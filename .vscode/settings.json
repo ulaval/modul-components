@@ -1,0 +1,8 @@
+// Placez vos paramètres dans ce fichier pour remplacer les paramètres par défaut et les paramètres utilisateur.
+{
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "files.trimTrailingWhitespace": true,
+    "tslint.configFile": "conf/tslint.json",
+    "tslint.run": "onSave"
+}

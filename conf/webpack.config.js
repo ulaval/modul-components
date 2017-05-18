@@ -1,0 +1,97 @@
+const CompressionPlugin = require("compression-webpack-plugin");
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const path = require("path");
+
+function resolve(dir) {
+    return path.join(__dirname, '..', dir)
+}
+
+module.exports = {
+    entry: {
+        buttons: ["./src/buttons/buttons.ts"]
+    },
+
+    output: {
+        path: resolve("dist"),
+        publicPath: "/",
+        filename: "[name].js"
+    },
+
+    resolve: {
+        extensions: ['.js', '.ts', '.html'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js',
+            "@": resolve('src')
+        }
+    },
+
+    devtool: 'source-map',
+
+    module: {
+        loaders: [
+            {
+                exclude: [
+                    'vue/**/*'
+                ],
+            }
+        ],
+        rules: [
+            {
+                enforce: 'post',
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                enforce: 'post',
+                test: /\.scss$/,
+                use: ['style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function () {
+                                return [
+                                    require('autoprefixer')
+                                ];
+                            }
+                        }
+                    },
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /\.html$/,
+                loader: 'vue-template-loader',
+                exclude: resolve('src/index.html'),
+                options: {
+                    scoped: true
+                }
+            },
+            {
+                test: /\.ts$/,
+                loader: 'awesome-typescript-loader',
+                options: {
+                    configFileName: resolve('tsconfig.json')
+                }
+            },
+            {
+                test: /\.ts$/,
+                enforce: 'pre',
+                loader: 'tslint-loader',
+                include: [resolve('src'), resolve('test')],
+                options: {
+                    configFile: 'conf/tslint.json',
+                    formatter: 'grouped',
+                    formattersDirectory: 'node_modules/custom-tslint-formatters/formatters'
+                }
+            }
+        ]
+    },
+    plugins: [
+        new CompressionPlugin(),
+        new StyleLintPlugin({
+            configFile: 'conf/stylelint.json',
+            emitErrors: false
+        })
+    ]
+}

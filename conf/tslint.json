@@ -1,0 +1,28 @@
+{
+    "extends": "tslint-config-standard",
+    "rules": {
+        "indent": [
+            true,
+            "spaces"
+        ],
+        "triple-equals": false,
+        "ter-indent": [
+            true,
+            4
+        ],
+        "space-before-function-paren": [
+            true,
+            "never"
+        ],
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape"
+        ],
+        "no-empty": false
+    }
+}
