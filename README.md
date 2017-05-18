@@ -1,2 +1,2 @@
-# vuejs-typescript-template
-Template to start a new project with Vuejs / Typescript
+# vuejs-components
+A set of VueJS components.
