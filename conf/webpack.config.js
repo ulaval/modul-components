@@ -1,6 +1,5 @@
-const CompressionPlugin = require("compression-webpack-plugin");
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const path = require("path");
+const path = require('path');
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -8,20 +7,24 @@ function resolve(dir) {
 
 module.exports = {
     entry: {
-        buttons: ["./src/buttons/buttons.ts"]
+        buttons: ['./src/buttons/buttons.ts'],
+        lists: ['./src/lists/lists.ts']
     },
 
+    externals: ['vue','vue-class-component'],
+
     output: {
-        path: resolve("dist"),
-        publicPath: "/",
-        filename: "[name].js"
+        path: resolve('dist'),
+        publicPath: '/',
+        libraryTarget: 'umd',
+        filename: '[name].js'
     },
 
     resolve: {
         extensions: ['.js', '.ts', '.html'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            "@": resolve('src')
+            '@': resolve('src')
         }
     },
 
@@ -88,7 +91,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new CompressionPlugin(),
         new StyleLintPlugin({
             configFile: 'conf/stylelint.json',
             emitErrors: false

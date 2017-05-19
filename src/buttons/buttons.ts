@@ -1,4 +1,4 @@
-import { PluginObject } from 'Vue';
+import { PluginObject } from 'vue';
 import { ButtonComponent, BUTTON_NAME } from './button';
 
 const buttons: PluginObject<any> = {
