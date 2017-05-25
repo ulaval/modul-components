@@ -5,7 +5,7 @@ import WithRender from './dynamic-template.html';
 
 @WithRender
 @Component
-export class DynamicTemplateComponent extends Vue {
+export class MDynamicTemplate extends Vue {
     @Prop()
     public template: string;
 

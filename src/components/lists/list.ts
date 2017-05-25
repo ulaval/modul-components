@@ -4,7 +4,7 @@ import WithRender from './list.html?style=./list.scss';
 
 @WithRender
 @Component
-export class ListComponent extends Vue {
+export class MList extends Vue {
     public get values(): string[] {
         return ['v1', 'v3', 'v3'];
     }

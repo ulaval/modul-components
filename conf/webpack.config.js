@@ -7,13 +7,14 @@ function resolve(dir) {
 
 module.exports = {
     entry: {
-        'components-meta': ['./src/components-meta.ts'],
-        'buttons': ['./src/buttons/buttons.ts'],
-        'lists': ['./src/lists/lists.ts'],
-        'text': ['./src/text/text.ts']
+        'component-names': ['./src/components/component-names.ts'],
+        'meta': ['./src/components/meta.ts'],
+        'buttons': ['./src/components/buttons/buttons.ts'],
+        'lists': ['./src/components/lists/lists.ts'],
+        'text': ['./src/components/text/text.ts']
     },
 
-    externals: ['vue','vue-class-component'],
+    externals: ['vue', 'vue-class-component', 'vue-property-decorator'],
 
     output: {
         path: resolve('dist'),

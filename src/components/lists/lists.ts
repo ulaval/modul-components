@@ -1,10 +1,10 @@
 import { PluginObject } from 'vue';
-import { ListComponent } from './list';
-import ComponentsMeta from '../components-meta';
+import { MList } from './list';
+import { LIST_NAME } from '../component-names';
 
 class Lists implements PluginObject<any> {
     public install(v, options) {
-        v.component('mpo-list', ListComponent);
+        v.component(LIST_NAME, MList);
     }
 }
 
