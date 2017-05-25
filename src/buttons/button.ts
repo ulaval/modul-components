@@ -9,5 +9,3 @@ export class ButtonComponent extends Vue {
         this.$el.style.backgroundColor = 'yellow';
     }
 }
-
-export const BUTTON_NAME: string = 'mpo-button';

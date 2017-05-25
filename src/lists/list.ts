@@ -9,5 +9,3 @@ export class ListComponent extends Vue {
         return ['v1', 'v3', 'v3'];
     }
 }
-
-export const LIST_NAME: string = 'mpo-list';

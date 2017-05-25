@@ -1,10 +1,11 @@
 import { PluginObject } from 'vue';
-import { ButtonComponent, BUTTON_NAME } from './button';
+import { ButtonComponent } from './button';
+import ComponentsMeta from '../components-meta';
 
-const buttons: PluginObject<any> = {
-    install(v, options) {
-        v.component(BUTTON_NAME, ButtonComponent);
+class Buttons implements PluginObject<any> {
+    public install(v, options) {
+        v.component('mpo-button', ButtonComponent);
     }
-};
+}
 
-export default buttons;
+export default new Buttons();

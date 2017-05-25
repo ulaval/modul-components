@@ -7,8 +7,10 @@ function resolve(dir) {
 
 module.exports = {
     entry: {
-        buttons: ['./src/buttons/buttons.ts'],
-        lists: ['./src/lists/lists.ts']
+        'components-meta': ['./src/components-meta.ts'],
+        'buttons': ['./src/buttons/buttons.ts'],
+        'lists': ['./src/lists/lists.ts'],
+        'text': ['./src/text/text.ts']
     },
 
     externals: ['vue','vue-class-component'],
