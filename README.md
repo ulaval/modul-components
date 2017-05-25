@@ -1,2 +1,2 @@
-# vuejs-components
-A set of VueJS components.
+# modul-components
+A set of VueJS components for Modul web applications.
