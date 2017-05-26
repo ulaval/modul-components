@@ -2,7 +2,7 @@ import { PluginObject } from 'vue';
 import { MButton } from './button';
 import { BUTTON_NAME } from '../component-names';
 
-class Buttons implements PluginObject<any> {
+export class Buttons implements PluginObject<any> {
     public install(v, options) {
         v.component(BUTTON_NAME, MButton);
     }

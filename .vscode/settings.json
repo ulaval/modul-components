@@ -2,6 +2,10 @@
 {
     "editor.detectIndentation": false,
     "editor.tabSize": 4,
+    "files.exclude": {
+        "src/components/**/*.d.ts": true,
+        "src/utils/**/*.d.ts": true
+    },
     "files.trimTrailingWhitespace": true,
     "tslint.configFile": "conf/tslint.json",
     "tslint.run": "onSave"

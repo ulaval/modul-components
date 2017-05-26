@@ -11,7 +11,8 @@ module.exports = {
         'meta': ['./src/components/meta.ts'],
         'buttons': ['./src/components/buttons/buttons.ts'],
         'lists': ['./src/components/lists/lists.ts'],
-        'text': ['./src/components/text/text.ts']
+        'text': ['./src/components/text/text.ts'],
+        'utils': ['./src/utils/i18n.ts', './src/utils/uuid.ts']
     },
 
     externals: ['vue', 'vue-class-component', 'vue-property-decorator'],

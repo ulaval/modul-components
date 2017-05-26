@@ -1,5 +1,5 @@
 {
-    "name": "vuejs-components",
+    "name": "modul-components",
     "version": "0.1.0",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
@@ -7,8 +7,8 @@
     "scripts": {
         "clean": "rimraf dist",
         "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors",
-        "build": "webpack --config conf/webpack.config.js --colors",
-        "declarations": "node conf/declarations.js",
+        "build": "webpack --config conf/webpack.config.js --colors && npm run declarations",
+        "declarations": "del .\\dist\\*.d.ts /Q && for /r src %f in (*.d.ts) do @copy \"%f\" dist",
         "unit": "karma start conf/karma.conf.js --browsers PhantomJS --single-run",
         "unitall": "karma start conf/karma.conf.js --single-run",
         "test": "npm run unitall",
@@ -69,5 +69,9 @@
         "last 2 versions",
         "not ie <= 10"
     ],
+    "files": [
+        "dist"
+    ],
+    "typings": "dist/index.d.ts",
     "license": "Apache-2.0"
 }
