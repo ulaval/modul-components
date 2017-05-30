@@ -7,8 +7,8 @@
     "scripts": {
         "clean": "rimraf dist",
         "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors",
-        "build": "webpack --config conf/webpack.config.js --colors && npm run declarations",
-        "declarations": "del .\\dist\\*.d.ts /Q && for /r src %f in (*.d.ts) do @copy \"%f\" dist",
+        "build": "del .\\dist\\*.d.ts /Q && webpack --config conf/webpack.config.js --colors && npm run declarations",
+        "declarations": "for /r src %f in (*.d.ts) do @copy \"%f\" dist",
         "unit": "karma start conf/karma.conf.js --browsers PhantomJS --single-run",
         "unitall": "karma start conf/karma.conf.js --single-run",
         "test": "npm run unitall",

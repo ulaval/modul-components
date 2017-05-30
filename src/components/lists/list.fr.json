@@ -1,6 +1,6 @@
 {
-    "name": "liste",
-    "displayName": "Liste",
+    "tag": "m-list",
+    "name": "Liste",
     "overview": [
         {
             "type": "rubric",

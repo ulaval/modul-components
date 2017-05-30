@@ -1,6 +1,6 @@
 {
-    "name": "gabarit-dynamique",
-    "displayName": "Gabarit dynamique",
+    "tag": "m-dynamique-template",
+    "name": "Gabarit dynamique",
     "overview": [
         {
             "type": "rubric",

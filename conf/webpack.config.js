@@ -9,10 +9,12 @@ module.exports = {
     entry: {
         'component-names': ['./src/components/component-names.ts'],
         'meta': ['./src/components/meta.ts'],
+        'meta-fr': ['./src/components/meta-fr.ts'],
         'buttons': ['./src/components/buttons/buttons.ts'],
         'lists': ['./src/components/lists/lists.ts'],
         'text': ['./src/components/text/text.ts'],
-        'utils': ['./src/utils/i18n.ts', './src/utils/uuid.ts']
+        'utils': ['./src/utils/i18n.ts', './src/utils/uuid.ts'],
+        'services': ['./src/services/component-meta-impl']
     },
 
     externals: ['vue', 'vue-class-component', 'vue-property-decorator'],

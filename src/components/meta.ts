@@ -1,6 +1,11 @@
-import { BUTTON_NAME, LIST_NAME, DYNAMIC_TEMPLATE_NAME } from './component-names';
+import Vue from 'vue';
+import { components } from './component-names';
 
 export type OverviewType = 'rubric' | 'do' | 'dont';
+
+export const BUTTONS_LIB: string = 'Buttons';
+export const LISTS_LIB: string = 'Lists';
+export const TEXT_LIB: string = 'Text';
 
 export interface Overview {
     type: OverviewType;
@@ -9,28 +14,42 @@ export interface Overview {
 }
 
 export interface ComponentMeta {
-    name: string;
-    displayName: string;
-    overview: Overview[];
+    tag: string;
+    name?: string;
+    overview?: Overview[];
 }
 
-type MetaMap = {
+export type ComponentMetaMap = {
     [key: string]: ComponentMeta;
 };
 
+type MetaMap = {
+    [language: string]: ComponentMetaMap;
+};
+
 export class Meta {
-    private meta: MetaMap = {
-        [BUTTON_NAME]: require('./buttons/button.fr.json'),
-        [LIST_NAME]: require('./lists/list.fr.json'),
-        [DYNAMIC_TEMPLATE_NAME]: require('./text/dynamic-template.fr.json')
+    private componentMeta: MetaMap = {
+        ['fr']: {}
     };
 
-    public getComponentKeys(): Array<string> {
-        return Object.keys(this.meta).filter(key => this.meta.hasOwnProperty(key));
+    constructor() {
+        components.forEach(componentTag => {
+            this.componentMeta['fr'][componentTag] = {tag: componentTag};
+        });
     }
 
-    public getMeta(key: string): ComponentMeta {
-        return this.meta[key];
+    public mergeComponentMeta(language: string, tag: string, meta: ComponentMeta): void {
+        let metaObject: ComponentMeta = this.componentMeta[language][tag];
+        this.componentMeta[language][tag] = {...metaObject, ...meta};
+    }
+
+    public getTagsByLanguage(language: string): string[] {
+        let meta: ComponentMetaMap = this.componentMeta[language];
+        return Object.keys(meta).filter(key => meta.hasOwnProperty(key));
+    }
+
+    public getMetaByLanguageAndTag(language: string, tag: string): ComponentMeta {
+        return this.componentMeta[language][tag];
     }
 }
 
