@@ -110,6 +110,7 @@ module.exports = function (env) {
     if (isProd) {
         config.entry = {
             'component-names': ['./src/components/component-names.ts'],
+            'directives': ['./src/components/directives/index.ts'],
             'meta': ['./src/components/meta.ts'],
             'meta-fr': ['./src/components/meta-fr.ts'],
             'buttons': ['./src/components/buttons/index.ts'],
