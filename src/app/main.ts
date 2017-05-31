@@ -3,12 +3,14 @@ import Vue from 'vue';
 import router from './router';
 
 import Buttons from '@/components/buttons/buttons';
+import Link from '@/components/links/links';
 import Lists from '@/components/lists/lists';
 import Text from '@/components/text/text';
 
 Vue.config.productionTip = false;
 
 Vue.use(Buttons);
+Vue.use(Link);
 Vue.use(Lists);
 Vue.use(Text);
 

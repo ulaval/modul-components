@@ -1,0 +1,48 @@
+
+
+// ======================================================================
+//  Bulleted list
+// ======================================================================
+
+.m-bulleted-list {
+    margin: $m-margin 0;
+
+    > :not(ul):not(li) {
+        font-weight: $m-font-weight--bold;
+        margin-bottom: 0;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0 0 0 $m-padding--l;
+    }
+
+    &:not(ul) {
+        margin: $m-margin 0;
+    }
+
+    li {
+        position: relative;
+        list-style: none;
+
+        margin: $m-padding--s 0;
+
+        &::before {
+            position: absolute;
+            top: 8px;
+            left: -12px;
+
+            content: '';
+
+            width: 3px;
+            height: 3px;
+
+            border-radius: 50%;
+            background: $m-color--grey--light;
+        }
+    }
+}
+
+ul.m-bulleted-list {
+    padding: 0 0 0 $m-padding--l;
+}
