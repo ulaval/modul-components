@@ -1,0 +1,10 @@
+$theme-primary: #922338;
+$theme-accent: #0072a8;
+$theme-text: #fff;
+
+@import '_theme-components';
+@include my-comp-theme(
+    $theme-primary,
+    $theme-accent,
+    $theme-text
+);
