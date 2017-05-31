@@ -1,0 +1,7 @@
+<div>
+    <h3>Components</h3>
+    <div v-for="route in routes">
+        <router-link :to="route">{{route}}</router-link>
+    </div>
+    <router-view></router-view>
+</div>
