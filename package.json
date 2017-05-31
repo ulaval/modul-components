@@ -6,7 +6,7 @@
     "private": true,
     "scripts": {
         "clean": "rimraf dist",
-        "dev": "rimraf dist/*.d.ts && webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8081 --open --history-api-fallback",
+        "dev": "rimraf dist/*.d.ts && webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
         "build": "rimraf dist/*.d.ts && webpack --env.prod --config conf/webpack.config.js --colors && npm run declarations",
         "declarations": "copyfiles -f ./src/**/*.d.ts dist",
         "unit": "karma start conf/karma.conf.js --browsers PhantomJS --single-run",
