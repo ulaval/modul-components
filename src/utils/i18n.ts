@@ -1,4 +1,3 @@
-
 /**
  * This package provides language and locales utilities.
  */
@@ -6,19 +5,31 @@
 /**
  * French language code.
  */
-export const FRENCH = 'fr';
+export const FRENCH: string = 'fr';
 
 /**
  * English language code.
  */
-export const ENGLISH = 'en';
+export const ENGLISH: string = 'en';
 
 /**
  * Regex to parse and format messages.
  */
-const FORMAT_REGEX = /{\\d+}/g;
+const FORMAT_REGEX: RegExp = /{\\d+}/g;
 
-const messages = {};
+export type MessageMap = {
+    [key: string]: string;
+};
+
+export type BundleMessagesMap = {
+    [bundle: string]: MessageMap;
+};
+
+type LanguageBundlesMap = {
+    [language: string]: BundleMessagesMap;
+};
+
+const messages: LanguageBundlesMap = {};
 
 /**
  * The default language is english.
@@ -34,13 +45,14 @@ export function currentLang(lang?: string): string {
 }
 
 /**
- * Adds the messages so that it can be resolved.
+ * Adds the messages so that they can be resolved.
  *
  * @param lang The language, for example: 'en'
  * @param messages The messages
  */
-export function addMessages(lang: string, messages: any): void {
-    // TODO: mergeMessages
+export function addMessages(lang: string, bundle: BundleMessagesMap): void {
+    let languageBundles: BundleMessagesMap = messages[lang];
+    messages[lang] = { ...languageBundles, ...bundle };
 }
 
 /**
@@ -76,7 +88,6 @@ export function translate(key: string, params: any[] = [], nb?: number, modifier
 }
 
 function resolveKey(lang: string, key: string, nb?: number, modifier?: string, encodeParams?: boolean): string {
-
     let val: string | null = null;
 
     if (nb && modifier) {
@@ -144,18 +155,16 @@ function resolveKey(lang: string, key: string, nb?: number, modifier?: string, e
 function findKey(lang: string, key: string): string | null {
     const parts = key.split(':');
 
-    if (parts.length != 3) {
-        console.warn(`The key ${key} is invalid. The key needs to be in the format <module>:<bundle>:<id>`);
+    if (parts.length != 2) {
+        console.warn(`The key ${key} is invalid. The key needs to be in the format <bundle>:<id>`);
         return null;
     }
 
-    const moduleName = parts[0];
-    const bundleName = parts[1];
-    const id = parts[2];
+    const bundleName = parts[0];
+    const id = parts[1];
 
     const langMsgs = messages[lang];
-    const moduleMsgs = langMsgs && langMsgs[moduleName];
-    const bundleMsgs = moduleMsgs && moduleMsgs[bundleName];
+    const bundleMsgs = langMsgs && langMsgs[bundleName];
     return bundleMsgs && bundleMsgs[id];
 }
 
@@ -165,7 +174,7 @@ function findKey(lang: string, key: string): string | null {
  * The format is 'This is a {0} containing {1}...'
  */
 function format(val: string, params: any[]): string {
-    return val.replace(FORMAT_REGEX, function(match) {
+    return val.replace(FORMAT_REGEX, match => {
         let index = parseInt(match.substring(1, match.length - 1), 10);
 
         if (index >= params.length) {
@@ -182,8 +191,8 @@ function format(val: string, params: any[]): string {
  */
 function htmlEncode(val: string) {
     return val.replace(/&/g, '&amp;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
 }

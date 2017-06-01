@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
-import Meta from '@/components/meta';
+import Meta from '@/meta/meta';
+import { FRENCH } from '@/utils/i18n';
 import { Navigation } from './navigation';
 import { Viewer } from './viewer';
 
@@ -11,15 +12,13 @@ const componentRoutes: RouteConfig[] = [{
     component: Navigation
 }];
 
-Meta.getTagsByLanguage('fr').forEach(tag => {
+Meta.getTagsByLanguage(FRENCH).forEach(tag => {
     componentRoutes.push({
         path: '/' + tag,
         meta: tag,
         component: Viewer
     });
 });
-
-console.log(componentRoutes);
 
 export default new Router({
     mode: 'history',
