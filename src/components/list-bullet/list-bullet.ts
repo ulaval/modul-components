@@ -1,15 +1,16 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import WithRender from './list.html?style=./list.scss';
+import { Prop } from 'vue-property-decorator';
+import WithRender from './list-bullet.html?style=./list-bullet.scss';
 import { LIST_NAME } from '../component-names';
 
 @WithRender
 @Component
 export class MList extends Vue {
-    public get values(): string[] {
-        return ['v1', 'v3', 'v3'];
-    }
+    @Prop({ default: ['Element 1', 'Element 2', 'Element 3'] })
+    public values: string[];
+    private componentName = LIST_NAME;
 }
 
 const ListPlugin: PluginObject<any> = {

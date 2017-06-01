@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import { PluginObject } from 'vue';
+import { RIPPLE_EFFECT_NAME } from '../component-names';
 
 export class MRippleEffect extends Vue {
 
@@ -10,7 +12,6 @@ export class MRippleEffect extends Vue {
 
         if (el) {
             el.addEventListener('mousedown', (event: MouseEvent) => {
-                console.log('salut');
                 if(isActif) {
                     let rippleEl: HTMLElement = document.createElement('span');
                     let rippleELStyle = rippleEl.style;
@@ -38,7 +39,7 @@ export class MRippleEffect extends Vue {
                     }
 
                     let dimension = (max * 2) + 'px';
-                    let rippleElClassName: string = 'v-m-ripple-effect';
+                    let rippleElClassName: string = RIPPLE_EFFECT_NAME;
 
                     rippleEl.className = rippleElClassName;
                     rippleELStyle.position = 'absolute';
@@ -88,3 +89,11 @@ export class MRippleEffect extends Vue {
         }
     }
 }
+
+const RippleEffectPlugin: PluginObject<any> = {
+    install(v, options) {
+        v.directive(RIPPLE_EFFECT_NAME, new MRippleEffect());
+    }
+};
+
+export default RippleEffectPlugin;

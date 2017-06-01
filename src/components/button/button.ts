@@ -1,27 +1,21 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './button.html?style=./button.scss';
 import { BUTTON_NAME } from '../component-names';
 
 @WithRender
-@Component({
-    props: {
-        type : {
-            type: String,
-            default: 'primary'
-        },
-        isWaiting: {
-            type: Boolean,
-            default: false
-        },
-        isDisabled: {
-            type: Boolean,
-            default: false
-        }
-    }
-})
+@Component
 export class MButton extends Vue {
+
+    @Prop({ default: 'prymary' })
+    public type: string;
+    @Prop({ default: false })
+    public isWaiting: boolean;
+    @Prop({ default: false })
+    public isDisabled: boolean;
+
     private componentName: string = BUTTON_NAME;
     private rippleEffectIsActive: boolean = true;
 
@@ -30,6 +24,7 @@ export class MButton extends Vue {
             this.rippleEffectIsActive = false;
         }
     }
+
 
     public get hasIconeLeft(): boolean {
         return !!this.$slots['icon-left'];

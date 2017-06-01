@@ -1,7 +1,7 @@
 // components
 export const BUTTON_NAME: string = 'm-button';
 export const LINK_NAME: string = 'm-link';
-export const LIST_NAME: string = 'm-list';
+export const LIST_NAME: string = 'm-list-bullet';
 export const TEXT_ICON_NAME: string = 'm-text-icon';
 export const DYNAMIC_TEMPLATE_NAME: string = 'm-dynamic-template';
 
@@ -14,8 +14,8 @@ export const components: string[] = [
 ];
 
 // directives
-export const RIPPLE_EFFECT: string = 'm-ripple-effect';
+export const RIPPLE_EFFECT_NAME: string = 'm-ripple-effect';
 
 export const directives: string[] = [
-    RIPPLE_EFFECT
+    RIPPLE_EFFECT_NAME
 ];

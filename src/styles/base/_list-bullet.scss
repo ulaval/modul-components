@@ -1,18 +1,20 @@
 
 
 // ======================================================================
-//  Bulleted list
+//  List bullet
 // ======================================================================
 
-.m-bulleted-list {
+.m-list-bullet {
     margin: $m-margin 0;
+    padding: 0 0 0 $m-padding--l;
 
     > :not(ul):not(li) {
         font-weight: $m-font-weight--bold;
         margin-bottom: 0;
     }
 
-    ul {
+    ul,
+    &__list {
         margin: 0;
         padding: 0 0 0 $m-padding--l;
     }
@@ -21,7 +23,8 @@
         margin: $m-margin 0;
     }
 
-    li {
+    li,
+    &__elem {
         position: relative;
         list-style: none;
 
@@ -41,8 +44,4 @@
             background: $m-color--grey--light;
         }
     }
-}
-
-ul.m-bulleted-list {
-    padding: 0 0 0 $m-padding--l;
 }

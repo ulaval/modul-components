@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import WithRender from './text-icon.html?style=./text-icon.scss';
 import { TEXT_ICON_NAME } from '../component-names';
@@ -16,3 +17,11 @@ export class MTextIcon extends Vue {
         return !!this.$slots['icon-right'];
     }
 }
+
+const TextIconPlugin: PluginObject<any> = {
+    install(v, options) {
+        v.component(TEXT_ICON_NAME, MTextIcon);
+    }
+};
+
+export default TextIconPlugin;

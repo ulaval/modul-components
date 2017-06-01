@@ -2,8 +2,7 @@
                 {'is-primary': type!='secondary',
                 'is-secondary': type=='secondary',
                 'is-waiting': isWaiting,
-                'is-disabled': isDisabled},
-                addClass ]"
+                'is-disabled': isDisabled} ]"
         v-m-ripple-effect="rippleEffectIsActive"
         :disabled="isWaiting || isDisabled">
     <span :class="[ componentName + '__icon', 'is-left']" v-if="hasIconeLeft">

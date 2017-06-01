@@ -1,6 +1,6 @@
 {
-    "tag": "m-list",
-    "name": "Liste",
+    "tag": "m-list-bullet",
+    "name": "Liste à puce",
     "overview": [
         {
             "type": "rubric",
