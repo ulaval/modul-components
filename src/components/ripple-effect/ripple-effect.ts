@@ -7,7 +7,6 @@ export class MRippleEffect extends Vue {
     public bind(element: HTMLElement, binding) {
         let isActif: boolean = binding.value == undefined ? true : binding.value;
         let el: HTMLElement = element;
-        el.style.position = 'relative';
         el.style.overflow = 'hidden';
 
         if (el) {
@@ -15,11 +14,14 @@ export class MRippleEffect extends Vue {
                 if(isActif) {
                     let rippleEl: HTMLElement = document.createElement('span');
                     let rippleELStyle = rippleEl.style;
+                    let elClick = (event.target as HTMLElement);
 
-                    let elBoundingRect = (event.target as HTMLElement).getBoundingClientRect();
+                    let elBoundingRect = el.getBoundingClientRect();
 
                     let positionX: number = event.offsetX;
                     let positionY: number;
+
+                    elClick.style.position = 'relative';
 
                     if (positionX !== undefined) {
                         positionY = event.offsetY;
@@ -57,7 +59,7 @@ export class MRippleEffect extends Vue {
                     rippleELStyle.backgroundClip = 'padding-box';
                     rippleELStyle.opacity = '0.2';
                     rippleELStyle.transform = 'scale(0)';
-                    rippleELStyle.transition = 'transform 0.4s ease-out, opacity 0.4s ease-out';
+                    rippleELStyle.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
 
                     (event.target as HTMLElement).appendChild(rippleEl);
 
