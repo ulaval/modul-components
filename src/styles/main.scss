@@ -1,18 +1,30 @@
 @charset 'UTF-8';
 
-// 1. Configuration and helpers
-@import
-  'abstracts/variables',
-  'abstracts/functions',
-  'abstracts/mixins';
 
-// 2. Vendors
-@import
-  'vendor/normalize';
+// ======================================================================
+//  Variables
+// ======================================================================
 
-// 3. Base stuff
 @import
-  'base/base',
-  'base/fonts',
-  'base/typography',
-  'base/helpers';
+    'abstract/variables',
+    'abstract/var-color-calendar';
+
+
+// ======================================================================
+//  HTML overide
+// ======================================================================
+
+// @import 'normalize';
+
+
+// ======================================================================
+//  Base
+// ======================================================================
+
+// @import 'base/fonts';
+@import
+    'base/base',
+    'base/typography',
+    'base/grid',
+    'base/bulleted-list';
+

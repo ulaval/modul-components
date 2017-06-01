@@ -110,13 +110,14 @@ module.exports = function (env) {
     if (isProd) {
         config.entry = {
             'component-names': ['./src/components/component-names.ts'],
-            'directives': ['./src/components/directives/index.ts'],
-            'meta': ['./src/components/meta.ts'],
-            'meta-fr': ['./src/components/meta-fr.ts'],
-            'buttons': ['./src/components/buttons/index.ts'],
-            'lists': ['./src/components/lists/index.ts'],
-            'text': ['./src/components/text/index.ts'],
-            'utils': ['./src/utils/i18n.ts', './src/utils/uuid.ts'],
+            'meta': ['./src/meta/meta.ts'],
+            'meta-fr': ['./src/meta/meta-fr.ts'],
+            'background-color': ['./src/directives/background-color/background-color.ts'],
+            'button': ['./src/components/button/button.ts'],
+            'list': ['./src/components/list/list.ts'],
+            'dynamic-template': ['./src/components/dynamic-template/dynamic-template.ts'],
+            'i18n': ['./src/utils/i18n.ts'],
+            'uuid': ['./src/utils/uuid.ts'],
             'services': ['./src/services/component-meta-impl']
         };
 

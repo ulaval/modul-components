@@ -6,6 +6,7 @@
     "private": true,
     "scripts": {
         "clean": "rimraf dist",
+        "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8080 --open --history-api-fallback",
         "dev": "rimraf dist/*.d.ts && webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
         "build": "rimraf dist/*.d.ts && webpack --env.prod --config conf/webpack.config.js --colors && npm run declarations && npm run scssCopy",
         "declarations": "copyfiles -f ./src/**/*.d.ts dist",

@@ -1,0 +1,87 @@
+
+
+$m-color--black: #000000;
+$m-color--text: $m-color--black;
+$m-color--white: #FFFFFF;
+
+
+// ======================================================================
+//  Official color of Université Laval
+// ======================================================================
+
+$m-color--ul-blue: #0099FF ;
+$m-color--ul-yellow: #FFC103;
+$m-color--ul-red: #E30513;
+
+
+// ======================================================================
+//  Grey
+// ======================================================================
+
+$m-color--grey--darkest: #1C1C1C !default;
+$m-color--grey--darker: #545454 !default;
+$m-color--grey--dark: #8C8C8C !default;
+$m-color--grey: #A8A8A8 !default;
+$m-color--grey--light: #C4C4C4 !default;
+$m-color--grey--lighter: #E0E0E0 !default;
+$m-color--grey--lightest: #EFEFEF !default;
+
+
+// ======================================================================
+//  Primary colors
+// ======================================================================
+
+$m-color--primary--darker: #0080AD !default;
+$m-color--primary--dark: #008CC9 !default;
+$m-color--primary: $m-color--ul-blue !default;
+$m-color--primary--light: #1AADFF !default;
+$m-color--primary--lighter: #52D2FF !default;
+$m-color--primary--lightest: #CCFAFF !default;
+
+
+// ======================================================================
+//  Secondary colors
+// ======================================================================
+
+$m-color--secondary--darker: #B64C00 !default;
+$m-color--secondary--dark: #D07300 !default;
+$m-color--secondary: #F39612 !default;
+$m-color--secondary--light: #FFAA26 !default;
+$m-color--secondary--lighter: #FFBE3A !default;
+$m-color--secondary--lightest: #FFEECF !default;
+
+
+// ======================================================================
+//  Yellow
+// ======================================================================
+
+$m-color--yellow--darker: #CC8F09 !default;
+$m-color--yellow--dark: #E0A207 !default;
+$m-color--yellow: $m-color--ul-yellow !default;
+$m-color--yellow--light: #FFD517 !default;
+$m-color--yellow--lighter: #FFEC66 !default;
+$m-color--yellow--lightest: #FFFDCF !default;
+
+
+// ======================================================================
+//  Valid colors
+// ======================================================================
+
+$m-color--valid--darker: #079942 !default;
+$m-color--valid--dark: #14A555 !default;
+$m-color--valid: #13BF69 !default;
+$m-color--valid--light: #17C96B !default;
+$m-color--valid--lighter: #1DDD6F !default;
+$m-color--valid--lightest: #DCF9E9 !default;
+
+
+// ======================================================================
+//  Error colors
+// ======================================================================
+
+$m-color--error--darker: #910722 !default;
+$m-color--error--dark: #AD071F !default;
+$m-color--error: $m-color--ul-red !default;
+$m-color--error--light: #FF4545 !default;
+$m-color--error--lighter: #FF5C5C !default;
+$m-color--error--lightest: #FFCCCC !default;

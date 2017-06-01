@@ -1,0 +1,16 @@
+
+@import '../../styles/abstracts/variables';
+
+.m-text-icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+.m-text-icon__text {
+    flex: 1;
+}
+
+.m-text-icon__icon {
+    display: block;
+}
+
