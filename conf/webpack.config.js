@@ -110,9 +110,9 @@ module.exports = function (env) {
     if (isProd) {
         config.entry = {
             'component-names': ['./src/components/component-names.ts'],
-            'meta': ['./src/components/meta.ts'],
-            'meta-fr': ['./src/components/meta-fr.ts'],
-            'background-color': ['./src/components/background-color/background-color.ts'],
+            'meta': ['./src/meta/meta.ts'],
+            'meta-fr': ['./src/meta/meta-fr.ts'],
+            'background-color': ['./src/directives/background-color/background-color.ts'],
             'button': ['./src/components/button/button.ts'],
             'list': ['./src/components/list/list.ts'],
             'dynamic-template': ['./src/components/dynamic-template/dynamic-template.ts'],

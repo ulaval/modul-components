@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
-import { BACKGROUND_COLOR_NAME } from '../component-names';
+import { BACKGROUND_COLOR_NAME } from '../directives-names';
 
 export class MBackgroundColor extends Vue {
     public bind(element: HTMLElement) {
