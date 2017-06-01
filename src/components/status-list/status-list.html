@@ -1,1 +1,5 @@
-<div class="m-status-list">Satuts list!!!</div>
+<ul :class="componentName">
+    <li v-for="value in values" :key="text">
+        <span class="icon" :class="value.status">i</span><span class="libelle">{{value.text}}</span>
+    </li>
+</ul>

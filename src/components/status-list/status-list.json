@@ -1,6 +1,6 @@
 {
-    "tag": "m-bouton",
-    "name": "Bouton",
+    "tag": "m-status-list",
+    "name": "Satus-list",
     "overview": [
         {
             "type": "rubric",

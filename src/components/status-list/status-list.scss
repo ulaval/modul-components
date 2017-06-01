@@ -1,4 +1,62 @@
+
+$m-status-list-icon-size: 22px;
+
 .m-status-list {
-    background-color: pink;
-    padding: 10px;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &::before {
+        content: "";
+        display: block;
+        background-color: #d6d6d6;
+        width: 1px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+
+        left: $m-status-list-icon-size / 2;
+        z-index: 1;
+
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    li + li {
+        margin-top: 8px;
+    }
+
+    .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $m-status-list-icon-size;
+        height: $m-status-list-icon-size;
+        margin-right: 8px;
+    }
+
+    .pending {
+        background-color: yellow;
+    }
+
+    .completed {
+        background-color: green;
+    }
+
+    .error {
+        background-color: red;
+    }
+
+    .test {
+        background: #000;
+        color: #fff;
+        font-size: 30px;
+    }
 }
+
