@@ -2,15 +2,15 @@ import './polyfills';
 import Vue from 'vue';
 import router from './router';
 
-import Buttons from '@/components/buttons';
-import Lists from '@/components/lists';
-import Text from '@/components/text';
+import ButtonPlugin from '@/components/button/button';
+import ListPlugin from '@/components/list/list';
+import DynamicTemplatePlugin from '@/components/dynamic-template/dynamic-template';
 
 Vue.config.productionTip = false;
 
-Vue.use(Buttons);
-Vue.use(Lists);
-Vue.use(Text);
+Vue.use(ButtonPlugin);
+Vue.use(ListPlugin);
+Vue.use(DynamicTemplatePlugin);
 
 const vue = new Vue({
     router,

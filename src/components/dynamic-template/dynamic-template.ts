@@ -1,8 +1,10 @@
 import Vue from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dynamic-template.html';
 import uuid from '@/utils/uuid';
+import { DYNAMIC_TEMPLATE_NAME } from '../component-names';
 
 @WithRender
 @Component
@@ -31,3 +33,11 @@ export class MDynamicTemplate extends Vue {
         this.internalTemplate = this.tag;
     }
 }
+
+const DynamicTemplatePlugin: PluginObject<any> = {
+    install(v, options) {
+        v.component(DYNAMIC_TEMPLATE_NAME, MDynamicTemplate);
+    }
+};
+
+export default DynamicTemplatePlugin;

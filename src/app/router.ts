@@ -19,8 +19,6 @@ Meta.getTagsByLanguage('fr').forEach(tag => {
     });
 });
 
-console.log(componentRoutes);
-
 export default new Router({
     mode: 'history',
     routes: componentRoutes
