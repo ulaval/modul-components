@@ -116,7 +116,8 @@ module.exports = function (env) {
             'buttons': ['./src/components/buttons/index.ts'],
             'lists': ['./src/components/lists/index.ts'],
             'text': ['./src/components/text/index.ts'],
-            'utils': ['./src/utils/i18n.ts', './src/utils/uuid.ts'],
+            'i18n': ['./src/utils/i18n.ts'],
+            'uuid': ['./src/utils/uuid.ts'],
             'services': ['./src/services/component-meta-impl']
         };
 
