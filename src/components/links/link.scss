@@ -1,12 +1,9 @@
 
-@import '../../styles/abstract/variables';
+@import '../../styles/abstracts/variables';
 
 
 .m-link {
     position: relative;
-
-    display: inline-flex;
-    align-items: center;
 
     font-weight: $m-font-weight--bold;
 
@@ -19,7 +16,6 @@
         position: absolute;
         right: 0;
         bottom: 0;
-
 
         content: '';
 
@@ -55,11 +51,11 @@
     }
 }
 
-.m-link__text {
+.m-text-icon__text {
     flex: 1;
 }
 
-.m-link__icon {
+.m-text-icon__icon {
     font-size: 14px;
     display: block;
 

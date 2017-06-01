@@ -1,11 +1,7 @@
 import Vue from 'vue';
-import { components } from './component-names';
+import { components, directives } from './component-names';
 
 export type OverviewType = 'rubric' | 'do' | 'dont';
-
-export const BUTTONS_LIB: string = 'Buttons';
-export const LISTS_LIB: string = 'Lists';
-export const TEXT_LIB: string = 'Text';
 
 export interface Overview {
     type: OverviewType;
@@ -35,6 +31,10 @@ export class Meta {
     constructor() {
         components.forEach(componentTag => {
             this.componentMeta['fr'][componentTag] = {tag: componentTag};
+        });
+
+        directives.forEach(directiveTag => {
+            this.componentMeta['fr'][directiveTag] = {tag: directiveTag};
         });
     }
 

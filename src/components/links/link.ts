@@ -10,9 +10,9 @@ import { LINK_NAME } from '../component-names';
             type: String,
             default: '/'
         },
-        isExternalUrl: {
-            type: Boolean,
-            default: false
+        type: {
+            type: String,
+            default: 'routerLink'
         },
         isWithoutVisit: {
             type: Boolean,
@@ -20,8 +20,26 @@ import { LINK_NAME } from '../component-names';
         }
     }
 })
+
 export class MLink extends Vue {
     private componentName: string = LINK_NAME;
+
+    private isRouterLink: boolean = false;
+    private isLink: boolean = false;
+    private isExternalLink: boolean = false;
+
+    public mounted() {
+        switch(this.$props.type) {
+            case 'link':
+                this.isLink = true;
+                break;
+            case 'externalLink':
+                this.isExternalLink = true;
+                break;
+            default:
+                this.isRouterLink = true;
+        }
+    }
 
     public get hasIconeLeft(): boolean {
         return !!this.$slots['icon-left'];
@@ -30,8 +48,4 @@ export class MLink extends Vue {
     public get hasIconeRight(): boolean {
         return !!this.$slots['icon-right'];
     }
-
-    // public get values(): string[] {
-    //     return ['v1', 'v3', 'v3'];
-    // }
 }

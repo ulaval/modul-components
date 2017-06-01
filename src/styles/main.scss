@@ -5,8 +5,9 @@
 //  Variables
 // ======================================================================
 
-@import 'abstract/variables';
-@import 'abstract/var-color-calendar';
+@import
+    'abstract/variables',
+    'abstract/var-color-calendar';
 
 
 // ======================================================================
@@ -20,9 +21,10 @@
 //  Base
 // ======================================================================
 
-// @import 'base/font';
-@import 'base/base';
-@import 'base/typography';
-@import 'base/grid';
-@import 'base/bulleted-list';
+// @import 'base/fonts';
+@import
+    'base/base',
+    'base/typography',
+    'base/grid',
+    'base/bulleted-list';
 
