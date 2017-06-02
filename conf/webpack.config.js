@@ -60,8 +60,12 @@ module.exports = function (env) {
                                 }
                             }
                         },
-                        'sass-loader'
-                    ]
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                includePaths: ["./src/styles"]
+                            }
+                        }]
                 },
                 {
                     test: /\.html$/,
@@ -114,6 +118,7 @@ module.exports = function (env) {
             'meta-fr': ['./src/meta/meta-fr.ts'],
             'background-color': ['./src/directives/background-color/background-color.ts'],
             'button': ['./src/components/button/button.ts'],
+            'lang': ['./src/directives/lang/lang.ts'],
             'list': ['./src/components/list/list.ts'],
             'dynamic-template': ['./src/components/dynamic-template/dynamic-template.ts'],
             'i18n': ['./src/utils/i18n.ts'],

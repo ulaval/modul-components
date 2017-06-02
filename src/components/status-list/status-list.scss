@@ -1,3 +1,4 @@
+@import 'abstracts/variables';
 
 $m-status-list-icon-size: 22px;
 
@@ -29,7 +30,7 @@ $m-status-list-icon-size: 22px;
     }
 
     li + li {
-        margin-top: 8px;
+        margin-top: $m-margin;
     }
 
     .icon {
@@ -53,10 +54,5 @@ $m-status-list-icon-size: 22px;
         background-color: red;
     }
 
-    .test {
-        background: #000;
-        color: #fff;
-        font-size: 30px;
-    }
 }
 
