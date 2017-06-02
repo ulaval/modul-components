@@ -60,8 +60,12 @@ module.exports = function (env) {
                                 }
                             }
                         },
-                        'sass-loader'
-                    ]
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                includePaths: ["./src/styles"]
+                            }
+                        }]
                 },
                 {
                     test: /\.html$/,
