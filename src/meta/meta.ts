@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import { components } from '@/components/component-names';
 import { directives } from '@/directives/directives-names';
-import { FRENCH } from '@/utils/i18n';
 
 export type OverviewType = 'rubric' | 'do' | 'dont';
 
@@ -27,16 +26,16 @@ type MetaMap = {
 
 export class Meta {
     private componentMeta: MetaMap = {
-        [FRENCH]: {}
+        ['fr']: {}
     };
 
     constructor() {
         components.forEach(componentTag => {
-            this.componentMeta[FRENCH][componentTag] = {tag: componentTag};
+            this.componentMeta['fr'][componentTag] = {tag: componentTag};
         });
 
         directives.forEach(directiveTag => {
-            this.componentMeta[FRENCH][directiveTag] = {tag: directiveTag};
+            this.componentMeta['fr'][directiveTag] = {tag: directiveTag};
         });
     }
 
