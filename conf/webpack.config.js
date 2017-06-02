@@ -92,6 +92,10 @@ module.exports = function (env) {
                         formatter: 'grouped',
                         formattersDirectory: 'node_modules/custom-tslint-formatters/formatters'
                     }
+                },
+                {
+                    test: /\.svg$/,
+                    loader: 'svg-inline-loader'
                 }
             ]
         },

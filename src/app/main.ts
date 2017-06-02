@@ -9,6 +9,7 @@ import ListPlugin from '@/components/list-bullet/list-bullet';
 import RippleEffectPlugin from '@/components/ripple-effect/ripple-effect';
 import TextIconPlugin from '@/components/text-icon/text-icon';
 import StatusList from '@/components/status-list';
+import IconPlugin from '@/components/icon/icon';
 
 Vue.config.productionTip = false;
 
@@ -19,6 +20,7 @@ Vue.use(ListPlugin);
 Vue.use(RippleEffectPlugin);
 Vue.use(TextIconPlugin);
 Vue.use(StatusList);
+Vue.use(IconPlugin);
 
 const vue = new Vue({
     router,
