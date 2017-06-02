@@ -1,0 +1,69 @@
+
+@import '../../styles/abstracts/variables';
+
+
+.m-link {
+    position: relative;
+
+    font-weight: $m-font-weight--bold;
+
+    color: $m-color--primary;
+    text-decoration: none;
+    padding-bottom: 2px;
+
+    &::after {
+        transition: width .3s ease;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+        content: '';
+
+        width: 0px;
+        height: 1px;
+        background: $m-color--primary;
+
+    }
+
+    &:not(.is-without-visit) {
+        &:visited {
+            color: $m-color--primary--darker;
+        }
+    }
+
+    &:not(:active) {
+        &:hover {
+            color: $m-color--primary--light;
+            &::after {
+                left: 0;
+                width: 100%;
+                background: $m-color--primary--light;
+            }
+        }
+    }
+
+
+    &:active {
+        color: $m-color--primary--dark;
+        &::after {
+            background: $m-color--primary--dark;
+        }
+    }
+}
+
+.m-text-icon__text {
+    flex: 1;
+}
+
+.m-text-icon__icon {
+    font-size: 14px;
+    display: block;
+
+    &.is-left {
+        margin-right: $m-margin--s;
+    }
+    &.is-right{
+        margin-left: $m-margin--s;
+    }
+}
+

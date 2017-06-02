@@ -1,0 +1,114 @@
+
+@import '../../styles/abstracts/variables';
+
+$m-button--color: $m-color--primary !default;
+$m-button--color--hover: $m-color--primary--light !default;
+$m-button--color--active: $m-color--primary--darker !default;
+$m-button--color--waiting: $m-color--primary--lighter !default;
+$m-button--color--disabled: $m-color--grey--light !default;
+
+.m-button {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px $m-padding 9px $m-padding;
+
+
+
+    appearance: none;
+    outline: none;
+    user-select: none;
+    text-decoration: none;
+
+    font-size: $m-font-size;
+    font-weight: $m-font-weight--bold;
+    line-height: 1;
+
+    border: 1px solid $m-button--color;
+    border-radius: 4px;
+
+    &.is-primary,
+    &.is-secondary {
+        cursor: pointer;
+
+        &:not(.is-waiting):not(.is-disabled) {
+            &:hover {
+                color: $m-color--white;
+                background: $m-button--color--hover;
+                border-color: $m-button--color--hover;
+            }
+            &:active {
+                background: $m-button--color--active;
+                border-color: $m-button--color--active;
+            }
+        }
+    }
+
+    &.is-primary {
+        color: $m-color--white;
+        background: $m-button--color;
+    }
+
+    &.is-secondary {
+        background: none;
+        color: $m-button--color;
+    }
+
+    &.is-waiting,
+    &.is-disabled {
+        transition: none;
+    }
+
+    &.is-waiting {
+        cursor: progress;
+        color: $m-color--white;
+        background: $m-button--color--waiting;
+        border-color: $m-button--color--waiting;
+    }
+
+    &.is-disabled {
+        cursor: not-allowed;
+        color: $m-button--color--disabled;
+        background: $m-color--white;
+        border-color: $m-button--color--disabled;
+    }
+}
+
+.m-button__text {
+    flex: 1;
+}
+
+.m-button__more-info,
+.m-button__icon {
+    &:empty {
+        display: none;
+    }
+}
+
+.m-button__more-info {
+    display: block;
+
+    font-size: $m-font-size--s;
+    font-weight: $m-font-weight--regular;
+
+    margin-top: $m-margin--s;
+
+    &:empty {
+        display: none;
+    }
+}
+
+.m-button__icon {
+    &.is-left {
+        margin-right: $m-padding--s;
+    }
+    &.is-right{
+        margin-left: $m-padding--s;
+    }
+}
+
+
