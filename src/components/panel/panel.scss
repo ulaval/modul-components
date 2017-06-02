@@ -5,7 +5,7 @@
     position: relative;
 	border: 1px solid $m-color--grey;
     display: block;
-    box-shadow: 0 1px 1px rgba($m-color--black, 0.07);;
+    box-shadow: 0 1px 1px rgba($m-color--black, 0.07);
 
     &.is-primary {
         background: $m-color--white;
@@ -34,6 +34,17 @@
         }
 
     }
+
+    &.no-shadow {
+        box-shadow: none;
+    }
+
+    &.no-padding {
+        .m-panel__header, .m-panel__body {
+            padding: 0;
+        }
+    }
+
 }
 
 .m-panel__header, .m-panel__body {
