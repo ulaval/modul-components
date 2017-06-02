@@ -1,0 +1,10 @@
+<boite :class="[ componentName,
+                {'is-primary': type!='secondary',
+                'is-secondary': type=='secondary'} ]">
+    <div :class="[ componentName + '__header']" v-if="hasHeader">
+        <slot name="header"></slot>
+    </div>
+    <div :class="[ componentName + '__body']">
+        <slot>{{ lorem }}</slot>
+    </div>
+</boite>
