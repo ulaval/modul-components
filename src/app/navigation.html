@@ -1,7 +1,11 @@
 <div>
-    <h3>Components</h3>
-    <div v-for="route in routes">
-        <router-link :to="route">{{route}}</router-link>
-    </div>
+    <h2 class="m-without-margin-top">Components list</h2>
+    <nav>
+        <ul>
+            <li v-for="route in routes">
+                <m-link :url="route">{{route}}</m-link></router-link>
+            </li>
+        </ul>
+    </nav>
     <router-view></router-view>
 </div>
