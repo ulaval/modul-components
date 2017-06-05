@@ -92,6 +92,15 @@ module.exports = function (env) {
                         formatter: 'grouped',
                         formattersDirectory: 'node_modules/custom-tslint-formatters/formatters'
                     }
+                },
+                {
+                    test: /\.svg$/,
+                    loader: 'svg-inline-loader',
+                    options: {
+                        removeTags: true,
+                        removingTags: ['desc', 'defs', 'style'],
+                        removeSVGTagAttrs: true
+                    }
                 }
             ]
         },
@@ -120,6 +129,7 @@ module.exports = function (env) {
             'button': ['./src/components/button/button.ts'],
             'lang': ['./src/directives/lang/lang.ts'],
             'list': ['./src/components/list/list.ts'],
+            'panel': ['./src/components/panel/panel.ts'],
             'dynamic-template': ['./src/components/dynamic-template/dynamic-template.ts'],
             'i18n': ['./src/utils/i18n.ts'],
             'uuid': ['./src/utils/uuid.ts'],
