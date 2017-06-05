@@ -121,7 +121,7 @@ module.exports = function (env) {
     }
 
     if (isProd) {
-        config.entry = {
+        /*config.entry = {
             'component-names': ['./src/components/component-names.ts'],
             'meta': ['./src/meta/meta.ts'],
             'meta-fr': ['./src/meta/meta-fr.ts'],
@@ -143,7 +143,9 @@ module.exports = function (env) {
             publicPath: '/',
             libraryTarget: 'umd',
             filename: '[name].js'
-        };
+        };*/
+
+        console.log('Use npm run tsc instead (for the moment...)');
     }
 
     return config;

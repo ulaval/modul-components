@@ -7,7 +7,7 @@ import Component from 'vue-class-component';
 @Component
 export class ServiceMixin extends Vue {
     public beforeCreate(): void {
-        console.log('before create mixin');
+        // console.log('before create mixin');
         const options = this.$options;
         (options as any).$serviceMixin = this;
     }
@@ -19,7 +19,7 @@ export class ServiceMixin extends Vue {
 
 class GlobalMixin extends Vue {
     public beforeCreate(): void {
-        console.log('before create global mixin');
+        // console.log('before create global mixin');
         // console.log(this.$options);
         (this.$options as any).$aaa = '?';
         (this as any).$globalMixin = 'zz';
@@ -29,15 +29,15 @@ class GlobalMixin extends Vue {
 type GlobalFunc = (s: string) => void;
 
 const f1: GlobalFunc = (s: string) => {
-    console.log('f1', s);
+    // console.log('f1', s);
 };
 
 const f2: GlobalFunc = (s: string) => {
-    console.log('f2', s);
+    // console.log('f2', s);
 };
 
 const f3: GlobalFunc = (s: string) => {
-    console.log('f3', s);
+    // console.log('f3', s);
 };
 
 const ComponentMetaService: PluginObject<any> = {

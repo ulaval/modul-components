@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import { components } from '@/components/component-names';
-import { directives } from '@/directives/directives-names';
+import { components } from '../components/component-names';
+import { directives } from '../directives/directive-names';
 
 export type OverviewType = 'rubric' | 'do' | 'dont';
 
