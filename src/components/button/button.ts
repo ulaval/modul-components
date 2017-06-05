@@ -9,22 +9,20 @@ import { BUTTON_NAME } from '../component-names';
 @Component
 export class MButton extends Vue {
 
-    @Prop({ default: 'prymary' })
+    @Prop({ default: 'primary' })
     public type: string;
-    @Prop({ default: false })
-    public isWaiting: boolean;
-    @Prop({ default: false })
-    public isDisabled: boolean;
+    @Prop({ default: 'default' })
+    public state: string;
 
     private componentName: string = BUTTON_NAME;
-    private rippleEffectIsActive: boolean = true;
 
-    public mounted() {
-        if (this.$props.isWaiting || this.$props.isDisabled) {
-            this.rippleEffectIsActive = false;
+    public get isDisabled(): boolean {
+        console.log(this.$props.state);
+         if ( this.$props.state=='selected' || this.$props.state=='waiting' || this.$props.state=='disabled' ) {
+           return true;
         }
+        return false;
     }
-
 
     public get hasIconeLeft(): boolean {
         return !!this.$slots['icon-left'];
