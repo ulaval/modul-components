@@ -8,8 +8,10 @@ import { ICON_NAME } from '../component-names';
 @WithRender
 @Component
 export class MIcon extends Vue {
-    @Prop({ required: true })
+    @Prop({ default: 'default' })
     public icon: string
+    @Prop()
+    public title: string
     @Prop({ default: '1em' })
     public height: string
     @Prop({ default: '1em' })
@@ -19,12 +21,19 @@ export class MIcon extends Vue {
 
     private iconContent = '';
 
+    private modifyTitle(svg): string {
+        if (this.$props.title) {
+            return svg.replace(/<title>[^<]*/, '<title>' + this.$props.title);
+        }
+        return svg;
+    }
+
     public beforeMount() {
         var vm = this;
-        (require as any)(['bundle-loader!../../public/' + vm.$props.icon + '.svg'],
+        (require as any)(['bundle-loader!../../public/icons/' + vm.$props.icon + '.svg'],
             function (waitForChunk) {
                 waitForChunk(function (svg) {
-                    vm.iconContent = svg.replace('viewBox', 'width="' + vm.$props.width + '" height="' + vm.$props.height + '" viewBox');
+                    vm.iconContent = vm.modifyTitle(svg).replace('viewBox', 'width="' + vm.$props.width + '" height="' + vm.$props.height + '" viewBox');
                 })
             }
         )
