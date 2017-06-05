@@ -1,10 +1,11 @@
 <button :class="[ componentName,
-                {'is-primary': type!='secondary',
+                { 'is-primary': type!='secondary',
                 'is-secondary': type=='secondary',
-                'is-waiting': isWaiting,
-                'is-disabled': isDisabled} ]"
-        v-m-ripple-effect="rippleEffectIsActive"
-        :disabled="isWaiting || isDisabled">
+                'is-selected': state=='selected',
+                'is-waiting': state=='waiting',
+                'is-disabled': state=='disabled' } ]"
+        v-m-ripple-effect="!isDisabled"
+        :disabled="isDisabled">
     <span :class="[ componentName + '__icon', 'is-left']" v-if="hasIconeLeft">
         <slot name="icon-left"></slot>
     </span>

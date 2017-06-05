@@ -3,7 +3,8 @@
 
 $m-button--color: $m-color--primary !default;
 $m-button--color--hover: $m-color--primary--light !default;
-$m-button--color--active: $m-color--primary--darker !default;
+$m-button--color--active: $m-color--primary !default;
+$m-button--color--selected: $m-color--primary--darker !default;
 $m-button--color--waiting: $m-color--primary--lighter !default;
 $m-button--color--disabled: $m-color--grey--light !default;
 
@@ -16,8 +17,6 @@ $m-button--color--disabled: $m-color--grey--light !default;
     text-align: center;
     vertical-align: middle;
     padding: 10px $m-padding 9px $m-padding;
-
-
 
     appearance: none;
     outline: none;
@@ -33,9 +32,8 @@ $m-button--color--disabled: $m-color--grey--light !default;
 
     &.is-primary,
     &.is-secondary {
-        cursor: pointer;
-
-        &:not(.is-waiting):not(.is-disabled) {
+        &:not(.is-selected):not(.is-waiting):not(.is-disabled) {
+            cursor: pointer;
             &:hover {
                 color: $m-color--white;
                 background: $m-button--color--hover;
@@ -54,13 +52,21 @@ $m-button--color--disabled: $m-color--grey--light !default;
     }
 
     &.is-secondary {
-        background: none;
         color: $m-button--color;
+        background: $m-color--white;
     }
 
+    &.is-selected,
     &.is-waiting,
     &.is-disabled {
-        transition: none;
+        transition-property: background, border-color, color;
+        transition-duration: .3s;
+        transition-timing-function: ease;
+    }
+
+    &.is-selected {
+        background: $m-button--color--selected;
+        border-color: $m-button--color--selected;
     }
 
     &.is-waiting {
