@@ -2,19 +2,19 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@/*": [
+            "/*": [
                 "src/*"
             ]
         },
-        "target": "es5",
-        "module": "es2015",
+        "target": "es6",
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
         "types": [
             "node",
-            "jasmine"
+            "jasmine",
+            "core-js"
         ],
         "typeRoots": [
             "node_modules/@types"

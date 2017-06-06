@@ -39,8 +39,24 @@
         box-shadow: none;
     }
 
+    &.no-border {
+        border: 0;
+    }
+
     &.no-padding {
         .m-panel__header, .m-panel__body {
+            padding: 0;
+        }
+    }
+
+    &.no-padding-header {
+        .m-panel__header {
+            padding: 0;
+        }
+    }
+
+    &.no-padding-body {
+        .m-panel__body {
             padding: 0;
         }
     }
@@ -49,6 +65,17 @@
 
 .m-panel__header, .m-panel__body {
     padding: $m-padding;
+}
+
+.m-panel__header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr auto;
+
+    .m-panel__header__content.is-right{
+        justify-self: flex-end;
+    }
+
 }
 
 

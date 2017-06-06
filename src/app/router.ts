@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
-import Meta from '@/meta/meta';
-import { FRENCH } from '@/utils/i18n';
+import Meta from '../meta/meta';
+import { FRENCH } from '../utils/i18n';
 import { Navigation } from './navigation';
 import { Viewer } from './viewer';
 

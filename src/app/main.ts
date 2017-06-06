@@ -15,16 +15,16 @@ import PanelPlugin from '@/components/panel/panel';
 
 Vue.config.productionTip = false;
 
-Vue.use(AccordionPlugin);
-Vue.use(ButtonPlugin);
-Vue.use(DynamicTemplatePlugin);
-Vue.use(LinkPlugin);
-Vue.use(ListPlugin);
-Vue.use(RippleEffectPlugin);
-Vue.use(TextIconPlugin);
-Vue.use(StatusList);
-// Vue.use(IconPlugin);
 Vue.use(PanelPlugin);
+Vue.use(StatusList);
+Vue.use(TextIconPlugin);
+Vue.use(RippleEffectPlugin);
+Vue.use(ListPlugin);
+Vue.use(LinkPlugin);
+Vue.use(DynamicTemplatePlugin);
+Vue.use(ButtonPlugin);
+Vue.use(AccordionPlugin);
+// Vue.use(IconPlugin);
 
 const vue = new Vue({
     router,

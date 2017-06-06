@@ -35,8 +35,22 @@ export class MStatusList extends Vue {
 
     public values: Object[] = this.model;
 
-    // public mounted() {
-    //     console.log(this.model);
-    // }
+    public getIcon(status):string {
+        let icon: string = "";
+        switch (status) {
+            case 'completed':
+                icon = 'pastille-crochet';
+                break;
+            case 'pending':
+                icon = 'pastille-crochet-jaune';
+                break;
+            case 'error':
+                icon = 'pastille-erreur';
+                break;
+            default:
+                break;
+        }
+        return icon;
+    }
 
 }

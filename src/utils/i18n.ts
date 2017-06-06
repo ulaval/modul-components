@@ -1,3 +1,5 @@
+import { PluginObject } from 'vue';
+
 /**
  * This package provides language and locales utilities.
  */
@@ -29,12 +31,10 @@ type LanguageBundlesMap = {
     [language: string]: BundleMessagesMap;
 };
 
-const messages: LanguageBundlesMap = {};
-
 /**
  * The default language is english.
  */
-let curLang = ENGLISH;
+export let curLang = ENGLISH;
 
 export function currentLang(lang?: string): string {
     if (lang) {
@@ -44,128 +44,132 @@ export function currentLang(lang?: string): string {
     return curLang;
 }
 
-/**
- * Adds the messages so that they can be resolved.
- *
- * @param lang The language, for example: 'en'
- * @param messages The messages
- */
-export function addMessages(lang: string, bundle: BundleMessagesMap): void {
-    let languageBundles: BundleMessagesMap = messages[lang];
-    messages[lang] = { ...languageBundles, ...bundle };
-}
+export class Messages {
+    private messages: LanguageBundlesMap = {};
 
-/**
- * Allows to translate a key into the specified language.
- *
- * The resolution is made in this order:
- *
- * key.nb.modifier
- * key.p.modifier
- * key.nb
- * key.p
- * key.modifier
- * key
- */
-export function translate(key: string, params: any[] = [], nb?: number, modifier?: string, htmlEncodeParams: boolean = true): string {
-    if (!key) {
-        throw new Error('The key is empty.');
+    /**
+     * Adds the messages so that they can be resolved.
+     *
+     * @param lang The language, for example: 'en'
+     * @param messages The messages
+     */
+    public addMessages(lang: string, bundle: BundleMessagesMap): void {
+        let languageBundles: BundleMessagesMap = this.messages[lang];
+        this.messages[lang] = { ...languageBundles, ...bundle };
     }
 
-    let val = resolveKey(curLang, key, nb, modifier);
+    /**
+     * Allows to translate a key into the specified language.
+     *
+     * The resolution is made in this order:
+     *
+     * key.nb.modifier
+     * key.p.modifier
+     * key.nb
+     * key.p
+     * key.modifier
+     * key
+     */
+    public translate(key: string, params: any[] = [], nb?: number, modifier?: string, htmlEncodeParams: boolean = true): string {
+        if (!key) {
+            throw new Error('The key is empty.');
+        }
 
-    if (Array.isArray(params) && params.length) {
-        for (let i = 0; i < params.length; ++i) {
-            if (htmlEncodeParams) {
-                params[i] = htmlEncode(params[i]);
+        let val = this.resolveKey(curLang, key, nb, modifier);
+
+        if (Array.isArray(params) && params.length) {
+            for (let i = 0; i < params.length; ++i) {
+                if (htmlEncodeParams) {
+                    params[i] = htmlEncode(params[i]);
+                }
             }
         }
-    }
 
-    val = format(val, params);
+        val = format(val, params);
 
-    return val;
-}
-
-function resolveKey(lang: string, key: string, nb?: number, modifier?: string, encodeParams?: boolean): string {
-    let val: string | null = null;
-
-    if (nb && modifier) {
-        // key.nb.modifier
-        val = findKey(lang, `${key}.${nb}.${modifier}`);
-
-        if (val) {
-            return val;
-        }
-
-        // key.p.modifier
-        if (nb > 1) {
-            val = findKey(lang, `${key}.p.${modifier}`);
-
-            if (val) {
-                return val;
-            }
-        }
-    }
-
-    if (nb) {
-        // key.nb
-        val = findKey(lang, `${key}.${nb}`);
-
-        if (val) {
-            return val;
-        }
-
-        // key.p
-        if (nb > 1) {
-            val = findKey(lang, `${key}.p`);
-
-            if (val) {
-                return val;
-            }
-        }
-    }
-
-    if (modifier) {
-        // key.modifier
-        val = findKey(lang, `${key}.${modifier}`);
-
-        if (val) {
-            return val;
-        }
-    }
-
-    // key
-    val = findKey(lang, key);
-
-    if (val) {
         return val;
     }
 
-    console.warn(`The key ${key} does not exist.`);
-    return key;
-}
+    private resolveKey(lang: string, key: string, nb?: number, modifier?: string, encodeParams?: boolean): string {
+        let val: string | null = null;
 
-/**
- * Finds a key in the available messages or returns null.
- *
- * @param lang The language to use
- * @param key The key to find
- */
-function findKey(lang: string, key: string): string | null {
-    const parts = key.split(':');
+        if (nb && modifier) {
+            // key.nb.modifier
+            val = this.findKey(lang, `${key}.${nb}.${modifier}`);
 
-    if (parts.length != 2) {
-        console.warn(`The key ${key} is invalid. The key needs to be in the format <bundle>:<id>`);
-        return null;
+            if (val) {
+                return val;
+            }
+
+            // key.p.modifier
+            if (nb > 1) {
+                val = this.findKey(lang, `${key}.p.${modifier}`);
+
+                if (val) {
+                    return val;
+                }
+            }
+        }
+
+        if (nb) {
+            // key.nb
+            val = this.findKey(lang, `${key}.${nb}`);
+
+            if (val) {
+                return val;
+            }
+
+            // key.p
+            if (nb > 1) {
+                val = this.findKey(lang, `${key}.p`);
+
+                if (val) {
+                    return val;
+                }
+            }
+        }
+
+        if (modifier) {
+            // key.modifier
+            val = this.findKey(lang, `${key}.${modifier}`);
+
+            if (val) {
+                return val;
+            }
+        }
+
+        // key
+        val = this.findKey(lang, key);
+
+        if (val) {
+            return val;
+        }
+
+        console.warn(`The key ${key} does not exist.`);
+        return key;
     }
 
-    const bundleName = parts[0];
-    const id = parts[1];
+    /**
+     * Finds a key in the available messages or returns null.
+     *
+     * @param lang The language to use
+     * @param key The key to find
+     */
+    private findKey(lang: string, key: string): string | null {
+        const parts = key.split(':');
 
-    const langMsgs = messages[lang];
-    const bundleMsgs = langMsgs && langMsgs[bundleName];
-    return bundleMsgs && bundleMsgs[id];
+        if (parts.length != 2) {
+            console.warn(`The key ${key} is invalid. The key needs to be in the format <bundle>:<id>`);
+            return null;
+        }
+
+        const bundleName = parts[0];
+        const id = parts[1];
+
+        const langMsgs = this.messages[lang];
+        const bundleMsgs = langMsgs && langMsgs[bundleName];
+        return bundleMsgs && bundleMsgs[id];
+    }
 }
 
 /**
@@ -196,3 +200,13 @@ function htmlEncode(val: string) {
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 }
+
+const MessagePlugin: PluginObject<any> = {
+    install(v, options) {
+        let msg: Messages = new Messages();
+        (v as any).$i18n = msg;
+        (v.prototype as any).$i18n = msg;
+    }
+};
+
+export default MessagePlugin;
