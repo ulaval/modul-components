@@ -9,21 +9,6 @@
 
     color: $m-color--primary;
     text-decoration: none;
-    padding-bottom: 2px;
-
-    &::after {
-        transition: width .3s ease;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-
-        content: '';
-
-        width: 0px;
-        height: 1px;
-        background: $m-color--primary;
-
-    }
 
     &:not(.is-without-visit) {
         &:visited {
@@ -32,32 +17,59 @@
     }
 
     &:not(:active) {
-        &:hover {
+        &:hover,
+        &:focus {
             color: $m-color--primary--light;
-            &::after {
-                left: 0;
-                width: 100%;
-                background: $m-color--primary--light;
+            .m-link__text {
+                &::after {
+                    width: 100%;
+                    background: $m-color--primary--light;
+                    opacity: 1;
+                }
             }
         }
     }
 
+    &:focus {
+        outline: none;
+    }
 
     &:active {
         color: $m-color--primary--dark;
-        &::after {
-            background: $m-color--primary--dark;
+
+        .m-link__text {
+            &::after {
+                right: 0;
+                left: auto;
+                width: 0%;
+                background: $m-color--primary--dark;
+                opacity: 0;
+            }
         }
     }
 }
 
-.m-text-icon__text {
+.m-link__text {
+    position: relative;
     flex: 1;
+
+    &::after {
+        transition: width .3s ease, opacity .3s ease;
+        position: absolute;
+        right: 0;
+        bottom: -1px; //Magic number
+        left: 0;
+        content: '';
+        width: 0;
+        height: 1px;
+        background: $m-color--primary;
+        opacity: 0;
+    }
 }
 
-.m-text-icon__icon {
+.m-link__icon {
     font-size: 14px;
-    display: block;
+    display: inline-flex;
 
     &.is-left {
         margin-right: $m-margin--s;

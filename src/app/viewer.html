@@ -1,7 +1,10 @@
 <div>
-    <m-link url="/" >
+    <m-link url="/" is-without-visit="true">
         <span slot="icon-left"><</span>Back
     </m-link>
     <h2 class="m-margin-top-small m-margin-bottom-large">{{$route.meta}}</h2>
     <m-dynamic-template :template="tag"></m-dynamic-template>
+    <m-accordion><h2 slot="title">Bonjour</h2>salut</m-accordion>
+    <m-accordion></m-accordion>
+    <m-accordion></m-accordion>
 </div>

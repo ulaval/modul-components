@@ -1,6 +1,6 @@
 
 <transition>
-    <router-link :class="[ componentName ]" :to="{ path: url }" v-if="isRouterLink">
+    <router-link :class="[ componentName, { 'is-without-visit': isWithoutVisit } ]" :to="{ path: url }" v-if="isRouterLink">
         <span :class="[ componentName + '__icon', 'is-left']" v-if="hasIconeLeft">
             <slot name="icon-left"></slot>
         </span>
@@ -11,7 +11,7 @@
             <slot name="icon-right"></slot>
         </span>
     </router-link>
-    <a :class="[ componentName ]" :href="url" v-if="isLink">
+    <a :class="[ componentName, { 'is-without-visit': isWithoutVisit } ]" :href="url" v-if="isLink">
         <span :class="[ componentName + '__icon', 'is-left']" v-if="hasIconeLeft">
             <slot name="icon-left"></slot>
         </span>
