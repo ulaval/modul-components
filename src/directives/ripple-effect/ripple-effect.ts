@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
-import { RIPPLE_EFFECT_NAME } from '../component-names';
+import { RIPPLE_EFFECT_NAME } from '../directive-names';
 
 export class MRippleEffect extends Vue {
 
@@ -87,7 +87,7 @@ export class MRippleEffect extends Vue {
 
     public unbind(element: HTMLElement) {
         if (element) {
-            element.removeEventListener('mousedown', () => { false }, false);
+            element.removeEventListener('mousedown', () => { return false; }, false);
         }
     }
 }

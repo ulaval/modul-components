@@ -10,7 +10,6 @@ import IconPlugin from './icon/icon';
 import LinkPlugin from './link/link';
 import ListBulletPlugin from './list-bullet/list-bullet';
 import PanelPlugin from './panel/panel';
-import RippleEffectPlugin from './ripple-effect/ripple-effect';
 import StatusList from './status-list';
 import TextIconPlugin from './text-icon/text-icon';
 import TablePlugin from './table/table';
@@ -26,7 +25,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(LinkPlugin);
         Vue.use(ListBulletPlugin);
         Vue.use(PanelPlugin);
-        Vue.use(RippleEffectPlugin);
         Vue.use(TextIconPlugin);
         Vue.use(StatusList);
         Vue.use(TablePlugin);
