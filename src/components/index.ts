@@ -11,6 +11,7 @@ import PanelPlugin from './panel/panel';
 import RippleEffectPlugin from './ripple-effect/ripple-effect';
 import StatusList from './status-list';
 import TextIconPlugin from './text-icon/text-icon';
+import TablePlugin from './table/table';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options) {
@@ -24,6 +25,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RippleEffectPlugin);
         Vue.use(TextIconPlugin);
         Vue.use(StatusList);
+        Vue.use(TablePlugin);
     }
 };
 

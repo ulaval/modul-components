@@ -16,10 +16,12 @@ export class MIcon extends Vue {
     public height: string
     @Prop({ default: '1em' })
     public width: string
-    @Prop({ default: () => 0 })
-    public onClick: any
 
     private iconContent = '';
+
+    private onClick(event) {
+        this.$emit('onClick', event);
+    }
 
     private modifyTitle(svg): string {
         if (this.$props.title) {
@@ -30,7 +32,7 @@ export class MIcon extends Vue {
 
     public beforeMount() {
         var vm = this;
-        (require as any)(['bundle-loader!../../public/icons/' + vm.$props.icon + '.svg'],
+        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.icon + '.svg'],
             function (waitForChunk) {
                 waitForChunk(function (svg) {
                     vm.iconContent = vm.modifyTitle(svg).replace('viewBox', 'width="' + vm.$props.width + '" height="' + vm.$props.height + '" viewBox');

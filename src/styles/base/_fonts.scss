@@ -1,5 +1,3 @@
-
-
 // ======================================================================
 //  Mixin font face
 // ======================================================================
@@ -13,19 +11,14 @@
     }
 }
 
-
 // ======================================================================
 //  Font face
 // ======================================================================
-
 @include m-font-face($m-font-name, '#{$m-font-path}/#{$m-font-name}-Semibold', $m-font-weight--black, normal);
 @include m-font-face($m-font-name, '#{$m-font-path}/#{$m-font-name}-SemiboldIt', $m-font-weight--black, italic);
-
 @include m-font-face($m-font-name, '#{$m-font-path}/#{$m-font-name}-Regular', $m-font-weight--bold, normal);
 @include m-font-face($m-font-name, '#{$m-font-path}/#{$m-font-name}-It', $m-font-weight--bold, italic);
-
 @include m-font-face($m-font-name, '#{$m-font-path}/#{$m-font-name}-Light', $m-font-weight--regular, normal);
 @include m-font-face($m-font-name, '#{$m-font-path}/#{$m-font-name}-LightIt', $m-font-weight--regular, italic);
-
 @include m-font-face($m-font-name, '#{$m-font-path}/#{$m-font-name}-ExtraLight', $m-font-weight--light, normal);
 @include m-font-face($m-font-name, '#{$m-font-path}/#{$m-font-name}-ExtraLightIt', $m-font-weight--light, italic);

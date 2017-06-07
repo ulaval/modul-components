@@ -1,9 +1,8 @@
-
-@import '../../styles/abstracts/variables';
+@import 'abstracts/variables';
 
 .m-panel {
     position: relative;
-	border: 1px solid $m-color--grey;
+    border: 1px solid $m-color--grey;
     display: block;
     box-shadow: 0 1px 1px rgba($m-color--black, 0.07);
 
@@ -12,7 +11,7 @@
         border-top: 0;
         padding-top: 4px;
 
-        &:before {
+        &::before {
             width: 100%;
             height: 4px;
             top: 0;
@@ -22,7 +21,6 @@
             position: absolute;
             background-color: $m-color--secondary;
         }
-
     }
 
     &.is-secondary {
@@ -32,7 +30,6 @@
             background-color: $m-color--grey--lighter;
             border-bottom: 1px solid $m-color--grey;
         }
-
     }
 
     &.no-shadow {
@@ -44,7 +41,8 @@
     }
 
     &.no-padding {
-        .m-panel__header, .m-panel__body {
+        .m-panel__header,
+        .m-panel__body {
             padding: 0;
         }
     }
@@ -60,23 +58,19 @@
             padding: 0;
         }
     }
-
 }
 
-.m-panel__header, .m-panel__body {
+.m-panel__header,
+.m-panel__body {
     padding: $m-padding;
-}
 
-.m-panel__header {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr auto;
-
-    .m-panel__header__content.is-right{
-        justify-self: flex-end;
+    @media screen and (max-width: 640px) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
+    .m-panel__header__content.is-right {
+        justify-self: flex-end;
+    }
 }
-
-
-

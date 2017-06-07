@@ -8,15 +8,16 @@
         },
         "outDir": "dist",
         "declaration": true,
-        "target": "es6",
+        "target": "es5",
+        "module": "es2015",
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
         "types": [
+            "es6-promise",
             "node",
-            "jasmine",
-            "core-js"
+            "jasmine"
         ],
         "typeRoots": [
             "node_modules/@types"

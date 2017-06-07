@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import { Messages } from './i18n';
-import { AxiosStatic } from 'axios';
+import { HttpService } from './http';
 
 export class ModulVue extends Vue {
     public $i18n: Messages;
-    public $http: AxiosStatic;
+    public $http: HttpService;
 }
