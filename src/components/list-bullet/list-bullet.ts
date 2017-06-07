@@ -7,16 +7,16 @@ import { LIST_BULLET_NAME } from '../component-names';
 
 @WithRender
 @Component
-export class MList extends Vue {
+export class MListBullet extends Vue {
     @Prop({ default: ['Element 1', 'Element 2', 'Element 3'] })
     public values: string[];
     private componentName = LIST_BULLET_NAME;
 }
 
-const ListPlugin: PluginObject<any> = {
+const ListBulletPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(LIST_BULLET_NAME, MList);
+        v.component(LIST_BULLET_NAME, MListBullet);
     }
 };
 
-export default ListPlugin;
+export default ListBulletPlugin;
