@@ -1,0 +1,16 @@
+<section class="m-accordion-group">
+    <header class="m-accordion-group__header">
+        <span class="m-accordion-group__header__title">
+            <slot name="title">m-accordion-group</slot>
+        </span>
+        <span class="m-accordion-group__header__button">
+            <m-link type="button" @onClick="openAllAccordions" v-if="!accordionsAreOpen">Tout ouvrir</m-link>
+            <m-link type="button" @onClick="closeAllAccordions" v-else>Tout fermer</m-link>
+        </span>
+    </header>
+    <div class="m-accordion-group__body">
+        <slot>
+            <m-accordion></m-accordion>
+        </slot>
+    </div>
+</section>

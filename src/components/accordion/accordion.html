@@ -1,21 +1,21 @@
-<article :class="[ componentName , { 'is-regular': type!='light', 'is-light': type=='light' } ]">
+<article class="m-accordion" :class="{ 'is-regular': type!='light', 'is-light': type=='light' }">
     <header>
-        <a href="javascript:void(0);" :class="[ componentName + '__header' ]"  @click="toggleAccordion()">
-            <span :class="[ componentName + '__header__icon', 'is-left', , 'has-border', { 'is-close': accordionIsOpen } ]" v-if="type=='light'">
-                <span :class="[ componentName + '__header__icon__plus' ]"></span>
-                <span :class="[ componentName + '__header__icon__minus' ]"></span>
+        <a href="#" class="m-accordion__header"  @click="toggleAccordion($event)" v-m-ripple-effect="type!='light'">
+            <span class="m-accordion__header__icon is-left has-border" :class="{ 'is-close': accordionIsOpen }" v-if="type=='light'">
             </span>
-            <span :class="[ componentName + '__header__tilte' ]">
-                <slot name="title">{{ componentName }}</slot>
+            <span class="m-accordion__header__tilte">
+                <slot name="title">m-accordion</slot>
             </span>
-            <span :class="[ componentName + '__header__icon', 'is-right', 'is-large', { 'is-close': accordionIsOpen } ]" v-if="type!='light'">
+            <span class="m-accordion__header__icon is-right is-large" :class="{ 'is-close': accordionIsOpen }" v-if="type!='light'">
             </span>
         </a>
     </header>
-    <transition :name="componentName + '__anim'">
-        <div :class="[ componentName + '__body' ]" v-if="accordionIsOpen">
-            <div :class="[ componentName + '__body__wrap' ]">
-                <slot>Le programme est avant tout orienté vers la conception et non vers la production (technique). Le design y est présenté comme une expertise de résolution de problèmes au service d'un tiers ou de la société.</slot>
+    <transition @enter="animationEnter"
+                @after-enter="animationAfterEnter"
+                @leave="animationLeave">
+        <div class="m-accordion__body" v-if="accordionIsOpen">
+            <div class="m-accordion__body__wrap">
+                <slot>m-accordion - text</slot>
             </div>
         </div>
     </transition>

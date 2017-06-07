@@ -1,0 +1,12 @@
+
+@import '../../styles/abstracts/variables';
+
+.m-accordion-group__header {
+    display: flex;
+    justify-content: space-between;
+    padding: $m-margin $m-padding;
+}
+
+.m-accordion-group__body {
+    margin-top: 2px;
+}

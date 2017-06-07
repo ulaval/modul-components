@@ -10,21 +10,60 @@ import { ACCORDION_NAME } from '../component-names';
 export class MAccordion extends Vue {
 
     @Prop({ default: 'regular' })
-    public type: string;
+    private type: string;
 
     @Prop({ default: false })
-    public isOpen: boolean;
+    private isOpen: boolean;
 
-    public accordionIsOpen: boolean = false;
+    private accordionIsOpen: boolean = false;
 
-    private componentName: string = ACCORDION_NAME;
+    public componentName: string = ACCORDION_NAME;
 
-    public mounted() {
+    private mounted() {
         this.accordionIsOpen = this.isOpen;
     }
 
-    public toggleAccordion() {
+    private toggleAccordion(event) {
         this.accordionIsOpen = !this.accordionIsOpen;
+        if(this.$parent.$options._componentTag == 'm-accordion-group') {
+            this.$parent.toggleAccordion();
+        }
+        event.preventDefault();
+    }
+
+    private openAccordion() {
+        this.accordionIsOpen = true;
+    }
+
+    private closeAccordion() {
+        this.accordionIsOpen = false;
+    }
+
+    private animationEnter(el, done) {
+        let height: number = el.clientHeight;
+        el.style.maxHeight = '0';
+        setTimeout(()=> {
+            el.style.maxHeight = height + 'px';
+            done();
+        }, 2);
+
+    }
+
+    private animationAfterEnter(el) {
+        setTimeout(()=> {
+            el.style.maxHeight = 'none';
+        }, 300);
+    }
+
+    private animationLeave(el, done) {
+        let height: number = el.clientHeight;
+        el.style.maxHeight = height + 'px';
+        setTimeout(()=> {
+            el.style.maxHeight = '0';
+        }, 0);
+        setTimeout(()=> {
+            done();
+        }, 300);
     }
 
 }
