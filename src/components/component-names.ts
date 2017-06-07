@@ -1,4 +1,5 @@
 export const ACCORDION_NAME: string = 'm-accordion';
+export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const BUTTON_NAME: string = 'm-button';
 export const DYNAMIC_TEMPLATE_NAME: string = 'm-dynamic-template';
 export const I18N_NAME: string = 'm-i18n';
@@ -12,6 +13,7 @@ export const TEXT_ICON_NAME: string = 'm-text-icon';
 
 export const components: string[] = [
     ACCORDION_NAME,
+    ACCORDION_GROUP_NAME,
     BUTTON_NAME,
     DYNAMIC_TEMPLATE_NAME,
     I18N_NAME,
