@@ -21,7 +21,7 @@ export class MLink extends Vue {
     private isExternalLink: boolean = false;
 
     public mounted() {
-        switch(this.$props.type) {
+        switch (this.$props.type) {
             case 'link':
                 this.isLink = true;
                 break;

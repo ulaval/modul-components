@@ -18,8 +18,8 @@ export class MButton extends Vue {
 
     public get isDisabled(): boolean {
         console.log(this.$props.state);
-         if ( this.$props.state=='selected' || this.$props.state=='waiting' || this.$props.state=='disabled' ) {
-           return true;
+        if (this.$props.state == 'selected' || this.$props.state == 'waiting' || this.$props.state == 'disabled') {
+            return true;
         }
         return false;
     }

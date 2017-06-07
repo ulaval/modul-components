@@ -90,7 +90,8 @@ module.exports = function (env) {
                     options: {
                         configFile: 'conf/tslint.json',
                         formatter: 'grouped',
-                        formattersDirectory: 'node_modules/custom-tslint-formatters/formatters'
+                        formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
+                        emitErrors: true,
                     }
                 },
                 {

@@ -9,15 +9,24 @@ import { ICON_NAME } from '../component-names';
 @Component
 export class MIcon extends Vue {
     @Prop({ default: 'default' })
-    public icon: string
+    public icon: string;
     @Prop()
-    public title: string
+    public title: string;
     @Prop({ default: '1em' })
-    public height: string
+    public height: string;
     @Prop({ default: '1em' })
-    public width: string
+    public width: string;
 
     private iconContent = '';
+
+    public beforeMount() {
+        let vm = this;
+        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.icon + '.svg'], waitForChunk => {
+            waitForChunk(svg => {
+                this.iconContent = this.modifyTitle(svg).replace('viewBox', 'width="' + this.$props.width + '" height="' + this.$props.height + '" viewBox');
+            });
+        });
+    }
 
     private onClick(event) {
         this.$emit('onClick', event);
@@ -28,17 +37,6 @@ export class MIcon extends Vue {
             return svg.replace(/<title>[^<]*/, '<title>' + this.$props.title);
         }
         return svg;
-    }
-
-    public beforeMount() {
-        var vm = this;
-        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.icon + '.svg'],
-            function (waitForChunk) {
-                waitForChunk(function (svg) {
-                    vm.iconContent = vm.modifyTitle(svg).replace('viewBox', 'width="' + vm.$props.width + '" height="' + vm.$props.height + '" viewBox');
-                })
-            }
-        )
     }
 }
 
