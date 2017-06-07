@@ -16,10 +16,12 @@ export class MIcon extends Vue {
     public height: string
     @Prop({ default: '1em' })
     public width: string
-    @Prop({ default: () => 0 })
-    public onClick: any
 
     private iconContent = '';
+
+    private onClick(event) {
+        this.$emit('onClick', event);
+    }
 
     private modifyTitle(svg): string {
         if (this.$props.title) {
