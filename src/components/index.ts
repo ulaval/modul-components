@@ -2,8 +2,8 @@ import Vue from 'vue';
 import { PluginObject } from 'vue';
 
 import LangPlugin from './lang/lang';
-import AccodrionPlugin from './accordion/accordion';
-import AccodrionGroupPlugin from './accordion-group/accordion-group';
+import AccordionPlugin from './accordion/accordion';
+import AccordionGroupPlugin from './accordion-group/accordion-group';
 import ButtonPlugin from './button/button';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import IconPlugin from './icon/icon';
@@ -18,8 +18,8 @@ import TablePlugin from './table/table';
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options) {
         Vue.use(LangPlugin);
-        Vue.use(AccodrionPlugin);
-        Vue.use(AccodrionGroupPlugin);
+        Vue.use(AccordionPlugin);
+        Vue.use(AccordionGroupPlugin);
         Vue.use(ButtonPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(IconPlugin);
