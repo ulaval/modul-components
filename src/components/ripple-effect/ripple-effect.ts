@@ -7,7 +7,6 @@ export class MRippleEffect extends Vue {
     public bind(element: HTMLElement, binding) {
         let isActif: boolean = binding.value == undefined ? true : binding.value;
         let el: HTMLElement = element;
-        el.style.overflow = 'hidden';
 
         if (el) {
             el.addEventListener('mousedown', (event: MouseEvent) => {
@@ -15,6 +14,7 @@ export class MRippleEffect extends Vue {
                     let rippleEl: HTMLElement = document.createElement('span');
                     let rippleELStyle = rippleEl.style;
                     let elClick = (event.target as HTMLElement);
+                    el.style.overflow = 'hidden';
 
                     let elBoundingRect = el.getBoundingClientRect();
 
@@ -55,13 +55,13 @@ export class MRippleEffect extends Vue {
                     rippleELStyle.pointerEvents = 'none';
                     rippleELStyle.userSelect = 'none';
                     rippleELStyle.borderRadius = '50%';
-                    rippleELStyle.backgroundColor = 'currentColor';
+                    rippleELStyle.backgroundColor = '#CCFAFF';
                     rippleELStyle.backgroundClip = 'padding-box';
                     rippleELStyle.opacity = '0.2';
                     rippleELStyle.transform = 'scale(0)';
                     rippleELStyle.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
 
-                    (event.target as HTMLElement).appendChild(rippleEl);
+                    elClick.appendChild(rippleEl);
 
                     setTimeout(() => {
                         rippleEl.className += ' enter-active';
