@@ -17,7 +17,7 @@ export class MAccordion extends Vue {
 
     private accordionIsOpen: boolean = false;
 
-    public componentName: string = ACCORDION_NAME;
+    private componentName: string = ACCORDION_NAME;
 
     private mounted() {
         this.accordionIsOpen = this.isOpen;

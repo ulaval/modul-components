@@ -10,12 +10,14 @@ import { ACCORDION_NAME } from '../component-names';
 @Component
 export class MAccordionGroup extends Vue {
     @Prop({ default: false })
-    private accordionsAreOpen: boolean;
+    private openAllAccordion: boolean;
 
+    private accordionsAreOpen: boolean = false;
     private hasError: boolean = false;
     private nbAccordion: number = 0;
 
     private mounted() {
+        this.accordionsAreOpen = this.openAllAccordion;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
                 this.nbAccordion++;
@@ -57,6 +59,10 @@ export class MAccordionGroup extends Vue {
                 this.$children[i].closeAccordion();
             }
         }
+    }
+
+    private get accordionsAreAllOpen(): boolean {
+        return this.accordionsAreOpen;
     }
 }
 

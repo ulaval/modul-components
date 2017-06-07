@@ -4,7 +4,7 @@
             <slot name="title">m-accordion-group</slot>
         </span>
         <span class="m-accordion-group__header__button">
-            <m-link type="button" @onClick="openAllAccordions" v-if="!accordionsAreOpen">Tout ouvrir</m-link>
+            <m-link type="button" @onClick="openAllAccordions" v-if="!accordionsAreAllOpen">Tout ouvrir</m-link>
             <m-link type="button" @onClick="closeAllAccordions" v-else>Tout fermer</m-link>
         </span>
     </header>
