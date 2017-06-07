@@ -17,12 +17,12 @@ export class MAccordionGroup extends Vue {
 
     private mounted() {
         for (let i = 0; i < this.$children.length; i++) {
-            if(this.checkAccordion(i)) {
+            if (this.checkAccordion(i)) {
                 this.nbAccordion++;
             }
         }
 
-        if(this.accordionsAreOpen) {
+        if (this.accordionsAreOpen) {
             this.openAllAccordions();
         }
     }
@@ -30,7 +30,7 @@ export class MAccordionGroup extends Vue {
     private toggleAccordion() {
         let nbAccordionOpen: number = 0;
         for (let i = 0; i < this.$children.length; i++) {
-            if(this.checkAccordion(i) && this.$children[i].accordionIsOpen) {
+            if (this.checkAccordion(i) && this.$children[i].accordionIsOpen) {
                 nbAccordionOpen++;
             }
         }
@@ -44,7 +44,7 @@ export class MAccordionGroup extends Vue {
     private openAllAccordions() {
         this.accordionsAreOpen = true;
         for (let i = 0; i < this.$children.length; i++) {
-            if(this.checkAccordion(i)) {
+            if (this.checkAccordion(i)) {
                 this.$children[i].openAccordion();
             }
         }
@@ -53,7 +53,7 @@ export class MAccordionGroup extends Vue {
     private closeAllAccordions() {
         this.accordionsAreOpen = false;
         for (let i = 0; i < this.$children.length; i++) {
-            if(this.checkAccordion(i)) {
+            if (this.checkAccordion(i)) {
                 this.$children[i].closeAccordion();
             }
         }

@@ -25,7 +25,7 @@ export class MAccordion extends Vue {
 
     private toggleAccordion(event) {
         this.accordionIsOpen = !this.accordionIsOpen;
-        if(this.$parent.$options._componentTag == 'm-accordion-group') {
+        if (this.$parent.$options._componentTag == 'm-accordion-group') {
             this.$parent.toggleAccordion();
         }
         event.preventDefault();
@@ -42,7 +42,7 @@ export class MAccordion extends Vue {
     private animationEnter(el, done) {
         let height: number = el.clientHeight;
         el.style.maxHeight = '0';
-        setTimeout(()=> {
+        setTimeout (() => {
             el.style.maxHeight = height + 'px';
             done();
         }, 2);
@@ -50,7 +50,7 @@ export class MAccordion extends Vue {
     }
 
     private animationAfterEnter(el) {
-        setTimeout(()=> {
+        setTimeout (() => {
             el.style.maxHeight = 'none';
         }, 300);
     }
@@ -58,10 +58,10 @@ export class MAccordion extends Vue {
     private animationLeave(el, done) {
         let height: number = el.clientHeight;
         el.style.maxHeight = height + 'px';
-        setTimeout(()=> {
+        setTimeout (() => {
             el.style.maxHeight = '0';
         }, 0);
-        setTimeout(()=> {
+        setTimeout (() => {
             done();
         }, 300);
     }

@@ -17,8 +17,8 @@ export class MButton extends Vue {
     private componentName: string = BUTTON_NAME;
 
     public get isDisabled(): boolean {
-         if ( this.$props.state=='selected' || this.$props.state=='waiting' || this.$props.state=='disabled' ) {
-           return true;
+        if (this.$props.state == 'selected' || this.$props.state == 'waiting' || this.$props.state == 'disabled') {
+            return true;
         }
         return false;
     }

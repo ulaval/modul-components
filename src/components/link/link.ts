@@ -26,19 +26,19 @@ export class MLink extends Vue {
 
     private mounted() {
         this.hrefAttribute = this.url;
-        switch(this.$props.type) {
-            case 'link':
-                this.isLink = true;
-                break;
-            case 'externalLink':
-                this.isExternalLink = true;
-                break;
-            case 'button':
-                this.isButton = true;
-                break;
-            default:
-                this.url = this.url == '#' ? '/' : this.url;
-                this.isRouterLink = true;
+        switch (this.$props.type) {
+        case 'link':
+            this.isLink = true;
+            break;
+        case 'externalLink':
+            this.isExternalLink = true;
+            break;
+        case 'button':
+            this.isButton = true;
+            break;
+        default:
+            this.url = this.url == '#' ? '/' : this.url;
+            this.isRouterLink = true;
         }
     }
 
