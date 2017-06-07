@@ -32,7 +32,7 @@ export class MIcon extends Vue {
 
     public beforeMount() {
         let vm = this;
-        (require as any)(['bundle-loader!../../public/icons/' + vm.$props.icon + '.svg'],
+        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.icon + '.svg'],
             function(waitForChunk) {
                 waitForChunk(function(svg) {
                     vm.iconContent = vm.modifyTitle(svg).replace('viewBox', 'width="' + vm.$props.width + '" height="' + vm.$props.height + '" viewBox');
