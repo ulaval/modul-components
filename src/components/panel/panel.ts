@@ -24,7 +24,7 @@ export class MPanel extends Vue {
     private componentName: string = PANEL_NAME;
 
     public get hasHeader(): boolean {
-        if(!!this.$slots['header'] || !!this.$slots['header-content-left'] || !!this.$slots['header-content-right']){
+        if (this.$slots['header'] || this.$slots['header-content-left'] || this.$slots['header-content-right']) {
             return true;
         }
         return false;

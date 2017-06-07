@@ -9,13 +9,13 @@ import { ICON_NAME } from '../component-names';
 @Component
 export class MIcon extends Vue {
     @Prop({ default: 'default' })
-    public icon: string
+    public icon: string;
     @Prop()
-    public title: string
+    public title: string;
     @Prop({ default: '1em' })
-    public height: string
+    public height: string;
     @Prop({ default: '1em' })
-    public width: string
+    public width: string;
 
     private iconContent = '';
 
@@ -31,14 +31,14 @@ export class MIcon extends Vue {
     }
 
     public beforeMount() {
-        var vm = this;
-        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.icon + '.svg'],
-            function (waitForChunk) {
-                waitForChunk(function (svg) {
+        let vm = this;
+        (require as any)(['bundle-loader!../../public/icons/' + vm.$props.icon + '.svg'],
+            function(waitForChunk) {
+                waitForChunk(function(svg) {
                     vm.iconContent = vm.modifyTitle(svg).replace('viewBox', 'width="' + vm.$props.width + '" height="' + vm.$props.height + '" viewBox');
-                })
+                });
             }
-        )
+        );
     }
 }
 
