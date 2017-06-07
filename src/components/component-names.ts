@@ -8,6 +8,7 @@ export const PANEL_NAME: string = 'm-panel';
 export const RIPPLE_EFFECT_NAME: string = 'm-ripple-effect';
 export const STATUS_LIST_NAME: string = 'm-status-list';
 export const TEXT_ICON_NAME: string = 'm-text-icon';
+export const TABLE_NAME: string = 'm-table';
 
 export const components: string[] = [
     BUTTON_NAME,
@@ -19,5 +20,6 @@ export const components: string[] = [
     PANEL_NAME,
     RIPPLE_EFFECT_NAME,
     STATUS_LIST_NAME,
-    TEXT_ICON_NAME
+    TEXT_ICON_NAME,
+    TABLE_NAME
 ];

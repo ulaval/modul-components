@@ -130,6 +130,7 @@ module.exports = function (env) {
             'lang': ['./src/directives/lang/lang.ts'],
             'list': ['./src/components/list/list.ts'],
             'panel': ['./src/components/panel/panel.ts'],
+            'table': ['./src/components/table/table.ts'],
             'dynamic-template': ['./src/components/dynamic-template/dynamic-template.ts'],
             'i18n': ['./src/utils/i18n.ts'],
             'uuid': ['./src/utils/uuid.ts'],
