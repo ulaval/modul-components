@@ -1,5 +1,4 @@
 @import 'abstracts/variables';
-
 $m-status-list-icon-size: 22px;
 
 .m-status-list {
@@ -16,10 +15,8 @@ $m-status-list-icon-size: 22px;
         position: absolute;
         top: 3px;
         bottom: 3px;
-
         left: $m-status-list-icon-size / 2;
         z-index: 1;
-
     }
 
     li {
@@ -42,6 +39,4 @@ $m-status-list-icon-size: 22px;
         height: $m-status-list-icon-size;
         margin-right: 8px;
     }
-
 }
-

@@ -7,6 +7,8 @@
         "src/typings.d.ts": false
     },
     "files.trimTrailingWhitespace": true,
-    "tslint.configFile": "conf/tslint.json",
-    "tslint.run": "onSave"
+    "files.insertFinalNewline": true,
+    "stylelint.enable": true,
+    "css.validate": false,
+    "scss.validate": false
 }

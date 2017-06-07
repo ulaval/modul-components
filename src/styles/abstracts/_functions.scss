@@ -7,8 +7,9 @@
 /// @param {String} $type - asset type folder (e.g. `fonts/`)
 /// @param {String} $path - asset path
 /// @return {Url}
+
 @function asset($base, $type, $path) {
-  @return url($base + $type + $path);
+    @return url($base + $type + $path);
 }
 
 /// Returns URL to an image based on its path
@@ -16,8 +17,9 @@
 /// @param {String} $base [$base-url] - base URL
 /// @return {Url}
 /// @require $base-url
+
 @function image($path, $base: $base-url) {
-  @return asset($base, 'images/', $path);
+    @return asset($base, 'images/', $path);
 }
 
 /// Returns URL to a font based on its path
@@ -25,6 +27,7 @@
 /// @param {String} $base [$base-url] - base URL
 /// @return {Url}
 /// @require $base-url
+
 @function font($path, $base: $base-url) {
-  @return asset($base, 'fonts/', $path);
+    @return asset($base, 'fonts/', $path);
 }

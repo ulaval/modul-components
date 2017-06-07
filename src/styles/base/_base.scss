@@ -1,7 +1,7 @@
 *,
-*:before,
-*:after {
-  box-sizing: inherit;
+*::before,
+*::after {
+    box-sizing: inherit;
 }
 
 html,
@@ -19,7 +19,6 @@ body {
     font-style: normal;
     font-size: $m-font-size;
     line-height: $m-line-height;
-
     min-width: $m-min-width;
 }
 

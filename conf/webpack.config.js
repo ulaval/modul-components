@@ -32,15 +32,12 @@ module.exports = function (env) {
         devtool: 'source-map',
 
         module: {
-            loaders: [
-                {
-                    exclude: [
-                        'vue/**/*'
-                    ],
-                }
-            ],
-            rules: [
-                {
+            loaders: [{
+                exclude: [
+                    'vue/**/*'
+                ],
+            }],
+            rules: [{
                     enforce: 'post',
                     test: /\.css$/,
                     use: ['style-loader', 'css-loader']
@@ -59,13 +56,16 @@ module.exports = function (env) {
                                     ];
                                 }
                             }
-                        },
-                        {
-                            loader: "sass-loader",
-                            options: {
-                                includePaths: ["./src/styles"]
-                            }
-                        }]
+                        }
+                    ]
+                },
+                {
+                    enforce: 'pre',
+                    test: /\.scss$/,
+                    loader: "sass-loader",
+                    options: {
+                        includePaths: ["./src/styles"]
+                    }
                 },
                 {
                     test: /\.html$/,
@@ -106,7 +106,7 @@ module.exports = function (env) {
         },
         plugins: [
             new StyleLintPlugin({
-                configFile: 'conf/stylelint.json',
+                configFile: '.stylelintrc',
                 emitErrors: false
             })
         ]

@@ -1,5 +1,3 @@
-
-
 // ======================================================================
 //  Margin
 // ======================================================================
@@ -9,9 +7,11 @@
 
     &-top {
         margin-top: $m-margin;
+
         &-large {
             margin-top: $m-margin--l;
         }
+
         &-small {
             margin-top: $m-margin--s;
         }
@@ -19,9 +19,11 @@
 
     &-right {
         margin-right: $m-margin;
+
         &-large {
             margin-right: $m-margin--l;
         }
+
         &-small {
             margin-right: $m-margin--s;
         }
@@ -29,9 +31,11 @@
 
     &-bottom {
         margin-bottom: $m-margin;
+
         &-large {
             margin-bottom: $m-margin--l;
         }
+
         &-small {
             margin-bottom: $m-margin--s;
         }
@@ -39,9 +43,11 @@
 
     &-left {
         margin-left: $m-margin;
+
         &-large {
             margin-left: $m-margin--l;
         }
+
         &-small {
             margin-left: $m-margin--s;
         }
@@ -55,6 +61,7 @@
             margin-top: $m-margin--l;
             margin-bottom: $m-margin--l;
         }
+
         &-small {
             margin-top: $m-margin--s;
             margin-bottom: $m-margin--s;
@@ -69,6 +76,7 @@
             margin-right: $m-margin--l;
             margin-left: $m-margin--l;
         }
+
         &-small {
             margin-right: $m-margin--s;
             margin-left: $m-margin--s;
@@ -84,7 +92,6 @@
     }
 }
 
-
 // ======================================================================
 //  Padding
 // ======================================================================
@@ -94,9 +101,11 @@
 
     &-top {
         padding-top: $m-padding;
+
         &-large {
             padding-top: $m-padding--l;
         }
+
         &-small {
             padding-top: $m-padding--s;
         }
@@ -104,9 +113,11 @@
 
     &-right {
         padding-right: $m-padding;
+
         &-large {
             padding-right: $m-padding--l;
         }
+
         &-small {
             padding-right: $m-padding--s;
         }
@@ -114,9 +125,11 @@
 
     &-bottom {
         padding-bottom: $m-padding;
+
         &-large {
             padding-bottom: $m-padding--l;
         }
+
         &-small {
             padding-bottom: $m-padding--s;
         }
@@ -124,9 +137,11 @@
 
     &-left {
         padding-left: $m-padding;
+
         &-large {
             padding-left: $m-padding--l;
         }
+
         &-small {
             padding-left: $m-padding--s;
         }
@@ -140,6 +155,7 @@
             padding-top: $m-padding--l;
             padding-bottom: $m-padding--l;
         }
+
         &-small {
             padding-top: $m-padding--s;
             padding-bottom: $m-padding--s;
@@ -154,6 +170,7 @@
             padding-right: $m-padding--l;
             padding-left: $m-padding--l;
         }
+
         &-small {
             padding-right: $m-padding--s;
             padding-left: $m-padding--s;
@@ -169,7 +186,6 @@
     }
 }
 
-
 // ======================================================================
 //  without margin and padding
 // ======================================================================
@@ -177,22 +193,28 @@
 .m-without {
     &-margin {
         margin: 0;
+
         &-top {
             margin-top: 0;
         }
+
         &-right {
             margin-right: 0;
         }
+
         &-bottom {
             margin-bottom: 0;
         }
+
         &-left {
             margin-left: 0;
         }
+
         &-top-bottom {
             margin-top: 0;
             margin-bottom: 0;
         }
+
         &-right-left {
             margin-right: 0;
             margin-left: 0;
@@ -201,22 +223,28 @@
 
     &-padding {
         padding: 0;
+
         &-top {
             padding-top: 0;
         }
+
         &-right {
             padding-right: 0;
         }
+
         &-bottom {
             padding-bottom: 0;
         }
+
         &-left {
             padding-left: 0;
         }
+
         &-top-bottom {
             padding-top: 0;
             padding-bottom: 0;
         }
+
         &-right-left {
             padding-right: 0;
             padding-left: 0;
