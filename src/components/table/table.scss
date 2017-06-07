@@ -1,9 +1,8 @@
-
 @import '../../styles/abstracts/variables';
 
 .m-table {
-
-    .m-table__header, .m-table__body {
+    .m-table__header,
+    .m-table__body {
         padding: $m-padding;
     }
 
@@ -20,63 +19,55 @@
             align-items: flex-start;
         }
 
-        .m-table__header__content.is-right{
+        .m-table__header__content.is-right {
             justify-self: flex-end;
         }
-
     }
 
     .m-table__body {
-
-        table{
+        table {
             width: 100%;
             border-collapse: collapse;
 
-            thead th{
+            thead th {
                 padding: 0 $m-padding--s $m-margin--s;
                 font-weight: $m-font-weight--bold;
                 color: $m-color--black;
                 border-bottom: 2px solid $m-color--grey--lighter;
 
-                &:first-child{
+                &:first-child {
                     padding-left: 0;
                     text-align: left;
                 }
 
-                &:last-child{
+                &:last-child {
                     padding-right: 0;
                 }
-
             }
 
-            tbody tr{
+            tbody tr {
                 border-bottom: 1px solid $m-color--grey--lighter;
 
-                &:last-child{
+                &:last-child {
                     border-bottom: 0;
                 }
 
-                td{
+                td {
                     padding: $m-padding $m-padding--s;
                     margin: 1px 0;
                     vertical-align: top;
                     text-align: center;
 
-                    &:first-child{
+                    &:first-child {
                         padding: $m-padding 0;
                         text-align: left;
                     }
 
-                    &:last-child{
+                    &:last-child {
                         padding-right: 0;
                     }
-
                 }
             }
         }
     }
-
 }
-
-
-
