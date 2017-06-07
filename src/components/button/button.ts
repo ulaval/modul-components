@@ -17,11 +17,14 @@ export class MButton extends Vue {
     private componentName: string = BUTTON_NAME;
 
     public get isDisabled(): boolean {
-        console.log(this.$props.state);
          if ( this.$props.state=='selected' || this.$props.state=='waiting' || this.$props.state=='disabled' ) {
            return true;
         }
         return false;
+    }
+
+    private onClick(event) {
+        this.$emit('onClick');
     }
 
     public get hasIconeLeft(): boolean {
