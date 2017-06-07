@@ -3,6 +3,7 @@
 
 
 .m-link {
+    transition: color .3s ease;
     position: relative;
 
     font-weight: $m-font-weight--bold;
@@ -41,7 +42,7 @@
             &::after {
                 right: 0;
                 left: auto;
-                width: 0%;
+                width: 8%;
                 background: $m-color--primary--dark;
                 opacity: 0;
             }
@@ -60,7 +61,7 @@
         bottom: -1px; //Magic number
         left: 0;
         content: '';
-        width: 0;
+        width: 8%;
         height: 1px;
         background: $m-color--primary;
         opacity: 0;

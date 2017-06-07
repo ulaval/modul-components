@@ -1,35 +1,33 @@
 
 <transition>
-    <router-link :class="[ componentName, { 'is-without-visit': isWithoutVisit } ]" :to="{ path: url }" v-if="isRouterLink">
-        <span :class="[ componentName + '__icon', 'is-left']" v-if="hasIconeLeft">
+    <router-link class="m-link"
+                 :class="{ 'is-without-visit': isWithoutVisit }"
+                 :to="{ path: url }"
+                 v-if="isRouterLink">
+        <span class="m-link__icon is-left" v-if="hasIconeLeft">
             <slot name="icon-left"></slot>
         </span>
-        <span :class="[ componentName + '__text' ]">
+        <span  class="m-link__text">
             <slot>{{ componentName }}</slot>
         </span>
-        <span :class="[ componentName + '__icon', 'is-right']" v-if="hasIconeRight">
+        <span class="m-link__icon is-right" v-if="hasIconeRight">
             <slot name="icon-right"></slot>
         </span>
     </router-link>
-    <a :class="[ componentName, { 'is-without-visit': isWithoutVisit } ]" :href="url" v-if="isLink">
-        <span :class="[ componentName + '__icon', 'is-left']" v-if="hasIconeLeft">
+    <a class="m-link"
+       :class="{ 'is-without-visit': isWithoutVisit }"
+       :href="url"
+       :title="getTitleAttribute"
+       :target="getTargetAttribute"
+       v-if="isLink || isExternalLink || isButton"
+       @click="onClick($event)">
+        <span class="m-link__icon is-left" v-if="hasIconeLeft">
             <slot name="icon-left"></slot>
         </span>
-        <span :class="[ componentName + '__text' ]">
+        <span  class="m-link__text">
             <slot>{{ componentName }}</slot>
         </span>
-        <span :class="[ componentName + '__icon', 'is-right']" v-if="hasIconeRight">
-            <slot name="icon-right"></slot>
-        </span>
-    </a>
-    <a :class="[ componentName, { 'is-without-visit': isWithoutVisit } ]" :href="url" target="_blank" v-if="isExternalLink" :title="'Cet hyperlien s\'ouvrira dans une nouvelle fenêtre.'">
-        <span :class="[ componentName + '__icon', 'is-left']" v-if="hasIconeLeft">
-            <slot name="icon-left"></slot>
-        </span>
-        <span :class="[ componentName + '__text' ]">
-            <slot>{{ componentName }}</slot>
-        </span>
-        <span :class="[ componentName + '__icon', 'is-right']" v-if="hasIconeRight">
+        <span class="m-link__icon is-right" v-if="hasIconeRight">
             <slot name="icon-right"></slot>
         </span>
     </a>
