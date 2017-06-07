@@ -10,7 +10,7 @@ export class MRippleEffect extends Vue {
 
         if (el) {
             el.addEventListener('mousedown', (event: MouseEvent) => {
-                if(isActif) {
+                if (isActif) {
                     let rippleEl: HTMLElement = document.createElement('span');
                     let rippleELStyle = rippleEl.style;
                     let elClick = (event.target as HTMLElement);
@@ -86,8 +86,8 @@ export class MRippleEffect extends Vue {
     }
 
     public unbind(element: HTMLElement) {
-        if(element) {
-             element.removeEventListener('mousedown', () => { false }, false);
+        if (element) {
+            element.removeEventListener('mousedown', () => { false }, false);
         }
     }
 }
