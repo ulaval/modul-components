@@ -1,24 +1,21 @@
 @import 'abstracts/variables';
 
 .m-link {
-    transition: color .3s ease;
+    transition: color 0.3s ease;
     position: relative;
     font-weight: $m-font-weight--bold;
     color: $m-color--primary;
     text-decoration: none;
 
     &::after {
-        transition: width .3s ease;
+        transition: width 0.3s ease;
         position: absolute;
         right: 0;
         bottom: 0;
-
         content: '';
-
-        width: 0px;
+        width: 0;
         height: 1px;
         background: $m-color--primary;
-
     }
 
     &:not(.is-without-visit) {
@@ -31,6 +28,7 @@
         &:hover,
         &:focus {
             color: $m-color--primary--light;
+
             .m-link__text {
                 &::after {
                     width: 100%;
@@ -65,7 +63,7 @@
     flex: 1;
 
     &::after {
-        transition: width .3s ease, opacity .3s ease;
+        transition: width 0.3s ease, opacity 0.3s ease;
         position: absolute;
         right: 0;
         bottom: -1px; //Magic number

@@ -1,22 +1,23 @@
-
 @import '../../styles/abstracts/variables';
-
 $m-accordion--icon--l--width: 12px;
 $m-accordion--icon--width: 10px;
 $m-accordion--icon--l--height: 2px;
 $m-accordion--icon--height: 1px;
-
 $m-accordion--border--size: 2px;
 $m-accordion--color: $m-color--secondary;
 $m-accordion--color--border: $m-color--grey--lighter;
 
-
 .m-accordion {
-
     &.is-regular,
     &.is-light {
         .m-accordion__header__tilte {
-            &, h1, h2, h3, h4, h5, h6 {
+            &,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
                 margin: 0;
                 font-size: $m-font-size;
                 font-weight: $m-font-weight--bold;
@@ -30,16 +31,16 @@ $m-accordion--color--border: $m-color--grey--lighter;
         header {
             border-left: $m-border-size solid $m-accordion--color;
         }
+
         .m-accordion__header {
             min-height: 56px;
             padding: $m-padding $m-padding $m-padding $m-margin;
-
             border-top: $m-accordion--border--size solid $m-accordion--color--border;
             border-bottom: $m-accordion--border--size solid $m-accordion--color--border;
         }
 
         .m-accordion__body__wrap {
-            transition: .45s opacity ease, .3s transform ease;
+            transition: 0.45s opacity ease, 0.3s transform ease;
             padding: $m-padding;
         }
 
@@ -67,14 +68,13 @@ $m-accordion--color--border: $m-color--grey--lighter;
         .m-accordion__header {
             &:hover {
                 .m-accordion__header__tilte {
-                    transition: color .3s ease;
+                    transition: color 0.3s ease;
                     color: $m-color--primary;
                 }
             }
         }
 
-
-        .m-accordion__body__wrap  {
+        .m-accordion__body__wrap {
             padding-left: $m-margin--l;
             padding-top: $m-margin--s;
             padding-bottom: $m-margin;
@@ -85,7 +85,6 @@ $m-accordion--color--border: $m-color--grey--lighter;
 .m-accordion__header {
     color: $m-color--black;
     text-decoration: none;
-
     display: flex;
     align-items: center;
 
@@ -104,21 +103,21 @@ $m-accordion--color--border: $m-color--grey--lighter;
 
     &::before,
     &::after {
-        transition: .3s transform ease;
+        transition: 0.3s transform ease;
         position: absolute;
         top: 50%;
         left: 50%;
         content: '';
         background: $m-color--primary;
-        transform: translate3d(-50%, -50%, 0)
+        transform: translate3d(-50%, -50%, 0);
     }
 
     &::before {
-        transition: .3s transform ease;
+        transition: 0.3s transform ease;
     }
 
     &::after {
-        transition: .3s transform ease, .6s opacity ease;
+        transition: 0.3s transform ease, 0.6s opacity ease;
     }
 
     &.is-close {
@@ -189,7 +188,7 @@ $m-accordion--color--border: $m-color--grey--lighter;
 }
 
 .m-accordion__body {
-    transition: .3s max-height ease;
+    transition: 0.3s max-height ease;
     overflow: hidden;
     height: auto;
 }
