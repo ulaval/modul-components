@@ -1,25 +1,3 @@
-
-LOCAL
-2/2
-dev
-3
-master
-REMOTE
-3/3
-origin
-Demo-+-components-project-structure
-dev
-master
-STASHES
-1
-On dev: Auto stash before rebase of "origin/dev"
-TAGS
-0/0
-SUBMODULES
-0
-src/components/message/message.ts
-Ignore white space
-@@ -0,0 +1,49 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
