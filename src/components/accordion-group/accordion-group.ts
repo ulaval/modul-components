@@ -14,40 +14,50 @@ export class MAccordionGroup extends Vue {
 
     private accordionsAreOpen: boolean = false;
     private hasError: boolean = false;
+    private componentName: string = ACCORDION_GROUP_NAME;
     private nbAccordion: number = 0;
+    private arrAccordion: boolean[] = [];
+    private nbAccordionOpen: number = 0;
 
     private mounted() {
         this.accordionsAreOpen = this.openAllAccordion;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
+                this.$children[i]['accordionID'] = this.nbAccordion;
+                if (this.$children[i]['aIsOpen']) {
+                    this.nbAccordionOpen++;
+                    this.arrAccordion.push(true);
+                } else {
+                    this.arrAccordion.push(false);
+                }
                 this.nbAccordion++;
             }
         }
-
         if (this.accordionsAreOpen) {
             this.openAllAccordions();
         }
     }
 
-    private toggleAccordion() {
-        let nbAccordionOpen: number = 0;
-        for (let i = 0; i < this.$children.length; i++) {
-            if (this.checkAccordion(i) && this.$children[i].accordionIsOpen) {
-                nbAccordionOpen++;
-            }
+    private checkToggleAccordion(accordionID: number, isOpen: boolean) {
+        this.arrAccordion[accordionID] = isOpen;
+        if (isOpen) {
+            this.nbAccordionOpen++;
+        } else {
+            this.nbAccordionOpen--;
         }
-        this.accordionsAreOpen = nbAccordionOpen == this.nbAccordion ? true : false;
+        this.accordionsAreOpen = this.nbAccordionOpen == this.nbAccordion ? true : false;
     }
 
     private checkAccordion(index: number): boolean {
-        return this.$children[index].$options._componentTag == ACCORDION_NAME ? true : false;
+        return this.$children[index]['componentName'] == ACCORDION_NAME ? true : false;
     }
 
     private openAllAccordions() {
         this.accordionsAreOpen = true;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
-                this.$children[i].openAccordion();
+                this.$children[i]['animIsActive'] = true;
+                this.$children[i]['openAccordion']();
             }
         }
     }
@@ -56,7 +66,7 @@ export class MAccordionGroup extends Vue {
         this.accordionsAreOpen = false;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
-                this.$children[i].closeAccordion();
+                this.$children[i]['closeAccordion']();
             }
         }
     }
