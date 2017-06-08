@@ -7,6 +7,9 @@ $m-button--color--waiting: $m-color--primary--lighter !default;
 $m-button--color--disabled: $m-color--grey--light !default;
 
 .m-button {
+    transition-property: background, border-color, color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -49,14 +52,6 @@ $m-button--color--disabled: $m-color--grey--light !default;
     &.is-secondary {
         color: $m-button--color;
         background: $m-color--white;
-    }
-
-    &.is-selected,
-    &.is-waiting,
-    &.is-disabled {
-        transition-property: background, border-color, color;
-        transition-duration: 0.3s;
-        transition-timing-function: ease;
     }
 
     &.is-selected {
