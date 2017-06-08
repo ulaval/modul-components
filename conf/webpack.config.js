@@ -50,6 +50,7 @@ module.exports = function (env) {
                         {
                             loader: 'postcss-loader',
                             options: {
+                                sourceMap: true,
                                 plugins: function () {
                                     return [
                                         require('autoprefixer')
@@ -64,6 +65,7 @@ module.exports = function (env) {
                     test: /\.scss$/,
                     loader: "sass-loader",
                     options: {
+                        sourceMap: true,
                         includePaths: ["./src/styles"]
                     }
                 },
