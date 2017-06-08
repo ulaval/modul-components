@@ -44,7 +44,7 @@ export class MLink extends Vue {
 
     private onClick(event) {
         this.$emit('onClick');
-        if(this.isButton) {
+        if (this.isButton) {
             event.preventDefault();
         }
     }

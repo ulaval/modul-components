@@ -18,9 +18,21 @@
         background: $m-color--primary;
     }
 
-    &:not(.is-without-visit) {
+    &:not(.is-without-visit):not(.is-button) {
         &:visited {
             color: $m-color--primary--darker;
+
+            .m-link__text.m-link__text {
+                &::after {
+                    background: $m-color--primary--darker;
+                }
+            }
+        }
+    }
+
+    &:not(.is-button) {
+        &:focus {
+            outline: none;
         }
     }
 
@@ -28,7 +40,10 @@
         &:hover,
         &:focus {
             color: $m-color--primary--light;
+        }
 
+        &:not(.is-button):focus,
+        &:hover {
             .m-link__text {
                 &::after {
                     width: 100%;
@@ -37,10 +52,6 @@
                 }
             }
         }
-    }
-
-    &:focus {
-        outline: none;
     }
 
     &:active {
@@ -66,7 +77,7 @@
         transition: width 0.3s ease, opacity 0.3s ease;
         position: absolute;
         right: 0;
-        bottom: -1px; //Magic number
+        bottom: 1px; //Magic number
         left: 0;
         content: '';
         width: 8%;
