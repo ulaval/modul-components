@@ -1,0 +1,49 @@
+@import '../../styles/abstracts/variables';
+
+.m-dialog {
+    &__backdrop {
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: auto;
+    }
+
+    &__wrapper {
+        display: inline-block;
+        padding: $m-padding;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    &__container {
+        background-color: $m-color--white;
+        max-width: $m-max-width--dialog;
+        border-radius: $m-border-radius;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    &__body {
+        padding: $m-padding;
+    }
+
+    &__footer {
+        padding: 0 $m-padding $m-padding;
+        text-align: center;
+
+        &-content {
+            display: inline-flex;
+            flex-direction: column;
+        }
+
+        .m-button {
+            margin: $m-padding--s;
+        }
+    }
+}
