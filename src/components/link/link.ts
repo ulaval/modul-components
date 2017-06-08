@@ -24,8 +24,8 @@ export class MLink extends Vue {
     private targetAttribute: string = '_blanck';
     private titleAttribute: string = 'Cet hyperlien s\'ouvrira dans une nouvelle fenêtre.';
 
-<<<<<<< HEAD
-    public mounted() {
+    private mounted() {
+        this.hrefAttribute = this.url;
         switch (this.$props.type) {
             case 'link':
                 this.isLink = true;
@@ -33,25 +33,12 @@ export class MLink extends Vue {
             case 'externalLink':
                 this.isExternalLink = true;
                 break;
+            case 'button':
+                this.isButton = true;
+                break;
             default:
+                this.url = this.url == '#' ? '/' : this.url;
                 this.isRouterLink = true;
-=======
-    private mounted() {
-        this.hrefAttribute = this.url;
-        switch (this.$props.type) {
-        case 'link':
-            this.isLink = true;
-            break;
-        case 'externalLink':
-            this.isExternalLink = true;
-            break;
-        case 'button':
-            this.isButton = true;
-            break;
-        default:
-            this.url = this.url == '#' ? '/' : this.url;
-            this.isRouterLink = true;
->>>>>>> 1635e4a0ec683130c832c15cf29b707c4f33941f
         }
     }
 
