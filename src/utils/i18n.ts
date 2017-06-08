@@ -91,7 +91,7 @@ export class Messages {
     }
 
     private resolveKey(lang: string, key: string, nb?: number, modifier?: string, encodeParams?: boolean): string {
-        let val: string | null = null;
+        let val: string | undefined = undefined;
 
         if (nb && modifier) {
             // key.nb.modifier
@@ -155,12 +155,12 @@ export class Messages {
      * @param lang The language to use
      * @param key The key to find
      */
-    private findKey(lang: string, key: string): string | null {
+    private findKey(lang: string, key: string): string | undefined {
         const parts = key.split(':');
 
         if (parts.length != 2) {
             console.warn(`The key ${key} is invalid. The key needs to be in the format <bundle>:<id>`);
-            return null;
+            return undefined;
         }
 
         const bundleName = parts[0];

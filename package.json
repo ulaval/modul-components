@@ -83,6 +83,5 @@
     "files": [
         "dist"
     ],
-    "typings": "dist/index.d.ts",
     "license": "Apache-2.0"
 }

@@ -8,6 +8,7 @@ if (!Array.prototype['find']) {
     Object.defineProperty(Array.prototype, 'find', {
         value: (...predicate: any[]) => {
             // 1. Let O be ? ToObject(this value).
+            // tslint:disable-next-line:no-null-keyword
             if (this == null) {
                 throw new TypeError('"this" is null or not defined');
             }

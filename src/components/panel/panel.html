@@ -5,7 +5,8 @@
                 'no-border': hasBorder == 'false',
                 'no-padding': hasPadding == 'false',
                 'no-padding-header': hasPaddingHeader == 'false',
-                'no-padding-body': hasPaddingBody == 'false'} ]">
+                'no-padding-body': hasPaddingBody == 'false',
+                'no-padding-footer': hasPaddingFooter == 'false'} ]">
     <header :class="[ componentName + '__header']" v-if="hasHeader">
         <slot name="header"></slot>
         <span :class="[ componentName + '__header__content', 'is-left']" v-if="hasContentLeft">
@@ -16,6 +17,15 @@
         </span>
     </header>
     <div :class="[ componentName + '__body']">
-        <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis. Duis mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit commodo arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec vehicula condimentum elementum. Sed laoreet est eget lorem tristique condimentum. Vestibulum at odio orci. Duis nisl erat, aliquam non tortor et, dapibus maximus nulla. Mauris lobortis, orci nec lobortis faucibus, nisi justo eleifend erat, sed convallis velit mi non lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</slot>
+        <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis. Duis
+            mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit commodo
+            arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+            cubilia Curae; Donec vehicula condimentum elementum. Sed laoreet est eget lorem tristique condimentum. Vestibulum
+            at odio orci. Duis nisl erat, aliquam non tortor et, dapibus maximus nulla. Mauris lobortis, orci nec lobortis
+            faucibus, nisi justo eleifend erat, sed convallis velit mi non lacus. Pellentesque habitant morbi tristique senectus
+            et netus et malesuada fames ac turpis egestas.</slot>
     </div>
+    <footer :class="[ componentName + '__footer']" v-if="hasFooter">
+        <slot name="footer"></slot>
+    </footer>
 </article>

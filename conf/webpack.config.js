@@ -11,7 +11,7 @@ module.exports = function (env) {
 
     var config = {
         entry: {
-            app: ['./src/app/main.ts']
+            app: ['./tests/app/main.ts']
         },
 
         externals: [],
@@ -70,7 +70,7 @@ module.exports = function (env) {
                 {
                     test: /\.html$/,
                     loader: 'vue-template-loader',
-                    exclude: resolve('src/index.html'),
+                    exclude: resolve('tests/app/index.html'),
                     options: {
                         scoped: true
                     }
@@ -90,7 +90,8 @@ module.exports = function (env) {
                     options: {
                         configFile: 'conf/tslint.json',
                         formatter: 'grouped',
-                        formattersDirectory: 'node_modules/custom-tslint-formatters/formatters'
+                        formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
+                        emitErrors: true,
                     }
                 },
                 {
@@ -115,7 +116,7 @@ module.exports = function (env) {
     if (!isProd) {
         config.plugins.push(new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: resolve('src/index.html'),
+            template: resolve('tests/app/index.html'),
             inject: 'body'
         }));
     }

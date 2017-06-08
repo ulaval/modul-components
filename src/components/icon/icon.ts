@@ -19,6 +19,15 @@ export class MIcon extends Vue {
 
     private iconContent = '';
 
+    public beforeMount() {
+        let vm = this;
+        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.icon + '.svg'], waitForChunk => {
+            waitForChunk(svg => {
+                this.iconContent = this.modifyTitle(svg).replace('viewBox', 'width="' + this.$props.width + '" height="' + this.$props.height + '" viewBox');
+            });
+        });
+    }
+
     private onClick(event) {
         this.$emit('onClick', event);
     }
@@ -28,17 +37,6 @@ export class MIcon extends Vue {
             return svg.replace(/<title>[^<]*/, '<title>' + this.$props.title);
         }
         return svg;
-    }
-
-    public beforeMount() {
-        let vm = this;
-        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.icon + '.svg'],
-            function(waitForChunk) {
-                waitForChunk(function(svg) {
-                    vm.iconContent = vm.modifyTitle(svg).replace('viewBox', 'width="' + vm.$props.width + '" height="' + vm.$props.height + '" viewBox');
-                });
-            }
-        );
     }
 }
 

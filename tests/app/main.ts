@@ -2,9 +2,9 @@ import './polyfills';
 import Vue from 'vue';
 import router from './router';
 
-import ComponentsPlugin from '../components';
-import DirectivesPlugin from '../directives';
-import UtilsPlugin, { UtilsPluginOptions } from '../utils';
+import ComponentsPlugin from '../../src/components';
+import DirectivesPlugin from '../../src/directives';
+import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
 
 Vue.config.productionTip = false;
 

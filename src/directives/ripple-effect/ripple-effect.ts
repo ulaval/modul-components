@@ -87,7 +87,7 @@ export class MRippleEffect extends Vue {
 
     public unbind(element: HTMLElement) {
         if (element) {
-            element.removeEventListener('mousedown', () => { return false; }, false);
+            element.removeEventListener('mousedown', () => false, false);
         }
     }
 }

@@ -7,11 +7,8 @@ import { STATUS_LIST_NAME } from '../component-names';
 @Component
 
 export class MStatusList extends Vue {
-    private componentName = STATUS_LIST_NAME;
-
     @Prop({
-        default:
-        function() {
+        default: () => {
             return [
                 {
                     'status': 'completed',
@@ -32,9 +29,10 @@ export class MStatusList extends Vue {
             ];
         }
     })
-    private model: Object[];
-
+    public model: Object[];
     public values: Object[] = this.model;
+
+    private componentName = STATUS_LIST_NAME;
 
     public getIcon(status): string {
         let icon: string = '';
