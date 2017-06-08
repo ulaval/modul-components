@@ -3,12 +3,17 @@
         <div class="m-dialog__wrapper">
             <div class="m-dialog__container">
                 <div class="m-dialog__body">
-                    <slot name="body"></slot>
+                    <slot name="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore doloremque odio, et dignissimos qui
+                        recusandae doloribus nobis ipsam dolore cupiditate possimus quia commodi sit hic dolorum aperiam.
+                        Consectetur quisquam, praesentium.</slot>
                 </div>
                 <div class="m-dialog__footer">
                     <div class="m-dialog__footer-content">
-                        <slot name="footer"></slot>
-                        <m-link v-if="!isModal" type="button" @onClick="onClose">Fermer</m-link>
+                        <slot name="footer">
+                            <m-button @onClick="onClose">Ok</m-button>
+                            <m-button @onClick="onClose" type="secondary">Cancel</m-button>
+                        </slot>
+                        <m-link v-if="!isModal" type="button" @onClick="onClose">Close</m-link>
                     </div>
                 </div>
             </div>
