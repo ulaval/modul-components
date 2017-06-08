@@ -58,6 +58,7 @@
 *::before,
 *::after {
     box-sizing: inherit;
+    outline-color: #1aadff;
 }
 
 html,
