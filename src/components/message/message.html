@@ -1,0 +1,26 @@
+<div :class="[ componentName,
+                {'is-success': type=='success',
+                'is-info': type=='info',
+                'is-warning': type=='warning',
+                'is-error': type=='error',
+                'is-regular': mode!='reduce',
+                'is-reduce': mode=='reduce',
+                'no-icon': hasIcon=='false'} ]">
+    <div :class="[ componentName+ '__container',
+                {'is-regular': mode!='reduce',
+                'is-reduce': mode=='reduce'} ]">
+        <div :class="[ componentName + '__icon']" v-if="hasIcon">
+            <slot name="icon">
+                <m-icon :icon="getIcon()"></m-icon>
+            </slot>
+        </div>
+        <div :class="[ componentName + '__body']">
+            <slot>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis.
+                    Duis mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam
+                    blandit commodo arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci
+                    luctus et ultrices posuere cubilia Curae.</p>
+            </slot>
+        </div>
+    </div>
+</div>
