@@ -10,5 +10,7 @@
     "files.insertFinalNewline": true,
     "stylelint.enable": true,
     "css.validate": false,
-    "scss.validate": false
+    "scss.validate": false,
+    "tslint.configFile": "conf/tslint.json",
+    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false
 }
