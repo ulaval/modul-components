@@ -20,6 +20,8 @@ export class MPanel extends Vue {
     public hasPaddingHeader: boolean;
     @Prop({ default: false })
     public hasPaddingBody: boolean;
+    @Prop({ default: false })
+    public hasPaddingFooter: boolean;
 
     private componentName: string = PANEL_NAME;
 
@@ -36,6 +38,10 @@ export class MPanel extends Vue {
 
     public get hasContentRight(): boolean {
         return !!this.$slots['header-content-right'];
+    }
+
+    public get hasFooter(): boolean {
+        return !!this.$slots['footer'];
     }
 }
 
