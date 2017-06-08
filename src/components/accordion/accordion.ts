@@ -11,16 +11,61 @@ export class MAccordion extends Vue {
 
     @Prop({ default: 'regular' })
     private type: string;
-
-    @Prop({ default: false })
+    @Prop()
     private isOpen: boolean;
+    @Prop()
+    private iconPosition: string;
+    @Prop()
+    private iconStyle: string;
+    @Prop()
+    private iconSize: string;
 
     private accordionIsOpen: boolean = false;
-
+    private aIconPosition: string = 'right';
+    private aIconSize: string = 'large';
+    private aIconStyle: string = 'default';
     private componentName: string = ACCORDION_NAME;
 
     private mounted() {
-        this.accordionIsOpen = this.isOpen;
+        this.accordionIsOpen = this.$props.isOpen;
+        this.aIconPosition = this.$props.iconPosition;
+        this.aIconSize = this.$props.iconSize;
+        this.aIconStyle = this.$props.iconStyle;
+
+        switch (this.$props.type) {
+        case 'light':
+            if (this.aIconPosition == undefined) {
+                this.aIconPosition = 'left';
+            }
+            if (this.aIconSize == undefined) {
+                this.aIconSize = 'small';
+            }
+            if (this.aIconStyle == undefined) {
+                this.aIconStyle = 'border';
+            }
+            break;
+        case 'noStyle':
+            if (this.aIconPosition == undefined) {
+                this.aIconPosition = 'right';
+            }
+            if (this.aIconSize == undefined) {
+                this.aIconSize = 'large';
+            }
+            if (this.aIconStyle== undefined) {
+                this.aIconStyle= 'default';
+            }
+            break;
+        default:
+            if (this.aIconPosition == undefined) {
+                this.aIconPosition = 'right';
+            }
+            if (this.aIconSize == undefined) {
+                this.aIconSize = 'large';
+            }
+            if (this.aIconStyle == undefined) {
+                this.aIconStyle = 'default';
+            }
+        }
     }
 
     private toggleAccordion(event) {
@@ -39,7 +84,7 @@ export class MAccordion extends Vue {
         this.accordionIsOpen = false;
     }
 
-    private animationEnter(el, done) {
+    private animEnter(el, done) {
         let height: number = el.clientHeight;
         el.style.maxHeight = '0';
         setTimeout (() => {
@@ -49,13 +94,13 @@ export class MAccordion extends Vue {
 
     }
 
-    private animationAfterEnter(el) {
+    private animAfterEnter(el) {
         setTimeout (() => {
             el.style.maxHeight = 'none';
         }, 300);
     }
 
-    private animationLeave(el, done) {
+    private animLeave(el, done) {
         let height: number = el.clientHeight;
         el.style.maxHeight = height + 'px';
         setTimeout (() => {
@@ -65,7 +110,6 @@ export class MAccordion extends Vue {
             done();
         }, 300);
     }
-
 }
 
 const AccordionPlugin: PluginObject<any> = {

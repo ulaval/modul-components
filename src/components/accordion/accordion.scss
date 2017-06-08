@@ -83,10 +83,13 @@ $m-accordion--color--border: $m-color--grey--lighter;
 }
 
 .m-accordion__header {
-    color: $m-color--black;
-    text-decoration: none;
     display: flex;
     align-items: center;
+
+    &:not(.is-no-style) {
+        color: $m-color--black;
+        text-decoration: none;
+    }
 
     &:focus {
         outline-color: $m-color--primary--lightest;

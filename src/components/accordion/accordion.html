@@ -1,18 +1,18 @@
-<article class="m-accordion" :class="{ 'is-regular': type!='light', 'is-light': type=='light' }">
+<article class="m-accordion" :class="{ 'is-regular': type=='regular', 'is-light': type=='light', 'is-no-style': type=='noStyle', 'is-close': !accordionIsOpen }">
     <header>
-        <a href="#" class="m-accordion__header"  @click="toggleAccordion($event)" v-m-ripple-effect="type!='light'">
-            <span class="m-accordion__header__icon is-left has-border" :class="{ 'is-close': accordionIsOpen }" v-if="type=='light'">
+        <a href="#" class="m-accordion__header"  @click="toggleAccordion($event)">
+            <span class="m-accordion__header__icon is-left" :class="{ 'is-close': accordionIsOpen, 'is-large': aIconSize=='large', 'has-border': aIconStyle=='border' }" v-if="aIconPosition == 'left'">
             </span>
             <span class="m-accordion__header__tilte">
-                <slot name="title">m-accordion</slot>
+                <slot name="title">m-accordion {{ hasRipple }}</slot>
             </span>
-            <span class="m-accordion__header__icon is-right is-large" :class="{ 'is-close': accordionIsOpen }" v-if="type!='light'">
+            <span class="m-accordion__header__icon is-right" :class="{ 'is-close': accordionIsOpen, 'is-large': aIconSize=='large', 'has-border': aIconStyle=='border' }" v-if="aIconPosition == 'right'">
             </span>
         </a>
     </header>
-    <transition @enter="animationEnter"
-                @after-enter="animationAfterEnter"
-                @leave="animationLeave">
+    <transition @enter="animEnter"
+                @after-enter="animAfterEnter"
+                @leave="animLeave">
         <div class="m-accordion__body" v-if="accordionIsOpen">
             <div class="m-accordion__body__wrap">
                 <slot>m-accordion - text</slot>
