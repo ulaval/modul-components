@@ -54,7 +54,7 @@ export class MAccordionGroup extends Vue {
 
     private openAllAccordions() {
         this.accordionsAreOpen = true;
-        for (let i = 0; i < this.$children.length; i++) {
+        for (let i = 0; i < this.arrAccordion.length; i++) {
             if (this.checkAccordion(i)) {
                 this.$children[i]['animIsActive'] = true;
                 this.$children[i]['openAccordion']();
