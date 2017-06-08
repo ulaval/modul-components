@@ -1,21 +1,22 @@
-<button :class="[ componentName,
-                { 'is-primary': type!='secondary',
+<button class="m-button"
+        :class="{ 'is-primary': type!='secondary',
                 'is-secondary': type=='secondary',
                 'is-selected': state=='selected',
                 'is-waiting': state=='waiting',
-                'is-disabled': state=='disabled' } ]"
+                'is-disabled': state=='disabled' }"
+        :disabled="isDisabled"
         v-m-ripple-effect="!isDisabled"
-        :disabled="isDisabled">
-    <span :class="[ componentName + '__icon', 'is-left']" v-if="hasIconeLeft">
+        @click="onClick">
+    <span class="m-button__icon is-left" v-if="hasIconeLeft">
         <slot name="icon-left"></slot>
     </span>
-    <span :class="[ componentName + '__text']">
+    <span class="m-button__text">
         <slot>{{ componentName }}</slot>
         <span :class="[ componentName + '__more-info' ]" v-if="hasMoreInfo">
             <slot name="more-info"></slot>
         </span>
     </span>
-    <span :class="[ componentName + '__icon', 'is-right']" v-if="hasIconeRight">
+    <span class="m-button__icon is-right" v-if="hasIconeRight">
         <slot name="icon-right"></slot>
     </span>
 </button>
