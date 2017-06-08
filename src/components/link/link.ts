@@ -44,7 +44,9 @@ export class MLink extends Vue {
 
     private onClick(event) {
         this.$emit('onClick');
-        event.preventDefault();
+        if(this.isButton) {
+            event.preventDefault();
+        }
     }
 
     public get getTargetAttribute(): string {
