@@ -1,0 +1,7 @@
+.el-upload-list {
+    border: 1px solid green;
+}
+
+.el-upload-list__item-name {
+    border: 1px solid #000;
+}
