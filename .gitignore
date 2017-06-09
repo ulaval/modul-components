@@ -2,3 +2,4 @@ dist
 node_modules
 src/**/*.d.ts
 npm-debug\.log
+%temp%/

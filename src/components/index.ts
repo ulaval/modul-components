@@ -15,9 +15,6 @@ import StatusList from './status-list';
 import TablePlugin from './table/table';
 import TextIconPlugin from './text-icon/text-icon';
 import MessagePlugin from './message/message';
-
-/* Avec la libs element-ui */
-import { Upload } from 'element-ui';
 import UploadPlugin from './upload/upload';
 
 const ComponentsPlugin: PluginObject<any> = {
@@ -36,9 +33,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TablePlugin);
         Vue.use(TextIconPlugin);
         Vue.use(MessagePlugin);
-
-        /* Avec la libs element-ui */
-        Vue.component(Upload.name, Upload);
         Vue.use(UploadPlugin);
     }
 };
