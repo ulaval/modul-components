@@ -9,8 +9,10 @@ import { BUTTON_NAME } from '../component-names';
 @Component
 export class MButton extends Vue {
 
-    @Prop({ default: 'primary' })
+    @Prop({ default: 'button' })
     public type: string;
+    @Prop({ default: 'primary' })
+    public aspect: string;
     @Prop({ default: 'default' })
     public state: string;
 

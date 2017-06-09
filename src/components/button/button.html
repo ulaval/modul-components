@@ -1,10 +1,11 @@
 <button class="m-button"
-        :class="{ 'is-primary': type!='secondary',
-                'is-secondary': type=='secondary',
+        :class="{ 'is-primary': aspect!='secondary',
+                'is-secondary': aspect=='secondary',
                 'is-selected': state=='selected',
                 'is-waiting': state=='waiting',
                 'is-disabled': state=='disabled' }"
         :disabled="isDisabled"
+        :type="type"
         v-m-ripple-effect="!isDisabled"
         @click="onClick">
     <span class="m-button__icon is-left" v-if="hasIconeLeft">
