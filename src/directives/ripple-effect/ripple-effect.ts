@@ -1,30 +1,36 @@
-import Vue from 'vue';
+import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
 import { PluginObject } from 'vue';
 import RippleEffect from './ripple-effect-lib';
 import { RIPPLE_EFFECT_NAME } from '../directive-names';
 
-export class MRippleEffect extends Vue {
+const MOUSE_DOWN_MODIFIER: string = 'ripple-effect_mouse-down';
 
-    public bind(element: HTMLElement, binding) {
+interface RippleEffectBinding extends VNodeDirective {
+    listener: (event: MouseEvent) => void;
+}
+
+const MRippleEffect: DirectiveOptions = {
+    bind(element: HTMLElement, binding: RippleEffectBinding) {
         let isActive: boolean = binding.value == undefined ? true : binding.value;
         let el: HTMLElement = element;
         if (el) {
-            el.addEventListener('mousedown', (event: MouseEvent) => {
+            binding.listener = (event: MouseEvent) => {
                 RippleEffect.initRipple(event, el, isActive);
-            });
+            };
+            el.addEventListener('mousedown', binding.listener);
         }
-    }
+    },
 
-    public unbind(element: HTMLElement) {
-        if (element) {
-            element.removeEventListener('mousedown', () => false, false);
+    unbind(element: HTMLElement, binding: RippleEffectBinding) {
+        if (element && binding.listener) {
+            element.removeEventListener('mousedown', binding.listener);
         }
     }
-}
+};
 
 const RippleEffectPlugin: PluginObject<any> = {
     install(v, options) {
-        v.directive(RIPPLE_EFFECT_NAME, new MRippleEffect());
+        v.directive(RIPPLE_EFFECT_NAME, MRippleEffect);
     }
 };
 
