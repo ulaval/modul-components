@@ -9,16 +9,18 @@
         <div class="m-message__icon" v-if="!hasIcon">
             <m-icon :name="getIcon()"></m-icon>
         </div>
-        <div class="m-message__body">
-            <m-link type="button" @onClick="onClose" class="m-message__closeButton" v-if="showCloseButton">
+        <div class="m-message__body" :class="{'have-close-button': !hasCloseButton}">
+            <m-button aspect="icon" @onClick="onClose" class="m-message__closeButton" v-if="showCloseButton">
                 <m-icon></m-icon>
-            </m-link>
-            <slot>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis. Duis mattis
-                vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit commodo
-                arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                posuere cubilia Curae.</p>
-            </slot>
+            </m-button>
+            <p>
+                <slot>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis. Duis mattis
+                    vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit commodo
+                    arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae.
+                </slot>
+            </p>
         </div>
     </div>
 </div>

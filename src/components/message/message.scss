@@ -75,10 +75,15 @@ $m-message-size: 22px;
             padding: $m-margin;
             flex: 1;
 
+            &.have-close-button {
+                padding-right: $m-padding--l;
+                position: relative;
+            }
+
             .m-message__closeButton {
-                float: right;
-                padding-left: $m-padding--l;
-                line-height: $m-font-size--xs;
+                position: absolute;
+                top: 0;
+                right: 0;
 
                 .m-icon {
                     font-size: $m-font-size--xs;
