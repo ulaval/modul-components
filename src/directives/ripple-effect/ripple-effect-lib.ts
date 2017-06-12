@@ -14,20 +14,23 @@ export class RippleEffect {
     private dimension: number;
 
     public initRipple(event: MouseEvent, el: HTMLElement) {
+        this.el = el;
         this.rippleEl = document.createElement('span');
         this.rippleELStyle = this.rippleEl.style;
         this.clickEl = event.target as HTMLElement;
-        this.boundingRectEl = el.getBoundingClientRect();
+        this.boundingRectEl = this.el.getBoundingClientRect();
         this.clickEl.style.position = 'relative';
         this.addRipple(event);
     }
 
     private addRipple(event: MouseEvent) {
-        this.setPosition(event);
-        this.setStyle();
-        this.clickEl.appendChild(this.rippleEl);
-        this.setStyleAnimation();
-        this.removeRipple(event);
+        if (this.isActive) {
+            this.setPosition(event);
+            this.setStyle();
+            this.clickEl.appendChild(this.rippleEl);
+            this.setStyleAnimation();
+            this.removeRipple(event);
+        }
     }
 
     private setPosition(event) {

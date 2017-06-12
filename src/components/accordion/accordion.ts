@@ -15,14 +15,18 @@ export class MAccordion extends Vue {
     @Prop()
     private isOpen: boolean;
     @Prop()
+    private hasRippleEffect: boolean;
+    @Prop()
     private iconPosition: string;
     @Prop()
     private iconStyle: string;
     @Prop()
     private iconSize: string;
 
+    private aType: string = 'regular';
     private aIsOpen: boolean = false;
     private aIconPosition: string = 'right';
+    private hasRipple: boolean = false;
     private aIconSize: string = 'large';
     private aIconStyle: string = 'default';
     private componentName: string = ACCORDION_NAME;
@@ -30,13 +34,21 @@ export class MAccordion extends Vue {
     private accordionID: number;
 
     private mounted() {
+        this.aType = this.$props.type;
         this.aIsOpen = this.$props.isOpen == undefined ? false : true;
+        this.hasRipple = this.$props.hasRippleEffect;
         this.aIconPosition = this.$props.iconPosition;
         this.aIconSize = this.$props.iconSize;
         this.aIconStyle = this.$props.iconStyle;
+        this.setType();
+    }
 
-        switch (this.$props.type) {
+    private setType(): void {
+        switch (this.aType) {
             case 'light':
+                if (this.hasRipple == undefined) {
+                    this.hasRipple = false;
+                }
                 if (this.aIconPosition == undefined) {
                     this.aIconPosition = 'left';
                 }
@@ -48,6 +60,9 @@ export class MAccordion extends Vue {
                 }
                 break;
             case 'noStyle':
+                if (this.hasRipple == undefined) {
+                    this.hasRipple = false;
+                }
                 if (this.aIconPosition == undefined) {
                     this.aIconPosition = 'right';
                 }
@@ -59,6 +74,9 @@ export class MAccordion extends Vue {
                 }
                 break;
             default:
+                if (this.hasRipple == undefined) {
+                    this.hasRipple = true;
+                }
                 if (this.aIconPosition == undefined) {
                     this.aIconPosition = 'right';
                 }
@@ -71,7 +89,29 @@ export class MAccordion extends Vue {
         }
     }
 
-    private toggleAccordion(event) {
+    private resetType(type): void {
+        switch (this.aType) {
+            case 'light':
+                this.hasRipple = false;
+                this.aIconPosition = 'left';
+                this.aIconSize = 'small';
+                this.aIconStyle = 'border';
+                break;
+            case 'noStyle':
+                this.hasRipple = false;
+                this.aIconPosition = 'right';
+                this.aIconSize = 'large';
+                this.aIconStyle = 'default';
+                break;
+            default:
+                this.hasRipple = true;
+                this.aIconPosition = 'right';
+                this.aIconSize = 'large';
+                this.aIconStyle = 'default';
+        }
+    }
+
+    private toggleAccordion(event): void {
         this.animIsActive = true;
         this.aIsOpen = !this.aIsOpen;
         if (this.$parent['componentName'] == ACCORDION_GROUP_NAME) {
@@ -80,15 +120,15 @@ export class MAccordion extends Vue {
         event.preventDefault();
     }
 
-    private openAccordion() {
+    private openAccordion(): void {
         this.aIsOpen = true;
     }
 
-    private closeAccordion() {
+    private closeAccordion(): void {
         this.aIsOpen = false;
     }
 
-    private animEnter(el, done) {
+    private animEnter(el, done): void {
         if (this.animIsActive) {
             let height: number = el.clientHeight;
             el.style.maxHeight = '0';
@@ -101,7 +141,7 @@ export class MAccordion extends Vue {
         }
     }
 
-    private animAfterEnter(el) {
+    private animAfterEnter(el): void {
         if (this.animIsActive) {
             setTimeout(() => {
                 el.style.maxHeight = 'none';
@@ -109,7 +149,7 @@ export class MAccordion extends Vue {
         }
     }
 
-    private animLeave(el, done) {
+    private animLeave(el, done): void {
         if (this.animIsActive) {
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';
