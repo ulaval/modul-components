@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-import WithRender from './lang.html';
+import { Prop, Watch } from 'vue-property-decorator';
+import WithRender from './i18n.html';
 import { I18N_NAME } from '../component-names';
 import { ModulVue } from '../../utils/vue';
 
@@ -15,6 +15,15 @@ export class MLang extends ModulVue {
     public msg: string;
 
     public mounted() {
+        this.translate();
+    }
+
+    @Watch('msg')
+    public onMessageKeyChanged() {
+        this.translate();
+    }
+
+    private translate(): void {
         this.text = this.$i18n.translate(this.msg);
     }
 }

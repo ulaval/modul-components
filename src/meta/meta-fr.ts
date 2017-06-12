@@ -5,6 +5,9 @@ import { Meta } from './meta';
 
 export class MetaFr implements PluginObject<any> {
     public install(v, options) {
+        if (!options) {
+            throw new Error('MetaFr.install -> you must provide a Meta object within the options argument');
+        }
         (options as Meta).mergeComponentMeta('fr', BUTTON_NAME, require('../components/button/button.fr.json'));
         (options as Meta).mergeComponentMeta('fr', DYNAMIC_TEMPLATE_NAME, require('../components/dynamic-template/dynamic-template.fr.json'));
         (options as Meta).mergeComponentMeta('fr', ICON_NAME, require('../components/icon/icon.fr.json'));

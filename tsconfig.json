@@ -2,6 +2,7 @@
     "compilerOptions": {
         "baseUrl": ".",
         "outDir": "dist",
+        "rootDir": "src",
         "declaration": true,
         "target": "es5",
         "module": "es2015",
