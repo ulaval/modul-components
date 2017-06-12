@@ -1,0 +1,24 @@
+{
+    "tag": "m-upload",
+    "name": "Téléchargement",
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "Contexte d'utilisation",
+            "content": "Lorem ipsum dolor sit amet, <m-upload></m-upload> consectetur adipiscing elit. <b>Quisque</b> ornare sollicitudin nunc sed sollicitudin. Phasellus ex lacus, varius sit amet lacinia at, mollis non sapien. Pellentesque et justo tristique, feugiat risus in, suscipit enim. Vestibulum fermentum mattis nulla, quis finibus ipsum tempus ac. Quisque orci eros, lacinia nec enim a, posuere sagittis ex."
+        },
+        {
+            "type": "rubric",
+            "title": "Règles d'utilisation",
+            "content": "Etiam risus arcu, ultricies at justo nec, lobortis faucibus augue. Aliquam imperdiet lobortis dictum. Maecenas sed blandit orci, et facilisis sapien. Suspendisse urna est, euismod quis nulla viverra, accumsan faucibus orci. In ornare velit id maximus laoreet. Donec vestibulum ac ipsum eget facilisis. "
+        },
+        {
+            "type": "do",
+            "content": "Quisque sed nisl ac mauris semper scelerisque a vel lectus. Morbi vitae bibendum risus. Aenean et metus sed libero euismod aliquet rhoncus vel metus. Nulla eget mi a tellus fermentum ullamcorper."
+        },
+        {
+            "type": "dont",
+            "content": "Praesent eget dui eu mi ultricies iaculis. Phasellus cursus, odio eget ornare semper, elit libero efficitur purus, nec imperdiet ligula nibh non ante."
+        }
+    ]
+}

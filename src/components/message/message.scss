@@ -1,5 +1,4 @@
 @import 'abstracts/variables';
-$m-message-info--color: #eaf5ff;
 $m-message-size: 22px;
 
 .m-message {
@@ -11,10 +10,11 @@ $m-message-size: 22px;
 
             .m-message__icon {
                 background-color: $m-color--valid--lightest;
+                border-color: $m-color--valid;
             }
 
-            .m-message__body {
-                border-color: $m-color--valid;
+            .m-message__body .m-message__closeButton {
+                color: $m-color--valid;
             }
         }
 
@@ -22,11 +22,12 @@ $m-message-size: 22px;
             border: 1px solid $m-color--primary;
 
             .m-message__icon {
-                background-color: $m-message-info--color;
+                background-color: $m-color--primary--lightest;
+                border-color: $m-color--primary;
             }
 
-            .m-message__body {
-                border-color: $m-color--primary;
+            .m-message__body .m-message__closeButton {
+                color: $m-color--primary;
             }
         }
 
@@ -35,10 +36,11 @@ $m-message-size: 22px;
 
             .m-message__icon {
                 background-color: $m-color--yellow--lightest;
+                border-color: $m-color--yellow;
             }
 
-            .m-message__body {
-                border-color: $m-color--yellow;
+            .m-message__body .m-message__closeButton {
+                color: $m-color--yellow;
             }
         }
 
@@ -47,10 +49,11 @@ $m-message-size: 22px;
 
             .m-message__icon {
                 background-color: $m-color--error--lightest;
+                border-color: $m-color--error;
             }
 
-            .m-message__body {
-                border-color: $m-color--error;
+            .m-message__body .m-message__closeButton {
+                color: $m-color--error;
             }
         }
 
@@ -60,6 +63,7 @@ $m-message-size: 22px;
 
         .m-message__icon {
             align-items: center;
+            border-right: 1px solid;
 
             .m-icon {
                 font-size: $m-message-size;
@@ -68,8 +72,20 @@ $m-message-size: 22px;
         }
 
         .m-message__body {
-            border-left: 1px solid;
-            padding: $m-padding;
+            padding: $m-margin;
+            flex: 1;
+
+            .m-message__closeButton {
+                float: right;
+                padding-left: $m-padding--l;
+                line-height: $m-font-size--xs;
+
+                .m-icon {
+                    font-size: $m-font-size--xs;
+                    width: $m-font-size--xs;
+                    height: $m-font-size--xs;
+                }
+            }
         }
     }
 
@@ -82,7 +98,7 @@ $m-message-size: 22px;
 
         &.is-info {
             .m-message__container {
-                background-color: $m-message-info--color;
+                background-color: $m-color--primary--lightest;
             }
         }
 

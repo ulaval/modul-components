@@ -1,22 +1,21 @@
-<article :class="[ componentName,
-                {'is-primary': type!='secondary',
+<article class="m-panel" :class="{'is-primary': type!='secondary',
                 'is-secondary': type=='secondary',
                 'no-shadow': hasShadow == 'false',
                 'no-border': hasBorder == 'false',
                 'no-padding': hasPadding == 'false',
                 'no-padding-header': hasPaddingHeader == 'false',
                 'no-padding-body': hasPaddingBody == 'false',
-                'no-padding-footer': hasPaddingFooter == 'false'} ]">
-    <header :class="[ componentName + '__header']" v-if="hasHeader">
+                'no-padding-footer': hasPaddingFooter == 'false'}">
+    <header class="m-panel__header" v-if="hasHeader">
         <slot name="header"></slot>
-        <span :class="[ componentName + '__header__content', 'is-left']" v-if="hasContentLeft">
+        <span class="m-panel__header__content is-left" v-if="hasContentLeft">
             <slot name="header-content-left"></slot>
         </span>
-        <span :class="[ componentName + '__header__content', 'is-right']" v-if="hasContentRight">
+        <span class="m-panel__header__content is-right" v-if="hasContentRight">
             <slot name="header-content-right"></slot>
         </span>
     </header>
-    <div :class="[ componentName + '__body']">
+    <div class="m-panel__body">
         <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis. Duis
             mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit commodo
             arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
@@ -25,7 +24,7 @@
             faucibus, nisi justo eleifend erat, sed convallis velit mi non lacus. Pellentesque habitant morbi tristique senectus
             et netus et malesuada fames ac turpis egestas.</slot>
     </div>
-    <footer :class="[ componentName + '__footer']" v-if="hasFooter">
+    <footer class="m-panel__footer" v-if="hasFooter">
         <slot name="footer"></slot>
     </footer>
 </article>

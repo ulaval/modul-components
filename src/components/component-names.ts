@@ -12,6 +12,7 @@ export const STATUS_LIST_NAME: string = 'm-status-list';
 export const TABLE_NAME: string = 'm-table';
 export const TEXT_ICON_NAME: string = 'm-text-icon';
 export const MESSAGE_NAME: string = 'm-message';
+export const UPLOAD_NAME: string = 'm-upload';
 
 export const components: string[] = [
     ACCORDION_GROUP_NAME,
@@ -27,5 +28,6 @@ export const components: string[] = [
     STATUS_LIST_NAME,
     TABLE_NAME,
     TEXT_ICON_NAME,
-    MESSAGE_NAME
+    MESSAGE_NAME,
+    UPLOAD_NAME
 ];

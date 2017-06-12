@@ -3,3 +3,4 @@ node_modules
 src/**/*.d.ts
 npm-debug\.log
 tests/reports
+%temp%/
