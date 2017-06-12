@@ -15,6 +15,7 @@ export const TEXT_ICON_NAME: string = 'm-text-icon';
 export const MESSAGE_NAME: string = 'm-message';
 export const UPLOAD_NAME: string = 'm-upload';
 export const POPPER_NAME: string = 'm-popper';
+export const STEP_NAME: string = 'm-step';
 
 export const components: string[] = [
     ACCORDION_GROUP_NAME,
@@ -33,5 +34,6 @@ export const components: string[] = [
     TEXT_ICON_NAME,
     MESSAGE_NAME,
     UPLOAD_NAME,
-    POPPER_NAME
+    POPPER_NAME,
+    STEP_NAME
 ];
