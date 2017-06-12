@@ -1,6 +1,6 @@
 {
-    "tag": "m-link",
-    "name": "Lien",
+    "tag": "m-panel",
+    "name": "Panneau",
     "overview": [
         {
             "type": "rubric",

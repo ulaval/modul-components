@@ -7,7 +7,7 @@ import DirectivesPlugin from '../../src/directives';
 import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
 
 import I18nLanguagePlugin, { currentLang, FRENCH } from '../../src/utils/i18n';
-import FrenchPlugin from '../../src/lang/fr/fr';
+import FrenchPlugin from '../../src/lang/fr';
 
 Vue.config.productionTip = false;
 

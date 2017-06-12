@@ -1,6 +1,6 @@
 {
-    "tag": "m-panel",
-    "name": "Panel",
+    "tag": "m-dialog",
+    "name": "Boîte de dialogue",
     "overview": [
         {
             "type": "rubric",
