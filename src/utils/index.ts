@@ -2,8 +2,8 @@ import Vue from 'vue';
 import { PluginObject } from 'vue';
 
 import MessagesPlugin from './i18n';
-import HttpPlugin from './http';
-import SecurityPlugin, { SecurityPluginOptions } from './security';
+import HttpPlugin from './http/http';
+import SecurityPlugin, { SecurityPluginOptions } from './http/security';
 
 export interface UtilsPluginOptions {
     securityPluginOptions: SecurityPluginOptions;
