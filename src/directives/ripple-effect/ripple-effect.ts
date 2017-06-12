@@ -13,12 +13,15 @@ const MRippleEffect: DirectiveOptions = {
     bind(element: HTMLElement, binding: RippleEffectBinding) {
         RippleEffect.isActive = binding.value == undefined ? false : binding.value;
         element.style.overflow = 'hidden';
-        if (element && RippleEffect.isActive) {
+        if (element) {
             binding.listener = (event: MouseEvent) => {
                 RippleEffect.initRipple(event, element);
             };
             element.addEventListener('mousedown', binding.listener);
         }
+    },
+    componentUpdated(element: HTMLElement, binding: RippleEffectBinding) {
+        RippleEffect.isActive = binding.value == undefined ? false : binding.value;
     },
     unbind(element: HTMLElement, binding: RippleEffectBinding) {
         if (element && binding.listener) {
