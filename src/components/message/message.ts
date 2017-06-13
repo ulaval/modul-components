@@ -36,7 +36,7 @@ export class MMessage extends Vue {
             case 'success':
                 icon = 'pastille-crochet';
                 break;
-            case 'info':
+            case 'information':
                 icon = 'pastille-attention-rouge';
                 break;
             case 'warning':

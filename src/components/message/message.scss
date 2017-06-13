@@ -18,7 +18,7 @@ $m-message-size: 22px;
             }
         }
 
-        &.is-info {
+        &.is-information {
             border: 1px solid $m-color--primary;
 
             .m-message__icon {
@@ -101,7 +101,7 @@ $m-message-size: 22px;
             }
         }
 
-        &.is-info {
+        &.is-information {
             .m-message__container {
                 background-color: $m-color--primary--lightest;
             }
