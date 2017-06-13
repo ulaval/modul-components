@@ -12,18 +12,25 @@ export class MIcon extends Vue {
     public name: string;
     @Prop()
     public svgTitle: string;
-    @Prop({ default: '1em' })
-    public height: string;
-    @Prop({ default: '1em' })
+    @Prop({ default: '16px' })
     public width: string;
+    @Prop({ default: '16px' })
+    public height: string;
 
+    private propsWidth: string;
+    private propsHeight: string;
+    private propsSvgTitle: string;
     private iconContent = '';
+    private componentName = ICON_NAME;
 
     public beforeMount() {
         let vm = this;
+        this.propsSvgTitle = this.$props.svgTitle;
+        this.propsWidth = this.$props.width;
+        this.propsHeight = this.$props.height;
         (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.name + '.svg'], waitForChunk => {
             waitForChunk(svg => {
-                this.iconContent = this.modifyTitle(svg).replace('viewBox', 'width="' + this.$props.width + '" height="' + this.$props.height + '" viewBox');
+                this.iconContent = this.modifyTitle(svg).replace('viewBox', 'width="' + this.propsWidth + '" height="' + this.propsHeight + '" viewBox');
             });
         });
     }
@@ -37,6 +44,10 @@ export class MIcon extends Vue {
             return svg.replace(/<title>[^<]*/, '<title>' + this.$props.svgTitle);
         }
         return svg;
+    }
+
+    private get hasSvgTitle() {
+        return !!this.propsSvgTitle;
     }
 }
 

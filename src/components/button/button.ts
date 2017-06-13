@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './button.html?style=./button.scss';
 import { BUTTON_NAME } from '../component-names';
+import { ICON_NAME } from '../component-names';
 
 @WithRender
 @Component
@@ -29,6 +30,20 @@ export class MButton extends Vue {
         this.propsType = this.$props.type == undefined ? 'button' : this.$props.type;
         this.propsAspect = this.$props.aspect == undefined ? 'primary' : this.$props.aspect;
         this.propsState = this.$props.state == undefined ? 'default' : this.$props.state;
+        this.resizeIcon();
+    }
+
+    private resizeIcon(): void {
+        for (let i = 0; i < this.$children.length; i++) {
+            if (this.$children[i]['componentName'] == ICON_NAME) {
+                this.$children[i]['propsWidth'] = '12px';
+                this.$children[i]['propsHeight'] = '12px';
+            }
+        }
+    }
+
+    private checkAccordion(index: number): boolean {
+        return this.$children[index]['componentName'] == ICON_NAME ? true : false;
     }
 
     private get hasIconeLeft(): boolean {
@@ -41,6 +56,10 @@ export class MButton extends Vue {
 
     private get hasMoreInfo(): boolean {
         return !!this.$slots['more-info'];
+    }
+
+    private get hasHiddenText(): boolean {
+        return !!this.$slots['icon-hidden-text'];
     }
 
     private get isDisabled(): boolean {
