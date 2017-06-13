@@ -1,18 +1,22 @@
-<section class="m-accordion-group">
-    <header class="m-accordion-group__header">
-        <span class="m-accordion-group__header__title">
+<transition>
+    <section class="m-accordion-group" v-if="!hasError">
+        <header class="m-accordion-group__header">
+            <span class="m-accordion-group__header__title">
             <slot name="title">m-accordion-group</slot>
         </span>
-        <span class="m-accordion-group__header__button">
-            <m-link type="button" @onClick="openAllAccordions" v-if="!accordionsAreAllOpen">Tout ouvrir</m-link>
-            <m-link type="button" @onClick="closeAllAccordions" v-else>Tout fermer</m-link>
+        <m-link type="button" @onClick="openAllAccordions" v-if="!accordionsAreAllOpen"><m-i18n msg="m-accordion-group:open-all"></m-i18n></m-link>
+            <m-link type="button" @onClick="closeAllAccordions" v-else><m-i18n msg="m-accordion-group:close-all"></m-i18n></m-link>
         </span>
-    </header>
-    <div class="m-accordion-group__body">
-        <slot>
-            <m-accordion></m-accordion>
-            <m-accordion></m-accordion>
-            <m-accordion></m-accordion>
-        </slot>
-    </div>
-</section>
+        </header>
+        <div class="m-accordion-group__body">
+            <slot>
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+            </slot>
+        </div>
+    </section>
+    <section class="m-accordion-group" v-if="hasError">
+        <p>{{ errorMessage }}</p>
+    </section>
+</transition>

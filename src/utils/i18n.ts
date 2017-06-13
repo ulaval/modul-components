@@ -145,7 +145,7 @@ export class Messages {
             return val;
         }
 
-        console.warn(`The key ${key} does not exist.`);
+        console.warn(`The key ${key} does not exist. Current lang: ${curLang}`);
         return key;
     }
 

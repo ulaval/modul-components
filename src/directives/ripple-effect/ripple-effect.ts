@@ -11,16 +11,18 @@ interface RippleEffectBinding extends VNodeDirective {
 
 const MRippleEffect: DirectiveOptions = {
     bind(element: HTMLElement, binding: RippleEffectBinding) {
-        let isActive: boolean = binding.value == undefined ? true : binding.value;
-        let el: HTMLElement = element;
-        if (el) {
+        RippleEffect.isActive = binding.value == undefined ? false : binding.value;
+        element.style.overflow = 'hidden';
+        if (element) {
             binding.listener = (event: MouseEvent) => {
-                RippleEffect.initRipple(event, el, isActive);
+                RippleEffect.initRipple(event, element);
             };
-            el.addEventListener('mousedown', binding.listener);
+            element.addEventListener('mousedown', binding.listener);
         }
     },
-
+    componentUpdated(element: HTMLElement, binding: RippleEffectBinding) {
+        RippleEffect.isActive = binding.value == undefined ? false : binding.value;
+    },
     unbind(element: HTMLElement, binding: RippleEffectBinding) {
         if (element && binding.listener) {
             element.removeEventListener('mousedown', binding.listener);

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { Messages } from './i18n';
-import { HttpService } from './http';
+import { HttpService } from './http/http';
 
 export class ModulVue extends Vue {
     public $i18n: Messages;

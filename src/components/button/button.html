@@ -1,22 +1,27 @@
 <button class="m-button"
-        :class="{ 'is-primary': type!='secondary',
-                'is-secondary': type=='secondary',
+        :class="{ 'is-primary': aspect=='primary',
+                'is-secondary': aspect=='secondary',
+                'is-icon': aspect=='icon',
                 'is-selected': state=='selected',
                 'is-waiting': state=='waiting',
                 'is-disabled': state=='disabled' }"
         :disabled="isDisabled"
-        v-m-ripple-effect="!isDisabled"
+        :type="type"
+        v-m-ripple-effect="!isDisabled && aspect!='icon'"
         @click="onClick">
-    <span class="m-button__icon is-left" v-if="hasIconeLeft">
+    <span class="m-button__icon is-left" v-if="hasIconeLeft && aspect!='icon'">
         <slot name="icon-left"></slot>
     </span>
-    <span class="m-button__text">
+    <span class="m-button__text" v-if="aspect!='icon'">
         <slot>{{ componentName }}</slot>
-        <span :class="[ componentName + '__more-info' ]" v-if="hasMoreInfo">
+         <span class="m-button__more-info" v-if="hasMoreInfo">
             <slot name="more-info"></slot>
         </span>
     </span>
-    <span class="m-button__icon is-right" v-if="hasIconeRight">
+    <span class="m-button__icon is-right" v-if="hasIconeRight && aspect!='icon'">
         <slot name="icon-right"></slot>
+    </span>
+    <span class="m-button__icon" v-if="aspect=='icon'">
+        <slot><m-icon></m-icon></slot>
     </span>
 </button>

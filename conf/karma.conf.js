@@ -3,16 +3,23 @@
 // we are also using it with karma-webpack
 //   https://github.com/webpack/karma-webpack
 
-var webpackConfig = require('./webpack.config');
+var webpackConfig = require('./webpack.config')();
 
 module.exports = function (config) {
+    let reporters = ['spec'];
+    if (config.junitReport) {
+        reporters.push('junit');
+    }
     config.set({
         browsers: ['PhantomJS', 'Chrome', 'Firefox'],
         frameworks: ['jasmine'],
-        reporters: ['spec'],
-        files: ['../tests/unit/index.js'],
+        reporters: reporters,
+        files: ['../tests/unit.js'],
+        junitReporter: {
+            outputDir: '../tests/reports'
+        },
         preprocessors: {
-            '../tests/unit/index.js': ['webpack']
+            '../tests/unit.js': ['webpack']
         },
         webpack: webpackConfig,
         webpackMiddleware: {

@@ -1,14 +1,14 @@
-<div :class="[ componentName, + '' ]">
-    <header :class="[ componentName + '__header']" v-if="hasHeader">
+<div class="m-table">
+    <header class="m-table__header" v-if="hasHeader">
         <slot name="header"></slot>
-        <span :class="[ componentName + '__header__content', 'is-left']" v-if="hasContentLeft">
+        <span class="m-table__header__content is-left" v-if="hasContentLeft">
             <slot name="header-content-left"></slot>
         </span>
-        <span :class="[ componentName + '__header__content', 'is-right']" v-if="hasContentRight">
+        <span class="m-table__header__content is-right" v-if="hasContentRight">
             <slot name="header-content-right"></slot>
         </span>
     </header>
-    <div :class="[ componentName + '__body']">
+    <div class="m-table__body">
         <slot>
             <table>
                 <thead>

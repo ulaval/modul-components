@@ -7,7 +7,7 @@ import ButtonPlugin from './button/button';
 import DialogPlugin from './dialog/dialog';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import IconPlugin from './icon/icon';
-import LangPlugin from './lang/lang';
+import I18nPlugin from './i18n/i18n';
 import LinkPlugin from './link/link';
 import ListBulletPlugin from './list-bullet/list-bullet';
 import PanelPlugin from './panel/panel';
@@ -26,7 +26,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DialogPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(IconPlugin);
-        Vue.use(LangPlugin);
+        Vue.use(I18nPlugin);
         Vue.use(LinkPlugin);
         Vue.use(ListBulletPlugin);
         Vue.use(PanelPlugin);

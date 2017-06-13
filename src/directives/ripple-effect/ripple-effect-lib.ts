@@ -2,6 +2,7 @@ import { RIPPLE_EFFECT_NAME } from '../directive-names';
 
 export class RippleEffect {
 
+    public isActive: boolean;
     private clickEl: HTMLElement;
     private rippleEl: HTMLElement;
     private el: HTMLElement;
@@ -12,24 +13,24 @@ export class RippleEffect {
     private maxWidth: number;
     private dimension: number;
 
-    public initRipple(event: MouseEvent, el: HTMLElement, isActive: boolean) {
+    public initRipple(event: MouseEvent, el: HTMLElement) {
+        this.el = el;
         this.rippleEl = document.createElement('span');
         this.rippleELStyle = this.rippleEl.style;
         this.clickEl = event.target as HTMLElement;
-        this.boundingRectEl = el.getBoundingClientRect();
-        if (isActive) {
-            this.clickEl.style.position = 'relative';
-            el.style.overflow = 'hidden';
-            this.addRipple(event);
-        }
+        this.boundingRectEl = this.el.getBoundingClientRect();
+        this.clickEl.style.position = 'relative';
+        this.addRipple(event);
     }
 
     private addRipple(event: MouseEvent) {
-        this.setPosition(event);
-        this.setStyle();
-        this.clickEl.appendChild(this.rippleEl);
-        this.setStyleAnimation();
-        this.removeRipple(event);
+        if (this.isActive) {
+            this.setPosition(event);
+            this.setStyle();
+            this.clickEl.appendChild(this.rippleEl);
+            this.setStyleAnimation();
+            this.removeRipple(event);
+        }
     }
 
     private setPosition(event) {

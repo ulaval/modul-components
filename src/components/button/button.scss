@@ -7,27 +7,28 @@ $m-button--color--waiting: $m-color--primary--lighter !default;
 $m-button--color--disabled: $m-color--grey--light !default;
 
 .m-button {
-    transition-property: background, border-color, color;
-    transition-duration: 0.3s;
-    transition-timing-function: ease;
     position: relative;
     display: inline-flex;
     align-items: center;
     text-align: center;
     vertical-align: middle;
-    padding: 10px $m-padding 9px $m-padding;
     appearance: none;
     outline: none;
     user-select: none;
+    font-size: 100%;
     text-decoration: none;
-    font-size: $m-font-size;
-    font-weight: $m-font-weight--bold;
     line-height: 1;
-    border: 1px solid $m-button--color;
     border-radius: 4px;
 
     &.is-primary,
     &.is-secondary {
+        transition-property: background, border-color, color;
+        transition-duration: 0.3s;
+        transition-timing-function: ease;
+        padding: 10px $m-padding 9px $m-padding;
+        font-weight: $m-font-weight--bold;
+        border: 1px solid $m-button--color;
+
         &:not(.is-selected):not(.is-waiting):not(.is-disabled) {
             cursor: pointer;
 
@@ -42,6 +43,25 @@ $m-button--color--disabled: $m-color--grey--light !default;
                 border-color: $m-button--color--active;
             }
         }
+
+        &.is-waiting {
+            cursor: progress;
+            color: $m-color--white;
+            background: $m-button--color--waiting;
+            border-color: $m-button--color--waiting;
+        }
+
+        &.is-disabled {
+            cursor: not-allowed;
+            color: $m-button--color--disabled;
+            background: $m-color--white;
+            border-color: $m-button--color--disabled;
+        }
+
+        &.is-selected {
+            background: $m-button--color--selected;
+            border-color: $m-button--color--selected;
+        }
     }
 
     &.is-primary {
@@ -54,23 +74,11 @@ $m-button--color--disabled: $m-color--grey--light !default;
         background: $m-color--white;
     }
 
-    &.is-selected {
-        background: $m-button--color--selected;
-        border-color: $m-button--color--selected;
-    }
-
-    &.is-waiting {
-        cursor: progress;
-        color: $m-color--white;
-        background: $m-button--color--waiting;
-        border-color: $m-button--color--waiting;
-    }
-
-    &.is-disabled {
-        cursor: not-allowed;
-        color: $m-button--color--disabled;
-        background: $m-color--white;
-        border-color: $m-button--color--disabled;
+    &.is-icon {
+        border: none;
+        max-width: $m-touch-size;
+        min-height: $m-touch-size;
+        background: transparent;
     }
 }
 

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import axios from 'axios';
-import * as strUtils from './str';
+import * as strUtils from '../str';
 
 const AUTHORIZATION_HEADER: string = 'Authorization';
 
