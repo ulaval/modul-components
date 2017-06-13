@@ -1,7 +1,6 @@
 import '../../../tests/app/polyfills';
 import Vue from 'vue';
 import axios from 'axios';
-import moxios from 'moxios';
 import http, { HttpService } from './http';
 import { RequestConfig } from './rest';
 
