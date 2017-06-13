@@ -100,8 +100,8 @@ $m-button--color--disabled: $m-color--grey--light !default;
             z-index: 1;
             content: '';
             display: block;
-            width: $m-touch-size/2;
-            height: $m-touch-size/2;
+            width: $m-touch-size / 2;
+            height: $m-touch-size / 2;
             border-radius: 50%;
             opacity: 0;
             background: lighten($m-color--primary--lightest, 5);
@@ -125,49 +125,50 @@ $m-button--color--disabled: $m-color--grey--light !default;
             }
         }
     }
-}
 
-.m-button__wrap {
-    display: inline-flex;
-    align-items: center;
-    text-align: center;
+    &__wrap {
+        display: inline-flex;
+        align-items: center;
+        text-align: center;
+        width: 100%;
 
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-        display: inline;
-    }
-}
-
-.m-button__text {
-    flex: 1;
-}
-
-.m-button__more-info,
-.m-button__icon {
-    &:empty {
-        display: none;
-    }
-}
-
-.m-button__more-info {
-    display: block;
-    font-size: $m-font-size--s;
-    font-weight: $m-font-weight--regular;
-    margin-top: $m-margin--s;
-
-    &:empty {
-        display: none;
-    }
-}
-
-.m-button__icon {
-    position: relative;
-    z-index: 2;
-
-    &.is-left {
-        margin-right: $m-margin;
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            display: inline;
+        }
     }
 
-    &.is-right {
-        margin-left: $m-margin;
+    &__more-info,
+    &__icon {
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__text {
+        flex: 1;
+    }
+
+    &__icon {
+        position: relative;
+        z-index: 2;
+
+        &.is-left {
+            margin-right: $m-margin;
+        }
+
+        &.is-right {
+            margin-left: $m-margin;
+        }
+    }
+
+    &__more-info {
+        display: block;
+        font-size: $m-font-size--s;
+        font-weight: $m-font-weight--regular;
+        margin-top: $m-margin--s;
+
+        &:empty {
+            display: none;
+        }
     }
 }
