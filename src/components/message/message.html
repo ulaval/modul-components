@@ -7,7 +7,7 @@
     <div class="m-message__container" :class="{'is-regular': mode!='reduce',
                 'is-reduce': mode=='reduce'}">
         <div class="m-message__icon" v-if="hasNoIcon">
-            <m-icon :icon="getIcon()"></m-icon>
+            <m-icon :name="getIcon()"></m-icon>
         </div>
         <div class="m-message__body">
             <m-link type="button" @onClick="onClose" class="m-message__closeButton" v-if="showCloseButton">
