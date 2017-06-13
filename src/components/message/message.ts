@@ -9,7 +9,7 @@ import { MESSAGE_NAME } from '../component-names';
 @Component
 export class MMessage extends Vue {
     @Prop({ default: 'success' })
-    public type: string;
+    public state: string;
     @Prop({ default: 'regular' })
     public mode: string;
     @Prop({ default: false })
@@ -32,7 +32,7 @@ export class MMessage extends Vue {
 
     public getIcon(): string {
         let icon: string = '';
-        switch (this.$props.type) {
+        switch (this.$props.state) {
             case 'success':
                 icon = 'pastille-crochet';
                 break;

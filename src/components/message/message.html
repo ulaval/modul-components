@@ -1,7 +1,7 @@
-<div class="m-message" :class="{'is-success': type=='success',
-                'is-information': type=='information',
-                'is-warning': type=='warning',
-                'is-error': type=='error',
+<div class="m-message" :class="{'is-success': state=='success',
+                'is-information': state=='information',
+                'is-warning': state=='warning',
+                'is-error': state=='error',
                 'is-regular': mode!='reduce',
                 'is-reduce': mode=='reduce'}" v-if="!isVisible">
     <div class="m-message__container" :class="{'is-regular': mode!='reduce',
