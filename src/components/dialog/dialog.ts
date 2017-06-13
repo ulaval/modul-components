@@ -11,22 +11,26 @@ export class MDialog extends Vue {
     @Prop({ default: true })
     public isModal: boolean;
 
-    public onBackdropClick(event) {
+    public onBackdropClick(event): void {
         if (!this.$props.isModal) {
             this.onClose(event);
         }
     }
 
-    public onClose(event) {
+    private onClose(event): void {
         this.$emit('onClose', event);
     }
 
-    public created() {
+    private created(): void {
         document.body.classList.toggle('m-overflow-hidden');
     }
 
-    public destroyed() {
+    private destroyed(): void {
         document.body.classList.toggle('m-overflow-hidden');
+    }
+
+    private get hasTitle(): boolean {
+        return !!this.$slots['title'];
     }
 }
 
