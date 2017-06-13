@@ -17,28 +17,37 @@ export class MButton extends Vue {
     public state: string;
 
     private componentName: string = BUTTON_NAME;
+    private propsType: string = 'button';
+    private propsAspect: string = 'primary';
+    private propsState: string = 'default';
 
-    public get isDisabled(): boolean {
-        if (this.$props.state == 'selected' || this.$props.state == 'waiting' || this.$props.state == 'disabled') {
-            return true;
-        }
-        return false;
-    }
-
-    private onClick(event) {
+    private onClick(event): void {
         this.$emit('onClick');
     }
 
-    public get hasIconeLeft(): boolean {
+    private mounted(): void {
+        this.propsType = this.$props.type == undefined ? 'button' : this.$props.type;
+        this.propsAspect = this.$props.aspect == undefined ? 'primary' : this.$props.aspect;
+        this.propsState = this.$props.state == undefined ? 'default' : this.$props.state;
+    }
+
+    private get hasIconeLeft(): boolean {
         return !!this.$slots['icon-left'];
     }
 
-    public get hasIconeRight(): boolean {
+    private get hasIconeRight(): boolean {
         return !!this.$slots['icon-right'];
     }
 
-    public get hasMoreInfo(): boolean {
+    private get hasMoreInfo(): boolean {
         return !!this.$slots['more-info'];
+    }
+
+    private get isDisabled(): boolean {
+        if (this.propsState == 'waiting' || this.propsState == 'disabled' || this.propsState == 'selected') {
+            return true;
+        }
+        return false;
     }
 }
 
