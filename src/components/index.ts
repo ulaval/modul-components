@@ -16,6 +16,7 @@ import TablePlugin from './table/table';
 import TextIconPlugin from './text-icon/text-icon';
 import MessagePlugin from './message/message';
 import UploadPlugin from './upload/upload';
+import PopperPlugin from './popper/popper';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options) {
@@ -34,6 +35,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TextIconPlugin);
         Vue.use(MessagePlugin);
         Vue.use(UploadPlugin);
+        Vue.use(PopperPlugin);
     }
 };
 

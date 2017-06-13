@@ -13,6 +13,7 @@ export const TABLE_NAME: string = 'm-table';
 export const TEXT_ICON_NAME: string = 'm-text-icon';
 export const MESSAGE_NAME: string = 'm-message';
 export const UPLOAD_NAME: string = 'm-upload';
+export const POPPER_NAME: string = 'm-popper';
 
 export const components: string[] = [
     ACCORDION_GROUP_NAME,
@@ -29,5 +30,6 @@ export const components: string[] = [
     TABLE_NAME,
     TEXT_ICON_NAME,
     MESSAGE_NAME,
-    UPLOAD_NAME
+    UPLOAD_NAME,
+    POPPER_NAME
 ];
