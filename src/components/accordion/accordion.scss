@@ -1,4 +1,5 @@
 @import '../../styles/abstracts/variables';
+
 $m-accordion--icon--l--width: 12px;
 $m-accordion--icon--width: 10px;
 $m-accordion--icon--l--height: 2px;
@@ -82,119 +83,118 @@ $m-accordion--color--border: $m-color--grey--lighter;
             padding-bottom: $m-margin;
         }
     }
+
+    &__header {
+        display: flex;
+        align-items: center;
+
+        &:not(.is-no-style) {
+            color: $m-color--black;
+            text-decoration: none;
+        }
+
+        &__tilte {
+            flex: 1;
+        }
+
+        &__icon {
+            position: relative;
+            display: block;
+
+            &::before,
+            &::after {
+                transition: 0.3s transform ease;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                content: '';
+                background: $m-color--primary;
+                transform: translate3d(-50%, -50%, 0);
+            }
+
+            &::before {
+                transition: 0.3s transform ease;
+            }
+
+            &::after {
+                transition: 0.3s transform ease, 0.6s opacity ease;
+            }
+
+            &.is-close {
+                &::before,
+                &::after {
+                    transform: translate3d(-50%, -50%, 0) rotate(90deg);
+                }
+
+                &::before {
+                    opacity: 0;
+                }
+            }
+
+            &:not(.is-large) {
+                width: $m-accordion--icon--width;
+                height: $m-accordion--icon--width;
+
+                &::before {
+                    width: $m-accordion--icon--width;
+                    height: $m-accordion--icon--height;
+                }
+
+                &::after {
+                    width: $m-accordion--icon--height;
+                    height: $m-accordion--icon--width;
+                }
+
+                &.has-border {
+                    width: $m-accordion--icon--width + 8;
+                    height: $m-accordion--icon--width + 8;
+                    border-width: $m-accordion--icon--height;
+                }
+            }
+
+            &.is-large {
+                width: $m-accordion--icon--l--width;
+                height: $m-accordion--icon--l--width;
+
+                &::before {
+                    width: $m-accordion--icon--l--width;
+                    height: $m-accordion--icon--l--height;
+                }
+
+                &::after {
+                    width: $m-accordion--icon--l--height;
+                    height: $m-accordion--icon--l--width;
+                }
+
+                &.has-border {
+                    width: $m-accordion--icon--l--width + 8;
+                    height: $m-accordion--icon--l--width + 8;
+                    border-width: $m-accordion--icon--l--height;
+                }
+            }
+
+            &.has-border {
+                border-color: $m-color--primary;
+                border-style: solid;
+            }
+
+            &.is-left {
+                margin-right: $m-margin--s;
+            }
+
+            &.is-right {
+                margin-left: $m-margin;
+            }
+        }
+    }
+
+    &__body {
+        transition: 0.3s max-height ease;
+        overflow: hidden;
+        height: auto;
+    }
+
+    &__hidden {
+        @include visuallyHidden;
+    }
 }
-
-.m-accordion__header {
-    display: flex;
-    align-items: center;
-
-    &:not(.is-no-style) {
-        color: $m-color--black;
-        text-decoration: none;
-    }
-}
-
-.m-accordion__header__tilte {
-    flex: 1;
-}
-
-.m-accordion__header__icon {
-    position: relative;
-    display: block;
-
-    &::before,
-    &::after {
-        transition: 0.3s transform ease;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        content: '';
-        background: $m-color--primary;
-        transform: translate3d(-50%, -50%, 0);
-    }
-
-    &::before {
-        transition: 0.3s transform ease;
-    }
-
-    &::after {
-        transition: 0.3s transform ease, 0.6s opacity ease;
-    }
-
-    &.is-close {
-        &::before,
-        &::after {
-            transform: translate3d(-50%, -50%, 0) rotate(90deg);
-        }
-
-        &::before {
-            opacity: 0;
-        }
-    }
-
-    &:not(.is-large) {
-        width: $m-accordion--icon--width;
-        height: $m-accordion--icon--width;
-
-        &::before {
-            width: $m-accordion--icon--width;
-            height: $m-accordion--icon--height;
-        }
-
-        &::after {
-            width: $m-accordion--icon--height;
-            height: $m-accordion--icon--width;
-        }
-
-        &.has-border {
-            width: $m-accordion--icon--width + 8;
-            height: $m-accordion--icon--width + 8;
-            border-width: $m-accordion--icon--height;
-        }
-    }
-
-    &.is-large {
-        width: $m-accordion--icon--l--width;
-        height: $m-accordion--icon--l--width;
-
-        &::before {
-            width: $m-accordion--icon--l--width;
-            height: $m-accordion--icon--l--height;
-        }
-
-        &::after {
-            width: $m-accordion--icon--l--height;
-            height: $m-accordion--icon--l--width;
-        }
-
-        &.has-border {
-            width: $m-accordion--icon--l--width + 8;
-            height: $m-accordion--icon--l--width + 8;
-            border-width: $m-accordion--icon--l--height;
-        }
-    }
-
-    &.has-border {
-        border-color: $m-color--primary;
-        border-style: solid;
-    }
-
-    &.is-left {
-        margin-right: $m-margin--s;
-    }
-
-    &.is-right {
-        margin-left: $m-margin;
-    }
-}
-
-.m-accordion__body {
-    transition: 0.3s max-height ease;
-    overflow: hidden;
-    height: auto;
-}
-
-.m-accordion__hidden {
-    @include visuallyHidden;
-}
-
