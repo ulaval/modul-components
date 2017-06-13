@@ -194,3 +194,7 @@ $m-accordion--color--border: $m-color--grey--lighter;
     height: auto;
 }
 
+.m-accordion__hidden {
+    @include visuallyHidden;
+}
+

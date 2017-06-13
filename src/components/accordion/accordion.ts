@@ -15,117 +15,107 @@ export class MAccordion extends Vue {
     @Prop()
     private isOpen: boolean;
     @Prop()
-    private hasRippleEffect: boolean;
-    @Prop()
     private iconPosition: string;
     @Prop()
     private iconStyle: string;
     @Prop()
     private iconSize: string;
 
-    private aType: string = 'regular';
-    private aIsOpen: boolean = false;
-    private aIconPosition: string = 'right';
-    private hasRipple: boolean = false;
-    private aIconSize: string = 'large';
-    private aIconStyle: string = 'default';
+    private propsType: string = 'regular';
+    private propsIsOpen: boolean = false;
+    private propsIconPosition: string = 'right';
+    private propsIconSize: string = 'large';
+    private propsIconStyle: string = 'default';
     private componentName: string = ACCORDION_NAME;
     private animIsActive: boolean = false;
     private accordionID: number;
 
-    private mounted() {
-        this.aType = this.$props.type;
-        this.aIsOpen = this.$props.isOpen == undefined ? false : true;
-        this.hasRipple = this.$props.hasRippleEffect;
-        this.aIconPosition = this.$props.iconPosition;
-        this.aIconSize = this.$props.iconSize;
-        this.aIconStyle = this.$props.iconStyle;
+    private mounted(): void {
+        this.propsType = this.$props.type;
+        this.propsIsOpen = this.$props.isOpen == undefined ? false : true;
+        this.propsIconPosition = this.$props.iconPosition;
+        this.propsIconSize = this.$props.iconSize;
+        this.propsIconStyle = this.$props.iconStyle;
         this.setType();
     }
 
     private setType(): void {
-        switch (this.aType) {
+        switch (this.propsType) {
             case 'light':
-                if (this.hasRipple == undefined) {
-                    this.hasRipple = false;
+                if (this.propsIconPosition == undefined) {
+                    this.propsIconPosition = 'left';
                 }
-                if (this.aIconPosition == undefined) {
-                    this.aIconPosition = 'left';
+                if (this.propsIconSize == undefined) {
+                    this.propsIconSize = 'small';
                 }
-                if (this.aIconSize == undefined) {
-                    this.aIconSize = 'small';
-                }
-                if (this.aIconStyle == undefined) {
-                    this.aIconStyle = 'border';
+                if (this.propsIconStyle == undefined) {
+                    this.propsIconStyle = 'border';
                 }
                 break;
             case 'noStyle':
-                if (this.hasRipple == undefined) {
-                    this.hasRipple = false;
+                if (this.propsIconPosition == undefined) {
+                    this.propsIconPosition = 'right';
                 }
-                if (this.aIconPosition == undefined) {
-                    this.aIconPosition = 'right';
+                if (this.propsIconSize == undefined) {
+                    this.propsIconSize = 'large';
                 }
-                if (this.aIconSize == undefined) {
-                    this.aIconSize = 'large';
-                }
-                if (this.aIconStyle == undefined) {
-                    this.aIconStyle = 'default';
+                if (this.propsIconStyle == undefined) {
+                    this.propsIconStyle = 'default';
                 }
                 break;
             default:
-                if (this.hasRipple == undefined) {
-                    this.hasRipple = true;
+                if (this.propsIconPosition == undefined) {
+                    this.propsIconPosition = 'right';
                 }
-                if (this.aIconPosition == undefined) {
-                    this.aIconPosition = 'right';
+                if (this.propsIconSize == undefined) {
+                    this.propsIconSize = 'large';
                 }
-                if (this.aIconSize == undefined) {
-                    this.aIconSize = 'large';
-                }
-                if (this.aIconStyle == undefined) {
-                    this.aIconStyle = 'default';
+                if (this.propsIconStyle == undefined) {
+                    this.propsIconStyle = 'default';
                 }
         }
     }
 
     private resetType(type): void {
-        switch (this.aType) {
+        switch (type) {
             case 'light':
-                this.hasRipple = false;
-                this.aIconPosition = 'left';
-                this.aIconSize = 'small';
-                this.aIconStyle = 'border';
+                this.propsIconPosition = 'left';
+                this.propsIconSize = 'small';
+                this.propsIconStyle = 'border';
                 break;
             case 'noStyle':
-                this.hasRipple = false;
-                this.aIconPosition = 'right';
-                this.aIconSize = 'large';
-                this.aIconStyle = 'default';
+                if (this.propsIconPosition == undefined) {
+                    this.propsIconPosition = 'right';
+                }
+                if (this.propsIconSize == undefined) {
+                    this.propsIconSize = 'large';
+                }
+                if (this.propsIconStyle == undefined) {
+                    this.propsIconStyle = 'default';
+                }
                 break;
             default:
-                this.hasRipple = true;
-                this.aIconPosition = 'right';
-                this.aIconSize = 'large';
-                this.aIconStyle = 'default';
+                this.propsIconPosition = 'right';
+                this.propsIconSize = 'large';
+                this.propsIconStyle = 'default';
         }
     }
 
     private toggleAccordion(event): void {
         this.animIsActive = true;
-        this.aIsOpen = !this.aIsOpen;
+        this.propsIsOpen = !this.propsIsOpen;
         if (this.$parent['componentName'] == ACCORDION_GROUP_NAME) {
-            this.$parent['checkToggleAccordion'](this.accordionID, this.aIsOpen);
+            this.$parent['checkToggleAccordion'](this.accordionID, this.propsIsOpen);
         }
         event.preventDefault();
     }
 
     private openAccordion(): void {
-        this.aIsOpen = true;
+        this.propsIsOpen = true;
     }
 
     private closeAccordion(): void {
-        this.aIsOpen = false;
+        this.propsIsOpen = false;
     }
 
     private animEnter(el, done): void {
@@ -162,6 +152,13 @@ export class MAccordion extends Vue {
         } else {
             done();
         }
+    }
+
+    private get typeIsRegular(): boolean {
+        if (this.propsType == 'light' || this.propsType == 'noStyle') {
+            return false;
+        }
+        return true;
     }
 }
 

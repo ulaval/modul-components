@@ -12,9 +12,10 @@ export class MAccordionGroup extends Vue {
     @Prop()
     private type: string;
     @Prop({ default: false })
-    private openAllAccordion: boolean;
+    private openAll: boolean;
 
-    private accordionsAreOpen: boolean = false;
+    private propsType: string;
+    private propsOpenAll: boolean = false;
     private hasError: boolean = false;
     private errorDefaultMesage: string = 'Error in <' + ACCORDION_GROUP_NAME + '>: ';
     private errorMessage: string = '';
@@ -22,32 +23,27 @@ export class MAccordionGroup extends Vue {
     private nbAccordion: number = 0;
     private arrAccordion: boolean[] = [];
     private nbAccordionOpen: number = 0;
-    private accorionsType: string;
 
     private mounted(): void {
-        this.accordionsAreOpen = this.openAllAccordion;
-        if (this.$props.type == 'regular' || this.$props.type == 'light' || this.$props.type == 'noStyle') {
-            this.accorionsType = this.$props.type;
-        } else {
-            this.accorionsType = 'regular';
-        }
+        this.propsOpenAll = this.$props.openAll;
+        this.propsType = this.$props.type == 'light' || this.$props.type == 'noStyle' ? this.$props.type : this.propsType = 'regular';
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
                 this.$children[i]['accordionID'] = this.nbAccordion;
-                if (this.$children[i]['aIsOpen']) {
+                if (this.$children[i]['propsIsOpen']) {
                     this.nbAccordionOpen++;
                     this.arrAccordion.push(true);
                 } else {
                     this.arrAccordion.push(false);
                 }
-                if (this.accorionsType != this.$children[i]['aType']) {
-                    this.$children[i]['aType'] = this.accorionsType;
-                    this.$children[i]['resetType'](this.accorionsType);
+                if (this.propsType != this.$children[i]['propsType']) {
+                    this.$children[i]['propsType'] = this.propsType;
+                    this.$children[i]['resetType'](this.propsType);
                 }
                 this.nbAccordion++;
             }
         }
-        if (this.accordionsAreOpen) {
+        if (this.propsOpenAll) {
             this.openAllAccordions();
         }
         if (this.nbAccordion == 0) {
@@ -64,15 +60,15 @@ export class MAccordionGroup extends Vue {
         } else {
             this.nbAccordionOpen--;
         }
-        this.accordionsAreOpen = this.nbAccordionOpen == this.nbAccordion ? true : false;
+        this.propsOpenAll = this.nbAccordionOpen == this.nbAccordion ? true : false;
     }
 
     private checkAccordion(index: number): boolean {
         return this.$children[index]['componentName'] == ACCORDION_NAME ? true : false;
     }
 
-    private openAllAccordions() {
-        this.accordionsAreOpen = true;
+    private openAllAccordions(): void {
+        this.propsOpenAll = true;
         this.nbAccordionOpen = this.nbAccordion;
         for (let i = 0; i < this.$children.length; i++) {
             if (i < this.arrAccordion.length) {
@@ -85,8 +81,8 @@ export class MAccordionGroup extends Vue {
         }
     }
 
-    private closeAllAccordions() {
-        this.accordionsAreOpen = false;
+    private closeAllAccordions(): void {
+        this.propsOpenAll = false;
         this.nbAccordionOpen = 0;
         for (let i = 0; i < this.$children.length; i++) {
             if (i < this.arrAccordion.length) {
@@ -98,8 +94,8 @@ export class MAccordionGroup extends Vue {
         }
     }
 
-    private get accordionsAreAllOpen(): boolean {
-        return this.accordionsAreOpen;
+    public get hasTitle(): boolean {
+        return !!this.$slots['title'];
     }
 }
 

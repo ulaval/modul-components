@@ -1,18 +1,19 @@
-<article class="m-accordion" :class="{ 'is-regular': aType=='regular', 'is-light': aType=='light', 'is-no-style': aType=='noStyle', 'is-close': !aIsOpen }"
-    data-name="m-accordion">
+<article class="m-accordion" :class="{ 'is-regular': typeIsRegular, 'is-light': propsType=='light', 'is-no-style': propsType=='noStyle', 'is-close': !propsIsOpen }">
     <header>
-        <a href="#" class="m-accordion__header" @click="toggleAccordion" v-m-ripple-effect="hasRipple">
-            <span class="m-accordion__header__icon is-left" :class="{ 'is-close': aIsOpen, 'is-large': aIconSize=='large', 'has-border': aIconStyle=='border' }" v-if="aIconPosition == 'left'">
+        <a href="#" class="m-accordion__header" @click="toggleAccordion">
+            <span class="m-accordion__header__icon is-left" :class="{ 'is-close': propsIsOpen, 'is-large': propsIconSize=='large', 'has-border': propsIconStyle=='border' }" v-if="propsIconPosition != 'right'">
             </span>
             <span class="m-accordion__header__tilte">
                 <slot name="title">m-accordion</slot>
+                <m-i18n msg="m-accordion:open" class="m-accordion__hidden" v-if="!propsIsOpen"></m-i18n>
+                <m-i18n msg="m-accordion:close" class="m-accordion__hidden" v-if="propsIsOpen"></m-i18n>
             </span>
-            <span class="m-accordion__header__icon is-right" :class="{ 'is-close': aIsOpen, 'is-large': aIconSize=='large', 'has-border': aIconStyle=='border' }" v-if="aIconPosition == 'right'">
+            <span class="m-accordion__header__icon is-right" :class="{ 'is-close': propsIsOpen, 'is-large': propsIconSize=='large', 'has-border': propsIconStyle=='border' }" v-if="propsIconPosition == 'right'">
             </span>
         </a>
     </header>
     <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
-        <div class="m-accordion__body" :class="{ 'is-anim-active': animIsActive }" v-if="aIsOpen">
+        <div class="m-accordion__body" :class="{ 'is-anim-active': animIsActive }" v-if="propsIsOpen">
             <div class="m-accordion__body__wrap">
                 <slot>m-accordion - text</slot>
             </div>

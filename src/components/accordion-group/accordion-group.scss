@@ -4,6 +4,10 @@
     display: flex;
     justify-content: space-between;
     padding: $m-margin $m-padding;
+
+    &.is-no-title {
+        justify-content: flex-end;
+    }
 }
 
 .m-accordion-group__body {
