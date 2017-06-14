@@ -12,18 +12,19 @@ export class MIcon extends Vue {
     public name: string;
     @Prop()
     public svgTitle: string;
-    @Prop({ default: '16px' })
+    @Prop({ default: '100%' })
     public width: string;
-    @Prop({ default: '16px' })
+    @Prop({ default: '100%' })
     public height: string;
+
+    private componentName = ICON_NAME;
 
     private propsWidth: string;
     private propsHeight: string;
     private propsSvgTitle: string;
     private iconContent = '';
-    private componentName = ICON_NAME;
 
-    public beforeMount() {
+    private beforeMount(): void {
         let vm = this;
         this.propsSvgTitle = this.$props.svgTitle;
         this.propsWidth = this.$props.width;
@@ -35,7 +36,7 @@ export class MIcon extends Vue {
         });
     }
 
-    private onClick(event) {
+    private onClick(event): void {
         this.$emit('onClick', event);
     }
 
@@ -46,7 +47,7 @@ export class MIcon extends Vue {
         return svg;
     }
 
-    private get hasSvgTitle() {
+    private get hasSvgTitle(): boolean {
         return !!this.propsSvgTitle;
     }
 }
