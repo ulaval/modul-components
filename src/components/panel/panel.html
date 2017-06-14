@@ -1,11 +1,11 @@
-<article class="m-panel" :class="{'is-primary': type!='secondary',
-                'is-secondary': type=='secondary',
-                'no-shadow': hasShadow == 'false',
-                'no-border': hasBorder == 'false',
-                'no-padding': hasPadding == 'false',
-                'no-padding-header': hasPaddingHeader == 'false',
-                'no-padding-body': hasPaddingBody == 'false',
-                'no-padding-footer': hasPaddingFooter == 'false'}">
+<article class="m-panel" :class="{ 'is-primary': type != 'secondary',
+                'is-secondary': type == 'secondary',
+                'no-shadow': !hasShadow,
+                'no-border': !hasBorder,
+                'no-padding': !hasPadding,
+                'no-padding-header': !hasPaddingHeader,
+                'no-padding-body': !hasPaddingBody,
+                'no-padding-footer': !hasPaddingFooter }">
     <header class="m-panel__header" v-if="hasHeader">
         <slot name="header"></slot>
         <span class="m-panel__header__content is-left" v-if="hasContentLeft">

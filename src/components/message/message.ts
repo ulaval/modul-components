@@ -12,12 +12,12 @@ export class MMessage extends Vue {
     public type: string;
     @Prop({ default: 'regular' })
     public mode: string;
-    @Prop({ default: true })
-    public hasNoIcon: boolean;
+    @Prop({ default: false })
+    public hasIcon: boolean;
     @Prop({ default: true })
     public hasCloseButton: boolean;
-    @Prop({ default: true })
-    public notVisible: boolean;
+    @Prop({ default: false })
+    public isVisible: boolean;
 
     private componentName = MESSAGE_NAME;
 
@@ -25,9 +25,9 @@ export class MMessage extends Vue {
         return this.$props.mode == 'regular' && !this.$props.hasCloseButton;
     }
 
-    public onClose(event) {
+    public onClose(event): void {
         this.$emit('onClose', event);
-        this.$props.notVisible = false;
+        this.$props.isVisible = false;
     }
 
     public getIcon(): string {
