@@ -41,6 +41,7 @@ export class MPopper extends Vue {
     @Prop()
     public options: Object;
 
+    public componentName: string = POPPER_NAME;
     public referenceElm;
     public popperJS;
     public showPopper: boolean = false;

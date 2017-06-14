@@ -9,12 +9,13 @@ import { ModulVue } from '../../utils/vue';
 @WithRender
 @Component
 export class MLang extends ModulVue {
-    public text: string = '';
-
     @Prop()
     public msg: string;
 
-    public mounted() {
+    public componentName: string = I18N_NAME;
+    public text: string = '';
+
+    public mounted(): void {
         this.translate();
     }
 
