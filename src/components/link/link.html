@@ -2,7 +2,7 @@
 <transition>
     <router-link class="m-link"
                  :class="{ 'is-without-visit': isWithoutVisit }"
-                 :to="{ path: url }"
+                 :to="{ path: propsUrl }"
                  v-if="isRouterLink">
         <span class="m-link__icon is-left" v-if="hasIconeLeft">
             <slot name="icon-left"></slot>
@@ -16,7 +16,7 @@
     </router-link>
     <a class="m-link"
        :class="{ 'is-without-visit': isWithoutVisit, 'is-button': isButton }"
-       :href="url"
+       :href="propsUrl"
        :title="getTitleAttribute"
        :target="getTargetAttribute"
        v-if="isLink || isExternalLink || isButton"

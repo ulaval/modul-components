@@ -9,34 +9,46 @@ import { ICON_NAME } from '../component-names';
 @Component
 export class MIcon extends Vue {
     @Prop({ default: 'default' })
-    public icon: string;
+    public name: string;
     @Prop()
-    public title: string;
-    @Prop({ default: '1em' })
-    public height: string;
-    @Prop({ default: '1em' })
+    public svgTitle: string;
+    @Prop({ default: '100%' })
     public width: string;
+    @Prop({ default: '100%' })
+    public height: string;
 
+    private componentName = ICON_NAME;
+
+    private propsWidth: string;
+    private propsHeight: string;
+    private propsSvgTitle: string;
     private iconContent = '';
 
-    public beforeMount() {
+    private beforeMount(): void {
         let vm = this;
-        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.icon + '.svg'], waitForChunk => {
+        this.propsSvgTitle = this.$props.svgTitle;
+        this.propsWidth = this.$props.width;
+        this.propsHeight = this.$props.height;
+        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.name + '.svg'], waitForChunk => {
             waitForChunk(svg => {
-                this.iconContent = this.modifyTitle(svg).replace('viewBox', 'width="' + this.$props.width + '" height="' + this.$props.height + '" viewBox');
+                this.iconContent = this.modifyTitle(svg).replace('viewBox', 'width="' + this.propsWidth + '" height="' + this.propsHeight + '" viewBox');
             });
         });
     }
 
-    private onClick(event) {
+    private onClick(event): void {
         this.$emit('onClick', event);
     }
 
     private modifyTitle(svg): string {
-        if (this.$props.title) {
-            return svg.replace(/<title>[^<]*/, '<title>' + this.$props.title);
+        if (this.$props.svgTitle) {
+            return svg.replace(/<title>[^<]*/, '<title>' + this.$props.svgTitle);
         }
         return svg;
+    }
+
+    private get hasSvgTitle(): boolean {
+        return !!this.propsSvgTitle;
     }
 }
 

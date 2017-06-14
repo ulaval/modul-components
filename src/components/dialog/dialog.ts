@@ -9,24 +9,30 @@ import { DIALOG_NAME } from '../component-names';
 @Component
 export class MDialog extends Vue {
     @Prop({ default: true })
-    public isModal: boolean;
+    private isModal: boolean;
 
-    public onBackdropClick(event) {
+    private componentName: string = DIALOG_NAME;
+
+    private onBackdropClick(event): void {
         if (!this.$props.isModal) {
             this.onClose(event);
         }
     }
 
-    public onClose(event) {
+    private onClose(event): void {
         this.$emit('onClose', event);
     }
 
-    public created() {
+    private created(): void {
         document.body.classList.toggle('m-overflow-hidden');
     }
 
-    public destroyed() {
+    private destroyed(): void {
         document.body.classList.toggle('m-overflow-hidden');
+    }
+
+    private get hasTitle(): boolean {
+        return !!this.$slots['title'];
     }
 }
 

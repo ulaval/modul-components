@@ -8,14 +8,15 @@ import { LINK_NAME } from '../component-names';
 @WithRender
 @Component
 export class MLink extends Vue {
-    @Prop({ default: '#' })
+    @Prop({ default: '/' })
     private url: string;
-    @Prop({ default: 'routerLink' })
+    @Prop({ default: 'router-link' })
     private type: string;
     @Prop({ default: false })
     private isWithoutVisit: boolean;
 
     private componentName: string = LINK_NAME;
+    private propsUrl: string;
     private isRouterLink: boolean = false;
     private isLink: boolean = false;
     private isExternalLink: boolean = false;
@@ -24,25 +25,26 @@ export class MLink extends Vue {
     private targetAttribute: string = '_blanck';
     private titleAttribute: string = 'Cet hyperlien s\'ouvrira dans une nouvelle fenêtre.';
 
-    private mounted() {
+    private mounted(): void {
+        this.propsUrl = this.$props.url;
         this.hrefAttribute = this.url;
         switch (this.$props.type) {
             case 'link':
                 this.isLink = true;
                 break;
-            case 'externalLink':
+            case 'external-link':
                 this.isExternalLink = true;
                 break;
             case 'button':
+                this.propsUrl = '#';
                 this.isButton = true;
                 break;
             default:
-                this.url = this.url == '#' ? '/' : this.url;
                 this.isRouterLink = true;
         }
     }
 
-    private onClick(event) {
+    private onClick(event): void {
         this.$emit('onClick');
         if (this.isButton) {
             event.preventDefault();

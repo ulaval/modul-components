@@ -12,15 +12,15 @@ export class MPanel extends Vue {
     public type: string;
     @Prop({ default: false })
     public hasShadow: boolean;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public hasBorder: boolean;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public hasPadding: boolean;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public hasPaddingHeader: boolean;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public hasPaddingBody: boolean;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public hasPaddingFooter: boolean;
 
     private componentName: string = PANEL_NAME;

@@ -1,27 +1,24 @@
-<button class="m-button"
-        :class="{ 'is-primary': aspect=='primary',
-                'is-secondary': aspect=='secondary',
-                'is-icon': aspect=='icon',
-                'is-selected': state=='selected',
-                'is-waiting': state=='waiting',
-                'is-disabled': state=='disabled' }"
-        :disabled="isDisabled"
-        :type="type"
-        v-m-ripple-effect="!isDisabled && aspect!='icon'"
-        @click="onClick">
-    <span class="m-button__icon is-left" v-if="hasIconeLeft && aspect!='icon'">
-        <slot name="icon-left"></slot>
-    </span>
-    <span class="m-button__text" v-if="aspect!='icon'">
-        <slot>{{ componentName }}</slot>
-         <span class="m-button__more-info" v-if="hasMoreInfo">
-            <slot name="more-info"></slot>
+<button class="m-button" :class="{ 'is-primary': propsAspect=='primary',
+                'is-secondary': propsAspect=='secondary',
+                'is-icon': propsAspect=='icon',
+                'is-selected': propsState=='selected',
+                'is-waiting': propsState=='waiting',
+                'is-disabled': propsState=='disabled' }" :disabled="isDisabled" :type="type" @click="onClick">
+    <span class="m-button__wrap" v-if="propsAspect!='icon'">
+        <span class="m-button__icon is-left" v-if="hasIconeLeft">
+            <slot name="icon-left"></slot>
+        </span>
+        <span class="m-button__text">
+            <slot>m-button</slot>
+            <span class="m-button__more-info" v-if="hasMoreInfo">
+                <slot name="more-info"></slot>
+            </span>
+        </span>
+        <span class="m-button__icon is-right" v-if="hasIconeRight">
+            <slot name="icon-right"></slot>
         </span>
     </span>
-    <span class="m-button__icon is-right" v-if="hasIconeRight && aspect!='icon'">
-        <slot name="icon-right"></slot>
-    </span>
-    <span class="m-button__icon" v-if="aspect=='icon'">
+    <span class="m-button__icon" v-if="propsAspect=='icon'">
         <slot><m-icon></m-icon></slot>
     </span>
 </button>

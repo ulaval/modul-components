@@ -1,0 +1,72 @@
+@import 'abstracts/variables';
+
+$m-checkbox--width: 16px;
+
+.m-checkbox {
+    display: flex;
+    align-items: center;
+    user-select: none;
+    line-height: 1;
+
+    &:not(.is-disabled) {
+        cursor: pointer;
+
+        .m-checkbox__label {
+            cursor: pointer;
+            color: $m-color--black;
+        }
+
+        .m-checkbox__input {
+            border-color: $m-color--primary;
+            color: $m-color--primary;
+        }
+
+        &:hover {
+            .m-checkbox__input {
+                background: $m-color--primary--lightest;
+            }
+
+            .m-checkbox__label {
+                color: $m-color--grey--dark;
+            }
+        }
+    }
+
+    &.is-disabled {
+        border-color: $m-color--grey--light;
+        background: $m-color--grey--lighter;
+    }
+
+    &.is-checkbox-left {
+        .m-checkbox__label {
+            padding-left: $m-margin--s;
+        }
+    }
+
+    &.is-checkbox-right {
+        .m-checkbox__label {
+            padding-right: $m-margin--s;
+        }
+    }
+}
+
+.m-checkbox__input {
+    transition: 0.3s background ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: $m-checkbox--width;
+    height: $m-checkbox--width;
+    background: $m-color--white;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: $m-border-size/2;
+}
+
+.m-checkbox__label {
+    transition: 0.3s color ease;
+}
+
+.m-checkbox__hidden {
+    @include visuallyHidden;
+}

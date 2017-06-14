@@ -1,6 +1,7 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
 export const BUTTON_NAME: string = 'm-button';
+export const CHECKBOX_NAME: string = 'm-checkbox';
 export const DIALOG_NAME: string = 'm-dialog';
 export const DYNAMIC_TEMPLATE_NAME: string = 'm-dynamic-template';
 export const I18N_NAME: string = 'm-i18n';
@@ -15,11 +16,13 @@ export const MESSAGE_NAME: string = 'm-message';
 export const UPLOAD_NAME: string = 'm-upload';
 export const POPPER_NAME: string = 'm-popper';
 export const DROPDOWN_NAME: string = 'm-dropdown';
+export const STEP_NAME: string = 'm-step';
 
 export const components: string[] = [
     ACCORDION_GROUP_NAME,
     ACCORDION_NAME,
     BUTTON_NAME,
+    CHECKBOX_NAME,
     DIALOG_NAME,
     DYNAMIC_TEMPLATE_NAME,
     I18N_NAME,
@@ -34,4 +37,5 @@ export const components: string[] = [
     UPLOAD_NAME,
     POPPER_NAME,
     DROPDOWN_NAME
+    STEP_NAME
 ];

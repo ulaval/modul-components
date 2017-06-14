@@ -67,35 +67,35 @@
             }
         }
     }
-}
 
-.m-link__text {
-    position: relative;
-    flex: 1;
+    &__text {
+        position: relative;
+        flex: 1;
 
-    &::after {
-        transition: width 0.3s ease, opacity 0.3s ease;
-        position: absolute;
-        right: 0;
-        bottom: 1px; //Magic number
-        left: 0;
-        content: '';
-        width: 8%;
-        height: 1px;
-        background: $m-color--primary;
-        opacity: 0;
-    }
-}
-
-.m-link__icon {
-    font-size: 14px;
-    display: inline-flex;
-
-    &.is-left {
-        margin-right: $m-margin--s;
+        &::after {
+            transition: width 0.3s ease, opacity 0.3s ease;
+            position: absolute;
+            right: 0;
+            bottom: 1px; //Magic number
+            left: 0;
+            content: '';
+            width: 8%;
+            height: 1px;
+            background: $m-color--primary;
+            opacity: 0;
+        }
     }
 
-    &.is-right {
-        margin-left: $m-margin--s;
+    &__icon {
+        font-size: 14px;
+        display: inline-flex;
+
+        &.is-left {
+            margin-right: $m-margin--s;
+        }
+
+        &.is-right {
+            margin-left: $m-margin--s;
+        }
     }
 }

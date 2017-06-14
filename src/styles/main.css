@@ -359,62 +359,62 @@ a {
     padding: 8px;
 }
 
-.m-without-margin {
+.m-no-margin {
     margin: 0;
 }
 
-.m-without-margin-top {
+.m-no-margin-top {
     margin-top: 0;
 }
 
-.m-without-margin-right {
+.m-no-margin-right {
     margin-right: 0;
 }
 
-.m-without-margin-bottom {
+.m-no-margin-bottom {
     margin-bottom: 0;
 }
 
-.m-without-margin-left {
+.m-no-margin-left {
     margin-left: 0;
 }
 
-.m-without-margin-top-bottom {
+.m-no-margin-top-bottom {
     margin-top: 0;
     margin-bottom: 0;
 }
 
-.m-without-margin-right-left {
+.m-no-margin-right-left {
     margin-right: 0;
     margin-left: 0;
 }
 
-.m-without-padding {
+.m-no-padding {
     padding: 0;
 }
 
-.m-without-padding-top {
+.m-no-padding-top {
     padding-top: 0;
 }
 
-.m-without-padding-right {
+.m-no-padding-right {
     padding-right: 0;
 }
 
-.m-without-padding-bottom {
+.m-no-padding-bottom {
     padding-bottom: 0;
 }
 
-.m-without-padding-left {
+.m-no-padding-left {
     padding-left: 0;
 }
 
-.m-without-padding-top-bottom {
+.m-no-padding-top-bottom {
     padding-top: 0;
     padding-bottom: 0;
 }
 
-.m-without-padding-right-left {
+.m-no-padding-right-left {
     padding-right: 0;
     padding-left: 0;
 }

@@ -4,6 +4,7 @@ import { PluginObject } from 'vue';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import ButtonPlugin from './button/button';
+import CheckboxPlugin from './checkbox/checkbox';
 import DialogPlugin from './dialog/dialog';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import IconPlugin from './icon/icon';
@@ -18,12 +19,14 @@ import MessagePlugin from './message/message';
 import UploadPlugin from './upload/upload';
 import PopperPlugin from './popper/popper';
 import DropdownPlugin from './dropdown/dropdown';
+import StepPlugin from './step/step';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options) {
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
+        Vue.use(CheckboxPlugin);
         Vue.use(DialogPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(IconPlugin);
@@ -38,6 +41,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(UploadPlugin);
         Vue.use(PopperPlugin);
         Vue.use(DropdownPlugin);
+        Vue.use(StepPlugin);
     }
 };
 
