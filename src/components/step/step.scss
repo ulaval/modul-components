@@ -1,0 +1,47 @@
+@import 'abstracts/variables';
+$m-step--icon--size: 44px;
+
+.m-step {
+    display: block;
+    position: relative;
+    padding-bottom: $m-padding--l;
+
+    &::before {
+        position: absolute;
+        height: calc(100% + 1px);
+        z-index: 1;
+        width: 1px;
+        background-color: $m-color--grey--darker;
+        content: "";
+        left: calc((#{$m-step--icon--size} / 2) - 1px); //magic number
+    }
+
+    .m-step__header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        z-index: 2;
+
+        .m-step__header__icon {
+            border: 2px solid $m-color--grey--lighter;
+            height: $m-step--icon--size;
+            width: $m-step--icon--size;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $m-color--white;
+        }
+
+        .m-step__header__title {
+            flex: 1;
+            margin: 0;
+            margin-left: $m-margin;
+        }
+    }
+
+    .m-step__body {
+        margin-left: calc(#{$m-step--icon--size} + #{$m-margin});
+        padding-bottom: $m-margin--l;
+    }
+}

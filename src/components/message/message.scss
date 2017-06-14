@@ -18,7 +18,7 @@ $m-message-size: 22px;
             }
         }
 
-        &.is-info {
+        &.is-information {
             border: 1px solid $m-color--primary;
 
             .m-message__icon {
@@ -62,12 +62,13 @@ $m-message-size: 22px;
         }
 
         .m-message__icon {
+            width: 44px;
+            justify-content: center;
             align-items: center;
             border-right: 1px solid;
 
             .m-icon {
                 font-size: $m-message-size;
-                width: 44px;
             }
         }
 
@@ -75,10 +76,15 @@ $m-message-size: 22px;
             padding: $m-margin;
             flex: 1;
 
+            &.have-close-button {
+                padding-right: $m-padding--l;
+                position: relative;
+            }
+
             .m-message__closeButton {
-                float: right;
-                padding-left: $m-padding--l;
-                line-height: $m-font-size--xs;
+                position: absolute;
+                top: 0;
+                right: 0;
 
                 .m-icon {
                     font-size: $m-font-size--xs;
@@ -96,7 +102,7 @@ $m-message-size: 22px;
             }
         }
 
-        &.is-info {
+        &.is-information {
             .m-message__container {
                 background-color: $m-color--primary--lightest;
             }

@@ -9,20 +9,20 @@ import { MESSAGE_NAME } from '../component-names';
 @Component
 export class MMessage extends Vue {
     @Prop({ default: 'success' })
-    public type: string;
+    public state: string;
     @Prop({ default: 'regular' })
     public mode: string;
-    @Prop({ default: false })
-    public hasIcon: boolean;
     @Prop({ default: true })
-    public hasCloseButton: boolean;
+    public hasIcon: boolean;
     @Prop({ default: false })
+    public hasCloseButton: boolean;
+    @Prop({ default: true })
     public isVisible: boolean;
 
     private componentName = MESSAGE_NAME;
 
     public get showCloseButton(): boolean {
-        return this.$props.mode == 'regular' && !this.$props.hasCloseButton;
+        return this.$props.mode == 'regular' && this.$props.hasCloseButton;
     }
 
     public onClose(event): void {
@@ -32,11 +32,11 @@ export class MMessage extends Vue {
 
     public getIcon(): string {
         let icon: string = '';
-        switch (this.$props.type) {
+        switch (this.$props.state) {
             case 'success':
                 icon = 'pastille-crochet';
                 break;
-            case 'info':
+            case 'information':
                 icon = 'pastille-attention-rouge';
                 break;
             case 'warning':

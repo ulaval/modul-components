@@ -1,0 +1,19 @@
+<div class="m-step" :class="{'is-success': aState=='success', 'is-close': !aIsOpen}">
+    <header class="m-step__header" @click="openStep">
+        <div class="m-step__header__icon">
+            <m-icon></m-icon>
+        </div>
+        <h2 class="m-step__header__title">
+            <slot name="header">Lorem ipsum dolor sit amet</slot>
+        </h2>
+    </header>
+    <div class="m-step__body" v-if="aIsOpen">
+        <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis. Duis
+            mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit commodo
+            arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+            cubilia Curae; Donec vehicula condimentum elementum. Sed laoreet est eget lorem tristique condimentum. Vestibulum
+            at odio orci. Duis nisl erat, aliquam non tortor et, dapibus maximus nulla. Mauris lobortis, orci nec lobortis
+            faucibus, nisi justo eleifend erat, sed convallis velit mi non lacus. Pellentesque habitant morbi tristique senectus
+            et netus et malesuada fames ac turpis egestas.</slot>
+    </div>
+</div>

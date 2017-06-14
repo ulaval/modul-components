@@ -10,7 +10,7 @@ import { PANEL_NAME } from '../component-names';
 export class MPanel extends Vue {
     @Prop({ default: 'primary' })
     public type: string;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public hasShadow: boolean;
     @Prop({ default: true })
     public hasBorder: boolean;
