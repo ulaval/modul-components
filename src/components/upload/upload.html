@@ -1,13 +1,9 @@
-<div>
-    <el-upload
-        class="m-el-upload"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
-        :file-list="fileList">
-        <m-button>Click to upload</m-button>
-        <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-    </el-upload>
-
-    <m-dropdown :elements="['fdsfdsf', 'weujjhg', '543d54356436']" :invite="yoyo"></m-dropdown>
-</div>
+<el-upload
+    class="m-el-upload"
+    action="https://jsonplaceholder.typicode.com/posts/"
+    :on-preview="handlePreview"
+    :on-remove="handleRemove"
+    :file-list="fileList">
+    <m-button>Click to upload</m-button>
+    <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+</el-upload>
