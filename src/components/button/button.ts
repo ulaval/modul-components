@@ -13,14 +13,14 @@ export class MButton extends Vue {
     @Prop({ default: 'button' })
     public type: string;
     @Prop({ default: 'primary' })
-    public aspect: string;
+    public mode: string;
     @Prop({ default: 'default' })
     public state: string;
 
-    private componentName: string = BUTTON_NAME;
+    public componentName: string = BUTTON_NAME;
 
     private propsType: string = 'button';
-    private propsAspect: string = 'primary';
+    private propsMode: string = 'primary';
     private propsState: string = 'default';
 
     private onClick(event): void {
@@ -30,7 +30,7 @@ export class MButton extends Vue {
 
     private mounted(): void {
         this.propsType = this.$props.type == undefined ? 'button' : this.$props.type;
-        this.propsAspect = this.$props.aspect == undefined ? 'primary' : this.$props.aspect;
+        this.propsMode = this.$props.mode == undefined ? 'primary' : this.$props.mode;
         this.propsState = this.$props.state == undefined ? 'default' : this.$props.state;
     }
 
