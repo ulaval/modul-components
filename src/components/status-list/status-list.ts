@@ -3,6 +3,14 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './status-list.html?style=./status-list.scss';
 import { STATUS_LIST_NAME } from '../component-names';
+
+export interface MStatusListData {
+    status: MStatusListStates;
+    text: string;
+}
+
+export type MStatusListStates = 'completed' | 'pending' | 'error';
+
 @WithRender
 @Component
 
@@ -29,12 +37,9 @@ export class MStatusList extends Vue {
             ];
         }
     })
-    public model: Object[];
-    public values: Object[] = this.model;
+    public states: MStatusListData[];
 
-    private componentName = STATUS_LIST_NAME;
-
-    public getIcon(status): string {
+    public getIcon(status: MStatusListStates): string {
         let icon: string = '';
         switch (status) {
             case 'completed':
