@@ -8,7 +8,7 @@
         "clean": "rimraf dist",
         "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
         "build": "rimraf dist/*.d.ts && webpack --env.prod --config conf/webpack.config.js --colors && npm run declarations && npm run scssToDist",
-        "tsc": "tsc && copyfiles -u 1 ./src/**/*.fr.json dist && copyfiles -u 1 ./src/**/*.html dist && copyfiles -u 1 ./src/**/*.scss && copyfiles -u 1 ./src/**/*.css dist && copyfiles -u 1 ./src/public/**/*.* dist && npm run assetsToDist",
+        "tsc": "tsc && copyfiles -u 1 ./src/**/*.fr.json dist && copyfiles -u 1 ./src/**/*.html dist && copyfiles -u 1 ./src/**/*.scss dist && copyfiles -u 1 ./src/**/*.css dist && copyfiles -u 1 ./src/public/**/*.* dist && npm run assetsToDist",
         "declarations": "copyfiles -f ./src/**/*.d.ts dist",
         "scssToDist": "copyfiles -u 1 ./src/styles/**/*.scss dist && copyfiles -u 1 ./src/styles/**/*.css dist",
         "assetsToDist": "copyfiles -u 1 ./src/assets/**/* dist",
