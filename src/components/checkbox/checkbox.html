@@ -1,11 +1,7 @@
-<span class="m-checkbox" :class="{ 'is-checkbox-left': hasCheckboxLeft, 'is-checkbox-right': !hasCheckboxLeft }">
-    <span class="m-checkbox__input is-left" v-if="hasCheckboxLeft" :class="{ 'is-checked': checked }">
+<span class="m-checkbox" :class="{ 'is-checkbox-left': hasCheckboxLeft, 'is-checkbox-right': !hasCheckboxLeft, 'is-checked': propsIsChecked  }">
+    <input type="checkbox" id="checkbox" class="m-checkbox__hidden" v-model="propsIsChecked">
+    <span class="m-checkbox__input">
         <m-icon name="pastille-crochet" width="10px" height="10px" v-if="propsIsChecked"></m-icon>
-        <input type="checkbox" id="checkbox" class="m-checkbox__hidden" v-model="propsIsChecked">
     </span>
     <label class="m-checkbox__label" for="checkbox"><slot>m-checkbox</slot><slot name="checked" v-if="propsIsChecked"></slot></label>
-    <span class="m-checkbox__input is-left" v-if="!hasCheckboxLeft">
-        <m-icon name="pastille-crochet" width="10px" height="10px" v-if="propsIsChecked"></m-icon>
-        <input type="checkbox" id="checkbox" class="m-checkbox__hidden" v-model="propsIsChecked" >
-    </span>
 </span>

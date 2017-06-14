@@ -1,5 +1,4 @@
 @import 'abstracts/variables';
-
 $m-checkbox--width: 16px;
 
 .m-checkbox {
@@ -12,6 +11,7 @@ $m-checkbox--width: 16px;
         cursor: pointer;
 
         .m-checkbox__label {
+            flex: 1;
             cursor: pointer;
             color: $m-color--black;
         }
@@ -27,7 +27,13 @@ $m-checkbox--width: 16px;
             }
 
             .m-checkbox__label {
-                color: $m-color--grey--dark;
+                color: $m-color--primary;
+            }
+        }
+
+        input:focus {
+            ~ .m-checkbox__input {
+                background: $m-color--primary--lightest;
             }
         }
     }
@@ -44,6 +50,8 @@ $m-checkbox--width: 16px;
     }
 
     &.is-checkbox-right {
+        flex-direction: row-reverse;
+
         .m-checkbox__label {
             padding-right: $m-margin--s;
         }
@@ -60,7 +68,7 @@ $m-checkbox--width: 16px;
     background: $m-color--white;
     border-width: 1px;
     border-style: solid;
-    border-radius: $m-border-size/2;
+    border-radius: $m-border-size / 2;
 }
 
 .m-checkbox__label {
