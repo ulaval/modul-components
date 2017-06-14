@@ -8,6 +8,7 @@ import CheckboxPlugin from './checkbox/checkbox';
 import DialogPlugin from './dialog/dialog';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import IconPlugin from './icon/icon';
+import InputPlugin from './input/input';
 import I18nPlugin from './i18n/i18n';
 import LinkPlugin from './link/link';
 import ListBulletPlugin from './list-bullet/list-bullet';
@@ -30,6 +31,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DialogPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(IconPlugin);
+        Vue.use(InputPlugin);
         Vue.use(I18nPlugin);
         Vue.use(LinkPlugin);
         Vue.use(ListBulletPlugin);
