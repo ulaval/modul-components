@@ -13,7 +13,7 @@ import I18nPlugin from './i18n/i18n';
 import LinkPlugin from './link/link';
 import ListBulletPlugin from './list-bullet/list-bullet';
 import PanelPlugin from './panel/panel';
-import StatusList from './status-list';
+import StatusList from './status-list/status-list';
 import TablePlugin from './table/table';
 import TextIconPlugin from './text-icon/text-icon';
 import MessagePlugin from './message/message';

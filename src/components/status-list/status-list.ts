@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './status-list.html?style=./status-list.scss';
@@ -58,3 +58,11 @@ export class MStatusList extends Vue {
     }
 
 }
+
+const StatusList: PluginObject<any> = {
+    install(v, options) {
+        v.component(STATUS_LIST_NAME, MStatusList);
+    }
+};
+
+export default StatusList;
