@@ -8,20 +8,39 @@ import { STEP_NAME } from '../component-names';
 @WithRender
 @Component
 export class MStep extends Vue {
-    @Prop({ default: 'success' })
-    public type: string;
+    @Prop({ default: 'disable' })
+    private state: string;
+    @Prop()
     private isOpen: boolean;
     @Prop()
+    private isObligatory: boolean;
 
     private componentName = STEP_NAME;
+    private aState: string = 'disable';
+    private aIsOpen: boolean = false;
 
-    public get hasHeader(): boolean {
-        return !!this.$slots['header'];
+    private mounted() {
+        this.aState = this.$props.state;
+        this.aIsOpen = this.$props.isOpen == undefined ? false : true;
     }
 
-    public getIcon(): string {
+    private openStep(): void {
+        this.aIsOpen = true;
+    }
+
+    private closeStep(): void {
+        this.aIsOpen = false;
+    }
+
+    private getIcon(): string {
         let icon: string = '';
-        switch (this.$props.type) {
+        switch (this.$props.state) {
+            case 'disable':
+                icon = 'pastille-crochet';
+                break;
+            case 'in-progress':
+                icon = 'pastille-crochet';
+                break;
             case 'success':
                 icon = 'pastille-crochet';
                 break;
@@ -36,7 +55,6 @@ export class MStep extends Vue {
         }
         return icon;
     }
-
 }
 
 const StepPlugin: PluginObject<any> = {
