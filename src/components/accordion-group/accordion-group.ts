@@ -14,15 +14,18 @@ export class MAccordionGroup extends Vue {
     @Prop({ default: false })
     private openAll: boolean;
 
+    private componentName: string = ACCORDION_GROUP_NAME;
+
     private propsType: string;
     private propsOpenAll: boolean = false;
-    private hasError: boolean = false;
-    private errorDefaultMesage: string = 'Error in <' + ACCORDION_GROUP_NAME + '>: ';
-    private errorMessage: string = '';
-    private componentName: string = ACCORDION_GROUP_NAME;
+
     private nbAccordion: number = 0;
     private arrAccordion: boolean[] = [];
     private nbAccordionOpen: number = 0;
+
+    private hasError: boolean = false;
+    private errorDefaultMesage: string = 'Error in <' + ACCORDION_GROUP_NAME + '>: ';
+    private errorMessage: string = '';
 
     private mounted(): void {
         this.propsOpenAll = this.$props.openAll;

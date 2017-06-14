@@ -21,12 +21,14 @@ export class MAccordion extends Vue {
     @Prop()
     private iconSize: string;
 
+    private componentName: string = ACCORDION_NAME;
+
     private propsType: string = 'regular';
     private propsIsOpen: boolean = false;
     private propsIconPosition: string = 'right';
     private propsIconSize: string = 'large';
     private propsIconStyle: string = 'default';
-    private componentName: string = ACCORDION_NAME;
+
     private animIsActive: boolean = false;
     private accordionID: number;
 
