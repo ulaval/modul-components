@@ -13,22 +13,22 @@ $m-color--ul-red: #e30513;
 //  Grey
 // ======================================================================
 $m-color--grey--darkest: #1c1c1c !default;
-$m-color--grey--darker: #545454 !default;
-$m-color--grey--dark: #8c8c8c !default;
-$m-color--grey: #a8a8a8 !default;
-$m-color--grey--light: #c4c4c4 !default;
-$m-color--grey--lighter: #e0e0e0 !default;
-$m-color--grey--lightest: #efefef !default;
+$m-color--grey--darker: #353535 !default;
+$m-color--grey--dark: #545454 !default;
+$m-color--grey: #d5d5d5 !default;
+$m-color--grey--light: #e0e0e0 !default;
+$m-color--grey--lighter: #ededed !default;
+$m-color--grey--lightest: #f7f7f7 !default;
 
 // ======================================================================
 //  Primary colors
 // ======================================================================
-$m-color--primary--darker: #0080ad !default;
-$m-color--primary--dark: #008cc9 !default;
+$m-color--primary--darker: #0074a0 !default;
+$m-color--primary--dark: #0087bd !default;
 $m-color--primary: $m-color--ul-blue !default;
-$m-color--primary--light: #1aadff !default;
-$m-color--primary--lighter: #52d2ff !default;
-$m-color--primary--lightest: #ccfaff !default;
+$m-color--primary--light: #36adff !default;
+$m-color--primary--lighter: #6ed2ff !default;
+$m-color--primary--lightest: #dffaff !default;
 
 // ======================================================================
 //  Secondary colors
@@ -63,9 +63,9 @@ $m-color--valid--lightest: #dcf9e9 !default;
 // ======================================================================
 //  Error colors
 // ======================================================================
-$m-color--error--darker: #910722 !default;
-$m-color--error--dark: #ad071f !default;
+$m-color--error--darker: #b20000 !default;
+$m-color--error--dark: #ca0000 !default;
 $m-color--error: $m-color--ul-red !default;
-$m-color--error--light: #ff4545 !default;
-$m-color--error--lighter: #ff5c5c !default;
-$m-color--error--lightest: #fcc !default;
+$m-color--error--light: #e33642 !default;
+$m-color--error--lighter: #e39fa8 !default;
+$m-color--error--lightest: #ffdcdc !default;
