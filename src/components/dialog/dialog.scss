@@ -3,7 +3,7 @@
 .m-dialog {
     &__backdrop {
         background-color: rgba(0, 0, 0, 0.7);
-        z-index: 1;
+        z-index: 9999;
         display: flex;
         justify-content: center;
         align-items: center;
