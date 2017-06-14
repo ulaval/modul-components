@@ -62,12 +62,13 @@ $m-message-size: 22px;
         }
 
         .m-message__icon {
+            width: 44px;
+            justify-content: center;
             align-items: center;
             border-right: 1px solid;
 
             .m-icon {
                 font-size: $m-message-size;
-                width: 44px;
             }
         }
 
