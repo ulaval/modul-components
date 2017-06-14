@@ -30,20 +30,15 @@
         }
     }
 
-    &:not(.is-button) {
-        &:focus {
-            outline: none;
-        }
+    &:focus {
+        outline: none;
     }
 
     &:not(:active) {
-        &:hover,
-        &:focus {
-            color: $m-color--primary--light;
-        }
-
-        &:not(.is-button):focus,
+        &:focus,
         &:hover {
+            color: $m-color--primary--light;
+
             .m-link__text {
                 &::after {
                     width: 100%;

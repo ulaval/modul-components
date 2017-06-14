@@ -25,6 +25,7 @@ export class MButton extends Vue {
 
     private onClick(event): void {
         this.$emit('onClick');
+        this.$el.blur();
     }
 
     private mounted(): void {

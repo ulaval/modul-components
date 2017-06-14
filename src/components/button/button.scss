@@ -42,7 +42,8 @@ $m-button--color--disabled: $m-color--grey--light !default;
                 border-color: $m-button--color--hover;
             }
 
-            &:active {
+            &:active,
+            &:focus {
                 background: $m-button--color--active;
                 border-color: $m-button--color--active;
             }
@@ -104,17 +105,18 @@ $m-button--color--disabled: $m-color--grey--light !default;
             height: $m-touch-size / 2;
             border-radius: 50%;
             opacity: 0;
-            background: lighten($m-color--primary--lightest, 5);
+            background: $m-color--primary--lightest;
         }
 
         .m-button__icon {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
         }
     }
 
     &:not(.is-selected):not(.is-waiting):not(.is-disabled) {
-        &:active {
+        &:active,
+        &:focus {
             &.is-icon {
                 &::after {
                     opacity: 1;
@@ -150,7 +152,6 @@ $m-button--color--disabled: $m-color--grey--light !default;
 
     &__icon {
         position: relative;
-        top: -2px; // Magic number
         z-index: 2;
         width: 12px;
 

@@ -46,24 +46,25 @@ export class MLink extends Vue {
 
     private onClick(event): void {
         this.$emit('onClick');
+        this.$el.blur();
         if (this.isButton) {
             event.preventDefault();
         }
     }
 
-    public get getTargetAttribute(): string {
+    private get getTargetAttribute(): string {
         return this.isExternalLink ? this.targetAttribute : '';
     }
 
-    public get getTitleAttribute(): string {
+    private get getTitleAttribute(): string {
         return this.isExternalLink ? this.titleAttribute : '';
     }
 
-    public get hasIconeLeft(): boolean {
+    private get hasIconeLeft(): boolean {
         return !!this.$slots['icon-left'];
     }
 
-    public get hasIconeRight(): boolean {
+    private get hasIconeRight(): boolean {
         return !!this.$slots['icon-right'];
     }
 }
