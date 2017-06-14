@@ -18,6 +18,7 @@ export class MButton extends Vue {
     public state: string;
 
     private componentName: string = BUTTON_NAME;
+
     private propsType: string = 'button';
     private propsAspect: string = 'primary';
     private propsState: string = 'default';
@@ -30,16 +31,6 @@ export class MButton extends Vue {
         this.propsType = this.$props.type == undefined ? 'button' : this.$props.type;
         this.propsAspect = this.$props.aspect == undefined ? 'primary' : this.$props.aspect;
         this.propsState = this.$props.state == undefined ? 'default' : this.$props.state;
-        this.resizeIcon();
-    }
-
-    private resizeIcon(): void {
-        for (let i = 0; i < this.$children.length; i++) {
-            if (this.$children[i]['componentName'] == ICON_NAME) {
-                this.$children[i]['propsWidth'] = '12px';
-                this.$children[i]['propsHeight'] = '12px';
-            }
-        }
     }
 
     private checkAccordion(index: number): boolean {

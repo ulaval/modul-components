@@ -150,7 +150,9 @@ $m-button--color--disabled: $m-color--grey--light !default;
 
     &__icon {
         position: relative;
+        top: -2px; // Magic number
         z-index: 2;
+        width: 12px;
 
         &.is-left {
             margin-right: $m-margin;
