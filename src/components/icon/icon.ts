@@ -17,7 +17,7 @@ export class MIcon extends Vue {
     @Prop({ default: '100%' })
     public height: string;
 
-    private componentName = ICON_NAME;
+    public componentName = ICON_NAME;
 
     private propsWidth: string;
     private propsHeight: string;

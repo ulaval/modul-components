@@ -19,7 +19,7 @@ export class MMessage extends Vue {
     @Prop({ default: true })
     public isVisible: boolean;
 
-    private componentName = MESSAGE_NAME;
+    public componentName = MESSAGE_NAME;
 
     public get showCloseButton(): boolean {
         return this.$props.mode == 'regular' && this.$props.hasCloseButton;

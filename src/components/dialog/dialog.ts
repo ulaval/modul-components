@@ -9,9 +9,9 @@ import { DIALOG_NAME } from '../component-names';
 @Component
 export class MDialog extends Vue {
     @Prop({ default: true })
-    private isModal: boolean;
+    public isModal: boolean;
 
-    private componentName: string = DIALOG_NAME;
+    public componentName: string = DIALOG_NAME;
 
     private onBackdropClick(event): void {
         if (!this.$props.isModal) {

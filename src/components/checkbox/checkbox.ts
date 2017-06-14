@@ -16,7 +16,7 @@ export class MCheckbox extends Vue {
     @Prop({ default: 'left' })
     public position: string;
 
-    private componentName: string = CHECKBOX_NAME;
+    public componentName: string = CHECKBOX_NAME;
     private propsIsChecked = true;
 
     public mounted(): void {

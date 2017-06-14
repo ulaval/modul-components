@@ -11,17 +11,17 @@ import { ACCORDION_GROUP_NAME } from '../component-names';
 export class MAccordion extends Vue {
 
     @Prop({ default: 'regular' })
-    private type: string;
+    public type: string;
     @Prop()
-    private isOpen: boolean;
+    public isOpen: boolean;
     @Prop()
-    private iconPosition: string;
+    public iconPosition: string;
     @Prop()
-    private iconStyle: string;
+    public iconStyle: string;
     @Prop()
-    private iconSize: string;
+    public iconSize: string;
 
-    private componentName: string = ACCORDION_NAME;
+    public componentName: string = ACCORDION_NAME;
 
     private propsType: string = 'regular';
     private propsIsOpen: boolean = false;

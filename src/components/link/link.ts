@@ -9,13 +9,14 @@ import { LINK_NAME } from '../component-names';
 @Component
 export class MLink extends Vue {
     @Prop({ default: '/' })
-    private url: string;
+    public url: string;
     @Prop({ default: 'router-link' })
-    private type: string;
+    public type: string;
     @Prop({ default: false })
-    private isWithoutVisit: boolean;
+    public isWithoutVisit: boolean;
 
-    private componentName: string = LINK_NAME;
+    public componentName: string = LINK_NAME;
+
     private propsUrl: string;
     private isRouterLink: boolean = false;
     private isLink: boolean = false;

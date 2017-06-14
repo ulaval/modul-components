@@ -10,7 +10,8 @@ import { LIST_BULLET_NAME } from '../component-names';
 export class MListBullet extends Vue {
     @Prop({ default: ['Element 1', 'Element 2', 'Element 3'] })
     public values: string[];
-    private componentName = LIST_BULLET_NAME;
+
+    public componentName = LIST_BULLET_NAME;
 }
 
 const ListBulletPlugin: PluginObject<any> = {

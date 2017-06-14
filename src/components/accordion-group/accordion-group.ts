@@ -10,11 +10,11 @@ import { ACCORDION_NAME } from '../component-names';
 @Component
 export class MAccordionGroup extends Vue {
     @Prop()
-    private type: string;
+    public type: string;
     @Prop({ default: false })
-    private openAll: boolean;
+    public openAll: boolean;
 
-    private componentName: string = ACCORDION_GROUP_NAME;
+    public componentName: string = ACCORDION_GROUP_NAME;
 
     private propsType: string;
     private propsOpenAll: boolean = false;
