@@ -36,6 +36,6 @@ export const components: string[] = [
     MESSAGE_NAME,
     UPLOAD_NAME,
     POPPER_NAME,
-    DROPDOWN_NAME
+    DROPDOWN_NAME,
     STEP_NAME
 ];
