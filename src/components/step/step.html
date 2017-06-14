@@ -1,7 +1,10 @@
-<div class="m-step" :class="{'is-success': aState=='success', 'is-close': !aIsOpen}">
+<div class="m-step" :class="{'is-disable': aState=='disable','is-inProgress': aState=='in-progress','is-success': aState=='success','is-warning': aState=='warning','is-error': aState=='error', 'is-open': aIsOpen, 'is-last': isLast}">
     <header class="m-step__header" @click="openStep">
         <div class="m-step__header__icon">
-            <m-icon></m-icon>
+            <m-icon :name="iconName"></m-icon>
+            <div class="m-step__header__icon__badge">
+                <m-icon :name="getIcon()"></m-icon>
+            </div>
         </div>
         <h2 class="m-step__header__title">
             <slot name="header">Lorem ipsum dolor sit amet</slot>

@@ -10,18 +10,24 @@ import { STEP_NAME } from '../component-names';
 export class MStep extends Vue {
     @Prop({ default: 'disable' })
     private state: string;
-    @Prop()
+    @Prop({ default: false })
     private isOpen: boolean;
-    @Prop()
+    @Prop({ default: false })
     private isObligatory: boolean;
+    @Prop({ default: 'default' })
+    private iconName: string;
+    @Prop({ default: false })
+    private isLast: boolean;
 
     private componentName = STEP_NAME;
     private aState: string = 'disable';
     private aIsOpen: boolean = false;
+    private aIsLast: boolean = false;
 
     private mounted() {
         this.aState = this.$props.state;
-        this.aIsOpen = this.$props.isOpen == undefined ? false : true;
+        this.aIsOpen = this.$props.isOpen;
+        this.aIsLast = this.$props.isLast;
     }
 
     private openStep(): void {
@@ -36,16 +42,13 @@ export class MStep extends Vue {
         let icon: string = '';
         switch (this.$props.state) {
             case 'disable':
-                icon = 'pastille-crochet';
-                break;
-            case 'in-progress':
-                icon = 'pastille-crochet';
+                icon = 'default';
                 break;
             case 'success':
                 icon = 'pastille-crochet';
                 break;
             case 'warning':
-                icon = 'pastille-attention';
+                icon = 'pastille-crochet-jaune';
                 break;
             case 'error':
                 icon = 'pastille-erreur';
