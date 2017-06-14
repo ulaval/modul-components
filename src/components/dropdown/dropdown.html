@@ -1,0 +1,7 @@
+<m-popper trigger="click" :options="{placement: 'bottom'}">
+    <ul class="m-popper__popper" v-if="computedElementsCount > 0">
+        <li v-for="element in elements">{{element}}</li>
+    </ul>
+    <input type="text" slot="reference" :value="invite" />
+</m-popper>
+

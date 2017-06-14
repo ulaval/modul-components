@@ -17,6 +17,7 @@ import TextIconPlugin from './text-icon/text-icon';
 import MessagePlugin from './message/message';
 import UploadPlugin from './upload/upload';
 import PopperPlugin from './popper/popper';
+import DropdownPlugin from './dropdown/dropdown';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options) {
@@ -36,6 +37,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(MessagePlugin);
         Vue.use(UploadPlugin);
         Vue.use(PopperPlugin);
+        Vue.use(DropdownPlugin);
     }
 };
 
