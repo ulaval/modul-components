@@ -1,10 +1,10 @@
-<button class="m-button" :class="{ 'is-primary': propsAspect=='primary',
-                'is-secondary': propsAspect=='secondary',
-                'is-icon': propsAspect=='icon',
+<button class="m-button" :class="{ 'is-primary': propsMode=='primary',
+                'is-secondary': propsMode=='secondary',
+                'is-icon': propsMode=='icon',
                 'is-selected': propsState=='selected',
                 'is-waiting': propsState=='waiting',
                 'is-disabled': propsState=='disabled' }" :disabled="isDisabled" :type="type" @click="onClick">
-    <span class="m-button__wrap" v-if="propsAspect!='icon'">
+    <span class="m-button__wrap" v-if="propsMode!='icon'">
         <span class="m-button__icon is-left" v-if="hasIconeLeft">
             <slot name="icon-left"></slot>
         </span>
@@ -18,7 +18,7 @@
             <slot name="icon-right"></slot>
         </span>
     </span>
-    <span class="m-button__icon" v-if="propsAspect=='icon'">
+    <span class="m-button__icon" v-if="propsMode=='icon'">
         <slot><m-icon></m-icon></slot>
     </span>
 </button>

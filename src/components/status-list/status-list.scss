@@ -1,5 +1,6 @@
 @import 'abstracts/variables';
 $m-status-list-icon-size: 22px;
+$m-status-list-line-width: 2px;
 
 .m-status-list {
     position: relative;
@@ -11,11 +12,11 @@ $m-status-list-icon-size: 22px;
         content: "";
         display: block;
         background-color: #d6d6d6;
-        width: 2px;
+        width: $m-status-list-line-width;
         position: absolute;
         top: 3px;
         bottom: 3px;
-        left: $m-status-list-icon-size / 2;
+        left: ($m-status-list-icon-size / 2) - ($m-status-list-line-width / 2);
         z-index: 1;
     }
 
@@ -35,8 +36,6 @@ $m-status-list-icon-size: 22px;
         align-items: center;
         justify-content: center;
         font-size: $m-status-list-icon-size;
-        width: $m-status-list-icon-size;
-        height: $m-status-list-icon-size;
         margin-right: 8px;
     }
 }

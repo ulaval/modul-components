@@ -11,7 +11,7 @@ import { ACCORDION_GROUP_NAME } from '../component-names';
 export class MAccordion extends Vue {
 
     @Prop({ default: 'regular' })
-    public type: string;
+    public mode: string;
     @Prop()
     public isOpen: boolean;
     @Prop()
@@ -23,7 +23,7 @@ export class MAccordion extends Vue {
 
     public componentName: string = ACCORDION_NAME;
 
-    private propsType: string = 'regular';
+    private propsMode: string = 'regular';
     private propsIsOpen: boolean = false;
     private propsIconPosition: string = 'right';
     private propsIconSize: string = 'large';
@@ -33,8 +33,8 @@ export class MAccordion extends Vue {
     private accordionID: number;
 
     private mounted(): void {
-        this.propsType = this.$props.type;
-        this.propsIsOpen = this.$props.isOpen == undefined ? false : true;
+        this.propsMode = this.$props.type;
+        this.propsIsOpen = this.$props.isOpen == undefined ? false : this.$props.isOpen;
         this.propsIconPosition = this.$props.iconPosition;
         this.propsIconSize = this.$props.iconSize;
         this.propsIconStyle = this.$props.iconStyle;
@@ -42,7 +42,7 @@ export class MAccordion extends Vue {
     }
 
     private setType(): void {
-        switch (this.propsType) {
+        switch (this.propsMode) {
             case 'light':
                 if (this.propsIconPosition == undefined) {
                     this.propsIconPosition = 'left';
@@ -54,7 +54,7 @@ export class MAccordion extends Vue {
                     this.propsIconStyle = 'border';
                 }
                 break;
-            case 'noStyle':
+            case 'no-style':
                 if (this.propsIconPosition == undefined) {
                     this.propsIconPosition = 'right';
                 }
@@ -85,7 +85,7 @@ export class MAccordion extends Vue {
                 this.propsIconSize = 'small';
                 this.propsIconStyle = 'border';
                 break;
-            case 'noStyle':
+            case 'no-style':
                 if (this.propsIconPosition == undefined) {
                     this.propsIconPosition = 'right';
                 }
@@ -157,7 +157,7 @@ export class MAccordion extends Vue {
     }
 
     private get typeIsRegular(): boolean {
-        if (this.propsType == 'light' || this.propsType == 'noStyle') {
+        if (this.propsMode == 'light' || this.propsMode == 'noStyle') {
             return false;
         }
         return true;

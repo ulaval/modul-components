@@ -1,4 +1,4 @@
-<article class="m-accordion" :class="{ 'is-regular': typeIsRegular, 'is-light': propsType=='light', 'is-no-style': propsType=='noStyle', 'is-close': !propsIsOpen }">
+<article class="m-accordion" :class="{ 'is-regular': typeIsRegular, 'is-light': propsMode=='light', 'is-no-style': propsMode=='noStyle', 'is-close': !propsIsOpen }">
     <header>
         <a href="#" class="m-accordion__header" @click="toggleAccordion">
             <span class="m-accordion__header__icon is-left" :class="{ 'is-close': propsIsOpen, 'is-large': propsIconSize=='large', 'has-border': propsIconStyle=='border' }" v-if="propsIconPosition != 'right'">

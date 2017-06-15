@@ -11,7 +11,7 @@ export class MLink extends Vue {
     @Prop({ default: '/' })
     public url: string;
     @Prop({ default: 'router-link' })
-    public type: string;
+    public mode: string;
     @Prop({ default: false })
     public isWithoutVisit: boolean;
 
@@ -29,7 +29,7 @@ export class MLink extends Vue {
     private mounted(): void {
         this.propsUrl = this.$props.url;
         this.hrefAttribute = this.url;
-        switch (this.$props.type) {
+        switch (this.$props.mode) {
             case 'link':
                 this.isLink = true;
                 break;
