@@ -20,22 +20,31 @@ export class MStep extends Vue {
     private isLast: boolean;
 
     private componentName = STEP_NAME;
-    private aState: string = 'disable';
-    private aIsOpen: boolean = false;
-    private aIsLast: boolean = false;
+    private propsState: string = 'disable';
+    private propsIsOpen: boolean = false;
+    private propsIsLast: boolean = false;
+    private animIsActive: boolean = false;
 
     private mounted() {
-        this.aState = this.$props.state;
-        this.aIsOpen = this.$props.isOpen;
-        this.aIsLast = this.$props.isLast;
+        this.propsState = this.$props.state;
+        this.propsIsOpen = this.$props.isOpen;
+        this.propsIsLast = this.$props.isLast;
+    }
+
+    private toggleStep(event): void {
+        this.animIsActive = true;
+        this.propsIsOpen = !this.propsIsOpen;
+        event.preventDefault();
     }
 
     private openStep(): void {
-        this.aIsOpen = true;
+        this.animIsActive = true;
+        this.propsIsOpen = true;
     }
 
     private closeStep(): void {
-        this.aIsOpen = false;
+        this.animIsActive = true;
+        this.propsIsOpen = false;
     }
 
     private getIcon(): string {
@@ -57,6 +66,42 @@ export class MStep extends Vue {
                 break;
         }
         return icon;
+    }
+
+    private animEnter(el, done): void {
+        if (this.animIsActive) {
+            let height: number = el.clientHeight;
+            el.style.maxHeight = '0';
+            setTimeout(() => {
+                el.style.maxHeight = height + 'px';
+                done();
+            }, 2);
+        } else {
+            done();
+        }
+    }
+
+    private animAfterEnter(el): void {
+        if (this.animIsActive) {
+            setTimeout(() => {
+                el.style.maxHeight = 'none';
+            }, 300);
+        }
+    }
+
+    private animLeave(el, done): void {
+        if (this.animIsActive) {
+            let height: number = el.clientHeight;
+            el.style.maxHeight = height + 'px';
+            setTimeout(() => {
+                el.style.maxHeight = '0';
+            }, 0);
+            setTimeout(() => {
+                done();
+            }, 300);
+        } else {
+            done();
+        }
     }
 }
 
