@@ -40,6 +40,10 @@ export class MPopper extends Vue {
     public transition: string;
     @Prop()
     public options: Object;
+    @Prop({ default: false})
+    public closeOnContentClick: boolean;
+    @Prop({ default: true})
+    public toggleOnReferenceClick: boolean;
 
     public componentName: string = POPPER_NAME;
     public referenceElm;
@@ -83,6 +87,9 @@ export class MPopper extends Vue {
         switch (this.trigger) {
             case 'click':
                 on(this.referenceElm, 'click', this.doToggle);
+                if (this.closeOnContentClick) {
+                    on(this.popper, 'click', this.doClose);
+                }
                 on(document, 'click', this.handleDocumentClick);
                 break;
             case 'hover':
@@ -98,7 +105,11 @@ export class MPopper extends Vue {
 
     doToggle() {
         if (!this.forceShow) {
-            this.showPopper = !this.showPopper;
+            if (this.toggleOnReferenceClick) {
+                this.showPopper = !this.showPopper;
+            } else {
+                this.doShow();
+            }
         }
     }
 
@@ -196,12 +207,11 @@ export class MPopper extends Vue {
     }
 
     handleDocumentClick(e) {
-        if (!this.$el || !this.referenceElm ||
+        if (!this.$el || !this.referenceElm || !this.popper ||
             this.$el.contains(e.target) ||
             this.referenceElm.contains(e.target) ||
-            !this.popper || this.popper.contains(e.target) ||
-            this.forceShow
-        ) {
+            this.popper.contains(e.target) ||
+            this.forceShow) {
             return;
         }
 
