@@ -16,12 +16,18 @@ export class MButton extends Vue {
     public mode: string;
     @Prop({ default: 'default' })
     public state: string;
+    @Prop()
+    public iconName: string;
+    @Prop({ default: 'left' })
+    public iconPosition: string;
 
     public componentName: string = BUTTON_NAME;
 
     private propsType: string = 'button';
     private propsMode: string = 'primary';
     private propsState: string = 'default';
+
+    private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "iconName" is undefined';
 
     private onClick(event): void {
         this.$emit('onClick');
@@ -34,24 +40,20 @@ export class MButton extends Vue {
         this.propsState = this.$props.state == undefined ? 'default' : this.$props.state;
     }
 
-    private checkAccordion(index: number): boolean {
-        return this.$children[index]['componentName'] == ICON_NAME ? true : false;
+    private get hasIcone(): boolean {
+        return !!this.$props.iconName;
     }
 
     private get hasIconeLeft(): boolean {
-        return !!this.$slots['icon-left'];
-    }
-
-    private get hasIconeRight(): boolean {
-        return !!this.$slots['icon-right'];
+        return this.$props.iconPosition == 'left' ? true : false;
     }
 
     private get hasMoreInfo(): boolean {
         return !!this.$slots['more-info'];
     }
 
-    private get hasHiddenText(): boolean {
-        return !!this.$slots['icon-hidden-text'];
+    private get hasSlots(): boolean {
+        return !!this.$slots.default;
     }
 
     private get isDisabled(): boolean {
