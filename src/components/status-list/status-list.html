@@ -1,6 +1,6 @@
 <ul class="m-status-list">
-    <li v-for="value in values" :key="text">
-        <m-icon :name="getIcon(value.status)"></m-icon>
-        <span class="libelle">{{value.text}}</span>
+    <li v-for="state in states" :key="text">
+        <m-icon :name="getIcon(state.status)"></m-icon>
+        <span class="libelle">{{state.text}}</span>
     </li>
 </ul>

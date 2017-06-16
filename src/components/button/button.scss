@@ -20,7 +20,7 @@ $m-button--color--disabled: $m-color--grey--light !default;
     line-height: 1;
     border-radius: 4px;
 
-    span {
+    span:not(.m-button__hidden) {
         position: relative;
     }
 
@@ -109,7 +109,7 @@ $m-button--color--disabled: $m-color--grey--light !default;
         }
 
         .m-button__icon {
-            width: 16px;
+            font-size: 16px;
             height: 16px;
         }
     }
@@ -153,7 +153,7 @@ $m-button--color--disabled: $m-color--grey--light !default;
     &__icon {
         position: relative;
         z-index: 2;
-        width: 12px;
+        font-size: 12px;
 
         &.is-left {
             margin-right: $m-margin;
@@ -173,5 +173,9 @@ $m-button--color--disabled: $m-color--grey--light !default;
         &:empty {
             display: none;
         }
+    }
+
+    &__hidden {
+        @include visuallyHidden;
     }
 }

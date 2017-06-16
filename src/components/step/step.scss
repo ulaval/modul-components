@@ -1,5 +1,6 @@
 @import 'abstracts/variables';
 $m-step--icon--size: 44px;
+$m-step--badge--size: 20px;
 
 .m-step {
     display: block;
@@ -8,12 +9,30 @@ $m-step--icon--size: 44px;
 
     &::before {
         position: absolute;
-        height: calc(100% + 1px);
+        height: 100%;
         z-index: 1;
         width: 1px;
-        background-color: $m-color--grey--darker;
+        background-color: $m-color--grey--dark;
         content: "";
         left: calc((#{$m-step--icon--size} / 2) - 1px); //magic number
+    }
+
+    &.is-inProgress {
+        .m-step__header .m-step__header__icon {
+            border-color: $m-color--ul-yellow;
+        }
+    }
+
+    &.is-last {
+        &::before {
+            position: relative;
+            height: 0;
+            z-index: 0;
+            width: 0;
+            background-color: transparent;
+            content: "";
+            left: auto;
+        }
     }
 
     .m-step__header {
@@ -21,27 +40,55 @@ $m-step--icon--size: 44px;
         display: flex;
         align-items: center;
         z-index: 2;
+        color: $m-color--black;
+        text-decoration: none;
+        margin-bottom: $m-margin--xs;
 
         .m-step__header__icon {
-            border: 2px solid $m-color--grey--lighter;
+            border: 2px solid $m-color--grey;
             height: $m-step--icon--size;
             width: $m-step--icon--size;
+            font-size: $m-step--badge--size;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: $m-color--white;
+            position: relative;
+
+            .m-step__header__icon__badge {
+                width: $m-step--badge--size;
+                height: $m-step--badge--size;
+                position: absolute;
+                z-index: 3;
+                bottom: calc(#{$m-step--badge--size} / -4);
+                right: calc(#{$m-step--badge--size} / -4);
+            }
         }
 
         .m-step__header__title {
+            &,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                margin: 0;
+                margin-left: $m-margin;
+                font-size: $m-font-size--h2;
+                font-weight: $m-font-weight--bold;
+            }
+
             flex: 1;
-            margin: 0;
-            margin-left: $m-margin;
+            font-size: $m-font-size--h3;
         }
     }
 
     .m-step__body {
         margin-left: calc(#{$m-step--icon--size} + #{$m-margin});
-        padding-bottom: $m-margin--l;
+        transition: 0.3s max-height ease;
+        overflow: hidden;
+        height: auto;
     }
 }

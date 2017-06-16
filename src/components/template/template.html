@@ -1,0 +1,15 @@
+<main class="m-template" :class="{ 'm-template--has-column' : hasColumn }">
+    <header class="m-template__header">
+        <slot name="header">
+            <m-i18n msg="m-template:header-default-text"></m-i18n>
+        </slot>
+    </header>
+    <section class="m-template__body">
+        <slot>
+            <m-i18n msg="m-template:body-default-text"></m-i18n>
+        </slot>
+    </section>
+    <aside v-if="hasColumn" class="m-template__column">
+        <slot name="column"></slot>
+    </aside>
+</main>

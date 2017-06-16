@@ -1,7 +1,33 @@
-<m-popper trigger="click" :options="{placement: 'bottom'}">
-    <ul class="m-popper__popper" v-if="computedElementsCount > 0">
-        <li v-for="element in elements">{{element}}</li>
-    </ul>
-    <input type="text" slot="reference" :value="invite" />
-</m-popper>
+<div class="m-dropdown" ref="mDropdown">
+    <ul class="m-popper__popper m-dropdown__elements" style="visibility: hidden;"><span class="m-dropdown__element-text" ref="mDropdownCalculate"></span></li></ul>
 
+    <m-popper trigger="click" :options="{placement: 'bottom'}" :close-on-content-click="true" :toggle-on-reference-click="false">
+        <ul class="m-popper__popper m-dropdown__elements"
+            v-if="computedElementsCount > 0"
+            ref="mDropdownElements">
+            <li v-for="(element, index) in elements"
+                @click="selectElement($event, element)"
+                class="m-dropdown__element"
+                :class="{'m-dropdown__element--active': element === propsSelectedElement}"
+                :key="index"
+                :data-index="index">
+                <span class="m-dropdown__element-text" v-once>
+                    {{ getElementListText(element) }}
+                </span>
+            </li>
+        </ul>
+
+        <input type="text"
+               class="m-dropdown__value"
+               ref="mDropdownValue"
+               slot="reference"
+               v-if="isEditabled"
+               v-model="textElement" />
+        <span class="m-dropdown__value"
+              ref="mDropdownValue"
+              slot="reference"
+              v-if="!isEditabled">
+            {{ textElement }}
+        </span>
+    </m-popper>
+</div>

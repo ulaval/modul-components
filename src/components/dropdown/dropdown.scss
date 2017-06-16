@@ -1,115 +1,45 @@
-// @import 'abstracts/variables';
-// $m-button--color: $m-color--primary !default;
-// $m-button--color--hover: $m-color--primary--light !default;
-// $m-button--color--active: $m-color--primary !default;
-// $m-button--color--selected: $m-color--primary--darker !default;
-// $m-button--color--waiting: $m-color--primary--lighter !default;
-// $m-button--color--disabled: $m-color--grey--light !default;
+@import 'abstracts/variables';
 
-// .m-button {
-//     position: relative;
-//     display: inline-flex;
-//     align-items: center;
-//     text-align: center;
-//     vertical-align: middle;
-//     appearance: none;
-//     outline: none;
-//     user-select: none;
-//     font-size: 100%;
-//     text-decoration: none;
-//     line-height: 1;
-//     border-radius: 4px;
+// CSS temporaire pour développer
+.m-dropdown {
+    box-sizing: content-box;
+    padding-top: $m-padding--l;
+}
 
-//     &.is-primary,
-//     &.is-secondary {
-//         transition-property: background, border-color, color;
-//         transition-duration: 0.3s;
-//         transition-timing-function: ease;
-//         padding: 10px $m-padding 9px $m-padding;
-//         font-weight: $m-font-weight--bold;
-//         border: 1px solid $m-button--color;
+.m-dropdown__elements {
+    list-style: none;
+    text-align: left;
+    padding: $m-padding;
+    margin: 0;
+}
 
-//         &:not(.is-selected):not(.is-waiting):not(.is-disabled) {
-//             cursor: pointer;
+.m-dropdown__element {
+    padding: $m-padding--xs 0;
+    margin: 0;
+}
 
-//             &:hover {
-//                 color: $m-color--white;
-//                 background: $m-button--color--hover;
-//                 border-color: $m-button--color--hover;
-//             }
+.m-dropdown__element--active {
+    font-weight: bold;
+}
 
-//             &:active {
-//                 background: $m-button--color--active;
-//                 border-color: $m-button--color--active;
-//             }
-//         }
+.m-dropdown__element-link {
+    cursor: pointer;
+}
 
-//         &.is-waiting {
-//             cursor: progress;
-//             color: $m-color--white;
-//             background: $m-button--color--waiting;
-//             border-color: $m-button--color--waiting;
-//         }
-
-//         &.is-disabled {
-//             cursor: not-allowed;
-//             color: $m-button--color--disabled;
-//             background: $m-color--white;
-//             border-color: $m-button--color--disabled;
-//         }
-
-//         &.is-selected {
-//             background: $m-button--color--selected;
-//             border-color: $m-button--color--selected;
-//         }
-//     }
-
-//     &.is-primary {
-//         color: $m-color--white;
-//         background: $m-button--color;
-//     }
-
-//     &.is-secondary {
-//         color: $m-button--color;
-//         background: $m-color--white;
-//     }
-
-//     &.is-icon {
-//         border: none;
-//         max-width: $m-touch-size;
-//         min-height: $m-touch-size;
-//         background: transparent;
-//     }
-// }
-
-// .m-button__text {
-//     flex: 1;
-// }
-
-// .m-button__more-info,
-// .m-button__icon {
-//     &:empty {
-//         display: none;
-//     }
-// }
-
-// .m-button__more-info {
-//     display: block;
-//     font-size: $m-font-size--s;
-//     font-weight: $m-font-weight--regular;
-//     margin-top: $m-margin--s;
-
-//     &:empty {
-//         display: none;
-//     }
-// }
-
-// .m-button__icon {
-//     &.is-left {
-//         margin-right: $m-padding--s;
-//     }
-
-//     &.is-right {
-//         margin-left: $m-padding--s;
-//     }
-// }
+.m-dropdown__value {
+    position: relative;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // min-width: 130px;
+    // max-width: 250px;
+    height: 32px;
+    padding: 0 $m-padding--xs;
+    background: #fff;
+    border: 1px solid #dcdbd9;
+    text-align: left;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #000;
+}

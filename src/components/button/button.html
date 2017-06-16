@@ -5,20 +5,20 @@
                 'is-waiting': propsState=='waiting',
                 'is-disabled': propsState=='disabled' }" :disabled="isDisabled" :type="type" @click="onClick">
     <span class="m-button__wrap" v-if="propsMode!='icon'">
-        <span class="m-button__icon is-left" v-if="hasIconeLeft">
-            <slot name="icon-left"></slot>
-        </span>
+        <m-icon class="m-button__icon is-left" :name="iconName" v-if="hasIconeLeft && hasIcone"></m-icon>
         <span class="m-button__text">
             <slot>m-button</slot>
             <span class="m-button__more-info" v-if="hasMoreInfo">
                 <slot name="more-info"></slot>
             </span>
         </span>
-        <span class="m-button__icon is-right" v-if="hasIconeRight">
-            <slot name="icon-right"></slot>
-        </span>
+        <m-icon class="m-button__icon is-right" :name="iconName" v-if="!hasIconeLeft  && hasIcone"></m-icon>
     </span>
-    <span class="m-button__icon" v-if="propsMode=='icon'">
-        <slot><m-icon></m-icon></slot>
+    <span class="m-button__icon" v-if="propsMode=='icon' && hasIcone">
+        <m-icon :name="iconName"></m-icon>
+        <span class="m-button__hidden" v-if="hasSlots"><slot></slot></span>
+        <span v-if="!hasSlots">m-button icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the voice readers.
+</span>
     </span>
+    <span v-if="propsMode=='icon' && !hasIcone">{{ errorMessageIcon }}</span>
 </button>

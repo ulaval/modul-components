@@ -1,19 +1,31 @@
-<div class="m-step" :class="{'is-success': aState=='success', 'is-close': !aIsOpen}">
-    <header class="m-step__header" @click="openStep">
-        <div class="m-step__header__icon">
-            <m-icon></m-icon>
-        </div>
-        <h2 class="m-step__header__title">
-            <slot name="header">Lorem ipsum dolor sit amet</slot>
-        </h2>
+<article class="m-step" :class="{'is-disable': propsState=='disable','is-inProgress': propsState=='in-progress','is-success': propsState=='success','is-warning': propsState=='warning','is-error': propsState=='error', 'is-open': propsIsOpen, 'is-close': !propsIsOpen, 'is-last': isLast}">
+    <header>
+        <a href="#" class="m-step__header" @click="openStep">
+            <span class="m-step__header__icon">
+                <m-icon :name="iconName"></m-icon>
+                <span class="m-step__header__icon__badge">
+                    <m-icon :name="getIcon()"></m-icon>
+                </span>
+            </span>
+            <span class="m-step__header__title">
+                <slot name="header">Lorem ipsum dolor sit amet</slot>
+            </span>
+        </a>
     </header>
-    <div class="m-step__body" v-if="aIsOpen">
-        <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis. Duis
-            mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit commodo
-            arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-            cubilia Curae; Donec vehicula condimentum elementum. Sed laoreet est eget lorem tristique condimentum. Vestibulum
-            at odio orci. Duis nisl erat, aliquam non tortor et, dapibus maximus nulla. Mauris lobortis, orci nec lobortis
-            faucibus, nisi justo eleifend erat, sed convallis velit mi non lacus. Pellentesque habitant morbi tristique senectus
-            et netus et malesuada fames ac turpis egestas.</slot>
-    </div>
-</div>
+
+    <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
+        <div class="m-step__body" v-if="propsIsOpen">
+            <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis.
+                Duis mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit
+                commodo arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et
+                ultrices posuere cubilia Curae; Donec vehicula condimentum elementum. Sed laoreet est eget lorem tristique
+                condimentum. Vestibulum at odio orci. Duis nisl erat, aliquam non tortor et, dapibus maximus nulla. Mauris
+                lobortis, orci nec lobortis faucibus, nisi justo eleifend erat, sed convallis velit mi non lacus. Pellentesque
+                habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                <p>
+                    <a href="#" @click="closeStep">Close step</a>
+                </p>
+            </slot>
+        </div>
+    </transition>
+</article>
