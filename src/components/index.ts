@@ -21,6 +21,7 @@ import UploadPlugin from './upload/upload';
 import PopperPlugin from './popper/popper';
 import DropdownPlugin from './dropdown/dropdown';
 import StepPlugin from './step/step';
+import Template from './template/template';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options) {
@@ -44,6 +45,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(PopperPlugin);
         Vue.use(DropdownPlugin);
         Vue.use(StepPlugin);
+        Vue.use(Template);
     }
 };
 

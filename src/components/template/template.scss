@@ -1,0 +1,47 @@
+@import 'abstracts/variables';
+$m-template-column-width: 384px;
+
+.m-template {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.m-template__header {
+    flex-basis: 100%;
+    background-color: #f3f1ef;
+    padding: 22px $m-padding--l;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    > :first-child:not(:only-child):not(.m-link) {
+        flex: 2 1 auto;
+        margin: 0;
+    }
+
+    > :last-child:not(:only-child) {
+        flex: 0 1 auto;
+        margin: 0;
+    }
+
+    .m-link {
+        width: 100%;
+
+        & + :nth-child(2) {
+            flex: 2 1 auto;
+        }
+    }
+}
+
+.m-template__body {
+    flex: 2 1 auto;
+    padding: $m-padding--l;
+}
+
+.m-template__column {
+    flex: 0 1 $m-template-column-width;
+    background-color: #ebe8e5;
+    padding: $m-padding--l;
+}

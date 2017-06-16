@@ -18,6 +18,7 @@ export const UPLOAD_NAME: string = 'm-upload';
 export const POPPER_NAME: string = 'm-popper';
 export const DROPDOWN_NAME: string = 'm-dropdown';
 export const STEP_NAME: string = 'm-step';
+export const TEMPLATE_NAME: string = 'm-template';
 
 export const components: string[] = [
     ACCORDION_GROUP_NAME,
@@ -39,5 +40,6 @@ export const components: string[] = [
     UPLOAD_NAME,
     POPPER_NAME,
     DROPDOWN_NAME,
-    STEP_NAME
+    STEP_NAME,
+    TEMPLATE_NAME
 ];
