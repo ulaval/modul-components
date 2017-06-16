@@ -6,6 +6,7 @@ import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 
 const NON_DEFINI: string = 'undefined';
+const NO_SORT: string = 'none';
 
 @WithRender
 @Component
@@ -21,10 +22,10 @@ export class MDropdown extends Vue {
     public invite: string;
     @Prop({ default: false })
     public disabled: boolean;
-    // @Prop()
-    // public nullValue: string;
-    // @Prop({ default: false })
-    // public tri: boolean;
+    @Prop()
+    public nullValue: string;
+    @Prop({ default: NO_SORT })
+    public sort: string;
     // @Prop({ default: false })
     // public name: boolean;
     // @Prop({ default: false })
@@ -81,6 +82,8 @@ export class MDropdown extends Vue {
 
     public created() {
         console.log(this.elements);
+
+        // Trier la liste
     }
 
     public mounted() {
@@ -88,16 +91,16 @@ export class MDropdown extends Vue {
         this.propsSelectedElement = this.$props.selectedElement;
 
         // valeur nulle (choix d'un element facultatif)
-        // if (typeof this.nullValue == NON_DEFINI) {
-        //     this.nullValueAvailable = false;
-        // } else {
-            // this.nullValueAvailable = true;
-            // if ((this.nullValue.trim().length == 0)) {
-            //     this.nullValueText = '(Aucun)';
-            // } else {
-            //     this.nullValueText = this.nullValue;
-            // }
-        // }
+        if (typeof this.nullValue == NON_DEFINI) {
+            this.nullValueAvailable = false;
+        } else {
+            this.nullValueAvailable = true;
+            if ((this.nullValue.trim().length == 0)) {
+                this.nullValueText = '(Aucun)';
+            } else {
+                this.nullValueText = this.nullValue;
+            }
+        }
 
         // Set width of Popper with the same as Reference
 
@@ -107,7 +110,7 @@ export class MDropdown extends Vue {
     public selectElement($event, element: string): void {
         this.propsSelectedElement = element;
 
-        console.log(this.propsSelectedElement);
+        // console.log(this.propsSelectedElement);
         // this.$scope.$emit(EvenementListe.SELECTIONNER_ELEMENT, new EvenementListe.EvenementListeDeroulante(this.elementSelectionne, this.name));
         // this.ouverte = false;
 
@@ -162,34 +165,26 @@ export class MDropdown extends Vue {
         let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
 
         let width: number = 0;
-        let font: string = this.createFont(hiddenField);
+        // let font: string = this.createFont(hiddenField);
 
         if (this.elements && this.elements.length > 0) {
             for (let element of this.elements) {
-                width = Math.max(width, this.getTextWidth(this.getElementListText(element), font));
+                width = Math.max(width, this.getTextWidth(hiddenField, this.getElementListText(element)));
             }
         } else {
-            width = this.getTextWidth(this.getSelectedElementText(), font);
+            width = this.getTextWidth(hiddenField, this.getSelectedElementText());
         }
 
-        // corps de la liste
-        // var corps = this.elementHtml.find(ControleurListeDeroulante.CLASSE_MENU);
+        hiddenField.remove();
 
-        // largeur = Math.ceil(largeur);
-        // corps.css('width', largeur + 'px');
-        // bouton.css('width', largeur + 'px');
+        width = Math.ceil(width);
+        valueField.style.width = width + 'px';
+        elements.style.width = width + 'px';
     }
 
-    private createFont(element: HTMLElement): string {
-        return element.style.fontSize + ' ' + element.style.fontFamily;
-    }
-
-    private getTextWidth(text: string, font: string): number {
-        let canvas = this.canvas || (this.canvas = document.createElement('canvas'));
-        let context = canvas.getContext('2d') as CanvasRenderingContext2D;
-        context.font = font;
-        let metrics = context.measureText(text);
-        return metrics.width;
+    private getTextWidth(element: HTMLElement, text: string): number {
+        element.innerHTML = text;
+        return element.offsetWidth;
     }
 
     // public preparerListe(elements, old): void {

@@ -2,6 +2,7 @@
 
 // CSS temporaire pour développer
 .m-dropdown {
+    box-sizing: content-box;
     padding-top: $m-padding--l;
 }
 
@@ -31,8 +32,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 130px;
-    max-width: 250px;
+    // min-width: 130px;
+    // max-width: 250px;
     height: 32px;
     padding: 0 $m-padding--xs;
     background: #fff;
@@ -41,5 +42,4 @@
     white-space: nowrap;
     cursor: pointer;
     color: #000;
-    width: 200px;
 }
