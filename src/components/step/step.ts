@@ -31,20 +31,18 @@ export class MStep extends Vue {
         this.propsIsLast = this.$props.isLast;
     }
 
-    private toggleStep(event): void {
+    private openStep(event): void {
         this.animIsActive = true;
-        this.propsIsOpen = !this.propsIsOpen;
+        this.propsIsOpen = true;
+        this.$emit('openStep', event);
         event.preventDefault();
     }
 
-    private openStep(): void {
-        this.animIsActive = true;
-        this.propsIsOpen = true;
-    }
-
-    private closeStep(): void {
+    private closeStep(event): void {
         this.animIsActive = true;
         this.propsIsOpen = false;
+        this.$emit('closeStep', event);
+        event.preventDefault();
     }
 
     private getIcon(): string {

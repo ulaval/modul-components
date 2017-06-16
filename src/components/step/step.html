@@ -1,14 +1,16 @@
-<article class="m-step" :class="{'is-disable': aState=='disable','is-inProgress': aState=='in-progress','is-success': aState=='success','is-warning': aState=='warning','is-error': aState=='error', 'is-open': propsIsOpen, 'is-close': !propsIsOpen, 'is-last': isLast}">
-    <header class="m-step__header" @click="toggleStep">
-        <span class="m-step__header__icon">
-            <m-icon :name="iconName"></m-icon>
-            <span class="m-step__header__icon__badge">
-                <m-icon :name="getIcon()"></m-icon>
+<article class="m-step" :class="{'is-disable': propsState=='disable','is-inProgress': propsState=='in-progress','is-success': propsState=='success','is-warning': propsState=='warning','is-error': propsState=='error', 'is-open': propsIsOpen, 'is-close': !propsIsOpen, 'is-last': isLast}">
+    <header>
+        <a href="#" class="m-step__header" @click="openStep">
+            <span class="m-step__header__icon">
+                <m-icon :name="iconName"></m-icon>
+                <span class="m-step__header__icon__badge">
+                    <m-icon :name="getIcon()"></m-icon>
+                </span>
             </span>
-        </span>
-        <span class="m-step__header__title">
-            <slot name="header">Lorem ipsum dolor sit amet</slot>
-        </span>
+            <span class="m-step__header__title">
+                <slot name="header">Lorem ipsum dolor sit amet</slot>
+            </span>
+        </a>
     </header>
 
     <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
@@ -19,7 +21,11 @@
                 ultrices posuere cubilia Curae; Donec vehicula condimentum elementum. Sed laoreet est eget lorem tristique
                 condimentum. Vestibulum at odio orci. Duis nisl erat, aliquam non tortor et, dapibus maximus nulla. Mauris
                 lobortis, orci nec lobortis faucibus, nisi justo eleifend erat, sed convallis velit mi non lacus. Pellentesque
-                habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</slot>
+                habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                <p>
+                    <a href="#" @click="closeStep">Close step</a>
+                </p>
+            </slot>
         </div>
     </transition>
 </article>
