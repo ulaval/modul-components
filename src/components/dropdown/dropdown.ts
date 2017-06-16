@@ -19,10 +19,10 @@ export class MDropdown extends Vue {
     public getTexteElement: Function;
     @Prop()
     public invite: string;
-    // @Prop({ default: false })
-    // public inactif: boolean;
-    @Prop()
-    public nullValue: string;
+    @Prop({ default: false })
+    public disabled: boolean;
+    // @Prop()
+    // public nullValue: string;
     // @Prop({ default: false })
     // public tri: boolean;
     // @Prop({ default: false })
@@ -30,7 +30,7 @@ export class MDropdown extends Vue {
     // @Prop({ default: false })
     // public formName: boolean;
     @Prop({ default: false })
-    public saisieActive: boolean;
+    public editEnabled: boolean;
 
     public activeElement: string;
 
@@ -40,8 +40,45 @@ export class MDropdown extends Vue {
     public nullValueText: string;
     public nullValueAvailable: boolean;
 
+    @Watch('textElement')
+    public textElementChanged(value) {
+        console.log(value);
+    }
+
+//     @Watch('elements', {immediate: true})
+//     private updateList(filtreTexte: string, init: boolean): void {
+//         this.updateEnCours = null;
+
+//         var filtreTexteNormalise: string;
+//         var elementsTexte: string;
+//         var elementsTexteNormalise: string;
+//         var elementsFiltre: any = [];
+
+//         // Normalise la chaine de recherche
+//         var filtreTexteNormalise = DiacriticUtils.normaliserChaine(filtreTexte);
+
+//         for (let i = 0; i < this.elementsTries.length; i++) {
+//             elementsTexte = this.getTexteElementListe(this.elementsTries[i]);
+//             elementsTexteNormalise = DiacriticUtils.normaliserChaine(elementsTexte);
+
+//             //if (this.comparerElements(elementsTexte, filtreTexte)) {
+//             if (this.comparerElements(elementsTexteNormalise, filtreTexteNormalise)) {
+//                 elementsFiltre.push(this.elementsTries[i]);
+//             }
+//         }
+
+//         this.elementsTriesFiltres = elementsFiltre;
+//         if (!init) {
+//             this.$scope.$apply();
+//         }
+//    }
+
     public get computedElementsCount(): number {
         return this.elements.length;
+    }
+
+    public created() {
+        console.log(this.elements);
     }
 
     public mounted() {
@@ -49,16 +86,20 @@ export class MDropdown extends Vue {
         this.activeElement = this.selectedElement;
 
         // valeur nulle (choix d'un element facultatif)
-        if (typeof this.nullValue == NON_DEFINI) {
-            this.nullValueAvailable = false;
-        } else {
-            this.nullValueAvailable = true;
-            if ((this.nullValue.trim().length == 0)) {
-                this.nullValueText = '(Aucun)';
-            } else {
-                this.nullValueText = this.nullValue;
-            }
-        }
+        // if (typeof this.nullValue == NON_DEFINI) {
+        //     this.nullValueAvailable = false;
+        // } else {
+            // this.nullValueAvailable = true;
+            // if ((this.nullValue.trim().length == 0)) {
+            //     this.nullValueText = '(Aucun)';
+            // } else {
+            //     this.nullValueText = this.nullValue;
+            // }
+        // }
+
+        // Set width of Popper with the same as Reference
+
+        this.adjustWidth();
     }
 
     public selectElement($event, element: string): void {
@@ -109,12 +150,99 @@ export class MDropdown extends Vue {
 
         return text;
     }
+
+    public adjustWidth(): void {
+
+        let valueField: Element = this.$refs.mDropdownValue as Element;
+        // var div = this.elementHtml.find(ControleurListeDeroulante.CLASSE_CALCUL);
+        // var largeur: number = 0;
+        // var font = this.creerPolice(div);
+
+        // if (this.elementsTries && this.elementsTries.length > 0) {
+        //     for (var index = 0; index < this.elementsTries.length; index++) {
+        //         largeur = Math.max(largeur, this.getLargeurTexte(this.getTexteElementListe(this.elementsTries[index]), font));
+        //     }
+        // } else {
+        //     largeur = this.getLargeurTexte(this.getTexteElementSelectionne(), font);
+        // }
+
+        // var bouton = this.elementHtml.find(ControleurListeDeroulante.CLASSE_BOUTON);
+
+        // // corps de la liste
+        // var corps = this.elementHtml.find(ControleurListeDeroulante.CLASSE_MENU);
+
+        // // var cssMaxWidth = element.parent().css('max-width');
+        // //regarder si on a un max-width
+        // // if (cssMaxWidth && cssMaxWidth.length > 2) {
+        // //     var maxWidth = Number(cssMaxWidth.substring(0, cssMaxWidth.length - 2));
+        // // } else {
+        // //     this.largeur = largeur;
+        // // }
+        // // this.largeur = Math.min(maxWidth, largeur);
+
+        // largeur = Math.ceil(largeur);
+        // corps.css('width', largeur + 'px');
+        // bouton.css('width', largeur + 'px');
+
+        // // if (MpoObjectUtils.isNonDefini(appliquerFondu) || appliquerFondu) {
+        // //     this.appliquerFonduTexteSelectionne();
+        // // }
+    }
+
+    // public preparerListe(elements, old): void {
+
+    //     var elementsTries: any[] = new Array();
+
+    //     if (this.elements) {
+    //         if (MpoStringUtils.isVide(this.tri)) {
+    //             elementsTries = this.$filter<Function>(NOM_FILTRE_TRIER_PAR)(this.elements);
+    //         } else if (this.tri != TRI_AUCUN) {
+    //             var parametres = this.tri.split(':');
+    //             elementsTries = this.$filter<Function>(parametres[0])(this.elements, parametres[1], parametres[2]);
+    //         } else {
+    //             //Copie la liste
+    //             elementsTries = this.elements.slice(0);
+    //         }
+    //         if (this.valeurNullePresente) {
+    //             elementsTries.splice(0, 0, this.valeurNulleTexte);
+    //         }
+
+    //         // element par defaut.
+
+    //         if (MpoObjectUtils.isNonDefini(this.elementSelectionne)) {
+    //             //L'invite est prioritaire si presente, elementSelectionne restera undefined pour l'invite
+    //             if (MpoObjectUtils.isNonDefiniOuNull(this.invite)) {
+    //                 if (this.valeurNullePresente) {
+    //                     this.elementSelectionne = this.valeurNulleTexte;
+    //                 } else {
+    //                     //Pas de valeur nulle, pas d'invite (1er element par defaut)
+    //                     this.elementSelectionne = this.elements[0];
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     this.elementsTries = elementsTries;
+    //     this.elementsTriesFiltres = elementsTries;
+    //     this.ajusterDimension();
+
+    //     if (!this.elements || this.elements.length === 0) {
+    //         if(elements !== old) {
+    //             //Changer seulement si la valeur de elements a changé. Sinon on peut écraser une valeur
+    //             //Selectionnée dans des cas ou on a l'element sélectionné avant la liste. (Dans une préférence par exemple)
+    //             this.elementSelectionne = null;
+    //         }
+    //         this.inactif = true;
+    //     } else {
+    //         this.inactif = false;
+    //     }
+    // }
 }
 
-const ButtonPlugin: PluginObject<any> = {
+const DropdownPlugin: PluginObject<any> = {
     install(v, options) {
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };
 
-export default ButtonPlugin;
+export default DropdownPlugin;

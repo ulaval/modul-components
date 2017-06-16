@@ -4,7 +4,7 @@
             <li v-for="(element, index) in elements"
                 @click="selectElement($event, element)"
                 class="m-dropdown__element"
-                :class="{'m-dropdown__element--active': element === textElement}"
+                :class="{'m-dropdown__element--active': element === activeElement}"
                 :key="index"
                 :data-index="index">
                 <span class="m-dropdown__element-text" v-once>
@@ -13,7 +13,17 @@
             </li>
         </ul>
 
-        <input type="text" slot="reference" v-if="saisieActive" v-model="textElement" class="" />
-        <span slot="reference" v-if="!saisieActive">{{ textElement }}</span>
+        <input type="text"
+               class="m-dropdown__value"
+               ref="mDropdownValue"
+               slot="reference"
+               v-if="editEnabled"
+               v-model="textElement" />
+        <span class="m-dropdown__value"
+              ref="mDropdownValue"
+              slot="reference"
+              v-if="!editEnabled">
+            {{ textElement }}
+        </span>
     </m-popper>
 </div>
