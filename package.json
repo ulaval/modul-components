@@ -36,13 +36,13 @@
         "vue-template-loader": "^0.3.1"
     },
     "peerDependencies": {
-        "@types/es6-promise": "^0.0.32",
-        "@types/node": "^7.0.16",
-        "axios": "^0.16.2",
-        "es6-promise": "^4.1.0",
-        "popper.js": "^1.9.9",
-        "typescript": "^2.3.2",
-        "vue": "^2.3.2"
+        "@types/es6-promise": "0.x",
+        "@types/node": "7.x",
+        "axios": "0.x",
+        "es6-promise": "4.x",
+        "popper.js": "1.x",
+        "typescript": "2.x",
+        "vue": "2.x"
     },
     "devDependencies": {
         "@types/es6-promise": "^0.0.32",
