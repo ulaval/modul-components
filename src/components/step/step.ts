@@ -9,17 +9,18 @@ import { STEP_NAME } from '../component-names';
 @Component
 export class MStep extends Vue {
     @Prop({ default: 'disable' })
-    private state: string;
+    public state: string;
     @Prop({ default: false })
-    private isOpen: boolean;
+    public isOpen: boolean;
     @Prop({ default: false })
-    private isObligatory: boolean;
+    public isObligatory: boolean;
     @Prop({ default: 'default' })
-    private iconName: string;
+    public iconName: string;
     @Prop({ default: false })
-    private isLast: boolean;
+    public isLast: boolean;
 
-    private componentName = STEP_NAME;
+    public componentName = STEP_NAME;
+
     private propsState: string = 'disable';
     private propsIsOpen: boolean = false;
     private propsIsLast: boolean = false;
