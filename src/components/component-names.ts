@@ -16,6 +16,7 @@ export const TEXT_ICON_NAME: string = 'm-text-icon';
 export const MESSAGE_NAME: string = 'm-message';
 export const UPLOAD_NAME: string = 'm-upload';
 export const POPPER_NAME: string = 'm-popper';
+export const POPPER_LIST_NAME: string = 'm-popper-list';
 export const DROPDOWN_NAME: string = 'm-dropdown';
 export const STEP_NAME: string = 'm-step';
 export const TEMPLATE_NAME: string = 'm-template';
@@ -39,6 +40,7 @@ export const components: string[] = [
     MESSAGE_NAME,
     UPLOAD_NAME,
     POPPER_NAME,
+    POPPER_LIST_NAME,
     DROPDOWN_NAME,
     STEP_NAME,
     TEMPLATE_NAME

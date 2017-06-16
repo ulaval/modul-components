@@ -19,6 +19,7 @@ import TextIconPlugin from './text-icon/text-icon';
 import MessagePlugin from './message/message';
 import UploadPlugin from './upload/upload';
 import PopperPlugin from './popper/popper';
+import PopperListPlugin from './popper-list/popper-list';
 import DropdownPlugin from './dropdown/dropdown';
 import StepPlugin from './step/step';
 import Template from './template/template';
@@ -43,6 +44,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(MessagePlugin);
         Vue.use(UploadPlugin);
         Vue.use(PopperPlugin);
+        Vue.use(PopperListPlugin);
         Vue.use(DropdownPlugin);
         Vue.use(StepPlugin);
         Vue.use(Template);
