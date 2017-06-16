@@ -1,0 +1,186 @@
+@import 'abstracts/variables';
+$m-text-field--transiton-duration: 0.45s;
+$m-text-field--color--helper: lighten($m-color--black, 60);
+$m-text-field--color--focus: $m-color--primary;
+$m-text-field--color--error: $m-color--error;
+$m-text-field--color--valid: $m-color--valid;
+$m-text-field--margin: $m-padding--xs;
+
+.m-text-field {
+    display: inline-flex;
+
+    &,
+    &__wrap {
+        position: relative;
+        flex-direction: column;
+    }
+
+    &__wrap {
+        display: flex;
+    }
+
+    &:not(.is-focus),
+    &.is-disabled {
+        .m-text-field__label {
+            &.is-value-empty {
+                bottom: $m-text-field--margin;
+                font-size: $m-font-size;
+                font-weight: $m-font-weight;
+            }
+        }
+    }
+
+    &:not(.is-focus):not(.is-disabled) {
+        .m-text-field__label {
+            cursor: pointer;
+        }
+    }
+
+    &__label {
+        transition-property: color, bottom, font-size;
+        transition-duration: $m-text-field--transiton-duration;
+        transition-timing-function: ease;
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+    }
+
+    &__label,
+    &.has-error .m-text-field__label {
+        bottom: 23px;
+        font-size: 12px;
+        font-weight: $m-font-weight--bold;
+    }
+
+    &__input {
+        position: relative;
+        z-index: 1;
+        margin-top: 28px;
+        outline: none;
+        cursor: text;
+        padding: 0 0 $m-text-field--margin 0;
+        font-family: $m-font-family;
+        font-size: $m-font-size;
+        font-weight: $m-font-weight;
+        text-decoration: none;
+        color: $m-text-color;
+        border: none;
+        border-bottom: 1px solid #000;
+        width: 100%;
+        min-width: 140px;
+        height: 26px;
+
+        &-line {
+            transition: $m-text-field--transiton-duration width ease-in-out;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: $m-text-field--color--focus;
+        }
+
+        &__dafault-text {
+            opacity: 1;
+            color: $m-text-field--color--helper;
+        }
+    }
+
+    &__error-message,
+    &__helper-message {
+        margin-top: $m-text-field--margin;
+        font-size: $m-font-size--s;
+    }
+
+    &__error-message {
+        color: $m-text-field--color--error;
+
+        ~ .m-text-field__helper-message {
+            margin-top: 2px;
+        }
+
+        &__icon {
+            font-size: 8px;
+        }
+    }
+
+    &__helper-message {
+        color: $m-text-field--color--helper;
+    }
+
+    &__transparent {
+        opacity: 0;
+    }
+
+    &__icon {
+        position: absolute;
+        z-index: 2;
+        bottom: 5px;
+        right: 0;
+
+        &,
+        &-disabled {
+            font-size: 12px;
+        }
+
+        &-disabled {
+            margin-bottom: 5px;
+        }
+    }
+
+    &.is-focus {
+        &:not(.is-disabled) {
+            &:not(.has-error) {
+                .m-text-field__label {
+                    color: $m-text-field--color--focus;
+                }
+            }
+
+            .m-text-field__input-line {
+                width: 100%;
+            }
+        }
+    }
+
+    &.is-selection-inactive {
+        .m-text-field__label,
+        .m-text-field__input {
+            cursor: pointer;
+        }
+    }
+
+    &.is-disabled {
+        &,
+        .m-text-field__label,
+        .m-text-field__input {
+            user-select: none;
+            cursor: not-allowed;
+        }
+
+        .m-text-field__label,
+        .m-text-field__icon {
+            color: $m-text-field--color--helper;
+        }
+
+        .m-text-field__input {
+            border-bottom-style: dashed;
+            border-color: $m-text-field--color--helper;
+        }
+    }
+
+    &.has-error {
+        .m-text-field__label {
+            color: $m-text-field--color--error;
+        }
+
+        .m-text-field__input {
+            &-line {
+                background: $m-text-field--color--error;
+            }
+        }
+    }
+}
