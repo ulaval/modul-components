@@ -30,15 +30,17 @@ export class MDropdown extends Vue {
     // @Prop({ default: false })
     // public formName: boolean;
     @Prop({ default: false })
-    public editEnabled: boolean;
+    public isEditabled: boolean;
 
-    public activeElement: string;
+    public propsSelectedElement: string;
 
     // Initialize data for v-model to work
     public textElement: string = '';
 
     public nullValueText: string;
     public nullValueAvailable: boolean;
+
+    private canvas: HTMLCanvasElement;
 
     @Watch('textElement')
     public textElementChanged(value) {
@@ -83,7 +85,7 @@ export class MDropdown extends Vue {
 
     public mounted() {
         // Copy of the prop to avoid override on re-render
-        this.activeElement = this.selectedElement;
+        this.propsSelectedElement = this.$props.selectedElement;
 
         // valeur nulle (choix d'un element facultatif)
         // if (typeof this.nullValue == NON_DEFINI) {
@@ -103,9 +105,9 @@ export class MDropdown extends Vue {
     }
 
     public selectElement($event, element: string): void {
-        this.activeElement = element;
+        this.propsSelectedElement = element;
 
-        console.log(this.activeElement);
+        console.log(this.propsSelectedElement);
         // this.$scope.$emit(EvenementListe.SELECTIONNER_ELEMENT, new EvenementListe.EvenementListeDeroulante(this.elementSelectionne, this.name));
         // this.ouverte = false;
 
@@ -118,18 +120,18 @@ export class MDropdown extends Vue {
         //         this.ngModel.$render();
         //     };
         // }
-        this.textElement = this.getActiveElementText();
+        this.textElement = this.getSelectedElementText();
     }
 
-    public getActiveElementText(): string {
+    public getSelectedElementText(): string {
         let text: string = '';
 
-        if ((typeof this.activeElement == NON_DEFINI) && !(typeof this.invite == NON_DEFINI)) {
+        if ((typeof this.propsSelectedElement == NON_DEFINI) && !(typeof this.invite == NON_DEFINI)) {
             text = this.invite;
-        } else if (typeof this.activeElement == NON_DEFINI || this.activeElement == this.nullValueText) {
+        } else if (typeof this.propsSelectedElement == NON_DEFINI || this.propsSelectedElement == this.nullValueText) {
             text = this.nullValueText;
         } else {
-            text = this.getElementListText(this.activeElement);
+            text = this.getElementListText(this.propsSelectedElement);
         }
 
         return text;
@@ -152,41 +154,42 @@ export class MDropdown extends Vue {
     }
 
     public adjustWidth(): void {
+        // Hidden element to calculate width
+        let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
+        // Input or span
+        let valueField: HTMLElement = this.$refs.mDropdownValue as HTMLElement;
+        // List
+        let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
 
-        let valueField: Element = this.$refs.mDropdownValue as Element;
-        // var div = this.elementHtml.find(ControleurListeDeroulante.CLASSE_CALCUL);
-        // var largeur: number = 0;
-        // var font = this.creerPolice(div);
+        let width: number = 0;
+        let font: string = this.createFont(hiddenField);
 
-        // if (this.elementsTries && this.elementsTries.length > 0) {
-        //     for (var index = 0; index < this.elementsTries.length; index++) {
-        //         largeur = Math.max(largeur, this.getLargeurTexte(this.getTexteElementListe(this.elementsTries[index]), font));
-        //     }
-        // } else {
-        //     largeur = this.getLargeurTexte(this.getTexteElementSelectionne(), font);
-        // }
+        if (this.elements && this.elements.length > 0) {
+            for (let element of this.elements) {
+                width = Math.max(width, this.getTextWidth(this.getElementListText(element), font));
+            }
+        } else {
+            width = this.getTextWidth(this.getSelectedElementText(), font);
+        }
 
-        // var bouton = this.elementHtml.find(ControleurListeDeroulante.CLASSE_BOUTON);
-
-        // // corps de la liste
+        // corps de la liste
         // var corps = this.elementHtml.find(ControleurListeDeroulante.CLASSE_MENU);
-
-        // // var cssMaxWidth = element.parent().css('max-width');
-        // //regarder si on a un max-width
-        // // if (cssMaxWidth && cssMaxWidth.length > 2) {
-        // //     var maxWidth = Number(cssMaxWidth.substring(0, cssMaxWidth.length - 2));
-        // // } else {
-        // //     this.largeur = largeur;
-        // // }
-        // // this.largeur = Math.min(maxWidth, largeur);
 
         // largeur = Math.ceil(largeur);
         // corps.css('width', largeur + 'px');
         // bouton.css('width', largeur + 'px');
+    }
 
-        // // if (MpoObjectUtils.isNonDefini(appliquerFondu) || appliquerFondu) {
-        // //     this.appliquerFonduTexteSelectionne();
-        // // }
+    private createFont(element: HTMLElement): string {
+        return element.style.fontSize + ' ' + element.style.fontFamily;
+    }
+
+    private getTextWidth(text: string, font: string): number {
+        let canvas = this.canvas || (this.canvas = document.createElement('canvas'));
+        let context = canvas.getContext('2d') as CanvasRenderingContext2D;
+        context.font = font;
+        let metrics = context.measureText(text);
+        return metrics.width;
     }
 
     // public preparerListe(elements, old): void {

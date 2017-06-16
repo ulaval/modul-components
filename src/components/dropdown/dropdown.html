@@ -1,10 +1,14 @@
 <div class="m-dropdown">
+    <ul class="m-popper__popper m-dropdown__elements" style="display: none;"><span class="m-dropdown__element-text" ref="mDropdownCalculate"></span></li></ul>
+
     <m-popper trigger="click" :options="{placement: 'bottom'}" :close-on-content-click="true" :toggle-on-reference-click="false">
-        <ul class="m-popper__popper m-dropdown__elements" v-if="computedElementsCount > 0">
+        <ul class="m-popper__popper m-dropdown__elements"
+            v-if="computedElementsCount > 0"
+            ref="mDropdownElements">
             <li v-for="(element, index) in elements"
                 @click="selectElement($event, element)"
                 class="m-dropdown__element"
-                :class="{'m-dropdown__element--active': element === activeElement}"
+                :class="{'m-dropdown__element--active': element === propsSelectedElement}"
                 :key="index"
                 :data-index="index">
                 <span class="m-dropdown__element-text" v-once>
@@ -17,12 +21,12 @@
                class="m-dropdown__value"
                ref="mDropdownValue"
                slot="reference"
-               v-if="editEnabled"
+               v-if="isEditabled"
                v-model="textElement" />
         <span class="m-dropdown__value"
               ref="mDropdownValue"
               slot="reference"
-              v-if="!editEnabled">
+              v-if="!isEditabled">
             {{ textElement }}
         </span>
     </m-popper>
