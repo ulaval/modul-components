@@ -1,4 +1,4 @@
-<article class="m-step" :class="{'is-disable': aState=='disable','is-inProgress': aState=='in-progress','is-success': aState=='success','is-warning': aState=='warning','is-error': aState=='error', 'is-open': propsIsOpen, 'is-close': !propsIsOpen, 'is-last': isLast}">
+<article class="m-step" :class="{'is-disable': propsState=='disable','is-inProgress': propsState=='in-progress','is-success': propsState=='success','is-warning': propsState=='warning','is-error': propsState=='error', 'is-open': propsIsOpen, 'is-close': !propsIsOpen, 'is-last': isLast}">
     <header>
         <a href="#" class="m-step__header" @click="openStep">
             <span class="m-step__header__icon">
