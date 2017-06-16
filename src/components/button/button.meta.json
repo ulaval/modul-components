@@ -1,0 +1,53 @@
+{
+    "tag": "m-button",
+    "name": "m-button-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "primary",
+                "secondary"
+            ],
+            "default": 0
+        },
+        "state": {
+            "type": "string",
+            "values": [
+                "default",
+                "waiting",
+                "selected",
+                "disabled"
+            ],
+            "default": 0
+        },
+        "type": {
+            "type": "string",
+            "values": [
+                "reset",
+                "submit",
+                "button"
+            ],
+            "default": 2
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-button-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-button-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-button-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-button-meta:dont"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "tag": "m-icon",
+    "name": "m-icon-meta:name",
+    "overview": [{
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-icon-meta:context-of-use"
+        }
+    ]
+}

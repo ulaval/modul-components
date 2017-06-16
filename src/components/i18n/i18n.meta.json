@@ -1,0 +1,22 @@
+{
+    "tag": "m-i18n",
+    "name": "m-i18n-meta:name",
+    "attributes": {
+        "i18n-key": {
+            "type": "string",
+            "description": "Clé correspondant au texte à afficher dans la langue courante."
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-i18n-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-i18n-meta:usage"
+        }
+    ]
+}

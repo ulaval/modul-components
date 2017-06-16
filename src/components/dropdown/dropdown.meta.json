@@ -1,0 +1,16 @@
+{
+    "tag": "m-dropdown",
+    "name": "m-dropdown-meta:name",
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-dropdown-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-dropdown-meta:usage"
+        }
+    ]
+}

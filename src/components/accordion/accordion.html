@@ -5,8 +5,8 @@
             </span>
             <span class="m-accordion__header__tilte">
                 <slot name="title">m-accordion</slot>
-                <m-i18n msg="m-accordion:open" class="m-accordion__hidden" v-if="!propsIsOpen"></m-i18n>
-                <m-i18n msg="m-accordion:close" class="m-accordion__hidden" v-if="propsIsOpen"></m-i18n>
+                <m-i18n i18n-key="m-accordion:open" class="m-accordion__hidden" v-if="!propsIsOpen"></m-i18n>
+                <m-i18n i18n-key="m-accordion:close" class="m-accordion__hidden" v-if="propsIsOpen"></m-i18n>
             </span>
             <span class="m-accordion__header__icon is-right" :class="{ 'is-close': propsIsOpen, 'is-large': propsIconSize=='large', 'has-border': propsIconStyle=='border' }" v-if="propsIconPosition == 'right'">
             </span>

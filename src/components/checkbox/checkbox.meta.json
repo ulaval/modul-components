@@ -1,0 +1,16 @@
+{
+    "tag": "m-checkbox",
+    "name": "m-checkbox-meta:name",
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-checkbox-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-checkbox-meta:usage"
+        }
+    ]
+}

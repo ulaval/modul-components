@@ -1,0 +1,11 @@
+{
+    "tag": "m-text-icon",
+    "name": "m-text-icon-meta:name",
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-text-icon-meta:context-of-use"
+        }
+    ]
+}

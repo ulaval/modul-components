@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import WithRender from './navigation.html';
-import Meta from '../../src/meta/meta';
-import { FRENCH } from '../../src/utils/i18n';
+import Meta from '../../../src/meta/meta';
+import { FRENCH } from '../../../src/utils/i18n';
 
 @WithRender
 @Component

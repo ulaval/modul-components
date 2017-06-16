@@ -1,0 +1,11 @@
+{
+    "tag": "m-panel",
+    "name": "m-panel-meta:name",
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-panel-meta:context-of-use"
+        }
+    ]
+}

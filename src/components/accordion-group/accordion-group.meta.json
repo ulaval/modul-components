@@ -1,0 +1,35 @@
+{
+    "tag": "m-accordion-group",
+    "name": "m-accordion-group-meta:name",
+    "attributes": {
+        "areAllOpen": {
+            "type": "boolean",
+            "values": [
+                "false",
+                "true"
+            ],
+            "default": 0
+        },
+        "mode": {
+            "type": "string",
+            "values": [
+                "no-style",
+                "regular",
+                "light"
+            ],
+            "default": 1
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-accordion-group-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-accordion-group-meta:usage"
+        }
+    ]
+}

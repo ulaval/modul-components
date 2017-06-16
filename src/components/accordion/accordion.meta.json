@@ -1,0 +1,59 @@
+{
+    "tag": "m-accordion",
+    "name": "m-accordion-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "no-style",
+                "light",
+                "regular"
+            ],
+            "default": 0
+        },
+        "is-open": {
+            "type": "boolean",
+            "values": [
+                "false",
+                "true"
+            ],
+            "default": 0
+        },
+        "icon-position": {
+            "type": "string",
+            "values": [
+                "right",
+                "left"
+            ],
+            "default": 0
+        },
+        "icon-style": {
+            "type": "string",
+            "values": [
+                "default",
+                "border"
+            ],
+            "default": 0
+        },
+        "icon-size": {
+            "type": "string",
+            "values": [
+                "small",
+                "large"
+            ],
+            "default": 1
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-accordion-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-accordion-meta:usage"
+        }
+    ]
+}

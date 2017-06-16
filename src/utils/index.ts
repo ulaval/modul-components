@@ -12,7 +12,7 @@ export interface UtilsPluginOptions {
 const UtilsPlugin: PluginObject<any> = {
     install(v, options) {
         if (!options) {
-            throw new Error('UtilsPlugin.install -> options cannot be null');
+            throw new Error('UtilsPlugin.install -> you must provide a UtilsPluginOptions option object.');
         }
         let o: UtilsPluginOptions = options as UtilsPluginOptions;
         Vue.use(MessagesPlugin);

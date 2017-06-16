@@ -1,0 +1,11 @@
+{
+    "tag": "m-status-list",
+    "name": "m-status-list-meta:name",
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-status-list-meta:context-of-use"
+        }
+    ]
+}

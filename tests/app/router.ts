@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
 import Meta from '../../src/meta/meta';
 import { FRENCH } from '../../src/utils/i18n';
-import { Navigation } from './navigation';
+import { Attributes } from './attributes/attributes';
+import { Navigation } from './navigation/navigation';
 import { Viewer } from './viewer';
 
 Vue.use(Router);
@@ -10,6 +11,9 @@ Vue.use(Router);
 const componentRoutes: RouteConfig[] = [{
     path: '/',
     component: Navigation
+}, {
+    path: '/attributes',
+    component: Attributes
 }];
 
 Meta.getTagsByLanguage(FRENCH).forEach(tag => {

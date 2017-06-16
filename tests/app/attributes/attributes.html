@@ -1,0 +1,30 @@
+<div>
+    <h2 class="m-no-margin-top">Attributes by component</h2>
+    <ul>
+        <li v-for="meta in allMeta">
+            {{meta.tag}}
+            <ul>
+                <li v-for="attribute in getAttributes(meta)">
+                    <span>
+                    {{attribute}} {{meta.attributes[attribute].type}}
+                    </span>
+                    <span v-for="(value, index) in meta.attributes[attribute].values">
+                        <i v-if="meta.attributes[attribute].default == index">{{value}}</i>
+                        <span v-else>{{value}}</span>
+                    </span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h2 class="m-no-margin-top">Components by attribute</h2>
+    <ul>
+        <li v-for="attribute in getAllAttributes()">
+            {{attribute}}
+            <ul>
+                <li v-for="tag in attributeMap[attribute]">
+                    {{tag}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,22 @@
+{
+    "tag": "m-dynamic-template",
+    "name": "m-dynamic-template-meta:name",
+    "attributes": {
+        "template": {
+            "type": "string",
+            "description": "true,false,Array<Promise>"
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-dynamic-template-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-dynamic-template-meta:usage"
+        }
+    ]
+}

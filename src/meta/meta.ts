@@ -10,9 +10,21 @@ export interface Overview {
     content: string;
 }
 
+export interface ComponentAttribute {
+    type: string;
+    description: string;
+    values: string[];
+    default?: number;
+}
+
+export interface ComponentAttributes {
+    [attribute: string]: ComponentAttribute;
+}
+
 export interface ComponentMeta {
     tag: string;
     name?: string;
+    attributes?: ComponentAttributes;
     overview?: Overview[];
 }
 
@@ -51,6 +63,14 @@ export class Meta {
 
     public getMetaByLanguageAndTag(language: string, tag: string): ComponentMeta {
         return this.componentMeta[language][tag];
+    }
+
+    public getComponentAttributes(componentMeta: ComponentMeta): string[] {
+        if (componentMeta.attributes) {
+            return Object.keys(componentMeta.attributes).filter(key => componentMeta.attributes && componentMeta.attributes.hasOwnProperty(key));
+        } else {
+            return [];
+        }
     }
 }
 

@@ -10,7 +10,7 @@ import { ModulVue } from '../../utils/vue';
 @Component
 export class MLang extends ModulVue {
     @Prop()
-    public msg: string;
+    public i18nKey: string;
 
     public componentName: string = I18N_NAME;
     public text: string = '';
@@ -19,13 +19,13 @@ export class MLang extends ModulVue {
         this.translate();
     }
 
-    @Watch('msg')
+    @Watch('i18nKey')
     public onMessageKeyChanged() {
         this.translate();
     }
 
     private translate(): void {
-        this.text = this.$i18n.translate(this.msg);
+        this.text = this.$i18n.translate(this.i18nKey);
     }
 }
 

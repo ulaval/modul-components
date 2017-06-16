@@ -13,11 +13,11 @@
                     <slot name="footer">
                         <m-button @onClick="onClose">Ok</m-button>
                         <m-button @onClick="onClose" type="secondary">
-                            <m-i18n msg="m-dialog:cancel"></m-i18n>
+                            <m-i18n i18n-key="m-dialog:cancel"></m-i18n>
                         </m-button>
                     </slot>
                     <m-link v-if="!isModal" type="button" @onClick="onClose">
-                        <m-i18n msg="m-dialog:close"></m-i18n>
+                        <m-i18n i18n-key="m-dialog:close"></m-i18n>
                     </m-link>
                 </nav>
             </footer>
