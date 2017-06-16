@@ -14,15 +14,17 @@ const FrenchMetaPlugin: PluginObject<any> = {
             (v as any).$i18n.addMessages(FRENCH, require('../components/dynamic-template/dynamic-template.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/i18n/i18n.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/icon/icon.meta.fr.json'));
-            (v as any).$i18n.addMessages(FRENCH, require('../components/input/input.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/link/link.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/list-bullet/list-bullet.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/message/message.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/panel/panel.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/popper/popper.meta.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/popper-list/popper-list.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/status-list/status-list.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/step/step.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/table/table.meta.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/template/template.meta.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/text-field/text-field.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/text-icon/text-icon.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/upload/upload.meta.fr.json'));
 

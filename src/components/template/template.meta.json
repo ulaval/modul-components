@@ -1,11 +1,11 @@
 {
-    "tag": "m-input",
-    "name": "m-input-meta:name",
+    "tag": "m-template",
+    "name": "m-template-meta:name",
     "overview": [
         {
             "type": "rubric",
             "title": "meta:context-of-use",
-            "content": "m-input-meta:context-of-use"
+            "content": "m-template-meta:context-of-use"
         }
     ]
 }
