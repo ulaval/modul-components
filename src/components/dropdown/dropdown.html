@@ -5,7 +5,7 @@
         <ul class="m-popper__popper m-dropdown__elements"
             v-if="computedElementsCount > 0"
             ref="mDropdownElements">
-            <li v-for="(element, index) in elements"
+            <li v-for="(element, index) in elementsSorted"
                 @click="selectElement($event, element)"
                 class="m-dropdown__element"
                 :class="{'m-dropdown__element--active': element === propsSelectedElement}"
@@ -22,7 +22,8 @@
                ref="mDropdownValue"
                slot="reference"
                v-if="isEditabled"
-               v-model="textElement" />
+               v-model="textElement"
+               :placeholder="propsInvite" />
         <span class="m-dropdown__value"
               ref="mDropdownValue"
               slot="reference"

@@ -5,8 +5,9 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 
-const NON_DEFINI: string = 'undefined';
+const UNDEFINED: string = 'undefined';
 const NO_SORT: string = 'none';
+const SORT_ALPHABETICALLY: string = 'alphabetically';
 
 @WithRender
 @Component
@@ -24,7 +25,7 @@ export class MDropdown extends Vue {
     public disabled: boolean;
     @Prop()
     public nullValue: string;
-    @Prop({ default: NO_SORT })
+    @Prop({ default: SORT_ALPHABETICALLY })
     public sort: string;
     // @Prop({ default: false })
     // public name: boolean;
@@ -33,78 +34,44 @@ export class MDropdown extends Vue {
     @Prop({ default: false })
     public isEditabled: boolean;
 
+    // Copy of props
     public propsSelectedElement: string;
+    public propsInvite: string;
 
     // Initialize data for v-model to work
     public textElement: string = '';
 
-    public nullValueText: string;
-    public nullValueAvailable: boolean;
-
-    private canvas: HTMLCanvasElement;
+    private elementsSorted: Array<string>;
+    // private elementsSortedFiltered: Array<string>;
+    private nullValueText: string;
+    private nullValueAvailable: boolean;
 
     @Watch('textElement')
-    public textElementChanged(value) {
+    public textElementChanged(value): void {
         console.log(value);
     }
 
-//     @Watch('elements', {immediate: true})
-//     private updateList(filtreTexte: string, init: boolean): void {
-//         this.updateEnCours = null;
-
-//         var filtreTexteNormalise: string;
-//         var elementsTexte: string;
-//         var elementsTexteNormalise: string;
-//         var elementsFiltre: any = [];
-
-//         // Normalise la chaine de recherche
-//         var filtreTexteNormalise = DiacriticUtils.normaliserChaine(filtreTexte);
-
-//         for (let i = 0; i < this.elementsTries.length; i++) {
-//             elementsTexte = this.getTexteElementListe(this.elementsTries[i]);
-//             elementsTexteNormalise = DiacriticUtils.normaliserChaine(elementsTexte);
-
-//             //if (this.comparerElements(elementsTexte, filtreTexte)) {
-//             if (this.comparerElements(elementsTexteNormalise, filtreTexteNormalise)) {
-//                 elementsFiltre.push(this.elementsTries[i]);
-//             }
-//         }
-
-//         this.elementsTriesFiltres = elementsFiltre;
-//         if (!init) {
-//             this.$scope.$apply();
-//         }
-//    }
+    @Watch('elements')
+    public elementChanged(value): void {
+        this.prepareList();
+    }
 
     public get computedElementsCount(): number {
         return this.elements.length;
     }
 
     public created() {
-        console.log(this.elements);
 
-        // Trier la liste
     }
 
     public mounted() {
-        // Copy of the prop to avoid override on re-render
+        // Copy of props to avoid override on re-render
         this.propsSelectedElement = this.$props.selectedElement;
+        this.propsInvite = this.$props.invite;
 
-        // valeur nulle (choix d'un element facultatif)
-        if (typeof this.nullValue == NON_DEFINI) {
-            this.nullValueAvailable = false;
-        } else {
-            this.nullValueAvailable = true;
-            if ((this.nullValue.trim().length == 0)) {
-                this.nullValueText = '(Aucun)';
-            } else {
-                this.nullValueText = this.nullValue;
-            }
-        }
-
-        // Set width of Popper with the same as Reference
-
-        this.adjustWidth();
+        // By default, value of the dropdown is the invite. Will be override by selectedElement if there one
+        this.textElement = this.propsInvite;
+        this.prepareList();
     }
 
     public selectElement($event, element: string): void {
@@ -124,15 +91,16 @@ export class MDropdown extends Vue {
         //     };
         // }
         this.textElement = this.getSelectedElementText();
+        this.$emit('elementSelected', this.propsSelectedElement);
     }
 
     public getSelectedElementText(): string {
         let text: string = '';
 
-        if ((typeof this.propsSelectedElement == NON_DEFINI) && !(typeof this.invite == NON_DEFINI)) {
+        if ((typeof this.propsSelectedElement == UNDEFINED) && !(typeof this.invite == UNDEFINED)) {
             text = this.invite;
-        } else if (typeof this.propsSelectedElement == NON_DEFINI || this.propsSelectedElement == this.nullValueText) {
-            text = this.nullValueText;
+        // } else if (typeof this.propsSelectedElement == UNDEFINED || this.propsSelectedElement == this.nullValueText) {
+        //     text = this.nullValueText;
         } else {
             text = this.getElementListText(this.propsSelectedElement);
         }
@@ -144,7 +112,7 @@ export class MDropdown extends Vue {
         let text: string = '';
 
         if (!element) {
-            text = this.nullValueText;
+            // text = this.nullValueText;
         } else if (this.getTexteElement) {
             text = this.getTexteElement({ element: element });
         }
@@ -165,10 +133,9 @@ export class MDropdown extends Vue {
         let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
 
         let width: number = 0;
-        // let font: string = this.createFont(hiddenField);
 
-        if (this.elements && this.elements.length > 0) {
-            for (let element of this.elements) {
+        if (this.elementsSorted && this.elementsSorted.length > 0) {
+            for (let element of this.elementsSorted) {
                 width = Math.max(width, this.getTextWidth(hiddenField, this.getElementListText(element)));
             }
         } else {
@@ -187,54 +154,53 @@ export class MDropdown extends Vue {
         return element.offsetWidth;
     }
 
-    // public preparerListe(elements, old): void {
+    private prepareList(): void {
+        let elementsSort: string[] = new Array();
 
-    //     var elementsTries: any[] = new Array();
+        if (this.elements) {
+            if (this.sort != NO_SORT) {
+                // let parameters = this.sort.split(':');
+                // elementsSort = this.$filter<Function>(parametres[0])(this.elements, parametres[1], parametres[2]);
 
-    //     if (this.elements) {
-    //         if (MpoStringUtils.isVide(this.tri)) {
-    //             elementsTries = this.$filter<Function>(NOM_FILTRE_TRIER_PAR)(this.elements);
-    //         } else if (this.tri != TRI_AUCUN) {
-    //             var parametres = this.tri.split(':');
-    //             elementsTries = this.$filter<Function>(parametres[0])(this.elements, parametres[1], parametres[2]);
-    //         } else {
-    //             //Copie la liste
-    //             elementsTries = this.elements.slice(0);
-    //         }
-    //         if (this.valeurNullePresente) {
-    //             elementsTries.splice(0, 0, this.valeurNulleTexte);
-    //         }
+                // TODO: Faire le tri
+                elementsSort = this.elements.slice(0);
+            } else {
+                // Copy the list without sorting
+                elementsSort = this.elements.slice(0);
+            }
+            // if (this.valeurNullePresente) {
+            //     elementsTries.splice(0, 0, this.valeurNulleTexte);
+            // }
 
-    //         // element par defaut.
+            // Default element.
+            if (typeof this.propsSelectedElement == UNDEFINED) {
+                // Invite is priority if present, selectedElement will stay undefined for the invite
+                if (typeof this.propsInvite == UNDEFINED) {
+                    if (this.nullValueAvailable) {
+                        this.propsSelectedElement = this.nullValueText;
+                    } else {
+                        // No nullValue, no invite => 1st element is selected by default
+                        this.propsSelectedElement = this.elements[0];
+                    }
+                }
+            }
+        }
 
-    //         if (MpoObjectUtils.isNonDefini(this.elementSelectionne)) {
-    //             //L'invite est prioritaire si presente, elementSelectionne restera undefined pour l'invite
-    //             if (MpoObjectUtils.isNonDefiniOuNull(this.invite)) {
-    //                 if (this.valeurNullePresente) {
-    //                     this.elementSelectionne = this.valeurNulleTexte;
-    //                 } else {
-    //                     //Pas de valeur nulle, pas d'invite (1er element par defaut)
-    //                     this.elementSelectionne = this.elements[0];
-    //                 }
-    //             }
-    //         }
-    //     }
+        this.elementsSorted = elementsSort;
+        // this.elementsSortedFiltered = elementsSort;
+        this.adjustWidth();
 
-    //     this.elementsTries = elementsTries;
-    //     this.elementsTriesFiltres = elementsTries;
-    //     this.ajusterDimension();
-
-    //     if (!this.elements || this.elements.length === 0) {
-    //         if(elements !== old) {
-    //             //Changer seulement si la valeur de elements a changé. Sinon on peut écraser une valeur
-    //             //Selectionnée dans des cas ou on a l'element sélectionné avant la liste. (Dans une préférence par exemple)
-    //             this.elementSelectionne = null;
-    //         }
-    //         this.inactif = true;
-    //     } else {
-    //         this.inactif = false;
-    //     }
-    // }
+        // if (!this.elements || this.elements.length === 0) {
+        //     if(elements !== old) {
+        //         //Changer seulement si la valeur de elements a changé. Sinon on peut écraser une valeur
+        //         //Selectionnée dans des cas ou on a l'element sélectionné avant la liste. (Dans une préférence par exemple)
+        //         this.elementSelectionne = null;
+        //     }
+        //     this.inactif = true;
+        // } else {
+        //     this.inactif = false;
+        // }
+    }
 }
 
 const DropdownPlugin: PluginObject<any> = {
