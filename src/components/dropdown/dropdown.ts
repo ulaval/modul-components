@@ -76,10 +76,7 @@ export class MDropdown extends Vue {
 
     public selectElement($event, element: string): void {
         this.propsSelectedElement = element;
-
-        // console.log(this.propsSelectedElement);
-        // this.$scope.$emit(EvenementListe.SELECTIONNER_ELEMENT, new EvenementListe.EvenementListeDeroulante(this.elementSelectionne, this.name));
-        // this.ouverte = false;
+        this.textElement = this.getSelectedElementText();
 
         // Gestion si la liste deroulante est dans un form. Pour les flags touched / valid.
         // if (MpoObjectUtils.isDefini(this.name)) {
@@ -90,7 +87,7 @@ export class MDropdown extends Vue {
         //         this.ngModel.$render();
         //     };
         // }
-        this.textElement = this.getSelectedElementText();
+
         this.$emit('elementSelected', this.propsSelectedElement);
     }
 
@@ -142,7 +139,7 @@ export class MDropdown extends Vue {
             width = this.getTextWidth(hiddenField, this.getSelectedElementText());
         }
 
-        hiddenField.remove();
+        // hiddenField.remove();
 
         width = Math.ceil(width);
         valueField.style.width = width + 'px';
@@ -182,6 +179,7 @@ export class MDropdown extends Vue {
                         // No nullValue, no invite => 1st element is selected by default
                         this.propsSelectedElement = this.elements[0];
                     }
+                    this.textElement = this.getSelectedElementText();
                 }
             }
         }
