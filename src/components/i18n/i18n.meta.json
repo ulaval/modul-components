@@ -4,7 +4,7 @@
     "attributes": {
         "i18n-key": {
             "type": "string",
-            "description": "Clé correspondant au texte à afficher dans la langue courante."
+            "description": "m-i18n-meta:i18n-key-desc"
         }
     },
     "overview": [

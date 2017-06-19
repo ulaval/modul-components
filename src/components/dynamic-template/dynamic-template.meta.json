@@ -4,7 +4,7 @@
     "attributes": {
         "template": {
             "type": "string",
-            "description": "true,false,Array<Promise>"
+            "description": "m-dynamic-template:template-desc"
         }
     },
     "overview": [

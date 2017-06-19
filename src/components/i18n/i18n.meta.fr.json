@@ -2,6 +2,7 @@
     "m-i18n-meta": {
         "name": "Internationnalisation",
         "context-of-use": "Décrire ici le contexte d'utilisation de l'internationnalisation.",
-        "usage": "Quelques règles d'utilisation."
+        "usage": "Quelques règles d'utilisation.",
+        "i18n-key-desc": "Clé correspondant au texte à afficher dans la langue courante."
     }
 }

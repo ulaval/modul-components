@@ -25,7 +25,9 @@ export class MLang extends ModulVue {
     }
 
     private translate(): void {
-        this.text = this.$i18n.translate(this.i18nKey);
+        if (this.i18nKey) {
+            this.text = this.$i18n.translate(this.i18nKey);
+        }
     }
 }
 
