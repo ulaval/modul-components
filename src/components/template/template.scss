@@ -29,7 +29,7 @@ $m-template-column-width: 384px;
     .m-link {
         width: 100%;
 
-        & + :nth-child(2) {
+        + :nth-child(2) {
             flex: 2 1 auto;
         }
     }
