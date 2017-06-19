@@ -4,12 +4,12 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './step.html?style=./step.scss';
 import { STEP_NAME } from '../component-names';
-import { TransitionMixin } from '../../mixins/transition';
+import { TransitionAccordionMixin } from '../../mixins/transitionAccordion';
 
 @WithRender
 @Component({
     mixins: [
-        TransitionMixin
+        TransitionAccordionMixin
     ]
 })
 export class MStep extends Vue {

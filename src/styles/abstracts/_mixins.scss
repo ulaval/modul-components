@@ -8,3 +8,9 @@
     padding: 0;
     border: 0;
 }
+
+@mixin transitionAccordion() {
+    transition: 0.3s max-height ease;
+    overflow: hidden;
+    height: auto;
+}

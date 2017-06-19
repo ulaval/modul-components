@@ -2,10 +2,9 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 
-// TODO-remove mixin test
 @Component
 
-export class TransitionMixin extends Vue {
+export class TransitionAccordionMixin extends Vue {
 
     private animEnter(el, done): void {
         if ((this as any).animIsActive) {

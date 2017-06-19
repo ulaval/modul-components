@@ -5,9 +5,14 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './accordion.html?style=./accordion.scss';
 import { ACCORDION_NAME } from '../component-names';
 import { ACCORDION_GROUP_NAME } from '../component-names';
+import { TransitionAccordionMixin } from '../../mixins/transitionAccordion';
 
 @WithRender
-@Component
+@Component({
+    mixins: [
+        TransitionAccordionMixin
+    ]
+})
 export class MAccordion extends Vue {
 
     @Prop({ default: 'regular' })
@@ -118,42 +123,6 @@ export class MAccordion extends Vue {
 
     private closeAccordion(): void {
         this.propsIsOpen = false;
-    }
-
-    private animEnter(el, done): void {
-        if (this.animIsActive) {
-            let height: number = el.clientHeight;
-            el.style.maxHeight = '0';
-            setTimeout(() => {
-                el.style.maxHeight = height + 'px';
-                done();
-            }, 2);
-        } else {
-            done();
-        }
-    }
-
-    private animAfterEnter(el): void {
-        if (this.animIsActive) {
-            setTimeout(() => {
-                el.style.maxHeight = 'none';
-            }, 300);
-        }
-    }
-
-    private animLeave(el, done): void {
-        if (this.animIsActive) {
-            let height: number = el.clientHeight;
-            el.style.maxHeight = height + 'px';
-            setTimeout(() => {
-                el.style.maxHeight = '0';
-            }, 0);
-            setTimeout(() => {
-                done();
-            }, 300);
-        } else {
-            done();
-        }
     }
 
     private get typeIsRegular(): boolean {

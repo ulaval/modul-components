@@ -189,9 +189,7 @@ $m-accordion--color--border: $m-color--grey--light;
     }
 
     &__body {
-        transition: 0.3s max-height ease;
-        overflow: hidden;
-        height: auto;
+        @include transitionAccordion;
     }
 
     &__hidden {
