@@ -8,8 +8,9 @@
             <m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>
             <slot>Text field</slot>
         </label>
-        <input class="m-text-field__input"
-            ref="input" @focus="onFocus"
+        <input class="m-text-field__input" :class="[ 'is-type-' + propsType ]"
+            ref="input"
+            @focus="onFocus"
             :disabled="isDisabled"
             @blur="onBlur"
             v-model="propsValue"

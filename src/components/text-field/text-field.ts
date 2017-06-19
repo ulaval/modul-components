@@ -5,12 +5,17 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './text-field.html?style=./text-field.scss';
 import { TEXT_FIELD_NAME } from '../component-names';
 
+export type MTexteFieldType = 'text' | 'password' | 'email' | 'url' | 'tel';
+export type MTexteFieldState = 'default' | 'disabled' | 'error';
+
 @WithRender
 @Component
 export class MTexteField extends Vue {
 
+    @Prop({ default: 'text' })
+    public type: MTexteFieldType;
     @Prop({ default: 'default' })
-    public state: string;
+    public state: MTexteFieldState;
     @Prop({ default: '' })
     public value: string;
     @Prop({ default: '' })
@@ -26,7 +31,8 @@ export class MTexteField extends Vue {
 
     public componentName: string = TEXT_FIELD_NAME;
 
-    private propsState: string;
+    private propsType: MTexteFieldType;
+    private propsState: MTexteFieldState;
     private propsValue: string;
     private propsDefaultText: string;
     private propsIsSelectionActive: boolean;
@@ -37,7 +43,8 @@ export class MTexteField extends Vue {
     private isFocusActive: boolean = false;
 
     private beforeMount(): void {
-        this.propsState = this.$props.state == undefined ? 'default' : this.$props.state;
+        this.propsType = this.$props.type;
+        this.propsState = this.$props.state;
         this.propsValue = this.$props.value;
         this.propsIsSelectionActive = this.$props.isSelectionActive;
         this.propsDefaultText = this.$props.defaultText;
@@ -45,6 +52,13 @@ export class MTexteField extends Vue {
         this.hasHelperText = this.$props.helperMessage != '';
         this.checkHasValue();
         this.checkHasDefaultText();
+    }
+
+    private mounted() {
+        if (this.propsIsSelectionActive) {
+            // Set attribute type on input refs
+            this.$refs.input['setAttribute']('type', this.propsType);
+        }
     }
 
     private onFocus(event): void {
@@ -73,7 +87,7 @@ export class MTexteField extends Vue {
         event.preventDefault();
     }
 
-    private checkHasValue() {
+    private checkHasValue(): void {
         this.isValueEmpty = String(this.propsValue).length == 0 ? true : false;
     }
 
@@ -82,7 +96,13 @@ export class MTexteField extends Vue {
     }
 
     private get hasError(): boolean {
-        return this.$props.errorMessage != '';
+        if (this.$props.errorMessage != '' || this.$props.state == 'error') {
+            this.propsState = 'error';
+            return true;
+        } else if (this.propsState != 'disabled') {
+            this.propsState = 'default';
+        }
+        return false;
     }
 
     private checkHasDefaultText() {
