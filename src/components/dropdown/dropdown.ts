@@ -42,13 +42,13 @@ export class MDropdown extends Vue {
     public textElement: string = '';
 
     private elementsSorted: Array<string>;
-    // private elementsSortedFiltered: Array<string>;
+
     private nullValueText: string;
     private nullValueAvailable: boolean;
 
     @Watch('textElement')
     public textElementChanged(value): void {
-        console.log(value);
+        // console.log(value);
     }
 
     @Watch('elements')
@@ -56,22 +56,34 @@ export class MDropdown extends Vue {
         this.prepareList();
     }
 
-    public get computedElementsCount(): number {
+    public get elementsCount(): number {
         return this.elements.length;
     }
 
-    public created() {
+    public get elementsSortedFiltered(): Array<string> {
+        if ((this.textElement == '') || (this.textElement == this.propsInvite) || (this.textElement == this.propsSelectedElement)) {
+            return this.elementsSorted;
+        }
+
+        let r: Array<string> = this.elementsSorted.filter((element) => {
+            return element.match(this.textElement);
+        });
+        console.log(r);
+        return r;
 
     }
 
-    public mounted() {
+    public created() {
         // Copy of props to avoid override on re-render
         this.propsSelectedElement = this.$props.selectedElement;
         this.propsInvite = this.$props.invite;
 
-        // By default, value of the dropdown is the invite. Will be override by selectedElement if there one
-        this.textElement = this.propsInvite;
+        // Must run before computed data
         this.prepareList();
+    }
+
+    public mounted() {
+        this.adjustWidth();
     }
 
     public selectElement($event, element: string): void {
@@ -131,8 +143,8 @@ export class MDropdown extends Vue {
 
         let width: number = 0;
 
-        if (this.elementsSorted && this.elementsSorted.length > 0) {
-            for (let element of this.elementsSorted) {
+        if (this.elements && this.elements.length > 0) {
+            for (let element of this.elements) {
                 width = Math.max(width, this.getTextWidth(hiddenField, this.getElementListText(element)));
             }
         } else {
@@ -152,7 +164,7 @@ export class MDropdown extends Vue {
     }
 
     private prepareList(): void {
-        let elementsSort: string[] = new Array();
+        let elementsSorted: string[] = new Array();
 
         if (this.elements) {
             if (this.sort != NO_SORT) {
@@ -160,10 +172,10 @@ export class MDropdown extends Vue {
                 // elementsSort = this.$filter<Function>(parametres[0])(this.elements, parametres[1], parametres[2]);
 
                 // TODO: Faire le tri
-                elementsSort = this.elements.slice(0);
+                elementsSorted = this.elements.slice(0);
             } else {
                 // Copy the list without sorting
-                elementsSort = this.elements.slice(0);
+                elementsSorted = this.elements.slice(0);
             }
             // if (this.valeurNullePresente) {
             //     elementsTries.splice(0, 0, this.valeurNulleTexte);
@@ -180,13 +192,13 @@ export class MDropdown extends Vue {
                         this.propsSelectedElement = this.elements[0];
                     }
                     this.textElement = this.getSelectedElementText();
+                } else {
+                    this.textElement = this.propsInvite;
                 }
             }
         }
 
-        this.elementsSorted = elementsSort;
-        // this.elementsSortedFiltered = elementsSort;
-        this.adjustWidth();
+        this.elementsSorted = elementsSorted;
 
         // if (!this.elements || this.elements.length === 0) {
         //     if(elements !== old) {

@@ -3,15 +3,15 @@
 
     <m-popper trigger="click" :options="{placement: 'bottom'}" :close-on-content-click="true" :toggle-on-reference-click="false">
         <ul class="m-popper__popper m-dropdown__elements"
-            v-if="computedElementsCount > 0"
+            v-if="elementsCount > 0"
             ref="mDropdownElements">
-            <li v-for="(element, index) in elementsSorted"
+            <li v-for="(element, index) in elementsSortedFiltered"
                 @click="selectElement($event, element)"
                 class="m-dropdown__element"
                 :class="{'m-dropdown__element--active': element === propsSelectedElement}"
                 :key="index"
                 :data-index="index">
-                <span class="m-dropdown__element-text" v-once>
+                <span class="m-dropdown__element-text">
                     {{ getElementListText(element) }}
                 </span>
             </li>
@@ -30,5 +30,7 @@
               v-if="!isEditabled">
             {{ textElement }}
         </span>
+
+        <!--<m-text-field ref="mDropdownValue" slot="reference" :value="textElement"></m-text-field>-->
     </m-popper>
 </div>
