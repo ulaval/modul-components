@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
+import { normalizeString } from '../../utils/str';
 
 const UNDEFINED: string = 'undefined';
 const NO_SORT: string = 'none';
@@ -27,6 +28,8 @@ export class MDropdown extends Vue {
     public nullValue: string;
     @Prop({ default: SORT_ALPHABETICALLY })
     public sort: string;
+    @Prop({ default: false })
+    public widthFromCss: boolean;
     // @Prop({ default: false })
     // public name: boolean;
     // @Prop({ default: false })
@@ -46,6 +49,8 @@ export class MDropdown extends Vue {
     private nullValueText: string;
     private nullValueAvailable: boolean;
 
+    // private updateEnCours: number;
+
     @Watch('textElement')
     public textElementChanged(value): void {
         // console.log(value);
@@ -53,7 +58,7 @@ export class MDropdown extends Vue {
 
     @Watch('elements')
     public elementChanged(value): void {
-        this.prepareList();
+        this.prepareElements();
     }
 
     public get elementsCount(): number {
@@ -61,16 +66,27 @@ export class MDropdown extends Vue {
     }
 
     public get elementsSortedFiltered(): Array<string> {
+        // let filteredElements: Array<string> = this.elementsSorted;
+
+        // if (this.updateEnCours) {
+        //     clearTimeout(this.updateEnCours);
+        // }
+
+        // this.updateEnCours = window.setTimeout(
+        //     () => filteredElements = this.filterElements()
+        // , 300);
+
+        // return filteredElements;
+
         if ((this.textElement == '') || (this.textElement == this.propsInvite) || (this.textElement == this.propsSelectedElement)) {
             return this.elementsSorted;
         }
 
-        let r: Array<string> = this.elementsSorted.filter((element) => {
-            return element.match(this.textElement);
+        let filteredElements: Array<string> = this.elementsSorted.filter((element) => {
+            return normalizeString(element).match(normalizeString(this.textElement));
         });
-        console.log(r);
-        return r;
 
+        return filteredElements;
     }
 
     public created() {
@@ -79,11 +95,17 @@ export class MDropdown extends Vue {
         this.propsInvite = this.$props.invite;
 
         // Run in created() to run before computed data
-        this.prepareList();
+        this.prepareElements();
     }
 
     public mounted() {
-        this.adjustWidth();
+        if (!this.widthFromCss) {
+            this.adjustWidth();
+        } else {
+            let parentElement: HTMLElement = this.$refs.mDropdown as HTMLElement;
+            let childElement: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
+            childElement.style.width = parentElement.offsetWidth + 'px';
+        }
     }
 
     public selectElement($event, element: string): void {
@@ -108,8 +130,8 @@ export class MDropdown extends Vue {
 
         if ((typeof this.propsSelectedElement == UNDEFINED) && !(typeof this.invite == UNDEFINED)) {
             text = this.invite;
-        // } else if (typeof this.propsSelectedElement == UNDEFINED || this.propsSelectedElement == this.nullValueText) {
-        //     text = this.nullValueText;
+            // } else if (typeof this.propsSelectedElement == UNDEFINED || this.propsSelectedElement == this.nullValueText) {
+            //     text = this.nullValueText;
         } else {
             text = this.getElementListText(this.propsSelectedElement);
         }
@@ -163,7 +185,7 @@ export class MDropdown extends Vue {
         return element.offsetWidth;
     }
 
-    private prepareList(): void {
+    private prepareElements(): void {
         let elementsSorted: string[] = new Array();
 
         if (this.elements) {
@@ -211,6 +233,18 @@ export class MDropdown extends Vue {
         //     this.inactif = false;
         // }
     }
+
+    // private filterElements(): Array<string> {
+    //     if ((this.textElement == '') || (this.textElement == this.propsInvite) || (this.textElement == this.propsSelectedElement)) {
+    //         return this.elementsSorted;
+    //     }
+
+    //     let filteredElements: Array<string> = this.elementsSorted.filter((element) => {
+    //         return normalizeString(element).match(normalizeString(this.textElement));
+    //     });
+
+    //     return filteredElements;
+    // }
 }
 
 const DropdownPlugin: PluginObject<any> = {
