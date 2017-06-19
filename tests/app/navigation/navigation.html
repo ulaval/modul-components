@@ -1,9 +1,15 @@
 <div>
     <h2 class="m-no-margin-top">Components list</h2>
+    <h2 class="m-no-margin-top">
+        <m-link url="attributes">
+            Attributes list
+        </m-link>
+    </h2>
+
     <nav>
         <ul>
             <li v-for="route in routes">
-                <m-link :url="route">{{route}}</m-link></router-link>
+                <m-link :url="route">{{route}}</m-link>
             </li>
         </ul>
     </nav>
