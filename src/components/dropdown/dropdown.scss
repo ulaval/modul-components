@@ -1,39 +1,82 @@
 @import 'abstracts/variables';
+$m-dropdown--color--hover: $m-color--grey--lightest;
+$m-dropdown--color--select: $m-color--grey--lighter;
+$m-dropdown--color--active: $m-color--primary--lightest;
 
-// CSS temporaire pour développer
 .m-dropdown {
-    box-sizing: content-box;
-    padding-top: $m-padding--l;
-}
+    // box-sizing: content-box;
+    display: inline-flex;
+    flex-direction: column;
 
-.m-dropdown__elements {
-    list-style: none;
-    text-align: left;
-    padding: $m-padding;
-    margin: 0;
-}
+    &__list {
+        list-style: none;
+        text-align: left;
+        margin: 0;
+        padding: 0;
+        background: $m-color--white;
+        user-select: none;
+        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
+        max-height: 158px;
+        overflow-x: hidden;
+        overflow-y: auto;
 
-.m-dropdown__element {
-    padding: $m-padding--xs 0;
-    margin: 0;
-}
+        &.is-hidden {
+            position: absolute;
+            visibility: hidden;
+        }
 
-.m-dropdown__element--active {
-    font-weight: bold;
-}
+        &__element {
+            margin: 0;
+            width: 100%;
 
-.m-dropdown__element-link {
-    cursor: pointer;
+            &:not(.is-selected) {
+                .m-dropdown__list__element__text {
+                    cursor: pointer;
+                    transition: 0.3s background ease;
+                }
+            }
+
+            &.is-selected {
+                .m-dropdown__list__element__text {
+                    cursor: default;
+                    background: $m-dropdown--color--select;
+                }
+            }
+
+            &.is-focus {
+                .m-dropdown__list__element__text {
+                    background: $m-dropdown--color--hover;
+                }
+            }
+
+            &__text {
+                box-sizing: border-box;
+                display: inline-flex;
+                align-items: center;
+                width: 100%;
+                padding: $m-margin $m-padding;
+                color: $m-text-color;
+                text-decoration: none;
+
+                &:hover {
+                    background: $m-dropdown--color--hover;
+                }
+
+                &:active {
+                    background: $m-dropdown--color--active;
+                }
+            }
+        }
+    }
 }
 
 .m-dropdown__value {
+    box-sizing: border-box;
     position: relative;
     transition: color 0.3s ease, border-color 0.3s ease;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    // min-width: 130px;
-    // max-width: 250px;
     height: 32px;
     padding: 0 $m-padding--xs;
     background: #fff;

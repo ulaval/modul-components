@@ -1,17 +1,21 @@
 <div class="m-dropdown" ref="mDropdown">
-    <ul class="m-popper__popper m-dropdown__elements" style="visibility: hidden;"><span class="m-dropdown__element-text" ref="mDropdownCalculate"></span></li></ul>
+    <ul class="m-dropdown__list is-hidden" aria-hidden="true">
+        <li class="m-dropdown__list__element">
+            <span class="m-dropdown__list__element__text" ref="mDropdownCalculate"></span>
+        </li>
+    </ul>
 
-    <m-popper trigger="click" :options="{placement: 'bottom'}" :close-on-content-click="true" :toggle-on-reference-click="false">
-        <ul class="m-popper__popper m-dropdown__elements"
-            v-if="elementsCount > 0"
+    <m-popper trigger="click" :options="{ placement: 'bottom' }" :close-on-content-click="true" :toggle-on-reference-click="false">
+        <ul class="m-dropdown__list"
+            v-if="computedElementsCount > 0"
             ref="mDropdownElements">
             <li v-for="(element, index) in elementsSortedFiltered"
                 @click="selectElement($event, element)"
-                class="m-dropdown__element"
-                :class="{'m-dropdown__element--active': element === propsSelectedElement}"
+                class="m-dropdown__list__element"
+                :class="{ 'is-selected': element === propsSelectedElement }"
                 :key="index"
                 :data-index="index">
-                <span class="m-dropdown__element-text">
+                <span class="m-dropdown__list__element__text" v-once>
                     {{ getElementListText(element) }}
                 </span>
             </li>
