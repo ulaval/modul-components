@@ -8,12 +8,17 @@ import { ModulVue } from '../../utils/vue';
 
 @WithRender
 @Component
-export class MLang extends ModulVue {
+export class MI18n extends ModulVue {
     @Prop()
     public i18nKey: string;
 
-    public componentName: string = I18N_NAME;
     public text: string = '';
+
+    public created(): void {
+        if (!this.$i18n) {
+            throw new Error('MI18n -> this.$i18n is undefined, you must register the i18n plugin.');
+        }
+    }
 
     public mounted(): void {
         this.translate();
@@ -27,14 +32,16 @@ export class MLang extends ModulVue {
     private translate(): void {
         if (this.i18nKey) {
             this.text = this.$i18n.translate(this.i18nKey);
+        } else {
+            this.text = '';
         }
     }
 }
 
-const LangPlugin: PluginObject<any> = {
+const I18nPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(I18N_NAME, MLang);
+        v.component(I18N_NAME, MI18n);
     }
 };
 
-export default LangPlugin;
+export default I18nPlugin;

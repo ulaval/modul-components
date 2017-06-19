@@ -1,12 +1,12 @@
-import '../../../tests/app/polyfills';
+import '../polyfills';
 import Vue from 'vue';
 import axios from 'axios';
-import http, { HttpService } from './http';
+import httpPlugin, { HttpService } from './http';
 import { RequestConfig } from './rest';
 
 describe('http plugin', () => {
-    it('should register $http on vue instance', () => {
-        Vue.use(http);
+    it('registers $http on vue instance', () => {
+        Vue.use(httpPlugin);
 
         Vue.use({
             install(v, options) {
@@ -15,8 +15,8 @@ describe('http plugin', () => {
         });
     });
 
-    it('should register $http on vue prototype', () => {
-        Vue.use(http);
+    it('registers $http on vue prototype', () => {
+        Vue.use(httpPlugin);
 
         let Ex = Vue.extend({
             created: function() {

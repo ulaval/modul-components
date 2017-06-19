@@ -1,3 +1,7 @@
-export function startsWith(text: string | undefined, value: string | undefined): boolean {
-    return (!text && !value) || (!!text && !!value && text.slice(0, value.length) == value);
+export function startsWith(text: string | undefined, startsWith: string | undefined): boolean {
+    let undef: string | undefined = undefined;
+    return (text === undef && startsWith === undef) // both undef
+        || (text !== undef && startsWith !== undef && !text && !startsWith) // both empty
+        || (!!text && startsWith !== undef && !startsWith) // startsWith empty
+        || (!!text && !!startsWith && text.slice(0, startsWith.length) == startsWith);
 }
