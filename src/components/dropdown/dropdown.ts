@@ -78,7 +78,7 @@ export class MDropdown extends Vue {
         this.propsSelectedElement = this.$props.selectedElement;
         this.propsInvite = this.$props.invite;
 
-        // Must run before computed data
+        // Run in created() to run before computed data
         this.prepareList();
     }
 
