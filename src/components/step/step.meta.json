@@ -1,6 +1,28 @@
 {
     "tag": "m-step",
     "name": "m-step-meta:name",
+    "attributes": {
+        "state": {
+            "type": "string",
+            "values": [
+                "warning",
+                "in-progress",
+                "information",
+                "disabled"
+            ],
+            "default": "disabled"
+        },
+        "isOpen": {
+            "type": "boolean",
+            "default": false
+        },
+        "isObligatory": {
+            "type": "boolean",
+            "default": true
+        },
+        "iconName": {
+        }
+    },
     "overview": [
         {
             "type": "rubric",

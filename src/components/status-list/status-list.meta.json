@@ -1,6 +1,12 @@
 {
     "tag": "m-status-list",
     "name": "m-status-list-meta:name",
+    "attributes": {
+        "states": {
+            "type": "MStatusListData",
+            "description": "m-status-list-meta:states-desc"
+        }
+    },
     "overview": [
         {
             "type": "rubric",

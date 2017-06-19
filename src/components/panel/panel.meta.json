@@ -1,6 +1,40 @@
 {
     "tag": "m-panel",
     "name": "m-panel-meta:name",
+    "attributes": {
+        "type": {
+            "type": "string",
+            "values": [
+                "secondary",
+                "primary"
+            ],
+            "default": "primary"
+        },
+        "hasShadow": {
+            "type": "boolean",
+            "default": true
+        },
+        "hasBorder": {
+            "type": "boolean",
+            "default": true
+        },
+        "hasPadding": {
+            "type": "boolean",
+            "default": true
+        },
+        "hasPaddingHeader": {
+            "type": "boolean",
+            "default": true
+        },
+        "hasPaddingBody": {
+            "type": "boolean",
+            "default": true
+        },
+        "hasPaddingFooter": {
+            "type": "boolean",
+            "default": true
+        }
+    },
     "overview": [
         {
             "type": "rubric",

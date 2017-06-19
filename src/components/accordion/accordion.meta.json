@@ -13,11 +13,7 @@
         },
         "is-open": {
             "type": "boolean",
-            "values": [
-                "false",
-                "true"
-            ],
-            "default": 0
+            "default": false
         },
         "icon-position": {
             "type": "string",

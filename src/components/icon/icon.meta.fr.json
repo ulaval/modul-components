@@ -1,6 +1,8 @@
 {
     "m-icon-meta": {
         "name": "Icône",
-        "context-of-use": "Décrire ici le contexte d'utilisation de l'icône."
+        "context-of-use": "Décrire ici le contexte d'utilisation de l'icône.",
+        "name-desc": "SVG file name.",
+        "svg-title-desc": "SVG title for accessibility."
     }
 }

@@ -1,6 +1,18 @@
 {
     "tag": "m-link",
     "name": "m-link-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "router-link",
+                "button",
+                "external-link",
+                "link"
+            ],
+            "default": "router-link"
+        }
+    },
     "overview": [
         {
             "type": "rubric",

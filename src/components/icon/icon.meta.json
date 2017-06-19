@@ -1,6 +1,24 @@
 {
     "tag": "m-icon",
     "name": "m-icon-meta:name",
+    "attributes": {
+        "name": {
+            "type": "string",
+            "description": "m-icon-meta:name-desc"
+        },
+        "svgTitle": {
+            "type": "string",
+            "description": "m-icon-meta:svg-title-desc"
+        },
+        "width": {
+            "type": "size",
+            "default": "100%"
+        },
+        "heigth": {
+            "type": "size",
+            "default": "100%"
+        }
+    },
     "overview": [{
             "type": "rubric",
             "title": "meta:context-of-use",

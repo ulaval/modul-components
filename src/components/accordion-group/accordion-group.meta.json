@@ -4,11 +4,7 @@
     "attributes": {
         "areAllOpen": {
             "type": "boolean",
-            "values": [
-                "false",
-                "true"
-            ],
-            "default": 0
+            "default": false
         },
         "mode": {
             "type": "string",
