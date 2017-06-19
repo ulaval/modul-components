@@ -87,8 +87,7 @@ $m-step--badge--size: 20px;
 
     .m-step__body {
         margin-left: calc(#{$m-step--icon--size} + #{$m-margin});
-        transition: 0.3s max-height ease;
-        overflow: hidden;
-        height: auto;
+
+        @include transitionAccordion;
     }
 }
