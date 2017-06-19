@@ -1,13 +1,10 @@
 <div>
-    <h2 class="m-no-margin-top">Components list</h2>
     <h2 class="m-no-margin-top">
-        <m-link url="attributes">
-            Attributes list
-        </m-link>
+        <m-link url="attributes">Attributes list</m-link>
     </h2>
-
+    <h2>Components list</h2>
     <nav>
-        <ul>
+        <ul class="m-list-bullet">
             <li v-for="route in routes">
                 <m-link :url="route">{{route}}</m-link>
             </li>
