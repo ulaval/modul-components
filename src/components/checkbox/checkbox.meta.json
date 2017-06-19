@@ -1,6 +1,20 @@
 {
     "tag": "m-checkbox",
     "name": "m-checkbox-meta:name",
+    "attributes": {
+        "isChecked": {
+            "type": "boolean",
+            "default": false
+        },
+        "position": {
+            "type": "string",
+            "values": [
+                "right",
+                "left"
+            ],
+            "default": 1
+        }
+    },
     "overview": [
         {
             "type": "rubric",

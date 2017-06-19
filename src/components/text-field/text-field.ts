@@ -6,7 +6,7 @@ import WithRender from './text-field.html?style=./text-field.scss';
 import { TEXT_FIELD_NAME } from '../component-names';
 
 export type MTexteFieldType = 'text' | 'password' | 'email' | 'url' | 'tel';
-export type MTexteFieldState = 'default' | 'disabled' | 'error';
+export type MTexteFieldState = 'default' | 'disabled' | 'error' | 'valid';
 
 @WithRender
 @Component

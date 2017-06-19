@@ -11,12 +11,12 @@
             "description": "m-icon-meta:svg-title-desc"
         },
         "width": {
-            "type": "size",
-            "default": "100%"
+            "type": "string",
+            "default": "1em"
         },
         "heigth": {
-            "type": "size",
-            "default": "100%"
+            "type": "string",
+            "default": "1em"
         }
     },
     "overview": [{

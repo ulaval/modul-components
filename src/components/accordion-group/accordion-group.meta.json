@@ -9,11 +9,11 @@
         "mode": {
             "type": "string",
             "values": [
-                "no-style",
                 "regular",
-                "light"
+                "light",
+                "no-style"
             ],
-            "default": 1
+            "default": 0
         }
     },
     "overview": [

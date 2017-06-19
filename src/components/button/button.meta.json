@@ -23,11 +23,11 @@
         "type": {
             "type": "string",
             "values": [
-                "reset",
+                "button",
                 "submit",
-                "button"
+                "reset"
             ],
-            "default": 2
+            "default": 0
         }
     },
     "overview": [

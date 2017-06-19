@@ -1,6 +1,48 @@
 {
     "tag": "m-text-field",
     "name": "m-text-field-meta:name",
+    "attributes": {
+        "type": {
+            "type": "string",
+            "values": [
+                "text",
+                "password",
+                "email",
+                "url",
+                "tel"
+            ],
+            "default": 0
+        },
+        "state": {
+            "type": "string",
+            "values": [
+                "default",
+                "disabled",
+                "error",
+                "valid"
+            ],
+            "default": 0
+        },
+        "value": {
+            "type": "string"
+        },
+        "default-text": {
+            "type": "string"
+        },
+        "isSelectionActive": {
+            "type": "boolean",
+            "default": true
+        },
+        "iconName": {
+            "type": "string"
+        },
+        "errorMessage": {
+            "type": "string"
+        },
+        "helperMessage": {
+            "type": "string"
+        }
+    },
     "overview": [
         {
             "type": "rubric",

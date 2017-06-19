@@ -10,7 +10,15 @@
                 "external-link",
                 "link"
             ],
-            "default": "router-link"
+            "default": 0
+        },
+        "url" : {
+            "type": "string",
+            "default": "/"
+        },
+        "is-without-visit" : {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": [

@@ -5,25 +5,25 @@
         "mode": {
             "type": "string",
             "values": [
-                "no-style",
+                "regular",
                 "light",
-                "regular"
+                "no-style"
             ],
             "default": 0
         },
-        "is-open": {
+        "isOpen": {
             "type": "boolean",
             "default": false
         },
-        "icon-position": {
+        "iconPosition": {
             "type": "string",
             "values": [
                 "right",
                 "left"
             ],
-            "default": 0
+            "default": 1
         },
-        "icon-style": {
+        "iconStyle": {
             "type": "string",
             "values": [
                 "default",
@@ -31,7 +31,7 @@
             ],
             "default": 0
         },
-        "icon-size": {
+        "iconSize": {
             "type": "string",
             "values": [
                 "small",
