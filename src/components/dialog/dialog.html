@@ -2,10 +2,14 @@
     <div class="m-dialog__backdrop" @click.self="onBackdropClick">
         <article class="m-dialog__wrap">
             <header class="m-dialog__header" v-if="hasTitle">
-                <h2 class="m-dialog__header__title"><slot name="title"></slot></h2>
+                <h2 class="m-dialog__header__title">
+                    <slot name="title"></slot>
+                </h2>
             </header>
             <div class="m-dialog__body">
-                <slot>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore doloremque odio, et dignissimos qui recusandae doloribus nobis ipsam dolore cupiditate possimus quia commodi sit hic dolorum aperiam. Consectetur quisquam, praesentium.
+                <slot>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore doloremque odio, et dignissimos qui recusandae
+                    doloribus nobis ipsam dolore cupiditate possimus quia commodi sit hic dolorum aperiam. Consectetur quisquam,
+                    praesentium.
                 </slot>
             </div>
             <footer class="m-dialog__footer">

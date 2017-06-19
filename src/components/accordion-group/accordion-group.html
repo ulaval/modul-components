@@ -4,8 +4,12 @@
             <span class="m-accordion-group__header__title" v-if="hasTitle">
                 <slot name="title"></slot>
             </span>
-            <m-link mode="button" @onClick="openAllAccordions" v-if="!propsAreAllOpen"><m-i18n i18n-key="m-accordion-group:open-all"></m-i18n></m-link>
-            <m-link mode="button" @onClick="closeAllAccordions" v-if="propsAreAllOpen"><m-i18n i18n-key="m-accordion-group:close-all"></m-i18n></m-link>
+            <m-link mode="button" @onClick="openAllAccordions" v-if="!propsAreAllOpen">
+                <m-i18n i18n-key="m-accordion-group:open-all"></m-i18n>
+            </m-link>
+            <m-link mode="button" @onClick="closeAllAccordions" v-if="propsAreAllOpen">
+                <m-i18n i18n-key="m-accordion-group:close-all"></m-i18n>
+            </m-link>
         </header>
         <div class="m-accordion-group__body">
             <slot>
