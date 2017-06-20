@@ -5,7 +5,7 @@
         </li>
     </ul>
 
-    <m-popper trigger="click" :options="{ placement: 'bottom' }" :close-on-content-click="true" :toggle-on-reference-click="false" :disabled="stateDisabled">
+    <m-popper trigger="click" :options="{ placement: 'bottom' }" :close-on-content-click="true" :toggle-on-reference-click="false" :disabled="stateDisabled"  mode="dropdown">
         <ul class="m-dropdown__list"
             ref="mDropdownElements">
             <li v-for="(element, index) in elementsSortedFiltered"

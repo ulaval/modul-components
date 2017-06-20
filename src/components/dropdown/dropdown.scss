@@ -9,16 +9,17 @@ $m-dropdown--color--active: $m-color--primary--lightest;
     flex-direction: column;
 
     &__list {
-        list-style: none;
-        text-align: left;
-        margin: 0;
-        padding: 0;
-        background: $m-color--white;
-        user-select: none;
-        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
-        max-height: 158px;
+        transition: 0.3s max-height ease;
+        height: auto;
         overflow-x: hidden;
         overflow-y: auto;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        list-style: none;
+        text-align: left;
+        background: $m-color--white;
+        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
 
         &.is-hidden {
             position: absolute;

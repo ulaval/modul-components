@@ -1,7 +1,9 @@
 <span class="m-popper">
-    <transition class="m-popper__transition" :name="transition" @after-leave="doDestroy">
-        <span
-            ref="m-popper__popper"
+    <transition @enter="animEnter"
+        @after-enter="animAfterEnter"
+        @leave="animLeave"
+        @after-leave="doDestroy">
+        <span ref="m-popper__popper"
             :aria-hidden="!showPopper"
             v-show="!disabled && showPopper">
             <slot class="m-popper__content">{{ content }}</slot>

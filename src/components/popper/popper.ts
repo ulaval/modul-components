@@ -19,8 +19,8 @@ export class MPopper extends Vue {
 
     @Prop({
         default: 'hover',
-        validator: (value) => ['click', 'hover'].indexOf(value) > -1 }
-    )
+        validator: (value) => ['click', 'hover'].indexOf(value) > -1
+    })
     public trigger: string;
     @Prop({ default: false })
     public disabled: boolean;
@@ -36,13 +36,13 @@ export class MPopper extends Vue {
     public appendToBody: boolean;
     @Prop({ default: false })
     public visibleArrow: boolean;
-    @Prop({ default: '' })
-    public transition: string;
+    @Prop({ default: 'default' })
+    public mode: string;
     @Prop()
     public options: Object;
-    @Prop({ default: false})
+    @Prop({ default: false })
     public closeOnContentClick: boolean;
-    @Prop({ default: true})
+    @Prop({ default: true })
     public toggleOnReferenceClick: boolean;
 
     public componentName: string = POPPER_NAME;
@@ -54,12 +54,15 @@ export class MPopper extends Vue {
         placement: 'bottom',
         gpuAcceleration: false,
         modifiers: {},
-        onCreate: () => {}
+        onCreate: () => { }
     };
 
+    private propsMode: string;
     private popper: Node | undefined;
     private appended: boolean;
     private _timer: number;
+    private dropdownMaxHeight: number = 198;
+    private dropdownClass: string = '.m-dropdown__list';
 
     @Watch('showPopper')
     public showPopperChanged(value) {
@@ -71,16 +74,17 @@ export class MPopper extends Vue {
         }
     }
 
-    @Watch('forceShow', {immediate: true})
+    @Watch('forceShow', { immediate: true })
     public forceShowChanged(value) {
         this[value ? 'doShow' : 'doClose']();
     }
 
     public created() {
-        this.popperOptions = {...this.popperOptions, ...this.options};
+        this.popperOptions = { ...this.popperOptions, ...this.options };
     }
 
     public mounted() {
+        this.propsMode = this.$props.mode;
         this.referenceElm = this.reference || this.$slots.reference[0].elm;
         this.popper = this.$slots.default[0].elm;
 
@@ -150,8 +154,8 @@ export class MPopper extends Vue {
                 const boundariesElement = document.querySelector(this.boundariesSelector);
 
                 if (boundariesElement) {
-                    this.popperOptions.modifiers = {...this.popperOptions.modifiers};
-                    this.popperOptions.modifiers.preventOverflow = {...this.popperOptions.modifiers.preventOverflow};
+                    this.popperOptions.modifiers = { ...this.popperOptions.modifiers };
+                    this.popperOptions.modifiers.preventOverflow = { ...this.popperOptions.modifiers.preventOverflow };
                     this.popperOptions.modifiers.preventOverflow.boundariesElement = boundariesElement;
                 }
             }
@@ -220,6 +224,46 @@ export class MPopper extends Vue {
 
     destroyed() {
         this.destroyPopper();
+    }
+
+    private animEnter(element, done): void {
+        if (this.propsMode == 'dropdown') {
+            let el = element.querySelector(this.dropdownClass);
+            el.style.overflowY = 'hidden';
+            el.style.maxHeight = '0';
+            setTimeout(() => {
+                el.style.maxHeight = this.dropdownMaxHeight + 'px';
+                done();
+            }, 0);
+        } else {
+            done();
+        }
+    }
+
+    private animAfterEnter(element): void {
+        if (this.propsMode == 'dropdown') {
+            let el = element.querySelector(this.dropdownClass);
+            setTimeout(() => {
+                el.style.maxHeight = this.dropdownMaxHeight + 'px';
+                el.style.overflowY = 'auto';
+            }, 300);
+        }
+    }
+
+    private animLeave(element, done): void {
+        if (this.propsMode == 'dropdown') {
+            let el = element.querySelector(this.dropdownClass);
+            el.style.maxHeight = this.dropdownMaxHeight + 'px';
+            el.style.overflowY = 'hidden';
+            el.style.maxHeight = '0';
+            setTimeout(() => {
+                el.style.maxHeight = this.dropdownMaxHeight + 'px';
+                el.style.overflowY = 'auto';
+                done();
+            }, 300);
+        } else {
+            done();
+        }
     }
 }
 
