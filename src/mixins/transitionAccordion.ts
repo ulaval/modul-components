@@ -3,7 +3,6 @@ import Vue from 'vue';
 import { PluginObject } from 'vue';
 
 @Component
-
 export class TransitionAccordionMixin extends Vue {
 
     private animEnter(el: HTMLElement, done): void {
