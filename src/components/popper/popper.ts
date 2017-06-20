@@ -229,10 +229,11 @@ export class MPopper extends Vue {
     private animEnter(element, done): void {
         if (this.propsMode == 'dropdown') {
             let el = element.querySelector(this.dropdownClass);
+            let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';
-            setTimeout(() => {
-                el.style.maxHeight = this.dropdownMaxHeight + 'px';
+            setTimeout( () => {
+                el.style.maxHeight = height + 'px';
                 done();
             }, 0);
         } else {
@@ -253,12 +254,12 @@ export class MPopper extends Vue {
     private animLeave(element, done): void {
         if (this.propsMode == 'dropdown') {
             let el = element.querySelector(this.dropdownClass);
-            el.style.maxHeight = this.dropdownMaxHeight + 'px';
+            let height: number = el.clientHeight;
+            el.style.maxHeight = height + 'px';
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';
             setTimeout(() => {
-                el.style.maxHeight = this.dropdownMaxHeight + 'px';
-                el.style.overflowY = 'auto';
+                el.style.maxHeight = 'none';
                 done();
             }, 300);
         } else {

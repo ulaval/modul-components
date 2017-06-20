@@ -6,20 +6,20 @@ import { PluginObject } from 'vue';
 
 export class TransitionAccordionMixin extends Vue {
 
-    private animEnter(el, done): void {
+    private animEnter(el: HTMLElement, done): void {
         if ((this as any).animIsActive) {
             let height: number = el.clientHeight;
             el.style.maxHeight = '0';
             setTimeout(() => {
                 el.style.maxHeight = height + 'px';
                 done();
-            }, 2);
+            }, 0);
         } else {
             done();
         }
     }
 
-    private animAfterEnter(el): void {
+    private animAfterEnter(el: HTMLElement): void {
         if ((this as any).animIsActive) {
             setTimeout(() => {
                 el.style.maxHeight = 'none';
@@ -27,7 +27,7 @@ export class TransitionAccordionMixin extends Vue {
         }
     }
 
-    private animLeave(el, done): void {
+    private animLeave(el: HTMLElement, done): void {
         if ((this as any).animIsActive) {
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';
