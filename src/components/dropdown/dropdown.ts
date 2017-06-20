@@ -170,7 +170,7 @@ export class MDropdown extends Vue {
         // Hidden element to calculate width
         let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
         // Input or span
-        let valueField: HTMLElement = this.$refs.mDropdownValue as HTMLElement;
+        let valueField: Vue = this.$refs.mDropdownValue as Vue;
         // List
         let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
 
@@ -187,7 +187,7 @@ export class MDropdown extends Vue {
         // hiddenField.remove();
 
         width = Math.ceil(width);
-        valueField.style.width = width + 'px';
+        valueField.$el.style.width = width + 'px';
         elements.style.width = width + 'px';
     }
 

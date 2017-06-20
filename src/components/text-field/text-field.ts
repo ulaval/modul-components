@@ -33,7 +33,7 @@ export class MTexteField extends Vue {
 
     private propsType: MTexteFieldType;
     private propsState: MTexteFieldState;
-    private propsValue: string;
+    private propsValue: string = '';
     private propsDefaultText: string;
     private propsIsSelectionActive: boolean;
     private hasIcon: boolean;
@@ -41,6 +41,19 @@ export class MTexteField extends Vue {
     private isValueEmpty: boolean = false;
     private isDefaultTextEmpty: boolean = false;
     private isFocusActive: boolean = false;
+    private isUpdating: number;
+
+    @Watch('propsValue')
+    private propsValueChanged(value): void {
+        // Delayed $emit to limit event fired
+        if (this.isUpdating) {
+            clearTimeout(this.isUpdating);
+        }
+
+        this.isUpdating = window.setTimeout(
+            () => this.$emit('onValueChanged', this.propsValue)
+        , 300);
+    }
 
     private beforeMount(): void {
         this.propsType = this.$props.type;

@@ -23,22 +23,11 @@
             </li>
         </ul>
 
-        <input type="text"
-               class="m-dropdown__value"
-               ref="mDropdownValue"
-               slot="reference"
-               v-if="isEditabled"
-               v-model="textElement"
-               :placeholder="propsInvite" />
-        <span class="m-dropdown__value"
-              ref="mDropdownValue"
-              slot="reference"
-              v-if="!isEditabled">
-            {{ textElement }}
-        </span>
-
-
+        <m-text-field ref="mDropdownValue"
+                      slot="reference"
+                      :value="textElement"
+                      :state="state"
+                      @onValueChanged="textElement = $event">
+        </m-text-field>
     </m-popper>
-
-    <!--<m-text-field  :value="textElement"></m-text-field>-->
 </div>
