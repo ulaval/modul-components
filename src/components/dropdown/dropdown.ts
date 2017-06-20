@@ -22,8 +22,8 @@ export class MDropdown extends Vue {
     public getTexteElement: Function;
     @Prop()
     public invite: string;
-    @Prop({ default: false })
-    public disabled: boolean;
+    @Prop({ default: '' })
+    public state: string;
     @Prop()
     public nullValue: string;
     @Prop({ default: SORT_ALPHABETICALLY })
@@ -46,6 +46,8 @@ export class MDropdown extends Vue {
 
     private elementsSorted: Array<string>;
 
+    private stateDisabled: boolean;
+
     private nullValueText: string;
     private nullValueAvailable: boolean;
 
@@ -61,8 +63,17 @@ export class MDropdown extends Vue {
         this.prepareElements();
     }
 
+    @Watch('state', { immediate: true })
+    public stateChanged(value): void {
+        if (value == 'disabled') {
+            this.stateDisabled = true;
+        } else {
+            this.stateDisabled = false;
+        }
+    }
+
     public get elementsCount(): number {
-        return this.elements.length;
+        return this.elementsSortedFiltered.length;
     }
 
     public get elementsSortedFiltered(): Array<string> {

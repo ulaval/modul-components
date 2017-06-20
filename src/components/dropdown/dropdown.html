@@ -1,21 +1,25 @@
-<div class="m-dropdown" ref="mDropdown">
+<div class="m-dropdown" ref="mDropdown" :class="{ 'is-disabled': stateDisabled }">
     <ul class="m-dropdown__list is-hidden" aria-hidden="true">
         <li class="m-dropdown__list__element">
             <span class="m-dropdown__list__element__text" ref="mDropdownCalculate"></span>
         </li>
     </ul>
 
-    <m-popper trigger="click" :options="{ placement: 'bottom' }" :close-on-content-click="true" :toggle-on-reference-click="false">
+    <m-popper trigger="click" :options="{ placement: 'bottom' }" :close-on-content-click="true" :toggle-on-reference-click="false" :disabled="stateDisabled">
         <ul class="m-dropdown__list"
-            v-if="elementsCount > 0"
             ref="mDropdownElements">
             <li v-for="(element, index) in elementsSortedFiltered"
+                v-if="elementsCount > 0"
                 @click="selectElement($event, element)"
                 class="m-dropdown__list__element"
                 :class="{ 'is-selected': element === propsSelectedElement }"
                 :key="index"
                 :data-index="index">
                 <span class="m-dropdown__list__element__text">{{ getElementListText(element) }}</span>
+            </li>
+            <li v-if="elementsCount <= 0"
+                class="m-dropdown__list__element">
+                <span class="m-dropdown__list__element__text">Aucun résultat</span>
             </li>
         </ul>
 
