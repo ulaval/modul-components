@@ -16,7 +16,8 @@ export interface IPopperOptions {
 @WithRender
 @Component
 export class MPopper extends Vue {
-
+    @Prop({ default: 'default' })
+    public mode: string;
     @Prop({
         default: 'hover',
         validator: (value) => ['click', 'hover'].indexOf(value) > -1
@@ -36,8 +37,6 @@ export class MPopper extends Vue {
     public appendToBody: boolean;
     @Prop({ default: false })
     public visibleArrow: boolean;
-    @Prop({ default: 'default' })
-    public mode: string;
     @Prop()
     public options: Object;
     @Prop({ default: false })
@@ -79,11 +78,11 @@ export class MPopper extends Vue {
         this[value ? 'doShow' : 'doClose']();
     }
 
-    public created() {
+    private created(): void {
         this.popperOptions = { ...this.popperOptions, ...this.options };
     }
 
-    public mounted() {
+    private mounted(): void {
         this.propsMode = this.$props.mode;
         this.referenceElm = this.reference || this.$slots.reference[0].elm;
         this.popper = this.$slots.default[0].elm;
@@ -107,7 +106,7 @@ export class MPopper extends Vue {
         this.createPopper();
     }
 
-    doToggle() {
+    private doToggle(): void {
         if (!this.forceShow) {
             if (this.toggleOnReferenceClick) {
                 this.showPopper = !this.showPopper;
@@ -117,15 +116,15 @@ export class MPopper extends Vue {
         }
     }
 
-    doShow() {
+    private doShow(): void {
         this.showPopper = true;
     }
 
-    doClose() {
+    private doClose(): void {
         this.showPopper = false;
     }
 
-    doDestroy() {
+    private doDestroy(): void {
         if (this.showPopper || !this.popperJS) {
             return;
         }
@@ -134,7 +133,7 @@ export class MPopper extends Vue {
         this.popperJS = undefined;
     }
 
-    createPopper() {
+    private createPopper(): void {
         this.$nextTick(() => {
             if (this.visibleArrow) {
                 this.appendArrow(this.popper);
@@ -169,7 +168,7 @@ export class MPopper extends Vue {
         });
     }
 
-    destroyPopper() {
+    private destroyPopper(): void {
         off(this.referenceElm, 'click', this.doToggle);
         off(this.referenceElm, 'mouseup', this.doClose);
         off(this.referenceElm, 'mousedown', this.doShow);
@@ -182,7 +181,7 @@ export class MPopper extends Vue {
         this.popperJS = undefined;
     }
 
-    appendArrow(element) {
+    private appendArrow(element): void {
         if (this.appended) {
             return;
         }
@@ -195,22 +194,22 @@ export class MPopper extends Vue {
         element.appendChild(arrow);
     }
 
-    updatePopper() {
+    private updatePopper(): void {
         this.popperJS ? this.popperJS.update() : this.createPopper();
     }
 
-    onMouseOver() {
+    private onMouseOver(): void {
         this.showPopper = true;
         clearTimeout(this._timer);
     }
 
-    onMouseOut() {
+    private onMouseOut(): void {
         this._timer = window.setTimeout(() => {
             this.showPopper = false;
         }, 10);
     }
 
-    handleDocumentClick(e) {
+    private handleDocumentClick(e): void {
         if (!this.$el || !this.referenceElm || !this.popper ||
             this.$el.contains(e.target) ||
             this.referenceElm.contains(e.target) ||
@@ -222,12 +221,12 @@ export class MPopper extends Vue {
         this.showPopper = false;
     }
 
-    destroyed() {
+    private destroyed() {
         this.destroyPopper();
     }
 
     private animEnter(element, done): void {
-        if (this.propsMode == 'dropdown') {
+        if (this.propsMode == 'dropdown' && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
             el.style.overflowY = 'hidden';
@@ -242,7 +241,7 @@ export class MPopper extends Vue {
     }
 
     private animAfterEnter(element): void {
-        if (this.propsMode == 'dropdown') {
+        if (this.propsMode == 'dropdown' && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             setTimeout(() => {
                 el.style.maxHeight = this.dropdownMaxHeight + 'px';
@@ -252,7 +251,7 @@ export class MPopper extends Vue {
     }
 
     private animLeave(element, done): void {
-        if (this.propsMode == 'dropdown') {
+        if (this.propsMode == 'dropdown' && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';
