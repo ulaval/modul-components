@@ -1,4 +1,4 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import axios, { AxiosRequestConfig, AxiosPromise, AxiosResponse } from 'axios';
 import qs from 'qs/lib';
 import { RestAdapter, RequestConfig } from './rest';
