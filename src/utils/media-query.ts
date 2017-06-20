@@ -66,6 +66,9 @@ export const BREAKING_POINT_FROM_LARGE: string = 'screen and (min-width:1024px)'
  */
 export const BREAKING_POINT_FROM_VERY_LARGE: string = 'screen and (min-width:1400px)';
 
+const MATCH: string = 'match-';
+const UNMATCH: string = 'unmatch-';
+
 export class MediaQuery {
     private eventBus: Vue = new Vue();
 
@@ -87,28 +90,35 @@ export class MediaQuery {
         this.registerEnquire(BREAKING_POINT_FROM_VERY_LARGE);
     }
 
-    public register(breakingPoint: string, callback: () => void): void {
-        this.eventBus.$on(breakingPoint, callback);
+    public register(breakingPoint: string, match: () => void, unmatch?: () => void): void {
+        this.eventBus.$on(MATCH + breakingPoint, match);
+        if (unmatch) {
+            this.eventBus.$on(UNMATCH + breakingPoint, unmatch);
+        }
 
         // registration needed to be notified if breakpoint matches, always force unregister
         this.registerEnquire(breakingPoint, true);
     }
 
-    public unregister(breakingPoint: string, callback: () => void): void {
-        this.eventBus.$off(breakingPoint, callback);
+    public unregister(breakingPoint: string, match: () => void, unmatch?: () => void): void {
+        this.eventBus.$off(MATCH + breakingPoint, match);
+        if (unmatch) {
+            this.eventBus.$off(UNMATCH + breakingPoint, unmatch);
+        }
     }
 
     private registerEnquire(breakingPoint: string, unregister?: boolean): void {
         let obj = {
-            match: () => this.notify(breakingPoint)
+            match: () => this.notify(MATCH + breakingPoint),
+            unmatch: () => { if (!unregister) { this.notify(UNMATCH + breakingPoint); } }
         };
 
         // register needed in order to be notified if breakpoint matches.
-        enquire.register(BREAKING_POINT_UNTIL_EXTRA_SMALL, obj);
+        enquire.register(breakingPoint, obj);
 
         // registration from external components will always be unregistered.
         if (unregister) {
-            enquire.unregister(BREAKING_POINT_UNTIL_EXTRA_SMALL, obj);
+            enquire.unregister(breakingPoint, obj);
         }
     }
 
