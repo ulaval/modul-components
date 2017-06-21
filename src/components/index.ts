@@ -15,7 +15,6 @@ import PanelPlugin from './panel/panel';
 import StatusList from './status-list/status-list';
 import TablePlugin from './table/table';
 import TextFieldPlugin from './text-field/text-field';
-import TextIconPlugin from './text-icon/text-icon';
 import MessagePlugin from './message/message';
 import UploadPlugin from './upload/upload';
 import PopperPlugin from './popper/popper';
@@ -40,7 +39,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(StatusList);
         Vue.use(TablePlugin);
         Vue.use(TextFieldPlugin);
-        Vue.use(TextIconPlugin);
         Vue.use(MessagePlugin);
         Vue.use(UploadPlugin);
         Vue.use(PopperPlugin);

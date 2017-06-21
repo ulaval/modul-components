@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import {
     ACCORDION_NAME, ACCORDION_GROUP_NAME, BUTTON_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, ICON_NAME, LINK_NAME,
-    LIST_BULLET_NAME, MESSAGE_NAME, PANEL_NAME, POPPER_LIST_NAME, POPPER_NAME, STATUS_LIST_NAME, STEP_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME, TEXT_ICON_NAME,
+    LIST_BULLET_NAME, MESSAGE_NAME, PANEL_NAME, POPPER_LIST_NAME, POPPER_NAME, STATUS_LIST_NAME, STEP_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
     UPLOAD_NAME
 } from '../components/component-names';
 import { RIPPLE_EFFECT_NAME } from '../directives/directive-names';
@@ -32,7 +32,6 @@ export class MetaAll implements PluginObject<any> {
         (options as Meta).mergeComponentMeta('fr', TABLE_NAME, require('../components/table/table.meta.json'));
         (options as Meta).mergeComponentMeta('fr', TEMPLATE_NAME, require('../components/template/template.meta.json'));
         (options as Meta).mergeComponentMeta('fr', TEXT_FIELD_NAME, require('../components/text-field/text-field.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', TEXT_ICON_NAME, require('../components/text-icon/text-icon.meta.json'));
         (options as Meta).mergeComponentMeta('fr', UPLOAD_NAME, require('../components/upload/upload.meta.json'));
 
         (options as Meta).mergeComponentMeta('fr', RIPPLE_EFFECT_NAME, require('../directives/ripple-effect/ripple-effect.meta.json'));

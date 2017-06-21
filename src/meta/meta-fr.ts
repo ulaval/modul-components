@@ -25,9 +25,7 @@ const FrenchMetaPlugin: PluginObject<any> = {
             (v as any).$i18n.addMessages(FRENCH, require('../components/table/table.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/template/template.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/text-field/text-field.meta.fr.json'));
-            (v as any).$i18n.addMessages(FRENCH, require('../components/text-icon/text-icon.meta.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/upload/upload.meta.fr.json'));
-
             (v as any).$i18n.addMessages(FRENCH, require('../directives/ripple-effect/ripple-effect.meta.fr.json'));
         } else {
             throw new Error('FrenchMetaPlugin.install -> You must use the i18n plugin.');
