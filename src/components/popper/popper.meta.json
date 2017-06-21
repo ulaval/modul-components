@@ -40,6 +40,14 @@
                 "click"
             ],
             "default": "hover"
+        },
+        "closeOnContentClick": {
+            "type": "boolean",
+            "default": false
+        },
+        "toggleOnReferenceClick": {
+            "type": "boolean",
+            "default": true
         }
     },
     "overview": [

@@ -77,18 +77,6 @@ export class MDropdown extends Vue {
     }
 
     public get elementsSortedFiltered(): Array<string> {
-        // let filteredElements: Array<string> = this.elementsSorted;
-
-        // if (this.updateEnCours) {
-        //     clearTimeout(this.updateEnCours);
-        // }
-
-        // this.updateEnCours = window.setTimeout(
-        //     () => filteredElements = this.filterElements()
-        // , 300);
-
-        // return filteredElements;
-
         if ((this.textElement == '') || (this.textElement == this.propsInvite) || (this.textElement == this.propsSelectedElement)) {
             return this.elementsSorted;
         }
