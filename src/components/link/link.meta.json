@@ -16,9 +16,13 @@
             "type": "string",
             "default": "/"
         },
-        "is-without-visit" : {
-            "type": "boolean",
-            "default": false
+        "state" : {
+            "type": "string",
+            "value": [
+                "default",
+                "unvisited"
+            ],
+            "default": 0
         }
     },
     "overview": [

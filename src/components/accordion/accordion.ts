@@ -50,7 +50,7 @@ export class MAccordion extends Vue {
     private animIsActive: boolean = false;
     private accordionID: number;
 
-    private mounted(): void {
+    private beforeMount(): void {
         this.propsMode = this.mode;
         this.propsIsOpen = this.isOpen == undefined ? false : this.isOpen;
         this.propsIconPosition = this.iconPosition;

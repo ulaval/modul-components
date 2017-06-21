@@ -1,33 +1,33 @@
 
 <transition>
     <router-link class="m-link"
-                 :class="{ 'is-without-visit': isWithoutVisit }"
+                 :class="{ 'm--is-unvisited': state == 'unvisited' }"
                  :to="{ path: propsUrl }"
                  v-if="isRouterLink">
-        <span class="m-link__icon is-left" v-if="hasIconeLeft">
+        <span class="m-link__icon m--is-left" v-if="hasIconeLeft">
             <slot name="icon-left"></slot>
         </span>
         <span  class="m-link__text">
             <slot>{{ componentName }}</slot>
         </span>
-        <span class="m-link__icon is-right" v-if="hasIconeRight">
+        <span class="m-link__icon m--is-right" v-if="hasIconeRight">
             <slot name="icon-right"></slot>
         </span>
     </router-link>
     <a class="m-link"
-       :class="{ 'is-without-visit': isWithoutVisit, 'is-button': isButton }"
+       :class="{ 'm--is-unvisited': state == 'unvisited', 'm--is-button': isButton }"
        :href="propsUrl"
        :title="getTitleAttribute"
        :target="getTargetAttribute"
        v-if="isLink || isExternalLink || isButton"
        @click="onClick">
-        <span class="m-link__icon is-left" v-if="hasIconeLeft">
+        <span class="m-link__icon m--is-left" v-if="hasIconeLeft">
             <slot name="icon-left"></slot>
         </span>
         <span  class="m-link__text">
             <slot>{{ componentName }}</slot>
         </span>
-        <span class="m-link__icon is-right" v-if="hasIconeRight">
+        <span class="m-link__icon m--is-right" v-if="hasIconeRight">
             <slot name="icon-right"></slot>
         </span>
     </a>

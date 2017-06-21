@@ -1,19 +1,25 @@
 import Vue from 'vue';
+import { ModulVue } from '../../utils/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './link.html?style=./link.scss';
 import { LINK_NAME } from '../component-names';
 
+const MODE_ROUTER_LINK: string = 'router-link';
+const MODE_EXTERNAL_LINK: string = 'external-link';
+const MODE_LINK: string = 'link';
+const MODE_BUTTON: string = 'button';
+
 @WithRender
 @Component
-export class MLink extends Vue {
+export class MLink extends ModulVue {
     @Prop({ default: '/' })
     public url: string;
-    @Prop({ default: 'router-link' })
+    @Prop({ default: MODE_ROUTER_LINK })
     public mode: string;
-    @Prop({ default: false })
-    public isWithoutVisit: boolean;
+    @Prop({ default: 'default' })
+    public state: boolean;
 
     public componentName: string = LINK_NAME;
 
@@ -26,17 +32,17 @@ export class MLink extends Vue {
     private targetAttribute: string = '_blanck';
     private titleAttribute: string = 'Cet hyperlien s\'ouvrira dans une nouvelle fenêtre.';
 
-    private mounted(): void {
-        this.propsUrl = this.$props.url;
+    private beforeMount(): void {
+        this.propsUrl = this.url;
         this.hrefAttribute = this.url;
-        switch (this.$props.mode) {
-            case 'link':
-                this.isLink = true;
-                break;
-            case 'external-link':
+        switch (this.mode) {
+            case MODE_EXTERNAL_LINK:
                 this.isExternalLink = true;
                 break;
-            case 'button':
+            case MODE_LINK:
+                this.isLink = true;
+                break;
+            case MODE_BUTTON:
                 this.propsUrl = '#';
                 this.isButton = true;
                 break;
@@ -46,7 +52,7 @@ export class MLink extends Vue {
     }
 
     private onClick(event): void {
-        this.$emit('onClick');
+        this.$emit('click');
         this.$el.blur();
         if (this.isButton) {
             event.preventDefault();
