@@ -24,8 +24,8 @@ $m-button--color--disabled: $m-color--grey--light !default;
         position: relative;
     }
 
-    &.is-primary,
-    &.is-secondary {
+    &.m--is-primary,
+    &.m--is-secondary {
         transition-property: background, border-color, color;
         transition-duration: 0.3s;
         transition-timing-function: ease;
@@ -33,7 +33,7 @@ $m-button--color--disabled: $m-color--grey--light !default;
         font-weight: $m-font-weight--bold;
         border: 1px solid $m-button--color;
 
-        &:not(.is-selected):not(.is-waiting):not(.is-disabled) {
+        &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
             cursor: pointer;
 
             &:hover {
@@ -49,37 +49,37 @@ $m-button--color--disabled: $m-color--grey--light !default;
             }
         }
 
-        &.is-waiting {
+        &.m--is-waiting {
             cursor: progress;
             color: $m-color--white;
             background: $m-button--color--waiting;
             border-color: $m-button--color--waiting;
         }
 
-        &.is-disabled {
+        &.m--is-disabled {
             cursor: not-allowed;
             color: $m-button--color--disabled;
             background: $m-color--white;
             border-color: $m-button--color--disabled;
         }
 
-        &.is-selected {
+        &.m--is-selected {
             background: $m-button--color--selected;
             border-color: $m-button--color--selected;
         }
     }
 
-    &.is-primary {
+    &.m--is-primary {
         color: $m-color--white;
         background: $m-button--color;
     }
 
-    &.is-secondary {
+    &.m--is-secondary {
         color: $m-button--color;
         background: $m-color--white;
     }
 
-    &.is-icon {
+    &.m--is-icon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -114,7 +114,7 @@ $m-button--color--disabled: $m-color--grey--light !default;
         }
     }
 
-    &:not(.is-selected):not(.is-waiting):not(.is-disabled) {
+    &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
         &:active,
         &:focus {
             &.is-icon {

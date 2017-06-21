@@ -1,18 +1,18 @@
-<button class="m-button" :class="{ 'is-primary': propsMode=='primary',
-                'is-secondary': propsMode=='secondary',
-                'is-icon': propsMode=='icon',
-                'is-selected': propsState=='selected',
-                'is-waiting': propsState=='waiting',
-                'is-disabled': propsState=='disabled' }" :disabled="isDisabled" :type="type" @click="onClick">
+<button class="m-button" :class="{ 'm--is-primary': propsMode=='primary',
+                'm--is-secondary': propsMode=='secondary',
+                'm--is-icon': propsMode=='icon',
+                'm--is-selected': propsState=='selected',
+                'm--is-waiting': propsState=='waiting',
+                'm--is-disabled': propsState=='disabled' }" :disabled="isDisabled" :type="type" @click="onClick">
     <span class="m-button__wrap" v-if="propsMode!='icon'">
-        <m-icon class="m-button__icon is-left" :name="iconName" v-if="hasIconeLeft && hasIcone"></m-icon>
+        <m-icon class="m-button__icon m--is-left" :name="iconName" v-if="hasIconeLeft && hasIcone"></m-icon>
         <span class="m-button__text">
             <slot>m-button</slot>
             <span class="m-button__more-info" v-if="hasMoreInfo">
                 <slot name="more-info"></slot>
             </span>
         </span>
-        <m-icon class="m-button__icon is-right" :name="iconName" v-if="!hasIconeLeft  && hasIcone"></m-icon>
+        <m-icon class="m-button__icon m--is-right" :name="iconName" v-if="!hasIconeLeft  && hasIcone"></m-icon>
     </span>
     <span class="m-button__icon" v-if="propsMode=='icon' && hasIcone">
         <m-icon :name="iconName"></m-icon>

@@ -1,20 +1,32 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './button.html?style=./button.scss';
 import { BUTTON_NAME } from '../component-names';
 import { ICON_NAME } from '../component-names';
+
+const TYPE_BUTTON: string = 'button';
+const TYPE_SUBMIT: string = 'submit';
+const TYPE_RESET: string = 'reset';
+
+const MODE_PRIMARY: string = 'primary';
+const MODE_SECONDARY: string = 'secondary';
+
+const STATE_DEFAULT: string = 'default';
+const STATE_DISABLED: string = 'disabled';
+const STATE_WAITING: string = 'waiting';
+const STATE_SELECTED: string = 'selected';
 
 @WithRender
 @Component
 export class MButton extends Vue {
 
-    @Prop({ default: 'button' })
+    @Prop({ default: TYPE_BUTTON })
     public type: string;
-    @Prop({ default: 'primary' })
+    @Prop({ default: MODE_PRIMARY })
     public mode: string;
-    @Prop({ default: 'default' })
+    @Prop({ default: STATE_DEFAULT })
     public state: string;
     @Prop()
     public iconName: string;
@@ -23,29 +35,47 @@ export class MButton extends Vue {
 
     public componentName: string = BUTTON_NAME;
 
-    private propsType: string = 'button';
-    private propsMode: string = 'primary';
-    private propsState: string = 'default';
+    private propsType: string = TYPE_BUTTON;
+    private propsMode: string = MODE_PRIMARY;
+    private propsState: string = STATE_DEFAULT;
 
     private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "iconName" is undefined';
 
+    @Watch('mode')
+    private changeMode(newMode): void {
+        this.propsState = this.getMode(newMode);
+    }
+
+    @Watch('state')
+    private changeState(newState): void {
+        this.propsState = this.getState(newState);
+    }
+
+    private beforeMount(): void {
+        this.propsType = this.type != TYPE_SUBMIT && this.type != TYPE_RESET ? TYPE_BUTTON : this.type;
+        this.propsMode = this.getMode(this.mode);
+        this.propsState = this.getState(this.state);
+    }
+
+    private getMode(mode: string): string {
+        return mode != MODE_SECONDARY ? MODE_PRIMARY : mode;
+    }
+
+    private getState(state: string): string {
+        return state != STATE_DISABLED && state != STATE_WAITING && state != STATE_SELECTED ? STATE_DEFAULT : state;
+    }
+
     private onClick(event): void {
-        this.$emit('onClick');
+        this.$emit('click');
         this.$el.blur();
     }
 
-    private mounted(): void {
-        this.propsType = this.$props.type == undefined ? 'button' : this.$props.type;
-        this.propsMode = this.$props.mode == undefined ? 'primary' : this.$props.mode;
-        this.propsState = this.$props.state == undefined ? 'default' : this.$props.state;
-    }
-
     private get hasIcone(): boolean {
-        return !!this.$props.iconName;
+        return !!this.iconName;
     }
 
     private get hasIconeLeft(): boolean {
-        return this.$props.iconPosition == 'left' ? true : false;
+        return this.iconPosition == 'left' ? true : false;
     }
 
     private get hasMoreInfo(): boolean {
@@ -57,7 +87,7 @@ export class MButton extends Vue {
     }
 
     private get isDisabled(): boolean {
-        if (this.propsState == 'waiting' || this.propsState == 'disabled' || this.propsState == 'selected') {
+        if (this.propsState == STATE_WAITING || this.propsState == STATE_DISABLED || this.propsState == STATE_SELECTED) {
             return true;
         }
         return false;
