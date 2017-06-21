@@ -1,7 +1,12 @@
-<span class="m-checkbox" :class="{ 'is-checkbox-left': hasCheckboxLeft, 'is-checkbox-right': !hasCheckboxLeft, 'is-checked': propsIsChecked  }">
-    <input type="checkbox" id="checkbox" class="m-checkbox__hidden" v-model="propsIsChecked">
-    <span class="m-checkbox__input">
-        <m-icon name="pastille-crochet" width="10px" height="10px" v-if="propsIsChecked"></m-icon>
-    </span>
-    <label class="m-checkbox__label" for="checkbox"><slot>m-checkbox</slot><slot name="checked" v-if="propsIsChecked"></slot></label>
+<span class="m-checkbox" :class="{ 'm--is-checkbox-left': hasCheckboxLeft, 'm--is-checkbox-right': !hasCheckboxLeft, 'm--is-checked': propsIsChecked, 'm--is-focus': isFocus }"
+    @click="onClick">
+    <input ref="checkbox" type="checkbox" :id="id" class="m-checkbox__hidden" v-model="propsIsChecked" @focus="isFocus=true" @blur="isFocus=false">
+    <label class="m-checkbox__wrap" :for="id" :aria-hidden="!propsHasLabel">
+        <span class="m-checkbox__input" aria-hidden="true">
+            <m-icon class="m-checkbox__input-icon" name="pastille-crochet" width="10px" height="10px"></m-icon>
+        </span>
+        <span class="m-checkbox__label" v-if="propsHasLabel">
+            <slot>m-checkbox</slot>
+        </span>
+    </label>
 </span>

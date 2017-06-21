@@ -5,22 +5,42 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        _uid: number;
+    }
+}
+
 @WithRender
-@Component
+@Component({
+    data() {
+        return {
+            id: 'checkbox' + this._uid
+        };
+    }
+})
 export class MCheckbox extends Vue {
 
-    @Prop({ default: 'primary' })
-    public aspect: string;
     @Prop({ default: false })
     public isChecked: boolean;
     @Prop({ default: 'left' })
     public position: string;
+    @Prop({ default: true })
+    public hasLabel: boolean;
 
     public componentName: string = CHECKBOX_NAME;
     private propsIsChecked = true;
+    private propsHasLabel = true;
+    private isFocus = false;
 
     public mounted(): void {
-        this.propsIsChecked = this.$props.isChecked;
+        this.propsIsChecked = this.isChecked;
+        this.propsHasLabel = this.hasLabel;
+    }
+
+    private onClick(event): void {
+        this.$emit('onClick');
+        this.$refs['checkbox']['blur']();
     }
 
     public get hasCheckboxLeft(): boolean {
