@@ -1,15 +1,20 @@
 <div>
-    <p id="u320" v-if="untilExtraSmall">... <= 320</p>
-    <p id="u640" v-if="untilSmall">... < 640</p>
-    <p id="u768" v-if="untilMedium">... < 768</p>
-    <p id="u1024" v-if="untilLarge">... < 1024</p>
-    <p id="u1400" v-if="untilExtraLarge">... < 1400</p>
-    <p id="i320-640" v-if="isSmall">320 > ... < 640</p>
-    <p id="i640-768" v-if="isMedium">640 >= ... < 768</p>
-    <p id="i768-1024" v-if="isLarge">768 >= ... < 1024</p>
-    <p id="f320" v-if="fromExtraSmall">320 > ...</p>
-    <p id="f640" v-if="fromSmall">640 >= ...</p>
-    <p id="f768" v-if="fromMedium">768 >= ...</p>
-    <p id="f1024" v-if="fromLarge">1024 >= ...</p>
-    <p id="f1400" v-if="fromExtraLarge">1400 >= ...</p>
+    <h2>min-width</h2>
+    <p v-if="isMinExtraSmall">480px >= ...</p>
+    <p v-if="isMinSmall">768 >= ...</p>
+    <p v-if="isMinMedium">1024 >= ...</p>
+    <p v-if="isMinLarge"> 1200 >= ...</p>
+    <p v-if="isExtraLarge">1600 >= ...</p>
+
+    <h2>max-width</h2>
+    <p v-if="isExtraSmall">... <= 479</p>
+    <p v-if="isMaxSmall">... <= 767</p>
+    <p v-if="isMaxMedium">... <= 1023</p>
+    <p v-if="isMaxLarge">... <= 1199px</p>
+    <p v-if="isMaxExtraLarge">... <= 1599</p>
+
+    <h2>min-width and max-width</h2>
+    <p v-if="isSmall"> 480 =­> ... <= 767</p>
+    <p v-if="isMedium">768 => ... <= 1023</p>
+    <p v-if="isLarge">1024 => ... <= 1599</p>
 </div>

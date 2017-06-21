@@ -1,70 +1,50 @@
 import Vue, { PluginObject } from 'vue';
 import * as enquire from 'enquire.js/dist/enquire';
 
-/**
- * ... <= 320px
- */
-export const BREAKING_POINT_UNTIL_EXTRA_SMALL: string = 'screen and (max-width:320px)';
+// MIN-WIDTH
 
-/**
- * ... < 640
- */
-export const BREAKING_POINT_UNTIL_SMALL: string = 'screen and (max-width:639px)';
+// 480px >= ...
+export const BREAKING_POINT_MIN_EXTRA_SMALL: string = 'screen and (min-width:480px)';
 
-/**
- * ... < 768
- */
-export const BREAKING_POINT_UNTIL_MEDIUM: string = 'screen and (max-width:767px)';
+// 768 >= ...
+export const BREAKING_POINT_MIN_SMALL: string = 'screen and (min-width:768px)';
 
-/**
- * ... < 1024
- */
-export const BREAKING_POINT_UNTIL_LARGE: string = 'screen and (max-width:1023px)';
+// 1024 >= ...
+export const BREAKING_POINT_MIN_MEDIUM: string = 'screen and (min-width:1024px)';
 
-/**
- * ... < 1400
- */
-export const BREAKING_POINT_UNTIL_VERY_LARGE: string = 'screen and (max-width:1399px)';
+// 1200 >= ...
+export const BREAKING_POINT_MIN_LARGE: string = 'screen and (min-width:1200px)';
 
-/**
- * 320 > ... < 640
- */
-export const BREAKING_POINT_SMALL: string = 'screen and (min-width: 321px) and (max-width:639px)';
+// MAX-WIDTH
 
-/**
- * 639 > ... < 768
- */
-export const BREAKING_POINT_MEDIUM: string = 'screen and (min-width: 640px) and (max-width:767px)';
+// ... <= 767
+export const BREAKING_POINT_MAX_SMALL: string = 'screen and (max-width:767px)';
 
-/**
- * 767 > ... < 1024
- */
-export const BREAKING_POINT_LARGE: string = 'screen and (min-width: 768px) and (max-width:1023px)';
+// ... <= 1023
+export const BREAKING_POINT_MAX_MEDIUM: string = 'screen and (max-width:1023px)';
 
-/**
- * 320 > ...
- */
-export const BREAKING_POINT_FROM_EXTRA_SMALL: string = 'screen and (min-width:321px)';
+// ... <= 1199px
+export const BREAKING_POINT_MAX_LARGE: string = 'screen and (max-width:1199px)';
 
-/**
- * 640 >= ...
- */
-export const BREAKING_POINT_FROM_SMALL: string = 'screen and (min-width:640px)';
+// ... <= 1599
+export const BREAKING_POINT_MAX_EXTRA_LARGE: string = 'screen and (max-width:1599px)';
 
-/**
- * 768 >= ...
- */
-export const BREAKING_POINT_FROM_MEDIUM: string = 'screen and (min-width:768px)';
+// MIN-WIDTH and MAX-WIDTH
 
-/**
- * 1024 >= ...
- */
-export const BREAKING_POINT_FROM_LARGE: string = 'screen and (min-width:1024px)';
+// ... <= 479
+export const BREAKING_POINT_EXTRA_SMALL: string = 'screen and (max-width:479px)';
 
-/**
- * 1400 >= ...
- */
-export const BREAKING_POINT_FROM_VERY_LARGE: string = 'screen and (min-width:1400px)';
+// 480 =­> ... <= 767
+export const BREAKING_POINT_SMALL: string = 'screen and (min-width:480px) and (max-width:767px)';
+
+// 768 => ... <= 1023
+export const BREAKING_POINT_MEDIUM: string = 'screen and (min-width:768px) and (max-width:1023px)';
+
+// 1024 => ... <= 1599
+export const BREAKING_POINT_LARGE: string = 'screen and (min-width:1024px) and (max-width:1599px)';
+
+// 1600 >= ...
+export const BREAKING_POINT_EXTRA_LARGE: string = 'screen and (min-width:1600px)';
 
 const MATCH: string = 'match-';
 const UNMATCH: string = 'unmatch-';
@@ -73,21 +53,21 @@ export class MediaQuery {
     private eventBus: Vue = new Vue();
 
     constructor() {
-        this.registerEnquire(BREAKING_POINT_UNTIL_EXTRA_SMALL);
-        this.registerEnquire(BREAKING_POINT_UNTIL_SMALL);
-        this.registerEnquire(BREAKING_POINT_UNTIL_MEDIUM);
-        this.registerEnquire(BREAKING_POINT_UNTIL_LARGE);
-        this.registerEnquire(BREAKING_POINT_UNTIL_VERY_LARGE);
+        this.registerEnquire(BREAKING_POINT_MIN_EXTRA_SMALL);
+        this.registerEnquire(BREAKING_POINT_MIN_SMALL);
+        this.registerEnquire(BREAKING_POINT_MIN_MEDIUM);
+        this.registerEnquire(BREAKING_POINT_MIN_LARGE);
 
+        this.registerEnquire(BREAKING_POINT_MAX_SMALL);
+        this.registerEnquire(BREAKING_POINT_MAX_MEDIUM);
+        this.registerEnquire(BREAKING_POINT_MAX_LARGE);
+        this.registerEnquire(BREAKING_POINT_MAX_EXTRA_LARGE);
+
+        this.registerEnquire(BREAKING_POINT_EXTRA_SMALL);
         this.registerEnquire(BREAKING_POINT_SMALL);
         this.registerEnquire(BREAKING_POINT_MEDIUM);
         this.registerEnquire(BREAKING_POINT_LARGE);
-
-        this.registerEnquire(BREAKING_POINT_FROM_EXTRA_SMALL);
-        this.registerEnquire(BREAKING_POINT_FROM_SMALL);
-        this.registerEnquire(BREAKING_POINT_FROM_MEDIUM);
-        this.registerEnquire(BREAKING_POINT_FROM_LARGE);
-        this.registerEnquire(BREAKING_POINT_FROM_VERY_LARGE);
+        this.registerEnquire(BREAKING_POINT_EXTRA_LARGE);
     }
 
     public register(breakingPoint: string, match: () => void, unmatch?: () => void): void {
