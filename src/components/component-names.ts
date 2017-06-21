@@ -19,6 +19,7 @@ export const POPPER_LIST_NAME: string = 'm-popper-list';
 export const DROPDOWN_NAME: string = 'm-dropdown';
 export const STEP_NAME: string = 'm-step';
 export const TEMPLATE_NAME: string = 'm-template';
+export const RADIO_NAME: string = 'm-radio';
 
 export const components: string[] = [
     ACCORDION_GROUP_NAME,
@@ -41,5 +42,6 @@ export const components: string[] = [
     POPPER_LIST_NAME,
     DROPDOWN_NAME,
     STEP_NAME,
-    TEMPLATE_NAME
+    TEMPLATE_NAME,
+    RADIO_NAME
 ];

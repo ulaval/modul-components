@@ -1,0 +1,14 @@
+<ul class="m-radio" >
+    <li v-for="(radioValue, index) in radioValues">
+        <input class="m-radio__hidden"  ref="radio" type="radio" :id="radioValue.value" :name="name" :value="radioValue.value" v-model="valueChecked">
+        <label class="m-radio__wrap" :for="radioValue.value">
+            <span class="m-radio__input" :class="{ 'm--is-checked': radioValue.value == valueChecked }" aria-hidden="true"></span>
+            <span class="m-radio__label">
+                <slot>{{ radioValue.label }}</slot>
+            </span>
+        </label>
+    </li>
+    radio {{ valueChecked }}
+</ul>
+
+
