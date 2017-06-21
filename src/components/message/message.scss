@@ -9,7 +9,7 @@ $m-message-size: 22px;
             border: 1px solid $m-color--valid;
 
             .m-message__icon {
-                background-color: $m-color--valid--lightest;
+                background-color: $m-color--valid-lightest;
                 border-color: $m-color--valid;
             }
 
@@ -22,7 +22,7 @@ $m-message-size: 22px;
             border: 1px solid $m-color--primary;
 
             .m-message__icon {
-                background-color: $m-color--primary--lightest;
+                background-color: $m-color--primary-lightest;
                 border-color: $m-color--primary;
             }
 
@@ -35,7 +35,7 @@ $m-message-size: 22px;
             border: 1px solid $m-color--yellow;
 
             .m-message__icon {
-                background-color: $m-color--yellow--lightest;
+                background-color: $m-color--yellow-lightest;
                 border-color: $m-color--yellow;
             }
 
@@ -48,7 +48,7 @@ $m-message-size: 22px;
             border: 1px solid $m-color--error;
 
             .m-message__icon {
-                background-color: $m-color--error--lightest;
+                background-color: $m-color--error-lightest;
                 border-color: $m-color--error;
             }
 
@@ -98,25 +98,25 @@ $m-message-size: 22px;
     &.is-light {
         &.is-success {
             .m-message__container {
-                background-color: $m-color--valid--lightest;
+                background-color: $m-color--valid-lightest;
             }
         }
 
         &.is-information {
             .m-message__container {
-                background-color: $m-color--primary--lightest;
+                background-color: $m-color--primary-lightest;
             }
         }
 
         &.is-warning {
             .m-message__container {
-                background-color: $m-color--yellow--lightest;
+                background-color: $m-color--yellow-lightest;
             }
         }
 
         &.is-error {
             .m-message__container {
-                background-color: $m-color--error--lightest;
+                background-color: $m-color--error-lightest;
             }
         }
 

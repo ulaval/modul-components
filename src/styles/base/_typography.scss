@@ -1,17 +1,16 @@
 // ======================================================================
 //  Titles
 // ======================================================================
-
 h1,
 h2,
 h3,
 h4,
 h5,
-.m-h1,
-.m-h2,
-.m-h3,
-.m-h4,
-.m-h5 {
+.m-u--h1,
+.m-u--h2,
+.m-u--h3,
+.m-u--h4,
+.m-u--h5 {
     font-weight: $m-font-weight--bold;
     line-height: 1;
 }
@@ -19,42 +18,42 @@ h5,
 h4,
 h5,
 h6,
-.m-h4,
-.m-h5,
-.m-h6 {
+.m-u--h4,
+.m-u--h5,
+.m-u--h6 {
     margin: $m-margin--l 0 0 0;
 }
 
 h1,
-.m-h1 {
+.m-u--h1 {
     font-size: $m-font-size--h1;
     margin: 0;
 }
 
 h2,
-.m-h2 {
+.m-u--h2 {
     font-size: $m-font-size--h2;
     margin: $m-padding--l 0 0 0;
 }
 
 h3,
-.m-h3 {
+.m-u--h3 {
     font-size: $m-font-size--h3;
     margin: $m-padding--l 0 0 0;
 }
 
 h4,
-.m-h4 {
+.m-u--h4 {
     font-size: $m-font-size--h4;
 }
 
 h5,
-.m-h5 {
+.m-u--h5 {
     font-size: $m-font-size--h5;
 }
 
 h6,
-.m-h6 {
+.m-u--h6 {
     font-weight: $m-font-weight--regular;
     font-size: $m-font-size--h6;
     line-height: 1;
@@ -63,33 +62,32 @@ h6,
 // ======================================================================
 //  Texts
 // ======================================================================
-
 p,
-.m-p {
+.m-u--p {
     margin: $m-margin 0;
 }
 
 b,
 strong,
-.m-font-weight-bold {
+.m-u--font-weight-bold {
     font-weight: $m-font-weight--bold;
 }
 
-.m-font-weight-regular {
+.m-u--font-weight-regular {
     font-weight: $m-font-weight--regular;
 }
 
-.m-font-weight-light {
+.m-u--font-weight-light {
     font-weight: $m-font-weight--light;
 }
 
-.m-font-style-normal {
+.m-u--font-style-normal {
     font-style: normal;
 }
 
 i,
 em,
-.m-font-style-italic {
+.m-u--font-style-italic {
     font-style: italic;
 }
 

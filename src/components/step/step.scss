@@ -12,7 +12,7 @@ $m-step--badge--size: 20px;
         height: 100%;
         z-index: 1;
         width: 1px;
-        background-color: $m-color--grey--dark;
+        background-color: $m-color--grey-dark;
         content: "";
         left: calc((#{$m-step--icon--size} / 2) - 1px); //magic number
     }

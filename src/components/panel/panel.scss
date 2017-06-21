@@ -4,7 +4,7 @@ $m-panel--border-width: 1px;
 
 .m-panel {
     position: relative;
-    border: $m-panel--border-width solid $m-color--grey--light;
+    border: $m-panel--border-width solid $m-color--grey-light;
     display: block;
     box-shadow: 0 1px 1px rgba($m-color--black, 0.05);
 
@@ -26,10 +26,10 @@ $m-panel--border-width: 1px;
     }
 
     &.is-secondary {
-        background: $m-color--grey--lightest;
+        background: $m-color--grey-lightest;
 
         .m-panel__header {
-            background-color: $m-color--grey--lighter;
+            background-color: $m-color--grey-lighter;
             border-bottom: 1px solid $m-color--grey;
         }
     }

@@ -1,7 +1,7 @@
 @import 'abstracts/variables';
-$m-dropdown--color--hover: $m-color--grey--lightest;
-$m-dropdown--color--select: $m-color--grey--lighter;
-$m-dropdown--color--active: $m-color--primary--lightest;
+$m-dropdown--color--hover: $m-color--grey-lightest;
+$m-dropdown--color--select: $m-color--grey-lighter;
+$m-dropdown--color--active: $m-color--primary-lightest;
 
 .m-dropdown {
     // box-sizing: content-box;
@@ -56,7 +56,7 @@ $m-dropdown--color--active: $m-color--primary--lightest;
                 align-items: center;
                 width: 100%;
                 padding: $m-margin $m-padding;
-                color: $m-text-color;
+                color: $m-color--text;
                 text-decoration: none;
 
                 &:hover {
