@@ -6,6 +6,10 @@ import WithRender from './accordion-group.html?style=./accordion-group.scss';
 import { ACCORDION_GROUP_NAME } from '../component-names';
 import { ACCORDION_NAME } from '../component-names';
 
+const MODE_REGULAR: string = 'regular';
+const MODE_LIGHT: string = 'light';
+const MODE_NO_STYLE: string = 'no-style';
+
 @WithRender
 @Component
 export class MAccordionGroup extends Vue {
@@ -16,7 +20,7 @@ export class MAccordionGroup extends Vue {
 
     public componentName: string = ACCORDION_GROUP_NAME;
 
-    private propsMode: string;
+    private propsMode: string = MODE_REGULAR;
     private propsAreAllOpen: boolean = false;
 
     private nbAccordion: number = 0;
@@ -28,8 +32,8 @@ export class MAccordionGroup extends Vue {
     private errorMessage: string = '';
 
     private mounted(): void {
-        this.propsAreAllOpen = this.$props.areAllOpen;
-        this.propsMode = this.$props.type == 'light' || this.$props.type == 'no-style' ? this.$props.type : this.propsMode = 'regular';
+        this.propsAreAllOpen = this.areAllOpen;
+        this.propsMode = this.mode == MODE_LIGHT || this.mode == MODE_NO_STYLE ? this.mode : this.propsMode;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
                 this.$children[i]['accordionID'] = this.nbAccordion;
@@ -41,7 +45,7 @@ export class MAccordionGroup extends Vue {
                 }
                 if (this.propsMode != this.$children[i]['propsMode']) {
                     this.$children[i]['propsMode'] = this.propsMode;
-                    this.$children[i]['resetType'](this.propsMode);
+                    this.$children[i]['resetMode'](this.propsMode);
                 }
                 this.nbAccordion++;
             }

@@ -7,6 +7,19 @@ import { ACCORDION_NAME } from '../component-names';
 import { ACCORDION_GROUP_NAME } from '../component-names';
 import { TransitionAccordionMixin } from '../../mixins/transitionAccordion';
 
+const MODE_REGULAR: string = 'regular';
+const MODE_LIGHT: string = 'light';
+const MODE_NO_STYLE: string = 'no-style';
+
+const ICON_POSITION_LEFT: string = 'left';
+const ICON_POSITION_RIGHT: string = 'right';
+
+const ICON_STYLE_DEFAULT: string = 'default';
+const ICON_STYLE_BORDER: string = 'border';
+
+const ICON_SIZE_SMALL: string = 'small';
+const ICON_SIZE_LARGE: string = 'large';
+
 @WithRender
 @Component({
     mixins: [
@@ -15,7 +28,7 @@ import { TransitionAccordionMixin } from '../../mixins/transitionAccordion';
 })
 export class MAccordion extends Vue {
 
-    @Prop({ default: 'regular' })
+    @Prop({ default: MODE_REGULAR })
     public mode: string;
     @Prop()
     public isOpen: boolean;
@@ -28,83 +41,79 @@ export class MAccordion extends Vue {
 
     public componentName: string = ACCORDION_NAME;
 
-    private propsMode: string = 'regular';
+    private propsMode: string = MODE_REGULAR;
     private propsIsOpen: boolean = false;
-    private propsIconPosition: string = 'right';
-    private propsIconSize: string = 'large';
-    private propsIconStyle: string = 'default';
+    private propsIconPosition: string = ICON_POSITION_RIGHT;
+    private propsIconStyle: string = ICON_STYLE_DEFAULT;
+    private propsIconSize: string = ICON_SIZE_LARGE;
 
     private animIsActive: boolean = false;
     private accordionID: number;
 
     private mounted(): void {
-        this.propsMode = this.$props.type;
-        this.propsIsOpen = this.$props.isOpen == undefined ? false : this.$props.isOpen;
-        this.propsIconPosition = this.$props.iconPosition;
-        this.propsIconSize = this.$props.iconSize;
-        this.propsIconStyle = this.$props.iconStyle;
-        this.setType();
+        this.propsMode = this.mode;
+        this.propsIsOpen = this.isOpen == undefined ? false : this.isOpen;
+        this.propsIconPosition = this.iconPosition;
+        this.propsIconSize = this.iconSize;
+        this.propsIconStyle = this.iconStyle;
+        this.setMode();
     }
 
-    private setType(): void {
+    private setMode(): void {
         switch (this.propsMode) {
-            case 'light':
+            case MODE_LIGHT:
                 if (this.propsIconPosition == undefined) {
-                    this.propsIconPosition = 'left';
+                    this.propsIconPosition = ICON_POSITION_LEFT;
                 }
                 if (this.propsIconSize == undefined) {
-                    this.propsIconSize = 'small';
+                    this.propsIconSize = ICON_SIZE_SMALL;
                 }
                 if (this.propsIconStyle == undefined) {
-                    this.propsIconStyle = 'border';
+                    this.propsIconStyle = ICON_STYLE_BORDER;
                 }
                 break;
-            case 'no-style':
-                if (this.propsIconPosition == undefined) {
-                    this.propsIconPosition = 'right';
-                }
-                if (this.propsIconSize == undefined) {
-                    this.propsIconSize = 'large';
-                }
-                if (this.propsIconStyle == undefined) {
-                    this.propsIconStyle = 'default';
-                }
+            case MODE_NO_STYLE:
+                this.setModeNoStyle();
                 break;
             default:
                 if (this.propsIconPosition == undefined) {
-                    this.propsIconPosition = 'right';
+                    this.propsIconPosition = ICON_POSITION_RIGHT;
                 }
                 if (this.propsIconSize == undefined) {
-                    this.propsIconSize = 'large';
+                    this.propsIconSize = ICON_SIZE_LARGE;
                 }
                 if (this.propsIconStyle == undefined) {
-                    this.propsIconStyle = 'default';
+                    this.propsIconStyle = ICON_STYLE_DEFAULT;
                 }
         }
     }
 
-    private resetType(type): void {
+    private resetMode(type): void {
         switch (type) {
-            case 'light':
-                this.propsIconPosition = 'left';
-                this.propsIconSize = 'small';
-                this.propsIconStyle = 'border';
+            case MODE_LIGHT:
+                this.propsIconPosition = ICON_POSITION_LEFT;
+                this.propsIconSize = ICON_SIZE_SMALL;
+                this.propsIconStyle = ICON_STYLE_BORDER;
                 break;
-            case 'no-style':
-                if (this.propsIconPosition == undefined) {
-                    this.propsIconPosition = 'right';
-                }
-                if (this.propsIconSize == undefined) {
-                    this.propsIconSize = 'large';
-                }
-                if (this.propsIconStyle == undefined) {
-                    this.propsIconStyle = 'default';
-                }
+            case MODE_NO_STYLE:
+                this.setModeNoStyle();
                 break;
             default:
-                this.propsIconPosition = 'right';
-                this.propsIconSize = 'large';
-                this.propsIconStyle = 'default';
+                this.propsIconPosition = ICON_POSITION_RIGHT;
+                this.propsIconSize = ICON_SIZE_LARGE;
+                this.propsIconStyle = ICON_STYLE_DEFAULT;
+        }
+    }
+
+    private setModeNoStyle(): void {
+        if (this.propsIconPosition == undefined) {
+            this.propsIconPosition = ICON_POSITION_RIGHT;
+        }
+        if (this.propsIconSize == undefined) {
+            this.propsIconSize = ICON_SIZE_LARGE;
+        }
+        if (this.propsIconStyle == undefined) {
+            this.propsIconStyle = ICON_STYLE_DEFAULT;
         }
     }
 
@@ -114,6 +123,7 @@ export class MAccordion extends Vue {
         if (this.$parent['componentName'] == ACCORDION_GROUP_NAME) {
             this.$parent['checkToggleAccordion'](this.accordionID, this.propsIsOpen);
         }
+        this.$emit('click', this.accordionID, this.propsIsOpen);
         event.preventDefault();
     }
 
@@ -125,8 +135,8 @@ export class MAccordion extends Vue {
         this.propsIsOpen = false;
     }
 
-    private get typeIsRegular(): boolean {
-        if (this.propsMode == 'light' || this.propsMode == 'noStyle') {
+    private get modeIsRegular(): boolean {
+        if (this.propsMode == MODE_LIGHT || this.propsMode == MODE_NO_STYLE) {
             return false;
         }
         return true;

@@ -1,6 +1,6 @@
 {
     "m-accordion": {
-        "open": "Cliquer pour ouvrir l'accordéon.",
-        "close": "Cliquer pour fermer l'accordéon."
+        "open": "Cliquer pour afficher le contenu.",
+        "close": "Cliquer pour cacher le contenu."
     }
 }

@@ -1,20 +1,17 @@
-<article class="m-accordion" :class="{ 'is-regular': typeIsRegular, 'is-light': propsMode=='light', 'is-no-style': propsMode=='noStyle', 'is-close': !propsIsOpen }">
-    <header>
-        <a href="#" class="m-accordion__header" @click="toggleAccordion">
-            <span class="m-accordion__header__icon is-left" :class="{ 'is-close': propsIsOpen, 'is-large': propsIconSize=='large', 'has-border': propsIconStyle=='border' }" v-if="propsIconPosition != 'right'">
-            </span>
-            <span class="m-accordion__header__tilte">
+<article class="m-accordion" :class="{ 'm--is-regular': modeIsRegular, 'm--is-light': propsMode=='light', 'm--is-no-style': propsMode=='noStyle', 'm--is-close': !propsIsOpen }">
+    <header class="m-accordion__header-wrap">
+        <a href="#" class="m-accordion__header" @click="toggleAccordion" :class="{ 'm--is-icon-left': propsIconPosition != 'right' }">
+            <span class="m-accordion__header__title">
                 <slot name="title">m-accordion</slot>
                 <m-i18n i18n-key="m-accordion:open" class="m-accordion__hidden" v-if="!propsIsOpen"></m-i18n>
                 <m-i18n i18n-key="m-accordion:close" class="m-accordion__hidden" v-if="propsIsOpen"></m-i18n>
             </span>
-            <span class="m-accordion__header__icon is-right" :class="{ 'is-close': propsIsOpen, 'is-large': propsIconSize=='large', 'has-border': propsIconStyle=='border' }" v-if="propsIconPosition == 'right'">
-            </span>
+            <span class="m-accordion__header__icon" aria-hidden="true" :class="{ 'm--is-close': propsIsOpen, 'm--is-anim-active': animIsActive, 'm--is-left': propsIconPosition != 'right', 'm--is-large': propsIconSize=='large', 'm--has-border': propsIconStyle=='border' }"></span>
         </a>
     </header>
     <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
-        <div class="m-accordion__body" :class="{ 'is-anim-active': animIsActive }" v-if="propsIsOpen">
-            <div class="m-accordion__body__wrap">
+        <div class="m-accordion__body-wrap" :class="{ 'm--is-anim-active': animIsActive }" v-if="propsIsOpen">
+            <div class="m-accordion__body">
                 <slot>m-accordion - text</slot>
             </div>
         </div>
