@@ -203,6 +203,8 @@ export class MDropdown extends Vue {
                 } else {
                     this.textElement = this.propsInvite;
                 }
+            } else {
+                this.textElement = this.getSelectedElementText();
             }
         }
 
