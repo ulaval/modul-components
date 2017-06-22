@@ -47,7 +47,7 @@ export class MRadioButtons extends Vue {
 
     private propsIsChecked = true;
     private propsHasLabel = true;
-    private valueChecked: string = '';
+    private checkedValue: string = '';
 
     public mounted(): void {
         this.propsIsChecked = this.isChecked;
