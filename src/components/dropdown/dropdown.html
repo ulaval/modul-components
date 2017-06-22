@@ -5,16 +5,21 @@
         </li>
     </ul>
 
-    <m-popper trigger="click" :options="{ placement: 'bottom' }" :close-on-content-click="true" :toggle-on-reference-click="false" :disabled="stateDisabled" mode="dropdown">
+    <m-popper trigger="click"
+              :options="{ placement: 'bottom' }"
+              :closeOnContentClick="true"
+              :toggleOnReferenceClick="false"
+              :disabled="stateDisabled"
+              mode="dropdown">
         <ul class="m-dropdown__list"
             ref="mDropdownElements">
             <li v-for="(element, index) in elementsSortedFiltered"
                 v-if="elementsCount > 0"
-                @click="selectElement($event, element)"
                 class="m-dropdown__list__element"
                 :class="{ 'is-selected': element === propsSelectedElement }"
                 :key="index"
-                :data-index="index">
+                :data-index="index"
+                @click="selectElement($event, element)">
                 <span class="m-dropdown__list__element__text">{{ getElementListText(element) }}</span>
             </li>
             <li v-if="elementsCount <= 0"
@@ -27,8 +32,8 @@
                       slot="reference"
                       :value="textElement"
                       :state="state"
-                      :is-selection-active="isEditabled"
-                      @onValueChanged="textElement = $event">
+                      :isEditabled="isEditabled"
+                      @valueChanged="textElement = $event">
         </m-text-field>
     </m-popper>
 </div>

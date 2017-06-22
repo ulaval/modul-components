@@ -1,4 +1,4 @@
-<span class="m-popper">
+<span class="m-popper" :class="{ 'm--is-open': isAnimPopperActive }">
     <transition @enter="animEnter"
         @after-enter="animAfterEnter"
         @leave="animLeave"

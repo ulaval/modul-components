@@ -1,27 +1,28 @@
-<span class="m-text-field" :class="{
-    'is-focus' : isFocusActive,
-    'is-selection-inactive' : !isSelectionActive,
-    'is-disabled' : isDisabled,
-    'has-error' : hasError }">
+<span class="m-text-field"
+      :class="{ 'is-focus' : isFocusActive,
+          'is-editabled' : !propsIsEditabled,
+          'is-disabled' : isDisabled,
+          'has-error' : hasError }">
     <span class="m-text-field__wrap">
         <label class="m-text-field__label" @click="onFocus" :class="{ 'is-value-empty' : isValueEmpty }">
             <m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>
             <slot>Text field</slot>
         </label>
-        <input class="m-text-field__input" :class="[ 'is-type-' + propsType ]"
-            ref="input"
-            @focus="onFocus"
-            :disabled="isDisabled"
-            @blur="onBlur"
-            v-model="propsValue"
-            v-if="isSelectionActive">
+        <input class="m-text-field__input"
+               ref="input"
+               :class="[ 'is-type-' + propsType ]"
+               :disabled="isDisabled"
+               @focus="onFocus"
+               @blur="onBlur"
+               v-model="propsValue"
+               v-if="propsIsEditabled">
         <a href="#"
-            class="m-text-field__input"
-            ref="input"
-            @focus="onFocus"
-            @blur="onBlur"
-            @click="onClick"
-            v-if="!isSelectionActive">
+           class="m-text-field__input"
+           ref="input"
+           @focus="onFocus"
+           @blur="onBlur"
+           @click="onClick"
+           v-if="!propsIsEditabled">
             <span class="m-text-field__input__value" v-if="isDefaultTextEmpty">{{ propsValue }}</span>
             <span class="m-text-field__input__dafault-text" v-if="!isDefaultTextEmpty">- {{ propsDefaultText}} -</span>
             <span aria-hidden="true" class="m-text-field__transparent" v-if="isDefaultTextEmpty && isValueEmpty">Hidden text</span>

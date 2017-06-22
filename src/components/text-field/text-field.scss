@@ -1,6 +1,6 @@
 @import 'abstracts/variables';
 $m-text-field--transiton-duration: 0.45s;
-$m-text-field--color--helper: lighten($m-color--black, 60);
+$m-text-field--color--helper: $m-color--grey-darker;
 $m-text-field--color--focus: $m-color--primary;
 $m-text-field--color--error: $m-color--error;
 $m-text-field--color--valid: $m-color--valid;
@@ -8,6 +8,7 @@ $m-text-field--margin: $m-padding--xs;
 
 .m-text-field {
     display: inline-flex;
+    min-width: 80px;
 
     &,
     &__wrap {
@@ -25,7 +26,6 @@ $m-text-field--margin: $m-padding--xs;
             &.is-value-empty {
                 bottom: $m-text-field--margin;
                 font-size: $m-font-size;
-                font-weight: $m-font-weight;
             }
         }
     }
@@ -48,7 +48,7 @@ $m-text-field--margin: $m-padding--xs;
     &__label,
     &.has-error .m-text-field__label {
         bottom: 25px;
-        font-size: 12px;
+        font-size: $m-font-size--xs;
         font-weight: $m-font-weight--bold;
     }
 
@@ -67,7 +67,6 @@ $m-text-field--margin: $m-padding--xs;
         border: none;
         border-bottom: 1px solid #000;
         width: 100%;
-        min-width: 140px;
         height: 26px;
 
         &-line {
@@ -93,7 +92,7 @@ $m-text-field--margin: $m-padding--xs;
     &__error-message,
     &__helper-message {
         margin-top: $m-text-field--margin;
-        font-size: $m-font-size--s;
+        font-size: $m-font-size--xs;
     }
 
     &__error-message {
@@ -146,7 +145,7 @@ $m-text-field--margin: $m-padding--xs;
         }
     }
 
-    &.is-selection-inactive {
+    &.is-editabled {
         .m-text-field__label,
         .m-text-field__input {
             cursor: pointer;
@@ -173,12 +172,21 @@ $m-text-field--margin: $m-padding--xs;
     }
 
     &.has-error {
+        &.is-focus {
+            .m-text-field__label {
+                color: $m-text-field--color--error;
+            }
+        }
+
         .m-text-field__label {
-            color: $m-text-field--color--error;
+            &:not(.is-value-empty) {
+                color: $m-text-field--color--error;
+            }
         }
 
         .m-text-field__input {
             &-line {
+                width: 100%;
                 background: $m-text-field--color--error;
             }
         }

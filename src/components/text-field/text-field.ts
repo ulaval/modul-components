@@ -21,7 +21,7 @@ export class MTexteField extends Vue {
     @Prop({ default: '' })
     public defaultText: string;
     @Prop({ default: true })
-    public isSelectionActive: boolean;
+    public isEditabled: boolean;
     @Prop({ default: '' })
     public iconName: string;
     @Prop({ default: '' })
@@ -35,7 +35,7 @@ export class MTexteField extends Vue {
     private propsState: MTexteFieldState;
     private propsValue: string = '';
     private propsDefaultText: string;
-    private propsIsSelectionActive: boolean;
+    private propsIsEditabled: boolean;
     private hasIcon: boolean;
     private hasHelperText: boolean;
     private isValueEmpty: boolean = false;
@@ -56,24 +56,24 @@ export class MTexteField extends Vue {
         }
 
         this.isUpdating = window.setTimeout(
-            () => this.$emit('onValueChanged', this.propsValue)
+            () => this.$emit('valueChanged', this.propsValue)
         , 300);
     }
 
     private beforeMount(): void {
-        this.propsType = this.$props.type;
-        this.propsState = this.$props.state;
-        this.propsValue = this.$props.value;
-        this.propsIsSelectionActive = this.$props.isSelectionActive;
-        this.propsDefaultText = this.$props.defaultText;
-        this.hasIcon = this.$props.iconName != '';
-        this.hasHelperText = this.$props.helperMessage != '';
+        this.propsType = this.type;
+        this.propsState = this.state;
+        this.propsValue = this.value;
+        this.propsIsEditabled = this.isEditabled;
+        this.propsDefaultText = this.defaultText;
+        this.hasIcon = this.iconName != '';
+        this.hasHelperText = this.helperMessage != '';
         this.checkHasValue();
         this.checkHasDefaultText();
     }
 
     private mounted() {
-        if (this.propsIsSelectionActive) {
+        if (this.propsIsEditabled) {
             // Set attribute type on input refs
             this.$refs.input['setAttribute']('type', this.propsType);
         }
@@ -85,7 +85,7 @@ export class MTexteField extends Vue {
             this.$refs.input['focus']();
             this.checkHasValue();
             this.checkHasDefaultText();
-            this.$emit('onFocus', event, this.propsValue);
+            this.$emit('focus', event, this.propsValue);
         }
     }
 
@@ -94,13 +94,13 @@ export class MTexteField extends Vue {
         if (!this.isDisabled) {
             this.checkHasValue();
             this.checkHasDefaultText();
-            this.$emit('onBlur', event, this.propsValue);
+            this.$emit('blur', event, this.propsValue);
         }
     }
 
     private onClick(event): void {
         if (!this.isDisabled) {
-            this.$emit('onClick', event, this.propsValue);
+            this.$emit('click', event, this.propsValue);
         }
         event.preventDefault();
     }

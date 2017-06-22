@@ -48,6 +48,7 @@ export class MPopper extends Vue {
     public referenceElm;
     public popperJS;
     public showPopper: boolean = false;
+    public isAnimPopperActive: boolean = false;
     public currentPlacement: string = '';
     public popperOptions: IPopperOptions = {
         placement: 'bottom',
@@ -226,6 +227,7 @@ export class MPopper extends Vue {
     }
 
     private animEnter(element, done): void {
+        this.isAnimPopperActive = true;
         if (this.propsMode == 'dropdown' && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
@@ -259,9 +261,11 @@ export class MPopper extends Vue {
             el.style.maxHeight = '0';
             setTimeout(() => {
                 el.style.maxHeight = 'none';
+                this.isAnimPopperActive = false;
                 done();
             }, 300);
         } else {
+            this.isAnimPopperActive = false;
             done();
         }
     }
