@@ -1,17 +1,17 @@
-<article class="m-panel" :class="{ 'is-primary': type != 'secondary',
-                'is-secondary': type == 'secondary',
-                'no-shadow': !hasShadow,
-                'no-border': !hasBorder,
-                'no-padding': !hasPadding,
-                'no-padding-header': !hasPaddingHeader,
-                'no-padding-body': !hasPaddingBody,
-                'no-padding-footer': !hasPaddingFooter }">
+<article class="m-panel" :class="{ 'm--is-primary': type != 'secondary',
+                'm--is-secondary': type == 'secondary',
+                'm--no-shadow': !hasShadow,
+                'm--no-border': !hasBorder,
+                'm--no-padding': !hasPadding,
+                'm--no-padding-header': !hasPaddingHeader,
+                'm--no-padding-body': !hasPaddingBody,
+                'm--no-padding-footer': !hasPaddingFooter }">
     <header class="m-panel__header" v-if="hasHeader">
         <slot name="header"></slot>
-        <span class="m-panel__header__content is-left" v-if="hasContentLeft">
+        <span class="m-panel__header__content m--is-left" v-if="hasContentLeft">
             <slot name="header-content-left"></slot>
         </span>
-        <span class="m-panel__header__content is-right" v-if="hasContentRight">
+        <span class="m-panel__header__content m--is-right" v-if="hasContentRight">
             <slot name="header-content-right"></slot>
         </span>
     </header>
