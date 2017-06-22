@@ -4,21 +4,10 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
-
-declare module 'vue/types/vue' {
-    interface Vue {
-        _uid: number;
-    }
-}
+import uuid from '../../utils/uuid';
 
 @WithRender
-@Component({
-    data() {
-        return {
-            id: 'checkbox' + this._uid
-        };
-    }
-})
+@Component
 export class MCheckbox extends Vue {
 
     @Prop({ default: false })
@@ -32,6 +21,7 @@ export class MCheckbox extends Vue {
     private propsIsChecked = true;
     private propsHasLabel = true;
     private isFocus = false;
+    private id: string = 'checkbox' + uuid.generate();
 
     public mounted(): void {
         this.propsIsChecked = this.isChecked;
