@@ -2,8 +2,8 @@ import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './radio.html?style=./radio.scss';
-import { RADIO_NAME } from '../component-names';
+import WithRender from './radio-buttons.html?style=./radio-buttons.scss';
+import { RADIO_BUTTONS_NAME } from '../component-names';
 
 export interface MRadioData {
     value: string;
@@ -12,7 +12,7 @@ export interface MRadioData {
 
 @WithRender
 @Component
-export class MRadio extends Vue {
+export class MRadioButtons extends Vue {
 
     @Prop({
         default: () => {
@@ -55,10 +55,10 @@ export class MRadio extends Vue {
     }
 }
 
-const RadioPlugin: PluginObject<any> = {
+const RadioButtonsPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(RADIO_NAME, MRadio);
+        v.component(RADIO_BUTTONS_NAME, MRadioButtons);
     }
 };
 
-export default RadioPlugin;
+export default RadioButtonsPlugin;

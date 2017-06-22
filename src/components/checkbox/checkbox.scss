@@ -21,7 +21,7 @@ $m-checkbox--width: 16px;
         }
 
         .m-checkbox__input {
-            border-color: $m-color--primary;
+            border-color: $m-color--text;
             color: $m-color--primary;
 
             .m-icon {
@@ -29,18 +29,10 @@ $m-checkbox--width: 16px;
             }
         }
 
-        &:hover {
-            .m-checkbox__input {
-                background: $m-color--primary-lightest;
-            }
-
-            .m-checkbox__label {
-                color: $m-color--primary;
-            }
-        }
-
+        &:hover,
         &.m--is-focus {
             .m-checkbox__input {
+                border-color: $m-color--primary;
                 background: $m-color--primary-lightest;
             }
 
@@ -80,7 +72,7 @@ $m-checkbox--width: 16px;
     }
 
     &__input {
-        transition: 0.3s background ease;
+        transition: 0.3s background ease, 0.3s border-color ease;
         display: inline-flex;
         align-items: center;
         justify-content: center;
