@@ -32,9 +32,9 @@ export class MStep extends Vue {
     private animIsActive: boolean = false;
 
     private mounted() {
-        this.propsState = this.$props.state;
-        this.propsIsOpen = this.$props.isOpen;
-        this.propsIsLast = this.$props.isLast;
+        this.propsState = this.state;
+        this.propsIsOpen = this.isOpen;
+        this.propsIsLast = this.isLast;
     }
 
     private openStep(event): void {
@@ -53,7 +53,7 @@ export class MStep extends Vue {
 
     private getIcon(): string {
         let icon: string = '';
-        switch (this.$props.state) {
+        switch (this.state) {
             case 'disable':
                 icon = 'default';
                 break;
