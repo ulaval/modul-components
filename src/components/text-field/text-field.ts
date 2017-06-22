@@ -43,6 +43,11 @@ export class MTexteField extends Vue {
     private isFocusActive: boolean = false;
     private isUpdating: number;
 
+    @Watch('value')
+    private valueChanged(value): void {
+        this.propsValue = this.$props.value;
+    }
+
     @Watch('propsValue')
     private propsValueChanged(value): void {
         // Delayed $emit to limit event fired
