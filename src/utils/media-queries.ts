@@ -17,30 +17,30 @@ export const BREAKING_POINT_MIN_LARGE: string = 'screen and (min-width:1200px)';
 
 // MAX-WIDTH
 
-// ... <= 767
+// ... < 768
 export const BREAKING_POINT_MAX_SMALL: string = 'screen and (max-width:767px)';
 
-// ... <= 1023
+// ... < 1024
 export const BREAKING_POINT_MAX_MEDIUM: string = 'screen and (max-width:1023px)';
 
-// ... <= 1199px
+// ... < 1200px
 export const BREAKING_POINT_MAX_LARGE: string = 'screen and (max-width:1199px)';
 
-// ... <= 1599
+// ... < 1600
 export const BREAKING_POINT_MAX_EXTRA_LARGE: string = 'screen and (max-width:1599px)';
 
 // MIN-WIDTH and MAX-WIDTH
 
-// ... <= 479
+// ... < 480
 export const BREAKING_POINT_EXTRA_SMALL: string = 'screen and (max-width:479px)';
 
-// 480 =­> ... <= 767
+// 480 =­> ... < 768
 export const BREAKING_POINT_SMALL: string = 'screen and (min-width:480px) and (max-width:767px)';
 
-// 768 => ... <= 1023
+// 768 => ... < 1024
 export const BREAKING_POINT_MEDIUM: string = 'screen and (min-width:768px) and (max-width:1023px)';
 
-// 1024 => ... <= 1599
+// 1024 => ... < 1600
 export const BREAKING_POINT_LARGE: string = 'screen and (min-width:1024px) and (max-width:1599px)';
 
 // 1600 >= ...
