@@ -7,8 +7,6 @@ import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str';
 
 const UNDEFINED: string = 'undefined';
-const NO_SORT: string = 'none';
-const SORT_ALPHABETICALLY: string = 'alphabetically';
 
 @WithRender
 @Component
@@ -24,18 +22,20 @@ export class MDropdown extends Vue {
     public invite: string;
     @Prop({ default: '' })
     public state: string;
+    @Prop({ default: true })
+    public isSort: boolean;
     @Prop()
-    public nullValue: string;
-    @Prop({ default: SORT_ALPHABETICALLY })
-    public sort: string;
+    public sortMethod: Function;
     @Prop({ default: false })
     public widthFromCss: boolean;
+    @Prop({ default: false })
+    public isEditabled: boolean;
+    // @Prop()
+    // public nullValue: string;
     // @Prop({ default: false })
     // public name: boolean;
     // @Prop({ default: false })
     // public formName: boolean;
-    @Prop({ default: false })
-    public isEditabled: boolean;
 
     // Copy of props
     public propsSelectedElement: string;
@@ -101,17 +101,6 @@ export class MDropdown extends Vue {
     public selectElement($event, element: string): void {
         this.propsSelectedElement = element;
         this.textElement = this.getSelectedElementText();
-
-        // Gestion si la liste deroulante est dans un form. Pour les flags touched / valid.
-        // if (MpoObjectUtils.isDefini(this.name)) {
-        //     if (this.ngModel && typeof this.ngModel == "object") {
-        //         this.ngModel.$setTouched();
-        //         this.ngModel.$setViewValue(this.elementSelectionne);
-        //         this.ngModel.$validate();
-        //         this.ngModel.$render();
-        //     };
-        // }
-
         this.$emit('elementSelected', this.propsSelectedElement);
     }
 
@@ -179,11 +168,16 @@ export class MDropdown extends Vue {
         let elementsSorted: string[] = new Array();
 
         if (this.elements) {
-            if (this.sort != NO_SORT) {
-                elementsSorted = this.elements.sort((a, b) => a.localeCompare(b));
+            if (typeof this.sortMethod == UNDEFINED) {
+                if (this.isSort) {
+                    // Default sort: Alphabetically
+                    elementsSorted = this.elements.sort((a, b) => a.localeCompare(b));
+                } else {
+                    // Copy the list without sorting
+                    elementsSorted = this.elements.slice(0);
+                }
             } else {
-                // Copy the list without sorting
-                elementsSorted = this.elements.slice(0);
+                elementsSorted = this.sortMethod(this.elements);
             }
 
             // Default element.

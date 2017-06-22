@@ -24,16 +24,12 @@
             ],
             "default": ""
         },
-        "nullValue": {
-            "type": "string"
+        "isSort": {
+            "type": "boolean",
+             "default": true
         },
-        "sort": {
-            "type": "string",
-            "values": [
-                "alphabetically",
-                "none"
-            ],
-            "default": "alphabetically"
+        "sortMethod": {
+            "type": "Function"
         },
         "widthFromCss": {
             "type": "boolean",
