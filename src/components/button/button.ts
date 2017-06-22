@@ -12,6 +12,7 @@ const TYPE_RESET: string = 'reset';
 
 const MODE_PRIMARY: string = 'primary';
 const MODE_SECONDARY: string = 'secondary';
+const MODE_ICON: string = 'icon';
 
 const STATE_DEFAULT: string = 'default';
 const STATE_DISABLED: string = 'disabled';
@@ -32,6 +33,8 @@ export class MButton extends Vue {
     public iconName: string;
     @Prop({ default: 'left' })
     public iconPosition: string;
+    @Prop({ default: false })
+    public isFullSize: boolean;
 
     public componentName: string = BUTTON_NAME;
 
@@ -58,7 +61,7 @@ export class MButton extends Vue {
     }
 
     private getMode(mode: string): string {
-        return mode != MODE_SECONDARY ? MODE_PRIMARY : mode;
+        return mode != MODE_SECONDARY && mode != MODE_ICON ? MODE_PRIMARY : mode;
     }
 
     private getState(state: string): string {

@@ -3,7 +3,8 @@
                 'm--is-icon': propsMode=='icon',
                 'm--is-selected': propsState=='selected',
                 'm--is-waiting': propsState=='waiting',
-                'm--is-disabled': propsState=='disabled' }" :disabled="isDisabled" :type="type" @click="onClick">
+                'm--is-disabled': propsState=='disabled',
+                'm--is-full-size': isFullSize }" :disabled="isDisabled" :type="type" @click="onClick">
     <span class="m-button__wrap" v-if="propsMode!='icon'">
         <m-icon class="m-button__icon m--is-left" :name="iconName" v-if="hasIconeLeft && hasIcone"></m-icon>
         <span class="m-button__text">

@@ -6,7 +6,8 @@
             "type": "string",
             "values": [
                 "primary",
-                "secondary"
+                "secondary",
+                "icon"
             ],
             "default": 0
         },
@@ -28,6 +29,10 @@
                 "reset"
             ],
             "default": 0
+        },
+        "isFullSize": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": [

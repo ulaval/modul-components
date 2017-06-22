@@ -114,10 +114,14 @@ $m-button--color-disabled: $m-color--grey-light !default;
         }
     }
 
+    &.m--is-full-size {
+        width: 100%;
+    }
+
     &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
-        &:active,
-        &:focus {
-            &.is-icon {
+        &.m--is-icon {
+            &:active,
+            &:focus {
                 &::after {
                     opacity: 1;
                     transition-delay: 0s;
