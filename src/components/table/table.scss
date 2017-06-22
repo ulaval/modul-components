@@ -8,7 +8,7 @@
 
     .m-table__header {
         margin-right: 16px;
-        background-color: $m-color--grey--lightest;
+        background-color: $m-color--grey-lightest;
         padding: $m-padding;
         display: grid;
         align-items: center;
@@ -20,7 +20,7 @@
             align-items: flex-start;
         }
 
-        .m-table__header__content.is-right {
+        .m-table__header__content.m--is-right {
             justify-self: flex-end;
         }
     }
@@ -34,7 +34,7 @@
                 padding: 0 $m-padding--s $m-margin--s;
                 font-weight: $m-font-weight--bold;
                 color: $m-color--black;
-                border-bottom: 2px solid $m-color--grey--lighter;
+                border-bottom: 2px solid $m-color--grey-lighter;
 
                 &:first-child {
                     padding-left: 0;
@@ -47,7 +47,7 @@
             }
 
             tbody tr {
-                border-bottom: 1px solid $m-color--grey--lighter;
+                border-bottom: 1px solid $m-color--grey-lighter;
 
                 &:last-child {
                     border-bottom: 0;

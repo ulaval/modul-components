@@ -1,9 +1,9 @@
-<article class="m-step" :class="{'is-disable': propsState=='disable','is-inProgress': propsState=='in-progress','is-success': propsState=='success','is-warning': propsState=='warning','is-error': propsState=='error', 'is-open': propsIsOpen, 'is-close': !propsIsOpen, 'is-last': isLast}">
+<article class="m-step" :class="{'m--is-disable': propsState=='disable','m--is-in-progress': propsState=='in-progress','m--is-success': propsState=='success','m--is-warning': propsState=='warning','m--is-error': propsState=='error', 'm--is-open': propsIsOpen, 'm--is-close': !propsIsOpen, 'm--is-last': isLast}">
     <header>
         <a href="#" class="m-step__header" @click="openStep">
-            <span class="m-step__header__icon">
+            <span class="m-step__icon">
                 <m-icon :name="iconName"></m-icon>
-                <span class="m-step__header__icon__badge">
+                <span class="m-step__icon__badge">
                     <m-icon :name="getIcon()"></m-icon>
                 </span>
             </span>

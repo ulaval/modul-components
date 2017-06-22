@@ -22,17 +22,17 @@ export class MMessage extends Vue {
     public componentName = MESSAGE_NAME;
 
     private get showCloseButton(): boolean {
-        return this.$props.mode == 'regular' && this.$props.hasCloseButton;
+        return this.mode == 'regular' && this.hasCloseButton;
     }
 
     private onClose(event): void {
         this.$emit('onClose', event);
-        this.$props.isVisible = false;
+        this.isVisible = false;
     }
 
     private getIcon(): string {
         let icon: string = '';
-        switch (this.$props.state) {
+        switch (this.state) {
             case 'success':
                 icon = 'pastille-crochet';
                 break;

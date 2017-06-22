@@ -12,73 +12,68 @@ $m-color--ul-red: #e30513;
 // ======================================================================
 //  Black grey
 // ======================================================================
-$m-color--black-grey--darker: #232323 !default;
-$m-color--black-grey--dark: #2e2e2e !default;
+$m-color--black-grey-darker: #232323 !default;
+$m-color--black-grey-dark: #2e2e2e !default;
 $m-color--black-grey: #3d3d3d !default;
-$m-color--black-grey--light: #4f4f4f !default;
-$m-color--black-grey--lighter: #666 !default;
+$m-color--black-grey-light: #4f4f4f !default;
+$m-color--black-grey-lighter: #666 !default;
 
 // ======================================================================
 //  Grey
 // ======================================================================
-$m-color--grey--darker: #999 !default;
-$m-color--grey--dark: #b0b0b0 !default;
+$m-color--grey-darker: #999 !default;
+$m-color--grey-dark: #b0b0b0 !default;
 $m-color--grey: #dadada !default;
-$m-color--grey--light: #e8e8e8 !default;
-$m-color--grey--lighter: #f1f1f1 !default;
-$m-color--grey--lightest: #f7f7f7 !default;
+$m-color--grey-light: #e8e8e8 !default;
+$m-color--grey-lighter: #f1f1f1 !default;
+$m-color--grey-lightest: #f7f7f7 !default;
 
 // ======================================================================
 //  Primary colors
 // ======================================================================
-$m-color--primary--darker: #0074a0 !default;
-$m-color--primary--dark: #0087bd !default;
+$m-color--primary-darker: #0074a0 !default;
+$m-color--primary-dark: #0087bd !default;
 $m-color--primary: $m-color--ul-blue !default;
-$m-color--primary--light: #36adff !default;
-$m-color--primary--lighter: #6ed2ff !default;
-$m-color--primary--lightest: #dffaff !default;
+$m-color--primary-light: #36adff !default;
+$m-color--primary-lighter: #6ed2ff !default;
+$m-color--primary-lightest: #dffaff !default;
 
 // ======================================================================
 //  Secondary colors
 // ======================================================================
-$m-color--secondary--darker: #b64c00 !default;
-$m-color--secondary--dark: #d07300 !default;
+$m-color--secondary-darker: #b64c00 !default;
+$m-color--secondary-dark: #d07300 !default;
 $m-color--secondary: #f39612 !default;
-$m-color--secondary--light: #ffaa26 !default;
-$m-color--secondary--lighter: #ffbe3a !default;
-$m-color--secondary--lightest: #ffeecf !default;
+$m-color--secondary-light: #ffaa26 !default;
+$m-color--secondary-lighter: #ffbe3a !default;
+$m-color--secondary-lightest: #ffeecf !default;
 
 // ======================================================================
 //  Yellow
 // ======================================================================
-$m-color--yellow--darker: #cc8f09 !default;
-$m-color--yellow--dark: #e0a207 !default;
+$m-color--yellow-darker: #cc8f09 !default;
+$m-color--yellow-dark: #e0a207 !default;
 $m-color--yellow: $m-color--ul-yellow !default;
-$m-color--yellow--light: #ffd517 !default;
-$m-color--yellow--lighter: #ffec66 !default;
-$m-color--yellow--lightest: #fffdcf !default;
+$m-color--yellow-light: #ffd517 !default;
+$m-color--yellow-lighter: #ffec66 !default;
+$m-color--yellow-lightest: #fffdcf !default;
 
 // ======================================================================
 //  Valid colors
 // ======================================================================
-$m-color--valid--darker: #079942 !default;
-$m-color--valid--dark: #14a555 !default;
+$m-color--valid-darker: #079942 !default;
+$m-color--valid-dark: #14a555 !default;
 $m-color--valid: #13bf69 !default;
-$m-color--valid--light: #17c96b !default;
-$m-color--valid--lighter: #1ddd6f !default;
-$m-color--valid--lightest: #dcf9e9 !default;
+$m-color--valid-light: #17c96b !default;
+$m-color--valid-lighter: #1ddd6f !default;
+$m-color--valid-lightest: #dcf9e9 !default;
 
 // ======================================================================
 //  Error colors
 // ======================================================================
-$m-color--error--darker: #b20000 !default;
-$m-color--error--dark: #ca0000 !default;
+$m-color--error-darker: #b20000 !default;
+$m-color--error-dark: #ca0000 !default;
 $m-color--error: $m-color--ul-red !default;
-$m-color--error--light: #e33642 !default;
-$m-color--error--lighter: #e39fa8 !default;
-$m-color--error--lightest: #ffdcdc !default;
-
-// ======================================================================
-//  Font color
-// ======================================================================
-$m-text-color: $m-color--black !default;
+$m-color--error-light: #e33642 !default;
+$m-color--error-lighter: #e39fa8 !default;
+$m-color--error-lightest: #ffdcdc !default;

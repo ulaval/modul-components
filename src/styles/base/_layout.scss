@@ -2,17 +2,25 @@
 //  Margin
 // ======================================================================
 
-.m-margin {
+.m-u--margin {
     margin: $m-margin;
+
+    &--l {
+        margin: $m-margin--l;
+    }
+
+    &--s {
+        margin: $m-margin--s;
+    }
 
     &-top {
         margin-top: $m-margin;
 
-        &-large {
+        &--l {
             margin-top: $m-margin--l;
         }
 
-        &-small {
+        &--s {
             margin-top: $m-margin--s;
         }
     }
@@ -20,11 +28,11 @@
     &-right {
         margin-right: $m-margin;
 
-        &-large {
+        &--l {
             margin-right: $m-margin--l;
         }
 
-        &-small {
+        &--s {
             margin-right: $m-margin--s;
         }
     }
@@ -32,11 +40,11 @@
     &-bottom {
         margin-bottom: $m-margin;
 
-        &-large {
+        &--l {
             margin-bottom: $m-margin--l;
         }
 
-        &-small {
+        &--s {
             margin-bottom: $m-margin--s;
         }
     }
@@ -44,11 +52,11 @@
     &-left {
         margin-left: $m-margin;
 
-        &-large {
+        &--l {
             margin-left: $m-margin--l;
         }
 
-        &-small {
+        &--s {
             margin-left: $m-margin--s;
         }
     }
@@ -57,12 +65,12 @@
         margin-top: $m-margin;
         margin-bottom: $m-margin;
 
-        &-large {
+        &--l {
             margin-top: $m-margin--l;
             margin-bottom: $m-margin--l;
         }
 
-        &-small {
+        &--s {
             margin-top: $m-margin--s;
             margin-bottom: $m-margin--s;
         }
@@ -72,41 +80,40 @@
         margin-right: $m-margin;
         margin-left: $m-margin;
 
-        &-large {
+        &--l {
             margin-right: $m-margin--l;
             margin-left: $m-margin--l;
         }
 
-        &-small {
+        &--s {
             margin-right: $m-margin--s;
             margin-left: $m-margin--s;
         }
-    }
-
-    &-large {
-        margin: $m-margin--l;
-    }
-
-    &-samll {
-        margin: $m-margin--s;
     }
 }
 
 // ======================================================================
 //  Padding
 // ======================================================================
-
-.m-padding {
+.m-u--padding {
     padding: $m-padding;
+
+    &--l {
+        padding: $m-padding--l;
+    }
+
+    &--s {
+        padding: $m-padding--s;
+    }
 
     &-top {
         padding-top: $m-padding;
 
-        &-large {
+        &--l {
             padding-top: $m-padding--l;
         }
 
-        &-small {
+        &--s {
             padding-top: $m-padding--s;
         }
     }
@@ -114,11 +121,11 @@
     &-right {
         padding-right: $m-padding;
 
-        &-large {
+        &--l {
             padding-right: $m-padding--l;
         }
 
-        &-small {
+        &--s {
             padding-right: $m-padding--s;
         }
     }
@@ -126,11 +133,11 @@
     &-bottom {
         padding-bottom: $m-padding;
 
-        &-large {
+        &--l {
             padding-bottom: $m-padding--l;
         }
 
-        &-small {
+        &--s {
             padding-bottom: $m-padding--s;
         }
     }
@@ -138,11 +145,11 @@
     &-left {
         padding-left: $m-padding;
 
-        &-large {
+        &--l {
             padding-left: $m-padding--l;
         }
 
-        &-small {
+        &--s {
             padding-left: $m-padding--s;
         }
     }
@@ -151,12 +158,12 @@
         padding-top: $m-padding;
         padding-bottom: $m-padding;
 
-        &-large {
+        &--l {
             padding-top: $m-padding--l;
             padding-bottom: $m-padding--l;
         }
 
-        &-small {
+        &--s {
             padding-top: $m-padding--s;
             padding-bottom: $m-padding--s;
         }
@@ -166,31 +173,130 @@
         padding-right: $m-padding;
         padding-left: $m-padding;
 
-        &-large {
+        &--l {
             padding-right: $m-padding--l;
             padding-left: $m-padding--l;
         }
 
-        &-small {
+        &--s {
             padding-right: $m-padding--s;
             padding-left: $m-padding--s;
         }
     }
+}
 
-    &-large {
-        padding: $m-padding--l;
+// ======================================================================
+//  border
+// ======================================================================
+.m-u--border {
+    border: $m-border-width solid;
+
+    &--l {
+        border: $m-border-width--l solid;
     }
 
-    &-samll {
-        padding: $m-padding--s;
+    &--s {
+        border: $m-border-width--s solid;
+    }
+
+    &-top {
+        border-top: $m-border-width solid;
+
+        &--l {
+            border-top: $m-border-width--l solid;
+        }
+
+        &--s {
+            border-top: $m-border-width--s solid;
+        }
+    }
+
+    &-right {
+        border-right: $m-border-width solid;
+
+        &--l {
+            border-right: $m-border-width--l solid;
+        }
+
+        &--s {
+            border-right: $m-border-width--s solid;
+        }
+    }
+
+    &-bottom {
+        border-bottom: $m-border-width solid;
+
+        &--l {
+            border-bottom: $m-border-width--l solid;
+        }
+
+        &--s {
+            border-bottom: $m-border-width--s solid;
+        }
+    }
+
+    &-left {
+        border-left: $m-border-width solid;
+
+        &--l {
+            border-left: $m-border-width--l solid;
+        }
+
+        &--s {
+            border-left: $m-border-width--s solid;
+        }
+    }
+
+    &-top-bottom {
+        border-top: $m-border-width solid;
+        border-bottom: $m-border-width solid;
+
+        &--l {
+            border-top: $m-border-width--l solid;
+            border-bottom: $m-border-width--l solid;
+        }
+
+        &--s {
+            border-top: $m-border-width--s solid;
+            border-bottom: $m-border-width--s solid;
+        }
+    }
+
+    &-right-left {
+        border-right: $m-border-width solid;
+        border-left: $m-border-width solid;
+
+        &--l {
+            border-right: $m-border-width--l solid;
+            border-left: $m-border-width--l solid;
+        }
+
+        &--s {
+            border-right: $m-border-width--s solid;
+            border-left: $m-border-width--s solid;
+        }
     }
 }
 
 // ======================================================================
-//  without margin and padding
+//  box-shadow
 // ======================================================================
+.m-u--box-shadow {
+    box-shadow: $m-box-shadow;
 
-.m-no {
+    &--l {
+        box-shadow: $m-box-shadow--l;
+    }
+
+    &--s {
+        box-shadow: $m-box-shadow--s;
+    }
+}
+
+// ======================================================================
+//  mo margin, no padding, no border and no box-shadow
+// ======================================================================
+.m-u--no {
     &-margin {
         margin: 0;
 
@@ -249,5 +355,39 @@
             padding-right: 0;
             padding-left: 0;
         }
+    }
+
+    &-border {
+        border: none;
+
+        &-top {
+            border-top: none;
+        }
+
+        &-right {
+            border-right: none;
+        }
+
+        &-bottom {
+            border-bottom: none;
+        }
+
+        &-left {
+            border-left: none;
+        }
+
+        &-top-bottom {
+            border-top: none;
+            border-bottom: none;
+        }
+
+        &-right-left {
+            border-right: none;
+            border-left: none;
+        }
+    }
+
+    &-box-shadow {
+        box-shadow: none;
     }
 }

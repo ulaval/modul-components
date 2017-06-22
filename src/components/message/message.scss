@@ -4,60 +4,60 @@ $m-message-size: 22px;
 .m-message {
     display: block;
 
-    &.is-regular {
-        &.is-success {
+    &.m--is-regular {
+        &.m--is-success {
             border: 1px solid $m-color--valid;
 
             .m-message__icon {
-                background-color: $m-color--valid--lightest;
+                background-color: $m-color--valid-lightest;
                 border-color: $m-color--valid;
             }
 
-            .m-message__body .m-message__closeButton {
+            .m-message__body .m-message__close-button {
                 color: $m-color--valid;
             }
         }
 
-        &.is-information {
+        &.m--is-information {
             border: 1px solid $m-color--primary;
 
             .m-message__icon {
-                background-color: $m-color--primary--lightest;
+                background-color: $m-color--primary-lightest;
                 border-color: $m-color--primary;
             }
 
-            .m-message__body .m-message__closeButton {
+            .m-message__body .m-message__close-button {
                 color: $m-color--primary;
             }
         }
 
-        &.is-warning {
+        &.m--is-warning {
             border: 1px solid $m-color--yellow;
 
             .m-message__icon {
-                background-color: $m-color--yellow--lightest;
+                background-color: $m-color--yellow-lightest;
                 border-color: $m-color--yellow;
             }
 
-            .m-message__body .m-message__closeButton {
+            .m-message__body .m-message__close-button {
                 color: $m-color--yellow;
             }
         }
 
-        &.is-error {
+        &.m--is-error {
             border: 1px solid $m-color--error;
 
             .m-message__icon {
-                background-color: $m-color--error--lightest;
+                background-color: $m-color--error-lightest;
                 border-color: $m-color--error;
             }
 
-            .m-message__body .m-message__closeButton {
+            .m-message__body .m-message__close-button {
                 color: $m-color--error;
             }
         }
 
-        .m-message__container {
+        .m-message__wrap {
             display: flex;
         }
 
@@ -76,12 +76,12 @@ $m-message-size: 22px;
             padding: $m-margin;
             flex: 1;
 
-            &.have-close-button {
+            &.m--have-close-button {
                 padding-right: $m-padding--l;
                 position: relative;
             }
 
-            .m-message__closeButton {
+            .m-message__close-button {
                 position: absolute;
                 top: 0;
                 right: 0;
@@ -95,32 +95,32 @@ $m-message-size: 22px;
         }
     }
 
-    &.is-light {
-        &.is-success {
-            .m-message__container {
-                background-color: $m-color--valid--lightest;
+    &.m--is-light {
+        &.m--is-success {
+            .m-message__wrap {
+                background-color: $m-color--valid-lightest;
             }
         }
 
-        &.is-information {
-            .m-message__container {
-                background-color: $m-color--primary--lightest;
+        &.m--is-information {
+            .m-message__wrap {
+                background-color: $m-color--primary-lightest;
             }
         }
 
-        &.is-warning {
-            .m-message__container {
-                background-color: $m-color--yellow--lightest;
+        &.m--is-warning {
+            .m-message__wrap {
+                background-color: $m-color--yellow-lightest;
             }
         }
 
-        &.is-error {
-            .m-message__container {
-                background-color: $m-color--error--lightest;
+        &.m--is-error {
+            .m-message__wrap {
+                background-color: $m-color--error-lightest;
             }
         }
 
-        .m-message__container {
+        .m-message__wrap {
             display: inline-flex;
 
             .m-message__body {

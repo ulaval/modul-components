@@ -5,7 +5,7 @@ $m-accordion--icon--l--height: 2px;
 $m-accordion--icon--height: 1px;
 $m-accordion--border--size: 2px;
 $m-accordion--color: $m-color--secondary;
-$m-accordion--color--border: $m-color--grey--light;
+$m-accordion--color--border: $m-color--grey-light;
 
 .m-accordion {
     &.m--is-regular,
@@ -36,7 +36,7 @@ $m-accordion--color--border: $m-color--grey--light;
                 border-bottom: $m-accordion--border--size solid $m-accordion--color--border;
 
                 &-wrap {
-                    border-left: $m-border-size solid $m-accordion--color;
+                    border-left: $m-border-width--l solid $m-accordion--color;
                 }
             }
 
@@ -96,7 +96,7 @@ $m-accordion--color--border: $m-color--grey--light;
         }
 
         &:not(.m--is-no-style) {
-            color: $m-color--black;
+            color: $m-color--text;
             text-decoration: none;
         }
 

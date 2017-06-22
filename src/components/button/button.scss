@@ -1,10 +1,10 @@
 @import 'abstracts/variables';
 $m-button--color: $m-color--primary !default;
-$m-button--color--hover: $m-color--primary--light !default;
-$m-button--color--active: $m-color--primary--dark !default;
-$m-button--color--selected: $m-color--primary--darker !default;
-$m-button--color--waiting: $m-color--primary--lighter !default;
-$m-button--color--disabled: $m-color--grey--light !default;
+$m-button--color-hover: $m-color--primary-light !default;
+$m-button--color-active: $m-color--primary-dark !default;
+$m-button--color-selected: $m-color--primary-darker !default;
+$m-button--color-waiting: $m-color--primary-lighter !default;
+$m-button--color-disabled: $m-color--grey-light !default;
 
 .m-button {
     position: relative;
@@ -38,34 +38,34 @@ $m-button--color--disabled: $m-color--grey--light !default;
 
             &:hover {
                 color: $m-color--white;
-                background: $m-button--color--hover;
-                border-color: $m-button--color--hover;
+                background: $m-button--color-hover;
+                border-color: $m-button--color-hover;
             }
 
             &:active,
             &:focus {
-                background: $m-button--color--active;
-                border-color: $m-button--color--active;
+                background: $m-button--color-active;
+                border-color: $m-button--color-active;
             }
         }
 
         &.m--is-waiting {
             cursor: progress;
             color: $m-color--white;
-            background: $m-button--color--waiting;
-            border-color: $m-button--color--waiting;
+            background: $m-button--color-waiting;
+            border-color: $m-button--color-waiting;
         }
 
         &.m--is-disabled {
             cursor: not-allowed;
-            color: $m-button--color--disabled;
+            color: $m-button--color-disabled;
             background: $m-color--white;
-            border-color: $m-button--color--disabled;
+            border-color: $m-button--color-disabled;
         }
 
         &.m--is-selected {
-            background: $m-button--color--selected;
-            border-color: $m-button--color--selected;
+            background: $m-button--color-selected;
+            border-color: $m-button--color-selected;
         }
     }
 
@@ -105,7 +105,7 @@ $m-button--color--disabled: $m-color--grey--light !default;
             height: $m-touch-size / 2;
             border-radius: 50%;
             opacity: 0;
-            background: $m-color--primary--lightest;
+            background: $m-color--primary-lightest;
         }
 
         .m-button__icon {

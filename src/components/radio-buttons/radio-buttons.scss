@@ -1,0 +1,84 @@
+@import 'abstracts/variables';
+$m-checkbox--width: 16px;
+
+.m-radio-buttons {
+    display: inline;
+    user-select: none;
+    line-height: 1;
+    list-style: none;
+    padding-left: 0;
+
+    &:not(.is-disabled) {
+        cursor: pointer;
+
+        .m-radio-buttons__wrap {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .m-radio-buttons__wrap:hover,
+        input[type=radio]:focus ~ .m-radio-buttons__wrap {
+            .m-radio-buttons__input {
+                border-color: $m-color--primary;
+                background: $m-color--primary-lightest;
+            }
+
+            .m-radio-buttons__label {
+                color: $m-color--primary;
+            }
+        }
+
+        .m-radio-buttons__label {
+            flex: 1;
+            color: $m-color--text;
+            padding-left: $m-margin--s;
+        }
+
+        .m-radio-buttons__input {
+            border-color: $m-color--black;
+            color: $m-color--black;
+
+            &.m--is-checked {
+                &::before {
+                    visibility: visible;
+                    transform: scale(1);
+                }
+            }
+
+            &::before {
+                transition: 0.3s transform ease-out;
+                content: '';
+                display: block;
+                width: 10px;
+                height: 10px;
+                background: $m-color--primary;
+                border-radius: 50%;
+                visibility: hidden;
+                transform: scale(0);
+            }
+        }
+    }
+
+    &__input {
+        transition: 0.3s background ease, 0.3s bordr-color ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: $m-checkbox--width;
+        height: $m-checkbox--width;
+        background: $m-color--white;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    &__label {
+        transition: 0.3s color ease;
+    }
+
+    &__hidden {
+        @include visuallyHidden;
+    }
+}

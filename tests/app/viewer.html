@@ -1,7 +1,7 @@
 <div>
-    <m-link is-without-visit="true">
+    <m-link state="unvisited">
         <span slot="icon-left"><</span>Back
     </m-link>
-    <h2 class="m-margin-top-small m-margin-bottom-large">{{$route.meta}}</h2>
+    <h2 class="m-u--margin-top--s m-u--margin-bottom--l">{{$route.meta}}</h2>
     <m-dynamic-template :template="tag"></m-dynamic-template>
 </div>

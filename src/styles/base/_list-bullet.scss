@@ -2,7 +2,7 @@
 //  List bullet
 // ======================================================================
 
-.m-list-bullet {
+.m-u--list-bullet {
     margin: $m-margin 0;
     padding: 0 0 0 $m-padding--l;
 
@@ -29,13 +29,13 @@
 
         &::before {
             position: absolute;
-            top: 8px;
-            left: -12px;
+            top: 8px; // Magic number
+            left: -12px; // Magic number
             content: '';
             width: 3px;
             height: 3px;
             border-radius: 50%;
-            background: $m-color--grey--light;
+            background: $m-color--grey-dark;
         }
     }
 }

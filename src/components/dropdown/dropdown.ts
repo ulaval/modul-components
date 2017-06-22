@@ -45,18 +45,9 @@ export class MDropdown extends Vue {
     public textElement: string = '';
 
     private elementsSorted: Array<string>;
-
     private stateDisabled: boolean;
-
     private nullValueText: string;
     private nullValueAvailable: boolean;
-
-    // private updateEnCours: number;
-
-    @Watch('textElement')
-    public textElementChanged(value): void {
-        // console.log(value);
-    }
 
     @Watch('elements')
     public elementChanged(value): void {
@@ -157,9 +148,9 @@ export class MDropdown extends Vue {
     public adjustWidth(): void {
         // Hidden element to calculate width
         let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
-        // Input or span
+        // Input or a
         let valueField: Vue = this.$refs.mDropdownValue as Vue;
-        // List
+        // List of elements
         let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
 
         let width: number = 0;
@@ -172,9 +163,8 @@ export class MDropdown extends Vue {
             width = this.getTextWidth(hiddenField, this.getSelectedElementText());
         }
 
-        // hiddenField.remove();
-
         width = Math.ceil(width);
+        // Set width to Input and List
         valueField.$el.style.width = width + 'px';
         elements.style.width = width + 'px';
     }
@@ -198,9 +188,6 @@ export class MDropdown extends Vue {
                 // Copy the list without sorting
                 elementsSorted = this.elements.slice(0);
             }
-            // if (this.valeurNullePresente) {
-            //     elementsTries.splice(0, 0, this.valeurNulleTexte);
-            // }
 
             // Default element.
             if (typeof this.propsSelectedElement == UNDEFINED) {
@@ -216,6 +203,8 @@ export class MDropdown extends Vue {
                 } else {
                     this.textElement = this.propsInvite;
                 }
+            } else {
+                this.textElement = this.getSelectedElementText();
             }
         }
 
@@ -232,18 +221,6 @@ export class MDropdown extends Vue {
         //     this.inactif = false;
         // }
     }
-
-    // private filterElements(): Array<string> {
-    //     if ((this.textElement == '') || (this.textElement == this.propsInvite) || (this.textElement == this.propsSelectedElement)) {
-    //         return this.elementsSorted;
-    //     }
-
-    //     let filteredElements: Array<string> = this.elementsSorted.filter((element) => {
-    //         return normalizeString(element).match(normalizeString(this.textElement));
-    //     });
-
-    //     return filteredElements;
-    // }
 }
 
 const DropdownPlugin: PluginObject<any> = {

@@ -1,5 +1,5 @@
 // ======================================================================
-//  Max and min width
+//  max and min width
 // ======================================================================
 $m-max-width: 1000px !default;
 $m-max-width--text: 720px !default;
@@ -7,7 +7,7 @@ $m-max-width--dialog: 400px !default;
 $m-min-width: 320px !default;
 
 // ======================================================================
-//  Margin
+//  margin
 // ======================================================================
 $m-margin--xl: 48px !default;
 $m-margin--l: 24px !default;
@@ -16,7 +16,7 @@ $m-margin--s: 6px !default;
 $m-margin--xs: 3px !default;
 
 // ======================================================================
-//  Padding
+//  padding
 // ======================================================================
 $m-padding--xl: 64px !default;
 $m-padding--l: 32px !default;
@@ -25,7 +25,22 @@ $m-padding--s: 8px !default;
 $m-padding--xs: 4px !default;
 
 // ======================================================================
-//  Others
+//  border
 // ======================================================================
+$m-border-width--l: 4px !default;
+$m-border-width: 2px !default;
+$m-border-width--s: 1px !default;
+
+// ======================================================================
+//  box-shadow
+// ======================================================================
+$m-box-shadow--l: 0 3px 6px rgba($m-color--black, 0.18) !default;
+$m-box-shadow: 0 2px 4px rgba($m-color--black, 0.15) !default;
+$m-box-shadow--s: 0 1px 1px rgba($m-color--black, 0.15) !default;
+
+// ======================================================================
+//  touch size
+// ======================================================================
+$m-touch-size--l: 48px !default;
 $m-touch-size: 44px !default;
-$m-border-size: 4px;
+$m-touch-size--s: 38px !default;

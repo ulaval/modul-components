@@ -1,10 +1,10 @@
 import './polyfills';
 import Vue from 'vue';
-import MediaQueryPlugin from './media-query';
+import MediaQueriesPlugin from './media-queries';
 
-describe('MediaQuery plugin', () => {
+describe('Mediies plugin', () => {
     it('registers $mq on vue instance', () => {
-        Vue.use(MediaQueryPlugin);
+        Vue.use(MediaQueriesPlugin);
 
         Vue.use({
             install(v, options) {
@@ -14,7 +14,7 @@ describe('MediaQuery plugin', () => {
     });
 
     it('registers $mq on vue prototype', () => {
-        Vue.use(MediaQueryPlugin);
+        Vue.use(MediaQueriesPlugin);
 
         let Ex = Vue.extend({
             created: function() {

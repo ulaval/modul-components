@@ -12,18 +12,18 @@ $m-step--badge--size: 20px;
         height: 100%;
         z-index: 1;
         width: 1px;
-        background-color: $m-color--grey--dark;
+        background-color: $m-color--grey-dark;
         content: "";
         left: calc((#{$m-step--icon--size} / 2) - 1px); //magic number
     }
 
-    &.is-inProgress {
-        .m-step__header .m-step__header__icon {
+    &.m--is-in-progress {
+        .m-step__header .m-step__icon {
             border-color: $m-color--ul-yellow;
         }
     }
 
-    &.is-last {
+    &.m--is-last {
         &::before {
             position: relative;
             height: 0;
@@ -44,7 +44,7 @@ $m-step--badge--size: 20px;
         text-decoration: none;
         margin-bottom: $m-margin--xs;
 
-        .m-step__header__icon {
+        .m-step__icon {
             border: 2px solid $m-color--grey;
             height: $m-step--icon--size;
             width: $m-step--icon--size;
@@ -56,7 +56,7 @@ $m-step--badge--size: 20px;
             background-color: $m-color--white;
             position: relative;
 
-            .m-step__header__icon__badge {
+            .m-step__icon__badge {
                 width: $m-step--badge--size;
                 height: $m-step--badge--size;
                 position: absolute;

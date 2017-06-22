@@ -1,9 +1,9 @@
 <div>
-    <m-link is-without-visit="true">
+    <m-link state="unvisited">
         <span slot="icon-left"><</span>Back
     </m-link>
     <h2>Attributes by component</h2>
-    <ul class="m-list-bullet">
+    <ul class="m-u--list-bullet">
         <li v-for="meta in allMeta">
             {{meta.tag}}
             <ul>
@@ -20,7 +20,7 @@
         </li>
     </ul>
     <h2>Components by attribute</h2>
-    <ul class="m-list-bullet">
+    <ul class="m-u--list-bullet">
         <li v-for="attribute in getAllAttributes()">
             {{attribute}}
             <ul>

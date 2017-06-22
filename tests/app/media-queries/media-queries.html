@@ -1,0 +1,23 @@
+<div>
+    <m-link state="unvisited">
+        <span slot="icon-left"><</span>Back
+    </m-link>
+    <h2>min-width</h2>
+    <p v-if="isMinExtraSmall">480px >= ... <strong>isMinExtraSmall</strong></p>
+    <p v-if="isMinSmall">768 >= ... <strong>isMinSmall</strong></p>
+    <p v-if="isMinMedium">1024 >= ... <strong>isMinMedium</strong></p>
+    <p v-if="isMinLarge"> 1200 >= ... <strong>isMinLarge</strong></p>
+    <p v-if="isExtraLarge">1600 >= ... <strong>isExtraLarge</strong></p>
+
+    <h2>max-width</h2>
+    <p v-if="isExtraSmall"><strong>isExtraSmall</strong> ... <= 479</p>
+    <p v-if="isMaxSmall"><strong>isMaxSmall</strong> ... <= 767</p>
+    <p v-if="isMaxMedium"><strong>isMaxMedium</strong> ... <= 1023</p>
+    <p v-if="isMaxLarge"><strong>isMaxLarge</strong> ... <= 1199px</p>
+    <p v-if="isMaxExtraLarge"><strong>isMaxExtraLarge</strong> ... <= 1599</p>
+
+    <h2>min-width and max-width</h2>
+    <p v-if="isSmall"> 480 =­> ... <strong>isSmall</strong> ... <= 767</p>
+    <p v-if="isMedium">768 => ... <strong>isMedium</strong>... <= 1023</p>
+    <p v-if="isLarge">1024 => ... <strong>isLarge</strong> ... <= 1599</p>
+</div>

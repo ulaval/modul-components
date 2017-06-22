@@ -18,7 +18,7 @@
         },
         "state" : {
             "type": "string",
-            "value": [
+            "values": [
                 "default",
                 "unvisited"
             ],

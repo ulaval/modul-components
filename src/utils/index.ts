@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 
-import MediaQueryPlugin from './media-query';
+import MediaQueriesPlugin from './media-queries';
 import MessagesPlugin from './i18n';
 import HttpPlugin from './http/http';
 import SecurityPlugin, { SecurityPluginOptions } from './http/security';
@@ -17,7 +17,7 @@ const UtilsPlugin: PluginObject<any> = {
         }
         let o: UtilsPluginOptions = options as UtilsPluginOptions;
 
-        Vue.use(MediaQueryPlugin);
+        Vue.use(MediaQueriesPlugin);
         Vue.use(MessagesPlugin);
         Vue.use(HttpPlugin);
         Vue.use(SecurityPlugin, o.securityPluginOptions);

@@ -6,22 +6,23 @@ import AccordionPlugin from './accordion/accordion';
 import ButtonPlugin from './button/button';
 import CheckboxPlugin from './checkbox/checkbox';
 import DialogPlugin from './dialog/dialog';
+import DropdownPlugin from './dropdown/dropdown';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import IconPlugin from './icon/icon';
 import I18nPlugin from './i18n/i18n';
 import LinkPlugin from './link/link';
 import ListBulletPlugin from './list-bullet/list-bullet';
-import PanelPlugin from './panel/panel';
-import StatusList from './status-list/status-list';
-import TablePlugin from './table/table';
-import TextFieldPlugin from './text-field/text-field';
 import MessagePlugin from './message/message';
-import UploadPlugin from './upload/upload';
+import PanelPlugin from './panel/panel';
 import PopperPlugin from './popper/popper';
 import PopperListPlugin from './popper-list/popper-list';
-import DropdownPlugin from './dropdown/dropdown';
+import RadioButtonsPlugin from './radio-buttons/radio-buttons';
+import StatusList from './status-list/status-list';
 import StepPlugin from './step/step';
+import TablePlugin from './table/table';
 import Template from './template/template';
+import TextFieldPlugin from './text-field/text-field';
+import UploadPlugin from './upload/upload';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options) {
@@ -30,22 +31,23 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ButtonPlugin);
         Vue.use(CheckboxPlugin);
         Vue.use(DialogPlugin);
+        Vue.use(DropdownPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(IconPlugin);
         Vue.use(I18nPlugin);
         Vue.use(LinkPlugin);
         Vue.use(ListBulletPlugin);
-        Vue.use(PanelPlugin);
-        Vue.use(StatusList);
-        Vue.use(TablePlugin);
-        Vue.use(TextFieldPlugin);
         Vue.use(MessagePlugin);
-        Vue.use(UploadPlugin);
+        Vue.use(PanelPlugin);
         Vue.use(PopperPlugin);
         Vue.use(PopperListPlugin);
-        Vue.use(DropdownPlugin);
+        Vue.use(RadioButtonsPlugin);
+        Vue.use(StatusList);
         Vue.use(StepPlugin);
+        Vue.use(TablePlugin);
         Vue.use(Template);
+        Vue.use(TextFieldPlugin);
+        Vue.use(UploadPlugin);
     }
 };
 
