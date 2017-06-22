@@ -79,9 +79,9 @@ $m-checkbox--width: 16px;
         width: $m-checkbox--width;
         height: $m-checkbox--width;
         background: $m-color--white;
-        border-width: 1px;
+        border-width: $m-border-width--s;
         border-style: solid;
-        border-radius: $m-border-size / 2;
+        border-radius: $m-border-width;
     }
 
     &__label {
