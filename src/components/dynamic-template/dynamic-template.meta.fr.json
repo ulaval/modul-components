@@ -1,8 +1,7 @@
 {
     "m-dynamic-template-meta": {
         "name": "Gabarit dynamique",
-        "context-of-use": "Décrire ici le contexte d'utilisation du gabarit dynamique.",
-        "usage": "Quelques règles d'utilisation.",
+        "context-of-use": "La composante de gabarit dynamique est utilisée lorsque du texte devant être affiché contient ou bien des balises, ou bien des componsantes VueJs. Typiquement, le texte à afficher provient d'un service web, d'un fichier de ressources, etc.",
         "template-desc": "Gabarit pouvant contenir des balises html, mais aussi des composantes et/ou directives VueJs."
     }
 }

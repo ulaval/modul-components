@@ -12,11 +12,6 @@
             "type": "rubric",
             "title": "meta:context-of-use",
             "content": "m-dynamic-template-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-dynamic-template-meta:usage"
         }
     ]
 }
