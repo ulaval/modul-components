@@ -21,7 +21,7 @@ export class MCheckbox extends Vue {
     private propsIsChecked = true;
     private propsHasLabel = true;
     private isFocus = false;
-    private id: string = 'checkbox' + uuid.generate();
+    private id: string = `checkbox${uuid.generate()}`;
 
     public mounted(): void {
         this.propsIsChecked = this.isChecked;
