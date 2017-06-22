@@ -19,7 +19,7 @@ export class MDropdown extends Vue {
     @Prop()
     public selectedElement: string;
     @Prop()
-    public getTexteElement: Function;
+    public getTextElement: Function;
     @Prop()
     public invite: string;
     @Prop({ default: '' })
@@ -81,8 +81,8 @@ export class MDropdown extends Vue {
 
     public created() {
         // Copy of props to avoid override on re-render
-        this.propsSelectedElement = this.$props.selectedElement;
-        this.propsInvite = this.$props.invite;
+        this.propsSelectedElement = this.selectedElement;
+        this.propsInvite = this.invite;
 
         // Run in created() to run before computed data
         this.prepareElements();
@@ -134,8 +134,8 @@ export class MDropdown extends Vue {
 
         if (!element) {
             // text = this.nullValueText;
-        } else if (this.getTexteElement) {
-            text = this.getTexteElement({ element: element });
+        } else if (this.getTextElement) {
+            text = this.getTextElement({ element: element });
         }
 
         if (text.trim().length == 0) {
@@ -163,7 +163,8 @@ export class MDropdown extends Vue {
             width = this.getTextWidth(hiddenField, this.getSelectedElementText());
         }
 
-        width = Math.ceil(width);
+        // Add 25px for scroll
+        width = Math.ceil(width) + 25;
         // Set width to Input and List
         valueField.$el.style.width = width + 'px';
         elements.style.width = width + 'px';
@@ -179,11 +180,7 @@ export class MDropdown extends Vue {
 
         if (this.elements) {
             if (this.sort != NO_SORT) {
-                // let parameters = this.sort.split(':');
-                // elementsSort = this.$filter<Function>(parametres[0])(this.elements, parametres[1], parametres[2]);
-
-                // TODO: Faire le tri
-                elementsSorted = this.elements.slice(0);
+                elementsSorted = this.elements.sort((a, b) => a.localeCompare(b));
             } else {
                 // Copy the list without sorting
                 elementsSorted = this.elements.slice(0);

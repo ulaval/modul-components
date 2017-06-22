@@ -34,6 +34,7 @@
                       :state="state"
                       :isEditabled="isEditabled"
                       @valueChanged="textElement = $event">
+                      <slot></slot>
         </m-text-field>
     </m-popper>
 </div>
