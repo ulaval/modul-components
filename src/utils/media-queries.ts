@@ -49,7 +49,7 @@ export const BREAKING_POINT_EXTRA_LARGE: string = 'screen and (min-width:1600px)
 const MATCH: string = 'match-';
 const UNMATCH: string = 'unmatch-';
 
-export class MediaQuery {
+export class MediaQueries {
     private eventBus: Vue = new Vue();
 
     constructor() {
@@ -107,12 +107,12 @@ export class MediaQuery {
     }
 }
 
-const MediaQueryPlugin: PluginObject<any> = {
+const MediaQueriesPlugin: PluginObject<any> = {
     install(v, options) {
-        let mediaQuery = new MediaQuery();
-        (v as any).$mq = mediaQuery;
-        (v.prototype as any).$mq = mediaQuery;
+        let mediaQueries = new MediaQueries();
+        (v as any).$mq = mediaQueries;
+        (v.prototype as any).$mq = mediaQueries;
     }
 };
 
-export default MediaQueryPlugin;
+export default MediaQueriesPlugin;

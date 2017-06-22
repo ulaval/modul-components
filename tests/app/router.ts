@@ -4,7 +4,7 @@ import Meta from '../../src/meta/meta';
 import { FRENCH } from '../../src/utils/i18n';
 import { Attributes } from './attributes/attributes';
 import { Navigation } from './navigation/navigation';
-import { MediaQuery } from './media-query/media-query';
+import { MediaQueries } from './media-queries/media-queries';
 import { Viewer } from './viewer';
 
 Vue.use(Router);
@@ -16,8 +16,8 @@ const componentRoutes: RouteConfig[] = [{
     path: '/attributes',
     component: Attributes
 }, {
-    path: '/media-query',
-    component: MediaQuery
+    path: '/media-queries',
+    component: MediaQueries
 }];
 
 Meta.getTagsByLanguage(FRENCH).forEach(tag => {

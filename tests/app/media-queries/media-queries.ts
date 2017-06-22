@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import WithRender from './media-query.html';
+import WithRender from './media-queries.html';
 import { ModulVue } from '../../../src/utils/vue';
 import {
     BREAKING_POINT_MIN_EXTRA_SMALL,
@@ -16,11 +16,11 @@ import {
     BREAKING_POINT_MEDIUM,
     BREAKING_POINT_LARGE,
     BREAKING_POINT_EXTRA_LARGE
-} from '../../../src/utils/media-query';
+} from '../../../src/utils/media-queries';
 
 @WithRender
 @Component
-export class MediaQuery extends ModulVue {
+export class MediaQueries extends ModulVue {
     private isMinExtraSmall: boolean = false;
     private isMinSmall: boolean = false;
     private isMinMedium: boolean = false;
