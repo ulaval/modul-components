@@ -6,13 +6,15 @@ import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
 import uuid from '../../utils/uuid';
 
+const POSITION_LEFT: string = 'left';
+
 @WithRender
 @Component
 export class MCheckbox extends Vue {
 
     @Prop({ default: false })
     public isChecked: boolean;
-    @Prop({ default: 'left' })
+    @Prop({ default: POSITION_LEFT })
     public position: string;
     @Prop({ default: true })
     public hasLabel: boolean;
@@ -29,12 +31,12 @@ export class MCheckbox extends Vue {
     }
 
     private onClick(event): void {
-        this.$emit('onClick');
+        this.$emit('click');
         this.$refs['checkbox']['blur']();
     }
 
     public get hasCheckboxLeft(): boolean {
-        return this.$props['position'] == 'left';
+        return this.$props['position'] == POSITION_LEFT;
     }
 }
 
