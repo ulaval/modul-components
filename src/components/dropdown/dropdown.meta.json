@@ -13,10 +13,6 @@
         "getTexteElement": {
             "type": "Function"
         },
-        "invite": {
-            "type": "string",
-            "default": ""
-        },
         "state": {
             "type": "string",
             "values": [
