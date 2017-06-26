@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import {
     ACCORDION_NAME, ACCORDION_GROUP_NAME, BUTTON_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, ICON_NAME, LINK_NAME,
-    LIST_BULLET_NAME, MESSAGE_NAME, PANEL_NAME, POPPER_LIST_NAME, POPPER_NAME, STATUS_LIST_NAME, STEP_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
+    LIST_BULLET_NAME, MESSAGE_NAME, PANEL_NAME, POPPER_LIST_NAME, POPPER_NAME, RADIO_BUTTONS_NAME, STATUS_LIST_NAME, STEP_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
     UPLOAD_NAME
 } from '../components/component-names';
 import { RIPPLE_EFFECT_NAME } from '../directives/directive-names';
@@ -27,13 +27,13 @@ export class MetaAll implements PluginObject<any> {
         (options as Meta).mergeComponentMeta(PANEL_NAME, require('../components/panel/panel.meta.json'));
         (options as Meta).mergeComponentMeta(POPPER_LIST_NAME, require('../components/popper-list/popper-list.meta.json'));
         (options as Meta).mergeComponentMeta(POPPER_NAME, require('../components/popper/popper.meta.json'));
+        (options as Meta).mergeComponentMeta(RADIO_BUTTONS_NAME, require('../components/radio-buttons/radio-buttons.meta.json'));
         (options as Meta).mergeComponentMeta(STATUS_LIST_NAME, require('../components/status-list/status-list.meta.json'));
         (options as Meta).mergeComponentMeta(STEP_NAME, require('../components/step/step.meta.json'));
         (options as Meta).mergeComponentMeta(TABLE_NAME, require('../components/table/table.meta.json'));
         (options as Meta).mergeComponentMeta(TEMPLATE_NAME, require('../components/template/template.meta.json'));
         (options as Meta).mergeComponentMeta(TEXT_FIELD_NAME, require('../components/text-field/text-field.meta.json'));
         (options as Meta).mergeComponentMeta(UPLOAD_NAME, require('../components/upload/upload.meta.json'));
-
         (options as Meta).mergeComponentMeta(RIPPLE_EFFECT_NAME, require('../directives/ripple-effect/ripple-effect.meta.json'));
     }
 }

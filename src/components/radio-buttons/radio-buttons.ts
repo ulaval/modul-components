@@ -5,9 +5,12 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './radio-buttons.html?style=./radio-buttons.scss';
 import { RADIO_BUTTONS_NAME } from '../component-names';
 
+const POSITION_LEFT: string = 'left';
+
 export interface MRadioData {
     value: string;
     label: string;
+    checked: boolean;
 }
 
 @WithRender
@@ -19,8 +22,7 @@ export class MRadioButtons extends Vue {
             return [
                 {
                     'value': 'radio-1',
-                    'label': 'Radio 1',
-                    'checked': true
+                    'label': 'Radio 1'
                 },
                 {
                     'value': 'radio-2',
@@ -28,7 +30,8 @@ export class MRadioButtons extends Vue {
                 },
                 {
                     'value': 'radio-3',
-                    'label': 'Radio 3'
+                    'label': 'Radio 3',
+                    'checked': true
                 },
                 {
                     'value': 'radio-4',
@@ -40,18 +43,37 @@ export class MRadioButtons extends Vue {
     public radioValues: MRadioData[];
     @Prop({ default: 'radio' })
     public name: string;
-    @Prop({ default: false })
-    public isChecked: boolean;
     @Prop({ default: true })
     public hasLabel: boolean;
+    @Prop({ default: POSITION_LEFT })
+    public position: string;
 
-    private propsIsChecked = true;
+    public componentName: string = RADIO_BUTTONS_NAME;
     private propsHasLabel = true;
+    private propsPosition = POSITION_LEFT;
+    private isFocus = false;
     private checkedValue: string = '';
+    private defaultCheckedValue = this.findChecked();
 
-    public mounted(): void {
-        this.propsIsChecked = this.isChecked;
+    private mounted(): void {
         this.propsHasLabel = this.hasLabel;
+        this.propsPosition = this.position;
+        if (this.defaultCheckedValue != '') {
+            this.checkedValue = this.defaultCheckedValue;
+        }
+    }
+
+    private findChecked(): any {
+        for (let i = 0; i < this.radioValues.length; i++) {
+            if (this.radioValues[i].checked == true) {
+                return this.radioValues[i].value;
+            }
+        }
+    }
+
+    private onClick(event): void {
+        this.$emit('click');
+        this.$refs['radio-button']['blur']();
     }
 }
 

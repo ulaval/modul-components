@@ -2,17 +2,24 @@
     "tag": "m-radio-buttons",
     "name": "m-radio-buttons-meta:name",
     "attributes": {
-        "isChecked": {
+        "radioValue": {
+            "type": "MRadioData"
+        },
+        "name": {
+            "type": "string",
+            "default": "name"
+        },
+        "hasLabel": {
             "type": "boolean",
-            "default": false
+            "default": true
         },
         "position": {
             "type": "string",
             "values": [
-                "right",
-                "left"
+                "left",
+                "right"
             ],
-            "default": 1
+            "default": 0
         }
     },
     "overview": [
