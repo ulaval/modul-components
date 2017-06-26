@@ -18,8 +18,6 @@ export class MDropdown extends Vue {
     public selectedElement: string;
     @Prop()
     public getTextElement: Function;
-    @Prop()
-    public invite: string;
     @Prop({ default: '' })
     public state: string;
     @Prop({ default: true })
@@ -39,7 +37,6 @@ export class MDropdown extends Vue {
 
     // Copy of props
     public propsSelectedElement: string;
-    public propsInvite: string;
 
     // Initialize data for v-model to work
     public textElement: string = '';
@@ -68,7 +65,7 @@ export class MDropdown extends Vue {
     }
 
     public get elementsSortedFiltered(): Array<string> {
-        if ((this.textElement == '') || (this.textElement == this.propsInvite) || (this.textElement == this.propsSelectedElement)) {
+        if ((this.textElement == '') || (this.textElement == this.propsSelectedElement)) {
             return this.elementsSorted;
         }
 
@@ -82,7 +79,6 @@ export class MDropdown extends Vue {
     public created() {
         // Copy of props to avoid override on re-render
         this.propsSelectedElement = this.selectedElement;
-        this.propsInvite = this.invite;
 
         // Run in created() to run before computed data
         this.prepareElements();
@@ -107,8 +103,8 @@ export class MDropdown extends Vue {
     public getSelectedElementText(): string {
         let text: string = '';
 
-        if ((typeof this.propsSelectedElement == UNDEFINED) && !(typeof this.invite == UNDEFINED)) {
-            text = this.invite;
+        if (typeof this.propsSelectedElement == UNDEFINED) {
+            text = '';
             // } else if (typeof this.propsSelectedElement == UNDEFINED || this.propsSelectedElement == this.nullValueText) {
             //     text = this.nullValueText;
         } else {
