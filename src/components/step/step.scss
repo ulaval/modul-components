@@ -17,6 +17,10 @@ $m-step--badge--size: 20px;
         left: calc((#{$m-step--icon--size} / 2) - 1px); //magic number
     }
 
+    &.m--is-open .m-step__header {
+        cursor: default;
+    }
+
     &.m--is-in-progress {
         .m-step__header .m-step__icon {
             border-color: $m-color--ul-yellow;

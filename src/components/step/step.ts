@@ -6,14 +6,20 @@ import WithRender from './step.html?style=./step.scss';
 import { STEP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion';
 
+const STATE_DISABLE: string = 'disable';
+const STATE_IN_PROGRESS: string = 'in-progress';
+const STATE_SUCCESS: string = 'success';
+const STATE_WARNING: string = 'warning';
+const STATE_ERROR: string = 'error';
+
 @WithRender
 @Component({
     mixins: [
         TransitionAccordion
     ]
 })
-export class MStep extends Vue implements TransitionAccordionMixin {
-    @Prop({ default: 'disable' })
+export class MStep extends Vue {
+    @Prop({ default: STATE_DISABLE })
     public state: string;
     @Prop({ default: false })
     public isOpen: boolean;
@@ -27,7 +33,7 @@ export class MStep extends Vue implements TransitionAccordionMixin {
     public componentName = STEP_NAME;
     public animIsActive: boolean = false;
 
-    private propsState: string = 'disable';
+    private propsState: string = STATE_DISABLE;
     private propsIsOpen: boolean = false;
     private propsIsLast: boolean = false;
 
@@ -54,16 +60,16 @@ export class MStep extends Vue implements TransitionAccordionMixin {
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
-            case 'disable':
+            case STATE_DISABLE:
                 icon = 'default';
                 break;
-            case 'success':
+            case STATE_SUCCESS:
                 icon = 'pastille-crochet';
                 break;
-            case 'warning':
+            case STATE_WARNING:
                 icon = 'pastille-crochet-jaune';
                 break;
-            case 'error':
+            case STATE_ERROR:
                 icon = 'pastille-erreur';
                 break;
             default:
