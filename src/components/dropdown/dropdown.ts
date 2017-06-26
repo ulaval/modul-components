@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { ModulVue } from '../../utils/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
@@ -10,7 +11,7 @@ const UNDEFINED: string = 'undefined';
 
 @WithRender
 @Component
-export class MDropdown extends Vue {
+export class MDropdown extends ModulVue {
 
     @Prop({ default: [] })
     public elements: string[];
@@ -28,8 +29,8 @@ export class MDropdown extends Vue {
     public widthFromCss: boolean;
     @Prop({ default: false })
     public isEditabled: boolean;
-    // @Prop()
-    // public nullValue: string;
+    @Prop()
+    public nullValue: string;
     // @Prop({ default: false })
     // public name: boolean;
     // @Prop({ default: false })
@@ -80,6 +81,18 @@ export class MDropdown extends Vue {
         // Copy of props to avoid override on re-render
         this.propsSelectedElement = this.selectedElement;
 
+        // Null value (element facultatif)
+        if (typeof this.nullValue == UNDEFINED) {
+            this.nullValueAvailable = false;
+        } else {
+            this.nullValueAvailable = true;
+            if (this.nullValue.trim() == '') {
+                this.nullValueText = this.$i18n.translate('m-dropdown:none');
+            } else {
+                this.nullValueText = this.nullValue;
+            }
+        }
+
         // Run in created() to run before computed data
         this.prepareElements();
     }
@@ -103,10 +116,8 @@ export class MDropdown extends Vue {
     public getSelectedElementText(): string {
         let text: string = '';
 
-        if (typeof this.propsSelectedElement == UNDEFINED) {
-            text = '';
-            // } else if (typeof this.propsSelectedElement == UNDEFINED || this.propsSelectedElement == this.nullValueText) {
-            //     text = this.nullValueText;
+        if ((typeof this.propsSelectedElement == UNDEFINED) || (this.propsSelectedElement == this.nullValueText)) {
+            text = this.nullValueText;
         } else {
             text = this.getElementListText(this.propsSelectedElement);
         }
@@ -118,7 +129,7 @@ export class MDropdown extends Vue {
         let text: string = '';
 
         if (!element) {
-            // text = this.nullValueText;
+            text = this.nullValueText;
         } else if (this.getTextElement) {
             text = this.getTextElement({ element: element });
         }
@@ -148,7 +159,7 @@ export class MDropdown extends Vue {
             width = this.getTextWidth(hiddenField, this.getSelectedElementText());
         }
 
-        // Add 25px for scroll
+        // Add 25px for scrollbar
         width = Math.ceil(width) + 25;
         // Set width to Input and List
         valueField.$el.style.width = width + 'px';
@@ -185,24 +196,16 @@ export class MDropdown extends Vue {
                     // No nullValue => 1st element is selected by default
                     this.propsSelectedElement = elementsSorted[0];
                 }
-                this.textElement = this.getSelectedElementText();
-            } else {
-                this.textElement = this.getSelectedElementText();
             }
+            this.textElement = this.getSelectedElementText();
+        }
+
+        // Add nullValue to sorted elements
+        if (this.nullValueAvailable) {
+            elementsSorted.splice(0, 0, this.nullValueText);
         }
 
         this.elementsSorted = elementsSorted;
-
-        // if (!this.elements || this.elements.length === 0) {
-        //     if(elements !== old) {
-        //         //Changer seulement si la valeur de elements a changé. Sinon on peut écraser une valeur
-        //         //Selectionnée dans des cas ou on a l'element sélectionné avant la liste. (Dans une préférence par exemple)
-        //         this.elementSelectionne = null;
-        //     }
-        //     this.inactif = true;
-        // } else {
-        //     this.inactif = false;
-        // }
     }
 }
 

@@ -27,6 +27,9 @@
         "sortMethod": {
             "type": "Function"
         },
+        "nullValue": {
+            "type": "string"
+        },
         "widthFromCss": {
             "type": "boolean",
             "default": false

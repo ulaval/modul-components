@@ -1,5 +1,6 @@
 {
     "m-dropdown": {
-        "no-result": "Aucun résultats"
+        "no-result": "Aucun résultats",
+        "none": "(Aucun)"
     }
 }
