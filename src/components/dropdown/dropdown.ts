@@ -179,13 +179,13 @@ export class MDropdown extends ModulVue {
             elementsSorted = this.elements.slice(0);
 
             // Sorting options
-            if (typeof this.sortMethod == UNDEFINED) {
-                if (this.isSort) {
+            if (this.isSort) {
+                if (typeof this.sortMethod == UNDEFINED) {
                     // Default sort: Alphabetically
                     elementsSorted = elementsSorted.sort((a, b) => a.localeCompare(b));
+                } else {
+                    elementsSorted = this.sortMethod(elementsSorted);
                 }
-            } else {
-                elementsSorted = this.sortMethod(elementsSorted);
             }
 
             // Default element
