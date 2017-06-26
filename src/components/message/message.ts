@@ -5,12 +5,20 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './message.html?style=./message.scss';
 import { MESSAGE_NAME } from '../component-names';
 
+const STATE_SUCCESS: string = 'success';
+const STATE_INFORMATION: string = 'information';
+const STATE_WARNING: string = 'warning';
+const STATE_ERROR: string = 'error';
+
+const MODE_REGULAR: string = 'regular';
+const MODE_LIGHT: string = 'light';
+
 @WithRender
 @Component
 export class MMessage extends Vue {
-    @Prop({ default: 'success' })
+    @Prop({ default: STATE_ERROR })
     public state: string;
-    @Prop({ default: 'regular' })
+    @Prop({ default: MODE_REGULAR })
     public mode: string;
     @Prop({ default: true })
     public hasIcon: boolean;
@@ -22,27 +30,27 @@ export class MMessage extends Vue {
     public componentName = MESSAGE_NAME;
 
     private get showCloseButton(): boolean {
-        return this.mode == 'regular' && this.hasCloseButton;
+        return this.mode == MODE_REGULAR && this.hasCloseButton;
     }
 
     private onClose(event): void {
-        this.$emit('onClose', event);
+        this.$emit('close', event);
         this.isVisible = false;
     }
 
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
-            case 'success':
+            case STATE_SUCCESS:
                 icon = 'pastille-crochet';
                 break;
-            case 'information':
+            case STATE_INFORMATION:
                 icon = 'pastille-attention-rouge';
                 break;
-            case 'warning':
+            case STATE_WARNING:
                 icon = 'pastille-attention';
                 break;
-            case 'error':
+            case STATE_ERROR:
                 icon = 'pastille-erreur';
                 break;
             default:

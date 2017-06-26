@@ -86,9 +86,8 @@ $m-message-size: 22px;
                 top: 0;
                 right: 0;
 
-                .m-icon {
+                .m-button__icon .m-icon {
                     font-size: $m-font-size--xs;
-                    width: $m-font-size--xs;
                     height: $m-font-size--xs;
                 }
             }
