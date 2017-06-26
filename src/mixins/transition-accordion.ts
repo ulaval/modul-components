@@ -1,12 +1,16 @@
-import Component from 'vue-class-component';
 import Vue from 'vue';
-import { PluginObject } from 'vue';
+import Component from 'vue-class-component';
+
+export interface TransitionAccordionMixin {
+    animIsActive: boolean;
+}
 
 @Component
-export class TransitionAccordionMixin extends Vue {
+export class TransitionAccordion extends Vue implements TransitionAccordionMixin {
+    public animIsActive: boolean;
 
     private animEnter(el: HTMLElement, done): void {
-        if ((this as any).animIsActive) {
+        if (this.animIsActive) {
             let height: number = el.clientHeight;
             el.style.maxHeight = '0';
             setTimeout(() => {
@@ -19,7 +23,7 @@ export class TransitionAccordionMixin extends Vue {
     }
 
     private animAfterEnter(el: HTMLElement): void {
-        if ((this as any).animIsActive) {
+        if (this.animIsActive) {
             setTimeout(() => {
                 el.style.maxHeight = 'none';
             }, 300);
@@ -27,7 +31,7 @@ export class TransitionAccordionMixin extends Vue {
     }
 
     private animLeave(el: HTMLElement, done): void {
-        if ((this as any).animIsActive) {
+        if (this.animIsActive) {
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';
             setTimeout(() => {

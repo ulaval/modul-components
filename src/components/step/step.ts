@@ -4,15 +4,15 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './step.html?style=./step.scss';
 import { STEP_NAME } from '../component-names';
-import { TransitionAccordionMixin } from '../../mixins/transitionAccordion';
+import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion';
 
 @WithRender
 @Component({
     mixins: [
-        TransitionAccordionMixin
+        TransitionAccordion
     ]
 })
-export class MStep extends Vue {
+export class MStep extends Vue implements TransitionAccordionMixin {
     @Prop({ default: 'disable' })
     public state: string;
     @Prop({ default: false })
@@ -25,11 +25,11 @@ export class MStep extends Vue {
     public isLast: boolean;
 
     public componentName = STEP_NAME;
+    public animIsActive: boolean = false;
 
     private propsState: string = 'disable';
     private propsIsOpen: boolean = false;
     private propsIsLast: boolean = false;
-    private animIsActive: boolean = false;
 
     private mounted() {
         this.propsState = this.state;

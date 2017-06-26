@@ -5,7 +5,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './accordion.html?style=./accordion.scss';
 import { ACCORDION_NAME } from '../component-names';
 import { ACCORDION_GROUP_NAME } from '../component-names';
-import { TransitionAccordionMixin } from '../../mixins/transitionAccordion';
+import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion';
 
 const MODE_REGULAR: string = 'regular';
 const MODE_LIGHT: string = 'light';
@@ -23,10 +23,10 @@ const ICON_SIZE_LARGE: string = 'large';
 @WithRender
 @Component({
     mixins: [
-        TransitionAccordionMixin
+        TransitionAccordion
     ]
 })
-export class MAccordion extends Vue {
+export class MAccordion extends Vue implements TransitionAccordionMixin {
 
     @Prop({ default: MODE_REGULAR })
     public mode: string;
@@ -40,6 +40,7 @@ export class MAccordion extends Vue {
     public iconSize: string;
 
     public componentName: string = ACCORDION_NAME;
+    public animIsActive: boolean = false;
 
     private propsMode: string = MODE_REGULAR;
     private propsIsOpen: boolean = false;
@@ -47,7 +48,6 @@ export class MAccordion extends Vue {
     private propsIconStyle: string = ICON_STYLE_DEFAULT;
     private propsIconSize: string = ICON_SIZE_LARGE;
 
-    private animIsActive: boolean = false;
     private accordionID: number;
 
     private beforeMount(): void {
