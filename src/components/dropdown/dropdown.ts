@@ -164,32 +164,28 @@ export class MDropdown extends Vue {
         let elementsSorted: string[] = new Array();
 
         if (this.elements) {
+            // Create a separe copy of the array, to prevent triggering infinite loop on watcher of elements
+            elementsSorted = this.elements.slice(0);
+
+            // Sorting options
             if (typeof this.sortMethod == UNDEFINED) {
                 if (this.isSort) {
                     // Default sort: Alphabetically
-                    elementsSorted = this.elements.sort((a, b) => a.localeCompare(b));
-                } else {
-                    // Copy the list without sorting
-                    elementsSorted = this.elements.slice(0);
+                    elementsSorted = elementsSorted.sort((a, b) => a.localeCompare(b));
                 }
             } else {
-                elementsSorted = this.sortMethod(this.elements);
+                elementsSorted = this.sortMethod(elementsSorted);
             }
 
-            // Default element.
+            // Default element
             if (typeof this.propsSelectedElement == UNDEFINED) {
-                // Invite is priority if present, selectedElement will stay undefined for the invite
-                if (typeof this.propsInvite == UNDEFINED) {
-                    if (this.nullValueAvailable) {
-                        this.propsSelectedElement = this.nullValueText;
-                    } else {
-                        // No nullValue, no invite => 1st element is selected by default
-                        this.propsSelectedElement = this.elements[0];
-                    }
-                    this.textElement = this.getSelectedElementText();
+                if (this.nullValueAvailable) {
+                    this.propsSelectedElement = this.nullValueText;
                 } else {
-                    this.textElement = this.propsInvite;
+                    // No nullValue => 1st element is selected by default
+                    this.propsSelectedElement = elementsSorted[0];
                 }
+                this.textElement = this.getSelectedElementText();
             } else {
                 this.textElement = this.getSelectedElementText();
             }
