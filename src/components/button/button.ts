@@ -19,6 +19,8 @@ const STATE_DISABLED: string = 'disabled';
 const STATE_WAITING: string = 'waiting';
 const STATE_SELECTED: string = 'selected';
 
+const ICON_SIZE: string = '16px';
+
 @WithRender
 @Component
 export class MButton extends Vue {
@@ -33,6 +35,8 @@ export class MButton extends Vue {
     public iconName: string;
     @Prop({ default: 'left' })
     public iconPosition: string;
+    @Prop({ default: ICON_SIZE })
+    public iconSize: string;
     @Prop({ default: false })
     public isFullSize: boolean;
 

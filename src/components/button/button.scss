@@ -107,11 +107,6 @@ $m-button--color-disabled: $m-color--grey-light !default;
             opacity: 0;
             background: $m-color--primary-lightest;
         }
-
-        .m-button__icon {
-            font-size: 16px;
-            height: 16px;
-        }
     }
 
     &.m--is-full-size {
@@ -157,7 +152,8 @@ $m-button--color-disabled: $m-color--grey-light !default;
     &__icon {
         position: relative;
         z-index: 2;
-        font-size: 12px;
+        font-size: $m-font-size;
+        height: $m-font-size;
 
         &.is-left {
             margin-right: $m-margin;
