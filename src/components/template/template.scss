@@ -14,7 +14,6 @@ $m-template-column-width: 384px;
         justify-content: space-between;
         width: 100%;
         background-color: $m-color--grey-lighter;
-        min-height: 70px;
 
         > :first-child:not(:only-child):not(.m-link) {
             flex: 2 1 auto;
@@ -69,6 +68,10 @@ $m-template-column-width: 384px;
             padding: $m-padding;
         }
 
+        &__header {
+            min-height: 52px;
+        }
+
         &__column {
             width: 100%;
         }
@@ -98,6 +101,10 @@ $m-template-column-width: 384px;
         &__body__footer,
         &__column {
             padding: $m-padding--l;
+        }
+
+        &__header {
+            min-height: 84px;
         }
 
         &__wrap {
