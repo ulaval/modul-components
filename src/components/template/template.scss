@@ -3,45 +3,107 @@ $m-template-column-width: 384px;
 
 .m-template {
     position: relative;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+
+    &__header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background-color: $m-color--grey-lighter;
+        min-height: 70px;
+
+        > :first-child:not(:only-child):not(.m-link) {
+            flex: 2 1 auto;
+            margin: 0;
+        }
+
+        > :last-child:not(:only-child) {
+            flex: 0 1 auto;
+            margin: 0;
+        }
+
+        .m-link {
+            width: 100%;
+
+            + :nth-child(2) {
+                flex: 2 1 auto;
+            }
+        }
+    }
+
+    &__wrap {
+        height: 100%;
+    }
+
+    &__body-footer-wrap {
+        display: flex;
+        flex-direction: column;
+        flex: 2 1 auto;
+    }
+
+    &__body {
+        flex: 1 0 auto;
+    }
+
+    &__column {
+        background-color: $m-color--grey-light;
+    }
+
+    &__footer {
+        flex: 0 1 auto;
+        width: 100%;
+        background: $m-color--grey;
+    }
 }
 
-.m-template__header {
-    flex-basis: 100%;
-    background-color: #f3f1ef;
-    padding: 22px $m-padding--l;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
+@media screen and (max-width: $m-screen--max--s) {
+    .m-template {
+        &__header,
+        &__body,
+        &__column,
+        &__footer {
+            padding: $m-padding;
+        }
 
-    > :first-child:not(:only-child):not(.m-link) {
-        flex: 2 1 auto;
-        margin: 0;
-    }
-
-    > :last-child:not(:only-child) {
-        flex: 0 1 auto;
-        margin: 0;
-    }
-
-    .m-link {
-        width: 100%;
-
-        + :nth-child(2) {
-            flex: 2 1 auto;
+        &__column {
+            width: 100%;
         }
     }
 }
 
-.m-template__body {
-    flex: 2 1 auto;
-    padding: $m-padding--l;
+@media screen and (min-width: $m-screen--min--s) and (max-width: $m-screen--max--m) {
+    .m-template {
+        &__column {
+            flex: 0 1 50%;
+        }
+    }
 }
 
-.m-template__column {
-    flex: 0 1 $m-template-column-width;
-    background-color: #ebe8e5;
-    padding: $m-padding--l;
+@media screen and (min-width: $m-screen--min--m) {
+    .m-template {
+        &__column {
+            flex: 0 1 $m-template-column-width;
+        }
+    }
+}
+
+@media screen and (min-width: $m-screen--min--s) {
+    .m-template {
+        &__header,
+        &__body,
+        &__column,
+        &__footer {
+            padding: $m-padding--l;
+        }
+
+        &__wrap {
+            display: flex;
+            flex-wrap: wrap;
+            flex: 1 0 auto;
+        }
+    }
 }
