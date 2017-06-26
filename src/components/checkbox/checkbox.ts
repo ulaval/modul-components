@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
-import uuid from '../../utils/uuid';
+import uuid from '../../utils/uuid/uuid';
 
 const POSITION_LEFT: string = 'left';
 

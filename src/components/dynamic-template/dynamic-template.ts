@@ -3,7 +3,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dynamic-template.html';
-import uuid from '../../utils/uuid';
+import uuid from '../../utils/uuid/uuid';
 import { DYNAMIC_TEMPLATE_NAME } from '../component-names';
 
 @WithRender

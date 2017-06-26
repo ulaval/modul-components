@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import WithRender from './attributes.html';
 import Meta, { ComponentMeta, ComponentAttributes } from '../../../src/meta/meta';
-import { FRENCH } from '../../../src/utils/i18n';
 
 interface AttributeMap {
     [attribute: string]: string[];
@@ -17,8 +16,8 @@ export class Attributes extends Vue {
     public mounted(): void {
         let meta: ComponentMeta[] = [];
         let map: AttributeMap = {};
-        Meta.getTagsByLanguage(FRENCH).forEach(tag => {
-            let componentMeta: ComponentMeta = Meta.getMetaByLanguageAndTag(FRENCH, tag);
+        Meta.getTags().forEach(tag => {
+            let componentMeta: ComponentMeta = Meta.getMetaByTag(tag);
             meta.push(componentMeta);
 
             this.getAttributes(componentMeta).forEach(attribute => {

@@ -12,29 +12,29 @@ export class MetaAll implements PluginObject<any> {
         if (!options) {
             throw new Error('MetaAll.install -> you must provide a Meta object within the options argument');
         }
-        (options as Meta).mergeComponentMeta('fr', ACCORDION_NAME, require('../components/accordion/accordion.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', ACCORDION_GROUP_NAME, require('../components/accordion-group/accordion-group.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', BUTTON_NAME, require('../components/button/button.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', CHECKBOX_NAME, require('../components/checkbox/checkbox.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', DIALOG_NAME, require('../components/dialog/dialog.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', DROPDOWN_NAME, require('../components/dropdown/dropdown.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', DYNAMIC_TEMPLATE_NAME, require('../components/dynamic-template/dynamic-template.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', I18N_NAME, require('../components/i18n/i18n.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', ICON_NAME, require('../components/icon/icon.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', LINK_NAME, require('../components/link/link.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', LIST_BULLET_NAME, require('../components/list-bullet/list-bullet.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', MESSAGE_NAME, require('../components/message/message.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', PANEL_NAME, require('../components/panel/panel.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', POPPER_LIST_NAME, require('../components/popper-list/popper-list.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', POPPER_NAME, require('../components/popper/popper.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', STATUS_LIST_NAME, require('../components/status-list/status-list.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', STEP_NAME, require('../components/step/step.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', TABLE_NAME, require('../components/table/table.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', TEMPLATE_NAME, require('../components/template/template.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', TEXT_FIELD_NAME, require('../components/text-field/text-field.meta.json'));
-        (options as Meta).mergeComponentMeta('fr', UPLOAD_NAME, require('../components/upload/upload.meta.json'));
+        (options as Meta).mergeComponentMeta(ACCORDION_NAME, require('../components/accordion/accordion.meta.json'));
+        (options as Meta).mergeComponentMeta(ACCORDION_GROUP_NAME, require('../components/accordion-group/accordion-group.meta.json'));
+        (options as Meta).mergeComponentMeta(BUTTON_NAME, require('../components/button/button.meta.json'));
+        (options as Meta).mergeComponentMeta(CHECKBOX_NAME, require('../components/checkbox/checkbox.meta.json'));
+        (options as Meta).mergeComponentMeta(DIALOG_NAME, require('../components/dialog/dialog.meta.json'));
+        (options as Meta).mergeComponentMeta(DROPDOWN_NAME, require('../components/dropdown/dropdown.meta.json'));
+        (options as Meta).mergeComponentMeta(DYNAMIC_TEMPLATE_NAME, require('../components/dynamic-template/dynamic-template.meta.json'));
+        (options as Meta).mergeComponentMeta(I18N_NAME, require('../components/i18n/i18n.meta.json'));
+        (options as Meta).mergeComponentMeta(ICON_NAME, require('../components/icon/icon.meta.json'));
+        (options as Meta).mergeComponentMeta(LINK_NAME, require('../components/link/link.meta.json'));
+        (options as Meta).mergeComponentMeta(LIST_BULLET_NAME, require('../components/list-bullet/list-bullet.meta.json'));
+        (options as Meta).mergeComponentMeta(MESSAGE_NAME, require('../components/message/message.meta.json'));
+        (options as Meta).mergeComponentMeta(PANEL_NAME, require('../components/panel/panel.meta.json'));
+        (options as Meta).mergeComponentMeta(POPPER_LIST_NAME, require('../components/popper-list/popper-list.meta.json'));
+        (options as Meta).mergeComponentMeta(POPPER_NAME, require('../components/popper/popper.meta.json'));
+        (options as Meta).mergeComponentMeta(STATUS_LIST_NAME, require('../components/status-list/status-list.meta.json'));
+        (options as Meta).mergeComponentMeta(STEP_NAME, require('../components/step/step.meta.json'));
+        (options as Meta).mergeComponentMeta(TABLE_NAME, require('../components/table/table.meta.json'));
+        (options as Meta).mergeComponentMeta(TEMPLATE_NAME, require('../components/template/template.meta.json'));
+        (options as Meta).mergeComponentMeta(TEXT_FIELD_NAME, require('../components/text-field/text-field.meta.json'));
+        (options as Meta).mergeComponentMeta(UPLOAD_NAME, require('../components/upload/upload.meta.json'));
 
-        (options as Meta).mergeComponentMeta('fr', RIPPLE_EFFECT_NAME, require('../directives/ripple-effect/ripple-effect.meta.json'));
+        (options as Meta).mergeComponentMeta(RIPPLE_EFFECT_NAME, require('../directives/ripple-effect/ripple-effect.meta.json'));
     }
 }
 

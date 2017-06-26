@@ -1,4 +1,4 @@
-import './polyfills';
+import '../polyfills';
 import * as strUtils from './str';
 
 describe('str.startsWith', () => {

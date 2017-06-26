@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 
-import MediaQueriesPlugin from './media-queries';
-import MessagesPlugin from './i18n';
+import MediaQueriesPlugin from './media-queries/media-queries';
+import MessagesPlugin from './i18n/i18n';
 import HttpPlugin from './http/http';
 import SecurityPlugin, { SecurityPluginOptions } from './http/security';
 

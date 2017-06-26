@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
 import Meta from '../../src/meta/meta';
-import { FRENCH } from '../../src/utils/i18n';
 import { Attributes } from './attributes/attributes';
 import { Navigation } from './navigation/navigation';
 import { MediaQueriesTest } from './media-queries/media-queries';
@@ -20,7 +19,7 @@ const componentRoutes: RouteConfig[] = [{
     component: MediaQueriesTest
 }];
 
-Meta.getTagsByLanguage(FRENCH).forEach(tag => {
+Meta.getTags().forEach(tag => {
     componentRoutes.push({
         path: '/' + tag,
         meta: tag,

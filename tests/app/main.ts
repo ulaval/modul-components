@@ -8,7 +8,7 @@ import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
 
 import Meta from '../../src/meta/meta';
 import MetaAll from '../../src/meta/meta-all';
-import I18nLanguagePlugin, { currentLang, FRENCH } from '../../src/utils/i18n';
+import I18nLanguagePlugin, { currentLang, FRENCH } from '../../src/utils/i18n/i18n';
 import FrenchPlugin from '../../src/lang/fr';
 
 Vue.config.productionTip = false;

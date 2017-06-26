@@ -32,37 +32,30 @@ export type ComponentMetaMap = {
     [key: string]: ComponentMeta;
 };
 
-type MetaMap = {
-    [language: string]: ComponentMetaMap;
-};
-
 export class Meta {
-    private componentMeta: MetaMap = {
-        ['fr']: {}
-    };
+    private componentMeta: ComponentMetaMap = {};
 
     constructor() {
         components.forEach(componentTag => {
-            this.componentMeta['fr'][componentTag] = {tag: componentTag};
+            this.componentMeta[componentTag] = {tag: componentTag};
         });
 
         directives.forEach(directiveTag => {
-            this.componentMeta['fr'][directiveTag] = {tag: directiveTag};
+            this.componentMeta[directiveTag] = {tag: directiveTag};
         });
     }
 
-    public mergeComponentMeta(language: string, tag: string, meta: ComponentMeta): void {
-        let metaObject: ComponentMeta = this.componentMeta[language][tag];
-        this.componentMeta[language][tag] = {...metaObject, ...meta};
+    public mergeComponentMeta(tag: string, meta: ComponentMeta): void {
+        let metaObject: ComponentMeta = this.componentMeta[tag];
+        this.componentMeta[tag] = {...metaObject, ...meta};
     }
 
-    public getTagsByLanguage(language: string): string[] {
-        let meta: ComponentMetaMap = this.componentMeta[language];
-        return Object.keys(meta).filter(key => meta.hasOwnProperty(key));
+    public getTags(): string[] {
+        return Object.keys(this.componentMeta).filter(key => this.componentMeta.hasOwnProperty(key));
     }
 
-    public getMetaByLanguageAndTag(language: string, tag: string): ComponentMeta {
-        return this.componentMeta[language][tag];
+    public getMetaByTag(tag: string): ComponentMeta {
+        return this.componentMeta[tag];
     }
 
     public getComponentAttributes(componentMeta: ComponentMeta): string[] {

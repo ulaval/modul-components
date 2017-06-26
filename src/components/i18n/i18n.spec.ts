@@ -1,6 +1,6 @@
 import '../../utils/polyfills';
 import Vue from 'vue';
-import i18nPlugin from '../../utils/i18n';
+import i18nPlugin from '../../utils/i18n/i18n';
 import { MI18n } from './i18n';
 
 describe('i18n', () => {

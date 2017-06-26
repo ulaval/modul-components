@@ -1,5 +1,5 @@
 import { PluginObject } from 'vue';
-import { FRENCH } from '../utils/i18n';
+import { FRENCH } from '../utils/i18n/i18n';
 
 const FrenchPlugin: PluginObject<any> = {
     install(v, options) {

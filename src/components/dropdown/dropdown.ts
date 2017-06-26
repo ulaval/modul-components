@@ -5,7 +5,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
-import { normalizeString } from '../../utils/str';
+import { normalizeString } from '../../utils/str/str';
 
 const UNDEFINED: string = 'undefined';
 

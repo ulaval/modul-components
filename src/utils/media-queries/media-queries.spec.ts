@@ -1,4 +1,4 @@
-import './polyfills';
+import '../polyfills';
 import Vue from 'vue';
 import MediaQueriesPlugin from './media-queries';
 

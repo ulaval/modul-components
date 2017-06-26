@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './i18n.html';
 import { I18N_NAME } from '../component-names';
-import { ModulVue } from '../../utils/vue';
+import { ModulVue } from '../../utils/vue/vue';
 
 @WithRender
 @Component
