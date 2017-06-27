@@ -1,0 +1,9 @@
+@import '../../styles/abstracts/variables';
+
+.m-tab-pane {
+    display: block;
+
+    &__hidden {
+        @include visuallyHidden;
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "tag": "m-tab-pane",
+    "name": "m-tab-pane-meta:name",
+    "attributes": {
+
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-tab-pane-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-tab-pane-meta:usage"
+        }
+    ]
+}

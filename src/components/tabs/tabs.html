@@ -1,0 +1,21 @@
+<article class="m-tabs">
+    <header class="m-tabs__header">
+        <nav class="m-tabs__nav">
+            <ul>
+                <li v-for="(tab, index) in arrTabPane" class="m-tabs__nav__element">
+                    <button type="button"
+                            class="m-tabs__nav__button"
+                            :class="{ 'is-selected': indexTabPaneSelected == index }"
+                            @click="changeTab(index)">{{ tab.label }}</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="m-tabs__body">
+        <slot>
+            <m-tab-pane label="Tab 1">Tab 1</m-tab-pane>
+            <m-tab-pane label="Tab 2">Tab 2</m-tab-pane>
+            <m-tab-pane label="Tab 3">Tab 3</m-tab-pane>
+        </slot>
+    </div>
+</article>
