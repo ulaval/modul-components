@@ -6,7 +6,7 @@ import WithRender from './step.html?style=./step.scss';
 import { STEP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 
-const STATE_DISABLE: string = 'disable';
+const STATE_LOCKED: string = 'locked';
 const STATE_IN_PROGRESS: string = 'in-progress';
 const STATE_SUCCESS: string = 'success';
 const STATE_WARNING: string = 'warning';
@@ -19,7 +19,7 @@ const STATE_ERROR: string = 'error';
     ]
 })
 export class MStep extends Vue {
-    @Prop({ default: STATE_DISABLE })
+    @Prop({ default: STATE_LOCKED })
     public state: string;
     @Prop({ default: false })
     public isOpen: boolean;
@@ -33,7 +33,7 @@ export class MStep extends Vue {
     public componentName = STEP_NAME;
     public animIsActive: boolean = false;
 
-    private propsState: string = STATE_DISABLE;
+    private propsState: string = STATE_LOCKED;
     private propsIsOpen: boolean = false;
     private propsIsLast: boolean = false;
 
@@ -60,7 +60,7 @@ export class MStep extends Vue {
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
-            case STATE_DISABLE:
+            case STATE_LOCKED:
                 icon = 'default';
                 break;
             case STATE_SUCCESS:
