@@ -60,7 +60,9 @@ $m-checkbox--width: 16px;
     }
 
     &.m--is-checkbox-right {
-        flex-direction: row-reverse;
+        .m-checkbox__wrap {
+            flex-direction: row-reverse;
+        }
 
         .m-checkbox__label {
             padding-right: $m-margin--s;
