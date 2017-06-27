@@ -28,7 +28,7 @@ export class MDropdown extends ModulVue {
     @Prop({ default: false })
     public widthFromCss: boolean;
     @Prop({ default: false })
-    public isEditabled: boolean;
+    public isEditable: boolean;
     @Prop()
     public nullValue: string;
     // @Prop({ default: false })

@@ -21,7 +21,7 @@ export class MTexteField extends Vue {
     @Prop({ default: '' })
     public defaultText: string;
     @Prop({ default: true })
-    public isEditabled: boolean;
+    public isEditable: boolean;
     @Prop({ default: '' })
     public iconName: string;
     @Prop({ default: '' })
@@ -35,7 +35,7 @@ export class MTexteField extends Vue {
     private propsState: MTexteFieldState;
     private propsValue: string = '';
     private propsDefaultText: string;
-    private propsIsEditabled: boolean;
+    private propsIsEditable: boolean;
     private hasIcon: boolean;
     private hasHelperText: boolean;
     private isValueEmpty: boolean = false;
@@ -64,7 +64,7 @@ export class MTexteField extends Vue {
         this.propsType = this.type;
         this.propsState = this.state;
         this.propsValue = this.value;
-        this.propsIsEditabled = this.isEditabled;
+        this.propsIsEditable = this.isEditable;
         this.propsDefaultText = this.defaultText;
         this.hasIcon = this.iconName != '';
         this.hasHelperText = this.helperMessage != '';
@@ -73,7 +73,7 @@ export class MTexteField extends Vue {
     }
 
     private mounted() {
-        if (this.propsIsEditabled) {
+        if (this.propsIsEditable) {
             // Set attribute type on input refs
             this.$refs.input['setAttribute']('type', this.propsType);
         }

@@ -34,7 +34,7 @@
             "type": "boolean",
             "default": false
         },
-        "isEditabled": {
+        "isEditable": {
             "type": "boolean",
             "default": false
         }

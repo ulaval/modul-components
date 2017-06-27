@@ -1,6 +1,6 @@
 <span class="m-text-field"
       :class="{ 'is-focus' : isFocusActive,
-          'is-editabled' : !propsIsEditabled,
+          'is-editable' : !propsIsEditable,
           'is-disabled' : isDisabled,
           'has-error' : hasError }">
     <span class="m-text-field__wrap">
@@ -15,14 +15,14 @@
                @focus="onFocus"
                @blur="onBlur"
                v-model="propsValue"
-               v-if="propsIsEditabled">
+               v-if="propsIsEditable">
         <a href="#"
            class="m-text-field__input"
            ref="input"
            @focus="onFocus"
            @blur="onBlur"
            @click="onClick"
-           v-if="!propsIsEditabled">
+           v-if="!propsIsEditable">
             <span class="m-text-field__input__value" v-if="isDefaultTextEmpty">{{ propsValue }}</span>
             <span class="m-text-field__input__dafault-text" v-if="!isDefaultTextEmpty">- {{ propsDefaultText}} -</span>
             <span aria-hidden="true" class="m-text-field__transparent" v-if="isDefaultTextEmpty && isValueEmpty">Hidden text</span>
