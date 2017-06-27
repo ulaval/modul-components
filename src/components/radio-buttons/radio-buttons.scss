@@ -14,38 +14,32 @@ $m-checkbox--width: 16px;
             align-items: center;
             cursor: pointer;
 
-            &.m--is-left {
-                .m-radio-buttons__input {
-                    order: 1;
-                }
-
-                .m-radio-buttons__label {
-                    padding-left: $m-margin--s;
-                    order: 2;
-                }
-            }
-
             &.m--is-right {
-                .m-radio-buttons__input {
-                    order: 2;
-                }
+                flex-direction: row-reverse;
 
                 .m-radio-buttons__label {
                     padding-right: $m-margin--s;
-                    order: 1;
                 }
             }
-        }
 
-        .m-radio-buttons__wrap:hover,
-        input[type=radio]:focus ~ .m-radio-buttons__wrap {
-            .m-radio-buttons__input {
-                border-color: $m-color--primary;
-                background: $m-color--primary-lightest;
+            &:not(.m--is-right) {
+                .m-radio-buttons__label {
+                    padding-left: $m-margin--s;
+                }
             }
 
-            .m-radio-buttons__label {
-                color: $m-color--primary;
+            &:hover {
+                .m-radio-buttons__label {
+                    color: $m-color--primary;
+                }
+            }
+
+            &:hover,
+            &.m--is-focus {
+                .m-radio-buttons__input {
+                    border-color: $m-color--primary;
+                    background: $m-color--primary-lightest;
+                }
             }
         }
 

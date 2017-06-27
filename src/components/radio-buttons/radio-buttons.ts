@@ -22,7 +22,8 @@ export class MRadioButtons extends Vue {
             return [
                 {
                     'value': 'radio-1',
-                    'label': 'Radio 1'
+                    'label': 'Radio 1',
+                    'checked': true
                 },
                 {
                     'value': 'radio-2',
@@ -30,8 +31,7 @@ export class MRadioButtons extends Vue {
                 },
                 {
                     'value': 'radio-3',
-                    'label': 'Radio 3',
-                    'checked': true
+                    'label': 'Radio 3'
                 },
                 {
                     'value': 'radio-4',
@@ -49,11 +49,12 @@ export class MRadioButtons extends Vue {
     public position: string;
 
     public componentName: string = RADIO_BUTTONS_NAME;
-    private propsHasLabel = true;
-    private propsPosition = POSITION_LEFT;
-    private isFocus = false;
+    private propsHasLabel: boolean = true;
+    private propsPosition: string = POSITION_LEFT;
+    private isFocus: boolean = false;
     private checkedValue: string = '';
-    private defaultCheckedValue = this.findChecked();
+    private defaultCheckedValue: string = this.findChecked();
+    private test: boolean = false;
 
     private mounted(): void {
         this.propsHasLabel = this.hasLabel;
@@ -72,8 +73,7 @@ export class MRadioButtons extends Vue {
     }
 
     private onClick(event): void {
-        this.$emit('click');
-        this.$refs['radio-button']['blur']();
+        this.$emit('click', this.checkedValue);
     }
 }
 
