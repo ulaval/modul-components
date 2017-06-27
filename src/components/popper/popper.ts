@@ -41,8 +41,8 @@ export class MPopper extends Vue {
     public options: Object;
     @Prop({ default: false })
     public closeOnContentClick: boolean;
-    @Prop({ default: true })
-    public toggleOnReferenceClick: boolean;
+    @Prop({ default: false })
+    public closeOnReferenceClick: boolean;
 
     public componentName: string = POPPER_NAME;
     public referenceElm;
@@ -109,7 +109,7 @@ export class MPopper extends Vue {
 
     private doToggle(): void {
         if (!this.forceShow) {
-            if (this.toggleOnReferenceClick) {
+            if (this.closeOnReferenceClick) {
                 this.showPopper = !this.showPopper;
             } else {
                 this.doShow();
