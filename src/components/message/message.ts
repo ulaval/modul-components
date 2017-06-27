@@ -16,7 +16,7 @@ const MODE_LIGHT: string = 'light';
 @WithRender
 @Component
 export class MMessage extends Vue {
-    @Prop({ default: STATE_ERROR })
+    @Prop({ default: STATE_SUCCESS })
     public state: string;
     @Prop({ default: MODE_REGULAR })
     public mode: string;
