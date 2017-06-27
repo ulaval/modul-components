@@ -5,7 +5,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './accordion.html?style=./accordion.scss';
 import { ACCORDION_NAME } from '../component-names';
 import { ACCORDION_GROUP_NAME } from '../component-names';
-import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion';
+import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 
 const MODE_REGULAR: string = 'regular';
 const MODE_LIGHT: string = 'light';

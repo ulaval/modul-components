@@ -17,14 +17,36 @@ export interface ComponentAttribute {
     default?: number;
 }
 
+export interface ComponentMethodArgument {
+    name: string;
+    type: string;
+    description: string;
+}
+
+export interface ComponentMethodReturn {
+    type: string;
+    description: string;
+}
+
+export interface ComponentMethod {
+    description: string;
+    arguments: ComponentMethodArgument[];
+    return?: ComponentMethodReturn;
+}
+
 export interface ComponentAttributes {
     [attribute: string]: ComponentAttribute;
+}
+
+export interface ComponentMethods {
+    [method: string]: ComponentMethod;
 }
 
 export interface ComponentMeta {
     tag: string;
     name?: string;
     attributes?: ComponentAttributes;
+    methods?: ComponentMethods;
     overview?: Overview[];
 }
 

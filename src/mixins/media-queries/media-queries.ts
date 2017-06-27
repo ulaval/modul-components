@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { ModulVue } from '../utils/vue/vue';
+import { ModulVue } from '../../utils/vue/vue';
 import {
     BREAKING_POINT_MIN_EXTRA_SMALL,
     BREAKING_POINT_MIN_SMALL,
@@ -15,7 +15,7 @@ import {
     BREAKING_POINT_MEDIUM,
     BREAKING_POINT_LARGE,
     BREAKING_POINT_EXTRA_LARGE
-} from '../utils/media-queries/media-queries';
+} from '../../utils/media-queries/media-queries';
 
 export interface MediaQueriesMixin {
     isMinExtraSmall: boolean;

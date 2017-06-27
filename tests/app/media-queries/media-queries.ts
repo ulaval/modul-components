@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import WithRender from './media-queries.html';
-import { MediaQueries, MediaQueriesMixin } from '../../../src/mixins/media-queries';
+import { MediaQueries, MediaQueriesMixin } from '../../../src/mixins/media-queries/media-queries';
 
 @WithRender
 @Component({

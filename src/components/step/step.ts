@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './step.html?style=./step.scss';
 import { STEP_NAME } from '../component-names';
-import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion';
+import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 
 const STATE_DISABLE: string = 'disable';
 const STATE_IN_PROGRESS: string = 'in-progress';
