@@ -64,13 +64,13 @@ export class MStep extends Vue {
                 icon = 'default';
                 break;
             case STATE_SUCCESS:
-                icon = 'pastille-crochet';
+                icon = 'chip-check';
                 break;
             case STATE_WARNING:
-                icon = 'pastille-crochet-jaune';
+                icon = 'chip-check-yellow';
                 break;
             case STATE_ERROR:
-                icon = 'pastille-erreur';
+                icon = 'chip-error';
                 break;
             default:
                 break;

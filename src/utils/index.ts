@@ -5,6 +5,7 @@ import MediaQueriesPlugin from './media-queries/media-queries';
 import MessagesPlugin from './i18n/i18n';
 import HttpPlugin from './http/http';
 import SecurityPlugin, { SecurityPluginOptions } from './http/security';
+import SpritesPlugin from './svg/sprites';
 
 export interface UtilsPluginOptions {
     securityPluginOptions: SecurityPluginOptions;
@@ -21,6 +22,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(MessagesPlugin);
         Vue.use(HttpPlugin);
         Vue.use(SecurityPlugin, o.securityPluginOptions);
+        Vue.use(SpritesPlugin);
     }
 };
 

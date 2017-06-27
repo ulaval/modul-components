@@ -3,7 +3,7 @@
     <input ref="checkbox" type="checkbox" :id="id" class="m-checkbox__hidden" v-model="propsChecked" @focus="isFocus=true" @blur="isFocus=false">
     <label class="m-checkbox__wrap" :for="id" :aria-hidden="!propsLabel">
         <span class="m-checkbox__input" aria-hidden="true">
-            <m-icon class="m-checkbox__input-icon" name="pastille-crochet" width="10px" height="10px"></m-icon>
+            <m-icon class="m-checkbox__input-icon" name="chip-check" width="10px" height="10px"></m-icon>
         </span>
         <span class="m-checkbox__label" v-if="propsLabel">
             <slot>m-checkbox</slot>

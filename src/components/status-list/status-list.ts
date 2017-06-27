@@ -43,13 +43,13 @@ export class MStatusList extends Vue {
         let icon: string = '';
         switch (status) {
             case 'completed':
-                icon = 'pastille-crochet';
+                icon = 'chip-check';
                 break;
             case 'pending':
-                icon = 'pastille-crochet-jaune';
+                icon = 'chip-check-yellow';
                 break;
             case 'error':
-                icon = 'pastille-erreur';
+                icon = 'chip-error';
                 break;
             default:
                 break;

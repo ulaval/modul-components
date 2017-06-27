@@ -19,36 +19,22 @@ export class MIcon extends Vue {
 
     public componentName = ICON_NAME;
 
-    private propsWidth: string;
-    private propsHeight: string;
-    private propsSvgTitle: string;
-    private iconContent = '';
-
-    private beforeMount(): void {
-        let vm = this;
-        this.propsSvgTitle = this.$props.svgTitle;
-        this.propsWidth = this.$props.width;
-        this.propsHeight = this.$props.height;
-        (require as any)(['bundle-loader!../../assets/icons/' + vm.$props.name + '.svg'], waitForChunk => {
-            waitForChunk(svg => {
-                this.iconContent = this.modifyTitle(svg).replace('viewBox', 'width="' + this.propsWidth + '" height="' + this.propsHeight + '" viewBox');
-            });
-        });
+    public beforeMount(): void {
+        if (!document.getElementById(this.name)) {
+            console.warn(this.name + ' is not a valid svg id. Make sure that the sprite has been loaded via the $svg instance service.');
+        }
     }
 
     private onClick(event): void {
-        this.$emit('onClick', event);
-    }
-
-    private modifyTitle(svg): string {
-        if (this.$props.svgTitle) {
-            return svg.replace(/<title>[^<]*/, '<title>' + this.$props.svgTitle);
-        }
-        return svg;
+        this.$emit('click', event);
     }
 
     private get hasSvgTitle(): boolean {
-        return !!this.propsSvgTitle;
+        return !!this.svgTitle;
+    }
+
+    private get spriteId(): string {
+        return '#' + this.name;
     }
 }
 

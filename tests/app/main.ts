@@ -10,6 +10,7 @@ import Meta from '../../src/meta/meta';
 import MetaAll from '../../src/meta/meta-all';
 import I18nLanguagePlugin, { currentLang, FRENCH } from '../../src/utils/i18n/i18n';
 import FrenchPlugin from '../../src/lang/fr';
+import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 
 Vue.config.productionTip = false;
 
@@ -27,6 +28,7 @@ currentLang(FRENCH);
 Vue.use(I18nLanguagePlugin);
 Vue.use(FrenchPlugin);
 Vue.use(MetaAll, Meta);
+Vue.use(DefaultSpritesPlugin);
 
 const vue = new Vue({
     router,

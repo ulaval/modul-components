@@ -1,1 +1,6 @@
-<span v-html="iconContent" class="m-icon" @click="onClick" :aria-hidden="!hasSvgTitle"></span>
+<span class="m-icon" @click="onClick" :aria-hidden="!hasSvgTitle">
+    <svg :width="width" :height="height" >
+        <title v-if="hasSvgTitle">{{svgTitle}}</title>
+        <use :xlink:href="spriteId"></use>
+    </svg>
+</span>

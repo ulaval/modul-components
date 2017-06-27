@@ -42,16 +42,16 @@ export class MMessage extends Vue {
         let icon: string = '';
         switch (this.state) {
             case STATE_SUCCESS:
-                icon = 'pastille-crochet';
+                icon = 'chip-check';
                 break;
             case STATE_INFORMATION:
-                icon = 'pastille-attention-rouge';
+                icon = 'chip-warning-red';
                 break;
             case STATE_WARNING:
-                icon = 'pastille-attention';
+                icon = 'chip-warning';
                 break;
             case STATE_ERROR:
-                icon = 'pastille-erreur';
+                icon = 'chip-error';
                 break;
             default:
                 break;
