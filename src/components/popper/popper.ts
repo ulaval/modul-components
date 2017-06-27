@@ -41,7 +41,7 @@ export class MPopper extends Vue {
     public options: Object;
     @Prop({ default: false })
     public closeOnContentClick: boolean;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public closeOnReferenceClick: boolean;
 
     public componentName: string = POPPER_NAME;
