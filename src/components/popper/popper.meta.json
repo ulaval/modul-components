@@ -45,7 +45,7 @@
             "type": "boolean",
             "default": false
         },
-        "toggleOnReferenceClick": {
+        "closeOnReferenceClick": {
             "type": "boolean",
             "default": true
         }

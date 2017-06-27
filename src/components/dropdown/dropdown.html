@@ -8,7 +8,7 @@
     <m-popper trigger="click"
               :options="{ placement: 'bottom' }"
               :closeOnContentClick="true"
-              :toggleOnReferenceClick="false"
+              :closeOnReferenceClick="false"
               :disabled="stateDisabled"
               mode="dropdown">
         <ul class="m-dropdown__list"
@@ -32,7 +32,7 @@
                       slot="reference"
                       :value="textElement"
                       :state="state"
-                      :isEditabled="isEditabled"
+                      :isEditable="isEditable"
                       @valueChanged="textElement = $event">
                       <slot></slot>
         </m-text-field>
