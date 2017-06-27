@@ -19,7 +19,7 @@ export class MLink extends ModulVue {
     @Prop({ default: MODE_ROUTER_LINK })
     public mode: string;
     @Prop({ default: 'default' })
-    public state: boolean;
+    public state: string;
 
     public componentName: string = LINK_NAME;
 
