@@ -36,7 +36,7 @@ export class MCheckbox extends Vue {
     }
 
     public get hasCheckboxLeft(): boolean {
-        return this.$props['position'] == POSITION_LEFT;
+        return this.position == POSITION_LEFT;
     }
 }
 
