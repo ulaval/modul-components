@@ -7,37 +7,31 @@ import { SWITCH_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 
 const POSITION_LEFT: string = 'left';
-const ON_TEXT: string = 'yes';
-const OFF_TEXT: string = 'no';
 
 @WithRender
 @Component
 export class MSwitch extends Vue {
 
     @Prop({ default: false })
-    public isChecked: boolean;
+    public checked: boolean;
     @Prop({ default: POSITION_LEFT })
     public position: string;
     @Prop({ default: false })
-    public hasLabel: boolean;
-    @Prop({ default: ON_TEXT })
-    public onText: string;
-    @Prop({ default: OFF_TEXT })
-    public offText: string;
+    public label: boolean;
+    @Prop({ default: true })
+    public helperText: boolean;
 
     public componentName: string = SWITCH_NAME;
-    private propsIsChecked: boolean = true;
-    private propsHasLabel: boolean = true;
-    private propsOnText: string = ON_TEXT;
-    private propsOffText: string = OFF_TEXT;
+    private propsChecked: boolean = true;
+    private propsLabel: boolean = true;
+    private propsHelperText: boolean = true;
     private isFocus = false;
     private id: string = `switch${uuid.generate()}`;
 
     public mounted(): void {
-        this.propsIsChecked = this.isChecked;
-        this.propsHasLabel = this.hasLabel;
-        this.propsOnText = this.onText;
-        this.propsOffText = this.offText;
+        this.propsChecked = this.checked;
+        this.propsLabel = this.label;
+        this.propsHelperText = this.helperText;
     }
 
     private onClick(event): void {

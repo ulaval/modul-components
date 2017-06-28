@@ -1,4 +1,5 @@
 @import 'abstracts/variables';
+$m-switch-size: 23px;
 
 .m-switch {
     display: inline;
@@ -42,7 +43,7 @@
                 border-color: $m-color--white;
                 background-color: $m-color--white;
                 left: auto;
-                left: calc(100% - 25px);
+                left: calc(100% - #{$m-switch-size});
             }
 
             .m-switch__text {
@@ -73,6 +74,12 @@
         }
     }
 
+    &.m--no-helperText {
+        .m-switch__input {
+            min-width: 40px;
+        }
+    }
+
     &__input {
         transition: 0.3s ease-in-out;
         background: $m-color--grey-light;
@@ -81,7 +88,7 @@
         display: inline-flex;
         position: relative;
         height: 25px;
-        min-width: 60px;
+        min-width: 54px;
     }
 
     &__button {
@@ -90,7 +97,7 @@
         border-radius: 2rem;
         border: $m-border-width--s solid $m-color--white;
         height: 100%;
-        width: 25px;
+        width: $m-switch-size;
         left: 0;
         position: relative;
         z-index: 2;
@@ -102,15 +109,17 @@
         transition: 0.3s ease-in-out;
         display: flex;
         height: 100%;
-        width: calc(100% - 25px);
-        left: calc(100% - (100% - 25px));
+        width: calc(100% - #{$m-switch-size});
+        left: calc(100% - (100% - #{$m-switch-size}));
         align-items: center;
         justify-content: center;
         position: absolute;
         z-index: 1;
         text-align: center;
         color: $m-color--grey-darker;
-        font-size: $m-font-size--xs;
+        font-size: 9px;
+        text-transform: uppercase;
+        line-height: 0;
     }
 
     &__label {

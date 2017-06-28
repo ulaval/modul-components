@@ -2,21 +2,25 @@
     "tag": "m-switch",
     "name": "m-switch-meta:name",
     "attributes": {
-        "name": {
-            "type": "string",
-            "default": "name"
-        },
-        "hasLabel": {
+        "checked": {
             "type": "boolean",
-            "default": true
+            "default": false
         },
         "position": {
             "type": "string",
             "values": [
-                "left",
-                "right"
+                "right",
+                "left"
             ],
-            "default": 0
+            "default": 1
+        },
+        "label": {
+            "type": "boolean",
+            "default": false
+        },
+        "helperText": {
+            "type": "boolean",
+            "default": true
         }
     },
     "overview": [
