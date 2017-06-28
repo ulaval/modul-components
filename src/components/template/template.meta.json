@@ -1,6 +1,12 @@
 {
     "tag": "m-template",
     "name": "m-template-meta:name",
+    "attributes": {
+        "hasFooterFullWidth": {
+            "type": "boolean",
+            "default": false
+        }
+    },
     "overview": [
         {
             "type": "rubric",

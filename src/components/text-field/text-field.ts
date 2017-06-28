@@ -75,7 +75,7 @@ export class MTexteField extends Vue {
     private mounted() {
         if (this.propsIsEditable) {
             // Set attribute type on input refs
-            this.$refs.input['setAttribute']('type', this.propsType);
+            this.$refs.input['type'] = this.propsType;
         }
     }
 

@@ -11,12 +11,15 @@
                     <m-i18n i18n-key="m-template:body-default-text"></m-i18n>
                 </slot>
             </section>
-            <section class="m-template__body__footer" v-if="hasFooter">
+            <section class="m-template__body__footer" v-if="hasFooter && !hasFooterFullWidth">
                 <slot name="footer"></slot>
             </section>
         </div>
         <aside class="m-template__column" v-if="hasColumn">
             <slot name="column"></slot>
         </aside>
+        <section class="m-template__body__footer" v-if="hasFooter && hasFooterFullWidth">
+            <slot name="footer"></slot>
+        </section>
     </div>
 </main>
