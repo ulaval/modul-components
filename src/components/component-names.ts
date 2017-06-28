@@ -16,6 +16,7 @@ export const POPPER_NAME: string = 'm-popper';
 export const RADIO_BUTTONS_NAME: string = 'm-radio-buttons';
 export const STATUS_LIST_NAME: string = 'm-status-list';
 export const STEP_NAME: string = 'm-step';
+export const SWITCH_NAME: string = 'm-switch';
 export const TAB_PANE_NAME: string = 'm-tab-pane';
 export const TABLE_NAME: string = 'm-table';
 export const TABS_NAME: string = 'm-tabs';
@@ -42,6 +43,7 @@ export const components: string[] = [
     RADIO_BUTTONS_NAME,
     STATUS_LIST_NAME,
     STEP_NAME,
+    SWITCH_NAME,
     TAB_PANE_NAME,
     TABLE_NAME,
     TABS_NAME,

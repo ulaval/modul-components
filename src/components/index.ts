@@ -19,6 +19,7 @@ import PopperListPlugin from './popper-list/popper-list';
 import RadioButtonsPlugin from './radio-buttons/radio-buttons';
 import StatusList from './status-list/status-list';
 import StepPlugin from './step/step';
+import SwitchPlugin from './switch/switch';
 import TabPanePlugin from './tab-pane/tab-pane';
 import TablePlugin from './table/table';
 import TabsPlugin from './tabs/tabs';
@@ -46,6 +47,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RadioButtonsPlugin);
         Vue.use(StatusList);
         Vue.use(StepPlugin);
+        Vue.use(SwitchPlugin);
         Vue.use(TabPanePlugin);
         Vue.use(TablePlugin);
         Vue.use(TabsPlugin);
