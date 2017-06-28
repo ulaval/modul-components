@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './dynamic-template.html';
 import uuid from '../../utils/uuid/uuid';
 import { DYNAMIC_TEMPLATE_NAME } from '../component-names';
@@ -12,25 +12,13 @@ export class MDynamicTemplate extends Vue {
     @Prop()
     public template: string;
 
-    public internalTemplate: string = '';
-
     private tag: string = 'm-dt-' + uuid.generate();
 
-    public mounted(): void {
-        this.renderTemplate();
-    }
-
-    @Watch('template')
-    public onTemplate() {
-        this.renderTemplate();
-    }
-
-    private renderTemplate(): void {
+    private get internalTemplate(): string {
         Vue.component(this.tag, {
-            template: '<div>' + this.template + '</div>'
+            template: `<div>${this.template}</div>`
         });
-        this.internalTemplate = '';
-        this.internalTemplate = this.tag;
+        return this.tag;
     }
 }
 
