@@ -1,5 +1,5 @@
 @import 'abstracts/variables';
-$m-checkbox--width: 16px;
+$m-radio-buttons--width: 16px;
 
 .m-radio-buttons {
     display: inline;
@@ -78,8 +78,8 @@ $m-checkbox--width: 16px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: $m-checkbox--width;
-        height: $m-checkbox--width;
+        width: $m-radio-buttons--width;
+        height: $m-radio-buttons--width;
         background: $m-color--white;
         border-width: 1px;
         border-style: solid;
