@@ -12,15 +12,19 @@
             ],
             "default": "disabled"
         },
-        "isOpen": {
+        "open": {
             "type": "boolean",
             "default": false
         },
-        "isObligatory": {
+        "obligatory": {
             "type": "boolean",
             "default": true
         },
         "iconName": {
+        },
+        "last": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": [

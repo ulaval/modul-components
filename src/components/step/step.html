@@ -1,4 +1,4 @@
-<article class="m-step" :class="{'m--is-locked': propsState=='locked','m--is-in-progress': propsState=='in-progress','m--is-success': propsState=='success','m--is-warning': propsState=='warning','m--is-error': propsState=='error', 'm--is-open': propsIsOpen, 'm--is-close': !propsIsOpen, 'm--is-last': isLast}">
+<article class="m-step" :class="{'m--is-locked': propsState=='locked','m--is-in-progress': propsState=='in-progress','m--is-success': propsState=='success','m--is-warning': propsState=='warning','m--is-error': propsState=='error', 'm--is-open': propsOpen, 'm--is-close': !propsOpen, 'm--is-last': last}">
     <header>
         <a href="#" class="m-step__header" @click="openStep">
             <span class="m-step__icon">
@@ -14,7 +14,7 @@
     </header>
 
     <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
-        <div class="m-step__body" v-if="propsIsOpen">
+        <div class="m-step__body" v-if="propsOpen">
             <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis.
                 Duis mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit
                 commodo arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et

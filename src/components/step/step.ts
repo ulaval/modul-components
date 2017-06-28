@@ -22,37 +22,37 @@ export class MStep extends Vue {
     @Prop({ default: STATE_LOCKED })
     public state: string;
     @Prop({ default: false })
-    public isOpen: boolean;
+    public open: boolean;
     @Prop({ default: false })
-    public isObligatory: boolean;
+    public obligatory: boolean;
     @Prop({ default: 'default' })
     public iconName: string;
     @Prop({ default: false })
-    public isLast: boolean;
+    public last: boolean;
 
     public componentName = STEP_NAME;
     public animIsActive: boolean = false;
 
     private propsState: string = STATE_LOCKED;
-    private propsIsOpen: boolean = false;
-    private propsIsLast: boolean = false;
+    private propsOpen: boolean = false;
+    private propsLast: boolean = false;
 
     private mounted() {
         this.propsState = this.state;
-        this.propsIsOpen = this.isOpen;
-        this.propsIsLast = this.isLast;
+        this.propsOpen = this.open;
+        this.propsLast = this.last;
     }
 
     private openStep(event): void {
         this.animIsActive = true;
-        this.propsIsOpen = true;
+        this.propsOpen = true;
         this.$emit('openStep', event);
         event.preventDefault();
     }
 
     private closeStep(event): void {
         this.animIsActive = true;
-        this.propsIsOpen = false;
+        this.propsOpen = false;
         this.$emit('closeStep', event);
         event.preventDefault();
     }
