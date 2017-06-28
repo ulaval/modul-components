@@ -30,6 +30,24 @@
             ],
             "default": 0
         },
+        "iconName": {
+            "type": "string"
+        },
+        "iconPosition": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        },
+        "iconSize": {
+            "type": "string",
+            "values": [
+                "16px"
+            ],
+            "default": 0
+        },
         "isFullSize": {
             "type": "boolean",
             "default": false

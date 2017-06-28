@@ -19,6 +19,7 @@ const STATE_DISABLED: string = 'disabled';
 const STATE_WAITING: string = 'waiting';
 const STATE_SELECTED: string = 'selected';
 
+const ICON_POSITION_LEFT: string = 'left';
 const ICON_SIZE: string = '16px';
 
 @WithRender
@@ -33,7 +34,7 @@ export class MButton extends Vue {
     public state: string;
     @Prop()
     public iconName: string;
-    @Prop({ default: 'left' })
+    @Prop({ default: ICON_POSITION_LEFT })
     public iconPosition: string;
     @Prop({ default: ICON_SIZE })
     public iconSize: string;
@@ -82,7 +83,7 @@ export class MButton extends Vue {
     }
 
     private get hasIconeLeft(): boolean {
-        return this.iconPosition == 'left' ? true : false;
+        return this.iconPosition == ICON_POSITION_LEFT ? true : false;
     }
 
     private get hasMoreInfo(): boolean {
