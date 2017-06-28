@@ -4,6 +4,7 @@ import { PluginObject } from 'vue';
 import MediaQueriesPlugin from './media-queries/media-queries';
 import MessagesPlugin from './i18n/i18n';
 import HttpPlugin from './http/http';
+import PortalPlugin from 'portal-vue';
 import SecurityPlugin, { SecurityPluginOptions } from './http/security';
 import SpritesPlugin from './svg/sprites';
 
@@ -21,6 +22,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(MediaQueriesPlugin);
         Vue.use(MessagesPlugin);
         Vue.use(HttpPlugin);
+        Vue.use(PortalPlugin);
         Vue.use(SecurityPlugin, o.securityPluginOptions);
         Vue.use(SpritesPlugin);
     }

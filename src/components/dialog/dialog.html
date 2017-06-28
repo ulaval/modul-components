@@ -1,30 +1,35 @@
-<div class="m-dialog">
-    <div class="m-dialog__backdrop" @click.self="onBackdropClick">
-        <article class="m-dialog__wrap">
-            <header class="m-dialog__header" v-if="hasTitle">
-                <h2 class="m-dialog__header__title">
-                    <slot name="title"></slot>
-                </h2>
-            </header>
-            <div class="m-dialog__body">
-                <slot>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore doloremque odio, et dignissimos qui recusandae
-                    doloribus nobis ipsam dolore cupiditate possimus quia commodi sit hic dolorum aperiam. Consectetur quisquam,
-                    praesentium.
-                </slot>
-            </div>
-            <footer class="m-dialog__footer">
-                <nav class="m-dialog__footer__nav">
-                    <slot name="footer">
-                        <m-button @onClick="onClose">Ok</m-button>
-                        <m-button @onClick="onClose" type="secondary">
-                            <m-i18n i18n-key="m-dialog:cancel"></m-i18n>
-                        </m-button>
+<span class="m-dialog">
+    <portal v-if="isOpen" :targetEl="'#' + propsId">
+        <div class="m-dialog__backdrop" @click.self="backdropClick" :class="{ 'm--is-open': isVisible, 'm--is--backdrop-hidden': !hasBackdrop }" tabindex="-1">
+            <article class="m-dialog__wrap">
+                <header class="m-dialog__header" v-if="hasTitle">
+                    <h2 class="m-dialog__header__title">
+                        <slot name="title"></slot>
+                    </h2>
+                </header>
+                <div class="m-dialog__body">
+                    <slot name="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore doloremque odio, et dignissimos qui
+                        recusandae doloribus nobis ipsam dolore cupiditate possimus quia commodi sit hic dolorum aperiam.
+                        Consectetur quisquam, praesentium.
                     </slot>
-                    <m-link v-if="!isModal" type="button" @onClick="onClose">
-                        <m-i18n i18n-key="m-dialog:close"></m-i18n>
-                    </m-link>
-                </nav>
-            </footer>
-        </article>
-    </div>
-</div>
+                </div>
+                <footer class="m-dialog__footer">
+                    <nav class="m-dialog__footer__nav">
+                        <slot name="footer">
+                            <m-button @click="close">Ok</m-button>
+                            <m-button @click="close" type="secondary">
+                                <m-i18n i18n-key="m-dialog:cancel"></m-i18n>
+                            </m-button>
+                        </slot>
+                        <m-link v-if="!isDialog" type="button" @click="close">
+                            <m-i18n i18n-key="m-dialog:close"></m-i18n>
+                        </m-link>
+                    </nav>
+                </footer>
+            </article>
+        </div>
+    </portal>
+    <span @click="open" class="m-dialog__button">
+        <slot><m-button>Open dialog</m-button></slot>
+    </span>
+</span>

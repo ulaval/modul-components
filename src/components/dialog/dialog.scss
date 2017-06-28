@@ -2,7 +2,8 @@
 
 .m-dialog {
     &__backdrop {
-        background-color: rgba(0, 0, 0, 0.7);
+        transition: 0.2s background linear;
+        background: none;
         z-index: 9999;
         display: flex;
         justify-content: center;
@@ -13,16 +14,50 @@
         bottom: 0;
         left: 0;
         overflow: auto;
-        padding: $m-padding--l;
+        padding: $m-padding;
+        cursor: pointer;
+
+        @media screen and (min-width: $m-screen--min--s) {
+            padding: $m-padding--l;
+        }
+
+        &.m--is--backdrop-hidden {
+            background: none;
+        }
+
+        &.m--is-open {
+            &:not(.m--is--backdrop-hidden) {
+                background: rgba($m-color--black, 0.7);
+            }
+
+            .m-dialog {
+                &__wrap {
+                    transform: translate3d(0, 0, 0);
+                    opacity: 1;
+                }
+            }
+        }
     }
 
     &__wrap {
+        cursor: auto;
+        transition: 0.3s transform ease, 0.2s opacity linear;
+        transform: translate3d(0, $m-padding--l, 0);
         margin-top: auto;
         margin-bottom: auto;
-        background-color: $m-color--white;
-        max-width: $m-max-width--dialog;
+        width: 100%;
+        background: $m-color--white;
         border-radius: $m-border-radius;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            margin-top: 60px;
+        }
+
+        @media screen and (min-width: #{$m-max-width--dialog + $m-padding * 2}) {
+            width: $m-max-width--dialog;
+        }
     }
 
     &__header,
@@ -58,6 +93,28 @@
         .m-button__text {
             width: 100%;
             text-align: center;
+        }
+    }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+
+    .m-dialog {
+        &__backdrop {
+            transition: opacity 0.5s;
+        }
+    }
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+
+    .m-dialog {
+        &__backdrop {
+            opacity: 0;
         }
     }
 }
