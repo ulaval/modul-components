@@ -13,21 +13,21 @@ const POSITION_LEFT: string = 'left';
 export class MCheckbox extends Vue {
 
     @Prop({ default: false })
-    public isChecked: boolean;
+    public checked: boolean;
     @Prop({ default: POSITION_LEFT })
     public position: string;
     @Prop({ default: true })
-    public hasLabel: boolean;
+    public label: boolean;
 
     public componentName: string = CHECKBOX_NAME;
-    private propsIsChecked = true;
-    private propsHasLabel = true;
+    private propsChecked = true;
+    private propsLabel = true;
     private isFocus = false;
     private id: string = `checkbox${uuid.generate()}`;
 
     public mounted(): void {
-        this.propsIsChecked = this.isChecked;
-        this.propsHasLabel = this.hasLabel;
+        this.propsChecked = this.checked;
+        this.propsLabel = this.label;
     }
 
     private onClick(event): void {
