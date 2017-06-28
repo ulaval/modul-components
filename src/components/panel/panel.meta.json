@@ -10,27 +10,27 @@
             ],
             "default": "primary"
         },
-        "hasShadow": {
+        "shadow": {
             "type": "boolean",
             "default": true
         },
-        "hasBorder": {
+        "border": {
             "type": "boolean",
             "default": true
         },
-        "hasPadding": {
+        "padding": {
             "type": "boolean",
             "default": true
         },
-        "hasPaddingHeader": {
+        "paddingHeader": {
             "type": "boolean",
             "default": true
         },
-        "hasPaddingBody": {
+        "paddingBody": {
             "type": "boolean",
             "default": true
         },
-        "hasPaddingFooter": {
+        "paddingFooter": {
             "type": "boolean",
             "default": true
         }

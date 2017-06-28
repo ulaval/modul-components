@@ -11,17 +11,17 @@ export class MPanel extends Vue {
     @Prop({ default: 'primary' })
     public type: string;
     @Prop({ default: true })
-    public hasShadow: boolean;
+    public shadow: boolean;
     @Prop({ default: true })
-    public hasBorder: boolean;
+    public border: boolean;
     @Prop({ default: true })
-    public hasPadding: boolean;
+    public padding: boolean;
     @Prop({ default: true })
-    public hasPaddingHeader: boolean;
+    public paddingHeader: boolean;
     @Prop({ default: true })
-    public hasPaddingBody: boolean;
+    public paddingBody: boolean;
     @Prop({ default: true })
-    public hasPaddingFooter: boolean;
+    public paddingFooter: boolean;
 
     public componentName: string = PANEL_NAME;
 
