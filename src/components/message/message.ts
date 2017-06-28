@@ -21,21 +21,21 @@ export class MMessage extends Vue {
     @Prop({ default: MODE_REGULAR })
     public mode: string;
     @Prop({ default: true })
-    public hasIcon: boolean;
+    public icon: boolean;
     @Prop({ default: false })
-    public hasCloseButton: boolean;
+    public closeButton: boolean;
     @Prop({ default: true })
-    public isVisible: boolean;
+    public visible: boolean;
 
     public componentName = MESSAGE_NAME;
 
     private get showCloseButton(): boolean {
-        return this.mode == MODE_REGULAR && this.hasCloseButton;
+        return this.mode == MODE_REGULAR && this.closeButton;
     }
 
     private onClose(event): void {
         this.$emit('close', event);
-        this.isVisible = false;
+        this.visible = false;
     }
 
     private getIcon(): string {
