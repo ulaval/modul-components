@@ -1,0 +1,34 @@
+{
+    "tag": "m-switch",
+    "name": "m-switch-meta:name",
+    "attributes": {
+        "name": {
+            "type": "string",
+            "default": "name"
+        },
+        "hasLabel": {
+            "type": "boolean",
+            "default": true
+        },
+        "position": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-switch-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-switch-meta:usage"
+        }
+    ]
+}
