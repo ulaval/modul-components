@@ -1,5 +1,123 @@
 @import 'abstracts/variables';
 
 .m-switch {
-    color: red;
+    display: inline;
+    user-select: none;
+    line-height: 1;
+
+    &:not(.is-disabled) {
+        .m-switch__wrap {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .m-switch__label {
+            flex: 1;
+            color: $m-color--text;
+        }
+
+        .m-switch__input {
+            border-color: $m-color--grey;
+        }
+
+        &:hover,
+        &.m--is-focus {
+            .m-switch__input {
+                border-color: $m-color--grey-dark;
+            }
+
+            .m-switch__label {
+                color: $m-color--primary;
+            }
+        }
+
+        &.m--is-checked {
+            .m-switch__input {
+                border-color: $m-color--primary;
+                background-color: $m-color--primary;
+            }
+
+            .m-switch__button {
+                border-color: $m-color--white;
+                background-color: $m-color--white;
+                left: auto;
+                left: calc(100% - 25px);
+            }
+
+            .m-switch__text {
+                color: $m-color--white;
+                left: 0;
+            }
+        }
+    }
+
+    &.m--is-disabled {
+        border-color: $m-color--grey-light;
+        background: $m-color--grey-lighter;
+    }
+
+    &.m--is-switch-left {
+        .m-switch__label {
+            padding-left: $m-margin--s;
+        }
+    }
+
+    &.m--is-switch-right {
+        .m-switch__wrap {
+            flex-direction: row-reverse;
+        }
+
+        .m-switch__label {
+            padding-right: $m-margin--s;
+        }
+    }
+
+    &__input {
+        transition: 0.3s ease-in-out;
+        background: $m-color--grey-light;
+        border-radius: 2rem;
+        border: $m-border-width--s solid $m-color--grey;
+        display: inline-flex;
+        position: relative;
+        height: 25px;
+        min-width: 60px;
+    }
+
+    &__button {
+        transition: 0.3s ease-in-out;
+        background: $m-color--white;
+        border-radius: 2rem;
+        border: $m-border-width--s solid $m-color--white;
+        height: 100%;
+        width: 25px;
+        left: 0;
+        position: relative;
+        z-index: 2;
+        color: $m-color--grey-darker;
+        font-size: $m-font-size--xs;
+    }
+
+    &__text {
+        transition: 0.3s ease-in-out;
+        display: flex;
+        height: 100%;
+        width: calc(100% - 25px);
+        left: calc(100% - (100% - 25px));
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        z-index: 1;
+        text-align: center;
+        color: $m-color--grey-darker;
+        font-size: $m-font-size--xs;
+    }
+
+    &__label {
+        transition: 0.3s color ease;
+    }
+
+    &__hidden {
+        @include visuallyHidden;
+    }
 }

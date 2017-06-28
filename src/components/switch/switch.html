@@ -1,3 +1,17 @@
-<span class="m-switch">
-    test
+<span class="m-switch" :class="{ 'm--is-switch-left': hasSwitchLeft, 'm--is-switch-right': !hasSwitchLeft, 'm--is-checked': propsIsChecked, 'm--is-focus': isFocus }"
+    @click="onClick">
+    <input ref="switch" type="checkbox" :id="id" class="m-switch__hidden" v-model="propsIsChecked" @focus="isFocus=true" @blur="isFocus=false">
+    <label class="m-switch__wrap" :for="id" :aria-hidden="!propsHasLabel">
+        <span class="m-switch__input" aria-hidden="true">
+            <span class="m-switch__button" aria-hidden="true"></span>
+            <span class="m-switch__text" aria-hidden="true">
+                <slot v-if="propsIsChecked">{{ propsOnText }}</slot>
+                <slot v-if="!propsIsChecked">{{ propsOffText }}</slot>
+            </span>
+        </span>
+        <span class="m-switch__label" v-if="propsHasLabel">
+            <slot>m-switch</slot>
+        </span>
+    </label>
 </span>
+
