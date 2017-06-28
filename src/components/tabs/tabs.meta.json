@@ -2,7 +2,9 @@
     "tag": "m-tabs",
     "name": "m-tabs-meta:name",
     "attributes": {
-
+        "mode": {
+            "type": "string"
+        }
     },
     "overview": [
         {
