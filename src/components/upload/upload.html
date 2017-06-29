@@ -1,9 +1,11 @@
-<el-upload
-    class="m-el-upload"
-    action="https://jsonplaceholder.typicode.com/posts/"
-    :on-preview="handlePreview"
-    :on-remove="handleRemove"
-    :file-list="fileList">
-    <m-button>Click to upload</m-button>
-    <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
+<div class="m-upload">
+    <input type="file" id="files" name="files[]" @change="filesChange" multiple />
+
+    <div class="m-upload__drag-drop-zone" id="list">
+        Zone de drag and drop
+
+        <ul>
+            <li v-for="file in filesSelected">{{ file }}</li>
+        </ul>
+    </div>
+</div>
