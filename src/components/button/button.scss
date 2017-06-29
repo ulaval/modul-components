@@ -155,11 +155,11 @@ $m-button--color-disabled: $m-color--grey-light !default;
         font-size: $m-font-size;
         height: $m-font-size;
 
-        &.is-left {
+        &.m--is-left {
             margin-right: $m-margin;
         }
 
-        &.is-right {
+        &.m--is-right {
             margin-left: $m-margin;
         }
     }

@@ -21,6 +21,7 @@ const STATE_SELECTED: string = 'selected';
 
 const ICON_POSITION_LEFT: string = 'left';
 const ICON_SIZE: string = '16px';
+const ICON_SIZE_SMALL: string = '12px';
 
 @WithRender
 @Component
@@ -36,7 +37,7 @@ export class MButton extends Vue {
     public iconName: string;
     @Prop({ default: ICON_POSITION_LEFT })
     public iconPosition: string;
-    @Prop({ default: ICON_SIZE })
+    @Prop()
     public iconSize: string;
     @Prop({ default: false })
     public isFullSize: boolean;
@@ -46,6 +47,7 @@ export class MButton extends Vue {
     private propsType: string = TYPE_BUTTON;
     private propsMode: string = MODE_PRIMARY;
     private propsState: string = STATE_DEFAULT;
+    private propsIconSize: string = ICON_SIZE;
 
     private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "iconName" is undefined';
 
@@ -63,6 +65,11 @@ export class MButton extends Vue {
         this.propsType = this.type != TYPE_SUBMIT && this.type != TYPE_RESET ? TYPE_BUTTON : this.type;
         this.propsMode = this.getMode(this.mode);
         this.propsState = this.getState(this.state);
+        if (this.propsMode == MODE_ICON) {
+            this.propsIconSize = this.iconSize == undefined ? ICON_SIZE : this.iconSize;
+        } else {
+            this.propsIconSize = this.iconSize == undefined ? ICON_SIZE_SMALL : this.iconSize;
+        }
     }
 
     private getMode(mode: string): string {
