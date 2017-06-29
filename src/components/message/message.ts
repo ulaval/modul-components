@@ -5,13 +5,13 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './message.html?style=./message.scss';
 import { MESSAGE_NAME } from '../component-names';
 
-const STATE_SUCCESS: string = 'success';
-const STATE_INFORMATION: string = 'information';
-const STATE_WARNING: string = 'warning';
-const STATE_ERROR: string = 'error';
+export const STATE_SUCCESS: string = 'success';
+export const STATE_INFORMATION: string = 'information';
+export const STATE_WARNING: string = 'warning';
+export const STATE_ERROR: string = 'error';
 
-const MODE_REGULAR: string = 'regular';
-const MODE_LIGHT: string = 'light';
+export const MODE_REGULAR: string = 'regular';
+export const MODE_LIGHT: string = 'light';
 
 @WithRender
 @Component
