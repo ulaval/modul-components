@@ -45,7 +45,7 @@ export class MTexteField extends Vue {
 
     @Watch('value')
     private valueChanged(value): void {
-        this.propsValue = this.$props.value;
+        this.propsValue = this.value;
     }
 
     @Watch('propsValue')
@@ -99,7 +99,6 @@ export class MTexteField extends Vue {
     }
 
     private onKeyup(event): void {
-        this.isFocusActive = this.isDisabled ? true : false;
         if (!this.isDisabled) {
             this.checkHasValue();
             this.checkHasDefaultText();
@@ -123,7 +122,7 @@ export class MTexteField extends Vue {
     }
 
     private get hasError(): boolean {
-        if (this.$props.errorMessage != '' || this.$props.state == 'error') {
+        if (this.errorMessage != '' || this.state == 'error') {
             this.propsState = 'error';
             return true;
         } else if (this.propsState != 'disabled') {

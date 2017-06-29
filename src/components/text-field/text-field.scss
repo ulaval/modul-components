@@ -4,6 +4,7 @@ $m-text-field--color--helper: $m-color--grey-darker;
 $m-text-field--color--focus: $m-color--primary;
 $m-text-field--color--error: $m-color--error;
 $m-text-field--color--valid: $m-color--valid;
+$m-text-field--color--disabled: $m-color--grey-darker;
 $m-text-field--margin: $m-padding--xs;
 
 .m-text-field {
@@ -162,12 +163,12 @@ $m-text-field--margin: $m-padding--xs;
 
         .m-text-field__label,
         .m-text-field__icon {
-            color: $m-text-field--color--helper;
+            color: $m-text-field--color--disabled;
         }
 
         .m-text-field__input {
             border-bottom-style: dashed;
-            border-color: $m-text-field--color--helper;
+            border-color: $m-text-field--color--disabled;
         }
     }
 
