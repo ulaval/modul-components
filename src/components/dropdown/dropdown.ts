@@ -300,7 +300,6 @@ export class MDropdown extends ModulVue {
     }
 
     public keyupItem($event: KeyboardEvent, index: number): void {
-        console.log('keyupItem', $event, index);
         let selector: string = '';
         switch ($event.keyCode) {
             case KeyCode.DOM_VK_UP:

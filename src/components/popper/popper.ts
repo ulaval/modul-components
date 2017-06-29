@@ -84,27 +84,29 @@ export class MPopper extends Vue {
     }
 
     private mounted(): void {
-        this.propsMode = this.$props.mode;
-        this.referenceElm = this.reference || this.$slots.reference[0].elm;
-        this.popper = this.$slots.default[0].elm;
+        if ((this.$slots.reference) && (this.$slots.default)) {
+            this.propsMode = this.$props.mode;
+            this.referenceElm = this.reference || this.$slots.reference[0].elm;
+            this.popper = this.$slots.default[0].elm;
 
-        switch (this.trigger) {
-            case 'click':
-                on(this.referenceElm, 'click', this.doToggle);
-                if (this.closeOnContentClick) {
-                    on(this.popper, 'click', this.doClose);
-                }
-                on(document, 'click', this.handleDocumentClick);
-                break;
-            case 'hover':
-                on(this.referenceElm, 'mouseover', this.onMouseOver);
-                on(this.popper, 'mouseover', this.onMouseOver);
-                on(this.referenceElm, 'mouseout', this.onMouseOut);
-                on(this.popper, 'mouseout', this.onMouseOut);
-                break;
+            switch (this.trigger) {
+                case 'click':
+                    on(this.referenceElm, 'click', this.doToggle);
+                    if (this.closeOnContentClick) {
+                        on(this.popper, 'click', this.doClose);
+                    }
+                    on(document, 'click', this.handleDocumentClick);
+                    break;
+                case 'hover':
+                    on(this.referenceElm, 'mouseover', this.onMouseOver);
+                    on(this.popper, 'mouseover', this.onMouseOver);
+                    on(this.referenceElm, 'mouseout', this.onMouseOut);
+                    on(this.popper, 'mouseout', this.onMouseOut);
+                    break;
+            }
+
+            this.createPopper();
         }
-
-        this.createPopper();
     }
 
     private doToggle(): void {
