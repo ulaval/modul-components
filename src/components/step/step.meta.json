@@ -16,7 +16,7 @@
             "type": "boolean",
             "default": false
         },
-        "obligatory": {
+        "required": {
             "type": "boolean",
             "default": true
         },
