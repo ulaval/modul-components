@@ -38,7 +38,7 @@ export class MPopper extends Vue {
     @Prop({ default: false })
     public visibleArrow: boolean;
     @Prop()
-    public options: Object;
+    public options: any;
     @Prop({ default: false })
     public closeOnContentClick: boolean;
     @Prop({ default: true })
@@ -80,7 +80,7 @@ export class MPopper extends Vue {
     }
 
     private created(): void {
-        // FIXME: this.popperOptions = { ...this.popperOptions, ...this.options };
+        this.popperOptions = { ...this.popperOptions, ...this.options };
     }
 
     private mounted(): void {
