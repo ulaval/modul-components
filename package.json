@@ -1,9 +1,9 @@
 {
-  "name": "modul-components",
-  "version": "0.1.0",
+  "name": "@ulaval/modul-components",
+  "version": "0.1.2",
   "description": "Component library",
   "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
-  "private": true,
+  "private": false,
   "scripts": {
     "clean": "rimraf dist",
     "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
@@ -81,7 +81,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ulaval/vuejs-typescript-template.git"
+    "url": "https://github.com/ulaval/modul-components.git"
   },
   "engines": {
     "node": ">= 6.0.0",

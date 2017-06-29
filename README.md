@@ -1,5 +1,5 @@
 # modul-components
-A set of VueJS components for Modul web applications.
+A set of VueJS components for Modul web applications (alpha release).
 
 ## Usage
 1. Clone this project
@@ -13,6 +13,6 @@ A set of VueJS components for Modul web applications.
 
 ## Usage as a dependency in your project
 1. Run npm install @ulaval/modul-components --save
-1. Look at the [documentation][1]
+1. Look at the [documentation][1] (not yet deployed)
 
 [1]: https://ulaval.github.io
