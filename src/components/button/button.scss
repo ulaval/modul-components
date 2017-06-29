@@ -4,7 +4,7 @@ $m-button--color-hover: $m-color--primary-light !default;
 $m-button--color-active: $m-color--primary-dark !default;
 $m-button--color-selected: $m-color--primary-darker !default;
 $m-button--color-waiting: $m-color--primary-lighter !default;
-$m-button--color-disabled: $m-color--grey-light !default;
+$m-button--color-disabled: $m-color--grey-darker !default;
 
 .m-button {
     position: relative;
@@ -44,6 +44,7 @@ $m-button--color-disabled: $m-color--grey-light !default;
 
             &:active,
             &:focus {
+                color: $m-color--white;
                 background: $m-button--color-active;
                 border-color: $m-button--color-active;
             }
