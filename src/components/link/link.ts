@@ -29,8 +29,6 @@ export class MLink extends ModulVue {
     private isExternalLink: boolean = false;
     private isButton: boolean = false;
     private hrefAttribute: string;
-    private targetAttribute: string = '_blanck';
-    private titleAttribute: string = 'Cet hyperlien s\'ouvrira dans une nouvelle fenêtre.';
 
     private beforeMount(): void {
         this.propsUrl = this.url;
@@ -50,6 +48,12 @@ export class MLink extends ModulVue {
                 this.isRouterLink = true;
         }
     }
+    private mounted(): void {
+        if (this.isExternalLink) {
+            this.$refs['link']['setAttribute']('title', this.$i18n.translate('m-link:open-new-tab'));
+            this.$refs['link']['setAttribute']('target', '_blank');
+        }
+    }
 
     private onClick(event): void {
         this.$emit('click');
@@ -57,14 +61,6 @@ export class MLink extends ModulVue {
         if (this.isButton) {
             event.preventDefault();
         }
-    }
-
-    private get getTargetAttribute(): string {
-        return this.isExternalLink ? this.targetAttribute : '';
-    }
-
-    private get getTitleAttribute(): string {
-        return this.isExternalLink ? this.titleAttribute : '';
     }
 
     private get hasIconeLeft(): boolean {
