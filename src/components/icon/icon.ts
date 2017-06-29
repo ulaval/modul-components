@@ -26,6 +26,7 @@ export class MIcon extends Vue {
     }
 
     private onClick(event): void {
+        console.log('sss');
         this.$emit('click', event);
     }
 

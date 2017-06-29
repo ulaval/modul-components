@@ -20,15 +20,33 @@ $m-status-list-line-width: 2px;
         z-index: 1;
     }
 
-    li {
+    &__list {
         display: flex;
         align-items: center;
         position: relative;
         z-index: 2;
-    }
 
-    li + li {
-        margin-top: $m-margin;
+        + .m-status-list__list {
+            margin-top: $m-margin;
+        }
+
+        &.m--is-completed {
+            .m-icon {
+                color: $m-color--valid;
+            }
+        }
+
+        &.m--is-error {
+            .m-icon {
+                color: $m-color--error;
+            }
+        }
+
+        &.m--is-pending {
+            .m-icon {
+                color: $m-color--yellow;
+            }
+        }
     }
 
     .m-icon {

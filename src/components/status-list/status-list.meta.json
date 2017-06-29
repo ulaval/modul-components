@@ -2,7 +2,7 @@
     "tag": "m-status-list",
     "name": "m-status-list-meta:name",
     "attributes": {
-        "states": {
+        "listData": {
             "type": "MStatusListData",
             "description": "m-status-list-meta:states-desc"
         }

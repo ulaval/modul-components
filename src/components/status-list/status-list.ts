@@ -4,8 +4,15 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './status-list.html?style=./status-list.scss';
 import { STATUS_LIST_NAME } from '../component-names';
 
+const STATE_COMPLETED: string = 'completed';
+const STATE_PENDING: string = 'pending';
+const STATE_ERROR: string = 'error';
+
+const ICON_NAME_CHIP_CHECK: string = 'chip-check';
+const ICON_NAME_CHIP_ERROR: string = 'chip-error';
+
 export interface MStatusListData {
-    status: MStatusListStates;
+    state: MStatusListStates;
     text: string;
 }
 
@@ -19,44 +26,29 @@ export class MStatusList extends Vue {
         default: () => {
             return [
                 {
-                    'status': 'completed',
+                    'state': STATE_COMPLETED,
                     'text': 'Informations default'
                 },
                 {
-                    'status': 'pending',
+                    'state': STATE_PENDING,
                     'text': 'Questions default'
                 },
                 {
-                    'status': 'error',
+                    'state': STATE_ERROR,
                     'text': 'Pièces default'
                 },
                 {
-                    'status': 'completed',
+                    'state': STATE_COMPLETED,
                     'text': 'Formulaire default'
                 }
             ];
         }
     })
-    public states: MStatusListData[];
+    public listData: MStatusListData[];
 
-    public getIcon(status: MStatusListStates): string {
-        let icon: string = '';
-        switch (status) {
-            case 'completed':
-                icon = 'chip-check';
-                break;
-            case 'pending':
-                icon = 'chip-check-yellow';
-                break;
-            case 'error':
-                icon = 'chip-error';
-                break;
-            default:
-                break;
-        }
-        return icon;
+    private getIconName(state: MStatusListStates): string {
+        return state == STATE_ERROR ? ICON_NAME_CHIP_ERROR : ICON_NAME_CHIP_CHECK;
     }
-
 }
 
 const StatusList: PluginObject<any> = {

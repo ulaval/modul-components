@@ -1,6 +1,10 @@
 <ul class="m-status-list">
-    <li v-for="state in states" :key="text">
-        <m-icon :name="getIcon(state.status)"></m-icon>
-        <span class="libelle">{{state.text}}</span>
+    <li class="m-status-list__list" v-for="data in listData"
+        :key="text"
+        :class="{ 'm--is-completed' : data.state=='completed',
+               'm--is-pending' : data.state=='pending',
+               'm--is-error' : data.state=='error'}">
+        <m-icon :name="getIconName(data.state)"></m-icon>
+        <span class="m-status-list__libelle">{{data.text}}</span>
     </li>
 </ul>
