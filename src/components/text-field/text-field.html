@@ -14,6 +14,7 @@
                :disabled="isDisabled"
                @focus="onFocus"
                @blur="onBlur"
+               @keyup="onKeyup"
                v-model="propsValue"
                v-if="propsIsEditable">
         <a href="#"
@@ -22,6 +23,7 @@
            @focus="onFocus"
            @blur="onBlur"
            @click="onClick"
+           @keyup="onKeyup"
            v-if="!propsIsEditable">
             <span class="m-text-field__input__value" v-if="isDefaultTextEmpty">{{ propsValue }}</span>
             <span class="m-text-field__input__dafault-text" v-if="!isDefaultTextEmpty">- {{ propsDefaultText}} -</span>

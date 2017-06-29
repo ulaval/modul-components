@@ -10,7 +10,9 @@
               :closeOnContentClick="true"
               :closeOnReferenceClick="false"
               :disabled="stateDisabled"
-              mode="dropdown">
+              mode="dropdown"
+              @show="listOpen(true)"
+              @hide="listOpen(false)">
         <ul class="m-dropdown__list"
             ref="mDropdownElements">
             <li v-for="(element, index) in elementsSortedFiltered"
@@ -18,9 +20,11 @@
                 class="m-dropdown__list__element"
                 :class="{ 'is-selected': element === propsSelectedElement }"
                 :key="index"
-                :data-index="index"
                 @click="selectElement($event, element)">
-                <span class="m-dropdown__list__element__text">{{ getElementListText(element) }}</span>
+                <a class="m-dropdown__list__element__text"
+                   :data-index="index"
+                   @keyup="keyupItem($event, index)"
+                   tabindex="0">{{ getElementListText(element) }}</a>
             </li>
             <li v-if="elementsCount <= 0"
                 class="m-dropdown__list__element">
@@ -33,7 +37,8 @@
                       :value="textElement"
                       :state="state"
                       :isEditable="isEditable"
-                      @valueChanged="textElement = $event">
+                      @valueChanged="textElement = $event"
+                      @keyup="keyupList">
                       <slot></slot>
         </m-text-field>
     </m-popper>
