@@ -13,7 +13,7 @@ export class HttpService implements RestAdapter {
         // });
     }
 
-    public execute<T>(config: RequestConfig): Promise<T> {
+    public execute<T>(config: RequestConfig): Promise<any> {
         let axiosConfig: AxiosRequestConfig = this.buildConfig(config);
 
         let response: AxiosPromise = axios(axiosConfig);

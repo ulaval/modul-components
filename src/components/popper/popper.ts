@@ -80,7 +80,7 @@ export class MPopper extends Vue {
     }
 
     private created(): void {
-        this.popperOptions = { ...this.popperOptions, ...this.options };
+        // FIXME: this.popperOptions = { ...this.popperOptions, ...this.options };
     }
 
     private mounted(): void {
