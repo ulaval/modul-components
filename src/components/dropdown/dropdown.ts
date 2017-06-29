@@ -296,43 +296,7 @@ export class MDropdown extends ModulVue {
         if (!this.listIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_SPACE)) {
             $event.preventDefault();
             (this.$refs.mDropdownValue as Vue).$el.click();
-
-            let element: HTMLElement = this.$el.querySelector('[data-index=\'0\']') as HTMLElement;
-            console.log(element);
-            if (element) {
-                // console.log('focus');
-                element.focus();
-            // } else {
-            //     console.log('NO focus');
-            }
-            // let a = (this.$refs.test as HTMLElement).focus();
-            console.log(document.activeElement);
-
-            // let firstElement: HTMLElement = (this.$refs.mDropdownElements as HTMLElement).firstElementChild as HTMLElement;
-            // if (firstElement.firstElementChild) {
-            //     (firstElement.firstElementChild as HTMLElement).focus();
-            // }
-            return;
         }
-
-        // switch ($event.keyCode) {
-        //     case KeyCode.DOM_VK_UP:
-        //     case KeyCode.DOM_VK_PAGE_UP:
-        //     case KeyCode.DOM_VK_END:
-        //         let firstElement: HTMLElement = (this.$refs.mDropdownElements as HTMLElement).firstElementChild as HTMLElement;
-        //         if (firstElement) {
-        //             firstElement.focus();
-        //         }
-        //         break;
-        //     case KeyCode.DOM_VK_DOWN:
-        //     case KeyCode.DOM_VK_PAGE_DOWN:
-        //     case KeyCode.DOM_VK_HOME:
-        //         let lastElement: HTMLElement = (this.$refs.mDropdownElements as HTMLElement).lastElementChild as HTMLElement;
-        //         if (lastElement) {
-        //             lastElement.focus();
-        //         }
-        //         break;
-        // }
     }
 
     public keyupItem($event: KeyboardEvent, index: number): void {
@@ -373,11 +337,20 @@ export class MDropdown extends ModulVue {
                 }
                 selector = '[data-index=\'' + index + '\']';
                 break;
+            case KeyCode.DOM_VK_ENTER:
+            case KeyCode.DOM_VK_RETURN:
+                let element: HTMLElement = this.$el.querySelector('[data-index=\'' + index + '\']') as HTMLElement;
+                if (element) {
+                    element.click();
+                }
+                return;
         }
 
-        let element: HTMLElement = this.$el.querySelector(selector) as HTMLElement;
-        if (element) {
-            element.focus();
+        if (selector.trim() != '') {
+            let element: HTMLElement = this.$el.querySelector(selector) as HTMLElement;
+            if (element) {
+                element.focus();
+            }
         }
     }
 
