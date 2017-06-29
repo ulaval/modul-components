@@ -46,6 +46,7 @@ export class MDropdown extends ModulVue {
     private stateDisabled: boolean;
     private nullValueText: string;
     private nullValueAvailable: boolean;
+    private listIsOpen: boolean;
 
     @Watch('elements')
     public elementChanged(value): void {
@@ -164,6 +165,10 @@ export class MDropdown extends ModulVue {
         // Set width to Input and List
         valueField.$el.style.width = width + 'px';
         elements.style.width = width + 'px';
+    }
+
+    public listOpen(value: boolean): void {
+        this.listIsOpen = value;
     }
 
     private getTextWidth(element: HTMLElement, text: string): number {
