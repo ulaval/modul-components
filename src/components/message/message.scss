@@ -11,6 +11,7 @@ $m-message-size: 22px;
             .m-message__icon {
                 background-color: $m-color--valid-lightest;
                 border-color: $m-color--valid;
+                color: $m-color--valid;
             }
 
             .m-message__body .m-message__close-button {
@@ -24,6 +25,7 @@ $m-message-size: 22px;
             .m-message__icon {
                 background-color: $m-color--primary-lightest;
                 border-color: $m-color--primary;
+                color: $m-color--primary;
             }
 
             .m-message__body .m-message__close-button {
@@ -37,6 +39,7 @@ $m-message-size: 22px;
             .m-message__icon {
                 background-color: $m-color--yellow-lightest;
                 border-color: $m-color--yellow;
+                color: $m-color--yellow;
             }
 
             .m-message__body .m-message__close-button {
@@ -50,6 +53,7 @@ $m-message-size: 22px;
             .m-message__icon {
                 background-color: $m-color--error-lightest;
                 border-color: $m-color--error;
+                color: $m-color--error;
             }
 
             .m-message__body .m-message__close-button {

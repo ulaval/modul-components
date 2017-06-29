@@ -45,7 +45,7 @@ export class MMessage extends Vue {
                 icon = 'chip-check';
                 break;
             case STATE_INFORMATION:
-                icon = 'chip-warning-red';
+                icon = 'default';
                 break;
             case STATE_WARNING:
                 icon = 'chip-warning';
