@@ -1,0 +1,96 @@
+@import 'abstracts/variables';
+
+.m-link {
+    transition: color 0.3s ease;
+    position: relative;
+    font-weight: $m-font-weight--bold;
+    color: $m-color--primary;
+    text-decoration: none;
+
+    &::after {
+        transition: width 0.3s ease;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        content: '';
+        width: 0;
+        height: 1px;
+        background: $m-color--primary;
+    }
+
+    &:not(.m--is-unvisited):not(.m--is-button) {
+        &:visited {
+            color: $m-color--primary-darker;
+
+            .m-link__text.m-link__text {
+                &::after {
+                    background: $m-color--primary-darker;
+                }
+            }
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:not(:active) {
+        &:focus,
+        &:hover {
+            color: $m-color--primary-light;
+
+            .m-link__text {
+                &::after {
+                    width: 100%;
+                    background: $m-color--primary-light;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &:active {
+        color: $m-color--primary-dark;
+
+        .m-link__text {
+            &::after {
+                right: 0;
+                left: auto;
+                width: 8%;
+                background: $m-color--primary-dark;
+                opacity: 0;
+            }
+        }
+    }
+
+    &__text {
+        position: relative;
+        flex: 1;
+
+        &::after {
+            transition: width 0.3s ease, opacity 0.3s ease;
+            position: absolute;
+            right: 0;
+            bottom: 1px; //Magic number
+            left: 0;
+            content: '';
+            width: 8%;
+            height: 1px;
+            background: $m-color--primary;
+            opacity: 0;
+        }
+    }
+
+    &__icon {
+        font-size: 14px;
+        display: inline-flex;
+
+        &.m--is-left {
+            margin-right: $m-margin--s;
+        }
+
+        &.m--is-right {
+            margin-left: $m-margin--s;
+        }
+    }
+}

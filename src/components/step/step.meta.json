@@ -1,0 +1,37 @@
+{
+    "tag": "m-step",
+    "name": "m-step-meta:name",
+    "attributes": {
+        "state": {
+            "type": "string",
+            "values": [
+                "warning",
+                "in-progress",
+                "information",
+                "locked"
+            ],
+            "default": "disabled"
+        },
+        "open": {
+            "type": "boolean",
+            "default": false
+        },
+        "required": {
+            "type": "boolean",
+            "default": true
+        },
+        "iconName": {
+        },
+        "last": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-step-meta:context-of-use"
+        }
+    ]
+}

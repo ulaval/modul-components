@@ -1,0 +1,13 @@
+<span class="m-popper" :class="{ 'm--is-open': isAnimPopperActive }">
+    <slot name="reference" class="m-popper__reference"></slot>
+    <transition @enter="animEnter"
+        @after-enter="animAfterEnter"
+        @leave="animLeave"
+        @after-leave="doDestroy">
+        <span ref="m-popper__popper"
+            :aria-hidden="!showPopper"
+            v-show="!disabled && showPopper">
+            <slot class="m-popper__content">{{ content }}</slot>
+        </span>
+    </transition>
+</span>

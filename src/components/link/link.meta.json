@@ -1,0 +1,35 @@
+{
+    "tag": "m-link",
+    "name": "m-link-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "router-link",
+                "button",
+                "external-link",
+                "link"
+            ],
+            "default": 0
+        },
+        "url" : {
+            "type": "string",
+            "default": "/"
+        },
+        "state" : {
+            "type": "string",
+            "values": [
+                "default",
+                "unvisited"
+            ],
+            "default": 0
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-link-meta:context-of-use"
+        }
+    ]
+}

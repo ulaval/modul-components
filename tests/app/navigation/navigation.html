@@ -1,0 +1,13 @@
+<div>
+    <h2 class="m-u--no-margin-top"><m-link url="attributes">Attributes list</m-link></h2>
+    <h2><m-link url="media-queries">Media Queries</m-link></h2>
+    <h2>Components list</h2>
+    <nav>
+        <ul class="m-u--list-bullet">
+            <li v-for="route in routes">
+                <m-link :url="route">{{route}}</m-link>
+            </li>
+        </ul>
+    </nav>
+    <router-view></router-view>
+</div>

@@ -1,0 +1,37 @@
+{
+    "tag": "m-radio-buttons",
+    "name": "m-radio-buttons-meta:name",
+    "attributes": {
+        "radioValue": {
+            "type": "MRadioData"
+        },
+        "name": {
+            "type": "string",
+            "default": "name"
+        },
+        "hasLabel": {
+            "type": "boolean",
+            "default": true
+        },
+        "position": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-radio-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-radio-meta:usage"
+        }
+    ]
+}

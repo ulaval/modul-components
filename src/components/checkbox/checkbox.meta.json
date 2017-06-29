@@ -1,0 +1,34 @@
+{
+    "tag": "m-checkbox",
+    "name": "m-checkbox-meta:name",
+    "attributes": {
+        "checked": {
+            "type": "boolean",
+            "default": false
+        },
+        "position": {
+            "type": "string",
+            "values": [
+                "right",
+                "left"
+            ],
+            "default": 1
+        },
+        "label": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-checkbox-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-checkbox-meta:usage"
+        }
+    ]
+}

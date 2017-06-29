@@ -1,0 +1,38 @@
+{
+    "tag": "m-switch",
+    "name": "m-switch-meta:name",
+    "attributes": {
+        "checked": {
+            "type": "boolean",
+            "default": false
+        },
+        "position": {
+            "type": "string",
+            "values": [
+                "right",
+                "left"
+            ],
+            "default": 1
+        },
+        "label": {
+            "type": "boolean",
+            "default": false
+        },
+        "helperText": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-switch-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-switch-meta:usage"
+        }
+    ]
+}

@@ -1,11 +1,8 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
-        "paths": {
-            "@/*": [
-                "src/*"
-            ]
-        },
+        "outDir": "dist",
+        "rootDir": "src",
         "declaration": true,
         "target": "es5",
         "module": "es2015",
@@ -14,11 +11,15 @@
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
         "types": [
+            "es6-promise",
             "node",
             "jasmine"
         ],
         "typeRoots": [
             "node_modules/@types"
         ]
-    }
+    },
+    "include": [
+        "src/**/*"
+    ]
 }

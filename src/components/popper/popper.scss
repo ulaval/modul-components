@@ -1,0 +1,9 @@
+@import 'm-popper.css';
+
+.m-popper {
+    box-sizing: border-box;
+
+    &.m--is-open {
+        z-index: 3;
+    }
+}

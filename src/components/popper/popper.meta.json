@@ -1,0 +1,60 @@
+{
+    "tag": "m-popper",
+    "name": "m-popper-meta:name",
+    "attributes": {
+        "options": {
+            "type": "string",
+            "values": [
+                "placement",
+                "gpuAcceleration"
+            ]
+        },
+        "transition": {
+        },
+        "visibleArrow": {
+            "type": "boolean",
+            "default": false
+        },
+        "appendToBody": {
+            "type": "boolean",
+            "default": false
+        },
+        "forceShow": {
+            "type": "boolean",
+            "default": false
+        },
+        "reference": {
+        },
+        "boundariesSelector": {
+        },
+        "content": {
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "trigger": {
+            "type": "string",
+            "values": [
+                "hover",
+                "click"
+            ],
+            "default": "hover"
+        },
+        "closeOnContentClick": {
+            "type": "boolean",
+            "default": false
+        },
+        "closeOnReferenceClick": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-popper-meta:context-of-use"
+        }
+    ]
+}

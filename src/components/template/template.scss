@@ -1,0 +1,115 @@
+@import 'abstracts/variables';
+$m-template-column-width: 384px;
+
+.m-template {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background-color: $m-color--grey-lighter;
+
+        > :first-child:not(:only-child):not(.m-link) {
+            flex: 2 1 auto;
+            margin: 0;
+        }
+
+        > :last-child:not(:only-child) {
+            flex: 0 1 auto;
+            margin: 0;
+        }
+
+        .m-link {
+            width: 100%;
+
+            + :nth-child(2) {
+                flex: 2 1 auto;
+            }
+        }
+    }
+
+    &__wrap {
+        height: 100%;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        flex: 2 1 auto;
+
+        &__content {
+            flex: 1 0 auto;
+        }
+
+        &__footer {
+            flex: 0 1 auto;
+            width: 100%;
+        }
+    }
+
+    &__column {
+        background-color: $m-color--grey-light;
+    }
+}
+
+@media screen and (max-width: $m-screen--max--s) {
+    .m-template {
+        &__header,
+        &__body__content,
+        &__body__footer,
+        &__column {
+            padding: $m-padding;
+        }
+
+        &__header {
+            min-height: 52px;
+        }
+
+        &__column {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (min-width: $m-screen--min--s) and (max-width: $m-screen--max--m) {
+    .m-template {
+        &__column {
+            flex: 0 1 50%;
+        }
+    }
+}
+
+@media screen and (min-width: $m-screen--min--m) {
+    .m-template {
+        &__column {
+            flex: 0 1 $m-template-column-width;
+        }
+    }
+}
+
+@media screen and (min-width: $m-screen--min--s) {
+    .m-template {
+        &__header,
+        &__body__content,
+        &__body__footer,
+        &__column {
+            padding: $m-padding--l;
+        }
+
+        &__header {
+            min-height: 84px;
+        }
+
+        &__wrap {
+            display: flex;
+            flex-wrap: wrap;
+            flex: 1 0 auto;
+        }
+    }
+}

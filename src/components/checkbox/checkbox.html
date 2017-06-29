@@ -1,0 +1,12 @@
+<span class="m-checkbox" :class="{ 'm--is-checkbox-left': hasCheckboxLeft, 'm--is-checkbox-right': !hasCheckboxLeft, 'm--is-checked': propsChecked, 'm--is-focus': isFocus }"
+    @click="onClick">
+    <input ref="checkbox" type="checkbox" :id="id" class="m-checkbox__hidden" v-model="propsChecked" @focus="isFocus=true" @blur="isFocus=false">
+    <label class="m-checkbox__wrap" :for="id" :aria-hidden="!propsLabel">
+        <span class="m-checkbox__input" aria-hidden="true">
+            <m-icon class="m-checkbox__input-icon" name="chip-check" width="10px" height="10px"></m-icon>
+        </span>
+        <span class="m-checkbox__label" v-if="propsLabel">
+            <slot>m-checkbox</slot>
+        </span>
+    </label>
+</span>

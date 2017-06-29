@@ -1,0 +1,9 @@
+{
+    "http-meta": {
+        "name": "Service http",
+        "context-of-use": "Le service http permet d'effectuer des requêtes à des services de type REST. Le service est défini pour chacune des instances Vue via la propriété $http.",
+        "execute": "Effectue une requête à un service REST selon les paramètres et retourne la promesse associée.",
+        "execute-config": "Requête REST.",
+        "execute-return": "Promesse contenant le résultat de l'opération asynchrone."
+    }
+}

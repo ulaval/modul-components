@@ -1,0 +1,11 @@
+<div class="m-upload">
+    <input type="file" id="files" name="files[]" @change="filesChange" multiple />
+
+    <div class="m-upload__drag-drop-zone" id="list">
+        Zone de drag and drop
+
+        <ul>
+            <li v-for="file in filesSelected">{{ file }}</li>
+        </ul>
+    </div>
+</div>

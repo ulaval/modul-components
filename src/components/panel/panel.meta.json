@@ -1,0 +1,45 @@
+{
+    "tag": "m-panel",
+    "name": "m-panel-meta:name",
+    "attributes": {
+        "type": {
+            "type": "string",
+            "values": [
+                "secondary",
+                "primary"
+            ],
+            "default": "primary"
+        },
+        "shadow": {
+            "type": "boolean",
+            "default": true
+        },
+        "border": {
+            "type": "boolean",
+            "default": true
+        },
+        "padding": {
+            "type": "boolean",
+            "default": true
+        },
+        "paddingHeader": {
+            "type": "boolean",
+            "default": true
+        },
+        "paddingBody": {
+            "type": "boolean",
+            "default": true
+        },
+        "paddingFooter": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-panel-meta:context-of-use"
+        }
+    ]
+}

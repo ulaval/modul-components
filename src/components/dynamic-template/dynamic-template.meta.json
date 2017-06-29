@@ -1,0 +1,17 @@
+{
+    "tag": "m-dynamic-template",
+    "name": "m-dynamic-template-meta:name",
+    "attributes": {
+        "template": {
+            "type": "string",
+            "description": "m-dynamic-template:template-desc"
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-dynamic-template-meta:context-of-use"
+        }
+    ]
+}

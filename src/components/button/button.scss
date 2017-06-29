@@ -1,0 +1,181 @@
+@import 'abstracts/variables';
+$m-button--color: $m-color--primary !default;
+$m-button--color-hover: $m-color--primary-light !default;
+$m-button--color-active: $m-color--primary-dark !default;
+$m-button--color-selected: $m-color--primary-darker !default;
+$m-button--color-waiting: $m-color--primary-lighter !default;
+$m-button--color-disabled: $m-color--grey-light !default;
+
+.m-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    appearance: none;
+    outline: none;
+    user-select: none;
+    font-size: 100%;
+    text-decoration: none;
+    line-height: 1;
+    border-radius: 4px;
+
+    span:not(.m-button__hidden) {
+        position: relative;
+    }
+
+    &.m--is-primary,
+    &.m--is-secondary {
+        transition-property: background, border-color, color;
+        transition-duration: 0.3s;
+        transition-timing-function: ease;
+        padding: 10px $m-padding 9px $m-padding;
+        font-weight: $m-font-weight--bold;
+        border: 1px solid $m-button--color;
+
+        &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
+            cursor: pointer;
+
+            &:hover {
+                color: $m-color--white;
+                background: $m-button--color-hover;
+                border-color: $m-button--color-hover;
+            }
+
+            &:active,
+            &:focus {
+                background: $m-button--color-active;
+                border-color: $m-button--color-active;
+            }
+        }
+
+        &.m--is-waiting {
+            cursor: progress;
+            color: $m-color--white;
+            background: $m-button--color-waiting;
+            border-color: $m-button--color-waiting;
+        }
+
+        &.m--is-disabled {
+            cursor: not-allowed;
+            color: $m-button--color-disabled;
+            background: $m-color--white;
+            border-color: $m-button--color-disabled;
+        }
+
+        &.m--is-selected {
+            background: $m-button--color-selected;
+            border-color: $m-button--color-selected;
+        }
+    }
+
+    &.m--is-primary {
+        color: $m-color--white;
+        background: $m-button--color;
+    }
+
+    &.m--is-secondary {
+        color: $m-button--color;
+        background: $m-color--white;
+    }
+
+    &.m--is-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        cursor: pointer;
+        border: none;
+        border-radius: 50%;
+        min-width: $m-touch-size;
+        min-height: $m-touch-size;
+        background: transparent;
+
+        &::after {
+            transition: 0.3s width ease, 0.3s height ease, 0.2s opacity linear;
+            transition-delay: 0.3s;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+            content: '';
+            display: block;
+            width: $m-touch-size / 2;
+            height: $m-touch-size / 2;
+            border-radius: 50%;
+            opacity: 0;
+            background: $m-color--primary-lightest;
+        }
+    }
+
+    &.m--is-full-size {
+        width: 100%;
+    }
+
+    &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
+        &.m--is-icon {
+            &:active,
+            &:focus {
+                &::after {
+                    opacity: 1;
+                    transition-delay: 0s;
+                    width: $m-touch-size;
+                    height: $m-touch-size;
+                }
+            }
+        }
+    }
+
+    &__wrap {
+        display: inline-flex;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            display: inline;
+        }
+    }
+
+    &__more-info,
+    &__icon {
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__text {
+        flex: 1;
+    }
+
+    &__icon {
+        position: relative;
+        z-index: 2;
+        font-size: $m-font-size;
+        height: $m-font-size;
+
+        &.m--is-left {
+            margin-right: $m-margin;
+        }
+
+        &.m--is-right {
+            margin-left: $m-margin;
+        }
+    }
+
+    &__more-info {
+        display: block;
+        font-size: $m-font-size--s;
+        font-weight: $m-font-weight--regular;
+        margin-top: $m-margin--s;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__hidden {
+        @include visuallyHidden;
+    }
+}

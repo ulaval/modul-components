@@ -1,0 +1,62 @@
+{
+    "tag": "m-dropdown",
+    "name": "m-dropdown-meta:name",
+    "attributes": {
+        "elements": {
+            "type": "string[]",
+            "default": []
+        },
+        "selectedElement": {
+            "type": "string",
+            "default": []
+        },
+        "getTexteElement": {
+            "type": "Function"
+        },
+        "state": {
+            "type": "string",
+            "values": [
+                "disabled"
+            ],
+            "default": ""
+        },
+        "isSort": {
+            "type": "boolean",
+             "default": true
+        },
+        "sortMethod": {
+            "type": "Function"
+        },
+        "nullValue": {
+            "type": "string"
+        },
+        "widthFromCss": {
+            "type": "boolean",
+            "default": false
+        },
+        "isEditable": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-dropdown-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-dropdown-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-dropdown-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-dropdown-meta:dont"
+        }
+    ]
+}

@@ -1,0 +1,120 @@
+@import '../../styles/abstracts/variables';
+
+.m-dialog {
+    &__backdrop {
+        transition: 0.2s background linear;
+        background: none;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: auto;
+        padding: $m-padding;
+        cursor: pointer;
+
+        @media screen and (min-width: $m-screen--min--s) {
+            padding: $m-padding--l;
+        }
+
+        &.m--is--backdrop-hidden {
+            background: none;
+        }
+
+        &.m--is-open {
+            &:not(.m--is--backdrop-hidden) {
+                background: rgba($m-color--black, 0.7);
+            }
+
+            .m-dialog {
+                &__wrap {
+                    transform: translate3d(0, 0, 0);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &__wrap {
+        cursor: auto;
+        transition: 0.3s transform ease, 0.2s opacity linear;
+        transform: translate3d(0, $m-padding--l, 0);
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 100%;
+        background: $m-color--white;
+        border-radius: $m-border-radius;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            margin-top: 60px;
+        }
+
+        @media screen and (min-width: #{$m-max-width--dialog + $m-padding * 2}) {
+            width: $m-max-width--dialog;
+        }
+    }
+
+    &__header,
+    &__body {
+        padding: $m-padding;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid $m-color--grey-light;
+
+        &__title {
+            margin: 0;
+            font-size: $m-font-size--h4;
+            font-weight: $m-font-weight--bold;
+        }
+    }
+
+    &__footer {
+        padding: 0 $m-padding $m-padding;
+        text-align: center;
+
+        &__nav {
+            display: inline-flex;
+            flex-direction: column;
+        }
+
+        .m-button {
+            margin-top: $m-padding--s;
+        }
+
+        .m-button__text {
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+
+    .m-dialog {
+        &__backdrop {
+            transition: opacity 0.5s;
+        }
+    }
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+
+    .m-dialog {
+        &__backdrop {
+            opacity: 0;
+        }
+    }
+}
