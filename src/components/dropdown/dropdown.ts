@@ -132,7 +132,7 @@ export class KeyCode {
 @Component
 export class MDropdown extends ModulVue {
 
-    @Prop({ default: [] })
+    @Prop({ default: () => [] })
     public elements: string[];
     @Prop()
     public selectedElement: string;
