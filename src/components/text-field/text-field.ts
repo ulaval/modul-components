@@ -98,6 +98,15 @@ export class MTexteField extends Vue {
         }
     }
 
+    private onKeyup(event): void {
+        this.isFocusActive = this.isDisabled ? true : false;
+        if (!this.isDisabled) {
+            this.checkHasValue();
+            this.checkHasDefaultText();
+            this.$emit('keyup', event, this.propsValue);
+        }
+    }
+
     private onClick(event): void {
         if (!this.isDisabled) {
             this.$emit('click', event, this.propsValue);

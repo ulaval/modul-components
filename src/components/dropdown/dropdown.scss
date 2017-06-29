@@ -59,7 +59,8 @@ $m-dropdown--color--active: $m-color--primary-lightest;
                 color: $m-color--text;
                 text-decoration: none;
 
-                &:hover {
+                &:hover,
+                &:focus {
                     background: $m-dropdown--color--hover;
                 }
 

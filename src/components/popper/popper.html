@@ -1,4 +1,5 @@
 <span class="m-popper" :class="{ 'm--is-open': isAnimPopperActive }">
+    <slot name="reference" class="m-popper__reference"></slot>
     <transition @enter="animEnter"
         @after-enter="animAfterEnter"
         @leave="animLeave"
@@ -9,5 +10,4 @@
             <slot class="m-popper__content">{{ content }}</slot>
         </span>
     </transition>
-    <slot name="reference" class="m-popper__reference"></slot>
 </span>
