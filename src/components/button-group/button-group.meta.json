@@ -1,0 +1,76 @@
+{
+    "tag": "m-button-group",
+    "name": "m-button-group-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "primary",
+                "secondary",
+                "icon"
+            ],
+            "default": 0
+        },
+        "state": {
+            "type": "string",
+            "values": [
+                "default",
+                "waiting",
+                "selected",
+                "disabled"
+            ],
+            "default": 0
+        },
+        "type": {
+            "type": "string",
+            "values": [
+                "button",
+                "submit",
+                "reset"
+            ],
+            "default": 0
+        },
+        "iconName": {
+            "type": "string"
+        },
+        "iconPosition": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        },
+        "iconSize": {
+            "type": "string",
+            "values": [
+                "16px"
+            ],
+            "default": 0
+        },
+        "isFullSize": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-button-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-button-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-button-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-button-meta:dont"
+        }
+    ]
+}

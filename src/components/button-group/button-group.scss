@@ -1,0 +1,7 @@
+@import 'abstracts/variables';
+
+.m-button-group {
+    &__hidden {
+        @include visuallyHidden;
+    }
+}
