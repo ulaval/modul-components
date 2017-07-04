@@ -1,11 +1,22 @@
 <div class="m-upload">
-    <input type="file" id="files" name="files[]" @change="filesChange" multiple />
+    <input type="file" id="files" name="files[]" :accept="extensionsProp" @change="filesInput" :multiple="multiple" />
 
-    <div class="m-upload__drag-drop-zone" id="list">
+    <div class="m-upload__drag-drop-zone" id="list" @dragover.prevent @drop="filesDrop" style="border:1px solid #000;">
         Zone de drag and drop
 
+        <m-message state="warning" :closeButton="true" :visible="hasErrorMsgs">
+            <ul>
+                <li v-for="error in errorMsgs">{{ error }}</li>
+            </ul>
+        </m-message>
+
         <ul>
-            <li v-for="file in filesSelected">{{ file }}</li>
+            <li v-for="(file, index) of globalFileList">{{ file.file.name }} -- {{ file.isRead }} --<m-button @click="remove(index)">Remove</m-button></li>
         </ul>
     </div>
+
+    <br />-----<br />
+
+    <br />-----<br />
+    fileAPISupport: {{ fileAPISupport }}
 </div>
