@@ -133,9 +133,9 @@ export class KeyCode {
 export class MDropdown extends ModulVue {
 
     @Prop({ default: () => [] })
-    public elements: string[];
+    public elements: any[];
     @Prop()
-    public selectedElement: string;
+    public selectedElement: any;
     @Prop()
     public getTextElement: Function;
     @Prop({ default: '' })
@@ -149,19 +149,19 @@ export class MDropdown extends ModulVue {
     @Prop({ default: false })
     public isEditable: boolean;
     @Prop()
-    public nullValue: string;
+    public nullValue: any;
     // @Prop({ default: false })
     // public name: boolean;
     // @Prop({ default: false })
     // public formName: boolean;
 
     // Copy of props
-    public propsSelectedElement: string;
+    public propsSelectedElement: any;
 
     // Initialize data for v-model to work
     public textElement: string = '';
 
-    private elementsSorted: Array<string>;
+    private elementsSorted: Array<any>;
     private stateDisabled: boolean;
     private nullValueText: string;
     private nullValueAvailable: boolean;
@@ -185,13 +185,13 @@ export class MDropdown extends ModulVue {
         return this.elementsSortedFiltered.length;
     }
 
-    public get elementsSortedFiltered(): Array<string> {
-        if ((this.textElement == '') || (this.textElement == this.propsSelectedElement)) {
+    public get elementsSortedFiltered(): Array<any> {
+        if ((this.textElement == '') || (this.textElement == this.getSelectedElementText())) {
             return this.elementsSorted;
         }
 
-        let filteredElements: Array<string> = this.elementsSorted.filter((element) => {
-            return normalizeString(element).match(normalizeString(this.textElement));
+        let filteredElements: Array<any> = this.elementsSorted.filter((element) => {
+            return normalizeString(this.getElementListText(element)).match(normalizeString(this.textElement));
         });
 
         return filteredElements;
@@ -208,10 +208,10 @@ export class MDropdown extends ModulVue {
             this.nullValueAvailable = false;
         } else {
             this.nullValueAvailable = true;
-            if (this.nullValue.trim() == '') {
+            if (this.getElementListText(this.nullValue).trim() == '') {
                 this.nullValueText = this.$i18n.translate('m-dropdown:none');
             } else {
-                this.nullValueText = this.nullValue;
+                this.nullValueText = this.getElementListText(this.nullValue);
             }
         }
 
@@ -229,28 +229,21 @@ export class MDropdown extends ModulVue {
         }
     }
 
-    public selectElement($event, element: string): void {
+    public selectElement($event, element: any): void {
         this.propsSelectedElement = element;
         this.textElement = this.getSelectedElementText();
         this.$emit('elementSelected', this.propsSelectedElement);
     }
 
     public getSelectedElementText(): string {
-        let text: string = '';
-
-        if ((typeof this.propsSelectedElement == UNDEFINED) || (this.propsSelectedElement == this.nullValueText)) {
-            text = this.nullValueText;
-        } else {
-            text = this.getElementListText(this.propsSelectedElement);
-        }
-
+        let text: string = this.getElementListText(this.propsSelectedElement);
         return text;
     }
 
-    public getElementListText(element: string): string {
+    public getElementListText(element: any): string {
         let text: string = '';
 
-        if (!element) {
+        if (typeof element == UNDEFINED || element == this.nullValue) {
             text = this.nullValueText;
         } else if (this.getTextElement) {
             text = this.getTextElement({ element: element });
@@ -292,10 +285,18 @@ export class MDropdown extends ModulVue {
         this.listIsOpen = value;
     }
 
-    public keyupList($event): void {
+    public keyupReference($event): void {
         if (!this.listIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_SPACE)) {
             $event.preventDefault();
             (this.$refs.mDropdownValue as Vue).$el.click();
+        }
+
+        if (this.listIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_END || $event.keyCode == KeyCode.DOM_VK_PAGE_DOWN)) {
+            $event.preventDefault();
+            let htmlElement: HTMLElement = this.$el.querySelector('[data-index=\'0\']') as HTMLElement;
+            if (htmlElement) {
+                htmlElement.focus();
+            }
         }
     }
 
@@ -359,7 +360,7 @@ export class MDropdown extends ModulVue {
     }
 
     private prepareElements(): void {
-        let elementsSorted: string[] = new Array();
+        let elementsSorted: any[] = new Array();
 
         if (this.elements) {
             // Create a separe copy of the array, to prevent triggering infinite loop on watcher of elements
@@ -369,7 +370,11 @@ export class MDropdown extends ModulVue {
             if (this.isSort) {
                 if (typeof this.sortMethod == UNDEFINED) {
                     // Default sort: Alphabetically
-                    elementsSorted = elementsSorted.sort((a, b) => a.localeCompare(b));
+                    if (typeof this.getTextElement == UNDEFINED) {
+                        elementsSorted = elementsSorted.sort((a, b) => a.localeCompare(b));
+                    } else {
+                        elementsSorted = elementsSorted.sort((a, b) => this.getElementListText(a).localeCompare(this.getElementListText(b)));
+                    }
                 } else {
                     elementsSorted = this.sortMethod(elementsSorted);
                 }

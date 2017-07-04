@@ -36,9 +36,9 @@
                       slot="reference"
                       :value="textElement"
                       :state="state"
-                      :isEditable="isEditable"
+                      :is-editable="isEditable"
                       @valueChanged="textElement = $event"
-                      @keyup="keyupList">
+                      @keyup="keyupReference">
                       <slot></slot>
         </m-text-field>
     </m-popper>
