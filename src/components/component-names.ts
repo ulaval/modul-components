@@ -1,6 +1,7 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
 export const BUTTON_NAME: string = 'm-button';
+export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CHECKBOX_NAME: string = 'm-checkbox';
 export const DIALOG_NAME: string = 'm-dialog';
 export const DROPDOWN_NAME: string = 'm-dropdown';
@@ -28,6 +29,7 @@ export const components: string[] = [
     ACCORDION_GROUP_NAME,
     ACCORDION_NAME,
     BUTTON_NAME,
+    BUTTON_GROUP_NAME,
     CHECKBOX_NAME,
     DIALOG_NAME,
     DROPDOWN_NAME,

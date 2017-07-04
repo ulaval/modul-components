@@ -4,6 +4,7 @@ import { PluginObject } from 'vue';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import ButtonPlugin from './button/button';
+import ButtonGroupPlugin from './button-group/button-group';
 import CheckboxPlugin from './checkbox/checkbox';
 import DialogPlugin from './dialog/dialog';
 import DropdownPlugin from './dropdown/dropdown';
@@ -32,6 +33,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
+        Vue.use(ButtonGroupPlugin);
         Vue.use(CheckboxPlugin);
         Vue.use(DialogPlugin);
         Vue.use(DropdownPlugin);
