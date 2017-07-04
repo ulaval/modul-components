@@ -244,12 +244,14 @@ export class MDropdown extends ModulVue {
         let text: string = '';
 
         if (typeof element == UNDEFINED || element == this.nullValue) {
-            text = this.nullValueText;
+            if (this.nullValueAvailable) {
+                text = this.nullValueText;
+            }
         } else if (this.getTextElement) {
             text = this.getTextElement({ element: element });
         }
 
-        if (text.trim().length == 0) {
+        if ((text.trim().length == 0) && (element)) {
             text = String(element);
         }
 
