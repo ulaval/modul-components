@@ -1,6 +1,6 @@
 <article class="m-accordion" :class="{ 'm--is-regular': modeIsRegular, 'm--is-light': propsMode=='light', 'm--is-no-style': propsMode=='noStyle', 'm--is-close': !propsIsOpen }">
     <header class="m-accordion__header-wrap">
-        <a href="#" class="m-accordion__header" @click="toggleAccordion" :class="{ 'm--is-icon-left': propsIconPosition != 'right' }">
+        <a href="#" class="m-accordion__header" @click.prevent="toggleAccordion" :class="{ 'm--is-icon-left': propsIconPosition != 'right' }">
             <span class="m-accordion__header__title">
                 <slot name="title">m-accordion</slot>
                 <m-i18n i18n-key="m-accordion:open" class="m-accordion__hidden" v-if="!propsIsOpen"></m-i18n>

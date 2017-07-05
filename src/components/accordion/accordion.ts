@@ -47,6 +47,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
     private propsIconPosition: string = ICON_POSITION_RIGHT;
     private propsIconStyle: string = ICON_STYLE_DEFAULT;
     private propsIconSize: string = ICON_SIZE_LARGE;
+    private eventBus: Vue = new Vue();
 
     private accordionID: number;
 
@@ -120,11 +121,8 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
     private toggleAccordion(event): void {
         this.animIsActive = true;
         this.propsIsOpen = !this.propsIsOpen;
-        if (this.$parent['componentName'] == ACCORDION_GROUP_NAME) {
-            this.$parent['checkToggleAccordion'](this.accordionID, this.propsIsOpen);
-        }
+        this.eventBus.$emit('click', this.accordionID, this.propsIsOpen);
         this.$emit('click', this.accordionID, this.propsIsOpen);
-        event.preventDefault();
     }
 
     private openAccordion(): void {

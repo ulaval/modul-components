@@ -46,18 +46,18 @@ $m-accordion--color--border: $m-color--grey-light;
 
                 &-wrap {
                     &.m--is-anim-active {
-                        &.v-enter,
-                        &.v-leave {
-                            .m-accordion__body__wrap {
-                                transform: translate3d(0, $m-margin--l, 0);
-                                opacity: 0;
+                        &.v-enter-to {
+                            .m-accordion__body {
+                                transform: translate3d(0, 0, 0);
+                                opacity: 1;
                             }
                         }
 
-                        &.v-enter-to {
-                            .m-accordion__body__wrap {
-                                transform: translate3d(0, 0, 0);
-                                opacity: 1;
+                        &.v-enter,
+                        &.v-leave-to {
+                            .m-accordion__body {
+                                transform: translate3d(0, $m-margin--l, 0);
+                                opacity: 0;
                             }
                         }
                     }

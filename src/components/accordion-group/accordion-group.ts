@@ -42,6 +42,7 @@ export class MAccordionGroup extends Vue {
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
                 this.$children[i]['accordionID'] = this.nbAccordion;
+                this.$children[i]['eventBus']['$on']('click', (id, value) => this.toggleAccordionGroup(id, value));
                 this.arrAccordion.push({
                     id: this.nbAccordion,
                     childrenNumber: i,
@@ -77,7 +78,7 @@ export class MAccordionGroup extends Vue {
         }
     }
 
-    private checkToggleAccordion(accordionID: number, isOpen: boolean): void {
+    private toggleAccordionGroup(accordionID: number, isOpen: boolean): void {
         for (let i = 0; i < this.arrAccordion.length; i++) {
             if (this.arrAccordion[i]['id'] == accordionID) {
                 this.arrAccordion[i]['isOpen'] = isOpen;
