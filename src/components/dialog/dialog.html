@@ -1,7 +1,7 @@
 <span class="m-dialog">
     <portal v-if="propsIsOpen" :targetEl="'#' + propsId">
         <div class="m-dialog__wrap"
-             :class="{ 'm--is-open': isVisible, 'm--is-primary': propsMode == 'primary', 'm--is-secondary': propsMode == 'secondary'}"
+             :class="{ 'm--is-open': isVisible, 'm--is-primary': propsMode == 'primary', 'm--is-secondary': propsMode == 'secondary', 'm--is-clickable-backdrop': propsIsCloseOnBackdrop}"
              @click.self="backdropClick"
              tabindex="-1">
             <article class="m-dialog__article">
@@ -34,9 +34,10 @@
             </article>
         </div>
     </portal>
-    </div>
-
-    <span @click="openDialog" class="m-dialog__button">
-        <slot><m-button>Open dialog</m-button></slot>
+    <span @click="openDialog" class="m-dialog__button" v-if="hasDefaultSlots">
+        <slot></slot>
+    </span>
+    <span v-if="!hasDefaultSlots">
+        The default slot is required to open the dialog
     </span>
 </span>

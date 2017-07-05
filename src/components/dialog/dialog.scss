@@ -15,7 +15,6 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
         justify-content: center;
         align-items: center;
         overflow: auto;
-        cursor: pointer;
 
         @media screen and (min-width: $m-screen--min--s) {
             padding: $m-padding--l;
@@ -117,6 +116,10 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                     }
                 }
             }
+        }
+
+        &.m--is-clickable-backdrop {
+            cursor: pointer;
         }
     }
 

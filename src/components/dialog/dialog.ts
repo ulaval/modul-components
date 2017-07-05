@@ -1,57 +1,35 @@
-import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
+import { ModulVue } from '../../utils/vue/vue';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dialog.html?style=./dialog.scss';
 import { DIALOG_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
-import { BodyScroll, BodyScrollMixin } from '../../mixins/body-scroll/body-scroll';
-import { Backdrop, BackdropMixin } from '../../mixins/backdrop/backdrop';
+
+const DIALOG_MODE_PRIMARY = 'primary';
+const DIALOG_MODE_SECONDARY = 'secondary';
+
 @WithRender
-@Component({
-    mixins: [
-        BodyScroll,
-        Backdrop
-    ]
-})
-export class MDialog extends Vue implements BodyScrollMixin, BackdropMixin {
-    @Prop({ default: 'primary' })
+@Component
+export class MDialog extends ModulVue {
+    @Prop({ default: DIALOG_MODE_PRIMARY })
     public mode: string;
     @Prop({ default: 'mDialog' })
     public id: string;
     @Prop({ default: false })
     public isOpen: boolean;
-    @Prop({ default: true })
-    public hasBackdrop: boolean;
     @Prop({ default: 'body' })
     public targetElement: string;
+    @Prop()
+    public isCloseOnBackdrop: boolean;
 
     public componentName: string = DIALOG_NAME;
-
-    // BodyScrollMixin interface
-    public activeScollBody: Function;
-    public stopScollBody: Function;
-    public addWindow: Function;
-    public setDataWindowCount: Function;
-    public getDataWindowCount: Function;
-    public removeDataWindowCount: Function;
-
-    // BackdropMixin interface
-    public backdropZIndex: string;
-    public createBackdrop: Function;
-    public changeBackdropZIndex: Function;
-    public removeBackdrop: Function;
-    public setBackdropStyle: Function;
-    public getDataBackdropID: Function;
-    public setDataBackdropZIndex: Function;
-    public getDataBackdropZIndex: Function;
-    public getElementBackdrop: Function;
 
     private propsMode: string = 'primary';
     private propsIsOpen: boolean = false;
     private propsId: string = 'mDialog';
-    private propsHasBackdrop: boolean;
     private propsTargetElement: HTMLElement = document.body;
+    private propsIsCloseOnBackdrop: boolean = true;
     private elementPortalTarget: HTMLElement = document.createElement('div');
     private nbDialog: number = 0;
     private isVisible: boolean = false;
@@ -66,19 +44,31 @@ export class MDialog extends Vue implements BodyScrollMixin, BackdropMixin {
     @Watch('isOpen')
     private isOpenChanged(newValue): void {
         this.propsIsOpen = newValue;
+        if (this.propsIsOpen) {
+            this.openDialog();
+        } else {
+            this.closeDialog();
+        }
+        this.$emit('isOpen', this.propsIsOpen);
     }
 
     private beforeMount(): void {
         this.setTargetElement(this.targetElement);
-        this.propsHasBackdrop = this.hasBackdrop;
+        this.propsIsCloseOnBackdrop = this.isCloseOnBackdrop;
         this.propsMode = this.mode;
         if (this.isOpen) {
             this.openDialog();
         }
         switch (this.propsMode) {
             case 'secondary':
+                if (this.propsIsCloseOnBackdrop == undefined) {
+                    this.propsIsCloseOnBackdrop = true;
+                }
                 break;
             default:
+                if (this.propsIsCloseOnBackdrop == undefined) {
+                    this.propsIsCloseOnBackdrop = false;
+                }
         }
     }
 
@@ -107,9 +97,9 @@ export class MDialog extends Vue implements BodyScrollMixin, BackdropMixin {
         if (!this.isAnimActive) {
             this.isVisible = false;
             this.isAnimActive = true;
-            this.changeBackdropZIndex(-1);
-            if (this.getDataWindowCount() == 1) {
-                this.getElementBackdrop().style.opacity = '0';
+            this.$mWindow.backdropElement.style.zIndex = String(this.$mWindow.windowZIndex - 1);
+            if (this.$mWindow.windowCount == 1) {
+                this.$mWindow.backdropElement.style.opacity = '0';
             }
             setTimeout(() => {
                 this.propsIsOpen = false;
@@ -126,9 +116,8 @@ export class MDialog extends Vue implements BodyScrollMixin, BackdropMixin {
         this.elementPortalTarget.setAttribute('class', 'm-dialog-popover');
         this.elementPortalTarget.style.position = 'relative';
 
-        if (this.getDataWindowCount() == 0) {
+        if (this.$mWindow.windowCount == 0) {
             this.addFirstDialog();
-            this.stopScollBody();
         } else {
             this.propsTargetElement.appendChild(this.elementPortalTarget);
             this.addDialog();
@@ -140,35 +129,27 @@ export class MDialog extends Vue implements BodyScrollMixin, BackdropMixin {
         if (elementPortalTarget) {
             elementPortalTarget.remove();
         }
-
-        if (this.getDataWindowCount() == 1) {
-            this.removeDataWindowCount();
-            this.activeScollBody();
-            this.removeBackdrop();
-        } else {
-            this.setDataWindowCount(String(this.getDataWindowCount() - 1));
-        }
+        this.$mWindow.deleteWindow(this.propsId);
     }
 
     private addFirstDialog() {
-        // Init first dialog
-        this.setDataWindowCount('1');
-        this.elementPortalTarget.style.zIndex = this.backdropZIndex;
-        // Init first backdrop
-        this.createBackdrop(this.propsTargetElement);
+        this.$mWindow.addWindow(this.propsId);
+        this.elementPortalTarget.style.zIndex = String(this.$mWindow.windowZIndex);
+        this.$mWindow.createBackdrop(this.propsTargetElement);
         this.propsTargetElement.appendChild(this.elementPortalTarget);
     }
 
     private addDialog() {
         let elementPortalTarget: HTMLElement = this.getElementPortalTarget();
         elementPortalTarget.style.position = 'relative';
-        this.addWindow();
-        this.changeBackdropZIndex(1);
-        elementPortalTarget.style.zIndex = String(this.getDataBackdropZIndex());
+        this.$mWindow.addWindow(this.propsId);
+        elementPortalTarget.style.zIndex = String(this.$mWindow.windowZIndex);
     }
 
     private backdropClick(event): void {
-        this.closeDialog(event);
+        if (this.propsIsCloseOnBackdrop) {
+            this.closeDialog(event);
+        }
     }
 
     private getElementPortalTarget(): HTMLElement {
@@ -177,6 +158,11 @@ export class MDialog extends Vue implements BodyScrollMixin, BackdropMixin {
 
     private get hasTitle(): boolean {
         return !!this.$slots['title'];
+    }
+
+    private get hasDefaultSlots(): boolean {
+        console.log(!!this.$slots.default);
+        return !!this.$slots.default;
     }
 }
 
