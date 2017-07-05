@@ -208,10 +208,11 @@ export class MDropdown extends ModulVue {
             this.nullValueAvailable = false;
         } else {
             this.nullValueAvailable = true;
-            if (this.getElementListText(this.nullValue).trim() == '') {
-                this.nullValueText = this.$i18n.translate('m-dropdown:none');
+
+            if (this.getTextElement) {
+                this.nullValueText = this.getTextElement({ element: this.nullValue });
             } else {
-                this.nullValueText = this.getElementListText(this.nullValue);
+                this.nullValueText = String(this.nullValue);
             }
         }
 
