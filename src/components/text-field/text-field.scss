@@ -21,17 +21,25 @@ $m-text-field--margin: $m-padding--xs;
         display: flex;
     }
 
-    &:not(.is-focus),
-    &.is-disabled {
-        .m-text-field__label {
-            &.is-value-empty {
-                bottom: $m-text-field--margin;
-                font-size: $m-font-size;
+    &:not(.m--is-focus),
+    &.m--is-disabled {
+        &.m--is-value-empty {
+            .m-text-field {
+                &__label {
+                    bottom: $m-text-field--margin;
+                    font-size: $m-font-size;
+                }
+
+                &__icon {
+                    &-disabled {
+                        font-size: 12px;
+                    }
+                }
             }
         }
     }
 
-    &:not(.is-focus):not(.is-disabled) {
+    &:not(.m--is-focus):not(.m--is-disabled) {
         .m-text-field__label {
             cursor: pointer;
         }
@@ -47,7 +55,7 @@ $m-text-field--margin: $m-padding--xs;
     }
 
     &__label,
-    &.has-error .m-text-field__label {
+    &.m--has-error .m-text-field__label {
         bottom: 25px;
         font-size: $m-font-size--xs;
         font-weight: $m-font-weight--bold;
@@ -129,13 +137,14 @@ $m-text-field--margin: $m-padding--xs;
 
         &,
         &-disabled {
-            font-size: 12px;
+            stroke-width: 2px;
+            font-size: 8px;
         }
     }
 
-    &.is-focus {
-        &:not(.is-disabled) {
-            &:not(.has-error) {
+    &.m--is-focus {
+        &:not(.m--is-disabled) {
+            &:not(.m--has-error) {
                 .m-text-field__label {
                     color: $m-text-field--color--focus;
                 }
@@ -147,14 +156,14 @@ $m-text-field--margin: $m-padding--xs;
         }
     }
 
-    &.is-editable {
+    &.m--not-editable {
         .m-text-field__label,
         .m-text-field__input {
             cursor: pointer;
         }
     }
 
-    &.is-disabled {
+    &.m--is-disabled {
         &,
         .m-text-field__label,
         .m-text-field__input {
@@ -163,7 +172,8 @@ $m-text-field--margin: $m-padding--xs;
         }
 
         .m-text-field__label,
-        .m-text-field__icon {
+        .m-text-field__icon,
+        .m-text-field__input {
             color: $m-text-field--color--disabled;
         }
 
@@ -173,15 +183,10 @@ $m-text-field--margin: $m-padding--xs;
         }
     }
 
-    &.has-error {
-        &.is-focus {
+    &.m--has-error {
+        &.m--is-focus,
+        &:not(.m--is-value-empty) {
             .m-text-field__label {
-                color: $m-text-field--color--error;
-            }
-        }
-
-        .m-text-field__label {
-            &:not(.is-value-empty) {
                 color: $m-text-field--color--error;
             }
         }

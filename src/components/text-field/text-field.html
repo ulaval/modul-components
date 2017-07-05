@@ -1,16 +1,17 @@
 <span class="m-text-field"
-      :class="{ 'is-focus' : isFocusActive || isForceFocus,
-          'is-editable' : !propsIsEditable,
-          'is-disabled' : isDisabled,
-          'has-error' : hasError }">
+      :class="[{ 'm--is-focus' : isFocusActive || isForceFocus,
+          'm--not-editable' : !propsIsEditable,
+          'm--is-disabled' : isDisabled,
+          'm--has-error' : hasError,
+          'm--is-value-empty' : isValueEmpty },
+          'm--is-type-' + propsType]">
     <span class="m-text-field__wrap">
-        <label class="m-text-field__label" @click="onFocus" :class="{ 'is-value-empty' : isValueEmpty }" v-if="hasDefaultSlot || isDisabled">
+        <label class="m-text-field__label" @click="onFocus" v-if="hasDefaultSlot || isDisabled">
             <m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>
             <slot></slot>
         </label>
         <input class="m-text-field__input"
                ref="input"
-               :class="[ 'is-type-' + propsType ]"
                :disabled="isDisabled"
                @focus="onFocus"
                @blur="onBlur"
