@@ -132,7 +132,7 @@ export class KeyCode {
 @Component
 export class MDropdown extends ModulVue {
 
-    @Prop({ default: () => [] })
+    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5']})
     public elements: any[];
     @Prop()
     public selectedElement: any;
@@ -150,6 +150,8 @@ export class MDropdown extends ModulVue {
     public isEditable: boolean;
     @Prop()
     public nullValue: any;
+    @Prop({ default: '' })
+    public defaultText: string;
     // @Prop({ default: false })
     // public name: boolean;
     // @Prop({ default: false })
@@ -165,7 +167,7 @@ export class MDropdown extends ModulVue {
     private stateDisabled: boolean;
     private nullValueText: string;
     private nullValueAvailable: boolean;
-    private listIsOpen: boolean;
+    private listIsOpen: boolean = false;
 
     @Watch('elements')
     public elementChanged(value): void {

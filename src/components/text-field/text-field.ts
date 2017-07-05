@@ -28,6 +28,8 @@ export class MTexteField extends Vue {
     public errorMessage: string;
     @Prop({ default: '' })
     public helperMessage: string;
+    @Prop({ default: false })
+    public isForceFocus: boolean;
 
     public componentName: string = TEXT_FIELD_NAME;
 
@@ -41,15 +43,16 @@ export class MTexteField extends Vue {
     private isValueEmpty: boolean = false;
     private isDefaultTextEmpty: boolean = false;
     private isFocusActive: boolean = false;
+    // private propsIsFoceFocus: boolean = false;
     private isUpdating: number;
 
     @Watch('value')
-    private valueChanged(value): void {
+    private valueChanged(value: string): void {
         this.propsValue = this.value;
     }
 
     @Watch('propsValue')
-    private propsValueChanged(value): void {
+    private propsValueChanged(value: string): void {
         // Delayed $emit to limit event fired
         if (this.isUpdating) {
             clearTimeout(this.isUpdating);
@@ -139,6 +142,10 @@ export class MTexteField extends Vue {
         } else {
             this.isDefaultTextEmpty = true;
         }
+    }
+
+    private get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
     }
 }
 

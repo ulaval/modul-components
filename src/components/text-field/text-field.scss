@@ -84,9 +84,14 @@ $m-text-field--margin: $m-padding--xs;
             background: $m-text-field--color--focus;
         }
 
-        &__dafault-text {
+        &__default-text {
+            transition: opacity 0.3s ease;
             opacity: 1;
             color: $m-text-field--color--helper;
+
+            &.m--is-transparent {
+                opacity: 0;
+            }
         }
     }
 
@@ -125,10 +130,6 @@ $m-text-field--margin: $m-padding--xs;
         &,
         &-disabled {
             font-size: 12px;
-        }
-
-        &-disabled {
-            margin-bottom: 5px;
         }
     }
 

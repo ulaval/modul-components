@@ -4,7 +4,6 @@
             <span class="m-dropdown__list__element__text" ref="mDropdownCalculate"></span>
         </li>
     </ul>
-
     <m-popper trigger="click"
               :options="{ placement: 'bottom' }"
               :closeOnContentClick="true"
@@ -36,7 +35,9 @@
                       slot="reference"
                       :value="textElement"
                       :state="state"
-                      :is-editable="isEditable"
+                      :isEditable="!isEditable"
+                      :isForceFocus="listIsOpen"
+                      :defaultText="defaultText"
                       @valueChanged="textElement = $event"
                       @keyup="keyupReference">
                       <slot></slot>

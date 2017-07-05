@@ -6,6 +6,8 @@ import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
 import Popper from 'popper.js';
 
+const MODE_DROPDOWN = 'dropdown';
+
 export interface IPopperOptions {
     placement: string;
     gpuAcceleration: boolean;
@@ -85,7 +87,7 @@ export class MPopper extends Vue {
 
     private mounted(): void {
         if ((this.$slots.reference) && (this.$slots.default)) {
-            this.propsMode = this.$props.mode;
+            this.propsMode = this.mode;
             this.referenceElm = this.reference || this.$slots.reference[0].elm;
             this.popper = this.$slots.default[0].elm;
 
@@ -230,7 +232,7 @@ export class MPopper extends Vue {
 
     private animEnter(element, done): void {
         this.isAnimPopperActive = true;
-        if (this.propsMode == 'dropdown' && !this.appendToBody) {
+        if (this.propsMode == MODE_DROPDOWN && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
             el.style.overflowY = 'hidden';
@@ -245,7 +247,7 @@ export class MPopper extends Vue {
     }
 
     private animAfterEnter(element): void {
-        if (this.propsMode == 'dropdown' && !this.appendToBody) {
+        if (this.propsMode == MODE_DROPDOWN && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             setTimeout(() => {
                 el.style.maxHeight = this.dropdownMaxHeight + 'px';
@@ -255,7 +257,7 @@ export class MPopper extends Vue {
     }
 
     private animLeave(element, done): void {
-        if (this.propsMode == 'dropdown' && !this.appendToBody) {
+        if (this.propsMode == MODE_DROPDOWN && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';

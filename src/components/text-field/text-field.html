@@ -1,10 +1,10 @@
 <span class="m-text-field"
-      :class="{ 'is-focus' : isFocusActive,
+      :class="{ 'is-focus' : isFocusActive || isForceFocus,
           'is-editable' : !propsIsEditable,
           'is-disabled' : isDisabled,
           'has-error' : hasError }">
     <span class="m-text-field__wrap">
-        <label class="m-text-field__label" @click="onFocus" :class="{ 'is-value-empty' : isValueEmpty }">
+        <label class="m-text-field__label" @click="onFocus" :class="{ 'is-value-empty' : isValueEmpty }" v-if="hasDefaultSlot || isDisabled">
             <m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>
             <slot></slot>
         </label>
@@ -26,8 +26,7 @@
            @keyup="onKeyup"
            v-if="!propsIsEditable">
             <span class="m-text-field__input__value" v-if="isDefaultTextEmpty">{{ propsValue }}</span>
-            <span class="m-text-field__input__dafault-text" v-if="!isDefaultTextEmpty">- {{ propsDefaultText}} -</span>
-            <span aria-hidden="true" class="m-text-field__transparent" v-if="isDefaultTextEmpty && isValueEmpty">Hidden text</span>
+            <span class="m-text-field__input__default-text" :aria-hidden="isDefaultTextEmpty" :class="{ 'm--is-transparent': isDefaultTextEmpty }">- {{ propsDefaultText}} -</span>
         </a>
         <m-icon :name="iconName" class="m-text-field__icon" v-if="hasIcon"></m-icon>
         <span aria-hidden="true" class="m-text-field__input-line"></span>
