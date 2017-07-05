@@ -5,14 +5,26 @@ import uuid from '../../utils/uuid/uuid';
 const DATA_BACKDROP_Z_INDEX: string = 'data-m-backdrop-z-index';
 const DATA_BACKDROP_ID: string = 'data-m-backdrop-id';
 
+export interface BackdropMixin {
+    backdropZIndex: string;
+    createBackdrop: Function;
+    changeBackdropZIndex: Function;
+    removeBackdrop: Function;
+    setBackdropStyle: Function;
+    getDataBackdropID: Function;
+    setDataBackdropZIndex: Function;
+    getDataBackdropZIndex: Function;
+    getElementBackdrop: Function;
+}
+
 @Component
-export class Backdrop extends Vue {
+export class Backdrop extends Vue implements BackdropMixin {
     public elementBody: HTMLElement = document.body;
     public elementBackdrop: HTMLElement;
     public backdropZIndex: string = '100';
     public backdropId: string;
 
-    private createBackdrop(targetElement: HTMLElement): void {
+    public createBackdrop(targetElement: HTMLElement): void {
         this.elementBackdrop = document.createElement('div');
         this.backdropId = 'mBackdropId-' + uuid.generate();
         this.elementBackdrop.setAttribute('id', this.backdropId);
@@ -27,19 +39,19 @@ export class Backdrop extends Vue {
         }, 2);
     }
 
-    private changeBackdropZIndex(value: number): void {
+    public changeBackdropZIndex(value: number): void {
         let zIndex: number = this.getDataBackdropZIndex();
         this.setDataBackdropZIndex(String(zIndex + value));
         this.getElementBackdrop().style.zIndex = String(zIndex + value);
     }
 
-    private removeBackdrop() {
+    public removeBackdrop() {
         this.getElementBackdrop().remove();
         this.elementBody.removeAttribute(DATA_BACKDROP_Z_INDEX);
         this.elementBody.removeAttribute(DATA_BACKDROP_ID);
     }
 
-    private setBackdropStyle(): void {
+    public setBackdropStyle(): void {
         this.elementBackdrop.style.position = 'fixed';
         this.elementBackdrop.style.zIndex = this.backdropZIndex;
         this.elementBackdrop.style.transition = 'opacity 0.3s ease';
@@ -51,19 +63,19 @@ export class Backdrop extends Vue {
         this.elementBackdrop.style.opacity = '0';
     }
 
-    private getDataBackdropID(): string {
+    public getDataBackdropID(): string {
         return String(this.elementBody.getAttribute(DATA_BACKDROP_ID));
     }
 
-    private setDataBackdropZIndex(value: string): void {
+    public setDataBackdropZIndex(value: string): void {
         this.elementBody.setAttribute(DATA_BACKDROP_Z_INDEX, value);
     }
 
-    private getDataBackdropZIndex(): number {
+    public getDataBackdropZIndex(): number {
         return Number(this.elementBody.getAttribute(DATA_BACKDROP_Z_INDEX));
     }
 
-    private getElementBackdrop(): HTMLElement {
+    public getElementBackdrop(): HTMLElement {
         return document.querySelector('#' + this.getDataBackdropID()) as HTMLElement;
     }
 }

@@ -5,8 +5,8 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dialog.html?style=./dialog.scss';
 import { DIALOG_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
-import { BodyScroll } from '../../mixins/body-scroll/body-scroll';
-import { Backdrop } from '../../mixins/backdrop/backdrop';
+import { BodyScroll, BodyScrollMixin } from '../../mixins/body-scroll/body-scroll';
+import { Backdrop, BackdropMixin } from '../../mixins/backdrop/backdrop';
 @WithRender
 @Component({
     mixins: [
@@ -14,7 +14,7 @@ import { Backdrop } from '../../mixins/backdrop/backdrop';
         Backdrop
     ]
 })
-export class MDialog extends Vue {
+export class MDialog extends Vue implements BodyScrollMixin, BackdropMixin {
     @Prop({ default: 'primary' })
     public mode: string;
     @Prop({ default: 'mDialog' })
@@ -27,6 +27,25 @@ export class MDialog extends Vue {
     public targetElement: string;
 
     public componentName: string = DIALOG_NAME;
+
+    // BodyScrollMixin interface
+    public activeScollBody: Function;
+    public stopScollBody: Function;
+    public addWindow: Function;
+    public setDataWindowCount: Function;
+    public getDataWindowCount: Function;
+    public removeDataWindowCount: Function;
+
+    // BackdropMixin interface
+    public backdropZIndex: string;
+    public createBackdrop: Function;
+    public changeBackdropZIndex: Function;
+    public removeBackdrop: Function;
+    public setBackdropStyle: Function;
+    public getDataBackdropID: Function;
+    public setDataBackdropZIndex: Function;
+    public getDataBackdropZIndex: Function;
+    public getElementBackdrop: Function;
 
     private propsMode: string = 'primary';
     private propsIsOpen: boolean = false;
@@ -88,9 +107,9 @@ export class MDialog extends Vue {
         if (!this.isAnimActive) {
             this.isVisible = false;
             this.isAnimActive = true;
-            this['changeBackdropZIndex'](-1);
-            if (this['getDataWindowCount']() == 1) {
-                this['getElementBackdrop']().style.opacity = '0';
+            this.changeBackdropZIndex(-1);
+            if (this.getDataWindowCount() == 1) {
+                this.getElementBackdrop().style.opacity = '0';
             }
             setTimeout(() => {
                 this.propsIsOpen = false;
@@ -107,9 +126,9 @@ export class MDialog extends Vue {
         this.elementPortalTarget.setAttribute('class', 'm-dialog-popover');
         this.elementPortalTarget.style.position = 'relative';
 
-        if (this['getDataWindowCount']() == 0) {
+        if (this.getDataWindowCount() == 0) {
             this.addFirstDialog();
-            this['stopScollBody']();
+            this.stopScollBody();
         } else {
             this.propsTargetElement.appendChild(this.elementPortalTarget);
             this.addDialog();
@@ -122,30 +141,30 @@ export class MDialog extends Vue {
             elementPortalTarget.remove();
         }
 
-        if (this['getDataWindowCount']() == 1) {
-            this['removeDataWindowCount']();
-            this['activeScollBody']();
-            this['removeBackdrop']();
+        if (this.getDataWindowCount() == 1) {
+            this.removeDataWindowCount();
+            this.activeScollBody();
+            this.removeBackdrop();
         } else {
-            this['setDataWindowCount'](String(this['getDataWindowCount']() - 1));
+            this.setDataWindowCount(String(this.getDataWindowCount() - 1));
         }
     }
 
     private addFirstDialog() {
         // Init first dialog
-        this['setDataWindowCount']('1');
-        this.elementPortalTarget.style.zIndex = this['backdropZIndex'];
+        this.setDataWindowCount('1');
+        this.elementPortalTarget.style.zIndex = this.backdropZIndex;
         // Init first backdrop
-        this['createBackdrop'](this.propsTargetElement);
+        this.createBackdrop(this.propsTargetElement);
         this.propsTargetElement.appendChild(this.elementPortalTarget);
     }
 
     private addDialog() {
         let elementPortalTarget: HTMLElement = this.getElementPortalTarget();
         elementPortalTarget.style.position = 'relative';
-        this['addWindow']();
-        this['changeBackdropZIndex'](1);
-        elementPortalTarget.style.zIndex = String(this['getDataBackdropZIndex']());
+        this.addWindow();
+        this.changeBackdropZIndex(1);
+        elementPortalTarget.style.zIndex = String(this.getDataBackdropZIndex());
     }
 
     private backdropClick(event): void {
