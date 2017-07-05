@@ -1,66 +1,132 @@
 @import '../../styles/abstracts/variables';
+$m-dialog-primary--max-width: 380px !default;
+$m-dialog-secondary--max-width: 640px !default;
+$m-dialog-secondary--header-height: $m-touch-size !default;
 
 .m-dialog {
-    &__backdrop {
-        transition: 0.2s background linear;
-        background: none;
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    &__wrap {
         position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         overflow: auto;
-        padding: $m-padding;
         cursor: pointer;
 
         @media screen and (min-width: $m-screen--min--s) {
             padding: $m-padding--l;
         }
 
-        &.m--is--backdrop-hidden {
-            background: none;
-        }
-
-        &.m--is-open {
-            &:not(.m--is--backdrop-hidden) {
-                background: rgba($m-color--black, 0.7);
-            }
+        &.m--is-primary {
+            padding: $m-padding;
 
             .m-dialog {
-                &__wrap {
-                    transform: translate3d(0, 0, 0);
-                    opacity: 1;
+                &__article {
+                    transition: 0.3s transform ease, 0.2s opacity linear;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                    transform: translate3d(0, $m-padding--l, 0);
+                    opacity: 0;
+                    border-radius: $m-border-radius;
+
+                    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+                        margin-top: 60px;
+                    }
+
+                    @media screen and (min-width: #{$m-dialog-primary--max-width + $m-padding * 2}) {
+                        width: $m-dialog-primary--max-width;
+                    }
+                }
+
+                &__header {
+                    border-bottom: 1px solid $m-color--grey-light;
+                }
+            }
+
+            &.m--is-open {
+                .m-dialog {
+                    &__article {
+                        transform: translate3d(0, 0, 0);
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        &.m--is-secondary {
+            .m-dialog {
+                &__article {
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+
+                    @media screen and (max-width: #{$m-screen--max--s}) {
+                        transition: 0.45s transform ease;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        transform: translate3d(0, 100%, 0);
+                    }
+
+                    @media screen and (min-width: #{$m-screen--min--s}) {
+                        transition: 0.3s transform ease, 0.2s opacity linear;
+                        transform: translate3d(0, $m-padding--l, 0);
+                        margin-top: auto;
+                        margin-bottom: auto;
+                        max-width: $m-dialog-secondary--max-width;
+                        opacity: 0;
+                    }
+                }
+
+                &__header {
+                    background: $m-color--black-grey;
+                    color: $m-color--white;
+                    min-height: $m-dialog-secondary--header-height;
+
+                    &__close-button {
+                        color: $m-color--white;
+
+                        &::after {
+                            background: $m-color--black-grey-light;
+                        }
+                    }
+                }
+
+                &__body {
+                    flex: 1;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                }
+            }
+
+            &.m--is-open {
+                .m-dialog {
+                    &__article {
+                        @media screen and (max-width: #{$m-screen--max--s}) {
+                            transform: translate3d(0, 0, 0);
+                        }
+
+                        @media screen and (min-width: #{$m-screen--min--s}) {
+                            transform: translate3d(0, 0, 0);
+                            opacity: 1;
+                        }
+                    }
                 }
             }
         }
     }
 
-    &__wrap {
+    &__article {
         cursor: auto;
-        transition: 0.3s transform ease, 0.2s opacity linear;
-        transform: translate3d(0, $m-padding--l, 0);
-        margin-top: auto;
-        margin-bottom: auto;
         width: 100%;
         background: $m-color--white;
-        border-radius: $m-border-radius;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
-        opacity: 0;
-
-        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-            margin-top: 60px;
-        }
-
-        @media screen and (min-width: #{$m-max-width--dialog + $m-padding * 2}) {
-            width: $m-max-width--dialog;
-        }
     }
 
-    &__header,
     &__body {
         padding: $m-padding;
     }
@@ -68,12 +134,18 @@
     &__header {
         display: flex;
         align-items: center;
-        border-bottom: 1px solid $m-color--grey-light;
+        padding: $m-margin $m-padding;
 
         &__title {
+            flex: 1;
             margin: 0;
-            font-size: $m-font-size--h4;
+            font-size: $m-font-size--h5;
             font-weight: $m-font-weight--bold;
+        }
+
+        &__close-button {
+            margin: -#{$m-padding} -#{$m-margin} -#{$m-padding} 0;// Magic number;
+            stroke-width: 2px;
         }
     }
 
@@ -93,28 +165,6 @@
         .m-button__text {
             width: 100%;
             text-align: center;
-        }
-    }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
-
-    .m-dialog {
-        &__backdrop {
-            transition: opacity 0.5s;
-        }
-    }
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
-
-    .m-dialog {
-        &__backdrop {
-            opacity: 0;
         }
     }
 }
