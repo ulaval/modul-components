@@ -292,7 +292,7 @@ export class MDropdown extends ModulVue {
 
     public listOpen(value: boolean): void {
         this.listIsOpen = value;
-        this.$emit('dropdownStatut', this.listIsOpen);
+        this.$emit('dropdownOpen', this.listIsOpen);
     }
 
     public keyupReference($event): void {
