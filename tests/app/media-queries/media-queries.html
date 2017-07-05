@@ -4,21 +4,21 @@
         <span slot="icon-left"><</span>Back
     </m-link>
     <h2>min-width</h2>
-    <p id="min480" v-if="isMinExtraSmall">480px >= ... <strong>isMinExtraSmall</strong></p>
-    <p id="min768" v-if="isMinSmall">768 >= ... <strong>isMinSmall</strong></p>
-    <p id="min1024" v-if="isMinMedium">1024 >= ... <strong>isMinMedium</strong></p>
-    <p id="min1200" v-if="isMinLarge"> 1200 >= ... <strong>isMinLarge</strong></p>
-    <p id="min1600" v-if="isExtraLarge">1600 >= ... <strong>isExtraLarge</strong></p>
+    <p id="min480" v-if="isScreenMinXS">480px >= ... <strong>isScreenMinXS</strong></p>
+    <p id="min768" v-if="isScreenMinS">768 >= ... <strong>isScreenMinS</strong></p>
+    <p id="min1024" v-if="isScreenMinM">1024 >= ... <strong>isScreenMinM</strong></p>
+    <p id="min1200" v-if="isScreenMinL"> 1200 >= ... <strong>isScreenMinL</strong></p>
+    <p id="min1600" v-if="isScreenXL">1600 >= ... <strong>isScreenXL</strong></p>
 
     <h2>max-width</h2>
-    <p id="max480" v-if="isExtraSmall"><strong>isExtraSmall</strong> ... < 480</p>
-    <p id="max768" v-if="isMaxSmall"><strong>isMaxSmall</strong> ... < 768</p>
-    <p id="max1024" v-if="isMaxMedium"><strong>isMaxMedium</strong> ... < 1024</p>
-    <p id="max1200" v-if="isMaxLarge"><strong>isMaxLarge</strong> ... < 1200px</p>
-    <p id="max1600" v-if="isMaxExtraLarge"><strong>isMaxExtraLarge</strong> ... < 1600</p>
+    <p id="max480" v-if="isScreenXS"><strong>isScreenXS</strong> ... < 480</p>
+    <p id="max768" v-if="isScreenMaxS"><strong>isScreenMaxS</strong> ... < 768</p>
+    <p id="max1024" v-if="isScreenMaxM"><strong>isScreenMaxM</strong> ... < 1024</p>
+    <p id="max1200" v-if="isScreenMaxL"><strong>isScreenMaxL</strong> ... < 1200px</p>
+    <p id="max1600" v-if="isScreenMaxXL"><strong>isScreenMaxXL</strong> ... < 1600</p>
 
     <h2>min-width and max-width</h2>
-    <p id="in480-768" v-if="isSmall"> 480 =­> ... <strong>isSmall</strong> ... < 768</p>
-    <p id="in768-1024" v-if="isMedium">768 => ... <strong>isMedium</strong>... < 1024</p>
-    <p id="in1024-1600" v-if="isLarge">1024 => ... <strong>isLarge</strong> ... < 1600</p>
+    <p id="in480-768" v-if="isScreenS"> 480 =­> ... <strong>isScreenS</strong> ... < 768</p>
+    <p id="in768-1024" v-if="isScreenM">768 => ... <strong>isScreenM</strong>... < 1024</p>
+    <p id="in1024-1600" v-if="isScreenL">1024 => ... <strong>isScreenL</strong> ... < 1600</p>
 </div>

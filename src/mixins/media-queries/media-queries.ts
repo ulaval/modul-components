@@ -2,150 +2,150 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { ModulVue } from '../../utils/vue/vue';
 import {
-    BREAKING_POINT_MIN_EXTRA_SMALL,
-    BREAKING_POINT_MIN_SMALL,
-    BREAKING_POINT_MIN_MEDIUM,
-    BREAKING_POINT_MIN_LARGE,
-    BREAKING_POINT_MAX_SMALL,
-    BREAKING_POINT_MAX_MEDIUM,
-    BREAKING_POINT_MAX_LARGE,
-    BREAKING_POINT_MAX_EXTRA_LARGE,
-    BREAKING_POINT_EXTRA_SMALL,
-    BREAKING_POINT_SMALL,
-    BREAKING_POINT_MEDIUM,
-    BREAKING_POINT_LARGE,
-    BREAKING_POINT_EXTRA_LARGE
+    SCREEN_MIN_W_XS,
+    SCREEN_MIN_W_S,
+    SCREEN_MIN_W_M,
+    SCREEN_MIN_W_L,
+    SCREEN_MAX_W_S,
+    SCREEN_MAX_W_M,
+    SCREEN_MAX_W_L,
+    SCREEN_MAX_W_XL,
+    SCREEN_W_XS,
+    SCREEN_W_S,
+    SCREEN_W_M,
+    SCREEN_W_L,
+    SCREEN_W_XL
 } from '../../utils/media-queries/media-queries';
 
 export interface MediaQueriesMixin {
-    isMinExtraSmall: boolean;
-    isMinSmall: boolean;
-    isMinMedium: boolean;
-    isMinLarge: boolean;
+    isScreenMinXS: boolean;
+    isScreenMinS: boolean;
+    isScreenMinM: boolean;
+    isScreenMinL: boolean;
 
-    isExtraSmall: boolean;
-    isSmall: boolean;
-    isMedium: boolean;
-    isLarge: boolean;
-    isExtraLarge: boolean;
+    isScreenXS: boolean;
+    isScreenS: boolean;
+    isScreenM: boolean;
+    isScreenL: boolean;
+    isScreenXL: boolean;
 
-    isMaxSmall: boolean;
-    isMaxMedium: boolean;
-    isMaxLarge: boolean;
-    isMaxExtraLarge: boolean;
+    isScreenMaxS: boolean;
+    isScreenMaxM: boolean;
+    isScreenMaxL: boolean;
+    isScreenMaxXL: boolean;
 }
 
 @Component
 export class MediaQueries extends ModulVue implements MediaQueriesMixin {
-    public isMinExtraSmall: boolean = false;
-    public isMinSmall: boolean = false;
-    public isMinMedium: boolean = false;
-    public isMinLarge: boolean = false;
+    public isScreenMinXS: boolean = false;
+    public isScreenMinS: boolean = false;
+    public isScreenMinM: boolean = false;
+    public isScreenMinL: boolean = false;
 
-    public isExtraSmall: boolean = false;
-    public isSmall: boolean = false;
-    public isMedium: boolean = false;
-    public isLarge: boolean = false;
-    public isExtraLarge: boolean = false;
+    public isScreenXS: boolean = false;
+    public isScreenS: boolean = false;
+    public isScreenM: boolean = false;
+    public isScreenL: boolean = false;
+    public isScreenXL: boolean = false;
 
-    public isMaxSmall: boolean = false;
-    public isMaxMedium: boolean = false;
-    public isMaxLarge: boolean = false;
-    public isMaxExtraLarge: boolean = false;
+    public isScreenMaxS: boolean = false;
+    public isScreenMaxM: boolean = false;
+    public isScreenMaxL: boolean = false;
+    public isScreenMaxXL: boolean = false;
 
-    private mqMinExtraSmallIn: () => void;
-    private mqMinExtraSmallOut: () => void;
-    private mqMinSmallIn: () => void;
-    private mqMinSmallOut: () => void;
-    private mqMinMediumIn: () => void;
-    private mqMinMediumOut: () => void;
-    private mqMinLargeIn: () => void;
-    private mqMinLargeOut: () => void;
+    private screenMinXSIn: () => void;
+    private screenMinXSOut: () => void;
+    private screenMinSIn: () => void;
+    private screenMinSOut: () => void;
+    private screenMinMIn: () => void;
+    private screenMinMOut: () => void;
+    private screenMinLIn: () => void;
+    private screenMinLOut: () => void;
 
-    private mqMaxSmallIn: () => void;
-    private mqMaxSmallOut: () => void;
-    private mqMaxMediumIn: () => void;
-    private mqMaxMediumOut: () => void;
-    private mqMaxLargeIn: () => void;
-    private mqMaxLargeOut: () => void;
-    private mqMaxExtraLargeIn: () => void;
-    private mqMaxExtraLargeOut: () => void;
+    private screenMaxSIn: () => void;
+    private screenMaxSOut: () => void;
+    private screenMaxMIn: () => void;
+    private screenMaxMOut: () => void;
+    private screenMaxLIn: () => void;
+    private screenMaxLOut: () => void;
+    private screenMaxXLIn: () => void;
+    private screenMaxXLOut: () => void;
 
-    private mqExtraSmallIn: () => void;
-    private mqExtraSmallOut: () => void;
-    private mqSmallIn: () => void;
-    private mqSmallOut: () => void;
-    private mqMediumIn: () => void;
-    private mqMediumOut: () => void;
-    private mqLargeIn: () => void;
-    private mqLargeOut: () => void;
-    private mqExtraLargeIn: () => void;
-    private mqExtraLargeOut: () => void;
+    private screenXSIn: () => void;
+    private screenXSOut: () => void;
+    private screenSIn: () => void;
+    private screenSOut: () => void;
+    private screenMIn: () => void;
+    private screenMOut: () => void;
+    private screenLIn: () => void;
+    private screenLOut: () => void;
+    private screenXLIn: () => void;
+    private screenXLOut: () => void;
 
     public created(): void {
-        this.mqMinExtraSmallIn = () => this.isMinExtraSmall = true;
-        this.mqMinExtraSmallOut = () => this.isMinExtraSmall = false;
-        this.mqMinSmallIn = () => this.isMinSmall = true;
-        this.mqMinSmallOut = () => this.isMinSmall = false;
-        this.mqMinMediumIn = () => this.isMinMedium = true;
-        this.mqMinMediumOut = () => this.isMinMedium = false;
-        this.mqMinLargeIn = () => this.isMinLarge = true;
-        this.mqMinLargeOut = () => this.isMinLarge = false;
+        this.screenMinXSIn = () => this.isScreenMinXS = true;
+        this.screenMinXSOut = () => this.isScreenMinXS = false;
+        this.screenMinSIn = () => this.isScreenMinS = true;
+        this.screenMinSOut = () => this.isScreenMinS = false;
+        this.screenMinMIn = () => this.isScreenMinM = true;
+        this.screenMinMOut = () => this.isScreenMinM = false;
+        this.screenMinLIn = () => this.isScreenMinL = true;
+        this.screenMinLOut = () => this.isScreenMinL = false;
 
-        this.mqMaxSmallIn = () => this.isMaxSmall = true;
-        this.mqMaxSmallOut = () => this.isMaxSmall = false;
-        this.mqMaxMediumIn = () => this.isMaxMedium = true;
-        this.mqMaxMediumOut = () => this.isMaxMedium = false;
-        this.mqMaxLargeIn = () => this.isMaxLarge = true;
-        this.mqMaxLargeOut = () => this.isMaxLarge = false;
-        this.mqMaxExtraLargeIn = () => this.isMaxExtraLarge = true;
-        this.mqMaxExtraLargeOut = () => this.isMaxExtraLarge = false;
+        this.screenMaxSIn = () => this.isScreenMaxS = true;
+        this.screenMaxSOut = () => this.isScreenMaxS = false;
+        this.screenMaxMIn = () => this.isScreenMaxM = true;
+        this.screenMaxMOut = () => this.isScreenMaxM = false;
+        this.screenMaxLIn = () => this.isScreenMaxL = true;
+        this.screenMaxLOut = () => this.isScreenMaxL = false;
+        this.screenMaxXLIn = () => this.isScreenMaxXL = true;
+        this.screenMaxXLOut = () => this.isScreenMaxXL = false;
 
-        this.mqExtraSmallIn = () => this.isExtraSmall = true;
-        this.mqExtraSmallOut = () => this.isExtraSmall = false;
-        this.mqSmallIn = () => this.isSmall = true;
-        this.mqSmallOut = () => this.isSmall = false;
-        this.mqMediumIn = () => this.isMedium = true;
-        this.mqMediumOut = () => this.isMedium = false;
-        this.mqLargeIn = () => this.isLarge = true;
-        this.mqLargeOut = () => this.isLarge = false;
-        this.mqExtraLargeIn = () => this.isExtraLarge = true;
-        this.mqExtraLargeOut = () => this.isExtraLarge = false;
+        this.screenXSIn = () => this.isScreenXS = true;
+        this.screenXSOut = () => this.isScreenXS = false;
+        this.screenSIn = () => this.isScreenS = true;
+        this.screenSOut = () => this.isScreenS = false;
+        this.screenMIn = () => this.isScreenM = true;
+        this.screenMOut = () => this.isScreenM = false;
+        this.screenLIn = () => this.isScreenL = true;
+        this.screenLOut = () => this.isScreenL = false;
+        this.screenXLIn = () => this.isScreenXL = true;
+        this.screenXLOut = () => this.isScreenXL = false;
     }
 
     public mounted(): void {
-        this.$mq.register(BREAKING_POINT_MIN_EXTRA_SMALL, this.mqMinExtraSmallIn, this.mqMinExtraSmallOut);
-        this.$mq.register(BREAKING_POINT_MIN_SMALL, this.mqMinSmallIn, this.mqMinSmallOut);
-        this.$mq.register(BREAKING_POINT_MIN_MEDIUM, this.mqMinMediumIn, this.mqMinMediumOut);
-        this.$mq.register(BREAKING_POINT_MIN_LARGE, this.mqMinLargeIn, this.mqMinLargeOut);
+        this.$mq.register(SCREEN_MIN_W_XS, this.screenMinXSIn, this.screenMinXSOut);
+        this.$mq.register(SCREEN_MIN_W_S, this.screenMinSIn, this.screenMinSOut);
+        this.$mq.register(SCREEN_MIN_W_M, this.screenMinMIn, this.screenMinMOut);
+        this.$mq.register(SCREEN_MIN_W_L, this.screenMinLIn, this.screenMinLOut);
 
-        this.$mq.register(BREAKING_POINT_MAX_SMALL, this.mqMaxSmallIn, this.mqMaxSmallOut);
-        this.$mq.register(BREAKING_POINT_MAX_MEDIUM, this.mqMaxMediumIn, this.mqMaxMediumOut);
-        this.$mq.register(BREAKING_POINT_MAX_LARGE, this.mqMaxLargeIn, this.mqMaxLargeOut);
-        this.$mq.register(BREAKING_POINT_MAX_EXTRA_LARGE, this.mqMaxExtraLargeIn, this.mqMaxExtraLargeOut);
+        this.$mq.register(SCREEN_MAX_W_S, this.screenMaxSIn, this.screenMaxSOut);
+        this.$mq.register(SCREEN_MAX_W_M, this.screenMaxMIn, this.screenMaxMOut);
+        this.$mq.register(SCREEN_MAX_W_L, this.screenMaxLIn, this.screenMaxLOut);
+        this.$mq.register(SCREEN_MAX_W_XL, this.screenMaxXLIn, this.screenMaxXLOut);
 
-        this.$mq.register(BREAKING_POINT_EXTRA_SMALL, this.mqExtraSmallIn, this.mqExtraSmallOut);
-        this.$mq.register(BREAKING_POINT_SMALL, this.mqSmallIn, this.mqSmallOut);
-        this.$mq.register(BREAKING_POINT_MEDIUM, this.mqMediumIn, this.mqMediumOut);
-        this.$mq.register(BREAKING_POINT_LARGE, this.mqLargeIn, this.mqLargeOut);
-        this.$mq.register(BREAKING_POINT_EXTRA_LARGE, this.mqExtraLargeIn, this.mqExtraLargeOut);
+        this.$mq.register(SCREEN_W_XS, this.screenXSIn, this.screenXSOut);
+        this.$mq.register(SCREEN_W_S, this.screenSIn, this.screenSOut);
+        this.$mq.register(SCREEN_W_M, this.screenMIn, this.screenMOut);
+        this.$mq.register(SCREEN_W_L, this.screenLIn, this.screenLOut);
+        this.$mq.register(SCREEN_W_XL, this.screenXLIn, this.screenXLOut);
     }
 
     public destroyed(): void {
-        this.$mq.register(BREAKING_POINT_MIN_EXTRA_SMALL, this.mqMinExtraSmallIn, this.mqMinExtraSmallOut);
-        this.$mq.register(BREAKING_POINT_MIN_SMALL, this.mqMinSmallIn, this.mqMinSmallOut);
-        this.$mq.register(BREAKING_POINT_MIN_MEDIUM, this.mqMinMediumIn, this.mqMinMediumOut);
-        this.$mq.register(BREAKING_POINT_MIN_LARGE, this.mqMinLargeIn, this.mqMinLargeOut);
+        this.$mq.unregister(SCREEN_MIN_W_XS, this.screenMinXSIn, this.screenMinXSOut);
+        this.$mq.unregister(SCREEN_MIN_W_S, this.screenMinSIn, this.screenMinSOut);
+        this.$mq.unregister(SCREEN_MIN_W_M, this.screenMinMIn, this.screenMinMOut);
+        this.$mq.unregister(SCREEN_MIN_W_L, this.screenMinLIn, this.screenMinLOut);
 
-        this.$mq.register(BREAKING_POINT_MAX_SMALL, this.mqMaxSmallIn, this.mqMaxSmallOut);
-        this.$mq.register(BREAKING_POINT_MAX_MEDIUM, this.mqMaxMediumIn, this.mqMaxMediumOut);
-        this.$mq.register(BREAKING_POINT_MAX_LARGE, this.mqMaxLargeIn, this.mqMaxLargeOut);
-        this.$mq.register(BREAKING_POINT_MAX_EXTRA_LARGE, this.mqMaxExtraLargeIn, this.mqMaxExtraLargeOut);
+        this.$mq.unregister(SCREEN_MAX_W_S, this.screenMaxSIn, this.screenMaxSOut);
+        this.$mq.unregister(SCREEN_MAX_W_M, this.screenMaxMIn, this.screenMaxMOut);
+        this.$mq.unregister(SCREEN_MAX_W_L, this.screenMaxLIn, this.screenMaxLOut);
+        this.$mq.unregister(SCREEN_MAX_W_XL, this.screenMaxXLIn, this.screenMaxXLOut);
 
-        this.$mq.register(BREAKING_POINT_EXTRA_SMALL, this.mqExtraSmallIn, this.mqExtraSmallOut);
-        this.$mq.register(BREAKING_POINT_SMALL, this.mqSmallIn, this.mqSmallOut);
-        this.$mq.register(BREAKING_POINT_MEDIUM, this.mqMediumIn, this.mqMediumOut);
-        this.$mq.register(BREAKING_POINT_LARGE, this.mqLargeIn, this.mqLargeOut);
-        this.$mq.register(BREAKING_POINT_EXTRA_LARGE, this.mqExtraLargeIn, this.mqExtraLargeOut);
+        this.$mq.unregister(SCREEN_W_XS, this.screenXSIn, this.screenXSOut);
+        this.$mq.unregister(SCREEN_W_S, this.screenSIn, this.screenSOut);
+        this.$mq.unregister(SCREEN_W_M, this.screenMIn, this.screenMOut);
+        this.$mq.unregister(SCREEN_W_L, this.screenLIn, this.screenLOut);
+        this.$mq.unregister(SCREEN_W_XL, this.screenXLIn, this.screenXLOut);
     }
 }
