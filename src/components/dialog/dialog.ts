@@ -20,6 +20,8 @@ export class MDialog extends ModulVue {
     public isOpen: boolean;
     @Prop({ default: 'body' })
     public targetElement: string;
+    @Prop({ default: '' })
+    public title: string;
     @Prop()
     public isCloseOnBackdrop: boolean;
 
@@ -157,7 +159,7 @@ export class MDialog extends ModulVue {
     }
 
     private get hasTitle(): boolean {
-        return !!this.$slots['title'];
+        return this.title == '' ? false : true;
     }
 
     private get hasDefaultSlots(): boolean {

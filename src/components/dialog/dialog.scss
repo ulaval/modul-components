@@ -82,12 +82,24 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                 }
 
                 &__header {
+                    position: relative;
                     background: $m-color--black-grey;
                     color: $m-color--white;
                     min-height: $m-dialog-secondary--header-height;
 
+                    &__title {
+                        padding-right: $m-touch-size;
+                    }
+
                     &__close-button {
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                        margin: 0;
                         color: $m-color--white;
+                        transform: translate3d(0, -50%, 0);
+
+                        stroke-width: 2px;
 
                         &::after {
                             background: $m-color--black-grey-light;
@@ -144,11 +156,7 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
             margin: 0;
             font-size: $m-font-size--h5;
             font-weight: $m-font-weight--bold;
-        }
-
-        &__close-button {
-            margin: -#{$m-padding} -#{$m-margin} -#{$m-padding} 0;// Magic number;
-            stroke-width: 2px;
+            line-height: 1.2;
         }
     }
 
