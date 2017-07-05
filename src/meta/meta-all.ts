@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import {
-    ACCORDION_NAME, ACCORDION_GROUP_NAME, BUTTON_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, ICON_NAME, LINK_NAME,
+    ACCORDION_NAME, ACCORDION_GROUP_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, ICON_NAME, LINK_NAME,
     LIST_BULLET_NAME, MESSAGE_NAME, PANEL_NAME, POPPER_LIST_NAME, POPPER_NAME, RADIO_BUTTONS_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
     UPLOAD_NAME
 } from '../components/component-names';
@@ -15,6 +15,7 @@ export class MetaAll implements PluginObject<any> {
         (options as Meta).mergeComponentMeta(ACCORDION_NAME, require('../components/accordion/accordion.meta.json'));
         (options as Meta).mergeComponentMeta(ACCORDION_GROUP_NAME, require('../components/accordion-group/accordion-group.meta.json'));
         (options as Meta).mergeComponentMeta(BUTTON_NAME, require('../components/button/button.meta.json'));
+        (options as Meta).mergeComponentMeta(BUTTON_GROUP_NAME, require('../components/button-group/button-group.meta.json'));
         (options as Meta).mergeComponentMeta(CHECKBOX_NAME, require('../components/checkbox/checkbox.meta.json'));
         (options as Meta).mergeComponentMeta(DIALOG_NAME, require('../components/dialog/dialog.meta.json'));
         (options as Meta).mergeComponentMeta(DROPDOWN_NAME, require('../components/dropdown/dropdown.meta.json'));

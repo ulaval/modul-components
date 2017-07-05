@@ -9,6 +9,7 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/accordion/accordion.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/accordion-group/accordion-group.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/button/button.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/button-group/button-group.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/checkbox/checkbox.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dialog/dialog.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.meta.fr.json'));
