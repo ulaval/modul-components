@@ -6,7 +6,7 @@
     <span class="m-text-field__wrap">
         <label class="m-text-field__label" @click="onFocus" :class="{ 'is-value-empty' : isValueEmpty }">
             <m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>
-            <slot>Text field</slot>
+            <slot></slot>
         </label>
         <input class="m-text-field__input"
                ref="input"
