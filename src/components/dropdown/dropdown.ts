@@ -172,6 +172,12 @@ export class MDropdown extends ModulVue {
         this.prepareElements();
     }
 
+    @Watch('selectedElement')
+    public selectedElementChanged(value): void {
+        this.propsSelectedElement = value;
+        this.textElement = this.getSelectedElementText();
+    }
+
     @Watch('state', { immediate: true })
     public stateChanged(value): void {
         if (value == 'disabled') {
