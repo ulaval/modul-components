@@ -394,9 +394,7 @@ export class MDropdown extends ModulVue {
 
             // Default element
             if (typeof this.propsSelectedElement == UNDEFINED) {
-                if (this.nullValueAvailable) {
-                    this.propsSelectedElement = this.nullValueText;
-                } else {
+                if (!this.nullValueAvailable) {
                     // No nullValue => 1st element is selected by default
                     this.propsSelectedElement = elementsSorted[0];
                 }
@@ -406,7 +404,7 @@ export class MDropdown extends ModulVue {
 
         // Add nullValue to sorted elements
         if (this.nullValueAvailable) {
-            elementsSorted.splice(0, 0, this.nullValueText);
+            elementsSorted.splice(0, 0, this.nullValue);
         }
 
         this.elementsSorted = elementsSorted;
