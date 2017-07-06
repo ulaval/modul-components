@@ -29,12 +29,10 @@ export class InputState extends Vue implements InputStateMixin {
     }
 
     public get hasError(): boolean {
-        console.log(STATE_ERROR);
         return this.propsState == STATE_ERROR;
     }
 
     public get isValid(): boolean {
-        console.log(STATE_VALID);
         return this.propsState == STATE_VALID;
     }
 
