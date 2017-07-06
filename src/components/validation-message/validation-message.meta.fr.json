@@ -1,0 +1,9 @@
+{
+    "m-validation-message-meta": {
+        "name": "Message de validation",
+        "context-of-use": "Décrire ici le contexte d'utilisation du bouton.",
+        "usage": "Quelques règles d'utilisation.",
+        "do": "Bonne pratique.",
+        "dont": "À ne pas faire."
+    }
+}

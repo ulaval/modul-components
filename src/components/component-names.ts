@@ -25,6 +25,7 @@ export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
 export const TEXT_FIELD_NAME: string = 'm-text-field';
 export const UPLOAD_NAME: string = 'm-upload';
+export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
 
 export const components: string[] = [
     ACCORDION_GROUP_NAME,
@@ -53,5 +54,6 @@ export const components: string[] = [
     TABS_NAME,
     TEMPLATE_NAME,
     TEXT_FIELD_NAME,
-    UPLOAD_NAME
+    UPLOAD_NAME,
+    VALIDATION_MESSAGE_NAME
 ];

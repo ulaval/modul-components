@@ -1,0 +1,34 @@
+@import 'abstracts/variables';
+$m-validation-message--color-error: $m-color--error !default;
+$m-validation-message--color-valid: $m-color--valid !default;
+$m-validation-message--color-helper: $m-color--grey-darker !default;
+$m-validation-message--margin: $m-padding--xs !default;
+
+.m-validation-message {
+    font-size: $m-font-size--xs;
+    display: inline-flex;
+    flex-direction: column;
+
+    &__error,
+    &__valid {
+        ~ .m-validation-message__helper {
+            margin-top: 2px;
+        }
+
+        &__icon {
+            font-size: 8px;
+        }
+    }
+
+    &__error {
+        color: $m-validation-message--color-error;
+    }
+
+    &__valid {
+        color: $m-validation-message--color-valid;
+    }
+
+    &__helper {
+        color: $m-validation-message--color-helper;
+    }
+}

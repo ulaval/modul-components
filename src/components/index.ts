@@ -28,6 +28,7 @@ import TabsPlugin from './tabs/tabs';
 import Template from './template/template';
 import TextFieldPlugin from './text-field/text-field';
 import UploadPlugin from './upload/upload';
+import ValidationMessagePlugin from './validation-message/validation-message';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options) {
@@ -58,6 +59,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(Template);
         Vue.use(TextFieldPlugin);
         Vue.use(UploadPlugin);
+        Vue.use(ValidationMessagePlugin);
     }
 };
 
