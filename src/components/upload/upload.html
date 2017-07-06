@@ -1,31 +1,44 @@
 <div class="m-upload">
-    <div class="m-upload__file-input-area"
-         v-if="fileInput">
+    <div class="m-upload__file-input-area" v-if="fileInput">
         <input type="file" id="files" name="files[]" :accept="extensionsProp" @change="filesInput" :multiple="multiple" />
     </div>
 
-    <div class="m-upload__drag-drop-area"
-         v-if="dragDrop"
+    <div class="m-upload__drag-drop-area" v-if="dragDrop"
          @dragover.prevent
          @drop="filesDrop"
          style="border:1px solid #000; padding: 15px; margin: 10px 0;">
         Zone de drag and drop
     </div>
 
-    <div class="m-upload__files"
-         v-if="filesList">
-        <m-message state="warning" :closeButton="true" :visible="hasErrorMsgs">
-            <ul>
-                <li v-for="error in errorMsgs">{{ error }}</li>
-            </ul>
-        </m-message>
-
+    <div class="m-upload__files" v-if="filesList">
         <ul>
             <li v-for="(file, index) of globalFileList" :class="{'reading': !file.isRead}">{{ file.file.name }} <m-button @click="remove(index)">Remove</m-button></li>
         </ul>
     </div>
 
+    <div class="m-upload__error-area" v-if="error">
+        <m-message state="warning"
+                :closeButton="true"
+                :visible="hasErrorMsgs">
+            <ul>
+                <li v-for="error in errorMsgs">{{ error }}</li>
+            </ul>
+        </m-message>
+    </div>
+
     <br />-----<br />
-    fileAPISupport: {{ fileAPISupport }}
+
+    <!--<m-dropdown :elements="elements"
+                :get-text-element="getText"
+                default-text="fdsfd fds fdsf f"
+                :is-editable="true"
+                :is-open="open"
+                @isOpen="openCheck($event)"
+                @element-selected="alertMe($event)">
+        Label du dropdown
+    </m-dropdown>
+    <m-button @click="open = !open">Switch</m-button>
+
+    {{ open }}-->
     <br />-----<br />
 </div>

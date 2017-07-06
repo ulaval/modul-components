@@ -25,6 +25,8 @@ export class MUpload extends Vue {
     public dragDrop: boolean;
     @Prop({ default: true })
     public filesList: boolean;
+    @Prop({ default: true })
+    public error: boolean;
     @Prop({ default: 10 })
     public maxFilesAllow: number;
     @Prop({ default: () => [] })
