@@ -3,7 +3,8 @@
           'm--not-editable' : !propsIsEditable,
           'm--is-disabled' : isDisabled,
           'm--has-error' : hasError,
-          'm--is-value-empty' : isValueEmpty },
+          'm--is-valid' : isValid,
+          'm--is-empty-value' : isEmptyValue },
           'm--is-type-' + propsType]">
     <span class="m-text-field__wrap">
         <label class="m-text-field__label" @click="onFocus" v-if="hasDefaultSlot || isDisabled">
@@ -32,10 +33,9 @@
         <m-icon :name="iconName" class="m-text-field__icon" v-if="hasIcon"></m-icon>
         <span aria-hidden="true" class="m-text-field__input-line"></span>
     </span>
-    <span class="m-text-field__error-message" v-if="!isDisabled && hasError">
-        <m-icon name="default" class="m-text-field__error-message__icon"></m-icon> {{ errorMessage }}
-    </span>
-    <span class="m-text-field__helper-message" v-if="!isDisabled && hasHelperText">
-        {{ helperMessage }}
-    </span>
+    <m-validation-message
+        :state="propsState"
+        :error-message="propsErrorMessage"
+        :valid-message="propsValidMessage"
+        :helper-message="helperMessage"></m-validation-message>
 </span>

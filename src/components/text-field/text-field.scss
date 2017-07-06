@@ -1,11 +1,11 @@
 @import 'abstracts/variables';
-$m-text-field--transiton-duration: 0.45s;
-$m-text-field--color--helper: $m-color--grey-darker;
-$m-text-field--color--focus: $m-color--primary;
-$m-text-field--color--error: $m-color--error;
-$m-text-field--color--valid: $m-color--valid;
-$m-text-field--color--disabled: $m-color--grey-darker;
-$m-text-field--margin: $m-padding--xs;
+$m-text-field--transiton-duration: 0.45s !default;
+$m-text-field--color-helper: $m-color--grey-darker !default;
+$m-text-field--color-focus: $m-color--primary !default;
+$m-text-field--color-error: $m-color--error !default;
+$m-text-field--color-valid: $m-color--valid !default;
+$m-text-field--color-disabled: $m-color--grey-darker !default;
+$m-text-field--margin: $m-padding--xs !default;
 
 .m-text-field {
     display: inline-flex;
@@ -23,7 +23,7 @@ $m-text-field--margin: $m-padding--xs;
 
     &:not(.m--is-focus),
     &.m--is-disabled {
-        &.m--is-value-empty {
+        &.m--is-empty-value {
             .m-text-field {
                 &__label {
                     bottom: $m-text-field--margin;
@@ -50,21 +50,21 @@ $m-text-field--margin: $m-padding--xs;
         transition-duration: $m-text-field--transiton-duration;
         transition-timing-function: ease;
         position: absolute;
+        bottom: 25px;
         z-index: 2;
         width: 100%;
-    }
-
-    &__label,
-    &.m--has-error .m-text-field__label {
-        bottom: 25px;
         font-size: $m-font-size--xs;
         font-weight: $m-font-weight--bold;
+
+        ~ .m-text-field__input {
+            margin-top: 12px; // Magic number : Space required when the label is present and the focus on text-field is active
+        }
     }
 
     &__input {
         position: relative;
         z-index: 1;
-        margin-top: 28px;
+        width: 100%;
         outline: none;
         cursor: text;
         padding: 0 0 $m-text-field--margin 0;
@@ -75,8 +75,7 @@ $m-text-field--margin: $m-padding--xs;
         color: $m-color--text;
         border: none;
         border-bottom: 1px solid #000;
-        width: 100%;
-        height: 26px;
+        background-color: none;
 
         &-line {
             transition: $m-text-field--transiton-duration width ease-in-out;
@@ -89,44 +88,18 @@ $m-text-field--margin: $m-padding--xs;
             display: block;
             width: 0;
             height: 2px;
-            background: $m-text-field--color--focus;
+            background: $m-text-field--color-focus;
         }
 
         &__default-text {
             transition: opacity 0.3s ease;
             opacity: 1;
-            color: $m-text-field--color--helper;
+            color: $m-text-field--color-helper;
 
             &.m--is-transparent {
                 opacity: 0;
             }
         }
-    }
-
-    &__error-message,
-    &__helper-message {
-        margin-top: $m-text-field--margin;
-        font-size: $m-font-size--xs;
-    }
-
-    &__error-message {
-        color: $m-text-field--color--error;
-
-        ~ .m-text-field__helper-message {
-            margin-top: 2px;
-        }
-
-        &__icon {
-            font-size: 8px;
-        }
-    }
-
-    &__helper-message {
-        color: $m-text-field--color--helper;
-    }
-
-    &__transparent {
-        opacity: 0;
     }
 
     &__icon {
@@ -144,14 +117,14 @@ $m-text-field--margin: $m-padding--xs;
 
     &.m--is-focus {
         &:not(.m--is-disabled) {
-            &:not(.m--has-error) {
-                .m-text-field__label {
-                    color: $m-text-field--color--focus;
+            .m-text-field {
+                &__label {
+                    color: $m-text-field--color-focus;
                 }
-            }
 
-            .m-text-field__input-line {
-                width: 100%;
+                &__input-line {
+                    width: 100%;
+                }
             }
         }
     }
@@ -174,28 +147,56 @@ $m-text-field--margin: $m-padding--xs;
         .m-text-field__label,
         .m-text-field__icon,
         .m-text-field__input {
-            color: $m-text-field--color--disabled;
+            color: $m-text-field--color-disabled;
         }
 
         .m-text-field__input {
             border-bottom-style: dashed;
-            border-color: $m-text-field--color--disabled;
+            border-color: $m-text-field--color-disabled;
+        }
+    }
+
+    &.m--has-error,
+    &.m--is-valid {
+        .m-text-field__input {
+            &-line {
+                width: 100%;
+            }
         }
     }
 
     &.m--has-error {
         &.m--is-focus,
-        &:not(.m--is-value-empty) {
+        &:not(.m--is-empty-value) {
             .m-text-field__label {
-                color: $m-text-field--color--error;
+                color: $m-text-field--color-error;
             }
         }
 
         .m-text-field__input {
             &-line {
                 width: 100%;
-                background: $m-text-field--color--error;
+                background: $m-text-field--color-error;
             }
         }
+    }
+
+    &.m--is-valid {
+        &.m--is-focus,
+        &:not(.m--is-empty-value) {
+            .m-text-field__label {
+                color: $m-text-field--color-valid;
+            }
+        }
+
+        .m-text-field__input {
+            &-line {
+                background: $m-text-field--color-valid;
+            }
+        }
+    }
+
+    .m-validation-message {
+        margin-top: $m-text-field--margin;
     }
 }

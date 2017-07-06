@@ -4,18 +4,29 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './text-field.html?style=./text-field.scss';
 import { TEXT_FIELD_NAME } from '../component-names';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 
-export type MTexteFieldType = 'text' | 'password' | 'email' | 'url' | 'tel';
-export type MTexteFieldState = 'default' | 'disabled' | 'error' | 'valid';
+const TYPE_TEXT = 'text';
+const TYPE_PASSWORD = 'password';
+const TYPE_EMAIL = 'email';
+const TYPE_URL = 'url';
+const TYPE_TEL = 'tel';
+
+const STATE_DEFAULT = 'default';
+const STATE_DISABLED = 'disabled';
+const STATE_ERROR = 'error';
+const STATE_VALID = 'valid';
 
 @WithRender
-@Component
-export class MTexteField extends Vue {
+@Component({
+    mixins: [
+        InputState
+    ]
+})
+export class MTexteField extends Vue implements InputStateMixin {
 
-    @Prop({ default: 'text' })
-    public type: MTexteFieldType;
-    @Prop({ default: 'default' })
-    public state: MTexteFieldState;
+    @Prop({ default: TYPE_TEXT })
+    public type: string;
     @Prop({ default: '' })
     public value: string;
     @Prop({ default: '' })
@@ -24,26 +35,21 @@ export class MTexteField extends Vue {
     public isEditable: boolean;
     @Prop({ default: '' })
     public iconName: string;
-    @Prop({ default: '' })
-    public errorMessage: string;
-    @Prop({ default: '' })
-    public helperMessage: string;
     @Prop({ default: false })
     public isForceFocus: boolean;
 
     public componentName: string = TEXT_FIELD_NAME;
 
-    private propsType: MTexteFieldType;
-    private propsState: MTexteFieldState;
+    public isDisabled: boolean;
+    public hasError: boolean;
+    public isValid: boolean;
+
     private propsValue: string = '';
     private propsDefaultText: string;
-    private propsIsEditable: boolean;
     private hasIcon: boolean;
-    private hasHelperText: boolean;
-    private isValueEmpty: boolean = false;
+    private isEmptyValue: boolean = false;
     private isDefaultTextEmpty: boolean = false;
     private isFocusActive: boolean = false;
-    // private propsIsFoceFocus: boolean = false;
     private isUpdating: number;
 
     @Watch('value')
@@ -64,13 +70,9 @@ export class MTexteField extends Vue {
     }
 
     private beforeMount(): void {
-        this.propsType = this.type;
-        this.propsState = this.state;
         this.propsValue = this.value;
-        this.propsIsEditable = this.isEditable;
         this.propsDefaultText = this.defaultText;
         this.hasIcon = this.iconName != '';
-        this.hasHelperText = this.helperMessage != '';
         this.checkHasValue();
         this.checkHasDefaultText();
     }
@@ -117,31 +119,25 @@ export class MTexteField extends Vue {
     }
 
     private checkHasValue(): void {
-        this.isValueEmpty = String(this.propsValue).length == 0 ? true : false;
-    }
-
-    private get isDisabled(): boolean {
-        return this.propsState == 'disabled';
-    }
-
-    private get hasError(): boolean {
-        if (this.errorMessage != '' || this.state == 'error') {
-            this.propsState = 'error';
-            return true;
-        } else if (this.propsState != 'disabled') {
-            this.propsState = 'default';
-        }
-        return false;
+        this.isEmptyValue = String(this.propsValue).length == 0 ? true : false;
     }
 
     private checkHasDefaultText() {
         if (this.propsDefaultText == '' || this.propsDefaultText == undefined) {
             this.isDefaultTextEmpty = true;
-        } else if (this.isValueEmpty && this.isFocusActive) {
+        } else if (this.isEmptyValue && this.isFocusActive) {
             this.isDefaultTextEmpty = false;
         } else {
             this.isDefaultTextEmpty = true;
         }
+    }
+
+    private get propsType(): string {
+        return this.type == TYPE_PASSWORD || this.type == TYPE_EMAIL || this.type == TYPE_URL || this.type == TYPE_TEL ? this.type : TYPE_TEL;
+    }
+
+    private get propsIsEditable(): boolean {
+        return this.isEditable;
     }
 
     private get hasDefaultSlot(): boolean {
