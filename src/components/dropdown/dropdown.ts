@@ -183,6 +183,11 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         this.prepareElements();
     }
 
+    @Watch('isOpen')
+    public isOpenChanged(value): void {
+        console.log(this.isOpen);
+    }
+
     @Watch('selectedElement')
     public selectedElementChanged(value): void {
         this.propsSelectedElement = value;
