@@ -18,6 +18,7 @@ import PanelPlugin from './panel/panel';
 import PopperPlugin from './popper/popper';
 import PopperListPlugin from './popper-list/popper-list';
 import RadioButtonsPlugin from './radio-buttons/radio-buttons';
+import SpinnerPlugin from './spinner/spinner';
 import StatusList from './status-list/status-list';
 import StepPlugin from './step/step';
 import SwitchPlugin from './switch/switch';
@@ -47,6 +48,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(PopperPlugin);
         Vue.use(PopperListPlugin);
         Vue.use(RadioButtonsPlugin);
+        Vue.use(SpinnerPlugin);
         Vue.use(StatusList);
         Vue.use(StepPlugin);
         Vue.use(SwitchPlugin);

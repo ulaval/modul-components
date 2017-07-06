@@ -1,17 +1,17 @@
-<div class="m-message" :class="{'m--is-success': state=='success',
+<div class="m-spinner" :class="{'m--is-success': state=='success',
                 'm--is-information': state=='information',
                 'm--is-warning': state=='warning',
                 'm--is-error': state=='error',
                 'm--is-regular': mode!='light',
                 'm--is-light': mode=='light'}" v-if="visible">
-    <div class="m-message__wrap" :class="{'m--is-regular': mode!='reduce',
+    <div class="m-spinner__wrap" :class="{'m--is-regular': mode!='reduce',
                 'm--is-light': mode=='light'}">
-        <div class="m-message__icon" v-if="icon">
+        <div class="m-spinner__icon" v-if="icon">
             <m-icon :name="getIcon()"></m-icon>
         </div>
-        <div class="m-message__body" :class="{'m--have-close-button': closeButton}">
-            <m-button mode="icon" iconName="default" iconSize="10px" @click="onClose" class="m-message__close-button" v-if="showCloseButton">
-                <m-i18n i18n-key="m-message:close"></m-i18n>
+        <div class="m-spinner__body" :class="{'m--have-close-button': closeButton}">
+            <m-button mode="icon" iconName="default" iconSize="10px" @click="onClose" class="m-spinner__close-button" v-if="showCloseButton">
+                <m-i18n i18n-key="m-spinner:close"></m-i18n>
             </m-button>
             <p>
                 <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis.

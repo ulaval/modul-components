@@ -3,7 +3,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './spinner.html?style=./spinner.scss';
-import { MESSAGE_NAME } from '../component-names';
+import { SPINNER_NAME } from '../component-names';
 
 export const STATE_SUCCESS: string = 'success';
 export const STATE_INFORMATION: string = 'information';
@@ -15,7 +15,7 @@ export const MODE_LIGHT: string = 'light';
 
 @WithRender
 @Component
-export class MMessage extends Vue {
+export class MSpinner extends Vue {
     @Prop({ default: STATE_SUCCESS })
     public state: string;
     @Prop({ default: MODE_REGULAR })
@@ -27,7 +27,7 @@ export class MMessage extends Vue {
     @Prop({ default: true })
     public visible: boolean;
 
-    public componentName = MESSAGE_NAME;
+    public componentName = SPINNER_NAME;
 
     private get showCloseButton(): boolean {
         return this.mode == MODE_REGULAR && this.closeButton;
@@ -61,10 +61,10 @@ export class MMessage extends Vue {
 
 }
 
-const MessagePlugin: PluginObject<any> = {
+const SpinnerPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(MESSAGE_NAME, MMessage);
+        v.component(SPINNER_NAME, MSpinner);
     }
 };
 
-export default MessagePlugin;
+export default SpinnerPlugin;
