@@ -6,6 +6,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -129,8 +130,12 @@ export class KeyCode {
 }
 
 @WithRender
-@Component
-export class MDropdown extends ModulVue {
+@Component({
+    mixins: [
+        InputState
+    ]
+})
+export class MDropdown extends ModulVue implements InputStateMixin {
 
     @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5']})
     public elements: any[];
@@ -138,8 +143,6 @@ export class MDropdown extends ModulVue {
     public selectedElement: any;
     @Prop()
     public getTextElement: Function;
-    @Prop({ default: '' })
-    public state: string;
     @Prop({ default: false })
     public isOpen: boolean;
     @Prop({ default: true })
@@ -159,6 +162,12 @@ export class MDropdown extends ModulVue {
     // @Prop({ default: false })
     // public formName: boolean;
 
+    public componentNameL: string = DROPDOWN_NAME;
+
+    public isDisabled: boolean;
+    public hasError: boolean;
+    public isValid: boolean;
+
     // Copy of props
     public propsSelectedElement: any;
     public propsIsOpen: boolean;
@@ -167,7 +176,7 @@ export class MDropdown extends ModulVue {
     public textElement: string = '';
 
     private elementsSorted: Array<any>;
-    private stateDisabled: boolean;
+    // private stateDisabled: boolean;
     private nullValueText: string;
     private nullValueAvailable: boolean;
 
@@ -180,15 +189,6 @@ export class MDropdown extends ModulVue {
     public selectedElementChanged(value): void {
         this.propsSelectedElement = value;
         this.textElement = this.getSelectedElementText();
-    }
-
-    @Watch('state', { immediate: true })
-    public stateChanged(value): void {
-        if (value == 'disabled') {
-            this.stateDisabled = true;
-        } else {
-            this.stateDisabled = false;
-        }
     }
 
     public get elementsCount(): number {

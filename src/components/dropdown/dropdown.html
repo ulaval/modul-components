@@ -1,5 +1,5 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'is-disabled': stateDisabled }">
-    <ul class="m-dropdown__list is-hidden" aria-hidden="true">
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': isDisabled }">
+    <ul class="m-dropdown__list m--is-hidden" aria-hidden="true">
         <li class="m-dropdown__list__element">
             <span class="m-dropdown__list__element__text" ref="mDropdownCalculate"></span>
         </li>
@@ -8,8 +8,7 @@
               :options="{ placement: 'bottom' }"
               :closeOnContentClick="true"
               :closeOnReferenceClick="false"
-              :disabled="stateDisabled"
-              :isOpen="isOpen"
+              :disabled="isDisabled"
               mode="dropdown"
               @show="toggleList(true)"
               @hide="toggleList(false)">
@@ -35,13 +34,18 @@
         <m-text-field ref="mDropdownValue"
                       slot="reference"
                       :value="textElement"
-                      :state="state"
-                      :isEditable="isEditable"
-                      :isForceFocus="listIsOpen"
-                      :defaultText="defaultText"
+                      :state="propsState"
+                      :is-editable="isEditable"
+                      :is-force-focus="listIsOpen"
+                      :default-text="defaultText"
                       @valueChanged="textElement = $event"
                       @keyup="keyupReference">
                       <slot></slot>
         </m-text-field>
     </m-popper>
+    <m-validation-message
+        :state="propsState"
+        :error-message="propsErrorMessage"
+        :valid-message="propsValidMessage"
+        :helper-message="helperMessage"></m-validation-message>
 </div>
