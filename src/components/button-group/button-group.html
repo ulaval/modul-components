@@ -1,13 +1,13 @@
-<ul class="m-button-group" :class="{ 'm--is-full-size': isFullSize }" >
+<ul class="m-button-group" :class="{ 'm--is-full-size': fullSize }" >
     <li class="m-button-group__wrap" v-for="(buttonGroupValue, index) in buttonGroupValues" :class="{ 'm--is-focus': isFocus && buttonGroupValue.value == activeValue, 'm--is-active': buttonGroupValue.value == activeValue }">
         <input class="m-button-group__hidden" ref="refRadio" type="radio" :id="buttonGroupValue.value" :name="name" :value="buttonGroupValue.value"
             v-model="activeValue" @focus="isFocus=true" @blur="isFocus=false" @click="onClick">
         <label class="m-button-group__label" :for="buttonGroupValue.value">
-            <m-icon aria-hidden="true" class="m-button-group__icon m--is-left" :name="buttonGroupValue.iconName" v-if="hasIconLeft  && hasIcon"></m-icon>
+            <m-icon aria-hidden="true" class="m-button-group__icon m--is-left" :name="buttonGroupValue.iconName" v-if="hasIconLeft  && icon"></m-icon>
             <span class="m-button-group__text">
                 <slot>{{ buttonGroupValue.label }}</slot>
             </span>
-            <m-icon aria-hidden="true" class="m-button-group__icon m--is-right" :name="buttonGroupValue.iconName"  v-if="!hasIconLeft  && hasIcon"></m-icon>
+            <m-icon aria-hidden="true" class="m-button-group__icon m--is-right" :name="buttonGroupValue.iconName"  v-if="!hasIconLeft  && icon"></m-icon>
         </label>
     </li>
 </ul>

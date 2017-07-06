@@ -43,11 +43,11 @@ export class MButtonGroup extends Vue {
     @Prop({ default: 'button-group' })
     public name: string;
     @Prop({ default: false })
-    public hasIcon: string;
+    public icon: string;
     @Prop({ default: ICON_POSITION_LEFT })
     public iconPosition: string;
     @Prop({ default: true })
-    public isFullSize: boolean;
+    public fullSize: boolean;
 
     public componentName: string = BUTTON_GROUP_NAME;
     private isFocus: boolean = false;

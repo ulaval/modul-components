@@ -12,7 +12,7 @@
             ],
             "default": 0
         },
-        "hasIcon": {
+        "icon": {
             "type": "string",
             "default": false
         },
@@ -24,7 +24,7 @@
             ],
             "default": 0
         },
-        "isFullSize": {
+        "fullSize": {
             "type": "boolean",
             "default": false
         }
