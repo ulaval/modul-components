@@ -154,8 +154,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     @Prop({ default: false })
     public isEditable: boolean;
     @Prop()
-    public nullValue: any;
-    @Prop({ default: '' })
     public defaultText: string;
     // @Prop({ default: false })
     // public name: boolean;
@@ -177,8 +175,8 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
     private elementsSorted: Array<any>;
     // private stateDisabled: boolean;
-    private nullValueText: string;
-    private nullValueAvailable: boolean;
+    // private defaultValueText: string;
+    // private defaultValueAvailable: boolean;
 
     @Watch('elements')
     public elementChanged(value): void {
@@ -213,18 +211,18 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
         this.propsIsOpen = false;
 
-        // Null value (element facultatif)
-        if (typeof this.nullValue == UNDEFINED) {
-            this.nullValueAvailable = false;
-        } else {
-            this.nullValueAvailable = true;
+        // default value (element facultatif)
+        // if (typeof this.defaultValue == UNDEFINED) {
+        //     this.defaultValueAvailable = false;
+        // } else {
+        //     this.defaultValueAvailable = true;
 
-            if (this.getTextElement) {
-                this.nullValueText = this.getTextElement({ element: this.nullValue });
-            } else {
-                this.nullValueText = String(this.nullValue);
-            }
-        }
+        //     if (this.getTextElement) {
+        //         this.defaultValueText = this.getTextElement({ element: this.defaultValue });
+        //     } else {
+        //         this.defaultValueText = String(this.defaultValue);
+        //     }
+        // }
 
         // Run in created() to run before computed data
         this.prepareElements();
@@ -247,24 +245,37 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     }
 
     public getSelectedElementText(): string {
-        let text: string = this.getElementListText(this.propsSelectedElement);
+        let text: string = '';
+
+        if (typeof this.propsSelectedElement != UNDEFINED) {
+            text = this.getElementListText(this.propsSelectedElement);
+        }
+
         return text;
     }
 
     public getElementListText(element: any): string {
         let text: string = '';
 
-        if (typeof element == UNDEFINED || element == this.nullValue) {
-            if (this.nullValueAvailable) {
-                text = this.nullValueText;
-            }
+        if (typeof element == UNDEFINED) {
+            text = '';
         } else if (this.getTextElement) {
             text = this.getTextElement({ element: element });
-        }
-
-        if ((text.trim().length == 0) && (element)) {
+        } else {
             text = String(element);
         }
+
+        // if (typeof element == UNDEFINED || element == this.defaultValue) {
+        //     if (this.defaultValueAvailable) {
+        //         text = this.defaultValueText;
+        //     }
+        // } else if (this.getTextElement) {
+        //     text = this.getTextElement({ element: element });
+        // }
+
+        // if ((text.trim().length == 0) && (element)) {
+        //     text = String(element);
+        // }
 
         return text;
     }
@@ -395,19 +406,19 @@ export class MDropdown extends ModulVue implements InputStateMixin {
             }
 
             // Default element
-            if (typeof this.propsSelectedElement == UNDEFINED) {
-                if (!this.nullValueAvailable) {
-                    // No nullValue => 1st element is selected by default
-                    this.propsSelectedElement = elementsSorted[0];
-                }
-            }
+            // if (typeof this.propsSelectedElement == UNDEFINED) {
+            //     if (!this.defaultValueAvailable) {
+            //         // No defaultValue => 1st element is selected by default
+            //         // this.propsSelectedElement = elementsSorted[0];
+            //     }
+            // }
             this.textElement = this.getSelectedElementText();
         }
 
-        // Add nullValue to sorted elements
-        if (this.nullValueAvailable) {
-            elementsSorted.splice(0, 0, this.nullValue);
-        }
+        // Add defaultValue to sorted elements
+        // if (this.defaultValueAvailable) {
+        //     elementsSorted.splice(0, 0, this.defaultValue);
+        // }
 
         this.elementsSorted = elementsSorted;
     }
