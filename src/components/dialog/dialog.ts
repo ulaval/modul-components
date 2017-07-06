@@ -163,7 +163,6 @@ export class MDialog extends ModulVue {
     }
 
     private get hasDefaultSlots(): boolean {
-        console.log(!!this.$slots.default);
         return !!this.$slots.default;
     }
 }
