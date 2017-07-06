@@ -26,6 +26,8 @@ export class MPopper extends Vue {
     })
     public trigger: string;
     @Prop({ default: false })
+    public isOpen: boolean;
+    @Prop({ default: false })
     public disabled: boolean;
     @Prop()
     public content: string;
@@ -79,6 +81,11 @@ export class MPopper extends Vue {
     @Watch('forceShow', { immediate: true })
     public forceShowChanged(value) {
         this[value ? 'doShow' : 'doClose']();
+    }
+
+    @Watch('isOpen')
+    public isOpenChanged(value) {
+        this.showPopper = this.isOpen;
     }
 
     private created(): void {

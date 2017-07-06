@@ -140,6 +140,8 @@ export class MDropdown extends ModulVue {
     public getTextElement: Function;
     @Prop({ default: '' })
     public state: string;
+    @Prop({ default: false })
+    public isOpen: boolean;
     @Prop({ default: true })
     public isSort: boolean;
     @Prop()
@@ -159,6 +161,7 @@ export class MDropdown extends ModulVue {
 
     // Copy of props
     public propsSelectedElement: any;
+    public propsIsOpen: boolean;
 
     // Initialize data for v-model to work
     public textElement: string = '';
@@ -167,7 +170,6 @@ export class MDropdown extends ModulVue {
     private stateDisabled: boolean;
     private nullValueText: string;
     private nullValueAvailable: boolean;
-    private listIsOpen: boolean = false;
 
     @Watch('elements')
     public elementChanged(value): void {
@@ -209,7 +211,7 @@ export class MDropdown extends ModulVue {
         // Copy of props to avoid override on re-render
         this.propsSelectedElement = this.selectedElement;
 
-        this.listIsOpen = false;
+        this.propsIsOpen = false;
 
         // Null value (element facultatif)
         if (typeof this.nullValue == UNDEFINED) {
@@ -292,18 +294,18 @@ export class MDropdown extends ModulVue {
         elements.style.width = width + 'px';
     }
 
-    public listOpen(value: boolean): void {
-        this.listIsOpen = value;
-        this.$emit('dropdownOpen', this.listIsOpen);
+    public toggleList(value: boolean): void {
+        this.propsIsOpen = value;
+        this.$emit('isOpen', value);
     }
 
     public keyupReference($event): void {
-        if (!this.listIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_SPACE)) {
+        if (!this.propsIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_SPACE)) {
             $event.preventDefault();
             (this.$refs.mDropdownValue as Vue).$el.click();
         }
 
-        if (this.listIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_END || $event.keyCode == KeyCode.DOM_VK_PAGE_DOWN)) {
+        if (this.propsIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_END || $event.keyCode == KeyCode.DOM_VK_PAGE_DOWN)) {
             $event.preventDefault();
             let htmlElement: HTMLElement = this.$el.querySelector('[data-index=\'0\']') as HTMLElement;
             if (htmlElement) {

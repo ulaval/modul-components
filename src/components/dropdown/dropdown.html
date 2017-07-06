@@ -9,9 +9,10 @@
               :closeOnContentClick="true"
               :closeOnReferenceClick="false"
               :disabled="stateDisabled"
+              :isOpen="isOpen"
               mode="dropdown"
-              @show="listOpen(true)"
-              @hide="listOpen(false)">
+              @show="toggleList(true)"
+              @hide="toggleList(false)">
         <ul class="m-dropdown__list"
             ref="mDropdownElements">
             <li v-for="(element, index) in elementsSortedFiltered"
