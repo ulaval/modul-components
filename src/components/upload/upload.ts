@@ -19,6 +19,12 @@ export class MUpload extends Vue {
 
     @Prop({ default: true })
     public multiple: boolean;
+    @Prop({ default: true })
+    public fileInput: boolean;
+    @Prop({ default: true })
+    public dragDrop: boolean;
+    @Prop({ default: true })
+    public filesList: boolean;
     @Prop({ default: 10 })
     public maxFilesAllow: number;
     @Prop({ default: () => [] })
@@ -57,6 +63,10 @@ export class MUpload extends Vue {
         }
     }
 
+    public remove(index: number): void {
+        this.globalFileList.splice(index, 1);
+    }
+
     public filesInput($event: Event) {
         let newFilesAdded: boolean = false;
 
@@ -93,13 +103,18 @@ export class MUpload extends Vue {
     }
 
     private addToGlobalFilelist(file: File): boolean {
-        if (this.hasTooManyFiles()) {
-            this.errorMsgs.push(`File ${file.name} wasn't add - Max number of files (${this.maxFilesAllow}) allow is reach`);
+        if (this.isFolder(file)) {
+            this.errorMsgs.push(`${file.name}: Cannot add folder`);
             return false;
         }
 
         if (this.isTooBig(file)) {
             this.errorMsgs.push(`File ${file.name} is bigger than max size ${this.maxSizeBytes} bytes`);
+            return false;
+        }
+
+        if (this.hasTooManyFiles()) {
+            this.errorMsgs.push(`File ${file.name} wasn't add - Max number of files (${this.maxFilesAllow}) allow is reach`);
             return false;
         }
 
@@ -127,6 +142,14 @@ export class MUpload extends Vue {
 
     private isTooBig(file: File): boolean {
         if (file.size > this.maxSizeBytes) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private isFolder(file: File): boolean {
+        if (file.type == '') {
             return true;
         } else {
             return false;
