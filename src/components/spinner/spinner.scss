@@ -1,0 +1,160 @@
+@import 'abstracts/variables';
+
+.m-message {
+    display: block;
+
+    &.m--is-regular {
+        &.m--is-success {
+            border: 1px solid $m-color--valid;
+
+            .m-message__icon {
+                background-color: $m-color--valid-lightest;
+                border-color: $m-color--valid;
+                color: $m-color--valid;
+            }
+
+            .m-message__body .m-message__close-button {
+                color: $m-color--valid;
+            }
+        }
+
+        &.m--is-information {
+            border: 1px solid $m-color--primary;
+
+            .m-message__icon {
+                background-color: $m-color--primary-lightest;
+                border-color: $m-color--primary;
+                color: $m-color--primary;
+            }
+
+            .m-message__body .m-message__close-button {
+                color: $m-color--primary;
+            }
+        }
+
+        &.m--is-warning {
+            border: 1px solid $m-color--yellow;
+
+            .m-message__icon {
+                background-color: $m-color--yellow-lightest;
+                border-color: $m-color--yellow;
+                color: $m-color--yellow;
+            }
+
+            .m-message__body .m-message__close-button {
+                color: $m-color--yellow;
+            }
+        }
+
+        &.m--is-error {
+            border: 1px solid $m-color--error;
+
+            .m-message__icon {
+                background-color: $m-color--error-lightest;
+                border-color: $m-color--error;
+                color: $m-color--error;
+            }
+
+            .m-message__body .m-message__close-button {
+                color: $m-color--error;
+            }
+        }
+
+        .m-message__wrap {
+            display: flex;
+        }
+
+        .m-message__icon {
+            width: 44px;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid;
+
+            .m-icon {
+                font-size: $m-message-size;
+            }
+        }
+
+        .m-message__body {
+            padding: $m-margin;
+            flex: 1;
+
+            &.m--have-close-button {
+                padding-right: $m-padding--l;
+                position: relative;
+            }
+
+            .m-message__close-button {
+                position: absolute;
+                top: 0;
+                right: 0;
+
+                .m-button__icon .m-icon {
+                    font-size: $m-font-size--xs;
+                    height: $m-font-size--xs;
+                }
+            }
+        }
+    }
+
+    &.m--is-light {
+        &.m--is-success {
+            .m-message__wrap {
+                background-color: $m-color--valid-lightest;
+            }
+        }
+
+        &.m--is-information {
+            .m-message__wrap {
+                background-color: $m-color--primary-lightest;
+            }
+        }
+
+        &.m--is-warning {
+            .m-message__wrap {
+                background-color: $m-color--yellow-lightest;
+            }
+        }
+
+        &.m--is-error {
+            .m-message__wrap {
+                background-color: $m-color--error-lightest;
+            }
+        }
+
+        .m-message__wrap {
+            display: inline-flex;
+
+            .m-message__body {
+                padding: $m-padding--s;
+            }
+
+            .m-message__icon {
+                align-items: flex-start;
+
+                .m-icon {
+                    font-size: $m-font-size--l;
+                    width: $m-font-size--l;
+                    margin-left: $m-padding--s;
+                    margin-top: $m-padding--s;
+                }
+            }
+        }
+    }
+
+    .m-message__icon {
+        display: flex;
+
+        .m-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .m-message__body {
+        p {
+            margin: 0;
+        }
+    }
+}

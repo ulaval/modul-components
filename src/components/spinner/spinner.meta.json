@@ -1,0 +1,43 @@
+{
+    "tag": "m-message",
+    "name": "m-message-meta:name",
+    "attributes": {
+        "state": {
+            "type": "string",
+            "values": [
+                "error",
+                "warning",
+                "information",
+                "success"
+            ],
+            "default": "success"
+        },
+        "mode": {
+            "type": "string",
+            "values": [
+                "light",
+                "regular"
+            ],
+            "default": "regular"
+        },
+        "icon": {
+            "type": "boolean",
+            "default": true
+        },
+        "closeButton": {
+            "type": "boolean",
+            "default": false
+        },
+        "visible": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-message-meta:context-of-use"
+        }
+    ]
+}
