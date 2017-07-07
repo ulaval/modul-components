@@ -1,161 +1,47 @@
 @import 'abstracts/variables';
-$m-spinner-size: 16px;
+$m-loading-speed: 0.7s;
 
 .m-spinner {
-    display: block;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
 
-    &.m--is-regular {
-        &.m--is-success {
-            border: 1px solid $m-color--valid;
+    &.m--is-processing {
 
-            .m-spinner__icon {
-                background-color: $m-color--valid-lightest;
-                border-color: $m-color--valid;
-                color: $m-color--valid;
-            }
-
-            .m-spinner__body .m-spinner__close-button {
-                color: $m-color--valid;
-            }
-        }
-
-        &.m--is-information {
-            border: 1px solid $m-color--primary;
-
-            .m-spinner__icon {
-                background-color: $m-color--primary-lightest;
-                border-color: $m-color--primary;
-                color: $m-color--primary;
-            }
-
-            .m-spinner__body .m-spinner__close-button {
-                color: $m-color--primary;
-            }
-        }
-
-        &.m--is-warning {
-            border: 1px solid $m-color--yellow;
-
-            .m-spinner__icon {
-                background-color: $m-color--yellow-lightest;
-                border-color: $m-color--yellow;
-                color: $m-color--yellow;
-            }
-
-            .m-spinner__body .m-spinner__close-button {
-                color: $m-color--yellow;
-            }
-        }
-
-        &.m--is-error {
-            border: 1px solid $m-color--error;
-
-            .m-spinner__icon {
-                background-color: $m-color--error-lightest;
-                border-color: $m-color--error;
-                color: $m-color--error;
-            }
-
-            .m-spinner__body .m-spinner__close-button {
-                color: $m-color--error;
-            }
-        }
-
-        .m-spinner__wrap {
-            display: flex;
-        }
-
-        .m-spinner__icon {
-            width: 44px;
-            justify-content: center;
-            align-items: center;
-            border-right: 1px solid;
-
-            .m-icon {
-                font-size: $m-spinner-size;
-            }
-        }
-
-        .m-spinner__body {
-            padding: $m-margin;
-            flex: 1;
-
-            &.m--have-close-button {
-                padding-right: $m-padding--l;
-                position: relative;
-            }
-
-            .m-spinner__close-button {
-                position: absolute;
-                top: 0;
-                right: 0;
-
-                .m-button__icon .m-icon {
-                    font-size: $m-font-size--xs;
-                    height: $m-font-size--xs;
-                }
-            }
-        }
     }
 
-    &.m--is-light {
-        &.m--is-success {
-            .m-spinner__wrap {
-                background-color: $m-color--valid-lightest;
-            }
-        }
-
-        &.m--is-information {
-            .m-spinner__wrap {
-                background-color: $m-color--primary-lightest;
-            }
-        }
-
-        &.m--is-warning {
-            .m-spinner__wrap {
-                background-color: $m-color--yellow-lightest;
-            }
-        }
-
-        &.m--is-error {
-            .m-spinner__wrap {
-                background-color: $m-color--error-lightest;
-            }
-        }
-
-        .m-spinner__wrap {
-            display: inline-flex;
-
-            .m-spinner__body {
-                padding: $m-padding--s;
-            }
-
-            .m-spinner__icon {
-                align-items: flex-start;
-
-                .m-icon {
-                    font-size: $m-font-size--l;
-                    width: $m-font-size--l;
-                    margin-left: $m-padding--s;
-                    margin-top: $m-padding--s;
-                }
-            }
-        }
+    &__title {
+        font-weight: 400;
+        white-space: pre-line;
+        margin-bottom: 2px;
+        font-size: 18px;
     }
 
-    .m-spinner__icon {
-        display: flex;
-
-        .m-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    &__description {
+        font-size: 16px;
+        margin-top: 0;
     }
 
-    .m-spinner__body {
-        p {
-            margin: 0;
+    &__icon {
+        animation: m-infinity-rotation $m-loading-speed linear infinite;
+
+        circle {
+            stroke-width: 4px;
+            fill: none;
+        }
+
+        .m-spinner {
+            &__circle-background {
+                stroke: $m-color--grey-light;
+            }
+
+            &__circle-foreground {
+                stroke-width: 4px;
+                stroke: $m-color--ul-yellow;
+                stroke-dasharray: 45 250;
+            }
         }
     }
 }
