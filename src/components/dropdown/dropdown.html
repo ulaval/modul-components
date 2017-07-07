@@ -1,7 +1,7 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': isDisabled }">
     <ul class="m-dropdown__list m--is-hidden" aria-hidden="true">
         <li class="m-dropdown__list__element">
-            <span class="m-dropdown__list__element__text" ref="mDropdownCalculate"></span>
+            <span class="m-dropdown__list__element-text" ref="mDropdownCalculate"></span>
         </li>
     </ul>
     <m-popper trigger="click"
@@ -21,7 +21,7 @@
                 :class="{ 'is-selected': element === propsSelectedElement }"
                 :key="index"
                 @click="selectElement($event, element)">
-                <a class="m-dropdown__list__element__text"
+                <a class="m-dropdown__list__element-text"
                    :data-index="index"
                    @keyup="keyupItem($event, index)"
                    tabindex="0">{{ getElementListText(element) }}</a>

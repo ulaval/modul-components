@@ -1,6 +1,7 @@
 @import 'abstracts/variables';
 $m-dropdown--color-hover: $m-color--grey-lightest;
 $m-dropdown--color-select: $m-color--grey-lighter;
+$m-dropdown--color-focus: $m-color--primary-lightest;
 $m-dropdown--color-active: $m-color--primary-lightest;
 $m-dropdown--margin: $m-padding--xs !default;
 
@@ -32,37 +33,42 @@ $m-dropdown--margin: $m-padding--xs !default;
             width: 100%;
 
             &:not(.is-selected) {
-                .m-dropdown__list__element__text {
+                .m-dropdown__list__element-text {
                     cursor: pointer;
                     transition: 0.3s background ease;
                 }
             }
 
             &.is-selected {
-                .m-dropdown__list__element__text {
+                .m-dropdown__list__element-text {
                     cursor: default;
                     background: $m-dropdown--color-select;
                 }
             }
 
             &.is-focus {
-                .m-dropdown__list__element__text {
+                .m-dropdown__list__element-text {
                     background: $m-dropdown--color-hover;
                 }
             }
 
-            &__text {
+            &-text {
+                transition: background 0.3s ease;
                 box-sizing: border-box;
                 display: inline-flex;
                 align-items: center;
                 width: 100%;
-                padding: $m-margin $m-padding;
+                padding: $m-padding;
                 color: $m-color--text;
                 text-decoration: none;
+                outline: none;
 
-                &:hover,
-                &:focus {
+                &:hover {
                     background: $m-dropdown--color-hover;
+                }
+
+                &:focus {
+                    background: $m-dropdown--color-focus;
                 }
 
                 &:active {
