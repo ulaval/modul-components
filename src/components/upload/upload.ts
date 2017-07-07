@@ -29,10 +29,10 @@ export class MUpload extends Vue {
     public error: boolean;
     @Prop({ default: 10 })
     public maxFilesAllow: number;
-    @Prop({ default: () => [] })
-    public extensions: string[];
     @Prop({ default: 26214400 }) // 25 Mo
     public maxSizeBytes: number;
+    @Prop({ default: () => [] })
+    public extensions: string[];
 
     public globalFileList: GlobalFileList[] = [];
     public errorMsgs: string[] = [];

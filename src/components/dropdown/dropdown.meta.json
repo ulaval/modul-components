@@ -3,22 +3,18 @@
     "name": "m-dropdown-meta:name",
     "attributes": {
         "elements": {
-            "type": "string[]",
+            "type": "any[]",
             "default": []
         },
         "selectedElement": {
-            "type": "string",
-            "default": []
+            "type": "any"
         },
         "getTexteElement": {
             "type": "Function"
         },
-        "state": {
-            "type": "string",
-            "values": [
-                "disabled"
-            ],
-            "default": ""
+        "isOpen": {
+            "type": "boolean",
+             "default": false
         },
         "isSort": {
             "type": "boolean",
@@ -27,14 +23,18 @@
         "sortMethod": {
             "type": "Function"
         },
-        "nullValue": {
-            "type": "string"
-        },
         "widthFromCss": {
             "type": "boolean",
             "default": false
         },
         "isEditable": {
+            "type": "boolean",
+            "default": false
+        },
+        "defaultText": {
+            "type": "string"
+        },
+        "defaultFirstElement": {
             "type": "boolean",
             "default": false
         }

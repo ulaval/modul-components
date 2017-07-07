@@ -21,7 +21,7 @@ export class MPopper extends Vue {
     @Prop({ default: 'default' })
     public mode: string;
     @Prop({
-        default: 'hover',
+        default: 'click',
         validator: (value) => ['click', 'hover'].indexOf(value) > -1
     })
     public trigger: string;

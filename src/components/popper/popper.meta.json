@@ -2,36 +2,9 @@
     "tag": "m-popper",
     "name": "m-popper-meta:name",
     "attributes": {
-        "options": {
+        "mode": {
             "type": "string",
-            "values": [
-                "placement",
-                "gpuAcceleration"
-            ]
-        },
-        "transition": {
-        },
-        "visibleArrow": {
-            "type": "boolean",
-            "default": false
-        },
-        "appendToBody": {
-            "type": "boolean",
-            "default": false
-        },
-        "forceShow": {
-            "type": "boolean",
-            "default": false
-        },
-        "reference": {
-        },
-        "boundariesSelector": {
-        },
-        "content": {
-        },
-        "disabled": {
-            "type": "boolean",
-            "default": false
+            "default": "default"
         },
         "trigger": {
             "type": "string",
@@ -39,7 +12,40 @@
                 "hover",
                 "click"
             ],
-            "default": "hover"
+            "default": "click"
+        },
+        "isOpen": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "content": {
+        },
+        "boundariesSelector": {
+        },
+        "reference": {
+        },
+        "forceShow": {
+            "type": "boolean",
+            "default": false
+        },
+        "appendToBody": {
+            "type": "boolean",
+            "default": false
+        },
+        "visibleArrow": {
+            "type": "boolean",
+            "default": false
+        },
+        "options": {
+            "type": "string",
+            "values": [
+                "placement",
+                "gpuAcceleration"
+            ]
         },
         "closeOnContentClick": {
             "type": "boolean",
