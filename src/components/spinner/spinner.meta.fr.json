@@ -1,6 +1,6 @@
 {
-    "m-message-meta": {
-        "name": "Message",
-        "context-of-use": "Décrire ici le contexte d'utilisation du message."
+    "m-spinner-meta": {
+        "name": "Action en cours",
+        "context-of-use": "Décrire ici le contexte d'utilisation du Action en cours."
     }
 }

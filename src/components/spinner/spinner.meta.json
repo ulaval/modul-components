@@ -1,6 +1,6 @@
 {
-    "tag": "m-message",
-    "name": "m-message-meta:name",
+    "tag": "m-spinner",
+    "name": "m-spinner-meta:name",
     "attributes": {
         "mode": {
             "type": "string",
@@ -15,7 +15,7 @@
         {
             "type": "rubric",
             "title": "meta:context-of-use",
-            "content": "m-message-meta:context-of-use"
+            "content": "m-spinner-meta:context-of-use"
         }
     ]
 }
