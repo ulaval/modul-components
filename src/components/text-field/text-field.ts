@@ -55,6 +55,7 @@ export class MTexteField extends Vue implements InputStateMixin {
     @Watch('value')
     private valueChanged(value: string): void {
         this.propsValue = this.value;
+        this.checkHasValue();
     }
 
     @Watch('propsValue')
@@ -86,7 +87,7 @@ export class MTexteField extends Vue implements InputStateMixin {
 
     private onFocus(event): void {
         this.isFocusActive = this.isDisabled ? false : true;
-        if (!this.isDisabled) {
+        if (!this.isDisabled && !this.isForceFocus) {
             this.$refs.input['focus']();
             this.checkHasValue();
             this.checkHasDefaultText();
@@ -96,7 +97,7 @@ export class MTexteField extends Vue implements InputStateMixin {
 
     private onBlur(event): void {
         this.isFocusActive = this.isDisabled ? true : false;
-        if (!this.isDisabled) {
+        if (!this.isDisabled && !this.isForceFocus) {
             this.checkHasValue();
             this.checkHasDefaultText();
             this.$emit('blur', event, this.propsValue);
@@ -104,7 +105,7 @@ export class MTexteField extends Vue implements InputStateMixin {
     }
 
     private onKeyup(event): void {
-        if (!this.isDisabled) {
+        if (!this.isDisabled && !this.isForceFocus) {
             this.checkHasValue();
             this.checkHasDefaultText();
             this.$emit('keyup', event, this.propsValue);
