@@ -1,0 +1,21 @@
+{
+    "tag": "m-limit-text",
+    "name": "m-limit-text-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "loading",
+                "processing"
+            ],
+            "default": "loading"
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-limit-text-meta:context-of-use"
+        }
+    ]
+}

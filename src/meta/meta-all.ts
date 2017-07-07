@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import {
-    ACCORDION_NAME, ACCORDION_GROUP_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, ICON_NAME, LINK_NAME,
+    ACCORDION_NAME, ACCORDION_GROUP_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, LIMIT_TEXT_NAME, ICON_NAME, LINK_NAME,
     LIST_BULLET_NAME, MESSAGE_NAME, PANEL_NAME, POPPER_LIST_NAME, POPPER_NAME, RADIO_BUTTONS_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
     UPLOAD_NAME
 } from '../components/component-names';
@@ -22,6 +22,7 @@ export class MetaAll implements PluginObject<any> {
         (options as Meta).mergeComponentMeta(DYNAMIC_TEMPLATE_NAME, require('../components/dynamic-template/dynamic-template.meta.json'));
         (options as Meta).mergeComponentMeta(I18N_NAME, require('../components/i18n/i18n.meta.json'));
         (options as Meta).mergeComponentMeta(ICON_NAME, require('../components/icon/icon.meta.json'));
+        (options as Meta).mergeComponentMeta(LIMIT_TEXT_NAME, require('../components/limit-text/limit-text.meta.json'));
         (options as Meta).mergeComponentMeta(LINK_NAME, require('../components/link/link.meta.json'));
         (options as Meta).mergeComponentMeta(LIST_BULLET_NAME, require('../components/list-bullet/list-bullet.meta.json'));
         (options as Meta).mergeComponentMeta(MESSAGE_NAME, require('../components/message/message.meta.json'));

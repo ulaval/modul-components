@@ -8,6 +8,7 @@ export const DROPDOWN_NAME: string = 'm-dropdown';
 export const DYNAMIC_TEMPLATE_NAME: string = 'm-dynamic-template';
 export const I18N_NAME: string = 'm-i18n';
 export const ICON_NAME: string = 'm-icon';
+export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
 export const LIST_BULLET_NAME: string = 'm-list-bullet';
 export const MESSAGE_NAME: string = 'm-message';
@@ -38,6 +39,7 @@ export const components: string[] = [
     DYNAMIC_TEMPLATE_NAME,
     I18N_NAME,
     ICON_NAME,
+    LIMIT_TEXT_NAME,
     LINK_NAME,
     LIST_BULLET_NAME,
     MESSAGE_NAME,
