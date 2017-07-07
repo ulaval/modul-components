@@ -1,8 +1,8 @@
-<div class="m-spinner":class="{ 'm--is-loading': mode=='loading', 'm--is-processing': mode=='processing'}">
+<div class="m-spinner" :class="{ 'm--is-loading': mode=='loading', 'm--is-processing': mode=='processing'}">
     <svg class="m-spinner__icon" height="50" width="50">
         <g transform="translate(25, 25)">
-            <circle class="m-spinner__circle-background" r="20"/>
-            <circle class="m-spinner__circle-foreground" r="20"/>
+            <circle class="m-spinner__circle-background" r="20" />
+            <circle class="m-spinner__circle-foreground" r="20" />
         </g>
     </svg>
     <p class="m-spinner__title">
@@ -16,4 +16,3 @@
         </slot>
     </p>
 </div>
-
