@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i");
 @keyframes m-infinity-rotation {
   0% {
     transform: rotate(-90deg); }
@@ -17,7 +18,7 @@ html {
   box-sizing: border-box; }
 
 body {
-  font-family: "SourceSansPro", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
   font-weight: 300;
   font-style: normal;
   font-size: 16px;
@@ -29,46 +30,6 @@ body {
   background: #ffc103;
   color: #000; }
 
-@font-face {
-  font-family: "SourceSansPro";
-  font-weight: 500;
-  font-style: normal;
-  src: url("https://contenu.monportail.ulaval.ca/mpo/modules/sourcesanspro/1.0.51/SourceSansPro-Regular/SourceSansPro-Semibold.ttf"); }
-@font-face {
-  font-family: "SourceSansPro";
-  font-weight: 500;
-  font-style: italic;
-  src: url("https://contenu.monportail.ulaval.ca/mpo/modules/sourcesanspro/1.0.51/SourceSansPro-Regular/SourceSansPro-SemiboldIt.ttf"); }
-@font-face {
-  font-family: "SourceSansPro";
-  font-weight: 400;
-  font-style: normal;
-  src: url("https://contenu.monportail.ulaval.ca/mpo/modules/sourcesanspro/1.0.51/SourceSansPro-Regular/SourceSansPro-Regular.ttf"); }
-@font-face {
-  font-family: "SourceSansPro";
-  font-weight: 400;
-  font-style: italic;
-  src: url("https://contenu.monportail.ulaval.ca/mpo/modules/sourcesanspro/1.0.51/SourceSansPro-Regular/SourceSansPro-It.ttf"); }
-@font-face {
-  font-family: "SourceSansPro";
-  font-weight: 300;
-  font-style: normal;
-  src: url("https://contenu.monportail.ulaval.ca/mpo/modules/sourcesanspro/1.0.51/SourceSansPro-Regular/SourceSansPro-Light.ttf"); }
-@font-face {
-  font-family: "SourceSansPro";
-  font-weight: 300;
-  font-style: italic;
-  src: url("https://contenu.monportail.ulaval.ca/mpo/modules/sourcesanspro/1.0.51/SourceSansPro-Regular/SourceSansPro-LightIt.ttf"); }
-@font-face {
-  font-family: "SourceSansPro";
-  font-weight: 200;
-  font-style: normal;
-  src: url("https://contenu.monportail.ulaval.ca/mpo/modules/sourcesanspro/1.0.51/SourceSansPro-Regular/SourceSansPro-ExtraLight.ttf"); }
-@font-face {
-  font-family: "SourceSansPro";
-  font-weight: 200;
-  font-style: italic;
-  src: url("https://contenu.monportail.ulaval.ca/mpo/modules/sourcesanspro/1.0.51/SourceSansPro-Regular/SourceSansPro-ExtraLightIt.ttf"); }
 .m-u--margin {
   margin: 12px; }
   .m-u--margin--l {
