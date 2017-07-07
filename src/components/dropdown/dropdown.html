@@ -28,7 +28,9 @@
             </li>
             <li v-if="elementsCount <= 0"
                 class="m-dropdown__list__element">
-                <span class="m-dropdown__list__element__text"><m-i18n i18n-key="m-dropdown:no-result"></m-i18n></span>
+                <span class="m-dropdown__list__element__text">
+                    <m-i18n i18n-key="m-dropdown:no-result"></m-i18n>
+                </span>
             </li>
         </ul>
 
@@ -37,11 +39,11 @@
                       :value="textElement"
                       :state="propsState"
                       :is-editable="isEditable"
-                      :is-force-focus="listIsOpen"
+                      :is-force-focus="isOpen"
                       :default-text="defaultText"
                       @valueChanged="textElement = $event"
                       @keyup="keyupReference">
-                      <slot></slot>
+            <slot></slot>
         </m-text-field>
     </m-popper>
     <m-validation-message

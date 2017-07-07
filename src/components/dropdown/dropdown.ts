@@ -155,6 +155,8 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     public isEditable: boolean;
     @Prop()
     public defaultText: string;
+    @Prop({ default: false })
+    public defaultFirstElement: boolean;
     // @Prop({ default: false })
     // public name: boolean;
     // @Prop({ default: false })
@@ -406,12 +408,9 @@ export class MDropdown extends ModulVue implements InputStateMixin {
             }
 
             // Default element
-            // if (typeof this.propsSelectedElement == UNDEFINED) {
-            //     if (!this.defaultValueAvailable) {
-            //         // No defaultValue => 1st element is selected by default
-            //         // this.propsSelectedElement = elementsSorted[0];
-            //     }
-            // }
+            if (this.defaultFirstElement && elementsSorted[0]) {
+                this.propsSelectedElement = elementsSorted[0];
+            }
             this.textElement = this.getSelectedElementText();
         }
 
