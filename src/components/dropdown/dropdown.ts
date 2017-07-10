@@ -284,8 +284,21 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     }
 
     public toggleDropdown(value: boolean): void {
+        if (value) {
+            this.setDropdownElementFocus();
+        }
         this.propsIsOpen = value;
         this.$emit('isOpen', value);
+    }
+
+    public setDropdownElementFocus(): void {
+        let list: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
+        let element: HTMLElement = this.$el.querySelector('[data-index=\'0\']') as HTMLElement;
+        if (element) {
+            // list.focus();
+            element.focus();
+        }
+        // console.log(element);
     }
 
     public keyupReference($event): void {
@@ -308,41 +321,44 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         switch ($event.keyCode) {
             case KeyCode.DOM_VK_UP:
                 if (index == 0) {
-                    selector = '[data-index=\'' + (this.elementsSortedFiltered.length - 1) + '\']';
+                    selector = `[data-index='0']`;
                 } else {
-                    selector = '[data-index=\'' + (index - 1) + '\']';
+                    selector = `[data-index='${index - 1}']`;
                 }
                 break;
             case KeyCode.DOM_VK_HOME:
-                selector = '[data-index=\'0\']';
+                selector = `[data-index='0']`;
                 break;
             case KeyCode.DOM_VK_PAGE_UP:
                 index -= PAGE_STEP;
                 if (index < 0) {
                     index = 0;
                 }
-                selector = '[data-index=\'' + index + '\']';
+                selector = `[data-index='${index}']`;
                 break;
             case KeyCode.DOM_VK_DOWN:
                 if (index == this.elementsSortedFiltered.length - 1) {
-                    selector = '[data-index=\'0\']';
+                    selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
                 } else {
-                    selector = '[data-index=\'' + (index + 1) + '\']';
+                    selector = `[data-index='${index + 1}']`;
                 }
                 break;
             case KeyCode.DOM_VK_END:
-                selector = '[data-index=\'' + (this.elementsSortedFiltered.length - 1) + '\']';
+                selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
                 break;
             case KeyCode.DOM_VK_PAGE_DOWN:
                 index += PAGE_STEP;
                 if (index >= this.elementsSortedFiltered.length) {
                     index = this.elementsSortedFiltered.length - 1;
                 }
-                selector = '[data-index=\'' + index + '\']';
+                selector = `[data-index='${index}']`;
                 break;
+            // case KeyCode.DOM_VK_RIGHT:
+            //     selector = `[data-index='8']`;
+            //     break;
             case KeyCode.DOM_VK_ENTER:
             case KeyCode.DOM_VK_RETURN:
-                let element: HTMLElement = this.$el.querySelector('[data-index=\'' + index + '\']') as HTMLElement;
+                let element: HTMLElement = this.$el.querySelector(`[data-index='${index}']`) as HTMLElement;
                 if (element) {
                     element.click();
                 }

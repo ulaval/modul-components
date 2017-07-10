@@ -105,7 +105,7 @@ export class MTexteField extends Vue implements InputStateMixin {
     }
 
     private onKeyup(event): void {
-        if (!this.isDisabled && !this.isForceFocus) {
+        if (!this.isDisabled) {
             this.checkHasValue();
             this.checkHasDefaultText();
             this.$emit('keyup', event, this.propsValue);
