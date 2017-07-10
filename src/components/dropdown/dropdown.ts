@@ -179,8 +179,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
     private elementsSorted: Array<any>;
 
-    private isScreenMaxS: boolean;
-
     @Watch('elements')
     public elementChanged(value): void {
         this.prepareElements();
@@ -219,8 +217,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
         // Run in created() to run before computed data
         this.prepareElements();
-
-        console.log('isScreenMaxS', this.isScreenMaxS);
     }
 
     public mounted() {
@@ -292,7 +288,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     public toggleDropdown(value: boolean): void {
         this.propsIsOpen = value;
         if (value) {
-            this.$el.style.zIndex = '3';
+            this.$el.style.zIndex = '10';
         } else {
             this.$el.style.removeProperty('zIndex');
         }
