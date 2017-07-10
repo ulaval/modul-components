@@ -14,14 +14,16 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: auto;
-
-        @media screen and (min-width: $m-screen--min--s) {
-            padding: $m-padding--l;
-        }
+        outline: none;
 
         &.m--is-primary {
+            overflow-x: hidden;
+            overflow-y: auto;
             padding: $m-padding;
+
+            @media screen and (min-width: $m-screen--min--s) {
+                padding: $m-padding--l;
+            }
 
             .m-dialog {
                 &__article {
@@ -57,6 +59,9 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
         }
 
         &.m--is-secondary {
+            overflow-x: hidden;
+            overflow-y: auto;
+
             .m-dialog {
                 &__article {
                     overflow: hidden;
@@ -64,7 +69,7 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                     flex-direction: column;
 
                     @media screen and (max-width: #{$m-screen--max--s}) {
-                        transition: 0.45s transform ease;
+                        transition: 0.6s transform ease;
                         position: absolute;
                         top: 0;
                         bottom: 0;
@@ -129,6 +134,51 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
             }
         }
 
+        &.m--is-panel {
+            transition: transform 0.6s ease;
+            transform: translate3d(0, 100%, 0);
+
+            .m-dialog {
+                &__article {
+                    position: absolute;
+                    bottom: 0;
+                    display: flex;
+                    flex-direction: column;
+                    min-height: $m-touch-size--l;
+                    max-height: calc(100vh - 70px);
+                }
+
+                &__header {
+                    min-height: $m-touch-size;
+                    border-bottom: 1px solid $m-color--grey-light;
+                }
+
+                &__close-button {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: $m-padding;
+                    background: none;
+                    border: none;
+                    font-size: $m-font-size;
+                    color: $m-color--white;
+                    outline: none;
+                    cursor: pointer;
+                    transform: translate3d(0, -100%, 0);
+                }
+
+                &__body {
+                    flex: 1;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                }
+            }
+
+            &.m--is-open {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
         &.m--is-clickable-backdrop {
             cursor: pointer;
         }
@@ -148,9 +198,15 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
     &__header {
         display: flex;
         align-items: center;
+        width: 100%;
         padding: $m-margin $m-padding;
 
-        &__title {
+        &__title,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
             flex: 1;
             margin: 0;
             font-size: $m-font-size--h5;
@@ -163,9 +219,13 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
         padding: 0 $m-padding $m-padding;
         text-align: center;
 
-        &__nav {
+        &-nav {
             display: inline-flex;
             flex-direction: column;
+
+            &__first-button {
+                margin: 0;
+            }
         }
 
         .m-button {

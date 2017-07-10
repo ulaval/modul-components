@@ -5,17 +5,26 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dialog.html?style=./dialog.scss';
 import { DIALOG_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
+import { MediaQueries } from '../../../src/mixins/media-queries/media-queries';
 
-const DIALOG_MODE_PRIMARY = 'primary';
-const DIALOG_MODE_SECONDARY = 'secondary';
+const MODE_PRIMARY = 'primary';
+const MODE_SECONDARY = 'secondary';
+const MODE_PANEL = 'panel';
+
+const TRANSITION_DURATION = 300;
+const TRANSITION_DURATION_LONG = 600;
 
 @WithRender
-@Component
+@Component({
+    mixins: [MediaQueries]
+})
 export class MDialog extends ModulVue {
-    @Prop({ default: DIALOG_MODE_PRIMARY })
+    @Prop({ default: MODE_PRIMARY })
     public mode: string;
     @Prop({ default: 'mDialog' })
     public id: string;
+    @Prop()
+    public className: string;
     @Prop({ default: false })
     public isOpen: boolean;
     @Prop({ default: 'body' })
@@ -27,16 +36,16 @@ export class MDialog extends ModulVue {
 
     public componentName: string = DIALOG_NAME;
 
-    private propsMode: string = 'primary';
     private propsIsOpen: boolean = false;
     private propsId: string = 'mDialog';
     private propsTargetElement: HTMLElement = document.body;
-    private propsIsCloseOnBackdrop: boolean = true;
     private elementPortalTarget: HTMLElement = document.createElement('div');
+    private propsIsCloseOnBackdrop: boolean;
     private nbDialog: number = 0;
     private isVisible: boolean = false;
     private isAnimActive: boolean = false;
-    private isMinSmall: boolean;
+    private isScreenMinS: boolean;
+    private transitionDuration: number = TRANSITION_DURATION;
 
     @Watch('targetElement')
     private setTargetElement(newTagetElement): void {
@@ -51,26 +60,12 @@ export class MDialog extends ModulVue {
         } else {
             this.closeDialog();
         }
-        this.$emit('isOpen', this.propsIsOpen);
     }
 
     private beforeMount(): void {
         this.setTargetElement(this.targetElement);
-        this.propsIsCloseOnBackdrop = this.isCloseOnBackdrop;
-        this.propsMode = this.mode;
         if (this.isOpen) {
             this.openDialog();
-        }
-        switch (this.propsMode) {
-            case 'secondary':
-                if (this.propsIsCloseOnBackdrop == undefined) {
-                    this.propsIsCloseOnBackdrop = true;
-                }
-                break;
-            default:
-                if (this.propsIsCloseOnBackdrop == undefined) {
-                    this.propsIsCloseOnBackdrop = false;
-                }
         }
     }
 
@@ -90,8 +85,8 @@ export class MDialog extends ModulVue {
             }, 2);
             setTimeout(() => {
                 this.isAnimActive = false;
-            }, 300);
-            this.$emit('open');
+            }, this.transitionDuration);
+            this.$emit('toggleOpen', true);
         }
     }
 
@@ -107,8 +102,8 @@ export class MDialog extends ModulVue {
                 this.propsIsOpen = false;
                 this.deleteDialog();
                 this.isAnimActive = false;
-                this.$emit('close');
-            }, 300);
+                this.$emit('toggleIsOpen', false);
+            }, this.transitionDuration);
         }
     }
 
@@ -158,12 +153,38 @@ export class MDialog extends ModulVue {
         return document.querySelector('#' + this.propsId) as HTMLElement;
     }
 
+    private get propsMode(): string {
+        let mode: string = this.mode == MODE_SECONDARY || this.mode == MODE_PANEL ? this.mode : MODE_PRIMARY;
+        switch (mode) {
+            case MODE_SECONDARY:
+                this.propsIsCloseOnBackdrop = this.isCloseOnBackdrop == undefined ? true : this.isCloseOnBackdrop;
+                this.transitionDuration = this.isScreenMinS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
+                break;
+            case MODE_PANEL:
+                this.propsIsCloseOnBackdrop = this.isCloseOnBackdrop == undefined ? true : this.isCloseOnBackdrop;
+                this.transitionDuration = TRANSITION_DURATION_LONG;
+                break;
+            default:
+                this.propsIsCloseOnBackdrop = this.isCloseOnBackdrop == undefined ? false : this.isCloseOnBackdrop;
+                this.transitionDuration = TRANSITION_DURATION;
+        }
+        return mode;
+    }
+
     private get hasTitle(): boolean {
         return this.title == '' ? false : true;
     }
 
     private get hasDefaultSlots(): boolean {
         return !!this.$slots.default;
+    }
+
+    private get hasHeaderSlot(): boolean {
+        return !!this.$slots.header;
+    }
+
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
     }
 }
 

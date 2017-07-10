@@ -1,12 +1,19 @@
 <span class="m-dialog">
     <portal v-if="propsIsOpen" :targetEl="'#' + propsId">
         <div class="m-dialog__wrap"
-             :class="{ 'm--is-open': isVisible, 'm--is-primary': propsMode == 'primary', 'm--is-secondary': propsMode == 'secondary', 'm--is-clickable-backdrop': propsIsCloseOnBackdrop}"
+             :class="[{ 'm--is-open': isVisible, 'm--is-primary': propsMode == 'primary', 'm--is-secondary': propsMode == 'secondary', 'm--is-panel': propsMode == 'panel', 'm--is-clickable-backdrop': propsIsCloseOnBackdrop }, className]"
              @click.self="backdropClick"
              tabindex="-1">
             <article class="m-dialog__article">
-                <header class="m-dialog__header" :class="{ 'm--has-title': hasTitle }" v-if="hasTitle || propsMode == 'secondary'">
+                <button type="button" @click="closeDialog" class="m-dialog__close-button" v-if="propsMode == 'panel'">
+                    <m-i18n i18n-key="m-dialog:close"></m-i18n>
+                </button>
+                <header class="m-dialog__header" :class="{ 'm--has-title': hasTitle }" v-if="hasHeaderSlot || hasTitle || propsMode == 'secondary'">
+                    <slot name="header"></slot>
                     <h2 class="m-dialog__header__title" v-if="hasTitle">{{ title }}</h2>
+                    <h2 v-if="!hasTitle && !hasHeaderSlot && propsMode == 'secondary'">
+                        Error: m-dialog in secondary mode needs a header slot or title prop.
+                    </h2>
                     <m-button @click="closeDialog" mode="icon" iconName="default" class="m-dialog__header__close-button" v-if="propsMode == 'secondary'">
                         <m-i18n i18n-key="m-dialog:close"></m-i18n>
                     </m-button>
@@ -17,16 +24,15 @@
                         Consectetur quisquam, praesentium.
                     </slot>
                 </div>
-                <footer class="m-dialog__footer">
-                    <nav class="m-dialog__footer__nav">
-                        <slot name="footer">
-                            <m-button @click="closeDialog">
-                                <m-i18n i18n-key="m-dialog:ok"></m-i18n>
-                            </m-button>
-                            <m-button @click="closeDialog" mode="secondary">
-                                <m-i18n i18n-key="m-dialog:cancel"></m-i18n>
-                            </m-button>
-                        </slot>
+                <footer class="m-dialog__footer" v-if="hasFooterSlot || propsMode == 'primary'">
+                    <slot name="footer"></slot>
+                    <nav class="m-dialog__footer-nav" v-if="!hasFooterSlot">
+                        <m-button @click="closeDialog" class="m-dialog__footer-nav__first-button">
+                            <m-i18n i18n-key="m-dialog:ok"></m-i18n>
+                        </m-button>
+                        <m-button @click="closeDialog" mode="secondary">
+                            <m-i18n i18n-key="m-dialog:cancel"></m-i18n>
+                        </m-button>
                     </nav>
                 </footer>
             </article>
