@@ -7,6 +7,7 @@ import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -132,7 +133,8 @@ export class KeyCode {
 @WithRender
 @Component({
     mixins: [
-        InputState
+        InputState,
+        MediaQueries
     ]
 })
 export class MDropdown extends ModulVue implements InputStateMixin {
@@ -177,6 +179,8 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
     private elementsSorted: Array<any>;
 
+    private isScreenMaxS: boolean;
+
     @Watch('elements')
     public elementChanged(value): void {
         this.prepareElements();
@@ -215,6 +219,8 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
         // Run in created() to run before computed data
         this.prepareElements();
+
+        console.log('isScreenMaxS', this.isScreenMaxS);
     }
 
     public mounted() {

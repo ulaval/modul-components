@@ -20,14 +20,15 @@
                 :class="{ 'is-selected': element === propsSelectedElement }"
                 :key="index"
                 @click="selectElement($event, element)">
-                <a class="m-dropdown__list__element-text"
+                <a href="#"
+                   class="m-dropdown__list__element-text"
                    :data-index="index"
-                   @keyup="keyupItem($event, index)"
-                   tabindex="0">{{ getElementListText(element) }}</a>
+                   @click.prevent
+                   @keyup="keyupItem($event, index)">{{ getElementListText(element) }}</a>
             </li>
             <li v-if="elementsCount <= 0"
                 class="m-dropdown__list__element">
-                <span class="m-dropdown__list__element__text">
+                <span class="m-dropdown__list__element-text">
                     <m-i18n i18n-key="m-dropdown:no-result"></m-i18n>
                 </span>
             </li>
@@ -42,7 +43,7 @@
                       :default-text="defaultText"
                       @valueChanged="textElement = $event"
                       @keyup="keyupReference"
-                      tabindex="0">
+                      @focus="propsIsOpen = true">
             <slot></slot>
         </m-text-field>
     </m-popper>
