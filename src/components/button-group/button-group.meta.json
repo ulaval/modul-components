@@ -13,8 +13,12 @@
             "default": 0
         },
         "icon": {
-            "type": "string",
-            "default": false
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
         },
         "iconPosition": {
             "type": "string",
@@ -26,7 +30,11 @@
         },
         "fullSize": {
             "type": "boolean",
-            "default": false
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
         }
     },
     "overview": [
