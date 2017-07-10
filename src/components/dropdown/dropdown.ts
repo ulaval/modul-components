@@ -284,21 +284,23 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     }
 
     public toggleDropdown(value: boolean): void {
-        if (value) {
-            this.setDropdownElementFocus();
-        }
         this.propsIsOpen = value;
         this.$emit('isOpen', value);
+
+        Vue.nextTick(() => {
+            if (value) {
+                this.setDropdownElementFocus();
+            }
+        });
     }
 
     public setDropdownElementFocus(): void {
-        let list: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
-        let element: HTMLElement = this.$el.querySelector('[data-index=\'0\']') as HTMLElement;
-        if (element) {
-            // list.focus();
-            element.focus();
+        if (!this.isEditable) {
+            let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
+            if (element) {
+                element.focus();
+            }
         }
-        // console.log(element);
     }
 
     public keyupReference($event): void {
@@ -309,7 +311,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
         if (this.propsIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_END || $event.keyCode == KeyCode.DOM_VK_PAGE_DOWN)) {
             $event.preventDefault();
-            let htmlElement: HTMLElement = this.$el.querySelector('[data-index=\'0\']') as HTMLElement;
+            let htmlElement: HTMLElement = this.$el.querySelector(`[data-index='0']`) as HTMLElement;
             if (htmlElement) {
                 htmlElement.focus();
             }
@@ -353,9 +355,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
                 }
                 selector = `[data-index='${index}']`;
                 break;
-            // case KeyCode.DOM_VK_RIGHT:
-            //     selector = `[data-index='8']`;
-            //     break;
             case KeyCode.DOM_VK_ENTER:
             case KeyCode.DOM_VK_RETURN:
                 let element: HTMLElement = this.$el.querySelector(`[data-index='${index}']`) as HTMLElement;
