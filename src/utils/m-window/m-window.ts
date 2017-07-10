@@ -20,7 +20,7 @@ export class MWindow {
     public arrWindow: any = new Array();
 
     public backdropElement: HTMLElement;
-    public backdropId: string;
+    public backdropId: string = '';
     public windowZIndex: number = Z_INDEZ_DEFAULT;
 
     public addWindow(windowId): void {
@@ -51,20 +51,23 @@ export class MWindow {
     }
 
     public createBackdrop(targetElement: HTMLElement = this.bodyElement): void {
-        this.backdropElement = document.createElement('div');
-        this.backdropId = BACKDROP_ID + '-' + uuid.generate();
-        this.backdropElement.setAttribute('id', this.backdropId);
-        this.backdropElement.setAttribute('class', BACKDROP_CLASS_NAME);
-        this.backdropElement.setAttribute('aria-hidden', 'true');
-        this.setBackdropStyle();
-        targetElement.appendChild(this.backdropElement);
-        this.backdropElement = document.querySelector('#' + this.backdropId) as HTMLElement;
-        setTimeout(() => {
-            this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_VISIBLE;
-        }, 2);
+        if (this.backdropId == '') {
+            this.backdropElement = document.createElement('div');
+            this.backdropId = BACKDROP_ID + '-' + uuid.generate();
+            this.backdropElement.setAttribute('id', this.backdropId);
+            this.backdropElement.setAttribute('class', BACKDROP_CLASS_NAME);
+            this.backdropElement.setAttribute('aria-hidden', 'true');
+            this.setBackdropStyle();
+            targetElement.appendChild(this.backdropElement);
+            this.backdropElement = document.querySelector('#' + this.backdropId) as HTMLElement;
+            setTimeout(() => {
+                this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_VISIBLE;
+            }, 2);
+        }
     }
 
     public removeBackdrop() {
+        this.backdropId = '';
         this.backdropElement.remove();
     }
 
