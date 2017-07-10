@@ -279,6 +279,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         width = Math.ceil(width) + 25;
         // Set width to Input and List
         valueField.$el.style.width = width + 'px';
+        this.$el.style.width = width + 'px';
         elements.style.width = width + 'px';
     }
 
