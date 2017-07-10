@@ -86,6 +86,11 @@ export class MDialog extends ModulVue {
             setTimeout(() => {
                 this.isAnimActive = false;
             }, this.transitionDuration);
+            ModulVue.nextTick(() => {
+                this.$refs.dialogWrap['setAttribute']('tabindex', '0');
+                this.$refs.dialogWrap['focus']();
+                this.$refs.dialogWrap['removeAttribute']('tabindex');
+            });
             this.$emit('toggleOpen', true);
         }
     }
@@ -103,6 +108,11 @@ export class MDialog extends ModulVue {
                 this.deleteDialog();
                 this.isAnimActive = false;
                 this.$emit('toggleIsOpen', false);
+                ModulVue.nextTick(() => {
+                    this.$refs.dialogButton['setAttribute']('tabindex', '0');
+                    this.$refs.dialogButton['focus']();
+                    this.$refs.dialogButton['removeAttribute']('tabindex');
+                });
             }, this.transitionDuration);
         }
     }

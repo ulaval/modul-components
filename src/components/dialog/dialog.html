@@ -3,7 +3,7 @@
         <div class="m-dialog__wrap"
              :class="[{ 'm--is-open': isVisible, 'm--is-primary': propsMode == 'primary', 'm--is-secondary': propsMode == 'secondary', 'm--is-panel': propsMode == 'panel', 'm--is-clickable-backdrop': propsIsCloseOnBackdrop }, className]"
              @click.self="backdropClick"
-             tabindex="-1">
+             ref="dialogWrap">
             <article class="m-dialog__article">
                 <button type="button" @click="closeDialog" class="m-dialog__close-button" v-if="propsMode == 'panel'">
                     <m-i18n i18n-key="m-dialog:close"></m-i18n>
@@ -38,7 +38,7 @@
             </article>
         </div>
     </portal>
-    <span @click="openDialog" class="m-dialog__button" v-if="hasDefaultSlots">
+    <span @click="openDialog" class="m-dialog__button" ref="dialogButton" v-if="hasDefaultSlots">
         <slot></slot>
     </span>
     <span v-if="!hasDefaultSlots">
