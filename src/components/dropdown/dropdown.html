@@ -9,10 +9,10 @@
               :closeOnContentClick="true"
               :closeOnReferenceClick="false"
               :disabled="isDisabled"
-              :isOpen="isOpen"
+              :isOpen="propsIsOpen"
               mode="dropdown"
-              @show="toggleList(true)"
-              @hide="toggleList(false)">
+              @show="toggleDropdown(true)"
+              @hide="toggleDropdown(false)">
         <ul class="m-dropdown__list"
             ref="mDropdownElements">
             <li v-for="(element, index) in elementsSortedFiltered"
@@ -39,10 +39,11 @@
                       :value="textElement"
                       :state="propsState"
                       :is-editable="isEditable"
-                      :is-force-focus="isOpen"
+                      :is-force-focus="propsIsOpen"
                       :default-text="defaultText"
                       @valueChanged="textElement = $event"
-                      @keyup="keyupReference">
+                      @keyup="keyupReference"
+                      tabindex="0">
             <slot></slot>
         </m-text-field>
     </m-popper>

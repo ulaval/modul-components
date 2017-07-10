@@ -137,7 +137,7 @@ export class KeyCode {
 })
 export class MDropdown extends ModulVue implements InputStateMixin {
 
-    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5']})
+    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6', 'element 7', 'element 8', 'element 9', 'element 10', 'element 11']})
     public elements: any[];
     @Prop()
     public selectedElement: any;
@@ -170,15 +170,12 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
     // Copy of props
     public propsSelectedElement: any;
-    public propsIsOpen: boolean;
+    public propsIsOpen: boolean = false;
 
     // Initialize data for v-model to work
     public textElement: string = '';
 
     private elementsSorted: Array<any>;
-    // private stateDisabled: boolean;
-    // private defaultValueText: string;
-    // private defaultValueAvailable: boolean;
 
     @Watch('elements')
     public elementChanged(value): void {
@@ -189,6 +186,11 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     public selectedElementChanged(value): void {
         this.propsSelectedElement = value;
         this.textElement = this.getSelectedElementText();
+    }
+
+    @Watch('isOpen')
+    public isOpenChanged(value): void {
+        this.propsIsOpen = value;
     }
 
     public get elementsCount(): number {
@@ -210,21 +212,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     public created() {
         // Copy of props to avoid override on re-render
         this.propsSelectedElement = this.selectedElement;
-
-        this.propsIsOpen = false;
-
-        // default value (element facultatif)
-        // if (typeof this.defaultValue == UNDEFINED) {
-        //     this.defaultValueAvailable = false;
-        // } else {
-        //     this.defaultValueAvailable = true;
-
-        //     if (this.getTextElement) {
-        //         this.defaultValueText = this.getTextElement({ element: this.defaultValue });
-        //     } else {
-        //         this.defaultValueText = String(this.defaultValue);
-        //     }
-        // }
 
         // Run in created() to run before computed data
         this.prepareElements();
@@ -267,18 +254,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
             text = String(element);
         }
 
-        // if (typeof element == UNDEFINED || element == this.defaultValue) {
-        //     if (this.defaultValueAvailable) {
-        //         text = this.defaultValueText;
-        //     }
-        // } else if (this.getTextElement) {
-        //     text = this.getTextElement({ element: element });
-        // }
-
-        // if ((text.trim().length == 0) && (element)) {
-        //     text = String(element);
-        // }
-
         return text;
     }
 
@@ -307,7 +282,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         elements.style.width = width + 'px';
     }
 
-    public toggleList(value: boolean): void {
+    public toggleDropdown(value: boolean): void {
         this.propsIsOpen = value;
         this.$emit('isOpen', value);
     }
@@ -413,11 +388,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
             }
             this.textElement = this.getSelectedElementText();
         }
-
-        // Add defaultValue to sorted elements
-        // if (this.defaultValueAvailable) {
-        //     elementsSorted.splice(0, 0, this.defaultValue);
-        // }
 
         this.elementsSorted = elementsSorted;
     }
