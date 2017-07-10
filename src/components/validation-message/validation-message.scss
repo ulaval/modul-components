@@ -5,7 +5,7 @@ $m-validation-message--color-helper: $m-color--grey-darker !default;
 $m-validation-message--margin: $m-padding--xs !default;
 
 .m-validation-message {
-    font-size: $m-font-size--xs;
+    font-size: $m-font-size--s;
     display: inline-flex;
     flex-direction: column;
 

@@ -291,13 +291,18 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
     public toggleDropdown(value: boolean): void {
         this.propsIsOpen = value;
-        this.$emit('isOpen', value);
+        if (value) {
+            this.$el.style.zIndex = '3';
+        } else {
+            this.$el.style.removeProperty('zIndex');
+        }
 
         Vue.nextTick(() => {
             if (value) {
                 this.setDropdownElementFocus();
             }
         });
+        this.$emit('isOpen', value);
     }
 
     public setDropdownElementFocus(): void {

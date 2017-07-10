@@ -28,7 +28,7 @@ $m-text-field--margin: $m-padding--xs !default;
             .m-text-field {
                 &__label {
                     bottom: $m-text-field--margin;
-                    font-size: $m-font-size;
+                    font-size: $m-font-size--l;
                 }
 
                 &__icon {
@@ -54,7 +54,7 @@ $m-text-field--margin: $m-padding--xs !default;
         bottom: 25px;
         z-index: 2;
         width: 100%;
-        font-size: $m-font-size--xs;
+        font-size: $m-font-size--s;
         font-weight: $m-font-weight--bold;
 
         ~ .m-text-field__input {
@@ -70,7 +70,7 @@ $m-text-field--margin: $m-padding--xs !default;
         cursor: text;
         padding: 0 0 $m-text-field--margin 0;
         font-family: $m-font-family;
-        font-size: $m-font-size;
+        font-size: $m-font-size--l;
         font-weight: $m-font-weight;
         text-decoration: none;
         color: $m-color--text;
@@ -154,6 +154,7 @@ $m-text-field--margin: $m-padding--xs !default;
         .m-text-field__input {
             border-bottom-style: dashed;
             border-color: $m-text-field--color-disabled;
+            background: none;
         }
     }
 

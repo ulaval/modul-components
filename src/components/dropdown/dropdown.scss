@@ -6,7 +6,7 @@ $m-dropdown--color-active: $m-color--primary-lightest;
 $m-dropdown--margin: $m-padding--xs !default;
 
 .m-dropdown {
-    // box-sizing: content-box;
+    position: relative;
     display: inline-flex;
     flex-direction: column;
 
