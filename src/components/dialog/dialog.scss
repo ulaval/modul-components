@@ -17,6 +17,10 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
         outline: none;
         min-width: $m-min-width;
 
+        @include m-is-ie() {
+            display: block;
+        }
+
         &.m--is-primary {
             overflow-x: hidden;
             overflow-y: auto;
@@ -35,12 +39,12 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                     opacity: 0;
                     border-radius: $m-border-radius;
 
-                    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                        margin-top: 60px;
-                    }
-
                     @media screen and (min-width: #{$m-dialog-primary--max-width + $m-padding * 2}) {
                         width: $m-dialog-primary--max-width;
+                    }
+
+                    @include m-is-ie() {
+                        margin: 60px auto;
                     }
                 }
 
@@ -75,6 +79,7 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                         top: 0;
                         bottom: 0;
                         transform: translate3d(0, 100%, 0);
+                        margin: 0 !important; //style for IE
                     }
 
                     @media screen and (min-width: #{$m-screen--min--s}) {
@@ -85,6 +90,10 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                         max-width: $m-dialog-secondary--max-width;
                         opacity: 0;
                     }
+
+                    @include m-is-ie() {
+                        margin: $m-padding--l*2 auto;
+                    }
                 }
 
                 &__header {
@@ -92,10 +101,7 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                     background: $m-color--black-grey;
                     color: $m-color--white;
                     min-height: $m-dialog-secondary--header-height;
-
-                    &__title {
-                        padding-right: $m-touch-size;
-                    }
+                    padding-right: $m-touch-size;
 
                     &__close-button {
                         position: absolute;
@@ -116,6 +122,10 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                     flex: 1;
                     overflow-x: hidden;
                     overflow-y: auto;
+
+                    @include m-is-ie() {
+                        flex: none;
+                    }
                 }
             }
 
@@ -142,7 +152,9 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
             .m-dialog {
                 &__article {
                     position: absolute;
+                    right: 0;
                     bottom: 0;
+                    left: 0;
                     display: flex;
                     flex-direction: column;
                     min-height: $m-touch-size--l;
@@ -155,7 +167,7 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                 }
 
                 &__close-button {
-                    transition: 0.3s background ease, 0.3s transform ease;
+                    transition: 0.3s background ease;
                     position: absolute;
                     top: 0;
                     right: 0;
@@ -164,16 +176,14 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                     border: none;
                     font-size: $m-font-size;
                     color: $m-color--white;
-                    outline: none;
                     cursor: pointer;
+                    outline: none;
+                    text-decoration: none;
+                    line-height: 1;
                     transform: translate3d(0, -100%, 0);
 
                     &:focus:not(:hover) {
                         background: rgba($m-color--black, 0.3);
-                    }
-
-                    &:active {
-                        transform: translate3d(0, -100%, 0) scale(0.85);
                     }
                 }
 
@@ -181,6 +191,10 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                     flex: 1;
                     overflow-x: hidden;
                     overflow-y: auto;
+
+                    @include m-is-ie() {
+                        flex: none;
+                    }
                 }
             }
 

@@ -68,7 +68,7 @@ export class MWindow {
 
     public removeBackdrop() {
         this.backdropId = '';
-        this.backdropElement.remove();
+        document.body.removeChild(this.backdropElement);
     }
 
     public activeScollBody(): void {

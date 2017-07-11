@@ -108,6 +108,17 @@ $m-button--color-disabled: $m-color--grey-darker !default;
             opacity: 0;
             background: $m-color--primary-lightest;
         }
+
+        .m-button {
+            &__icon {
+                @include m-is-ie() {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                }
+            }
+        }
     }
 
     &.m--is-full-size {

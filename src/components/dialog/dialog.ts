@@ -134,7 +134,7 @@ export class MDialog extends ModulVue {
     private deleteDialog() {
         let elementPortalTarget: HTMLElement = this.getElementPortalTarget();
         if (elementPortalTarget) {
-            elementPortalTarget.remove();
+            document.body.removeChild(elementPortalTarget);
         }
         this.$mWindow.deleteWindow(this.propId);
     }
