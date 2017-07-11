@@ -14,19 +14,16 @@
             <m-i18n i18n-key="m-accordion:open" class="m-accordion__hidden" v-if="!propOpen"></m-i18n>
             <m-i18n i18n-key="m-accordion:close" class="m-accordion__hidden" v-if="propOpen"></m-i18n>
         </div>
-        <span href="#"
-            aria-hidden="true"
-            class="m-accordion__header__icon"
-            :class="{ 'm--is-close': propOpen,
-                    'm--is-anim-active': animIsActive,
-                    'm--is-left': propIconPosition != 'right',
-                    'm--is-large': propIconSize=='large',
-                    'm--has-border': propIconStyle=='border' }"
-            @click.prevent>
-        </span>
+        <span aria-hidden="true"
+              class="m-accordion__header-icon"
+              :class="{ 'm--is-close': propOpen,
+                     'm--is-anim-active': isAnimActive,
+                     'm--is-left': propIconPosition != 'right',
+                     'm--is-large': propIconSize=='large',
+                     'm--has-border': propIconStyle=='border' }"></span>
     </header>
     <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
-        <div class="m-accordion__body-wrap" :class="{ 'm--is-anim-active': animIsActive }" v-if="propOpen">
+        <div class="m-accordion__body-wrap" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propOpen">
             <div class="m-accordion__body">
                 <slot>m-accordion - text</slot>
             </div>
