@@ -14,7 +14,7 @@
             ],
             "default": "click"
         },
-        "isOpen": {
+        "open": {
             "type": "boolean",
             "default": "false"
         },

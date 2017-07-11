@@ -26,7 +26,7 @@ export class MPopper extends Vue {
     })
     public trigger: string;
     @Prop({ default: false })
-    public isOpen: boolean;
+    public open: boolean;
     @Prop({ default: false })
     public disabled: boolean;
     @Prop()
@@ -52,7 +52,7 @@ export class MPopper extends Vue {
     public referenceElm;
     public popperJS;
     public showPopper: boolean = false;
-    public isAnimPopperActive: boolean = false;
+    public animPopperActive: boolean = false;
     public currentPlacement: string = '';
     public popperOptions: IPopperOptions = {
         placement: 'bottom',
@@ -83,9 +83,9 @@ export class MPopper extends Vue {
         this[value ? 'doShow' : 'doClose']();
     }
 
-    @Watch('isOpen')
-    public isOpenChanged(value) {
-        this.showPopper = this.isOpen;
+    @Watch('open')
+    public openChanged(value) {
+        this.showPopper = this.open;
     }
 
     private created(): void {
@@ -238,7 +238,7 @@ export class MPopper extends Vue {
     }
 
     private animEnter(element, done): void {
-        this.isAnimPopperActive = true;
+        this.animPopperActive = true;
         if (this.propsMode == MODE_DROPDOWN && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
@@ -272,11 +272,11 @@ export class MPopper extends Vue {
             el.style.maxHeight = '0';
             setTimeout(() => {
                 el.style.maxHeight = 'none';
-                this.isAnimPopperActive = false;
+                this.animPopperActive = false;
                 done();
             }, 300);
         } else {
-            this.isAnimPopperActive = false;
+            this.animPopperActive = false;
             done();
         }
     }
