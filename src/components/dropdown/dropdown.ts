@@ -146,15 +146,15 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     @Prop()
     public getTextElement: Function;
     @Prop({ default: false })
-    public isOpen: boolean;
+    public open: boolean;
     @Prop({ default: true })
-    public isSort: boolean;
+    public sort: boolean;
     @Prop()
     public sortMethod: Function;
     @Prop({ default: false })
     public widthFromCss: boolean;
     @Prop({ default: false })
-    public isEditable: boolean;
+    public editable: boolean;
     @Prop()
     public defaultText: string;
     @Prop({ default: false })
@@ -172,7 +172,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
     // Copy of props
     public propsSelectedElement: any;
-    public propsIsOpen: boolean = false;
+    public propsOpen: boolean = false;
 
     // Initialize data for v-model to work
     public textElement: string = '';
@@ -190,9 +190,9 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         this.textElement = this.getSelectedElementText();
     }
 
-    @Watch('isOpen')
-    public isOpenChanged(value): void {
-        this.propsIsOpen = value;
+    @Watch('open')
+    public openChanged(value): void {
+        this.propsOpen = value;
     }
 
     public get elementsCount(): number {
@@ -286,7 +286,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     }
 
     public toggleDropdown(value: boolean): void {
-        this.propsIsOpen = value;
+        this.propsOpen = value;
         if (value) {
             this.$el.style.zIndex = '10';
         } else {
@@ -298,11 +298,11 @@ export class MDropdown extends ModulVue implements InputStateMixin {
                 this.setDropdownElementFocus();
             }
         });
-        this.$emit('isOpen', value);
+        this.$emit('open', value);
     }
 
     public setDropdownElementFocus(): void {
-        if (!this.isEditable) {
+        if (!this.editable) {
             let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
             if (element) {
                 element.focus();
@@ -311,12 +311,12 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     }
 
     public keyupReference($event): void {
-        if (!this.propsIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_SPACE)) {
+        if (!this.propsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_SPACE)) {
             $event.preventDefault();
             (this.$refs.mDropdownValue as Vue).$el.click();
         }
 
-        if (this.propsIsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_END || $event.keyCode == KeyCode.DOM_VK_PAGE_DOWN)) {
+        if (this.propsOpen && ($event.keyCode == KeyCode.DOM_VK_DOWN || $event.keyCode == KeyCode.DOM_VK_END || $event.keyCode == KeyCode.DOM_VK_PAGE_DOWN)) {
             $event.preventDefault();
             let htmlElement: HTMLElement = this.$el.querySelector(`[data-index='0']`) as HTMLElement;
             if (htmlElement) {
@@ -392,7 +392,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
             elementsSorted = this.elements.slice(0);
 
             // Sorting options
-            if (this.isSort) {
+            if (this.sort) {
                 if (typeof this.sortMethod == UNDEFINED) {
                     // Default sort: Alphabetically
                     if (typeof this.getTextElement == UNDEFINED) {

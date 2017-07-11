@@ -12,11 +12,11 @@
         "getTexteElement": {
             "type": "Function"
         },
-        "isOpen": {
+        "open": {
             "type": "boolean",
              "default": false
         },
-        "isSort": {
+        "sort": {
             "type": "boolean",
              "default": true
         },
@@ -27,7 +27,7 @@
             "type": "boolean",
             "default": false
         },
-        "isEditable": {
+        "editable": {
             "type": "boolean",
             "default": false
         },

@@ -8,7 +8,7 @@
               :closeOnContentClick="true"
               :closeOnReferenceClick="false"
               :disabled="isDisabled"
-              :isOpen="propsIsOpen"
+              :open="propsOpen"
               mode="dropdown"
               @show="toggleDropdown(true)"
               @hide="toggleDropdown(false)">
@@ -39,11 +39,11 @@
                       :value="textElement"
                       :state="propsState"
                       :editable="isEditable"
-                      :force-focus="propsIsOpen"
+                      :force-focus="propsOpen"
                       :default-text="defaultText"
                       @valueChanged="textElement = $event"
                       @keyup="keyupReference"
-                      @focus="propsIsOpen = true">
+                      @focus="propsOpen = true">
             <slot></slot>
         </m-text-field>
     </m-popper>
