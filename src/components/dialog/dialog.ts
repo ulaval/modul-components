@@ -26,21 +26,21 @@ export class MDialog extends ModulVue {
     @Prop()
     public className: string;
     @Prop({ default: false })
-    public isOpen: boolean;
+    public open: boolean;
     @Prop({ default: 'body' })
     public targetElement: string;
     @Prop({ default: '' })
     public title: string;
     @Prop()
-    public isCloseOnBackdrop: boolean;
+    public closeOnBackdrop: boolean;
 
     public componentName: string = DIALOG_NAME;
 
-    private propsIsOpen: boolean = false;
-    private propsId: string = 'mDialog';
-    private propsTargetElement: HTMLElement = document.body;
+    private propOpen: boolean = false;
+    private propId: string = 'mDialog';
+    private propTargetElement: HTMLElement = document.body;
     private elementPortalTarget: HTMLElement = document.createElement('div');
-    private propsIsCloseOnBackdrop: boolean;
+    private propCloseOnBackdrop: boolean;
     private nbDialog: number = 0;
     private isVisible: boolean = false;
     private isAnimActive: boolean = false;
@@ -49,13 +49,13 @@ export class MDialog extends ModulVue {
 
     @Watch('targetElement')
     private setTargetElement(newTagetElement): void {
-        this.propsTargetElement = document.querySelector(newTagetElement) as HTMLElement;
+        this.propTargetElement = document.querySelector(newTagetElement) as HTMLElement;
     }
 
-    @Watch('isOpen')
+    @Watch('open')
     private isOpenChanged(newValue): void {
-        this.propsIsOpen = newValue;
-        if (this.propsIsOpen) {
+        this.propOpen = newValue;
+        if (this.propOpen) {
             this.openDialog();
         } else {
             this.closeDialog();
@@ -64,13 +64,13 @@ export class MDialog extends ModulVue {
 
     private beforeMount(): void {
         this.setTargetElement(this.targetElement);
-        if (this.isOpen) {
+        if (this.open) {
             this.openDialog();
         }
     }
 
     private destroyed(): void {
-        if (this.propsIsOpen) {
+        if (this.propOpen) {
             this.deleteDialog();
         }
     }
@@ -78,7 +78,7 @@ export class MDialog extends ModulVue {
     private openDialog(event = undefined): void {
         if (!this.isAnimActive) {
             this.createDialog();
-            this.propsIsOpen = true;
+            this.propOpen = true;
             this.isAnimActive = true;
             setTimeout(() => {
                 this.isVisible = true;
@@ -104,10 +104,10 @@ export class MDialog extends ModulVue {
                 this.$mWindow.backdropElement.style.opacity = '0';
             }
             setTimeout(() => {
-                this.propsIsOpen = false;
+                this.propOpen = false;
                 this.deleteDialog();
                 this.isAnimActive = false;
-                this.$emit('toggleIsOpen', false);
+                this.$emit('toggleOpen', false);
                 ModulVue.nextTick(() => {
                     this.$refs.dialogButton['setAttribute']('tabindex', '0');
                     this.$refs.dialogButton['focus']();
@@ -118,15 +118,15 @@ export class MDialog extends ModulVue {
     }
 
     private createDialog() {
-        this.propsId = this.id + '-' + uuid.generate();
-        this.elementPortalTarget.setAttribute('id', this.propsId);
+        this.propId = this.id + '-' + uuid.generate();
+        this.elementPortalTarget.setAttribute('id', this.propId);
         this.elementPortalTarget.setAttribute('class', 'm-dialog-popover');
         this.elementPortalTarget.style.position = 'relative';
 
         if (this.$mWindow.windowCount == 0) {
             this.addFirstDialog();
         } else {
-            this.propsTargetElement.appendChild(this.elementPortalTarget);
+            this.propTargetElement.appendChild(this.elementPortalTarget);
             this.addDialog();
         }
     }
@@ -136,46 +136,46 @@ export class MDialog extends ModulVue {
         if (elementPortalTarget) {
             elementPortalTarget.remove();
         }
-        this.$mWindow.deleteWindow(this.propsId);
+        this.$mWindow.deleteWindow(this.propId);
     }
 
     private addFirstDialog() {
-        this.$mWindow.addWindow(this.propsId);
+        this.$mWindow.addWindow(this.propId);
         this.elementPortalTarget.style.zIndex = String(this.$mWindow.windowZIndex);
-        this.$mWindow.createBackdrop(this.propsTargetElement);
-        this.propsTargetElement.appendChild(this.elementPortalTarget);
+        this.$mWindow.createBackdrop(this.propTargetElement);
+        this.propTargetElement.appendChild(this.elementPortalTarget);
     }
 
     private addDialog() {
         let elementPortalTarget: HTMLElement = this.getElementPortalTarget();
         elementPortalTarget.style.position = 'relative';
-        this.$mWindow.addWindow(this.propsId);
+        this.$mWindow.addWindow(this.propId);
         elementPortalTarget.style.zIndex = String(this.$mWindow.windowZIndex);
     }
 
     private backdropClick(event): void {
-        if (this.propsIsCloseOnBackdrop) {
+        if (this.propCloseOnBackdrop) {
             this.closeDialog(event);
         }
     }
 
     private getElementPortalTarget(): HTMLElement {
-        return document.querySelector('#' + this.propsId) as HTMLElement;
+        return document.querySelector('#' + this.propId) as HTMLElement;
     }
 
-    private get propsMode(): string {
+    private get propMode(): string {
         let mode: string = this.mode == MODE_SECONDARY || this.mode == MODE_PANEL ? this.mode : MODE_PRIMARY;
         switch (mode) {
             case MODE_SECONDARY:
-                this.propsIsCloseOnBackdrop = this.isCloseOnBackdrop == undefined ? true : this.isCloseOnBackdrop;
+                this.propCloseOnBackdrop = this.closeOnBackdrop == undefined ? true : this.closeOnBackdrop;
                 this.transitionDuration = this.isScreenMinS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
                 break;
             case MODE_PANEL:
-                this.propsIsCloseOnBackdrop = this.isCloseOnBackdrop == undefined ? true : this.isCloseOnBackdrop;
+                this.propCloseOnBackdrop = this.closeOnBackdrop == undefined ? true : this.closeOnBackdrop;
                 this.transitionDuration = TRANSITION_DURATION_LONG;
                 break;
             default:
-                this.propsIsCloseOnBackdrop = this.isCloseOnBackdrop == undefined ? false : this.isCloseOnBackdrop;
+                this.propCloseOnBackdrop = this.closeOnBackdrop == undefined ? false : this.closeOnBackdrop;
                 this.transitionDuration = TRANSITION_DURATION;
         }
         return mode;

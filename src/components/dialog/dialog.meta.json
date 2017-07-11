@@ -21,7 +21,7 @@
         "className": {
             "type": "string"
         },
-        "isOpen": {
+        "open": {
             "type": "boolean",
             "default": false
         },
@@ -35,7 +35,7 @@
         "title": {
             "type": "string"
         },
-        "isCloseOnBackdrop": {
+        "closeOnBackdrop": {
             "type": "boolean"
         }
     },

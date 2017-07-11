@@ -25,7 +25,7 @@ export class MValidationMessage extends ModulVue {
     private titleErrorIcon: string = this.$i18n.translate('m-validation-message:title-error-icon');
     private titleValidIcon: string = this.$i18n.translate('m-validation-message:title-valid-icon');
 
-    private get propsState(): string {
+    private get propState(): string {
         return this.state == STATE_DISABLED ? STATE_DEFAULT : STATE_DEFAULT;
     }
 

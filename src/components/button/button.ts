@@ -40,25 +40,25 @@ export class MButton extends Vue {
     @Prop()
     public iconSize: string;
     @Prop({ default: false })
-    public isFullSize: boolean;
+    public fullSize: boolean;
 
     public componentName: string = BUTTON_NAME;
 
     private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "iconName" is undefined';
 
-    private get propsType(): string {
+    private get propType(): string {
         return this.type != TYPE_SUBMIT && this.type != TYPE_RESET ? TYPE_BUTTON : this.type;
     }
 
-    private get propsMode(): string {
+    private get propMode(): string {
         return this.mode != MODE_SECONDARY && this.mode != MODE_ICON ? MODE_PRIMARY : this.mode;
     }
 
-    private get propsState(): string {
+    private get propState(): string {
         return this.state != STATE_DISABLED && this.state != STATE_WAITING && this.state != STATE_SELECTED ? STATE_DEFAULT : this.state;
     }
 
-    private get propsIconSize(): string {
+    private get propIconSize(): string {
         if (this.iconSize == MODE_ICON) {
             return this.iconSize == undefined ? ICON_SIZE : this.iconSize;
         }
@@ -74,7 +74,7 @@ export class MButton extends Vue {
     }
 
     private get isDisabled(): boolean {
-        if (this.propsState == STATE_WAITING || this.propsState == STATE_DISABLED || this.propsState == STATE_SELECTED) {
+        if (this.propState == STATE_WAITING || this.propState == STATE_DISABLED || this.propState == STATE_SELECTED) {
             return true;
         }
         return false;
