@@ -1,11 +1,11 @@
 <span class="m-text-field"
-      :class="[{ 'm--is-focus' : isFocusActive || isForceFocus,
-          'm--not-editable' : !propsIsEditable,
+      :class="[{ 'm--is-focus' : isFocusActive || forceFocus,
+          'm--not-editable' : !propEditable,
           'm--is-disabled' : isDisabled,
           'm--has-error' : hasError,
           'm--is-valid' : isValid,
           'm--is-empty-value' : isEmptyValue },
-          'm--is-type-' + propsType]">
+          'm--is-type-' + propType]">
     <span class="m-text-field__wrap">
         <label class="m-text-field__label" @click="onFocus" v-if="hasDefaultSlot || isDisabled">
             <m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>
@@ -17,8 +17,8 @@
                @focus="onFocus"
                @blur="onBlur"
                @keyup="onKeyup"
-               v-model="propsValue"
-               v-if="propsIsEditable">
+               v-model="propValue"
+               v-if="propEditable">
         <a href="#"
            class="m-text-field__input"
            ref="input"
@@ -26,16 +26,16 @@
            @blur="onBlur"
            @click="onClick"
            @keyup="onKeyup"
-           v-if="!propsIsEditable">
-            <span class="m-text-field__input__value" v-if="isDefaultTextEmpty">{{ propsValue }}</span>
-            <span class="m-text-field__input__default-text" :aria-hidden="isDefaultTextEmpty" :class="{ 'm--is-transparent': isDefaultTextEmpty }">- {{ propsDefaultText}} -</span>
+           v-if="!propEditable">
+            <span class="m-text-field__input__value" v-if="isDefaultTextEmpty">{{ propValue }}</span>
+            <span class="m-text-field__input__default-text" :aria-hidden="isDefaultTextEmpty" :class="{ 'm--is-transparent': isDefaultTextEmpty }">- {{ propDefaultText}} -</span>
         </a>
         <m-icon :name="iconName" class="m-text-field__icon" v-if="hasIcon"></m-icon>
         <span aria-hidden="true" class="m-text-field__input-line"></span>
     </span>
     <m-validation-message
-        :state="propsState"
-        :error-message="propsErrorMessage"
-        :valid-message="propsValidMessage"
+        :state="propState"
+        :error-message="propErrorMessage"
+        :valid-message="propValidMessage"
         :helper-message="helperMessage"></m-validation-message>
 </span>

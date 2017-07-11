@@ -32,11 +32,11 @@ export class MTexteField extends Vue implements InputStateMixin {
     @Prop({ default: '' })
     public defaultText: string;
     @Prop({ default: true })
-    public isEditable: boolean;
+    public editable: boolean;
     @Prop({ default: '' })
     public iconName: string;
     @Prop({ default: false })
-    public isForceFocus: boolean;
+    public forceFocus: boolean;
 
     public componentName: string = TEXT_FIELD_NAME;
 
@@ -44,8 +44,8 @@ export class MTexteField extends Vue implements InputStateMixin {
     public hasError: boolean;
     public isValid: boolean;
 
-    private propsValue: string = '';
-    private propsDefaultText: string;
+    private propValue: string = '';
+    private propDefaultText: string;
     private hasIcon: boolean;
     private isEmptyValue: boolean = false;
     private isDefaultTextEmpty: boolean = false;
@@ -54,53 +54,53 @@ export class MTexteField extends Vue implements InputStateMixin {
 
     @Watch('value')
     private valueChanged(value: string): void {
-        this.propsValue = this.value;
+        this.propValue = this.value;
         this.checkHasValue();
     }
 
-    @Watch('propsValue')
-    private propsValueChanged(value: string): void {
+    @Watch('propValue')
+    private propValueChanged(value: string): void {
         // Delayed $emit to limit event fired
         if (this.isUpdating) {
             clearTimeout(this.isUpdating);
         }
 
         this.isUpdating = window.setTimeout(
-            () => this.$emit('valueChanged', this.propsValue)
+            () => this.$emit('valueChanged', this.propValue)
         , 300);
     }
 
     private beforeMount(): void {
-        this.propsValue = this.value;
-        this.propsDefaultText = this.defaultText;
+        this.propValue = this.value;
+        this.propDefaultText = this.defaultText;
         this.hasIcon = this.iconName != '';
         this.checkHasValue();
         this.checkHasDefaultText();
     }
 
     private mounted() {
-        if (this.propsIsEditable) {
+        if (this.propEditable) {
             // Set attribute type on input refs
-            this.$refs.input['type'] = this.propsType;
+            this.$refs.input['type'] = this.propType;
         }
     }
 
     private onFocus(event): void {
         this.isFocusActive = this.isDisabled ? false : true;
-        if (!this.isDisabled && !this.isForceFocus) {
+        if (!this.isDisabled && !this.forceFocus) {
             this.$refs.input['focus']();
             this.checkHasValue();
             this.checkHasDefaultText();
-            this.$emit('focus', event, this.propsValue);
+            this.$emit('focus', event, this.propValue);
         }
     }
 
     private onBlur(event): void {
         this.isFocusActive = this.isDisabled ? true : false;
-        if (!this.isDisabled && !this.isForceFocus) {
+        if (!this.isDisabled && !this.forceFocus) {
             this.checkHasValue();
             this.checkHasDefaultText();
-            this.$emit('blur', event, this.propsValue);
+            this.$emit('blur', event, this.propValue);
         }
     }
 
@@ -108,23 +108,23 @@ export class MTexteField extends Vue implements InputStateMixin {
         if (!this.isDisabled) {
             this.checkHasValue();
             this.checkHasDefaultText();
-            this.$emit('keyup', event, this.propsValue);
+            this.$emit('keyup', event, this.propValue);
         }
     }
 
     private onClick(event): void {
         if (!this.isDisabled) {
-            this.$emit('click', event, this.propsValue);
+            this.$emit('click', event, this.propValue);
         }
         event.preventDefault();
     }
 
     private checkHasValue(): void {
-        this.isEmptyValue = String(this.propsValue).length == 0 ? true : false;
+        this.isEmptyValue = String(this.propValue).length == 0 ? true : false;
     }
 
     private checkHasDefaultText() {
-        if (this.propsDefaultText == '' || this.propsDefaultText == undefined) {
+        if (this.propDefaultText == '' || this.propDefaultText == undefined) {
             this.isDefaultTextEmpty = true;
         } else if (this.isEmptyValue && this.isFocusActive) {
             this.isDefaultTextEmpty = false;
@@ -133,12 +133,12 @@ export class MTexteField extends Vue implements InputStateMixin {
         }
     }
 
-    private get propsType(): string {
+    private get propType(): string {
         return this.type == TYPE_PASSWORD || this.type == TYPE_EMAIL || this.type == TYPE_URL || this.type == TYPE_TEL ? this.type : TYPE_TEL;
     }
 
-    private get propsIsEditable(): boolean {
-        return this.isEditable;
+    private get propEditable(): boolean {
+        return this.editable;
     }
 
     private get hasDefaultSlot(): boolean {

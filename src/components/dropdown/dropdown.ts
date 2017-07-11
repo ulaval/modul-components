@@ -290,7 +290,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         if (value) {
             this.$el.style.zIndex = '10';
         } else {
-            this.$el.style.removeProperty('zIndex');
+            this.$el.style.removeProperty('z-index');
         }
 
         Vue.nextTick(() => {
