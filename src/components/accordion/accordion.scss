@@ -1,11 +1,11 @@
 @import '../../styles/abstracts/variables';
-$m-accordion--icon--l--width: 12px;
-$m-accordion--icon--width: 10px;
-$m-accordion--icon--l--height: 2px;
-$m-accordion--icon--height: 1px;
-$m-accordion--border--size: 2px;
+$m-accordion--icon-l-width: 12px;
+$m-accordion--icon-width: 10px;
+$m-accordion--icon-l-height: 2px;
+$m-accordion--icon-height: 1px;
+$m-accordion--border-size: 2px;
+$m-accordion--border-color: $m-color--grey-light;
 $m-accordion--color: $m-color--secondary;
-$m-accordion--color--border: $m-color--grey-light;
 
 .m-accordion {
     &.m--is-regular,
@@ -26,17 +26,24 @@ $m-accordion--color--border: $m-color--grey-light;
     }
 
     &.m--is-regular {
-        margin-top: - $m-accordion--border--size;
+        margin-top: - $m-accordion--border-size;
 
         .m-accordion {
             &__header {
+                position: relative;
                 min-height: 56px;
                 padding: $m-padding $m-padding $m-padding $m-margin;
-                border-top: $m-accordion--border--size solid $m-accordion--color--border;
-                border-bottom: $m-accordion--border--size solid $m-accordion--color--border;
+                border-top: $m-accordion--border-size solid $m-accordion--border-color;
+                border-bottom: $m-accordion--border-size solid $m-accordion--border-color;
 
-                &-wrap {
-                    border-left: $m-border-width--l solid $m-accordion--color;
+                &::after {
+                    position: absolute;
+                    top: -$m-accordion--border-size;
+                    bottom: -$m-accordion--border-size;
+                    left: 0;
+                    content: '';
+                    width: $m-border-width--l;
+                    background: $m-accordion--color;
                 }
             }
 
@@ -90,6 +97,12 @@ $m-accordion--color--border: $m-color--grey-light;
     &__header {
         display: flex;
         align-items: center;
+        cursor: pointer;
+
+        &:hover,
+        &:active {
+            outline: none;
+        }
 
         &.m--is-icon-left {
             flex-direction: row-reverse;
@@ -140,44 +153,44 @@ $m-accordion--color--border: $m-color--grey-light;
             }
 
             &:not(.m--is-large) {
-                width: $m-accordion--icon--width;
-                height: $m-accordion--icon--width;
+                width: $m-accordion--icon-width;
+                height: $m-accordion--icon-width;
 
                 &::before {
-                    width: $m-accordion--icon--width;
-                    height: $m-accordion--icon--height;
+                    width: $m-accordion--icon-width;
+                    height: $m-accordion--icon-height;
                 }
 
                 &::after {
-                    width: $m-accordion--icon--height;
-                    height: $m-accordion--icon--width;
+                    width: $m-accordion--icon-height;
+                    height: $m-accordion--icon-width;
                 }
 
                 &.m--has-border {
-                    width: $m-accordion--icon--width + 8;
-                    height: $m-accordion--icon--width + 8;
-                    border-width: $m-accordion--icon--height;
+                    width: $m-accordion--icon-width + 8;
+                    height: $m-accordion--icon-width + 8;
+                    border-width: $m-accordion--icon-height;
                 }
             }
 
             &.m--is-large {
-                width: $m-accordion--icon--l--width;
-                height: $m-accordion--icon--l--width;
+                width: $m-accordion--icon-l-width;
+                height: $m-accordion--icon-l-width;
 
                 &::before {
-                    width: $m-accordion--icon--l--width;
-                    height: $m-accordion--icon--l--height;
+                    width: $m-accordion--icon-l-width;
+                    height: $m-accordion--icon-l-height;
                 }
 
                 &::after {
-                    width: $m-accordion--icon--l--height;
-                    height: $m-accordion--icon--l--width;
+                    width: $m-accordion--icon-l-height;
+                    height: $m-accordion--icon-l-width;
                 }
 
                 &.m--has-border {
-                    width: $m-accordion--icon--l--width + 8;
-                    height: $m-accordion--icon--l--width + 8;
-                    border-width: $m-accordion--icon--l--height;
+                    width: $m-accordion--icon-l-width + 8;
+                    height: $m-accordion--icon-l-width + 8;
+                    border-width: $m-accordion--icon-l-height;
                 }
             }
 

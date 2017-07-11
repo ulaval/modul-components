@@ -1,14 +1,14 @@
 <transition>
     <article class="m-accordion-group" v-if="!hasError">
-        <header class="m-accordion-group__header" :class="{ 'm--is-no-title' : !hasTitle }" v-if="hasTitle || !propsIsConcurrent">
+        <header class="m-accordion-group__header" :class="{ 'm--is-no-title' : !hasTitle }" v-if="hasTitle || !propConcurrent">
             <span class="m-accordion-group__header__title" v-if="hasTitle">
                 <slot name="title"></slot>
             </span>
-            <template v-if="!propsIsConcurrent">
-                <m-link mode="button" @click="openAllAccordions" v-if="!propsAreAllOpen">
+            <template v-if="!propConcurrent">
+                <m-link mode="button" @click="openAllAccordions" v-if="!propAllOpen">
                     <m-i18n i18n-key="m-accordion-group:open-all"></m-i18n>
                 </m-link>
-                <m-link mode="button" @click="closeAllAccordions" v-if="propsAreAllOpen">
+                <m-link mode="button" @click="closeAllAccordions" v-if="propAllOpen">
                     <m-i18n i18n-key="m-accordion-group:close-all"></m-i18n>
                 </m-link>
             </template>
