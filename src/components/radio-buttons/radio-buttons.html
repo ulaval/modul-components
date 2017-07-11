@@ -3,9 +3,9 @@
         <input class="m-radio-buttons__hidden" ref="refRadio" type="radio" :id="radioValue.value" :name="name" :value="radioValue.value"
             v-model="checkedValue" @focus="isFocus=true" @blur="isFocus=false" @click="onClick">
         <label class="m-radio-buttons__wrap" :class="{ 'm--is-right': propsPosition == 'right', 'm--is-focus': isFocus && radioValue.value == checkedValue}"
-            :for="radioValue.value" :aria-hidden="!propsHasLabel">
+            :for="radioValue.value" :aria-hidden="!propsLabel">
             <span class="m-radio-buttons__input" :class="{ 'm--is-checked': radioValue.value == checkedValue }" aria-hidden="true"></span>
-            <span class="m-radio-buttons__label" v-if="propsHasLabel">
+            <span class="m-radio-buttons__label" v-if="propsLabel">
                 <slot>{{ radioValue.label }}</slot>
             </span>
         </label>

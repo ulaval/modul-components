@@ -44,19 +44,19 @@ export class MRadioButtons extends Vue {
     @Prop({ default: 'radio' })
     public name: string;
     @Prop({ default: true })
-    public hasLabel: boolean;
+    public label: boolean;
     @Prop({ default: POSITION_LEFT })
     public position: string;
 
     public componentName: string = RADIO_BUTTONS_NAME;
-    private propsHasLabel: boolean = true;
+    private propsLabel: boolean = true;
     private propsPosition: string = POSITION_LEFT;
     private isFocus: boolean = false;
     private checkedValue: string = '';
     private defaultCheckedValue: string = this.findChecked();
 
     private mounted(): void {
-        this.propsHasLabel = this.hasLabel;
+        this.propsLabel = this.label;
         this.propsPosition = this.position;
         if (this.defaultCheckedValue != '') {
             this.checkedValue = this.defaultCheckedValue;

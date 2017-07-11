@@ -9,7 +9,7 @@
             "type": "string",
             "default": "name"
         },
-        "hasLabel": {
+        "label": {
             "type": "boolean",
             "default": true
         },
