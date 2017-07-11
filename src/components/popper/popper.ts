@@ -40,7 +40,7 @@ export class MPopper extends Vue {
     @Prop({ default: false })
     public appendToBody: boolean;
     @Prop({ default: false })
-    public visibleArrow: boolean;
+    public arrow: boolean;
     @Prop()
     public options: any;
     @Prop({ default: false })
@@ -147,7 +147,7 @@ export class MPopper extends Vue {
 
     private createPopper(): void {
         this.$nextTick(() => {
-            if (this.visibleArrow) {
+            if (this.arrow) {
                 this.appendArrow(this.popper);
             }
 
