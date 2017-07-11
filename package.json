@@ -7,8 +7,8 @@
     "scripts": {
         "clean": "rimraf dist",
         "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
-        "build": "rimraf dist/*.d.ts && webpack --env.prod --config conf/webpack.config.js --colors && npm run dtsToDist && npm run scssToDist",
-        "dist": "tsc && copyfiles -u 1 ./src/**/*.json dist && copyfiles -u 1 ./src/**/*.html dist && copyfiles -u 1 ./src/**/*.scss dist && copyfiles -u 1 ./src/**/*.css dist && copyfiles -u 1 ./src/public/**/*.* dist && npm run assetsToDist",
+        "buildWebpack": "rimraf dist/*.d.ts && webpack --env.prod --config conf/webpack.config.js --colors && npm run dtsToDist && npm run scssToDist",
+        "build": "tsc && copyfiles -u 1 ./src/**/*.json dist && copyfiles -u 1 ./src/**/*.html dist && copyfiles -u 1 ./src/**/*.scss dist && copyfiles -u 1 ./src/**/*.css dist && npm run assetsToDist",
         "dtsToDist": "copyfiles -f ./src/**/*.d.ts dist",
         "scssToDist": "copyfiles -u 1 ./src/styles/**/*.scss dist && copyfiles -u 1 ./src/styles/**/*.css dist",
         "assetsToDist": "copyfiles -u 1 ./src/assets/**/* dist",
