@@ -1,44 +1,31 @@
 <div class="m-upload">
-    <div class="m-upload__file-input-area" v-if="fileInput">
+    <div class="m-upload__file-input" v-if="fileInput">
         <input type="file" id="files" name="files[]" :accept="extensionsProp" @change="filesInput" :multiple="multiple" />
     </div>
 
-    <div class="m-upload__drag-drop-area" v-if="dragDrop"
-         @dragover.prevent
-         @drop="filesDrop"
-         style="border:1px solid #000; padding: 15px; margin: 10px 0;">
+    <div class="m-upload__drag-drop"
+         :class="{'drag-over': dragOver}"
+         v-if="dragDrop"
+         @dragover.prevent="dragOver = true"
+         @dragleave.prevent="dragOver = false"
+         @drop="filesDrop">
         Zone de drag and drop
     </div>
 
-    <div class="m-upload__files" v-if="filesList">
+    <ul class="m-upload__files-list" v-if="filesList">
+        <li v-for="(file, index) of globalFileList" :class="{'error': file.errorReading}">
+            <m-spinner mode="processing" v-if="!file.isRead"></m-spinner>{{ file.file.name }}
+            <m-button @click="remove(index)">Remove</m-button>
+        </li>
+    </ul>
+
+    <m-message class="m-upload__error"
+               v-if="errors"
+               state="warning"
+               :closeButton="true"
+               :visible="hasErrorMsgs">
         <ul>
-            <li v-for="(file, index) of globalFileList" :class="{'reading': !file.isRead}">{{ file.file.name }} <m-button @click="remove(index)">Remove</m-button></li>
+            <li v-for="error in errorMsgs">{{ error }}</li>
         </ul>
-    </div>
-
-    <div class="m-upload__error-area" v-if="error">
-        <m-message state="warning"
-                :closeButton="true"
-                :visible="hasErrorMsgs">
-            <ul>
-                <li v-for="error in errorMsgs">{{ error }}</li>
-            </ul>
-        </m-message>
-    </div>
-
-    <br />-----<br />
-
-    <!--<m-dropdown :elements="elements"
-                :get-text-element="getText"
-                default-text="fdsfd fds fdsf f"
-                :is-editable="true"
-                :is-open="open"
-                @isOpen="openCheck($event)"
-                @element-selected="alertMe($event)">
-        Label du dropdown
-    </m-dropdown>
-    <m-button @click="open = !open">Switch</m-button>
-
-    {{ open }}-->
-    <br />-----<br />
+    </m-message>
 </div>

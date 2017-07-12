@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
@@ -7,15 +8,24 @@ import { UPLOAD_NAME } from '../component-names';
 
 const UNDEFINED: string = 'undefined';
 
+const ERROR_FOLDER: string = 'm-upload:error-folder';
+const ERROR_MAX_FILES: string = 'm-upload:error-max-files';
+const ERROR_MAX_SIZE: string = 'm-upload:error-max-size';
+const ERROR_DUPLICATE: string = 'm-upload:error-duplicate';
+const ERROR_EXTENSION: string = 'm-upload:error-extension';
+const ERROR_ABORT: string = 'm-upload:error-abort';
+const ERROR_LOADING: string = 'm-upload:error-loading';
+
 export interface GlobalFileList {
     file: File;
     isRead: boolean;
+    errorReading: boolean;
     reader?: FileReader;
 }
 
 @WithRender
 @Component
-export class MUpload extends Vue {
+export class MUpload extends ModulVue {
 
     @Prop({ default: true })
     public multiple: boolean;
@@ -26,7 +36,7 @@ export class MUpload extends Vue {
     @Prop({ default: true })
     public filesList: boolean;
     @Prop({ default: true })
-    public error: boolean;
+    public errors: boolean;
     @Prop({ default: 10 })
     public maxFilesAllow: number;
     @Prop({ default: 26214400 }) // 25 Mo
@@ -39,6 +49,8 @@ export class MUpload extends Vue {
 
     private fileAPISupport: boolean = false;
     private extensionsProp: string;
+
+    private dragOver: boolean = false;
 
     @Watch('extensions')
     public extensionsChange() {
@@ -89,6 +101,7 @@ export class MUpload extends Vue {
 
         $event.stopPropagation();
         $event.preventDefault();
+        this.dragOver = false;
         this.errorMsgs = [];
 
         let files: FileList = $event.dataTransfer.files;
@@ -106,31 +119,33 @@ export class MUpload extends Vue {
 
     private addToGlobalFilelist(file: File): boolean {
         if (this.isFolder(file)) {
-            this.errorMsgs.push(`${file.name}: Cannot add folder`);
-            return false;
-        }
-
-        if (this.isTooBig(file)) {
-            this.errorMsgs.push(`File ${file.name} is bigger than max size ${this.maxSizeBytes} bytes`);
+            this.manageErrorMsg(file, ERROR_FOLDER);
             return false;
         }
 
         if (this.hasTooManyFiles()) {
-            this.errorMsgs.push(`File ${file.name} wasn't add - Max number of files (${this.maxFilesAllow}) allow is reach`);
+            this.manageErrorMsg(file, ERROR_MAX_FILES);
+            return false;
+        }
+
+        if (this.isTooBig(file)) {
+            this.manageErrorMsg(file, ERROR_MAX_SIZE);
+
             return false;
         }
 
         if (this.isFileAlreadyAdded(file)) {
-            this.errorMsgs.push(`File ${file.name} is already in list`);
+            this.manageErrorMsg(file, ERROR_DUPLICATE);
+
             return false;
         }
 
-        if ((this.extensionsProp != '*') && (!this.validExtension(file))) {
-            this.errorMsgs.push(`File ${file.name} doesn't have a valid extension`);
+        if (this.extensionsProp != '*' && !this.validExtension(file)) {
+            this.manageErrorMsg(file, ERROR_EXTENSION);
             return false;
         }
 
-        this.globalFileList.push({ file: file, isRead: false });
+        this.globalFileList.push({ file: file, isRead: false, errorReading: false });
         return true;
     }
 
@@ -190,10 +205,37 @@ export class MUpload extends Vue {
                 file.reader = new FileReader();
 
                 // Closure to capture the file information.
-                file.reader.onload = ((file) => {
+                file.reader.onloadend = ((file) => {
                     return (e) => {
                         file.isRead = true;
-                        console.log(file.file.name + ' is done');
+                        console.log(file.file.name, 'onloadend');
+                    // Render thumbnail.
+                    // var span = document.createElement('span');
+                    // span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                    //                     '" title="', escape(theFile.name), '"/>'].join('');
+                    // document.getElementById('list').insertBefore(span, null);
+                    };
+                })(file);
+
+                file.reader.onloadstart = ((file: GlobalFileList) => {
+                    return (e) => {
+                        if (file.reader) {
+                            console.log(file.file.name, 'onloadstart');
+                        }
+                    };
+                })(file);
+
+                file.reader.onabort = ((file) => {
+                    return (e) => {
+                        file.errorReading = true;
+                        this.manageErrorMsg(file.file, ERROR_ABORT);
+                    };
+                })(file);
+
+                file.reader.onerror = ((file) => {
+                    return (e) => {
+                        file.errorReading = true;
+                        this.manageErrorMsg(file.file, ERROR_LOADING);
                     // Render thumbnail.
                     // var span = document.createElement('span');
                     // span.innerHTML = ['<img class="thumb" src="', e.target.result,
@@ -203,13 +245,20 @@ export class MUpload extends Vue {
                 })(file);
 
                 // Read in the image file as a data URL.
-                file.reader.readAsDataURL(file.file); // Return data: URL
-                // file.reader.readAsArrayBuffer(file.file); // Return ArrayBuffer
+                // file.reader.readAsDataURL(file.file); // Return data: URL
+                file.reader.readAsArrayBuffer(file.file); // Return ArrayBuffer
                 // file.reader.readAsText(file.file); // Return text string
+
+                // file.reader.
             }
         }
 
         return true;
+    }
+
+    private manageErrorMsg(file: File, key: string, params: any[] = []): void {
+        params.splice(0, 0, file.name);
+        this.errorMsgs.push(this.$i18n.translate(key, params));
     }
 }
 

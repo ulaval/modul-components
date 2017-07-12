@@ -1,6 +1,23 @@
 @import 'abstracts/variables';
 
-.reading {
-    color: $m-color--grey-dark;
+.error {
+    color: red;
+    text-decoration: line-through;
 }
 
+.m-upload__files-list {
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #000;
+}
+
+.m-upload__drag-drop {
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #000;
+
+    &.drag-over {
+        background: $m-color--grey-dark;
+        cursor: move;
+    }
+}
