@@ -27,7 +27,7 @@ export interface GlobalFileList {
 @Component
 export class MUpload extends ModulVue {
 
-    @Prop({ default: true })
+    @Prop({ default: false })
     public multiple: boolean;
     @Prop({ default: true })
     public fileInput: boolean;
