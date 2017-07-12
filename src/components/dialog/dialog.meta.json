@@ -18,25 +18,18 @@
             ],
             "default": 0
         },
-        "className": {
-            "type": "string"
-        },
         "open": {
             "type": "boolean",
             "default": false
         },
-        "targetElement": {
-            "type": "string",
-            "values": [
-                "body"
-            ],
-            "default": 0
+        "closeOnBackdrop": {
+            "type": "boolean"
         },
         "title": {
             "type": "string"
         },
-        "closeOnBackdrop": {
-            "type": "boolean"
+        "className": {
+            "type": "string"
         }
     },
     "overview": [

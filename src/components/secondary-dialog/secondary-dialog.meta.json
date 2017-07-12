@@ -1,27 +1,46 @@
 {
-    "tag": "m-panel-window",
-    "name": "m-panel-window:name",
+    "tag": "m-secondary-dialog",
+    "name": "m-secondary-dialog:name",
     "attributes": {
-
+        "id": {
+            "type": "string",
+            "values": [
+                "mDialog"
+            ],
+            "default": 0
+        },
+        "open": {
+            "type": "boolean",
+            "default": false
+        },
+        "closeOnBackdrop": {
+            "type": "boolean"
+        },
+        "title": {
+            "type": "string"
+        },
+        "className": {
+            "type": "string"
+        }
     },
     "overview": [
         {
             "type": "rubric",
             "title": "meta:context-of-use",
-            "content": "m-panel-window-meta:context-of-use"
+            "content": "m-secondary-dialog-meta:context-of-use"
         },
         {
             "type": "rubric",
             "title": "meta:usage",
-            "content": "m-panel-window-meta:usage"
+            "content": "m-secondary-dialog-meta:usage"
         },
         {
             "type": "do",
-            "content": "m-panel-window-meta:do"
+            "content": "m-secondary-dialog-meta:do"
         },
         {
             "type": "dont",
-            "content": "m-panel-window-meta:dont"
+            "content": "m-secondary-dialog-meta:dont"
         }
     ]
 }
