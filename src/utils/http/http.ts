@@ -29,7 +29,7 @@ export class HttpService implements RestAdapter {
 
     private buildConfig(config: RequestConfig): AxiosRequestConfig {
         let axiosConfig: AxiosRequestConfig = {};
-        axiosConfig.url = config.url;
+        axiosConfig.url = this.resolveUrl(config);
         axiosConfig.method = config.method;
         axiosConfig.params = config.queryParams;
         axiosConfig.headers = config.headers;
@@ -56,6 +56,17 @@ export class HttpService implements RestAdapter {
         };
 
         return axiosConfig;
+    }
+
+    private resolveUrl(config: RequestConfig): string | undefined {
+        let result: string | undefined = config.url;
+        if (result && config.pathParams) {
+            for (let key in config.pathParams) {
+                result = result.replace('{' + key + '}', encodeURIComponent(config.pathParams[key]));
+            }
+        }
+
+        return result;
     }
 }
 
