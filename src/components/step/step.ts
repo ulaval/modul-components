@@ -31,7 +31,7 @@ export class MStep extends Vue {
     public last: boolean;
 
     public componentName = STEP_NAME;
-    public animIsActive: boolean = false;
+    public isAnimActive: boolean = false;
 
     private propsOpen: boolean = false;
 
@@ -40,14 +40,14 @@ export class MStep extends Vue {
     }
 
     private openStep(event): void {
-        this.animIsActive = true;
+        this.isAnimActive = true;
         this.propsOpen = true;
         this.$emit('openStep', event);
         event.preventDefault();
     }
 
     private closeStep(event): void {
-        this.animIsActive = true;
+        this.isAnimActive = true;
         this.propsOpen = false;
         this.$emit('closeStep', event);
         event.preventDefault();

@@ -1,0 +1,21 @@
+{
+    "tag": "m-spinner",
+    "name": "m-spinner-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "loading",
+                "processing"
+            ],
+            "default": "loading"
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-spinner-meta:context-of-use"
+        }
+    ]
+}

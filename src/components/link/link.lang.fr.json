@@ -1,6 +1,5 @@
 {
     "m-link": {
-        "open-all": "Tout ouvrir",
-        "close-all": "Tout fermer"
+        "open-new-tab": "Cet hyperlien s'ouvrira dans un nouvel onglet."
     }
 }

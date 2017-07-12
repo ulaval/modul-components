@@ -13,6 +13,9 @@
             ],
             "default": 0
         },
+        "value": {
+            "type": "string"
+        },
         "state": {
             "type": "string",
             "values": [
@@ -23,13 +26,10 @@
             ],
             "default": 0
         },
-        "value": {
+        "defaultText": {
             "type": "string"
         },
-        "default-text": {
-            "type": "string"
-        },
-        "isSelectionActive": {
+        "editable": {
             "type": "boolean",
             "default": true
         },
@@ -41,6 +41,10 @@
         },
         "helperMessage": {
             "type": "string"
+        },
+        "forceFocus": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": [

@@ -54,8 +54,13 @@ export type ComponentMetaMap = {
     [key: string]: ComponentMeta;
 };
 
+export type CategoryComponentMap = {
+    [key: string]: ComponentMeta[];
+};
+
 export class Meta {
     private componentMeta: ComponentMetaMap = {};
+    private categories: CategoryComponentMap = {};
 
     constructor() {
         components.forEach(componentTag => {
@@ -67,17 +72,33 @@ export class Meta {
         });
     }
 
-    public mergeComponentMeta(tag: string, meta: ComponentMeta): void {
+    public mergeComponentMeta(tag: string, meta: ComponentMeta, category?: string): void {
         let metaObject: ComponentMeta = this.componentMeta[tag];
         this.componentMeta[tag] = {...metaObject, ...meta};
+        if (category) {
+            let categoryComponents: ComponentMeta[] = this.categories[category];
+            if (!categoryComponents) {
+                categoryComponents = [];
+                this.categories[category] = categoryComponents;
+            }
+            categoryComponents.push(this.componentMeta[tag]);
+        }
     }
 
     public getTags(): string[] {
         return Object.keys(this.componentMeta).filter(key => this.componentMeta.hasOwnProperty(key));
     }
 
+    public getCategories(): string[] {
+        return Object.keys(this.categories).filter(key => this.categories.hasOwnProperty(key));
+    }
+
     public getMetaByTag(tag: string): ComponentMeta {
         return this.componentMeta[tag];
+    }
+
+    public getMetaByCategory(category: string): ComponentMeta[] {
+        return this.categories[category];
     }
 
     public getComponentAttributes(componentMeta: ComponentMeta): string[] {

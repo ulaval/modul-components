@@ -1,0 +1,24 @@
+{
+    "tag": "m-validation-message",
+    "name": "m-validation-message-meta:name",
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-validation-message-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-validation-message-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-validation-message-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-validation-message-meta:dont"
+        }
+    ]
+}

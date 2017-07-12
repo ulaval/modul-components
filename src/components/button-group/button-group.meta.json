@@ -1,0 +1,52 @@
+{
+    "tag": "m-button-group",
+    "name": "m-button-group-meta:name",
+    "attributes": {
+        "buttonGroupValues": {
+            "type": "MButtonGroupData"
+        },
+        "name": {
+            "type": "string",
+            "values": [
+                "button-group"
+            ],
+            "default": 0
+        },
+        "icon": {
+            "type": "string",
+            "default": false
+        },
+        "iconPosition": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        },
+        "fullSize": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-button-group-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-button-group-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-button-group-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-button-group-meta:dont"
+        }
+    ]
+}

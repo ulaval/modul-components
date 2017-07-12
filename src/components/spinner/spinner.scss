@@ -1,0 +1,43 @@
+@import 'abstracts/variables';
+$m-loading-speed: 0.7s;
+
+.m-spinner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    &__title {
+        font-weight: 400;
+        white-space: pre-line;
+        margin-bottom: 2px;
+        font-size: 18px;
+    }
+
+    &__description {
+        font-size: 16px;
+        margin-top: 0;
+    }
+
+    &__icon {
+        animation: m-infinity-rotation $m-loading-speed linear infinite;
+
+        circle {
+            stroke-width: 4px;
+            fill: none;
+        }
+
+        .m-spinner {
+            &__circle-background {
+                stroke: $m-color--grey-light;
+            }
+
+            &__circle-foreground {
+                stroke-width: 4px;
+                stroke: $m-color--ul-yellow;
+                stroke-dasharray: 45 250;
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+<m-dialog :mode="mode"
+          :id="id"
+          :open="open"
+          :closeOnBackdrop="closeOnBackdrop"
+          :title="title"
+          :className="className">
+    <div slot="header" v-if="hasHeaderSlot"><slot name="header"></slot></div>
+    <div slot="content" v-if="hasContentSlot"><slot name="content"></slot></div>
+    <div slot="footer" v-if="hasFooterSlot"><slot name="footer"></slot></div>
+    <slot>{{ componentName }}</slot>
+</m-dialog>

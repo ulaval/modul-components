@@ -1,6 +1,37 @@
 {
     "tag": "m-dialog",
     "name": "m-dialog-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "primary",
+                "secondary",
+                "panel"
+            ],
+            "default": 0
+        },
+        "id": {
+            "type": "string",
+            "values": [
+                "mDialog"
+            ],
+            "default": 0
+        },
+        "open": {
+            "type": "boolean",
+            "default": false
+        },
+        "closeOnBackdrop": {
+            "type": "boolean"
+        },
+        "title": {
+            "type": "string"
+        },
+        "className": {
+            "type": "string"
+        }
+    },
     "overview": [
         {
             "type": "rubric",
