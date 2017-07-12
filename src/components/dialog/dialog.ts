@@ -93,7 +93,7 @@ export class MDialog extends ModulVue implements DialogPropsMixin {
             this.isVisible = false;
             this.isAnimActive = true;
             this.$mWindow.backdropElement.style.zIndex = String(this.$mWindow.windowZIndex - 1);
-            if (this.$mWindow.windowCount == 1) {
+            if (this.$mWindow.windowCount == 1 && this.$mWindow.hasBackdrop) {
                 this.$mWindow.backdropElement.style.opacity = '0';
             }
             setTimeout(() => {
@@ -116,44 +116,27 @@ export class MDialog extends ModulVue implements DialogPropsMixin {
         this.portalTargetElement.setAttribute('class', 'm-dialog-popover');
         this.portalTargetElement.style.position = 'relative';
 
-        if (this.$mWindow.windowCount == 0) {
-            this.addFirstDialog();
-        } else {
-            this.bodyElement.appendChild(this.portalTargetElement);
-            this.addDialog();
-        }
-    }
-
-    private deleteDialog() {
-        let portalTargetElement: HTMLElement = this.getPortalTargetElement();
-        if (portalTargetElement) {
-            document.body.removeChild(portalTargetElement);
-        }
-        this.$mWindow.deleteWindow(this.propId);
-    }
-
-    private addFirstDialog() {
         this.$mWindow.addWindow(this.propId);
         this.portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
-        this.$mWindow.createBackdrop(this.bodyElement);
+
+        if (!this.$mWindow.hasBackdrop) {
+            this.$mWindow.createBackdrop(this.bodyElement);
+        }
         this.bodyElement.appendChild(this.portalTargetElement);
     }
 
-    private addDialog() {
-        let portalTargetElement: HTMLElement = this.getPortalTargetElement();
-        portalTargetElement.style.position = 'relative';
-        this.$mWindow.addWindow(this.propId);
-        portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
+    private deleteDialog() {
+        let portalTargetElement: HTMLElement = this.bodyElement.querySelector('#' + this.propId) as HTMLElement;
+        if (portalTargetElement) {
+            this.bodyElement.removeChild(portalTargetElement);
+        }
+        this.$mWindow.deleteWindow(this.propId);
     }
 
     private backdropClick(event): void {
         if (this.propCloseOnBackdrop) {
             this.closeDialog(event);
         }
-    }
-
-    private getPortalTargetElement(): HTMLElement {
-        return document.querySelector('#' + this.propId) as HTMLElement;
     }
 
     private get propMode(): string {

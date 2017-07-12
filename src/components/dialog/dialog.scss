@@ -21,14 +21,17 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
             display: block;
         }
 
+        &.m--is-primary,
+        &.m--is-secondary {
+            @media screen and (min-width: $m-screen--min--s) {
+                padding: $m-padding--l;
+            }
+        }
+
         &.m--is-primary {
             overflow-x: hidden;
             overflow-y: auto;
             padding: $m-padding;
-
-            @media screen and (min-width: $m-screen--min--s) {
-                padding: $m-padding--l;
-            }
 
             .m-dialog {
                 &__article {

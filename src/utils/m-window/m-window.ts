@@ -7,7 +7,7 @@ const BACKDROP_STYLE_TRANSITION: string = 'opacity 0.3s ease';
 const BACKDROP_STYLE_POSITION: string = 'fixed';
 const BACKDROP_STYLE_POSITION_VALUE: string = '0';
 const BACKDROP_STYLE_BACKGROUND: string = '#000';
-const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.7';
+const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.8';
 const BACKDROP_STYLE_OPACITY: string = '0';
 const Z_INDEZ_DEFAULT: number = 100;
 
@@ -22,6 +22,7 @@ export class MWindow {
     public backdropElement: HTMLElement;
     public backdropId: string = '';
     public windowZIndex: number = Z_INDEZ_DEFAULT;
+    public hasBackdrop: boolean = false;
 
     public addWindow(windowId): void {
         this.windowCount++;
@@ -38,6 +39,7 @@ export class MWindow {
     }
 
     public deleteWindow(windowId): void {
+        console.log('windowId', windowId);
         this.windowCount--;
         this.windowZIndex--;
         if (this.windowCount == 0) {
@@ -51,7 +53,8 @@ export class MWindow {
     }
 
     public createBackdrop(targetElement: HTMLElement = this.bodyElement): void {
-        if (this.backdropId == '') {
+        if (!this.hasBackdrop) {
+            this.hasBackdrop = true;
             this.backdropElement = document.createElement('div');
             this.backdropId = BACKDROP_ID + '-' + uuid.generate();
             this.backdropElement.setAttribute('id', this.backdropId);
@@ -67,7 +70,7 @@ export class MWindow {
     }
 
     public removeBackdrop() {
-        this.backdropId = '';
+        this.hasBackdrop = false;
         document.body.removeChild(this.backdropElement);
     }
 

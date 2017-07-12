@@ -8,7 +8,22 @@
                 "loading",
                 "processing"
             ],
-            "default": "loading"
+            "default": 0
+        },
+        "aspect": {
+            "type": "string",
+            "values": [
+                "default",
+                "light",
+                "dark"
+            ],
+            "default": 0
+        },
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
         }
     },
     "overview": [
