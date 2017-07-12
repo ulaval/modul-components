@@ -13,9 +13,11 @@ export const LINK_NAME: string = 'm-link';
 export const LIST_BULLET_NAME: string = 'm-list-bullet';
 export const MESSAGE_NAME: string = 'm-message';
 export const PANEL_NAME: string = 'm-panel';
+export const PANEL_DIALOG_NAME: string = 'm-panel-dialog';
 export const POPPER_LIST_NAME: string = 'm-popper-list';
 export const POPPER_NAME: string = 'm-popper';
 export const RADIO_BUTTONS_NAME: string = 'm-radio-buttons';
+export const SECONDARY_DIALOG_NAME: string = 'm-secondary-dialog';
 export const SPINNER_NAME: string = 'm-spinner';
 export const STATUS_LIST_NAME: string = 'm-status-list';
 export const STEP_NAME: string = 'm-step';
@@ -44,9 +46,11 @@ export const components: string[] = [
     LIST_BULLET_NAME,
     MESSAGE_NAME,
     PANEL_NAME,
+    PANEL_DIALOG_NAME,
     POPPER_LIST_NAME,
     POPPER_NAME,
     RADIO_BUTTONS_NAME,
+    SECONDARY_DIALOG_NAME,
     SPINNER_NAME,
     STATUS_LIST_NAME,
     STEP_NAME,

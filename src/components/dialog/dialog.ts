@@ -6,6 +6,7 @@ import WithRender from './dialog.html?style=./dialog.scss';
 import { DIALOG_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { DialogProps, DialogPropsMixin } from '../../mixins/dialog-props/dialog-props';
 
 const MODE_PRIMARY = 'primary';
 const MODE_SECONDARY = 'secondary';
@@ -16,41 +17,34 @@ const TRANSITION_DURATION_LONG = 600;
 
 @WithRender
 @Component({
-    mixins: [MediaQueries]
+    mixins: [
+        MediaQueries,
+        DialogProps
+    ]
 })
-export class MDialog extends ModulVue {
+export class MDialog extends ModulVue implements DialogPropsMixin {
     @Prop({ default: MODE_PRIMARY })
     public mode: string;
-    @Prop({ default: 'mDialog' })
+
+    // DialogPropsMixin props
     public id: string;
-    @Prop()
-    public className: string;
-    @Prop({ default: false })
     public open: boolean;
-    @Prop({ default: 'body' })
-    public targetElement: string;
-    @Prop({ default: '' })
-    public title: string;
-    @Prop()
     public closeOnBackdrop: boolean;
+    public title: string;
+    public className: string;
 
     public componentName: string = DIALOG_NAME;
 
     private propOpen: boolean = false;
     private propId: string = 'mDialog';
-    private propTargetElement: HTMLElement = document.body;
-    private elementPortalTarget: HTMLElement = document.createElement('div');
     private propCloseOnBackdrop: boolean;
+    private bodyElement: HTMLElement = document.body;
+    private portalTargetElement: HTMLElement = document.createElement('div');
     private nbDialog: number = 0;
     private isVisible: boolean = false;
     private isAnimActive: boolean = false;
     private isScreenMinS: boolean;
     private transitionDuration: number = TRANSITION_DURATION;
-
-    @Watch('targetElement')
-    private setTargetElement(newTagetElement): void {
-        this.propTargetElement = document.querySelector(newTagetElement) as HTMLElement;
-    }
 
     @Watch('open')
     private isOpenChanged(newValue): void {
@@ -63,7 +57,6 @@ export class MDialog extends ModulVue {
     }
 
     private beforeMount(): void {
-        this.setTargetElement(this.targetElement);
         if (this.open) {
             this.openDialog();
         }
@@ -119,38 +112,38 @@ export class MDialog extends ModulVue {
 
     private createDialog() {
         this.propId = this.id + '-' + uuid.generate();
-        this.elementPortalTarget.setAttribute('id', this.propId);
-        this.elementPortalTarget.setAttribute('class', 'm-dialog-popover');
-        this.elementPortalTarget.style.position = 'relative';
+        this.portalTargetElement.setAttribute('id', this.propId);
+        this.portalTargetElement.setAttribute('class', 'm-dialog-popover');
+        this.portalTargetElement.style.position = 'relative';
 
         if (this.$mWindow.windowCount == 0) {
             this.addFirstDialog();
         } else {
-            this.propTargetElement.appendChild(this.elementPortalTarget);
+            this.bodyElement.appendChild(this.portalTargetElement);
             this.addDialog();
         }
     }
 
     private deleteDialog() {
-        let elementPortalTarget: HTMLElement = this.getElementPortalTarget();
-        if (elementPortalTarget) {
-            document.body.removeChild(elementPortalTarget);
+        let portalTargetElement: HTMLElement = this.getPortalTargetElement();
+        if (portalTargetElement) {
+            document.body.removeChild(portalTargetElement);
         }
         this.$mWindow.deleteWindow(this.propId);
     }
 
     private addFirstDialog() {
         this.$mWindow.addWindow(this.propId);
-        this.elementPortalTarget.style.zIndex = String(this.$mWindow.windowZIndex);
-        this.$mWindow.createBackdrop(this.propTargetElement);
-        this.propTargetElement.appendChild(this.elementPortalTarget);
+        this.portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
+        this.$mWindow.createBackdrop(this.bodyElement);
+        this.bodyElement.appendChild(this.portalTargetElement);
     }
 
     private addDialog() {
-        let elementPortalTarget: HTMLElement = this.getElementPortalTarget();
-        elementPortalTarget.style.position = 'relative';
+        let portalTargetElement: HTMLElement = this.getPortalTargetElement();
+        portalTargetElement.style.position = 'relative';
         this.$mWindow.addWindow(this.propId);
-        elementPortalTarget.style.zIndex = String(this.$mWindow.windowZIndex);
+        portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
     }
 
     private backdropClick(event): void {
@@ -159,7 +152,7 @@ export class MDialog extends ModulVue {
         }
     }
 
-    private getElementPortalTarget(): HTMLElement {
+    private getPortalTargetElement(): HTMLElement {
         return document.querySelector('#' + this.propId) as HTMLElement;
     }
 
@@ -183,18 +176,6 @@ export class MDialog extends ModulVue {
 
     private get hasTitle(): boolean {
         return this.title == '' ? false : true;
-    }
-
-    private get hasDefaultSlots(): boolean {
-        return !!this.$slots.default;
-    }
-
-    private get hasHeaderSlot(): boolean {
-        return !!this.$slots.header;
-    }
-
-    private get hasFooterSlot(): boolean {
-        return !!this.$slots.footer;
     }
 }
 

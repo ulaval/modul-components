@@ -1,0 +1,27 @@
+{
+    "tag": "m-panel-window",
+    "name": "m-panel-window:name",
+    "attributes": {
+
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-panel-window-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-panel-window-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-panel-window-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-panel-window-meta:dont"
+        }
+    ]
+}
