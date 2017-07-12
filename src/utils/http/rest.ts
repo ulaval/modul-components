@@ -1,8 +1,8 @@
 export interface RequestConfig {
     method?: string;
-    url?: string;
+    rawUrl?: string;
     pathParams?: any;
-    queryParams?: any;
+    params?: any;
     headers?: any;
     formParams?: any;
     data?: any;
