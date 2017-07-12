@@ -251,7 +251,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         if (typeof element == UNDEFINED) {
             text = '';
         } else if (this.getTextElement) {
-            text = this.getTextElement({ element: element });
+            text = this.getTextElement(element);
         } else {
             text = String(element);
         }
