@@ -35,7 +35,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
     @Prop()
     public iconPosition: string;
     @Prop()
-    public iconStyle: string;
+    public iconAspect: string;
     @Prop()
     public iconSize: string;
 
@@ -45,7 +45,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
     private propMode: string = MODE_REGULAR;
     private propOpen: boolean = false;
     private propIconPosition: string = ICON_POSITION_RIGHT;
-    private propIconStyle: string = ICON_STYLE_DEFAULT;
+    private propIconAspect: string = ICON_STYLE_DEFAULT;
     private propIconSize: string = ICON_SIZE_LARGE;
     private eventBus: Vue = new Vue();
 
@@ -56,7 +56,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
         this.propOpen = this.open == undefined ? false : this.open;
         this.propIconPosition = this.iconPosition;
         this.propIconSize = this.iconSize;
-        this.propIconStyle = this.iconStyle;
+        this.propIconAspect = this.iconAspect;
         this.setMode();
     }
 
@@ -69,8 +69,8 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
                 if (this.propIconSize == undefined) {
                     this.propIconSize = ICON_SIZE_SMALL;
                 }
-                if (this.propIconStyle == undefined) {
-                    this.propIconStyle = ICON_STYLE_BORDER;
+                if (this.propIconAspect == undefined) {
+                    this.propIconAspect = ICON_STYLE_BORDER;
                 }
                 break;
             case MODE_NO_STYLE:
@@ -83,8 +83,8 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
                 if (this.propIconSize == undefined) {
                     this.propIconSize = ICON_SIZE_LARGE;
                 }
-                if (this.propIconStyle == undefined) {
-                    this.propIconStyle = ICON_STYLE_DEFAULT;
+                if (this.propIconAspect == undefined) {
+                    this.propIconAspect = ICON_STYLE_DEFAULT;
                 }
         }
     }
@@ -94,7 +94,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
             case MODE_LIGHT:
                 this.propIconPosition = ICON_POSITION_LEFT;
                 this.propIconSize = ICON_SIZE_SMALL;
-                this.propIconStyle = ICON_STYLE_BORDER;
+                this.propIconAspect = ICON_STYLE_BORDER;
                 break;
             case MODE_NO_STYLE:
                 this.setModeNoStyle();
@@ -102,7 +102,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
             default:
                 this.propIconPosition = ICON_POSITION_RIGHT;
                 this.propIconSize = ICON_SIZE_LARGE;
-                this.propIconStyle = ICON_STYLE_DEFAULT;
+                this.propIconAspect = ICON_STYLE_DEFAULT;
         }
     }
 
@@ -113,8 +113,8 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
         if (this.propIconSize == undefined) {
             this.propIconSize = ICON_SIZE_LARGE;
         }
-        if (this.propIconStyle == undefined) {
-            this.propIconStyle = ICON_STYLE_DEFAULT;
+        if (this.propIconAspect == undefined) {
+            this.propIconAspect = ICON_STYLE_DEFAULT;
         }
     }
 

@@ -23,7 +23,7 @@
             ],
             "default": 1
         },
-        "iconStyle": {
+        "iconAspect": {
             "type": "string",
             "values": [
                 "default",
