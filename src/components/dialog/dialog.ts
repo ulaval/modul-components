@@ -5,7 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dialog.html?style=./dialog.scss';
 import { DIALOG_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
-import { MediaQueries } from '../../../src/mixins/media-queries/media-queries';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 
 const MODE_PRIMARY = 'primary';
 const MODE_SECONDARY = 'secondary';
