@@ -1,6 +1,13 @@
 {
     "meta": {
         "context-of-use": "Contexte d'utilisation",
-        "usage": "Règles d'utilisation"
+        "usage": "Règles d'utilisation",
+        "communication": "Communication",
+        "content": "Contenu",
+        "forms": "Formulaires",
+        "indicators": "Indicators",
+        "navigation": "Navigation",
+        "search-sort": "Recherche et tri",
+        "layout": "Disposition"
     }
 }

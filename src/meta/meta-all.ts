@@ -7,13 +7,14 @@ import {
 import { RIPPLE_EFFECT_NAME } from '../directives/directive-names';
 import { Meta } from './meta';
 
-const CATEGORY_COMUNICATION: string = 'COMMUNICATION';
-const CATEGORY_CONTENT: string = 'CONTENT';
-const CATEGORY_FORMS: string = 'FORMS';
-const CATEGORY_INDICATORS: string = 'INDICATORS';
-const CATEGORY_NAVIGATION: string = 'NAVIGATION';
-const CATEGORY_SEARCH_SORT: string = 'SEARCH_SORT';
-const CATEGORY_LAYOUT: string = 'LAYOUT';
+// should be i18n key format
+const CATEGORY_COMUNICATION: string = 'meta:communication';
+const CATEGORY_CONTENT: string = 'meta:content';
+const CATEGORY_FORMS: string = 'meta:forms';
+const CATEGORY_INDICATORS: string = 'meta:indicators';
+const CATEGORY_NAVIGATION: string = 'meta:navigation';
+const CATEGORY_SEARCH_SORT: string = 'meta:search-sort';
+const CATEGORY_LAYOUT: string = 'meta:layout';
 
 export class MetaAll implements PluginObject<any> {
     public install(v, options) {
