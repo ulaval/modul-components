@@ -9,12 +9,14 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/accordion/accordion.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/accordion-group/accordion-group.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/button/button.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/button-group/button-group.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/checkbox/checkbox.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dialog/dialog.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dynamic-template/dynamic-template.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/i18n/i18n.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/icon/icon.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/limit-text/limit-text.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/link/link.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/list-bullet/list-bullet.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/message/message.meta.fr.json'));
@@ -22,6 +24,7 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/popper/popper.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/popper-list/popper-list.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/radio-buttons/radio-buttons.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/spinner/spinner.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/status-list/status-list.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/step/step.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/table/table.meta.fr.json'));

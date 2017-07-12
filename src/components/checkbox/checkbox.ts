@@ -20,14 +20,14 @@ export class MCheckbox extends Vue {
     public label: boolean;
 
     public componentName: string = CHECKBOX_NAME;
-    private propsChecked = true;
-    private propsLabel = true;
+    private propChecked = true;
+    private propLabel = true;
     private isFocus = false;
-    private id: string = `checkbox${uuid.generate()}`;
+    private id: string = `mCheckbox-${uuid.generate()}`;
 
     public mounted(): void {
-        this.propsChecked = this.checked;
-        this.propsLabel = this.label;
+        this.propChecked = this.checked;
+        this.propLabel = this.label;
     }
 
     private onClick(event): void {

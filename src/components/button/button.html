@@ -1,25 +1,25 @@
-<button class="m-button" :class="{ 'm--is-primary': propsMode=='primary',
-              'm--is-secondary': propsMode=='secondary',
-              'm--is-icon': propsMode=='icon',
-              'm--is-selected': propsState=='selected',
-              'm--is-waiting': propsState=='waiting',
-              'm--is-disabled': propsState=='disabled',
-              'm--is-full-size': isFullSize }" :disabled="isDisabled" :type="type" @click="onClick">
-    <span class="m-button__wrap" v-if="propsMode!='icon'">
-        <m-icon aria-hidden="true" class="m-button__icon m--is-left" :name="iconName" :width="propsIconSize" :height="propsIconSize" v-if="hasIconeLeft && hasIcone"></m-icon>
+<button class="m-button" :class="{ 'm--is-primary': propMode=='primary',
+              'm--is-secondary': propMode=='secondary',
+              'm--is-icon': propMode=='icon',
+              'm--is-selected': propState=='selected',
+              'm--is-waiting': propState=='waiting',
+              'm--is-disabled': propState=='disabled',
+              'm--is-full-size': fullSize }" :disabled="isDisabled" :type="type" @click="onClick">
+    <span class="m-button__wrap" v-if="propMode!='icon'">
+        <m-icon aria-hidden="true" class="m-button__icon m--is-left" :name="iconName" :width="propIconSize" :height="propIconSize" v-if="hasIconeLeft && hasIcone"></m-icon>
         <span class="m-button__text">
             <slot>m-button</slot>
             <span class="m-button__more-info" v-if="hasMoreInfo">
                 <slot name="more-info"></slot>
             </span>
         </span>
-        <m-icon aria-hidden="true" class="m-button__icon m--is-right" :name="iconName" :width="propsIconSize" :height="propsIconSize" v-if="!hasIconeLeft  && hasIcone"></m-icon>
+        <m-icon aria-hidden="true" class="m-button__icon m--is-right" :name="iconName" :width="propIconSize" :height="propIconSize" v-if="!hasIconeLeft  && hasIcone"></m-icon>
     </span>
-    <span class="m-button__icon" v-if="propsMode=='icon' && hasIcone">
-        <m-icon :name="iconName" :width="propsIconSize" :height="propsIconSize"></m-icon>
+    <span class="m-button__icon" v-if="propMode=='icon' && hasIcone">
+        <m-icon :name="iconName" :width="propIconSize" :height="propIconSize"></m-icon>
         <span class="m-button__hidden" v-if="hasSlots"><slot></slot></span>
         <span v-if="!hasSlots">m-button icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the voice readers.
 </span>
     </span>
-    <span v-if="propsMode=='icon' && !hasIcone">{{ errorMessageIcon }}</span>
+    <span v-if="propMode=='icon' && !hasIcone">{{ errorMessageIcon }}</span>
 </button>

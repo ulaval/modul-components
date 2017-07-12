@@ -6,6 +6,8 @@ import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
 import Popper from 'popper.js';
 
+const MODE_DROPDOWN = 'dropdown';
+
 export interface IPopperOptions {
     placement: string;
     gpuAcceleration: boolean;
@@ -19,10 +21,12 @@ export class MPopper extends Vue {
     @Prop({ default: 'default' })
     public mode: string;
     @Prop({
-        default: 'hover',
+        default: 'click',
         validator: (value) => ['click', 'hover'].indexOf(value) > -1
     })
     public trigger: string;
+    @Prop({ default: false })
+    public open: boolean;
     @Prop({ default: false })
     public disabled: boolean;
     @Prop()
@@ -36,7 +40,7 @@ export class MPopper extends Vue {
     @Prop({ default: false })
     public appendToBody: boolean;
     @Prop({ default: false })
-    public visibleArrow: boolean;
+    public arrow: boolean;
     @Prop()
     public options: any;
     @Prop({ default: false })
@@ -48,7 +52,7 @@ export class MPopper extends Vue {
     public referenceElm;
     public popperJS;
     public showPopper: boolean = false;
-    public isAnimPopperActive: boolean = false;
+    public animPopperActive: boolean = false;
     public currentPlacement: string = '';
     public popperOptions: IPopperOptions = {
         placement: 'bottom',
@@ -79,13 +83,18 @@ export class MPopper extends Vue {
         this[value ? 'doShow' : 'doClose']();
     }
 
+    @Watch('open')
+    public openChanged(value) {
+        this.showPopper = this.open;
+    }
+
     private created(): void {
         this.popperOptions = { ...this.popperOptions, ...this.options };
     }
 
     private mounted(): void {
         if ((this.$slots.reference) && (this.$slots.default)) {
-            this.propsMode = this.$props.mode;
+            this.propsMode = this.mode;
             this.referenceElm = this.reference || this.$slots.reference[0].elm;
             this.popper = this.$slots.default[0].elm;
 
@@ -138,7 +147,7 @@ export class MPopper extends Vue {
 
     private createPopper(): void {
         this.$nextTick(() => {
-            if (this.visibleArrow) {
+            if (this.arrow) {
                 this.appendArrow(this.popper);
             }
 
@@ -229,8 +238,8 @@ export class MPopper extends Vue {
     }
 
     private animEnter(element, done): void {
-        this.isAnimPopperActive = true;
-        if (this.propsMode == 'dropdown' && !this.appendToBody) {
+        this.animPopperActive = true;
+        if (this.propsMode == MODE_DROPDOWN && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
             el.style.overflowY = 'hidden';
@@ -245,7 +254,7 @@ export class MPopper extends Vue {
     }
 
     private animAfterEnter(element): void {
-        if (this.propsMode == 'dropdown' && !this.appendToBody) {
+        if (this.propsMode == MODE_DROPDOWN && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             setTimeout(() => {
                 el.style.maxHeight = this.dropdownMaxHeight + 'px';
@@ -255,7 +264,7 @@ export class MPopper extends Vue {
     }
 
     private animLeave(element, done): void {
-        if (this.propsMode == 'dropdown' && !this.appendToBody) {
+        if (this.propsMode == MODE_DROPDOWN && !this.appendToBody) {
             let el = element.querySelector(this.dropdownClass);
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';
@@ -263,11 +272,11 @@ export class MPopper extends Vue {
             el.style.maxHeight = '0';
             setTimeout(() => {
                 el.style.maxHeight = 'none';
-                this.isAnimPopperActive = false;
+                this.animPopperActive = false;
                 done();
             }, 300);
         } else {
-            this.isAnimPopperActive = false;
+            this.animPopperActive = false;
             done();
         }
     }

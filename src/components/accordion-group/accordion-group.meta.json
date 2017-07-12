@@ -2,7 +2,7 @@
     "tag": "m-accordion-group",
     "name": "m-accordion-group-meta:name",
     "attributes": {
-        "areAllOpen": {
+        "allOpen": {
             "type": "boolean",
             "default": false
         },
@@ -15,7 +15,7 @@
             ],
             "default": 0
         },
-        "isConcurrent": {
+        "concurrent": {
             "type": "boolean",
             "default": false
         }

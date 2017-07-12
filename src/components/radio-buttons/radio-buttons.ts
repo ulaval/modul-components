@@ -54,7 +54,6 @@ export class MRadioButtons extends Vue {
     private isFocus: boolean = false;
     private checkedValue: string = '';
     private defaultCheckedValue: string = this.findChecked();
-    private test: boolean = false;
 
     private mounted(): void {
         this.propsHasLabel = this.hasLabel;

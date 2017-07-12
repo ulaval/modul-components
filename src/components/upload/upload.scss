@@ -1,2 +1,6 @@
-@import url("https://unpkg.com/element-ui/lib/theme-default/index.css");
-@import "../../styles/vendor/el-uploader.css";
+@import 'abstracts/variables';
+
+.reading {
+    color: $m-color--grey-dark;
+}
+
