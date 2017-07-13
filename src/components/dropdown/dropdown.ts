@@ -115,10 +115,8 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         }
     }
 
-    public selectElement($event, element: any): void {
-        this.propSelectedElement = element;
-        this.textElement = this.getSelectedElementText();
-        this.$emit('elementSelected', this.propSelectedElement);
+    public onSelectElement($event, element: any): void {
+        this.selectElement(element);
     }
 
     public getSelectedElementText(): string {
@@ -265,6 +263,12 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         }
     }
 
+    private selectElement(element: any): void {
+        this.propSelectedElement = element;
+        this.textElement = this.getSelectedElementText();
+        this.$emit('elementSelected', this.propSelectedElement);
+    }
+
     private getTextWidth(element: HTMLElement, text: string): number {
         element.innerHTML = text;
         return element.offsetWidth;
@@ -293,8 +297,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
             // Default element
             if (this.defaultFirstElement && elementsSorted[0]) {
-                this.propSelectedElement = elementsSorted[0];
-                this.$emit('elementSelected', this.propSelectedElement);
+                this.selectElement(elementsSorted[0]);
             }
             this.textElement = this.getSelectedElementText();
         }
