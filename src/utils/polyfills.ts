@@ -70,7 +70,7 @@ if (!Array.prototype['includes']) {
         value: function(searchElement, fromIndex) {
 
             // 1. Let O be ? ToObject(this value).
-            if (this == null) {
+            if (this == undefined) {
                 throw new TypeError('"this" is null or not defined');
             }
 
