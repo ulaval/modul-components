@@ -23,6 +23,14 @@ export class DialogProps extends Vue implements DialogPropsMixin {
     public title: string;
     @Prop()
     public className: string;
+    @Prop({ default: true })
+    public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
+    @Prop({ default: true })
+    public paddingFooter: boolean;
 
     private get hasDefaultSlots(): boolean {
         return !!this.$slots.default;
