@@ -8,16 +8,17 @@
               :closeOnContentClick="true"
               :closeOnReferenceClick="false"
               :disabled="isDisabled"
-              :open="propsOpen"
+              :open="propOpen"
               mode="dropdown"
               @show="toggleDropdown(true)"
-              @hide="toggleDropdown(false)">
+              @hide="toggleDropdown(false)"
+              v-if="!isScreenMaxS">
         <ul class="m-dropdown__list"
             ref="mDropdownElements">
             <li v-for="(element, index) in elementsSortedFiltered"
                 v-if="elementsCount > 0"
                 class="m-dropdown__list__element"
-                :class="{ 'is-selected': element === propsSelectedElement }"
+                :class="{ 'is-selected': element === propSelectedElement }"
                 :key="index"
                 @click="selectElement($event, element)">
                 <a href="#"
@@ -33,23 +34,70 @@
                 </span>
             </li>
         </ul>
-
         <m-text-field ref="mDropdownValue"
                       slot="reference"
+                      :label="label"
                       :value="textElement"
-                      :state="propsState"
-                      :editable="isEditable"
-                      :force-focus="propsOpen"
+                      :state="propState"
+                      :editable="editable"
+                      :force-focus="propOpen"
                       :default-text="defaultText"
                       @valueChanged="textElement = $event"
                       @keyup="keyupReference"
-                      @focus="propsOpen = true">
-            <slot></slot>
+                      @focus="propOpen = true">
         </m-text-field>
     </m-popper>
+    <template v-if="isScreenMaxS">
+        <m-panel-dialog v-if="propState != 'disabled'" :paddingBody="false">
+            <div slot="header" v-if="hasLabel">
+                <span v-if="hasLabel">{{ label }}</span>
+                <template v-if="editable">
+                    <m-icon name="default"></m-icon>
+                    <input type="text" v-model="textElement">
+                </template>
+                <span v-if="!editable && textElement"> : {{ textElement }}</span>
+            </div>
+            <ul class="m-dropdown__list" slot="content">
+                <li v-for="(element, index) in elementsSortedFiltered"
+                    v-if="elementsCount > 0"
+                    class="m-dropdown__list__element"
+                    :class="{ 'is-selected': element === propSelectedElement }"
+                    :key="index"
+                    @click="selectElement($event, element)">
+                    <a href="#"
+                    class="m-dropdown__list__element-text"
+                    :data-index="index"
+                    @click.prevent
+                    @keyup="keyupItem($event, index)">{{ getElementListText(element) }}</a>
+                </li>
+                <li v-if="elementsCount <= 0"
+                    class="m-dropdown__list__element">
+                    <span class="m-dropdown__list__element-text">
+                        <m-i18n i18n-key="m-dropdown:no-result"></m-i18n>
+                    </span>
+                </li>
+            </ul>
+            <m-text-field :label="label"
+                          :value="textElement"
+                          :state="propState"
+                          :editable="editable"
+                          :force-focus="propOpen"
+                          :default-text="defaultText"
+                          @valueChanged="textElement = $event"
+                          @keyup="keyupReference"
+                          @focus="propOpen = true">
+            </m-text-field>
+        </m-panel-dialog>
+        <m-text-field :label="label"
+                      :value="textElement"
+                      :state="propState"
+                      :editable="false"
+                      v-if="propState == 'disabled'">
+        </m-text-field>
+    </template>
     <m-validation-message
-        :state="propsState"
-        :error-message="propsErrorMessage"
-        :valid-message="propsValidMessage"
+        :state="propState"
+        :error-message="propErrorMessage"
+        :valid-message="propValidMessage"
         :helper-message="helperMessage"></m-validation-message>
 </div>

@@ -16,6 +16,9 @@
         "value": {
             "type": "string"
         },
+        "label": {
+            "type": "string"
+        },
         "state": {
             "type": "string",
             "values": [
