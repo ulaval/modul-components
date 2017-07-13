@@ -4,7 +4,7 @@
     "attributes": {
         "multiple": {
             "type": "boolean",
-             "default": true
+             "default": false
         },
         "fileInput": {
             "type": "boolean",
@@ -33,6 +33,10 @@
         "extensions": {
             "type": "string[]",
             "default": []
+        },
+        "showImage": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": [
