@@ -39,7 +39,6 @@ export class MWindow {
     }
 
     public deleteWindow(windowId): void {
-        console.log('windowId', windowId);
         this.windowCount--;
         this.windowZIndex--;
         if (this.windowCount == 0) {

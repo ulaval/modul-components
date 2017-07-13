@@ -4,8 +4,8 @@
           :closeOnBackdrop="closeOnBackdrop"
           :title="title"
           :className="className">
-    <div slot="header" v-if="hasHeaderSlot"><slot name="header"></slot></div>
-    <div slot="content" v-if="hasContentSlot"><slot name="content"></slot></div>
-    <div slot="footer" v-if="hasFooterSlot"><slot name="footer"></slot></div>
+    <template slot="header" v-if="hasHeaderSlot"><slot name="header"></slot></template>
+    <template slot="content" v-if="hasContentSlot"><slot name="content"></slot></template>
+    <template slot="footer" v-if="hasFooterSlot"><slot name="footer"></slot></template>
     <slot>{{ componentName }}</slot>
 </m-dialog>

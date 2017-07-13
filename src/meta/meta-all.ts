@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import {
     ACCORDION_NAME, ACCORDION_GROUP_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, LIMIT_TEXT_NAME, ICON_NAME, LINK_NAME,
-    LIST_BULLET_NAME, MESSAGE_NAME, PANEL_NAME, POPPER_LIST_NAME, POPPER_NAME, RADIO_BUTTONS_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
+    LIST_BULLET_NAME, MESSAGE_NAME, PANEL_DIALOG_NAME, PANEL_NAME, POPPER_LIST_NAME, POPPER_NAME, RADIO_BUTTONS_NAME, SECONDARY_DIALOG_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
     UPLOAD_NAME
 } from '../components/component-names';
 import { RIPPLE_EFFECT_NAME } from '../directives/directive-names';
@@ -36,10 +36,12 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(LINK_NAME, require('../components/link/link.meta.json'), CATEGORY_NAVIGATION);
         meta.mergeComponentMeta(LIST_BULLET_NAME, require('../components/list-bullet/list-bullet.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(MESSAGE_NAME, require('../components/message/message.meta.json'), CATEGORY_COMUNICATION);
+        meta.mergeComponentMeta(PANEL_DIALOG_NAME, require('../components/panel-dialog/panel-dialog.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(PANEL_NAME, require('../components/panel/panel.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(POPPER_LIST_NAME, require('../components/popper-list/popper-list.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(POPPER_NAME, require('../components/popper/popper.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(RADIO_BUTTONS_NAME, require('../components/radio-buttons/radio-buttons.meta.json'), CATEGORY_FORMS);
+        meta.mergeComponentMeta(SECONDARY_DIALOG_NAME, require('../components/secondary-dialog/secondary-dialog.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(SPINNER_NAME, require('../components/spinner/spinner.meta.json'), CATEGORY_INDICATORS);
         meta.mergeComponentMeta(STATUS_LIST_NAME, require('../components/status-list/status-list.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(STEP_NAME, require('../components/step/step.meta.json'), CATEGORY_LAYOUT);
