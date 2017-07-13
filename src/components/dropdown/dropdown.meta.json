@@ -12,6 +12,9 @@
         "getTexteElement": {
             "type": "Function"
         },
+        "label": {
+            "type": "string"
+        },
         "open": {
             "type": "boolean",
              "default": false

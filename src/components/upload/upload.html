@@ -13,9 +13,18 @@
     </div>
 
     <ul class="m-upload__files-list" v-if="filesList">
-        <li v-for="(file, index) of globalFileList" :class="{'error': file.errorReading}">
-            <m-spinner mode="processing" v-if="!file.isRead"></m-spinner>{{ file.file.name }}
-            <m-button @click="remove(index)">Remove</m-button>
+        <li v-for="(file, index) of globalFileList"
+            class="m-upload__file"
+            :class="{'error': file.errorReading}">
+            <m-spinner class="m-upload__file__loading"
+                       mode="processing"
+                       v-if="!file.isRead"></m-spinner>
+            <span class="m-upload__file__name">{{ file.file.name }}</span>
+            <img :src="file.img"
+                 v-if="showImage && file.img"
+                 class="m-upload__file__image"
+                 :alt="file.file.name" />
+            <m-button class="m-upload__file__remove" @click="remove(index)">Remove</m-button>
         </li>
     </ul>
 

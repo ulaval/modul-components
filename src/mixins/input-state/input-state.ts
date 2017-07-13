@@ -25,18 +25,18 @@ export class InputState extends Vue implements InputStateMixin {
     public helperMessage: string;
 
     public get isDisabled(): boolean {
-        return this.propsState == STATE_DISABLED;
+        return this.propState == STATE_DISABLED;
     }
 
     public get hasError(): boolean {
-        return this.propsState == STATE_ERROR;
+        return this.propState == STATE_ERROR;
     }
 
     public get isValid(): boolean {
-        return this.propsState == STATE_VALID;
+        return this.propState == STATE_VALID;
     }
 
-    private get propsState(): string {
+    private get propState(): string {
         let state: string = this.state == STATE_DISABLED || this.state == STATE_ERROR || this.state == STATE_VALID ? this.state : STATE_DEFAULT;
         if (state != STATE_DISABLED && this.propsErrorMessage != '') {
             state = STATE_ERROR;

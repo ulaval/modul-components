@@ -1,18 +1,20 @@
-<div class="m-spinner" :class="{ 'm--is-loading': mode=='loading', 'm--is-processing': mode=='processing'}">
-    <svg class="m-spinner__icon" height="50" width="50">
-        <g transform="translate(25, 25)">
-            <circle class="m-spinner__circle-background" r="20" />
-            <circle class="m-spinner__circle-foreground" r="20" />
-        </g>
-    </svg>
-    <p class="m-spinner__title">
-        <slot name="title">
-            <m-i18n i18n-key="m-spinner:title"></m-i18n>
-        </slot>
-    </p>
-    <p class="m-spinner__description">
-        <slot name="description">
-            <m-i18n i18n-key="m-spinner:description"></m-i18n>
-        </slot>
-    </p>
+<div class="m-spinner" :aria-hidden="!defaultTagetElVisible">
+    <portal :targetEl="'#'+ spinnerId" v-if="spinnerVisible">
+        <div class="m-spinner__wrap"
+             :class="{'m--is-loading': mode == 'loading',
+                    'm--is-processing': mode == 'processing',
+                    'm--is-light': propAspect == 'light',
+                    'm--is-dark': propAspect == 'dark'}">
+            <svg class="m-spinner__icon" height="50" width="50" aria-hidden="true">
+                <g transform="translate(25, 25)">
+                    <circle class="m-spinner__circle-background" r="20" />
+                    <circle class="m-spinner__circle-foreground" r="20" />
+                </g>
+            </svg>
+            <h2 class="m-spinner__title" v-if="hasTitle">{{ title }}</h2>
+            <p class="m-spinner__description" v-if="hasDescription">{{ description }}</p>
+        </div>
+    </portal>
+    <div :id="spinnerId" v-if="defaultTagetElVisible"></div>
 </div>
+

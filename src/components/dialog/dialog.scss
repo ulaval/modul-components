@@ -21,14 +21,17 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
             display: block;
         }
 
+        &.m--is-primary,
+        &.m--is-secondary {
+            @media screen and (min-width: $m-screen--min--s) {
+                padding: $m-padding--l;
+            }
+        }
+
         &.m--is-primary {
             overflow-x: hidden;
             overflow-y: auto;
             padding: $m-padding;
-
-            @media screen and (min-width: $m-screen--min--s) {
-                padding: $m-padding--l;
-            }
 
             .m-dialog {
                 &__article {
@@ -213,6 +216,14 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
         width: 100%;
         background: $m-color--white;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    &__header,
+    &__body,
+    &__footer {
+        &.m--no-padding {
+            padding: 0;
+        }
     }
 
     &__body {

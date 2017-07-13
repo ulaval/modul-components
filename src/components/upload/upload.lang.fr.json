@@ -6,6 +6,7 @@
         "error-duplicate": "Fichier: {0} - Fichier déjà présent",
         "error-extension": "Fichier: {0} - Extentions non permise",
         "error-abort": "Fichier: {0} - Chargement interrompu",
-        "error-loading": "Fichier: {0} - Erreur au chargement"
+        "error-loading": "Fichier: {0} - Erreur au chargement",
+        "error-multiple": "Ajouter un seul fichier"
     }
 }

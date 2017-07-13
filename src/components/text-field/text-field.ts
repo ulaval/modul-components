@@ -29,6 +29,8 @@ export class MTexteField extends Vue implements InputStateMixin {
     public type: string;
     @Prop({ default: '' })
     public value: string;
+    @Prop()
+    public label: string;
     @Prop({ default: '' })
     public defaultText: string;
     @Prop({ default: true })
@@ -137,12 +139,12 @@ export class MTexteField extends Vue implements InputStateMixin {
         return this.type == TYPE_PASSWORD || this.type == TYPE_EMAIL || this.type == TYPE_URL || this.type == TYPE_TEL ? this.type : TYPE_TEL;
     }
 
-    private get propEditable(): boolean {
-        return this.editable;
+    private get hasLabel(): boolean {
+        return this.label == '' || this.label == undefined ? false : true;
     }
 
-    private get hasDefaultSlot(): boolean {
-        return !!this.$slots.default;
+    private get propEditable(): boolean {
+        return this.editable;
     }
 }
 
