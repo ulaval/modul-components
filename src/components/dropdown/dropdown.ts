@@ -291,6 +291,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
             // Default element
             if (this.defaultFirstElement && elementsSorted[0]) {
                 this.propsSelectedElement = elementsSorted[0];
+                this.$emit('elementSelected', this.propsSelectedElement);
             }
             this.textElement = this.getSelectedElementText();
         }
