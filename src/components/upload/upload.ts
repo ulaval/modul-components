@@ -15,19 +15,21 @@ const ERROR_DUPLICATE: string = 'm-upload:error-duplicate';
 const ERROR_EXTENSION: string = 'm-upload:error-extension';
 const ERROR_ABORT: string = 'm-upload:error-abort';
 const ERROR_LOADING: string = 'm-upload:error-loading';
+const ERROR_MULTIPLE: string = 'm-upload:error-multiple';
 
 export interface GlobalFileList {
     file: File;
     isRead: boolean;
     errorReading: boolean;
     reader?: FileReader;
+    img?: any;
 }
 
 @WithRender
 @Component
 export class MUpload extends ModulVue {
 
-    @Prop({ default: true })
+    @Prop({ default: false })
     public multiple: boolean;
     @Prop({ default: true })
     public fileInput: boolean;
@@ -43,6 +45,8 @@ export class MUpload extends ModulVue {
     public maxSizeBytes: number;
     @Prop({ default: () => [] })
     public extensions: string[];
+    @Prop({ default: false })
+    public showImage: boolean;
 
     public globalFileList: GlobalFileList[] = [];
     public errorMsgs: string[] = [];
@@ -81,7 +85,7 @@ export class MUpload extends ModulVue {
         this.globalFileList.splice(index, 1);
     }
 
-    public filesInput($event: Event) {
+    public filesInput($event: Event): void {
         let newFilesAdded: boolean = false;
 
         this.errorMsgs = [];
@@ -96,7 +100,7 @@ export class MUpload extends ModulVue {
         }
     }
 
-    public filesDrop($event: DragEvent) {
+    public filesDrop($event: DragEvent): void {
         let newFilesAdded: boolean = false;
 
         $event.stopPropagation();
@@ -106,10 +110,18 @@ export class MUpload extends ModulVue {
 
         let files: FileList = $event.dataTransfer.files;
 
-        // FileList object.
-        for (let i = 0; i < files.length; i++) {
-            let file: File = files.item(i);
-            newFilesAdded = this.addToGlobalFilelist(file) || newFilesAdded;
+        if (this.multiple) {
+            for (let i = 0; i < files.length; i++) {
+                let file: File = files.item(i);
+                newFilesAdded = this.addToGlobalFilelist(file) || newFilesAdded;
+            }
+        } else {
+            if (files.length == 1) {
+                this.globalFileList = [];
+                newFilesAdded = this.addToGlobalFilelist(files[0]);
+            } else {
+                this.manageErrorMsg(ERROR_MULTIPLE);
+            }
         }
 
         if (newFilesAdded) {
@@ -119,29 +131,29 @@ export class MUpload extends ModulVue {
 
     private addToGlobalFilelist(file: File): boolean {
         if (this.isFolder(file)) {
-            this.manageErrorMsg(file, ERROR_FOLDER);
+            this.manageErrorMsg(ERROR_FOLDER, file);
             return false;
         }
 
         if (this.hasTooManyFiles()) {
-            this.manageErrorMsg(file, ERROR_MAX_FILES);
+            this.manageErrorMsg(ERROR_MAX_FILES, file);
             return false;
         }
 
         if (this.isTooBig(file)) {
-            this.manageErrorMsg(file, ERROR_MAX_SIZE);
+            this.manageErrorMsg(ERROR_MAX_SIZE, file);
 
             return false;
         }
 
         if (this.isFileAlreadyAdded(file)) {
-            this.manageErrorMsg(file, ERROR_DUPLICATE);
+            this.manageErrorMsg(ERROR_DUPLICATE, file);
 
             return false;
         }
 
         if (this.extensionsProp != '*' && !this.validExtension(file)) {
-            this.manageErrorMsg(file, ERROR_EXTENSION);
+            this.manageErrorMsg(ERROR_EXTENSION, file);
             return false;
         }
 
@@ -208,19 +220,12 @@ export class MUpload extends ModulVue {
                 file.reader.onloadend = ((file) => {
                     return (e) => {
                         file.isRead = true;
-                        console.log(file.file.name, 'onloadend');
-                    // Render thumbnail.
-                    // var span = document.createElement('span');
-                    // span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                    //                     '" title="', escape(theFile.name), '"/>'].join('');
-                    // document.getElementById('list').insertBefore(span, null);
-                    };
-                })(file);
 
-                file.reader.onloadstart = ((file: GlobalFileList) => {
-                    return (e) => {
-                        if (file.reader) {
-                            console.log(file.file.name, 'onloadstart');
+                        if (this.showImage) {
+                            if (file.file.type.match('image.*')) {
+                                let arrayBuffer: ArrayBuffer = e.target.result;
+                                file.img = 'data:image/' + file.file.type.substring(file.file.type.lastIndexOf('/')) + ';base64,' + this.arrayBufferToBase64(arrayBuffer);
+                            }
                         }
                     };
                 })(file);
@@ -228,37 +233,86 @@ export class MUpload extends ModulVue {
                 file.reader.onabort = ((file) => {
                     return (e) => {
                         file.errorReading = true;
-                        this.manageErrorMsg(file.file, ERROR_ABORT);
+                        this.manageErrorMsg(ERROR_ABORT, file.file);
                     };
                 })(file);
 
                 file.reader.onerror = ((file) => {
                     return (e) => {
                         file.errorReading = true;
-                        this.manageErrorMsg(file.file, ERROR_LOADING);
-                    // Render thumbnail.
-                    // var span = document.createElement('span');
-                    // span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                    //                     '" title="', escape(theFile.name), '"/>'].join('');
-                    // document.getElementById('list').insertBefore(span, null);
+                        this.manageErrorMsg(ERROR_LOADING, file.file);
                     };
                 })(file);
 
-                // Read in the image file as a data URL.
                 // file.reader.readAsDataURL(file.file); // Return data: URL
                 file.reader.readAsArrayBuffer(file.file); // Return ArrayBuffer
                 // file.reader.readAsText(file.file); // Return text string
-
-                // file.reader.
             }
         }
 
         return true;
     }
 
-    private manageErrorMsg(file: File, key: string, params: any[] = []): void {
-        params.splice(0, 0, file.name);
+    private manageErrorMsg(key: string, file?: File, params: any[] = []): void {
+        if (file) {
+            params.splice(0, 0, file.name);
+        }
         this.errorMsgs.push(this.$i18n.translate(key, params));
+    }
+
+    private arrayBufferToBase64(arrayBuffer: ArrayBuffer): string {
+        let base64: string = '';
+        let encodings: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+        let bytes: Uint8Array = new Uint8Array(arrayBuffer);
+        let byteLength: number = bytes.byteLength;
+        let byteRemainder: number = byteLength % 3;
+        let mainLength: number = byteLength - byteRemainder;
+
+        let a: number;
+        let b: number;
+        let c: number;
+        let d: number;
+        let chunk;
+
+        // Main loop deals with bytes in chunks of 3
+        for (let i = 0; i < mainLength; i = i + 3) {
+            // Combine the three bytes into a single integer
+            chunk = (bytes[i] << 16) | (bytes[i + 1] << 8) | bytes[i + 2];
+
+            // Use bitmasks to extract 6-bit segments from the triplet
+            a = (chunk & 16515072) >> 18; // 16515072 = (2^6 - 1) << 18
+            b = (chunk & 258048) >> 12; // 258048 = (2^6 - 1) << 12
+            c = (chunk & 4032) >> 6; // 4032 = (2^6 - 1) << 6
+            d = chunk & 63; // 63 = 2^6 - 1
+
+            // Convert the raw binary segments to the appropriate ASCII encoding
+            base64 += encodings[a] + encodings[b] + encodings[c] + encodings[d];
+        }
+
+        // Deal with the remaining bytes and padding
+        if (byteRemainder == 1) {
+            chunk = bytes[mainLength];
+
+            a = (chunk & 252) >> 2; // 252 = (2^6 - 1) << 2
+
+            // Set the 4 least significant bits to zero
+            b = (chunk & 3) << 4; // 3   = 2^2 - 1
+
+            base64 += encodings[a] + encodings[b] + '==';
+        } else if (byteRemainder == 2) {
+            chunk = (bytes[mainLength] << 8) | bytes[mainLength + 1];
+
+            a = (chunk & 64512) >> 10; // 64512 = (2^6 - 1) << 10
+            b = (chunk & 1008) >> 4; // 1008  = (2^6 - 1) << 4
+
+            // Set the 2 least significant bits to zero
+            c = (chunk & 15) << 2; // 15    = 2^4 - 1
+
+            base64 += encodings[a] + encodings[b] + encodings[c] + '=';
+        }
+
+        return base64;
     }
 }
 
