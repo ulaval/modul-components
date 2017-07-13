@@ -48,6 +48,7 @@ export interface ComponentMeta {
     attributes?: ComponentAttributes;
     methods?: ComponentMethods;
     overview?: Overview[];
+    category?: string;
 }
 
 export type ComponentMetaMap = {
@@ -81,6 +82,7 @@ export class Meta {
                 categoryComponents = [];
                 this.categories[category] = categoryComponents;
             }
+            this.componentMeta[tag].category = category;
             categoryComponents.push(this.componentMeta[tag]);
         }
     }

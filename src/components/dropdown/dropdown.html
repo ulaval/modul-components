@@ -1,4 +1,4 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': isDisabled }">
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }">
     <ul class="m-dropdown__list m--is-hidden" aria-hidden="true">
         <li class="m-dropdown__list__element">
             <span class="m-dropdown__list__element-text" ref="mDropdownCalculate"></span>
@@ -7,7 +7,7 @@
     <m-popper :options="{ placement: 'bottom' }"
               :closeOnContentClick="true"
               :closeOnReferenceClick="false"
-              :disabled="isDisabled"
+              :disabled="disabled"
               :open="propsOpen"
               mode="dropdown"
               @show="toggleDropdown(true)"
@@ -19,7 +19,7 @@
                 class="m-dropdown__list__element"
                 :class="{ 'is-selected': element === propsSelectedElement }"
                 :key="index"
-                @click="selectElement($event, element)">
+                @click="onSelectElement($event, element)">
                 <a href="#"
                    class="m-dropdown__list__element-text"
                    :data-index="index"
@@ -38,7 +38,7 @@
                       slot="reference"
                       :value="textElement"
                       :state="propsState"
-                      :editable="isEditable"
+                      :editable="editable"
                       :force-focus="propsOpen"
                       :default-text="defaultText"
                       @valueChanged="textElement = $event"
