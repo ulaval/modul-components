@@ -5,7 +5,8 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
-import { normalizeString, KeyCode } from '../../utils/str/str';
+import { normalizeString } from '../../utils/str/str';
+import { KeyCode } from '../../utils/keycode/keycode';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 
