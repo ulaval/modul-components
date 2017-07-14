@@ -1,0 +1,7 @@
+<div class="m-upload-dragdrop"
+        :class="{'drag-over': dragOver}"
+        @dragover.prevent="dragOver = true"
+        @dragleave.prevent="dragOver = false"
+        @drop="filesDrop">
+    Zone de drag and drop
+</div>
