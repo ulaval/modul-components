@@ -63,27 +63,15 @@ $m-loading-speed: 0.7s;
         animation: m-infinity-rotation $m-loading-speed linear infinite;
         width: 46px;
         height: 46px;
-
-        &::after {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            content: '';
-            background: none;
-            border: 4px solid;
-            border-color: $m-color--ul-yellow $m-color--grey-light $m-color--grey-light $m-color--grey-light;
-            border-radius: 50%;
-        }
+        background: none;
+        border: 4px solid;
+        border-color: $m-color--ul-yellow $m-color--grey-light $m-color--grey-light $m-color--grey-light;
+        border-radius: 50%;
 
         &.m--is-small {
             width: 20px;
             height: 20px;
-
-            &::after {
-                border-width: 2px;
-            }
+            border-width: 2px;
         }
     }
 }
