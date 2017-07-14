@@ -33,7 +33,6 @@ $m-loading-speed: 0.7s;
                         border-bottom-color: $m-color--white;
                         border-right-color: $m-color--white;
                     }
-
                 }
             }
         }
@@ -62,8 +61,8 @@ $m-loading-speed: 0.7s;
     &__icon {
         position: relative;
         animation: m-infinity-rotation $m-loading-speed linear infinite;
-        width: 50px;
-        height: 50px;
+        width: 46px;
+        height: 46px;
 
         &::after {
             position: absolute;
@@ -74,10 +73,7 @@ $m-loading-speed: 0.7s;
             content: '';
             background: none;
             border: 4px solid;
-            border-top-color: $m-color--ul-yellow;
-            border-left-color: $m-color--grey-light;
-            border-bottom-color: $m-color--grey-light;
-            border-right-color: $m-color--grey-light;
+            border-color: $m-color--ul-yellow $m-color--grey-light $m-color--grey-light $m-color--grey-light;
             border-radius: 50%;
         }
 
@@ -88,7 +84,6 @@ $m-loading-speed: 0.7s;
             &::after {
                 border-width: 2px;
             }
-
         }
     }
 }
