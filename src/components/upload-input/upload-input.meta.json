@@ -1,6 +1,6 @@
 {
     "tag": "m-upload-input",
-    "name": "m-upload-meta:name",
+    "name": "m-upload-input-meta:name",
     "attributes": {
         "multiple": {
             "type": "boolean",
@@ -15,20 +15,20 @@
         {
             "type": "rubric",
             "title": "meta:context-of-use",
-            "content": "m-upload-meta:context-of-use"
+            "content": "m-upload-input-meta:context-of-use"
         },
         {
             "type": "rubric",
             "title": "meta:usage",
-            "content": "m-upload-meta:usage"
+            "content": "m-upload-input-meta:usage"
         },
         {
             "type": "do",
-            "content": "m-upload-meta:do"
+            "content": "m-upload-input-meta:do"
         },
         {
             "type": "dont",
-            "content": "m-upload-meta:dont"
+            "content": "m-upload-input-meta:dont"
         }
     ]
 }

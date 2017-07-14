@@ -4,4 +4,23 @@
     </m-link>
     <h2 class="m-u--margin-top--s m-u--margin-bottom--l">{{$route.meta}}</h2>
     <m-dynamic-template :template="tag"></m-dynamic-template>
+
+
+    <br />-----<br />
+
+    <m-dropdown :elements="elements"
+                :get-text-element="getText"
+                default-text="fdsfd fds fdsf f"
+                :defaultFirstElement="true"
+                @elementSelected="alertMe($event)"
+                :editable="true">
+        Label du dropdown
+    </m-dropdown>
+
+    <m-upload :multiple="true" :show-image="true" :extensions="ext"></m-upload>
+
+    <!-- <m-button @click="change"></m-button> -->
+
+
+
 </div>

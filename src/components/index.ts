@@ -33,6 +33,7 @@ import TextFieldPlugin from './text-field/text-field';
 import UploadPlugin from './upload/upload';
 import UploadInputPlugin from './upload-input/upload-input';
 import UploadDragdropPlugin from './upload-dragdrop/upload-dragdrop';
+import UploadFileslistPlugin from './upload-fileslist/upload-fileslist';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 const ComponentsPlugin: PluginObject<any> = {
@@ -69,6 +70,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(UploadPlugin);
         Vue.use(UploadInputPlugin);
         Vue.use(UploadDragdropPlugin);
+        Vue.use(UploadFileslistPlugin);
         Vue.use(ValidationMessagePlugin);
     }
 };
