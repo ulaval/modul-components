@@ -1,7 +1,7 @@
 <article class="m-accordion"
-         :class="{ 'm--is-regular': modeIsRegular,
-                'm--is-light': propMode=='light',
-                'm--is-no-style': propMode=='noStyle',
+         :class="{ 'm--is-regular': isAspectRegular,
+                'm--is-light': propAspect=='light',
+                'm--is-no-style': propAspect=='no-style',
                 'm--is-close': !propOpen }">
     <header tabindex="0"
             class="m-accordion__header"

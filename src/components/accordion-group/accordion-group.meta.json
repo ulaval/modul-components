@@ -6,7 +6,7 @@
             "type": "boolean",
             "default": false
         },
-        "mode": {
+        "aspect": {
             "type": "string",
             "values": [
                 "regular",

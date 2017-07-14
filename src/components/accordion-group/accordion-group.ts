@@ -6,15 +6,15 @@ import WithRender from './accordion-group.html?style=./accordion-group.scss';
 import { ACCORDION_GROUP_NAME } from '../component-names';
 import { ACCORDION_NAME } from '../component-names';
 
-const MODE_REGULAR: string = 'regular';
-const MODE_LIGHT: string = 'light';
-const MODE_NO_STYLE: string = 'no-style';
+const ASPECT_REGULAR: string = 'regular';
+const ASPECT_LIGHT: string = 'light';
+const ASPECT_NO_STYLE: string = 'no-style';
 
 @WithRender
 @Component
 export class MAccordionGroup extends Vue {
     @Prop()
-    public mode: string;
+    public aspect: string;
     @Prop({ default: false })
     public concurrent: boolean;
     @Prop({ default: false })
@@ -22,7 +22,7 @@ export class MAccordionGroup extends Vue {
 
     public componentName: string = ACCORDION_GROUP_NAME;
 
-    private propMode: string = MODE_REGULAR;
+    private propAspect: string = ASPECT_REGULAR;
     private propConcurrent: boolean = true;
     private propAllOpen: boolean = false;
 
@@ -37,7 +37,7 @@ export class MAccordionGroup extends Vue {
 
     private mounted(): void {
         this.propAllOpen = this.allOpen;
-        this.propMode = this.mode == MODE_LIGHT || this.mode == MODE_NO_STYLE ? this.mode : this.propMode;
+        this.propAspect = this.aspect == ASPECT_LIGHT || this.aspect == ASPECT_NO_STYLE ? this.aspect : ASPECT_REGULAR;
         this.propConcurrent = this.concurrent;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
@@ -58,9 +58,9 @@ export class MAccordionGroup extends Vue {
                         this.arrAccordion[this.nbAccordion]['open'] = true;
                     }
                 }
-                if (this.propMode != this.$children[i]['propMode']) {
-                    this.$children[i]['propMode'] = this.propMode;
-                    this.$children[i]['resetMode'](this.propMode);
+                if (this.propAspect != this.$children[i]['propAspect']) {
+                    this.$children[i]['propAspect'] = this.propAspect;
+                    this.$children[i]['resetAspect'](this.propAspect);
                 }
                 this.nbAccordion++;
             }

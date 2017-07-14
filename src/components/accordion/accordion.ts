@@ -7,9 +7,9 @@ import { ACCORDION_NAME } from '../component-names';
 import { ACCORDION_GROUP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 
-const MODE_REGULAR: string = 'regular';
-const MODE_LIGHT: string = 'light';
-const MODE_NO_STYLE: string = 'no-style';
+const ASPECT_REGULAR: string = 'regular';
+const ASPECT_LIGHT: string = 'light';
+const ASPECT_NO_STYLE: string = 'no-style';
 
 const ICON_POSITION_LEFT: string = 'left';
 const ICON_POSITION_RIGHT: string = 'right';
@@ -28,8 +28,8 @@ const ICON_SIZE_LARGE: string = 'large';
 })
 export class MAccordion extends Vue implements TransitionAccordionMixin {
 
-    @Prop({ default: MODE_REGULAR })
-    public mode: string;
+    @Prop({ default: ASPECT_REGULAR })
+    public aspect: string;
     @Prop()
     public open: boolean;
     @Prop()
@@ -42,7 +42,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
     public componentName: string = ACCORDION_NAME;
     public isAnimActive: boolean = false;
 
-    private propMode: string = MODE_REGULAR;
+    private propAspect: string = ASPECT_REGULAR;
     private propOpen: boolean = false;
     private propIconPosition: string = ICON_POSITION_RIGHT;
     private propIconAspect: string = ICON_STYLE_DEFAULT;
@@ -52,17 +52,17 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
     private accordionID: number;
 
     private beforeMount(): void {
-        this.propMode = this.mode;
+        this.propAspect = this.aspect;
         this.propOpen = this.open == undefined ? false : this.open;
         this.propIconPosition = this.iconPosition;
         this.propIconSize = this.iconSize;
         this.propIconAspect = this.iconAspect;
-        this.setMode();
+        this.setAspect();
     }
 
-    private setMode(): void {
-        switch (this.propMode) {
-            case MODE_LIGHT:
+    private setAspect(): void {
+        switch (this.propAspect) {
+            case ASPECT_LIGHT:
                 if (this.propIconPosition == undefined) {
                     this.propIconPosition = ICON_POSITION_LEFT;
                 }
@@ -73,8 +73,8 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
                     this.propIconAspect = ICON_STYLE_BORDER;
                 }
                 break;
-            case MODE_NO_STYLE:
-                this.setModeNoStyle();
+            case ASPECT_NO_STYLE:
+                this.setAspectNoStyle();
                 break;
             default:
                 if (this.propIconPosition == undefined) {
@@ -89,15 +89,15 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
         }
     }
 
-    private resetMode(type): void {
+    private resetAspect(type): void {
         switch (type) {
-            case MODE_LIGHT:
+            case ASPECT_LIGHT:
                 this.propIconPosition = ICON_POSITION_LEFT;
                 this.propIconSize = ICON_SIZE_SMALL;
                 this.propIconAspect = ICON_STYLE_BORDER;
                 break;
-            case MODE_NO_STYLE:
-                this.setModeNoStyle();
+            case ASPECT_NO_STYLE:
+                this.setAspectNoStyle();
                 break;
             default:
                 this.propIconPosition = ICON_POSITION_RIGHT;
@@ -106,7 +106,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
         }
     }
 
-    private setModeNoStyle(): void {
+    private setAspectNoStyle(): void {
         if (this.propIconPosition == undefined) {
             this.propIconPosition = ICON_POSITION_RIGHT;
         }
@@ -134,11 +134,8 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
         this.propOpen = false;
     }
 
-    private get modeIsRegular(): boolean {
-        if (this.propMode == MODE_LIGHT || this.propMode == MODE_NO_STYLE) {
-            return false;
-        }
-        return true;
+    private get isAspectRegular(): boolean {
+        return this.propAspect == ASPECT_LIGHT || this.propAspect == ASPECT_NO_STYLE ? false : true;
     }
 }
 

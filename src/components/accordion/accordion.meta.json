@@ -2,7 +2,7 @@
     "tag": "m-accordion",
     "name": "m-accordion-meta:name",
     "attributes": {
-        "mode": {
+        "aspect": {
             "type": "string",
             "values": [
                 "regular",
