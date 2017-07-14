@@ -9,17 +9,7 @@ import { MUploadInterface } from '../upload/upload';
 @WithRender
 @Component
 export class MUploadDragdrop extends Vue {
-
-    private fileAPISupport: boolean = false;
-
     private dragOver: boolean = false;
-
-    public mounted() {
-        // Check for the various File API support.
-        if ((window as any).File && (window as any).FileReader && (window as any).FileList && window.Blob) {
-            this.fileAPISupport = true;
-        }
-    }
 
     public filesDrop($event: DragEvent): void {
         $event.stopPropagation();

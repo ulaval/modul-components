@@ -1,15 +1,3 @@
 <div class="m-upload">
-    <m-upload-input></m-upload-input>
-    <m-upload-dragdrop></m-upload-dragdrop>
-    <m-upload-fileslist></m-upload-fileslist>
-
-    <m-message class="m-upload__error"
-               v-if="errors"
-               state="warning"
-               :closeButton="true"
-               :visible="hasErrorMsgs">
-        <ul>
-            <li v-for="error in errorMsgs">{{ error }}</li>
-        </ul>
-    </m-message>
+    <slot></slot>
 </div>
