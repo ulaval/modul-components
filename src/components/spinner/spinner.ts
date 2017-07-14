@@ -9,9 +9,10 @@ import { SPINNER_NAME } from '../component-names';
 export const MODE_LOADING: string = 'loading';
 export const MODE_PROCESSING: string = 'processing';
 
-export const ASPECT_DEFAULT: string = 'default';
-export const ASPECT_LIGHT: string = 'light';
 export const ASPECT_DARK: string = 'dark';
+export const ASPECT_REGULAR: string = 'regular';
+export const ASPECT_LIGHT: string = 'light';
+export const ASPECT_LIGHTER: string = 'lighter';
 
 export const SIZE_LARGE: string = 'large';
 export const SIZE_SMALL: string = 'small';
@@ -82,10 +83,10 @@ export class MSpinner extends ModulVue {
     }
 
     private get propAspect(): string {
-        if ((this.aspect != ASPECT_DARK || this.aspect != ASPECT_DEFAULT) && this.mode == MODE_PROCESSING) {
+        if ((this.aspect != ASPECT_DARK || this.aspect != ASPECT_REGULAR || this.aspect != ASPECT_LIGHTER ) && this.mode == MODE_PROCESSING) {
             return ASPECT_LIGHT;
         } else {
-            return this.aspect == ASPECT_LIGHT || this.aspect == ASPECT_DARK ? this.aspect : ASPECT_DEFAULT;
+            return this.aspect == ASPECT_DARK || this.aspect == ASPECT_LIGHT || this.aspect == ASPECT_LIGHTER ? this.aspect : ASPECT_REGULAR;
         }
     }
 

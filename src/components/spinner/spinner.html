@@ -3,8 +3,9 @@
         <div class="m-spinner__wrap"
              :class="{'m--is-loading': mode == 'loading',
                     'm--is-processing': mode == 'processing',
+                    'm--is-dark': propAspect == 'dark',
                     'm--is-light': propAspect == 'light',
-                    'm--is-dark': propAspect == 'dark'}">
+                    'm--is-lighter': propAspect == 'lighter'}">
             <div aria-hidden="true"
                  class="m-spinner__icon"
                  :class="{ 'm--is-small' : propSize == 'small'}"></div>

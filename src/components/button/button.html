@@ -7,7 +7,7 @@
               'm--is-full-size': fullSize }" :disabled="isDisabled" :type="type" @click="onClick">
     <span class="m-button__wrap" v-if="propMode!='icon'">
         <m-icon aria-hidden="true" class="m-button__icon m--is-left" :name="iconName" :width="propIconSize" :height="propIconSize" v-if="hasIconeLeft && hasIcone && propState!='waiting'"></m-icon>
-        <m-spinner aria-hidden="true" class="m-button__icon m--is-left" aspect="light" size="small" v-if="propState=='waiting'"></m-spinner>
+        <m-spinner aria-hidden="true" class="m-button__icon m--is-left" aspect="lighter" size="small" v-if="propState=='waiting'"></m-spinner>
         <span class="m-button__text">
             <slot>m-button</slot>
             <span class="m-button__more-info" v-if="hasMoreInfo">

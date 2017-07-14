@@ -19,11 +19,13 @@
         "aspect": {
             "type": "string",
             "values": [
-                "default",
+                "dark",
+                "regular",
                 "light",
-                "dark"
+                "lighter"
+
             ],
-            "default": 0
+            "default": 1
         },
         "size": {
             "type": "string",
