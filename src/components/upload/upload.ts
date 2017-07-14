@@ -81,53 +81,95 @@ export class MUpload extends ModulVue {
         }
     }
 
+    public filesdroped(files: FileList): void {
+        if (files) {
+            let newFilesAdded: boolean = false;
+
+            this.errorMsgs = [];
+
+            if (this.multiple) {
+                for (let i = 0; i < files.length; i++) {
+                    let file: File = files.item(i);
+                    newFilesAdded = this.addToGlobalFilelist(file) || newFilesAdded;
+                }
+            } else {
+                if (files.length == 1) {
+                    this.globalFileList = [];
+                    newFilesAdded = this.addToGlobalFilelist(files[0]);
+                } else {
+                    this.manageErrorMsg(ERROR_MULTIPLE);
+                }
+            }
+
+            if (newFilesAdded) {
+                this.readFiles();
+            }
+        }
+    }
+
+    public filesInputed(files: FileList): void {
+        if (files) {
+            let newFilesAdded: boolean = false;
+
+            this.errorMsgs = [];
+
+            for (let i = 0; i < files.length; i++) {
+                newFilesAdded = this.addToGlobalFilelist(files[i]) || newFilesAdded;
+            }
+
+            if (newFilesAdded) {
+                this.readFiles();
+            }
+        }
+    }
+
     public remove(index: number): void {
         this.globalFileList.splice(index, 1);
     }
 
-    public filesInput($event: Event): void {
-        let newFilesAdded: boolean = false;
+    // public filesInput($event: Event): void {
+    //     let newFilesAdded: boolean = false;
 
-        this.errorMsgs = [];
+    //     this.errorMsgs = [];
 
-        // FileList object.
-        for (let file of ($event.target as any).files) {
-            newFilesAdded = this.addToGlobalFilelist(file) || newFilesAdded;
-        }
+    //     // FileList object.
+    //     for (let file of ($event.target as any).files) {
+    //         newFilesAdded = this.addToGlobalFilelist(file) || newFilesAdded;
+    //     }
 
-        if (newFilesAdded) {
-            this.readFiles();
-        }
-    }
+    //     if (newFilesAdded) {
+    //         this.readFiles();
+    //     }
+    // }
 
-    public filesDrop($event: DragEvent): void {
-        let newFilesAdded: boolean = false;
+    // public filesDrop($event: DragEvent): void {
+    //     let newFilesAdded: boolean = false;
 
-        $event.stopPropagation();
-        $event.preventDefault();
-        this.dragOver = false;
-        this.errorMsgs = [];
+    //     $event.stopPropagation();
+    //     $event.preventDefault();
+    //     this.dragOver = false;
+    //     this.errorMsgs = [];
 
-        let files: FileList = $event.dataTransfer.files;
+    //     let files: FileList = $event.dataTransfer.files;
 
-        if (this.multiple) {
-            for (let i = 0; i < files.length; i++) {
-                let file: File = files.item(i);
-                newFilesAdded = this.addToGlobalFilelist(file) || newFilesAdded;
-            }
-        } else {
-            if (files.length == 1) {
-                this.globalFileList = [];
-                newFilesAdded = this.addToGlobalFilelist(files[0]);
-            } else {
-                this.manageErrorMsg(ERROR_MULTIPLE);
-            }
-        }
+    //     if (this.multiple) {
+    //         for (let i = 0; i < files.length; i++) {
+    //             let file: File = files.item(i);
+    //             newFilesAdded = this.addToGlobalFilelist(file) || newFilesAdded;
+    //         }
+    //     } else {
+    //         if (files.length == 1) {
+    //             this.globalFileList = [];
+    //             newFilesAdded = this.addToGlobalFilelist(files[0]);
+    //         } else {
+    //             this.manageErrorMsg(ERROR_MULTIPLE);
+    //         }
+    //     }
 
-        if (newFilesAdded) {
-            this.readFiles();
-        }
-    }
+    //     if (newFilesAdded) {
+    //         this.readFiles();
+    //     }
+    // }
 
     private addToGlobalFilelist(file: File): boolean {
         if (this.isFolder(file)) {

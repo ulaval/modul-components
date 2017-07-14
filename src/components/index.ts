@@ -31,6 +31,8 @@ import TabsPlugin from './tabs/tabs';
 import Template from './template/template';
 import TextFieldPlugin from './text-field/text-field';
 import UploadPlugin from './upload/upload';
+import UploadInputPlugin from './upload-input/upload-input';
+import UploadDragdropPlugin from './upload-dragdrop/upload-dragdrop';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 const ComponentsPlugin: PluginObject<any> = {
@@ -65,6 +67,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(Template);
         Vue.use(TextFieldPlugin);
         Vue.use(UploadPlugin);
+        Vue.use(UploadInputPlugin);
+        Vue.use(UploadDragdropPlugin);
         Vue.use(ValidationMessagePlugin);
     }
 };

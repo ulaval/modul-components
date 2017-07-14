@@ -1,0 +1,34 @@
+{
+    "tag": "m-upload-input",
+    "name": "m-upload-meta:name",
+    "attributes": {
+        "multiple": {
+            "type": "boolean",
+             "default": false
+        },
+        "extensions": {
+            "type": "string[]",
+            "default": []
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-upload-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-upload-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-upload-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-upload-meta:dont"
+        }
+    ]
+}

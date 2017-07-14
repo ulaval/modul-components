@@ -1,23 +1,13 @@
 <div class="m-upload">
-    <div class="m-upload__file-input" v-if="fileInput">
-        <input type="file" id="files" name="files[]" :accept="extensionsProp" @change="filesInput" :multiple="multiple" />
-    </div>
+    <m-upload-input @filesInputed="filesInputed($event)"></m-upload-input>
 
-    <div class="m-upload__drag-drop"
-         :class="{'drag-over': dragOver}"
-         v-if="dragDrop"
-         @dragover.prevent="dragOver = true"
-         @dragleave.prevent="dragOver = false"
-         @drop="filesDrop">
-        Zone de drag and drop
-    </div>
+    <m-upload-dragdrop @filesDroped="filesdroped($event)"></m-upload-dragdrop>
 
     <ul class="m-upload__files-list" v-if="filesList">
         <li v-for="(file, index) of globalFileList"
             class="m-upload__file"
             :class="{'error': file.errorReading}">
             <m-spinner class="m-upload__file__loading"
-                       mode="processing"
                        v-if="!file.isRead"></m-spinner>
             <span class="m-upload__file__name">{{ file.file.name }}</span>
             <img :src="file.img"
@@ -37,4 +27,6 @@
             <li v-for="error in errorMsgs">{{ error }}</li>
         </ul>
     </m-message>
+
+
 </div>
