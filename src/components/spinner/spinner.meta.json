@@ -10,6 +10,12 @@
             ],
             "default": 0
         },
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
         "aspect": {
             "type": "string",
             "values": [
@@ -19,11 +25,13 @@
             ],
             "default": 0
         },
-        "title": {
-            "type": "string"
-        },
-        "description": {
-            "type": "string"
+        "size": {
+            "type": "string",
+            "values": [
+                "large",
+                "small"
+            ],
+            "default": 0
         }
     },
     "overview": [

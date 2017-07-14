@@ -26,8 +26,14 @@ $m-loading-speed: 0.7s;
                 &__description {
                     color: $m-color--white;
                 }
-                &__circle-background {
-                    stroke: $m-color--white;
+
+                &__icon {
+                    &::after {
+                        border-left-color: $m-color--white;
+                        border-bottom-color: $m-color--white;
+                        border-right-color: $m-color--white;
+                    }
+
                 }
             }
         }
@@ -54,23 +60,35 @@ $m-loading-speed: 0.7s;
     }
 
     &__icon {
+        position: relative;
         animation: m-infinity-rotation $m-loading-speed linear infinite;
+        width: 50px;
+        height: 50px;
 
-        circle {
-            stroke-width: 4px;
-            fill: none;
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            content: '';
+            background: none;
+            border: 4px solid;
+            border-top-color: $m-color--ul-yellow;
+            border-left-color: $m-color--grey-light;
+            border-bottom-color: $m-color--grey-light;
+            border-right-color: $m-color--grey-light;
+            border-radius: 50%;
         }
 
-        .m-spinner {
-            &__circle-background {
-                stroke: $m-color--grey-light;
+        &.m--is-small {
+            width: 20px;
+            height: 20px;
+
+            &::after {
+                border-width: 2px;
             }
 
-            &__circle-foreground {
-                stroke-width: 4px;
-                stroke: $m-color--ul-yellow;
-                stroke-dasharray: 45 250;
-            }
         }
     }
 }

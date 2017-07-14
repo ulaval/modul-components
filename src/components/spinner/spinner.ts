@@ -9,9 +9,12 @@ import { SPINNER_NAME } from '../component-names';
 export const MODE_LOADING: string = 'loading';
 export const MODE_PROCESSING: string = 'processing';
 
-export const STYLE_DEFAULT: string = 'default';
-export const STYLE_LIGHT: string = 'light';
-export const STYLE_DARK: string = 'dark';
+export const ASPECT_DEFAULT: string = 'default';
+export const ASPECT_LIGHT: string = 'light';
+export const ASPECT_DARK: string = 'dark';
+
+export const SIZE_LARGE: string = 'large';
+export const SIZE_SMALL: string = 'small';
 
 export const SPINNER_ID: string = 'MSpinner';
 
@@ -21,11 +24,13 @@ export class MSpinner extends ModulVue {
     @Prop({ default: MODE_LOADING })
     public mode: string;
     @Prop()
-    public aspect: string;
-    @Prop()
     public title: string;
     @Prop()
     public description: string;
+    @Prop()
+    public aspect: string;
+    @Prop({ default: SIZE_LARGE } )
+    public size: string;
 
     public componentName = SPINNER_NAME;
 
@@ -77,11 +82,15 @@ export class MSpinner extends ModulVue {
     }
 
     private get propAspect(): string {
-        if ((this.aspect != STYLE_DARK || this.aspect != STYLE_DEFAULT) && this.mode == MODE_PROCESSING) {
-            return STYLE_LIGHT;
+        if ((this.aspect != ASPECT_DARK || this.aspect != ASPECT_DEFAULT) && this.mode == MODE_PROCESSING) {
+            return ASPECT_LIGHT;
         } else {
-            return this.aspect == STYLE_LIGHT || this.aspect == STYLE_DARK ? this.aspect : STYLE_DEFAULT;
+            return this.aspect == ASPECT_LIGHT || this.aspect == ASPECT_DARK ? this.aspect : ASPECT_DEFAULT;
         }
+    }
+
+    private get propSize(): string {
+        return this.size == SIZE_SMALL ? SIZE_SMALL : SIZE_LARGE;
     }
 
     private get hasTitle(): boolean {

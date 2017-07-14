@@ -17,8 +17,8 @@ export class MLink extends ModulVue {
     public url: string;
     @Prop({ default: MODE_ROUTER_LINK })
     public mode: string;
-    @Prop({ default: 'default' })
-    public state: string;
+    @Prop({ default: false })
+    public unvisited: boolean;
 
     public componentName: string = LINK_NAME;
 
@@ -30,7 +30,6 @@ export class MLink extends ModulVue {
     private hrefAttribute: string;
 
     private beforeMount(): void {
-        this.propsUrl = this.url;
         this.hrefAttribute = this.url;
         switch (this.mode) {
             case MODE_EXTERNAL_LINK:
@@ -40,7 +39,6 @@ export class MLink extends ModulVue {
                 this.isLink = true;
                 break;
             case MODE_BUTTON:
-                this.propsUrl = '#';
                 this.isButton = true;
                 break;
             default:
@@ -55,11 +53,15 @@ export class MLink extends ModulVue {
     }
 
     private onClick(event): void {
-        this.$emit('click');
         this.$el.blur();
         if (this.isButton) {
             event.preventDefault();
         }
+        this.$emit('click');
+    }
+
+    private get propUrl(): string {
+        return this.mode == MODE_BUTTON ? '#' : this.url ;
     }
 
     private get hasIconeLeft(): boolean {

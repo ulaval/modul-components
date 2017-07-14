@@ -5,12 +5,9 @@
                     'm--is-processing': mode == 'processing',
                     'm--is-light': propAspect == 'light',
                     'm--is-dark': propAspect == 'dark'}">
-            <svg class="m-spinner__icon" height="50" width="50" aria-hidden="true">
-                <g transform="translate(25, 25)">
-                    <circle class="m-spinner__circle-background" r="20" />
-                    <circle class="m-spinner__circle-foreground" r="20" />
-                </g>
-            </svg>
+            <div aria-hidden="true"
+                 class="m-spinner__icon"
+                 :class="{ 'm--is-small' : propSize == 'small'}"></div>
             <h2 class="m-spinner__title" v-if="hasTitle">{{ title }}</h2>
             <p class="m-spinner__description" v-if="hasDescription">{{ description }}</p>
         </div>

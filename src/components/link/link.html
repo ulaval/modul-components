@@ -1,8 +1,8 @@
 
 <transition>
     <router-link class="m-link"
-                 :class="{ 'm--is-unvisited': state == 'unvisited' }"
-                 :to="{ path: propsUrl }"
+                 :class="{ 'm--is-unvisited': unvisited }"
+                 :to="{ path: propUrl }"
                  v-if="isRouterLink">
         <span class="m-link__icon m--is-left" v-if="hasIconeLeft">
             <slot name="icon-left"></slot>
@@ -16,8 +16,8 @@
     </router-link>
     <a ref="link"
        class="m-link"
-       :class="{ 'm--is-unvisited': state == 'unvisited', 'm--is-button': isButton }"
-       :href="propsUrl"
+       :class="{ 'm--is-unvisited': unvisited, 'm--is-button': isButton }"
+       :href="propUrl"
        v-if="isLink || isExternalLink || isButton"
        @click="onClick">
         <span class="m-link__icon m--is-left" v-if="hasIconeLeft">
