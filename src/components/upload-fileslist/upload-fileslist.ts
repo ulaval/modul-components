@@ -13,6 +13,10 @@ export class MUploadFileslist extends Vue {
         return (this.$parent as MUploadInterface).globalFileList;
     }
 
+    public get showImage(): boolean {
+        return (this.$parent as MUploadInterface).showImageProp;
+    }
+
     public removeFile(index: number): void {
         (this.$parent as MUploadInterface).globalFileList.splice(index, 1);
     }
