@@ -2,7 +2,7 @@ import { PluginObject } from 'vue';
 import {
     ACCORDION_NAME, ACCORDION_GROUP_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, LIMIT_TEXT_NAME, ICON_NAME, LINK_NAME,
     LIST_BULLET_NAME, MESSAGE_NAME, PANEL_DIALOG_NAME, PANEL_NAME, POPPER_LIST_NAME, POPPER_NAME, RADIO_BUTTONS_NAME, SECONDARY_DIALOG_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
-    UPLOAD_NAME
+    UPLOAD_NAME, UPLOAD_INPUT_NAME, UPLOAD_DRAGDROP_NAME, UPLOAD_FILESLIST_NAME
 } from '../components/component-names';
 import { RIPPLE_EFFECT_NAME } from '../directives/directive-names';
 import { Meta } from './meta';
@@ -50,6 +50,9 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(TEMPLATE_NAME, require('../components/template/template.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(TEXT_FIELD_NAME, require('../components/text-field/text-field.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(UPLOAD_NAME, require('../components/upload/upload.meta.json'), CATEGORY_FORMS);
+        meta.mergeComponentMeta(UPLOAD_INPUT_NAME, require('../components/upload-input/upload-input.meta.json'), CATEGORY_FORMS);
+        meta.mergeComponentMeta(UPLOAD_DRAGDROP_NAME, require('../components/upload-dragdrop/upload-dragdrop.meta.json'), CATEGORY_FORMS);
+        meta.mergeComponentMeta(UPLOAD_FILESLIST_NAME, require('../components/upload-fileslist/upload-fileslist.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(RIPPLE_EFFECT_NAME, require('../directives/ripple-effect/ripple-effect.meta.json'), CATEGORY_LAYOUT);
     }
 }

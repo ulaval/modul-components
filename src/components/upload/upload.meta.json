@@ -2,25 +2,13 @@
     "tag": "m-upload",
     "name": "m-upload-meta:name",
     "attributes": {
+        "extensions": {
+            "type": "string[]",
+            "default": []
+        },
         "multiple": {
             "type": "boolean",
              "default": false
-        },
-        "fileInput": {
-            "type": "boolean",
-             "default": true
-        },
-        "dragDrop": {
-            "type": "boolean",
-             "default": true
-        },
-        "filesList": {
-            "type": "boolean",
-             "default": true
-        },
-        "error": {
-            "type": "boolean",
-             "default": true
         },
         "maxFilesAllow": {
             "type": "number",
@@ -29,10 +17,6 @@
         "maxSizeBytes": {
             "type": "number",
             "default": 26214400
-        },
-        "extensions": {
-            "type": "string[]",
-            "default": []
         },
         "showImage": {
             "type": "boolean",

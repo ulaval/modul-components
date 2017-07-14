@@ -28,6 +28,9 @@ export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
 export const TEXT_FIELD_NAME: string = 'm-text-field';
 export const UPLOAD_NAME: string = 'm-upload';
+export const UPLOAD_INPUT_NAME: string = 'm-upload-input';
+export const UPLOAD_DRAGDROP_NAME: string = 'm-upload-dragdrop';
+export const UPLOAD_FILESLIST_NAME: string = 'm-upload-fileslist';
 export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
 
 export const components: string[] = [
@@ -61,5 +64,8 @@ export const components: string[] = [
     TEMPLATE_NAME,
     TEXT_FIELD_NAME,
     UPLOAD_NAME,
+    UPLOAD_INPUT_NAME,
+    UPLOAD_DRAGDROP_NAME,
+    UPLOAD_FILESLIST_NAME,
     VALIDATION_MESSAGE_NAME
 ];

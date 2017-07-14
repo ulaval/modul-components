@@ -1,0 +1,25 @@
+{
+    "tag": "m-upload-fileslist",
+    "name": "m-upload-fileslist-meta:name",
+    "attributes": {},
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-upload-fileslist-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-upload-fileslist-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-upload-fileslist-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-upload-fileslist-meta:dont"
+        }
+    ]
+}
