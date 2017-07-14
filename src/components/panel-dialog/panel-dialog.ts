@@ -2,19 +2,17 @@ import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from '../../mixins/dialog-props/dialog-template.html';
+import WithRender from '../../mixins/dialog-template/dialog-template.html?style=../../mixins/dialog-template/dialog-template.scss';
 import { PANEL_DIALOG_NAME } from '../component-names';
-import { DialogProps } from '../../mixins/dialog-props/dialog-props';
+import { DialogTemplate, DialogTemplateMixin } from '../../mixins/dialog-template/dialog-template';
 
 @WithRender
 @Component({
-    mixins: [DialogProps]
+    mixins: [DialogTemplate]
 })
-export class MPanelDialog extends Vue {
-    @Prop({ default: false })
-    public title: string;
+export class MPanelDialog extends Vue implements DialogTemplateMixin {
+    public mode = 'panel';
     public componentName: string = PANEL_DIALOG_NAME;
-    private mode = 'panel';
 }
 
 const PanelDialogPlugin: PluginObject<any> = {
