@@ -7,14 +7,16 @@ import WithRender from './upload.html?style=./upload.scss';
 import { UPLOAD_NAME } from '../component-names';
 import { arrayBufferToBase64 } from '../../utils/base64/base64';
 
-const ERROR_FOLDER: string = 'm-upload:error-folder';
-const ERROR_MAX_FILES: string = 'm-upload:error-max-files';
-const ERROR_MAX_SIZE: string = 'm-upload:error-max-size';
-const ERROR_DUPLICATE: string = 'm-upload:error-duplicate';
-const ERROR_EXTENSION: string = 'm-upload:error-extension';
-const ERROR_ABORT: string = 'm-upload:error-abort';
-const ERROR_LOADING: string = 'm-upload:error-loading';
-const ERROR_MULTIPLE: string = 'm-upload:error-multiple';
+const ERROR_FOLDER: string = 'ERROR_FOLDER';
+const ERROR_MAX_FILES: string = 'ERROR_MAX_FILES';
+const ERROR_MAX_SIZE: string = 'ERROR_MAX_SIZE';
+const ERROR_DUPLICATE: string = 'ERROR_DUPLICATE';
+const ERROR_EXTENSION: string = 'ERROR_EXTENSION';
+const ERROR_ABORT: string = 'ERROR_ABORT';
+const ERROR_LOADING: string = 'ERROR_LOADING';
+const ERROR_MULTIPLE: string = 'ERROR_MULTIPLE';
+
+const GLOBAL_ERROR: string = 'GLOBAL_ERROR';
 
 export interface MUploadInterface extends Vue {
     globalFileList: GlobalFileList[];
@@ -22,8 +24,7 @@ export interface MUploadInterface extends Vue {
     multipleProp: boolean;
     showImageProp: boolean;
     fileAPISupport: boolean;
-    filesdroped(files: FileList): void;
-    filesInputed(files: FileList): void;
+    addNewFiles(files: FileList): void;
 }
 
 export interface GlobalFileList {
@@ -32,6 +33,20 @@ export interface GlobalFileList {
     errorReading: boolean;
     reader?: FileReader;
     img?: any;
+}
+
+export interface IUploadError {
+    [filename: string]: UploadError[];
+}
+
+export class UploadError {
+    public errorKey: string;
+    public param: string;
+    public paramName: string;
+
+    constructor(errorKey: string) {
+        this.errorKey = errorKey;
+    }
 }
 
 @WithRender
@@ -50,7 +65,7 @@ export class MUpload extends ModulVue implements MUploadInterface {
     public showImage: boolean;
 
     public globalFileList: GlobalFileList[] = [];
-    public errorMsgs: string[] = [];
+    public uploadErrors: IUploadError = {};
     public fileAPISupport: boolean = false;
 
     public mounted() {
@@ -73,79 +88,53 @@ export class MUpload extends ModulVue implements MUploadInterface {
         return this.showImage;
     }
 
-    public get hasErrorMsgs(): boolean {
-        if (this.errorMsgs.length > 0) {
-            return true;
+    public addNewFiles(files: FileList): void {
+        let newFileAdded: boolean = false;
+
+        this.uploadErrors = {};
+
+        if (this.hasTooManyFiles(files)) {
+            this.manageErrorMsg(GLOBAL_ERROR, ERROR_MAX_FILES, this.maxFilesAllow.toString(), 'MAX_NUMBER_OF_FILES');
         } else {
-            return false;
-        }
-    }
-
-    public filesdroped(files: FileList): void {
-        if (files) {
-            let newFilesAdded: boolean = false;
-
-            this.errorMsgs = [];
-
             if (this.multiple) {
                 for (let i = 0; i < files.length; i++) {
-                    let file: File = files.item(i);
-                    newFilesAdded = this.addToGlobalFilelist(file) || newFilesAdded;
+                    newFileAdded = this.addToGlobalFilelist(files.item(i)) || newFileAdded;
                 }
             } else {
-                if (files.length == 1) {
-                    this.globalFileList = [];
-                    newFilesAdded = this.addToGlobalFilelist(files[0]);
+                if (files.length > 1) {
+                    this.manageErrorMsg(GLOBAL_ERROR, ERROR_MULTIPLE);
                 } else {
-                    this.manageErrorMsg(ERROR_MULTIPLE);
+                    this.globalFileList = [];
+                    newFileAdded = this.addToGlobalFilelist(files.item(0));
                 }
             }
 
-            if (newFilesAdded) {
+            if (newFileAdded) {
                 this.readFiles();
             }
         }
-    }
 
-    public filesInputed(files: FileList): void {
-        if (files) {
-            let newFilesAdded: boolean = false;
-
-            this.errorMsgs = [];
-
-            for (let i = 0; i < files.length; i++) {
-                newFilesAdded = this.addToGlobalFilelist(files[i]) || newFilesAdded;
-            }
-
-            if (newFilesAdded) {
-                this.readFiles();
-            }
-        }
+        this.$emit('errors', this.uploadErrors);
     }
 
     private addToGlobalFilelist(file: File): boolean {
         if (this.isFolder(file)) {
-            this.manageErrorMsg(ERROR_FOLDER, file);
-            return false;
-        }
-
-        if (this.hasTooManyFiles()) {
-            this.manageErrorMsg(ERROR_MAX_FILES, file);
+            this.manageErrorMsg(file.name, ERROR_FOLDER);
             return false;
         }
 
         if (this.isTooBig(file)) {
-            this.manageErrorMsg(ERROR_MAX_SIZE, file);
+            this.manageErrorMsg(file.name, ERROR_MAX_SIZE, this.maxSizeBytes.toString(), 'MAX_BYTES_SIZE');
             return false;
         }
 
         if (this.isAlreadyAdded(file)) {
-            this.manageErrorMsg(ERROR_DUPLICATE, file);
+            this.manageErrorMsg(file.name, ERROR_DUPLICATE);
             return false;
         }
 
         if (this.extensionsProp != '*' && !this.isValidExtension(file)) {
-            this.manageErrorMsg(ERROR_EXTENSION, file);
+            this.manageErrorMsg(file.name, ERROR_EXTENSION);
             return false;
         }
 
@@ -153,8 +142,8 @@ export class MUpload extends ModulVue implements MUploadInterface {
         return true;
     }
 
-    private hasTooManyFiles(): boolean {
-        if (this.globalFileList.length >= this.maxFilesAllow) {
+    private hasTooManyFiles(files: FileList): boolean {
+        if (this.globalFileList.length + files.length > this.maxFilesAllow) {
             return true;
         } else {
             return false;
@@ -225,14 +214,17 @@ export class MUpload extends ModulVue implements MUploadInterface {
                 file.reader.onabort = ((file) => {
                     return (e) => {
                         file.errorReading = true;
-                        this.manageErrorMsg(ERROR_ABORT, file.file);
+                        this.manageErrorMsg(file.file.name, ERROR_ABORT);
+                        this.$emit('errors', this.uploadErrors);
+
                     };
                 })(file);
 
                 file.reader.onerror = ((file) => {
                     return (e) => {
                         file.errorReading = true;
-                        this.manageErrorMsg(ERROR_LOADING, file.file);
+                        this.manageErrorMsg(file.file.name, ERROR_LOADING);
+                        this.$emit('errors', this.uploadErrors);
                     };
                 })(file);
 
@@ -245,11 +237,20 @@ export class MUpload extends ModulVue implements MUploadInterface {
         return true;
     }
 
-    private manageErrorMsg(key: string, file?: File, params: any[] = []): void {
-        if (file) {
-            params.splice(0, 0, file.name);
+    private manageErrorMsg(filename: string, key: string, param?: string, paramName?: string): void {
+        if (!this.uploadErrors[filename]) {
+            this.uploadErrors[filename] = [];
         }
-        this.errorMsgs.push(this.$i18n.translate(key, params));
+
+        let uploadError: UploadError = new UploadError(key);
+        if (param) {
+            uploadError.param = param;
+        }
+        if (paramName) {
+            uploadError.paramName = paramName;
+        }
+
+        this.uploadErrors[filename].push(uploadError);
     }
 }
 
