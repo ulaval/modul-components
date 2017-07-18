@@ -9,7 +9,7 @@ $m-text-field--margin: $m-padding--xs !default;
 
 .m-text-field {
     display: inline-flex;
-    min-width: 138px;
+    min-width: 80px;
     outline: none;
 
     &,
@@ -76,7 +76,7 @@ $m-text-field--margin: $m-padding--xs !default;
         color: $m-color--text;
         border: none;
         border-bottom: 1px solid #000;
-        background-color: none;
+        background: none;
 
         &-line {
             transition: $m-text-field--transiton-duration width ease-in-out;

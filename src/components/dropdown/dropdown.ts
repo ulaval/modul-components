@@ -3,34 +3,27 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './dropdown.html?style=./dropdown.scss';
+import WithRender from '../../mixins/dropdown-template/dropdown-template.html?style=../../mixins/dropdown-template/dropdown-template.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { DropdownTemplate, DropdownTemplateMixin } from '../../mixins/dropdown-template/dropdown-template';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
-const POPPER_CLASS_NAME: string = '.m-popper__popper';
 
 @WithRender
 @Component({
-    mixins: [
-        InputState,
-        MediaQueries
-    ]
+    mixins: [DropdownTemplate]
 })
-export class MDropdown extends ModulVue implements InputStateMixin {
+export class MDropdown extends ModulVue implements DropdownTemplateMixin {
 
-    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6', 'element 7', 'element 8', 'element 9', 'element 10', 'element 11'] })
+    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6'] })
     public elements: any[];
     @Prop()
     public selectedElement: any;
     @Prop()
     public getTextElement: Function;
-    @Prop()
-    public label: string;
     @Prop({ default: false })
     public open: boolean;
     @Prop({ default: true })
@@ -39,23 +32,15 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     public sortMethod: Function;
     @Prop({ default: false })
     public widthFromCss: boolean;
-    @Prop({ default: false })
+
+    public componentName: string = DROPDOWN_NAME;
+
+    // var from DropdownTemplateMixin
+    public mode: string = 'dropdown';
+    public label: string;
     public editable: boolean;
-    @Prop()
     public defaultText: string;
-    @Prop({ default: false })
     public defaultFirstElement: boolean;
-    // @Prop({ default: false })
-    // public name: boolean;
-    // @Prop({ default: false })
-    // public formName: boolean;
-
-    public componentNameL: string = DROPDOWN_NAME;
-
-    public isDisabled: boolean;
-    public hasError: boolean;
-    public isValid: boolean;
-    public isScreenMaxS: boolean;
 
     // Copy of prop
     public propSelectedElement: any;
@@ -65,8 +50,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     public textElement: string = '';
 
     private elementsSorted: Array<any>;
-
-    private dropdownMaxHeight: number = 198;
 
     @Watch('elements')
     public elementChanged(value): void {
@@ -306,52 +289,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         }
 
         this.elementsSorted = elementsSorted;
-    }
-
-    private focusOnResearchInput(): void {
-        this.$refs.researchInput['focus']();
-    }
-
-    private get hasLabel(): boolean {
-        return this.label == '' || this.label == undefined ? false : true;
-    }
-
-    private get researchText(): string {
-        return this.$i18n.translate('m-dropdown:research');
-    }
-
-    private animEnter(element: HTMLElement, done: any): void {
-        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
-        let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
-        let transition: string = '0.3s max-height ease';
-        el.style.transition = transition;
-        el.style.webkitTransition = transition;
-        el.style.overflowY = 'hidden';
-        el.style.maxHeight = '0';
-        setTimeout(() => {
-            el.style.maxHeight = height + 'px';
-            done();
-        }, 0);
-    }
-
-    private animAfterEnter(element: HTMLElement): void {
-        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
-        setTimeout(() => {
-            el.style.maxHeight = this.dropdownMaxHeight + 'px';
-            el.style.overflowY = 'auto';
-        }, 300);
-    }
-
-    private animLeave(element: HTMLElement, done: any): void {
-        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
-        let height: number = el.clientHeight;
-        el.style.maxHeight = height + 'px';
-        el.style.overflowY = 'hidden';
-        el.style.maxHeight = '0';
-        setTimeout(() => {
-            el.style.maxHeight = 'none';
-            done();
-        }, 300);
     }
 
 }

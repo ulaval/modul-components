@@ -3,34 +3,27 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './select.html?style=./select.scss';
+import WithRender from '../../mixins/dropdown-template/dropdown-template.html?style=../../mixins/dropdown-template/dropdown-template.scss';
 import { SELECT_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { DropdownTemplate, DropdownTemplateMixin } from '../../mixins/dropdown-template/dropdown-template';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
-const POPPER_CLASS_NAME: string = '.m-popper__popper';
 
 @WithRender
 @Component({
-    mixins: [
-        InputState,
-        MediaQueries
-    ]
+    mixins: [DropdownTemplate]
 })
-export class MSelect extends ModulVue implements InputStateMixin {
+export class MSelect extends ModulVue implements DropdownTemplateMixin {
 
-    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6', 'element 7', 'element 8', 'element 9', 'element 10', 'element 11'] })
+    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6'] })
     public elements: any[];
     @Prop()
     public selectedElement: any;
     @Prop()
     public getTextElement: Function;
-    @Prop()
-    public label: string;
     @Prop({ default: false })
     public open: boolean;
     @Prop({ default: true })
@@ -39,23 +32,15 @@ export class MSelect extends ModulVue implements InputStateMixin {
     public sortMethod: Function;
     @Prop({ default: false })
     public widthFromCss: boolean;
-    @Prop({ default: false })
+
+    public componentName: string = SELECT_NAME;
+
+    // var from DropdownTemplateMixin
+    public mode: string = 'select';
+    public label: string;
     public editable: boolean;
-    @Prop()
     public defaultText: string;
-    @Prop({ default: false })
     public defaultFirstElement: boolean;
-    // @Prop({ default: false })
-    // public name: boolean;
-    // @Prop({ default: false })
-    // public formName: boolean;
-
-    public componentNameL: string = SELECT_NAME;
-
-    public isDisabled: boolean;
-    public hasError: boolean;
-    public isValid: boolean;
-    public isScreenMaxS: boolean;
 
     // Copy of prop
     public propSelectedElement: any;
@@ -65,8 +50,6 @@ export class MSelect extends ModulVue implements InputStateMixin {
     public textElement: string = '';
 
     private elementsSorted: Array<any>;
-
-    private selectMaxHeight: number = 198;
 
     @Watch('elements')
     public elementChanged(value): void {
@@ -143,11 +126,11 @@ export class MSelect extends ModulVue implements InputStateMixin {
     public adjustWidth(): void {
         if (!this.widthFromCss) {
             // Hidden element to calculate width
-            let hiddenField: HTMLElement = this.$refs.mSelectCalculate as HTMLElement;
+            let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
             // Input or a
-            let valueField: Vue = this.$refs.mSelectValue as Vue;
+            let valueField: Vue = this.$refs.mDropdownValue as Vue;
             // List of elements
-            let elements: HTMLElement = this.$refs.mSelectElements as HTMLElement;
+            let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
 
             let width: number = 0;
 
@@ -167,13 +150,13 @@ export class MSelect extends ModulVue implements InputStateMixin {
             elements.style.width = width + 'px';
 
         } else {
-            let parentElement: HTMLElement = this.$refs.mSelect as HTMLElement;
-            let childElement: HTMLElement = this.$refs.mSelectElements as HTMLElement;
+            let parentElement: HTMLElement = this.$refs.mDropdown as HTMLElement;
+            let childElement: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
             childElement.style.width = parentElement.offsetWidth + 'px';
         }
     }
 
-    public toggleSelect(value: boolean): void {
+    public toggleDropdown(value: boolean): void {
         this.propOpen = value;
         if (value) {
             this.$el.style.zIndex = '10';
@@ -182,13 +165,13 @@ export class MSelect extends ModulVue implements InputStateMixin {
         }
         Vue.nextTick(() => {
             if (value) {
-                this.setSelectElementFocus();
+                this.setDropdownElementFocus();
             }
         });
         this.$emit('open', value);
     }
 
-    public setSelectElementFocus(): void {
+    public setDropdownElementFocus(): void {
         if (!this.editable) {
             let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
             if (element) {
@@ -200,7 +183,7 @@ export class MSelect extends ModulVue implements InputStateMixin {
     public keyupReference($event): void {
         if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
             $event.preventDefault();
-            (this.$refs.mSelectValue as Vue).$el.click();
+            (this.$refs.mDropdownValue as Vue).$el.click();
         }
 
         if (this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN)) {
@@ -306,52 +289,6 @@ export class MSelect extends ModulVue implements InputStateMixin {
         }
 
         this.elementsSorted = elementsSorted;
-    }
-
-    private focusOnResearchInput(): void {
-        this.$refs.researchInput['focus']();
-    }
-
-    private get hasLabel(): boolean {
-        return this.label == '' || this.label == undefined ? false : true;
-    }
-
-    private get researchText(): string {
-        return this.$i18n.translate('m-select:research');
-    }
-
-    private animEnter(element: HTMLElement, done: any): void {
-        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
-        let height: number = el.clientHeight > this.selectMaxHeight ? this.selectMaxHeight : el.clientHeight;
-        let transition: string = '0.3s max-height ease';
-        el.style.transition = transition;
-        el.style.webkitTransition = transition;
-        el.style.overflowY = 'hidden';
-        el.style.maxHeight = '0';
-        setTimeout(() => {
-            el.style.maxHeight = height + 'px';
-            done();
-        }, 0);
-    }
-
-    private animAfterEnter(element: HTMLElement): void {
-        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
-        setTimeout(() => {
-            el.style.maxHeight = this.selectMaxHeight + 'px';
-            el.style.overflowY = 'auto';
-        }, 300);
-    }
-
-    private animLeave(element: HTMLElement, done: any): void {
-        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
-        let height: number = el.clientHeight;
-        el.style.maxHeight = height + 'px';
-        el.style.overflowY = 'hidden';
-        el.style.maxHeight = '0';
-        setTimeout(() => {
-            el.style.maxHeight = 'none';
-            done();
-        }, 300);
     }
 
 }
