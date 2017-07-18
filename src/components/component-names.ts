@@ -12,10 +12,14 @@ export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
 export const LIST_BULLET_NAME: string = 'm-list-bullet';
 export const MESSAGE_NAME: string = 'm-message';
+export const NAV_BAR_NAME: string = 'm-nav-bar';
+export const OPTIONS_MENU_NAME: string = 'm-options-menu';
+export const OPTIONS_MENU_ITEM_NAME: string = 'm-options-menu-item';
 export const PANEL_NAME: string = 'm-panel';
 export const PANEL_DIALOG_NAME: string = 'm-panel-dialog';
 export const POPPER_LIST_NAME: string = 'm-popper-list';
 export const POPPER_NAME: string = 'm-popper';
+export const POPUP_NAME: string = 'm-popup';
 export const RADIO_BUTTONS_NAME: string = 'm-radio-buttons';
 export const SECONDARY_DIALOG_NAME: string = 'm-secondary-dialog';
 export const SELECT_NAME: string = 'm-select';
@@ -49,10 +53,14 @@ export const components: string[] = [
     LINK_NAME,
     LIST_BULLET_NAME,
     MESSAGE_NAME,
+    NAV_BAR_NAME,
+    OPTIONS_MENU_NAME,
+    OPTIONS_MENU_ITEM_NAME,
     PANEL_NAME,
     PANEL_DIALOG_NAME,
     POPPER_LIST_NAME,
     POPPER_NAME,
+    POPUP_NAME,
     RADIO_BUTTONS_NAME,
     SECONDARY_DIALOG_NAME,
     SELECT_NAME,

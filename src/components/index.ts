@@ -15,6 +15,7 @@ import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import ListBulletPlugin from './list-bullet/list-bullet';
 import MessagePlugin from './message/message';
+import NavBarPlugin from './nav-bar/nav-bar';
 import PanelPlugin from './panel/panel';
 import PanelDialogPlugin from './panel-dialog/panel-dialog';
 import PopperPlugin from './popper/popper';
@@ -53,6 +54,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(LinkPlugin);
         Vue.use(ListBulletPlugin);
         Vue.use(MessagePlugin);
+        Vue.use(NavBarPlugin);
         Vue.use(PanelPlugin);
         Vue.use(PanelDialogPlugin);
         Vue.use(PopperPlugin);
