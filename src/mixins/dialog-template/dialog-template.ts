@@ -50,7 +50,7 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
     private portalTargetElement: HTMLElement = document.createElement('div');
     private isVisible: boolean = false;
     private isAnimActive: boolean = false;
-    private isScreenMinS: boolean;
+    private isScreenMaxS: boolean;
     private transitionDuration: number = TRANSITION_DURATION;
 
     @Watch('open')
@@ -151,7 +151,7 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
         switch (mode) {
             case MODE_SECONDARY:
                 this.propCloseOnBackdrop = this.closeOnBackdrop == undefined ? true : this.closeOnBackdrop;
-                this.transitionDuration = this.isScreenMinS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
+                this.transitionDuration = this.isScreenMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
                 break;
             case MODE_PANEL:
                 this.propCloseOnBackdrop = this.closeOnBackdrop == undefined ? true : this.closeOnBackdrop;

@@ -27,7 +27,7 @@ export class MTabs extends Vue {
                 this.$children[i]['unselectTab']();
                 this.arrTabPane.push({
                     id: this.nbTabPane,
-                    label: this.$children[i]['label'],
+                    value: this.$children[i]['label'],
                     isSelected: this.$children[i]['isSelected'],
                     childrenNumber: i
                 });

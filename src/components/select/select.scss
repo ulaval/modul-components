@@ -1,11 +1,11 @@
 @import 'abstracts/variables';
-$m-dropdown--color-hover: $m-color--grey-lightest !default;
-$m-dropdown--color-select: $m-color--grey-lighter !default;
-$m-dropdown--color-focus: $m-color--primary-lightest !default;
-$m-dropdown--color-active: $m-color--primary-lightest !default;
-$m-dropdown--margin: $m-padding--xs !default;
+$m-select--color-hover: $m-color--grey-lightest !default;
+$m-select--color-select: $m-color--grey-lighter !default;
+$m-select--color-focus: $m-color--primary-lightest !default;
+$m-select--color-active: $m-color--primary-lightest !default;
+$m-select--margin: $m-padding--xs !default;
 
-.m-dropdown {
+.m-select {
     position: relative;
     display: inline-flex;
     flex-direction: column;
@@ -59,22 +59,22 @@ $m-dropdown--margin: $m-padding--xs !default;
             width: 100%;
 
             &:not(.is-selected) {
-                .m-dropdown__list__element-text {
+                .m-select__list__element-text {
                     cursor: pointer;
                     transition: 0.3s background ease;
                 }
             }
 
             &.is-selected {
-                .m-dropdown__list__element-text {
+                .m-select__list__element-text {
                     cursor: default;
-                    background: $m-dropdown--color-select;
+                    background: $m-select--color-select;
                 }
             }
 
             &.is-focus {
-                .m-dropdown__list__element-text {
-                    background: $m-dropdown--color-hover;
+                .m-select__list__element-text {
+                    background: $m-select--color-hover;
                 }
             }
 
@@ -91,21 +91,21 @@ $m-dropdown--margin: $m-padding--xs !default;
                 outline: none;
 
                 &:hover {
-                    background: $m-dropdown--color-hover;
+                    background: $m-select--color-hover;
                 }
 
                 &:focus {
-                    background: $m-dropdown--color-focus;
+                    background: $m-select--color-focus;
                 }
 
                 &:active {
-                    background: $m-dropdown--color-active;
+                    background: $m-select--color-active;
                 }
             }
         }
     }
 
     .m-validation-message {
-        margin-top: $m-dropdown--margin;
+        margin-top: $m-select--margin;
     }
 }

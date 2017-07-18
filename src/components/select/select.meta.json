@@ -1,0 +1,65 @@
+{
+    "tag": "m-select",
+    "name": "m-select-meta:name",
+    "attributes": {
+        "elements": {
+            "type": "any[]",
+            "default": []
+        },
+        "selectedElement": {
+            "type": "any"
+        },
+        "getTexteElement": {
+            "type": "Function"
+        },
+        "label": {
+            "type": "string"
+        },
+        "open": {
+            "type": "boolean",
+             "default": false
+        },
+        "sort": {
+            "type": "boolean",
+             "default": true
+        },
+        "sortMethod": {
+            "type": "Function"
+        },
+        "widthFromCss": {
+            "type": "boolean",
+            "default": false
+        },
+        "editable": {
+            "type": "boolean",
+            "default": false
+        },
+        "defaultText": {
+            "type": "string"
+        },
+        "defaultFirstElement": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-select-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-select-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-select-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-select-meta:dont"
+        }
+    ]
+}

@@ -1,9 +1,31 @@
 @import 'm-popper.css';
+@import 'abstracts/variables';
 
 .m-popper {
     box-sizing: border-box;
+    display: inline;
 
-    &.m--is-open {
-        z-index: 3;
+    &__popper {
+        z-index: 4;
+        display: inline-flex;
+        flex-direction: column;
+        overflow: hidden;
+        margin: 0;
+        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
+    }
+
+    &__reference {
+        display: inline-flex;
+        z-index: 1;
+    }
+
+    &__content {
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    &__header {
+        width: 100%;
     }
 }

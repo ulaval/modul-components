@@ -1,10 +1,7 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }">
-    <em style="display: block; margin: 10px 0 0; font-size: 20px; white-space:nowrap">********************************</em>
-    <em style="display: block; font-size: 20px; white-space:nowrap">*** USE &lt;m-select&gt; INSTEAD ***</em>
-    <em style="display: block; margin: 0 0 10px; font-size: 20px; white-space:nowrap">********************************</em>
-    <ul class="m-dropdown__list m--is-hidden" aria-hidden="true">
-        <li class="m-dropdown__list__element">
-            <a href="#" class="m-dropdown__list__element-text" ref="mDropdownCalculate"></a>
+<div class="m-select" ref="mSelect" :class="{ 'm--is-disabled': disabled }">
+    <ul class="m-select__list m--is-hidden" aria-hidden="true">
+        <li class="m-select__list__element">
+            <a href="#" class="m-select__list__element-text" ref="mSelectCalculate"></a>
         </li>
     </ul>
     <m-popper :options="{ placement: 'bottom' }"
@@ -12,47 +9,47 @@
               :closeOnReferenceClick="false"
               :disabled="isDisabled"
               :open="propOpen"
-              mode="dropdown"
+              mode="select"
               dialogMode="panel"
               :enterFn="animEnter"
               :afterEnterFn="animAfterEnter"
               :leaveFn="animLeave"
-              @show="toggleDropdown(true)"
-              @hide="toggleDropdown(false)"
+              @show="toggleSelect(true)"
+              @hide="toggleSelect(false)"
               :paddingHeader="false"
               :paddingBody="false">
         <template slot="header" v-if="hasLabel && isScreenMaxS">
-            <h2 class="m-dropdown__header__label">{{ label }}</h2>
-            <div class="m-dropdown__header__research" v-if="editable">
+            <h2 class="m-select__header__label">{{ label }}</h2>
+            <div class="m-select__header__research" v-if="editable">
                 <input type="text"
-                       class="m-dropdown__header__research-input"
+                       class="m-select__header__research-input"
                        :placeholder="researchText"
                        v-model="textElement"
                        ref="researchInput">
                 <m-button mode="icon" iconName="default" @click="focusOnResearchInput">
-                    <m-i18n i18n-key="m-dropdown:search"></m-i18n>
+                    <m-i18n i18n-key="m-select:search"></m-i18n>
                 </m-button>
             </div>
         </template>
-        <ul class="m-dropdown__list"
-            ref="mDropdownElements"
+        <ul class="m-select__list"
+            ref="mSelectElements"
             slot="content">
             <li v-for="(element, index) in elementsSortedFiltered"
                 v-if="elementsCount > 0"
-                class="m-dropdown__list__element"
+                class="m-select__list__element"
                 :class="{ 'is-selected': element === propSelectedElement }"
                 :key="index"
                 @click="onSelectElement($event, element)">
                 <a href="#"
-                   class="m-dropdown__list__element-text"
+                   class="m-select__list__element-text"
                    :data-index="index"
                    @click.prevent
                    @keyup="keyupItem($event, index)">{{ getElementListText(element) }}</a>
             </li>
             <li v-if="elementsCount <= 0"
-                class="m-dropdown__list__element">
-                <span class="m-dropdown__list__element-text">
-                    <m-i18n i18n-key="m-dropdown:no-result"></m-i18n>
+                class="m-select__list__element">
+                <span class="m-select__list__element-text">
+                    <m-i18n i18n-key="m-select:no-result"></m-i18n>
                 </span>
             </li>
         </ul>
@@ -60,7 +57,7 @@
         <template slot="footer">
             <slot name="footer"></slot>
         </template>
-        <m-text-field ref="mDropdownValue"
+        <m-text-field ref="mSelectValue"
                       :label="label"
                       :value="textElement"
                       :state="propState"

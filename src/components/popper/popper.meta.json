@@ -16,29 +16,30 @@
         },
         "open": {
             "type": "boolean",
-            "default": "false"
-        },
-        "disabled": {
-            "type": "boolean",
-            "default": false
-        },
-        "content": {
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
         },
         "boundariesSelector": {
-        },
-        "reference": {
+            "type": "string"
         },
         "forceShow": {
             "type": "boolean",
-            "default": false
-        },
-        "appendToBody": {
-            "type": "boolean",
-            "default": false
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
         },
         "arrow": {
             "type": "boolean",
-            "default": false
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
         },
         "options": {
             "type": "string",
@@ -49,11 +50,60 @@
         },
         "closeOnContentClick": {
             "type": "boolean",
-            "default": false
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
         },
         "closeOnReferenceClick": {
             "type": "boolean",
-            "default": true
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "mobileMode": {
+            "type": "string",
+            "value": [
+                "primary",
+                "secondary",
+                "panel"
+            ],
+            "default": 2
+        },
+        "padding": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "paddingHeader": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "paddingBody": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "paddingFooter": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
         }
     },
     "overview": [
