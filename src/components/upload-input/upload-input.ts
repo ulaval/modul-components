@@ -20,7 +20,7 @@ export class MUploadInput extends Vue {
     public filesInput($event: Event): void {
         let files: FileList = ($event.target as any).files;
 
-        (this.$parent as MUploadInterface).filesInputed(files);
+        (this.$parent as MUploadInterface).addNewFiles(files);
         this.$emit('filesInputed', files);
     }
 }

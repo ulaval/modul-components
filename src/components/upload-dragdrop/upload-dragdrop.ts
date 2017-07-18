@@ -18,7 +18,7 @@ export class MUploadDragdrop extends Vue {
 
         let files: FileList = $event.dataTransfer.files;
 
-        (this.$parent as MUploadInterface).filesdroped(files);
+        (this.$parent as MUploadInterface).addNewFiles(files);
         this.$emit('filesDroped', files);
     }
 }
