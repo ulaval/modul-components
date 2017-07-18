@@ -1,6 +1,8 @@
 {
     "m-select": {
         "no-result": "Aucun résultats",
-        "none": "(Aucun)"
+        "none": "(Aucun)",
+        "research" : "Recherche",
+        "search" : "Rechercher"
     }
 }
