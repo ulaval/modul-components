@@ -1,0 +1,86 @@
+@import 'abstracts/variables';
+$m-select--color-hover: $m-color--grey-lightest;
+$m-select--color-select: $m-color--grey-lighter;
+$m-select--color-focus: $m-color--primary-lightest;
+$m-select--color-active: $m-color--primary-lightest;
+$m-select--margin: $m-padding--xs !default;
+
+.m-select {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+
+    &__list {
+        transition: 0.3s max-height ease;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        list-style: none;
+        text-align: left;
+        background: $m-color--white;
+        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
+
+        &.m--is-hidden {
+            position: absolute;
+            visibility: hidden;
+        }
+
+        &__element {
+            margin: 0;
+            width: 100%;
+
+            &:not(.is-selected) {
+                .m-select__list__element-text {
+                    cursor: pointer;
+                    transition: 0.3s background ease;
+                }
+            }
+
+            &.is-selected {
+                .m-select__list__element-text {
+                    cursor: default;
+                    background: $m-select--color-select;
+                }
+            }
+
+            &.is-focus {
+                .m-select__list__element-text {
+                    background: $m-select--color-hover;
+                }
+            }
+
+            &-text {
+                transition: background 0.3s ease;
+                box-sizing: border-box;
+                display: inline-flex;
+                align-items: center;
+                width: 100%;
+                padding: $m-padding;
+                color: $m-color--text;
+                font-size: $m-font-size--l;
+                text-decoration: none;
+                outline: none;
+
+                &:hover {
+                    background: $m-select--color-hover;
+                }
+
+                &:focus {
+                    background: $m-select--color-focus;
+                }
+
+                &:active {
+                    background: $m-select--color-active;
+                }
+            }
+        }
+    }
+}
+
+.m-dialog__body {
+    padding: 0;
+}
+

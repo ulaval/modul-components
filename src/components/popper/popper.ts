@@ -6,7 +6,7 @@ import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
 import Popper from 'popper.js';
 
-const MODE_DROPDOWN = 'dropdown';
+const MODE_SELECT = 'select';
 
 export interface IPopperOptions {
     placement: string;
@@ -65,8 +65,8 @@ export class MPopper extends Vue {
     private popper: Node | undefined;
     private appended: boolean;
     private _timer: number;
-    private dropdownMaxHeight: number = 198;
-    private dropdownClass: string = '.m-dropdown__list';
+    private selectMaxHeight: number = 198;
+    private selectClass: string = '.m-select__list';
 
     @Watch('showPopper')
     public showPopperChanged(value) {
@@ -239,9 +239,9 @@ export class MPopper extends Vue {
 
     private animEnter(element, done): void {
         this.animPopperActive = true;
-        if (this.propMode == MODE_DROPDOWN && !this.appendToBody) {
-            let el = element.querySelector(this.dropdownClass);
-            let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
+        if (this.propMode == MODE_SELECT && !this.appendToBody) {
+            let el = element.querySelector(this.selectClass);
+            let height: number = el.clientHeight > this.selectMaxHeight ? this.selectMaxHeight : el.clientHeight;
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';
             setTimeout( () => {
@@ -254,18 +254,18 @@ export class MPopper extends Vue {
     }
 
     private animAfterEnter(element): void {
-        if (this.propMode == MODE_DROPDOWN && !this.appendToBody) {
-            let el = element.querySelector(this.dropdownClass);
+        if (this.propMode == MODE_SELECT && !this.appendToBody) {
+            let el = element.querySelector(this.selectClass);
             setTimeout(() => {
-                el.style.maxHeight = this.dropdownMaxHeight + 'px';
+                el.style.maxHeight = this.selectMaxHeight + 'px';
                 el.style.overflowY = 'auto';
             }, 300);
         }
     }
 
     private animLeave(element, done): void {
-        if (this.propMode == MODE_DROPDOWN && !this.appendToBody) {
-            let el = element.querySelector(this.dropdownClass);
+        if (this.propMode == MODE_SELECT && !this.appendToBody) {
+            let el = element.querySelector(this.selectClass);
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';
             el.style.overflowY = 'hidden';

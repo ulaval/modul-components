@@ -21,6 +21,7 @@ import PopperPlugin from './popper/popper';
 import PopperListPlugin from './popper-list/popper-list';
 import RadioButtonsPlugin from './radio-buttons/radio-buttons';
 import SecondaryDialogPlugin from './secondary-dialog/secondary-dialog';
+import SelectPlugin from './select/select';
 import SpinnerPlugin from './spinner/spinner';
 import StatusList from './status-list/status-list';
 import StepPlugin from './step/step';
@@ -58,6 +59,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(PopperListPlugin);
         Vue.use(RadioButtonsPlugin);
         Vue.use(SecondaryDialogPlugin);
+        Vue.use(SelectPlugin);
         Vue.use(SpinnerPlugin);
         Vue.use(StatusList);
         Vue.use(StepPlugin);
