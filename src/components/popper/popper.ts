@@ -32,6 +32,8 @@ export class MPopper extends Vue {
     public trigger: string;
     @Prop({ default: false })
     public open: boolean;
+    @Prop({ default: false })
+    public disabled: boolean;
     @Prop()
     public boundariesSelector: string;
     @Prop({ default: false })
@@ -191,14 +193,8 @@ export class MPopper extends Vue {
         this.popperJS ? this.popperJS.update() : this.createPopper();
     }
 
-    private onClick(): void {
-        if (this.trigger == TRIGGER_CLICK) {
-            this.doToggle();
-        }
-    }
-
     private doToggle(): void {
-        if (!this.forceShow) {
+        if (!this.forceShow && !this.disabled) {
             if (this.closeOnReferenceClick) {
                 this.showPopper = !this.showPopper;
             } else {

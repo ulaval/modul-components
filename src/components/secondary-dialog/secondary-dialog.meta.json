@@ -2,7 +2,7 @@
     "tag": "m-secondary-dialog",
     "name": "m-secondary-dialog:name",
     "attributes": {
-        "id": {
+         "id": {
             "type": "string",
             "values": [
                 "mDialog"
@@ -13,8 +13,21 @@
             "type": "boolean",
             "default": false
         },
+        "disabled": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
         "closeOnBackdrop": {
-            "type": "boolean"
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
         },
         "title": {
             "type": "string"
@@ -24,20 +37,36 @@
         },
         "padding": {
             "type": "boolean",
-            "default": true
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
         },
         "paddingHeader": {
             "type": "boolean",
-            "default": true
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
         },
         "paddingBody": {
             "type": "boolean",
-            "default": true
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
         }
         ,
         "paddingFooter": {
             "type": "boolean",
-            "default": true
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
         }
     },
     "overview": [

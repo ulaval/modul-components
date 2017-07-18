@@ -4,12 +4,13 @@ import { Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 
-const MODE_PRIMARY = 'primary';
-const MODE_SECONDARY = 'secondary';
-const MODE_PANEL = 'panel';
+const MODE_PRIMARY: string = 'primary';
+const MODE_SECONDARY: string = 'secondary';
+const MODE_PANEL: string = 'panel';
 
-const TRANSITION_DURATION = 300;
-const TRANSITION_DURATION_LONG = 600;
+const DIALOG_ID: string = 'mDialog';
+const TRANSITION_DURATION: number = 300;
+const TRANSITION_DURATION_LONG: number = 600;
 
 export interface DialogTemplateMixin {
     mode: string;
@@ -21,10 +22,12 @@ export interface DialogTemplateMixin {
 })
 export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
 
-    @Prop({ default: 'mDialog' })
+    @Prop({ default: DIALOG_ID })
     public id: string;
     @Prop({ default: false })
     public open: boolean;
+    @Prop({ default: false })
+    public disabled: boolean;
     @Prop()
     public closeOnBackdrop: boolean;
     @Prop({ default: '' })
@@ -44,7 +47,7 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
     public componentName: string;
 
     private propOpen: boolean = false;
-    private propId: string = 'mDialog';
+    private propId: string = DIALOG_ID;
     private propCloseOnBackdrop: boolean;
     private bodyElement: HTMLElement = document.body;
     private portalTargetElement: HTMLElement = document.createElement('div');
@@ -76,7 +79,7 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
     }
 
     private openDialog(event = undefined): void {
-        if (!this.isAnimActive) {
+        if (!this.isAnimActive && !this.disabled) {
             this.createDialog();
             this.propOpen = true;
             this.isAnimActive = true;
