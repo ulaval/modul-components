@@ -7,7 +7,7 @@ const BACKDROP_STYLE_TRANSITION: string = 'opacity 0.3s ease';
 const BACKDROP_STYLE_POSITION: string = 'fixed';
 const BACKDROP_STYLE_POSITION_VALUE: string = '0';
 const BACKDROP_STYLE_BACKGROUND: string = '#000';
-const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.8';
+const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.7';
 const BACKDROP_STYLE_OPACITY: string = '0';
 const Z_INDEZ_DEFAULT: number = 100;
 
