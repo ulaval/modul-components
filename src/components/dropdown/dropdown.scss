@@ -1,8 +1,8 @@
 @import 'abstracts/variables';
-$m-dropdown--color-hover: $m-color--grey-lightest;
-$m-dropdown--color-select: $m-color--grey-lighter;
-$m-dropdown--color-focus: $m-color--primary-lightest;
-$m-dropdown--color-active: $m-color--primary-lightest;
+$m-dropdown--color-hover: $m-color--grey-lightest !default;
+$m-dropdown--color-select: $m-color--grey-lighter !default;
+$m-dropdown--color-focus: $m-color--primary-lightest !default;
+$m-dropdown--color-active: $m-color--primary-lightest !default;
 $m-dropdown--margin: $m-padding--xs !default;
 
 .m-dropdown {
@@ -10,8 +10,35 @@ $m-dropdown--margin: $m-padding--xs !default;
     display: inline-flex;
     flex-direction: column;
 
+    &__header {
+        &__label {
+            margin: 0;
+            padding: $m-padding;
+            font-size: $m-font-size--l;
+            font-weight: $m-font-weight--bold;
+            color: $m-color--white;
+            background: $m-color--black-grey;
+        }
+
+        &__research {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            background: $m-color--grey-lightest;
+
+            &-input {
+                width: 100%;
+                font-size: $m-font-size;
+                font-weight: $m-font-weight;
+                border: none;
+                outline: none;
+                background: none;
+                padding: $m-padding 0 $m-padding $m-padding;
+            }
+        }
+    }
+
     &__list {
-        transition: 0.3s max-height ease;
         height: auto;
         overflow-x: hidden;
         overflow-y: auto;
@@ -21,7 +48,6 @@ $m-dropdown--margin: $m-padding--xs !default;
         list-style: none;
         text-align: left;
         background: $m-color--white;
-        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
 
         &.m--is-hidden {
             position: absolute;
@@ -78,9 +104,8 @@ $m-dropdown--margin: $m-padding--xs !default;
             }
         }
     }
-}
 
-.m-dialog__body {
-    padding: 0;
+    .m-validation-message {
+        margin-top: $m-dropdown--margin;
+    }
 }
-

@@ -12,6 +12,7 @@ import { MediaQueries } from '../../mixins/media-queries/media-queries';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
+const POPPER_CLASS_NAME: string = '.m-popper__popper';
 
 @WithRender
 @Component({
@@ -22,7 +23,7 @@ const PAGE_STEP: number = 4;
 })
 export class MDropdown extends ModulVue implements InputStateMixin {
 
-    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6', 'element 7', 'element 8', 'element 9', 'element 10', 'element 11']})
+    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6', 'element 7', 'element 8', 'element 9', 'element 10', 'element 11'] })
     public elements: any[];
     @Prop()
     public selectedElement: any;
@@ -65,6 +66,8 @@ export class MDropdown extends ModulVue implements InputStateMixin {
 
     private elementsSorted: Array<any>;
 
+    private dropdownMaxHeight: number = 198;
+
     @Watch('elements')
     public elementChanged(value): void {
         this.prepareElements();
@@ -106,13 +109,7 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     }
 
     public mounted() {
-        if (!this.widthFromCss) {
-            this.adjustWidth();
-        } else {
-            let parentElement: HTMLElement = this.$refs.mDropdown as HTMLElement;
-            let childElement: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
-            childElement.style.width = parentElement.offsetWidth + 'px';
-        }
+        this.adjustWidth();
     }
 
     public onSelectElement($event, element: any): void {
@@ -144,29 +141,36 @@ export class MDropdown extends ModulVue implements InputStateMixin {
     }
 
     public adjustWidth(): void {
-        // Hidden element to calculate width
-        let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
-        // Input or a
-        let valueField: Vue = this.$refs.mDropdownValue as Vue;
-        // List of elements
-        let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
+        if (!this.widthFromCss) {
+            // Hidden element to calculate width
+            let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
+            // Input or a
+            let valueField: Vue = this.$refs.mDropdownValue as Vue;
+            // List of elements
+            let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
 
-        let width: number = 0;
+            let width: number = 0;
 
-        if (this.elements && this.elements.length > 0) {
-            for (let element of this.elements) {
-                width = Math.max(width, this.getTextWidth(hiddenField, this.getElementListText(element)));
+            if (this.elements && this.elements.length > 0) {
+                for (let element of this.elements) {
+                    width = Math.max(width, this.getTextWidth(hiddenField, this.getElementListText(element)));
+                }
+            } else {
+                width = this.getTextWidth(hiddenField, this.getSelectedElementText());
             }
-        } else {
-            width = this.getTextWidth(hiddenField, this.getSelectedElementText());
-        }
 
-        // Add 25px for scrollbar
-        width = Math.ceil(width) + 25;
-        // Set width to Input and List
-        valueField.$el.style.width = width + 'px';
-        this.$el.style.width = width + 'px';
-        elements.style.width = width + 'px';
+            // Add 25px for scrollbar
+            width = Math.ceil(width) + 25;
+            // Set width to Input and List
+            valueField.$el.style.width = width + 'px';
+            this.$el.style.width = width + 'px';
+            elements.style.width = width + 'px';
+
+        } else {
+            let parentElement: HTMLElement = this.$refs.mDropdown as HTMLElement;
+            let childElement: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
+            childElement.style.width = parentElement.offsetWidth + 'px';
+        }
     }
 
     public toggleDropdown(value: boolean): void {
@@ -176,7 +180,6 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         } else {
             this.$el.style.removeProperty('z-index');
         }
-
         Vue.nextTick(() => {
             if (value) {
                 this.setDropdownElementFocus();
@@ -305,9 +308,52 @@ export class MDropdown extends ModulVue implements InputStateMixin {
         this.elementsSorted = elementsSorted;
     }
 
+    private focusOnResearchInput(): void {
+        this.$refs.researchInput['focus']();
+    }
+
     private get hasLabel(): boolean {
         return this.label == '' || this.label == undefined ? false : true;
     }
+
+    private get researchText(): string {
+        return this.$i18n.translate('m-dropdown:research');
+    }
+
+    private animEnter(element: HTMLElement, done: any): void {
+        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
+        let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
+        let transition: string = '0.3s max-height ease';
+        el.style.transition = transition;
+        el.style.webkitTransition = transition;
+        el.style.overflowY = 'hidden';
+        el.style.maxHeight = '0';
+        setTimeout(() => {
+            el.style.maxHeight = height + 'px';
+            done();
+        }, 0);
+    }
+
+    private animAfterEnter(element: HTMLElement): void {
+        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
+        setTimeout(() => {
+            el.style.maxHeight = this.dropdownMaxHeight + 'px';
+            el.style.overflowY = 'auto';
+        }, 300);
+    }
+
+    private animLeave(element: HTMLElement, done: any): void {
+        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
+        let height: number = el.clientHeight;
+        el.style.maxHeight = height + 'px';
+        el.style.overflowY = 'hidden';
+        el.style.maxHeight = '0';
+        setTimeout(() => {
+            el.style.maxHeight = 'none';
+            done();
+        }, 300);
+    }
+
 }
 
 const DropdownPlugin: PluginObject<any> = {
