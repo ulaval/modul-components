@@ -27,15 +27,9 @@ $m-loading-speed: 0.7s;
                 &__description {
                     color: $m-color--white;
                 }
-            }
-        }
 
-        &.m--is-light {
-            .m-spinner {
-                &__icon {
-                    border-left-color: $m-color--white;
-                    border-bottom-color: $m-color--white;
-                    border-right-color: $m-color--white;
+                &__circle-background {
+                    stroke: $m-color--white;
                 }
             }
         }
