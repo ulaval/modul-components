@@ -1,15 +1,5 @@
 .m-popper__popper {
-    width: auto;
-    background-color: #fafafa;
-    color: #212121;
-    text-align: center;
-    padding: 2px;
-    display: inline-block;
-    border-radius: 3px;
     position: absolute;
-    font-size: 14px;
-    font-weight: normal;
-    border: 1px #ebebeb solid;
     z-index: 200000;
 }
 
@@ -22,7 +12,7 @@
 }
 
 .m-popper__popper[x-placement^="top"] {
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 .m-popper__popper[x-placement^="top"] .popper__arrow {
