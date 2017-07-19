@@ -13,6 +13,8 @@ export const MODE_PROCESSING: string = 'processing';
 export class MLimitText extends ModulVue {
     @Prop({ default: 4 })
     public maxNumberOfLine: number;
+    @Prop()
+    public label: string;
 
     public componentName = LIMIT_TEXT_NAME;
     private reduceContent: string = '';
@@ -30,9 +32,22 @@ export class MLimitText extends ModulVue {
 
     private mounted(): void {
         this.originalContent = this.$refs.originalText['innerHTML'];
-        this.fullContent = this.originalContent + this.closeLink;
+        if (this.originalContent.match('</')) {
+            let tagIndex = this.originalContent.lastIndexOf('</');
+            this.fullContent = this.originalContent.substring(0,tagIndex) + this.closeLink + this.originalContent.substring(tagIndex);
+        } else {
+            this.fullContent = this.originalContent + this.closeLink;
+        }
         this.adjustText();
         this.ready = true;
+        // let windowWidth = document.documentElement.clientWidth;
+        // window.addEventListener('resize', () => {
+        //     if (document.documentElement.clientWidth != windowWidth) {
+        //         windowWidth = document.documentElement.clientWidth;
+        //         this.adjustText();
+
+        //     }
+        // });
     }
 
     private adjustText(): void {
@@ -49,9 +64,6 @@ export class MLimitText extends ModulVue {
         let initLineHeigh: any = parseFloat(String(window.getComputedStyle(el).lineHeight).replace(/,/g, '.')).toFixed(2);
         let maxHeight: number = this.maxNumberOfLine * initLineHeigh;
         let currentHeight: number = (el as HTMLElement).clientHeight;
-        // console.log(initLineHeigh, maxHeight, currentHeight);
-        // console.log(this.reduceContent);
-        // console.log(this.remainingContent);
         return (currentHeight > maxHeight);
     }
     private updateContent(content): void {
@@ -59,7 +71,7 @@ export class MLimitText extends ModulVue {
     }
 
     private getReduceContent(): void {
-        let HTMLcontent = this.originalContent;
+        let HTMLcontent = this.fullContent;
         let index: number = 0;
         let lastValidContent: string = '';
         let closingTag: string = '';
@@ -101,12 +113,11 @@ export class MLimitText extends ModulVue {
                         break;
                 }
             }
-            let openingTag = closingTag.replace(/\\/g, '');
             lastValidContent = this.reduceContent;
-            this.reduceContent = HTMLcontent.substring(0, index + 1) + this.openLink + closingTag;
+            this.reduceContent = HTMLcontent.substring(0, index + 1) + this.openLinkOriginal + closingTag;
             index++;
         }
-        this.reduceContent = lastValidContent;
+        this.reduceContent = lastValidContent.replace(this.openLinkOriginal, this.openLink);
     }
 
     private getReduceText(): string {
@@ -117,21 +128,23 @@ export class MLimitText extends ModulVue {
         return this.fullContent;
     }
 
+    private get openLinkOriginal(): string {
+        return `... <m-link style="font-weight:400;" mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.label ? this.label.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
+    }
+
     private get openLink(): string {
-        return `... <m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[ + ]</m-link>`;
+        return `... <m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.label ? this.label.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
     }
 
     private get closeLink(): string {
-        return `<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:close') + `" :underline="false">[ - ]</m-link>`;
+        return `<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:close') + `" :underline="false">[\xa0-\xa0]</m-link>`;
     }
 
     private openText(): boolean {
-        console.log('open');
         return this.open = true;
     }
 
     private closeText(): boolean {
-        console.log('close');
         return this.open = false;
     }
 
