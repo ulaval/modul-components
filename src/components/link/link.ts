@@ -21,6 +21,8 @@ export class MLink extends ModulVue {
     public unvisited: boolean;
     @Prop({ default: true })
     public underline: boolean;
+    @Prop()
+    public hiddenText: string;
 
     public componentName: string = LINK_NAME;
 
@@ -72,6 +74,9 @@ export class MLink extends ModulVue {
 
     private get hasIconeRight(): boolean {
         return !!this.$slots['icon-right'];
+    }
+    private get hasHiddenText(): boolean {
+        return this.hiddenText == '' && this.hiddenText == undefined ? false : true;
     }
 }
 

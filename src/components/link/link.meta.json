@@ -31,6 +31,9 @@
                 "false"
             ],
             "default": 0
+        },
+        "hiddenText" : {
+            "type": "string"
         }
     },
     "overview": [

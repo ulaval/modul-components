@@ -86,4 +86,8 @@
             margin-left: $m-margin--s;
         }
     }
+
+    &__hidden {
+        @include visuallyHidden;
+    }
 }
