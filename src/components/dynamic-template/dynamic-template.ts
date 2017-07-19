@@ -13,6 +13,14 @@ export class MDynamicTemplate extends Vue {
 
     private tag: string = 'm-dt-' + uuid.generate();
 
+    protected mounted(): void {
+        this.$emit('mounted', this.$children);
+    }
+
+    protected updated(): void {
+        this.$emit('updated', this.$children);
+    }
+
     private get internalTemplate(): string {
         Vue.component(this.tag, {
             template: `<div>${this.template}</div>`
