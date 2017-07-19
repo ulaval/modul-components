@@ -1,0 +1,10 @@
+<li class="m-dropdown-item"
+    :class="{ 'is-selected': element === propSelectedElement }"
+    :key="index"
+    @click="onSelectElement($event, element)">
+    <a href="#"
+        class="m-dropdown-item__element-text"
+        :data-index="index"
+        @click.prevent
+        @keyup="keyupItem($event, index)">{{ getElementListText(element) }}</a>
+</li>

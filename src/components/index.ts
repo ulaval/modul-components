@@ -8,6 +8,7 @@ import ButtonGroupPlugin from './button-group/button-group';
 import CheckboxPlugin from './checkbox/checkbox';
 import DialogPlugin from './dialog/dialog';
 import DropdownPlugin from './dropdown/dropdown';
+import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
@@ -49,6 +50,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(CheckboxPlugin);
         Vue.use(DialogPlugin);
         Vue.use(DropdownPlugin);
+        Vue.use(DropdownItemPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);

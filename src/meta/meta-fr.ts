@@ -13,6 +13,7 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/checkbox/checkbox.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dialog/dialog.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/dropdown-item/dropdown-item.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dynamic-template/dynamic-template.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/i18n/i18n.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/icon/icon.meta.fr.json'));
