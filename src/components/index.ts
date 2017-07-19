@@ -16,6 +16,8 @@ import LinkPlugin from './link/link';
 import ListBulletPlugin from './list-bullet/list-bullet';
 import MessagePlugin from './message/message';
 import NavBarPlugin from './nav-bar/nav-bar';
+import OptionsMenuPlugin from './options-menu/options-menu';
+import OptionsMenuItemPlugin from './options-menu-item/options-menu-item';
 import PanelPlugin from './panel/panel';
 import PanelDialogPlugin from './panel-dialog/panel-dialog';
 import PopperPlugin from './popper/popper';
@@ -55,6 +57,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ListBulletPlugin);
         Vue.use(MessagePlugin);
         Vue.use(NavBarPlugin);
+        Vue.use(OptionsMenuPlugin);
+        Vue.use(OptionsMenuItemPlugin);
         Vue.use(PanelPlugin);
         Vue.use(PanelDialogPlugin);
         Vue.use(PopperPlugin);

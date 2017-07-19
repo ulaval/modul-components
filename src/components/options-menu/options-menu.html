@@ -1,0 +1,10 @@
+<m-popper :open="isOpen">
+    <div class="m-options-menu" slot="content">
+        <slot>
+            <m-options-menu-item iconName="default" @click="onItemClick">Option 1</m-options-menu-item>
+            <m-options-menu-item iconName="default"></m-options-menu-item>
+            <m-options-menu-item>Option 3</m-options-menu-item>
+        </slot>
+    </div>
+    <m-button mode="icon" iconName="options">Open popup</m-button>
+</m-popper>

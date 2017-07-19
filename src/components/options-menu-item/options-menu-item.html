@@ -1,0 +1,6 @@
+<a class="m-options-menu-item" :class="{ 'disabled' : isDisabled}" href="#" @click.prevent="onClick" ref="m-options-menu-item">
+    <span class="m-options-menu-item__icon" :class="{ 'm-options-menu-item__first-cell' : hasIcon }" ref="icon">
+        <m-icon :iconName="iconName" v-if="hasIcon"></m-icon>
+    </span>
+    <span class="m-options-menu-item__text" :class="{ 'm-options-menu-item__last-cell' : hasSlot }" ref="text"><slot></slot></span>
+</a>
