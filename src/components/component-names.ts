@@ -1,5 +1,6 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
+export const BULLET_LIST_NAME: string = 'm-bullet-list';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CHECKBOX_NAME: string = 'm-checkbox';
@@ -11,7 +12,6 @@ export const I18N_NAME: string = 'm-i18n';
 export const ICON_NAME: string = 'm-icon';
 export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
-export const LIST_BULLET_NAME: string = 'm-list-bullet';
 export const MESSAGE_NAME: string = 'm-message';
 export const NAV_BAR_NAME: string = 'm-nav-bar';
 export const OPTIONS_MENU_NAME: string = 'm-options-menu';
@@ -41,6 +41,7 @@ export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
 export const components: string[] = [
     ACCORDION_GROUP_NAME,
     ACCORDION_NAME,
+    BULLET_LIST_NAME,
     BUTTON_NAME,
     BUTTON_GROUP_NAME,
     CHECKBOX_NAME,
@@ -52,7 +53,6 @@ export const components: string[] = [
     ICON_NAME,
     LIMIT_TEXT_NAME,
     LINK_NAME,
-    LIST_BULLET_NAME,
     MESSAGE_NAME,
     NAV_BAR_NAME,
     OPTIONS_MENU_NAME,

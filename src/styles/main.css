@@ -235,22 +235,22 @@ body {
 .m-u--no-box-shadow {
   box-shadow: none; }
 
-.m-u--list-bullet {
+.m-u--bullet-list {
   margin: 12px 0;
   padding: 0 0 0 32px; }
-  .m-u--list-bullet > :not(ul):not(li) {
+  .m-u--bullet-list > :not(ul):not(li) {
     font-weight: 400;
     margin-bottom: 0; }
-  .m-u--list-bullet ul, .m-u--list-bullet__list {
+  .m-u--bullet-listul, .m-u--bullet-list__list {
     margin: 0;
     padding: 0 0 0 32px; }
-  .m-u--list-bullet:not(ul) {
+  .m-u--bullet-list:not(ul) {
     margin: 12px 0; }
-  .m-u--list-bullet li, .m-u--list-bullet__elem {
+  .m-u--bullet-list li, .m-u--bullet-list__elem {
     position: relative;
     list-style: none;
     margin: 8px 0; }
-    .m-u--list-bullet li::before, .m-u--list-bullet__elem::before {
+    .m-u--bullet-list li::before, .m-u--bullet-list__elem::before {
       position: absolute;
       top: 8px;
       left: -12px;

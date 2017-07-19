@@ -1,0 +1,11 @@
+{
+    "tag": "m-bullet-list",
+    "name": "m-bullet-list-meta:name",
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-bullet-list-meta:context-of-use"
+        }
+    ]
+}

@@ -3,6 +3,7 @@ import { PluginObject } from 'vue';
 
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
+import BulletListPlugin from './bullet-list/bullet-list';
 import ButtonPlugin from './button/button';
 import ButtonGroupPlugin from './button-group/button-group';
 import CheckboxPlugin from './checkbox/checkbox';
@@ -14,7 +15,6 @@ import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
 import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
-import ListBulletPlugin from './list-bullet/list-bullet';
 import MessagePlugin from './message/message';
 import NavBarPlugin from './nav-bar/nav-bar';
 import OptionsMenuPlugin from './options-menu/options-menu';
@@ -55,7 +55,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(IconPlugin);
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);
-        Vue.use(ListBulletPlugin);
+        Vue.use(BulletListPlugin);
         Vue.use(MessagePlugin);
         Vue.use(NavBarPlugin);
         Vue.use(OptionsMenuPlugin);
