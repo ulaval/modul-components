@@ -18,7 +18,6 @@ export const OPTIONS_MENU_NAME: string = 'm-options-menu';
 export const OPTIONS_MENU_ITEM_NAME: string = 'm-options-menu-item';
 export const PANEL_NAME: string = 'm-panel';
 export const PANEL_DIALOG_NAME: string = 'm-panel-dialog';
-export const POPPER_LIST_NAME: string = 'm-popper-list';
 export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const RADIO_BUTTONS_NAME: string = 'm-radio-buttons';
@@ -60,7 +59,6 @@ export const components: string[] = [
     OPTIONS_MENU_ITEM_NAME,
     PANEL_NAME,
     PANEL_DIALOG_NAME,
-    POPPER_LIST_NAME,
     POPPER_NAME,
     POPUP_NAME,
     RADIO_BUTTONS_NAME,
