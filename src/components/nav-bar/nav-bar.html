@@ -4,7 +4,7 @@
             <a href="#"
                class="m-nav-bar__element__link"
                :class="{ 'm--is-selected': element.isSelected,
-                      'm--is-icon-right': element.iconPosition=='right'}"
+                      'm--is-icon-right': propIconPosition=='right'}"
                @click.prevent="onClick($event, index)">
                <m-icon :name="element.iconName" v-if="element.iconName"></m-icon>{{ element.value }}</a>
         </li>

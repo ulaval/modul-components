@@ -9,14 +9,19 @@ const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
 const POPPER_CLASS_NAME: string = '.m-popper__popper';
 
+const ICON_POSITION_LEFT: string = 'left';
+const ICON_POSITION_RIGHT: string = 'right';
+
 @WithRender
 @Component
 export class MNavbar extends ModulVue {
 
-    @Prop({ default: () => [{value: 'ele 1', isSelected: false, iconName: 'default', iconPosition: 'right'}, {value: 'element #2', isSelected: true}, {value: 'element 3', isSelected: false}] })
+    @Prop({ default: () => [{value: 'ele 1', isSelected: false, iconName: 'default'}, {value: 'element #2', isSelected: true}, {value: 'element 3', isSelected: false}] })
     public elements: any[];
     @Prop()
     public mode: string;
+    @Prop({ default: ICON_POSITION_LEFT })
+    private iconPosition: string;
 
     private isAnimActive: boolean = false;
 
@@ -41,6 +46,10 @@ export class MNavbar extends ModulVue {
         }
         this.setLinePosition();
         this.$emit('click', event, index);
+    }
+
+    private get propIconPosition(): string {
+        return this.iconPosition == ICON_POSITION_RIGHT ? this.iconPosition : ICON_POSITION_LEFT;
     }
 
 }

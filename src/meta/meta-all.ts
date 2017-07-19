@@ -37,6 +37,7 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(LIST_BULLET_NAME, require('../components/list-bullet/list-bullet.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(MESSAGE_NAME, require('../components/message/message.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(NAV_BAR_NAME, require('../components/nav-bar/nav-bar.meta.json'), CATEGORY_NAVIGATION);
+        meta.mergeComponentMeta(NAV_BAR_NAME, require('../components/options-menu/options-menu.meta.json'), CATEGORY_CONTENT);
         meta.mergeComponentMeta(PANEL_NAME, require('../components/panel/panel.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(POPPER_LIST_NAME, require('../components/popper-list/popper-list.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(POPPER_NAME, require('../components/popper/popper.meta.json'), CATEGORY_LAYOUT);
