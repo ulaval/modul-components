@@ -42,6 +42,8 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
     public defaultText: string;
     public defaultFirstElement: boolean;
 
+    public isScreenMaxS: boolean = false;
+
     // Copy of prop
     public propSelectedElement: any;
     public propOpen: boolean = false;
@@ -63,8 +65,17 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
     }
 
     @Watch('open')
-    public openChanged(value): void {
+    public openChanged(value: boolean): void {
         this.propOpen = value;
+    }
+
+    @Watch('isScreenMaxS')
+    public isScreenMaxSChanged(value: boolean): void {
+        if (!value) {
+            Vue.nextTick(() => {
+                this.adjustWidth();
+            });
+        }
     }
 
     public get elementsCount(): number {
@@ -97,6 +108,7 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
 
     public onSelectElement($event, element: any): void {
         this.selectElement(element);
+        this.propOpen = false;
     }
 
     public getSelectedElementText(): string {
@@ -157,18 +169,16 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
     }
 
     public toggleDropdown(value: boolean): void {
-        this.propOpen = value;
-        if (value) {
-            this.$el.style.zIndex = '10';
-        } else {
-            this.$el.style.removeProperty('z-index');
-        }
         Vue.nextTick(() => {
+            this.propOpen = value;
             if (value) {
+                this.$el.style.zIndex = '10';
                 this.setDropdownElementFocus();
+            } else {
+                this.$el.style.removeProperty('z-index');
             }
+            this.$emit('open', value);
         });
-        this.$emit('open', value);
     }
 
     public setDropdownElementFocus(): void {

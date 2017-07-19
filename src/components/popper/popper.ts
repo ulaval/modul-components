@@ -79,7 +79,7 @@ export class MPopper extends Vue {
     public isScreenMaxS: boolean;
     public referenceElm: HTMLElement;
     public popperJS;
-    public showPopper: boolean = false;
+    public isPopperOpen: boolean = false;
     public animPopperActive: boolean = false;
     public currentPlacement: string = '';
     public popperOptions: IPopperOptions = {
@@ -94,27 +94,40 @@ export class MPopper extends Vue {
     private appended: boolean;
     private _timer: number;
 
-    @Watch('showPopper')
-    public showPopperChanged(value) {
-        if (value) {
-            this.updatePopper();
-            this.$emit('show');
-        } else {
-            setTimeout(() => {
-                this.doDestroy();
-            }, 300);
-            this.$emit('hide');
-        }
-    }
+    private isDialogOpen: boolean = false;
 
     @Watch('forceShow', { immediate: true })
     public forceShowChanged(value) {
-        this[value ? 'doShow' : 'doClose']();
+        this[value ? 'openPopper' : 'closePopper']();
+    }
+
+    @Watch('isScreenMaxS')
+    private isScreenMaxSChanged(value) {
+        if (value) {
+            this.doDestroy();
+            this.isDialogOpen = this.isPopperOpen;
+        } else {
+            this.createPopper();
+            this.closePopper();
+            if (this.isDialogOpen) {
+                setTimeout(() => {
+                    this.openPopper();
+                }, 2);
+            }
+        }
     }
 
     @Watch('open')
-    public openChanged(value) {
-        this.showPopper = this.open;
+    private openChanged(value): void {
+        if (!this.isScreenMaxS) {
+            if (this.open) {
+                this.openPopper();
+            } else {
+                this.closePopper();
+            }
+        } else {
+            this.isDialogOpen = value;
+        }
     }
 
     private created(): void {
@@ -123,10 +136,10 @@ export class MPopper extends Vue {
 
     private mounted(): void {
         if ((this.$slots.content) && (this.$slots.default)) {
-            this.referenceElm = this.$refs.reference as HTMLElement;
-            this.popper = this.$refs.popper;
+            if (!this.isScreenMaxS) {
+                this.createPopper();
+            }
             on(document, 'click', this.handleDocumentClick);
-            this.createPopper();
         }
     }
 
@@ -136,6 +149,8 @@ export class MPopper extends Vue {
 
     private createPopper(): void {
         this.$nextTick(() => {
+            this.referenceElm = this.$refs.reference as HTMLElement;
+            this.popper = this.$refs.popper;
             if (this.arrow) {
                 this.appendArrow(this.popper);
             }
@@ -169,7 +184,7 @@ export class MPopper extends Vue {
     }
 
     private doDestroy(): void {
-        if (this.showPopper || !this.popperJS) {
+        if (this.isPopperOpen || !this.popperJS) {
             return;
         }
         this.popperJS.destroy();
@@ -193,42 +208,52 @@ export class MPopper extends Vue {
         this.popperJS ? this.popperJS.update() : this.createPopper();
     }
 
-    private doToggle(): void {
+    private togglePopper(): void {
         if (!this.forceShow && !this.disabled) {
             if (this.closeOnReferenceClick) {
-                this.showPopper = !this.showPopper;
+                if (this.isPopperOpen) {
+                    this.closePopper();
+                } else {
+                    this.openPopper();
+                }
             } else {
-                this.doShow();
+                this.openPopper();
             }
         }
     }
 
     private onContentClick(): void {
         if (this.closeOnContentClick) {
-            this.doClose();
+            this.closePopper();
         }
     }
 
-    private doShow(): void {
-        this.showPopper = true;
-        clearTimeout(this._timer);
+    private openPopper(): void {
+        if (!this.isPopperOpen && !this.isScreenMaxS) {
+            this.isPopperOpen = true;
+            clearTimeout(this._timer);
+            this.updatePopper();
+            this.$emit('show');
+        }
     }
 
-    private doClose(): void {
-        this.showPopper = false;
+    private closePopper(): void {
+        if (this.isPopperOpen && !this.isScreenMaxS) {
+            this.isPopperOpen = false;
+            this.$emit('hide');
+        }
     }
 
     private onMouseOver(): void {
-        if (this.trigger == TRIGGER_HOVER) {
-            this.showPopper = true;
-            clearTimeout(this._timer);
+        if (this.trigger == TRIGGER_HOVER && !this.isScreenMaxS) {
+            this.openPopper();
         }
     }
 
     private onMouseOut(): void {
-        if (this.trigger == TRIGGER_HOVER) {
+        if (this.trigger == TRIGGER_HOVER && !this.isScreenMaxS) {
             this._timer = window.setTimeout(() => {
-                this.showPopper = false;
+                this.closePopper();
             }, 10);
         }
     }
@@ -241,7 +266,7 @@ export class MPopper extends Vue {
             this.forceShow) {
             return;
         }
-        this.showPopper = false;
+        this.closePopper();
     }
 
     private get propMobileMode(): string {

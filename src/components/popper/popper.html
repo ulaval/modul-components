@@ -8,8 +8,8 @@
                     @leave="animLeave"
                     @after-leave="doDestroy">
             <div class="m-popper__popper-wrap"
-                 :aria-hidden="!showPopper"
-                 v-show="!disabled && showPopper">
+                 :aria-hidden="!isPopperOpen"
+                 v-show="!disabled && isPopperOpen">
                 <div class="m-popper__popper" ref="popper">
                     <div class="m-popper__content" v-if="hasContentSlot" @click="onContentClick">
                         <slot name="content"></slot>
@@ -20,16 +20,19 @@
                 </div>
             </div>
         </transition>
-        <div @click="doToggle" ref="reference" class="m-popper__reference">
+        <div @click="togglePopper" ref="reference" class="m-popper__reference">
             <slot></slot>
         </div>
     </template>
-    <m-dialog :mode="propMobileMode" v-if="isScreenMaxS"
+    <m-dialog :mode="propMobileMode"
               :padding="padding"
               :paddingHeader="paddingHeader"
               :paddingBody="paddingBody"
               :paddingFooter="paddingFooter"
-              :disabled="disabled">
+              :disabled="disabled"
+              :open="isDialogOpen"
+              @open="isDialogOpen = true"
+              v-if="isScreenMaxS">
         <div slot="header" class="m-popper__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>
         </div>

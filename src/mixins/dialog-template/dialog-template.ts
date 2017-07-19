@@ -57,8 +57,8 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
     private transitionDuration: number = TRANSITION_DURATION;
 
     @Watch('open')
-    private isOpenChanged(newValue): void {
-        this.propOpen = newValue;
+    private isOpenChanged(value: boolean): void {
+        this.propOpen = value;
         if (this.propOpen) {
             this.openDialog();
         } else {
@@ -94,7 +94,7 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
                 this.$refs.dialogWrap['focus']();
                 this.$refs.dialogWrap['removeAttribute']('tabindex');
             });
-            this.$emit('toggleOpen', true);
+            this.$emit('open');
         }
     }
 
@@ -110,7 +110,7 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
                 this.propOpen = false;
                 this.deleteDialog();
                 this.isAnimActive = false;
-                this.$emit('toggleOpen', false);
+                this.$emit('close');
                 ModulVue.nextTick(() => {
                     this.$refs.dialogButton['setAttribute']('tabindex', '0');
                     this.$refs.dialogButton['focus']();
@@ -129,13 +129,12 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
         this.$mWindow.addWindow(this.propId);
         this.portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
 
-        if (!this.$mWindow.hasBackdrop) {
-            this.$mWindow.createBackdrop(this.bodyElement);
-        }
+        this.$mWindow.createBackdrop(this.bodyElement);
         this.bodyElement.appendChild(this.portalTargetElement);
     }
 
     private deleteDialog() {
+        console.log('deleteDialog');
         let portalTargetElement: HTMLElement = this.bodyElement.querySelector('#' + this.propId) as HTMLElement;
         if (portalTargetElement) {
             this.bodyElement.removeChild(portalTargetElement);

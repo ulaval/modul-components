@@ -15,8 +15,9 @@
                 <header class="m-dialog__header"
                         :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }"
                         v-if="hasHeaderSlot || hasTitle || propMode == 'secondary'">
-                    <slot name="header"></slot>
+
                     <h2 class="m-dialog__header__title" v-if="hasTitle">{{ title }}</h2>
+                    <slot name="header"></slot>
                     <h2 v-if="!hasTitle && !hasHeaderSlot && propMode == 'secondary'">
                         Error: m-dialog in secondary mode needs a header slot or title prop.
                     </h2>
@@ -46,8 +47,5 @@
     </portal>
     <span @click="openDialog" class="m-dialog__button" ref="dialogButton" v-if="hasDefaultSlots">
         <slot></slot>
-    </span>
-    <span v-if="!hasDefaultSlots">
-        The default slot is required to open the dialog
     </span>
 </span>

@@ -157,18 +157,16 @@ export class MDropdown extends ModulVue implements DropdownTemplateMixin {
     }
 
     public toggleDropdown(value: boolean): void {
-        this.propOpen = value;
-        if (value) {
-            this.$el.style.zIndex = '10';
-        } else {
-            this.$el.style.removeProperty('z-index');
-        }
         Vue.nextTick(() => {
+            this.propOpen = value;
             if (value) {
+                this.$el.style.zIndex = '10';
                 this.setDropdownElementFocus();
+            } else {
+                this.$el.style.removeProperty('z-index');
             }
+            this.$emit('open', value);
         });
-        this.$emit('open', value);
     }
 
     public setDropdownElementFocus(): void {
