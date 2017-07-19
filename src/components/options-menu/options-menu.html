@@ -1,8 +1,8 @@
-<m-popper :open="isOpen">
-    <div class="m-options-menu" slot="content">
+<m-popper :open="isOpen" @show="onShow" @hide="onHide" :enter="onEnter" :after-enter="onAfterEnter">
+    <div class="m-options-menu" slot="content" ref="menu">
         <slot>
-            <m-options-menu-item iconName="default" @click="onItemClick">Option 1</m-options-menu-item>
-            <m-options-menu-item iconName="default"></m-options-menu-item>
+            <m-options-menu-item icon-name="default" @click="onItemClick">Option 1</m-options-menu-item>
+            <m-options-menu-item icon-name="default"></m-options-menu-item>
             <m-options-menu-item>Option 3</m-options-menu-item>
         </slot>
     </div>

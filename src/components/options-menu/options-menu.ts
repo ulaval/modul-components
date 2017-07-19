@@ -70,19 +70,18 @@ export class MOptionsMenu extends ModulVue {
         this.isOpen = false;
     }
 
-    private animEnter(element, done) {
-        this.$refs['menu']['style']['transitionProperty'] = 'margin-top, opacity';
-        this.$refs['menu']['style']['transitionDuration'] = '0.3s';
-        this.$refs['menu']['style']['marginTop'] = '0';
-        this.$refs['menu']['style']['opacity'] = '0';
-        this.$refs['menu']['style']['zIndex'] = '10';
+    private onEnter(element: HTMLElement, done) {
+        element.style.transitionProperty = 'margin-top, opacity';
+        element.style.transitionDuration = '0.3s';
+        element.style.marginTop = '20px';
+        element.style.opacity = '0';
         done();
     }
 
-    private animAfterEnter(element) {
+    private onAfterEnter(element: HTMLElement) {
         Vue.nextTick(() => {
-            this.$refs['menu']['style']['marginTop'] = '-20px';
-            this.$refs['menu']['style']['opacity'] = '1';
+            element.style.marginTop = '0';
+            element.style.opacity = '1';
         });
     }
 }

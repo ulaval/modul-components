@@ -1,5 +1,7 @@
 @import 'abstracts/variables';
 
 .m-limit-text {
-    color: red;
+    &__hidden {
+        @include visuallyHidden;
+    }
 }

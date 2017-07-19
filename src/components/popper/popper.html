@@ -3,10 +3,8 @@
      @mouseover="onMouseOver"
      @mouseout="onMouseOut">
      <template v-if="!isScreenMaxS">
-        <transition @enter="animEnter"
-                    @after-enter="animAfterEnter"
-                    @leave="animLeave"
-                    @after-leave="doDestroy">
+        <transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter" @enter-cancelled="onEnterCancelled"
+                    @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
             <div class="m-popper__popper-wrap"
                  :aria-hidden="!isPopperOpen"
                  v-show="!disabled && isPopperOpen">

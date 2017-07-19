@@ -59,21 +59,21 @@ export class MPopper extends Vue {
     public paddingFooter: boolean;
 
     @Prop()
-    public beforeEnterFn: any;
+    public beforeEnter: any;
     @Prop()
-    public enterFn: any;
+    public enter: any;
     @Prop()
-    public afterEnterFn: any;
+    public afterEnter: any;
     @Prop()
-    public enterCancelledFn: any;
+    public enterCancelled: any;
     @Prop()
-    public beforeLeaveFn: any;
+    public beforeLeave: any;
     @Prop()
-    public leaveFn: any;
+    public leave: any;
     @Prop()
-    public afterLeaveFn: any;
+    public afterLeave: any;
     @Prop()
-    public leaveCancelledFn: any;
+    public leaveCancelled: any;
 
     public componentName: string = POPPER_NAME;
     public isScreenMaxS: boolean;
@@ -285,49 +285,58 @@ export class MPopper extends Vue {
         return !!this.$slots.footer;
     }
 
-    private animEnter(el, done): void {
+    private onBeforeEnter(el: HTMLElement): void {
+        if (typeof (this.beforeEnter) === 'function') {
+            this.beforeEnter(el.children[0]);
+        }
+    }
+
+    private onEnter(el: HTMLElement, done): void {
         this.animPopperActive = true;
-        if (typeof (this.enterFn) === 'function') {
-            this.enterFn(el, done);
-        }
-    }
-
-    private animAfterEnter(el): void {
-        if (typeof (this.afterEnterFn) === 'function') {
-            this.afterEnterFn(el);
-        }
-    }
-
-    private animEnterCancelled(el): void {
-        if (typeof (this.enterCancelledFn) === 'function') {
-            this.enterCancelledFn(el);
-        }
-    }
-
-    private animBeforeLeave(el): void {
-        if (typeof (this.beforeLeaveFn) === 'function') {
-            this.beforeLeaveFn(el);
-        }
-    }
-
-    private animLeave(el, done): void {
-        if (typeof (this.leaveFn) === 'function') {
-            this.leaveFn(el, done);
+        if (typeof (this.enter) === 'function') {
+            this.enter(el.children[0], done);
         } else {
             done();
         }
     }
 
-    private animAfterLeave(el): void {
-        this.animPopperActive = false;
-        if (typeof (this.afterLeaveFn) === 'function') {
-            this.afterLeaveFn(el);
+    private onAfterEnter(el: HTMLElement): void {
+        if (typeof (this.afterEnter) === 'function') {
+            this.afterEnter(el.children[0]);
         }
     }
 
-    private animLeaveCancelled(el): void {
-        if (typeof (this.leaveCancelledFn) === 'function') {
-            this.leaveCancelledFn(el);
+    private onEnterCancelled(el: HTMLElement): void {
+        if (typeof (this.enterCancelled) === 'function') {
+            this.enterCancelled(el);
+        }
+    }
+
+    private onBeforeLeave(el: HTMLElement): void {
+        if (typeof (this.beforeLeave) === 'function') {
+            this.beforeLeave(el.children[0]);
+        }
+    }
+
+    private onLeave(el: HTMLElement, done): void {
+        if (typeof (this.leave) === 'function') {
+            this.leave(el.children[0], done);
+        } else {
+            done();
+        }
+    }
+
+    private onAfterLeave(el: HTMLElement): void {
+        this.animPopperActive = false;
+        if (typeof (this.afterLeave) === 'function') {
+            this.afterLeave(el.children[0]);
+        }
+        this.doDestroy();
+    }
+
+    private onLeaveCancelled(el: HTMLElement): void {
+        if (typeof (this.leaveCancelled) === 'function') {
+            this.leaveCancelled(el.children[0]);
         }
     }
 }

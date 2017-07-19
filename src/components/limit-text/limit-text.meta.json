@@ -2,13 +2,15 @@
     "tag": "m-limit-text",
     "name": "m-limit-text-meta:name",
     "attributes": {
-        "mode": {
-            "type": "string",
+        "maxNumberOfLine": {
+            "type": "number",
             "values": [
-                "loading",
-                "processing"
+                "4"
             ],
-            "default": "loading"
+            "default": "0"
+        },
+        "label": {
+            "type": "string"
         }
     },
     "overview": [
