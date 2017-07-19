@@ -19,6 +19,8 @@ export class MLink extends ModulVue {
     public mode: string;
     @Prop({ default: false })
     public unvisited: boolean;
+    @Prop({ default: true })
+    public underline: boolean;
 
     public componentName: string = LINK_NAME;
 
