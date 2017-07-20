@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import {
-    ACCORDION_NAME, ACCORDION_GROUP_NAME, BULLET_LIST_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DROPDOWN_ITEM_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, LIMIT_TEXT_NAME, ICON_NAME, LINK_NAME, MESSAGE_NAME, NAV_BAR_NAME, PANEL_DIALOG_NAME, PANEL_NAME, POPPER_NAME, RADIO_BUTTONS_NAME, SECONDARY_DIALOG_NAME, SELECT_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
+    ACCORDION_NAME, ACCORDION_GROUP_NAME, BULLET_LIST_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DROPDOWN_ITEM_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, LIMIT_TEXT_NAME, ICON_NAME, LINK_NAME, MESSAGE_NAME, NAV_BAR_NAME, OPTIONS_MENU_NAME, PANEL_NAME, PANEL_DIALOG_NAME, POPPER_NAME, RADIO_BUTTONS_NAME, SECONDARY_DIALOG_NAME, SELECT_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TABS_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
     UPLOAD_NAME, UPLOAD_INPUT_NAME, UPLOAD_DRAGDROP_NAME, UPLOAD_FILESLIST_NAME
 } from '../components/component-names';
 import { RIPPLE_EFFECT_NAME } from '../directives/directive-names';
@@ -37,8 +37,9 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(LINK_NAME, require('../components/link/link.meta.json'), CATEGORY_NAVIGATION);
         meta.mergeComponentMeta(MESSAGE_NAME, require('../components/message/message.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(NAV_BAR_NAME, require('../components/nav-bar/nav-bar.meta.json'), CATEGORY_NAVIGATION);
-        meta.mergeComponentMeta(NAV_BAR_NAME, require('../components/options-menu/options-menu.meta.json'), CATEGORY_CONTENT);
+        meta.mergeComponentMeta(OPTIONS_MENU_NAME, require('../components/options-menu/options-menu.meta.json'), CATEGORY_CONTENT);
         meta.mergeComponentMeta(PANEL_NAME, require('../components/panel/panel.meta.json'), CATEGORY_LAYOUT);
+        meta.mergeComponentMeta(PANEL_DIALOG_NAME, require('../components/panel-dialog/panel-dialog.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(POPPER_NAME, require('../components/popper/popper.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(RADIO_BUTTONS_NAME, require('../components/radio-buttons/radio-buttons.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(SECONDARY_DIALOG_NAME, require('../components/secondary-dialog/secondary-dialog.meta.json'), CATEGORY_COMUNICATION);
@@ -48,6 +49,7 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(STEP_NAME, require('../components/step/step.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(SWITCH_NAME, require('../components/switch/switch.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(TABLE_NAME, require('../components/table/table.meta.json'), CATEGORY_LAYOUT);
+        meta.mergeComponentMeta(TABS_NAME, require('../components/tabs/tabs.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(TEMPLATE_NAME, require('../components/template/template.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(TEXT_FIELD_NAME, require('../components/text-field/text-field.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(UPLOAD_NAME, require('../components/upload/upload.meta.json'), CATEGORY_FORMS);

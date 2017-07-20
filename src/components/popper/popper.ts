@@ -286,8 +286,8 @@ export class MPopper extends Vue {
         return !!this.$slots.header;
     }
 
-    private get hasContentSlot(): boolean {
-        return !!this.$slots.content;
+    private get hasBodySlot(): boolean {
+        return !!this.$slots.body;
     }
 
     private get hasFooterSlot(): boolean {

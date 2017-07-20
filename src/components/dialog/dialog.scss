@@ -4,6 +4,8 @@ $m-dialog-secondary--max-width: 640px !default;
 $m-dialog-secondary--header-height: $m-touch-size !default;
 
 .m-dialog {
+    display: inline-block;
+
     &__wrap {
         position: fixed;
         top: 0;
@@ -278,5 +280,6 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
 
     &__button {
         outline: none;
+        display: inline-block;
     }
 }

@@ -9,8 +9,8 @@
                  :aria-hidden="!isPopperOpen"
                  v-show="!disabled && isPopperOpen">
                 <div class="m-popper__popper" ref="popper">
-                    <div class="m-popper__content" v-if="hasContentSlot" @click="onContentClick">
-                        <slot name="content"></slot>
+                    <div class="m-popper__body" v-if="hasBodySlot" @click="onContentClick">
+                        <slot name="body"></slot>
                     </div>
                     <div class="m-popper__footer" v-if="hasFooterSlot">
                         <slot name="footer"></slot>
@@ -35,8 +35,8 @@
         <div slot="header" class="m-popper__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>
         </div>
-        <div slot="content" class="m-popper__content" v-if="hasContentSlot">
-            <slot name="content"></slot>
+        <div slot="body" class="m-popper__body" v-if="hasBodySlot">
+            <slot name="body"></slot>
         </div>
         <div slot="footer" class="m-popper__footer" v-if="hasFooterSlot">
             <slot name="footer"></slot>
