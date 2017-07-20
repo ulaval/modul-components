@@ -3,8 +3,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './tabs.html?style=./tabs.scss';
-import { TABS_NAME } from '../component-names';
-import { TAB_PANE_NAME } from '../component-names';
+import { TABS_NAME, TAB_PANE_NAME } from '../component-names';
 
 @WithRender
 @Component
@@ -20,7 +19,7 @@ export class MTabs extends Vue {
     protected mounted(): void {
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkTabPane(i)) {
-                this.$children[i]['tabePaneID'] = this.nbTabPane;
+                this.$children[i]['id'] = this.nbTabPane;
                 if (this.$children[i]['isSelected'] ) {
                     this.indexTabPaneSelected = this.nbTabPane;
                 }
@@ -37,16 +36,16 @@ export class MTabs extends Vue {
         this.$children[this.arrTabPane[this.indexTabPaneSelected].childrenNumber]['selectTab']();
     }
 
-    private changeTab(tabIndex) {
-        this.indexTabPaneSelected = tabIndex;
+    private changeTab(index: number): void {
+        this.indexTabPaneSelected = index;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkTabPane(i)) {
-                if (this.$children[i]['tabePaneID'] == tabIndex) {
+                if (this.$children[i]['id'] == index) {
                     this.$children[i]['selectTab']();
-                    this.arrTabPane[tabIndex]['isSelected'] = true;
+                    this.arrTabPane[index]['isSelected'] = true;
                 } else {
                     this.$children[i]['unselectTab']();
-                    this.arrTabPane[tabIndex]['isSelected'] = false;
+                    this.arrTabPane[index]['isSelected'] = false;
                 }
             }
         }

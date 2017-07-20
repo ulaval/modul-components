@@ -1,0 +1,7 @@
+<li class="m-nav-bar-item"
+    :class="{ 'm--is-selected': isSelected,
+           'm--is-first-item' : isFirtsItem,
+           'm--is-last-item' : isLastItem}"
+    @click="onClick">
+    <slot></slot>
+</li>

@@ -14,6 +14,7 @@ export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
 export const MESSAGE_NAME: string = 'm-message';
 export const NAV_BAR_NAME: string = 'm-nav-bar';
+export const NAV_BAR_ITEM_NAME: string = 'm-nav-bar-item';
 export const OPTIONS_MENU_NAME: string = 'm-options-menu';
 export const OPTIONS_MENU_ITEM_NAME: string = 'm-options-menu-item';
 export const PANEL_NAME: string = 'm-panel';

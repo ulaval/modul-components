@@ -14,8 +14,6 @@
     }
 
     &__element {
-        margin: 0 $m-margin;
-
         &__link {
             position: relative;
             transition: 0.3s color ease;
@@ -78,6 +76,57 @@
 
         &.m--is-anim-active {
             transition: 0.3s transform ease, 0.3s width ease;
+        }
+    }
+
+    &-item {
+        position: relative;
+        transition: 0.3s color ease;
+        display: flex;
+        align-items: center;
+        padding: 0 0 $m-margin 0;
+        margin: 0 $m-margin;
+        cursor: pointer;
+
+        &,
+        a,
+        a:visited {
+            text-decoration: none;
+            font-size: $m-font-size;
+            color: $m-color--grey-darker;
+        }
+
+        &::after {
+            transition: 0.3s opacity ease;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            content: '';
+            width: 100%;
+            height: $m-border-width--l;
+            background: $m-color--grey-light;
+            opacity: 0;
+        }
+
+        &:hover {
+            color: $m-color--text;
+
+            &::after {
+                opacity: 1;
+            }
+        }
+
+        &.m--is-selected {
+            color: $m-color--text;
+        }
+
+        &.m--is-first-item {
+            margin-left: 0;
+        }
+
+        &.m--is-last-item {
+            margin-right: 0;
         }
     }
 }

@@ -17,6 +17,7 @@ import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import MessagePlugin from './message/message';
 import NavBarPlugin from './nav-bar/nav-bar';
+import NavBarItemPlugin from './nav-bar-item/nav-bar-item';
 import OptionsMenuPlugin from './options-menu/options-menu';
 import OptionsMenuItemPlugin from './options-menu-item/options-menu-item';
 import PanelPlugin from './panel/panel';
@@ -58,6 +59,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(BulletListPlugin);
         Vue.use(MessagePlugin);
         Vue.use(NavBarPlugin);
+        Vue.use(NavBarItemPlugin);
         Vue.use(OptionsMenuPlugin);
         Vue.use(OptionsMenuItemPlugin);
         Vue.use(PanelPlugin);

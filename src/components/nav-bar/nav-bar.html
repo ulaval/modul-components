@@ -1,13 +1,9 @@
 <nav class="m-nav-bar">
     <ul class="m-nav-bar__list" aria-hidden="true">
-        <li class="m-nav-bar__element" v-for="(element, index) in elements">
-            <a href="#"
-               class="m-nav-bar__element__link"
-               :class="{ 'm--is-selected': element.isSelected,
-                      'm--is-icon-right': propIconPosition=='right'}"
-               @click.prevent="onClick($event, index)">
-               <m-icon :name="element.iconName" v-if="element.iconName"></m-icon>{{ element.value }}</a>
-        </li>
+        <m-nav-bar-item>Élém 1</m-nav-bar-item>
+        <m-nav-bar-item>Élément 2</m-nav-bar-item>
+        <m-nav-bar-item>Élément très très long 3</m-nav-bar-item>
+        <m-nav-bar-item>Élément 4</m-nav-bar-item>
     </ul>
     <div aria-hidden="true"
          class="m-nav-bar__line"

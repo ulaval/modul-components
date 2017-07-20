@@ -3,8 +3,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './accordion-group.html?style=./accordion-group.scss';
-import { ACCORDION_GROUP_NAME } from '../component-names';
-import { ACCORDION_NAME } from '../component-names';
+import { ACCORDION_NAME, ACCORDION_GROUP_NAME } from '../component-names';
 
 const ASPECT_REGULAR: string = 'regular';
 const ASPECT_LIGHT: string = 'light';
