@@ -14,7 +14,6 @@ export interface DropdownTemplateMixin {
 }
 
 const DROPDOWN_MAX_HEIGHT: number = 198;
-const POPPER_CLASS_NAME: string = '.m-popper__popper';
 
 @Component({
     mixins: [
@@ -59,8 +58,7 @@ export class DropdownTemplate extends ModulVue implements DropdownTemplateMixin,
         return !!this.$slots.footer;
     }
 
-    public animEnter(element: HTMLElement, done: any): void {
-        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
+    public animEnter(el: HTMLElement, done: any): void {
         let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
         let transition: string = '0.3s max-height ease';
         el.style.transition = transition;
@@ -73,16 +71,14 @@ export class DropdownTemplate extends ModulVue implements DropdownTemplateMixin,
         }, 0);
     }
 
-    public animAfterEnter(element: HTMLElement): void {
-        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
+    public animAfterEnter(el: HTMLElement): void {
         setTimeout(() => {
             el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
             el.style.overflowY = 'auto';
         }, 300);
     }
 
-    public animLeave(element: HTMLElement, done: any): void {
-        let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
+    public animLeave(el: HTMLElement, done: any): void {
         let height: number = el.clientHeight;
         el.style.maxHeight = height + 'px';
         el.style.overflowY = 'hidden';

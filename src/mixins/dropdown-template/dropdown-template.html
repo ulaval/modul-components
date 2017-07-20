@@ -5,18 +5,18 @@
         </li>
     </ul>
     <m-popper :options="{ placement: 'bottom' }"
-              :closeOnContentClick="true"
-              :closeOnReferenceClick="false"
+              :close-on-content-click="true"
+              :close-on-reference-click="false"
               :disabled="isDisabled"
               :open="propOpen"
-              dialogMode="panel"
-              :enterFn="animEnter"
-              :afterEnterFn="animAfterEnter"
-              :leaveFn="animLeave"
+              dialog-mode="panel"
+              :enter="animEnter"
+              :after-enter="animAfterEnter"
+              :leave="animLeave"
               @show="toggleDropdown(true)"
               @hide="toggleDropdown(false)"
-              :paddingHeader="false"
-              :paddingBody="false">
+              :padding-header="false"
+              :padding-body="false">
         <template slot="header" v-if="hasLabel && isScreenMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">
@@ -25,7 +25,7 @@
                        :placeholder="researchText"
                        v-model="textElement"
                        ref="researchInput">
-                <m-button mode="icon" iconName="default" @click="focusOnResearchInput">
+                <m-button mode="icon" icon-name="default" @click="focusOnResearchInput">
                     <m-i18n i18n-key="m-dropdown:search"></m-i18n>
                 </m-button>
             </div>
