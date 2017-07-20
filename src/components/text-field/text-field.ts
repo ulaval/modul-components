@@ -136,7 +136,7 @@ export class MTexteField extends Vue implements InputStateMixin {
     }
 
     private get propType(): string {
-        return this.type == TYPE_PASSWORD || this.type == TYPE_EMAIL || this.type == TYPE_URL || this.type == TYPE_TEL ? this.type : TYPE_TEL;
+        return this.type == TYPE_PASSWORD || this.type == TYPE_EMAIL || this.type == TYPE_URL || this.type == TYPE_TEL ? this.type : TYPE_TEXT;
     }
 
     private get hasLabel(): boolean {
