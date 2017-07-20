@@ -1,7 +1,0 @@
-@import 'abstracts/variables';
-
-.m-limit-text {
-    &__hidden {
-        @include visuallyHidden;
-    }
-}

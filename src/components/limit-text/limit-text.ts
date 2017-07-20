@@ -2,7 +2,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './limit-text.html?style=./limit-text.scss';
+import WithRender from './limit-text.html';
 import { LIMIT_TEXT_NAME } from '../component-names';
 
 export const MODE_LOADING: string = 'loading';
@@ -21,7 +21,7 @@ export class MLimitText extends ModulVue {
     private originalContent: string = '';
     private fullContent: string = '';
     private open: boolean = false;
-    private ready: boolean = false;
+    private hasFinish: boolean = false;
     private child: ModulVue;
     private el;
     private initLineHeigh: any = '';
@@ -45,16 +45,8 @@ export class MLimitText extends ModulVue {
         this.adjustText();
 
         // Update the element on window resize
-        let resizetimer;
-        window.addEventListener('resize', this.setResizeTimer );
-        this.ready = true;
-    }
-
-    private destroyed(): void {
-        if (this.child) {
-            this.child.$off('click');
-        }
-        window.removeEventListener('resize', this.setResizeTimer);
+        // let resizetimer;
+        // window.addEventListener('resize', this.setResizeTimer );
     }
 
     protected destroyed(): void {
@@ -64,30 +56,37 @@ export class MLimitText extends ModulVue {
     }
 
     private adjustText(): void {
-        if (this.isContentToHeigh(false)) {
+        if (this.isContentTooTall(false)) {
             this.getReduceContent();
+            this.hasFinish = true;
         } else {
-            // ok
+            this.hasFinish = false;
         }
     }
 
-    private doneResize(): void {
-        if (document.documentElement.clientWidth != this.windowWidth && this.open != true) {
-            this.windowWidth = document.documentElement.clientWidth;
-            this.getReduceContent();
-        }
-    }
+    // Resize parts
+    // private setResizeTimer() {
+    //     clearTimeout(this.resizetimer);
+    //     this.resizetimer = setTimeout(this.doneResize, 250);
+    // }
 
-    private isContentToHeigh(update: boolean): boolean {
+    // private doneResize(): void {
+    //     if (document.documentElement.clientWidth != this.windowWidth) {
+    //         this.windowWidth = document.documentElement.clientWidth;
+    //         this.adjustText();
+    //     }
+    // }
+
+    private isContentTooTall(update: boolean): boolean {
         let el = this.$refs.originalText as HTMLElement;
-        if (el == undefined) {
-            el = this.$refs.reduceText['$el'] as HTMLElement;
-        }
-        // console.log(this.el);
-        // console.log(this.el.innerHTML);
+
+        // Resize parts
+        // if (el == undefined) {
+        //     el = this.$refs.reduceText['$el'] as HTMLElement;
+        // }
+
         if (update) { this.updateContent(this.reduceContent, el); }
         let currentHeight: number = (el as HTMLElement).clientHeight;
-        // console.log(this.initLineHeigh, this.maxHeight, currentHeight);
         return (currentHeight > this.maxHeight);
     }
     private updateContent(content, el): void {
@@ -100,7 +99,7 @@ export class MLimitText extends ModulVue {
         let lastValidContent: string = '';
         let closingTag: string = '';
 
-        while (index < HTMLcontent.length && !this.isContentToHeigh(true)) {
+        while (index < HTMLcontent.length && !this.isContentTooTall(true)) {
             if (HTMLcontent[index] === '<' && (index + 1) < HTMLcontent.length) {
                 switch (true) {
                     // Opening tag
@@ -137,8 +136,6 @@ export class MLimitText extends ModulVue {
                         break;
                 }
             }
-            // console.log('lastvalide ',lastValidContent);
-            // console.log('html ',HTMLcontent);
             lastValidContent = this.reduceContent;
             this.reduceContent = HTMLcontent.substring(0, index + 1) + this.openLinkOriginal + closingTag;
             index++;
@@ -166,12 +163,12 @@ export class MLimitText extends ModulVue {
         return `<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:close') + `" :underline="false">[\xa0-\xa0]</m-link>`;
     }
 
-    private openText(): boolean {
-        return this.open = true;
+    private openText(): void {
+        this.open = true;
     }
 
-    private closeText(): boolean {
-        return this.open = false;
+    private closeText(): void {
+        this.open = false;
     }
 
     private onUpdatedOpen(component: any): void {
