@@ -51,7 +51,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
 
     private accordionID: number;
 
-    private beforeMount(): void {
+    protected beforeMount(): void {
         this.propAspect = this.aspect;
         this.propOpen = this.open == undefined ? false : this.open;
         this.propIconPosition = this.iconPosition;

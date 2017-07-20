@@ -12,7 +12,7 @@ export class Mtemplate extends Vue {
 
     private propsHasFooterFullWidth: boolean = false;
 
-    private beforeMount(): void {
+    protected beforeMount(): void {
         this.updateFooterWidth(this.hasFooterFullWidth);
     }
 
@@ -21,11 +21,11 @@ export class Mtemplate extends Vue {
         this.propsHasFooterFullWidth = newValue;
     }
 
-    public get hasColumn(): boolean {
+    private get hasColumn(): boolean {
         return !!this.$slots['column'];
     }
 
-    public get hasFooter(): boolean {
+    private get hasFooter(): boolean {
         return !!this.$slots['footer'];
     }
 }

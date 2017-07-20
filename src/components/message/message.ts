@@ -29,10 +29,6 @@ export class MMessage extends Vue {
 
     public componentName = MESSAGE_NAME;
 
-    private get showCloseButton(): boolean {
-        return this.mode == MODE_REGULAR && this.closeButton;
-    }
-
     private onClose(event): void {
         this.$emit('close', event);
         this.visible = false;
@@ -57,6 +53,10 @@ export class MMessage extends Vue {
                 break;
         }
         return icon;
+    }
+
+    private get showCloseButton(): boolean {
+        return this.mode == MODE_REGULAR && this.closeButton;
     }
 
 }

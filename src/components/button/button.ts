@@ -46,6 +46,11 @@ export class MButton extends Vue {
 
     private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "iconName" is undefined';
 
+    private onClick(event): void {
+        this.$emit('click');
+        this.$el.blur();
+    }
+
     private get propType(): string {
         return this.type != TYPE_SUBMIT && this.type != TYPE_RESET ? TYPE_BUTTON : this.type;
     }
@@ -86,11 +91,6 @@ export class MButton extends Vue {
 
     private get hasSlots(): boolean {
         return !!this.$slots.default;
-    }
-
-    private onClick(event): void {
-        this.$emit('click');
-        this.$el.blur();
     }
 }
 

@@ -54,6 +54,21 @@ export class MTexteField extends Vue implements InputStateMixin {
     private isFocusActive: boolean = false;
     private isUpdating: number;
 
+    protected beforeMount(): void {
+        this.propValue = this.value;
+        this.propDefaultText = this.defaultText;
+        this.hasIcon = this.iconName != '';
+        this.checkHasValue();
+        this.checkHasDefaultText();
+    }
+
+    protected mounted() {
+        if (this.propEditable) {
+            // Set attribute type on input refs
+            this.$refs.input['type'] = this.propType;
+        }
+    }
+
     @Watch('value')
     private valueChanged(value: string): void {
         this.propValue = this.value;
@@ -70,21 +85,6 @@ export class MTexteField extends Vue implements InputStateMixin {
         this.isUpdating = window.setTimeout(
             () => this.$emit('valueChanged', this.propValue)
         , 300);
-    }
-
-    private beforeMount(): void {
-        this.propValue = this.value;
-        this.propDefaultText = this.defaultText;
-        this.hasIcon = this.iconName != '';
-        this.checkHasValue();
-        this.checkHasDefaultText();
-    }
-
-    private mounted() {
-        if (this.propEditable) {
-            // Set attribute type on input refs
-            this.$refs.input['type'] = this.propType;
-        }
     }
 
     private onFocus(event): void {

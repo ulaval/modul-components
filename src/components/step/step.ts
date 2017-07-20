@@ -32,10 +32,9 @@ export class MStep extends Vue {
 
     public componentName = STEP_NAME;
     public isAnimActive: boolean = false;
-
     private propsOpen: boolean = false;
 
-    private mounted() {
+    protected mounted() {
         this.propsOpen = this.open;
     }
 

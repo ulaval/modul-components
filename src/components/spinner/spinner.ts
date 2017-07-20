@@ -41,7 +41,7 @@ export class MSpinner extends ModulVue {
     private defaultTagetElVisible: boolean = false;
     private spinnerVisible: boolean = false;
 
-    private mounted(): void {
+    protected mounted(): void {
         this.spinnerId = SPINNER_ID + '-' + uuid.generate();
         if (this.mode == MODE_PROCESSING) {
             this.appendSpinnerToBody();
@@ -51,7 +51,7 @@ export class MSpinner extends ModulVue {
         }
     }
 
-    private destroyed(): void {
+    protected destroyed(): void {
         if (this.mode == MODE_PROCESSING) {
             this.removeSpinnerToBody();
         }

@@ -24,13 +24,7 @@ export class MLimitText extends ModulVue {
     private ready: boolean = false;
     private child: ModulVue;
 
-    protected destroyed(): void {
-        if (this.child) {
-            this.child.$off('click');
-        }
-    }
-
-    private mounted(): void {
+    protected mounted(): void {
         this.originalContent = this.$refs.originalText['innerHTML'];
         if (this.originalContent.match('</')) {
             let tagIndex = this.originalContent.lastIndexOf('</');
@@ -48,6 +42,12 @@ export class MLimitText extends ModulVue {
 
         //     }
         // });
+    }
+
+    protected destroyed(): void {
+        if (this.child) {
+            this.child.$off('click');
+        }
     }
 
     private adjustText(): void {

@@ -28,7 +28,7 @@ export class MSwitch extends Vue {
     private isFocus = false;
     private id: string = `switch${uuid.generate()}`;
 
-    public mounted(): void {
+    protected mounted(): void {
         this.propsChecked = this.checked;
         this.propsLabel = this.label;
         this.propsHelperText = this.helperText;

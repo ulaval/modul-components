@@ -15,6 +15,10 @@ export class MOptionsMenuItem extends ModulVue {
     @Prop({ default: false })
     public disabled: boolean;
 
+    private onClick(): void {
+        if (!this.isDisabled) this.$emit('click');
+    }
+
     private get hasIcon(): boolean {
         return !!this.iconName;
     }
@@ -25,10 +29,6 @@ export class MOptionsMenuItem extends ModulVue {
 
     private get hasSlot(): boolean {
         return !!this.$slots.default;
-    }
-
-    public onClick(): void {
-        if (!this.isDisabled) this.$emit('click');
     }
 }
 

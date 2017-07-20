@@ -33,7 +33,7 @@ export class MLink extends ModulVue {
     private isButton: boolean = false;
     private hrefAttribute: string;
 
-    private beforeMount(): void {
+    protected beforeMount(): void {
         this.hrefAttribute = this.url;
         switch (this.mode) {
             case MODE_EXTERNAL_LINK:
@@ -49,7 +49,7 @@ export class MLink extends ModulVue {
                 this.isRouterLink = true;
         }
     }
-    private mounted(): void {
+    protected mounted(): void {
         if (this.isExternalLink) {
             this.$refs['link']['setAttribute']('title', this.$i18n.translate('m-link:open-new-tab'));
             this.$refs['link']['setAttribute']('target', '_blank');

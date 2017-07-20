@@ -55,7 +55,7 @@ export class MButtonGroup extends Vue {
     private value: string = '';
     private defaultActiveValue: string = this.findActive();
 
-    private mounted(): void {
+    protected mounted(): void {
         if (this.defaultActiveValue != '') {
             this.activeValue = this.defaultActiveValue;
         }

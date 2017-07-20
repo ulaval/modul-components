@@ -25,7 +25,7 @@ export class MNavbar extends ModulVue {
 
     private isAnimActive: boolean = false;
 
-    private mounted(): void {
+    protected mounted(): void {
         this.setLinePosition();
     }
 

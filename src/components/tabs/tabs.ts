@@ -17,7 +17,7 @@ export class MTabs extends Vue {
     private arrTabPane = new Array();
     private indexTabPaneSelected: number = 0;
 
-    private mounted(): void {
+    protected mounted(): void {
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkTabPane(i)) {
                 this.$children[i]['tabePaneID'] = this.nbTabPane;

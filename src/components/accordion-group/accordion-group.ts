@@ -35,7 +35,7 @@ export class MAccordionGroup extends Vue {
     private errorDefaultMesage: string = 'ERROR in <' + ACCORDION_GROUP_NAME + '> : ';
     private errorMessage: string = '';
 
-    private mounted(): void {
+    protected mounted(): void {
         this.propAllOpen = this.allOpen;
         this.propAspect = this.aspect == ASPECT_LIGHT || this.aspect == ASPECT_NO_STYLE ? this.aspect : ASPECT_REGULAR;
         this.propConcurrent = this.concurrent;

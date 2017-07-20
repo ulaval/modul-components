@@ -28,12 +28,7 @@ export class MOptionsMenu extends ModulVue {
 
     private isOpen: boolean = this.open;
 
-    @Watch('open')
-    private openChanged(value): void {
-        this.isOpen = value;
-    }
-
-    private mounted(): void {
+    protected mounted(): void {
         let containsIcon: boolean = false;
         let containsText: boolean = false;
         this.$children[0].$children.forEach((child) => {
@@ -54,6 +49,11 @@ export class MOptionsMenu extends ModulVue {
                 }
             });
         }
+    }
+
+    @Watch('open')
+    private openChanged(value): void {
+        this.isOpen = value;
     }
 
     private onShow(): void {

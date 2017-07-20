@@ -24,13 +24,13 @@ export class MTabPane extends Vue {
     private isSelected: boolean = false;
     private isDisabled: boolean = false;
 
+    protected beforeMount(): void {
+        this.checkState(this.state);
+    }
+
     @Watch('state')
     private changeState(newState: string): void {
         this.checkState(newState);
-    }
-
-    private beforeMount(): void {
-        this.checkState(this.state);
     }
 
     private checkState(state: string) {
