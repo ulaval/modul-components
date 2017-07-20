@@ -56,6 +56,18 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
     private isScreenMaxS: boolean;
     private transitionDuration: number = TRANSITION_DURATION;
 
+    protected beforeMount(): void {
+        if (this.open) {
+            this.openDialog();
+        }
+    }
+
+    protected destroyed(): void {
+        if (this.propOpen) {
+            this.deleteDialog();
+        }
+    }
+
     @Watch('open')
     private isOpenChanged(value: boolean): void {
         this.propOpen = value;
@@ -66,20 +78,8 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
         }
     }
 
-    private beforeMount(): void {
-        if (this.open) {
-            this.openDialog();
-        }
-    }
-
-    private destroyed(): void {
-        if (this.propOpen) {
-            this.deleteDialog();
-        }
-    }
-
     private openDialog(event = undefined): void {
-        if (!this.isAnimActive && !this.disabled) {
+        if (!this.isAnimActive && !this.disabled && !this.isVisible) {
             this.createDialog();
             this.propOpen = true;
             this.isAnimActive = true;
@@ -99,7 +99,7 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
     }
 
     private closeDialog(event = undefined): void {
-        if (!this.isAnimActive) {
+        if (!this.isAnimActive && this.isVisible) {
             this.isVisible = false;
             this.isAnimActive = true;
             this.$mWindow.backdropElement.style.zIndex = String(this.$mWindow.windowZIndex - 1);

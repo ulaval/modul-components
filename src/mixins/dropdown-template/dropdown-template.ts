@@ -55,6 +55,10 @@ export class DropdownTemplate extends ModulVue implements DropdownTemplateMixin,
         return this.$i18n.translate('m-dropdown:research');
     }
 
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
+    }
+
     public animEnter(element: HTMLElement, done: any): void {
         let el: HTMLElement = element.querySelector(POPPER_CLASS_NAME) as HTMLElement;
         let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;

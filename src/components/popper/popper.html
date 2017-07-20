@@ -29,7 +29,8 @@
               :paddingFooter="paddingFooter"
               :disabled="disabled"
               :open="isDialogOpen"
-              @open="isDialogOpen = true"
+              @open="toggleDialog(true)"
+              @close="toggleDialog(false)"
               v-if="isScreenMaxS">
         <div slot="header" class="m-popper__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>

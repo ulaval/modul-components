@@ -53,24 +53,36 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
 
     private elementsSorted: Array<any>;
 
+    protected created() {
+        // Copy of prop to avoid override on re-render
+        this.propSelectedElement = this.selectedElement;
+
+        // Run in created() to run before computed data
+        this.prepareElements();
+    }
+
+    protected mounted() {
+        this.adjustWidth();
+    }
+
     @Watch('elements')
-    public elementChanged(value): void {
+    private elementChanged(value): void {
         this.prepareElements();
     }
 
     @Watch('selectedElement')
-    public selectedElementChanged(value): void {
+    private selectedElementChanged(value): void {
         this.propSelectedElement = value;
         this.textElement = this.getSelectedElementText();
     }
 
     @Watch('open')
-    public openChanged(value: boolean): void {
+    private openChanged(value: boolean): void {
         this.propOpen = value;
     }
 
     @Watch('isScreenMaxS')
-    public isScreenMaxSChanged(value: boolean): void {
+    private isScreenMaxSChanged(value: boolean): void {
         if (!value) {
             Vue.nextTick(() => {
                 this.adjustWidth();
@@ -78,11 +90,11 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
         }
     }
 
-    public get elementsCount(): number {
+    private get elementsCount(): number {
         return this.elementsSortedFiltered.length;
     }
 
-    public get elementsSortedFiltered(): Array<any> {
+    private get elementsSortedFiltered(): Array<any> {
         if ((this.textElement == '') || (this.textElement == this.getSelectedElementText())) {
             return this.elementsSorted;
         }
@@ -94,24 +106,12 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
         return filteredElements;
     }
 
-    public created() {
-        // Copy of prop to avoid override on re-render
-        this.propSelectedElement = this.selectedElement;
-
-        // Run in created() to run before computed data
-        this.prepareElements();
-    }
-
-    public mounted() {
-        this.adjustWidth();
-    }
-
-    public onSelectElement($event, element: any): void {
+    private onSelectElement($event, element: any): void {
         this.selectElement(element);
         this.propOpen = false;
     }
 
-    public getSelectedElementText(): string {
+    private getSelectedElementText(): string {
         let text: string = '';
 
         if (typeof this.propSelectedElement != UNDEFINED) {
@@ -121,7 +121,7 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
         return text;
     }
 
-    public getElementListText(element: any): string {
+    private getElementListText(element: any): string {
         let text: string = '';
 
         if (typeof element == UNDEFINED) {
@@ -135,7 +135,7 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
         return text;
     }
 
-    public adjustWidth(): void {
+    private adjustWidth(): void {
         if (!this.widthFromCss) {
             // Hidden element to calculate width
             let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
@@ -168,7 +168,7 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
         }
     }
 
-    public toggleDropdown(value: boolean): void {
+    private toggleDropdown(value: boolean): void {
         Vue.nextTick(() => {
             this.propOpen = value;
             if (value) {
@@ -181,7 +181,7 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
         });
     }
 
-    public setDropdownElementFocus(): void {
+    private setDropdownElementFocus(): void {
         if (!this.editable) {
             let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
             if (element) {
@@ -190,7 +190,7 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
         }
     }
 
-    public keyupReference($event): void {
+    private keyupReference($event): void {
         if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
             $event.preventDefault();
             (this.$refs.mDropdownValue as Vue).$el.click();
@@ -205,7 +205,7 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
         }
     }
 
-    public keyupItem($event: KeyboardEvent, index: number): void {
+    private keyupItem($event: KeyboardEvent, index: number): void {
         let selector: string = '';
         switch ($event.keyCode) {
             case KeyCode.M_UP:

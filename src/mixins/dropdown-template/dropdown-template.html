@@ -53,7 +53,7 @@
                 </span>
             </li>
         </ul>
-        <template slot="footer">
+        <template slot="footer" v-if="hasFooterSlot">
             <slot name="footer"></slot>
         </template>
         <m-text-field ref="mDropdownValue"

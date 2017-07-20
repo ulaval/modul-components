@@ -30,7 +30,7 @@ export class MPopper extends Vue {
         validator: (value) => [TRIGGER_CLICK, TRIGGER_HOVER].indexOf(value) > -1
     })
     public trigger: string;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public open: boolean;
     @Prop({ default: false })
     public disabled: boolean;
@@ -96,8 +96,25 @@ export class MPopper extends Vue {
 
     private isDialogOpen: boolean = false;
 
+    protected created(): void {
+        this.popperOptions = { ...this.popperOptions, ...this.options };
+    }
+
+    protected mounted(): void {
+        if ((this.$slots.content) && (this.$slots.default)) {
+            if (!this.isScreenMaxS) {
+                this.createPopper();
+            }
+            on(document, 'click', this.handleDocumentClick);
+        }
+    }
+
+    protected destroyed() {
+        this.destroyPopper();
+    }
+
     @Watch('forceShow', { immediate: true })
-    public forceShowChanged(value) {
+    private forceShowChanged(value) {
         this[value ? 'openPopper' : 'closePopper']();
     }
 
@@ -115,36 +132,6 @@ export class MPopper extends Vue {
                 }, 2);
             }
         }
-    }
-
-    @Watch('open')
-    private openChanged(value): void {
-        if (!this.isScreenMaxS) {
-            if (this.open) {
-                this.openPopper();
-            } else {
-                this.closePopper();
-            }
-        } else {
-            this.isDialogOpen = value;
-        }
-    }
-
-    private created(): void {
-        this.popperOptions = { ...this.popperOptions, ...this.options };
-    }
-
-    private mounted(): void {
-        if ((this.$slots.content) && (this.$slots.default)) {
-            if (!this.isScreenMaxS) {
-                this.createPopper();
-            }
-            on(document, 'click', this.handleDocumentClick);
-        }
-    }
-
-    private destroyed() {
-        this.destroyPopper();
     }
 
     private createPopper(): void {
@@ -222,6 +209,15 @@ export class MPopper extends Vue {
         }
     }
 
+    private toggleDialog(value: boolean): void {
+        this.isDialogOpen = value;
+        if (value) {
+            this.$emit('show');
+        } else {
+            this.$emit('hide');
+        }
+    }
+
     private onContentClick(): void {
         if (this.closeOnContentClick) {
             this.closePopper();
@@ -267,6 +263,19 @@ export class MPopper extends Vue {
             return;
         }
         this.closePopper();
+    }
+
+    private get propOpen(): boolean {
+        if (!this.isScreenMaxS) {
+            if (this.open) {
+                this.openPopper();
+            } else {
+                this.closePopper();
+            }
+        } else {
+            this.isDialogOpen = this.open;
+        }
+        return this.open;
     }
 
     private get propMobileMode(): string {
