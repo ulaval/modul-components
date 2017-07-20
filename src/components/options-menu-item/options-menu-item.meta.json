@@ -2,24 +2,12 @@
     "tag": "m-options-menu",
     "name": "m-options-menu-meta:name",
     "attributes": {
-        "trigger": {
+        "iconName": {
             "type": "string",
-            "values": ["click", "hover"],
-            "default": "click"
-        },
-        "options": {
-            "type": "any",
-            "values": "see popper.js options",
-            "default": {
-                "placement": "bottom"
-            }
+            "values": "",
+            "default": ""
         },
         "disabled": {
-            "type": "boolean",
-            "values": [true, false],
-            "default": false
-        },
-        "open": {
             "type": "boolean",
             "values": [true, false],
             "default": false
