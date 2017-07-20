@@ -28,6 +28,9 @@ export class MOptionsMenu extends ModulVue {
 
     private isOpen: boolean = this.open;
 
+    private fullWidth: number;
+    private fullHeight: number;
+
     protected mounted(): void {
         let containsIcon: boolean = false;
         let containsText: boolean = false;
@@ -66,22 +69,29 @@ export class MOptionsMenu extends ModulVue {
         this.$emit('hide');
     }
 
-    private onItemClick(): void {
-        this.isOpen = false;
-    }
-
-    private onEnter(element: HTMLElement, done) {
-        element.style.transitionProperty = 'margin-top, opacity';
-        element.style.transitionDuration = '0.3s';
-        element.style.marginTop = '20px';
-        element.style.opacity = '0';
+    private onEnter(el: HTMLElement, done) {
+        if (!this.fullHeight && !this.fullWidth) {
+            this.fullWidth = el.clientWidth;
+            this.fullHeight = el.clientHeight;
+            this.$refs['menu']['style']['position'] = 'absolute';
+            this.$refs['menu']['style']['width'] = this.fullWidth + 'px';
+            this.$refs['menu']['style']['height'] = this.fullHeight + 'px';
+        }
+        el.style.transitionProperty = 'margin-top, opacity, width, height';
+        el.style.transitionDuration = '0.3s';
+        el.style.marginTop = '20px';
+        el.style.opacity = '0';
+        el.style.width = '0';
+        el.style.height = '0';
         done();
     }
 
-    private onAfterEnter(element: HTMLElement) {
+    private onAfterEnter(el: HTMLElement) {
         Vue.nextTick(() => {
-            element.style.marginTop = '0';
-            element.style.opacity = '1';
+            el.style.marginTop = '0';
+            el.style.opacity = '1';
+            el.style.width = this.fullWidth + 'px';
+            el.style.height = this.fullHeight + 'px';
         });
     }
 }
