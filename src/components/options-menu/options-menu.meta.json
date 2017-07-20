@@ -2,9 +2,30 @@
     "tag": "m-options-menu",
     "name": "m-options-menu-meta:name",
     "attributes": {
+        "trigger": {
+            "type": "string",
+            "values": ["click", "hover"],
+            "default": "click"
+        },
+        "options": {
+            "type": "any",
+            "values": "see popper.js options",
+            "default": {
+                "placement": "bottom"
+            }
+        },
+        "disabled": {
+            "type": "boolean",
+            "values": [true, false],
+            "default": false
+        },
+        "open": {
+            "type": "boolean",
+            "values": [true, false],
+            "default": false
+        }
     },
-    "overview": [
-        {
+    "overview": [{
             "type": "rubric",
             "title": "meta:context-of-use",
             "content": "m-options-menu-meta:context-of-use"
