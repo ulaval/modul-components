@@ -23,9 +23,19 @@ export class MLimitText extends ModulVue {
     private open: boolean = false;
     private ready: boolean = false;
     private child: ModulVue;
+    private el;
+    private initLineHeigh: any = '';
+    private maxHeight: number = 0;
+    private windowWidth: number = document.documentElement.clientWidth;
+    private resizetimer: any;
 
     protected mounted(): void {
         this.originalContent = this.$refs.originalText['innerHTML'];
+        this.el = this.$refs.originalText as HTMLElement;
+        this.initLineHeigh = parseFloat(String(window.getComputedStyle(this.el).lineHeight).replace(/,/g, '.')).toFixed(2);
+        this.maxHeight = this.maxNumberOfLine * this.initLineHeigh;
+
+        // Add the close link if an HTML tag is present
         if (this.originalContent.match('</')) {
             let tagIndex = this.originalContent.lastIndexOf('</');
             this.fullContent = this.originalContent.substring(0,tagIndex) + this.closeLink + this.originalContent.substring(tagIndex);
@@ -33,15 +43,18 @@ export class MLimitText extends ModulVue {
             this.fullContent = this.originalContent + this.closeLink;
         }
         this.adjustText();
-        this.ready = true;
-        // let windowWidth = document.documentElement.clientWidth;
-        // window.addEventListener('resize', () => {
-        //     if (document.documentElement.clientWidth != windowWidth) {
-        //         windowWidth = document.documentElement.clientWidth;
-        //         this.adjustText();
 
-        //     }
-        // });
+        // Update the element on window resize
+        let resizetimer;
+        window.addEventListener('resize', this.setResizeTimer );
+        this.ready = true;
+    }
+
+    private destroyed(): void {
+        if (this.child) {
+            this.child.$off('click');
+        }
+        window.removeEventListener('resize', this.setResizeTimer);
     }
 
     protected destroyed(): void {
@@ -58,16 +71,27 @@ export class MLimitText extends ModulVue {
         }
     }
 
-    private isContentToHeigh(update: boolean): boolean {
-        if (update) { this.updateContent(this.reduceContent); }
-        let el = this.$refs.originalText as HTMLElement;
-        let initLineHeigh: any = parseFloat(String(window.getComputedStyle(el).lineHeight).replace(/,/g, '.')).toFixed(2);
-        let maxHeight: number = this.maxNumberOfLine * initLineHeigh;
-        let currentHeight: number = (el as HTMLElement).clientHeight;
-        return (currentHeight > maxHeight);
+    private doneResize(): void {
+        if (document.documentElement.clientWidth != this.windowWidth && this.open != true) {
+            this.windowWidth = document.documentElement.clientWidth;
+            this.getReduceContent();
+        }
     }
-    private updateContent(content): void {
-        this.$refs.originalText['innerHTML'] = content;
+
+    private isContentToHeigh(update: boolean): boolean {
+        let el = this.$refs.originalText as HTMLElement;
+        if (el == undefined) {
+            el = this.$refs.reduceText['$el'] as HTMLElement;
+        }
+        // console.log(this.el);
+        // console.log(this.el.innerHTML);
+        if (update) { this.updateContent(this.reduceContent, el); }
+        let currentHeight: number = (el as HTMLElement).clientHeight;
+        // console.log(this.initLineHeigh, this.maxHeight, currentHeight);
+        return (currentHeight > this.maxHeight);
+    }
+    private updateContent(content, el): void {
+        el.innerHTML = content;
     }
 
     private getReduceContent(): void {
@@ -113,6 +137,8 @@ export class MLimitText extends ModulVue {
                         break;
                 }
             }
+            // console.log('lastvalide ',lastValidContent);
+            // console.log('html ',HTMLcontent);
             lastValidContent = this.reduceContent;
             this.reduceContent = HTMLcontent.substring(0, index + 1) + this.openLinkOriginal + closingTag;
             index++;
@@ -120,11 +146,11 @@ export class MLimitText extends ModulVue {
         this.reduceContent = lastValidContent.replace(this.openLinkOriginal, this.openLink);
     }
 
-    private getReduceText(): string {
+    private get getReduceText(): string {
         return this.reduceContent;
     }
 
-    private getFullText(): string {
+    private get getFullText(): string {
         return this.fullContent;
     }
 
