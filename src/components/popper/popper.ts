@@ -230,12 +230,20 @@ export class MPopper extends Vue {
             clearTimeout(this._timer);
             this.updatePopper();
             this.$emit('show');
+        } else if (!this.isDialogOpen && this.isScreenMaxS) {
+            this.isDialogOpen = true;
+            clearTimeout(this._timer);
+            this.updatePopper();
+            this.$emit('show');
         }
     }
 
     private closePopper(): void {
         if (this.isPopperOpen && !this.isScreenMaxS) {
             this.isPopperOpen = false;
+            this.$emit('hide');
+        } else if (this.isDialogOpen && this.isScreenMaxS) {
+            this.isDialogOpen = false;
             this.$emit('hide');
         }
     }

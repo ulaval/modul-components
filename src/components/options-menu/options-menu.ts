@@ -21,12 +21,8 @@ export class MOptionsMenu extends ModulVue {
     public options: any;
     @Prop({ default: false })
     public disabled: boolean;
-    @Prop({ default: false })
-    public open: boolean;
 
     public isScreenMaxS: boolean;
-
-    private isOpen: boolean = this.open;
 
     private fullWidth: number;
     private fullHeight: number;
@@ -54,19 +50,16 @@ export class MOptionsMenu extends ModulVue {
         }
     }
 
-    @Watch('open')
-    private openChanged(value): void {
-        this.isOpen = value;
-    }
-
     private onShow(): void {
-        this.isOpen = true;
         this.$emit('show');
     }
 
     private onHide(): void {
-        this.isOpen = false;
         this.$emit('hide');
+    }
+
+    private close(): void {
+        this.$children[0]['closePopper']();
     }
 
     private onEnter(el: HTMLElement, done) {
