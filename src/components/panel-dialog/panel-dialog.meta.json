@@ -1,6 +1,6 @@
 {
     "tag": "m-panel-dialog",
-    "name": "m-panel-dialog:name",
+    "name": "m-panel-dialog-meta:name",
     "attributes": {
         "id": {
             "type": "string",

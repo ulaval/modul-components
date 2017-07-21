@@ -1,6 +1,6 @@
 {
     "tag": "m-secondary-dialog",
-    "name": "m-secondary-dialog:name",
+    "name": "m-secondary-dialog-meta:name",
     "attributes": {
          "id": {
             "type": "string",
