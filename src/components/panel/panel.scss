@@ -53,7 +53,7 @@ $m-panel--border-width: 1px;
         }
 
         &:not(.m--no-padding) {
-            padding: $m-padding;
+            padding: $m-padding $m-padding #{ $m-padding + $m-margin--s } $m-padding;
         }
 
         &,
@@ -74,7 +74,7 @@ $m-panel--border-width: 1px;
     &__body,
     &__footer {
         &:not(.m--no-padding) {
-            padding: 0 $m-padding $m-padding $m-padding;
+            padding: 0 $m-padding #{ $m-padding + $m-margin--s } $m-padding;
         }
     }
 
