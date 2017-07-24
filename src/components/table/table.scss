@@ -1,12 +1,12 @@
 @import '../../styles/abstracts/variables';
 
 .m-table {
-    .m-table__header,
-    .m-table__body {
+    &__header,
+    &__body {
         padding: $m-padding;
     }
 
-    .m-table__header {
+    &__header {
         margin-right: 16px;
         background-color: $m-color--grey-lightest;
         padding: $m-padding;
@@ -20,12 +20,31 @@
             align-items: flex-start;
         }
 
-        .m-table__header__content.m--is-right {
+        &,
+        &__content-left,
+        &__content-right {
+            > :first-child {
+                margin-top: 0;
+            }
+        }
+
+        > h1,
+        > h2,
+        > h3,
+        > h4,
+        > h5,
+        > h6 {
+            margin-top: 0;
+            font-size: $m-font-size--l;
+            font-weight: $m-font-weight--bold;
+        }
+
+        &__content-right {
             justify-self: flex-end;
         }
     }
 
-    .m-table__body {
+    &__body {
         table {
             width: 100%;
             border-collapse: collapse;
