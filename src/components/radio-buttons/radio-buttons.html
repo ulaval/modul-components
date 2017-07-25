@@ -1,12 +1,12 @@
 <ul class="m-radio-buttons">
-    <li v-for="(radioValue, index) in radioValues">
-        <input class="m-radio-buttons__hidden" ref="refRadio" type="radio" :id="radioValue.value" :name="name" :value="radioValue.value"
+    <li v-for="(data, index) in listData">
+        <input class="m-radio-buttons__hidden" ref="refRadio" type="radio" :id="data.value" :name="name" :value="data.value"
             v-model="checkedValue" @focus="isFocus=true" @blur="isFocus=false" @click="onClick">
-        <label class="m-radio-buttons__wrap" :class="{ 'm--is-right': propsPosition == 'right', 'm--is-focus': isFocus && radioValue.value == checkedValue}"
-            :for="radioValue.value" :aria-hidden="!propsLabel">
-            <span class="m-radio-buttons__input" :class="{ 'm--is-checked': radioValue.value == checkedValue }" aria-hidden="true"></span>
+        <label class="m-radio-buttons__wrap" :class="{ 'm--is-right': propsPosition == 'right', 'm--is-focus': isFocus && data.value == checkedValue}"
+            :for="data.value" :aria-hidden="!propsLabel">
+            <span class="m-radio-buttons__input" :class="{ 'm--is-checked': data.value == checkedValue }" aria-hidden="true"></span>
             <span class="m-radio-buttons__label" v-if="propsLabel">
-                <slot>{{ radioValue.label }}</slot>
+                <slot>{{ data.label }}</slot>
             </span>
         </label>
     </li>

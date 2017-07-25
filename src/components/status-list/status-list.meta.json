@@ -3,7 +3,7 @@
     "name": "m-status-list-meta:name",
     "attributes": {
         "listData": {
-            "type": "MStatusListData",
+            "type": "object",
             "description": "m-status-list-meta:states-desc"
         }
     },

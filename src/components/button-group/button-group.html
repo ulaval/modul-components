@@ -1,13 +1,13 @@
 <ul class="m-button-group" :class="{ 'm--is-full-size': fullSize }" >
-    <li class="m-button-group__wrap" v-for="(buttonGroupValue, index) in buttonGroupValues" :class="{ 'm--is-focus': isFocus && buttonGroupValue.value == activeValue, 'm--is-active': buttonGroupValue.value == activeValue }">
-        <input class="m-button-group__hidden" ref="refRadio" type="radio" :id="buttonGroupValue.value" :name="name" :value="buttonGroupValue.value"
+    <li class="m-button-group__wrap" v-for="(data, index) in listData" :class="{ 'm--is-focus': isFocus && data.value == activeValue, 'm--is-active': data.value == activeValue }">
+        <input class="m-button-group__hidden" ref="refRadio" type="radio" :id="data.value" :name="name" :value="data.value"
             v-model="activeValue" @focus="isFocus=true" @blur="isFocus=false" @click="onClick">
-        <label class="m-button-group__label" :for="buttonGroupValue.value">
-            <m-icon aria-hidden="true" class="m-button-group__icon m--is-left" :name="buttonGroupValue.iconName" v-if="hasIconLeft  && icon"></m-icon>
+        <label class="m-button-group__label" :for="data.value">
+            <m-icon aria-hidden="true" class="m-button-group__icon m--is-left" :name="data.iconName" v-if="hasIconLeft  && icon"></m-icon>
             <span class="m-button-group__text">
-                <slot>{{ buttonGroupValue.label }}</slot>
+                <slot>{{ data.label }}</slot>
             </span>
-            <m-icon aria-hidden="true" class="m-button-group__icon m--is-right" :name="buttonGroupValue.iconName"  v-if="!hasIconLeft  && icon"></m-icon>
+            <m-icon aria-hidden="true" class="m-button-group__icon m--is-right" :name="data.iconName"  v-if="!hasIconLeft  && icon"></m-icon>
         </label>
     </li>
 </ul>

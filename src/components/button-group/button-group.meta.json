@@ -2,8 +2,8 @@
     "tag": "m-button-group",
     "name": "m-button-group-meta:name",
     "attributes": {
-        "buttonGroupValues": {
-            "type": "MButtonGroupData"
+        "listData": {
+            "type": "object"
         },
         "name": {
             "type": "string",

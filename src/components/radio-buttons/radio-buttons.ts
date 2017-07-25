@@ -7,7 +7,7 @@ import { RADIO_BUTTONS_NAME } from '../component-names';
 
 const POSITION_LEFT: string = 'left';
 
-export interface MRadioData {
+export interface MRadioListData {
     value: string;
     label: string;
     checked: boolean;
@@ -40,7 +40,7 @@ export class MRadioButtons extends Vue {
             ];
         }
     })
-    public radioValues: MRadioData[];
+    public listData: MRadioListData[];
     @Prop({ default: 'radio' })
     public name: string;
     @Prop({ default: true })
@@ -64,9 +64,9 @@ export class MRadioButtons extends Vue {
     }
 
     private findChecked(): any {
-        for (let i = 0; i < this.radioValues.length; i++) {
-            if (this.radioValues[i].checked == true) {
-                return this.radioValues[i].value;
+        for (let i = 0; i < this.listData.length; i++) {
+            if (this.listData[i].checked == true) {
+                return this.listData[i].value;
             }
         }
     }
