@@ -1,20 +1,20 @@
-<article class="m-panel" :class="{ 'm--is-primary': type != 'secondary',
-                'm--is-secondary': type == 'secondary',
+<article class="m-panel" :class="{ 'm--is-primary': propMode == 'primary',
+                'm--is-secondary': propMode == 'secondary',
                 'm--no-shadow': !shadow,
                 'm--no-border': !border }">
-    <header class="m-panel__header" :class="{ 'm--no-padding': !paddingHeader || !padding }"v-if="hasHeader">
-        <span class="m-panel__header__content-left" v-if="hasContentLeft">
+    <header class="m-panel__header" :class="{ 'm--no-padding': !hasPaddingHeader }" v-if="hasHeader">
+        <span class="m-panel__header__content-left" v-if="hasHeaderContentLeftSlot">
             <slot name="header-content-left"></slot>
         </span>
         <slot name="header"></slot>
-        <span class="m-panel__header__content-right" v-if="hasContentRight">
+        <span class="m-panel__header__content-right" v-if="hasHeaderContentRightSlot">
             <slot name="header-content-right"></slot>
         </span>
     </header>
-    <div class="m-panel__body" :class="{ 'm--no-padding': !paddingBody || !padding }">
-        <slot>m-panel needs default slot</slot>
+    <div class="m-panel__body" :class="{ 'm--no-padding': !hasPaddingBody, 'm--has-padding-top': !hasHeader && hasPaddingBody }" v-if="hasDefaultSlot">
+        <slot></slot>
     </div>
-    <footer class="m-panel__footer" :class="{ 'm--no-padding': !paddingFooter || !padding }" v-if="hasFooter">
+    <footer class="m-panel__footer" :class="{ 'm--no-padding': !hasPaddingFooter }" v-if="hasFooterSlot">
         <slot name="footer"></slot>
     </footer>
 </article>

@@ -2,13 +2,13 @@
     "tag": "m-panel",
     "name": "m-panel-meta:name",
     "attributes": {
-        "type": {
+        "mode": {
             "type": "string",
             "values": [
-                "secondary",
-                "primary"
+                "primary",
+                "secondary"
             ],
-            "default": "primary"
+            "default": 0
         },
         "shadow": {
             "type": "boolean",
