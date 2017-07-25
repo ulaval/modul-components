@@ -1,25 +1,2 @@
 @import '../../styles/abstracts/variables';
 
-.m-tabs {
-    &__nav {
-        ul {
-            display: inline-flex;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        &__button {
-            font-size: $m-font-size;
-            outline: none;
-            padding: $m-padding;
-            background: $m-color--white;
-            border: none;
-            cursor: pointer;
-
-            &.is-selected {
-                border-top: $m-border-width--l solid $m-color--secondary;
-            }
-        }
-    }
-}

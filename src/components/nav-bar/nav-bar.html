@@ -1,12 +1,17 @@
-<nav class="m-nav-bar">
+<nav class="m-nav-bar"
+     :class="{
+         'm--is-regular': propAspect == 'regular' || propAspect == 'dark',
+         'm--is-light': propAspect == 'light',
+         'm--is-dark': propAspect == 'dark',
+         'm--no-style': propAspect == 'no-style'
+     }">
     <ul class="m-nav-bar__list" aria-hidden="true">
-        <m-nav-bar-item>Élém 1</m-nav-bar-item>
-        <m-nav-bar-item>Élément 2</m-nav-bar-item>
-        <m-nav-bar-item>Élément très très long 3</m-nav-bar-item>
-        <m-nav-bar-item>Élément 4</m-nav-bar-item>
+        <slot>
+            <m-nav-bar-item>Élém 1</m-nav-bar-item>
+            <m-nav-bar-item>Élément 2</m-nav-bar-item>
+            <m-nav-bar-item><button>Élément très très long 3</button></m-nav-bar-item>
+            <m-nav-bar-item><a href="#">Élément 4</a></m-nav-bar-item>
+        </slot>
     </ul>
-    <div aria-hidden="true"
-         class="m-nav-bar__line"
-         :class="{ 'm--is-anim-active': isAnimActive }"
-         ref="line"></div>
+    <div aria-hidden="true" class="m-nav-bar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propLine" ref="line"></div>
 </nav>

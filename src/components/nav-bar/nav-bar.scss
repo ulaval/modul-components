@@ -13,61 +13,6 @@
         display: inline-flex;
     }
 
-    &__element {
-        &__link {
-            position: relative;
-            transition: 0.3s color ease;
-            display: flex;
-            align-items: center;
-            padding: 0 0 $m-margin 0;
-            text-decoration: none;
-            font-size: $m-font-size;
-            color: $m-color--grey-darker;
-
-            &::after {
-                transition: 0.3s opacity ease;
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                content: '';
-                width: 100%;
-                height: $m-border-width--l;
-                background: $m-color--grey-light;
-                opacity: 0;
-            }
-
-            .m-icon {
-                font-size: 10px;
-            }
-
-            &:hover,
-            &.m--is-selected {
-                color: $m-color--text;
-            }
-
-            &:hover {
-                &::after {
-                    opacity: 1;
-                }
-            }
-
-            &.m--is-icon-right {
-                flex-direction: row-reverse;
-
-                .m-icon {
-                    margin-left: $m-margin--s;
-                }
-            }
-
-            &:not(.m--is-icon-right) {
-                .m-icon {
-                    margin-right: $m-margin--s;
-                }
-            }
-        }
-    }
-
     &__line {
         position: absolute;
         bottom: 0;
@@ -81,52 +26,158 @@
 
     &-item {
         position: relative;
-        transition: 0.3s color ease;
         display: flex;
         align-items: center;
-        padding: 0 0 $m-margin 0;
-        margin: 0 $m-margin;
-        cursor: pointer;
+        user-select: none;
 
-        &,
-        a,
-        a:visited {
-            text-decoration: none;
-            font-size: $m-font-size;
-            color: $m-color--grey-darker;
-        }
-
-        &::after {
-            transition: 0.3s opacity ease;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            content: '';
-            width: 100%;
-            height: $m-border-width--l;
-            background: $m-color--grey-light;
-            opacity: 0;
-        }
-
-        &:hover {
-            color: $m-color--text;
-
-            &::after {
-                opacity: 1;
+        &:not(.m--is-selected) {
+            &,
+            a,
+            a:visited,
+            button {
+                cursor: pointer;
             }
         }
 
-        &.m--is-selected {
-            color: $m-color--text;
+        &,
+        a,
+        a:visited,
+        button {
+            font-family: $m-font-family;
+            font-size: $m-font-size;
+            font-weight: $m-font-weight;
         }
 
-        &.m--is-first-item {
-            margin-left: 0;
+        button {
+            border: none;
+            background: none;
         }
 
-        &.m--is-last-item {
-            margin-right: 0;
+        &,
+        :focus {
+            outline: none;
+        }
+    }
+
+    &.m--is-regular {
+        .m-nav-bar-item {
+            margin-right: 1px;
+
+            &[tabindex],
+            a,
+            button {
+                padding: $m-padding;
+                background: $m-color--grey-light;
+                color: $m-color--text;
+            }
+
+            &.m--is-selected {
+                &[tabindex],
+                a,
+                button {
+                    background: $m-color--white;
+
+                    &::before {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        left: 0;
+                        content: '';
+                        height: $m-border-width--l;
+                        background: $m-color--yellow;
+                    }
+                }
+            }
+
+            &:not(.m--is-selected) {
+                &[tabindex],
+                a,
+                button {
+                    transition: 0.3s background ease;
+
+                    &:hover,
+                    &:focus {
+                        background: $m-color--grey-lighter;
+                    }
+
+                    &:active {
+                        background: $m-color--grey;
+                    }
+                }
+            }
+
+            &.m--is-last-item {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &.m--is-dark {
+        .m-nav-bar-item {
+            &.m--is-selected {
+                &[tabindex],
+                a,
+                button {
+                    color: $m-color--white;
+                    background: $m-color--black-grey;
+                }
+            }
+        }
+    }
+
+    &.m--is-light {
+        .m-nav-bar-item {
+            margin: 0 $m-margin;
+
+            a:visited {
+                color: $m-color--grey-darker;
+            }
+
+            &[tabindex],
+            a,
+            button {
+                transition: 0.3s color ease;
+                color: $m-color--grey-darker;
+                padding: 0 0 $m-margin 0;
+
+                &::after {
+                    transition: 0.3s opacity ease;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    content: '';
+                    width: 100%;
+                    height: $m-border-width--l;
+                    background: $m-color--grey-light;
+                    opacity: 0;
+                }
+
+                &:hover,
+                &:focus {
+                    color: $m-color--text;
+
+                    &::after {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &.m--is-selected {
+                &[tabindex],
+                a,
+                button {
+                    color: $m-color--text;
+                }
+            }
+
+            &.m--is-first-item {
+                margin-left: 0;
+            }
+
+            &.m--is-last-item {
+                margin-right: 0;
+            }
         }
     }
 }
