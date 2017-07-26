@@ -87,7 +87,7 @@ code {
     word-wrap: break-word;
     font-size: $m-font-size--s;
     font-weight: $m-font-weight;
-    color: $m-color--black-grey;
+    color: $m-color--text;
 }
 
 // ======================================================================
@@ -149,16 +149,16 @@ a {
 // ======================================================================
 .m-u--typo {
     &--light {
-        color: $m-color--black-grey;
+        color: $m-color--grey-darker;
 
         &-small {
             font-size: $m-font-size--s;
-            color: $m-color--black-grey;
+            color: $m-color--grey-darker;
 
             &-italic {
                 font-size: $m-font-size--s;
                 font-style: italic;
-                color: $m-color--black-grey;
+                color: $m-color--grey-darker;
             }
         }
     }

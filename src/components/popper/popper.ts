@@ -101,7 +101,7 @@ export class MPopper extends Vue {
     }
 
     protected mounted(): void {
-        if ((this.$slots.content) && (this.$slots.default)) {
+        if ((this.$slots.body) && (this.$slots.default)) {
             if (!this.isScreenMaxS) {
                 this.createPopper();
             }

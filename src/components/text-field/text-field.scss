@@ -28,7 +28,7 @@ $m-text-field--margin: $m-padding--xs !default;
             .m-text-field {
                 &__label {
                     bottom: $m-text-field--margin;
-                    font-size: $m-font-size;
+                    font-size: $m-font-size--l;
                 }
 
                 &__icon {

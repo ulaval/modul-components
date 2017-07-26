@@ -96,7 +96,7 @@ code {
   word-wrap: break-word;
   font-size: 14px;
   font-weight: 300;
-  color: #3d3d3d; }
+  color: #000; }
 
 a {
   color: #09f; }
@@ -106,7 +106,7 @@ a {
 .m-u--font-size--s {
   font-size: 14px; }
 .m-u--font-size--xs {
-  font-size: 10px; }
+  font-size: 12px; }
 .m-u--font-style--normal {
   font-style: normal; }
 .m-u--font-style--italic {
@@ -121,14 +121,14 @@ a {
   font-weight: 200; }
 
 .m-u--typo--light {
-  color: #3d3d3d; }
+  color: #999; }
   .m-u--typo--light-small {
     font-size: 14px;
-    color: #3d3d3d; }
+    color: #999; }
     .m-u--typo--light-small-italic {
       font-size: 14px;
       font-style: italic;
-      color: #3d3d3d; }
+      color: #999; }
 .m-u--typo--small {
   font-size: 14px; }
   .m-u--typo--small-italic {

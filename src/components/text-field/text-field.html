@@ -7,10 +7,7 @@
           'm--is-empty-value' : isEmptyValue },
           'm--is-type-' + propType]">
     <span class="m-text-field__wrap">
-        <label class="m-text-field__label" @click="onFocus" v-if="hasLabel || isDisabled">
-            <m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>
-            {{ label }}
-        </label>
+        <label class="m-text-field__label" @click="onFocus" v-if="hasLabel || isDisabled"><m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>{{ label }}</label>
         <input class="m-text-field__input"
                ref="input"
                :disabled="isDisabled"
