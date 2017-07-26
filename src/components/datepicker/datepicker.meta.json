@@ -1,0 +1,30 @@
+{
+    "tag": "m-datepicker",
+    "name": "m-datepicker-meta:name",
+    "attributes": {
+        "format": {
+            "type": "string",
+            "values": "see Moment.js formating options",
+            "default": "L"
+        }
+    },
+    "overview": [{
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-datepicker-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-datepicker-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-datepicker-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-datepicker-meta:dont"
+        }
+    ]
+}
