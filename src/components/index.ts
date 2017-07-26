@@ -7,6 +7,7 @@ import BulletListPlugin from './bullet-list/bullet-list';
 import ButtonPlugin from './button/button';
 import ButtonGroupPlugin from './button-group/button-group';
 import CheckboxPlugin from './checkbox/checkbox';
+import DatepickerPlugin from './datepicker/datepicker';
 import DialogPlugin from './dialog/dialog';
 import DropdownPlugin from './dropdown/dropdown';
 import DropdownItemPlugin from './dropdown-item/dropdown-item';
@@ -48,6 +49,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ButtonPlugin);
         Vue.use(ButtonGroupPlugin);
         Vue.use(CheckboxPlugin);
+        Vue.use(DatepickerPlugin);
         Vue.use(DialogPlugin);
         Vue.use(DropdownPlugin);
         Vue.use(DropdownItemPlugin);

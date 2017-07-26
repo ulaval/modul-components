@@ -1,0 +1,52 @@
+@import '../../styles/abstracts/variables';
+
+.m-datepicker {
+    width: 296px;
+    height: 384px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__years,
+    &__months {
+        cursor: pointer;
+    }
+
+    &__body {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        max-height: 296px;
+        overflow-y: auto;
+    }
+
+    &__weekday {
+        width: 2.5em;
+        height: 2.5em;
+    }
+
+    &__item {
+        width: 2.5em;
+        height: 2.5em;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background-color: $m-color--primary-lightest;
+        }
+
+        &.m--is-selected {
+            background-color: $m-color--primary-light;
+        }
+
+        &.m--is-disabled {
+            color: $m-color--grey-darker;
+        }
+    }
+}

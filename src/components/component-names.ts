@@ -4,6 +4,7 @@ export const BULLET_LIST_NAME: string = 'm-bullet-list';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CHECKBOX_NAME: string = 'm-checkbox';
+export const DATEPICKER_NAME: string = 'm-datepicker';
 export const DIALOG_NAME: string = 'm-dialog';
 export const DROPDOWN_NAME: string = 'm-dropdown';
 export const DROPDOWN_ITEM_NAME: string = 'm-dropdown-item';
@@ -46,6 +47,7 @@ export const components: string[] = [
     BUTTON_NAME,
     BUTTON_GROUP_NAME,
     CHECKBOX_NAME,
+    DATEPICKER_NAME,
     DIALOG_NAME,
     DROPDOWN_NAME,
     DROPDOWN_ITEM_NAME,
