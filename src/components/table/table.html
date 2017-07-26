@@ -1,10 +1,10 @@
 <div class="m-table">
     <header class="m-table__header" v-if="hasHeader">
-        <slot name="header"></slot>
-        <span class="m-table__header__content m--is-left" v-if="hasContentLeft">
+        <span class="m-table__header__content-left" v-if="hasContentLeft">
             <slot name="header-content-left"></slot>
         </span>
-        <span class="m-table__header__content m--is-right" v-if="hasContentRight">
+        <slot name="header"></slot>
+        <span class="m-table__header__content-right" v-if="hasContentRight">
             <slot name="header-content-right"></slot>
         </span>
     </header>

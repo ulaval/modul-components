@@ -7,7 +7,7 @@ import { BUTTON_GROUP_NAME } from '../component-names';
 
 const ICON_POSITION_LEFT: string = 'left';
 
-export interface MButtonGroupData {
+export interface MButtonGroupListData {
     value: string;
     label: string;
     active: boolean;
@@ -39,7 +39,7 @@ export class MButtonGroup extends Vue {
             ];
         }
     })
-    public buttonGroupValues: MButtonGroupData[];
+    public listData: MButtonGroupListData[];
     @Prop({ default: 'button-group' })
     public name: string;
     @Prop({ default: false })
@@ -62,9 +62,9 @@ export class MButtonGroup extends Vue {
     }
 
     private findActive(): any {
-        for (let i = 0; i < this.buttonGroupValues.length; i++) {
-            if (this.buttonGroupValues[i].active == true) {
-                return this.buttonGroupValues[i].value;
+        for (let i = 0; i < this.listData.length; i++) {
+            if (this.listData[i].active == true) {
+                return this.listData[i].value;
             }
         }
     }

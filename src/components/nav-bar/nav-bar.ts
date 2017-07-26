@@ -9,19 +9,19 @@ const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
 const POPPER_CLASS_NAME: string = '.m-popper__popper';
 
-const ICON_POSITION_LEFT: string = 'left';
-const ICON_POSITION_RIGHT: string = 'right';
+const ASPECT_REGULAR: string = 'regular';
+const ASPECT_LIGHT: string = 'light';
+const ASPECT_DARK: string = 'dark';
+const ASPECT_NO_STYLE: string = 'no-style';
 
 @WithRender
 @Component
 export class MNavbar extends ModulVue {
 
-    @Prop({ default: () => [{ value: 'ele 1', isSelected: false, iconName: 'default' }, { value: 'element #2', isSelected: true }, { value: 'element 3', isSelected: false }] })
-    public elements: any[];
+    @Prop({ default: ASPECT_DARK })
+    public aspect: string;
     @Prop()
-    public mode: string;
-    @Prop({ default: ICON_POSITION_LEFT })
-    private iconPosition: string;
+    public line: boolean;
 
     private isAnimActive: boolean = false;
 
@@ -30,6 +30,10 @@ export class MNavbar extends ModulVue {
     private childrenIndexSelected: number;
 
     protected mounted(): void {
+        this.init();
+    }
+
+    private init(): void {
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkNavBarItem(i)) {
                 this.$children[i]['id'] = this.itemCount;
@@ -52,7 +56,9 @@ export class MNavbar extends ModulVue {
         this.childrenIndexSelected = this.childrenIndexSelected == undefined ? this.arrItem[0].childrenIndex : this.childrenIndexSelected;
         let childrenSelected = this.$children[this.childrenIndexSelected];
         childrenSelected['selectItem']();
-        this.setLinePosition(childrenSelected.$el as HTMLElement);
+        if (this.propAspect == ASPECT_LIGHT) {
+            this.setLinePosition(childrenSelected.$el as HTMLElement);
+        }
     }
 
     private changeItem(id: number, childrenIndex: number): void {
@@ -63,7 +69,9 @@ export class MNavbar extends ModulVue {
             this.$children[this.childrenIndexSelected]['unselectItem']();
             this.$children[childrenIndex]['selectItem']();
             this.childrenIndexSelected = childrenIndex;
-            this.setLinePosition(this.$children[childrenIndex].$el as HTMLElement);
+            if (this.propAspect == ASPECT_LIGHT) {
+                this.setLinePosition(this.$children[childrenIndex].$el as HTMLElement);
+            }
             this.$emit('click');
         }
     }
@@ -81,10 +89,16 @@ export class MNavbar extends ModulVue {
         });
     }
 
-    private get propIconPosition(): string {
-        return this.iconPosition == ICON_POSITION_RIGHT ? this.iconPosition : ICON_POSITION_LEFT;
+    private get propAspect(): string {
+        return this.aspect == ASPECT_REGULAR || this.aspect == ASPECT_DARK || this.aspect == ASPECT_NO_STYLE ? this.aspect : ASPECT_LIGHT;
     }
 
+    private get propLine(): boolean {
+        if (this.line == undefined) {
+            return this.propAspect == ASPECT_LIGHT;
+        }
+        return this.line;
+    }
 }
 
 const NavbarPlugin: PluginObject<any> = {

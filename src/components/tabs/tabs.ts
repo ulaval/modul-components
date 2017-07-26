@@ -5,16 +5,22 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './tabs.html?style=./tabs.scss';
 import { TABS_NAME, TAB_PANE_NAME } from '../component-names';
 
+const ASPECT_REGULAR: string = 'regular';
+const ASPECT_LIGHT: string = 'light';
+const ASPECT_DARK: string = 'dark';
+const ASPECT_NO_STYLE: string = 'no-style';
+
 @WithRender
 @Component
 export class MTabs extends Vue {
-    @Prop({ default: '' })
-    public mode: string;
+    @Prop({ default: ASPECT_LIGHT })
+    public aspect: string;
 
     public componentName = TABS_NAME;
     private nbTabPane: number = 0;
     private arrTabPane = new Array();
     private indexTabPaneSelected: number = 0;
+    private loading = true;
 
     protected mounted(): void {
         for (let i = 0; i < this.$children.length; i++) {
@@ -34,6 +40,7 @@ export class MTabs extends Vue {
             }
         }
         this.$children[this.arrTabPane[this.indexTabPaneSelected].childrenNumber]['selectTab']();
+        this.loading = false;
     }
 
     private changeTab(index: number): void {
@@ -53,6 +60,10 @@ export class MTabs extends Vue {
 
     private checkTabPane(index: number): boolean {
         return this.$children[index]['componentName'] == TAB_PANE_NAME ? true : false;
+    }
+
+    private get propAspect(): string {
+        return this.aspect == ASPECT_REGULAR || this.aspect == ASPECT_DARK || this.aspect == ASPECT_NO_STYLE ? this.aspect : ASPECT_LIGHT;
     }
 }
 

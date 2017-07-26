@@ -1,11 +1,11 @@
 @import 'abstracts/variables';
-
 $m-panel--border-width: 1px;
 
 .m-panel {
     position: relative;
     border: $m-panel--border-width solid $m-color--grey-light;
-    display: block;
+    display: flex;
+    flex-direction: column;
     box-shadow: 0 1px 1px rgba($m-color--black, 0.05);
 
     &.m--is-primary {
@@ -42,55 +42,64 @@ $m-panel--border-width: 1px;
         border: 0;
     }
 
-    &.m--no-padding {
-        .m-panel__header,
-        .m-panel__body,
-        .m-panel__footer {
-            padding: 0;
+    &__header,
+    &__body,
+    &__footer {
+        > :first-child {
+            margin-top: 0;
+
+            > :first-child {
+                margin-top: 0;
+            }
         }
     }
 
-    &.m--no-padding-header {
-        .m-panel__header {
-            padding: 0;
+    &__header {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr auto;
+
+        @media screen and (max-width: 640px) {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &:not(.m--no-padding) {
+            padding: $m-padding $m-padding #{ $m-padding + $m-margin--s } $m-padding;
+        }
+
+        &__content-left,
+        &__content-right {
+            > :first-child {
+                margin-top: 0;
+            }
+        }
+
+        &__content {
+            &-right {
+                justify-self: flex-end;
+            }
         }
     }
 
-    &.m--no-padding-body {
-        .m-panel__body {
-            padding: 0;
+    &__body {
+        flex: 1;
+
+        &:not(.m--no-padding) {
+            padding: 0 $m-padding #{ $m-padding + $m-margin--s } $m-padding;
+        }
+
+        &.m--has-padding-top {
+            padding-top: $m-padding;
         }
     }
 
-    &.m--no-padding-footer {
-        .m-panel__footer {
-            padding: 0;
+    &__footer {
+        border-top: 1px solid $m-color--grey;
+
+        &:not(.m--no-padding) {
+            padding: $m-padding;
         }
     }
-
-    .m-panel__header,
-    .m-panel__body,
-    .m-panel__footer {
-        padding: $m-padding;
-    }
-}
-
-.m-panel__header {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr auto;
-
-    @media screen and (max-width: 640px) {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .m-panel__header__content.m--is-right {
-        justify-self: flex-end;
-    }
-}
-
-.m-panel__footer {
-    border-top: 1px solid $m-color--grey;
 }

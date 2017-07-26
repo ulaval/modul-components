@@ -2,8 +2,8 @@
     "tag": "m-radio-buttons",
     "name": "m-radio-buttons-meta:name",
     "attributes": {
-        "radioValue": {
-            "type": "MRadioData"
+        "listData": {
+            "type": "object"
         },
         "name": {
             "type": "string",

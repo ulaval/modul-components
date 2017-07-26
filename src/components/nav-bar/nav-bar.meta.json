@@ -2,9 +2,22 @@
     "tag": "m-nav-bar",
     "name": "m-nav-bar-meta:name",
     "attributes": {
-        "elements": {
-            "type": "any[]",
-            "default": []
+        "aspect": {
+            "type": "string",
+            "value": [
+                "regular",
+                "light",
+                "dark",
+                "no-style"
+            ],
+            "default": 1
+        },
+        "line": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ]
         }
     },
     "overview": [

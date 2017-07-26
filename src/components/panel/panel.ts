@@ -5,11 +5,14 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './panel.html?style=./panel.scss';
 import { PANEL_NAME } from '../component-names';
 
+const MODE_PRIMARY: string = 'primary';
+const MODE_SECONDARY: string = 'secondary';
+
 @WithRender
 @Component
 export class MPanel extends Vue {
-    @Prop({ default: 'primary' })
-    public type: string;
+    @Prop({ default: MODE_PRIMARY })
+    public mode: string;
     @Prop({ default: true })
     public shadow: boolean;
     @Prop({ default: true })
@@ -25,6 +28,10 @@ export class MPanel extends Vue {
 
     public componentName: string = PANEL_NAME;
 
+    private get propMode(): string {
+        return this.mode == MODE_PRIMARY ? MODE_PRIMARY : MODE_SECONDARY;
+    }
+
     private get hasHeader(): boolean {
         if (this.$slots['header'] || this.$slots['header-content-left'] || this.$slots['header-content-right']) {
             return true;
@@ -32,16 +39,32 @@ export class MPanel extends Vue {
         return false;
     }
 
-    private get hasContentLeft(): boolean {
+    private get hasHeaderContentLeftSlot(): boolean {
         return !!this.$slots['header-content-left'];
     }
 
-    private get hasContentRight(): boolean {
+    private get hasHeaderContentRightSlot(): boolean {
         return !!this.$slots['header-content-right'];
     }
 
-    private get hasFooter(): boolean {
-        return !!this.$slots['footer'];
+    private get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
+    }
+
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
+    }
+
+    private get hasPaddingHeader(): boolean {
+        return this.paddingHeader && this.padding;
+    }
+
+    private get hasPaddingBody(): boolean {
+        return this.paddingBody && this.padding;
+    }
+
+    private get hasPaddingFooter(): boolean {
+        return this.paddingFooter && this.padding;
     }
 }
 
