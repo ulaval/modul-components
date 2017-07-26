@@ -1,26 +1,12 @@
 @charset 'utf-8';
 
-// ======================================================================
-//  Variables
-// ======================================================================
-
-@import 'abstracts/variables',
-    'abstracts/var-color-calendar';
-
-// ======================================================================
-//  HTML overide
-// ======================================================================
-
-// @import 'normalize';
-
-// ======================================================================
-//  Base
-// ======================================================================
-
-@import 'base/animations',
-    'base/base',
+@import
+    'abstracts/variables',
+    'abstracts/var-color-calendar',
     'base/fonts',
-    'base/layout',
-    'base/bullet-list',
+    'base/base',
     'base/typography',
-    'base/utils';
+    'base/layout',
+    'base/utils',
+    'base/bullet-list',
+    'base/animations';

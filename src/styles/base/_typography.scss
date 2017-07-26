@@ -60,7 +60,7 @@ h6,
 }
 
 // ======================================================================
-//  Texts
+//  Text
 // ======================================================================
 p,
 .m-u--p {
@@ -68,26 +68,12 @@ p,
 }
 
 b,
-strong,
-.m-u--font-weight-bold {
+strong {
     font-weight: $m-font-weight--bold;
 }
 
-.m-u--font-weight-regular {
-    font-weight: $m-font-weight--regular;
-}
-
-.m-u--font-weight-light {
-    font-weight: $m-font-weight--light;
-}
-
-.m-u--font-style-normal {
-    font-style: normal;
-}
-
 i,
-em,
-.m-u--font-style-italic {
+em {
     font-style: italic;
 }
 
@@ -95,10 +81,99 @@ small {
     font-size: $m-font-size--s;
 }
 
-// ======================================================================
-//  links
-// ======================================================================
+pre,
+code {
+    word-break: break-all;
+    word-wrap: break-word;
+    font-size: $m-font-size--s;
+    font-weight: $m-font-weight;
+    color: $m-color--black-grey;
+}
 
+// ======================================================================
+//  Link
+// ======================================================================
 a {
     color: $m-color--primary;
+}
+
+// ======================================================================
+//  Font
+// ======================================================================
+.m-u--font {
+    &-size {
+        &--l {
+            font-size: $m-font-size--s;
+        }
+
+        &--s {
+            font-size: $m-font-size--s;
+        }
+
+        &--xs {
+            font-size: $m-font-size--xs;
+        }
+    }
+
+    &-style {
+        &--normal {
+            font-style: normal;
+        }
+
+        &--italic {
+            font-style: italic;
+        }
+    }
+
+    &-weight {
+        &--normal {
+            font-weight: $m-font-weight;
+        }
+
+        &--black {
+            font-weight: $m-font-weight--black;
+        }
+
+        &--bold {
+            font-weight: $m-font-weight--bold;
+        }
+
+        &--light {
+            font-weight: $m-font-weight--light;
+        }
+    }
+}
+
+// ======================================================================
+//  Typo
+// ======================================================================
+.m-u--typo {
+    &--light {
+        color: $m-color--black-grey;
+
+        &-small {
+            font-size: $m-font-size--s;
+            color: $m-color--black-grey;
+
+            &-italic {
+                font-size: $m-font-size--s;
+                font-style: italic;
+                color: $m-color--black-grey;
+            }
+        }
+    }
+
+    &--small {
+        font-size: $m-font-size--s;
+
+        &-italic {
+            font-size: $m-font-size--s;
+            font-style: italic;
+        }
+    }
+
+    &--italic {
+        font-size: $m-font-size--s;
+        font-style: italic;
+    }
 }
