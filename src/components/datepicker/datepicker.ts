@@ -20,14 +20,8 @@ interface SelectionDate {
 @Component
 export class MDatepicker extends Vue {
 
-    @Prop({ default: 'date' })
-    public type: string;
     @Prop({ default: 'L' })
     public format: string;
-    @Prop()
-    public min: any;
-    @Prop()
-    public max: any;
 
     private view: string = 'day';
     private today: moment.Moment = moment().local();
@@ -137,6 +131,7 @@ export class MDatepicker extends Vue {
 
     private selectDate(selectedDate: SelectionDate): void {
         this.selectedDate = selectedDate;
+        this.refreshDates();
         this.$emit('selected', this.selectedDate);
         this.closeDatepicker();
     }

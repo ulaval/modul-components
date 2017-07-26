@@ -3,23 +3,27 @@
     <div class="m-datepicker" slot="body">
         <div class="m-datepicker__header">
             <m-button mode="icon" icon-name="arrow-left" @click="changeYear(-1)">next month</m-button>
-            <span @click="view = 'year'" class="m-datepicker__years">{{selectedDate.year}}</span>
+            <button type="button" @click="view = 'year'" class="m-datepicker__years">{{selectedDate.year}}</button>
             <m-button mode="icon" icon-name="arrow-right" @click="changeYear(1)">next month</m-button>
         </div>
         <div class="m-datepicker__header">
             <m-button mode="icon" icon-name="arrow-left" @click="changeMonth(-1)">previous month</m-button>
-            <span @click="view = 'month'" class="m-datepicker__months">{{monthName}}</span>
+            <button type="button" @click="view = 'month'" class="m-datepicker__months">{{monthName}}</button>
             <m-button mode="icon" icon-name="arrow-right" @click="changeMonth(1)">next month</m-button>
         </div>
         <div class="m-datepicker__body">
-            <table v-if="view == 'year'">
+            <table v-if="view == 'year'" class="m-datepicker__body-table">
                 <tr v-for="year in yearRows">
-                    <td v-for="y in year" @click="selectYear(y)" :class="{'m--is-selected': selectedDate.year == y}" class="m-datepicker__item">{{y}}</td>
+                    <td v-for="y in year" class="m-datepicker__body-cell">
+                        <button type="button" @click="selectYear(y)" :class="{'m--is-selected': selectedDate.year == y}" class="m-datepicker__item">{{y}}</button>
+                    </td>
                 </tr>
             </table>
             <table v-if="view == 'month'">
                 <tr v-for="month in monthRows">
-                    <td v-for="m in month" @click="selectMonth(m)" :class="{'m--is-selected': monthName == m}" class="m-datepicker__item">{{m}}</td>
+                    <td v-for="m in month" class="m-datepicker__body-cell">
+                        <button type="button" @click="selectMonth(m)" :class="{'m--is-selected': monthName == m}" class="m-datepicker__item">{{m}}</button>
+                    </td>
                 </tr>
             </table>
             <table v-if="view == 'day'">
@@ -27,8 +31,10 @@
                     <td v-for="w in weekdays" class="m-datepicker__weekday">{{w}}</td>
                 </tr>
                 <tr v-for="day in dayRows">
-                    <td v-for="d in day" @click="selectDate(d)" :class="{'m--is-selected': isSelectedDate(d), 'm--is-disabled': !isInSelectedMonth(d)}"
-                        class="m-datepicker__item">{{d.day}}</td>
+                    <td v-for="d in day" class="m-datepicker__body-cell">
+                        <button type="button" @click="selectDate(d)" :class="{'m--is-selected': isSelectedDate(d), 'm--is-disabled': !isInSelectedMonth(d)}"
+                            class="m-datepicker__item">{{d.day}}</button>
+                    </td>
                 </tr>
             </table>
         </div>

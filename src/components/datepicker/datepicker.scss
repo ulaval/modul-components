@@ -13,7 +13,14 @@
     }
 
     &__years,
-    &__months {
+    &__months,
+    &__item {
+        background: none;
+        border: 0;
+        color: inherit;
+        font: inherit;
+        outline: none;
+        padding: 0;
         cursor: pointer;
     }
 
@@ -23,9 +30,18 @@
         text-align: center;
         max-height: 296px;
         overflow-y: auto;
+
+        &-table {
+            border-spacing: 0;
+        }
+
+        &-cell {
+            padding: 0;
+        }
     }
 
     &__weekday {
+        padding: 0;
         width: 2.5em;
         height: 2.5em;
     }
