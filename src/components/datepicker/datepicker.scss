@@ -61,8 +61,14 @@
             background-color: $m-color--primary-light;
         }
 
+        &.m--is-other-month {
+            color: $m-color--grey-dark;
+        }
+
         &.m--is-disabled {
-            color: $m-color--grey-darker;
+            background-color: transparent;
+            color: $m-color--grey-light;
+            cursor: not-allowed;
         }
     }
 }

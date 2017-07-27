@@ -2,10 +2,25 @@
     "tag": "m-datepicker",
     "name": "m-datepicker-meta:name",
     "attributes": {
+        "value": {
+            "type": "moment.Moment",
+            "values": "see Moment.js constructor arguments",
+            "default": "now"
+        },
         "format": {
             "type": "string",
             "values": "see Moment.js formating options",
             "default": "L"
+        },
+        "min": {
+            "type": "moment.Moment",
+            "values": "see Moment.js constructor arguments",
+            "default": "now minus 10 years"
+        },
+        "max": {
+            "type": "moment.Moment",
+            "values": "see Moment.js constructor arguments",
+            "default": "now plus 10 years"
         }
     },
     "overview": [{
