@@ -72,8 +72,7 @@ export class MDialog extends ModulVue implements DialogTemplateMixin {
 
     @Watch('open')
     private isOpenChanged(value: boolean): void {
-        this.propOpen = value;
-        if (this.propOpen) {
+        if (value) {
             this.openDialog();
         } else {
             this.closeDialog();
