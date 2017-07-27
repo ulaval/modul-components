@@ -2,14 +2,11 @@
                 'm--is-secondary': propMode == 'secondary',
                 'm--no-shadow': !shadow,
                 'm--no-border': !border }">
-    <header class="m-panel__header" :class="{ 'm--no-padding': !hasPaddingHeader }" v-if="hasHeader">
-        <span class="m-panel__header__content-left" v-if="hasHeaderContentLeftSlot">
-            <slot name="header-content-left"></slot>
-        </span>
-        <slot name="header"></slot>
-        <span class="m-panel__header__content-right" v-if="hasHeaderContentRightSlot">
-            <slot name="header-content-right"></slot>
-        </span>
+    <header class="m-panel__header" :class="{ 'm--no-padding': !hasPaddingHeader, 'm--is-right-content-alone': !hasHeaderSlot }" v-if="hasHeader">
+        <div class="m-panel__header__content"><slot name="header"></slot></div>
+        <div class="m-panel__header__content-right" v-if="hasHeaderRightContentSlot">
+            <slot name="header-right-content"></slot>
+        </div>
     </header>
     <div class="m-panel__body" :class="{ 'm--no-padding': !hasPaddingBody, 'm--has-padding-top': !hasHeader && hasPaddingBody }" v-if="hasDefaultSlot">
         <slot></slot>

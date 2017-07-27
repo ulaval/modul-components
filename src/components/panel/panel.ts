@@ -33,18 +33,18 @@ export class MPanel extends Vue {
     }
 
     private get hasHeader(): boolean {
-        if (this.$slots['header'] || this.$slots['header-content-left'] || this.$slots['header-content-right']) {
+        if (this.$slots.header || this.$slots['header-right-content']) {
             return true;
         }
         return false;
     }
 
-    private get hasHeaderContentLeftSlot(): boolean {
-        return !!this.$slots['header-content-left'];
+    private get hasHeaderRightContentSlot(): boolean {
+        return !!this.$slots['header-right-content'];
     }
 
-    private get hasHeaderContentRightSlot(): boolean {
-        return !!this.$slots['header-content-right'];
+    private get hasHeaderSlot(): boolean {
+        return !!this.$slots.header;
     }
 
     private get hasDefaultSlot(): boolean {
