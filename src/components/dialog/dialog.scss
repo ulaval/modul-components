@@ -56,6 +56,26 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
                 &__header {
                     border-bottom: 1px solid $m-color--grey-light;
                 }
+
+                &__footer-nav {
+                    &,
+                    > :first-child {
+                        display: inline-flex;
+                        flex-direction: column;
+
+                        &,
+                        &.m-button,
+                        &.m-link,
+                        > :first-child {
+                             margin: 0;
+                        }
+                    }
+
+                    .m-button,
+                    .m-link {
+                        margin-top: $m-margin;
+                    }
+                }
             }
 
             &.m--is-open {
@@ -229,6 +249,14 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
         &.m--no-padding {
             padding: 0;
         }
+
+        > :first-child {
+            margin: 0;
+
+            > :first-child {
+                margin: 0;
+            }
+        }
     }
 
     &__header {
@@ -258,24 +286,6 @@ $m-dialog-secondary--header-height: $m-touch-size !default;
     &__footer {
         padding: 0 $m-padding $m-padding;
         text-align: center;
-
-        &-nav {
-            display: inline-flex;
-            flex-direction: column;
-
-            &__first-button {
-                margin: 0;
-            }
-        }
-
-        .m-button {
-            margin-top: $m-padding--s;
-        }
-
-        .m-button__text {
-            width: 100%;
-            text-align: center;
-        }
     }
 
     &__button {

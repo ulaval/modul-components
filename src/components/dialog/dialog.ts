@@ -147,6 +147,16 @@ export class MDialog extends ModulVue implements DialogTemplateMixin {
             this.closeDialog(event);
         }
     }
+
+    private onTrue() {
+        this.closeDialog();
+        this.$emit('true');
+    }
+
+    private onFalse() {
+        this.closeDialog();
+        this.$emit('false');
+    }
 }
 
 const DialogPlugin: PluginObject<any> = {
