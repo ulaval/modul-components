@@ -1,24 +1,20 @@
-<main class="m-template" :class="{ 'm--has-column' : hasColumn }">
-    <header class="m-template__header">
-        <slot name="header">
-            <m-i18n i18n-key="m-template:header-default-text"></m-i18n>
-        </slot>
+<main class="m-template" :class="[{ 'm--has-column' : hasColumnSlot }, className ]">
+    <header class="m-template__header" v-if="hasHeaderSlot">
+        <slot name="header"></slot>
     </header>
-    <div class="m-template__wrap">
-        <div class="m-template__body">
-            <section class="m-template__body__content">
-                <slot>
-                    <m-i18n i18n-key="m-template:body-default-text"></m-i18n>
-                </slot>
+    <div class="m-template__wrap" v-if="hasDefaultSlot || hasColumnSlot || hasFooterSlot ">
+        <div class="m-template__body" v-if="hasDefaultSlot || (hasFooterSlot && !footerFullWidth)">
+            <section class="m-template__body__content" v-if="hasDefaultSlot">
+                <slot></slot>
             </section>
-            <section class="m-template__body__footer" v-if="hasFooter && !hasFooterFullWidth">
+            <section class="m-template__body__footer" v-if="hasFooterSlot && !footerFullWidth">
                 <slot name="footer"></slot>
             </section>
         </div>
-        <aside class="m-template__column" v-if="hasColumn">
+        <aside class="m-template__column" v-if="hasColumnSlot">
             <slot name="column"></slot>
         </aside>
-        <section class="m-template__body__footer" v-if="hasFooter && hasFooterFullWidth">
+        <section class="m-template__body__footer" v-if="hasFooterSlot && footerFullWidth">
             <slot name="footer"></slot>
         </section>
     </div>

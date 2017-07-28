@@ -1,6 +1,0 @@
-{
-    "m-template": {
-        "header-default-text": "Veuillez, svp, ajouter un titre à la page. ex : <h1 slot='header'>Titre de la page</h1>",
-        "body-default-text": "Votre contenu principal s'affichera ici"
-    }
-}
