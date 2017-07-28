@@ -1,5 +1,7 @@
-<m-popper padding="">
-    <m-text-field @focus="openDatepicker" :value="formattedDate"></m-text-field>
+<m-popper padding="" @show="isOpen = true" @hide="isOpen = false">
+
+    <m-text-field icon-name="calendar" :force-focus="isOpen" @focus="openDatepicker" :value="formattedDate" @change="onChange"
+        :error="error" :placeholder="placeholder" :icon-description="isOpen ? 'close calendar' : 'open calendar'"></m-text-field>
     <div class="m-datepicker" slot="body">
         <div class="m-datepicker__header">
             <m-button mode="icon" icon-name="arrow-left" @click="selectYear(selectedDate.year - 1)" :state="isMinYear? 'disabled' : ''">previous year</m-button>

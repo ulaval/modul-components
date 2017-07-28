@@ -1,10 +1,11 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './datepicker.html?style=./datepicker.scss';
 import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
+import { curLang } from '../../utils/i18n/i18n';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -25,7 +26,7 @@ export interface DatepickerMonth {
 
 @WithRender
 @Component
-export class MDatepicker extends Vue {
+export class MDatepicker extends ModulVue {
 
     @Prop({ default: () => { return moment(); } })
     public value: moment.Moment;
@@ -38,8 +39,8 @@ export class MDatepicker extends Vue {
 
     private view: string = 'day';
     private selectedDate: DatepickerDate = { day: 0, month: 0, year: 0, isDisabled: false };
-    private formattedDate: string = this.value.format(this.format);
-    private weekdays: string[] = moment.weekdaysMin();
+    private formattedDate: string = '';
+    private weekdays: string[] = [];
     private months: DatepickerMonth[] = [];
     private years: number[] = [];
     private leadingDays: DatepickerDate[] = [];
@@ -48,8 +49,14 @@ export class MDatepicker extends Vue {
     private yearRows: any[] = [];
     private monthRows: any[] = [];
     private dayRows: any[] = [];
+    private error: string = '';
+    private placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
+    private isOpen: boolean = false;
 
     private created(): void {
+        moment.locale(curLang);
+        this.formattedDate = this.value.format(this.format);
+        this.weekdays = moment.weekdaysMin();
         this.selectedDate.day = this.value.date();
         this.selectedDate.month = this.value.month();
         this.selectedDate.year = this.value.year();
@@ -186,6 +193,29 @@ export class MDatepicker extends Vue {
         this.$emit('close');
     }
 
+    private onChange(event, value) {
+        console.log(value);
+        let newDate = moment(value);
+        if (newDate.isValid()) {
+            if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
+                this.selectedDate = {
+                    day: newDate.date(),
+                    month: newDate.month(),
+                    year: newDate.year(),
+                    isDisabled: false
+                };
+                this.setDays();
+                this.$emit('selected', newDate);
+                this.error = '';
+            } else {
+                this.error = 'out of bounds error';
+            }
+        } else {
+            this.error = 'invalid date error';
+        }
+        this.closeDatepicker();
+    }
+
     private selectYear(year: number, showMonths: boolean = false): void {
         let newDate = moment(this.selectedDate).year(year);
         this.selectedDate.day = newDate.date();
@@ -232,6 +262,7 @@ export class MDatepicker extends Vue {
             this.setDays();
             this.$emit('selected', moment(this.selectedDate));
             this.closeDatepicker();
+            this.error = '';
         }
     }
 }
