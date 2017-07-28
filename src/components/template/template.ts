@@ -7,8 +7,6 @@ import { TEMPLATE_NAME } from '../component-names';
 @WithRender
 @Component
 export class Mtemplate extends Vue {
-    @Prop()
-    public className: string;
     @Prop({ default: false })
     public footerFullWidth: boolean;
 

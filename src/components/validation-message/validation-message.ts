@@ -14,11 +14,13 @@ export class MValidationMessage extends ModulVue {
     @Prop({ default: STATE_DEFAULT })
     public state: string;
     @Prop({ default: '' })
-    public errorMessage: string;
+    public error: string;
     @Prop({ default: '' })
-    public helperMessage: string;
+    public helper: string;
     @Prop({ default: '' })
-    public validMessage: string;
+    public valid: string;
+    @Prop()
+    public className: string;
 
     public componentName = VALIDATION_MESSAGE_NAME;
 
@@ -34,15 +36,15 @@ export class MValidationMessage extends ModulVue {
     }
 
     private get hasError(): boolean {
-        return !this.isDiabled && this.errorMessage != '';
+        return !this.isDiabled && this.error != '';
     }
 
     private get hasHelper(): boolean {
-        return !this.isDiabled && this.helperMessage != '';
+        return !this.isDiabled && this.helper != '';
     }
 
     private get isValid(): boolean {
-        return !this.isDiabled && this.validMessage != '' && !this.hasError;
+        return !this.isDiabled && this.valid != '' && !this.hasError;
     }
 }
 

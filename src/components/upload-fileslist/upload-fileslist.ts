@@ -9,16 +9,17 @@ import { MUploadInterface, GlobalFileList } from '../upload/upload';
 @WithRender
 @Component
 export class MUploadFileslist extends Vue {
-    public get fileList(): GlobalFileList[] {
+
+    private removeFile(index: number): void {
+        (this.$parent as MUploadInterface).globalFileList.splice(index, 1);
+    }
+
+    private get fileList(): GlobalFileList[] {
         return (this.$parent as MUploadInterface).globalFileList;
     }
 
-    public get showImage(): boolean {
+    private get showImage(): boolean {
         return (this.$parent as MUploadInterface).showImageProp;
-    }
-
-    public removeFile(index: number): void {
-        (this.$parent as MUploadInterface).globalFileList.splice(index, 1);
     }
 }
 

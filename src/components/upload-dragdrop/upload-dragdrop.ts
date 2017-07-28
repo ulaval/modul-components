@@ -11,7 +11,7 @@ import { MUploadInterface } from '../upload/upload';
 export class MUploadDragdrop extends Vue {
     private dragOver: boolean = false;
 
-    public filesDrop($event: DragEvent): void {
+    private filesDrop($event: DragEvent): void {
         $event.stopPropagation();
         $event.preventDefault();
         this.dragOver = false;

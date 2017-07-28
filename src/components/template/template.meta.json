@@ -2,7 +2,7 @@
     "tag": "m-template",
     "name": "m-template-meta:name",
     "attributes": {
-        "hasFooterFullWidth": {
+        "footerFullWidth": {
             "type": "boolean",
             "default": false
         }

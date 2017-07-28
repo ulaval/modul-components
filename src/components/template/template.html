@@ -1,21 +1,21 @@
-<main class="m-template" :class="[{ 'm--has-column' : hasColumnSlot }, className ]">
+<section class="m-template" :class="{ 'm--has-column' : hasColumnSlot }">
     <header class="m-template__header" v-if="hasHeaderSlot">
         <slot name="header"></slot>
     </header>
     <div class="m-template__wrap" v-if="hasDefaultSlot || hasColumnSlot || hasFooterSlot ">
         <div class="m-template__body" v-if="hasDefaultSlot || (hasFooterSlot && !footerFullWidth)">
-            <section class="m-template__body__content" v-if="hasDefaultSlot">
+            <div class="m-template__body__content" v-if="hasDefaultSlot">
                 <slot></slot>
-            </section>
-            <section class="m-template__body__footer" v-if="hasFooterSlot && !footerFullWidth">
+            </div>
+            <footer class="m-template__body__footer" v-if="hasFooterSlot && !footerFullWidth">
                 <slot name="footer"></slot>
-            </section>
+            </footer>
         </div>
         <aside class="m-template__column" v-if="hasColumnSlot">
             <slot name="column"></slot>
         </aside>
-        <section class="m-template__body__footer" v-if="hasFooterSlot && footerFullWidth">
+        <footer class="m-template__body__footer" v-if="hasFooterSlot && footerFullWidth">
             <slot name="footer"></slot>
-        </section>
+        </footer>
     </div>
-</main>
+</section>

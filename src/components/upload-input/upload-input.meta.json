@@ -1,16 +1,7 @@
 {
     "tag": "m-upload-input",
     "name": "m-upload-input-meta:name",
-    "attributes": {
-        "multiple": {
-            "type": "boolean",
-             "default": false
-        },
-        "extensions": {
-            "type": "string[]",
-            "default": []
-        }
-    },
+    "attributes": {},
     "overview": [
         {
             "type": "rubric",

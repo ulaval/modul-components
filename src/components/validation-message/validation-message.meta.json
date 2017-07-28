@@ -1,6 +1,25 @@
 {
     "tag": "m-validation-message",
     "name": "m-validation-message-meta:name",
+    "attributes": {
+        "state": {
+            "type": "string",
+            "value": [
+                "default",
+                "disabled"
+            ],
+            "default": 0
+        },
+        "error": {
+            "type": "string"
+        },
+        "helper": {
+            "type": "string"
+        },
+        "valid": {
+            "type": "string"
+        }
+    },
     "overview": [
         {
             "type": "rubric",

@@ -9,19 +9,20 @@ import { MUploadInterface } from '../upload/upload';
 @WithRender
 @Component
 export class MUploadInput extends Vue {
-    public get extensions(): string {
-        return (this.$parent as MUploadInterface).extensionsProp;
-    }
 
-    public get multiple(): boolean {
-        return (this.$parent as MUploadInterface).multipleProp;
-    }
-
-    public filesInput($event: Event): void {
+    private filesInput($event: Event): void {
         let files: FileList = ($event.target as any).files;
 
         (this.$parent as MUploadInterface).addNewFiles(files);
         this.$emit('filesInputed', files);
+    }
+
+    private get extensions(): string {
+        return (this.$parent as MUploadInterface).extensionsProp;
+    }
+
+    private get multiple(): boolean {
+        return (this.$parent as MUploadInterface).multipleProp;
     }
 }
 
