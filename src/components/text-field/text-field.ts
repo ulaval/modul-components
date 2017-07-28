@@ -37,8 +37,14 @@ export class MTexteField extends Vue implements InputStateMixin {
     public editable: boolean;
     @Prop({ default: '' })
     public iconName: string;
+    @Prop({ default: '' })
+    public iconDescription: string;
     @Prop({ default: false })
     public forceFocus: boolean;
+    @Prop()
+    public error: string;
+    @Prop()
+    public placeholder: string;
 
     public componentName: string = TEXT_FIELD_NAME;
 
@@ -48,6 +54,7 @@ export class MTexteField extends Vue implements InputStateMixin {
 
     private propValue: string = '';
     private propDefaultText: string;
+    private propErrorMessage: string = this.error;
     private hasIcon: boolean;
     private isEmptyValue: boolean = false;
     private isDefaultTextEmpty: boolean = false;
@@ -84,7 +91,7 @@ export class MTexteField extends Vue implements InputStateMixin {
 
         this.isUpdating = window.setTimeout(
             () => this.$emit('valueChanged', this.propValue)
-        , 300);
+            , 300);
     }
 
     private onFocus(event): void {
@@ -119,6 +126,10 @@ export class MTexteField extends Vue implements InputStateMixin {
             this.$emit('click', event, this.propValue);
         }
         event.preventDefault();
+    }
+
+    private onChange(event) {
+        this.$emit('change', event, this.propValue);
     }
 
     private checkHasValue(): void {

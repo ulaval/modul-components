@@ -2,7 +2,7 @@
       :class="[{ 'm--is-focus' : isFocusActive || forceFocus,
           'm--not-editable' : !propEditable,
           'm--is-disabled' : isDisabled,
-          'm--has-error' : hasError,
+          'm--has-error' : error,
           'm--is-valid' : isValid,
           'm--is-empty-value' : isEmptyValue },
           'm--is-type-' + propType ]">
@@ -14,6 +14,8 @@
                @focus="onFocus"
                @blur="onBlur"
                @keyup="onKeyup"
+               @change="onChange"
+               :placeholder="placeholder"
                v-model="propValue"
                v-if="propEditable">
         <a href="#"
@@ -27,7 +29,7 @@
             <span class="m-text-field__input__value" v-if="isDefaultTextEmpty">{{ propValue }}</span>
             <span class="m-text-field__input__default-text" :aria-hidden="isDefaultTextEmpty" :class="{ 'm--is-transparent': isDefaultTextEmpty }">- {{ propDefaultText}} -</span>
         </a>
-        <m-icon :name="iconName" class="m-text-field__icon" v-if="hasIcon"></m-icon>
+        <m-button mode="icon" :icon-name="iconName" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>
         <span aria-hidden="true" class="m-text-field__input-line"></span>
     </span>
     <m-validation-message
