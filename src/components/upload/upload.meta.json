@@ -21,9 +21,6 @@
         "showImage": {
             "type": "boolean",
             "default": false
-        },
-        "className": {
-            "type": "string"
         }
     },
     "overview": [

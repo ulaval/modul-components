@@ -19,8 +19,6 @@ export class MValidationMessage extends ModulVue {
     public helper: string;
     @Prop({ default: '' })
     public valid: string;
-    @Prop()
-    public className: string;
 
     public componentName = VALIDATION_MESSAGE_NAME;
 
