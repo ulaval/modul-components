@@ -32,8 +32,6 @@ export class DialogTemplate extends ModulVue implements DialogTemplateMixin {
     public closeOnBackdrop: boolean;
     @Prop({ default: '' })
     public title: string;
-    @Prop()
-    public className: string;
     @Prop({ default: true })
     public padding: boolean;
     @Prop({ default: true })

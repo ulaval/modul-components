@@ -63,8 +63,6 @@ export class MUpload extends ModulVue implements MUploadInterface {
     public maxSizeBytes: number;
     @Prop({ default: false })
     public showImage: boolean;
-    @Prop()
-    public className: string;
 
     public globalFileList: GlobalFileList[] = [];
     public uploadErrors: IUploadError = {};
