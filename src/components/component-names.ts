@@ -25,6 +25,7 @@ export const POPUP_NAME: string = 'm-popup';
 export const RADIO_BUTTONS_NAME: string = 'm-radio-buttons';
 export const SECONDARY_DIALOG_NAME: string = 'm-secondary-dialog';
 export const SELECT_NAME: string = 'm-select';
+export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
 export const STATUS_LIST_NAME: string = 'm-status-list';
 export const STEP_NAME: string = 'm-step';
@@ -67,6 +68,7 @@ export const components: string[] = [
     RADIO_BUTTONS_NAME,
     SECONDARY_DIALOG_NAME,
     SELECT_NAME,
+    SLIDER_NAME,
     SPINNER_NAME,
     STATUS_LIST_NAME,
     STEP_NAME,

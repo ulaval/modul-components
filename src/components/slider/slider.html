@@ -1,0 +1,4 @@
+<div class="m-slider" @click="onClick" @keydown="onKeydown" ref="m-slider" tabindex="0">
+    <div class="m-slider__track" :style="{width: percentage + '%'}"></div>
+    <v-touch class="m-slider__thumb" @panmove="onPanmove" @panend="onPanend" :style="{left: percentage + '%'}"></v-touch>
+</div>

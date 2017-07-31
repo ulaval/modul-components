@@ -1,0 +1,27 @@
+@import 'abstracts/variables';
+$m-slider-height: 3px;
+$m-slider-thumb: 17px;
+
+.m-slider {
+    height: $m-slider-height;
+    background-color: $m-color--grey-dark;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+
+    &__track {
+        background-color: $m-color--primary;
+        height: 100%;
+    }
+
+    &__thumb {
+        position: absolute;
+        width: $m-slider-thumb;
+        height: $m-slider-thumb;
+        top: - ($m-slider-thumb - $m-slider-height) / 2;
+        margin-left: -$m-slider-thumb / 2;
+        background-color: $m-color--primary;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+}
