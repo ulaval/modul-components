@@ -5,14 +5,16 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './panel.html?style=./panel.scss';
 import { PANEL_NAME } from '../component-names';
 
-const MODE_PRIMARY: string = 'primary';
-const MODE_SECONDARY: string = 'secondary';
+export enum MPanelMode {
+    PRIMARY = 'primary',
+    SECONDARY = 'secondary'
+}
 
 @WithRender
 @Component
 export class MPanel extends Vue {
-    @Prop({ default: MODE_PRIMARY })
-    public mode: string;
+    @Prop({ default: MPanelMode.PRIMARY })
+    public mode: MPanelMode;
     @Prop({ default: true })
     public shadow: boolean;
     @Prop({ default: true })
@@ -28,8 +30,8 @@ export class MPanel extends Vue {
 
     public componentName: string = PANEL_NAME;
 
-    private get propMode(): string {
-        return this.mode == MODE_PRIMARY ? MODE_PRIMARY : MODE_SECONDARY;
+    private get propMode(): MPanelMode {
+        return this.mode == MPanelMode.SECONDARY ? MPanelMode.SECONDARY : MPanelMode.PRIMARY;
     }
 
     private get hasHeader(): boolean {
