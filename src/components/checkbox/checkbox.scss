@@ -28,34 +28,39 @@ $m-checkbox--width: 16px;
 
                 &__icon {
                     position: relative;
-                    top: 0;
-                    left: 2px;
+                    top: -1px; // Magic number
+                    left: 1px; // Magic number
                     width: 10px;
-                    height: 1px;
-                    transform: rotate(-60deg);
+                    height: 5px;
+                    transform: rotate(-32deg);
 
                     &::before,
                     &::after {
-                        transition: 0.1s width ease;
                         position: absolute;
                         bottom: 0;
+                        left: 0;
                         content: '';
                         background: $m-color--primary;
                         width: 0;
-                        height: 2px;
                         border-radius: 2px;
                     }
 
                     &::before {
-                        left: 1px; //Magic number
+                        bottom: 0;
+                        transition: 0.1s width ease;
                         transition-delay: 0;
-                        transform: rotate(-75deg);
-                        transform-origin: 0;
+                        transform: rotate(-20deg);
+                        width: 0;
+                        height: 2px;
                     }
 
                     &::after {
+                        top: 0;
+                        transition: 0.1s height ease;
                         transition-delay: 0.1s;
-                        right: 0;
+                        width: 2px;
+                        height: 0;
+
                     }
                 }
             }
@@ -81,12 +86,12 @@ $m-checkbox--width: 16px;
                     &__icon {
                         &::before {
                             transition-delay: 0.2s;
-                            width: 6px;
+                            width: 10px;
                         }
 
                         &::after {
                             transition-delay: 0;
-                            width: 10px;
+                            height: 6px;
                         }
                     }
                 }
