@@ -13,13 +13,6 @@ const DIALOG_MODE_PRIMARY = 'primary';
 const DIALOG_MODE_SECONDARY = 'secondary';
 const DIALOG_MODE_PANEL = 'panel';
 
-export interface IPopperOptions {
-    placement: string;
-    gpuAcceleration: boolean;
-    modifiers: any;
-    onCreate: Function;
-}
-
 @WithRender
 @Component({
     mixins: [MediaQueries]
@@ -82,9 +75,8 @@ export class MPopper extends Vue {
     public isPopperOpen: boolean = false;
     public animPopperActive: boolean = false;
     public currentPlacement: string = '';
-    public popperOptions: IPopperOptions = {
+    public popperOptions: Popper.PopperOptions = {
         placement: 'bottom',
-        gpuAcceleration: false,
         modifiers: {},
         onCreate: () => { }
     };
@@ -149,9 +141,9 @@ export class MPopper extends Vue {
             if (this.boundariesSelector) {
                 const boundariesElement = document.querySelector(this.boundariesSelector);
 
-                if (boundariesElement) {
-                    this.popperOptions.modifiers = { ...this.popperOptions.modifiers };
-                    this.popperOptions.modifiers.preventOverflow = { ...this.popperOptions.modifiers.preventOverflow };
+                if (this.popperOptions.modifiers && this.popperOptions.modifiers.preventOverflow && boundariesElement) {
+                    // this.popperOptions.modifiers = { ...this.popperOptions.modifiers };
+                    // this.popperOptions.modifiers.preventOverflow = { ...this.popperOptions.modifiers.preventOverflow };
                     this.popperOptions.modifiers.preventOverflow.boundariesElement = boundariesElement;
                 }
             }
