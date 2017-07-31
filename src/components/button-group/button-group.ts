@@ -46,7 +46,7 @@ export class MButtonGroup extends Vue {
     public icon: boolean;
     @Prop({ default: ICON_POSITION_LEFT })
     public iconPosition: string;
-    @Prop({ default: true })
+    @Prop({ default: false })
     public fullSize: boolean;
 
     public componentName: string = BUTTON_GROUP_NAME;

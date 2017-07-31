@@ -81,6 +81,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
     }
 
     &.m--is-icon {
+        transition: 0.3s color ease;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -91,6 +92,11 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         min-width: $m-touch-size;
         min-height: $m-touch-size;
         background: transparent;
+        color: $m-color--black-grey-lighter;
+
+        &:hover {
+            color: $m-color--text;
+        }
 
         &::after {
             transition: 0.3s width ease, 0.3s height ease, 0.2s opacity linear;

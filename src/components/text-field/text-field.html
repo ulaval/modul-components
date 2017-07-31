@@ -1,10 +1,11 @@
 <span class="m-text-field"
       :class="[{ 'm--is-focus' : isFocusActive || forceFocus,
-          'm--not-editable' : !propEditable,
+          'm--not-editable' : !editable,
           'm--is-disabled' : isDisabled,
           'm--has-error' : error,
           'm--is-valid' : isValid,
-          'm--is-empty-value' : isEmptyValue },
+          'm--is-empty-value' : isEmptyValue,
+          'm-has-icon' : hasIcon },
           'm--is-type-' + propType ]">
     <span class="m-text-field__wrap">
         <label class="m-text-field__label" @click="onFocus" v-if="hasLabel || isDisabled"><m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>{{ label }}</label>
@@ -17,19 +18,19 @@
                @change="onChange"
                :placeholder="placeholder"
                v-model="propValue"
-               v-if="propEditable">
+               v-if="editable">
         <a href="#"
            class="m-text-field__input"
            ref="input"
            @focus="onFocus"
            @blur="onBlur"
-           @click="onClick"
+           @click.prevent="onClick"
            @keyup="onKeyup"
-           v-if="!propEditable">
+           v-if="!editable">
             <span class="m-text-field__input__value" v-if="isDefaultTextEmpty">{{ propValue }}</span>
             <span class="m-text-field__input__default-text" :aria-hidden="isDefaultTextEmpty" :class="{ 'm--is-transparent': isDefaultTextEmpty }">- {{ propDefaultText}} -</span>
         </a>
-        <m-button mode="icon" :icon-name="iconName" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>
+        <m-button mode="icon" :icon-name="propIconName" class="m-text-field__icon" v-if="hasIcon" @click="onClickIcon">{{ propIconDescription }}</m-button>
         <span aria-hidden="true" class="m-text-field__input-line"></span>
     </span>
     <m-validation-message

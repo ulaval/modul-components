@@ -17,14 +17,6 @@
                 "left"
             ],
             "default": 1
-        },
-        "label": {
-            "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
         }
     },
     "overview": [

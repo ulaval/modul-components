@@ -17,6 +17,7 @@ const FrenchPlugin: PluginObject<any> = {
             (v as any).$i18n.addMessages(FRENCH, require('../components/select/select.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/spinner/spinner.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/switch/switch.lang.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/text-field/text-field.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/validation-message/validation-message.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/upload/upload.lang.fr.json'));
         } else {
