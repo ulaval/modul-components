@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
@@ -17,13 +17,16 @@ const STATE_DISABLED = 'disabled';
 const STATE_ERROR = 'error';
 const STATE_VALID = 'valid';
 
+const ICON_NAME_PASSWORD_VISIBLE = 'default';
+const ICON_NAME_PASSWORD_HIDDEN = 'default';
+
 @WithRender
 @Component({
     mixins: [
         InputState
     ]
 })
-export class MTexteField extends Vue implements InputStateMixin {
+export class MTexteField extends ModulVue implements InputStateMixin {
 
     @Prop({ default: TYPE_TEXT })
     public type: string;
@@ -55,25 +58,22 @@ export class MTexteField extends Vue implements InputStateMixin {
     private propValue: string = '';
     private propDefaultText: string;
     private propErrorMessage: string = this.error;
-    private hasIcon: boolean;
+    private propIconName: string = this.error;
+    private propIconDescription: string = '';
+    private typeIsPassword: boolean = false;
     private isEmptyValue: boolean = false;
     private isDefaultTextEmpty: boolean = false;
     private isFocusActive: boolean = false;
     private isUpdating: number;
 
+    private iconDescriptionPasswordShow: string = this.$i18n.translate('m-text-field:password-show');
+    private iconDescriptionPasswordHide: string = this.$i18n.translate('m-text-field:password-hide');
+
     protected beforeMount(): void {
         this.propValue = this.value;
         this.propDefaultText = this.defaultText;
-        this.hasIcon = this.iconName != '';
         this.checkHasValue();
         this.checkHasDefaultText();
-    }
-
-    protected mounted() {
-        if (this.propEditable) {
-            // Set attribute type on input refs
-            this.$refs.input['type'] = this.propType;
-        }
     }
 
     @Watch('value')
@@ -125,7 +125,26 @@ export class MTexteField extends Vue implements InputStateMixin {
         if (!this.isDisabled) {
             this.$emit('click', event, this.propValue);
         }
-        event.preventDefault();
+    }
+
+    private onClickIcon(event): void {
+        this.isFocusActive = this.isDisabled ? false : true;
+        if (this.editable) {
+            this.$refs.input['focus']();
+        }
+        if (this.propType == TYPE_PASSWORD) {
+            if (this.typeIsPassword) {
+                this.setType(TYPE_TEXT);
+                this.typeIsPassword = false;
+                this.propIconDescription = this.iconDescriptionPasswordHide;
+                this.propIconName = ICON_NAME_PASSWORD_HIDDEN;
+            } else {
+                this.setType(TYPE_PASSWORD);
+                this.typeIsPassword = true;
+                this.propIconDescription = this.iconDescriptionPasswordShow;
+                this.propIconName = ICON_NAME_PASSWORD_VISIBLE;
+            }
+        }
     }
 
     private onChange(event) {
@@ -146,16 +165,32 @@ export class MTexteField extends Vue implements InputStateMixin {
         }
     }
 
+    private setType(type: string): void {
+        if (this.editable) {
+            // Set attribute type on input refs
+            ModulVue.nextTick(() => {
+                this.$refs.input['type'] = type;
+            });
+        }
+    }
+
     private get propType(): string {
-        return this.type == TYPE_PASSWORD || this.type == TYPE_EMAIL || this.type == TYPE_URL || this.type == TYPE_TEL ? this.type : TYPE_TEXT;
+        let type: string = this.type == TYPE_PASSWORD || this.type == TYPE_EMAIL || this.type == TYPE_URL || this.type == TYPE_TEL ? this.type : TYPE_TEXT;
+        if (type == TYPE_PASSWORD) {
+            this.typeIsPassword = true;
+            this.propIconDescription = this.iconDescriptionPasswordShow;
+        }
+        this.setType(type);
+        return type;
     }
 
     private get hasLabel(): boolean {
         return this.label == '' || this.label == undefined ? false : true;
     }
 
-    private get propEditable(): boolean {
-        return this.editable;
+    private get hasIcon(): boolean {
+        this.propIconName = this.propType == TYPE_PASSWORD ? ICON_NAME_PASSWORD_VISIBLE : this.iconName;
+        return this.propIconName != '';
     }
 }
 
