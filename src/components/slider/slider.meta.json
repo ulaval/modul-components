@@ -1,0 +1,41 @@
+{
+    "tag": "m-slider",
+    "name": "m-slider-meta:name",
+    "attributes": {
+        "value": {
+            "type": "number",
+            "default": 50
+        },
+        "min": {
+            "type": "number",
+            "default": 0
+        },
+        "max": {
+            "type": "number",
+            "default": 100
+        },
+        "step": {
+            "type": "number",
+            "default": 1
+        }
+    },
+    "overview": [{
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-slider-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-slider-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-slider-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-slider-meta:dont"
+        }
+    ]
+}
