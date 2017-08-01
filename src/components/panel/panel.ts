@@ -6,14 +6,16 @@ import WithRender from './panel.html?style=./panel.scss';
 import { PANEL_NAME } from '../component-names';
 
 export enum MPanelMode {
-    PRIMARY = 'primary',
-    SECONDARY = 'secondary'
+    Primary = 'primary',
+    Secondary = 'secondary'
 }
+
+const HEADER_RIGHT_CONTENT: string = 'header-right-content';
 
 @WithRender
 @Component
 export class MPanel extends Vue {
-    @Prop({ default: MPanelMode.PRIMARY })
+    @Prop({ default: MPanelMode.Primary })
     public mode: MPanelMode;
     @Prop({ default: true })
     public shadow: boolean;
@@ -31,18 +33,18 @@ export class MPanel extends Vue {
     public componentName: string = PANEL_NAME;
 
     private get propMode(): MPanelMode {
-        return this.mode == MPanelMode.SECONDARY ? MPanelMode.SECONDARY : MPanelMode.PRIMARY;
+        return this.mode == MPanelMode.Secondary ? MPanelMode.Secondary : MPanelMode.Primary;
     }
 
     private get hasHeader(): boolean {
-        if (this.$slots.header || this.$slots['header-right-content']) {
+        if (this.$slots.header || this.$slots[HEADER_RIGHT_CONTENT]) {
             return true;
         }
         return false;
     }
 
     private get hasHeaderRightContentSlot(): boolean {
-        return !!this.$slots['header-right-content'];
+        return !!this.$slots[HEADER_RIGHT_CONTENT];
     }
 
     private get hasHeaderSlot(): boolean {

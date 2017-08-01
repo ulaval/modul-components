@@ -6,11 +6,13 @@ import WithRender from './step.html?style=./step.scss';
 import { STEP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 
-const STATE_LOCKED: string = 'locked';
-const STATE_IN_PROGRESS: string = 'in-progress';
-const STATE_SUCCESS: string = 'success';
-const STATE_WARNING: string = 'warning';
-const STATE_ERROR: string = 'error';
+export enum MStepState {
+    Locked = 'locked',
+    InProgress = 'in-progress',
+    Success = 'success',
+    Warning = 'warning',
+    Error = 'error'
+}
 
 @WithRender
 @Component({
@@ -19,8 +21,8 @@ const STATE_ERROR: string = 'error';
     ]
 })
 export class MStep extends Vue {
-    @Prop({ default: STATE_LOCKED })
-    public state: string;
+    @Prop({ default: MStepState.Locked })
+    public state: MStepState;
     @Prop({ default: false })
     public open: boolean;
     @Prop({ default: false })
@@ -55,16 +57,16 @@ export class MStep extends Vue {
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
-            case STATE_LOCKED:
+            case MStepState.Locked:
                 icon = 'default';
                 break;
-            case STATE_SUCCESS:
+            case MStepState.Success:
                 icon = 'chip-check';
                 break;
-            case STATE_WARNING:
+            case MStepState.Warning:
                 icon = 'chip-check-yellow';
                 break;
-            case STATE_ERROR:
+            case MStepState.Error:
                 icon = 'chip-error';
                 break;
             default:
