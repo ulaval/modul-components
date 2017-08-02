@@ -6,18 +6,24 @@ import WithRender from './button.html?style=./button.scss';
 import { BUTTON_NAME } from '../component-names';
 import { ICON_NAME } from '../component-names';
 
-const TYPE_BUTTON: string = 'button';
-const TYPE_SUBMIT: string = 'submit';
-const TYPE_RESET: string = 'reset';
+export enum MButtonType {
+    Button = 'button',
+    Submit = 'submit',
+    Reset = 'reset'
+}
 
-const MODE_PRIMARY: string = 'primary';
-const MODE_SECONDARY: string = 'secondary';
-const MODE_ICON: string = 'icon';
+export enum MButtonMode {
+    Primary = 'primary',
+    Secondary = 'secondary',
+    Icon = 'icon'
+}
 
-const STATE_DEFAULT: string = 'default';
-const STATE_DISABLED: string = 'disabled';
-const STATE_WAITING: string = 'waiting';
-const STATE_SELECTED: string = 'selected';
+export enum MButtonState {
+    Default = 'default',
+    Disabled = 'disabled',
+    Waiting = 'waiting',
+    Selected = 'selected'
+}
 
 const ICON_POSITION_LEFT: string = 'left';
 const ICON_SIZE: string = '16px';
@@ -27,12 +33,12 @@ const ICON_SIZE_SMALL: string = '12px';
 @Component
 export class MButton extends Vue {
 
-    @Prop({ default: TYPE_BUTTON })
-    public type: string;
-    @Prop({ default: MODE_PRIMARY })
-    public mode: string;
-    @Prop({ default: STATE_DEFAULT })
-    public state: string;
+    @Prop({ default: MButtonType.Button })
+    public type: MButtonType;
+    @Prop({ default: MButtonMode.Primary })
+    public mode: MButtonMode;
+    @Prop({ default: MButtonState.Default })
+    public state: MButtonState;
     @Prop()
     public iconName: string;
     @Prop({ default: ICON_POSITION_LEFT })
@@ -44,7 +50,7 @@ export class MButton extends Vue {
 
     public componentName: string = BUTTON_NAME;
 
-    private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "iconName" is undefined';
+    private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "icon-name" is undefined';
 
     private onClick(event): void {
         this.$emit('click');
@@ -52,19 +58,19 @@ export class MButton extends Vue {
     }
 
     private get propType(): string {
-        return this.type != TYPE_SUBMIT && this.type != TYPE_RESET ? TYPE_BUTTON : this.type;
+        return this.type != MButtonType.Submit && this.type != MButtonType.Reset ? MButtonType.Button : this.type;
     }
 
     private get propMode(): string {
-        return this.mode != MODE_SECONDARY && this.mode != MODE_ICON ? MODE_PRIMARY : this.mode;
+        return this.mode != MButtonMode.Secondary && this.mode != MButtonMode.Icon ? MButtonMode.Primary : this.mode;
     }
 
     private get propState(): string {
-        return this.state != STATE_DISABLED && this.state != STATE_WAITING && this.state != STATE_SELECTED ? STATE_DEFAULT : this.state;
+        return this.state != MButtonState.Disabled && this.state != MButtonState.Waiting && this.state != MButtonState.Selected ? MButtonState.Default : this.state;
     }
 
     private get propIconSize(): string {
-        if (this.iconSize == MODE_ICON) {
+        if (this.mode == MButtonMode.Icon) {
             return this.iconSize == undefined ? ICON_SIZE : this.iconSize;
         }
         return this.iconSize == undefined ? ICON_SIZE_SMALL : this.iconSize;
@@ -79,10 +85,7 @@ export class MButton extends Vue {
     }
 
     private get isDisabled(): boolean {
-        if (this.propState == STATE_WAITING || this.propState == STATE_DISABLED || this.propState == STATE_SELECTED) {
-            return true;
-        }
-        return false;
+        return this.propState == MButtonState.Waiting || this.propState == MButtonState.Disabled || this.propState == MButtonState.Selected;
     }
 
     private get hasMoreInfo(): boolean {
