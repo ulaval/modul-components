@@ -6,6 +6,7 @@ import WithRender from './datepicker.html?style=./datepicker.scss';
 import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
 import { curLang } from '../../utils/i18n/i18n';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -25,8 +26,10 @@ export interface DatepickerMonth {
 }
 
 @WithRender
-@Component
-export class MDatepicker extends ModulVue {
+@Component({
+    mixins: [InputState]
+})
+export class MDatepicker extends ModulVue implements InputStateMixin {
 
     @Prop({ default: () => { return moment(); } })
     public value: moment.Moment;
@@ -36,6 +39,13 @@ export class MDatepicker extends ModulVue {
     public min: moment.Moment;
     @Prop({ default: () => { return moment().add(10, 'year'); } })
     public max: moment.Moment;
+
+    // Variables from InputStateMixin
+    public hasError: boolean;
+    public isDisabled: boolean;
+    public isValid: boolean;
+
+    public componentName: string = DATEPICKER_NAME;
 
     private view: string = 'day';
     private selectedDate: DatepickerDate = { day: 0, month: 0, year: 0, isDisabled: false };

@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './tabs.html?style=./tabs.scss';
 import { TABS_NAME, TAB_PANE_NAME } from '../component-names';
+import { MTabPane } from '../tab-pane/tab-pane';
 
 const ASPECT_REGULAR: string = 'regular';
 const ASPECT_LIGHT: string = 'light';
@@ -25,21 +26,22 @@ export class MTabs extends Vue {
     protected mounted(): void {
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkTabPane(i)) {
-                this.$children[i]['id'] = this.nbTabPane;
-                if (this.$children[i]['isSelected'] ) {
+                let tabPane: MTabPane = this.$children[i] as MTabPane;
+                tabPane.id = this.nbTabPane;
+                if (tabPane.isSelected ) {
                     this.indexTabPaneSelected = this.nbTabPane;
                 }
-                this.$children[i]['unselectTab']();
+                tabPane.unselectTab();
                 this.arrTabPane.push({
                     id: this.nbTabPane,
-                    value: this.$children[i]['label'],
-                    isSelected: this.$children[i]['isSelected'],
+                    value: tabPane.label,
+                    isSelected: tabPane.isSelected,
                     childrenNumber: i
                 });
                 this.nbTabPane++;
             }
         }
-        this.$children[this.arrTabPane[this.indexTabPaneSelected].childrenNumber]['selectTab']();
+        (this.$children[this.arrTabPane[this.indexTabPaneSelected].childrenNumber] as MTabPane).selectTab();
         this.loading = false;
     }
 
@@ -47,19 +49,20 @@ export class MTabs extends Vue {
         this.indexTabPaneSelected = index;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkTabPane(i)) {
-                if (this.$children[i]['id'] == index) {
-                    this.$children[i]['selectTab']();
-                    this.arrTabPane[index]['isSelected'] = true;
+                let tabPane: MTabPane = this.$children[i] as MTabPane;
+                if (tabPane.id == index) {
+                    tabPane.selectTab();
+                    tabPane.isSelected = true;
                 } else {
-                    this.$children[i]['unselectTab']();
-                    this.arrTabPane[index]['isSelected'] = false;
+                    tabPane.unselectTab();
+                    this.arrTabPane[index].isSelected = false;
                 }
             }
         }
     }
 
     private checkTabPane(index: number): boolean {
-        return this.$children[index]['componentName'] == TAB_PANE_NAME ? true : false;
+        return (this.$children[index] as MTabPane).componentName == TAB_PANE_NAME ? true : false;
     }
 
     private get propAspect(): string {

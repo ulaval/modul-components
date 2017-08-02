@@ -15,15 +15,14 @@ export class MTabPane extends Vue {
     public selected: boolean;
 
     public componentName = TAB_PANE_NAME;
+    public id: number;
+    public isSelected: boolean = false;
 
-    private id: number;
-    private isSelected: boolean = false;
-
-    private selectTab(): void {
+    public selectTab(): void {
         this.isSelected = true;
     }
 
-    private unselectTab(): void {
+    public unselectTab(): void {
         this.isSelected = false;
     }
 

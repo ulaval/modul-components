@@ -3,9 +3,9 @@ $m-slider-height: 3px;
 $m-slider-thumb: 17px;
 
 .m-slider {
+    position: relative;
     height: $m-slider-height;
     background-color: $m-color--grey-dark;
-    position: relative;
     cursor: pointer;
     outline: none;
 
