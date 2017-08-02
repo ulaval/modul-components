@@ -33,6 +33,7 @@ export class MCheckbox extends Vue {
     protected set propChecked(value: boolean) {
         if (this.internalPropChecked != value) {
             this.internalPropChecked = value;
+            this.$emit('update:checked', value);
             this.$emit('checked', value);
         }
     }
