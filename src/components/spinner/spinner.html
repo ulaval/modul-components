@@ -1,5 +1,5 @@
-<div class="m-spinner" :aria-hidden="!defaultTagetElVisible">
-    <portal :target-el="'#'+ spinnerId" v-if="spinnerVisible">
+<div class="m-spinner" :aria-hidden="!defaultTargetElVisible">
+    <portal :target-el="'#'+ getSpinnerId()" v-if="spinnerVisible">
         <div class="m-spinner__wrap"
              :class="{'m--is-loading': mode == 'loading',
                     'm--is-processing': mode == 'processing',
@@ -13,6 +13,6 @@
             <p class="m-spinner__description" v-if="hasDescription">{{ description }}</p>
         </div>
     </portal>
-    <div :id="spinnerId" v-if="defaultTagetElVisible"></div>
+    <div :id="spinnerId" v-if="defaultTargetElVisible"></div>
 </div>
 
