@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './switch.html?style=./switch.scss';
 import { SWITCH_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
@@ -22,16 +22,29 @@ export class MSwitch extends Vue {
     public helperText: boolean;
 
     public componentName: string = SWITCH_NAME;
-    private propsChecked: boolean = true;
-    private propsLabel: boolean = true;
-    private propsHelperText: boolean = true;
+    private internalPropChecked: boolean = false;
     private isFocus = false;
     private id: string = `switch${uuid.generate()}`;
 
     protected mounted(): void {
-        this.propsChecked = this.checked;
-        this.propsLabel = this.label;
-        this.propsHelperText = this.helperText;
+        this.propChecked = this.checked;
+    }
+
+    protected get propChecked(): boolean {
+        return this.internalPropChecked;
+    }
+
+    protected set propChecked(value: boolean) {
+        if (this.internalPropChecked != value) {
+            this.internalPropChecked = value;
+            this.$emit('update:checked', value);
+            this.$emit('checked', value);
+        }
+    }
+
+    @Watch('checked')
+    private checkedChanged(value: boolean): void {
+        this.propChecked = this.checked;
     }
 
     private onClick(event): void {
