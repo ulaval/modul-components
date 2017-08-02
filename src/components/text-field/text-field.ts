@@ -14,7 +14,6 @@ const TYPE_TEL = 'tel';
 
 const STATE_DEFAULT = 'default';
 const STATE_DISABLED = 'disabled';
-const STATE_ERROR = 'error';
 const STATE_VALID = 'valid';
 
 const ICON_NAME_PASSWORD_VISIBLE = 'default';
@@ -45,8 +44,6 @@ export class MTexteField extends ModulVue implements InputStateMixin {
     @Prop({ default: false })
     public forceFocus: boolean;
     @Prop()
-    public error: string;
-    @Prop()
     public placeholder: string;
 
     public componentName: string = TEXT_FIELD_NAME;
@@ -57,8 +54,7 @@ export class MTexteField extends ModulVue implements InputStateMixin {
 
     private propValue: string = '';
     private propDefaultText: string;
-    private propErrorMessage: string = this.error;
-    private propIconName: string = this.error;
+    private propIconName: string;
     private propIconDescription: string = '';
     private typeIsPassword: boolean = false;
     private isEmptyValue: boolean = false;
