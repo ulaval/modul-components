@@ -20,7 +20,7 @@
                      'm--is-anim-active': isAnimActive,
                      'm--is-left': propIconPosition != 'right',
                      'm--is-large': propIconSize=='large',
-                     'm--has-border': propIconAspect=='border' }"></span>
+                     'm--has-border': propIconAspect=='regular' }"></span>
     </header>
     <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
         <div class="m-accordion__body-wrap" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propOpen">

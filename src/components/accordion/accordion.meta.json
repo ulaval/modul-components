@@ -26,10 +26,10 @@
         "iconAspect": {
             "type": "string",
             "values": [
-                "default",
-                "border"
+                "regular",
+                "light"
             ],
-            "default": 0
+            "default": 1
         },
         "iconSize": {
             "type": "string",

@@ -6,49 +6,81 @@ import WithRender from './accordion.html?style=./accordion.scss';
 import { ACCORDION_NAME, ACCORDION_GROUP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 
-const ASPECT_REGULAR: string = 'regular';
-const ASPECT_LIGHT: string = 'light';
-const ASPECT_NO_STYLE: string = 'no-style';
+export enum MAccordionAspect {
+    REGULAR = 'regular',
+    LIGHT = 'light',
+    NO_STYLE= 'no-style'
+}
 
-const ICON_POSITION_LEFT: string = 'left';
-const ICON_POSITION_RIGHT: string = 'right';
+export enum MAccordionIconPosition {
+    LEFT = 'left',
+    RIGHT = 'right'
+}
 
-const ICON_STYLE_DEFAULT: string = 'default';
-const ICON_STYLE_BORDER: string = 'border';
+export enum MAccordionIconAspect {
+    REGULAR = 'regular',
+    LIGHT = 'light'
+}
 
-const ICON_SIZE_SMALL: string = 'small';
-const ICON_SIZE_LARGE: string = 'large';
+export enum MAccordionIconASize {
+    SMALL = 'small',
+    LARGE = 'large'
+}
 
 @WithRender
 @Component({
-    mixins: [
-        TransitionAccordion
-    ]
+    mixins: [TransitionAccordion]
 })
 export class MAccordion extends Vue implements TransitionAccordionMixin {
 
-    @Prop({ default: ASPECT_REGULAR })
-    public aspect: string;
+    @Prop({ default: MAccordionAspect.REGULAR })
+    public aspect: MAccordionAspect;
     @Prop()
     public open: boolean;
     @Prop()
-    public iconPosition: string;
+    public iconPosition: MAccordionIconPosition;
     @Prop()
-    public iconAspect: string;
+    public iconAspect: MAccordionIconAspect;
     @Prop()
-    public iconSize: string;
+    public iconSize: MAccordionIconASize;
 
-    public componentName: string = ACCORDION_NAME;
+    // Variable form TransitionAccordionMixin
     public isAnimActive: boolean = false;
 
-    private propAspect: string = ASPECT_REGULAR;
-    private propOpen: boolean = false;
-    private propIconPosition: string = ICON_POSITION_RIGHT;
-    private propIconAspect: string = ICON_STYLE_DEFAULT;
-    private propIconSize: string = ICON_SIZE_LARGE;
-    private eventBus: Vue = new Vue();
+    public componentName: string = ACCORDION_NAME;
+    public propAspect: string = MAccordionAspect.REGULAR;
+    public propOpen: boolean = false;
+    public eventBus: Vue = new Vue();
+    public id: number;
 
-    private accordionID: number;
+    private propIconPosition: string = MAccordionIconPosition.RIGHT;
+    private propIconAspect: string = MAccordionIconAspect.LIGHT;
+    private propIconSize: string = MAccordionIconASize.LARGE;
+
+    public resetAspect(type): void {
+        switch (type) {
+            case MAccordionAspect.LIGHT:
+                this.propIconPosition = MAccordionIconPosition.LEFT;
+                this.propIconSize = MAccordionIconASize.SMALL;
+                this.propIconAspect = MAccordionIconAspect.REGULAR;
+                break;
+            case MAccordionAspect.NO_STYLE:
+                this.setAspectNoStyle();
+                break;
+            default:
+                this.propIconPosition = MAccordionIconPosition.RIGHT;
+                this.propIconSize = MAccordionIconASize.LARGE;
+                this.propIconAspect = MAccordionIconAspect.LIGHT;
+        }
+    }
+
+    public openAccordion(): void {
+        this.propOpen = true;
+    }
+
+    public closeAccordion(): void {
+        this.propOpen = false;
+    }
 
     protected beforeMount(): void {
         this.propAspect = this.aspect;
@@ -61,80 +93,55 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
 
     private setAspect(): void {
         switch (this.propAspect) {
-            case ASPECT_LIGHT:
+            case MAccordionAspect.LIGHT:
                 if (this.propIconPosition == undefined) {
-                    this.propIconPosition = ICON_POSITION_LEFT;
+                    this.propIconPosition = MAccordionIconPosition.LEFT;
                 }
                 if (this.propIconSize == undefined) {
-                    this.propIconSize = ICON_SIZE_SMALL;
+                    this.propIconSize = MAccordionIconASize.SMALL;
                 }
                 if (this.propIconAspect == undefined) {
-                    this.propIconAspect = ICON_STYLE_BORDER;
+                    this.propIconAspect = MAccordionIconAspect.REGULAR;
                 }
                 break;
-            case ASPECT_NO_STYLE:
+            case MAccordionAspect.NO_STYLE:
                 this.setAspectNoStyle();
                 break;
             default:
                 if (this.propIconPosition == undefined) {
-                    this.propIconPosition = ICON_POSITION_RIGHT;
+                    this.propIconPosition = MAccordionIconPosition.RIGHT;
                 }
                 if (this.propIconSize == undefined) {
-                    this.propIconSize = ICON_SIZE_LARGE;
+                    this.propIconSize = MAccordionIconASize.LARGE;
                 }
                 if (this.propIconAspect == undefined) {
-                    this.propIconAspect = ICON_STYLE_DEFAULT;
+                    this.propIconAspect = MAccordionIconAspect.LIGHT;
                 }
-        }
-    }
-
-    private resetAspect(type): void {
-        switch (type) {
-            case ASPECT_LIGHT:
-                this.propIconPosition = ICON_POSITION_LEFT;
-                this.propIconSize = ICON_SIZE_SMALL;
-                this.propIconAspect = ICON_STYLE_BORDER;
-                break;
-            case ASPECT_NO_STYLE:
-                this.setAspectNoStyle();
-                break;
-            default:
-                this.propIconPosition = ICON_POSITION_RIGHT;
-                this.propIconSize = ICON_SIZE_LARGE;
-                this.propIconAspect = ICON_STYLE_DEFAULT;
         }
     }
 
     private setAspectNoStyle(): void {
         if (this.propIconPosition == undefined) {
-            this.propIconPosition = ICON_POSITION_RIGHT;
+            this.propIconPosition = MAccordionIconPosition.RIGHT;
         }
         if (this.propIconSize == undefined) {
-            this.propIconSize = ICON_SIZE_LARGE;
+            this.propIconSize = MAccordionIconASize.LARGE;
         }
         if (this.propIconAspect == undefined) {
-            this.propIconAspect = ICON_STYLE_DEFAULT;
+            this.propIconAspect = MAccordionIconAspect.LIGHT;
         }
     }
 
-    private toggleAccordion(event): void {
+    private toggleAccordion(): void {
         this.isAnimActive = true;
         this.propOpen = !this.propOpen;
         this.$refs.accordionHeader['blur']();
-        this.eventBus.$emit('click', this.accordionID, this.propOpen);
-        this.$emit('click', this.accordionID, this.propOpen);
-    }
-
-    private openAccordion(): void {
-        this.propOpen = true;
-    }
-
-    private closeAccordion(): void {
-        this.propOpen = false;
+        this.eventBus.$emit('click', this.id, this.propOpen);
+        this.$emit('click', this.id, this.propOpen);
     }
 
     private get isAspectRegular(): boolean {
-        return this.propAspect == ASPECT_LIGHT || this.propAspect == ASPECT_NO_STYLE ? false : true;
+        return this.propAspect == MAccordionAspect.LIGHT || this.propAspect == MAccordionAspect.NO_STYLE ? false : true;
     }
 }
 
