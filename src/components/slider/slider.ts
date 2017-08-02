@@ -23,7 +23,7 @@ export class MSlider extends ModulVue {
     private offsetLeft: number;
     private offsetRatio: number;
 
-    private mounted(): void {
+    protected mounted(): void {
         this.offsetLeft = this.$refs['m-slider']['offsetLeft'];
         this.offsetRatio = this.range / this.$refs['m-slider']['clientWidth'];
     }

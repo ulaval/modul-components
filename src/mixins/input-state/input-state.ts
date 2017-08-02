@@ -8,8 +8,8 @@ const STATE_ERROR = 'error';
 const STATE_VALID = 'valid';
 
 export interface InputStateMixin {
-    isDisabled: boolean;
     hasError: boolean;
+    isDisabled: boolean;
     isValid: boolean;
 }
 
