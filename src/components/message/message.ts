@@ -5,21 +5,25 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './message.html?style=./message.scss';
 import { MESSAGE_NAME } from '../component-names';
 
-export const STATE_SUCCESS: string = 'success';
-export const STATE_INFORMATION: string = 'information';
-export const STATE_WARNING: string = 'warning';
-export const STATE_ERROR: string = 'error';
+export enum MMessageState {
+    Success = 'success',
+    Information = 'information',
+    Warning = 'warning',
+    Error = 'error'
+}
 
-export const MODE_REGULAR: string = 'regular';
-export const MODE_LIGHT: string = 'light';
+export enum MMessageMode {
+    Regular = 'regular',
+    Light = 'light'
+}
 
 @WithRender
 @Component
 export class MMessage extends Vue {
-    @Prop({ default: STATE_SUCCESS })
-    public state: string;
-    @Prop({ default: MODE_REGULAR })
-    public mode: string;
+    @Prop({ default: MMessageState.Success })
+    public state: MMessageState;
+    @Prop({ default: MMessageMode.Regular })
+    public mode: MMessageMode;
     @Prop({ default: true })
     public icon: boolean;
     @Prop({ default: false })
@@ -31,22 +35,21 @@ export class MMessage extends Vue {
 
     private onClose(event): void {
         this.$emit('close', event);
-        this.visible = false;
     }
 
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
-            case STATE_SUCCESS:
+            case MMessageState.Success:
                 icon = 'chip-check';
                 break;
-            case STATE_INFORMATION:
+            case MMessageState.Information:
                 icon = 'default';
                 break;
-            case STATE_WARNING:
+            case MMessageState.Warning:
                 icon = 'chip-warning';
                 break;
-            case STATE_ERROR:
+            case MMessageState.Error:
                 icon = 'chip-error';
                 break;
             default:
@@ -56,7 +59,7 @@ export class MMessage extends Vue {
     }
 
     private get showCloseButton(): boolean {
-        return this.mode == MODE_REGULAR && this.closeButton;
+        return this.mode == MMessageMode.Regular && this.closeButton;
     }
 
 }
