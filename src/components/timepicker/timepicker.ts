@@ -33,6 +33,8 @@ export class MTimepicker extends ModulVue {
     private okButtonText: string = this.$i18n.translate('m-timepicker:button-ok');
     private error: string = '';
     private isOpen: boolean = false;
+    private isMousedown: boolean = false;
+    private scrollTimeout;
 
     private mounted(): void {
         moment.locale(curLang);
@@ -44,7 +46,7 @@ export class MTimepicker extends ModulVue {
         return moment().hour(this.selectedHour).minute(this.selectedMinute).format(this.format);
     }
 
-    private onChange(event, value: string) {
+    private onChange(event, value: string): void {
         let numbers = value.match(/\d+/g);
         if (numbers && numbers.length == 2 && Number(numbers[0]) >= 0 && Number(numbers[0]) < 24 && Number(numbers[1]) >= 0 && Number(numbers[1]) < 60) {
             this.selectedHour = parseInt(numbers[0], 10);
@@ -78,6 +80,28 @@ export class MTimepicker extends ModulVue {
                 container.scrollTop = selectedElement['offsetTop'] - container.clientHeight / 2 + selectedElement.clientHeight / 2;
             }
         }, 10);
+    }
+
+    private onScroll(event: Event): void {
+        if (!this.isMousedown) {
+            clearTimeout(this.scrollTimeout);
+            this.scrollTimeout = setTimeout(() => {
+                if (event.srcElement) this.positionScroll(event.srcElement);
+            }, 300);
+        }
+    }
+
+    private onMousedown(event: Event): void {
+        this.isMousedown = true;
+    }
+
+    private onMouseup(event: Event): void {
+        this.isMousedown = false;
+        if (event.srcElement) this.positionScroll(event.srcElement);
+    }
+
+    private positionScroll(el: Element) {
+        el.scrollTop = Math.round(el.scrollTop / 36) * 36;
     }
 
     private selectHour(hour: number): void {

@@ -4,15 +4,15 @@
         :icon-description="isOpen ? closeTimeSelectorDesc : openTimeSelectorDesc"></m-text-field>
     <div class="m-timepicker" slot="body">
         <div class="m-timepicker__body">
-            <ul class="m-timepicker__hours" ref="hours">
+            <ul class="m-timepicker__hours" ref="hours" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
                 <li v-for="(h, i) in 24"><a class="m-timepicker__hour" :class="{'m--is-selected': i == tempHour}" @click.stop.prevent="selectHour(i)">{{i}}</a></li>
             </ul>
-            <ul class="m-timepicker__minutes" ref="minutes">
+            <ul class="m-timepicker__minutes" ref="minutes" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
                 <li v-for="(m, i) in 60"><a class="m-timepicker__minute" :class="{'m--is-selected': i == tempMinute}" @click.stop.prevent="selectMinute(i)">{{i}}</a></li>
             </ul>
         </div>
         <div class="m-timepicker__footer">
-            <m-button @click="onOk">{{okButtonText}}</m-button>
+            <m-link mode="button" @click="onOk">{{okButtonText}}</m-link>
         </div>
     </div>
 </m-popper>

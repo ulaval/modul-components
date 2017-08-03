@@ -23,7 +23,11 @@
             background: 0 0;
 
             &-track-piece {
-                background: #f1f1f1;
+                background-color: $m-color--grey-lighter;
+            }
+
+            &-thumb {
+                background-color: $m-color--grey;
             }
         }
     }
