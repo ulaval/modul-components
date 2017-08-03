@@ -4,5 +4,4 @@ src/**/*.d.ts
 npm-debug\.log
 tests/reports
 %temp%/
-package-lock.json
 *.tgz
