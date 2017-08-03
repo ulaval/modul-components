@@ -2,7 +2,7 @@
       :class="[{ 'm--is-focus' : isFocusActive || forceFocus,
           'm--not-editable' : !editable,
           'm--is-disabled' : isDisabled,
-          'm--has-error' : hasError,
+          'm--has-error' : error,
           'm--is-valid' : isValid,
           'm--is-empty-value' : isEmptyValue,
           'm-has-icon' : hasIcon },
@@ -35,7 +35,7 @@
     </span>
     <m-validation-message
         :state="propState"
-        :error="propErrorMessage"
+        :error="error"
         :valid="propValidMessage"
         :helper="helperMessage"></m-validation-message>
 </span>

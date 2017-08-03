@@ -35,6 +35,7 @@ export const TABLE_NAME: string = 'm-table';
 export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
 export const TEXT_FIELD_NAME: string = 'm-text-field';
+export const TIMEPICKER_NAME: string = 'm-timepicker';
 export const UPLOAD_NAME: string = 'm-upload';
 export const UPLOAD_INPUT_NAME: string = 'm-upload-input';
 export const UPLOAD_DRAGDROP_NAME: string = 'm-upload-dragdrop';
@@ -78,6 +79,7 @@ export const components: string[] = [
     TABS_NAME,
     TEMPLATE_NAME,
     TEXT_FIELD_NAME,
+    TIMEPICKER_NAME,
     UPLOAD_NAME,
     UPLOAD_INPUT_NAME,
     UPLOAD_DRAGDROP_NAME,
