@@ -9,4 +9,12 @@ export class ModulVue extends Vue {
     public $http: HttpService;
     public $mq: MediaQueries;
     public $mWindow: MWindow;
+
+    protected getParent<T extends Vue>(test: (obj: Vue) => boolean): T | undefined {
+        let p: Vue = this.$parent;
+        while (p && !test(p)) {
+            p = p.$parent;
+        }
+        return p as any;
+    }
 }
