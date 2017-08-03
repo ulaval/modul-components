@@ -82,7 +82,7 @@ export class MediaQueries extends ModulVue implements MediaQueriesMixin {
     private screenXLIn: () => void;
     private screenXLOut: () => void;
 
-    public created(): void {
+    protected created(): void {
         this.screenMinXSIn = () => this.isScreenMinXS = true;
         this.screenMinXSOut = () => this.isScreenMinXS = false;
         this.screenMinSIn = () => this.isScreenMinS = true;
@@ -113,7 +113,7 @@ export class MediaQueries extends ModulVue implements MediaQueriesMixin {
         this.screenXLOut = () => this.isScreenXL = false;
     }
 
-    public mounted(): void {
+    protected mounted(): void {
         this.$mq.register(SCREEN_MIN_W_XS, this.screenMinXSIn, this.screenMinXSOut);
         this.$mq.register(SCREEN_MIN_W_S, this.screenMinSIn, this.screenMinSOut);
         this.$mq.register(SCREEN_MIN_W_M, this.screenMinMIn, this.screenMinMOut);
@@ -131,7 +131,7 @@ export class MediaQueries extends ModulVue implements MediaQueriesMixin {
         this.$mq.register(SCREEN_W_XL, this.screenXLIn, this.screenXLOut);
     }
 
-    public destroyed(): void {
+    protected destroyed(): void {
         this.$mq.unregister(SCREEN_MIN_W_XS, this.screenMinXSIn, this.screenMinXSOut);
         this.$mq.unregister(SCREEN_MIN_W_S, this.screenMinSIn, this.screenMinSOut);
         this.$mq.unregister(SCREEN_MIN_W_M, this.screenMinMIn, this.screenMinMOut);
