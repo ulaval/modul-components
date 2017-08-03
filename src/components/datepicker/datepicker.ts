@@ -61,6 +61,8 @@ export class MDatepicker extends ModulVue implements InputStateMixin {
     private dayRows: any[] = [];
     private error: string = '';
     private placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
+    private openCalendarDesc: string = this.$i18n.translate('m-datepicker:open-calendar-desc');
+    private closeCalendarDesc: string = this.$i18n.translate('m-datepicker:close-calendar-desc');
     private isOpen: boolean = false;
 
     private created(): void {
@@ -218,10 +220,10 @@ export class MDatepicker extends ModulVue implements InputStateMixin {
                 this.$emit('selected', newDate);
                 this.error = '';
             } else {
-                this.error = 'out of bounds error';
+                this.error = this.$i18n.translate('m-datepicker:out-of-bounds-error');
             }
         } else {
-            this.error = 'invalid date error';
+            this.error = this.$i18n.translate('m-datepicker:format-error');
         }
         this.closeDatepicker();
     }

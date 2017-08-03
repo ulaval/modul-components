@@ -1,5 +1,9 @@
 {
     "m-datepicker": {
-        "placeholder": "yyyy mm dd"
+        "placeholder": "yyyy mm dd",
+        "open-calendar-desc": "open calendar",
+        "close-calendar-desc": "close calendar",
+        "out-of-bounds-error": "out of bounds",
+        "format-error": "invalid format"
     }
 }

@@ -44,6 +44,8 @@ export class MTexteField extends ModulVue implements InputStateMixin {
     @Prop({ default: false })
     public forceFocus: boolean;
     @Prop()
+    public error: string;
+    @Prop()
     public placeholder: string;
 
     public componentName: string = TEXT_FIELD_NAME;
