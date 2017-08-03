@@ -1,0 +1,9 @@
+{
+    "m-timepicker": {
+        "button-ok": "OK",
+        "placeholder": "hh mm",
+        "desc-open-time-selector": "open time selector",
+        "desc-close-time-selector": "close time selector",
+        "error-format": "invalid format"
+    }
+}

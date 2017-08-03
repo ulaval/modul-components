@@ -37,6 +37,7 @@ import TablePlugin from './table/table';
 import TabsPlugin from './tabs/tabs';
 import Template from './template/template';
 import TextFieldPlugin from './text-field/text-field';
+import TimepickerPlugin from './timepicker/timepicker';
 import UploadPlugin from './upload/upload';
 import UploadInputPlugin from './upload-input/upload-input';
 import UploadDragdropPlugin from './upload-dragdrop/upload-dragdrop';
@@ -81,6 +82,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TabsPlugin);
         Vue.use(Template);
         Vue.use(TextFieldPlugin);
+        Vue.use(TimepickerPlugin);
         Vue.use(UploadPlugin);
         Vue.use(UploadInputPlugin);
         Vue.use(UploadDragdropPlugin);
