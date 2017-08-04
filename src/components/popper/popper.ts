@@ -88,6 +88,8 @@ export class MPopper extends MediaQueries {
 
     private isDialogOpen: boolean = false;
 
+    private showPopperBody: boolean = true;
+
     public created(): void {
         this.popperOptions = { ...this.popperOptions, ...this.options };
     }
@@ -113,16 +115,20 @@ export class MPopper extends MediaQueries {
     @Watch('isScreenMaxS')
     private isScreenMaxSChanged(value) {
         if (value) {
+            this.showPopperBody = false;
             this.doDestroy();
             this.isDialogOpen = this.isPopperOpen;
         } else {
-            this.createPopper();
-            this.closePopper();
-            if (this.isDialogOpen) {
-                setTimeout(() => {
-                    this.openPopper();
-                }, 2);
-            }
+            this.$nextTick(() => {
+                this.showPopperBody = true;
+                this.createPopper();
+                this.closePopper();
+                if (this.isDialogOpen) {
+                    setTimeout(() => {
+                        this.openPopper();
+                    }, 2);
+                }
+            });
         }
     }
 
@@ -287,7 +293,7 @@ export class MPopper extends MediaQueries {
     }
 
     private get hasBodySlot(): boolean {
-        return !!this.$slots.body;
+        return !!this.$slots.body && this.isScreenMaxS ? true : this.showPopperBody;
     }
 
     private get hasFooterSlot(): boolean {
