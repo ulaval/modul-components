@@ -166,7 +166,7 @@ export class MTexteField extends ModulVue implements InputStateMixin {
     private setType(type: string): void {
         if (this.editable) {
             // Set attribute type on input refs
-            ModulVue.nextTick(() => {
+            this.$nextTick(() => {
                 this.$refs.input['type'] = type;
             });
         }

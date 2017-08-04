@@ -77,7 +77,7 @@ export class MSpinner extends ModulVue {
             if (this.internalPropMode == MSpinnerMode.Processing) {
                 this.defaultTargetElVisible = false;
                 this.spinnerVisible = false;
-                Vue.nextTick(() => {
+                this.$nextTick(() => {
                     this.appendSpinnerToBody();
                 });
             } else {

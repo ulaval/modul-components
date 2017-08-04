@@ -1,7 +1,7 @@
 <transition>
     <article class="m-accordion-group" v-if="!hasError">
-        <header class="m-accordion-group__header" :class="{ 'm--is-no-title' : !hasTitle }" v-if="hasTitle || !propConcurrent">
-            <span class="m-accordion-group__header__title" v-if="hasTitle">
+        <header class="m-accordion-group__header" :class="{ 'm--is-no-title' : !hasTitle }" v-if="hasTitleSlot || !propConcurrent">
+            <span class="m-accordion-group__header__title" v-if="hasTitleSlot">
                 <slot name="title"></slot>
             </span>
             <template v-if="!propConcurrent">
