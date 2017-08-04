@@ -17,7 +17,7 @@ const DIALOG_MODE_PANEL = 'panel';
 @Component({
     mixins: [MediaQueries]
 })
-export class MPopper extends Vue {
+export class MPopper extends MediaQueries {
     @Prop({
         default: TRIGGER_CLICK,
         validator: (value) => [TRIGGER_CLICK, TRIGGER_HOVER].indexOf(value) > -1
@@ -69,7 +69,6 @@ export class MPopper extends Vue {
     public leaveCancelled: any;
 
     public componentName: string = POPPER_NAME;
-    public isScreenMaxS: boolean;
     public referenceElm: HTMLElement;
     public popperJS;
     public isPopperOpen: boolean = false;
