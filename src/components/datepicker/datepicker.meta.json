@@ -1,0 +1,45 @@
+{
+    "tag": "m-datepicker",
+    "name": "m-datepicker-meta:name",
+    "attributes": {
+        "value": {
+            "type": "moment.Moment",
+            "values": "see Moment.js constructor arguments",
+            "default": "now"
+        },
+        "format": {
+            "type": "string",
+            "values": "see Moment.js formating options",
+            "default": "L"
+        },
+        "min": {
+            "type": "moment.Moment",
+            "values": "see Moment.js constructor arguments",
+            "default": "now minus 10 years"
+        },
+        "max": {
+            "type": "moment.Moment",
+            "values": "see Moment.js constructor arguments",
+            "default": "now plus 10 years"
+        }
+    },
+    "overview": [{
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-datepicker-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-datepicker-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-datepicker-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-datepicker-meta:dont"
+        }
+    ]
+}

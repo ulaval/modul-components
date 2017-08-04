@@ -8,25 +8,22 @@ import { TEMPLATE_NAME } from '../component-names';
 @Component
 export class Mtemplate extends Vue {
     @Prop({ default: false })
-    public hasFooterFullWidth: boolean;
+    public footerFullWidth: boolean;
 
-    private propsHasFooterFullWidth: boolean = false;
-
-    private beforeMount(): void {
-        this.updateFooterWidth(this.hasFooterFullWidth);
+    private get hasHeaderSlot(): boolean {
+        return !!this.$slots.header;
     }
 
-    @Watch('hasFooterFullWidth')
-    private updateFooterWidth(newValue: boolean): void {
-        this.propsHasFooterFullWidth = newValue;
+    private get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
     }
 
-    public get hasColumn(): boolean {
-        return !!this.$slots['column'];
+    private get hasColumnSlot(): boolean {
+        return !!this.$slots.column;
     }
 
-    public get hasFooter(): boolean {
-        return !!this.$slots['footer'];
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
     }
 }
 

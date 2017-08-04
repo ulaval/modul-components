@@ -7,7 +7,7 @@ import { RADIO_BUTTONS_NAME } from '../component-names';
 
 const POSITION_LEFT: string = 'left';
 
-export interface MRadioData {
+export interface MRadioListData {
     value: string;
     label: string;
     checked: boolean;
@@ -40,24 +40,23 @@ export class MRadioButtons extends Vue {
             ];
         }
     })
-    public radioValues: MRadioData[];
+    public listData: MRadioListData[];
     @Prop({ default: 'radio' })
     public name: string;
     @Prop({ default: true })
-    public hasLabel: boolean;
+    public label: boolean;
     @Prop({ default: POSITION_LEFT })
     public position: string;
 
     public componentName: string = RADIO_BUTTONS_NAME;
-    private propsHasLabel: boolean = true;
+    private propsLabel: boolean = true;
     private propsPosition: string = POSITION_LEFT;
     private isFocus: boolean = false;
     private checkedValue: string = '';
     private defaultCheckedValue: string = this.findChecked();
-    private test: boolean = false;
 
-    private mounted(): void {
-        this.propsHasLabel = this.hasLabel;
+    protected mounted(): void {
+        this.propsLabel = this.label;
         this.propsPosition = this.position;
         if (this.defaultCheckedValue != '') {
             this.checkedValue = this.defaultCheckedValue;
@@ -65,9 +64,9 @@ export class MRadioButtons extends Vue {
     }
 
     private findChecked(): any {
-        for (let i = 0; i < this.radioValues.length; i++) {
-            if (this.radioValues[i].checked == true) {
-                return this.radioValues[i].value;
+        for (let i = 0; i < this.listData.length; i++) {
+            if (this.listData[i].checked == true) {
+                return this.listData[i].value;
             }
         }
     }

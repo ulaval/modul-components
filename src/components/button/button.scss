@@ -4,7 +4,7 @@ $m-button--color-hover: $m-color--primary-light !default;
 $m-button--color-active: $m-color--primary-dark !default;
 $m-button--color-selected: $m-color--primary-darker !default;
 $m-button--color-waiting: $m-color--primary-lighter !default;
-$m-button--color-disabled: $m-color--grey-light !default;
+$m-button--color-disabled: $m-color--grey-darker !default;
 
 .m-button {
     position: relative;
@@ -44,6 +44,7 @@ $m-button--color-disabled: $m-color--grey-light !default;
 
             &:active,
             &:focus {
+                color: $m-color--white;
                 background: $m-button--color-active;
                 border-color: $m-button--color-active;
             }
@@ -80,6 +81,7 @@ $m-button--color-disabled: $m-color--grey-light !default;
     }
 
     &.m--is-icon {
+        transition: 0.3s color ease;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -90,6 +92,11 @@ $m-button--color-disabled: $m-color--grey-light !default;
         min-width: $m-touch-size;
         min-height: $m-touch-size;
         background: transparent;
+        color: $m-color--black-grey-lighter;
+
+        &:hover {
+            color: $m-color--text;
+        }
 
         &::after {
             transition: 0.3s width ease, 0.3s height ease, 0.2s opacity linear;
@@ -106,6 +113,17 @@ $m-button--color-disabled: $m-color--grey-light !default;
             border-radius: 50%;
             opacity: 0;
             background: $m-color--primary-lightest;
+        }
+
+        .m-button {
+            &__icon {
+                @include m-is-ie() {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                }
+            }
         }
     }
 

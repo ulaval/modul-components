@@ -1,11 +1,46 @@
 {
     "tag": "m-upload",
     "name": "m-upload-meta:name",
+    "attributes": {
+        "extensions": {
+            "type": "string[]",
+            "default": []
+        },
+        "multiple": {
+            "type": "boolean",
+             "default": false
+        },
+        "maxFilesAllow": {
+            "type": "number",
+             "default": 10
+        },
+        "maxSizeBytes": {
+            "type": "number",
+            "default": 26214400
+        },
+        "showImage": {
+            "type": "boolean",
+            "default": false
+        }
+    },
     "overview": [
         {
             "type": "rubric",
             "title": "meta:context-of-use",
             "content": "m-upload-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-upload-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-upload-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-upload-meta:dont"
         }
     ]
 }

@@ -89,7 +89,7 @@ export class RippleEffect {
             this.rippleEl.className = RIPPLE_EFFECT_NAME + ' leave-active';
             this.rippleELStyle.opacity = '0';
             setTimeout(() => {
-                this.rippleEl.remove();
+                document.body.removeChild(this.rippleEl);
             }, 450);
         };
         document.addEventListener(releaseEvent, release);

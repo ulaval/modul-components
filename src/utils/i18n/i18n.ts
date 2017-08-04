@@ -77,11 +77,9 @@ export class Messages {
 
         let val = this.resolveKey(curLang, key, nb, modifier);
 
-        if (Array.isArray(params) && params.length) {
+        if (htmlEncodeParams && params.length) {
             for (let i = 0; i < params.length; ++i) {
-                if (htmlEncodeParams) {
-                    params[i] = htmlEncode(params[i]);
-                }
+                params[i] = htmlEncode(params[i].toString());
             }
         }
 

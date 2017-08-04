@@ -1,13 +1,46 @@
-<span class="m-popper" :class="{ 'm--is-open': isAnimPopperActive }">
-    <slot name="reference" class="m-popper__reference"></slot>
-    <transition @enter="animEnter"
-        @after-enter="animAfterEnter"
-        @leave="animLeave"
-        @after-leave="doDestroy">
-        <span ref="m-popper__popper"
-            :aria-hidden="!showPopper"
-            v-show="!disabled && showPopper">
-            <slot class="m-popper__content">{{ content }}</slot>
-        </span>
-    </transition>
-</span>
+<div class="m-popper"
+     :class="{ 'm--is-open': animPopperActive }"
+     @mouseover="onMouseOver"
+     @mouseout="onMouseOut">
+     <template v-if="!isScreenMaxS">
+        <transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter" @enter-cancelled="onEnterCancelled"
+                    @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
+            <div class="m-popper__popper-wrap"
+                 :aria-hidden="!isPopperOpen"
+                 v-show="!disabled && isPopperOpen">
+                <div class="m-popper__popper" ref="popper">
+                    <div class="m-popper__body" v-if="hasBodySlot" @click="onContentClick">
+                        <slot name="body"></slot>
+                    </div>
+                    <div class="m-popper__footer" v-if="hasFooterSlot">
+                        <slot name="footer"></slot>
+                    </div>
+                </div>
+            </div>
+        </transition>
+        <div @click="togglePopper" ref="reference" class="m-popper__reference">
+            <slot></slot>
+        </div>
+    </template>
+    <m-dialog :mode="propMobileMode"
+              :padding="padding"
+              :padding-header="paddingHeader"
+              :padding-body="paddingBody"
+              :padding-footer="paddingFooter"
+              :disabled="disabled"
+              :open="isDialogOpen"
+              @open="toggleDialog(true)"
+              @close="toggleDialog(false)"
+              v-if="isScreenMaxS">
+        <div slot="header" class="m-popper__header" v-if="hasHeaderSlot">
+            <slot name="header"></slot>
+        </div>
+        <div slot="body" class="m-popper__body" v-if="hasBodySlot">
+            <slot name="body"></slot>
+        </div>
+        <div slot="footer" class="m-popper__footer" v-if="hasFooterSlot">
+            <slot name="footer"></slot>
+        </div>
+        <slot></slot>
+    </m-dialog>
+</div>

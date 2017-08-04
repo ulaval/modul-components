@@ -4,7 +4,11 @@
     "attributes": {
         "checked": {
             "type": "boolean",
-            "default": false
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
         },
         "position": {
             "type": "string",
@@ -13,10 +17,6 @@
                 "left"
             ],
             "default": 1
-        },
-        "label": {
-            "type": "boolean",
-            "default": true
         }
     },
     "overview": [

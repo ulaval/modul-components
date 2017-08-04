@@ -4,148 +4,134 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import Popper from 'popper.js';
 
-export interface IPopperOptions {
-    placement: string;
-    gpuAcceleration: boolean;
-    modifiers: any;
-    onCreate: Function;
-}
+const TRIGGER_CLICK = 'click';
+const TRIGGER_HOVER = 'hover';
+const DIALOG_MODE_PRIMARY = 'primary';
+const DIALOG_MODE_SECONDARY = 'secondary';
+const DIALOG_MODE_PANEL = 'panel';
 
 @WithRender
-@Component
+@Component({
+    mixins: [MediaQueries]
+})
 export class MPopper extends Vue {
-    @Prop({ default: 'default' })
-    public mode: string;
     @Prop({
-        default: 'hover',
-        validator: (value) => ['click', 'hover'].indexOf(value) > -1
+        default: TRIGGER_CLICK,
+        validator: (value) => [TRIGGER_CLICK, TRIGGER_HOVER].indexOf(value) > -1
     })
     public trigger: string;
+    @Prop({ default: true })
+    public open: boolean;
     @Prop({ default: false })
     public disabled: boolean;
     @Prop()
-    public content: string;
-    @Prop()
     public boundariesSelector: string;
-    @Prop()
-    public reference: Object;
     @Prop({ default: false })
     public forceShow: boolean;
     @Prop({ default: false })
-    public appendToBody: boolean;
-    @Prop({ default: false })
-    public visibleArrow: boolean;
+    public arrow: boolean;
     @Prop()
     public options: any;
     @Prop({ default: false })
     public closeOnContentClick: boolean;
     @Prop({ default: true })
     public closeOnReferenceClick: boolean;
+    @Prop({ default: DIALOG_MODE_PANEL })
+    public mobileMode: string;
+
+    @Prop({ default: true })
+    public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
+    @Prop({ default: true })
+    public paddingFooter: boolean;
+
+    @Prop()
+    public beforeEnter: any;
+    @Prop()
+    public enter: any;
+    @Prop()
+    public afterEnter: any;
+    @Prop()
+    public enterCancelled: any;
+    @Prop()
+    public beforeLeave: any;
+    @Prop()
+    public leave: any;
+    @Prop()
+    public afterLeave: any;
+    @Prop()
+    public leaveCancelled: any;
 
     public componentName: string = POPPER_NAME;
-    public referenceElm;
+    public isScreenMaxS: boolean;
+    public referenceElm: HTMLElement;
     public popperJS;
-    public showPopper: boolean = false;
-    public isAnimPopperActive: boolean = false;
+    public isPopperOpen: boolean = false;
+    public animPopperActive: boolean = false;
     public currentPlacement: string = '';
-    public popperOptions: IPopperOptions = {
+    public popperOptions: Popper.PopperOptions = {
         placement: 'bottom',
-        gpuAcceleration: false,
         modifiers: {},
         onCreate: () => { }
     };
 
-    private propsMode: string;
-    private popper: Node | undefined;
+    private propMode: string;
+    private popper;
     private appended: boolean;
     private _timer: number;
-    private dropdownMaxHeight: number = 198;
-    private dropdownClass: string = '.m-dropdown__list';
 
-    @Watch('showPopper')
-    public showPopperChanged(value) {
-        if (value) {
-            this.$emit('show');
-            this.updatePopper();
-        } else {
-            this.$emit('hide');
-        }
-    }
+    private isDialogOpen: boolean = false;
 
-    @Watch('forceShow', { immediate: true })
-    public forceShowChanged(value) {
-        this[value ? 'doShow' : 'doClose']();
-    }
-
-    private created(): void {
+    protected created(): void {
         this.popperOptions = { ...this.popperOptions, ...this.options };
     }
 
-    private mounted(): void {
-        if ((this.$slots.reference) && (this.$slots.default)) {
-            this.propsMode = this.$props.mode;
-            this.referenceElm = this.reference || this.$slots.reference[0].elm;
-            this.popper = this.$slots.default[0].elm;
-
-            switch (this.trigger) {
-                case 'click':
-                    on(this.referenceElm, 'click', this.doToggle);
-                    if (this.closeOnContentClick) {
-                        on(this.popper, 'click', this.doClose);
-                    }
-                    on(document, 'click', this.handleDocumentClick);
-                    break;
-                case 'hover':
-                    on(this.referenceElm, 'mouseover', this.onMouseOver);
-                    on(this.popper, 'mouseover', this.onMouseOver);
-                    on(this.referenceElm, 'mouseout', this.onMouseOut);
-                    on(this.popper, 'mouseout', this.onMouseOut);
-                    break;
+    protected mounted(): void {
+        if ((this.$slots.body) && (this.$slots.default)) {
+            if (!this.isScreenMaxS) {
+                this.createPopper();
             }
+            on(document, 'click', this.handleDocumentClick);
+        }
+    }
 
+    protected destroyed() {
+        this.destroyPopper();
+    }
+
+    @Watch('forceShow', { immediate: true })
+    private forceShowChanged(value) {
+        this[value ? 'openPopper' : 'closePopper']();
+    }
+
+    @Watch('isScreenMaxS')
+    private isScreenMaxSChanged(value) {
+        if (value) {
+            this.doDestroy();
+            this.isDialogOpen = this.isPopperOpen;
+        } else {
             this.createPopper();
-        }
-    }
-
-    private doToggle(): void {
-        if (!this.forceShow) {
-            if (this.closeOnReferenceClick) {
-                this.showPopper = !this.showPopper;
-            } else {
-                this.doShow();
+            this.closePopper();
+            if (this.isDialogOpen) {
+                setTimeout(() => {
+                    this.openPopper();
+                }, 2);
             }
         }
-    }
-
-    private doShow(): void {
-        this.showPopper = true;
-    }
-
-    private doClose(): void {
-        this.showPopper = false;
-    }
-
-    private doDestroy(): void {
-        if (this.showPopper || !this.popperJS) {
-            return;
-        }
-
-        this.popperJS.destroy();
-        this.popperJS = undefined;
     }
 
     private createPopper(): void {
         this.$nextTick(() => {
-            if (this.visibleArrow) {
+            this.referenceElm = this.$refs.reference as HTMLElement;
+            this.popper = this.$refs.popper;
+            if (this.arrow) {
                 this.appendArrow(this.popper);
-            }
-
-            if (this.appendToBody) {
-                if (!(typeof this.popper === 'undefined')) {
-                    document.body.appendChild(this.popper);
-                }
             }
 
             if (this.popperJS && this.popperJS.destroy) {
@@ -155,9 +141,9 @@ export class MPopper extends Vue {
             if (this.boundariesSelector) {
                 const boundariesElement = document.querySelector(this.boundariesSelector);
 
-                if (boundariesElement) {
-                    this.popperOptions.modifiers = { ...this.popperOptions.modifiers };
-                    this.popperOptions.modifiers.preventOverflow = { ...this.popperOptions.modifiers.preventOverflow };
+                if (this.popperOptions.modifiers && this.popperOptions.modifiers.preventOverflow && boundariesElement) {
+                    // this.popperOptions.modifiers = { ...this.popperOptions.modifiers };
+                    // this.popperOptions.modifiers.preventOverflow = { ...this.popperOptions.modifiers.preventOverflow };
                     this.popperOptions.modifiers.preventOverflow.boundariesElement = boundariesElement;
                 }
             }
@@ -172,15 +158,15 @@ export class MPopper extends Vue {
     }
 
     private destroyPopper(): void {
-        off(this.referenceElm, 'click', this.doToggle);
-        off(this.referenceElm, 'mouseup', this.doClose);
-        off(this.referenceElm, 'mousedown', this.doShow);
-        off(this.referenceElm, 'focus', this.doShow);
-        off(this.referenceElm, 'blur', this.doClose);
-        off(this.referenceElm, 'mouseout', this.onMouseOut);
-        off(this.referenceElm, 'mouseover', this.onMouseOver);
         off(document, 'click', this.handleDocumentClick);
+        this.popperJS = undefined;
+    }
 
+    private doDestroy(): void {
+        if (this.isPopperOpen || !this.popperJS) {
+            return;
+        }
+        this.popperJS.destroy();
         this.popperJS = undefined;
     }
 
@@ -201,15 +187,71 @@ export class MPopper extends Vue {
         this.popperJS ? this.popperJS.update() : this.createPopper();
     }
 
+    private togglePopper(): void {
+        if (!this.forceShow && !this.disabled) {
+            if (this.closeOnReferenceClick) {
+                if (this.isPopperOpen) {
+                    this.closePopper();
+                } else {
+                    this.openPopper();
+                }
+            } else {
+                this.openPopper();
+            }
+        }
+    }
+
+    private toggleDialog(value: boolean): void {
+        this.isDialogOpen = value;
+        if (value) {
+            this.$emit('show');
+        } else {
+            this.$emit('hide');
+        }
+    }
+
+    private onContentClick(): void {
+        if (this.closeOnContentClick) {
+            this.closePopper();
+        }
+    }
+
+    private openPopper(): void {
+        if (!this.isPopperOpen && !this.isScreenMaxS) {
+            this.isPopperOpen = true;
+            clearTimeout(this._timer);
+            this.updatePopper();
+            this.$emit('show');
+        } else if (!this.isDialogOpen && this.isScreenMaxS) {
+            this.isDialogOpen = true;
+            clearTimeout(this._timer);
+            this.updatePopper();
+            this.$emit('show');
+        }
+    }
+
+    private closePopper(): void {
+        if (this.isPopperOpen && !this.isScreenMaxS) {
+            this.isPopperOpen = false;
+            this.$emit('hide');
+        } else if (this.isDialogOpen && this.isScreenMaxS) {
+            this.isDialogOpen = false;
+            this.$emit('hide');
+        }
+    }
+
     private onMouseOver(): void {
-        this.showPopper = true;
-        clearTimeout(this._timer);
+        if (this.trigger == TRIGGER_HOVER && !this.isScreenMaxS) {
+            this.openPopper();
+        }
     }
 
     private onMouseOut(): void {
-        this._timer = window.setTimeout(() => {
-            this.showPopper = false;
-        }, 10);
+        if (this.trigger == TRIGGER_HOVER && !this.isScreenMaxS) {
+            this._timer = window.setTimeout(() => {
+                this.closePopper();
+            }, 10);
+        }
     }
 
     private handleDocumentClick(e): void {
@@ -220,55 +262,90 @@ export class MPopper extends Vue {
             this.forceShow) {
             return;
         }
-
-        this.showPopper = false;
+        this.closePopper();
     }
 
-    private destroyed() {
-        this.destroyPopper();
+    private get propOpen(): boolean {
+        if (!this.isScreenMaxS) {
+            if (this.open) {
+                this.openPopper();
+            } else {
+                this.closePopper();
+            }
+        } else {
+            this.isDialogOpen = this.open;
+        }
+        return this.open;
     }
 
-    private animEnter(element, done): void {
-        this.isAnimPopperActive = true;
-        if (this.propsMode == 'dropdown' && !this.appendToBody) {
-            let el = element.querySelector(this.dropdownClass);
-            let height: number = el.clientHeight > this.dropdownMaxHeight ? this.dropdownMaxHeight : el.clientHeight;
-            el.style.overflowY = 'hidden';
-            el.style.maxHeight = '0';
-            setTimeout( () => {
-                el.style.maxHeight = height + 'px';
-                done();
-            }, 0);
+    private get propMobileMode(): string {
+        return this.mobileMode == DIALOG_MODE_PRIMARY || this.mobileMode == DIALOG_MODE_SECONDARY ? this.mobileMode : DIALOG_MODE_PANEL;
+    }
+
+    private get hasHeaderSlot(): boolean {
+        return !!this.$slots.header;
+    }
+
+    private get hasBodySlot(): boolean {
+        return !!this.$slots.body;
+    }
+
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
+    }
+
+    private onBeforeEnter(el: HTMLElement): void {
+        if (typeof (this.beforeEnter) === 'function') {
+            this.beforeEnter(el.children[0]);
+        }
+    }
+
+    private onEnter(el: HTMLElement, done): void {
+        this.animPopperActive = true;
+        if (typeof (this.enter) === 'function') {
+            this.enter(el.children[0], done);
         } else {
             done();
         }
     }
 
-    private animAfterEnter(element): void {
-        if (this.propsMode == 'dropdown' && !this.appendToBody) {
-            let el = element.querySelector(this.dropdownClass);
-            setTimeout(() => {
-                el.style.maxHeight = this.dropdownMaxHeight + 'px';
-                el.style.overflowY = 'auto';
-            }, 300);
+    private onAfterEnter(el: HTMLElement): void {
+        if (typeof (this.afterEnter) === 'function') {
+            this.afterEnter(el.children[0]);
         }
     }
 
-    private animLeave(element, done): void {
-        if (this.propsMode == 'dropdown' && !this.appendToBody) {
-            let el = element.querySelector(this.dropdownClass);
-            let height: number = el.clientHeight;
-            el.style.maxHeight = height + 'px';
-            el.style.overflowY = 'hidden';
-            el.style.maxHeight = '0';
-            setTimeout(() => {
-                el.style.maxHeight = 'none';
-                this.isAnimPopperActive = false;
-                done();
-            }, 300);
+    private onEnterCancelled(el: HTMLElement): void {
+        if (typeof (this.enterCancelled) === 'function') {
+            this.enterCancelled(el);
+        }
+    }
+
+    private onBeforeLeave(el: HTMLElement): void {
+        if (typeof (this.beforeLeave) === 'function') {
+            this.beforeLeave(el.children[0]);
+        }
+    }
+
+    private onLeave(el: HTMLElement, done): void {
+        if (typeof (this.leave) === 'function') {
+            this.leave(el.children[0], done);
         } else {
-            this.isAnimPopperActive = false;
             done();
+        }
+    }
+
+    private onAfterLeave(el: HTMLElement): void {
+        this.animPopperActive = false;
+        if (typeof (this.afterLeave) === 'function') {
+            this.afterLeave(el.children[0]);
+        }
+        this.doDestroy();
+    }
+
+    private onLeaveCancelled(el: HTMLElement): void {
+        if (typeof (this.leaveCancelled) === 'function') {
+            this.leaveCancelled(el.children[0]);
         }
     }
 }

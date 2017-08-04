@@ -5,11 +5,18 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './panel.html?style=./panel.scss';
 import { PANEL_NAME } from '../component-names';
 
+export enum MPanelMode {
+    Primary = 'primary',
+    Secondary = 'secondary'
+}
+
+const HEADER_RIGHT_CONTENT: string = 'header-right-content';
+
 @WithRender
 @Component
 export class MPanel extends Vue {
-    @Prop({ default: 'primary' })
-    public type: string;
+    @Prop({ default: MPanelMode.Primary })
+    public mode: MPanelMode;
     @Prop({ default: true })
     public shadow: boolean;
     @Prop({ default: true })
@@ -25,23 +32,43 @@ export class MPanel extends Vue {
 
     public componentName: string = PANEL_NAME;
 
+    private get propMode(): MPanelMode {
+        return this.mode == MPanelMode.Secondary ? MPanelMode.Secondary : MPanelMode.Primary;
+    }
+
     private get hasHeader(): boolean {
-        if (this.$slots['header'] || this.$slots['header-content-left'] || this.$slots['header-content-right']) {
+        if (this.$slots.header || this.$slots[HEADER_RIGHT_CONTENT]) {
             return true;
         }
         return false;
     }
 
-    private get hasContentLeft(): boolean {
-        return !!this.$slots['header-content-left'];
+    private get hasHeaderRightContentSlot(): boolean {
+        return !!this.$slots[HEADER_RIGHT_CONTENT];
     }
 
-    private get hasContentRight(): boolean {
-        return !!this.$slots['header-content-right'];
+    private get hasHeaderSlot(): boolean {
+        return !!this.$slots.header;
     }
 
-    private get hasFooter(): boolean {
-        return !!this.$slots['footer'];
+    private get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
+    }
+
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
+    }
+
+    private get hasPaddingHeader(): boolean {
+        return this.paddingHeader && this.padding;
+    }
+
+    private get hasPaddingBody(): boolean {
+        return this.paddingBody && this.padding;
+    }
+
+    private get hasPaddingFooter(): boolean {
+        return this.paddingFooter && this.padding;
     }
 }
 

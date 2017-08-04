@@ -16,13 +16,24 @@
             "type": "string",
             "default": "/"
         },
-        "state" : {
-            "type": "string",
+        "unvisited" : {
+            "type": "boolean",
             "values": [
-                "default",
-                "unvisited"
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "underline" : {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
             ],
             "default": 0
+        },
+        "hiddenText" : {
+            "type": "string"
         }
     },
     "overview": [

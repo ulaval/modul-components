@@ -10,7 +10,7 @@
             <m-icon :name="getIcon()"></m-icon>
         </div>
         <div class="m-message__body" :class="{'m--have-close-button': closeButton}">
-            <m-button mode="icon" iconName="default" iconSize="10px" @click="onClose" class="m-message__close-button" v-if="showCloseButton">
+            <m-button mode="icon" icon-name="default" icon-size="10px" @click="onClose" class="m-message__close-button" v-if="showCloseButton">
                 <m-i18n i18n-key="m-message:close"></m-i18n>
             </m-button>
             <p>

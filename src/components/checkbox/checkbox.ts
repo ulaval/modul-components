@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
@@ -16,18 +16,31 @@ export class MCheckbox extends Vue {
     public checked: boolean;
     @Prop({ default: POSITION_LEFT })
     public position: string;
-    @Prop({ default: true })
-    public label: boolean;
 
     public componentName: string = CHECKBOX_NAME;
-    private propsChecked = true;
-    private propsLabel = true;
+    private internalPropChecked: boolean = false;
     private isFocus = false;
-    private id: string = `checkbox${uuid.generate()}`;
+    private id: string = `mCheckbox-${uuid.generate()}`;
 
-    public mounted(): void {
-        this.propsChecked = this.checked;
-        this.propsLabel = this.label;
+    protected mounted(): void {
+        this.propChecked = this.checked;
+    }
+
+    protected get propChecked(): boolean {
+        return this.internalPropChecked;
+    }
+
+    protected set propChecked(value: boolean) {
+        if (this.internalPropChecked != value) {
+            this.internalPropChecked = value;
+            this.$emit('update:checked', value);
+            this.$emit('checked', value);
+        }
+    }
+
+    @Watch('checked')
+    private checkedChanged(value: boolean): void {
+        this.propChecked = this.checked;
     }
 
     private onClick(event): void {
@@ -35,8 +48,16 @@ export class MCheckbox extends Vue {
         this.$refs['checkbox']['blur']();
     }
 
-    public get hasCheckboxLeft(): boolean {
+    private setFocus(value: boolean): void {
+        this.isFocus = value;
+    }
+
+    private get hasCheckboxLeft(): boolean {
         return this.position == POSITION_LEFT;
+    }
+
+    private get hasLabelSlot(): boolean {
+        return !!this.$slots.default;
     }
 }
 

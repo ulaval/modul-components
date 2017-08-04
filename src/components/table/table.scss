@@ -1,56 +1,78 @@
 @import '../../styles/abstracts/variables';
 
 .m-table {
-    .m-table__header,
-    .m-table__body {
-        padding: $m-padding;
-    }
-
-    .m-table__header {
-        margin-right: 16px;
-        background-color: $m-color--grey-lightest;
-        padding: $m-padding;
-        display: grid;
+    &__header {
+        display: flex;
         align-items: center;
-        grid-template-columns: 1fr auto;
+        margin-right: 16px;
+        padding: $m-padding;
+        background-color: $m-color--grey-lightest;
 
-        @media screen and (max-width: 640px) {
-            display: flex;
+        @media screen and (max-width: $m-screen--max--s) {
             flex-direction: column;
             align-items: flex-start;
         }
 
-        .m-table__header__content.m--is-right {
+        &,
+        &__content-left,
+        &__content-right {
+            > :first-child {
+                margin-top: 0;
+            }
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: 0;
+            font-size: $m-font-size--l;
+            font-weight: $m-font-weight--bold;
+        }
+
+        &__content-right {
             justify-self: flex-end;
         }
     }
 
-    .m-table__body {
+    &__body {
+        padding: $m-padding $m-padding 0 $m-padding;
+
         table {
             width: 100%;
             border-collapse: collapse;
 
-            thead th {
-                padding: 0 $m-padding--s $m-margin--s;
-                font-weight: $m-font-weight--bold;
-                color: $m-color--black;
-                border-bottom: 2px solid $m-color--grey-lighter;
+            thead {
+                th {
+                    padding: 0 $m-padding--s $m-margin--s;
+                    font-weight: $m-font-weight--bold;
+                    color: $m-color--black;
+                    border-bottom: 2px solid $m-color--grey-lighter;
 
-                &:first-child {
-                    padding-left: 0;
-                    text-align: left;
-                }
+                    &:first-child {
+                        padding-left: 0;
+                        text-align: left;
+                    }
 
-                &:last-child {
-                    padding-right: 0;
+                    &:last-child {
+                        padding-right: 0;
+                    }
                 }
             }
 
-            tbody tr {
-                border-bottom: 1px solid $m-color--grey-lighter;
+            tbody {
+                tr {
+                    border-bottom: 1px solid $m-color--grey-lighter;
 
-                &:last-child {
-                    border-bottom: 0;
+                    &:last-child {
+                        border-bottom: 0;
+
+                        td {
+                            padding-bottom: 0;
+                        }
+                    }
                 }
 
                 td {

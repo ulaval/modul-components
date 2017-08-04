@@ -5,6 +5,10 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './table.html?style=./table.scss';
 import { TABLE_NAME } from '../component-names';
 
+const HEADER: string = 'header';
+const HEADER_CONTENT_LEFT: string = 'header-content-left';
+const HEADER_CONTENT_RIGHT: string = 'header-content-right';
+
 @WithRender
 @Component
 export class MTable extends Vue {
@@ -12,18 +16,18 @@ export class MTable extends Vue {
     public componentName: string = TABLE_NAME;
 
     private get hasHeader(): boolean {
-        if (this.$slots['header'] || this.$slots['header-content-left'] || this.$slots['header-content-right']) {
+        if (this.$slots[HEADER] || this.$slots[HEADER_CONTENT_LEFT] || this.$slots[HEADER_CONTENT_RIGHT]) {
             return true;
         }
         return false;
     }
 
     private get hasContentLeft(): boolean {
-        return !!this.$slots['header-content-left'];
+        return !!this.$slots[HEADER_CONTENT_LEFT];
     }
 
     private get hasContentRight(): boolean {
-        return !!this.$slots['header-content-right'];
+        return !!this.$slots[HEADER_CONTENT_RIGHT];
     }
 }
 

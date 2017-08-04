@@ -1,0 +1,13 @@
+<m-popper @show="onShow" @hide="onHide" :enter="onEnter" :after-enter="onAfterEnter" padding="">
+    <div class="m-options-menu" slot="body" ref="menu">
+        <slot>
+            <m-options-menu-item icon-name="default" @click="close">Option 1</m-options-menu-item>
+            <m-options-menu-item icon-name="default"></m-options-menu-item>
+            <m-options-menu-item>Option 3</m-options-menu-item>
+        </slot>
+    </div>
+    <m-button mode="icon" icon-name="options">
+        <m-i18n i18n-key="m-options-menu:open" v-if="!isOpen"></m-i18n>
+        <m-i18n i18n-key="m-options-menu:close" v-if="isOpen"></m-i18n>
+    </m-button>
+</m-popper>

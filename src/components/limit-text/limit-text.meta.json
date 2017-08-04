@@ -1,0 +1,23 @@
+{
+    "tag": "m-limit-text",
+    "name": "m-limit-text-meta:name",
+    "attributes": {
+        "maxNumberOfLine": {
+            "type": "number",
+            "values": [
+                "4"
+            ],
+            "default": "0"
+        },
+        "label": {
+            "type": "string"
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-limit-text-meta:context-of-use"
+        }
+    ]
+}

@@ -3,28 +3,24 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './accordion-group.html?style=./accordion-group.scss';
-import { ACCORDION_GROUP_NAME } from '../component-names';
-import { ACCORDION_NAME } from '../component-names';
-
-const MODE_REGULAR: string = 'regular';
-const MODE_LIGHT: string = 'light';
-const MODE_NO_STYLE: string = 'no-style';
+import { ACCORDION_NAME, ACCORDION_GROUP_NAME } from '../component-names';
+import { MAccordion, MAccordionAspect } from '../accordion/accordion';
 
 @WithRender
 @Component
 export class MAccordionGroup extends Vue {
     @Prop()
-    public mode: string;
+    public aspect: MAccordionAspect;
     @Prop({ default: false })
-    public isConcurrent: boolean;
+    public concurrent: boolean;
     @Prop({ default: false })
-    public areAllOpen: boolean;
+    public allOpen: boolean;
 
     public componentName: string = ACCORDION_GROUP_NAME;
 
-    private propsMode: string = MODE_REGULAR;
-    private propsIsConcurrent: boolean = true;
-    private propsAreAllOpen: boolean = false;
+    private propAspect: string = MAccordionAspect.REGULAR;
+    private propConcurrent: boolean = true;
+    private propAllOpen: boolean = false;
 
     private nbAccordion: number = 0;
     private arrAccordion = new Array();
@@ -35,39 +31,41 @@ export class MAccordionGroup extends Vue {
     private errorDefaultMesage: string = 'ERROR in <' + ACCORDION_GROUP_NAME + '> : ';
     private errorMessage: string = '';
 
-    private mounted(): void {
-        this.propsAreAllOpen = this.areAllOpen;
-        this.propsMode = this.mode == MODE_LIGHT || this.mode == MODE_NO_STYLE ? this.mode : this.propsMode;
-        this.propsIsConcurrent = this.isConcurrent;
+    protected mounted(): void {
+        this.propAllOpen = this.allOpen;
+        this.propAspect = this.aspect == MAccordionAspect.LIGHT || this.aspect == MAccordionAspect.NO_STYLE ? this.aspect : MAccordionAspect.REGULAR;
+        this.propConcurrent = this.concurrent;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
-                this.$children[i]['accordionID'] = this.nbAccordion;
+                let accordion: MAccordion = this.$children[i] as MAccordion;
+                accordion.id = this.nbAccordion;
+                accordion.eventBus.$on('click', (id: number, open: boolean) => this.toggleAccordionGroup(id, open));
                 this.arrAccordion.push({
                     id: this.nbAccordion,
                     childrenNumber: i,
-                    isOpen: false
+                    open: false
                 });
-                if (this.$children[i]['propsIsOpen']) {
-                    if (this.propsIsConcurrent) {
+                if (accordion.propOpen) {
+                    if (this.propConcurrent) {
                         this.indexAccordionOpen = this.nbAccordion;
-                        this.$children[i]['closeAccordion']();
-                        this.arrAccordion[this.nbAccordion]['isOpen'] = false;
+                        accordion.closeAccordion();
+                        this.arrAccordion[this.nbAccordion].open = false;
                     } else {
                         this.nbAccordionOpen++;
-                        this.arrAccordion[this.nbAccordion]['isOpen'] = true;
+                        this.arrAccordion[this.nbAccordion].open = true;
                     }
                 }
-                if (this.propsMode != this.$children[i]['propsMode']) {
-                    this.$children[i]['propsMode'] = this.propsMode;
-                    this.$children[i]['resetMode'](this.propsMode);
+                if (this.propAspect != accordion.propAspect) {
+                    accordion.propAspect = this.propAspect;
+                    accordion.resetAspect(this.propAspect);
                 }
                 this.nbAccordion++;
             }
         }
-        if (this.propsIsConcurrent) {
+        if (this.propConcurrent) {
             this.openAccordionConcurrent();
         }
-        if (this.propsAreAllOpen && !this.propsIsConcurrent) {
+        if (this.propAllOpen && !this.propConcurrent) {
             this.openAllAccordions(false);
         }
         if (this.nbAccordion == 0) {
@@ -77,31 +75,31 @@ export class MAccordionGroup extends Vue {
         }
     }
 
-    private checkToggleAccordion(accordionID: number, isOpen: boolean): void {
+    private toggleAccordionGroup(accordionID: number, open: boolean): void {
         for (let i = 0; i < this.arrAccordion.length; i++) {
-            if (this.arrAccordion[i]['id'] == accordionID) {
-                this.arrAccordion[i]['isOpen'] = isOpen;
+            if (this.arrAccordion[i].id == accordionID) {
+                this.arrAccordion[i].open = open;
                 this.indexAccordionOpen = i;
             }
         }
-        if (this.propsIsConcurrent) {
+        if (this.propConcurrent) {
             this.closeAllAccordions(true);
-            if (isOpen) {
+            if (open) {
                 this.openAccordionConcurrent();
             }
         } else {
-            if (isOpen) {
+            if (open) {
                 this.nbAccordionOpen++;
             } else {
                 this.nbAccordionOpen--;
             }
-            this.propsAreAllOpen = this.nbAccordionOpen == this.nbAccordion ? true : false;
+            this.propAllOpen = this.nbAccordionOpen == this.nbAccordion ? true : false;
         }
     }
 
     private openAccordionConcurrent(): void {
         if (this.indexAccordionOpen != undefined) {
-            this.$children[this.arrAccordion[this.indexAccordionOpen].childrenNumber]['openAccordion']();
+            (this.$children[this.arrAccordion[this.indexAccordionOpen].childrenNumber]as MAccordion).openAccordion();
             this.nbAccordionOpen = 1;
         } else {
             this.nbAccordionOpen = 0;
@@ -109,33 +107,35 @@ export class MAccordionGroup extends Vue {
     }
 
     private checkAccordion(index: number): boolean {
-        return this.$children[index]['componentName'] == ACCORDION_NAME ? true : false;
+        return (this.$children[index] as MAccordion).componentName == ACCORDION_NAME ? true : false;
     }
 
-    private openAllAccordions(animIsActive: boolean = true): void {
-        this.propsAreAllOpen = true;
+    private openAllAccordions(isAnimActive: boolean = true): void {
+        this.propAllOpen = true;
         this.nbAccordionOpen = this.nbAccordion;
         for (let i = 0; i < this.$children.length; i++) {
+            let accordion: MAccordion = this.$children[i] as MAccordion;
             if (i < this.arrAccordion.length) {
-                this.arrAccordion[i]['isOpen'] = true;
+                this.arrAccordion[i].open = true;
             }
             if (this.checkAccordion(i)) {
-                this.$children[i]['animIsActive'] = animIsActive;
-                this.$children[i]['openAccordion']();
+                accordion.isAnimActive = isAnimActive;
+                accordion.openAccordion();
             }
         }
     }
 
-    private closeAllAccordions(animIsActive: boolean = true): void {
-        this.propsAreAllOpen = false;
+    private closeAllAccordions(isAnimActive: boolean = true): void {
+        this.propAllOpen = false;
         this.nbAccordionOpen = 0;
         for (let i = 0; i < this.$children.length; i++) {
+            let accordion: MAccordion = this.$children[i] as MAccordion;
             if (i < this.arrAccordion.length) {
-                this.arrAccordion[i]['isOpen'] = false;
+                this.arrAccordion[i].open = false;
             }
             if (this.checkAccordion(i)) {
-                this.$children[i]['animIsActive'] = animIsActive;
-                this.$children[i]['closeAccordion']();
+                accordion.isAnimActive = isAnimActive;
+                accordion.closeAccordion();
             }
         }
     }

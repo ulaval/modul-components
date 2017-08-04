@@ -1,0 +1,34 @@
+{
+    "tag": "m-nav-bar-item",
+    "name": "m-nav-bar-item-meta:name",
+    "attributes": {
+        "selected": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-nav-bar-item-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-nav-bar-item-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-nav-bar-item-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-nav-bar-item-meta:dont"
+        }
+    ]
+}

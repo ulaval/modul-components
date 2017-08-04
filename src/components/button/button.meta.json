@@ -48,7 +48,7 @@
             ],
             "default": 0
         },
-        "isFullSize": {
+        "fullSize": {
             "type": "boolean",
             "default": false
         }

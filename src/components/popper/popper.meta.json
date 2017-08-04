@@ -2,36 +2,9 @@
     "tag": "m-popper",
     "name": "m-popper-meta:name",
     "attributes": {
-        "options": {
+        "mode": {
             "type": "string",
-            "values": [
-                "placement",
-                "gpuAcceleration"
-            ]
-        },
-        "transition": {
-        },
-        "visibleArrow": {
-            "type": "boolean",
-            "default": false
-        },
-        "appendToBody": {
-            "type": "boolean",
-            "default": false
-        },
-        "forceShow": {
-            "type": "boolean",
-            "default": false
-        },
-        "reference": {
-        },
-        "boundariesSelector": {
-        },
-        "content": {
-        },
-        "disabled": {
-            "type": "boolean",
-            "default": false
+            "default": "default"
         },
         "trigger": {
             "type": "string",
@@ -39,15 +12,98 @@
                 "hover",
                 "click"
             ],
-            "default": "hover"
+            "default": "click"
+        },
+        "open": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "boundariesSelector": {
+            "type": "string"
+        },
+        "forceShow": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "arrow": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "options": {
+            "type": "string",
+            "values": [
+                "placement",
+                "gpuAcceleration"
+            ]
         },
         "closeOnContentClick": {
             "type": "boolean",
-            "default": false
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
         },
         "closeOnReferenceClick": {
             "type": "boolean",
-            "default": true
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "mobileMode": {
+            "type": "string",
+            "value": [
+                "primary",
+                "secondary",
+                "panel"
+            ],
+            "default": 2
+        },
+        "padding": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "paddingHeader": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "paddingBody": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "paddingFooter": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
         }
     },
     "overview": [

@@ -1,0 +1,43 @@
+{
+    "tag": "m-validation-message",
+    "name": "m-validation-message-meta:name",
+    "attributes": {
+        "state": {
+            "type": "string",
+            "value": [
+                "default",
+                "disabled"
+            ],
+            "default": 0
+        },
+        "error": {
+            "type": "string"
+        },
+        "helper": {
+            "type": "string"
+        },
+        "valid": {
+            "type": "string"
+        }
+    },
+    "overview": [
+        {
+            "type": "rubric",
+            "title": "meta:context-of-use",
+            "content": "m-validation-message-meta:context-of-use"
+        },
+        {
+            "type": "rubric",
+            "title": "meta:usage",
+            "content": "m-validation-message-meta:usage"
+        },
+        {
+            "type": "do",
+            "content": "m-validation-message-meta:do"
+        },
+        {
+            "type": "dont",
+            "content": "m-validation-message-meta:dont"
+        }
+    ]
+}

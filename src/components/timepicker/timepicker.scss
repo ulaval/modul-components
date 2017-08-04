@@ -1,0 +1,57 @@
+@import 'abstracts/variables';
+
+.m-timepicker {
+    width: 210px;
+
+    &__body {
+        display: flex;
+    }
+
+    &__hours,
+    &__minutes {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        overflow: auto;
+        max-height: 36px * 7;
+        flex: 1 0 auto;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+            background: 0 0;
+
+            &-track-piece {
+                background-color: $m-color--grey-lighter;
+            }
+
+            &-thumb {
+                background-color: $m-color--grey;
+            }
+        }
+    }
+
+    &__hour,
+    &__minute {
+        padding: $m-padding--s;
+        cursor: pointer;
+        outline: 0;
+        color: inherit;
+        display: block;
+
+        &:hover,
+        &:focus {
+            background-color: $m-color--primary-lightest;
+        }
+
+        &.m--is-selected {
+            background-color: $m-color--primary;
+        }
+    }
+
+    &__footer {
+        padding: $m-padding;
+        text-align: center;
+    }
+}
