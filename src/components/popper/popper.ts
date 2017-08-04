@@ -9,9 +9,12 @@ import Popper from 'popper.js';
 
 const TRIGGER_CLICK = 'click';
 const TRIGGER_HOVER = 'hover';
-const DIALOG_MODE_PRIMARY = 'primary';
-const DIALOG_MODE_SECONDARY = 'secondary';
-const DIALOG_MODE_PANEL = 'panel';
+
+export enum DialogMode {
+    Primary = 'primary',
+    Secondary = 'secondary',
+    Panel = 'panel'
+}
 
 @WithRender
 @Component({
@@ -39,8 +42,8 @@ export class MPopper extends MediaQueries {
     public closeOnContentClick: boolean;
     @Prop({ default: true })
     public closeOnReferenceClick: boolean;
-    @Prop({ default: DIALOG_MODE_PANEL })
-    public mobileMode: string;
+    @Prop({ default: DialogMode.Panel })
+    public mobileMode: DialogMode;
 
     @Prop({ default: true })
     public padding: boolean;
@@ -277,8 +280,8 @@ export class MPopper extends MediaQueries {
         return this.open;
     }
 
-    private get propMobileMode(): string {
-        return this.mobileMode == DIALOG_MODE_PRIMARY || this.mobileMode == DIALOG_MODE_SECONDARY ? this.mobileMode : DIALOG_MODE_PANEL;
+    private get propMobileMode(): DialogMode {
+        return this.mobileMode == DialogMode.Primary || this.mobileMode == DialogMode.Secondary ? this.mobileMode : DialogMode.Panel;
     }
 
     private get hasHeaderSlot(): boolean {
