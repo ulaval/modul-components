@@ -44,7 +44,7 @@ $m-status-list-line-width: 2px;
 
         &.m--is-pending {
             .m-icon {
-                color: $m-color--yellow;
+                color: $m-color--warning;
             }
         }
     }

@@ -10,7 +10,7 @@ $m-slider-thumb: 17px;
     outline: none;
 
     &__track {
-        background-color: $m-color--primary;
+        background-color: $m-color--interactive;
         height: 100%;
     }
 
@@ -20,7 +20,7 @@ $m-slider-thumb: 17px;
         height: $m-slider-thumb;
         top: - ($m-slider-thumb - $m-slider-height) / 2;
         margin-left: -$m-slider-thumb / 2;
-        background-color: $m-color--primary;
+        background-color: $m-color--interactive;
         border-radius: 50%;
         cursor: pointer;
     }

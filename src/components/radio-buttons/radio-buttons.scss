@@ -30,15 +30,15 @@ $m-radio-buttons--width: 16px;
 
             &:hover {
                 .m-radio-buttons__label {
-                    color: $m-color--primary;
+                    color: $m-color--interactive;
                 }
             }
 
             &:hover,
             &.m--is-focus {
                 .m-radio-buttons__input {
-                    border-color: $m-color--primary;
-                    background: $m-color--primary-lightest;
+                    border-color: $m-color--interactive;
+                    background: $m-color--interactive-lightest;
                 }
             }
         }
@@ -65,7 +65,7 @@ $m-radio-buttons--width: 16px;
                 display: block;
                 width: 10px;
                 height: 10px;
-                background: $m-color--primary;
+                background: $m-color--interactive;
                 border-radius: 50%;
                 visibility: hidden;
                 transform: scale(0);
