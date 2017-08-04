@@ -6,16 +6,16 @@ $m-message-size: 22px;
 
     &.m--is-regular {
         &.m--is-success {
-            border: 1px solid $m-color--valid;
+            border: 1px solid $m-color--success;
 
             .m-message__icon {
-                background-color: $m-color--valid-lightest;
-                border-color: $m-color--valid;
-                color: $m-color--valid;
+                background-color: $m-color--success-lightest;
+                border-color: $m-color--success;
+                color: $m-color--success;
             }
 
             .m-message__body .m-message__close-button {
-                color: $m-color--valid;
+                color: $m-color--success;
             }
         }
 
@@ -101,7 +101,7 @@ $m-message-size: 22px;
     &.m--is-light {
         &.m--is-success {
             .m-message__wrap {
-                background-color: $m-color--valid-lightest;
+                background-color: $m-color--success-lightest;
             }
         }
 
