@@ -80,7 +80,7 @@ export class MOptionsMenu extends ModulVue {
     }
 
     private onAfterEnter(el: HTMLElement) {
-        Vue.nextTick(() => {
+        this.$nextTick(() => {
             el.style.marginTop = '0';
             el.style.opacity = '1';
             el.style.width = this.fullWidth + 'px';

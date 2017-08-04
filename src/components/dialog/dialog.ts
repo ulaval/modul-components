@@ -112,7 +112,7 @@ export class MDialog extends ModulVue implements DialogTemplateMixin {
                 this.deleteDialog();
                 this.isAnimActive = false;
                 this.$emit('close');
-                ModulVue.nextTick(() => {
+                this.$nextTick(() => {
                     this.$refs.dialogButton['setAttribute']('tabindex', '0');
                     this.$refs.dialogButton['focus']();
                     this.$refs.dialogButton['removeAttribute']('tabindex');

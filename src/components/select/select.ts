@@ -84,7 +84,7 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
     @Watch('isScreenMaxS')
     private isScreenMaxSChanged(value: boolean): void {
         if (!value) {
-            Vue.nextTick(() => {
+            this.$nextTick(() => {
                 this.adjustWidth();
             });
         }
@@ -169,7 +169,7 @@ export class MSelect extends ModulVue implements DropdownTemplateMixin {
     }
 
     private toggleDropdown(value: boolean): void {
-        Vue.nextTick(() => {
+        this.$nextTick(() => {
             this.propOpen = value;
             if (value) {
                 this.$el.style.zIndex = '10';
