@@ -14,10 +14,8 @@ const DIALOG_MODE_SECONDARY = 'secondary';
 const DIALOG_MODE_PANEL = 'panel';
 
 @WithRender
-@Component({
-    mixins: [MediaQueries]
-})
-export class MPopper extends Vue {
+@Component
+export class MPopper extends MediaQueries {
     @Prop({
         default: TRIGGER_CLICK,
         validator: (value) => [TRIGGER_CLICK, TRIGGER_HOVER].indexOf(value) > -1
@@ -53,9 +51,9 @@ export class MPopper extends Vue {
 
     @Prop()
     public beforeEnter: any;
-    @Prop()
+    @Prop({ default: function() { return this.defaultOnEnter; } })
     public enter: any;
-    @Prop()
+    @Prop({ default: function() { return this.defaultOnAfterEnter; } })
     public afterEnter: any;
     @Prop()
     public enterCancelled: any;
@@ -85,14 +83,16 @@ export class MPopper extends Vue {
     private popper;
     private appended: boolean;
     private _timer: number;
+    private fullWidth: number = 0;
+    private fullHeight: number = 0;
 
     private isDialogOpen: boolean = false;
 
-    protected created(): void {
+    public created(): void {
         this.popperOptions = { ...this.popperOptions, ...this.options };
     }
 
-    protected mounted(): void {
+    public mounted(): void {
         if ((this.$slots.body) && (this.$slots.default)) {
             if (!this.isScreenMaxS) {
                 this.createPopper();
@@ -101,7 +101,7 @@ export class MPopper extends Vue {
         }
     }
 
-    protected destroyed() {
+    public destroyed() {
         this.destroyPopper();
     }
 
@@ -309,10 +309,37 @@ export class MPopper extends Vue {
         }
     }
 
+    private defaultOnEnter(el: HTMLElement, done) {
+        if (!this.fullHeight && !this.fullWidth) {
+            this.fullWidth = el.clientWidth;
+            this.fullHeight = el.clientHeight;
+        }
+        let bodyContent = this.$refs['body']['children'][0] as HTMLElement;
+        bodyContent.style.position = 'absolute';
+        bodyContent.style.width = this.fullWidth + 'px';
+        bodyContent.style.height = this.fullHeight + 'px';
+        el.style.transitionProperty = 'margin-top, opacity, width, height';
+        el.style.transitionDuration = '0.3s';
+        el.style.marginTop = '20px';
+        el.style.opacity = '0';
+        el.style.width = '0';
+        el.style.height = '0';
+        done();
+    }
+
     private onAfterEnter(el: HTMLElement): void {
         if (typeof (this.afterEnter) === 'function') {
             this.afterEnter(el.children[0]);
         }
+    }
+
+    private defaultOnAfterEnter(el: HTMLElement) {
+        Vue.nextTick(() => {
+            el.style.marginTop = '0';
+            el.style.opacity = '1';
+            el.style.width = this.fullWidth + 'px';
+            el.style.height = this.fullHeight + 'px';
+        });
     }
 
     private onEnterCancelled(el: HTMLElement): void {
