@@ -9,7 +9,7 @@
                  :aria-hidden="!isPopperOpen"
                  v-show="!disabled && isPopperOpen">
                 <div class="m-popper__popper" ref="popper">
-                    <div class="m-popper__body" v-if="hasBodySlot" @click="onContentClick">
+                    <div class="m-popper__body" v-if="hasBodySlot" @click="onContentClick" ref="body">
                         <slot name="body"></slot>
                     </div>
                     <div class="m-popper__footer" v-if="hasFooterSlot">
