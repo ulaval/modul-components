@@ -90,7 +90,7 @@ export class MDialog extends ModulVue implements DialogTemplateMixin {
             setTimeout(() => {
                 this.isAnimActive = false;
             }, this.transitionDuration);
-            ModulVue.nextTick(() => {
+            this.$nextTick(() => {
                 this.$refs.dialogWrap['setAttribute']('tabindex', '0');
                 this.$refs.dialogWrap['focus']();
                 this.$refs.dialogWrap['removeAttribute']('tabindex');
