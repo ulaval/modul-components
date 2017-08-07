@@ -6,7 +6,10 @@ import WithRender from './switch.html?style=./switch.scss';
 import { SWITCH_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 
-const POSITION_LEFT: string = 'left';
+export enum MSwitchPosition {
+    LEFT = 'left',
+    RIGHT = 'right'
+}
 
 @WithRender
 @Component
@@ -14,7 +17,7 @@ export class MSwitch extends Vue {
 
     @Prop()
     public value: boolean;
-    @Prop({ default: POSITION_LEFT })
+    @Prop({ default: MSwitchPosition.LEFT })
     public position: string;
     @Prop({ default: false })
     public label: boolean;
@@ -42,7 +45,7 @@ export class MSwitch extends Vue {
     }
 
     public get hasSwitchLeft(): boolean {
-        return this.position == POSITION_LEFT;
+        return ((this.position == MSwitchPosition.RIGHT) ? false : true);
     }
 }
 
