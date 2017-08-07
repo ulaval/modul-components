@@ -1,7 +1,7 @@
 @import 'abstracts/variables';
-$m-radio-buttons--width: 16px;
+$m-radio--width: 16px;
 
-.m-radio-buttons {
+.m-radio {
     display: inline;
     user-select: none;
     line-height: 1;
@@ -9,7 +9,7 @@ $m-radio-buttons--width: 16px;
     padding-left: 0;
 
     &:not(.is-disabled) {
-        .m-radio-buttons__wrap {
+        .m-radio__wrap {
             display: inline-flex;
             align-items: center;
             cursor: pointer;
@@ -17,38 +17,38 @@ $m-radio-buttons--width: 16px;
             &.m--is-right {
                 flex-direction: row-reverse;
 
-                .m-radio-buttons__label {
+                .m-radio__label {
                     padding-right: $m-margin--s;
                 }
             }
 
             &:not(.m--is-right) {
-                .m-radio-buttons__label {
+                .m-radio__label {
                     padding-left: $m-margin--s;
                 }
             }
 
             &:hover {
-                .m-radio-buttons__label {
+                .m-radio__label {
                     color: $m-color--interactive;
                 }
             }
 
             &:hover,
             &.m--is-focus {
-                .m-radio-buttons__input {
+                .m-radio__input {
                     border-color: $m-color--interactive;
                     background: $m-color--interactive-lightest;
                 }
             }
         }
 
-        .m-radio-buttons__label {
+        .m-radio__label {
             flex: 1;
             color: $m-color--text;
         }
 
-        .m-radio-buttons__input {
+        .m-radio__input {
             border-color: $m-color--black;
             color: $m-color--black;
 
@@ -78,8 +78,8 @@ $m-radio-buttons--width: 16px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: $m-radio-buttons--width;
-        height: $m-radio-buttons--width;
+        width: $m-radio--width;
+        height: $m-radio--width;
         background: $m-color--white;
         border-width: 1px;
         border-style: solid;

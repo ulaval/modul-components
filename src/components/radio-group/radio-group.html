@@ -1,0 +1,11 @@
+<span class="m-radio">
+    <input class="m-radio__hidden" ref="refRadio" type="radio" :id="value" :name="name" :value="value"
+        v-model="checkedValue" @focus="isFocus=true" @blur="isFocus=false" @click="onClick">
+    <label class="m-radio__wrap" :class="{ 'm--is-right': propsPosition == 'right', 'm--is-focus': isFocus && value == checkedValue}"
+        :for="value" :aria-hidden="!propsLabel">
+        <span class="m-radio__input" :class="{ 'm--is-checked': value == checkedValue }" aria-hidden="true"></span>
+        <span class="m-radio__label" v-if="propsLabel">
+            <slot>label</slot>
+        </span>
+    </label>
+</span>

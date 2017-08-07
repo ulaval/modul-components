@@ -2,8 +2,8 @@ import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './radio-buttons.html?style=./radio-buttons.scss';
-import { RADIO_BUTTONS_NAME } from '../component-names';
+import WithRender from './radio.html?style=./radio.scss';
+import { RADIO_NAME } from '../component-names';
 
 const POSITION_LEFT: string = 'left';
 
@@ -15,7 +15,7 @@ export interface MRadioListData {
 
 @WithRender
 @Component
-export class MRadioButtons extends Vue {
+export class MRadio extends Vue {
 
     @Prop({
         default: () => {
@@ -48,8 +48,9 @@ export class MRadioButtons extends Vue {
     @Prop({ default: POSITION_LEFT })
     public position: string;
 
-    public componentName: string = RADIO_BUTTONS_NAME;
+    public componentName: string = RADIO_NAME;
     private propsLabel: boolean = true;
+    private value: string = 'test';
     private propsPosition: string = POSITION_LEFT;
     private isFocus: boolean = false;
     private checkedValue: string = '';
@@ -76,10 +77,10 @@ export class MRadioButtons extends Vue {
     }
 }
 
-const RadioButtonsPlugin: PluginObject<any> = {
+const RadioPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(RADIO_BUTTONS_NAME, MRadioButtons);
+        v.component(RADIO_NAME, MRadio);
     }
 };
 
-export default RadioButtonsPlugin;
+export default RadioPlugin;
