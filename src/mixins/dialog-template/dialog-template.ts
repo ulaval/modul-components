@@ -57,20 +57,24 @@ export class DialogTemplate extends MediaQueries {
 
     private set propOpen(value: boolean) {
         if (this.internalPropOpen != value) {
-            this.busy = true;
-            this.internalPropOpen = value;
-            if (value) {
-                this.internalOpenDialog().then(() => {
-                    this.$emit('update:open', value);
-                    this.$emit('open');
-                    this.busy = false;
-                });
+            if (this.busy) {
+                this.$emit('update:open', !value);
             } else {
-                this.internalCloseDialog().then(() => {
-                    this.$emit('update:open', value);
-                    this.$emit('close');
-                    this.busy = false;
-                });
+                this.busy = true;
+                this.internalPropOpen = value;
+                if (value) {
+                    this.internalOpenDialog().then(() => {
+                        this.$emit('update:open', value);
+                        this.$emit('open');
+                        this.busy = false;
+                    });
+                } else {
+                    this.internalCloseDialog().then(() => {
+                        this.$emit('update:open', value);
+                        this.$emit('close');
+                        this.busy = false;
+                    });
+                }
             }
         }
     }
