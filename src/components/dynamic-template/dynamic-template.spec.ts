@@ -6,7 +6,7 @@ describe('dynamic-template', () => {
     it('renders the template', () => {
         const vm: MDynamicTemplate = new MDynamicTemplate({ propsData: { template: '<span>abcde</span>' } }).$mount();
 
-        this.$nextTick(() => {
+        Vue.nextTick(() => {
             expect(vm.$el.innerHTML).toBe('<span>abcde</span>');
         });
     });
@@ -15,7 +15,7 @@ describe('dynamic-template', () => {
         const vm: MDynamicTemplate = new MDynamicTemplate({ propsData: { template: '<span>abcde</span>' } }).$mount();
         vm.template = '<p>abcde</p>';
 
-        this.$nextTick(() => {
+        Vue.nextTick(() => {
             expect(vm.$el.innerHTML).toBe('<p>abcde</p>');
         });
     });
