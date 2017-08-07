@@ -17,7 +17,7 @@ export class MWindow {
     public scrollPosition: number = 0;
 
     public windowCount: number = 0;
-    public arrWindow: any = new Array();
+    // public arrWindow: any = new Array();
 
     public backdropElement: HTMLElement;
     public backdropId: string = '';
@@ -30,11 +30,11 @@ export class MWindow {
         if (this.windowCount == 1) {
             this.stopScollBody();
         }
-        this.arrWindow.push({
-            id: windowId,
-            windowPosition: this.windowCount - 1,
-            zIndex: this.windowZIndex
-        });
+        // this.arrWindow.push({
+        //     id: windowId,
+        //     windowPosition: this.windowCount - 1,
+        //     zIndex: this.windowZIndex
+        // });
         this.setBackdropZIndex();
     }
 
@@ -46,8 +46,8 @@ export class MWindow {
             this.removeBackdrop();
             this.windowZIndex = Z_INDEZ_DEFAULT;
         }
-        let windowPosition: number = Number(this.getArrWindowData(windowId)['windowPosition']);
-        this.arrWindow.splice(windowPosition, 1);
+        // let windowPosition: number = Number(this.getArrWindowData(windowId)['windowPosition']);
+        // this.arrWindow.splice(windowPosition, 1);
         this.setBackdropZIndex();
     }
 
@@ -96,13 +96,13 @@ export class MWindow {
         this.bodyStyle.overflow = 'hidden';
     }
 
-    public getArrWindowData(windowId): any {
-        for (let i = 0; i < this.arrWindow.length; i++) {
-            if (this.arrWindow[i].id == windowId) {
-                return this.arrWindow[i];
-            }
-        }
-    }
+    // public getArrWindowData(windowId): any {
+    //     for (let i = 0; i < this.arrWindow.length; i++) {
+    //         if (this.arrWindow[i].id == windowId) {
+    //             return this.arrWindow[i];
+    //         }
+    //     }
+    // }
 
     public setScrollPosition() {
         this.scrollPosition = this.bodyElement.scrollTop;
