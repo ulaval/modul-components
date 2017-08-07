@@ -15,13 +15,17 @@ export class MOptionsMenu extends ModulVue {
     @Prop()
     public disabled: boolean;
 
-    public mounted(): void {
+    public close(): void {
+        this.$children[0]['closePopper']();
+    }
+
+    protected mounted(): void {
         let containsIcon: boolean = false;
         let containsText: boolean = false;
         this.$children[0].$children.forEach((child) => {
             if (child.$refs['m-options-menu-item']) {
-                if (child['hasIcon']) containsIcon = true;
-                if (child['hasSlot']) containsText = true;
+                containsIcon = child['hasIcon'];
+                containsText = child['hasSlot'];
             }
         });
         // add classes for padding right of icon or left of text
@@ -44,10 +48,6 @@ export class MOptionsMenu extends ModulVue {
 
     private onHide(): void {
         this.$emit('hide');
-    }
-
-    private close(): void {
-        this.$children[0]['closePopper']();
     }
 }
 
