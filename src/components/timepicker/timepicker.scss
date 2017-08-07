@@ -42,11 +42,11 @@
 
         &:hover,
         &:focus {
-            background-color: $m-color--primary-lightest;
+            background-color: $m-color--interactive-lightest;
         }
 
         &.m--is-selected {
-            background-color: $m-color--primary;
+            background-color: $m-color--interactive;
         }
     }
 

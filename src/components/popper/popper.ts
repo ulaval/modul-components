@@ -17,9 +17,13 @@ export enum DialogMode {
 }
 
 @WithRender
+<<<<<<< HEAD
 @Component({
     mixins: [MediaQueries]
 })
+=======
+@Component
+>>>>>>> ba93b203e783ac0c945ca9ab76447526221ff73d
 export class MPopper extends MediaQueries {
     @Prop({
         default: TRIGGER_CLICK,
@@ -56,9 +60,9 @@ export class MPopper extends MediaQueries {
 
     @Prop()
     public beforeEnter: any;
-    @Prop()
+    @Prop({ default: function() { return this.defaultOnEnter; } })
     public enter: any;
-    @Prop()
+    @Prop({ default: function() { return this.defaultOnAfterEnter; } })
     public afterEnter: any;
     @Prop()
     public enterCancelled: any;
@@ -87,14 +91,18 @@ export class MPopper extends MediaQueries {
     private popper;
     private appended: boolean;
     private _timer: number;
+    private fullWidth: number = 0;
+    private fullHeight: number = 0;
 
     private isDialogOpen: boolean = false;
 
-    protected created(): void {
+    private showPopperBody: boolean = true;
+
+    public created(): void {
         this.popperOptions = { ...this.popperOptions, ...this.options };
     }
 
-    protected mounted(): void {
+    public mounted(): void {
         if ((this.$slots.body) && (this.$slots.default)) {
             if (!this.isScreenMaxS) {
                 this.createPopper();
@@ -103,7 +111,7 @@ export class MPopper extends MediaQueries {
         }
     }
 
-    protected destroyed() {
+    public destroyed() {
         this.destroyPopper();
     }
 
@@ -115,16 +123,20 @@ export class MPopper extends MediaQueries {
     @Watch('isScreenMaxS')
     private isScreenMaxSChanged(value) {
         if (value) {
+            this.showPopperBody = false;
             this.doDestroy();
             this.isDialogOpen = this.isPopperOpen;
         } else {
-            this.createPopper();
-            this.closePopper();
-            if (this.isDialogOpen) {
-                setTimeout(() => {
-                    this.openPopper();
-                }, 2);
-            }
+            this.$nextTick(() => {
+                this.showPopperBody = true;
+                this.createPopper();
+                this.closePopper();
+                if (this.isDialogOpen) {
+                    setTimeout(() => {
+                        this.openPopper();
+                    }, 2);
+                }
+            });
         }
     }
 
@@ -289,7 +301,7 @@ export class MPopper extends MediaQueries {
     }
 
     private get hasBodySlot(): boolean {
-        return !!this.$slots.body;
+        return !!this.$slots.body && this.isScreenMaxS ? true : this.showPopperBody;
     }
 
     private get hasFooterSlot(): boolean {
@@ -311,10 +323,37 @@ export class MPopper extends MediaQueries {
         }
     }
 
+    private defaultOnEnter(el: HTMLElement, done) {
+        if (!this.fullHeight && !this.fullWidth) {
+            this.fullWidth = el.clientWidth;
+            this.fullHeight = el.clientHeight;
+        }
+        let bodyContent = this.$refs['body']['children'][0] as HTMLElement;
+        bodyContent.style.position = 'absolute';
+        bodyContent.style.width = this.fullWidth + 'px';
+        bodyContent.style.height = this.fullHeight + 'px';
+        el.style.transitionProperty = 'margin-top, opacity, width, height';
+        el.style.transitionDuration = '0.3s';
+        el.style.marginTop = '20px';
+        el.style.opacity = '0';
+        el.style.width = '0';
+        el.style.height = '0';
+        done();
+    }
+
     private onAfterEnter(el: HTMLElement): void {
         if (typeof (this.afterEnter) === 'function') {
             this.afterEnter(el.children[0]);
         }
+    }
+
+    private defaultOnAfterEnter(el: HTMLElement) {
+        Vue.nextTick(() => {
+            el.style.marginTop = '0';
+            el.style.opacity = '1';
+            el.style.width = this.fullWidth + 'px';
+            el.style.height = this.fullHeight + 'px';
+        });
     }
 
     private onEnterCancelled(el: HTMLElement): void {

@@ -29,51 +29,51 @@ $m-color--grey-lighter: #f1f1f1 !default;
 $m-color--grey-lightest: #f7f7f7 !default;
 
 // ======================================================================
-//  Primary colors
+//  Success colors
 // ======================================================================
-$m-color--primary-darker: #0074a0 !default;
-$m-color--primary-dark: #0087bd !default;
-$m-color--primary: $m-color--ul-blue !default;
-$m-color--primary-light: #36adff !default;
-$m-color--primary-lighter: #6ed2ff !default;
-$m-color--primary-lightest: #dffaff !default;
+$m-color--success-dark: #14a555 !default;
+$m-color--success: #13bf69 !default;
+$m-color--success-light: #17c96b !default;
+$m-color--success-lightest: #dcf9e9 !default;
 
 // ======================================================================
-//  Secondary colors
+//  Warning colors
 // ======================================================================
-$m-color--secondary-darker: #b64c00 !default;
-$m-color--secondary-dark: #d07300 !default;
-$m-color--secondary: #f39612 !default;
-$m-color--secondary-light: #ffaa26 !default;
-$m-color--secondary-lighter: #ffbe3a !default;
-$m-color--secondary-lightest: #ffeecf !default;
-
-// ======================================================================
-//  Yellow
-// ======================================================================
-$m-color--yellow-darker: #cc8f09 !default;
-$m-color--yellow-dark: #e0a207 !default;
-$m-color--yellow: $m-color--ul-yellow !default;
-$m-color--yellow-light: #ffd517 !default;
-$m-color--yellow-lighter: #ffec66 !default;
-$m-color--yellow-lightest: #fffdcf !default;
-
-// ======================================================================
-//  Valid colors
-// ======================================================================
-$m-color--valid-darker: #079942 !default;
-$m-color--valid-dark: #14a555 !default;
-$m-color--valid: #13bf69 !default;
-$m-color--valid-light: #17c96b !default;
-$m-color--valid-lighter: #1ddd6f !default;
-$m-color--valid-lightest: #dcf9e9 !default;
+$m-color--warning-dark: #e0a207 !default;
+$m-color--warning: $m-color--ul-yellow !default;
+$m-color--warning-light: #ffd517 !default;
+$m-color--warning-lightest: #fffdcf !default;
 
 // ======================================================================
 //  Error colors
 // ======================================================================
-$m-color--error-darker: #b20000 !default;
 $m-color--error-dark: #ca0000 !default;
 $m-color--error: $m-color--ul-red !default;
 $m-color--error-light: #e33642 !default;
-$m-color--error-lighter: #e39fa8 !default;
 $m-color--error-lightest: #ffdcdc !default;
+
+// ======================================================================
+//  Interactive colors
+// ======================================================================
+$m-color--interactive-darker: #0074a0 !default;
+$m-color--interactive-dark: #0087bd !default;
+$m-color--interactive: $m-color--ul-blue !default;
+$m-color--interactive-light: #36adff !default;
+$m-color--interactive-lighter: #6ed2ff !default;
+$m-color--interactive-lightest: #dffaff !default;
+
+// ======================================================================
+//  Accent colors
+// ======================================================================
+$m-color--accent-dark: #d07300 !default;
+$m-color--accent: #f39612 !default;
+$m-color--accent-light: #ffaa26 !default;
+$m-color--accent-lightest: #ffeecf !default;
+
+// ======================================================================
+//  Active colors
+// ======================================================================
+$m-color--active-dark: $m-color--warning-dark !default;
+$m-color--active: $m-color--ul-yellow !default;
+$m-color--active-light: $m-color--warning-light !default;
+$m-color--active-lightest: $m-color--warning-lightest !default;

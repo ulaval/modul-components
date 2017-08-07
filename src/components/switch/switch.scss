@@ -29,14 +29,14 @@ $m-switch-size: 23px;
             }
 
             .m-switch__label {
-                color: $m-color--primary;
+                color: $m-color--interactive;
             }
         }
 
         &.m--is-checked {
             .m-switch__input {
-                border-color: $m-color--primary;
-                background-color: $m-color--primary;
+                border-color: $m-color--interactive;
+                background-color: $m-color--interactive;
             }
 
             .m-switch__button {

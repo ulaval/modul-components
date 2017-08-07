@@ -6,44 +6,44 @@ $m-message-size: 22px;
 
     &.m--is-regular {
         &.m--is-success {
-            border: 1px solid $m-color--valid;
+            border: 1px solid $m-color--success;
 
             .m-message__icon {
-                background-color: $m-color--valid-lightest;
-                border-color: $m-color--valid;
-                color: $m-color--valid;
+                background-color: $m-color--success-lightest;
+                border-color: $m-color--success;
+                color: $m-color--success;
             }
 
             .m-message__body .m-message__close-button {
-                color: $m-color--valid;
+                color: $m-color--success;
             }
         }
 
         &.m--is-information {
-            border: 1px solid $m-color--primary;
+            border: 1px solid $m-color--interactive;
 
             .m-message__icon {
-                background-color: $m-color--primary-lightest;
-                border-color: $m-color--primary;
-                color: $m-color--primary;
+                background-color: $m-color--interactive-lightest;
+                border-color: $m-color--interactive;
+                color: $m-color--interactive;
             }
 
             .m-message__body .m-message__close-button {
-                color: $m-color--primary;
+                color: $m-color--interactive;
             }
         }
 
         &.m--is-warning {
-            border: 1px solid $m-color--yellow;
+            border: 1px solid $m-color--warning;
 
             .m-message__icon {
-                background-color: $m-color--yellow-lightest;
-                border-color: $m-color--yellow;
-                color: $m-color--yellow;
+                background-color: $m-color--warning-lightest;
+                border-color: $m-color--warning;
+                color: $m-color--warning;
             }
 
             .m-message__body .m-message__close-button {
-                color: $m-color--yellow;
+                color: $m-color--warning;
             }
         }
 
@@ -101,19 +101,19 @@ $m-message-size: 22px;
     &.m--is-light {
         &.m--is-success {
             .m-message__wrap {
-                background-color: $m-color--valid-lightest;
+                background-color: $m-color--success-lightest;
             }
         }
 
         &.m--is-information {
             .m-message__wrap {
-                background-color: $m-color--primary-lightest;
+                background-color: $m-color--interactive-lightest;
             }
         }
 
         &.m--is-warning {
             .m-message__wrap {
-                background-color: $m-color--yellow-lightest;
+                background-color: $m-color--warning-lightest;
             }
         }
 

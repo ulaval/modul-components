@@ -24,7 +24,7 @@ $m-checkbox--width: 16px;
             &__input {
                 position: relative;
                 border-color: $m-color--text;
-                color: $m-color--primary;
+                color: $m-color--interactive;
 
                 &__icon {
                     position: relative;
@@ -40,7 +40,7 @@ $m-checkbox--width: 16px;
                         bottom: 0;
                         left: 0;
                         content: '';
-                        background: $m-color--primary;
+                        background: $m-color--interactive;
                         width: 0;
                         border-radius: 2px;
                     }
@@ -69,12 +69,12 @@ $m-checkbox--width: 16px;
         &.m--is-focus {
             .m-checkbox {
                 &__input {
-                    border-color: $m-color--primary;
-                    background: $m-color--primary-lightest;
+                    border-color: $m-color--interactive;
+                    background: $m-color--interactive-lightest;
                 }
 
                 &__label {
-                    color: $m-color--primary;
+                    color: $m-color--interactive;
                 }
             }
         }

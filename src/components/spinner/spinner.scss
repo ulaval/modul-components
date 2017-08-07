@@ -27,9 +27,13 @@ $m-loading-speed: 0.7s;
                 &__description {
                     color: $m-color--white;
                 }
+            }
+        }
 
-                &__circle-background {
-                    stroke: $m-color--white;
+        &.m--is-light {
+            .m-spinner {
+                &__icon {
+                    border-color: $m-color--active $m-color--white $m-color--white $m-color--white;
                 }
             }
         }
@@ -44,8 +48,8 @@ $m-loading-speed: 0.7s;
 
         &.m--is-dark {
             .m-spinner {
-                &__circle-background {
-                    stroke: $m-color--grey;
+                &__icon {
+                    border-color: $m-color--active $m-color--grey $m-color--grey $m-color--grey;
                 }
             }
         }
@@ -70,7 +74,7 @@ $m-loading-speed: 0.7s;
         height: 46px;
         background: none;
         border: 4px solid;
-        border-color: $m-color--ul-yellow $m-color--grey-light $m-color--grey-light $m-color--grey-light;
+        border-color: $m-color--active $m-color--grey-light $m-color--grey-light $m-color--grey-light;
         border-radius: 50%;
 
         &.m--is-small {

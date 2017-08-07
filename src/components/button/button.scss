@@ -1,9 +1,9 @@
 @import 'abstracts/variables';
-$m-button--color: $m-color--primary !default;
-$m-button--color-hover: $m-color--primary-light !default;
-$m-button--color-active: $m-color--primary-dark !default;
-$m-button--color-selected: $m-color--primary-darker !default;
-$m-button--color-waiting: $m-color--primary-lighter !default;
+$m-button--color: $m-color--interactive !default;
+$m-button--color-hover: $m-color--interactive-light !default;
+$m-button--color-active: $m-color--interactive-dark !default;
+$m-button--color-selected: $m-color--interactive-darker !default;
+$m-button--color-waiting: $m-color--interactive-lighter !default;
 $m-button--color-disabled: $m-color--grey-darker !default;
 
 .m-button {
@@ -112,7 +112,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
             height: $m-touch-size / 2;
             border-radius: 50%;
             opacity: 0;
-            background: $m-color--primary-lightest;
+            background: $m-color--interactive-lightest;
         }
 
         .m-button {
@@ -171,7 +171,6 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         position: relative;
         z-index: 2;
         font-size: $m-font-size;
-        height: $m-font-size;
 
         &.m--is-left {
             margin-right: $m-margin;

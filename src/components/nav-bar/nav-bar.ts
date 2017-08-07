@@ -81,7 +81,7 @@ export class MNavbar extends ModulVue {
     }
 
     private setLinePosition(el: HTMLElement): void {
-        ModulVue.nextTick(() => {
+        this.$nextTick(() => {
             let positionX: number = el.offsetLeft;
             let width: number = el.clientWidth;
             this.$refs.line['style']['transform'] = 'translate3d(' + positionX + 'px, 0, 0)';

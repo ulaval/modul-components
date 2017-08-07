@@ -4,7 +4,7 @@
     transition: color 0.3s ease;
     position: relative;
     font-weight: $m-font-weight--bold;
-    color: $m-color--primary;
+    color: $m-color--interactive;
     text-decoration: none;
 
     &:not(.m--no-underline) {
@@ -18,7 +18,7 @@
                 content: '';
                 width: 8%;
                 height: 1px;
-                background: $m-color--primary;
+                background: $m-color--interactive;
                 opacity: 0;
             }
         }
@@ -26,11 +26,11 @@
 
     &:not(.m--is-unvisited):not(.m--is-button) {
         &:visited {
-            color: $m-color--primary-darker;
+            color: $m-color--interactive-darker;
 
             .m-link__text.m-link__text {
                 &::after {
-                    background: $m-color--primary-darker;
+                    background: $m-color--interactive-darker;
                 }
             }
         }
@@ -43,12 +43,12 @@
     &:not(:active) {
         &:focus,
         &:hover {
-            color: $m-color--primary-light;
+            color: $m-color--interactive-light;
 
             .m-link__text {
                 &::after {
                     width: 100%;
-                    background: $m-color--primary-light;
+                    background: $m-color--interactive-light;
                     opacity: 1;
                 }
             }
@@ -56,14 +56,14 @@
     }
 
     &:active {
-        color: $m-color--primary-dark;
+        color: $m-color--interactive-dark;
 
         .m-link__text {
             &::after {
                 right: 0;
                 left: auto;
                 width: 8%;
-                background: $m-color--primary-dark;
+                background: $m-color--interactive-dark;
                 opacity: 0;
             }
         }

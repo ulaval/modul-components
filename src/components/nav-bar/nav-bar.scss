@@ -16,7 +16,7 @@
     &__line {
         position: absolute;
         bottom: 0;
-        background: $m-color--yellow;
+        background: $m-color--active;
         height: $m-border-width--l;
 
         &.m--is-anim-active {
@@ -84,7 +84,7 @@
                         left: 0;
                         content: '';
                         height: $m-border-width--l;
-                        background: $m-color--yellow;
+                        background: $m-color--active;
                     }
                 }
             }

@@ -54,11 +54,11 @@
 
         &:hover,
         &:focus {
-            background-color: $m-color--primary-lightest;
+            background-color: $m-color--interactive-lightest;
         }
 
         &.m--is-selected {
-            background-color: $m-color--primary-light;
+            background-color: $m-color--interactive-light;
         }
 
         &.m--is-other-month {

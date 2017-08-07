@@ -1,4 +1,4 @@
-<m-popper padding="" @show="isOpen = true" @hide="isOpen = false">
+<m-popper padding="" @show="isOpen = true" @hide="isOpen = false" :options="options" :disabled="disabled">
 
     <m-text-field icon-name="calendar" :force-focus="isOpen" @focus="openDatepicker" :value="formattedDate" @change="onChange"
         :error="error" :placeholder="placeholder" :icon-description="isOpen ? closeCalendarDesc : openCalendarDesc"></m-text-field>

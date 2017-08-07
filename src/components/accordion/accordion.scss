@@ -5,7 +5,7 @@ $m-accordion--icon-l-height: 2px;
 $m-accordion--icon-height: 1px;
 $m-accordion--border-size: 2px;
 $m-accordion--border-color: $m-color--grey-light;
-$m-accordion--color: $m-color--secondary;
+$m-accordion--color: $m-color--accent;
 
 .m-accordion {
     &.m--is-regular,
@@ -81,7 +81,7 @@ $m-accordion--color: $m-color--secondary;
                 &:hover {
                     .m-accordion__header__title {
                         transition: color 0.3s ease;
-                        color: $m-color--primary;
+                        color: $m-color--interactive;
                     }
                 }
             }
@@ -127,7 +127,7 @@ $m-accordion--color: $m-color--secondary;
                 top: 50%;
                 left: 50%;
                 content: '';
-                background: $m-color--primary;
+                background: $m-color--interactive;
                 transform: translate3d(-50%, -50%, 0);
             }
 
@@ -195,7 +195,7 @@ $m-accordion--color: $m-color--secondary;
             }
 
             &.m--has-border {
-                border-color: $m-color--primary;
+                border-color: $m-color--interactive;
                 border-style: solid;
             }
 

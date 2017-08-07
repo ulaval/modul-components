@@ -39,6 +39,10 @@ export class MDatepicker extends ModulVue implements InputStateMixin {
     public min: moment.Moment;
     @Prop({ default: () => { return moment().add(10, 'year'); } })
     public max: moment.Moment;
+    @Prop({ default: () => ({ placement: 'bottom-start' }) })
+    public options: any;
+    @Prop()
+    public disabled: boolean;
 
     // Variables from InputStateMixin
     public hasError: boolean;

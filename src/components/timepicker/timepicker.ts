@@ -22,6 +22,10 @@ export class MTimepicker extends ModulVue {
     public minute: number;
     @Prop({ default: 'LT' })
     public format: string;
+    @Prop({ default: () => ({ placement: 'bottom-start' }) })
+    public options: any;
+    @Prop()
+    public disabled: boolean;
 
     private selectedHour: number = 0;
     private selectedMinute: number = 0;

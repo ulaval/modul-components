@@ -1,9 +1,9 @@
 @import 'abstracts/variables';
 $m-text-field--transiton-duration: 0.45s !default;
 $m-text-field--color-helper: $m-color--grey-darker !default;
-$m-text-field--color-focus: $m-color--primary !default;
+$m-text-field--color-focus: $m-color--interactive !default;
 $m-text-field--color-error: $m-color--error !default;
-$m-text-field--color-valid: $m-color--valid !default;
+$m-text-field--color-valid: $m-color--success !default;
 $m-text-field--color-disabled: $m-color--grey-darker !default;
 $m-text-field--margin: $m-padding--xs !default;
 
