@@ -1,0 +1,295 @@
+@import '../../styles/abstracts/variables';
+$m-dialog-primary--max-width: 380px !default;
+$m-dialog-secondary--max-width: 640px !default;
+$m-dialog-secondary--header-height: $m-touch-size !default;
+
+.m-dialog {
+    display: inline-block;
+
+    &__wrap {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        min-width: $m-min-width;
+
+        @include m-is-ie() {
+            display: block;
+        }
+
+        &.m--is-primary,
+        &.m--is-secondary {
+            @media screen and (min-width: $m-screen--min--s) {
+                padding: $m-padding--l;
+            }
+        }
+
+        &.m--is-primary {
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: $m-padding;
+
+            .m-dialog {
+                &__article {
+                    transition: 0.3s transform ease, 0.2s opacity linear;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                    transform: translate3d(0, $m-padding--l, 0);
+                    opacity: 0;
+                    border-radius: $m-border-radius;
+
+                    @media screen and (min-width: #{$m-dialog-primary--max-width + $m-padding * 2}) {
+                        width: $m-dialog-primary--max-width;
+                    }
+
+                    @include m-is-ie() {
+                        margin: 60px auto;
+                    }
+                }
+
+                &__header {
+                    border-bottom: 1px solid $m-color--grey-light;
+                }
+
+                &__footer-nav {
+                    &,
+                    > :first-child {
+                        display: inline-flex;
+                        flex-direction: column;
+
+                        &,
+                        &.m-button,
+                        &.m-link,
+                        > :first-child {
+                            margin: 0;
+                        }
+                    }
+
+                    .m-button,
+                    .m-link {
+                        margin-top: $m-margin;
+                    }
+                }
+            }
+
+            &.m--is-open {
+                .m-dialog {
+                    &__article {
+                        transform: translate3d(0, 0, 0);
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        &.m--is-secondary {
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            .m-dialog {
+                &__article {
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+
+                    @media screen and (max-width: #{$m-screen--max--s}) {
+                        transition: 0.6s transform ease;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        transform: translate3d(0, 110%, 0);
+                        margin: 0 !important; //style for IE
+                    }
+
+                    @media screen and (min-width: #{$m-screen--min--s}) {
+                        transition: 0.3s transform ease, 0.2s opacity linear;
+                        transform: translate3d(0, $m-padding--l, 0);
+                        margin-top: auto;
+                        margin-bottom: auto;
+                        max-width: $m-dialog-secondary--max-width;
+                        opacity: 0;
+                    }
+
+                    @include m-is-ie() {
+                        margin: $m-padding--l*2 auto;
+                    }
+                }
+
+                &__header {
+                    position: relative;
+                    background: $m-color--black-grey;
+                    color: $m-color--white;
+                    min-height: $m-dialog-secondary--header-height;
+                    padding-right: $m-touch-size;
+
+                    &__close-button {
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                        margin: 0;
+                        color: $m-color--white;
+                        transform: translate3d(0, -50%, 0);
+                        stroke-width: 2px;
+
+                        &::after {
+                            background: $m-color--black-grey-light;
+                        }
+                    }
+                }
+
+                &__body {
+                    flex: 1;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+
+                    @include m-is-ie() {
+                        flex: none;
+                    }
+                }
+            }
+
+            &.m--is-open {
+                .m-dialog {
+                    &__article {
+                        @media screen and (max-width: #{$m-screen--max--s}) {
+                            transform: translate3d(0, 0, 0);
+                        }
+
+                        @media screen and (min-width: #{$m-screen--min--s}) {
+                            transform: translate3d(0, 0, 0);
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.m--is-panel {
+            .m-dialog {
+                &__article {
+                    transition: transform 0.6s ease;
+                    transform: translate3d(0, 100%, 0);
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    display: flex;
+                    flex-direction: column;
+                    min-height: $m-touch-size--l;
+                    max-height: calc(100vh - #{$m-padding--xl});
+                }
+
+                &__header {
+                    display: block;
+                    border-bottom: 1px solid $m-color--grey-light;
+                }
+
+                &__close-button {
+                    transition: 0.3s background ease;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: $m-margin $m-padding;
+                    background: none;
+                    border: none;
+                    font-size: $m-font-size;
+                    color: $m-color--white;
+                    cursor: pointer;
+                    outline: none;
+                    text-decoration: none;
+                    line-height: 1;
+                    transform: translate3d(0, -100%, 0);
+
+                    &:focus:not(:hover) {
+                        background: rgba($m-color--black, 0.3);
+                    }
+                }
+
+                &__body {
+                    flex: 1;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+
+                    @include m-is-ie() {
+                        flex: none;
+                    }
+                }
+            }
+
+            &.m--is-open {
+                .m-dialog {
+                    &__article {
+                        transform: translate3d(0, 0, 0);
+                    }
+                }
+            }
+        }
+
+        &.m--is-clickable-backdrop {
+            cursor: pointer;
+        }
+    }
+
+    &__article {
+        cursor: auto;
+        width: 100%;
+        background: $m-color--white;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    &__header,
+    &__body,
+    &__footer {
+        &.m--no-padding {
+            padding: 0;
+        }
+
+        > :first-child {
+            margin: 0;
+
+            > :first-child {
+                margin: 0;
+            }
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: $m-margin $m-padding;
+
+        &__title,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            flex: 1;
+            margin: 0;
+            font-size: $m-font-size--h5;
+            font-weight: $m-font-weight--bold;
+            line-height: 1.2;
+        }
+    }
+
+    &__body {
+        padding: $m-padding;
+    }
+
+    &__footer {
+        padding: 0 $m-padding $m-padding;
+        text-align: center;
+    }
+
+    &__button {
+        outline: none;
+        display: inline-block;
+    }
+}

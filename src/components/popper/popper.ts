@@ -5,16 +5,11 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { DialogMode } from '../../mixins/dialog-template/dialog-template';
 import Popper from 'popper.js';
 
 const TRIGGER_CLICK = 'click';
 const TRIGGER_HOVER = 'hover';
-
-export enum DialogMode {
-    Primary = 'primary',
-    Secondary = 'secondary',
-    Panel = 'panel'
-}
 
 @WithRender
 @Component({
