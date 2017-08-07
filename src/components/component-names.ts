@@ -14,6 +14,7 @@ export const ICON_NAME: string = 'm-icon';
 export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
 export const MESSAGE_NAME: string = 'm-message';
+export const MODAL_NAME: string = 'm-modal';
 export const NAV_BAR_NAME: string = 'm-nav-bar';
 export const NAV_BAR_ITEM_NAME: string = 'm-nav-bar-item';
 export const OPTIONS_MENU_NAME: string = 'm-options-menu';
@@ -23,7 +24,8 @@ export const SIDEBAR_NAME: string = 'm-sidebar';
 export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const RADIO_BUTTONS_NAME: string = 'm-radio-buttons';
-export const MODAL_NAME: string = 'm-modal';
+export const RADIO_NAME: string = 'm-radio';
+export const SECONDARY_DIALOG_NAME: string = 'm-secondary-dialog';
 export const SELECT_NAME: string = 'm-select';
 export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
@@ -59,6 +61,7 @@ export const components: string[] = [
     LIMIT_TEXT_NAME,
     LINK_NAME,
     MESSAGE_NAME,
+    MODAL_NAME,
     NAV_BAR_NAME,
     OPTIONS_MENU_NAME,
     OPTIONS_MENU_ITEM_NAME,
@@ -67,7 +70,8 @@ export const components: string[] = [
     POPPER_NAME,
     POPUP_NAME,
     RADIO_BUTTONS_NAME,
-    MODAL_NAME,
+    RADIO_NAME,
+    SECONDARY_DIALOG_NAME,
     SELECT_NAME,
     SLIDER_NAME,
     SPINNER_NAME,
