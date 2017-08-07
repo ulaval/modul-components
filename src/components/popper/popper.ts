@@ -17,13 +17,9 @@ export enum DialogMode {
 }
 
 @WithRender
-<<<<<<< HEAD
 @Component({
     mixins: [MediaQueries]
 })
-=======
-@Component
->>>>>>> ba93b203e783ac0c945ca9ab76447526221ff73d
 export class MPopper extends MediaQueries {
     @Prop({
         default: TRIGGER_CLICK,
