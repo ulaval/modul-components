@@ -11,10 +11,6 @@ const DIALOG_ID: string = 'mDialog';
 })
 export class MDialog extends Vue {
     public componentName: string = DIALOG_NAME;
-
-    protected get propMode(): DialogMode {
-        return DialogMode.Primary;
-    }
 }
 
 const DialogPlugin: PluginObject<any> = {

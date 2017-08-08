@@ -1,3 +1,4 @@
+import { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
@@ -21,7 +22,8 @@ const DIALOG_ID: string = 'mDialog';
     mixins: [MediaQueries]
 })
 export class DialogTemplate extends ModulVue {
-
+    @Prop({ default: DialogMode.Primary })
+    public mode: DialogMode;
     @Prop({ default: DIALOG_ID })
     public id: string;
     @Prop({ default: false })
@@ -81,7 +83,7 @@ export class DialogTemplate extends ModulVue {
     }
 
     protected get propMode(): DialogMode {
-        return DialogMode.Primary;
+        return this.mode;
     }
 
     public get propCloseOnBackdrop(): boolean {
