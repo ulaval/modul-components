@@ -115,7 +115,7 @@ export class MAccordionGroup extends Vue {
                 this.arrAccordion[i].open = true;
             }
             if (this.checkAccordion(i)) {
-                accordion.isAnimActive = isAnimActive;
+                accordion.setIsAnimActive(isAnimActive);
                 accordion.openAccordion();
             }
         }
@@ -130,7 +130,7 @@ export class MAccordionGroup extends Vue {
                 this.arrAccordion[i].open = false;
             }
             if (this.checkAccordion(i)) {
-                accordion.isAnimActive = isAnimActive;
+                accordion.setIsAnimActive(isAnimActive);
                 accordion.closeAccordion();
             }
         }

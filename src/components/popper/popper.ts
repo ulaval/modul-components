@@ -1,10 +1,10 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { DialogMode } from '../../mixins/dialog-template/dialog-template';
 import Popper from 'popper.js';
 
@@ -15,7 +15,7 @@ const TRIGGER_HOVER = 'hover';
 @Component({
     mixins: [MediaQueries]
 })
-export class MPopper extends MediaQueries {
+export class MPopper extends ModulVue {
     @Prop({
         default: TRIGGER_CLICK,
         validator: (value) => [TRIGGER_CLICK, TRIGGER_HOVER].indexOf(value) > -1
@@ -95,7 +95,7 @@ export class MPopper extends MediaQueries {
 
     public mounted(): void {
         if ((this.$slots.body) && (this.$slots.default)) {
-            if (!this.isScreenMaxS) {
+            if (!this.as<MediaQueriesMixin>().isScreenMaxS) {
                 this.createPopper();
             }
             on(document, 'click', this.handleDocumentClick);
@@ -222,12 +222,12 @@ export class MPopper extends MediaQueries {
     }
 
     private openPopper(): void {
-        if (!this.isPopperOpen && !this.isScreenMaxS) {
+        if (!this.isPopperOpen && !this.as<MediaQueriesMixin>().isScreenMaxS) {
             this.isPopperOpen = true;
             clearTimeout(this._timer);
             this.updatePopper();
             this.$emit('show');
-        } else if (!this.isDialogOpen && this.isScreenMaxS) {
+        } else if (!this.isDialogOpen && this.as<MediaQueriesMixin>().isScreenMaxS) {
             this.isDialogOpen = true;
             clearTimeout(this._timer);
             this.updatePopper();
@@ -236,23 +236,23 @@ export class MPopper extends MediaQueries {
     }
 
     private closePopper(): void {
-        if (this.isPopperOpen && !this.isScreenMaxS) {
+        if (this.isPopperOpen && !this.as<MediaQueriesMixin>().isScreenMaxS) {
             this.isPopperOpen = false;
             this.$emit('hide');
-        } else if (this.isDialogOpen && this.isScreenMaxS) {
+        } else if (this.isDialogOpen && this.as<MediaQueriesMixin>().isScreenMaxS) {
             this.isDialogOpen = false;
             this.$emit('hide');
         }
     }
 
     private onMouseOver(): void {
-        if (this.trigger == TRIGGER_HOVER && !this.isScreenMaxS) {
+        if (this.trigger == TRIGGER_HOVER && !this.as<MediaQueriesMixin>().isScreenMaxS) {
             this.openPopper();
         }
     }
 
     private onMouseOut(): void {
-        if (this.trigger == TRIGGER_HOVER && !this.isScreenMaxS) {
+        if (this.trigger == TRIGGER_HOVER && !this.as<MediaQueriesMixin>().isScreenMaxS) {
             this._timer = window.setTimeout(() => {
                 this.closePopper();
             }, 10);
@@ -271,7 +271,7 @@ export class MPopper extends MediaQueries {
     }
 
     private get propOpen(): boolean {
-        if (!this.isScreenMaxS) {
+        if (!this.as<MediaQueriesMixin>().isScreenMaxS) {
             if (this.open) {
                 this.openPopper();
             } else {
@@ -292,7 +292,7 @@ export class MPopper extends MediaQueries {
     }
 
     private get hasBodySlot(): boolean {
-        return !!this.$slots.body && this.isScreenMaxS ? true : this.showPopperBody;
+        return !!this.$slots.body && this.as<MediaQueriesMixin>().isScreenMaxS ? true : this.showPopperBody;
     }
 
     private get hasFooterSlot(): boolean {
@@ -339,7 +339,7 @@ export class MPopper extends MediaQueries {
     }
 
     private defaultOnAfterEnter(el: HTMLElement) {
-        Vue.nextTick(() => {
+        this.$nextTick(() => {
             el.style.marginTop = '0';
             el.style.opacity = '1';
             el.style.width = this.fullWidth + 'px';

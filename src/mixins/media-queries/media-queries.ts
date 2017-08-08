@@ -83,6 +83,10 @@ export class MediaQueries extends ModulVue implements MediaQueriesMixin {
     private screenXLOut: () => void;
 
     protected created(): void {
+        if (!this.$mq) {
+            throw new Error('MediaQueries mixin -> this.$mq is undefined, you must register the MediaQueries plugin.');
+        }
+
         this.screenMinXSIn = () => this.isScreenMinXS = true;
         this.screenMinXSOut = () => this.isScreenMinXS = false;
         this.screenMinSIn = () => this.isScreenMinS = true;

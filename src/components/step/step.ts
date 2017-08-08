@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -20,7 +20,7 @@ export enum MStepState {
         TransitionAccordion
     ]
 })
-export class MStep extends Vue {
+export class MStep extends ModulVue {
     @Prop({ default: MStepState.Locked })
     public state: MStepState;
     @Prop({ default: false })
@@ -33,7 +33,6 @@ export class MStep extends Vue {
     public last: boolean;
 
     public componentName = STEP_NAME;
-    public isAnimActive: boolean = false;
     private propsOpen: boolean = false;
 
     protected mounted() {
@@ -41,14 +40,14 @@ export class MStep extends Vue {
     }
 
     private openStep(event): void {
-        this.isAnimActive = true;
+        this.as<TransitionAccordionMixin>().isAnimActive = true;
         this.propsOpen = true;
         this.$emit('openStep', event);
         event.preventDefault();
     }
 
     private closeStep(event): void {
-        this.isAnimActive = true;
+        this.as<TransitionAccordionMixin>().isAnimActive = true;
         this.propsOpen = false;
         this.$emit('closeStep', event);
         event.preventDefault();

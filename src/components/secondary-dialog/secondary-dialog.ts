@@ -7,7 +7,7 @@ import { DialogTemplate, DialogMode } from '../../mixins/dialog-template/dialog-
 @Component({
     mixins: [DialogTemplate]
 })
-export class MSecondaryDialog extends DialogTemplate {
+export class MSecondaryDialog extends Vue {
     public componentName: string = SECONDARY_DIALOG_NAME;
 
     protected get propMode(): DialogMode {

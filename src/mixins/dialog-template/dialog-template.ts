@@ -1,7 +1,8 @@
+import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import WithRender from './dialog-template.html?style=./dialog-template.scss';
 
 export enum DialogMode {
@@ -19,7 +20,7 @@ const DIALOG_ID: string = 'mDialog';
 @Component({
     mixins: [MediaQueries]
 })
-export class DialogTemplate extends MediaQueries {
+export class DialogTemplate extends ModulVue {
 
     @Prop({ default: DIALOG_ID })
     public id: string;
@@ -95,7 +96,7 @@ export class DialogTemplate extends MediaQueries {
         let result: number;
         switch (this.propMode) {
             case DialogMode.Secondary:
-                result = this.isScreenMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
+                result = this.as<MediaQueriesMixin>().isScreenMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
                 break;
             case DialogMode.Panel:
                 result = TRANSITION_DURATION_LONG;

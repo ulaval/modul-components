@@ -16,7 +16,7 @@ const PAGE_STEP: number = 4;
 @Component({
     mixins: [DropdownTemplate]
 })
-export class MDropdown extends ModulVue implements DropdownTemplateMixin {
+export class MDropdown extends ModulVue {
 
     @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6'] })
     public elements: any[];
@@ -34,13 +34,6 @@ export class MDropdown extends ModulVue implements DropdownTemplateMixin {
     public widthFromCss: boolean;
 
     public componentName: string = DROPDOWN_NAME;
-
-    // var from DropdownTemplateMixin
-    public mode: string = 'dropdown';
-    public label: string;
-    public editable: boolean;
-    public defaultText: string;
-    public defaultFirstElement: boolean;
 
     // Copy of prop
     public propSelectedElement: any;
@@ -170,7 +163,7 @@ export class MDropdown extends ModulVue implements DropdownTemplateMixin {
     }
 
     public setDropdownElementFocus(): void {
-        if (!this.editable) {
+        if (!this.as<DropdownTemplateMixin>().editable) {
             let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
             if (element) {
                 element.focus();
@@ -280,7 +273,7 @@ export class MDropdown extends ModulVue implements DropdownTemplateMixin {
             }
 
             // Default element
-            if (this.defaultFirstElement && elementsSorted[0]) {
+            if (this.as<DropdownTemplateMixin>().defaultFirstElement && elementsSorted[0]) {
                 this.selectElement(elementsSorted[0]);
             }
             this.textElement = this.getSelectedElementText();

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -31,7 +32,7 @@ export enum MAccordionIconASize {
 @Component({
     mixins: [TransitionAccordion]
 })
-export class MAccordion extends Vue implements TransitionAccordionMixin {
+export class MAccordion extends ModulVue {
 
     @Prop({ default: MAccordionAspect.Regular })
     public aspect: MAccordionAspect;
@@ -43,9 +44,6 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
     public iconAspect: MAccordionIconAspect;
     @Prop()
     public iconSize: MAccordionIconASize;
-
-    // Variable form TransitionAccordionMixin
-    public isAnimActive: boolean = false;
 
     public componentName: string = ACCORDION_NAME;
     public propAspect: string = MAccordionAspect.Regular;
@@ -80,6 +78,10 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
 
     public closeAccordion(): void {
         this.propOpen = false;
+    }
+
+    public setIsAnimActive(value: boolean): void {
+        this.as<TransitionAccordionMixin>().isAnimActive = value;
     }
 
     protected beforeMount(): void {
@@ -133,7 +135,7 @@ export class MAccordion extends Vue implements TransitionAccordionMixin {
     }
 
     private toggleAccordion(): void {
-        this.isAnimActive = true;
+        this.as<TransitionAccordionMixin>().isAnimActive = true;
         this.propOpen = !this.propOpen;
         this.$refs.accordionHeader['blur']();
         this.eventBus.$emit('click', this.id, this.propOpen);
