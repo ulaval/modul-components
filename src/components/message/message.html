@@ -3,7 +3,7 @@
                 'm--is-warning': state=='warning',
                 'm--is-error': state=='error',
                 'm--is-regular': mode!='light',
-                'm--is-light': mode=='light'}" v-if="visible">
+                'm--is-light': mode=='light'}" v-if="propVisible">
     <div class="m-message__wrap" :class="{'m--is-regular': mode!='reduce',
                 'm--is-light': mode=='light'}">
         <div class="m-message__icon" v-if="icon">

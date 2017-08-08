@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './message.html?style=./message.scss';
 import { MESSAGE_NAME } from '../component-names';
 
@@ -33,7 +33,30 @@ export class MMessage extends Vue {
 
     public componentName = MESSAGE_NAME;
 
+    private internalPropVisible: boolean = false;
+
+    protected mounted(): void {
+        this.propVisible = this.visible;
+    }
+
+    private get propVisible(): boolean {
+        return this.internalPropVisible;
+    }
+
+    private set propVisible(value: boolean) {
+        if (this.internalPropVisible != value) {
+            this.internalPropVisible = value;
+            this.$emit('update:visible', value);
+        }
+    }
+
+    @Watch('visible')
+    private visibleChanged(value: boolean): void {
+        this.propVisible = value;
+    }
+
     private onClose(event): void {
+        this.propVisible = false;
         this.$emit('close', event);
     }
 
