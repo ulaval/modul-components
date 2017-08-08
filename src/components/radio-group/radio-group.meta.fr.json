@@ -1,7 +1,7 @@
 {
-    "m-radio-buttons-meta": {
-        "name": "Boutons radio",
-        "context-of-use": "Décrire ici le contexte d'utilisation de la boîte à cocher.",
+    "m-radio-group-meta": {
+        "name": "Groupe de boutons radio",
+        "context-of-use": "Décrire ici le contexte d'utilisation du groupe de boutons radio.",
         "usage": "Quelques règles d'utilisation."
     }
 }

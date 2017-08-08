@@ -1,6 +1,6 @@
 {
-    "tag": "m-radio-buttons",
-    "name": "m-radio-buttons-meta:name",
+    "tag": "m-radio-group",
+    "name": "m-radio-group-meta:name",
     "attributes": {
         "listData": {
             "type": "object"
@@ -30,12 +30,12 @@
         {
             "type": "rubric",
             "title": "meta:context-of-use",
-            "content": "m-radio-meta:context-of-use"
+            "content": "m-radio-group-meta:context-of-use"
         },
         {
             "type": "rubric",
             "title": "meta:usage",
-            "content": "m-radio-meta:usage"
+            "content": "m-radio-group-meta:usage"
         }
     ]
 }

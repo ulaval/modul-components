@@ -1,6 +1,6 @@
 {
-    "tag": "m-radio-buttons",
-    "name": "m-radio-buttons-meta:name",
+    "tag": "m-radio",
+    "name": "m-radio-meta:name",
     "attributes": {
         "listData": {
             "type": "object"
