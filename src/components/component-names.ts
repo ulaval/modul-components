@@ -25,6 +25,7 @@ export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const RADIO_BUTTONS_NAME: string = 'm-radio-buttons';
 export const RADIO_NAME: string = 'm-radio';
+export const RADIO_GROUP_NAME: string = 'm-radio-group';
 export const SECONDARY_DIALOG_NAME: string = 'm-secondary-dialog';
 export const SELECT_NAME: string = 'm-select';
 export const SLIDER_NAME: string = 'm-slider';
@@ -71,6 +72,7 @@ export const components: string[] = [
     POPUP_NAME,
     RADIO_BUTTONS_NAME,
     RADIO_NAME,
+    RADIO_GROUP_NAME,
     SECONDARY_DIALOG_NAME,
     SELECT_NAME,
     SLIDER_NAME,

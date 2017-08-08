@@ -2,74 +2,49 @@ import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './radio.html?style=./radio.scss';
-import { RADIO_NAME } from '../component-names';
+import WithRender from './radio-group.html?style=./radio-group.scss';
+import { RADIO_NAME, RADIO_GROUP_NAME } from '../component-names';
+import { MRadio } from '../radio/radio';
+import uuid from '../../utils/uuid/uuid';
 
-const POSITION_LEFT: string = 'left';
-
-export interface MRadioListData {
-    value: string;
-    label: string;
-    checked: boolean;
+export enum MRadioGroupPosition {
+    LEFT = 'left',
+    RIGHT = 'right'
 }
 
 @WithRender
 @Component
-export class MRadio extends Vue {
+export class MRadioGroup extends Vue {
 
-    @Prop({
-        default: () => {
-            return [
-                {
-                    'value': 'radio-1',
-                    'label': 'Radio 1',
-                    'checked': true
-                },
-                {
-                    'value': 'radio-2',
-                    'label': 'Radio 2'
-                },
-                {
-                    'value': 'radio-3',
-                    'label': 'Radio 3'
-                },
-                {
-                    'value': 'radio-4',
-                    'label': 'Radio 4'
-                }
-            ];
-        }
-    })
-    public listData: MRadioListData[];
-    @Prop({ default: 'radio' })
-    public name: string;
     @Prop({ default: true })
     public label: boolean;
-    @Prop({ default: POSITION_LEFT })
+    @Prop({ default: MRadioGroupPosition.LEFT })
     public position: string;
 
-    public componentName: string = RADIO_NAME;
-    private propsLabel: boolean = true;
-    private value: string = 'test';
-    private propsPosition: string = POSITION_LEFT;
-    private isFocus: boolean = false;
+    public componentName: string = RADIO_GROUP_NAME;
     private checkedValue: string = '';
-    private defaultCheckedValue: string = this.findChecked();
+    private nbRadio: number = 0;
+    private name: string = `mRadioGroupName-${uuid.generate()}`;
+
+    private hasError: boolean = false;
+    private errorDefaultMesage: string = 'ERROR in <' + RADIO_GROUP_NAME + '> : ';
+    private errorMessage: string = '';
 
     protected mounted(): void {
-        this.propsLabel = this.label;
-        this.propsPosition = this.position;
-        if (this.defaultCheckedValue != '') {
-            this.checkedValue = this.defaultCheckedValue;
+        for (let i = 0; i < this.$children.length; i++) {
+            if (this.checkRadio(i)) {
+                this.nbRadio ++;
+            }
+        }
+        if (this.nbRadio == 0) {
+            this.hasError = true;
+            this.errorMessage = this.errorDefaultMesage + 'No <' + RADIO_NAME + '> found in <' + RADIO_GROUP_NAME + '>';
+            console.error(this.errorMessage);
         }
     }
 
-    private findChecked(): any {
-        for (let i = 0; i < this.listData.length; i++) {
-            if (this.listData[i].checked == true) {
-                return this.listData[i].value;
-            }
-        }
+    private checkRadio(index: number): boolean {
+        return (this.$children[index] as MRadio).componentName == RADIO_NAME ? true : false;
     }
 
     private onClick(event): void {
@@ -77,10 +52,10 @@ export class MRadio extends Vue {
     }
 }
 
-const RadioPlugin: PluginObject<any> = {
+const RadioGroupPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(RADIO_NAME, MRadio);
+        v.component(RADIO_GROUP_NAME, MRadioGroup);
     }
 };
 
-export default RadioPlugin;
+export default RadioGroupPlugin;
