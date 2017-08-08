@@ -2,10 +2,12 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
-const STATE_DEFAULT = 'default';
-const STATE_DISABLED = 'disabled';
-const STATE_ERROR = 'error';
-const STATE_VALID = 'valid';
+export enum InputStateValue {
+    Default = 'default',
+    Disabled = 'disabled',
+    Error = 'error',
+    Valid = 'valid'
+}
 
 export interface InputStateMixin {
     hasError: boolean;
@@ -15,8 +17,8 @@ export interface InputStateMixin {
 
 @Component
 export class InputState extends Vue implements InputStateMixin {
-    @Prop({ default: STATE_DEFAULT })
-    public state: string;
+    @Prop({ default: InputStateValue.Default })
+    public state: InputStateValue;
     @Prop({ default: '' })
     public errorMessage: string;
     @Prop({ default: '' })
@@ -25,23 +27,24 @@ export class InputState extends Vue implements InputStateMixin {
     public helperMessage: string;
 
     public get isDisabled(): boolean {
-        return this.propState == STATE_DISABLED;
+        return this.propState == InputStateValue.Disabled;
     }
 
     public get hasError(): boolean {
-        return this.propState == STATE_ERROR;
+        return this.propState == InputStateValue.Error;
     }
 
     public get isValid(): boolean {
-        return this.propState == STATE_VALID;
+        return this.propState == InputStateValue.Valid;
     }
 
-    private get propState(): string {
-        let state: string = this.state == STATE_DISABLED || this.state == STATE_ERROR || this.state == STATE_VALID ? this.state : STATE_DEFAULT;
-        if (state != STATE_DISABLED && this.propsErrorMessage != '') {
-            state = STATE_ERROR;
-        } else if (state != STATE_DISABLED && this.propsValidMessage != '') {
-            state = STATE_VALID;
+    private get propState(): InputStateValue {
+        let state: InputStateValue =
+            this.state == InputStateValue.Disabled || this.state == InputStateValue.Error || this.state == InputStateValue.Valid ? this.state : InputStateValue.Default;
+        if (state != InputStateValue.Disabled && this.propsErrorMessage != '') {
+            state = InputStateValue.Error;
+        } else if (state != InputStateValue.Disabled && this.propsValidMessage != '') {
+            state = InputStateValue.Valid;
         }
         return state;
     }
