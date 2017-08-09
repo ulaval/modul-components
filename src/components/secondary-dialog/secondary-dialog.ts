@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { SECONDARY_DIALOG_NAME } from '../component-names';
@@ -7,7 +7,7 @@ import { DialogTemplate, DialogMode } from '../../mixins/dialog-template/dialog-
 @Component({
     mixins: [DialogTemplate]
 })
-export class MSecondaryDialog extends Vue {
+export class MSecondaryDialog extends ModulVue {
     public componentName: string = SECONDARY_DIALOG_NAME;
 
     protected get propMode(): DialogMode {

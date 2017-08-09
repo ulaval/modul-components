@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { DIALOG_NAME } from '../component-names';
@@ -9,7 +9,7 @@ const DIALOG_ID: string = 'mDialog';
 @Component({
     mixins: [DialogTemplate]
 })
-export class MDialog extends Vue {
+export class MDialog extends ModulVue {
     public componentName: string = DIALOG_NAME;
 }
 
