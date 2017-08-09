@@ -18,11 +18,18 @@ export class MCheckbox extends Vue {
     public value: boolean;
 
     public componentName: string = CHECKBOX_NAME;
+
     private isFocus = false;
     private id: string = `mCheckbox-${uuid.generate()}`;
+    private internalPropValue: boolean = false;
 
-    private onInput(event: Event): void {
-        this.$emit('input', !(event.target as HTMLInputElement).checked);
+    private get propValue(): boolean {
+        return this.value != undefined ? this.value : this.internalPropValue;
+    }
+
+    private set propValue(value: boolean) {
+        this.$emit('input', value);
+        this.internalPropValue = value;
     }
 
     private onClick(event: MouseEvent): void {
