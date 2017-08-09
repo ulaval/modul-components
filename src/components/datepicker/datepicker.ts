@@ -210,7 +210,6 @@ export class MDatepicker extends ModulVue implements InputStateMixin {
     }
 
     private onChange(event, value) {
-        console.log(value);
         let newDate = moment(value);
         if (newDate.isValid()) {
             if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
@@ -221,7 +220,7 @@ export class MDatepicker extends ModulVue implements InputStateMixin {
                     isDisabled: false
                 };
                 this.setDays();
-                this.$emit('selected', newDate);
+                this.$emit('change', newDate);
                 this.error = '';
             } else {
                 this.error = this.$i18n.translate('m-datepicker:out-of-bounds-error');
@@ -276,7 +275,7 @@ export class MDatepicker extends ModulVue implements InputStateMixin {
         if (!selectedDate.isDisabled) {
             this.selectedDate = selectedDate;
             this.setDays();
-            this.$emit('selected', moment(this.selectedDate));
+            this.$emit('change', moment(this.selectedDate));
             this.closeDatepicker();
             this.error = '';
         }
