@@ -6,24 +6,31 @@ import WithRender from './radio.html?style=./radio.scss';
 import { RADIO_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 
-const POSITION_LEFT: string = 'left';
+export enum MRadioPosition {
+    LEFT = 'left',
+    RIGHT = 'right'
+}
 
 @WithRender
 @Component
 export class MRadio extends Vue {
 
-    @Prop({ default: 'radio' })
-    public name: string;
-    @Prop({ default: 'radio' })
-    public value: string;
     @Prop({ default: true })
     public label: boolean;
-    @Prop({ default: POSITION_LEFT })
+    @Prop({ default: 'value1' })
+    public value: string;
+    @Prop({})
+    public radioLabel: string;
+    @Prop({ default: MRadioPosition.LEFT })
     public position: string;
 
     public componentName: string = RADIO_NAME;
+    public name: string;
+    public radioID: string;
+    public checked: boolean = false;
+
     private propLabel: boolean = true;
-    private propPosition: string = POSITION_LEFT;
+    private propPosition: string = MRadioPosition.LEFT;
     private isFocus: boolean = false;
     private checkedValue: string = '';
 
@@ -34,6 +41,7 @@ export class MRadio extends Vue {
 
     private onClick(event): void {
         this.$emit('click', this.checkedValue);
+        this.$emit('input', this.value);
     }
 }
 

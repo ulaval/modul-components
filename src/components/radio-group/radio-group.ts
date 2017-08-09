@@ -18,13 +18,16 @@ export class MRadioGroup extends Vue {
 
     @Prop({ default: true })
     public label: boolean;
+    @Prop({ default: 'radio-name' })
+    public name: string;
     @Prop({ default: MRadioGroupPosition.LEFT })
     public position: string;
 
     public componentName: string = RADIO_GROUP_NAME;
-    private checkedValue: string = '';
+    public value: string;
+    private radioModel: string;
     private nbRadio: number = 0;
-    private name: string = `mRadioGroupName-${uuid.generate()}`;
+    private radioNameID: string = `${uuid.generate()}`;
 
     private hasError: boolean = false;
     private errorDefaultMesage: string = 'ERROR in <' + RADIO_GROUP_NAME + '> : ';
@@ -33,6 +36,7 @@ export class MRadioGroup extends Vue {
     protected mounted(): void {
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkRadio(i)) {
+                let radio: MRadio = this.$children[i] as MRadio;
                 this.nbRadio ++;
             }
         }
@@ -45,10 +49,6 @@ export class MRadioGroup extends Vue {
 
     private checkRadio(index: number): boolean {
         return (this.$children[index] as MRadio).componentName == RADIO_NAME ? true : false;
-    }
-
-    private onClick(event): void {
-        this.$emit('click', this.checkedValue);
     }
 }
 

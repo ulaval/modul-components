@@ -1,12 +1,9 @@
 <span class="m-radio-group">
     <span v-if="!hasError">
         <slot>
-            <m-radio name="name">radio 1</m-radio>
-            <m-radio name="name">radio 2</m-radio>
-            <m-radio name="name">radio 3</m-radio>
+            <m-radio>Radio 1</m-radio>
+            <m-radio>Radio 2</m-radio>
+            <m-radio>Radio 3</m-radio>
         </slot>
     </span>
-    <div class="m-radio-group" v-if="hasError">
-        <p>{{ errorMessage }}</p>
-    </div>
 </span>

@@ -2,13 +2,6 @@
     "tag": "m-radio",
     "name": "m-radio-meta:name",
     "attributes": {
-        "listData": {
-            "type": "object"
-        },
-        "name": {
-            "type": "string",
-            "default": "name"
-        },
         "label": {
             "type": "boolean",
             "values": [
