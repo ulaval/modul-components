@@ -106,8 +106,11 @@ $m-panel--screen--min: 639px;
         flex: 1;
 
         &:not(.m--no-padding) {
-            padding: 0 $m-padding #{ $m-padding + $m-margin--s } $m-padding;
+            padding-right: $m-padding;
+            padding-left: $m-padding;
         }
+
+        padding-bottom: #{ $m-padding + $m-margin--s };
 
         &.m--has-padding-top {
             padding-top: $m-padding;
