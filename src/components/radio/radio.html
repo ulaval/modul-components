@@ -1,9 +1,9 @@
 <span class="m-radio">
-    <input class="m-radio__hiddenn" ref="refRadio" type="radio" :id="radioID" :name="name" :value="radioLabel"
-        v-model="modelValue" @focus="isFocus=true" @blur="isFocus=false" @click="onClick">
-    <label class="m-radio__wrap" :class="{ 'm--is-right': propPosition == 'right', 'm--is-focus': isFocus && modelValue == value}"
+    <input class="m-radio__hidden" :value="value" type="radio" v-model="model" :id="radioID" :name="name"
+           @focus="isFocus=true" @blur="isFocus=false" @click="onClick">
+    <label class="m-radio__wrap" :class="{ 'm--is-right': propPosition == 'right', 'm--is-focus': isFocus && model == value}"
         :for="radioID" :aria-hidden="!propLabel">
-        <span class="m-radio__input" :class="{ 'm--is-checked': modelValue == value }" aria-hidden="true"></span>
+        <span class="m-radio__input" :class="{ 'm--is-checked': model == value }" aria-hidden="true"></span>
         <span class="m-radio__label" v-if="propLabel">
             <slot>Label</slot>
         </span>

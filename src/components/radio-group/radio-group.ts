@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './radio-group.html?style=./radio-group.scss';
 import { RADIO_NAME, RADIO_GROUP_NAME } from '../component-names';
 import { MRadio } from '../radio/radio';
@@ -18,26 +18,32 @@ export class MRadioGroup extends Vue {
 
     @Prop({ default: true })
     public label: boolean;
-    @Prop({ default: 'radio-name' })
-    public name: string;
     @Prop({ default: MRadioGroupPosition.LEFT })
     public position: string;
+    @Prop()
+    public value: string;
+    @Prop({ default: false })
+    public disabled: boolean;
 
     public componentName: string = RADIO_GROUP_NAME;
-    public value: string;
-    private radioModel: string;
     private nbRadio: number = 0;
-    private radioNameID: string = `${uuid.generate()}`;
+    private radioName: string = uuid.generate();
 
     private hasError: boolean = false;
     private errorDefaultMesage: string = 'ERROR in <' + RADIO_GROUP_NAME + '> : ';
     private errorMessage: string = '';
 
+    public updateValue(val): void {
+        this.value = val;
+        this.$emit('input', val);
+    }
+
     protected mounted(): void {
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkRadio(i)) {
                 let radio: MRadio = this.$children[i] as MRadio;
-                this.nbRadio ++;
+                radio.name = this.radioName;
+                this.nbRadio++;
             }
         }
         if (this.nbRadio == 0) {
