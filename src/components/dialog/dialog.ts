@@ -1,6 +1,5 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { DIALOG_NAME } from '../component-names';
 import { DialogTemplate, DialogMode } from '../../mixins/dialog-template/dialog-template';
