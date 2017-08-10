@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import {
-    ACCORDION_NAME, ACCORDION_GROUP_NAME, BULLET_LIST_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DROPDOWN_ITEM_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, LIMIT_TEXT_NAME, ICON_NAME, LINK_NAME, MESSAGE_NAME, MODAL_NAME, NAV_BAR_NAME, NAV_BAR_ITEM_NAME, OPTIONS_MENU_NAME, PANEL_NAME, PANEL_DIALOG_NAME, POPPER_NAME, RADIO_NAME, SECONDARY_DIALOG_NAME, SELECT_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TABS_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
+    ACCORDION_NAME, ACCORDION_GROUP_NAME, BULLET_LIST_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DROPDOWN_ITEM_NAME, DYNAMIC_TEMPLATE_NAME, I18N_NAME, LIMIT_TEXT_NAME, ICON_NAME, LINK_NAME, MESSAGE_NAME, MODAL_NAME, NAV_BAR_NAME, NAV_BAR_ITEM_NAME, OPTIONS_MENU_NAME, PANEL_NAME, POPPER_NAME, RADIO_NAME, SELECT_NAME, SIDEBAR_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TABS_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
     UPLOAD_NAME, UPLOAD_INPUT_NAME, UPLOAD_DRAGDROP_NAME, UPLOAD_FILESLIST_NAME
 } from '../components/component-names';
 import { RIPPLE_EFFECT_NAME } from '../directives/directive-names';
@@ -41,11 +41,10 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(NAV_BAR_NAME, require('../components/nav-bar-item/nav-bar-item.meta.json'), CATEGORY_NAVIGATION);
         meta.mergeComponentMeta(OPTIONS_MENU_NAME, require('../components/options-menu/options-menu.meta.json'), CATEGORY_CONTENT);
         meta.mergeComponentMeta(PANEL_NAME, require('../components/panel/panel.meta.json'), CATEGORY_LAYOUT);
-        meta.mergeComponentMeta(SIDEBAR_NAME, require('../components/sidebar/sidebar.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(POPPER_NAME, require('../components/popper/popper.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(RADIO_NAME, require('../components/radio/radio.meta.json'), CATEGORY_FORMS);
-        meta.mergeComponentMeta(SECONDARY_DIALOG_NAME, require('../components/secondary-dialog/secondary-dialog.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(SELECT_NAME, require('../components/select/select.meta.json'), CATEGORY_FORMS);
+        meta.mergeComponentMeta(SIDEBAR_NAME, require('../components/sidebar/sidebar.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(SPINNER_NAME, require('../components/spinner/spinner.meta.json'), CATEGORY_INDICATORS);
         meta.mergeComponentMeta(STATUS_LIST_NAME, require('../components/status-list/status-list.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(STEP_NAME, require('../components/step/step.meta.json'), CATEGORY_LAYOUT);
