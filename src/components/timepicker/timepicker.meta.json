@@ -2,18 +2,33 @@
     "tag": "m-timepicker",
     "name": "m-timepicker-meta:name",
     "attributes": {
-        "hour": {
-            "type": "number",
-            "default": "hour from current time"
+        "time": {
+            "type": "moment.Moment | moment.Duration",
+            "default": "moment()"
         },
-        "minute": {
+        "isDuration": {
+            "type": "boolean",
+            "default": false
+        },
+        "step": {
             "type": "number",
-            "default": "minute from current time"
+            "default": 5
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
         },
         "format": {
             "type": "string",
             "values": "see Moment.js formating options",
             "default": "LT"
+        },
+        "options": {
+            "type": "any",
+            "values": "see Popper.js options",
+            "default": {
+                "placement": "bottom-start"
+            }
         }
     },
     "overview": [{

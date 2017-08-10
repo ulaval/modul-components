@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
@@ -12,38 +12,27 @@ const POSITION_LEFT: string = 'left';
 @Component
 export class MCheckbox extends Vue {
 
-    @Prop({ default: false })
-    public checked: boolean;
     @Prop({ default: POSITION_LEFT })
     public position: string;
+    @Prop()
+    public value: boolean;
 
     public componentName: string = CHECKBOX_NAME;
-    private internalPropChecked: boolean = false;
+
     private isFocus = false;
     private id: string = `mCheckbox-${uuid.generate()}`;
+    private internalPropValue: boolean = false;
 
-    protected mounted(): void {
-        this.propChecked = this.checked;
+    private get propValue(): boolean {
+        return this.value != undefined ? this.value : this.internalPropValue;
     }
 
-    protected get propChecked(): boolean {
-        return this.internalPropChecked;
+    private set propValue(value: boolean) {
+        this.$emit('input', value);
+        this.internalPropValue = value;
     }
 
-    protected set propChecked(value: boolean) {
-        if (this.internalPropChecked != value) {
-            this.internalPropChecked = value;
-            this.$emit('update:checked', value);
-            this.$emit('checked', value);
-        }
-    }
-
-    @Watch('checked')
-    private checkedChanged(value: boolean): void {
-        this.propChecked = this.checked;
-    }
-
-    private onClick(event): void {
+    private onClick(event: MouseEvent): void {
         this.$emit('click');
         this.$refs['checkbox']['blur']();
     }

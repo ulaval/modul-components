@@ -7,30 +7,28 @@ import { TIMEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
 import { curLang } from '../../utils/i18n/i18n';
 
-export interface TimepickerObject {
-    hour: number;
-    minute: number;
-}
-
 @WithRender
 @Component
 export class MTimepicker extends ModulVue {
 
+    @Prop({ default: () => { return moment(); } })
+    public time: moment.Moment | moment.Duration;
+    @Prop({ default: false })
+    public isDuration: boolean;
+    @Prop({ default: 5 })
+    public step: number;
     @Prop()
-    public hour: number;
-    @Prop()
-    public minute: number;
+    public disabled: boolean;
     @Prop({ default: 'LT' })
     public format: string;
     @Prop({ default: () => ({ placement: 'bottom-start' }) })
     public options: any;
-    @Prop()
-    public disabled: boolean;
 
-    private selectedHour: number = 0;
-    private selectedMinute: number = 0;
-    private tempHour: number = 0;
-    private tempMinute: number = 0;
+    private hours: object = {};
+    private selectedHour: number = NaN;
+    private selectedMinute: number = NaN;
+    private tempHour: number = NaN;
+    private tempMinute: number = NaN;
     private placeholder: string = this.$i18n.translate('m-timepicker:placeholder');
     private openTimeSelectorDesc: string = this.$i18n.translate('m-timepicker:desc-open-time-selector');
     private closeTimeSelectorDesc: string = this.$i18n.translate('m-timepicker:desc-close-time-selector');
@@ -42,8 +40,35 @@ export class MTimepicker extends ModulVue {
 
     private mounted(): void {
         moment.locale(curLang);
-        this.tempHour = this.selectedHour = this.hour || moment().hour();
-        this.tempMinute = this.selectedMinute = this.minute || moment().minute();
+
+        if (this.time === undefined) {
+            if (this.isDuration) {
+                this.time = moment.duration();
+                this.selectedHour = 0;
+                this.selectedMinute = 0;
+            } else {
+                this.selectedHour = moment().hours();
+                this.selectedMinute = Math.round(moment().minutes() / this.step) * this.step;
+            }
+        } else {
+            this.selectedHour = this.time.hours();
+            this.selectedMinute = Math.round(this.time.minutes() / this.step) * this.step;
+        }
+
+        this.tempHour = this.selectedHour;
+        this.tempMinute = this.selectedMinute;
+
+        for (let h = 0; h < 24; h++) {
+            let minutes: number[] = [];
+            for (let m = 0; m < 60; m += this.step) {
+                minutes.push(m);
+            }
+            this.hours[h] = minutes;
+        }
+    }
+
+    private get minutes(): number[] {
+        return this.hours[this.tempHour];
     }
 
     private get formattedTime(): string {
@@ -56,7 +81,7 @@ export class MTimepicker extends ModulVue {
             this.selectedHour = parseInt(numbers[0], 10);
             this.selectedMinute = parseInt(numbers[1], 10);
             this.error = '';
-            this.$emit('change', { hour: this.selectedHour, minute: this.selectedMinute });
+            this.emitChange(this.selectedHour, this.selectedMinute);
         } else {
             this.error = this.$i18n.translate('m-timepicker:error-format');
         }
@@ -119,8 +144,16 @@ export class MTimepicker extends ModulVue {
     private onOk(): void {
         this.selectedHour = this.tempHour;
         this.selectedMinute = this.tempMinute;
-        this.$emit('change', { hour: this.selectedHour, minute: this.selectedMinute });
+        this.emitChange(this.selectedHour, this.selectedMinute);
         this.$children[0]['closePopper']();
+    }
+
+    private emitChange(hour: number, minute: number): void {
+        if (this.isDuration) {
+            this.$emit('change', moment.duration(hour + ':' + minute));
+        } else {
+            this.$emit('change', moment().hour(hour).minute(minute));
+        }
     }
 }
 

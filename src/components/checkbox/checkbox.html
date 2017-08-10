@@ -1,5 +1,5 @@
-<span class="m-checkbox" :class="{ 'm--is-checkbox-left': hasCheckboxLeft, 'm--is-checkbox-right': !hasCheckboxLeft, 'm--is-checked': propChecked, 'm--is-focus': isFocus }">
-    <input ref="checkbox" type="checkbox" :id="id" class="m-checkbox__hidden" v-model="propChecked" @click="onClick" @focus="setFocus(true)" @blur="setFocus(false)">
+<span class="m-checkbox" :class="{ 'm--is-checkbox-left': hasCheckboxLeft, 'm--is-checkbox-right': !hasCheckboxLeft, 'm--is-checked': propValue, 'm--is-focus': isFocus }">
+    <input ref="checkbox" type="checkbox" :id="id" class="m-checkbox__hidden" v-model="propValue" @click="onClick" @focus="setFocus(true)" @blur="setFocus(false)">
     <label class="m-checkbox__wrap" :for="id" :aria-hidden="!hasLabelSlot">
         <span class="m-checkbox__input" aria-hidden="true">
             <span class="m-checkbox__input__icon"></span>

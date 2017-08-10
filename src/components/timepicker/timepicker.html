@@ -1,14 +1,13 @@
 <m-popper padding="" @show="onShow" @hide="onHide" :options="options" :disabled="disabled">
-
     <m-text-field icon-name="clock" :force-focus="isOpen" :value="formattedTime" @change="onChange" :error="error" :placeholder="placeholder"
         :icon-description="isOpen ? closeTimeSelectorDesc : openTimeSelectorDesc"></m-text-field>
     <div class="m-timepicker" slot="body">
         <div class="m-timepicker__body">
             <ul class="m-timepicker__hours" ref="hours" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
-                <li v-for="(h, i) in 24"><a class="m-timepicker__hour" :class="{'m--is-selected': i == tempHour}" @click.stop.prevent="selectHour(i)">{{i}}</a></li>
+                <li v-for="(h, i) in hours"><a class="m-timepicker__hour" :class="{'m--is-selected': i == tempHour}" @click.stop.prevent="selectHour(i)">{{i < 10 ? '0' + i : i}}</a></li>
             </ul>
             <ul class="m-timepicker__minutes" ref="minutes" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
-                <li v-for="(m, i) in 60"><a class="m-timepicker__minute" :class="{'m--is-selected': i == tempMinute}" @click.stop.prevent="selectMinute(i)">{{i}}</a></li>
+                <li v-for="(m, i) in minutes"><a class="m-timepicker__minute" :class="{'m--is-selected': m == tempMinute}" @click.stop.prevent="selectMinute(m)">{{m < 10 ? '0' + m : m}}</a></li>
             </ul>
         </div>
         <div class="m-timepicker__footer">
