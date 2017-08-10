@@ -1,6 +1,6 @@
 {
-    "m-panel-dialog-meta": {
-        "name": "Fenêtre de dialogue en panneau",
+    "m-modal-meta": {
+        "name": "Fenêtre de dialogue",
         "context-of-use": "Décrire ici le contexte d'utilisation de la liste déroulante.",
         "usage": "Quelques règles d'utilisation."
     }

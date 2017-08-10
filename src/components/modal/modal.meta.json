@@ -1,11 +1,11 @@
 {
-    "tag": "m-panel-dialog",
-    "name": "m-panel-dialog-meta:name",
+    "tag": "m-modal",
+    "name": "m-modal-meta:name",
     "attributes": {
-        "id": {
+         "id": {
             "type": "string",
             "values": [
-                "mDialog"
+                "mModal"
             ],
             "default": 0
         },
@@ -73,20 +73,20 @@
         {
             "type": "rubric",
             "title": "meta:context-of-use",
-            "content": "m-panel-dialog-meta:context-of-use"
+            "content": "m-secondary-dialog-meta:context-of-use"
         },
         {
             "type": "rubric",
             "title": "meta:usage",
-            "content": "m-panel-dialog-meta:usage"
+            "content": "m-secondary-dialog-meta:usage"
         },
         {
             "type": "do",
-            "content": "m-panel-dialog-meta:do"
+            "content": "m-secondary-dialog-meta:do"
         },
         {
             "type": "dont",
-            "content": "m-panel-dialog-meta:dont"
+            "content": "m-secondary-dialog-meta:dont"
         }
     ]
 }

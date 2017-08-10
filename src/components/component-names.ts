@@ -19,11 +19,11 @@ export const NAV_BAR_ITEM_NAME: string = 'm-nav-bar-item';
 export const OPTIONS_MENU_NAME: string = 'm-options-menu';
 export const OPTIONS_MENU_ITEM_NAME: string = 'm-options-menu-item';
 export const PANEL_NAME: string = 'm-panel';
-export const PANEL_DIALOG_NAME: string = 'm-panel-dialog';
+export const SIDEBAR_NAME: string = 'm-sidebar';
 export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const RADIO_BUTTONS_NAME: string = 'm-radio-buttons';
-export const SECONDARY_DIALOG_NAME: string = 'm-secondary-dialog';
+export const MODAL_NAME: string = 'm-modal';
 export const SELECT_NAME: string = 'm-select';
 export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
@@ -63,11 +63,11 @@ export const components: string[] = [
     OPTIONS_MENU_NAME,
     OPTIONS_MENU_ITEM_NAME,
     PANEL_NAME,
-    PANEL_DIALOG_NAME,
+    SIDEBAR_NAME,
     POPPER_NAME,
     POPUP_NAME,
     RADIO_BUTTONS_NAME,
-    SECONDARY_DIALOG_NAME,
+    MODAL_NAME,
     SELECT_NAME,
     SLIDER_NAME,
     SPINNER_NAME,

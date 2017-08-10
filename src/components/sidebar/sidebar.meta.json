@@ -1,8 +1,8 @@
 {
-    "tag": "m-secondary-dialog",
-    "name": "m-secondary-dialog-meta:name",
+    "tag": "m-sidebar",
+    "name": "m-sidebar-meta:name",
     "attributes": {
-         "id": {
+        "id": {
             "type": "string",
             "values": [
                 "mDialog"
@@ -73,20 +73,20 @@
         {
             "type": "rubric",
             "title": "meta:context-of-use",
-            "content": "m-secondary-dialog-meta:context-of-use"
+            "content": "m-panel-dialog-meta:context-of-use"
         },
         {
             "type": "rubric",
             "title": "meta:usage",
-            "content": "m-secondary-dialog-meta:usage"
+            "content": "m-panel-dialog-meta:usage"
         },
         {
             "type": "do",
-            "content": "m-secondary-dialog-meta:do"
+            "content": "m-panel-dialog-meta:do"
         },
         {
             "type": "dont",
-            "content": "m-secondary-dialog-meta:dont"
+            "content": "m-panel-dialog-meta:dont"
         }
     ]
 }

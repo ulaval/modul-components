@@ -1,5 +1,6 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { DIALOG_NAME } from '../component-names';
 import { DialogTemplate, DialogMode } from '../../mixins/dialog-template/dialog-template';
@@ -11,6 +12,10 @@ const DIALOG_ID: string = 'mDialog';
 })
 export class MDialog extends ModulVue {
     public componentName: string = DIALOG_NAME;
+
+    protected get dialogMode(): DialogMode {
+        return DialogMode.Dialog;
+    }
 }
 
 const DialogPlugin: PluginObject<any> = {

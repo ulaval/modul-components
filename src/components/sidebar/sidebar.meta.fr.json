@@ -1,6 +1,6 @@
 {
-    "m-secondary-dialog-meta": {
-        "name": "Fenêtre de dialogue secondaire",
+    "m-sidebar-meta": {
+        "name": "Fenêtre de dialogue en panneau",
         "context-of-use": "Décrire ici le contexte d'utilisation de la liste déroulante.",
         "usage": "Quelques règles d'utilisation."
     }

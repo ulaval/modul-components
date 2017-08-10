@@ -1,13 +1,8 @@
-<div class="m-popper"
-     :class="{ 'm--is-open': animPopperActive }"
-     @mouseover="onMouseOver"
-     @mouseout="onMouseOut">
-     <template v-if="!isScreenMaxS">
+<div class="m-popper" :class="{ 'm--is-open': animPopperActive }" @mouseover="onMouseOver" @mouseout="onMouseOut">
+    <template v-if="!isScreenMaxS">
         <transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter" @enter-cancelled="onEnterCancelled"
-                    @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
-            <div class="m-popper__popper-wrap"
-                 :aria-hidden="!isPopperOpen"
-                 v-show="!disabled && isPopperOpen">
+            @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
+            <div class="m-popper__popper-wrap" :aria-hidden="!isPopperOpen" v-show="!disabled && isPopperOpen">
                 <div class="m-popper__popper" ref="popper">
                     <div class="m-popper__body" v-if="hasBodySlot" @click="onContentClick" ref="body">
                         <slot name="body"></slot>
@@ -22,16 +17,8 @@
             <slot></slot>
         </div>
     </template>
-    <m-dialog :mode="propMobileMode"
-              :padding="padding"
-              :padding-header="paddingHeader"
-              :padding-body="paddingBody"
-              :padding-footer="paddingFooter"
-              :disabled="disabled"
-              :open="isDialogOpen"
-              @open="toggleDialog(true)"
-              @close="toggleDialog(false)"
-              v-if="isScreenMaxS">
+    <m-panel-dialog :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter"
+        :disabled="disabled" :open="isDialogOpen" @open="toggleDialog(true)" @close="toggleDialog(false)" v-if="isScreenMaxS">
         <div slot="header" class="m-popper__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>
         </div>
@@ -42,5 +29,5 @@
             <slot name="footer"></slot>
         </div>
         <slot></slot>
-    </m-dialog>
+    </m-panel-dialog>
 </div>
