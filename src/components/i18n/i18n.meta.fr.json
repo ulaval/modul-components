@@ -1,8 +1,6 @@
 {
     "m-i18n-meta": {
         "name": "Internationnalisation",
-        "context-of-use": "La composante d'internationnalisation (i18n) est utilisée pour afficher du texte en fonction de la langue courante de l'application. À l'interne, la composante appelle la classe utilitaire $i18n définie sur l'instance de Vue.",
-        "usage": "Voir l'utilitaire <m-link url=\"/composants/i18n\">$i18n</m-link> pour obtenir plus d'informations sur l'internationnalisation des applications, les fichiers de messages, l'utilisation des clés de libellés, etc.",
         "i18n-key-desc": "Clé correspondant au texte à afficher dans la langue courante."
     }
 }

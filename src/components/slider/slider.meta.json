@@ -19,23 +19,5 @@
             "default": 1
         }
     },
-    "overview": [{
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-slider-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-slider-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-slider-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-slider-meta:dont"
-        }
-    ]
+    "overview": "slider.overview"
 }

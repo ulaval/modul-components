@@ -31,23 +31,5 @@
             }
         }
     },
-    "overview": [{
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-timepicker-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-timepicker-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-timepicker-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-timepicker-meta:dont"
-        }
-    ]
+    "overview": "timepicker.overview"
 }

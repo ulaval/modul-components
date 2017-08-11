@@ -1,6 +1,5 @@
 {
     "m-panel-meta": {
-        "name": "Panneau",
-        "context-of-use": "Décrire ici le contexte d'utilisation du panneau."
+        "name": "Panneau"
     }
 }

@@ -20,24 +20,5 @@
             ]
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-nav-bar-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-nav-bar-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-nav-bar-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-nav-bar-meta:dont"
-        }
-    ]
+    "overview": "nav-bar.overview"
 }

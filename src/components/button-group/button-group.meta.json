@@ -37,24 +37,5 @@
             "default": 1
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-button-group-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-button-group-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-button-group-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-button-group-meta:dont"
-        }
-    ]
+    "overview": "button-group.overview"
 }

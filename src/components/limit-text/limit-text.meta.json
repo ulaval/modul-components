@@ -13,11 +13,5 @@
             "type": "string"
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-limit-text-meta:context-of-use"
-        }
-    ]
+    "overview": "limit-text.overview"
 }

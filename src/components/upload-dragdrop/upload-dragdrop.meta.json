@@ -2,24 +2,5 @@
     "tag": "m-upload-dragdrop",
     "name": "m-upload-dragdrop-meta:name",
     "attributes": {},
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-upload-dragdrop-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-upload-dragdrop-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-upload-dragdrop-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-upload-dragdrop-meta:dont"
-        }
-    ]
+    "overview": "upload-dragdrop.overview"
 }

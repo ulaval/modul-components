@@ -1,6 +1,5 @@
 {
     "m-upload-fileslist-meta": {
-        "name": "Téléchargement - Fichier à télécharger",
-        "context-of-use": "Décrire ici le contexte d'utilisation du téléchargement."
+        "name": "Téléchargement - Fichier à télécharger"
     }
 }

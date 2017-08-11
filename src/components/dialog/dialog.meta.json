@@ -78,16 +78,5 @@
             "default": 0
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-dialog-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-dialog-meta:usage"
-        }
-    ]
+    "overview": "dialog.overview"
 }
