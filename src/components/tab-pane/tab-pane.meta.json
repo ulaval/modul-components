@@ -17,16 +17,5 @@
             "default": 0
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-tab-pane-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-tab-pane-meta:usage"
-        }
-    ]
+    "overview": "tab-pane.overview"
 }

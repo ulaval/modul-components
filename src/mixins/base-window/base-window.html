@@ -1,0 +1,47 @@
+<div class="m-base-window">
+    <portal v-if="propOpen" :target-el="'#' + propId">
+        <div class="m-base-window__wrap" :class="[{ 'm--is-open': isVisible,
+                    'm--is-modal': dialogMode == 'modal',
+                    'm--is-dialog': dialogMode == 'dialog',
+                    'm--is-sidebar': dialogMode == 'sidebar',
+                    'm--is-clickable-backdrop': propCloseOnBackdrop }, className, fromClass]" :style="offsetStyle" @click.self="backdropClick"
+            ref="dialogWrap">
+            <article class="m-base-window__article">
+                <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="dialogMode == 'sidebar'">
+                    <m-i18n i18n-key="m-base-window:close"></m-i18n>
+                </button>
+                <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }" v-if="hasHeaderSlot || hasTitle || dialogMode == 'dialog'">
+
+                    <h2 class="m-base-window__title" v-if="hasTitle">{{ title }}</h2>
+                    <slot name="header"></slot>
+                    <h2 v-if="!hasTitle && !hasHeaderSlot && dialogMode == 'dialog'">
+                        Error: This component needs a header slot or title prop.
+                    </h2>
+                    <m-button @click="closeDialog" mode="icon" icon-name="default" class="m-base-window__header__close-button" v-if="dialogMode == 'dialog'">
+                        <m-i18n i18n-key="m-base-window:close"></m-i18n>
+                    </m-button>
+                </header>
+                <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasBodySlot">
+                    <slot name="body"></slot>
+                </div>
+                <footer class="m-base-window__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot || dialogMode == 'modal'">
+                    <slot name="footer" v-if="dialogMode != 'modal'"></slot>
+                    <nav class="m-base-window__footer-nav" v-if="dialogMode == 'modal'">
+                        <slot name="footer"></slot>
+                        <template v-if="!hasFooterSlot">
+                            <m-button @click="onTrue">
+                                <m-i18n i18n-key="m-base-window:ok"></m-i18n>
+                            </m-button>
+                            <m-link mode="button" @click="onFalse">
+                                <m-i18n i18n-key="m-base-window:cancel"></m-i18n>
+                            </m-link>
+                        </template>
+                    </nav>
+                </footer>
+            </article>
+        </div>
+    </portal>
+    <div @click="openDialog" class="m-base-window__button" ref="dialogButton" v-if="hasDefaultSlots">
+        <slot></slot>
+    </div>
+</div>

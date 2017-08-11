@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import WithRender from './dialog-template.html?style=./dialog-template.scss';
+import WithRender from './base-window.html?style=./base-window.scss';
 
 export enum DialogMode {
     Modal = 'modal',
@@ -73,6 +73,10 @@ export class DialogTemplate extends ModulVue {
         }
     }
 
+    protected get offsetStyle(): string | undefined {
+        return undefined;
+    }
+
     private get propOpen(): boolean {
         return this.internalPropOpen;
     }
@@ -122,7 +126,7 @@ export class DialogTemplate extends ModulVue {
         let result: number;
         switch (this.dialogMode) {
             case DialogMode.Dialog:
-                result = this.as<MediaQueriesMixin>() .isScreenMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
+                result = this.as<MediaQueriesMixin>().isScreenMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
                 break;
             case DialogMode.Sidebar:
                 result = TRANSITION_DURATION_LONG;

@@ -1,11 +1,5 @@
 {
     "tag": "m-table",
     "name": "m-table-meta:name",
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-table-meta:context-of-use"
-        }
-    ]
+    "overview": "table.overview"
 }

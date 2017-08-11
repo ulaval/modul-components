@@ -40,16 +40,5 @@
             "default": 1
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-accordion-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-accordion-meta:usage"
-        }
-    ]
+    "overview": "accordion.overview"
 }

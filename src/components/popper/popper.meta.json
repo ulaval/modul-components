@@ -106,11 +106,5 @@
             "default": 0
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-popper-meta:context-of-use"
-        }
-    ]
+    "overview": "popper.overview"
 }

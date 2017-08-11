@@ -69,24 +69,5 @@
             "default": 0
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-secondary-dialog-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-secondary-dialog-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-secondary-dialog-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-secondary-dialog-meta:dont"
-        }
-    ]
+    "overview": "modal.overview"
 }

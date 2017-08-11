@@ -50,11 +50,5 @@
             "default": false
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-text-field-meta:context-of-use"
-        }
-    ]
+    "overview": "text-field.overview"
 }

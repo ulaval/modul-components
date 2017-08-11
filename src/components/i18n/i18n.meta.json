@@ -7,16 +7,5 @@
             "description": "m-i18n-meta:i18n-key-desc"
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-i18n-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-i18n-meta:usage"
-        }
-    ]
+    "overview": "i18n.overview"
 }

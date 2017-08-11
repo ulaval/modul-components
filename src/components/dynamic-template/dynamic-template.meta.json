@@ -7,11 +7,5 @@
             "description": "m-dynamic-template:template-desc"
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-dynamic-template-meta:context-of-use"
-        }
-    ]
+    "overview": "dynamic-template.overview"
 }

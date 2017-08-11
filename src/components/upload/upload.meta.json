@@ -23,24 +23,5 @@
             "default": false
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-upload-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-upload-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-upload-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-upload-meta:dont"
-        }
-    ]
+    "overview": "upload.overview"
 }

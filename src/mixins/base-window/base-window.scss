@@ -1,0 +1,297 @@
+@import '../../styles/abstracts/variables';
+$m-modal--max-width: 380px !default;
+$m-dialog--max-width: 640px !default;
+$m-dialog--header-height: $m-touch-size !default;
+
+.m-base-window {
+    display: inline-block;
+
+    &__wrap {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        min-width: $m-min-width;
+
+        @include m-is-ie() {
+            display: block;
+        }
+
+        &.m--is-modal,
+        &.m--is-dialog {
+            @media screen and (min-width: $m-screen--min--s) {
+                padding: $m-padding--l;
+            }
+        }
+
+        &.m--is-clickable-backdrop {
+            cursor: pointer;
+        }
+    }
+
+    &__article {
+        cursor: auto;
+        width: 100%;
+        background: $m-color--white;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+
+        .m--is-modal & {
+            transition: 0.3s transform ease, 0.2s opacity linear;
+            margin-top: auto;
+            margin-bottom: auto;
+            transform: translate3d(0, $m-padding--l, 0);
+            opacity: 0;
+            border-radius: $m-border-radius;
+
+            @media screen and (min-width: #{$m-modal--max-width + $m-padding * 2}) {
+                width: $m-modal--max-width;
+            }
+
+            @include m-is-ie() {
+                margin: 60px auto;
+            }
+
+        }
+
+        .m--is-modal.m--is-open & {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+
+        .m--is-dialog & {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+
+            @media screen and (max-width: #{$m-screen--max--s}) {
+                transition: 0.6s transform ease;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                transform: translate3d(0, 110%, 0);
+                margin: 0 !important; //style for IE
+            }
+
+            @media screen and (min-width: #{$m-screen--min--s}) {
+                transition: 0.3s transform ease, 0.2s opacity linear;
+                transform: translate3d(0, $m-padding--l, 0);
+                margin-top: auto;
+                margin-bottom: auto;
+                max-width: $m-dialog--max-width;
+                opacity: 0;
+            }
+
+            @include m-is-ie() {
+                margin: $m-padding--l*2 auto;
+            }
+        }
+
+        .m--is-dialog.m--is-open & {
+            @media screen and (max-width: #{$m-screen--max--s}) {
+                transform: translate3d(0, 0, 0);
+            }
+
+            @media screen and (min-width: #{$m-screen--min--s}) {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+        }
+
+        .m--is-sidebar & {
+            transition: transform 0.6s ease;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: $m-touch-size--l;
+            max-height: calc(100vh - #{$m-padding--xl});
+        }
+
+        .m--from-bottom & {
+            transform: translate3d(0, 100%, 0);
+        }
+
+        .m--from-bottom.m--is-open & {
+            transform: translate3d(0, 0, 0);
+        }
+
+        .m--from-right & {
+            transform: translate3d(100%, 0, 0);
+        }
+
+        .m--from-right.m--is-open & {
+            transform: translate3d(0, 0, 0);
+        }
+
+        .m--from-left & {
+            transform: translate3d(-100%, 0, 0);
+        }
+
+        .m--from-left.m--is-open & {
+            transform: translate3d(0, 0, 0);
+        }
+
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: $m-margin $m-padding;
+
+        .m--is-modal & {
+            border-bottom: 1px solid $m-color--grey-light;
+        }
+
+        .m--is-dialog & {
+            position: relative;
+            background: $m-color--black-grey;
+            color: $m-color--white;
+            min-height: $m-dialog--header-height;
+            padding-right: $m-touch-size;
+        }
+
+        .m--is-sidebar & {
+            display: block;
+            border-bottom: 1px solid $m-color--grey-light;
+        }
+
+        &__close-button {
+            .m--is-dialog & {
+                position: absolute;
+                top: 50%;
+                right: 0;
+                margin: 0;
+                color: $m-color--white;
+                transform: translate3d(0, -50%, 0);
+                stroke-width: 2px;
+
+                &::after {
+                    background: $m-color--black-grey-light;
+                }
+            }
+        }
+    }
+
+    &__body {
+        padding: $m-padding;
+
+        .m--is-dialog &,
+        .m--is-sidebar & {
+            flex: 1;
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            @include m-is-ie() {
+                flex: none;
+            }
+        }
+
+    }
+
+    &__footer-nav {
+        .m--is-modal & {
+            &,
+            > :first-child {
+                display: inline-flex;
+                flex-direction: column;
+
+                &,
+                &.m-button,
+                &.m-link,
+                > :first-child {
+                    margin: 0;
+                }
+            }
+
+            .m-button,
+            .m-link {
+                margin-top: $m-margin;
+            }
+        }
+    }
+
+    &__footer {
+        padding: 0 $m-padding $m-padding;
+        text-align: center;
+
+        .m--is-modal & {
+
+        }
+    }
+
+    &__header,
+    &__body,
+    &__footer {
+        &.m--no-padding {
+            padding: 0;
+        }
+
+        > :first-child {
+            margin: 0;
+
+            > :first-child {
+                margin: 0;
+            }
+        }
+    }
+
+    &__title,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        flex: 1;
+        margin: 0;
+        font-size: $m-font-size--h5;
+        font-weight: $m-font-weight--bold;
+        line-height: 1.2;
+    }
+
+    &__button {
+        outline: none;
+        display: inline-block;
+    }
+
+    &__close-button {
+        .m--is-sidebar & {
+            transition: 0.3s background ease;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: $m-margin $m-padding;
+            background: none;
+            border: none;
+            font-size: $m-font-size;
+            color: $m-color--white;
+            cursor: pointer;
+            outline: none;
+            text-decoration: none;
+            line-height: 1;
+            transform: translate3d(0, -100%, 0);
+
+            &:focus:not(:hover) {
+                background: rgba($m-color--black, 0.3);
+            }
+        }
+    }
+}
+
+.m--is-modal {
+    padding: $m-padding;
+}
+
+.m--is-modal,
+.m--is-dialog {
+    overflow-x: hidden;
+    overflow-y: auto;
+}

@@ -42,24 +42,5 @@
             "default": false
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-dropdown-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-dropdown-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-dropdown-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-dropdown-meta:dont"
-        }
-    ]
+    "overview": "dropdown.overview"
 }
