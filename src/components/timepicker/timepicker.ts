@@ -11,10 +11,14 @@ import { curLang } from '../../utils/i18n/i18n';
 @Component
 export class MTimepicker extends ModulVue {
 
-    @Prop({ default: () => { return moment(); } })
-    public time: moment.Moment | moment.Duration;
     @Prop({ default: false })
     public isDuration: boolean;
+    @Prop({ default: function() { return this.isDuration ? moment.duration('1:0') : moment(); } })
+    public time: moment.Moment | moment.Duration;
+    @Prop({ default: function() { return this.isDuration ? moment.duration('0:0') : moment().hours(0).minutes(0); } })
+    public min: moment.Moment | moment.Duration;
+    @Prop({ default: function() { return this.isDuration ? moment.duration('4:0') : moment().hours(23).minutes(59); } })
+    public max: moment.Moment | moment.Duration;
     @Prop({ default: 5 })
     public step: number;
     @Prop()
@@ -41,29 +45,46 @@ export class MTimepicker extends ModulVue {
     private mounted(): void {
         moment.locale(curLang);
 
-        if (this.time === undefined) {
-            if (this.isDuration) {
-                this.time = moment.duration();
-                this.selectedHour = 0;
-                this.selectedMinute = 0;
+        let newTime = this.isDuration ? moment.duration(this.min.hours() + ':' + this.min.minutes()) : moment().hours(this.min.hours()).minutes(this.min.minutes());
+        while (this.isTimeSameOrBeforeMax(newTime)) {
+            let hour = newTime.hours();
+            if (!this.hours[hour]) this.hours[hour] = [];
+            this.hours[hour].push(newTime.minutes());
+            newTime.add(this.step, 'm');
+        }
+
+        let roundedTime = this.time.add(Math.round(this.time.minutes() / this.step) * this.step - this.time.minutes(), 'm');
+
+        if (this.isTimeSameOrBeforeMax(roundedTime)) {
+            if (this.isTimeSameOrAfterMin(roundedTime)) {
+                this.selectedHour = roundedTime.hours();
+                this.selectedMinute = roundedTime.minutes();
             } else {
-                this.selectedHour = moment().hours();
-                this.selectedMinute = Math.round(moment().minutes() / this.step) * this.step;
+                this.selectedHour = this.min.hours();
+                this.selectedMinute = this.hours[this.selectedHour][0];
             }
         } else {
-            this.selectedHour = this.time.hours();
-            this.selectedMinute = Math.round(this.time.minutes() / this.step) * this.step;
+            this.selectedHour = this.max.hours();
+            this.selectedMinute = this.hours[this.selectedHour][this.hours[this.selectedHour].length - 1];
         }
 
         this.tempHour = this.selectedHour;
         this.tempMinute = this.selectedMinute;
+    }
 
-        for (let h = 0; h < 24; h++) {
-            let minutes: number[] = [];
-            for (let m = 0; m < 60; m += this.step) {
-                minutes.push(m);
-            }
-            this.hours[h] = minutes;
+    private isTimeSameOrBeforeMax(time: moment.Moment | moment.Duration): boolean {
+        if (moment.isDuration(time)) {
+            return time.asMilliseconds() <= (this.max as moment.Duration).asMilliseconds();
+        } else {
+            return moment(time).isSameOrBefore(this.max as moment.Moment, 'minute');
+        }
+    }
+
+    private isTimeSameOrAfterMin(time: moment.Moment | moment.Duration): boolean {
+        if (moment.isDuration(time)) {
+            return time.asMilliseconds() >= (this.min as moment.Duration).asMilliseconds();
+        } else {
+            return moment(time).isSameOrAfter(this.min as moment.Moment, 'minute');
         }
     }
 
@@ -72,16 +93,35 @@ export class MTimepicker extends ModulVue {
     }
 
     private get formattedTime(): string {
-        return moment().hour(this.selectedHour).minute(this.selectedMinute).format(this.format);
+        if (this.isDuration) {
+            return this.selectedHour + ':' + this.formatMinute(this.selectedMinute);
+        } else {
+            return moment().hours(this.selectedHour).minutes(this.selectedMinute).format(this.format);
+        }
+    }
+
+    private formatHour(hour: number): string {
+        return !this.isDuration && hour < 10 ? '0' + hour : hour.toString();
+    }
+
+    private formatMinute(minute: number): string {
+        return minute < 10 ? '0' + minute : minute.toString();
     }
 
     private onChange(event, value: string): void {
         let numbers = value.match(/\d+/g);
-        if (numbers && numbers.length == 2 && Number(numbers[0]) >= 0 && Number(numbers[0]) < 24 && Number(numbers[1]) >= 0 && Number(numbers[1]) < 60) {
-            this.selectedHour = parseInt(numbers[0], 10);
-            this.selectedMinute = parseInt(numbers[1], 10);
-            this.error = '';
-            this.emitChange(this.selectedHour, this.selectedMinute);
+        if (numbers && numbers.length == 2) {
+            if (isNaN(Number(numbers[0])) || isNaN(Number(numbers[1]))) {
+                this.error = this.$i18n.translate('m-timepicker:error-format');
+            } else if (Number(numbers[0]) < this.min.hours() || Number(numbers[0]) > this.max.hours()
+                || Number(numbers[1]) < this.min.minutes() || Number(numbers[1]) > this.max.minutes()) {
+                this.error = this.$i18n.translate('m-timepicker:out-of-bounds-error');
+            } else {
+                this.selectedHour = parseInt(numbers[0], 10);
+                this.selectedMinute = parseInt(numbers[1], 10);
+                this.error = '';
+                this.emitChange(this.selectedHour, this.selectedMinute);
+            }
         } else {
             this.error = this.$i18n.translate('m-timepicker:error-format');
         }
@@ -130,7 +170,7 @@ export class MTimepicker extends ModulVue {
     }
 
     private positionScroll(el: Element) {
-        el.scrollTop = Math.round(el.scrollTop / 36) * 36;
+        el.scrollTop = Math.round(el.scrollTop / 44) * 44;
     }
 
     private selectHour(hour: number): void {
@@ -152,7 +192,7 @@ export class MTimepicker extends ModulVue {
         if (this.isDuration) {
             this.$emit('change', moment.duration(hour + ':' + minute));
         } else {
-            this.$emit('change', moment().hour(hour).minute(minute));
+            this.$emit('change', moment().hours(hour).minutes(minute));
         }
     }
 }

@@ -1,8 +1,9 @@
 @import 'abstracts/variables';
+$m-timepicker-scroll-height: $m-touch-size * 5;
 
 .m-timepicker {
     width: 210px;
-    height: 300px;
+    height: $m-timepicker-scroll-height + 20 + 32;
 
     &__body {
         display: flex;
@@ -15,7 +16,7 @@
         margin: 0;
         text-align: center;
         overflow: auto;
-        max-height: 36px * 7;
+        max-height: $m-timepicker-scroll-height;
         flex: 1 0 auto;
 
         &::-webkit-scrollbar {
@@ -35,11 +36,13 @@
 
     &__hour,
     &__minute {
-        padding: $m-padding--s;
         cursor: pointer;
         outline: 0;
         color: inherit;
-        display: block;
+        height: $m-touch-size;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:hover,
         &:focus {

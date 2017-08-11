@@ -4,10 +4,10 @@
     <div class="m-timepicker" slot="body">
         <div class="m-timepicker__body">
             <ul class="m-timepicker__hours" ref="hours" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
-                <li v-for="(h, i) in hours"><a class="m-timepicker__hour" :class="{'m--is-selected': i == tempHour}" @click.stop.prevent="selectHour(i)">{{i < 10 ? '0' + i : i}}</a></li>
+                <li v-for="(h, i) in hours"><a class="m-timepicker__hour" :class="{'m--is-selected': i == tempHour}" @click.stop.prevent="selectHour(i)">{{formatHour(i)}}</a></li>
             </ul>
             <ul class="m-timepicker__minutes" ref="minutes" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
-                <li v-for="(m, i) in minutes"><a class="m-timepicker__minute" :class="{'m--is-selected': m == tempMinute}" @click.stop.prevent="selectMinute(m)">{{m < 10 ? '0' + m : m}}</a></li>
+                <li v-for="m in minutes"><a class="m-timepicker__minute" :class="{'m--is-selected': m == tempMinute}" @click.stop.prevent="selectMinute(m)">{{formatMinute(m)}}</a></li>
             </ul>
         </div>
         <div class="m-timepicker__footer">

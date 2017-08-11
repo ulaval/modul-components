@@ -2,13 +2,21 @@
     "tag": "m-timepicker",
     "name": "m-timepicker-meta:name",
     "attributes": {
-        "time": {
-            "type": "moment.Moment | moment.Duration",
-            "default": "moment()"
-        },
         "isDuration": {
             "type": "boolean",
             "default": false
+        },
+        "time": {
+            "type": "moment.Moment | moment.Duration",
+            "default": "moment() | moment.duration('1:0')"
+        },
+        "min": {
+            "type": "moment.Moment | moment.Duration",
+            "default": "moment().hours(0).minutes(0) | moment.duration('0:0')"
+        },
+        "max": {
+            "type": "moment.Moment | moment.Duration",
+            "default": "moment().hours(23).minutes(59) | moment.duration('4:0')"
         },
         "step": {
             "type": "number",
