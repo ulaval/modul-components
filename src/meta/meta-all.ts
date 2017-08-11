@@ -27,7 +27,7 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(BUTTON_NAME, require('../components/button/button.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(BUTTON_GROUP_NAME, require('../components/button-group/button-group.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(CHECKBOX_NAME, require('../components/checkbox/checkbox.meta.json'), CATEGORY_FORMS);
-        meta.mergeComponentMeta(DIALOG_NAME, require('../components/dialog/dialog.meta.json'), CATEGORY_COMUNICATION);
+        meta.mergeComponentMeta(DIALOG_NAME, require('../components/dialog-window/dialog-window.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(DROPDOWN_NAME, require('../components/dropdown/dropdown.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(DROPDOWN_ITEM_NAME, require('../components/dropdown-item/dropdown-item.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(DYNAMIC_TEMPLATE_NAME, require('../components/dynamic-template/dynamic-template.meta.json'), CATEGORY_LAYOUT);
@@ -36,7 +36,7 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(LIMIT_TEXT_NAME, require('../components/limit-text/limit-text.meta.json'), CATEGORY_CONTENT);
         meta.mergeComponentMeta(LINK_NAME, require('../components/link/link.meta.json'), CATEGORY_NAVIGATION);
         meta.mergeComponentMeta(MESSAGE_NAME, require('../components/message/message.meta.json'), CATEGORY_COMUNICATION);
-        meta.mergeComponentMeta(MODAL_NAME, require('../components/modal/modal.meta.json'), CATEGORY_COMUNICATION);
+        meta.mergeComponentMeta(MODAL_NAME, require('../components/modal-window/modal-window.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(NAV_BAR_NAME, require('../components/nav-bar/nav-bar.meta.json'), CATEGORY_NAVIGATION);
         meta.mergeComponentMeta(NAV_BAR_NAME, require('../components/nav-bar-item/nav-bar-item.meta.json'), CATEGORY_NAVIGATION);
         meta.mergeComponentMeta(OPTIONS_MENU_NAME, require('../components/options-menu/options-menu.meta.json'), CATEGORY_CONTENT);
@@ -44,7 +44,7 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(POPPER_NAME, require('../components/popper/popper.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(RADIO_NAME, require('../components/radio/radio.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(SELECT_NAME, require('../components/select/select.meta.json'), CATEGORY_FORMS);
-        meta.mergeComponentMeta(SIDEBAR_NAME, require('../components/sidebar/sidebar.meta.json'), CATEGORY_COMUNICATION);
+        meta.mergeComponentMeta(SIDEBAR_NAME, require('../components/sidebar-window/sidebar-window.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(SPINNER_NAME, require('../components/spinner/spinner.meta.json'), CATEGORY_INDICATORS);
         meta.mergeComponentMeta(STATUS_LIST_NAME, require('../components/status-list/status-list.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(STEP_NAME, require('../components/step/step.meta.json'), CATEGORY_LAYOUT);

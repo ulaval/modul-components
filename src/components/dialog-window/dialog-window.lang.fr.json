@@ -1,5 +1,5 @@
 {
-    "m-dialog": {
+    "m-base-window": {
         "cancel": "Annuler",
         "close": "Fermer",
         "ok": "Ok"

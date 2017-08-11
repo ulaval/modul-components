@@ -3,7 +3,7 @@ import { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
-import { DialogTemplate, DialogMode } from '../../mixins/dialog-template/dialog-template';
+import { DialogTemplate, DialogMode } from '../../mixins/base-window/base-window';
 
 @Component({
     mixins: [DialogTemplate]

@@ -5,7 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { DialogMode } from '../../mixins/dialog-template/dialog-template';
+import { DialogMode } from '../../mixins/base-window/base-window';
 import Popper from 'popper.js';
 
 const TRIGGER_CLICK = 'click';
