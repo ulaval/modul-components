@@ -16,7 +16,7 @@ export class MSidebar extends ModulVue {
     @Prop({ default: DialogFrom.Bottom })
     private from: DialogFrom;
 
-    @Prop({ default: '100%' })
+    @Prop({ default: '0' })
     private offset: String;
 
     protected get dialogMode(): DialogMode {
