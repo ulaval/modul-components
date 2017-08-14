@@ -33,6 +33,11 @@ $m-dialog--header-height: $m-touch-size !default;
         &.m--is-clickable-backdrop {
             cursor: pointer;
         }
+
+        &.m--is-open {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
     }
 
     &__article {
@@ -56,7 +61,6 @@ $m-dialog--header-height: $m-touch-size !default;
             @include m-is-ie() {
                 margin: 60px auto;
             }
-
         }
 
         .m--is-modal.m--is-open & {
@@ -107,38 +111,51 @@ $m-dialog--header-height: $m-touch-size !default;
             transition: transform 0.6s ease;
             position: absolute;
             right: 0;
-            bottom: 0;
             left: 0;
             display: flex;
             flex-direction: column;
             min-height: $m-touch-size--l;
+        }
+
+        .m--is-sidebar.m--from-top.m--is-open &,
+        .m--is-sidebar.m--from-right.m--is-open &,
+        .m--is-sidebar.m--from-bottom.m--is-open &,
+        .m--is-sidebar.m--from-bottom-right.m--is-open &,
+        .m--is-sidebar.m--from-bottom-left.m--is-open &,
+        .m--is-sidebar.m--from-left.m--is-open & {
+            transform: translate3d(0, 0, 0);
+        }
+
+        .m--is-sidebar.m--from-top &,
+        .m--is-sidebar.m--from-right &,
+        .m--is-sidebar.m--from-left & {
+            top: 0;
+        }
+
+        .m--is-sidebar.m--from-top & {
+            transform: translate3d(0, -100%, 0);
+        }
+
+        .m--is-sidebar.m--from-bottom & {
+            transform: translate3d(0, calc(100% + #{$m-touch-size}), 0);
+        }
+
+        .m--is-sidebar.m--from-bottom &,
+        .m--is-sidebar.m--from-bottom-right &,
+        .m--is-sidebar.m--from-bottom-left & {
+            bottom: 0;
             max-height: calc(100vh - #{$m-padding--xl});
         }
 
-        .m--from-bottom & {
-            transform: translate3d(0, 100%, 0);
-        }
-
-        .m--from-bottom.m--is-open & {
-            transform: translate3d(0, 0, 0);
-        }
-
-        .m--from-right & {
+        .m--is-sidebar.m--from-right &,
+        .m--is-sidebar.m--from-bottom-right & {
             transform: translate3d(100%, 0, 0);
         }
 
-        .m--from-right.m--is-open & {
-            transform: translate3d(0, 0, 0);
-        }
-
-        .m--from-left & {
+        .m--is-sidebar.m--from-left &,
+        .m--is-sidebar.m--from-bottom-left & {
             transform: translate3d(-100%, 0, 0);
         }
-
-        .m--from-left.m--is-open & {
-            transform: translate3d(0, 0, 0);
-        }
-
     }
 
     &__header {
@@ -157,6 +174,13 @@ $m-dialog--header-height: $m-touch-size !default;
             color: $m-color--white;
             min-height: $m-dialog--header-height;
             padding-right: $m-touch-size;
+
+            h2 {
+                margin: 0;
+                font-size: $m-font-size--h4;
+                font-weight: $m-font-weight--bold;
+                line-height: 1.2;
+            }
         }
 
         .m--is-sidebar & {
@@ -174,6 +198,10 @@ $m-dialog--header-height: $m-touch-size !default;
                 transform: translate3d(0, -50%, 0);
                 stroke-width: 2px;
 
+                &:hover {
+                    color: $m-color--white;
+                }
+
                 &::after {
                     background: $m-color--black-grey-light;
                 }
@@ -183,6 +211,14 @@ $m-dialog--header-height: $m-touch-size !default;
 
     &__body {
         padding: $m-padding;
+
+        > :first-child {
+            margin-top: none;
+
+            > :first-child {
+                margin-top: none;
+            }
+        }
 
         .m--is-dialog &,
         .m--is-sidebar & {
@@ -194,7 +230,6 @@ $m-dialog--header-height: $m-touch-size !default;
                 flex: none;
             }
         }
-
     }
 
     &__footer-nav {
@@ -222,10 +257,6 @@ $m-dialog--header-height: $m-touch-size !default;
     &__footer {
         padding: 0 $m-padding $m-padding;
         text-align: center;
-
-        .m--is-modal & {
-
-        }
     }
 
     &__header,
@@ -242,19 +273,6 @@ $m-dialog--header-height: $m-touch-size !default;
                 margin: 0;
             }
         }
-    }
-
-    &__title,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-        flex: 1;
-        margin: 0;
-        font-size: $m-font-size--h5;
-        font-weight: $m-font-weight--bold;
-        line-height: 1.2;
     }
 
     &__button {

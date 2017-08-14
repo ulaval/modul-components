@@ -10,35 +10,21 @@ import { DialogTemplate, DialogMode, DialogFrom } from '../../mixins/base-window
     mixins: [DialogTemplate]
 })
 export class MSidebar extends ModulVue {
-
-    private componentName: String = SIDEBAR_NAME;
-
     @Prop({ default: DialogFrom.Bottom })
-    private from: DialogFrom;
+    public from: DialogFrom;
 
     @Prop({ default: '100%' })
-    private offset: String;
+    public width: string;
+
+    public componentName: String = SIDEBAR_NAME;
 
     protected get dialogMode(): DialogMode {
         return DialogMode.Sidebar;
     }
 
-    protected get offsetStyle(): String {
-
-        let offsetValue: string = '';
-        if (this.from == 'right') {
-            offsetValue = 'margin-left: ' + this.offset;
-        } else if (this.from == 'left') {
-            offsetValue = 'margin-right: ' + this.offset;
-        }
-
-        return offsetValue;
-    }
-
-    private getPanelDirection(): String {
+    private getDialogFrom(): String {
         return this.from;
     }
-
 }
 
 const SidebarPlugin: PluginObject<any> = {

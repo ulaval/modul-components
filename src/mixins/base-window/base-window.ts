@@ -14,9 +14,11 @@ export enum DialogMode {
 
 export enum DialogFrom {
     Top = 'top',
-    Bottom = 'bottom',
     Right = 'right',
-    Left = 'left'
+    Bottom = 'bottom',
+    Left = 'left',
+    BottomRight = 'bottom-right',
+    BottomLeft = 'Bottom-left'
 }
 
 export const TRANSITION_DURATION: number = 300;
@@ -73,21 +75,16 @@ export class DialogTemplate extends ModulVue {
         }
     }
 
-    protected get offsetStyle(): string | undefined {
-        return undefined;
-    }
-
     private get propOpen(): boolean {
         return this.internalPropOpen;
     }
 
     private get fromClass(): String {
-        let from = this.dialogMode == 'sidebar' ? 'm--from-' + this.getPanelDirection() : '';
-        return from;
+        return this.dialogMode == DialogMode.Sidebar && this.getDialogFrom() != undefined ? 'm--from-' + this.getDialogFrom() : '';
     }
 
-    private getPanelDirection(): String {
-        return DialogFrom.Bottom;
+    private getDialogFrom(): String | undefined {
+        return undefined;
     }
 
     private set propOpen(value: boolean) {
@@ -96,8 +93,8 @@ export class DialogTemplate extends ModulVue {
                 this.$emit('update:open', !value);
             } else {
                 this.busy = true;
-                this.internalPropOpen = value;
                 if (value) {
+                    this.internalPropOpen = true;
                     this.internalOpenDialog().then(() => {
                         this.$emit('update:open', value);
                         this.$emit('open');
@@ -105,6 +102,7 @@ export class DialogTemplate extends ModulVue {
                     });
                 } else {
                     this.internalCloseDialog().then(() => {
+                        this.internalPropOpen = false;
                         this.$emit('update:open', value);
                         this.$emit('close');
                         this.busy = false;
@@ -178,7 +176,8 @@ export class DialogTemplate extends ModulVue {
             this.isVisible = false;
             this.$mWindow.backdropElement.style.zIndex = String(this.$mWindow.windowZIndex - 1);
             if (this.$mWindow.windowCount == 1 && this.$mWindow.hasBackdrop) {
-                this.$mWindow.backdropElement.style.opacity = '0';
+                this.$mWindow.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
+                this.$mWindow.setBackdropOpacity('0');
             }
             setTimeout(() => {
                 this.deleteDialog();
@@ -202,6 +201,8 @@ export class DialogTemplate extends ModulVue {
         this.portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
 
         this.$mWindow.createBackdrop(this.bodyElement);
+        this.$mWindow.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
+
         this.bodyElement.appendChild(this.portalTargetElement);
     }
 

@@ -67,6 +67,21 @@
                 "false"
             ],
             "default": 0
+        },
+        "from": {
+            "type": "string",
+            "value": [
+                "right",
+                "bottom",
+                "left",
+                "bottom-right",
+                "bottom-left"
+            ],
+            "default": 1
+        },
+        "width": {
+            "type": "string",
+            "default": "100%"
         }
     },
     "overview": "sidebar.overview"

@@ -3,12 +3,14 @@ import uuid from '../../utils/uuid/uuid';
 
 const BACKDROP_ID: string = 'mBackdropID';
 const BACKDROP_CLASS_NAME: string = 'm-backdrop';
-const BACKDROP_STYLE_TRANSITION: string = 'opacity 0.3s ease';
+const BACKDROP_STYLE_TRANSITION: string = 'opacity ease';
+const BACKDROP_STYLE_TRANSITION_DURATION: string = '0.3s';
 const BACKDROP_STYLE_POSITION: string = 'fixed';
 const BACKDROP_STYLE_POSITION_VALUE: string = '0';
 const BACKDROP_STYLE_BACKGROUND: string = '#000';
-const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.7';
 const BACKDROP_STYLE_OPACITY: string = '0';
+const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.7';
+
 const Z_INDEZ_DEFAULT: number = 100;
 
 export class MWindow {
@@ -23,6 +25,7 @@ export class MWindow {
     public backdropId: string = '';
     public windowZIndex: number = Z_INDEZ_DEFAULT;
     public hasBackdrop: boolean = false;
+    private backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
 
     public addWindow(windowId): void {
         this.windowCount++;
@@ -63,7 +66,7 @@ export class MWindow {
             targetElement.appendChild(this.backdropElement);
             this.backdropElement = document.querySelector('#' + this.backdropId) as HTMLElement;
             setTimeout(() => {
-                this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_VISIBLE;
+                this.setBackdropOpacity(BACKDROP_STYLE_OPACITY_VISIBLE);
             }, 2);
         }
     }
@@ -73,6 +76,16 @@ export class MWindow {
             document.body.removeChild(this.backdropElement);
             this.hasBackdrop = false;
         }
+    }
+
+    public setBackdropTransitionDuration(transitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION): void {
+        this.backdropTransitionDuration = transitionDuration;
+        this.backdropElement.style.webkitTransitionDuration = transitionDuration;
+        this.backdropElement.style.transitionDuration = transitionDuration;
+    }
+
+    public setBackdropOpacity(opacityValue: string): void {
+        this.backdropElement.style.opacity = opacityValue;
     }
 
     public activeScollBody(): void {
@@ -112,6 +125,8 @@ export class MWindow {
         let styles: any = this.backdropElement.style;
         styles.webkitTransition = BACKDROP_STYLE_TRANSITION;
         styles.transition = BACKDROP_STYLE_TRANSITION;
+        styles.webkitTransitionDuration = this.backdropTransitionDuration;
+        styles.transitionDuration = this.backdropTransitionDuration;
         styles.position = BACKDROP_STYLE_POSITION;
         styles.top = BACKDROP_STYLE_POSITION_VALUE;
         styles.right = BACKDROP_STYLE_POSITION_VALUE;
