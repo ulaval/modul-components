@@ -126,10 +126,6 @@ a {
     }
 
     &-weight {
-        &--normal {
-            font-weight: $m-font-weight;
-        }
-
         &--black {
             font-weight: $m-font-weight--black;
         }
@@ -138,8 +134,8 @@ a {
             font-weight: $m-font-weight--bold;
         }
 
-        &--light {
-            font-weight: $m-font-weight--light;
+        &--normal {
+            font-weight: $m-font-weight;
         }
     }
 }
