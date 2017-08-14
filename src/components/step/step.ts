@@ -1,7 +1,7 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './step.html?style=./step.scss';
 import { STEP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
@@ -23,7 +23,7 @@ export enum MStepState {
 export class MStep extends ModulVue {
     @Prop({ default: MStepState.Locked })
     public state: MStepState;
-    @Prop({ default: false })
+    @Prop()
     public open: boolean;
     @Prop({ default: false })
     public required: boolean;
@@ -33,22 +33,33 @@ export class MStep extends ModulVue {
     public last: boolean;
 
     public componentName = STEP_NAME;
-    private propsOpen: boolean = false;
+    private internalPropOpen: boolean = false;
 
-    protected mounted() {
-        this.propsOpen = this.open;
+    @Watch('open')
+    private openChanged(value: boolean): void {
+        this.propOpen = value;
+    }
+
+    protected get propOpen(): boolean {
+        return this.open != undefined ? this.open : this.internalPropOpen;
+    }
+
+    protected set propOpen(value: boolean) {
+        this.as<TransitionAccordionMixin>().isAnimActive = true;
+        this.$emit('open', value);
+        this.internalPropOpen = value;
     }
 
     private openStep(event): void {
         this.as<TransitionAccordionMixin>().isAnimActive = true;
-        this.propsOpen = true;
+        this.propOpen = true;
         this.$emit('openStep', event);
         event.preventDefault();
     }
 
     private closeStep(event): void {
         this.as<TransitionAccordionMixin>().isAnimActive = true;
-        this.propsOpen = false;
+        this.propOpen = false;
         this.$emit('closeStep', event);
         event.preventDefault();
     }
