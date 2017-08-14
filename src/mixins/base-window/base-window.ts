@@ -53,6 +53,7 @@ export class DialogTemplate extends ModulVue {
     public className: string;
 
     public componentName: string;
+    public from: string;
 
     private internalPropOpen: boolean = false;
     private propId: string = DIALOG_ID;
@@ -80,11 +81,7 @@ export class DialogTemplate extends ModulVue {
     }
 
     private get fromClass(): String {
-        return this.dialogMode == DialogMode.Sidebar && this.getDialogFrom() != undefined ? 'm--from-' + this.getDialogFrom() : '';
-    }
-
-    private getDialogFrom(): String | undefined {
-        return undefined;
+        return this.dialogMode == DialogMode.Sidebar && this.from != undefined ? 'm--from-' + this.from : '';
     }
 
     private set propOpen(value: boolean) {

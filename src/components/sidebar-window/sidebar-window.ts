@@ -25,6 +25,10 @@ export class MSidebar extends ModulVue {
     private getDialogFrom(): String {
         return this.from;
     }
+
+    private get marginLeft(): string {
+        return this.from == DialogFrom.Right || this.from == DialogFrom.BottomRight ? 'calc(100% - ' + this.width + ')' : '';
+    }
 }
 
 const SidebarPlugin: PluginObject<any> = {
