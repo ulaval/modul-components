@@ -17,7 +17,7 @@
             <slot></slot>
         </div>
     </template>
-    <m-panel-dialog :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter"
+    <m-sidebar :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter"
         :disabled="disabled" :open="isDialogOpen" @open="toggleDialog(true)" @close="toggleDialog(false)" v-if="isScreenMaxS">
         <div slot="header" class="m-popper__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>
@@ -29,5 +29,5 @@
             <slot name="footer"></slot>
         </div>
         <slot></slot>
-    </m-panel-dialog>
+    </m-sidebar>
 </div>

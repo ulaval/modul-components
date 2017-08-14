@@ -21,17 +21,15 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/limit-text/limit-text.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/link/link.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/message/message.meta.fr.json'));
-            i18n.addMessages(FRENCH, require('../components/modal/modal.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/nav-bar/nav-bar.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/nav-bar-item/nav-bar-item.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/options-menu/options-menu.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/panel/panel.meta.fr.json'));
-            i18n.addMessages(FRENCH, require('../components/siderbar-window/siderbar-window.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/sidebar-window/sidebar-window.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/popper/popper.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/radio/radio.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/modal-window/modal-window.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/select/select.meta.fr.json'));
-            i18n.addMessages(FRENCH, require('../components/sidebar/sidebar.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/spinner/spinner.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/status-list/status-list.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/step/step.meta.fr.json'));
