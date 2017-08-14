@@ -1,7 +1,5 @@
 {
     "m-datepicker-meta": {
-        "name": "Sélecteur de date",
-        "context-of-use": "Décrire ici le contexte d'utilisation du sélecteur de date.",
-        "usage": "Quelques règles d'utilisation."
+        "name": "Sélecteur de date"
     }
 }

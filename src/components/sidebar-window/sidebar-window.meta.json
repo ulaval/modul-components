@@ -1,17 +1,8 @@
 {
-    "tag": "m-dialog",
-    "name": "m-dialog-meta:name",
+    "tag": "m-sidebar",
+    "name": "m-sidebar-meta:name",
     "attributes": {
-        "mode": {
-            "type": "string",
-            "values": [
-                "primary",
-                "secondary",
-                "panel"
-            ],
-            "default": 0
-        },
-         "id": {
+        "id": {
             "type": "string",
             "values": [
                 "mDialog"
@@ -36,7 +27,7 @@
                 "true",
                 "false"
             ],
-            "default": 1
+            "default": 0
         },
         "title": {
             "type": "string"
@@ -78,16 +69,5 @@
             "default": 0
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-dialog-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-dialog-meta:usage"
-        }
-    ]
+    "overview": "sidebar.overview"
 }

@@ -23,23 +23,5 @@
             "default": "now plus 10 years"
         }
     },
-    "overview": [{
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-datepicker-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-datepicker-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-datepicker-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-datepicker-meta:dont"
-        }
-    ]
+    "overview": "datepicker.overview"
 }

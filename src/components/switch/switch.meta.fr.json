@@ -1,7 +1,5 @@
 {
     "m-switch-meta": {
-        "name": "Interrupteur",
-        "context-of-use": "Décrire ici le contexte d'utilisation de l'interrupteur.",
-        "usage": "Quelques règles d'utilisation."
+        "name": "Interrupteur"
     }
 }

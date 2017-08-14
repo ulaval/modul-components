@@ -1,7 +1,5 @@
 {
     "m-radio-group-meta": {
-        "name": "Groupe de boutons radio",
-        "context-of-use": "Décrire ici le contexte d'utilisation du groupe de boutons radio.",
-        "usage": "Quelques règles d'utilisation."
+        "name": "Groupe de boutons radio"
     }
 }

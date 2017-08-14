@@ -7,11 +7,5 @@
             "description": "m-status-list-meta:states-desc"
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-status-list-meta:context-of-use"
-        }
-    ]
+    "overview": "status-list.overview"
 }

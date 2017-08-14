@@ -2,7 +2,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { DIALOG_NAME } from '../component-names';
-import { DialogTemplate, DialogMode } from '../../mixins/dialog-template/dialog-template';
+import { DialogTemplate, DialogMode } from '../../mixins/base-window/base-window';
 
 const DIALOG_ID: string = 'mDialog';
 

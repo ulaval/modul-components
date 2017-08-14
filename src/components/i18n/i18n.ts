@@ -11,6 +11,8 @@ import { ModulVue } from '../../utils/vue/vue';
 export class MI18n extends ModulVue {
     @Prop()
     public i18nKey: string;
+    @Prop()
+    public k: string;
 
     public created(): void {
         if (!this.$i18n) {
@@ -20,7 +22,10 @@ export class MI18n extends ModulVue {
 
     private get text(): string {
         let result = '';
-        if (this.i18nKey) {
+        if (this.k) {
+            result = this.$i18n.translate(this.k);
+        } else if (this.i18nKey) {
+            console.warn('MI18n -> attribute i18n-key is deprecated; use attribute "k" instead.');
             result = this.$i18n.translate(this.i18nKey);
         }
 

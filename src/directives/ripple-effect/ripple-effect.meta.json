@@ -1,11 +1,5 @@
 {
     "tag": "m-ripple-effect",
     "name": "m-ripple-effect-meta:name",
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-ripple-effect-meta:context-of-use"
-        }
-    ]
+    "overview": "ripple-effect.overview"
 }

@@ -36,11 +36,5 @@
             "default": 0
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-spinner-meta:context-of-use"
-        }
-    ]
+    "overview": "spinner.overview"
 }

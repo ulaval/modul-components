@@ -6,11 +6,5 @@
             "type": "object"
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-bullet-list-meta:context-of-use"
-        }
-    ]
+    "overview": "bullet-list.overview"
 }

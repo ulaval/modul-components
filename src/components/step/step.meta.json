@@ -40,11 +40,5 @@
             "default": 1
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-step-meta:context-of-use"
-        }
-    ]
+    "overview": "step.overview"
 }

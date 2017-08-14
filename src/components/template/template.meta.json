@@ -7,11 +7,5 @@
             "default": false
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-template-meta:context-of-use"
-        }
-    ]
+    "overview": "template.overview"
 }

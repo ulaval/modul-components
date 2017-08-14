@@ -47,7 +47,7 @@ export interface ComponentMeta {
     name?: string;
     attributes?: ComponentAttributes;
     methods?: ComponentMethods;
-    overview?: Overview[];
+    overview?: string;
     category?: string;
 }
 
