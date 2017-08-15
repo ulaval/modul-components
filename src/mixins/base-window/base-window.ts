@@ -54,7 +54,9 @@ export class DialogTemplate extends ModulVue {
 
     public componentName: string;
     public from: string;
+    private hasHeader: boolean;
 
+    private popoverClassName: string = this.className ? 'm-' + this.className + '-popover' : '';
     private internalPropOpen: boolean = false;
     private propId: string = DIALOG_ID;
     private bodyElement: HTMLElement = document.body;
@@ -107,6 +109,15 @@ export class DialogTemplate extends ModulVue {
                 }
             }
         }
+    }
+
+    private get showHeader(): boolean {
+        if (this.from != 'bottom' && this.dialogMode != 'modal' && (this.hasHeaderSlot || this.hasTitle)) {
+            this.hasHeader = true;
+        } else {
+            this.hasHeader = false;
+        }
+        return this.hasHeader;
     }
 
     public get propCloseOnBackdrop(): boolean {
@@ -191,7 +202,7 @@ export class DialogTemplate extends ModulVue {
     private createDialog() {
         this.propId = this.id + '-' + uuid.generate();
         this.portalTargetElement.setAttribute('id', this.propId);
-        this.portalTargetElement.setAttribute('class', 'm-dialog-popover');
+        this.portalTargetElement.setAttribute('class', 'm-base-window-popover ' + this.popoverClassName);
         this.portalTargetElement.style.position = 'relative';
 
         this.$mWindow.addWindow(this.propId);
