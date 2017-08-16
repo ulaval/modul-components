@@ -33,21 +33,16 @@ export class MStep extends ModulVue {
     public last: boolean;
 
     public componentName = STEP_NAME;
-    private internalPropOpen: boolean = false;
+    private propOpen: boolean = false;
 
     @Watch('open')
-    private openChanged(value: boolean): void {
-        this.propOpen = value;
-    }
-
-    protected get propOpen(): boolean {
-        return this.open != undefined ? this.open : this.internalPropOpen;
-    }
-
-    protected set propOpen(value: boolean) {
+    protected openChanged(open: boolean): void {
         this.as<TransitionAccordionMixin>().isAnimActive = true;
-        this.$emit('open', value);
-        this.internalPropOpen = value;
+        this.propOpen = open;
+    }
+
+    protected mounted(): void {
+        this.propOpen = this.open != undefined ? this.open : false;
     }
 
     private openStep(event): void {
