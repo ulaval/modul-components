@@ -38,6 +38,7 @@ export class MRadio extends ModulVue {
     public name: string;
     public propPosition: string = MRadioPosition.LEFT;
     public propInline: boolean = false;
+    public propDisabled: boolean = false;
     // ----- For Button Group -----
     public propIcon: boolean = false;
     public propIconPosition: string = MRadioPosition.LEFT;
@@ -54,6 +55,8 @@ export class MRadio extends ModulVue {
     protected mounted(): void {
         this.propPosition = this.position;
         this.propInline = this.inline;
+        this.propDisabled = this.disabled;
+
         // ----- For Button Group -----
         this.propIcon = this.icon;
         this.propIconPosition = this.iconPosition;

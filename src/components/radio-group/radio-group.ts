@@ -55,6 +55,9 @@ export class MRadioGroup extends Vue {
                 radio.name = this.radioName;
                 radio.propPosition = this.position;
                 radio.propInline = this.inline;
+                if (this.disabled != false) {
+                    radio.propDisabled = this.disabled;
+                }
                 this.nbRadio++;
             }
         }

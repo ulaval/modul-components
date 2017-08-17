@@ -60,6 +60,9 @@ export class MButtonGroup extends Vue {
                 radio.fullSize = this.fullSize;
                 radio.icon = this.icon;
                 radio.iconPosition = this.iconPosition;
+                if (this.disabled != false) {
+                    radio.propDisabled = this.disabled;
+                }
                 if (i == 0) {
                     radio.firstChild = true;
                 }
