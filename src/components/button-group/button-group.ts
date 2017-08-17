@@ -30,8 +30,6 @@ export class MButtonGroup extends Vue {
     @Prop({ default: MRadioGroupPosition.LEFT })
     public position: string;
     @Prop({ default: false })
-    public inline: boolean;
-    @Prop({ default: false })
     public disabled: boolean;
     @Prop({ default: false })
     public fullSize: boolean;
@@ -59,7 +57,6 @@ export class MButtonGroup extends Vue {
                 let radio: MRadio = this.$children[i] as MRadio;
                 radio.name = this.radioName;
                 radio.propPosition = this.position;
-                radio.propInline = this.inline;
                 radio.fullSize = this.fullSize;
                 radio.icon = this.icon;
                 radio.iconPosition = this.iconPosition;

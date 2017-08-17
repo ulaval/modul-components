@@ -23,6 +23,8 @@ export class MRadio extends ModulVue {
     @Prop({ default: false })
     public inline: boolean;
     @Prop({ default: false })
+    public disabled: boolean;
+    @Prop({ default: false })
     // ----- For Button Group -----
     public icon: boolean;
     @Prop({ default: MRadioPosition.LEFT })

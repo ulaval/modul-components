@@ -2,20 +2,8 @@
     "tag": "m-radio-group",
     "name": "m-radio-group-meta:name",
     "attributes": {
-        "listData": {
-            "type": "object"
-        },
-        "name": {
-            "type": "string",
-            "default": "name"
-        },
-        "label": {
-            "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+        "value": {
+            "type": "string"
         },
         "position": {
             "type": "string",
@@ -24,6 +12,22 @@
                 "right"
             ],
             "default": 0
+        },
+        "inline": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "disabled": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
         }
     },
     "overview": "radio-group.overview"
