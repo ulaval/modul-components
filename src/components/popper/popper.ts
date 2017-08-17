@@ -5,7 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { DialogMode } from '../../mixins/base-window/base-window';
+import { BaseWindowMode } from '../../mixins/base-window/base-window';
 import Popper from 'popper.js';
 
 const TRIGGER_CLICK = 'click';
@@ -37,8 +37,8 @@ export class MPopper extends ModulVue {
     public closeOnContentClick: boolean;
     @Prop({ default: true })
     public closeOnReferenceClick: boolean;
-    @Prop({ default: DialogMode.Sidebar })
-    public mobileMode: DialogMode;
+    @Prop({ default: BaseWindowMode.Sidebar })
+    public mobileMode: BaseWindowMode;
 
     @Prop({ default: true })
     public padding: boolean;
@@ -283,8 +283,8 @@ export class MPopper extends ModulVue {
         return this.open;
     }
 
-    // private get propMobileMode(): DialogMode {
-    //     return this.mobileMode == DialogMode.Primary || this.mobileMode == DialogMode.Secondary ? this.mobileMode : DialogMode.Panel;
+    // private get propMobileMode(): BaseWindowMode {
+    //     return this.mobileMode == BaseWindowMode.Primary || this.mobileMode == BaseWindowMode.Secondary ? this.mobileMode : BaseWindowMode.Panel;
     // }
 
     private get hasHeaderSlot(): boolean {

@@ -3,16 +3,16 @@ import { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
-import { DialogTemplate, DialogMode } from '../../mixins/base-window/base-window';
+import { BaseWindow, BaseWindowMode } from '../../mixins/base-window/base-window';
 
 @Component({
-    mixins: [DialogTemplate]
+    mixins: [BaseWindow]
 })
 export class MModal extends ModulVue {
     public componentName: string = MODAL_NAME;
 
-    protected get propMode(): DialogMode {
-        return DialogMode.Modal;
+    protected get propMode(): BaseWindowMode {
+        return BaseWindowMode.Modal;
     }
 }
 

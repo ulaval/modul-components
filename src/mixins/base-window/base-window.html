@@ -1,13 +1,13 @@
 <div class="m-base-window">
     <portal v-if="propOpen" :target-el="'#' + propId">
         <div class="m-base-window__wrap" :class="[{ 'm--is-open': isVisible,
-                    'm--is-modal': dialogMode == 'modal',
-                    'm--is-dialog': dialogMode == 'dialog',
-                    'm--is-sidebar': dialogMode == 'sidebar',
+                    'm--is-modal': windowMode == 'modal',
+                    'm--is-dialog': windowMode == 'dialog',
+                    'm--is-sidebar': windowMode == 'sidebar',
                     'm--is-clickable-backdrop': propCloseOnBackdrop }, className, fromClass]" @click.self="backdropClick"
             ref="dialogWrap">
             <article class="m-base-window__article" :style="{ width: width, 'margin-left': marginLeft }">
-                <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="dialogMode == 'sidebar' && getDialogFrom() == 'bottom'">
+                <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="windowMode == 'sidebar' && from == 'bottom'">
                     <m-i18n k="m-base-window:close"></m-i18n>
                 </button>
                 <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }"
@@ -18,15 +18,15 @@
                         <m-i18n k="m-base-window:close"></m-i18n>
                     </m-button>
                 </header>
-                <header class="m-base-window__header" v-else-if="dialogMode == 'dialog'">
+                <header class="m-base-window__header" v-else-if="windowMode == 'dialog'">
                     <h2>Error: This component needs a header slot or title prop.</h2>
                 </header>
                 <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasBodySlot">
                     <slot name="body"></slot>
                 </div>
-                <footer class="m-base-window__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot || dialogMode == 'modal'">
-                    <slot name="footer" v-if="dialogMode != 'modal'"></slot>
-                    <nav class="m-base-window__footer-nav" v-if="dialogMode == 'modal'">
+                <footer class="m-base-window__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot || windowMode == 'modal'">
+                    <slot name="footer" v-if="windowMode != 'modal'"></slot>
+                    <nav class="m-base-window__footer-nav" v-if="windowMode == 'modal'">
                         <slot name="footer"></slot>
                         <template v-if="!hasFooterSlot">
                             <m-button @click="onTrue">

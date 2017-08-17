@@ -2,18 +2,18 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { DIALOG_NAME } from '../component-names';
-import { DialogTemplate, DialogMode } from '../../mixins/base-window/base-window';
+import { BaseWindow, BaseWindowMode } from '../../mixins/base-window/base-window';
 
 const DIALOG_ID: string = 'mDialog';
 
 @Component({
-    mixins: [DialogTemplate]
+    mixins: [BaseWindow]
 })
 export class MDialog extends ModulVue {
     public componentName: string = DIALOG_NAME;
 
-    protected get dialogMode(): DialogMode {
-        return DialogMode.Dialog;
+    protected get windowMode(): BaseWindowMode {
+        return BaseWindowMode.Dialog;
     }
 }
 

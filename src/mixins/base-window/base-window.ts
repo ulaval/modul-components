@@ -6,13 +6,13 @@ import uuid from '../../utils/uuid/uuid';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import WithRender from './base-window.html?style=./base-window.scss';
 
-export enum DialogMode {
+export enum BaseWindowMode {
     Modal = 'modal',
     Dialog = 'dialog',
     Sidebar = 'sidebar'
 }
 
-export enum DialogFrom {
+export enum BaseWindowFrom {
     Top = 'top',
     Right = 'right',
     Bottom = 'bottom',
@@ -30,7 +30,7 @@ const DIALOG_ID: string = 'mDialog';
 @Component({
     mixins: [MediaQueries]
 })
-export class DialogTemplate extends ModulVue {
+export class BaseWindow extends ModulVue {
     @Prop({ default: DIALOG_ID })
     public id: string;
     @Prop({ default: false })
@@ -64,8 +64,8 @@ export class DialogTemplate extends ModulVue {
     private isVisible: boolean = false;
     private busy: boolean = false;
 
-    protected get dialogMode(): DialogMode {
-        return DialogMode.Modal;
+    protected get windowMode(): BaseWindowMode {
+        return BaseWindowMode.Modal;
     }
 
     protected beforeMount(): void {
@@ -83,7 +83,7 @@ export class DialogTemplate extends ModulVue {
     }
 
     private get fromClass(): String {
-        return this.dialogMode == DialogMode.Sidebar && this.from != undefined ? 'm--from-' + this.from : '';
+        return this.windowMode == BaseWindowMode.Sidebar && this.from != undefined ? 'm--from-' + this.from : '';
     }
 
     private set propOpen(value: boolean) {
@@ -112,7 +112,7 @@ export class DialogTemplate extends ModulVue {
     }
 
     private get showHeader(): boolean {
-        if (this.from != 'bottom' && this.dialogMode != 'modal' && (this.hasHeaderSlot || this.hasTitle)) {
+        if (this.from != BaseWindowFrom.Bottom && this.windowMode != BaseWindowMode.Modal && (this.hasHeaderSlot || this.hasTitle)) {
             this.hasHeader = true;
         } else {
             this.hasHeader = false;
@@ -122,7 +122,7 @@ export class DialogTemplate extends ModulVue {
 
     public get propCloseOnBackdrop(): boolean {
         let result: boolean = false;
-        if (this.dialogMode == DialogMode.Dialog || this.dialogMode == DialogMode.Sidebar) {
+        if (this.windowMode == BaseWindowMode.Dialog || this.windowMode == BaseWindowMode.Sidebar) {
             result = this.closeOnBackdrop == undefined ? true : this.closeOnBackdrop;
         }
         return result;
@@ -130,11 +130,11 @@ export class DialogTemplate extends ModulVue {
 
     public get transitionDuration(): number {
         let result: number;
-        switch (this.dialogMode) {
-            case DialogMode.Dialog:
+        switch (this.windowMode) {
+            case BaseWindowMode.Dialog:
                 result = this.as<MediaQueriesMixin>().isScreenMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
                 break;
-            case DialogMode.Sidebar:
+            case BaseWindowMode.Sidebar:
                 result = TRANSITION_DURATION_LONG;
                 break;
             default:
