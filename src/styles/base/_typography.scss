@@ -144,32 +144,18 @@ a {
 //  Typo
 // ======================================================================
 .m-u--typo {
-    &--light {
-        color: $m-color--grey-darker;
-
-        &-small {
-            font-size: $m-font-size--s;
-            color: $m-color--grey-darker;
-
-            &-italic {
-                font-size: $m-font-size--s;
-                font-style: italic;
-                color: $m-color--grey-darker;
-            }
-        }
-    }
-
-    &--small {
-        font-size: $m-font-size--s;
-
-        &-italic {
-            font-size: $m-font-size--s;
-            font-style: italic;
-        }
-    }
-
-    &--italic {
+    &--precision {
         font-size: $m-font-size--s;
         font-style: italic;
+        color: $m-color--grey-darker;
     }
+
+    &--highlighting {
+        display: inline;
+        font-size: $m-font-size--s;
+        font-weight: $m-font-weight--bold;
+        background: $m-color--grey-light;
+        box-shadow: 0 0 0 2px $m-color--grey-light;
+    }
+
 }

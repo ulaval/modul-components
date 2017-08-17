@@ -132,72 +132,32 @@ a {
 .m-u--font-weight--normal {
   font-weight: 300; }
 
-.m-u--typo--light {
-  color: #999; }
-  .m-u--typo--light-small {
-    font-size: 14px;
-    color: #999; }
-    .m-u--typo--light-small-italic {
-      font-size: 14px;
-      font-style: italic;
-      color: #999; }
-.m-u--typo--small {
-  font-size: 14px; }
-  .m-u--typo--small-italic {
-    font-size: 14px;
-    font-style: italic; }
-.m-u--typo--italic {
+.m-u--typo--precision {
   font-size: 14px;
-  font-style: italic; }
+  font-style: italic;
+  color: #999; }
+.m-u--typo--highlighting {
+  display: inline;
+  font-size: 14px;
+  font-weight: 400;
+  background: #e8e8e8;
+  box-shadow: 0 0 0 2px #e8e8e8; }
 
 .m-u--display--block {
   display: block; }
 .m-u--display--flex {
   display: flex; }
-.m-u--display--inline-block {
-  display: inline-block; }
-.m-u--display--inline-flex {
-  display: inline-flex; }
-.m-u--align-content--center {
-  align-content: center; }
-.m-u--align-content--flex-start {
-  align-content: flex-start; }
-.m-u--align-content--flex-end {
-  align-content: flex-end; }
-.m-u--align-content--stretch {
-  align-content: stretch; }
-.m-u--align-content--space-around {
-  align-content: space-around; }
-.m-u--align-content--space-between {
-  align-content: space-between; }
-.m-u--align-item--baseline {
-  align-items: baseline; }
-.m-u--align-item--center {
-  align-items: center; }
-.m-u--align-item--flex-start {
-  align-items: flex-start; }
-.m-u--align-item--flex-end {
-  align-items: flex-end; }
-.m-u--align-item--stretch {
-  align-items: stretch; }
-.m-u--justify-content--center {
-  justify-content: center; }
-.m-u--justify-content--flex-start {
-  justify-content: flex-start; }
-.m-u--justify-content--flex-end {
-  justify-content: flex-end; }
-.m-u--justify-content--space-around {
-  justify-content: space-around; }
-.m-u--justify-content--space-between {
-  justify-content: space-between; }
-.m-u--flex-direction--column {
-  flex-direction: column; }
-.m-u--flex-direction--column-reverse {
-  flex-direction: column-reverse; }
-.m-u--flex-direction--row {
-  flex-direction: row; }
-.m-u--flex-direction--row-reverse {
-  flex-direction: row-reverse; }
+.m-u--display--inline {
+  display: inline; }
+  .m-u--display--inline-block {
+    display: inline-block; }
+  .m-u--display--inline-flex {
+    display: inline-flex; }
+
+.m-u--max-width {
+  max-width: 1000px; }
+.m-u--min-width {
+  min-width: 320px; }
 
 .m-u--margin {
   margin: 12px; }

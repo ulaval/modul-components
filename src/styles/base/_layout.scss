@@ -13,6 +13,7 @@
         }
 
         &--inline {
+            display: inline;
             &-block {
                 display: inline-block;
             }
@@ -22,93 +23,18 @@
             }
         }
     }
+}
 
-    &--align-content {
-        &--center {
-            align-content: center;
-        }
-
-        &--flex-start {
-            align-content: flex-start;
-        }
-
-        &--flex-end {
-            align-content: flex-end;
-        }
-
-        &--stretch {
-            align-content: stretch;
-        }
-
-        &--space-around {
-            align-content: space-around;
-        }
-
-        &--space-between {
-            align-content: space-between;
-        }
+// ======================================================================
+//  Max and min width
+// ======================================================================
+.m-u {
+    &--max-width {
+        max-width: $m-max-width;
     }
 
-    &--align-item {
-        &--baseline {
-            align-items: baseline;
-        }
-
-        &--center {
-            align-items: center;
-        }
-
-        &--flex-start {
-            align-items: flex-start;
-        }
-
-        &--flex-end {
-            align-items: flex-end;
-        }
-
-        &--stretch {
-            align-items: stretch;
-        }
-    }
-
-    &--justify-content {
-        &--center {
-            justify-content: center;
-        }
-
-        &--flex-start {
-            justify-content: flex-start;
-        }
-
-        &--flex-end {
-            justify-content: flex-end;
-        }
-
-        &--space-around {
-            justify-content: space-around;
-        }
-
-        &--space-between {
-            justify-content: space-between;
-        }
-    }
-
-    &--flex-direction {
-        &--column {
-            flex-direction: column;
-        }
-
-        &--column-reverse {
-            flex-direction: column-reverse;
-        }
-
-        &--row {
-            flex-direction: row;
-        }
-
-        &--row-reverse {
-            flex-direction: row-reverse;
-        }
+    &--min-width {
+        min-width: $m-min-width;
     }
 }
 
