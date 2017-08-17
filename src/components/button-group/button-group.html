@@ -1,13 +1,12 @@
-<ul class="m-button-group" :class="{ 'm--is-full-size': fullSize }" >
-    <li class="m-button-group__wrap" v-for="(data, index) in listData" :class="{ 'm--is-focus': isFocus && data.value == activeValue, 'm--is-active': data.value == activeValue }">
-        <input class="m-button-group__hidden" ref="refRadio" type="radio" :id="data.value" :name="name" :value="data.value"
-            v-model="activeValue" @focus="isFocus=true" @blur="isFocus=false" @click="onClick">
-        <label class="m-button-group__label" :for="data.value">
-            <m-icon aria-hidden="true" class="m-button-group__icon m--is-left" :name="data.iconName" v-if="hasIconLeft  && icon"></m-icon>
-            <span class="m-button-group__text">
-                <slot>{{ data.label }}</slot>
-            </span>
-            <m-icon aria-hidden="true" class="m-button-group__icon m--is-right" :name="data.iconName"  v-if="!hasIconLeft  && icon"></m-icon>
-        </label>
-    </li>
+ <ul class="m-button-group">
+    <span class="m-button-group__wrap" v-if="!hasError">
+        <slot>
+            <m-radio value="button1">Button 1</m-radio>
+            <m-radio value="button2">Button 2</m-radio>
+            <m-radio value="button3">Button 3</m-radio>
+        </slot>
+    </span>
+    <div class="m-radio-group" v-if="hasError">
+        <p>{{ errorMessage }}</p>
+    </div>
 </ul>

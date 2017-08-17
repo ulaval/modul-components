@@ -2,13 +2,8 @@
     "tag": "m-radio",
     "name": "m-radio-meta:name",
     "attributes": {
-        "label": {
-            "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+        "value": {
+            "type": "string"
         },
         "position": {
             "type": "string",
@@ -17,6 +12,41 @@
                 "right"
             ],
             "default": 0
+        },
+        "inline": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "disabled": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "icon": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "iconPosition": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        },
+        "iconName": {
+            "type": "string"
         }
     },
     "overview": "radio.overview"

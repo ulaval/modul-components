@@ -1,14 +1,19 @@
 @import 'abstracts/variables';
 $m-radio--width: 16px;
+$m-radio--color-disabled: $m-color--grey-darker !default;
 
-.m-radio {
-    display: inline;
+.m-radio.m--is-radio-style {
+    display: block;
     user-select: none;
     line-height: 1;
     list-style: none;
     padding-left: 0;
 
     &:not(.is-disabled) {
+        &.m--is-inline {
+            display: inline;
+        }
+
         .m-radio__wrap {
             display: inline-flex;
             align-items: center;
@@ -28,7 +33,7 @@ $m-radio--width: 16px;
                 }
             }
 
-            &:hover {
+            &:hover:not(.m--is-disabled) {
                 .m-radio__label {
                     color: $m-color--interactive;
                 }
@@ -39,6 +44,21 @@ $m-radio--width: 16px;
                 .m-radio__input {
                     border-color: $m-color--interactive;
                     background: $m-color--interactive-lightest;
+                }
+            }
+
+            &.m--is-disabled {
+                cursor: not-allowed;
+
+                .m-radio__input {
+                    border-color: $m-radio--color-disabled;
+                    background: $m-radio--color-disabled;
+                }
+
+                .m-radio__label {
+                    color: $m-radio--color-disabled;
+                    background: $m-color--white;
+                    border-color: $m-radio--color-disabled;
                 }
             }
         }
@@ -73,7 +93,7 @@ $m-radio--width: 16px;
         }
     }
 
-    &__input {
+    .m-radio__input {
         transition: 0.3s background ease, 0.3s border-color ease;
         display: inline-flex;
         align-items: center;
@@ -87,11 +107,173 @@ $m-radio--width: 16px;
         z-index: 1;
     }
 
-    &__label {
+    .m-radio__label {
         transition: 0.3s color ease;
     }
 
-    &__hidden {
+    .m-radio__hidden {
         @include visuallyHidden;
+    }
+}
+
+.m-radio.m--is-button-style {
+    display: inline-flex;
+    user-select: none;
+    line-height: 1;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+
+    &.m--is-full-size {
+        display: flex;
+        flex: 1;
+
+        .m-radio__wrap {
+            flex: 1;
+        }
+    }
+
+    &:not(.is-disabled) {
+        .m-radio__wrap {
+            .m-radio__label {
+                transition-property: background, border-color, color;
+                transition-duration: 0.3s;
+                transition-timing-function: ease;
+                color: $m-color--interactive;
+                border-right: 1px solid $m-color--interactive;
+                border-top: 1px solid $m-color--interactive;
+                border-bottom: 1px solid $m-color--interactive;
+                font-weight: $m-font-weight--bold;
+                cursor: pointer;
+            }
+
+            .m-radio__icon {
+                color: $m-color--interactive;
+            }
+
+            &:hover {
+                .m-radio__label {
+                    background: $m-color--interactive;
+                    color: $m-color--white;
+                }
+
+                .m-radio__icon {
+                    color: $m-color--white;
+                }
+            }
+
+            &.m--is-checked {
+                .m-radio__label {
+                    color: $m-color--white;
+                    background: $m-color--interactive-dark;
+                    border-color: $m-color--interactive-dark;
+                    cursor: default;
+                }
+
+                .m-radio__icon {
+                    color: $m-color--white;
+                }
+            }
+
+            &:not(.m--is-checked):not(.m--is-disabled) {
+                &:hover {
+                    .m-radio__label {
+                        background: $m-color--interactive;
+                        color: $m-color--white;
+                    }
+
+                    .m-radio__icon {
+                        color: $m-color--white;
+                    }
+                }
+            }
+
+            &.m--is-focus {
+                .m-radio__label {
+                    background: $m-color--interactive;
+                    border-color: $m-color--interactive;
+                    color: $m-color--white;
+                }
+
+                .m-radio__icon {
+                    color: $m-color--white;
+                }
+            }
+
+            &.m--is-disabled {
+                .m-radio__label {
+                    cursor: not-allowed;
+                    color: $m-radio--color-disabled;
+                    background: $m-color--white;
+                    border-color: $m-radio--color-disabled;
+                }
+
+                .m-radio__icon {
+                    color: $m-radio--color-disabled;
+                }
+            }
+        }
+    }
+
+    .m-radio__wrap {
+        display: inline-flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        vertical-align: middle;
+        appearance: none;
+        outline: none;
+        user-select: none;
+        font-size: 100%;
+        text-decoration: none;
+        line-height: 1;
+
+        &.m--is-first {
+            .m-radio__label {
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+                border-left: 1px solid $m-color--interactive;
+            }
+        }
+
+        &.m--is-last {
+            .m-radio__label {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+        }
+    }
+
+    .m-radio__label {
+        transition: 0.3s color ease;
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        padding: 10px $m-padding 9px $m-padding;
+    }
+
+    .m-radio__hidden {
+        @include visuallyHidden;
+    }
+
+    .m-radio__icon {
+        position: relative;
+        z-index: 2;
+        font-size: $m-font-size;
+        height: $m-font-size;
+        transition: 0.3s color ease;
+
+        &:empty {
+            display: none;
+        }
+
+        &.m--is-left {
+            margin-right: $m-margin--s;
+        }
+
+        &.m--is-right {
+            margin-left: $m-margin--s;
+        }
     }
 }

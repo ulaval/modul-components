@@ -16,16 +16,17 @@ export enum MRadioGroupPosition {
 @Component
 export class MRadioGroup extends Vue {
 
-    @Prop({ default: true })
-    public label: boolean;
-    @Prop({ default: MRadioGroupPosition.LEFT })
-    public position: string;
     @Prop()
     public value: string;
+    @Prop({ default: MRadioGroupPosition.LEFT })
+    public position: string;
+    @Prop({ default: false })
+    public inline: boolean;
     @Prop({ default: false })
     public disabled: boolean;
 
     public componentName: string = RADIO_GROUP_NAME;
+    public internalPropValue: string;
     private nbRadio: number = 0;
     private radioName: string = uuid.generate();
 
@@ -38,11 +39,25 @@ export class MRadioGroup extends Vue {
         this.$emit('input', val);
     }
 
+    private get propValue(): string {
+        return this.value != undefined ? this.value : this.internalPropValue;
+    }
+
+    private set propValue(value: string) {
+        this.$emit('input', value);
+        this.internalPropValue = value;
+    }
+
     protected mounted(): void {
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkRadio(i)) {
                 let radio: MRadio = this.$children[i] as MRadio;
                 radio.name = this.radioName;
+                radio.propPosition = this.position;
+                radio.propInline = this.inline;
+                if (this.disabled != false) {
+                    radio.propDisabled = this.disabled;
+                }
                 this.nbRadio++;
             }
         }

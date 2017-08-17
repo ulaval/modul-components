@@ -190,11 +190,13 @@ export class BaseWindow extends ModulVue {
             setTimeout(() => {
                 this.deleteDialog();
                 resolve();
-                this.$nextTick(() => {
-                    this.$refs.dialogButton['setAttribute']('tabindex', '0');
-                    this.$refs.dialogButton['focus']();
-                    this.$refs.dialogButton['removeAttribute']('tabindex');
-                });
+                if (this.hasDefaultSlots) {
+                    this.$nextTick(() => {
+                        this.$refs.dialogButton['setAttribute']('tabindex', '0');
+                        this.$refs.dialogButton['focus']();
+                        this.$refs.dialogButton['removeAttribute']('tabindex');
+                    });
+                }
             }, this.transitionDuration);
         });
     }

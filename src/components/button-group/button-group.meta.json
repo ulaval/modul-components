@@ -2,15 +2,32 @@
     "tag": "m-button-group",
     "name": "m-button-group-meta:name",
     "attributes": {
-        "listData": {
-            "type": "object"
+        "value": {
+            "type": "string"
         },
-        "name": {
+        "position": {
             "type": "string",
             "values": [
-                "button-group"
+                "left",
+                "right"
             ],
             "default": 0
+        },
+        "disabled": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "fullSize": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
         },
         "icon": {
             "type": "boolean",
@@ -27,14 +44,6 @@
                 "right"
             ],
             "default": 0
-        },
-        "fullSize": {
-            "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
         }
     },
     "overview": "button-group.overview"
