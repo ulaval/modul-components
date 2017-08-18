@@ -103,7 +103,7 @@ $m-panel--screen--min: 639px;
     }
 
     &__body {
-        flex: 1;
+        flex: 1 1 auto;
 
         &:not(.m--no-padding) {
             padding-right: $m-padding;

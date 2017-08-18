@@ -117,7 +117,7 @@ $m-dialog--header-height: $m-touch-size !default;
                 }
 
                 &__body {
-                    flex: 1;
+                    flex: 1 1 auto;
                     overflow-x: hidden;
                     overflow-y: auto;
 
