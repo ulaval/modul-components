@@ -1,3 +1,39 @@
-<ul class="m-bullet-list m-u--bullet-list">
-    <li v-for="data in listData" :class="[ componentName + '__elem' ]">{{ data }}</li>
-</ul>
+<div class="m-bullet-list">
+    <p class="m-bullet-list__title">{{ title }} :</p>
+    <ul class="m-bullet-list__list">
+        <slot>
+            <li>Element #1</li>
+            <li>Element #2
+                <ul>
+                    <li>Element #2.1</li>
+                    <li>Element #2.2
+                        <ul>
+                            <li>Element #2.2.1</li>
+                            <li>Element #2.2.2
+                                <ul>
+                                    <li>Element #2.3.1</li>
+                                    <li>Element #2.3.2
+                                        <ul>
+                                            <li>Element #2.4.1</li>
+                                            <li>Element #2.4.2</li>
+                                            <li>Element #2.4.3</li>
+                                            <li>Element #2.4.4</li>
+                                        </ul>
+                                    </li>
+                                    <li>Element #2.3.3</li>
+                                    <li>Element #2.3.4</li>
+                                </ul>
+                            </li>
+                            <li>Element #2.2.3</li>
+                            <li>Element #2.2.4</li>
+                        </ul>
+                    </li>
+                    <li>Element #2.3</li>
+                    <li>Element #2.4</li>
+                </ul>
+            </li>
+            <li>Element #3</li>
+            <li>Element #4</li>
+        </slot>
+    </ul>
+</div>

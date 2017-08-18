@@ -2,8 +2,8 @@
     "tag": "m-bullet-list",
     "name": "m-bullet-list-meta:name",
     "attributes": {
-        "listData": {
-            "type": "object"
+        "title": {
+            "type": "string"
         }
     },
     "overview": "bullet-list.overview"

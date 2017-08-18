@@ -8,8 +8,8 @@ import { BULLET_LIST_NAME } from '../component-names';
 @WithRender
 @Component
 export class MBulletList extends Vue {
-    @Prop({ default: () => ['Element 1', 'Element 2', 'Element 3'] })
-    public listData: string[];
+    @Prop({ default: 'Title' })
+    public title: string;
 
     public componentName = BULLET_LIST_NAME;
 }
