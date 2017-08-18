@@ -67,8 +67,7 @@
                 "false"
             ],
             "default": 0
-        }
-        ,
+        },
         "paddingFooter": {
             "type": "boolean",
             "value": [
@@ -76,6 +75,16 @@
                 "false"
             ],
             "default": 0
+        },
+        "size": {
+            "type": "string",
+            "value": [
+                "full-size",
+                "large",
+                "default",
+                "small"
+            ],
+            "default": 2
         }
     },
     "overview": "dialog.overview"

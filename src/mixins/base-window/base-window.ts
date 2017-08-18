@@ -82,10 +82,6 @@ export class BaseWindow extends ModulVue {
         return this.internalPropOpen;
     }
 
-    private get fromClass(): String {
-        return this.windowMode == BaseWindowMode.Sidebar && this.from != undefined ? 'm--from-' + this.from : '';
-    }
-
     private set propOpen(value: boolean) {
         if (this.internalPropOpen != value) {
             if (this.busy) {

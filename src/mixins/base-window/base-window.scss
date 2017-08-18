@@ -1,6 +1,8 @@
 @import '../../styles/abstracts/variables';
 $m-modal--max-width: 380px !default;
+$m-dialog--max-width--l: $m-max-width !default;
 $m-dialog--max-width: 640px !default;
+$m-dialog--max-width--s: 420px !default;
 $m-dialog--header-height: $m-touch-size !default;
 
 .m-base-window {
@@ -34,6 +36,310 @@ $m-dialog--header-height: $m-touch-size !default;
             @media screen and (max-width: $m-screen--max--s) {
                 padding: $m-padding;
             }
+
+            &.m--is-open {
+                .m-base-window {
+                    &__article {
+                        transform: translate3d(0, 0, 0);
+                        opacity: 1;
+                    }
+                }
+            }
+
+            .m-base-window {
+                &__article {
+                    transition: 0.3s transform ease, 0.2s opacity linear;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                    transform: translate3d(0, $m-padding--l, 0);
+                    opacity: 0;
+                    border-radius: $m-border-radius;
+
+                    @media screen and (min-width: #{$m-modal--max-width + $m-padding * 2}) {
+                        width: $m-modal--max-width;
+                    }
+
+                    @include m-is-ie() {
+                        margin: 60px auto;
+                    }
+                }
+
+                &__header {
+                    border-bottom: 1px solid $m-color--grey-light;
+                }
+
+                &__footer-nav {
+                    &,
+                    > :first-child {
+                        display: inline-flex;
+                        flex-direction: column;
+
+                        &,
+                        &.m-button,
+                        &.m-link,
+                        > :first-child {
+                            margin: 0;
+                        }
+                    }
+
+                    .m-button,
+                    .m-link {
+                        margin-top: $m-margin;
+                    }
+                }
+            }
+        }
+
+        &.m--is-dialog,
+        &.m--is-sidebar {
+            .m-base-window {
+                &__header {
+                    position: relative;
+                    min-height: $m-dialog--header-height;
+                    padding-right: $m-touch-size;
+
+                    &__close-button {
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                        margin: 0;
+                        transform: translate3d(0, -50%, 0);
+                        stroke-width: 2px;
+
+                        &:hover {
+                            color: $m-color--white;
+                        }
+
+                        &::after {
+                            background: $m-color--black-grey-light;
+                        }
+                    }
+                }
+
+                &__body {
+                    flex: 1;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+
+                    @include m-is-ie() {
+                        flex: none;
+                    }
+                }
+            }
+        }
+
+        &.m--is-dialog {
+            &.m--is-full-size {
+                .m-base-window {
+                    &__article {
+                        @media screen and (min-width: #{$m-screen--min--s}) {
+                            max-width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+
+            &.m--is-large {
+                .m-base-window {
+                    &__article {
+                        @media screen and (min-width: #{$m-screen--min--s}) {
+                            max-width: $m-dialog--max-width--l;
+                        }
+                    }
+                }
+            }
+
+            &.m--is-small {
+                .m-base-window {
+                    &__article {
+                        @media screen and (min-width: #{$m-screen--min--s}) {
+                            max-width: $m-dialog--max-width--s;
+                        }
+                    }
+                }
+            }
+
+            &.m--is-open {
+                .m-base-window {
+                    &__article {
+                        @media screen and (max-width: #{$m-screen--max--s}) {
+                            transform: translate3d(0, 0, 0);
+                        }
+
+                        @media screen and (min-width: #{$m-screen--min--s}) {
+                            transform: translate3d(0, 0, 0);
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            .m-base-window {
+                &__article {
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+
+                    @media screen and (max-width: #{$m-screen--max--s}) {
+                        transition: 0.6s transform ease;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        transform: translate3d(0, 110%, 0);
+                        margin: 0 !important; //style for IE
+                    }
+
+                    @media screen and (min-width: #{$m-screen--min--s}) {
+                        transition: 0.3s transform ease, 0.2s opacity linear;
+                        transform: translate3d(0, $m-padding--l, 0);
+                        margin-top: auto;
+                        margin-bottom: auto;
+                        max-width: $m-dialog--max-width;
+                        opacity: 0;
+                    }
+
+                    @include m-is-ie() {
+                        margin: $m-padding--l*2 auto;
+                    }
+                }
+
+                &__header {
+                    background: $m-color--black-grey;
+                    color: $m-color--white;
+                    min-height: $m-dialog--header-height;
+                    padding-right: $m-touch-size;
+
+                    h2 {
+                        margin: 0;
+                        font-size: $m-font-size--h4;
+                        font-weight: $m-font-weight--bold;
+                        line-height: 1.2;
+                    }
+
+                    &__close-button {
+                        color: $m-color--white;
+
+                        &::after {
+                            background: $m-color--black-grey-light;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.m--is-sidebar {
+            &.m--is-from-top,
+            &.m--is-from-right,
+            &.m--is-from-bottom,
+            &.m--is-from-bottom-right,
+            &.m--is-from-bottom-left,
+            &.m--is-from-left {
+                &.m--is-open {
+                    .m-base-window {
+                        &__article {
+                            transform: translate3d(0, 0, 0);
+                        }
+                    }
+                }
+            }
+
+            &.m--is-from-top,
+            &.m--is-from-right,
+            &.m--is-from-left {
+                .m-base-window {
+                    &__article {
+                        top: 0;
+                    }
+                }
+            }
+
+            &.m--is-from-top {
+                .m-base-window {
+                    &__article {
+                        transform: translate3d(0, -100%, 0);
+                    }
+                }
+            }
+
+            &.m--is-from-bottom {
+                .m-base-window {
+                    &__article {
+                        transform: translate3d(0, calc(100% + #{$m-touch-size}), 0);
+                    }
+                }
+            }
+
+            &.m--is-from-bottom,
+            &.m--is-from-bottom-right,
+            &.m--is-from-bottom-left {
+                .m-base-window {
+                    &__article {
+                        bottom: 0;
+                        max-height: calc(100vh - #{$m-padding--xl});
+                    }
+                }
+            }
+
+            &.m--is-from-right,
+            &.m--is-from-bottom-right {
+                .m-base-window {
+                    &__article {
+                        transform: translate3d(100%, 0, 0);
+                    }
+                }
+            }
+
+            &.m--is-from-left,
+            &.m--is-from-bottom-left {
+                .m-base-window {
+                    &__article {
+                        transform: translate3d(-100%, 0, 0);
+                    }
+                }
+            }
+
+            .m-base-window {
+                &__article {
+                    transition: transform 0.6s ease;
+                    position: absolute;
+                    right: 0;
+                    left: 0;
+                    display: flex;
+                    flex-direction: column;
+                    min-height: $m-touch-size--l;
+                }
+
+                &__header {
+                    display: block;
+                    border-bottom: 1px solid $m-color--grey-light;
+
+                    &__close-button {
+                        color: $m-color--black-grey-light;
+                    }
+                }
+
+                &__close-button {
+                    transition: 0.3s background ease;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: $m-margin $m-padding;
+                    background: none;
+                    border: none;
+                    font-size: $m-font-size;
+                    color: $m-color--white;
+                    cursor: pointer;
+                    outline: none;
+                    text-decoration: none;
+                    line-height: 1;
+                    transform: translate3d(0, -100%, 0);
+
+                    &:focus:not(:hover) {
+                        background: rgba($m-color--black, 0.3);
+                    }
+                }
+            }
         }
 
         &.m--is-clickable-backdrop {
@@ -51,117 +357,6 @@ $m-dialog--header-height: $m-touch-size !default;
         width: 100%;
         background: $m-color--white;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
-
-        .m--is-modal & {
-            transition: 0.3s transform ease, 0.2s opacity linear;
-            margin-top: auto;
-            margin-bottom: auto;
-            transform: translate3d(0, $m-padding--l, 0);
-            opacity: 0;
-            border-radius: $m-border-radius;
-
-            @media screen and (min-width: #{$m-modal--max-width + $m-padding * 2}) {
-                width: $m-modal--max-width;
-            }
-
-            @include m-is-ie() {
-                margin: 60px auto;
-            }
-        }
-
-        .m--is-modal.m--is-open & {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
-        }
-
-        .m--is-dialog & {
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-
-            @media screen and (max-width: #{$m-screen--max--s}) {
-                transition: 0.6s transform ease;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                transform: translate3d(0, 110%, 0);
-                margin: 0 !important; //style for IE
-            }
-
-            @media screen and (min-width: #{$m-screen--min--s}) {
-                transition: 0.3s transform ease, 0.2s opacity linear;
-                transform: translate3d(0, $m-padding--l, 0);
-                margin-top: auto;
-                margin-bottom: auto;
-                max-width: $m-dialog--max-width;
-                opacity: 0;
-            }
-
-            @include m-is-ie() {
-                margin: $m-padding--l*2 auto;
-            }
-        }
-
-        .m--is-dialog.m--is-open & {
-            @media screen and (max-width: #{$m-screen--max--s}) {
-                transform: translate3d(0, 0, 0);
-            }
-
-            @media screen and (min-width: #{$m-screen--min--s}) {
-                transform: translate3d(0, 0, 0);
-                opacity: 1;
-            }
-        }
-
-        .m--is-sidebar & {
-            transition: transform 0.6s ease;
-            position: absolute;
-            right: 0;
-            left: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: $m-touch-size--l;
-        }
-
-        .m--is-sidebar.m--from-top.m--is-open &,
-        .m--is-sidebar.m--from-right.m--is-open &,
-        .m--is-sidebar.m--from-bottom.m--is-open &,
-        .m--is-sidebar.m--from-bottom-right.m--is-open &,
-        .m--is-sidebar.m--from-bottom-left.m--is-open &,
-        .m--is-sidebar.m--from-left.m--is-open & {
-            transform: translate3d(0, 0, 0);
-        }
-
-        .m--is-sidebar.m--from-top &,
-        .m--is-sidebar.m--from-right &,
-        .m--is-sidebar.m--from-left & {
-            top: 0;
-        }
-
-        .m--is-sidebar.m--from-top & {
-            transform: translate3d(0, -100%, 0);
-        }
-
-        .m--is-sidebar.m--from-bottom & {
-            transform: translate3d(0, calc(100% + #{$m-touch-size}), 0);
-        }
-
-        .m--is-sidebar.m--from-bottom &,
-        .m--is-sidebar.m--from-bottom-right &,
-        .m--is-sidebar.m--from-bottom-left & {
-            bottom: 0;
-            max-height: calc(100vh - #{$m-padding--xl});
-        }
-
-        .m--is-sidebar.m--from-right &,
-        .m--is-sidebar.m--from-bottom-right & {
-            transform: translate3d(100%, 0, 0);
-        }
-
-        .m--is-sidebar.m--from-left &,
-        .m--is-sidebar.m--from-bottom-left & {
-            transform: translate3d(-100%, 0, 0);
-        }
     }
 
     &__header,
@@ -185,105 +380,10 @@ $m-dialog--header-height: $m-touch-size !default;
         align-items: center;
         width: 100%;
         padding: $m-margin $m-padding;
-
-        .m--is-modal & {
-            border-bottom: 1px solid $m-color--grey-light;
-        }
-
-        .m--is-dialog & {
-            background: $m-color--black-grey;
-            color: $m-color--white;
-            min-height: $m-dialog--header-height;
-            padding-right: $m-touch-size;
-
-            h2 {
-                margin: 0;
-                font-size: $m-font-size--h4;
-                font-weight: $m-font-weight--bold;
-                line-height: 1.2;
-            }
-        }
-
-        .m--is-sidebar & {
-            display: block;
-            border-bottom: 1px solid $m-color--grey-light;
-        }
-
-        .m--is-dialog &,
-        .m--is-sidebar & {
-            position: relative;
-            min-height: $m-dialog--header-height;
-            padding-right: $m-touch-size;
-        }
-
-        &__close-button {
-            .m--is-dialog & {
-                color: $m-color--white;
-
-                &::after {
-                    background: $m-color--black-grey-light;
-                }
-            }
-
-            .m--is-sidebar & {
-                color: $m-color--black-grey-light;
-            }
-
-            .m--is-dialog &,
-            .m--is-sidebar & {
-                position: absolute;
-                top: 50%;
-                right: 0;
-                margin: 0;
-                transform: translate3d(0, -50%, 0);
-                stroke-width: 2px;
-
-                &:hover {
-                    color: $m-color--white;
-                }
-
-                &::after {
-                    background: $m-color--black-grey-light;
-                }
-            }
-        }
     }
 
     &__body {
         padding: $m-padding;
-
-        .m--is-dialog &,
-        .m--is-sidebar & {
-            flex: 1;
-            overflow-x: hidden;
-            overflow-y: auto;
-
-            @include m-is-ie() {
-                flex: none;
-            }
-        }
-    }
-
-    &__footer-nav {
-        .m--is-modal & {
-            &,
-            > :first-child {
-                display: inline-flex;
-                flex-direction: column;
-
-                &,
-                &.m-button,
-                &.m-link,
-                > :first-child {
-                    margin: 0;
-                }
-            }
-
-            .m-button,
-            .m-link {
-                margin-top: $m-margin;
-            }
-        }
     }
 
     &__footer {
@@ -294,28 +394,5 @@ $m-dialog--header-height: $m-touch-size !default;
     &__button {
         outline: none;
         display: inline-block;
-    }
-
-    &__close-button {
-        .m--is-sidebar & {
-            transition: 0.3s background ease;
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: $m-margin $m-padding;
-            background: none;
-            border: none;
-            font-size: $m-font-size;
-            color: $m-color--white;
-            cursor: pointer;
-            outline: none;
-            text-decoration: none;
-            line-height: 1;
-            transform: translate3d(0, -100%, 0);
-
-            &:focus:not(:hover) {
-                background: rgba($m-color--black, 0.3);
-            }
-        }
     }
 }

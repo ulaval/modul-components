@@ -4,14 +4,16 @@
                     'm--is-modal': windowMode == 'modal',
                     'm--is-dialog': windowMode == 'dialog',
                     'm--is-sidebar': windowMode == 'sidebar',
-                    'm--is-clickable-backdrop': propCloseOnBackdrop }, className, fromClass]" @click.self="backdropClick"
+                    'm--is-small': propSize == 'small',
+                    'm--is-small': propSize == 'light',
+                    'm--is-full-size': propSize == 'full-size',
+                    'm--is-clickable-backdrop': propCloseOnBackdrop }, className, 'm--is-from-' + propFrom]" @click.self="backdropClick"
             ref="dialogWrap">
-            <article class="m-base-window__article" :style="{ width: width, 'margin-left': marginLeft }">
-                <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="windowMode == 'sidebar' && from == 'bottom'">
+            <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }">
+                <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="windowMode == 'sidebar' && propFrom == 'bottom'">
                     <m-i18n k="m-base-window:close"></m-i18n>
                 </button>
-                <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }"
-                    v-if="showHeader">
+                <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }" v-if="showHeader">
                     <h2 class="m-base-window__title" v-if="hasTitle">{{ title }}</h2>
                     <slot name="header"></slot>
                     <m-button @click="closeDialog" mode="icon" icon-name="default" class="m-base-window__header__close-button">
