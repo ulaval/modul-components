@@ -1,9 +1,27 @@
 // ======================================================================
-//  border-radius
+//  Border
 // ======================================================================
+$m-border-width--l: 4px !default;
+$m-border-width: 2px !default;
+$m-border-width--s: 1px !default;
 $m-border-radius: 6px !default;
 
 // ======================================================================
-//  box-shadow
+//  Box-shadow
 // ======================================================================
-$m-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+$m-box-shadow--l: 0 3px 6px rgba($m-color--black, 0.18) !default;
+$m-box-shadow: 0 2px 4px rgba($m-color--black, 0.15) !default;
+$m-box-shadow--s: 0 1px 1px rgba($m-color--black, 0.15) !default;
+
+// ======================================================================
+//  Scrollbar
+// ======================================================================
+$m-scrollbar-width: 8px !default;
+
+// ======================================================================
+//  Touch size
+// ======================================================================
+$m-touch-size--l: 48px !default;
+$m-touch-size: 44px !default;
+$m-touch-size--s: 38px !default;
+

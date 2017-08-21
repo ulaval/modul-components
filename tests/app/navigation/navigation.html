@@ -3,11 +3,11 @@
     <h2><m-link url="media-queries">Media Queries</m-link></h2>
     <h2>Components list</h2>
     <nav>
-        <ul class="m-u--bullet-list">
+        <m-bullet-list>
             <li v-for="route in routes">
                 <m-link :url="route">{{route}}</m-link>
             </li>
-        </ul>
+        </m-bullet-list>
     </nav>
     <router-view></router-view>
 </div>

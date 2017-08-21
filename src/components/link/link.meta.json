@@ -32,6 +32,14 @@
             ],
             "default": 0
         },
+        "noStyle": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
         "hiddenText" : {
             "type": "string"
         }
