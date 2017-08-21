@@ -10,6 +10,10 @@ $m-panel--screen--min: 639px;
     flex-direction: column;
     box-shadow: 0 1px 1px rgba($m-color--black, 0.05);
 
+    @include m-is-ie() {
+        display: block;
+    }
+
     &.m--is-primary {
         background: $m-color--white;
         border-top: 0;
