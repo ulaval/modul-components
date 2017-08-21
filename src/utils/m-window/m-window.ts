@@ -118,7 +118,7 @@ export class MWindow {
     // }
 
     public setScrollPosition() {
-        this.scrollPosition = this.bodyElement.scrollTop;
+        this.scrollPosition = window.pageYOffset;
     }
 
     public setBackdropStyle(): void {
