@@ -3,153 +3,208 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from '../../mixins/dropdown-template/dropdown-template.html?style=../../mixins/dropdown-template/dropdown-template.scss';
+import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
-import { DropdownTemplate, DropdownTemplateMixin } from '../../mixins/dropdown-template/dropdown-template';
+import { MDropDownItemInterface } from '../dropdown-item/dropdown-item';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
 
-@WithRender
-@Component({
-    mixins: [DropdownTemplate]
-})
-export class MDropdown extends ModulVue {
+export interface SelectedValue {
+    key: string | undefined;
+    value: any;
+}
 
-    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6'] })
-    public elements: any[];
+export interface MDropDownInterface extends Vue {
+    selected: Array<SelectedValue>;
+    currentElement: SelectedValue;
+    addAction: boolean;
+}
+
+@WithRender
+@Component
+export class MDropdown extends ModulVue implements MDropDownInterface {
+
     @Prop()
-    public selectedElement: any;
+    public label: string;
     @Prop()
-    public getTextElement: Function;
+    public defaultText: string;
     @Prop({ default: false })
     public open: boolean;
-    @Prop({ default: true })
-    public sort: boolean;
-    @Prop()
-    public sortMethod: Function;
+    @Prop({ default: false })
+    public disabled: boolean;
+    @Prop({ default: false })
+    public editable: boolean;
+    @Prop({ default: false })
+    public multiple: boolean;
     @Prop({ default: false })
     public widthFromCss: boolean;
+    @Prop({ default: false })
+    public defaultFirstElement: boolean;
 
     public componentName: string = DROPDOWN_NAME;
 
+    public selected: Array<SelectedValue> = [];
+    public currentElement: SelectedValue = {'key': undefined, 'value': undefined};
+    public addAction: true;
+
     // Copy of prop
-    public propSelectedElement: any;
     public propOpen: boolean = false;
 
-    // Initialize data for v-model to work
-    public textElement: string = '';
-
-    private elementsSorted: Array<any>;
-
-    @Watch('elements')
-    public elementChanged(value): void {
-        this.prepareElements();
+    private created() {
+        // Run in created() to run before computed data
+        // this.prepareElements();
     }
 
-    @Watch('selectedElement')
-    public selectedElementChanged(value): void {
-        this.propSelectedElement = value;
-        this.textElement = this.getSelectedElementText();
+    private mounted() {
+        // this.adjustWidth();
+    }
+
+    @Watch('selected')
+    private selectedChanged(value): void {
+        this.$emit('change', this.selected, this.addAction);
+    }
+
+    @Watch('currentElement')
+    private currentElementChanged(value): void {
+        this.$emit('elementSelected', this.currentElement, this.addAction);
     }
 
     @Watch('open')
-    public openChanged(value): void {
+    private openChanged(value): void {
         this.propOpen = value;
     }
 
-    public get elementsCount(): number {
-        return this.elementsSortedFiltered.length;
-    }
-
-    public get elementsSortedFiltered(): Array<any> {
-        if ((this.textElement == '') || (this.textElement == this.getSelectedElementText())) {
-            return this.elementsSorted;
+    @Watch('isScreenMaxS')
+    private isScreenMaxSChanged(value: boolean): void {
+        if (!value) {
+            this.$nextTick(() => {
+                // this.adjustWidth();
+            });
         }
-
-        let filteredElements: Array<any> = this.elementsSorted.filter((element) => {
-            return normalizeString(this.getElementListText(element)).match(normalizeString(this.textElement));
-        });
-
-        return filteredElements;
     }
 
-    public created() {
-        // Copy of prop to avoid override on re-render
-        this.propSelectedElement = this.selectedElement;
+    // private adjustWidth(): void {
+    //     if (!this.widthFromCss) {
+    //         // Hidden element to calculate width
+    //         let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
+    //         // Input or a
+    //         let valueField: Vue = this.$refs.mDropdownValue as Vue;
+    //         // List of elements
+    //         let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
 
-        // Run in created() to run before computed data
-        this.prepareElements();
-    }
+    //         let width: number = 0;
 
-    public mounted() {
-        this.adjustWidth();
-    }
+    //         if (elements && elements.children.length > 0) {
+    //             for (let i = 0; i < elements.children.length; i++) {
 
-    public onSelectElement($event, element: any): void {
-        this.selectElement(element);
-    }
+    //                 if ((elements.children[i].children.length > 0) &&
+    //                     (elements.children[i].children.item(0).classList.contains('m-dropdown-group'))) {
 
-    public getSelectedElementText(): string {
-        let text: string = '';
+    //                     let elementsChild: HTMLElement = elements.children[i] as HTMLElement;
+    //                     for (let j = 0; j < elementsChild.children.length; j++) {
+    //                         width = Math.max(width, this.getElementWidth(hiddenField, elementsChild.children[j] as HTMLElement));
+    //                     }
+    //                 } else {
+    //                     width = Math.max(width, this.getElementWidth(hiddenField, elements.children[i] as HTMLElement));
+    //                 }
+    //             }
+    //         } else {
+    //             // width = this.getElementWidth(hiddenField, this.getSelectedElementText());
+    //         }
 
-        if (typeof this.propSelectedElement != UNDEFINED) {
-            text = this.getElementListText(this.propSelectedElement);
+    //         // Add 25px for scrollbar
+    //         width = Math.ceil(width) + 25;
+    //         // Set width to Input and List
+    //         valueField.$el.style.width = width + 'px';
+    //         this.$el.style.width = width + 'px';
+    //         elements.style.width = width + 'px';
+
+    //     } else {
+    //         let parentElement: HTMLElement = this.$refs.mDropdown as HTMLElement;
+    //         let childElement: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
+    //         childElement.style.width = parentElement.offsetWidth + 'px';
+    //     }
+    // }
+
+    // private getElementWidth(elementContainer: HTMLElement, elementText: HTMLElement): number {
+    //     // console.log(elementContainer);
+    //     // console.log(elementText);
+    //     elementContainer.innerHTML = elementText.innerText;
+    //     let width: number = elementContainer.offsetWidth;
+    //     // elementContainer.removeChild(elementText);
+    //     // if (element.$el.)
+    //     // elementContainer.innerHTML = element;
+    //     return width;
+    // }
+
+    private filterDropdown(text: string): void {
+        for (let child of this.$children) {
+            if (child.$options.name == 'MPopper') {
+                this.propagateTextFilter(normalizeString(text.trim()), child);
+            }
         }
-
-        return text;
     }
 
-    public getElementListText(element: any): string {
-        let text: string = '';
-
-        if (typeof element == UNDEFINED) {
-            text = '';
-        } else if (this.getTextElement) {
-            text = this.getTextElement(element);
-        } else {
-            text = String(element);
-        }
-
-        return text;
-    }
-
-    public adjustWidth(): void {
-        if (!this.widthFromCss) {
-            // Hidden element to calculate width
-            let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
-            // Input or a
-            let valueField: Vue = this.$refs.mDropdownValue as Vue;
-            // List of elements
-            let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
-
-            let width: number = 0;
-
-            if (this.elements && this.elements.length > 0) {
-                for (let element of this.elements) {
-                    width = Math.max(width, this.getTextWidth(hiddenField, this.getElementListText(element)));
-                }
-            } else {
-                width = this.getTextWidth(hiddenField, this.getSelectedElementText());
+    private propagateTextFilter(text: string, node: Vue): void {
+        for (let child of node.$children) {
+            if (child.$options.name == 'MDropdownGroup') {
+                this.propagateTextFilter(text, child);
             }
 
-            // Add 25px for scrollbar
-            width = Math.ceil(width) + 25;
-            // Set width to Input and List
-            valueField.$el.style.width = width + 'px';
-            this.$el.style.width = width + 'px';
-            elements.style.width = width + 'px';
-
-        } else {
-            let parentElement: HTMLElement = this.$refs.mDropdown as HTMLElement;
-            let childElement: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
-            childElement.style.width = parentElement.offsetWidth + 'px';
+            if (child.$options.name == 'MDropdownItem') {
+                (child as MDropDownItemInterface).filter = text;
+            }
         }
     }
 
-    public toggleDropdown(value: boolean): void {
+    // private get elementsCount(): number {
+    //     return this.elementsSortedFiltered.length;
+    // }
+
+    // private get elementsSortedFiltered(): Array<any> {
+    //     if ((this.textElement == '') || (this.textElement == this.getSelectedElementText())) {
+    //         return this.elementsSorted;
+    //     }
+
+    //     let filteredElements: Array<any> = this.elementsSorted.filter((element) => {
+    //         return normalizeString(this.getElementListText(element)).match(normalizeString(this.textElement));
+    //     });
+
+    //     return filteredElements;
+    // }
+
+    // private onSelectElement($event, element: any): void {
+    //     this.selectElement(element);
+    // }
+
+    // private getSelectedElementText(): string {
+    //     let text: string = '';
+
+    //     if (typeof this.propSelectedElement != UNDEFINED) {
+    //         text = this.getElementListText(this.propSelectedElement);
+    //     }
+
+    //     return text;
+    // }
+
+    // private getElementListText(element: any): string {
+    //     let text: string = '';
+
+    //     if (typeof element == UNDEFINED) {
+    //         text = '';
+    //     } else if (this.getTextElement) {
+    //         text = this.getTextElement(element);
+    //     } else {
+    //         text = String(element);
+    //     }
+
+    //     return text;
+    // }
+
+    private toggleDropdown(value: boolean): void {
         Vue.nextTick(() => {
             this.propOpen = value;
             if (value) {
@@ -162,16 +217,16 @@ export class MDropdown extends ModulVue {
         });
     }
 
-    public setDropdownElementFocus(): void {
-        if (!this.as<DropdownTemplateMixin>().editable) {
-            let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
-            if (element) {
-                element.focus();
-            }
-        }
+    private setDropdownElementFocus(): void {
+        // if (!this.as<DropdownTemplateMixin>().editable) {
+        //     let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
+        //     if (element) {
+        //         element.focus();
+        //     }
+        // }
     }
 
-    public keyupReference($event): void {
+    private keyupReference($event): void {
         if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
             $event.preventDefault();
             (this.$refs.mDropdownValue as Vue).$el.click();
@@ -186,7 +241,7 @@ export class MDropdown extends ModulVue {
         }
     }
 
-    public keyupItem($event: KeyboardEvent, index: number): void {
+    private keyupItem($event: KeyboardEvent, index: number): void {
         let selector: string = '';
         switch ($event.keyCode) {
             case KeyCode.M_UP:
@@ -206,23 +261,23 @@ export class MDropdown extends ModulVue {
                 }
                 selector = `[data-index='${index}']`;
                 break;
-            case KeyCode.M_DOWN:
-                if (index == this.elementsSortedFiltered.length - 1) {
-                    selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
-                } else {
-                    selector = `[data-index='${index + 1}']`;
-                }
-                break;
-            case KeyCode.M_END:
-                selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
-                break;
-            case KeyCode.M_PAGE_DOWN:
-                index += PAGE_STEP;
-                if (index >= this.elementsSortedFiltered.length) {
-                    index = this.elementsSortedFiltered.length - 1;
-                }
-                selector = `[data-index='${index}']`;
-                break;
+            // case KeyCode.M_DOWN:
+            //     if (index == this.elementsSortedFiltered.length - 1) {
+            //         selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
+            //     } else {
+            //         selector = `[data-index='${index + 1}']`;
+            //     }
+            //     break;
+            // case KeyCode.M_END:
+            //     selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
+            //     break;
+            // case KeyCode.M_PAGE_DOWN:
+            //     index += PAGE_STEP;
+            //     if (index >= this.elementsSortedFiltered.length) {
+            //         index = this.elementsSortedFiltered.length - 1;
+            //     }
+            //     selector = `[data-index='${index}']`;
+            //     break;
             case KeyCode.M_ENTER:
             case KeyCode.M_RETURN:
                 let element: HTMLElement = this.$el.querySelector(`[data-index='${index}']`) as HTMLElement;
@@ -240,47 +295,42 @@ export class MDropdown extends ModulVue {
         }
     }
 
-    private selectElement(element: any): void {
-        this.propSelectedElement = element;
-        this.textElement = this.getSelectedElementText();
-        this.$emit('elementSelected', this.propSelectedElement);
-    }
+    // private selectElement(element: any): void {
+    //     this.propSelectedElement = element;
+    //     this.textElement = this.getSelectedElementText();
+    //     this.$emit('elementSelected', this.propSelectedElement);
+    // }
 
-    private getTextWidth(element: HTMLElement, text: string): number {
-        element.innerHTML = text;
-        return element.offsetWidth;
-    }
+    // private prepareElements(): void {
+    //     let elementsSorted: any[] = new Array();
 
-    private prepareElements(): void {
-        let elementsSorted: any[] = new Array();
+    //     if (this.elements) {
+    //         // Create a separe copy of the array, to prevent triggering infinite loop on watcher of elements
+    //         elementsSorted = this.elements.slice(0);
 
-        if (this.elements) {
-            // Create a separe copy of the array, to prevent triggering infinite loop on watcher of elements
-            elementsSorted = this.elements.slice(0);
+    //         // Sorting options
+    //         if (this.sort) {
+    //             if (typeof this.sortMethod == UNDEFINED) {
+    //                 // Default sort: Alphabetically
+    //                 if (typeof this.getTextElement == UNDEFINED) {
+    //                     elementsSorted = elementsSorted.sort((a, b) => a.localeCompare(b));
+    //                 } else {
+    //                     elementsSorted = elementsSorted.sort((a, b) => this.getElementListText(a).localeCompare(this.getElementListText(b)));
+    //                 }
+    //             } else {
+    //                 elementsSorted = this.sortMethod(elementsSorted);
+    //             }
+    //         }
 
-            // Sorting options
-            if (this.sort) {
-                if (typeof this.sortMethod == UNDEFINED) {
-                    // Default sort: Alphabetically
-                    if (typeof this.getTextElement == UNDEFINED) {
-                        elementsSorted = elementsSorted.sort((a, b) => a.localeCompare(b));
-                    } else {
-                        elementsSorted = elementsSorted.sort((a, b) => this.getElementListText(a).localeCompare(this.getElementListText(b)));
-                    }
-                } else {
-                    elementsSorted = this.sortMethod(elementsSorted);
-                }
-            }
+    //         // Default element
+    //         if (this.as<DropdownTemplateMixin>().defaultFirstElement && elementsSorted[0]) {
+    //             this.selectElement(elementsSorted[0]);
+    //         }
+    //         this.textElement = this.getSelectedElementText();
+    //     }
 
-            // Default element
-            if (this.as<DropdownTemplateMixin>().defaultFirstElement && elementsSorted[0]) {
-                this.selectElement(elementsSorted[0]);
-            }
-            this.textElement = this.getSelectedElementText();
-        }
-
-        this.elementsSorted = elementsSorted;
-    }
+    //     this.elementsSorted = elementsSorted;
+    // }
 
 }
 

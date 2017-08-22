@@ -11,6 +11,7 @@ import DatepickerPlugin from './datepicker/datepicker';
 import DialogPlugin from './dialog-window/dialog-window';
 import DropdownPlugin from './dropdown/dropdown';
 import DropdownItemPlugin from './dropdown-item/dropdown-item';
+import DropdownGroupPlugin from './dropdown-group/dropdown-group';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
@@ -56,6 +57,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DialogPlugin);
         Vue.use(DropdownPlugin);
         Vue.use(DropdownItemPlugin);
+        Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);

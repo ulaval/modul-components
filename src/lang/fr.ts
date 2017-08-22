@@ -10,6 +10,7 @@ const FrenchPlugin: PluginObject<any> = {
             (v as any).$i18n.addMessages(FRENCH, require('../components/datepicker/datepicker.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown-item/dropdown-item.lang.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown-group/dropdown-group.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/link/link.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/limit-text/limit-text.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/message/message.lang.fr.json'));

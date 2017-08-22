@@ -6,70 +6,47 @@ $m-dropdown--color-active: $m-color--interactive-lightest !default;
 $m-dropdown--margin: $m-padding--xs !default;
 
 .m-dropdown-item {
-    &__list {
-        height: auto;
-        overflow-x: hidden;
-        overflow-y: auto;
-        margin: 0;
-        padding: 0;
-        user-select: none;
-        list-style: none;
-        text-align: left;
-        background: $m-color--white;
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 100%;
+    padding: $m-padding;
+    margin: 0;
+    align-items: center;
+    transition: background 0.3s ease;
+    color: $m-color--text;
+    font-size: $m-font-size--l;
+    text-decoration: none;
+    outline: none;
 
-        &.m--is-hidden {
-            position: absolute;
-            visibility: hidden;
+    &:hover {
+        background: $m-dropdown--color-hover;
+    }
+
+    &:focus {
+        background: $m-dropdown--color-focus;
+    }
+
+    &:active {
+        background: $m-dropdown--color-active;
+    }
+
+    &:not(.is-selected) {
+        .m-dropdown__list__element-text {
+            cursor: pointer;
+            transition: 0.3s background ease;
         }
+    }
 
-        &__element {
-            margin: 0;
-            width: 100%;
+    &.is-selected {
+        .m-dropdown__list__element-text {
+            cursor: default;
+            background: $m-dropdown--color-select;
+        }
+    }
 
-            &:not(.is-selected) {
-                .m-dropdown__list__element-text {
-                    cursor: pointer;
-                    transition: 0.3s background ease;
-                }
-            }
-
-            &.is-selected {
-                .m-dropdown__list__element-text {
-                    cursor: default;
-                    background: $m-dropdown--color-select;
-                }
-            }
-
-            &.is-focus {
-                .m-dropdown__list__element-text {
-                    background: $m-dropdown--color-hover;
-                }
-            }
-
-            &-text {
-                transition: background 0.3s ease;
-                box-sizing: border-box;
-                display: inline-flex;
-                align-items: center;
-                width: 100%;
-                padding: $m-padding;
-                color: $m-color--text;
-                font-size: $m-font-size--l;
-                text-decoration: none;
-                outline: none;
-
-                &:hover {
-                    background: $m-dropdown--color-hover;
-                }
-
-                &:focus {
-                    background: $m-dropdown--color-focus;
-                }
-
-                &:active {
-                    background: $m-dropdown--color-active;
-                }
-            }
+    &.is-focus {
+        .m-dropdown__list__element-text {
+            background: $m-dropdown--color-hover;
         }
     }
 }
