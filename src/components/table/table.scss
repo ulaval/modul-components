@@ -14,7 +14,7 @@
         align-items: center;
         margin-right: 16px;
         padding: $m-padding;
-        background-color: $m-color--grey-lightest;
+        background-color: $m-color--grey-lighter;
 
         @media screen and (max-width: $m-screen--max--s) {
             flex-direction: column;
@@ -55,7 +55,7 @@
                     padding: 0 $m-padding--s $m-margin--s;
                     font-weight: $m-font-weight--bold;
                     color: $m-color--black;
-                    border-bottom: 2px solid $m-color--grey-lighter;
+                    border-bottom: 2px solid $m-color--grey-light;
 
                     &:first-child {
                         padding-left: 0;
@@ -70,7 +70,7 @@
 
             tbody {
                 tr {
-                    border-bottom: 1px solid $m-color--grey-lighter;
+                    border-bottom: 1px solid $m-color--grey-light;
 
                     &:last-child {
                         border-bottom: 0;
