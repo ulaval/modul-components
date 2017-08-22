@@ -1,27 +1,51 @@
 @import 'abstracts/variables';
-$m-slider-height: 3px;
-$m-slider-thumb: 17px;
+$m-slider--tarck-height: 4px !default;
+$m-slider--thumb-width: 20px !default;
 
 .m-slider {
     position: relative;
-    height: $m-slider-height;
-    background-color: $m-color--grey-dark;
+    width: 100%;
     cursor: pointer;
-    outline: none;
+    padding: #{ ($m-slider--thumb-width / 2) - ($m-slider--tarck-height / 2)} 0;
 
     &__track {
-        background-color: $m-color--interactive;
-        height: 100%;
+        position: relative;
+        height: $m-slider--tarck-height;
+        background: $m-color--grey-dark;
+        border-radius: 2px;
+        overflow: hidden;
+
+        div {
+            transition: 0.1s width ease;
+            height: 100%;
+            background: $m-color--interactive;
+        }
     }
 
     &__thumb {
+        transition: 0.3s transform ease, 0.3s background ease, 0.1s left ease;
         position: absolute;
-        width: $m-slider-thumb;
-        height: $m-slider-thumb;
-        top: - ($m-slider-thumb - $m-slider-height) / 2;
-        margin-left: -$m-slider-thumb / 2;
-        background-color: $m-color--interactive;
+        top: 0;
+        width: $m-slider--thumb-width;
+        height: $m-slider--thumb-width;
+        margin-left: -$m-slider--thumb-width / 2; // Magic number
+        background: $m-color--white;
         border-radius: 50%;
         cursor: pointer;
+        outline: none;
+        border: 4px solid $m-color--interactive;
+
+        &:hover,
+        &:focus {
+            transform: scale(1.2);
+        }
+
+        &:active {
+            background: $m-color--interactive-lighter;
+        }
+    }
+
+    &__hidden {
+        @include m-visually-hidden;
     }
 }
