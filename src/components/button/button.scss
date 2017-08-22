@@ -193,6 +193,6 @@ $m-button--color-disabled: $m-color--grey-darker !default;
     }
 
     &__hidden {
-        @include visuallyHidden;
+        @include m-visually-hidden;
     }
 }

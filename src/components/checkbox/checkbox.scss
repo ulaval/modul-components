@@ -141,6 +141,6 @@ $m-checkbox--width: 16px;
     }
 
     &__hidden {
-        @include visuallyHidden;
+        @include m-visually-hidden;
     }
 }

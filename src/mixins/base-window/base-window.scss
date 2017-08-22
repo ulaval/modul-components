@@ -70,7 +70,8 @@ $m-dialog--header-height: $m-touch-size !default;
 
                 &__footer {
                     text-align: center;
-                    &:not(.m--is-no-padding) {
+
+                    &:not(.m--no-padding) {
                         padding-bottom: $m-padding;
                     }
                 }

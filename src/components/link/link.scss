@@ -90,7 +90,7 @@
             }
 
             &__hidden {
-                @include visuallyHidden;
+                @include m-visually-hidden;
             }
         }
     }
