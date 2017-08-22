@@ -5,14 +5,6 @@
         "value": {
             "type": "string"
         },
-        "position": {
-            "type": "string",
-            "values": [
-                "left",
-                "right"
-            ],
-            "default": 0
-        },
         "disabled": {
             "type": "boolean",
             "values": [
@@ -29,13 +21,13 @@
             ],
             "default": 1
         },
-        "icon": {
+        "inline": {
             "type": "boolean",
             "values": [
                 "true",
                 "false"
             ],
-            "default": 1
+            "default": 0
         },
         "iconPosition": {
             "type": "string",
