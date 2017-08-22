@@ -1,0 +1,62 @@
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }">
+    <ul class="m-dropdown__list m--is-hidden" aria-hidden="true">
+        <li class="m-dropdown__list__element"  ref="mDropdownCalculate"></li>
+    </ul>
+    <m-popper :options="{ placement: 'bottom' }"
+              :close-on-content-click="!multiple"
+              :close-on-reference-click="false"
+              :disabled="isDisabled"
+              :open="propOpen"
+              dialog-mode="panel"
+              :enter="animEnter"
+              :after-enter="animAfterEnter"
+              :leave="animLeave"
+              :padding-header="false"
+              :padding-body="false"
+              @show="toggleDropdown(true)"
+              @hide="toggleDropdown(false)">
+        <template slot="header" v-if="hasLabel && isScreenMaxS">
+            <h2 class="m-dropdown__header__label">{{ label }}</h2>
+            <div class="m-dropdown__header__research" v-if="editable">
+                <input type="text"
+                       class="m-dropdown__header__research-input"
+                       :placeholder="researchText"
+                       v-model="textElement"
+                       ref="researchInput">
+                <m-button mode="icon" icon-name="default" @click="focusOnResearchInput">
+                    <m-i18n i18n-key="m-dropdown:search"></m-i18n>
+                </m-button>
+            </div>
+        </template>
+        <ul class="m-dropdown__list"
+            ref="mDropdownElements"
+            slot="body">
+            <slot></slot>
+            <li v-if="elementsCount <= 0"
+                class="m-dropdown__list__element">
+                <span class="m-dropdown__list__element-text">
+                    <m-i18n i18n-key="m-dropdown:no-result"></m-i18n>
+                </span>
+            </li>
+        </ul>
+        <template slot="footer" v-if="hasFooterSlot">
+            <slot name="footer"></slot>
+        </template>
+        <m-text-field ref="mDropdownValue"
+                      :label="label"
+                      :value="textElement"
+                      :state="propState"
+                      :editable="editable"
+                      :disabled="isDisabled"
+                      :force-focus="propOpen"
+                      :default-text="defaultText"
+                      @valueChanged="filterDropdown($event)"
+                      @keyup="keyupReference">
+        </m-text-field>
+    </m-popper>
+    <m-validation-message
+        :state="propState"
+        :error="propErrorMessage"
+        :valid="propValidMessage"
+        :helper="helperMessage"></m-validation-message>
+</div>
