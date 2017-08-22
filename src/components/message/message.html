@@ -4,22 +4,21 @@
                 'm--is-error': state=='error',
                 'm--is-regular': mode!='light',
                 'm--is-light': mode=='light'}" v-if="propVisible">
-    <div class="m-message__wrap" :class="{'m--is-regular': mode!='reduce',
-                'm--is-light': mode=='light'}">
+    <div class="m-message__wrap">
         <div class="m-message__icon" v-if="icon">
             <m-icon :name="getIcon()"></m-icon>
         </div>
         <div class="m-message__body" :class="{'m--have-close-button': closeButton}">
-            <m-button mode="icon" icon-name="default" icon-size="10px" @click="onClose" class="m-message__close-button" v-if="showCloseButton">
+            <m-button mode="icon" icon-name="default" icon-size="10px" @click="onClose" class="m-message__body__close-button" v-if="showCloseButton">
                 <m-i18n k="m-message:close"></m-i18n>
             </m-button>
-            <p>
-                <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis.
+            <div class="m-message__body__content">
+                <slot><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis.
                     Duis mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam
                     blandit commodo arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci
-                    luctus et ultrices posuere cubilia Curae.
+                    luctus et ultrices posuere cubilia Curae.</p>
                 </slot>
-            </p>
+            </div>
         </div>
     </div>
 </div>

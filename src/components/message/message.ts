@@ -26,22 +26,22 @@ export class MMessage extends Vue {
     public mode: MMessageMode;
     @Prop({ default: true })
     public icon: boolean;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public closeButton: boolean;
     @Prop()
-    public value: boolean;
+    public visible: boolean;
 
     public componentName = MESSAGE_NAME;
 
     private internalPropVisible: boolean = true;
 
     private get propVisible(): boolean {
-        return this.value != undefined ? this.value : this.internalPropVisible;
+        return this.visible != undefined ? this.visible : this.internalPropVisible;
     }
 
-    private set propVisible(value: boolean) {
-        this.$emit('input', value);
-        this.internalPropVisible = value;
+    private set propVisible(visible: boolean) {
+        this.internalPropVisible = visible;
+        this.$emit('input', visible);
     }
 
     private onClose(event): void {
