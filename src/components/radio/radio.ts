@@ -8,8 +8,8 @@ import { MRadioGroup } from '../radio-group/radio-group';
 import uuid from '../../utils/uuid/uuid';
 
 export enum MRadioPosition {
-    LEFT = 'left',
-    RIGHT = 'right'
+    Left = 'left',
+    Right = 'right'
 }
 
 @WithRender
@@ -18,16 +18,12 @@ export class MRadio extends ModulVue {
 
     @Prop()
     public value: string;
-    @Prop({ default: MRadioPosition.LEFT })
+    @Prop({ default: MRadioPosition.Left })
     public position: string;
     @Prop({ default: false })
-    public inline: boolean;
-    @Prop({ default: false })
     public disabled: boolean;
-    @Prop({ default: false })
     // ----- For Button Group -----
-    public icon: boolean;
-    @Prop({ default: MRadioPosition.LEFT })
+    @Prop({ default: MRadioPosition.Left })
     public iconPosition: string;
     @Prop()
     public iconName: string;
@@ -36,17 +32,16 @@ export class MRadio extends ModulVue {
     public componentName: string = RADIO_NAME;
     public radioID: string = uuid.generate();
     public name: string;
-    public propPosition: string = MRadioPosition.LEFT;
-    public propInline: boolean = false;
+    public propPosition: string = MRadioPosition.Left;
     public propDisabled: boolean = false;
     // ----- For Button Group -----
-    public propIcon: boolean = false;
-    public propIconPosition: string = MRadioPosition.LEFT;
+    public propIconPosition: string = MRadioPosition.Left;
     public propIconName: string;
     public firstChild: boolean = false;
     public lastChild: boolean = false;
+    public inline: boolean = false;
     public fullSize: boolean = false;
-    // ---------------------------
+     // ---------------------------
 
     private isFocus: boolean = false;
     private radioGroup: any;
@@ -54,11 +49,9 @@ export class MRadio extends ModulVue {
 
     protected mounted(): void {
         this.propPosition = this.position;
-        this.propInline = this.inline;
         this.propDisabled = this.disabled;
 
         // ----- For Button Group -----
-        this.propIcon = this.icon;
         this.propIconPosition = this.iconPosition;
         this.propIconName = this.iconName;
         // ---------------------------
@@ -68,14 +61,14 @@ export class MRadio extends ModulVue {
         return this.isGroup() && this.radioGroup.$props.value != undefined ? this.radioGroup.$props.value : this.internalValue;
     }
 
-    protected set model(val: string) {
+    protected set model(value: string) {
         if (this.isGroup) {
             if (this.radioGroup) {
-                this.radioGroup.updateValue(val);
+                this.radioGroup.updateValue(value);
             }
         } else {
-            this.internalValue = val;
-            this.$emit('input', val);
+            this.internalValue = value;
+            this.$emit('input', value);
         }
     }
 
@@ -100,8 +93,12 @@ export class MRadio extends ModulVue {
         this.$emit('input', this.value);
     }
 
+    private get hasIcon(): boolean {
+        return this.iconName == undefined || this.iconName == '' ? false : true;
+    }
+
     private get hasIconLeft(): boolean {
-        return this.iconPosition == MRadioPosition.LEFT ? true : false;
+        return this.iconPosition == MRadioPosition.Left;
     }
 }
 

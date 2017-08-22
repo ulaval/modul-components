@@ -1,21 +1,21 @@
-<li class="m-radio" :class="{ 'm--is-inline': propInline == true, 'm--is-radio-style': !isParentButtonGroup }" v-if="!isParentButtonGroup">
+<li class="m-radio"
+    :class="{ 'm--is-button': isParentButtonGroup,
+              'm--is-disabled': propDisabled,
+              'm--is-checked': model == value && !propDisabled,
+              'm--is-focus': isFocus && !propDisabled,
+              'm--is-input-right': propPosition == 'right',
+              'm--is-first': firstChild,
+              'm--is-last': lastChild,
+              'm--is-full-size': fullSize,
+              'm--is-inline': inline }">
     <input class="m-radio__hidden" :value="value" type="radio" v-model="model" :id="radioID" :name="name"
            @focus="isFocus=true" @blur="isFocus=false" @click="onClick" :disabled="propDisabled == true" :aria-hidden="propDisabled == true">
-    <label class="m-radio__wrap" :class="{ 'm--is-right': propPosition == 'right', 'm--is-focus': isFocus && propDisabled == false, 'm--is-disabled': propDisabled == true }" :for="radioID">
-        <span class="m-radio__input" :class="{ 'm--is-checked': model == value && propDisabled == false }" aria-hidden="true"></span>
+    <label class="m-radio__wrap" :for="radioID">
+        <span class="m-radio__input" aria-hidden="true" v-if="!isParentButtonGroup"></span>
         <span class="m-radio__label">
+            <m-icon aria-hidden="true" class="m-radio__icon m--is-left" :name="propIconName" v-if="hasIconLeft && hasIcon && isParentButtonGroup"></m-icon>
             <slot>Label</slot>
-        </span>
-    </label>
-</li>
-<li class="m-radio" :class="{ 'm--is-button-style': isParentButtonGroup }" v-else-if="isParentButtonGroup">
-    <input class="m-radio__hidden" :value="value" type="radio" v-model="model" :id="radioID" :name="name"
-           @focus="isFocus=true" @blur="isFocus=false" @click="onClick" :disabled="propDisabled == true" :aria-hidden="propDisabled == true">
-    <label class="m-radio__wrap" :class="{ 'm--is-right': propPosition == 'right', 'm--is-checked': model == value && propDisabled == false, 'm--is-focus': isFocus && propDisabled == false, 'm--is-first': firstChild == true, 'm--is-last': lastChild == true, 'm--is-disabled': propDisabled == true }" :for="radioID">
-        <span class="m-radio__label">
-            <m-icon aria-hidden="true" class="m-radio__icon m--is-left" :name="propIconName" v-if="hasIconLeft  && icon"></m-icon>
-            <slot>Label</slot>
-            <m-icon aria-hidden="true" class="m-radio__icon m--is-right" :name="propIconName"  v-if="!hasIconLeft  && icon"></m-icon>
+            <m-icon aria-hidden="true" class="m-radio__icon m--is-right" :name="propIconName"  v-if="!hasIconLeft && hasIcon && isParentButtonGroup"></m-icon>
         </span>
     </label>
 </li>

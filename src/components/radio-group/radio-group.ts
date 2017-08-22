@@ -6,11 +6,7 @@ import WithRender from './radio-group.html?style=./radio-group.scss';
 import { RADIO_NAME, RADIO_GROUP_NAME } from '../component-names';
 import { MRadio } from '../radio/radio';
 import uuid from '../../utils/uuid/uuid';
-
-export enum MRadioGroupPosition {
-    LEFT = 'left',
-    RIGHT = 'right'
-}
+import { MRadioPosition } from '../radio/radio';
 
 @WithRender
 @Component
@@ -18,7 +14,7 @@ export class MRadioGroup extends Vue {
 
     @Prop()
     public value: string;
-    @Prop({ default: MRadioGroupPosition.LEFT })
+    @Prop({ default: MRadioPosition.Left })
     public position: string;
     @Prop({ default: false })
     public inline: boolean;
@@ -34,9 +30,9 @@ export class MRadioGroup extends Vue {
     private errorDefaultMesage: string = 'ERROR in <' + RADIO_GROUP_NAME + '> : ';
     private errorMessage: string = '';
 
-    public updateValue(val): void {
-        this.value = val;
-        this.$emit('input', val);
+    public updateValue(value: string): void {
+        this.value = value;
+        this.$emit('input', value);
     }
 
     private get propValue(): string {
@@ -53,8 +49,7 @@ export class MRadioGroup extends Vue {
             if (this.checkRadio(i)) {
                 let radio: MRadio = this.$children[i] as MRadio;
                 radio.name = this.radioName;
-                radio.propPosition = this.position;
-                radio.propInline = this.inline;
+                radio.propPosition = this.position == MRadioPosition.Left ? MRadioPosition.Left : MRadioPosition.Right;
                 if (this.disabled != false) {
                     radio.propDisabled = this.disabled;
                 }

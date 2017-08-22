@@ -3,4 +3,22 @@ $m-radio--width: 16px;
 
 .m-radio-group {
     padding: 0;
+
+    &.m--is-inline {
+        .m-radio {
+            display: inline;
+
+            + .m-radio {
+                margin-left: $m-padding--s;
+            }
+        }
+    }
+
+    &:not(.m--is-inline) {
+        .m-radio {
+            + .m-radio {
+                margin-top: $m-margin--s;
+            }
+        }
+    }
 }
