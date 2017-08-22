@@ -4,6 +4,9 @@
     padding: 0;
 
     &__wrap {
-        display: flex;
+        &.m--is-inline {
+            display: flex;
+            margin: 0;
+        }
     }
 }

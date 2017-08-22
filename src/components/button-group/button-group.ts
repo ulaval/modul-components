@@ -6,20 +6,7 @@ import WithRender from './button-group.html?style=./button-group.scss';
 import { BUTTON_GROUP_NAME, RADIO_NAME } from '../component-names';
 import { MRadio } from '../radio/radio';
 import uuid from '../../utils/uuid/uuid';
-
-const ICON_POSITION_LEFT: string = 'left';
-
-export interface MButtonGroupListData {
-    value: string;
-    label: string;
-    active: boolean;
-    iconName: string;
-}
-
-export enum MRadioGroupPosition {
-    LEFT = 'left',
-    RIGHT = 'right'
-}
+import { MRadioPosition } from '../radio/radio';
 
 @WithRender
 @Component
@@ -27,15 +14,13 @@ export class MButtonGroup extends Vue {
 
     @Prop()
     public value: string;
-    @Prop({ default: MRadioGroupPosition.LEFT })
-    public position: string;
     @Prop({ default: false })
     public disabled: boolean;
     @Prop({ default: false })
     public fullSize: boolean;
-    @Prop({ default: false })
-    public icon: boolean;
-    @Prop({ default: MRadioGroupPosition.LEFT })
+    @Prop({ default: true })
+    public inline: boolean;
+    @Prop({ default: MRadioPosition.Left })
     public iconPosition: string;
 
     public componentName: string = BUTTON_GROUP_NAME;
@@ -46,9 +31,9 @@ export class MButtonGroup extends Vue {
     private errorDefaultMesage: string = 'ERROR in <' + BUTTON_GROUP_NAME + '> : ';
     private errorMessage: string = '';
 
-    public updateValue(val): void {
-        this.value = val;
-        this.$emit('input', val);
+    public updateValue(value: string): void {
+        this.value = value;
+        this.$emit('input', value);
     }
 
     protected mounted(): void {
@@ -56,10 +41,9 @@ export class MButtonGroup extends Vue {
             if (this.checkRadio(i)) {
                 let radio: MRadio = this.$children[i] as MRadio;
                 radio.name = this.radioName;
-                radio.propPosition = this.position;
+                radio.inline = this.inline;
                 radio.fullSize = this.fullSize;
-                radio.icon = this.icon;
-                radio.iconPosition = this.iconPosition;
+                radio.iconPosition = this.iconPosition == MRadioPosition.Left ? MRadioPosition.Left : MRadioPosition.Right;
                 if (this.disabled != false) {
                     radio.propDisabled = this.disabled;
                 }
