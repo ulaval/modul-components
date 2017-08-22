@@ -19,7 +19,7 @@ $m-accordion--color: $m-color--accent;
             h5,
             h6 {
                 margin: 0;
-                font-size: $m-font-size;
+                font-size: $m-font-size--l;
                 font-weight: $m-font-weight--bold;
             }
         }
@@ -210,10 +210,10 @@ $m-accordion--color: $m-color--accent;
     }
 
     &__body-wrap {
-        @include transitionAccordion;
+        @include m-transition-accordion;
     }
 
     &__hidden {
-        @include visuallyHidden;
+        @include m-visually-hidden;
     }
 }

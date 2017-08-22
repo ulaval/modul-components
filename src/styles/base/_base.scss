@@ -28,3 +28,12 @@ body {
     background: $m-color--ul-yellow;
     color: $m-color--text;
 }
+
+ul,
+li {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}

@@ -1,4 +1,4 @@
-@mixin visuallyHidden() {
+@mixin m-visually-hidden() {
     position: absolute;
     overflow: hidden;
     clip: rect(0 0 0 0);
@@ -9,7 +9,7 @@
     border: 0;
 }
 
-@mixin transitionAccordion() {
+@mixin m-transition-accordion() {
     transition: 0.3s max-height ease;
     overflow: hidden;
     height: auto;

@@ -4,6 +4,6 @@
     display: block;
 
     &__hidden {
-        @include visuallyHidden;
+        @include m-visually-hidden;
     }
 }

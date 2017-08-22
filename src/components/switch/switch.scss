@@ -127,6 +127,6 @@ $m-switch-size: 23px;
     }
 
     &__hidden {
-        @include visuallyHidden;
+        @include m-visually-hidden;
     }
 }
