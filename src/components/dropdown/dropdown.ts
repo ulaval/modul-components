@@ -15,17 +15,19 @@ const PAGE_STEP: number = 4;
 export interface SelectedValue {
     key: string | undefined;
     value: any;
+    label: string;
 }
 
-export interface MDropDownInterface extends Vue {
+export interface MDropdownInterface extends Vue {
     selected: Array<SelectedValue>;
     currentElement: SelectedValue;
     addAction: boolean;
+    nbItems: number;
 }
 
 @WithRender
 @Component
-export class MDropdown extends ModulVue implements MDropDownInterface {
+export class MDropdown extends ModulVue implements MDropdownInterface {
 
     @Prop()
     public label: string;
@@ -47,8 +49,10 @@ export class MDropdown extends ModulVue implements MDropDownInterface {
     public componentName: string = DROPDOWN_NAME;
 
     public selected: Array<SelectedValue> = [];
-    public currentElement: SelectedValue = {'key': undefined, 'value': undefined};
+    public currentElement: SelectedValue = {'key': undefined, 'value': undefined, 'label': ''};
     public addAction: true;
+    public nbItems: number = 0;
+    public selectedText: string = '';
 
     // Copy of prop
     public propOpen: boolean = false;
@@ -69,6 +73,13 @@ export class MDropdown extends ModulVue implements MDropDownInterface {
 
     @Watch('currentElement')
     private currentElementChanged(value): void {
+        this.selectedText = '';
+        for (let item of this.selected ) {
+            if (this.selectedText != '') {
+                this.selectedText += ', ';
+            }
+            this.selectedText += item.label;
+        }
         this.$emit('elementSelected', this.currentElement, this.addAction);
     }
 
@@ -140,10 +151,16 @@ export class MDropdown extends ModulVue implements MDropDownInterface {
     //     return width;
     // }
 
+    private get propEditable(): boolean {
+        return this.editable && this.selected.length == 0;
+    }
+
     private filterDropdown(text: string): void {
-        for (let child of this.$children) {
-            if (child.$options.name == 'MPopper') {
-                this.propagateTextFilter(normalizeString(text.trim()), child);
+        if (this.selected.length == 0) {
+            for (let child of this.$children) {
+                if (child.$options.name == 'MPopper') {
+                    this.propagateTextFilter(normalizeString(text.trim()), child);
+                }
             }
         }
     }
@@ -159,6 +176,10 @@ export class MDropdown extends ModulVue implements MDropDownInterface {
             }
         }
     }
+
+    // private textfieldClick(): void {
+    //     this.propEditable = false;
+    // }
 
     // private get elementsCount(): number {
     //     return this.elementsSortedFiltered.length;
