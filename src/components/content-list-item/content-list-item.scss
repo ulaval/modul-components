@@ -6,11 +6,12 @@
     padding: $m-padding;
     position: relative;
     justify-content: space-between;
+    background-color: $m-color--white;
 
     &,
     &__button {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
     }
 
     &__button {
@@ -18,7 +19,9 @@
         transition: color 0.3s ease;
         width: $m-touch-size;
         text-align: right;
-        display: block;
+        display: flex;
+        align-self: center;
+        justify-content: flex-end;
     }
 
     &:hover {
@@ -28,3 +31,13 @@
     }
 }
 
+.delete-anim-enter-active,
+.delete-anim-leave-active {
+    transition: all 0.3s;
+}
+
+.delete-anim-enter,
+.delete-anim-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}

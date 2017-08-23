@@ -5,6 +5,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './content-list-item.html?style=./content-list-item.scss';
 import { CONTENT_LIST_ITEM_NAME } from '../component-names';
+import { MContentListInterface } from '../content-list/content-list';
 
 @WithRender
 @Component
@@ -13,16 +14,21 @@ export class MContentListItem extends ModulVue {
 
     @Prop({ default: false })
     public button: boolean;
+    @Prop()
+    public index: number;
 
-    // private get hasBouton(): boolean {
-    //     if (this.button) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    private visible: boolean = true;
+    private ramdomId: any = 0;
 
     private deleteItem() {
-        console.log('delete');
+        this.visible = false;
+        console.log('delete item', this.index);
+        (this.$parent as MContentListInterface).deletedElement = this.index;
+    }
+
+    private addItem() {
+        this.visible = true;
+        console.log('add item');
     }
 
 }

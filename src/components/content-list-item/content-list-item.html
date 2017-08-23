@@ -1,12 +1,15 @@
-<li class="m-content-list-item">
-    <span>
-        <slot>
-            <span>test de contenu d'une liste</span>
-        </slot>
-    </span>
-    <span>
-        <a v-if="button" href="#" @click="deleteItem()" class="m-content-list-item__button">
-            <m-icon name="chip-error"></m-icon>
-        </a>
-    </span>
-</li>
+
+<transition name="delete-anim">
+    <li class="m-content-list-item" v-if="visible">
+        <span>
+            <slot>
+                <span>test de contenu d'une liste</span>
+            </slot>
+        </span>
+        <span>
+            <a v-if="button" href="#" @click="deleteItem()" class="m-content-list-item__button">
+                <m-icon name="chip-error"></m-icon>
+            </a>
+        </span>
+    </li>
+</transition>
