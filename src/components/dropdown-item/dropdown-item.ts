@@ -11,6 +11,7 @@ import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropDownItemInterface extends Vue {
     filter: string;
+    getElement(): SelectedValue;
 }
 
 @WithRender
@@ -133,6 +134,10 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
             }
             (this.root as MDropdownInterface).currentElement = {'key': this.propKey, 'value': this.value, label: this.propLabel};
         }
+    }
+
+    public getElement(): SelectedValue {
+        return {'key': this.propKey, 'value': this.value, label: this.propLabel};
     }
 
     private getRootMDropdown(node: Vue): Vue {

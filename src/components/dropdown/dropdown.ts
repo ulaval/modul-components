@@ -57,13 +57,19 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     // Copy of prop
     public propOpen: boolean = false;
 
-    private created() {
-        // Run in created() to run before computed data
-        // this.prepareElements();
-    }
+    // private created() {
+    // }
 
     private mounted() {
-        // this.adjustWidth();
+        // Obtenir le premier dropdown-item
+        if (this.defaultFirstElement && !this.multiple && !this.disabled) {
+            let firstElement: Vue | undefined = this.getFirstElement();
+            if (firstElement) {
+                this.currentElement = (firstElement as MDropDownItemInterface).getElement();
+                this.selected.push(this.currentElement);
+                this.addAction = true;
+            }
+        }
     }
 
     @Watch('selected')
@@ -155,10 +161,38 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         return this.editable && this.selected.length == 0;
     }
 
+    private getFirstElement(): Vue | undefined {
+        let firstElement: Vue | undefined;
+
+        for (let child of this.$children) {
+            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
+                firstElement = this.recursiveSearch(child);
+                break;
+            }
+        }
+        return firstElement;
+    }
+
+    private recursiveSearch(node: Vue): Vue | undefined {
+        let firstElement: Vue | undefined;
+
+        for (let child of node.$children) {
+            if (child.$options.name == 'MDropdownGroup') {
+                firstElement = this.recursiveSearch(child);
+                if (firstElement) {
+                    return firstElement;
+                }
+            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
+                return child;
+            }
+        }
+        return firstElement;
+    }
+
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {
             for (let child of this.$children) {
-                if (child.$options.name == 'MPopper') {
+                if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
                     this.propagateTextFilter(normalizeString(text.trim()), child);
                 }
             }
@@ -169,9 +203,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         for (let child of node.$children) {
             if (child.$options.name == 'MDropdownGroup') {
                 this.propagateTextFilter(text, child);
-            }
-
-            if (child.$options.name == 'MDropdownItem') {
+            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
                 (child as MDropDownItemInterface).filter = text;
             }
         }
