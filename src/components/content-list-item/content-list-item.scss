@@ -1,0 +1,30 @@
+@import 'abstracts/variables';
+
+.m-content-list-item {
+    list-style: none;
+    border-bottom: 1px solid $m-color--grey-lighter;
+    padding: $m-padding;
+    position: relative;
+    justify-content: space-between;
+
+    &,
+    &__button {
+        display: flex;
+        align-items: center;
+    }
+
+    &__button {
+        color: $m-color--white;
+        transition: color 0.3s ease;
+        width: $m-touch-size;
+        text-align: right;
+        display: block;
+    }
+
+    &:hover {
+        .m-content-list-item__button {
+            color: $m-color--grey-light;
+        }
+    }
+}
+

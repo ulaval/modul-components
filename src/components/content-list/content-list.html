@@ -1,0 +1,18 @@
+<div class="m-content-list">
+    <header class="m-content-list__header" v-if="hasHeader">
+        <slot name="header"></slot>
+    </header>
+    <ul class="m-content-list__body">
+        <slot>
+            <li>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </li>
+            <li>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </li>
+            <li>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </li>
+        </slot>
+    </ul>
+</div>
