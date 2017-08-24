@@ -309,6 +309,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         el.style.webkitTransition = transition;
         el.style.overflowY = 'hidden';
         el.style.maxHeight = '0';
+        el.style.width = this.width;
         setTimeout(() => {
             el.style.maxHeight = height + 'px';
             done();

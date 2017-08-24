@@ -1,7 +1,4 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }">
-    <ul class="m-dropdown__list m--is-hidden" aria-hidden="true">
-        <li class="m-dropdown__list__element"  ref="mDropdownCalculate"></li>
-    </ul>
     <m-popper :options="{ placement: 'bottom' }"
               :close-on-content-click="!multiple"
               :close-on-reference-click="!propEditable"
@@ -30,8 +27,7 @@
         </template>
         <ul class="m-dropdown__list"
             ref="mDropdownElements"
-            slot="body"
-            :style="{ width: propWidth }">
+            slot="body">
             <slot></slot>
             <li class="m-dropdown-item">
                 <span class="m-dropdown-item__element-text">
@@ -51,7 +47,7 @@
                       :disabled="disabled"
                       :force-focus="propOpen"
                       :default-text="defaultText"
-                      :style="{ width: propWidth }"
+                      :style="{ width: width }"
                       @valueChanged="filterDropdown($event)"
                       @keyup="keyupReference">
         </m-text-field>
