@@ -33,9 +33,13 @@
             slot="body"
             :style="{ width: width }">
             <slot></slot>
-            <li v-if="nbItems <= 0"
-                class="m-dropdown__list__element">
-                <span class="m-dropdown__list__element-text">
+            <li v-if="nbItemsVisible == 0 && nbItems != 0" class="m-dropdown-item">
+                <span class="m-dropdown-item__element-text">
+                    {{ propTextNoMatch }}
+                </span>
+            </li>
+            <li v-if="nbItems == 0" class="m-dropdown-item">
+                <span class="m-dropdown-item__element-text">
                     {{ propTextNoData }}
                 </span>
             </li>
@@ -56,6 +60,7 @@
                       @keyup="keyupReference">
         </m-text-field>
     </m-popper>
+    {{ nbItemsVisible }}-{{ nbItems }}
     <m-validation-message
         :state="propState"
         :error="propErrorMessage"

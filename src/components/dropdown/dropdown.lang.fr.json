@@ -1,6 +1,7 @@
 {
     "m-dropdown": {
-        "no-result": "Aucun résultats",
+        "no-data": "Aucune données",
+        "no-result": "Aucune résultats",
         "none": "(Aucun)",
         "research" : "Recherche",
         "search" : "Rechercher"

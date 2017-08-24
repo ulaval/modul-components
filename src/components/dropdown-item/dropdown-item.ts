@@ -60,6 +60,7 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
         }
         this.root = this.getRootMDropdown(this.$parent);
         (this.root as MDropdownInterface).nbItems++;
+        (this.root as MDropdownInterface).nbItemsVisible++;
 
         this.group = this.getMDropdownGroup(this.$parent);
         if (this.group) {
@@ -71,12 +72,12 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     @Watch('visible')
     public visibleChanged(value): void {
         if (value) {
-            (this.root as MDropdownInterface).nbItems++;
+            (this.root as MDropdownInterface).nbItemsVisible++;
             if (this.group) {
                 (this.group as MDropdownGroupInterface).nbItemsVisible++;
             }
         } else {
-            (this.root as MDropdownInterface).nbItems--;
+            (this.root as MDropdownInterface).nbItemsVisible--;
             if (this.group) {
                 (this.group as MDropdownGroupInterface).nbItemsVisible--;
             }

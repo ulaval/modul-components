@@ -23,6 +23,7 @@ export interface MDropdownInterface extends Vue {
     currentElement: SelectedValue;
     addAction: boolean;
     nbItems: number;
+    nbItemsVisible: number;
 }
 
 @WithRender
@@ -56,6 +57,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public currentElement: SelectedValue = {'key': undefined, 'value': undefined, 'label': ''};
     public addAction: true;
     public nbItems: number = 0;
+    public nbItemsVisible: number = 0;
     public selectedText: string = '';
 
     // Copy of prop
@@ -103,6 +105,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     private isScreenMaxSChanged(value: boolean): void {
         if (!value) {
             this.$nextTick(() => {
+                console.log('YOOOOO');
                 // this.adjustWidth();
             });
         }
@@ -170,7 +173,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         if (this.textNoData) {
             return this.textNoData;
         } else {
-            return this.$i18n.translate('m-dropdown:no-result');
+            return this.$i18n.translate('m-dropdown:no-data');
         }
     }
 
