@@ -22,34 +22,34 @@ export class MFlexTemplate extends Vue {
     @Prop({ default: MFlexTemplateFrom.Left })
     public from: MFlexTemplateFrom;
     @Prop({ default: false })
-    public open: boolean;
+    public menuOpen: boolean;
     @Prop({ default: false })
     public smallMenu: boolean;
     @Prop({ default: '44px' })
     public smallMenuSize: string;
 
     private valueMenuWidth: string;
-    private openCount: number = 0;
+    private menuOpenCount: number = 0;
 
     private get fromRight(): boolean {
         return this.from == MFlexTemplateFrom.Right;
     }
 
-    private get propOpen(): boolean {
-        if (this.open) {
+    private get propMenuOpen(): boolean {
+        if (this.menuOpen) {
             this.valueMenuWidth = this.smallMenu ? this.smallMenuSize : this.propMenuWidth;
 
             if (this.hasNavSlot) {
                 this.$nextTick(() => {
                     let navEl: HTMLElement = this.$refs.nav as HTMLElement;
                     navEl.setAttribute('tabindex', '0');
-                    if (this.openCount != 0) {
+                    if (this.menuOpenCount != 0) {
                         navEl.focus();
                     }
                 });
             }
 
-            this.$emit('open');
+            this.$emit('menuOpen');
         } else {
             this.valueMenuWidth = '0';
             if (this.hasNavSlot) {
@@ -60,14 +60,14 @@ export class MFlexTemplate extends Vue {
                     }
                 });
             }
-            this.$emit('close');
+            this.$emit('MenuClose');
         }
 
         this.$nextTick(() => {
-            this.openCount++;
+            this.menuOpenCount++;
         });
 
-        return this.open;
+        return this.menuOpen;
     }
 
     private get propSmallMenu(): boolean {
