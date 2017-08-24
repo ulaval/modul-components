@@ -8,9 +8,11 @@ import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { MDropDownItemInterface } from '../dropdown-item/dropdown-item';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
-const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
+const DROPDOWN_MAX_HEIGHT: number = 198;
 
 export interface SelectedValue {
     key: string | undefined;
@@ -29,7 +31,12 @@ export interface MDropdownInterface extends Vue {
 }
 
 @WithRender
-@Component
+@Component({
+    mixins: [
+        InputState,
+        MediaQueries
+    ]
+})
 export class MDropdown extends ModulVue implements MDropdownInterface {
 
     @Prop()
@@ -119,7 +126,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     private isScreenMaxSChanged(value: boolean): void {
         if (!value) {
             this.$nextTick(() => {
-                console.log('YOOOOO');
                 // this.adjustWidth();
             });
         }
@@ -352,6 +358,37 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
                 element.focus();
             }
         }
+    }
+
+    private animEnter(el: HTMLElement, done: any): void {
+        let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
+        let transition: string = '0.3s max-height ease';
+        el.style.transition = transition;
+        el.style.webkitTransition = transition;
+        el.style.overflowY = 'hidden';
+        el.style.maxHeight = '0';
+        setTimeout(() => {
+            el.style.maxHeight = height + 'px';
+            done();
+        }, 0);
+    }
+
+    private animAfterEnter(el: HTMLElement): void {
+        setTimeout(() => {
+            el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
+            el.style.overflowY = 'auto';
+        }, 300);
+    }
+
+    private animLeave(el: HTMLElement, done: any): void {
+        let height: number = el.clientHeight;
+        el.style.maxHeight = height + 'px';
+        el.style.overflowY = 'hidden';
+        el.style.maxHeight = '0';
+        setTimeout(() => {
+            el.style.maxHeight = 'none';
+            done();
+        }, 300);
     }
 }
 

@@ -33,14 +33,10 @@
             slot="body"
             :style="{ width: width }">
             <slot></slot>
-            <li v-if="nbItemsVisible == 0 && nbItems != 0" class="m-dropdown-item">
+            <li class="m-dropdown-item">
                 <span class="m-dropdown-item__element-text">
-                    {{ propTextNoMatch }}
-                </span>
-            </li>
-            <li v-if="nbItems == 0" class="m-dropdown-item">
-                <span class="m-dropdown-item__element-text">
-                    {{ propTextNoData }}
+                    <span v-if="nbItemsVisible == 0 && nbItems != 0">{{ propTextNoMatch }}</span>
+                    <span v-if="nbItems == 0">{{ propTextNoData }}</span>
                 </span>
             </li>
         </ul>
