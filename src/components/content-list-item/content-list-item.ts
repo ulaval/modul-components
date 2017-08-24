@@ -26,11 +26,6 @@ export class MContentListItem extends ModulVue {
         (this.$parent as MContentListInterface).deletedElement = this.index;
     }
 
-    private addItem() {
-        this.visible = true;
-        console.log('add item');
-    }
-
 }
 
 const ContentListItemPlugin: PluginObject<any> = {
