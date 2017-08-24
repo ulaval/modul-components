@@ -11,18 +11,25 @@ $m-radio--color-disabled-light: $m-color--grey !default;
 
     &:not(.m--is-button) {
         &:not(.m--is-disabled) {
+            .m-radio__wrap:hover,
+            &.m--is-focus {
+                .m-radio {
+                    &__label {
+                        color: $m-color--interactive;
+                    }
+
+                    &__input {
+                        border-color: $m-color--interactive;
+                        background: $m-color--interactive-lightest;
+                    }
+                }
+            }
+
             .m-radio {
                 &__wrap {
                     cursor: pointer;
 
                     &:hover {
-                        .m-radio__label {
-                            color: $m-color--interactive;
-                        }
-                    }
-
-                    &:hover,
-                    &.m--is-focus {
                         .m-radio__input {
                             border-color: $m-color--interactive;
                             background: $m-color--interactive-lightest;
@@ -61,23 +68,19 @@ $m-radio--color-disabled-light: $m-color--grey !default;
             }
 
             &.m--is-checked {
-                .m-radio {
-                    &__input {
-                        &::before {
-                            background: $m-radio--color-disabled;
-                        }
+                .m-radio__input {
+                    &::before {
+                        background: $m-radio--color-disabled;
                     }
                 }
             }
         }
 
         &.m--is-checked {
-            .m-radio {
-                &__input {
-                    &::before {
-                        visibility: visible;
-                        transform: scale(1);
-                    }
+            .m-radio__input {
+                &::before {
+                    visibility: visible;
+                    transform: scale(1);
                 }
             }
         }
