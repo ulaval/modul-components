@@ -27,6 +27,7 @@ $m-template-column-width: 384px;
 
         .m-link {
             width: 100%;
+            margin-bottom: $m-margin--s;
 
             + :nth-child(2) {
                 flex: 2 1 auto;

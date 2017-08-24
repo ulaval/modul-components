@@ -74,11 +74,13 @@
             &__text {
                 position: relative;
                 flex: 1;
+                vertical-align: middle;
             }
 
             &__icon {
                 font-size: 14px;
                 display: inline-flex;
+                vertical-align: middle;
 
                 &.m--is-left {
                     margin-right: $m-margin--s;
