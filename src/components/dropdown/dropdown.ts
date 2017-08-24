@@ -41,10 +41,14 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public editable: boolean;
     @Prop({ default: false })
     public multiple: boolean;
-    @Prop({ default: false })
-    public widthFromCss: boolean;
+    @Prop({ default: '200px' })
+    public width: string;
     @Prop({ default: false })
     public defaultFirstElement: boolean;
+    @Prop()
+    public textNoData: string;
+    @Prop()
+    public textNoMatch: string;
 
     public componentName: string = DROPDOWN_NAME;
 
@@ -161,6 +165,22 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         return this.editable && this.selected.length == 0;
     }
 
+    private get propTextNoData(): string {
+        if (this.textNoData) {
+            return this.textNoData;
+        } else {
+            return this.$i18n.translate('m-dropdown:no-result');
+        }
+    }
+
+    private get propTextNoMatch(): string {
+        if (this.textNoMatch) {
+            return this.textNoMatch;
+        } else {
+            return this.$i18n.translate('m-dropdown:no-result');
+        }
+    }
+
     private getFirstElement(): Vue | undefined {
         let firstElement: Vue | undefined;
 
@@ -208,54 +228,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
             }
         }
     }
-
-    // private textfieldClick(): void {
-    //     this.propEditable = false;
-    // }
-
-    // private get elementsCount(): number {
-    //     return this.elementsSortedFiltered.length;
-    // }
-
-    // private get elementsSortedFiltered(): Array<any> {
-    //     if ((this.textElement == '') || (this.textElement == this.getSelectedElementText())) {
-    //         return this.elementsSorted;
-    //     }
-
-    //     let filteredElements: Array<any> = this.elementsSorted.filter((element) => {
-    //         return normalizeString(this.getElementListText(element)).match(normalizeString(this.textElement));
-    //     });
-
-    //     return filteredElements;
-    // }
-
-    // private onSelectElement($event, element: any): void {
-    //     this.selectElement(element);
-    // }
-
-    // private getSelectedElementText(): string {
-    //     let text: string = '';
-
-    //     if (typeof this.propSelectedElement != UNDEFINED) {
-    //         text = this.getElementListText(this.propSelectedElement);
-    //     }
-
-    //     return text;
-    // }
-
-    // private getElementListText(element: any): string {
-    //     let text: string = '';
-
-    //     if (typeof element == UNDEFINED) {
-    //         text = '';
-    //     } else if (this.getTextElement) {
-    //         text = this.getTextElement(element);
-    //     } else {
-    //         text = String(element);
-    //     }
-
-    //     return text;
-    // }
 
     private toggleDropdown(value: boolean): void {
         Vue.nextTick(() => {
@@ -347,44 +319,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
             }
         }
     }
-
-    // private selectElement(element: any): void {
-    //     this.propSelectedElement = element;
-    //     this.textElement = this.getSelectedElementText();
-    //     this.$emit('elementSelected', this.propSelectedElement);
-    // }
-
-    // private prepareElements(): void {
-    //     let elementsSorted: any[] = new Array();
-
-    //     if (this.elements) {
-    //         // Create a separe copy of the array, to prevent triggering infinite loop on watcher of elements
-    //         elementsSorted = this.elements.slice(0);
-
-    //         // Sorting options
-    //         if (this.sort) {
-    //             if (typeof this.sortMethod == UNDEFINED) {
-    //                 // Default sort: Alphabetically
-    //                 if (typeof this.getTextElement == UNDEFINED) {
-    //                     elementsSorted = elementsSorted.sort((a, b) => a.localeCompare(b));
-    //                 } else {
-    //                     elementsSorted = elementsSorted.sort((a, b) => this.getElementListText(a).localeCompare(this.getElementListText(b)));
-    //                 }
-    //             } else {
-    //                 elementsSorted = this.sortMethod(elementsSorted);
-    //             }
-    //         }
-
-    //         // Default element
-    //         if (this.as<DropdownTemplateMixin>().defaultFirstElement && elementsSorted[0]) {
-    //             this.selectElement(elementsSorted[0]);
-    //         }
-    //         this.textElement = this.getSelectedElementText();
-    //     }
-
-    //     this.elementsSorted = elementsSorted;
-    // }
-
 }
 
 const DropdownPlugin: PluginObject<any> = {
