@@ -5,8 +5,8 @@
         </div>
     </header>
     <div class="m-template__wrap" v-if="hasDefaultSlot || hasColumnSlot || hasFooterSlot ">
-        <div class="m-template__body" v-if="hasDefaultSlot || (hasFooterSlot && !footerFullWidth)">
-            <div class="m-template__body-test">
+        <div class="m-template__body-container" v-if="hasDefaultSlot || (hasFooterSlot && !footerFullWidth)">
+            <div class="m-template__body">
                 <div class="m-template__body__content" v-if="hasDefaultSlot">
                     <slot></slot>
                 </div>

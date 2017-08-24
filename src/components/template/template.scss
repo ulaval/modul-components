@@ -45,6 +45,17 @@ $m-template--column-color: $m-color--grey-light;
         }
     }
 
+    &__body__content,
+    &__body__footer,
+    &__column {
+        > :first-child {
+            &,
+            > :first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
     &__header {
         display: flex;
         flex-wrap: wrap;
@@ -96,26 +107,17 @@ $m-template--column-color: $m-color--grey-light;
     }
 
     &__body {
-        // display: flex;
-        // flex-direction: column;
-        flex: 1 1 auto;
-        background: $m-color--white;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
 
-        &-test {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+        &-container {
+            flex: 1 1 auto;
+            background: $m-color--white;
         }
 
         &__content {
             flex: 1 1 auto;
-
-            > :first-child {
-                &,
-                > :first-child {
-                    margin-top: 0;
-                }
-            }
         }
 
         &__footer {
