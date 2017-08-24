@@ -11,7 +11,7 @@ import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropDownItemInterface extends Vue {
     filter: string;
-    getElement(): SelectedValue;
+    onSelectElement(): void;
 }
 
 @WithRender

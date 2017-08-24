@@ -69,9 +69,10 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         if (this.defaultFirstElement && !this.multiple && !this.disabled) {
             let firstElement: Vue | undefined = this.getFirstElement();
             if (firstElement) {
-                this.currentElement = (firstElement as MDropDownItemInterface).getElement();
-                this.selected.push(this.currentElement);
-                this.addAction = true;
+
+                (firstElement as MDropDownItemInterface).onSelectElement();
+                // this.selected.push(this.currentElement);
+                // this.addAction = true;
             }
         }
     }
