@@ -31,7 +31,7 @@
         <ul class="m-dropdown__list"
             ref="mDropdownElements"
             slot="body"
-            :style="{ width: width }">
+            :style="{ width: propWidth }">
             <slot></slot>
             <li class="m-dropdown-item">
                 <span class="m-dropdown-item__element-text">
@@ -51,7 +51,7 @@
                       :disabled="disabled"
                       :force-focus="propOpen"
                       :default-text="defaultText"
-                      :style="{ width: width }"
+                      :style="{ width: propWidth }"
                       @valueChanged="filterDropdown($event)"
                       @keyup="keyupReference">
         </m-text-field>

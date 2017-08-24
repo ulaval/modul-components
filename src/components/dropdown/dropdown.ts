@@ -92,10 +92,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         if (this.defaultFirstElement && !this.multiple && !this.disabled) {
             let firstElement: Vue | undefined = this.getFirstElement();
             if (firstElement) {
-
                 (firstElement as MDropDownItemInterface).onSelectElement();
-                // this.selected.push(this.currentElement);
-                // this.addAction = true;
             }
         }
     }
@@ -122,69 +119,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         this.propOpen = value;
     }
 
-    @Watch('isScreenMaxS')
-    private isScreenMaxSChanged(value: boolean): void {
-        if (!value) {
-            this.$nextTick(() => {
-                // this.adjustWidth();
-            });
-        }
-    }
-
-    // private adjustWidth(): void {
-    //     if (!this.widthFromCss) {
-    //         // Hidden element to calculate width
-    //         let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
-    //         // Input or a
-    //         let valueField: Vue = this.$refs.mDropdownValue as Vue;
-    //         // List of elements
-    //         let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
-
-    //         let width: number = 0;
-
-    //         if (elements && elements.children.length > 0) {
-    //             for (let i = 0; i < elements.children.length; i++) {
-
-    //                 if ((elements.children[i].children.length > 0) &&
-    //                     (elements.children[i].children.item(0).classList.contains('m-dropdown-group'))) {
-
-    //                     let elementsChild: HTMLElement = elements.children[i] as HTMLElement;
-    //                     for (let j = 0; j < elementsChild.children.length; j++) {
-    //                         width = Math.max(width, this.getElementWidth(hiddenField, elementsChild.children[j] as HTMLElement));
-    //                     }
-    //                 } else {
-    //                     width = Math.max(width, this.getElementWidth(hiddenField, elements.children[i] as HTMLElement));
-    //                 }
-    //             }
-    //         } else {
-    //             // width = this.getElementWidth(hiddenField, this.getSelectedElementText());
-    //         }
-
-    //         // Add 25px for scrollbar
-    //         width = Math.ceil(width) + 25;
-    //         // Set width to Input and List
-    //         valueField.$el.style.width = width + 'px';
-    //         this.$el.style.width = width + 'px';
-    //         elements.style.width = width + 'px';
-
-    //     } else {
-    //         let parentElement: HTMLElement = this.$refs.mDropdown as HTMLElement;
-    //         let childElement: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
-    //         childElement.style.width = parentElement.offsetWidth + 'px';
-    //     }
-    // }
-
-    // private getElementWidth(elementContainer: HTMLElement, elementText: HTMLElement): number {
-    //     // console.log(elementContainer);
-    //     // console.log(elementText);
-    //     elementContainer.innerHTML = elementText.innerText;
-    //     let width: number = elementContainer.offsetWidth;
-    //     // elementContainer.removeChild(elementText);
-    //     // if (element.$el.)
-    //     // elementContainer.innerHTML = element;
-    //     return width;
-    // }
-
     private get propEditable(): boolean {
         return this.editable && this.selected.length == 0;
     }
@@ -202,6 +136,14 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
             return this.textNoMatch;
         } else {
             return this.$i18n.translate('m-dropdown:no-result');
+        }
+    }
+
+    private get propWidth(): string {
+        if (this.as<MediaQueriesMixin>().isScreenMaxS) {
+            return '100%';
+        } else {
+            return this.width;
         }
     }
 
