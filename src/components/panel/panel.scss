@@ -1,7 +1,7 @@
 @import 'abstracts/variables';
 $m-panel--border-width: 1px;
-$m-panel--screen--max: 640px;
-$m-panel--screen--min: 639px;
+$m-panel--screen--max: 639px;
+$m-panel--screen--min: 640px;
 
 .m-panel {
     position: relative;
@@ -60,16 +60,6 @@ $m-panel--screen--min: 639px;
     }
 
     &__header {
-        @media screen and (max-width: $m-panel--screen--max) {
-            display: block;
-        }
-
-        @media screen and (min-width: $m-panel--screen--min) {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
         &:not(.m--no-padding) {
             padding: $m-padding $m-padding #{ $m-padding + $m-margin--s } $m-padding;
         }
@@ -90,31 +80,20 @@ $m-panel--screen--min: 639px;
         }
 
         &.m--is-right-content-alone {
-            @media screen and (min-width: $m-panel--screen--min) {
+            &[min-width~="#{ $m-panel--screen--min }"] {
                 justify-content: flex-end;
-            }
-        }
-
-        &:not(.m--is-right-content-alone) {
-            .m-panel__header__content {
-                &-right {
-                    @media screen and (max-width: $m-panel--screen--max) {
-                        margin-top: $m-margin;
-                    }
-                }
             }
         }
     }
 
     &__body {
         flex: 1 1 auto;
+        padding-bottom: #{ $m-padding + $m-margin--s };
 
         &:not(.m--no-padding) {
             padding-right: $m-padding;
             padding-left: $m-padding;
         }
-
-        padding-bottom: #{ $m-padding + $m-margin--s };
 
         &.m--has-padding-top {
             padding-top: $m-padding;
@@ -126,6 +105,32 @@ $m-panel--screen--min: 639px;
 
         &:not(.m--no-padding) {
             padding: $m-padding;
+        }
+    }
+
+    &[max-width~="#{ $m-panel--screen--max }"] {
+        .m-panel {
+            &__header {
+                display: block;
+            }
+        }
+
+        &:not(.m--is-right-content-alone) {
+            .m-panel__header__content {
+                &-right {
+                    margin-top: $m-margin;
+                }
+            }
+        }
+    }
+
+    &[min-width~="#{ $m-panel--screen--min }"] {
+        .m-panel {
+            &__header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
         }
     }
 }

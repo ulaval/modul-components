@@ -61,7 +61,9 @@
 
     &.m--is-regular {
         .m-nav-bar-item {
-            margin-right: 1px;
+            + .m-nav-bar-item {
+                margin-left: 1px;
+            }
 
             &[tabindex],
             a,
@@ -104,10 +106,6 @@
                         background: $m-color--grey;
                     }
                 }
-            }
-
-            &.m--is-last-item {
-                margin-right: 0;
             }
         }
     }
@@ -171,11 +169,11 @@
                 }
             }
 
-            &.m--is-first-item {
+            &.m--is-first {
                 margin-left: 0;
             }
 
-            &.m--is-last-item {
+            &.m--is-last {
                 margin-right: 0;
             }
         }

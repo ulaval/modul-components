@@ -50,7 +50,7 @@ export class MNavbar extends ModulVue {
                     childrenIndex: i
                 });
                 this.itemCount++;
-                this.$children[i]['eventBus']['$on']('click', (id, childrenIndex) => this.changeItem(id, childrenIndex));
+                this.$children[i]['$on']('click', (id, childrenIndex) => this.changeItem(id, childrenIndex));
             }
         }
         this.$children[this.arrItem[0].childrenIndex]['isFirtsItem'] = true;

@@ -15,7 +15,6 @@ export class MNavBarItem extends Vue {
 
     private id: number;
     private propFocus: boolean = true;
-    private eventBus: Vue = new Vue();
     private isSelected: boolean = false;
     private childrenIndex: number;
     private isFirtsItem: boolean = false;
@@ -28,8 +27,7 @@ export class MNavBarItem extends Vue {
     }
 
     private onClick(): void {
-        this.$emit('click', this.id);
-        this.eventBus.$emit('click', this.id, this.childrenIndex);
+        this.$emit('click', this.id, this.childrenIndex);
     }
 
     private selectItem(): void {
