@@ -1,0 +1,23 @@
+@import 'abstracts/variables';
+
+.m-content-list {
+    &__header {
+        padding: $m-padding;
+        background-color: $m-color--grey-lightest;
+
+        @media screen and (max-width: $m-screen--max--s) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    &__body {
+        &,
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            background-color: $m-color--white;
+        }
+    }
+}

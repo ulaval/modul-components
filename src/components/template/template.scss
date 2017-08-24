@@ -69,6 +69,7 @@ $m-template--column-color: $m-color--grey-light;
 
         .m-link {
             width: 100%;
+            margin-bottom: $m-margin--s;
 
             + :nth-child(2) {
                 flex: 2 1 auto;

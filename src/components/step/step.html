@@ -11,10 +11,11 @@
     <header class="m-step__header" @keyup.enter="openStep" @click="openStep" ref="header">
         <span class="m-step__header__icon">
             <m-icon :name="iconName"></m-icon>
-            <span class="m-step__header__icon-badge">
+            <span class="m-step__header__icon-badge" v-if="state">
                 <m-icon :name="getIcon()"></m-icon>
             </span>
         </span>
+
         <div class="m-step__header__title">
             <slot name="header">Lorem ipsum dolor sit amet</slot>
         </div>

@@ -2,7 +2,7 @@
     <ul class="m-button-group__wrap" :class="{ 'm--is-inline': inline }" v-if="!hasError">
         <slot v-if="!hasError">
             <m-radio value="button1">Button 1</m-radio>
-            <m-radio value="button2">Button Button 2</m-radio>
+            <m-radio value="button2">Button 2</m-radio>
             <m-radio value="button3">Button 3</m-radio>
         </slot>
         <p v-if="hasError">{{ errorMessage }}</p>

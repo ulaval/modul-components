@@ -8,24 +8,36 @@ import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { MDropDownItemInterface } from '../dropdown-item/dropdown-item';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
-const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
+const DROPDOWN_MAX_HEIGHT: number = 198;
 
 export interface SelectedValue {
     key: string | undefined;
     value: any;
+    label: string;
 }
 
-export interface MDropDownInterface extends Vue {
+export interface MDropdownInterface extends Vue {
     selected: Array<SelectedValue>;
     currentElement: SelectedValue;
     addAction: boolean;
+    nbItems: number;
+    nbItemsVisible: number;
+    multiple: boolean;
+    getElement(key: string): Vue | undefined;
 }
 
 @WithRender
-@Component
-export class MDropdown extends ModulVue implements MDropDownInterface {
+@Component({
+    mixins: [
+        InputState,
+        MediaQueries
+    ]
+})
+export class MDropdown extends ModulVue implements MDropdownInterface {
 
     @Prop()
     public label: string;
@@ -39,27 +51,50 @@ export class MDropdown extends ModulVue implements MDropDownInterface {
     public editable: boolean;
     @Prop({ default: false })
     public multiple: boolean;
-    @Prop({ default: false })
-    public widthFromCss: boolean;
+    @Prop({ default: '200px' })
+    public width: string;
     @Prop({ default: false })
     public defaultFirstElement: boolean;
+    @Prop()
+    public textNoData: string;
+    @Prop()
+    public textNoMatch: string;
 
     public componentName: string = DROPDOWN_NAME;
 
     public selected: Array<SelectedValue> = [];
-    public currentElement: SelectedValue = {'key': undefined, 'value': undefined};
+    public currentElement: SelectedValue = {'key': undefined, 'value': undefined, 'label': ''};
     public addAction: true;
+    public nbItems: number = 0;
+    public nbItemsVisible: number = 0;
+    public selectedText: string = '';
 
     // Copy of prop
     public propOpen: boolean = false;
 
-    private created() {
-        // Run in created() to run before computed data
-        // this.prepareElements();
+    public getElement(key: string): Vue | undefined {
+        let element: Vue | undefined;
+
+        for (let child of this.$children) {
+            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
+                element = this.recursiveGetElement(key, child);
+                break;
+            }
+        }
+        return element;
     }
 
+    // private created() {
+    // }
+
     private mounted() {
-        // this.adjustWidth();
+        // Obtenir le premier dropdown-item
+        if (this.defaultFirstElement && !this.multiple && !this.disabled) {
+            let firstElement: Vue | undefined = this.getFirstElement();
+            if (firstElement) {
+                (firstElement as MDropDownItemInterface).onSelectElement();
+            }
+        }
     }
 
     @Watch('selected')
@@ -69,6 +104,13 @@ export class MDropdown extends ModulVue implements MDropDownInterface {
 
     @Watch('currentElement')
     private currentElementChanged(value): void {
+        this.selectedText = '';
+        for (let item of this.selected ) {
+            if (this.selectedText != '') {
+                this.selectedText += ', ';
+            }
+            this.selectedText += item.label;
+        }
         this.$emit('elementSelected', this.currentElement, this.addAction);
     }
 
@@ -77,73 +119,84 @@ export class MDropdown extends ModulVue implements MDropDownInterface {
         this.propOpen = value;
     }
 
-    @Watch('isScreenMaxS')
-    private isScreenMaxSChanged(value: boolean): void {
-        if (!value) {
-            this.$nextTick(() => {
-                // this.adjustWidth();
-            });
+    private get propEditable(): boolean {
+        return this.editable && this.selected.length == 0;
+    }
+
+    private get propTextNoData(): string {
+        if (this.textNoData) {
+            return this.textNoData;
+        } else {
+            return this.$i18n.translate('m-dropdown:no-data');
         }
     }
 
-    // private adjustWidth(): void {
-    //     if (!this.widthFromCss) {
-    //         // Hidden element to calculate width
-    //         let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
-    //         // Input or a
-    //         let valueField: Vue = this.$refs.mDropdownValue as Vue;
-    //         // List of elements
-    //         let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
+    private get propTextNoMatch(): string {
+        if (this.textNoMatch) {
+            return this.textNoMatch;
+        } else {
+            return this.$i18n.translate('m-dropdown:no-result');
+        }
+    }
 
-    //         let width: number = 0;
+    private get propWidth(): string {
+        if (this.as<MediaQueriesMixin>().isScreenMaxS) {
+            return '100%';
+        } else {
+            return this.width;
+        }
+    }
 
-    //         if (elements && elements.children.length > 0) {
-    //             for (let i = 0; i < elements.children.length; i++) {
+    private recursiveGetElement(key: string, node: Vue): Vue | undefined {
+        let element: Vue | undefined;
 
-    //                 if ((elements.children[i].children.length > 0) &&
-    //                     (elements.children[i].children.item(0).classList.contains('m-dropdown-group'))) {
+        for (let child of node.$children) {
+            if (child.$options.name == 'MDropdownGroup') {
+                element = this.recursiveGetElement(key, child);
+                if (element) {
+                    return element;
+                }
+            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment' && child.$el.attributes['data-key'].value == key) {
+                return child;
+            }
+        }
+        return element;
+    }
 
-    //                     let elementsChild: HTMLElement = elements.children[i] as HTMLElement;
-    //                     for (let j = 0; j < elementsChild.children.length; j++) {
-    //                         width = Math.max(width, this.getElementWidth(hiddenField, elementsChild.children[j] as HTMLElement));
-    //                     }
-    //                 } else {
-    //                     width = Math.max(width, this.getElementWidth(hiddenField, elements.children[i] as HTMLElement));
-    //                 }
-    //             }
-    //         } else {
-    //             // width = this.getElementWidth(hiddenField, this.getSelectedElementText());
-    //         }
+    private getFirstElement(): Vue | undefined {
+        let firstElement: Vue | undefined;
 
-    //         // Add 25px for scrollbar
-    //         width = Math.ceil(width) + 25;
-    //         // Set width to Input and List
-    //         valueField.$el.style.width = width + 'px';
-    //         this.$el.style.width = width + 'px';
-    //         elements.style.width = width + 'px';
+        for (let child of this.$children) {
+            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
+                firstElement = this.recursiveGetFirstElement(child);
+                break;
+            }
+        }
+        return firstElement;
+    }
 
-    //     } else {
-    //         let parentElement: HTMLElement = this.$refs.mDropdown as HTMLElement;
-    //         let childElement: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
-    //         childElement.style.width = parentElement.offsetWidth + 'px';
-    //     }
-    // }
+    private recursiveGetFirstElement(node: Vue): Vue | undefined {
+        let firstElement: Vue | undefined;
 
-    // private getElementWidth(elementContainer: HTMLElement, elementText: HTMLElement): number {
-    //     // console.log(elementContainer);
-    //     // console.log(elementText);
-    //     elementContainer.innerHTML = elementText.innerText;
-    //     let width: number = elementContainer.offsetWidth;
-    //     // elementContainer.removeChild(elementText);
-    //     // if (element.$el.)
-    //     // elementContainer.innerHTML = element;
-    //     return width;
-    // }
+        for (let child of node.$children) {
+            if (child.$options.name == 'MDropdownGroup') {
+                firstElement = this.recursiveGetFirstElement(child);
+                if (firstElement) {
+                    return firstElement;
+                }
+            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
+                return child;
+            }
+        }
+        return firstElement;
+    }
 
     private filterDropdown(text: string): void {
-        for (let child of this.$children) {
-            if (child.$options.name == 'MPopper') {
-                this.propagateTextFilter(normalizeString(text.trim()), child);
+        if (this.selected.length == 0) {
+            for (let child of this.$children) {
+                if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
+                    this.propagateTextFilter(normalizeString(text.trim()), child);
+                }
             }
         }
     }
@@ -152,57 +205,11 @@ export class MDropdown extends ModulVue implements MDropDownInterface {
         for (let child of node.$children) {
             if (child.$options.name == 'MDropdownGroup') {
                 this.propagateTextFilter(text, child);
-            }
-
-            if (child.$options.name == 'MDropdownItem') {
+            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
                 (child as MDropDownItemInterface).filter = text;
             }
         }
     }
-
-    // private get elementsCount(): number {
-    //     return this.elementsSortedFiltered.length;
-    // }
-
-    // private get elementsSortedFiltered(): Array<any> {
-    //     if ((this.textElement == '') || (this.textElement == this.getSelectedElementText())) {
-    //         return this.elementsSorted;
-    //     }
-
-    //     let filteredElements: Array<any> = this.elementsSorted.filter((element) => {
-    //         return normalizeString(this.getElementListText(element)).match(normalizeString(this.textElement));
-    //     });
-
-    //     return filteredElements;
-    // }
-
-    // private onSelectElement($event, element: any): void {
-    //     this.selectElement(element);
-    // }
-
-    // private getSelectedElementText(): string {
-    //     let text: string = '';
-
-    //     if (typeof this.propSelectedElement != UNDEFINED) {
-    //         text = this.getElementListText(this.propSelectedElement);
-    //     }
-
-    //     return text;
-    // }
-
-    // private getElementListText(element: any): string {
-    //     let text: string = '';
-
-    //     if (typeof element == UNDEFINED) {
-    //         text = '';
-    //     } else if (this.getTextElement) {
-    //         text = this.getTextElement(element);
-    //     } else {
-    //         text = String(element);
-    //     }
-
-    //     return text;
-    // }
 
     private toggleDropdown(value: boolean): void {
         Vue.nextTick(() => {
@@ -295,43 +302,37 @@ export class MDropdown extends ModulVue implements MDropDownInterface {
         }
     }
 
-    // private selectElement(element: any): void {
-    //     this.propSelectedElement = element;
-    //     this.textElement = this.getSelectedElementText();
-    //     this.$emit('elementSelected', this.propSelectedElement);
-    // }
+    private animEnter(el: HTMLElement, done: any): void {
+        let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
+        let transition: string = '0.3s max-height ease';
+        el.style.transition = transition;
+        el.style.webkitTransition = transition;
+        el.style.overflowY = 'hidden';
+        el.style.maxHeight = '0';
+        el.style.width = this.width;
+        setTimeout(() => {
+            el.style.maxHeight = height + 'px';
+            done();
+        }, 0);
+    }
 
-    // private prepareElements(): void {
-    //     let elementsSorted: any[] = new Array();
+    private animAfterEnter(el: HTMLElement): void {
+        setTimeout(() => {
+            el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
+            el.style.overflowY = 'auto';
+        }, 300);
+    }
 
-    //     if (this.elements) {
-    //         // Create a separe copy of the array, to prevent triggering infinite loop on watcher of elements
-    //         elementsSorted = this.elements.slice(0);
-
-    //         // Sorting options
-    //         if (this.sort) {
-    //             if (typeof this.sortMethod == UNDEFINED) {
-    //                 // Default sort: Alphabetically
-    //                 if (typeof this.getTextElement == UNDEFINED) {
-    //                     elementsSorted = elementsSorted.sort((a, b) => a.localeCompare(b));
-    //                 } else {
-    //                     elementsSorted = elementsSorted.sort((a, b) => this.getElementListText(a).localeCompare(this.getElementListText(b)));
-    //                 }
-    //             } else {
-    //                 elementsSorted = this.sortMethod(elementsSorted);
-    //             }
-    //         }
-
-    //         // Default element
-    //         if (this.as<DropdownTemplateMixin>().defaultFirstElement && elementsSorted[0]) {
-    //             this.selectElement(elementsSorted[0]);
-    //         }
-    //         this.textElement = this.getSelectedElementText();
-    //     }
-
-    //     this.elementsSorted = elementsSorted;
-    // }
-
+    private animLeave(el: HTMLElement, done: any): void {
+        let height: number = el.clientHeight;
+        el.style.maxHeight = height + 'px';
+        el.style.overflowY = 'hidden';
+        el.style.maxHeight = '0';
+        setTimeout(() => {
+            el.style.maxHeight = 'none';
+            done();
+        }, 300);
+    }
 }
 
 const DropdownPlugin: PluginObject<any> = {

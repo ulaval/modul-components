@@ -4,6 +4,8 @@ import { PluginObject } from 'vue';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import BulletListPlugin from './bullet-list/bullet-list';
+import ContentListPlugin from './content-list/content-list';
+import ContentListItemPlugin from './content-list-item/content-list-item';
 import ButtonPlugin from './button/button';
 import ButtonGroupPlugin from './button-group/button-group';
 import CheckboxPlugin from './checkbox/checkbox';
@@ -66,6 +68,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);
         Vue.use(BulletListPlugin);
+        Vue.use(ContentListPlugin);
+        Vue.use(ContentListItemPlugin);
         Vue.use(MessagePlugin);
         Vue.use(ModalPlugin);
         Vue.use(NavBarPlugin);

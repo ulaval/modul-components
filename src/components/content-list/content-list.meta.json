@@ -1,0 +1,10 @@
+{
+    "tag": "m-bullet-list",
+    "name": "m-bullet-list-meta:name",
+    "attributes": {
+        "title": {
+            "type": "string"
+        }
+    },
+    "overview": "bullet-list.overview"
+}

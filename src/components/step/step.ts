@@ -27,7 +27,7 @@ export enum MStepMode {
     ]
 })
 export class MStep extends ModulVue {
-    @Prop({ default: MStepState.Locked })
+    @Prop()
     public state: MStepState;
     @Prop({ default: MStepMode.Default })
     public mode: MStepMode;

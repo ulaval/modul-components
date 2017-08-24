@@ -1,0 +1,12 @@
+<div class="m-content-list">
+    <header class="m-content-list__header" v-if="hasHeader">
+        <slot name="header"></slot>
+    </header>
+    <ul class="m-content-list__body">
+        <slot>
+            <p>
+                This component is intended to be used with m-content-list-item components as child component. A header slot is also available.
+            </p>
+        </slot>
+    </ul>
+</div>

@@ -1,6 +1,8 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
 export const BULLET_LIST_NAME: string = 'm-bullet-list';
+export const CONTENT_LIST_NAME: string = 'm-content-list';
+export const CONTENT_LIST_ITEM_NAME: string = 'm-content-list-item';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CHECKBOX_NAME: string = 'm-checkbox';
@@ -50,6 +52,8 @@ export const components: string[] = [
     ACCORDION_GROUP_NAME,
     ACCORDION_NAME,
     BULLET_LIST_NAME,
+    CONTENT_LIST_NAME,
+    CONTENT_LIST_ITEM_NAME,
     BUTTON_NAME,
     BUTTON_GROUP_NAME,
     CHECKBOX_NAME,

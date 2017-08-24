@@ -7,7 +7,7 @@ import WithRender from './dropdown-group.html?style=./dropdown-group.scss';
 import { DROPDOWN_GROUP_NAME } from '../component-names';
 
 export interface MDropdownGroupInterface extends Vue {
-    nbItemVisible: number;
+    nbItemsVisible: number;
 }
 
 @WithRender
@@ -18,10 +18,10 @@ export class MDropdownGroup extends Vue implements MDropdownGroupInterface {
     @Prop()
     public label: string;
 
-    public nbItemVisible: number = 0;
+    public nbItemsVisible: number = 0;
 
     public get visible(): boolean {
-        return this.nbItemVisible > 0;
+        return this.nbItemsVisible > 0;
     }
 }
 

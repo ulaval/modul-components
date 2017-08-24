@@ -1,0 +1,15 @@
+
+<transition name="delete-anim">
+    <li class="m-content-list-item" v-if="visible">
+        <span>
+            <slot>
+                <p>This component is intended to be used as m-content-list component child.</p>
+            </slot>
+        </span>
+        <span>
+            <a v-if="button" href="#" @click="deleteItem()" class="m-content-list-item__button">
+                <m-icon name="chip-error"></m-icon>
+            </a>
+        </span>
+    </li>
+</transition>

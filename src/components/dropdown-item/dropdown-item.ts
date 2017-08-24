@@ -6,11 +6,13 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
 import { DROPDOWN_ITEM_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
-import { MDropDownInterface, SelectedValue } from '../dropdown/dropdown';
+import { MDropdownInterface, SelectedValue } from '../dropdown/dropdown';
 import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropDownItemInterface extends Vue {
     filter: string;
+    propSelected: boolean;
+    onSelectElement(): void;
 }
 
 @WithRender
@@ -34,6 +36,7 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     public filter: string = '';
     public forceHide: boolean = false;
     public hasError: boolean = false;
+    public root: Vue;
     public group: Vue | undefined;
 
     public created() {
@@ -56,21 +59,28 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
                 }
             }
         }
+        this.root = this.getRootMDropdown(this.$parent);
+        (this.root as MDropdownInterface).nbItems++;
+        (this.root as MDropdownInterface).nbItemsVisible++;
 
         this.group = this.getMDropdownGroup(this.$parent);
         if (this.group) {
-            (this.group as MDropdownGroupInterface).nbItemVisible++;
+            (this.group as MDropdownGroupInterface).nbItemsVisible++;
         }
 
     }
 
     @Watch('visible')
     public visibleChanged(value): void {
-        if (this.group) {
-            if (value) {
-                (this.group as MDropdownGroupInterface).nbItemVisible++;
-            } else {
-                (this.group as MDropdownGroupInterface).nbItemVisible--;
+        if (value) {
+            (this.root as MDropdownInterface).nbItemsVisible++;
+            if (this.group) {
+                (this.group as MDropdownGroupInterface).nbItemsVisible++;
+            }
+        } else {
+            (this.root as MDropdownInterface).nbItemsVisible--;
+            if (this.group) {
+                (this.group as MDropdownGroupInterface).nbItemsVisible--;
             }
         }
     }
@@ -109,22 +119,44 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     }
 
     public onSelectElement(): void {
-        let parent: Vue = this.getRootMDropdown(this.$parent);
-        let array: Array<SelectedValue> = (parent as MDropDownInterface).selected;
+        if (!this.disabled) {
+            let array: Array<SelectedValue> = (this.root as MDropdownInterface).selected;
 
-        if (this.propSelected) {
-            this.propSelected = (parent as MDropDownInterface).addAction = false;
-            for (let i = 0; i < array.length; i++) {
-                if (array[i].key == this.propKey) {
-                    array.splice(i, 1);
-                    break;
+            if ((this.root as MDropdownInterface).multiple) {
+                // Dropdown with multiple selection: Add current selection to previous
+                if (this.propSelected) {
+                    this.propSelected = (this.root as MDropdownInterface).addAction = false;
+                    for (let i = 0; i < array.length; i++) {
+                        if (array[i].key == this.propKey) {
+                            array.splice(i, 1);
+                            break;
+                        }
+                    }
+                } else {
+                    this.propSelected = (this.root as MDropdownInterface).addAction = true;
+                    array.push({ key: this.propKey, value: this.value, label: this.propLabel });
                 }
+            } else {
+                // Dropdown without multiple selection: Remove first past selection before adding new
+                let currentSelectedElement: SelectedValue = array[0];
+                if (currentSelectedElement && currentSelectedElement.key) {
+                    let item: Vue | undefined = (this.root as MDropdownInterface).getElement(currentSelectedElement.key);
+                    if (item) {
+                        (item as MDropDownItemInterface).propSelected = false;
+                    }
+                    array.splice(0, 1);
+                }
+
+                this.propSelected = (this.root as MDropdownInterface).addAction = true;
+                array.push({ key: this.propKey, value: this.value, label: this.propLabel });
             }
-        } else {
-            this.propSelected = (parent as MDropDownInterface).addAction = true;
-            array.push({ key: this.propKey, value: this.value });
+
+            (this.root as MDropdownInterface).currentElement = {'key': this.propKey, 'value': this.value, label: this.propLabel};
         }
-        (parent as MDropDownInterface).currentElement = {'key': this.propKey, 'value': this.value};
+    }
+
+    public getElement(): SelectedValue {
+        return {'key': this.propKey, 'value': this.value, label: this.propLabel};
     }
 
     private getRootMDropdown(node: Vue): Vue {

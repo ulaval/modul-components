@@ -59,3 +59,18 @@ $m-dropdown--margin: $m-padding--xs !default;
         margin-top: $m-dropdown--margin;
     }
 }
+
+.m-dropdown-item {
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 100%;
+    padding: $m-padding;
+    margin: 0;
+    align-items: center;
+    transition: background 0.3s ease;
+    color: $m-color--text;
+    font-size: $m-font-size--l;
+    text-decoration: none;
+    outline: none;
+    word-break: break-all;
+}
