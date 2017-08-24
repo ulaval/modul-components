@@ -3,7 +3,8 @@
     :disabled="disabled"
     v-if="visible"
     @click="onSelectElement($event, element)"
-    :data-value="value">
+    :data-value="value"
+    :data-key="propKey">
         <span class="m-dropdown-item__element-text" >{{ propLabel }}</span>
     <!-- <slot></slot> -->
 

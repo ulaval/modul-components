@@ -11,6 +11,7 @@ import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropDownItemInterface extends Vue {
     filter: string;
+    propSelected: boolean;
     onSelectElement(): void;
 }
 
@@ -121,18 +122,35 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
         if (!this.disabled) {
             let array: Array<SelectedValue> = (this.root as MDropdownInterface).selected;
 
-            if (this.propSelected) {
-                this.propSelected = (this.root as MDropdownInterface).addAction = false;
-                for (let i = 0; i < array.length; i++) {
-                    if (array[i].key == this.propKey) {
-                        array.splice(i, 1);
-                        break;
+            if ((this.root as MDropdownInterface).multiple) {
+                // Dropdown with multiple selection: Add current selection to previous
+                if (this.propSelected) {
+                    this.propSelected = (this.root as MDropdownInterface).addAction = false;
+                    for (let i = 0; i < array.length; i++) {
+                        if (array[i].key == this.propKey) {
+                            array.splice(i, 1);
+                            break;
+                        }
                     }
+                } else {
+                    this.propSelected = (this.root as MDropdownInterface).addAction = true;
+                    array.push({ key: this.propKey, value: this.value, label: this.propLabel });
                 }
             } else {
+                // Dropdown without multiple selection: Remove first past selection before adding new
+                let currentSelectedElement: SelectedValue = array[0];
+                if (currentSelectedElement && currentSelectedElement.key) {
+                    let item: Vue | undefined = (this.root as MDropdownInterface).getElement(currentSelectedElement.key);
+                    if (item) {
+                        (item as MDropDownItemInterface).propSelected = false;
+                    }
+                    array.splice(0, 1);
+                }
+
                 this.propSelected = (this.root as MDropdownInterface).addAction = true;
                 array.push({ key: this.propKey, value: this.value, label: this.propLabel });
             }
+
             (this.root as MDropdownInterface).currentElement = {'key': this.propKey, 'value': this.value, label: this.propLabel};
         }
     }

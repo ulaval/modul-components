@@ -24,6 +24,8 @@ export interface MDropdownInterface extends Vue {
     addAction: boolean;
     nbItems: number;
     nbItemsVisible: number;
+    multiple: boolean;
+    getElement(key: string): Vue | undefined;
 }
 
 @WithRender
@@ -62,6 +64,18 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     // Copy of prop
     public propOpen: boolean = false;
+
+    public getElement(key: string): Vue | undefined {
+        let element: Vue | undefined;
+
+        for (let child of this.$children) {
+            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
+                element = this.recursiveGetElement(key, child);
+                break;
+            }
+        }
+        return element;
+    }
 
     // private created() {
     // }
@@ -185,24 +199,40 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
+    private recursiveGetElement(key: string, node: Vue): Vue | undefined {
+        let element: Vue | undefined;
+
+        for (let child of node.$children) {
+            if (child.$options.name == 'MDropdownGroup') {
+                element = this.recursiveGetElement(key, child);
+                if (element) {
+                    return element;
+                }
+            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment' && child.$el.attributes['data-key'].value == key) {
+                return child;
+            }
+        }
+        return element;
+    }
+
     private getFirstElement(): Vue | undefined {
         let firstElement: Vue | undefined;
 
         for (let child of this.$children) {
             if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
-                firstElement = this.recursiveSearch(child);
+                firstElement = this.recursiveGetFirstElement(child);
                 break;
             }
         }
         return firstElement;
     }
 
-    private recursiveSearch(node: Vue): Vue | undefined {
+    private recursiveGetFirstElement(node: Vue): Vue | undefined {
         let firstElement: Vue | undefined;
 
         for (let child of node.$children) {
             if (child.$options.name == 'MDropdownGroup') {
-                firstElement = this.recursiveSearch(child);
+                firstElement = this.recursiveGetFirstElement(child);
                 if (firstElement) {
                     return firstElement;
                 }
