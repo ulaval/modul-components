@@ -25,7 +25,7 @@
         "boundariesSelector": {
             "type": "string"
         },
-        "forceShow": {
+        "forceOpen": {
             "type": "boolean",
             "value": [
                 "true",

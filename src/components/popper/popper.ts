@@ -28,7 +28,7 @@ export class MPopper extends ModulVue {
     @Prop()
     public boundariesSelector: string;
     @Prop({ default: false })
-    public forceShow: boolean;
+    public forceOpen: boolean;
     @Prop({ default: false })
     public arrow: boolean;
     @Prop()
@@ -106,8 +106,8 @@ export class MPopper extends ModulVue {
         this.destroyPopper();
     }
 
-    @Watch('forceShow', { immediate: true })
-    private forceShowChanged(value) {
+    @Watch('forceOpen', { immediate: true })
+    private forceOpenChanged(value) {
         this[value ? 'openPopper' : 'closePopper']();
     }
 
@@ -193,7 +193,7 @@ export class MPopper extends ModulVue {
     }
 
     private togglePopper(): void {
-        if (!this.forceShow && !this.disabled) {
+        if (!this.forceOpen && !this.disabled) {
             if (this.closeOnReferenceClick) {
                 if (this.isPopperOpen) {
                     this.closePopper();
@@ -264,7 +264,7 @@ export class MPopper extends ModulVue {
             this.$el.contains(e.target) ||
             this.referenceElm.contains(e.target) ||
             this.popper.contains(e.target) ||
-            this.forceShow) {
+            this.forceOpen) {
             return;
         }
         this.closePopper();
