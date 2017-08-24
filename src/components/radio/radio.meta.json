@@ -13,14 +13,6 @@
             ],
             "default": 0
         },
-        "inline": {
-            "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
-        },
         "disabled": {
             "type": "boolean",
             "values": [
@@ -29,13 +21,8 @@
             ],
             "default": 1
         },
-        "icon": {
-            "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+        "iconName": {
+            "type": "string"
         },
         "iconPosition": {
             "type": "string",
@@ -44,9 +31,6 @@
                 "right"
             ],
             "default": 0
-        },
-        "iconName": {
-            "type": "string"
         }
     },
     "overview": "radio.overview"

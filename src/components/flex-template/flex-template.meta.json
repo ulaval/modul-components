@@ -2,21 +2,43 @@
     "tag": "m-flex-template",
     "name": "m-flex-template-meta:name",
     "attributes": {
-        "checked": {
+        "paddinTop": {
+            "type": "string"
+        },
+        "menuWidth": {
+            "type": "string"
+        },
+        "minHeight": {
+            "type": "string",
+            "default": "100vh"
+        },
+        "from": {
+            "type": "string",
+            "value": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        },
+        "menuOpen": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
+            "value": [
+                true,
+                false
             ],
             "default": 1
         },
-        "position": {
-            "type": "string",
-            "values": [
-                "right",
-                "left"
+        "smallMenu": {
+            "type": "boolean",
+            "value": [
+                true,
+                false
             ],
             "default": 1
+        },
+        "smallMenuSize": {
+            "type": "string",
+            "default": "44px"
         }
     },
     "overview": "flex-template.overview"
