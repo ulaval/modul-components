@@ -1,25 +1,70 @@
 @import 'abstracts/variables';
 $m-step--icon--size: 44px;
-$m-step--badge--size: 20px;
+$m-step--icon--size-s: 34px;
+$m-step--badge--size: 14px;
+$m-step--badge--size-s: 10px;
 
 .m-step {
-    display: block;
     position: relative;
+    display: block;
     padding-bottom: $m-padding--l;
+
+    &[max-width~="#{$m-screen--max--s - $m-padding *2}"] {
+        &::before {
+            left: #{ ($m-step--icon--size-s / 2) - 1 }; // Magic number
+        }
+
+        .m-step {
+            &__header {
+                &__icon {
+                    height: $m-step--icon--size-s;
+                    width: $m-step--icon--size-s;
+                    font-size: 14px;
+
+                    &-badge {
+                        width: $m-step--badge--size-s;
+                        height: $m-step--badge--size-s;
+                        bottom: $m-step--badge--size-s / -4;
+                        right: $m-step--badge--size-s / -4;
+                        font-size: 10px;
+                    }
+                }
+            }
+
+            &__body {
+                margin-left: $m-step--icon--size-s + $m-margin;
+            }
+        }
+    }
 
     &::before {
         position: absolute;
         height: 100%;
         z-index: 1;
-        width: 1px;
-        background-color: $m-color--grey-dark;
+        width: 2px;
+        background-color: $m-color--grey;
         content: "";
-        left: calc((#{$m-step--icon--size} / 2) - 1px); //magic number
+        left: #{ ($m-step--icon--size / 2) - 1 }; // Magic number
     }
 
-    &.m--is-open {
+    &:not(.m--is-accordion) {
+        &.m--is-open {
+            .m-step__header {
+                cursor: default;
+                outline: none;
+            }
+        }
+
+        &.m--is-close {
+            .m-step__header {
+                user-select: none;
+            }
+        }
+    }
+
+    &.m--is-accordion {
         .m-step__header {
-            cursor: default;
+            user-select: none;
         }
     }
 
@@ -50,27 +95,32 @@ $m-step--badge--size: 20px;
         text-decoration: none;
         margin-bottom: $m-margin--xs;
         cursor: pointer;
-        outline: none;
+
+        &:hover,
+        &:active {
+            outline: none;
+        }
 
         &__icon {
-            border: 2px solid $m-color--grey;
-            height: $m-step--icon--size;
-            width: $m-step--icon--size;
-            font-size: $m-step--badge--size;
-            border-radius: 50%;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            height: $m-step--icon--size;
+            width: $m-step--icon--size;
+            border-radius: 50%;
+            border: 2px solid $m-color--grey;
             background-color: $m-color--white;
-            position: relative;
+            font-size: 18px;
 
             &-badge {
+                position: absolute;
+                z-index: 2;
                 width: $m-step--badge--size;
                 height: $m-step--badge--size;
-                position: absolute;
-                z-index: 3;
-                bottom: calc(#{$m-step--badge--size} / -4);
-                right: calc(#{$m-step--badge--size} / -4);
+                bottom: $m-step--badge--size / -4;
+                right: $m-step--badge--size / -4;
+                font-size: 14px;
             }
         }
 
@@ -84,7 +134,7 @@ $m-step--badge--size: 20px;
             h6 {
                 margin: 0;
                 margin-left: $m-margin;
-                font-size: $m-font-size--h2;
+                font-size: $m-font-size--h3;
                 font-weight: $m-font-weight--bold;
             }
 
@@ -94,8 +144,15 @@ $m-step--badge--size: 20px;
     }
 
     &__body {
-        margin-left: calc(#{$m-step--icon--size} + #{$m-margin});
-
         @include m-transition-accordion;
+
+        margin-left: $m-step--icon--size + $m-margin;
+
+        > :first-child {
+            &,
+            > :first-child {
+                margin-top: 0;
+            }
+        }
     }
 }

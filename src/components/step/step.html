@@ -1,5 +1,14 @@
-<article class="m-step" :class="{'m--is-locked': state=='locked','m--is-in-progress': state=='in-progress','m--is-success': state=='success','m--is-warning': state=='warning','m--is-error': state=='error', 'm--is-open': propOpen, 'm--is-close': !propOpen, 'm--is-last': last}">
-    <header class="m-step__header" @click="openStep" tabindex="0">
+<article class="m-step"
+         :class="{ 'm--is-locked': state=='locked',
+                   'm--is-in-progress': state=='in-progress',
+                   'm--is-success': state=='success',
+                   'm--is-warning': state=='warning',
+                   'm--is-error': state=='error',
+                   'm--is-open': propOpen,
+                   'm--is-close': !propOpen,
+                   'm--is-last': last,
+                   'm--is-accordion': propMode == 'accordion' }">
+    <header class="m-step__header" @keyup.enter="openStep" @click="openStep" ref="header">
         <span class="m-step__header__icon">
             <m-icon :name="iconName"></m-icon>
             <span class="m-step__header__icon-badge">
@@ -13,15 +22,15 @@
 
     <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
         <div class="m-step__body" v-if="propOpen">
-            <slot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis.
+            <slot><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis.
                 Duis mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit
                 commodo arcu et vehicula. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et
                 ultrices posuere cubilia Curae; Donec vehicula condimentum elementum. Sed laoreet est eget lorem tristique
                 condimentum. Vestibulum at odio orci. Duis nisl erat, aliquam non tortor et, dapibus maximus nulla. Mauris
                 lobortis, orci nec lobortis faucibus, nisi justo eleifend erat, sed convallis velit mi non lacus. Pellentesque
-                habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
                 <p>
-                    <a href="#" @click="closeStep">Close step</a>
+                    <m-link mode="button" @click="closeStep">Close step</m-link>
                 </p>
             </slot>
         </div>
