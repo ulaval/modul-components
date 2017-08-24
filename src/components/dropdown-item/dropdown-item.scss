@@ -32,6 +32,7 @@ $m-dropdown--margin: $m-padding--xs !default;
             background: $m-dropdown--color-active;
         }
     }
+
     &.m--is-disabled {
         cursor: not-allowed;
         color: $m-color--grey;
