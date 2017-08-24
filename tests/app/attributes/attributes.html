@@ -1,33 +1,38 @@
-<div>
-    <m-link state="unvisited">
-        <span slot="icon-left"><</span>Back
-    </m-link>
-    <h2>Attributes by component</h2>
-    <ul class="m-u--bullet-list">
-        <li v-for="meta in allMeta">
-            {{meta.tag}}
-            <ul>
-                <li v-for="attribute in getAttributes(meta)">
-                    <span>
+<m-flex-template padding-top="52px">
+    <m-template>
+        <template slot="header">
+            <m-link state="unvisited">
+                <span slot="icon-left"><</span>Home
+            </m-link>
+            <h1>Attributes list</h1>
+        </template>
+        <h2>Attributes by component</h2>
+        <ul class="m-u--bullet-list">
+            <li v-for="meta in allMeta">
+                {{meta.tag}}
+                <ul>
+                    <li v-for="attribute in getAttributes(meta)">
+                        <span>
                     {{attribute}}: <span style="color: blue">{{meta.attributes[attribute].type}}</span>
-                    </span>
-                    <span v-for="(value, index) in meta.attributes[attribute].values" style="margin-left: 8px">
+                        </span>
+                        <span v-for="(value, index) in meta.attributes[attribute].values" style="margin-left: 8px">
                         <i v-if="meta.attributes[attribute].default == index" style="font-weight:400">{{value}}</i>
                         <span v-else>{{value}}</span>
-                    </span>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <h2>Components by attribute</h2>
-    <ul class="m-u--bullet-list">
-        <li v-for="attribute in getAllAttributes()">
-            {{attribute}}
-            <ul>
-                <li v-for="tag in attributeMap[attribute]">
-                    {{tag}}
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
+                        </span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <h2>Components by attribute</h2>
+        <ul class="m-u--bullet-list">
+            <li v-for="attribute in getAllAttributes()">
+                {{attribute}}
+                <ul>
+                    <li v-for="tag in attributeMap[attribute]">
+                        {{tag}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </m-template>
+</m-flex-template>

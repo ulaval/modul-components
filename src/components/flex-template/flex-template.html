@@ -1,0 +1,20 @@
+<div class="m-flex-template" :class="{ 'm--is-menu-open': propOpen, 'm--is-menu-right': fromRight }">
+    <nav class="m-flex-template__nav-container" :style="{ 'padding-top': paddingTop, 'width': valueMenuWidth }" :aria-hidden="!propOpen" v-if="hasNavSlot">
+        <div class="m-flex-template__nav" :style="{ 'width': valueMenuWidth, 'height': 'calc(100% - ' + paddingTop + ')' }">
+            <div class="m-flex-template__nav__content" :style="{ 'width': propMenuWidth }" ref="nav">
+                <slot name="nav"> </slot>
+            </div>
+        </div>
+    </nav>
+
+    <div class="m-flex-template__page-container">
+        <div class="m-flex-template__page" :style="{ 'padding-top': paddingTop, 'min-height': minHeight }">
+            <div class="m-flex-template__page__body">
+                <slot>... Waiting</slot>
+            </div>
+            <footer class="m-flex-template__page__footer" v-if="hasFooterSlot">
+                <slot name="footer"></slot>
+            </footer>
+        </div>
+    </div>
+</div>

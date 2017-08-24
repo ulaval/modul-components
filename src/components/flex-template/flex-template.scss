@@ -1,0 +1,85 @@
+@import 'abstracts/variables';
+
+.m-flex-template {
+    display: flex;
+
+    &.m--is-menu-right {
+        flex-direction: row-reverse;
+
+        .m-flex-template {
+            &__nav {
+                right: 0;
+
+                &__content {
+                    position: absolute;
+                    right: 0;
+                }
+            }
+        }
+    }
+
+    &:not(.m--is-menu-right) {
+        .m-flex-template {
+            &__nav {
+                left: 0;
+            }
+        }
+    }
+
+    &__nav-container,
+    &__nav {
+        transition: 0.45s width ease-in-out;
+        width: 300px;
+        width: 44px;
+    }
+
+    &__nav__content,
+    &__page__body,
+    &__page__footer {
+        > :first-child {
+            &,
+            > :first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &__nav {
+        position: fixed;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        &-container {
+            position: relative;
+            outline: none;
+        }
+    }
+
+    &__page {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+
+        &-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+
+        &__body {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+
+            > :first-child {
+                flex: 1 1 auto;
+            }
+        }
+
+        &__footer {
+            width: 100%;
+        }
+    }
+}

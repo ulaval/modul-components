@@ -1,19 +1,61 @@
 @import 'abstracts/variables';
-$m-template-column-width: 384px;
+$m-template--column-width: 370px;
+$m-template--column-color: $m-color--grey-light;
 
 .m-template {
     position: relative;
-    height: 100%;
     display: flex;
     flex-direction: column;
+
+    &[max-width~="#{ $m-screen--max--m }"] {
+        .m-template {
+            &__column {
+                flex: 0 0 50%;
+            }
+        }
+    }
+
+    &[max-width~="#{ $m-screen--max--s }"] {
+        .m-template {
+            &__wrap {
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__column {
+                flex: none;
+                width: 100%;
+            }
+        }
+    }
+
+    &[min-width~="#{ $m-screen--min--m }"] {
+        .m-template {
+            &__column {
+                flex: 0 0 $m-template--column-width;
+            }
+        }
+    }
+
+    &[min-width~="#{ $m-screen--min--s }"] {
+        .m-template {
+            &__column {
+                max-width: $m-template--column-width;
+            }
+        }
+    }
 
     &__header {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
-        background-color: $m-color--grey-lighter;
+
+        &-container {
+            width: 100%;
+            display: block;
+            background-color: $m-color--grey-lighter;
+        }
 
         > :first-child:not(:only-child):not(.m-link) {
             flex: 2 1 auto;
@@ -46,30 +88,46 @@ $m-template-column-width: 384px;
     }
 
     &__wrap {
-        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        flex: 1 1 auto;
     }
 
     &__body {
-        display: flex;
-        flex-direction: column;
-        flex: 2 1 auto;
+        // display: flex;
+        // flex-direction: column;
+        flex: 1 1 auto;
+        background: $m-color--white;
+
+        &-test {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
 
         &__content {
-            flex: 1 0 auto;
+            flex: 1 1 auto;
+
+            > :first-child {
+                &,
+                > :first-child {
+                    margin-top: 0;
+                }
+            }
         }
 
         &__footer {
-            flex: 0 1 auto;
             width: 100%;
         }
     }
 
     &__column {
-        background-color: $m-color--grey-light;
+        background-color: $m-template--column-color;
     }
 }
 
-@media screen and (max-width: $m-screen--max--s) {
+@media (max-width: $m-screen--max--s) {
     .m-template {
         &__header,
         &__body__content,
@@ -77,30 +135,10 @@ $m-template-column-width: 384px;
         &__column {
             padding: $m-padding;
         }
-
-        &__column {
-            width: 100%;
-        }
     }
 }
 
-@media screen and (min-width: $m-screen--min--s) and (max-width: $m-screen--max--m) {
-    .m-template {
-        &__column {
-            flex: 0 1 50%;
-        }
-    }
-}
-
-@media screen and (min-width: $m-screen--min--m) {
-    .m-template {
-        &__column {
-            flex: 0 1 $m-template-column-width;
-        }
-    }
-}
-
-@media screen and (min-width: $m-screen--min--s) {
+@media (min-width: $m-screen--min--s) {
     .m-template {
         &__body__content,
         &__body__footer,
@@ -110,12 +148,6 @@ $m-template-column-width: 384px;
 
         &__header {
             padding: $m-margin--l $m-padding--l;
-        }
-
-        &__wrap {
-            display: flex;
-            flex-wrap: wrap;
-            flex: 1 0 auto;
         }
     }
 }

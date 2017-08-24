@@ -13,6 +13,7 @@ import DropdownPlugin from './dropdown/dropdown';
 import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DropdownGroupPlugin from './dropdown-group/dropdown-group';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
+import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
 import LimitTextPlugin from './limit-text/limit-text';
@@ -59,6 +60,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DropdownItemPlugin);
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
+        Vue.use(FlexTemplatePlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);
         Vue.use(LimitTextPlugin);

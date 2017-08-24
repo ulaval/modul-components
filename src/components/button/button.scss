@@ -151,7 +151,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         text-align: center;
         width: 100%;
 
-        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        @include m-is-ie {
             display: inline;
         }
     }

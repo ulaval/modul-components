@@ -1,0 +1,23 @@
+{
+    "tag": "m-flex-template",
+    "name": "m-flex-template-meta:name",
+    "attributes": {
+        "checked": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "position": {
+            "type": "string",
+            "values": [
+                "right",
+                "left"
+            ],
+            "default": 1
+        }
+    },
+    "overview": "flex-template.overview"
+}

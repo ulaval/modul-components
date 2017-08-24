@@ -5,24 +5,29 @@
     <title>MODUL Components (test)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        .mtest-header,
-        .mtest-main {
-            padding: 32px;
+        .mtest-header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 2;
+            padding: 16px 32px;
+            background: #fff;
         }
 
-        .mtest-header {
-            border-bottom: 1px solid #ccc;
+        .mtest-header h1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     </style>
 </head>
 
 <body class="m-u--no-margin">
-    <header class="mtest-header">
-        <h1>MODUL <i class="m-u--h4 m-u--no-margin-top">Components</i></h1>
+    <header class="mtest-header m-u--box-shadow--s">
+        <h1 class="m-u--h4 m-u--no-margin-top">MODUL <i class="m-u--font-size--s m-u--no-margin-top">Components</i></h1>
     </header>
-    <main class="mtest-main">
-        <div id="vue">... Waiting</div>
-    </main>
+    <div id="vue">... Waiting</div>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 import Vue, { PluginObject } from 'vue';
+
 import * as enquire from 'enquire.js/dist/enquire';
 
 // MIN-WIDTH
