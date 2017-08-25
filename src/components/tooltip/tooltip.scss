@@ -1,5 +1,17 @@
-@import '../../styles/abstracts/variables';
+@import 'abstracts/variables';
 
 .m-tooltip {
-    color: red;
+    &__icon {
+        color: $m-color--interactive-light;
+        cursor: pointer;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: $m-color--interactive;
+        }
+    }
+
+    &__content {
+        padding: $m-padding;
+    }
 }

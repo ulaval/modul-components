@@ -5,18 +5,38 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './tooltip.html?style=./tooltip.scss';
 import { TOOLTIP_NAME } from '../component-names';
 
+export enum MTooltipMode {
+    ICON = 'icon',
+    LINK = 'link'
+}
+
 @WithRender
 @Component
 export class MTooltip extends Vue {
-    @Prop({ default: 4 })
-    public maxNumberOfLine: number;
+    @Prop({ default: MTooltipMode.ICON })
+    public mode: string;
     @Prop()
     public label: string;
 
     public componentName = TOOLTIP_NAME;
+    private propLabel: string;
 
-    protected mounted(): void {
+    private get propMode(): string {
+        return this.mode != MTooltipMode.ICON && this.label != undefined ? MTooltipMode.LINK : MTooltipMode.ICON;
+    }
 
+    private openTooltip(): void {
+        console.log('test');
+        this.$emit('click');
+    }
+
+    private onOpen(): void {
+        this.openTooltip();
+        this.$emit('open');
+    }
+
+    private onClose(): void {
+        this.$emit('close');
     }
 }
 
