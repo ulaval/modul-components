@@ -6,6 +6,7 @@ $m-template--column-color: $m-color--grey-light;
     position: relative;
     display: flex;
     flex-direction: column;
+    min-width: $m-min-width;
 
     &[max-width~="#{ $m-screen--max--m }"] {
         .m-template {
