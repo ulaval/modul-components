@@ -29,7 +29,6 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     @Prop({ default: false })
     public disabled: boolean;
 
-    public propSelected: boolean = this.selected;
     public propLabel: string = this.label;
     public propKey: string = this.k;
 
@@ -39,7 +38,11 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     public root: Vue;
     public group: Vue | undefined;
 
-    public created() {
+    private internalSelected: boolean = false;
+    // public propSelected: boolean = this.selected;
+
+    public created(): void {
+        this.propSelected = this.selected;
         if (!this.value) {
             console.error(`[label: ${this.label}] La valeur (value) est obligatoire`);
             this.forceHide = true;
@@ -71,8 +74,8 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     }
 
     @Watch('visible')
-    public visibleChanged(value): void {
-        if (value) {
+    public visibleChanged(visible: boolean): void {
+        if (visible) {
             (this.root as MDropdownInterface).nbItemsVisible++;
             if (this.group) {
                 (this.group as MDropdownGroupInterface).nbItemsVisible++;
@@ -83,6 +86,11 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
                 (this.group as MDropdownGroupInterface).nbItemsVisible--;
             }
         }
+    }
+
+    @Watch('selected')
+    public selectedChanged(selected: boolean): void {
+        this.propSelected = selected;
     }
 
     // public get propLabel(): string {
@@ -157,6 +165,14 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
 
     public getElement(): SelectedValue {
         return {'key': this.propKey, 'value': this.value, label: this.propLabel};
+    }
+
+    public get propSelected(): boolean {
+        return this.internalSelected;
+    }
+
+    public set propSelected(selected: boolean) {
+        this.internalSelected = selected != undefined ? selected : false;
     }
 
     private getRootMDropdown(node: Vue): Vue {

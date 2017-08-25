@@ -63,14 +63,12 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public componentName: string = DROPDOWN_NAME;
 
     public selected: Array<SelectedValue> = [];
-    public currentElement: SelectedValue = {'key': undefined, 'value': undefined, 'label': ''};
+    public currentElement: SelectedValue = { 'key': undefined, 'value': undefined, 'label': '' };
     public addAction: true;
     public nbItems: number = 0;
     public nbItemsVisible: number = 0;
     public selectedText: string = '';
-
-    // Copy of prop
-    public propOpen: boolean = false;
+    private internalOpen: boolean = false;
 
     public getElement(key: string): Vue | undefined {
         let element: Vue | undefined;
@@ -87,7 +85,8 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     // private created() {
     // }
 
-    private mounted() {
+    protected mounted(): void {
+        this.propOpen = this.open;
         // Obtenir le premier dropdown-item
         if (this.defaultFirstElement && !this.multiple && !this.disabled) {
             let firstElement: Vue | undefined = this.getFirstElement();
@@ -105,7 +104,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     @Watch('currentElement')
     private currentElementChanged(value): void {
         this.selectedText = '';
-        for (let item of this.selected ) {
+        for (let item of this.selected) {
             if (this.selectedText != '') {
                 this.selectedText += ', ';
             }
@@ -117,6 +116,24 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     @Watch('open')
     private openChanged(value): void {
         this.propOpen = value;
+    }
+
+    private get propOpen(): boolean {
+        return this.internalOpen;
+    }
+
+    private set propOpen(open: boolean) {
+        this.internalOpen = open != undefined ? open : false;
+        this.$nextTick(() => {
+            if (open) {
+                this.$el.style.zIndex = '10';
+                this.setDropdownElementFocus();
+                this.$emit('open');
+            } else {
+                this.$el.style.removeProperty('z-index');
+                this.$emit('close');
+            }
+        });
     }
 
     private get propEditable(): boolean {
@@ -211,19 +228,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
-    private toggleDropdown(value: boolean): void {
-        Vue.nextTick(() => {
-            this.propOpen = value;
-            if (value) {
-                this.$el.style.zIndex = '10';
-                this.setDropdownElementFocus();
-            } else {
-                this.$el.style.removeProperty('z-index');
-            }
-            this.$emit('open', value);
-        });
-    }
-
     private setDropdownElementFocus(): void {
         // if (!this.as<DropdownTemplateMixin>().editable) {
         //     let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
@@ -303,17 +307,20 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     }
 
     private animEnter(el: HTMLElement, done: any): void {
-        let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
-        let transition: string = '0.3s max-height ease';
-        el.style.transition = transition;
-        el.style.webkitTransition = transition;
-        el.style.overflowY = 'hidden';
-        el.style.maxHeight = '0';
-        el.style.width = this.width;
-        setTimeout(() => {
-            el.style.maxHeight = height + 'px';
-            done();
-        }, 0);
+        this.$nextTick(() => {
+            let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
+            let transition: string = '0.3s max-height ease';
+            el.style.transition = transition;
+            el.style.webkitTransition = transition;
+            el.style.overflowY = 'hidden';
+            el.style.maxHeight = '0';
+            el.style.width = this.width;
+            setTimeout(() => {
+                el.style.maxHeight = height + 'px';
+                done();
+            }, 0);
+        });
+
     }
 
     private animAfterEnter(el: HTMLElement): void {
@@ -324,14 +331,16 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     }
 
     private animLeave(el: HTMLElement, done: any): void {
-        let height: number = el.clientHeight;
-        el.style.maxHeight = height + 'px';
-        el.style.overflowY = 'hidden';
-        el.style.maxHeight = '0';
-        setTimeout(() => {
-            el.style.maxHeight = 'none';
-            done();
-        }, 300);
+        this.$nextTick(() => {
+            let height: number = el.clientHeight;
+            el.style.maxHeight = height + 'px';
+            el.style.overflowY = 'hidden';
+            el.style.maxHeight = '0';
+            setTimeout(() => {
+                el.style.maxHeight = 'none';
+                done();
+            }, 300);
+        });
     }
 }
 
