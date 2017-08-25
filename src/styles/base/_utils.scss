@@ -163,18 +163,15 @@
 
         // Webkit scrollbar
         &::-webkit-scrollbar {
-            width: $m-scrollbar-width;
-            height: $m-scrollbar-width;
-            background: transparent;
+            @include m-scrollbar();
         }
 
         &::-webkit-scrollbar-track-piece {
-            background: $m-color--scrollbar--light;
+            @include m-scrollbar-track-piece();
         }
 
-        &::-webkit-scrollbar-thumb:vertical,
-        &::-webkit-scrollbar-thumb:horizontal {
-            background: $m-color--scrollbar;
+        &::-webkit-scrollbar-thumb {
+            @include m-scrollbar-thumb();
         }
     }
 

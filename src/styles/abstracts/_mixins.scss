@@ -1,3 +1,19 @@
+
+
+@mixin m-scrollbar {
+    width: $m-scrollbar-width;
+    height: $m-scrollbar-width;
+    background: transparent;
+}
+
+@mixin m-scrollbar-track-piece {
+    background: $m-color--scrollbar--light;
+}
+
+@mixin m-scrollbar-thumb {
+    background: $m-color--scrollbar;
+}
+
 @mixin m-visually-hidden() {
     position: absolute;
     overflow: hidden;

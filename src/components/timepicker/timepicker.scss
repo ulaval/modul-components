@@ -1,9 +1,16 @@
 @import 'abstracts/variables';
-$m-timepicker-scroll-height: $m-touch-size * 5;
+$m-timepicker--color-hover: $m-color--grey-lightest !default;
+$m-timepicker--color-select: $m-color--grey-light !default;
+$m-timepicker--color-focus: $m-color--interactive-lightest !default;
+$m-timepicker--color-active: $m-color--interactive-lightest !default;
+$m-timepicker--scroll-height: $m-touch-size * 5 !default;
 
 .m-timepicker {
-    width: 210px;
-    height: $m-timepicker-scroll-height + 20 + 32;
+    &__article {
+        width: 210px;
+        height: $m-timepicker--scroll-height + $m-touch-size;
+        background: $m-color--white;
+    }
 
     &__body {
         display: flex;
@@ -16,46 +23,56 @@ $m-timepicker-scroll-height: $m-touch-size * 5;
         margin: 0;
         text-align: center;
         overflow: auto;
-        max-height: $m-timepicker-scroll-height;
+        max-height: $m-timepicker--scroll-height;
         flex: 1 0 auto;
 
         &::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-            background: 0 0;
+            @include m-scrollbar();
 
             &-track-piece {
-                background-color: $m-color--grey-lighter;
+                @include m-scrollbar-track-piece();
             }
 
             &-thumb {
-                background-color: $m-color--grey;
+                @include m-scrollbar-thumb();
             }
         }
-    }
 
-    &__hour,
-    &__minute {
-        cursor: pointer;
-        outline: 0;
-        color: inherit;
-        height: $m-touch-size;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        &__item {
+            transition: 0.3s background ease;
+            outline: 0;
+            color: inherit;
+            height: $m-touch-size;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-        &:hover,
-        &:focus {
-            background-color: $m-color--interactive-lightest;
-        }
+            &:not(.m--is-selected) {
+                cursor: pointer;
 
-        &.m--is-selected {
-            background-color: $m-color--interactive;
+                &:hover {
+                    background: $m-timepicker--color-hover;
+                }
+
+                &:focus {
+                    background: $m-timepicker--color-focus;
+                }
+
+                &:active {
+                    background: $m-timepicker--color-active;
+                }
+            }
+
+            &.m--is-selected {
+                cursor: not-allowed;
+                background: $m-timepicker--color-select;
+            }
         }
     }
 
     &__footer {
-        padding: $m-padding;
+        height: $m-touch-size;
+        padding: $m-margin $m-padding;
         text-align: center;
     }
 }

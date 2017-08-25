@@ -1,35 +1,37 @@
 @import 'abstracts/variables';
-$m-dropdown--color-hover: $m-color--grey-lightest !default;
-$m-dropdown--color-select: $m-color--grey-lighter !default;
-$m-dropdown--color-focus: $m-color--interactive-lightest !default;
-$m-dropdown--color-active: $m-color--interactive-lightest !default;
-$m-dropdown--margin: $m-padding--xs !default;
+$m-dropdown-item--color-hover: $m-color--grey-lightest !default;
+$m-dropdown-item--color-select: $m-color--grey-light !default;
+$m-dropdown-item--color-focus: $m-color--interactive-lightest !default;
+$m-dropdown-item--color-active: $m-color--interactive-lightest !default;
 
 .m-dropdown-item {
-    box-sizing: border-box;
+    transition: 0.3s background ease;
     display: inline-flex;
+    align-items: center;
     width: 100%;
     padding: $m-padding;
     margin: 0;
-    align-items: center;
-    transition: background 0.3s ease;
     color: $m-color--text;
     font-size: $m-font-size--l;
+    word-break: break-all;
     text-decoration: none;
     outline: none;
-    word-break: break-all;
 
     &:not(.m--is-disabled) {
-        &:hover {
-            background: $m-dropdown--color-hover;
-        }
+        &:not(.m--is-selected) {
+            cursor: pointer;
 
-        &:focus {
-            background: $m-dropdown--color-focus;
-        }
+            &:hover {
+                background: $m-dropdown-item--color-hover;
+            }
 
-        &:active {
-            background: $m-dropdown--color-active;
+            &:focus {
+                background: $m-dropdown-item--color-focus;
+            }
+
+            &:active {
+                background: $m-dropdown-item--color-active;
+            }
         }
     }
 
@@ -38,25 +40,12 @@ $m-dropdown--margin: $m-padding--xs !default;
         color: $m-color--grey;
     }
 
-    &:not(.is-selected) {
-        .m-dropdown__list__element-text {
-            cursor: pointer;
-            transition: 0.3s background ease;
-        }
-    }
-
-    &.is-selected {
-        background: $m-dropdown--color-select;
+    &.m--is-selected {
+        background: $m-dropdown-item--color-select;
 
         .m-dropdown__list__element-text {
             cursor: default;
-            background: $m-dropdown--color-select;
-        }
-    }
-
-    &.is-focus {
-        .m-dropdown__list__element-text {
-            background: $m-dropdown--color-hover;
+            background: $m-dropdown-item--color-select;
         }
     }
 }
