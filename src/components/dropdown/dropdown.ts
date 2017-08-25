@@ -62,9 +62,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     public componentName: string = DROPDOWN_NAME;
 
-    // Copy of prop
-    public propOpen: boolean = false;
-
     public selected: Array<SelectedValue> = [];
     public currentElement: SelectedValue = { 'key': undefined, 'value': undefined, 'label': '' };
     public addAction: true;
@@ -84,9 +81,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
         return element;
     }
-
-    // private created() {
-    // }
 
     protected mounted(): void {
         this.propOpen = this.open;

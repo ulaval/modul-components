@@ -96,29 +96,6 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
         this.propSelected = selected;
     }
 
-    // public get propLabel(): string {
-    //     if (!this.label) {
-    //         return this.value.toString();
-    //     } else {
-    //         return this.label;
-    //     }
-    // }
-
-    // public get propKey(): string {
-    //     let key: string #= this.k;
-
-    //     if (!this.k) {
-    //         if (typeof this.value == 'string') {
-    //             key = this.value;
-    //         } else {
-    //             console.log('Une clef (k) est nécessaire quand la valeur (value) est un objet');
-    //             key = 'undefined';
-    //         }
-    //     }
-
-    //     return key;
-    // }
-
     public get visible(): boolean {
         let isVisible: boolean = false;
 
@@ -164,10 +141,6 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
 
             (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
         }
-    }
-
-    public getElement(): SelectedValue {
-        return {'key': this.propKey, 'value': this.value, label: this.propLabel};
     }
 
     public get propSelected(): boolean {
