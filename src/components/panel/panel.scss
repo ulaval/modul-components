@@ -98,6 +98,20 @@ $m-panel--screen--min: 640px;
         &.m--has-padding-top {
             padding-top: $m-padding;
         }
+
+        @include m-scrollbar-ie();
+
+        &::-webkit-scrollbar {
+            @include m-scrollbar();
+
+            &-track-piece {
+                @include m-scrollbar-track-piece();
+            }
+
+            &-thumb {
+                @include m-scrollbar-thumb();
+            }
+        }
     }
 
     &__footer {

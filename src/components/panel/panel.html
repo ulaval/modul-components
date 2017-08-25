@@ -8,7 +8,7 @@
             <slot name="header-right-content"></slot>
         </div>
     </header>
-    <div class="m-panel__body" :class="[{ 'm--no-padding': !hasPaddingBody, 'm--has-padding-top': !hasHeader && hasPaddingBody }, 'm-u--overflow']" v-if="hasDefaultSlot">
+    <div class="m-panel__body" :class="{ 'm--no-padding': !hasPaddingBody, 'm--has-padding-top': !hasHeader && hasPaddingBody }" v-if="hasDefaultSlot">
         <slot></slot>
     </div>
     <footer class="m-panel__footer" :class="{ 'm--no-padding': !hasPaddingFooter }" v-if="hasFooterSlot">

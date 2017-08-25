@@ -20,7 +20,7 @@
 
         &.m--is-default-anim {
             .m-popper__article {
-                transform: translate3d(0, 44px, 0);
+                transform: translate3d(0, $m-margin--l, 0) scale(0.98);
                 opacity: 0;
             }
 

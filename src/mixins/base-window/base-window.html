@@ -27,7 +27,7 @@
                 <header class="m-base-window__header" v-else-if="windowMode == 'dialog'">
                     <h2>Error: This component needs a header slot or title prop.</h2>
                 </header>
-                <div class="m-base-window__body" :class="[{ 'm--no-padding': !padding || !paddingBody }, 'm-u--overflow']" v-if="hasBodySlot">
+                <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasBodySlot">
                     <slot name="body"></slot>
                 </div>
                 <footer class="m-base-window__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot || windowMode == 'modal'">

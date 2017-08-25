@@ -26,6 +26,8 @@ $m-timepicker--scroll-height: $m-touch-size * 5 !default;
         max-height: $m-timepicker--scroll-height;
         flex: 1 0 auto;
 
+        @include m-scrollbar-ie();
+
         &::-webkit-scrollbar {
             @include m-scrollbar();
 
