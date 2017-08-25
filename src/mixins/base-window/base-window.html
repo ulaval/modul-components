@@ -1,4 +1,7 @@
 <div class="m-base-window">
+    <div @click="openDialog" class="m-base-window__button" ref="dialogButton" v-if="hasDefaultSlots">
+        <slot></slot>
+    </div>
     <portal v-if="propOpen" :target-el="'#' + propId">
         <div class="m-base-window__wrap" :class="[{ 'm--is-open': isVisible,
                     'm--is-modal': windowMode == 'modal',
@@ -13,7 +16,8 @@
                 <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="windowMode == 'sidebar' && propFrom == 'bottom'">
                     <m-i18n k="m-base-window:close"></m-i18n>
                 </button>
-                <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }" v-if="showHeader">
+                <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }"
+                    v-if="showHeader">
                     <h2 class="m-base-window__title" v-if="hasTitle">{{ title }}</h2>
                     <slot name="header"></slot>
                     <m-button @click="closeDialog" mode="icon" icon-name="default" class="m-base-window__header__close-button">
@@ -43,7 +47,4 @@
             </article>
         </div>
     </portal>
-    <div @click="openDialog" class="m-base-window__button" ref="dialogButton" v-if="hasDefaultSlots">
-        <slot></slot>
-    </div>
 </div>

@@ -167,9 +167,10 @@ export class BaseWindow extends ModulVue {
             setTimeout(() => {
                 resolve();
                 this.$nextTick(() => {
-                    this.$refs.dialogWrap['setAttribute']('tabindex', '0');
-                    this.$refs.dialogWrap['focus']();
-                    this.$refs.dialogWrap['removeAttribute']('tabindex');
+                    let dialogWrapEl: HTMLElement = this.$refs.dialogWrap as HTMLElement;
+                    dialogWrapEl.setAttribute('tabindex', '0');
+                    dialogWrapEl.focus();
+                    dialogWrapEl.removeAttribute('tabindex');
                 });
             }, this.transitionDuration);
         });
@@ -188,9 +189,10 @@ export class BaseWindow extends ModulVue {
                 resolve();
                 if (this.hasDefaultSlots) {
                     this.$nextTick(() => {
-                        this.$refs.dialogButton['setAttribute']('tabindex', '0');
-                        this.$refs.dialogButton['focus']();
-                        this.$refs.dialogButton['removeAttribute']('tabindex');
+                        let dialogButtonEl: HTMLElement = this.$refs.dialogButton as HTMLElement;
+                        dialogButtonEl.setAttribute('tabindex', '0');
+                        dialogButtonEl.focus();
+                        dialogButtonEl.removeAttribute('tabindex');
                     });
                 }
             }, this.transitionDuration);
