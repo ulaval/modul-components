@@ -51,9 +51,9 @@ export class MPopper extends ModulVue {
 
     @Prop()
     public beforeEnter: any;
-    @Prop({ default: function() { return this.defaultOnEnter; } })
+    @Prop()
     public enter: any;
-    @Prop({ default: function() { return this.defaultOnAfterEnter; } })
+    @Prop()
     public afterEnter: any;
     @Prop()
     public enterCancelled: any;
@@ -89,11 +89,14 @@ export class MPopper extends ModulVue {
 
     private showPopperBody: boolean = true;
 
-    public created(): void {
+    private defaultAnim: boolean = false;
+    private openAnim: boolean = false;
+
+    protected created(): void {
         this.popperOptions = { ...this.popperOptions, ...this.options };
     }
 
-    public mounted(): void {
+    protected mounted(): void {
         if ((this.$slots.body) && (this.$slots.default)) {
             if (!this.as<MediaQueriesMixin>().isScreenMaxS) {
                 this.createPopper();
@@ -102,7 +105,7 @@ export class MPopper extends ModulVue {
         }
     }
 
-    public destroyed() {
+    protected destroyed(): void {
         this.destroyPopper();
     }
 
@@ -118,8 +121,8 @@ export class MPopper extends ModulVue {
             this.doDestroy();
             this.isDialogOpen = this.isPopperOpen;
         } else {
+            this.showPopperBody = true;
             this.$nextTick(() => {
-                this.showPopperBody = true;
                 this.createPopper();
                 this.closePopper();
                 if (this.isDialogOpen) {
@@ -209,9 +212,9 @@ export class MPopper extends ModulVue {
     private toggleDialog(value: boolean): void {
         this.isDialogOpen = value;
         if (value) {
-            this.$emit('show');
+            this.$emit('open');
         } else {
-            this.$emit('hide');
+            this.$emit('close');
         }
     }
 
@@ -226,22 +229,22 @@ export class MPopper extends ModulVue {
             this.isPopperOpen = true;
             clearTimeout(this._timer);
             this.updatePopper();
-            this.$emit('show');
+            this.$emit('open');
         } else if (!this.isDialogOpen && this.as<MediaQueriesMixin>().isScreenMaxS) {
             this.isDialogOpen = true;
             clearTimeout(this._timer);
             this.updatePopper();
-            this.$emit('show');
+            this.$emit('open');
         }
     }
 
     private closePopper(): void {
         if (this.isPopperOpen && !this.as<MediaQueriesMixin>().isScreenMaxS) {
             this.isPopperOpen = false;
-            this.$emit('hide');
+            this.$emit('close');
         } else if (this.isDialogOpen && this.as<MediaQueriesMixin>().isScreenMaxS) {
             this.isDialogOpen = false;
-            this.$emit('hide');
+            this.$emit('close');
         }
     }
 
@@ -310,41 +313,14 @@ export class MPopper extends ModulVue {
         if (typeof (this.enter) === 'function') {
             this.enter(el.children[0], done);
         } else {
-            done();
+            this.defaultAnim = true;
         }
-    }
-
-    private defaultOnEnter(el: HTMLElement, done) {
-        if (!this.fullHeight && !this.fullWidth) {
-            this.fullWidth = el.clientWidth;
-            this.fullHeight = el.clientHeight;
-        }
-        let bodyContent = this.$refs['body']['children'][0] as HTMLElement;
-        bodyContent.style.position = 'absolute';
-        bodyContent.style.width = this.fullWidth + 'px';
-        bodyContent.style.height = this.fullHeight + 'px';
-        el.style.transitionProperty = 'margin-top, opacity, width, height';
-        el.style.transitionDuration = '0.3s';
-        el.style.marginTop = '20px';
-        el.style.opacity = '0';
-        el.style.width = '0';
-        el.style.height = '0';
-        done();
     }
 
     private onAfterEnter(el: HTMLElement): void {
         if (typeof (this.afterEnter) === 'function') {
             this.afterEnter(el.children[0]);
         }
-    }
-
-    private defaultOnAfterEnter(el: HTMLElement) {
-        this.$nextTick(() => {
-            el.style.marginTop = '0';
-            el.style.opacity = '1';
-            el.style.width = this.fullWidth + 'px';
-            el.style.height = this.fullHeight + 'px';
-        });
     }
 
     private onEnterCancelled(el: HTMLElement): void {
@@ -363,16 +339,23 @@ export class MPopper extends ModulVue {
         if (typeof (this.leave) === 'function') {
             this.leave(el.children[0], done);
         } else {
-            done();
+            setTimeout(() => {
+                done();
+            }, 300);
         }
     }
+
+    // private defaultOnLeave(el: HTMLElement, done): void {
+    //     setTimeout(() => {
+    //         done();
+    //     }, 300);
+    // }
 
     private onAfterLeave(el: HTMLElement): void {
         this.animPopperActive = false;
         if (typeof (this.afterLeave) === 'function') {
             this.afterLeave(el.children[0]);
         }
-        this.doDestroy();
     }
 
     private onLeaveCancelled(el: HTMLElement): void {

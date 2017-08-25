@@ -42,20 +42,16 @@ export class MTextField extends ModulVue {
     @Prop({ default: false })
     public forceFocus: boolean;
     @Prop()
-    public error: string;
-    @Prop()
     public placeholder: string;
 
     public componentName: string = TEXT_FIELD_NAME;
 
     private propValue: string = '';
-    private propDefaultText: string;
     private propIconName: string;
     private propIconDescription: string = '';
     private typeIsPassword: boolean = false;
-    private isEmptyValue: boolean = false;
     private isDefaultTextEmpty: boolean = false;
-    private isFocusActive: boolean = false;
+    private focusActive: boolean = false;
     private isUpdating: number;
 
     private iconDescriptionPasswordShow: string = this.$i18n.translate('m-text-field:password-show');
@@ -63,15 +59,11 @@ export class MTextField extends ModulVue {
 
     protected beforeMount(): void {
         this.propValue = this.value;
-        this.propDefaultText = this.defaultText;
-        this.checkHasValue();
-        this.checkHasDefaultText();
     }
 
     @Watch('value')
     private valueChanged(value: string): void {
         this.propValue = this.value;
-        this.checkHasValue();
     }
 
     @Watch('propValue')
@@ -87,28 +79,22 @@ export class MTextField extends ModulVue {
     }
 
     private onFocus(event): void {
-        this.isFocusActive = !this.as<InputStateMixin>().isDisabled;
+        this.focusActive = !this.as<InputStateMixin>().isDisabled;
         if (!this.as<InputStateMixin>().isDisabled && !this.forceFocus) {
-            this.$refs.input['focus']();
-            this.checkHasValue();
-            this.checkHasDefaultText();
+            (this.$refs.input as HTMLElement).focus();
             this.$emit('focus', event, this.propValue);
         }
     }
 
     private onBlur(event): void {
-        this.isFocusActive = this.as<InputStateMixin>().isDisabled;
+        this.focusActive = this.as<InputStateMixin>().isDisabled;
         if (!this.as<InputStateMixin>().isDisabled && !this.forceFocus) {
-            this.checkHasValue();
-            this.checkHasDefaultText();
             this.$emit('blur', event, this.propValue);
         }
     }
 
     private onKeyup(event): void {
         if (!this.as<InputStateMixin>().isDisabled) {
-            this.checkHasValue();
-            this.checkHasDefaultText();
             this.$emit('keyup', event, this.propValue);
         }
     }
@@ -120,9 +106,9 @@ export class MTextField extends ModulVue {
     }
 
     private onClickIcon(event): void {
-        this.isFocusActive = !this.as<InputStateMixin>().isDisabled;
+        this.focusActive = !this.as<InputStateMixin>().isDisabled;
         if (this.editable) {
-            this.$refs.input['focus']();
+            (this.$refs.input as HTMLElement).focus();
         }
         if (this.propType == MTextFieldType.Password) {
             if (this.typeIsPassword) {
@@ -143,26 +129,33 @@ export class MTextField extends ModulVue {
         this.$emit('change', event, this.propValue);
     }
 
-    private checkHasValue(): void {
-        this.isEmptyValue = String(this.propValue).length == 0;
-        this.checkHasDefaultText();
+    private get valueIsEmpty(): boolean {
+        return String(this.propValue).length == 0;
     }
 
-    private checkHasDefaultText() {
-        if (this.propDefaultText == '' || this.propDefaultText == undefined) {
-            this.isDefaultTextEmpty = true;
-        } else if (this.isEmptyValue && this.isFocusActive) {
-            this.isDefaultTextEmpty = false;
+    private get hasDefaultText(): boolean {
+        return this.defaultText == '' || this.defaultText == undefined || !this.valueIsEmpty ? false : true;
+    }
+
+    private get isDefaultTextVisible(): boolean {
+        return this.isFocus;
+    }
+
+    private get isFocus(): boolean {
+        let focus: boolean = this.forceFocus ? true : this.focusActive;
+        if (focus) {
+            this.$emit('focus');
         } else {
-            this.isDefaultTextEmpty = true;
+            this.$emit('blur');
         }
+        return focus;
     }
 
     private setType(type: string): void {
         if (this.editable) {
-            // Set attribute type on input refs
+            // Set attribute type on input ref
             this.$nextTick(() => {
-                this.$refs.input['type'] = type;
+                (this.$refs.input as HTMLElement).setAttribute('type', type);
             });
         }
     }

@@ -8,9 +8,12 @@ $m-text-field--color-disabled: $m-color--grey-darker !default;
 $m-text-field--margin: $m-padding--xs !default;
 
 .m-text-field {
+    position: relative;
     display: inline-flex;
+    flex-direction: column;
     min-width: 80px;
     outline: none;
+    padding-top: 16px; // Magic number
 
     &.m--is-focus {
         &:not(.m--is-disabled) {
@@ -67,7 +70,7 @@ $m-text-field--margin: $m-padding--xs !default;
 
     &.m--has-error {
         &.m--is-focus,
-        &:not(.m--is-empty-value) {
+        &:not(.m--no-value) {
             .m-text-field__label {
                 color: $m-text-field--color-error;
             }
@@ -83,7 +86,7 @@ $m-text-field--margin: $m-padding--xs !default;
 
     &.m--is-valid {
         &.m--is-focus,
-        &:not(.m--is-empty-value) {
+        &:not(.m--no-value) {
             .m-text-field__label {
                 color: $m-text-field--color-valid;
             }
@@ -104,22 +107,12 @@ $m-text-field--margin: $m-padding--xs !default;
         }
     }
 
-    &,
-    &__wrap {
-        position: relative;
-        flex-direction: column;
-    }
-
-    &__wrap {
-        display: flex;
-    }
-
     &:not(.m--is-focus),
     &.m--is-disabled {
-        &.m--is-empty-value {
+        &.m--no-value {
             .m-text-field {
                 &__label {
-                    bottom: $m-text-field--margin;
+                    top: 18px; // Magic number
                     font-size: $m-font-size--l;
                 }
 
@@ -138,20 +131,23 @@ $m-text-field--margin: $m-padding--xs !default;
         }
     }
 
+    &__wrap {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
     &__label {
-        transition-property: color, bottom, font-size;
+        transition-property: color, top, font-size;
         transition-duration: $m-text-field--transiton-duration;
         transition-timing-function: ease;
         position: absolute;
-        bottom: 25px;
+        top: 0;
         z-index: 2;
         width: 100%;
         font-size: $m-font-size--s;
         font-weight: $m-font-weight--bold;
-
-        ~ .m-text-field__input {
-            margin-top: 12px; // Magic number : Space required when the label is present and the focus on text-field is active
-        }
+        white-space: nowrap;
     }
 
     &__input {
@@ -211,9 +207,5 @@ $m-text-field--margin: $m-padding--xs !default;
             stroke-width: 2px;
             font-size: 8px;
         }
-    }
-
-    .m-validation-message {
-        margin-top: $m-text-field--margin;
     }
 }

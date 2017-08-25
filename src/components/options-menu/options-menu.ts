@@ -42,12 +42,12 @@ export class MOptionsMenu extends ModulVue {
         }
     }
 
-    private onShow(): void {
-        this.$emit('show');
+    private onOpen(): void {
+        this.$emit('open');
     }
 
-    private onHide(): void {
-        this.$emit('hide');
+    private onClose(): void {
+        this.$emit('close');
     }
 }
 

@@ -1,24 +1,25 @@
 <div class="m-popper" :class="{ 'm--is-open': animPopperActive }" @mouseover="onMouseOver" @mouseout="onMouseOut">
     <template v-if="!isScreenMaxS">
-        <transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter" @enter-cancelled="onEnterCancelled"
-            @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
-            <div class="m-popper__popper-wrap" :aria-hidden="!isPopperOpen" v-show="!disabled && isPopperOpen">
-                <div class="m-popper__popper" ref="popper">
-                    <div class="m-popper__body" v-if="hasBodySlot" @click="onContentClick" ref="body">
-                        <slot name="body"></slot>
-                    </div>
-                    <div class="m-popper__footer" v-if="hasFooterSlot">
-                        <slot name="footer"></slot>
-                    </div>
-                </div>
-            </div>
-        </transition>
         <div @click="togglePopper" ref="reference" class="m-popper__reference">
             <slot></slot>
         </div>
+        <transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter" @enter-cancelled="onEnterCancelled"
+            @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
+            <div class="m-popper__container" :class="{ 'm--is-default-anim': defaultAnim }" ref="popper" :aria-hidden="!isPopperOpen" v-show="!disabled && isPopperOpen">
+                <article class="m-popper__article">
+                    <div class="m-popper__body" v-if="hasBodySlot" @click="onContentClick" ref="body">
+                        <slot name="body"></slot>
+                    </div>
+                    <footer class="m-popper__footer" v-if="hasFooterSlot">
+                        <slot name="footer"></slot>
+                    </footer>
+                </article>
+            </div>
+        </transition>
     </template>
     <m-sidebar :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter"
         :disabled="disabled" :open="isDialogOpen" @open="toggleDialog(true)" @close="toggleDialog(false)" v-if="isScreenMaxS">
+        <slot></slot>
         <div slot="header" class="m-popper__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>
         </div>
@@ -28,6 +29,5 @@
         <div slot="footer" class="m-popper__footer" v-if="hasFooterSlot">
             <slot name="footer"></slot>
         </div>
-        <slot></slot>
     </m-sidebar>
 </div>
