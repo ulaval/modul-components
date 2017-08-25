@@ -1,0 +1,17 @@
+{
+    "tag": "m-tooltip",
+    "name": "m-tooltip-meta:name",
+    "attributes": {
+        "maxNumberOfLine": {
+            "type": "number",
+            "values": [
+                "4"
+            ],
+            "default": "0"
+        },
+        "label": {
+            "type": "string"
+        }
+    },
+    "overview": "tooltip.overview"
+}
