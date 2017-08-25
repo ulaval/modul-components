@@ -13,8 +13,8 @@
               :enter="animEnter"
               :after-enter="animAfterEnter"
               :leave="animLeave"
-              @show="toggleDropdown(true)"
-              @hide="toggleDropdown(false)"
+              @open="toggleDropdown(true)"
+              @close="toggleDropdown(false)"
               :padding-header="false"
               :padding-body="false">
         <template slot="header" v-if="hasLabel && isScreenMaxS">

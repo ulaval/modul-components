@@ -128,18 +128,18 @@ export class MTimepicker extends ModulVue {
         this.$children[0]['closePopper']();
     }
 
-    private onShow(): void {
+    private onOpen(): void {
         this.scrollToSelection(this.$refs['hours'] as HTMLElement);
         this.scrollToSelection(this.$refs['minutes'] as HTMLElement);
         this.isOpen = true;
-        this.$emit('show');
+        this.$emit('open');
     }
 
-    private onHide(): void {
+    private onClose(): void {
         this.tempHour = this.selectedHour;
         this.tempMinute = this.selectedMinute;
         this.isOpen = false;
-        this.$emit('hide');
+        this.$emit('close');
     }
 
     private scrollToSelection(container: HTMLElement): void {

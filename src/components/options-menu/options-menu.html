@@ -1,4 +1,4 @@
-<m-popper @show="onShow" @hide="onHide" padding="" :options="options" :disabled="disabled">
+<m-popper @open="onOpen" @close="onClose" padding="" :options="options" :disabled="disabled">
     <div class="m-options-menu" slot="body" ref="menu">
         <slot>
             <m-options-menu-item icon-name="default">Option 1</m-options-menu-item>

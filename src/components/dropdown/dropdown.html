@@ -10,8 +10,8 @@
               :leave="animLeave"
               :padding-header="false"
               :padding-body="false"
-              @show="toggleDropdown(true)"
-              @hide="toggleDropdown(false)">
+              @open="openChanged(true)"
+              @close="openChanged(false)">
         <template slot="header" v-if="hasLabel && isScreenMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">
@@ -29,13 +29,15 @@
             ref="mDropdownElements"
             slot="body">
             <slot></slot>
-            <li class="m-dropdown-item">
+
+            <li v-if="nbItems == 0 || (nbItemsVisible == 0 && nbItems != 0)" class="m-dropdown-item">
                 <span class="m-dropdown-item__element-text">
                     <span v-if="nbItemsVisible == 0 && nbItems != 0">{{ propTextNoMatch }}</span>
                     <span v-if="nbItems == 0">{{ propTextNoData }}</span>
                 </span>
             </li>
         </ul>
+
         <template slot="footer" v-if="hasFooterSlot">
             <slot name="footer"></slot>
         </template>
