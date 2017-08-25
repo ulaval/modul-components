@@ -19,8 +19,6 @@ export interface MDropDownItemInterface extends Vue {
 @Component
 export class MDropdownItem extends Vue implements MDropDownItemInterface {
     @Prop()
-    public k: string;
-    @Prop()
     public label: string;
     @Prop()
     public value: any;
@@ -29,10 +27,14 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     @Prop({ default: false })
     public disabled: boolean;
 
+    public componentName: string = DROPDOWN_ITEM_NAME;
+
+    // Copy of prop
     public propSelected: boolean = this.selected;
     public propLabel: string = this.label;
-    public propKey: string = this.k;
+    public propValue: string = this.value;
 
+    public key: string;
     public filter: string = '';
     public forceHide: boolean = false;
     public hasError: boolean = false;
@@ -40,25 +42,30 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     public group: Vue | undefined;
 
     public created() {
-        if (!this.value) {
-            console.error(`[label: ${this.label}] La valeur (value) est obligatoire`);
-            this.forceHide = true;
-            this.hasError = true;
-        } else {
-            if (!this.label) {
-                this.propLabel = this.value.toString();
-            }
+        this.key = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
 
-            if (!this.k) {
-                if (typeof this.value == 'string') {
-                    this.propKey = this.value;
+        if (this.value) {
+            this.propValue = this.value;
+
+            if (!this.label) {
+                if (typeof this.propValue == 'string') {
+                    this.propLabel = this.propValue;
                 } else {
-                    console.error(`[value: ${this.value}, label: ${this.label}] Une clef (k) est nécessaire quand la valeur (value) est un objet`);
-                    this.forceHide = true;
-                    this.hasError = true;
+                    this.propLabel = JSON.stringify(this.propValue);
                 }
             }
+        } else {
+            if (!this.label) {
+                console.error(`DROPDOWN-ITEM: La valeur (value) ou libellé (label) est obligatoire`);
+                //  In V2.0 allow custom template using slot in this case
+                this.forceHide = true;
+                this.hasError = true;
+            } else {
+                this.propLabel = this.label;
+                this.propValue = this.propLabel;
+            }
         }
+
         this.root = this.getRootMDropdown(this.$parent);
         (this.root as MDropdownInterface).nbItems++;
         (this.root as MDropdownInterface).nbItemsVisible++;
@@ -85,29 +92,6 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
         }
     }
 
-    // public get propLabel(): string {
-    //     if (!this.label) {
-    //         return this.value.toString();
-    //     } else {
-    //         return this.label;
-    //     }
-    // }
-
-    // public get propKey(): string {
-    //     let key: string #= this.k;
-
-    //     if (!this.k) {
-    //         if (typeof this.value == 'string') {
-    //             key = this.value;
-    //         } else {
-    //             console.log('Une clef (k) est nécessaire quand la valeur (value) est un objet');
-    //             key = 'undefined';
-    //         }
-    //     }
-
-    //     return key;
-    // }
-
     public get visible(): boolean {
         let isVisible: boolean = false;
 
@@ -127,14 +111,14 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
                 if (this.propSelected) {
                     this.propSelected = (this.root as MDropdownInterface).addAction = false;
                     for (let i = 0; i < array.length; i++) {
-                        if (array[i].key == this.propKey) {
+                        if (array[i].key == this.key) {
                             array.splice(i, 1);
                             break;
                         }
                     }
                 } else {
                     this.propSelected = (this.root as MDropdownInterface).addAction = true;
-                    array.push({ key: this.propKey, value: this.value, label: this.propLabel });
+                    array.push({ key: this.key, value: this.propValue, label: this.propLabel });
                 }
             } else {
                 // Dropdown without multiple selection: Remove first past selection before adding new
@@ -148,15 +132,11 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
                 }
 
                 this.propSelected = (this.root as MDropdownInterface).addAction = true;
-                array.push({ key: this.propKey, value: this.value, label: this.propLabel });
+                array.push({ key: this.key, value: this.propValue, label: this.propLabel });
             }
 
-            (this.root as MDropdownInterface).currentElement = {'key': this.propKey, 'value': this.value, label: this.propLabel};
+            (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
         }
-    }
-
-    public getElement(): SelectedValue {
-        return {'key': this.propKey, 'value': this.value, label: this.propLabel};
     }
 
     private getRootMDropdown(node: Vue): Vue {

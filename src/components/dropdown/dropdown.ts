@@ -62,15 +62,15 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     public componentName: string = DROPDOWN_NAME;
 
+    // Copy of prop
+    public propOpen: boolean = false;
+
     public selected: Array<SelectedValue> = [];
     public currentElement: SelectedValue = {'key': undefined, 'value': undefined, 'label': ''};
     public addAction: true;
     public nbItems: number = 0;
     public nbItemsVisible: number = 0;
     public selectedText: string = '';
-
-    // Copy of prop
-    public propOpen: boolean = false;
 
     public getElement(key: string): Vue | undefined {
         let element: Vue | undefined;
@@ -111,7 +111,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
             }
             this.selectedText += item.label;
         }
-        this.$emit('elementSelected', this.currentElement, this.addAction);
+        this.$emit('elementSelected', this.currentElement.value, this.addAction);
     }
 
     @Watch('open')
@@ -216,21 +216,11 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
             this.propOpen = value;
             if (value) {
                 this.$el.style.zIndex = '10';
-                this.setDropdownElementFocus();
             } else {
                 this.$el.style.removeProperty('z-index');
             }
             this.$emit('open', value);
         });
-    }
-
-    private setDropdownElementFocus(): void {
-        // if (!this.as<DropdownTemplateMixin>().editable) {
-        //     let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
-        //     if (element) {
-        //         element.focus();
-        //     }
-        // }
     }
 
     private keyupReference($event): void {

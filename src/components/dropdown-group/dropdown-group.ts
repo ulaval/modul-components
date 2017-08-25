@@ -14,9 +14,9 @@ export interface MDropdownGroupInterface extends Vue {
 @Component
 export class MDropdownGroup extends Vue implements MDropdownGroupInterface {
     @Prop()
-    public k: string;
-    @Prop()
     public label: string;
+
+    public componentName: string = DROPDOWN_GROUP_NAME;
 
     public nbItemsVisible: number = 0;
 
