@@ -1,10 +1,13 @@
 @import 'abstracts/variables';
+$m-tooltip--width: 320px !default;
+$m-tooltip--max-height: 280px !default;
 
 .m-tooltip {
     &__icon {
         color: $m-color--interactive-light;
         cursor: pointer;
         transition: color 0.3s ease;
+        margin-bottom: $m-margin--s;
 
         &:hover {
             color: $m-color--interactive;
@@ -13,5 +16,49 @@
 
     &__content {
         padding: $m-padding;
+        background: $m-color--interactive-lightest;
+
+        @media (max-width: $m-screen--max--s) {
+            position: relative;
+
+            &::after {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                content: '';
+                height: 1px;
+                background: $m-color--interactive;
+            }
+        }
+
+        @media (min-width: $m-screen--min--s) {
+            width: $m-tooltip--width;
+            max-height: $m-tooltip--max-height;
+            overflow-x: hidden;
+            overflow-y: auto;
+            border: 1px solid $m-color--interactive;
+        }
+
+        @include m-scrollbar-ie();
+
+        &::-webkit-scrollbar {
+            @include m-scrollbar();
+
+            &-track-piece {
+                @include m-scrollbar-track-piece();
+            }
+
+            &-thumb {
+                @include m-scrollbar-thumb();
+            }
+        }
+
+        > :first-child {
+            &,
+            > :first-child {
+                margin-top: 0;
+            }
+        }
     }
 }
