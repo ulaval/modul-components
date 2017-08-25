@@ -27,7 +27,6 @@
 
 @mixin m-transition-accordion() {
     transition: 0.3s max-height ease;
-    overflow: hidden;
     height: auto;
 }
 

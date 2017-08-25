@@ -13,6 +13,7 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
         if (this.isAnimActive) {
             let height: number = el.clientHeight;
             el.style.maxHeight = '0';
+            el.style.overflow = 'hidden';
             setTimeout(() => {
                 el.style.maxHeight = height + 'px';
                 done();
@@ -25,7 +26,8 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
     private animAfterEnter(el: HTMLElement): void {
         if (this.isAnimActive) {
             setTimeout(() => {
-                el.style.maxHeight = 'none';
+                el.style.removeProperty('max-height');
+                el.style.removeProperty('overflow');
             }, 300);
         }
     }
@@ -34,6 +36,7 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
         if (this.isAnimActive) {
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';
+            el.style.overflow = 'hidden';
             setTimeout(() => {
                 el.style.maxHeight = '0';
             }, 0);
