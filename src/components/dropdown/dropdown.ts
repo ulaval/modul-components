@@ -99,7 +99,13 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     @Watch('selected')
     private selectedChanged(value): void {
-        this.$emit('change', this.selected, this.addAction);
+        let values: any[] = [];
+
+        for (let selectedValue of this.selected) {
+            values.push(selectedValue.value);
+        }
+
+        this.$emit('change', values, this.addAction);
     }
 
     @Watch('currentElement')
