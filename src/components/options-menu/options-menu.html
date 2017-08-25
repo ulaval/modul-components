@@ -1,4 +1,8 @@
 <m-popper @open="onOpen" @close="onClose" padding="" :options="options" :disabled="disabled">
+    <m-button mode="icon" icon-name="options">
+        <m-i18n k="m-options-menu:open" v-if="!isOpen"></m-i18n>
+        <m-i18n k="m-options-menu:close" v-if="isOpen"></m-i18n>
+    </m-button>
     <div class="m-options-menu" slot="body" ref="menu">
         <slot>
             <m-options-menu-item icon-name="default">Option 1</m-options-menu-item>
@@ -6,8 +10,4 @@
             <m-options-menu-item>Option 3</m-options-menu-item>
         </slot>
     </div>
-    <m-button mode="icon" icon-name="options">
-        <m-i18n k="m-options-menu:open" v-if="!isOpen"></m-i18n>
-        <m-i18n k="m-options-menu:close" v-if="isOpen"></m-i18n>
-    </m-button>
 </m-popper>

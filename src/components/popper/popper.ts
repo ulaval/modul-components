@@ -39,7 +39,6 @@ export class MPopper extends ModulVue {
     public closeOnReferenceClick: boolean;
     @Prop({ default: BaseWindowMode.Sidebar })
     public mobileMode: BaseWindowMode;
-
     @Prop({ default: true })
     public padding: boolean;
     @Prop({ default: true })
@@ -48,7 +47,6 @@ export class MPopper extends ModulVue {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
-
     @Prop()
     public beforeEnter: any;
     @Prop()
@@ -69,7 +67,6 @@ export class MPopper extends ModulVue {
     public componentName: string = POPPER_NAME;
     public referenceElm: HTMLElement;
     public popperJS;
-    public isPopperOpen: boolean = false;
     public animPopperActive: boolean = false;
     public currentPlacement: string = '';
     public popperOptions: Popper.PopperOptions = {
@@ -85,12 +82,9 @@ export class MPopper extends ModulVue {
     private fullWidth: number = 0;
     private fullHeight: number = 0;
 
+    private isPopperOpen: boolean = false;
     private isDialogOpen: boolean = false;
-
-    private showPopperBody: boolean = true;
-
     private defaultAnim: boolean = false;
-    private openAnim: boolean = false;
 
     protected created(): void {
         this.popperOptions = { ...this.popperOptions, ...this.options };
@@ -117,20 +111,16 @@ export class MPopper extends ModulVue {
     @Watch('isScreenMaxS')
     private isScreenMaxSChanged(value) {
         if (value) {
-            this.showPopperBody = false;
             this.doDestroy();
             this.isDialogOpen = this.isPopperOpen;
         } else {
-            this.showPopperBody = true;
-            this.$nextTick(() => {
-                this.createPopper();
-                this.closePopper();
-                if (this.isDialogOpen) {
-                    setTimeout(() => {
-                        this.openPopper();
-                    }, 2);
-                }
-            });
+            this.createPopper();
+            this.closePopper();
+            if (this.isDialogOpen) {
+                setTimeout(() => {
+                    this.openPopper();
+                }, 2);
+            }
         }
     }
 
@@ -286,16 +276,12 @@ export class MPopper extends ModulVue {
         return this.open;
     }
 
-    // private get propMobileMode(): BaseWindowMode {
-    //     return this.mobileMode == BaseWindowMode.Primary || this.mobileMode == BaseWindowMode.Secondary ? this.mobileMode : BaseWindowMode.Panel;
-    // }
-
     private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;
     }
 
     private get hasBodySlot(): boolean {
-        return !!this.$slots.body && this.as<MediaQueriesMixin>().isScreenMaxS ? true : this.showPopperBody;
+        return !!this.$slots.body && this.as<MediaQueriesMixin>().isScreenMaxS ? true : !this.as<MediaQueriesMixin>().isScreenMaxS;
     }
 
     private get hasFooterSlot(): boolean {
@@ -344,12 +330,6 @@ export class MPopper extends ModulVue {
             }, 300);
         }
     }
-
-    // private defaultOnLeave(el: HTMLElement, done): void {
-    //     setTimeout(() => {
-    //         done();
-    //     }, 300);
-    // }
 
     private onAfterLeave(el: HTMLElement): void {
         this.animPopperActive = false;
