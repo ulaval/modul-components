@@ -145,6 +145,7 @@ export class MTextField extends ModulVue {
 
     private checkHasValue(): void {
         this.isEmptyValue = String(this.propValue).length == 0;
+        this.checkHasDefaultText();
     }
 
     private checkHasDefaultText() {

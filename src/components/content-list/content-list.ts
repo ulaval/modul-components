@@ -26,9 +26,7 @@ export class MContentList extends ModulVue implements MContentListInterface {
 
     @Watch('deletedElement')
     private deletedChildElement(value): void {
-        console.log('parent', this.deletedElement);
         this.$emit('contentListDeletedElement', this.deletedElement);
-
     }
 }
 

@@ -22,7 +22,6 @@ export class MContentListItem extends ModulVue {
 
     private deleteItem() {
         this.visible = false;
-        console.log('delete item', this.index);
         (this.$parent as MContentListInterface).deletedElement = this.index;
     }
 
