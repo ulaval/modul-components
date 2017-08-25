@@ -62,6 +62,9 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     public componentName: string = DROPDOWN_NAME;
 
+    // Copy of prop
+    public propOpen: boolean = false;
+
     public selected: Array<SelectedValue> = [];
     public currentElement: SelectedValue = { 'key': undefined, 'value': undefined, 'label': '' };
     public addAction: true;
@@ -98,7 +101,13 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     @Watch('selected')
     private selectedChanged(value): void {
-        this.$emit('change', this.selected, this.addAction);
+        let values: any[] = [];
+
+        for (let selectedValue of this.selected) {
+            values.push(selectedValue.value);
+        }
+
+        this.$emit('change', values, this.addAction);
     }
 
     @Watch('currentElement')
@@ -110,7 +119,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
             }
             this.selectedText += item.label;
         }
-        this.$emit('elementSelected', this.currentElement, this.addAction);
+        this.$emit('elementSelected', this.currentElement.value, this.addAction);
     }
 
     @Watch('open')
