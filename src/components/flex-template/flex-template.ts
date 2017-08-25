@@ -36,10 +36,9 @@ export class MFlexTemplate extends Vue {
     }
 
     private get propMenuOpen(): boolean {
-        if (this.menuOpen) {
-            this.valueMenuWidth = this.smallMenu ? this.smallMenuSize : this.propMenuWidth;
-
-            if (this.hasNavSlot) {
+        if (this.hasNavSlot) {
+            if (this.menuOpen) {
+                this.valueMenuWidth = this.smallMenu ? this.smallMenuSize : this.propMenuWidth;
                 this.$nextTick(() => {
                     let navEl: HTMLElement = this.$refs.nav as HTMLElement;
                     navEl.setAttribute('tabindex', '0');
@@ -47,27 +46,28 @@ export class MFlexTemplate extends Vue {
                         navEl.focus();
                     }
                 });
-            }
+                this.$emit('menuOpen');
+            } else {
+                this.valueMenuWidth = '0';
 
-            this.$emit('menuOpen');
-        } else {
-            this.valueMenuWidth = '0';
-            if (this.hasNavSlot) {
                 this.$nextTick(() => {
                     let navEl: HTMLElement = this.$refs.nav as HTMLElement;
                     if (navEl.hasAttribute('tabindex')) {
                         navEl.removeAttribute('tabindex');
                     }
                 });
+
+                this.$emit('menuClose');
             }
-            this.$emit('MenuClose');
+
+            this.$nextTick(() => {
+                this.menuOpenCount++;
+            });
+
+            return this.menuOpen;
         }
 
-        this.$nextTick(() => {
-            this.menuOpenCount++;
-        });
-
-        return this.menuOpen;
+        return false;
     }
 
     private get propSmallMenu(): boolean {

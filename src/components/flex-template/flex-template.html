@@ -1,13 +1,13 @@
 <div class="m-flex-template" :class="{ 'm--is-menu-open': propMenuOpen, 'm--is-menu-right': fromRight }">
-    <nav class="m-flex-template__nav-container" :style="{ 'padding-top': paddingTop, 'width': valueMenuWidth }" :aria-hidden="!propMenuOpen" v-if="hasNavSlot">
+    <div class="m-flex-template__nav-container" :style="{ 'padding-top': paddingTop, 'width': valueMenuWidth }" :aria-hidden="!propMenuOpen" v-if="hasNavSlot">
         <div class="m-flex-template__nav" :style="{ 'width': valueMenuWidth, 'height': 'calc(100% - ' + paddingTop + ')' }">
             <div class="m-flex-template__nav__content" :style="{ 'width': propMenuWidth }" ref="nav">
                 <slot name="nav"> </slot>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <div class="m-flex-template__page-container">
+    <div class="m-flex-template__page-container" :style="{ 'width': 'calc(100% - ' + valueMenuWidth + ')' }">
         <div class="m-flex-template__page" :style="{ 'padding-top': paddingTop, 'min-height': minHeight }">
             <div class="m-flex-template__page__body">
                 <slot>... Waiting</slot>
