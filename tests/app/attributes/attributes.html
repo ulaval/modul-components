@@ -1,13 +1,13 @@
 <m-flex-template padding-top="52px">
     <m-template>
         <template slot="header">
-            <m-link state="unvisited">
+            <m-link :unvisited="true">
                 <span slot="icon-left"><</span>Menu
             </m-link>
             <h1>Attributes list</h1>
         </template>
         <h2>Attributes by component</h2>
-        <ul class="m-u--bullet-list">
+        <m-bullet-list class="m-u--margin-top">
             <li v-for="meta in allMeta">
                 {{meta.tag}}
                 <ul>
@@ -22,9 +22,9 @@
                     </li>
                 </ul>
             </li>
-        </ul>
+        </m-bullet-list>
         <h2>Components by attribute</h2>
-        <ul class="m-u--bullet-list">
+        <m-bullet-list class="m-u--margin-top">
             <li v-for="attribute in getAllAttributes()">
                 {{attribute}}
                 <ul>
@@ -33,6 +33,6 @@
                     </li>
                 </ul>
             </li>
-        </ul>
+        </m-bullet-list>
     </m-template>
 </m-flex-template>
