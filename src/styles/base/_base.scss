@@ -2,12 +2,14 @@
 *::before,
 *::after {
     box-sizing: inherit;
+    outline-color: $m-color--interactive-light;
 }
 
 html,
 body {
     height: 100%;
-    outline-color: $m-color--interactive-light;
+    min-width: $m-min-width;
+    overflow: hidden;
 }
 
 html {
@@ -20,7 +22,6 @@ body {
     font-style: normal;
     font-size: $m-font-size;
     line-height: $m-line-height;
-    min-width: $m-min-width;
     margin: 0;
 }
 
