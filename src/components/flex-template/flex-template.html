@@ -1,13 +1,16 @@
-<div class="m-flex-template" :class="{ 'm--is-menu-open': propMenuOpen, 'm--is-menu-right': fromRight }">
-    <div class="m-flex-template__nav-container" :style="{ 'padding-top': paddingTop, 'width': valueMenuWidth }" :aria-hidden="!propMenuOpen" v-if="hasNavSlot">
-        <div class="m-flex-template__nav" :style="{ 'width': valueMenuWidth, 'height': 'calc(100% - ' + paddingTop + ')' }">
-            <div class="m-flex-template__nav__content" :style="{ 'width': propMenuWidth }" ref="nav">
-                <slot name="nav"> </slot>
+<div class="m-flex-template" :class="{ 'm--is-menu-open': animOpen, 'm--is-menu-right': fromRight }">
+    <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
+        <div class="m-flex-template__nav-container" :style="{ 'padding-top': paddingTop }" :aria-hidden="!propMenuOpen"
+            v-if="hasNavSlot & propMenuOpen" ref="navContainer" >
+            <div class="m-flex-template__nav" ref="nav" :style="{ 'height': 'calc(100% - ' + paddingTop + ')' }">
+                <div class="m-flex-template__nav__content" :style="{ 'width': menuWidth }" ref="navContent" tabindex="0">
+                    <slot name="nav"> </slot>
+                </div>
             </div>
         </div>
-    </div>
+    </transition>
 
-    <div class="m-flex-template__page-container" :style="{ 'width': 'calc(100% - ' + valueMenuWidth + ')' }">
+    <div class="m-flex-template__page-container" ref="pageContainer">
         <div class="m-flex-template__page" :style="{ 'padding-top': paddingTop, 'min-height': minHeight }">
             <div class="m-flex-template__page__body">
                 <slot>... Waiting</slot>

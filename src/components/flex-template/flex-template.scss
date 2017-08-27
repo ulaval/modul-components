@@ -1,19 +1,10 @@
 @import 'abstracts/variables';
 
 .m-flex-template {
-    display: flex;
-
     &.m--is-menu-right {
-        flex-direction: row-reverse;
-
         .m-flex-template {
             &__nav {
                 right: 0;
-
-                &__content {
-                    position: absolute;
-                    right: 0;
-                }
             }
         }
     }
@@ -27,10 +18,8 @@
     }
 
     &__nav-container,
-    &__nav {
+    &__page-container {
         transition: 0.45s width ease-in-out;
-        width: 300px;
-        width: 44px;
     }
 
     &__nav__content,
@@ -45,46 +34,128 @@
     }
 
     &__nav {
-        position: fixed;
-        overflow-y: auto;
-
-        &-container {
-            position: relative;
+        &__content {
+            outline: none;
         }
 
         &__content {
-            height: 100%;
-            outline: none;
+            background: $m-color--white;
+
+            &,
+            > :first-child {
+                height: 100%;
+                overflow-y: auto;
+
+                @include m-scrollbar-ie();
+
+                &::-webkit-scrollbar {
+                    @include m-scrollbar();
+
+                    &-track-piece {
+                        @include m-scrollbar-track-piece();
+                    }
+
+                    &-thumb {
+                        @include m-scrollbar-thumb();
+                    }
+                }
+            }
         }
     }
 
     &__page {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: $m-min-width;
-        min-height: 100vh;
-
         &-container {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            flex: 1 1 auto;
-        }
-
-        &__body {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            flex: 1 1 auto;
-
-            > :first-child {
-                flex: 1 1 auto;
-            }
+            width: 100%;
         }
 
         &__footer {
             width: 100%;
+        }
+    }
+
+    &[max-width~="#{ $m-bp--max--s }"] {
+        &:not(.m--is-menu-open) {
+            &.m--is-menu-right {
+                .m-flex-template__nav {
+                    transform: translate3d(100%, 0, 0);
+                }
+            }
+
+            &:not(.m--is-menu-right) {
+                .m-flex-template__nav {
+                    transform: translate3d(-100%, 0, 0);
+                }
+            }
+        }
+
+        .m-flex-template {
+            &__nav {
+                transition: 0.45s transform ease;
+                position: fixed;
+
+                &-container {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    z-index: 4;
+                }
+            }
+
+            &__page {
+                &-container {
+                    z-index: 1;
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+
+    &[min-width~="#{ $m-bp--min--s }"] {
+        display: flex;
+
+        &.m--is-menu-right {
+            flex-direction: row-reverse;
+
+            .m-flex-template {
+                &__nav {
+                    &__content {
+                        position: absolute;
+                        right: 0;
+                    }
+                }
+            }
+        }
+
+        .m-flex-template {
+            &__nav {
+                position: fixed;
+
+                &-container {
+                    position: relative;
+                    width: 0;
+                }
+            }
+
+            &__page {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+
+                &-container,
+                &__body {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1 1 auto;
+                }
+
+                &__body {
+                    > :first-child {
+                        flex: 1 1 auto;
+                    }
+                }
+            }
         }
     }
 }

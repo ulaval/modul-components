@@ -1,9 +1,10 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './flex-template.html?style=./flex-template.scss';
 import { FLEX_TEMPLATE_NAME } from '../component-names';
+import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
 
 export enum MFlexTemplateFrom {
     Left = 'left',
@@ -11,8 +12,10 @@ export enum MFlexTemplateFrom {
 }
 
 @WithRender
-@Component
-export class MFlexTemplate extends Vue {
+@Component({
+    mixins: [ElementQueries]
+})
+export class MFlexTemplate extends ModulVue {
     @Prop()
     public paddingTop: string;
     @Prop({ default: '300px' })
@@ -31,54 +34,45 @@ export class MFlexTemplate extends Vue {
     private valueMenuWidth: string;
     private menuOpenCount: number = 0;
 
-    private get fromRight(): boolean {
-        return this.from == MFlexTemplateFrom.Right;
+    private animOpen: boolean = false;
+
+    @Watch('isEqMaxS')
+    private isEqMaxSChanged(value: boolean): void {
+        if (this.propMenuOpen) {
+            this.animEnter(this.$el, this.doneAnim);
+        }
+    }
+
+    private doneAnim(): void {
+        return;
     }
 
     private get propMenuOpen(): boolean {
         if (this.hasNavSlot) {
-            if (this.menuOpen) {
-                this.valueMenuWidth = this.smallMenu ? this.smallMenuSize : this.propMenuWidth;
-                this.$nextTick(() => {
-                    let navEl: HTMLElement = this.$refs.nav as HTMLElement;
-                    navEl.setAttribute('tabindex', '0');
-                    if (this.menuOpenCount != 0) {
-                        navEl.focus();
-                    }
-                });
-                this.$emit('menuOpen');
-            } else {
-                this.valueMenuWidth = '0';
-
-                this.$nextTick(() => {
-                    let navEl: HTMLElement = this.$refs.nav as HTMLElement;
-                    if (navEl.hasAttribute('tabindex')) {
-                        navEl.removeAttribute('tabindex');
-                    }
-                });
-
-                this.$emit('menuClose');
-            }
-
-            this.$nextTick(() => {
-                this.menuOpenCount++;
-            });
-
             return this.menuOpen;
         }
-
         return false;
     }
 
     private get propSmallMenu(): boolean {
-        if (this.smallMenu) {
-            this.valueMenuWidth = this.smallMenuSize;
+        if (this.hasNavSlot) {
+            return this.smallMenu;
         }
-        return this.smallMenu;
+        return false;
     }
 
-    private get propMenuWidth(): string {
-        return this.menuWidth;
+    private get fromRight(): boolean {
+        return this.from == MFlexTemplateFrom.Right;
+    }
+
+    private get menuOpenWidth(): string {
+        if (this.hasNavSlot) {
+            if (this.smallMenu) {
+                return this.smallMenuSize;
+            }
+            return this.menuWidth;
+        }
+        return '';
     }
 
     private get hasNavSlot(): boolean {
@@ -87,6 +81,47 @@ export class MFlexTemplate extends Vue {
 
     private get hasFooterSlot(): boolean {
         return !!this.$slots.footer;
+    }
+
+    private animEnter(el: HTMLElement, done): void {
+        if (!this.as<ElementQueriesMixin>().isEqMaxS) {
+            let navContainer: HTMLElement = this.$refs.navContainer as HTMLElement;
+            let pageContainer: HTMLElement = this.$refs.pageContainer as HTMLElement;
+            setTimeout(() => {
+                this.animOpen = true;
+                navContainer.style.width = this.menuOpenWidth;
+                pageContainer.style.width = 'calc(100% - ' + this.menuOpenWidth + ')';
+                setTimeout(() => {
+                    done();
+                }, 450);
+            }, 10);
+        } else {
+            setTimeout(() => {
+                this.animOpen = true;
+            }, 10);
+            done();
+        }
+    }
+
+    private animAfterEnter(el: HTMLElement): void {
+        let navContent: HTMLElement = this.$refs.navContent as HTMLElement;
+        if (this.menuOpenCount != 0) {
+            navContent.focus();
+        }
+    }
+
+    private animLeave(el: HTMLElement, done): void {
+        this.animOpen = false;
+        if (!this.as<ElementQueriesMixin>().isEqMaxS) {
+            let navContainer: HTMLElement = this.$refs.navContainer as HTMLElement;
+            let pageContainer: HTMLElement = this.$refs.pageContainer as HTMLElement;
+            navContainer.style.removeProperty('width');
+            pageContainer.style.removeProperty('width');
+        }
+
+        setTimeout(() => {
+            done();
+        }, 450);
     }
 }
 
