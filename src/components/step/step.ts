@@ -31,7 +31,7 @@ export class MStep extends ModulVue {
     public state: MStepState;
     @Prop({ default: MStepMode.Default })
     public mode: MStepMode;
-    @Prop()
+    @Prop({ default: false })
     public open: boolean;
     @Prop({ default: false })
     public required: boolean;
@@ -52,7 +52,6 @@ export class MStep extends ModulVue {
 
     protected mounted(): void {
         this.propOpen = this.open;
-        this.propMode = this.mode;
         ElementQueries.init();
     }
 
@@ -61,16 +60,10 @@ export class MStep extends ModulVue {
             this.as<TransitionAccordionMixin>().isAnimActive = true;
             this.propOpen = !this.propOpen;
             event.currentTarget.blur();
-            if (this.propOpen) {
-                this.$emit('openStep', event);
-            } else {
-                this.$emit('closeStep', event);
-            }
         } else {
             if (!this.propOpen) {
                 this.as<TransitionAccordionMixin>().isAnimActive = true;
                 this.propOpen = true;
-                this.$emit('openStep', event);
                 event.currentTarget.blur();
             }
         }
@@ -111,28 +104,31 @@ export class MStep extends ModulVue {
 
     private set propOpen(open: boolean) {
         this.internalOpen = open != undefined ? open : false;
+        if (this.internalOpen) {
+            this.$emit('open');
+        } else {
+            this.$emit('close');
+        }
         let refHeader: HTMLElement = this.$refs.header as HTMLElement;
         if (this.propMode == MStepMode.Accordion) {
             if (!refHeader.hasAttribute('tabindex')) {
                 refHeader.setAttribute('tabindex', '0');
             }
         } else {
-            if (this.internalOpen) {
+            if (this.propOpen) {
                 if (refHeader.hasAttribute('tabindex')) {
                     refHeader.removeAttribute('tabindex');
                 }
             } else {
-                refHeader.setAttribute('tabindex', '0');
+                if (!refHeader.hasAttribute('tabindex')) {
+                    refHeader.setAttribute('tabindex', '0');
+                }
             }
         }
     }
 
-    private get propMode(): MStepMode | string {
-        return this.internalMode;
-    }
-
-    private set propMode(mode: MStepMode | string) {
-        this.internalMode = mode == undefined || mode == '' ? MStepMode.Default : mode;
+    private get propMode(): MStepMode {
+        return this.mode == MStepMode.Accordion ? this.mode : MStepMode.Default;
     }
 }
 
