@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
@@ -48,7 +47,6 @@ export class MAccordion extends ModulVue {
     public componentName: string = ACCORDION_NAME;
     public propAspect: string = MAccordionAspect.Regular;
     public propOpen: boolean = false;
-    public eventBus: Vue = new Vue();
     public id: number;
 
     private propIconPosition: string = MAccordionIconPosition.Right;
@@ -138,7 +136,6 @@ export class MAccordion extends ModulVue {
         this.as<TransitionAccordionMixin>().isAnimActive = true;
         this.propOpen = !this.propOpen;
         this.$refs.accordionHeader['blur']();
-        this.eventBus.$emit('click', this.id, this.propOpen);
         this.$emit('click', this.id, this.propOpen);
     }
 
