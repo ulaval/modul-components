@@ -117,8 +117,8 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     }
 
     @Watch('open')
-    private openChanged(value): void {
-        this.propOpen = value;
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
     }
 
     private get propOpen(): boolean {
@@ -160,7 +160,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     }
 
     private get propWidth(): string {
-        if (this.as<MediaQueriesMixin>().isScreenMaxS) {
+        if (this.as<MediaQueriesMixin>().isMqMaxS) {
             return '100%';
         } else {
             return this.width;

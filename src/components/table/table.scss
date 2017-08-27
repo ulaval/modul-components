@@ -16,7 +16,7 @@
         padding: $m-padding;
         background-color: $m-color--grey-lighter;
 
-        @media screen and (max-width: $m-screen--max--s) {
+        @media screen and (max-width: $m-bp--max--s) {
             flex-direction: column;
             align-items: flex-start;
         }

@@ -35,7 +35,7 @@ export class MSelect extends ModulVue {
 
     public componentName: string = SELECT_NAME;
 
-    public isScreenMaxS: boolean = false;
+    public isMqMaxS: boolean = false;
 
     // Copy of prop
     public propSelectedElement: any;
@@ -74,8 +74,8 @@ export class MSelect extends ModulVue {
         this.propOpen = value;
     }
 
-    @Watch('isScreenMaxS')
-    private isScreenMaxSChanged(value: boolean): void {
+    @Watch('isMqMaxS')
+    private isMqMaxSChanged(value: boolean): void {
         if (!value) {
             this.$nextTick(() => {
                 this.adjustWidth();

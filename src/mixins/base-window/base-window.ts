@@ -128,7 +128,7 @@ export class BaseWindow extends ModulVue {
         let result: number;
         switch (this.windowMode) {
             case BaseWindowMode.Dialog:
-                result = this.as<MediaQueriesMixin>().isScreenMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
+                result = this.as<MediaQueriesMixin>().isMqMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
                 break;
             case BaseWindowMode.Sidebar:
                 result = TRANSITION_DURATION_LONG;

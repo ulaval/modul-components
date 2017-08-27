@@ -17,7 +17,7 @@
               @close="toggleDropdown(false)"
               :padding-header="false"
               :padding-body="false">
-        <template slot="header" v-if="hasLabel && isScreenMaxS">
+        <template slot="header" v-if="hasLabel && isMqMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">
                 <input type="text"

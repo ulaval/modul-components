@@ -92,7 +92,7 @@ export class MPopper extends ModulVue {
 
     protected mounted(): void {
         if ((this.$slots.body) && (this.$slots.default)) {
-            if (!this.as<MediaQueriesMixin>().isScreenMaxS) {
+            if (!this.as<MediaQueriesMixin>().isMqMaxS) {
                 this.createPopper();
             }
             on(document, 'click', this.handleDocumentClick);
@@ -108,8 +108,8 @@ export class MPopper extends ModulVue {
         this[value ? 'openPopper' : 'closePopper']();
     }
 
-    @Watch('isScreenMaxS')
-    private isScreenMaxSChanged(value) {
+    @Watch('isMqMaxS')
+    private isMqMaxSChanged(value) {
         if (value) {
             this.doDestroy();
             this.isDialogOpen = this.isPopperOpen;
@@ -215,12 +215,12 @@ export class MPopper extends ModulVue {
     }
 
     private openPopper(): void {
-        if (!this.isPopperOpen && !this.as<MediaQueriesMixin>().isScreenMaxS) {
+        if (!this.isPopperOpen && !this.as<MediaQueriesMixin>().isMqMaxS) {
             this.isPopperOpen = true;
             clearTimeout(this._timer);
             this.updatePopper();
             this.$emit('open');
-        } else if (!this.isDialogOpen && this.as<MediaQueriesMixin>().isScreenMaxS) {
+        } else if (!this.isDialogOpen && this.as<MediaQueriesMixin>().isMqMaxS) {
             this.isDialogOpen = true;
             clearTimeout(this._timer);
             this.updatePopper();
@@ -229,23 +229,23 @@ export class MPopper extends ModulVue {
     }
 
     private closePopper(): void {
-        if (this.isPopperOpen && !this.as<MediaQueriesMixin>().isScreenMaxS) {
+        if (this.isPopperOpen && !this.as<MediaQueriesMixin>().isMqMaxS) {
             this.isPopperOpen = false;
             this.$emit('close');
-        } else if (this.isDialogOpen && this.as<MediaQueriesMixin>().isScreenMaxS) {
+        } else if (this.isDialogOpen && this.as<MediaQueriesMixin>().isMqMaxS) {
             this.isDialogOpen = false;
             this.$emit('close');
         }
     }
 
     private onMouseOver(): void {
-        if (this.trigger == TRIGGER_HOVER && !this.as<MediaQueriesMixin>().isScreenMaxS) {
+        if (this.trigger == TRIGGER_HOVER && !this.as<MediaQueriesMixin>().isMqMaxS) {
             this.openPopper();
         }
     }
 
     private onMouseOut(): void {
-        if (this.trigger == TRIGGER_HOVER && !this.as<MediaQueriesMixin>().isScreenMaxS) {
+        if (this.trigger == TRIGGER_HOVER && !this.as<MediaQueriesMixin>().isMqMaxS) {
             this._timer = window.setTimeout(() => {
                 this.closePopper();
             }, 10);
@@ -264,7 +264,7 @@ export class MPopper extends ModulVue {
     }
 
     private get propOpen(): boolean {
-        if (!this.as<MediaQueriesMixin>().isScreenMaxS) {
+        if (!this.as<MediaQueriesMixin>().isMqMaxS) {
             if (this.open) {
                 this.openPopper();
             } else {
@@ -281,7 +281,7 @@ export class MPopper extends ModulVue {
     }
 
     private get hasBodySlot(): boolean {
-        return !!this.$slots.body && this.as<MediaQueriesMixin>().isScreenMaxS ? true : !this.as<MediaQueriesMixin>().isScreenMaxS;
+        return !!this.$slots.body && this.as<MediaQueriesMixin>().isMqMaxS ? true : !this.as<MediaQueriesMixin>().isMqMaxS;
     }
 
     private get hasFooterSlot(): boolean {

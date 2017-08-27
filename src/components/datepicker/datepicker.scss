@@ -4,11 +4,11 @@ $m-datepicker--width: 300px !default;
 .m-datepicker {
     background: $m-color--white;
 
-    @media (max-width: $m-screen--max--s) {
+    @media (max-width: $m-bp--max--s) {
         width: 100%;
     }
 
-    @media (min-width: $m-screen--min--s) {
+    @media (min-width: $m-bp--min--s) {
         width: $m-datepicker--width;
     }
 

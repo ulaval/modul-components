@@ -12,7 +12,7 @@
               :padding-body="false"
               @open="openChanged(true)"
               @close="openChanged(false)">
-        <template slot="header" v-if="hasLabel && isScreenMaxS">
+        <template slot="header" v-if="hasLabel && isMqMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">
                 <input type="text"

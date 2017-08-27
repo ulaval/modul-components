@@ -1,5 +1,5 @@
 <div class="m-popper" :class="{ 'm--is-open': animPopperActive }" @mouseover="onMouseOver" @mouseout="onMouseOut">
-    <template v-if="!isScreenMaxS">
+    <template v-if="!isMqMaxS">
         <div @click="togglePopper" ref="reference" class="m-popper__reference">
             <slot></slot>
         </div>
@@ -18,7 +18,7 @@
         </transition>
     </template>
     <m-sidebar :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter"
-        :disabled="disabled" :open="isDialogOpen" @open="toggleDialog(true)" @close="toggleDialog(false)" v-if="isScreenMaxS">
+        :disabled="disabled" :open="isDialogOpen" @open="toggleDialog(true)" @close="toggleDialog(false)" v-if="isMqMaxS">
         <slot></slot>
         <div slot="header" class="m-popper__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>

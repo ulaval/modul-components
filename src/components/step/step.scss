@@ -9,7 +9,7 @@ $m-step--badge--size-s: 10px;
     display: block;
     padding-bottom: $m-padding--l;
 
-    &[max-width~="#{$m-screen--max--s - $m-padding *2}"] {
+    &[max-width~="#{$m-bp--max--s - $m-padding *2}"] {
         &::before {
             left: #{ ($m-step--icon--size-s / 2) - 1 }; // Magic number
         }
@@ -27,6 +27,18 @@ $m-step--badge--size-s: 10px;
                         bottom: $m-step--badge--size-s / -4;
                         right: $m-step--badge--size-s / -4;
                         font-size: 10px;
+                    }
+                }
+
+                &__title {
+                    &,
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6 {
+                        font-size: $m-font-size--h3;
                     }
                 }
             }
@@ -125,6 +137,8 @@ $m-step--badge--size-s: 10px;
         }
 
         &__title {
+            flex: 1;
+
             &,
             h1,
             h2,
@@ -136,10 +150,8 @@ $m-step--badge--size-s: 10px;
                 margin-left: $m-margin;
                 font-size: $m-font-size--h2;
                 font-weight: $m-font-weight--bold;
+                line-height: 1.1;
             }
-
-            flex: 1;
-            font-size: $m-font-size--h3;
         }
     }
 

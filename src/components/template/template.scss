@@ -8,7 +8,7 @@ $m-template--column-color: $m-color--grey-light;
     flex-direction: column;
     min-width: $m-min-width;
 
-    &[max-width~="#{ $m-screen--max--m }"] {
+    &[max-width~="#{ $m-bp--max--m }"] {
         .m-template {
             &__column {
                 flex: 0 0 50%;
@@ -16,7 +16,7 @@ $m-template--column-color: $m-color--grey-light;
         }
     }
 
-    &[max-width~="#{ $m-screen--max--s }"] {
+    &[max-width~="#{ $m-bp--max--s }"] {
         .m-template {
             &__wrap {
                 display: flex;
@@ -30,7 +30,7 @@ $m-template--column-color: $m-color--grey-light;
         }
     }
 
-    &[min-width~="#{ $m-screen--min--m }"] {
+    &[min-width~="#{ $m-bp--min--m }"] {
         .m-template {
             &__column {
                 flex: 0 0 $m-template--column-width;
@@ -38,7 +38,7 @@ $m-template--column-color: $m-color--grey-light;
         }
     }
 
-    &[min-width~="#{ $m-screen--min--s }"] {
+    &[min-width~="#{ $m-bp--min--s }"] {
         .m-template {
             &__column {
                 max-width: $m-template--column-width;
@@ -131,7 +131,7 @@ $m-template--column-color: $m-color--grey-light;
     }
 }
 
-@media (max-width: $m-screen--max--s) {
+@media (max-width: $m-bp--max--s) {
     .m-template {
         &__header,
         &__body__content,
@@ -141,7 +141,7 @@ $m-template--column-color: $m-color--grey-light;
     }
 }
 
-@media (min-width: $m-screen--min--s) {
+@media (min-width: $m-bp--min--s) {
     .m-template {
         &__body__content,
         &__column {

@@ -1,6 +1,27 @@
 import Vue, { PluginObject } from 'vue';
-
 import * as enquire from 'enquire.js/dist/enquire';
+
+export enum MediaQueriesBpMin {
+    XL = 'screen and (min-width:1600px)',
+    L = 'screen and (min-width:1200px)',
+    M = 'screen and (min-width:1024px)',
+    S = 'screen and (min-width:768px)',
+    XS = 'screen and (min-width:480px)'
+}
+
+export enum MediaQueriesBpMax {
+    XL = 'screen and (max-width:1599px)',
+    L = 'screen and (max-width:1199px)',
+    M = 'screen and (max-width:1023px)',
+    S = 'screen and (max-width:767px)',
+    XS = 'screen and (max-width:479px)'
+}
+
+export enum MediaQueriesBp {
+    L = 'screen and (min-width:1024px) and (max-width:1599px)',
+    M = 'screen and (min-width:768px) and (max-width:1023px)',
+    S = 'screen and (min-width:480px) and (max-width:767px)'
+}
 
 // MIN-WIDTH
 
@@ -54,21 +75,21 @@ export class MediaQueries {
     private eventBus: Vue = new Vue();
 
     constructor() {
-        this.registerEnquire(SCREEN_MIN_W_XS);
-        this.registerEnquire(SCREEN_MIN_W_S);
-        this.registerEnquire(SCREEN_MIN_W_M);
-        this.registerEnquire(SCREEN_MIN_W_L);
+        this.registerEnquire(MediaQueriesBpMin.XL);
+        this.registerEnquire(MediaQueriesBpMin.L);
+        this.registerEnquire(MediaQueriesBpMin.M);
+        this.registerEnquire(MediaQueriesBpMin.S);
+        this.registerEnquire(MediaQueriesBpMin.XS);
 
-        this.registerEnquire(SCREEN_MAX_W_S);
-        this.registerEnquire(SCREEN_MAX_W_M);
-        this.registerEnquire(SCREEN_MAX_W_L);
-        this.registerEnquire(SCREEN_MAX_W_XL);
+        this.registerEnquire(MediaQueriesBpMax.XL);
+        this.registerEnquire(MediaQueriesBpMax.L);
+        this.registerEnquire(MediaQueriesBpMax.M);
+        this.registerEnquire(MediaQueriesBpMax.S);
+        this.registerEnquire(MediaQueriesBpMax.XS);
 
-        this.registerEnquire(SCREEN_W_XS);
-        this.registerEnquire(SCREEN_W_S);
-        this.registerEnquire(SCREEN_W_M);
-        this.registerEnquire(SCREEN_W_L);
-        this.registerEnquire(SCREEN_W_XL);
+        this.registerEnquire(MediaQueriesBp.L);
+        this.registerEnquire(MediaQueriesBp.M);
+        this.registerEnquire(MediaQueriesBp.S);
     }
 
     public register(breakingPoint: string, match: () => void, unmatch?: () => void): void {
