@@ -29,10 +29,9 @@
             ref="mDropdownElements"
             slot="body">
             <slot></slot>
-
-            <li v-if="nbItems == 0 || (nbItemsVisible == 0 && nbItems != 0)" class="m-dropdown-item">
+            <li class="m-dropdown-item" v-if="nbItems == 0 || nbItemsVisible == 0">
                 <span class="m-dropdown-item__element-text">
-                    <span v-if="nbItemsVisible == 0 && nbItems != 0">{{ propTextNoMatch }}</span>
+                    <span v-if="nbItems != 0">{{ propTextNoMatch }}</span>
                     <span v-if="nbItems == 0">{{ propTextNoData }}</span>
                 </span>
             </li>
