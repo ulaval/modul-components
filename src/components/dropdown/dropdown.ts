@@ -43,6 +43,8 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public label: string;
     @Prop()
     public defaultText: string;
+    @Prop()
+    public defaultValue: any;
     @Prop({ default: false })
     public open: boolean;
     @Prop({ default: false })
@@ -99,6 +101,10 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
         for (let selectedValue of this.selected) {
             values.push(selectedValue.value);
+        }
+
+        if (value.length == 0 && this.defaultValue) {
+            values.push(this.defaultValue);
         }
 
         this.$emit('change', values, this.addAction);
