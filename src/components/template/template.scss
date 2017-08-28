@@ -27,6 +27,15 @@ $m-template--column-color: $m-color--grey-light;
                 flex: none;
                 width: 100%;
             }
+
+            &__body {
+                flex: 1 1 auto;
+
+                &-container {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
         }
     }
 
@@ -103,7 +112,6 @@ $m-template--column-color: $m-color--grey-light;
     &__wrap {
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
         flex: 1 1 auto;
     }
 
@@ -113,6 +121,7 @@ $m-template--column-color: $m-color--grey-light;
         height: 100%;
 
         &-container {
+            width: 100%;
             flex: 1 1 auto;
             background: $m-color--white;
         }

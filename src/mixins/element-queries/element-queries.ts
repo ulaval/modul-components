@@ -54,13 +54,14 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
     public isEqM: boolean = false;
     public isEqL: boolean = false;
 
-    private resize: ResizeSensor;
+    private resizeSensor: ResizeSensor;
 
     protected mounted(): void {
-        this.resize = new ResizeSensor(this.$el, () => this.resizeElement(this.$el));
+        this.resizeElement(this.$el);
+        this.resizeSensor = new ResizeSensor(this.$el, () => this.resizeElement(this.$el));
     }
     protected destroyed(): void {
-        this.resize = undefined;
+        this.resizeSensor.detach();
     }
 
     private resizeElement(el: HTMLElement): void {

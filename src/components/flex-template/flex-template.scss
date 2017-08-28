@@ -1,28 +1,85 @@
 @import 'abstracts/variables';
 
 .m-flex-template {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+
     &.m--is-menu-right {
         .m-flex-template {
-            &__nav {
-                right: 0;
+            &__menu {
+                &,
+                &-container {
+                    right: 0;
+                }
+            }
+        }
+    }
+
+    &.m--is-header-fixe {
+        .m-flex-template {
+            &__header {
+                position: fixed;
+                z-index: 2;
+            }
+        }
+    }
+
+    &.m--is-header-fixe,
+    &.m--no-header {
+        &.m--is-menu-fixe {
+            .m-flex-template {
+                &__menu {
+                    position: fixed;
+                }
+            }
+        }
+    }
+
+    &.m--is-menu-fixe-fake {
+        .m-flex-template {
+            &__menu {
+                transition: 0.3s top ease;
+                max-height: 100vh;
+            }
+        }
+    }
+
+    &.m--is-header-hidden {
+        .m-flex-template {
+            &__header {
+                transform: translate3d(0, -100%, 0);
+            }
+        }
+    }
+
+    &.m--has-menu-anim {
+        .m-flex-template {
+            &__menu-container,
+            &__page-container {
+                transition: 0.45s width ease-in-out;
             }
         }
     }
 
     &:not(.m--is-menu-right) {
         .m-flex-template {
-            &__nav {
+            &__menu {
                 left: 0;
             }
         }
     }
 
-    &__nav-container,
-    &__page-container {
-        transition: 0.45s width ease-in-out;
+    &__header {
+        transition: 0.3s transform ease;
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 100%;
+        background: $m-color--white;
     }
 
-    &__nav__content,
+    &__menu__content,
     &__page__body,
     &__page__footer {
         > :first-child {
@@ -33,7 +90,11 @@
         }
     }
 
-    &__nav {
+    &__menu {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+
         &__content {
             outline: none;
         }
@@ -64,8 +125,26 @@
     }
 
     &__page {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        &-container,
+        &__body {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+
         &-container {
             width: 100%;
+        }
+
+        &__body {
+            > :first-child {
+                flex: 1 1 auto;
+            }
         }
 
         &__footer {
@@ -76,22 +155,31 @@
     &[max-width~="#{ $m-bp--max--s }"] {
         &:not(.m--is-menu-open) {
             &.m--is-menu-right {
-                .m-flex-template__nav {
+                .m-flex-template__menu {
                     transform: translate3d(100%, 0, 0);
                 }
             }
 
             &:not(.m--is-menu-right) {
-                .m-flex-template__nav {
+                .m-flex-template__menu {
                     transform: translate3d(-100%, 0, 0);
                 }
             }
         }
 
+        &.m--has-menu-anim {
+            .m-flex-template {
+                &__menu {
+                    transition: 0.45s transform ease;
+                }
+            }
+        }
+
         .m-flex-template {
-            &__nav {
-                transition: 0.45s transform ease;
+            &__menu {
                 position: fixed;
+                top: 0;
+                bottom: 0;
 
                 &-container {
                     position: absolute;
@@ -111,13 +199,13 @@
     }
 
     &[min-width~="#{ $m-bp--min--s }"] {
-        display: flex;
-
         &.m--is-menu-right {
-            flex-direction: row-reverse;
-
             .m-flex-template {
-                &__nav {
+                &__corps {
+                    flex-direction: row-reverse;
+                }
+
+                &__menu {
                     &__content {
                         position: absolute;
                         right: 0;
@@ -127,33 +215,14 @@
         }
 
         .m-flex-template {
-            &__nav {
-                position: fixed;
+            &__corps {
+                display: flex;
+            }
 
+            &__menu {
                 &-container {
                     position: relative;
                     width: 0;
-                }
-            }
-
-            &__page {
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-
-                &-container,
-                &__body {
-                    position: relative;
-                    display: flex;
-                    flex-direction: column;
-                    flex: 1 1 auto;
-                }
-
-                &__body {
-                    > :first-child {
-                        flex: 1 1 auto;
-                    }
                 }
             }
         }
