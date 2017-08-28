@@ -1,5 +1,6 @@
 {
     "m-tooltip": {
-        "open": "Ouvrir l'info-bulle"
+        "open": "Ouvrir l'infobulle",
+        "close": "Fermer l'infobulle"
     }
 }

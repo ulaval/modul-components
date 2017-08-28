@@ -17,6 +17,8 @@ export class MTooltip extends Vue {
     public mode: string;
     @Prop()
     public label: string;
+    @Prop({ default: true })
+    public closeButton: boolean;
 
     public componentName = TOOLTIP_NAME;
     private propLabel: string;
@@ -36,8 +38,13 @@ export class MTooltip extends Vue {
     }
 
     private onClose(): void {
-        this.$emit('close');
+        this.$emit('close', event);
     }
+
+    private close(): void {
+        this.$children[0]['closePopper']();
+    }
+
 }
 
 const TooltipPlugin: PluginObject<any> = {
