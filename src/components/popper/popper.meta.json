@@ -104,6 +104,14 @@
                 "false"
             ],
             "default": 0
+        },
+        "shadow": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": "0"
         }
     },
     "overview": "popper.overview"

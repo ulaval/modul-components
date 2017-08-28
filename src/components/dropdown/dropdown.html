@@ -21,7 +21,7 @@
                        v-model="textElement"
                        ref="researchInput">
                 <m-button mode="icon" icon-name="default" @click="focusOnResearchInput">
-                    <m-i18n i18n-key="m-dropdown:search"></m-i18n>
+                    <m-i18n k="m-dropdown:search"></m-i18n>
                 </m-button>
             </div>
         </template>
@@ -29,10 +29,9 @@
             ref="mDropdownElements"
             slot="body">
             <slot></slot>
-
-            <li v-if="nbItems == 0 || (nbItemsVisible == 0 && nbItems != 0)" class="m-dropdown-item">
+            <li class="m-dropdown-item" v-if="nbItems == 0 || nbItemsVisible == 0">
                 <span class="m-dropdown-item__element-text">
-                    <span v-if="nbItemsVisible == 0 && nbItems != 0">{{ propTextNoMatch }}</span>
+                    <span v-if="nbItems != 0">{{ propTextNoMatch }}</span>
                     <span v-if="nbItems == 0">{{ propTextNoData }}</span>
                 </span>
             </li>

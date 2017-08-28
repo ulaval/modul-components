@@ -63,6 +63,8 @@ export class MPopper extends ModulVue {
     public afterLeave: any;
     @Prop()
     public leaveCancelled: any;
+    @Prop({ default: true })
+    public shadow: boolean;
 
     public componentName: string = POPPER_NAME;
     public referenceElm: HTMLElement;
@@ -342,6 +344,10 @@ export class MPopper extends ModulVue {
         if (typeof (this.leaveCancelled) === 'function') {
             this.leaveCancelled(el.children[0]);
         }
+    }
+
+    private get propShadow(): boolean {
+        return !this.shadow;
     }
 }
 

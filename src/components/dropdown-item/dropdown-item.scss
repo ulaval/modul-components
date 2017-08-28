@@ -6,8 +6,7 @@ $m-dropdown-item--color-active: $m-color--interactive-lightest !default;
 
 .m-dropdown-item {
     transition: 0.3s background ease;
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
     width: 100%;
     padding: $m-padding;
     margin: 0;

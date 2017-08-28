@@ -6,7 +6,7 @@
         <transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter" @enter-cancelled="onEnterCancelled"
             @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
             <div class="m-popper__container" :class="{ 'm--is-default-anim': defaultAnim }" ref="popper" :aria-hidden="!isPopperOpen" v-show="!disabled && isPopperOpen">
-                <article class="m-popper__article">
+                <article class="m-popper__article" :class="{ 'm--no-shadow': propShadow }">
                     <div class="m-popper__body" v-if="hasBodySlot" @click="onContentClick" ref="body">
                         <slot name="body"></slot>
                     </div>

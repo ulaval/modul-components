@@ -1,14 +1,18 @@
-<m-popper class="m-tooltip" @show="onOpen" @hide="onClose" padding="" :options="options" :disabled="disabled">
+<m-popper class="m-tooltip" @show="onOpen" @hide="onClose" padding="" :options="options" :disabled="disabled" :shadow="false">
     <m-icon class="m-tooltip__icon" name="information" v-if="propMode == 'icon'"></m-icon>
     <m-link class="m-tooltip__label" mode="button" v-if="propMode != 'icon'">{{ label }}</m-link>
-    <div slot="body" class="m-tooltip__content">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <m-bullet-list title="Id enim eu ullamco" class="m-u--margin-top">
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-            <li>Sunt ad eu eiusmod esse mollit consectetur quis voluptate adipisicing irure.</li>
-            <li>Sunt proident elit elit irure do aliqua enim ex Lorem tempor velit fugiat proident amet.</li>
-            <li>Aute consectetur esse sint voluptate.</li>
-        </m-bullet-list>
-        <p>Consequat officia ipsum elit cupidatat reprehenderit veniam culpa consequat occaecat veniam labore eiusmod.</p>
+    <div slot="body" class="m-tooltip__content" :class="{'m--has-close-button': closeButton}">
+        <m-button mode="icon" icon-name="default" icon-size="10px" @click="close" class="m-tooltip__content__close-button" v-if="closeButton">
+            <m-i18n k="m-tooltip:close"></m-i18n>
+        </m-button>
+        <slot>
+            <p style="margin-top:0;">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <m-bullet-list title="Id enim eu ullamco" class="m-u--margin-top">
+                <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
+                <li>Sunt ad eu eiusmod esse mollit consectetur quis voluptate irure.</li>
+                <li>Aute consectetur esse sint voluptate.</li>
+            </m-bullet-list>
+            <p>Consequat officia ipsum elit cupidatat reprehe ccaecat veniam labore eiusmod.</p>
+        </slot>
     </div>
 </m-popper>

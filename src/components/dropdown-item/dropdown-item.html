@@ -1,17 +1,10 @@
 <li class="m-dropdown-item"
     :class="{ 'm--is-selected': propSelected, 'm--is-disabled': disabled }"
     :disabled="disabled"
-    v-if="visible"
+    v-show="visible"
     @click="onSelectElement($event, element)"
     :data-key="key">
-        <span class="m-dropdown-item__element-text" >{{ propLabel }}</span>
-    <!-- <slot></slot> -->
+    <slot><span class="m-dropdown-item__element-text">{{ propLabel }}</span></slot>
 
-    <!-- <a href="#"
-       class="m-dropdown-item__element-text"
-       :data-index="index"
-       @click.prevent
-       @keyup="keyupItem($event, index)">
-
-    </a> -->
+    <!-- @keyup="keyupItem($event, index)" -->
 </li>
