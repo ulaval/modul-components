@@ -1,0 +1,408 @@
+{
+	/*
+	 // Place your snippets for HTML here. Each snippet is defined under a snippet name and has a prefix, body and 
+	 // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	 // $1, $2 for tab stops, ${id} and ${id:label} and ${1:label} for variables. Variables with the same id are connected.
+	 // Example:
+	 "Print to console": {
+		"prefix": "log",
+		"body": [
+			"console.log('$1');",
+			"$2"
+		],
+		"description": "Log output to console"
+	}
+*/
+	"template": {
+		"prefix": "template",
+		"body": [
+			"<template>$1</template>",
+			"$2"
+		],
+		"description": "Create a html template tag"
+	},
+	"accordion": {
+		"prefix": "m-accordion",
+		"body": [
+			"<m-accordion>$1</m-accordion>",
+			"$2"
+		],
+		"description": "Create a modul accordion tag"
+	},
+	"accordion-group": {
+		"prefix": "m-accordion-group",
+		"body": [
+			"<m-accordion-group>$1</m-accordion-group>",
+			"$2"
+		],
+		"description": "Create a modul accordion-group tag"
+	},
+	"bullet-list": {
+		"prefix": "m-bullet-list",
+		"body": [
+			"<m-bullet-list>$1</m-bullet-list>",
+			"$2"
+		],
+		"description": "Create a modul bullet-list tag"
+	},
+	"content-list": {
+		"prefix": "m-content-list",
+		"body": [
+			"<m-content-list>$1</m-content-list>",
+			"$2"
+		],
+		"description": "Create a modul content-list tag"
+	},
+	"content-list-item": {
+		"prefix": "m-content-list-item",
+		"body": [
+			"<m-content-list-item>$1</m-content-list-item>",
+			"$2"
+		],
+		"description": "Create a modul content-list-item tag"
+	},
+	"button": {
+		"prefix": "m-button",
+		"body": [
+			"<m-button>$1</m-button>",
+			"$2"
+		],
+		"description": "Create a modul button tag"
+	},
+	"button-group": {
+		"prefix": "m-button-group",
+		"body": [
+			"<m-button-group>$1</m-button-group>",
+			"$2"
+		],
+		"description": "Create a modul button-group tag"
+	},
+	"checkbox": {
+		"prefix": "m-checkbox",
+		"body": [
+			"<m-checkbox>$1</m-checkbox>",
+			"$2"
+		],
+		"description": "Create a modul checkbox tag"
+	},
+	"datepicker": {
+		"prefix": "m-datepicker",
+		"body": [
+			"<m-datepicker>$1</m-datepicker>",
+			"$2"
+		],
+		"description": "Create a modul datepicker tag"
+	},
+	"dialog": {
+		"prefix": "m-dialog",
+		"body": [
+			"<m-dialog>$1</m-dialog>",
+			"$2"
+		],
+		"description": "Create a modul dialog tag"
+	},
+	"dropdown": {
+		"prefix": "m-dropdown",
+		"body": [
+			"<m-dropdown>$1</m-dropdown>",
+			"$2"
+		],
+		"description": "Create a modul dropdown tag"
+	},
+	"dropdown-item": {
+		"prefix": "m-dropdown-item",
+		"body": [
+			"<m-dropdown-item>$1</m-dropdown-item>",
+			"$2"
+		],
+		"description": "Create a modul dropdown-item tag"
+	},
+	"dropdown-group": {
+		"prefix": "m-dropdown-group",
+		"body": [
+			"<m-dropdown-group>$1</m-dropdown-group>",
+			"$2"
+		],
+		"description": "Create a modul dropdown-group tag"
+	},
+	"dynamic-template": {
+		"prefix": "m-dynamic-template",
+		"body": [
+			"<m-dynamic-template>$1</m-dynamic-template>",
+			"$2"
+		],
+		"description": "Create a modul dynamic-template tag"
+	},
+	"flex-template": {
+		"prefix": "m-flex-template",
+		"body": [
+			"<m-flex-template>$1</m-flex-template>",
+			"$2"
+		],
+		"description": "Create a modul flex-template tag"
+	},
+	"i18n": {
+		"prefix": "m-i18n",
+		"body": [
+			"<m-i18n>$1</m-i18n>",
+			"$2"
+		],
+		"description": "Create a modul i18n tag"
+	},
+	"icon": {
+		"prefix": "m-icon",
+		"body": [
+			"<m-icon>$1</m-icon>",
+			"$2"
+		],
+		"description": "Create a modul icon tag"
+	},
+	"limit-text": {
+		"prefix": "m-limit-text",
+		"body": [
+			"<m-limit-text>$1</m-limit-text>",
+			"$2"
+		],
+		"description": "Create a modul limit-text tag"
+	},
+	"link": {
+		"prefix": "m-link",
+		"body": [
+			"<m-link>$1</m-link>",
+			"$2"
+		],
+		"description": "Create a modul link tag"
+	},
+	"message": {
+		"prefix": "m-message",
+		"body": [
+			"<m-message>$1</m-message>",
+			"$2"
+		],
+		"description": "Create a modul message tag"
+	},
+	"modal": {
+		"prefix": "m-modal",
+		"body": [
+			"<m-modal>$1</m-modal>",
+			"$2"
+		],
+		"description": "Create a modul modal tag"
+	},
+	"nav-bar": {
+		"prefix": "m-nav-bar",
+		"body": [
+			"<m-nav-bar>$1</m-nav-bar>",
+			"$2"
+		],
+		"description": "Create a modul nav-bar tag"
+	},
+	"options-menu": {
+		"prefix": "m-options-menu",
+		"body": [
+			"<m-options-menu>$1</m-options-menu>",
+			"$2"
+		],
+		"description": "Create a modul options-menu tag"
+	},
+	"options-menu-item": {
+		"prefix": "m-options-menu-item",
+		"body": [
+			"<m-options-menu-item>$1</m-options-menu-item>",
+			"$2"
+		],
+		"description": "Create a modul options-menu-item tag"
+	},
+	"panel": {
+		"prefix": "m-panel",
+		"body": [
+			"<m-panel>$1</m-panel>",
+			"$2"
+		],
+		"description": "Create a modul panel tag"
+	},
+	"popper": {
+		"prefix": "m-popper",
+		"body": [
+			"<m-popper>$1</m-popper>",
+			"$2"
+		],
+		"description": "Create a modul popper tag"
+	},
+	"popup": {
+		"prefix": "m-popup",
+		"body": [
+			"<m-popup>$1</m-popup>",
+			"$2"
+		],
+		"description": "Create a modul popup tag"
+	},
+	"radio": {
+		"prefix": "m-radio",
+		"body": [
+			"<m-radio>$1</m-radio>",
+			"$2"
+		],
+		"description": "Create a modul radio tag"
+	},
+	"radio-group": {
+		"prefix": "m-radio-group",
+		"body": [
+			"<m-radio-group>$1</m-radio-group>",
+			"$2"
+		],
+		"description": "Create a modul radio-group tag"
+	},
+	"sidebar": {
+		"prefix": "m-sidebar",
+		"body": [
+			"<m-sidebar>$1</m-sidebar>",
+			"$2"
+		],
+		"description": "Create a modul sidebar tag"
+	},
+	"slider": {
+		"prefix": "m-slider",
+		"body": [
+			"<m-slider>$1</m-slider>",
+			"$2"
+		],
+		"description": "Create a modul slider tag"
+	},
+	"spinner": {
+		"prefix": "m-spinner",
+		"body": [
+			"<m-spinner>$1</m-spinner>",
+			"$2"
+		],
+		"description": "Create a modul spinner tag"
+	},
+	"status-list": {
+		"prefix": "m-status-list",
+		"body": [
+			"<m-status-list>$1</m-status-list>",
+			"$2"
+		],
+		"description": "Create a modul status-list tag"
+	},
+	"step": {
+		"prefix": "m-step",
+		"body": [
+			"<m-step>$1</m-step>",
+			"$2"
+		],
+		"description": "Create a modul step tag"
+	},
+	"switch": {
+		"prefix": "m-switch",
+		"body": [
+			"<m-switch>$1</m-switch>",
+			"$2"
+		],
+		"description": "Create a modul switch tag"
+	},
+	"tabs": {
+		"prefix": "m-tabs",
+		"body": [
+			"<m-tabs>$1</m-tabs>",
+			"$2"
+		],
+		"description": "Create a modul tabs tag"
+	},
+	"tab-pane": {
+		"prefix": "m-tab-pane",
+		"body": [
+			"<m-tab-pane>$1</m-tab-pane>",
+			"$2"
+		],
+		"description": "Create a modul tab-pane tag"
+	},
+	"table": {
+		"prefix": "m-table",
+		"body": [
+			"<m-table>$1</m-table>",
+			"$2"
+		],
+		"description": "Create a modul table tag"
+	},
+	"template": {
+		"prefix": "m-template",
+		"body": [
+			"<m-template>$1</m-template>",
+			"$2"
+		],
+		"description": "Create a modul template tag"
+	},
+	"text-field": {
+		"prefix": "m-text-field",
+		"body": [
+			"<m-text-field>$1</m-text-field>",
+			"$2"
+		],
+		"description": "Create a modul text-field tag"
+	},
+	"timepicker": {
+		"prefix": "m-timepicker",
+		"body": [
+			"<m-timepicker>$1</m-timepicker>",
+			"$2"
+		],
+		"description": "Create a modul timepicker tag"
+	},
+	"tooltip": {
+		"prefix": "m-tooltip",
+		"body": [
+			"<m-tooltip>$1</m-tooltip>",
+			"$2"
+		],
+		"description": "Create a modul tooltip tag"
+	},
+	"upload": {
+		"prefix": "m-upload",
+		"body": [
+			"<m-upload>$1</m-upload>",
+			"$2"
+		],
+		"description": "Create a modul upload tag"
+	},
+	"upload-input": {
+		"prefix": "m-upload-input",
+		"body": [
+			"<m-upload-input>$1</m-upload-input>",
+			"$2"
+		],
+		"description": "Create a modul upload-input tag"
+	},
+	"upload-dragdrop": {
+		"prefix": "m-upload-dragdrop",
+		"body": [
+			"<m-upload-dragdrop>$1</m-upload-dragdrop>",
+			"$2"
+		],
+		"description": "Create a modul upload-dragdrop tag"
+	},
+	"upload-fileslist": {
+		"prefix": "m-upload-fileslist",
+		"body": [
+			"<m-upload-fileslist>$1</m-upload-fileslist>",
+			"$2"
+		],
+		"description": "Create a modul upload-fileslist tag"
+	},
+	"validation-message": {
+		"prefix": "m-validation-message",
+		"body": [
+			"<m-validation-message>$1</m-validation-message>",
+			"$2"
+		],
+		"description": "Create a modul validation-message tag"
+	},
+	"ripple-effect": {
+		"prefix": "m-ripple-effect",
+		"body": [
+			"<m-ripple-effect>$1</m-ripple-effect>",
+			"$2"
+		],
+		"description": "Create a modul ripple-effect tag"
+	}
+}
