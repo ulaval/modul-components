@@ -455,10 +455,11 @@ diacriticsMap[0xA763] = 'z';
  */
 export function normalizeString(str: string): string {
     let result: string = '';
-    for (let i = 0; i < str.length; ++i) {
+    let val: string = str.toString(); // In case 'str' is a numeric value
+    for (let i = 0; i < val.length; ++i) {
         // Passer chaque cles et remplacer dans la chaine
-        let converted: string = diacriticsMap[str.charAt(i).toLowerCase().charCodeAt(0)];
-        result += converted ? converted : str.charAt(i);
+        let converted: string = diacriticsMap[val.charAt(i).toLowerCase().charCodeAt(0)];
+        result += converted ? converted : val.charAt(i);
     }
 
     return result;
