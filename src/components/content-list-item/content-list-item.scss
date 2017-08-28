@@ -7,6 +7,7 @@
     position: relative;
     justify-content: space-between;
     background-color: $m-color--white;
+    z-index: 1;
 
     &,
     &__button {
@@ -33,6 +34,7 @@
 
 .delete-anim-leave-active {
     transition: opacity 0.3s ease, max-height 0.5s ease, padding 0.5s ease;
+    overflow: hidden;
 }
 
 .delete-anim-leave {
