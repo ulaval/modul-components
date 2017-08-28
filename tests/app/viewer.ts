@@ -7,9 +7,16 @@ import WithRender from './viewer.html';
 @Component
 export class Viewer extends Vue {
     public tag: string = '';
+    public menuOpen: boolean = true;
 
     public mounted() {
         this.buildTag();
+    }
+
+    public toggleMenu(): void {
+        console.log('tes');
+
+        this.menuOpen = !this.menuOpen;
     }
 
     @Watch('$route')
