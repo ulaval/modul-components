@@ -3,6 +3,8 @@ $m-datepicker--width: 300px !default;
 
 .m-datepicker {
     background: $m-color--white;
+    box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
+    overflow: hidden;
 
     @media (max-width: $m-bp--max--s) {
         width: 100%;
