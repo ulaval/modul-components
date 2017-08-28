@@ -135,7 +135,7 @@ export class MAccordion extends ModulVue {
     private toggleAccordion(): void {
         this.as<TransitionAccordionMixin>().isAnimActive = true;
         this.propOpen = !this.propOpen;
-        this.$refs.accordionHeader['blur']();
+        (this.$refs.accordionHeader as HTMLElement).blur();
         this.$emit('click', this.id, this.propOpen);
     }
 
