@@ -10,7 +10,19 @@
         z-index: 4;
         display: inline-flex;
         flex-direction: column;
+        overflow: hidden;
         margin: 0;
+        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
+
+        &.m--no-shadow {
+            box-shadow: none;
+            overflow: visible;
+
+            .m-popper__body {
+                overflow-x: visible;
+                overflow-y: visible;
+            }
+        }
     }
 
     &__container {
@@ -38,6 +50,8 @@
 
     &__body {
         flex: 1 1 auto;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     &__header {
