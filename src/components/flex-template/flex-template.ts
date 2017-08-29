@@ -90,8 +90,10 @@ export class MFlexTemplate extends ModulVue {
 
     private setHeaderHeight(): void {
         this.$nextTick(() => {
-            this.headerHeight = (this.$refs.header as HTMLElement).clientHeight;
-            this.setSpacing(this.headerHeight);
+            if (this.hasHeaderSlot) {
+                this.headerHeight = (this.$refs.header as HTMLElement).clientHeight;
+                this.setSpacing(this.headerHeight);
+            }
         });
     }
 
