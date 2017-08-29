@@ -64,7 +64,7 @@ h6,
 // ======================================================================
 p,
 .m-u--p {
-    margin: $m-margin 0;
+    margin: $m-margin 0 0 0;
 }
 
 b,
@@ -94,7 +94,7 @@ code {
 //  Link
 // ======================================================================
 a {
-    color: $m-color--primary;
+    color: $m-color--interactive;
 }
 
 // ======================================================================
@@ -126,10 +126,6 @@ a {
     }
 
     &-weight {
-        &--normal {
-            font-weight: $m-font-weight;
-        }
-
         &--black {
             font-weight: $m-font-weight--black;
         }
@@ -138,8 +134,8 @@ a {
             font-weight: $m-font-weight--bold;
         }
 
-        &--light {
-            font-weight: $m-font-weight--light;
+        &--normal {
+            font-weight: $m-font-weight;
         }
     }
 }
@@ -148,32 +144,17 @@ a {
 //  Typo
 // ======================================================================
 .m-u--typo {
-    &--light {
-        color: $m-color--grey-darker;
-
-        &-small {
-            font-size: $m-font-size--s;
-            color: $m-color--grey-darker;
-
-            &-italic {
-                font-size: $m-font-size--s;
-                font-style: italic;
-                color: $m-color--grey-darker;
-            }
-        }
-    }
-
-    &--small {
-        font-size: $m-font-size--s;
-
-        &-italic {
-            font-size: $m-font-size--s;
-            font-style: italic;
-        }
-    }
-
-    &--italic {
+    &--precision {
         font-size: $m-font-size--s;
         font-style: italic;
+        color: $m-color--grey-darker;
+    }
+
+    &--highlighting {
+        display: inline;
+        font-size: $m-font-size--s;
+        font-weight: $m-font-weight--bold;
+        background: $m-color--warning-light;
+        box-shadow: 0 0 0 2px $m-color--warning-light;
     }
 }

@@ -17,4 +17,9 @@ export class ModulVue extends Vue {
         }
         return p as any;
     }
+
+    protected as<T>(): T {
+        let result: any = this;
+        return result as T;
+    }
 }

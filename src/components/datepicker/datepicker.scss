@@ -1,10 +1,16 @@
 @import '../../styles/abstracts/variables';
+$m-datepicker--width: 300px !default;
 
 .m-datepicker {
-    width: 296px;
-    height: 384px;
-    margin-left: auto;
-    margin-right: auto;
+    background: $m-color--white;
+
+    @media (max-width: $m-bp--max--s) {
+        width: 100%;
+    }
+
+    @media (min-width: $m-bp--min--s) {
+        width: $m-datepicker--width;
+    }
 
     &__header {
         display: flex;
@@ -27,9 +33,7 @@
     &__body {
         display: flex;
         justify-content: center;
-        text-align: center;
-        max-height: 296px;
-        overflow-y: auto;
+        width: 100%;
 
         &-table {
             border-spacing: 0;
@@ -37,6 +41,11 @@
 
         &-cell {
             padding: 0;
+        }
+
+        table {
+            width: 100%;
+            text-align: center;
         }
     }
 
@@ -54,11 +63,11 @@
 
         &:hover,
         &:focus {
-            background-color: $m-color--primary-lightest;
+            background-color: $m-color--interactive-lightest;
         }
 
         &.m--is-selected {
-            background-color: $m-color--primary-light;
+            background-color: $m-color--interactive-light;
         }
 
         &.m--is-other-month {

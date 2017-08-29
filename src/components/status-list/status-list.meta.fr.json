@@ -1,7 +1,6 @@
 {
     "m-status-list-meta": {
         "name": "Liste d'états",
-        "context-of-use": "Décrire ici le contexte d'utilisation de la liste d'états.",
         "states-desc": "Accepte une collection d'objets de type MStatusListData"
     }
 }

@@ -1,0 +1,26 @@
+{
+    "tag": "m-tooltip",
+    "name": "m-tooltip-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "icon",
+                "link"
+            ],
+            "default": "0"
+        },
+        "label": {
+            "type": "string"
+        },
+        "closeButton": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": "0"
+        }
+    },
+    "overview": "tooltip.overview"
+}

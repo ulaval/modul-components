@@ -1,0 +1,67 @@
+{
+    "tag": "m-flex-template",
+    "name": "m-flex-template-meta:name",
+    "attributes": {
+        "dynamicHeader": {
+            "type": "boolean",
+            "value": [
+                true,
+                false
+            ],
+            "default": 0
+        },
+        "headerFixe": {
+            "type": "boolean",
+            "value": [
+                true,
+                false
+            ],
+            "default": 0
+        },
+        "menuFixe": {
+            "type": "boolean",
+            "value": [
+                true,
+                false
+            ],
+            "default": 0
+        },
+        "menuWidth": {
+            "type": "string",
+            "default": "300px"
+        },
+        "minHeight": {
+            "type": "string",
+            "default": "100vh"
+        },
+        "menuFrom": {
+            "type": "string",
+            "value": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        },
+        "menuOpen": {
+            "type": "boolean",
+            "value": [
+                true,
+                false
+            ],
+            "default": 1
+        },
+        "smallMenu": {
+            "type": "boolean",
+            "value": [
+                true,
+                false
+            ],
+            "default": 1
+        },
+        "smallMenuSize": {
+            "type": "string",
+            "default": "44px"
+        }
+    },
+    "overview": "flex-template.overview"
+}

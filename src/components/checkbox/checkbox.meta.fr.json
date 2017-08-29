@@ -1,7 +1,5 @@
 {
     "m-checkbox-meta": {
-        "name": "Boîte à cocher",
-        "context-of-use": "Décrire ici le contexte d'utilisation de la boîte à cocher.",
-        "usage": "Quelques règles d'utilisation."
+        "name": "Boîte à cocher"
     }
 }

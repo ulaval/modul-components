@@ -2,31 +2,20 @@
     "tag": "m-dropdown",
     "name": "m-dropdown-meta:name",
     "attributes": {
-        "elements": {
-            "type": "any[]",
-            "default": []
-        },
-        "selectedElement": {
-            "type": "any"
-        },
-        "getTexteElement": {
-            "type": "Function"
-        },
         "label": {
             "type": "string"
+        },
+        "defaultText": {
+            "type": "string"
+        },
+        "defaultValue": {
+            "type": "any"
         },
         "open": {
             "type": "boolean",
              "default": false
         },
-        "sort": {
-            "type": "boolean",
-             "default": true
-        },
-        "sortMethod": {
-            "type": "Function"
-        },
-        "widthFromCss": {
+        "disabled": {
             "type": "boolean",
             "default": false
         },
@@ -34,32 +23,24 @@
             "type": "boolean",
             "default": false
         },
-        "defaultText": {
-            "type": "string"
+        "multiple": {
+            "type": "boolean",
+            "default": false
+        },
+        "width": {
+            "type": "string",
+            "default": "200px"
         },
         "defaultFirstElement": {
             "type": "boolean",
             "default": false
+        },
+        "textNoData": {
+            "type": "string"
+        },
+        "textNoMatch": {
+            "type": "string"
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-dropdown-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-dropdown-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-dropdown-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-dropdown-meta:dont"
-        }
-    ]
+    "overview": "dropdown.overview"
 }

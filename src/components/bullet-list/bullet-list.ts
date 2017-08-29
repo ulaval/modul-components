@@ -8,10 +8,14 @@ import { BULLET_LIST_NAME } from '../component-names';
 @WithRender
 @Component
 export class MBulletList extends Vue {
-    @Prop({ default: () => ['Element 1', 'Element 2', 'Element 3'] })
-    public listData: string[];
+    @Prop()
+    public title: string;
 
     public componentName = BULLET_LIST_NAME;
+
+    private get hasTitile(): boolean {
+        return this.title == undefined || this.title == '' ? false : true;
+    }
 }
 
 const BulletListPlugin: PluginObject<any> = {

@@ -1,0 +1,10 @@
+{
+    "tag": "m-dropdown-group",
+    "name": "m-dropdown-group-meta:name",
+    "attributes": {
+        "label": {
+            "type": "string"
+        }
+    },
+    "overview": "dropdown-group.overview"
+}

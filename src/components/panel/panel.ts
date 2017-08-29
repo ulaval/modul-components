@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './panel.html?style=./panel.scss';
 import { PANEL_NAME } from '../component-names';
+import ElementQueries from 'css-element-queries/src/ElementQueries';
 
 export enum MPanelMode {
     Primary = 'primary',
@@ -31,6 +32,10 @@ export class MPanel extends Vue {
     public paddingFooter: boolean;
 
     public componentName: string = PANEL_NAME;
+
+    protected mounted(): void {
+        ElementQueries.init();
+    }
 
     private get propMode(): MPanelMode {
         return this.mode == MPanelMode.Secondary ? MPanelMode.Secondary : MPanelMode.Primary;

@@ -3,182 +3,250 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from '../../mixins/dropdown-template/dropdown-template.html?style=../../mixins/dropdown-template/dropdown-template.scss';
+import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
-import { DropdownTemplate, DropdownTemplateMixin } from '../../mixins/dropdown-template/dropdown-template';
+import { MDropDownItemInterface } from '../dropdown-item/dropdown-item';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
-const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
+const DROPDOWN_MAX_HEIGHT: number = 198;
+
+export interface SelectedValue {
+    key: string | undefined;
+    value: any;
+    label: string;
+}
+
+export interface MDropdownInterface extends Vue {
+    selected: Array<SelectedValue>;
+    currentElement: SelectedValue;
+    addAction: boolean;
+    nbItems: number;
+    nbItemsVisible: number;
+    multiple: boolean;
+    getElement(key: string): Vue | undefined;
+}
 
 @WithRender
 @Component({
-    mixins: [DropdownTemplate]
+    mixins: [
+        InputState,
+        MediaQueries
+    ]
 })
-export class MDropdown extends ModulVue implements DropdownTemplateMixin {
+export class MDropdown extends ModulVue implements MDropdownInterface {
 
-    @Prop({ default: () => ['element 1', 'element 2', 'element 3', 'element 4', 'element 5', 'element 6'] })
-    public elements: any[];
     @Prop()
-    public selectedElement: any;
+    public label: string;
     @Prop()
-    public getTextElement: Function;
+    public defaultText: string;
+    @Prop()
+    public defaultValue: any;
     @Prop({ default: false })
     public open: boolean;
-    @Prop({ default: true })
-    public sort: boolean;
-    @Prop()
-    public sortMethod: Function;
     @Prop({ default: false })
-    public widthFromCss: boolean;
+    public disabled: boolean;
+    @Prop({ default: false })
+    public editable: boolean;
+    @Prop({ default: false })
+    public multiple: boolean;
+    @Prop({ default: '200px' })
+    public width: string;
+    @Prop({ default: false })
+    public defaultFirstElement: boolean;
+    @Prop()
+    public textNoData: string;
+    @Prop()
+    public textNoMatch: string;
 
     public componentName: string = DROPDOWN_NAME;
 
-    // var from DropdownTemplateMixin
-    public mode: string = 'dropdown';
-    public label: string;
-    public editable: boolean;
-    public defaultText: string;
-    public defaultFirstElement: boolean;
+    public selected: Array<SelectedValue> = [];
+    public currentElement: SelectedValue = { 'key': undefined, 'value': undefined, 'label': '' };
+    public addAction: true;
+    public nbItems: number = 0;
+    public nbItemsVisible: number = 0;
+    public selectedText: string = '';
+    private internalOpen: boolean = false;
 
-    // Copy of prop
-    public propSelectedElement: any;
-    public propOpen: boolean = false;
+    public getElement(key: string): Vue | undefined {
+        let element: Vue | undefined;
 
-    // Initialize data for v-model to work
-    public textElement: string = '';
-
-    private elementsSorted: Array<any>;
-
-    @Watch('elements')
-    public elementChanged(value): void {
-        this.prepareElements();
+        for (let child of this.$children) {
+            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
+                element = this.recursiveGetElement(key, child);
+                break;
+            }
+        }
+        return element;
     }
 
-    @Watch('selectedElement')
-    public selectedElementChanged(value): void {
-        this.propSelectedElement = value;
-        this.textElement = this.getSelectedElementText();
+    protected mounted(): void {
+        this.propOpen = this.open;
+        // Obtenir le premier dropdown-item
+        if (this.defaultFirstElement && !this.multiple && !this.disabled) {
+            let firstElement: Vue | undefined = this.getFirstElement();
+            if (firstElement) {
+                (firstElement as MDropDownItemInterface).onSelectElement();
+            }
+        }
+    }
+
+    @Watch('selected')
+    private selectedChanged(value): void {
+        let values: any[] = [];
+
+        for (let selectedValue of this.selected) {
+            values.push(selectedValue.value);
+        }
+
+        if (value.length == 0 && this.defaultValue) {
+            values.push(this.defaultValue);
+        }
+
+        this.$emit('change', values, this.addAction);
+    }
+
+    @Watch('currentElement')
+    private currentElementChanged(value): void {
+        this.selectedText = '';
+        for (let item of this.selected) {
+            if (this.selectedText != '') {
+                this.selectedText += ', ';
+            }
+            this.selectedText += item.label;
+        }
+        this.$emit('elementSelected', this.currentElement.value, this.addAction);
     }
 
     @Watch('open')
-    public openChanged(value): void {
-        this.propOpen = value;
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
     }
 
-    public get elementsCount(): number {
-        return this.elementsSortedFiltered.length;
+    private get propOpen(): boolean {
+        return this.internalOpen;
     }
 
-    public get elementsSortedFiltered(): Array<any> {
-        if ((this.textElement == '') || (this.textElement == this.getSelectedElementText())) {
-            return this.elementsSorted;
-        }
-
-        let filteredElements: Array<any> = this.elementsSorted.filter((element) => {
-            return normalizeString(this.getElementListText(element)).match(normalizeString(this.textElement));
-        });
-
-        return filteredElements;
-    }
-
-    public created() {
-        // Copy of prop to avoid override on re-render
-        this.propSelectedElement = this.selectedElement;
-
-        // Run in created() to run before computed data
-        this.prepareElements();
-    }
-
-    public mounted() {
-        this.adjustWidth();
-    }
-
-    public onSelectElement($event, element: any): void {
-        this.selectElement(element);
-    }
-
-    public getSelectedElementText(): string {
-        let text: string = '';
-
-        if (typeof this.propSelectedElement != UNDEFINED) {
-            text = this.getElementListText(this.propSelectedElement);
-        }
-
-        return text;
-    }
-
-    public getElementListText(element: any): string {
-        let text: string = '';
-
-        if (typeof element == UNDEFINED) {
-            text = '';
-        } else if (this.getTextElement) {
-            text = this.getTextElement(element);
-        } else {
-            text = String(element);
-        }
-
-        return text;
-    }
-
-    public adjustWidth(): void {
-        if (!this.widthFromCss) {
-            // Hidden element to calculate width
-            let hiddenField: HTMLElement = this.$refs.mDropdownCalculate as HTMLElement;
-            // Input or a
-            let valueField: Vue = this.$refs.mDropdownValue as Vue;
-            // List of elements
-            let elements: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
-
-            let width: number = 0;
-
-            if (this.elements && this.elements.length > 0) {
-                for (let element of this.elements) {
-                    width = Math.max(width, this.getTextWidth(hiddenField, this.getElementListText(element)));
-                }
-            } else {
-                width = this.getTextWidth(hiddenField, this.getSelectedElementText());
-            }
-
-            // Add 25px for scrollbar
-            width = Math.ceil(width) + 25;
-            // Set width to Input and List
-            valueField.$el.style.width = width + 'px';
-            this.$el.style.width = width + 'px';
-            elements.style.width = width + 'px';
-
-        } else {
-            let parentElement: HTMLElement = this.$refs.mDropdown as HTMLElement;
-            let childElement: HTMLElement = this.$refs.mDropdownElements as HTMLElement;
-            childElement.style.width = parentElement.offsetWidth + 'px';
-        }
-    }
-
-    public toggleDropdown(value: boolean): void {
-        Vue.nextTick(() => {
-            this.propOpen = value;
-            if (value) {
+    private set propOpen(open: boolean) {
+        this.internalOpen = open != undefined ? open : false;
+        this.$nextTick(() => {
+            if (open) {
                 this.$el.style.zIndex = '10';
                 this.setDropdownElementFocus();
+                this.$emit('open');
             } else {
                 this.$el.style.removeProperty('z-index');
+                this.$emit('close');
             }
-            this.$emit('open', value);
         });
     }
 
-    public setDropdownElementFocus(): void {
-        if (!this.editable) {
-            let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
-            if (element) {
-                element.focus();
+    private get propEditable(): boolean {
+        return this.editable && this.selected.length == 0;
+    }
+
+    private get propTextNoData(): string {
+        if (this.textNoData) {
+            return this.textNoData;
+        } else {
+            return this.$i18n.translate('m-dropdown:no-data');
+        }
+    }
+
+    private get propTextNoMatch(): string {
+        if (this.textNoMatch) {
+            return this.textNoMatch;
+        } else {
+            return this.$i18n.translate('m-dropdown:no-result');
+        }
+    }
+
+    private get propWidth(): string {
+        if (this.as<MediaQueriesMixin>().isMqMaxS) {
+            return '100%';
+        } else {
+            return this.width;
+        }
+    }
+
+    private recursiveGetElement(key: string, node: Vue): Vue | undefined {
+        let element: Vue | undefined;
+
+        for (let child of node.$children) {
+            if (child.$options.name == 'MDropdownGroup') {
+                element = this.recursiveGetElement(key, child);
+                if (element) {
+                    return element;
+                }
+            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment' && child.$el.attributes['data-key'].value == key) {
+                return child;
+            }
+        }
+        return element;
+    }
+
+    private getFirstElement(): Vue | undefined {
+        let firstElement: Vue | undefined;
+
+        for (let child of this.$children) {
+            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
+                firstElement = this.recursiveGetFirstElement(child);
+                break;
+            }
+        }
+        return firstElement;
+    }
+
+    private recursiveGetFirstElement(node: Vue): Vue | undefined {
+        let firstElement: Vue | undefined;
+
+        for (let child of node.$children) {
+            if (child.$options.name == 'MDropdownGroup') {
+                firstElement = this.recursiveGetFirstElement(child);
+                if (firstElement) {
+                    return firstElement;
+                }
+            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
+                return child;
+            }
+        }
+        return firstElement;
+    }
+
+    private filterDropdown(text: string): void {
+        if (this.selected.length == 0) {
+            for (let child of this.$children) {
+                if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
+                    this.propagateTextFilter(normalizeString(text.trim()), child);
+                }
             }
         }
     }
 
-    public keyupReference($event): void {
+    private propagateTextFilter(text: string, node: Vue): void {
+        for (let child of node.$children) {
+            if (child.$options.name == 'MDropdownGroup') {
+                this.propagateTextFilter(text, child);
+            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
+                (child as MDropDownItemInterface).filter = text;
+            }
+        }
+    }
+
+    private setDropdownElementFocus(): void {
+        // if (!this.as<DropdownTemplateMixin>().editable) {
+        //     let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
+        //     if (element) {
+        //         element.focus();
+        //     }
+        // }
+    }
+
+    private keyupReference($event): void {
         if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
             $event.preventDefault();
             (this.$refs.mDropdownValue as Vue).$el.click();
@@ -193,7 +261,7 @@ export class MDropdown extends ModulVue implements DropdownTemplateMixin {
         }
     }
 
-    public keyupItem($event: KeyboardEvent, index: number): void {
+    private keyupItem($event: KeyboardEvent, index: number): void {
         let selector: string = '';
         switch ($event.keyCode) {
             case KeyCode.M_UP:
@@ -213,23 +281,23 @@ export class MDropdown extends ModulVue implements DropdownTemplateMixin {
                 }
                 selector = `[data-index='${index}']`;
                 break;
-            case KeyCode.M_DOWN:
-                if (index == this.elementsSortedFiltered.length - 1) {
-                    selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
-                } else {
-                    selector = `[data-index='${index + 1}']`;
-                }
-                break;
-            case KeyCode.M_END:
-                selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
-                break;
-            case KeyCode.M_PAGE_DOWN:
-                index += PAGE_STEP;
-                if (index >= this.elementsSortedFiltered.length) {
-                    index = this.elementsSortedFiltered.length - 1;
-                }
-                selector = `[data-index='${index}']`;
-                break;
+            // case KeyCode.M_DOWN:
+            //     if (index == this.elementsSortedFiltered.length - 1) {
+            //         selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
+            //     } else {
+            //         selector = `[data-index='${index + 1}']`;
+            //     }
+            //     break;
+            // case KeyCode.M_END:
+            //     selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
+            //     break;
+            // case KeyCode.M_PAGE_DOWN:
+            //     index += PAGE_STEP;
+            //     if (index >= this.elementsSortedFiltered.length) {
+            //         index = this.elementsSortedFiltered.length - 1;
+            //     }
+            //     selector = `[data-index='${index}']`;
+            //     break;
             case KeyCode.M_ENTER:
             case KeyCode.M_RETURN:
                 let element: HTMLElement = this.$el.querySelector(`[data-index='${index}']`) as HTMLElement;
@@ -247,48 +315,42 @@ export class MDropdown extends ModulVue implements DropdownTemplateMixin {
         }
     }
 
-    private selectElement(element: any): void {
-        this.propSelectedElement = element;
-        this.textElement = this.getSelectedElementText();
-        this.$emit('elementSelected', this.propSelectedElement);
+    private animEnter(el: HTMLElement, done: any): void {
+        this.$nextTick(() => {
+            let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
+            let transition: string = '0.3s max-height ease';
+            el.style.transition = transition;
+            el.style.webkitTransition = transition;
+            el.style.overflowY = 'hidden';
+            el.style.maxHeight = '0';
+            el.style.width = this.width;
+            setTimeout(() => {
+                el.style.maxHeight = height + 'px';
+                done();
+            }, 0);
+        });
+
     }
 
-    private getTextWidth(element: HTMLElement, text: string): number {
-        element.innerHTML = text;
-        return element.offsetWidth;
+    private animAfterEnter(el: HTMLElement): void {
+        setTimeout(() => {
+            el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
+            el.style.overflowY = 'auto';
+        }, 300);
     }
 
-    private prepareElements(): void {
-        let elementsSorted: any[] = new Array();
-
-        if (this.elements) {
-            // Create a separe copy of the array, to prevent triggering infinite loop on watcher of elements
-            elementsSorted = this.elements.slice(0);
-
-            // Sorting options
-            if (this.sort) {
-                if (typeof this.sortMethod == UNDEFINED) {
-                    // Default sort: Alphabetically
-                    if (typeof this.getTextElement == UNDEFINED) {
-                        elementsSorted = elementsSorted.sort((a, b) => a.localeCompare(b));
-                    } else {
-                        elementsSorted = elementsSorted.sort((a, b) => this.getElementListText(a).localeCompare(this.getElementListText(b)));
-                    }
-                } else {
-                    elementsSorted = this.sortMethod(elementsSorted);
-                }
-            }
-
-            // Default element
-            if (this.defaultFirstElement && elementsSorted[0]) {
-                this.selectElement(elementsSorted[0]);
-            }
-            this.textElement = this.getSelectedElementText();
-        }
-
-        this.elementsSorted = elementsSorted;
+    private animLeave(el: HTMLElement, done: any): void {
+        this.$nextTick(() => {
+            let height: number = el.clientHeight;
+            el.style.maxHeight = height + 'px';
+            el.style.overflowY = 'hidden';
+            el.style.maxHeight = '0';
+            setTimeout(() => {
+                el.style.maxHeight = 'none';
+                done();
+            }, 300);
+        });
     }
-
 }
 
 const DropdownPlugin: PluginObject<any> = {

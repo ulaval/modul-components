@@ -6,16 +6,5 @@
             "type": "string"
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-tabs-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-tabs-meta:usage"
-        }
-    ]
+    "overview": "tabs.overview"
 }

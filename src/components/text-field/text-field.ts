@@ -6,15 +6,13 @@ import WithRender from './text-field.html?style=./text-field.scss';
 import { TEXT_FIELD_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 
-const TYPE_TEXT = 'text';
-const TYPE_PASSWORD = 'password';
-const TYPE_EMAIL = 'email';
-const TYPE_URL = 'url';
-const TYPE_TEL = 'tel';
-
-const STATE_DEFAULT = 'default';
-const STATE_DISABLED = 'disabled';
-const STATE_VALID = 'valid';
+export enum MTextFieldType {
+    Text = 'text',
+    Password = 'password',
+    EMail = 'email',
+    Url = 'url',
+    Telephone = 'tel'
+}
 
 const ICON_NAME_PASSWORD_VISIBLE = 'default';
 const ICON_NAME_PASSWORD_HIDDEN = 'default';
@@ -25,10 +23,10 @@ const ICON_NAME_PASSWORD_HIDDEN = 'default';
         InputState
     ]
 })
-export class MTexteField extends ModulVue implements InputStateMixin {
+export class MTextField extends ModulVue {
 
-    @Prop({ default: TYPE_TEXT })
-    public type: string;
+    @Prop({ default: MTextFieldType.Text })
+    public type: MTextFieldType;
     @Prop({ default: '' })
     public value: string;
     @Prop()
@@ -44,24 +42,16 @@ export class MTexteField extends ModulVue implements InputStateMixin {
     @Prop({ default: false })
     public forceFocus: boolean;
     @Prop()
-    public error: string;
-    @Prop()
     public placeholder: string;
 
     public componentName: string = TEXT_FIELD_NAME;
 
-    public isDisabled: boolean;
-    public hasError: boolean;
-    public isValid: boolean;
-
     private propValue: string = '';
-    private propDefaultText: string;
     private propIconName: string;
     private propIconDescription: string = '';
     private typeIsPassword: boolean = false;
-    private isEmptyValue: boolean = false;
     private isDefaultTextEmpty: boolean = false;
-    private isFocusActive: boolean = false;
+    private focusActive: boolean = false;
     private isUpdating: number;
 
     private iconDescriptionPasswordShow: string = this.$i18n.translate('m-text-field:password-show');
@@ -69,15 +59,11 @@ export class MTexteField extends ModulVue implements InputStateMixin {
 
     protected beforeMount(): void {
         this.propValue = this.value;
-        this.propDefaultText = this.defaultText;
-        this.checkHasValue();
-        this.checkHasDefaultText();
     }
 
     @Watch('value')
     private valueChanged(value: string): void {
         this.propValue = this.value;
-        this.checkHasValue();
     }
 
     @Watch('propValue')
@@ -93,51 +79,45 @@ export class MTexteField extends ModulVue implements InputStateMixin {
     }
 
     private onFocus(event): void {
-        this.isFocusActive = this.isDisabled ? false : true;
-        if (!this.isDisabled && !this.forceFocus) {
-            this.$refs.input['focus']();
-            this.checkHasValue();
-            this.checkHasDefaultText();
+        this.focusActive = !this.as<InputStateMixin>().isDisabled;
+        if (!this.as<InputStateMixin>().isDisabled && !this.forceFocus) {
+            (this.$refs.input as HTMLElement).focus();
             this.$emit('focus', event, this.propValue);
         }
     }
 
     private onBlur(event): void {
-        this.isFocusActive = this.isDisabled ? true : false;
-        if (!this.isDisabled && !this.forceFocus) {
-            this.checkHasValue();
-            this.checkHasDefaultText();
+        this.focusActive = this.as<InputStateMixin>().isDisabled;
+        if (!this.as<InputStateMixin>().isDisabled && !this.forceFocus) {
             this.$emit('blur', event, this.propValue);
         }
     }
 
     private onKeyup(event): void {
-        if (!this.isDisabled) {
-            this.checkHasValue();
-            this.checkHasDefaultText();
+        if (!this.as<InputStateMixin>().isDisabled) {
             this.$emit('keyup', event, this.propValue);
         }
     }
 
     private onClick(event): void {
-        if (!this.isDisabled) {
+        if (!this.as<InputStateMixin>().isDisabled) {
             this.$emit('click', event, this.propValue);
         }
     }
 
     private onClickIcon(event): void {
-        this.isFocusActive = this.isDisabled ? false : true;
+        this.focusActive = !this.as<InputStateMixin>().isDisabled;
         if (this.editable) {
-            this.$refs.input['focus']();
+            (this.$refs.input as HTMLElement).focus();
         }
-        if (this.propType == TYPE_PASSWORD) {
+        if (this.propType == MTextFieldType.Password) {
             if (this.typeIsPassword) {
-                this.setType(TYPE_TEXT);
+                this.setType(MTextFieldType.Text);
                 this.typeIsPassword = false;
                 this.propIconDescription = this.iconDescriptionPasswordHide;
                 this.propIconName = ICON_NAME_PASSWORD_HIDDEN;
             } else {
-                this.setType(TYPE_PASSWORD);
+                this.setType(MTextFieldType.Password);
                 this.typeIsPassword = true;
                 this.propIconDescription = this.iconDescriptionPasswordShow;
                 this.propIconName = ICON_NAME_PASSWORD_VISIBLE;
@@ -149,32 +129,41 @@ export class MTexteField extends ModulVue implements InputStateMixin {
         this.$emit('change', event, this.propValue);
     }
 
-    private checkHasValue(): void {
-        this.isEmptyValue = String(this.propValue).length == 0 ? true : false;
+    private get valueIsEmpty(): boolean {
+        return String(this.propValue).length == 0;
     }
 
-    private checkHasDefaultText() {
-        if (this.propDefaultText == '' || this.propDefaultText == undefined) {
-            this.isDefaultTextEmpty = true;
-        } else if (this.isEmptyValue && this.isFocusActive) {
-            this.isDefaultTextEmpty = false;
+    private get hasDefaultText(): boolean {
+        return this.defaultText == '' || this.defaultText == undefined || !this.valueIsEmpty ? false : true;
+    }
+
+    private get isDefaultTextVisible(): boolean {
+        return this.isFocus;
+    }
+
+    private get isFocus(): boolean {
+        let focus: boolean = this.forceFocus ? true : this.focusActive;
+        if (focus) {
+            this.$emit('focus');
         } else {
-            this.isDefaultTextEmpty = true;
+            this.$emit('blur');
         }
+        return focus;
     }
 
     private setType(type: string): void {
         if (this.editable) {
-            // Set attribute type on input refs
-            ModulVue.nextTick(() => {
-                this.$refs.input['type'] = type;
+            // Set attribute type on input ref
+            this.$nextTick(() => {
+                (this.$refs.input as HTMLElement).setAttribute('type', type);
             });
         }
     }
 
-    private get propType(): string {
-        let type: string = this.type == TYPE_PASSWORD || this.type == TYPE_EMAIL || this.type == TYPE_URL || this.type == TYPE_TEL ? this.type : TYPE_TEXT;
-        if (type == TYPE_PASSWORD) {
+    private get propType(): MTextFieldType {
+        let type: MTextFieldType = this.type == MTextFieldType.Password || this.type == MTextFieldType.EMail || this.type == MTextFieldType.Url ||
+                this.type == MTextFieldType.Telephone ? this.type : MTextFieldType.Text;
+        if (type == MTextFieldType.Password) {
             this.typeIsPassword = true;
             this.propIconDescription = this.iconDescriptionPasswordShow;
         }
@@ -187,14 +176,14 @@ export class MTexteField extends ModulVue implements InputStateMixin {
     }
 
     private get hasIcon(): boolean {
-        this.propIconName = this.propType == TYPE_PASSWORD ? ICON_NAME_PASSWORD_VISIBLE : this.iconName;
+        this.propIconName = this.propType == MTextFieldType.Password ? ICON_NAME_PASSWORD_VISIBLE : this.iconName;
         return this.propIconName != '';
     }
 }
 
 const TextFieldPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(TEXT_FIELD_NAME, MTexteField);
+        v.component(TEXT_FIELD_NAME, MTextField);
     }
 };
 

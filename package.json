@@ -1,6 +1,6 @@
 {
   "name": "@ulaval/modul-components",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Component library",
   "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
   "private": false,
@@ -8,7 +8,7 @@
     "clean": "rimraf dist",
     "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
     "buildWebpack": "rimraf dist/*.d.ts && webpack --env.prod --config conf/webpack.config.js --colors && npm run dtsToDist && npm run scssToDist",
-    "build": "tsc && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist",
+    "build": "tsc && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && copyfiles -u 1 \"./src/**/*.md\" dist && npm run assetsToDist",
     "dtsToDist": "copyfiles -f \"./src/**/*.d.ts\" dist",
     "scssToDist": "copyfiles -u 1 \"./src/styles/**/*.scss\" dist && copyfiles -u 1 \"./src/styles/**/*.css\" dist",
     "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
@@ -24,6 +24,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "bundle-loader": "^0.5.5",
+    "css-element-queries": "^0.4.0",
     "css-loader": "^0.28.1",
     "element-ui": "^1.3.6",
     "enquire.js": "^2.1.6",

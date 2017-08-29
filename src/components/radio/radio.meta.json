@@ -1,0 +1,37 @@
+{
+    "tag": "m-radio",
+    "name": "m-radio-meta:name",
+    "attributes": {
+        "value": {
+            "type": "string"
+        },
+        "position": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        },
+        "disabled": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "iconName": {
+            "type": "string"
+        },
+        "iconPosition": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        }
+    },
+    "overview": "radio.overview"
+}

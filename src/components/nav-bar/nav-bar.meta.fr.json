@@ -1,7 +1,5 @@
 {
     "m-nav-bar-meta": {
-        "name": "Barre de navigation",
-        "context-of-use": "Décrire ici le contexte d'utilisation de la liste déroulante.",
-        "usage": "Quelques règles d'utilisation."
+        "name": "Barre de navigation"
     }
 }

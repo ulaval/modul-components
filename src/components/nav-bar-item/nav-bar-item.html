@@ -1,8 +1,8 @@
 <li class="m-nav-bar-item"
     :class="{
         'm--is-selected': isSelected,
-        'm--is-first-item' : isFirtsItem,
-        'm--is-last-item' : isLastItem
+        'm--is-first' : isFirtsItem,
+        'm--is-last' : isLastItem
     }"
     @keyup.enter="onClick"
     @click="onClick"><slot></slot></li>

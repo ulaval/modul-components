@@ -2,37 +2,42 @@
     "tag": "m-timepicker",
     "name": "m-timepicker-meta:name",
     "attributes": {
-        "hour": {
-            "type": "number",
-            "default": "hour from current time"
+        "isDuration": {
+            "type": "boolean",
+            "default": false
         },
-        "minute": {
+        "time": {
+            "type": "moment.Moment | moment.Duration",
+            "default": "moment() | moment.duration('1:0')"
+        },
+        "min": {
+            "type": "moment.Moment | moment.Duration",
+            "default": "moment().hours(0).minutes(0) | moment.duration('0:0')"
+        },
+        "max": {
+            "type": "moment.Moment | moment.Duration",
+            "default": "moment().hours(23).minutes(59) | moment.duration('4:0')"
+        },
+        "step": {
             "type": "number",
-            "default": "minute from current time"
+            "default": 5
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
         },
         "format": {
             "type": "string",
             "values": "see Moment.js formating options",
             "default": "LT"
+        },
+        "options": {
+            "type": "any",
+            "values": "see Popper.js options",
+            "default": {
+                "placement": "bottom-start"
+            }
         }
     },
-    "overview": [{
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-timepicker-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-timepicker-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-timepicker-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-timepicker-meta:dont"
-        }
-    ]
+    "overview": "timepicker.overview"
 }

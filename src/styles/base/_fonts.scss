@@ -1,4 +1,27 @@
 // ======================================================================
 //  Import font face
 // ======================================================================
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i');
+// @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i');
+$m-font-face-src: 'https://contenu.monportail.ulaval.ca/mpo/modules/sourcesanspro/1.0.51';
+
+@font-face {
+    font-family: $m-font-name;
+    font-weight: $m-font-weight--black;
+    font-style: normal;
+    src: url($m-font-face-src + '/SourceSansPro-Semibold/SourceSansPro-Semibold.otf.woff');
+}
+
+@font-face {
+    font-family: $m-font-name;
+    font-weight: $m-font-weight--bold;
+    font-style: normal;
+    src: url($m-font-face-src + '/SourceSansPro-Regular/SourceSansPro-Regular.otf.woff');
+}
+
+@font-face {
+    font-family: $m-font-name;
+    font-weight: $m-font-weight;
+    font-style: normal;
+    src: url($m-font-face-src + '/SourceSansPro-Light/SourceSansPro-Light.otf.woff');
+}
+

@@ -1,4 +1,4 @@
-<div class="m-table">
+<div class="m-table" :class="{'m--has-header': hasHeader}">
     <header class="m-table__header" v-if="hasHeader">
         <span class="m-table__header__content-left" v-if="hasContentLeft">
             <slot name="header-content-left"></slot>

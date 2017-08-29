@@ -2,31 +2,16 @@
     "tag": "m-button-group",
     "name": "m-button-group-meta:name",
     "attributes": {
-        "listData": {
-            "type": "object"
+        "value": {
+            "type": "string"
         },
-        "name": {
-            "type": "string",
-            "values": [
-                "button-group"
-            ],
-            "default": 0
-        },
-        "icon": {
+        "disabled": {
             "type": "boolean",
             "values": [
                 "true",
                 "false"
             ],
             "default": 1
-        },
-        "iconPosition": {
-            "type": "string",
-            "values": [
-                "left",
-                "right"
-            ],
-            "default": 0
         },
         "fullSize": {
             "type": "boolean",
@@ -35,26 +20,23 @@
                 "false"
             ],
             "default": 1
+        },
+        "inline": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "iconPosition": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-button-group-meta:context-of-use"
-        },
-        {
-            "type": "rubric",
-            "title": "meta:usage",
-            "content": "m-button-group-meta:usage"
-        },
-        {
-            "type": "do",
-            "content": "m-button-group-meta:do"
-        },
-        {
-            "type": "dont",
-            "content": "m-button-group-meta:dont"
-        }
-    ]
+    "overview": "button-group.overview"
 }

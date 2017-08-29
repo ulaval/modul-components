@@ -1,0 +1,230 @@
+@import 'abstracts/variables';
+
+.m-flex-template {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+
+    &.m--is-menu-right {
+        .m-flex-template {
+            &__menu {
+                &,
+                &-container {
+                    right: 0;
+                }
+            }
+        }
+    }
+
+    &.m--is-header-fixe {
+        .m-flex-template {
+            &__header {
+                position: fixed;
+                z-index: 2;
+            }
+        }
+    }
+
+    &.m--is-header-fixe,
+    &.m--no-header {
+        &.m--is-menu-fixe {
+            .m-flex-template {
+                &__menu {
+                    position: fixed;
+                }
+            }
+        }
+    }
+
+    &.m--is-menu-fixe-fake {
+        .m-flex-template {
+            &__menu {
+                transition: 0.3s top ease;
+                max-height: 100vh;
+            }
+        }
+    }
+
+    &.m--is-header-hidden {
+        .m-flex-template {
+            &__header {
+                transform: translate3d(0, -100%, 0);
+            }
+        }
+    }
+
+    &.m--has-menu-anim {
+        .m-flex-template {
+            &__menu-container,
+            &__page-container {
+                transition: 0.45s width ease-in-out;
+            }
+        }
+    }
+
+    &:not(.m--is-menu-right) {
+        .m-flex-template {
+            &__menu {
+                left: 0;
+            }
+        }
+    }
+
+    &__header {
+        transition: 0.3s transform ease;
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 100%;
+        background: $m-color--white;
+    }
+
+    &__menu__content,
+    &__page__body,
+    &__page__footer {
+        > :first-child {
+            &,
+            > :first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &__menu {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+
+        &__content {
+            outline: none;
+        }
+
+        &__content {
+            background: $m-color--white;
+
+            &,
+            > :first-child {
+                height: 100%;
+                overflow-y: auto;
+
+                @include m-scrollbar-ie();
+
+                &::-webkit-scrollbar {
+                    @include m-scrollbar();
+
+                    &-track-piece {
+                        @include m-scrollbar-track-piece();
+                    }
+
+                    &-thumb {
+                        @include m-scrollbar-thumb();
+                    }
+                }
+            }
+        }
+    }
+
+    &__page {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        &-container,
+        &__body {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+
+        &-container {
+            width: 100%;
+        }
+
+        &__body {
+            > :first-child {
+                flex: 1 1 auto;
+            }
+        }
+
+        &__footer {
+            width: 100%;
+        }
+    }
+
+    &[max-width~="#{ $m-bp--max--s }"] {
+        &:not(.m--is-menu-open) {
+            &.m--is-menu-right {
+                .m-flex-template__menu {
+                    transform: translate3d(100%, 0, 0);
+                }
+            }
+
+            &:not(.m--is-menu-right) {
+                .m-flex-template__menu {
+                    transform: translate3d(-100%, 0, 0);
+                }
+            }
+        }
+
+        &.m--has-menu-anim {
+            .m-flex-template {
+                &__menu {
+                    transition: 0.45s transform ease;
+                }
+            }
+        }
+
+        .m-flex-template {
+            &__menu {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+
+                &-container {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    z-index: 4;
+                }
+            }
+
+            &__page {
+                &-container {
+                    z-index: 1;
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+
+    &[min-width~="#{ $m-bp--min--s }"] {
+        &.m--is-menu-right {
+            .m-flex-template {
+                &__corps {
+                    flex-direction: row-reverse;
+                }
+
+                &__menu {
+                    &__content {
+                        position: absolute;
+                        right: 0;
+                    }
+                }
+            }
+        }
+
+        .m-flex-template {
+            &__corps {
+                display: flex;
+            }
+
+            &__menu {
+                &-container {
+                    position: relative;
+                    width: 0;
+                }
+            }
+        }
+    }
+}

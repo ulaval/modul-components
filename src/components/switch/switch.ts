@@ -1,20 +1,23 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './switch.html?style=./switch.scss';
 import { SWITCH_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 
-const POSITION_LEFT: string = 'left';
+export enum MSwitchPosition {
+    LEFT = 'left',
+    RIGHT = 'right'
+}
 
 @WithRender
 @Component
 export class MSwitch extends Vue {
 
-    @Prop({ default: false })
-    public checked: boolean;
-    @Prop({ default: POSITION_LEFT })
+    @Prop()
+    public value: boolean;
+    @Prop({ default: MSwitchPosition.LEFT })
     public position: string;
     @Prop({ default: false })
     public label: boolean;
@@ -26,25 +29,14 @@ export class MSwitch extends Vue {
     private isFocus = false;
     private id: string = `switch${uuid.generate()}`;
 
-    protected mounted(): void {
-        this.propChecked = this.checked;
-    }
-
     protected get propChecked(): boolean {
-        return this.internalPropChecked;
+        return this.value != undefined ? this.value : this.internalPropChecked;
     }
 
     protected set propChecked(value: boolean) {
-        if (this.internalPropChecked != value) {
-            this.internalPropChecked = value;
-            this.$emit('update:checked', value);
-            this.$emit('checked', value);
-        }
-    }
-
-    @Watch('checked')
-    private checkedChanged(value: boolean): void {
-        this.propChecked = this.checked;
+        this.$emit('input', value);
+        this.$emit('checked', value);
+        this.internalPropChecked = value;
     }
 
     private onClick(event): void {
@@ -53,7 +45,7 @@ export class MSwitch extends Vue {
     }
 
     public get hasSwitchLeft(): boolean {
-        return this.position == POSITION_LEFT;
+        return ((this.position == MSwitchPosition.RIGHT) ? false : true);
     }
 }
 

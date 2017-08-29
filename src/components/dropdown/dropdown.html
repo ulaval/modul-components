@@ -1,0 +1,61 @@
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }">
+    <m-popper :options="{ placement: 'bottom' }"
+              :close-on-content-click="!multiple"
+              :close-on-reference-click="!propEditable"
+              :disabled="disabled"
+              :open="propOpen"
+              dialog-mode="panel"
+              :enter="animEnter"
+              :after-enter="animAfterEnter"
+              :leave="animLeave"
+              :padding-header="false"
+              :padding-body="false"
+              @open="openChanged(true)"
+              @close="openChanged(false)">
+        <template slot="header" v-if="hasLabel && isMqMaxS">
+            <h2 class="m-dropdown__header__label">{{ label }}</h2>
+            <div class="m-dropdown__header__research" v-if="editable">
+                <input type="text"
+                       class="m-dropdown__header__research-input"
+                       :placeholder="researchText"
+                       v-model="textElement"
+                       ref="researchInput">
+                <m-button mode="icon" icon-name="default" @click="focusOnResearchInput">
+                    <m-i18n k="m-dropdown:search"></m-i18n>
+                </m-button>
+            </div>
+        </template>
+        <ul class="m-dropdown__list"
+            ref="mDropdownElements"
+            slot="body">
+            <slot></slot>
+            <li class="m-dropdown-item" v-if="nbItems == 0 || nbItemsVisible == 0">
+                <span class="m-dropdown-item__element-text">
+                    <span v-if="nbItems != 0">{{ propTextNoMatch }}</span>
+                    <span v-if="nbItems == 0">{{ propTextNoData }}</span>
+                </span>
+            </li>
+        </ul>
+
+        <template slot="footer" v-if="hasFooterSlot">
+            <slot name="footer"></slot>
+        </template>
+        <m-text-field ref="mDropdownValue"
+                      :label="label"
+                      :value="selectedText"
+                      :state="propState"
+                      :editable="propEditable"
+                      :disabled="disabled"
+                      :force-focus="propOpen"
+                      :default-text="defaultText"
+                      :style="{ width: width }"
+                      @valueChanged="filterDropdown($event)"
+                      @keyup="keyupReference">
+        </m-text-field>
+    </m-popper>
+    <m-validation-message
+        :state="propState"
+        :error="propErrorMessage"
+        :valid="propValidMessage"
+        :helper="helperMessage"></m-validation-message>
+</div>

@@ -25,7 +25,7 @@
         "boundariesSelector": {
             "type": "string"
         },
-        "forceShow": {
+        "forceOpen": {
             "type": "boolean",
             "value": [
                 "true",
@@ -104,13 +104,15 @@
                 "false"
             ],
             "default": 0
+        },
+        "shadow": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": "0"
         }
     },
-    "overview": [
-        {
-            "type": "rubric",
-            "title": "meta:context-of-use",
-            "content": "m-popper-meta:context-of-use"
-        }
-    ]
+    "overview": "popper.overview"
 }

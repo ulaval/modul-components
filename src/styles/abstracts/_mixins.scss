@@ -1,4 +1,28 @@
-@mixin visuallyHidden() {
+@mixin m-scrollbar {
+    width: $m-scrollbar-width;
+    height: $m-scrollbar-width;
+    background: transparent;
+}
+
+@mixin m-scrollbar-ie {
+    scrollbar-face-color: $m-color--scrollbar;
+    scrollbar-shadow-color: $m-color--scrollbar;
+    scrollbar-highlight-color: $m-color--white;
+    // scrollbar-3dlight-color: $m-color--white;
+    scrollbar-darkshadow-color: $m-color--white;
+    scrollbar-track-color: $m-color--white;
+    scrollbar-arrow-color: $m-color--scrollbar;
+}
+
+@mixin m-scrollbar-track-piece {
+    background: $m-color--scrollbar--light;
+}
+
+@mixin m-scrollbar-thumb {
+    background: $m-color--scrollbar;
+}
+
+@mixin m-visually-hidden() {
     position: absolute;
     overflow: hidden;
     clip: rect(0 0 0 0);
@@ -9,9 +33,8 @@
     border: 0;
 }
 
-@mixin transitionAccordion() {
+@mixin m-transition-accordion() {
     transition: 0.3s max-height ease;
-    overflow: hidden;
     height: auto;
 }
 

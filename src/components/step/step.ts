@@ -1,10 +1,11 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './step.html?style=./step.scss';
 import { STEP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
+import ElementQueries from 'css-element-queries/src/ElementQueries';
 
 export enum MStepState {
     Locked = 'locked',
@@ -14,15 +15,22 @@ export enum MStepState {
     Error = 'error'
 }
 
+export enum MStepMode {
+    Default = 'default',
+    Accordion = 'accordion'
+}
+
 @WithRender
 @Component({
     mixins: [
         TransitionAccordion
     ]
 })
-export class MStep extends Vue {
-    @Prop({ default: MStepState.Locked })
+export class MStep extends ModulVue {
+    @Prop()
     public state: MStepState;
+    @Prop({ default: MStepMode.Default })
+    public mode: MStepMode;
     @Prop({ default: false })
     public open: boolean;
     @Prop({ default: false })
@@ -33,25 +41,40 @@ export class MStep extends Vue {
     public last: boolean;
 
     public componentName = STEP_NAME;
-    public isAnimActive: boolean = false;
-    private propsOpen: boolean = false;
+    private internalOpen: boolean = false;
+    private internalMode: MStepMode | string = MStepMode.Default;
 
-    protected mounted() {
-        this.propsOpen = this.open;
+    @Watch('open')
+    protected openChanged(open: boolean): void {
+        this.as<TransitionAccordionMixin>().isAnimActive = true;
+        this.propOpen = open;
+    }
+
+    protected mounted(): void {
+        this.propOpen = this.open;
+        ElementQueries.init();
     }
 
     private openStep(event): void {
-        this.isAnimActive = true;
-        this.propsOpen = true;
-        this.$emit('openStep', event);
-        event.preventDefault();
+        if (this.propMode == MStepMode.Accordion) {
+            this.as<TransitionAccordionMixin>().isAnimActive = true;
+            this.propOpen = !this.propOpen;
+            event.currentTarget.blur();
+        } else {
+            if (!this.propOpen) {
+                this.as<TransitionAccordionMixin>().isAnimActive = true;
+                this.propOpen = true;
+                event.currentTarget.blur();
+            }
+        }
     }
 
-    private closeStep(event): void {
-        this.isAnimActive = true;
-        this.propsOpen = false;
-        this.$emit('closeStep', event);
-        event.preventDefault();
+    private closeStep(): void {
+        if (this.propOpen) {
+            this.as<TransitionAccordionMixin>().isAnimActive = true;
+            this.propOpen = false;
+            this.$emit('closeStep');
+        }
     }
 
     private getIcon(): string {
@@ -73,6 +96,39 @@ export class MStep extends Vue {
                 break;
         }
         return icon;
+    }
+
+    private get propOpen(): boolean {
+        return this.internalOpen;
+    }
+
+    private set propOpen(open: boolean) {
+        this.internalOpen = open != undefined ? open : false;
+        if (this.internalOpen) {
+            this.$emit('open');
+        } else {
+            this.$emit('close');
+        }
+        let refHeader: HTMLElement = this.$refs.header as HTMLElement;
+        if (this.propMode == MStepMode.Accordion) {
+            if (!refHeader.hasAttribute('tabindex')) {
+                refHeader.setAttribute('tabindex', '0');
+            }
+        } else {
+            if (this.propOpen) {
+                if (refHeader.hasAttribute('tabindex')) {
+                    refHeader.removeAttribute('tabindex');
+                }
+            } else {
+                if (!refHeader.hasAttribute('tabindex')) {
+                    refHeader.setAttribute('tabindex', '0');
+                }
+            }
+        }
+    }
+
+    private get propMode(): MStepMode {
+        return this.mode == MStepMode.Accordion ? this.mode : MStepMode.Default;
     }
 }
 

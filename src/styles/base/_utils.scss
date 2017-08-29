@@ -148,8 +148,31 @@
 //  Overflow
 // ======================================================================
 .m-u--overflow {
+    &,
+    &--auto,
+    &--scroll,
+    &--visible {
+        @include m-scrollbar-ie();
+
+        &::-webkit-scrollbar {
+            @include m-scrollbar();
+        }
+
+        &::-webkit-scrollbar-track-piece {
+            @include m-scrollbar-track-piece();
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @include m-scrollbar-thumb();
+        }
+    }
+
     &--auto {
         overflow: auto;
+    }
+
+    &--scroll {
+        overflow: scroll;
     }
 
     &--visible {
@@ -165,5 +188,5 @@
 //  Visually hidden
 // ======================================================================
 .m-u--visually-hidden {
-    @include visuallyHidden();
+    @include m-visually-hidden;
 }

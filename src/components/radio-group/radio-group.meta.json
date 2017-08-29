@@ -1,0 +1,34 @@
+{
+    "tag": "m-radio-group",
+    "name": "m-radio-group-meta:name",
+    "attributes": {
+        "value": {
+            "type": "string"
+        },
+        "position": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        },
+        "inline": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "disabled": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        }
+    },
+    "overview": "radio-group.overview"
+}

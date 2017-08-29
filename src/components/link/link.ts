@@ -23,6 +23,8 @@ export class MLink extends ModulVue {
     public unvisited: boolean;
     @Prop({ default: true })
     public underline: boolean;
+    @Prop({ default: false })
+    public noStyle: boolean;
     @Prop()
     public hiddenText: string;
 

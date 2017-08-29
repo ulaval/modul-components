@@ -1,6 +1,7 @@
 import '../../src/utils/polyfills';
 import Vue from 'vue';
 import router from './router';
+import '../../src/styles/main.scss';
 
 import ComponentsPlugin from '../../src/components';
 import DirectivesPlugin from '../../src/directives';

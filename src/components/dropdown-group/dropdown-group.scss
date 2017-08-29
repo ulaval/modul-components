@@ -1,0 +1,19 @@
+@import 'abstracts/variables';
+$m-dropdown--color-hover: $m-color--grey-lightest !default;
+$m-dropdown--color-select: $m-color--grey-lighter !default;
+$m-dropdown--color-focus: $m-color--interactive-lightest !default;
+$m-dropdown--color-active: $m-color--interactive-lightest !default;
+$m-dropdown--margin: $m-padding--xs !default;
+
+.m-dropdown-group {
+    .m-dropdown-group__header {
+        display: block;
+        padding: $m-padding/2 $m-padding;
+        background: $m-color--grey-darker;
+        color: #fff;
+    }
+
+    .m-dropdown-group__list {
+        padding: 0;
+    }
+}

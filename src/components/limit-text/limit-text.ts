@@ -4,12 +4,15 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './limit-text.html';
 import { LIMIT_TEXT_NAME } from '../component-names';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
 export const MODE_LOADING: string = 'loading';
 export const MODE_PROCESSING: string = 'processing';
 
 @WithRender
-@Component
+@Component({
+    mixins: [MediaQueries]
+})
 export class MLimitText extends ModulVue {
     @Prop({ default: 4 })
     public maxNumberOfLine: number;
@@ -23,11 +26,9 @@ export class MLimitText extends ModulVue {
     private open: boolean = false;
     private hasFinish: boolean = false;
     private child: ModulVue;
-    private el;
+    private el: HTMLElement;
     private initLineHeigh: any = '';
     private maxHeight: number = 0;
-    private windowWidth: number = document.documentElement.clientWidth;
-    private resizetimer: any;
 
     protected mounted(): void {
         this.originalContent = this.$refs.originalText['innerHTML'];
@@ -42,11 +43,20 @@ export class MLimitText extends ModulVue {
         } else {
             this.fullContent = this.originalContent + this.closeLink;
         }
+        // Get the limited text
         this.adjustText();
 
-        // Update the element on window resize
-        // let resizetimer;
-        // window.addEventListener('resize', this.setResizeTimer );
+        // Resize section ------------
+        let previousOrientation = window.screen['orientation']['type'];
+        let checkOrientation = () => {
+            if (window.screen['orientation']['type'] !== previousOrientation) {
+                previousOrientation = window.screen['orientation']['type'];
+                this.reset();
+            }
+        };
+        window.addEventListener('resize', checkOrientation, false);
+        window.addEventListener('orientationchange', checkOrientation, false);
+        // ---------------------------
     }
 
     protected destroyed(): void {
@@ -57,6 +67,7 @@ export class MLimitText extends ModulVue {
 
     private adjustText(): void {
         if (this.isContentTooTall(false)) {
+            this.hasFinish = false;
             this.getReduceContent();
             this.hasFinish = true;
         } else {
@@ -64,33 +75,23 @@ export class MLimitText extends ModulVue {
         }
     }
 
-    // Resize parts
-    // private setResizeTimer() {
-    //     clearTimeout(this.resizetimer);
-    //     this.resizetimer = setTimeout(this.doneResize, 250);
-    // }
-
-    // private doneResize(): void {
-    //     if (document.documentElement.clientWidth != this.windowWidth) {
-    //         this.windowWidth = document.documentElement.clientWidth;
-    //         this.adjustText();
-    //     }
-    // }
-
     private isContentTooTall(update: boolean): boolean {
-        let el = this.$refs.originalText as HTMLElement;
-
-        // Resize parts
-        // if (el == undefined) {
-        //     el = this.$refs.reduceText['$el'] as HTMLElement;
-        // }
-
-        if (update) { this.updateContent(this.reduceContent, el); }
-        let currentHeight: number = (el as HTMLElement).clientHeight;
+        if (update) { this.updateContent(this.reduceContent, this.el); }
+        let currentHeight: number = (this.el as HTMLElement).clientHeight;
         return (currentHeight > this.maxHeight);
     }
+
     private updateContent(content, el): void {
         el.innerHTML = content;
+    }
+
+    private reset(): void {
+        this.hasFinish = false;
+        this.el.innerHTML = this.originalContent;
+        this.reduceContent = '';
+        this.$nextTick(() => {
+            this.adjustText();
+        });
     }
 
     private getReduceContent(): void {

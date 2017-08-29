@@ -3,12 +3,17 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './template.html?style=./template.scss';
 import { TEMPLATE_NAME } from '../component-names';
+import ElementQueries from 'css-element-queries/src/ElementQueries';
 
 @WithRender
 @Component
 export class Mtemplate extends Vue {
     @Prop({ default: false })
     public footerFullWidth: boolean;
+
+    protected mounted(): void {
+        ElementQueries.init();
+    }
 
     private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;
