@@ -21,19 +21,12 @@ export class MTooltip extends Vue {
     public closeButton: boolean;
 
     public componentName = TOOLTIP_NAME;
-    private propLabel: string;
 
     private get propMode(): string {
         return this.mode != MTooltipMode.ICON && this.label != undefined ? MTooltipMode.LINK : MTooltipMode.ICON;
     }
 
-    private openTooltip(): void {
-        console.log('test');
-        this.$emit('click');
-    }
-
     private onOpen(): void {
-        this.openTooltip();
         this.$emit('open');
     }
 
