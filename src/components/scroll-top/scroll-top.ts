@@ -17,18 +17,25 @@ export class MScrollTop extends Vue {
     public position: string;
 
     public componentName = SCROLL_TOP_NAME;
-    public scrollBreakPoint: number = window.innerHeight * 2;
+    private scrollBreakPoint: number = window.innerHeight * 2;
+    private isFocus: boolean = false;
 
     protected mounted(): void {
         console.log(this.scrollBreakPoint);
+        window.document.body.onscroll = function() {
+            console.log('in');
+        };
+
     }
 
     private scrollTop(): void {
         console.log(document.body.offsetHeight);
     }
 
-    private onScroll(): void {
-        console.log('test');
+    private onClick(event) {
+        console.log(this.$el);
+        this.$emit('click');
+        this.$el.blur();
     }
 
 }
