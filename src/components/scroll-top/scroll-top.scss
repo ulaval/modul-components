@@ -1,0 +1,27 @@
+@import 'abstracts/variables';
+
+.m-scroll-top {
+    position: fixed;
+    bottom: 60px;
+    right: $m-padding--l;
+    z-index: 999;
+
+    &.m-button.m--is-icon {
+        background-color: $m-color--black-grey-dark;
+        border-radius: $m-border-radius--s;
+        min-width: 28px;
+        min-height: 28px;
+        opacity: 0.3;
+        transition: 0.3s ease;
+        color: $m-color--white;
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

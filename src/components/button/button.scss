@@ -171,6 +171,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         position: relative;
         z-index: 2;
         font-size: $m-font-size;
+        height: $m-font-size;
 
         &.m--is-left {
             margin-right: $m-margin;
