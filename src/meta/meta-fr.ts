@@ -41,7 +41,7 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/tabs/tabs.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/template/template.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/text-field/text-field.meta.fr.json'));
-            i18n.addMessages(FRENCH, require('../components/timerpicker/timerpicker.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/timepicker/timepicker.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/tooltip/tooltip.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/upload/upload.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../directives/ripple-effect/ripple-effect.meta.fr.json'));
