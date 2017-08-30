@@ -75,10 +75,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth >= ElementQueriesBpMin.XL) {
             if (!this.isEqMinXL) {
                 this.isEqMinXL = true;
+                this.$emit('isEqMinXL', true);
             }
         } else {
             if (this.isEqMinXL) {
                 this.isEqMinXL = false;
+                this.$emit('isEqMinXL', false);
             }
         }
 
@@ -86,10 +88,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth >= ElementQueriesBpMin.L) {
             if (!this.isEqMinL) {
                 this.isEqMinL = true;
+                this.$emit('isEqMinL', true);
             }
         } else {
             if (this.isEqMinL) {
                 this.isEqMinL = false;
+                this.$emit('isEqMinL', false);
             }
         }
 
@@ -97,10 +101,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth >= ElementQueriesBpMin.M) {
             if (!this.isEqMinM) {
                 this.isEqMinM = true;
+                this.$emit('isEqMinM', true);
             }
         } else {
             if (this.isEqMinM) {
                 this.isEqMinM = false;
+                this.$emit('isEqMinM', false);
             }
         }
 
@@ -108,10 +114,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth >= ElementQueriesBpMin.S) {
             if (!this.isEqMinS) {
                 this.isEqMinS = true;
+                this.$emit('isEqMinS', true);
             }
         } else {
             if (this.isEqMinS) {
                 this.isEqMinS = false;
+                this.$emit('isEqMinS', false);
             }
         }
 
@@ -119,10 +127,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth >= ElementQueriesBpMin.XS) {
             if (!this.isEqMinXS) {
                 this.isEqMinXS = true;
+                this.$emit('isEqMinXS', true);
             }
         } else {
             if (this.isEqMinXS) {
                 this.isEqMinXS = false;
+                this.$emit('isEqMinXS', false);
             }
         }
     }
@@ -132,10 +142,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth <= ElementQueriesBpMax.XL) {
             if (!this.isEqMaxXL) {
                 this.isEqMaxXL = true;
+                this.$emit('isEqMaxXL', true);
             }
         } else {
             if (this.isEqMaxXL) {
                 this.isEqMaxXL = false;
+                this.$emit('isEqMaxXL', false);
             }
         }
 
@@ -143,10 +155,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth <= ElementQueriesBpMax.L) {
             if (!this.isEqMaxL) {
                 this.isEqMaxL = true;
+                this.$emit('isEqMaxL', true);
             }
         } else {
             if (this.isEqMaxL) {
                 this.isEqMaxL = false;
+                this.$emit('isEqMaxL', false);
             }
         }
 
@@ -154,10 +168,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth <= ElementQueriesBpMax.M) {
             if (!this.isEqMaxM) {
                 this.isEqMaxM = true;
+                this.$emit('isEqMaxM', true);
             }
         } else {
             if (this.isEqMaxM) {
                 this.isEqMaxM = false;
+                this.$emit('isEqMaxM', false);
             }
         }
 
@@ -165,10 +181,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth <= ElementQueriesBpMax.S) {
             if (!this.isEqMaxS) {
                 this.isEqMaxS = true;
+                this.$emit('isEqMaxS', true);
             }
         } else {
             if (this.isEqMaxS) {
                 this.isEqMaxS = false;
+                this.$emit('isEqMaxS', false);
             }
         }
 
@@ -176,10 +194,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth <= ElementQueriesBpMax.XS) {
             if (!this.isEqMaxXS) {
                 this.isEqMaxXS = true;
+                this.$emit('isEqMaxXS', true);
             }
         } else {
             if (this.isEqMaxXS) {
                 this.isEqMaxXS = false;
+                this.$emit('isEqMaxXS', false);
             }
         }
     }
@@ -189,10 +209,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth >= ElementQueriesBpMin.M && el.clientWidth <= ElementQueriesBpMax.L) {
             if (!this.isEqL) {
                 this.isEqL = true;
+                this.$emit('isEqL', true);
             }
         } else {
             if (this.isEqL) {
                 this.isEqL = false;
+                this.$emit('isEqL', false);
             }
         }
 
@@ -200,10 +222,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth >= ElementQueriesBpMin.S && el.clientWidth <= ElementQueriesBpMax.M) {
             if (!this.isEqM) {
                 this.isEqM = true;
+                this.$emit('isEqM', true);
             }
         } else {
             if (this.isEqM) {
                 this.isEqM = false;
+                this.$emit('isEqM', false);
             }
         }
 
@@ -211,10 +235,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         if (el.clientWidth >= ElementQueriesBpMin.XS && el.clientWidth <= ElementQueriesBpMax.S) {
             if (!this.isEqS) {
                 this.isEqS = true;
+                this.$emit('isEqS', true);
             }
         } else {
             if (this.isEqS) {
                 this.isEqS = false;
+                this.$emit('isEqS', false);
             }
         }
     }
