@@ -1,4 +1,4 @@
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import uuid from '../../utils/uuid/uuid';
 
 const BACKDROP_ID: string = 'mBackdropID';
@@ -17,6 +17,7 @@ export class MWindow {
     public bodyElement: HTMLElement = document.body;
     public bodyStyle: any = this.bodyElement.style;
     public scrollPosition: number = 0;
+    public event = new Vue();
 
     public windowCount: number = 0;
     // public arrWindow: any = new Array();
@@ -26,6 +27,28 @@ export class MWindow {
     public windowZIndex: number = Z_INDEZ_DEFAULT;
     public hasBackdrop: boolean = false;
     private backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
+
+    constructor() {
+        document.body.addEventListener('click', (e: MouseEvent) => this.onClick(e));
+        document.body.addEventListener('scroll', (e) => this.onScroll(e));
+        window.addEventListener('resize', (e) => this.onRisize(e));
+    }
+
+    public onClick(event: MouseEvent): void {
+        this.event.$emit('click', event);
+    }
+
+    public onRisize(event): void {
+        this.event.$emit('resize', event);
+    }
+
+    public elementIsClick(element: HTMLElement, eventTarget: HTMLElement): boolean {
+        return element.contains(eventTarget);
+    }
+
+    public onScroll(event): void {
+        this.event.$emit('scroll', event);
+    }
 
     public addWindow(windowId): void {
         this.windowCount++;

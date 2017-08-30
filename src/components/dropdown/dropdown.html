@@ -1,17 +1,16 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }">
-    <m-popper :options="{ placement: 'bottom' }"
-              :close-on-content-click="!multiple"
-              :close-on-reference-click="!propEditable"
-              :disabled="disabled"
-              :open="propOpen"
-              dialog-mode="panel"
-              :enter="animEnter"
-              :after-enter="animAfterEnter"
-              :leave="animLeave"
-              :padding-header="false"
-              :padding-body="false"
-              @open="openChanged(true)"
-              @close="openChanged(false)">
+    <m-popup :placement="bottom-start"
+             :close-on-content-click="!multiple"
+             :close-on-reference-click="!propEditable"
+             :disabled="disabled"
+             :open="propOpen"
+             :enter="animEnter"
+             :after-enter="animAfterEnter"
+             :leave="animLeave"
+             :padding-header="false"
+             :padding-body="false"
+             @open="openChanged(true)"
+             @close="openChanged(false)">
         <template slot="header" v-if="hasLabel && isMqMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">
@@ -52,7 +51,7 @@
                       @valueChanged="filterDropdown($event)"
                       @keyup="keyupReference">
         </m-text-field>
-    </m-popper>
+    </m-popup>
     <m-validation-message
         :state="propState"
         :error="propErrorMessage"

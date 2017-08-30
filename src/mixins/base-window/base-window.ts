@@ -35,6 +35,8 @@ export class BaseWindow extends ModulVue {
     public id: string;
     @Prop({ default: false })
     public open: boolean;
+    @Prop()
+    public classNamePortalTarget: string;
     @Prop({ default: false })
     public disabled: boolean;
     @Prop()
@@ -49,18 +51,15 @@ export class BaseWindow extends ModulVue {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
-    @Prop()
-    public className: string;
 
     public componentName: string;
     public from: string;
     private hasHeader: boolean;
 
-    private popoverClassName: string = this.className ? 'm-' + this.className + '-popover' : '';
     private internalPropOpen: boolean = false;
     private propId: string = DIALOG_ID;
     private bodyElement: HTMLElement = document.body;
-    private portalTargetElement: HTMLElement = document.createElement('div');
+    private portalTargetEl: HTMLElement = document.createElement('div');
     private isVisible: boolean = false;
     private busy: boolean = false;
 
@@ -201,23 +200,23 @@ export class BaseWindow extends ModulVue {
 
     private createDialog() {
         this.propId = this.id + '-' + uuid.generate();
-        this.portalTargetElement.setAttribute('id', this.propId);
-        this.portalTargetElement.setAttribute('class', 'm-base-window-popover ' + this.popoverClassName);
-        this.portalTargetElement.style.position = 'relative';
+        this.portalTargetEl.setAttribute('id', this.propId);
+        this.portalTargetEl.setAttribute('class', this.classNamePortalTarget);
+        this.portalTargetEl.style.position = 'relative';
 
         this.$mWindow.addWindow(this.propId);
-        this.portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
+        this.portalTargetEl.style.zIndex = String(this.$mWindow.windowZIndex);
 
         this.$mWindow.createBackdrop(this.bodyElement);
         this.$mWindow.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
 
-        this.bodyElement.appendChild(this.portalTargetElement);
+        this.bodyElement.appendChild(this.portalTargetEl);
     }
 
     private deleteDialog() {
-        let portalTargetElement: HTMLElement = this.bodyElement.querySelector('#' + this.propId) as HTMLElement;
-        if (portalTargetElement) {
-            this.bodyElement.removeChild(portalTargetElement);
+        let portalTargetEl: HTMLElement = this.bodyElement.querySelector('#' + this.propId) as HTMLElement;
+        if (portalTargetEl) {
+            this.bodyElement.removeChild(portalTargetEl);
         }
         this.$mWindow.deleteWindow(this.propId);
     }

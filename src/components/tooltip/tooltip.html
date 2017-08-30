@@ -1,4 +1,4 @@
-<m-popper class="m-tooltip" @show="onOpen" @hide="onClose" padding="" :options="options" :disabled="disabled" :shadow="false">
+<m-popup class="m-tooltip" @show="onOpen" @hide="onClose" padding="" :options="options" :disabled="disabled" :shadow="false">
     <m-icon class="m-tooltip__icon" name="information" v-if="propMode == 'icon'"></m-icon>
     <m-link class="m-tooltip__label" mode="button" v-if="propMode != 'icon'">{{ label }}</m-link>
     <div slot="body" class="m-tooltip__content" :class="{'m--has-close-button': closeButton}">
@@ -15,4 +15,4 @@
             <p>Consequat officia ipsum elit cupidatat reprehe ccaecat veniam labore eiusmod.</p>
         </slot>
     </div>
-</m-popper>
+</m-popup>

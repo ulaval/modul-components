@@ -1,0 +1,118 @@
+{
+    "tag": "m-popup",
+    "name": "m-popup-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "default": "default"
+        },
+        "trigger": {
+            "type": "string",
+            "values": [
+                "hover",
+                "click"
+            ],
+            "default": "click"
+        },
+        "open": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "boundariesSelector": {
+            "type": "string"
+        },
+        "forceOpen": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "arrow": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "options": {
+            "type": "string",
+            "values": [
+                "placement",
+                "gpuAcceleration"
+            ]
+        },
+        "closeOnContentClick": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 1
+        },
+        "closeOnReferenceClick": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "mobileMode": {
+            "type": "string",
+            "value": [
+                "primary",
+                "secondary",
+                "panel"
+            ],
+            "default": 2
+        },
+        "padding": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "paddingHeader": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "paddingBody": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "paddingFooter": {
+            "type": "boolean",
+            "value": [
+                "true",
+                "false"
+            ],
+            "default": 0
+        },
+        "shadow": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": "0"
+        }
+    },
+    "overview": "popup.overview"
+}

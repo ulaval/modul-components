@@ -2,6 +2,9 @@
 *::before,
 *::after {
     box-sizing: inherit;
+}
+
+* {
     outline-color: $m-color--interactive-light;
 }
 
@@ -10,6 +13,7 @@ body {
     height: 100%;
     min-width: $m-min-width;
     overflow-x: hidden;
+    outline-color: $m-color--interactive-light;
 }
 
 html {

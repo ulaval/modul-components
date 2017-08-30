@@ -1,33 +1,19 @@
-<div class="m-popper" :class="{ 'm--is-open': animPopperActive }" @mouseover="onMouseOver" @mouseout="onMouseOut">
-    <template v-if="!isMqMaxS">
-        <div @click="togglePopper" ref="reference" class="m-popper__reference">
-            <slot></slot>
-        </div>
+<div class="m-popup" :class="{ 'm--is-open': visible }" @click="onClick" @mouseover="onMouseOver" @mouseout="onMouseOut">
+    <slot></slot>
+    <portal :target-el="'#' + propId">
         <transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter" @enter-cancelled="onEnterCancelled"
             @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
-            <div class="m-popper__container" :class="{ 'm--is-default-anim': defaultAnim }" ref="popper" :aria-hidden="!isPopperOpen" v-show="!disabled && isPopperOpen">
-                <article class="m-popper__article" :class="{ 'm--no-shadow': propShadow }">
-                    <div class="m-popper__body" v-if="hasBodySlot" @click="onContentClick" ref="body">
-                        <slot name="body"></slot>
-                    </div>
-                    <footer class="m-popper__footer" v-if="hasFooterSlot">
-                        <slot name="footer"></slot>
-                    </footer>
-                </article>
-            </div>
+            <article class="m-popup__article" :class="[{ 'm--is-default-anim': defaultAnim, 'm--is-open': defaultAnimOpen }, 'm--is-placement-' + propPlacement ]" :aria-hidden="!visible" v-show="visible">
+                <header class="m-popup__article__header" v-if="hasHeaderSlot">
+                    <slot name="header"></slot>
+                </header>
+                <div class="m-popup__article__body" v-if="hasBodySlot">
+                    <slot name="body"></slot>
+                </div>
+                <footer class="m-popup__article__footer" v-if="hasFooterSlot">
+                    <slot name="footer"></slot>
+                </footer>
+            </article>
         </transition>
-    </template>
-    <m-sidebar :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter"
-        :disabled="disabled" :open="isDialogOpen" @open="toggleDialog(true)" @close="toggleDialog(false)" v-if="isMqMaxS">
-        <slot></slot>
-        <div slot="header" class="m-popper__header" v-if="hasHeaderSlot">
-            <slot name="header"></slot>
-        </div>
-        <div slot="body" class="m-popper__body" v-if="hasBodySlot">
-            <slot name="body"></slot>
-        </div>
-        <div slot="footer" class="m-popper__footer" v-if="hasFooterSlot">
-            <slot name="footer"></slot>
-        </div>
-    </m-sidebar>
+    </portal>
 </div>

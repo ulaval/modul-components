@@ -1,60 +1,76 @@
-@import 'm-popper.css';
 @import 'abstracts/variables';
 
-.m-popper {
-    box-sizing: border-box;
-    display: inline;
+.m-popup {
+    display: inline-flex;
+
+    &[x-placement^="top"],
+    &[x-placement^="top-start"],
+    &[x-placement^="top-end"] {
+        .m-popup__article {
+            &.m--is-default-anim {
+                transform: translate3d(0, -$m-margin--l, 0) scale(0.98);
+            }
+        }
+    }
+
+    &[x-placement^="right"],
+    &[x-placement^="right-start"],
+    &[x-placement^="right-end"] {
+        .m-popup__article {
+            &.m--is-default-anim {
+
+            }
+        }
+    }
+
+    &[x-placement^="bottom"],
+    &[x-placement^="bottom-start"],
+    &[x-placement^="bottom-end"] {
+        .m-popup__article {
+            &.m--is-default-anim {
+                transform: translate3d(0, $m-margin--l, 0) scale(0.98);
+            }
+        }
+    }
+
+    &[x-placement^="left"],
+    &[x-placement^="left-start"],
+    &[x-placement^="left-end"] {
+        .m-popup__article {
+            &.m--is-default-anim {
+                transform: translate3d(-$m-margin--l, 0, 0) scale(0.98);
+            }
+        }
+    }
 
     &__article {
-        transition: 0.3s transform ease-in-out, 0.3s opacity ease;
-        z-index: 4;
-        display: inline-flex;
-        flex-direction: column;
-        overflow: hidden;
-        margin: 0;
-        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
-
-        &.m--no-shadow {
-            box-shadow: none;
-            overflow: visible;
-
-            .m-popper__body {
-                overflow-x: visible;
-                overflow-y: visible;
-            }
-        }
-    }
-
-    &__container {
-        z-index: 4;
+        max-height: calc(100vh - #{ $m-margin });
+        overflow-y: auto;
 
         &.m--is-default-anim {
-            .m-popper__article {
-                transform: translate3d(0, $m-margin--l, 0) scale(0.98);
-                opacity: 0;
+            transition: 0.3s transform ease-in-out, 0.3s opacity ease;
+            opacity: 0;
+
+            &.m--is-placement-top{
+                transform: translate3d(0, -$m-margin--l, 0) scale(0.98);
             }
 
-            &.v-enter-to {
-                .m-popper__article {
-                    transform: translate3d(0, 0, 0);
-                    opacity: 1;
-                }
+            &.m--is-placement-bottom {
+                transform: translate3d(0, $m-margin--l, 0) scale(0.98);
+            }
+
+            &.m--is-placement-right {
+                transform: translate3d($m-margin--l, 0, 0) scale(0.98);
+            }
+
+            &.m--is-placement-left {
+                transform: translate3d(-$m-margin--l, 0, 0) scale(0.98);
+            }
+
+            &.m--is-open.m--is-open {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
             }
         }
-    }
-
-    &__reference {
-        display: inline-flex;
-        z-index: 1;
-    }
-
-    &__body {
-        flex: 1 1 auto;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    &__header {
-        width: 100%;
     }
 }
