@@ -42,7 +42,7 @@ export class MLink extends ModulVue {
         if (this.isButton) {
             event.preventDefault();
         }
-        this.$emit('click');
+        this.$emit('click', event);
     }
 
     private get isRouterLink(): boolean {

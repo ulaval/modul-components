@@ -14,8 +14,6 @@ export class Viewer extends Vue {
     }
 
     public toggleMenu(): void {
-        console.log('tes');
-
         this.menuOpen = !this.menuOpen;
     }
 

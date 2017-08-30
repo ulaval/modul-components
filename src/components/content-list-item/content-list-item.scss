@@ -32,6 +32,24 @@
     // }
 }
 
+.delete-anim-enter-active {
+    transition: opacity 0.3s ease, max-height 0.5s ease, padding 0.5s ease;
+    overflow: hidden;
+}
+
+.delete-anim-enter {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.delete-anim-enter-to {
+    opacity: 1;
+    max-height: 300px;
+    padding: $m-padding;
+}
+
 .delete-anim-leave-active {
     transition: opacity 0.3s ease, max-height 0.5s ease, padding 0.5s ease;
     overflow: hidden;

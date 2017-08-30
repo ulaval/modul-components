@@ -33,7 +33,7 @@ export class MCheckbox extends Vue {
     }
 
     private onClick(event: MouseEvent): void {
-        this.$emit('click');
+        this.$emit('click', event);
         this.$refs['checkbox']['blur']();
     }
 

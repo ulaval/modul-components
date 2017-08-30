@@ -28,6 +28,7 @@ import OptionsMenuPlugin from './options-menu/options-menu';
 import OptionsMenuItemPlugin from './options-menu-item/options-menu-item';
 import PanelPlugin from './panel/panel';
 import PopperPlugin from './popper/popper';
+import PopupPlugin from './popup/popup';
 import RadioPlugin from './radio/radio';
 import RadioGroupPlugin from './radio-group/radio-group';
 import SelectPlugin from './select/select';
@@ -79,6 +80,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(OptionsMenuItemPlugin);
         Vue.use(PanelPlugin);
         Vue.use(PopperPlugin);
+        Vue.use(PopupPlugin);
         Vue.use(RadioPlugin);
         Vue.use(RadioGroupPlugin);
         Vue.use(SelectPlugin);

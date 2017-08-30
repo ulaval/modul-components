@@ -22,7 +22,7 @@ export class MOptionsMenuItem extends ModulVue {
             if (parentMenu) {
                 parentMenu.close();
             }
-            this.$emit('click');
+            this.$emit('click', event);
         } else {
             e.stopPropagation();
         }
