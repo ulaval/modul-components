@@ -10,7 +10,7 @@ $m-accordion--color: $m-color--accent;
 .m-accordion {
     &.m--is-regular,
     &.m--is-light {
-        .m-accordion__header__title {
+        > .m-accordion__header__title {
             &,
             h1,
             h2,
@@ -28,7 +28,7 @@ $m-accordion--color: $m-color--accent;
     &.m--is-regular {
         margin-top: - $m-accordion--border-size;
 
-        .m-accordion {
+        > .m-accordion {
             &__header {
                 position: relative;
                 min-height: 56px;
@@ -47,27 +47,27 @@ $m-accordion--color: $m-color--accent;
                 }
             }
 
-            &__body {
-                transition: 0.45s opacity ease, 0.3s transform ease;
-                padding: $m-padding;
-
-                &-wrap {
-                    &.m--is-anim-active {
-                        &.v-enter-to {
-                            .m-accordion__body {
-                                transform: translate3d(0, 0, 0);
-                                opacity: 1;
-                            }
-                        }
-
-                        &.v-enter,
-                        &.v-leave-to {
-                            .m-accordion__body {
-                                transform: translate3d(0, $m-margin--l, 0);
-                                opacity: 0;
-                            }
+            &__body-wrap {
+                &.m--is-anim-active {
+                    &.v-enter-to {
+                        .m-accordion__body {
+                            transform: translate3d(0, 0, 0);
+                            opacity: 1;
                         }
                     }
+
+                    &.v-enter,
+                    &.v-leave-to {
+                        .m-accordion__body {
+                            transform: translate3d(0, $m-margin--l, 0);
+                            opacity: 0;
+                        }
+                    }
+                }
+
+                > .m-accordion__body {
+                    transition: 0.45s opacity ease, 0.3s transform ease;
+                    padding: $m-padding;
                 }
             }
         }
@@ -76,7 +76,7 @@ $m-accordion--color: $m-color--accent;
     &.m--is-light {
         margin: $m-margin--s 0;
 
-        .m-accordion {
+        > .m-accordion {
             &__header {
                 &:hover {
                     .m-accordion__header__title {
@@ -86,10 +86,12 @@ $m-accordion--color: $m-color--accent;
                 }
             }
 
-            &__body {
-                padding-left: $m-margin--l;
-                padding-top: $m-margin--s;
-                padding-bottom: $m-margin;
+            &__body-wrap {
+                > .m-accordion__body {
+                    padding-left: $m-margin--l;
+                    padding-top: $m-margin--s;
+                    padding-bottom: $m-margin;
+                }
             }
         }
     }
@@ -210,10 +212,10 @@ $m-accordion--color: $m-color--accent;
     }
 
     &__body-wrap {
-        @include m-transition-accordion;
+        @include m-transition-accordion();
     }
 
     &__hidden {
-        @include m-visually-hidden;
+        @include m-visually-hidden();
     }
 }
