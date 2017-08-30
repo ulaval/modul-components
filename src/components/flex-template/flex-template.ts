@@ -24,8 +24,6 @@ export class MFlexTemplate extends ModulVue {
     public menuWidth: string;
     @Prop({ default: true })
     public menuFixe: boolean;
-    @Prop()
-    public minHeight: string;
     @Prop({ default: MFlexTemplateFrom.Left })
     public menuFrom: MFlexTemplateFrom;
     @Prop({ default: false })
@@ -34,6 +32,8 @@ export class MFlexTemplate extends ModulVue {
     public smallMenu: boolean;
     @Prop({ default: '44px' })
     public smallMenuSize: string;
+    @Prop()
+    public pageMinHeight: string;
 
     private menuOpenCount: number = 0;
 
@@ -47,10 +47,14 @@ export class MFlexTemplate extends ModulVue {
     private internalMenuOpen: boolean = false;
     private menuHasAnim: boolean = false;
 
+    private internalSmallMenu: boolean = false;
+
     protected mounted(): void {
         document.body.addEventListener('scroll', this.onScroll);
         this.propMenuOpen = this.menuOpen;
         this.scrollPosition = document.body.scrollTop;
+        this.internalSmallMenu = this.smallMenu;
+        this.$on('isEqMaxS', (value: boolean) => this.isEqMaxSChanged(value));
         this.setHeaderHeight();
     }
 
@@ -58,17 +62,21 @@ export class MFlexTemplate extends ModulVue {
         document.body.removeEventListener('scroll', this.onScroll);
     }
 
-    @Watch('isEqMaxS')
-    private isEqMaxSChanged(value: boolean): void {
-        if (this.propMenuOpen) {
-            this.animEnter(this.$el, this.doneAnim);
-        }
-    }
-
     @Watch('menuOpen')
     private menuOpenChanged(open: boolean): void {
         this.menuHasAnim = true;
         this.propMenuOpen = open;
+        if (open) {
+            this.$emit('open');
+        } else {
+            this.$emit('close');
+        }
+    }
+
+    private isEqMaxSChanged(value: boolean): void {
+        if (this.propMenuOpen) {
+            this.animEnter(this.$el, this.doneAnim);
+        }
     }
 
     private doneAnim(): void {
@@ -80,18 +88,12 @@ export class MFlexTemplate extends ModulVue {
         this.adjustDynamicHeader();
     }
 
-    private pageOnclick(): void {
-        if (this.as<ElementQueriesMixin>().isEqMaxS) {
-            if (this.propMenuOpen) {
-                // this.propMenuOpen = false;
-            }
-        }
-    }
-
     private setHeaderHeight(): void {
         this.$nextTick(() => {
-            this.headerHeight = (this.$refs.header as HTMLElement).clientHeight;
-            this.setSpacing(this.headerHeight);
+            if (this.hasHeaderSlot) {
+                this.headerHeight = (this.$refs.header as HTMLElement).clientHeight;
+                this.setSpacing(this.headerHeight);
+            }
         });
     }
 
@@ -101,15 +103,17 @@ export class MFlexTemplate extends ModulVue {
     }
 
     private adjustDynamicHeader() {
-        let position: number = this.$el.getBoundingClientRect().top;
-        let maxPosition: number = position + this.headerHeight + (this.headerHeight * 1.3);
-        let header = this.$refs.header as HTMLElement;
-        this.headerHidden = this.propDynamicHeader && (maxPosition <= 0 && !this.propMenuOpen) && (this.scrollPosition >= position);
-        this.scrollPosition = position;
+        if (this.hasHeaderSlot) {
+            let position: number = this.$el.getBoundingClientRect().top;
+            let maxPosition: number = position + this.headerHeight + (this.headerHeight * 1.3);
+            let header = this.$refs.header as HTMLElement;
+            this.headerHidden = this.propDynamicHeader && (maxPosition <= 0 && !this.propMenuOpen) && (this.scrollPosition >= position);
+            this.scrollPosition = position;
+        }
     }
 
     private adjustFixeMenu(): void {
-        if (!this.propHeaderFixe && this.propMenuFixe && this.hasHeaderSlot && this.propMenuOpen && !this.as<ElementQueriesMixin>().isEqMaxS) {
+        if (!this.propHeaderFixe && this.propMenuFixe && this.propMenuOpen && !this.as<ElementQueriesMixin>().isEqMaxS) {
             let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;
             let menu: HTMLElement = this.$refs.menu as HTMLElement;
             let topPosition: number = menuContainer.getBoundingClientRect().top;
@@ -119,7 +123,7 @@ export class MFlexTemplate extends ModulVue {
                 } else {
                     this.topMenu = '';
                 }
-            }, 200);
+            }, 100);
         }
     }
 
@@ -143,13 +147,6 @@ export class MFlexTemplate extends ModulVue {
         return this.hasMenuSlot && this.menuFixe;
     }
 
-    private get propSmallMenu(): boolean {
-        if (this.hasMenuSlot) {
-            return this.smallMenu;
-        }
-        return false;
-    }
-
     private get menuOpenWidth(): string {
         if (this.hasMenuSlot) {
             if (this.smallMenu) {
@@ -160,8 +157,29 @@ export class MFlexTemplate extends ModulVue {
         return '';
     }
 
-    private get propMinHeight(): string {
-        return this.minHeight == undefined || this.minHeight == '' ? '100vh' : this.minHeight;
+    private get propSmallMenu(): boolean {
+        if (this.hasMenuSlot) {
+            if (this.internalSmallMenu != this.smallMenu) {
+                this.menuHasAnim = true;
+                this.setMenuWidth();
+                this.internalSmallMenu = this.smallMenu;
+            }
+            return this.smallMenu;
+        }
+        return false;
+    }
+
+    private setMenuWidth(): void {
+        let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;
+        let menu: HTMLElement = this.$refs.menu as HTMLElement;
+        let pageContainer: HTMLElement = this.$refs.pageContainer as HTMLElement;
+        menuContainer.style.width = this.menuOpenWidth;
+        menu.style.width = this.menuOpenWidth;
+        pageContainer.style.width = 'calc(100% - ' + this.menuOpenWidth + ')';
+    }
+
+    private get propPageMinHeight(): string {
+        return this.pageMinHeight == undefined || this.pageMinHeight == '' ? '100vh' : this.pageMinHeight;
     }
 
     private get isMenuFromRight(): boolean {
@@ -188,21 +206,17 @@ export class MFlexTemplate extends ModulVue {
         this.adjustFixeMenu();
         this.adjustDynamicHeader();
         if (!this.as<ElementQueriesMixin>().isEqMaxS) {
-            let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;
-            let pageContainer: HTMLElement = this.$refs.pageContainer as HTMLElement;
             if (this.menuHasAnim) {
                 setTimeout(() => {
                     this.transitionDelayOpen = true;
-                    menuContainer.style.width = this.menuOpenWidth;
-                    pageContainer.style.width = 'calc(100% - ' + this.menuOpenWidth + ')';
+                    this.setMenuWidth();
                     setTimeout(() => {
                         done();
                     }, 450);
                 }, 20);
             } else {
                 this.transitionDelayOpen = true;
-                menuContainer.style.width = this.menuOpenWidth;
-                pageContainer.style.width = 'calc(100% - ' + this.menuOpenWidth + ')';
+                this.setMenuWidth();
                 done();
             }
 
@@ -234,6 +248,7 @@ export class MFlexTemplate extends ModulVue {
             done();
         }, 450);
     }
+
 }
 
 const FlexTemplatePlugin: PluginObject<any> = {

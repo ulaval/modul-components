@@ -3,10 +3,11 @@
               'm--is-menu-right': isMenuFromRight,
               'm--no-header': !hasHeaderSlot,
               'm--is-menu-fixe-fake': isMenuFixeFake,
-              'm--is-header-fixe': propHeaderFixe,
+              'm--is-header-fixe': propHeaderFixe && !isMenuFixeFake,
               'm--is-menu-fixe': propMenuFixe,
               'm--is-header-hidden': headerHidden,
-              'm--has-menu-anim': menuHasAnim }">
+              'm--has-menu-anim': menuHasAnim,
+              'm--is-small-menu': propSmallMenu }">
     <header class="m-flex-template__header" ref="header" v-if="hasHeaderSlot">
         <slot name="header"></slot>
     </header>
@@ -22,8 +23,8 @@
             </div>
         </transition>
 
-        <div class="m-flex-template__page-container" ref="pageContainer" @click="pageOnclick">
-            <div class="m-flex-template__page" :style="{ 'padding-top': paddingPage, 'min-height': propMinHeight }">
+        <div class="m-flex-template__page-container" ref="pageContainer">
+            <div class="m-flex-template__page" :style="{ 'padding-top': paddingPage, 'min-height': propPageMinHeight }">
                 <div class="m-flex-template__page__body">
                     <slot>... Waiting</slot>
                 </div>

@@ -4,12 +4,13 @@
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
+    background: $m-color--white;
 
     &.m--is-menu-right {
-        .m-flex-template {
-            &__menu {
+        > .m-flex-template__corps {
+            > .m-flex-template__menu-container {
                 &,
-                &-container {
+                > .m-flex-template__menu {
                     right: 0;
                 }
             }
@@ -17,55 +18,57 @@
     }
 
     &.m--is-header-fixe {
-        .m-flex-template {
-            &__header {
-                position: fixed;
-                z-index: 2;
-            }
+        > .m-flex-template__header {
+            position: fixed;
+            z-index: 2;
         }
     }
 
-    &.m--is-header-fixe,
-    &.m--no-header {
+    &.m--is-header-fixe {
         &.m--is-menu-fixe {
-            .m-flex-template {
-                &__menu {
-                    position: fixed;
+            > .m-flex-template__corps {
+                > .m-flex-template__menu-container {
+                    > .m-flex-template__menu {
+                        position: fixed;
+                    }
                 }
             }
         }
     }
 
     &.m--is-menu-fixe-fake {
-        .m-flex-template {
-            &__menu {
-                transition: 0.3s top ease;
-                max-height: 100vh;
+        > .m-flex-template__corps {
+            > .m-flex-template__menu-container {
+                > .m-flex-template__menu {
+                    transition: 0.3s top ease;
+                    max-height: 100vh;
+                    overflow-y: auto;
+                }
             }
         }
     }
 
     &.m--is-header-hidden {
-        .m-flex-template {
-            &__header {
-                transform: translate3d(0, -100%, 0);
-            }
+        > .m-flex-template__header {
+            transform: translate3d(0, -100%, 0);
         }
     }
 
     &.m--has-menu-anim {
-        .m-flex-template {
-            &__menu-container,
-            &__page-container {
+        > .m-flex-template__corps {
+            > .m-flex-template__menu-container,
+            > .m-flex-template__page-container {
                 transition: 0.45s width ease-in-out;
             }
         }
     }
 
     &:not(.m--is-menu-right) {
-        .m-flex-template {
-            &__menu {
-                left: 0;
+        > .m-flex-template__corps {
+            > .m-flex-template__menu-container {
+                > .m-flex-template__menu {
+                    left: 0;
+                }
             }
         }
     }
@@ -95,12 +98,13 @@
         top: 0;
         bottom: 0;
 
-        &__content {
-            outline: none;
+        &-container {
+            width: 0;
         }
 
         &__content {
             background: $m-color--white;
+            outline: none;
 
             &,
             > :first-child {
@@ -155,72 +159,88 @@
     &[max-width~="#{ $m-bp--max--s }"] {
         &:not(.m--is-menu-open) {
             &.m--is-menu-right {
-                .m-flex-template__menu {
-                    transform: translate3d(100%, 0, 0);
+                > .m-flex-template__corps {
+                    > .m-flex-template__menu-container {
+                        > .m-flex-template__menu {
+                            transform: translate3d(100%, 0, 0);
+                        }
+                    }
                 }
             }
 
             &:not(.m--is-menu-right) {
-                .m-flex-template__menu {
-                    transform: translate3d(-100%, 0, 0);
+                > .m-flex-template__corps {
+                    > .m-flex-template__menu-container {
+                        > .m-flex-template__menu {
+                            transform: translate3d(-100%, 0, 0);
+                        }
+                    }
                 }
             }
         }
 
         &.m--has-menu-anim {
-            .m-flex-template {
-                &__menu {
-                    transition: 0.45s transform ease;
+            > .m-flex-template__corps {
+                > .m-flex-template__menu-container {
+                    > .m-flex-template__menu {
+                        transition: 0.45s transform ease;
+                    }
                 }
             }
         }
 
-        .m-flex-template {
-            &__menu {
-                position: fixed;
-                top: 0;
-                bottom: 0;
-
-                &-container {
-                    position: absolute;
+        > .m-flex-template__corps {
+            > .m-flex-template__menu-container {
+                > .m-flex-template__menu {
+                    position: fixed;
                     top: 0;
                     bottom: 0;
-                    z-index: 4;
+                    z-index: 2;
+
+                    &-container {
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        z-index: 4;
+                    }
                 }
             }
 
-            &__page {
-                &-container {
-                    z-index: 1;
-                    width: 100% !important;
-                }
+            > .m-flex-template__page-container {
+                z-index: 1;
+                width: 100% !important;
             }
         }
     }
 
     &[min-width~="#{ $m-bp--min--s }"] {
         &.m--is-menu-right {
-            .m-flex-template {
-                &__corps {
-                    flex-direction: row-reverse;
-                }
+            > .m-flex-template__corps {
+                flex-direction: row-reverse;
 
-                &__menu {
-                    &__content {
-                        position: absolute;
+                > .m-flex-template__menu-container {
+                    > .m-flex-template__menu {
                         right: 0;
                     }
                 }
             }
+
+            // &:not(.m--is-header-fixe) {
+            //     > .m-flex-template__corps {
+            //         > .m-flex-template__menu-container {
+            //             > .m-flex-template__menu {
+            //                 position: absolute;
+            //             }
+            //         }
+            //     }
+            // }
         }
 
-        .m-flex-template {
-            &__corps {
-                display: flex;
-            }
+        > .m-flex-template__corps {
+            display: flex;
 
-            &__menu {
-                &-container {
+            > .m-flex-template__menu-container {
+                > .m-flex-template__menu {
                     position: relative;
                     width: 0;
                 }
