@@ -31,7 +31,7 @@ export class MFlexTemplate extends ModulVue {
     @Prop({ default: false })
     public smallMenu: boolean;
     @Prop({ default: '44px' })
-    public smallMenuSize: string;
+    public smallMenuWidth: string;
     @Prop()
     public pageMinHeight: string;
 
@@ -47,12 +47,9 @@ export class MFlexTemplate extends ModulVue {
     private internalMenuOpen: boolean = false;
     private menuHasAnim: boolean = false;
 
-    private internalSmallMenu: boolean = false;
-
     protected mounted(): void {
         this.propMenuOpen = this.menuOpen;
         this.scrollPosition = document.body.scrollTop;
-        this.internalSmallMenu = this.smallMenu;
         this.$on('isEqMaxS', (value: boolean) => this.isEqMaxSChanged(value));
         this.$mWindow.event.$on('scroll', this.onScroll);
         this.setHeaderHeight();
@@ -73,14 +70,18 @@ export class MFlexTemplate extends ModulVue {
         }
     }
 
-    private isEqMaxSChanged(value: boolean): void {
-        if (this.propMenuOpen) {
-            this.animEnter(this.$el, this.doneAnim);
+    @Watch('smallMenu')
+    private smallMenuChanged(smallMenu: boolean): void {
+        this.menuHasAnim = true;
+        if (this.propMenuOpen && !this.as<ElementQueriesMixin>().isEqMaxS) {
+            this.setMenuWidth();
         }
     }
 
-    private doneAnim(): void {
-        return;
+    private isEqMaxSChanged(value: boolean): void {
+        if (this.propMenuOpen) {
+            this.setMenuWidth();
+        }
     }
 
     private onScroll() {
@@ -127,8 +128,14 @@ export class MFlexTemplate extends ModulVue {
         }
     }
 
-    private get propDynamicHeader(): boolean {
-        return this.dynamicHeader && this.propHeaderFixe;
+    private setMenuWidth(): void {
+        let width = this.propSmallMenu ? this.smallMenuWidth : this.menuWidth;
+        let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;
+        let menu: HTMLElement = this.$refs.menu as HTMLElement;
+        let pageContainer: HTMLElement = this.$refs.pageContainer as HTMLElement;
+        menuContainer.style.width = width;
+        menu.style.width = width;
+        pageContainer.style.width = 'calc(100% - ' + width + ')';
     }
 
     private get propMenuOpen(): boolean {
@@ -139,6 +146,10 @@ export class MFlexTemplate extends ModulVue {
         this.internalMenuOpen = this.hasMenuSlot ? open : false;
     }
 
+    private get propSmallMenu(): boolean {
+        return this.hasMenuSlot ? this.smallMenu : false;
+    }
+
     private get propHeaderFixe() {
         return this.hasHeaderSlot && this.headerFixe;
     }
@@ -147,35 +158,8 @@ export class MFlexTemplate extends ModulVue {
         return this.hasMenuSlot && this.menuFixe;
     }
 
-    private get menuOpenWidth(): string {
-        if (this.hasMenuSlot) {
-            if (this.smallMenu && !this.as<ElementQueriesMixin>().isEqMaxS) {
-                return this.smallMenuSize;
-            }
-            return this.menuWidth;
-        }
-        return '';
-    }
-
-    private get propSmallMenu(): boolean {
-        if (this.hasMenuSlot) {
-            if (this.internalSmallMenu != this.smallMenu) {
-                this.menuHasAnim = true;
-                this.setMenuWidth();
-                this.internalSmallMenu = this.smallMenu;
-            }
-            return this.smallMenu;
-        }
-        return false;
-    }
-
-    private setMenuWidth(): void {
-        let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;
-        let menu: HTMLElement = this.$refs.menu as HTMLElement;
-        let pageContainer: HTMLElement = this.$refs.pageContainer as HTMLElement;
-        menuContainer.style.width = this.menuOpenWidth;
-        menu.style.width = this.menuOpenWidth;
-        pageContainer.style.width = 'calc(100% - ' + this.menuOpenWidth + ')';
+    private get propDynamicHeader(): boolean {
+        return this.dynamicHeader && this.propHeaderFixe;
     }
 
     private get propPageMinHeight(): string {
