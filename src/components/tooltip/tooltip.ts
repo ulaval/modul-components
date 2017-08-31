@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './tooltip.html?style=./tooltip.scss';
 import { TOOLTIP_NAME } from '../component-names';
 import { MPopup } from '../popup/popup';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { MPopperPlacement } from '../popper/popper';
 
 export enum MTooltipMode {
@@ -13,7 +14,9 @@ export enum MTooltipMode {
 }
 
 @WithRender
-@Component
+@Component({
+    mixins: [MediaQueries]
+})
 export class MTooltip extends Vue {
     @Prop({ default: false })
     public open: boolean;
@@ -31,9 +34,26 @@ export class MTooltip extends Vue {
     public disabled: boolean;
 
     public componentName = TOOLTIP_NAME;
+    private propOpen: boolean;
+    private error: boolean = false;
+    private isEqMaxS: boolean = false;
+
+    protected mounted(): void {
+        this.propOpen = this.open;
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
+    }
 
     private get propMode(): string {
         return this.mode != MTooltipMode.ICON && this.label != undefined ? MTooltipMode.LINK : MTooltipMode.ICON;
+    }
+
+    private get propLabel(): string {
+        this.error = this.label == undefined || this.label == '';
+        return this.label;
     }
 
     private onOpen(): void {

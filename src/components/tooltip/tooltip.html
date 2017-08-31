@@ -1,12 +1,11 @@
-<m-popup class="m-tooltip" :open="open" @open="onOpen" @close="onClose" :placement="placement" padding="" :disabled="disabled" :classNamePortalTarget="classNamePortalTarget">
-    <m-icon class="m-tooltip__icon" name="information" v-if="propMode == 'icon'"></m-icon>
-    <m-link class="m-tooltip__label" mode="button" v-if="propMode != 'icon'">{{ label }}</m-link>
+<m-popup class="m-tooltip" :open="propOpen" @open="onOpen" @close="onClose" :placement="placement" padding="" :disabled="disabled"
+    :classNamePortalTarget="classNamePortalTarget">
+    <m-button class="m-tooltip__icon" mode="icon" icon-name="information" v-if="propMode == 'icon'">{{ propLabel }}</m-button>
+    <m-link class="m-tooltip__label" mode="button" v-if="propMode != 'icon'">{{ propLabel }}</m-link>
+    <span v-if="error">m-tooltip needs the "label" prop. The text of this property will be visually hidden in "icon" mode and read by voice readers</span>
     <div slot="body" class="m-tooltip__content" :class="{'m--has-close-button': closeButton}">
-        <m-button mode="icon" icon-name="default" icon-size="10px" @click="close" class="m-tooltip__content__close-button" v-if="closeButton">
-            <m-i18n k="m-tooltip:close"></m-i18n>
-        </m-button>
         <slot>
-            <p style="margin-top:0;">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             <m-bullet-list title="Id enim eu ullamco" class="m-u--margin-top">
                 <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
                 <li>Sunt ad eu eiusmod esse mollit consectetur quis voluptate irure.</li>
@@ -14,5 +13,8 @@
             </m-bullet-list>
             <p>Consequat officia ipsum elit cupidatat reprehe ccaecat veniam labore eiusmod.</p>
         </slot>
+        <m-button mode="icon" icon-name="default" icon-size="10px" @click="close" class="m-tooltip__content__close-button" v-if="closeButton && isMqMinS">
+            <m-i18n k="m-tooltip:close"></m-i18n>
+        </m-button>
     </div>
 </m-popup>

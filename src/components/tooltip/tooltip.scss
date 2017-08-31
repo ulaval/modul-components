@@ -4,14 +4,30 @@ $m-tooltip--max-height: 280px !default;
 
 .m-tooltip {
     &__icon {
+        transition: color 0.3s ease;
         color: $m-color--interactive-light;
         cursor: pointer;
-        transition: color 0.3s ease;
-        margin-bottom: $m-margin--s;
 
         &:hover {
             color: $m-color--interactive;
         }
+
+        &:active {
+            outline: none;
+        }
+
+        &.m-button {
+            min-width: $m-font-size;
+            min-height: $m-font-size;
+            height: $m-font-size;
+
+            color: $m-color--interactive-light;
+
+            &:hover {
+                color: $m-color--interactive;
+            }
+        }
+
     }
 
     &__content {
