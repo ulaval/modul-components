@@ -1,44 +1,17 @@
 <div class="m-popup" :id="id">
-    <m-popper :open="propOpen"
-              @open="openChanged(true)"
-              @close="openChanged(false)"
-              :disabled="disabled"
-              :id="id"
-              :classNamePortalTarget="classNamePortalTarget"
-              :placement="placement"
-              :openOnClick="openOnClick"
-              :openOnOver="openOnOver"
-              :beforeEnter="beforeEnter"
-              :enter="enter"
-              :afterEnter="afterEnter"
-              :enterCancelled="enterCancelled"
-              :beforeLeave="beforeLeave"
-              :leave="leave"
-              :afterLeave="afterLeave"
-              :leaveCancelled="leaveCancelled"
-              v-if="!isMqMaxS">
+    <m-popper :open="propOpen" @open="openChanged(true)" @close="openChanged(false)" :disabled="disabled" :id="id" :classNamePortalTarget="classNamePortalTarget"
+        :placement="placement" :openOnClick="openOnClick" :openOnOver="openOnOver" :beforeEnter="beforeEnter" :enter="enter"
+        :afterEnter="afterEnter" :enterCancelled="enterCancelled" :beforeLeave="beforeLeave" :leave="leave" :afterLeave="afterLeave"
+        :leaveCancelled="leaveCancelled" v-if="!isMqMaxS">
         <slot></slot>
-        <div slot="header" class="m-popup__header" v-if="hasHeaderSlot">
+        <div slot="body" class="m-popup__body" v-if="hasHeaderSlot || hasBodySlot || hasFooterSlot">
             <slot name="header"></slot>
-        </div>
-        <div slot="body" class="m-popup__body" v-if="hasBodySlot">
             <slot name="body"></slot>
-        </div>
-        <div slot="footer" class="m-popup__footer" v-if="hasFooterSlot">
             <slot name="footer"></slot>
         </div>
     </m-popper>
-    <m-sidebar :open="propOpen"
-               @open="openChanged(true)"
-               @close="openChanged(false)"
-               :disabled="disabled"
-               :id="id"
-               :classNamePortalTarget="classNamePortalTarget"
-               :padding="padding"
-               :padding-header="paddingHeader"
-               :padding-body="paddingBody"
-               :padding-footer="paddingFooter"
-               v-if="isMqMaxS">
+    <m-sidebar :open="propOpen" @open="openChanged(true)" @close="openChanged(false)" :disabled="disabled" :id="id" :classNamePortalTarget="classNamePortalTarget"
+        :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter" v-if="isMqMaxS">
         <slot></slot>
         <div slot="header" class="m-popup__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>

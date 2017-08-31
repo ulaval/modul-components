@@ -48,28 +48,23 @@ $m-tooltip--max-height: 280px !default;
         }
     }
 
+    &__close-button.m-button.m--is-icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: $m-color--interactive;
+
+        .m-button__icon .m-icon {
+            font-size: $m-font-size--xs;
+            height: $m-font-size--xs;
+        }
+    }
+
     &__body {
         padding: $m-padding;
         background: $m-color--interactive-lightest;
         box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
         border-radius: $m-border-radius--s;
-
-        &.m--has-close-button {
-            padding-right: $m-padding--l;
-            position: relative;
-        }
-
-        &__close-button.m-button.m--is-icon {
-            position: absolute;
-            top: 0;
-            right: 0;
-            color: $m-color--interactive;
-
-            .m-button__icon .m-icon {
-                font-size: $m-font-size--xs;
-                height: $m-font-size--xs;
-            }
-        }
 
         @media (max-width: $m-bp--max--s) {
             position: relative;
@@ -93,6 +88,11 @@ $m-tooltip--max-height: 280px !default;
             border: 1px solid $m-color--interactive;
         }
 
+        @media (max-height: $m-tooltip--max-height) {
+            min-height: $m-touch-size;
+            max-height: calc(100vh - #{ $m-margin--l });
+        }
+
         @include m-scrollbar-ie();
 
         &::-webkit-scrollbar {
@@ -107,10 +107,12 @@ $m-tooltip--max-height: 280px !default;
             }
         }
 
-        > :first-child {
-            &,
-            > :first-child {
-                margin-top: 0;
+        &-container {
+            &.m--has-close-button {
+                position: relative;
+                .m-tooltip__body {
+                    padding-right: $m-padding--l;
+                }
             }
         }
     }

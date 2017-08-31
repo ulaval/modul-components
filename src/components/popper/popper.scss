@@ -6,9 +6,6 @@ $m-popper--margin: $m-margin !default;
     display: inline-flex;
 
     &__article {
-        max-height: calc(100vh - #{ $m-margin });
-        overflow-y: auto;
-
         &.m--is-default-anim {
             transition: 0.3s transform ease-in-out, 0.3s opacity ease;
             opacity: 0;
@@ -40,6 +37,13 @@ $m-popper--margin: $m-margin !default;
             &.m--is-open.m--is-open {
                 transform: translate3d(0, 0, 0);
                 opacity: 1;
+            }
+        }
+
+        > :first-child {
+            &,
+            > :first-child {
+                margin-top: 0;
             }
         }
     }

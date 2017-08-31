@@ -78,12 +78,14 @@ export class MPopper extends ModulVue {
     protected mounted(): void {
         this.propOpen = this.open;
         this.$mWindow.event.$on('click', (e: MouseEvent) => this.onClickOutside(e));
+        this.$mWindow.event.$on('scroll', () => this.update());
         this.$mWindow.event.$on('resize', () => this.update());
     }
 
     protected destroyed(): void {
         this.destroyPopper();
         this.$mWindow.event.$off('click');
+        this.$mWindow.event.$off('scroll');
         this.$mWindow.event.$off('resize');
         document.body.removeChild(this.getPortalTargetEl());
     }
@@ -94,6 +96,8 @@ export class MPopper extends ModulVue {
     }
 
     private update(): void {
+        console.log('up');
+
         if (this.popper != undefined) {
             this.popper.update();
         }
@@ -220,6 +224,10 @@ export class MPopper extends ModulVue {
         return placement;
     }
 
+    private get hasBodySlot(): boolean {
+        return !!this.$slots.body;
+    }
+
     private get defaultAnim(): boolean {
         return !this.hasBeforeEnterAnim() && !this.hasEnterAnim() && !this.hasAfterEnterAnim() && !this.hasBeforeLeaveAnim() && !this.hasLeaveAnim() && !this.hasAfterLeaveAnim();
     }
@@ -255,6 +263,9 @@ export class MPopper extends ModulVue {
     }
 
     private onEnter(el: HTMLElement, done): void {
+        this.$nextTick(() => {
+            this.update();
+        });
         if (this.hasEnterAnim()) {
             this.enter(el.children[0], done);
         } else {
@@ -303,18 +314,6 @@ export class MPopper extends ModulVue {
         if (typeof (this.leaveCancelled) === 'function') {
             this.leaveCancelled(el.children[0]);
         }
-    }
-
-    private get hasHeaderSlot(): boolean {
-        return !!this.$slots.header;
-    }
-
-    private get hasBodySlot(): boolean {
-        return !!this.$slots.body;
-    }
-
-    private get hasFooterSlot(): boolean {
-        return !!this.$slots.footer;
     }
 }
 

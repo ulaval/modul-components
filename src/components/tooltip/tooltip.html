@@ -9,18 +9,12 @@
         </m-link>
     </template>
     <span v-if="!hasDefaultSlot">m-tooltip icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the voice readers.</span>
-    <div slot="body" class="m-tooltip__body" :class="{'m--has-close-button': closeButton}" v-if="hasBodySlot">
-        <slot name="body">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <m-bullet-list title="Id enim eu ullamco" class="m-u--margin-top">
-                <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-                <li>Sunt ad eu eiusmod esse mollit consectetur quis voluptate irure.</li>
-                <li>Aute consectetur esse sint voluptate.</li>
-            </m-bullet-list>
-            <p>Consequat officia ipsum elit cupidatat reprehe ccaecat veniam labore eiusmod.</p>
-        </slot>
-        <m-button mode="icon" icon-name="default" icon-size="10px" @click="close" class="m-tooltip__body__close-button" v-if="closeButton && isMqMinS">
+    <div slot="body" class="m-tooltip__body-container" :class="{ 'm--has-close-button': propCloseButton }" v-if="hasBodySlot">
+        <m-button mode="icon" icon-name="default" icon-size="10px" @click="close" class="m-tooltip__close-button" v-if="propCloseButton">
             <m-i18n k="m-tooltip:close"></m-i18n>
         </m-button>
+        <div class="m-tooltip__body">
+            <slot name="body"></slot>
+        </div>
     </div>
 </m-popup>

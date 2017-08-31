@@ -1,11 +1,11 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './tooltip.html?style=./tooltip.scss';
 import { TOOLTIP_NAME } from '../component-names';
 import { MPopup } from '../popup/popup';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { MPopperPlacement } from '../popper/popper';
 
 export enum MTooltipMode {
@@ -17,7 +17,7 @@ export enum MTooltipMode {
 @Component({
     mixins: [MediaQueries]
 })
-export class MTooltip extends Vue {
+export class MTooltip extends ModulVue {
     @Prop({ default: false })
     public open: boolean;
     @Prop({ default: MTooltipMode.Icon })
@@ -47,6 +47,10 @@ export class MTooltip extends Vue {
 
     private get propMode(): string {
         return this.mode == MTooltipMode.Link ? this.mode : MTooltipMode.Icon;
+    }
+
+    private get propCloseButton(): boolean {
+        return this.as<MediaQueriesMixin>().isMqMaxS ? false : this.closeButton;
     }
 
     private get hasDefaultSlot(): boolean {
