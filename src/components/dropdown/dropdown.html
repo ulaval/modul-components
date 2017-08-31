@@ -26,12 +26,14 @@
         </template>
         <ul class="m-dropdown__list"
             ref="mDropdownElements"
-            slot="body">
+            slot="body"
+            tabindex="1"
+            @keyup="keyupItem">
             <slot></slot>
-            <li class="m-dropdown-item" v-if="nbItems == 0 || nbItemsVisible == 0">
+            <li class="m-dropdown-item" v-if="items.length == 0 || nbItemsVisible == 0">
                 <span class="m-dropdown-item__element-text">
-                    <span v-if="nbItems != 0">{{ propTextNoMatch }}</span>
-                    <span v-if="nbItems == 0">{{ propTextNoData }}</span>
+                    <span v-if="items.length != 0">{{ propTextNoMatch }}</span>
+                    <span v-if="items.length == 0">{{ propTextNoData }}</span>
                 </span>
             </li>
         </ul>
