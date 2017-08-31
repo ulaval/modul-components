@@ -87,6 +87,10 @@ export class Meta {
         }
     }
 
+    public getMeta(): any {
+        return this.componentMeta;
+    }
+
     public getTags(): string[] {
         return Object.keys(this.componentMeta).filter(key => this.componentMeta.hasOwnProperty(key));
     }
