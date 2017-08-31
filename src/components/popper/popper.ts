@@ -96,8 +96,6 @@ export class MPopper extends ModulVue {
     }
 
     private update(): void {
-        console.log('up');
-
         if (this.popper != undefined) {
             this.popper.update();
         }
