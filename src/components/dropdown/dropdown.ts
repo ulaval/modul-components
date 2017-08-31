@@ -107,12 +107,12 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
-    public getFocus(): Vue | undefined {
-        let elementFocus: Vue | undefined = undefined;
+    public getFocus(): MDropDownItemInterface | undefined {
+        let elementFocus: MDropDownItemInterface | undefined = undefined;
 
         for (let item of this.items) {
             if ((item as MDropDownItemInterface).hasFocus) {
-                elementFocus = item;
+                elementFocus = (item as MDropDownItemInterface);
                 break;
             }
         }
@@ -226,23 +226,26 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {
-            for (let child of this.$children) {
-                if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
-                    this.propagateTextFilter(normalizeString(text.trim()), child);
-                }
+            for (let item of this.items) {
+                (item as MDropDownItemInterface).filter = text;
             }
+            // for (let child of this.$children) {
+            //     if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
+            //         this.propagateTextFilter(normalizeString(text.trim()), child);
+            //     }
+            // }
         }
     }
 
-    private propagateTextFilter(text: string, node: Vue): void {
-        for (let child of node.$children) {
-            if (child.$options.name == 'MDropdownGroup') {
-                this.propagateTextFilter(text, child);
-            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
-                (child as MDropDownItemInterface).filter = text;
-            }
-        }
-    }
+    // private propagateTextFilter(text: string, node: Vue): void {
+    //     for (let child of node.$children) {
+    //         if (child.$options.name == 'MDropdownGroup') {
+    //             this.propagateTextFilter(text, child);
+    //         } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
+    //             (child as MDropDownItemInterface).filter = text;
+    //         }
+    //     }
+    // }
 
     private keyupReference($event): void {
         if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
@@ -261,68 +264,69 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     private keyupItem($event: KeyboardEvent): void {
         let element: Vue | undefined = undefined;
-        let focusElement: Vue | undefined = this.getFocus();
+        let focusElement: MDropDownItemInterface | undefined = this.getFocus();
+
+        let itemsEnabled: MDropDownItemInterface[] = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
 
         switch ($event.keyCode) {
             case KeyCode.M_UP:
                 if (focusElement) {
-                    let index: number = this.items.indexOf(focusElement);
+                    let index: number = itemsEnabled.indexOf(focusElement);
                     if (index == 0) {
-                        element = this.items[0];
+                        element = itemsEnabled[0];
                     } else {
-                        element = this.items[index - 1];
+                        element = itemsEnabled[index - 1];
                     }
                 } else {
-                    element = this.items[0];
+                    element = itemsEnabled[0];
                 }
                 break;
-
             case KeyCode.M_HOME:
-                element = this.items[0];
+                element = itemsEnabled[0];
                 break;
             case KeyCode.M_PAGE_UP:
                 if (focusElement) {
-                    let index: number = this.items.indexOf(focusElement);
+                    let index: number = itemsEnabled.indexOf(focusElement);
                     index -= PAGE_STEP;
 
                     if (index < 0) {
-                        element = this.items[0];
+                        element = itemsEnabled[0];
                     } else {
-                        element = this.items[index];
+                        element = itemsEnabled[index];
                     }
                 } else {
-                    element = this.items[0];
+                    element = itemsEnabled[0];
                 }
                 break;
             case KeyCode.M_DOWN:
                 if (focusElement) {
-                    let index: number = this.items.indexOf(focusElement);
-                    if (index == this.items.length - 1) {
-                        element = this.items[this.items.length - 1];
+                    let index: number = itemsEnabled.indexOf(focusElement);
+                    if (index == itemsEnabled.length - 1) {
+                        element = itemsEnabled[itemsEnabled.length - 1];
                     } else {
-                        element = this.items[index + 1];
+                        element = itemsEnabled[index + 1];
                     }
                 } else {
-                    element = this.items[0];
+                    element = itemsEnabled[0];
                 }
                 break;
 
             case KeyCode.M_END:
-                element = this.items[this.items.length - 1];
+                element = itemsEnabled[itemsEnabled.length - 1];
                 break;
             case KeyCode.M_PAGE_DOWN:
                 if (focusElement) {
-                    let index: number = this.items.indexOf(focusElement);
+                    let index: number = itemsEnabled.indexOf(focusElement);
                     index += PAGE_STEP;
 
-                    if (index > this.items.length - 1) {
-                        element = this.items[this.items.length - 1];
+                    if (index > itemsEnabled.length - 1) {
+                        element = itemsEnabled[itemsEnabled.length - 1];
                     } else {
-                        element = this.items[index];
+                        element = itemsEnabled[index];
                     }
                 } else {
-                    let index: number = (PAGE_STEP < this.items.length ? PAGE_STEP - 1 : this.items.length - 1);
-                    element = this.items[index];
+                    let index: number = (PAGE_STEP < itemsEnabled.length ? PAGE_STEP - 1 : itemsEnabled.length - 1);
+                    element = itemsEnabled[index];
                 }
                 break;
             case KeyCode.M_ENTER:
