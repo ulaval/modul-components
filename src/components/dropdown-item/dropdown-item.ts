@@ -13,6 +13,7 @@ import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 export interface MDropDownItemInterface extends Vue {
     filter: string;
     visible: boolean;
+    disabled: boolean;
     propSelected: boolean;
     hasFocus: boolean;
     onSelectElement(): void;
@@ -77,7 +78,6 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
         if (this.group) {
             (this.group as MDropdownGroupInterface).nbItemsVisible++;
         }
-
     }
 
     beforeDestroy() {
