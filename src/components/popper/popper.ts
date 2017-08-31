@@ -78,14 +78,12 @@ export class MPopper extends ModulVue {
     protected mounted(): void {
         this.propOpen = this.open;
         this.$mWindow.event.$on('click', (e: MouseEvent) => this.onClickOutside(e));
-        this.$mWindow.event.$on('scroll', () => this.update());
         this.$mWindow.event.$on('resize', () => this.update());
     }
 
     protected destroyed(): void {
         this.destroyPopper();
         this.$mWindow.event.$off('click');
-        this.$mWindow.event.$off('scroll');
         this.$mWindow.event.$off('resize');
         document.body.removeChild(this.getPortalTargetEl());
     }
@@ -117,7 +115,7 @@ export class MPopper extends ModulVue {
                 }
                 portalTargetEl.style.zIndex = String(this.$mWindow.windowZIndex);
                 if (this.propOpen) {
-                    this.setFastFocusToElement(portalTargetEl);
+                    this.setFastFocusToElement(this.$refs.popper as HTMLElement);
                 }
             });
         }

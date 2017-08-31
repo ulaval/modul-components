@@ -3,7 +3,7 @@
     <portal :target-el="'#' + propId">
         <transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter" @enter-cancelled="onEnterCancelled"
             @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
-            <article class="m-popper__article" :class="[{ 'm--is-default-anim': defaultAnim, 'm--is-open': defaultAnimOpen }, 'm--is-placement-' + propPlacement ]" :aria-hidden="!visible" v-show="visible">
+            <article class="m-popper__article" :class="[{ 'm--is-default-anim': defaultAnim, 'm--is-open': defaultAnimOpen }, 'm--is-placement-' + propPlacement ]" ref="popper" :aria-hidden="!visible" v-show="visible">
                 <header class="m-popper__article__header" v-if="hasHeaderSlot">
                     <slot name="header"></slot>
                 </header>

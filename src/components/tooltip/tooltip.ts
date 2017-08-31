@@ -9,8 +9,8 @@ import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { MPopperPlacement } from '../popper/popper';
 
 export enum MTooltipMode {
-    ICON = 'icon',
-    LINK = 'link'
+    Icon = 'icon',
+    Link = 'link'
 }
 
 @WithRender
@@ -20,12 +20,10 @@ export enum MTooltipMode {
 export class MTooltip extends Vue {
     @Prop({ default: false })
     public open: boolean;
-    @Prop({ default: MTooltipMode.ICON })
+    @Prop({ default: MTooltipMode.Icon })
     public mode: string;
     @Prop({ default: MPopperPlacement.Bottom })
     public placement: MPopperPlacement;
-    @Prop()
-    public label: string;
     @Prop({ default: true })
     public closeButton: boolean;
     @Prop({ default: '' })
@@ -48,12 +46,15 @@ export class MTooltip extends Vue {
     }
 
     private get propMode(): string {
-        return this.mode != MTooltipMode.ICON && this.label != undefined ? MTooltipMode.LINK : MTooltipMode.ICON;
+        return this.mode == MTooltipMode.Link ? this.mode : MTooltipMode.Icon;
     }
 
-    private get propLabel(): string {
-        this.error = this.label == undefined || this.label == '';
-        return this.label;
+    private get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
+    }
+
+    private get hasBodySlot(): boolean {
+        return !!this.$slots.body;
     }
 
     private onOpen(): void {

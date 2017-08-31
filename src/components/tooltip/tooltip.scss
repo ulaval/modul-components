@@ -3,6 +3,26 @@ $m-tooltip--width: 320px !default;
 $m-tooltip--max-height: 280px !default;
 
 .m-tooltip {
+    display: inline;
+
+    > :first-child {
+        display: inline;
+    }
+
+    &.m--is-icon-mode {
+        .m-tooltip__icon {
+            position: relative;
+            top: -1px; // Magic number: align icon width text
+        }
+    }
+
+    &.m--is-link-mode {
+        .m-tooltip__link {
+            position: relative;
+            top: -2px; // Magic number: align link width text
+        }
+    }
+
     &__icon {
         transition: color 0.3s ease;
         color: $m-color--interactive-light;
@@ -20,17 +40,15 @@ $m-tooltip--max-height: 280px !default;
             min-width: $m-font-size;
             min-height: $m-font-size;
             height: $m-font-size;
-
             color: $m-color--interactive-light;
 
             &:hover {
                 color: $m-color--interactive;
             }
         }
-
     }
 
-    &__content {
+    &__body {
         padding: $m-padding;
         background: $m-color--interactive-lightest;
         box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;

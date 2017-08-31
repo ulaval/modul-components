@@ -1,10 +1,16 @@
-<m-popup class="m-tooltip" :open="propOpen" @open="onOpen" @close="onClose" :placement="placement" padding="" :disabled="disabled"
-    :classNamePortalTarget="classNamePortalTarget">
-    <m-button class="m-tooltip__icon" mode="icon" icon-name="information" v-if="propMode == 'icon'">{{ propLabel }}</m-button>
-    <m-link class="m-tooltip__label" mode="button" v-if="propMode != 'icon'">{{ propLabel }}</m-link>
-    <span v-if="error">m-tooltip needs the "label" prop. The text of this property will be visually hidden in "icon" mode and read by voice readers</span>
-    <div slot="body" class="m-tooltip__content" :class="{'m--has-close-button': closeButton}">
-        <slot>
+<m-popup class="m-tooltip" :class="{ 'm--is-icon-mode': propMode == 'icon', 'm--is-link-mode': propMode != 'icon' }" :open="propOpen"
+    @open="onOpen" @close="onClose" :placement="placement" padding="" :disabled="disabled" :classNamePortalTarget="classNamePortalTarget">
+    <template v-if="hasDefaultSlot">
+        <m-button class="m-tooltip__icon" mode="icon" icon-name="information" v-if="propMode == 'icon'">
+            <slot></slot>
+        </m-button>
+        <m-link class="m-tooltip__link" mode="button" v-if="propMode != 'icon'">
+            <slot></slot>
+        </m-link>
+    </template>
+    <span v-if="!hasDefaultSlot">m-tooltip icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the voice readers.</span>
+    <div slot="body" class="m-tooltip__body" :class="{'m--has-close-button': closeButton}" v-if="hasBodySlot">
+        <slot name="body">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             <m-bullet-list title="Id enim eu ullamco" class="m-u--margin-top">
                 <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
@@ -13,7 +19,7 @@
             </m-bullet-list>
             <p>Consequat officia ipsum elit cupidatat reprehe ccaecat veniam labore eiusmod.</p>
         </slot>
-        <m-button mode="icon" icon-name="default" icon-size="10px" @click="close" class="m-tooltip__content__close-button" v-if="closeButton && isMqMinS">
+        <m-button mode="icon" icon-name="default" icon-size="10px" @click="close" class="m-tooltip__body__close-button" v-if="closeButton && isMqMinS">
             <m-i18n k="m-tooltip:close"></m-i18n>
         </m-button>
     </div>

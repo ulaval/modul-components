@@ -73,7 +73,7 @@ export class MLink extends ModulVue {
         return !!this.$slots['icon-right'];
     }
     private get hasHiddenText(): boolean {
-        return this.hiddenText == '' && this.hiddenText == undefined ? false : true;
+        return this.hiddenText == undefined || this.hiddenText == '' ? false : true;
     }
 }
 
