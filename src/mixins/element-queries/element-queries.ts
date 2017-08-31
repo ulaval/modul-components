@@ -60,17 +60,17 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         this.resizeElement(this.$el);
         this.resizeSensor = new ResizeSensor(this.$el, () => this.resizeElement(this.$el));
     }
-    protected destroyed(): void {
+    protected beforeDestroy(): void {
         this.resizeSensor.detach();
     }
 
     private resizeElement(el: HTMLElement): void {
-        this.checkMinWidth(el);
-        this.checkMaxWidth(el);
-        this.checkMinMaxWidth(el);
+        this.setEqMin(el);
+        this.setEqMax(el);
+        this.setEq(el);
     }
 
-    private checkMinWidth(el: HTMLElement): void {
+    private setEqMin(el: HTMLElement): void {
         // width >= XL
         if (el.clientWidth >= ElementQueriesBpMin.XL) {
             if (!this.isEqMinXL) {
@@ -137,7 +137,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
     }
 
-    private checkMaxWidth(el: HTMLElement): void {
+    private setEqMax(el: HTMLElement): void {
         // width <= XL
         if (el.clientWidth <= ElementQueriesBpMax.XL) {
             if (!this.isEqMaxXL) {
@@ -204,7 +204,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
     }
 
-    private checkMinMaxWidth(el: HTMLElement): void {
+    private setEq(el: HTMLElement): void {
         // width >= minM && width <= maxL
         if (el.clientWidth >= ElementQueriesBpMin.M && el.clientWidth <= ElementQueriesBpMax.L) {
             if (!this.isEqL) {

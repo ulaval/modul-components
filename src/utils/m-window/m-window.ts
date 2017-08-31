@@ -29,8 +29,8 @@ export class MWindow {
     private backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
 
     constructor() {
-        document.body.addEventListener('click', (e: MouseEvent) => this.onClick(e));
-        document.body.addEventListener('scroll', (e) => this.onScroll(e));
+        window.addEventListener('click', (e: MouseEvent) => this.onClick(e));
+        window.addEventListener('scroll', (e) => this.onScroll(e));
         window.addEventListener('resize', (e) => this.onRisize(e));
     }
 

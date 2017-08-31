@@ -50,16 +50,16 @@ export class MFlexTemplate extends ModulVue {
     private internalSmallMenu: boolean = false;
 
     protected mounted(): void {
-        document.body.addEventListener('scroll', this.onScroll);
         this.propMenuOpen = this.menuOpen;
         this.scrollPosition = document.body.scrollTop;
         this.internalSmallMenu = this.smallMenu;
         this.$on('isEqMaxS', (value: boolean) => this.isEqMaxSChanged(value));
+        this.$mWindow.event.$on('scroll', this.onScroll);
         this.setHeaderHeight();
     }
 
     protected beforeDdestroy(): void {
-        document.body.removeEventListener('scroll', this.onScroll);
+        this.$mWindow.event.$off('scroll');
     }
 
     @Watch('menuOpen')
@@ -149,7 +149,7 @@ export class MFlexTemplate extends ModulVue {
 
     private get menuOpenWidth(): string {
         if (this.hasMenuSlot) {
-            if (this.smallMenu) {
+            if (this.smallMenu && !this.as<ElementQueriesMixin>().isEqMaxS) {
                 return this.smallMenuSize;
             }
             return this.menuWidth;

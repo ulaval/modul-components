@@ -156,7 +156,7 @@
         }
     }
 
-    &[max-width~="#{ $m-bp--max--s }"] {
+    &.m--is-eq-max-s {
         &:not(.m--is-menu-open) {
             &.m--is-menu-right {
                 > .m-flex-template__corps {
@@ -213,7 +213,7 @@
         }
     }
 
-    &[min-width~="#{ $m-bp--min--s }"] {
+    &:not(.m--is-eq-max-s) {
         &.m--is-menu-right {
             > .m-flex-template__corps {
                 flex-direction: row-reverse;
