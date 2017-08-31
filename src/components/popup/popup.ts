@@ -55,22 +55,26 @@ export class MPopup extends ModulVue {
     public componentName: string = POPUP_NAME;
     private internalOpen: boolean = false;
 
-    @Watch('open')
-    private openChanged(open: boolean): void {
-        this.propOpen = open;
+    protected mounted(): void {
+        this.propOpen = this.open;
     }
 
-    private get propOpen(): boolean {
+    public get propOpen(): boolean {
         return this.internalOpen;
     }
 
-    private set propOpen(open) {
+    public set propOpen(open) {
         if (open) {
             this.$emit('open');
         } else {
             this.$emit('close');
         }
         this.internalOpen = open;
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
     }
 
     private get hasHeaderSlot(): boolean {
@@ -93,16 +97,3 @@ const PopupPlugin: PluginObject<any> = {
 };
 
 export default PopupPlugin;
-
-// Add and remove events listeners that support IE implementation.
-function on(element, event, handler) {
-    if (element && event && handler) {
-        document.addEventListener ? element.addEventListener(event, handler, false) : element.attachEvent('on' + event, handler);
-    }
-}
-
-function off(element, event, handler) {
-    if (element && event) {
-        document.removeEventListener ? element.removeEventListener(event, handler, false) : element.detachEvent('on' + event, handler);
-    }
-}

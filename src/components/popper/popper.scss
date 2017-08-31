@@ -1,47 +1,9 @@
 @import 'abstracts/variables';
+$m-popper--scale: 0.98 !default;
+$m-popper--margin: $m-margin--l !default;
 
-.m-popup {
+.m-popper {
     display: inline-flex;
-
-    &[x-placement^="top"],
-    &[x-placement^="top-start"],
-    &[x-placement^="top-end"] {
-        .m-popup__article {
-            &.m--is-default-anim {
-                transform: translate3d(0, -$m-margin--l, 0) scale(0.98);
-            }
-        }
-    }
-
-    &[x-placement^="right"],
-    &[x-placement^="right-start"],
-    &[x-placement^="right-end"] {
-        .m-popup__article {
-            &.m--is-default-anim {
-
-            }
-        }
-    }
-
-    &[x-placement^="bottom"],
-    &[x-placement^="bottom-start"],
-    &[x-placement^="bottom-end"] {
-        .m-popup__article {
-            &.m--is-default-anim {
-                transform: translate3d(0, $m-margin--l, 0) scale(0.98);
-            }
-        }
-    }
-
-    &[x-placement^="left"],
-    &[x-placement^="left-start"],
-    &[x-placement^="left-end"] {
-        .m-popup__article {
-            &.m--is-default-anim {
-                transform: translate3d(-$m-margin--l, 0, 0) scale(0.98);
-            }
-        }
-    }
 
     &__article {
         max-height: calc(100vh - #{ $m-margin });
@@ -51,20 +13,28 @@
             transition: 0.3s transform ease-in-out, 0.3s opacity ease;
             opacity: 0;
 
-            &.m--is-placement-top{
-                transform: translate3d(0, -$m-margin--l, 0) scale(0.98);
+            &.m--is-placement-top,
+            &.m--is-placement-top-start,
+            &.m--is-placement-top-end {
+                transform: translate3d(0, -$m-popper--margin, 0) scale($m-popper--scale);
             }
 
-            &.m--is-placement-bottom {
-                transform: translate3d(0, $m-margin--l, 0) scale(0.98);
+            &.m--is-placement-right,
+            &.m--is-placement-right-start,
+            &.m--is-placement-right-end {
+                transform: translate3d($m-popper--margin, 0, 0) scale($m-popper--scale);
             }
 
-            &.m--is-placement-right {
-                transform: translate3d($m-margin--l, 0, 0) scale(0.98);
+            &.m--is-placement-bottom,
+            &.m--is-placement-bottom-start,
+            &.m--is-placement-bottom-end {
+                transform: translate3d(0, $m-popper--margin, 0) scale($m-popper--scale);
             }
 
-            &.m--is-placement-left {
-                transform: translate3d(-$m-margin--l, 0, 0) scale(0.98);
+            &.m--is-placement-left,
+            &.m--is-placement-left-start,
+            &.m--is-placement-left-end {
+                transform: translate3d(-$m-popper--margin, 0, 0) scale($m-popper--scale);
             }
 
             &.m--is-open.m--is-open {

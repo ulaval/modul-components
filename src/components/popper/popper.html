@@ -1,16 +1,16 @@
-<div class="m-popup" :class="{ 'm--is-open': visible }" @click="onClick" @mouseover="onMouseOver" @mouseout="onMouseOut">
+<div class="m-popper" :class="{ 'm--is-open': visible }" @click="onClick" @mouseover="onMouseOver" @mouseout="onMouseOut">
     <slot></slot>
     <portal :target-el="'#' + propId">
         <transition @before-enter="onBeforeEnter" @enter="onEnter" @after-enter="onAfterEnter" @enter-cancelled="onEnterCancelled"
             @before-leave="onAfterLeave" @leave="onLeave" @after-leave="onAfterLeave" @leave-cancelled="onLeaveCancelled">
-            <article class="m-popup__article" :class="[{ 'm--is-default-anim': defaultAnim, 'm--is-open': defaultAnimOpen }, 'm--is-placement-' + propPlacement ]" :aria-hidden="!visible" v-show="visible">
-                <header class="m-popup__article__header" v-if="hasHeaderSlot">
+            <article class="m-popper__article" :class="[{ 'm--is-default-anim': defaultAnim, 'm--is-open': defaultAnimOpen }, 'm--is-placement-' + propPlacement ]" :aria-hidden="!visible" v-show="visible">
+                <header class="m-popper__article__header" v-if="hasHeaderSlot">
                     <slot name="header"></slot>
                 </header>
-                <div class="m-popup__article__body" v-if="hasBodySlot">
+                <div class="m-popper__article__body" v-if="hasBodySlot">
                     <slot name="body"></slot>
                 </div>
-                <footer class="m-popup__article__footer" v-if="hasFooterSlot">
+                <footer class="m-popper__article__footer" v-if="hasFooterSlot">
                     <slot name="footer"></slot>
                 </footer>
             </article>

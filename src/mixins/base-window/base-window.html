@@ -1,7 +1,5 @@
-<div class="m-base-window">
-    <div @click="openDialog" class="m-base-window__button" ref="dialogButton" v-if="hasDefaultSlots">
-        <slot></slot>
-    </div>
+<div class="m-base-window" @click="openDialog" ref="baseWindow">
+    <slot></slot>
     <portal v-if="propOpen" :target-el="'#' + propId">
         <div class="m-base-window__wrap" :class="[{ 'm--is-open': isVisible,
                     'm--is-modal': windowMode == 'modal',
@@ -10,7 +8,8 @@
                     'm--is-small': propSize == 'small',
                     'm--is-small': propSize == 'light',
                     'm--is-full-size': propSize == 'full-size',
-                    'm--is-clickable-backdrop': propCloseOnBackdrop }, className, 'm--is-from-' + propFrom]" @click.self="backdropClick"
+                    'm--is-clickable-backdrop': propCloseOnBackdrop,
+                    'm--is-disabled':disabled }, className, 'm--is-from-' + propFrom]" @click.self="backdropClick"
             ref="dialogWrap">
             <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }">
                 <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="windowMode == 'sidebar' && propFrom == 'bottom'">

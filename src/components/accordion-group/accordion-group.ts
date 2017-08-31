@@ -95,7 +95,7 @@ export class MAccordionGroup extends Vue {
 
     private openAccordionConcurrent(): void {
         if (this.indexAccordionOpen != undefined) {
-            (this.$children[this.arrAccordion[this.indexAccordionOpen].childrenNumber]as MAccordion).openAccordion();
+            (this.$children[this.arrAccordion[this.indexAccordionOpen].childrenNumber] as MAccordion).openAccordion();
             this.nbAccordionOpen = 1;
         } else {
             this.nbAccordionOpen = 0;
