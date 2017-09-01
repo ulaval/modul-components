@@ -13,6 +13,7 @@ import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/medi
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 198;
+const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface SelectedValue {
     key: string | undefined;
@@ -342,12 +343,11 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
-    private animEnter(el: HTMLElement, done: any): void {
+    private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
-            let transition: string = '0.3s max-height ease';
-            el.style.transition = transition;
-            el.style.webkitTransition = transition;
+            el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+            el.style.transition = DROPDOWN_STYLE_TRANSITION;
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';
             el.style.width = this.width;
@@ -359,14 +359,14 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     }
 
-    private animAfterEnter(el: HTMLElement): void {
+    private transitionAfterEnter(el: HTMLElement): void {
         setTimeout(() => {
             el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
             el.style.overflowY = 'auto';
         }, 300);
     }
 
-    private animLeave(el: HTMLElement, done: any): void {
+    private transitionLeave(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';
