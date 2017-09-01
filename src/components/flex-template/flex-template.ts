@@ -104,8 +104,6 @@ export class MFlexTemplate extends ModulVue {
     }
 
     private adjustDynamicHeader() {
-        console.log('adjustDynamicHeader');
-
         if (this.hasHeaderSlot) {
             let position: number = this.$el.getBoundingClientRect().top;
             let maxPosition: number = position + this.headerHeight + (this.headerHeight * 1.3);
