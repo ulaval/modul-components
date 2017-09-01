@@ -28,10 +28,10 @@ export interface MDropdownInterface extends Vue {
     addAction: boolean;
     nbItemsVisible: number;
     multiple: boolean;
+    propOpen: boolean;
     getElement(key: string): Vue | undefined;
     itemDestroy(item: Vue): void;
     setFocus(item: Vue): void;
-
 }
 
 @WithRender
@@ -80,8 +80,10 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         let element: Vue | undefined;
 
         for (let child of this.$children) {
-            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
-                element = this.recursiveGetElement(key, child);
+            if (child.$options.name == 'MPopup' &&
+                child.$el.nodeName != '#comment' &&
+                child.$children[0].$options.name == 'MPopper') {
+                element = this.recursiveGetElement(key, child.$children[0]);
                 break;
             }
         }
@@ -164,11 +166,11 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         this.propOpen = open;
     }
 
-    private get propOpen(): boolean {
+    public get propOpen(): boolean {
         return this.internalOpen;
     }
 
-    private set propOpen(open: boolean) {
+    public set propOpen(open: boolean) {
         this.internalOpen = open != undefined ? open : false;
         this.$nextTick(() => {
             if (open) {
@@ -266,7 +268,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     private keyupItem($event: KeyboardEvent): void {
         let element: Vue | undefined = undefined;
         let focusElement: MDropDownItemInterface | undefined = this.getFocus();
-
         let itemsEnabled: MDropDownItemInterface[] = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
 
         switch ($event.keyCode) {

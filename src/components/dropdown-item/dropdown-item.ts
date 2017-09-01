@@ -136,11 +136,10 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
                     array.push({ key: this.key, value: this.propValue, label: this.propLabel });
                 }
             } else {
-                // Dropdown without multiple selection: Remove first past selection before adding new
+                // Dropdown without multiple selection: FirstRemove past selection, then add new
                 let currentSelectedElement: SelectedValue = array[0];
-                if (currentSelectedElement && currentSelectedElement.key) {
-                    let item: Vue | undefined = (this.root as MDropdownInterface).getElement(currentSelectedElement.key);
-                    if (item) {
+                if (currentSelectedElement) {
+                    for (let item of (this.root as MDropdownInterface).items) {
                         (item as MDropDownItemInterface).propSelected = false;
                     }
                     array.splice(0, 1);
@@ -148,6 +147,7 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
 
                 this.propSelected = (this.root as MDropdownInterface).addAction = true;
                 array.push({ key: this.key, value: this.propValue, label: this.propLabel });
+                (this.root as MDropdownInterface).propOpen = false;
             }
 
             (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
