@@ -1,4 +1,4 @@
-<div class="m-content-list">
+<div class="m-content-list" :class="{ 'm--is-eq-max-xs': isEqMaxXS, 'm--is-eq-max-s': isEqMaxS }">
     <header class="m-content-list__header" v-if="hasHeader">
         <slot name="header"></slot>
     </header>
