@@ -14,7 +14,7 @@ $m-panel--screen--min: 640px;
         display: block;
     }
 
-    &.m--is-primary {
+    &.m--is-mode-primary {
         background: $m-color--white;
         border-top: 0;
         padding-top: 4px;
@@ -31,12 +31,14 @@ $m-panel--screen--min: 640px;
         }
     }
 
-    &.m--is-secondary {
+    &.m--is-mode-secondary {
         background: $m-color--grey-lightest;
 
-        .m-panel__header {
-            background-color: $m-color--grey-lighter;
-            border-bottom: 1px solid $m-color--grey;
+        .m-panel {
+            > .m-panel__header {
+                background-color: $m-color--grey-lighter;
+                border-bottom: 1px solid $m-color--grey;
+            }
         }
     }
 
@@ -123,28 +125,22 @@ $m-panel--screen--min: 640px;
     }
 
     &[max-width~="#{ $m-panel--screen--max }"] {
-        .m-panel {
-            &__header {
-                display: block;
-            }
+        .m-panel__header {
+            display: block;
         }
 
         &:not(.m--is-right-content-alone) {
-            .m-panel__header__content {
-                &-right {
-                    margin-top: $m-margin;
-                }
+            .m-panel__header__content-right {
+                margin-top: $m-margin;
             }
         }
     }
 
     &[min-width~="#{ $m-panel--screen--min }"] {
-        .m-panel {
-            &__header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
+        .m-panel__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     }
 }

@@ -24,8 +24,8 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         position: relative;
     }
 
-    &.m--is-primary,
-    &.m--is-secondary {
+    &.m--is-mode-primary,
+    &.m--is-mode-secondary {
         transition-property: background, border-color, color;
         transition-duration: 0.3s;
         transition-timing-function: ease;
@@ -70,12 +70,12 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         }
     }
 
-    &.m--is-primary {
+    &.m--is-mode-primary {
         color: $m-color--white;
         background: $m-button--color;
     }
 
-    &.m--is-secondary {
+    &.m--is-mode-secondary {
         color: $m-button--color;
         background: $m-color--white;
     }
