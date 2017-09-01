@@ -6,5 +6,6 @@
             "type": "string"
         }
     },
-    "overview": "dropdown-group.overview"
+    "overview": "dropdown-group.overview",
+    "preview": "false"
 }

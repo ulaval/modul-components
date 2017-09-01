@@ -7,5 +7,6 @@
             "description": "m-dynamic-template:template-desc"
         }
     },
-    "overview": "dynamic-template.overview"
+    "overview": "dynamic-template.overview",
+    "preview": "false"
 }

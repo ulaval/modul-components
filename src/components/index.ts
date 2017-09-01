@@ -31,7 +31,6 @@ import PopperPlugin from './popper/popper';
 import PopupPlugin from './popup/popup';
 import RadioPlugin from './radio/radio';
 import RadioGroupPlugin from './radio-group/radio-group';
-import SelectPlugin from './select/select';
 import SidebarPlugin from './sidebar-window/sidebar-window';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
@@ -83,7 +82,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(PopupPlugin);
         Vue.use(RadioPlugin);
         Vue.use(RadioGroupPlugin);
-        Vue.use(SelectPlugin);
         Vue.use(SidebarPlugin);
         Vue.use(SliderPlugin);
         Vue.use(SpinnerPlugin);

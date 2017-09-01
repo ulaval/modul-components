@@ -59,5 +59,6 @@
             "default": 0
         }
     },
-    "overview": "panel.overview"
+    "overview": "panel.overview",
+    "preview": "false"
 }
