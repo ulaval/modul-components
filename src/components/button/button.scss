@@ -81,7 +81,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
     }
 
     &.m--is-icon {
-        transition: color $m-transition ease;
+        transition: color $m-transition-duration ease;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -99,7 +99,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         }
 
         &::after {
-            transition: width $m-transition ease, height $m-transition ease, opacity $m-transition--s linear;
+            transition: width $m-transition-duration ease, height $m-transition-duration ease, opacity $m-transition-duration--s linear;
             transition-delay: 0.3s;
             transform: translate(-50%, -50%);
             position: absolute;

@@ -7,7 +7,7 @@ $m-popper--margin: $m-margin !default;
 
     &__article {
         &.m--is-default-anim {
-            transition: transform $m-transition ease-in-out, opacity $m-transition ease;
+            transition: transform $m-transition-duration ease-in-out, opacity $m-transition-duration ease;
             opacity: 0;
 
             &.m--is-placement-top,

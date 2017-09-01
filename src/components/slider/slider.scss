@@ -23,7 +23,7 @@ $m-slider--thumb-width: 20px !default;
     }
 
     &__thumb {
-        transition: transform $m-transition ease, background $m-transition ease, left 0.1s ease;
+        transition: transform $m-transition-duration ease, background $m-transition-duration ease, left 0.1s ease;
         position: absolute;
         top: 0;
         width: $m-slider--thumb-width;

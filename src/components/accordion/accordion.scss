@@ -66,7 +66,7 @@ $m-accordion--color: $m-color--accent;
                 }
 
                 > .m-accordion__body {
-                    transition: opacity $m-transition--l ease, transform $m-transition ease;
+                    transition: opacity $m-transition-duration--l ease, transform $m-transition-duration ease;
                     padding: $m-padding;
                 }
             }
@@ -80,7 +80,7 @@ $m-accordion--color: $m-color--accent;
             &__header {
                 &:hover {
                     .m-accordion__header__title {
-                        transition: color $m-transition ease;
+                        transition: color $m-transition-duration ease;
                         color: $m-color--interactive;
                     }
                 }
@@ -135,11 +135,11 @@ $m-accordion--color: $m-color--accent;
 
             &.m--is-anim-active {
                 &::before {
-                    transition: transform $m-transition ease;
+                    transition: transform $m-transition-duration ease;
                 }
 
                 &::after {
-                    transition: transform $m-transition ease, opacity 0.6s ease;
+                    transition: transform $m-transition-duration ease, opacity 0.6s ease;
                 }
             }
 

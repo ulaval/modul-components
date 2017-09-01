@@ -24,7 +24,7 @@ $m-tooltip--max-height: 280px !default;
     }
 
     &__icon {
-        transition: color $m-transition ease;
+        transition: color $m-transition-duration ease;
         color: $m-color--interactive-light;
         cursor: pointer;
 

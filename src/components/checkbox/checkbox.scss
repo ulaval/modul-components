@@ -124,7 +124,7 @@ $m-checkbox--width: 16px;
     }
 
     &__input {
-        transition: background $m-transition ease, border-color $m-transition ease;
+        transition: background $m-transition-duration ease, border-color $m-transition-duration ease;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -137,7 +137,7 @@ $m-checkbox--width: 16px;
     }
 
     &__label {
-        transition: color $m-transition ease;
+        transition: color $m-transition-duration ease;
     }
 
     &__hidden {
