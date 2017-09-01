@@ -81,7 +81,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
     }
 
     &.m--is-icon {
-        transition: 0.3s color ease;
+        transition: color $m-transition ease;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -99,7 +99,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         }
 
         &::after {
-            transition: 0.3s width ease, 0.3s height ease, 0.2s opacity linear;
+            transition: width $m-transition ease, height $m-transition ease, opacity $m-transition--s linear;
             transition-delay: 0.3s;
             transform: translate(-50%, -50%);
             position: absolute;

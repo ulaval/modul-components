@@ -5,7 +5,7 @@ $m-dropdown-item--color-focus: $m-color--interactive-lightest !default;
 $m-dropdown-item--color-active: $m-color--interactive-lightest !default;
 
 .m-dropdown-item {
-    transition: 0.3s background ease;
+    transition: background $m-transition ease;
     display: inline-block;
     width: 100%;
     padding: $m-padding;

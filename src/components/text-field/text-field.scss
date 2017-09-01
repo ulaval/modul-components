@@ -1,5 +1,5 @@
 @import 'abstracts/variables';
-$m-text-field--transiton-duration: 0.45s !default;
+$m-text-field--transiton-duration: $m-transition--l !default;
 $m-text-field--color-helper: $m-color--grey-darker !default;
 $m-text-field--color-focus: $m-color--interactive !default;
 $m-text-field--color-error: $m-color--error !default;
@@ -167,7 +167,7 @@ $m-text-field--margin: $m-padding--xs !default;
         background: none;
 
         &-line {
-            transition: $m-text-field--transiton-duration width ease-in-out;
+            transition: width $m-text-field--transiton-duration ease-in-out;
             position: absolute;
             right: 0;
             bottom: 0;
@@ -181,7 +181,7 @@ $m-text-field--margin: $m-padding--xs !default;
         }
 
         &__default-text {
-            transition: opacity 0.3s ease;
+            transition: opacity $m-transition ease;
             opacity: 1;
             color: $m-text-field--color-helper;
 
