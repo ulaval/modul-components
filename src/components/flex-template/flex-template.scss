@@ -40,7 +40,7 @@
         > .m-flex-template__corps {
             > .m-flex-template__menu-container {
                 > .m-flex-template__menu {
-                    transition: top $m-transition-duration--l ease-in-out;
+                    transition: top $m-transition-duration--s ease;
                     max-height: 100vh;
                     overflow-y: auto;
                 }

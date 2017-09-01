@@ -30,6 +30,7 @@ export class MWindow {
 
     constructor() {
         window.addEventListener('click', (e: MouseEvent) => this.onClick(e));
+        window.addEventListener('scroll', (e) => this.onScroll(e));
         window.addEventListener('resize', (e) => this.onRisize(e));
     }
 

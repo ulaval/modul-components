@@ -43,20 +43,20 @@ export class MFlexTemplate extends ModulVue {
     private headerHeight: number = 0;
     private headerHidden: boolean = false;
     private scrollPosition: number = 0;
-
     private internalMenuOpen: boolean = false;
     private menuHasAnim: boolean = false;
+    private animDynamicHeader: boolean = false;
 
     protected mounted(): void {
         this.propMenuOpen = this.menuOpen;
         this.scrollPosition = document.body.scrollTop;
         this.$on('isEqMaxS', (value: boolean) => this.isEqMaxSChanged(value));
-        window.addEventListener('scroll', this.onScroll);
+        this.$mWindow.event.$on('scroll', this.onScroll);
         this.setHeaderHeight();
     }
 
     protected beforeDdestroy(): void {
-        window.removeEventListener('scroll',this.onScroll);
+        this.$mWindow.event.$off('scroll', this.onScroll);
     }
 
     @Watch('menuOpen')
@@ -104,11 +104,11 @@ export class MFlexTemplate extends ModulVue {
     }
 
     private adjustDynamicHeader() {
-        if (this.hasHeaderSlot) {
+        if (this.propDynamicHeader) {
             let position: number = this.$el.getBoundingClientRect().top;
-            let maxPosition: number = position + this.headerHeight + (this.headerHeight * 1.3);
+            let maxPosition: number = position + this.headerHeight + 50;
             let header = this.$refs.header as HTMLElement;
-            this.headerHidden = this.propDynamicHeader && (maxPosition <= 0 && !this.propMenuOpen) && (this.scrollPosition >= position);
+            this.headerHidden = (maxPosition <= 0 && !this.propMenuOpen) && (this.scrollPosition >= position);
             this.scrollPosition = position;
         }
     }
