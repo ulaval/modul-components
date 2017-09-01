@@ -34,6 +34,8 @@
             &.m-button.m-button {
                 min-width: auto;
                 min-height: auto;
+                width: $m-font-size;
+                height: $m-font-size;
             }
         }
     }

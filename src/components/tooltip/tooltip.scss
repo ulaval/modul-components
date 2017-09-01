@@ -37,8 +37,9 @@ $m-tooltip--max-height: 280px !default;
         }
 
         &.m-button {
-            min-width: $m-font-size;
-            min-height: $m-font-size;
+            min-width: auto;
+            min-height: auto;
+            width: $m-font-size;
             height: $m-font-size;
             color: $m-color--interactive-light;
 
