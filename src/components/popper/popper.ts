@@ -77,7 +77,6 @@ export class MPopper extends ModulVue {
 
     protected mounted(): void {
         this.propOpen = this.open;
-        this.$mWindow.event.$on('click', (e: MouseEvent) => this.onClickOutside(e));
         this.$mWindow.event.$on('scroll', () => this.update());
         this.$mWindow.event.$on('resize', () => this.update());
     }
@@ -192,9 +191,14 @@ export class MPopper extends ModulVue {
             if (open) {
                 this.openPopper();
                 this.$emit('open');
+                // Keep the timer to allow an element outside the component to open the popper
+                setTimeout(() => {
+                    this.$mWindow.event.$on('click', (e: MouseEvent) => this.onClickOutside(e));
+                }, 0);
             } else {
                 this.closePopper();
                 this.$emit('close');
+                this.$mWindow.event.$off('click');
             }
             this.internalOpen = open;
         }

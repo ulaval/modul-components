@@ -4,6 +4,7 @@ $m-popper--margin: $m-margin !default;
 
 .m-popper {
     display: inline-flex;
+    cursor: pointer;
 
     &__article {
         &.m--is-default-anim {

@@ -110,6 +110,7 @@ $m-tooltip--max-height: 280px !default;
         &-container {
             &.m--has-close-button {
                 position: relative;
+
                 .m-tooltip__body {
                     padding-right: $m-padding--l;
                 }
