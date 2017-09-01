@@ -78,6 +78,13 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
         if (this.group) {
             (this.group as MDropdownGroupInterface).nbItemsVisible++;
         }
+
+        if (!this.hasError && this.propSelected) {
+            if ((this.root as MDropdownInterface).multiple || (this.root as MDropdownInterface).selected.length == 0) {
+                (this.root as MDropdownInterface).selected.push({ key: this.key, value: this.propValue, label: this.propLabel });
+                (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
+            }
+        }
     }
 
     beforeDestroy() {
@@ -104,7 +111,7 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
 
     @Watch('selected')
     public selectedChanged(selected: boolean): void {
-        this.propSelected = selected;
+        this.onSelectElement();
     }
 
     public get visible(): boolean {
