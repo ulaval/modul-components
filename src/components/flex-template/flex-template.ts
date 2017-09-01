@@ -186,7 +186,7 @@ export class MFlexTemplate extends ModulVue {
         return !!this.$slots.footer;
     }
 
-    private animEnter(el: HTMLElement, done): void {
+    private transitionEnter(el: HTMLElement, done): void {
         this.adjustFixeMenu();
         this.adjustDynamicHeader();
         if (!this.as<ElementQueriesMixin>().isEqMaxS) {
@@ -212,7 +212,7 @@ export class MFlexTemplate extends ModulVue {
         }
     }
 
-    private animAfterEnter(el: HTMLElement): void {
+    private transitionAfterEnter(el: HTMLElement): void {
         let menuContent: HTMLElement = this.$refs.menuContent as HTMLElement;
         if (this.menuOpenCount != 0) {
             menuContent.focus();
@@ -220,7 +220,7 @@ export class MFlexTemplate extends ModulVue {
         this.menuOpenCount++;
     }
 
-    private animLeave(el: HTMLElement, done): void {
+    private transitionLeave(el: HTMLElement, done): void {
         this.transitionDelayOpen = false;
         if (!this.as<ElementQueriesMixin>().isEqMaxS) {
             let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;

@@ -211,10 +211,6 @@ $m-accordion--color: $m-color--accent;
         }
     }
 
-    &__body-wrap {
-        @include m-transition-accordion();
-    }
-
     &__hidden {
         @include m-visually-hidden();
     }

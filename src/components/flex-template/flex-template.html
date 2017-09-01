@@ -13,7 +13,7 @@
         <slot name="header"></slot>
     </header>
     <div class="m-flex-template__corps">
-        <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
+        <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
             <div class="m-flex-template__menu-container" v-if="propMenuOpen"
                 ref="menuContainer">
                 <div class="m-flex-template__menu" :style="{ 'top': topMenu }" ref="menu">
