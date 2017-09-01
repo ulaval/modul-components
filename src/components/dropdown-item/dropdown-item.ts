@@ -14,6 +14,7 @@ export interface MDropDownItemInterface extends Vue {
     filter: string;
     visible: boolean;
     disabled: boolean;
+    propInactif: boolean;
     propSelected: boolean;
     hasFocus: boolean;
     onSelectElement(): void;
@@ -30,10 +31,13 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     public selected: boolean;
     @Prop({ default: false })
     public disabled: boolean;
+    @Prop({ default: false })
+    public inactif: boolean;
 
     public componentName: string = DROPDOWN_ITEM_NAME;
     public propLabel: string = this.label;
     public propValue: string = this.value;
+    public propInactif: boolean = this.inactif;
 
     public key: string;
     public filter: string = '';
@@ -63,23 +67,24 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
             }
         } else {
             if (!this.label) {
-                console.error(`DROPDOWN-ITEM: La valeur (value) ou libellé (label) est obligatoire`);
-                this.forceHide = true;
-                this.hasError = true;
+                console.debug(`Inactif`);
+                this.propInactif = true;
             } else {
                 this.propLabel = this.label;
                 this.propValue = this.propLabel;
             }
         }
 
-        (this.root as MDropdownInterface).items.push(this);
-        (this.root as MDropdownInterface).nbItemsVisible++;
+        if (!this.propInactif) {
+            (this.root as MDropdownInterface).items.push(this);
+            (this.root as MDropdownInterface).nbItemsVisible++;
 
-        if (this.group) {
-            (this.group as MDropdownGroupInterface).nbItemsVisible++;
+            if (this.group) {
+                (this.group as MDropdownGroupInterface).nbItemsVisible++;
+            }
         }
 
-        if (!this.hasError && this.propSelected) {
+        if (!this.inactif && this.propSelected) {
             if ((this.root as MDropdownInterface).multiple || (this.root as MDropdownInterface).selected.length == 0) {
                 (this.root as MDropdownInterface).selected.push({ key: this.key, value: this.propValue, label: this.propLabel });
                 (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
@@ -96,15 +101,17 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
 
     @Watch('visible')
     public visibleChanged(visible: boolean): void {
-        if (visible) {
-            (this.root as MDropdownInterface).nbItemsVisible++;
-            if (this.group) {
-                (this.group as MDropdownGroupInterface).nbItemsVisible++;
-            }
-        } else {
-            (this.root as MDropdownInterface).nbItemsVisible--;
-            if (this.group) {
-                (this.group as MDropdownGroupInterface).nbItemsVisible--;
+        if (!this.propInactif) {
+            if (visible) {
+                (this.root as MDropdownInterface).nbItemsVisible++;
+                if (this.group) {
+                    (this.group as MDropdownGroupInterface).nbItemsVisible++;
+                }
+            } else {
+                (this.root as MDropdownInterface).nbItemsVisible--;
+                if (this.group) {
+                    (this.group as MDropdownGroupInterface).nbItemsVisible--;
+                }
             }
         }
     }
@@ -124,8 +131,16 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
         return isVisible;
     }
 
+    public get propSelected(): boolean {
+        return this.internalSelected;
+    }
+
+    public set propSelected(selected: boolean) {
+        this.internalSelected = selected != undefined ? selected : false;
+    }
+
     public onSelectElement(): void {
-        if (!this.disabled) {
+        if (!(this.disabled || this.inactif)) {
             let array: Array<SelectedValue> = (this.root as MDropdownInterface).selected;
 
             if ((this.root as MDropdownInterface).multiple) {
@@ -159,14 +174,6 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
 
             (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
         }
-    }
-
-    public get propSelected(): boolean {
-        return this.internalSelected;
-    }
-
-    public set propSelected(selected: boolean) {
-        this.internalSelected = selected != undefined ? selected : false;
     }
 
     private getMDropdownRoot(node: Vue): Vue {

@@ -75,6 +75,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public nbItemsVisible: number = 0;
     public selectedText: string = '';
     private internalOpen: boolean = false;
+    private noItemsLabel: string;
 
     public getElement(key: string): Vue | undefined {
         let element: Vue | undefined;
@@ -203,6 +204,17 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
+    private get showNoItemsLabel(): boolean {
+        let show: boolean = false;
+
+        if (this.nbItemsVisible == 0) {
+            this.noItemsLabel = this.items.length == 0 ? this.propTextNoData : this.propTextNoMatch;
+            show = true;
+        }
+
+        return show;
+    }
+
     private get propWidth(): string {
         if (this.as<MediaQueriesMixin>().isMqMaxS) {
             return '100%';
@@ -230,25 +242,12 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {
             for (let item of this.items) {
-                (item as MDropDownItemInterface).filter = text;
+                if (!(item as MDropDownItemInterface).propInactif) {
+                    (item as MDropDownItemInterface).filter = normalizeString(text.trim());
+                }
             }
-            // for (let child of this.$children) {
-            //     if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
-            //         this.propagateTextFilter(normalizeString(text.trim()), child);
-            //     }
-            // }
         }
     }
-
-    // private propagateTextFilter(text: string, node: Vue): void {
-    //     for (let child of node.$children) {
-    //         if (child.$options.name == 'MDropdownGroup') {
-    //             this.propagateTextFilter(text, child);
-    //         } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
-    //             (child as MDropDownItemInterface).filter = text;
-    //         }
-    //     }
-    // }
 
     private keyupReference($event): void {
         if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
