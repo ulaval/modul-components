@@ -51,12 +51,12 @@ export class MFlexTemplate extends ModulVue {
         this.propMenuOpen = this.menuOpen;
         this.scrollPosition = document.body.scrollTop;
         this.$on('isEqMaxS', (value: boolean) => this.isEqMaxSChanged(value));
-        this.$mWindow.event.$on('scroll', this.onScroll);
+        window.addEventListener('scroll', this.onScroll);
         this.setHeaderHeight();
     }
 
     protected beforeDdestroy(): void {
-        this.$mWindow.event.$off('scroll');
+        window.removeEventListener('scroll',this.onScroll);
     }
 
     @Watch('menuOpen')
@@ -104,6 +104,8 @@ export class MFlexTemplate extends ModulVue {
     }
 
     private adjustDynamicHeader() {
+        console.log('adjustDynamicHeader');
+
         if (this.hasHeaderSlot) {
             let position: number = this.$el.getBoundingClientRect().top;
             let maxPosition: number = position + this.headerHeight + (this.headerHeight * 1.3);

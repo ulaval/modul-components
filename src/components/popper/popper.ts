@@ -78,15 +78,15 @@ export class MPopper extends ModulVue {
     protected mounted(): void {
         this.propOpen = this.open;
         this.$mWindow.event.$on('click', (e: MouseEvent) => this.onClickOutside(e));
-        this.$mWindow.event.$on('scroll', () => this.update());
         this.$mWindow.event.$on('resize', () => this.update());
+        window.addEventListener('scroll', this.update);
     }
 
     protected destroyed(): void {
         this.destroyPopper();
         this.$mWindow.event.$off('click');
-        this.$mWindow.event.$off('scroll');
         this.$mWindow.event.$off('resize');
+        window.removeEventListener('scroll', this.update);
         document.body.removeChild(this.getPortalTargetEl());
     }
 
