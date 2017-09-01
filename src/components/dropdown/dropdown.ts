@@ -27,10 +27,10 @@ export interface MDropdownInterface extends Vue {
     addAction: boolean;
     nbItemsVisible: number;
     multiple: boolean;
+    propOpen: boolean;
     getElement(key: string): Vue | undefined;
     itemDestroy(item: Vue): void;
     setFocus(item: Vue): void;
-
 }
 
 @WithRender
@@ -165,11 +165,11 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         this.propOpen = open;
     }
 
-    private get propOpen(): boolean {
+    public get propOpen(): boolean {
         return this.internalOpen;
     }
 
-    private set propOpen(open: boolean) {
+    public set propOpen(open: boolean) {
         this.internalOpen = open != undefined ? open : false;
         this.$nextTick(() => {
             if (open) {

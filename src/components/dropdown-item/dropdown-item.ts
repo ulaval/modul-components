@@ -147,6 +147,7 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
 
                 this.propSelected = (this.root as MDropdownInterface).addAction = true;
                 array.push({ key: this.key, value: this.propValue, label: this.propLabel });
+                (this.root as MDropdownInterface).propOpen = false;
             }
 
             (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
