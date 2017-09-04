@@ -4,9 +4,9 @@
              :close-on-reference-click="!propEditable"
              :disabled="disabled"
              :open="propOpen"
-             :enter="animEnter"
-             :after-enter="animAfterEnter"
-             :leave="animLeave"
+             :enter="transitionEnter"
+             :after-enter="transitionAfterEnter"
+             :leave="transitionLeave"
              :padding-header="false"
              :padding-body="false"
              @open="openChanged(true)"
@@ -30,12 +30,7 @@
             tabindex="1"
             @keyup="keyupItem">
             <slot></slot>
-            <li class="m-dropdown-item" v-if="items.length == 0 || nbItemsVisible == 0">
-                <span class="m-dropdown-item__element-text">
-                    <span v-if="items.length != 0">{{ propTextNoMatch }}</span>
-                    <span v-if="items.length == 0">{{ propTextNoData }}</span>
-                </span>
-            </li>
+            <m-dropdown-item v-show="showNoItemsLabel" :label="noItemsLabel" :inactif="true" ></m-dropdown-item>
         </ul>
 
         <template slot="footer" v-if="hasFooterSlot">

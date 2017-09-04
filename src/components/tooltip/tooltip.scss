@@ -24,7 +24,7 @@ $m-tooltip--max-height: 280px !default;
     }
 
     &__icon {
-        transition: color 0.3s ease;
+        transition: color $m-transition-duration ease;
         color: $m-color--interactive-light;
         cursor: pointer;
 
@@ -37,8 +37,9 @@ $m-tooltip--max-height: 280px !default;
         }
 
         &.m-button {
-            min-width: $m-font-size;
-            min-height: $m-font-size;
+            min-width: auto;
+            min-height: auto;
+            width: $m-font-size;
             height: $m-font-size;
             color: $m-color--interactive-light;
 
@@ -62,7 +63,7 @@ $m-tooltip--max-height: 280px !default;
 
     &__body {
         padding: $m-padding;
-        background: $m-color--interactive-lightest;
+        background: $m-color--information;
         box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
         border-radius: $m-border-radius--s;
 

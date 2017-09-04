@@ -7,5 +7,6 @@
             "default": false
         }
     },
-    "overview": "template.overview"
+    "overview": "template.overview",
+    "preview": "false"
 }

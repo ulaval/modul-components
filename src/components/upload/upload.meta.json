@@ -23,5 +23,6 @@
             "default": false
         }
     },
-    "overview": "upload.overview"
+    "overview": "upload.overview",
+    "preview": "false"
 }

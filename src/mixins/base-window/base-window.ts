@@ -168,16 +168,17 @@ export class BaseWindow extends ModulVue {
             this.createDialog();
             setTimeout(() => {
                 this.isVisible = true;
-            }, 2);
-            setTimeout(() => {
-                resolve();
-                this.$nextTick(() => {
+                setTimeout(() => {
+                    resolve();
                     let dialogWrapEl: HTMLElement = this.$refs.dialogWrap as HTMLElement;
-                    dialogWrapEl.setAttribute('tabindex', '0');
-                    dialogWrapEl.focus();
-                    dialogWrapEl.removeAttribute('tabindex');
-                });
-            }, this.transitionDuration);
+                    if (dialogWrapEl) {
+                        dialogWrapEl.setAttribute('tabindex', '0');
+                        dialogWrapEl.focus();
+                        dialogWrapEl.blur();
+                        dialogWrapEl.removeAttribute('tabindex');
+                    }
+                }, this.transitionDuration);
+            }, 10);
         });
     }
 

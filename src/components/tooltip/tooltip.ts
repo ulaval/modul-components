@@ -5,6 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './tooltip.html?style=./tooltip.scss';
 import { TOOLTIP_NAME } from '../component-names';
 import { MPopup } from '../popup/popup';
+import { MPopper } from '../popper/popper';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { MPopperPlacement } from '../popper/popper';
 
@@ -70,7 +71,7 @@ export class MTooltip extends ModulVue {
     }
 
     private close(): void {
-        (this.$children[0] as MPopup).propOpen = false;
+        ((this.$children[0] as MPopup).$children[0] as MPopper).propOpen = false;
     }
 }
 

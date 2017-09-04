@@ -1,15 +1,14 @@
-
-<transition name="delete-anim">
-    <li class="m-content-list-item" v-if="visible">
-        <span>
-            <slot>
-                <p>This component is intended to be used as <b>m-content-list</b> component child.</p>
-            </slot>
-        </span>
-        <span>
-            <a v-if="button" href="#" @click.prevent="deleteItem()" class="m-content-list-item__button">
-                <m-icon name="chip-error"></m-icon>
-            </a>
+<transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
+    <li class="m-content-list-item" v-if="visible" :class="{ 'm--is-eq-max-xs': isEqMaxXS }">
+        <span class="m-content-list-item__article">
+            <span class="m-content-list-item__article__body">
+                <slot>
+                    <p>This component is intended to be used as <b>m-content-list</b> component child.</p>
+                </slot>
+            </span>
+            <m-button v-if="deleteButton" mode="icon" icon-name="chip-error" @click="deleteItem()" class="m-content-list-item__article__button">
+                Delete
+            </m-button>
         </span>
     </li>
 </transition>

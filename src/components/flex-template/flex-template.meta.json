@@ -63,5 +63,6 @@
             "default": "44px"
         }
     },
-    "overview": "flex-template.overview"
+    "overview": "flex-template.overview",
+    "preview": "false"
 }

@@ -5,7 +5,7 @@ $m-dropdown-item--color-focus: $m-color--interactive-lightest !default;
 $m-dropdown-item--color-active: $m-color--interactive-lightest !default;
 
 .m-dropdown-item {
-    transition: 0.3s background ease;
+    transition: background $m-transition-duration ease;
     display: inline-block;
     width: 100%;
     padding: $m-padding;
@@ -17,22 +17,25 @@ $m-dropdown-item--color-active: $m-color--interactive-lightest !default;
     outline: none;
 
     &:not(.m--is-disabled) {
-        &:not(.m--is-selected) {
-            cursor: pointer;
+        &:not(.m--is-inactif) {
+            &:not(.m--is-selected) {
+                cursor: pointer;
 
-            &:hover {
-                background: $m-dropdown-item--color-hover;
-            }
+                &:hover {
+                    background: $m-dropdown-item--color-hover;
+                }
 
-            &:focus {
-                background: $m-dropdown-item--color-focus;
-            }
+                &:focus {
+                    background: $m-dropdown-item--color-focus;
+                }
 
-            &:active {
-                background: $m-dropdown-item--color-active;
+                &:active {
+                    background: $m-dropdown-item--color-active;
+                }
             }
         }
     }
+
 
     &.m--is-disabled {
         cursor: not-allowed;

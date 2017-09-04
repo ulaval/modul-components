@@ -48,7 +48,7 @@ $m-dialog--header-height: $m-touch-size !default;
 
             .m-base-window {
                 &__article {
-                    transition: 0.3s transform ease, 0.2s opacity linear;
+                    transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
                     margin-top: auto;
                     margin-bottom: auto;
                     transform: translate3d(0, $m-padding--l, 0);
@@ -190,7 +190,7 @@ $m-dialog--header-height: $m-touch-size !default;
                     flex-direction: column;
 
                     @media screen and (max-width: #{$m-bp--max--s}) {
-                        transition: 0.6s transform ease;
+                        transition: transform 0.6s ease;
                         position: absolute;
                         top: 0;
                         bottom: 0;
@@ -199,7 +199,7 @@ $m-dialog--header-height: $m-touch-size !default;
                     }
 
                     @media screen and (min-width: #{$m-bp--min--s}) {
-                        transition: 0.3s transform ease, 0.2s opacity linear;
+                        transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
                         transform: translate3d(0, $m-padding--l, 0);
                         margin-top: auto;
                         margin-bottom: auto;
@@ -335,7 +335,7 @@ $m-dialog--header-height: $m-touch-size !default;
                 }
 
                 &__close-button {
-                    transition: 0.3s background ease;
+                    transition: background $m-transition-duration ease;
                     position: absolute;
                     top: 0;
                     right: 0;

@@ -114,5 +114,6 @@
             "default": "0"
         }
     },
-    "overview": "popper.overview"
+    "overview": "popper.overview",
+    "preview": "false"
 }

@@ -20,7 +20,7 @@
             <slot name="header">Lorem ipsum dolor sit amet</slot>
         </div>
     </header>
-    <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
+    <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
         <div class="m-step__body" v-if="propOpen">
             <slot><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis nibh eu diam pellentesque lobortis.
                 Duis mattis vel orci at luctus. Fusce vitae eros quis diam iaculis imperdiet quis vitae sapien. Aliquam blandit

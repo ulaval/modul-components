@@ -2,5 +2,6 @@
     "tag": "m-dropdown-item",
     "name": "m-dropdown-item-meta:name",
     "attributes": {},
-    "overview": "dropdown-item.overview"
+    "overview": "dropdown-item.overview",
+    "preview": "false"
 }

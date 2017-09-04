@@ -66,6 +66,7 @@ export class MPopper extends ModulVue {
     private propId: string;
 
     private defaultAnimOpen: boolean = false;
+    private init: boolean = false;
 
     protected created(): void {
         this.propId = this.id + '-' + uuid.generate();
@@ -77,16 +78,38 @@ export class MPopper extends ModulVue {
 
     protected mounted(): void {
         this.propOpen = this.open;
-        this.$mWindow.event.$on('scroll', () => this.update());
-        this.$mWindow.event.$on('resize', () => this.update());
+        this.$mWindow.event.$on('scroll', this.update);
+        this.$mWindow.event.$on('resize', this.update);
     }
 
-    protected destroyed(): void {
+    protected beforeDestroy(): void {
+        this.$mWindow.event.$off('click', this.onClickOutside);
+        this.$mWindow.event.$off('scroll', this.update);
+        this.$mWindow.event.$off('resize', this.update);
         this.destroyPopper();
-        this.$mWindow.event.$off('click');
-        this.$mWindow.event.$off('scroll');
-        this.$mWindow.event.$off('resize');
         document.body.removeChild(this.getPortalTargetEl());
+    }
+
+    public get propOpen(): boolean {
+        return this.internalOpen;
+    }
+
+    public set propOpen(open) {
+        if (!this.disabled) {
+            if (open) {
+                this.openPopper();
+                this.$emit('open');
+                // Keep the timer to allow an element outside the component to open the popper
+                setTimeout(() => {
+                    this.$mWindow.event.$on('click', this.onClickOutside);
+                }, 0);
+            } else {
+                this.closePopper();
+                this.$emit('close');
+                this.$mWindow.event.$off('click', this.onClickOutside);
+            }
+            this.internalOpen = open;
+        }
     }
 
     @Watch('open')
@@ -150,15 +173,14 @@ export class MPopper extends ModulVue {
     private onClick(event: MouseEvent): void {
         if (this.propOpenOnClick && !this.disabled) {
             this.propOpen = !this.propOpen;
-            if (this.propCloseOnClickOutside) {
-                event.stopPropagation();
-            }
         }
     }
 
     private onClickOutside(event: MouseEvent): void {
-        if (!(this.getPortalTargetEl() as HTMLElement).contains(event.target as HTMLElement) && this.propCloseOnClickOutside) {
-            this.propOpen = false;
+        if (this.getPortalTargetEl() && this.propCloseOnClickOutside) {
+            if (!(this.getPortalTargetEl() as HTMLElement).contains(event.target as HTMLElement)) {
+                this.propOpen = false;
+            }
         }
     }
 
@@ -180,28 +202,6 @@ export class MPopper extends ModulVue {
 
     private get propCloseOnClickOutside(): boolean {
         return this.propOpen ? this.closeOnClickOutside : false;
-    }
-
-    private get propOpen(): boolean {
-        return this.internalOpen;
-    }
-
-    private set propOpen(open) {
-        if (!this.disabled) {
-            if (open) {
-                this.openPopper();
-                this.$emit('open');
-                // Keep the timer to allow an element outside the component to open the popper
-                setTimeout(() => {
-                    this.$mWindow.event.$on('click', (e: MouseEvent) => this.onClickOutside(e));
-                }, 0);
-            } else {
-                this.closePopper();
-                this.$emit('close');
-                this.$mWindow.event.$off('click');
-            }
-            this.internalOpen = open;
-        }
     }
 
     private get propPlacement(): MPopperPlacement {

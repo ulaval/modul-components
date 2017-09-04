@@ -40,7 +40,7 @@
         > .m-flex-template__corps {
             > .m-flex-template__menu-container {
                 > .m-flex-template__menu {
-                    transition: 0.3s top ease;
+                    transition: top $m-transition-duration--s ease;
                     max-height: 100vh;
                     overflow-y: auto;
                 }
@@ -58,7 +58,7 @@
         > .m-flex-template__corps {
             > .m-flex-template__menu-container,
             > .m-flex-template__page-container {
-                transition: 0.45s width ease-in-out;
+                transition: width $m-transition-duration--l ease-in-out;
             }
         }
     }
@@ -74,7 +74,7 @@
     }
 
     &__header {
-        transition: 0.3s transform ease;
+        transition: transform $m-transition-duration ease;
         position: relative;
         top: 0;
         right: 0;
@@ -183,7 +183,7 @@
             > .m-flex-template__corps {
                 > .m-flex-template__menu-container {
                     > .m-flex-template__menu {
-                        transition: 0.45s transform ease;
+                        transition: transform $m-transition-duration--l ease-in-out;
                     }
                 }
             }

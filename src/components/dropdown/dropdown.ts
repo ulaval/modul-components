@@ -13,6 +13,7 @@ import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/medi
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 198;
+const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface SelectedValue {
     key: string | undefined;
@@ -27,10 +28,10 @@ export interface MDropdownInterface extends Vue {
     addAction: boolean;
     nbItemsVisible: number;
     multiple: boolean;
+    propOpen: boolean;
     getElement(key: string): Vue | undefined;
     itemDestroy(item: Vue): void;
     setFocus(item: Vue): void;
-
 }
 
 @WithRender
@@ -74,13 +75,16 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public nbItemsVisible: number = 0;
     public selectedText: string = '';
     private internalOpen: boolean = false;
+    private noItemsLabel: string;
 
     public getElement(key: string): Vue | undefined {
         let element: Vue | undefined;
 
         for (let child of this.$children) {
-            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
-                element = this.recursiveGetElement(key, child);
+            if (child.$options.name == 'MPopup' &&
+                child.$el.nodeName != '#comment' &&
+                child.$children[0].$options.name == 'MPopper') {
+                element = this.recursiveGetElement(key, child.$children[0]);
                 break;
             }
         }
@@ -163,11 +167,11 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         this.propOpen = open;
     }
 
-    private get propOpen(): boolean {
+    public get propOpen(): boolean {
         return this.internalOpen;
     }
 
-    private set propOpen(open: boolean) {
+    public set propOpen(open: boolean) {
         this.internalOpen = open != undefined ? open : false;
         this.$nextTick(() => {
             if (open) {
@@ -200,6 +204,17 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
+    private get showNoItemsLabel(): boolean {
+        let show: boolean = false;
+
+        if (this.nbItemsVisible == 0) {
+            this.noItemsLabel = this.items.length == 0 ? this.propTextNoData : this.propTextNoMatch;
+            show = true;
+        }
+
+        return show;
+    }
+
     private get propWidth(): string {
         if (this.as<MediaQueriesMixin>().isMqMaxS) {
             return '100%';
@@ -227,25 +242,12 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {
             for (let item of this.items) {
-                (item as MDropDownItemInterface).filter = text;
+                if (!(item as MDropDownItemInterface).propInactif) {
+                    (item as MDropDownItemInterface).filter = normalizeString(text.trim());
+                }
             }
-            // for (let child of this.$children) {
-            //     if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
-            //         this.propagateTextFilter(normalizeString(text.trim()), child);
-            //     }
-            // }
         }
     }
-
-    // private propagateTextFilter(text: string, node: Vue): void {
-    //     for (let child of node.$children) {
-    //         if (child.$options.name == 'MDropdownGroup') {
-    //             this.propagateTextFilter(text, child);
-    //         } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
-    //             (child as MDropDownItemInterface).filter = text;
-    //         }
-    //     }
-    // }
 
     private keyupReference($event): void {
         if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
@@ -265,7 +267,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     private keyupItem($event: KeyboardEvent): void {
         let element: Vue | undefined = undefined;
         let focusElement: MDropDownItemInterface | undefined = this.getFocus();
-
         let itemsEnabled: MDropDownItemInterface[] = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
 
         switch ($event.keyCode) {
@@ -342,12 +343,11 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
-    private animEnter(el: HTMLElement, done: any): void {
+    private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
-            let transition: string = '0.3s max-height ease';
-            el.style.transition = transition;
-            el.style.webkitTransition = transition;
+            el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+            el.style.transition = DROPDOWN_STYLE_TRANSITION;
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';
             el.style.width = this.width;
@@ -359,14 +359,14 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     }
 
-    private animAfterEnter(el: HTMLElement): void {
+    private transitionAfterEnter(el: HTMLElement): void {
         setTimeout(() => {
             el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
             el.style.overflowY = 'auto';
         }, 300);
     }
 
-    private animLeave(el: HTMLElement, done: any): void {
+    private transitionLeave(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';

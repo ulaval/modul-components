@@ -61,7 +61,7 @@ $m-dropdown--margin: $m-padding--xs !default;
             &:not(.is-selected) {
                 .m-dropdown__list__element-text {
                     cursor: pointer;
-                    transition: 0.3s background ease;
+                    transition: background $m-transition-duration ease;
                 }
             }
 
@@ -79,7 +79,7 @@ $m-dropdown--margin: $m-padding--xs !default;
             }
 
             &-text {
-                transition: background 0.3s ease;
+                transition: background $m-transition-duration ease;
                 box-sizing: border-box;
                 display: inline-flex;
                 align-items: center;

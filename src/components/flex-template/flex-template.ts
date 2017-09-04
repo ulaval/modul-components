@@ -43,9 +43,9 @@ export class MFlexTemplate extends ModulVue {
     private headerHeight: number = 0;
     private headerHidden: boolean = false;
     private scrollPosition: number = 0;
-
     private internalMenuOpen: boolean = false;
     private menuHasAnim: boolean = false;
+    private animDynamicHeader: boolean = false;
 
     protected mounted(): void {
         this.propMenuOpen = this.menuOpen;
@@ -56,7 +56,7 @@ export class MFlexTemplate extends ModulVue {
     }
 
     protected beforeDdestroy(): void {
-        this.$mWindow.event.$off('scroll');
+        this.$mWindow.event.$off('scroll', this.onScroll);
     }
 
     @Watch('menuOpen')
@@ -104,11 +104,11 @@ export class MFlexTemplate extends ModulVue {
     }
 
     private adjustDynamicHeader() {
-        if (this.hasHeaderSlot) {
+        if (this.propDynamicHeader) {
             let position: number = this.$el.getBoundingClientRect().top;
-            let maxPosition: number = position + this.headerHeight + (this.headerHeight * 1.3);
+            let maxPosition: number = position + this.headerHeight + 50;
             let header = this.$refs.header as HTMLElement;
-            this.headerHidden = this.propDynamicHeader && (maxPosition <= 0 && !this.propMenuOpen) && (this.scrollPosition >= position);
+            this.headerHidden = (maxPosition <= 0 && !this.propMenuOpen) && (this.scrollPosition >= position);
             this.scrollPosition = position;
         }
     }
@@ -186,7 +186,7 @@ export class MFlexTemplate extends ModulVue {
         return !!this.$slots.footer;
     }
 
-    private animEnter(el: HTMLElement, done): void {
+    private transitionEnter(el: HTMLElement, done): void {
         this.adjustFixeMenu();
         this.adjustDynamicHeader();
         if (!this.as<ElementQueriesMixin>().isEqMaxS) {
@@ -212,7 +212,7 @@ export class MFlexTemplate extends ModulVue {
         }
     }
 
-    private animAfterEnter(el: HTMLElement): void {
+    private transitionAfterEnter(el: HTMLElement): void {
         let menuContent: HTMLElement = this.$refs.menuContent as HTMLElement;
         if (this.menuOpenCount != 0) {
             menuContent.focus();
@@ -220,7 +220,7 @@ export class MFlexTemplate extends ModulVue {
         this.menuOpenCount++;
     }
 
-    private animLeave(el: HTMLElement, done): void {
+    private transitionLeave(el: HTMLElement, done): void {
         this.transitionDelayOpen = false;
         if (!this.as<ElementQueriesMixin>().isEqMaxS) {
             let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;

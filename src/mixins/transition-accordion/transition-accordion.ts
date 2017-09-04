@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
+const ACCORDION_STYLE_TRANSITION: string = 'max-height 0.3s ease';
+
 export interface TransitionAccordionMixin {
     isAnimActive: boolean;
 }
@@ -9,22 +11,29 @@ export interface TransitionAccordionMixin {
 export class TransitionAccordion extends Vue implements TransitionAccordionMixin {
     public isAnimActive: boolean;
 
-    private animEnter(el: HTMLElement, done): void {
-        if (this.isAnimActive) {
+    private setTransitionStart(el: HTMLElement) {
+        el.style.webkitTransition = ACCORDION_STYLE_TRANSITION;
+        el.style.transition = ACCORDION_STYLE_TRANSITION;
+        el.style.height = 'auto';
+        el.style.overflow = 'hidden';
+    }
+
+    private transitionEnter(el: HTMLElement, done): void {
+        if (this.isAnimActive || this.isAnimActive == undefined) {
             let height: number = el.clientHeight;
+            this.setTransitionStart(el);
             el.style.maxHeight = '0';
-            el.style.overflow = 'hidden';
             setTimeout(() => {
                 el.style.maxHeight = height + 'px';
                 done();
-            }, 0);
+            });
         } else {
             done();
         }
     }
 
-    private animAfterEnter(el: HTMLElement): void {
-        if (this.isAnimActive) {
+    private transitionAfterEnter(el: HTMLElement): void {
+        if (this.isAnimActive || this.isAnimActive == undefined) {
             setTimeout(() => {
                 el.style.removeProperty('max-height');
                 el.style.removeProperty('overflow');
@@ -32,17 +41,17 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
         }
     }
 
-    private animLeave(el: HTMLElement, done): void {
-        if (this.isAnimActive) {
+    private transitionLeave(el: HTMLElement, done): void {
+        if (this.isAnimActive || this.isAnimActive == undefined) {
+            this.setTransitionStart(el);
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';
-            el.style.overflow = 'hidden';
             setTimeout(() => {
                 el.style.maxHeight = '0';
-            }, 0);
-            setTimeout(() => {
-                done();
-            }, 300);
+                setTimeout(() => {
+                    done();
+                }, 300);
+            }, 10);
         } else {
             done();
         }
