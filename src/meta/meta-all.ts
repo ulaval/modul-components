@@ -49,6 +49,7 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(POPUP_NAME, require('../components/popup/popup.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(RADIO_NAME, require('../components/radio/radio.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(RADIO_GROUP_NAME, require('../components/radio-group/radio-group.meta.json'), CATEGORY_FORMS);
+        meta.mergeComponentMeta(SCROLL_TOP_NAME, require('../components/scroll-top/scroll-top.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(SIDEBAR_NAME, require('../components/sidebar-window/sidebar-window.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(SPINNER_NAME, require('../components/spinner/spinner.meta.json'), CATEGORY_INDICATORS);
         meta.mergeComponentMeta(STATUS_LIST_NAME, require('../components/status-list/status-list.meta.json'), CATEGORY_LAYOUT);
