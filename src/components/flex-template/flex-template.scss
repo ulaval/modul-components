@@ -40,7 +40,7 @@
         > .m-flex-template__corps {
             > .m-flex-template__menu-container {
                 > .m-flex-template__menu {
-                    transition: top $m-transition-duration--s ease;
+                    transition: top $m-transition-duration--l ease-in-out;
                     max-height: 100vh;
                     overflow-y: auto;
                 }
@@ -126,6 +126,11 @@
                 }
             }
         }
+    }
+
+    &__corps {
+        position: relative;
+        z-index: 1;
     }
 
     &__page {

@@ -125,7 +125,7 @@ export class MFlexTemplate extends ModulVue {
                 } else {
                     this.topMenu = '';
                 }
-            }, 100);
+            }, 60);
         }
     }
 

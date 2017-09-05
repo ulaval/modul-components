@@ -30,5 +30,6 @@
             "default": 1
         }
     },
-    "overview": "radio-group.overview"
+    "overview": "radio-group.overview",
+    "preview": false
 }

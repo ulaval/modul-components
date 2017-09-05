@@ -85,5 +85,5 @@
         }
     },
     "overview": "sidebar.overview",
-    "preview": "false"
+    "preview": false
 }

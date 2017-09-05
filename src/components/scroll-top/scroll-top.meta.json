@@ -22,5 +22,6 @@
             "default": "0"
         }
     },
-    "overview": "scroll-top.overview"
+    "overview": "scroll-top.overview",
+    "preview": false
 }

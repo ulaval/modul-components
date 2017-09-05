@@ -7,5 +7,6 @@
             "description": "m-i18n-meta:i18n-key-desc"
         }
     },
-    "overview": "i18n.overview"
+    "overview": "i18n.overview",
+    "preview": false
 }

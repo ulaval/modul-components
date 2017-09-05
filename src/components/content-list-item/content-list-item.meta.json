@@ -6,5 +6,6 @@
             "type": "string"
         }
     },
-    "overview": "content-list-item.overview"
+    "overview": "content-list-item.overview",
+    "preview": false
 }
