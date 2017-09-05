@@ -17,30 +17,29 @@ export class MScrollTop extends ModulVue {
     public position: string;
 
     public componentName = SCROLL_TOP_NAME;
-    private scrollBreakPoint: number = window.innerHeight * 2;
-    private isFocus: boolean = false;
+    private scrollBreakPoint: number = window.innerHeight;
+    private visible: boolean = true;
 
     protected mounted(): void {
         console.log(this.scrollBreakPoint);
-        this.$mWindow.event.$on('scroll', this.onScroll);
+        if (this.position != 'relative') {
+            this.visible = false;
+            this.$mWindow.event.$on('scroll', this.onScroll);
+        }
     }
 
-    private update(): void {
-        console.log('scroll');
-    }
-
-    private scrollTop(): void {
-        console.log(document.body.offsetHeight);
+    protected beforeDestroy(): void {
+        this.$mWindow.event.$off('scroll', this.onScroll);
     }
 
     private onScroll(e): void {
-        console.log('scroll');
+        let scrollPosition = window.pageYOffset;
+        scrollPosition > this.scrollBreakPoint ? this.visible = true : this.visible = false;
     }
 
     private onClick(event) {
-        console.log(this.$el);
         let scollDuration: number = 600;
-        let scrollStep: number = -window.scrollY / (scollDuration / 15);
+        let scrollStep: number = -window.scrollY / (scollDuration / 20);
         let scrollInterval = setInterval(() => {
             if (window.scrollY != 0) {
                 window.scrollBy(0, scrollStep);
