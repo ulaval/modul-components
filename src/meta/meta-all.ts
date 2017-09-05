@@ -25,9 +25,9 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(ACCORDION_GROUP_NAME, require('../components/accordion-group/accordion-group.meta.json'), CATEGORY_CONTENT);
         meta.mergeComponentMeta(BULLET_LIST_NAME, require('../components/bullet-list/bullet-list.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(BUTTON_NAME, require('../components/button/button.meta.json'), CATEGORY_FORMS);
-        meta.mergeComponentMeta(CONTENT_LIST_NAME, require('../components/button-group/button-group.meta.json'), CATEGORY_FORMS);
-        meta.mergeComponentMeta(CONTENT_LIST_ITEM_NAME, require('../components/content-list/content-list.meta.json'), CATEGORY_CONTENT);
-        meta.mergeComponentMeta(BUTTON_GROUP_NAME, require('../components/content-list-item/content-list-item.meta.json'), CATEGORY_CONTENT);
+        meta.mergeComponentMeta(BUTTON_GROUP_NAME, require('../components/button-group/button-group.meta.json'), CATEGORY_FORMS);
+        meta.mergeComponentMeta(CONTENT_LIST_NAME, require('../components/content-list/content-list.meta.json'), CATEGORY_CONTENT);
+        meta.mergeComponentMeta(CONTENT_LIST_ITEM_NAME, require('../components/content-list-item/content-list-item.meta.json'), CATEGORY_CONTENT);
         meta.mergeComponentMeta(CHECKBOX_NAME, require('../components/checkbox/checkbox.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(DIALOG_NAME, require('../components/dialog-window/dialog-window.meta.json'), CATEGORY_COMUNICATION);
         meta.mergeComponentMeta(DROPDOWN_NAME, require('../components/dropdown/dropdown.meta.json'), CATEGORY_FORMS);
