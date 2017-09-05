@@ -97,18 +97,23 @@ export class MPopper extends ModulVue {
     public set propOpen(open) {
         if (!this.disabled) {
             if (open) {
-                this.openPopper();
-                this.$emit('open');
-                // Keep the timer to allow an element outside the component to open the popper
-                setTimeout(() => {
-                    this.$mWindow.event.$on('click', this.onClickOutside);
-                }, 0);
+                if (!this.internalOpen) {
+                    this.internalOpen = true;
+                    this.openPopper();
+                    this.$emit('open');
+                    // Keep the timer to allow an element outside the component to open the popper
+                    setTimeout(() => {
+                        this.$mWindow.event.$on('click', this.onClickOutside);
+                    }, 0);
+                }
             } else {
-                this.closePopper();
-                this.$emit('close');
-                this.$mWindow.event.$off('click', this.onClickOutside);
+                if (this.internalOpen) {
+                    this.internalOpen = false;
+                    this.closePopper();
+                    this.$mWindow.event.$off('click', this.onClickOutside);
+                    this.$emit('close');
+                }
             }
-            this.internalOpen = open;
         }
     }
 
@@ -138,9 +143,6 @@ export class MPopper extends ModulVue {
                     this.popper.update();
                 }
                 portalTargetEl.style.zIndex = String(this.$mWindow.windowZIndex);
-                if (this.propOpen) {
-                    this.setFastFocusToElement(this.$refs.popper as HTMLElement);
-                }
             });
         }
     }
@@ -279,6 +281,10 @@ export class MPopper extends ModulVue {
     private onAfterEnter(el: HTMLElement): void {
         if (this.hasAfterEnterAnim()) {
             this.afterEnter(el.children[0]);
+        }
+
+        if (this.propOpen) {
+            this.setFastFocusToElement(el);
         }
     }
 
