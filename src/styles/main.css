@@ -16,14 +16,13 @@
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
-  outline-color: #36adff; }
+  box-sizing: inherit; }
 
 html,
 body {
-  height: 100%;
   min-width: 320px;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  outline-color: #36adff; }
 
 html {
   box-sizing: border-box; }

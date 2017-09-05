@@ -1,6 +1,6 @@
 {
-    "tag": "m-popper",
-    "name": "m-popper-meta:name",
+    "tag": "m-popup",
+    "name": "m-popup-meta:name",
     "attributes": {
         "mode": {
             "type": "string",
@@ -114,6 +114,6 @@
             "default": "0"
         }
     },
-    "overview": "popper.overview",
+    "overview": "popup.overview",
     "preview": "false"
 }

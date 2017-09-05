@@ -1,68 +1,49 @@
 @import 'abstracts/variables';
 
 .m-content-list-item {
-    list-style: none;
-    border-bottom: 1px solid $m-color--grey-lighter;
-    padding: $m-padding;
     position: relative;
-    justify-content: space-between;
-    background-color: $m-color--white;
-    z-index: 1;
+    list-style: none;
 
-    &,
-    &__button {
-        display: flex;
-        align-items: flex-end;
+    &:not(:last-child) {
+        .m-content-list-item__article {
+            border-bottom: 1px solid $m-color--grey-lighter;
+        }
     }
 
-    &__button {
-        color: $m-color--grey-light;
-        transition: color 0.3s ease;
-        width: $m-touch-size;
-        text-align: right;
+    &__article {
+        padding: $m-padding;
         display: flex;
-        align-self: center;
-        justify-content: flex-end;
+        justify-content: space-between;
+        background-color: $m-color--white;
+
+        @media (max-width: $m-bp--max--s) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &__body {
+            > :first-child {
+                &,
+                > :first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &__button {
+            &.m-button.m-button {
+                min-width: auto;
+                min-height: auto;
+                width: $m-font-size;
+                height: $m-font-size;
+            }
+        }
     }
 
-    // &:hover {
-    //     .m-content-list-item__button {
-    //         color: $m-color--grey-light;
-    //     }
-    // }
-}
-
-.delete-anim-enter-active {
-    transition: opacity 0.3s ease, max-height 0.5s ease, padding 0.5s ease;
-    overflow: hidden;
-}
-
-.delete-anim-enter {
-    opacity: 0;
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.delete-anim-enter-to {
-    opacity: 1;
-    max-height: 300px;
-    padding: $m-padding;
-}
-
-.delete-anim-leave-active {
-    transition: opacity 0.3s ease, max-height 0.5s ease, padding 0.5s ease;
-    overflow: hidden;
-}
-
-.delete-anim-leave {
-    opacity: 1;
-    max-height: 100px;
-}
-
-.delete-anim-leave-to {
-    opacity: 0;
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    &.m--is-eq-max-xs {
+        .m-content-list-item__article {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
 }

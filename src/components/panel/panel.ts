@@ -37,6 +37,10 @@ export class MPanel extends Vue {
         ElementQueries.init();
     }
 
+    protected beforeDestroy(): void {
+        ElementQueries.detach();
+    }
+
     private get propMode(): MPanelMode {
         return this.mode == MPanelMode.Secondary ? MPanelMode.Secondary : MPanelMode.Primary;
     }

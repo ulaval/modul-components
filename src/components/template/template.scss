@@ -8,53 +8,6 @@ $m-template--column-color: $m-color--grey-light;
     flex-direction: column;
     min-width: $m-min-width;
 
-    &[max-width~="#{ $m-bp--max--m }"] {
-        .m-template {
-            &__column {
-                flex: 0 0 50%;
-            }
-        }
-    }
-
-    &[max-width~="#{ $m-bp--max--s }"] {
-        .m-template {
-            &__wrap {
-                display: flex;
-                flex-direction: column;
-            }
-
-            &__column {
-                flex: none;
-                width: 100%;
-            }
-
-            &__body {
-                flex: 1 1 auto;
-
-                &-container {
-                    display: flex;
-                    flex-direction: column;
-                }
-            }
-        }
-    }
-
-    &[min-width~="#{ $m-bp--min--m }"] {
-        .m-template {
-            &__column {
-                flex: 0 0 $m-template--column-width;
-            }
-        }
-    }
-
-    &[min-width~="#{ $m-bp--min--s }"] {
-        .m-template {
-            &__column {
-                max-width: $m-template--column-width;
-            }
-        }
-    }
-
     &__body__content,
     &__body__footer,
     &__column {
@@ -137,6 +90,47 @@ $m-template--column-color: $m-color--grey-light;
 
     &__column {
         background-color: $m-template--column-color;
+    }
+
+    &.m--is-eq-max-m {
+        .m-template__column {
+            flex: 0 0 50%;
+        }
+    }
+
+    &.m--is-eq-max-s {
+        .m-template {
+            &__wrap {
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__column {
+                flex: none;
+                width: 100%;
+            }
+
+            &__body {
+                flex: 1 1 auto;
+
+                &-container {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+
+    &:not(.m--is-eq-max-m) {
+        .m-template__column {
+            flex: 0 0 $m-template--column-width;
+        }
+    }
+
+    &:not(.m--is-eq-max-s) {
+        .m-template__column {
+            max-width: $m-template--column-width;
+        }
     }
 }
 

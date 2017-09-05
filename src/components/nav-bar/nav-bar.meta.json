@@ -20,5 +20,6 @@
             ]
         }
     },
-    "overview": "nav-bar.overview"
+    "overview": "nav-bar.overview",
+    "preview": "false"
 }

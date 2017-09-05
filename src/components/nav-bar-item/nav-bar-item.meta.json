@@ -11,5 +11,6 @@
             "default": 1
         }
     },
-    "overview": "nav-bar-item.overview"
+    "overview": "nav-bar-item.overview",
+    "preview": "false"
 }

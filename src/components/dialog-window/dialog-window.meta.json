@@ -87,5 +87,6 @@
             "default": 2
         }
     },
-    "overview": "dialog.overview"
+    "overview": "dialog.overview",
+    "preview": "false"
 }

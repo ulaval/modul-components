@@ -20,7 +20,7 @@
         height: $m-border-width--l;
 
         &.m--is-anim-active {
-            transition: 0.3s transform ease, 0.3s width ease;
+            transition: transform $m-transition-duration ease, width $m-transition-duration ease;
         }
     }
 
@@ -95,7 +95,7 @@
                 &[tabindex],
                 a,
                 button {
-                    transition: 0.3s background ease;
+                    transition: background $m-transition-duration ease;
 
                     &:hover,
                     &:focus {
@@ -134,12 +134,12 @@
             &[tabindex],
             a,
             button {
-                transition: 0.3s color ease;
+                transition: color $m-transition-duration ease;
                 color: $m-color--grey-darker;
                 padding: 0 0 $m-margin 0;
 
                 &::after {
-                    transition: 0.3s opacity ease;
+                    transition: opacity $m-transition-duration ease;
                     position: absolute;
                     right: 0;
                     bottom: 0;

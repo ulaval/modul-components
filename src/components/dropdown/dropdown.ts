@@ -11,8 +11,9 @@ import { MDropDownItemInterface } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
-const PAGE_STEP: number = 4;
+const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 198;
+const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface SelectedValue {
     key: string | undefined;
@@ -21,13 +22,16 @@ export interface SelectedValue {
 }
 
 export interface MDropdownInterface extends Vue {
+    items: Vue[];
     selected: Array<SelectedValue>;
     currentElement: SelectedValue;
     addAction: boolean;
-    nbItems: number;
     nbItemsVisible: number;
     multiple: boolean;
+    propOpen: boolean;
     getElement(key: string): Vue | undefined;
+    itemDestroy(item: Vue): void;
+    setFocus(item: Vue): void;
 }
 
 @WithRender
@@ -64,31 +68,67 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     public componentName: string = DROPDOWN_NAME;
 
+    public items: Vue[] = [];
     public selected: Array<SelectedValue> = [];
     public currentElement: SelectedValue = { 'key': undefined, 'value': undefined, 'label': '' };
     public addAction: true;
-    public nbItems: number = 0;
     public nbItemsVisible: number = 0;
     public selectedText: string = '';
     private internalOpen: boolean = false;
+    private noItemsLabel: string;
 
     public getElement(key: string): Vue | undefined {
         let element: Vue | undefined;
 
         for (let child of this.$children) {
-            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
-                element = this.recursiveGetElement(key, child);
+            if (child.$options.name == 'MPopup' &&
+                child.$el.nodeName != '#comment' &&
+                child.$children[0].$options.name == 'MPopper') {
+                element = this.recursiveGetElement(key, child.$children[0]);
                 break;
             }
         }
         return element;
     }
 
+    public itemDestroy(item: Vue): void {
+        let index: number = this.items.indexOf(item);
+        if (index > -1) {
+            this.items.splice(index, 1);
+            if ((this.items[index] as MDropDownItemInterface).visible) {
+                this.nbItemsVisible--;
+            }
+        }
+    }
+
+    public setFocus(elementFocus: Vue): void {
+        for (let item of this.items) {
+            if (item === elementFocus) {
+                (item as MDropDownItemInterface).hasFocus = true;
+            } else {
+                (item as MDropDownItemInterface).hasFocus = false;
+            }
+        }
+    }
+
+    public getFocus(): MDropDownItemInterface | undefined {
+        let elementFocus: MDropDownItemInterface | undefined = undefined;
+
+        for (let item of this.items) {
+            if ((item as MDropDownItemInterface).hasFocus) {
+                elementFocus = (item as MDropDownItemInterface);
+                break;
+            }
+        }
+
+        return elementFocus;
+    }
+
     protected mounted(): void {
         this.propOpen = this.open;
         // Obtenir le premier dropdown-item
         if (this.defaultFirstElement && !this.multiple && !this.disabled) {
-            let firstElement: Vue | undefined = this.getFirstElement();
+            let firstElement: Vue = this.items[0];
             if (firstElement) {
                 (firstElement as MDropDownItemInterface).onSelectElement();
             }
@@ -127,16 +167,15 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         this.propOpen = open;
     }
 
-    private get propOpen(): boolean {
+    public get propOpen(): boolean {
         return this.internalOpen;
     }
 
-    private set propOpen(open: boolean) {
+    public set propOpen(open: boolean) {
         this.internalOpen = open != undefined ? open : false;
         this.$nextTick(() => {
             if (open) {
                 this.$el.style.zIndex = '10';
-                this.setDropdownElementFocus();
                 this.$emit('open');
             } else {
                 this.$el.style.removeProperty('z-index');
@@ -165,6 +204,17 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
+    private get showNoItemsLabel(): boolean {
+        let show: boolean = false;
+
+        if (this.nbItemsVisible == 0) {
+            this.noItemsLabel = this.items.length == 0 ? this.propTextNoData : this.propTextNoMatch;
+            show = true;
+        }
+
+        return show;
+    }
+
     private get propWidth(): string {
         if (this.as<MediaQueriesMixin>().isMqMaxS) {
             return '100%';
@@ -189,61 +239,14 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         return element;
     }
 
-    private getFirstElement(): Vue | undefined {
-        let firstElement: Vue | undefined;
-
-        for (let child of this.$children) {
-            if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
-                firstElement = this.recursiveGetFirstElement(child);
-                break;
-            }
-        }
-        return firstElement;
-    }
-
-    private recursiveGetFirstElement(node: Vue): Vue | undefined {
-        let firstElement: Vue | undefined;
-
-        for (let child of node.$children) {
-            if (child.$options.name == 'MDropdownGroup') {
-                firstElement = this.recursiveGetFirstElement(child);
-                if (firstElement) {
-                    return firstElement;
-                }
-            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
-                return child;
-            }
-        }
-        return firstElement;
-    }
-
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {
-            for (let child of this.$children) {
-                if (child.$options.name == 'MPopper' && child.$el.nodeName != '#comment') {
-                    this.propagateTextFilter(normalizeString(text.trim()), child);
+            for (let item of this.items) {
+                if (!(item as MDropDownItemInterface).propInactif) {
+                    (item as MDropDownItemInterface).filter = normalizeString(text.trim());
                 }
             }
         }
-    }
-
-    private propagateTextFilter(text: string, node: Vue): void {
-        for (let child of node.$children) {
-            if (child.$options.name == 'MDropdownGroup') {
-                this.propagateTextFilter(text, child);
-            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment') {
-                (child as MDropDownItemInterface).filter = text;
-            }
-        }
-    }
-
-    private setDropdownElementFocus(): void {
-        // if (!this.as<DropdownTemplateMixin>().editable) {
-        //     let element: HTMLElement = this.$el.querySelector(`.is-selected a`) as HTMLElement;
-        //     if (element) {
-        //         element.focus();
-        //     }
-        // }
     }
 
     private keyupReference($event): void {
@@ -261,66 +264,90 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
-    private keyupItem($event: KeyboardEvent, index: number): void {
-        let selector: string = '';
+    private keyupItem($event: KeyboardEvent): void {
+        let element: Vue | undefined = undefined;
+        let focusElement: MDropDownItemInterface | undefined = this.getFocus();
+        let itemsEnabled: MDropDownItemInterface[] = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
+
         switch ($event.keyCode) {
             case KeyCode.M_UP:
-                if (index == 0) {
-                    selector = `[data-index='0']`;
+                if (focusElement) {
+                    let index: number = itemsEnabled.indexOf(focusElement);
+                    if (index == 0) {
+                        element = itemsEnabled[0];
+                    } else {
+                        element = itemsEnabled[index - 1];
+                    }
                 } else {
-                    selector = `[data-index='${index - 1}']`;
+                    element = itemsEnabled[0];
                 }
                 break;
             case KeyCode.M_HOME:
-                selector = `[data-index='0']`;
+                element = itemsEnabled[0];
                 break;
             case KeyCode.M_PAGE_UP:
-                index -= PAGE_STEP;
-                if (index < 0) {
-                    index = 0;
+                if (focusElement) {
+                    let index: number = itemsEnabled.indexOf(focusElement);
+                    index -= PAGE_STEP;
+
+                    if (index < 0) {
+                        element = itemsEnabled[0];
+                    } else {
+                        element = itemsEnabled[index];
+                    }
+                } else {
+                    element = itemsEnabled[0];
                 }
-                selector = `[data-index='${index}']`;
                 break;
-            // case KeyCode.M_DOWN:
-            //     if (index == this.elementsSortedFiltered.length - 1) {
-            //         selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
-            //     } else {
-            //         selector = `[data-index='${index + 1}']`;
-            //     }
-            //     break;
-            // case KeyCode.M_END:
-            //     selector = `[data-index='${this.elementsSortedFiltered.length - 1}']`;
-            //     break;
-            // case KeyCode.M_PAGE_DOWN:
-            //     index += PAGE_STEP;
-            //     if (index >= this.elementsSortedFiltered.length) {
-            //         index = this.elementsSortedFiltered.length - 1;
-            //     }
-            //     selector = `[data-index='${index}']`;
-            //     break;
+            case KeyCode.M_DOWN:
+                if (focusElement) {
+                    let index: number = itemsEnabled.indexOf(focusElement);
+                    if (index == itemsEnabled.length - 1) {
+                        element = itemsEnabled[itemsEnabled.length - 1];
+                    } else {
+                        element = itemsEnabled[index + 1];
+                    }
+                } else {
+                    element = itemsEnabled[0];
+                }
+                break;
+
+            case KeyCode.M_END:
+                element = itemsEnabled[itemsEnabled.length - 1];
+                break;
+            case KeyCode.M_PAGE_DOWN:
+                if (focusElement) {
+                    let index: number = itemsEnabled.indexOf(focusElement);
+                    index += PAGE_STEP;
+
+                    if (index > itemsEnabled.length - 1) {
+                        element = itemsEnabled[itemsEnabled.length - 1];
+                    } else {
+                        element = itemsEnabled[index];
+                    }
+                } else {
+                    let index: number = (PAGE_STEP < itemsEnabled.length ? PAGE_STEP - 1 : itemsEnabled.length - 1);
+                    element = itemsEnabled[index];
+                }
+                break;
             case KeyCode.M_ENTER:
             case KeyCode.M_RETURN:
-                let element: HTMLElement = this.$el.querySelector(`[data-index='${index}']`) as HTMLElement;
-                if (element) {
-                    element.click();
+                if (focusElement) {
+                    (focusElement as MDropDownItemInterface).onSelectElement();
                 }
                 return;
         }
 
-        if (selector.trim() != '') {
-            let element: HTMLElement = this.$el.querySelector(selector) as HTMLElement;
-            if (element) {
-                element.focus();
-            }
+        if (element) {
+            element.$el.focus();
         }
     }
 
-    private animEnter(el: HTMLElement, done: any): void {
+    private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
-            let transition: string = '0.3s max-height ease';
-            el.style.transition = transition;
-            el.style.webkitTransition = transition;
+            el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+            el.style.transition = DROPDOWN_STYLE_TRANSITION;
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';
             el.style.width = this.width;
@@ -332,14 +359,14 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     }
 
-    private animAfterEnter(el: HTMLElement): void {
+    private transitionAfterEnter(el: HTMLElement): void {
         setTimeout(() => {
             el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
             el.style.overflowY = 'auto';
         }, 300);
     }
 
-    private animLeave(el: HTMLElement, done: any): void {
+    private transitionLeave(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             let height: number = el.clientHeight;
             el.style.maxHeight = height + 'px';

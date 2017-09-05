@@ -22,7 +22,7 @@
                      'm--is-large': propIconSize=='large',
                      'm--has-border': propIconAspect=='regular' }"></span>
     </header>
-    <transition @enter="animEnter" @after-enter="animAfterEnter" @leave="animLeave">
+    <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
         <div class="m-accordion__body-wrap" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propOpen">
             <div class="m-accordion__body">
                 <slot>m-accordion - text</slot>

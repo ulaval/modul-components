@@ -38,7 +38,7 @@ $m-radio--color-disabled-light: $m-color--grey !default;
                 }
 
                 &__label {
-                    transition: 0.3s color ease;
+                    transition: color $m-transition-duration ease;
                     color: $m-color--text;
                 }
 
@@ -110,7 +110,7 @@ $m-radio--color-disabled-light: $m-color--grey !default;
             }
 
             &__input {
-                transition: 0.3s background ease, 0.3s border-color ease;
+                transition: background $m-transition-duration ease, border-color  $m-transition-duration ease;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -123,7 +123,7 @@ $m-radio--color-disabled-light: $m-color--grey !default;
                 z-index: 1;
 
                 &::before {
-                    transition: 0.3s transform ease-out;
+                    transition: transform $m-transition-duration ease-out;
                     content: '';
                     display: block;
                     width: 10px;
@@ -306,7 +306,7 @@ $m-radio--color-disabled-light: $m-color--grey !default;
                 z-index: 2;
                 font-size: $m-font-size;
                 height: $m-font-size;
-                transition: 0.3s color ease;
+                transition: color $m-transition-duration ease;
 
                 &:empty {
                     display: none;

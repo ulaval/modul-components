@@ -1,7 +1,7 @@
 <m-flex-template :menuOpen="menuOpen">
     <m-template>
         <template slot="header">
-            <m-link state="unvisited">
+            <m-link :unvisited="true">
                 <span slot="icon-left"><</span>Menu
             </m-link>
             <h1>{{$route.meta}}</h1>

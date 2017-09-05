@@ -55,6 +55,10 @@ export class MStep extends ModulVue {
         ElementQueries.init();
     }
 
+    protected beforeDestroy(): void {
+        ElementQueries.detach();
+    }
+
     private openStep(event): void {
         if (this.propMode == MStepMode.Accordion) {
             this.as<TransitionAccordionMixin>().isAnimActive = true;

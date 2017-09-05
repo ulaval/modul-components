@@ -156,8 +156,6 @@ $m-step--badge--size-s: 10px;
     }
 
     &__body {
-        @include m-transition-accordion;
-
         margin-left: $m-step--icon--size + $m-margin;
 
         > :first-child {

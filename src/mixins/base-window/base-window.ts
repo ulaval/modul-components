@@ -35,6 +35,8 @@ export class BaseWindow extends ModulVue {
     public id: string;
     @Prop({ default: false })
     public open: boolean;
+    @Prop({ default: '' })
+    public classNamePortalTarget: string;
     @Prop({ default: false })
     public disabled: boolean;
     @Prop()
@@ -49,18 +51,15 @@ export class BaseWindow extends ModulVue {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
-    @Prop()
-    public className: string;
 
     public componentName: string;
     public from: string;
     private hasHeader: boolean;
 
-    private popoverClassName: string = this.className ? 'm-' + this.className + '-popover' : '';
     private internalPropOpen: boolean = false;
     private propId: string = DIALOG_ID;
     private bodyElement: HTMLElement = document.body;
-    private portalTargetElement: HTMLElement = document.createElement('div');
+    private portalTargetEl: HTMLElement = document.createElement('div');
     private isVisible: boolean = false;
     private busy: boolean = false;
 
@@ -79,11 +78,14 @@ export class BaseWindow extends ModulVue {
     }
 
     private get propOpen(): boolean {
+        if (this.disabled) {
+            return false;
+        }
         return this.internalPropOpen;
     }
 
     private set propOpen(value: boolean) {
-        if (this.internalPropOpen != value) {
+        if (this.internalPropOpen != value && !this.disabled) {
             if (this.busy) {
                 this.$emit('update:open', !value);
             } else {
@@ -145,10 +147,13 @@ export class BaseWindow extends ModulVue {
     }
 
     private openDialog(): boolean {
-        if (!this.busy) {
-            this.propOpen = true;
+        if (this.hasDefaultSlots) {
+            if (!this.busy) {
+                this.propOpen = true;
+            }
+            return this.propOpen;
         }
-        return this.propOpen;
+        return false;
     }
 
     private closeDialog(): boolean {
@@ -163,16 +168,17 @@ export class BaseWindow extends ModulVue {
             this.createDialog();
             setTimeout(() => {
                 this.isVisible = true;
-            }, 2);
-            setTimeout(() => {
-                resolve();
-                this.$nextTick(() => {
+                setTimeout(() => {
+                    resolve();
                     let dialogWrapEl: HTMLElement = this.$refs.dialogWrap as HTMLElement;
-                    dialogWrapEl.setAttribute('tabindex', '0');
-                    dialogWrapEl.focus();
-                    dialogWrapEl.removeAttribute('tabindex');
-                });
-            }, this.transitionDuration);
+                    if (dialogWrapEl) {
+                        dialogWrapEl.setAttribute('tabindex', '0');
+                        dialogWrapEl.focus();
+                        dialogWrapEl.blur();
+                        dialogWrapEl.removeAttribute('tabindex');
+                    }
+                }, this.transitionDuration);
+            }, 10);
         });
     }
 
@@ -189,10 +195,10 @@ export class BaseWindow extends ModulVue {
                 resolve();
                 if (this.hasDefaultSlots) {
                     this.$nextTick(() => {
-                        let dialogButtonEl: HTMLElement = this.$refs.dialogButton as HTMLElement;
-                        dialogButtonEl.setAttribute('tabindex', '0');
-                        dialogButtonEl.focus();
-                        dialogButtonEl.removeAttribute('tabindex');
+                        let baseWindowEl: HTMLElement = this.$refs.baseWindow as HTMLElement;
+                        baseWindowEl.setAttribute('tabindex', '0');
+                        baseWindowEl.focus();
+                        baseWindowEl.removeAttribute('tabindex');
                     });
                 }
             }, this.transitionDuration);
@@ -200,24 +206,26 @@ export class BaseWindow extends ModulVue {
     }
 
     private createDialog() {
-        this.propId = this.id + '-' + uuid.generate();
-        this.portalTargetElement.setAttribute('id', this.propId);
-        this.portalTargetElement.setAttribute('class', 'm-base-window-popover ' + this.popoverClassName);
-        this.portalTargetElement.style.position = 'relative';
+        if (!this.disabled) {
+            this.propId = this.id + '-' + uuid.generate();
+            this.portalTargetEl.setAttribute('id', this.propId);
+            this.portalTargetEl.setAttribute('class', this.classNamePortalTarget);
+            this.portalTargetEl.style.position = 'relative';
 
-        this.$mWindow.addWindow(this.propId);
-        this.portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
+            this.$mWindow.addWindow(this.propId);
+            this.portalTargetEl.style.zIndex = String(this.$mWindow.windowZIndex);
 
-        this.$mWindow.createBackdrop(this.bodyElement);
-        this.$mWindow.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
+            this.$mWindow.createBackdrop(this.bodyElement);
+            this.$mWindow.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
 
-        this.bodyElement.appendChild(this.portalTargetElement);
+            this.bodyElement.appendChild(this.portalTargetEl);
+        }
     }
 
     private deleteDialog() {
-        let portalTargetElement: HTMLElement = this.bodyElement.querySelector('#' + this.propId) as HTMLElement;
-        if (portalTargetElement) {
-            this.bodyElement.removeChild(portalTargetElement);
+        let portalTargetEl: HTMLElement = this.bodyElement.querySelector('#' + this.propId) as HTMLElement;
+        if (portalTargetEl) {
+            this.bodyElement.removeChild(portalTargetEl);
         }
         this.$mWindow.deleteWindow(this.propId);
     }

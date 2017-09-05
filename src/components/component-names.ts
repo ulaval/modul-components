@@ -29,7 +29,6 @@ export const POPUP_NAME: string = 'm-popup';
 export const RADIO_NAME: string = 'm-radio';
 export const RADIO_GROUP_NAME: string = 'm-radio-group';
 export const SCROLL_TOP_NAME: string = 'm-scroll-top';
-export const SELECT_NAME: string = 'm-select';
 export const SIDEBAR_NAME: string = 'm-sidebar';
 export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
@@ -80,7 +79,6 @@ export const components: string[] = [
     RADIO_NAME,
     RADIO_GROUP_NAME,
     SCROLL_TOP_NAME,
-    SELECT_NAME,
     SIDEBAR_NAME,
     SLIDER_NAME,
     SPINNER_NAME,

@@ -53,7 +53,7 @@ export class MButton extends Vue {
     private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "icon-name" is undefined';
 
     private onClick(event): void {
-        this.$emit('click');
+        this.$emit('click', event);
         this.$el.blur();
     }
 

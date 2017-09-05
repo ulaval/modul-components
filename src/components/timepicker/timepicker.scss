@@ -41,7 +41,7 @@ $m-timepicker--scroll-height: $m-touch-size * 5 !default;
         }
 
         &__item {
-            transition: 0.3s background ease;
+            transition: background $m-transition-duration ease;
             outline: 0;
             color: inherit;
             height: $m-touch-size;

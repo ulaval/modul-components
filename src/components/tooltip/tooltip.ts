@@ -1,29 +1,65 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './tooltip.html?style=./tooltip.scss';
 import { TOOLTIP_NAME } from '../component-names';
+import { MPopup } from '../popup/popup';
+import { MPopper } from '../popper/popper';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import { MPopperPlacement } from '../popper/popper';
 
 export enum MTooltipMode {
-    ICON = 'icon',
-    LINK = 'link'
+    Icon = 'icon',
+    Link = 'link'
 }
 
 @WithRender
-@Component
-export class MTooltip extends Vue {
-    @Prop({ default: MTooltipMode.ICON })
+@Component({
+    mixins: [MediaQueries]
+})
+export class MTooltip extends ModulVue {
+    @Prop({ default: false })
+    public open: boolean;
+    @Prop({ default: MTooltipMode.Icon })
     public mode: string;
-    @Prop()
-    public label: string;
+    @Prop({ default: MPopperPlacement.Bottom })
+    public placement: MPopperPlacement;
     @Prop({ default: true })
     public closeButton: boolean;
+    @Prop({ default: '' })
+    public classNamePortalTarget: string;
+    @Prop({ default: false })
+    public disabled: boolean;
 
     public componentName = TOOLTIP_NAME;
+    private propOpen: boolean;
+    private error: boolean = false;
+    private isEqMaxS: boolean = false;
+
+    protected mounted(): void {
+        this.propOpen = this.open;
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
+    }
 
     private get propMode(): string {
-        return this.mode != MTooltipMode.ICON && this.label != undefined ? MTooltipMode.LINK : MTooltipMode.ICON;
+        return this.mode == MTooltipMode.Link ? this.mode : MTooltipMode.Icon;
+    }
+
+    private get propCloseButton(): boolean {
+        return this.as<MediaQueriesMixin>().isMqMaxS ? false : this.closeButton;
+    }
+
+    private get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
+    }
+
+    private get hasBodySlot(): boolean {
+        return !!this.$slots.body;
     }
 
     private onOpen(): void {
@@ -35,9 +71,8 @@ export class MTooltip extends Vue {
     }
 
     private close(): void {
-        this.$children[0]['closePopper']();
+        ((this.$children[0] as MPopup).$children[0] as MPopper).propOpen = false;
     }
-
 }
 
 const TooltipPlugin: PluginObject<any> = {
