@@ -6,8 +6,8 @@ Ut ac semper ligula. In a elit ac odio eleifend dapibus eu consequat ligula. Nul
 
 > In a elit ac odio eleifend dapibus eu consequat ligula. Nulla dignissim magna felis, a placerat nisl fringilla vel.
 
-<m-do>Cras vehicula purus nec dapibus dictum. Vestibulum congue vel risus ac congue. Sed facilisis diam ut semper porttitor. Vivamus lobortis pellentesque suscipit. Proin et ante massa.</m-do>
+<modul-do-dont :mode="do">Cras vehicula purus nec dapibus dictum. Vestibulum congue vel risus ac congue. Sed facilisis diam ut semper porttitor. Vivamus lobortis pellentesque suscipit. Proin et ante massa.</modul-do-dont>
 
-<m-dont>
+<modul-do-dont :mode="dont">
 Aenean ullamcorper hendrerit rutrum.
-</m-dont>
+</modul-do-dont>
