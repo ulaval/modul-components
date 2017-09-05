@@ -224,27 +224,10 @@
                     }
                 }
             }
-
-            // &:not(.m--is-header-fixe) {
-            //     > .m-flex-template__corps {
-            //         > .m-flex-template__menu-container {
-            //             > .m-flex-template__menu {
-            //                 position: absolute;
-            //             }
-            //         }
-            //     }
-            // }
         }
 
         > .m-flex-template__corps {
             display: flex;
-
-            > .m-flex-template__menu-container {
-                > .m-flex-template__menu {
-                    position: relative;
-                    width: 0;
-                }
-            }
         }
     }
 }
