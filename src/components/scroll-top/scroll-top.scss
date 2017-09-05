@@ -1,22 +1,27 @@
 @import 'abstracts/variables';
 
 .m-scroll-top {
+    transition: opacity 0.3s ease;
     position: fixed;
-    bottom: 60px;
-    right: $m-padding--l;
+    right: $m-padding;
+    bottom: $m-padding;
     z-index: 999;
-    background-color: $m-color--black-grey-dark;
-    border-radius: $m-border-radius--s;
-    min-width: 28px;
-    min-height: 28px;
-    opacity: 0.3;
-    transition: 0.3s ease;
-    cursor: pointer;
-    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 28px;
+    min-height: 28px;
     padding: 0;
+    background-color: $m-color--black-grey-dark;
+    border: none;
+    border-radius: $m-border-radius--s;
+    opacity: 0.3;
+    cursor: pointer;
+
+    @media (min-width: $m-bp--min--s) {
+        right: $m-padding--l;
+        bottom: $m-padding--l;
+    }
 
     &:hover {
         opacity: 1;
@@ -30,10 +35,6 @@
 
     .m-icon {
         color: $m-color--white;
-        -webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
         transform: rotate(-90deg);
     }
 

@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -12,7 +12,7 @@ export enum MScrollTopPosition {
 
 @WithRender
 @Component
-export class MScrollTop extends Vue {
+export class MScrollTop extends ModulVue {
     @Prop({ default: MScrollTopPosition.STICKY })
     public position: string;
 
@@ -22,18 +22,29 @@ export class MScrollTop extends Vue {
 
     protected mounted(): void {
         console.log(this.scrollBreakPoint);
-        window.document.body.onscroll = function() {
-            console.log('in');
-        };
-
+        this.$mWindow.event.$on('scroll', this.onScroll);
     }
 
     private scrollTop(): void {
         console.log(document.body.offsetHeight);
     }
 
+    private onScroll(e): void {
+        console.log('scroll');
+    }
+
     private onClick(event) {
         console.log(this.$el);
+        let scollDuration: number = 600;
+        let scrollStep: number = -window.scrollY / (scollDuration / 15);
+        let scrollInterval = setInterval(() => {
+            if (window.scrollY != 0) {
+                window.scrollBy(0, scrollStep);
+            } else {
+                clearInterval(scrollInterval);
+            }
+        }, 15);
+
         this.$emit('click');
         this.$el.blur();
     }
