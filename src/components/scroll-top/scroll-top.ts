@@ -25,6 +25,10 @@ export class MScrollTop extends ModulVue {
         this.$mWindow.event.$on('scroll', this.onScroll);
     }
 
+    private update(): void {
+        console.log('scroll');
+    }
+
     private scrollTop(): void {
         console.log(document.body.offsetHeight);
     }
