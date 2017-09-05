@@ -20,5 +20,6 @@
             "default": false
         }
     },
-    "overview": "accordion-group.overview"
+    "overview": "accordion-group.overview",
+    "preview": false
 }
