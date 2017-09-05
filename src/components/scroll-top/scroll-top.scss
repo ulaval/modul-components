@@ -2,42 +2,65 @@
 
 .m-scroll-top {
     transition: opacity 0.3s ease;
-    position: fixed;
-    right: $m-padding;
-    bottom: $m-padding;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 28px;
-    min-height: 28px;
-    padding: 0;
-    background-color: $m-color--black-grey-dark;
-    border: none;
-    border-radius: $m-border-radius--s;
-    width: 28px;
-    height: 28px;
-    opacity: 0.3;
-    cursor: pointer;
+    opacity: 1;
 
-    @media (min-width: $m-bp--min--s) {
-        right: $m-padding--l;
-        bottom: $m-padding--l;
+    &:not(.m--is-relative) {
+        position: fixed;
+        right: $m-padding;
+        bottom: $m-padding;
+        z-index: 999;
+
+        @media (min-width: $m-bp--min--s) {
+            right: $m-padding--l;
+            bottom: $m-padding--l;
+        }
     }
 
-    &:hover {
-        opacity: 1;
+    &__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        background-color: $m-color--black-grey-dark;
+        border: none;
+        border-radius: $m-border-radius--s;
+        transition: opacity 0.3s ease;
+        opacity: 0.3;
+        cursor: pointer;
+
+        .m-icon {
+            color: $m-color--white;
+            transform: rotate(-90deg);
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:active,
+        &:focus {
+            outline: none;
+            opacity: 1;
+        }
     }
 
-    &:active,
-    &:focus {
-        outline: none;
-        opacity: 1;
+    &-enter-active {
+        opacity: 0;
     }
 
-    .m-icon {
-        color: $m-color--white;
-        transform: rotate(-90deg);
+    &-leave-active {
+        opacity: 0;
+    }
+
+    &.m--is-relative {
+        display: flex;
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin-top: $m-margin;
+        justify-content: flex-end;
     }
 
     &__hidden {

@@ -14,6 +14,7 @@
         padding: $m-padding;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         background-color: $m-color--white;
 
         @media (max-width: $m-bp--max--s) {

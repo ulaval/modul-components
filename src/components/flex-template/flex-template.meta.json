@@ -64,5 +64,5 @@
         }
     },
     "overview": "flex-template.overview",
-    "preview": "false"
+    "preview": false
 }

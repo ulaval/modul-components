@@ -69,6 +69,6 @@
             "default": 0
         }
     },
-    "overview": "modal.overview",
-    "preview": "false"
+    "overview": "modal-window.overview",
+    "preview": false
 }
