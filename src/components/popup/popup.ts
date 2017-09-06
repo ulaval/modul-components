@@ -83,6 +83,10 @@ export class MPopup extends ModulVue {
         this.propOpen = open;
     }
 
+    private togglePopup(open: boolean): void {
+        this.propOpen = open;
+    }
+
     private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;
     }
