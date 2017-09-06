@@ -28,7 +28,7 @@ export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const RADIO_NAME: string = 'm-radio';
 export const RADIO_GROUP_NAME: string = 'm-radio-group';
-export const SECONDARY_DIALOG_NAME: string = 'm-secondary-dialog';
+export const SCROLL_TOP_NAME: string = 'm-scroll-top';
 export const SIDEBAR_NAME: string = 'm-sidebar';
 export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
@@ -78,7 +78,7 @@ export const components: string[] = [
     POPUP_NAME,
     RADIO_NAME,
     RADIO_GROUP_NAME,
-    SECONDARY_DIALOG_NAME,
+    SCROLL_TOP_NAME,
     SIDEBAR_NAME,
     SLIDER_NAME,
     SPINNER_NAME,

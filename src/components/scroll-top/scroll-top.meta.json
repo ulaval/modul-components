@@ -1,0 +1,27 @@
+{
+    "tag": "m-scroll-top",
+    "name": "m-scroll-top-meta:name",
+    "attributes": {
+        "mode": {
+            "type": "string",
+            "values": [
+                "icon",
+                "link"
+            ],
+            "default": "0"
+        },
+        "label": {
+            "type": "string"
+        },
+        "closeButton": {
+            "type": "boolean",
+            "values": [
+                "true",
+                "false"
+            ],
+            "default": "0"
+        }
+    },
+    "overview": "scroll-top.overview",
+    "preview": false
+}

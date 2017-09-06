@@ -61,13 +61,18 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         this.resizeSensor = new ResizeSensor(this.$el, () => this.resizeElement(this.$el));
     }
     protected beforeDestroy(): void {
-        this.resizeSensor.detach();
+        if (this.resizeSensor != undefined) {
+            this.resizeSensor.detach();
+            this.resizeSensor = undefined;
+            delete this.resizeSensor;
+        }
     }
 
     private resizeElement(el: HTMLElement): void {
         this.setEqMin(el);
         this.setEqMax(el);
         this.setEq(el);
+        this.$emit('resize');
     }
 
     private setEqMin(el: HTMLElement): void {

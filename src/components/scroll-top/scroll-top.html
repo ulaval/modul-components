@@ -1,0 +1,10 @@
+<transition name="m-scroll-top">
+    <div class="m-scroll-top" :class="{'m--is-relative': position == 'relative' }" v-if="visible">
+        <button @click="onClick" class="m-scroll-top__button">
+            <m-icon name="arrow-right" width="16px" height="16px"></m-icon>
+            <m-i18n class="m-scroll-top__hidden" k="m-scroll-top:top"></m-i18n>
+        </button>
+    </div>
+</transition>
+
+

@@ -2,5 +2,6 @@
     "tag": "m-upload-input",
     "name": "m-upload-input-meta:name",
     "attributes": {},
-    "overview": "upload-input.overview"
+    "overview": "upload-input.overview",
+    "preview": false
 }

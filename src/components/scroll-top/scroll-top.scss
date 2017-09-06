@@ -1,0 +1,69 @@
+@import 'abstracts/variables';
+
+.m-scroll-top {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+
+    &:not(.m--is-relative) {
+        position: fixed;
+        right: $m-padding;
+        bottom: $m-padding;
+        z-index: 999;
+
+        @media (min-width: $m-bp--min--s) {
+            right: $m-padding--l;
+            bottom: $m-padding--l;
+        }
+    }
+
+    &__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        background-color: $m-color--black-grey-dark;
+        border: none;
+        border-radius: $m-border-radius--s;
+        transition: opacity 0.3s ease;
+        opacity: 0.3;
+        cursor: pointer;
+
+        .m-icon {
+            color: $m-color--white;
+            transform: rotate(-90deg);
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:active,
+        &:focus {
+            outline: none;
+            opacity: 1;
+        }
+    }
+
+    &-enter-active {
+        opacity: 0;
+    }
+
+    &-leave-active {
+        opacity: 0;
+    }
+
+    &.m--is-relative {
+        display: flex;
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin-top: $m-margin;
+        justify-content: flex-end;
+    }
+
+    &__hidden {
+        @include m-visually-hidden;
+    }
+}

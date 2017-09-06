@@ -63,7 +63,7 @@ $m-panel--screen--min: 640px;
 
     &__header {
         &:not(.m--no-padding) {
-            padding: $m-padding $m-padding #{ $m-padding + $m-margin--s } $m-padding;
+            padding: $m-padding $m-padding--s #{ $m-padding + $m-margin--s } $m-padding--s;
         }
 
         &__content,
@@ -93,8 +93,8 @@ $m-panel--screen--min: 640px;
         padding-bottom: #{ $m-padding + $m-margin--s };
 
         &:not(.m--no-padding) {
-            padding-right: $m-padding;
-            padding-left: $m-padding;
+            padding-right: $m-padding--s;
+            padding-left: $m-padding--s;
         }
 
         &.m--has-padding-top {
@@ -120,7 +120,18 @@ $m-panel--screen--min: 640px;
         border-top: 1px solid $m-color--grey;
 
         &:not(.m--no-padding) {
-            padding: $m-padding;
+            padding: $m-padding--s;
+        }
+    }
+
+    &__header,
+    &__body,
+    &__footer {
+        &:not(.m--no-padding) {
+            @media (min-width: $m-bp--min--s) {
+                padding-right: $m-padding;
+                padding-left: $m-padding;
+            }
         }
     }
 

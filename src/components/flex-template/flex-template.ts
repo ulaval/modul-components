@@ -53,6 +53,7 @@ export class MFlexTemplate extends ModulVue {
         this.$on('isEqMaxS', (value: boolean) => this.isEqMaxSChanged(value));
         this.$mWindow.event.$on('scroll', this.onScroll);
         this.setHeaderHeight();
+
     }
 
     protected beforeDdestroy(): void {
@@ -84,7 +85,7 @@ export class MFlexTemplate extends ModulVue {
         }
     }
 
-    private onScroll() {
+    private onScroll(e) {
         this.adjustFixeMenu();
         this.adjustDynamicHeader();
     }
@@ -124,7 +125,7 @@ export class MFlexTemplate extends ModulVue {
                 } else {
                     this.topMenu = '';
                 }
-            }, 100);
+            }, 60);
         }
     }
 

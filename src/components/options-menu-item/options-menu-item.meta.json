@@ -13,5 +13,6 @@
             "default": false
         }
     },
-    "overview": "options-menu-item.overview"
+    "overview": "options-menu-item.overview",
+    "preview": false
 }

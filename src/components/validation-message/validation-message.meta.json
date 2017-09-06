@@ -20,5 +20,6 @@
             "type": "string"
         }
     },
-    "overview": "validation-mesage"
+    "overview": "validation-mesage",
+    "preview": false
 }

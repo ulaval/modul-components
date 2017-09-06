@@ -6,6 +6,7 @@ const FrenchPlugin: PluginObject<any> = {
         if ((v as any).$i18n) {
             (v as any).$i18n.addMessages(FRENCH, require('../components/accordion/accordion.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/accordion-group/accordion-group.lang.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/content-list-item/content-list-item.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dialog-window/dialog-window.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/datepicker/datepicker.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.lang.fr.json'));
@@ -15,6 +16,7 @@ const FrenchPlugin: PluginObject<any> = {
             (v as any).$i18n.addMessages(FRENCH, require('../components/limit-text/limit-text.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/message/message.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/options-menu/options-menu.lang.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/scroll-top/scroll-top.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/spinner/spinner.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/switch/switch.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/text-field/text-field.lang.fr.json'));
