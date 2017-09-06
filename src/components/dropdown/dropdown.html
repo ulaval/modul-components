@@ -1,7 +1,5 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }">
     <m-popup :placement="bottom-start"
-             :close-on-content-click="!multiple"
-             :close-on-reference-click="!propEditable"
              :disabled="disabled"
              :open="propOpen"
              :enter="transitionEnter"
@@ -9,8 +7,8 @@
              :leave="transitionLeave"
              :padding-header="false"
              :padding-body="false"
-             @open="openChanged(true)"
-             @close="openChanged(false)">
+             @open="toggleDropdown(true)"
+             @close="toggleDropdown(false)">
         <template slot="header" v-if="hasLabel && isMqMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">

@@ -28,10 +28,10 @@ export interface MDropdownInterface extends Vue {
     addAction: boolean;
     nbItemsVisible: number;
     multiple: boolean;
-    propOpen: boolean;
     getElement(key: string): Vue | undefined;
     itemDestroy(item: Vue): void;
     setFocus(item: Vue): void;
+    toggleDropdown(open: boolean): void;
 }
 
 @WithRender
@@ -122,6 +122,10 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
 
         return elementFocus;
+    }
+
+    public toggleDropdown(open: boolean): void {
+        this.propOpen = open;
     }
 
     protected mounted(): void {

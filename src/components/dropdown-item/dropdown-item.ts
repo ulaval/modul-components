@@ -84,7 +84,7 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
             }
         }
 
-        if (!this.inactif && this.propSelected) {
+        if (!this.propInactif && this.propSelected) {
             if ((this.root as MDropdownInterface).multiple || (this.root as MDropdownInterface).selected.length == 0) {
                 (this.root as MDropdownInterface).selected.push({ key: this.key, value: this.propValue, label: this.propLabel });
                 (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
@@ -140,7 +140,7 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     }
 
     public onSelectElement(): void {
-        if (!(this.disabled || this.inactif)) {
+        if (!(this.disabled || this.propInactif)) {
             let array: Array<SelectedValue> = (this.root as MDropdownInterface).selected;
 
             if ((this.root as MDropdownInterface).multiple) {
@@ -169,7 +169,8 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
 
                 this.propSelected = (this.root as MDropdownInterface).addAction = true;
                 array.push({ key: this.key, value: this.propValue, label: this.propLabel });
-                // (this.root as MDropdownInterface).propOpen = false;
+
+                (this.root as MDropdownInterface).toggleDropdown(false);
             }
 
             (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
