@@ -48,13 +48,14 @@ export class MScrollTop extends ModulVue {
         this.scrollPosition > this.scrollBreakPoint ? this.visible = true : this.visible = false;
     }
 
+    // Need to be modified
     private get scrollTarget(): number {
         return this.position == MScrollTopPosition.RELATIVE ? 0 : 0;
     }
 
     private onClick(event) {
         let scollDuration: number = 600;
-        this.scrollToY(0, 1500);
+        this.scrollToY(this.scrollTarget, 1500);
         this.$emit('click');
         this.$el.blur();
     }
