@@ -140,7 +140,6 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
             }
         }
 
-        (this.root as MDropdownInterface).itemDestroy(this);
         if (this.group) {
             (this.group as MDropdownGroupInterface).nbItemsVisible--;
         }
