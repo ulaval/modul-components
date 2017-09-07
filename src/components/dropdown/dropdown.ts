@@ -32,7 +32,7 @@ export interface MDropdownInterface extends Vue {
     disabled: boolean;
     defaultFirstElement: boolean;
     // getElement(key: string): Vue | undefined;
-    itemDestroy(item: Vue): void;
+    // itemDestroy(item: Vue): void;
     setFocus(item: Vue): void;
     toggleDropdown(open: boolean): void;
 }
@@ -96,15 +96,15 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     //     return element;
     // }
 
-    public itemDestroy(item: Vue): void {
-        let index: number = this.items.indexOf(item);
-        if (index > -1) {
-            this.items.splice(index, 1);
-            if ((this.items[index] as MDropDownItemInterface).visible) {
-                this.nbItemsVisible--;
-            }
-        }
-    }
+    // public itemDestroy(item: Vue): void {
+    //     let index: number = this.items.indexOf(item);
+    //     if (index > -1) {
+    //         this.items.splice(index, 1);
+    //         if ((this.items[index] as MDropDownItemInterface).visible) {
+    //             this.nbItemsVisible--;
+    //         }
+    //     }
+    // }
 
     public setFocus(elementFocus: Vue): void {
         for (let item of this.items) {
