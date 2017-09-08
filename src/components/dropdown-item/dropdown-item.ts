@@ -135,7 +135,7 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
 
         if (index > -1) {
             (this.root as MDropdownInterface).items.splice(index, 1);
-            if (((this.root as MDropdownInterface).items[index] as MDropdownItem).visible) {
+            if ((this.root as MDropdownInterface).items[index] && ((this.root as MDropdownInterface).items[index] as MDropdownItem).visible) {
                 (this.root as MDropdownInterface).nbItemsVisible--;
             }
         }
