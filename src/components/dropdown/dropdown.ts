@@ -384,6 +384,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     private transitionLeave(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             let height: number = el.clientHeight;
+            el.style.width = this.$el.clientWidth + 'px';
             el.style.maxHeight = height + 'px';
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';
