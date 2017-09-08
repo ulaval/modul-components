@@ -143,6 +143,14 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         this.propOpen = this.open;
     }
 
+    protected beforeDestroy() {
+        console.log('Dropdown', 'beforeDestroy');
+    }
+
+    protected destroyed() {
+        console.log('Dropdown', 'destroyed');
+    }
+
     @Watch('selected')
     private selectedChanged(value): void {
         let values: any[] = [];
@@ -153,6 +161,14 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
         if (value.length == 0 && this.defaultValue) {
             values.push(this.defaultValue);
+        }
+
+        this.selectedText = '';
+        for (let item of this.selected) {
+            if (this.selectedText != '') {
+                this.selectedText += ', ';
+            }
+            this.selectedText += item.label;
         }
 
         this.$emit('change', values, this.addAction);
@@ -166,13 +182,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     @Watch('currentElement')
     private currentElementChanged(value): void {
-        this.selectedText = '';
-        for (let item of this.selected) {
-            if (this.selectedText != '') {
-                this.selectedText += ', ';
-            }
-            this.selectedText += item.label;
-        }
         this.$emit('elementSelected', this.currentElement.value, this.addAction);
     }
 
