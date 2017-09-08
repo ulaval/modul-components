@@ -1,5 +1,5 @@
 <li class="m-radio"
-    :class="{ 'm--is-button': isButton,
+    :class="{ 'm--is-button': isButton(),
               'm--is-disabled': !propEnabled,
               'm--is-checked': model == v,
               'm--is-focus': hasFocus && propEnabled,
@@ -11,11 +11,11 @@
     <input class="m-radio__hidden" :value="v" type="radio" v-model="model" :id="radioID" :name="propName"
            @focus="onFocus" @blur="onBlur" :disabled="!propEnabled" :aria-hidden="!propEnabled">
     <label class="m-radio__wrap" :for="radioID">
-        <span class="m-radio__input" aria-hidden="true" v-if="!isButton"></span>
+        <span class="m-radio__input" aria-hidden="true" v-if="!isButton()"></span>
         <span class="m-radio__label">
-            <m-icon aria-hidden="true" class="m-radio__icon m--is-left" :name="iconName" v-if="hasIconLeft && hasIcon && isButton"></m-icon>
+            <m-icon aria-hidden="true" class="m-radio__icon m--is-left" :name="iconName" v-if="hasIconLeft() && hasIcon() && isButton()"></m-icon>
             <slot><span v-if="demo">Label</span></slot>
-            <m-icon aria-hidden="true" class="m-radio__icon m--is-right" :name="iconName"  v-if="!hasIconLeft && hasIcon && isButton"></m-icon>
+            <m-icon aria-hidden="true" class="m-radio__icon m--is-right" :name="iconName"  v-if="!hasIconLeft() && hasIcon() && isButton()"></m-icon>
         </span>
     </label>
 </li>

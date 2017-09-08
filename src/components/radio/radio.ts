@@ -53,7 +53,6 @@ export class MRadio extends ModulVue {
     public radioID: string = uuid.generate();
     public firstChild: boolean = false;
     public lastChild: boolean = false;
-    // ---------------------------
 
     private hasFocus: boolean = false;
     private hasParentGroup: boolean | undefined = undefined;
@@ -108,7 +107,7 @@ export class MRadio extends ModulVue {
         return !!this.hasParentGroup;
     }
 
-    private get isButton(): boolean {
+    private isButton(): boolean {
         return this.isGroup() && this.parentGroup instanceof BaseButtonGroup;
     }
 
