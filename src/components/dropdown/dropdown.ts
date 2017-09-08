@@ -62,7 +62,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public editable: boolean;
     @Prop({ default: false })
     public multiple: boolean;
-    @Prop({ default: '200px' })
+    @Prop()
     public width: string;
     @Prop({ default: false })
     public defaultFirstElement: boolean;
@@ -81,6 +81,9 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public selectedText: string = '';
     private internalOpen: boolean = false;
     private noItemsLabel: string;
+
+    private textFieldLabelEl: HTMLElement;
+    private textFieldInputValueEl: HTMLElement;
 
     // public getElement(key: string): Vue | undefined {
     //     let element: Vue | undefined;
@@ -134,6 +137,9 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     }
 
     protected mounted(): void {
+        let textField = this.$children[0].$children[0].$children[0];
+        this.textFieldLabelEl = textField.$refs.label as HTMLElement;
+        this.textFieldInputValueEl = textField.$refs.inputValue as HTMLElement;
         this.propOpen = this.open;
     }
 
@@ -221,14 +227,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
 
         return show;
-    }
-
-    private get propWidth(): string {
-        if (this.as<MediaQueriesMixin>().isMqMaxS) {
-            return '100%';
-        } else {
-            return this.width;
-        }
     }
 
     // private recursiveGetElement(key: string, node: Vue): Vue | undefined {
@@ -358,7 +356,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
             el.style.transition = DROPDOWN_STYLE_TRANSITION;
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';
-            el.style.width = this.width;
+            el.style.width = this.$el.clientWidth + 'px';
             setTimeout(() => {
                 el.style.maxHeight = height + 'px';
                 done();

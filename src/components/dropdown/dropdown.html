@@ -1,4 +1,4 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }">
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }" :style="{ width: width }">
     <m-popup :placement="bottom-start"
              :disabled="disabled"
              :open="propOpen"
@@ -7,6 +7,7 @@
              :leave="transitionLeave"
              :padding-header="false"
              :padding-body="false"
+             width="100%"
              @open="toggleDropdown(true)"
              @close="toggleDropdown(false)">
         <template slot="header" v-if="hasLabel && isMqMaxS">
@@ -42,7 +43,6 @@
                       :disabled="disabled"
                       :force-focus="propOpen"
                       :default-text="defaultText"
-                      :style="{ width: width }"
                       @valueChanged="filterDropdown($event)"
                       @keyup="keyupReference">
         </m-text-field>

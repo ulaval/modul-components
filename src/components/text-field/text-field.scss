@@ -10,8 +10,8 @@ $m-text-field--margin: $m-padding--xs !default;
     position: relative;
     display: inline-flex;
     flex-direction: column;
-    min-width: 80px;
     outline: none;
+    min-width: 80px;
     padding-top: 16px; // Magic number
 
     &.m--is-focus {
@@ -187,6 +187,17 @@ $m-text-field--margin: $m-padding--xs !default;
             &.m--is-transparent {
                 opacity: 0;
             }
+        }
+
+        &__value {
+            display: block;
+            white-space: nowrap;
+        }
+
+        &.m--is-transparent {
+            opacity: 0;
+            width: 1px;
+            user-select: none;
         }
     }
 

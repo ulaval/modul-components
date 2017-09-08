@@ -1,4 +1,4 @@
-<div class="m-popup" :id="id">
+<div class="m-popup" :id="id" :style="{ width: width }">
     <m-popper :open="propOpen"
               @open="togglePopup(true)"
               @close="togglePopup(false)"
@@ -16,9 +16,10 @@
               :leave="leave"
               :afterLeave="afterLeave"
               :leaveCancelled="leaveCancelled"
-              v-if="!isMqMaxS">
+              v-if="!isMqMaxS"
+              :style="{ width: width }">
         <slot></slot>
-        <div slot="body" class="m-popup__body" v-if="hasHeaderSlot || hasBodySlot || hasFooterSlot">
+        <div slot="body" class="m-popup__body" :class="{ 'm--has-shadow': shadow }" v-if="hasHeaderSlot || hasBodySlot || hasFooterSlot">
             <slot name="header"></slot>
             <slot name="body"></slot>
             <slot name="footer"></slot>
