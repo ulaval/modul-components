@@ -2,7 +2,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './popup.html';
+import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { MPopperPlacement } from '../popper/popper';
@@ -21,12 +21,16 @@ export class MPopup extends ModulVue {
     public openOnClick: boolean;
     @Prop({ default: false })
     public openOnOver: boolean;
+    @Prop({ default: 'auto' })
+    public width: string;
     @Prop()
     public id: string;
     @Prop({ default: false })
     public disabled: boolean;
     @Prop({ default: '' })
     public classNamePortalTarget: string;
+    @Prop({ default: true })
+    public shadow: boolean;
     @Prop({ default: true })
     public padding: boolean;
     @Prop({ default: true })

@@ -1,4 +1,4 @@
-<m-popup class="m-tooltip" :class="{ 'm--is-icon-mode': propMode == 'icon', 'm--is-link-mode': propMode != 'icon' }" :open="propOpen"
+<m-popup class="m-tooltip" :class="{ 'm--is-icon-mode': propMode == 'icon', 'm--is-link-mode': propMode != 'icon' }" :open="propOpen" :shadow="false"
     @open="onOpen" @close="onClose" :placement="placement" padding="" :disabled="disabled" :classNamePortalTarget="classNamePortalTarget">
     <template v-if="hasDefaultSlot">
         <m-button class="m-tooltip__icon" mode="icon" icon-name="information" v-if="propMode == 'icon'">
