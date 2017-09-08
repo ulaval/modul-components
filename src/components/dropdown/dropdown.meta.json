@@ -42,5 +42,6 @@
             "type": "string"
         }
     },
-    "overview": "dropdown.overview"
+    "overview": "dropdown.overview",
+    "preview": "dropdown.preview"
 }
