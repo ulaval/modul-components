@@ -26,9 +26,10 @@
         background-color: $m-color--black-grey-dark;
         border: none;
         border-radius: $m-border-radius--s;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.3s ease, transform 0.3s ease;
         opacity: 0.3;
         cursor: pointer;
+        transform: scale(1);
 
         .m-icon {
             color: $m-color--white;
@@ -44,14 +45,18 @@
             outline: none;
             opacity: 1;
         }
-    }
 
-    &-enter-active {
-        opacity: 0;
-    }
+        &.m--is {
+            &-enter-active,
+            &-leave-active {
+                transition: transform 0.3s ease;
+            }
 
-    &-leave-active {
-        opacity: 0;
+            &-enter,
+            &-leave-to {
+                transform: rotate(90deg) scale(0);
+            }
+        }
     }
 
     &.m--is-relative {
