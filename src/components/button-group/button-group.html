@@ -1,10 +1,11 @@
 <div class="m-button-group">
-    <ul class="m-button-group__wrap" :class="{ 'm--is-inline': inline }" v-if="!hasError">
-        <slot v-if="!hasError">
-            <m-radio value="button1">Button 1</m-radio>
-            <m-radio value="button2">Button 2</m-radio>
-            <m-radio value="button3">Button 3</m-radio>
+    <ul class="m-button-group__wrap" :class="{ 'm--is-inline': inline }">
+        <slot>
+            <span v-if="demo">
+                <m-radio value="button1" v-model="model">Button 1</m-radio>
+                <m-radio value="button2" v-model="model">Button 2</m-radio>
+                <m-radio value="button3" v-model="model">Button 3</m-radio>
+            </span>
         </slot>
-        <p v-if="hasError">{{ errorMessage }}</p>
     </ul>
 </div>

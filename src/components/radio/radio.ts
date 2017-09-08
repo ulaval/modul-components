@@ -3,13 +3,31 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './radio.html?style=./radio.scss';
-import { RADIO_NAME, RADIO_GROUP_NAME, BUTTON_GROUP_NAME } from '../component-names';
-import { MRadioGroup } from '../radio-group/radio-group';
+import { RADIO_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 
 export enum MRadioPosition {
     Left = 'left',
     Right = 'right'
+}
+
+export interface RadioGroup {
+    name: string;
+    position: MRadioPosition;
+    enabled: boolean;
+    inline: boolean;
+    getValue(): string;
+    updateValue(value: string): void;
+}
+
+export interface ButtonGroup extends RadioGroup {
+    fullsize: boolean;
+}
+
+export abstract class BaseRadioGroup extends ModulVue {
+}
+
+export abstract class BaseButtonGroup extends BaseRadioGroup {
 }
 
 @WithRender
@@ -18,87 +36,95 @@ export class MRadio extends ModulVue {
 
     @Prop()
     public value: string;
+    @Prop()
+    public v: string;
+    @Prop()
+    public name: string;
     @Prop({ default: MRadioPosition.Left })
-    public position: string;
-    @Prop({ default: false })
-    public disabled: boolean;
+    public position: MRadioPosition;
+    @Prop({ default: true })
+    public enabled: boolean;
+    @Prop({ default: false})
+    public demo: boolean;
     // ----- For Button Group -----
-    @Prop({ default: MRadioPosition.Left })
-    public iconPosition: string;
     @Prop()
     public iconName: string;
     // ---------------------------
-
-    public componentName: string = RADIO_NAME;
     public radioID: string = uuid.generate();
-    public name: string;
-    public propPosition: string = MRadioPosition.Left;
-    public propDisabled: boolean = false;
-    // ----- For Button Group -----
-    public propIconPosition: string = MRadioPosition.Left;
-    public propIconName: string;
     public firstChild: boolean = false;
     public lastChild: boolean = false;
-    public inline: boolean = false;
-    public fullSize: boolean = false;
-     // ---------------------------
 
-    private isFocus: boolean = false;
-    private radioGroup: any;
-    private internalValue: string;
+    private hasFocus: boolean = false;
+    private hasParentGroup: boolean | undefined = undefined;
+    private parentGroup: RadioGroup;
 
-    protected mounted(): void {
-        this.propPosition = this.position;
-        this.propDisabled = this.disabled;
+    public get propPosition(): MRadioPosition {
+        return this.isGroup() ? this.parentGroup.position : this.position;
+    }
 
-        // ----- For Button Group -----
-        this.propIconPosition = this.iconPosition;
-        this.propIconName = this.iconName;
-        // ---------------------------
+    public get propEnabled(): boolean {
+        let result: boolean = this.enabled;
+        let groupEnabled: boolean = this.isGroup() ? this.parentGroup.enabled : true;
+
+        return groupEnabled && result;
+    }
+
+    public get propName(): string {
+        return this.isGroup() ? this.parentGroup.name : this.name;
+    }
+
+    public get propInline(): boolean {
+        return this.isGroup() ? this.parentGroup.inline : false;
+    }
+
+    public get propFullsize(): boolean {
+        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullsize : false;
     }
 
     protected get model(): string {
-        return this.isGroup() && this.radioGroup.$props.value != undefined ? this.radioGroup.$props.value : this.internalValue;
+        return this.isGroup() ? this.parentGroup.getValue() : this.value;
     }
 
     protected set model(value: string) {
-        if (this.isGroup) {
-            if (this.radioGroup) {
-                this.radioGroup.updateValue(value);
-            }
+        if (this.isGroup()) {
+            this.parentGroup.updateValue(value);
         } else {
-            this.internalValue = value;
             this.$emit('input', value);
+            this.$emit('change', value);
         }
     }
 
     private isGroup(): boolean {
-        let parent = this.$parent;
-        while (parent) {
-            if (parent['componentName'] !== RADIO_GROUP_NAME && parent['componentName'] !== BUTTON_GROUP_NAME) {
-                parent = parent.$parent;
+        if (this.hasParentGroup === undefined) {
+            let parentGroup: BaseRadioGroup | undefined = this.getParent<BaseRadioGroup>(p => p instanceof BaseRadioGroup);
+            if (parentGroup) {
+                this.parentGroup = (parentGroup as any) as RadioGroup;
+                this.hasParentGroup = true;
             } else {
-                this.radioGroup = parent;
-                return true;
+                this.hasParentGroup = false;
             }
         }
-        return false;
+        return !!this.hasParentGroup;
     }
 
-    private get isParentButtonGroup(): boolean {
-        return this.$parent['componentName'] == BUTTON_GROUP_NAME;
+    private isButton(): boolean {
+        return this.isGroup() && this.parentGroup instanceof BaseButtonGroup;
     }
 
-    private onClick(event): void {
-        this.$emit('input', this.value);
+    private onFocus(): void {
+        this.hasFocus = true;
     }
 
-    private get hasIcon(): boolean {
-        return this.iconName == undefined || this.iconName == '' ? false : true;
+    private onBlur(): void {
+        this.hasFocus = false;
     }
 
-    private get hasIconLeft(): boolean {
-        return this.iconPosition == MRadioPosition.Left;
+    private hasIcon(): boolean {
+        return !!this.iconName;
+    }
+
+    private hasIconLeft(): boolean {
+        return this.isGroup() ? this.parentGroup.position == MRadioPosition.Left : false;
     }
 }
 
