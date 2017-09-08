@@ -5,10 +5,11 @@ import { Prop } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import WithRender from './scroll-top.html?style=./scroll-top.scss';
 import { SCROLL_TOP_NAME } from '../component-names';
+import { Portal, PortalMixin } from '../../mixins/portal/portal';
 
 export enum MScrollTopPosition {
-    STICKY = 'sticky',
-    RELATIVE = 'relative'
+    Sticky = 'sticky',
+    Relative = 'relative'
 }
 
 declare global {
@@ -18,24 +19,37 @@ declare global {
 const SCROLL_TOP_ID: string = 'MScrollTop';
 
 @WithRender
-@Component
+@Component({
+    mixins: [Portal]
+})
 export class MScrollTop extends ModulVue {
-    @Prop({ default: MScrollTopPosition.STICKY })
+    @Prop({ default: MScrollTopPosition.Sticky })
     public position: string;
 
     public componentName = SCROLL_TOP_NAME;
     private scrollBreakPoint: number = window.innerHeight * 0.75;
-    private visible: boolean = true;
     private scrollPosition: number;
+
     private bodyElement: HTMLElement = document.body;
+    private visible: boolean = true;
+    private show: boolean = false;
+    private defaultTargetElVisible: boolean = false;
     private portalTargetElement: HTMLElement = document.createElement('div');
     private scrollTopId: string = SCROLL_TOP_ID + '-' + uuid.generate();
-    private scrollTopPortalId: string = SCROLL_TOP_ID + '-portal-' + uuid.generate();
+    private scrollTopPortalId: string;
 
     protected mounted(): void {
-        if (this.position != 'relative') {
+        if (this.position != MScrollTopPosition.Relative) {
             this.visible = false;
+            this.defaultTargetElVisible = false;
+            this.$nextTick(() => {
+                this.appendScrollTopToBody();
+            });
             this.$mWindow.event.$on('scroll', this.onScroll);
+        }else {
+            this.removeScrollTopToBody();
+            this.visible = true;
+            this.defaultTargetElVisible = true;
         }
         window.requestAnimFrame = (function() {
             return window.requestAnimationFrame ||
@@ -57,7 +71,7 @@ export class MScrollTop extends ModulVue {
 
     // Need to be modified
     private get scrollTarget(): number {
-        return this.position == MScrollTopPosition.RELATIVE ? 0 : 0;
+        return this.position == MScrollTopPosition.Relative ? 0 : 0;
     }
 
     private onClick(event) {
@@ -101,32 +115,17 @@ export class MScrollTop extends ModulVue {
     }
 
     private appendScrollTopToBody(): void {
-        this.portalTargetElement.setAttribute('id', this.scrollTopPortalId);
-        this.portalTargetElement.setAttribute('class', 'm-spinner-popover');
-        this.portalTargetElement.style.position = 'relative';
-        this.bodyElement.appendChild(this.portalTargetElement);
-
-        this.$mWindow.addWindow(this.scrollTopPortalId);
-        this.portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
-
-        if (!this.$mWindow.hasBackdrop) {
-            this.$mWindow.createBackdrop(this.bodyElement);
-        }
-
-        this.bodyElement.appendChild(this.portalTargetElement);
+        this.as<PortalMixin>().appendPortalToBody(SCROLL_TOP_ID, 'm-spinner-popover', '0.3s');
+        this.scrollTopPortalId = this.as<PortalMixin>().portalId;
         this.visible = true;
     }
 
     private removeScrollTopToBody(): void {
-        let portalTargetElement: HTMLElement = this.bodyElement.querySelector('#' + this.scrollTopPortalId) as HTMLElement;
-        if (portalTargetElement) {
-            this.bodyElement.removeChild(portalTargetElement);
-            this.$mWindow.deleteWindow(this.scrollTopPortalId);
-        }
+        this.as<PortalMixin>().removePortal();
     }
 
     private getScrollTopId(): string {
-        return this.position == MScrollTopPosition.RELATIVE ? this.scrollTopPortalId : this.scrollTopId;
+        return this.position == MScrollTopPosition.Relative ? this.scrollTopPortalId : this.scrollTopId;
     }
 
 }

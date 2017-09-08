@@ -1,14 +1,14 @@
-<div class="m-scroll-top" :class="{'m--is-relative': position == 'relative' }" :aria-hidden="true">
-    <template v-if="true">
+<div class="m-scroll-top" :class="{'m--is-relative': position == 'relative' }" :aria-hidden="!defaultTargetElVisible">
+    <template v-if="visible">
         <slot></slot>
-        <div v-if="defaultTargetElVisible">
-            <slot name="nom"></slot>
-            <div :id="spinnerId"></div>
+        <div>
+            <slot name="additionalContent"></slot>
+            <div :id="scrollTopId"></div>
         </div>
     </template>
-    <portal :target-el="'#'+ getSpinnerId()" v-if="spinnerVisible">
-        <transition name="m--is"> >
-            <button @click="onClick" class="m-scroll-top__button" v-if="visible">
+    <portal :target-el="'#'+ getScrollTopId()" v-if="visible">
+        <transition name="m--is">
+            <button @click="onClick" class="m-scroll-top__button" v-show="show">
                 <m-icon name="arrow-right" width="16px" height="16px"></m-icon>
                 <m-i18n class="m-scroll-top__hidden" k="m-scroll-top:top"></m-i18n>
             </button>
