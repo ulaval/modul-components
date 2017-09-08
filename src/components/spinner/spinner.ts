@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
@@ -6,6 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import WithRender from './spinner.html?style=./spinner.scss';
 import { SPINNER_NAME } from '../component-names';
+import { Portal, PortalMixin } from '../../mixins/portal/portal';
 
 export enum MSpinnerMode {
     Loading = 'loading',
@@ -27,7 +27,9 @@ export enum MSpinnerSize {
 const SPINNER_ID: string = 'MSpinner';
 
 @WithRender
-@Component
+@Component({
+    mixins: [Portal]
+})
 export class MSpinner extends ModulVue {
     @Prop({ default: MSpinnerMode.Loading })
     public mode: MSpinnerMode;
@@ -43,12 +45,10 @@ export class MSpinner extends ModulVue {
     public componentName = SPINNER_NAME;
 
     private spinnerId: string = SPINNER_ID + '-' + uuid.generate();
-    private spinnerPortalId: string = SPINNER_ID + '-portal-' + uuid.generate();
+    private spinnerPortalId: string;
 
-    private bodyElement: HTMLElement = document.body;
-    private portalTargetElement: HTMLElement = document.createElement('div');
     private defaultTargetElVisible: boolean = false;
-    private spinnerVisible: boolean = false;
+    private visible: boolean = false;
     private internalPropMode: MSpinnerMode;
 
     protected beforeMount(): void {
@@ -76,41 +76,27 @@ export class MSpinner extends ModulVue {
 
             if (this.internalPropMode == MSpinnerMode.Processing) {
                 this.defaultTargetElVisible = false;
-                this.spinnerVisible = false;
+                this.visible = false;
                 this.$nextTick(() => {
                     this.appendSpinnerToBody();
                 });
             } else {
                 this.removeSpinnerToBody();
                 this.defaultTargetElVisible = true;
-                this.spinnerVisible = true;
+                this.visible = true;
             }
         }
     }
 
     private appendSpinnerToBody(): void {
-        this.portalTargetElement.setAttribute('id', this.spinnerPortalId);
-        this.portalTargetElement.setAttribute('class', 'm-spinner-popover');
-        this.portalTargetElement.style.position = 'relative';
-        this.bodyElement.appendChild(this.portalTargetElement);
+        this.as<PortalMixin>().appendBackdropAndPortalToBody(SPINNER_ID, 'm-spinner-popover', '0.3s');
+        this.spinnerPortalId = this.as<PortalMixin>().portalId;
 
-        this.$mWindow.addWindow(this.spinnerPortalId);
-        this.portalTargetElement.style.zIndex = String(this.$mWindow.windowZIndex);
-
-        if (!this.$mWindow.hasBackdrop) {
-            this.$mWindow.createBackdrop(this.bodyElement);
-        }
-
-        this.bodyElement.appendChild(this.portalTargetElement);
-        this.spinnerVisible = true;
+        this.visible = true;
     }
 
     private removeSpinnerToBody(): void {
-        let portalTargetElement: HTMLElement = this.bodyElement.querySelector('#' + this.spinnerPortalId) as HTMLElement;
-        if (portalTargetElement) {
-            this.bodyElement.removeChild(portalTargetElement);
-            this.$mWindow.deleteWindow(this.spinnerPortalId);
-        }
+        this.as<PortalMixin>().removeBackdropAndPortal();
     }
 
     private getSpinnerId(): string {

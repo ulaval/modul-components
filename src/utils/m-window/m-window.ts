@@ -14,8 +14,9 @@ const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.7';
 const Z_INDEZ_DEFAULT: number = 100;
 
 export class MWindow {
-    public bodyElement: HTMLElement = document.body;
-    public bodyStyle: any = this.bodyElement.style;
+    public bodyEl: HTMLElement = document.body;
+    public bodyStyle: any = this.bodyEl.style;
+    public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
     public scrollPosition: number = 0;
     public event = new Vue();
 
@@ -77,7 +78,7 @@ export class MWindow {
         this.setBackdropZIndex();
     }
 
-    public createBackdrop(targetElement: HTMLElement = this.bodyElement): void {
+    public createBackdrop(targetElement: HTMLElement = this.bodyEl): void {
         if (!this.hasBackdrop) {
             this.hasBackdrop = true;
             this.backdropElement = document.createElement('div');
@@ -117,9 +118,10 @@ export class MWindow {
         this.bodyStyle.removeProperty('right');
         this.bodyStyle.removeProperty('left');
         this.bodyStyle.removeProperty('overflow');
+        this.htmlEl.style.removeProperty('overflow');
         window.scrollBy(0, this.scrollPosition);
         if (this.bodyStyle.length == 0) {
-            this.bodyElement.removeAttribute('style');
+            this.bodyEl.removeAttribute('style');
         }
     }
 
@@ -130,6 +132,7 @@ export class MWindow {
         this.bodyStyle.right = '0';
         this.bodyStyle.left = '0';
         this.bodyStyle.overflow = 'hidden';
+        this.htmlEl.style.overflow = 'hidden';
     }
 
     // public getArrWindowData(windowId): any {
