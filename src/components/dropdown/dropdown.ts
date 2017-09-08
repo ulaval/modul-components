@@ -22,14 +22,17 @@ export interface SelectedValue {
 }
 
 export interface MDropdownInterface extends Vue {
+    value: any;
     items: Vue[];
     selected: Array<SelectedValue>;
     currentElement: SelectedValue;
     addAction: boolean;
     nbItemsVisible: number;
     multiple: boolean;
-    getElement(key: string): Vue | undefined;
-    itemDestroy(item: Vue): void;
+    disabled: boolean;
+    defaultFirstElement: boolean;
+    // getElement(key: string): Vue | undefined;
+    // itemDestroy(item: Vue): void;
     setFocus(item: Vue): void;
     toggleDropdown(open: boolean): void;
 }
@@ -43,6 +46,8 @@ export interface MDropdownInterface extends Vue {
 })
 export class MDropdown extends ModulVue implements MDropdownInterface {
 
+    @Prop()
+    public value: any;
     @Prop()
     public label: string;
     @Prop()
@@ -77,29 +82,29 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     private internalOpen: boolean = false;
     private noItemsLabel: string;
 
-    public getElement(key: string): Vue | undefined {
-        let element: Vue | undefined;
+    // public getElement(key: string): Vue | undefined {
+    //     let element: Vue | undefined;
 
-        for (let child of this.$children) {
-            if (child.$options.name == 'MPopup' &&
-                child.$el.nodeName != '#comment' &&
-                child.$children[0].$options.name == 'MPopper') {
-                element = this.recursiveGetElement(key, child.$children[0]);
-                break;
-            }
-        }
-        return element;
-    }
+    //     for (let child of this.$children) {
+    //         if (child.$options.name == 'MPopup' &&
+    //             child.$el.nodeName != '#comment' &&
+    //             child.$children[0].$options.name == 'MPopper') {
+    //             element = this.recursiveGetElement(key, child.$children[0]);
+    //             break;
+    //         }
+    //     }
+    //     return element;
+    // }
 
-    public itemDestroy(item: Vue): void {
-        let index: number = this.items.indexOf(item);
-        if (index > -1) {
-            this.items.splice(index, 1);
-            if ((this.items[index] as MDropDownItemInterface).visible) {
-                this.nbItemsVisible--;
-            }
-        }
-    }
+    // public itemDestroy(item: Vue): void {
+    //     let index: number = this.items.indexOf(item);
+    //     if (index > -1) {
+    //         this.items.splice(index, 1);
+    //         if ((this.items[index] as MDropDownItemInterface).visible) {
+    //             this.nbItemsVisible--;
+    //         }
+    //     }
+    // }
 
     public setFocus(elementFocus: Vue): void {
         for (let item of this.items) {
@@ -130,13 +135,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     protected mounted(): void {
         this.propOpen = this.open;
-        // Obtenir le premier dropdown-item
-        if (this.defaultFirstElement && !this.multiple && !this.disabled) {
-            let firstElement: Vue = this.items[0];
-            if (firstElement) {
-                (firstElement as MDropDownItemInterface).onSelectElement();
-            }
-        }
     }
 
     @Watch('selected')
@@ -152,6 +150,12 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
 
         this.$emit('change', values, this.addAction);
+
+        if (this.multiple) {
+            this.$emit('input', values, this.addAction);
+        } else {
+            this.$emit('input', values[0], this.addAction);
+        }
     }
 
     @Watch('currentElement')
@@ -227,21 +231,21 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
     }
 
-    private recursiveGetElement(key: string, node: Vue): Vue | undefined {
-        let element: Vue | undefined;
+    // private recursiveGetElement(key: string, node: Vue): Vue | undefined {
+    //     let element: Vue | undefined;
 
-        for (let child of node.$children) {
-            if (child.$options.name == 'MDropdownGroup') {
-                element = this.recursiveGetElement(key, child);
-                if (element) {
-                    return element;
-                }
-            } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment' && child.$el.attributes['data-key'].value == key) {
-                return child;
-            }
-        }
-        return element;
-    }
+    //     for (let child of node.$children) {
+    //         if (child.$options.name == 'MDropdownGroup') {
+    //             element = this.recursiveGetElement(key, child);
+    //             if (element) {
+    //                 return element;
+    //             }
+    //         } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment' && child.$el.attributes['data-key'].value == key) {
+    //             return child;
+    //         }
+    //     }
+    //     return element;
+    // }
 
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {

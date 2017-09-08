@@ -55,6 +55,11 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
         this.root = this.getMDropdownRoot(this.$parent);
         this.group = this.getMDropdownGroup(this.$parent);
 
+        // Init of value and label
+        // - If Value and Label : Value = value, Label = label
+        // - If only value : value = value, label = string(value)
+        // - If only label : value = label, label = label
+        // - If none: value = undef, label = undef and item is flag inactive
         if (this.value) {
             this.propValue = this.value;
 
@@ -67,7 +72,6 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
             }
         } else {
             if (!this.label) {
-                console.debug(`Inactif`);
                 this.propInactif = true;
             } else {
                 this.propLabel = this.label;
@@ -75,6 +79,7 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
             }
         }
 
+        // If element is actif, add to array of items and increment counters
         if (!this.propInactif) {
             (this.root as MDropdownInterface).items.push(this);
             (this.root as MDropdownInterface).nbItemsVisible++;
@@ -84,6 +89,39 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
             }
         }
 
+        // Check if element is in v-model
+        if ((this.root as MDropdownInterface).multiple) {
+            if (Array.isArray((this.root as MDropdownInterface).value)) {
+                if ((this.root as MDropdownInterface).value.indexOf(this.propValue) != -1) {
+                    this.propSelected = true;
+                }
+            } else {
+                console.error('Model must be an Array');
+            }
+        } else {
+            if (Array.isArray((this.root as MDropdownInterface).value)) {
+                console.error('Model can\'t be an Array');
+            } else {
+                if ((this.root as MDropdownInterface).defaultFirstElement &&
+                    !(this.root as MDropdownInterface).disabled &&
+                    !this.disabled &&
+                    !this.propInactif &&
+                    !(this.root as MDropdownInterface).value &&
+                    (this.root as MDropdownInterface).selected.length == 0) {
+
+                    // If no v-model and flag defaultFirstElement set first element as selected
+                    this.propSelected = true;
+
+                } else if ((this.root as MDropdownInterface).value && (this.root as MDropdownInterface).value === this.propValue) {
+                    // If v-model and current element in model
+                    this.propSelected = true;
+                }
+            }
+        }
+
+        // When an element is selected (prop flag), we add it to dropdown container of selected element
+        // On multiple mode, we add it
+        // On single mode, we add the first selected that we get
         if (!this.propInactif && this.propSelected) {
             if ((this.root as MDropdownInterface).multiple || (this.root as MDropdownInterface).selected.length == 0) {
                 (this.root as MDropdownInterface).selected.push({ key: this.key, value: this.propValue, label: this.propLabel });
@@ -93,7 +131,15 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     }
 
     beforeDestroy() {
-        (this.root as MDropdownInterface).itemDestroy(this);
+        let index: number = (this.root as MDropdownInterface).items.indexOf(this);
+
+        if (index > -1) {
+            (this.root as MDropdownInterface).items.splice(index, 1);
+            if (((this.root as MDropdownInterface).items[index] as MDropdownItem).visible) {
+                (this.root as MDropdownInterface).nbItemsVisible--;
+            }
+        }
+
         if (this.group) {
             (this.group as MDropdownGroupInterface).nbItemsVisible--;
         }
