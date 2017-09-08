@@ -4,13 +4,13 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './accordion-group.html?style=./accordion-group.scss';
 import { ACCORDION_NAME, ACCORDION_GROUP_NAME } from '../component-names';
-import { MAccordion, MAccordionAspect } from '../accordion/accordion';
+import { MAccordion, MAccordionSkin } from '../accordion/accordion';
 
 @WithRender
 @Component
 export class MAccordionGroup extends Vue {
     @Prop()
-    public aspect: MAccordionAspect;
+    public skin: MAccordionSkin;
     @Prop({ default: false })
     public concurrent: boolean;
     @Prop({ default: false })
@@ -51,9 +51,9 @@ export class MAccordionGroup extends Vue {
                         this.arrAccordion[this.nbAccordion].open = true;
                     }
                 }
-                if (this.propAspect != accordion.propAspect) {
-                    accordion.propAspect = this.propAspect;
-                    accordion.resetAspect(this.propAspect);
+                if (this.propSkin != accordion.propSkin) {
+                    accordion.propSkin = this.propSkin;
+                    accordion.resetSkin(this.propSkin);
                 }
                 this.nbAccordion++;
             }
@@ -136,8 +136,8 @@ export class MAccordionGroup extends Vue {
         }
     }
 
-    private get propAspect(): string {
-        return this.aspect == MAccordionAspect.Light || this.aspect == MAccordionAspect.Vanilla ? this.aspect : MAccordionAspect.Regular;
+    private get propSkin(): string {
+        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Vanilla ? this.skin : MAccordionSkin.Regular;
     }
 
     private get hasTitleSlot(): boolean {

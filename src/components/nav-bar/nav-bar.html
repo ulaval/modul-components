@@ -1,9 +1,9 @@
 <nav class="m-nav-bar"
      :class="{
-         'm--is-regular': propAspect == 'regular' || propAspect == 'dark',
-         'm--is-light': propAspect == 'light',
-         'm--is-dark': propAspect == 'dark',
-         'm--is-vanilla': propAspect == 'vanilla'
+         'm--is-regular': propSkin == 'regular' || propSkin == 'dark',
+         'm--is-light': propSkin == 'light',
+         'm--is-dark': propSkin == 'dark',
+         'm--is-vanilla': propSkin == 'vanilla'
      }">
     <ul class="m-nav-bar__list" aria-hidden="true">
         <slot>

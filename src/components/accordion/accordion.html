@@ -1,7 +1,7 @@
 <article class="m-accordion"
-         :class="{ 'm--is-regular': isAspectRegular,
-                'm--is-light': propAspect=='light',
-                'm--is-vanilla': propAspect=='vanilla',
+         :class="{ 'm--is-regular': isSkinRegular,
+                'm--is-light': propSkin=='light',
+                'm--is-vanilla': propSkin=='vanilla',
                 'm--is-close': !propOpen }">
     <header tabindex="0"
             class="m-accordion__header"
@@ -20,7 +20,7 @@
                      'm--is-anim-active': isAnimActive,
                      'm--is-left': propIconPosition != 'right',
                      'm--is-large': propIconSize=='large',
-                     'm--has-border': propIconAspect=='regular' }"></span>
+                     'm--has-border': propIconSkin=='regular' }"></span>
     </header>
     <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
         <div class="m-accordion__body-wrap" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propOpen">

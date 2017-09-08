@@ -38,7 +38,7 @@ export class MSpinner extends ModulVue {
     @Prop()
     public description: string;
     @Prop()
-    public aspect: MSpinnerStyle;
+    public skin: MSpinnerStyle;
     @Prop({ default: MSpinnerSize.Large })
     public size: MSpinnerSize;
 
@@ -103,14 +103,14 @@ export class MSpinner extends ModulVue {
         return this.mode == MSpinnerMode.Processing ? this.spinnerPortalId : this.spinnerId;
     }
 
-    private get propAspect(): MSpinnerStyle {
+    private get propSkin(): MSpinnerStyle {
         let result: MSpinnerStyle;
-        switch (this.aspect) {
+        switch (this.skin) {
             case MSpinnerStyle.Dark:
             case MSpinnerStyle.Light:
             case MSpinnerStyle.Lighter:
             case MSpinnerStyle.Regular:
-                result = this.aspect;
+                result = this.skin;
                 break;
             default:
                 result = this.mode == MSpinnerMode.Processing ? MSpinnerStyle.Light : MSpinnerStyle.Regular;

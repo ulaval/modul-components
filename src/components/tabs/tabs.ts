@@ -6,16 +6,18 @@ import WithRender from './tabs.html?style=./tabs.scss';
 import { TABS_NAME, TAB_PANE_NAME } from '../component-names';
 import { MTabPane } from '../tab-pane/tab-pane';
 
-const ASPECT_REGULAR: string = 'regular';
-const ASPECT_LIGHT: string = 'light';
-const ASPECT_DARK: string = 'dark';
-const ASPECT_NO_STYLE: string = 'vanilla';
+export enum MTabsSkin {
+    Regular = 'regular',
+    Light = 'light',
+    Dark = 'dark',
+    Vanilla = 'vanilla'
+}
 
 @WithRender
 @Component
 export class MTabs extends Vue {
-    @Prop({ default: ASPECT_LIGHT })
-    public aspect: string;
+    @Prop({ default: MTabsSkin.Light })
+    public skin: string;
 
     public componentName = TABS_NAME;
     private nbTabPane: number = 0;
@@ -65,8 +67,8 @@ export class MTabs extends Vue {
         return (this.$children[index] as MTabPane).componentName == TAB_PANE_NAME ? true : false;
     }
 
-    private get propAspect(): string {
-        return this.aspect == ASPECT_REGULAR || this.aspect == ASPECT_DARK || this.aspect == ASPECT_NO_STYLE ? this.aspect : ASPECT_LIGHT;
+    private get propSkin(): string {
+        return this.skin == MTabsSkin.Regular || this.skin == MTabsSkin.Dark || this.skin == MTabsSkin.Vanilla ? this.skin : MTabsSkin.Light;
     }
 }
 

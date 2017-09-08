@@ -6,7 +6,7 @@
             "type": "boolean",
             "default": false
         },
-        "aspect": {
+        "skin": {
             "type": "string",
             "values": [
                 "regular",

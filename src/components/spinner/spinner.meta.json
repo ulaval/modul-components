@@ -16,7 +16,7 @@
         "description": {
             "type": "string"
         },
-        "aspect": {
+        "skin": {
             "type": "string",
             "values": [
                 "dark",

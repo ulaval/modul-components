@@ -1,6 +1,6 @@
 <article class="m-tabs">
     <header class="m-tabs__header" v-if="!loading">
-        <m-nav-bar :aspect="propAspect">
+        <m-nav-bar :skin="propSkin">
             <m-nav-bar-item @click="changeTab(index)" v-for="(tab, index) in arrTabPane">{{ tab.value }}</m-nav-bar-item>
         </m-nav-bar>
     </header>

@@ -2,7 +2,7 @@
     "tag": "m-accordion",
     "name": "m-accordion-meta:name",
     "attributes": {
-        "aspect": {
+        "skin": {
             "type": "string",
             "values": [
                 "regular",
@@ -23,7 +23,7 @@
             ],
             "default": 1
         },
-        "iconAspect": {
+        "iconSkin": {
             "type": "string",
             "values": [
                 "regular",

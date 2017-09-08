@@ -9,7 +9,7 @@ const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
 const POPPER_CLASS_NAME: string = '.m-popper__popper';
 
-export enum MNavbarAspect {
+export enum MNavbarSkin {
     Regular = 'regular',
     Light = 'light',
     Dark = 'dark',
@@ -20,8 +20,8 @@ export enum MNavbarAspect {
 @Component
 export class MNavbar extends ModulVue {
 
-    @Prop({ default: MNavbarAspect.Dark })
-    public aspect: string;
+    @Prop({ default: MNavbarSkin.Dark })
+    public skin: string;
     @Prop()
     public line: boolean;
 
@@ -58,7 +58,7 @@ export class MNavbar extends ModulVue {
         this.childrenIndexSelected = this.childrenIndexSelected == undefined ? this.arrItem[0].childrenIndex : this.childrenIndexSelected;
         let childrenSelected = this.$children[this.childrenIndexSelected];
         childrenSelected['selectItem']();
-        if (this.propAspect == MNavbarAspect.Light) {
+        if (this.propSkin == MNavbarSkin.Light) {
             this.setLinePosition(childrenSelected.$el as HTMLElement);
         }
     }
@@ -71,7 +71,7 @@ export class MNavbar extends ModulVue {
             this.$children[this.childrenIndexSelected]['unselectItem']();
             this.$children[childrenIndex]['selectItem']();
             this.childrenIndexSelected = childrenIndex;
-            if (this.propAspect == MNavbarAspect.Light) {
+            if (this.propSkin == MNavbarSkin.Light) {
                 this.setLinePosition(this.$children[childrenIndex].$el as HTMLElement);
             }
             this.$emit('click');
@@ -91,13 +91,13 @@ export class MNavbar extends ModulVue {
         });
     }
 
-    private get propAspect(): MNavbarAspect {
-        return this.aspect == MNavbarAspect.Regular || this.aspect == MNavbarAspect.Dark || this.aspect == MNavbarAspect.Vanilla ? this.aspect : MNavbarAspect.Light;
+    private get propSkin(): MNavbarSkin {
+        return this.skin == MNavbarSkin.Regular || this.skin == MNavbarSkin.Dark || this.skin == MNavbarSkin.Vanilla ? this.skin : MNavbarSkin.Light;
     }
 
     private get propLine(): boolean {
         if (this.line == undefined) {
-            return this.propAspect == MNavbarAspect.Light;
+            return this.propSkin == MNavbarSkin.Light;
         }
         return this.line;
     }

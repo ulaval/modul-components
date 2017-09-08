@@ -6,7 +6,7 @@ import WithRender from './accordion.html?style=./accordion.scss';
 import { ACCORDION_NAME, ACCORDION_GROUP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 
-export enum MAccordionAspect {
+export enum MAccordionSkin {
     Regular = 'regular',
     Light = 'light',
     Vanilla= 'vanilla'
@@ -17,7 +17,7 @@ export enum MAccordionIconPosition {
     Right = 'right'
 }
 
-export enum MAccordionIconAspect {
+export enum MAccordionIconSkin {
     Regular = 'regular',
     Light = 'light'
 }
@@ -33,40 +33,40 @@ export enum MAccordionIconASize {
 })
 export class MAccordion extends ModulVue {
 
-    @Prop({ default: MAccordionAspect.Regular })
-    public aspect: MAccordionAspect;
+    @Prop({ default: MAccordionSkin.Regular })
+    public skin: MAccordionSkin;
     @Prop()
     public open: boolean;
     @Prop()
     public iconPosition: MAccordionIconPosition;
     @Prop()
-    public iconAspect: MAccordionIconAspect;
+    public iconSkin: MAccordionIconSkin;
     @Prop()
     public iconSize: MAccordionIconASize;
 
     public componentName: string = ACCORDION_NAME;
-    public propAspect: string = MAccordionAspect.Regular;
+    public propSkin: string = MAccordionSkin.Regular;
     public propOpen: boolean = false;
     public id: number;
 
     private propIconPosition: string = MAccordionIconPosition.Right;
-    private propIconAspect: string = MAccordionIconAspect.Light;
+    private propIconSkin: string = MAccordionIconSkin.Light;
     private propIconSize: string = MAccordionIconASize.Large;
 
-    public resetAspect(type): void {
+    public resetSkin(type): void {
         switch (type) {
-            case MAccordionAspect.Light:
+            case MAccordionSkin.Light:
                 this.propIconPosition = MAccordionIconPosition.Left;
                 this.propIconSize = MAccordionIconASize.Small;
-                this.propIconAspect = MAccordionIconAspect.Regular;
+                this.propIconSkin = MAccordionIconSkin.Regular;
                 break;
-            case MAccordionAspect.Vanilla:
-                this.setAspectVanilla();
+            case MAccordionSkin.Vanilla:
+                this.setSkinVanilla();
                 break;
             default:
                 this.propIconPosition = MAccordionIconPosition.Right;
                 this.propIconSize = MAccordionIconASize.Large;
-                this.propIconAspect = MAccordionIconAspect.Light;
+                this.propIconSkin = MAccordionIconSkin.Light;
         }
     }
 
@@ -83,29 +83,29 @@ export class MAccordion extends ModulVue {
     }
 
     protected beforeMount(): void {
-        this.propAspect = this.aspect;
+        this.propSkin = this.skin;
         this.propOpen = this.open == undefined ? false : this.open;
         this.propIconPosition = this.iconPosition;
         this.propIconSize = this.iconSize;
-        this.propIconAspect = this.iconAspect;
-        this.setAspect();
+        this.propIconSkin = this.iconSkin;
+        this.setSkin();
     }
 
-    private setAspect(): void {
-        switch (this.propAspect) {
-            case MAccordionAspect.Light:
+    private setSkin(): void {
+        switch (this.propSkin) {
+            case MAccordionSkin.Light:
                 if (this.propIconPosition == undefined) {
                     this.propIconPosition = MAccordionIconPosition.Left;
                 }
                 if (this.propIconSize == undefined) {
                     this.propIconSize = MAccordionIconASize.Small;
                 }
-                if (this.propIconAspect == undefined) {
-                    this.propIconAspect = MAccordionIconAspect.Regular;
+                if (this.propIconSkin == undefined) {
+                    this.propIconSkin = MAccordionIconSkin.Regular;
                 }
                 break;
-            case MAccordionAspect.Vanilla:
-                this.setAspectVanilla();
+            case MAccordionSkin.Vanilla:
+                this.setSkinVanilla();
                 break;
             default:
                 if (this.propIconPosition == undefined) {
@@ -114,21 +114,21 @@ export class MAccordion extends ModulVue {
                 if (this.propIconSize == undefined) {
                     this.propIconSize = MAccordionIconASize.Large;
                 }
-                if (this.propIconAspect == undefined) {
-                    this.propIconAspect = MAccordionIconAspect.Light;
+                if (this.propIconSkin == undefined) {
+                    this.propIconSkin = MAccordionIconSkin.Light;
                 }
         }
     }
 
-    private setAspectVanilla(): void {
+    private setSkinVanilla(): void {
         if (this.propIconPosition == undefined) {
             this.propIconPosition = MAccordionIconPosition.Right;
         }
         if (this.propIconSize == undefined) {
             this.propIconSize = MAccordionIconASize.Large;
         }
-        if (this.propIconAspect == undefined) {
-            this.propIconAspect = MAccordionIconAspect.Light;
+        if (this.propIconSkin == undefined) {
+            this.propIconSkin = MAccordionIconSkin.Light;
         }
     }
 
@@ -139,8 +139,8 @@ export class MAccordion extends ModulVue {
         this.$emit('click', this.id, this.propOpen);
     }
 
-    private get isAspectRegular(): boolean {
-        return this.propAspect == MAccordionAspect.Light || this.propAspect == MAccordionAspect.Vanilla ? false : true;
+    private get isSkinRegular(): boolean {
+        return this.propSkin == MAccordionSkin.Light || this.propSkin == MAccordionSkin.Vanilla ? false : true;
     }
 }
 
