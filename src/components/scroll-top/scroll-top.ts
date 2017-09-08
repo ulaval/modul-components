@@ -23,7 +23,7 @@ export class MScrollTop extends ModulVue {
     public componentName = SCROLL_TOP_NAME;
     private scrollBreakPoint: number = window.innerHeight * 0.75;
     private visible: boolean = true;
-    private scrollPosition: number ;
+    private scrollPosition: number;
 
     protected mounted(): void {
         if (this.position != 'relative') {
