@@ -16,14 +16,14 @@ $m-slider--thumb-width: 20px !default;
         overflow: hidden;
 
         div {
-            transition: 0.1s width ease;
+            transition: width 0.1s ease;
             height: 100%;
             background: $m-color--interactive;
         }
     }
 
     &__thumb {
-        transition: 0.3s transform ease, 0.3s background ease, 0.1s left ease;
+        transition: transform $m-transition-duration ease, background $m-transition-duration ease, left 0.1s ease;
         position: absolute;
         top: 0;
         width: $m-slider--thumb-width;

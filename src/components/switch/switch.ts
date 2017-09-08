@@ -40,7 +40,7 @@ export class MSwitch extends Vue {
     }
 
     private onClick(event): void {
-        this.$emit('click');
+        this.$emit('click', event);
         this.$refs['switch']['blur']();
     }
 

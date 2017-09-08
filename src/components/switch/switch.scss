@@ -81,7 +81,7 @@ $m-switch-size: 23px;
     }
 
     &__input {
-        transition: 0.3s ease-in-out;
+        transition: $m-transition-duration ease-in-out;
         background: $m-color--grey-light;
         border-radius: 2rem;
         border: $m-border-width--s solid $m-color--grey;
@@ -92,7 +92,7 @@ $m-switch-size: 23px;
     }
 
     &__button {
-        transition: 0.3s ease-in-out;
+        transition: $m-transition-duration ease-in-out;
         background: $m-color--white;
         border-radius: 2rem;
         border: $m-border-width--s solid $m-color--white;
@@ -106,7 +106,7 @@ $m-switch-size: 23px;
     }
 
     &__text {
-        transition: 0.3s ease-in-out;
+        transition: $m-transition-duration ease-in-out;
         display: flex;
         height: 100%;
         width: calc(100% - #{$m-switch-size});
@@ -123,7 +123,7 @@ $m-switch-size: 23px;
     }
 
     &__label {
-        transition: 0.3s color ease;
+        transition: $m-transition-duration color ease;
     }
 
     &__hidden {

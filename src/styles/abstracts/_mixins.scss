@@ -33,11 +33,6 @@
     border: 0;
 }
 
-@mixin m-transition-accordion() {
-    transition: 0.3s max-height ease;
-    height: auto;
-}
-
 @mixin m-is-ie() {
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
         @content;

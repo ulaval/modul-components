@@ -1,4 +1,4 @@
-<m-popper @open="onOpen" @close="onClose" padding="" :options="options" :disabled="disabled">
+<m-popup @open="onOpen" @close="onClose" padding="" :options="options" :disabled="disabled">
     <m-button mode="icon" icon-name="options">
         <m-i18n k="m-options-menu:open" v-if="!isOpen"></m-i18n>
         <m-i18n k="m-options-menu:close" v-if="isOpen"></m-i18n>
@@ -10,4 +10,4 @@
             <m-options-menu-item>Option 3</m-options-menu-item>
         </slot>
     </div>
-</m-popper>
+</m-popup>

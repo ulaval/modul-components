@@ -11,6 +11,8 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/bullet-list/bullet-list.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/button/button.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/button-group/button-group.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/content-list/content-list.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/content-list-item/content-list-item.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/checkbox/checkbox.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dialog-window/dialog-window.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.meta.fr.json'));
@@ -29,9 +31,11 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/panel/panel.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/sidebar-window/sidebar-window.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/popper/popper.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/popup/popup.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/radio/radio.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/radio-group/radio-group.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/modal-window/modal-window.meta.fr.json'));
-            i18n.addMessages(FRENCH, require('../components/select/select.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/scroll-top/scroll-top.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/spinner/spinner.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/status-list/status-list.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/step/step.meta.fr.json'));
@@ -40,7 +44,7 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/tabs/tabs.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/template/template.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/text-field/text-field.meta.fr.json'));
-            i18n.addMessages(FRENCH, require('../components/timerpicker/timerpicker.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/timepicker/timepicker.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/tooltip/tooltip.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/upload/upload.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../directives/ripple-effect/ripple-effect.meta.fr.json'));

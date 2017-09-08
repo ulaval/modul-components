@@ -49,6 +49,7 @@ export interface ComponentMeta {
     methods?: ComponentMethods;
     overview?: string;
     category?: string;
+    preview?: boolean;
 }
 
 export type ComponentMetaMap = {
@@ -76,6 +77,9 @@ export class Meta {
     public mergeComponentMeta(tag: string, meta: ComponentMeta, category?: string): void {
         let metaObject: ComponentMeta = this.componentMeta[tag];
         this.componentMeta[tag] = {...metaObject, ...meta};
+        if (this.componentMeta[tag].preview == undefined) {
+            this.componentMeta[tag].preview = true;
+        }
         if (category) {
             let categoryComponents: ComponentMeta[] = this.categories[category];
             if (!categoryComponents) {
@@ -85,6 +89,10 @@ export class Meta {
             this.componentMeta[tag].category = category;
             categoryComponents.push(this.componentMeta[tag]);
         }
+    }
+
+    public getMeta(): any {
+        return this.componentMeta;
     }
 
     public getTags(): string[] {

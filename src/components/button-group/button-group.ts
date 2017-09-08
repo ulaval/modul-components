@@ -1,70 +1,45 @@
-import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './button-group.html?style=./button-group.scss';
 import { BUTTON_GROUP_NAME, RADIO_NAME } from '../component-names';
-import { MRadio } from '../radio/radio';
+import { MRadio, MRadioPosition, BaseButtonGroup, ButtonGroup } from '../radio/radio';
 import uuid from '../../utils/uuid/uuid';
-import { MRadioPosition } from '../radio/radio';
 
 @WithRender
 @Component
-export class MButtonGroup extends Vue {
+export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
 
     @Prop()
     public value: string;
+    @Prop({ default: true })
+    public enabled: boolean;
     @Prop({ default: false })
-    public disabled: boolean;
-    @Prop({ default: false })
-    public fullSize: boolean;
+    public fullsize: boolean;
     @Prop({ default: true })
     public inline: boolean;
     @Prop({ default: MRadioPosition.Left })
-    public iconPosition: string;
+    public position: MRadioPosition;
 
-    public componentName: string = BUTTON_GROUP_NAME;
-    private nbRadio: number = 0;
-    private radioName: string = uuid.generate();
+    public name: string = uuid.generate();
+    private internalValue: string = '';
 
-    private hasError: boolean = false;
-    private errorDefaultMesage: string = 'ERROR in <' + BUTTON_GROUP_NAME + '> : ';
-    private errorMessage: string = '';
+    public getValue(): string {
+        return this.model;
+    }
 
     public updateValue(value: string): void {
-        this.value = value;
+        this.model = value;
+    }
+
+    private get model(): string {
+        return this.value == undefined ? this.internalValue : this.value;
+    }
+
+    private set model(value: string) {
+        this.internalValue = value;
         this.$emit('input', value);
-    }
-
-    protected mounted(): void {
-        for (let i = 0; i < this.$children.length; i++) {
-            if (this.checkRadio(i)) {
-                let radio: MRadio = this.$children[i] as MRadio;
-                radio.name = this.radioName;
-                radio.inline = this.inline;
-                radio.fullSize = this.fullSize;
-                radio.iconPosition = this.iconPosition == MRadioPosition.Left ? MRadioPosition.Left : MRadioPosition.Right;
-                if (this.disabled != false) {
-                    radio.propDisabled = this.disabled;
-                }
-                if (i == 0) {
-                    radio.firstChild = true;
-                }
-                if (i == this.$children.length - 1) {
-                    radio.lastChild = true;
-                }
-                this.nbRadio++;
-            }
-        }
-        if (this.nbRadio == 0) {
-            this.hasError = true;
-            this.errorMessage = this.errorDefaultMesage + 'No <' + RADIO_NAME + '> found in <' + BUTTON_GROUP_NAME + '>';
-            console.error(this.errorMessage);
-        }
-    }
-
-    private checkRadio(index: number): boolean {
-        return (this.$children[index] as MRadio).componentName == RADIO_NAME ? true : false;
+        this.$emit('change', value);
     }
 }
 

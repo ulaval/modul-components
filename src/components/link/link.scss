@@ -2,7 +2,7 @@
 
 .m-link {
     &:not(.m--no-style) {
-        transition: color 0.3s ease;
+        transition: color $m-transition-duration ease;
         position: relative;
         font-weight: $m-font-weight--bold;
         color: $m-color--interactive;
@@ -11,7 +11,7 @@
         &:not(.m--no-underline) {
             .m-link__text {
                 &::after {
-                    transition: width 0.3s ease, opacity 0.3s ease;
+                    transition: width $m-transition-duration ease, opacity $m-transition-duration ease;
                     position: absolute;
                     right: 0;
                     bottom: 1px; //Magic number

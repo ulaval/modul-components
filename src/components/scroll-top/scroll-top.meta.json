@@ -1,0 +1,16 @@
+{
+    "tag": "m-scroll-top",
+    "name": "m-scroll-top-meta:name",
+    "attributes": {
+        "position": {
+            "type": "string",
+            "values": [
+                "sticky",
+                "relative"
+            ],
+            "default": "0"
+        }
+    },
+    "overview": "scroll-top.overview",
+    "preview": false
+}

@@ -84,5 +84,6 @@
             "default": "100%"
         }
     },
-    "overview": "sidebar.overview"
+    "overview": "sidebar-window.overview",
+    "preview": false
 }

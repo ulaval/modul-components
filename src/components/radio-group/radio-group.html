@@ -1,12 +1,9 @@
 <ul class="m-radio-group" :class="{ 'm--is-inline': inline }">
-    <span v-if="!hasError">
-        <slot>
-            <m-radio value="radio1" :disabled="true">Radio 1</m-radio>
-            <m-radio value="radio2" :inline="true">Radio 2</m-radio>
-            <m-radio value="radio3" :inline="true">Radio 3</m-radio>
-        </slot>
-    </span>
-    <div class="m-radio-group" v-if="hasError">
-        <p>{{ errorMessage }}</p>
-    </div>
+    <slot>
+        <span v-if="demo">
+            <m-radio v="radio1" v-model="model">Radio 1</m-radio>
+            <m-radio v="radio2" v-model="model">Radio 2</m-radio>
+            <m-radio v="radio3" v-model="model">Radio 3</m-radio>
+        </span>
+    </slot>
 </ul>
