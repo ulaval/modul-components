@@ -1,5 +1,5 @@
 <div class="m-scroll-top" :class="{'m--is-relative': position == 'relative' }" :aria-hidden="!defaultTargetElVisible">
-    <template v-if="visible">
+    <template v-if="defaultTargetElVisible">
         <slot></slot>
         <div>
             <slot name="additionalContent"></slot>
@@ -7,11 +7,11 @@
         </div>
     </template>
     <portal :target-el="'#'+ getScrollTopId()" v-if="visible">
-        <transition name="m--is">
-            <button @click="onClick" class="m-scroll-top__button" v-show="show">
+        <!-- <transition name="m--is"> -->
+            <button @click="onClick" class="m-scroll-top__button">
                 <m-icon name="arrow-right" width="16px" height="16px"></m-icon>
                 <m-i18n class="m-scroll-top__hidden" k="m-scroll-top:top"></m-i18n>
             </button>
-        </transition>
+        <!-- </transition> -->
     </portal>
 </div>

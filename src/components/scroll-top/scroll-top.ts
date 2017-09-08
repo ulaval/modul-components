@@ -46,7 +46,7 @@ export class MScrollTop extends ModulVue {
                 this.appendScrollTopToBody();
             });
             this.$mWindow.event.$on('scroll', this.onScroll);
-        }else {
+        } else {
             this.removeScrollTopToBody();
             this.visible = true;
             this.defaultTargetElVisible = true;
@@ -65,8 +65,8 @@ export class MScrollTop extends ModulVue {
     }
 
     private onScroll(e): void {
-        this.scrollPosition = window.pageYOffset;
-        this.scrollPosition > this.scrollBreakPoint ? this.visible = true : this.visible = false;
+        // this.scrollPosition = window.pageYOffset;
+        // this.scrollPosition > this.scrollBreakPoint ? this.visible = true : this.visible = false;
     }
 
     // Need to be modified
@@ -125,7 +125,7 @@ export class MScrollTop extends ModulVue {
     }
 
     private getScrollTopId(): string {
-        return this.position == MScrollTopPosition.Relative ? this.scrollTopPortalId : this.scrollTopId;
+        return this.position == MScrollTopPosition.Relative ? this.scrollTopId : this.scrollTopPortalId ;
     }
 
 }
