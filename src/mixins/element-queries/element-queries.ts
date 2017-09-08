@@ -72,6 +72,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         this.setEqMin(el);
         this.setEqMax(el);
         this.setEq(el);
+        this.$emit('resize');
     }
 
     private setEqMin(el: HTMLElement): void {

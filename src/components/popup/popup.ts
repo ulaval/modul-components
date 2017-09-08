@@ -65,15 +65,25 @@ export class MPopup extends ModulVue {
 
     public set propOpen(open) {
         if (open) {
-            this.$emit('open');
+            if (!this.internalOpen) {
+                this.internalOpen = true;
+                this.$emit('open');
+            }
+
         } else {
-            this.$emit('close');
+            if (this.internalOpen) {
+                this.internalOpen = false;
+                this.$emit('close');
+            }
         }
-        this.internalOpen = open;
     }
 
     @Watch('open')
     private openChanged(open: boolean): void {
+        this.propOpen = open;
+    }
+
+    private togglePopup(open: boolean): void {
         this.propOpen = open;
     }
 
