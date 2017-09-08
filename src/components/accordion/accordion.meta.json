@@ -7,7 +7,7 @@
             "values": [
                 "regular",
                 "light",
-                "no-style"
+                "vanilla"
             ],
             "default": 0
         },

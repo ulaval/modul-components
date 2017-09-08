@@ -9,7 +9,7 @@ import { MTabPane } from '../tab-pane/tab-pane';
 const ASPECT_REGULAR: string = 'regular';
 const ASPECT_LIGHT: string = 'light';
 const ASPECT_DARK: string = 'dark';
-const ASPECT_NO_STYLE: string = 'no-style';
+const ASPECT_NO_STYLE: string = 'vanilla';
 
 @WithRender
 @Component

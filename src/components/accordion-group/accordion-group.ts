@@ -137,7 +137,7 @@ export class MAccordionGroup extends Vue {
     }
 
     private get propAspect(): string {
-        return this.aspect == MAccordionAspect.Light || this.aspect == MAccordionAspect.NoStyle ? this.aspect : MAccordionAspect.Regular;
+        return this.aspect == MAccordionAspect.Light || this.aspect == MAccordionAspect.Vanilla ? this.aspect : MAccordionAspect.Regular;
     }
 
     private get hasTitleSlot(): boolean {

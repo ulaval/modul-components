@@ -9,7 +9,7 @@ import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/tran
 export enum MAccordionAspect {
     Regular = 'regular',
     Light = 'light',
-    NoStyle= 'no-style'
+    Vanilla= 'vanilla'
 }
 
 export enum MAccordionIconPosition {
@@ -60,8 +60,8 @@ export class MAccordion extends ModulVue {
                 this.propIconSize = MAccordionIconASize.Small;
                 this.propIconAspect = MAccordionIconAspect.Regular;
                 break;
-            case MAccordionAspect.NoStyle:
-                this.setAspectNoStyle();
+            case MAccordionAspect.Vanilla:
+                this.setAspectVanilla();
                 break;
             default:
                 this.propIconPosition = MAccordionIconPosition.Right;
@@ -104,8 +104,8 @@ export class MAccordion extends ModulVue {
                     this.propIconAspect = MAccordionIconAspect.Regular;
                 }
                 break;
-            case MAccordionAspect.NoStyle:
-                this.setAspectNoStyle();
+            case MAccordionAspect.Vanilla:
+                this.setAspectVanilla();
                 break;
             default:
                 if (this.propIconPosition == undefined) {
@@ -120,7 +120,7 @@ export class MAccordion extends ModulVue {
         }
     }
 
-    private setAspectNoStyle(): void {
+    private setAspectVanilla(): void {
         if (this.propIconPosition == undefined) {
             this.propIconPosition = MAccordionIconPosition.Right;
         }
@@ -140,7 +140,7 @@ export class MAccordion extends ModulVue {
     }
 
     private get isAspectRegular(): boolean {
-        return this.propAspect == MAccordionAspect.Light || this.propAspect == MAccordionAspect.NoStyle ? false : true;
+        return this.propAspect == MAccordionAspect.Light || this.propAspect == MAccordionAspect.Vanilla ? false : true;
     }
 }
 

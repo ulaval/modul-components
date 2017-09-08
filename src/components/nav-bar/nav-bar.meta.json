@@ -8,7 +8,7 @@
                 "regular",
                 "light",
                 "dark",
-                "no-style"
+                "vanilla"
             ],
             "default": 1
         },

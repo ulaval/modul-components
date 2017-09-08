@@ -13,7 +13,7 @@ export enum MNavbarAspect {
     Regular = 'regular',
     Light = 'light',
     Dark = 'dark',
-    NoStyle = 'no-style'
+    Vanilla = 'vanilla'
 }
 
 @WithRender
@@ -92,7 +92,7 @@ export class MNavbar extends ModulVue {
     }
 
     private get propAspect(): MNavbarAspect {
-        return this.aspect == MNavbarAspect.Regular || this.aspect == MNavbarAspect.Dark || this.aspect == MNavbarAspect.NoStyle ? this.aspect : MNavbarAspect.Light;
+        return this.aspect == MNavbarAspect.Regular || this.aspect == MNavbarAspect.Dark || this.aspect == MNavbarAspect.Vanilla ? this.aspect : MNavbarAspect.Light;
     }
 
     private get propLine(): boolean {
