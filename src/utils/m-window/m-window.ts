@@ -19,6 +19,8 @@ export class MWindow {
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
     public scrollPosition: number = 0;
     public event = new Vue();
+    public scrollDown: boolean = false;
+    public scrollUp: boolean = true;
 
     public windowCount: number = 0;
     // public arrWindow: any = new Array();
@@ -28,6 +30,8 @@ export class MWindow {
     public windowZIndex: number = Z_INDEZ_DEFAULT;
     public hasBackdrop: boolean = false;
     private backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
+
+    private scrollLastPosition: number = 0;
 
     constructor() {
         window.addEventListener('click', (e: MouseEvent) => this.onClick(e));
@@ -48,6 +52,15 @@ export class MWindow {
     }
 
     public onScroll(event): void {
+        this.setScrollPosition();
+        if (this.scrollLastPosition > this.scrollPosition) {
+            this.scrollUp = true;
+            this.scrollDown = false;
+        } else {
+            this.scrollUp = false;
+            this.scrollDown = true;
+        }
+        this.scrollLastPosition = this.scrollPosition;
         this.event.$emit('scroll', event);
     }
 
