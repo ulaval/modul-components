@@ -54,6 +54,10 @@ $m-dropdown--margin: $m-padding--xs !default;
             visibility: hidden;
         }
     }
+
+    .m-text-field {
+        width: 100%;
+    }
 }
 
 .m-dropdown-item {

@@ -110,7 +110,7 @@ $m-accordion--color: $m-color--accent;
             flex-direction: row-reverse;
         }
 
-        &:not(.m--is-no-style) {
+        &:not(.m--is-vanilla) {
             color: $m-color--text;
             text-decoration: none;
         }

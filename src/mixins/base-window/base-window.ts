@@ -2,8 +2,8 @@ import { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import uuid from '../../utils/uuid/uuid';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import WithRender from './base-window.html?style=./base-window.scss';
 
 export enum BaseWindowMode {
@@ -28,7 +28,10 @@ const DIALOG_ID: string = 'mDialog';
 
 @WithRender
 @Component({
-    mixins: [MediaQueries]
+    mixins: [
+        MediaQueries,
+        Portal
+    ]
 })
 export class BaseWindow extends ModulVue {
     @Prop({ default: DIALOG_ID })
@@ -58,9 +61,7 @@ export class BaseWindow extends ModulVue {
 
     private internalPropOpen: boolean = false;
     private propId: string = DIALOG_ID;
-    private bodyElement: HTMLElement = document.body;
-    private portalTargetEl: HTMLElement = document.createElement('div');
-    private isVisible: boolean = false;
+    private visible: boolean = false;
     private busy: boolean = false;
 
     protected get windowMode(): BaseWindowMode {
@@ -167,7 +168,7 @@ export class BaseWindow extends ModulVue {
         return new Promise((resolve, reject) => {
             this.createDialog();
             setTimeout(() => {
-                this.isVisible = true;
+                this.visible = true;
                 setTimeout(() => {
                     resolve();
                     let dialogWrapEl: HTMLElement = this.$refs.dialogWrap as HTMLElement;
@@ -184,7 +185,7 @@ export class BaseWindow extends ModulVue {
 
     private internalCloseDialog(event = undefined): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.isVisible = false;
+            this.visible = false;
             this.$mWindow.backdropElement.style.zIndex = String(this.$mWindow.windowZIndex - 1);
             if (this.$mWindow.windowCount == 1 && this.$mWindow.hasBackdrop) {
                 this.$mWindow.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
@@ -207,27 +208,13 @@ export class BaseWindow extends ModulVue {
 
     private createDialog() {
         if (!this.disabled) {
-            this.propId = this.id + '-' + uuid.generate();
-            this.portalTargetEl.setAttribute('id', this.propId);
-            this.portalTargetEl.setAttribute('class', this.classNamePortalTarget);
-            this.portalTargetEl.style.position = 'relative';
-
-            this.$mWindow.addWindow(this.propId);
-            this.portalTargetEl.style.zIndex = String(this.$mWindow.windowZIndex);
-
-            this.$mWindow.createBackdrop(this.bodyElement);
-            this.$mWindow.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
-
-            this.bodyElement.appendChild(this.portalTargetEl);
+            this.as<PortalMixin>().appendBackdropAndPortalToBody(this.id, this.classNamePortalTarget, this.transitionDuration / 1000 + 's');
+            this.propId = this.as<PortalMixin>().portalId;
         }
     }
 
     private deleteDialog() {
-        let portalTargetEl: HTMLElement = this.bodyElement.querySelector('#' + this.propId) as HTMLElement;
-        if (portalTargetEl) {
-            this.bodyElement.removeChild(portalTargetEl);
-        }
-        this.$mWindow.deleteWindow(this.propId);
+        this.as<PortalMixin>().removeBackdropAndPortal();
     }
 
     private backdropClick(event): void {

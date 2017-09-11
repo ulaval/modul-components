@@ -32,7 +32,7 @@
             ],
             "default": 0
         },
-        "noStyle": {
+        "vanilla": {
             "type": "boolean",
             "values": [
                 "true",

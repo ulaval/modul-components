@@ -1,7 +1,7 @@
 @import 'abstracts/variables';
 
 .m-link {
-    &:not(.m--no-style) {
+    &:not(.m--is-vanilla) {
         transition: color $m-transition-duration ease;
         position: relative;
         font-weight: $m-font-weight--bold;

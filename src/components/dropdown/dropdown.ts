@@ -11,6 +11,13 @@ import { MDropDownItemInterface } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
+export enum DropdownnStateValue {
+    Default = 'default',
+    Disabled = 'disabled',
+    Error = 'error',
+    Valid = 'valid'
+}
+
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 198;
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
@@ -62,7 +69,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public editable: boolean;
     @Prop({ default: false })
     public multiple: boolean;
-    @Prop({ default: '200px' })
+    @Prop()
     public width: string;
     @Prop({ default: false })
     public defaultFirstElement: boolean;
@@ -70,6 +77,8 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public textNoData: string;
     @Prop()
     public textNoMatch: string;
+    @Prop({ default: DropdownnStateValue.Default })
+    public state: DropdownnStateValue;
 
     public componentName: string = DROPDOWN_NAME;
 
@@ -81,6 +90,9 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public selectedText: string = '';
     private internalOpen: boolean = false;
     private noItemsLabel: string;
+
+    private textFieldLabelEl: HTMLElement;
+    private textFieldInputValueEl: HTMLElement;
 
     // public getElement(key: string): Vue | undefined {
     //     let element: Vue | undefined;
@@ -134,7 +146,18 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     }
 
     protected mounted(): void {
+        let textField = this.$children[0].$children[0].$children[0];
+        this.textFieldLabelEl = textField.$refs.label as HTMLElement;
+        this.textFieldInputValueEl = textField.$refs.inputValue as HTMLElement;
         this.propOpen = this.open;
+    }
+
+    protected beforeDestroy() {
+        console.log('Dropdown', 'beforeDestroy');
+    }
+
+    protected destroyed() {
+        console.log('Dropdown', 'destroyed');
     }
 
     @Watch('selected')
@@ -149,6 +172,14 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
             values.push(this.defaultValue);
         }
 
+        this.selectedText = '';
+        for (let item of this.selected) {
+            if (this.selectedText != '') {
+                this.selectedText += ', ';
+            }
+            this.selectedText += item.label;
+        }
+
         this.$emit('change', values, this.addAction);
 
         if (this.multiple) {
@@ -160,13 +191,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     @Watch('currentElement')
     private currentElementChanged(value): void {
-        this.selectedText = '';
-        for (let item of this.selected) {
-            if (this.selectedText != '') {
-                this.selectedText += ', ';
-            }
-            this.selectedText += item.label;
-        }
         this.$emit('elementSelected', this.currentElement.value, this.addAction);
     }
 
@@ -223,12 +247,19 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         return show;
     }
 
-    private get propWidth(): string {
-        if (this.as<MediaQueriesMixin>().isMqMaxS) {
-            return '100%';
-        } else {
-            return this.width;
-        }
+    private get propState(): DropdownnStateValue {
+        let state: DropdownnStateValue =
+            this.state == DropdownnStateValue.Disabled || this.state == DropdownnStateValue.Error || this.state == DropdownnStateValue.Valid ? this.state : DropdownnStateValue.Default;
+        // if (state != DropdownnStateValue.Disabled && this.propErrorMessage != '') {
+        //     state = DropdownnStateValue.Error;
+        // } else if (state != DropdownnStateValue.Disabled && this.propValidMessage != '') {
+        //     state = DropdownnStateValue.Valid;
+        // }
+        return state;
+    }
+
+    public get isDisabled(): boolean {
+        return this.propState == DropdownnStateValue.Disabled;
     }
 
     // private recursiveGetElement(key: string, node: Vue): Vue | undefined {
@@ -358,7 +389,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
             el.style.transition = DROPDOWN_STYLE_TRANSITION;
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';
-            el.style.width = this.width;
+            el.style.width = this.$el.clientWidth + 'px';
             setTimeout(() => {
                 el.style.maxHeight = height + 'px';
                 done();
@@ -377,6 +408,7 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     private transitionLeave(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             let height: number = el.clientHeight;
+            el.style.width = this.$el.clientWidth + 'px';
             el.style.maxHeight = height + 'px';
             el.style.overflowY = 'hidden';
             el.style.maxHeight = '0';

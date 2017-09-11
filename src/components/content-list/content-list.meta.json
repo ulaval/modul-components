@@ -7,5 +7,5 @@
         }
     },
     "overview": "content-list.overview",
-    "exemple": "<m-content-list><m-content-list-item>Item 1</m-content-list-item><m-content-list-item delete-button='true'>Item 2</m-content-list-item> <m-content-list-item delete-button='true'>Item 3</m-content-list-item></m-content-list>"
+    "preview": "content-list.preview"
 }

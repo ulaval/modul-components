@@ -1,0 +1,9 @@
+@import 'abstracts/variables';
+
+.m-popup {
+    &__body {
+        &.m--has-shadow {
+            box-shadow: $m-box-shadow;
+        }
+    }
+}

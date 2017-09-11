@@ -4,6 +4,8 @@ import { directives } from '../directives/directive-names';
 
 export type OverviewType = 'rubric' | 'do' | 'dont';
 
+export type Preview = string | boolean;
+
 export interface Overview {
     type: OverviewType;
     title: string;
@@ -49,7 +51,7 @@ export interface ComponentMeta {
     methods?: ComponentMethods;
     overview?: string;
     category?: string;
-    preview?: boolean;
+    preview?: Preview;
 }
 
 export type ComponentMetaMap = {

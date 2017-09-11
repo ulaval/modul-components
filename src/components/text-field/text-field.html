@@ -7,7 +7,7 @@
           'm--no-value' : valueIsEmpty,
           'm-has-icon' : hasIcon },
           'm--is-type-' + propType ]">
-    <label class="m-text-field__label" @click="onFocus" v-if="hasLabel || isDisabled">
+    <label class="m-text-field__label" @click="onFocus" ref="label" v-if="hasLabel || isDisabled">
         <m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>{{ label }}
     </label>
     <span class="m-text-field__wrap">
@@ -29,7 +29,8 @@
               @click.prevent="onClick"
               @keyup="onKeyup"
               v-if="!editable">
-            <span class="m-text-field__input__value" v-if="!hasDefaultText">{{ propValue }}</span>
+            <span class="m-text-field__input__value" ref="inputValue" v-if="!hasDefaultText">{{ propValue }}</span>
+            <span class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="valueIsEmpty">i</span>
             <span class="m-text-field__input__default-text" :class="{ 'm--is-transparent': !isDefaultTextVisible }" v-if="hasDefaultText">- {{ defaultText }} -</span>
         </span>
         <m-button mode="icon" :icon-name="propIconName" class="m-text-field__icon" v-if="hasIcon" @click="onClickIcon">{{ propIconDescription }}</m-button>
