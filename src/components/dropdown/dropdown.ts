@@ -11,6 +11,13 @@ import { MDropDownItemInterface } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
+export enum DropdownnStateValue {
+    Default = 'default',
+    Disabled = 'disabled',
+    Error = 'error',
+    Valid = 'valid'
+}
+
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 198;
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
@@ -70,6 +77,8 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public textNoData: string;
     @Prop()
     public textNoMatch: string;
+    @Prop({ default: DropdownnStateValue.Default })
+    public state: DropdownnStateValue;
 
     public componentName: string = DROPDOWN_NAME;
 
@@ -236,6 +245,21 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         }
 
         return show;
+    }
+
+    private get propState(): DropdownnStateValue {
+        let state: DropdownnStateValue =
+            this.state == DropdownnStateValue.Disabled || this.state == DropdownnStateValue.Error || this.state == DropdownnStateValue.Valid ? this.state : DropdownnStateValue.Default;
+        // if (state != DropdownnStateValue.Disabled && this.propErrorMessage != '') {
+        //     state = DropdownnStateValue.Error;
+        // } else if (state != DropdownnStateValue.Disabled && this.propValidMessage != '') {
+        //     state = DropdownnStateValue.Valid;
+        // }
+        return state;
+    }
+
+    public get isDisabled(): boolean {
+        return this.propState == DropdownnStateValue.Disabled;
     }
 
     // private recursiveGetElement(key: string, node: Vue): Vue | undefined {

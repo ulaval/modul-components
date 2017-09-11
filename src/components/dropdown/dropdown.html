@@ -1,6 +1,6 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }" :style="{ width: width }">
     <m-popup :placement="bottom-start"
-             :disabled="disabled"
+             :disabled="isDisabled"
              :open="propOpen"
              :enter="transitionEnter"
              :after-enter="transitionAfterEnter"
