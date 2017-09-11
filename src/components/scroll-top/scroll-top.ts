@@ -60,7 +60,6 @@ export class MScrollTop extends ModulVue {
                     window.setTimeout(callback, 1000 / 60);
                 };
         })();
-        console.log(this.scrollTopId, this.scrollTopPortalId);
 
     }
 
@@ -120,7 +119,7 @@ export class MScrollTop extends ModulVue {
     }
 
     private appendScrollTopToBody(): void {
-        this.as<PortalMixin>().appendPortalToBody(SCROLL_TOP_ID, 'm-spinner-popover', '0.3s');
+        this.as<PortalMixin>().appendPortalToBody(SCROLL_TOP_ID, 'm-scrollTop-popover', '0.3s');
         this.scrollTopPortalId = this.as<PortalMixin>().portalId;
         this.visible = true;
     }
@@ -130,9 +129,12 @@ export class MScrollTop extends ModulVue {
     }
 
     private getScrollTopId(): string {
-        return this.position == MScrollTopPosition.Relative ? this.scrollTopId : this.scrollTopPortalId ;
+        return this.position == MScrollTopPosition.Relative ? this.scrollTopId : this.scrollTopPortalId;
     }
 
+    private get hasAdditionalContentSlot(): boolean {
+        return !!this.$slots.additionalContent;
+    }
 }
 
 const ScrollTopPlugin: PluginObject<any> = {

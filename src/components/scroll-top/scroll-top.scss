@@ -2,14 +2,15 @@
 
 .m-scroll-top {
     &__button {
-        position: fixed;
-        right: $m-padding;
-        bottom: $m-padding;
-        z-index: 999;
+        &:not(.m--is-relative) {
+            position: fixed;
+            right: $m-padding;
+            bottom: $m-padding;
 
-        @media (min-width: $m-bp--min--s) {
-            right: $m-padding--l;
-            bottom: $m-padding--l;
+            @media (min-width: $m-bp--min--s) {
+                right: $m-padding--l;
+                bottom: $m-padding--l;
+            }
         }
 
         display: flex;
@@ -46,13 +47,23 @@
             &-leave-to {
                 transform: rotate(360deg) scale(0);
             }
+
+            &-relative {
+                transform: rotate(0) scale(1);
+            }
         }
     }
 
-    &.m--is-relative {
+    &.m--is-relative .m-scroll-top__wrap {
         display: flex;
         position: relative;
         margin-top: $m-margin;
+        align-items: center;
+        justify-content: flex-end;
+
+        .m-scroll-top__wrap__slotContent {
+            flex: 1;
+        }
     }
 
     &__hidden {
