@@ -34,11 +34,13 @@ export class MScrollTop extends ModulVue {
     private visible: boolean = true;
     private show: boolean = false;
     private defaultTargetElVisible: boolean = false;
-    private portalTargetElement: HTMLElement = document.createElement('div');
+    // private portalTargetElement: HTMLElement = document.createElement('div');
     private scrollTopId: string = SCROLL_TOP_ID + '-' + uuid.generate();
     private scrollTopPortalId: string;
 
     protected mounted(): void {
+        console.log(this.position);
+
         if (this.position != MScrollTopPosition.Relative) {
             this.visible = false;
             this.defaultTargetElVisible = false;
