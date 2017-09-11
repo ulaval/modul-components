@@ -1,10 +1,7 @@
 @import 'abstracts/variables';
 
 .m-scroll-top {
-    transition: opacity 0.3s ease;
-    opacity: 1;
-
-    &:not(.m--is-relative) {
+    &__button {
         position: fixed;
         right: $m-padding;
         bottom: $m-padding;
@@ -14,9 +11,7 @@
             right: $m-padding--l;
             bottom: $m-padding--l;
         }
-    }
 
-    &__button {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -26,10 +21,10 @@
         background-color: $m-color--black-grey-dark;
         border: none;
         border-radius: $m-border-radius--s;
-        transition: opacity 0.3s ease, transform 0.3s ease;
         opacity: 0.3;
         cursor: pointer;
-        transform: scale(1);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform: rotate(0) scale(1);
 
         .m-icon {
             color: $m-color--white;
@@ -47,14 +42,9 @@
         }
 
         &.m--is {
-            &-enter-active,
-            &-leave-active {
-                transition: transform 0.3s ease;
-            }
-
             &-enter,
             &-leave-to {
-                transform: rotate(90deg) scale(0);
+                transform: rotate(360deg) scale(0);
             }
         }
     }
@@ -62,10 +52,7 @@
     &.m--is-relative {
         display: flex;
         position: relative;
-        bottom: auto;
-        right: auto;
         margin-top: $m-margin;
-        justify-content: flex-end;
     }
 
     &__hidden {
