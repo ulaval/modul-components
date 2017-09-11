@@ -17,8 +17,9 @@ export class MWindow {
     public bodyEl: HTMLElement = document.body;
     public bodyStyle: any = this.bodyEl.style;
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
-    public scrollPosition: number = 0;
     public event = new Vue();
+    public scrollPosition: number = 0;
+    public stopScrollPosition: number = 0;
     public scrollDown: boolean = false;
     public scrollUp: boolean = true;
 
@@ -31,9 +32,10 @@ export class MWindow {
     public hasBackdrop: boolean = false;
     private backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
 
-    private scrollLastPosition: number = 0;
+    private lastScrollPosition: number = 0;
 
     constructor() {
+        this.scrollPosition = window.scrollY;
         window.addEventListener('click', (e: MouseEvent) => this.onClick(e));
         window.addEventListener('scroll', (e) => this.onScroll(e));
         window.addEventListener('resize', (e) => this.onRisize(e));
@@ -52,15 +54,15 @@ export class MWindow {
     }
 
     public onScroll(event): void {
-        this.setScrollPosition();
-        if (this.scrollLastPosition > this.scrollPosition) {
+        this.scrollPosition = window.scrollY;
+        if (this.lastScrollPosition > this.scrollPosition) {
             this.scrollUp = true;
             this.scrollDown = false;
         } else {
             this.scrollUp = false;
             this.scrollDown = true;
         }
-        this.scrollLastPosition = this.scrollPosition;
+        this.lastScrollPosition = this.scrollPosition;
         this.event.$emit('scroll', event);
     }
 
@@ -126,22 +128,23 @@ export class MWindow {
     }
 
     public activeScollBody(): void {
+        this.htmlEl.style.removeProperty('overflow');
         this.bodyStyle.removeProperty('position');
         this.bodyStyle.removeProperty('top');
         this.bodyStyle.removeProperty('right');
         this.bodyStyle.removeProperty('left');
         this.bodyStyle.removeProperty('overflow');
-        this.htmlEl.style.removeProperty('overflow');
-        window.scrollBy(0, this.scrollPosition);
+        window.scrollBy(0, this.stopScrollPosition);
+        this.stopScrollPosition = this.scrollPosition;
         if (this.bodyStyle.length == 0) {
             this.bodyEl.removeAttribute('style');
         }
     }
 
     public stopScollBody(): void {
-        this.setScrollPosition();
+        this.stopScrollPosition = this.scrollPosition;
         this.bodyStyle.position = 'fixed';
-        this.bodyStyle.top = '-' + this.scrollPosition + 'px';
+        this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
         this.bodyStyle.right = '0';
         this.bodyStyle.left = '0';
         this.bodyStyle.overflow = 'hidden';
@@ -155,10 +158,6 @@ export class MWindow {
     //         }
     //     }
     // }
-
-    public setScrollPosition() {
-        this.scrollPosition = window.pageYOffset;
-    }
 
     public setBackdropStyle(): void {
         let styles: any = this.backdropElement.style;
