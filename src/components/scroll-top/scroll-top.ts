@@ -60,7 +60,6 @@ export class MScrollTop extends ModulVue {
                     window.setTimeout(callback, 1000 / 60);
                 };
         })();
-
     }
 
     protected beforeDestroy(): void {
@@ -73,16 +72,15 @@ export class MScrollTop extends ModulVue {
         this.scrollPosition > this.scrollBreakPoint ? this.show = true : this.show = false;
     }
 
-    // Need to be modified
     private get scrollTarget(): number {
-        return this.position == MScrollTopPosition.Relative ? 0 : 0;
+        return this.position == MScrollTopPosition.Relative ? this.$el.offsetTop : 0;
     }
 
     private onClick(event) {
         let scollDuration: number = 600;
         this.scrollToY(this.scrollTarget, 1500);
         this.$emit('click');
-        this.$el.blur();
+        this.$refs['scrollButton']['blur']();
     }
 
     private scrollToY(scrollTargetYReceived, speedReceived) {
