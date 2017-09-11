@@ -7,9 +7,16 @@ import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
-import { MDropDownItemInterface } from '../dropdown-item/dropdown-item';
+import { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+
+export enum DropdownnStateValue {
+    Default = 'default',
+    Disabled = 'disabled',
+    Error = 'error',
+    Valid = 'valid'
+}
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 198;
@@ -31,8 +38,6 @@ export interface MDropdownInterface extends Vue {
     multiple: boolean;
     disabled: boolean;
     defaultFirstElement: boolean;
-    // getElement(key: string): Vue | undefined;
-    // itemDestroy(item: Vue): void;
     setFocus(item: Vue): void;
     toggleDropdown(open: boolean): void;
 }
@@ -44,7 +49,7 @@ export interface MDropdownInterface extends Vue {
         MediaQueries
     ]
 })
-export class MDropdown extends ModulVue implements MDropdownInterface {
+export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     @Prop()
     public value: any;
@@ -70,6 +75,8 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public textNoData: string;
     @Prop()
     public textNoMatch: string;
+    @Prop({ default: DropdownnStateValue.Default })
+    public state: DropdownnStateValue;
 
     public componentName: string = DROPDOWN_NAME;
 
@@ -84,30 +91,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
-
-    // public getElement(key: string): Vue | undefined {
-    //     let element: Vue | undefined;
-
-    //     for (let child of this.$children) {
-    //         if (child.$options.name == 'MPopup' &&
-    //             child.$el.nodeName != '#comment' &&
-    //             child.$children[0].$options.name == 'MPopper') {
-    //             element = this.recursiveGetElement(key, child.$children[0]);
-    //             break;
-    //         }
-    //     }
-    //     return element;
-    // }
-
-    // public itemDestroy(item: Vue): void {
-    //     let index: number = this.items.indexOf(item);
-    //     if (index > -1) {
-    //         this.items.splice(index, 1);
-    //         if ((this.items[index] as MDropDownItemInterface).visible) {
-    //             this.nbItemsVisible--;
-    //         }
-    //     }
-    // }
 
     public setFocus(elementFocus: Vue): void {
         for (let item of this.items) {
@@ -238,21 +221,20 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
         return show;
     }
 
-    // private recursiveGetElement(key: string, node: Vue): Vue | undefined {
-    //     let element: Vue | undefined;
+    private get propState(): DropdownnStateValue {
+        let state: DropdownnStateValue =
+            this.state == DropdownnStateValue.Disabled || this.state == DropdownnStateValue.Error || this.state == DropdownnStateValue.Valid ? this.state : DropdownnStateValue.Default;
+        // if (state != DropdownnStateValue.Disabled && this.propErrorMessage != '') {
+        //     state = DropdownnStateValue.Error;
+        // } else if (state != DropdownnStateValue.Disabled && this.propValidMessage != '') {
+        //     state = DropdownnStateValue.Valid;
+        // }
+        return state;
+    }
 
-    //     for (let child of node.$children) {
-    //         if (child.$options.name == 'MDropdownGroup') {
-    //             element = this.recursiveGetElement(key, child);
-    //             if (element) {
-    //                 return element;
-    //             }
-    //         } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment' && child.$el.attributes['data-key'].value == key) {
-    //             return child;
-    //         }
-    //     }
-    //     return element;
-    // }
+    public get isDisabled(): boolean {
+        return this.propState == DropdownnStateValue.Disabled;
+    }
 
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {
