@@ -20,9 +20,15 @@ export interface MDropDownItemInterface extends Vue {
     onSelectElement(): void;
 }
 
+export abstract class BaseDropdown extends ModulVue {
+}
+
+export abstract class BaseDropdownGroup extends Vue {
+}
+
 @WithRender
 @Component
-export class MDropdownItem extends Vue implements MDropDownItemInterface {
+export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     @Prop()
     public label: string;
     @Prop()
@@ -52,8 +58,8 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
     public created(): void {
         this.propSelected = this.selected;
         this.key = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
-        this.root = this.getMDropdownRoot(this.$parent);
-        this.group = this.getMDropdownGroup(this.$parent);
+        this.getMDropdownRoot(this);
+        this.getMDropdownGroup(this);
 
         // Init of value and label
         // - If Value and Label : Value = value, Label = label
@@ -230,24 +236,20 @@ export class MDropdownItem extends Vue implements MDropDownItemInterface {
         }
     }
 
-    private getMDropdownRoot(node: Vue): Vue {
-        if (node.$options.name != 'MDropdown') {
-            node = this.getMDropdownRoot(node.$parent);
-        }
+    private getMDropdownRoot(node: Vue): void {
+        let rootNode: BaseDropdown | undefined = this.getParent<BaseDropdown>(p => p instanceof BaseDropdown);
 
-        return node;
+        if (rootNode) {
+            this.root = rootNode;
+        } else {
+            console.error('m-dropdown-item need to be inside m-dropdown');
+        }
     }
 
-    private getMDropdownGroup(node: Vue): Vue | undefined {
-        let currentNode: Vue | undefined = node;
+    private getMDropdownGroup(node: Vue): void {
+        let groupNode: BaseDropdownGroup | undefined = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
 
-        if (node.$options.name == 'MDropdown') {
-            currentNode = undefined;
-        } else if (node.$options.name != 'MDropdownGroup') {
-            currentNode = this.getMDropdownGroup(node.$parent);
-        }
-
-        return currentNode;
+        this.group = groupNode;
     }
 
     private setHover(flag: boolean): void {
