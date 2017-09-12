@@ -12,6 +12,7 @@ const BACKDROP_STYLE_OPACITY: string = '0';
 const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.7';
 
 const Z_INDEZ_DEFAULT: number = 100;
+const DONE_EVENT_DURATION: number = 250;
 
 export class MWindow {
     public bodyEl: HTMLElement = document.body;
@@ -33,20 +34,27 @@ export class MWindow {
     private backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
 
     private lastScrollPosition: number = 0;
+    private doneResizeEvent: any;
+    private doneScrollEvent: any;
 
     constructor() {
         this.scrollPosition = window.scrollY;
         window.addEventListener('click', (e: MouseEvent) => this.onClick(e));
         window.addEventListener('scroll', (e) => this.onScroll(e));
-        window.addEventListener('resize', (e) => this.onRisize(e));
+        window.addEventListener('resize', (e) => this.onResize(e));
     }
 
     public onClick(event: MouseEvent): void {
         this.event.$emit('click', event);
     }
 
-    public onRisize(event): void {
+    public onResize(event): void {
         this.event.$emit('resize', event);
+
+        clearTimeout(this.doneResizeEvent);
+        this.doneResizeEvent = setTimeout( () => {
+            this.event.$emit('resizeDone', event);
+        }, DONE_EVENT_DURATION);
     }
 
     public elementIsClick(element: HTMLElement, eventTarget: HTMLElement): boolean {
@@ -64,6 +72,11 @@ export class MWindow {
         }
         this.lastScrollPosition = this.scrollPosition;
         this.event.$emit('scroll', event);
+
+        clearTimeout(this.doneScrollEvent);
+        this.doneScrollEvent = setTimeout( () => {
+            this.event.$emit('scrollDone', event);
+        }, DONE_EVENT_DURATION);
     }
 
     public addWindow(windowId): void {
