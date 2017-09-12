@@ -186,10 +186,10 @@ export class BaseWindow extends ModulVue {
     private internalCloseDialog(event = undefined): Promise<any> {
         return new Promise((resolve, reject) => {
             this.visible = false;
-            this.$mWindow.backdropElement.style.zIndex = String(this.$mWindow.windowZIndex - 1);
-            if (this.$mWindow.windowCount == 1 && this.$mWindow.hasBackdrop) {
-                this.$mWindow.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
-                this.$mWindow.setBackdropOpacity('0');
+            this.$modul.backdropElement.style.zIndex = String(this.$modul.windowZIndex - 1);
+            if (this.$modul.windowCount == 1 && this.$modul.hasBackdrop) {
+                this.$modul.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
+                this.$modul.setBackdropOpacity('0');
             }
             setTimeout(() => {
                 this.deleteDialog();

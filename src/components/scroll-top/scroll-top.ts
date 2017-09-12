@@ -47,7 +47,7 @@ export class MScrollTop extends ModulVue {
             this.$nextTick(() => {
                 this.appendScrollTopToBody();
             });
-            this.$mWindow.event.$on('scroll', this.onScroll);
+            this.$modul.event.$on('scroll', this.onScroll);
         } else {
             this.defaultTargetElVisible = true;
             this.visible = true;
@@ -66,7 +66,7 @@ export class MScrollTop extends ModulVue {
 
     protected beforeDestroy(): void {
         this.removeScrollTopToBody();
-        this.$mWindow.event.$off('scroll', this.onScroll);
+        this.$modul.event.$off('scroll', this.onScroll);
     }
 
     private onScroll(e): void {

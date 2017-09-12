@@ -49,16 +49,16 @@ export class MFlexTemplate extends ModulVue {
 
     protected mounted(): void {
         this.propMenuOpen = this.menuOpen;
-        this.scrollPosition = this.$mWindow.scrollPosition;
+        this.scrollPosition = this.$modul.scrollPosition;
         this.$on('isEqMaxS', (value: boolean) => this.isEqMaxSChanged(value));
-        this.$mWindow.event.$on('scroll', this.onScroll);
-        this.$mWindow.event.$on('resizeDone', this.onResizeDone);
         this.setHeaderHeight();
+        this.$modul.event.$on('scroll', this.onScroll);
+        this.$modul.event.$on('resizeDone', this.onResizeDone);
     }
 
     protected beforeDdestroy(): void {
-        this.$mWindow.event.$off('scroll', this.onScroll);
-        this.$mWindow.event.$off('resizeDone', this.onResizeDone);
+        this.$modul.event.$off('scroll', this.onScroll);
+        this.$modul.event.$off('resizeDone', this.onResizeDone);
     }
 
     @Watch('menuOpen')
@@ -225,6 +225,7 @@ export class MFlexTemplate extends ModulVue {
             menuContent.focus();
         }
         this.menuOpenCount++;
+        this.$modul.updateAfterResize();
     }
 
     private transitionLeave(el: HTMLElement, done): void {
@@ -236,6 +237,7 @@ export class MFlexTemplate extends ModulVue {
             pageContainer.style.removeProperty('width');
         }
         setTimeout(() => {
+            this.$modul.updateAfterResize();
             done();
         }, 450);
     }

@@ -14,7 +14,7 @@ const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.7';
 const Z_INDEZ_DEFAULT: number = 100;
 const DONE_EVENT_DURATION: number = 250;
 
-export class MWindow {
+export class Modul {
     public bodyEl: HTMLElement = document.body;
     public bodyStyle: any = this.bodyEl.style;
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
@@ -34,8 +34,8 @@ export class MWindow {
     private backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
 
     private lastScrollPosition: number = 0;
-    private doneResizeEvent: any;
     private doneScrollEvent: any;
+    private doneResizeEvent: any;
 
     constructor() {
         this.scrollPosition = window.scrollY;
@@ -46,19 +46,6 @@ export class MWindow {
 
     public onClick(event: MouseEvent): void {
         this.event.$emit('click', event);
-    }
-
-    public onResize(event): void {
-        this.event.$emit('resize', event);
-
-        clearTimeout(this.doneResizeEvent);
-        this.doneResizeEvent = setTimeout( () => {
-            this.event.$emit('resizeDone', event);
-        }, DONE_EVENT_DURATION);
-    }
-
-    public elementIsClick(element: HTMLElement, eventTarget: HTMLElement): boolean {
-        return element.contains(eventTarget);
     }
 
     public onScroll(event): void {
@@ -76,6 +63,15 @@ export class MWindow {
         clearTimeout(this.doneScrollEvent);
         this.doneScrollEvent = setTimeout( () => {
             this.event.$emit('scrollDone', event);
+        }, DONE_EVENT_DURATION);
+    }
+
+    public onResize(event): void {
+        this.event.$emit('resize', event);
+
+        clearTimeout(this.doneResizeEvent);
+        this.doneResizeEvent = setTimeout( () => {
+            this.event.$emit('resizeDone', event);
         }, DONE_EVENT_DURATION);
     }
 
@@ -104,6 +100,10 @@ export class MWindow {
         // let windowPosition: number = Number(this.getArrWindowData(windowId)['windowPosition']);
         // this.arrWindow.splice(windowPosition, 1);
         this.setBackdropZIndex();
+    }
+
+    public updateAfterResize(): void {
+        this.event.$emit('updateAfterResize');
     }
 
     public createBackdrop(targetElement: HTMLElement = this.bodyEl): void {
@@ -195,12 +195,12 @@ export class MWindow {
     }
 }
 
-const MMWindowPlugin: PluginObject<any> = {
+const ModulPlugin: PluginObject<any> = {
     install(v, options) {
-        let mWindow = new MWindow();
-        (v as any).$mWindow = mWindow;
-        (v.prototype as any).$mWindow = mWindow;
+        let modul = new Modul();
+        (v as any).$modul = modul;
+        (v.prototype as any).$modul = modul;
     }
 };
 
-export default MMWindowPlugin;
+export default ModulPlugin;

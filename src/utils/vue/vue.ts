@@ -2,13 +2,13 @@ import Vue from 'vue';
 import { Messages } from '../i18n/i18n';
 import { HttpService } from '../http/http';
 import { MediaQueries } from '../media-queries/media-queries';
-import { MWindow } from '../m-window/m-window';
+import { Modul } from '../modul/modul';
 
 export class ModulVue extends Vue {
     public $i18n: Messages;
     public $http: HttpService;
     public $mq: MediaQueries;
-    public $mWindow: MWindow;
+    public $modul: Modul;
 
     protected getParent<T extends Vue>(test: (obj: Vue) => boolean): T | undefined {
         let p: Vue = this.$parent;
