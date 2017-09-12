@@ -49,11 +49,10 @@ export class MFlexTemplate extends ModulVue {
 
     protected mounted(): void {
         this.propMenuOpen = this.menuOpen;
-        this.scrollPosition = document.body.scrollTop;
+        this.scrollPosition = this.$mWindow.scrollPosition;
         this.$on('isEqMaxS', (value: boolean) => this.isEqMaxSChanged(value));
         this.$mWindow.event.$on('scroll', this.onScroll);
         this.setHeaderHeight();
-
     }
 
     protected beforeDdestroy(): void {

@@ -8,7 +8,7 @@ import { SCROLL_TOP_NAME } from '../component-names';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
 
 export enum MScrollTopPosition {
-    Sticky = 'sticky',
+    Fixe = 'fixe',
     Relative = 'relative'
 }
 
@@ -23,22 +23,24 @@ const SCROLL_TOP_ID: string = 'MScrollTop';
     mixins: [Portal]
 })
 export class MScrollTop extends ModulVue {
-    @Prop({ default: MScrollTopPosition.Sticky })
+    @Prop({ default: MScrollTopPosition.Fixe })
     public position: string;
 
     public componentName = SCROLL_TOP_NAME;
-    private scrollBreakPoint: number = window.innerHeight * 0.75;
+    private scrollBreakPoint: number = window.innerHeight * 1.5;
     private scrollPosition: number;
 
     private bodyElement: HTMLElement = document.body;
     private visible: boolean = true;
     private show: boolean = false;
     private defaultTargetElVisible: boolean = false;
-    private portalTargetElement: HTMLElement = document.createElement('div');
+    // private portalTargetElement: HTMLElement = document.createElement('div');
     private scrollTopId: string = SCROLL_TOP_ID + '-' + uuid.generate();
     private scrollTopPortalId: string;
 
     protected mounted(): void {
+        console.log(this.position);
+
         if (this.position != MScrollTopPosition.Relative) {
             this.visible = false;
             this.defaultTargetElVisible = false;
@@ -47,9 +49,11 @@ export class MScrollTop extends ModulVue {
             });
             this.$mWindow.event.$on('scroll', this.onScroll);
         } else {
-            this.removeScrollTopToBody();
-            this.visible = true;
             this.defaultTargetElVisible = true;
+            this.visible = true;
+            this.$nextTick(() => {
+                this.show = true;
+            });
         }
         window.requestAnimFrame = (function() {
             return window.requestAnimationFrame ||
@@ -61,24 +65,24 @@ export class MScrollTop extends ModulVue {
     }
 
     protected beforeDestroy(): void {
+        this.removeScrollTopToBody();
         this.$mWindow.event.$off('scroll', this.onScroll);
     }
 
     private onScroll(e): void {
-        // this.scrollPosition = window.pageYOffset;
-        // this.scrollPosition > this.scrollBreakPoint ? this.visible = true : this.visible = false;
+        this.scrollPosition = window.pageYOffset;
+        this.scrollPosition > this.scrollBreakPoint ? this.show = true : this.show = false;
     }
 
-    // Need to be modified
     private get scrollTarget(): number {
-        return this.position == MScrollTopPosition.Relative ? 0 : 0;
+        return this.position == MScrollTopPosition.Relative ? this.$el.offsetTop : 0;
     }
 
     private onClick(event) {
         let scollDuration: number = 600;
         this.scrollToY(this.scrollTarget, 1500);
         this.$emit('click');
-        this.$el.blur();
+        this.$refs['scrollButton']['blur']();
     }
 
     private scrollToY(scrollTargetYReceived, speedReceived) {
@@ -115,7 +119,7 @@ export class MScrollTop extends ModulVue {
     }
 
     private appendScrollTopToBody(): void {
-        this.as<PortalMixin>().appendPortalToBody(SCROLL_TOP_ID, 'm-spinner-popover', '0.3s');
+        this.as<PortalMixin>().appendPortalToBody(SCROLL_TOP_ID, 'm-scrollTop-popover', '0.3s');
         this.scrollTopPortalId = this.as<PortalMixin>().portalId;
         this.visible = true;
     }
@@ -125,9 +129,12 @@ export class MScrollTop extends ModulVue {
     }
 
     private getScrollTopId(): string {
-        return this.position == MScrollTopPosition.Relative ? this.scrollTopId : this.scrollTopPortalId ;
+        return this.position == MScrollTopPosition.Relative ? this.scrollTopId : this.scrollTopPortalId;
     }
 
+    private get hasAdditionalContentSlot(): boolean {
+        return !!this.$slots.additionalContent;
+    }
 }
 
 const ScrollTopPlugin: PluginObject<any> = {
