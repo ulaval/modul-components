@@ -38,9 +38,7 @@ export class MScrollTop extends ModulVue {
     private scrollTopId: string = SCROLL_TOP_ID + '-' + uuid.generate();
     private scrollTopPortalId: string;
 
-    protected mounted(): void {
-        console.log(this.position);
-
+    protected created(): void {
         if (this.position != MScrollTopPosition.Relative) {
             this.visible = false;
             this.defaultTargetElVisible = false;
