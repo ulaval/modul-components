@@ -7,7 +7,7 @@ import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
-import { MDropDownItemInterface } from '../dropdown-item/dropdown-item';
+import { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
@@ -38,8 +38,6 @@ export interface MDropdownInterface extends Vue {
     multiple: boolean;
     disabled: boolean;
     defaultFirstElement: boolean;
-    // getElement(key: string): Vue | undefined;
-    // itemDestroy(item: Vue): void;
     setFocus(item: Vue): void;
     toggleDropdown(open: boolean): void;
 }
@@ -51,7 +49,7 @@ export interface MDropdownInterface extends Vue {
         MediaQueries
     ]
 })
-export class MDropdown extends ModulVue implements MDropdownInterface {
+export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     @Prop()
     public value: any;
@@ -93,30 +91,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
 
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
-
-    // public getElement(key: string): Vue | undefined {
-    //     let element: Vue | undefined;
-
-    //     for (let child of this.$children) {
-    //         if (child.$options.name == 'MPopup' &&
-    //             child.$el.nodeName != '#comment' &&
-    //             child.$children[0].$options.name == 'MPopper') {
-    //             element = this.recursiveGetElement(key, child.$children[0]);
-    //             break;
-    //         }
-    //     }
-    //     return element;
-    // }
-
-    // public itemDestroy(item: Vue): void {
-    //     let index: number = this.items.indexOf(item);
-    //     if (index > -1) {
-    //         this.items.splice(index, 1);
-    //         if ((this.items[index] as MDropDownItemInterface).visible) {
-    //             this.nbItemsVisible--;
-    //         }
-    //     }
-    // }
 
     public setFocus(elementFocus: Vue): void {
         for (let item of this.items) {
@@ -261,22 +235,6 @@ export class MDropdown extends ModulVue implements MDropdownInterface {
     public get isDisabled(): boolean {
         return this.propState == DropdownnStateValue.Disabled;
     }
-
-    // private recursiveGetElement(key: string, node: Vue): Vue | undefined {
-    //     let element: Vue | undefined;
-
-    //     for (let child of node.$children) {
-    //         if (child.$options.name == 'MDropdownGroup') {
-    //             element = this.recursiveGetElement(key, child);
-    //             if (element) {
-    //                 return element;
-    //             }
-    //         } else if (child.$options.name == 'MDropdownItem' && child.$el.nodeName != '#comment' && child.$el.attributes['data-key'].value == key) {
-    //             return child;
-    //         }
-    //     }
-    //     return element;
-    // }
 
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {

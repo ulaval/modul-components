@@ -1,22 +1,18 @@
 @import 'abstracts/variables';
 
 .m-scroll-top {
-    transition: opacity 0.3s ease;
-    opacity: 1;
-
-    &:not(.m--is-relative) {
-        position: fixed;
-        right: $m-padding;
-        bottom: $m-padding;
-        z-index: 999;
-
-        @media (min-width: $m-bp--min--s) {
-            right: $m-padding--l;
-            bottom: $m-padding--l;
-        }
-    }
-
     &__button {
+        &:not(.m--is-relative) {
+            position: fixed;
+            right: $m-padding;
+            bottom: $m-padding;
+
+            @media (min-width: $m-bp--min--s) {
+                right: $m-padding--l;
+                bottom: $m-padding--l;
+            }
+        }
+
         display: flex;
         align-items: center;
         justify-content: center;
@@ -26,10 +22,10 @@
         background-color: $m-color--black-grey-dark;
         border: none;
         border-radius: $m-border-radius--s;
-        transition: opacity 0.3s ease, transform 0.3s ease;
         opacity: 0.3;
         cursor: pointer;
-        transform: scale(1);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform: rotate(0) scale(1);
 
         .m-icon {
             color: $m-color--white;
@@ -47,25 +43,27 @@
         }
 
         &.m--is {
-            &-enter-active,
-            &-leave-active {
-                transition: transform 0.3s ease;
-            }
-
             &-enter,
             &-leave-to {
-                transform: rotate(90deg) scale(0);
+                transform: rotate(360deg) scale(0);
+            }
+
+            &-relative {
+                transform: rotate(0) scale(1);
             }
         }
     }
 
-    &.m--is-relative {
+    &.m--is-relative .m-scroll-top__wrap {
         display: flex;
         position: relative;
-        bottom: auto;
-        right: auto;
         margin-top: $m-margin;
+        align-items: center;
         justify-content: flex-end;
+
+        .m-scroll-top__wrap__slotContent {
+            flex: 1;
+        }
     }
 
     &__hidden {

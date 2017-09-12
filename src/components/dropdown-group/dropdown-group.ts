@@ -5,6 +5,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown-group.html?style=./dropdown-group.scss';
 import { DROPDOWN_GROUP_NAME } from '../component-names';
+import { BaseDropdownGroup } from '../dropdown-item/dropdown-item';
 
 export interface MDropdownGroupInterface extends Vue {
     nbItemsVisible: number;
@@ -12,7 +13,7 @@ export interface MDropdownGroupInterface extends Vue {
 
 @WithRender
 @Component
-export class MDropdownGroup extends Vue implements MDropdownGroupInterface {
+export class MDropdownGroup extends BaseDropdownGroup implements MDropdownGroupInterface {
     @Prop()
     public label: string;
 
