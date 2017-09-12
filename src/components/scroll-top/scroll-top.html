@@ -1,16 +1,19 @@
 <div class="m-scroll-top" :class="{'m--is-relative': position == 'relative' }" :aria-hidden="!defaultTargetElVisible">
-    <div v-show="defaultTargetElVisible">
-        <slot></slot>
-        <div class="m-scroll-top__wrap">
-            <span class="m-scroll-top__wrap__slotContent" v-if="hasAdditionalContentSlot">
-                <slot name="additionalContent"></slot>
-            </span>
-            <div :id="scrollTopId"></div>
+    <template v-if="defaultTargetElVisible">
+        <div class="m-scroll-top__body">
+            <slot></slot>
         </div>
-    </div>
+        <div class="m-scroll-top__footer">
+            <div class="m-scroll-top__footer__content" v-if="hasFooterSlot">
+                <slot name="footer"></slot>
+            </div>
+            <div :id="scrollTopId" class="m-scroll-top__footer__button"></div>
+        </div>
+    </template>
     <portal :target-el="'#'+ getScrollTopId()" v-if="visible">
         <transition name="m--is">
-            <button ref="scrollButton" @click="onClick" class="m-scroll-top__button" :class="{'m--is-relative': position == 'relative' }" v-if="show">
+            <button ref="scrollButton" @click="onClick" class="m-scroll-top__button" :class="{'m--is-relative': position == 'relative' }"
+                v-if="show">
                 <m-icon name="arrow-right" width="16px" height="16px"></m-icon>
                 <m-i18n class="m-scroll-top__hidden" k="m-scroll-top:top"></m-i18n>
             </button>

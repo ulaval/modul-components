@@ -54,14 +54,14 @@
         }
     }
 
-    &.m--is-relative .m-scroll-top__wrap {
+    &__footer {
         display: flex;
         position: relative;
         margin-top: $m-margin;
         align-items: center;
         justify-content: flex-end;
 
-        .m-scroll-top__wrap__slotContent {
+        &__content {
             flex: 1;
         }
     }

@@ -6,6 +6,8 @@ import uuid from '../../utils/uuid/uuid';
 import WithRender from './scroll-top.html?style=./scroll-top.scss';
 import { SCROLL_TOP_NAME } from '../component-names';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
+import ScrollTo from '../../directives/scroll-to/scroll-to-lib';
+import { ScrollToDuration } from '../../directives/scroll-to/scroll-to-lib';
 
 export enum MScrollTopPosition {
     Fixe = 'fixe',
@@ -25,12 +27,13 @@ const SCROLL_TOP_ID: string = 'MScrollTop';
 export class MScrollTop extends ModulVue {
     @Prop({ default: MScrollTopPosition.Fixe })
     public position: string;
+    @Prop({ default: ScrollToDuration.Regular })
+    public duration: string;
 
     public componentName = SCROLL_TOP_NAME;
     private scrollBreakPoint: number = window.innerHeight * 1.5;
     private scrollPosition: number;
 
-    private bodyElement: HTMLElement = document.body;
     private visible: boolean = true;
     private show: boolean = false;
     private defaultTargetElVisible: boolean = false;
@@ -38,9 +41,7 @@ export class MScrollTop extends ModulVue {
     private scrollTopId: string = SCROLL_TOP_ID + '-' + uuid.generate();
     private scrollTopPortalId: string;
 
-    protected mounted(): void {
-        console.log(this.position);
-
+    protected created(): void {
         if (this.position != MScrollTopPosition.Relative) {
             this.visible = false;
             this.defaultTargetElVisible = false;
@@ -55,13 +56,6 @@ export class MScrollTop extends ModulVue {
                 this.show = true;
             });
         }
-        window.requestAnimFrame = (function() {
-            return window.requestAnimationFrame ||
-                window.webkitRequestAnimationFrame ||
-                function(callback) {
-                    window.setTimeout(callback, 1000 / 60);
-                };
-        })();
     }
 
     protected beforeDestroy(): void {
@@ -79,43 +73,9 @@ export class MScrollTop extends ModulVue {
     }
 
     private onClick(event) {
-        let scollDuration: number = 600;
-        this.scrollToY(this.scrollTarget, 1500);
+        ScrollTo.startScroll(this.$modul.bodyEl, this.scrollTarget, this.propDuration);
+        (this.$refs.scrollButton as HTMLElement).blur();
         this.$emit('click');
-        this.$refs['scrollButton']['blur']();
-    }
-
-    private scrollToY(scrollTargetYReceived, speedReceived) {
-
-        let scrollY = window.scrollY || document.documentElement.scrollTop;
-        let scrollTargetY = scrollTargetYReceived || 0;
-        let speed = speedReceived || 2000;
-        let easing = 'easeOutSine';
-        let currentTime = 0;
-        let time = Math.max(.1, Math.min(Math.abs(scrollY - scrollTargetY) / speed, .8));
-
-        // easing equations from https://github.com/danro/easing-js/blob/master/easing.js
-        let easingEquations = {
-            easeOutSine: function(pos) {
-                return Math.pow(pos, 0.15);
-            }
-        };
-
-        function tick() {
-            currentTime += 1 / 60;
-
-            let p = currentTime / time;
-            let t = easingEquations[easing](p);
-
-            if (p < 1) {
-                window.requestAnimFrame(tick);
-                window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
-            } else {
-                window.scrollTo(0, scrollTargetY);
-            }
-        }
-
-        tick();
     }
 
     private appendScrollTopToBody(): void {
@@ -130,6 +90,10 @@ export class MScrollTop extends ModulVue {
 
     private getScrollTopId(): string {
         return this.position == MScrollTopPosition.Relative ? this.scrollTopId : this.scrollTopPortalId;
+    }
+
+    private get propDuration(): ScrollToDuration {
+        return this.duration == ScrollToDuration.Null || this.duration == ScrollToDuration.Slow || this.duration == ScrollToDuration.Fast ? this.duration : ScrollToDuration.Regular;
     }
 
     private get hasAdditionalContentSlot(): boolean {

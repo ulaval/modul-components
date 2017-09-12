@@ -15,7 +15,7 @@ const Z_INDEZ_DEFAULT: number = 100;
 const DONE_EVENT_DURATION: number = 250;
 
 export class Modul {
-    public bodyEl: HTMLElement = document.body;
+    public bodyEl: HTMLElement = document.body || document.documentElement;
     public bodyStyle: any = this.bodyEl.style;
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
     public event = new Vue();
@@ -61,7 +61,7 @@ export class Modul {
         this.event.$emit('scroll', event);
 
         clearTimeout(this.doneScrollEvent);
-        this.doneScrollEvent = setTimeout( () => {
+        this.doneScrollEvent = setTimeout(() => {
             this.event.$emit('scrollDone', event);
         }, DONE_EVENT_DURATION);
     }
@@ -70,7 +70,7 @@ export class Modul {
         this.event.$emit('resize', event);
 
         clearTimeout(this.doneResizeEvent);
-        this.doneResizeEvent = setTimeout( () => {
+        this.doneResizeEvent = setTimeout(() => {
             this.event.$emit('resizeDone', event);
         }, DONE_EVENT_DURATION);
     }
