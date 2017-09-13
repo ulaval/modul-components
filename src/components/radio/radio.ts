@@ -35,9 +35,10 @@ export abstract class BaseButtonGroup extends BaseRadioGroup {
 export class MRadio extends ModulVue {
 
     @Prop()
-    public value: string;
+    @Model('change')
+    public modelValue: string;
     @Prop()
-    public v: string;
+    public value: string;
     @Prop()
     public name: string;
     @Prop({ default: MRadioPosition.Left })
@@ -84,14 +85,13 @@ export class MRadio extends ModulVue {
     }
 
     protected get model(): string {
-        return this.isGroup() ? this.parentGroup.getValue() : this.value;
+        return this.isGroup() ? this.parentGroup.getValue() : this.modelValue;
     }
 
     protected set model(value: string) {
         if (this.isGroup()) {
             this.parentGroup.updateValue(value);
         } else {
-            this.$emit('input', value);
             this.$emit('change', value);
         }
     }
