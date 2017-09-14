@@ -15,8 +15,10 @@ export class MOptionsMenu extends ModulVue {
     @Prop()
     public disabled: boolean;
 
+    private isOpen = false;
+
     public close(): void {
-        this.$children[0]['closePopper']();
+        this.isOpen = false;
     }
 
     protected mounted(): void {
@@ -43,10 +45,12 @@ export class MOptionsMenu extends ModulVue {
     }
 
     private onOpen(): void {
+        this.isOpen = true;
         this.$emit('open');
     }
 
     private onClose(): void {
+        this.isOpen = false;
         this.$emit('close');
     }
 }
