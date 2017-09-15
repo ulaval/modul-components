@@ -32,9 +32,9 @@
             <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="valueIsEmpty && !hasValueSlot">i</div>
             <div class="m-text-field__input__default-text" :class="{ 'm--is-transparent': !isDefaultTextVisible }" v-if="hasDefaultText">- {{ defaultText }} -</div>
         </div>
-        <m-button mode="icon" :icon-name="iconName" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>
-        <m-button mode="icon" :icon-name="iconNamePassword" class="m-text-field__icon-password" v-if="propIconPassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-button>
-        <m-button mode="icon" icon-name="calendar" class="m-text-field__icon-dropdown" v-if="modeIsDropdown && !isDisabled">test</m-button>
+        <m-button mode="icon" :icon-name="iconName" icon-size="13px" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>
+        <m-button mode="icon" :icon-name="iconNamePassword" icon-size="13px" class="m-text-field__icon-password" v-if="propIconPassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-button>
+        <m-button mode="icon" icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon-dropdown" v-if="modeIsDropdown && !isDisabled">test</m-button>
     </div>
     <m-validation-message
         :state="propState"

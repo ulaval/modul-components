@@ -219,7 +219,7 @@ $m-text-field--margin: $m-margin--s !default;
 
             &.m-button {
                 min-height: 20px;
-                min-width: 30px;
+                min-width: 26px;
             }
         }
 
@@ -228,8 +228,10 @@ $m-text-field--margin: $m-margin--s !default;
         }
 
         &-dropdown {
-            &.m-button {
+            &.m-button.m-button {
                 transition: transform 0.3s ease;
+                font-size: 5px;
+                fill: $m-color--black;
             }
 
         }
