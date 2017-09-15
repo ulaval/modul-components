@@ -36,8 +36,7 @@ export class MContentListItem extends ModulVue {
 
     private deleteItem() {
         this.visible = false;
-        this.$emit('delete', this.index);
-        this.parentContentList.deletedItem = this.index;
+        this.parentContentList.deleteChildElement(this.index);
     }
 
     private get isEqMaxXS(): boolean {
