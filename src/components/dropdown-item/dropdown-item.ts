@@ -185,7 +185,7 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
 
         if (!this.forceHide &&
             (this.filter == '' || this.filter == normalizeString(this.propLabel) || normalizeString(this.propLabel).match(this.filter)) &&
-            (!this.propInactif || (this.root as MDropdownInterface).nbItemsVisible != 0)) {
+            (!this.propInactif || (this.root && (this.root as MDropdownInterface).nbItemsVisible != 0))) {
             isVisible = true;
         }
 
