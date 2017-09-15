@@ -21,7 +21,6 @@ export class MContentList extends ModulVue implements MContentListInterface {
     public sizeSmall: boolean;
 
     public deleteChildElement(index): void {
-        console.log('ItemDeleted', index);
         this.$emit('ItemDeleted', index);
     }
 
