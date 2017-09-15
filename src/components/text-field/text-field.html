@@ -1,44 +1,44 @@
-<span class="m-text-field"
-      :class="[{ 'm--is-focus' : isFocus,
-          'm--not-editable' : !editable,
+<div class="m-text-field"
+      :class="[{ 'm--is-focus' : isFocus || forceFocus,
+          'm--not-editable' : !propEditable,
           'm--is-disabled' : isDisabled,
           'm--has-error' : hasError,
           'm--is-valid' : isValid,
           'm--no-value' : valueIsEmpty,
-          'm-has-icon' : hasIcon },
-          'm--is-type-' + propType ]">
-    <label class="m-text-field__label" @click="onFocus" ref="label" v-if="hasLabel || isDisabled">
-        <m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>{{ label }}
-    </label>
-    <span class="m-text-field__wrap">
+          'm--has-icon' : hasIcon,
+          'm--is-mode-dropdown': modeIsDropdown },
+          'm--is-type-' + propType ]"
+      @click="onClick">
+    <label class="m-text-field__label" ref="label" v-if="hasLabel || isDisabled"><m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>{{ label }}</label>
+    <div class="m-text-field__input-container">
         <input class="m-text-field__input"
-               ref="input"
-               :disabled="isDisabled"
-               @focus="onFocus"
-               @blur="onBlur"
-               @keyup="onKeyup"
-               @change="onChange"
-               :placeholder="placeholder"
-               v-model="propValue"
-               v-if="editable">
-        <span class="m-text-field__input"
-              ref="input"
-              tabindex="0"
-              @focus="onFocus"
-              @blur="onBlur"
-              @click.prevent="onClick"
-              @keyup="onKeyup"
-              v-if="!editable">
-            <span class="m-text-field__input__value" ref="inputValue" v-if="!hasDefaultText">{{ propValue }}</span>
-            <span class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="valueIsEmpty">i</span>
-            <span class="m-text-field__input__default-text" :class="{ 'm--is-transparent': !isDefaultTextVisible }" v-if="hasDefaultText">- {{ defaultText }} -</span>
-        </span>
-        <m-button mode="icon" :icon-name="propIconName" class="m-text-field__icon" v-if="hasIcon" @click="onClickIcon">{{ propIconDescription }}</m-button>
-        <span aria-hidden="true" class="m-text-field__input-line"></span>
-    </span>
+            ref="input"
+            :disabled="isDisabled"
+            @focus="onFocus"
+            @blur="onBlur"
+            @keyup="onKeyup"
+            :placeholder="placeholder"
+            v-model="propValue"
+            v-if="propEditable">
+        <div class="m-text-field__input"
+            ref="input"
+            tabindex="0"
+            @focus="onFocus"
+            @blur="onBlur"
+            @keyup="onKeyup"
+            v-if="!propEditable">
+            <div class="m-text-field__input__value" ref="inputValue" v-if="!hasValueSlot && !hasDefaultText">{{ propValue }}</div>
+            <div class="m-text-field__input__value" ref="inputValue" v-if="hasValueSlot && !hasDefaultText"><slot name="value"></slot></div>
+            <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="valueIsEmpty && !hasValueSlot">i</div>
+            <div class="m-text-field__input__default-text" :class="{ 'm--is-transparent': !isDefaultTextVisible }" v-if="hasDefaultText">- {{ defaultText }} -</div>
+        </div>
+        <m-button mode="icon" :icon-name="iconName" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>
+        <m-button mode="icon" :icon-name="iconNamePassword" class="m-text-field__icon-password" v-if="propIconPassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-button>
+        <m-button mode="icon" icon-name="calendar" class="m-text-field__icon-dropdown" v-if="modeIsDropdown && !isDisabled">test</m-button>
+    </div>
     <m-validation-message
         :state="propState"
         :error="propErrorMessage"
         :valid="propValidMessage"
-        :helper="helperMessage"></m-validation-message>
-</span>
+        :helper="propHelperMessage" v-if="!modeIsDropdown"></m-validation-message>
+</div>

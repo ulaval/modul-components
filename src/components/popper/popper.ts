@@ -41,6 +41,8 @@ export class MPopper extends ModulVue {
     public classNamePortalTarget: string;
     @Prop({ default: true })
     public closeOnClickOutside: boolean;
+    @Prop({ default: true })
+    public focusManagement: boolean;
     @Prop()
     public beforeEnter: any;
     @Prop()
@@ -157,10 +159,12 @@ export class MPopper extends ModulVue {
     }
 
     private setFastFocusToElement(el: HTMLElement): void {
-        el.setAttribute('tabindex', '0');
-        el.focus();
-        el.blur();
-        el.removeAttribute('tabindex');
+        if (this.focusManagement) {
+            el.setAttribute('tabindex', '0');
+            el.focus();
+            el.blur();
+            el.removeAttribute('tabindex');
+        }
     }
 
     private destroyPopper() {

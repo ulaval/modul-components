@@ -11,11 +11,17 @@ export enum MTextFieldType {
     Password = 'password',
     EMail = 'email',
     Url = 'url',
-    Telephone = 'tel'
+    Telephone = 'tel',
+    Dropdown = 'dropdown'
 }
 
-const ICON_NAME_PASSWORD_VISIBLE = 'default';
-const ICON_NAME_PASSWORD_HIDDEN = 'default';
+export enum MTextFieldMode {
+    Regular = 'text',
+    Dropdown = 'dropdown'
+}
+
+const ICON_NAME_PASSWORD_VISIBLE: string = 'default';
+const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
 
 @WithRender
 @Component({
@@ -27,8 +33,12 @@ export class MTextField extends ModulVue {
 
     @Prop({ default: MTextFieldType.Text })
     public type: MTextFieldType;
+    @Prop({ default: MTextFieldMode.Regular })
+    public mode: MTextFieldMode;
     @Prop({ default: '' })
     public value: string;
+    @Prop({ default: true })
+    public iconPassword: boolean;
     @Prop()
     public label: string;
     @Prop({ default: '' })
@@ -46,19 +56,26 @@ export class MTextField extends ModulVue {
 
     public componentName: string = TEXT_FIELD_NAME;
 
-    private propValue: string = '';
-    private propIconName: string;
-    private propIconDescription: string = '';
-    private typeIsPassword: boolean = false;
-    private isDefaultTextEmpty: boolean = false;
-    private focusActive: boolean = false;
-    private isUpdating: number;
+    private internalType: MTextFieldType;
+    private internalValue: string = '';
+    private iconNamePassword: string = '';
+    private iconDescriptionPassword: string = '';
+    private internalPasswordIsShow: boolean = false;
+    private valueIsUpdating: number;
+    private internalIsFocus: boolean = false;
 
-    private iconDescriptionPasswordShow: string = this.$i18n.translate('m-text-field:password-show');
-    private iconDescriptionPasswordHide: string = this.$i18n.translate('m-text-field:password-hide');
+    private iconDescriptionShowPassword: string = this.$i18n.translate('m-text-field:show-password');
+    private iconDescriptionHidePassword: string = this.$i18n.translate('m-text-field:hide-password');
 
     protected beforeMount(): void {
+        this.propType = this.type;
         this.propValue = this.value;
+        this.passwordIsShow = this.internalPasswordIsShow;
+    }
+
+    @Watch('type')
+    private typeChanged(type: MTextFieldType): void {
+        this.propType = type;
     }
 
     @Watch('value')
@@ -66,31 +83,23 @@ export class MTextField extends ModulVue {
         this.propValue = this.value;
     }
 
-    @Watch('propValue')
-    private propValueChanged(value: string): void {
-        // Delayed $emit to limit event fired
-        if (this.isUpdating) {
-            clearTimeout(this.isUpdating);
+    private onFocus(event): void {
+        if (!this.isFocus) {
+            this.isFocus = !this.isFocus;
         }
-
-        this.isUpdating = window.setTimeout(
-            () => this.$emit('valueChanged', this.propValue)
-            , 300);
     }
 
-    private onFocus(event): void {
-        this.focusActive = !this.as<InputStateMixin>().isDisabled;
-        if (!this.as<InputStateMixin>().isDisabled && !this.forceFocus) {
+    private onClick(event) {
+        if (!this.isFocus) {
+            this.isFocus = !this.isFocus;
+        }
+        if (this.isFocus) {
             (this.$refs.input as HTMLElement).focus();
-            this.$emit('focus', event, this.propValue);
         }
     }
 
     private onBlur(event): void {
-        this.focusActive = this.as<InputStateMixin>().isDisabled;
-        if (!this.as<InputStateMixin>().isDisabled && !this.forceFocus) {
-            this.$emit('blur', event, this.propValue);
-        }
+        this.isFocus = false;
     }
 
     private onKeyup(event): void {
@@ -99,38 +108,77 @@ export class MTextField extends ModulVue {
         }
     }
 
-    private onClick(event): void {
-        if (!this.as<InputStateMixin>().isDisabled) {
-            this.$emit('click', event, this.propValue);
+    private togglePasswordVisibility(event): void {
+        this.passwordIsShow = !this.passwordIsShow;
+    }
+
+    private set propType(type: MTextFieldType) {
+        this.internalType = type == MTextFieldType.Password || type == MTextFieldType.EMail || type == MTextFieldType.Url ||
+            type == MTextFieldType.Telephone ? type : MTextFieldType.Text;
+        this.setType(this.internalType);
+    }
+
+    private get propType(): MTextFieldType {
+        return this.internalType;
+    }
+
+    private setType(type: MTextFieldType): void {
+        if (this.propEditable) {
+            this.$nextTick(() => {
+                (this.$refs.input as HTMLElement).setAttribute('type', type);
+            });
         }
     }
 
-    private onClickIcon(event): void {
-        this.focusActive = !this.as<InputStateMixin>().isDisabled;
-        if (this.editable) {
-            (this.$refs.input as HTMLElement).focus();
+    private set propValue(value: string) {
+        this.internalValue = this.hasValueSlot && this.propType != MTextFieldType.Password ? 'hasValueSlot' : value;
+
+        // Delayed $emit to limit event fired
+        if (this.valueIsUpdating) {
+            clearTimeout(this.valueIsUpdating);
         }
-        if (this.propType == MTextFieldType.Password) {
-            if (this.typeIsPassword) {
-                this.setType(MTextFieldType.Text);
-                this.typeIsPassword = false;
-                this.propIconDescription = this.iconDescriptionPasswordHide;
-                this.propIconName = ICON_NAME_PASSWORD_HIDDEN;
-            } else {
-                this.setType(MTextFieldType.Password);
-                this.typeIsPassword = true;
-                this.propIconDescription = this.iconDescriptionPasswordShow;
-                this.propIconName = ICON_NAME_PASSWORD_VISIBLE;
-            }
-        }
+
+        this.valueIsUpdating = window.setTimeout(() => {
+            this.$emit('valueChanged', this.internalValue);
+        }, 300);
     }
 
-    private onChange(event) {
-        this.$emit('change', event, this.propValue);
+    private get propValue(): string {
+        return this.internalValue;
     }
 
     private get valueIsEmpty(): boolean {
         return String(this.propValue).length == 0;
+    }
+
+    private set isFocus(focus: boolean) {
+        this.internalIsFocus = this.as<InputStateMixin>().isDisabled ? false : focus;
+        if (this.internalIsFocus) {
+            this.$emit('focus');
+        } else {
+            this.$emit('blur');
+        }
+    }
+
+    private get isFocus(): boolean {
+        return this.internalIsFocus;
+    }
+
+    private set passwordIsShow(show: boolean) {
+        this.internalPasswordIsShow = this.type == MTextFieldType.Password ? show : false;
+        if (this.internalPasswordIsShow) {
+            this.iconDescriptionPassword = this.iconDescriptionHidePassword;
+            this.iconNamePassword = ICON_NAME_PASSWORD_HIDDEN;
+            this.setType(MTextFieldType.Text);
+        } else {
+            this.iconDescriptionPassword = this.iconDescriptionShowPassword;
+            this.iconNamePassword = ICON_NAME_PASSWORD_VISIBLE;
+            this.setType(MTextFieldType.Password);
+        }
+    }
+
+    private get passwordIsShow(): boolean {
+        return this.internalPasswordIsShow;
     }
 
     private get hasDefaultText(): boolean {
@@ -141,34 +189,24 @@ export class MTextField extends ModulVue {
         return this.isFocus;
     }
 
-    private get isFocus(): boolean {
-        let focus: boolean = this.forceFocus ? true : this.focusActive;
-        if (focus) {
-            this.$emit('focus');
-        } else {
-            this.$emit('blur');
+    private get modeIsDropdown(): boolean {
+        if (this.mode == MTextFieldMode.Dropdown) {
+            this.propType = MTextFieldType.Text;
+            return true;
         }
-        return focus;
+        return false;
     }
 
-    private setType(type: string): void {
-        if (this.editable) {
-            // Set attribute type on input ref
-            this.$nextTick(() => {
-                (this.$refs.input as HTMLElement).setAttribute('type', type);
-            });
-        }
+    private get propIconPassword(): boolean {
+        return this.propType == MTextFieldType.Password && !this.as<InputStateMixin>().isDisabled ? this.iconPassword : false;
     }
 
-    private get propType(): MTextFieldType {
-        let type: MTextFieldType = this.type == MTextFieldType.Password || this.type == MTextFieldType.EMail || this.type == MTextFieldType.Url ||
-                this.type == MTextFieldType.Telephone ? this.type : MTextFieldType.Text;
-        if (type == MTextFieldType.Password) {
-            this.typeIsPassword = true;
-            this.propIconDescription = this.iconDescriptionPasswordShow;
-        }
-        this.setType(type);
-        return type;
+    private get propEditable(): boolean {
+        return this.hasValueSlot && this.propType != MTextFieldType.Password ? false : this.editable;
+    }
+
+    private get hasValueSlot(): boolean {
+        return !!this.$slots.value;
     }
 
     private get hasLabel(): boolean {
@@ -176,8 +214,7 @@ export class MTextField extends ModulVue {
     }
 
     private get hasIcon(): boolean {
-        this.propIconName = this.propType == MTextFieldType.Password ? ICON_NAME_PASSWORD_VISIBLE : this.iconName;
-        return this.propIconName != '';
+        return this.iconName != '' && !this.as<InputStateMixin>().isDisabled;
     }
 }
 
