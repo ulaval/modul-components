@@ -183,7 +183,9 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     public get visible(): boolean {
         let isVisible: boolean = false;
 
-        if (!this.forceHide && (this.filter == '' || this.filter == normalizeString(this.propLabel) || normalizeString(this.propLabel).match(this.filter))) {
+        if (!this.forceHide &&
+            (this.filter == '' || this.filter == normalizeString(this.propLabel) || normalizeString(this.propLabel).match(this.filter)) &&
+            (!this.propInactif || (this.root && (this.root as MDropdownInterface).nbItemsVisible != 0))) {
             isVisible = true;
         }
 
