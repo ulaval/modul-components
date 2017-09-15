@@ -317,38 +317,48 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
-            let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
-            el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
-            el.style.transition = DROPDOWN_STYLE_TRANSITION;
-            el.style.overflowY = 'hidden';
-            el.style.maxHeight = '0';
-            el.style.width = this.$el.clientWidth + 'px';
-            setTimeout(() => {
-                el.style.maxHeight = height + 'px';
+            if (this.as<MediaQueriesMixin>().isMqMinS) {
+                let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
+                el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+                el.style.transition = DROPDOWN_STYLE_TRANSITION;
+                el.style.overflowY = 'hidden';
+                el.style.maxHeight = '0';
+                el.style.width = this.$el.clientWidth + 'px';
+                setTimeout(() => {
+                    el.style.maxHeight = height + 'px';
+                    done();
+                }, 0);
+            } else {
                 done();
-            }, 0);
+            }
         });
 
     }
 
     private transitionAfterEnter(el: HTMLElement): void {
-        setTimeout(() => {
-            el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
-            el.style.overflowY = 'auto';
-        }, 300);
+        if (this.as<MediaQueriesMixin>().isMqMinS) {
+            setTimeout(() => {
+                el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
+                el.style.overflowY = 'auto';
+            }, 300);
+        }
     }
 
     private transitionLeave(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
-            let height: number = el.clientHeight;
-            el.style.width = this.$el.clientWidth + 'px';
-            el.style.maxHeight = height + 'px';
-            el.style.overflowY = 'hidden';
-            el.style.maxHeight = '0';
-            setTimeout(() => {
-                el.style.maxHeight = 'none';
+            if (this.as<MediaQueriesMixin>().isMqMinS) {
+                let height: number = el.clientHeight;
+                el.style.width = this.$el.clientWidth + 'px';
+                el.style.maxHeight = height + 'px';
+                el.style.overflowY = 'hidden';
+                el.style.maxHeight = '0';
+                setTimeout(() => {
+                    el.style.maxHeight = 'none';
+                    done();
+                }, 300);
+            } else {
                 done();
-            }, 300);
+            }
         });
     }
 }
