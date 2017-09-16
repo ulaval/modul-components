@@ -80,7 +80,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         background: $m-color--white;
     }
 
-    &.m--is-icon {
+    &.m--is-mode-icon {
         transition: color $m-transition-duration ease;
         display: inline-flex;
         align-items: center;
@@ -92,7 +92,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
         min-width: $m-touch-size;
         min-height: $m-touch-size;
         background: transparent;
-        color: $m-color--grey-dark;
+        color: $m-color--grey-darker;
 
         &:hover {
             color: $m-color--text;
@@ -132,7 +132,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
     }
 
     &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
-        &.m--is-icon {
+        &.m--is-mode-icon {
             &:active,
             &:focus {
                 &::after {
