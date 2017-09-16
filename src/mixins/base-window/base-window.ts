@@ -187,6 +187,7 @@ export class BaseWindow extends ModulVue {
         return new Promise((resolve, reject) => {
             this.visible = false;
             this.$modul.backdropElement.style.zIndex = String(this.$modul.windowZIndex - 1);
+            this.$emit('startClose');
             if (this.$modul.windowCount == 1 && this.$modul.hasBackdrop) {
                 this.$modul.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
                 this.$modul.setBackdropOpacity('0');

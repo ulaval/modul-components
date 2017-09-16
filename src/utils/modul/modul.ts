@@ -31,7 +31,7 @@ export class Modul {
     public backdropId: string = '';
     public windowZIndex: number = Z_INDEZ_DEFAULT;
     public hasBackdrop: boolean = false;
-    private backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
+    public backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
 
     private lastScrollPosition: number = 0;
     private doneScrollEvent: any;
