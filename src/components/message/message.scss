@@ -9,7 +9,7 @@ $m-message-size: 22px;
             border: 1px solid $m-color--success;
 
             .m-message__icon {
-                background-color: $m-color--success-lightest;
+                background: $m-color--success-lightest;
                 border-color: $m-color--success;
                 color: $m-color--success;
             }
@@ -23,7 +23,7 @@ $m-message-size: 22px;
             border: 1px solid $m-color--interactive;
 
             .m-message__icon {
-                background-color: $m-color--interactive-lightest;
+                background: $m-color--information;
                 border-color: $m-color--interactive;
                 color: $m-color--interactive;
             }
@@ -37,7 +37,7 @@ $m-message-size: 22px;
             border: 1px solid $m-color--warning;
 
             .m-message__icon {
-                background-color: $m-color--warning-lightest;
+                background: $m-color--warning-lightest;
                 border-color: $m-color--warning;
                 color: $m-color--warning;
             }
@@ -51,7 +51,7 @@ $m-message-size: 22px;
             border: 1px solid $m-color--error;
 
             .m-message__icon {
-                background-color: $m-color--error-lightest;
+                background: $m-color--error-lightest;
                 border-color: $m-color--error;
                 color: $m-color--error;
             }
@@ -103,25 +103,25 @@ $m-message-size: 22px;
     &.m--is-light {
         &.m--is-success {
             .m-message__wrap {
-                background-color: $m-color--success-lightest;
+                background: $m-color--success-lightest;
             }
         }
 
         &.m--is-information {
             .m-message__wrap {
-                background-color: $m-color--interactive-lightest;
+                background: $m-color--information;
             }
         }
 
         &.m--is-warning {
             .m-message__wrap {
-                background-color: $m-color--warning-lightest;
+                background: $m-color--warning-lightest;
             }
         }
 
         &.m--is-error {
             .m-message__wrap {
-                background-color: $m-color--error-lightest;
+                background: $m-color--error-lightest;
             }
         }
 

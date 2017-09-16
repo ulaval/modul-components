@@ -165,15 +165,17 @@ export class MTextField extends ModulVue {
     }
 
     private set passwordIsShow(show: boolean) {
-        this.internalPasswordIsShow = this.type == MTextFieldType.Password ? show : false;
-        if (this.internalPasswordIsShow) {
-            this.iconDescriptionPassword = this.iconDescriptionHidePassword;
-            this.iconNamePassword = ICON_NAME_PASSWORD_HIDDEN;
-            this.setType(MTextFieldType.Text);
-        } else {
-            this.iconDescriptionPassword = this.iconDescriptionShowPassword;
-            this.iconNamePassword = ICON_NAME_PASSWORD_VISIBLE;
-            this.setType(MTextFieldType.Password);
+        this.internalPasswordIsShow = show;
+        if (this.type == MTextFieldType.Password) {
+            if (this.internalPasswordIsShow) {
+                this.iconDescriptionPassword = this.iconDescriptionHidePassword;
+                this.iconNamePassword = ICON_NAME_PASSWORD_HIDDEN;
+                this.setType(MTextFieldType.Text);
+            } else {
+                this.iconDescriptionPassword = this.iconDescriptionShowPassword;
+                this.iconNamePassword = ICON_NAME_PASSWORD_VISIBLE;
+                this.setType(MTextFieldType.Password);
+            }
         }
     }
 
