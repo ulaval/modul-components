@@ -210,7 +210,7 @@ export class MTextField extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return this.label == '' || this.label == undefined ? false : true;
+        return (this.label == '' || this.label == undefined ) && !this.as<InputStateMixin>().isDisabled ? false : true;
     }
 
     private get hasIcon(): boolean {

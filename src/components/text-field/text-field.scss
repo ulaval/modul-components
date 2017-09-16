@@ -1,5 +1,5 @@
 @import 'abstracts/variables';
-$m-text-field--color-helper: $m-color--grey-darker !default;
+$m-text-field--color-default-text: $m-color--grey-darker !default;
 $m-text-field--color-focus: $m-color--interactive !default;
 $m-text-field--color-error: $m-color--error !default;
 $m-text-field--color-valid: $m-color--success !default;
@@ -12,7 +12,6 @@ $m-text-field--margin: $m-margin--s !default;
     flex-direction: column;
     outline: none;
     min-width: 130px;
-    padding-top: 16px; // Magic number
 
     &.m--is-focus {
         &:not(.m--is-disabled) {
@@ -25,11 +24,21 @@ $m-text-field--margin: $m-margin--s !default;
                     width: 100%;
                 }
 
-                &__icon-dropdown {
-                    transform: rotate(-180deg);
+                &__icon {
+                    &.m-button.m--is-mode-icon {
+                        color: $m-color--interactive;
+                    }
+
+                    &.m--is-dropdown {
+                        transform: rotate(-180deg);
+                    }
                 }
             }
         }
+    }
+
+    &.m--has-label {
+        padding-top: 16px; // Magic number
     }
 
     &.m--not-editable {
@@ -99,6 +108,26 @@ $m-text-field--margin: $m-margin--s !default;
         }
     }
 
+    &:not(.m--is-focus) {
+        &:hover {
+            .m-text-field__icon {
+                &.m-button.m--is-mode-icon {
+                    color: $m-color--text;
+                }
+            }
+        }
+
+        &.m--no-value {
+            &:hover {
+                .m-text-field__input-container {
+                    &::before {
+                        border-color: $m-color--text;
+                    }
+                }
+            }
+        }
+    }
+
     &:not(.m--is-focus),
     &.m--is-disabled {
         &.m--no-value {
@@ -108,10 +137,14 @@ $m-text-field--margin: $m-margin--s !default;
                     font-size: $m-font-size--l;
                 }
 
-                &__icon {
-                    &-disabled {
-                        font-size: 12px;
+                &__input-container {
+                    &::before {
+                        border-color: $m-color--grey-darker;
                     }
+                }
+
+                &__icon.m--is-disabled {
+                    font-size: 12px;
                 }
             }
         }
@@ -167,10 +200,10 @@ $m-text-field--margin: $m-margin--s !default;
                 display: block;
             }
 
-
             &::before {
+                transition: border-color $m-transition-duration ease;
                 width: 100%;
-                border-bottom: 1px solid #000;
+                border-bottom: 1px solid $m-color--text;
             }
 
             &::after {
@@ -184,7 +217,7 @@ $m-text-field--margin: $m-margin--s !default;
         &__default-text {
             transition: opacity $m-transition-duration ease;
             opacity: 1;
-            color: $m-text-field--color-helper;
+            color: $m-text-field--color-default-text;
 
             &.m--is-transparent {
                 opacity: 0;
@@ -210,30 +243,22 @@ $m-text-field--margin: $m-margin--s !default;
     }
 
     &__icon {
-        &,
-        &-password,
-        &-dropdown,
-        &-disabled {
-            stroke-width: 2px;
-            z-index: 1;
+        stroke-width: 2px;
+        z-index: 1;
 
-            &.m-button {
-                min-height: 20px;
-                min-width: 26px;
-            }
+        &.m-button {
+            min-height: 20px;
+            min-width: 26px;
         }
 
-        &-disabled {
+        &.m--is-disabled {
             margin-right: $m-margin--s;
         }
 
-        &-dropdown {
-            &.m-button.m-button {
-                transition: transform 0.3s ease;
-                font-size: 5px;
-                fill: $m-color--black;
+        &.m--is-dropdown {
+            &.m-button.m--is-mode-icon {
+                transition: transform $m-transition-duration ease, color $m-transition-duration ease;
             }
-
         }
     }
 }

@@ -6,10 +6,11 @@
           'm--is-valid' : isValid,
           'm--no-value' : valueIsEmpty,
           'm--has-icon' : hasIcon,
-          'm--is-mode-dropdown': modeIsDropdown },
+          'm--is-mode-dropdown': modeIsDropdown,
+          'm--has-label': hasLabel },
           'm--is-type-' + propType ]"
       @click="onClick">
-    <label class="m-text-field__label" ref="label" v-if="hasLabel || isDisabled"><m-icon name="default" class="m-text-field__icon-disabled" v-if="isDisabled"></m-icon>{{ label }}</label>
+    <label class="m-text-field__label" ref="label" v-if="hasLabel"><m-icon name="default" class="m-text-field__icon m--is-disabled" v-if="isDisabled"></m-icon>{{ label }}</label>
     <div class="m-text-field__input-container">
         <input class="m-text-field__input"
             ref="input"
@@ -33,8 +34,8 @@
             <div class="m-text-field__input__default-text" :class="{ 'm--is-transparent': !isDefaultTextVisible }" v-if="hasDefaultText">- {{ defaultText }} -</div>
         </div>
         <m-button mode="icon" :icon-name="iconName" icon-size="13px" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>
-        <m-button mode="icon" :icon-name="iconNamePassword" icon-size="13px" class="m-text-field__icon-password" v-if="propIconPassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-button>
-        <m-button mode="icon" icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon-dropdown" v-if="modeIsDropdown && !isDisabled">test</m-button>
+        <m-button mode="icon" :icon-name="iconNamePassword" icon-size="13px" class="m-text-field__icon m--is-password" v-if="propIconPassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-button>
+        <m-button mode="icon" icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon m--is-dropdown" v-if="modeIsDropdown && !isDisabled">test</m-button>
     </div>
     <m-validation-message
         :state="propState"
