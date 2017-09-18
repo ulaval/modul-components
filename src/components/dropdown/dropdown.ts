@@ -11,13 +11,6 @@ import { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
-export enum DropdownnStateValue {
-    Default = 'default',
-    Disabled = 'disabled',
-    Error = 'error',
-    Valid = 'valid'
-}
-
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 198;
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
@@ -35,8 +28,8 @@ export interface MDropdownInterface extends Vue {
     currentElement: SelectedValue;
     addAction: boolean;
     nbItemsVisible: number;
+    isDisabled: boolean;
     multiple: boolean;
-    disabled: boolean;
     defaultFirstElement: boolean;
     setFocus(item: Vue): void;
     toggleDropdown(open: boolean): void;
@@ -62,8 +55,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop({ default: false })
     public open: boolean;
     @Prop({ default: false })
-    public disabled: boolean;
-    @Prop({ default: false })
     public editable: boolean;
     @Prop({ default: false })
     public multiple: boolean;
@@ -75,10 +66,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public textNoData: string;
     @Prop()
     public textNoMatch: string;
-    @Prop({ default: DropdownnStateValue.Default })
-    public state: DropdownnStateValue;
 
     public componentName: string = DROPDOWN_NAME;
+    public isDisabled: boolean;
 
     public items: Vue[] = [];
     public selected: Array<SelectedValue> = [];
@@ -221,21 +211,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return show;
     }
 
-    private get propState(): DropdownnStateValue {
-        let state: DropdownnStateValue =
-            this.state == DropdownnStateValue.Disabled || this.state == DropdownnStateValue.Error || this.state == DropdownnStateValue.Valid ? this.state : DropdownnStateValue.Default;
-        // if (state != DropdownnStateValue.Disabled && this.propErrorMessage != '') {
-        //     state = DropdownnStateValue.Error;
-        // } else if (state != DropdownnStateValue.Disabled && this.propValidMessage != '') {
-        //     state = DropdownnStateValue.Valid;
-        // }
-        return state;
-    }
-
-    public get isDisabled(): boolean {
-        return this.propState == DropdownnStateValue.Disabled;
-    }
-
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {
             for (let item of this.items) {
@@ -342,38 +317,48 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
-            let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
-            el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
-            el.style.transition = DROPDOWN_STYLE_TRANSITION;
-            el.style.overflowY = 'hidden';
-            el.style.maxHeight = '0';
-            el.style.width = this.$el.clientWidth + 'px';
-            setTimeout(() => {
-                el.style.maxHeight = height + 'px';
+            if (this.as<MediaQueriesMixin>().isMqMinS) {
+                let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
+                el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+                el.style.transition = DROPDOWN_STYLE_TRANSITION;
+                el.style.overflowY = 'hidden';
+                el.style.maxHeight = '0';
+                el.style.width = this.$el.clientWidth + 'px';
+                setTimeout(() => {
+                    el.style.maxHeight = height + 'px';
+                    done();
+                }, 0);
+            } else {
                 done();
-            }, 0);
+            }
         });
 
     }
 
     private transitionAfterEnter(el: HTMLElement): void {
-        setTimeout(() => {
-            el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
-            el.style.overflowY = 'auto';
-        }, 300);
+        if (this.as<MediaQueriesMixin>().isMqMinS) {
+            setTimeout(() => {
+                el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
+                el.style.overflowY = 'auto';
+            }, 300);
+        }
     }
 
     private transitionLeave(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
-            let height: number = el.clientHeight;
-            el.style.width = this.$el.clientWidth + 'px';
-            el.style.maxHeight = height + 'px';
-            el.style.overflowY = 'hidden';
-            el.style.maxHeight = '0';
-            setTimeout(() => {
-                el.style.maxHeight = 'none';
+            if (this.as<MediaQueriesMixin>().isMqMinS) {
+                let height: number = el.clientHeight;
+                el.style.width = this.$el.clientWidth + 'px';
+                el.style.maxHeight = height + 'px';
+                el.style.overflowY = 'hidden';
+                el.style.maxHeight = '0';
+                setTimeout(() => {
+                    el.style.maxHeight = 'none';
+                    done();
+                }, 300);
+            } else {
                 done();
-            }, 300);
+            }
         });
     }
 }

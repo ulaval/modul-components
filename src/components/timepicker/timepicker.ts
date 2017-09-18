@@ -125,7 +125,7 @@ export class MTimepicker extends ModulVue {
         } else {
             this.error = this.$i18n.translate('m-timepicker:error-format');
         }
-        this.$children[0]['closePopper']();
+        this.isOpen = false;
     }
 
     private onOpen(): void {
@@ -185,7 +185,7 @@ export class MTimepicker extends ModulVue {
         this.selectedHour = this.tempHour;
         this.selectedMinute = this.tempMinute;
         this.emitChange(this.selectedHour, this.selectedMinute);
-        this.$children[0]['closePopper']();
+        this.isOpen = false;
     }
 
     private emitChange(hour: number, minute: number): void {

@@ -3,10 +3,25 @@
 .m-button-group {
     padding: 0;
 
-    &__wrap {
-        &.m--is-inline {
-            display: flex;
-            margin: 0;
+    &:not(.m--is-inline) {
+        .m-button-group__wrap {
+            flex-direction: column;
         }
+    }
+
+    &.m--is-full-size {
+        &,
+        .m-button-group__wrap {
+            width: 100%;
+        }
+    }
+
+    &,
+    &__wrap {
+        display: inline-flex;
+    }
+
+    &__wrap {
+        margin: 0;
     }
 }

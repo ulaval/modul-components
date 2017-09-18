@@ -7,6 +7,7 @@
              :leave="transitionLeave"
              :padding-header="false"
              :padding-body="false"
+             :focus-management="!propEditable"
              width="100%"
              @open="toggleDropdown(true)"
              @close="toggleDropdown(false)">
@@ -36,11 +37,11 @@
             <slot name="footer"></slot>
         </template>
         <m-text-field ref="mDropdownValue"
+                      mode="dropdown"
                       :label="label"
                       :value="selectedText"
                       :state="propState"
                       :editable="propEditable"
-                      :disabled="disabled"
                       :force-focus="propOpen"
                       :default-text="defaultText"
                       @valueChanged="filterDropdown($event)"

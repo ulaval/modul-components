@@ -1,6 +1,8 @@
 {
     "m-text-field": {
-        "password-show": "Afficher le mot de passe",
-        "password-hide": "Cacher le mot de passe"
+        "show-password": "Afficher le mot de passe",
+        "hide-password": "Cacher le mot de passe",
+        "open-dropdown": "Afficher le contenu de la liste déroulante",
+        "close-dropdown": "Cacher le contenu de la liste déroulante"
     }
 }

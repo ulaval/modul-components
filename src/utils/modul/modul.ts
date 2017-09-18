@@ -12,9 +12,10 @@ const BACKDROP_STYLE_OPACITY: string = '0';
 const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.7';
 
 const Z_INDEZ_DEFAULT: number = 100;
+const DONE_EVENT_DURATION: number = 250;
 
-export class MWindow {
-    public bodyEl: HTMLElement = document.body;
+export class Modul {
+    public bodyEl: HTMLElement = document.body || document.documentElement;
     public bodyStyle: any = this.bodyEl.style;
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
     public event = new Vue();
@@ -30,27 +31,21 @@ export class MWindow {
     public backdropId: string = '';
     public windowZIndex: number = Z_INDEZ_DEFAULT;
     public hasBackdrop: boolean = false;
-    private backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
+    public backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
 
     private lastScrollPosition: number = 0;
+    private doneScrollEvent: any;
+    private doneResizeEvent: any;
 
     constructor() {
         this.scrollPosition = window.scrollY;
         window.addEventListener('click', (e: MouseEvent) => this.onClick(e));
         window.addEventListener('scroll', (e) => this.onScroll(e));
-        window.addEventListener('resize', (e) => this.onRisize(e));
+        window.addEventListener('resize', (e) => this.onResize(e));
     }
 
     public onClick(event: MouseEvent): void {
         this.event.$emit('click', event);
-    }
-
-    public onRisize(event): void {
-        this.event.$emit('resize', event);
-    }
-
-    public elementIsClick(element: HTMLElement, eventTarget: HTMLElement): boolean {
-        return element.contains(eventTarget);
     }
 
     public onScroll(event): void {
@@ -64,6 +59,20 @@ export class MWindow {
         }
         this.lastScrollPosition = this.scrollPosition;
         this.event.$emit('scroll', event);
+
+        clearTimeout(this.doneScrollEvent);
+        this.doneScrollEvent = setTimeout(() => {
+            this.event.$emit('scrollDone', event);
+        }, DONE_EVENT_DURATION);
+    }
+
+    public onResize(event): void {
+        this.event.$emit('resize', event);
+
+        clearTimeout(this.doneResizeEvent);
+        this.doneResizeEvent = setTimeout(() => {
+            this.event.$emit('resizeDone', event);
+        }, DONE_EVENT_DURATION);
     }
 
     public addWindow(windowId): void {
@@ -91,6 +100,10 @@ export class MWindow {
         // let windowPosition: number = Number(this.getArrWindowData(windowId)['windowPosition']);
         // this.arrWindow.splice(windowPosition, 1);
         this.setBackdropZIndex();
+    }
+
+    public updateAfterResize(): void {
+        this.event.$emit('updateAfterResize');
     }
 
     public createBackdrop(targetElement: HTMLElement = this.bodyEl): void {
@@ -182,12 +195,12 @@ export class MWindow {
     }
 }
 
-const MMWindowPlugin: PluginObject<any> = {
+const ModulPlugin: PluginObject<any> = {
     install(v, options) {
-        let mWindow = new MWindow();
-        (v as any).$mWindow = mWindow;
-        (v.prototype as any).$mWindow = mWindow;
+        let modul = new Modul();
+        (v as any).$modul = modul;
+        (v.prototype as any).$modul = modul;
     }
 };
 
-export default MMWindowPlugin;
+export default ModulPlugin;

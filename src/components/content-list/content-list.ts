@@ -8,8 +8,8 @@ import { CONTENT_LIST_NAME } from '../component-names';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 
 export interface MContentListInterface extends ModulVue {
-    deletedItem: any;
     sizeSmall: boolean;
+    deleteChildElement(index: any): void;
 }
 
 @WithRender
@@ -18,9 +18,11 @@ export interface MContentListInterface extends ModulVue {
 })
 export class MContentList extends ModulVue implements MContentListInterface {
     public componentName = CONTENT_LIST_NAME;
-
-    public deletedItem = '';
     public sizeSmall: boolean;
+
+    public deleteChildElement(index): void {
+        this.$emit('ItemDeleted', index);
+    }
 
     protected mounted(): void {
         this.isEqMaxXSChanged(this.as<ElementQueries>().isEqMaxXS);
@@ -36,11 +38,6 @@ export class MContentList extends ModulVue implements MContentListInterface {
             return true;
         }
         return false;
-    }
-
-    @Watch('deletedItem')
-    private deletedChildElement(value): void {
-        this.$emit('deletedItem', this.deletedItem);
     }
 }
 

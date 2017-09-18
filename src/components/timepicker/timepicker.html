@@ -1,4 +1,4 @@
-<m-popup class="m-timepicker" @open="onOpen" @close="onClose" :options="options" :disabled="disabled">
+<m-popup class="m-timepicker" :open="isOpen" @open="onOpen" @close="onClose" :options="options" :disabled="disabled">
     <m-text-field icon-name="clock" :force-focus="isOpen" :value="formattedTime" @change="onChange" :error="error" :placeholder="placeholder"
         :icon-description="isOpen ? closeTimeSelectorDesc : openTimeSelectorDesc"></m-text-field>
     <article class="m-timepicker__article" slot="body">

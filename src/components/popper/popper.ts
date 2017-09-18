@@ -41,6 +41,8 @@ export class MPopper extends ModulVue {
     public classNamePortalTarget: string;
     @Prop({ default: true })
     public closeOnClickOutside: boolean;
+    @Prop({ default: true })
+    public focusManagement: boolean;
     @Prop()
     public beforeEnter: any;
     @Prop()
@@ -78,14 +80,16 @@ export class MPopper extends ModulVue {
 
     protected mounted(): void {
         this.propOpen = this.open;
-        this.$mWindow.event.$on('scroll', this.update);
-        this.$mWindow.event.$on('resize', this.update);
+        this.$modul.event.$on('scroll', this.update);
+        this.$modul.event.$on('resize', this.update);
+        this.$modul.event.$on('updateAfterResize', this.update);
     }
 
     protected beforeDestroy(): void {
-        this.$mWindow.event.$off('click', this.onClickOutside);
-        this.$mWindow.event.$off('scroll', this.update);
-        this.$mWindow.event.$off('resize', this.update);
+        this.$modul.event.$off('click', this.onClickOutside);
+        this.$modul.event.$off('scroll', this.update);
+        this.$modul.event.$off('resize', this.update);
+        this.$modul.event.$off('updateAfterResize', this.update);
         this.destroyPopper();
         document.body.removeChild(this.getPortalTargetEl());
     }
@@ -103,14 +107,14 @@ export class MPopper extends ModulVue {
                     this.$emit('open');
                     // Keep the timer to allow an element outside the component to open the popper
                     setTimeout(() => {
-                        this.$mWindow.event.$on('click', this.onClickOutside);
+                        this.$modul.event.$on('click', this.onClickOutside);
                     }, 0);
                 }
             } else {
                 if (this.internalOpen) {
                     this.internalOpen = false;
                     this.closePopper();
-                    this.$mWindow.event.$off('click', this.onClickOutside);
+                    this.$modul.event.$off('click', this.onClickOutside);
                     this.$emit('close');
                 }
             }
@@ -142,7 +146,7 @@ export class MPopper extends ModulVue {
                 } else {
                     this.popper.update();
                 }
-                portalTargetEl.style.zIndex = String(this.$mWindow.windowZIndex);
+                portalTargetEl.style.zIndex = String(this.$modul.windowZIndex);
             });
         }
     }
@@ -155,10 +159,12 @@ export class MPopper extends ModulVue {
     }
 
     private setFastFocusToElement(el: HTMLElement): void {
-        el.setAttribute('tabindex', '0');
-        el.focus();
-        el.blur();
-        el.removeAttribute('tabindex');
+        if (this.focusManagement) {
+            el.setAttribute('tabindex', '0');
+            el.focus();
+            el.blur();
+            el.removeAttribute('tabindex');
+        }
     }
 
     private destroyPopper() {

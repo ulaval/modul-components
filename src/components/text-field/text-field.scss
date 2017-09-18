@@ -1,10 +1,10 @@
 @import 'abstracts/variables';
-$m-text-field--color-helper: $m-color--grey-darker !default;
+$m-text-field--color-default-text: $m-color--grey-darker !default;
 $m-text-field--color-focus: $m-color--interactive !default;
 $m-text-field--color-error: $m-color--error !default;
 $m-text-field--color-valid: $m-color--success !default;
 $m-text-field--color-disabled: $m-color--grey-darker !default;
-$m-text-field--margin: $m-padding--xs !default;
+$m-text-field--margin: $m-margin--s !default;
 
 .m-text-field {
     position: relative;
@@ -12,7 +12,6 @@ $m-text-field--margin: $m-padding--xs !default;
     flex-direction: column;
     outline: none;
     min-width: 130px;
-    padding-top: 16px; // Magic number
 
     &.m--is-focus {
         &:not(.m--is-disabled) {
@@ -21,11 +20,25 @@ $m-text-field--margin: $m-padding--xs !default;
                     color: $m-text-field--color-focus;
                 }
 
-                &__input-line {
+                &__input-container::after {
                     width: 100%;
+                }
+
+                &__icon {
+                    &.m-button.m--is-mode-icon {
+                        color: $m-color--interactive;
+                    }
+
+                    &.m--is-dropdown {
+                        transform: rotate(-180deg);
+                    }
                 }
             }
         }
+    }
+
+    &.m--has-label {
+        padding-top: 16px; // Magic number
     }
 
     &.m--not-editable {
@@ -51,19 +64,20 @@ $m-text-field--margin: $m-padding--xs !default;
             }
 
             &__input {
-                border-bottom-style: dashed;
-                border-color: $m-text-field--color-disabled;
                 background: none;
+
+                &-container::before {
+                    border-bottom-style: dashed;
+                    border-color: $m-text-field--color-disabled;
+                }
             }
         }
     }
 
     &.m--has-error,
     &.m--is-valid {
-        .m-text-field__input {
-            &-line {
-                width: 100%;
-            }
+        .m-text-field__input-container::after {
+            width: 100%;
         }
     }
 
@@ -75,11 +89,9 @@ $m-text-field--margin: $m-padding--xs !default;
             }
         }
 
-        .m-text-field__input {
-            &-line {
-                width: 100%;
-                background: $m-text-field--color-error;
-            }
+        .m-text-field__input-container::after {
+            width: 100%;
+            background: $m-text-field--color-error;
         }
     }
 
@@ -91,17 +103,27 @@ $m-text-field--margin: $m-padding--xs !default;
             }
         }
 
-        .m-text-field__input {
-            &-line {
-                background: $m-text-field--color-valid;
-            }
+        .m-text-field__input-container::after {
+            background: $m-text-field--color-valid;
         }
     }
 
-    &.m-has-icon {
-        .m-text-field {
-            &__input {
-                padding-right: 30px;
+    &:not(.m--is-focus) {
+        &:hover {
+            .m-text-field__icon {
+                &.m-button.m--is-mode-icon {
+                    color: $m-color--text;
+                }
+            }
+        }
+
+        &.m--no-value {
+            &:hover {
+                .m-text-field__input-container {
+                    &::before {
+                        border-color: $m-color--text;
+                    }
+                }
             }
         }
     }
@@ -115,10 +137,14 @@ $m-text-field--margin: $m-padding--xs !default;
                     font-size: $m-font-size--l;
                 }
 
-                &__icon {
-                    &-disabled {
-                        font-size: 12px;
+                &__input-container {
+                    &::before {
+                        border-color: $m-color--grey-darker;
                     }
+                }
+
+                &__icon.m--is-disabled {
+                    font-size: 12px;
                 }
             }
         }
@@ -130,19 +156,13 @@ $m-text-field--margin: $m-padding--xs !default;
         }
     }
 
-    &__wrap {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-    }
-
     &__label {
         transition-property: color, top, font-size;
         transition-duration: $m-transition-duration--l;
         transition-timing-function: ease;
         position: absolute;
         top: 0;
-        z-index: 2;
+        z-index: 1;
         width: 100%;
         font-size: $m-font-size--s;
         font-weight: $m-font-weight--bold;
@@ -151,8 +171,7 @@ $m-text-field--margin: $m-padding--xs !default;
 
     &__input {
         position: relative;
-        z-index: 1;
-        width: 100%;
+        z-index: 2;
         outline: none;
         cursor: text;
         padding: 0 0 $m-text-field--margin 0;
@@ -162,27 +181,43 @@ $m-text-field--margin: $m-padding--xs !default;
         text-decoration: none;
         color: $m-color--text;
         border: none;
-        border-bottom: 1px solid #000;
         background: none;
 
-        &-line {
-            transition: width $m-transition-duration--l ease-in-out;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 1;
-            content: '';
-            display: block;
-            width: 0;
-            height: 2px;
-            background: $m-text-field--color-focus;
+        &-container {
+            position: relative;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+            &::before,
+            &::after {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 2;
+                content: '';
+                display: block;
+            }
+
+            &::before {
+                transition: border-color $m-transition-duration ease;
+                width: 100%;
+                border-bottom: 1px solid $m-color--text;
+            }
+
+            &::after {
+                transition: width $m-transition-duration--l ease-in-out;
+                width: 0;
+                height: 2px;
+                background: $m-text-field--color-focus;
+            }
         }
 
         &__default-text {
             transition: opacity $m-transition-duration ease;
             opacity: 1;
-            color: $m-text-field--color-helper;
+            color: $m-text-field--color-default-text;
 
             &.m--is-transparent {
                 opacity: 0;
@@ -194,6 +229,12 @@ $m-text-field--margin: $m-padding--xs !default;
             white-space: nowrap;
         }
 
+        &[type="password"] {
+            -webkit-text-security: disc;
+            letter-spacing: 2px; // Maguc number;
+            user-select: none;
+        }
+
         &.m--is-transparent {
             opacity: 0;
             width: 1px;
@@ -202,20 +243,22 @@ $m-text-field--margin: $m-padding--xs !default;
     }
 
     &__icon {
-        position: absolute;
-        z-index: 2;
-        bottom: 5px;
-        right: 0;
+        stroke-width: 2px;
+        z-index: 1;
 
         &.m-button {
             min-height: 20px;
-            min-width: 30px;
+            min-width: 26px;
         }
 
-        &,
-        &-disabled {
-            stroke-width: 2px;
-            font-size: 8px;
+        &.m--is-disabled {
+            margin-right: $m-margin--s;
+        }
+
+        &.m--is-dropdown {
+            &.m-button.m--is-mode-icon {
+                transition: transform $m-transition-duration ease, color $m-transition-duration ease;
+            }
         }
     }
 }

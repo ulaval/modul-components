@@ -15,7 +15,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     @Prop({ default: true })
     public enabled: boolean;
     @Prop({ default: false })
-    public fullsize: boolean;
+    public fullSize: boolean;
     @Prop({ default: true })
     public inline: boolean;
     @Prop({ default: MRadioPosition.Left })
@@ -23,6 +23,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
 
     public name: string = uuid.generate();
     private internalValue: string = '';
+    private internalWidth: number = 0;
 
     public getValue(): string {
         return this.model;

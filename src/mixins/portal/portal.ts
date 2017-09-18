@@ -27,42 +27,42 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public createBackdropEl(transitionDuration: string = '0.3s'): void {
-        if (!this.$mWindow.hasBackdrop) {
-            this.$mWindow.createBackdrop(this.$mWindow.bodyEl);
+        if (!this.$modul.hasBackdrop) {
+            this.$modul.createBackdrop(this.$modul.bodyEl);
         }
-        this.$mWindow.setBackdropTransitionDuration(transitionDuration);
+        this.$modul.setBackdropTransitionDuration(transitionDuration);
     }
 
     public appendBackdropAndPortalToBody(portalId: string, portalClassName: string, backdropTransitionDuration: string): void {
         this.ceratePortalEl(portalId, portalClassName);
-        this.$mWindow.addWindow(this.portalId);
-        this.portalEl.style.zIndex = String(this.$mWindow.windowZIndex);
+        this.$modul.addWindow(this.portalId);
+        this.portalEl.style.zIndex = String(this.$modul.windowZIndex);
         this.createBackdropEl(backdropTransitionDuration);
-        this.$mWindow.bodyEl.appendChild(this.portalEl);
+        this.$modul.bodyEl.appendChild(this.portalEl);
     }
 
     public appendPortalToBody(id: string, className: string): void {
         this.ceratePortalEl(id, className);
-        this.portalEl.style.zIndex = String(this.$mWindow.windowZIndex);
-        this.$mWindow.bodyEl.appendChild(this.portalEl);
+        this.portalEl.style.zIndex = String(this.$modul.windowZIndex);
+        this.$modul.bodyEl.appendChild(this.portalEl);
     }
 
     public removePortal(): void {
         let portalEl: HTMLElement = this.getPotalEl();
         if (portalEl) {
-            this.$mWindow.bodyEl.removeChild(portalEl);
+            this.$modul.bodyEl.removeChild(portalEl);
         }
     }
 
     public removeBackdropAndPortal(): void {
         let portalEl: HTMLElement = this.getPotalEl();
         if (portalEl) {
-            this.$mWindow.bodyEl.removeChild(portalEl);
-            this.$mWindow.deleteWindow(this.portalId);
+            this.$modul.bodyEl.removeChild(portalEl);
+            this.$modul.deleteWindow(this.portalId);
         }
     }
 
     private getPotalEl(): HTMLElement {
-        return this.$mWindow.bodyEl.querySelector('#' + this.portalId) as HTMLElement;
+        return this.$modul.bodyEl.querySelector('#' + this.portalId) as HTMLElement;
     }
 }

@@ -49,14 +49,16 @@ export class MFlexTemplate extends ModulVue {
 
     protected mounted(): void {
         this.propMenuOpen = this.menuOpen;
-        this.scrollPosition = this.$mWindow.scrollPosition;
+        this.scrollPosition = this.$modul.scrollPosition;
         this.$on('isEqMaxS', (value: boolean) => this.isEqMaxSChanged(value));
-        this.$mWindow.event.$on('scroll', this.onScroll);
         this.setHeaderHeight();
+        this.$modul.event.$on('scroll', this.onScroll);
+        this.$modul.event.$on('resizeDone', this.onResizeDone);
     }
 
     protected beforeDdestroy(): void {
-        this.$mWindow.event.$off('scroll', this.onScroll);
+        this.$modul.event.$off('scroll', this.onScroll);
+        this.$modul.event.$off('resizeDone', this.onResizeDone);
     }
 
     @Watch('menuOpen')
@@ -89,6 +91,12 @@ export class MFlexTemplate extends ModulVue {
         this.adjustDynamicHeader();
     }
 
+    private onResizeDone(e) {
+        this.setHeaderHeight();
+        this.adjustFixeMenu();
+        this.adjustDynamicHeader();
+    }
+
     private setHeaderHeight(): void {
         this.$nextTick(() => {
             if (this.hasHeaderSlot) {
@@ -107,7 +115,6 @@ export class MFlexTemplate extends ModulVue {
         if (this.propDynamicHeader) {
             let position: number = this.$el.getBoundingClientRect().top;
             let maxPosition: number = position + this.headerHeight + 50;
-            let header = this.$refs.header as HTMLElement;
             this.headerHidden = (maxPosition <= 0 && !this.propMenuOpen) && (this.scrollPosition >= position);
             this.scrollPosition = position;
         }
@@ -218,6 +225,7 @@ export class MFlexTemplate extends ModulVue {
             menuContent.focus();
         }
         this.menuOpenCount++;
+        this.$modul.updateAfterResize();
     }
 
     private transitionLeave(el: HTMLElement, done): void {
@@ -229,6 +237,7 @@ export class MFlexTemplate extends ModulVue {
             pageContainer.style.removeProperty('width');
         }
         setTimeout(() => {
+            this.$modul.updateAfterResize();
             done();
         }, 450);
     }

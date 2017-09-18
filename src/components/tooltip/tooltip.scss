@@ -9,14 +9,14 @@ $m-tooltip--max-height: 280px !default;
         display: inline;
     }
 
-    &.m--is-icon-mode {
+    &.m--is-mode-icon {
         .m-tooltip__icon {
             position: relative;
             top: -1px; // Magic number: align icon width text
         }
     }
 
-    &.m--is-link-mode {
+    &.m--is-mode-link {
         .m-tooltip__link {
             position: relative;
             top: -2px; // Magic number: align link width text
@@ -49,7 +49,7 @@ $m-tooltip--max-height: 280px !default;
         }
     }
 
-    &__close-button.m-button.m--is-icon {
+    &__close-button.m-button.m--is-mode-icon {
         position: absolute;
         top: 0;
         right: 0;

@@ -5,7 +5,7 @@
         "position": {
             "type": "string",
             "values": [
-                "sticky",
+                "fixe",
                 "relative"
             ],
             "default": "0"

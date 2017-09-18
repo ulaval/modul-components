@@ -86,12 +86,12 @@ describe('radio', () => {
         });
     });
 
-    it('v prop', () => {
+    it('value prop', () => {
         let input: HTMLInputElement | null = radio.$el.querySelector('input');
         expect(input).toBeTruthy();
         if (input) {
             expect(input.value).toEqual('');
-            radio.v = 'value';
+            radio.value = 'value';
             Vue.nextTick(() => {
                 if (input) {
                     expect(input.value).toEqual('value');
@@ -105,8 +105,8 @@ describe('radio', () => {
             data: {
                 model: 'radio2'
             },
-            template: `<div><m-radio v="radio1" name="radio" v-model="model"></m-radio>
-            <m-radio v="radio2" name="radio" v-model="model"></m-radio></div>`
+            template: `<div><m-radio value="radio1" name="radio" v-model="model"></m-radio>
+            <m-radio value="radio2" name="radio" v-model="model"></m-radio></div>`
         }).$mount();
 
         let nodes: NodeListOf<HTMLLIElement> = vm.$el.querySelectorAll('li');
@@ -127,8 +127,8 @@ describe('radio', () => {
             data: {
                 model: 'radio2'
             },
-            template: `<div><m-radio ref="a" @change="onChange" v="radio1" name="radio" v-model="model"></m-radio>
-            <m-radio ref="b" @change="onChange" v="changeSpy" name="radio" v-model="model"></m-radio></div>`,
+            template: `<div><m-radio ref="a" @change="onChange" value="radio1" name="radio" v-model="model"></m-radio>
+            <m-radio ref="b" @change="onChange" value="radio2" name="radio" v-model="model"></m-radio></div>`,
             methods: {
                 onChange: changeSpy
             }

@@ -205,7 +205,7 @@ export class MDatepicker extends ModulVue implements InputStateMixin {
 
     private closeDatepicker(): void {
         this.formatDate();
-        this.$children[0]['closePopper']();
+        this.isOpen = false;
         this.$emit('close');
     }
 

@@ -109,7 +109,7 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
                 console.error('Model can\'t be an Array');
             } else {
                 if ((this.root as MDropdownInterface).defaultFirstElement &&
-                    !(this.root as MDropdownInterface).disabled &&
+                    !(this.root as MDropdownInterface).isDisabled &&
                     !this.disabled &&
                     !this.propInactif &&
                     !(this.root as MDropdownInterface).value &&
@@ -183,7 +183,9 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     public get visible(): boolean {
         let isVisible: boolean = false;
 
-        if (!this.forceHide && (this.filter == '' || this.filter == normalizeString(this.propLabel) || normalizeString(this.propLabel).match(this.filter))) {
+        if (!this.forceHide &&
+            (this.filter == '' || this.filter == normalizeString(this.propLabel) || normalizeString(this.propLabel).match(this.filter)) &&
+            (!this.propInactif || (this.root && (this.root as MDropdownInterface).nbItemsVisible != 0))) {
             isVisible = true;
         }
 
