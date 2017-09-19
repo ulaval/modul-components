@@ -5,12 +5,12 @@
 
     <div class="m-datepicker" slot="body">
         <div class="m-datepicker__header">
-            <m-button mode="icon" icon-name="arrow-left" @click="selectYear(selectedDate.year - 1)" :state="isMinYear? 'disabled' : ''">previous year</m-button>
+            <m-button mode="icon" icon-name="left-arrow" @click="selectYear(selectedDate.year - 1)" :state="isMinYear? 'disabled' : ''">previous year</m-button>
             <button type="button" @click="view = 'year'" class="m-datepicker__years">{{selectedDate.year}}</button>
-            <m-button mode="icon" icon-name="arrow-right" @click="selectYear(selectedDate.year + 1)" :state="isMaxYear? 'disabled' : ''">next year</m-button>
-            <m-button mode="icon" icon-name="arrow-left" @click="changeMonth(-1)" :state="isMinMonth? 'disabled' : ''">previous month</m-button>
+            <m-button mode="icon" icon-name="right-arrow" @click="selectYear(selectedDate.year + 1)" :state="isMaxYear? 'disabled' : ''">next year</m-button>
+            <m-button mode="icon" icon-name="left-arrow" @click="changeMonth(-1)" :state="isMinMonth? 'disabled' : ''">previous month</m-button>
             <button type="button" @click="view = 'month'" class="m-datepicker__months">{{monthName}}</button>
-            <m-button mode="icon" icon-name="arrow-right" @click="changeMonth(1)" :state="isMaxMonth? 'disabled' : ''">next month</m-button>
+            <m-button mode="icon" icon-name="right-arrow" @click="changeMonth(1)" :state="isMaxMonth? 'disabled' : ''">next month</m-button>
         </div>
         <div class="m-datepicker__body">
             <table v-if="view == 'year'" class="m-datepicker__body-table">
