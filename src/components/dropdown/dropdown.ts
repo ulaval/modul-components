@@ -126,30 +126,32 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     @Watch('selected')
     private selectedChanged(value): void {
-        let values: any[] = [];
+        if (!this.as<InputStateMixin>().isDisabled) {
+            let values: any[] = [];
 
-        for (let selectedValue of this.selected) {
-            values.push(selectedValue.value);
-        }
-
-        if (value.length == 0 && this.defaultValue) {
-            values.push(this.defaultValue);
-        }
-
-        this.selectedText = '';
-        for (let item of this.selected) {
-            if (this.selectedText != '') {
-                this.selectedText += ', ';
+            for (let selectedValue of this.selected) {
+                values.push(selectedValue.value);
             }
-            this.selectedText += item.label;
-        }
 
-        this.$emit('change', values, this.addAction);
+            if (value.length == 0 && this.defaultValue) {
+                values.push(this.defaultValue);
+            }
 
-        if (this.multiple) {
-            this.$emit('input', values, this.addAction);
-        } else {
-            this.$emit('input', values[0], this.addAction);
+            this.selectedText = '';
+            for (let item of this.selected) {
+                if (this.selectedText != '') {
+                    this.selectedText += ', ';
+                }
+                this.selectedText += item.label;
+            }
+
+            this.$emit('change', values, this.addAction);
+
+            if (this.multiple) {
+                this.$emit('input', values, this.addAction);
+            } else {
+                this.$emit('input', values[0], this.addAction);
+            }
         }
     }
 
@@ -163,6 +165,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.propOpen = open;
     }
 
+    @Watch('isDisabled')
+    private isDisabledChanged(disabled: boolean): void {
+        if (disabled) {
+            this.propOpen = false;
+        }
+    }
+
     public get propOpen(): boolean {
         return this.internalOpen;
     }
@@ -171,10 +180,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.internalOpen = open != undefined ? open : false;
         this.$nextTick(() => {
             if (open) {
-                this.$el.style.zIndex = '10';
                 this.$emit('open');
             } else {
-                this.$el.style.removeProperty('z-index');
                 this.$emit('close');
             }
         });
