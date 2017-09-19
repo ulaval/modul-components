@@ -24,6 +24,36 @@
         }
     }
 
+    &__arrow {
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 6px 10px 0;
+            transform: translateX(-50%);
+            position: absolute;
+            left: 50%;
+        }
+
+        &::before {
+            border-color: $m-color--grey transparent transparent transparent;
+            top: 0;
+        }
+
+        &::after {
+            border-color: $m-color--white transparent transparent transparent;
+            top: -2px;
+        }
+
+        &.m--is-anim-active {
+            transition: transform $m-transition-duration ease, width $m-transition-duration ease;
+        }
+    }
+
     &-item {
         position: relative;
         display: flex;
@@ -158,6 +188,50 @@
                     &::after {
                         opacity: 1;
                     }
+                }
+            }
+
+            &.m--is-selected {
+                &[tabindex],
+                a,
+                button {
+                    color: $m-color--text;
+                }
+            }
+
+            &.m--is-first {
+                margin-left: 0;
+            }
+
+            &.m--is-last {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &.m--is-arrow {
+        border-bottom: $m-border-width--s solid $m-color--grey;
+        margin-bottom: $m-margin;
+        overflow: visible;
+
+        .m-nav-bar-item {
+            margin: 0 $m-margin;
+
+            a:visited {
+                color: $m-color--grey-darker;
+            }
+
+            &[tabindex],
+            a,
+            button {
+                transition: color $m-transition-duration ease;
+                color: $m-color--grey-darker;
+                padding: $m-margin 0;
+                font-weight: $m-font-weight--bold;
+
+                &:hover,
+                &:focus {
+                    color: $m-color--text;
                 }
             }
 
