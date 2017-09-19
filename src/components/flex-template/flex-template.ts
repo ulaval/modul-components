@@ -56,7 +56,7 @@ export class MFlexTemplate extends ModulVue {
         this.$modul.event.$on('resizeDone', this.onResizeDone);
     }
 
-    protected beforeDdestroy(): void {
+    protected beforeDestroy(): void {
         this.$modul.event.$off('scroll', this.onScroll);
         this.$modul.event.$off('resizeDone', this.onResizeDone);
     }
@@ -86,7 +86,7 @@ export class MFlexTemplate extends ModulVue {
         }
     }
 
-    private onScroll(e) {
+    private onScroll() {
         this.adjustFixeMenu();
         this.adjustDynamicHeader();
     }
