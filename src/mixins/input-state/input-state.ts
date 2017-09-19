@@ -19,17 +19,17 @@ export interface InputStateMixin {
 export class InputState extends Vue implements InputStateMixin {
     @Prop({ default: InputStateValue.Default })
     public state: InputStateValue;
-    @Prop({ default: '' })
-    public errorMessage: string;
-    @Prop({ default: '' })
-    public validMessage: string;
-    @Prop({ default: '' })
-    public helperMessage: string;
+    @Prop()
+    public errorMessage: string | undefined;
+    @Prop()
+    public validMessage: string | undefined;
+    @Prop()
+    public helperMessage: string | undefined;
 
     private internalState: InputStateValue = InputStateValue.Default;
-    private internalErrorMessage: string = '';
-    private internalValidMessage: string = '';
-    private internalHelperMessage: string = '';
+    private internalErrorMessage: string | undefined;
+    private internalValidMessage: string | undefined;
+    private internalHelperMessage: string | undefined;
 
     protected created(): void {
         this.propState = this.state;
@@ -50,6 +50,49 @@ export class InputState extends Vue implements InputStateMixin {
         return this.propState == InputStateValue.Valid;
     }
 
+    public set propState(state: InputStateValue) {
+        this.internalState =
+            state == InputStateValue.Disabled || state == InputStateValue.Error || state == InputStateValue.Valid ? state : InputStateValue.Default;
+    }
+
+    public get propState(): InputStateValue {
+        return this.internalState;
+    }
+
+    public set propErrorMessage(message: string | undefined) {
+        if (!this.isDisabled && message != '' && message != undefined) {
+            this.propState = InputStateValue.Error;
+            this.internalErrorMessage = message;
+        } else {
+            this.internalErrorMessage = undefined;
+        }
+    }
+
+    public get propErrorMessage(): string | undefined {
+        return this.internalErrorMessage;
+    }
+
+    public set propValidMessage(message: string | undefined) {
+        if (!this.isDisabled && this.propState != InputStateValue.Error && message != '' && message != undefined) {
+            this.propState = InputStateValue.Valid;
+            this.internalValidMessage = message;
+        } else {
+            this.internalValidMessage = undefined;
+        }
+    }
+
+    public get propValidMessage(): string | undefined {
+        return this.internalValidMessage;
+    }
+
+    public set propHelperMessage(message: string | undefined) {
+        this.internalHelperMessage = message == '' ? undefined : message;
+    }
+
+    public get propHelperMessage(): string | undefined {
+        return this.internalHelperMessage;
+    }
+
     @Watch('state')
     private stateChanged(state: InputStateValue): void {
         this.propState = state;
@@ -68,45 +111,5 @@ export class InputState extends Vue implements InputStateMixin {
     @Watch('helperMessage')
     private helperMessageChanged(message: string): void {
         this.helperMessage = message;
-    }
-
-    private set propState(state: InputStateValue) {
-        this.internalState =
-            state == InputStateValue.Disabled || state == InputStateValue.Error || state == InputStateValue.Valid ? state : InputStateValue.Default;
-    }
-
-    private get propState(): InputStateValue {
-        return this.internalState;
-    }
-
-    private set propErrorMessage(message: string) {
-        this.internalErrorMessage = message;
-
-        if (!this.isDisabled && this.internalErrorMessage != '') {
-            this.propState = InputStateValue.Error;
-        }
-    }
-
-    private get propErrorMessage(): string {
-        return this.internalErrorMessage;
-    }
-
-    private set propValidMessage(message: string) {
-        this.internalValidMessage = message;
-        if (!this.isDisabled && this.propState != InputStateValue.Error && this.propValidMessage != '') {
-            this.propState = InputStateValue.Valid;
-        }
-    }
-
-    private get propValidMessage(): string {
-        return this.internalValidMessage;
-    }
-
-    private set propHelperMessage(message: string) {
-        this.internalHelperMessage = message;
-    }
-
-    private get propHelperMessage(): string {
-        return this.internalHelperMessage;
     }
 }

@@ -38,8 +38,7 @@
         <m-button mode="icon" icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon m--is-dropdown" v-if="modeIsDropdown && !isDisabled">test</m-button>
     </div>
     <m-validation-message
-        :state="propState"
-        :error="propErrorMessage"
-        :valid="propValidMessage"
-        :helper="propHelperMessage" v-if="!modeIsDropdown"></m-validation-message>
+        :error-message="propErrorMessage"
+        :valid-message="propValidMessage"
+        :helper-message="propHelperMessage" v-if="!modeIsDropdown"></m-validation-message>
 </div>

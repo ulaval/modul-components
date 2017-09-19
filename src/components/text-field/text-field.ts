@@ -25,9 +25,7 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
 
 @WithRender
 @Component({
-    mixins: [
-        InputState
-    ]
+    mixins: [InputState]
 })
 export class MTextField extends ModulVue {
 
