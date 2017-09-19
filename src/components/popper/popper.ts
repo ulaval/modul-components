@@ -68,7 +68,6 @@ export class MPopper extends ModulVue {
     private propId: string;
 
     private defaultAnimOpen: boolean = false;
-    private init: boolean = false;
 
     protected created(): void {
         this.propId = this.id + '-' + uuid.generate();
