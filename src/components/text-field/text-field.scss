@@ -89,6 +89,16 @@ $m-text-field--margin: $m-margin--s !default;
             }
         }
 
+        &,
+        &:hover:not(.m--is-focus),
+        &.m--is-focus {
+            .m-text-field__icon {
+                &.m-button.m--is-mode-icon {
+                    color: $m-color--error;
+                }
+            }
+        }
+
         .m-text-field__input-container::after {
             width: 100%;
             background: $m-text-field--color-error;
@@ -100,6 +110,16 @@ $m-text-field--margin: $m-margin--s !default;
         &:not(.m--no-value) {
             .m-text-field__label {
                 color: $m-text-field--color-valid;
+            }
+        }
+
+        &,
+        &:hover:not(.m--is-focus),
+        &.m--is-focus {
+            .m-text-field__icon {
+                &.m-button.m--is-mode-icon {
+                    color: $m-color--success;
+                }
             }
         }
 
@@ -182,6 +202,7 @@ $m-text-field--margin: $m-margin--s !default;
         color: $m-color--text;
         border: none;
         background: none;
+        flex: 1 1 auto;
 
         &-container {
             position: relative;
