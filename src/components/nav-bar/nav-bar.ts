@@ -13,7 +13,8 @@ export enum MNavbarSkin {
     Regular = 'regular',
     Light = 'light',
     Dark = 'dark',
-    Vanilla = 'vanilla'
+    Vanilla = 'vanilla',
+    Arrow = 'arrow'
 }
 
 @WithRender
@@ -61,6 +62,9 @@ export class MNavbar extends ModulVue {
         if (this.propSkin == MNavbarSkin.Light) {
             this.setLinePosition(childrenSelected.$el as HTMLElement);
         }
+        if (this.propSkin == MNavbarSkin.Arrow) {
+            this.setArrowPosition(childrenSelected.$el as HTMLElement);
+        }
     }
 
     private changeItem(id: number, childrenIndex: number): void {
@@ -73,6 +77,9 @@ export class MNavbar extends ModulVue {
             this.childrenIndexSelected = childrenIndex;
             if (this.propSkin == MNavbarSkin.Light) {
                 this.setLinePosition(this.$children[childrenIndex].$el as HTMLElement);
+            }
+            if (this.propSkin == MNavbarSkin.Arrow) {
+                this.setArrowPosition(this.$children[childrenIndex].$el as HTMLElement);
             }
             this.$emit('click');
         }
@@ -91,13 +98,29 @@ export class MNavbar extends ModulVue {
         });
     }
 
+    private setArrowPosition(el: HTMLElement): void {
+        this.$nextTick(() => {
+            let positionX: number = el.offsetLeft;
+            let width: number = el.clientWidth;
+            this.$refs.Arrow['style']['transform'] = 'translate3d(' + positionX + 'px, 0, 0)';
+            this.$refs.Arrow['style']['width'] = width + 'px';
+        });
+    }
+
     private get propSkin(): MNavbarSkin {
-        return this.skin == MNavbarSkin.Regular || this.skin == MNavbarSkin.Dark || this.skin == MNavbarSkin.Vanilla ? this.skin : MNavbarSkin.Light;
+        return this.skin == MNavbarSkin.Regular || this.skin == MNavbarSkin.Dark || this.skin == MNavbarSkin.Vanilla || this.skin == MNavbarSkin.Arrow ? this.skin : MNavbarSkin.Light;
     }
 
     private get propLine(): boolean {
         if (this.line == undefined) {
             return this.propSkin == MNavbarSkin.Light;
+        }
+        return this.line;
+    }
+
+    private get propArrow(): boolean {
+        if (this.line == undefined) {
+            return this.propSkin == MNavbarSkin.Arrow;
         }
         return this.line;
     }
