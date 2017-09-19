@@ -3,47 +3,27 @@ import Promise from 'es6-promise';
 // Polyfill for the Promise API
 Promise.polyfill();
 
-// https://tc39.github.io/ecma262/#sec-array.prototype.find
+// http://stackoverflow.com/questions/35135127/adding-a-function-to-array-prototype-in-ie-results-in-it-being-pushed-in-to-ever.
 if (!Array.prototype['find']) {
     Object.defineProperty(Array.prototype, 'find', {
-        value: (...predicate: any[]) => {
-            // 1. Let O be ? ToObject(this value).
-            // tslint:disable-next-line:no-null-keyword
-            if (this == null) {
-                throw new TypeError('"this" is null or not defined');
+        value: function(predicate) {
+            if (this === undefined) {
+                throw new TypeError('Array.prototype.find called on null or undefined');
             }
-
-            let o = Object(this);
-
-            // 2. Let len be ? ToLength(? Get(O, "length")).
-            let len = o.length >>> 0;
-
-            // 3. If IsCallable(predicate) is false, throw a TypeError exception.
             if (typeof predicate !== 'function') {
                 throw new TypeError('predicate must be a function');
             }
+            let list = Object(this);
+            let length = list.length >>> 0;
+            let thisArg = arguments[1];
+            let value;
 
-            // 4. If thisArg was supplied, let T be thisArg else let T be undefined.
-            let thisArg = predicate[1];
-
-            // 5. Let k be 0.
-            let k = 0;
-
-            // 6. Repeat, while k < len
-            while (k < len) {
-                // a. Let Pk be ! ToString(k).
-                // b. Let kValue be ? Get(O, Pk).
-                // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
-                // d. If testResult is true, return kValue.
-                let kValue = o[k];
-                if (predicate[0].call(thisArg, kValue, k, o)) {
-                    return kValue;
+            for (let i = 0; i < length; i++) {
+                value = list[i];
+                if (predicate.call(thisArg, value, i, list)) {
+                    return value;
                 }
-                // e. Increase k by 1.
-                k++;
             }
-
-            // 7. Return undefined.
             return undefined;
         }
     });
