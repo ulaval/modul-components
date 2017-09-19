@@ -137,7 +137,7 @@ $m-text-field--margin: $m-margin--s !default;
             }
         }
 
-        &.m--no-value {
+        &.m--no-value:not(.m--is-disabled) {
             &:hover {
                 .m-text-field__input-container {
                     &::before {
