@@ -12,9 +12,13 @@ $m-dropdown-item--color-active: $m-color--interactive-lightest !default;
     margin: 0;
     color: $m-color--text;
     font-size: $m-font-size--l;
-    word-break: break-all;
     text-decoration: none;
     outline: none;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    hyphens: auto;
 
     &:not(.m--is-disabled) {
         &:not(.m--is-inactif) {
