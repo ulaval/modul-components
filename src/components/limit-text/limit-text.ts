@@ -6,9 +6,6 @@ import WithRender from './limit-text.html';
 import { LIMIT_TEXT_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
-export const MODE_LOADING: string = 'loading';
-export const MODE_PROCESSING: string = 'processing';
-
 @WithRender
 @Component({
     mixins: [MediaQueries]
