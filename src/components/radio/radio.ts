@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './radio.html?style=./radio.scss';
 import { RADIO_NAME } from '../component-names';
+import IconPlugin from '../icon/icon';
 import uuid from '../../utils/uuid/uuid';
 
 export enum MRadioPosition {
@@ -21,7 +22,7 @@ export interface RadioGroup {
 }
 
 export interface ButtonGroup extends RadioGroup {
-    fullSize: boolean;
+    fullsize: boolean;
 }
 
 export abstract class BaseRadioGroup extends ModulVue {
@@ -45,7 +46,7 @@ export class MRadio extends ModulVue {
     public position: MRadioPosition;
     @Prop({ default: true })
     public enabled: boolean;
-    @Prop({ default: false})
+    @Prop({ default: false })
     public demo: boolean;
     // ----- For Button Group -----
     @Prop()
@@ -54,8 +55,6 @@ export class MRadio extends ModulVue {
     public iconPosition: MRadioPosition;
     // ---------------------------
     public radioID: string = uuid.generate();
-    public firstChild: boolean = false;
-    public lastChild: boolean = false;
 
     private hasFocus: boolean = false;
     private hasParentGroup: boolean | undefined = undefined;
@@ -80,8 +79,8 @@ export class MRadio extends ModulVue {
         return this.isGroup() ? this.parentGroup.inline : false;
     }
 
-    public get propFullSize(): boolean {
-        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullSize : false;
+    public get propFullsize(): boolean {
+        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullsize : false;
     }
 
     protected get model(): string {
@@ -132,6 +131,7 @@ export class MRadio extends ModulVue {
 
 const RadioPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(IconPlugin);
         v.component(RADIO_NAME, MRadio);
     }
 };

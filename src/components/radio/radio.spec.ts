@@ -5,6 +5,9 @@ import RadioPlugin, { MRadio, MRadioPosition } from './radio';
 const DISABLED_CSS: string = 'm--is-disabled';
 const POSITION_RIGHT_CSS: string = 'm--is-input-right';
 const CHECKED_CSS: string = 'm--is-checked';
+const BUTTON_CSS: string = 'm--is-button';
+const FULLSIZE_CSS: string = 'm--is-full-size';
+const INLINE_CSS: string = 'm--is-inline';
 
 let radio: MRadio;
 
@@ -19,6 +22,22 @@ describe('radio', () => {
     beforeEach(() => {
         Vue.use(RadioPlugin);
         radio = new MRadio().$mount();
+    });
+
+    it('css class for button group are not present', () => {
+        expect(radio.$el.classList.contains(BUTTON_CSS)).toBeFalsy();
+        expect(radio.$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
+        expect(radio.$el.classList.contains(INLINE_CSS)).toBeFalsy();
+    });
+
+    it('iconname prop is ignored if not in button group', () => {
+        let svg: SVGSVGElement | null = radio.$el.querySelector('svg');
+        expect(svg).toBeFalsy();
+        radio.iconName = 'chip-error';
+        Vue.nextTick(() => {
+            svg = radio.$el.querySelector('svg');
+            expect(svg).toBeFalsy();
+        });
     });
 
     it('radioID on the input and label elements', () => {
@@ -64,7 +83,7 @@ describe('radio', () => {
 
     it('position prop default', () => {
         expect(radio.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-        (radio.position as any) = 'fjw';
+        (radio.position as any) = 'invalid_position';
         Vue.nextTick(() => {
             expect(radio.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
         });
@@ -105,13 +124,16 @@ describe('radio', () => {
             data: {
                 model: 'radio2'
             },
-            template: `<div><m-radio value="radio1" name="radio" v-model="model"></m-radio>
-            <m-radio value="radio2" name="radio" v-model="model"></m-radio></div>`
+            template: `
+            <div>
+                <m-radio ref="a" value="radio1" name="radio" v-model="model"></m-radio>
+                <m-radio ref="b" value="radio2" name="radio" v-model="model"></m-radio>
+            </div>`
         }).$mount();
 
-        let nodes: NodeListOf<HTMLLIElement> = vm.$el.querySelectorAll('li');
-        let li1: HTMLLIElement = nodes.item(0);
-        let li2: HTMLLIElement = nodes.item(1);
+        let li1: HTMLLIElement = (vm.$refs.a as Vue).$el as HTMLLIElement;
+        let li2: HTMLLIElement = (vm.$refs.b as Vue).$el as HTMLLIElement;
+
         expect(li1.classList.contains(CHECKED_CSS)).toBeFalsy();
         expect(li2.classList.contains(CHECKED_CSS)).toBeTruthy();
         (vm as any).model = 'radio1';
@@ -127,13 +149,16 @@ describe('radio', () => {
             data: {
                 model: 'radio2'
             },
-            template: `<div><m-radio ref="a" @change="onChange" value="radio1" name="radio" v-model="model"></m-radio>
-            <m-radio ref="b" @change="onChange" value="radio2" name="radio" v-model="model"></m-radio></div>`,
+            template: `
+            <div>
+                <m-radio ref="a" @change="onChange" value="radio1" name="radio" v-model="model"></m-radio>
+                <m-radio ref="b" @change="onChange" value="radio2" name="radio" v-model="model"></m-radio>
+            </div>`,
             methods: {
                 onChange: changeSpy
             }
         }).$mount();
-        let input: HTMLInputElement | null = vm.$el.querySelector('input');
+        let input: HTMLInputElement | null = (vm.$refs.a as Vue).$el.querySelector('input');
 
         let e: any = document.createEvent('HTMLEvents');
         e.initEvent('change', true, true);
