@@ -4,19 +4,23 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './status-list.html?style=./status-list.scss';
 import { STATUS_LIST_NAME } from '../component-names';
 
-const STATE_COMPLETED: string = 'completed';
-const STATE_PENDING: string = 'pending';
-const STATE_ERROR: string = 'error';
+export enum MStatusListStates {
+    Completed = 'completed',
+    Pending = 'pending',
+    Error = 'error'
+}
 
-const ICON_NAME_CHIP_CHECK: string = 'chip-check';
-const ICON_NAME_CHIP_ERROR: string = 'chip-error';
+export enum MStatusListIconName {
+    Check = 'chip-check',
+    Error = 'chip-error'
+}
 
 export interface MStatusListData {
-    state: MStatusListStates;
+    state: MStatusListStatesType;
     text: string;
 }
 
-export type MStatusListStates = 'completed' | 'pending' | 'error';
+export type MStatusListStatesType = 'completed' | 'pending' | 'error';
 
 @WithRender
 @Component
@@ -26,19 +30,19 @@ export class MStatusList extends Vue {
         default: () => {
             return [
                 {
-                    'state': STATE_COMPLETED,
+                    'state': MStatusListStates.Completed,
                     'text': 'Informations default'
                 },
                 {
-                    'state': STATE_PENDING,
+                    'state': MStatusListStates.Pending,
                     'text': 'Questions default'
                 },
                 {
-                    'state': STATE_ERROR,
+                    'state': MStatusListStates.Error,
                     'text': 'Pièces default'
                 },
                 {
-                    'state': STATE_COMPLETED,
+                    'state': MStatusListStates.Completed,
                     'text': 'Formulaire default'
                 }
             ];
@@ -47,7 +51,7 @@ export class MStatusList extends Vue {
     public listData: MStatusListData[];
 
     private getIconName(state: MStatusListStates): string {
-        return state == STATE_ERROR ? ICON_NAME_CHIP_ERROR : ICON_NAME_CHIP_CHECK;
+        return state == MStatusListStates.Error ? MStatusListIconName.Error : MStatusListIconName.Check;
     }
 }
 
