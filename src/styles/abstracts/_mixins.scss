@@ -42,3 +42,9 @@
         @content;
     }
 }
+
+@mixin m-word-wrap() {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+  }

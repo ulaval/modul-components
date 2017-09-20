@@ -15,10 +15,7 @@ $m-dropdown-item--color-active: $m-color--interactive-lightest !default;
     text-decoration: none;
     outline: none;
 
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-
-    hyphens: auto;
+    @include m-word-wrap();
 
     &:not(.m--is-disabled) {
         &:not(.m--is-inactif) {
