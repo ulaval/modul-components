@@ -13,7 +13,7 @@ import { TransitionAccordion } from '../../mixins/transition-accordion/transitio
 export class MListItem extends ModulVue {
     public componentName = LIST_ITEM_NAME;
 
-    @Prop({ default: false })
+    @Prop({ default: true })
     public deleteButton: boolean;
     @Prop({ default: false })
     public disabled: boolean;

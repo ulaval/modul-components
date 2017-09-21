@@ -1,11 +1,19 @@
 {
-    "tag": "m-content-list-item",
-    "name": "m-content-list-item-meta:name",
+    "tag": "m-list-item",
+    "name": "m-list-item-meta:name",
     "attributes": {
-        "title": {
-            "type": "string"
+        "delete-button": {
+            "type": "boolean",
+            "default": true
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
+            "type": "boolean",
+            "default": false
         }
     },
-    "overview": "content-list-item.overview",
-    "preview": false
+    "overview": "list-item.overview"
 }
