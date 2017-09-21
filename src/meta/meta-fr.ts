@@ -11,8 +11,7 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/bullet-list/bullet-list.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/button/button.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/button-group/button-group.meta.fr.json'));
-            i18n.addMessages(FRENCH, require('../components/content-list/content-list.meta.fr.json'));
-            i18n.addMessages(FRENCH, require('../components/content-list-item/content-list-item.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/list-item/list-item.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/checkbox/checkbox.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dialog-window/dialog-window.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.meta.fr.json'));
