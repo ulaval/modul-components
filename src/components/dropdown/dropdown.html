@@ -1,4 +1,5 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }" :style="{ width: width }">
+    {{ nbItemsVisible }}
     <m-popup :placement="bottom-start"
              :disabled="isDisabled"
              :open="propOpen"
@@ -30,7 +31,7 @@
             tabindex="1"
             @keyup="keyupItem">
             <slot></slot>
-            <m-dropdown-item v-show="showNoItemsLabel" :label="noItemsLabel" :inactif="true" ></m-dropdown-item>
+            <m-dropdown-item v-show="showNoItemsLabel" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
         </ul>
 
         <template slot="footer" v-if="hasFooterSlot">

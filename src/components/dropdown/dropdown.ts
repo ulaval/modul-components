@@ -18,7 +18,7 @@ const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 export interface SelectedValue {
     key: string | undefined;
     value: any;
-    label: string;
+    label: string | undefined;
 }
 
 export interface MDropdownInterface extends Vue {
@@ -221,7 +221,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private filterDropdown(text: string): void {
         if (this.selected.length == 0) {
             for (let item of this.items) {
-                if (!(item as MDropDownItemInterface).propInactif) {
+                if (!(item as MDropDownItemInterface).inactif) {
                     (item as MDropDownItemInterface).filter = normalizeString(text.trim());
                 }
             }
