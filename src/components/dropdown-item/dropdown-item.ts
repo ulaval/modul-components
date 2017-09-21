@@ -53,17 +53,17 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     private internalSelected: boolean = false;
 
     public created(): void {
-        this.propSelected = this.selected;
-        this.key = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
-
         this.getMDropdownRoot(this);
         this.getMDropdownGroup(this);
+
+        this.key = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
 
         if (!this.value && !this.label) {
             this.inactif = true;
         }
 
-        // If element is not inactif add to array of items and increment counters
+        // If element is active add to array of items and increment counters
+        // Done a first time in the create because watch is not call on load
         if (!this.inactif) {
             (this.root as MDropdownInterface).items.push(this);
             (this.root as MDropdownInterface).nbItemsVisible++;
@@ -77,7 +77,7 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
         if ((this.root as MDropdownInterface).multiple) {
             if (Array.isArray((this.root as MDropdownInterface).value)) {
                 if ((this.root as MDropdownInterface).value.indexOf(this.propValue) != -1) {
-                    this.propSelected = true;
+                    this.onSelectElement();
                 }
             } else {
                 console.error('Model must be an Array');
@@ -87,29 +87,19 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
                 console.error('Model can\'t be an Array');
             } else {
                 if ((this.root as MDropdownInterface).defaultFirstElement &&
-                    !(this.root as MDropdownInterface).isDisabled &&
-                    !this.disabled &&
-                    !this.inactif &&
                     !(this.root as MDropdownInterface).value &&
-                    (this.root as MDropdownInterface).selected.length == 0) {
+                    !(this.root as MDropdownInterface).isDisabled &&
+                    (this.root as MDropdownInterface).selectedList.length == 0) {
 
-                    // If no v-model and flag defaultFirstElement set first element as selected
-                    this.propSelected = true;
+                    // If no v-model and flag defaultFirstElement set
+                    // and no other dropdoww-item has been previously selected :
+                    // mark this element as selected
+                    this.onSelectElement();
 
                 } else if ((this.root as MDropdownInterface).value && (this.root as MDropdownInterface).value === this.propValue) {
-                    // If v-model and current element in model
-                    this.propSelected = true;
+                    // If v-model value === current element
+                    this.onSelectElement();
                 }
-            }
-        }
-
-        // When an element is selected (prop flag), we add it to dropdown container of selected element
-        // On multiple mode, we add it
-        // On single mode, we add the first selected that we get
-        if (!this.inactif && this.propSelected) {
-            if ((this.root as MDropdownInterface).multiple || (this.root as MDropdownInterface).selected.length == 0) {
-                (this.root as MDropdownInterface).selected.push({ key: this.key, value: this.propValue, label: this.propLabel });
-                (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
             }
         }
     }
@@ -124,9 +114,9 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
             (this.root as MDropdownInterface).items.splice(index, 1);
         }
 
-        for (let i = 0; i < (this.root as MDropdownInterface).selected.length; i++) {
-            if ((this.root as MDropdownInterface).selected[i].key == this.key) {
-                (this.root as MDropdownInterface).selected.splice(i, 1);
+        for (let i = 0; i < (this.root as MDropdownInterface).selectedList.length; i++) {
+            if ((this.root as MDropdownInterface).selectedList[i].key == this.key) {
+                (this.root as MDropdownInterface).selectedList.splice(i, 1);
                 break;
             }
         }
@@ -203,24 +193,29 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
         let isVisible: boolean = true;
 
         if ((this.propLabel && !normalizeString(this.propLabel).match(this.filter)) ||
-            (this.inactif && (this.root && (this.root as MDropdownInterface).nbItemsVisible == 0))) {
+            (this.inactif && !this.hasItemsVisible())) {
             isVisible = false;
         }
 
-        if (this.noDataDefaultItem && (this.root && (this.root as MDropdownInterface).nbItemsVisible == 0)) {
+        if (this.noDataDefaultItem && !this.hasItemsVisible()) {
             isVisible = true;
         }
 
         return isVisible;
     }
 
+    public hasItemsVisible(): boolean {
+        return (this.root && (this.root as MDropdownInterface).nbItemsVisible != 0);
+    }
+
     public onSelectElement(): void {
         if (!this.disabled && !this.inactif) {
-            let array: Array<SelectedValue> = (this.root as MDropdownInterface).selected;
+            let array: Array<SelectedValue> = (this.root as MDropdownInterface).selectedList;
 
             if ((this.root as MDropdownInterface).multiple) {
                 // Dropdown with multiple selection: Add current selection to previous
                 if (this.propSelected) {
+                    // Element unselected
                     this.propSelected = (this.root as MDropdownInterface).addAction = false;
                     for (let i = 0; i < array.length; i++) {
                         if (array[i].key == this.key) {
@@ -229,17 +224,18 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
                         }
                     }
                 } else {
+                    // Element selected
                     this.propSelected = (this.root as MDropdownInterface).addAction = true;
                     array.push({ key: this.key, value: this.propValue, label: this.propLabel });
                 }
             } else {
-                // Dropdown without multiple selection: FirstRemove past selection, then add new
+                // Dropdown without multiple selection: FirstRemove past selection, then add newove past selection, then add new
                 let currentSelectedElement: SelectedValue = array[0];
                 if (currentSelectedElement) {
                     for (let item of (this.root as MDropdownInterface).items) {
                         (item as MDropDownItemInterface).propSelected = false;
                     }
-                    array.splice(0, 1);
+                    array = [];
                 }
 
                 this.propSelected = (this.root as MDropdownInterface).addAction = true;

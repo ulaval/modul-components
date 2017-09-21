@@ -24,7 +24,7 @@ export interface SelectedValue {
 export interface MDropdownInterface extends Vue {
     value: any;
     items: Vue[];
-    selected: Array<SelectedValue>;
+    selectedList: Array<SelectedValue>;
     currentElement: SelectedValue;
     addAction: boolean;
     nbItemsVisible: number;
@@ -71,7 +71,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public isDisabled: boolean;
 
     public items: Vue[] = [];
-    public selected: Array<SelectedValue> = [];
+    public selectedList: Array<SelectedValue> = [];
     public currentElement: SelectedValue = { 'key': undefined, 'value': undefined, 'label': '' };
     public addAction: true;
     public nbItemsVisible: number = 0;
@@ -116,20 +116,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.propOpen = this.open;
     }
 
-    protected beforeDestroy() {
-        console.log('Dropdown', 'beforeDestroy');
-    }
-
-    protected destroyed() {
-        console.log('Dropdown', 'destroyed');
-    }
-
-    @Watch('selected')
+    @Watch('selectedList')
     private selectedChanged(value): void {
         if (!this.as<InputStateMixin>().isDisabled) {
             let values: any[] = [];
 
-            for (let selectedValue of this.selected) {
+            for (let selectedValue of this.selectedList) {
                 values.push(selectedValue.value);
             }
 
@@ -138,7 +130,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             }
 
             this.selectedText = '';
-            for (let item of this.selected) {
+            for (let item of this.selectedList) { // CHECK double boucle selectedList
                 if (this.selectedText != '') {
                     this.selectedText += ', ';
                 }
@@ -188,7 +180,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private get propEditable(): boolean {
-        return this.editable && this.selected.length == 0;
+        return this.editable && this.selectedList.length == 0;
     }
 
     private get propTextNoData(): string {
@@ -219,7 +211,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private filterDropdown(text: string): void {
-        if (this.selected.length == 0) {
+        if (this.selectedList.length == 0) {
             for (let item of this.items) {
                 if (!(item as MDropDownItemInterface).inactif) {
                     (item as MDropDownItemInterface).filter = normalizeString(text.trim());
