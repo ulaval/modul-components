@@ -8,16 +8,13 @@
                 "regular",
                 "light",
                 "dark",
-                "vanilla"
+                "vanilla",
+                "arrow"
             ],
-            "default": 1
+            "default": 2
         },
         "line": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ]
+            "type": "boolean"
         }
     },
     "overview": "nav-bar.overview",

@@ -21,6 +21,15 @@
             "type": "moment.Moment",
             "values": "see Moment.js constructor arguments",
             "default": "now plus 10 years"
+        },
+        "options": {
+            "type": "any",
+            "values": "see Moment.js constructor arguments",
+            "default": "bottom-start"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "datepicker.overview"

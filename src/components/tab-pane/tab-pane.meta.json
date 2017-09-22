@@ -5,16 +5,9 @@
         "label": {
             "type": "string"
         },
-        "state": {
-            "type": "string",
-            "values": [
-                "default",
-                "selected",
-                "email",
-                "url",
-                "tel"
-            ],
-            "default": 0
+        "selected": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "tab-pane.overview"

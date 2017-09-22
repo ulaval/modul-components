@@ -1,7 +1,26 @@
 {
     "tag": "m-dropdown-item",
     "name": "m-dropdown-item-meta:name",
-    "attributes": {},
+    "attributes": {
+        "label": {
+            "type": "string"
+        },
+        "value": {
+            "type": "any"
+        },
+        "selected": {
+            "type": "boolean",
+            "default": false
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "noDataDefaultItem": {
+            "type": "boolean",
+            "default": false
+        }
+    },
     "overview": "dropdown-item.overview",
     "preview": false
 }

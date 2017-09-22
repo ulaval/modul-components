@@ -1,74 +1,7 @@
 {
     "tag": "m-modal",
     "name": "m-modal-meta:name",
-    "attributes": {
-         "id": {
-            "type": "string",
-            "values": [
-                "mModal"
-            ],
-            "default": 0
-        },
-        "open": {
-            "type": "boolean",
-            "default": false
-        },
-        "disabled": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 1
-        },
-        "closeOnBackdrop": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
-        },
-        "title": {
-            "type": "string"
-        },
-        "className": {
-            "type": "string"
-        },
-        "padding": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
-        },
-        "paddingHeader": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
-        },
-        "paddingBody": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
-        }
-        ,
-        "paddingFooter": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
-        }
-    },
+    "attributes": {},
     "overview": "modal-window.overview",
     "preview": false
 }

@@ -15,19 +15,15 @@
         },
         "inline": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": false
         },
-        "disabled": {
+        "enabled": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": true
+        },
+        "demo": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "radio-group.overview",

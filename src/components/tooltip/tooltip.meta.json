@@ -2,6 +2,10 @@
     "tag": "m-tooltip",
     "name": "m-tooltip-meta:name",
     "attributes": {
+        "open": {
+            "type": "boolean",
+            "default": false
+        },
         "mode": {
             "type": "string",
             "values": [
@@ -10,8 +14,23 @@
             ],
             "default": "0"
         },
-        "label": {
-            "type": "string"
+        "placement": {
+            "type": "MPopperPlacement",
+            "values": [
+                "top",
+                "top-start",
+                "top-end",
+                "right",
+                "right-start",
+                "right-end",
+                "bottom",
+                "bottom-start",
+                "bottom-end",
+                "left",
+                "left-start",
+                "left-end"
+            ],
+            "default": 6
         },
         "closeButton": {
             "type": "boolean",
@@ -20,6 +39,13 @@
                 "false"
             ],
             "default": "0"
+        },
+        "classNamePortalTarget": {
+            "type": "string"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "tooltip.overview"

@@ -10,7 +10,7 @@
                 "information",
                 "success"
             ],
-            "default": 3
+            "default": 4
         },
         "mode": {
             "type": "string",
@@ -22,27 +22,15 @@
         },
         "icon": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         },
         "closeButton": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": true
         },
         "visible": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         }
     },
     "overview": "message.overview"
