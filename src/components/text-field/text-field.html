@@ -4,12 +4,11 @@
           'm--is-disabled' : isDisabled,
           'm--has-error' : hasError,
           'm--is-valid' : isValid,
-          'm--no-value' : valueIsEmpty,
+          'm--no-value' : !hasValue,
           'm--has-icon' : hasIcon,
-          'm--is-mode-dropdown': modeIsDropdown,
+          'm--is-mode-dropdown': isDropdown,
           'm--has-label': hasLabel },
-          'm--is-type-' + propType ]"
-      @click="onClick">
+          'm--is-type-' + type ]">
     <label class="m-text-field__label" ref="label" v-if="hasLabel"><m-icon name="default" class="m-text-field__icon m--is-disabled" v-if="isDisabled"></m-icon>{{ label }}</label>
     <div class="m-text-field__input-container">
         <input class="m-text-field__input"
@@ -18,8 +17,8 @@
             @focus="onFocus"
             @blur="onBlur"
             @keyup="onKeyup"
-            :placeholder="placeholder"
-            v-model="propValue"
+            :placeholder="propPlaceholder"
+            v-model="model"
             v-if="propEditable">
         <div class="m-text-field__input"
             ref="input"
@@ -28,17 +27,17 @@
             @blur="onBlur"
             @keyup="onKeyup"
             v-if="!propEditable">
-            <div class="m-text-field__input__value" ref="inputValue" v-if="!hasValueSlot && !hasDefaultText">{{ propValue }}</div>
-            <div class="m-text-field__input__value" ref="inputValue" v-if="hasValueSlot && !hasDefaultText"><slot name="value"></slot></div>
-            <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="valueIsEmpty && !hasValueSlot">i</div>
+            <div class="m-text-field__input__value" ref="inputValue" v-if="!hasValueSlot && !hasDefaultText">{{ model }}</div>
+            <div class="m-text-field__input__value" ref="inputValue" v-if="hasValueSlot && !hasDefaultText"><slot></slot></div>
+            <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="!hasValue && !hasValueSlot">i</div>
             <div class="m-text-field__input__default-text" :class="{ 'm--is-transparent': !isDefaultTextVisible }" v-if="hasDefaultText">- {{ defaultText }} -</div>
         </div>
         <m-button mode="icon" :icon-name="iconName" icon-size="13px" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>
         <m-button mode="icon" :icon-name="iconNamePassword" icon-size="13px" class="m-text-field__icon m--is-password" v-if="propIconPassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-button>
-        <m-button mode="icon" icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon m--is-dropdown" v-if="modeIsDropdown && !isDisabled">test</m-button>
+        <m-button mode="icon" icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon m--is-dropdown" v-if="isDropdown && !isDisabled">test</m-button>
     </div>
     <m-validation-message
-        :error-message="propErrorMessage"
-        :valid-message="propValidMessage"
-        :helper-message="propHelperMessage" v-if="!modeIsDropdown"></m-validation-message>
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage" v-if="!isDropdown"></m-validation-message>
 </div>

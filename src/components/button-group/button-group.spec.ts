@@ -158,21 +158,6 @@ describe('button-group', () => {
             }).$mount();
         });
 
-        it('position prop default', () => {
-            expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-            expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-            expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-            expect((vm.$refs.d as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-
-            (vm as any).position = 'invalid_position';
-            Vue.nextTick(() => {
-                expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-                expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-                expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-                expect((vm.$refs.d as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-            });
-        });
-
         it('position prop left', () => {
             expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();

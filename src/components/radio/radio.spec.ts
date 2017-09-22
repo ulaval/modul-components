@@ -81,14 +81,6 @@ describe('radio', () => {
         }
     });
 
-    it('position prop default', () => {
-        expect(radio.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-        (radio.position as any) = 'invalid_position';
-        Vue.nextTick(() => {
-            expect(radio.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-        });
-    });
-
     it('position prop left', () => {
         expect(radio.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
         radio.position = MRadioPosition.Left;

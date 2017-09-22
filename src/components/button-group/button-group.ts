@@ -19,7 +19,10 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     public fullsize: boolean;
     @Prop({ default: true })
     public inline: boolean;
-    @Prop({ default: MRadioPosition.Left })
+    @Prop({
+        default: MRadioPosition.Left,
+        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+    })
     public position: MRadioPosition;
 
     public name: string = uuid.generate();

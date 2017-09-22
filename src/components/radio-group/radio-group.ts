@@ -13,7 +13,10 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     @Model('change')
     @Prop()
     public value: string;
-    @Prop({ default: MRadioPosition.Left })
+    @Prop({
+        default: MRadioPosition.Left,
+        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+    })
     public position: MRadioPosition;
     @Prop({ default: false })
     public inline: boolean;
