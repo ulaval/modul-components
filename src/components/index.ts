@@ -17,6 +17,7 @@ import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
+import InputStylePlugin from './input-style/input-style';
 import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import MessagePlugin from './message/message';
@@ -66,6 +67,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(FlexTemplatePlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);
+        Vue.use(InputStylePlugin);
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);
         Vue.use(BulletListPlugin);

@@ -1,0 +1,184 @@
+@import 'abstracts/variables';
+$m-input-style--color-default-text: $m-color--grey-darker !default;
+$m-input-style--color-focus: $m-color--interactive !default;
+$m-input-style--color-error: $m-color--error !default;
+$m-input-style--color-valid: $m-color--success !default;
+$m-input-style--color-disabled: $m-color--grey-darker !default;
+$m-input-style--margin: $m-margin--s !default;
+
+.m-input-style {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    outline: none;
+    cursor: pointer;
+    min-width: 130px;
+
+    &::before,
+    &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        content: '';
+        display: block;
+    }
+
+    &::before {
+        transition: border-color $m-transition-duration ease;
+        width: 100%;
+        border-bottom: 1px solid $m-color--grey-darker;
+    }
+
+    &::after {
+        transition: width $m-transition-duration--l ease-in-out;
+        width: 0;
+        height: 2px;
+        background: $m-input-style--color-focus;
+    }
+
+    &:hover:not(.m--is-disabled),
+    &.m--has-value {
+        &::before {
+            border-color: $m-color--text;
+        }
+    }
+
+    &.m--is-focus {
+        .m-input-style__label {
+            color: $m-input-style--color-focus;
+        }
+    }
+
+    &.m--is-focus {
+        &::after {
+            width: 100%;
+        }
+    }
+
+    &.m--is-label-up {
+        cursor: text;
+
+        .m-input-style {
+            &__label {
+                top: 0;
+                z-index: 1;
+                width: 100%;
+                font-size: $m-font-size--s;
+                cursor: pointer;
+            }
+
+            &__disabled-icon {
+                stroke-width: 3px;
+                font-size: 8px; //Magic number
+            }
+        }
+    }
+
+    &.m--has-label {
+        padding-top: 18px;
+    }
+
+    &:not(.m--is-label-up) {
+        .m-input-style__value {
+            opacity: 0;
+        }
+    }
+
+    &.m--has-error {
+        &::before {
+            border-color: $m-input-style--color-error;
+        }
+
+        &::after {
+            background: $m-input-style--color-error;
+        }
+
+        .m-input-style__label {
+            color: $m-input-style--color-error;
+        }
+    }
+
+    &.m--is-valid {
+        &::before {
+            border-color: $m-input-style--color-valid;
+        }
+
+        &::after {
+            background: $m-input-style--color-valid;
+        }
+
+        .m-input-style__label {
+            color: $m-input-style--color-valid;
+        }
+    }
+
+    &.m--is-disabled {
+        user-select: none;
+
+        &,
+        .m-input-style__label {
+            cursor: not-allowed;
+        }
+
+        &::before {
+            border-bottom-style: dashed;
+            border-color: $m-input-style--color-disabled;
+        }
+
+        .m-input-style {
+            &__label,
+            &__value {
+                color: $m-input-style--color-disabled;
+            }
+        }
+    }
+
+    &__label {
+        transition-property: color, top, font-size;
+        transition-duration: $m-transition-duration--l;
+        transition-timing-function: ease;
+        position: absolute;
+        top: 18px; //Magic number
+        z-index: 1;
+        width: 100%;
+        font-size: $m-font-size--l;
+        font-weight: $m-font-weight--bold;
+        white-space: nowrap;
+    }
+
+    &__value {
+        transition: opacity 0.3s ease;
+        position: relative;
+        z-index: 2;
+        padding: 0 0 $m-input-style--margin 0;
+        font-weight: $m-font-weight;
+        text-decoration: none;
+        flex: 1 1 auto;
+
+        &,
+        input {
+            outline: none;
+            font-family: $m-font-family;
+            font-size: $m-font-size--l;
+            text-align: left;
+            color: $m-color--text;
+            border: none;
+            background: none;
+        }
+    }
+
+    &__disabled-icon {
+        transition: font-size $m-transition-duration--l ease, stroke-width $m-transition-duration--l ease;
+        z-index: 1;
+        stroke-width: 2px;
+        margin-right: $m-margin--s;
+        font-size: 12px; //Magic number
+
+        &.m-button {
+            min-height: 20px;
+            min-width: 26px;
+        }
+    }
+}
