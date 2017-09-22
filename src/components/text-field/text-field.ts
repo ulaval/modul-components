@@ -60,6 +60,7 @@ export class MTextField extends ModulVue {
     @Prop()
     public placeholder: string;
 
+    private internalValue: string = '';
     private passwordAsText: boolean = false;
     private internalIsFocus: boolean = false;
 
@@ -118,11 +119,12 @@ export class MTextField extends ModulVue {
     }
 
     private set model(value: string) {
+        this.internalValue = value;
         this.$emit('change', value);
     }
 
     private get model(): string {
-        return this.value;
+        return this.value == undefined ? this.internalValue : this.value;
     }
 
     private get hasValue(): boolean {
