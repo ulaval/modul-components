@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import {
-    ACCORDION_NAME, ACCORDION_GROUP_NAME, BULLET_LIST_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, LIST_ITEM_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DROPDOWN_GROUP_NAME, DROPDOWN_ITEM_NAME, DYNAMIC_TEMPLATE_NAME, FLEX_TEMPLATE_NAME, I18N_NAME, LIMIT_TEXT_NAME, ICON_NAME, LINK_NAME, MESSAGE_NAME, MODAL_NAME, NAV_BAR_NAME, NAV_BAR_ITEM_NAME, OPTIONS_MENU_NAME, PANEL_NAME, POPPER_NAME, POPUP_NAME, RADIO_NAME, RADIO_GROUP_NAME, SCROLL_TOP_NAME, SIDEBAR_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TABS_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
+    ACCORDION_NAME, ACCORDION_GROUP_NAME, BULLET_LIST_NAME, BUTTON_NAME, BUTTON_GROUP_NAME, LIST_ITEM_NAME, CHECKBOX_NAME, DIALOG_NAME, DROPDOWN_NAME, DROPDOWN_GROUP_NAME, DROPDOWN_ITEM_NAME, DYNAMIC_TEMPLATE_NAME, FLEX_TEMPLATE_NAME, I18N_NAME, LIMIT_TEXT_NAME, ICON_NAME, INPUT_STYLE_NAME, LINK_NAME, MESSAGE_NAME, MODAL_NAME, NAV_BAR_NAME, NAV_BAR_ITEM_NAME, OPTIONS_MENU_NAME, PANEL_NAME, POPPER_NAME, POPUP_NAME, RADIO_NAME, RADIO_GROUP_NAME, SCROLL_TOP_NAME, SIDEBAR_NAME, SPINNER_NAME, STATUS_LIST_NAME, STEP_NAME, SWITCH_NAME, TABLE_NAME, TABS_NAME, TEMPLATE_NAME, TEXT_FIELD_NAME,
     TIMEPICKER_NAME, TOOLTIP_NAME, UPLOAD_NAME, UPLOAD_INPUT_NAME, UPLOAD_DRAGDROP_NAME, UPLOAD_FILESLIST_NAME
 } from '../components/component-names';
 import { RIPPLE_EFFECT_NAME } from '../directives/directive-names';
@@ -35,7 +35,8 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(DYNAMIC_TEMPLATE_NAME, require('../components/dynamic-template/dynamic-template.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(FLEX_TEMPLATE_NAME, require('../components/flex-template/flex-template.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(I18N_NAME, require('../components/i18n/i18n.meta.json'));
-        meta.mergeComponentMeta(ICON_NAME, require('../components/icon/icon.meta.json'), CATEGORY_INDICATORS);
+        meta.mergeComponentMeta(ICON_NAME, require('../components/input-style/input-style.meta.json'), CATEGORY_FORMS);
+        meta.mergeComponentMeta(INPUT_STYLE_NAME, require('../components/icon/icon.meta.json'), CATEGORY_INDICATORS);
         meta.mergeComponentMeta(LIMIT_TEXT_NAME, require('../components/limit-text/limit-text.meta.json'), CATEGORY_CONTENT);
         meta.mergeComponentMeta(LINK_NAME, require('../components/link/link.meta.json'), CATEGORY_NAVIGATION);
         meta.mergeComponentMeta(MESSAGE_NAME, require('../components/message/message.meta.json'), CATEGORY_COMUNICATION);
