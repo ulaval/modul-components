@@ -13,23 +13,18 @@
             ],
             "default": 0
         },
+        "mode": {
+            "type": "string",
+            "values": [
+                "text",
+                "dropdown"
+            ],
+            "default": 0
+        },
         "value": {
             "type": "string"
         },
         "label": {
-            "type": "string"
-        },
-        "state": {
-            "type": "string",
-            "values": [
-                "default",
-                "disabled",
-                "error",
-                "valid"
-            ],
-            "default": 0
-        },
-        "defaultText": {
             "type": "string"
         },
         "editable": {
@@ -39,15 +34,15 @@
         "iconName": {
             "type": "string"
         },
-        "errorMessage": {
-            "type": "string"
-        },
-        "helperMessage": {
+        "iconDescription": {
             "type": "string"
         },
         "forceFocus": {
             "type": "boolean",
             "default": false
+        },
+        "placeholder": {
+            "type": "string"
         }
     },
     "overview": "text-field.overview"

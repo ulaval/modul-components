@@ -41,7 +41,7 @@ export class MDatepicker extends ModulVue {
     public max: moment.Moment;
     @Prop({ default: () => ({ placement: 'bottom-start' }) })
     public options: any;
-    @Prop()
+    @Prop( {default: false})
     public disabled: boolean;
 
     public componentName: string = DATEPICKER_NAME;

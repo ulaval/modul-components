@@ -4,10 +4,7 @@
     "attributes": {
         "maxNumberOfLine": {
             "type": "number",
-            "values": [
-                "4"
-            ],
-            "default": "0"
+            "default": 4
         },
         "label": {
             "type": "string"

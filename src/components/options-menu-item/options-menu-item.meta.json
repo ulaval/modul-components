@@ -3,13 +3,10 @@
     "name": "m-options-menu-item-meta:name",
     "attributes": {
         "iconName": {
-            "type": "string",
-            "values": "",
-            "default": ""
+            "type": "string"
         },
         "disabled": {
             "type": "boolean",
-            "values": [true, false],
             "default": false
         }
     },

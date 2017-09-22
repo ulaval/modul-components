@@ -2,6 +2,9 @@
     "tag": "m-dropdown",
     "name": "m-dropdown-meta:name",
     "attributes": {
+        "value": {
+            "type": "any"
+        },
         "label": {
             "type": "string"
         },
@@ -12,10 +15,6 @@
             "type": "any"
         },
         "open": {
-            "type": "boolean",
-             "default": false
-        },
-        "disabled": {
             "type": "boolean",
             "default": false
         },
@@ -28,8 +27,7 @@
             "default": false
         },
         "width": {
-            "type": "string",
-            "default": "200px"
+            "type": "string"
         },
         "defaultFirstElement": {
             "type": "boolean",

@@ -4,27 +4,15 @@
     "attributes": {
         "dynamicHeader": {
             "type": "boolean",
-            "value": [
-                true,
-                false
-            ],
-            "default": 0
+            "default": true
         },
         "headerFixe": {
             "type": "boolean",
-            "value": [
-                true,
-                false
-            ],
-            "default": 0
+            "default": true
         },
         "menuFixe": {
             "type": "boolean",
-            "value": [
-                true,
-                false
-            ],
-            "default": 0
+            "default": true
         },
         "menuWidth": {
             "type": "string",
@@ -44,19 +32,11 @@
         },
         "menuOpen": {
             "type": "boolean",
-            "value": [
-                true,
-                false
-            ],
-            "default": 1
+            "default": false
         },
         "smallMenu": {
             "type": "boolean",
-            "value": [
-                true,
-                false
-            ],
-            "default": 1
+            "default": false
         },
         "smallMenuSize": {
             "type": "string",

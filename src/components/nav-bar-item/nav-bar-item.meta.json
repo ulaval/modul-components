@@ -4,11 +4,7 @@
     "attributes": {
         "selected": {
             "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": false
         }
     },
     "overview": "nav-bar-item.overview",

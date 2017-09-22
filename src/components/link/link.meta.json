@@ -18,27 +18,15 @@
         },
         "unvisited" : {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": false
         },
         "underline" : {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         },
         "vanilla": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": false
         },
         "hiddenText" : {
             "type": "string"

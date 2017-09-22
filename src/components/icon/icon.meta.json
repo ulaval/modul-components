@@ -4,7 +4,8 @@
     "attributes": {
         "name": {
             "type": "string",
-            "description": "m-icon-meta:name-desc"
+            "description": "m-icon-meta:name-desc",
+            "default": "default"
         },
         "svgTitle": {
             "type": "string",

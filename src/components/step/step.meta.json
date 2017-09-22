@@ -8,36 +8,34 @@
                 "warning",
                 "in-progress",
                 "information",
-                "locked"
+                "locked",
+                "success"
             ],
-            "default": "disabled"
+            "default": 3
         },
-        "open": {
-            "type": "boolean",
+        "mode": {
+            "type": "string",
             "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
-        },
-        "required": {
-            "type": "boolean",
-            "values": [
-                "true",
-                "false"
+                "default",
+                "accordion"
             ],
             "default": 0
         },
+        "open": {
+            "type": "boolean",
+            "default": false
+        },
+        "required": {
+            "type": "boolean",
+            "default": false
+        },
         "iconName": {
-            "type": "string"
+            "type": "string",
+            "default": "default"
         },
         "last": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": false
         }
     },
     "overview": "step.overview"

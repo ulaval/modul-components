@@ -2,116 +2,78 @@
     "tag": "m-popup",
     "name": "m-popup-meta:name",
     "attributes": {
-        "mode": {
-            "type": "string",
-            "default": "default"
-        },
-        "trigger": {
-            "type": "string",
-            "values": [
-                "hover",
-                "click"
-            ],
-            "default": "click"
-        },
         "open": {
             "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": false
         },
-        "boundariesSelector": {
+        "placement": {
+            "type": "MPopperPlacement",
+            "values": [
+                "top",
+                "top-start",
+                "top-end",
+                "right",
+                "right-start",
+                "right-end",
+                "bottom",
+                "bottom-start",
+                "bottom-end",
+                "left",
+                "left-start",
+                "left-end"
+            ],
+            "default": 6
+        },
+        "openOnclick": {
+            "type": "boolean",
+            "default": true
+        },
+        "openOnHover": {
+            "type": "boolean",
+            "default": false
+        },
+        "id": {
+            "type": "string",
+            "default": "mPopper"
+        },
+        "disable": {
+            "type": "boolean",
+            "default": false
+        },
+        "classNamePortalTarget": {
             "type": "string"
         },
-        "forceOpen": {
+        "closeOnClickOutside": {
             "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": true
         },
-        "arrow": {
+        "focusManagement": {
             "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": true
         },
-        "options": {
-            "type": "string",
-            "values": [
-                "placement",
-                "gpuAcceleration"
-            ]
+        "beforeEnter": {
+            "type": "any"
         },
-        "closeOnContentClick": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 1
+        "enter": {
+            "type": "any"
         },
-        "closeOnReferenceClick": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
+        "afterEnter": {
+            "type": "any"
         },
-        "mobileMode": {
-            "type": "string",
-            "value": [
-                "primary",
-                "secondary",
-                "panel"
-            ],
-            "default": 2
+        "enterCancelled": {
+            "type": "any"
         },
-        "padding": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
+        "beforeLeave": {
+            "type": "any"
         },
-        "paddingHeader": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
+        "leave": {
+            "type": "any"
         },
-        "paddingBody": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
+        "afterLeave": {
+            "type": "any"
         },
-        "paddingFooter": {
-            "type": "boolean",
-            "value": [
-                "true",
-                "false"
-            ],
-            "default": 0
-        },
-        "shadow": {
-            "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": "0"
+        "leaveCancelled": {
+            "type": "any"
         }
     },
     "overview": "popup.overview",

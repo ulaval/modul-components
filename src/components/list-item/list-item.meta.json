@@ -2,7 +2,7 @@
     "tag": "m-list-item",
     "name": "m-list-item-meta:name",
     "attributes": {
-        "delete-button": {
+        "deleteButton": {
             "type": "boolean",
             "default": true
         },

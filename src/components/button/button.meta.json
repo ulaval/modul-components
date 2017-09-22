@@ -2,6 +2,15 @@
     "tag": "m-button",
     "name": "m-button-meta:name",
     "attributes": {
+        "type": {
+            "type": "string",
+            "values": [
+                "button",
+                "submit",
+                "reset"
+            ],
+            "default": 0
+        },
         "mode": {
             "type": "string",
             "values": [
@@ -18,15 +27,6 @@
                 "waiting",
                 "selected",
                 "disabled"
-            ],
-            "default": 0
-        },
-        "type": {
-            "type": "string",
-            "values": [
-                "button",
-                "submit",
-                "reset"
             ],
             "default": 0
         },
