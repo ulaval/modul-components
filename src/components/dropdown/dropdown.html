@@ -40,12 +40,12 @@
         <m-text-field ref="mDropdownValue"
                       mode="dropdown"
                       :label="label"
-                      :value="selectedText"
+                      v-model="selectedText"
                       :state="propState"
                       :editable="propEditable"
                       :force-focus="propOpen"
-                      :default-text="defaultText"
-                      @valueChanged="filterDropdown($event)"
+                      :placeholder="defaultText"
+                      @change="filterDropdown($event)"
                       @keyup="keyupReference">
         </m-text-field>
     </m-popup>

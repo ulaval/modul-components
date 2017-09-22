@@ -47,8 +47,6 @@ export class MTextField extends ModulVue {
     public iconPassword: boolean;
     @Prop()
     public label: string;
-    @Prop()
-    public defaultText: string;
     @Prop({ default: true })
     public editable: boolean;
     @Prop()
@@ -106,6 +104,10 @@ export class MTextField extends ModulVue {
         return this.hasLabel ? (this.internalIsFocus ? this.placeholder : '') : this.placeholder;
     }
 
+    private get isPlaceholderVisible(): boolean {
+        return !!this.placeholder && (this.hasLabel ? this.internalIsFocus && !this.hasValue : !this.hasValue);
+    }
+
     private get inputType(): MTextFieldType {
         let result: MTextFieldType = MTextFieldType.Text;
 
@@ -141,14 +143,6 @@ export class MTextField extends ModulVue {
 
     private get iconDescriptionPassword() {
         return this.passwordAsText ? this.iconDescriptionHidePassword : this.iconDescriptionShowPassword;
-    }
-
-    private get hasDefaultText(): boolean {
-        return !!this.defaultText;
-    }
-
-    private get isDefaultTextVisible(): boolean {
-        return this.isFocus;
     }
 
     private get isDropdown(): boolean {
