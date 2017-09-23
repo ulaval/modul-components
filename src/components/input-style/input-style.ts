@@ -21,11 +21,11 @@ export class MInputStyle extends ModulVue {
     public empty: boolean;
 
     private get hasValue(): boolean {
-        return !!this.$slots.default && !this.empty;
+        return this.hasDefaultSlot && !this.empty;
     }
 
     private get labelIsUp(): boolean {
-        return (this.hasValue || this.isFocus) && this.hasLabel;
+        return this.hasValue && this.isFocus && this.hasLabel;
     }
 
     private get hasLabel(): boolean {
@@ -33,7 +33,13 @@ export class MInputStyle extends ModulVue {
     }
 
     private get isFocus(): boolean {
-        return this.focus && !this.as<InputState>().disabled;
+        let focus: boolean = this.focus && !this.as<InputState>().disabled;
+        this.$emit('focus', focus);
+        return focus;
+    }
+
+    private get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
     }
 
     private onClick(event): void {

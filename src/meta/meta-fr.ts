@@ -21,6 +21,7 @@ const FrenchMetaPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('../components/flex-template/flex-template.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/i18n/i18n.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/icon/icon.meta.fr.json'));
+            i18n.addMessages(FRENCH, require('../components/input-style/input-style.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/limit-text/limit-text.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/link/link.meta.fr.json'));
             i18n.addMessages(FRENCH, require('../components/message/message.meta.fr.json'));

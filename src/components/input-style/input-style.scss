@@ -38,7 +38,7 @@ $m-input-style--margin: $m-margin--s !default;
         background: $m-input-style--color-focus;
     }
 
-    &:hover:not(.m--is-disabled),
+    &:hover:not(.m--is-disabled):not(.m--has-error):not(.m--is-valid),
     &.m--has-value {
         &::before {
             border-color: $m-color--text;
@@ -46,14 +46,12 @@ $m-input-style--margin: $m-margin--s !default;
     }
 
     &.m--is-focus {
-        .m-input-style__label {
-            color: $m-input-style--color-focus;
-        }
-    }
-
-    &.m--is-focus {
         &::after {
             width: 100%;
+        }
+
+        .m-input-style__label {
+            color: $m-input-style--color-focus;
         }
     }
 
@@ -127,6 +125,10 @@ $m-input-style--margin: $m-margin--s !default;
             border-color: $m-input-style--color-disabled;
         }
 
+        &::after {
+            background: $m-input-style--color-disabled;
+        }
+
         .m-input-style {
             &__label,
             &__value {
@@ -166,6 +168,11 @@ $m-input-style--margin: $m-margin--s !default;
             color: $m-color--text;
             border: none;
             background: none;
+        }
+
+        &__transparent-text {
+            opacity: 0;
+            width: 0;
         }
     }
 

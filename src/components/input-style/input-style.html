@@ -1,16 +1,15 @@
-<div class="m-input-style"
-     :class="{ 'm--is-focus' : isFocus,
+<div class="m-input-style" :class="{ 'm--is-focus' : isFocus,
                'm--is-label-up': labelIsUp,
                'm--is-disabled' : isDisabled,
                'm--has-error' : hasError,
                'm--is-valid' : isValid,
                'm--has-label': hasLabel,
-               'm--has-value': hasValue }"
-     @click="onClick">
+               'm--has-value': hasValue }" @click="onClick">
     <label class="m-input-style__label" v-if="hasLabel">
         <m-icon class="m-input-style__disabled-icon" name="default" v-if="disabled">
         </m-icon>{{ label }}</label>
     <div class="m-input-style__value">
         <slot></slot>
+        <m-i18n k="m-input-style:empty-value" class="m-input-style__value__transparent-text" v-if="!hasDefaultSlot"></m-i18n>
     </div>
 </div>
