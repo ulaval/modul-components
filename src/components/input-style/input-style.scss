@@ -71,7 +71,7 @@ $m-input-style--margin: $m-margin--s !default;
 
             &__disabled-icon {
                 stroke-width: 3px;
-                font-size: 8px; //Magic number
+                font-size: 8px; // Magic number
             }
         }
     }
@@ -172,13 +172,9 @@ $m-input-style--margin: $m-margin--s !default;
     &__disabled-icon {
         transition: font-size $m-transition-duration--l ease, stroke-width $m-transition-duration--l ease;
         z-index: 1;
+        display: inline-block;
         stroke-width: 2px;
+        font-size: 12px; // Magic number
         margin-right: $m-margin--s;
-        font-size: 12px; //Magic number
-
-        &.m-button {
-            min-height: 20px;
-            min-width: 26px;
-        }
     }
 }

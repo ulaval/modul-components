@@ -8,7 +8,7 @@
                'm--has-value': hasValue }"
      @click="onClick">
     <label class="m-input-style__label" v-if="hasLabel">
-        <m-icon name="default" class="m-input-style__disabled-icon" v-if="disabled">
+        <m-icon class="m-input-style__disabled-icon" name="default" v-if="disabled">
         </m-icon>{{ label }}</label>
     <div class="m-input-style__value">
         <slot></slot>
