@@ -1,7 +1,7 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }" :style="{ width: width }">
-    {{ nbItemsVisible }}
+    {{ inactive }}
     <m-popup :placement="bottom-start"
-             :disabled="isDisabled"
+             :disabled="inactive"
              :open="propOpen"
              :enter="transitionEnter"
              :after-enter="transitionAfterEnter"
@@ -31,7 +31,7 @@
             tabindex="1"
             @keyup="keyupItem">
             <slot></slot>
-            <m-dropdown-item v-show="showNoItemsLabel" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
+            <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
         </ul>
 
         <template slot="footer" v-if="hasFooterSlot">
@@ -45,6 +45,8 @@
                       :editable="propEditable"
                       :force-focus="propOpen"
                       :placeholder="defaultText"
+                      :disabled="disabled"
+                      :waiting="waiting"
                       :error-message="errorMessage"
                       :valid-message="validMessage"
                       :helper-message="helperMessage"

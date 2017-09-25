@@ -6,8 +6,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
 import { DROPDOWN_ITEM_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
-import { KeyCode } from '../../utils/keycode/keycode';
-import { MDropdownInterface, SelectedValue } from '../dropdown/dropdown';
+import { MDropdownInterface } from '../dropdown/dropdown';
 import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropDownItemInterface extends Vue {
@@ -15,9 +14,10 @@ export interface MDropDownItemInterface extends Vue {
     visible: boolean;
     disabled: boolean;
     inactif: boolean;
-    propSelected: boolean;
+    propLabel: string | undefined;
+    propValue: any;
+    selected: boolean;
     hasFocus: boolean;
-    onSelectElement(): void;
 }
 
 export abstract class BaseDropdown extends ModulVue {
@@ -34,29 +34,21 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     @Prop()
     public value: any;
     @Prop({ default: false })
-    public selected: boolean;
-    @Prop({ default: false })
     public disabled: boolean;
     @Prop({ default: false })
     public noDataDefaultItem: boolean;
 
     public componentName: string = DROPDOWN_ITEM_NAME;
 
-    public key: string; // Dynamically create
     public inactif: boolean = false; // Without label and value
     public filter: string = ''; // Set by parent
-    public hasError: boolean = false;
     public root: Vue; // Dropdown component
     public group: Vue | undefined; // Dropdown-group parent if there is one
     public hasFocus: boolean = false;
 
-    private internalSelected: boolean = false;
-
     public created(): void {
         this.getMDropdownRoot(this);
         this.getMDropdownGroup(this);
-
-        this.key = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
 
         if (!this.value && !this.label) {
             this.inactif = true;
@@ -66,41 +58,11 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
         // Done a first time in the create because watch is not call on load
         if (!this.inactif) {
             (this.root as MDropdownInterface).items.push(this);
-            (this.root as MDropdownInterface).nbItemsVisible++;
-
-            if (this.group) {
-                (this.group as MDropdownGroupInterface).nbItemsVisible++;
-            }
+            this.incrementCounters();
         }
 
-        // Check if element is in v-model
-        if ((this.root as MDropdownInterface).multiple) {
-            if (Array.isArray((this.root as MDropdownInterface).value)) {
-                if ((this.root as MDropdownInterface).value.indexOf(this.propValue) != -1) {
-                    this.onSelectElement();
-                }
-            } else {
-                console.error('Model must be an Array');
-            }
-        } else {
-            if (Array.isArray((this.root as MDropdownInterface).value)) {
-                console.error('Model can\'t be an Array');
-            } else {
-                if ((this.root as MDropdownInterface).defaultFirstElement &&
-                    !(this.root as MDropdownInterface).value &&
-                    !(this.root as MDropdownInterface).isDisabled &&
-                    (this.root as MDropdownInterface).selectedList.length == 0) {
-
-                    // If no v-model and flag defaultFirstElement set
-                    // and no other dropdoww-item has been previously selected :
-                    // mark this element as selected
-                    this.onSelectElement();
-
-                } else if ((this.root as MDropdownInterface).value && (this.root as MDropdownInterface).value === this.propValue) {
-                    // If v-model value === current element
-                    this.onSelectElement();
-                }
-            }
+        if ((this.root as MDropdownInterface).model == this.propValue) {
+            (this.root as MDropdownInterface).setModel(this.propValue, this.propLabel);
         }
     }
 
@@ -108,44 +70,24 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
         let index: number = (this.root as MDropdownInterface).items.indexOf(this);
 
         if (index > -1) {
-            if ((this.root as MDropdownInterface).items[index] && ((this.root as MDropdownInterface).items[index] as MDropdownItem).visible) {
-                (this.root as MDropdownInterface).nbItemsVisible--;
+            if ((this.root as MDropdownInterface).items[index] &&
+                ((this.root as MDropdownInterface).items[index] as MDropdownItem).visible) {
+                this.decrementCounters();
             }
             (this.root as MDropdownInterface).items.splice(index, 1);
         }
 
-        for (let i = 0; i < (this.root as MDropdownInterface).selectedList.length; i++) {
-            if ((this.root as MDropdownInterface).selectedList[i].key == this.key) {
-                (this.root as MDropdownInterface).selectedList.splice(i, 1);
-                break;
-            }
-        }
-
-        if (this.group) {
-            (this.group as MDropdownGroupInterface).nbItemsVisible--;
-        }
     }
 
     @Watch('visible')
     public visibleChanged(visible: boolean): void {
         if (!this.inactif) {
             if (visible) {
-                (this.root as MDropdownInterface).nbItemsVisible++;
-                if (this.group) {
-                    (this.group as MDropdownGroupInterface).nbItemsVisible++;
-                }
+                this.incrementCounters();
             } else {
-                (this.root as MDropdownInterface).nbItemsVisible--;
-                if (this.group) {
-                    (this.group as MDropdownGroupInterface).nbItemsVisible--;
-                }
+                this.decrementCounters();
             }
         }
-    }
-
-    @Watch('selected')
-    public selectedChanged(selected: boolean): void {
-        this.onSelectElement();
     }
 
     // Value and label rules
@@ -181,12 +123,8 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
         }
     }
 
-    public get propSelected(): boolean {
-        return this.internalSelected;
-    }
-
-    public set propSelected(selected: boolean) {
-        this.internalSelected = selected != undefined ? selected : false;
+    public get selected(): boolean {
+        return (this.root as MDropdownInterface).model == this.propValue;
     }
 
     public get visible(): boolean {
@@ -208,43 +146,25 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
         return (this.root && (this.root as MDropdownInterface).nbItemsVisible != 0);
     }
 
-    public onSelectElement(): void {
+    public onClick(): void {
         if (!this.disabled && !this.inactif) {
-            let array: Array<SelectedValue> = (this.root as MDropdownInterface).selectedList;
+            (this.root as MDropdownInterface).setModel(this.propValue, this.propLabel);
+            (this.root as MDropdownInterface).emitChange(this.propValue, true);
+            (this.root as MDropdownInterface).toggleDropdown(false);
+        }
+    }
 
-            if ((this.root as MDropdownInterface).multiple) {
-                // Dropdown with multiple selection: Add current selection to previous
-                if (this.propSelected) {
-                    // Element unselected
-                    this.propSelected = (this.root as MDropdownInterface).addAction = false;
-                    for (let i = 0; i < array.length; i++) {
-                        if (array[i].key == this.key) {
-                            array.splice(i, 1);
-                            break;
-                        }
-                    }
-                } else {
-                    // Element selected
-                    this.propSelected = (this.root as MDropdownInterface).addAction = true;
-                    array.push({ key: this.key, value: this.propValue, label: this.propLabel });
-                }
-            } else {
-                // Dropdown without multiple selection: FirstRemove past selection, then add newove past selection, then add new
-                let currentSelectedElement: SelectedValue = array[0];
-                if (currentSelectedElement) {
-                    for (let item of (this.root as MDropdownInterface).items) {
-                        (item as MDropDownItemInterface).propSelected = false;
-                    }
-                    array = [];
-                }
+    private incrementCounters(): void {
+        (this.root as MDropdownInterface).nbItemsVisible++;
+        if (this.group) {
+            (this.group as MDropdownGroupInterface).nbItemsVisible++;
+        }
+    }
 
-                this.propSelected = (this.root as MDropdownInterface).addAction = true;
-                array.push({ key: this.key, value: this.propValue, label: this.propLabel });
-
-                (this.root as MDropdownInterface).toggleDropdown(false);
-            }
-
-            (this.root as MDropdownInterface).currentElement = {key: this.key, value: this.propValue, label: this.propLabel};
+    private decrementCounters(): void {
+        (this.root as MDropdownInterface).nbItemsVisible--;
+        if (this.group) {
+            (this.group as MDropdownGroupInterface).nbItemsVisible--;
         }
     }
 
@@ -260,7 +180,6 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
 
     private getMDropdownGroup(node: Vue): void {
         let groupNode: BaseDropdownGroup | undefined = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
-
         this.group = groupNode;
     }
 
