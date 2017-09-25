@@ -32,7 +32,6 @@ export interface MDropdownInterface extends Vue {
     ]
 })
 export class MDropdown extends BaseDropdown implements MDropdownInterface {
-
     @Prop()
     public value: any;
     @Prop()
@@ -56,18 +55,18 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public textNoMatch: string;
 
-    public componentName: string = DROPDOWN_NAME;
-
-    public isDisabled: boolean;
     public items: Vue[] = [];
     public nbItemsVisible: number = 0;
-    public selectedText: string = '';
-    public hasModel: boolean = true;
+
+    private selectedText: string = '';
+    private hasModel: boolean = true;
     private internalOpen: boolean = false;
     private noItemsLabel: string;
 
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
+
+    private componentName: string = DROPDOWN_NAME;
 
     public setFocus(elementFocus: Vue): void {
         for (let item of this.items) {
@@ -107,23 +106,21 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.propOpen = open;
     }
 
-    protected mounted(): void {
+    private mounted(): void {
         let textField = this.$children[0].$children[0].$children[0];
         this.textFieldLabelEl = textField.$refs.label as HTMLElement;
         this.textFieldInputValueEl = textField.$refs.inputValue as HTMLElement;
         this.propOpen = this.open;
     }
 
+    @Watch('value')
+    private valueChanged(value: any): void {
+        this.$emit('valueChanged', value);
+    }
+
     @Watch('open')
     private openChanged(open: boolean): void {
         this.propOpen = open;
-    }
-
-    @Watch('isDisabled')
-    private isDisabledChanged(disabled: boolean): void {
-        if (disabled) {
-            this.propOpen = false;
-        }
     }
 
     public get model(): any {
@@ -175,7 +172,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get inactive(): boolean {
-        return this.disabled || this.waiting;
+        let inactive: boolean = this.disabled || this.waiting;
+
+        if (inactive) {
+            this.toggleDropdown(false);
+        }
+
+        return inactive;
     }
 
     private filterDropdown(text: string): void {

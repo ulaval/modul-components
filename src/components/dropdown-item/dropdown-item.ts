@@ -54,6 +54,9 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
             this.inactif = true;
         }
 
+        (this.root as MDropdownInterface).$on('valueChanged',
+            (value: any) => { this.updateTextfield(value); });
+
         // If element is active add to array of items and increment counters
         // Done a first time in the create because watch is not call on load
         if (!this.inactif) {
@@ -61,9 +64,7 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
             this.incrementCounters();
         }
 
-        if ((this.root as MDropdownInterface).model == this.propValue) {
-            (this.root as MDropdownInterface).setModel(this.propValue, this.propLabel);
-        }
+        this.updateTextfield((this.root as MDropdownInterface).model);
     }
 
     beforeDestroy() {
@@ -76,7 +77,6 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
             }
             (this.root as MDropdownInterface).items.splice(index, 1);
         }
-
     }
 
     @Watch('visible')
@@ -151,6 +151,12 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
             (this.root as MDropdownInterface).setModel(this.propValue, this.propLabel);
             (this.root as MDropdownInterface).emitChange(this.propValue, true);
             (this.root as MDropdownInterface).toggleDropdown(false);
+        }
+    }
+
+    private updateTextfield(value): void {
+        if (value === this.propValue) {
+            (this.root as MDropdownInterface).setModel(this.propValue, this.propLabel);
         }
     }
 
