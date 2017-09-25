@@ -45,6 +45,9 @@
                       :editable="propEditable"
                       :force-focus="propOpen"
                       :placeholder="defaultText"
+                      :error-message="errorMessage"
+                      :valid-message="validMessage"
+                      :helper-message="helperMessage"
                       @change="filterDropdown($event)"
                       @keyup="keyupReference">
         </m-text-field>

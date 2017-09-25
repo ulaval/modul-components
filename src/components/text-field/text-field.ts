@@ -168,6 +168,10 @@ export class MTextField extends ModulVue {
     private get hasIcon(): boolean {
         return !!this.iconName && !this.as<InputStateMixin>().isDisabled;
     }
+
+    private get isMessageVisible(): boolean {
+        return !this.forceFocus;
+    }
 }
 
 const TextFieldPlugin: PluginObject<any> = {
