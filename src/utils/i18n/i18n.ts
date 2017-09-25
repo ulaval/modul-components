@@ -83,7 +83,6 @@ export class Messages {
             }
         }
 
-        console.log('val', val, params);
         val = format(val, params);
 
         return val;
@@ -179,7 +178,6 @@ export class Messages {
 function format(val: string, params: any[]): string {
     return val.replace(FORMAT_REGEX, match => {
         let index = parseInt(match.substring(1, match.length - 1), 10);
-        console.log('match', index, params[index]);
 
         if (index >= params.length) {
             console.warn(`The parameter ${index} doesn't exist while translating: '${val}'`);
