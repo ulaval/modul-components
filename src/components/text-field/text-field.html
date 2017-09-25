@@ -1,5 +1,5 @@
 <div class="m-text-field"
-      :class="[{ 'm--is-focus' : isFocus || forceFocus,
+      :class="[{ 'm--is-focus' : isFocus,
           'm--not-editable' : !propEditable,
           'm--is-disabled' : isDisabled,
           'm--has-error' : hasError,
@@ -29,7 +29,7 @@
             v-if="!propEditable">
             <div class="m-text-field__input__value" ref="inputValue" v-if="!hasValueSlot && !isPlaceholderVisible">{{ model }}</div>
             <!-- <div class="m-text-field__input__value" ref="inputValue" v-if="hasValueSlot && !hasDefaultText"><slot></slot></div> -->
-            <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="!hasValue && !hasValueSlot">i</div>
+            <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="!hasValue && !hasValueSlot && !isPlaceholderVisible">i</div>
             <div class="m-text-field__input__default-text" v-if="isPlaceholderVisible">- {{ placeholder }} -</div>
         </div>
         <m-button mode="icon" :icon-name="iconName" icon-size="13px" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>

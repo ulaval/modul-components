@@ -101,11 +101,11 @@ export class MTextField extends ModulVue {
     }
 
     private get propPlaceholder(): string {
-        return this.hasLabel ? (this.internalIsFocus ? this.placeholder : '') : this.placeholder;
+        return this.hasLabel ? (this.isFocus ? this.placeholder : '') : this.placeholder;
     }
 
     private get isPlaceholderVisible(): boolean {
-        return !!this.placeholder && (this.hasLabel ? this.internalIsFocus && !this.hasValue : !this.hasValue);
+        return !!this.placeholder && (this.hasLabel ? this.isFocus && !this.hasValue : !this.hasValue);
     }
 
     private get inputType(): MTextFieldType {
@@ -134,7 +134,7 @@ export class MTextField extends ModulVue {
     }
 
     private get isFocus(): boolean {
-        return this.internalIsFocus;
+        return this.internalIsFocus || this.forceFocus;
     }
 
     private get iconNamePassword() {
