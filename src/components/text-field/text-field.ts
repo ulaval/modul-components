@@ -57,6 +57,8 @@ export class MTextField extends ModulVue {
     public forceFocus: boolean;
     @Prop()
     public placeholder: string;
+    @Prop({ default: false })
+    public waiting: boolean;
 
     private internalValue: string = '';
     private passwordAsText: boolean = false;

@@ -283,4 +283,12 @@ $m-text-field--margin: $m-margin--s !default;
             }
         }
     }
+
+    .m-spinner {
+        min-height: 20px;
+        min-width: 26px;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+    }
 }
