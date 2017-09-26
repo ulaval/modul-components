@@ -49,7 +49,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public editable: boolean;
     // @Prop({ default: false })
     // public multiple: boolean;
-    @Prop()
+    @Prop({default: '100%'})
     public width: string;
     @Prop()
     public textNoData: string;
