@@ -147,7 +147,7 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     }
 
     public onClick(): void {
-        if (!this.disabled && !this.inactif) {
+        if (!(this.root as MDropdownInterface).inactive && !this.disabled && !this.inactif) {
             (this.root as MDropdownInterface).setModel(this.propValue, this.propLabel);
             (this.root as MDropdownInterface).emitChange(this.propValue, true);
             (this.root as MDropdownInterface).toggleDropdown(false);

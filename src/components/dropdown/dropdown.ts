@@ -17,6 +17,7 @@ const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 export interface MDropdownInterface extends Vue {
     model: any;
     items: Vue[];
+    inactive: boolean;
     nbItemsVisible: number;
     setFocus(item: Vue): void;
     toggleDropdown(open: boolean): void;
@@ -107,9 +108,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private mounted(): void {
-        let textField = this.$children[0].$children[0].$children[0];
-        this.textFieldLabelEl = textField.$refs.label as HTMLElement;
-        this.textFieldInputValueEl = textField.$refs.inputValue as HTMLElement;
         this.propOpen = this.open;
     }
 
@@ -172,13 +170,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get inactive(): boolean {
-        let inactive: boolean = this.disabled || this.waiting;
-
-        if (inactive) {
-            this.toggleDropdown(false);
-        }
-
-        return inactive;
+        return this.disabled || this.waiting;
     }
 
     private filterDropdown(text: string): void {
