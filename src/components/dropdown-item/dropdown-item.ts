@@ -10,13 +10,8 @@ import { MDropdownInterface } from '../dropdown/dropdown';
 import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropDownItemInterface extends Vue {
-    filter: string;
     visible: boolean;
     disabled: boolean;
-    inactif: boolean;
-    propLabel: string | undefined;
-    propValue: any;
-    selected: boolean;
     hasFocus: boolean;
 }
 
