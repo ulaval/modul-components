@@ -4,10 +4,11 @@ $m-input-style--color-focus: $m-color--interactive !default;
 $m-input-style--color-error: $m-color--error !default;
 $m-input-style--color-valid: $m-color--success !default;
 $m-input-style--color-disabled: $m-color--grey-darker !default;
-$m-input-style--margin: $m-margin--s !default;
+$m-input-style--padding: 5px !default;
 
 .m-input-style {
     position: relative;
+    z-index: 0;
     display: inline-flex;
     flex-direction: column;
     outline: none;
@@ -43,6 +44,11 @@ $m-input-style--margin: $m-margin--s !default;
         &::before {
             border-color: $m-color--text;
         }
+
+        .m-button.m--is-mode-icon,
+        .m-icon.m-icon {
+            color: $m-color--text;
+        }
     }
 
     &.m--is-focus {
@@ -50,7 +56,9 @@ $m-input-style--margin: $m-margin--s !default;
             width: 100%;
         }
 
-        .m-input-style__label {
+        .m-input-style__label,
+        .m-button.m--is-mode-icon,
+        .m-icon.m-icon {
             color: $m-input-style--color-focus;
         }
     }
@@ -60,7 +68,8 @@ $m-input-style--margin: $m-margin--s !default;
 
         .m-input-style {
             &__label {
-                top: 0;
+                transform: translate(0, 100%);
+                bottom: 100%;
                 z-index: 1;
                 width: 100%;
                 font-size: $m-font-size--s;
@@ -75,11 +84,11 @@ $m-input-style--margin: $m-margin--s !default;
     }
 
     &.m--has-label {
-        padding-top: 18px;
+        padding-top: 16px; // Magic number
     }
 
     &:not(.m--is-label-up) {
-        .m-input-style__value {
+        .m-input-style__body {
             opacity: 0;
         }
     }
@@ -93,7 +102,9 @@ $m-input-style--margin: $m-margin--s !default;
             background: $m-input-style--color-error;
         }
 
-        .m-input-style__label {
+        .m-input-style__label,
+        .m-button.m--is-mode-icon,
+        .m-icon.m-icon {
             color: $m-input-style--color-error;
         }
     }
@@ -107,19 +118,14 @@ $m-input-style--margin: $m-margin--s !default;
             background: $m-input-style--color-valid;
         }
 
-        .m-input-style__label {
+        .m-input-style__label,
+        .m-button.m--is-mode-icon,
+        .m-icon.m-icon {
             color: $m-input-style--color-valid;
         }
     }
 
     &.m--is-disabled {
-        user-select: none;
-
-        &,
-        .m-input-style__label {
-            cursor: not-allowed;
-        }
-
         &::before {
             border-bottom-style: dashed;
             border-color: $m-input-style--color-disabled;
@@ -129,50 +135,100 @@ $m-input-style--margin: $m-margin--s !default;
             background: $m-input-style--color-disabled;
         }
 
-        .m-input-style {
-            &__label,
-            &__value {
-                color: $m-input-style--color-disabled;
-            }
+        .m-input-style__label,
+        .m-input-style__body,
+        .m-button.m--is-mode-icon,
+        .m-icon.m-icon {
+            color: $m-input-style--color-disabled;
+        }
+
+        &,
+        .m-input-style__label,
+        .m-input-style__body,
+        .m-input-style__body__left,
+        .m-input-style__body__right,
+        .m-input-style__body input,
+        .m-input-style__body div,
+        .m-input-style__body span,
+        .m-button.m--is-mode-icon,
+        .m-icon.m-icon {
+            color: $m-input-style--color-disabled;
+            cursor: not-allowed;
+            user-select: none;
         }
     }
 
     &__label {
-        transition-property: color, top, font-size;
+        transition-property: color, top, bottom, transform, font-size;
         transition-duration: $m-transition-duration--l;
         transition-timing-function: ease;
         position: absolute;
-        top: 18px; //Magic number
-        z-index: 1;
+        z-index: 2;
+        bottom: $m-input-style--padding;
         width: 100%;
         font-size: $m-font-size--l;
         font-weight: $m-font-weight--bold;
         white-space: nowrap;
     }
 
-    &__value {
+    &__body {
         transition: opacity 0.3s ease;
         position: relative;
-        z-index: 2;
-        padding: 0 0 $m-input-style--margin 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        padding: 0 0 $m-input-style--padding 0;
         font-weight: $m-font-weight;
         text-decoration: none;
         flex: 1 1 auto;
+
+        &,
+        div,
+        span {
+            cursor: pointer;
+        }
 
         &,
         input {
             outline: none;
             font-family: $m-font-family;
             font-size: $m-font-size--l;
+            font-weight: $m-font-weight;
             text-align: left;
             color: $m-color--text;
             border: none;
             background: none;
+            cursor: text;
+        }
+
+        &__left {
+            flex: 1 1 auto;
+        }
+
+        &__right {
+            display: flex;
         }
 
         &__transparent-text {
             opacity: 0;
             width: 0;
+        }
+
+        .m-button.m--is-mode-icon,
+        .m-icon.m-icon {
+            position: relative;
+            z-index: 0;
+            font-size: 16px;
+            color: $m-color--grey-darker;
+        }
+
+        .m-button.m--is-mode-icon {
+            min-width: auto;
+            min-height: auto;
+        }
+
+        .m-icon.m-icon {
+            transition: color 0.3s ease;
         }
     }
 

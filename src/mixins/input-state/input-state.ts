@@ -33,7 +33,12 @@ export class InputState extends Vue implements InputStateMixin {
     private error: boolean;
 
     public get isDisabled(): boolean {
-        return this.propState == InputStateValue.Disabled;
+        let disabled: boolean = this.propState == InputStateValue.Disabled;
+        this.$nextTick(() => {
+            let inputEl: HTMLElement = this.$el.querySelector('input') as HTMLElement;
+            disabled ? inputEl.setAttribute('disabled', 'true') : inputEl.removeAttribute('disabled');
+        });
+        return disabled;
     }
 
     public get hasError(): boolean {
@@ -50,7 +55,7 @@ export class InputState extends Vue implements InputStateMixin {
 
     public get propState(): InputStateValue {
         let state: InputStateValue = this.state == InputStateValue.Disabled || this.state == InputStateValue.Error || this.state == InputStateValue.Valid ? this.state
-        : InputStateValue.Default;
+            : InputStateValue.Default;
         if (!this.disabled) {
             if (this.hasErrorMessage) {
                 state = InputStateValue.Error;
