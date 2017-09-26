@@ -88,7 +88,7 @@ $m-input-style--padding: 5px !default;
     }
 
     &:not(.m--is-label-up) {
-        .m-input-style__body {
+        .m-input-style__body__left {
             opacity: 0;
         }
     }
@@ -163,7 +163,7 @@ $m-input-style--padding: 5px !default;
         transition-duration: $m-transition-duration--l;
         transition-timing-function: ease;
         position: absolute;
-        z-index: 2;
+        z-index: 0;
         bottom: $m-input-style--padding;
         width: 100%;
         font-size: $m-font-size--l;
@@ -172,7 +172,6 @@ $m-input-style--padding: 5px !default;
     }
 
     &__body {
-        transition: opacity 0.3s ease;
         position: relative;
         z-index: 1;
         display: flex;
@@ -202,6 +201,7 @@ $m-input-style--padding: 5px !default;
         }
 
         &__left {
+            transition: opacity 0.3s ease;
             flex: 1 1 auto;
         }
 
