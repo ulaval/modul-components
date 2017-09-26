@@ -248,7 +248,7 @@ $m-text-field--margin: $m-margin--s !default;
 
         &__value {
             display: block;
-            white-space: nowrap;
+            // white-space: nowrap; allow the selected text to wrap in text-filed/dropdown
         }
 
         &[type="password"] {
