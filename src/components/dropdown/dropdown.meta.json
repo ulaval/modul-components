@@ -11,8 +11,13 @@
         "defaultText": {
             "type": "string"
         },
-        "defaultValue": {
-            "type": "any"
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
+            "type": "boolean",
+            "default": false
         },
         "open": {
             "type": "boolean",
@@ -22,16 +27,12 @@
             "type": "boolean",
             "default": false
         },
-        "multiple": {
-            "type": "boolean",
-            "default": false
-        },
+        // "multiple": {
+        //     "type": "boolean",
+        //     "default": false
+        // },
         "width": {
             "type": "string"
-        },
-        "defaultFirstElement": {
-            "type": "boolean",
-            "default": false
         },
         "textNoData": {
             "type": "string"

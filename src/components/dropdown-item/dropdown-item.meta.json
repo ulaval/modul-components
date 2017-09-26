@@ -8,10 +8,6 @@
         "value": {
             "type": "any"
         },
-        "selected": {
-            "type": "boolean",
-            "default": false
-        },
         "disabled": {
             "type": "boolean",
             "default": false
