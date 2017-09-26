@@ -113,6 +113,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     @Watch('value')
     private valueChanged(value: any): void {
+        this.selectedText = '';
         this.$emit('valueChanged', value);
     }
 
