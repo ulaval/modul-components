@@ -1,5 +1,4 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }" :style="{ width: width }">
-
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ width: width }">
     <m-popup :placement="bottom-start"
              :disabled="inactive"
              :open="propOpen"

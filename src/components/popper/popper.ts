@@ -63,7 +63,7 @@ export class MPopper extends ModulVue {
     public componentName: string = POPPER_NAME;
     private internalOpen: boolean = false;
     private popper: Popper | undefined;
-    private visible: boolean = false;
+    private internalVisible: boolean = false;
     private portalTargetEl: HTMLElement;
     private propId: string;
 
@@ -98,26 +98,28 @@ export class MPopper extends ModulVue {
     }
 
     public set propOpen(open) {
-        if (!this.disabled) {
-            if (open) {
-                if (!this.internalOpen) {
-                    this.internalOpen = true;
-                    this.openPopper();
-                    this.$emit('open');
-                    // Keep the timer to allow an element outside the component to open the popper
-                    setTimeout(() => {
-                        this.$modul.event.$on('click', this.onClickOutside);
-                    }, 0);
-                }
-            } else {
-                if (this.internalOpen) {
-                    this.internalOpen = false;
-                    this.closePopper();
-                    this.$modul.event.$off('click', this.onClickOutside);
-                    this.$emit('close');
-                }
+        if (open) {
+            if (!this.internalOpen && !this.disabled) {
+                this.internalOpen = true;
+                this.openPopper();
+                this.$emit('open');
+                // Keep the timer to allow an element outside the component to open the popper
+                setTimeout(() => {
+                    this.$modul.event.$on('click', this.onClickOutside);
+                }, 0);
+            }
+        } else {
+            if (this.internalOpen) {
+                this.internalOpen = false;
+                this.closePopper();
+                this.$modul.event.$off('click', this.onClickOutside);
+                this.$emit('close');
             }
         }
+    }
+
+    public get visible(): boolean {
+        return this.internalVisible && !this.disabled;
     }
 
     @Watch('open')
@@ -133,7 +135,7 @@ export class MPopper extends ModulVue {
 
     private openPopper(): void {
         if (!this.disabled) {
-            this.visible = true;
+            this.internalVisible = true;
             this.$nextTick(() => {
                 let portalTargetEl: HTMLElement = this.getPortalTargetEl();
                 if (this.popper == undefined) {
@@ -152,7 +154,7 @@ export class MPopper extends ModulVue {
 
     private closePopper(): void {
         if (!this.disabled) {
-            this.visible = false;
+            this.internalVisible = false;
             this.setFastFocusToElement(this.$el);
         }
     }
