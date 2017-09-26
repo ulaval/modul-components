@@ -34,10 +34,10 @@ export class InputState extends Vue implements InputStateMixin {
 
     public get isDisabled(): boolean {
         let disabled: boolean = this.propState == InputStateValue.Disabled;
-        this.$nextTick(() => {
-            let inputEl: HTMLElement = this.$el.querySelector('input') as HTMLElement;
-            disabled ? inputEl.setAttribute('disabled', 'true') : inputEl.removeAttribute('disabled');
-        });
+        // this.$nextTick(() => {
+        //     let inputEl: HTMLElement = this.$el.querySelector('input') as HTMLElement;
+        //     disabled ? inputEl.setAttribute('disabled', 'true') : inputEl.removeAttribute('disabled');
+        // });
         return disabled;
     }
 
