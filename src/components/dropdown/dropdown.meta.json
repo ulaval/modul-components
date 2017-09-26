@@ -27,10 +27,6 @@
             "type": "boolean",
             "default": false
         },
-        // "multiple": {
-        //     "type": "boolean",
-        //     "default": false
-        // },
         "width": {
             "type": "string"
         },
