@@ -2,13 +2,9 @@
     "tag": "m-checkbox",
     "name": "m-checkbox-meta:name",
     "attributes": {
-        "checked": {
+        "value": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": false
         },
         "position": {
             "type": "string",

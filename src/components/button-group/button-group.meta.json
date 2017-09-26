@@ -5,31 +5,19 @@
         "value": {
             "type": "string"
         },
-        "disabled": {
+        "enabled": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": false
         },
         "fullSize": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": false
         },
         "inline": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         },
-        "iconPosition": {
+        "position": {
             "type": "string",
             "values": [
                 "left",

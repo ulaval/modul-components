@@ -17,7 +17,7 @@ export const ENGLISH: string = 'en';
 /**
  * Regex to parse and format messages.
  */
-const FORMAT_REGEX: RegExp = /{\\d+}/g;
+const FORMAT_REGEX: RegExp = /{\d+}/g;
 
 export type MessageMap = {
     [key: string]: string;

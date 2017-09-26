@@ -6,13 +6,16 @@ import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 
-const POSITION_LEFT: string = 'left';
+export enum MCheckboxPosition {
+    Left = 'left',
+    Right = 'right'
+}
 
 @WithRender
 @Component
 export class MCheckbox extends Vue {
 
-    @Prop({ default: POSITION_LEFT })
+    @Prop({ default: MCheckboxPosition.Left })
     public position: string;
     @Prop()
     public value: boolean;
@@ -42,7 +45,7 @@ export class MCheckbox extends Vue {
     }
 
     private get hasCheckboxLeft(): boolean {
-        return this.position == POSITION_LEFT;
+        return this.position == MCheckboxPosition.Left;
     }
 
     private get hasLabelSlot(): boolean {

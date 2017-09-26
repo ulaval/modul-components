@@ -15,7 +15,6 @@ const componentRoutes: RouteConfig[] = [{
     path: '/attributes',
     component: Attributes,
     beforeEnter: (to, from, next) => {
-        console.log('Attributes router.beforeEach');
         next();
     }
 }, {
@@ -46,7 +45,6 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log('Gobal router.beforeEach');
     next();
 });
 

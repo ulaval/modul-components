@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
@@ -15,24 +14,15 @@ const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 198;
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
-export interface SelectedValue {
-    key: string | undefined;
-    value: any;
-    label: string;
-}
-
 export interface MDropdownInterface extends Vue {
-    value: any;
+    model: any;
     items: Vue[];
-    selected: Array<SelectedValue>;
-    currentElement: SelectedValue;
-    addAction: boolean;
+    inactive: boolean;
     nbItemsVisible: number;
-    isDisabled: boolean;
-    multiple: boolean;
-    defaultFirstElement: boolean;
     setFocus(item: Vue): void;
     toggleDropdown(open: boolean): void;
+    setModel(value: any, label: string | undefined): void;
+    emitChange(value: any, action: boolean);
 }
 
 @WithRender
@@ -43,44 +33,41 @@ export interface MDropdownInterface extends Vue {
     ]
 })
 export class MDropdown extends BaseDropdown implements MDropdownInterface {
-
     @Prop()
     public value: any;
     @Prop()
     public label: string;
     @Prop()
     public defaultText: string;
-    @Prop()
-    public defaultValue: any;
+    @Prop({ default: false })
+    public disabled: boolean;
+    @Prop({ default: false })
+    public waiting: boolean;
     @Prop({ default: false })
     public open: boolean;
     @Prop({ default: false })
     public editable: boolean;
-    @Prop({ default: false })
-    public multiple: boolean;
+    // @Prop({ default: false })
+    // public multiple: boolean;
     @Prop()
     public width: string;
-    @Prop({ default: false })
-    public defaultFirstElement: boolean;
     @Prop()
     public textNoData: string;
     @Prop()
     public textNoMatch: string;
 
-    public componentName: string = DROPDOWN_NAME;
-    public isDisabled: boolean;
-
     public items: Vue[] = [];
-    public selected: Array<SelectedValue> = [];
-    public currentElement: SelectedValue = { 'key': undefined, 'value': undefined, 'label': '' };
-    public addAction: true;
     public nbItemsVisible: number = 0;
-    public selectedText: string = '';
+
+    private selectedText: string = '';
+    private hasModel: boolean = true;
     private internalOpen: boolean = false;
     private noItemsLabel: string;
 
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
+
+    private componentName: string = DROPDOWN_NAME;
 
     public setFocus(elementFocus: Vue): void {
         for (let item of this.items) {
@@ -105,62 +92,43 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return elementFocus;
     }
 
+    public setModel(value: any, label: string | undefined): void {
+        if (label) {
+            this.selectedText = label;
+        }
+        this.$emit('input', value);
+    }
+
+    public emitChange(value: any, selected: boolean) {
+        this.$emit('change', value, selected);
+    }
+
     public toggleDropdown(open: boolean): void {
         this.propOpen = open;
     }
 
-    protected mounted(): void {
-        let textField = this.$children[0].$children[0].$children[0];
-        this.textFieldLabelEl = textField.$refs.label as HTMLElement;
-        this.textFieldInputValueEl = textField.$refs.inputValue as HTMLElement;
+    private mounted(): void {
         this.propOpen = this.open;
     }
 
-    protected beforeDestroy() {
-        console.log('Dropdown', 'beforeDestroy');
-    }
-
-    protected destroyed() {
-        console.log('Dropdown', 'destroyed');
-    }
-
-    @Watch('selected')
-    private selectedChanged(value): void {
-        let values: any[] = [];
-
-        for (let selectedValue of this.selected) {
-            values.push(selectedValue.value);
-        }
-
-        if (value.length == 0 && this.defaultValue) {
-            values.push(this.defaultValue);
-        }
-
-        this.selectedText = '';
-        for (let item of this.selected) {
-            if (this.selectedText != '') {
-                this.selectedText += ', ';
-            }
-            this.selectedText += item.label;
-        }
-
-        this.$emit('change', values, this.addAction);
-
-        if (this.multiple) {
-            this.$emit('input', values, this.addAction);
-        } else {
-            this.$emit('input', values[0], this.addAction);
-        }
-    }
-
-    @Watch('currentElement')
-    private currentElementChanged(value): void {
-        this.$emit('elementSelected', this.currentElement.value, this.addAction);
+    @Watch('value')
+    private valueChanged(value: any): void {
+        this.$emit('valueChanged', value);
     }
 
     @Watch('open')
     private openChanged(open: boolean): void {
         this.propOpen = open;
+    }
+
+    public get model(): any {
+        this.hasModel = !!this.value;
+
+        if (this.value == undefined) {
+            console.warn('A v-model is required to output the selected value(s)');
+        }
+
+        return this.value;
     }
 
     public get propOpen(): boolean {
@@ -171,36 +139,26 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.internalOpen = open != undefined ? open : false;
         this.$nextTick(() => {
             if (open) {
-                this.$el.style.zIndex = '10';
                 this.$emit('open');
             } else {
-                this.$el.style.removeProperty('z-index');
                 this.$emit('close');
             }
         });
     }
 
     private get propEditable(): boolean {
-        return this.editable && this.selected.length == 0;
+        return this.editable && !this.hasModel;
     }
 
     private get propTextNoData(): string {
-        if (this.textNoData) {
-            return this.textNoData;
-        } else {
-            return this.$i18n.translate('m-dropdown:no-data');
-        }
+        return (this.textNoData ? this.textNoData : this.$i18n.translate('m-dropdown:no-data'));
     }
 
     private get propTextNoMatch(): string {
-        if (this.textNoMatch) {
-            return this.textNoMatch;
-        } else {
-            return this.$i18n.translate('m-dropdown:no-result');
-        }
+        return (this.textNoMatch ? this.textNoMatch : this.$i18n.translate('m-dropdown:no-result'));
     }
 
-    private get showNoItemsLabel(): boolean {
+    private get noItems(): boolean {
         let show: boolean = false;
 
         if (this.nbItemsVisible == 0) {
@@ -211,10 +169,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return show;
     }
 
+    public get inactive(): boolean {
+        return this.disabled || this.waiting;
+    }
+
     private filterDropdown(text: string): void {
-        if (this.selected.length == 0) {
+        if (!this.hasModel) {
             for (let item of this.items) {
-                if (!(item as MDropDownItemInterface).propInactif) {
+                if (!(item as MDropDownItemInterface).inactif) {
                     (item as MDropDownItemInterface).filter = normalizeString(text.trim());
                 }
             }
@@ -305,7 +267,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             case KeyCode.M_ENTER:
             case KeyCode.M_RETURN:
                 if (focusElement) {
-                    (focusElement as MDropDownItemInterface).onSelectElement();
+                    // (focusElement as MDropDownItemInterface).onSelectElement();
                 }
                 return;
         }
@@ -332,7 +294,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 done();
             }
         });
-
     }
 
     private transitionAfterEnter(el: HTMLElement): void {

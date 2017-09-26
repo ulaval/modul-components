@@ -29,7 +29,7 @@ export interface DatepickerMonth {
 @Component({
     mixins: [InputState]
 })
-export class MDatepicker extends ModulVue implements InputStateMixin {
+export class MDatepicker extends ModulVue {
 
     @Prop({ default: () => { return moment(); } })
     public value: moment.Moment;
@@ -41,13 +41,8 @@ export class MDatepicker extends ModulVue implements InputStateMixin {
     public max: moment.Moment;
     @Prop({ default: () => ({ placement: 'bottom-start' }) })
     public options: any;
-    @Prop()
+    @Prop( {default: false})
     public disabled: boolean;
-
-    // Variables from InputStateMixin
-    public hasError: boolean;
-    public isDisabled: boolean;
-    public isValid: boolean;
 
     public componentName: string = DATEPICKER_NAME;
 

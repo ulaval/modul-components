@@ -12,51 +12,27 @@
         },
         "shadow": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         },
         "border": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         },
         "padding": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         },
         "paddingHeader": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         },
         "paddingBody": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         },
         "paddingFooter": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 0
+            "default": true
         }
     },
     "overview": "panel.overview",

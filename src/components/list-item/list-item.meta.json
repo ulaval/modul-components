@@ -1,0 +1,19 @@
+{
+    "tag": "m-list-item",
+    "name": "m-list-item-meta:name",
+    "attributes": {
+        "deleteButton": {
+            "type": "boolean",
+            "default": true
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "overview": "list-item.overview"
+}

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 export enum InputStateValue {
     Default = 'default',
@@ -13,30 +13,24 @@ export interface InputStateMixin {
     hasError: boolean;
     isDisabled: boolean;
     isValid: boolean;
+    hasHelper: boolean;
 }
 
 @Component
 export class InputState extends Vue implements InputStateMixin {
     @Prop({ default: InputStateValue.Default })
     public state: InputStateValue;
-    @Prop({ default: '' })
+    @Prop({ default: false })
+    public disabled: boolean;
+    @Prop()
     public errorMessage: string;
-    @Prop({ default: '' })
+    @Prop()
     public validMessage: string;
-    @Prop({ default: '' })
+    @Prop()
     public helperMessage: string;
 
-    private internalState: InputStateValue = InputStateValue.Default;
-    private internalErrorMessage: string = '';
-    private internalValidMessage: string = '';
-    private internalHelperMessage: string = '';
-
-    protected created(): void {
-        this.propState = this.state;
-        this.propErrorMessage = this.errorMessage;
-        this.propValidMessage = this.validMessage;
-        this.propHelperMessage = this.helperMessage;
-    }
+    private valid: boolean;
+    private error: boolean;
 
     public get isDisabled(): boolean {
         return this.propState == InputStateValue.Disabled;
@@ -46,67 +40,34 @@ export class InputState extends Vue implements InputStateMixin {
         return this.propState == InputStateValue.Error;
     }
 
+    public get hasHelper(): boolean {
+        return !!this.helperMessage || this.helperMessage == ' ';
+    }
+
     public get isValid(): boolean {
         return this.propState == InputStateValue.Valid;
     }
 
-    @Watch('state')
-    private stateChanged(state: InputStateValue): void {
-        this.propState = state;
-    }
-
-    @Watch('errorMessage')
-    private errorMessageChanged(message: string): void {
-        this.propErrorMessage = message;
-    }
-
-    @Watch('validMessage')
-    private validMessageChanged(message: string): void {
-        this.propValidMessage = message;
-    }
-
-    @Watch('helperMessage')
-    private helperMessageChanged(message: string): void {
-        this.helperMessage = message;
-    }
-
-    private set propState(state: InputStateValue) {
-        this.internalState =
-            state == InputStateValue.Disabled || state == InputStateValue.Error || state == InputStateValue.Valid ? state : InputStateValue.Default;
-    }
-
-    private get propState(): InputStateValue {
-        return this.internalState;
-    }
-
-    private set propErrorMessage(message: string) {
-        this.internalErrorMessage = message;
-
-        if (!this.isDisabled && this.internalErrorMessage != '') {
-            this.propState = InputStateValue.Error;
+    public get propState(): InputStateValue {
+        let state: InputStateValue = this.state == InputStateValue.Disabled || this.state == InputStateValue.Error || this.state == InputStateValue.Valid ? this.state
+        : InputStateValue.Default;
+        if (!this.disabled) {
+            if (this.hasErrorMessage) {
+                state = InputStateValue.Error;
+            } else if ((this.hasValidMessage)) {
+                state = InputStateValue.Valid;
+            }
+        } else {
+            state = InputStateValue.Disabled;
         }
+        return state;
     }
 
-    private get propErrorMessage(): string {
-        return this.internalErrorMessage;
+    private get hasErrorMessage(): boolean {
+        return !!this.errorMessage || this.errorMessage == ' ';
     }
 
-    private set propValidMessage(message: string) {
-        this.internalValidMessage = message;
-        if (!this.isDisabled && this.propState != InputStateValue.Error && this.propValidMessage != '') {
-            this.propState = InputStateValue.Valid;
-        }
-    }
-
-    private get propValidMessage(): string {
-        return this.internalValidMessage;
-    }
-
-    private set propHelperMessage(message: string) {
-        this.internalHelperMessage = message;
-    }
-
-    private get propHelperMessage(): string {
-        return this.internalHelperMessage;
+    private get hasValidMessage(): boolean {
+        return !!this.validMessage || this.validMessage == ' ';
     }
 }

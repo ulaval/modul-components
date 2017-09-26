@@ -2,7 +2,13 @@
     "tag": "m-radio",
     "name": "m-radio-meta:name",
     "attributes": {
+        "modelValue": {
+            "type": "string"
+        },
         "value": {
+            "type": "string"
+        },
+        "name": {
             "type": "string"
         },
         "position": {
@@ -13,13 +19,13 @@
             ],
             "default": 0
         },
-        "disabled": {
+        "enabled": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": 1
+            "default": true
+        },
+        "demo": {
+            "type": "boolean",
+            "default": false
         },
         "iconName": {
             "type": "string"

@@ -3,7 +3,8 @@
          'm--is-regular': propSkin == 'regular' || propSkin == 'dark',
          'm--is-light': propSkin == 'light',
          'm--is-dark': propSkin == 'dark',
-         'm--is-vanilla': propSkin == 'vanilla'
+         'm--is-vanilla': propSkin == 'vanilla',
+         'm--is-arrow': propSkin == 'arrow'
      }">
     <ul class="m-nav-bar__list" aria-hidden="true">
         <slot>
@@ -14,4 +15,5 @@
         </slot>
     </ul>
     <div aria-hidden="true" class="m-nav-bar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propLine" ref="line"></div>
+    <div aria-hidden="true" class="m-nav-bar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propArrow" ref="Arrow"></div>
 </nav>

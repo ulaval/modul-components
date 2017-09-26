@@ -5,6 +5,9 @@
         "i18n-key": {
             "type": "string",
             "description": "m-i18n-meta:i18n-key-desc"
+        },
+        "k": {
+            "type": "string"
         }
     },
     "overview": "i18n.overview",

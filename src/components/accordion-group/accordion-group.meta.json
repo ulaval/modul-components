@@ -2,10 +2,6 @@
     "tag": "m-accordion-group",
     "name": "m-accordion-group-meta:name",
     "attributes": {
-        "allOpen": {
-            "type": "boolean",
-            "default": false
-        },
         "skin": {
             "type": "string",
             "values": [
@@ -16,6 +12,10 @@
             "default": 0
         },
         "concurrent": {
+            "type": "boolean",
+            "default": false
+        },
+        "allOpen": {
             "type": "boolean",
             "default": false
         }

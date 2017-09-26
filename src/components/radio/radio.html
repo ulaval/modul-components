@@ -4,18 +4,16 @@
               'm--is-checked': model == value,
               'm--is-focus': hasFocus && propEnabled,
               'm--is-input-right': propPosition == 'right',
-              'm--is-first': firstChild,
-              'm--is-last': lastChild,
-              'm--is-full-size': propFullSize,
+              'm--is-full-size': propFullsize,
               'm--is-inline': propInline }">
     <input class="m-radio__hidden" :value="value" type="radio" v-model="model" :id="radioID" :name="propName"
            @focus="onFocus" @blur="onBlur" :disabled="!propEnabled" :aria-hidden="!propEnabled">
     <label class="m-radio__wrap" :for="radioID" ref="label">
         <span class="m-radio__input" aria-hidden="true" v-if="!isButton()"></span>
         <span class="m-radio__label">
-            <m-icon aria-hidden="true" class="m-radio__icon m--is-left" :name="iconName" v-if="hasIconLeft() && hasIcon()"></m-icon>
+            <m-icon aria-hidden="true" class="m-radio__icon m--is-left" :name="iconName" v-if="isButton() && hasIconLeft() && hasIcon()"></m-icon>
             <span class="m-radio__label__content"><slot><span v-if="demo">Label</span></slot></span>
-            <m-icon aria-hidden="true" class="m-radio__icon m--is-right" :name="iconName"  v-if="!hasIconLeft() && hasIcon()"></m-icon>
+            <m-icon aria-hidden="true" class="m-radio__icon m--is-right" :name="iconName" v-if="isButton() && !hasIconLeft() && hasIcon()"></m-icon>
         </span>
     </label>
 </li>

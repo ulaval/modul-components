@@ -190,3 +190,31 @@
 .m-u--visually-hidden {
     @include m-visually-hidden;
 }
+
+// ======================================================================
+//  List
+// ======================================================================
+.m-u--list-header {
+    padding: $m-padding;
+    background-color: $m-color--grey-lightest;
+
+    > p,
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    @media (max-width: $m-bp--max--s) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    & + ul {
+        margin-top: 0;
+    }
+}

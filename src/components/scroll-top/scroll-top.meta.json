@@ -9,6 +9,16 @@
                 "relative"
             ],
             "default": "0"
+        },
+        "duration": {
+            "type": "string",
+            "values": [
+                "null",
+                "slow",
+                "regular",
+                "fast"
+            ],
+            "default": "2"
         }
     },
     "overview": "scroll-top.overview",

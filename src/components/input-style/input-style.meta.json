@@ -1,0 +1,30 @@
+{
+    "tag": "m-input-style",
+    "name": "m-input-style-meta:name",
+    "attributes": {
+        "label": {
+            "type": "string"
+        },
+        "state": {
+            "type": "string",
+            "values": [
+                "default",
+                "disabled",
+                "error",
+                "valid"
+            ],
+            "default": 0
+        },
+        "editable": {
+            "type": "boolean",
+            "default": true
+        },
+        "errorMessage": {
+            "type": "string"
+        },
+        "helperMessage": {
+            "type": "string"
+        }
+    },
+    "overview": "input-style.overview"
+}

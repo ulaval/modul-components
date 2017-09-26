@@ -13,7 +13,7 @@ export class MBulletList extends Vue {
 
     public componentName = BULLET_LIST_NAME;
 
-    private get hasTitile(): boolean {
+    private get hasTitle(): boolean {
         return this.title == undefined || this.title == '' ? false : true;
     }
 }

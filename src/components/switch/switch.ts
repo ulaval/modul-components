@@ -19,8 +19,6 @@ export class MSwitch extends Vue {
     public value: boolean;
     @Prop({ default: MSwitchPosition.LEFT })
     public position: string;
-    @Prop({ default: false })
-    public label: boolean;
     @Prop({ default: true })
     public helperText: boolean;
 
@@ -46,6 +44,10 @@ export class MSwitch extends Vue {
 
     public get hasSwitchLeft(): boolean {
         return ((this.position == MSwitchPosition.RIGHT) ? false : true);
+    }
+
+    public get label(): boolean {
+        return !!this.$slots.default;
     }
 }
 

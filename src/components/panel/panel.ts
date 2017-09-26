@@ -38,7 +38,7 @@ export class MPanel extends Vue {
     }
 
     protected beforeDestroy(): void {
-        ElementQueries.detach();
+        ElementQueries.detach(this.$el);
     }
 
     private get propMode(): MPanelMode {

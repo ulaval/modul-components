@@ -1,18 +1,22 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './radio-group.html?style=./radio-group.scss';
-import { RADIO_NAME, RADIO_GROUP_NAME } from '../component-names';
-import { MRadio, MRadioPosition, BaseRadioGroup, RadioGroup } from '../radio/radio';
+import { RADIO_GROUP_NAME } from '../component-names';
+import RadioPlugin, { MRadioPosition, BaseRadioGroup, RadioGroup } from '../radio/radio';
 import uuid from '../../utils/uuid/uuid';
 
 @WithRender
 @Component
 export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
+    @Model('change')
     @Prop()
     public value: string;
-    @Prop({ default: MRadioPosition.Left })
+    @Prop({
+        default: MRadioPosition.Left,
+        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+    })
     public position: MRadioPosition;
     @Prop({ default: false })
     public inline: boolean;
@@ -38,13 +42,13 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
     private set model(value: string) {
         this.internalValue = value;
-        this.$emit('input', value);
         this.$emit('change', value);
     }
 }
 
 const RadioGroupPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(RadioPlugin);
         v.component(RADIO_GROUP_NAME, MRadioGroup);
     }
 };

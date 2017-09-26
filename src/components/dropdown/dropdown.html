@@ -1,6 +1,6 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled }" :style="{ width: width }">
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ width: width }">
     <m-popup :placement="bottom-start"
-             :disabled="isDisabled"
+             :disabled="inactive"
              :open="propOpen"
              :enter="transitionEnter"
              :after-enter="transitionAfterEnter"
@@ -30,7 +30,7 @@
             tabindex="1"
             @keyup="keyupItem">
             <slot></slot>
-            <m-dropdown-item v-show="showNoItemsLabel" :label="noItemsLabel" :inactif="true" ></m-dropdown-item>
+            <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
         </ul>
 
         <template slot="footer" v-if="hasFooterSlot">
@@ -39,18 +39,22 @@
         <m-text-field ref="mDropdownValue"
                       mode="dropdown"
                       :label="label"
-                      :value="selectedText"
+                      v-model="selectedText"
                       :state="propState"
                       :editable="propEditable"
                       :force-focus="propOpen"
-                      :default-text="defaultText"
-                      @valueChanged="filterDropdown($event)"
+                      :placeholder="defaultText"
+                      :disabled="disabled"
+                      :waiting="waiting"
+                      :error-message="errorMessage"
+                      :valid-message="validMessage"
+                      :helper-message="helperMessage"
+                      @change="filterDropdown($event)"
                       @keyup="keyupReference">
         </m-text-field>
     </m-popup>
     <m-validation-message
-        :state="propState"
-        :error="propErrorMessage"
-        :valid="propValidMessage"
-        :helper="helperMessage"></m-validation-message>
+        :error-message="propErrorMessage"
+        :valid-message="propValidMessage"
+        :helper-message="helperMessage"></m-validation-message>
 </div>

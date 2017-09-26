@@ -56,7 +56,7 @@ export class MStep extends ModulVue {
     }
 
     protected beforeDestroy(): void {
-        ElementQueries.detach();
+        ElementQueries.detach(this.$el);
     }
 
     private openStep(event): void {
