@@ -57,6 +57,9 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
         (this.root as MDropdownInterface).$on('valueChanged',
             (value: any) => { this.updateTextfield(value); });
 
+        (this.root as MDropdownInterface).$on('filter',
+            (value: string) => { this.filter = value; });
+
         // If element is active add to array of items and increment counters
         // Done a first time in the create because watch is not call on load
         if (!this.inactif) {

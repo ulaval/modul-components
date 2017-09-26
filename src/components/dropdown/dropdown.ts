@@ -174,12 +174,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private filterDropdown(text: string): void {
+        // Can be filter only when there nothing in model
         if (!this.hasModel) {
-            for (let item of this.items) {
-                if (!(item as MDropDownItemInterface).inactif) {
-                    (item as MDropDownItemInterface).filter = normalizeString(text.trim());
-                }
-            }
+            this.$emit('filter', normalizeString(text.trim()));
+            // for (let item of this.items) {
+            //     if (!(item as MDropDownItemInterface).inactif) {
+            //         (item as MDropDownItemInterface).filter = ;
+            //     }
+            // }
         }
     }
 
