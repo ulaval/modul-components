@@ -96,6 +96,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (label) {
             this.selectedText = label;
         }
+        this.$emit('filter'); // Clear filter
         this.$emit('input', value);
     }
 
