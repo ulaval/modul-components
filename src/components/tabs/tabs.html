@@ -1,14 +1,8 @@
 <article class="m-tabs">
-    <header class="m-tabs__header" v-if="!loading">
-        <m-nav-bar :skin="propSkin">
-            <m-nav-bar-item @click="changeTab(index)" v-for="(tab, index) in arrTabPane">{{ tab.value }}</m-nav-bar-item>
-        </m-nav-bar>
+    <header class="m-tabs__header">
+        <slot name="nav"></slot>
     </header>
-    <div class="m-tabs__body" v-show="!loading">
-        <slot>
-            <m-tab-pane label="First tab">First tab</m-tab-pane>
-            <m-tab-pane label="Second tab">Second tab</m-tab-pane>
-            <m-tab-pane label="Last">Last</m-tab-pane>
-        </slot>
+    <div class="m-tabs__body">
+        <slot></slot>
     </div>
 </article>

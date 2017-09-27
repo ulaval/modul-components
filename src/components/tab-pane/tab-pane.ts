@@ -1,34 +1,51 @@
 import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './tab-pane.html?style=./tab-pane.scss';
 import { TAB_PANE_NAME } from '../component-names';
+import { MTabsInterface } from '../tabs/tabs';
+
+export abstract class BaseTabs extends ModulVue {
+}
 
 @WithRender
 @Component
-export class MTabPane extends Vue {
+export class MTabPane extends ModulVue {
 
-    @Prop({ default: '' })
+    @Prop()
     public label: string;
+    @Prop()
+    public value: any;
     @Prop({ default: false })
-    public selected: boolean;
+    public disabled: boolean;
 
     public componentName = TAB_PANE_NAME;
-    public id: number;
-    public isSelected: boolean = false;
+    public root: Vue;
+    public inactif: boolean = false;
+    private hasModel: boolean = true;
 
-    public selectTab(): void {
-        this.isSelected = true;
+    public created(): void {
+        this.getMTabsRoot(this);
     }
 
-    public unselectTab(): void {
-        this.isSelected = false;
+    public get selected(): boolean {
+        return (this.root as MTabsInterface).model == this.value;
     }
 
-    private get propSelected(): boolean {
-        this.isSelected = this.selected;
-        return this.selected;
+    public onClick(): void {
+        (this.root as MTabsInterface).model = this.value;
+    }
+
+    private getMTabsRoot(node: Vue): void {
+        let rootNode: BaseTabs | undefined = this.getParent<BaseTabs>(p => p instanceof BaseTabs);
+
+        if (rootNode) {
+            this.root = rootNode;
+        } else {
+            console.error('m-tabs-pan need to be inside m-tabs');
+        }
     }
 }
 
