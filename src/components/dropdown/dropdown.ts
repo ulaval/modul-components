@@ -124,11 +124,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     public get model(): any {
         this.hasModel = !!this.value;
-
-        if (this.value == undefined) {
-            console.warn('A v-model is required to output the selected value(s)');
-        }
-
         return this.value;
     }
 
