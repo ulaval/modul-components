@@ -71,8 +71,7 @@ describe('radio-group', () => {
                     <m-radio-group ref="g" :position="position" >
                         <m-radio ref="a" position="left" value="radio1"></m-radio>
                         <m-radio ref="b" position="right" value="radio2"></m-radio>
-                        <m-radio ref="c" position="invalid" value="radio3"></m-radio>
-                        <m-radio ref="d" value="radio4"></m-radio>
+                        <m-radio ref="c" value="radio3"></m-radio>
                     </m-radio-group>
                 </div>`,
                 data: {
@@ -85,14 +84,12 @@ describe('radio-group', () => {
             expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-            expect((vm.$refs.d as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
 
             (vm as any).position = MRadioPosition.Left;
             Vue.nextTick(() => {
                 expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
                 expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
                 expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-                expect((vm.$refs.d as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             });
         });
 
@@ -100,14 +97,12 @@ describe('radio-group', () => {
             expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-            expect((vm.$refs.d as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
 
             (vm as any).position = MRadioPosition.Right;
             Vue.nextTick(() => {
                 expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
                 expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
                 expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
-                expect((vm.$refs.d as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
             });
         });
     });
