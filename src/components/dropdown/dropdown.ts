@@ -11,7 +11,7 @@ import { InputState, InputStateMixin } from '../../mixins/input-state/input-stat
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
 const PAGE_STEP: number = 3;
-const DROPDOWN_MAX_HEIGHT: number = 266;
+const DROPDOWN_MAX_HEIGHT: number = 220;
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface MDropdownInterface extends Vue {
