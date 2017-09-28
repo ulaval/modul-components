@@ -122,7 +122,7 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     }
 
     public get selected(): boolean {
-        return (this.root as MDropdownInterface).model == this.propValue;
+        return !this.inactif && (this.root as MDropdownInterface).model == this.propValue;
     }
 
     public get visible(): boolean {
