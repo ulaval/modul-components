@@ -164,7 +164,7 @@ export class MTextField extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return !!this.label && !this.as<InputStateMixin>().isDisabled;
+        return !!this.label;
     }
 
     private get hasIcon(): boolean {
