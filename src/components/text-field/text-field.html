@@ -27,7 +27,7 @@
             @blur="onBlur"
             @keyup="onKeyup"
             v-if="!propEditable">
-            <div class="m-text-field__input__value" ref="inputValue" v-if="!hasValueSlot && !isPlaceholderVisible">{{ model }}</div>
+            <div class="m-text-field__input__value" :title="model" ref="inputValue" v-if="!hasValueSlot && !isPlaceholderVisible">{{ model }}</div>
             <!-- <div class="m-text-field__input__value" ref="inputValue" v-if="hasValueSlot && !hasDefaultText"><slot></slot></div> -->
             <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="!hasValue && !hasValueSlot && !isPlaceholderVisible">i</div>
             <div class="m-text-field__input__default-text" v-if="isPlaceholderVisible">- {{ placeholder }} -</div>
