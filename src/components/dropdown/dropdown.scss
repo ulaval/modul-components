@@ -11,6 +11,7 @@ $m-dropdown--max-width: 320px - $m-padding*2;
     display: inline-flex;
     flex-direction: column;
     max-width: $m-dropdown--max-width;
+    padding-right: 25px; // Pour le X du clear
 
     &__header {
         &__label {
@@ -59,6 +60,15 @@ $m-dropdown--max-width: 320px - $m-padding*2;
 
     .m-text-field {
         width: 100%;
+    }
+
+    .m-dropdown__icon-clear {
+        position: absolute;
+        right: 0;
+        top: 20px;
+        min-height: 20px;
+        min-width: 26px;
+        color: $m-color--interactive;
     }
 }
 

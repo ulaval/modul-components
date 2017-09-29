@@ -183,6 +183,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private clearField(): void {
+        this.$emit('input');
+    }
+
     private keyupReference($event): void {
         if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
             $event.preventDefault();
@@ -285,7 +289,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 el.style.transition = DROPDOWN_STYLE_TRANSITION;
                 el.style.overflowY = 'hidden';
                 el.style.maxHeight = '0';
-                el.style.width = this.$el.clientWidth + 'px';
+                el.style.width = (this.$el.clientWidth - 25) + 'px';
                 setTimeout(() => {
                     el.style.maxHeight = height + 'px';
                     done();
@@ -309,7 +313,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
                 let height: number = el.clientHeight;
-                el.style.width = this.$el.clientWidth + 'px';
+                el.style.width = (this.$el.clientWidth - 25) + 'px';
                 el.style.maxHeight = height + 'px';
                 el.style.overflowY = 'hidden';
                 el.style.maxHeight = '0';
