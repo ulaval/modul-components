@@ -215,7 +215,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             }, 300);
         }
 
-        if (this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN)) {
+        if (this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN || $event.keyCode == KeyCode.M_TAB)) {
             (this.$refs.mDropdownElements as HTMLElement).focus();
         }
     }
