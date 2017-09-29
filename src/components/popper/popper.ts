@@ -187,7 +187,7 @@ export class MPopper extends ModulVue {
 
     private onClickOutside(event: MouseEvent): void {
         if (this.getPortalTargetEl() && this.propCloseOnClickOutside) {
-            if (!(this.getPortalTargetEl() as HTMLElement).contains(event.target as HTMLElement)) {
+            if (!(this.getPortalTargetEl() as HTMLElement).contains(event.target as HTMLElement) && !(this.$el as HTMLElement).contains(event.target as HTMLElement)) {
                 this.propOpen = false;
             }
         }

@@ -8,6 +8,7 @@
              :padding-header="false"
              :padding-body="false"
              :focus-management="!propEditable"
+             :open-on-click="!propOpen"
              width="100%"
              @open="toggleDropdown(true)"
              @close="toggleDropdown(false)">
@@ -17,8 +18,7 @@
                 <input type="text"
                        class="m-dropdown__header__research-input"
                        :placeholder="researchText"
-                       v-model="textElement"
-                       ref="researchInput">
+                       v-model="textElement">
                 <m-button mode="icon" icon-name="default" @click="focusOnResearchInput">
                     <m-i18n k="m-dropdown:search"></m-i18n>
                 </m-button>
