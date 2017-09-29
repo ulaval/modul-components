@@ -10,6 +10,7 @@ import { MDropdownInterface } from '../dropdown/dropdown';
 import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropDownItemInterface extends Vue {
+    propValue: any;
     visible: boolean;
     disabled: boolean;
     hasFocus: boolean;
@@ -54,6 +55,13 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
 
         (this.root as MDropdownInterface).$on('filter',
             (value: string) => { this.filter = value; });
+
+        (this.root as MDropdownInterface).$on('keyPressEnter',
+            (value: any) => {
+                if (value === this.propValue) {
+                    this.onClick();
+                }
+            });
 
         // If element is active add to array of items and increment counters
         // Done a first time in the create because watch is not call on load

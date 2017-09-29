@@ -189,7 +189,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 } else {
                     this.$emit('valueChanged', this.model);
                 }
-            }, 300);
+            }, 100);
         }
         this.dirty = false;
     }
@@ -206,17 +206,17 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private keyupReference($event): void {
-        if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
+        if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
             $event.preventDefault();
-            (this.$refs.mDropdownValue as Vue).$el.click();
+            this.propOpen = true;
+
+            setTimeout(() => { // Wait for menu to open
+                (this.$refs.mDropdownElements as HTMLElement).focus();
+            }, 300);
         }
 
-        if (this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN)) {
-            $event.preventDefault();
-            let htmlElement: HTMLElement = this.$el.querySelector(`[data-index='0']`) as HTMLElement;
-            if (htmlElement) {
-                htmlElement.focus();
-            }
+        if (this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN)) {
+            (this.$refs.mDropdownElements as HTMLElement).focus();
         }
     }
 
@@ -289,7 +289,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             case KeyCode.M_ENTER:
             case KeyCode.M_RETURN:
                 if (focusElement) {
-                    // (focusElement as MDropDownItemInterface).onSelectElement();
+                    this.$emit('keyPressEnter', (focusElement as MDropDownItemInterface).propValue);
                 }
                 return;
         }

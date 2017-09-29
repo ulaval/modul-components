@@ -51,6 +51,7 @@
                       :helper-message="helperMessage"
                       @change="filterDropdown($event)"
                       @keyup="keyupReference"
+                      @keydown.tab="keyupReference"
                       @blur="onBlur($event)"
                       @focus="onFocus($event)">
         </m-text-field>
