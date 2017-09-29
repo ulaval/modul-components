@@ -15,6 +15,7 @@
         margin-right: 16px;
         padding: $m-padding;
         background-color: $m-color--grey-lighter;
+        justify-content: space-between;
 
         @media screen and (max-width: $m-bp--max--s) {
             flex-direction: column;
@@ -38,10 +39,6 @@
             margin-top: 0;
             font-size: $m-font-size--l;
             font-weight: $m-font-weight--bold;
-        }
-
-        &__content-right {
-            justify-self: flex-end;
         }
     }
 

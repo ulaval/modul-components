@@ -3,61 +3,53 @@
 .m-list-item {
     position: relative;
     list-style: none;
+    border-bottom: 2px solid $m-color--grey-lighter;
+    transition: color 0.3 ease;
+    padding: $m-padding;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $m-color--white;
 
-    // &:not(:last-child) {
-    .m-list-item__article {
-        border-bottom: 2px solid $m-color--grey-lighter;
+    @media (max-width: $m-bp--max--s) {
+        padding-left: 0;
+        padding-right: 0;
     }
-    // }
 
-    &__article {
-        transition: color 0.3 ease;
-        padding: $m-padding;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: $m-color--white;
+    &__content {
+        flex: 1;
 
-        @media (max-width: $m-bp--max--s) {
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        &__body {
+        > :first-child {
+            &,
             > :first-child {
-                &,
-                > :first-child {
-                    margin-top: 0;
-                }
+                margin-top: 0;
             }
         }
+    }
 
-        &__button {
-            display: flex;
+    &__button {
+        display: flex;
 
-            .m-button {
-                min-width: auto !important;
-                min-height: auto !important;
-            }
+        .m-button {
+            min-width: auto !important;
+            min-height: auto !important;
         }
+    }
 
-        .m--is-disabled & {
-            color: rgba($m-color--grey-darker, 0.6);
-            background-color: $m-color--grey-lightest;
-            cursor: not-allowed;
-        }
+    &.m--is-disabled {
+        color: rgba($m-color--grey-darker, 0.6);
+        background-color: $m-color--grey-lightest;
+        cursor: not-allowed;
+    }
 
-        .m--is-waiting & {
-            color: $m-color--grey-darker;
-            cursor: wait;
-        }
+    &.m--is-waiting {
+        color: $m-color--grey-darker;
+        cursor: wait;
     }
 
     &.m--is-eq-max-xs {
-        .m-list-item__article {
-            padding-left: 0;
-            padding-right: 0;
-        }
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 

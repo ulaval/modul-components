@@ -14,7 +14,7 @@ export class MInputStyle extends ModulVue {
     @Prop()
     public label: string;
 
-    @Prop({ default: true })
+    @Prop({ default: false })
     public focus: boolean;
 
     @Prop({ default: true })
@@ -25,7 +25,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get labelIsUp(): boolean {
-        return this.hasValue && this.isFocus && this.hasLabel;
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
     }
 
     private get hasLabel(): boolean {
@@ -40,6 +40,10 @@ export class MInputStyle extends ModulVue {
 
     private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
+    }
+
+    private get hasRightContentSlot(): boolean {
+        return !!this.$slots['right-content'];
     }
 
     private onClick(event): void {

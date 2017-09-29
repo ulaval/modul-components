@@ -11,7 +11,8 @@ import { InputState, InputStateMixin } from '../../mixins/input-state/input-stat
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
 const PAGE_STEP: number = 3;
-const DROPDOWN_MAX_HEIGHT: number = 198;
+const DROPDOWN_MAX_HEIGHT: number = 220;
+const DROPDOWN_MAX_WIDTH: string = '704px'; // 768 - (32*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface MDropdownInterface extends Vue {
@@ -49,7 +50,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public editable: boolean;
     // @Prop({ default: false })
     // public multiple: boolean;
-    @Prop()
+    @Prop({default: DROPDOWN_MAX_WIDTH })
     public width: string;
     @Prop()
     public textNoData: string;
@@ -63,6 +64,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private hasModel: boolean = true;
     private internalOpen: boolean = false;
     private noItemsLabel: string;
+    private dirty: boolean = false;
 
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
@@ -96,7 +98,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (label) {
             this.selectedText = label;
         }
+
         this.$emit('input', value);
+        setTimeout(() => {
+            this.$emit('filter'); // Clear filter
+        }, 300);
     }
 
     public emitChange(value: any, selected: boolean) {
@@ -113,6 +119,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     @Watch('value')
     private valueChanged(value: any): void {
+        this.selectedText = '';
         this.$emit('valueChanged', value);
     }
 
@@ -123,11 +130,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     public get model(): any {
         this.hasModel = !!this.value;
-
-        if (this.value == undefined) {
-            console.warn('A v-model is required to output the selected value(s)');
-        }
-
         return this.value;
     }
 
@@ -147,7 +149,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private get propEditable(): boolean {
-        return this.editable && !this.hasModel;
+        return this.editable;
     }
 
     private get propTextNoData(): string {
@@ -174,27 +176,47 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private filterDropdown(text: string): void {
-        if (!this.hasModel) {
-            for (let item of this.items) {
-                if (!(item as MDropDownItemInterface).inactif) {
-                    (item as MDropDownItemInterface).filter = normalizeString(text.trim());
+        this.dirty = true;
+        this.$emit('filter', normalizeString(text.trim()));
+    }
+
+    private onBlur(event): void {
+        if (this.propEditable && this.dirty) {
+            setTimeout(() => {
+                if (!this.model || this.model == '') {
+                    this.selectedText = '';
+                    this.$emit('valueChanged');
+                } else {
+                    this.$emit('valueChanged', this.model);
                 }
-            }
+            }, 100);
+        }
+        this.dirty = false;
+    }
+
+    private onFocus(event: Event): void {
+        if (this.propEditable) {
+            this.dirty = true;
+            this.selectedText = '';
         }
     }
 
+    private clearField(): void {
+        this.$emit('input');
+    }
+
     private keyupReference($event): void {
-        if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
+        if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN)) {
             $event.preventDefault();
-            (this.$refs.mDropdownValue as Vue).$el.click();
+            this.propOpen = true;
+
+            setTimeout(() => { // Wait for menu to open
+                (this.$refs.mDropdownElements as HTMLElement).focus();
+            }, 300);
         }
 
-        if (this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN)) {
-            $event.preventDefault();
-            let htmlElement: HTMLElement = this.$el.querySelector(`[data-index='0']`) as HTMLElement;
-            if (htmlElement) {
-                htmlElement.focus();
-            }
+        if (this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN || $event.keyCode == KeyCode.M_TAB)) {
+            (this.$refs.mDropdownElements as HTMLElement).focus();
         }
     }
 
@@ -267,7 +289,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             case KeyCode.M_ENTER:
             case KeyCode.M_RETURN:
                 if (focusElement) {
-                    // (focusElement as MDropDownItemInterface).onSelectElement();
+                    this.$emit('keyPressEnter', (focusElement as MDropDownItemInterface).propValue);
                 }
                 return;
         }

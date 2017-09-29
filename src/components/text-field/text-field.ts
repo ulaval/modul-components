@@ -80,13 +80,13 @@ export class MTextField extends ModulVue {
     private onFocus(event: FocusEvent): void {
         this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
         if (this.internalIsFocus) {
-            this.$emit('focus');
+            this.$emit('focus', event);
         }
     }
 
     private onBlur(event): void {
         this.internalIsFocus = false;
-        this.$emit('blur');
+        this.$emit('blur', event);
     }
 
     private onKeyup(event): void {
@@ -164,7 +164,7 @@ export class MTextField extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return !!this.label && !this.as<InputStateMixin>().isDisabled;
+        return !!this.label;
     }
 
     private get hasIcon(): boolean {

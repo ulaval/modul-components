@@ -8,8 +8,13 @@
     <label class="m-input-style__label" v-if="hasLabel">
         <m-icon class="m-input-style__disabled-icon" name="default" v-if="disabled">
         </m-icon>{{ label }}</label>
-    <div class="m-input-style__value">
-        <slot></slot>
-        <m-i18n k="m-input-style:empty-value" class="m-input-style__value__transparent-text" v-if="!hasDefaultSlot"></m-i18n>
+    <div class="m-input-style__body">
+        <div class="m-input-style__body__left">
+            <slot></slot>
+            <m-i18n k="m-input-style:empty-value" class="m-input-style__body__transparent-text" v-if="!hasDefaultSlot"></m-i18n>
+        </div>
+        <div class="m-input-style__body__right" v-if="hasRightContentSlot">
+            <slot name="right-content"></slot>
+        </div>
     </div>
 </div>

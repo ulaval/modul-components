@@ -4,11 +4,13 @@ $m-dropdown--color-select: $m-color--grey-lighter !default;
 $m-dropdown--color-focus: $m-color--interactive-lightest !default;
 $m-dropdown--color-active: $m-color--interactive-lightest !default;
 $m-dropdown--margin: $m-padding--xs !default;
+// $m-dropdown--max-width: 320px - $m-padding*2;
 
 .m-dropdown {
     position: relative;
     display: inline-flex;
     flex-direction: column;
+    width: 100%;
 
     &__header {
         &__label {
@@ -57,6 +59,15 @@ $m-dropdown--margin: $m-padding--xs !default;
 
     .m-text-field {
         width: 100%;
+    }
+
+    .m-dropdown__icon-clear {
+        position: absolute;
+        right: 0;
+        top: 20px;
+        min-height: 20px;
+        min-width: 26px;
+        color: $m-color--interactive;
     }
 }
 

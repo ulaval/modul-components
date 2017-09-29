@@ -1,4 +1,4 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ width: width }">
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ maxWidth: width }">
     <m-popup :placement="bottom-start"
              :disabled="inactive"
              :open="propOpen"
@@ -8,6 +8,7 @@
              :padding-header="false"
              :padding-body="false"
              :focus-management="!propEditable"
+             :open-on-click="!propOpen"
              width="100%"
              @open="toggleDropdown(true)"
              @close="toggleDropdown(false)">
@@ -17,8 +18,7 @@
                 <input type="text"
                        class="m-dropdown__header__research-input"
                        :placeholder="researchText"
-                       v-model="textElement"
-                       ref="researchInput">
+                       v-model="textElement">
                 <m-button mode="icon" icon-name="default" @click="focusOnResearchInput">
                     <m-i18n k="m-dropdown:search"></m-i18n>
                 </m-button>
@@ -50,8 +50,12 @@
                       :valid-message="validMessage"
                       :helper-message="helperMessage"
                       @change="filterDropdown($event)"
-                      @keyup="keyupReference">
+                      @keyup="keyupReference"
+                      @keydown.tab="keyupReference"
+                      @blur="onBlur($event)"
+                      @focus="onFocus($event)">
         </m-text-field>
+        <!-- <m-button mode="icon" icon-name="default" icon-size="13px" class="m-dropdown__icon-clear" v-if="this.hasModel &&!disabled && !waiting" @click="clearField">Clear field</m-button> -->
     </m-popup>
     <m-validation-message
         :error-message="propErrorMessage"

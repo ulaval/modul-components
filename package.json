@@ -1,6 +1,6 @@
 {
   "name": "@ulaval/modul-components",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Component library",
   "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
   "private": false,
