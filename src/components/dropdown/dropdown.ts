@@ -63,6 +63,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private hasModel: boolean = true;
     private internalOpen: boolean = false;
     private noItemsLabel: string;
+    private dirty: boolean = false;
 
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
@@ -174,6 +175,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private filterDropdown(text: string): void {
         // Can be filter only when there nothing in model
         // if (!this.hasModel) {
+        this.dirty = true;
         this.$emit('filter', normalizeString(text.trim()));
             // for (let item of this.items) {
             //     if (!(item as MDropDownItemInterface).inactif) {
@@ -184,9 +186,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onBlur(event): void {
-        if (this.propEditable) {
+        if (this.propEditable && this.dirty) {
             this.$emit('valueChanged', this.model);
         }
+        this.dirty = false;
     }
 
     private clearField(): void {
