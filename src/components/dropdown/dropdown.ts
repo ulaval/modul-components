@@ -206,7 +206,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private keyupReference($event): void {
-        if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
+        if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN)) {
             $event.preventDefault();
             this.propOpen = true;
 
