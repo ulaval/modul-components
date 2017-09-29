@@ -98,8 +98,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             this.selectedText = label;
         }
 
-        this.$emit('filter'); // Clear filter
         this.$emit('input', value);
+        setTimeout(() => {
+            this.$emit('filter'); // Clear filter
+        }, 300);
     }
 
     public emitChange(value: any, selected: boolean) {
@@ -173,21 +175,18 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private filterDropdown(text: string): void {
-        // Can be filter only when there nothing in model
-        // if (!this.hasModel) {
         this.dirty = true;
         this.$emit('filter', normalizeString(text.trim()));
-            // for (let item of this.items) {
-            //     if (!(item as MDropDownItemInterface).inactif) {
-            //         (item as MDropDownItemInterface).filter = ;
-            //     }
-            // }
-        // }
     }
 
     private onBlur(event): void {
         if (this.propEditable && this.dirty) {
-            this.$emit('valueChanged', this.model);
+            if (!this.model || this.model == '') {
+                this.selectedText = '';
+                this.$emit('valueChanged');
+            } else {
+                this.$emit('valueChanged', this.model);
+            }
         }
         this.dirty = false;
     }
