@@ -12,6 +12,7 @@ import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/medi
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
+const DROPDOWN_MAX_WIDTH: string = '704px'; // 768 - (32*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface MDropdownInterface extends Vue {
@@ -49,7 +50,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public editable: boolean;
     // @Prop({ default: false })
     // public multiple: boolean;
-    @Prop({default: '100%'})
+    @Prop({default: DROPDOWN_MAX_WIDTH })
     public width: string;
     @Prop()
     public textNoData: string;
