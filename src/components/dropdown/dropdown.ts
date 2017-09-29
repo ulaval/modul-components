@@ -145,7 +145,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private get propEditable(): boolean {
-        return this.editable && !this.hasModel;
+        return this.editable;
     }
 
     private get propTextNoData(): string {
@@ -173,13 +173,19 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private filterDropdown(text: string): void {
         // Can be filter only when there nothing in model
-        if (!this.hasModel) {
-            this.$emit('filter', normalizeString(text.trim()));
+        // if (!this.hasModel) {
+        this.$emit('filter', normalizeString(text.trim()));
             // for (let item of this.items) {
             //     if (!(item as MDropDownItemInterface).inactif) {
             //         (item as MDropDownItemInterface).filter = ;
             //     }
             // }
+        // }
+    }
+
+    private onBlur(event): void {
+        if (this.propEditable) {
+            this.$emit('valueChanged', this.model);
         }
     }
 
@@ -289,7 +295,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 el.style.transition = DROPDOWN_STYLE_TRANSITION;
                 el.style.overflowY = 'hidden';
                 el.style.maxHeight = '0';
-                el.style.width = (this.$el.clientWidth - 25) + 'px';
+                el.style.width = this.$el.clientWidth + 'px';
                 setTimeout(() => {
                     el.style.maxHeight = height + 'px';
                     done();
@@ -313,7 +319,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
                 let height: number = el.clientHeight;
-                el.style.width = (this.$el.clientWidth - 25) + 'px';
+                el.style.width = this.$el.clientWidth + 'px';
                 el.style.maxHeight = height + 'px';
                 el.style.overflowY = 'hidden';
                 el.style.maxHeight = '0';

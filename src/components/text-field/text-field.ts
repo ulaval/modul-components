@@ -86,7 +86,7 @@ export class MTextField extends ModulVue {
 
     private onBlur(event): void {
         this.internalIsFocus = false;
-        this.$emit('blur');
+        this.$emit('blur', event);
     }
 
     private onKeyup(event): void {

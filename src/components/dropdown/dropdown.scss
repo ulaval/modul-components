@@ -11,7 +11,7 @@ $m-dropdown--max-width: 320px - $m-padding*2;
     display: inline-flex;
     flex-direction: column;
     max-width: $m-dropdown--max-width;
-    padding-right: 25px; // Pour le X du clear
+    // padding-right: 25px; // Pour le X du clear
 
     &__header {
         &__label {

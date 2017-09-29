@@ -50,9 +50,10 @@
                       :valid-message="validMessage"
                       :helper-message="helperMessage"
                       @change="filterDropdown($event)"
-                      @keyup="keyupReference">
+                      @keyup="keyupReference"
+                      @blur="onBlur($event)">
         </m-text-field>
-        <m-button mode="icon" icon-name="default" icon-size="13px" class="m-dropdown__icon-clear" v-if="this.hasModel &&!disabled && !waiting" @click="clearField">Clear field</m-button>
+        <!-- <m-button mode="icon" icon-name="default" icon-size="13px" class="m-dropdown__icon-clear" v-if="this.hasModel &&!disabled && !waiting" @click="clearField">Clear field</m-button> -->
     </m-popup>
     <m-validation-message
         :error-message="propErrorMessage"
