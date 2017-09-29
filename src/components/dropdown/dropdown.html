@@ -6,6 +6,7 @@
              :after-enter="transitionAfterEnter"
              :leave="transitionLeave"
              :padding-header="false"
+             :open-on-click="!propOpen"
              :padding-body="false"
              :focus-management="!propEditable"
              width="100%"
@@ -33,29 +34,30 @@
             <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
         </ul>
 
-        <template slot="footer" v-if="hasFooterSlot">
-            <slot name="footer"></slot>
-        </template>
-        <m-text-field ref="mDropdownValue"
-                      mode="dropdown"
+        <div slot="header" v-if="!isMqMinS && propEditable">
+            <input type="text" @change="filterDropdown($event)" @keyup="keyupReference" v-model="selectedText">
+        </div>
+        <m-input-style ref="mDropdownValue"
                       :label="label"
-                      v-model="selectedText"
                       :state="propState"
-                      :editable="propEditable"
-                      :force-focus="propOpen"
+                      :focus="propOpen"
                       :placeholder="defaultText"
                       :disabled="disabled"
                       :waiting="waiting"
-                      :error-message="errorMessage"
-                      :valid-message="validMessage"
-                      :helper-message="helperMessage"
-                      @change="filterDropdown($event)"
-                      @keyup="keyupReference">
-        </m-text-field>
-        <m-button mode="icon" icon-name="default" icon-size="13px" class="m-dropdown__icon-clear" v-if="this.hasModel &&!disabled && !waiting" @click="clearField">Clear field</m-button>
+                      :style="{ width: width }">
+            <input type="text" @focus="onFocus" @blur="onBlur" @change="filterDropdown($event)" @keyup="keyupReference" v-model="selectedText" v-if="propEditable">
+            <div v-if="!propEditable">{{ selectedText }}</div>
+            <m-button slot="right-content" mode="icon" icon-name="dropdown-arrow" class="m-dropdown__arrow" :class="{ 'm--is-open': propOpen }">
+                Open dropdown
+            </m-button>
+        </m-input-style>
+        <template slot="footer" v-if="hasFooterSlot">
+            <slot name="footer"></slot>
+        </template>
     </m-popup>
     <m-validation-message
         :error-message="propErrorMessage"
         :valid-message="propValidMessage"
-        :helper-message="helperMessage"></m-validation-message>
+        :helper-message="helperMessage"
+        v-if="!isDisabled"></m-validation-message>
 </div>

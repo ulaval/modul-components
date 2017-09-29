@@ -2,14 +2,19 @@
 $m-datepicker--width: 300px !default;
 
 .m-datepicker {
-    background: $m-color--white;
+    display: inline-flex;
+    flex-direction: column;
 
-    @media (max-width: $m-bp--max--s) {
-        width: 100%;
-    }
+    &__target {
+        background: $m-color--white;
 
-    @media (min-width: $m-bp--min--s) {
-        width: $m-datepicker--width;
+        @media (max-width: $m-bp--max--s) {
+            width: 100%;
+        }
+
+        @media (min-width: $m-bp--min--s) {
+            width: $m-datepicker--width;
+        }
     }
 
     &__header {

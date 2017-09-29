@@ -45,7 +45,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public waiting: boolean;
     @Prop({ default: false })
     public open: boolean;
-    @Prop({ default: false })
+    @Prop({ default: true })
     public editable: boolean;
     // @Prop({ default: false })
     // public multiple: boolean;
@@ -63,6 +63,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private hasModel: boolean = true;
     private internalOpen: boolean = false;
     private noItemsLabel: string;
+    private internalFocus: boolean = false;
 
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
@@ -109,7 +110,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.propOpen = open;
     }
 
-    private mounted(): void {
+    protected mounted(): void {
         this.propOpen = this.open;
     }
 
@@ -122,6 +123,19 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Watch('open')
     private openChanged(open: boolean): void {
         this.propOpen = open;
+    }
+
+    private get isFocus(): boolean {
+        let focus: boolean = !this.as<InputState>().disabled;
+        return focus;
+    }
+
+    private onFocus(): void {
+        this.internalFocus = !this.as<InputState>().disabled;
+    }
+
+    private onBlur(): void {
+        this.internalFocus = false;
     }
 
     public get model(): any {
