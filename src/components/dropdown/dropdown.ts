@@ -181,14 +181,23 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private onBlur(event): void {
         if (this.propEditable && this.dirty) {
-            if (!this.model || this.model == '') {
-                this.selectedText = '';
-                this.$emit('valueChanged');
-            } else {
-                this.$emit('valueChanged', this.model);
-            }
+            setTimeout(() => {
+                if (!this.model || this.model == '') {
+                    this.selectedText = '';
+                    this.$emit('valueChanged');
+                } else {
+                    this.$emit('valueChanged', this.model);
+                }
+            }, 300);
         }
         this.dirty = false;
+    }
+
+    private onFocus(event: Event): void {
+        if (this.propEditable) {
+            this.dirty = true;
+            this.selectedText = '';
+        }
     }
 
     private clearField(): void {

@@ -80,7 +80,7 @@ export class MTextField extends ModulVue {
     private onFocus(event: FocusEvent): void {
         this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
         if (this.internalIsFocus) {
-            this.$emit('focus');
+            this.$emit('focus', event);
         }
     }
 
