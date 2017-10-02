@@ -9,6 +9,7 @@ import { KeyCode } from '../../utils/keycode/keycode';
 import { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import { MTextFieldInterface } from '../text-field/text-field';
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
@@ -206,7 +207,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private keyupReference($event): void {
-        if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN)) {
+        if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
             $event.preventDefault();
             this.propOpen = true;
 
@@ -291,6 +292,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 if (focusElement) {
                     this.$emit('keyPressEnter', (focusElement as MDropDownItemInterface).propValue);
                 }
+                return;
+            case KeyCode.M_ESCAPE:
+                (this.$refs.mDropdownTextField as MTextFieldInterface).setFocus();
                 return;
         }
 

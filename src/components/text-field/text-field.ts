@@ -20,6 +20,10 @@ export enum MTextFieldMode {
     Dropdown = 'dropdown'
 }
 
+export interface MTextFieldInterface extends ModulVue {
+    setFocus(): void;
+}
+
 const ICON_NAME_PASSWORD_VISIBLE: string = 'default';
 const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
 
@@ -27,7 +31,7 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
 @Component({
     mixins: [InputState]
 })
-export class MTextField extends ModulVue {
+export class MTextField extends ModulVue implements MTextFieldInterface {
 
     @Prop({
         default: MTextFieldType.Text,
@@ -66,6 +70,11 @@ export class MTextField extends ModulVue {
 
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-text-field:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-text-field:hide-password');
+
+    public setFocus(): void {
+        (this.$el.children[1].children[0] as HTMLElement).focus();
+        this.internalIsFocus = true;
+    }
 
     protected mounted(): void {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
