@@ -285,7 +285,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 }
                 return;
             case KeyCode.M_ESCAPE:
-                (this.$refs.mDropdownTextField as MTextFieldInterface).setFocus();
+                (this.$refs.mDropdownTextField as MTextFieldInterface).releaseFocus();
+                this.internalOpen = false;
                 return;
         }
 

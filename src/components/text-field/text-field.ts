@@ -21,7 +21,7 @@ export enum MTextFieldMode {
 }
 
 export interface MTextFieldInterface extends ModulVue {
-    setFocus(): void;
+    releaseFocus(): void;
 }
 
 const ICON_NAME_PASSWORD_VISIBLE: string = 'default';
@@ -71,9 +71,10 @@ export class MTextField extends ModulVue implements MTextFieldInterface {
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-text-field:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-text-field:hide-password');
 
-    public setFocus(): void {
+    public releaseFocus(): void {
         (this.$el.children[1].children[0] as HTMLElement).focus();
-        this.internalIsFocus = true;
+        (this.$el.children[1].children[0] as HTMLElement).blur();
+        this.internalIsFocus = false;
     }
 
     protected mounted(): void {
