@@ -1,5 +1,5 @@
-<div class="m-table" :class="{'m--has-header': hasHeader}">
-    <header class="m-table__header" v-if="hasHeader">
+<div class="m-table" :class="{'m--has-header': hasHeader, 'm--has-option-menu': withOptionMenu }">
+    <header class="m-table__header" :class="{'m--no-padding': headerPadding}" v-if="hasHeader">
         <span class="m-table__header__content-left" v-if="hasContentLeft">
             <slot name="header-content-left"></slot>
         </span>
@@ -9,8 +9,8 @@
         </span>
     </header>
     <div class="m-table__body">
-        <slot>
-            <table>
+        <table>
+            <slot>
                 <thead>
                     <tr>
                         <th>title</th>
@@ -33,7 +33,7 @@
                         <td>cell</td>
                     </tr>
                 </tbody>
-            </table>
-        </slot>
+            </slot>
+        </table>
     </div>
 </div>

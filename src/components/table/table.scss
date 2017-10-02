@@ -1,18 +1,18 @@
 @import '../../styles/abstracts/variables';
 
 .m-table {
-    &.m--has-header {
-        .m-table {
-            &__body {
-                padding: $m-padding $m-padding 0 $m-padding;
-            }
-        }
-    }
+    // &.m--has-header {
+    //     .m-table {
+    //         &__body {
+    //             padding: $m-padding $m-padding 0 $m-padding;
+    //         }
+    //     }
+    // }
 
     &__header {
         display: flex;
         align-items: center;
-        margin-right: 16px;
+        // margin-right: 16px;
         padding: $m-padding;
         background-color: $m-color--grey-lighter;
         justify-content: space-between;
@@ -28,6 +28,10 @@
             > :first-child {
                 margin-top: 0;
             }
+        }
+
+        &__content-right .m--has-option-menu & {
+            width: 44px;
         }
 
         h1,
@@ -54,13 +58,25 @@
                     color: $m-color--black;
                     border-bottom: 2px solid $m-color--grey-light;
 
+                    .m--has-header & {
+                        padding-top: $m-padding;
+                    }
+
+                    .m--has-option-menu & {
+                        &:last-child {
+                            padding-left: 0;
+                            padding-right: 0;
+                            width: 44px;
+                        }
+                    }
+
                     &:first-child {
-                        padding-left: 0;
+                        padding-left: $m-padding;
                         text-align: left;
                     }
 
                     &:last-child {
-                        padding-right: 0;
+                        padding-right: $m-padding;
                     }
                 }
             }
@@ -84,16 +100,33 @@
                     vertical-align: top;
                     text-align: center;
 
+                    .m--has-option-menu & {
+                        padding: 0 $m-padding--s;
+                        vertical-align: middle;
+
+                        &:last-child {
+                            width: 44px;
+                            padding-left: 0;
+                            padding-right: 0;
+                        }
+                    }
+
                     &:first-child {
-                        padding: $m-padding 0;
+                        padding-left: $m-padding;
                         text-align: left;
                     }
 
                     &:last-child {
-                        padding-right: 0;
+                        padding-right: $m-padding;
                     }
                 }
             }
         }
+    }
+}
+
+.m--has-option-menu.m--has-option-menu {
+    .m-table__header {
+        padding: 0 0 0 $m-padding;
     }
 }
