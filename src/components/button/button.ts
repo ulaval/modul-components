@@ -54,7 +54,19 @@ export class MButton extends Vue {
 
     private onClick(event): void {
         this.$emit('click', event);
-        this.$el.blur();
+        this.onBlur(event, false);
+    }
+
+    private onFocus(event) {
+        this.$emit('focus', event);
+    }
+
+    private onBlur(event, emit: boolean = true): void {
+        if (emit) {
+            this.$emit('blur', event);
+        } else {
+            this.$el.blur();
+        }
     }
 
     private get propType(): string {
