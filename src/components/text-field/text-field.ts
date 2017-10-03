@@ -102,7 +102,10 @@ export class MTextField extends ModulVue {
             type = this.type;
         }
         this.$nextTick(() => {
-            (this.$refs.input as HTMLElement).setAttribute('type', type);
+            let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+            if (inputEl) {
+                inputEl.setAttribute('type', type);
+            }
         });
         return type;
     }

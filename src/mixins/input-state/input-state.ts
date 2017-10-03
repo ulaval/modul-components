@@ -32,9 +32,6 @@ export class InputState extends Vue implements InputStateMixin {
     @Prop()
     public helperMessage: string;
 
-    private valid: boolean;
-    private error: boolean;
-
     public get isDisabled(): boolean {
         return this.propState == InputStateValue.Disabled || this.propState == InputStateValue.Waiting;
     }
@@ -59,22 +56,14 @@ export class InputState extends Vue implements InputStateMixin {
         let state: InputStateValue = this.state == InputStateValue.Disabled || this.state == InputStateValue.Waiting || this.state == InputStateValue.Error || this.state == InputStateValue.Valid ? this.state
             : InputStateValue.Default;
         if (!this.disabled && !this.waiting ) {
-            if (this.hasErrorMessage) {
+            if ((!!this.errorMessage) || this.errorMessage == ' ') {
                 state = InputStateValue.Error;
-            } else if (this.hasValidMessage) {
+            } else if ((!!this.validMessage) || this.validMessage == ' ') {
                 state = InputStateValue.Valid;
             }
         } else {
             state = this.disabled ? InputStateValue.Disabled : InputStateValue.Waiting;
         }
         return state;
-    }
-
-    private get hasErrorMessage(): boolean {
-        return !!this.errorMessage || this.errorMessage == ' ';
-    }
-
-    private get hasValidMessage(): boolean {
-        return !!this.validMessage || this.validMessage == ' ';
     }
 }

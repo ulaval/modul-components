@@ -29,7 +29,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return !!this.label;
+        return !!this.label && this.label != '';
     }
 
     private get isFocus(): boolean {

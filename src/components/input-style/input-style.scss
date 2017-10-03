@@ -76,11 +76,6 @@ $m-input-style--padding: 5px !default;
                 font-size: $m-font-size--s;
                 cursor: pointer;
             }
-
-            &__disabled-icon {
-                stroke-width: 3px;
-                font-size: 8px; // Magic number
-            }
         }
     }
 
@@ -194,6 +189,7 @@ $m-input-style--padding: 5px !default;
         align-items: center;
         flex: 1 1 auto;
         width: 100%;
+        min-height: 30px; // Magic number
         padding: 0 0 $m-input-style--padding 0;
         font-weight: $m-font-weight;
         text-decoration: none;
@@ -236,7 +232,7 @@ $m-input-style--padding: 5px !default;
         }
 
         .m-button.m--is-mode-icon,
-        :not(.m-input-style__disabled-icon).m-icon {
+        .m-icon.m-icon {
             position: relative;
             z-index: 0;
             font-size: 16px;
@@ -248,17 +244,12 @@ $m-input-style--padding: 5px !default;
             min-height: auto;
         }
 
-        :not(.m-input-style__disabled-icon).m-icon {
+        .m-icon.m-icon {
             transition: color 0.3s ease;
         }
     }
 
-    &__disabled-icon {
-        transition: all $m-transition-duration--l ease;
-        z-index: 1;
-        display: inline-block;
-        stroke-width: 2px;
-        font-size: 12px; // Magic number
-        margin-right: $m-margin--s;
+    div {
+        outline: none;
     }
 }

@@ -4,20 +4,17 @@ $m-dropdown--color-select: $m-color--grey-lighter !default;
 $m-dropdown--color-focus: $m-color--interactive-lightest !default;
 $m-dropdown--color-active: $m-color--interactive-lightest !default;
 $m-dropdown--margin: $m-padding--xs !default;
-$m-dropdown--max-width: 320px - $m-padding*2;
 
 .m-dropdown {
     position: relative;
     display: inline-flex;
     flex-direction: column;
-    max-width: $m-dropdown--max-width;
-    padding-right: 25px; // Pour le X du clear
 
     &__header {
         &__label {
             margin: 0;
-            padding: $m-padding;
-            font-size: $m-font-size--l;
+            padding: $m-padding--s $m-padding;
+            font-size: $m-font-size--s;
             font-weight: $m-font-weight--bold;
             color: $m-color--white;
             background: $m-color--black-grey;
@@ -58,7 +55,15 @@ $m-dropdown--max-width: 320px - $m-padding*2;
         }
     }
 
-    .m-text-field {
+    &__arrow {
+        transition: transform 0.3s ease;
+
+        &.m--is-open {
+            transform: rotate(-180deg) translateY(-4px);
+        }
+    }
+
+    .m-input-style {
         width: 100%;
     }
 
@@ -70,19 +75,4 @@ $m-dropdown--max-width: 320px - $m-padding*2;
         min-width: 26px;
         color: $m-color--interactive;
     }
-}
-
-.m-dropdown-item {
-    transition: background $m-transition-duration ease;
-    box-sizing: border-box;
-    display: inline-flex;
-    width: 100%;
-    padding: $m-padding;
-    margin: 0;
-    align-items: center;
-    color: $m-color--text;
-    font-size: $m-font-size--l;
-    text-decoration: none;
-    outline: none;
-    word-break: break-all;
 }
