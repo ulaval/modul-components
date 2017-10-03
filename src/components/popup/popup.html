@@ -19,11 +19,12 @@
               :leave-cancelled="leaveCancelled"
               v-if="!isMqMaxS"
               :style="{ width: width }">
+
         <slot></slot>
         <div slot="body" class="m-popup__body" :class="{ 'm--has-shadow': shadow }" v-if="hasHeaderSlot || hasBodySlot || hasFooterSlot">
-            <slot name="header"></slot>
-            <slot name="body"></slot>
-            <slot name="footer"></slot>
+            <slot name="header" v-if="hasHeaderSlot"></slot>
+            <slot name="body" v-if="hasBodySlot"></slot>
+            <slot name="footer" v-if="hasFooterSlot"></slot>
         </div>
     </m-popper>
     <m-sidebar :open="propOpen" @open="togglePopup(true)" @close="togglePopup(false)" :disabled="disabled" :id="id" :classNamePortalTarget="classNamePortalTarget"
