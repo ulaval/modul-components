@@ -54,10 +54,11 @@ export class BaseWindow extends ModulVue {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
+    @Prop({ default: false })
+    public headerCloseButton: boolean;
 
     public componentName: string;
     public from: string;
-    private hasHeader: boolean;
 
     private internalPropOpen: boolean = false;
     private propId: string = DIALOG_ID;
@@ -110,13 +111,8 @@ export class BaseWindow extends ModulVue {
         }
     }
 
-    private get showHeader(): boolean {
-        if (this.from != BaseWindowFrom.Bottom && this.windowMode != BaseWindowMode.Modal && (this.hasHeaderSlot || this.hasTitle)) {
-            this.hasHeader = true;
-        } else {
-            this.hasHeader = false;
-        }
-        return this.hasHeader;
+    private get hasHeader(): boolean {
+        return this.hasHeaderSlot || this.hasTitle;
     }
 
     public get propCloseOnBackdrop(): boolean {
@@ -242,6 +238,10 @@ export class BaseWindow extends ModulVue {
 
     private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;
+    }
+
+    private get hasHeaderCloseButton(): boolean {
+        return this.headerCloseButton || this.windowMode == BaseWindowMode.Dialog;
     }
 
     private get hasBodySlot(): boolean {
