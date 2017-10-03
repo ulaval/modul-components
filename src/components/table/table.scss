@@ -12,7 +12,7 @@
     &__header {
         display: flex;
         align-items: center;
-        // margin-right: 16px;
+        font-size: $m-font-size--l;
         padding: $m-padding;
         background-color: $m-color--grey-lighter;
         justify-content: space-between;
@@ -85,13 +85,13 @@
                 tr {
                     border-bottom: 1px solid $m-color--grey-light;
 
-                    &:last-child {
-                        border-bottom: 0;
+                    // &:last-child {
+                    //     border-bottom: 0;
 
-                        > td {
-                            padding-bottom: 0;
-                        }
-                    }
+                    //     > td {
+                    //         padding-bottom: 0;
+                    //     }
+                    // }
                 }
 
                 td {
