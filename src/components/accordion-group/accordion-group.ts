@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -8,13 +9,15 @@ import { MAccordion, MAccordionSkin } from '../accordion/accordion';
 
 @WithRender
 @Component
-export class MAccordionGroup extends Vue {
+export class MAccordionGroup extends ModulVue {
     @Prop()
     public skin: MAccordionSkin;
     @Prop({ default: false })
     public concurrent: boolean;
     @Prop({ default: false })
     public allOpen: boolean;
+    @Prop()
+    public value: string;
 
     public componentName: string = ACCORDION_GROUP_NAME;
 
@@ -41,10 +44,10 @@ export class MAccordionGroup extends Vue {
                     childrenNumber: i,
                     open: false
                 });
-                if (accordion.propOpen) {
+                if (accordion.isOpen) {
                     if (this.concurrent) {
                         this.indexAccordionOpen = this.nbAccordion;
-                        accordion.closeAccordion();
+                        accordion.isOpen = false;
                         this.arrAccordion[this.nbAccordion].open = false;
                     } else {
                         this.nbAccordionOpen++;
@@ -53,7 +56,7 @@ export class MAccordionGroup extends Vue {
                 }
                 if (this.propSkin != accordion.propSkin) {
                     accordion.propSkin = this.propSkin;
-                    accordion.resetSkin(this.propSkin);
+                    accordion.setSkin();
                 }
                 this.nbAccordion++;
             }
@@ -72,12 +75,8 @@ export class MAccordionGroup extends Vue {
     }
 
     private toggleAccordionGroup(accordionID: number, open: boolean): void {
-        for (let i = 0; i < this.arrAccordion.length; i++) {
-            if (this.arrAccordion[i].id == accordionID) {
-                this.arrAccordion[i].open = open;
-                this.indexAccordionOpen = i;
-            }
-        }
+        console.log(this.$children);
+
         if (this.concurrent) {
             this.closeAllAccordions(true);
             if (open) {
@@ -95,7 +94,7 @@ export class MAccordionGroup extends Vue {
 
     private openAccordionConcurrent(): void {
         if (this.indexAccordionOpen != undefined) {
-            (this.$children[this.arrAccordion[this.indexAccordionOpen].childrenNumber] as MAccordion).openAccordion();
+            (this.$children[this.arrAccordion[this.indexAccordionOpen].childrenNumber] as MAccordion).isOpen = true;
             this.nbAccordionOpen = 1;
         } else {
             this.nbAccordionOpen = 0;
@@ -116,7 +115,7 @@ export class MAccordionGroup extends Vue {
             }
             if (this.checkAccordion(i)) {
                 accordion.setIsAnimActive(isAnimActive);
-                accordion.openAccordion();
+                accordion.isOpen = true;
             }
         }
     }
@@ -131,12 +130,12 @@ export class MAccordionGroup extends Vue {
             }
             if (this.checkAccordion(i)) {
                 accordion.setIsAnimActive(isAnimActive);
-                accordion.closeAccordion();
+                accordion.isOpen = false;
             }
         }
     }
 
-    private get propSkin(): string {
+    private get propSkin(): MAccordionSkin {
         return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Vanilla ? this.skin : MAccordionSkin.Regular;
     }
 

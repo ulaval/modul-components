@@ -1,7 +1,8 @@
+import Vue from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './accordion.html?style=./accordion.scss';
 import { ACCORDION_NAME, ACCORDION_GROUP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
@@ -9,7 +10,7 @@ import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/tran
 export enum MAccordionSkin {
     Regular = 'regular',
     Light = 'light',
-    Vanilla= 'vanilla'
+    Vanilla = 'vanilla'
 }
 
 export enum MAccordionIconPosition {
@@ -22,7 +23,7 @@ export enum MAccordionIconSkin {
     Light = 'light'
 }
 
-export enum MAccordionIconASize {
+export enum MAccordionIconSize {
     Small = 'small',
     Large = 'large'
 }
@@ -33,72 +34,67 @@ export enum MAccordionIconASize {
 })
 export class MAccordion extends ModulVue {
 
+    @Prop({ default: false })
+    public open: boolean;
     @Prop({ default: MAccordionSkin.Regular })
     public skin: MAccordionSkin;
-    @Prop()
-    public open: boolean;
     @Prop()
     public iconPosition: MAccordionIconPosition;
     @Prop()
     public iconSkin: MAccordionIconSkin;
     @Prop()
-    public iconSize: MAccordionIconASize;
+    public iconSize: MAccordionIconSize;
 
     public componentName: string = ACCORDION_NAME;
-    public propSkin: string = MAccordionSkin.Regular;
-    public propOpen: boolean = false;
     public id: number;
+    private hasParentGroup: boolean | undefined = undefined;
+    private root: any;
+    private internalPropOpen: boolean = this.open;
+    private internalPropSkin: MAccordionSkin = this.skin;
+    private internalIconPosition: MAccordionIconPosition = this.iconPosition;
+    private internalIconSize: MAccordionIconSize = this.iconSize;
+    private internalIconSkin: MAccordionIconSkin = this.iconSkin;
 
-    private propIconPosition: string = MAccordionIconPosition.Right;
-    private propIconSkin: string = MAccordionIconSkin.Light;
-    private propIconSize: string = MAccordionIconASize.Large;
-
-    public resetSkin(type): void {
-        switch (type) {
-            case MAccordionSkin.Light:
-                this.propIconPosition = MAccordionIconPosition.Left;
-                this.propIconSize = MAccordionIconASize.Small;
-                this.propIconSkin = MAccordionIconSkin.Regular;
-                break;
-            case MAccordionSkin.Vanilla:
-                this.setSkinVanilla();
-                break;
-            default:
-                this.propIconPosition = MAccordionIconPosition.Right;
-                this.propIconSize = MAccordionIconASize.Large;
-                this.propIconSkin = MAccordionIconSkin.Light;
-        }
+    @Watch('open')
+    public updateOpen(open: boolean): void {
+        this.isOpen = this.open;
     }
 
-    public openAccordion(): void {
-        this.propOpen = true;
+    @Watch('skin')
+    public updateSkin(skin: boolean): void {
+        this.propSkin = this.skin;
     }
 
-    public closeAccordion(): void {
-        this.propOpen = false;
+    public get isOpen(): boolean {
+        return this.internalPropOpen;
+    }
+
+    public set isOpen(value) {
+        this.$emit('input', value);
+        this.internalPropOpen = value;
+    }
+
+    public get propSkin(): MAccordionSkin {
+        return this.internalPropSkin;
+    }
+
+    public set propSkin(value: MAccordionSkin) {
+        this.internalPropSkin = value;
+        this.setSkin();
     }
 
     public setIsAnimActive(value: boolean): void {
         this.as<TransitionAccordionMixin>().isAnimActive = value;
     }
 
-    protected beforeMount(): void {
-        this.propSkin = this.skin;
-        this.propOpen = this.open == undefined ? false : this.open;
-        this.propIconPosition = this.iconPosition;
-        this.propIconSize = this.iconSize;
-        this.propIconSkin = this.iconSkin;
-        this.setSkin();
-    }
-
-    private setSkin(): void {
-        switch (this.propSkin) {
+    public setSkin(): void {
+        switch (this.internalPropSkin) {
             case MAccordionSkin.Light:
                 if (this.propIconPosition == undefined) {
                     this.propIconPosition = MAccordionIconPosition.Left;
                 }
                 if (this.propIconSize == undefined) {
-                    this.propIconSize = MAccordionIconASize.Small;
+                    this.propIconSize = MAccordionIconSize.Small;
                 }
                 if (this.propIconSkin == undefined) {
                     this.propIconSkin = MAccordionIconSkin.Regular;
@@ -112,7 +108,7 @@ export class MAccordion extends ModulVue {
                     this.propIconPosition = MAccordionIconPosition.Right;
                 }
                 if (this.propIconSize == undefined) {
-                    this.propIconSize = MAccordionIconASize.Large;
+                    this.propIconSize = MAccordionIconSize.Large;
                 }
                 if (this.propIconSkin == undefined) {
                     this.propIconSkin = MAccordionIconSkin.Light;
@@ -120,12 +116,36 @@ export class MAccordion extends ModulVue {
         }
     }
 
+    private get propIconPosition(): MAccordionIconPosition {
+        return this.internalIconPosition == undefined ? MAccordionIconPosition.Right : this.internalIconPosition;
+    }
+
+    private set propIconPosition(value: MAccordionIconPosition) {
+        this.internalIconPosition = value;
+    }
+
+    private get propIconSize(): MAccordionIconSize {
+        return this.internalIconSize == undefined ? MAccordionIconSize.Large : this.internalIconSize;
+    }
+
+    private set propIconSize(value: MAccordionIconSize) {
+        this.internalIconSize = value;
+    }
+
+    private get propIconSkin(): MAccordionIconSkin {
+        return this.internalIconSkin == undefined ? MAccordionIconSkin.Light : this.internalIconSkin;
+    }
+
+    private set propIconSkin(value: MAccordionIconSkin) {
+        this.internalIconSkin = value;
+    }
+
     private setSkinVanilla(): void {
         if (this.propIconPosition == undefined) {
             this.propIconPosition = MAccordionIconPosition.Right;
         }
         if (this.propIconSize == undefined) {
-            this.propIconSize = MAccordionIconASize.Large;
+            this.propIconSize = MAccordionIconSize.Large;
         }
         if (this.propIconSkin == undefined) {
             this.propIconSkin = MAccordionIconSkin.Light;
@@ -134,13 +154,9 @@ export class MAccordion extends ModulVue {
 
     private toggleAccordion(): void {
         this.as<TransitionAccordionMixin>().isAnimActive = true;
-        this.propOpen = !this.propOpen;
+        this.isOpen = !this.isOpen;
         (this.$refs.accordionHeader as HTMLElement).blur();
-        this.$emit('click', this.id, this.propOpen);
-    }
-
-    private get isSkinRegular(): boolean {
-        return this.propSkin == MAccordionSkin.Light || this.propSkin == MAccordionSkin.Vanilla ? false : true;
+        this.$emit('click', this.id, this.isOpen);
     }
 }
 
