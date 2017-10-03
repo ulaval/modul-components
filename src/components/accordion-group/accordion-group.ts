@@ -75,8 +75,6 @@ export class MAccordionGroup extends ModulVue {
     }
 
     private toggleAccordionGroup(accordionID: number, open: boolean): void {
-        console.log(this.$children);
-
         if (this.concurrent) {
             this.closeAllAccordions(true);
             if (open) {

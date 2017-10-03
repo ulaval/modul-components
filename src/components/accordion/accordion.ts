@@ -47,8 +47,6 @@ export class MAccordion extends ModulVue {
 
     public componentName: string = ACCORDION_NAME;
     public id: number;
-    private hasParentGroup: boolean | undefined = undefined;
-    private root: any;
     private internalPropOpen: boolean = this.open;
     private internalPropSkin: MAccordionSkin = this.skin;
     private internalIconPosition: MAccordionIconPosition = this.iconPosition;
