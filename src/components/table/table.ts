@@ -15,7 +15,9 @@ export class MTable extends Vue {
 
     public componentName: string = TABLE_NAME;
     @Prop({ default: false })
-    public withOptionMenu: boolean;
+    public withOptionsMenu: boolean;
+    @Prop({ default: false })
+    public demo: boolean;
 
     private get hasHeader(): boolean {
         if (this.$slots[HEADER] || this.$slots[HEADER_CONTENT_LEFT] || this.$slots[HEADER_CONTENT_RIGHT]) {

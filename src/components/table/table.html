@@ -1,4 +1,4 @@
-<div class="m-table" :class="{'m--has-header': hasHeader, 'm--has-option-menu': withOptionMenu }">
+<div class="m-table" :class="{'m--has-header': hasHeader, 'm--has-option-menu': withOptionsMenu }">
     <header class="m-table__header" :class="{'m--no-padding': headerPadding}" v-if="hasHeader">
         <span class="m-table__header__content-left" v-if="hasContentLeft">
             <slot name="header-content-left"></slot>
@@ -11,28 +11,51 @@
     <div class="m-table__body">
         <table>
             <slot>
-                <thead>
-                    <tr>
-                        <th>title</th>
-                        <th>title</th>
-                        <th>title</th>
-                        <th>title</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>cell</td>
-                        <td>cell</td>
-                        <td>cell</td>
-                        <td>cell</td>
-                    </tr>
-                    <tr>
-                        <td>cell</td>
-                        <td>cell</td>
-                        <td>cell</td>
-                        <td>cell</td>
-                    </tr>
-                </tbody>
+                <template v-if="demo">
+                    <thead>
+                        <tr>
+                            <th>title</th>
+                            <th>title</th>
+                            <th>title</th>
+                            <th v-if="withOptionsMenu"></th>
+                            <th v-else>title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>cell</td>
+                            <td>cell</td>
+                            <td>cell</td>
+                            <td>
+                                <m-options-menu v-if="withOptionsMenu">
+                                    <m-options-menu-item>
+                                        Exemple de menu
+                                    </m-options-menu-item>
+                                </m-options-menu>
+
+                                <template v-else>
+                                    cell
+                                </template>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>cell</td>
+                            <td>cell</td>
+                            <td>cell</td>
+                            <td>
+                                <m-options-menu v-if="withOptionsMenu">
+                                    <m-options-menu-item>
+                                        Exemple de menu
+                                    </m-options-menu-item>
+                                </m-options-menu>
+
+                                <template v-else>
+                                    cell
+                                </template>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
             </slot>
         </table>
     </div>
