@@ -22,9 +22,13 @@ export class MDynamicTemplate extends Vue {
     }
 
     private get internalTemplate(): string {
-        Vue.component(this.tag, {
-            template: `<div>${this.template}</div>`
-        });
+        if (typeof this.template === 'string') {
+            Vue.component(this.tag, {
+                template: `<div>${this.template}</div>`
+            });
+        } else {
+            Vue.component(this.tag, this.template);
+        }
         return this.tag;
     }
 }
