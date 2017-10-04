@@ -2,7 +2,7 @@ import '../polyfills';
 import Vue from 'vue';
 import MediaQueriesPlugin from './media-queries';
 
-describe('Mediies plugin', () => {
+describe('Media Queries plugin', () => {
     it('registers $mq on vue instance', () => {
         Vue.use(MediaQueriesPlugin);
 

@@ -35,8 +35,8 @@ export class MetaAll implements PluginObject<any> {
         meta.mergeComponentMeta(DYNAMIC_TEMPLATE_NAME, require('../components/dynamic-template/dynamic-template.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(FLEX_TEMPLATE_NAME, require('../components/flex-template/flex-template.meta.json'), CATEGORY_LAYOUT);
         meta.mergeComponentMeta(I18N_NAME, require('../components/i18n/i18n.meta.json'));
-        meta.mergeComponentMeta(ICON_NAME, require('../components/input-style/input-style.meta.json'), CATEGORY_FORMS);
-        meta.mergeComponentMeta(INPUT_STYLE_NAME, require('../components/icon/icon.meta.json'), CATEGORY_INDICATORS);
+        meta.mergeComponentMeta(ICON_NAME, require('../components/icon/icon.meta.json'), CATEGORY_INDICATORS);
+        meta.mergeComponentMeta(INPUT_STYLE_NAME, require('../components/input-style/input-style.meta.json'), CATEGORY_FORMS);
         meta.mergeComponentMeta(LIMIT_TEXT_NAME, require('../components/limit-text/limit-text.meta.json'), CATEGORY_CONTENT);
         meta.mergeComponentMeta(LINK_NAME, require('../components/link/link.meta.json'), CATEGORY_NAVIGATION);
         meta.mergeComponentMeta(MESSAGE_NAME, require('../components/message/message.meta.json'), CATEGORY_COMUNICATION);

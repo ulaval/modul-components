@@ -19,10 +19,6 @@
             "type": "boolean",
             "default": false
         },
-        "open": {
-            "type": "boolean",
-            "default": false
-        },
         "editable": {
             "type": "boolean",
             "default": false

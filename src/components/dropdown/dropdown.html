@@ -1,14 +1,14 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ maxWidth: width }">
     <m-popup :placement="bottom-start"
              :disabled="inactive"
-             :open="propOpen"
+             :open="open"
              :enter="transitionEnter"
              :after-enter="transitionAfterEnter"
              :leave="transitionLeave"
              :padding-header="false"
              :padding-body="false"
              :focus-management="!propEditable"
-             :open-on-click="!propOpen"
+             :open-on-click="!open"
              width="100%"
              @open="toggleDropdown(true)"
              @close="toggleDropdown(false)">
@@ -36,13 +36,13 @@
         <template slot="footer" v-if="hasFooterSlot">
             <slot name="footer"></slot>
         </template>
-        <m-text-field ref="mDropdownValue"
+        <m-text-field ref="mDropdownTextField"
                       mode="dropdown"
                       :label="label"
                       v-model="selectedText"
                       :state="propState"
                       :editable="propEditable"
-                      :force-focus="propOpen"
+                      :force-focus="open"
                       :placeholder="defaultText"
                       :disabled="disabled"
                       :waiting="waiting"

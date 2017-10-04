@@ -18,7 +18,7 @@ export enum MediaQueriesBpMax {
 }
 
 export enum MediaQueriesBp {
-    L = '(min-width: 1024px) and (max-width:1 599px)',
+    L = '(min-width: 1024px) and (max-width:1599px)',
     M = '(min-width: 768px) and (max-width: 1023px)',
     S = '(min-width: 480px) and (max-width: 767px)'
 }

@@ -3,7 +3,7 @@
     :disabled="disabled"
     :data-key="key"
     v-show="visible"
-    tabindex="1"
+    :tabindex="inactif ? -1 : 1"
     @focus="setHover(true)"
     @blur="setHover(false)"
     @click="onClick($event)">

@@ -9,6 +9,7 @@ import { KeyCode } from '../../utils/keycode/keycode';
 import { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import { MTextFieldInterface } from '../text-field/text-field';
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
@@ -44,8 +45,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public disabled: boolean;
     @Prop({ default: false })
     public waiting: boolean;
-    @Prop({ default: false })
-    public open: boolean;
+    // @Prop({ default: false })
+    // public open: boolean;
     @Prop({ default: false })
     public editable: boolean;
     // @Prop({ default: false })
@@ -110,11 +111,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public toggleDropdown(open: boolean): void {
-        this.propOpen = open;
-    }
-
-    private mounted(): void {
-        this.propOpen = this.open;
+        this.open = open;
     }
 
     @Watch('value')
@@ -123,21 +120,16 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$emit('valueChanged', value);
     }
 
-    @Watch('open')
-    private openChanged(open: boolean): void {
-        this.propOpen = open;
-    }
-
     public get model(): any {
         this.hasModel = !!this.value;
         return this.value;
     }
 
-    public get propOpen(): boolean {
+    public get open(): boolean {
         return this.internalOpen;
     }
 
-    public set propOpen(open: boolean) {
+    public set open(open: boolean) {
         this.internalOpen = open != undefined ? open : false;
         this.$nextTick(() => {
             if (open) {
@@ -206,9 +198,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private keyupReference($event): void {
-        if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN)) {
+        if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
             $event.preventDefault();
-            this.propOpen = true;
+            this.open = true;
 
             setTimeout(() => { // Wait for menu to open
                 (this.$refs.mDropdownElements as HTMLElement).focus();
@@ -291,6 +283,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 if (focusElement) {
                     this.$emit('keyPressEnter', (focusElement as MDropDownItemInterface).propValue);
                 }
+                return;
+            case KeyCode.M_ESCAPE:
+                (this.$refs.mDropdownTextField as MTextFieldInterface).releaseFocus();
+                this.internalOpen = false;
                 return;
         }
 
