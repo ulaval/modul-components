@@ -10,10 +10,9 @@ import { MDropdownInterface } from '../dropdown/dropdown';
 import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropDownItemInterface extends Vue {
-    propValue: any;
     visible: boolean;
     disabled: boolean;
-    hasFocus: boolean;
+    focus: boolean;
 }
 
 export abstract class BaseDropdown extends ModulVue {
@@ -37,10 +36,10 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     public componentName: string = DROPDOWN_ITEM_NAME;
 
     public inactif: boolean = false; // Without label and value
+    public focus: boolean = false;
     public filter: string = ''; // Set by parent
     public root: Vue; // Dropdown component
     public group: Vue | undefined; // Dropdown-group parent if there is one
-    public hasFocus: boolean = false;
 
     public created(): void {
         this.getMDropdownRoot(this);
@@ -58,8 +57,18 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
 
         (this.root as MDropdownInterface).$on('keyPressEnter',
             (value: any) => {
-                if (value === this.propValue) {
+                if (value === this) {
                     this.onClick();
+                }
+            });
+
+        (this.root as MDropdownInterface).$on('focus',
+            (value: Vue) => {
+                if (this == value) {
+                    this.focus = true;
+                    this.$el.scrollIntoView();
+                } else {
+                    this.focus = false;
                 }
             });
 
@@ -193,14 +202,6 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     private getMDropdownGroup(node: Vue): void {
         let groupNode: BaseDropdownGroup | undefined = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
         this.group = groupNode;
-    }
-
-    private setHover(flag: boolean): void {
-        if (flag) {
-            (this.root as MDropdownInterface).setFocus(this);
-        } else {
-            this.hasFocus = false;
-        }
     }
 }
 

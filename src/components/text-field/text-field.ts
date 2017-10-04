@@ -5,6 +5,7 @@ import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './text-field.html?style=./text-field.scss';
 import { TEXT_FIELD_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { KeyCode } from '../../utils/keycode/keycode';
 
 export enum MTextFieldType {
     Text = 'text',
@@ -20,10 +21,6 @@ export enum MTextFieldMode {
     Dropdown = 'dropdown'
 }
 
-export interface MTextFieldInterface extends ModulVue {
-    releaseFocus(): void;
-}
-
 const ICON_NAME_PASSWORD_VISIBLE: string = 'default';
 const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
 
@@ -31,7 +28,7 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
 @Component({
     mixins: [InputState]
 })
-export class MTextField extends ModulVue implements MTextFieldInterface {
+export class MTextField extends ModulVue {
 
     @Prop({
         default: MTextFieldType.Text,
@@ -71,14 +68,19 @@ export class MTextField extends ModulVue implements MTextFieldInterface {
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-text-field:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-text-field:hide-password');
 
-    public releaseFocus(): void {
-        (this.$el.children[1].children[0] as HTMLElement).focus();
-        (this.$el.children[1].children[0] as HTMLElement).blur();
-        this.internalIsFocus = false;
-    }
-
     protected mounted(): void {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
+
+        document.addEventListener('click', (e: MouseEvent) => {
+            if (!this.editable &&
+                !(e.target == this.$refs.textField ||
+                  e.target == this.$refs.input ||
+                  e.target == this.$refs.inputValue ||
+                  e.target == this.$refs.inputDefaultText ||
+                  e.target == this.$refs.label)) {
+                this.onBlur(e);
+            }
+        });
     }
 
     @Watch('type')
@@ -93,16 +95,25 @@ export class MTextField extends ModulVue implements MTextFieldInterface {
             this.$emit('focus', event);
         }
     }
-
     private onBlur(event): void {
-        this.internalIsFocus = false;
-        this.$emit('blur', event);
+        if (this.editable || !(event.type == 'blur' && event.target == this.$refs.input)) {
+            this.internalIsFocus = false;
+            this.$emit('blur', event);
+        }
     }
 
-    private onKeyup(event): void {
+    private onKeyup(event: KeyboardEvent): void {
         if (!this.as<InputStateMixin>().isDisabled) {
-            this.$emit('keyup', event, this.model);
+            if (event.keyCode != KeyCode.M_TAB) {
+                this.$emit('keyup', event, this.model);
+            } else {
+                this.onBlur(event);
+            }
         }
+    }
+
+    private onClick(event): void {
+        (this.$refs.input as HTMLElement).focus();
     }
 
     private togglePasswordVisibility(event): void {
@@ -179,6 +190,14 @@ export class MTextField extends ModulVue implements MTextFieldInterface {
 
     private get hasIcon(): boolean {
         return !!this.iconName && !this.as<InputStateMixin>().isDisabled;
+    }
+
+    private get tabindex(): number | undefined {
+        if (this.as<InputStateMixin>().isDisabled) {
+            return undefined;
+        } else {
+            return 0;
+        }
     }
 
     private get isMessageVisible(): boolean {
