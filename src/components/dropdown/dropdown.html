@@ -7,9 +7,10 @@
              :leave="transitionLeave"
              :padding-header="false"
              :padding-body="false"
-             :focus-management="!propEditable"
+             :focus-management="!editable"
              :open-on-click="!open"
              width="100%"
+             ref="popper"
              @open="toggleDropdown(true)"
              @close="toggleDropdown(false)">
         <template slot="header" v-if="hasLabel && isMqMaxS">
@@ -29,7 +30,7 @@
             slot="body"
             tabindex="1"
             @keyup="keyupItem">
-            <slot></slot>
+            <slot ref="items"></slot>
             <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
         </ul>
 
@@ -41,7 +42,7 @@
                       :label="label"
                       v-model="selectedText"
                       :state="propState"
-                      :editable="propEditable"
+                      :editable="editable"
                       :force-focus="open"
                       :placeholder="defaultText"
                       :disabled="disabled"

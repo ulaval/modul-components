@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
-import { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
+import { MDropdownItem, MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { MTextFieldInterface } from '../text-field/text-field';
@@ -51,7 +51,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public editable: boolean;
     // @Prop({ default: false })
     // public multiple: boolean;
-    @Prop({default: DROPDOWN_MAX_WIDTH })
+    @Prop({ default: DROPDOWN_MAX_WIDTH })
     public width: string;
     @Prop()
     public textNoData: string;
@@ -61,8 +61,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public items: Vue[] = [];
     public nbItemsVisible: number = 0;
 
+    private internalValue: string | undefined = undefined;
+    private internalItems: MDropdownItem[];
+
     private selectedText: string = '';
-    private hasModel: boolean = true;
+    // private hasModel: boolean = true;
     private internalOpen: boolean = false;
     private noItemsLabel: string;
     private dirty: boolean = false;
@@ -114,15 +117,29 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.open = open;
     }
 
-    @Watch('value')
-    private valueChanged(value: any): void {
-        this.selectedText = '';
-        this.$emit('valueChanged', value);
+    protected mounted(): void {
+        // console.log('m', this.$children);
+        // console.log('m', this.$refs);
+        // console.log('m', (this.$refs.mDropdownElements as Vue).$children);
+        this.buildItemsMap();
     }
 
+    protected updated(): void {
+        // console.log('u', this.$children);
+        // console.log('u', this.$refs);
+        // console.log('u', (this.$refs.mDropdownElements as Vue).$children);
+        this.buildItemsMap();
+    }
+
+    // @Watch('value')
+    // private valueChanged(value: any): void {
+    //     this.selectedText = '';
+    //     this.$emit('valueChanged', value);
+    // }
+
     public get model(): any {
-        this.hasModel = !!this.value;
-        return this.value;
+        // this.hasModel = !!this.value;
+        return this.value == undefined ? this.internalValue : this.value;
     }
 
     public get open(): boolean {
@@ -140,8 +157,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
-    private get propEditable(): boolean {
-        return this.editable;
+    private buildItemsMap(): void {
+        this.internalItems = (this.$refs.popper as Vue).$children[0].$children.filter(v => v instanceof MDropdownItem).map(v => v as MDropdownItem);
     }
 
     private get propTextNoData(): string {
@@ -153,14 +170,15 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private get noItems(): boolean {
-        let show: boolean = false;
+        return this.nbItemsVisible == 0;
+        // let show: boolean = false;
 
-        if (this.nbItemsVisible == 0) {
-            this.noItemsLabel = this.items.length == 0 ? this.propTextNoData : this.propTextNoMatch;
-            show = true;
-        }
+        // if (this.nbItemsVisible == 0) {
+        //     this.noItemsLabel = this.items.length == 0 ? this.propTextNoData : this.propTextNoMatch;
+        //     show = true;
+        // }
 
-        return show;
+        // return show;
     }
 
     public get inactive(): boolean {
@@ -173,7 +191,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onBlur(event): void {
-        if (this.propEditable && this.dirty) {
+        if (this.editable && this.dirty) {
             setTimeout(() => {
                 if (!this.model || this.model == '') {
                     this.selectedText = '';
@@ -187,7 +205,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onFocus(event: Event): void {
-        if (this.propEditable) {
+        if (this.editable) {
             this.dirty = true;
             this.selectedText = '';
         }
