@@ -6,7 +6,6 @@ import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './tabs.html?style=./tabs.scss';
 import { TABS_NAME, TAB_PANE_NAME } from '../component-names';
 import { BaseTabs } from '../tab-pane/tab-pane';
-import { MTabPane } from '../tab-pane/tab-pane';
 
 export interface MTabsInterface extends Vue {
     model: any;
