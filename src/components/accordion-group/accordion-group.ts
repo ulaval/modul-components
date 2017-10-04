@@ -21,7 +21,6 @@ export class MAccordionGroup extends ModulVue {
 
     public componentName: string = ACCORDION_GROUP_NAME;
 
-    private propAllOpen: boolean = false;
     private nbAccordion: number = 0;
     private arrAccordion = new Array();
     private nbAccordionOpen: number = 0;
@@ -30,9 +29,9 @@ export class MAccordionGroup extends ModulVue {
     private hasError: boolean = false;
     private errorDefaultMesage: string = 'ERROR in <' + ACCORDION_GROUP_NAME + '> : ';
     private errorMessage: string = '';
+    private internalPropAllOpen: boolean = false;
 
     protected mounted(): void {
-        this.propAllOpen = this.allOpen;
         this.concurrent = this.concurrent;
         for (let i = 0; i < this.$children.length; i++) {
             if (this.checkAccordion(i)) {
@@ -131,6 +130,14 @@ export class MAccordionGroup extends ModulVue {
                 accordion.isOpen = false;
             }
         }
+    }
+
+    private get propAllOpen(): boolean {
+        return this.internalPropAllOpen == undefined ? this.allOpen : this.internalPropAllOpen;
+    }
+
+    private set propAllOpen(value: boolean) {
+        this.internalPropAllOpen = value;
     }
 
     private get propSkin(): MAccordionSkin {
