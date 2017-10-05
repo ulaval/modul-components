@@ -6,7 +6,7 @@ import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
-import { MDropdownItem, MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
+import { MDropdownInterface, MDropdownItem, /*MDropDownItemInterface,*/ BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { MTextFieldInterface } from '../text-field/text-field';
@@ -16,16 +16,16 @@ const DROPDOWN_MAX_HEIGHT: number = 220;
 const DROPDOWN_MAX_WIDTH: string = '704px'; // 768 - (32*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
-export interface MDropdownInterface extends Vue {
-    model: any;
-    items: Vue[];
-    inactive: boolean;
-    nbItemsVisible: number;
-    setFocus(item: Vue): void;
-    toggleDropdown(open: boolean): void;
-    setModel(value: any, label: string | undefined): void;
-    emitChange(value: any, action: boolean);
-}
+// export interface MDropdownInterface extends Vue {
+//     model: any;
+//     items: Vue[];
+//     inactive: boolean;
+//     // nbItemsVisible: number;
+//     setFocus(item: Vue): void;
+//     toggleDropdown(open: boolean): void;
+//     setModel(value: any, label: string | undefined): void;
+//     emitChange(value: any, action: boolean);
+// }
 
 @WithRender
 @Component({
@@ -59,15 +59,17 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public textNoMatch: string;
 
     public items: Vue[] = [];
-    public nbItemsVisible: number = 0;
+    // public nbItemsVisible: number = 0;
 
     private internalValue: string | undefined = undefined;
-    private internalItems: MDropdownItem[];
+    private internalItems: MDropdownItem[] = [];
+    private internalSelectedText: string | undefined = '';
+    private observer: any;
 
-    private selectedText: string = '';
+    // private selectedText: string = '';
     // private hasModel: boolean = true;
     private internalOpen: boolean = false;
-    private noItemsLabel: string;
+    // private noItemsLabel: string;
     private dirty: boolean = false;
 
     private textFieldLabelEl: HTMLElement;
@@ -76,41 +78,41 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private componentName: string = DROPDOWN_NAME;
 
     public setFocus(elementFocus: Vue): void {
-        for (let item of this.items) {
-            if (item === elementFocus) {
-                (item as MDropDownItemInterface).hasFocus = true;
-            } else {
-                (item as MDropDownItemInterface).hasFocus = false;
-            }
-        }
+        // for (let item of this.items) {
+        //     if (item === elementFocus) {
+        //         (item as MDropDownItemInterface).hasFocus = true;
+        //     } else {
+        //         (item as MDropDownItemInterface).hasFocus = false;
+        //     }
+        // }
     }
 
-    public getFocus(): MDropDownItemInterface | undefined {
-        let elementFocus: MDropDownItemInterface | undefined = undefined;
+    public getFocus(): MDropdownItem | undefined {
+        let elementFocus: MDropdownItem | undefined = undefined;
 
-        for (let item of this.items) {
-            if ((item as MDropDownItemInterface).hasFocus) {
-                elementFocus = (item as MDropDownItemInterface);
-                break;
-            }
-        }
+        // for (let item of this.items) {
+        //     if ((item as MDropDownItemInterface).hasFocus) {
+        //         elementFocus = (item as MDropDownItemInterface);
+        //         break;
+        //     }
+        // }
 
         return elementFocus;
     }
 
-    public setModel(value: any, label: string | undefined): void {
-        if (label) {
-            this.selectedText = label;
-        }
+    // public setModel(value: any, label: string | undefined): void {
+    //     // if (label) {
+    //     //     this.selectedText = label;
+    //     // }
 
-        this.$emit('input', value);
-        setTimeout(() => {
-            this.$emit('filter'); // Clear filter
-        }, 300);
-    }
+    //     // this.$emit('input', value);
+    //     // setTimeout(() => {
+    //     //     this.$emit('filter'); // Clear filter
+    //     // }, 300);
+    // }
 
     public emitChange(value: any, selected: boolean) {
-        this.$emit('change', value, selected);
+        // this.$emit('change', value, selected);
     }
 
     public toggleDropdown(open: boolean): void {
@@ -121,14 +123,28 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         // console.log('m', this.$children);
         // console.log('m', this.$refs);
         // console.log('m', (this.$refs.mDropdownElements as Vue).$children);
-        this.buildItemsMap();
+        // this.buildItemsMap();
+
+        this.$nextTick(() => {
+            this.observer = new MutationObserver(function(mutations) {
+                console.log('slot mutation');
+                this.buildItemsMap();
+            }.bind(this));
+
+            let o: any = document.body.getElementsByClassName('m-dropdown__list');// this.$el.querySelector('.m-popup');
+            // console.log(o);
+            if (o) {
+                this.observer.observe(o[0], { attributes: true, childList: true, characterData: true, subtree: true }
+                );
+            }
+        });
     }
 
     protected updated(): void {
         // console.log('u', this.$children);
         // console.log('u', this.$refs);
         // console.log('u', (this.$refs.mDropdownElements as Vue).$children);
-        this.buildItemsMap();
+        // this.buildItemsMap();
     }
 
     // @Watch('value')
@@ -136,11 +152,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     //     this.selectedText = '';
     //     this.$emit('valueChanged', value);
     // }
-
-    public get model(): any {
-        // this.hasModel = !!this.value;
-        return this.value == undefined ? this.internalValue : this.value;
-    }
 
     public get open(): boolean {
         return this.internalOpen;
@@ -157,8 +168,51 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
+    public get model(): any {
+        return this.value == undefined ? this.internalValue : this.value;
+    }
+
+    public set model(value) {
+        this.internalValue = value;
+        this.$emit('input', value);
+    }
+
+    private get selectedText(): string | undefined {
+        return this.internalSelectedText;
+
+        // let result: string = this.model;
+        // if (this.internalItems) {
+        //     this.internalItems.every(item => {
+        //         if (item.value == this.model) {
+        //             result = item.text;
+        //             return false;
+        //         }
+        //         return true;
+        //     });
+        // }
+        // return result;
+    }
+
+    private set selectedText(value: string | undefined) {
+
+    }
+
     private buildItemsMap(): void {
-        this.internalItems = (this.$refs.popper as Vue).$children[0].$children.filter(v => v instanceof MDropdownItem).map(v => v as MDropdownItem);
+        this.internalItems = (this.$refs.popper as Vue).$children[0].$children.filter(v => v instanceof MDropdownItem && !v.noDataDefaultItem).map(v => v as MDropdownItem);
+        this.$nextTick(() => {
+            if (this.internalItems.every(item => {
+                // console.log(item);
+                // console.log('k', this.model, this.internalSelectedText, item.value, item.propLabel);
+                // console.log('has items', this.$slots, !!this.$slots, Object.keys(this.$slots).length, '-');
+                if (item.value == this.model) {
+                    this.internalSelectedText = item.propLabel;
+                    return false;
+                }
+                return true;
+            })) {
+                this.internalSelectedText = '';
+            }
+        });
     }
 
     private get propTextNoData(): string {
@@ -169,8 +223,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return (this.textNoMatch ? this.textNoMatch : this.$i18n.translate('m-dropdown:no-result'));
     }
 
-    private get noItems(): boolean {
-        return this.nbItemsVisible == 0;
+    private get hasItems(): boolean {
+        return this.internalItems.length > 0;
         // let show: boolean = false;
 
         // if (this.nbItemsVisible == 0) {
@@ -179,6 +233,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         // }
 
         // return show;
+    }
+
+    private get noItemsLabel(): string {
+        return (!this.internalItems || this.internalItems.length == 0) ? this.propTextNoData : this.propTextNoMatch;
     }
 
     public get inactive(): boolean {
@@ -194,7 +252,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (this.editable && this.dirty) {
             setTimeout(() => {
                 if (!this.model || this.model == '') {
-                    this.selectedText = '';
+                    // this.selectedText = '';
                     this.$emit('valueChanged');
                 } else {
                     this.$emit('valueChanged', this.model);
@@ -207,7 +265,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private onFocus(event: Event): void {
         if (this.editable) {
             this.dirty = true;
-            this.selectedText = '';
+            // this.selectedText = '';
         }
     }
 
@@ -231,86 +289,86 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private keyupItem($event: KeyboardEvent): void {
-        let element: Vue | undefined = undefined;
-        let focusElement: MDropDownItemInterface | undefined = this.getFocus();
-        let itemsEnabled: MDropDownItemInterface[] = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
+        // let element: Vue | undefined = undefined;
+        // let focusElement: MDropDownItemInterface | undefined = this.getFocus();
+        // let itemsEnabled: MDropDownItemInterface[] = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
 
-        switch ($event.keyCode) {
-            case KeyCode.M_UP:
-                if (focusElement) {
-                    let index: number = itemsEnabled.indexOf(focusElement);
-                    if (index == 0) {
-                        element = itemsEnabled[0];
-                    } else {
-                        element = itemsEnabled[index - 1];
-                    }
-                } else {
-                    element = itemsEnabled[0];
-                }
-                break;
-            case KeyCode.M_HOME:
-                element = itemsEnabled[0];
-                break;
-            case KeyCode.M_PAGE_UP:
-                if (focusElement) {
-                    let index: number = itemsEnabled.indexOf(focusElement);
-                    index -= PAGE_STEP;
+        // switch ($event.keyCode) {
+        //     case KeyCode.M_UP:
+        //         if (focusElement) {
+        //             let index: number = itemsEnabled.indexOf(focusElement);
+        //             if (index == 0) {
+        //                 element = itemsEnabled[0];
+        //             } else {
+        //                 element = itemsEnabled[index - 1];
+        //             }
+        //         } else {
+        //             element = itemsEnabled[0];
+        //         }
+        //         break;
+        //     case KeyCode.M_HOME:
+        //         element = itemsEnabled[0];
+        //         break;
+        //     case KeyCode.M_PAGE_UP:
+        //         if (focusElement) {
+        //             let index: number = itemsEnabled.indexOf(focusElement);
+        //             index -= PAGE_STEP;
 
-                    if (index < 0) {
-                        element = itemsEnabled[0];
-                    } else {
-                        element = itemsEnabled[index];
-                    }
-                } else {
-                    element = itemsEnabled[0];
-                }
-                break;
-            case KeyCode.M_DOWN:
-                if (focusElement) {
-                    let index: number = itemsEnabled.indexOf(focusElement);
-                    if (index == itemsEnabled.length - 1) {
-                        element = itemsEnabled[itemsEnabled.length - 1];
-                    } else {
-                        element = itemsEnabled[index + 1];
-                    }
-                } else {
-                    element = itemsEnabled[0];
-                }
-                break;
+        //             if (index < 0) {
+        //                 element = itemsEnabled[0];
+        //             } else {
+        //                 element = itemsEnabled[index];
+        //             }
+        //         } else {
+        //             element = itemsEnabled[0];
+        //         }
+        //         break;
+        //     case KeyCode.M_DOWN:
+        //         if (focusElement) {
+        //             let index: number = itemsEnabled.indexOf(focusElement);
+        //             if (index == itemsEnabled.length - 1) {
+        //                 element = itemsEnabled[itemsEnabled.length - 1];
+        //             } else {
+        //                 element = itemsEnabled[index + 1];
+        //             }
+        //         } else {
+        //             element = itemsEnabled[0];
+        //         }
+        //         break;
 
-            case KeyCode.M_END:
-                element = itemsEnabled[itemsEnabled.length - 1];
-                break;
-            case KeyCode.M_PAGE_DOWN:
-                if (focusElement) {
-                    let index: number = itemsEnabled.indexOf(focusElement);
-                    index += PAGE_STEP;
+        //     case KeyCode.M_END:
+        //         element = itemsEnabled[itemsEnabled.length - 1];
+        //         break;
+        //     case KeyCode.M_PAGE_DOWN:
+        //         if (focusElement) {
+        //             let index: number = itemsEnabled.indexOf(focusElement);
+        //             index += PAGE_STEP;
 
-                    if (index > itemsEnabled.length - 1) {
-                        element = itemsEnabled[itemsEnabled.length - 1];
-                    } else {
-                        element = itemsEnabled[index];
-                    }
-                } else {
-                    let index: number = (PAGE_STEP < itemsEnabled.length ? PAGE_STEP - 1 : itemsEnabled.length - 1);
-                    element = itemsEnabled[index];
-                }
-                break;
-            case KeyCode.M_ENTER:
-            case KeyCode.M_RETURN:
-                if (focusElement) {
-                    this.$emit('keyPressEnter', (focusElement as MDropDownItemInterface).propValue);
-                }
-                return;
-            case KeyCode.M_ESCAPE:
-                (this.$refs.mDropdownTextField as MTextFieldInterface).releaseFocus();
-                this.internalOpen = false;
-                return;
-        }
+        //             if (index > itemsEnabled.length - 1) {
+        //                 element = itemsEnabled[itemsEnabled.length - 1];
+        //             } else {
+        //                 element = itemsEnabled[index];
+        //             }
+        //         } else {
+        //             let index: number = (PAGE_STEP < itemsEnabled.length ? PAGE_STEP - 1 : itemsEnabled.length - 1);
+        //             element = itemsEnabled[index];
+        //         }
+        //         break;
+        //     case KeyCode.M_ENTER:
+        //     case KeyCode.M_RETURN:
+        //         if (focusElement) {
+        //             this.$emit('keyPressEnter', (focusElement as MDropDownItemInterface).propValue);
+        //         }
+        //         return;
+        //     case KeyCode.M_ESCAPE:
+        //         (this.$refs.mDropdownTextField as MTextFieldInterface).releaseFocus();
+        //         this.internalOpen = false;
+        //         return;
+        // }
 
-        if (element) {
-            element.$el.focus();
-        }
+        // if (element) {
+        //     element.$el.focus();
+        // }
     }
 
     private transitionEnter(el: HTMLElement, done: any): void {

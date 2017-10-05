@@ -30,8 +30,9 @@
             slot="body"
             tabindex="1"
             @keyup="keyupItem">
-            <slot ref="items"></slot>
-            <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
+            <slot></slot>
+            <m-dropdown-item v-if="!hasItems && !filtered" :no-data-default-item="true">{{ propTextNoData }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && filtered" :no-data-default-item="true">{{ propTextNoMatch }}</m-dropdown-item>
         </ul>
 
         <template slot="footer" v-if="hasFooterSlot">

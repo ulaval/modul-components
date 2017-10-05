@@ -11,9 +11,11 @@
             <option v-for="i in items" :value="i">{{i}}</option>
           </select><br/> -->
         <m-dropdown v-model="myObj.selection" width="500px" :editable="false">
-            <m-dropdown-item v-for="i in items" :label="i" :value="i"></m-dropdown-item>
+            <m-dropdown-item v-for="i in items" :value="i" :label="getLabel(i)"></m-dropdown-item>
             <!-- <m-dropdown-item :label="1" :value="1"></m-dropdown-item> -->
         </m-dropdown>
+
+        t: {{t}}
 
         <m-button @click="setItem()">Caption {{myCaption}}</m-button>{{myCaption}}
         <m-button @click="setItem2()">Caption {{myObj.selection}}</m-button>{{myObj.selection}}
