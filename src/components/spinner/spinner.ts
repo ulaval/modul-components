@@ -31,7 +31,7 @@ const SPINNER_ID: string = 'MSpinner';
     mixins: [Portal]
 })
 export class MSpinner extends ModulVue {
-    @Prop({ default: MSpinnerMode.Loading })
+    @Prop()
     public mode: MSpinnerMode;
     @Prop()
     public title: string;
@@ -49,7 +49,7 @@ export class MSpinner extends ModulVue {
 
     private defaultTargetElVisible: boolean = false;
     private visible: boolean = false;
-    private internalPropMode: MSpinnerMode;
+    private internalPropMode: MSpinnerMode = MSpinnerMode.Loading;
 
     protected beforeMount(): void {
         this.propMode = this.mode;
@@ -67,7 +67,7 @@ export class MSpinner extends ModulVue {
     }
 
     private get propMode(): MSpinnerMode {
-        return this.internalPropMode;
+        return this.mode != undefined ? this.mode : this.internalPropMode;
     }
 
     private set propMode(value: MSpinnerMode) {
