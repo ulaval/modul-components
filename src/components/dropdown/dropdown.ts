@@ -113,17 +113,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return elementFocus;
     }
 
-    // public setModel(value: any, label: string | undefined): void {
-    //     // if (label) {
-    //     //     this.selectedText = label;
-    //     // }
-
-    //     // this.$emit('input', value);
-    //     // setTimeout(() => {
-    //     //     this.$emit('filter'); // Clear filter
-    //     // }, 300);
-    // }
-
     public emitChange(value: any, selected: boolean) {
         // this.$emit('change', value, selected);
     }
@@ -153,19 +142,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             }
         });
     }
-
-    protected updated(): void {
-        // console.log('u', this.$children);
-        // console.log('u', this.$refs);
-        // console.log('u', (this.$refs.mDropdownElements as Vue).$children);
-        // this.buildItemsMap();
-    }
-
-    // @Watch('value')
-    // private valueChanged(value: any): void {
-    //     this.selectedText = '';
-    //     this.$emit('valueChanged', value);
-    // }
 
     public get open(): boolean {
         return this.internalOpen;
@@ -233,14 +209,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private get hasItems(): boolean {
         return this.internalItems.length > 0;
-        // let show: boolean = false;
-
-        // if (this.nbItemsVisible == 0) {
-        //     this.noItemsLabel = this.items.length == 0 ? this.propTextNoData : this.propTextNoMatch;
-        //     show = true;
-        // }
-
-        // return show;
     }
 
     private get noItemsLabel(): string {
@@ -426,6 +394,30 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             }
         });
     }
+
+        // public setModel(value: any, label: string | undefined): void {
+    //     // if (label) {
+    //     //     this.selectedText = label;
+    //     // }
+
+    //     // this.$emit('input', value);
+    //     // setTimeout(() => {
+    //     //     this.$emit('filter'); // Clear filter
+    //     // }, 300);
+    // }
+
+    // protected updated(): void {
+    //     // console.log('u', this.$children);
+    //     // console.log('u', this.$refs);
+    //     // console.log('u', (this.$refs.mDropdownElements as Vue).$children);
+    //     // this.buildItemsMap();
+    // }
+
+    // @Watch('value')
+    // private valueChanged(value: any): void {
+    //     this.selectedText = '';
+    //     this.$emit('valueChanged', value);
+    // }
 }
 
 const DropdownPlugin: PluginObject<any> = {

@@ -4,7 +4,7 @@ import WithRender from './navigation.html';
 import Meta from '../../../src/meta/meta';
 
 class Choice {
-    public selection: string = '';
+    public selection: string = 'item 2';
 
     constructor() {
         setInterval(() => {
