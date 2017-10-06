@@ -17,12 +17,13 @@ export interface RadioGroup {
     position: MRadioPosition;
     enabled: boolean;
     inline: boolean;
+    fullWidth: boolean;
     getValue(): string;
     updateValue(value: string): void;
 }
 
 export interface ButtonGroup extends RadioGroup {
-    fullsize: boolean;
+    fullWidth: boolean;
 }
 
 export abstract class BaseRadioGroup extends ModulVue {
@@ -59,6 +60,8 @@ export class MRadio extends ModulVue {
         validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
     })
     public iconPosition: MRadioPosition;
+    @Prop({ default: false })
+    public fullWidth: boolean;
     // ---------------------------
     public radioID: string = uuid.generate();
 
@@ -85,8 +88,8 @@ export class MRadio extends ModulVue {
         return this.isGroup() ? this.parentGroup.inline : false;
     }
 
-    public get propFullsize(): boolean {
-        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullsize : false;
+    public get propFullWidth(): boolean {
+        return this.isGroup() ? this.parentGroup.fullWidth : this.fullWidth;
     }
 
     protected get model(): string {
