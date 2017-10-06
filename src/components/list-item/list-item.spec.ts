@@ -29,29 +29,26 @@ describe('LIST-ITEM', () => {
         });
     });
 
-    // it('delete button event', () => {
-    //     let clickSpy = jasmine.createSpy('clickSpy');
-    //     let vm = new Vue({
-    //         template: `
-    //             <m-list-item @toDelete="onClick($event)">item 1</m-list-item>
-    //         `,
-    //         methods: {
-    //             onClick: clickSpy
-    //         }
-    //     }).$mount();
+    it('delete button event', () => {
+        let clickSpy = jasmine.createSpy('clickSpy');
+        let vm = new Vue({
+            template: `
+                <m-list-item @toDelete="onClick($event)">item 1</m-list-item>
+            `,
+            methods: {
+                onClick: clickSpy
+            }
+        }).$mount();
 
-    //     let deleteButton = list.$refs.button;
-    //     console.log(deleteButton);
+        let deleteButton = vm.$el.querySelector('button');
 
-    //     // let deleteButton: HTMLButtonElement | null = (list.$refs.button as Vue).$el.querySelector('button');
+        if (deleteButton) {
+            deleteButton.click();
+        }
 
-    //     // if (deleteButton) {
-    //     //     deleteButton.dispatchEvent(new Event('click'));
-    //     // }
-
-    //     Vue.nextTick(() => {
-    //         expect(clickSpy).toHaveBeenCalled();
-    //     });
-    // });
+        Vue.nextTick(() => {
+            expect(clickSpy).toHaveBeenCalled();
+        });
+    });
 
 });
