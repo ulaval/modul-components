@@ -5,6 +5,9 @@ import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './text-field.html?style=./text-field.scss';
 import { TEXT_FIELD_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import InputStyle from '../input-style/input-style';
+import ValidationMesagePlugin from '../validation-message/validation-message';
+import ButtonPlugin from '../button/button';
 
 export enum MTextFieldType {
     Text = 'text',
@@ -160,6 +163,9 @@ export class MTextField extends ModulVue {
 
 const TextFieldPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(InputStyle);
+        v.use(ValidationMesagePlugin);
+        v.use(ButtonPlugin);
         v.component(TEXT_FIELD_NAME, MTextField);
     }
 };

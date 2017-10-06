@@ -6,6 +6,7 @@ import WithRender from './radio.html?style=./radio.scss';
 import { RADIO_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import uuid from '../../utils/uuid/uuid';
+import RadioStylePlugin from '../radio-style/radio-style';
 
 export enum MRadioPosition {
     Left = 'left',
@@ -140,6 +141,7 @@ export class MRadio extends ModulVue {
 
 const RadioPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(RadioStylePlugin);
         v.use(IconPlugin);
         v.component(RADIO_NAME, MRadio);
     }

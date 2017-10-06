@@ -9,6 +9,7 @@ import { normalizeString } from '../../utils/str/str';
 import { MDropdownInterface } from '../dropdown/dropdown';
 import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import RadioStylePlugin from '../radio-style/radio-style';
 
 export interface MDropDownItemInterface extends Vue {
     visible: boolean;
@@ -201,6 +202,7 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
 
 const DropdownItemPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(RadioStylePlugin);
         v.component(DROPDOWN_ITEM_NAME, MDropdownItem);
     }
 };

@@ -6,9 +6,13 @@ import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { KeyCode } from '../../utils/keycode/keycode';
-import { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
+import DropdownItemPlugin, { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import PopupPlugin from '../popup/popup';
+import ButtonPlugin from '../button/button';
+import ValidationMessagePlugin from '../validation-message/validation-message';
+import InputStylePlugin from '../input-style/input-style';
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
@@ -389,6 +393,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
 const DropdownPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(PopupPlugin);
+        v.use(DropdownItemPlugin);
+        v.use(InputStylePlugin);
+        v.use(ButtonPlugin);
+        v.use(ValidationMessagePlugin);
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };

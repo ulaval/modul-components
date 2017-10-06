@@ -7,6 +7,9 @@ import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
 import { curLang } from '../../utils/i18n/i18n';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import PopupPlugin from '../popup/popup';
+import ButtonPlugin from '../button/button';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -279,6 +282,9 @@ export class MDatepicker extends ModulVue {
 
 const DatepickerPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(PopupPlugin);
+        v.use(ButtonPlugin);
+        v.use(ValidationMessagePlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };
