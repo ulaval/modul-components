@@ -6,6 +6,7 @@ import uuid from '../../utils/uuid/uuid';
 import WithRender from './spinner.html?style=./spinner.scss';
 import { SPINNER_NAME } from '../component-names';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
+import PortalPlugin from 'portal-vue';
 
 export enum MSpinnerMode {
     Loading = 'loading',
@@ -134,6 +135,7 @@ export class MSpinner extends ModulVue {
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(PortalPlugin);
         v.component(SPINNER_NAME, MSpinner);
     }
 };

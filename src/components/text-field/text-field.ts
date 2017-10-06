@@ -6,6 +6,10 @@ import WithRender from './text-field.html?style=./text-field.scss';
 import { TEXT_FIELD_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { KeyCode } from '../../utils/keycode/keycode';
+import IconPlugin from '../icon/icon';
+import ButtonPlugin from '../button/button';
+import SpinnerPlugin from '../spinner/spinner';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 
 export enum MTextFieldType {
     Text = 'text',
@@ -207,6 +211,10 @@ export class MTextField extends ModulVue {
 
 const TextFieldPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(IconPlugin);
+        v.use(ButtonPlugin);
+        v.use(SpinnerPlugin);
+        v.use(ValidationMessagePlugin);
         v.component(TEXT_FIELD_NAME, MTextField);
     }
 };

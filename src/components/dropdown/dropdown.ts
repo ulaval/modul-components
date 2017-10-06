@@ -9,6 +9,13 @@ import { KeyCode } from '../../utils/keycode/keycode';
 import { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import i18nPlugin from '../../utils/i18n/i18n';
+import DropdownItemPlugin from '../dropdown-item/dropdown-item';
+import ButtonPlugin from '../button/button';
+import TextFieldPlugin from '../text-field/text-field';
+import ValidationMessagePlugin from '../validation-message/validation-message';
+import PopupPlugin from '../popup/popup';
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
@@ -327,6 +334,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
 const DropdownPlugin: PluginObject<any> = {
     install(v, options) {
+        Vue.use(DropdownItemPlugin);
+        Vue.use(TextFieldPlugin);
+        Vue.use(ButtonPlugin);
+        Vue.use(PopupPlugin);
+        Vue.use(ValidationMessagePlugin);
+        Vue.use(MediaQueriesPlugin);
+        Vue.use(i18nPlugin);
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };
