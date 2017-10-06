@@ -15,7 +15,7 @@ export enum MRadioPosition {
 export interface RadioGroup {
     name: string;
     position: MRadioPosition;
-    enabled: boolean;
+    disabled: boolean;
     inline: boolean;
     fullWidth: boolean;
     getValue(): string;
@@ -48,8 +48,8 @@ export class MRadio extends ModulVue {
         validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
     })
     public position: MRadioPosition;
-    @Prop({ default: true })
-    public enabled: boolean;
+    @Prop({ default: false })
+    public disabled: boolean;
     @Prop({ default: false })
     public demo: boolean;
     // ----- For Button Group -----
@@ -73,11 +73,11 @@ export class MRadio extends ModulVue {
         return this.isGroup() ? this.parentGroup.position : this.position;
     }
 
-    public get propEnabled(): boolean {
-        let result: boolean = this.enabled;
-        let groupEnabled: boolean = this.isGroup() ? this.parentGroup.enabled : true;
+    public get propDisabled(): boolean {
+        let result: boolean = this.disabled;
+        let groupDisabled: boolean = this.isGroup() ? this.parentGroup.disabled : true;
 
-        return groupEnabled && result;
+        return groupDisabled && result;
     }
 
     public get propName(): string {

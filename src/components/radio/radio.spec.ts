@@ -53,14 +53,14 @@ describe('radio', () => {
         }
     });
 
-    it('enabled prop', () => {
+    it('disabled prop', () => {
         expect(radio.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
 
-        radio.enabled = false;
+        radio.disabled = true;
         Vue.nextTick(() => {
             expect(radio.$el.classList.contains(DISABLED_CSS)).toBeTruthy();
 
-            radio.enabled = true;
+            radio.disabled = false;
             Vue.nextTick(() => {
                 expect(radio.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
             });

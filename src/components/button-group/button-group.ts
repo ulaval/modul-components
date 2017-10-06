@@ -14,7 +14,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     @Prop()
     public value: string;
     @Prop({ default: true })
-    public enabled: boolean;
+    public disabled: boolean;
     @Prop({ default: false })
     public fullWidth: boolean;
     @Prop({ default: true })

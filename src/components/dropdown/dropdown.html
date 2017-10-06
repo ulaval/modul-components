@@ -17,13 +17,6 @@
             <slot></slot>
             <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
         </ul>
-
-        <!-- <div slot="header" v-if="!isMqMinS && propEditable">
-            <input type="text"
-                   @change="filterDropdown"
-                   @keyup="onKeyup"
-                   v-model="selectedValue">
-        </div> -->
         <m-input-style ref="mDropdownValue" :label="label" :state="propState" :empty="emptyValue" :focus="propOpen" :placeholder="defaultText"
             :disabled="disabled" :waiting="waiting">
             <input type="text" ref="input" @focus="onFocus" @change="filterDropdown" @keyup="onKeyup" v-model="selectedValue" v-if="propEditable"
