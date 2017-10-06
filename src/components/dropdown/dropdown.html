@@ -7,7 +7,7 @@
              :leave="transitionLeave"
              :padding-header="false"
              :padding-body="false"
-             :focus-management="!editable"
+             :focus-management="false"
              :open-on-click="!open"
              width="100%"
              ref="popper"
@@ -27,9 +27,7 @@
         </template>
         <ul class="m-dropdown__list"
             ref="mDropdownElements"
-            slot="body"
-            tabindex="1"
-            @keyup="keyupItem">
+            slot="body">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty" :no-data-default-item="true">{{ propTextNoData }}</m-dropdown-item>
             <m-dropdown-item v-if="!hasItems && dirty" :no-data-default-item="true">{{ propTextNoMatch }}</m-dropdown-item>
@@ -52,10 +50,9 @@
                       :valid-message="validMessage"
                       :helper-message="helperMessage"
                       @change="filterDropdown($event)"
-                      @keyup="keyupReference"
-                      @keydown.tab="keyupReference"
-                      @blur="onBlur($event)"
-                      @focus="onFocus($event)">
+                      @keyup="onKeyup"
+                      @focus="onFocus($event)"
+                      @blur="onBlur($event)">
         </m-text-field>
         <!-- <m-button mode="icon" icon-name="default" icon-size="13px" class="m-dropdown__icon-clear" v-if="this.hasModel &&!disabled && !waiting" @click="clearField">Clear field</m-button> -->
     </m-popup>

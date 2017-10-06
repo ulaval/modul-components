@@ -1,8 +1,8 @@
 <div class="m-spinner" :aria-hidden="!defaultTargetElVisible">
     <portal :target-el="'#'+ getSpinnerId()" v-if="visible">
         <div class="m-spinner__wrap"
-             :class="{'m--is-loading': mode == 'loading',
-                    'm--is-processing': mode == 'processing',
+             :class="{'m--is-loading': propMode == 'loading',
+                    'm--is-processing': propMode == 'processing',
                     'm--is-dark': propSkin == 'dark',
                     'm--is-light': propSkin == 'light',
                     'm--is-lighter': propSkin == 'lighter'}">

@@ -6,6 +6,8 @@ import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { MPopperPlacement } from '../popper/popper';
+import PopperPlugin from '../popper/popper';
+import SidebarPlugin from '../sidebar-window/sidebar-window';
 
 @WithRender
 @Component({
@@ -108,6 +110,8 @@ export class MPopup extends ModulVue {
 
 const PopupPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(PopperPlugin);
+        v.use(SidebarPlugin);
         v.component(POPUP_NAME, MPopup);
     }
 };

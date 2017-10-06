@@ -22,12 +22,10 @@ $m-dropdown-item--color-active: $m-color--interactive-lightest !default;
             &:not(.m--is-selected) {
                 cursor: pointer;
 
-                &:hover {
+                &:hover,
+                &:focus,
+                &.m--is-focus {
                     background: $m-dropdown-item--color-hover;
-                }
-
-                &:focus {
-                    background: $m-dropdown-item--color-focus;
                 }
 
                 &:active {

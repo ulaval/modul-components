@@ -20,6 +20,10 @@ export interface MDropdownInterface extends Vue {
 
     // setModel(value: any, label: string | undefined): void;
     // nbItemsVisible: number;
+    // export interface MDropDownItemInterface extends Vue {
+    //     visible: boolean;
+    //     disabled: boolean;
+    //     focus: boolean;
 }
 
 // export interface MDropDownItemInterface extends Vue {
@@ -51,10 +55,9 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
 
     public inactif: boolean = false; // Without label and value
     public root: MDropdownInterface; // Dropdown component
-    public group: Vue | undefined; // Dropdown-group parent if there is one
-    public hasFocus: boolean = false;
-
+    public focus: boolean = false;
     // public filter: string = ''; // Set by parent
+    public group: Vue | undefined; // Dropdown-group parent if there is one
 
     public created(): void {
         let rootNode: BaseDropdown | undefined = this.getParent<BaseDropdown>(p => p instanceof BaseDropdown);
@@ -66,6 +69,36 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
         }
 
         this.group = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
+
+        (this.root as MDropdownInterface).$on('keyPressEnter',
+            (value: any) => {
+                if (value === this) {
+                    this.onClick();
+                }
+            });
+
+        (this.root as MDropdownInterface).$on('focus',
+            (value: Vue) => {
+                if (this == value) {
+                    this.focus = true;
+                    this.$el.scrollIntoView();
+                } else {
+                    this.focus = false;
+                }
+            });
+
+        //     // If element is active add to array of items and increment counters
+        //     // Done a first time in the create because watch is not call on load
+        //     if (!this.inactif) {
+        //         (this.root as MDropdownInterface).items.push(this);
+        //         this.incrementCounters();
+        //     }
+
+        //     this.updateTextfield((this.root as MDropdownInterface).model);
+        // }
+
+        // beforeDestroy() {
+        //     let index: number = (this.root as MDropdownInterface).items.indexOf(this);
     }
 
     // Value and label rules
@@ -98,142 +131,11 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
     }
 
     public onClick(): void {
-        console.log(!this.noDataDefaultItem, !this.root.inactive, !this.disabled, !this.inactif);
         if (!this.noDataDefaultItem && !this.root.inactive && !this.disabled && !this.inactif) {
-            console.log('set root.model', this.value);
             this.root.model = this.value;
-        }
-        (this.root as MDropdownInterface).toggleDropdown(false);
-    }
-
-    private setHover(flag: boolean): void {
-        if (flag) {
-            (this.root as MDropdownInterface).setFocus(this);
-        } else {
-            this.hasFocus = false;
+            (this.root as MDropdownInterface).toggleDropdown(false);
         }
     }
-
-    // public created(): void {
-    //     let rootNode: BaseDropdown | undefined = this.getParent<BaseDropdown>(p => p instanceof BaseDropdown);
-
-    //     if (rootNode) {
-    //         this.root = (rootNode as any) as MDropdownInterface;
-    //     } else {
-    //         console.error('m-dropdown-item need to be inside m-dropdown');
-    //     }
-
-    //     this.group = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
-
-    //     // this.getMDropdownGroup(this);
-
-    //     // if (!this.value && !this.label) {
-    //     //     this.inactif = true;
-    //     // }
-
-    //     // (this.root as MDropdownInterface).$on('valueChanged',
-    //     //     (value: any) => { this.updateTextfield(value); });
-
-    //     // (this.root as MDropdownInterface).$on('filter',
-    //     //     (value: string) => { this.filter = value; });
-
-    //     // (this.root as MDropdownInterface).$on('keyPressEnter',
-    //     //     (value: any) => {
-    //     //         if (value === this.propValue) {
-    //     //             this.onClick();
-    //     //         }
-    //     //     });
-
-    //     // // If element is active add to array of items and increment counters
-    //     // // Done a first time in the create because watch is not call on load
-    //     // if (!this.inactif) {
-    //     //     (this.root as MDropdownInterface).items.push(this);
-    //     //     this.incrementCounters();
-    //     // }
-
-    //     // this.updateTextfield((this.root as MDropdownInterface).model);
-    // }
-
-        // @Watch('visible')
-    // public visibleChanged(visible: boolean): void {
-    //     // if (!this.inactif) {
-    //     //     if (visible) {
-    //     //         this.incrementCounters();
-    //     //     } else {
-    //     //         this.decrementCounters();
-    //     //     }
-    //     // }
-    // }
-
-    // public get propValue(): any {
-    //     if (this.value) {
-    //         return this.value;
-    //     } else {
-    //         if (this.label) {
-    //             return this.label;
-    //         } else {
-    //             return undefined;
-    //         }
-    //     }
-    // }
-
-    // public get text(): string {
-    //     return this.$el.innerText;
-    // }
-
-    // public hasItemsVisible(): boolean {
-    //     return (this.root && (this.root as MDropdownInterface).nbItemsVisible != 0);
-    // }
-
-    // protected mounted() {
-    //     // console.log('mounted');
-    //     // let index: number = (this.root as MDropdownInterface).items.indexOf(this);
-
-    //     // if (index > -1) {
-    //     //     if ((this.root as MDropdownInterface).items[index] &&
-    //     //         ((this.root as MDropdownInterface).items[index] as MDropdownItem).visible) {
-    //     //         this.decrementCounters();
-    //     //     }
-    //     //     (this.root as MDropdownInterface).items.splice(index, 1);
-    //     // }
-    // }
-
-    // protected beforeDestroy() {
-    //     console.log('destroy');
-    //     // let index: number = (this.root as MDropdownInterface).items.indexOf(this);
-
-    //     // if (index > -1) {
-    //     //     if ((this.root as MDropdownInterface).items[index] &&
-    //     //         ((this.root as MDropdownInterface).items[index] as MDropdownItem).visible) {
-    //     //         this.decrementCounters();
-    //     //     }
-    //     //     (this.root as MDropdownInterface).items.splice(index, 1);
-    //     // }
-    // }
-
-    // private updateTextfield(value): void {
-    //     // if (value === this.propValue) {
-    //     //     (this.root as MDropdownInterface).setModel(this.propValue, this.propLabel);
-    //     // }
-    // }
-
-    // private incrementCounters(): void {
-    //     (this.root as MDropdownInterface).nbItemsVisible++;
-    //     if (this.group) {
-    //         (this.group as MDropdownGroupInterface).nbItemsVisible++;
-    //     }
-    // }
-
-    // private decrementCounters(): void {
-    //     (this.root as MDropdownInterface).nbItemsVisible--;
-    //     if (this.group) {
-    //         (this.group as MDropdownGroupInterface).nbItemsVisible--;
-    //     }
-    // }
-
-    // private getMDropdownGroup(node: Vue): void {
-
-    // }
 }
 
 const DropdownItemPlugin: PluginObject<any> = {

@@ -9,7 +9,13 @@ import { KeyCode } from '../../utils/keycode/keycode';
 import { MDropdownInterface, MDropdownItem, /*MDropDownItemInterface,*/ BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { MTextFieldInterface } from '../text-field/text-field';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import i18nPlugin from '../../utils/i18n/i18n';
+import DropdownItemPlugin from '../dropdown-item/dropdown-item';
+import ButtonPlugin from '../button/button';
+import TextFieldPlugin from '../text-field/text-field';
+import ValidationMessagePlugin from '../validation-message/validation-message';
+import PopupPlugin from '../popup/popup';
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
@@ -45,8 +51,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public disabled: boolean;
     @Prop({ default: false })
     public waiting: boolean;
-    // @Prop({ default: false })
-    // public open: boolean;
     @Prop({ default: false })
     public editable: boolean;
     // @Prop({ default: false })
@@ -59,6 +63,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public textNoMatch: string;
 
     public items: Vue[] = [];
+    public itemsFocusable: Vue[] = [];
     // public nbItemsVisible: number = 0;
 
     private internalFilter: string = '';
@@ -225,20 +230,20 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         // // this.$emit('filter', normalizeString(text.trim()));
     }
 
-    private onBlur(event): void {
-        // if (this.editable && this.dirty) {
-        //     setTimeout(() => {
-        //         if (!this.model || this.model == '') {
-        //             // this.selectedText = '';
-        //             this.$emit('valueChanged');
-        //         } else {
-        //             this.$emit('valueChanged', this.model);
-        //         }
-        //     }, 100);
-        // }
-        // console.log('blur');
-        // this.dirty = false;
-    }
+    // private onBlur(event): void {
+    //     // if (this.editable && this.dirty) {
+    //     //     setTimeout(() => {
+    //     //         if (!this.model || this.model == '') {
+    //     //             // this.selectedText = '';
+    //     //             this.$emit('valueChanged');
+    //     //         } else {
+    //     //             this.$emit('valueChanged', this.model);
+    //     //         }
+    //     //     }, 100);
+    //     // }
+    //     // console.log('blur');
+    //     // this.dirty = false;
+    // }
 
     private onFocus(event: Event): void {
         if (this.editable) {
@@ -247,106 +252,124 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private onBlur(event): void {
+
+    //     if (this.internalOpen) {
+    //         this.toggleDropdown(false);
+    //     }
+
+    //     setTimeout(() => { // Wait that the dropdown is closed before clearing
+    //         this.$emit('filter'); // Clear filter
+    //         this.$emit('focus'); // Clear focus
+    //     }, 300);
+    }
+
     private clearField(): void {
         this.$emit('input');
     }
 
-    private keyupReference($event): void {
-        // if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
-        //     $event.preventDefault();
-        //     this.open = true;
-
-        //     setTimeout(() => { // Wait for menu to open
-        //         (this.$refs.mDropdownElements as HTMLElement).focus();
-        //     }, 300);
-        // }
-
-        // if (this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN || $event.keyCode == KeyCode.M_TAB)) {
-        //     (this.$refs.mDropdownElements as HTMLElement).focus();
-        // }
-    }
-
-    private keyupItem($event: KeyboardEvent): void {
-        // let element: Vue | undefined = undefined;
-        // let focusElement: MDropDownItemInterface | undefined = this.getFocus();
-        // let itemsEnabled: MDropDownItemInterface[] = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
+    private onKeyup($event: KeyboardEvent): void {
+        // this.itemsFocusable = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
 
         // switch ($event.keyCode) {
-        //     case KeyCode.M_UP:
-        //         if (focusElement) {
-        //             let index: number = itemsEnabled.indexOf(focusElement);
-        //             if (index == 0) {
-        //                 element = itemsEnabled[0];
-        //             } else {
-        //                 element = itemsEnabled[index - 1];
-        //             }
-        //         } else {
-        //             element = itemsEnabled[0];
+        //     case KeyCode.M_ENTER:
+        //     case KeyCode.M_RETURN:
+        //         let currentFocus: Vue | undefined = this.getFocusItem();
+        //         if (currentFocus) {
+        //             this.$emit('keyPressEnter', currentFocus);
+        //         }
+        //         return;
+        //     case KeyCode.M_SPACE:
+        //         if (!this.internalOpen) {
+        //             this.internalOpen = true;
         //         }
         //         break;
-        //     case KeyCode.M_HOME:
-        //         element = itemsEnabled[0];
-        //         break;
-        //     case KeyCode.M_PAGE_UP:
-        //         if (focusElement) {
-        //             let index: number = itemsEnabled.indexOf(focusElement);
-        //             index -= PAGE_STEP;
-
-        //             if (index < 0) {
-        //                 element = itemsEnabled[0];
-        //             } else {
-        //                 element = itemsEnabled[index];
-        //             }
-        //         } else {
-        //             element = itemsEnabled[0];
+        //     case KeyCode.M_ESCAPE:
+        //         this.internalOpen = false;
+        //         return;
+        //     case KeyCode.M_UP:
+        //         if (this.internalOpen) {
+        //             this.getPreviousFocusItem(this.getFocusItem());
         //         }
         //         break;
         //     case KeyCode.M_DOWN:
-        //         if (focusElement) {
-        //             let index: number = itemsEnabled.indexOf(focusElement);
-        //             if (index == itemsEnabled.length - 1) {
-        //                 element = itemsEnabled[itemsEnabled.length - 1];
-        //             } else {
-        //                 element = itemsEnabled[index + 1];
-        //             }
+        //         if (!this.internalOpen) {
+        //             this.internalOpen = true;
         //         } else {
-        //             element = itemsEnabled[0];
+        //             this.getNextFocusItem(this.getFocusItem());
         //         }
         //         break;
-
-        //     case KeyCode.M_END:
-        //         element = itemsEnabled[itemsEnabled.length - 1];
+        //     case KeyCode.M_PAGE_UP:
+        //         if (this.internalOpen) {
+        //             this.getPreviousFocusItem(this.getFocusItem(), PAGE_STEP);
+        //         }
         //         break;
         //     case KeyCode.M_PAGE_DOWN:
-        //         if (focusElement) {
-        //             let index: number = itemsEnabled.indexOf(focusElement);
-        //             index += PAGE_STEP;
-
-        //             if (index > itemsEnabled.length - 1) {
-        //                 element = itemsEnabled[itemsEnabled.length - 1];
-        //             } else {
-        //                 element = itemsEnabled[index];
-        //             }
+        //         if (!this.internalOpen) {
+        //             this.internalOpen = true;
         //         } else {
-        //             let index: number = (PAGE_STEP < itemsEnabled.length ? PAGE_STEP - 1 : itemsEnabled.length - 1);
-        //             element = itemsEnabled[index];
+        //             this.getNextFocusItem(this.getFocusItem(), PAGE_STEP);
         //         }
         //         break;
-        //     case KeyCode.M_ENTER:
-        //     case KeyCode.M_RETURN:
-        //         if (focusElement) {
-        //             this.$emit('keyPressEnter', (focusElement as MDropDownItemInterface).propValue);
+        //     case KeyCode.M_HOME:
+        //         if (this.internalOpen) {
+        //             this.getFirstFocusItem();
         //         }
-        //         return;
-        //     case KeyCode.M_ESCAPE:
-        //         (this.$refs.mDropdownTextField as MTextFieldInterface).releaseFocus();
-        //         this.internalOpen = false;
-        //         return;
+        //         break;
+        //     case KeyCode.M_END:
+        //         if (!this.internalOpen) {
+        //             this.internalOpen = true;
+        //         } else {
+        //             this.getLastFocusItem();
+        //         }
+        //         break;
+        // }
+    }
+
+    private getFocusItem(): Vue | undefined {
+        let elementFocused: Vue | undefined = undefined;
+
+        // for (let item of this.items) {
+        //     if ((item as MDropDownItemInterface).focus) {
+        //         elementFocused = item;
+        //     }
         // }
 
-        // if (element) {
-        //     element.$el.focus();
-        // }
+        return elementFocused;
+    }
+
+    private getNextFocusItem(currentItem: Vue | undefined, step: number = 1): void {
+        let index: number;
+
+        if (currentItem) {
+            index = this.itemsFocusable.indexOf(currentItem);
+            index = index + step < this.itemsFocusable.length ? index + step : this.itemsFocusable.length - 1;
+        } else {
+            index = 0;
+        }
+
+        this.$emit('focus', this.itemsFocusable[index]);
+    }
+
+    private getPreviousFocusItem(currentItem: Vue | undefined, step: number = 1): void {
+        let index: number;
+
+        if (currentItem) {
+            index = this.itemsFocusable.indexOf(currentItem);
+            index = index - step >= 0 ? index - step : 0;
+        } else {
+            index = this.itemsFocusable.length - 1;
+        }
+
+        this.$emit('focus', this.itemsFocusable[index]);
+    }
+
+    private getFirstFocusItem(): void {
+        this.$emit('focus', this.itemsFocusable[0]);
+    }
+
+    private getLastFocusItem(): void {
+        this.$emit('focus', this.itemsFocusable[this.itemsFocusable.length - 1]);
     }
 
     private transitionEnter(el: HTMLElement, done: any): void {
@@ -422,6 +445,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
 const DropdownPlugin: PluginObject<any> = {
     install(v, options) {
+        Vue.use(DropdownItemPlugin);
+        Vue.use(TextFieldPlugin);
+        Vue.use(ButtonPlugin);
+        Vue.use(PopupPlugin);
+        Vue.use(ValidationMessagePlugin);
+        Vue.use(MediaQueriesPlugin);
+        Vue.use(i18nPlugin);
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };
