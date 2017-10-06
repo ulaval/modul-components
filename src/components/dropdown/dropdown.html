@@ -31,8 +31,8 @@
             tabindex="1"
             @keyup="keyupItem">
             <slot></slot>
-            <m-dropdown-item v-if="!hasItems && !filtered" :no-data-default-item="true">{{ propTextNoData }}</m-dropdown-item>
-            <m-dropdown-item v-if="!hasItems && filtered" :no-data-default-item="true">{{ propTextNoMatch }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && !dirty" :no-data-default-item="true">{{ propTextNoData }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && dirty" :no-data-default-item="true">{{ propTextNoMatch }}</m-dropdown-item>
         </ul>
 
         <template slot="footer" v-if="hasFooterSlot">

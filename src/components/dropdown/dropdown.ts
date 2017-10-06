@@ -61,6 +61,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public items: Vue[] = [];
     // public nbItemsVisible: number = 0;
 
+    private internalFilter: string = '';
+
     private internalValue: string | undefined = undefined;
     private internalItems: MDropdownItem[] = [];
     private internalSelectedText: string | undefined = '';
@@ -76,6 +78,17 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private textFieldInputValueEl: HTMLElement;
 
     private componentName: string = DROPDOWN_NAME;
+
+    public filter(text: string | undefined): boolean {
+        if (text === undefined) {
+            return true;
+        } else if (!this.dirty) {
+            return true;
+        } else {
+            let parsedQuery = String(this.internalFilter).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
+            return new RegExp(parsedQuery, 'i').test(text);
+        }
+    }
 
     public setFocus(elementFocus: Vue): void {
         // for (let item of this.items) {
@@ -123,9 +136,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         // console.log('m', this.$children);
         // console.log('m', this.$refs);
         // console.log('m', (this.$refs.mDropdownElements as Vue).$children);
-        // this.buildItemsMap();
 
         this.$nextTick(() => {
+            this.buildItemsMap();
+
             this.observer = new MutationObserver(function(mutations) {
                 console.log('slot mutation');
                 this.buildItemsMap();
@@ -134,7 +148,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             let o: any = document.body.getElementsByClassName('m-dropdown__list');// this.$el.querySelector('.m-popup');
             // console.log(o);
             if (o) {
-                this.observer.observe(o[0], { attributes: true, childList: true, characterData: true, subtree: true }
+                this.observer.observe(o[0], { childList: true }
                 );
             }
         });
@@ -158,7 +172,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public set open(open: boolean) {
-        this.internalOpen = open != undefined ? open : false;
+        this.internalOpen = open;
+        this.dirty = false;
         this.$nextTick(() => {
             if (open) {
                 this.$emit('open');
@@ -175,44 +190,37 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public set model(value) {
         this.internalValue = value;
         this.$emit('input', value);
+        // console.log('dirty false', this.dirty);
+        this.dirty = false;
     }
 
-    private get selectedText(): string | undefined {
-        return this.internalSelectedText;
-
-        // let result: string = this.model;
-        // if (this.internalItems) {
-        //     this.internalItems.every(item => {
-        //         if (item.value == this.model) {
-        //             result = item.text;
-        //             return false;
-        //         }
-        //         return true;
-        //     });
-        // }
-        // return result;
+    private get selectedText(): string {
+        let result: string | undefined = '';
+        if (this.dirty) {
+            result = this.internalFilter;
+        } else if (this.internalItems.every(item => {
+            if (item.value == this.model) {
+                result = item.propLabel;
+                return false;
+            }
+            return true;
+        })) {
+            result = '';
+        }
+        return result;
     }
 
-    private set selectedText(value: string | undefined) {
-
+    private set selectedText(value: string) {
+        this.dirty = true;
+        this.internalFilter = value;
     }
 
     private buildItemsMap(): void {
-        this.internalItems = (this.$refs.popper as Vue).$children[0].$children.filter(v => v instanceof MDropdownItem && !v.noDataDefaultItem).map(v => v as MDropdownItem);
-        this.$nextTick(() => {
-            if (this.internalItems.every(item => {
-                // console.log(item);
-                // console.log('k', this.model, this.internalSelectedText, item.value, item.propLabel);
-                // console.log('has items', this.$slots, !!this.$slots, Object.keys(this.$slots).length, '-');
-                if (item.value == this.model) {
-                    this.internalSelectedText = item.propLabel;
-                    return false;
-                }
-                return true;
-            })) {
-                this.internalSelectedText = '';
-            }
-        });
+        this.internalItems = (this.$refs.popper as Vue).$children[0].$children.filter(v => v instanceof MDropdownItem && !v.noDataDefaultItem && v.visible).map(v => v as MDropdownItem);
+        // this.internalItems.forEach(i => console.log(i.label));
+        // this.$nextTick(() => {
+        //     this.internalItems.forEach(i => console.log(i.label));
+        // });
     }
 
     private get propTextNoData(): string {
@@ -244,27 +252,29 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private filterDropdown(text: string): void {
-        this.dirty = true;
-        this.$emit('filter', normalizeString(text.trim()));
+        // this.dirty = true;
+        // console.log('dirty');
+        // // this.$emit('filter', normalizeString(text.trim()));
     }
 
     private onBlur(event): void {
-        if (this.editable && this.dirty) {
-            setTimeout(() => {
-                if (!this.model || this.model == '') {
-                    // this.selectedText = '';
-                    this.$emit('valueChanged');
-                } else {
-                    this.$emit('valueChanged', this.model);
-                }
-            }, 100);
-        }
-        this.dirty = false;
+        // if (this.editable && this.dirty) {
+        //     setTimeout(() => {
+        //         if (!this.model || this.model == '') {
+        //             // this.selectedText = '';
+        //             this.$emit('valueChanged');
+        //         } else {
+        //             this.$emit('valueChanged', this.model);
+        //         }
+        //     }, 100);
+        // }
+        // console.log('blur');
+        // this.dirty = false;
     }
 
     private onFocus(event: Event): void {
         if (this.editable) {
-            this.dirty = true;
+            // this.dirty = true;
             // this.selectedText = '';
         }
     }
@@ -274,18 +284,18 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private keyupReference($event): void {
-        if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
-            $event.preventDefault();
-            this.open = true;
+        // if (!this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
+        //     $event.preventDefault();
+        //     this.open = true;
 
-            setTimeout(() => { // Wait for menu to open
-                (this.$refs.mDropdownElements as HTMLElement).focus();
-            }, 300);
-        }
+        //     setTimeout(() => { // Wait for menu to open
+        //         (this.$refs.mDropdownElements as HTMLElement).focus();
+        //     }, 300);
+        // }
 
-        if (this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN || $event.keyCode == KeyCode.M_TAB)) {
-            (this.$refs.mDropdownElements as HTMLElement).focus();
-        }
+        // if (this.internalOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN || $event.keyCode == KeyCode.M_TAB)) {
+        //     (this.$refs.mDropdownElements as HTMLElement).focus();
+        // }
     }
 
     private keyupItem($event: KeyboardEvent): void {

@@ -13,6 +13,7 @@ export interface MDropdownInterface extends Vue {
     items: Vue[];
     inactive: boolean;
     // nbItemsVisible: number;
+    filter(text: string | undefined): boolean;
     setFocus(item: Vue): void;
     toggleDropdown(open: boolean): void;
     // setModel(value: any, label: string | undefined): void;
@@ -92,16 +93,16 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
         // this.updateTextfield((this.root as MDropdownInterface).model);
     }
 
-    @Watch('visible')
-    public visibleChanged(visible: boolean): void {
-        // if (!this.inactif) {
-        //     if (visible) {
-        //         this.incrementCounters();
-        //     } else {
-        //         this.decrementCounters();
-        //     }
-        // }
-    }
+    // @Watch('visible')
+    // public visibleChanged(visible: boolean): void {
+    //     // if (!this.inactif) {
+    //     //     if (visible) {
+    //     //         this.incrementCounters();
+    //     //     } else {
+    //     //         this.decrementCounters();
+    //     //     }
+    //     // }
+    // }
 
     // Value and label rules
     // - If Value and Label : Value = value, Label = label
@@ -146,9 +147,9 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
     }
 
     public get visible(): boolean {
-        let isVisible: boolean = true;
+        let isVisible: boolean = this.root.filter(this.propLabel);// || this.root.isFiltering() && !!(this.propLabel && !normalizeString(this.propLabel).match(this.root.filter));
 
-        // if ((this.propLabel && !normalizeString(this.propLabel).match(this.filter)) ||
+        // if ((this.propLabel && !normalizeString(this.propLabel).match(this.root.filter)) ||
         //     (this.inactif && !this.hasItemsVisible())) {
         //     isVisible = false;
         // }
@@ -165,7 +166,9 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
     // }
 
     public onClick(): void {
+        console.log(!this.noDataDefaultItem, !this.root.inactive, !this.disabled, !this.inactif);
         if (!this.noDataDefaultItem && !this.root.inactive && !this.disabled && !this.inactif) {
+            console.log('set root.model', this.value);
             this.root.model = this.value;
             // (this.root as MDropdownInterface).emitChange(this.propValue, true);
         }

@@ -2,7 +2,7 @@
     :class="{ 'm--is-selected': selected, 'm--is-disabled': disabled, 'm--is-inactif': inactif }"
     :disabled="disabled"
     :data-key="key"
-    v-show="visible"
+    v-if="visible"
     :tabindex="inactif ? -1 : 1"
     @focus="setHover(true)"
     @blur="setHover(false)"
