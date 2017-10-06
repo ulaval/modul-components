@@ -7,7 +7,7 @@
         </div>
         <template v-if="!disabled">
             <div v-if="deleteButton && !waiting" class="m-list-item__button">
-                <m-button mode="icon" icon-name="chip-error" @click="toDelete($event)">
+                <m-button ref="button" mode="icon" icon-name="chip-error" @click="toDelete($event)">
                     <m-i18n k="m-list-item:delete"></m-i18n>
                 </m-button>
             </div>
