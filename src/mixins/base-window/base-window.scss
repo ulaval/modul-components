@@ -103,7 +103,6 @@ $m-dialog--header-height: $m-touch-size !default;
             .m-base-window {
                 &__header {
                     position: relative;
-                    min-height: $m-dialog--header-height;
                 }
 
                 &__body {
@@ -308,7 +307,6 @@ $m-dialog--header-height: $m-touch-size !default;
 
                 &__header {
                     display: block;
-                    border-bottom: 1px solid $m-color--grey-light;
                 }
 
                 &__close-button {
