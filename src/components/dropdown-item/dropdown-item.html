@@ -1,11 +1,7 @@
-<li class="m-dropdown-item"
-    :class="{ 'm--is-selected': selected, 'm--is-disabled': disabled, 'm--is-inactif': inactif }"
-    :disabled="disabled"
-    :data-key="key"
-    v-show="visible"
-    tabindex="1"
-    @focus="setHover(true)"
-    @blur="setHover(false)"
-    @click="onClick($event)">
-    <slot><span class="m-dropdown-item__element-text">{{ propLabel }}</span></slot>
+<li class="m-dropdown-item" :class="{ 'm--is-selected': selected, 'm--is-disabled': disabled, 'm--is-inactif': inactif }"
+    :disabled="disabled" :data-key="key" v-show="visible" tabindex="1" @focus="setHover(true)" @blur="setHover(false)" @click="onClick($event)">
+    <span class="m-dropdown-item__element-text" v-if="isMqMinS"><slot>{{ propLabel }}</slot></span>
+    <m-radio-style v-if="!isMqMinS" :full-width="true" position="right" :focus="hasFocus" :checked="selected" :disabled="disabled">
+        <span class="m-dropdown-item__element-text"><slot>{{ propLabel }}</slot></span>
+    </m-radio-style>
 </li>

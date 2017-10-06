@@ -8,6 +8,7 @@ import { DROPDOWN_ITEM_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { MDropdownInterface } from '../dropdown/dropdown';
 import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 
 export interface MDropDownItemInterface extends Vue {
     visible: boolean;
@@ -22,7 +23,9 @@ export abstract class BaseDropdownGroup extends Vue {
 }
 
 @WithRender
-@Component
+@Component({
+    mixins: [MediaQueries]
+})
 export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     @Prop()
     public label: string;
