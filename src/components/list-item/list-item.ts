@@ -5,11 +5,12 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './list-item.html?style=./list-item.scss';
 import { LIST_ITEM_NAME } from '../component-names';
 import { TransitionAccordion } from '../../mixins/transition-accordion/transition-accordion';
+import ButtonPlugin from '../button/button';
+import SpinnerPlugin from '../spinner/spinner';
+import I18nPlugin from '../i18n/i18n';
 
 @WithRender
-@Component({
-    mixins: [TransitionAccordion]
-})
+@Component
 export class MListItem extends ModulVue {
     public componentName = LIST_ITEM_NAME;
 
@@ -22,19 +23,17 @@ export class MListItem extends ModulVue {
 
     private visible: boolean = true;
 
-    // public beforeDestroy(): void {
-    //     this.visible = false;
-    // }
-
     private toDelete(event): void {
         this.$emit('toDelete', event);
-        console.log('toDelete', event);
     }
 
 }
 
 const ListItemPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(ButtonPlugin);
+        v.use(SpinnerPlugin);
+        v.use(I18nPlugin);
         v.component(LIST_ITEM_NAME, MListItem);
     }
 };

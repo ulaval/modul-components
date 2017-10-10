@@ -5,6 +5,8 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './button.html?style=./button.scss';
 import { BUTTON_NAME } from '../component-names';
 import { ICON_NAME } from '../component-names';
+import IconPlugin from '../icon/icon';
+import SpinnerPlugin from '../spinner/spinner';
 
 export enum MButtonType {
     Button = 'button',
@@ -111,6 +113,8 @@ export class MButton extends Vue {
 
 const ButtonPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(IconPlugin);
+        v.use(SpinnerPlugin);
         v.component(BUTTON_NAME, MButton);
     }
 };

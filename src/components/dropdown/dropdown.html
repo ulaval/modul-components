@@ -7,24 +7,20 @@
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="propEditable">
                 <input type="text" class="m-dropdown__header__research-input" placeholder="Recherche" ref="researchInput" v-model="selectedValue"
-                    @change="filterDropdown" @keyup="onKeyup">
+                    @change="onChange" @keyup="onKeyup">
                 <m-button mode="icon" icon-name="search" @click="focusOnResearchInput">
                     <m-i18n k="m-dropdown:search"></m-i18n>
                 </m-button>
             </div>
         </div>
-        <ul class="m-dropdown__list" ref="mDropdownElements" slot="body" @keyup="keyupItem">
+        <ul class="m-dropdown__list" ref="mDropdownElements" slot="body">
             <slot></slot>
             <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
         </ul>
         <m-input-style ref="mDropdownValue" :label="label" :state="propState" :empty="emptyValue" :focus="propOpen" :placeholder="defaultText"
             :disabled="disabled" :waiting="waiting">
-            <input type="text" ref="input" @focus="onFocus" @change="filterDropdown" @keyup="onKeyup" v-model="selectedValue" v-if="propEditable"
-                :disabled="isDisabled">
-            <template v-if="!propEditable">
-                <div v-if="!emptyValue" ref="input">{{ selectedValue }}</div>
-                <div v-if="emptyValue" ref="input">Aucune sélection</div>
-            </template>
+            <input type="text" ref="input" @focus="onFocus" @change="onChange" @keyup="onKeyup" v-model="selectedValue" v-if="propEditable"
+                :disabled="inactive" :readonly="!propEditable">
             <div class="m-dropdown__arrow" :class="{ 'm--is-open': propOpen }" slot="right-content">
                 <m-button mode="icon" icon-name="dropdown-arrow" @click="arrowOnClick($event)">Open dropdown</m-button>
             </div>

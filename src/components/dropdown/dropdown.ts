@@ -9,6 +9,8 @@ import { KeyCode } from '../../utils/keycode/keycode';
 import DropdownItemPlugin, { MDropDownItemInterface, BaseDropdown } from '../dropdown-item/dropdown-item';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import i18nPlugin from '../../utils/i18n/i18n';
 import PopupPlugin from '../popup/popup';
 import ButtonPlugin from '../button/button';
 import ValidationMessagePlugin from '../validation-message/validation-message';
@@ -16,6 +18,7 @@ import InputStylePlugin from '../input-style/input-style';
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
+const DROPDOWN_MAX_WIDTH: string = '704px'; // 768 - (32*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface MDropdownInterface extends Vue {
@@ -23,7 +26,6 @@ export interface MDropdownInterface extends Vue {
     items: Vue[];
     inactive: boolean;
     nbItemsVisible: number;
-    setFocus(item: Vue): void;
     toggleDropdown(open: boolean): void;
     setModel(value: any, label: string | undefined): void;
     emitChange(value: any, action: boolean);
@@ -49,7 +51,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public waiting: boolean;
     @Prop({ default: false })
     public open: boolean;
-    @Prop({ default: true })
+    @Prop({ default: false })
     public editable: boolean;
     // @Prop({ default: false })
     // public multiple: boolean;
@@ -64,6 +66,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     public componentName: string = DROPDOWN_NAME;
     public items: Vue[] = [];
+    public itemsFocusable: Vue[] = [];
     public nbItemsVisible: number = 0;
 
     private selectedValue: string = '';
@@ -74,36 +77,40 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
 
-    public setFocus(elementFocus: Vue): void {
-        for (let item of this.items) {
-            if (item === elementFocus) {
-                (item as MDropDownItemInterface).hasFocus = true;
-            } else {
-                (item as MDropDownItemInterface).hasFocus = false;
-            }
-        }
-    }
+    // private componentName: string = DROPDOWN_NAME;
 
-    public getFocus(): MDropDownItemInterface | undefined {
-        let elementFocus: MDropDownItemInterface | undefined = undefined;
+    // public setFocus(elementFocus: Vue): void {
+    //     for (let item of this.items) {
+    //         if (item === elementFocus) {
+    //             (item as MDropDownItemInterface).hasFocus = true;
+    //         } else {
+    //             (item as MDropDownItemInterface).hasFocus = false;
+    //         }
+    //     }
+    // }
 
-        for (let item of this.items) {
-            if ((item as MDropDownItemInterface).hasFocus) {
-                elementFocus = (item as MDropDownItemInterface);
-                break;
-            }
-        }
+    // public getFocus(): MDropDownItemInterface | undefined {
+    //     let elementFocus: MDropDownItemInterface | undefined = undefined;
 
-        return elementFocus;
-    }
+    //     for (let item of this.items) {
+    //         if ((item as MDropDownItemInterface).hasFocus) {
+    //             elementFocus = (item as MDropDownItemInterface);
+    //             break;
+    //         }
+    //     }
+
+    //     return elementFocus;
+    // }
 
     public setModel(value: any, label: string | undefined): void {
         if (label) {
             this.selectedValue = label;
         }
 
-        this.$emit('filter'); // Clear filter
         this.$emit('input', value);
+        setTimeout(() => {
+            this.$emit('filter'); // Clear filter
+        }, 300);
     }
 
     public emitChange(value: any, selected: boolean) {
@@ -111,28 +118,18 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public toggleDropdown(open: boolean): void {
-        this.propOpen = open;
+        this.$nextTick(() => {
+            if (this.propOpen != open) {
+                this.propOpen = open;
+            }
+        });
     }
 
-    protected mounted(): void {
-        this.propOpen = this.open;
-    }
-
-    @Watch('value')
-    private valueChanged(value: any): void {
+    public get model(): any {
+        this.hasModel = !!this.value;
         this.selectedValue = '';
-        this.$emit('valueChanged', value);
-    }
-
-    @Watch('open')
-    private openChanged(open: boolean): void {
-        this.propOpen = open;
-    }
-
-    private onFocus(): void {
-        if (!this.as<InputStateMixin>().isDisabled && !this.propOpen && !this.emptyValue) {
-            this.propOpen = true;
-        }
+        this.$emit('valueChanged', this.value);
+        return this.value;
     }
 
     private onClick() {
@@ -150,17 +147,19 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
-    public get model(): any {
-        this.hasModel = !!this.value;
-        return this.value;
+    private onFocus(): void {
+        if (!this.as<InputStateMixin>().isDisabled && !this.propOpen && !this.emptyValue) {
+            this.propOpen = true;
+        }
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
     }
 
     public get emptyValue(): boolean {
         return (this.selectedValue == undefined || this.selectedValue == '') && ((!this.propOpen && this.propEditable) || !this.propEditable);
-    }
-
-    public get propOpen(): boolean {
-        return this.internalOpen;
     }
 
     public set propOpen(open: boolean) {
@@ -175,8 +174,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
+    public get propOpen(): boolean {
+        return this.internalOpen;
+    }
+
     private get propEditable(): boolean {
-        return this.editable && !this.hasModel;
+        return this.editable;
     }
 
     private get propTextNoData(): string {
@@ -202,146 +205,134 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.disabled || this.waiting;
     }
 
-    private get hasLabel(): boolean {
-        return this.label != undefined && this.label != '';
-    }
-
     private filterDropdown(): void {
-        // Can be filter only when there nothing in model
+        if (!this.internalOpen) {
+            this.toggleDropdown(true);
+        }
         if (!this.hasModel) {
             this.$emit('filter', normalizeString(this.selectedValue.trim()));
-            // for (let item of this.items) {
-            //     if (!(item as MDropDownItemInterface).inactif) {
-            //         (item as MDropDownItemInterface).filter = ;
-            //     }
-            // }
         }
     }
 
-    private onKeyup($event): void {
-        if (!this.propOpen) {
-            this.propOpen = true;
-        }
+    private onChange($event): void {
+        this.$emit('change', $event);
+    }
 
-        this.filterDropdown();
-
-        if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
-            $event.preventDefault();
-            (this.$refs.mDropdownValue as Vue).$el.click();
-        }
-
-        if (this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN)) {
-            $event.preventDefault();
-            // console.log('ok');
-            let htmlElement: HTMLElement = this.$el.querySelector(`[data-index='0']`) as HTMLElement;
-            if (htmlElement) {
-                htmlElement.focus();
-            }
-
-            // console.log('htmlElement', htmlElement);
-        }
+    private get hasLabel(): boolean {
+        return this.label != undefined && this.label != '';
     }
 
     private clearField(): void {
         this.$emit('input');
     }
 
-    // private keyupReference($event): void {
-    //     if (!this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_SPACE)) {
-    //         $event.preventDefault();
-    //         (this.$refs.mDropdownValue as Vue).$el.click();
-    //     }
-
-    //     if (this.propOpen && ($event.keyCode == KeyCode.M_DOWN || $event.keyCode == KeyCode.M_END || $event.keyCode == KeyCode.M_PAGE_DOWN)) {
-    //         $event.preventDefault();
-    //         let htmlElement: HTMLElement = this.$el.querySelector(`[data-index='0']`) as HTMLElement;
-    //         if (htmlElement) {
-    //             htmlElement.focus();
-    //         }
-    //     }
-    // }
-
-    private keyupItem($event: KeyboardEvent): void {
-        let element: Vue | undefined = undefined;
-        let focusElement: MDropDownItemInterface | undefined = this.getFocus();
-        let itemsEnabled: MDropDownItemInterface[] = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
-
+    private onKeyup($event: KeyboardEvent): void {
+        this.itemsFocusable = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
+        if ($event.keyCode != KeyCode.M_PAGE_UP && $event.keyCode != KeyCode.M_PAGE_DOWN) {
+            this.filterDropdown();
+        }
         switch ($event.keyCode) {
-            case KeyCode.M_UP:
-                if (focusElement) {
-                    let index: number = itemsEnabled.indexOf(focusElement);
-                    if (index == 0) {
-                        element = itemsEnabled[0];
-                    } else {
-                        element = itemsEnabled[index - 1];
-                    }
-                } else {
-                    element = itemsEnabled[0];
+            case KeyCode.M_ENTER:
+            case KeyCode.M_RETURN:
+                let currentFocus: Vue | undefined = this.getFocusItem();
+                if (currentFocus) {
+                    this.$emit('keyPressEnter', currentFocus);
+                }
+                return;
+            case KeyCode.M_SPACE:
+                if (!this.internalOpen) {
+                    this.internalOpen = true;
                 }
                 break;
-            case KeyCode.M_HOME:
-                element = itemsEnabled[0];
-                break;
-            case KeyCode.M_PAGE_UP:
-                if (focusElement) {
-                    let index: number = itemsEnabled.indexOf(focusElement);
-                    index -= PAGE_STEP;
-
-                    if (index < 0) {
-                        element = itemsEnabled[0];
-                    } else {
-                        element = itemsEnabled[index];
-                    }
-                } else {
-                    element = itemsEnabled[0];
+            case KeyCode.M_ESCAPE:
+                this.internalOpen = false;
+                return;
+            case KeyCode.M_UP:
+                if (this.internalOpen) {
+                    this.getPreviousFocusItem(this.getFocusItem());
                 }
                 break;
             case KeyCode.M_DOWN:
-                if (focusElement) {
-                    let index: number = itemsEnabled.indexOf(focusElement);
-                    if (index == itemsEnabled.length - 1) {
-                        element = itemsEnabled[itemsEnabled.length - 1];
-                    } else {
-                        element = itemsEnabled[index + 1];
-                    }
+                if (!this.internalOpen) {
+                    this.internalOpen = true;
                 } else {
-                    element = itemsEnabled[0];
+                    this.getNextFocusItem(this.getFocusItem());
                 }
                 break;
-
-            case KeyCode.M_END:
-                element = itemsEnabled[itemsEnabled.length - 1];
+            case KeyCode.M_PAGE_UP:
+                if (this.internalOpen) {
+                    this.getPreviousFocusItem(this.getFocusItem(), PAGE_STEP);
+                }
                 break;
             case KeyCode.M_PAGE_DOWN:
-                if (focusElement) {
-                    let index: number = itemsEnabled.indexOf(focusElement);
-                    index += PAGE_STEP;
-
-                    if (index > itemsEnabled.length - 1) {
-                        element = itemsEnabled[itemsEnabled.length - 1];
-                    } else {
-                        element = itemsEnabled[index];
-                    }
+                if (!this.internalOpen) {
+                    this.internalOpen = true;
                 } else {
-                    let index: number = (PAGE_STEP < itemsEnabled.length ? PAGE_STEP - 1 : itemsEnabled.length - 1);
-                    element = itemsEnabled[index];
+                    this.getNextFocusItem(this.getFocusItem(), PAGE_STEP);
                 }
                 break;
-            case KeyCode.M_ENTER:
-            case KeyCode.M_RETURN:
-                if (focusElement) {
-                    // (focusElement as MDropDownItemInterface).onSelectElement();
+            case KeyCode.M_HOME:
+                if (this.internalOpen) {
+                    this.getFirstFocusItem();
                 }
-                return;
+                break;
+            case KeyCode.M_END:
+                if (!this.internalOpen) {
+                    this.internalOpen = true;
+                } else {
+                    this.getLastFocusItem();
+                }
+                break;
         }
+    }
 
-        if (element) {
-            element.$el.focus();
+    private getFocusItem(): Vue | undefined {
+        let elementFocused: Vue | undefined = undefined;
+
+        for (let item of this.items) {
+            if ((item as MDropDownItemInterface).focus) {
+                elementFocused = item;
+            }
         }
+        return elementFocused;
     }
 
     private focusOnResearchInput(): void {
         (this.$refs.researchInput as HTMLElement).focus();
+    }
+
+    private getNextFocusItem(currentItem: Vue | undefined, step: number = 1): void {
+        let index: number;
+
+        if (currentItem) {
+            index = this.itemsFocusable.indexOf(currentItem);
+            index = index + step < this.itemsFocusable.length ? index + step : this.itemsFocusable.length - 1;
+        } else {
+            index = 0;
+        }
+
+        this.$emit('focus', this.itemsFocusable[index]);
+    }
+
+    private getPreviousFocusItem(currentItem: Vue | undefined, step: number = 1): void {
+        let index: number;
+
+        if (currentItem) {
+            index = this.itemsFocusable.indexOf(currentItem);
+            index = index - step >= 0 ? index - step : 0;
+        } else {
+            index = this.itemsFocusable.length - 1;
+        }
+
+        this.$emit('focus', this.itemsFocusable[index]);
+    }
+
+    private getFirstFocusItem(): void {
+        this.$emit('focus', this.itemsFocusable[0]);
+    }
+
+    private getLastFocusItem(): void {
+        this.$emit('focus', this.itemsFocusable[this.itemsFocusable.length - 1]);
     }
 
     private transitionEnter(el: HTMLElement, done: any): void {
@@ -352,7 +343,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 el.style.transition = DROPDOWN_STYLE_TRANSITION;
                 el.style.overflowY = 'hidden';
                 el.style.maxHeight = '0';
-                el.style.width = (this.$el.clientWidth) + 'px';
+                (el.querySelector('.m-dropdown__list') as HTMLElement).style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
+                el.style.width = this.$el.clientWidth + 'px';
                 setTimeout(() => {
                     el.style.maxHeight = height + 'px';
                     done();
@@ -376,7 +368,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
                 let height: number = el.clientHeight;
-                el.style.width = (this.$el.clientWidth) + 'px';
+                el.style.width = (this.$el.clientWidth - 25) + 'px';
                 el.style.maxHeight = height + 'px';
                 el.style.overflowY = 'hidden';
                 el.style.maxHeight = '0';
@@ -398,6 +390,8 @@ const DropdownPlugin: PluginObject<any> = {
         v.use(InputStylePlugin);
         v.use(ButtonPlugin);
         v.use(ValidationMessagePlugin);
+        Vue.use(i18nPlugin);
+        Vue.use(MediaQueriesPlugin);
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };

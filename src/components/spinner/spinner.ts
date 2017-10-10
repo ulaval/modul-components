@@ -6,6 +6,8 @@ import uuid from '../../utils/uuid/uuid';
 import WithRender from './spinner.html?style=./spinner.scss';
 import { SPINNER_NAME } from '../component-names';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
+import PortalPlugin from 'portal-vue';
+import ModulPlugin from '../../utils/modul/modul';
 
 export enum MSpinnerMode {
     Loading = 'loading',
@@ -31,7 +33,7 @@ const SPINNER_ID: string = 'MSpinner';
     mixins: [Portal]
 })
 export class MSpinner extends ModulVue {
-    @Prop({ default: MSpinnerMode.Loading })
+    @Prop()
     public mode: MSpinnerMode;
     @Prop()
     public title: string;
@@ -49,7 +51,7 @@ export class MSpinner extends ModulVue {
 
     private defaultTargetElVisible: boolean = false;
     private visible: boolean = false;
-    private internalPropMode: MSpinnerMode;
+    private internalPropMode: MSpinnerMode = MSpinnerMode.Loading;
 
     protected beforeMount(): void {
         this.propMode = this.mode;
@@ -67,7 +69,7 @@ export class MSpinner extends ModulVue {
     }
 
     private get propMode(): MSpinnerMode {
-        return this.internalPropMode;
+        return this.mode != undefined ? this.mode : this.internalPropMode;
     }
 
     private set propMode(value: MSpinnerMode) {
@@ -134,6 +136,8 @@ export class MSpinner extends ModulVue {
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(PortalPlugin);
+        v.use(ModulPlugin);
         v.component(SPINNER_NAME, MSpinner);
     }
 };

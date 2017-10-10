@@ -6,6 +6,8 @@ import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 import Popper from 'popper.js';
+import PortalPlugin from 'portal-vue';
+import ModulPlugin from '../../utils/modul/modul';
 
 export enum MPopperPlacement {
     Top = 'top',
@@ -334,6 +336,8 @@ export class MPopper extends ModulVue {
 
 const PopperPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(PortalPlugin);
+        v.use(ModulPlugin);
         v.component(POPPER_NAME, MPopper);
     }
 };

@@ -5,6 +5,7 @@ import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './text-field.html?style=./text-field.scss';
 import { TEXT_FIELD_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { KeyCode } from '../../utils/keycode/keycode';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import ButtonPlugin from '../button/button';
@@ -57,6 +58,10 @@ export class MTextField extends ModulVue {
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-text-field:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-text-field:hide-password');
 
+    protected mounted(): void {
+        (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
+    }
+
     @Watch('type')
     private typeChanged(type: MTextFieldType): void {
         console.warn('MTextField - Change of property "type" is not supported');
@@ -73,13 +78,8 @@ export class MTextField extends ModulVue {
     private onFocus(event: FocusEvent): void {
         this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
         if (this.internalIsFocus) {
-            this.$emit('focus');
+            this.$emit('focus', event);
         }
-    }
-
-    private onBlur(event): void {
-        this.internalIsFocus = false;
-        this.$emit('blur');
     }
 
     private onKeyup(event): void {
@@ -158,6 +158,18 @@ export class MTextField extends ModulVue {
 
     private get hasIcon(): boolean {
         return !!this.iconName && !this.as<InputStateMixin>().isDisabled;
+    }
+
+    private get tabindex(): number | undefined {
+        if (this.as<InputStateMixin>().isDisabled) {
+            return undefined;
+        } else {
+            return 0;
+        }
+    }
+
+    private get isMessageVisible(): boolean {
+        return !this.forceFocus;
     }
 }
 
