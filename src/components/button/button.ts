@@ -27,7 +27,11 @@ export enum MButtonState {
     Selected = 'selected'
 }
 
-const ICON_POSITION_LEFT: string = 'left';
+export enum MButtonIconPosition {
+    Left = 'left',
+    Right = 'right'
+}
+
 const ICON_SIZE: string = '16px';
 const ICON_SIZE_SMALL: string = '12px';
 
@@ -43,8 +47,8 @@ export class MButton extends Vue {
     public state: MButtonState;
     @Prop()
     public iconName: string;
-    @Prop({ default: ICON_POSITION_LEFT })
-    public iconPosition: string;
+    @Prop({ default: MButtonIconPosition.Left })
+    public iconPosition: MButtonIconPosition;
     @Prop()
     public iconSize: string;
     @Prop({ default: false })
@@ -83,7 +87,7 @@ export class MButton extends Vue {
     }
 
     private get hasIconeLeft(): boolean {
-        return this.iconPosition == ICON_POSITION_LEFT ? true : false;
+        return this.iconPosition == MButtonIconPosition.Left ? true : false;
     }
 
     private get isDisabled(): boolean {

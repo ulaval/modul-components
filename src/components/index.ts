@@ -35,7 +35,7 @@ import ScrollTopPlugin from './scroll-top/scroll-top';
 import SidebarPlugin from './sidebar-window/sidebar-window';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
-import StatusList from './status-list/status-list';
+import Status from './status/status';
 import StepPlugin from './step/step';
 import SwitchPlugin from './switch/switch';
 import TabPanePlugin from './tab-pane/tab-pane';
@@ -87,7 +87,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(SidebarPlugin);
         Vue.use(SliderPlugin);
         Vue.use(SpinnerPlugin);
-        Vue.use(StatusList);
+        Vue.use(Status);
         Vue.use(StepPlugin);
         Vue.use(SwitchPlugin);
         Vue.use(TabPanePlugin);

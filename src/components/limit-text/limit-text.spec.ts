@@ -4,7 +4,7 @@ import LimitTextPlugin, { MLimitText } from './limit-text';
 
 let limitText: MLimitText;
 
-describe('checkbox', () => {
+describe('limit-text', () => {
     beforeEach(() => {
         Vue.use(LimitTextPlugin);
         limitText = new MLimitText().$mount();
