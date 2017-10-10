@@ -1,6 +1,27 @@
 @import 'abstracts/variables';
 
 .m-link {
+    display: inline-flex;
+    align-items: center;
+
+    &.m--has-right-icon {
+        flex-direction: row-reverse;
+
+        .m-link {
+            &__icon {
+                margin-left: $m-margin--xs;
+            }
+        }
+    }
+
+    &:not(.m--has-right-icon) {
+        .m-link {
+            &__icon {
+                margin-right: $m-margin--xs;
+            }
+        }
+    }
+
     &:not(.m--is-vanilla) {
         transition: color $m-transition-duration ease;
         position: relative;
@@ -37,10 +58,6 @@
             }
         }
 
-        &:focus {
-            outline: none;
-        }
-
         &:not(:active) {
             &:focus,
             &:hover {
@@ -70,6 +87,10 @@
             }
         }
 
+        &:focus {
+            outline: none;
+        }
+
         .m-link {
             &__text {
                 position: relative;
@@ -78,17 +99,10 @@
             }
 
             &__icon {
-                font-size: 14px;
+                font-size: 12px;
                 display: inline-flex;
                 vertical-align: middle;
-
-                &.m--is-left {
-                    margin-right: $m-margin--s;
-                }
-
-                &.m--is-right {
-                    margin-left: $m-margin--s;
-                }
+                stroke-width: 2px;
             }
 
             &__hidden {
