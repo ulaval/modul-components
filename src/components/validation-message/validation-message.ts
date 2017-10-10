@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import WithRender from './validation-message.html?style=./validation-message.scss';
 import { VALIDATION_MESSAGE_NAME } from '../component-names';
 import { InputState } from '../../mixins/input-state/input-state';
+import IconPlugin from '../icon/icon';
 
 @WithRender
 @Component({
@@ -16,6 +17,7 @@ export class MValidationMessage extends ModulVue {
 
 const ValidationMessagePlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(IconPlugin);
         v.component(VALIDATION_MESSAGE_NAME, MValidationMessage);
     }
 };

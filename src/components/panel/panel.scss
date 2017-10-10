@@ -14,7 +14,7 @@ $m-panel--screen--min: 640px;
         display: block;
     }
 
-    &.m--is-mode-primary {
+    &.m--is-primary {
         background: $m-color--white;
         border-top: 0;
         padding-top: 4px;
@@ -31,7 +31,7 @@ $m-panel--screen--min: 640px;
         }
     }
 
-    &.m--is-mode-secondary {
+    &.m--is-secondary {
         background: $m-color--grey-lightest;
 
         .m-panel {

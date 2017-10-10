@@ -196,7 +196,7 @@
 // ======================================================================
 .m-u--list-header {
     padding: $m-padding;
-    background-color: $m-color--grey-lightest;
+    background-color: $m-color--grey-lighter;
 
     > p,
     > h1,
@@ -207,6 +207,8 @@
     > h6 {
         margin-top: 0;
         margin-bottom: 0;
+        font-size: $m-font-size--l;
+        font-weight: $m-font-weight--bold;
     }
 
     @media (max-width: $m-bp--max--s) {

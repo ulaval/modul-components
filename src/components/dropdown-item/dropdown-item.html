@@ -1,11 +1,9 @@
 <li class="m-dropdown-item"
-    :class="{ 'm--is-selected': selected, 'm--is-disabled': disabled, 'm--is-inactif': inactif }"
+    :class="{ 'm--is-selected': selected, 'm--is-disabled': disabled, 'm--is-inactif': inactif, 'm--is-focus': focus }"
     :disabled="disabled"
-    :data-key="key"
     v-show="visible"
-    :tabindex="inactif ? -1 : 1"
     @focus="setHover(true)"
     @blur="setHover(false)"
-    @click="onClick($event)">
+    @mousedown="onClick($event)">
     <slot><span class="m-dropdown-item__element-text">{{ propLabel }}</span></slot>
 </li>
