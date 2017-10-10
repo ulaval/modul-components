@@ -10,13 +10,14 @@ import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropdownInterface extends Vue {
     model: any;
-    items: Vue[];
+    // items: Vue[];
     inactive: boolean;
 
+    focused: any;
     filter(text: string | undefined): boolean;
-    setFocus(item: Vue): void;
-    toggleDropdown(open: boolean): void;
-    emitChange(value: any, action: boolean);
+    // setFocus(item: Vue): void;
+    // toggleDropdown(open: boolean): void;
+    // emitChange(value: any, action: boolean);
 
     // setModel(value: any, label: string | undefined): void;
     // nbItemsVisible: number;
@@ -70,22 +71,22 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
 
         this.group = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
 
-        (this.root as MDropdownInterface).$on('keyPressEnter',
-            (value: any) => {
-                if (value === this) {
-                    this.onClick();
-                }
-            });
+        // (this.root as MDropdownInterface).$on('keyPressEnter',
+        //     (value: any) => {
+        //         if (value === this) {
+        //             this.onClick();
+        //         }
+        //     });
 
-        (this.root as MDropdownInterface).$on('focus',
-            (value: Vue) => {
-                if (this == value) {
-                    this.focus = true;
-                    this.$el.scrollIntoView();
-                } else {
-                    this.focus = false;
-                }
-            });
+        // (this.root as MDropdownInterface).$on('focus',
+        //     (value: Vue) => {
+        //         if (this == value) {
+        //             this.focus = true;
+        //             this.$el.scrollIntoView();
+        //         } else {
+        //             this.focus = false;
+        //         }
+        //     });
 
         //     // If element is active add to array of items and increment counters
         //     // Done a first time in the create because watch is not call on load
@@ -126,6 +127,10 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
         return (this.root as MDropdownInterface).model == this.value;
     }
 
+    public get focused(): boolean {
+        return (this.root as MDropdownInterface).focused == this.value;
+    }
+
     public get visible(): boolean {
         return this.root.filter(this.propLabel);
     }
@@ -134,7 +139,7 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
         console.log('mousedown');
         if (!this.noDataDefaultItem && !this.root.inactive && !this.disabled && !this.inactif) {
             this.root.model = this.value;
-            (this.root as MDropdownInterface).toggleDropdown(false);
+            // (this.root as MDropdownInterface).toggleDropdown(false);
         }
     }
 }

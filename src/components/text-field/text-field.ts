@@ -122,7 +122,11 @@ export class MTextField extends ModulVue {
     }
 
     private onClick(event): void {
-        // (this.$refs.input as HTMLElement).focus();
+        this.$emit('click');
+    }
+
+    private onMousedown(): void {
+        this.$emit('mousedown');
     }
 
     private dropdownToggle(): void {

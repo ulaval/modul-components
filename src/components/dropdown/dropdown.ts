@@ -62,16 +62,17 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public textNoMatch: string;
 
-    public items: Vue[] = [];
-    public itemsFocusable: Vue[] = [];
+    // public items: Vue[] = [];
+    // public itemsFocusable: Vue[] = [];
     // public nbItemsVisible: number = 0;
 
     private internalFilter: string = '';
 
-    private internalValue: string | undefined = undefined;
+    private internalValue: any | undefined = undefined;
     private internalItems: MDropdownItem[] = [];
     private internalSelectedText: string | undefined = '';
     private observer: any;
+    private focusedIndex: number = -1;
 
     // private selectedText: string = '';
     // private hasModel: boolean = true;
@@ -96,36 +97,36 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
-    public setFocus(elementFocus: Vue): void {
-        // for (let item of this.items) {
-        //     if (item === elementFocus) {
-        //         (item as MDropDownItemInterface).hasFocus = true;
-        //     } else {
-        //         (item as MDropDownItemInterface).hasFocus = false;
-        //     }
-        // }
-    }
+    // public setFocus(elementFocus: Vue): void {
+    //     // for (let item of this.items) {
+    //     //     if (item === elementFocus) {
+    //     //         (item as MDropDownItemInterface).hasFocus = true;
+    //     //     } else {
+    //     //         (item as MDropDownItemInterface).hasFocus = false;
+    //     //     }
+    //     // }
+    // }
 
-    public getFocus(): MDropdownItem | undefined {
-        let elementFocus: MDropdownItem | undefined = undefined;
+    // public getFocus(): MDropdownItem | undefined {
+    //     let elementFocus: MDropdownItem | undefined = undefined;
 
-        // for (let item of this.items) {
-        //     if ((item as MDropDownItemInterface).hasFocus) {
-        //         elementFocus = (item as MDropDownItemInterface);
-        //         break;
-        //     }
-        // }
+    //     // for (let item of this.items) {
+    //     //     if ((item as MDropDownItemInterface).hasFocus) {
+    //     //         elementFocus = (item as MDropDownItemInterface);
+    //     //         break;
+    //     //     }
+    //     // }
 
-        return elementFocus;
-    }
+    //     return elementFocus;
+    // }
 
-    public emitChange(value: any, selected: boolean) {
-        // this.$emit('change', value, selected);
-    }
+    // public emitChange(value: any, selected: boolean) {
+    //     // this.$emit('change', value, selected);
+    // }
 
-    public toggleDropdown(open: boolean): void {
-        this.open = open;
-    }
+    // public toggleDropdown(open: boolean): void {
+    //     this.open = open;
+    // }
 
     protected mounted(): void {
         // console.log('m', this.$children);
@@ -153,8 +154,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.internalOpen;
     }
 
-    public set open(open: boolean) {
-        this.internalOpen = open;
+    public set open(value: boolean) {
+        this.internalOpen = value;
         this.dirty = false;
         this.$nextTick(() => {
             if (open) {
@@ -169,11 +170,16 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.value == undefined ? this.internalValue : this.value;
     }
 
-    public set model(value) {
+    public set model(value: any) {
         this.preventBlur = true;
         this.internalValue = value;
         this.$emit('input', value);
         this.dirty = false;
+        this.internalOpen = false;
+    }
+
+    public get focused(): any {
+        return this.focusedIndex > -1 ? this.internalItems[this.focusedIndex].value : this.model;
     }
 
     private get selectedText(): string {
@@ -198,6 +204,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private buildItemsMap(): void {
+        this.focusedIndex = -1;
         this.internalItems = (this.$refs.popper as Vue).$children[0].$children.filter(v => v instanceof MDropdownItem && !v.noDataDefaultItem && v.visible).map(v => v as MDropdownItem);
         // this.internalItems.forEach(i => console.log(i.label));
         // this.$nextTick(() => {
@@ -252,20 +259,25 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private onFocus(event: Event): void {
         console.log('focu');
-        this.toggleDropdown(true);
+        // this.toggleDropdown(true);
+        this.open = true;
     }
 
     private onBlur(event): void {
         console.log('blu', this.preventBlur);
         this.preventBlur = false;
-        //     if (this.internalOpen) {
-        //         this.toggleDropdown(false);
-        //     }
+        if (!this.editable) {
+            this.open = false;
+        }
 
         //     setTimeout(() => { // Wait that the dropdown is closed before clearing
         //         this.$emit('filter'); // Clear filter
         //         this.$emit('focus'); // Clear focus
         //     }, 300);
+    }
+
+    private onMousedown(event): void {
+        this.open = !this.open;
     }
 
     private clearField(): void {
@@ -279,6 +291,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             case KeyCode.M_ENTER:
             case KeyCode.M_RETURN:
                 console.log('return');
+                if (this.focusedIndex > -1) {
+                    let item: MDropdownItem = this.internalItems[this.focusedIndex];
+                    this.model = item.value;
+                }
+                // this.internalOpen = false;
                 // let currentFocus: Vue | undefined = this.getFocusItem();
                 // if (currentFocus) {
                 //     this.$emit('keyPressEnter', currentFocus);
@@ -292,21 +309,25 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 break;
             case KeyCode.M_ESCAPE:
                 console.log('escape');
-                // this.internalOpen = false;
+                this.open = false;
                 break;
             case KeyCode.M_UP:
                 console.log('up');
-                // if (this.internalOpen) {
-                //     this.getPreviousFocusItem(this.getFocusItem());
-                // }
+                if (!this.open) {
+                    this.focusedIndex = -1;
+                    this.open = true;
+                } else {
+                    this.focusPreviousItem();
+                }
                 break;
             case KeyCode.M_DOWN:
                 console.log('down');
-                // if (!this.internalOpen) {
-                //     this.internalOpen = true;
-                // } else {
-                //     this.getNextFocusItem(this.getFocusItem());
-                // }
+                if (!this.open) {
+                    this.focusedIndex = -1;
+                    this.open = true;
+                } else {
+                    this.focusNextItem();
+                }
                 break;
             case KeyCode.M_PAGE_UP:
                 console.log('pageup');
@@ -339,55 +360,120 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
-    private getFocusItem(): Vue | undefined {
-        let elementFocused: Vue | undefined = undefined;
-
-        // for (let item of this.items) {
-        //     if ((item as MDropDownItemInterface).focus) {
-        //         elementFocused = item;
-        //     }
-        // }
-
-        return elementFocused;
+    private onOpen(): void {
+        this.focusSelected();
     }
 
-    private getNextFocusItem(currentItem: Vue | undefined, step: number = 1): void {
-        let index: number;
-
-        if (currentItem) {
-            index = this.itemsFocusable.indexOf(currentItem);
-            index = index + step < this.itemsFocusable.length ? index + step : this.itemsFocusable.length - 1;
-        } else {
-            index = 0;
+    private focusSelected(): void {
+        let selected: number = -1;
+        if (this.focusedIndex == -1 && this.model) {
+            this.internalItems.every((item, i) => {
+                if (item.value == this.model) {
+                    this.focusedIndex = i;
+                    return false;
+                }
+                return true;
+            });
         }
-
-        this.$emit('focus', this.itemsFocusable[index]);
     }
 
-    private getPreviousFocusItem(currentItem: Vue | undefined, step: number = 1): void {
-        let index: number;
-
-        if (currentItem) {
-            index = this.itemsFocusable.indexOf(currentItem);
-            index = index - step >= 0 ? index - step : 0;
+    private focusNextItem(): void {
+        if (this.focusedIndex > -1) {
+            this.focusedIndex++;
+            if (this.focusedIndex >= this.internalItems.length) {
+                this.focusedIndex = 0;
+            }
         } else {
-            index = this.itemsFocusable.length - 1;
+            this.focusedIndex = 0;
         }
-
-        this.$emit('focus', this.itemsFocusable[index]);
+        this.scrollToFocused();
     }
 
-    private getFirstFocusItem(): void {
-        this.$emit('focus', this.itemsFocusable[0]);
+    private focusPreviousItem(): void {
+        if (this.focusedIndex > -1) {
+            this.focusedIndex--;
+            if (this.focusedIndex < 0) {
+                this.focusedIndex = this.internalItems.length - 1;
+            }
+        } else {
+            this.focusedIndex = this.internalItems.length - 1;
+        }
+        this.scrollToFocused();
     }
 
-    private getLastFocusItem(): void {
-        this.$emit('focus', this.itemsFocusable[this.itemsFocusable.length - 1]);
+    private scrollToFocused(): void {
+        this.$nextTick(() => {
+            // console.log((this.$refs.popper as Vue).$el);
+            // console.log((this.$refs.popper as Vue).$el);
+            // let container: Element | null = (this.$refs.popper as Vue).$el.querySelector('.m-popup__body');
+            let container: Element = document.body.getElementsByClassName('m-popup__body')[0];
+            if (container) {
+                let selectedItem: MDropdownItem = this.internalItems[this.focusedIndex];
+                let top = selectedItem.$el.offsetTop;
+                let bottom = selectedItem.$el.offsetTop + selectedItem.$el.offsetHeight;
+                let viewRectTop = container.scrollTop;
+                let viewRectBottom = viewRectTop + container.clientHeight;
+
+                // console.log(top, bottom, viewRectTop, viewRectBottom);
+
+                if (top < viewRectTop) {
+                    container.scrollTop = top;
+                } else if (bottom > viewRectBottom) {
+                    container.scrollTop = bottom - container.clientHeight;
+                }
+            }
+        });
     }
 
-    private onDropdownToggle(): void {
-        this.toggleDropdown(!this.open);
-    }
+    // private getFocusItem(): Vue | undefined {
+    //     let elementFocused: Vue | undefined = undefined;
+
+    //     // for (let item of this.items) {
+    //     //     if ((item as MDropDownItemInterface).focus) {
+    //     //         elementFocused = item;
+    //     //     }
+    //     // }
+
+    //     return elementFocused;
+    // }
+
+    // private getNextFocusItem(currentItem: Vue | undefined, step: number = 1): void {
+    //     let index: number;
+
+    //     if (currentItem) {
+    //         index = this.itemsFocusable.indexOf(currentItem);
+    //         index = index + step < this.itemsFocusable.length ? index + step : this.itemsFocusable.length - 1;
+    //     } else {
+    //         index = 0;
+    //     }
+
+    //     this.$emit('focus', this.itemsFocusable[index]);
+    // }
+
+    // private getPreviousFocusItem(currentItem: Vue | undefined, step: number = 1): void {
+    //     let index: number;
+
+    //     if (currentItem) {
+    //         index = this.itemsFocusable.indexOf(currentItem);
+    //         index = index - step >= 0 ? index - step : 0;
+    //     } else {
+    //         index = this.itemsFocusable.length - 1;
+    //     }
+
+    //     this.$emit('focus', this.itemsFocusable[index]);
+    // }
+
+    // private getFirstFocusItem(): void {
+    //     this.$emit('focus', this.itemsFocusable[0]);
+    // }
+
+    // private getLastFocusItem(): void {
+    //     this.$emit('focus', this.itemsFocusable[this.itemsFocusable.length - 1]);
+    // }
+
+    // private onDropdownToggle(): void {
+    //     // this.toggleDropdown(!this.open);
+    // }
 
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
