@@ -74,7 +74,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private observer: any;
     private focusedIndex: number = -1;
 
-    // private selectedText: string = '';
     // private hasModel: boolean = true;
     private internalOpen: boolean = false;
     // private noItemsLabel: string;
@@ -199,6 +198,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private set selectedText(value: string) {
+        console.log('set selected', value);
         this.dirty = true;
         this.internalFilter = value;
     }
@@ -284,8 +284,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$emit('input');
     }
 
+    private onKeydown2($event: KeyboardEvent): void {
+        console.log('k2');
+    }
+
     private onKeydown($event: KeyboardEvent): void {
         // this.itemsFocusable = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
+        console.log('keydown trap');
 
         switch ($event.keyCode) {
             case KeyCode.M_ENTER:

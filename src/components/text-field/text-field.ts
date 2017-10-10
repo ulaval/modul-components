@@ -111,7 +111,7 @@ export class MTextField extends ModulVue {
     }
 
     private onKeydown(event: KeyboardEvent): void {
-        // console.log('keydown');
+        // console.log('keydown from tf');
         if (!this.as<InputStateMixin>().isDisabled) {
             if (event.keyCode != KeyCode.M_TAB) {
                 this.$emit('keydown', event, this.model);

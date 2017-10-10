@@ -10,7 +10,7 @@
         <!-- <select v-model="myObj.selection">
             <option v-for="i in items" :value="i">{{i}}</option>
           </select><br/> -->
-        <m-dropdown v-model="myObj.selection" width="500px" :editable="false">
+        <m-dropdown v-model="myObj.selection" width="500px" :editable="true">
             <m-dropdown-item v-for="i in items" :value="i" :label="getLabel(i)"></m-dropdown-item>
             <!-- <m-dropdown-item :label="1" :value="1"></m-dropdown-item> -->
         </m-dropdown>
