@@ -75,16 +75,16 @@ export class MTextField extends ModulVue {
     protected mounted(): void {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
 
-        document.addEventListener('click', (e: MouseEvent) => {
-            if (!this.editable &&
-                !(e.target == this.$refs.textField ||
-                  e.target == this.$refs.input ||
-                  e.target == this.$refs.inputValue ||
-                  e.target == this.$refs.inputDefaultText ||
-                  e.target == this.$refs.label)) {
-                this.onBlur(e);
-            }
-        });
+        // document.addEventListener('click', (e: MouseEvent) => {
+        //     if (!this.editable &&
+        //         !(e.target == this.$refs.textField ||
+        //           e.target == this.$refs.input ||
+        //           e.target == this.$refs.inputValue ||
+        //           e.target == this.$refs.inputDefaultText ||
+        //           e.target == this.$refs.label)) {
+        //         this.onBlur(e);
+        //     }
+        // });
     }
 
     @Watch('type')
@@ -100,24 +100,33 @@ export class MTextField extends ModulVue {
         }
     }
     private onBlur(event): void {
-        if (this.editable || !(event.type == 'blur' && event.target == this.$refs.input)) {
+        if (this.internalIsFocus) {
             this.internalIsFocus = false;
             this.$emit('blur', event);
         }
+        // if (this.editable || !(event.type == 'blur' && event.target == this.$refs.input)) {
+        //     this.internalIsFocus = false;
+        //     this.$emit('blur', event);
+        // }
     }
 
-    private onKeyup(event: KeyboardEvent): void {
+    private onKeydown(event: KeyboardEvent): void {
+        // console.log('keydown');
         if (!this.as<InputStateMixin>().isDisabled) {
             if (event.keyCode != KeyCode.M_TAB) {
-                this.$emit('keyup', event, this.model);
+                this.$emit('keydown', event, this.model);
             } else {
-                this.onBlur(event);
+                // this.onBlur(event);
             }
         }
     }
 
     private onClick(event): void {
-        (this.$refs.input as HTMLElement).focus();
+        // (this.$refs.input as HTMLElement).focus();
+    }
+
+    private dropdownToggle(): void {
+        this.$emit('dropdownToggle');
     }
 
     private togglePasswordVisibility(event): void {

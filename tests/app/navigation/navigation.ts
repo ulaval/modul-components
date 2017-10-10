@@ -9,6 +9,7 @@ class Choice {
     constructor() {
         setInterval(() => {
             // console.log(this.selection);
+            console.log(document.activeElement);
         }, 3000);
     }
 }

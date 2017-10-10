@@ -8,12 +8,12 @@
              :padding-header="false"
              :padding-body="false"
              :focus-management="false"
-             :open-on-click="!open"
+             :open-on-click="false"
              width="100%"
              ref="popper"
              @open="toggleDropdown(true)"
              @close="toggleDropdown(false)">
-        <template slot="header" v-if="hasLabel && isMqMaxS">
+        <!-- <template slot="header" v-if="hasLabel && isMqMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">
                 <input type="text"
@@ -24,7 +24,7 @@
                     <m-i18n k="m-dropdown:search"></m-i18n>
                 </m-button>
             </div>
-        </template>
+        </template> -->
         <ul class="m-dropdown__list"
             ref="mDropdownElements"
             slot="body">
@@ -49,10 +49,10 @@
                       :error-message="errorMessage"
                       :valid-message="validMessage"
                       :helper-message="helperMessage"
-                      @change="filterDropdown($event)"
-                      @keyup="onKeyup"
+                      @keydown.prevent="onKeydown"
                       @focus="onFocus($event)"
-                      @blur="onBlur($event)">
+                      @blur="onBlur($event)"
+                      @dropdownToggle="onDropdownToggle()">
         </m-text-field>
         <!-- <m-button mode="icon" icon-name="default" icon-size="13px" class="m-dropdown__icon-clear" v-if="this.hasModel &&!disabled && !waiting" @click="clearField">Clear field</m-button> -->
     </m-popup>

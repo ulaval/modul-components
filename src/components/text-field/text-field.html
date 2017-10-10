@@ -8,7 +8,7 @@
           'm--has-icon' : hasIcon,
           'm--is-mode-dropdown': isDropdown,
           'm--has-label': hasLabel },
-          'm--is-type-' + type ]"
+          'm--is-type-'+ type ]"
         ref="textField">
     <label class="m-text-field__label" ref="label" v-if="hasLabel"><m-icon name="default" class="m-text-field__icon m--is-disabled" v-if="isDisabled"></m-icon>{{ label }}</label>
     <div class="m-text-field__input-container">
@@ -17,19 +17,20 @@
             :disabled="isDisabled"
             @focus="onFocus"
             @blur="onBlur"
-            @keydown="onKeyup"
+            @keydown="onKeydown"
             :placeholder="propPlaceholder"
             v-model="model"
-            v-if="propEditable">
+            v-if="true"
+            :readonly="!propEditable">
         <div class="m-text-field__input"
             :tabindex="tabindex"
             ref="input"
             @focus="onFocus"
             @blur="onBlur"
             @mousedown.prevent="onFocus"
-            @keydown="onKeyup"
+            @keydown="onKeydown"
             @click="onClick"
-            v-if="!propEditable">
+            v-if="false">
             <div class="m-text-field__input__value" :title="model" ref="inputValue" v-if="!hasValueSlot && !isPlaceholderVisible">{{ model }}</div>
             <!-- <div class="m-text-field__input__value" ref="inputValue" v-if="hasValueSlot && !hasDefaultText"><slot></slot></div> -->
             <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="!hasValue && !hasValueSlot && !isPlaceholderVisible">i</div>
@@ -37,7 +38,7 @@
         </div>
         <m-button mode="icon" :icon-name="iconName" icon-size="13px" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>
         <m-button mode="icon" :icon-name="iconNamePassword" icon-size="13px" class="m-text-field__icon m--is-password" v-if="propIconPassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-button>
-        <m-button mode="icon" icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon m--is-dropdown" v-if="isDropdown && !isDisabled && !waiting" tabindex="-1">test</m-button>
+        <m-button mode="icon" icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon m--is-dropdown" v-if="isDropdown && !isDisabled && !waiting" @click="dropdownToggle()" tabindex="-1">test</m-button>
         <m-spinner size="small"  class="m-text-field_spinner" v-if="waiting && isDropdown"></m-spinner>
     </div>
     <m-validation-message

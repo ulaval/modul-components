@@ -131,6 +131,7 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
     }
 
     public onClick(): void {
+        console.log('mousedown');
         if (!this.noDataDefaultItem && !this.root.inactive && !this.disabled && !this.inactif) {
             this.root.model = this.value;
             (this.root as MDropdownInterface).toggleDropdown(false);

@@ -78,6 +78,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalOpen: boolean = false;
     // private noItemsLabel: string;
     private dirty: boolean = false;
+    private preventBlur: boolean = false;
 
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
@@ -169,9 +170,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public set model(value) {
+        this.preventBlur = true;
         this.internalValue = value;
         this.$emit('input', value);
-        // console.log('dirty false', this.dirty);
         this.dirty = false;
     }
 
@@ -224,11 +225,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.disabled || this.waiting;
     }
 
-    private filterDropdown(text: string): void {
-        // this.dirty = true;
-        // console.log('dirty');
-        // // this.$emit('filter', normalizeString(text.trim()));
-    }
+    // private filterDropdown(text: string): void {
+    //     // this.dirty = true;
+    //     // console.log('dirty');
+    //     // // this.$emit('filter', normalizeString(text.trim()));
+    // }
 
     // private onBlur(event): void {
     //     // if (this.editable && this.dirty) {
@@ -245,85 +246,97 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     //     // this.dirty = false;
     // }
 
+    private onTab(event: Event): void {
+        console.log('tab');
+    }
+
     private onFocus(event: Event): void {
-        if (this.editable) {
-            // this.dirty = true;
-            // this.selectedText = '';
-        }
+        console.log('focu');
+        this.toggleDropdown(true);
     }
 
     private onBlur(event): void {
+        console.log('blu', this.preventBlur);
+        this.preventBlur = false;
+        //     if (this.internalOpen) {
+        //         this.toggleDropdown(false);
+        //     }
 
-    //     if (this.internalOpen) {
-    //         this.toggleDropdown(false);
-    //     }
-
-    //     setTimeout(() => { // Wait that the dropdown is closed before clearing
-    //         this.$emit('filter'); // Clear filter
-    //         this.$emit('focus'); // Clear focus
-    //     }, 300);
+        //     setTimeout(() => { // Wait that the dropdown is closed before clearing
+        //         this.$emit('filter'); // Clear filter
+        //         this.$emit('focus'); // Clear focus
+        //     }, 300);
     }
 
     private clearField(): void {
         this.$emit('input');
     }
 
-    private onKeyup($event: KeyboardEvent): void {
+    private onKeydown($event: KeyboardEvent): void {
         // this.itemsFocusable = (this.items as MDropDownItemInterface[]).filter(item => (item.disabled === false && item.visible === true));
 
-        // switch ($event.keyCode) {
-        //     case KeyCode.M_ENTER:
-        //     case KeyCode.M_RETURN:
-        //         let currentFocus: Vue | undefined = this.getFocusItem();
-        //         if (currentFocus) {
-        //             this.$emit('keyPressEnter', currentFocus);
-        //         }
-        //         return;
-        //     case KeyCode.M_SPACE:
-        //         if (!this.internalOpen) {
-        //             this.internalOpen = true;
-        //         }
-        //         break;
-        //     case KeyCode.M_ESCAPE:
-        //         this.internalOpen = false;
-        //         return;
-        //     case KeyCode.M_UP:
-        //         if (this.internalOpen) {
-        //             this.getPreviousFocusItem(this.getFocusItem());
-        //         }
-        //         break;
-        //     case KeyCode.M_DOWN:
-        //         if (!this.internalOpen) {
-        //             this.internalOpen = true;
-        //         } else {
-        //             this.getNextFocusItem(this.getFocusItem());
-        //         }
-        //         break;
-        //     case KeyCode.M_PAGE_UP:
-        //         if (this.internalOpen) {
-        //             this.getPreviousFocusItem(this.getFocusItem(), PAGE_STEP);
-        //         }
-        //         break;
-        //     case KeyCode.M_PAGE_DOWN:
-        //         if (!this.internalOpen) {
-        //             this.internalOpen = true;
-        //         } else {
-        //             this.getNextFocusItem(this.getFocusItem(), PAGE_STEP);
-        //         }
-        //         break;
-        //     case KeyCode.M_HOME:
-        //         if (this.internalOpen) {
-        //             this.getFirstFocusItem();
-        //         }
-        //         break;
-        //     case KeyCode.M_END:
-        //         if (!this.internalOpen) {
-        //             this.internalOpen = true;
-        //         } else {
-        //             this.getLastFocusItem();
-        //         }
-        //         break;
-        // }
+        switch ($event.keyCode) {
+            case KeyCode.M_ENTER:
+            case KeyCode.M_RETURN:
+                console.log('return');
+                // let currentFocus: Vue | undefined = this.getFocusItem();
+                // if (currentFocus) {
+                //     this.$emit('keyPressEnter', currentFocus);
+                // }
+                break;
+            case KeyCode.M_SPACE:
+                console.log('space');
+                // if (!this.internalOpen) {
+                //     this.internalOpen = true;
+                // }
+                break;
+            case KeyCode.M_ESCAPE:
+                console.log('escape');
+                // this.internalOpen = false;
+                break;
+            case KeyCode.M_UP:
+                console.log('up');
+                // if (this.internalOpen) {
+                //     this.getPreviousFocusItem(this.getFocusItem());
+                // }
+                break;
+            case KeyCode.M_DOWN:
+                console.log('down');
+                // if (!this.internalOpen) {
+                //     this.internalOpen = true;
+                // } else {
+                //     this.getNextFocusItem(this.getFocusItem());
+                // }
+                break;
+            case KeyCode.M_PAGE_UP:
+                console.log('pageup');
+                // if (this.internalOpen) {
+                //     this.getPreviousFocusItem(this.getFocusItem(), PAGE_STEP);
+                // }
+                break;
+            case KeyCode.M_PAGE_DOWN:
+                console.log('page down');
+                // if (!this.internalOpen) {
+                //     this.internalOpen = true;
+                // } else {
+                //     this.getNextFocusItem(this.getFocusItem(), PAGE_STEP);
+                // }
+                break;
+            case KeyCode.M_HOME:
+                console.log('home');
+                // if (this.internalOpen) {
+                //     this.getFirstFocusItem();
+                // }
+                break;
+            case KeyCode.M_END:
+                console.log('end');
+                // if (!this.internalOpen) {
+                //     this.internalOpen = true;
+                // } else {
+                //     this.getLastFocusItem();
+                // }
+                break;
+        }
     }
 
     private getFocusItem(): Vue | undefined {
@@ -372,6 +385,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$emit('focus', this.itemsFocusable[this.itemsFocusable.length - 1]);
     }
 
+    private onDropdownToggle(): void {
+        this.toggleDropdown(!this.open);
+    }
+
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
@@ -418,7 +435,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
-        // public setModel(value: any, label: string | undefined): void {
+    // public setModel(value: any, label: string | undefined): void {
     //     // if (label) {
     //     //     this.selectedText = label;
     //     // }
