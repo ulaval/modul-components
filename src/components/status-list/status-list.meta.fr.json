@@ -1,6 +1,0 @@
-{
-    "m-status-list-meta": {
-        "name": "Liste d'états",
-        "states-desc": "Accepte une collection d'objets de type MStatusListData"
-    }
-}

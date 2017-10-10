@@ -1,0 +1,14 @@
+{
+    "tag": "m-status",
+    "name": "m-status-meta:name",
+    "attributes": {
+        "status": {
+            "type": "string",
+            "values": [
+                "completed",
+                "pending",
+                "error"
+            ]
+        }
+    }
+}
