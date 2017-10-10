@@ -8,6 +8,7 @@ const STATE_WARNING_CSS: string = 'm--is-warning';
 const STATE_ERROR_CSS: string = 'm--is-error';
 const MODE_REGULAR_CSS: string = 'm--is-regular';
 const MODE_LIGHT_CSS: string = 'm--is-light';
+const CLOSE_BUTTON_CSS: string = 'm--has-close-button';
 
 let message: MMessage;
 
@@ -67,6 +68,83 @@ describe('message', () => {
                 expect(message.$el.classList.contains(MODE_REGULAR_CSS)).toBeTruthy();
                 expect(message.$el.classList.contains(MODE_LIGHT_CSS)).toBeFalsy();
             });
+        });
+    });
+
+    it('icon prop', () => {
+        let vm = new Vue({
+            data: {
+                hasIcon: true
+            },
+            template: `
+            <div>
+                <m-message ref="a" :icon="hasIcon" :closeButton="false">Consequat ut proident est ullamco consequat ullamco.</m-message>
+            </div>`,
+            methods: {
+            }
+        }).$mount();
+
+        let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector('svg');
+        expect(icon).toBeTruthy();
+
+        (vm as any).hasIcon = false;
+        Vue.nextTick(() => {
+            let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector('svg');
+            expect(icon).toBeFalsy();
+        });
+    });
+
+    it('closeButton prop', () => {
+        let vm = new Vue({
+            data: {
+                hasCloseButton: true
+            },
+            template: `
+            <div>
+                <m-message ref="a" :icon="false" :closeButton="hasCloseButton">Consequat ut proident est ullamco consequat ullamco.</m-message>
+            </div>`,
+            methods: {
+            }
+        }).$mount();
+
+        let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector('svg');
+        let body: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-message__body');
+        expect(icon).toBeTruthy();
+        if (body) {
+            expect(body.classList.contains(CLOSE_BUTTON_CSS)).toBeTruthy();
+        }
+
+        (vm as any).hasCloseButton = false;
+        Vue.nextTick(() => {
+            let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector('svg');
+            let body: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-message__body');
+            expect(icon).toBeFalsy();
+            if (body) {
+                expect(body.classList.contains(CLOSE_BUTTON_CSS)).toBeFalsy();
+            }
+        });
+    });
+
+    it('visible prop', () => {
+        let vm = new Vue({
+            data: {
+                isVisible: true
+            },
+            template: `
+            <div>
+                <m-message ref="a" :visible="isVisible">Consequat ut proident est ullamco consequat ullamco.</m-message>
+            </div>`,
+            methods: {
+            }
+        }).$mount();
+
+        let message: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-message__wrap');
+        expect(message).toBeTruthy();
+
+        (vm as any).isVisible = false;
+        Vue.nextTick(() => {
+            let message: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-message__wrap');
+            expect(message).toBeFalsy();
         });
     });
 

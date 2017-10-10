@@ -130,7 +130,6 @@ describe('button', () => {
         }).$mount();
 
         let svg: SVGSVGElement | null = (vm.$refs.a as Vue).$el.querySelector('svg');
-        console.log(svg);
         expect(svg).toBeFalsy();
 
         (vm as any).iconName = 'default';
@@ -157,7 +156,6 @@ describe('button', () => {
         }).$mount();
 
         let svg: SVGSVGElement | null = (vm.$refs.a as Vue).$el.querySelector('svg');
-        console.log(svg);
         expect(svg).toBeFalsy();
 
         (vm as any).iconName = 'default';
