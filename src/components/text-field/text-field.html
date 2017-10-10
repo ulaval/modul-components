@@ -5,10 +5,17 @@
             'm--is-valid' : isValid,
             'm--has-icon' : hasIcon,
             'm--has-label': hasLabel },
-            'm--is-type-' + inputType ]" @click="onClick">
+            'm--is-type-' + inputType ]"
+     @click="onClick">
     <m-input-style :state="propState" :label="label" :focus="isFocus" :empty="isEmpty">
-        <input class="m-text-field__input" ref="input" @focus="onFocus" @blur="onBlur" @keyup="onKeyup" :disabled="isDisabled" :placeholder="placeholder"
-            v-model="model">
+        <input class="m-text-field__input"
+               :disabled="isDisabled"
+               :placeholder="propPlaceholder"
+               @focus="onFocus"
+               @blur="onBlur"
+               @keyup="onKeyup"
+               ref="input"
+               v-model="model">
         <template slot="right-content">
             <m-button mode="icon" :icon-name="iconName" v-if="hasIcon">{{ iconDescription }}</m-button>
             <div class="m-text-field__icon-password" :class="{ 'm--is-transparent': !hasValue }" v-if="propIconPassword">

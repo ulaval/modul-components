@@ -82,6 +82,11 @@ export class MTextField extends ModulVue {
         }
     }
 
+    private onBlur(event): void {
+        this.internalIsFocus = false;
+        this.$emit('blur');
+    }
+
     private onKeyup(event): void {
         if (!this.as<InputStateMixin>().isDisabled) {
             this.$emit('keyup', event, this.model);
@@ -92,8 +97,8 @@ export class MTextField extends ModulVue {
         this.passwordAsText = !this.passwordAsText;
     }
 
-    private get hasPlaceholder(): boolean {
-        return !!this.placeholder || this.placeholder != '';
+    private hasPlaceholder(): boolean {
+        return this.placeholder != undefined && this.placeholder != '';
     }
 
     private get inputType(): MTextFieldType {
@@ -127,13 +132,14 @@ export class MTextField extends ModulVue {
     }
 
     private get isEmpty(): boolean {
-        let empty: boolean = true;
-        if (this.isFocus) {
-            empty = false;
-        } else if (this.hasValue || this.hasPlaceholder) {
-            empty = false;
+        if (this.isFocus || this.hasValue || this.hasPlaceholder()) {
+            return false;
         }
-        return empty;
+        return true;
+    }
+
+    private get propPlaceholder(): string | undefined {
+        return this.hasPlaceholder() ? '- ' + this.placeholder + ' -' : undefined;
     }
 
     private get isFocus(): boolean {

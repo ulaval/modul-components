@@ -35,6 +35,10 @@ $m-dropdown--margin: $m-padding--xs !default;
                 background: none;
                 padding: $m-padding 0 $m-padding $m-padding;
             }
+
+            &-button {
+                stroke-width: 2px;
+            }
         }
     }
 
@@ -88,5 +92,9 @@ $m-dropdown--margin: $m-padding--xs !default;
         min-height: 20px;
         min-width: 26px;
         color: $m-color--interactive;
+    }
+
+    .m-validation-message {
+        cursor: pointer;
     }
 }

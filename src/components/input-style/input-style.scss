@@ -203,7 +203,6 @@ $m-input-style--padding: 5px !default;
         &,
         input {
             outline: none;
-            overflow: hidden;
             text-overflow: ellipsis;
             font-family: $m-font-family;
             font-size: $m-font-size--l;
@@ -212,18 +211,24 @@ $m-input-style--padding: 5px !default;
             color: $m-color--text;
             border: none;
             background: none;
-
-            &[type=password] {
-                letter-spacing: 2px;
-            }
         }
 
         input {
             cursor: text;
+            overflow: hidden;
             width: 100%;
+
+            &[type=password] {
+                letter-spacing: 2px;
+            }
+
+            &[readonly="readonly"] {
+                cursor: pointer;
+            }
         }
 
         &__left {
+            overflow: hidden;
             transition: opacity 0.3s ease;
             flex: 1 1 auto;
         }

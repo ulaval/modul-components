@@ -18,7 +18,6 @@ import InputStylePlugin from '../input-style/input-style';
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
-const DROPDOWN_MAX_WIDTH: string = '704px'; // 768 - (32*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface MDropdownInterface extends Vue {
@@ -44,7 +43,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public label: string;
     @Prop()
-    public defaultText: string;
+    public placeholder: string;
     @Prop({ default: false })
     public disabled: boolean;
     @Prop({ default: false })
@@ -110,24 +109,33 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onClick() {
-        if (!this.as<InputStateMixin>().isDisabled && (this.propEditable || (!this.propEditable && !this.propOpen))) {
-            this.propOpen = true;
+        if (this.editable) {
+            if (!this.as<InputStateMixin>().isDisabled && !this.propOpen) {
+                this.propOpen = true;
+            }
         } else {
-            this.propOpen = false;
+            if (!this.as<InputStateMixin>().isDisabled) {
+                this.propOpen = !this.propOpen;
+            }
         }
     }
 
     private arrowOnClick(event): void {
-        if (this.propEditable && this.propOpen) {
+        if (this.editable && this.propOpen) {
+
             this.propOpen = false;
             event.stopPropagation();
         }
     }
 
     private onFocus(): void {
-        if (!this.as<InputStateMixin>().isDisabled && !this.propOpen && !this.emptyValue) {
+        if (!this.as<InputStateMixin>().isDisabled && !this.propOpen && this.editable) {
             this.propOpen = true;
         }
+    }
+
+    private hasPlaceholder(): boolean {
+        return this.placeholder != undefined && this.placeholder != '';
     }
 
     @Watch('open')
@@ -135,16 +143,22 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.propOpen = open;
     }
 
-    public get emptyValue(): boolean {
-        return (this.selectedValue == undefined || this.selectedValue == '') && ((!this.propOpen && this.propEditable) || !this.propEditable);
+    public get isEmpty(): boolean {
+        return (this.editable && this.propOpen) || this.hasValue || this.hasPlaceholder() ? false : true;
+    }
+
+    private get hasValue(): boolean {
+        return this.selectedValue != undefined && this.selectedValue != '';
     }
 
     public set propOpen(open: boolean) {
         this.internalOpen = open != undefined ? open : false;
         this.$nextTick(() => {
-            if (open) {
+            if (this.internalOpen) {
                 this.$emit('open');
-                (this.$refs.input as HTMLElement).focus();
+                if (this.editable) {
+                    (this.$refs.input as HTMLElement).focus();
+                }
             } else {
                 this.$emit('close');
             }
@@ -155,8 +169,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.internalOpen;
     }
 
-    private get propEditable(): boolean {
-        return this.editable;
+    private get propPlaceholder(): string | undefined {
+        return this.hasPlaceholder() ? '- ' + this.placeholder + ' -' : undefined;
     }
 
     private get propTextNoData(): string {

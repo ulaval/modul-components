@@ -1,14 +1,31 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ width: width, 'max-width': maxWidth }"
-    @click="onClick">
-    <m-popup :placement="bottom-start" :disabled="inactive" :open="propOpen" :enter="transitionEnter"
-        :leave="transitionLeave" :padding-header="false" :open-on-click="false" :padding-body="false" :focus-management="false"
-        width="100%" @open="toggleDropdown(true)" @close="toggleDropdown(false)">
+<div class="m-dropdown"
+     :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }"
+     :style="{ width: width, 'max-width': maxWidth }"
+     ref="mDropdown"
+     @click="onClick">
+    <m-popup :placement="bottom-start"
+             :disabled="inactive"
+             :open="propOpen"
+             :enter="transitionEnter"
+             :leave="transitionLeave"
+             :padding-header="false"
+             :padding-body="false"
+             :open-on-click="false"
+             :focus-management="false"
+             width="100%"
+             @open="toggleDropdown(true)"
+             @close="toggleDropdown(false)">
         <div slot="header" v-show="isMqMaxS" :aria-hidden="!isMqMaxS">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
-            <div class="m-dropdown__header__research" v-if="propEditable">
-                <input type="text" class="m-dropdown__header__research-input" placeholder="Recherche" ref="researchInput" v-model="selectedValue"
-                    @change="onChange" @keyup="onKeyup">
-                <m-button mode="icon" icon-name="search" @click="focusOnResearchInput">
+            <div class="m-dropdown__header__research" v-if="editable">
+                <input class="m-dropdown__header__research-input"
+                       type="text"
+                       placeholder="Recherche"
+                       ref="researchInput"
+                       v-model="selectedValue"
+                       @change="onChange"
+                       @keyup="onKeyup">
+                <m-button class="m-dropdown__header__research-button" mode="icon" icon-name="search" @click="focusOnResearchInput">
                     <m-i18n k="m-dropdown:search"></m-i18n>
                 </m-button>
             </div>
@@ -17,10 +34,17 @@
             <slot></slot>
             <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
         </ul>
-        <m-input-style ref="mDropdownValue" :label="label" :state="propState" :empty="emptyValue" :focus="propOpen" :placeholder="defaultText"
+        <m-input-style ref="mDropdownValue" :label="label" :state="propState" :focus="propOpen" :empty="isEmpty"
             :disabled="disabled" :waiting="waiting">
-            <input type="text" ref="input" @focus="onFocus" @change="onChange" @keyup="onKeyup" v-model="selectedValue" v-if="propEditable"
-                :disabled="inactive" :readonly="!propEditable">
+            <input type="text"
+                   ref="input"
+                   :disabled="inactive"
+                   :readonly="!editable"
+                   :placeholder="propPlaceholder"
+                   @focus="onFocus"
+                   @change="onChange"
+                   @keyup="onKeyup"
+                   v-model="selectedValue">
             <div class="m-dropdown__arrow" :class="{ 'm--is-open': propOpen }" slot="right-content">
                 <m-button mode="icon" icon-name="dropdown-arrow" @click="arrowOnClick($event)">Open dropdown</m-button>
             </div>
@@ -29,5 +53,8 @@
             <slot name="footer"></slot>
         </template>
     </m-popup>
-    <m-validation-message :error-message="errorMessage" :valid-message="validMessage" :helper-message="helperMessage" v-if="!isDisabled"></m-validation-message>
+    <m-validation-message :error-message="errorMessage"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"
+                          v-if="!isDisabled"></m-validation-message>
 </div>
