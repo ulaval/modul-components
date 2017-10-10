@@ -1,5 +1,5 @@
-<article class="m-panel" :class="{ 'm--is-mode-primary': propMode == 'primary',
-                'm--is-mode-secondary': propMode == 'secondary',
+<article class="m-panel" :class="{ 'm--is-primary': propMode == 'primary',
+                'm--is-secondary': propMode == 'secondary',
                 'm--no-shadow': !shadow,
                 'm--no-border': !border }">
     <header class="m-panel__header" :class="{ 'm--no-padding': !hasPaddingHeader, 'm--is-right-content-alone': !hasHeaderSlot }" v-if="hasHeader">

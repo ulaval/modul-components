@@ -4,6 +4,9 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './message.html?style=./message.scss';
 import { MESSAGE_NAME } from '../component-names';
+import IconPlugin from '../icon/icon';
+import ButtonPlugin from '../button/button';
+import I18nPlugin from '../i18n/i18n';
 
 export enum MMessageState {
     Success = 'success',
@@ -78,6 +81,9 @@ export class MMessage extends Vue {
 
 const MessagePlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(IconPlugin);
+        v.use(ButtonPlugin);
+        v.use(I18nPlugin);
         v.component(MESSAGE_NAME, MMessage);
     }
 };
