@@ -10,13 +10,20 @@ const NO_PADDING_CSS: string = 'm--no-padding';
 
 let panel: MPanel;
 
+describe('MPanelMode', () => {
+    it('validates enum', () => {
+        expect(MPanelMode.Primary).toEqual('primary');
+        expect(MPanelMode.Secondary).toEqual('secondary');
+    });
+});
+
 describe('panel', () => {
     beforeEach(() => {
         Vue.use(PanelPlugin);
         panel = new MPanel().$mount();
     });
 
-    it('css class for button group are not present', () => {
+    it('css class for panel are not present', () => {
         expect(panel.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
         expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
         expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();

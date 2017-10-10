@@ -7,6 +7,13 @@ const RELATIVE_CSS: string = 'm--is-relative';
 
 let scrollTop: MScrollTop;
 
+describe('MScrollTopPosition', () => {
+    it('validates enum', () => {
+        expect(MScrollTopPosition.Fixe).toEqual('fixe');
+        expect(MScrollTopPosition.Relative).toEqual('relative');
+    });
+});
+
 describe('scroll-top', () => {
     beforeEach(() => {
         Vue.use(ScrollTopPlugin);

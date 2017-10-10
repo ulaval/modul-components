@@ -12,13 +12,29 @@ const CLOSE_BUTTON_CSS: string = 'm--has-close-button';
 
 let message: MMessage;
 
+describe('MMessageState', () => {
+    it('validates enum', () => {
+        expect(MMessageState.Success).toEqual('success');
+        expect(MMessageState.Information).toEqual('information');
+        expect(MMessageState.Warning).toEqual('warning');
+        expect(MMessageState.Error).toEqual('error');
+    });
+});
+
+describe('MMessageMode', () => {
+    it('validates enum', () => {
+        expect(MMessageMode.Regular).toEqual('regular');
+        expect(MMessageMode.Light).toEqual('light');
+    });
+});
+
 describe('message', () => {
     beforeEach(() => {
         Vue.use(MessagePlugin);
         message = new MMessage().$mount();
     });
 
-    it('css class for button group are not present', () => {
+    it('css class for message are not present', () => {
         expect(message.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
         expect(message.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
         expect(message.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
