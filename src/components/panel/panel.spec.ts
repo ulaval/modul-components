@@ -8,60 +8,60 @@ const NO_SHADOW_CSS: string = 'm--no-shadow';
 const NO_BORDER_CSS: string = 'm--no-border';
 const NO_PADDING_CSS: string = 'm--no-padding';
 
-let message: MPanel;
+let panel: MPanel;
 
 describe('panel', () => {
     beforeEach(() => {
         Vue.use(PanelPlugin);
-        message = new MPanel().$mount();
+        panel = new MPanel().$mount();
     });
 
     it('css class for button group are not present', () => {
-        expect(message.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
-        expect(message.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
-        expect(message.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
     });
 
     it('mode prop', () => {
-        expect(message.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
 
-        message.mode = MPanelMode.Secondary;
+        panel.mode = MPanelMode.Secondary;
         Vue.nextTick(() => {
-            expect(message.$el.classList.contains(MODE_SECONDARY_CSS)).toBeTruthy();
-            expect(message.$el.classList.contains(MODE_PRIMARY_CSS)).toBeFalsy();
+            expect(panel.$el.classList.contains(MODE_SECONDARY_CSS)).toBeTruthy();
+            expect(panel.$el.classList.contains(MODE_PRIMARY_CSS)).toBeFalsy();
 
-            message.mode = MPanelMode.Primary;
+            panel.mode = MPanelMode.Primary;
             Vue.nextTick(() => {
-                expect(message.$el.classList.contains(MODE_PRIMARY_CSS)).toBeTruthy();
-                expect(message.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
+                expect(panel.$el.classList.contains(MODE_PRIMARY_CSS)).toBeTruthy();
+                expect(panel.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
             });
         });
     });
 
     it('shadow prop', () => {
-        expect(message.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
 
-        message.shadow = false;
+        panel.shadow = false;
         Vue.nextTick(() => {
-            expect(message.$el.classList.contains(NO_SHADOW_CSS)).toBeTruthy();
+            expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeTruthy();
 
-            message.shadow = true;
+            panel.shadow = true;
             Vue.nextTick(() => {
-                expect(message.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
+                expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
             });
         });
     });
 
     it('border prop', () => {
-        expect(message.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
 
-        message.border = false;
+        panel.border = false;
         Vue.nextTick(() => {
-            expect(message.$el.classList.contains(NO_BORDER_CSS)).toBeTruthy();
+            expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeTruthy();
 
-            message.border = true;
+            panel.border = true;
             Vue.nextTick(() => {
-                expect(message.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
+                expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
             });
         });
     });
