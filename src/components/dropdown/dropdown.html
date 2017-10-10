@@ -1,6 +1,6 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ width: width, 'max-width': maxWidth }"
     @click="onClick">
-    <m-popup :placement="bottom-start" :disabled="inactive" :open="propOpen" :enter="transitionEnter" :after-enter="transitionAfterEnter"
+    <m-popup :placement="bottom-start" :disabled="inactive" :open="propOpen" :enter="transitionEnter"
         :leave="transitionLeave" :padding-header="false" :open-on-click="false" :padding-body="false" :focus-management="false"
         width="100%" @open="toggleDropdown(true)" @close="toggleDropdown(false)">
         <div slot="header" v-show="isMqMaxS" :aria-hidden="!isMqMaxS">
@@ -13,7 +13,7 @@
                 </m-button>
             </div>
         </div>
-        <ul class="m-dropdown__list" ref="mDropdownElements" slot="body">
+        <ul class="m-dropdown__list" ref="mDropdownElements" slot="body" :style="{ 'max-height': propMaxHeightList + 'px' }">
             <slot></slot>
             <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
         </ul>

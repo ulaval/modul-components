@@ -63,6 +63,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public textNoData: string;
     @Prop()
     public textNoMatch: string;
+    @Prop({ default: DROPDOWN_MAX_HEIGHT })
+    public maxHeightList: string;
 
     public componentName: string = DROPDOWN_NAME;
     public items: Vue[] = [];
@@ -76,31 +78,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private textFieldLabelEl: HTMLElement;
     private textFieldInputValueEl: HTMLElement;
-
-    // private componentName: string = DROPDOWN_NAME;
-
-    // public setFocus(elementFocus: Vue): void {
-    //     for (let item of this.items) {
-    //         if (item === elementFocus) {
-    //             (item as MDropDownItemInterface).hasFocus = true;
-    //         } else {
-    //             (item as MDropDownItemInterface).hasFocus = false;
-    //         }
-    //     }
-    // }
-
-    // public getFocus(): MDropDownItemInterface | undefined {
-    //     let elementFocus: MDropDownItemInterface | undefined = undefined;
-
-    //     for (let item of this.items) {
-    //         if ((item as MDropDownItemInterface).hasFocus) {
-    //             elementFocus = (item as MDropDownItemInterface);
-    //             break;
-    //         }
-    //     }
-
-    //     return elementFocus;
-    // }
 
     public setModel(value: any, label: string | undefined): void {
         if (label) {
@@ -286,6 +263,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private get propMaxHeightList(): string | undefined {
+        return this.as<MediaQueries>().isMqMinS ? this.maxHeightList : undefined;
+    }
+
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
+    }
+
     private getFocusItem(): Vue | undefined {
         let elementFocused: Vue | undefined = undefined;
 
@@ -338,12 +323,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
-                let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
+                let height: number = el.clientHeight;
                 el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
                 el.style.transition = DROPDOWN_STYLE_TRANSITION;
                 el.style.overflowY = 'hidden';
                 el.style.maxHeight = '0';
-                (el.querySelector('.m-dropdown__list') as HTMLElement).style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
                 el.style.width = this.$el.clientWidth + 'px';
                 setTimeout(() => {
                     el.style.maxHeight = height + 'px';
@@ -355,22 +339,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
-    private transitionAfterEnter(el: HTMLElement): void {
-        if (this.as<MediaQueriesMixin>().isMqMinS) {
-            setTimeout(() => {
-                el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
-                el.style.overflowY = 'auto';
-            }, 300);
-        }
-    }
-
     private transitionLeave(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
                 let height: number = el.clientHeight;
-                el.style.width = (this.$el.clientWidth - 25) + 'px';
+                el.style.width = this.$el.clientWidth + 'px';
                 el.style.maxHeight = height + 'px';
-                el.style.overflowY = 'hidden';
                 el.style.maxHeight = '0';
                 setTimeout(() => {
                     el.style.maxHeight = 'none';
