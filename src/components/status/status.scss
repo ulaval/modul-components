@@ -1,0 +1,54 @@
+@import 'abstracts/variables';
+$m-status-list-icon-size: 22px;
+$m-status-list-line-width: 2px;
+
+.m-status {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+
+    & + & {
+        margin-top: $m-margin;
+
+        &::after {
+            content: "";
+            display: block;
+            background-color: $m-color--grey-light;
+            width: $m-status-list-line-width;
+            position: absolute;
+            top: -($m-margin + 1); // magic number
+            bottom: 3px;
+            left: ($m-status-list-icon-size / 2) - ($m-status-list-line-width / 2);
+            z-index: 1;
+        }
+    }
+
+    .m-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $m-status-list-icon-size;
+        margin-right: 8px;
+        z-index: 2;
+        position: relative;
+    }
+
+    &.m--is-completed {
+        .m-icon {
+            color: $m-color--success;
+        }
+    }
+
+    &.m--is-error {
+        .m-icon {
+            color: $m-color--error;
+        }
+    }
+
+    &.m--is-pending {
+        .m-icon {
+            color: $m-color--warning;
+        }
+    }
+}
