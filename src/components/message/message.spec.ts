@@ -70,4 +70,26 @@ describe('message', () => {
         });
     });
 
+    it('close button event', () => {
+        let clickSpy = jasmine.createSpy('clickSpy');
+        let vm = new Vue({
+            template: `
+                <m-message @close="onClick($event)">Consequat ut proident est ullamco consequat ullamco.</m-message>
+            `,
+            methods: {
+                onClick: clickSpy
+            }
+        }).$mount();
+
+        let closeButton = vm.$el.querySelector('button');
+
+        if (closeButton) {
+            closeButton.click();
+        }
+
+        Vue.nextTick(() => {
+            expect(clickSpy).toHaveBeenCalled();
+        });
+    });
+
 });
