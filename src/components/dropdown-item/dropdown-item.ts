@@ -52,12 +52,16 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
         this.group = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
     }
 
+    public get visible(): boolean {
+        return this.noDataDefaultItem || this.root.filter(this.normalizedLabel);
+    }
+
     // Value and label rules
     // - If Value and Label : Value = value, Label = label
     // - If only value : value = value, label = value.toString
     // - If only label : value = label, label = label
     // - If none: value = undef, label = undef and item is flag inactive
-    public get propLabel(): string | undefined {
+    private get propLabel(): string | undefined {
         if (this.label) {
             return this.label;
         } else {
@@ -71,10 +75,6 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
                 return undefined;
             }
         }
-    }
-
-    public get visible(): boolean {
-        return this.noDataDefaultItem || this.root.filter(this.normalizedLabel);
     }
 
     private get selected(): boolean {

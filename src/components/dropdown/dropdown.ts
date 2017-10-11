@@ -82,11 +82,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 this.buildItemsMap();
             }.bind(this));
 
-            let o: any = document.body.getElementsByClassName('m-dropdown__list');// this.$el.querySelector('.m-popup');
-            if (o) {
+            let o: NodeListOf<Element> = document.body.getElementsByClassName('m-dropdown__list');// this.$el.querySelector('.m-popup');
+            if (o.length > 0) {
                 this.observer.observe(o[0], { childList: true }
                 );
             }
+
+            console.log(this.$children);
         });
     }
 
@@ -130,7 +132,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             result = this.internalFilter;
         } else if (this.internalItems.every(item => {
             if (item.value == this.model) {
-                result = item.propLabel;
+                result = ''; // item.propLabel;
                 return false;
             }
             return true;
