@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const path = require('path');
 
 function resolve(dir) {
@@ -111,7 +112,11 @@ module.exports = function (env) {
             new StyleLintPlugin({
                 configFile: '.stylelintrc',
                 emitErrors: true
-            })
+            }),
+            new ContextReplacementPlugin(
+                /moment[\/\\]locale$/,
+                /en-ca|fr-ca/
+            )
         ]
     }
 
