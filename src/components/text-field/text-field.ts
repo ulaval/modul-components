@@ -74,17 +74,6 @@ export class MTextField extends ModulVue {
 
     protected mounted(): void {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
-
-        // document.addEventListener('click', (e: MouseEvent) => {
-        //     if (!this.editable &&
-        //         !(e.target == this.$refs.textField ||
-        //           e.target == this.$refs.input ||
-        //           e.target == this.$refs.inputValue ||
-        //           e.target == this.$refs.inputDefaultText ||
-        //           e.target == this.$refs.label)) {
-        //         this.onBlur(e);
-        //     }
-        // });
     }
 
     @Watch('type')
@@ -104,21 +93,15 @@ export class MTextField extends ModulVue {
             this.internalIsFocus = false;
             this.$emit('blur', event);
         }
-        // if (this.editable || !(event.type == 'blur' && event.target == this.$refs.input)) {
-        //     this.internalIsFocus = false;
-        //     this.$emit('blur', event);
-        // }
     }
 
     private onKeydown(event: KeyboardEvent): void {
-        // console.log('keydown from tf');
-        if (!this.as<InputStateMixin>().isDisabled) {
-            if (event.keyCode != KeyCode.M_TAB) {
-                this.$emit('keydown', event, this.model);
-            } else {
-                // this.onBlur(event);
-            }
-        }
+        // if (!this.as<InputStateMixin>().isDisabled) {
+        //     if (event.keyCode != KeyCode.M_TAB) {
+        //         this.$emit('keydown', event, this.model);
+        //     }
+        // }
+        this.$emit('keydown', event, this.model);
     }
 
     private onClick(event): void {
@@ -127,10 +110,6 @@ export class MTextField extends ModulVue {
 
     private onMousedown(): void {
         this.$emit('mousedown');
-    }
-
-    private dropdownToggle(): void {
-        this.$emit('dropdownToggle');
     }
 
     private togglePasswordVisibility(event): void {

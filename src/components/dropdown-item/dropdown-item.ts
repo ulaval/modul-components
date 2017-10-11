@@ -10,29 +10,11 @@ import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropdownInterface extends Vue {
     model: any;
-    // items: Vue[];
     inactive: boolean;
 
     focused: any;
     filter(text: string | undefined): boolean;
-    // setFocus(item: Vue): void;
-    // toggleDropdown(open: boolean): void;
-    // emitChange(value: any, action: boolean);
-
-    // setModel(value: any, label: string | undefined): void;
-    // nbItemsVisible: number;
-    // export interface MDropDownItemInterface extends Vue {
-    //     visible: boolean;
-    //     disabled: boolean;
-    //     focus: boolean;
 }
-
-// export interface MDropDownItemInterface extends Vue {
-//     // propValue: any;
-//     visible: boolean;
-//     disabled: boolean;
-//     hasFocus: boolean;
-// }
 
 export abstract class BaseDropdown extends ModulVue {
 }
@@ -56,11 +38,9 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
 
     public inactif: boolean = false; // Without label and value
     public root: MDropdownInterface; // Dropdown component
-    public focus: boolean = false;
-    // public filter: string = ''; // Set by parent
     public group: Vue | undefined; // Dropdown-group parent if there is one
 
-    public created(): void {
+    protected created(): void {
         let rootNode: BaseDropdown | undefined = this.getParent<BaseDropdown>(p => p instanceof BaseDropdown);
 
         if (rootNode) {
@@ -70,36 +50,6 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
         }
 
         this.group = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
-
-        // (this.root as MDropdownInterface).$on('keyPressEnter',
-        //     (value: any) => {
-        //         if (value === this) {
-        //             this.onClick();
-        //         }
-        //     });
-
-        // (this.root as MDropdownInterface).$on('focus',
-        //     (value: Vue) => {
-        //         if (this == value) {
-        //             this.focus = true;
-        //             this.$el.scrollIntoView();
-        //         } else {
-        //             this.focus = false;
-        //         }
-        //     });
-
-        //     // If element is active add to array of items and increment counters
-        //     // Done a first time in the create because watch is not call on load
-        //     if (!this.inactif) {
-        //         (this.root as MDropdownInterface).items.push(this);
-        //         this.incrementCounters();
-        //     }
-
-        //     this.updateTextfield((this.root as MDropdownInterface).model);
-        // }
-
-        // beforeDestroy() {
-        //     let index: number = (this.root as MDropdownInterface).items.indexOf(this);
     }
 
     // Value and label rules
@@ -123,23 +73,29 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
         }
     }
 
-    public get selected(): boolean {
+    public get visible(): boolean {
+        return this.noDataDefaultItem || this.root.filter(this.normalizedLabel);
+    }
+
+    private get selected(): boolean {
         return (this.root as MDropdownInterface).model == this.value;
     }
 
-    public get focused(): boolean {
+    private get focused(): boolean {
         return (this.root as MDropdownInterface).focused == this.value;
     }
 
-    public get visible(): boolean {
-        return this.root.filter(this.propLabel);
-    }
-
-    public onClick(): void {
-        console.log('mousedown');
+    private onMousedown(): void {
         if (!this.noDataDefaultItem && !this.root.inactive && !this.disabled && !this.inactif) {
             this.root.model = this.value;
-            // (this.root as MDropdownInterface).toggleDropdown(false);
+        }
+    }
+
+    private get normalizedLabel(): string {
+        if (this.propLabel) {
+            return normalizeString(this.propLabel);
+        } else {
+            return '';
         }
     }
 }

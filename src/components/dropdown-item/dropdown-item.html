@@ -2,6 +2,6 @@
     :class="{ 'm--is-selected': selected, 'm--is-disabled': disabled, 'm--is-inactif': inactif, 'm--is-focus': focused }"
     :disabled="disabled"
     v-if="visible"
-    @mousedown="onClick($event)">
+    @mousedown.prevent="onMousedown($event)">
     <slot><span class="m-dropdown-item__element-text">{{ propLabel }}</span></slot>
 </li>
