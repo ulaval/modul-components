@@ -12,6 +12,11 @@ export enum MLinkMode {
     Button = 'button'
 }
 
+export enum MLinkIconPosition {
+    Left = 'left',
+    Right = 'right'
+}
+
 @WithRender
 @Component
 export class MLink extends ModulVue {
@@ -27,6 +32,12 @@ export class MLink extends ModulVue {
     public vanilla: boolean;
     @Prop()
     public hiddenText: string;
+    @Prop({ default: false })
+    public icon: boolean;
+    @Prop({ default: 'right-arrow' })
+    public iconName: string;
+    @Prop({ default: MLinkIconPosition.Left })
+    public iconPosition: string;
 
     public componentName: string = LINK_NAME;
 
@@ -61,17 +72,18 @@ export class MLink extends ModulVue {
         return this.mode == MLinkMode.Button;
     }
 
+    private get isIconPositionRight(): boolean {
+        return this.iconPosition == MLinkIconPosition.Right;
+    }
+
+    private get hasIcon(): boolean {
+        return this.iconName != undefined && this.iconName != '' && this.icon == true;
+    }
+
     private get propUrl(): string {
         return this.mode == MLinkMode.Button ? '#' : this.url;
     }
 
-    private get hasIconeLeft(): boolean {
-        return !!this.$slots['icon-left'];
-    }
-
-    private get hasIconeRight(): boolean {
-        return !!this.$slots['icon-right'];
-    }
     private get hasHiddenText(): boolean {
         return this.hiddenText == undefined || this.hiddenText == '' ? false : true;
     }

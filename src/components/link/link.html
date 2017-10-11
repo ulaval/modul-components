@@ -1,35 +1,27 @@
 
 <transition>
     <router-link class="m-link"
-                 :class="{ 'm--is-unvisited': unvisited, 'm--no-underline': !underline, 'm--is-vanilla': vanilla }"
+                 :class="{ 'm--is-unvisited': unvisited,
+                           'm--no-underline': !underline,
+                           'm--is-button': isButton,
+                           'm--is-vanilla': vanilla,
+                           'm--has-right-icon' : isIconPositionRight }"
                  :to="{ path: propUrl }"
                  v-if="isRouterLink">
-        <span class="m-link__icon m--is-left" v-if="hasIconeLeft">
-            <slot name="icon-left"></slot>
-        </span>
-        <span  class="m-link__text">
-            <slot>{{ componentName }}</slot>
-        </span>
-        <span class="m-link__icon m--is-right" v-if="hasIconeRight">
-            <slot name="icon-right"></slot>
-        </span>
+        <m-icon :name="iconName" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon><span  class="m-link__text"><slot>{{ componentName }}</slot></span>
         <span class="m-link__hidden" v-if="hasHiddenText">{{ hiddenText }}</span>
     </router-link>
-    <a ref="link"
-       class="m-link"
-       :class="{ 'm--is-unvisited': unvisited, 'm--no-underline': !underline, 'm--is-button': isButton, 'm--is-vanilla': vanilla }"
+    <a class="m-link"
+       :class="{ 'm--is-unvisited': unvisited,
+                 'm--no-underline': !underline,
+                 'm--is-button': isButton,
+                 'm--is-vanilla': vanilla,
+                 'm--has-right-icon' : isIconPositionRight }"
        :href="propUrl"
        v-if="isLink || isExternalLink || isButton"
+       ref="link"
        @click="onClick">
-        <span class="m-link__icon m--is-left" v-if="hasIconeLeft">
-            <slot name="icon-left"></slot>
-        </span>
-        <span  class="m-link__text">
-            <slot>{{ componentName }}</slot>
-        </span>
-        <span class="m-link__icon m--is-right" v-if="hasIconeRight">
-            <slot name="icon-right"></slot>
-        </span>
+        <m-icon :name="iconName" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon><span  class="m-link__text"><slot>{{ componentName }}</slot></span>
         <span class="m-link__hidden" v-if="hasHiddenText">{{ hiddenText }}</span>
     </a>
 </transition>

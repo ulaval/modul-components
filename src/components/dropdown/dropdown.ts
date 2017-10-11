@@ -19,7 +19,7 @@ import PopupPlugin from '../popup/popup';
 
 const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
-const DROPDOWN_MAX_WIDTH: string = '704px'; // 768 - (32*2)
+const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface MDropdownInterface extends Vue {

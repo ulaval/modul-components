@@ -32,7 +32,7 @@ export const SCROLL_TOP_NAME: string = 'm-scroll-top';
 export const SIDEBAR_NAME: string = 'm-sidebar';
 export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
-export const STATUS_LIST_NAME: string = 'm-status-list';
+export const STATUS_NAME: string = 'm-status';
 export const STEP_NAME: string = 'm-step';
 export const SWITCH_NAME: string = 'm-switch';
 export const TAB_PANE_NAME: string = 'm-tab-pane';
@@ -82,7 +82,7 @@ export const components: string[] = [
     SIDEBAR_NAME,
     SLIDER_NAME,
     SPINNER_NAME,
-    STATUS_LIST_NAME,
+    STATUS_NAME,
     STEP_NAME,
     SWITCH_NAME,
     TAB_PANE_NAME,

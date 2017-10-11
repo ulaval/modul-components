@@ -66,7 +66,7 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
             (value: Vue) => {
                 if (this == value) {
                     this.focus = true;
-                    this.$el.scrollIntoView();
+                    this.$el.scrollIntoView({block: 'nearest', inline: 'nearest'});
                 } else {
                     this.focus = false;
                 }
