@@ -82,6 +82,7 @@ export class BaseWindow extends ModulVue {
         if (this.disabled) {
             return false;
         }
+        console.log('get open');
         return this.internalPropOpen;
     }
 
@@ -92,8 +93,10 @@ export class BaseWindow extends ModulVue {
             } else {
                 this.busy = true;
                 if (value) {
+                    console.log('set open');
                     this.internalPropOpen = true;
                     this.internalOpenDialog().then(() => {
+                        console.log('open completed');
                         this.$emit('update:open', value);
                         this.$emit('open');
                         this.busy = false;

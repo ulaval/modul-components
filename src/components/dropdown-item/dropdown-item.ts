@@ -2,11 +2,9 @@ import Vue from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
 import { DROPDOWN_ITEM_NAME } from '../component-names';
-import { normalizeString } from '../../utils/str/str';
-import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
 export interface MDropdownInterface extends Vue {
     model: any;
@@ -14,12 +12,13 @@ export interface MDropdownInterface extends Vue {
 
     focused: any;
     filter(text: string | undefined): boolean;
+    groupHasItems(group: BaseDropdownGroup): boolean;
 }
 
 export abstract class BaseDropdown extends ModulVue {
 }
 
-export abstract class BaseDropdownGroup extends Vue {
+export abstract class BaseDropdownGroup extends ModulVue {
 }
 
 @WithRender
@@ -53,7 +52,7 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
     }
 
     public get visible(): boolean {
-        return this.noDataDefaultItem || this.root.filter(this.normalizedLabel);
+        return this.noDataDefaultItem || this.root.filter(this.propLabel);
     }
 
     // Value and label rules
@@ -61,7 +60,7 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
     // - If only value : value = value, label = value.toString
     // - If only label : value = label, label = label
     // - If none: value = undef, label = undef and item is flag inactive
-    private get propLabel(): string | undefined {
+    public get propLabel(): string | undefined {
         if (this.label) {
             return this.label;
         } else {
@@ -88,14 +87,6 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
     private onMousedown(): void {
         if (!this.noDataDefaultItem && !this.root.inactive && !this.disabled && !this.inactif) {
             this.root.model = this.value;
-        }
-    }
-
-    private get normalizedLabel(): string {
-        if (this.propLabel) {
-            return normalizeString(this.propLabel);
-        } else {
-            return '';
         }
     }
 }

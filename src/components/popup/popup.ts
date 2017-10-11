@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { MPopperPlacement } from '../popper/popper';
 import PopperPlugin from '../popper/popper';
 import SidebarPlugin from '../sidebar-window/sidebar-window';
@@ -84,6 +84,11 @@ export class MPopup extends ModulVue {
                 this.$emit('close');
             }
         }
+    }
+
+    private get isSmall(): boolean {
+        console.log('issmall', this.as<MediaQueriesMixin>().isMqMaxS);
+        return this.as<MediaQueriesMixin>().isMqMaxS;
     }
 
     @Watch('open')

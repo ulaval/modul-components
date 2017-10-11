@@ -6,7 +6,8 @@ import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { normalizeString } from '../../utils/str/str';
-import { MDropdownInterface, MDropdownItem, /*MDropDownItemInterface,*/ BaseDropdown } from '../dropdown-item/dropdown-item';
+import { MDropdownInterface, MDropdownItem, BaseDropdown, BaseDropdownGroup } from '../dropdown-item/dropdown-item';
+import { MDropdownGroup } from '../dropdown-group/dropdown-group';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
@@ -74,6 +75,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return result;
     }
 
+    public groupHasItems(group: BaseDropdownGroup): boolean {
+        return this.internalItems.some(i => {
+            return i.group == group;
+        });
+    }
+
     protected mounted(): void {
         this.$nextTick(() => {
             this.buildItemsMap();
@@ -84,8 +91,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
             let o: NodeListOf<Element> = document.body.getElementsByClassName('m-dropdown__list');// this.$el.querySelector('.m-popup');
             if (o.length > 0) {
-                this.observer.observe(o[0], { childList: true }
-                );
+                this.observer.observe(o[0], { subtree: true, childList: true });
             }
 
             console.log(this.$children);
@@ -132,7 +138,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             result = this.internalFilter;
         } else if (this.internalItems.every(item => {
             if (item.value == this.model) {
-                result = ''; // item.propLabel;
+                result = item.propLabel;
                 return false;
             }
             return true;
@@ -151,7 +157,21 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private buildItemsMap(): void {
         this.focusedIndex = -1;
-        this.internalItems = (this.$refs.popper as Vue).$children[0].$children.filter(v => v instanceof MDropdownItem && !v.noDataDefaultItem && v.visible).map(v => v as MDropdownItem);
+
+        // this.internalItems = (this.$refs.popper as Vue).$children[0].$children.filter(v => v instanceof MDropdownItem && !v.noDataDefaultItem && v.visible).map(v => v as MDropdownItem);
+        let items: MDropdownItem[] = [];
+        (this.$refs.popper as Vue).$children[0].$children.forEach(item => {
+            if (item instanceof MDropdownItem && !item.noDataDefaultItem && item.visible) {
+                items.push(item);
+            } else if (item instanceof MDropdownGroup) {
+                (item as Vue).$children.forEach(groupItem => {
+                    if (groupItem instanceof MDropdownItem && !groupItem.noDataDefaultItem && groupItem.visible) {
+                        items.push(groupItem);
+                    }
+                });
+            }
+        });
+        this.internalItems = items;
     }
 
     private get propTextNoData(): string {
