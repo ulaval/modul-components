@@ -7,8 +7,8 @@ import { SWITCH_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 
 export enum MSwitchPosition {
-    LEFT = 'left',
-    RIGHT = 'right'
+    Left = 'left',
+    Right = 'right'
 }
 
 @WithRender
@@ -17,7 +17,7 @@ export class MSwitch extends Vue {
 
     @Prop()
     public value: boolean;
-    @Prop({ default: MSwitchPosition.LEFT })
+    @Prop({ default: MSwitchPosition.Left })
     public position: string;
     @Prop({ default: true })
     public helperText: boolean;
@@ -43,7 +43,7 @@ export class MSwitch extends Vue {
     }
 
     public get hasSwitchLeft(): boolean {
-        return ((this.position == MSwitchPosition.RIGHT) ? false : true);
+        return ((this.position == MSwitchPosition.Right) ? false : true);
     }
 
     public get label(): boolean {

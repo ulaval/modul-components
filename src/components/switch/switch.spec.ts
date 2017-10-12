@@ -12,8 +12,8 @@ let switchVar: MSwitch;
 
 describe('MSwitchPosition', () => {
     it('validates enum', () => {
-        expect(MSwitchPosition.LEFT).toEqual('left');
-        expect(MSwitchPosition.RIGHT).toEqual('right');
+        expect(MSwitchPosition.Left).toEqual('left');
+        expect(MSwitchPosition.Right).toEqual('right');
     });
 });
 
@@ -37,11 +37,11 @@ describe('switch', () => {
     it('position prop', () => {
         expect(switchVar.$el.classList.contains(SWITCH_LEFT_CSS)).toBeTruthy();
         expect(switchVar.$el.classList.contains(SWITCH_RIGHT_CSS)).toBeFalsy();
-        switchVar.position = MSwitchPosition.RIGHT;
+        switchVar.position = MSwitchPosition.Right;
         Vue.nextTick(() => {
             expect(switchVar.$el.classList.contains(SWITCH_RIGHT_CSS)).toBeTruthy();
             expect(switchVar.$el.classList.contains(SWITCH_LEFT_CSS)).toBeFalsy();
-            switchVar.position = MSwitchPosition.LEFT;
+            switchVar.position = MSwitchPosition.Left;
             Vue.nextTick(() => {
                 expect(switchVar.$el.classList.contains(SWITCH_LEFT_CSS)).toBeTruthy();
                 expect(switchVar.$el.classList.contains(SWITCH_RIGHT_CSS)).toBeFalsy();
