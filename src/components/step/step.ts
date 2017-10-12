@@ -63,11 +63,13 @@ export class MStep extends ModulVue {
         if (this.propMode == MStepMode.Accordion) {
             this.as<TransitionAccordionMixin>().isAnimActive = true;
             this.propOpen = !this.propOpen;
+            this.$emit('open');
             event.currentTarget.blur();
         } else {
             if (!this.propOpen) {
                 this.as<TransitionAccordionMixin>().isAnimActive = true;
                 this.propOpen = true;
+                this.$emit('open');
                 event.currentTarget.blur();
             }
         }
