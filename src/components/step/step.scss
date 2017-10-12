@@ -30,17 +30,17 @@ $m-step--badge--size-s: 10px;
                     }
                 }
 
-                &__title {
-                    &,
-                    h1,
-                    h2,
-                    h3,
-                    h4,
-                    h5,
-                    h6 {
-                        font-size: $m-font-size--h3;
-                    }
-                }
+                // &__title {
+                //     &,
+                //     h1,
+                //     h2,
+                //     h3,
+                //     h4,
+                //     h5,
+                //     h6 {
+                //         font-size: $m-font-size--h4;
+                //     }
+                // }
             }
 
             &__body {
@@ -148,7 +148,7 @@ $m-step--badge--size-s: 10px;
             h6 {
                 margin: 0;
                 margin-left: $m-margin;
-                font-size: $m-font-size--h2;
+                font-size: $m-font-size--h3;
                 font-weight: $m-font-weight--bold;
                 line-height: 1.1;
             }

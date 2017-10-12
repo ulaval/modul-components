@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import ButtonPlugin, { MButton, MButtonType, MButtonMode, MButtonState } from './button';
+import ButtonPlugin, { MButton, MButtonType, MButtonMode, MButtonState, MButtonIconPosition } from './button';
 
 const MODE_PRIMARY_CSS: string = 'm--is-mode-primary';
 const MODE_SECONDARY_CSS: string = 'm--is-mode-secondary';
@@ -9,6 +9,8 @@ const STATE_DISABLED_CSS: string = 'm--is-disabled';
 const STATE_SELECTED_CSS: string = 'm--is-selected';
 const STATE_WAITING_CSS: string = 'm--is-waiting';
 const FULLSIZE_CSS: string = 'm--is-full-size';
+const ICON_POSITION_LEFT_CSS: string = 'm--is-left';
+const ICON_POSITION_RIGHT_CSS: string = 'm--is-right';
 
 let button: MButton;
 
@@ -112,6 +114,58 @@ describe('button', () => {
             Vue.nextTick(() => {
                 expect(button.$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
             });
+        });
+    });
+
+    it('icon position left', () => {
+        let vm = new Vue({
+            template: `
+            <div>
+                <m-button ref="a" :iconName="iconName" :iconPosition="internalIconPosition"></m-button>
+            </div>`,
+            data: {
+                iconName: undefined,
+                internalIconPosition: MButtonIconPosition.Left
+            }
+        }).$mount();
+
+        let svg: SVGSVGElement | null = (vm.$refs.a as Vue).$el.querySelector('svg');
+        expect(svg).toBeFalsy();
+
+        (vm as any).iconName = 'default';
+        (vm as any).internalIconPosition = MButtonIconPosition.Left;
+        Vue.nextTick(() => {
+            svg = (vm.$refs.a as Vue).$el.querySelector('svg');
+            expect(svg).toBeTruthy();
+            if (svg) {
+                expect(svg.classList.contains(ICON_POSITION_LEFT_CSS)).toBeTruthy();
+            }
+        });
+    });
+
+    it('icon position right', () => {
+        let vm = new Vue({
+            template: `
+            <div>
+                <m-button ref="a" :iconName="iconName" :iconPosition="internalIconPosition"></m-button>
+            </div>`,
+            data: {
+                iconName: undefined,
+                internalIconPosition: MButtonIconPosition.Left
+            }
+        }).$mount();
+
+        let svg: SVGSVGElement | null = (vm.$refs.a as Vue).$el.querySelector('svg');
+        expect(svg).toBeFalsy();
+
+        (vm as any).iconName = 'default';
+        (vm as any).internalIconPosition = MButtonIconPosition.Right;
+        Vue.nextTick(() => {
+            svg = (vm.$refs.a as Vue).$el.querySelector('svg');
+            expect(svg).toBeTruthy();
+            if (svg) {
+                expect(svg.classList.contains(ICON_POSITION_RIGHT_CSS)).toBeTruthy();
+            }
         });
     });
 
