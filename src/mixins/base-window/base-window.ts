@@ -57,7 +57,6 @@ export class BaseWindow extends ModulVue {
 
     public componentName: string;
     public from: string;
-    private hasHeader: boolean;
 
     private internalPropOpen: boolean = false;
     private propId: string = DIALOG_ID;
@@ -82,7 +81,6 @@ export class BaseWindow extends ModulVue {
         if (this.disabled) {
             return false;
         }
-        console.log('get open');
         return this.internalPropOpen;
     }
 
@@ -93,10 +91,8 @@ export class BaseWindow extends ModulVue {
             } else {
                 this.busy = true;
                 if (value) {
-                    console.log('set open');
                     this.internalPropOpen = true;
                     this.internalOpenDialog().then(() => {
-                        console.log('open completed');
                         this.$emit('update:open', value);
                         this.$emit('open');
                         this.busy = false;
@@ -114,12 +110,7 @@ export class BaseWindow extends ModulVue {
     }
 
     private get showHeader(): boolean {
-        if (this.from != BaseWindowFrom.Bottom && this.windowMode != BaseWindowMode.Modal && (this.hasHeaderSlot || this.hasTitle)) {
-            this.hasHeader = true;
-        } else {
-            this.hasHeader = false;
-        }
-        return this.hasHeader;
+        return this.from != BaseWindowFrom.Bottom && this.windowMode != BaseWindowMode.Modal && (this.hasHeaderSlot || this.hasTitle);
     }
 
     public get propCloseOnBackdrop(): boolean {

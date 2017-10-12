@@ -93,8 +93,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             if (o.length > 0) {
                 this.observer.observe(o[0], { subtree: true, childList: true });
             }
-
-            console.log(this.$children);
         });
     }
 
@@ -195,19 +193,17 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onFocus(event: Event): void {
+        console.log('focus');
         this.open = true;
     }
 
     private onBlur(event): void {
+        console.log('blur');
         this.open = false;
     }
 
     private onMousedown(event): void {
         this.open = !this.open;
-    }
-
-    private clearField(): void {
-        this.$emit('input');
     }
 
     private onKeydownEnter($event: KeyboardEvent): void {
