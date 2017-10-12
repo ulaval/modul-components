@@ -85,10 +85,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 this.buildItemsMap();
             }.bind(this));
 
-            let o: NodeListOf<Element> = document.body.getElementsByClassName('m-dropdown__list');// this.$el.querySelector('.m-popup');
-            if (o.length > 0) {
-                this.observer.observe(o[0], { subtree: true, childList: true });
-            }
+            this.observer.observe(this.$refs.items as HTMLUListElement, { subtree: true, childList: true });
         });
     }
 
@@ -150,6 +147,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private buildItemsMap(): void {
+        console.log(this.$refs);
         this.focusedIndex = -1;
 
         let items: MDropdownItem[] = [];
@@ -200,6 +198,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onBlur(event): void {
+        console.log('blur');
         this.open = false;
     }
 

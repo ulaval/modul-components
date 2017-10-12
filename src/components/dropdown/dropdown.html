@@ -25,7 +25,7 @@
             </div>
         </template> -->
         <ul class="m-dropdown__list"
-            ref="mDropdownElements"
+            ref="items"
             slot="body">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
