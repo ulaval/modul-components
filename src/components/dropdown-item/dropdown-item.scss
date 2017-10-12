@@ -18,7 +18,7 @@ $m-dropdown-item--color-active: $m-color--interactive-lightest !default;
     @include m-word-wrap();
 
     &:not(.m--is-disabled) {
-        &:not(.m--is-inactif) {
+        &:not(.m--is-inactive) {
             &:not(.m--is-selected) {
                 cursor: pointer;
 

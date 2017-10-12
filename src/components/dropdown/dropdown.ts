@@ -55,6 +55,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private internalValue: any | undefined = undefined;
     private internalItems: MDropdownItem[] = [];
+    private internalNavigationItems: MDropdownItem[];
     private internalSelectedText: string | undefined = '';
     private observer: any;
     private focusedIndex: number = -1;
@@ -62,12 +63,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalOpen: boolean = false;
     private dirty: boolean = false;
 
-    private textFieldLabelEl: HTMLElement;
-    private textFieldInputValueEl: HTMLElement;
-
-    private componentName: string = DROPDOWN_NAME;
-
-    public filter(text: string | undefined): boolean {
+    public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
         if (text !== undefined && this.dirty && (this.internalFilterRegExp)) {
             result = this.internalFilterRegExp.test(text);
@@ -127,7 +123,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get focused(): any {
-        return this.focusedIndex > -1 ? this.internalItems[this.focusedIndex].value : this.model;
+        return this.focusedIndex > -1 ? this.internalNavigationItems[this.focusedIndex].value : this.model;
     }
 
     private get selectedText(): string {
@@ -156,20 +152,27 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private buildItemsMap(): void {
         this.focusedIndex = -1;
 
-        // this.internalItems = (this.$refs.popper as Vue).$children[0].$children.filter(v => v instanceof MDropdownItem && !v.noDataDefaultItem && v.visible).map(v => v as MDropdownItem);
         let items: MDropdownItem[] = [];
+        let navigation: MDropdownItem[] = [];
         (this.$refs.popper as Vue).$children[0].$children.forEach(item => {
-            if (item instanceof MDropdownItem && !item.noDataDefaultItem && item.visible) {
+            if (item instanceof MDropdownItem && !item.inactive && !item.filtered) {
                 items.push(item);
+                if (!item.disabled) {
+                    navigation.push(item);
+                }
             } else if (item instanceof MDropdownGroup) {
                 (item as Vue).$children.forEach(groupItem => {
-                    if (groupItem instanceof MDropdownItem && !groupItem.noDataDefaultItem && groupItem.visible) {
+                    if (groupItem instanceof MDropdownItem && !groupItem.inactive && !groupItem.filtered) {
                         items.push(groupItem);
+                        if (!groupItem.disabled) {
+                            navigation.push(groupItem);
+                        }
                     }
                 });
             }
         });
         this.internalItems = items;
+        this.internalNavigationItems = navigation;
     }
 
     private get propTextNoData(): string {
@@ -193,12 +196,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onFocus(event: Event): void {
-        console.log('focus');
         this.open = true;
     }
 
     private onBlur(event): void {
-        console.log('blur');
         this.open = false;
     }
 
@@ -208,7 +209,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private onKeydownEnter($event: KeyboardEvent): void {
         if (this.focusedIndex > -1) {
-            let item: MDropdownItem = this.internalItems[this.focusedIndex];
+            let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
             this.model = item.value;
         }
     }
@@ -248,9 +249,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private focusSelected(): void {
-        let selected: number = -1;
         if (this.focusedIndex == -1 && this.model) {
-            this.internalItems.every((item, i) => {
+            this.internalNavigationItems.every((item, i) => {
                 if (item.value == this.model) {
                     this.focusedIndex = i;
                     return false;
@@ -263,11 +263,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private focusNextItem(): void {
         if (this.focusedIndex > -1) {
             this.focusedIndex++;
-            if (this.focusedIndex >= this.internalItems.length) {
+            if (this.focusedIndex >= this.internalNavigationItems.length) {
                 this.focusedIndex = 0;
             }
         } else {
-            this.focusedIndex = this.internalItems.length == 0 ? -1 : 0;
+            this.focusedIndex = this.internalNavigationItems.length == 0 ? -1 : 0;
         }
         if (this.focusedIndex > -1) {
             this.scrollToFocused();
@@ -278,10 +278,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (this.focusedIndex > -1) {
             this.focusedIndex--;
             if (this.focusedIndex < 0) {
-                this.focusedIndex = this.internalItems.length - 1;
+                this.focusedIndex = this.internalNavigationItems.length - 1;
             }
         } else {
-            this.focusedIndex = this.internalItems.length - 1;
+            this.focusedIndex = this.internalNavigationItems.length - 1;
         }
         if (this.focusedIndex > -1) {
             this.scrollToFocused();
@@ -292,9 +292,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$nextTick(() => {
             let container: Element = document.body.getElementsByClassName('m-popup__body')[0];
             if (container) {
-                let selectedItem: MDropdownItem = this.internalItems[this.focusedIndex];
-                let top = selectedItem.$el.offsetTop;
-                let bottom = selectedItem.$el.offsetTop + selectedItem.$el.offsetHeight;
+                let focusedItem: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
+                let top = focusedItem.$el.offsetTop;
+                let bottom = focusedItem.$el.offsetTop + focusedItem.$el.offsetHeight;
                 let viewRectTop = container.scrollTop;
                 let viewRectBottom = viewRectTop + container.clientHeight;
 

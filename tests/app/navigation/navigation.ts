@@ -65,6 +65,7 @@ export class Navigation extends Vue {
     private setItem2(): void {
         if (this.items == this.items2) {
             this.items = this.items0;
+            this.items3 = this.items0;
         } else {
             this.items = this.items2;
             this.myObj.selection = 'item C';

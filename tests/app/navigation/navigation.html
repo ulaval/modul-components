@@ -15,9 +15,9 @@
             <!-- <m-dropdown-item :label="1" :value="1"></m-dropdown-item> -->
         <!-- </m-dropdown> -->
         <m-dropdown v-model="myObj.selection" width="500px" :editable="true">
-            <m-dropdown-item v-for="i in items" :value="i" :label="getLabel(i)"></m-dropdown-item>
+            <m-dropdown-item v-for="(i, k, x) in items" :value="i" :label="getLabel(i)" :disabled="k==1||k==4" ></m-dropdown-item>
             <m-dropdown-group label="mon groupe">
-                <m-dropdown-item v-for="j in items3" :value="j" :label="getLabel(j)"></m-dropdown-item>
+                <m-dropdown-item v-for="(j, l, y) in items3" :value="j" :label="getLabel(j)" :disabled="l==0"></m-dropdown-item>
             </m-dropdown-group>
         </m-dropdown>
 

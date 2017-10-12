@@ -11,7 +11,7 @@ export interface MDropdownInterface extends Vue {
     inactive: boolean;
 
     focused: any;
-    filter(text: string | undefined): boolean;
+    matchFilter(text: string | undefined): boolean;
     groupHasItems(group: BaseDropdownGroup): boolean;
 }
 
@@ -23,19 +23,14 @@ export abstract class BaseDropdownGroup extends ModulVue {
 
 @WithRender
 @Component
-export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*/ {
+export class MDropdownItem extends ModulVue {
     @Prop()
     public label: string;
     @Prop()
     public value: any;
     @Prop({ default: false })
     public disabled: boolean;
-    @Prop({ default: false })
-    public noDataDefaultItem: boolean;
 
-    public componentName: string = DROPDOWN_ITEM_NAME;
-
-    public inactif: boolean = false; // Without label and value
     public root: MDropdownInterface; // Dropdown component
     public group: Vue | undefined; // Dropdown-group parent if there is one
 
@@ -51,8 +46,12 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
         this.group = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
     }
 
-    public get visible(): boolean {
-        return this.noDataDefaultItem || this.root.filter(this.propLabel);
+    public get filtered(): boolean {
+        return !this.root.matchFilter(this.propLabel);
+    }
+
+    public get inactive(): boolean {
+        return this.value === undefined;
     }
 
     // Value and label rules
@@ -63,16 +62,14 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
     public get propLabel(): string | undefined {
         if (this.label) {
             return this.label;
-        } else {
-            if (this.value) {
-                if (typeof this.value == 'string') {
-                    return this.value;
-                } else {
-                    return JSON.stringify(this.value);
-                }
+        } else if (this.value) {
+            if (typeof this.value == 'string') {
+                return this.value;
             } else {
-                return undefined;
+                return JSON.stringify(this.value);
             }
+        } else {
+            return undefined;
         }
     }
 
@@ -85,7 +82,7 @@ export class MDropdownItem extends ModulVue /*implements MDropDownItemInterface*
     }
 
     private onMousedown(): void {
-        if (!this.noDataDefaultItem && !this.root.inactive && !this.disabled && !this.inactif) {
+        if (!this.inactive && !this.root.inactive && !this.disabled) {
             this.root.model = this.value;
         }
     }
