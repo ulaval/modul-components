@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { KeyCode } from '../../utils/keycode/keycode';
@@ -30,6 +30,7 @@ const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
     ]
 })
 export class MDropdown extends BaseDropdown implements MDropdownInterface {
+    @Model('change')
     @Prop()
     public value: any;
     @Prop()
@@ -116,7 +117,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     public set model(value: any) {
         this.internalValue = value;
-        this.$emit('input', value);
+        this.$emit('change', value);
         this.dirty = false;
         this.internalOpen = false;
     }
