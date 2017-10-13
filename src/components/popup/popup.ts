@@ -59,6 +59,8 @@ export class MPopup extends ModulVue {
     public afterLeave: any;
     @Prop()
     public leaveCancelled: any;
+    @Prop()
+    public desktopOnly: boolean;
 
     public componentName: string = POPUP_NAME;
     private internalOpen: boolean = false;
@@ -87,7 +89,6 @@ export class MPopup extends ModulVue {
     }
 
     private get isSmall(): boolean {
-        console.log('issmall', this.as<MediaQueriesMixin>().isMqMaxS);
         return this.as<MediaQueriesMixin>().isMqMaxS;
     }
 

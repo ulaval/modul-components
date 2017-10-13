@@ -42,7 +42,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop({ default: false })
     public waiting: boolean;
     @Prop({ default: false })
-    public editable: boolean;
+    public filterable: boolean;
     @Prop({ default: DROPDOWN_MAX_WIDTH })
     public width: string;
     @Prop()
@@ -53,7 +53,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalFilter: string = '';
     private internalFilterRegExp: RegExp = / /;
 
-    private internalValue: any | undefined = undefined;
+    private internalValue: any | undefined = '';
     private internalItems: MDropdownItem[] = [];
     private internalNavigationItems: MDropdownItem[];
     private internalSelectedText: string | undefined = '';
@@ -85,7 +85,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 this.buildItemsMap();
             }.bind(this));
 
-            this.observer.observe(this.$refs.items as HTMLUListElement, { subtree: true, childList: true });
+            if (this.$refs.items) {
+                // todo: mobile
+                this.observer.observe(this.$refs.items as HTMLUListElement, { subtree: true, childList: true });
+            }
         });
     }
 
@@ -147,7 +150,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private buildItemsMap(): void {
-        console.log(this.$refs);
         this.focusedIndex = -1;
 
         let items: MDropdownItem[] = [];
@@ -198,7 +200,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onBlur(event): void {
-        console.log('blur');
         this.open = false;
     }
 
@@ -308,30 +309,32 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
-            if (this.as<MediaQueriesMixin>().isMqMinS) {
-                let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
-                el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
-                el.style.transition = DROPDOWN_STYLE_TRANSITION;
-                el.style.overflowY = 'hidden';
-                el.style.maxHeight = '0';
-                el.style.width = this.$el.clientWidth + 'px';
-                setTimeout(() => {
-                    el.style.maxHeight = height + 'px';
-                    done();
-                }, 0);
-            } else {
+            // TODO: mobile
+            // if (this.as<MediaQueriesMixin>().isMqMinS) {
+            let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
+            el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+            el.style.transition = DROPDOWN_STYLE_TRANSITION;
+            el.style.overflowY = 'hidden';
+            el.style.maxHeight = '0';
+            el.style.width = this.$el.clientWidth + 'px';
+            setTimeout(() => {
+                el.style.maxHeight = height + 'px';
                 done();
-            }
+            }, 0);
+            // } else {
+            //     done();
+            // }
         });
     }
 
     private transitionAfterEnter(el: HTMLElement): void {
-        if (this.as<MediaQueriesMixin>().isMqMinS) {
-            setTimeout(() => {
-                el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
-                el.style.overflowY = 'auto';
-            }, 300);
-        }
+        // TODO: mobile
+        // if (this.as<MediaQueriesMixin>().isMqMinS) {
+        setTimeout(() => {
+            el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
+            el.style.overflowY = 'auto';
+        }, 300);
+        // }
     }
 
     private transitionLeave(el: HTMLElement, done: any): void {

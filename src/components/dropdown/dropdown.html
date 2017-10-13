@@ -11,7 +11,8 @@
              :open-on-click="false"
              width="100%"
              ref="popper"
-             @open="onOpen">
+             @open="onOpen"
+             :desktop-only="true">
         <!-- <template slot="header" v-if="hasLabel && isMqMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">
@@ -40,7 +41,7 @@
                       :label="label"
                       v-model="selectedText"
                       :state="propState"
-                      :editable="editable"
+                      :editable="filterable"
                       :force-focus="open"
                       :placeholder="defaultText"
                       :disabled="disabled"

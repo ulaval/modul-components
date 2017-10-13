@@ -51,7 +51,7 @@
     "@types/node": "^7.0.16",
     "@types/popper.js": "^1.10.0",
     "awesome-typescript-loader": "^3.2.3",
-    "chromedriver": "^2.27.2",
+    "chromedriver": "^2.33.1",
     "copyfiles": "^1.2.0",
     "custom-tslint-formatters": "^2.1.0",
     "es6-promise": "^4.1.0",
