@@ -76,7 +76,6 @@ export class MPopper extends ModulVue {
         let createPortalTargetEl: HTMLElement = document.createElement('div') as HTMLElement;
         createPortalTargetEl.setAttribute('id', this.propId);
         createPortalTargetEl.setAttribute('class', this.classNamePortalTarget);
-        console.log('create popper portal', this.propId);
         document.body.appendChild(createPortalTargetEl);
     }
 
@@ -85,7 +84,6 @@ export class MPopper extends ModulVue {
         this.$modul.event.$on('scroll', this.update);
         this.$modul.event.$on('resize', this.update);
         this.$modul.event.$on('updateAfterResize', this.update);
-        console.log('mounted popper portal', this.propId);
     }
 
     protected beforeDestroy(): void {

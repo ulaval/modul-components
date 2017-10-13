@@ -18,7 +18,6 @@ import TextFieldPlugin from '../text-field/text-field';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import PopupPlugin from '../popup/popup';
 
-const PAGE_STEP: number = 3;
 const DROPDOWN_MAX_HEIGHT: number = 220;
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';

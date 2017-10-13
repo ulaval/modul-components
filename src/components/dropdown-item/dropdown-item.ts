@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
@@ -6,7 +5,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
 import { DROPDOWN_ITEM_NAME } from '../component-names';
 
-export interface MDropdownInterface extends Vue {
+export interface MDropdownInterface {
     model: any;
     inactive: boolean;
 
@@ -32,7 +31,7 @@ export class MDropdownItem extends ModulVue {
     public disabled: boolean;
 
     public root: MDropdownInterface; // Dropdown component
-    public group: Vue | undefined; // Dropdown-group parent if there is one
+    public group: BaseDropdown | undefined; // Dropdown-group parent if there is one
 
     protected created(): void {
         let rootNode: BaseDropdown | undefined = this.getParent<BaseDropdown>(p => p instanceof BaseDropdown);
