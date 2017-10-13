@@ -92,8 +92,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     public toggleDropdown(open: boolean): void {
         this.$nextTick(() => {
-            if (this.internalOpen != open) {
-                this.internalOpen = open;
+            if (this.open != open) {
+                this.open = open;
             }
         });
     }
@@ -148,7 +148,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.disabled || this.waiting;
     }
 
-    private filterDropdown(text: string): void {
+    public filterDropdown(text: string): void {
         if (!this.internalOpen) {
             this.toggleDropdown(true);
         }
