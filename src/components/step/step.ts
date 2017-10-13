@@ -6,6 +6,8 @@ import WithRender from './step.html?style=./step.scss';
 import { STEP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 import ElementQueries from 'css-element-queries/src/ElementQueries';
+import IconPlugin from '../icon/icon';
+import LinkPlugin from '../link/link';
 
 export enum MStepState {
     Locked = 'locked',
@@ -63,11 +65,13 @@ export class MStep extends ModulVue {
         if (this.propMode == MStepMode.Accordion) {
             this.as<TransitionAccordionMixin>().isAnimActive = true;
             this.propOpen = !this.propOpen;
+            this.$emit('open');
             event.currentTarget.blur();
         } else {
             if (!this.propOpen) {
                 this.as<TransitionAccordionMixin>().isAnimActive = true;
                 this.propOpen = true;
+                this.$emit('open');
                 event.currentTarget.blur();
             }
         }
@@ -138,6 +142,8 @@ export class MStep extends ModulVue {
 
 const StepPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(IconPlugin);
+        v.use(LinkPlugin);
         v.component(STEP_NAME, MStep);
     }
 };
