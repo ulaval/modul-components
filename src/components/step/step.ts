@@ -7,6 +7,7 @@ import { STEP_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 import ElementQueries from 'css-element-queries/src/ElementQueries';
 import IconPlugin from '../icon/icon';
+import LinkPlugin from '../link/link';
 
 export enum MStepState {
     Locked = 'locked',
@@ -142,6 +143,7 @@ export class MStep extends ModulVue {
 const StepPlugin: PluginObject<any> = {
     install(v, options) {
         v.use(IconPlugin);
+        v.use(LinkPlugin);
         v.component(STEP_NAME, MStep);
     }
 };

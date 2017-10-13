@@ -5,6 +5,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './table.html?style=./table.scss';
 import { TABLE_NAME } from '../component-names';
 import MenuPlugin from '../options-menu/options-menu';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 export enum MTableHeaderPosition {
     Left = 'left',
@@ -43,6 +44,7 @@ export class MTable extends Vue {
 const TablePlugin: PluginObject<any> = {
     install(v, options) {
         v.use(MenuPlugin);
+        v.use(MediaQueriesPlugin);
         v.component(TABLE_NAME, MTable);
     }
 };
