@@ -27,7 +27,7 @@
         <m-button @click="setItem()">Caption {{myCaption}}</m-button>{{myCaption}}
         <m-button @click="setItem2()">Caption {{myObj.selection}}</m-button>{{myObj.selection}}
 
-        <m-text-field v-model="t"></m-text-field>
+        <m-text-field :disabled="false"></m-text-field>
         <h2>Components list</h2>
         <nav class="m-u--margin-top">
             <m-bullet-list>
