@@ -13,7 +13,7 @@ describe('dropdown', () => {
     beforeEach(() => {
         Vue.use(DropdownPlugin);
         dropdown = new MDropdown().$mount();
-        spyOn(dropdown, 'toggleDropdown');
+        // spyOn(dropdown, 'toggleDropdown');
     });
 
     it('css class for dropdown are not present', () => {

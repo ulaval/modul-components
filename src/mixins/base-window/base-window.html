@@ -9,11 +9,11 @@
                     'm--is-small': propSize == 'light',
                     'm--is-full-size': propSize == 'full-size',
                     'm--is-clickable-backdrop': propCloseOnBackdrop,
-                    'm--is-disabled':disabled }, className, 'm--is-from-' + propFrom]"
+                    'm--is-disabled':disabled }, className, 'm--is-from-' + from]"
                     @click.self="backdropClick"
                     ref="dialogWrap">
             <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }">
-                <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="windowMode == 'sidebar' && propFrom == 'bottom'">
+                <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="windowMode == 'sidebar' && from == 'bottom'">
                     <m-i18n k="m-base-window:close"></m-i18n>
                 </button>
                 <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }"

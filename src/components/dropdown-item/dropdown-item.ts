@@ -1,108 +1,56 @@
-import Vue from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
 import { DROPDOWN_ITEM_NAME } from '../component-names';
-import { normalizeString } from '../../utils/str/str';
-import { MDropdownInterface } from '../dropdown/dropdown';
-import { MDropdownGroupInterface } from '../dropdown-group/dropdown-group';
 
-export interface MDropDownItemInterface extends Vue {
-    visible: boolean;
-    disabled: boolean;
-    focus: boolean;
+export interface MDropdownInterface {
+    model: any;
+    inactive: boolean;
+
+    focused: any;
+    matchFilter(text: string | undefined): boolean;
+    groupHasItems(group: BaseDropdownGroup): boolean;
 }
 
 export abstract class BaseDropdown extends ModulVue {
 }
 
-export abstract class BaseDropdownGroup extends Vue {
+export abstract class BaseDropdownGroup extends ModulVue {
 }
 
 @WithRender
 @Component
-export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
+export class MDropdownItem extends ModulVue {
     @Prop()
     public label: string;
     @Prop()
     public value: any;
     @Prop({ default: false })
     public disabled: boolean;
-    @Prop({ default: false })
-    public noDataDefaultItem: boolean;
 
-    public componentName: string = DROPDOWN_ITEM_NAME;
+    public root: MDropdownInterface; // Dropdown component
+    public group: BaseDropdown | undefined; // Dropdown-group parent if there is one
 
-    public inactif: boolean = false; // Without label and value
-    public focus: boolean = false;
-    public filter: string = ''; // Set by parent
-    public root: Vue; // Dropdown component
-    public group: Vue | undefined; // Dropdown-group parent if there is one
+    protected created(): void {
+        let rootNode: BaseDropdown | undefined = this.getParent<BaseDropdown>(p => p instanceof BaseDropdown);
 
-    public created(): void {
-        this.getMDropdownRoot(this);
-        this.getMDropdownGroup(this);
-
-        if (!this.value && !this.label) {
-            this.inactif = true;
+        if (rootNode) {
+            this.root = (rootNode as any) as MDropdownInterface;
+        } else {
+            console.error('m-dropdown-item need to be inside m-dropdown');
         }
 
-        (this.root as MDropdownInterface).$on('valueChanged',
-            (value: any) => { this.updateTextfield(value); });
-
-        (this.root as MDropdownInterface).$on('filter',
-            (value: string) => { this.filter = value; });
-
-        (this.root as MDropdownInterface).$on('keyPressEnter',
-            (value: any) => {
-                if (value === this) {
-                    this.onClick();
-                }
-            });
-
-        (this.root as MDropdownInterface).$on('focus',
-            (value: Vue) => {
-                if (this == value) {
-                    this.focus = true;
-                    this.$el.scrollIntoView({block: 'nearest', inline: 'nearest'});
-                } else {
-                    this.focus = false;
-                }
-            });
-
-        // If element is active add to array of items and increment counters
-        // Done a first time in the create because watch is not call on load
-        if (!this.inactif) {
-            (this.root as MDropdownInterface).items.push(this);
-            this.incrementCounters();
-        }
-
-        this.updateTextfield((this.root as MDropdownInterface).model);
+        this.group = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
     }
 
-    beforeDestroy() {
-        let index: number = (this.root as MDropdownInterface).items.indexOf(this);
-
-        if (index > -1) {
-            if ((this.root as MDropdownInterface).items[index] &&
-                ((this.root as MDropdownInterface).items[index] as MDropdownItem).visible) {
-                this.decrementCounters();
-            }
-            (this.root as MDropdownInterface).items.splice(index, 1);
-        }
+    public get filtered(): boolean {
+        return !this.root.matchFilter(this.propLabel);
     }
 
-    @Watch('visible')
-    public visibleChanged(visible: boolean): void {
-        if (!this.inactif) {
-            if (visible) {
-                this.incrementCounters();
-            } else {
-                this.decrementCounters();
-            }
-        }
+    public get inactive(): boolean {
+        return this.value === undefined;
     }
 
     // Value and label rules
@@ -113,95 +61,29 @@ export class MDropdownItem extends ModulVue implements MDropDownItemInterface {
     public get propLabel(): string | undefined {
         if (this.label) {
             return this.label;
-        } else {
-            if (this.value) {
-                if (typeof this.value == 'string') {
-                    return this.propValue;
-                } else {
-                    return JSON.stringify(this.propValue);
-                }
+        } else if (this.value) {
+            if (typeof this.value == 'string') {
+                return this.value;
             } else {
-                return undefined;
+                return JSON.stringify(this.value);
             }
-        }
-    }
-
-    public get propValue(): any {
-        if (this.value) {
-            return this.value;
         } else {
-            if (this.label) {
-                return this.label;
-            } else {
-                return undefined;
-            }
+            return undefined;
         }
     }
 
-    public get selected(): boolean {
-        return !this.inactif && (this.root as MDropdownInterface).model == this.propValue;
+    private get selected(): boolean {
+        return (this.root as MDropdownInterface).model == this.value;
     }
 
-    public get visible(): boolean {
-        let isVisible: boolean = true;
+    private get focused(): boolean {
+        return (this.root as MDropdownInterface).focused == this.value;
+    }
 
-        if ((this.propLabel && !normalizeString(this.propLabel).match(this.filter)) ||
-            (this.inactif && !this.hasItemsVisible())) {
-            isVisible = false;
+    private onMousedown(): void {
+        if (!this.inactive && !this.root.inactive && !this.disabled) {
+            this.root.model = this.value;
         }
-
-        if (this.noDataDefaultItem && !this.hasItemsVisible()) {
-            isVisible = true;
-        }
-
-        return isVisible;
-    }
-
-    public hasItemsVisible(): boolean {
-        return (this.root && (this.root as MDropdownInterface).nbItemsVisible != 0);
-    }
-
-    public onClick(): void {
-        if (!(this.root as MDropdownInterface).inactive && !this.disabled && !this.inactif) {
-            (this.root as MDropdownInterface).setModel(this.propValue, this.propLabel);
-            (this.root as MDropdownInterface).emitChange(this.propValue, true);
-            (this.root as MDropdownInterface).toggleDropdown(false);
-        }
-    }
-
-    private updateTextfield(value): void {
-        if (value === this.propValue) {
-            (this.root as MDropdownInterface).setModel(this.propValue, this.propLabel);
-        }
-    }
-
-    private incrementCounters(): void {
-        (this.root as MDropdownInterface).nbItemsVisible++;
-        if (this.group) {
-            (this.group as MDropdownGroupInterface).nbItemsVisible++;
-        }
-    }
-
-    private decrementCounters(): void {
-        (this.root as MDropdownInterface).nbItemsVisible--;
-        if (this.group) {
-            (this.group as MDropdownGroupInterface).nbItemsVisible--;
-        }
-    }
-
-    private getMDropdownRoot(node: Vue): void {
-        let rootNode: BaseDropdown | undefined = this.getParent<BaseDropdown>(p => p instanceof BaseDropdown);
-
-        if (rootNode) {
-            this.root = rootNode;
-        } else {
-            console.error('m-dropdown-item need to be inside m-dropdown');
-        }
-    }
-
-    private getMDropdownGroup(node: Vue): void {
-        let groupNode: BaseDropdownGroup | undefined = this.getParent<BaseDropdownGroup>(p => p instanceof BaseDropdownGroup);
-        this.group = groupNode;
     }
 }
 
