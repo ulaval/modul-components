@@ -2,7 +2,8 @@
 $m-switch-size: 23px;
 
 .m-switch {
-    display: inline;
+    display: inline-flex;
+    flex-direction: column;
     user-select: none;
     line-height: 1;
 
