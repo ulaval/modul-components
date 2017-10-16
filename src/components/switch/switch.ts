@@ -53,10 +53,6 @@ export class MSwitch extends ModulVue {
     public get label(): boolean {
         return !!this.$slots.default;
     }
-
-    private get isMessageVisible(): boolean {
-        return !this.isFocus;
-    }
 }
 
 const SwitchPlugin: PluginObject<any> = {
