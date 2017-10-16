@@ -1,4 +1,4 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ maxWidth: width }">
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ maxWidth: computedWidth }">
     <m-popup :placement="bottom-start"
              :disabled="inactive"
              :open="open"
