@@ -8,7 +8,9 @@ $m-radio--width: 16px;
     }
 
     &.m--is-inline {
-        &,
+        display: inline-flex;
+        flex-direction: column;
+
         .m-radio-group__wrap {
             display: inline-block;
         }
@@ -25,8 +27,7 @@ $m-radio--width: 16px;
     &:not(.m--is-inline) {
         &,
         .m-radio-group__wrap {
-            display: inline-flex;
-            flex-direction: column;
+            display: block;
         }
 
         .m-radio {
