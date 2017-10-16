@@ -16,4 +16,8 @@
             <m-icon aria-hidden="true" class="m-radio__icon m--is-right" :name="iconName" v-if="isButton() && !hasIconLeft() && hasIcon()"></m-icon>
         </span>
     </label>
+    <m-validation-message
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage" v-if="!isButton()"></m-validation-message>
 </li>
