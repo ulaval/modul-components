@@ -73,6 +73,10 @@ export class MPopup extends ModulVue {
         return this.internalOpen;
     }
 
+    public get popupBody(): Element {
+        return (this.$children[0] as any).popupBody;
+    }
+
     public set propOpen(open) {
         if (open) {
             if (!this.internalOpen) {

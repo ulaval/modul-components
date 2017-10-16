@@ -269,9 +269,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         } else {
             this.focusedIndex = this.internalNavigationItems.length == 0 ? -1 : 0;
         }
-        if (this.focusedIndex > -1) {
-            this.scrollToFocused();
-        }
+        this.scrollToFocused();
     }
 
     private focusPreviousItem(): void {
@@ -283,28 +281,28 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         } else {
             this.focusedIndex = this.internalNavigationItems.length - 1;
         }
-        if (this.focusedIndex > -1) {
-            this.scrollToFocused();
-        }
+        this.scrollToFocused();
     }
 
     private scrollToFocused(): void {
-        this.$nextTick(() => {
-            let container: Element = document.body.getElementsByClassName('m-popup__body')[0];
-            if (container) {
-                let focusedItem: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
-                let top = focusedItem.$el.offsetTop;
-                let bottom = focusedItem.$el.offsetTop + focusedItem.$el.offsetHeight;
-                let viewRectTop = container.scrollTop;
-                let viewRectBottom = viewRectTop + container.clientHeight;
+        if (this.focusedIndex > -1) {
+            this.$nextTick(() => {
+                let container: Element = (this.$refs.popper as any).popupBody;
+                if (container) {
+                    let focusedItem: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
+                    let top = focusedItem.$el.offsetTop;
+                    let bottom = focusedItem.$el.offsetTop + focusedItem.$el.offsetHeight;
+                    let viewRectTop = container.scrollTop;
+                    let viewRectBottom = viewRectTop + container.clientHeight;
 
-                if (top < viewRectTop) {
-                    container.scrollTop = top;
-                } else if (bottom > viewRectBottom) {
-                    container.scrollTop = bottom - container.clientHeight;
+                    if (top < viewRectTop) {
+                        container.scrollTop = top;
+                    } else if (bottom > viewRectBottom) {
+                        container.scrollTop = bottom - container.clientHeight;
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     private transitionEnter(el: HTMLElement, done: any): void {
@@ -333,6 +331,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         setTimeout(() => {
             el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
             el.style.overflowY = 'auto';
+            this.scrollToFocused();
         }, 300);
         // }
     }

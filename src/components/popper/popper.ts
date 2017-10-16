@@ -120,6 +120,10 @@ export class MPopper extends ModulVue {
         }
     }
 
+    public get popupBody(): any {
+        return (this.$refs.popper as Element).querySelector('.m-popup__body');
+    }
+
     public get visible(): boolean {
         return this.internalVisible && !this.disabled;
     }
