@@ -45,7 +45,6 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     }
 
     private set model(value: string) {
-        this.as<InputState>().errorMessage = 'Erreur';
         this.internalValue = value;
         this.$emit('change', value);
     }
