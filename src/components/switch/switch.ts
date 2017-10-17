@@ -1,10 +1,12 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './switch.html?style=./switch.scss';
 import { SWITCH_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 
 export enum MSwitchPosition {
     Left = 'left',
@@ -12,8 +14,10 @@ export enum MSwitchPosition {
 }
 
 @WithRender
-@Component
-export class MSwitch extends Vue {
+@Component({
+    mixins: [InputState]
+})
+export class MSwitch extends ModulVue {
 
     @Prop()
     public value: boolean;
@@ -53,6 +57,7 @@ export class MSwitch extends Vue {
 
 const SwitchPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(ValidationMessagePlugin);
         v.component(SWITCH_NAME, MSwitch);
     }
 };

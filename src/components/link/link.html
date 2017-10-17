@@ -1,14 +1,16 @@
-
 <transition>
     <router-link class="m-link"
                  :class="{ 'm--is-unvisited': unvisited,
-                           'm--no-underline': !underline,
-                           'm--is-button': isButton,
-                           'm--is-vanilla': vanilla,
-                           'm--has-right-icon' : isIconPositionRight }"
+                          'm--no-underline': !underline,
+                          'm--is-button': isButton,
+                          'm--is-vanilla': vanilla,
+                          'm--has-right-icon' : isIconPositionRight }"
                  :to="{ path: propUrl }"
                  v-if="isRouterLink">
-        <m-icon :name="iconName" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon><span  class="m-link__text"><slot>{{ componentName }}</slot></span>
+        <m-icon class="m-link__icon" :name="propIconName" :width="iconSize" :height="iconSize"v-if="hasIcon" aria-hidden="true"></m-icon>
+        <span class="m-link__text">
+            <slot>{{ componentName }}</slot>
+        </span>
         <span class="m-link__hidden" v-if="hasHiddenText">{{ hiddenText }}</span>
     </router-link>
     <a class="m-link"
@@ -19,9 +21,11 @@
                  'm--has-right-icon' : isIconPositionRight }"
        :href="propUrl"
        v-if="isLink || isExternalLink || isButton"
-       ref="link"
-       @click="onClick">
-        <m-icon :name="iconName" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon><span  class="m-link__text"><slot>{{ componentName }}</slot></span>
+       ref="link" @click="onClick">
+        <m-icon class="m-link__icon" :name="propIconName" :width="iconSize" :height="iconSize" v-if="hasIcon" aria-hidden="true"></m-icon>
+        <span class="m-link__text">
+            <slot>{{ componentName }}</slot>
+        </span>
         <span class="m-link__hidden" v-if="hasHiddenText">{{ hiddenText }}</span>
     </a>
 </transition>

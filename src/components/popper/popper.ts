@@ -120,6 +120,10 @@ export class MPopper extends ModulVue {
         }
     }
 
+    public get popupBody(): any {
+        return (this.$refs.popper as Element).querySelector('.m-popup__body');
+    }
+
     public get visible(): boolean {
         return this.internalVisible && !this.disabled;
     }
@@ -189,7 +193,7 @@ export class MPopper extends ModulVue {
 
     private onClickOutside(event: MouseEvent): void {
         if (this.getPortalTargetEl() && this.propCloseOnClickOutside) {
-            if (!(this.getPortalTargetEl() as HTMLElement).contains(event.target as HTMLElement)) {
+            if (!(this.getPortalTargetEl() as HTMLElement).contains(event.target as HTMLElement) && !(this.$el as HTMLElement).contains(event.target as HTMLElement)) {
                 this.propOpen = false;
             }
         }

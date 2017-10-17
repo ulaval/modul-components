@@ -2,7 +2,8 @@
 $m-checkbox--width: 16px;
 
 .m-checkbox {
-    display: inline;
+    display: inline-flex;
+    flex-direction: column;
     user-select: none;
     line-height: 1;
 

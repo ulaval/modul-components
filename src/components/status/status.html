@@ -1,10 +1,7 @@
-<li class="m-status" :class="{ 'm--is-completed' : status == statusEnum.Completed,
-                   'm--is-pending' : status == statusEnum.Pending,
-                   'm--is-error' : status == statusEnum.Error}">
-    <m-icon :name="getIconName(status)"></m-icon>
-    <span class="m-status__label">
-        <slot>
-
-        </slot>
-    </span>
+<li class="m-status"
+    :class="{ 'm--is-completed' : status == statusEnum.Completed,
+              'm--is-pending' : status == statusEnum.Pending,
+              'm--is-error' : status == statusEnum.Error}">
+    <m-icon v-if="status" :name="getIconName(status)"></m-icon>
+    <span class="m-status__label"><slot></slot></span>
 </li>

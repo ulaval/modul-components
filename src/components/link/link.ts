@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './link.html?style=./link.scss';
 import { LINK_NAME } from '../component-names';
+import VueRouter, { RouteConfig } from 'vue-router';
 
 export enum MLinkMode {
     RouterLink = 'router-link',
@@ -16,6 +17,8 @@ export enum MLinkIconPosition {
     Left = 'left',
     Right = 'right'
 }
+
+const ICON_NAME_DEFAULT: string = 'right-arrow';
 
 @WithRender
 @Component
@@ -34,10 +37,12 @@ export class MLink extends ModulVue {
     public hiddenText: string;
     @Prop({ default: false })
     public icon: boolean;
-    @Prop({ default: 'right-arrow' })
+    @Prop()
     public iconName: string;
     @Prop({ default: MLinkIconPosition.Left })
     public iconPosition: string;
+    @Prop({ default: '10px' })
+    public iconSize: string;
 
     public componentName: string = LINK_NAME;
 
@@ -77,7 +82,11 @@ export class MLink extends ModulVue {
     }
 
     private get hasIcon(): boolean {
-        return this.iconName != undefined && this.iconName != '' && this.icon == true;
+        return this.iconName != undefined && this.iconName != '' ? true : this.icon;
+    }
+
+    private get propIconName(): string {
+        return this.iconName != undefined && this.iconName != '' ? this.iconName : ICON_NAME_DEFAULT;
     }
 
     private get propUrl(): string {
@@ -91,6 +100,7 @@ export class MLink extends ModulVue {
 
 const LinkPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(VueRouter);
         v.component(LINK_NAME, MLink);
     }
 };

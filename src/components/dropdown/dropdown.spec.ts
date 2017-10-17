@@ -13,7 +13,6 @@ describe('dropdown', () => {
     beforeEach(() => {
         Vue.use(DropdownPlugin);
         dropdown = new MDropdown().$mount();
-        spyOn(dropdown, 'toggleDropdown');
     });
 
     it('css class for dropdown are not present', () => {
@@ -21,24 +20,26 @@ describe('dropdown', () => {
         expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeFalsy();
     });
 
-    it('enabled prop editable', () => {
+    it('enabled prop filterable', () => {
         let vm = new Vue({
             data: {
-                editable: false
+                filterable: false
             },
             template: `
-            <m-dropdown class="dd" :editable="editable">
+            <m-dropdown class="dd" :filterable="filterable">
                 <m-dropdown-item value="item A" label="*item A*"></m-dropdown-item>
                 <m-dropdown-item value="item B" label="*item B*"></m-dropdown-item>
             </m-dropdown>`
         }).$mount();
 
-        expect(vm.$el.querySelector('input.m-text-field__input')).toBeNull();
+        let input = vm.$el.querySelector('.m-text-field__input');
 
-        (vm as any).editable = true;
+        expect((input as HTMLElement).attributes.getNamedItem('readonly')).toBeTruthy();
+
+        (vm as any).filterable = true;
 
         Vue.nextTick(() => {
-            expect(vm.$el.querySelector('input.m-text-field__input')).not.toBeNull();
+            expect((input as HTMLElement).attributes.getNamedItem('readonly')).toBeFalsy();
         });
     });
 
@@ -101,47 +102,35 @@ describe('dropdown', () => {
 
     });
 
-    // it('toggle dropdown/ Emit Open and Close', () => {
-    //     let clickSpyOpen = jasmine.createSpy('clickSpyOpen');
-    //     let clickSpyClose = jasmine.createSpy('clickSpyClose');
+    it('toggle dropdown / Emit Open and Close', () => {
+        let clickSpyOpen = jasmine.createSpy('clickSpyOpen');
+        let clickSpyClose = jasmine.createSpy('clickSpyClose');
 
-    //     let vm = new Vue({
-    //         template: `
-    //             <m-dropdown @open="onOpen" @close="onClose" :editable="true">
-    //                 <m-dropdown-item value="item A" label="*item A*"></m-dropdown-item>
-    //                 <m-dropdown-item value="item B" label="*item B*"></m-dropdown-item>
-    //             </m-dropdown>
-    //         `,
-    //         methods: {
-    //             onOpen: clickSpyOpen,
-    //             onClose: clickSpyClose
-    //         }
-    //     }).$mount();
+        let vm = new Vue({
+            template: `
+                <m-dropdown ref="dd" @open="onOpen" @close="onClose">
+                    <m-dropdown-item value="item A" label="*item A*"></m-dropdown-item>
+                    <m-dropdown-item value="item B" label="*item B*"></m-dropdown-item>
+                </m-dropdown>`,
+            methods: {
+                onOpen: clickSpyOpen,
+                onClose: clickSpyClose
+            }
+        }).$mount();
 
-    //     let input = vm.$el.querySelector('.m-text-field__input-container');
+        let dd = vm.$refs.dd;
 
-    //     if (input) {
-    //         // dropdown.toggleDropdown(true);
-    //         (input as HTMLElement).click();
-    //     }
+        (dd as MDropdown).open = true;
 
-    //     Vue.nextTick(() => {
-    //         expect(clickSpyOpen.calls.any()).toEqual(true);
-    //         // expect(dropdown.toggleDropdown.calls.count()).toEqual(1);
-    //         // expect(clickSpyOpen).toHaveBeenCalled();
+        Vue.nextTick(() => {
+            expect(clickSpyOpen).toHaveBeenCalled();
 
-    //         if (input) {
-    //             (input as HTMLElement).click();
-    //         }
-
-    //         Vue.nextTick(() => {
-    //             expect(clickSpyClose.calls.any()).toEqual(true);
-    //             // expect(dropdown.toggleDropdown.calls.count()).toEqual(2);
-    //             // expect(clickSpyClose).toHaveBeenCalled();
-    //         });
-    //     });
-
-    // });
+            (dd as MDropdown).open = false;
+            Vue.nextTick(() => {
+                expect(clickSpyClose).toHaveBeenCalled();
+            });
+        });
+    });
 
     // En attente d'un changement pour Portal
     // it('0 items', () => {

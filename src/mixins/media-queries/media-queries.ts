@@ -101,7 +101,7 @@ export class MediaQueries extends ModulVue implements MediaQueriesMixin {
         this.mqSOut = () => this.isMqS = false;
     }
 
-    protected mounted(): void {
+    protected beforeMount(): void {
         this.$mq.register(MediaQueriesBpMin.XL, this.mqMinXLIn, this.mqMinXLOut);
         this.$mq.register(MediaQueriesBpMin.L, this.mqMinLIn, this.mqMinLOut);
         this.$mq.register(MediaQueriesBpMin.M, this.mqMinMIn, this.mqMinMOut);
@@ -119,7 +119,7 @@ export class MediaQueries extends ModulVue implements MediaQueriesMixin {
         this.$mq.register(MediaQueriesBp.L, this.mqLIn, this.mqLOut);
     }
 
-    protected destroyed(): void {
+    protected beforeDestroy(): void {
         this.$mq.unregister(MediaQueriesBpMin.XL, this.mqMinXLIn, this.mqMinXLOut);
         this.$mq.unregister(MediaQueriesBpMin.L, this.mqMinLIn, this.mqMinLOut);
         this.$mq.unregister(MediaQueriesBpMin.M, this.mqMinMIn, this.mqMinMOut);

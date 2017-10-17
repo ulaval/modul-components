@@ -5,9 +5,13 @@ import WithRender from './radio-group.html?style=./radio-group.scss';
 import { RADIO_GROUP_NAME } from '../component-names';
 import RadioPlugin, { MRadioPosition, BaseRadioGroup, RadioGroup } from '../radio/radio';
 import uuid from '../../utils/uuid/uuid';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 
 @WithRender
-@Component
+@Component({
+    mixins: [InputState]
+})
 export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
     @Model('change')
@@ -49,6 +53,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 const RadioGroupPlugin: PluginObject<any> = {
     install(v, options) {
         v.use(RadioPlugin);
+        v.use(ValidationMessagePlugin);
         v.component(RADIO_GROUP_NAME, MRadioGroup);
     }
 };

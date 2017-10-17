@@ -1,10 +1,12 @@
-import Vue from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 
 export enum MCheckboxPosition {
     Left = 'left',
@@ -12,8 +14,10 @@ export enum MCheckboxPosition {
 }
 
 @WithRender
-@Component
-export class MCheckbox extends Vue {
+@Component({
+    mixins: [InputState]
+})
+export class MCheckbox extends ModulVue {
 
     @Prop({ default: MCheckboxPosition.Left })
     public position: string;
@@ -55,6 +59,7 @@ export class MCheckbox extends Vue {
 
 const CheckboxPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(ValidationMessagePlugin);
         v.component(CHECKBOX_NAME, MCheckbox);
     }
 };

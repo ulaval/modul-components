@@ -13,7 +13,7 @@ $m-status-list-line-width: 2px;
 
         &::after {
             content: "";
-            display: block;
+            display: none;
             background-color: $m-color--grey-light;
             width: $m-status-list-line-width;
             position: absolute;
@@ -21,6 +21,12 @@ $m-status-list-line-width: 2px;
             bottom: 3px;
             left: ($m-status-list-icon-size / 2) - ($m-status-list-line-width / 2);
             z-index: 1;
+        }
+    }
+
+    &[class*=m--is-] + &[class*=m--is-] {
+        &::after {
+            display: block;
         }
     }
 
@@ -32,6 +38,14 @@ $m-status-list-line-width: 2px;
         margin-right: 8px;
         z-index: 2;
         position: relative;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &[class*=m--is-] {
+        .m-icon {
+            opacity: 1;
+        }
     }
 
     &.m--is-completed {
