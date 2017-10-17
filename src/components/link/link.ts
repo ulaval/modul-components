@@ -39,6 +39,8 @@ export class MLink extends ModulVue {
     public iconName: string;
     @Prop({ default: MLinkIconPosition.Left })
     public iconPosition: string;
+    @Prop()
+    public iconSize: string;
 
     public componentName: string = LINK_NAME;
 
@@ -78,7 +80,7 @@ export class MLink extends ModulVue {
     }
 
     private get hasIcon(): boolean {
-        return this.iconName != undefined && this.iconName != '' && this.icon == true;
+        return (this.iconName != undefined && this.iconName != '') || this.icon == true;
     }
 
     private get propUrl(): string {
