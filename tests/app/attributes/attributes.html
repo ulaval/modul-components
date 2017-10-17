@@ -1,11 +1,9 @@
 <m-flex-template padding-top="52px">
     <m-template>
-        <template slot="header">
-            <m-link :unvisited="true">
-                <span slot="icon-left"><</span>Menu
-            </m-link>
+        <div slot="header">
+            <m-link :unvisited="true" icon-name="left-arrow">Menu</m-link>
             <h1>Attributes list</h1>
-        </template>
+        </div>
         <h2>Attributes by component</h2>
         <m-bullet-list class="m-u--margin-top">
             <li v-for="meta in allMeta">
