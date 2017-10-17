@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './link.html?style=./link.scss';
 import { LINK_NAME } from '../component-names';
+import VueRouter, { RouteConfig } from 'vue-router';
 
 export enum MLinkMode {
     RouterLink = 'router-link',
@@ -38,6 +39,8 @@ export class MLink extends ModulVue {
     public iconName: string;
     @Prop({ default: MLinkIconPosition.Left })
     public iconPosition: string;
+    @Prop()
+    public iconSize: string;
 
     public componentName: string = LINK_NAME;
 
@@ -91,6 +94,7 @@ export class MLink extends ModulVue {
 
 const LinkPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(VueRouter);
         v.component(LINK_NAME, MLink);
     }
 };
