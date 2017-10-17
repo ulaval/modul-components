@@ -74,10 +74,17 @@ $m-dropdown--margin: $m-padding--xs !default;
     }
 
     &__arrow {
-        transition: transform 0.3s ease;
+        min-width: 22px;
+        text-align: right;
+
+        .m-button {
+            transition: transform 0.3s ease;
+        }
 
         &.m--is-open {
-            transform: rotate(-180deg) translateY(-4px);
+            .m-button {
+                transform: rotate(-180deg);
+            }
         }
     }
 

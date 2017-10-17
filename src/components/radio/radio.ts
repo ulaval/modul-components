@@ -6,6 +6,8 @@ import WithRender from './radio.html?style=./radio.scss';
 import { RADIO_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import uuid from '../../utils/uuid/uuid';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 import RadioStylePlugin from '../radio-style/radio-style';
 
 export enum MRadioPosition {
@@ -34,7 +36,9 @@ export abstract class BaseButtonGroup extends BaseRadioGroup {
 }
 
 @WithRender
-@Component
+@Component({
+    mixins: [InputState]
+})
 export class MRadio extends ModulVue {
 
     @Prop()
@@ -143,6 +147,7 @@ const RadioPlugin: PluginObject<any> = {
     install(v, options) {
         v.use(RadioStylePlugin);
         v.use(IconPlugin);
+        v.use(ValidationMessagePlugin);
         v.component(RADIO_NAME, MRadio);
     }
 };

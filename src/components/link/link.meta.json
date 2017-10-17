@@ -30,6 +30,22 @@
         },
         "hiddenText" : {
             "type": "string"
+        },
+        "icon" : {
+            "type": "boolean",
+            "default": false
+        },
+        "iconName" : {
+            "type": "string",
+            "default": "right-arrow"
+        },
+        "iconPosition" : {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
         }
     },
     "overview": "link.overview"

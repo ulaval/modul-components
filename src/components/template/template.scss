@@ -41,15 +41,6 @@ $m-template--column-color: $m-color--grey-light;
             margin: 0;
         }
 
-        .m-link {
-            width: 100%;
-            margin-bottom: $m-margin--s;
-
-            + :nth-child(2) {
-                flex: 2 1 auto;
-            }
-        }
-
         h1,
         h2,
         h3,

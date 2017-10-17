@@ -1,6 +1,6 @@
 {
   "name": "@ulaval/modul-components",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Component library",
   "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
   "private": false,
@@ -51,7 +51,7 @@
     "@types/node": "^7.0.16",
     "@types/popper.js": "^1.10.0",
     "awesome-typescript-loader": "^3.2.3",
-    "chromedriver": "^2.27.2",
+    "chromedriver": "^2.33.1",
     "copyfiles": "^1.2.0",
     "custom-tslint-formatters": "^2.1.0",
     "es6-promise": "^4.1.0",

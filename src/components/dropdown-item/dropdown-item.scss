@@ -18,7 +18,7 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
 
     @media (min-width: $m-bp--min--s) {
         &:not(.m--is-disabled) {
-            &:not(.m--is-inactif) {
+            &:not(.m--is-inactive) {
                 &:not(.m--is-selected) {
                     cursor: pointer;
 

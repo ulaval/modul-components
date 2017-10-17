@@ -1,11 +1,11 @@
 <div class="m-dropdown"
      :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }"
      :style="{ width: width, 'max-width': maxWidth }"
-     ref="mDropdown"
-     @click="onClick">
+     @click="onClick"
+     ref="mDropdown">
     <m-popup :placement="bottom-start"
              :disabled="inactive"
-             :open="propOpen"
+             :open="open"
              :enter="transitionEnter"
              :leave="transitionLeave"
              :padding-header="false"
@@ -13,40 +13,54 @@
              :open-on-click="false"
              :focus-management="false"
              width="100%"
-             @open="toggleDropdown(true)"
-             @close="toggleDropdown(false)">
+             ref="popper"
+             @open="onOpen"
+             @close="open = false"
+             :desktop-only="true">
         <div slot="header" v-show="isMqMaxS" :aria-hidden="!isMqMaxS">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
-            <div class="m-dropdown__header__research" v-if="editable">
+            <div class="m-dropdown__header__research" v-if="filterable">
                 <input class="m-dropdown__header__research-input"
                        type="text"
                        placeholder="Recherche"
                        ref="researchInput"
-                       v-model="selectedValue"
-                       @change="onChange"
-                       @keyup="onKeyup">
-                <m-button class="m-dropdown__header__research-button" mode="icon" icon-name="search" @click="focusOnResearchInput">
-                    <m-i18n k="m-dropdown:search"></m-i18n>
+                       v-model="selectedText">
+                <m-button class="m-dropdown__header__research-button" mode="icon" icon-name="search">
+                    <m-i18n k="m-dropdown:research"></m-i18n>
                 </m-button>
             </div>
         </div>
-        <ul class="m-dropdown__list" ref="mDropdownElements" slot="body" :style="{ 'max-height': propMaxHeightList + 'px' }">
+        <ul class="m-dropdown__list" ref="listItems" slot="body" :style="{ 'max-height': propMaxHeightList + 'px' }">
             <slot></slot>
-            <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>
         </ul>
-        <m-input-style ref="mDropdownValue" :label="label" :state="propState" :focus="propOpen" :empty="isEmpty"
-            :disabled="disabled" :waiting="waiting">
+        <m-input-style ref="mDropdownValue"
+                      :label="label"
+                      :state="propState"
+                      :focus="open"
+                      :empty="isEmpty"
+                      :disabled="disabled"
+                      :waiting="waiting">
             <input type="text"
                    ref="input"
                    :disabled="inactive"
-                   :readonly="!editable"
+                   :readonly="!filterable"
                    :placeholder="propPlaceholder"
+                   @keydown.enter.prevent="onKeydownEnter($event)"
+                   @keydown.return.prevent="onKeydownEnter($event)"
+                   @keydown.esc.prevent="onKeydownEscape($event)"
+                   @keydown.up.prevent="onKeydownUp($event)"
+                   @keydown.down.prevent="onKeydownDown($event)"
+                   @keydown="onKeydown"
                    @focus="onFocus"
-                   @change="onChange"
-                   @keyup="onKeyup"
-                   v-model="selectedValue">
-            <div class="m-dropdown__arrow" :class="{ 'm--is-open': propOpen }" slot="right-content">
-                <m-button mode="icon" icon-name="dropdown-arrow" @click="arrowOnClick($event)">Open dropdown</m-button>
+                   @blur="onBlur"
+                   v-model="selectedText">
+            <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" @click="arrowOnClick($event)">
+                <m-button mode="icon" icon-name="dropdown-arrow">
+                    <m-i18n k="m-dropdown:openDropdown" v-if="!open"></m-i18n>
+                    <m-i18n k="m-dropdown:closeDropdown" v-if="open"></m-i18n>
+                </m-button>
             </div>
         </m-input-style>
         <template slot="footer" v-if="hasFooterSlot">

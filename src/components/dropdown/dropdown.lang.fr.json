@@ -4,7 +4,8 @@
         "no-result": "Aucun résultats",
         "none": "(Aucun)",
         "research" : "Recherche",
-        "search" : "Rechercher"
+        "openDropdown": "Ouvrir la liste déroulante",
+        "closeDropdown": "Fermer la liste déroulante"
     }
 }
 

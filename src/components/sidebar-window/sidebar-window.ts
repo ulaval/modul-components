@@ -10,28 +10,31 @@ import { BaseWindow, BaseWindowMode, BaseWindowFrom } from '../../mixins/base-wi
     mixins: [BaseWindow]
 })
 export class MSidebar extends ModulVue {
-    @Prop({ default: BaseWindowFrom.Bottom })
+    @Prop({
+        default: BaseWindowFrom.Bottom,
+        validator: value =>
+            value == BaseWindowFrom.Top ||
+            value == BaseWindowFrom.Right ||
+            value == BaseWindowFrom.Left ||
+            value == BaseWindowFrom.Bottom ||
+            value == BaseWindowFrom.BottomRight ||
+            value == BaseWindowFrom.BottomLeft
+    })
     public from: BaseWindowFrom;
     @Prop()
     public width: string;
-
-    public componentName: String = SIDEBAR_NAME;
 
     protected get windowMode(): BaseWindowMode {
         return BaseWindowMode.Sidebar;
     }
 
-    private get propFrom(): string {
-        return this.from == BaseWindowFrom.Top || this.from == BaseWindowFrom.Right || this.from == BaseWindowFrom.Left || this.from == BaseWindowFrom.BottomRight || this.from == BaseWindowFrom.BottomLeft ? this.from : BaseWindowFrom.Bottom;
-    }
-
     private get marginLeft(): string {
-        return this.propFrom == BaseWindowFrom.Right || this.propFrom == BaseWindowFrom.BottomRight ? 'calc(100% - ' + this.propWidth + ')' : '';
+        return this.from == BaseWindowFrom.Right || this.from == BaseWindowFrom.BottomRight ? 'calc(100% - ' + this.propWidth + ')' : '';
     }
 
     private get propWidth(): string {
         if (this.width == undefined || this.width == '') {
-            if (this.propFrom == BaseWindowFrom.Top || this.propFrom == BaseWindowFrom.Bottom) {
+            if (this.from == BaseWindowFrom.Top || this.from == BaseWindowFrom.Bottom) {
                 return '100%';
             } else {
                 return '50%';

@@ -4,6 +4,8 @@ $m-radio--color-disabled: $m-color--grey-darker !default;
 $m-radio--color-disabled-light: $m-color--grey !default;
 
 .m-radio {
+    display: flex;
+    flex-direction: column;
     user-select: none;
     line-height: 1;
     list-style: none;
