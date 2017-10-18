@@ -1,14 +1,37 @@
 <div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ maxWidth: width }">
-    <m-popup :placement="bottom-start"
+    <m-text-field ref="mDropdownTextField"
+        mode="dropdown"
+        :label="label"
+        v-model="selectedText"
+        :state="propState"
+        :editable="filterable"
+        :force-focus="open"
+        :placeholder="defaultText"
+        :disabled="disabled"
+        :waiting="waiting"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"
+        @keydown.enter.prevent="onKeydownEnter($event)"
+        @keydown.return.prevent="onKeydownEnter($event)"
+        @keydown.esc.prevent="onKeydownEscape($event)"
+        @keydown.up.prevent="onKeydownUp($event)"
+        @keydown.down.prevent="onKeydownDown($event)"
+        @keydown="onKeydown($event)"
+        @focus="onFocus($event)"
+        @blur="onBlur($event)"
+        @mousedown="onMousedown($event)">
+    </m-text-field>
+    <m-popup placement="bottom-start"
              :disabled="inactive"
-             :open="open"
+             :open.sync="open"
              :enter="transitionEnter"
              :after-enter="transitionAfterEnter"
              :leave="transitionLeave"
              :padding-header="false"
              :padding-body="false"
              :focus-management="false"
-             :open-on-click="false"
+             open-trigger="manual"
              width="100%"
              ref="popper"
              @open="onOpen"
@@ -26,8 +49,7 @@
             </div>
         </template> -->
         <ul class="m-dropdown__list"
-            ref="items"
-            slot="body">
+            ref="items">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
             <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>
@@ -36,29 +58,6 @@
         <template slot="footer" v-if="hasFooterSlot">
             <slot name="footer"></slot>
         </template>
-        <m-text-field ref="mDropdownTextField"
-                      mode="dropdown"
-                      :label="label"
-                      v-model="selectedText"
-                      :state="propState"
-                      :editable="filterable"
-                      :force-focus="open"
-                      :placeholder="defaultText"
-                      :disabled="disabled"
-                      :waiting="waiting"
-                      :error-message="errorMessage"
-                      :valid-message="validMessage"
-                      :helper-message="helperMessage"
-                      @keydown.enter.prevent="onKeydownEnter($event)"
-                      @keydown.return.prevent="onKeydownEnter($event)"
-                      @keydown.esc.prevent="onKeydownEscape($event)"
-                      @keydown.up.prevent="onKeydownUp($event)"
-                      @keydown.down.prevent="onKeydownDown($event)"
-                      @keydown="onKeydown($event)"
-                      @focus="onFocus($event)"
-                      @blur="onBlur($event)"
-                      @mousedown="onMousedown($event)">
-        </m-text-field>
     </m-popup>
     <!-- <m-validation-message
         :error-message="propErrorMessage"
