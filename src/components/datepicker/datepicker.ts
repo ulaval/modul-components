@@ -230,13 +230,13 @@ export class MDatepicker extends ModulVue {
             }
         } else if (moment(event.target.value, this.format).isValid()) {
             let newDate = moment(event.target.value, this.format);
-            this.internalValue = '';
             if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
                 this.selectedMomentDate = newDate;
                 this.formattedDate = this.selectedMomentDate.format(this.format);
                 this.$emit('input', newDate);
                 this.error = '';
             } else {
+                this.formattedDate = newDate.format(this.format);
                 this.error = this.$i18n.translate('m-datepicker:out-of-range-error');
             }
         } else {
