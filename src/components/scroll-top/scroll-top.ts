@@ -8,6 +8,10 @@ import { SCROLL_TOP_NAME } from '../component-names';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import ScrollTo from '../../directives/scroll-to/scroll-to-lib';
 import { ScrollToDuration } from '../../directives/scroll-to/scroll-to-lib';
+import IconPlugin from '../icon/icon';
+import ButtonPlugin from '../button/button';
+import I18nPlugin from '../i18n/i18n';
+import PortalPlugin from 'portal-vue';
 
 export enum MScrollTopPosition {
     Fixe = 'fixe',
@@ -103,6 +107,10 @@ export class MScrollTop extends ModulVue {
 
 const ScrollTopPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(IconPlugin);
+        v.use(ButtonPlugin);
+        v.use(I18nPlugin);
+        v.use(PortalPlugin);
         v.component(SCROLL_TOP_NAME, MScrollTop);
     }
 };

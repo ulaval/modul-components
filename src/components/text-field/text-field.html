@@ -8,7 +8,7 @@
           'm--has-icon' : hasIcon,
           'm--is-mode-dropdown': isDropdown,
           'm--has-label': hasLabel },
-          'm--is-type-' + type ]"
+          'm--is-type-'+ type ]"
         ref="textField">
     <label class="m-text-field__label" ref="label" v-if="hasLabel"><m-icon name="default" class="m-text-field__icon m--is-disabled" v-if="isDisabled"></m-icon>{{ label }}</label>
     <div class="m-text-field__input-container">
@@ -17,19 +17,22 @@
             :disabled="isDisabled"
             @focus="onFocus"
             @blur="onBlur"
-            @keydown="onKeyup"
+            @keydown="onKeydown"
+            @click="onClick"
+            @mousedown="onMousedown"
             :placeholder="propPlaceholder"
             v-model="model"
-            v-if="propEditable">
+            v-if="true"
+            :readonly="!propEditable">
         <div class="m-text-field__input"
             :tabindex="tabindex"
             ref="input"
             @focus="onFocus"
             @blur="onBlur"
             @mousedown.prevent="onFocus"
-            @keydown="onKeyup"
+            @keydown="onKeydown"
             @click="onClick"
-            v-if="!propEditable">
+            v-if="false">
             <div class="m-text-field__input__value" :title="model" ref="inputValue" v-if="!hasValueSlot && !isPlaceholderVisible">{{ model }}</div>
             <!-- <div class="m-text-field__input__value" ref="inputValue" v-if="hasValueSlot && !hasDefaultText"><slot></slot></div> -->
             <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="!hasValue && !hasValueSlot && !isPlaceholderVisible">i</div>

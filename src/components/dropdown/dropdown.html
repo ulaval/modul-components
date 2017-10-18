@@ -1,4 +1,4 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ maxWidth: width }">
+<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ maxWidth: computedWidth }">
     <m-popup :placement="bottom-start"
              :disabled="inactive"
              :open="open"
@@ -8,11 +8,12 @@
              :padding-header="false"
              :padding-body="false"
              :focus-management="false"
-             :open-on-click="!open"
+             :open-on-click="false"
              width="100%"
-             @open="toggleDropdown(true)"
-             @close="toggleDropdown(false)">
-        <template slot="header" v-if="hasLabel && isMqMaxS">
+             ref="popper"
+             @open="onOpen"
+             :desktop-only="true">
+        <!-- <template slot="header" v-if="hasLabel && isMqMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">
                 <input type="text"
@@ -23,12 +24,13 @@
                     <m-i18n k="m-dropdown:search"></m-i18n>
                 </m-button>
             </div>
-        </template>
+        </template> -->
         <ul class="m-dropdown__list"
-            ref="mDropdownElements"
+            ref="items"
             slot="body">
             <slot></slot>
-            <m-dropdown-item v-show="noItems" :no-data-default-item="true">{{ noItemsLabel }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>
         </ul>
 
         <template slot="footer" v-if="hasFooterSlot">
@@ -39,7 +41,7 @@
                       :label="label"
                       v-model="selectedText"
                       :state="propState"
-                      :editable="propEditable"
+                      :editable="filterable"
                       :force-focus="open"
                       :placeholder="defaultText"
                       :disabled="disabled"
@@ -47,14 +49,19 @@
                       :error-message="errorMessage"
                       :valid-message="validMessage"
                       :helper-message="helperMessage"
-                      @change="filterDropdown($event)"
-                      @keyup="onKeyup"
+                      @keydown.enter.prevent="onKeydownEnter($event)"
+                      @keydown.return.prevent="onKeydownEnter($event)"
+                      @keydown.esc.prevent="onKeydownEscape($event)"
+                      @keydown.up.prevent="onKeydownUp($event)"
+                      @keydown.down.prevent="onKeydownDown($event)"
+                      @keydown="onKeydown($event)"
                       @focus="onFocus($event)"
-                      @blur="onBlur($event)">
+                      @blur="onBlur($event)"
+                      @mousedown="onMousedown($event)">
         </m-text-field>
     </m-popup>
-    <m-validation-message
+    <!-- <m-validation-message
         :error-message="propErrorMessage"
         :valid-message="propValidMessage"
-        :helper-message="helperMessage"></m-validation-message>
+        :helper-message="helperMessage"></m-validation-message> -->
 </div>

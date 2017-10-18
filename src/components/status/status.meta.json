@@ -1,0 +1,11 @@
+{
+    "tag": "m-status",
+    "name": "m-status-meta:name",
+    "attributes": {
+        "listData": {
+            "type": "object",
+            "description": "m-status-meta:states-desc"
+        }
+    },
+    "overview": "status.overview"
+}

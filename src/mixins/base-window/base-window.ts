@@ -57,7 +57,6 @@ export class BaseWindow extends ModulVue {
 
     public componentName: string;
     public from: string;
-    private hasHeader: boolean;
 
     private internalPropOpen: boolean = false;
     private propId: string = DIALOG_ID;
@@ -111,12 +110,7 @@ export class BaseWindow extends ModulVue {
     }
 
     private get showHeader(): boolean {
-        if (this.from != BaseWindowFrom.Bottom && this.windowMode != BaseWindowMode.Modal && (this.hasHeaderSlot || this.hasTitle)) {
-            this.hasHeader = true;
-        } else {
-            this.hasHeader = false;
-        }
-        return this.hasHeader;
+        return this.from != BaseWindowFrom.Bottom && this.windowMode != BaseWindowMode.Modal && (this.hasHeaderSlot || this.hasTitle);
     }
 
     public get propCloseOnBackdrop(): boolean {

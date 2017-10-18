@@ -82,7 +82,7 @@ $m-message-size: 22px;
                 flex: 1;
 
                 &.m--has-close-button {
-                    padding-right: $m-padding--l;
+                    padding-right: $m-touch-size;
                     position: relative;
                 }
 
@@ -90,6 +90,7 @@ $m-message-size: 22px;
                     position: absolute;
                     top: 0;
                     right: 0;
+                    z-index: 0;
 
                     .m-button__icon .m-icon {
                         font-size: $m-font-size--xs;
@@ -159,6 +160,9 @@ $m-message-size: 22px;
 
     &__body {
         &__content {
+            position: relative;
+            z-index: 1;
+
             > :first-child {
                 &,
                 > :first-child {

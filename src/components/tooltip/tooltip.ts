@@ -8,6 +8,10 @@ import { MPopup } from '../popup/popup';
 import { MPopper } from '../popper/popper';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { MPopperPlacement } from '../popper/popper';
+import ButtonPlugin from '../button/button';
+import LinkPlugin from '../link/link';
+import I18nPlugin from '../i18n/i18n';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 export enum MTooltipMode {
     Icon = 'icon',
@@ -77,6 +81,10 @@ export class MTooltip extends ModulVue {
 
 const TooltipPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(ButtonPlugin);
+        v.use(LinkPlugin);
+        v.use(I18nPlugin);
+        v.use(MediaQueriesPlugin);
         v.component(TOOLTIP_NAME, MTooltip);
     }
 };

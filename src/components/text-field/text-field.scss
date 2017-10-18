@@ -11,7 +11,7 @@ $m-text-field--margin: $m-margin--s !default;
     display: inline-flex;
     flex-direction: column;
     outline: none;
-    min-width: 130px;
+    min-width: 130px; // !!IMPORTANT!! if this value change please, update TEXTFIELD_MIN_WIDTH constant in dropdown.ts
 
     &__input {
         &::after {

@@ -151,6 +151,8 @@
         }
 
         &__body {
+            height: 100%;
+
             > :first-child {
                 flex: 1 1 auto;
             }

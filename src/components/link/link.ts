@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './link.html?style=./link.scss';
 import { LINK_NAME } from '../component-names';
+import VueRouter, { RouteConfig } from 'vue-router';
 
 export enum MLinkMode {
     RouterLink = 'router-link',
@@ -11,6 +12,13 @@ export enum MLinkMode {
     Link = 'link',
     Button = 'button'
 }
+
+export enum MLinkIconPosition {
+    Left = 'left',
+    Right = 'right'
+}
+
+const ICON_NAME_DEFAULT: string = 'right-arrow';
 
 @WithRender
 @Component
@@ -27,6 +35,16 @@ export class MLink extends ModulVue {
     public vanilla: boolean;
     @Prop()
     public hiddenText: string;
+    @Prop({ default: false })
+    public icon: boolean;
+    @Prop()
+    public iconName: string;
+    @Prop({ default: MLinkIconPosition.Left })
+    public iconPosition: string;
+    @Prop({ default: '12px' })
+    public iconSize: string;
+    @Prop({ default: false })
+    public disabled: boolean;
 
     public componentName: string = LINK_NAME;
 
@@ -39,10 +57,12 @@ export class MLink extends ModulVue {
 
     private onClick(event): void {
         this.$el.blur();
-        if (this.isButton) {
+        if (this.isButton || this.disabled) {
             event.preventDefault();
         }
-        this.$emit('click', event);
+        if (!this.disabled) {
+            this.$emit('click', event);
+        }
     }
 
     private get isRouterLink(): boolean {
@@ -61,17 +81,22 @@ export class MLink extends ModulVue {
         return this.mode == MLinkMode.Button;
     }
 
+    private get isIconPositionRight(): boolean {
+        return this.iconPosition == MLinkIconPosition.Right;
+    }
+
+    private get hasIcon(): boolean {
+        return this.iconName != undefined && this.iconName != '' ? true : this.icon;
+    }
+
+    private get propIconName(): string {
+        return this.iconName != undefined && this.iconName != '' ? this.iconName : ICON_NAME_DEFAULT;
+    }
+
     private get propUrl(): string {
         return this.mode == MLinkMode.Button ? '#' : this.url;
     }
 
-    private get hasIconeLeft(): boolean {
-        return !!this.$slots['icon-left'];
-    }
-
-    private get hasIconeRight(): boolean {
-        return !!this.$slots['icon-right'];
-    }
     private get hasHiddenText(): boolean {
         return this.hiddenText == undefined || this.hiddenText == '' ? false : true;
     }
@@ -79,6 +104,7 @@ export class MLink extends ModulVue {
 
 const LinkPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(VueRouter);
         v.component(LINK_NAME, MLink);
     }
 };
