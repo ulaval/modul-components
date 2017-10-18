@@ -9,8 +9,8 @@ let table: MTable;
 
 describe('MTableHeaderPosition', () => {
     it('validates enum', () => {
-        expect(MTableHeaderPosition.Left).toEqual('left');
-        expect(MTableHeaderPosition.Right).toEqual('right');
+        expect(MTableHeaderPosition.Left).toEqual('header-left');
+        expect(MTableHeaderPosition.Right).toEqual('header-right');
     });
 });
 
