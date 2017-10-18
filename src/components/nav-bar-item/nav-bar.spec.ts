@@ -12,7 +12,7 @@ describe('navbar-item', () => {
         navbaritem = new MNavBarItem().$mount();
     });
 
-    it('skin prop', () => {
+    it('selected prop', () => {
         expect(navbaritem.$el.classList.contains(SELECTED_CSS)).toBeFalsy();
 
         navbaritem.selected = true;
