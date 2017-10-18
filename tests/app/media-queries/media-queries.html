@@ -1,12 +1,10 @@
 
 <m-flex-template padding-top="52px">
     <m-template>
-        <template slot="header">
-            <m-link :unvisited="true">
-                <span slot="icon-left"><</span>Menu
-            </m-link>
+        <div slot="header">
+            <m-link :unvisited="true" icon-name="left-arrow">Menu</m-link>
             <h1>Media Queries</h1>
-        </template>
+        </div>
         <div>
             <h2 v-if="isMqMinXS || isMqMinS || isMqMinM || isMqMinL || isMqMinXL" >min-width</h2>
             <p id="min480" v-if="isMqMinXS">480px >= ... <strong>isMqMinXS</strong></p>

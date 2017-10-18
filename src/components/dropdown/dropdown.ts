@@ -104,7 +104,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.internalOpen = value;
         this.dirty = false;
         this.$nextTick(() => {
-            if (open) {
+            if (value) {
                 this.$emit('open');
             } else {
                 this.$emit('close');
