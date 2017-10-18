@@ -13,7 +13,6 @@ describe('dropdown', () => {
     beforeEach(() => {
         Vue.use(DropdownPlugin);
         dropdown = new MDropdown().$mount();
-        // spyOn(dropdown, 'toggleDropdown');
     });
 
     it('css class for dropdown are not present', () => {
@@ -21,24 +20,26 @@ describe('dropdown', () => {
         expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeFalsy();
     });
 
-    it('enabled prop editable', () => {
+    it('enabled prop filterable', () => {
         let vm = new Vue({
             data: {
-                editable: false
+                filterable: false
             },
             template: `
-            <m-dropdown class="dd" :editable="editable">
+            <m-dropdown class="dd" :filterable="filterable">
                 <m-dropdown-item value="item A" label="*item A*"></m-dropdown-item>
                 <m-dropdown-item value="item B" label="*item B*"></m-dropdown-item>
             </m-dropdown>`
         }).$mount();
 
-        expect(vm.$el.querySelector('input.m-text-field__input')).toBeNull();
+        let input = vm.$el.querySelector('.m-text-field__input');
 
-        (vm as any).editable = true;
+        expect((input as HTMLElement).attributes.getNamedItem('readonly')).toBeTruthy();
+
+        (vm as any).filterable = true;
 
         Vue.nextTick(() => {
-            expect(vm.$el.querySelector('input.m-text-field__input')).not.toBeNull();
+            expect((input as HTMLElement).attributes.getNamedItem('readonly')).toBeFalsy();
         });
     });
 

@@ -20,6 +20,7 @@ import PopupPlugin from '../popup/popup';
 
 const DROPDOWN_MAX_HEIGHT: number = 220;
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
+const TEXTFIELD_MIN_WIDTH: string = '130px'; // from text-field.scss
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 @WithRender
@@ -352,6 +353,16 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 done();
             }
         });
+    }
+
+    private get computedWidth(): string {
+        if (this.width == 'min') {
+            return TEXTFIELD_MIN_WIDTH;
+        } else if (this.width == 'max') {
+            return DROPDOWN_MAX_WIDTH;
+        } else {
+            return this.width;
+        }
     }
 }
 
