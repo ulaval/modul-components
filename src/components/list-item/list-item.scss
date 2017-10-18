@@ -19,12 +19,12 @@
     &__content {
         flex: 1;
 
-        > :first-child {
-            &,
-            > :first-child {
-                margin-top: 0;
-            }
-        }
+        // > :first-child {
+        //     &,
+        //     > :first-child {
+        //         margin-top: 0;
+        //     }
+        // }
     }
 
     &__button {
