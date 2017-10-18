@@ -7,22 +7,21 @@ import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
 import { curLang } from '../../utils/i18n/i18n';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { KeyCode } from '../../utils/keycode/keycode';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
 const VIEW_YEAR = 'year';
+const NB_YEARS_PER_ROW = 5;
+const ITEM_DIMENSION = 40;
 
 export interface DatepickerDate {
-    day: number;
+    date: number;
     month: number;
     year: number;
     isDisabled: boolean;
-}
-
-export interface DatepickerMonth {
-    name: string;
-    index: number;
-    isDisabled: boolean;
+    isToday: boolean;
+    isSelected: boolean;
 }
 
 @WithRender
@@ -31,117 +30,120 @@ export interface DatepickerMonth {
 })
 export class MDatepicker extends ModulVue {
 
-    @Prop({ default: () => { return moment(); } })
-    public value: moment.Moment;
-    @Prop({ default: 'L' })
+    @Prop()
+    public value: moment.Moment | Date;
+
+    @Prop({ default: 'DD/MM/YYYY' })
     public format: string;
+
     @Prop({ default: () => { return moment().subtract(10, 'year'); } })
-    public min: moment.Moment;
+    public min: moment.Moment | Date;
+
     @Prop({ default: () => { return moment().add(10, 'year'); } })
-    public max: moment.Moment;
-    @Prop({ default: () => ({ placement: 'bottom-start' }) })
-    public options: any;
-    @Prop( {default: false})
+    public max: moment.Moment | Date;
+
+    @Prop({ default: false })
     public disabled: boolean;
+
+    @Prop({ default: false })
+    public required: boolean;
 
     public componentName: string = DATEPICKER_NAME;
 
+    private isOpen: boolean = false;
     private view: string = 'day';
-    private selectedDate: DatepickerDate = { day: 0, month: 0, year: 0, isDisabled: false };
-    private formattedDate: string = '';
-    private weekdays: string[] = [];
-    private months: DatepickerMonth[] = [];
-    private years: number[] = [];
-    private leadingDays: DatepickerDate[] = [];
-    private days: DatepickerDate[] = [];
-    private TrailingDays: DatepickerDate[] = [];
-    private yearRows: any[] = [];
-    private monthRows: any[] = [];
-    private dayRows: any[] = [];
+    private internalValue = '';
     private error: string = '';
     private placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
     private openCalendarDesc: string = this.$i18n.translate('m-datepicker:open-calendar-desc');
     private closeCalendarDesc: string = this.$i18n.translate('m-datepicker:close-calendar-desc');
-    private isOpen: boolean = false;
+    private previousDays: DatepickerDate[] = [];
+    private days: DatepickerDate[] = [];
+    private nextDays: DatepickerDate[] = [];
+    private selectedYear: number = 0;
+    private selectedMonth: number = 0;
+    private selectedDay: number = 0;
 
-    private created(): void {
-        moment.locale(curLang);
-        this.formattedDate = this.value.format(this.format);
-        this.weekdays = moment.weekdaysMin();
-        this.selectedDate.day = this.value.date();
-        this.selectedDate.month = this.value.month();
-        this.selectedDate.year = this.value.year();
+    protected created(): void {
+        moment.locale([curLang, 'en-ca']);
+        this.selectedMomentDate = this.valueIsValid() ? moment(this.value) : moment();
+    }
 
-        for (let year = this.min.year(); year <= this.max.year(); year++) {
-            this.years.push(year);
+    private valueIsValid(): boolean {
+        return this.value && moment(this.value).isValid() && moment(this.value).isBetween(this.min, this.max, 'day', '[]');
+    }
+
+    private get years(): number[] {
+        let years: number[] = [];
+        for (let year = moment(this.max).year(); year >= moment(this.min).year(); year--) {
+            years.push(year);
         }
+        return this.prepareDataForTableLayout(years, NB_YEARS_PER_ROW);
+    }
 
+    private get months(): any[] {
+        let months: any[] = [];
         for (let index = 0; index <= 11; index++) {
-            this.months.push({ index, name: moment.monthsShort()[index], isDisabled: false });
+            months.push({
+                index,
+                name: moment.monthsShort()[index],
+                isDisabled: !moment({ year: this.selectedMomentDate.year(), month: index }).isBetween(this.min, this.max, 'month', '[]')
+            });
         }
-
-        this.setMonths();
-        this.setDays();
-
-        this.yearRows = this.prepareDataForTableLayout(this.years, 5);
-        this.monthRows = this.prepareDataForTableLayout(this.months, 3);
+        return this.prepareDataForTableLayout(months, 3);
     }
 
-    private setMonths() {
-        for (let index = 0; index <= 11; index++) {
-            this.months[index].isDisabled = !moment({ year: this.selectedDate.year, month: index }).isBetween(this.min, this.max, 'month', '[]');
-        }
+    private get weekdays(): string[] {
+        return moment.weekdaysMin();
     }
 
-    private setDays(): void {
-        this.leadingDays = this.getSelectedMonthPreviousDays();
-        this.days = this.getSelectedMonthDays();
-        this.TrailingDays = this.getSelectedMonthNextDays();
-        this.dayRows = this.prepareDataForTableLayout([...this.leadingDays, ...this.days, ...this.TrailingDays], 7);
-    }
-
-    private getSelectedMonthPreviousDays(): DatepickerDate[] {
-        let monthStartsAt = moment(this.selectedDate).startOf('month').weekday();
+    private getDaysOfPreviousMonth(): DatepickerDate[] {
+        let monthStartsAt = moment(this.selectedMomentDate).startOf('month').weekday();
         let days: DatepickerDate[] = [];
 
         for (let index = monthStartsAt; index > 0; index--) {
-            let date = moment(this.selectedDate).startOf('month').subtract(index, 'days');
+            let date = moment(this.selectedMomentDate).startOf('month').subtract(index, 'days');
             days.push({
-                day: date.date(),
+                date: date.date(),
                 month: date.month(),
                 year: date.year(),
-                isDisabled: moment(date).isBefore(this.min, 'day') || moment(date).isAfter(this.max, 'day')
+                isDisabled: moment(date).isBefore(this.min, 'day') || moment(date).isAfter(this.max, 'day'),
+                isToday: false,
+                isSelected: false
             });
         }
         return days;
     }
 
-    private getSelectedMonthDays(): DatepickerDate[] {
-        let lastDayOfMonth: number = moment(this.selectedDate).daysInMonth();
+    private getDaysOfCurrentMonth(): DatepickerDate[] {
+        let lastDayOfMonth: number = this.selectedMomentDate.daysInMonth();
         let days: DatepickerDate[] = [];
 
         for (let index = 1; index <= lastDayOfMonth; index++) {
-            let date = { day: index, month: this.selectedDate.month, year: this.selectedDate.year };
+            let date = { year: this.selectedMomentDate.year(), month: this.selectedMomentDate.month(), date: index };
             days.push({
                 ...date,
-                isDisabled: moment(date).isBefore(this.min, 'day') || moment(date).isAfter(this.max, 'day')
+                isDisabled: moment(date).isBefore(this.min, 'day') || moment(date).isAfter(this.max, 'day'),
+                isToday: moment().isSame(date, 'day'),
+                isSelected: this.selectedMomentDate.isSame(date, 'day')
             });
-
         }
         return days;
     }
 
-    private getSelectedMonthNextDays(): DatepickerDate[] {
-        let daysToDisplayFromNextMonth = 6 - moment(this.selectedDate).endOf('month').weekday();
+    private getDaysOfNextMonth(): DatepickerDate[] {
+        let daysToDisplayFromNextMonth = 6 - moment(this.selectedMomentDate).endOf('month').weekday();
         let days: DatepickerDate[] = [];
 
         for (let index = 1; index <= daysToDisplayFromNextMonth; index++) {
-            let date = moment(this.selectedDate).endOf('month').add(index, 'days');
+            let date = moment(this.selectedMomentDate).endOf('month').add(index, 'days');
             days.push({
-                day: date.date(),
+                date: date.date(),
                 month: date.month(),
                 year: date.year(),
-                isDisabled: moment(date).isBefore(this.min, 'day') || moment(date).isAfter(this.max, 'day')
+                isDisabled: moment(date).isBefore(this.min, 'day') || moment(date).isAfter(this.max, 'day'),
+                isToday: false,
+                isSelected: false
             });
         }
         return days;
@@ -162,63 +164,80 @@ export class MDatepicker extends ModulVue {
         return dataTable;
     }
 
+    private get formattedDate(): string {
+        return this.error || !this.value ? this.internalValue : moment(this.value).format(this.format);
+    }
+
+    private set formattedDate(value: string) {
+        this.internalValue = value;
+    }
+
+    private get selectedMomentDate(): moment.Moment {
+        return this.selectedDay ? moment({ year: this.selectedYear, month: this.selectedMonth, day: this.selectedDay }) : moment();
+    }
+
+    private set selectedMomentDate(value: moment.Moment) {
+        this.selectedYear = value.year();
+        this.selectedMonth = value.month();
+        this.selectedDay = value.date();
+    }
+
     private get isMinYear(): boolean {
-        return this.selectedDate.year <= this.min.year();
+        return this.selectedMomentDate.isSameOrBefore(this.min, 'year');
     }
 
     private get isMaxYear(): boolean {
-        return this.selectedDate.year >= this.max.year();
+        return this.selectedMomentDate.isSameOrAfter(this.max, 'year');
     }
 
     private get isMinMonth(): boolean {
-        return moment(this.selectedDate).isSameOrBefore(this.min, 'month');
+        return this.selectedMomentDate.isSameOrBefore(this.min, 'month');
     }
 
     private get isMaxMonth(): boolean {
-        return moment(this.selectedDate).isSameOrAfter(this.max, 'month');
+        return this.selectedMomentDate.isSameOrAfter(this.max, 'month');
     }
 
-    private get monthName(): string {
-        return this.months[this.selectedDate.month].name;
+    private get selectedMonthName(): string {
+        return moment().month(this.selectedMonth).format('MMM');
     }
 
-    private isSelectedDate(date: DatepickerDate): boolean {
-        return moment(date).isSame(this.selectedDate, 'day');
+    private get daysOfMonth(): DatepickerDate[] {
+        this.previousDays = this.getDaysOfPreviousMonth();
+        this.days = this.getDaysOfCurrentMonth();
+        this.nextDays = this.getDaysOfNextMonth();
+        return this.prepareDataForTableLayout([...this.previousDays, ...this.days, ...this.nextDays], 7);
     }
 
-    private isInSelectedMonth(date: DatepickerDate): boolean {
-        return date.month == this.selectedDate.month;
-    }
-
-    private formatDate(): void {
-        this.formattedDate = moment(this.selectedDate).format(this.format);
-    }
-
-    private openDatepicker(): void {
+    private onOpen() {
+        this.view = VIEW_DAY;
+        this.isOpen = true;
         this.$emit('open');
     }
 
-    private closeDatepicker(): void {
-        this.formatDate();
+    private onClose() {
         this.isOpen = false;
-        this.$emit('close');
     }
 
-    private onChange(event, value) {
-        let newDate = moment(value);
-        if (newDate.isValid()) {
+    private onBlur(event) {
+        if (event.target.value == '') {
+            this.selectedMomentDate = moment();
+            if (this.required) {
+                this.error = this.$i18n.translate('m-datepicker:required-error');
+            } else {
+                this.$emit('input', '');
+                this.error = '';
+            }
+        } else if (moment(event.target.value, this.format).isValid()) {
+            let newDate = moment(event.target.value, this.format);
+            this.internalValue = '';
             if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
-                this.selectedDate = {
-                    day: newDate.date(),
-                    month: newDate.month(),
-                    year: newDate.year(),
-                    isDisabled: false
-                };
-                this.setDays();
-                this.$emit('change', newDate);
+                this.selectedMomentDate = newDate;
+                this.formattedDate = this.selectedMomentDate.format(this.format);
+                this.$emit('input', newDate);
                 this.error = '';
             } else {
-                this.error = this.$i18n.translate('m-datepicker:out-of-bounds-error');
+                this.error = this.$i18n.translate('m-datepicker:out-of-range-error');
             }
         } else {
             this.error = this.$i18n.translate('m-datepicker:format-error');
@@ -226,53 +245,45 @@ export class MDatepicker extends ModulVue {
         this.closeDatepicker();
     }
 
+    private closeDatepicker(): void {
+        this.isOpen = false;
+        this.$emit('close');
+    }
+
+    private keepDateInRange(date: moment.Moment): moment.Moment {
+        if (date.isBefore(this.min, 'day')) {
+            return moment(this.min);
+        } else if (date.isAfter(this.max, 'day')) {
+            return moment(this.max);
+        }
+        return date;
+    }
+
+    private showYears() {
+        this.view = VIEW_YEAR;
+        let scrollTop = (Math.floor((moment(this.max).year() - this.selectedYear) / NB_YEARS_PER_ROW)) * ITEM_DIMENSION - (3 * ITEM_DIMENSION);
+        setTimeout(() => {
+            (this.$refs.body as Element).scrollTo(0, scrollTop);
+        }, 10);
+    }
+
     private selectYear(year: number, showMonths: boolean = false): void {
-        let newDate = moment(this.selectedDate).year(year);
-        this.selectedDate.day = newDate.date();
-        this.selectedDate.month = newDate.month();
-        this.selectedDate.year = newDate.year();
-        if (moment(this.selectedDate).isBefore(this.min, 'day')) {
-            this.selectedDate.day = this.min.date();
-            this.selectedDate.month = this.min.month();
-        }
-        if (moment(this.selectedDate).isAfter(this.max, 'day')) {
-            this.selectedDate.day = this.max.date();
-            this.selectedDate.month = this.max.month();
-        }
-        this.setMonths();
-        if (showMonths) {
-            this.view = VIEW_MONTH;
-        } else {
-            this.setDays();
-        }
+        this.selectedMomentDate = this.keepDateInRange(moment(this.selectedMomentDate).year(year));
+        if (showMonths) this.view = VIEW_MONTH;
     }
 
-    private selectMonth(month: number): void {
-        let newDate = moment(this.selectedDate).month(month);
-        this.selectedDate.day = newDate.date();
-        this.selectedDate.month = newDate.month();
-        this.setDays();
-        this.view = VIEW_DAY;
-    }
-
-    private changeMonth(value: number): void {
-        let newDate = moment(this.selectedDate).add(value, 'month');
-        this.selectedDate.day = newDate.date();
-        this.selectedDate.month = newDate.month();
-        if (this.selectedDate.year != newDate.year()) {
-            this.selectedDate.year = newDate.year();
-            this.setMonths();
-        }
-        if (this.view == VIEW_DAY) this.setDays();
+    private selectMonth(month: number, showDays: boolean = false): void {
+        this.selectedMomentDate = this.keepDateInRange(moment(this.selectedMomentDate).month(month));
+        if (showDays) this.view = VIEW_DAY;
     }
 
     private selectDate(selectedDate: DatepickerDate): void {
         if (!selectedDate.isDisabled) {
-            this.selectedDate = selectedDate;
-            this.setDays();
-            this.$emit('change', moment(this.selectedDate));
-            this.closeDatepicker();
+            this.selectedMomentDate = moment(selectedDate);
             this.error = '';
+            this.formattedDate = this.selectedMomentDate.format(this.format);
+            this.$emit('input', this.value instanceof Date ? this.selectedMomentDate.toDate() : this.selectedMomentDate);
+            this.closeDatepicker();
         }
     }
 }

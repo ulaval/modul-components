@@ -1,9 +1,10 @@
 {
     "m-datepicker": {
-        "placeholder": "yyyy mm dd",
+        "placeholder": "dd/mm/yyyy",
         "open-calendar-desc": "open calendar",
         "close-calendar-desc": "close calendar",
-        "out-of-bounds-error": "out of bounds",
-        "format-error": "invalid format"
+        "out-of-range-error": "out of bounds",
+        "format-error": "invalid format",
+        "required-error": "date required"
     }
 }

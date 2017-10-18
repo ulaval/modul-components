@@ -1,15 +1,16 @@
 @import '../../styles/abstracts/variables';
-$m-datepicker--width: 300px !default;
+$m-datepicker--item-dimension: 40px !default;
 
 .m-datepicker {
     background: $m-color--white;
+    padding: $m-padding--s;
 
     @media (max-width: $m-bp--max--s) {
         width: 100%;
     }
 
     @media (min-width: $m-bp--min--s) {
-        width: $m-datepicker--width;
+        width: $m-datepicker--item-dimension * 7 + $m-padding--s * 2;
     }
 
     &__header {
@@ -33,33 +34,36 @@ $m-datepicker--width: 300px !default;
     &__body {
         display: flex;
         justify-content: center;
-        width: 100%;
+        overflow-y: auto;
+        height: $m-datepicker--item-dimension * 7;
 
         &-table {
             border-spacing: 0;
+            border-collapse: collapse;
+            text-align: center;
+            width: 100%;
         }
 
         &-cell {
             padding: 0;
         }
-
-        table {
-            width: 100%;
-            text-align: center;
-        }
     }
 
     &__weekday {
         padding: 0;
-        width: 2.5em;
-        height: 2.5em;
+        width: $m-datepicker--item-dimension;
+        height: $m-datepicker--item-dimension;
     }
 
     &__item {
-        width: 2.5em;
-        height: 2.5em;
+        width: $m-datepicker--item-dimension;
+        height: $m-datepicker--item-dimension;
         border-radius: 50%;
         cursor: pointer;
+
+        &.m--is-today {
+            background-color: $m-color--grey-light;
+        }
 
         &:hover,
         &:focus {
@@ -73,11 +77,11 @@ $m-datepicker--width: 300px !default;
         &.m--is-other-month {
             color: $m-color--grey-dark;
         }
+    }
 
-        &.m--is-disabled {
-            background-color: transparent;
-            color: $m-color--grey-light;
-            cursor: not-allowed;
-        }
+    .m--is-disabled {
+        background-color: transparent;
+        color: $m-color--grey-light;
+        cursor: not-allowed;
     }
 }
