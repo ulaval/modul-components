@@ -58,7 +58,7 @@
             }
         }
 
-        &:not(:active) {
+        &:not(:active):not(.m--is-disabled) {
             &:focus,
             &:hover {
                 color: $m-color--interactive-light;
@@ -73,7 +73,7 @@
             }
         }
 
-        &:active {
+        &:active:not(.m--is-disabled) {
             color: $m-color--interactive-dark;
 
             .m-link__text {
@@ -85,6 +85,11 @@
                     opacity: 0;
                 }
             }
+        }
+
+        &.m--is-disabled {
+            color: $m-color--grey;
+            cursor: default;
         }
 
         &:focus {
