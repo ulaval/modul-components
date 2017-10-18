@@ -110,14 +110,13 @@ export class MPopper extends ModulVue {
     @Prop()
     public leaveCancelled: any;
 
-    // private internalOpen: boolean = false;
     private popper: Popper | undefined;
-    // private internalVisible: boolean = false;
     private portalTargetEl: HTMLElement;
     private propId: string;
 
     private defaultAnimOpen: boolean = false;
     private internalTrigger: Node | undefined = undefined;
+    private internalOpen: boolean = false;
 
     protected beforeMount(): void {
         this.propId = this.id + '-' + uuid.generate();
@@ -147,6 +146,7 @@ export class MPopper extends ModulVue {
         this.$modul.event.$off('scroll', this.update);
         this.$modul.event.$off('resize', this.update);
         this.$modul.event.$off('updateAfterResize', this.update);
+
         this.destroyPopper();
         document.body.removeChild(this.portalTargetEl);
     }
@@ -157,8 +157,6 @@ export class MPopper extends ModulVue {
 
     public set propOpen(value: boolean) {
         if (value) {
-            // this.internalOpen = true;
-
             if (this.popper == undefined) {
                 let options: object = {
                     placement: this.placement,
@@ -170,17 +168,17 @@ export class MPopper extends ModulVue {
             }
             this.portalTargetEl.style.zIndex = String(this.$modul.windowZIndex);
 
-            this.$emit('open');
-            // Keep the timer to allow an element outside the component to open the popper
-            // setTimeout(() => {
-            //     this.$modul.event.$on('click', this.onClickOutside);
-            // }, 0);
+            if (value != this.internalOpen) {
+                this.$emit('open');
+            }
         } else {
-            // this.internalOpen = false;
-            // this.closePopper();
-            // this.$modul.event.$off('click', this.onClickOutside);
-            this.$emit('close');
+            if (value != this.internalOpen) {
+                // really closing, reset focus
+                this.setFastFocusToElement(this.$el);
+                this.$emit('close');
+            }
         }
+        this.internalOpen = value;
         this.$emit('update:open', value);
     }
 
@@ -221,10 +219,6 @@ export class MPopper extends ModulVue {
         this.propOpen = !this.propOpen;
     }
 
-    // public get visible(): boolean {
-    //     return this.internalVisible && !this.disabled;
-    // }
-
     @Watch('open')
     private openChanged(open: boolean): void {
         this.propOpen = open;
@@ -240,14 +234,15 @@ export class MPopper extends ModulVue {
     //     this.setFastFocusToElement(this.$el);
     // }
 
-    // private setFastFocusToElement(el: HTMLElement): void {
-    //     if (this.focusManagement) {
-    //         // el.setAttribute('tabindex', '0');
-    //         // el.focus();
-    //         // el.blur();
-    //         // el.removeAttribute('tabindex');
-    //     }
-    // }
+    private setFastFocusToElement(el: HTMLElement): void {
+        console.log('fm');
+        if (this.focusManagement) {
+            el.setAttribute('tabindex', '0');
+            el.focus();
+            el.blur();
+            el.removeAttribute('tabindex');
+        }
+    }
 
     private destroyPopper() {
         if (this.popper !== undefined) {
@@ -256,20 +251,7 @@ export class MPopper extends ModulVue {
         }
     }
 
-    // private getPortalTargetEl(): HTMLElement {
-    //     // return document.getElementById(this.propId) as HTMLElement;
-    //     return this.portalTargetEl;
-    // }
-
-    // private onClick(event: MouseEvent): void {
-    //     if (this.openTrigger == MPopperOpenTrigger.Click && !this.disabled) {
-    //         console.log('open on click');
-    //         this.propOpen = !this.propOpen;
-    //     }
-    // }
-
     private handleDocumentClick(event: MouseEvent): void {
-        console.log('outside click', event.target);
         if (!(this.portalTargetEl.contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
              (this.internalTrigger && this.internalTrigger.contains(event.target as HTMLElement)))) {
             this.propOpen = false;
@@ -284,48 +266,44 @@ export class MPopper extends ModulVue {
         this.propOpen = false;
     }
 
-    // private get propOpenOnClick(): boolean {
-    //     return this.openOnOver ? true : this.openOnClick;
-    // }
-
-    // private get propCloseOnClickOutside(): boolean {
-    //     return this.propOpen ? this.closeOnClickOutside : false;
-    // }
-
     private get hasBodySlot(): boolean {
         return !!this.$slots.default;
     }
 
     private get defaultAnim(): boolean {
-        return !(this.hasBeforeEnterAnim() || this.hasEnterAnim() || this.hasAfterEnterAnim() || this.hasBeforeLeaveAnim() || this.hasLeaveAnim() || this.hasAfterLeaveAnim());
+        return !(this.beforeEnter || this.enter || this.afterEnter || this.beforeLeave || this.leave || this.afterLeave);
     }
 
-    private hasBeforeEnterAnim(): boolean {
-        return typeof (this.beforeEnter) === 'function';
-    }
+    // private get defaultAnim(): boolean {
+    //     return !(this.hasBeforeEnterAnim() || this.hasEnterAnim() || this.hasAfterEnterAnim() || this.hasBeforeLeaveAnim() || this.hasLeaveAnim() || this.hasAfterLeaveAnim());
+    // }
 
-    private hasEnterAnim(): boolean {
-        return typeof (this.enter) === 'function';
-    }
+    // private hasBeforeEnterAnim(): boolean {
+    //     return typeof (this.beforeEnter) === 'function';
+    // }
 
-    private hasAfterEnterAnim(): boolean {
-        return typeof (this.afterEnter) === 'function';
-    }
+    // private hasEnterAnim(): boolean {
+    //     return typeof (this.enter) === 'function';
+    // }
 
-    private hasBeforeLeaveAnim(): boolean {
-        return typeof (this.beforeLeave) === 'function';
-    }
+    // private hasAfterEnterAnim(): boolean {
+    //     return typeof (this.afterEnter) === 'function';
+    // }
 
-    private hasLeaveAnim(): boolean {
-        return typeof (this.leave) === 'function';
-    }
+    // private hasBeforeLeaveAnim(): boolean {
+    //     return typeof (this.beforeLeave) === 'function';
+    // }
 
-    private hasAfterLeaveAnim(): boolean {
-        return typeof (this.afterLeave) === 'function';
-    }
+    // private hasLeaveAnim(): boolean {
+    //     return typeof (this.leave) === 'function';
+    // }
+
+    // private hasAfterLeaveAnim(): boolean {
+    //     return typeof (this.afterLeave) === 'function';
+    // }
 
     private onBeforeEnter(el: HTMLElement): void {
-        if (this.hasBeforeEnterAnim()) {
+        if (this.beforeEnter) {
             this.beforeEnter(el.children[0]);
         }
     }
@@ -334,7 +312,7 @@ export class MPopper extends ModulVue {
         this.$nextTick(() => {
             this.update();
         });
-        if (this.hasEnterAnim()) {
+        if (this.enter) {
             this.enter(el.children[0], done);
         } else {
             this.defaultAnimOpen = true;
@@ -343,31 +321,28 @@ export class MPopper extends ModulVue {
     }
 
     private onAfterEnter(el: HTMLElement): void {
-        if (this.hasAfterEnterAnim()) {
+        if (this.afterEnter) {
             this.afterEnter(el.children[0]);
         }
 
-        if (this.propOpen) {
-            // this.setFastFocusToElement(el);
-        }
+        this.setFastFocusToElement(el);
     }
 
     private onEnterCancelled(el: HTMLElement): void {
-        if (typeof (this.enterCancelled) === 'function') {
+        if (this.enterCancelled) {
             this.enterCancelled(el);
         }
     }
 
     private onBeforeLeave(el: HTMLElement): void {
-        if (this.hasBeforeLeaveAnim()) {
+        if (this.beforeLeave) {
             this.beforeLeave(el.children[0]);
         }
     }
 
     private onLeave(el: HTMLElement, done): void {
-        if (this.hasLeaveAnim()) {
+        if (this.leave) {
             this.leave(el.children[0], done);
-
         } else {
             this.defaultAnimOpen = false;
             setTimeout(() => {
@@ -377,13 +352,13 @@ export class MPopper extends ModulVue {
     }
 
     private onAfterLeave(el: HTMLElement): void {
-        if (this.hasAfterLeaveAnim()) {
+        if (this.afterLeave) {
             this.afterLeave(el.children[0]);
         }
     }
 
     private onLeaveCancelled(el: HTMLElement): void {
-        if (typeof (this.leaveCancelled) === 'function') {
+        if (this.leaveCancelled) {
             this.leaveCancelled(el.children[0]);
         }
     }
