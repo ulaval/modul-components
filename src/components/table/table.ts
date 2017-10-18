@@ -8,8 +8,8 @@ import MenuPlugin from '../options-menu/options-menu';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 export enum MTableHeaderPosition {
-    Left = 'left',
-    Right = 'right'
+    Left = 'header-left',
+    Right = 'header-right'
 }
 
 const HEADER: string = 'header';
