@@ -59,10 +59,10 @@ export class MNavbar extends ModulVue {
         this.childrenIndexSelected = this.childrenIndexSelected == undefined ? this.arrItem[0].childrenIndex : this.childrenIndexSelected;
         let childrenSelected = this.$children[this.childrenIndexSelected];
         childrenSelected['selectItem']();
-        if (this.propSkin == MNavbarSkin.Light) {
+        if (this.propSkin == MNavbarSkin.Light && this.line != false) {
             this.setLinePosition(childrenSelected.$el as HTMLElement);
         }
-        if (this.propSkin == MNavbarSkin.Arrow) {
+        if (this.propSkin == MNavbarSkin.Arrow && this.line != false) {
             this.setArrowPosition(childrenSelected.$el as HTMLElement);
         }
     }
@@ -75,10 +75,10 @@ export class MNavbar extends ModulVue {
             this.$children[this.childrenIndexSelected]['unselectItem']();
             this.$children[childrenIndex]['selectItem']();
             this.childrenIndexSelected = childrenIndex;
-            if (this.propSkin == MNavbarSkin.Light) {
+            if (this.propSkin == MNavbarSkin.Light && this.line != false) {
                 this.setLinePosition(this.$children[childrenIndex].$el as HTMLElement);
             }
-            if (this.propSkin == MNavbarSkin.Arrow) {
+            if (this.propSkin == MNavbarSkin.Arrow && this.line != false) {
                 this.setArrowPosition(this.$children[childrenIndex].$el as HTMLElement);
             }
             this.$emit('click');
@@ -112,14 +112,14 @@ export class MNavbar extends ModulVue {
     }
 
     private get propLine(): boolean {
-        if (this.line == undefined) {
+        if (this.line == undefined || this.line == true) {
             return this.propSkin == MNavbarSkin.Light;
         }
         return this.line;
     }
 
     private get propArrow(): boolean {
-        if (this.line == undefined) {
+        if (this.line == undefined || this.line == true) {
             return this.propSkin == MNavbarSkin.Arrow;
         }
         return this.line;
