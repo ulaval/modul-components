@@ -5,7 +5,8 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { MPopperPlacement, MPopperOpenTrigger } from '../popper/popper';
+import { MPopperPlacement } from '../popper/popper';
+import { MOpenTrigger } from '../../mixins/open-trigger/open-trigger';
 import PopperPlugin from '../popper/popper';
 import SidebarPlugin from '../sidebar-window/sidebar-window';
 
@@ -19,8 +20,8 @@ export class MPopup extends ModulVue {
     public open: boolean;
     @Prop({ default: MPopperPlacement.Bottom })
     public placement: MPopperPlacement;
-    @Prop({default: MPopperOpenTrigger.Click})
-    public openTrigger: MPopperOpenTrigger;
+    @Prop({default: MOpenTrigger.Click})
+    public openTrigger: MOpenTrigger;
     // @Prop({ default: true })
     // public openOnClick: boolean;
     // @Prop({ default: false })
@@ -33,8 +34,6 @@ export class MPopup extends ModulVue {
     public id: string;
     @Prop({ default: false })
     public disabled: boolean;
-    @Prop({ default: '' })
-    public classNamePortalTarget: string;
     @Prop({ default: true })
     public shadow: boolean;
     @Prop({ default: true })
@@ -65,9 +64,6 @@ export class MPopup extends ModulVue {
     public desktopOnly: boolean;
 
     private internalTrigger: any = false;
-
-    // used for .sync
-    // private internalOpen: boolean = false;
 
     public get popupBody(): Element {
         return (this.$children[0] as any).popupBody;
@@ -105,7 +101,7 @@ export class MPopup extends ModulVue {
         return !!this.$slots.header;
     }
 
-    private get hasBodySlot(): boolean {
+    private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
     }
 

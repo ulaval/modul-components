@@ -9,6 +9,7 @@ import uuid from '../../utils/uuid/uuid';
 import Popper from 'popper.js';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
+import { OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 
 export enum MPopperPlacement {
     Top = 'top',
@@ -25,15 +26,17 @@ export enum MPopperPlacement {
     LeftEnd = 'left-end'
 }
 
-export enum MPopperOpenTrigger {
-    Hover = 'hover',
-    Click = 'click',
-    Manual = 'manual'
-}
+// export enum MPopperOpenTrigger {
+//     Hover = 'hover',
+//     Click = 'click',
+//     Manual = 'manual'
+// }
 
 @WithRender
-@Component
-export class MPopper extends ModulVue {
+@Component({
+    mixins: [OpenTrigger]
+})
+export class MPopper extends ModulVue implements OpenTriggerMixin {
     @Prop({ default: false })
     public open: boolean;
 
@@ -55,30 +58,23 @@ export class MPopper extends ModulVue {
     })
     public placement: MPopperPlacement;
 
-    // @Prop({ default: true })
-    // public openOnClick: boolean;
-    // @Prop({ default: false })
-    // public openOnOver: boolean;
-    @Prop({
-        default: MPopperOpenTrigger.Click,
-        validator: value =>
-            value == MPopperOpenTrigger.Click ||
-            value == MPopperOpenTrigger.Hover ||
-            value == MPopperOpenTrigger.Manual
-    })
-    public openTrigger: MPopperOpenTrigger;
+    // @Prop({
+    //     default: MPopperOpenTrigger.Click,
+    //     validator: value =>
+    //         value == MPopperOpenTrigger.Click ||
+    //         value == MPopperOpenTrigger.Hover ||
+    //         value == MPopperOpenTrigger.Manual
+    // })
+    // public openTrigger: MPopperOpenTrigger;
 
-    @Prop()
-    public trigger: any;
+    // @Prop()
+    // public trigger: any;
 
     @Prop({ default: 'mPopper' })
     public id: string;
 
     @Prop({ default: false })
     public disabled: boolean;
-
-    @Prop({ default: '' })
-    public classNamePortalTarget: string;
 
     @Prop({ default: true })
     public closeOnClickOutside: boolean;
@@ -115,14 +111,18 @@ export class MPopper extends ModulVue {
     private propId: string;
 
     private defaultAnimOpen: boolean = false;
-    private internalTrigger: Node | undefined = undefined;
+    // private internalTrigger: Node | undefined = undefined;
     private internalOpen: boolean = false;
+
+    public getPortalTargetElement(): HTMLElement {
+        return this.portalTargetEl;
+    }
 
     protected beforeMount(): void {
         this.propId = this.id + '-' + uuid.generate();
         let element: HTMLElement = document.createElement('div') as HTMLElement;
         element.setAttribute('id', this.propId);
-        element.setAttribute('class', this.classNamePortalTarget);
+        // element.setAttribute('class', this.classNamePortalTarget);
         document.body.appendChild(element);
     }
 
@@ -133,22 +133,26 @@ export class MPopper extends ModulVue {
         this.$modul.event.$on('resize', this.update);
         this.$modul.event.$on('updateAfterResize', this.update);
 
-        this.handleTrigger();
+        // this.handleTrigger();
     }
 
     protected beforeDestroy(): void {
-        if (this.internalTrigger) {
-            this.internalTrigger.removeEventListener('click', this.toggle);
-            this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
-            this.internalTrigger.removeEventListener('mouseleave', this.handleMouseLeave);
-        }
-        this.$modul.event.$off('click', this.handleDocumentClick);
+        // if (this.internalTrigger) {
+        //     this.internalTrigger.removeEventListener('click', this.toggle);
+        //     this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
+        //     this.internalTrigger.removeEventListener('mouseleave', this.handleMouseLeave);
+        // }
+        // this.$modul.event.$off('click', this.handleDocumentClick);
         this.$modul.event.$off('scroll', this.update);
         this.$modul.event.$off('resize', this.update);
         this.$modul.event.$off('updateAfterResize', this.update);
 
         this.destroyPopper();
         document.body.removeChild(this.portalTargetEl);
+    }
+
+    public get popupBody(): any {
+        return (this.$refs.popper as Element).querySelector('.m-popup__body');
     }
 
     public get propOpen(): boolean {
@@ -182,42 +186,38 @@ export class MPopper extends ModulVue {
         this.$emit('update:open', value);
     }
 
-    public get popupBody(): any {
-        return (this.$refs.popper as Element).querySelector('.m-popup__body');
-    }
+    // @Watch('trigger')
+    // private t(): void {
+    //     this.handleTrigger();
+    // }
 
-    @Watch('trigger')
-    private t(): void {
-        this.handleTrigger();
-    }
+    // private handleTrigger(): void {
+    //     if (this.internalTrigger) {
+    //         console.warn('trigger change or multiple triggers not supported');
+    //     }
+    //     if (this.trigger) {
+    //         this.internalTrigger = this.trigger;
+    //     } else if (this.$slots.trigger && this.$slots.trigger[0]) {
+    //         this.internalTrigger = this.$slots.trigger[0].elm;
+    //     }
+    //     if (this.internalTrigger) {
+    //         if (this.openTrigger == MPopperOpenTrigger.Click) {
+    //             this.internalTrigger.addEventListener('click', this.toggle);
+    //             this.$modul.event.$on('click', this.handleDocumentClick);
+    //         } else if (this.openTrigger == MPopperOpenTrigger.Hover) {
+    //             this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
+    //             this.internalTrigger.addEventListener('mouseleave', this.handleMouseLeave);
+    //             this.$nextTick(() => {
+    //                 (this.$refs.popper as Element).addEventListener('mouseenter', this.handleMouseEnter);
+    //                 (this.$refs.popper as Element).addEventListener('mouseleave', this.handleMouseLeave);
+    //             });
+    //         }
+    //     }
+    // }
 
-    private handleTrigger(): void {
-        if (this.internalTrigger) {
-            console.warn('trigger change or multiple triggers not supported');
-        }
-        if (this.trigger) {
-            this.internalTrigger = this.trigger;
-        } else if (this.$slots.trigger && this.$slots.trigger[0]) {
-            this.internalTrigger = this.$slots.trigger[0].elm;
-        }
-        if (this.internalTrigger) {
-            if (this.openTrigger == MPopperOpenTrigger.Click) {
-                this.internalTrigger.addEventListener('click', this.toggle);
-                this.$modul.event.$on('click', this.handleDocumentClick);
-            } else if (this.openTrigger == MPopperOpenTrigger.Hover) {
-                this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
-                this.internalTrigger.addEventListener('mouseleave', this.handleMouseLeave);
-                this.$nextTick(() => {
-                    (this.$refs.popper as Element).addEventListener('mouseenter', this.handleMouseEnter);
-                    (this.$refs.popper as Element).addEventListener('mouseleave', this.handleMouseLeave);
-                });
-            }
-        }
-    }
-
-    private toggle(): void {
-        this.propOpen = !this.propOpen;
-    }
+    // private toggle(): void {
+    //     this.propOpen = !this.propOpen;
+    // }
 
     @Watch('open')
     private openChanged(open: boolean): void {
@@ -230,12 +230,7 @@ export class MPopper extends ModulVue {
         }
     }
 
-    // private closePopper(): void {
-    //     this.setFastFocusToElement(this.$el);
-    // }
-
     private setFastFocusToElement(el: HTMLElement): void {
-        console.log('fm');
         if (this.focusManagement) {
             el.setAttribute('tabindex', '0');
             el.focus();
@@ -251,22 +246,15 @@ export class MPopper extends ModulVue {
         }
     }
 
-    private handleDocumentClick(event: MouseEvent): void {
-        if (!(this.portalTargetEl.contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
-             (this.internalTrigger && this.internalTrigger.contains(event.target as HTMLElement)))) {
-            this.propOpen = false;
-        }
-    }
+    // private handleMouseEnter(): void {
+    //     this.propOpen = true;
+    // }
 
-    private handleMouseEnter(): void {
-        this.propOpen = true;
-    }
+    // private handleMouseLeave(): void {
+    //     this.propOpen = false;
+    // }
 
-    private handleMouseLeave(): void {
-        this.propOpen = false;
-    }
-
-    private get hasBodySlot(): boolean {
+    private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
     }
 

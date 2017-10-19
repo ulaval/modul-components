@@ -75,7 +75,7 @@ export class MTooltip extends ModulVue {
     }
 
     private close(): void {
-        ((this.$children[0] as MPopup).$children[0] as MPopper).propOpen = false;
+        // ((this.$children[0] as MPopup).$children[0] as MPopper).propOpen = false;
     }
 }
 
