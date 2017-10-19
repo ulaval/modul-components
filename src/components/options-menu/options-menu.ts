@@ -7,6 +7,8 @@ import WithRender from './options-menu.html?style=./options-menu.scss';
 import { OPTIONS_MENU_NAME } from '../component-names';
 import PopupPlugin from '../popup/popup';
 import I18nPlugin from '../i18n/i18n';
+import { MButtonState } from '../button/button';
+import ButtonPlugin from '../button/button';
 
 @WithRender
 @Component
@@ -55,12 +57,17 @@ export class MOptionsMenu extends ModulVue {
         this.isOpen = false;
         this.$emit('close');
     }
+
+    private get propDisabled(): string {
+        return this.disabled == true ? MButtonState.Disabled : MButtonState.Default;
+    }
 }
 
 const MenuPlugin: PluginObject<any> = {
     install(v, options) {
         v.use(PopupPlugin);
         v.use(I18nPlugin);
+        v.use(ButtonPlugin);
         v.component(OPTIONS_MENU_NAME, MOptionsMenu);
     }
 };

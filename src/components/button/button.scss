@@ -125,6 +125,13 @@ $m-button--color-disabled: $m-color--grey-darker !default;
                 }
             }
         }
+
+        &.m--is-disabled {
+            cursor: not-allowed;
+            color: $m-button--color-disabled;
+            background: $m-color--white;
+            border-color: $m-button--color-disabled;
+        }
     }
 
     &.m--is-full-size {
