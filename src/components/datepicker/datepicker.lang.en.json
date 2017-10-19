@@ -3,7 +3,7 @@
         "placeholder": "dd/mm/yyyy",
         "open-calendar-desc": "open calendar",
         "close-calendar-desc": "close calendar",
-        "out-of-range-error": "out of bounds",
+        "out-of-range-error": "date is out of range",
         "format-error": "invalid format",
         "required-error": "date required"
     }
