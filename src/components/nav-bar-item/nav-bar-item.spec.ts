@@ -38,7 +38,6 @@ describe('navbar-item', () => {
         }).$mount();
 
         let element = vm.$el;
-        console.log(vm.$el);
 
         if (element) {
             (element as any).click();
