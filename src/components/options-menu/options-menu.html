@@ -1,5 +1,5 @@
 <m-popup :open="isOpen" @open="onOpen" @close="onClose" padding="" :options="options" :disabled="disabled">
-    <m-button class="m-options-menu-button" mode="icon" icon-name="options">
+    <m-button class="m-options-menu-button" mode="icon" :state="propDisabled" icon-name="options">
         <m-i18n k="m-options-menu:open" v-if="!isOpen"></m-i18n>
         <m-i18n k="m-options-menu:close" v-if="isOpen"></m-i18n>
     </m-button>
