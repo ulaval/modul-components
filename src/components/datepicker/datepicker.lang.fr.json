@@ -4,6 +4,7 @@
         "open-calendar-desc": "Ouvrir le calendrier",
         "close-calendar-desc": "Fermer le calendrier",
         "out-of-bounds-error": "Date hors limites",
-        "format-error": "Format invalide"
+        "format-error": "Format invalide",
+        "required-error": "Date requise"
     }
 }

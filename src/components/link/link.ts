@@ -18,6 +18,8 @@ export enum MLinkIconPosition {
     Right = 'right'
 }
 
+const ICON_NAME_DEFAULT: string = 'right-arrow';
+
 @WithRender
 @Component
 export class MLink extends ModulVue {
@@ -35,12 +37,14 @@ export class MLink extends ModulVue {
     public hiddenText: string;
     @Prop({ default: false })
     public icon: boolean;
-    @Prop({ default: 'right-arrow' })
+    @Prop()
     public iconName: string;
     @Prop({ default: MLinkIconPosition.Left })
     public iconPosition: string;
-    @Prop()
+    @Prop({ default: '12px' })
     public iconSize: string;
+    @Prop({ default: false })
+    public disabled: boolean;
 
     public componentName: string = LINK_NAME;
 
@@ -53,10 +57,12 @@ export class MLink extends ModulVue {
 
     private onClick(event): void {
         this.$el.blur();
-        if (this.isButton) {
+        if (this.isButton || this.disabled) {
             event.preventDefault();
         }
-        this.$emit('click', event);
+        if (!this.disabled) {
+            this.$emit('click', event);
+        }
     }
 
     private get isRouterLink(): boolean {
@@ -80,7 +86,11 @@ export class MLink extends ModulVue {
     }
 
     private get hasIcon(): boolean {
-        return (this.iconName != undefined && this.iconName != '') || this.icon == true;
+        return this.iconName != undefined && this.iconName != '' ? true : this.icon;
+    }
+
+    private get propIconName(): string {
+        return this.iconName != undefined && this.iconName != '' ? this.iconName : ICON_NAME_DEFAULT;
     }
 
     private get propUrl(): string {
