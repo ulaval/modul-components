@@ -2,9 +2,11 @@
 $m-datepicker--item-dimension: 40px !default;
 
 .m-datepicker {
-    background: $m-color--white;
-    padding: $m-padding--s;
-    border: 1px solid $m-color--grey-light;
+    &__wrap {
+        background: $m-color--white;
+        padding: $m-padding--s;
+        border: 1px solid $m-color--grey-light;
+    }
 
     &__target {
         background: $m-color--white;
