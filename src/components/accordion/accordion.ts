@@ -69,7 +69,7 @@ export class MAccordion extends ModulVue {
     }
 
     private get propSkin() {
-        return (this.$parent as MAccordionGroup).componentName == ACCORDION_GROUP_NAME ? (this.$parent as MAccordionGroup).skin : this.skin;
+        return this.$parent instanceof MAccordionGroup ? this.$parent.skin : this.skin;
     }
 
     private get propIconPosition(): MAccordionIconPosition {
