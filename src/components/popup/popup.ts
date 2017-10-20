@@ -87,10 +87,6 @@ export class MPopup extends ModulVue {
         this.internalTrigger = value;
     }
 
-    private get isSmall(): boolean {
-        return this.as<MediaQueriesMixin>().isMqMaxS;
-    }
-
     private onOpen(): void {
         this.$emit('open');
     }

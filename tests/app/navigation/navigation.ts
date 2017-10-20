@@ -60,7 +60,7 @@ export class Navigation extends Vue {
         });
         this.routes = meta;
 
-        this.myObj.selection = 'item 2';
+        this.myObj.selection = 'item 3';
     }
 
     private getLabel(item: string): string {

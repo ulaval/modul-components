@@ -16,7 +16,7 @@
               :leave="leave"
               :after-leave="afterLeave"
               :leave-cancelled="leaveCancelled"
-              v-if="!isSmall || desktopOnly"
+              v-if="!isMqMaxS || desktopOnly"
               :style="{ width: width }">
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
@@ -29,18 +29,19 @@
                @open="onOpen()"
                @close="onClose()"
                :disabled="disabled"
+               :focus-management="focusManagement"
                :id="id"
                :padding="padding"
                :padding-header="paddingHeader"
                :padding-body="paddingBody"
                :padding-footer="paddingFooter"
                :trigger="trigger"
-               v-if="isSmall && !desktopOnly">
+               v-if="isMqMaxS && !desktopOnly">
         <slot name="trigger"></slot>
         <div slot="header" class="m-popup__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>
         </div>
-        <div slot="body" class="m-popup__body" v-if="hasDefaultSlot">
+        <div class="m-popup__body" v-if="hasDefaultSlot">
             <slot></slot>
         </div>
         <div slot="footer" class="m-popup__footer" v-if="hasFooterSlot">

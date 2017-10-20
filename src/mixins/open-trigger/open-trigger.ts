@@ -8,13 +8,17 @@ export enum MOpenTrigger {
     Manual = 'manual'
 }
 
-export interface OpenTriggerMixin {
+export interface OpenTriggerMixinImpl {
     propOpen: boolean;
     getPortalTargetElement(): HTMLElement;
 }
 
+export interface OpenTriggerMixin {
+    getTrigger(): HTMLElement | undefined;
+}
+
 @Component
-export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
+export class OpenTrigger extends ModulVue implements OpenTriggerMixinImpl, OpenTriggerMixin {
     @Prop({
         default: MOpenTrigger.Click,
         validator: value =>
@@ -25,9 +29,9 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
     public openTrigger: MOpenTrigger;
 
     @Prop()
-    public trigger: any;
+    public trigger: HTMLElement;
 
-    private internalTrigger: Node | undefined = undefined;
+    private internalTrigger: HTMLElement | undefined = undefined;
 
     set propOpen(value: boolean) {
         // abstract
@@ -35,7 +39,11 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
 
     public getPortalTargetElement(): HTMLElement {
         // abstract
-        throw Error('Not implemented exception');
+        throw Error('Not implemented exception (open-trigger)');
+    }
+
+    public getTrigger(): HTMLElement | undefined {
+        return this.internalTrigger;
     }
 
     protected mounted(): void {
@@ -63,7 +71,7 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
         if (this.trigger) {
             this.internalTrigger = this.trigger;
         } else if (this.$slots.trigger && this.$slots.trigger[0]) {
-            this.internalTrigger = this.$slots.trigger[0].elm;
+            this.internalTrigger = this.$slots.trigger[0].elm as HTMLElement;
         }
         if (this.internalTrigger) {
             if (this.openTrigger == MOpenTrigger.Click) {

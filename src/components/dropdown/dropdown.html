@@ -4,7 +4,7 @@
         :label="label"
         v-model="selectedText"
         :state="propState"
-        :editable="filterable"
+        :editable="filterable && !isMqMaxS"
         :force-focus="open"
         :placeholder="defaultText"
         :disabled="disabled"
@@ -12,6 +12,7 @@
         :error-message="errorMessage"
         :valid-message="validMessage"
         :helper-message="helperMessage"
+        v-m-popup:popper
         @keydown.enter.prevent="onKeydownEnter($event)"
         @keydown.return.prevent="onKeydownEnter($event)"
         @keydown.esc.prevent="onKeydownEscape($event)"

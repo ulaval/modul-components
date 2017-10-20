@@ -9,7 +9,7 @@ import uuid from '../../utils/uuid/uuid';
 import Popper from 'popper.js';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
-import { OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
+import { OpenTrigger, OpenTriggerMixinImpl, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 
 export enum MPopperPlacement {
     Top = 'top',
@@ -26,17 +26,11 @@ export enum MPopperPlacement {
     LeftEnd = 'left-end'
 }
 
-// export enum MPopperOpenTrigger {
-//     Hover = 'hover',
-//     Click = 'click',
-//     Manual = 'manual'
-// }
-
 @WithRender
 @Component({
     mixins: [OpenTrigger]
 })
-export class MPopper extends ModulVue implements OpenTriggerMixin {
+export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
     @Prop({ default: false })
     public open: boolean;
 
@@ -57,18 +51,6 @@ export class MPopper extends ModulVue implements OpenTriggerMixin {
             value == MPopperPlacement.TopStart
     })
     public placement: MPopperPlacement;
-
-    // @Prop({
-    //     default: MPopperOpenTrigger.Click,
-    //     validator: value =>
-    //         value == MPopperOpenTrigger.Click ||
-    //         value == MPopperOpenTrigger.Hover ||
-    //         value == MPopperOpenTrigger.Manual
-    // })
-    // public openTrigger: MPopperOpenTrigger;
-
-    // @Prop()
-    // public trigger: any;
 
     @Prop({ default: 'mPopper' })
     public id: string;
@@ -111,7 +93,6 @@ export class MPopper extends ModulVue implements OpenTriggerMixin {
     private propId: string;
 
     private defaultAnimOpen: boolean = false;
-    // private internalTrigger: Node | undefined = undefined;
     private internalOpen: boolean = false;
 
     public getPortalTargetElement(): HTMLElement {
@@ -120,9 +101,8 @@ export class MPopper extends ModulVue implements OpenTriggerMixin {
 
     protected beforeMount(): void {
         this.propId = this.id + '-' + uuid.generate();
-        let element: HTMLElement = document.createElement('div') as HTMLElement;
+        let element: HTMLElement = document.createElement('div');
         element.setAttribute('id', this.propId);
-        // element.setAttribute('class', this.classNamePortalTarget);
         document.body.appendChild(element);
     }
 
@@ -132,17 +112,9 @@ export class MPopper extends ModulVue implements OpenTriggerMixin {
         this.$modul.event.$on('scroll', this.update);
         this.$modul.event.$on('resize', this.update);
         this.$modul.event.$on('updateAfterResize', this.update);
-
-        // this.handleTrigger();
     }
 
     protected beforeDestroy(): void {
-        // if (this.internalTrigger) {
-        //     this.internalTrigger.removeEventListener('click', this.toggle);
-        //     this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
-        //     this.internalTrigger.removeEventListener('mouseleave', this.handleMouseLeave);
-        // }
-        // this.$modul.event.$off('click', this.handleDocumentClick);
         this.$modul.event.$off('scroll', this.update);
         this.$modul.event.$off('resize', this.update);
         this.$modul.event.$off('updateAfterResize', this.update);
@@ -177,47 +149,12 @@ export class MPopper extends ModulVue implements OpenTriggerMixin {
             }
         } else {
             if (value != this.internalOpen) {
-                // really closing, reset focus
-                this.setFastFocusToElement(this.$el);
                 this.$emit('close');
             }
         }
         this.internalOpen = value;
         this.$emit('update:open', value);
     }
-
-    // @Watch('trigger')
-    // private t(): void {
-    //     this.handleTrigger();
-    // }
-
-    // private handleTrigger(): void {
-    //     if (this.internalTrigger) {
-    //         console.warn('trigger change or multiple triggers not supported');
-    //     }
-    //     if (this.trigger) {
-    //         this.internalTrigger = this.trigger;
-    //     } else if (this.$slots.trigger && this.$slots.trigger[0]) {
-    //         this.internalTrigger = this.$slots.trigger[0].elm;
-    //     }
-    //     if (this.internalTrigger) {
-    //         if (this.openTrigger == MPopperOpenTrigger.Click) {
-    //             this.internalTrigger.addEventListener('click', this.toggle);
-    //             this.$modul.event.$on('click', this.handleDocumentClick);
-    //         } else if (this.openTrigger == MPopperOpenTrigger.Hover) {
-    //             this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
-    //             this.internalTrigger.addEventListener('mouseleave', this.handleMouseLeave);
-    //             this.$nextTick(() => {
-    //                 (this.$refs.popper as Element).addEventListener('mouseenter', this.handleMouseEnter);
-    //                 (this.$refs.popper as Element).addEventListener('mouseleave', this.handleMouseLeave);
-    //             });
-    //         }
-    //     }
-    // }
-
-    // private toggle(): void {
-    //     this.propOpen = !this.propOpen;
-    // }
 
     @Watch('open')
     private openChanged(open: boolean): void {
@@ -246,14 +183,6 @@ export class MPopper extends ModulVue implements OpenTriggerMixin {
         }
     }
 
-    // private handleMouseEnter(): void {
-    //     this.propOpen = true;
-    // }
-
-    // private handleMouseLeave(): void {
-    //     this.propOpen = false;
-    // }
-
     private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
     }
@@ -261,34 +190,6 @@ export class MPopper extends ModulVue implements OpenTriggerMixin {
     private get defaultAnim(): boolean {
         return !(this.beforeEnter || this.enter || this.afterEnter || this.beforeLeave || this.leave || this.afterLeave);
     }
-
-    // private get defaultAnim(): boolean {
-    //     return !(this.hasBeforeEnterAnim() || this.hasEnterAnim() || this.hasAfterEnterAnim() || this.hasBeforeLeaveAnim() || this.hasLeaveAnim() || this.hasAfterLeaveAnim());
-    // }
-
-    // private hasBeforeEnterAnim(): boolean {
-    //     return typeof (this.beforeEnter) === 'function';
-    // }
-
-    // private hasEnterAnim(): boolean {
-    //     return typeof (this.enter) === 'function';
-    // }
-
-    // private hasAfterEnterAnim(): boolean {
-    //     return typeof (this.afterEnter) === 'function';
-    // }
-
-    // private hasBeforeLeaveAnim(): boolean {
-    //     return typeof (this.beforeLeave) === 'function';
-    // }
-
-    // private hasLeaveAnim(): boolean {
-    //     return typeof (this.leave) === 'function';
-    // }
-
-    // private hasAfterLeaveAnim(): boolean {
-    //     return typeof (this.afterLeave) === 'function';
-    // }
 
     private onBeforeEnter(el: HTMLElement): void {
         if (this.beforeEnter) {
@@ -342,6 +243,11 @@ export class MPopper extends ModulVue implements OpenTriggerMixin {
     private onAfterLeave(el: HTMLElement): void {
         if (this.afterLeave) {
             this.afterLeave(el.children[0]);
+        }
+
+        let trigger: HTMLElement | undefined = this.as<OpenTriggerMixin>().getTrigger();
+        if (trigger) {
+            this.setFastFocusToElement(trigger);
         }
     }
 

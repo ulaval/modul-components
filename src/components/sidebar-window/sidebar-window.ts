@@ -1,9 +1,9 @@
 import { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import { SIDEBAR_NAME } from '../component-names';
-import { OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
+import { OpenTrigger, OpenTriggerMixinImpl, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 import WithRender from './sidebar-window.html?style=../../mixins/base-window/base-window.scss';
 import uuid from '../../utils/uuid/uuid';
 
@@ -16,11 +16,14 @@ export enum SidebarOrigin {
     BottomLeft = 'Bottom-left'
 }
 
+export const TRANSITION_DURATION: number = 300;
+export const TRANSITION_DURATION_LONG: number = 600;
+
 @WithRender
 @Component({
     mixins: [OpenTrigger]
 })
-export class MSidebar extends ModulVue implements OpenTriggerMixin {
+export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     @Prop({
         default: SidebarOrigin.Bottom,
         validator: value =>
@@ -42,6 +45,9 @@ export class MSidebar extends ModulVue implements OpenTriggerMixin {
     @Prop({ default: false })
     public open: boolean;
 
+    @Prop({ default: true })
+    public focusManagement: boolean;
+
     @Prop({ default: false })
     public disabled: boolean;
 
@@ -55,9 +61,8 @@ export class MSidebar extends ModulVue implements OpenTriggerMixin {
 
     protected beforeMount(): void {
         this.propId = this.id + '-' + uuid.generate();
-        let element: HTMLElement = document.createElement('div') as HTMLElement;
+        let element: HTMLElement = document.createElement('div');
         element.setAttribute('id', this.propId);
-        // element.setAttribute('class', this.classNamePortalTarget);
         document.body.appendChild(element);
     }
 
@@ -71,8 +76,7 @@ export class MSidebar extends ModulVue implements OpenTriggerMixin {
     }
 
     public get popupBody(): any {
-        // return (this.$refs.popper as Element).querySelector('.m-popup__body');
-        throw Error('Not implemented exception');
+        return (this.$refs.article as Element).querySelector('.m-popup__body');
     }
 
     public get propOpen(): boolean {
@@ -81,15 +85,31 @@ export class MSidebar extends ModulVue implements OpenTriggerMixin {
 
     public set propOpen(value: boolean) {
         if (value) {
-            this.portalTargetEl.style.zIndex = String(this.$modul.windowZIndex);
+            if (this.portalTargetEl) {
+                this.portalTargetEl.style.zIndex = String(this.$modul.windowZIndex);
+                this.portalTargetEl.style.position = 'absolute';
+
+                setTimeout(() => {
+                    this.setFastFocusToElement(this.$refs.article as HTMLElement);
+                }, TRANSITION_DURATION_LONG);
+            }
 
             if (value != this.internalOpen) {
                 this.$emit('open');
             }
         } else {
+            if (this.portalTargetEl) {
+                setTimeout(() => {
+                    this.portalTargetEl.style.position = '';
+
+                    let trigger: HTMLElement | undefined = this.as<OpenTriggerMixin>().getTrigger();
+                    if (trigger) {
+                        this.setFastFocusToElement(trigger);
+                    }
+                }, TRANSITION_DURATION);
+            }
             if (value != this.internalOpen) {
                 // really closing, reset focus
-                this.setFastFocusToElement(this.$el);
                 this.$emit('close');
             }
         }
@@ -97,13 +117,18 @@ export class MSidebar extends ModulVue implements OpenTriggerMixin {
         this.$emit('update:open', value);
     }
 
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
+    }
+
     private setFastFocusToElement(el: HTMLElement): void {
-        // if (this.focusManagement) {
-        //     el.setAttribute('tabindex', '0');
-        //     el.focus();
-        //     el.blur();
-        //     el.removeAttribute('tabindex');
-        // }
+        if (this.focusManagement) {
+            el.setAttribute('tabindex', '0');
+            el.focus();
+            el.blur();
+            el.removeAttribute('tabindex');
+        }
     }
 
     private get hasDefaultSlot(): boolean {
@@ -123,12 +148,8 @@ export class MSidebar extends ModulVue implements OpenTriggerMixin {
     }
 
     private closeDialog(): void {
-
+        this.propOpen = false;
     }
-
-    // protected get windowMode(): BaseWindowMode {
-    //     return BaseWindowMode.Sidebar;
-    // }
 
     // private get marginLeft(): string {
     //     return this.from == BaseWindowFrom.Right || this.from == BaseWindowFrom.BottomRight ? 'calc(100% - ' + this.propWidth + ')' : '';
