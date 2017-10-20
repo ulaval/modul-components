@@ -82,9 +82,9 @@ export class MTextField extends ModulVue {
         }
     }
 
-    private onBlur(event): void {
+    private onBlur(event: Event): void {
         this.internalIsFocus = false;
-        this.$emit('blur');
+        this.$emit('blur', event);
     }
 
     private onKeyup(event): void {
@@ -136,10 +136,6 @@ export class MTextField extends ModulVue {
             return false;
         }
         return true;
-    }
-
-    private get propPlaceholder(): string | undefined {
-        return this.hasPlaceholder() ? '- ' + this.placeholder + ' -' : undefined;
     }
 
     private get isFocus(): boolean {

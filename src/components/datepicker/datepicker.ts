@@ -245,7 +245,7 @@ export class MDatepicker extends ModulVue {
         } else {
             this.error = this.$i18n.translate('m-datepicker:format-error');
         }
-        this.closeDatepicker();
+        // this.closeDatepicker();
     }
 
     private closeDatepicker(): void {
