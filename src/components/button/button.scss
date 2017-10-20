@@ -4,7 +4,6 @@ $m-button--color-hover: $m-color--interactive-light !default;
 $m-button--color-active: $m-color--interactive-dark !default;
 $m-button--color-selected: $m-color--interactive-darker !default;
 $m-button--color-waiting: $m-color--interactive-lighter !default;
-$m-button--color-disabled: $m-color--grey-darker !default;
 
 .m-button {
     position: relative;
@@ -59,9 +58,9 @@ $m-button--color-disabled: $m-color--grey-darker !default;
 
         &.m--is-disabled {
             cursor: not-allowed;
-            color: $m-button--color-disabled;
+            color: $m-color--disabled;
             background: $m-color--white;
-            border-color: $m-button--color-disabled;
+            border-color: $m-color--disabled;
         }
 
         &.m--is-selected {
@@ -128,9 +127,9 @@ $m-button--color-disabled: $m-color--grey-darker !default;
 
         &.m--is-disabled {
             cursor: not-allowed;
-            color: $m-button--color-disabled;
+            color: $m-color--disabled;
             background: $m-color--white;
-            border-color: $m-button--color-disabled;
+            border-color: $m-color--disabled;
         }
     }
 
