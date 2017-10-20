@@ -64,16 +64,18 @@ export class MPopup extends ModulVue {
     public desktopOnly: boolean;
 
     private internalTrigger: any = false;
+    private internalOpen: boolean = false;
 
     public get popupBody(): Element {
         return (this.$children[0] as any).popupBody;
     }
 
     private get propOpen(): boolean {
-        return this.open;
+        return this.open === undefined ? this.internalOpen : this.open;
     }
 
     private set propOpen(value: boolean) {
+        this.internalOpen = value;
         this.$emit('update:open', value);
     }
 

@@ -25,7 +25,7 @@
             <slot></slot>
         </div>
     </m-popper>
-    <m-sidebar :open="propOpen"
+    <m-sidebar :open.sync="propOpen"
                @open="onOpen()"
                @close="onClose()"
                :disabled="disabled"

@@ -1,11 +1,9 @@
 <div class="m-base-window" ref="baseWindow">
-    <portal v-show="propOpen" :target-el="'#' + propId">
+    <portal :target-el="'#' + propId">
         <div class="m-base-window__wrap m--is-sidebar" :class="[{ 'm--is-open': propOpen,
-                        'm--is-small': propSize == 'small',
-                        'm--is-small': propSize == 'light',
-                        'm--is-full-size': propSize == 'full-size',
                         'm--is-clickable-backdrop': propCloseOnBackdrop,
                         'm--is-disabled':disabled }, className, 'm--is-from-' + origin]" @click.self="backdropClick" ref="dialogWrap">
+            show
             <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }">
                 <button type="button" @click="closeDialog" class="m-base-window__close-button" v-if="origin == 'bottom'">
                     <m-i18n k="m-base-window:close"></m-i18n>
