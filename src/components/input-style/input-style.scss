@@ -182,6 +182,11 @@ $m-input-style--padding: 5px !default;
         white-space: nowrap;
     }
 
+    &__placeholder,
+    input::placeholder {
+        color: $m-color--grey-dark;
+    }
+
     &__body {
         position: relative;
         z-index: 1;
@@ -220,10 +225,6 @@ $m-input-style--padding: 5px !default;
 
             &[type=password] {
                 letter-spacing: 2px;
-            }
-
-            &[readonly="readonly"] {
-                cursor: pointer;
             }
         }
 

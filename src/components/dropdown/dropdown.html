@@ -1,5 +1,5 @@
 <div class="m-dropdown"
-     :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }"
+     :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting, 'm--is-filterable': filterable }"
      :style="{ width: width, 'max-width': maxWidth }"
      @click="onClick"
      ref="mDropdown">
@@ -44,9 +44,10 @@
                       :waiting="waiting">
             <input type="text"
                    ref="input"
+                   class="m-dropdown__input"
                    :disabled="inactive"
                    :readonly="!filterable"
-                   :placeholder="propPlaceholder"
+                   :placeholder="placeholder"
                    @keydown.enter.prevent="onKeydownEnter($event)"
                    @keydown.return.prevent="onKeydownEnter($event)"
                    @keydown.esc.prevent="onKeydownEscape($event)"
@@ -56,8 +57,8 @@
                    @focus="onFocus"
                    @blur="onBlur"
                    v-model="selectedText">
-            <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" @click="arrowOnClick($event)">
-                <m-button mode="icon" icon-name="dropdown-arrow">
+            <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }">
+                <m-button mode="icon" icon-name="dropdown-arrow" @click="arrowOnClick($event)">
                     <m-i18n k="m-dropdown:openDropdown" v-if="!open"></m-i18n>
                     <m-i18n k="m-dropdown:closeDropdown" v-if="open"></m-i18n>
                 </m-button>

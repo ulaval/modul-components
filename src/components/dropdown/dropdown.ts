@@ -108,11 +108,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.internalOpen = value;
         this.dirty = false;
         this.$nextTick(() => {
+            let inputEl: HTMLElement = this.$refs.input as HTMLElement;
             if (this.internalOpen) {
                 this.$emit('open');
-                if (this.filterable) {
-                    (this.$refs.input as HTMLElement).focus();
-                }
+                inputEl.focus();
             } else {
                 this.$emit('close');
             }
@@ -220,7 +219,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onFocus(event: Event): void {
-        if (!this.as<InputStateMixin>().isDisabled && !this.open && this.filterable) {
+        if (!this.as<InputStateMixin>().isDisabled && !this.open) {
             this.open = true;
         }
     }
@@ -232,14 +231,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onClick(event): void {
-        if (this.filterable) {
-            if (!this.as<InputStateMixin>().isDisabled && !this.open) {
-                this.open = true;
-            }
-        } else {
-            if (!this.as<InputStateMixin>().isDisabled) {
-                this.open = !this.open;
-            }
+        if (!this.as<InputStateMixin>().isDisabled && !this.open) {
+            this.open = true;
         }
     }
 
@@ -247,10 +240,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (this.focusedIndex > -1) {
             let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
             this.model = item.value;
-        }
-
-        if (!this.open) {
-            this.open = true;
         }
     }
 
@@ -285,7 +274,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private arrowOnClick(event): void {
-        if (this.filterable && this.open) {
+        if (this.open) {
             this.open = false;
             event.stopPropagation();
         }
