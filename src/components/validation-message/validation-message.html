@@ -1,5 +1,9 @@
-<span class="m-validation-message" v-if="hasError || isValid || hasHelper">
-    <span class="m-validation-message__error" v-if="hasError"><m-icon name="default" :svg-title="titleErrorIcon" class="m-validation-message__error__icon"></m-icon> {{ errorMessage }}</span>
-    <span class="m-validation-message__valid" v-if="isValid"><m-icon name="default" :svg-title="titleValidIcon" class="m-validation-message__valid__icon"></m-icon> {{ validMessage }}</span>
-    <span class="m-validation-message__helper" v-if="hasHelper">{{ helperMessage }}</span>
-</span>
+<div class="m-validation-message" v-if="hasError || isValid || hasHelper">
+    <p class="m-validation-message__error" v-if="hasError">
+        <m-icon name="default" :svg-title="titleErrorIcon" class="m-validation-message__error__icon"></m-icon> <span class="m-validation-message__text">{{ errorMessage }}</span>
+    </p>
+    <p class="m-validation-message__valid" v-if="isValid">
+        <m-icon name="default" :svg-title="titleValidIcon" class="m-validation-message__valid__icon"></m-icon> <span class="m-validation-message__text">{{ validMessage }}</span>
+    </p>
+    <p class="m-validation-message__helper" v-if="hasHelper">{{ helperMessage }}</p>
+</div>
