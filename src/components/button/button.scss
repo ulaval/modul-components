@@ -43,7 +43,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
             }
 
             &:active,
-            &:focus {
+            &.m--is-focus {
                 color: $m-color--white;
                 background: $m-button--color-active;
                 border-color: $m-button--color-active;
@@ -141,7 +141,7 @@ $m-button--color-disabled: $m-color--grey-darker !default;
     &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
         &.m--is-mode-icon {
             &:active,
-            &:focus {
+            &.m--is-focus {
                 &::after {
                     opacity: 1;
                     transition-delay: 0s;
