@@ -93,6 +93,10 @@ export class MAccordion extends ModulVue {
         return this.iconSkin || MAccordionIconSkin.Light;
     }
 
+    public setIsAnimActive(value: boolean): void {
+        this.as<TransitionAccordionMixin>().isAnimActive = value;
+    }
+
     private toggleAccordion(): void {
         this.isOpen = !this.isOpen;
         (this.$refs.accordionHeader as HTMLElement).blur();

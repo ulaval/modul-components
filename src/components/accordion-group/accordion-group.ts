@@ -27,33 +27,28 @@ export class MAccordionGroup extends ModulVue {
 
     private arrAccordion: MAccordion[] = new Array();
     private nbAccordionOpen: number = 0;
-    private indexAccordionOpen: number | undefined = undefined;
 
     private hasError: boolean = false;
     private errorDefaultMesage: string = 'ERROR in <' + ACCORDION_GROUP_NAME + '> : ';
     private errorMessage: string = '';
 
     protected mounted(): void {
-        for (let i = 0; i < this.$children.length; i++) {
-            if (this.checkAccordion(i)) {
-                let accordion: MAccordion = this.$children[i] as MAccordion;
-                accordion.id = i;
-                accordion.$on('click', (open: boolean) => this.toggleAccordionGroup(open));
+        this.$children.forEach((accordion, index) => {
+            if (accordion instanceof MAccordion && accordion.componentName == ACCORDION_NAME) {
+                accordion.id = index;
+                accordion.$on('click', (open: boolean) => this.toggleAccordionGroup(open, accordion));
                 this.arrAccordion.push(accordion);
                 if (accordion.isOpen) {
-                    if (this.concurrent) {
-                        this.indexAccordionOpen = i;
+                    if (this.concurrent && this.nbAccordionOpen == 1) {
+                        accordion.setIsAnimActive(false);
                         accordion.isOpen = false;
                     } else {
                         this.nbAccordionOpen++;
                     }
                 }
             }
-        }
-        if (this.concurrent) {
-            this.openAccordionConcurrent();
-        }
-        if (this.propAllOpen && !this.concurrent) {
+        });
+        if (this.allOpen && !this.concurrent) {
             this.openAllAccordions(false);
         }
         if (this.arrAccordion.length == 0) {
@@ -63,37 +58,19 @@ export class MAccordionGroup extends ModulVue {
         }
     }
 
-    private toggleAccordionGroup(open: boolean): void {
+    private toggleAccordionGroup(open: boolean, accordion: MAccordion): void {
         if (this.concurrent) {
             this.closeAllAccordions(true);
-            if (open) {
-                this.openAccordionConcurrent();
-            }
+            if (open) accordion.isOpen = true;
         } else {
-            if (open) {
-                this.nbAccordionOpen++;
-            } else {
-                this.nbAccordionOpen--;
-            }
+            open ? this.nbAccordionOpen++ : this.nbAccordionOpen--;
         }
-    }
-
-    private openAccordionConcurrent(): void {
-        if (this.indexAccordionOpen != undefined) {
-            this.arrAccordion[this.indexAccordionOpen].isOpen = true;
-            this.nbAccordionOpen = 1;
-        } else {
-            this.nbAccordionOpen = 0;
-        }
-    }
-
-    private checkAccordion(index: number): boolean {
-        return (this.$children[index] as MAccordion).componentName == ACCORDION_NAME ? true : false;
     }
 
     private openAllAccordions(isAnimActive: boolean = true): void {
         this.nbAccordionOpen = this.arrAccordion.length;
         this.arrAccordion.forEach(el => {
+            el.setIsAnimActive(isAnimActive);
             el.isOpen = true;
         });
     }
@@ -101,6 +78,7 @@ export class MAccordionGroup extends ModulVue {
     private closeAllAccordions(isAnimActive: boolean = true): void {
         this.nbAccordionOpen = 0;
         this.arrAccordion.forEach(el => {
+            el.setIsAnimActive(isAnimActive);
             el.isOpen = false;
         });
     }
