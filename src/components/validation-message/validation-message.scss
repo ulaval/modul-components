@@ -5,18 +5,23 @@ $m-validation-message--color-helper: $m-color--grey-darker !default;
 $m-validation-message--margin: $m-padding--xs !default;
 
 .m-validation-message {
-    font-size: $m-font-size--s;
-    display: inline-flex;
-    flex-direction: column;
+    p {
+        margin: 0;
+        font-size: $m-font-size--s;
+    }
 
     &__error,
     &__valid {
+        display: inline-flex;
+        align-items: baseline;
+
         ~ .m-validation-message__helper {
             margin-top: 2px;
         }
 
         &__icon {
             font-size: 8px;
+            margin-right: $m-margin--s;
         }
     }
 
@@ -30,5 +35,9 @@ $m-validation-message--margin: $m-padding--xs !default;
 
     &__helper {
         color: $m-validation-message--color-helper;
+    }
+
+    &__text {
+        flex: 1 1 auto;
     }
 }
