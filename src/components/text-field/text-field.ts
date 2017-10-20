@@ -132,10 +132,7 @@ export class MTextField extends ModulVue {
     }
 
     private get isEmpty(): boolean {
-        if (this.isFocus || this.hasValue || this.hasPlaceholder()) {
-            return false;
-        }
-        return true;
+        return this.isFocus || this.hasValue || this.hasPlaceholder() ? false : true;
     }
 
     private get isFocus(): boolean {
