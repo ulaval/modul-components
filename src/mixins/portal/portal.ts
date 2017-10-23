@@ -27,18 +27,18 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public createBackdropEl(transitionDuration: string = '0.3s'): void {
-        if (!this.$modul.hasBackdrop) {
-            this.$modul.createBackdrop(this.$modul.bodyEl);
-        }
-        this.$modul.setBackdropTransitionDuration(transitionDuration);
+        // if (!this.$modul.hasBackdrop) {
+        //     this.$modul.createBackdrop(this.$modul.bodyEl);
+        // }
+        // this.$modul.setBackdropTransitionDuration(transitionDuration);
     }
 
     public appendBackdropAndPortalToBody(portalId: string, portalClassName: string, backdropTransitionDuration: string): void {
-        this.ceratePortalEl(portalId, portalClassName);
-        this.$modul.addWindow(this.portalId);
-        this.portalEl.style.zIndex = String(this.$modul.windowZIndex);
-        this.createBackdropEl(backdropTransitionDuration);
-        this.$modul.bodyEl.appendChild(this.portalEl);
+        // this.ceratePortalEl(portalId, portalClassName);
+        // this.$modul.addWindow(this.portalId);
+        // this.portalEl.style.zIndex = String(this.$modul.windowZIndex);
+        // this.createBackdropEl(backdropTransitionDuration);
+        // this.$modul.bodyEl.appendChild(this.portalEl);
     }
 
     public appendPortalToBody(id: string, className: string): void {
@@ -55,11 +55,11 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public removeBackdropAndPortal(): void {
-        let portalEl: HTMLElement = this.getPotalEl();
-        if (portalEl) {
-            this.$modul.bodyEl.removeChild(portalEl);
-            this.$modul.deleteWindow(this.portalId);
-        }
+        // let portalEl: HTMLElement = this.getPotalEl();
+        // if (portalEl) {
+        //     this.$modul.bodyEl.removeChild(portalEl);
+        //     this.$modul.deleteWindow(this.portalId);
+        // }
     }
 
     private getPotalEl(): HTMLElement {

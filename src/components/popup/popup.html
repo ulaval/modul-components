@@ -28,6 +28,7 @@
     <m-sidebar :open.sync="propOpen"
                @open="onOpen()"
                @close="onClose()"
+               :close-on-backdrop="closeOnBackdrop"
                :disabled="disabled"
                :focus-management="focusManagement"
                :id="id"

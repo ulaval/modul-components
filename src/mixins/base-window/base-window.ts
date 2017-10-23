@@ -179,25 +179,25 @@ export class BaseWindow extends ModulVue {
 
     private internalCloseDialog(event = undefined): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.visible = false;
-            this.$modul.backdropElement.style.zIndex = String(this.$modul.windowZIndex - 1);
-            this.$emit('startClose');
-            if (this.$modul.windowCount == 1 && this.$modul.hasBackdrop) {
-                this.$modul.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
-                this.$modul.setBackdropOpacity('0');
-            }
-            setTimeout(() => {
-                this.deleteDialog();
-                resolve();
-                if (this.hasDefaultSlots) {
-                    this.$nextTick(() => {
-                        let baseWindowEl: HTMLElement = this.$refs.baseWindow as HTMLElement;
-                        baseWindowEl.setAttribute('tabindex', '0');
-                        baseWindowEl.focus();
-                        baseWindowEl.removeAttribute('tabindex');
-                    });
-                }
-            }, this.transitionDuration);
+        //     this.visible = false;
+        //     this.$modul.backdropElement.style.zIndex = String(this.$modul.windowZIndex - 1);
+        //     this.$emit('startClose');
+        //     if (this.$modul.windowCount == 1 && this.$modul.hasBackdrop) {
+        //         this.$modul.setBackdropTransitionDuration(this.transitionDuration / 1000 + 's');
+        //         this.$modul.setBackdropOpacity('0');
+        //     }
+        //     setTimeout(() => {
+        //         this.deleteDialog();
+        //         resolve();
+        //         if (this.hasDefaultSlots) {
+        //             this.$nextTick(() => {
+        //                 let baseWindowEl: HTMLElement = this.$refs.baseWindow as HTMLElement;
+        //                 baseWindowEl.setAttribute('tabindex', '0');
+        //                 baseWindowEl.focus();
+        //                 baseWindowEl.removeAttribute('tabindex');
+        //             });
+        //         }
+        //     }, this.transitionDuration);
         });
     }
 

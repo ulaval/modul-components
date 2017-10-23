@@ -48,6 +48,9 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     @Prop({ default: true })
     public focusManagement: boolean;
 
+    @Prop()
+    public closeOnBackdrop: boolean;
+
     @Prop({ default: false })
     public disabled: boolean;
 
@@ -84,33 +87,38 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     public set propOpen(value: boolean) {
-        if (value) {
-            if (this.portalTargetEl) {
-                this.portalTargetEl.style.zIndex = String(this.$modul.windowZIndex);
-                this.portalTargetEl.style.position = 'absolute';
+        if (value != this.internalOpen) {
+            if (value) {
+                if (this.portalTargetEl) {
+                    this.$modul.pushElement(this.portalTargetEl);
+                    this.portalTargetEl.style.position = 'absolute';
 
-                setTimeout(() => {
-                    this.setFastFocusToElement(this.$refs.article as HTMLElement);
-                }, TRANSITION_DURATION_LONG);
-            }
+                    setTimeout(() => {
+                        this.setFastFocusToElement(this.$refs.article as HTMLElement);
+                    }, TRANSITION_DURATION_LONG);
+                }
 
-            if (value != this.internalOpen) {
-                this.$emit('open');
-            }
-        } else {
-            if (this.portalTargetEl) {
-                setTimeout(() => {
-                    this.portalTargetEl.style.position = '';
+                if (value != this.internalOpen) {
+                    this.$emit('open');
+                }
+            } else {
+                if (this.portalTargetEl) {
+                    this.$modul.popElement(this.portalTargetEl);
 
-                    let trigger: HTMLElement | undefined = this.as<OpenTriggerMixin>().getTrigger();
-                    if (trigger) {
-                        this.setFastFocusToElement(trigger);
-                    }
-                }, TRANSITION_DURATION);
-            }
-            if (value != this.internalOpen) {
-                // really closing, reset focus
-                this.$emit('close');
+                    setTimeout(() => {
+                        // $emit update:open has been launched, animation already occurs
+
+                        this.portalTargetEl.style.position = '';
+                        let trigger: HTMLElement | undefined = this.as<OpenTriggerMixin>().getTrigger();
+                        if (trigger) {
+                            this.setFastFocusToElement(trigger);
+                        }
+                    }, TRANSITION_DURATION);
+                }
+                if (value != this.internalOpen) {
+                    // really closing, reset focus
+                    this.$emit('close');
+                }
             }
         }
         this.internalOpen = value;
@@ -144,7 +152,9 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     private backdropClick(): void {
-
+        if (this.closeOnBackdrop) {
+            this.propOpen = false;
+        }
     }
 
     private closeDialog(): void {

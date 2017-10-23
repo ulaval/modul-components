@@ -26,6 +26,8 @@ export class MPopup extends ModulVue {
     // public openOnClick: boolean;
     // @Prop({ default: false })
     // public openOnOver: boolean;
+    @Prop()
+    public closeOnBackdrop: boolean;
     @Prop({ default: true })
     public focusManagement: boolean;
     @Prop({ default: 'auto' })
