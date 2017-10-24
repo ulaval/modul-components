@@ -48,20 +48,18 @@ $m-accordion--color: $m-color--accent;
             }
 
             &__body-wrap {
-                &.m--is-anim-active {
-                    &.v-enter-to {
-                        .m-accordion__body {
-                            transform: translate3d(0, 0, 0);
-                            opacity: 1;
-                        }
+                &.v-enter-to {
+                    .m-accordion__body {
+                        transform: translate3d(0, 0, 0);
+                        opacity: 1;
                     }
+                }
 
-                    &.v-enter,
-                    &.v-leave-to {
-                        .m-accordion__body {
-                            transform: translate3d(0, $m-margin--l, 0);
-                            opacity: 0;
-                        }
+                &.v-enter,
+                &.v-leave-to {
+                    .m-accordion__body {
+                        transform: translate3d(0, $m-margin--l, 0);
+                        opacity: 0;
                     }
                 }
 
@@ -131,19 +129,14 @@ $m-accordion--color: $m-color--accent;
                 content: '';
                 background: $m-color--interactive;
                 transform: translate3d(-50%, -50%, 0);
+                transition: transform $m-transition-duration ease;
             }
 
-            &.m--is-anim-active {
-                &::before {
-                    transition: transform $m-transition-duration ease;
-                }
-
-                &::after {
-                    transition: transform $m-transition-duration ease, opacity 0.6s ease;
-                }
+            &::after {
+                transition: transform $m-transition-duration ease, opacity 0.6s ease;
             }
 
-            &.m--is-close {
+            &.m--is-closed {
                 &::before,
                 &::after {
                     transform: translate3d(-50%, -50%, 0) rotate(90deg);
