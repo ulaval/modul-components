@@ -53,7 +53,7 @@ export class MDatepicker extends ModulVue {
 
     public componentName: string = DATEPICKER_NAME;
 
-    private isOpen: boolean = false;
+    private open: boolean = false;
     private view: string = 'day';
     private internalValue = '';
     private error: string = '';
@@ -224,14 +224,15 @@ export class MDatepicker extends ModulVue {
 
     private onOpen() {
         this.view = VIEW_DAY;
-        this.isOpen = true;
+        this.open = true;
         this.internalIsFocus = true;
         this.$emit('open');
     }
 
     private onClose() {
-        this.isOpen = false;
+        this.open = false;
         this.internalIsFocus = false;
+        this.$emit('close');
     }
 
     private onClick(event: MouseEvent): void {
@@ -271,12 +272,14 @@ export class MDatepicker extends ModulVue {
         } else {
             this.error = this.$i18n.translate('m-datepicker:format-error');
         }
-        // this.closeDatepicker();
     }
 
-    private closeDatepicker(): void {
-        this.isOpen = false;
-        this.$emit('close');
+    private onKeydown($event: KeyboardEvent) {
+        if ($event.keyCode == KeyCode.M_TAB || $event.keyCode == KeyCode.M_ESCAPE) {
+            this.onClose();
+        } else {
+            this.onOpen();
+        }
     }
 
     private keepDateInRange(date: moment.Moment): moment.Moment {
@@ -312,7 +315,7 @@ export class MDatepicker extends ModulVue {
             this.error = '';
             this.formattedDate = this.selectedMomentDate.format(this.format);
             this.$emit('input', this.value instanceof Date ? this.selectedMomentDate.toDate() : this.selectedMomentDate);
-            this.closeDatepicker();
+            this.onClose();
         }
     }
 }

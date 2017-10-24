@@ -1,11 +1,11 @@
 <div class="m-datepicker">
-    <m-popup padding="" :open="isOpen" @open="onOpen" @close="onClose" :options="options" :disabled="disabled" focusManagement=""
+    <m-popup padding="" :open="open" @open="onOpen" @close="onClose" :options="options" :disabled="disabled" :focus-management="false"
         placement="bottom-start">
 
         <m-input-style :state="datepickerState" :label="label" :focus="isFocus" :empty="false">
             <input class="m-text-field__input" :disabled="isDisabled" :placeholder="placeholder" @focus="onFocus" @blur="onBlur"
-                ref="input" v-model="formattedDate" @keydown="isOpen = true">
-            <m-button slot="right-content" mode="icon" icon-name="calendar">{{ isOpen ? closeCalendarDesc : openCalendarDesc }}</m-button>
+                ref="input" v-model="formattedDate" @keydown="onKeydown">
+            <m-button slot="right-content" mode="icon" icon-name="calendar">{{ open ? closeCalendarDesc : openCalendarDesc }}</m-button>
         </m-input-style>
 
         <div class="m-datepicker__wrap" slot="body">
