@@ -112,6 +112,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             if (this.internalOpen) {
                 this.$emit('open');
                 inputEl.focus();
+                this.scrollToFocused();
             } else {
                 this.$emit('close');
             }
