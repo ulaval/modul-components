@@ -6,7 +6,7 @@
               :id="id"
               :placement="placement"
               :focus-management="focusManagement"
-              :open-trigger="openTrigger"
+              :open-trigger="propOpenTrigger"
               :trigger="trigger"
               :before-enter="beforeEnter"
               :enter="enter"
@@ -36,6 +36,7 @@
                :padding-header="paddingHeader"
                :padding-body="paddingBody"
                :padding-footer="paddingFooter"
+               :open-trigger="propOpenTrigger"
                :trigger="trigger"
                v-if="isMqMaxS && !desktopOnly">
         <slot name="trigger"></slot>

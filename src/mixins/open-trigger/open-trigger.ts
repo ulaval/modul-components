@@ -1,6 +1,7 @@
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+import { OpenTriggerHook, OpenTriggerHookMixin } from '../open-trigger/open-trigger-hook';
 
 export enum MOpenTrigger {
     Hover = 'hover',
@@ -13,12 +14,10 @@ export interface OpenTriggerMixinImpl {
     getPortalTargetElement(): HTMLElement;
 }
 
-export interface OpenTriggerMixin {
-    getTrigger(): HTMLElement | undefined;
-}
-
-@Component
-export class OpenTrigger extends ModulVue implements OpenTriggerMixinImpl, OpenTriggerMixin {
+@Component({
+    mixins: [OpenTriggerHook]
+})
+export class OpenTrigger extends ModulVue implements OpenTriggerMixinImpl {
     @Prop({
         default: MOpenTrigger.Click,
         validator: value =>
@@ -42,10 +41,6 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixinImpl, OpenT
         throw Error('Not implemented exception (open-trigger)');
     }
 
-    public getTrigger(): HTMLElement | undefined {
-        return this.internalTrigger;
-    }
-
     protected mounted(): void {
         this.handleTrigger();
     }
@@ -64,6 +59,11 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixinImpl, OpenT
         this.handleTrigger();
     }
 
+    @Watch('internalTriggerHook')
+    private onTriggerHookChange(): void {
+        this.handleTrigger();
+    }
+
     private handleTrigger(): void {
         if (this.internalTrigger) {
             console.warn('trigger change or multiple triggers not supported');
@@ -72,6 +72,8 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixinImpl, OpenT
             this.internalTrigger = this.trigger;
         } else if (this.$slots.trigger && this.$slots.trigger[0]) {
             this.internalTrigger = this.$slots.trigger[0].elm as HTMLElement;
+        } else if (this.as<OpenTriggerHookMixin>().triggerHook) {
+            this.internalTrigger = this.as<OpenTriggerHookMixin>().triggerHook;
         }
         if (this.internalTrigger) {
             if (this.openTrigger == MOpenTrigger.Click) {

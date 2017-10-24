@@ -9,7 +9,8 @@ import uuid from '../../utils/uuid/uuid';
 import Popper from 'popper.js';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
-import { OpenTrigger, OpenTriggerMixinImpl, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
+import { OpenTrigger, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
+import { OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 
 export enum MPopperPlacement {
     Top = 'top',
@@ -245,7 +246,7 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
             this.afterLeave(el.children[0]);
         }
 
-        let trigger: HTMLElement | undefined = this.as<OpenTriggerMixin>().getTrigger();
+        let trigger: HTMLElement | undefined = this.as<OpenTriggerHookMixin>().triggerHook;
         if (trigger) {
             this.setFastFocusToElement(trigger);
         }

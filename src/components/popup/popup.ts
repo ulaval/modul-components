@@ -7,12 +7,13 @@ import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { MPopperPlacement } from '../popper/popper';
 import { MOpenTrigger } from '../../mixins/open-trigger/open-trigger';
+import { OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 import PopperPlugin from '../popper/popper';
 import SidebarPlugin from '../sidebar-window/sidebar-window';
 
 @WithRender
 @Component({
-    mixins: [MediaQueries]
+    mixins: [MediaQueries, OpenTriggerHook]
 })
 export class MPopup extends ModulVue {
 
@@ -65,7 +66,6 @@ export class MPopup extends ModulVue {
     @Prop()
     public desktopOnly: boolean;
 
-    private internalTrigger: any = false;
     private internalOpen: boolean = false;
 
     public get popupBody(): Element {
@@ -81,12 +81,12 @@ export class MPopup extends ModulVue {
         this.$emit('update:open', value);
     }
 
-    public get trigger(): any {
-        return !this.internalTrigger ? undefined : this.internalTrigger;
+    public get propOpenTrigger(): MOpenTrigger {
+        return this.openTrigger; // todo: mobile + hover ??
     }
 
-    public set trigger(value: any) {
-        this.internalTrigger = value;
+    public get trigger(): any {
+        return !this.as<OpenTriggerHookMixin>().triggerHook ? undefined : this.as<OpenTriggerHookMixin>().triggerHook;
     }
 
     private onOpen(): void {

@@ -3,7 +3,8 @@ import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { SIDEBAR_NAME } from '../component-names';
-import { OpenTrigger, OpenTriggerMixinImpl, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
+import { OpenTrigger, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
+import { OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 import WithRender from './sidebar-window.html?style=../../mixins/base-window/base-window.scss';
 import uuid from '../../utils/uuid/uuid';
 
@@ -16,8 +17,8 @@ export enum SidebarOrigin {
     BottomLeft = 'Bottom-left'
 }
 
-export const TRANSITION_DURATION: number = 300;
-export const TRANSITION_DURATION_LONG: number = 600;
+const TRANSITION_DURATION: number = 300;
+const TRANSITION_DURATION_LONG: number = 600;
 
 @WithRender
 @Component({
@@ -109,7 +110,7 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
                         // $emit update:open has been launched, animation already occurs
 
                         this.portalTargetEl.style.position = '';
-                        let trigger: HTMLElement | undefined = this.as<OpenTriggerMixin>().getTrigger();
+                        let trigger: HTMLElement | undefined = this.as<OpenTriggerHookMixin>().triggerHook;
                         if (trigger) {
                             this.setFastFocusToElement(trigger);
                         }
@@ -144,6 +145,7 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     private get hasHeaderSlot(): boolean {
+        // todo: header or title?
         return !!this.$slots.header;
     }
 
