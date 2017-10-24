@@ -143,7 +143,7 @@ $m-accordion--color: $m-color--accent;
                 }
             }
 
-            &.m--is-closed {
+            &.m--is-close {
                 &::before,
                 &::after {
                     transform: translate3d(-50%, -50%, 0) rotate(90deg);

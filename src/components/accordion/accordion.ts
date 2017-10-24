@@ -5,7 +5,6 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './accordion.html?style=./accordion.scss';
 import { ACCORDION_NAME, ACCORDION_GROUP_NAME } from '../component-names';
-import { MAccordionGroup } from '../accordion-group/accordion-group';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 
 export enum MAccordionSkin {
@@ -37,26 +36,31 @@ export class MAccordion extends ModulVue {
 
     @Prop({ default: false })
     public open: boolean;
-
     @Prop({ default: MAccordionSkin.Regular })
     public skin: MAccordionSkin;
-
     @Prop()
     public iconPosition: MAccordionIconPosition;
-
     @Prop()
     public iconSkin: MAccordionIconSkin;
-
     @Prop()
     public iconSize: MAccordionIconSize;
 
     public componentName: string = ACCORDION_NAME;
     public id: number;
     private internalPropOpen: boolean = this.open;
+    private internalPropSkin: MAccordionSkin = this.skin;
+    private internalIconPosition: MAccordionIconPosition = this.iconPosition;
+    private internalIconSize: MAccordionIconSize = this.iconSize;
+    private internalIconSkin: MAccordionIconSkin = this.iconSkin;
 
     @Watch('open')
     public updateOpen(open: boolean): void {
         this.isOpen = this.open;
+    }
+
+    @Watch('skin')
+    public updateSkin(skin: boolean): void {
+        this.propSkin = this.skin;
     }
 
     public get isOpen(): boolean {
@@ -68,39 +72,89 @@ export class MAccordion extends ModulVue {
         this.internalPropOpen = value;
     }
 
-    private get propSkin() {
-        return this.$parent instanceof MAccordionGroup ? this.$parent.skin : this.skin;
+    public get propSkin(): MAccordionSkin {
+        return this.internalPropSkin;
     }
 
-    private get propIconPosition(): MAccordionIconPosition {
-        if (this.propSkin == MAccordionSkin.Light) {
-            return this.iconPosition || MAccordionIconPosition.Left;
-        }
-        return this.iconPosition || MAccordionIconPosition.Right;
-    }
-
-    private get propIconSize(): MAccordionIconSize {
-        if (this.propSkin == MAccordionSkin.Light) {
-            return this.iconSize || MAccordionIconSize.Small;
-        }
-        return this.iconSize || MAccordionIconSize.Large;
-    }
-
-    private get propIconSkin(): MAccordionIconSkin {
-        if (this.propSkin == MAccordionSkin.Light) {
-            return this.iconSkin || MAccordionIconSkin.Regular;
-        }
-        return this.iconSkin || MAccordionIconSkin.Light;
+    public set propSkin(value: MAccordionSkin) {
+        this.internalPropSkin = value;
+        this.setSkin();
     }
 
     public setIsAnimActive(value: boolean): void {
         this.as<TransitionAccordionMixin>().isAnimActive = value;
     }
 
+    public setSkin(): void {
+        switch (this.internalPropSkin) {
+            case MAccordionSkin.Light:
+                if (this.propIconPosition == undefined) {
+                    this.propIconPosition = MAccordionIconPosition.Left;
+                }
+                if (this.propIconSize == undefined) {
+                    this.propIconSize = MAccordionIconSize.Small;
+                }
+                if (this.propIconSkin == undefined) {
+                    this.propIconSkin = MAccordionIconSkin.Regular;
+                }
+                break;
+            case MAccordionSkin.Vanilla:
+                this.setSkinVanilla();
+                break;
+            default:
+                if (this.propIconPosition == undefined) {
+                    this.propIconPosition = MAccordionIconPosition.Right;
+                }
+                if (this.propIconSize == undefined) {
+                    this.propIconSize = MAccordionIconSize.Large;
+                }
+                if (this.propIconSkin == undefined) {
+                    this.propIconSkin = MAccordionIconSkin.Light;
+                }
+        }
+    }
+
+    private get propIconPosition(): MAccordionIconPosition {
+        return this.internalIconPosition == undefined ? MAccordionIconPosition.Right : this.internalIconPosition;
+    }
+
+    private set propIconPosition(value: MAccordionIconPosition) {
+        this.internalIconPosition = value;
+    }
+
+    private get propIconSize(): MAccordionIconSize {
+        return this.internalIconSize == undefined ? MAccordionIconSize.Large : this.internalIconSize;
+    }
+
+    private set propIconSize(value: MAccordionIconSize) {
+        this.internalIconSize = value;
+    }
+
+    private get propIconSkin(): MAccordionIconSkin {
+        return this.internalIconSkin == undefined ? MAccordionIconSkin.Light : this.internalIconSkin;
+    }
+
+    private set propIconSkin(value: MAccordionIconSkin) {
+        this.internalIconSkin = value;
+    }
+
+    private setSkinVanilla(): void {
+        if (this.propIconPosition == undefined) {
+            this.propIconPosition = MAccordionIconPosition.Right;
+        }
+        if (this.propIconSize == undefined) {
+            this.propIconSize = MAccordionIconSize.Large;
+        }
+        if (this.propIconSkin == undefined) {
+            this.propIconSkin = MAccordionIconSkin.Light;
+        }
+    }
+
     private toggleAccordion(): void {
+        this.as<TransitionAccordionMixin>().isAnimActive = true;
         this.isOpen = !this.isOpen;
         (this.$refs.accordionHeader as HTMLElement).blur();
-        this.$emit('click', this.isOpen);
+        this.$emit('click', this.id, this.isOpen);
     }
 }
 
