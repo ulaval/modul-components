@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
 import { DROPDOWN_ITEM_NAME } from '../component-names';
+import { normalizeString } from '../../utils/str/str';
 
 export interface MDropdownInterface {
     model: any;
@@ -46,7 +47,11 @@ export class MDropdownItem extends ModulVue {
     }
 
     public get filtered(): boolean {
-        return !this.root.matchFilter(this.propLabel);
+        if (this.propLabel) {
+            return !this.root.matchFilter(normalizeString(this.propLabel));
+        } else {
+            return false;
+        }
     }
 
     public get inactive(): boolean {
