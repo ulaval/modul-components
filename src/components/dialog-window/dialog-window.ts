@@ -37,7 +37,7 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
     })
     public size: string;
 
-    @Prop({ default: false })
+    @Prop()
     public open: boolean;
 
     @Prop({ default: false })
@@ -68,7 +68,7 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     protected mounted(): void {
-        this.propOpen = this.open;
+        // this.propOpen = this.open;
         this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
     }
 
@@ -77,7 +77,7 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     public get propOpen(): boolean {
-        return this.open && !this.disabled;
+        return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
     }
 
     public set propOpen(value: boolean) {
@@ -88,7 +88,7 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
                     this.portalTargetEl.style.position = 'absolute';
 
                     setTimeout(() => {
-                        // this.setFastFocusToElement(this.$refs.article as HTMLElement);
+                        this.setFastFocusToElement(this.$refs.article as HTMLElement);
                     }, this.transitionDuration);
                 }
 
@@ -97,7 +97,7 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
                 }
             } else {
                 if (this.portalTargetEl) {
-                    this.$modul.popElement(this.portalTargetEl);
+                    this.$modul.popElement(this.portalTargetEl, true);
 
                     setTimeout(() => {
                         // $emit update:open has been launched, animation already occurs
@@ -105,7 +105,7 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
                         this.portalTargetEl.style.position = '';
                         let trigger: HTMLElement | undefined = this.as<OpenTriggerHookMixin>().triggerHook;
                         if (trigger) {
-                            // this.setFastFocusToElement(trigger);
+                            this.setFastFocusToElement(trigger);
                         }
                     }, this.transitionDuration);
                 }
@@ -117,6 +117,13 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
         }
         this.internalOpen = value;
         this.$emit('update:open', value);
+    }
+
+    private setFastFocusToElement(el: HTMLElement): void {
+        el.setAttribute('tabindex', '0');
+        el.focus();
+        el.blur();
+        el.removeAttribute('tabindex');
     }
 
     private get transitionDuration(): number {

@@ -1,12 +1,11 @@
 <div class="m-base-window" ref="baseWindow">
     <portal :target-el="'#' + propId">
-        <div class="m-base-window__wrap" :class="[{ 'm--is-open': visible,
-                        'm--is-dialog': windowMode == 'dialog',
+        <div class="m-base-window__wrap m--is-dialog" :class="[{ 'm--is-open': propOpen,
                         'm--is-small': size == 'small',
                         'm--is-full-size': size == 'full-size',
                         'm--is-clickable-backdrop': closeOnBackdrop,
                         'm--is-disabled':disabled }, className]" @click.self="backdropClick()" ref="dialogWrap">
-            <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }">
+            <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
                 <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }"
                     v-if="hasHeader">
                     <h2 class="m-base-window__title" v-if="hasTitle">{{ title }}</h2>

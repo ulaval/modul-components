@@ -5,10 +5,9 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { MPopperPlacement } from '../popper/popper';
+import PopperPlugin, { MPopperPlacement } from '../popper/popper';
 import { MOpenTrigger } from '../../mixins/open-trigger/open-trigger';
 import { OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
-import PopperPlugin from '../popper/popper';
 import SidebarPlugin from '../sidebar-window/sidebar-window';
 
 @WithRender

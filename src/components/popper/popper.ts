@@ -32,7 +32,7 @@ export enum MPopperPlacement {
     mixins: [OpenTrigger]
 })
 export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
-    @Prop({ default: false })
+    @Prop()
     public open: boolean;
 
     @Prop({
@@ -108,7 +108,6 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     protected mounted(): void {
-        this.propOpen = this.open;
         this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
         this.$modul.event.$on('scroll', this.update);
         this.$modul.event.$on('resize', this.update);
@@ -129,7 +128,7 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     public get propOpen(): boolean {
-        return this.open && !this.disabled;
+        return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
     }
 
     public set propOpen(value: boolean) {

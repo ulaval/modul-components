@@ -4,8 +4,8 @@ import uuid from '../../utils/uuid/uuid';
 const BACKDROP_ID: string = 'mBackdropID';
 const BACKDROP_CLASS_NAME: string = 'm-backdrop';
 const BACKDROP_STYLE_TRANSITION: string = 'opacity ease';
-const BACKDROP_STYLE_TRANSITION_OPEN_DURATION: number = 600;
-const BACKDROP_STYLE_TRANSITION_CLOSE_DURATION: number = 300;
+const BACKDROP_STYLE_TRANSITION_SLOW_DURATION: number = 600;
+const BACKDROP_STYLE_TRANSITION_FAST_DURATION: number = 300;
 const BACKDROP_STYLE_POSITION: string = 'fixed';
 const BACKDROP_STYLE_POSITION_VALUE: string = '0';
 const BACKDROP_STYLE_BACKGROUND: string = '#000';
@@ -114,18 +114,18 @@ export class Modul {
         element.style.zIndex = String(this.windowZIndex);
     }
 
-    public popElement(element: HTMLElement): void {
+    public popElement(element: HTMLElement, slow: boolean = false): void {
         this.windowZIndex--;
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
             console.warn('$modul: Invalid window ref count');
             this.windowZIndex = Z_INDEZ_DEFAULT;
         }
         if (this.windowZIndex == Z_INDEZ_DEFAULT) {
-            this.removeBackdrop();
+            this.removeBackdrop(slow);
         }
     }
 
-    public ensureBackdrop(targetElement: HTMLElement = this.bodyEl): void {
+    private ensureBackdrop(targetElement: HTMLElement = this.bodyEl): void {
         if (!this.backdropElement) {
             this.stopScollBody();
 
@@ -149,7 +149,7 @@ export class Modul {
             targetElement.appendChild(element);
 
             this.backdropElement = document.querySelector('#' + id) as HTMLElement;
-            let duration: string = String(BACKDROP_STYLE_TRANSITION_OPEN_DURATION / 1000) + 's';
+            let duration: string = String(BACKDROP_STYLE_TRANSITION_SLOW_DURATION / 1000) + 's';
             this.backdropElement.style.webkitTransitionDuration = duration;
             this.backdropElement.style.transitionDuration = duration;
 
@@ -161,10 +161,12 @@ export class Modul {
         }
     }
 
-    public removeBackdrop() {
+    private removeBackdrop(slow: boolean) {
+        console.log('slow:', slow);
+        let speed: number = slow ? BACKDROP_STYLE_TRANSITION_SLOW_DURATION : BACKDROP_STYLE_TRANSITION_FAST_DURATION;
         if (this.backdropElement) {
             if (this.backdropElement) {
-                let duration: string = String(BACKDROP_STYLE_TRANSITION_CLOSE_DURATION / 1000) + 's';
+                let duration: string = String(speed / 1000) + 's';
                 this.backdropElement.style.webkitTransitionDuration = duration;
                 this.backdropElement.style.transitionDuration = duration;
 
@@ -178,7 +180,7 @@ export class Modul {
 
                     this.activeScollBody();
                 }
-            }, BACKDROP_STYLE_TRANSITION_CLOSE_DURATION);
+            }, speed);
         }
     }
 

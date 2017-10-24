@@ -3,7 +3,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { Portal, PortalMixin } from '../../mixins/portal/portal';
+// import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import WithRender from './base-window.html?style=./base-window.scss';
 
 export enum BaseWindowMode {
@@ -28,10 +28,10 @@ const DIALOG_ID: string = 'mDialog';
 
 @WithRender
 @Component({
-    mixins: [
+    /*mixins: [
         MediaQueries,
         Portal
-    ]
+    ]*/
 })
 export class BaseWindow extends ModulVue {
     @Prop({ default: DIALOG_ID })
@@ -202,14 +202,14 @@ export class BaseWindow extends ModulVue {
     }
 
     private createDialog() {
-        if (!this.disabled) {
-            this.as<PortalMixin>().appendBackdropAndPortalToBody(this.id, this.classNamePortalTarget, this.transitionDuration / 1000 + 's');
-            this.propId = this.as<PortalMixin>().portalId;
-        }
+        // if (!this.disabled) {
+        //     this.as<PortalMixin>().appendBackdropAndPortalToBody(this.id, this.classNamePortalTarget, this.transitionDuration / 1000 + 's');
+        //     this.propId = this.as<PortalMixin>().portalId;
+        // }
     }
 
     private deleteDialog() {
-        this.as<PortalMixin>().removeBackdropAndPortal();
+        // this.as<PortalMixin>().removeBackdropAndPortal();
     }
 
     private backdropClick(event): void {

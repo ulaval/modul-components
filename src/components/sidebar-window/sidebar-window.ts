@@ -43,7 +43,7 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     @Prop()
     public width: string;
 
-    @Prop({ default: false })
+    @Prop()
     public open: boolean;
 
     @Prop({ default: true })
@@ -71,7 +71,6 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     protected mounted(): void {
-        this.propOpen = this.open;
         this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
     }
 
@@ -84,7 +83,7 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     public get propOpen(): boolean {
-        return this.open && !this.disabled;
+        return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
     }
 
     public set propOpen(value: boolean) {
