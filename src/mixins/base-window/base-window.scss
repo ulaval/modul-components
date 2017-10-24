@@ -352,8 +352,6 @@ $m-dialog--header-height: $m-touch-size !default;
     &__header,
     &__body,
     &__footer {
-        position: relative;
-
         &.m--no-padding {
             padding: 0;
         }
