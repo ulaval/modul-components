@@ -1,27 +1,23 @@
-<transition>
-    <article class="m-accordion-group" v-if="!hasError">
-        <header class="m-accordion-group__header" :class="{ 'm--is-no-title' : !hasTitle }" v-if="hasTitleSlot || !concurrent">
-            <span class="m-accordion-group__header__title" v-if="hasTitleSlot">
-                <slot name="title"></slot>
-            </span>
-            <template v-if="!concurrent">
-                <m-link mode="button" @click="openAllAccordions" v-if="!propAllOpen">
-                    <m-i18n k="m-accordion-group:open-all"></m-i18n>
-                </m-link>
-                <m-link mode="button" @click="closeAllAccordions" v-if="propAllOpen">
-                    <m-i18n k="m-accordion-group:close-all"></m-i18n>
-                </m-link>
-            </template>
-        </header>
-        <div class="m-accordion-group__body">
-            <slot>
-                <m-accordion :open="false"></m-accordion>
-                <m-accordion :open="false"></m-accordion>
-                <m-accordion :open="false"></m-accordion>
-            </slot>
-        </div>
-    </article>
-    <article class="m-accordion-group" v-if="hasError">
-        <p>{{ errorMessage }}</p>
-    </article>
-</transition>
+<article class="m-accordion-group">
+    <header class="m-accordion-group__header" :class="{ 'm--is-no-title' : !hasTitle }" v-if="hasTitleSlot || !concurrent">
+        <span class="m-accordion-group__header__title" v-if="hasTitleSlot">
+            <slot name="title"></slot>
+        </span>
+        <template v-if="!concurrent">
+            <m-link mode="button" @click="openAllAccordions" v-if="!propAllOpen">
+                <m-i18n k="m-accordion-group:open-all"></m-i18n>
+            </m-link>
+            <span v-if="!propAllOpen && !propAllClosed">&nbsp;|&nbsp;</span>
+            <m-link mode="button" @click="closeAllAccordions" v-if="!propAllClosed">
+                <m-i18n k="m-accordion-group:close-all"></m-i18n>
+            </m-link>
+        </template>
+    </header>
+    <div class="m-accordion-group__body">
+        <slot>
+            <m-accordion></m-accordion>
+            <m-accordion></m-accordion>
+            <m-accordion></m-accordion>
+        </slot>
+    </div>
+</article>

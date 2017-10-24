@@ -1,29 +1,18 @@
-<article class="m-accordion"
-         :class="{ 'm--is-regular': propSkin=='regular',
-                'm--is-light': propSkin=='light',
-                'm--is-vanilla': propSkin=='vanilla',
-                'm--is-close': !isOpen }">
-    <header tabindex="0"
-            class="m-accordion__header"
-            :class="{ 'm--is-icon-left': propIconPosition != 'right' }"
-            @keyup.enter="toggleAccordion"
-            @click.prevent="toggleAccordion"
-            ref="accordionHeader">
+<article class="m-accordion" :class="['m--is-' + propSkin, {'m--is-closed': !propOpen}]">
+    <header tabindex="0" class="m-accordion__header" :class="{ 'm--is-icon-left': propIconPosition != 'right' }" @keyup.enter="toggleAccordion"
+        @click.prevent="toggleAccordion" ref="accordionHeader">
         <div class="m-accordion__header__title">
             <slot name="title">m-accordion</slot>
-            <m-i18n k="m-accordion:open" class="m-accordion__hidden" v-if="!isOpen"></m-i18n>
-            <m-i18n k="m-accordion:close" class="m-accordion__hidden" v-if="isOpen"></m-i18n>
+            <m-i18n k="m-accordion:open" class="m-accordion__hidden" v-if="!propOpen"></m-i18n>
+            <m-i18n k="m-accordion:close" class="m-accordion__hidden" v-if="propOpen"></m-i18n>
         </div>
-        <span aria-hidden="true"
-              class="m-accordion__header-icon"
-              :class="{ 'm--is-close': isOpen,
-                     'm--is-anim-active': isAnimActive,
+        <span aria-hidden="true" class="m-accordion__header-icon" :class="{ 'm--is-closed': propOpen,
                      'm--is-left': propIconPosition != 'right',
                      'm--is-large': propIconSize=='large',
                      'm--has-border': propIconSkin=='regular' }"></span>
     </header>
     <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
-        <div class="m-accordion__body-wrap" :class="{ 'm--is-anim-active': isAnimActive }" v-if="isOpen">
+        <div class="m-accordion__body-wrap" v-if="propOpen">
             <div class="m-accordion__body">
                 <slot>m-accordion - text</slot>
             </div>
