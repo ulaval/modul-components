@@ -5,6 +5,7 @@ import { Prop } from 'vue-property-decorator';
 export enum InputStateValue {
     Default = 'default',
     Disabled = 'disabled',
+    Waiting = 'waiting',
     Error = 'error',
     Valid = 'valid'
 }
@@ -22,6 +23,8 @@ export class InputState extends Vue implements InputStateMixin {
     public state: InputStateValue;
     @Prop({ default: false })
     public disabled: boolean;
+    @Prop({ default: false })
+    public waiting: boolean;
     @Prop()
     public errorMessage: string;
     @Prop()
@@ -29,20 +32,16 @@ export class InputState extends Vue implements InputStateMixin {
     @Prop()
     public helperMessage: string;
 
-    private valid: boolean;
-    private error: boolean;
-
     public get isDisabled(): boolean {
-        let disabled: boolean = this.propState == InputStateValue.Disabled;
-        // this.$nextTick(() => {
-        //     let inputEl: HTMLElement = this.$el.querySelector('input') as HTMLElement;
-        //     disabled ? inputEl.setAttribute('disabled', 'true') : inputEl.removeAttribute('disabled');
-        // });
-        return disabled;
+        return this.propState == InputStateValue.Disabled || this.propState == InputStateValue.Waiting;
+    }
+
+    public get isWaiting(): boolean {
+        return this.propState == InputStateValue.Waiting;
     }
 
     public get hasError(): boolean {
-        return this.propState == InputStateValue.Error;
+        return this.propState == InputStateValue.Error ;
     }
 
     public get hasHelper(): boolean {
@@ -54,25 +53,17 @@ export class InputState extends Vue implements InputStateMixin {
     }
 
     public get propState(): InputStateValue {
-        let state: InputStateValue = this.state == InputStateValue.Disabled || this.state == InputStateValue.Error || this.state == InputStateValue.Valid ? this.state
+        let state: InputStateValue = this.state == InputStateValue.Disabled || this.state == InputStateValue.Waiting || this.state == InputStateValue.Error || this.state == InputStateValue.Valid ? this.state
             : InputStateValue.Default;
-        if (!this.disabled) {
-            if (this.hasErrorMessage) {
+        if (!this.disabled && !this.waiting ) {
+            if ((!!this.errorMessage) || this.errorMessage == ' ') {
                 state = InputStateValue.Error;
-            } else if ((this.hasValidMessage)) {
+            } else if ((!!this.validMessage) || this.validMessage == ' ') {
                 state = InputStateValue.Valid;
             }
         } else {
-            state = InputStateValue.Disabled;
+            state = this.disabled ? InputStateValue.Disabled : InputStateValue.Waiting;
         }
         return state;
-    }
-
-    private get hasErrorMessage(): boolean {
-        return !!this.errorMessage || this.errorMessage == ' ';
-    }
-
-    private get hasValidMessage(): boolean {
-        return !!this.validMessage || this.validMessage == ' ';
     }
 }

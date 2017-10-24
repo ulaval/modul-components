@@ -4,7 +4,8 @@
               'm--is-selected': propState=='selected',
               'm--is-waiting': propState=='waiting',
               'm--is-disabled': propState=='disabled',
-              'm--is-full-size': fullSize }" :disabled="isDisabled" :type="type" @click="onClick">
+              'm--is-focus': focus,
+              'm--is-full-size': fullSize }" :disabled="isDisabled" :type="type" @click="onClick" @focus="onFocus" @blur="onBlur" @keydown="onKeydown">
     <span class="m-button__wrap" v-if="propMode!='icon'">
         <m-icon aria-hidden="true" class="m-button__icon m--is-left" :name="iconName" :width="propIconSize" :height="propIconSize" v-if="hasIconeLeft && hasIcone && propState!='waiting'"></m-icon>
         <m-spinner aria-hidden="true" class="m-button__icon m--is-left" skin="lighter" size="small" v-if="propState=='waiting'"></m-spinner>

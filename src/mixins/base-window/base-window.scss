@@ -7,8 +7,6 @@ $m-dialog--header-height: $m-touch-size !default;
 
 .m-base-window {
     display: inline-block;
-    // Nav bug in Modul website
-    // width: 100%;
 
     &__wrap {
         position: fixed;
@@ -105,25 +103,6 @@ $m-dialog--header-height: $m-touch-size !default;
             .m-base-window {
                 &__header {
                     position: relative;
-                    min-height: $m-dialog--header-height;
-                    padding-right: $m-touch-size;
-
-                    &__close-button {
-                        position: absolute;
-                        top: 50%;
-                        right: 0;
-                        margin: 0;
-                        transform: translate3d(0, -50%, 0);
-                        stroke-width: 2px;
-
-                        &:hover {
-                            color: $m-color--white;
-                        }
-
-                        &::after {
-                            background: $m-color--black-grey-light;
-                        }
-                    }
                 }
 
                 &__body {
@@ -218,7 +197,6 @@ $m-dialog--header-height: $m-touch-size !default;
                     background: $m-color--black-grey;
                     color: $m-color--white;
                     min-height: $m-dialog--header-height;
-                    padding-right: $m-touch-size;
 
                     h2 {
                         margin: 0;
@@ -329,11 +307,6 @@ $m-dialog--header-height: $m-touch-size !default;
 
                 &__header {
                     display: block;
-                    border-bottom: 1px solid $m-color--grey-light;
-
-                    &__close-button {
-                        color: $m-color--black-grey-light;
-                    }
                 }
 
                 &__close-button {
@@ -397,6 +370,19 @@ $m-dialog--header-height: $m-touch-size !default;
         align-items: center;
         width: 100%;
         padding: $m-margin $m-padding;
+
+        &.m--has-close-button {
+            padding-right: $m-touch-size;
+        }
+
+        &__close-button {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            margin: 0;
+            transform: translate3d(0, -50%, 0);
+            stroke-width: 2px;
+        }
     }
 
     &__body {

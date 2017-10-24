@@ -17,9 +17,13 @@
             "type": "boolean",
             "default": false
         },
-        "enabled": {
+        "disabled": {
             "type": "boolean",
             "default": true
+        },
+        "fullWidth": {
+            "type": "boolean",
+            "default": false
         },
         "demo": {
             "type": "boolean",

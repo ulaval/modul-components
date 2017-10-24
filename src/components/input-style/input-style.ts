@@ -5,6 +5,8 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './input-style.html?style=./input-style.scss';
 import { INPUT_STYLE_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import IconPlugin from '../icon/icon';
+import SpinnerPlugin from '../spinner/spinner';
 
 @WithRender
 @Component({
@@ -29,7 +31,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return !!this.label;
+        return !!this.label && this.label != '';
     }
 
     private get isFocus(): boolean {
@@ -53,6 +55,8 @@ export class MInputStyle extends ModulVue {
 
 const InputStylePlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(IconPlugin);
+        v.use(SpinnerPlugin);
         v.component(INPUT_STYLE_NAME, MInputStyle);
     }
 };

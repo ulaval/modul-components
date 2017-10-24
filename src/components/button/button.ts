@@ -55,12 +55,27 @@ export class MButton extends Vue {
     public fullSize: boolean;
 
     public componentName: string = BUTTON_NAME;
+    private focus: boolean = false;
 
     private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "icon-name" is undefined';
 
     private onClick(event): void {
+        this.focus = false;
         this.$emit('click', event);
-        this.$el.blur();
+    }
+
+    private onFocus(event) {
+        this.focus = true;
+        this.$emit('focus', event);
+    }
+
+    private onBlur(event): void {
+        this.focus = false;
+        this.$emit('blur', event);
+    }
+
+    private onKeydown(event): void {
+        this.$emit('keydown', event);
     }
 
     private get propType(): string {

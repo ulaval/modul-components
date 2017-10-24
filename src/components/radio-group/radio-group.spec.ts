@@ -140,17 +140,17 @@ describe('radio-group', () => {
         });
     });
 
-    it('enabled prop', () => {
+    it('disabled prop', () => {
         let vm = new Vue({
             template: `
             <div>
-                <m-radio-group ref="g" :enabled="enabled" >
+                <m-radio-group ref="g" :disabled="disabled" >
                     <m-radio ref="a" value="radio1"></m-radio>
-                    <m-radio ref="b" :enabled="false" value="radio2"></m-radio>
+                    <m-radio ref="b" :disabled="false" value="radio2"></m-radio>
                 </m-radio-group>
             </div>`,
             data: {
-                enabled: undefined
+                disabled: undefined
             }
         }).$mount();
 
@@ -158,12 +158,12 @@ describe('radio-group', () => {
         // override by item
         expect((vm.$refs.b as Vue).$el.classList.contains(DISABLED_CSS)).toBeTruthy();
 
-        (vm as any).enabled = false;
+        (vm as any).disabled = true;
         Vue.nextTick(() => {
             expect((vm.$refs.a as Vue).$el.classList.contains(DISABLED_CSS)).toBeTruthy();
             expect((vm.$refs.b as Vue).$el.classList.contains(DISABLED_CSS)).toBeTruthy();
 
-            (vm as any).enabled = true;
+            (vm as any).disabled = false;
             Vue.nextTick(() => {
                 expect((vm.$refs.a as Vue).$el.classList.contains(DISABLED_CSS)).toBeFalsy();
                 // override
