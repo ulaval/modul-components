@@ -27,7 +27,7 @@ export class MAccordionGroup extends ModulVue {
     private accordions: string[] = [];
     private openAccordions: string[] = [];
 
-    public addAccordion(id: string, open: boolean = false) {
+    public addAccordion(id: string, open: boolean = false): void {
         if (this.accordions.indexOf(id) == -1) this.accordions.push(id);
         // group value override individual accordion's inital open state
         if (!this.value && open && this.openAccordions.indexOf(id) == -1) {
@@ -35,12 +35,12 @@ export class MAccordionGroup extends ModulVue {
         }
     }
 
-    public removeAccordion(id: string) {
+    public removeAccordion(id: string): void {
         this.accordions = this.accordions.filter(el => el != id);
         this.setOpenAccordions(this.openAccordions.filter(el => el != id));
     }
 
-    public toggleAccordion(id: string) {
+    public toggleAccordion(id: string): void {
         if (this.openAccordions.indexOf(id) == -1) {
             this.setOpenAccordions([id, ...this.openAccordions]);
         } else {
@@ -48,16 +48,16 @@ export class MAccordionGroup extends ModulVue {
         }
     }
 
-    public accordionIsOpen(id) {
+    public accordionIsOpen(id): boolean {
         return (this.openAccordions.indexOf(id) != -1);
     }
 
-    protected created() {
+    protected created(): void {
         this.setOpenAccordions(this.value);
     }
 
     @Watch('value')
-    private setOpenAccordions(value?: string[]) {
+    private setOpenAccordions(value?: string[]): void {
         if (this.concurrent && value && value.length > 1) {
             this.openAccordions = [value[0]];
         } else {
@@ -75,7 +75,7 @@ export class MAccordionGroup extends ModulVue {
     }
 
     private get propSkin(): MAccordionSkin {
-        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.NoSkin ? this.skin : MAccordionSkin.Regular;
+        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Plain ? this.skin : MAccordionSkin.Regular;
     }
 
     private get hasTitleSlot(): boolean {

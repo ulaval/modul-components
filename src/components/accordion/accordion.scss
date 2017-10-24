@@ -108,7 +108,7 @@ $m-accordion--color: $m-color--accent;
             flex-direction: row-reverse;
         }
 
-        &:not(.m--is-vanilla) {
+        &:not(.m--is-plain) {
             color: $m-color--text;
             text-decoration: none;
         }

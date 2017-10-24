@@ -12,7 +12,7 @@ import uuid from '../../utils/uuid/uuid';
 export enum MAccordionSkin {
     Regular = 'regular',
     Light = 'light',
-    NoSkin = 'no-skin'
+    Plain = 'plain'
 }
 
 export enum MAccordionIconPosition {
@@ -73,19 +73,19 @@ export class MAccordion extends ModulVue {
         this.internalPropOpen = value;
     }
 
-    protected created() {
+    protected created(): void {
         if (this.$parent instanceof MAccordionGroup) this.$parent.addAccordion(this.propId, this.open);
     }
 
-    protected beforeDestroy() {
+    protected beforeDestroy(): void {
         if (this.$parent instanceof MAccordionGroup) this.$parent.removeAccordion(this.propId);
     }
 
-    private get propId() {
+    private get propId(): string {
         return this.id || this.uuid;
     }
 
-    private get propSkin() {
+    private get propSkin(): MAccordionSkin {
         return this.$parent instanceof MAccordionGroup ? this.$parent.skin : this.skin;
     }
 
