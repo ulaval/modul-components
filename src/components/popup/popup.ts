@@ -5,7 +5,8 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import PopperPlugin, { MPopperPlacement } from '../popper/popper';
+import { MPopperPlacement } from '../popper/popper';
+import PopperPlugin from '../popper/popper';
 import SidebarPlugin from '../sidebar-window/sidebar-window';
 
 @WithRender

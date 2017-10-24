@@ -8,9 +8,6 @@ import * as moment from 'moment';
 import { curLang } from '../../utils/i18n/i18n';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { KeyCode } from '../../utils/keycode/keycode';
-import PopupPlugin from '../popup/popup';
-import ButtonPlugin from '../button/button';
-import ValidationMessagePlugin from '../validation-message/validation-message';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -39,14 +36,14 @@ export class MDatepicker extends ModulVue {
     @Prop({ default: 'DD/MM/YYYY' })
     public format: string;
 
-    @Prop()
-    public label: string;
-
     @Prop({ default: () => { return moment().subtract(10, 'year'); } })
     public min: moment.Moment | Date;
 
     @Prop({ default: () => { return moment().add(10, 'year'); } })
     public max: moment.Moment | Date;
+
+    @Prop({ default: false })
+    public disabled: boolean;
 
     @Prop({ default: false })
     public required: boolean;
@@ -66,8 +63,6 @@ export class MDatepicker extends ModulVue {
     private selectedYear: number = 0;
     private selectedMonth: number = 0;
     private selectedDay: number = 0;
-
-    private internalIsFocus: boolean = false;
 
     protected created(): void {
         moment.locale([curLang, 'en-ca']);
@@ -214,41 +209,17 @@ export class MDatepicker extends ModulVue {
         return this.prepareDataForTableLayout([...this.previousDays, ...this.days, ...this.nextDays], 7);
     }
 
-    private get isFocus(): boolean {
-        return this.internalIsFocus;
-    }
-
-    private get datepickerState() {
-        return !this.as<InputState>().isDisabled && this.error != '' ? 'error' : this.as<InputState>().propState;
-    }
-
     private onOpen() {
         this.view = VIEW_DAY;
         this.isOpen = true;
-        this.internalIsFocus = true;
         this.$emit('open');
     }
 
     private onClose() {
         this.isOpen = false;
-        this.internalIsFocus = false;
     }
 
-    private onClick(event: MouseEvent): void {
-        this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
-        this.$emit('click');
-    }
-
-    private onFocus(event: FocusEvent): void {
-        this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
-        if (this.internalIsFocus) {
-            this.$emit('focus', event);
-        }
-    }
-
-    private onBlur(event): void {
-        this.$emit('blur', event);
-
+    private onBlur(event) {
         if (event.target.value == '') {
             this.selectedMomentDate = moment();
             if (this.required) {
@@ -271,7 +242,7 @@ export class MDatepicker extends ModulVue {
         } else {
             this.error = this.$i18n.translate('m-datepicker:format-error');
         }
-        // this.closeDatepicker();
+        this.closeDatepicker();
     }
 
     private closeDatepicker(): void {
@@ -319,9 +290,6 @@ export class MDatepicker extends ModulVue {
 
 const DatepickerPlugin: PluginObject<any> = {
     install(v, options) {
-        v.use(PopupPlugin);
-        v.use(ButtonPlugin);
-        v.use(ValidationMessagePlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };

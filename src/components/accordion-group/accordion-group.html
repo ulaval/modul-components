@@ -8,8 +8,7 @@
                 <m-link mode="button" @click="openAllAccordions" v-if="!propAllOpen">
                     <m-i18n k="m-accordion-group:open-all"></m-i18n>
                 </m-link>
-                <span v-if="!propAllOpen && !propAllClosed">&nbsp;|&nbsp;</span>
-                <m-link mode="button" @click="closeAllAccordions" v-if="!propAllClosed">
+                <m-link mode="button" @click="closeAllAccordions" v-if="propAllOpen">
                     <m-i18n k="m-accordion-group:close-all"></m-i18n>
                 </m-link>
             </template>

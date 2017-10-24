@@ -19,16 +19,15 @@
               :leave-cancelled="leaveCancelled"
               v-if="!isSmall || desktopOnly"
               :style="{ width: width }">
-
         <slot></slot>
         <div slot="body" class="m-popup__body" :class="{ 'm--has-shadow': shadow }" v-if="hasHeaderSlot || hasBodySlot || hasFooterSlot">
-            <slot name="header" v-if="hasHeaderSlot"></slot>
-            <slot name="body" v-if="hasBodySlot"></slot>
-            <slot name="footer" v-if="hasFooterSlot"></slot>
+            <slot name="header"></slot>
+            <slot name="body"></slot>
+            <slot name="footer"></slot>
         </div>
     </m-popper>
     <m-sidebar :open="propOpen" @open="togglePopup(true)" @close="togglePopup(false)" :disabled="disabled" :id="id" :classNamePortalTarget="classNamePortalTarget"
-        :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter" v-if="isSmall && !desktopOnly" :style="{ width: width }">
+        :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter" v-if="isSmall && !desktopOnly">
         <slot></slot>
         <div slot="header" class="m-popup__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>

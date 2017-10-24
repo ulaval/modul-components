@@ -1,10 +1,9 @@
 @import 'abstracts/variables';
-$m-input-style--color-default-text: $m-color--disabled !default;
+$m-input-style--color-default-text: $m-color--grey-darker !default;
 $m-input-style--color-focus: $m-color--interactive !default;
 $m-input-style--color-error: $m-color--error !default;
 $m-input-style--color-valid: $m-color--success !default;
-$m-input-style--color-disabled: $m-color--disabled !default;
-$m-input-style--color-waiting: $m-color--active !default;
+$m-input-style--color-disabled: $m-color--grey-darker !default;
 $m-input-style--padding: 5px !default;
 
 .m-input-style {
@@ -40,7 +39,7 @@ $m-input-style--padding: 5px !default;
         background: $m-input-style--color-focus;
     }
 
-    &:hover:not(.m--is-disabled):not(.m--has-error):not(.m--is-valid):not(.m--is-focus),
+    &:hover:not(.m--is-disabled):not(.m--has-error):not(.m--is-valid),
     &.m--has-value {
         &::before {
             border-color: $m-color--text;
@@ -76,6 +75,11 @@ $m-input-style--padding: 5px !default;
                 font-size: $m-font-size--s;
                 cursor: pointer;
             }
+
+            &__disabled-icon {
+                stroke-width: 3px;
+                font-size: 8px; // Magic number
+            }
         }
     }
 
@@ -84,7 +88,7 @@ $m-input-style--padding: 5px !default;
     }
 
     &:not(.m--is-label-up) {
-        &.m--has-label .m-input-style__body__left {
+        .m-input-style__body__left {
             opacity: 0;
         }
     }
@@ -154,21 +158,6 @@ $m-input-style--padding: 5px !default;
         }
     }
 
-    &.m--is-waiting {
-        &,
-        .m-input-style__label,
-        .m-input-style__body,
-        .m-input-style__body__left,
-        .m-input-style__body__right,
-        .m-input-style__body input,
-        .m-input-style__body div,
-        .m-input-style__body span,
-        .m-button.m--is-mode-icon,
-        .m-icon.m-icon {
-            cursor: wait;
-        }
-    }
-
     &__label {
         transition-property: color, top, bottom, transform, font-size;
         transition-duration: $m-transition-duration--l;
@@ -182,22 +171,15 @@ $m-input-style--padding: 5px !default;
         white-space: nowrap;
     }
 
-    &__placeholder,
-    input::placeholder {
-        color: $m-color--grey-dark;
-    }
-
     &__body {
         position: relative;
         z-index: 1;
         display: flex;
         align-items: center;
-        flex: 1 1 auto;
-        width: 100%;
-        min-height: 30px; // Magic number
         padding: 0 0 $m-input-style--padding 0;
         font-weight: $m-font-weight;
         text-decoration: none;
+        flex: 1 1 auto;
 
         &,
         div,
@@ -208,7 +190,6 @@ $m-input-style--padding: 5px !default;
         &,
         input {
             outline: none;
-            text-overflow: ellipsis;
             font-family: $m-font-family;
             font-size: $m-font-size--l;
             font-weight: $m-font-weight;
@@ -216,20 +197,10 @@ $m-input-style--padding: 5px !default;
             color: $m-color--text;
             border: none;
             background: none;
-        }
-
-        input {
             cursor: text;
-            overflow: hidden;
-            width: 100%;
-
-            &[type=password] {
-                letter-spacing: 2px;
-            }
         }
 
         &__left {
-            overflow: hidden;
             transition: opacity 0.3s ease;
             flex: 1 1 auto;
         }
@@ -261,7 +232,12 @@ $m-input-style--padding: 5px !default;
         }
     }
 
-    div {
-        outline: none;
+    &__disabled-icon {
+        transition: font-size $m-transition-duration--l ease, stroke-width $m-transition-duration--l ease;
+        z-index: 1;
+        display: inline-block;
+        stroke-width: 2px;
+        font-size: 12px; // Magic number
+        margin-right: $m-margin--s;
     }
 }

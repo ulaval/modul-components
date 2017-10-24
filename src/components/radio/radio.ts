@@ -8,7 +8,6 @@ import IconPlugin from '../icon/icon';
 import uuid from '../../utils/uuid/uuid';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import ValidationMessagePlugin from '../validation-message/validation-message';
-import RadioStylePlugin from '../radio-style/radio-style';
 
 export enum MRadioPosition {
     Left = 'left',
@@ -18,15 +17,14 @@ export enum MRadioPosition {
 export interface RadioGroup {
     name: string;
     position: MRadioPosition;
-    disabled: boolean;
+    enabled: boolean;
     inline: boolean;
-    fullWidth: boolean;
     getValue(): string;
     updateValue(value: string): void;
 }
 
 export interface ButtonGroup extends RadioGroup {
-    fullWidth: boolean;
+    fullsize: boolean;
 }
 
 export abstract class BaseRadioGroup extends ModulVue {
@@ -53,8 +51,8 @@ export class MRadio extends ModulVue {
         validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
     })
     public position: MRadioPosition;
-    @Prop({ default: false })
-    public disabled: boolean;
+    @Prop({ default: true })
+    public enabled: boolean;
     @Prop({ default: false })
     public demo: boolean;
     // ----- For Button Group -----
@@ -65,8 +63,6 @@ export class MRadio extends ModulVue {
         validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
     })
     public iconPosition: MRadioPosition;
-    @Prop({ default: false })
-    public fullWidth: boolean;
     // ---------------------------
     public radioID: string = uuid.generate();
 
@@ -78,11 +74,11 @@ export class MRadio extends ModulVue {
         return this.isGroup() ? this.parentGroup.position : this.position;
     }
 
-    public get propDisabled(): boolean {
-        let result: boolean = this.disabled;
-        let groupDisabled: boolean = this.isGroup() ? this.parentGroup.disabled : true;
+    public get propEnabled(): boolean {
+        let result: boolean = this.enabled;
+        let groupEnabled: boolean = this.isGroup() ? this.parentGroup.enabled : true;
 
-        return groupDisabled && result;
+        return groupEnabled && result;
     }
 
     public get propName(): string {
@@ -93,8 +89,8 @@ export class MRadio extends ModulVue {
         return this.isGroup() ? this.parentGroup.inline : false;
     }
 
-    public get propFullWidth(): boolean {
-        return this.isGroup() ? this.parentGroup.fullWidth : this.fullWidth;
+    public get propFullsize(): boolean {
+        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullsize : false;
     }
 
     protected get model(): string {
@@ -145,7 +141,6 @@ export class MRadio extends ModulVue {
 
 const RadioPlugin: PluginObject<any> = {
     install(v, options) {
-        v.use(RadioStylePlugin);
         v.use(IconPlugin);
         v.use(ValidationMessagePlugin);
         v.component(RADIO_NAME, MRadio);

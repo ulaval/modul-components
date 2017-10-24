@@ -2,21 +2,23 @@
 $m-radio--width: 16px;
 
 .m-radio-group {
-    display: inline-flex;
-
     &__wrap {
-        width: 100%;
         margin: 0;
         padding: 0;
     }
 
     &.m--is-inline {
-        .m-radio {
-            display: inline;
+        display: inline-flex;
+        flex-direction: column;
+
+        .m-radio-group__wrap {
+            display: inline-block;
         }
 
-        &:not(.m--is-full-width) {
-            .m-radio + .m-radio {
+        .m-radio {
+            display: inline;
+
+            + .m-radio {
                 margin-left: $m-padding--s;
             }
         }
@@ -25,7 +27,7 @@ $m-radio--width: 16px;
     &:not(.m--is-inline) {
         &,
         .m-radio-group__wrap {
-            flex-direction: column;
+            display: block;
         }
 
         .m-radio {
@@ -33,9 +35,5 @@ $m-radio--width: 16px;
                 margin-top: $m-margin--s;
             }
         }
-    }
-
-    &.m--is-full-width {
-        width: 100%;
     }
 }

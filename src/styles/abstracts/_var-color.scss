@@ -80,17 +80,7 @@ $m-color--active-light: $m-color--warning-light !default;
 $m-color--active-lightest: $m-color--warning-lightest !default;
 
 // ======================================================================
-//  disabled colors
-// ======================================================================
-$m-color--disabled: $m-color--grey-dark !default;
-
-// ======================================================================
 //  Scrollbar colors
 // ======================================================================
-$m-color--scrollbar: $m-color--grey !default;
-$m-color--scrollbar--light: $m-color--grey-lighter !default;
-
-// ======================================================================
-//  Disabled colors
-// ======================================================================
-$m-color--disabled: $m-color--grey-dark !default;
+$m-color--scrollbar: $m-color--grey;
+$m-color--scrollbar--light: $m-color--grey-lighter;

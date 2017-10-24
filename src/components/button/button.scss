@@ -4,6 +4,7 @@ $m-button--color-hover: $m-color--interactive-light !default;
 $m-button--color-active: $m-color--interactive-dark !default;
 $m-button--color-selected: $m-color--interactive-darker !default;
 $m-button--color-waiting: $m-color--interactive-lighter !default;
+$m-button--color-disabled: $m-color--grey-darker !default;
 
 .m-button {
     position: relative;
@@ -42,7 +43,7 @@ $m-button--color-waiting: $m-color--interactive-lighter !default;
             }
 
             &:active,
-            &.m--is-focus {
+            &:focus {
                 color: $m-color--white;
                 background: $m-button--color-active;
                 border-color: $m-button--color-active;
@@ -58,9 +59,9 @@ $m-button--color-waiting: $m-color--interactive-lighter !default;
 
         &.m--is-disabled {
             cursor: not-allowed;
-            color: $m-color--disabled;
+            color: $m-button--color-disabled;
             background: $m-color--white;
-            border-color: $m-color--disabled;
+            border-color: $m-button--color-disabled;
         }
 
         &.m--is-selected {
@@ -127,9 +128,9 @@ $m-button--color-waiting: $m-color--interactive-lighter !default;
 
         &.m--is-disabled {
             cursor: not-allowed;
-            color: $m-color--disabled;
+            color: $m-button--color-disabled;
             background: $m-color--white;
-            border-color: $m-color--disabled;
+            border-color: $m-button--color-disabled;
         }
     }
 
@@ -140,7 +141,7 @@ $m-button--color-waiting: $m-color--interactive-lighter !default;
     &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
         &.m--is-mode-icon {
             &:active,
-            &.m--is-focus {
+            &:focus {
                 &::after {
                     opacity: 1;
                     transition-delay: 0s;

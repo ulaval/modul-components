@@ -5,11 +5,11 @@
         "value": {
             "type": "string"
         },
-        "disabled": {
+        "enabled": {
             "type": "boolean",
             "default": false
         },
-        "fullWidth": {
+        "fullSize": {
             "type": "boolean",
             "default": false
         },
