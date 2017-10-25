@@ -43,6 +43,11 @@ describe('dropdown', () => {
         });
     });
 
+    it('has input to focus', () => {
+        let input = ((dropdown.$refs.mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement);
+        expect(input).toBeTruthy();
+    });
+
     it('enabled prop disabled', () => {
         expect(dropdown.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
 

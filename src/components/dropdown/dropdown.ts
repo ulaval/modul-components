@@ -78,6 +78,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
+    public focus(): void {
+        ((this.$refs.mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement).focus();
+    }
+
     protected mounted(): void {
         this.$nextTick(() => {
             this.buildItemsMap();
