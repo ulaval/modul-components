@@ -80,6 +80,11 @@ $m-color--active-light: $m-color--warning-light !default;
 $m-color--active-lightest: $m-color--warning-lightest !default;
 
 // ======================================================================
+//  disabled colors
+// ======================================================================
+$m-color--disabled: $m-color--grey-dark !default;
+
+// ======================================================================
 //  Scrollbar colors
 // ======================================================================
 $m-color--scrollbar: $m-color--grey;
