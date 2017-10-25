@@ -10,4 +10,6 @@ describe('limit-text', () => {
         limitText = new MLimitText().$mount();
     });
 
+    // Todo: Complete the unit test
+
 });
