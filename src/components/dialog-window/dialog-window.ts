@@ -2,15 +2,12 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import WithRender from './dialog-window.html?style=../../mixins/base-window/base-window.scss';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import { DIALOG_NAME } from '../component-names';
 import { OpenTrigger, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
 import { OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
-
-const DIALOG_ID: string = 'mDialog';
-const DIALOG_MAX_WIDTH: string = '640px';
 
 const TRANSITION_DURATION: number = 300;
 const TRANSITION_DURATION_LONG: number = 600;
@@ -54,7 +51,7 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
 
     private portalTargetEl: HTMLElement;
     private internalOpen: boolean = false;
-    private propId: string;
+    private propId: string = '';
 
     public getPortalTargetElement(): HTMLElement {
         return this.portalTargetEl;
@@ -68,7 +65,6 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     protected mounted(): void {
-        // this.propOpen = this.open;
         this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
     }
 
@@ -117,6 +113,11 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
         }
         this.internalOpen = value;
         this.$emit('update:open', value);
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
     }
 
     private setFastFocusToElement(el: HTMLElement): void {

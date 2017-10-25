@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { ModulVue } from '../../../src/utils/vue/vue';
 import Component from 'vue-class-component';
 import WithRender from './navigation.html';
 import Meta from '../../../src/meta/meta';
@@ -16,7 +16,7 @@ class Choice {
 
 @WithRender
 @Component
-export class Navigation extends Vue {
+export class Navigation extends ModulVue {
     public routes: string[] = [];
 
     private items0: string[] = [];
@@ -32,6 +32,7 @@ export class Navigation extends Vue {
     private items3: string[] = 'item Alpha,item Bravo'.split(',');
     private myObj: Choice = new Choice();
     private t: string = '';
+    private o: boolean = false;
 
     private template: object = {
         template: `<div>
@@ -65,5 +66,9 @@ export class Navigation extends Vue {
 
     private getLabel(item: string): string {
         return `--(${item})--`;
+    }
+
+    private onClick(): void {
+        this.$confirm().then(() => console.log('ok!!!')).catch(() => console.log('cancel!!!'));
     }
 }

@@ -91,7 +91,7 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
 
     private popper: Popper | undefined;
     private portalTargetEl: HTMLElement;
-    private propId: string;
+    private propId: string = '';
 
     private defaultAnimOpen: boolean = false;
     private internalOpen: boolean = false;

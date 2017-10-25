@@ -8,14 +8,14 @@
             <m-link url="media-queries">Media Queries</m-link>
         </h2>
 
-        <m-dropdown width="500px" v-model="myObj.selection" :filterable="true" :disabled="false">
+        <!-- <m-dropdown width="500px" v-model="myObj.selection" :filterable="true" :disabled="false">
             <m-dropdown-item v-for="(i, k, x) in items" :value="i" :label="getLabel(i)" :disabled="k==1||k==4"></m-dropdown-item>
             <m-dropdown-group label="mon groupe">
                 <m-dropdown-item v-for="(j, l, y) in items3" :value="j" :label="getLabel(j)" :disabled="l==0"></m-dropdown-item>
             </m-dropdown-group>
         </m-dropdown>
 
-        <m-options-menu></m-options-menu>
+        <m-options-menu></m-options-menu> -->
 
         <m-button v-m-popup:dialog1>dialog</m-button>
         <m-dialog ref="dialog1" title="title here">
@@ -23,6 +23,15 @@
             <a href="http://google.com">google</a>
             <a href="http://bing.com">bing</a>
         </m-dialog>
+
+        <m-button v-m-popup:modal1>modal</m-button>
+        <m-modal :open.sync="o" ref="modal1">
+            <p>show me something</p>
+            <a href="http://google.com">google</a>
+            <a href="http://bing.com">bing</a>
+        </m-modal>
+
+        <m-button @click="onClick()">confirm</m-button>
 
         <!-- <component :is="template"></component> -->
 

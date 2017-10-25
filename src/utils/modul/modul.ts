@@ -149,7 +149,7 @@ export class Modul {
             targetElement.appendChild(element);
 
             this.backdropElement = document.querySelector('#' + id) as HTMLElement;
-            let duration: string = String(BACKDROP_STYLE_TRANSITION_SLOW_DURATION / 1000) + 's';
+            let duration: string = String(BACKDROP_STYLE_TRANSITION_FAST_DURATION / 1000) + 's';
             this.backdropElement.style.webkitTransitionDuration = duration;
             this.backdropElement.style.transitionDuration = duration;
 

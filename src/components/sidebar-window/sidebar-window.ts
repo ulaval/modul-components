@@ -57,7 +57,7 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
 
     private portalTargetEl: HTMLElement;
     private internalOpen: boolean = false;
-    private propId: string;
+    private propId: string = '';
 
     public getPortalTargetElement(): HTMLElement {
         return this.portalTargetEl;

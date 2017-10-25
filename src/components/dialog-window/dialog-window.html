@@ -1,4 +1,5 @@
 <div class="m-base-window" ref="baseWindow">
+    <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
         <div class="m-base-window__wrap m--is-dialog" :class="[{ 'm--is-open': propOpen,
                         'm--is-small': size == 'small',
