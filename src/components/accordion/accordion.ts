@@ -1,13 +1,11 @@
-import Vue from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './accordion.html?style=./accordion.scss';
-import { ACCORDION_NAME, ACCORDION_GROUP_NAME } from '../component-names';
-import { MAccordionGroup } from '../accordion-group/accordion-group';
+import { ACCORDION_NAME } from '../component-names';
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 import uuid from '../../utils/uuid/uuid';
+import I18nPlugin from '../i18n/i18n';
 
 export enum MAccordionSkin {
     Regular = 'regular',
@@ -30,11 +28,19 @@ export enum MAccordionIconSize {
     Large = 'large'
 }
 
+export abstract class BaseAccordionGroup extends Vue {
+    abstract skin: MAccordionSkin;
+    abstract accordionIsOpen(id: string): boolean;
+    abstract addAccordion(id: string, open: boolean): void;
+    abstract removeAccordion(id: string): void;
+    abstract toggleAccordion(id: string): void;
+}
+
 @WithRender
 @Component({
     mixins: [TransitionAccordion]
 })
-export class MAccordion extends ModulVue {
+export class MAccordion extends Vue {
 
     @Prop()
     public open: boolean;
@@ -60,7 +66,7 @@ export class MAccordion extends ModulVue {
     private internalPropOpen: boolean = false;
 
     public get propOpen(): boolean {
-        if (this.$parent instanceof MAccordionGroup) {
+        if (this.$parent instanceof BaseAccordionGroup) {
             return this.$parent.accordionIsOpen(this.propId);
         } else if (this.open != undefined) {
             return this.open;
@@ -69,16 +75,16 @@ export class MAccordion extends ModulVue {
     }
 
     public set propOpen(value) {
-        this.$emit('update:open', value);
         this.internalPropOpen = value;
+        this.$emit('update:open', value);
     }
 
     protected created(): void {
-        if (this.$parent instanceof MAccordionGroup) this.$parent.addAccordion(this.propId, this.open);
+        if (this.$parent instanceof BaseAccordionGroup) this.$parent.addAccordion(this.propId, this.open);
     }
 
     protected beforeDestroy(): void {
-        if (this.$parent instanceof MAccordionGroup) this.$parent.removeAccordion(this.propId);
+        if (this.$parent instanceof BaseAccordionGroup) this.$parent.removeAccordion(this.propId);
     }
 
     private get propId(): string {
@@ -86,7 +92,7 @@ export class MAccordion extends ModulVue {
     }
 
     private get propSkin(): MAccordionSkin {
-        return this.$parent instanceof MAccordionGroup ? this.$parent.skin : this.skin;
+        return this.$parent instanceof BaseAccordionGroup ? this.$parent.skin : this.skin;
     }
 
     private get propIconPosition(): MAccordionIconPosition {
@@ -108,15 +114,16 @@ export class MAccordion extends ModulVue {
     }
 
     private toggleAccordion(): void {
-        if (this.$parent instanceof MAccordionGroup) this.$parent.toggleAccordion(this.propId);
-        this.propOpen = !this.propOpen;
+        if (this.$parent instanceof BaseAccordionGroup) this.$parent.toggleAccordion(this.propId);
         (this.$refs.accordionHeader as HTMLElement).blur();
-        this.$emit('click', this.propOpen);
+        this.propOpen = !this.propOpen;
+        this.$emit('click', this.internalPropOpen);
     }
 }
 
 const AccordionPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(I18nPlugin);
         v.component(ACCORDION_NAME, MAccordion);
     }
 };

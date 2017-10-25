@@ -1,14 +1,15 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './accordion-group.html?style=./accordion-group.scss';
 import { ACCORDION_GROUP_NAME } from '../component-names';
-import { MAccordionSkin } from '../accordion/accordion';
+import { MAccordionSkin, BaseAccordionGroup } from '../accordion/accordion';
+import I18nPlugin from '../i18n/i18n';
+import LinkPlugin from '../link/link';
 
 @WithRender
 @Component
-export class MAccordionGroup extends ModulVue {
+export class MAccordionGroup extends BaseAccordionGroup {
 
     @Prop({ default: MAccordionSkin.Regular })
     public skin: MAccordionSkin;
@@ -93,6 +94,8 @@ export class MAccordionGroup extends ModulVue {
 
 const AccordionGroupPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(I18nPlugin);
+        v.use(LinkPlugin);
         v.component(ACCORDION_GROUP_NAME, MAccordionGroup);
     }
 };
