@@ -3,7 +3,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './accordion-group.html?style=./accordion-group.scss';
 import { ACCORDION_GROUP_NAME } from '../component-names';
-import { MAccordionSkin, BaseAccordionGroup } from '../accordion/accordion';
+import MAccordionPlugin, { MAccordionSkin, BaseAccordionGroup } from '../accordion/accordion';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 
@@ -16,9 +16,6 @@ export class MAccordionGroup extends BaseAccordionGroup {
 
     @Prop({ default: false })
     public concurrent: boolean;
-
-    @Prop({ default: false })
-    public allOpen: boolean;
 
     @Prop()
     public value: string[];
@@ -94,6 +91,7 @@ export class MAccordionGroup extends BaseAccordionGroup {
 
 const AccordionGroupPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(MAccordionPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.component(ACCORDION_GROUP_NAME, MAccordionGroup);
