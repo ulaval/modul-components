@@ -9,7 +9,7 @@ import uuid from '../../utils/uuid/uuid';
 import Popper from 'popper.js';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
-import { OpenTrigger, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
+import { OpenTrigger, OpenTriggerMixin, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
 import { OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 
 export enum MPopperPlacement {
@@ -32,8 +32,8 @@ export enum MPopperPlacement {
     mixins: [OpenTrigger]
 })
 export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
-    @Prop()
-    public open: boolean;
+    // @Prop()
+    // public open: boolean;
 
     @Prop({
         default: MPopperPlacement.Bottom,
@@ -53,11 +53,11 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
     })
     public placement: MPopperPlacement;
 
-    @Prop({ default: 'mPopper' })
-    public id: string;
+    // @Prop({ default: 'mPopper' })
+    // public id: string;
 
-    @Prop({ default: false })
-    public disabled: boolean;
+    // @Prop({ default: false })
+    // public disabled: boolean;
 
     @Prop({ default: true })
     public closeOnClickOutside: boolean;
@@ -90,25 +90,51 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
     public leaveCancelled: any;
 
     private popper: Popper | undefined;
-    private portalTargetEl: HTMLElement;
-    private propId: string = '';
+    // private portalTargetEl: HTMLElement;
+    // private propId: string = '';
 
     private defaultAnimOpen: boolean = false;
     private internalOpen: boolean = false;
 
-    public getPortalTargetElement(): HTMLElement {
-        return this.portalTargetEl;
+    // public getPortalTargetElement(): HTMLElement {
+    //     return this.portalTargetEl;
+    // }
+
+    // protected beforeMount(): void {
+    //     this.propId = this.id + '-' + uuid.generate();
+    //     let element: HTMLElement = document.createElement('div');
+    //     element.setAttribute('id', this.propId);
+    //     document.body.appendChild(element);
+    // }
+
+    public handlesFocus(): boolean {
+        return this.focusManagement;
     }
 
-    protected beforeMount(): void {
-        this.propId = this.id + '-' + uuid.generate();
-        let element: HTMLElement = document.createElement('div');
-        element.setAttribute('id', this.propId);
-        document.body.appendChild(element);
+    public hasBackdrop(): boolean {
+        return false;
+    }
+
+    public getPortalElement(): HTMLElement {
+        return this.$refs.popper as HTMLElement;
+    }
+
+    public doCustomPropOpen(value: boolean, el: HTMLElement): void {
+        if (value) {
+            if (this.popper == undefined) {
+                let options: object = {
+                    placement: this.placement,
+                    eventsEnabled: false
+                };
+                this.popper = new Popper(this.$el, el, options);
+            } else {
+                this.popper.update();
+            }
+        }
     }
 
     protected mounted(): void {
-        this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
+        // this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
         this.$modul.event.$on('scroll', this.update);
         this.$modul.event.$on('resize', this.update);
         this.$modul.event.$on('updateAfterResize', this.update);
@@ -120,46 +146,46 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
         this.$modul.event.$off('updateAfterResize', this.update);
 
         this.destroyPopper();
-        document.body.removeChild(this.portalTargetEl);
+        // document.body.removeChild(this.portalTargetEl);
     }
 
     public get popupBody(): any {
         return (this.$refs.popper as Element).querySelector('.m-popup__body');
     }
 
-    public get propOpen(): boolean {
-        return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
-    }
+    // public get propOpen(): boolean {
+    //     return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
+    // }
 
-    public set propOpen(value: boolean) {
-        if (value) {
-            if (this.popper == undefined) {
-                let options: object = {
-                    placement: this.placement,
-                    eventsEnabled: false
-                };
-                this.popper = new Popper(this.$el, this.portalTargetEl, options);
-            } else {
-                this.popper.update();
-            }
-            this.portalTargetEl.style.zIndex = String(this.$modul.windowZIndex);
+    // public set propOpen(value: boolean) {
+    //     if (value) {
+    //         if (this.popper == undefined) {
+    //             let options: object = {
+    //                 placement: this.placement,
+    //                 eventsEnabled: false
+    //             };
+    //             this.popper = new Popper(this.$el, this.as<OpenTriggerMixin>().getPortalTargetElement(), options);
+    //         } else {
+    //             this.popper.update();
+    //         }
+    //         this.as<OpenTriggerMixin>().getPortalTargetElement().style.zIndex = String(this.$modul.windowZIndex);
 
-            if (value != this.internalOpen) {
-                this.$emit('open');
-            }
-        } else {
-            if (value != this.internalOpen) {
-                this.$emit('close');
-            }
-        }
-        this.internalOpen = value;
-        this.$emit('update:open', value);
-    }
+    //         if (value != this.internalOpen) {
+    //             this.$emit('open');
+    //         }
+    //     } else {
+    //         if (value != this.internalOpen) {
+    //             this.$emit('close');
+    //         }
+    //     }
+    //     this.internalOpen = value;
+    //     this.$emit('update:open', value);
+    // }
 
-    @Watch('open')
-    private openChanged(open: boolean): void {
-        this.propOpen = open;
-    }
+    // @Watch('open')
+    // private openChanged(open: boolean): void {
+    //     this.propOpen = open;
+    // }
 
     private update(): void {
         if (this.popper !== undefined) {
@@ -167,14 +193,14 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
         }
     }
 
-    private setFastFocusToElement(el: HTMLElement): void {
-        if (this.focusManagement) {
-            el.setAttribute('tabindex', '0');
-            el.focus();
-            el.blur();
-            el.removeAttribute('tabindex');
-        }
-    }
+    // private setFastFocusToElement(el: HTMLElement): void {
+    //     if (this.focusManagement) {
+    //         el.setAttribute('tabindex', '0');
+    //         el.focus();
+    //         el.blur();
+    //         el.removeAttribute('tabindex');
+    //     }
+    // }
 
     private destroyPopper() {
         if (this.popper !== undefined) {
@@ -214,7 +240,7 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
             this.afterEnter(el.children[0]);
         }
 
-        this.setFastFocusToElement(el);
+        // this.setFastFocusToElement(el);
     }
 
     private onEnterCancelled(el: HTMLElement): void {
@@ -247,7 +273,7 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
 
         let trigger: HTMLElement | undefined = this.as<OpenTriggerHookMixin>().triggerHook;
         if (trigger) {
-            this.setFastFocusToElement(trigger);
+            // this.setFastFocusToElement(trigger);
         }
     }
 

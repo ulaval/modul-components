@@ -108,13 +108,15 @@ export class Modul {
         this.event.$emit('updateAfterResize');
     }
 
-    public pushElement(element: HTMLElement): void {
-        this.ensureBackdrop();
+    public pushElement(element: HTMLElement, withBackdrop: boolean): void {
+        if (withBackdrop) {
+            this.ensureBackdrop();
+        }
         this.windowZIndex++;
         element.style.zIndex = String(this.windowZIndex);
     }
 
-    public popElement(element: HTMLElement, slow: boolean = false): void {
+    public popElement(element: HTMLElement, withBackdrop: boolean, slow: boolean): void {
         this.windowZIndex--;
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
             console.warn('$modul: Invalid window ref count');
@@ -165,13 +167,11 @@ export class Modul {
         console.log('slow:', slow);
         let speed: number = slow ? BACKDROP_STYLE_TRANSITION_SLOW_DURATION : BACKDROP_STYLE_TRANSITION_FAST_DURATION;
         if (this.backdropElement) {
-            if (this.backdropElement) {
-                let duration: string = String(speed / 1000) + 's';
-                this.backdropElement.style.webkitTransitionDuration = duration;
-                this.backdropElement.style.transitionDuration = duration;
+            let duration: string = String(speed / 1000) + 's';
+            this.backdropElement.style.webkitTransitionDuration = duration;
+            this.backdropElement.style.transitionDuration = duration;
 
-                this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_NOT_VISIBLE;
-            }
+            this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_NOT_VISIBLE;
 
             setTimeout(() => {
                 if (this.backdropElement) {

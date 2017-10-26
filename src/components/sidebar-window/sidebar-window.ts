@@ -3,7 +3,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { SIDEBAR_NAME } from '../component-names';
-import { OpenTrigger, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
+import { OpenTrigger, OpenTriggerMixin, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
 import { OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 import WithRender from './sidebar-window.html?style=../../mixins/base-window/base-window.scss';
 import uuid from '../../utils/uuid/uuid';
@@ -17,8 +17,8 @@ export enum SidebarOrigin {
     BottomLeft = 'Bottom-left'
 }
 
-const TRANSITION_DURATION: number = 300;
-const TRANSITION_DURATION_LONG: number = 600;
+// const TRANSITION_DURATION: number = 300;
+// const TRANSITION_DURATION_LONG: number = 600;
 
 @WithRender
 @Component({
@@ -37,14 +37,14 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     })
     public origin: SidebarOrigin;
 
-    @Prop({ default: 'mSidebar' })
-    public id: string;
+    // @Prop({ default: 'mSidebar' })
+    // public id: string;
 
     @Prop()
     public width: string;
 
-    @Prop()
-    public open: boolean;
+    // @Prop()
+    // public open: boolean;
 
     @Prop({ default: true })
     public focusManagement: boolean;
@@ -52,92 +52,108 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     @Prop()
     public closeOnBackdrop: boolean;
 
-    @Prop({ default: false })
-    public disabled: boolean;
+    // @Prop({ default: false })
+    // public disabled: boolean;
 
-    private portalTargetEl: HTMLElement;
-    private internalOpen: boolean = false;
-    private propId: string = '';
+    // private portalTargetEl: HTMLElement;
+    // private internalOpen: boolean = false;
+    // private propId: string = '';
 
-    public getPortalTargetElement(): HTMLElement {
-        return this.portalTargetEl;
-    }
+    // public getPortalTargetElement(): HTMLElement {
+    //     return this.portalTargetEl;
+    // }
 
-    protected beforeMount(): void {
-        this.propId = this.id + '-' + uuid.generate();
-        let element: HTMLElement = document.createElement('div');
-        element.setAttribute('id', this.propId);
-        document.body.appendChild(element);
-    }
+    // protected beforeMount(): void {
+    //     this.propId = this.id + '-' + uuid.generate();
+    //     let element: HTMLElement = document.createElement('div');
+    //     element.setAttribute('id', this.propId);
+    //     document.body.appendChild(element);
+    // }
 
-    protected mounted(): void {
-        this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
-    }
+    // protected mounted(): void {
+    //     this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
+    // }
 
-    protected beforeDestroy(): void {
-        document.body.removeChild(this.portalTargetEl);
-    }
+    // protected beforeDestroy(): void {
+    //     document.body.removeChild(this.portalTargetEl);
+    // }
 
     public get popupBody(): any {
         return (this.$refs.article as Element).querySelector('.m-popup__body');
     }
 
-    public get propOpen(): boolean {
-        return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
+    public handlesFocus(): boolean {
+        return this.focusManagement;
     }
 
-    public set propOpen(value: boolean) {
-        if (value != this.internalOpen) {
-            if (value) {
-                if (this.portalTargetEl) {
-                    this.$modul.pushElement(this.portalTargetEl);
-                    this.portalTargetEl.style.position = 'absolute';
-
-                    setTimeout(() => {
-                        this.setFastFocusToElement(this.$refs.article as HTMLElement);
-                    }, TRANSITION_DURATION_LONG);
-                }
-
-                if (value != this.internalOpen) {
-                    this.$emit('open');
-                }
-            } else {
-                if (this.portalTargetEl) {
-                    this.$modul.popElement(this.portalTargetEl);
-
-                    setTimeout(() => {
-                        // $emit update:open has been launched, animation already occurs
-
-                        this.portalTargetEl.style.position = '';
-                        let trigger: HTMLElement | undefined = this.as<OpenTriggerHookMixin>().triggerHook;
-                        if (trigger) {
-                            this.setFastFocusToElement(trigger);
-                        }
-                    }, TRANSITION_DURATION);
-                }
-                if (value != this.internalOpen) {
-                    // really closing, reset focus
-                    this.$emit('close');
-                }
-            }
-        }
-        this.internalOpen = value;
-        this.$emit('update:open', value);
+    public doCustomPropOpen(value: boolean): void {
+        // nothing
     }
 
-    @Watch('open')
-    private openChanged(open: boolean): void {
-        this.propOpen = open;
+    public hasBackdrop(): boolean {
+        return true;
     }
 
-    private setFastFocusToElement(el: HTMLElement): void {
-        if (this.focusManagement) {
-            el.setAttribute('tabindex', '0');
-            el.focus();
-            el.blur();
-            el.removeAttribute('tabindex');
-        }
+    public getPortalElement(): HTMLElement {
+        return this.$refs.article as HTMLElement;
     }
+
+    // public get propOpen(): boolean {
+    //     return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
+    // }
+
+    // public set propOpen(value: boolean) {
+    //     if (value != this.internalOpen) {
+    //         if (value) {
+    //             if (this.portalTargetEl) {
+    //                 this.$modul.pushElement(this.portalTargetEl);
+    //                 this.portalTargetEl.style.position = 'absolute';
+
+    //                 setTimeout(() => {
+    //                     this.setFastFocusToElement(this.$refs.article as HTMLElement);
+    //                 }, TRANSITION_DURATION_LONG);
+    //             }
+
+    //             if (value != this.internalOpen) {
+    //                 this.$emit('open');
+    //             }
+    //         } else {
+    //             if (this.portalTargetEl) {
+    //                 this.$modul.popElement(this.portalTargetEl);
+
+    //                 setTimeout(() => {
+    //                     // $emit update:open has been launched, animation already occurs
+
+    //                     this.portalTargetEl.style.position = '';
+    //                     let trigger: HTMLElement | undefined = this.as<OpenTriggerHookMixin>().triggerHook;
+    //                     if (trigger) {
+    //                         this.setFastFocusToElement(trigger);
+    //                     }
+    //                 }, TRANSITION_DURATION);
+    //             }
+    //             if (value != this.internalOpen) {
+    //                 // really closing, reset focus
+    //                 this.$emit('close');
+    //             }
+    //         }
+    //     }
+    //     this.internalOpen = value;
+    //     this.$emit('update:open', value);
+    // }
+
+    // @Watch('open')
+    // private openChanged(open: boolean): void {
+    //     this.propOpen = open;
+    // }
+
+    // private setFastFocusToElement(el: HTMLElement): void {
+    //     if (this.focusManagement) {
+    //         el.setAttribute('tabindex', '0');
+    //         el.focus();
+    //         el.blur();
+    //         el.removeAttribute('tabindex');
+    //     }
+    // }
 
     private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
@@ -154,12 +170,12 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
 
     private backdropClick(): void {
         if (this.closeOnBackdrop) {
-            this.propOpen = false;
+            this.as<OpenTriggerMixin>().propOpen = false;
         }
     }
 
     private closeDialog(): void {
-        this.propOpen = false;
+        this.as<OpenTriggerMixin>().propOpen = false;
     }
 
     // private get marginLeft(): string {
