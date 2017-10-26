@@ -3,7 +3,7 @@ import '../../utils/polyfills';
 import AccordionGroupPlugin, { MAccordionGroup } from './accordion-group';
 import { MAccordionSkin } from '../accordion/accordion';
 
-const NO_TITLE_CSS: string = 'm--is-no-title';
+const NO_TITLE_CSS: string = 'm--has-no-title';
 const SKIN_LIGHT_CSS: string = 'm--is-light';
 const SKIN_REGULAR_CSS: string = 'm--is-regular';
 const SKIN_PLAIN_CSS: string = 'm--is-plain';
@@ -16,7 +16,7 @@ describe('accordion-group', () => {
         accordionGroup = new MAccordionGroup().$mount();
     });
 
-    it('css classes are not present', () => {
+    it('css classes are present', () => {
         expect(accordionGroup.$el.querySelector('.' + NO_TITLE_CSS)).not.toBeNull();
     });
 
@@ -100,5 +100,20 @@ describe('accordion-group', () => {
                 });
             });
         });
+    });
+
+    it('title slot', () => {
+        let vm = new Vue({
+            template: `
+            <div>
+                <m-accordion-group ref="a">
+                    <div slot="title">Title</div>
+                    <m-accordion></m-accordion>
+                    <m-accordion></m-accordion>
+                </m-accordion-group>
+            </div>`
+        }).$mount();
+
+        expect((vm.$refs.a as Vue).$el.querySelector('.' + NO_TITLE_CSS)).toBeNull();
     });
 });
