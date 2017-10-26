@@ -5,7 +5,7 @@ $m-input-style--color-error: $m-color--error !default;
 $m-input-style--color-valid: $m-color--success !default;
 $m-input-style--color-disabled: $m-color--disabled !default;
 $m-input-style--color-waiting: $m-color--active !default;
-$m-input-style--padding: 5px !default;
+$m-input-style--padding: 4px !default;
 
 .m-input-style {
     position: relative;
@@ -69,18 +69,12 @@ $m-input-style--padding: 5px !default;
 
         .m-input-style {
             &__label {
-                transform: translate(0, 100%);
-                bottom: 100%;
+                transform: translate3d(0, -5px, 0) scale(0.8); // Magic number
                 z-index: 1;
                 width: 100%;
-                font-size: $m-font-size--s;
                 cursor: pointer;
             }
         }
-    }
-
-    &.m--has-label {
-        padding-top: 16px; // Magic number
     }
 
     &:not(.m--is-label-up) {
@@ -169,17 +163,23 @@ $m-input-style--padding: 5px !default;
         }
     }
 
+    &.m--has-label {
+        .m-input-style__body {
+            margin-top: -12px; // Magic number
+        }
+    }
+
     &__label {
-        transition-property: color, top, bottom, transform, font-size;
+        transition-property: color, transform;
         transition-duration: $m-transition-duration--l;
         transition-timing-function: ease;
-        position: absolute;
+        position: relative;
         z-index: 0;
-        bottom: $m-input-style--padding;
+        transform-origin: 0 0;
+        transform: translate3d(0, 13px, 0); // Magic number
         width: 100%;
         font-size: $m-font-size--l;
         font-weight: $m-font-weight--bold;
-        white-space: nowrap;
     }
 
     &__placeholder,
@@ -222,6 +222,7 @@ $m-input-style--padding: 5px !default;
             cursor: text;
             overflow: hidden;
             width: 100%;
+            padding: 0;
 
             &[type=password] {
                 letter-spacing: 2px;
