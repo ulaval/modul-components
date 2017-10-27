@@ -178,8 +178,8 @@ $m-input-style--padding: 4px !default;
         transform-origin: 0 0;
         transform: translate3d(0, 13px, 0); // Magic number
         width: 100%;
-        font-size: $m-font-size--l;
-        font-weight: $m-font-weight--bold;
+        font-size: $m-font-size;
+        font-weight: $m-font-weight;
     }
 
     &__placeholder,
@@ -210,8 +210,8 @@ $m-input-style--padding: 4px !default;
             outline: none;
             text-overflow: ellipsis;
             font-family: $m-font-family;
-            font-size: $m-font-size--l;
-            font-weight: $m-font-weight;
+            font-size: $m-font-size;
+            font-weight: $m-font-weight--bold;
             text-align: left;
             color: $m-color--text;
             border: none;
@@ -226,6 +226,10 @@ $m-input-style--padding: 4px !default;
 
             &[type=password] {
                 letter-spacing: 2px;
+            }
+
+            &[readonly=readonly] {
+                cursor: pointer;
             }
         }
 
