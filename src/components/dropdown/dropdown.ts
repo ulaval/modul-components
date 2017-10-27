@@ -108,10 +108,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.internalOpen = value;
         this.dirty = false;
         this.$nextTick(() => {
-            let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+            let inputEl: any = this.$refs.input;
             if (this.internalOpen) {
                 this.$emit('open');
                 inputEl.focus();
+                if (this.filterable) {
+                    inputEl.setSelectionRange(0, this.selectedText.length);
+                }
                 this.scrollToFocused();
             } else {
                 this.$emit('close');
@@ -219,25 +222,16 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.disabled || this.waiting;
     }
 
-    private onFocus(event: Event): void {
-        if (!this.as<InputStateMixin>().isDisabled && !this.open) {
-            this.open = true;
-        }
-    }
-
-    private onBlur(event): void {
-        setTimeout(() => {
-            this.open = false;
-        }, 300);
-    }
-
     private onClick(event): void {
-        if (!this.as<InputStateMixin>().isDisabled && !this.open) {
-            this.open = true;
+        if (!this.as<InputStateMixin>().isDisabled) {
+            this.open = !this.open;
         }
     }
 
     private onKeydownEnter($event: KeyboardEvent): void {
+        if (!this.open) {
+            this.open = true;
+        }
         if (this.focusedIndex > -1) {
             let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
             this.model = item.value;
@@ -274,11 +268,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
-    private arrowOnClick(event): void {
-        if (this.open) {
-            this.open = false;
-            event.stopPropagation();
-        }
+    private arrowOnKeydownEnter(): void {
+        this.open = !this.open;
     }
 
     private onOpen(): void {

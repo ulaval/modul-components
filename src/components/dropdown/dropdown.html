@@ -54,11 +54,9 @@
                    @keydown.up.prevent="onKeydownUp($event)"
                    @keydown.down.prevent="onKeydownDown($event)"
                    @keydown="onKeydown"
-                   @focus="onFocus"
-                   @blur="onBlur"
                    v-model="selectedText">
             <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }">
-                <m-button mode="icon" icon-name="dropdown-arrow" @click="arrowOnClick($event)">
+                <m-button mode="icon" icon-name="dropdown-arrow" @keydown.enter.prevent="arrowOnKeydownEnter">
                     <m-i18n k="m-dropdown:openDropdown" v-if="!open"></m-i18n>
                     <m-i18n k="m-dropdown:closeDropdown" v-if="open"></m-i18n>
                 </m-button>
