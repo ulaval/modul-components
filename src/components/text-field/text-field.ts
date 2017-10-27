@@ -97,9 +97,9 @@ export class MTextField extends ModulVue {
         this.passwordAsText = !this.passwordAsText;
     }
 
-    private hasPlaceholder(): boolean {
-        return this.placeholder != undefined && this.placeholder != '';
-    }
+    // private hasPlaceholder(): boolean {
+    //     return this.placeholder != undefined && this.placeholder != '';
+    // }
 
     private get inputType(): MTextFieldType {
         let type: MTextFieldType = MTextFieldType.Text;
@@ -132,7 +132,7 @@ export class MTextField extends ModulVue {
     }
 
     private get isEmpty(): boolean {
-        return this.isFocus || this.hasValue || this.hasPlaceholder() ? false : true;
+        return this.isFocus || this.hasValue ? false : true;
     }
 
     private get isFocus(): boolean {
