@@ -110,9 +110,9 @@ export class Modul {
         this.event.$emit('updateAfterResize');
     }
 
-    public pushElement(element: HTMLElement, withBackdrop: boolean): void {
+    public pushElement(element: HTMLElement, withBackdrop: boolean, viewportIsSmall: boolean): void {
         if (withBackdrop) {
-            this.ensureBackdrop();
+            this.ensureBackdrop(viewportIsSmall);
         }
         this.windowStack.push(element);
         this.windowZIndex++;
@@ -136,9 +136,9 @@ export class Modul {
         return this.windowStack.length > 0 ? this.windowStack[this.windowStack.length - 1] : undefined;
     }
 
-    private ensureBackdrop(targetElement: HTMLElement = this.bodyEl): void {
+    private ensureBackdrop(viewportIsSmall: boolean): void {
         if (!this.backdropElement) {
-            this.stopScollBody();
+            this.stopScollBody(viewportIsSmall);
 
             let element: HTMLElement = document.createElement('div');
             let id: string = BACKDROP_ID + '-' + uuid.generate();
@@ -157,7 +157,7 @@ export class Modul {
             element.style.background = BACKDROP_STYLE_BACKGROUND;
             element.style.opacity = BACKDROP_STYLE_OPACITY;
 
-            targetElement.appendChild(element);
+            this.bodyEl.appendChild(element);
 
             this.backdropElement = document.querySelector('#' + id) as HTMLElement;
             let duration: string = String(BACKDROP_STYLE_TRANSITION_FAST_DURATION / 1000) + 's';
@@ -226,9 +226,11 @@ export class Modul {
         }
     }
 
-    private stopScollBody(): void {
+    private stopScollBody(viewportIsSmall: boolean): void {
         this.stopScrollPosition = this.scrollPosition;
-        this.bodyStyle.position = 'fixed';
+        if (viewportIsSmall) {
+            this.bodyStyle.position = 'fixed';
+        }
         this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
         this.bodyStyle.right = '0';
         this.bodyStyle.left = '0';

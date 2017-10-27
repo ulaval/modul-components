@@ -18,21 +18,29 @@
         <m-options-menu></m-options-menu>
 
         <m-button v-m-popup:dialog1>dialog</m-button>
-        <m-dialog ref="dialog1" title="title here" size="full-size">
+        <m-dialog ref="dialog1" title="title here">
             <m-options-menu></m-options-menu>
             <p>show me something</p>
             <a href="http://google.com">google</a>
             <a href="http://bing.com">bing</a>
         </m-dialog>
 
-        <m-button v-m-popup:modal1>modal</m-button>
+        <!-- <m-button v-m-popup:modal1>modal</m-button>
         <m-modal :open.sync="o" ref="modal1">
             <p>show me something</p>
             <a href="http://google.com">google</a>
             <a href="http://bing.com">bing</a>
-        </m-modal>
+        </m-modal> -->
 
         <m-button @click="onClick()">confirm</m-button>
+
+        <m-button v-m-popup:sidebar1>sidebar</m-button>
+        <m-sidebar ref="sidebar1" origin="bottom" :close-on-backdrop="true">
+            <m-options-menu></m-options-menu>
+            <p>show me something</p>
+            <a href="http://google.com">google</a>
+            <a href="http://bing.com">bing</a>
+        </m-sidebar>
 
         <!-- <component :is="template"></component> -->
 

@@ -8,7 +8,7 @@ import { OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hoo
 import WithRender from './sidebar-window.html?style=../../mixins/base-window/base-window.scss';
 import uuid from '../../utils/uuid/uuid';
 
-export enum SidebarOrigin {
+export enum MSidebarOrigin {
     Top = 'top',
     Right = 'right',
     Bottom = 'bottom',
@@ -23,16 +23,16 @@ export enum SidebarOrigin {
 })
 export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
     @Prop({
-        default: SidebarOrigin.Bottom,
+        default: MSidebarOrigin.Bottom,
         validator: value =>
-            value == SidebarOrigin.Top ||
-            value == SidebarOrigin.Right ||
-            value == SidebarOrigin.Left ||
-            value == SidebarOrigin.Bottom ||
-            value == SidebarOrigin.BottomRight ||
-            value == SidebarOrigin.BottomLeft
+            value == MSidebarOrigin.Top ||
+            value == MSidebarOrigin.Right ||
+            value == MSidebarOrigin.Left ||
+            value == MSidebarOrigin.Bottom ||
+            value == MSidebarOrigin.BottomRight ||
+            value == MSidebarOrigin.BottomLeft
     })
-    public origin: SidebarOrigin;
+    public origin: MSidebarOrigin;
 
     @Prop()
     public width: string;
@@ -78,29 +78,29 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
 
     private backdropClick(): void {
         if (this.closeOnBackdrop) {
-            this.as<OpenTriggerMixin>().propOpen = false;
+            this.as<OpenTriggerMixin>().tryClose();
         }
     }
 
     private closeDialog(): void {
-        this.as<OpenTriggerMixin>().propOpen = false;
+        this.as<OpenTriggerMixin>().tryClose();
     }
 
-    // private get marginLeft(): string {
-    //     return this.from == BaseWindowFrom.Right || this.from == BaseWindowFrom.BottomRight ? 'calc(100% - ' + this.propWidth + ')' : '';
-    // }
+    private get marginLeft(): string {
+        return this.origin == MSidebarOrigin.Right || this.origin == MSidebarOrigin.BottomRight ? 'calc(100% - ' + this.propWidth + ')' : '';
+    }
 
-    // private get propWidth(): string {
-    //     if (this.width == undefined || this.width == '') {
-    //         if (this.from == BaseWindowFrom.Top || this.from == BaseWindowFrom.Bottom) {
-    //             return '100%';
-    //         } else {
-    //             return '50%';
-    //         }
-    //     } else {
-    //         return this.width;
-    //     }
-    // }
+    private get propWidth(): string {
+        if (!this.width) {
+            if (this.origin == MSidebarOrigin.Top || this.origin == MSidebarOrigin.Bottom) {
+                return '100%';
+            } else {
+                return '50%';
+            }
+        } else {
+            return this.width;
+        }
+    }
 }
 
 const SidebarPlugin: PluginObject<any> = {

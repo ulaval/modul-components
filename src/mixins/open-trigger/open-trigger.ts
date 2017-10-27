@@ -126,7 +126,7 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
         if (value != this.internalOpen) {
             if (value) {
                 if (this.portalTargetEl) {
-                    this.$modul.pushElement(this.portalTargetEl, this.as<OpenTriggerMixinImpl>().hasBackdrop());
+                    this.$modul.pushElement(this.portalTargetEl, this.as<OpenTriggerMixinImpl>().hasBackdrop(), this.as<MediaQueriesMixin>().isMqMaxS);
                     if (!this.as<OpenTriggerMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
                         this.portalTargetEl.style.position = 'absolute';
 
