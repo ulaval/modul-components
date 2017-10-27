@@ -13,10 +13,12 @@ export enum MOpenTrigger {
 
 export interface OpenTriggerMixin {
     propOpen: boolean;
+    setFocusToPortal(): void;
+    setFocusToTrigger(): void;
 }
 
 export interface OpenTriggerMixinImpl {
-    doCustomPropOpen(value: boolean, el: HTMLElement): void;
+    doCustomPropOpen(value: boolean, el: HTMLElement): boolean;
     handlesFocus(): boolean;
     hasBackdrop(): boolean;
     getPortalElement(): HTMLElement;
@@ -55,9 +57,24 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
     private portalTargetEl: HTMLElement;
     private internalOpen: boolean = false;
 
-    // public getPortalTargetElement(): HTMLElement {
-    //     return this.portalTargetEl;
-    // }
+    public setFocusToPortal(): void {
+        if (this.as<OpenTriggerMixinImpl>().handlesFocus()) {
+            let el: HTMLElement = this.as<OpenTriggerMixinImpl>().getPortalElement();
+            el.setAttribute('tabindex', '0');
+            el.focus();
+            el.blur();
+            el.removeAttribute('tabindex');
+        }
+    }
+
+    public setFocusToTrigger(): void {
+        if (this.as<OpenTriggerMixinImpl>().handlesFocus() && this.internalTrigger) {
+            this.internalTrigger.setAttribute('tabindex', '0');
+            this.internalTrigger.focus();
+            this.internalTrigger.blur();
+            this.internalTrigger.removeAttribute('tabindex');
+        }
+    }
 
     protected beforeMount(): void {
         this.propId = this.id + '-' + uuid.generate();
@@ -89,36 +106,32 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
     public set propOpen(value: boolean) {
         if (value != this.internalOpen) {
             if (value) {
-                this.as<OpenTriggerMixinImpl>().doCustomPropOpen(value, this.portalTargetEl);
                 if (this.portalTargetEl) {
                     this.$modul.pushElement(this.portalTargetEl, this.as<OpenTriggerMixinImpl>().hasBackdrop());
-                    this.portalTargetEl.style.position = 'absolute';
+                    if (!this.as<OpenTriggerMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
+                        this.portalTargetEl.style.position = 'absolute';
 
-                    setTimeout(() => {
-                        this.setFastFocusToElement(this.as<OpenTriggerMixinImpl>().getPortalElement());
-                    }, this.transitionDuration);
-                }
-
-                if (value != this.internalOpen) {
-                    this.$emit('open');
+                        setTimeout(() => {
+                            this.setFocusToPortal();
+                        }, this.transitionDuration);
+                    }
                 }
             } else {
                 if (this.portalTargetEl) {
                     this.$modul.popElement(this.portalTargetEl, this.as<OpenTriggerMixinImpl>().hasBackdrop(), true);
 
-                    setTimeout(() => {
-                        // $emit update:open has been launched, animation already occurs
-
-                        this.portalTargetEl.style.position = '';
-                        if (this.internalTrigger) {
-                            this.setFastFocusToElement(this.internalTrigger);
-                        }
-                    }, this.transitionDuration);
+                    if (!this.as<OpenTriggerMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
+                        setTimeout(() => {
+                            // $emit update:open has been launched, animation already occurs
+                            this.portalTargetEl.style.position = '';
+                            this.setFocusToTrigger();
+                        }, this.transitionDuration);
+                    }
                 }
-                if (value != this.internalOpen) {
-                    // really closing, reset focus
-                    this.$emit('close');
-                }
+            }
+            if (value != this.internalOpen) {
+                // really closing, reset focus
+                this.$emit(value ? 'open' : 'close');
             }
         }
         this.internalOpen = value;
@@ -127,15 +140,6 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
 
     private get transitionDuration(): number {
         return this.as<MediaQueriesMixin>().isMqMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
-    }
-
-    private setFastFocusToElement(el: HTMLElement): void {
-        if (this.as<OpenTriggerMixinImpl>().handlesFocus()) {
-            el.setAttribute('tabindex', '0');
-            el.focus();
-            el.blur();
-            el.removeAttribute('tabindex');
-        }
     }
 
     @Watch('trigger')
