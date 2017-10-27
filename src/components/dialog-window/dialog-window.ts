@@ -29,7 +29,7 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
             value == MDialogSize.Large ||
             value == MDialogSize.Small
     })
-    public size: string;
+    public size: MDialogSize;
 
     @Prop({ default: true })
     public closeOnBackdrop: boolean;
@@ -68,12 +68,12 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
 
     private backdropClick(): void {
         if (this.closeOnBackdrop) {
-            this.as<OpenTriggerMixin>().propOpen = false;
+            this.as<OpenTriggerMixin>().tryClose();
         }
     }
 
     private closeDialog(): void {
-        this.as<OpenTriggerMixin>().propOpen = false;
+        this.as<OpenTriggerMixin>().tryClose();
     }
 }
 

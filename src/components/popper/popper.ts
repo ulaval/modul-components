@@ -115,6 +115,8 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
         this.$modul.event.$on('scroll', this.update);
         this.$modul.event.$on('resize', this.update);
         this.$modul.event.$on('updateAfterResize', this.update);
+
+        this.$modul.event.$on('click', this.onDocumentClick);
     }
 
     protected beforeDestroy(): void {
@@ -122,11 +124,23 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
         this.$modul.event.$off('resize', this.update);
         this.$modul.event.$off('updateAfterResize', this.update);
 
+        this.$modul.event.$off('click', this.onDocumentClick);
+
         this.destroyPopper();
     }
 
     public get popupBody(): any {
         return (this.$refs.popper as Element).querySelector('.m-popup__body');
+    }
+
+    private onDocumentClick(event: MouseEvent): void {
+        if (this.as<OpenTriggerMixin>().propOpen) {
+            let trigger: HTMLElement | undefined = this.as<OpenTriggerMixin>().getTrigger();
+            if (!(this.as<OpenTriggerMixin>().getPortalElement().contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
+                (trigger && trigger.contains(event.target as HTMLElement)))) {
+                this.as<OpenTriggerMixin>().propOpen = false;
+            }
+        }
     }
 
     private update(): void {

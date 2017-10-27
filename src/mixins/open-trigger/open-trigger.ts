@@ -13,8 +13,11 @@ export enum MOpenTrigger {
 
 export interface OpenTriggerMixin {
     propOpen: boolean;
+    getPortalElement(): HTMLElement;
+    getTrigger(): HTMLElement | undefined;
     setFocusToPortal(): void;
     setFocusToTrigger(): void;
+    tryClose(): boolean;
 }
 
 export interface OpenTriggerMixinImpl {
@@ -76,6 +79,23 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
         }
     }
 
+    public getPortalElement(): HTMLElement {
+        return this.portalTargetEl;
+    }
+
+    public getTrigger(): HTMLElement | undefined {
+        return this.internalTrigger;
+    }
+
+    public tryClose(): boolean {
+        if (this.$modul.peekElement() == this.portalTargetEl) {
+            this.propOpen = false;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     protected beforeMount(): void {
         this.propId = this.id + '-' + uuid.generate();
         let element: HTMLElement = document.createElement('div');
@@ -94,7 +114,6 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
             this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
             this.internalTrigger.removeEventListener('mouseleave', this.handleMouseLeave);
         }
-        this.$modul.event.$off('click', this.onDocumentClick);
 
         document.body.removeChild(this.portalTargetEl);
     }
@@ -166,7 +185,6 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
         if (this.internalTrigger) {
             if (this.openTrigger == MOpenTrigger.Click) {
                 this.internalTrigger.addEventListener('click', this.toggle);
-                this.$modul.event.$on('click', this.onDocumentClick);
             } else if (this.openTrigger == MOpenTrigger.Hover) {
                 this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
                 this.internalTrigger.addEventListener('mouseleave', this.handleMouseLeave);
@@ -175,13 +193,6 @@ export class OpenTrigger extends ModulVue implements OpenTriggerMixin {
                     (this.$refs.popper as Element).addEventListener('mouseleave', this.handleMouseLeave);
                 });
             }
-        }
-    }
-
-    private onDocumentClick(event: MouseEvent): void {
-        if (!(this.portalTargetEl.contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
-            (this.internalTrigger && this.internalTrigger.contains(event.target as HTMLElement)))) {
-            this.propOpen = false;
         }
     }
 
