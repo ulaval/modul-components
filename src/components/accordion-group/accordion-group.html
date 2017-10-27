@@ -3,15 +3,15 @@
         <div class="m-accordion-group__header__title" v-if="hasTitleSlot">
             <slot name="title"></slot>
         </div>
-        <div v-if="!concurrent">
+        <template v-if="!concurrent">
             <m-link mode="button" @click="openAllAccordions" v-if="!propAllOpen">
                 <m-i18n k="m-accordion-group:open-all"></m-i18n>
             </m-link>
-            <span v-if="!propAllOpen && !propAllClosed">&nbsp;|&nbsp;</span>
+            <template v-if="!propAllOpen && !propAllClosed">&nbsp;&nbsp;|&nbsp;&nbsp;</template>
             <m-link mode="button" @click="closeAllAccordions" v-if="!propAllClosed">
                 <m-i18n k="m-accordion-group:close-all"></m-i18n>
             </m-link>
-        </div>
+        </template>
     </header>
     <div class="m-accordion-group__body">
         <slot>
