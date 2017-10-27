@@ -31,7 +31,7 @@ describe('optionsMenu', () => {
         });
     });
 
-    // This test needs to be fixed
+    // Todo: This test needs to be fixed
     // it('open event', () => {
     //     let clickSpy = jasmine.createSpy('clickSpy');
     //     let vm = new Vue({

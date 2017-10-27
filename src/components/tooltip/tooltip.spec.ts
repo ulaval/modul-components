@@ -68,7 +68,7 @@ describe('tooltip', () => {
         });
     });
 
-    // Need to be edit, can't catch popper element
+    // Todo: Need to be edit, can't catch popper element
 
     // it('open event', () => {
     //     let clickSpy = jasmine.createSpy('clickSpy');

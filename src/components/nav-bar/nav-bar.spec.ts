@@ -94,7 +94,7 @@ describe('navbar', () => {
         });
     });
 
-    // Need to be finish
+    // Todo: Need to be finish
     // it('click event', () => {
     //     let clickSpy = jasmine.createSpy('clickSpy');
     //     let vm = new Vue({
