@@ -15,5 +15,6 @@
             "default": 1
         }
     },
-    "overview": "checkbox.overview"
+    "overview": "checkbox.overview",
+    "preview": "checkbox.preview"
 }
