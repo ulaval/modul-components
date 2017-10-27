@@ -36,5 +36,6 @@
             "default": 0
         }
     },
-    "overview": "spinner.overview"
+    "overview": "spinner.overview",
+    "preview": "spinner.preview"
 }

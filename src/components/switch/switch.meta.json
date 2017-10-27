@@ -19,5 +19,6 @@
             "default": true
         }
     },
-    "overview": "switch.overview"
+    "overview": "switch.overview",
+    "preview": "switch.preview"
 }

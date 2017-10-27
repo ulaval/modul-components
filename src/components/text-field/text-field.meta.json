@@ -45,5 +45,6 @@
             "type": "string"
         }
     },
-    "overview": "text-field.overview"
+    "overview": "text-field.overview",
+    "preview": "text-field.preview"
 }

@@ -36,5 +36,5 @@
         }
     },
     "overview": "panel.overview",
-    "preview": false
+    "preview": "panel.preview"
 }

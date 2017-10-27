@@ -26,5 +26,6 @@
             "default": 0
         }
     },
-    "overview": "button-group.overview"
+    "overview": "button-group.overview",
+    "preview": "button-group.preview"
 }

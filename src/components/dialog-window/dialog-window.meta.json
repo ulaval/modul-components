@@ -14,5 +14,5 @@
         }
     },
     "overview": "dialog-window.overview",
-    "preview": false
+    "preview": "dialog-window.preview"
 }

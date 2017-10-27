@@ -33,5 +33,6 @@
             "default": true
         }
     },
-    "overview": "message.overview"
+    "overview": "message.overview",
+    "preview": "message.preview"
 }
