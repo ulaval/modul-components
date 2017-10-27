@@ -10,5 +10,6 @@
             "default": false
         }
     },
-    "overview": "tab-pane.overview"
+    "overview": "tab-pane.overview",
+    "preview": false
 }

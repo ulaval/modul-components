@@ -19,5 +19,6 @@
             "default": 1
         }
     },
-    "overview": "slider.overview"
+    "overview": "slider.overview",
+    "preview": "slider.preview"
 }

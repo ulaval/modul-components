@@ -27,5 +27,5 @@
         }
     },
     "overview": "radio-group.overview",
-    "preview": false
+    "preview": "radio-group.preview"
 }
