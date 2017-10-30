@@ -6,12 +6,12 @@ import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import PopperPlugin, { MPopperPlacement } from '../popper/popper';
-import { MOpenTrigger, OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
+import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 import SidebarPlugin from '../sidebar-window/sidebar-window';
 
 @WithRender
 @Component({
-    mixins: [MediaQueries, OpenTriggerHook]
+    mixins: [MediaQueries, OpenTrigger]
 })
 export class MPopup extends ModulVue {
 
@@ -80,7 +80,7 @@ export class MPopup extends ModulVue {
     }
 
     public get trigger(): any {
-        return !this.as<OpenTriggerHookMixin>().triggerHook ? undefined : this.as<OpenTriggerHookMixin>().triggerHook;
+        return !this.as<OpenTriggerMixin>().triggerHook ? undefined : this.as<OpenTriggerMixin>().triggerHook;
     }
 
     private onOpen(): void {

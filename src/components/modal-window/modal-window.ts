@@ -5,11 +5,10 @@ import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
 import WithRender from './modal-window.html?style=../../mixins/base-window/base-window.scss';
 import { Portal, PortalMixinImpl } from '../../mixins/portal/portal';
-import { OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 
 @WithRender
 @Component({
-    mixins: [Portal, OpenTriggerHook]
+    mixins: [Portal]
 })
 export class MModal extends ModulVue implements PortalMixinImpl {
     @Prop()

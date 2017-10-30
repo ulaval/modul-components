@@ -1,14 +1,14 @@
 import Vue, { DirectiveOptions, VNodeDirective, VNode } from 'vue';
 import { PluginObject } from 'vue';
 import { POPUP_NAME } from '../directive-names';
-import { OpenTriggerHook } from '../../mixins/open-trigger/open-trigger-hook';
+import { OpenTrigger } from '../../mixins/open-trigger/open-trigger';
 
 const MPopupDirective: DirectiveOptions = {
     bind(element: HTMLElement, binding: VNodeDirective, node: VNode) {
         if (node.context) {
             node.context.$nextTick(() => {
                 if (node.context) {
-                    (node.context.$refs[binding.arg] as OpenTriggerHook).triggerHook = element;
+                    (node.context.$refs[binding.arg] as OpenTrigger).triggerHook = element;
                 }
             });
         }

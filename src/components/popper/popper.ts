@@ -8,7 +8,6 @@ import Popper from 'popper.js';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
 import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
-import { OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 
 export enum MPopperPlacement {
     Top = 'top',

@@ -5,7 +5,6 @@ import WithRender from './dialog-window.html?style=../../mixins/base-window/base
 import { Prop } from 'vue-property-decorator';
 import { DIALOG_NAME } from '../component-names';
 import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
-import { OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 
 export enum MDialogSize {
     FullSize = 'full-size',
@@ -16,7 +15,7 @@ export enum MDialogSize {
 
 @WithRender
 @Component({
-    mixins: [Portal, OpenTriggerHook]
+    mixins: [Portal]
 })
 export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop({

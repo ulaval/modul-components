@@ -1,7 +1,7 @@
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import { MOpenTrigger, OpenTriggerHook, OpenTriggerHookMixin } from '../open-trigger/open-trigger-hook';
+import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../open-trigger/open-trigger';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
 
@@ -25,7 +25,7 @@ const TRANSITION_DURATION: number = 300;
 const TRANSITION_DURATION_LONG: number = 600;
 
 @Component({
-    mixins: [OpenTriggerHook, MediaQueries]
+    mixins: [OpenTrigger, MediaQueries]
 })
 export class Portal extends ModulVue implements PortalMixin {
     @Prop({
@@ -173,8 +173,8 @@ export class Portal extends ModulVue implements PortalMixin {
             this.internalTrigger = this.trigger;
         } else if (this.$slots.trigger && this.$slots.trigger[0]) {
             this.internalTrigger = this.$slots.trigger[0].elm as HTMLElement;
-        } else if (this.as<OpenTriggerHookMixin>().triggerHook) {
-            this.internalTrigger = this.as<OpenTriggerHookMixin>().triggerHook;
+        } else if (this.as<OpenTriggerMixin>().triggerHook) {
+            this.internalTrigger = this.as<OpenTriggerMixin>().triggerHook;
         }
         if (this.internalTrigger) {
             if (this.openTrigger == MOpenTrigger.Click) {

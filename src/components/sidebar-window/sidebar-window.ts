@@ -4,9 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { SIDEBAR_NAME } from '../component-names';
 import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
-import { OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 import WithRender from './sidebar-window.html?style=../../mixins/base-window/base-window.scss';
-import uuid from '../../utils/uuid/uuid';
 
 export enum MSidebarOrigin {
     Top = 'top',
