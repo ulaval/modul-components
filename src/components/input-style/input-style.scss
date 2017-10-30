@@ -69,7 +69,7 @@ $m-input-style--padding: 4px !default;
 
         .m-input-style {
             &__label {
-                transform: translate3d(0, -5px, 0) scale(0.8); // Magic number
+                transform: translate3d(0, -4px, 0) scale(0.8); // Magic number
                 z-index: 1;
                 width: 100%;
                 cursor: pointer;
@@ -178,6 +178,7 @@ $m-input-style--padding: 4px !default;
         transform-origin: 0 0;
         transform: translate3d(0, 13px, 0); // Magic number
         width: 100%;
+        margin-bottom: $m-margin--xs;
         font-size: $m-font-size;
         font-weight: $m-font-weight;
     }
