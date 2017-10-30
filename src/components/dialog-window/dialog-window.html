@@ -1,7 +1,7 @@
 <div class="m-base-window" ref="baseWindow">
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
-        <div class="m-base-window__wrap m--is-dialog" :class="[{ 'm--is-open': propOpen,
+        <div v-show="propOpen" class="m-base-window__wrap m--is-dialog" :class="[{ 'm--is-open': propOpen,
                         'm--is-small': size == 'small',
                         'm--is-full-size': size == 'full-size',
                         'm--is-clickable-backdrop': closeOnBackdrop,

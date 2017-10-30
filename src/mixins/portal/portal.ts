@@ -40,7 +40,7 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop()
     public open: boolean;
 
-    @Prop({ default: 'mOpenTrigger' })
+    @Prop({ default: 'mPortal' })
     public id: string;
 
     @Prop({ default: false })
