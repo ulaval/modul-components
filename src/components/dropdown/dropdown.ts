@@ -66,7 +66,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalOpen: boolean = false;
     private dirty: boolean = false;
 
-    private focus: boolean = false;
+    private mouseIsDown: boolean = false;
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
@@ -219,13 +219,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get inactive(): boolean {
-        return this.disabled || this.waiting;
-    }
-
-    private onClick(event): void {
-        if (!this.as<InputStateMixin>().isDisabled) {
-            this.open = !this.open;
-        }
+        return this.as<InputState>().isDisabled || this.waiting;
     }
 
     private onKeydownEnter($event: KeyboardEvent): void {
@@ -268,12 +262,37 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private onMousedown() {
+        this.mouseIsDown = true;
+    }
+
+    private onMouseup() {
+        setTimeout(() => {
+            this.mouseIsDown = false;
+        }, 0);
+    }
+
     private arrowOnKeydownEnter(): void {
-        this.open = !this.open;
+        if (!this.inactive) {
+            this.open = !this.open;
+        }
     }
 
     private onOpen(): void {
         this.focusSelected();
+        this.open = true;
+    }
+
+    private onFocus(): void {
+        if (!this.mouseIsDown && !this.inactive) {
+            this.open = true;
+        }
+    }
+
+    private onBlur(): void {
+        if (!this.mouseIsDown) {
+            this.open = false;
+        }
     }
 
     private focusSelected(): void {

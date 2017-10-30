@@ -1,7 +1,8 @@
 <div class="m-dropdown"
      :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting, 'm--is-filterable': filterable }"
      :style="{ width: width, 'max-width': maxWidth }"
-     @click="onClick"
+     @mousedown="onMousedown"
+     @mouseup="onMouseup"
      ref="mDropdown">
     <m-popup :placement="bottom-start"
              :disabled="inactive"
@@ -10,7 +11,6 @@
              :leave="transitionLeave"
              :padding-header="false"
              :padding-body="false"
-             :open-on-click="false"
              :focus-management="false"
              width="100%"
              ref="popper"
@@ -54,6 +54,8 @@
                    @keydown.up.prevent="onKeydownUp($event)"
                    @keydown.down.prevent="onKeydownDown($event)"
                    @keydown="onKeydown"
+                   @focus="onFocus"
+                   @blur="onBlur"
                    v-model="selectedText">
             <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }">
                 <m-button mode="icon" icon-name="dropdown-arrow" @keydown.enter.prevent="arrowOnKeydownEnter">
