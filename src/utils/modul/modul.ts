@@ -26,14 +26,8 @@ export class Modul {
     public scrollDown: boolean = false;
     public scrollUp: boolean = true;
 
-    // public windowCount: number = 0;
-    // public arrWindow: any = new Array();
-
     public backdropElement: HTMLElement | undefined;
-    // public backdropId: string = '';
     public windowZIndex: number = Z_INDEZ_DEFAULT;
-    // public hasBackdrop: boolean = false;
-    // public backdropTransitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION;
 
     private backdropIndex: number[] = [];
     private windowStack: HTMLElement[] = [];
@@ -78,33 +72,6 @@ export class Modul {
             this.event.$emit('resizeDone', event);
         }, DONE_EVENT_DURATION);
     }
-
-    // public addWindow(windowId): void {
-    //     this.windowCount++;
-    //     this.windowZIndex++;
-    //     if (this.windowCount == 1) {
-    //         this.stopScollBody();
-    //     }
-    //     // this.arrWindow.push({
-    //     //     id: windowId,
-    //     //     windowPosition: this.windowCount - 1,
-    //     //     zIndex: this.windowZIndex
-    //     // });
-    //     this.setBackdropZIndex();
-    // }
-
-    // public deleteWindow(windowId): void {
-    //     this.windowCount--;
-    //     this.windowZIndex--;
-    //     if (this.windowCount == 0) {
-    //         this.activeScollBody();
-    //         this.removeBackdrop();
-    //         this.windowZIndex = Z_INDEZ_DEFAULT;
-    //     }
-    //     // let windowPosition: number = Number(this.getArrWindowData(windowId)['windowPosition']);
-    //     // this.arrWindow.splice(windowPosition, 1);
-    //     this.setBackdropZIndex();
-    // }
 
     public updateAfterResize(): void {
         this.event.$emit('updateAfterResize');
@@ -200,18 +167,6 @@ export class Modul {
         }
     }
 
-    // public setBackdropTransitionDuration(transitionDuration: string = BACKDROP_STYLE_TRANSITION_DURATION): void {
-    //     // this.backdropTransitionDuration = transitionDuration;
-    //     if (this.backdropElement) {
-    //         this.backdropElement.style.webkitTransitionDuration = transitionDuration;
-    //         this.backdropElement.style.transitionDuration = transitionDuration;
-    //     }
-    // }
-
-    // public setBackdropOpacity(opacityValue: string): void {
-
-    // }
-
     private activeScollBody(): void {
         this.htmlEl.style.removeProperty('overflow');
         this.bodyStyle.removeProperty('position');
@@ -238,38 +193,6 @@ export class Modul {
         this.bodyStyle.overflow = 'hidden';
         this.htmlEl.style.overflow = 'hidden';
     }
-
-    // public getArrWindowData(windowId): any {
-    //     for (let i = 0; i < this.arrWindow.length; i++) {
-    //         if (this.arrWindow[i].id == windowId) {
-    //             return this.arrWindow[i];
-    //         }
-    //     }
-    // }
-
-    // public setBackdropStyle(): void {
-    //     if (this.backdropElement) {
-    //         let styles: any = this.backdropElement.style;
-    //         styles.webkitTransition = BACKDROP_STYLE_TRANSITION;
-    //         styles.transition = BACKDROP_STYLE_TRANSITION;
-    //         styles.webkitTransitionDuration = BACKDROP_STYLE_TRANSITION_OPEN_DURATION;
-    //         styles.transitionDuration = BACKDROP_STYLE_TRANSITION_OPEN_DURATION;
-    //         styles.position = BACKDROP_STYLE_POSITION;
-    //         styles.top = BACKDROP_STYLE_POSITION_VALUE;
-    //         styles.right = BACKDROP_STYLE_POSITION_VALUE;
-    //         styles.bottom = BACKDROP_STYLE_POSITION_VALUE;
-    //         styles.left = BACKDROP_STYLE_POSITION_VALUE;
-    //         styles.zIndex = String(this.windowZIndex);
-    //         styles.background = BACKDROP_STYLE_BACKGROUND;
-    //         styles.opacity = BACKDROP_STYLE_OPACITY;
-    //     }
-    // }
-
-    // private setBackdropZIndex() {
-    //     if (this.backdropElement) {
-    //         this.backdropElement.style.zIndex = String(this.windowZIndex);
-    //     }
-    // }
 }
 
 const ModulPlugin: PluginObject<any> = {
