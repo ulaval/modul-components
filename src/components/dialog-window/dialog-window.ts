@@ -2,12 +2,10 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import WithRender from './dialog-window.html?style=../../mixins/base-window/base-window.scss';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import { DIALOG_NAME } from '../component-names';
-import { OpenTrigger, OpenTriggerMixin, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
+import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
-import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import uuid from '../../utils/uuid/uuid';
 
 export enum MDialogSize {
     FullSize = 'full-size',
@@ -18,9 +16,9 @@ export enum MDialogSize {
 
 @WithRender
 @Component({
-    mixins: [OpenTrigger, OpenTriggerHook, MediaQueries]
+    mixins: [Portal, OpenTriggerHook]
 })
-export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
+export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop({
         default: MDialogSize.Default,
         validator: value =>
@@ -68,12 +66,12 @@ export class MDialog extends ModulVue implements OpenTriggerMixinImpl {
 
     private backdropClick(): void {
         if (this.closeOnBackdrop) {
-            this.as<OpenTriggerMixin>().tryClose();
+            this.as<PortalMixin>().tryClose();
         }
     }
 
     private closeDialog(): void {
-        this.as<OpenTriggerMixin>().tryClose();
+        this.as<PortalMixin>().tryClose();
     }
 }
 

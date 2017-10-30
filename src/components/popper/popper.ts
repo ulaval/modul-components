@@ -1,15 +1,13 @@
-import Vue from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './popper.html?style=./popper.scss';
 import { POPPER_NAME } from '../component-names';
-import uuid from '../../utils/uuid/uuid';
 import Popper from 'popper.js';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
-import { OpenTrigger, OpenTriggerMixin, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
+import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 
 export enum MPopperPlacement {
@@ -29,9 +27,9 @@ export enum MPopperPlacement {
 
 @WithRender
 @Component({
-    mixins: [OpenTrigger]
+    mixins: [Portal]
 })
-export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
+export class MPopper extends ModulVue implements PortalMixinImpl {
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
@@ -134,11 +132,11 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
     }
 
     private onDocumentClick(event: MouseEvent): void {
-        if (this.as<OpenTriggerMixin>().propOpen) {
-            let trigger: HTMLElement | undefined = this.as<OpenTriggerMixin>().getTrigger();
-            if (!(this.as<OpenTriggerMixin>().getPortalElement().contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
+        if (this.as<PortalMixin>().propOpen) {
+            let trigger: HTMLElement | undefined = this.as<PortalMixin>().getTrigger();
+            if (!(this.as<PortalMixin>().getPortalElement().contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
                 (trigger && trigger.contains(event.target as HTMLElement)))) {
-                this.as<OpenTriggerMixin>().propOpen = false;
+                this.as<PortalMixin>().propOpen = false;
             }
         }
     }
@@ -187,7 +185,7 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
             this.afterEnter(el.children[0]);
         }
 
-        this.as<OpenTriggerMixin>().setFocusToPortal();
+        this.as<PortalMixin>().setFocusToPortal();
     }
 
     private onEnterCancelled(el: HTMLElement): void {
@@ -218,7 +216,7 @@ export class MPopper extends ModulVue implements OpenTriggerMixinImpl {
             this.afterLeave(el.children[0]);
         }
 
-        this.as<OpenTriggerMixin>().setFocusToTrigger();
+        this.as<PortalMixin>().setFocusToTrigger();
     }
 
     private onLeaveCancelled(el: HTMLElement): void {

@@ -6,8 +6,7 @@ import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import PopperPlugin, { MPopperPlacement } from '../popper/popper';
-import { MOpenTrigger } from '../../mixins/open-trigger/open-trigger';
-import { OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
+import { MOpenTrigger, OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 import SidebarPlugin from '../sidebar-window/sidebar-window';
 
 @WithRender
@@ -22,10 +21,6 @@ export class MPopup extends ModulVue {
     public placement: MPopperPlacement;
     @Prop({default: MOpenTrigger.Click})
     public openTrigger: MOpenTrigger;
-    // @Prop({ default: true })
-    // public openOnClick: boolean;
-    // @Prop({ default: false })
-    // public openOnOver: boolean;
     @Prop()
     public closeOnBackdrop: boolean;
     @Prop({ default: true })

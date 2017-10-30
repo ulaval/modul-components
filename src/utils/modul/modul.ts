@@ -228,9 +228,9 @@ export class Modul {
 
     private stopScollBody(viewportIsSmall: boolean): void {
         this.stopScrollPosition = this.scrollPosition;
-        if (viewportIsSmall) {
-            this.bodyStyle.position = 'fixed';
-        }
+        // if (viewportIsSmall) {
+        this.bodyStyle.position = 'fixed';
+        // }
         this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
         this.bodyStyle.right = '0';
         this.bodyStyle.left = '0';

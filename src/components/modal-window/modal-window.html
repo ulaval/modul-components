@@ -4,7 +4,8 @@
         <div class="m-base-window__wrap m--is-modal" :class="[{ 'm--is-open': propOpen,
                         'm--is-disabled':disabled }, className]" ref="dialogWrap">
             <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
-                <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
+                <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot || hasMessage">
+                    <span v-if="hasMessage">{{message}}</span>
                     <slot></slot>
                 </div>
                 <footer class="m-base-window__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }">

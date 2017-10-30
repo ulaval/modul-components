@@ -5,6 +5,12 @@ export interface OpenTriggerHookMixin {
     triggerHook: HTMLElement | undefined;
 }
 
+export enum MOpenTrigger {
+    Hover = 'hover',
+    Click = 'click',
+    Manual = 'manual'
+}
+
 @Component
 export class OpenTriggerHook extends Vue implements OpenTriggerHookMixin {
     // should be initialized for reactivity

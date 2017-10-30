@@ -1,9 +1,9 @@
 import { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import { SIDEBAR_NAME } from '../component-names';
-import { OpenTrigger, OpenTriggerMixin, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
+import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
 import WithRender from './sidebar-window.html?style=../../mixins/base-window/base-window.scss';
 import uuid from '../../utils/uuid/uuid';
@@ -19,9 +19,9 @@ export enum MSidebarOrigin {
 
 @WithRender
 @Component({
-    mixins: [OpenTrigger]
+    mixins: [Portal]
 })
-export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
+export class MSidebar extends ModulVue implements PortalMixinImpl {
     @Prop({
         default: MSidebarOrigin.Bottom,
         validator: value =>
@@ -78,12 +78,12 @@ export class MSidebar extends ModulVue implements OpenTriggerMixinImpl {
 
     private backdropClick(): void {
         if (this.closeOnBackdrop) {
-            this.as<OpenTriggerMixin>().tryClose();
+            this.as<PortalMixin>().tryClose();
         }
     }
 
     private closeDialog(): void {
-        this.as<OpenTriggerMixin>().tryClose();
+        this.as<PortalMixin>().tryClose();
     }
 
     private get marginLeft(): string {

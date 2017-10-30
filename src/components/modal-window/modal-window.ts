@@ -1,21 +1,19 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
-import uuid from '../../utils/uuid/uuid';
 import WithRender from './modal-window.html?style=../../mixins/base-window/base-window.scss';
-import { OpenTrigger, OpenTriggerMixinImpl } from '../../mixins/open-trigger/open-trigger';
+import { Portal, PortalMixinImpl } from '../../mixins/portal/portal';
 import { OpenTriggerHook, OpenTriggerHookMixin } from '../../mixins/open-trigger/open-trigger-hook';
-import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
 @WithRender
 @Component({
-    mixins: [OpenTrigger, OpenTriggerHook, MediaQueries]
+    mixins: [Portal, OpenTriggerHook]
 })
-export class MModal extends ModulVue implements OpenTriggerMixinImpl {
+export class MModal extends ModulVue implements PortalMixinImpl {
     @Prop()
-    public open: boolean;
+    public message: string;
 
     public handlesFocus(): boolean {
         return true;
@@ -48,6 +46,10 @@ export class MModal extends ModulVue implements OpenTriggerMixinImpl {
 
     private get hasFooterSlot(): boolean {
         return !!this.$slots.footer;
+    }
+
+    private hasMessage(): boolean {
+        return !!this.message;
     }
 }
 

@@ -69,6 +69,6 @@ export class Navigation extends ModulVue {
     }
 
     private onClick(): void {
-        this.$confirm().then(() => console.log('ok!!!')).catch(() => console.log('cancel!!!'));
+        this.$confirm('question?').then(() => console.log('ok!!!')).catch(() => console.log('cancel!!!'));
     }
 }

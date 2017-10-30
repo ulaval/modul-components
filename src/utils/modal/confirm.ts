@@ -1,14 +1,17 @@
 import { PluginObject } from 'vue';
 import { MModal } from '../../components/modal-window/modal-window';
 
-export type ConfirmFunction = () => Promise<any>;
+export type ConfirmFunction = (message: string) => Promise<any>;
 
 let confirmInstance: MModal | undefined = undefined;
 
-export const confirmFunction: ConfirmFunction = function() {
+export const confirmFunction: ConfirmFunction = (message: string) => {
     if (!confirmInstance) {
         confirmInstance = new MModal({
-            el: document.createElement('div')
+            el: document.createElement('div'),
+            propsData: {
+                message: message
+            }
         });
 
         document.body.appendChild(confirmInstance.$el);
@@ -33,7 +36,7 @@ export const confirmFunction: ConfirmFunction = function() {
             if (confirmInstance) {
                 confirmInstance.$on('ok', onOk);
                 confirmInstance.$on('cancel', onCancel);
-                confirmInstance.open = true;
+                confirmInstance.$props['open'] = true;
             }
         };
 
@@ -41,7 +44,7 @@ export const confirmFunction: ConfirmFunction = function() {
             if (confirmInstance) {
                 confirmInstance.$off('ok', onOk);
                 confirmInstance.$off('cancel', onCancel);
-                confirmInstance.open = false;
+                confirmInstance.$props['open'] = false;
             }
         };
 
