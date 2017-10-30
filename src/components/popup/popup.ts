@@ -1,17 +1,17 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { MPopperPlacement } from '../popper/popper';
-import PopperPlugin from '../popper/popper';
+import PopperPlugin, { MPopperPlacement } from '../popper/popper';
+import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 import SidebarPlugin from '../sidebar-window/sidebar-window';
 
 @WithRender
 @Component({
-    mixins: [MediaQueries]
+    mixins: [MediaQueries, OpenTrigger]
 })
 export class MPopup extends ModulVue {
 
@@ -19,10 +19,10 @@ export class MPopup extends ModulVue {
     public open: boolean;
     @Prop({ default: MPopperPlacement.Bottom })
     public placement: MPopperPlacement;
-    @Prop({ default: true })
-    public openOnClick: boolean;
-    @Prop({ default: false })
-    public openOnOver: boolean;
+    @Prop({default: MOpenTrigger.Click})
+    public openTrigger: MOpenTrigger;
+    @Prop()
+    public closeOnBackdrop: boolean;
     @Prop({ default: true })
     public focusManagement: boolean;
     @Prop({ default: 'auto' })
@@ -31,8 +31,6 @@ export class MPopup extends ModulVue {
     public id: string;
     @Prop({ default: false })
     public disabled: boolean;
-    @Prop({ default: '' })
-    public classNamePortalTarget: string;
     @Prop({ default: true })
     public shadow: boolean;
     @Prop({ default: true })
@@ -62,59 +60,51 @@ export class MPopup extends ModulVue {
     @Prop()
     public desktopOnly: boolean;
 
-    public componentName: string = POPUP_NAME;
     private internalOpen: boolean = false;
-
-    protected mounted(): void {
-        this.propOpen = this.open;
-    }
-
-    public get propOpen(): boolean {
-        return this.internalOpen;
-    }
 
     public get popupBody(): Element {
         return (this.$children[0] as any).popupBody;
     }
 
-    public set propOpen(open) {
-        if (open) {
-            if (!this.internalOpen) {
-                this.internalOpen = true;
-                this.$emit('open');
-            }
-
-        } else {
-            if (this.internalOpen) {
-                this.internalOpen = false;
-                this.$emit('close');
-            }
-        }
+    private get propOpen(): boolean {
+        return this.open === undefined ? this.internalOpen : this.open;
     }
 
-    private get isSmall(): boolean {
-        return this.as<MediaQueriesMixin>().isMqMaxS;
+    private set propOpen(value: boolean) {
+        this.internalOpen = value;
+        this.$emit('update:open', value);
     }
 
-    @Watch('open')
-    private openChanged(open: boolean): void {
-        this.propOpen = open;
+    public get propOpenTrigger(): MOpenTrigger {
+        return this.openTrigger; // todo: mobile + hover ??
     }
 
-    private togglePopup(open: boolean): void {
-        this.propOpen = open;
+    public get trigger(): any {
+        return !this.as<OpenTriggerMixin>().triggerHook ? undefined : this.as<OpenTriggerMixin>().triggerHook;
+    }
+
+    private onOpen(): void {
+        this.$emit('open');
+    }
+
+    private onClose(): void {
+        this.$emit('close');
     }
 
     private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;
     }
 
-    private get hasBodySlot(): boolean {
-        return !!this.$slots.body;
+    private get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
     }
 
     private get hasFooterSlot(): boolean {
         return !!this.$slots.footer;
+    }
+
+    private get hasTriggerSlot(): boolean {
+        return !!this.$slots.trigger;
     }
 }
 

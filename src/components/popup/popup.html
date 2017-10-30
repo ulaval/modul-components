@@ -1,14 +1,13 @@
 <div class="m-popup" :id="id" :style="{ width: width }">
-    <m-popper :open="propOpen"
-              @open="togglePopup(true)"
-              @close="togglePopup(false)"
+    <m-popper :open.sync="propOpen"
+              @open="onOpen()"
+              @close="onClose()"
               :disabled="disabled"
               :id="id"
-              :classNamePortalTarget="classNamePortalTarget"
               :placement="placement"
               :focus-management="focusManagement"
-              :open-on-click="openOnClick"
-              :open-on-Over="openOnOver"
+              :open-trigger="propOpenTrigger"
+              :trigger="trigger"
               :before-enter="beforeEnter"
               :enter="enter"
               :after-enter="afterEnter"
@@ -17,23 +16,35 @@
               :leave="leave"
               :after-leave="afterLeave"
               :leave-cancelled="leaveCancelled"
-              v-if="!isSmall || desktopOnly"
+              v-if="!isMqMaxS || desktopOnly"
               :style="{ width: width }">
-        <slot></slot>
-        <div slot="body" class="m-popup__body" :class="{ 'm--has-shadow': shadow }" v-if="hasHeaderSlot || hasBodySlot || hasFooterSlot">
-            <slot name="header"></slot>
-            <slot name="body"></slot>
-            <slot name="footer"></slot>
+        <div slot="trigger" v-if="hasTriggerSlot">
+            <slot name="trigger"></slot>
+        </div>
+        <div class="m-popup__body" :class="{ 'm--has-shadow': shadow }">
+            <slot></slot>
         </div>
     </m-popper>
-    <m-sidebar :open="propOpen" @open="togglePopup(true)" @close="togglePopup(false)" :disabled="disabled" :id="id" :classNamePortalTarget="classNamePortalTarget"
-        :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody" :padding-footer="paddingFooter" v-if="isSmall && !desktopOnly">
-        <slot></slot>
+    <m-sidebar :open.sync="propOpen"
+               @open="onOpen()"
+               @close="onClose()"
+               :close-on-backdrop="closeOnBackdrop"
+               :disabled="disabled"
+               :focus-management="focusManagement"
+               :id="id"
+               :padding="padding"
+               :padding-header="paddingHeader"
+               :padding-body="paddingBody"
+               :padding-footer="paddingFooter"
+               :open-trigger="propOpenTrigger"
+               :trigger="trigger"
+               v-if="isMqMaxS && !desktopOnly">
+        <slot name="trigger"></slot>
         <div slot="header" class="m-popup__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>
         </div>
-        <div slot="body" class="m-popup__body" v-if="hasBodySlot">
-            <slot name="body"></slot>
+        <div class="m-popup__body" v-if="hasDefaultSlot">
+            <slot></slot>
         </div>
         <div slot="footer" class="m-popup__footer" v-if="hasFooterSlot">
             <slot name="footer"></slot>

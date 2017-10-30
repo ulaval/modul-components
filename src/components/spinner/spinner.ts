@@ -5,7 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import WithRender from './spinner.html?style=./spinner.scss';
 import { SPINNER_NAME } from '../component-names';
-import { Portal, PortalMixin } from '../../mixins/portal/portal';
+// import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
 
@@ -30,7 +30,7 @@ const SPINNER_ID: string = 'MSpinner';
 
 @WithRender
 @Component({
-    mixins: [Portal]
+    // mixins: [Portal]
 })
 export class MSpinner extends ModulVue {
     @Prop()
@@ -91,14 +91,14 @@ export class MSpinner extends ModulVue {
     }
 
     private appendSpinnerToBody(): void {
-        this.as<PortalMixin>().appendBackdropAndPortalToBody(SPINNER_ID, 'm-spinner-popover', '0.3s');
-        this.spinnerPortalId = this.as<PortalMixin>().portalId;
+        // this.as<PortalMixin>().appendBackdropAndPortalToBody(SPINNER_ID, 'm-spinner-popover', '0.3s');
+        // this.spinnerPortalId = this.as<PortalMixin>().portalId;
 
-        this.visible = true;
+        // this.visible = true;
     }
 
     private removeSpinnerToBody(): void {
-        this.as<PortalMixin>().removeBackdropAndPortal();
+        // this.as<PortalMixin>().removeBackdropAndPortal();
     }
 
     private getSpinnerId(): string {
