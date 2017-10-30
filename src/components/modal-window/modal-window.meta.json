@@ -3,5 +3,5 @@
     "name": "m-modal-meta:name",
     "attributes": {},
     "overview": "modal-window.overview",
-    "preview": false
+    "preview": "modal.preview"
 }

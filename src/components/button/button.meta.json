@@ -53,5 +53,6 @@
             "default": false
         }
     },
-    "overview": "button.overview"
+    "overview": "button.overview",
+    "preview": "button.preview"
 }

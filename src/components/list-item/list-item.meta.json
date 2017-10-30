@@ -15,5 +15,6 @@
             "default": false
         }
     },
-    "overview": "list-item.overview"
+    "overview": "list-item.overview",
+    "preview": "list-item.preview"
 }

@@ -48,5 +48,6 @@
             "default": false
         }
     },
-    "overview": "tooltip.overview"
+    "overview": "tooltip.overview",
+    "preview": "tooltip.preview"
 }
