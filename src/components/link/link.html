@@ -1,4 +1,4 @@
-<span>
+<transition>
     <router-link class="m-link" :class="{ 'm--is-unvisited': unvisited,
                            'm--is-disabled m--no-underline': disabled,
                            'm--no-underline': !underline,
@@ -28,4 +28,4 @@
         </span>
         <span class="m-link__hidden" v-if="hasHiddenText">{{ hiddenText }}</span>
     </a>
-</span>
+</transition>
