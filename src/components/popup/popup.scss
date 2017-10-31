@@ -1,6 +1,12 @@
 @import 'abstracts/variables';
 
 .m-popup {
+    position: relative;
+
+    .m-popper {
+        position: absolute;
+    }
+
     &__body {
         &.m--has-shadow {
             box-shadow: $m-box-shadow;
