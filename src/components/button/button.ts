@@ -63,6 +63,14 @@ export class MButton extends Vue {
         this.$el.blur();
     }
 
+    private onFocus(): void {
+        this.$emit('focus');
+    }
+
+    private onBlur(): void {
+        this.$emit('blur');
+    }
+
     private get propType(): string {
         return this.type != MButtonType.Submit && this.type != MButtonType.Reset ? MButtonType.Button : this.type;
     }

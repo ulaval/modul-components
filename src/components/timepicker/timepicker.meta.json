@@ -39,5 +39,6 @@
             }
         }
     },
-    "overview": "timepicker.overview"
+    "overview": "timepicker.overview",
+    "preview": "timerpicker.preview"
 }

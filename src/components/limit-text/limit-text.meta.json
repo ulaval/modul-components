@@ -10,5 +10,6 @@
             "type": "string"
         }
     },
-    "overview": "limit-text.overview"
+    "overview": "limit-text.overview",
+    "preview": "limit-text.preview"
 }

@@ -1,13 +1,10 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import WithRender from './dialog-window.html?style=../../mixins/base-window/base-window.scss';
+import { Prop } from 'vue-property-decorator';
 import { DIALOG_NAME } from '../component-names';
-import { BaseWindow, BaseWindowMode } from '../../mixins/base-window/base-window';
-import { MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-
-const DIALOG_ID: string = 'mDialog';
-const DIALOG_MAX_WIDTH: string = '640px';
+import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 
 export enum MDialogSize {
     FullSize = 'full-size',
@@ -16,21 +13,64 @@ export enum MDialogSize {
     Small = 'small'
 }
 
+@WithRender
 @Component({
-    mixins: [BaseWindow]
+    mixins: [Portal]
 })
-export class MDialog extends ModulVue {
-    @Prop({ default: MDialogSize.Default })
-    public size: string;
+export class MDialog extends ModulVue implements PortalMixinImpl {
+    @Prop({
+        default: MDialogSize.Default,
+        validator: value =>
+            value == MDialogSize.Default ||
+            value == MDialogSize.FullSize ||
+            value == MDialogSize.Large ||
+            value == MDialogSize.Small
+    })
+    public size: MDialogSize;
 
-    public componentName: string = DIALOG_NAME;
+    @Prop({ default: true })
+    public closeOnBackdrop: boolean;
 
-    protected get windowMode(): BaseWindowMode {
-        return BaseWindowMode.Dialog;
+    @Prop()
+    public title: string;
+
+    public handlesFocus(): boolean {
+        return true;
     }
 
-    private get propSize(): string {
-        return this.size == MDialogSize.Large || this.size == MDialogSize.Small || this.size == MDialogSize.FullSize ? this.size : MDialogSize.Default;
+    public doCustomPropOpen(value: boolean): boolean {
+        return false;
+    }
+
+    public hasBackdrop(): boolean {
+        return true;
+    }
+
+    public getPortalElement(): HTMLElement {
+        return this.$refs.article as HTMLElement;
+    }
+
+    private get hasDefaultSlot(): boolean {
+        // todo: header or title?
+        return !!this.$slots.default;
+    }
+
+    private get hasHeader(): boolean {
+        return this.hasTitle || !!this.$slots.header;
+    }
+
+    private get hasTitle(): boolean {
+        return !!this.title;
+    }
+
+    private backdropClick(): void {
+        if (this.closeOnBackdrop) {
+            this.as<PortalMixin>().tryClose();
+        }
+    }
+
+    private closeDialog(): void {
+        this.as<PortalMixin>().tryClose();
     }
 }
 

@@ -26,5 +26,6 @@
             "type": "string"
         }
     },
-    "overview": "input-style.overview"
+    "overview": "input-style.overview",
+    "preview": "input-style.preview"
 }
