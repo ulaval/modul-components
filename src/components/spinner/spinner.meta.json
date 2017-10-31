@@ -2,13 +2,9 @@
     "tag": "m-spinner",
     "name": "m-spinner-meta:name",
     "attributes": {
-        "mode": {
-            "type": "string",
-            "values": [
-                "loading",
-                "processing"
-            ],
-            "default": 0
+        "modal": {
+            "type": "boolean",
+            "default": false
         },
         "title": {
             "type": "string"

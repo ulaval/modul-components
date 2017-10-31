@@ -5,14 +5,8 @@ import { Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import WithRender from './spinner.html?style=./spinner.scss';
 import { SPINNER_NAME } from '../component-names';
-// import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
-
-export enum MSpinnerMode {
-    Loading = 'loading',
-    Processing = 'processing'
-}
 
 export enum MSpinnerStyle {
     Dark = 'dark',
@@ -29,100 +23,45 @@ export enum MSpinnerSize {
 const SPINNER_ID: string = 'MSpinner';
 
 @WithRender
-@Component({
-    // mixins: [Portal]
-})
+@Component
 export class MSpinner extends ModulVue {
     @Prop()
-    public mode: MSpinnerMode;
-    @Prop()
     public title: string;
+
     @Prop()
     public description: string;
-    @Prop()
+
+    @Prop({
+        default: MSpinnerStyle.Regular,
+        validator: value =>
+            value == MSpinnerStyle.Dark ||
+            value == MSpinnerStyle.Light ||
+            value == MSpinnerStyle.Lighter ||
+            value == MSpinnerStyle.Regular
+    })
     public skin: MSpinnerStyle;
-    @Prop({ default: MSpinnerSize.Large })
+
+    @Prop({
+        default: MSpinnerSize.Large,
+        validator: value => value == MSpinnerSize.Large || value == MSpinnerSize.Small
+    })
     public size: MSpinnerSize;
 
-    public componentName = SPINNER_NAME;
+    @Prop()
+    public modal: boolean;
 
     private spinnerId: string = SPINNER_ID + '-' + uuid.generate();
-    private spinnerPortalId: string;
+    private portalTargetEl: HTMLElement | undefined = undefined;
 
-    private defaultTargetElVisible: boolean = false;
     private visible: boolean = false;
-    private internalPropMode: MSpinnerMode = MSpinnerMode.Loading;
 
-    protected beforeMount(): void {
-        this.propMode = this.mode;
-    }
-
-    protected destroyed(): void {
-        if (this.internalPropMode == MSpinnerMode.Processing) {
-            this.removeSpinnerToBody();
-        }
-    }
-
-    @Watch('mode')
-    private modeChanged(value: MSpinnerMode): void {
-        this.propMode = this.mode;
-    }
-
-    private get propMode(): MSpinnerMode {
-        return this.mode != undefined ? this.mode : this.internalPropMode;
-    }
-
-    private set propMode(value: MSpinnerMode) {
-        if (this.internalPropMode != value) {
-            this.internalPropMode = value;
-
-            if (this.internalPropMode == MSpinnerMode.Processing) {
-                this.defaultTargetElVisible = false;
-                this.visible = false;
-                this.$nextTick(() => {
-                    this.appendSpinnerToBody();
-                });
-            } else {
-                this.removeSpinnerToBody();
-                this.defaultTargetElVisible = true;
-                this.visible = true;
+    protected beforeDestroy(): void {
+        if (this.modal) {
+            let el: HTMLElement = document.getElementById(this.spinnerId) as HTMLElement;
+            if (el) {
+                document.body.removeChild(el);
             }
         }
-    }
-
-    private appendSpinnerToBody(): void {
-        // this.as<PortalMixin>().appendBackdropAndPortalToBody(SPINNER_ID, 'm-spinner-popover', '0.3s');
-        // this.spinnerPortalId = this.as<PortalMixin>().portalId;
-
-        // this.visible = true;
-    }
-
-    private removeSpinnerToBody(): void {
-        // this.as<PortalMixin>().removeBackdropAndPortal();
-    }
-
-    private getSpinnerId(): string {
-        return this.mode == MSpinnerMode.Processing ? this.spinnerPortalId : this.spinnerId;
-    }
-
-    private get propSkin(): MSpinnerStyle {
-        let result: MSpinnerStyle;
-        switch (this.skin) {
-            case MSpinnerStyle.Dark:
-            case MSpinnerStyle.Light:
-            case MSpinnerStyle.Lighter:
-            case MSpinnerStyle.Regular:
-                result = this.skin;
-                break;
-            default:
-                result = this.mode == MSpinnerMode.Processing ? MSpinnerStyle.Light : MSpinnerStyle.Regular;
-                break;
-        }
-        return result;
-    }
-
-    private get propSize(): string {
-        return this.size == MSpinnerSize.Small ? MSpinnerSize.Small : MSpinnerSize.Large;
     }
 
     private get hasTitle(): boolean {
@@ -131,6 +70,33 @@ export class MSpinner extends ModulVue {
 
     private get hasDescription(): boolean {
         return !!this.description;
+    }
+
+    private onBeforeEnter(): void {
+        let el: HTMLElement = document.getElementById(this.spinnerId) as HTMLElement;
+        if (this.modal && !el) {
+            let element: HTMLElement = document.createElement('div');
+            element.setAttribute('id', this.spinnerId);
+            document.body.appendChild(element);
+        }
+    }
+
+    private onEnter(): void {
+        if (!this.portalTargetEl && this.modal) {
+            this.portalTargetEl = document.getElementById(this.spinnerId) as HTMLElement;
+            this.$modul.pushElement(this.portalTargetEl, true, false);
+            this.portalTargetEl.style.position = 'absolute';
+        }
+        this.visible = true;
+    }
+
+    private onLeave(): void {
+        this.visible = false;
+        if (this.modal && this.portalTargetEl) {
+            this.$modul.popElement(this.portalTargetEl, true, false);
+            this.portalTargetEl.style.position = '';
+            this.portalTargetEl = undefined;
+        }
     }
 }
 

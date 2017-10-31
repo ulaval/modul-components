@@ -1,10 +1,12 @@
 @import 'abstracts/variables';
 
 .m-nav-bar {
-    position: relative;
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+    &__wrap {
+        position: relative;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
 
     &__list {
         list-style: none;
@@ -210,13 +212,13 @@
     }
 
     &.m--is-arrow {
-        border-bottom: $m-border-width--s solid $m-color--grey;
-        margin-bottom: $m-margin;
-        overflow: visible;
+        .m-nav-bar__wrap {
+            border-bottom: $m-border-width--s solid $m-color--grey;
+            margin-bottom: $m-margin;
+            overflow: visible;
+        }
 
         .m-nav-bar-item {
-            margin: 0 $m-margin;
-
             a:visited {
                 color: $m-color--grey-darker;
             }
@@ -241,14 +243,6 @@
                 button {
                     color: $m-color--text;
                 }
-            }
-
-            &.m--is-first {
-                margin-left: 0;
-            }
-
-            &.m--is-last {
-                margin-right: 0;
             }
         }
     }
