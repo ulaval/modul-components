@@ -1,18 +1,15 @@
-<div class="m-spinner" :aria-hidden="!defaultTargetElVisible">
-    <portal :target-el="'#'+ getSpinnerId()" v-if="visible">
-        <div class="m-spinner__wrap"
-             :class="{'m--is-loading': propMode == 'loading',
-                    'm--is-processing': propMode == 'processing',
-                    'm--is-dark': propSkin == 'dark',
-                    'm--is-light': propSkin == 'light',
-                    'm--is-lighter': propSkin == 'lighter'}">
-            <div aria-hidden="true"
-                 class="m-spinner__icon"
-                 :class="{ 'm--is-small' : propSize == 'small'}"></div>
-            <h2 class="m-spinner__title" v-if="hasTitle">{{ title }}</h2>
-            <p class="m-spinner__description" v-if="hasDescription">{{ description }}</p>
-        </div>
-    </portal>
-    <div :id="spinnerId" v-if="defaultTargetElVisible"></div>
-</div>
-
+<transition :appear="true" :css="false" @before-enter="onBeforeEnter()" @enter="onEnter()" @leave="onLeave()">
+    <div class="m-spinner">
+        <portal :target-el="'#' + spinnerId" v-if="visible">
+            <div class="m-spinner__wrap" :class="{'m--is-processing': modal,
+                 'm--is-dark': skin == 'dark',
+                 'm--is-light': skin == 'light',
+                 'm--is-lighter': skin == 'lighter'}">
+                <div aria-hidden="true" class="m-spinner__icon" :class="{ 'm--is-small' : size == 'small'}"></div>
+                <h2 class="m-spinner__title" v-if="hasTitle">{{ title }}</h2>
+                <p class="m-spinner__description" v-if="hasDescription">{{ description }}</p>
+            </div>
+        </portal>
+        <div :id="spinnerId" v-if="!modal"></div>
+    </div>
+</transition>

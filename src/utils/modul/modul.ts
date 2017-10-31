@@ -89,7 +89,6 @@ export class Modul {
     public popElement(element: HTMLElement, withBackdrop: boolean, slow: boolean): void {
         this.windowZIndex--;
         this.windowStack.pop();
-        console.log('pop', this.windowZIndex);
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
             console.warn('$modul: Invalid window ref count');
             this.windowZIndex = Z_INDEZ_DEFAULT;
