@@ -9,9 +9,6 @@
         :placeholder="defaultText"
         :disabled="disabled"
         :waiting="waiting"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"
         v-m-popup:popper
         @keydown.enter.prevent="onKeydownEnter($event)"
         @keydown.return.prevent="onKeydownEnter($event)"
@@ -23,27 +20,28 @@
         @blur="onBlur($event)"
         @mousedown="onMousedown($event)">
     </m-text-field>
+
     <m-popup placement="bottom-start"
-             :disabled="inactive"
-             :open.sync="open"
-             :enter="transitionEnter"
-             :after-enter="transitionAfterEnter"
-             :leave="transitionLeave"
-             :padding-header="false"
-             :padding-body="false"
-             :focus-management="false"
-             :close-on-backdrop="false"
-             open-trigger="manual"
-             width="100%"
-             ref="popper"
-             @open="onOpen">
+            :disabled="inactive"
+            :open.sync="open"
+            :enter="transitionEnter"
+            :after-enter="transitionAfterEnter"
+            :leave="transitionLeave"
+            :padding-header="false"
+            :padding-body="false"
+            :focus-management="false"
+            :close-on-backdrop="false"
+            open-trigger="manual"
+            width="100%"
+            ref="popper"
+            @open="onOpen">
         <!-- <template slot="header" v-if="hasLabel && isMqMaxS">
             <h2 class="m-dropdown__header__label">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="editable">
                 <input type="text"
-                       class="m-dropdown__header__research-input"
-                       :placeholder="researchText"
-                       v-model="textElement">
+                    class="m-dropdown__header__research-input"
+                    :placeholder="researchText"
+                    v-model="textElement">
                 <m-button mode="icon" icon-name="default" @click="focusOnResearchInput">
                     <m-i18n k="m-dropdown:search"></m-i18n>
                 </m-button>
@@ -60,8 +58,9 @@
             <slot name="footer"></slot>
         </template>
     </m-popup>
-    <!-- <m-validation-message
+
+    <m-validation-message
         :error-message="propErrorMessage"
         :valid-message="propValidMessage"
-        :helper-message="helperMessage"></m-validation-message> -->
+        :helper-message="helperMessage"></m-validation-message>
 </div>
