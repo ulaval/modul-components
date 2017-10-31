@@ -59,12 +59,14 @@ export class MNavbar extends ModulVue {
         this.childrenIndexSelected = this.childrenIndexSelected == undefined ? this.arrItem[0].childrenIndex : this.childrenIndexSelected;
         let childrenSelected = this.$children[this.childrenIndexSelected];
         childrenSelected['selectItem']();
-        if (this.propSkin == MNavbarSkin.Light && this.line != false) {
-            this.setLinePosition(childrenSelected.$el as HTMLElement);
-        }
-        if (this.propSkin == MNavbarSkin.Arrow && this.line != false) {
-            this.setArrowPosition(childrenSelected.$el as HTMLElement);
-        }
+        setTimeout(() => {
+            if (this.propSkin == MNavbarSkin.Light && this.line != false) {
+                this.setLinePosition(childrenSelected.$el as HTMLElement);
+            }
+            if (this.propSkin == MNavbarSkin.Arrow && this.line != false) {
+                this.setArrowPosition(childrenSelected.$el as HTMLElement);
+            }
+        }, 0);
     }
 
     private changeItem(id: number, childrenIndex: number): void {
