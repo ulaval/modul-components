@@ -50,6 +50,8 @@ export class MDatepicker extends ModulVue {
 
     public componentName: string = DATEPICKER_NAME;
 
+    private internalIsFocus: boolean = false;
+
     private open: boolean = false;
     private view: string = 'day';
     private internalValue = '';
