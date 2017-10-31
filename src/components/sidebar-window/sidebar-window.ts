@@ -12,7 +12,7 @@ export enum MSidebarOrigin {
     Bottom = 'bottom',
     Left = 'left',
     BottomRight = 'bottom-right',
-    BottomLeft = 'Bottom-left'
+    BottomLeft = 'bottom-left'
 }
 
 @WithRender
@@ -38,7 +38,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     @Prop({ default: true })
     public focusManagement: boolean;
 
-    @Prop()
+    @Prop({ default: true })
     public closeOnBackdrop: boolean;
 
     public get popupBody(): any {
