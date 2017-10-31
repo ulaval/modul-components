@@ -1,21 +1,13 @@
 @import 'abstracts/variables';
 
 .m-popup {
+    position: relative;
+
+    .m-popper {
+        position: absolute;
+    }
+
     &__body {
-        @include m-scrollbar-ie();
-
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
-
-            &-track-piece {
-                @include m-scrollbar-track-piece();
-            }
-
-            &-thumb {
-                @include m-scrollbar-thumb();
-            }
-        }
-
         &.m--has-shadow {
             box-shadow: $m-box-shadow;
         }

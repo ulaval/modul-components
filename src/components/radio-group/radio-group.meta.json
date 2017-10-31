@@ -17,13 +17,9 @@
             "type": "boolean",
             "default": false
         },
-        "disabled": {
+        "enabled": {
             "type": "boolean",
             "default": true
-        },
-        "fullWidth": {
-            "type": "boolean",
-            "default": false
         },
         "demo": {
             "type": "boolean",
@@ -31,5 +27,5 @@
         }
     },
     "overview": "radio-group.overview",
-    "preview": false
+    "preview": "radio-group.preview"
 }

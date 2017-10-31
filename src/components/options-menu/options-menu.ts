@@ -19,10 +19,10 @@ export class MOptionsMenu extends ModulVue {
     @Prop()
     public disabled: boolean;
 
-    private isOpen = false;
+    private open = false;
 
     public close(): void {
-        this.isOpen = false;
+        this.open = false;
     }
 
     protected mounted(): void {
@@ -48,13 +48,19 @@ export class MOptionsMenu extends ModulVue {
         }
     }
 
+    private onFocus(): void {
+        console.log('focus');
+    }
+
+    private onBlur(): void {
+        console.log('blur');
+    }
+
     private onOpen(): void {
-        this.isOpen = true;
         this.$emit('open');
     }
 
     private onClose(): void {
-        this.isOpen = false;
         this.$emit('close');
     }
 

@@ -40,5 +40,6 @@
             "default": 1
         }
     },
-    "overview": "accordion.overview"
+    "overview": "accordion.overview",
+    "preview": "accordion.preview"
 }

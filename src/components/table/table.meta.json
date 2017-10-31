@@ -1,5 +1,6 @@
 {
     "tag": "m-table",
     "name": "m-table-meta:name",
-    "overview": "table.overview"
+    "overview": "table.overview",
+    "preview": "table.preview"
 }

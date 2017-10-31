@@ -1,15 +1,15 @@
-import Vue from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './accordion-group.html?style=./accordion-group.scss';
-import { ACCORDION_NAME, ACCORDION_GROUP_NAME } from '../component-names';
-import { MAccordion, MAccordionSkin } from '../accordion/accordion';
+import { ACCORDION_GROUP_NAME } from '../component-names';
+import MAccordionPlugin, { MAccordionSkin, BaseAccordionGroup } from '../accordion/accordion';
+import I18nPlugin from '../i18n/i18n';
+import LinkPlugin from '../link/link';
 
 @WithRender
 @Component
-export class MAccordionGroup extends ModulVue {
+export class MAccordionGroup extends BaseAccordionGroup {
 
     @Prop({ default: MAccordionSkin.Regular })
     public skin: MAccordionSkin;
@@ -17,87 +17,83 @@ export class MAccordionGroup extends ModulVue {
     @Prop({ default: false })
     public concurrent: boolean;
 
-    @Prop({ default: false })
-    public allOpen: boolean;
-
     @Prop()
-    public value: string;
+    public value: string[];
 
     public componentName: string = ACCORDION_GROUP_NAME;
 
-    private arrAccordion: MAccordion[] = new Array();
-    private nbAccordionOpen: number = 0;
+    private accordions: string[] = [];
+    private openAccordions: string[] = [];
 
-    private hasError: boolean = false;
-    private errorDefaultMesage: string = 'ERROR in <' + ACCORDION_GROUP_NAME + '> : ';
-    private errorMessage: string = '';
-
-    protected mounted(): void {
-        this.$children.forEach((accordion, index) => {
-            if (accordion instanceof MAccordion && accordion.componentName == ACCORDION_NAME) {
-                accordion.id = index;
-                accordion.$on('click', (open: boolean) => this.toggleAccordionGroup(open, accordion));
-                this.arrAccordion.push(accordion);
-                if (accordion.isOpen) {
-                    if (this.concurrent && this.nbAccordionOpen == 1) {
-                        accordion.setIsAnimActive(false);
-                        accordion.isOpen = false;
-                    } else {
-                        this.nbAccordionOpen++;
-                    }
-                }
-            }
-        });
-        if (this.allOpen && !this.concurrent) {
-            this.openAllAccordions(false);
-        }
-        if (this.arrAccordion.length == 0) {
-            this.hasError = true;
-            this.errorMessage = this.errorDefaultMesage + 'No <' + ACCORDION_NAME + '> found in <' + ACCORDION_GROUP_NAME + '>';
-            console.error(this.errorMessage);
+    public addAccordion(id: string, open: boolean = false): void {
+        if (this.accordions.indexOf(id) == -1) this.accordions.push(id);
+        // group value override individual accordion's inital open state
+        if (!this.value && open && this.openAccordions.indexOf(id) == -1) {
+            this.setOpenAccordions([...this.openAccordions, id]);
         }
     }
 
-    private toggleAccordionGroup(open: boolean, accordion: MAccordion): void {
-        if (this.concurrent) {
-            this.closeAllAccordions(true);
-            if (open) accordion.isOpen = true;
+    public removeAccordion(id: string): void {
+        this.accordions = this.accordions.filter(el => el != id);
+        this.setOpenAccordions(this.openAccordions.filter(el => el != id));
+    }
+
+    public toggleAccordion(id: string): void {
+        if (this.openAccordions.indexOf(id) == -1) {
+            this.setOpenAccordions([id, ...this.openAccordions]);
         } else {
-            open ? this.nbAccordionOpen++ : this.nbAccordionOpen--;
+            this.setOpenAccordions(this.openAccordions.filter(el => el != id));
         }
     }
 
-    private openAllAccordions(isAnimActive: boolean = true): void {
-        this.nbAccordionOpen = this.arrAccordion.length;
-        this.arrAccordion.forEach(el => {
-            el.setIsAnimActive(isAnimActive);
-            el.isOpen = true;
-        });
+    public accordionIsOpen(id): boolean {
+        return (this.openAccordions.indexOf(id) != -1);
     }
 
-    private closeAllAccordions(isAnimActive: boolean = true): void {
-        this.nbAccordionOpen = 0;
-        this.arrAccordion.forEach(el => {
-            el.setIsAnimActive(isAnimActive);
-            el.isOpen = false;
-        });
+    protected created(): void {
+        this.setOpenAccordions(this.value);
+    }
+
+    @Watch('value')
+    private setOpenAccordions(value?: string[]): void {
+        if (this.concurrent && value && value.length > 1) {
+            this.openAccordions = [value[0]];
+        } else {
+            this.openAccordions = value || [];
+        }
+        this.$emit('update:value', this.openAccordions);
     }
 
     private get propAllOpen(): boolean {
-        return this.nbAccordionOpen == this.arrAccordion.length;
+        return this.openAccordions.length == this.accordions.length;
     }
 
     private get propAllClosed(): boolean {
-        return this.nbAccordionOpen == 0;
+        return this.openAccordions.length == 0;
+    }
+
+    private get propSkin(): MAccordionSkin {
+        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Plain ? this.skin : MAccordionSkin.Regular;
     }
 
     private get hasTitleSlot(): boolean {
         return !!this.$slots['title'];
     }
+
+    private openAllAccordions(): void {
+        this.setOpenAccordions([...this.accordions]);
+    }
+
+    private closeAllAccordions(): void {
+        this.setOpenAccordions();
+    }
 }
 
 const AccordionGroupPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(MAccordionPlugin);
+        v.use(I18nPlugin);
+        v.use(LinkPlugin);
         v.component(ACCORDION_GROUP_NAME, MAccordionGroup);
     }
 };

@@ -28,7 +28,6 @@ export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const RADIO_NAME: string = 'm-radio';
 export const RADIO_GROUP_NAME: string = 'm-radio-group';
-export const RADIO_STYLE_NAME: string = 'm-radio-style';
 export const SCROLL_TOP_NAME: string = 'm-scroll-top';
 export const SIDEBAR_NAME: string = 'm-sidebar';
 export const SLIDER_NAME: string = 'm-slider';
@@ -53,7 +52,6 @@ export const components: string[] = [
     ACCORDION_GROUP_NAME,
     ACCORDION_NAME,
     BULLET_LIST_NAME,
-    LIST_ITEM_NAME,
     BUTTON_NAME,
     BUTTON_GROUP_NAME,
     CHECKBOX_NAME,
@@ -69,6 +67,7 @@ export const components: string[] = [
     INPUT_STYLE_NAME,
     LIMIT_TEXT_NAME,
     LINK_NAME,
+    LIST_ITEM_NAME,
     MESSAGE_NAME,
     MODAL_NAME,
     NAV_BAR_NAME,
@@ -79,7 +78,6 @@ export const components: string[] = [
     POPUP_NAME,
     RADIO_NAME,
     RADIO_GROUP_NAME,
-    RADIO_STYLE_NAME,
     SCROLL_TOP_NAME,
     SIDEBAR_NAME,
     SLIDER_NAME,

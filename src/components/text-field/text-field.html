@@ -1,27 +1,50 @@
 <div class="m-text-field"
-     :class="[{ 'm--is-disabled' : isDisabled,
-            'm--is-waiting' : isWaiting,
-            'm--has-error' : hasError,
-            'm--is-valid' : isValid,
-            'm--has-icon' : hasIcon,
-            'm--has-label': hasLabel },
-            'm--is-type-' + inputType ]"
-     @click="onClick">
-    <m-input-style :state="propState" :label="label" :focus="isFocus" :empty="isEmpty">
+      :class="[{ 'm--is-focus' : isFocus,
+          'm--not-editable' : !propEditable,
+          'm--is-disabled' : isDisabled,
+          'm--has-error' : hasError,
+          'm--is-valid' : isValid,
+          'm--no-value' : !hasValue,
+          'm--has-icon' : hasIcon,
+          'm--is-mode-dropdown': isDropdown,
+          'm--has-label': hasLabel },
+          'm--is-type-'+ type ]"
+        ref="textField">
+    <label class="m-text-field__label" ref="label" v-if="hasLabel"><m-icon name="default" class="m-text-field__icon m--is-disabled" v-if="isDisabled"></m-icon>{{ label }}</label>
+    <div class="m-text-field__input-container">
         <input class="m-text-field__input"
-               :disabled="isDisabled"
-               :placeholder="placeholder"
-               @focus="onFocus"
-               @blur="onBlur"
-               @keyup="onKeyup"
-               ref="input"
-               v-model="model">
-        <template slot="right-content">
-            <m-button mode="icon" :icon-name="iconName" v-if="hasIcon">{{ iconDescription }}</m-button>
-            <div class="m-text-field__icon-password" :class="{ 'm--is-transparent': !hasValue }" v-if="propIconPassword">
-                <m-button mode="icon" :icon-name="iconNamePassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-button>
-            </div>
-        </template>
-    </m-input-style>
-    <m-validation-message :error-message="errorMessage" :valid-message="validMessage" :helper-message="helperMessage" v-if="!isDisabled"></m-validation-message>
+            ref="input"
+            :disabled="isDisabled"
+            @focus="onFocus"
+            @blur="onBlur"
+            @keydown="onKeydown"
+            @click="onClick"
+            @mousedown="onMousedown"
+            :placeholder="propPlaceholder"
+            v-model="model"
+            v-if="true"
+            :readonly="!propEditable">
+        <div class="m-text-field__input"
+            :tabindex="tabindex"
+            ref="input"
+            @focus="onFocus"
+            @blur="onBlur"
+            @mousedown.prevent="onFocus"
+            @keydown="onKeydown"
+            @click="onClick"
+            v-if="false">
+            <div class="m-text-field__input__value" :title="model" ref="inputValue" v-if="!hasValueSlot && !isPlaceholderVisible">{{ model }}</div>
+            <!-- <div class="m-text-field__input__value" ref="inputValue" v-if="hasValueSlot && !hasDefaultText"><slot></slot></div> -->
+            <div class="m-text-field__input__value m--is-transparent" style="opacity: 0; width: 0;" aria-hidden="true" v-if="!hasValue && !hasValueSlot && !isPlaceholderVisible">i</div>
+            <div class="m-text-field__input__default-text" ref="inputDefaultText" v-if="isPlaceholderVisible">- {{ placeholder }} -</div>
+        </div>
+        <m-button mode="icon" :icon-name="iconName" icon-size="13px" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-button>
+        <m-button mode="icon" :icon-name="iconNamePassword" icon-size="13px" class="m-text-field__icon m--is-password" v-if="propIconPassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-button>
+        <m-button mode="icon" icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon m--is-dropdown" v-if="isDropdown && !isDisabled && !waiting" tabindex="-1">test</m-button>
+        <m-spinner size="small"  class="m-text-field_spinner" v-if="waiting && isDropdown"></m-spinner>
+    </div>
+    <m-validation-message
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage" v-if="isMessageVisible"></m-validation-message>
 </div>

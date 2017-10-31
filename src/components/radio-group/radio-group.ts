@@ -25,11 +25,9 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     @Prop({ default: false })
     public inline: boolean;
     @Prop({ default: true })
-    public disabled: boolean;
+    public enabled: boolean;
     @Prop({ default: false})
     public demo: boolean;
-    @Prop({ default: true })
-    public fullWidth: boolean;
 
     public name: string = uuid.generate();
     private internalValue: string = '';

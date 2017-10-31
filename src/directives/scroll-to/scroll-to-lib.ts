@@ -13,6 +13,7 @@ export class ScrollTo {
     public startScroll(element: HTMLElement = document.body, target: number = 0, duration: string = ScrollToDuration.Regular) {
         target = Math.round(target);
         let time: number;
+
         switch (duration) {
             case ScrollToDuration.Null:
                 time = 0;
@@ -39,7 +40,7 @@ export class ScrollTo {
         let startTime = Date.now();
         let endTime = startTime + time;
 
-        let startTop = element.scrollTop;
+        let startTop = window.scrollY;
         let distance = target - startTop;
 
         // based on http://en.wikipedia.org/wiki/Smoothstep
@@ -53,11 +54,11 @@ export class ScrollTo {
         return new Promise((resolve, reject) => {
             // This is to keep track of where the element's scrollTop is
             // supposed to be, based on what we're doing
-            let previousTop = element.scrollTop;
+            let previousTop = window.scrollY;
 
             // This is like a think function from a game loop
             let scrollFrame = () => {
-                if (element.scrollTop != previousTop) {
+                if (window.scrollY != previousTop) {
                     resolve();
                     return;
                 }
@@ -66,7 +67,7 @@ export class ScrollTo {
                 let now = Date.now();
                 let point = smoothStep(startTime, endTime, now);
                 let frameTop = Math.round(startTop + (distance * point));
-                element.scrollTop = frameTop;
+                window.scrollTo(0, frameTop);
 
                 // check if we're done!
                 if (now >= endTime) {
@@ -77,12 +78,12 @@ export class ScrollTo {
                 // If we were supposed to scroll but didn't, then we
                 // probably hit the limit, so consider it done; not
                 // interrupted.
-                if (element.scrollTop === previousTop
-                    && element.scrollTop !== frameTop) {
+                if (window.scrollY === previousTop
+                    && window.scrollY !== frameTop) {
                     resolve();
                     return;
                 }
-                previousTop = element.scrollTop;
+                previousTop = window.scrollY;
 
                 // schedule next frame for execution
                 setTimeout(scrollFrame, 0);

@@ -5,7 +5,7 @@ import { Prop } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import WithRender from './scroll-top.html?style=./scroll-top.scss';
 import { SCROLL_TOP_NAME } from '../component-names';
-import { Portal, PortalMixin } from '../../mixins/portal/portal';
+// import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import ScrollTo from '../../directives/scroll-to/scroll-to-lib';
 import { ScrollToDuration } from '../../directives/scroll-to/scroll-to-lib';
 import IconPlugin from '../icon/icon';
@@ -26,7 +26,7 @@ const SCROLL_TOP_ID: string = 'MScrollTop';
 
 @WithRender
 @Component({
-    mixins: [Portal]
+    // mixins: [Portal]
 })
 export class MScrollTop extends ModulVue {
     @Prop({ default: MScrollTopPosition.Fixe })
@@ -83,13 +83,13 @@ export class MScrollTop extends ModulVue {
     }
 
     private appendScrollTopToBody(): void {
-        this.as<PortalMixin>().appendPortalToBody(SCROLL_TOP_ID, 'm-scrollTop-popover', '0.3s');
-        this.scrollTopPortalId = this.as<PortalMixin>().portalId;
-        this.visible = true;
+        // this.as<PortalMixin>().appendPortalToBody(SCROLL_TOP_ID, 'm-scrollTop-popover', '0.3s');
+        // this.scrollTopPortalId = this.as<PortalMixin>().portalId;
+        // this.visible = true;
     }
 
     private removeScrollTopToBody(): void {
-        this.as<PortalMixin>().removePortal();
+        // this.as<PortalMixin>().removePortal();
     }
 
     private getScrollTopId(): string {

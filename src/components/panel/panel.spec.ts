@@ -2,8 +2,8 @@ import Vue from 'vue';
 import '../../utils/polyfills';
 import PanelPlugin, { MPanel, MPanelMode } from './panel';
 
-const MODE_PRIMARY_CSS: string = 'm--is-mode-primary';
-const MODE_SECONDARY_CSS: string = 'm--is-mode-secondary';
+const MODE_PRIMARY_CSS: string = 'm--is-primary';
+const MODE_SECONDARY_CSS: string = 'm--is-secondary';
 const NO_SHADOW_CSS: string = 'm--no-shadow';
 const NO_BORDER_CSS: string = 'm--no-border';
 const NO_PADDING_CSS: string = 'm--no-padding';

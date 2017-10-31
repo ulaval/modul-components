@@ -19,5 +19,5 @@
         }
     },
     "overview": "sidebar-window.overview",
-    "preview": false
+    "preview": "sidebar.preview"
 }

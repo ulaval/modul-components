@@ -1,0 +1,27 @@
+<div class="m-base-window" ref="baseWindow">
+    <slot name="trigger"></slot>
+    <portal :target-el="'#' + propId">
+        <div v-show="propOpen" class="m-base-window__wrap m--is-modal" :class="[{ 'm--is-open': propOpen,
+                        'm--is-disabled':disabled }, className]" ref="dialogWrap">
+            <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
+                <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot || hasMessage">
+                    <p v-if="hasMessage">{{message}}</p>
+                    <slot></slot>
+                </div>
+                <footer class="m-base-window__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }">
+                    <nav class="m-base-window__footer-nav">
+                        <slot name="footer"></slot>
+                        <template v-if="!hasFooterSlot">
+                            <m-button @click="onOk()">
+                                <m-i18n k="m-base-window:ok"></m-i18n>
+                            </m-button>
+                            <m-link mode="button" @click="onCancel()">
+                                <m-i18n k="m-base-window:cancel"></m-i18n>
+                            </m-link>
+                        </template>
+                    </nav>
+                </footer>
+            </article>
+        </div>
+    </portal>
+</div>

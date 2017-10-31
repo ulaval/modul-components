@@ -39,5 +39,6 @@
             "default": 0
         }
     },
-    "overview": "radio.overview"
+    "overview": "radio.overview",
+    "preview": "radio.preview"
 }

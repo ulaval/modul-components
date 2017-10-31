@@ -3,7 +3,7 @@ import { SpritesService } from './sprites';
 
 const DefaultSpritesPlugin: PluginObject<any> = {
     install(v, options) {
-        if ((v as any).$i18n) {
+        if ((v as any).$svg) {
             let svg: SpritesService = (v as any).$svg;
             svg.addSprites(require('../../assets/icons/sprites-default.svg'));
         } else {

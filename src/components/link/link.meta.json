@@ -48,5 +48,6 @@
             "default": 0
         }
     },
-    "overview": "link.overview"
+    "overview": "link.overview",
+    "preview": "link.preview"
 }
