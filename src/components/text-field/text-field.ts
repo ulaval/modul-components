@@ -149,7 +149,7 @@ export class MTextField extends ModulVue {
     }
 
     private get hasValue(): boolean {
-        return !!this.value;
+        return !!this.model;
     }
 
     private get isFocus(): boolean {

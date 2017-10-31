@@ -1,11 +1,8 @@
 @import 'abstracts/variables';
+@import 'abstracts/mixins';
 
 .m-popup {
-    position: relative;
-
-    .m-popper {
-        position: absolute;
-    }
+    @include m-visually-hidden();
 
     &__body {
         &.m--has-shadow {
