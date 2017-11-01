@@ -1,4 +1,4 @@
-<a class="m-options-menu-item" :class="{ 'disabled' : isDisabled}" href="#" @click.prevent="onClick($event)" ref="m-options-menu-item">
+<a class="m-options-menu-item" :class="{ 'disabled' : isDisabled}" tabindex="0" @click.prevent="onClick($event)" ref="m-options-menu-item">
     <span class="m-options-menu-item__icon" :class="{ 'm-options-menu-item__first-cell' : hasIcon }" ref="icon">
         <m-icon :name="iconName" v-if="hasIcon"></m-icon>
     </span>
