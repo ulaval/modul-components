@@ -3,8 +3,7 @@
     "name": "m-popup-meta:name",
     "attributes": {
         "open": {
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
         },
         "placement": {
             "type": "MPopperPlacement",
