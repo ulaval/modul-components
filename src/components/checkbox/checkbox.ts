@@ -1,7 +1,7 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
@@ -21,10 +21,10 @@ export class MCheckbox extends ModulVue {
 
     @Prop({ default: MCheckboxPosition.Left })
     public position: MCheckboxPosition;
+
+    @Model('change')
     @Prop()
     public value: boolean;
-
-    public componentName: string = CHECKBOX_NAME;
 
     private isFocus = false;
     private id: string = `mCheckbox-${uuid.generate()}`;
@@ -35,7 +35,7 @@ export class MCheckbox extends ModulVue {
     }
 
     private set propValue(value: boolean) {
-        this.$emit('input', value);
+        this.$emit('change', value);
         this.internalPropValue = value;
     }
 
