@@ -7,7 +7,12 @@
             'm--has-label': hasLabel },
             'm--is-type-' + inputType ]"
      @click="onClick">
-    <m-input-style :state="propState" :label="label" :focus="isFocus" :empty="isEmpty">
+    <m-input-style :disabled="isDisabled"
+                   :error="hasError"
+                   :valid="isValid"
+                   :label="label"
+                   :focus="isFocus"
+                   :empty="isEmpty">
         <input class="m-text-field__input"
             :disabled="isDisabled"
             :placeholder="placeholder"
@@ -23,5 +28,9 @@
             </div>
         </template>
     </m-input-style>
-    <m-validation-message :error-message="errorMessage" :valid-message="validMessage" :helper-message="helperMessage" v-if="!isDisabled"></m-validation-message>
+    <m-validation-message
+        :disabled="isDisabled"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"></m-validation-message>
 </div>

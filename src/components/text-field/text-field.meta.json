@@ -2,6 +2,9 @@
     "tag": "m-text-field",
     "name": "m-text-field-meta:name",
     "attributes": {
+        "value": {
+            "type": "string"
+        },
         "type": {
             "type": "string",
             "values": [
@@ -13,36 +16,43 @@
             ],
             "default": 0
         },
-        "mode": {
-            "type": "string",
-            "values": [
-                "text",
-                "dropdown"
-            ],
-            "default": 0
-        },
-        "value": {
-            "type": "string"
-        },
         "label": {
             "type": "string"
         },
-        "editable": {
+        "placeholder": {
+            "type": "string"
+        },
+        "filterable": {
             "type": "boolean",
             "default": true
-        },
-        "iconName": {
-            "type": "string"
-        },
-        "iconDescription": {
-            "type": "string"
         },
         "forceFocus": {
             "type": "boolean",
             "default": false
         },
-        "placeholder": {
-            "type": "string"
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "error": {
+            "type": "boolean",
+            "default": false
+        },
+        "valid": {
+            "type": "boolean",
+            "default": false
+        },
+        "error-message": {
+            "type": "string",
+            "default": ""
+        },
+        "valid-message": {
+            "type": "string",
+            "default": ""
+        },
+        "helper-message": {
+            "type": "string",
+            "default": ""
         }
     },
     "overview": "text-field.overview",

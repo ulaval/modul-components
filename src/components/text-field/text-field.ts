@@ -162,10 +162,6 @@ export class MTextField extends ModulVue {
             return 0;
         }
     }
-
-    private get isMessageVisible(): boolean {
-        return !this.forceFocus;
-    }
 }
 
 const TextFieldPlugin: PluginObject<any> = {
