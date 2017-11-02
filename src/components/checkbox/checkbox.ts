@@ -20,7 +20,7 @@ export enum MCheckboxPosition {
 export class MCheckbox extends ModulVue {
 
     @Prop({ default: MCheckboxPosition.Left })
-    public position: string;
+    public position: MCheckboxPosition;
     @Prop()
     public value: boolean;
 
