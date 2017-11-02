@@ -7,11 +7,12 @@
     <m-input-style ref="mDropdownValue"
       v-m-popup:popper
      :label="label"
-     :state="propState"
+     :disabled="isDisabled"
+     :waiting="waiting"
      :focus="open"
      :empty="isEmpty"
-     :disabled="disabled"
-     :waiting="waiting"
+     :error="hasError"
+     :valid="isValid"
      :width="width">
         <input type="text"
             ref="input"
@@ -76,7 +77,8 @@
     </m-popup>
 
     <m-validation-message
-        :error-message="propErrorMessage"
-        :valid-message="propValidMessage"
+        :disabled="isDisabled"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
 </div>
