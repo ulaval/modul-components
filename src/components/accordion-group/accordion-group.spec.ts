@@ -3,7 +3,7 @@ import '../../utils/polyfills';
 import AccordionGroupPlugin, { MAccordionGroup } from './accordion-group';
 import { MAccordionSkin } from '../accordion/accordion';
 
-const NO_TITLE_CSS: string = 'm--has-no-title';
+const NO_TITLE_CSS: string = 'm--no-title';
 const SKIN_LIGHT_CSS: string = 'm--is-light';
 const SKIN_REGULAR_CSS: string = 'm--is-regular';
 const SKIN_PLAIN_CSS: string = 'm--is-plain';

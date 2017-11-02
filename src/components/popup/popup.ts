@@ -15,7 +15,7 @@ import SidebarPlugin from '../sidebar-window/sidebar-window';
 })
 export class MPopup extends ModulVue {
 
-    @Prop({ default: false })
+    @Prop()
     public open: boolean;
     @Prop({ default: MPopperPlacement.Bottom })
     public placement: MPopperPlacement;

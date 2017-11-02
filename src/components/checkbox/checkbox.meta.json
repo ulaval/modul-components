@@ -13,6 +13,30 @@
                 "left"
             ],
             "default": 1
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "error": {
+            "type": "boolean",
+            "default": false
+        },
+        "valid": {
+            "type": "boolean",
+            "default": false
+        },
+        "error-message": {
+            "type": "string",
+            "default": ""
+        },
+        "valid-message": {
+            "type": "string",
+            "default": ""
+        },
+        "helper-message": {
+            "type": "string",
+            "default": ""
         }
     },
     "overview": "checkbox.overview",

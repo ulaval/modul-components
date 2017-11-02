@@ -13,6 +13,11 @@ import IconPlugin from '../icon/icon';
 export class MValidationMessage extends ModulVue {
     private titleErrorIcon: string = this.$i18n.translate('m-validation-message:title-error-icon');
     private titleValidIcon: string = this.$i18n.translate('m-validation-message:title-valid-icon');
+
+    private onClick(event: MouseEvent): void {
+        console.log('teshjadj43');
+        this.$emit('click', event);
+    }
 }
 
 const ValidationMessagePlugin: PluginObject<any> = {

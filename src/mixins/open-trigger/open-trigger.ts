@@ -13,14 +13,16 @@ export enum MOpenTrigger {
 
 @Component
 export class OpenTrigger extends Vue implements OpenTriggerMixin {
-    // should be initialized for reactivity
-    private internalTriggerHook: HTMLElement | undefined = {} as HTMLElement;
+    // should be initialized for reactivity (use of null instead of dummy class)
+    // tslint:disable-next-line:no-null-keyword
+    private internalTriggerHook: HTMLElement | null = null;
 
     public get triggerHook(): HTMLElement | undefined {
-        return Object.keys(this.internalTriggerHook).length == 0 ? undefined : this.internalTriggerHook;
+        // tslint:disable-next-line:no-null-keyword
+        return this.internalTriggerHook === null ? undefined : this.internalTriggerHook;
     }
 
     public set triggerHook(value: HTMLElement | undefined) {
-        this.internalTriggerHook = value;
+        this.internalTriggerHook = value as HTMLElement;
     }
 }
