@@ -280,9 +280,8 @@ $m-text-field--margin: $m-margin--s !default;
             white-space: nowrap;
         }
 
-        &[type="password"] {
+        &[type=password] {
             -webkit-text-security: disc;
-            letter-spacing: 2px; // Maguc number;
             user-select: none;
         }
 
