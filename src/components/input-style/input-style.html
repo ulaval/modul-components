@@ -12,7 +12,6 @@
     :style="{ width: width }">
     <label class="m-input-style__label" v-if="hasLabel">{{ label }}</label>
     <div class="m-input-style__body" :style="{ width: width }">
-        <m-icon class="m-input-style__disabled-icon" name="default" v-if="isDisabled && !waiting && !hasLabel"></m-icon>
         <div class="m-input-style__body__left">
             <slot></slot>
             <m-i18n k="m-input-style:empty-value" class="m-input-style__body__transparent-text" aria-hidden="true" v-if="!hasDefaultSlot"></m-i18n>
