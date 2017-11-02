@@ -18,10 +18,12 @@ export interface InputStateMixin {
 
 @Component
 export class InputState extends Vue implements InputStateMixin {
-    @Prop({ default: InputStateValue.Default })
-    public state: InputStateValue;
     @Prop({ default: false })
     public disabled: boolean;
+    @Prop({ default: false })
+    public error: boolean;
+    @Prop({ default: false })
+    public valid: boolean;
     @Prop()
     public errorMessage: string;
     @Prop()
@@ -29,20 +31,13 @@ export class InputState extends Vue implements InputStateMixin {
     @Prop()
     public helperMessage: string;
 
-    private valid: boolean;
-    private error: boolean;
-
     public get isDisabled(): boolean {
-        let disabled: boolean = this.propState == InputStateValue.Disabled;
-        // this.$nextTick(() => {
-        //     let inputEl: HTMLElement = this.$el.querySelector('input') as HTMLElement;
-        //     disabled ? inputEl.setAttribute('disabled', 'true') : inputEl.removeAttribute('disabled');
-        // });
+        let disabled: boolean = this.state == InputStateValue.Disabled;
         return disabled;
     }
 
     public get hasError(): boolean {
-        return this.propState == InputStateValue.Error;
+        return this.state == InputStateValue.Error;
     }
 
     public get hasHelper(): boolean {
@@ -50,17 +45,18 @@ export class InputState extends Vue implements InputStateMixin {
     }
 
     public get isValid(): boolean {
-        return this.propState == InputStateValue.Valid;
+        return this.state == InputStateValue.Valid;
     }
 
-    public get propState(): InputStateValue {
-        let state: InputStateValue = this.state == InputStateValue.Disabled || this.state == InputStateValue.Error || this.state == InputStateValue.Valid ? this.state
-            : InputStateValue.Default;
+    public get state(): InputStateValue {
+        let state: InputStateValue;
         if (!this.disabled) {
-            if (this.hasErrorMessage) {
+            if (this.hasErrorMessage || this.error) {
                 state = InputStateValue.Error;
-            } else if ((this.hasValidMessage)) {
+            } else if (this.hasValidMessage || this.valid) {
                 state = InputStateValue.Valid;
+            } else {
+                state = InputStateValue.Default;
             }
         } else {
             state = InputStateValue.Disabled;
