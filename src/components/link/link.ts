@@ -81,6 +81,10 @@ export class MLink extends ModulVue {
         return this.mode == MLinkMode.Button;
     }
 
+    private get isUnvisited(): boolean {
+        return this.isButton ? true : this.unvisited;
+    }
+
     private get isIconPositionRight(): boolean {
         return this.iconPosition == MLinkIconPosition.Right;
     }

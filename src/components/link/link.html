@@ -1,19 +1,20 @@
 <transition>
-    <router-link class="m-link" :class="{ 'm--is-unvisited': unvisited,
-                           'm--is-disabled m--no-underline': disabled,
+    <router-link class="m-link"
+                 :class="{ 'm--is-unvisited': isUnvisited,
+                           'm--is-disabled': disabled,
                            'm--no-underline': !underline,
                            'm--is-button': isButton,
                            'm--is-vanilla': vanilla,
-                           'm--has-right-icon' : isIconPositionRight }" :to="{ path: propUrl }" v-if="isRouterLink">
-
+                           'm--has-right-icon' : isIconPositionRight }"
+                 :to="{ path: propUrl }"
+                 v-if="isRouterLink">
         <m-icon :name="iconName" :style="{ fontSize: iconSize }" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon>
-
         <span class="m-link__text">
             <slot>{{ componentName }}</slot>
         </span>
         <span class="m-link__hidden" v-if="hasHiddenText">{{ hiddenText }}</span>
     </router-link>
-    <a class="m-link" :class="{ 'm--is-unvisited': unvisited,
+    <a class="m-link" :class="{ 'm--is-unvisited': isUnvisited,
                  'm--is-disabled': disabled,
                  'm--no-underline': !underline,
                  'm--is-button': isButton,
