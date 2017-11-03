@@ -56,15 +56,15 @@ describe('radio', () => {
     it('disabled prop', () => {
         expect(radio.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
 
-        // radio.disabled = false;
-        // Vue.nextTick(() => {
-        //     expect(radio.$el.classList.contains(DISABLED_CSS)).toBeTruthy();
+        radio.disabled = false;
+        Vue.nextTick(() => {
+            expect(radio.$el.classList.contains(DISABLED_CSS)).toBeTruthy();
 
-        //     radio.disabled = true;
-        //     Vue.nextTick(() => {
-        //         expect(radio.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
-        //     });
-        // });
+            radio.disabled = true;
+            Vue.nextTick(() => {
+                expect(radio.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
+            });
+        });
     });
 
     it('name prop', () => {

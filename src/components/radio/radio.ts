@@ -54,6 +54,7 @@ export class MRadio extends ModulVue {
     })
     public position: MRadioPosition;
     @Prop({ default: false })
+    public disabled: boolean;
 
     // ----- For Button Group -----
     @Prop()
@@ -84,8 +85,6 @@ export class MRadio extends ModulVue {
 
     public get propError(): boolean {
         let groupHasError: boolean = this.isGroup() ? this.parentGroup.stateIsError : false;
-        console.log('error', groupHasError || this.as<InputState>().hasError);
-
         return groupHasError || this.as<InputState>().hasError;
     }
 
