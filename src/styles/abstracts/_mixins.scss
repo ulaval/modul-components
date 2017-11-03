@@ -49,6 +49,59 @@
     hyphens: auto;
 }
 
+@mixin m-button() {
+    transition-property: background, border-color, color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    border: 1px solid $m-color--interactive;
+    appearance: none;
+    outline: none;
+    user-select: none;
+    text-decoration: none;
+    line-height: 1;
+}
+
+@mixin m-button--primary() {
+    color: $m-color--white;
+    background: $m-color--interactive;
+}
+
+@mixin m-button--secondary() {
+    color: $m-color--interactive;
+    background: $m-color--white;
+}
+
+@mixin m-button--waiting() {
+    cursor: progress;
+    color: $m-color--white;
+    background: $m-color--interactive-lighter;
+    border-color: $m-color--interactive-lighter;
+}
+
+@mixin m-button--disabled {
+    cursor: not-allowed;
+    color: $m-color--disabled;
+    background: $m-color--white;
+    border-color: $m-color--disabled;
+}
+
+@mixin m-button--hover() {
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        color: $m-color--white;
+        background: $m-color--interactive-light;
+        border-color: $m-color--interactive-light;
+    }
+
+    &:active {
+        color: $m-color--white;
+        background: $m-color--interactive-dark;
+        border-color: $m-color--interactive-dark;
+    }
+}
+
 @mixin m-bullet-list() {
     &,
     ul {

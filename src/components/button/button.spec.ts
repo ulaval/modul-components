@@ -1,12 +1,10 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import ButtonPlugin, { MButton, MButtonType, MButtonMode, MButtonState, MButtonIconPosition } from './button';
+import ButtonPlugin, { MButton, MButtonType, MButtonSkin, MButtonIconPosition } from './button';
 
-const MODE_PRIMARY_CSS: string = 'm--is-mode-primary';
-const MODE_SECONDARY_CSS: string = 'm--is-mode-secondary';
-const MODE_ICON_CSS: string = 'm--is-mode-icon';
+const SKIN_PRIMARY_CSS: string = 'm--is-skin-primary';
+const SKIN_SECONDARY_CSS: string = 'm--is-skin-secondary';
 const STATE_DISABLED_CSS: string = 'm--is-disabled';
-const STATE_SELECTED_CSS: string = 'm--is-selected';
 const STATE_WAITING_CSS: string = 'm--is-waiting';
 const FULLSIZE_CSS: string = 'm--is-full-size';
 const ICON_POSITION_LEFT_CSS: string = 'm--is-left';
@@ -22,20 +20,17 @@ describe('MButtonType', () => {
     });
 });
 
-describe('MButtonMode', () => {
+describe('MButtonSkin', () => {
     it('validates enum', () => {
-        expect(MButtonMode.Primary).toEqual('primary');
-        expect(MButtonMode.Secondary).toEqual('secondary');
-        expect(MButtonMode.Icon).toEqual('icon');
+        expect(MButtonSkin.Primary).toEqual('primary');
+        expect(MButtonSkin.Secondary).toEqual('secondary');
     });
 });
 
-describe('MButtonState', () => {
+describe('MButtonIconPosition', () => {
     it('validates enum', () => {
-        expect(MButtonState.Default).toEqual('default');
-        expect(MButtonState.Disabled).toEqual('disabled');
-        expect(MButtonState.Selected).toEqual('selected');
-        expect(MButtonState.Waiting).toEqual('waiting');
+        expect(MButtonIconPosition.Left).toEqual('left');
+        expect(MButtonIconPosition.Right).toEqual('right');
     });
 });
 
@@ -46,70 +41,62 @@ describe('button', () => {
     });
 
     it('css class for button are present', () => {
-        expect(button.$el.classList.contains(MODE_PRIMARY_CSS)).toBeTruthy();
+        expect(button.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeTruthy();
     });
 
     it('css class for button are not present', () => {
-        expect(button.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
-        expect(button.$el.classList.contains(MODE_ICON_CSS)).toBeFalsy();
+        expect(button.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
         expect(button.$el.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
-        expect(button.$el.classList.contains(STATE_SELECTED_CSS)).toBeFalsy();
         expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
         expect(button.$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
     });
 
-    it('mode prop', () => {
-        expect(button.$el.classList.contains(MODE_PRIMARY_CSS)).toBeTruthy();
-        expect(button.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
-        expect(button.$el.classList.contains(MODE_ICON_CSS)).toBeFalsy();
+    it('skin prop', () => {
+        expect(button.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeTruthy();
+        expect(button.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
 
-        button.mode = MButtonMode.Secondary;
+        button.skin = MButtonSkin.Secondary;
         Vue.nextTick(() => {
-            expect(button.$el.classList.contains(MODE_SECONDARY_CSS)).toBeTruthy();
-            expect(button.$el.classList.contains(MODE_PRIMARY_CSS)).toBeFalsy();
-            expect(button.$el.classList.contains(MODE_ICON_CSS)).toBeFalsy();
-
-            button.mode = MButtonMode.Icon;
-            Vue.nextTick(() => {
-                expect(button.$el.classList.contains(MODE_ICON_CSS)).toBeTruthy();
-                expect(button.$el.classList.contains(MODE_PRIMARY_CSS)).toBeFalsy();
-                expect(button.$el.classList.contains(MODE_SECONDARY_CSS)).toBeFalsy();
-            });
+            expect(button.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeTruthy();
+            expect(button.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeFalsy();
         });
     });
 
-    it('state prop', () => {
+    it('disabled prop', () => {
         expect(button.$el.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
-        expect(button.$el.classList.contains(STATE_SELECTED_CSS)).toBeFalsy();
-        expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
 
-        button.state = MButtonState.Disabled;
+        button.disabled = true;
         Vue.nextTick(() => {
             expect(button.$el.classList.contains(STATE_DISABLED_CSS)).toBeTruthy();
-            expect(button.$el.classList.contains(STATE_SELECTED_CSS)).toBeFalsy();
-            expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
 
-            button.state = MButtonState.Selected;
+            button.disabled = false;
             Vue.nextTick(() => {
                 expect(button.$el.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
-                expect(button.$el.classList.contains(STATE_SELECTED_CSS)).toBeTruthy();
-                expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
-
-                button.state = MButtonState.Waiting;
-                Vue.nextTick(() => {
-                    expect(button.$el.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
-                    expect(button.$el.classList.contains(STATE_SELECTED_CSS)).toBeFalsy();
-                    expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeTruthy();
-                });
             });
         });
     });
 
-    it('fullsize prop', () => {
+    it('waiting prop', () => {
+        expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
+
+        button.waiting = true;
+        Vue.nextTick(() => {
+            expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeTruthy();
+
+            button.waiting = false;
+            Vue.nextTick(() => {
+                expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
+            });
+        });
+    });
+
+    it('full-size prop', () => {
         expect(button.$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
+
         button.fullSize = true;
         Vue.nextTick(() => {
             expect(button.$el.classList.contains(FULLSIZE_CSS)).toBeTruthy();
+
             button.fullSize = false;
             Vue.nextTick(() => {
                 expect(button.$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
@@ -117,7 +104,11 @@ describe('button', () => {
         });
     });
 
-    it('icon position left', () => {
+    it('icon-size prop', () => {
+        expect(button.iconSize == '12px').toBeTruthy();
+    });
+
+    it('icon-position prop is left', () => {
         let vm = new Vue({
             template: `
             <div>
@@ -143,7 +134,7 @@ describe('button', () => {
         });
     });
 
-    it('icon position right', () => {
+    it('icon-position prop is right', () => {
         let vm = new Vue({
             template: `
             <div>

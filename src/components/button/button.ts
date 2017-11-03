@@ -14,17 +14,9 @@ export enum MButtonType {
     Reset = 'reset'
 }
 
-export enum MButtonMode {
+export enum MButtonSkin {
     Primary = 'primary',
-    Secondary = 'secondary',
-    Icon = 'icon'
-}
-
-export enum MButtonState {
-    Default = 'default',
-    Disabled = 'disabled',
-    Waiting = 'waiting',
-    Selected = 'selected'
+    Secondary = 'secondary'
 }
 
 export enum MButtonIconPosition {
@@ -32,62 +24,59 @@ export enum MButtonIconPosition {
     Right = 'right'
 }
 
-const ICON_SIZE: string = '16px';
-const ICON_SIZE_SMALL: string = '12px';
-
 @WithRender
 @Component
 export class MButton extends Vue {
 
-    @Prop({ default: MButtonType.Button })
+    @Prop({
+        default: MButtonType.Button,
+        validator: value => value == MButtonType.Button || value == MButtonType.Submit || value == MButtonType.Reset
+    })
     public type: MButtonType;
-    @Prop({ default: MButtonMode.Primary })
-    public mode: MButtonMode;
-    @Prop({ default: MButtonState.Default })
-    public state: MButtonState;
-    @Prop()
-    public iconName: string;
-    @Prop({ default: MButtonIconPosition.Left })
-    public iconPosition: MButtonIconPosition;
-    @Prop()
-    public iconSize: string;
+    @Prop({
+        default: MButtonSkin.Primary,
+        validator: value => value == MButtonSkin.Primary || value == MButtonSkin.Secondary
+    })
+    public skin: MButtonSkin;
+    @Prop({ default: false })
+    public disabled: boolean;
+    @Prop({ default: false })
+    public waiting: boolean;
     @Prop({ default: false })
     public fullSize: boolean;
+    @Prop()
+    public iconName: string;
+    @Prop({
+        default: MButtonIconPosition.Left,
+        validator: value => value == MButtonIconPosition.Left || value == MButtonIconPosition.Right
+    })
+    public iconPosition: MButtonIconPosition;
+    @Prop({ default: '12px' })
+    public iconSize: string;
 
-    public componentName: string = BUTTON_NAME;
-
-    private errorMessageIcon: string = 'ERROR in <' + BUTTON_NAME + ' mode="icon"> : props "icon-name" is undefined';
-
-    private onClick(event): void {
+    private onClick(event: Event): void {
         this.$emit('click', event);
         this.$el.blur();
     }
 
-    private onFocus(): void {
+    private onFocus(event: Event): void {
         this.$emit('focus');
     }
 
-    private onBlur(): void {
+    private onBlur(event: Event): void {
         this.$emit('blur');
     }
 
-    private get propType(): string {
-        return this.type != MButtonType.Submit && this.type != MButtonType.Reset ? MButtonType.Button : this.type;
+    private get isSkinPrimary(): boolean {
+        return this.skin != MButtonSkin.Secondary;
     }
 
-    private get propMode(): string {
-        return this.mode != MButtonMode.Secondary && this.mode != MButtonMode.Icon ? MButtonMode.Primary : this.mode;
+    private get isSkinSecondary(): boolean {
+        return this.skin == MButtonSkin.Secondary;
     }
 
-    private get propState(): string {
-        return this.state != MButtonState.Disabled && this.state != MButtonState.Waiting && this.state != MButtonState.Selected ? MButtonState.Default : this.state;
-    }
-
-    private get propIconSize(): string {
-        if (this.mode == MButtonMode.Icon) {
-            return this.iconSize == undefined ? ICON_SIZE : this.iconSize;
-        }
-        return this.iconSize == undefined ? ICON_SIZE_SMALL : this.iconSize;
+    private get isWaiting(): boolean {
+        return !this.disabled ? this.waiting : false;
     }
 
     private get hasIcone(): boolean {
@@ -95,19 +84,15 @@ export class MButton extends Vue {
     }
 
     private get hasIconeLeft(): boolean {
-        return this.iconPosition == MButtonIconPosition.Left ? true : false;
+        return this.iconPosition == MButtonIconPosition.Left && this.hasIcone && !this.waiting ? true : false;
     }
 
-    private get isDisabled(): boolean {
-        return this.propState == MButtonState.Waiting || this.propState == MButtonState.Disabled || this.propState == MButtonState.Selected;
+    private get hasIconeRight(): boolean {
+        return this.iconPosition == MButtonIconPosition.Right && this.hasIcone && !this.waiting ? true : false;
     }
 
     private get hasMoreInfo(): boolean {
         return !!this.$slots['more-info'];
-    }
-
-    private get hasSlots(): boolean {
-        return !!this.$slots.default;
     }
 }
 
