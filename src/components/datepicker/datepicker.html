@@ -6,14 +6,12 @@
 
     <div class="m-datepicker" slot="body">
         <div class="m-datepicker__header">
-            <m-button mode="icon" icon-name="left-arrow" @click="selectYear(selectedYear - 1)" :state="isMinYear? 'disabled' : ''" :class="{'m--is-disabled': isMinYear}">previous year</m-button>
+            <m-icon-button icon-name="left-arrow" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>
             <button type="button" @click="showYears" class="m-datepicker__years">{{selectedYear}}</button>
-            <m-button mode="icon" icon-name="right-arrow" @click="selectYear(selectedYear + 1)" :state="isMaxYear? 'disabled' : ''" :class="{'m--is-disabled': isMaxYear}">next year</m-button>
-            <m-button mode="icon" icon-name="left-arrow" @click="selectMonth(selectedMonth - 1)" :state="isMinMonth? 'disabled' : ''"
-                :class="{'m--is-disabled': isMinMonth}">previous month</m-button>
+            <m-icon-button icon-name="right-arrow" @click="selectYear(selectedYear + 1)" :disabled="isMaxYear">next year</m-icon-button>
+            <m-icon-button icon-name="left-arrow" @click="selectMonth(selectedMonth - 1)" :disabled="isMinMonth">previous month</m-icon-button>
             <button type="button" @click="view = 'month'" class="m-datepicker__months">{{selectedMonthName}}</button>
-            <m-button mode="icon" icon-name="right-arrow" @click="selectMonth(selectedMonth + 1)" :state="isMaxMonth? 'disabled' : ''"
-                :class="{'m--is-disabled': isMaxMonth}">next month</m-button>
+            <m-icon-button icon-name="right-arrow" @click="selectMonth(selectedMonth + 1)" :disabled="isMaxMonth">next month</m-icon-button>
         </div>
         <div class="m-datepicker__body" ref="body">
             <table class="m-datepicker__body-table">

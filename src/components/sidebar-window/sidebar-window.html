@@ -12,9 +12,9 @@
                     v-if="hasheaderSlot">
                     <h2 class="m-base-window__title" v-if="hasTitle">{{ title }}</h2>
                     <slot name="header"></slot>
-                    <m-button @click="closeDialog" mode="icon" icon-name="default" class="m-base-window__header__close-button">
+                    <m-icon-button @click="closeDialog" icon-name="default" class="m-base-window__header__close-button">
                         <m-i18n k="m-base-window:close"></m-i18n>
-                    </m-button>
+                    </m-icon-button>
                 </header>
                 <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
                     <slot></slot>

@@ -1,18 +1,18 @@
 <m-popup class="m-tooltip" :class="{ 'm--is-mode-icon': propMode == 'icon', 'm--is-mode-link': propMode != 'icon' }" :open="propOpen" :shadow="false"
     @open="onOpen" @close="onClose" :placement="placement" padding="" :disabled="disabled" :classNamePortalTarget="classNamePortalTarget">
     <template v-if="hasDefaultSlot">
-        <m-button class="m-tooltip__icon" mode="icon" icon-name="information" v-if="propMode == 'icon'">
+        <m-icon-button class="m-tooltip__icon" icon-name="information" v-if="propMode == 'icon'">
             <slot></slot>
-        </m-button>
+        </m-icon-button>
         <m-link class="m-tooltip__link" mode="button" v-if="propMode != 'icon'">
             <slot></slot>
         </m-link>
     </template>
     <span v-if="!hasDefaultSlot">m-tooltip icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the voice readers.</span>
     <div slot="body" class="m-tooltip__body-container" :class="{ 'm--has-close-button': propCloseButton }" v-if="hasBodySlot">
-        <m-button mode="icon" icon-name="default" icon-size="10px" @click="close" class="m-tooltip__close-button" v-if="propCloseButton">
+        <m-icon-button icon-name="default" icon-size="10px" @click="close" class="m-tooltip__close-button" v-if="propCloseButton">
             <m-i18n k="m-tooltip:close"></m-i18n>
-        </m-button>
+        </m-icon-button>
         <div class="m-tooltip__body">
             <slot name="body"></slot>
         </div>

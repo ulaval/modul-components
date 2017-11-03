@@ -11,9 +11,9 @@
                     v-if="hasHeader">
                     <h2 class="m-base-window__title" v-if="hasTitle">{{ title }}</h2>
                     <slot name="header"></slot>
-                    <m-button @click="closeDialog()" mode="icon" icon-name="default" class="m-base-window__header__close-button">
+                    <m-icon-button @click="closeDialog()" icon-name="default" class="m-base-window__header__close-button">
                         <m-i18n k="m-base-window:close"></m-i18n>
-                    </m-button>
+                    </m-icon-button>
                 </header>
                 <header class="m-base-window__header" v-else>
                     <h2>Error: This component needs a header slot or title prop.</h2>
