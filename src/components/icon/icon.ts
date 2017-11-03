@@ -13,9 +13,7 @@ export class MIcon extends Vue {
     @Prop()
     public svgTitle: string;
     @Prop({ default: '1em' })
-    public width: string;
-    @Prop({ default: '1em' })
-    public height: string;
+    public size: string;
 
     public componentName = ICON_NAME;
 

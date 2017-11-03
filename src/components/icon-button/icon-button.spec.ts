@@ -68,15 +68,35 @@ describe('icon-button', () => {
     });
 
     it('size prop default value', () => {
-        expect(iconButton.size == '44px').toBeTruthy();
+        expect(iconButton.size).toEqual('44px');
+
+        iconButton.size = '58px';
+        Vue.nextTick(() => {
+            expect(iconButton.size).toEqual('58px');
+
+            iconButton.size = '64px';
+            Vue.nextTick(() => {
+                expect(iconButton.size).toEqual('64px');
+            });
+        });
     });
 
     it('icon-name prop default value', () => {
-        expect(iconButton.iconName == 'default').toBeTruthy();
+        expect(iconButton.iconName).toEqual('default');
     });
 
-    it('icon-size prop default value', () => {
-        expect(iconButton.iconSize == '16px').toBeTruthy();
+    it('icon-size prop', () => {
+        expect(iconButton.iconSize).toEqual('16px');
+
+        iconButton.iconSize = '20px';
+        Vue.nextTick(() => {
+            expect(iconButton.iconSize).toEqual('20px');
+
+            iconButton.iconSize = '30px';
+            Vue.nextTick(() => {
+                expect(iconButton.iconSize).toEqual('30px');
+            });
+        });
     });
 
     it('click event', () => {
