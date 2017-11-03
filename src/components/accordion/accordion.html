@@ -2,7 +2,7 @@
     <header tabindex="0" class="m-accordion__header" :class="{ 'm--is-icon-left': propIconPosition != 'right' }" @keyup.enter="toggleAccordion"
         @click.prevent="toggleAccordion" ref="accordionHeader">
         <div class="m-accordion__header__title">
-            <slot name="title">m-accordion</slot>
+            <slot name="title"></slot>
             <m-i18n k="m-accordion:open" class="m-accordion__hidden" v-if="!propOpen"></m-i18n>
             <m-i18n k="m-accordion:close" class="m-accordion__hidden" v-if="propOpen"></m-i18n>
         </div>
@@ -14,7 +14,7 @@
     <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
         <div class="m-accordion__body-wrap" v-if="propOpen">
             <div class="m-accordion__body">
-                <slot>m-accordion - text</slot>
+                <slot></slot>
             </div>
         </div>
     </transition>
