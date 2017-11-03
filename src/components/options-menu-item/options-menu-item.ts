@@ -16,24 +16,29 @@ export class MOptionsMenuItem extends ModulVue {
     @Prop({ default: false })
     public disabled: boolean;
 
-    private onClick(e: MouseEvent): void {
-        if (!this.isDisabled) {
+    private onClick(event: MouseEvent): void {
+        if (!this.disabled) {
             let parentMenu: MOptionsMenu | undefined = this.getParent<MOptionsMenu>(p => p instanceof MOptionsMenu);
             if (parentMenu) {
                 parentMenu.close();
             }
             this.$emit('click', event);
         } else {
-            e.stopPropagation();
+            event.stopPropagation();
+        }
+    }
+
+    private onKeydownEnter(event: Event) {
+        if (!this.disabled) {
+            let parentMenu: MOptionsMenu | undefined = this.getParent<MOptionsMenu>(p => p instanceof MOptionsMenu);
+            if (parentMenu) {
+                parentMenu.close();
+            }
         }
     }
 
     private get hasIcon(): boolean {
         return !!this.iconName;
-    }
-
-    private get isDisabled(): boolean {
-        return this.disabled;
     }
 
     private get hasSlot(): boolean {
