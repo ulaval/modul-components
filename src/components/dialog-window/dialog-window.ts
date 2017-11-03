@@ -9,7 +9,7 @@ import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal
 export enum MDialogSize {
     FullSize = 'full-size',
     Large = 'large',
-    Default = 'default',
+    Regular = 'regular',
     Small = 'small'
 }
 
@@ -19,9 +19,9 @@ export enum MDialogSize {
 })
 export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop({
-        default: MDialogSize.Default,
+        default: MDialogSize.Regular,
         validator: value =>
-            value == MDialogSize.Default ||
+            value == MDialogSize.Regular ||
             value == MDialogSize.FullSize ||
             value == MDialogSize.Large ||
             value == MDialogSize.Small
@@ -33,6 +33,14 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     @Prop()
     public title: string;
+    @Prop({ default: true })
+    public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
+    @Prop({ default: true })
+    public paddingFooter: boolean;
 
     public handlesFocus(): boolean {
         return true;
