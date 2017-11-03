@@ -13,7 +13,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     @Model('change')
     @Prop()
     public value: string;
-    @Prop({ default: true })
+    @Prop({ default: false })
     public disabled: boolean;
     @Prop({ default: false })
     public fullsize: boolean;
