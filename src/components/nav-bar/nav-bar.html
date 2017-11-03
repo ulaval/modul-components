@@ -6,16 +6,7 @@
          'm--is-arrow': propSkin == 'arrow' }">
     <nav class="m-nav-bar__wrap">
         <ul class="m-nav-bar__list" aria-hidden="true">
-            <slot>
-                <m-nav-bar-item>Élém 1</m-nav-bar-item>
-                <m-nav-bar-item>Élément 2</m-nav-bar-item>
-                <m-nav-bar-item>
-                    <button>Élément très très long 3</button>
-                </m-nav-bar-item>
-                <m-nav-bar-item>
-                    <a href="#">Élément 4</a>
-                </m-nav-bar-item>
-            </slot>
+            <slot></slot>
         </ul>
         <div aria-hidden="true" class="m-nav-bar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propLine" ref="line"></div>
         <div aria-hidden="true" class="m-nav-bar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propArrow" ref="Arrow"></div>
