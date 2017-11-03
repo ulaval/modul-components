@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './nav-bar.html?style=./nav-bar.scss';
 import { NAV_BAR_NAME, NAV_BAR_ITEM_NAME } from '../component-names';
+import NavBarItemPlugin, { BaseNavBar } from '../nav-bar-item/nav-bar-item';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -19,84 +20,70 @@ export enum MNavbarSkin {
 
 @WithRender
 @Component
-export class MNavbar extends ModulVue {
+export class MNavbar extends BaseNavBar {
 
     @Prop({ default: MNavbarSkin.Dark })
     public skin: string;
     @Prop()
     public line: boolean;
+    @Prop()
+    public value: string;
 
     private isAnimActive: boolean = false;
+    private internalSelectedID: string;
 
     private itemCount: number = 0;
     private arrItem = new Array();
     private childrenIndexSelected: number;
 
-    protected mounted(): void {
-        this.init();
+    public isItemSelected(value, el): boolean {
+        if (this.propSkin == MNavbarSkin.Light && this.value == value && el != undefined) {
+            this.setLinePosition(el);
+        }
+        if (this.propSkin == MNavbarSkin.Arrow && this.value == value && el != undefined) {
+            this.setArrowPosition(el);
+        }
+        return this.value == value;
     }
 
-    private init(): void {
-        for (let i = 0; i < this.$children.length; i++) {
-            if (this.checkNavBarItem(i)) {
-                this.$children[i]['id'] = this.itemCount;
-                if (this.$children[i]['isSelected']) {
-                    this.childrenIndexSelected = i;
+    protected mounted() {
+        this.setItem();
+        this.$nextTick(() => {
+            this.initLine();
+        });
+    }
+
+    private setItem(): void {
+        this.$children.forEach((child, index, arr) => {
+            if (index == 0) {
+                child['isFirtsItem'] = true;
+            }
+            if (arr.length - 1 === index) {
+                child['isLastItem'] = true;
+            }
+        });
+    }
+
+    private initLine(): void {
+        this.$children.forEach((child, index, arr) => {
+            if (child.$props.value == this.value) {
+                if (this.skin == MNavbarSkin.Light) {
+                    this.setLinePosition(child.$el);
                 }
-                this.$children[i]['unselectItem']();
-                this.$children[i]['childrenIndex'] = i;
-                this.arrItem.push({
-                    id: this.itemCount,
-                    isSelected: this.$children[i]['isSelected'],
-                    childrenIndex: i
-                });
-                this.itemCount++;
-                this.$children[i]['$on']('click', (id, childrenIndex) => this.changeItem(id, childrenIndex));
+                if (this.skin == MNavbarSkin.Arrow) {
+                    this.setArrowPosition(child.$el);
+                }
             }
-        }
-        this.$children[this.arrItem[0].childrenIndex]['isFirtsItem'] = true;
-        this.$children[this.arrItem[this.arrItem.length - 1].childrenIndex]['isLastItem'] = true;
-        this.childrenIndexSelected = this.childrenIndexSelected == undefined ? this.arrItem[0].childrenIndex : this.childrenIndexSelected;
-        let childrenSelected = this.$children[this.childrenIndexSelected];
-        childrenSelected['selectItem']();
-        setTimeout(() => {
-            if (this.propSkin == MNavbarSkin.Light && this.line != false) {
-                this.setLinePosition(childrenSelected.$el as HTMLElement);
-            }
-            if (this.propSkin == MNavbarSkin.Arrow && this.line != false) {
-                this.setArrowPosition(childrenSelected.$el as HTMLElement);
-            }
-        }, 0);
-    }
-
-    private changeItem(id: number, childrenIndex: number): void {
-        if (childrenIndex != this.childrenIndexSelected) {
-            this.isAnimActive = true;
-            this.arrItem[this.$children[this.childrenIndexSelected]['id']]['isSelected'] = false;
-            this.arrItem[id]['isSelected'] = true;
-            this.$children[this.childrenIndexSelected]['unselectItem']();
-            this.$children[childrenIndex]['selectItem']();
-            this.childrenIndexSelected = childrenIndex;
-            if (this.propSkin == MNavbarSkin.Light && this.line != false) {
-                this.setLinePosition(this.$children[childrenIndex].$el as HTMLElement);
-            }
-            if (this.propSkin == MNavbarSkin.Arrow && this.line != false) {
-                this.setArrowPosition(this.$children[childrenIndex].$el as HTMLElement);
-            }
-            this.$emit('click');
-        }
-    }
-
-    private checkNavBarItem(index: number): boolean {
-        return this.$children[index]['componentName'] == NAV_BAR_ITEM_NAME ? true : false;
+        });
     }
 
     private setLinePosition(el: HTMLElement): void {
         this.$nextTick(() => {
             let positionX: number = el.offsetLeft;
             let width: number = el.clientWidth;
-            this.$refs.line['style']['transform'] = 'translate3d(' + positionX + 'px, 0, 0)';
-            this.$refs.line['style']['width'] = width + 'px';
+            let lineEL: HTMLElement = this.$refs.line as HTMLElement;
+            lineEL.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
+            lineEL.style.width = width + 'px';
         });
     }
 
@@ -104,8 +91,9 @@ export class MNavbar extends ModulVue {
         this.$nextTick(() => {
             let positionX: number = el.offsetLeft;
             let width: number = el.clientWidth;
-            this.$refs.Arrow['style']['transform'] = 'translate3d(' + positionX + 'px, 0, 0)';
-            this.$refs.Arrow['style']['width'] = width + 'px';
+            let arrowEL: HTMLElement = this.$refs.Arrow as HTMLElement;
+            arrowEL.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
+            arrowEL.style.width = width + 'px';
         });
     }
 
