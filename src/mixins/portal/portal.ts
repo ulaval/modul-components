@@ -103,6 +103,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     protected beforeDestroy(): void {
+        this.propOpen = false;
         if (this.internalTrigger) {
             this.internalTrigger.removeEventListener('click', this.toggle);
             this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
