@@ -1,13 +1,16 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './datepicker.html?style=./datepicker.scss';
 import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
 import { curLang } from '../../utils/i18n/i18n';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { KeyCode } from '../../utils/keycode/keycode';
+import PopupPlugin from '../popup/popup';
+import TextFieldPlugin from '../text-field/text-field';
+import ButtonPlugin from '../button/button';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -30,10 +33,11 @@ export interface DatepickerDate {
 })
 export class MDatepicker extends ModulVue {
 
+    @Model('change')
     @Prop()
     public value: moment.Moment | Date;
 
-    @Prop({ default: 'DD/MM/YYYY' })
+    @Prop({ default: 'DD/MM/Y' })
     public format: string;
 
     @Prop({ default: () => { return moment().subtract(10, 'year'); } })
@@ -47,8 +51,6 @@ export class MDatepicker extends ModulVue {
 
     @Prop({ default: false })
     public required: boolean;
-
-    public componentName: string = DATEPICKER_NAME;
 
     private isOpen: boolean = false;
     private view: string = 'day';
@@ -209,14 +211,10 @@ export class MDatepicker extends ModulVue {
         return this.prepareDataForTableLayout([...this.previousDays, ...this.days, ...this.nextDays], 7);
     }
 
-    private onOpen() {
+    private openCalendar() {
         this.view = VIEW_DAY;
         this.isOpen = true;
         this.$emit('open');
-    }
-
-    private onClose() {
-        this.isOpen = false;
     }
 
     private onBlur(event) {
@@ -225,7 +223,7 @@ export class MDatepicker extends ModulVue {
             if (this.required) {
                 this.error = this.$i18n.translate('m-datepicker:required-error');
             } else {
-                this.$emit('input', '');
+                this.$emit('change', '');
                 this.error = '';
             }
         } else if (moment(event.target.value, this.format).isValid()) {
@@ -233,7 +231,7 @@ export class MDatepicker extends ModulVue {
             if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
                 this.selectedMomentDate = newDate;
                 this.formattedDate = this.selectedMomentDate.format(this.format);
-                this.$emit('input', newDate);
+                this.$emit('change', newDate);
                 this.error = '';
             } else {
                 this.formattedDate = newDate.format(this.format);
@@ -242,10 +240,10 @@ export class MDatepicker extends ModulVue {
         } else {
             this.error = this.$i18n.translate('m-datepicker:format-error');
         }
-        this.closeDatepicker();
+        this.closeCalendar();
     }
 
-    private closeDatepicker(): void {
+    private closeCalendar(): void {
         this.isOpen = false;
         this.$emit('close');
     }
@@ -282,14 +280,17 @@ export class MDatepicker extends ModulVue {
             this.selectedMomentDate = moment(selectedDate);
             this.error = '';
             this.formattedDate = this.selectedMomentDate.format(this.format);
-            this.$emit('input', this.value instanceof Date ? this.selectedMomentDate.toDate() : this.selectedMomentDate);
-            this.closeDatepicker();
+            this.$emit('change', this.value instanceof Date ? this.selectedMomentDate.toDate() : this.selectedMomentDate);
+            this.closeCalendar();
         }
     }
 }
 
 const DatepickerPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(PopupPlugin);
+        v.use(TextFieldPlugin);
+        v.use(ButtonPlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };

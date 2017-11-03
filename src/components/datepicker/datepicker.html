@@ -1,47 +1,48 @@
-<m-popup padding="" :open="isOpen" @open="onOpen" @close="onClose" :options="options" :disabled="disabled" focusManagement=""
-    placement="bottom-start">
-
+<div class="m-datepicker">
     <m-text-field icon-name="calendar" :icon-description="isOpen ? closeCalendarDesc : openCalendarDesc" :force-focus="isOpen"
-        v-model="formattedDate" @blur="onBlur" :error-message="error" :placeholder="placeholder" :disabled="disabled"></m-text-field>
+        v-model="formattedDate" @click="openCalendar" @blur="onBlur" :error-message="error" :placeholder="placeholder" :disabled="disabled" v-m-popup:popup></m-text-field>
 
-    <div class="m-datepicker" slot="body">
-        <div class="m-datepicker__header">
-            <m-icon-button icon-name="left-arrow" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>
-            <button type="button" @click="showYears" class="m-datepicker__years">{{selectedYear}}</button>
-            <m-icon-button icon-name="right-arrow" @click="selectYear(selectedYear + 1)" :disabled="isMaxYear">next year</m-icon-button>
-            <m-icon-button icon-name="left-arrow" @click="selectMonth(selectedMonth - 1)" :disabled="isMinMonth">previous month</m-icon-button>
-            <button type="button" @click="view = 'month'" class="m-datepicker__months">{{selectedMonthName}}</button>
-            <m-icon-button icon-name="right-arrow" @click="selectMonth(selectedMonth + 1)" :disabled="isMaxMonth">next month</m-icon-button>
+    <m-popup ref="popup" :open.sync="isOpen" open-trigger="manual" padding="" :disabled="disabled" focusManagement="" placement="bottom-start">
+
+        <div class="m-datepicker__calendar" @click="isOpen = true">
+            <div class="m-datepicker__header">
+                <m-icon-button icon-name="left-arrow" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>
+                <button type="button" @click="showYears" class="m-datepicker__years">{{selectedYear}}</button>
+                <m-icon-button icon-name="right-arrow" @click="selectYear(selectedYear + 1)" :disabled="isMaxYear">next year</m-icon-button>
+                <m-icon-button icon-name="left-arrow" @click="selectMonth(selectedMonth - 1)" :disabled="isMinMonth">previous month</m-icon-button>
+                <button type="button" @click="view = 'month'" class="m-datepicker__months">{{selectedMonthName}}</button>
+                <m-icon-button icon-name="right-arrow" @click="selectMonth(selectedMonth + 1)" :disabled="isMaxMonth">next month</m-icon-button>
+            </div>
+            <div class="m-datepicker__body" ref="body">
+                <table class="m-datepicker__body-table">
+                    <template v-if="view == 'year'">
+                        <tr v-for="yearRow in years">
+                            <td v-for="y in yearRow" class="m-datepicker__body-cell">
+                                <button type="button" @click.stop="selectYear(y, true)" :class="{'m--is-selected': selectedYear == y}" class="m-datepicker__item">{{y}}</button>
+                            </td>
+                        </tr>
+                    </template>
+                    <template v-if="view == 'month'">
+                        <tr v-for="monthRow in months">
+                            <td v-for="m in monthRow" class="m-datepicker__body-cell">
+                                <button type="button" @click.stop="selectMonth(m.index, true)" :class="{'m--is-selected': selectedMonthName == m.name, 'm--is-disabled': m.isDisabled}"
+                                    class="m-datepicker__item" :disabled="m.isDisabled">{{m.name}}</button>
+                            </td>
+                        </tr>
+                    </template>
+                    <template v-if="view == 'day'">
+                        <tr>
+                            <td v-for="w in weekdays" class="m-datepicker__weekday">{{w}}</td>
+                        </tr>
+                        <tr v-for="dayRow in daysOfMonth">
+                            <td v-for="d in dayRow" class="m-datepicker__body-cell">
+                                <button :class="{'m--is-selected': d.isSelected, 'm--is-today': d.isToday, 'm--is-disabled': d.isDisabled, 'm--is-other-month': d.month != selectedMonth}"
+                                    type="button" @click.stop="selectDate(d)" class="m-datepicker__item">{{d.date}}</button>
+                            </td>
+                        </tr>
+                    </template>
+                </table>
+            </div>
         </div>
-        <div class="m-datepicker__body" ref="body">
-            <table class="m-datepicker__body-table">
-                <template v-if="view == 'year'">
-                    <tr v-for="yearRow in years">
-                        <td v-for="y in yearRow" class="m-datepicker__body-cell">
-                            <button type="button" @click.stop="selectYear(y, true)" :class="{'m--is-selected': selectedYear == y}" class="m-datepicker__item">{{y}}</button>
-                        </td>
-                    </tr>
-                </template>
-                <template v-if="view == 'month'">
-                    <tr v-for="monthRow in months">
-                        <td v-for="m in monthRow" class="m-datepicker__body-cell">
-                            <button type="button" @click.stop="selectMonth(m.index, true)" :class="{'m--is-selected': selectedMonthName == m.name, 'm--is-disabled': m.isDisabled}"
-                                class="m-datepicker__item" :disabled="m.isDisabled">{{m.name}}</button>
-                        </td>
-                    </tr>
-                </template>
-                <template v-if="view == 'day'">
-                    <tr>
-                        <td v-for="w in weekdays" class="m-datepicker__weekday">{{w}}</td>
-                    </tr>
-                    <tr v-for="dayRow in daysOfMonth">
-                        <td v-for="d in dayRow" class="m-datepicker__body-cell">
-                            <button :class="{'m--is-selected': d.isSelected, 'm--is-today': d.isToday, 'm--is-disabled': d.isDisabled, 'm--is-other-month': d.month != selectedMonth}"
-                                type="button" @click="selectDate(d)" class="m-datepicker__item">{{d.date}}</button>
-                        </td>
-                    </tr>
-                </template>
-            </table>
-        </div>
-    </div>
-</m-popup>
+    </m-popup>
+</div>
