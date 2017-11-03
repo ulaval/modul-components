@@ -9,7 +9,7 @@
         @click="onClick"
         @focus="onFocus"
         @blur="onBlur"
-        :style="{ width: size, height: size }">
-    <m-icon class="m-icon-button__icon" :name="iconName" :width="iconSize" :height="iconSize"></m-icon>
+        :style="{ width: buttonSize, height: buttonSize, fontSize: iconSize }">
+    <m-icon class="m-icon-button__icon" :name="iconName"></m-icon>
     <span class="m-icon-button__hidden" v-if="hasSlots"><slot></slot></span>
 </button>
