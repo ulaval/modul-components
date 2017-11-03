@@ -16,8 +16,10 @@ export enum MRadioPosition {
 
 export interface RadioGroup {
     name: string;
+    stateIsDisabled: boolean;
+    stateIsError: boolean;
+    stateIsValid: boolean;
     position: MRadioPosition;
-    enabled: boolean;
     inline: boolean;
     getValue(): string;
     updateValue(value: string): void;
@@ -51,10 +53,8 @@ export class MRadio extends ModulVue {
         validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
     })
     public position: MRadioPosition;
-    @Prop({ default: true })
-    public enabled: boolean;
     @Prop({ default: false })
-    public demo: boolean;
+
     // ----- For Button Group -----
     @Prop()
     public iconName: string;
@@ -63,6 +63,7 @@ export class MRadio extends ModulVue {
         validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
     })
     public iconPosition: MRadioPosition;
+
     // ---------------------------
     public radioID: string = uuid.generate();
 
@@ -70,15 +71,27 @@ export class MRadio extends ModulVue {
     private hasParentGroup: boolean | undefined = undefined;
     private parentGroup: RadioGroup;
 
+    private internalDisabled: boolean = false;
+
     public get propPosition(): MRadioPosition {
         return this.isGroup() ? this.parentGroup.position : this.position;
     }
 
-    public get propEnabled(): boolean {
-        let result: boolean = this.enabled;
-        let groupEnabled: boolean = this.isGroup() ? this.parentGroup.enabled : true;
+    public get propDisabled(): boolean {
+        let groupDisabled: boolean = this.isGroup() ? this.parentGroup.stateIsDisabled : false;
+        return groupDisabled || this.as<InputState>().isDisabled;
+    }
 
-        return groupEnabled && result;
+    public get propError(): boolean {
+        let groupHasError: boolean = this.isGroup() ? this.parentGroup.stateIsError : false;
+        console.log('error', groupHasError || this.as<InputState>().hasError);
+
+        return groupHasError || this.as<InputState>().hasError;
+    }
+
+    public get propValid(): boolean {
+        let groupValid: boolean = this.isGroup() ? this.parentGroup.stateIsValid : false;
+        return groupValid || this.as<InputState>().isValid;
     }
 
     public get propName(): string {

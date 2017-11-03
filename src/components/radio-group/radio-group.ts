@@ -24,16 +24,24 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     public position: MRadioPosition;
     @Prop({ default: false })
     public inline: boolean;
-    @Prop({ default: true })
-    public enabled: boolean;
-    @Prop({ default: false})
-    public demo: boolean;
 
     public name: string = uuid.generate();
     private internalValue: string = '';
 
     public getValue(): string {
         return this.model;
+    }
+
+    public get stateIsDisabled(): boolean {
+        return this.as<InputState>().isDisabled;
+    }
+
+    public get stateIsError(): boolean {
+        return this.as<InputState>().hasError;
+    }
+
+    public get stateIsValid(): boolean {
+        return this.as<InputState>().isValid;
     }
 
     public updateValue(value: string): void {
