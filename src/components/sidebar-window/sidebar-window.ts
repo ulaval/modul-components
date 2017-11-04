@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { SIDEBAR_NAME } from '../component-names';
 import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
-import WithRender from './sidebar-window.html?style=../../mixins/base-window/base-window.scss';
+import WithRender from './sidebar-window.html?style=./sidebar-window.scss';
 
 export enum MSidebarOrigin {
     Top = 'top',
@@ -13,6 +13,10 @@ export enum MSidebarOrigin {
     Left = 'left',
     BottomRight = 'bottom-right',
     BottomLeft = 'bottom-left'
+}
+export enum MSidebarCloseButtonPosition {
+    Left = 'left',
+    Right = 'right'
 }
 
 @WithRender
@@ -35,11 +39,27 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     @Prop()
     public width: string;
 
+    @Prop()
+    public title: string;
+    @Prop({ default: true })
+    public closeButton: boolean;
+    @Prop({ default: MSidebarCloseButtonPosition.Right })
+    public closeButtonPosition: MSidebarCloseButtonPosition;
+
     @Prop({ default: true })
     public focusManagement: boolean;
 
     @Prop({ default: true })
     public closeOnBackdrop: boolean;
+
+    @Prop({ default: true })
+    public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
+    @Prop({ default: true })
+    public paddingFooter: boolean;
 
     public get popupBody(): any {
         return (this.$refs.article as Element).querySelector('.m-popup__body');
@@ -61,13 +81,20 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
         return this.$refs.article as HTMLElement;
     }
 
+    private get hasHeaderSlot(): boolean {
+        return !!this.$slots.header;
+    }
+
     private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
     }
 
-    private get hasHeaderSlot(): boolean {
-        // todo: header or title?
-        return !!this.$slots.header;
+    private get hasHeader(): boolean {
+        return this.hasHeaderSlot || this.hasTitle || (this.closeButton && this.origin != MSidebarOrigin.Bottom);
+    }
+
+    private get hasTitle(): boolean {
+        return !!this.title;
     }
 
     private get hasFooterSlot(): boolean {

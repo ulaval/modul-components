@@ -1,28 +1,40 @@
-<div class="m-base-window" ref="baseWindow">
+<div class="m-sidebar" ref="baseWindow">
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
-        <div v-show="propOpen" class="m-base-window__wrap m--is-sidebar" :class="[{ 'm--is-open': propOpen,
-                        'm--is-clickable-backdrop': closeOnBackdrop,
-                        'm--is-disabled':disabled }, className, 'm--is-from-' + origin]" @click.self="backdropClick" ref="dialogWrap">
-            <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
-                <button type="button" @click="closeDialog()" class="m-base-window__close-button" v-if="origin == 'bottom'">
-                    <m-i18n k="m-base-window:close"></m-i18n>
-                </button>
-                <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }"
-                    v-if="hasheaderSlot">
-                    <h2 class="m-base-window__title" v-if="hasTitle">{{ title }}</h2>
-                    <slot name="header"></slot>
-                    <m-icon-button @click="closeDialog" icon-name="default" class="m-base-window__header__close-button">
+        <transition name="m--is">
+            <div v-show="propOpen"
+                class="m-sidebar__wrap m--is-sidebar"
+                :class="[{ 'm--is-open': propOpen,
+                           'm--is-close-on-backdrop': closeOnBackdrop,
+                           'm--is-disabled':disabled },
+                           'm--is-origin-' + origin,
+                           className ]"
+                @click.self="backdropClick"
+                ref="dialogWrap">
+                <article class="m-sidebar__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
+                    <button type="button" @click="closeDialog()" class="m-sidebar__close-button" v-if="closeButton && origin == 'bottom'">
                         <m-i18n k="m-base-window:close"></m-i18n>
-                    </m-icon-button>
-                </header>
-                <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
-                    <slot></slot>
-                </div>
-                <footer class="m-base-window__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot">
-                    <slot name="footer"></slot>
-                </footer>
-            </article>
-        </div>
+                    </button>
+                    <header class="m-sidebar__header"
+                            :class="{ 'm--has-close-button-right': closeButton && closeButtonPosition == 'right',
+                                      'm--has-close-button-left': closeButton && closeButtonPosition == 'left',
+                                      'm--no-content': !hasHeaderSlot || !hasTitle,
+                                      'm--no-padding': !padding || !paddingHeader }"
+                            v-if="hasHeader">
+                        <h2 class="m-sidebar__title" v-if="hasTitle">{{ title }}</h2>
+                        <slot name="header"></slot>
+                        <m-icon-button @click="closeDialog" icon-name="default" class="m-sidebar__header__close-button" v-if="closeButton">
+                            <m-i18n k="m-base-window:close"></m-i18n>
+                        </m-icon-button>
+                    </header>
+                    <div class="m-sidebar__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
+                        <slot></slot>
+                    </div>
+                    <footer class="m-sidebar__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot">
+                        <slot name="footer"></slot>
+                    </footer>
+                </article>
+            </div>
+        </transition>
     </portal>
 </div>
