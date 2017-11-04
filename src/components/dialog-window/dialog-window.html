@@ -1,30 +1,33 @@
-<div class="m-base-window" ref="baseWindow">
+<div class="m-dialog" ref="baseWindow">
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
-        <div v-show="propOpen" class="m-base-window__wrap m--is-dialog" :class="[{ 'm--is-open': propOpen,
-                        'm--is-small': size == 'small',
-                        'm--is-full-size': size == 'full-size',
-                        'm--is-clickable-backdrop': closeOnBackdrop,
-                        'm--is-disabled':disabled }, className]" @click.self="backdropClick()" ref="dialogWrap">
-            <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
-                <header class="m-base-window__header" :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }"
-                    v-if="hasHeader">
-                    <h2 class="m-base-window__title" v-if="hasTitle">{{ title }}</h2>
-                    <slot name="header"></slot>
-                    <m-icon-button @click="closeDialog()" icon-name="default" skin="dark" class="m-base-window__header__close-button">
-                        <m-i18n k="m-base-window:close"></m-i18n>
-                    </m-icon-button>
-                </header>
-                <header class="m-base-window__header" v-else>
-                    <h2>Error: This component needs a header slot or title prop.</h2>
-                </header>
-                <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
-                    <slot></slot>
-                </div>
-                <footer class="m-base-window__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot">
-                    <slot name="footer" v-if="windowMode != 'modal'"></slot>
-                </footer>
-            </article>
-        </div>
+        <transition name="m--is">
+            <div v-show="propOpen"
+                 class="m-dialog__wrap m--is-dialog"
+                 :class="[{ 'm--is-open': propOpen,
+                            'm--is-small': size == 'small',
+                            'm--is-full-size': size == 'full-size',
+                            'm--is-close-on-backdrop': closeOnBackdrop,
+                            'm--is-disabled':disabled }, className]"
+                 @click.self="backdropClick()"
+                 ref="dialogWrap">
+                <article class="m-dialog__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
+                    <header class="m-dialog__header"
+                            :class="{ 'm--has-title': hasTitle, 'm--no-padding': !padding || !paddingHeader }">
+                        <h2 v-if="hasTitle">{{ title }}</h2>
+                        <slot name="header"></slot>
+                        <m-icon-button @click="closeDialog()" icon-name="default" skin="dark" class="m-dialog__header__close-button">
+                            <m-i18n k="m-base-window:close"></m-i18n>
+                        </m-icon-button>
+                    </header>
+                    <div class="m-dialog__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
+                        <slot></slot>
+                    </div>
+                    <footer class="m-dialog__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot">
+                        <slot name="footer"></slot>
+                    </footer>
+                </article>
+            </div>
+        </transition>
     </portal>
 </div>
