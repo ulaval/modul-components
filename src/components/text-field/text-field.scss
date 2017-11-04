@@ -52,7 +52,7 @@ $m-text-field--margin: $m-margin--s !default;
                 }
 
                 &__icon {
-                    &.m-button.m--is-mode-icon {
+                    &.m-icon-button {
                         color: $m-color--interactive;
                     }
 
@@ -121,7 +121,7 @@ $m-text-field--margin: $m-margin--s !default;
         &:hover:not(.m--is-focus),
         &.m--is-focus {
             .m-text-field__icon {
-                &.m-button.m--is-mode-icon {
+                &.m-icon-button {
                     color: $m-color--error;
                 }
             }
@@ -145,7 +145,7 @@ $m-text-field--margin: $m-margin--s !default;
         &:hover:not(.m--is-focus),
         &.m--is-focus {
             .m-text-field__icon {
-                &.m-button.m--is-mode-icon {
+                &.m-icon-button {
                     color: $m-color--success;
                 }
             }
@@ -159,7 +159,7 @@ $m-text-field--margin: $m-margin--s !default;
     &:not(.m--is-focus) {
         &:hover {
             .m-text-field__icon {
-                &.m-button.m--is-mode-icon {
+                &.m-icon-button {
                     color: $m-color--text;
                 }
             }
@@ -296,7 +296,7 @@ $m-text-field--margin: $m-margin--s !default;
         stroke-width: 2px;
         z-index: 1;
 
-        &.m-button {
+        &.m-icon-button {
             min-height: 20px;
             min-width: 26px;
         }
@@ -306,7 +306,7 @@ $m-text-field--margin: $m-margin--s !default;
         }
 
         &.m--is-dropdown {
-            &.m-button.m--is-mode-icon {
+            &.m-icon-button {
                 transition: transform $m-transition-duration ease, color $m-transition-duration ease;
             }
         }

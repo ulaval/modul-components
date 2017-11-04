@@ -40,7 +40,7 @@
         </div>
         <m-icon-button :icon-name="iconName" icon-size="13px" class="m-text-field__icon" v-if="hasIcon">{{ iconDescription }}</m-icon-button>
         <m-icon-button :icon-name="iconNamePassword" icon-size="13px" class="m-text-field__icon m--is-password" v-if="propIconPassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
-        <m-icon-button icon-name="dropdown-arrow" icon-size="13px" class="m-text-field__icon m--is-dropdown" v-if="isDropdown && !isDisabled && !waiting" tabindex="-1">test</m-icon-button>
+        <m-icon-button icon-name="dropdown-arrow" icon-size="13px" button-size="13px" class="m-text-field__icon m--is-dropdown" v-if="isDropdown && !isDisabled && !waiting" tabindex="-1"></m-icon-button>
         <m-spinner size="small"  class="m-text-field_spinner" v-if="waiting && isDropdown"></m-spinner>
     </div>
     <m-validation-message
