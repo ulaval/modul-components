@@ -31,10 +31,10 @@
 
         <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
         <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="!waiting">
-            <m-button mode="icon" icon-name="dropdown-arrow" @keydown.enter.prevent="arrowOnKeydownEnter">
+            <m-icon-button icon-name="dropdown-arrow" button-size="22px" @keydown.enter.prevent="arrowOnKeydownEnter">
                 <m-i18n k="m-dropdown:open" v-if="!open"></m-i18n>
                 <m-i18n k="m-dropdown:close" v-if="open"></m-i18n>
-            </m-button>
+            </m-icon-button>
         </div>
     </m-input-style>
 
@@ -58,9 +58,9 @@
                         placeholder="Recherche"
                         ref="researchInput"
                         v-model="selectedText">
-                <m-button class="m-dropdown__header__research-button" mode="icon" icon-name="search">
+                <m-icon-button class="m-dropdown__header__research-button" icon-name="search">
                     <m-i18n k="m-dropdown:research"></m-i18n>
-                </m-button>
+                </m-icon-button>
             </div>
         </div>
         <ul class="m-dropdown__list"
