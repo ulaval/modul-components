@@ -43,7 +43,12 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     public title: string;
     @Prop({ default: true })
     public closeButton: boolean;
-    @Prop({ default: MSidebarCloseButtonPosition.Right })
+    @Prop({
+        default: MSidebarCloseButtonPosition.Right,
+        validator: value =>
+            value == MSidebarCloseButtonPosition.Right ||
+            value == MSidebarCloseButtonPosition.Left
+    })
     public closeButtonPosition: MSidebarCloseButtonPosition;
 
     @Prop({ default: true })
@@ -98,6 +103,8 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     }
 
     private get hasFooterSlot(): boolean {
+        console.log('closeButtonPosition', this.closeButtonPosition);
+
         return !!this.$slots.footer;
     }
 
