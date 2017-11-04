@@ -1,27 +1,35 @@
-<div class="m-base-window" ref="baseWindow">
+<div class="m-modal" ref="baseWindow">
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
-        <div v-show="propOpen" class="m-base-window__wrap m--is-modal" :class="[{ 'm--is-open': propOpen,
-                        'm--is-disabled':disabled }, className]" ref="dialogWrap">
-            <article class="m-base-window__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
-                <div class="m-base-window__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot || hasMessage">
-                    <p v-if="hasMessage">{{message}}</p>
-                    <slot></slot>
-                </div>
-                <footer class="m-base-window__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }">
-                    <nav class="m-base-window__footer-nav">
+        <transition name="m--is">
+            <div v-show="propOpen"
+                 class="m-modal__wrap"
+                 :class="[{ 'm--is-open': propOpen,
+                            'm--is-disabled':disabled },
+                            className]"
+                 ref="dialogWrap">
+                <article class="m-modal__article" ref="article">
+                    <header class="m-modal__header" :class="{ 'm--no-padding': !padding || !paddingHeader }" v-if="hasHeader">
+                        <h2 v-if="hasTitle">{{ title }}</h2>
+                        <slot name="header"></slot>
+                    </header>
+                    <div class="m-modal__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot || hasMessage">
+                        <p v-if="hasMessage">{{ message }}</p>
+                        <slot></slot>
+                    </div>
+                    <footer class="m-modal__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }">
                         <slot name="footer"></slot>
-                        <template v-if="!hasFooterSlot">
+                        <nav class="m-modal__footer__nav" v-if="!hasFooterSlot">
                             <m-button @click="onOk()">
                                 <m-i18n k="m-base-window:ok"></m-i18n>
                             </m-button>
                             <m-link mode="button" @click="onCancel()">
                                 <m-i18n k="m-base-window:cancel"></m-i18n>
                             </m-link>
-                        </template>
-                    </nav>
-                </footer>
-            </article>
-        </div>
+                        </nav>
+                    </footer>
+                </article>
+            </div>
+        </transition>
     </portal>
 </div>

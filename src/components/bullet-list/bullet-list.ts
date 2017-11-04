@@ -11,8 +11,6 @@ export class MBulletList extends Vue {
     @Prop()
     public title: string;
 
-    public componentName = BULLET_LIST_NAME;
-
     private get hasTitle(): boolean {
         return this.title == undefined || this.title == '' ? false : true;
     }

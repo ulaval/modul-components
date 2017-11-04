@@ -3,11 +3,12 @@ import { SpritesService } from './sprites';
 
 const DefaultSpritesPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug('DefaultSpritesPlugin.install');
         if ((v as any).$svg) {
             let svg: SpritesService = (v as any).$svg;
             svg.addSprites(require('../../assets/icons/sprites-default.svg'));
         } else {
-            throw new Error('DefaultSpritesPlugin.install -> You must use the svg plugin.');
+            console.error('DefaultSpritesPlugin.install -> You must use the svg plugin.');
         }
     }
 };

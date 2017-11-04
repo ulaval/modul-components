@@ -75,14 +75,26 @@ $m-checkbox--width: 16px;
 
         &.m--is-focus {
             &.m--has-error {
-                .m-checkbox__input {
-                    background: $m-color--error-lightest;
+                .m-checkbox {
+                    &__input {
+                        background: $m-color--error-lightest;
+                    }
+
+                    &__label {
+                        color: $m-color--error;
+                    }
                 }
             }
 
             &.m--is-valid {
-                .m-checkbox__input {
-                    background: $m-color--success-lightest;
+                .m-checkbox {
+                    &__input {
+                        background: $m-color--success-lightest;
+                    }
+
+                    &__label {
+                        color: $m-color--success;
+                    }
                 }
             }
         }
@@ -133,8 +145,14 @@ $m-checkbox--width: 16px;
         }
 
         .m-checkbox__wrap:hover {
-            .m-checkbox__input {
-                background: $m-color--error-lightest;
+            .m-checkbox {
+                &__label {
+                    color: $m-color--error;
+                }
+
+                &__input {
+                    background: $m-color--error-lightest;
+                }
             }
         }
     }
@@ -152,8 +170,14 @@ $m-checkbox--width: 16px;
         }
 
         .m-checkbox__wrap:hover {
-            .m-checkbox__input {
-                background: $m-color--success-lightest;
+            .m-checkbox {
+                &__label {
+                    color: $m-color--success;
+                }
+
+                &__input {
+                    background: $m-color--success-lightest;
+                }
             }
         }
     }

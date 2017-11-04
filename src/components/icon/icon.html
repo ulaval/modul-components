@@ -1,4 +1,4 @@
-<svg class="m-icon" @click="onClick" :aria-hidden="!hasSvgTitle" :width="width" :height="height">
+<svg class="m-icon" @click="onClick" :aria-hidden="!hasSvgTitle" :width="size" :height="size">
     <title v-if="hasSvgTitle">{{svgTitle}}</title>
     <use :xlink:href="spriteId" aria-hidden="true"></use>
 </svg>

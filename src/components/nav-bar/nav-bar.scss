@@ -20,6 +20,7 @@
         bottom: 0;
         background: $m-color--active;
         height: $m-border-width--l;
+        transition: transform $m-transition-duration, width $m-transition-duration;
 
         &.m--is-anim-active {
             transition: transform $m-transition-duration ease, width $m-transition-duration ease;
@@ -28,6 +29,7 @@
 
     &__arrow {
         position: relative;
+        transition: transform $m-transition-duration, width $m-transition-duration;
 
         &::before,
         &::after {
@@ -219,6 +221,8 @@
         }
 
         .m-nav-bar-item {
+            margin: 0 $m-margin;
+
             a:visited {
                 color: $m-color--grey-darker;
             }
@@ -243,6 +247,14 @@
                 button {
                     color: $m-color--text;
                 }
+            }
+
+            &.m--is-first {
+                margin-left: 0;
+            }
+
+            &.m--is-last {
+                margin-right: 0;
             }
         }
     }

@@ -64,7 +64,8 @@ export class MTextField extends ModulVue {
 
     @Watch('type')
     private typeChanged(type: MTextFieldType): void {
-        console.warn('MTextField - Change of property "type" is not supported');
+        console.warn('<' + TEXT_FIELD_NAME + '>: Change of property "type" is not supported');
+        (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
 
     private onClick(event: MouseEvent): void {

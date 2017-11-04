@@ -1,14 +1,6 @@
 @import '../../styles/abstracts/variables';
 
 .m-table {
-    // &.m--has-header {
-    //     .m-table {
-    //         &__body {
-    //             padding: $m-padding $m-padding 0 $m-padding;
-    //         }
-    //     }
-    // }
-
     &__header {
         display: flex;
         align-items: center;
@@ -86,21 +78,13 @@
             tbody {
                 tr {
                     border-bottom: 1px solid $m-color--grey-light;
-
-                    // &:last-child {
-                    //     border-bottom: 0;
-
-                    //     > td {
-                    //         padding-bottom: 0;
-                    //     }
-                    // }
                 }
 
                 td {
                     padding: $m-padding $m-padding--s;
                     margin: 1px 0;
                     vertical-align: top;
-                    text-align: center;
+                    text-align: left;
 
                     .m--has-option-menu & {
                         padding: 0 $m-padding--s;

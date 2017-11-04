@@ -1,7 +1,7 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import WithRender from './dialog-window.html?style=../../mixins/base-window/base-window.scss';
+import WithRender from './dialog-window.html?style=./dialog-window.scss';
 import { Prop } from 'vue-property-decorator';
 import { DIALOG_NAME } from '../component-names';
 import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
@@ -9,7 +9,7 @@ import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal
 export enum MDialogSize {
     FullSize = 'full-size',
     Large = 'large',
-    Default = 'default',
+    Regular = 'regular',
     Small = 'small'
 }
 
@@ -19,9 +19,9 @@ export enum MDialogSize {
 })
 export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop({
-        default: MDialogSize.Default,
+        default: MDialogSize.Regular,
         validator: value =>
-            value == MDialogSize.Default ||
+            value == MDialogSize.Regular ||
             value == MDialogSize.FullSize ||
             value == MDialogSize.Large ||
             value == MDialogSize.Small
@@ -33,6 +33,14 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     @Prop()
     public title: string;
+    @Prop({ default: true })
+    public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
+    @Prop({ default: true })
+    public paddingFooter: boolean;
 
     public handlesFocus(): boolean {
         return true;
@@ -50,17 +58,26 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return this.$refs.article as HTMLElement;
     }
 
+    protected mounted(): void {
+        if (!this.hasHeader()) {
+            console.warn('<' + DIALOG_NAME + '> needs a header slot or title prop.');
+        }
+    }
+
     private get hasDefaultSlot(): boolean {
-        // todo: header or title?
         return !!this.$slots.default;
     }
 
-    private get hasHeader(): boolean {
+    private hasHeader(): boolean {
         return this.hasTitle || !!this.$slots.header;
     }
 
     private get hasTitle(): boolean {
         return !!this.title;
+    }
+
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
     }
 
     private backdropClick(): void {

@@ -1,9 +1,4 @@
 @import 'abstracts/variables';
-$m-button--color: $m-color--interactive !default;
-$m-button--color-hover: $m-color--interactive-light !default;
-$m-button--color-active: $m-color--interactive-dark !default;
-$m-button--color-selected: $m-color--interactive-darker !default;
-$m-button--color-waiting: $m-color--interactive-lighter !default;
 
 .m-button {
     position: relative;
@@ -11,155 +6,48 @@ $m-button--color-waiting: $m-color--interactive-lighter !default;
     align-items: center;
     text-align: center;
     vertical-align: middle;
-    appearance: none;
-    outline: none;
-    user-select: none;
     font-size: 100%;
-    text-decoration: none;
-    line-height: 1;
     border-radius: 4px;
+    padding: 10px $m-padding 9px $m-padding;
+    font-weight: $m-font-weight--bold;
+
+    @include m-button();
+
+    @include m-is-ie() {
+        display: inline;
+    }
 
     span:not(.m-button__hidden) {
         position: relative;
     }
 
-    &.m--is-mode-primary,
-    &.m--is-mode-secondary {
-        transition-property: background, border-color, color;
-        transition-duration: 0.3s;
-        transition-timing-function: ease;
-        padding: 10px $m-padding 9px $m-padding;
-        font-weight: $m-font-weight--bold;
-        border: 1px solid $m-button--color;
-
-        &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
-            cursor: pointer;
-
-            &:hover {
-                color: $m-color--white;
-                background: $m-button--color-hover;
-                border-color: $m-button--color-hover;
-            }
-
-            &:active,
-            &:focus {
-                color: $m-color--white;
-                background: $m-button--color-active;
-                border-color: $m-button--color-active;
-            }
+    &:not(.m--is-waiting):not(.m--is-disabled) {
+        &.m--is-skin-primary {
+            @include m-button--primary();
         }
 
-        &.m--is-waiting {
-            cursor: progress;
-            color: $m-color--white;
-            background: $m-button--color-waiting;
-            border-color: $m-button--color-waiting;
+        &.m--is-skin-secondary {
+            @include m-button--secondary();
         }
 
-        &.m--is-disabled {
-            cursor: not-allowed;
-            color: $m-color--disabled;
-            background: $m-color--white;
-            border-color: $m-color--disabled;
-        }
-
-        &.m--is-selected {
-            background: $m-button--color-selected;
-            border-color: $m-button--color-selected;
-        }
+        @include m-button--hover();
     }
 
-    &.m--is-mode-primary {
-        color: $m-color--white;
-        background: $m-button--color;
+    &.m--is-waiting {
+        @include m-button--waiting();
     }
 
-    &.m--is-mode-secondary {
-        color: $m-button--color;
-        background: $m-color--white;
-    }
-
-    &.m--is-mode-icon {
-        transition: color $m-transition-duration ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        cursor: pointer;
-        border: none;
-        border-radius: 50%;
-        min-width: $m-touch-size;
-        min-height: $m-touch-size;
-        background: transparent;
-        color: $m-color--grey-darker;
-
-        &:hover {
-            color: $m-color--text;
-        }
-
-        &::after {
-            transition: width $m-transition-duration ease, height $m-transition-duration ease, opacity $m-transition-duration--s linear;
-            transition-delay: 0.3s;
-            transform: translate(-50%, -50%);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 1;
-            content: '';
-            display: block;
-            width: $m-touch-size / 2;
-            height: $m-touch-size / 2;
-            border-radius: 50%;
-            opacity: 0;
-            background: $m-color--interactive-lightest;
-        }
-
-        .m-button {
-            &__icon {
-                @include m-is-ie() {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate3d(-50%, -50%, 0);
-                }
-            }
-        }
-
-        &.m--is-disabled {
-            cursor: not-allowed;
-            color: $m-color--disabled;
-            background: $m-color--white;
-            border-color: $m-color--disabled;
-        }
+    &.m--is-disabled {
+        @include m-button--disabled();
     }
 
     &.m--is-full-size {
         width: 100%;
     }
 
-    &:not(.m--is-selected):not(.m--is-waiting):not(.m--is-disabled) {
-        &.m--is-mode-icon {
-            &:active,
-            &:focus {
-                &::after {
-                    opacity: 1;
-                    transition-delay: 0s;
-                    width: $m-touch-size;
-                    height: $m-touch-size;
-                }
-            }
-        }
-    }
-
-    &__wrap {
-        display: inline-flex;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-
-        @include m-is-ie {
-            display: inline;
-        }
+    .m-icon {
+        font-size: 12px;
+        stroke-width: 2px;
     }
 
     &__more-info,

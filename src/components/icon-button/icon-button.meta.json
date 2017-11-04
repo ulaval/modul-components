@@ -2,18 +2,11 @@
     "tag": "m-button",
     "name": "m-button-meta:name",
     "attributes": {
-        "type": {
-            "type": "string",
-            "values": [
-                "button",
-                "submit",
-                "reset"
-            ],
-            "default": 0
-        },
         "skin": {
             "type": "string",
             "values": [
+                "light",
+                "dark",
                 "primary",
                 "secondary"
             ],
@@ -27,20 +20,12 @@
             "type": "boolean",
             "default": false
         },
-        "fullSize": {
-            "type": "boolean",
-            "default": false
+        "size": {
+            "type": "string",
+            "default": "44px"
         },
         "iconName": {
             "type": "string"
-        },
-        "iconPosition": {
-            "type": "string",
-            "values": [
-                "left",
-                "right"
-            ],
-            "default": 0
         },
         "iconSize": {
             "type": "string",

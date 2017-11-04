@@ -1,11 +1,9 @@
 <m-flex-template :menuOpen="menuOpen">
     <m-template>
-        <template slot="header">
-            <m-link :unvisited="true">
-                <span slot="icon-left"><</span>Menu
-            </m-link>
+        <div slot="header">
+            <m-link :unvisited="true" icon-name="left-arrow">Menu</m-link>
             <h1>{{$route.meta}}</h1>
-        </template>
+        </div>
         <m-dynamic-template :template="tag"></m-dynamic-template>
     </m-template>
     <div slot="footer">Footer</div>

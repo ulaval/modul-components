@@ -57,8 +57,11 @@ export class Portal extends ModulVue implements PortalMixin {
     public setFocusToPortal(): void {
         if (this.as<PortalMixinImpl>().handlesFocus()) {
             let el: HTMLElement = this.as<PortalMixinImpl>().getPortalElement();
+            let x: number = window.scrollX; // AEL-53
+            let y: number = window.scrollY; // AEL-53
             el.setAttribute('tabindex', '0');
             el.focus();
+            window.scrollTo(x, y); // AEL-53
             el.blur();
             el.removeAttribute('tabindex');
         }
@@ -103,6 +106,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     protected beforeDestroy(): void {
+        this.propOpen = false;
         if (this.internalTrigger) {
             this.internalTrigger.removeEventListener('click', this.toggle);
             this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
@@ -167,7 +171,7 @@ export class Portal extends ModulVue implements PortalMixin {
 
     private handleTrigger(): void {
         if (this.internalTrigger) {
-            console.warn('trigger change or multiple triggers not supported');
+            console.warn('portal.ts : Trigger change or multiple triggers not supported');
         }
         if (this.trigger) {
             this.internalTrigger = this.trigger;

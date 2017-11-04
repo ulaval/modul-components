@@ -1,6 +1,6 @@
-<a class="m-options-menu-item" :class="{ 'disabled' : isDisabled}" tabindex="0" @click.prevent="onClick($event)" ref="m-options-menu-item">
-    <span class="m-options-menu-item__icon" :class="{ 'm-options-menu-item__first-cell' : hasIcon }" ref="icon">
+<li class="m-options-menu-item" :class="{ 'm-is--disabled' : disabled }" tabindex="0" @keydown.enter.prevent="onKeydownEnter" @click.prevent="onClick" ref="m-options-menu-item">
+    <span class="m-options-menu-item__icon" ref="icon">
         <m-icon :name="iconName" v-if="hasIcon"></m-icon>
     </span>
-    <span class="m-options-menu-item__text" :class="{ 'm-options-menu-item__last-cell' : hasSlot }" ref="text"><slot></slot></span>
-</a>
+    <span class="m-options-menu-item__text" ref="text"><slot></slot></span>
+</li>

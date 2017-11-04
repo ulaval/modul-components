@@ -1,22 +1,18 @@
-<div>
-    <m-button v-m-popup:popup1 class="m-options-menu-button" mode="icon" icon-name="options">
+<div class="m-options-menu" :class="{ 'm--is-disabled': disabled }">
+    <m-icon-button v-m-popup:popup1 class="m-options-menu__button" icon-name="options" :disabled="disabled"  :skin="skin" :size="size">
         <m-i18n k="m-options-menu:open" v-if="!open"></m-i18n>
         <m-i18n k="m-options-menu:close" v-if="open"></m-i18n>
-    </m-button>
+    </m-icon-button>
     <m-popup ref="popup1"
              :open.sync="open"
              @open="onOpen"
              @close="onClose"
              padding=""
-             :options="options"
+             :placement="placement"
              :disabled="disabled"
              :close-on-backdrop="true">
-        <div class="m-options-menu" ref="menu">
-            <slot>
-                <m-options-menu-item icon-name="default">Option 1</m-options-menu-item>
-                <m-options-menu-item icon-name="default"></m-options-menu-item>
-                <m-options-menu-item>Option 3</m-options-menu-item>
-            </slot>
-        </div>
+        <ul class="m-options-menu__wrap" ref="menu">
+            <slot></slot>
+        </ul>
     </m-popup>
 </div>

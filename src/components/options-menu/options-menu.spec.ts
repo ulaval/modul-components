@@ -2,7 +2,7 @@ import Vue from 'vue';
 import '../../utils/polyfills';
 import MenuPlugin, { MOptionsMenu } from './options-menu';
 
-const DISABLED_CSS: string = 'm--is-disabled';
+const STATE_DISABLED_CSS: string = 'm--is-disabled';
 
 let menu: MOptionsMenu;
 
@@ -15,17 +15,17 @@ describe('optionsMenu', () => {
     it('disabled prop', () => {
         let button = menu.$el.querySelector('button');
         if (button) {
-            expect(button.classList.contains(DISABLED_CSS)).toBeFalsy();
+            expect(button.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
         }
         menu.disabled = true;
         Vue.nextTick(() => {
             if (button) {
-                expect(button.classList.contains(DISABLED_CSS)).toBeTruthy();
+                expect(button.classList.contains(STATE_DISABLED_CSS)).toBeTruthy();
             }
             menu.disabled = false;
             Vue.nextTick(() => {
                 if (button) {
-                    expect(button.classList.contains(DISABLED_CSS)).toBeFalsy();
+                    expect(button.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
                 }
             });
         });

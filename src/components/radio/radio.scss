@@ -1,7 +1,6 @@
 @import 'abstracts/variables';
 $m-radio--width: 16px !default;
-$m-radio--color-disabled: $m-color--grey-darker !default;
-$m-radio--color-disabled-light: $m-color--grey !default;
+$m-radio--color-disabled: $m-color--disabled !default;
 
 .m-radio {
     display: flex;
@@ -11,34 +10,77 @@ $m-radio--color-disabled-light: $m-color--grey !default;
     list-style: none;
     padding-left: 0;
 
-    &:not(.m--is-button) {
+    &:not(.m--is-mode-button) {
         &:not(.m--is-disabled) {
-            .m-radio__wrap:hover,
-            &.m--is-focus {
-                .m-radio {
-                    &__label {
-                        color: $m-color--interactive;
-                    }
+            &:not(.m--is-error):not(.m--is-valid) {
+                &:not(.m--is-checked) .m-radio__wrap:hover,
+                &.m--is-focus {
+                    .m-radio {
+                        &__label {
+                            color: $m-color--interactive;
+                        }
 
-                    &__input {
-                        border-color: $m-color--interactive;
-                        background: $m-color--interactive-lightest;
-                    }
-                }
-            }
-
-            .m-radio {
-                &__wrap {
-                    cursor: pointer;
-
-                    &:hover {
-                        .m-radio__input {
+                        &__input {
                             border-color: $m-color--interactive;
                             background: $m-color--interactive-lightest;
                         }
                     }
                 }
+            }
 
+            &.m--is-error {
+                .m-radio__input {
+                    border-color: $m-color--error;
+
+                    &::before {
+                        background: $m-color--error;
+                    }
+                }
+
+                &:not(.m--is-checked) .m-radio__wrap:hover,
+                &.m--is-focus {
+                    .m-radio {
+                        &__label {
+                            color: $m-color--error;
+                        }
+
+                        &__input {
+                            background: $m-color--error-lightest;
+                        }
+                    }
+                }
+            }
+
+            &.m--is-valid {
+                .m-radio__input {
+                    border-color: $m-color--success;
+
+                    &::before {
+                        background: $m-color--success;
+                    }
+                }
+
+                &:not(.m--is-checked) .m-radio__wrap:hover,
+                &.m--is-focus {
+                    .m-radio {
+                        &__label {
+                            color: $m-color--success;
+                        }
+
+                        &__input {
+                            background: $m-color--success-lightest;
+                        }
+                    }
+                }
+            }
+
+            &:not(.m--is-checked) {
+                .m-radio__wrap {
+                    cursor: pointer;
+                }
+            }
+
+            .m-radio {
                 &__label {
                     transition: color $m-transition-duration ease;
                     color: $m-color--text;
@@ -58,31 +100,36 @@ $m-radio--color-disabled-light: $m-color--grey !default;
                 }
 
                 &__input {
-                    border-color: $m-radio--color-disabled;
-                    background: $m-radio--color-disabled-light;
+                    border-color: $m-color--disabled;
                 }
 
                 &__label {
-                    color: $m-radio--color-disabled;
+                    color: $m-color--disabled;
                     background: $m-color--white;
-                    border-color: $m-radio--color-disabled;
+                    border-color: $m-color--disabled;
                 }
             }
 
             &.m--is-checked {
                 .m-radio__input {
                     &::before {
-                        background: $m-radio--color-disabled;
+                        background: $m-color--disabled;
                     }
                 }
             }
         }
 
         &.m--is-checked {
-            .m-radio__input {
-                &::before {
-                    visibility: visible;
-                    transform: scale(1);
+            .m-radio {
+                &__wrap {
+                    cursor: default;
+                }
+
+                &__input {
+                    &::before {
+                        visibility: visible;
+                        transform: scale(1);
+                    }
                 }
             }
         }
@@ -143,7 +190,7 @@ $m-radio--color-disabled-light: $m-color--grey !default;
         }
     }
 
-    &.m--is-button {
+    &.m--is-mode-button {
         &:not(.m--is-disabled) {
             &.m--is-checked {
                 .m-radio {
