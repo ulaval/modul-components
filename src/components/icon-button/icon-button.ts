@@ -66,7 +66,7 @@ export class MIconButton extends Vue {
     private hasSlots(): boolean {
         let hasSlot: boolean = !!this.$slots.default;
         if (!hasSlot) {
-            console.warn('<' + ICON_BUTTON_NAME + '> icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
+            console.warn('<' + ICON_BUTTON_NAME + '> needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
         }
         return hasSlot;
     }
