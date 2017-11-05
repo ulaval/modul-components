@@ -103,8 +103,6 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     }
 
     private get hasFooterSlot(): boolean {
-        console.log('closeButtonPosition', this.closeButtonPosition);
-
         return !!this.$slots.footer;
     }
 
