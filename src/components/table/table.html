@@ -10,53 +10,7 @@
     </header>
     <div class="m-table__body">
         <table>
-            <slot>
-                <template v-if="demo">
-                    <thead>
-                        <tr>
-                            <th>title</th>
-                            <th>title</th>
-                            <th>title</th>
-                            <th v-if="withOptionsMenu"></th>
-                            <th v-else>title</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>cell</td>
-                            <td>cell</td>
-                            <td>cell</td>
-                            <td>
-                                <m-options-menu v-if="withOptionsMenu">
-                                    <m-options-menu-item>
-                                        Exemple de menu
-                                    </m-options-menu-item>
-                                </m-options-menu>
-
-                                <template v-else>
-                                    cell
-                                </template>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>cell</td>
-                            <td>cell</td>
-                            <td>cell</td>
-                            <td>
-                                <m-options-menu v-if="withOptionsMenu">
-                                    <m-options-menu-item>
-                                        Exemple de menu
-                                    </m-options-menu-item>
-                                </m-options-menu>
-
-                                <template v-else>
-                                    cell
-                                </template>
-                            </td>
-                        </tr>
-                    </tbody>
-                </template>
-            </slot>
+            <slot></slot>
         </table>
     </div>
 </div>

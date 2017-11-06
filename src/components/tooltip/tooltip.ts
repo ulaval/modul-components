@@ -59,6 +59,9 @@ export class MTooltip extends ModulVue {
     }
 
     private get hasDefaultSlot(): boolean {
+        if (!this.$slots.default) {
+            console.warn('m-tooltip icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the voice readers.');
+        }
         return !!this.$slots.default;
     }
 

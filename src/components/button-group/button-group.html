@@ -1,11 +1,5 @@
 <div class="m-button-group" :class="{ 'm--is-inline': inline, 'm--is-full-size': fullsize  }">
     <ul class="m-button-group__wrap">
-        <slot>
-            <span v-if="demo">
-                <m-radio value="button1" v-model="model">Button 1</m-radio>
-                <m-radio value="button2" v-model="model">Button 2</m-radio>
-                <m-radio value="button3" v-model="model">Button 3</m-radio>
-            </span>
-        </slot>
+        <slot></slot>
     </ul>
 </div>
