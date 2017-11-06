@@ -3,5 +3,5 @@
     :disabled="disabled"
     v-if="!filtered || inactive"
     @mousedown.prevent="onMousedown($event)">
-    <slot></slot>
+    <slot><span class="m-dropdown-item__element-text">{{ propLabel }}</span></slot>
 </li>
