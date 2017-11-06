@@ -36,7 +36,6 @@ export class MTooltip extends ModulVue {
     @Prop({ default: false })
     public disabled: boolean;
 
-    public componentName = TOOLTIP_NAME;
     private propOpen: boolean;
     private error: boolean = false;
     private isEqMaxS: boolean = false;
@@ -59,6 +58,9 @@ export class MTooltip extends ModulVue {
     }
 
     private get hasDefaultSlot(): boolean {
+        if (!this.$slots.default) {
+            console.warn('m-tooltip icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the voice readers.');
+        }
         return !!this.$slots.default;
     }
 

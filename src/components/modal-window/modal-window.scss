@@ -123,6 +123,15 @@ $m-modal--max-width: 380px !default;
         display: inline-flex;
         justify-content: center;
 
+        > div {
+            display: inline-flex;
+            flex-direction: column;
+
+            .m-link + .m-link {
+                margin-top: $m-margin;
+            }
+        }
+
         &__nav {
             display: inline-flex;
             flex-direction: column;

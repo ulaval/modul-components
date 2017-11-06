@@ -18,7 +18,9 @@
                         <slot></slot>
                     </div>
                     <footer class="m-modal__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }">
-                        <slot name="footer"></slot>
+                        <div>
+                            <slot name="footer"></slot>
+                        </div>
                         <nav class="m-modal__footer__nav" v-if="!hasFooterSlot">
                             <m-button @click="onOk()">
                                 <m-i18n k="m-base-window:ok"></m-i18n>

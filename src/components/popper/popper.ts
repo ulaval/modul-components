@@ -185,6 +185,12 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         }
 
         this.as<PortalMixin>().setFocusToPortal();
+
+        setTimeout(() => {
+            if (this.popper) {
+                this.popper.update();
+            }
+        }, 200);
     }
 
     private onEnterCancelled(el: HTMLElement): void {

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
+import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { KeyCode } from '../../utils/keycode/keycode';
@@ -131,6 +131,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.focusedIndex > -1 ? this.internalNavigationItems[this.focusedIndex].value : this.model;
     }
 
+    @Watch('isMqMaxS')
+    private onisMqMaxS(value: boolean, old: boolean): void {
+        if (value != old) {
+            this.$nextTick(() => this.buildItemsMap());
+        }
+    }
+
     private get selectedText(): string {
         let result: string | undefined = '';
         if (this.dirty) {
@@ -157,7 +164,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private buildItemsMap(): void {
         this.focusedIndex = -1;
 
+        // all visible items
         let items: MDropdownItem[] = [];
+        // items that can be reached with the keyboard (!disabled)
         let navigation: MDropdownItem[] = [];
         (this.$refs.popper as Vue).$children[0].$children.forEach(item => {
             if (item instanceof MDropdownItem && !item.inactive && !item.filtered) {
@@ -315,12 +324,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
                 el.style.opacity = '0';
                 setTimeout(() => {
-                    let height: number = el.clientHeight;
+                    el.style.removeProperty('opacity');
+                    let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
                     el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
                     el.style.transition = DROPDOWN_STYLE_TRANSITION;
                     el.style.overflowY = 'hidden';
                     el.style.maxHeight = '0';
-                    el.style.removeProperty('opacity');
                     el.style.width = this.$el.clientWidth + 'px';
                     setTimeout(() => {
                         el.style.maxHeight = height + 'px';

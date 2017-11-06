@@ -34,7 +34,6 @@ export class MScrollTop extends ModulVue {
     @Prop({ default: ScrollToDuration.Regular })
     public duration: string;
 
-    public componentName = SCROLL_TOP_NAME;
     private scrollBreakPoint: number = window.innerHeight * 1.5;
     private scrollPosition: number;
 

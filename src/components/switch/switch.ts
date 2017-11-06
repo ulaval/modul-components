@@ -26,7 +26,6 @@ export class MSwitch extends ModulVue {
     @Prop({ default: true })
     public helperText: boolean;
 
-    public componentName: string = SWITCH_NAME;
     private internalPropChecked: boolean = false;
     private isFocus = false;
     private id: string = `switch${uuid.generate()}`;

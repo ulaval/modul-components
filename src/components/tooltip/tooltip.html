@@ -8,7 +8,6 @@
             <slot></slot>
         </m-link>
     </template>
-    <span v-if="!hasDefaultSlot">m-tooltip icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the voice readers.</span>
     <div slot="body" class="m-tooltip__body-container" :class="{ 'm--has-close-button': propCloseButton }" v-if="hasBodySlot">
         <m-icon-button icon-name="default" icon-size="10px" @click="close" class="m-tooltip__close-button" v-if="propCloseButton">
             <m-i18n k="m-tooltip:close"></m-i18n>

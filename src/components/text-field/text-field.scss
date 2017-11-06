@@ -183,6 +183,7 @@ $m-text-field--margin: $m-margin--s !default;
                 &__label {
                     top: 18px; // Magic number
                     font-size: $m-font-size--l;
+                    font-weight: $m-font-weight;
                 }
 
                 &__input-container {
@@ -213,7 +214,7 @@ $m-text-field--margin: $m-margin--s !default;
         z-index: 1;
         width: 100%;
         font-size: $m-font-size--s;
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight;
         white-space: nowrap;
     }
 
@@ -225,7 +226,7 @@ $m-text-field--margin: $m-margin--s !default;
         padding: 0 0 $m-text-field--margin 0;
         font-family: $m-font-family;
         font-size: $m-font-size--l;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--bold;
         text-decoration: none;
         text-align: left;
         color: $m-color--text;
