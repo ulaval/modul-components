@@ -288,8 +288,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onFocus(): void {
-        if (!this.mouseIsDown && !this.inactive && this.as<MediaQueries>().isMqMinS) {
-            this.open = true;
+        if (!this.mouseIsDown && !this.open && !this.inactive && this.as<MediaQueries>().isMqMinS) {
+            setTimeout(() => {
+                this.open = true;
+            }, 300);
         }
     }
 
@@ -359,15 +361,19 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
-                let height: number = el.clientHeight;
-                el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
-                el.style.transition = DROPDOWN_STYLE_TRANSITION;
-                el.style.overflowY = 'hidden';
-                el.style.maxHeight = '0';
-                el.style.width = this.$el.clientWidth + 'px';
+                el.style.opacity = '0';
                 setTimeout(() => {
-                    el.style.maxHeight = height + 'px';
-                    done();
+                    let height: number = el.clientHeight;
+                    el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+                    el.style.transition = DROPDOWN_STYLE_TRANSITION;
+                    el.style.overflowY = 'hidden';
+                    el.style.maxHeight = '0';
+                    el.style.removeProperty('opacity');
+                    el.style.width = this.$el.clientWidth + 'px';
+                    setTimeout(() => {
+                        el.style.maxHeight = height + 'px';
+                        done();
+                    }, 0);
                 }, 0);
             } else {
                 done();
