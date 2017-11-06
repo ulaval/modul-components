@@ -105,7 +105,17 @@ describe('button', () => {
     });
 
     it('icon-size prop', () => {
-        expect(button.iconSize == '12px').toBeTruthy();
+        expect(button.iconSize).toEqual('12px');
+
+        button.iconSize = '20px';
+        Vue.nextTick(() => {
+            expect(button.iconSize).toEqual('20px');
+
+            button.iconSize = '30px';
+            Vue.nextTick(() => {
+                expect(button.iconSize).toEqual('30px');
+            });
+        });
     });
 
     it('icon-position prop is left', () => {

@@ -5,42 +5,41 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './nav-bar-item.html?style=./nav-bar-item.scss';
 import { NAV_BAR_ITEM_NAME } from '../component-names';
 
+export abstract class BaseNavBar extends Vue {
+    abstract isItemSelected(value: string, el: HTMLElement): boolean;
+}
+
 @WithRender
 @Component
 export class MNavBarItem extends Vue {
     @Prop({ default: false })
     public selected: boolean;
+    @Prop()
+    public value: string;
+    @Prop({ default: true })
+    public margin: string;
 
-    public componentName: string = NAV_BAR_ITEM_NAME;
-
-    private id: number;
+    public isFirtsItem: boolean = false;
+    public isLastItem: boolean = false;
     private propFocus: boolean = true;
-    private isSelected: boolean = false;
-    private childrenIndex: number;
-    private isFirtsItem: boolean = false;
-    private isLastItem: boolean = false;
+    private internalSelected: boolean = false;
 
     protected mounted() {
         if (!this.$el.querySelector('a, button')) {
             this.$el.setAttribute('tabindex', '0');
         }
     }
+    private get propSelected(): boolean {
+        if (this.$parent instanceof BaseNavBar) {
+            return this.$parent.isItemSelected(this.value, this.$el);
+        } else if (this.selected != undefined) {
+            return this.selected;
+        }
+        return this.internalSelected;
+    }
 
     private onClick(): void {
-        this.$emit('click', this.id, this.childrenIndex);
-    }
-
-    private selectItem(): void {
-        this.isSelected = true;
-    }
-
-    private unselectItem(): void {
-        this.isSelected = false;
-    }
-
-    private get propSelected(): boolean {
-        this.isSelected = this.selected;
-        return this.selected;
+        this.$emit('click', this.value);
     }
 }
 

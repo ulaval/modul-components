@@ -3,7 +3,7 @@ import { PluginObject } from 'vue';
 import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
-import WithRender from './modal-window.html?style=../../mixins/base-window/base-window.scss';
+import WithRender from './modal-window.html?style=./modal-window.scss';
 import { Portal, PortalMixinImpl } from '../../mixins/portal/portal';
 
 @WithRender
@@ -12,7 +12,19 @@ import { Portal, PortalMixinImpl } from '../../mixins/portal/portal';
 })
 export class MModal extends ModulVue implements PortalMixinImpl {
     @Prop()
+    public title: string;
+    @Prop()
     public message: string;
+    @Prop()
+    public className: string;
+    @Prop({ default: true })
+    public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
+    @Prop({ default: true })
+    public paddingFooter: boolean;
 
     public handlesFocus(): boolean {
         return true;
@@ -47,7 +59,15 @@ export class MModal extends ModulVue implements PortalMixinImpl {
         return !!this.$slots.footer;
     }
 
-    private hasMessage(): boolean {
+    private get hasHeader(): boolean {
+        return !!this.$slots.header || this.hasTitle;
+    }
+
+    private get hasTitle(): boolean {
+        return !!this.title;
+    }
+
+    private get hasMessage(): boolean {
         return !!this.message;
     }
 }

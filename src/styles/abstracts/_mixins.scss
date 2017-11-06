@@ -1,10 +1,10 @@
-@mixin m-scrollbar {
+@mixin m-scrollbar() {
     width: $m-scrollbar-width;
     height: $m-scrollbar-width;
     background: transparent;
 }
 
-@mixin m-scrollbar-ie {
+@mixin m-scrollbar-ie() {
     scrollbar-face-color: $m-color--scrollbar;
     scrollbar-shadow-color: $m-color--scrollbar;
     scrollbar-highlight-color: $m-color--white;
@@ -14,11 +14,11 @@
     scrollbar-arrow-color: $m-color--scrollbar;
 }
 
-@mixin m-scrollbar-track-piece {
+@mixin m-scrollbar-track-piece() {
     background: $m-color--scrollbar--light;
 }
 
-@mixin m-scrollbar-thumb {
+@mixin m-scrollbar-thumb() {
     background: $m-color--scrollbar;
 }
 
@@ -78,7 +78,7 @@
     border-color: $m-color--interactive-lighter;
 }
 
-@mixin m-button--disabled {
+@mixin m-button--disabled() {
     cursor: not-allowed;
     color: $m-color--disabled;
     background: $m-color--white;
