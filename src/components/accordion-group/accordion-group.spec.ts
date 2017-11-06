@@ -13,54 +13,96 @@ let accordionGroup: MAccordionGroup;
 describe('accordion-group', () => {
     beforeEach(() => {
         Vue.use(AccordionGroupPlugin);
-        accordionGroup = new MAccordionGroup().$mount();
     });
 
     it('css classes are present', () => {
+        accordionGroup = new MAccordionGroup().$mount();
         expect(accordionGroup.$el.querySelector('.' + NO_TITLE_CSS)).not.toBeNull();
     });
 
     it('skin prop', () => {
-        expect(accordionGroup.$el.querySelector('.' + SKIN_LIGHT_CSS)).toBeNull();
-        expect(accordionGroup.$el.querySelector('.' + SKIN_REGULAR_CSS)).not.toBeNull();
-        expect(accordionGroup.$el.querySelector('.' + SKIN_PLAIN_CSS)).toBeNull();
+        new Vue({
+            template: `
+            <m-accordion-group>
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+            </m-accordion-group>`,
+            mounted() {
+                expect(this.$el.querySelector('.' + SKIN_LIGHT_CSS)).toBeNull();
+                expect(this.$el.querySelector('.' + SKIN_REGULAR_CSS)).not.toBeNull();
+                expect(this.$el.querySelector('.' + SKIN_PLAIN_CSS)).toBeNull();
+            }
+        }).$mount();
 
-        accordionGroup.skin = MAccordionSkin.Light;
-        Vue.nextTick(() => {
-            expect(accordionGroup.$el.querySelector('.' + SKIN_LIGHT_CSS)).not.toBeNull();
-            expect(accordionGroup.$el.querySelector('.' + SKIN_REGULAR_CSS)).toBeNull();
-            expect(accordionGroup.$el.querySelector('.' + SKIN_PLAIN_CSS)).toBeNull();
+        new Vue({
+            template: `
+            <m-accordion-group :skin="skin">
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+            </m-accordion-group>`,
+            data: {
+                skin: MAccordionSkin.Light
+            },
+            mounted() {
+                expect(this.$el.querySelector('.' + SKIN_LIGHT_CSS)).not.toBeNull();
+                expect(this.$el.querySelector('.' + SKIN_REGULAR_CSS)).toBeNull();
+                expect(this.$el.querySelector('.' + SKIN_PLAIN_CSS)).toBeNull();
 
-            accordionGroup.skin = MAccordionSkin.Regular;
-            Vue.nextTick(() => {
-                expect(accordionGroup.$el.querySelector('.' + SKIN_LIGHT_CSS)).toBeNull();
-                expect(accordionGroup.$el.querySelector('.' + SKIN_REGULAR_CSS)).not.toBeNull();
-                expect(accordionGroup.$el.querySelector('.' + SKIN_PLAIN_CSS)).toBeNull();
-
-                accordionGroup.skin = MAccordionSkin.Plain;
+                (this as any).skin = MAccordionSkin.Regular;
                 Vue.nextTick(() => {
-                    expect(accordionGroup.$el.querySelector('.' + SKIN_LIGHT_CSS)).toBeNull();
-                    expect(accordionGroup.$el.querySelector('.' + SKIN_REGULAR_CSS)).toBeNull();
-                    expect(accordionGroup.$el.querySelector('.' + SKIN_PLAIN_CSS)).not.toBeNull();
+                    expect(this.$el.querySelector('.' + SKIN_LIGHT_CSS)).toBeNull();
+                    expect(this.$el.querySelector('.' + SKIN_REGULAR_CSS)).not.toBeNull();
+                    expect(this.$el.querySelector('.' + SKIN_PLAIN_CSS)).toBeNull();
+
+                    (this as any).skin = MAccordionSkin.Plain;
+                    Vue.nextTick(() => {
+                        expect(this.$el.querySelector('.' + SKIN_LIGHT_CSS)).toBeNull();
+                        expect(this.$el.querySelector('.' + SKIN_REGULAR_CSS)).toBeNull();
+                        expect(this.$el.querySelector('.' + SKIN_PLAIN_CSS)).not.toBeNull();
+                    });
                 });
-            });
-        });
+            }
+        }).$mount();
     });
 
     it('concurrent prop', () => {
-        Vue.nextTick(() => {
-            expect(accordionGroup.$el.querySelector('.m-link')).not.toBeNull();
-        });
+        new Vue({
+            template: `
+            <m-accordion-group>
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+            </m-accordion-group>`,
+            mounted() {
+                Vue.nextTick(() => {
+                    expect(this.$el.querySelector('.m-link')).not.toBeNull();
+                });
+            }
+        }).$mount();
 
-        accordionGroup.concurrent = false;
-        Vue.nextTick(() => {
-            expect(accordionGroup.$el.querySelector('.m-link')).not.toBeNull();
+        new Vue({
+            template: `
+            <m-accordion-group :concurrent="concurrent">
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+                <m-accordion></m-accordion>
+            </m-accordion-group>`,
+            data: {
+                concurrent: true
+            },
+            mounted() {
+                Vue.nextTick(() => {
+                    expect(this.$el.querySelector('.m-link')).toBeNull();
 
-            accordionGroup.concurrent = true;
-            Vue.nextTick(() => {
-                expect(accordionGroup.$el.querySelector('.m-link')).toBeNull();
-            });
-        });
+                    (this as any).concurrent = false;
+                    Vue.nextTick(() => {
+                        expect(this.$el.querySelector('.m-link')).not.toBeNull();
+                    });
+                });
+            }
+        }).$mount();
     });
 
     it('value prop', () => {
