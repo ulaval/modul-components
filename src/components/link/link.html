@@ -23,7 +23,7 @@
        :href="propUrl"
        v-if="isLink || isExternalLink || isButton"
        ref="link" @click="onClick">
-        <m-icon class="m-link__icon" :name="propIconName" :width="iconSize" :height="iconSize" v-if="hasIcon" aria-hidden="true"></m-icon>
+        <m-icon class="m-link__icon" :name="propIconName" :size="iconSize" v-if="hasIcon" aria-hidden="true"></m-icon>
         <span class="m-link__text">
             <slot></slot>
         </span>
