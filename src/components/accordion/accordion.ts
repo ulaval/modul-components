@@ -60,8 +60,6 @@ export class MAccordion extends Vue {
     @Prop()
     public id: string;
 
-    public componentName: string = ACCORDION_NAME;
-
     private uuid: string = uuid.generate();
     private internalPropOpen: boolean = false;
 

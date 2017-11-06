@@ -21,7 +21,6 @@ export class MTabPane extends ModulVue {
     @Prop({ default: false })
     public disabled: boolean;
 
-    public componentName = TAB_PANE_NAME;
     public root: Vue;
     public inactif: boolean = false;
     private hasModel: boolean = true;

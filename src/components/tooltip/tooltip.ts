@@ -36,7 +36,6 @@ export class MTooltip extends ModulVue {
     @Prop({ default: false })
     public disabled: boolean;
 
-    public componentName = TOOLTIP_NAME;
     private propOpen: boolean;
     private error: boolean = false;
     private isEqMaxS: boolean = false;

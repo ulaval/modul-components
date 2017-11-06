@@ -16,7 +16,6 @@ export class MLimitText extends ModulVue {
     @Prop()
     public label: string;
 
-    public componentName = LIMIT_TEXT_NAME;
     private reduceContent: string = '';
     private originalContent: string = '';
     private fullContent: string = '';
@@ -36,7 +35,7 @@ export class MLimitText extends ModulVue {
         // Add the close link if an HTML tag is present
         if (this.originalContent.match('</')) {
             let tagIndex = this.originalContent.lastIndexOf('</');
-            this.fullContent = this.originalContent.substring(0,tagIndex) + this.closeLink + this.originalContent.substring(tagIndex);
+            this.fullContent = this.originalContent.substring(0, tagIndex) + this.closeLink + this.originalContent.substring(tagIndex);
         } else {
             this.fullContent = this.originalContent + this.closeLink;
         }

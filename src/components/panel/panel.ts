@@ -31,8 +31,6 @@ export class MPanel extends Vue {
     @Prop({ default: true })
     public paddingFooter: boolean;
 
-    public componentName: string = PANEL_NAME;
-
     protected mounted(): void {
         ElementQueries.init();
     }
