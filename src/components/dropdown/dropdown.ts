@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
+import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 import { DROPDOWN_NAME } from '../component-names';
 import { KeyCode } from '../../utils/keycode/keycode';
@@ -78,6 +78,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
+    public focus(): void {
+        ((this.$refs.mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement).focus();
+    }
+
     protected mounted(): void {
         this.$nextTick(() => {
             this.buildItemsMap();
@@ -127,6 +131,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.focusedIndex > -1 ? this.internalNavigationItems[this.focusedIndex].value : this.model;
     }
 
+    @Watch('isMqMaxS')
+    private onisMqMaxS(value: boolean, old: boolean): void {
+        if (value != old) {
+            this.$nextTick(() => this.buildItemsMap());
+        }
+    }
+
     private get selectedText(): string {
         let result: string | undefined = '';
         if (this.dirty) {
@@ -153,7 +164,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private buildItemsMap(): void {
         this.focusedIndex = -1;
 
+        // all visible items
         let items: MDropdownItem[] = [];
+        // items that can be reached with the keyboard (!disabled)
         let navigation: MDropdownItem[] = [];
         (this.$refs.popper as Vue).$children[0].$children.forEach(item => {
             if (item instanceof MDropdownItem && !item.inactive && !item.filtered) {

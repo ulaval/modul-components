@@ -13,8 +13,8 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     @Model('change')
     @Prop()
     public value: string;
-    @Prop({ default: true })
-    public enabled: boolean;
+    @Prop({ default: false })
+    public disabled: boolean;
     @Prop({ default: false })
     public fullsize: boolean;
     @Prop({ default: true })
@@ -25,11 +25,18 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     })
     public position: MRadioPosition;
 
+    public stateIsError: boolean = false;
+    public stateIsValid: boolean = false;
+
     public name: string = uuid.generate();
     private internalValue: string = '';
 
     public getValue(): string {
         return this.model;
+    }
+
+    public get stateIsDisabled(): boolean {
+        return this.disabled;
     }
 
     public updateValue(value: string): void {

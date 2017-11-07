@@ -32,5 +32,6 @@
             "default": false
         }
     },
-    "overview": "datepicker.overview"
+    "overview": "datepicker.overview",
+    "preview": "datepicker.preview"
 }

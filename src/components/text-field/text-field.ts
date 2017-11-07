@@ -78,7 +78,7 @@ export class MTextField extends ModulVue {
 
     @Watch('type')
     private typeChanged(type: MTextFieldType): void {
-        console.warn('MTextField - Change of property "type" is not supported');
+        console.warn('<' + TEXT_FIELD_NAME + '>: Change of property "type" is not supported');
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
 
@@ -149,7 +149,7 @@ export class MTextField extends ModulVue {
     }
 
     private get hasValue(): boolean {
-        return !!this.value;
+        return !!this.model;
     }
 
     private get isFocus(): boolean {

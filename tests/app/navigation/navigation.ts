@@ -1,22 +1,11 @@
-import Vue from 'vue';
+import { ModulVue } from '../../../src/utils/vue/vue';
 import Component from 'vue-class-component';
 import WithRender from './navigation.html';
 import Meta from '../../../src/meta/meta';
 
-class Choice {
-    public selection: any = '';
-
-    constructor() {
-        setInterval(() => {
-            // console.log(this.selection);
-            // console.log(document.activeElement);
-        }, 3000);
-    }
-}
-
 @WithRender
 @Component
-export class Navigation extends Vue {
+export class Navigation extends ModulVue {
     public routes: string[] = [];
 
     public mounted(): void {

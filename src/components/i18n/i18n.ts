@@ -16,7 +16,7 @@ export class MI18n extends ModulVue {
 
     public created(): void {
         if (!this.$i18n) {
-            throw new Error('MI18n -> this.$i18n is undefined, you must register the i18n plugin.');
+            throw new Error('<' + I18N_NAME + '>: this.$i18n is undefined, you must register the i18n plugin.');
         }
     }
 
@@ -25,7 +25,7 @@ export class MI18n extends ModulVue {
         if (this.k) {
             result = this.$i18n.translate(this.k);
         } else if (this.i18nKey) {
-            console.warn('MI18n -> attribute i18n-key is deprecated; use attribute "k" instead.');
+            console.warn('<' + I18N_NAME + '>: Prop i18n-key is deprecated; use prop "k" instead.');
             result = this.$i18n.translate(this.i18nKey);
         }
 

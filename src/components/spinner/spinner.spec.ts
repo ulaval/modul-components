@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import SpinnerPlugin, { MSpinner, MSpinnerMode, MSpinnerStyle, MSpinnerSize } from './spinner';
+import SpinnerPlugin, { MSpinner, MSpinnerStyle, MSpinnerSize } from './spinner';
 
 const MODE_LOADING_CSS: string = 'm--is-loading';
 const MODE_PROCESSING_CSS: string = 'm--is-processing';
@@ -10,13 +10,6 @@ const SKIN_LIGHTER_CSS: string = 'm--is-lighter';
 const SIZE_SMALL_CSS: string = 'm--is-small';
 
 let spinner: MSpinner;
-
-describe('MSpinnerMode', () => {
-    it('validates enum', () => {
-        expect(MSpinnerMode.Loading).toEqual('loading');
-        expect(MSpinnerMode.Processing).toEqual('processing');
-    });
-});
 
 describe('MSpinnerStyle', () => {
     it('validates enum', () => {
@@ -48,27 +41,6 @@ describe('spinner', () => {
             expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
             expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeFalsy();
         }
-    });
-
-    it('mode prop', () => {
-        let wrap: Element | null = (spinner as Vue).$el.querySelector('m-spinner__wrap');
-        if (wrap) {
-            expect(wrap.classList.contains(MODE_PROCESSING_CSS)).toBeFalsy();
-        }
-        spinner.mode = MSpinnerMode.Processing;
-        Vue.nextTick(() => {
-            if (wrap) {
-                expect(wrap.classList.contains(MODE_PROCESSING_CSS)).toBeTruthy();
-                expect(wrap.classList.contains(MODE_LOADING_CSS)).toBeFalsy();
-            }
-            spinner.mode = MSpinnerMode.Loading;
-            Vue.nextTick(() => {
-                if (wrap) {
-                    expect(wrap.classList.contains(MODE_LOADING_CSS)).toBeTruthy();
-                    expect(wrap.classList.contains(MODE_PROCESSING_CSS)).toBeFalsy();
-                }
-            });
-        });
     });
 
     it('skin prop', () => {

@@ -9,6 +9,7 @@ import PortalPlugin from 'portal-vue';
 import SecurityPlugin, { SecurityPluginOptions } from './http/security';
 import SpritesPlugin from './svg/sprites';
 import * as TouchPlugin from 'vue-touch';
+import ConfirmPlugin from './modal/confirm';
 
 export interface UtilsPluginOptions {
     securityPluginOptions: SecurityPluginOptions;
@@ -29,6 +30,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(SecurityPlugin, o.securityPluginOptions);
         Vue.use(SpritesPlugin);
         Vue.use(TouchPlugin, { name: 'v-touch' });
+        Vue.use(ConfirmPlugin);
     }
 };
 

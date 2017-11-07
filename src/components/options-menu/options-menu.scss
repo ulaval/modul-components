@@ -1,7 +1,13 @@
 @import 'abstracts/variables';
 
 .m-options-menu {
-    background-color: $m-color--white;
-    display: table;
-    width: 100%;
+    display: inline-flex;
+
+    &__wrap {
+        background-color: $m-color--white;
+        display: table;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
 }

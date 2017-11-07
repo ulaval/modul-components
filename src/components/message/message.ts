@@ -34,8 +34,6 @@ export class MMessage extends Vue {
     @Prop()
     public visible: boolean;
 
-    public componentName = MESSAGE_NAME;
-
     private internalPropVisible: boolean = true;
 
     private get propVisible(): boolean {

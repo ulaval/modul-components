@@ -20,10 +20,6 @@ export class MTable extends Vue {
 
     @Prop({ default: false })
     public withOptionsMenu: boolean;
-    @Prop({ default: false })
-    public demo: boolean;
-
-    public componentName: string = TABLE_NAME;
 
     private get hasHeader(): boolean {
         if (this.$slots[HEADER] || this.$slots[MTableHeaderPosition.Left] || this.$slots[MTableHeaderPosition.Right]) {

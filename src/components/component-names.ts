@@ -14,6 +14,7 @@ export const DYNAMIC_TEMPLATE_NAME: string = 'm-dynamic-template';
 export const FLEX_TEMPLATE_NAME: string = 'm-flex-template';
 export const I18N_NAME: string = 'm-i18n';
 export const ICON_NAME: string = 'm-icon';
+export const ICON_BUTTON_NAME: string = 'm-icon-button';
 export const INPUT_STYLE_NAME: string = 'm-input-style';
 export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
@@ -52,7 +53,6 @@ export const components: string[] = [
     ACCORDION_GROUP_NAME,
     ACCORDION_NAME,
     BULLET_LIST_NAME,
-    LIST_ITEM_NAME,
     BUTTON_NAME,
     BUTTON_GROUP_NAME,
     CHECKBOX_NAME,
@@ -65,9 +65,11 @@ export const components: string[] = [
     FLEX_TEMPLATE_NAME,
     I18N_NAME,
     ICON_NAME,
+    ICON_BUTTON_NAME,
     INPUT_STYLE_NAME,
     LIMIT_TEXT_NAME,
     LINK_NAME,
+    LIST_ITEM_NAME,
     MESSAGE_NAME,
     MODAL_NAME,
     NAV_BAR_NAME,

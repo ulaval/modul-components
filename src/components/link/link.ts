@@ -46,8 +46,6 @@ export class MLink extends ModulVue {
     @Prop({ default: false })
     public disabled: boolean;
 
-    public componentName: string = LINK_NAME;
-
     protected mounted(): void {
         if (this.isExternalLink) {
             this.$refs['link']['setAttribute']('title', this.$i18n.translate('m-link:open-new-tab'));
@@ -79,6 +77,10 @@ export class MLink extends ModulVue {
 
     private get isButton(): boolean {
         return this.mode == MLinkMode.Button;
+    }
+
+    private get isUnvisited(): boolean {
+        return this.isButton ? true : this.unvisited;
     }
 
     private get isIconPositionRight(): boolean {

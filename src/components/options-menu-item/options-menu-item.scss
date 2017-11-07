@@ -15,33 +15,20 @@
         color: $m-color--grey-darker;
         width: 32px;
         padding-left: $m-padding;
-
-        &.is-empty {
-            padding-left: 0;
-            width: 0;
-        }
     }
 
     &__text {
         color: $m-color--black;
         padding-right: $m-padding;
         padding-left: 10px;
-
-        &.is-empty {
-            padding-left: 0;
-        }
-
-        .m-options-menu-item__icon.is-empty + & {
-            padding-left: $m-padding;
-        }
     }
 
-    &.disabled {
+    &.m-is--disabled {
         cursor: default;
     }
 
-    &:hover:not(.disabled),
-    &:focus:not(.disabled) {
+    &:hover:not(.m-is--disabled),
+    &:focus:not(.m-is--disabled) {
         background-color: $m-color--grey-lighter;
     }
 
@@ -49,11 +36,11 @@
         outline: 0;
     }
 
-    &:hover:not(.disabled) &__icon {
+    &:hover:not(.m-is--disabled) &__icon {
         color: $m-color--black-grey;
     }
 
-    &:active:not(.disabled) {
+    &:active:not(.m-is--disabled) {
         background-color: $m-color--interactive-lightest;
     }
 }

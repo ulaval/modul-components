@@ -17,7 +17,6 @@ export class MTabs extends BaseTabs implements MTabsInterface {
     @Prop()
     public value: string;
 
-    public componentName = TABS_NAME;
     private internalValue: string = '';
     private hasModel: boolean = true;
 

@@ -7,20 +7,34 @@ import WithRender from './options-menu.html?style=./options-menu.scss';
 import { OPTIONS_MENU_NAME } from '../component-names';
 import PopupPlugin from '../popup/popup';
 import I18nPlugin from '../i18n/i18n';
+import { MPopperPlacement } from '../popper/popper';
+import IconButtonPlugin from '../icon-button/icon-button';
+
+export enum MOptionsMenuSkin {
+    Light = 'light',
+    Dark = 'dark'
+}
 
 @WithRender
 @Component
 export class MOptionsMenu extends ModulVue {
 
-    @Prop()
-    public options: any;
+    @Prop({ default: MPopperPlacement.BottomStart })
+    public placement: MPopperPlacement;
+    @Prop({
+        default: MOptionsMenuSkin.Light,
+        validator: value => value == MOptionsMenuSkin.Light || value == MOptionsMenuSkin.Dark
+    })
+    public skin: MOptionsMenuSkin;
     @Prop()
     public disabled: boolean;
+    @Prop({ default: '44px' })
+    public size: string;
 
-    private isOpen = false;
+    private open = false;
 
     public close(): void {
-        this.isOpen = false;
+        this.open = false;
     }
 
     protected mounted(): void {
@@ -46,13 +60,19 @@ export class MOptionsMenu extends ModulVue {
         }
     }
 
+    private onFocus(): void {
+        console.log('focus');
+    }
+
+    private onBlur(): void {
+        console.log('blur');
+    }
+
     private onOpen(): void {
-        this.isOpen = true;
         this.$emit('open');
     }
 
     private onClose(): void {
-        this.isOpen = false;
         this.$emit('close');
     }
 }
@@ -61,6 +81,7 @@ const MenuPlugin: PluginObject<any> = {
     install(v, options) {
         v.use(PopupPlugin);
         v.use(I18nPlugin);
+        v.use(IconButtonPlugin);
         v.component(OPTIONS_MENU_NAME, MOptionsMenu);
     }
 };

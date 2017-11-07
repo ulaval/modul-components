@@ -38,5 +38,6 @@
             "default": false
         }
     },
-    "overview": "step.overview"
+    "overview": "step.overview",
+    "preview": "step.preview"
 }

@@ -20,5 +20,6 @@
             "default": "1em"
         }
     },
-    "overview": "icon.overview"
+    "overview": "icon.overview",
+    "preview": "icon.preview"
 }

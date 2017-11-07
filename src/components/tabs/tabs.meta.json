@@ -13,5 +13,6 @@
             "default": 1
         }
     },
-    "overview": "tabs.overview"
+    "overview": "tabs.overview",
+    "preview": false
 }

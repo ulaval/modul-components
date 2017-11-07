@@ -14,13 +14,11 @@ describe('icon', () => {
         let vm = new Vue({
             template: `
             <div>
-                <m-icon ref="a" :name="name" :svgTitle="svgTitle" :width="width" :height="height"></m-icon>
+                <m-icon ref="a" :name="name" :svgTitle="svgTitle"></m-icon>
             </div>`,
             data: {
                 name: 'default',
-                svgTitle: 'default',
-                width: '1em',
-                height: '1em'
+                svgTitle: 'default'
             }
         }).$mount();
         let use: SVGUseElement | null = (vm.$refs.a as Vue).$el.querySelector('use');
@@ -46,13 +44,11 @@ describe('icon', () => {
         let vm = new Vue({
             template: `
             <div>
-                <m-icon ref="a" :name="name" :svgTitle="svgTitle" :width="width" :height="height"></m-icon>
+                <m-icon ref="a" :name="name" :svgTitle="svgTitle"></m-icon>
             </div>`,
             data: {
                 name: 'default',
-                svgTitle: 'default',
-                width: '1em',
-                height: '1em'
+                svgTitle: 'default'
             }
         }).$mount();
         let svgTitle: HTMLTitleElement | null = (vm.$refs.a as Vue).$el.querySelector('title');
@@ -73,63 +69,31 @@ describe('icon', () => {
         });
     });
 
-    it('width prop', () => {
+    it('size prop', () => {
         let vm = new Vue({
             template: `
             <div>
-                <m-icon ref="a" :name="name" :svgTitle="svgTitle" :width="width" :height="height"></m-icon>
+                <m-icon ref="a" :name="name" :svgTitle="svgTitle" :size="size"></m-icon>
             </div>`,
             data: {
                 name: 'default',
                 svgTitle: 'default',
-                width: '1em',
-                height: '1em'
+                size: '1em'
             }
         }).$mount();
         let element: HTMLElement | null = (vm.$refs.a as Vue).$el;
         if (element) {
             expect(element.getAttribute('width')).toEqual('1em');
         }
-        (vm as any).width = '20px';
+        (vm as any).size = '20px';
         Vue.nextTick(() => {
             if (element) {
                 expect(element.getAttribute('width')).toEqual('20px');
             }
-            (vm as any).width = '1em';
+            (vm as any).size = '1em';
             Vue.nextTick(() => {
                 if (element) {
                     expect(element.getAttribute('width')).toEqual('1em');
-                }
-            });
-        });
-    });
-
-    it('height prop', () => {
-        let vm = new Vue({
-            template: `
-            <div>
-                <m-icon ref="a" :name="name" :svgTitle="svgTitle" :width="width" :height="height"></m-icon>
-            </div>`,
-            data: {
-                name: 'default',
-                svgTitle: 'default',
-                width: '1em',
-                height: '1em'
-            }
-        }).$mount();
-        let element: HTMLElement | null = (vm.$refs.a as Vue).$el;
-        if (element) {
-            expect(element.getAttribute('height')).toEqual('1em');
-        }
-        (vm as any).height = '20px';
-        Vue.nextTick(() => {
-            if (element) {
-                expect(element.getAttribute('height')).toEqual('20px');
-            }
-            (vm as any).height = '1em';
-            Vue.nextTick(() => {
-                if (element) {
-                    expect(element.getAttribute('height')).toEqual('1em');
                 }
             });
         });

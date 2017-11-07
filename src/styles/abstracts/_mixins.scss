@@ -1,10 +1,10 @@
-@mixin m-scrollbar {
+@mixin m-scrollbar() {
     width: $m-scrollbar-width;
     height: $m-scrollbar-width;
     background: transparent;
 }
 
-@mixin m-scrollbar-ie {
+@mixin m-scrollbar-ie() {
     scrollbar-face-color: $m-color--scrollbar;
     scrollbar-shadow-color: $m-color--scrollbar;
     scrollbar-highlight-color: $m-color--white;
@@ -14,11 +14,11 @@
     scrollbar-arrow-color: $m-color--scrollbar;
 }
 
-@mixin m-scrollbar-track-piece {
+@mixin m-scrollbar-track-piece() {
     background: $m-color--scrollbar--light;
 }
 
-@mixin m-scrollbar-thumb {
+@mixin m-scrollbar-thumb() {
     background: $m-color--scrollbar;
 }
 
@@ -47,4 +47,124 @@
     overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
+}
+
+@mixin m-button() {
+    transition-property: background, border-color, color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    border: 1px solid $m-color--interactive;
+    appearance: none;
+    outline: none;
+    user-select: none;
+    text-decoration: none;
+    line-height: 1;
+}
+
+@mixin m-button--primary() {
+    color: $m-color--white;
+    background: $m-color--interactive;
+}
+
+@mixin m-button--secondary() {
+    color: $m-color--interactive;
+    background: $m-color--white;
+}
+
+@mixin m-button--waiting() {
+    cursor: progress;
+    color: $m-color--white;
+    background: $m-color--interactive-lighter;
+    border-color: $m-color--interactive-lighter;
+}
+
+@mixin m-button--disabled() {
+    cursor: not-allowed;
+    color: $m-color--disabled;
+    background: $m-color--white;
+    border-color: $m-color--disabled;
+}
+
+@mixin m-button--hover() {
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        color: $m-color--white;
+        background: $m-color--interactive-light;
+        border-color: $m-color--interactive-light;
+    }
+
+    &:active {
+        color: $m-color--white;
+        background: $m-color--interactive-dark;
+        border-color: $m-color--interactive-dark;
+    }
+}
+
+@mixin m-bullet-list() {
+    &,
+    ul {
+        padding: 0 0 0 $m-margin--l;
+    }
+
+    ul {
+        margin: 0;
+    }
+
+    li {
+        position: relative;
+        list-style: none;
+        margin: 0 0 $m-padding--xs 0;
+
+        &::before {
+            position: absolute;
+            top: 8px; // Magic number
+            left: - $m-margin; // Magic number
+            content: '';
+            transform: translate3d(-50%, 0, 0);
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+
+        > ul {
+            margin: $m-padding--xs 0 0 0;
+        }
+    }
+
+    > li {
+        > ul > li::before,
+        &::before,
+        > ul > li > ul > li::before,
+        > ul > li > ul > li > ul > li::before {
+            width: 4px;
+            height: 4px;
+        }
+
+        > ul > li::before,
+        &::before {
+            border-radius: 50%;
+            border: 1px solid $m-color--black-grey-light;
+        }
+
+        &::before,
+        > ul > li > ul > li::before {
+            background: $m-color--black-grey-light;
+        }
+
+        > ul > li > ul > li::before,
+        > ul > li > ul > li > ul > li::before {
+            border: 1px solid $m-color--black-grey-light;
+        }
+
+        > ul > li > ul > li > ul > li > ul > li::before {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 3px 0 3px 4px;
+            border-color: transparent transparent transparent $m-color--black-grey-light;
+        }
+    }
 }

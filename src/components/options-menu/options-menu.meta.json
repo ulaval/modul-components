@@ -15,5 +15,5 @@
         }
     },
     "overview": "options-menu.overview",
-    "preview": false
+    "preview": "options-menu.preview"
 }

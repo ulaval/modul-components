@@ -11,24 +11,25 @@
             ],
             "default": 0
         },
-        "mode": {
+        "skin": {
             "type": "string",
             "values": [
                 "primary",
-                "secondary",
-                "icon"
+                "secondary"
             ],
             "default": 0
         },
-        "state": {
-            "type": "string",
-            "values": [
-                "default",
-                "waiting",
-                "selected",
-                "disabled"
-            ],
-            "default": 0
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
+            "type": "boolean",
+            "default": false
+        },
+        "fullSize": {
+            "type": "boolean",
+            "default": false
         },
         "iconName": {
             "type": "string"
@@ -43,15 +44,9 @@
         },
         "iconSize": {
             "type": "string",
-            "values": [
-                "16px"
-            ],
-            "default": 0
-        },
-        "fullSize": {
-            "type": "boolean",
-            "default": false
+            "default": "12px"
         }
     },
-    "overview": "button.overview"
+    "overview": "button.overview",
+    "preview": "button.preview"
 }
