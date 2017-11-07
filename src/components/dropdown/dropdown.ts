@@ -378,19 +378,15 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
-                el.style.opacity = '0';
+                let height: number = el.clientHeight;
+                el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+                el.style.transition = DROPDOWN_STYLE_TRANSITION;
+                el.style.overflowY = 'hidden';
+                el.style.maxHeight = '0';
+                el.style.width = this.$el.clientWidth + 'px';
                 setTimeout(() => {
-                    let height: number = el.clientHeight;
-                    el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
-                    el.style.transition = DROPDOWN_STYLE_TRANSITION;
-                    el.style.overflowY = 'hidden';
-                    el.style.maxHeight = '0';
-                    el.style.removeProperty('opacity');
-                    el.style.width = this.$el.clientWidth + 'px';
-                    setTimeout(() => {
-                        el.style.maxHeight = height + 'px';
-                        done();
-                    }, 0);
+                    el.style.maxHeight = height + 'px';
+                    done();
                 }, 0);
             } else {
                 done();
