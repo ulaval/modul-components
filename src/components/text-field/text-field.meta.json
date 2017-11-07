@@ -1,6 +1,7 @@
 {
     "tag": "m-text-field",
     "name": "m-text-field-meta:name",
+    "production": true,
     "attributes": {
         "value": {
             "type": "string"

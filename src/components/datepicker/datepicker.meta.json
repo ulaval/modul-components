@@ -1,6 +1,7 @@
 {
     "tag": "m-datepicker",
     "name": "m-datepicker-meta:name",
+    "production": true,
     "attributes": {
         "value": {
             "type": "moment.Moment",

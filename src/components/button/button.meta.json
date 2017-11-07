@@ -1,6 +1,7 @@
 {
     "tag": "m-button",
     "name": "m-button-meta:name",
+    "production": true,
     "attributes": {
         "type": {
             "type": "string",
