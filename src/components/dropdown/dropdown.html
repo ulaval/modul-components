@@ -58,7 +58,7 @@
                         placeholder="Recherche"
                         ref="researchInput"
                         v-model="selectedText">
-                <m-icon-button class="m-dropdown__header__research-button" icon-name="search">
+                <m-icon-button class="m-dropdown__header__research-button" icon-name="search" @click="focusOnResearchInput">
                     <m-i18n k="m-dropdown:research"></m-i18n>
                 </m-icon-button>
             </div>
