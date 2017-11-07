@@ -2,7 +2,7 @@
 @import 'abstracts/mixins';
 
 .m-popup {
-    @include m-visually-hidden();
+    display: inline-flex;
 
     &__body {
         &.m--has-shadow {
