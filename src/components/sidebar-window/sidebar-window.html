@@ -16,9 +16,9 @@
                         <m-i18n k="m-base-window:close"></m-i18n>
                     </button>
                     <header class="m-sidebar__header"
-                            :class="{ 'm--has-close-button-right': closeButton && closeButtonPosition == 'right',
-                                      'm--has-close-button-left': closeButton && closeButtonPosition == 'left',
-                                      'm--no-content': !hasHeaderSlot || !hasTitle,
+                            :class="{ 'm--has-close-button-right': closeButton && closeButtonPosition == 'right' && origin != 'bottom',
+                                      'm--has-close-button-left': closeButton && closeButtonPosition == 'left' && origin != 'bottom',
+                                      'm--no-content': (!hasHeaderSlot || !hasTitle) && closeButton && origin != 'bottom',
                                       'm--no-padding': !padding || !paddingHeader }"
                             v-if="hasHeader">
                         <h2 class="m-sidebar__title" v-if="hasTitle">{{ title }}</h2>
