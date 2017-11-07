@@ -4,7 +4,7 @@ import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
 import WithRender from './modal-window.html?style=./modal-window.scss';
-import { Portal, PortalMixinImpl } from '../../mixins/portal/portal';
+import { Portal, PortalMixinImpl, PortalMixin } from '../../mixins/portal/portal';
 
 @WithRender
 @Component({
@@ -43,10 +43,12 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     }
 
     private onOk(): void {
+        this.as<PortalMixin>().propOpen = false;
         this.$emit('ok');
     }
 
     private onCancel(): void {
+        this.as<PortalMixin>().propOpen = false;
         this.$emit('cancel');
     }
 
