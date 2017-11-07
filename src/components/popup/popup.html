@@ -39,7 +39,9 @@
                :open-trigger="propOpenTrigger"
                :trigger="trigger"
                v-if="isMqMaxS && !desktopOnly">
-        <slot name="trigger"></slot>
+        <div slot="trigger" v-if="hasTriggerSlot">
+            <slot name="trigger"></slot>
+        </div>
         <div slot="header" class="m-popup__header" v-if="hasHeaderSlot">
             <slot name="header"></slot>
         </div>
