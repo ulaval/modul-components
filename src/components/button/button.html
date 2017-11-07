@@ -11,8 +11,8 @@
         @blur="onBlur">
     <m-icon aria-hidden="true"
             class="m-button__icon m--is-left"
-            :name="iconName" :width="iconSize"
-            :height="iconSize"
+            :name="iconName"
+            :size="iconSize"
             v-if="hasIconeLeft"></m-icon>
     <m-spinner aria-hidden="true" class="m-button__icon m--is-left" skin="lighter" size="small" v-if="isWaiting"></m-spinner>
     <span class="m-button__text">
@@ -24,7 +24,6 @@
     <m-icon aria-hidden="true"
             class="m-button__icon m--is-right"
             :name="iconName"
-            :width="iconSize"
-            :height="iconSize"
+            :size="iconSize"
             v-if="hasIconeRight"></m-icon>
 </button>

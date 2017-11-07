@@ -14,13 +14,11 @@ describe('icon', () => {
         let vm = new Vue({
             template: `
             <div>
-                <m-icon ref="a" :name="name" :svgTitle="svgTitle" :width="width" :height="height"></m-icon>
+                <m-icon ref="a" :name="name" :svgTitle="svgTitle"></m-icon>
             </div>`,
             data: {
                 name: 'default',
-                svgTitle: 'default',
-                width: '1em',
-                height: '1em'
+                svgTitle: 'default'
             }
         }).$mount();
         let use: SVGUseElement | null = (vm.$refs.a as Vue).$el.querySelector('use');
@@ -46,13 +44,11 @@ describe('icon', () => {
         let vm = new Vue({
             template: `
             <div>
-                <m-icon ref="a" :name="name" :svgTitle="svgTitle" :width="width" :height="height"></m-icon>
+                <m-icon ref="a" :name="name" :svgTitle="svgTitle"></m-icon>
             </div>`,
             data: {
                 name: 'default',
-                svgTitle: 'default',
-                width: '1em',
-                height: '1em'
+                svgTitle: 'default'
             }
         }).$mount();
         let svgTitle: HTMLTitleElement | null = (vm.$refs.a as Vue).$el.querySelector('title');

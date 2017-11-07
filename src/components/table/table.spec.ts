@@ -18,7 +18,6 @@ describe('table', () => {
     beforeEach(() => {
         Vue.use(TablePlugin);
         table = new MTable().$mount();
-        table.demo = true;
     });
 
     it('css class for table are not present', () => {

@@ -1,10 +1,10 @@
 {
     "m-datepicker": {
         "placeholder": "jj/mm/aaaa",
-        "open-calendar-desc": "ouvrir le calendrier",
-        "close-calendar-desc": "fermer le calendrier",
-        "out-of-range-error": "date hors limites",
-        "format-error": "format invalide",
-        "required-error": "date requise"
+        "open-calendar-desc": "Ouvrir le calendrier",
+        "close-calendar-desc": "Fermer le calendrier",
+        "out-of-range-error": "Date hors limites",
+        "format-error": "Format invalide",
+        "required-error": "Date requise"
     }
 }

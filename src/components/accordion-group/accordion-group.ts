@@ -20,8 +20,6 @@ export class MAccordionGroup extends BaseAccordionGroup {
     @Prop()
     public value: string[];
 
-    public componentName: string = ACCORDION_GROUP_NAME;
-
     private accordions: string[] = [];
     private openAccordions: string[] = [];
 

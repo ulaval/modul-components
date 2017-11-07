@@ -15,8 +15,6 @@ export class MIcon extends Vue {
     @Prop({ default: '1em' })
     public size: string;
 
-    public componentName = ICON_NAME;
-
     protected beforeMount(): void {
         if (!document.getElementById(this.name)) {
             console.warn( '"' + this.name + '" is not a valid svg id. Make sure that the sprite has been loaded via the $svg instance service.');

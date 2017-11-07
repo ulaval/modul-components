@@ -76,5 +76,5 @@
         }
     },
     "overview": "popup.overview",
-    "preview": false
+    "preview": "popup.preview"
 }

@@ -42,7 +42,6 @@ export class MStep extends ModulVue {
     @Prop({ default: false })
     public last: boolean;
 
-    public componentName = STEP_NAME;
     private internalOpen: boolean = false;
     private internalMode: MStepMode | string = MStepMode.Default;
 

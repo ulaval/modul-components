@@ -12,7 +12,6 @@ import I18nPlugin from '../i18n/i18n';
 @WithRender
 @Component
 export class MListItem extends ModulVue {
-    public componentName = LIST_ITEM_NAME;
 
     @Prop({ default: true })
     public deleteButton: boolean;
