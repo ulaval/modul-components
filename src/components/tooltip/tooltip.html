@@ -1,19 +1,24 @@
-<m-popup class="m-tooltip" :class="{ 'm--is-mode-icon': propMode == 'icon', 'm--is-mode-link': propMode != 'icon' }" :open="propOpen" :shadow="false"
-    @open="onOpen" @close="onClose" :placement="placement" padding="" :disabled="disabled" :classNamePortalTarget="classNamePortalTarget">
-    <template v-if="hasDefaultSlot">
-        <m-icon-button class="m-tooltip__icon" icon-name="information" v-if="propMode == 'icon'">
-            <slot></slot>
-        </m-icon-button>
-        <m-link class="m-tooltip__link" mode="button" v-if="propMode != 'icon'">
-            <slot></slot>
-        </m-link>
-    </template>
-    <div slot="body" class="m-tooltip__body-container" :class="{ 'm--has-close-button': propCloseButton }" v-if="hasBodySlot">
+<m-popup :open.sync="propOpen"
+            @open="onOpen"
+            @close="onClose"
+            padding=""
+            :placement="placement"
+            :disabled="disabled"
+            :close-on-backdrop="true"
+            class="m-tooltip" :class="{ 'm--is-disabled': disabled }">
+    <m-icon-button slot="trigger" class="m-tooltip__icon" icon-name="information" v-if="propMode == 'icon'">
+        {{ open ? propCloseTitle : propOpenTitle }}
+    </m-icon-button>
+    <m-link slot="trigger" class="m-tooltip__link" mode="button" v-if="propMode != 'icon'">
+        <slot name="link"></slot>
+    </m-link>
+
+    <div class="m-tooltip__body-container" :class="{ 'm--has-close-button': propCloseButton }">
         <m-icon-button icon-name="default" icon-size="10px" @click="close" class="m-tooltip__close-button" v-if="propCloseButton">
             <m-i18n k="m-tooltip:close"></m-i18n>
         </m-icon-button>
         <div class="m-tooltip__body">
-            <slot name="body"></slot>
+            <slot></slot>
         </div>
     </div>
 </m-popup>

@@ -35,14 +35,12 @@ export class MTooltip extends ModulVue {
     public classNamePortalTarget: string;
     @Prop({ default: false })
     public disabled: boolean;
+    @Prop()
+    public openTitle: string;
+    @Prop()
+    public closeTitle: string;
 
-    private propOpen: boolean;
-    private error: boolean = false;
-    private isEqMaxS: boolean = false;
-
-    protected mounted(): void {
-        this.propOpen = this.open;
-    }
+    private propOpen = false;
 
     @Watch('open')
     private openChanged(open: boolean): void {
@@ -58,14 +56,7 @@ export class MTooltip extends ModulVue {
     }
 
     private get hasDefaultSlot(): boolean {
-        if (!this.$slots.default) {
-            console.warn('m-tooltip icon mode needs a text in its default slot that will describe its function. This text will be hidden and only read by the voice readers.');
-        }
         return !!this.$slots.default;
-    }
-
-    private get hasBodySlot(): boolean {
-        return !!this.$slots.body;
     }
 
     private onOpen(): void {
@@ -76,8 +67,16 @@ export class MTooltip extends ModulVue {
         this.$emit('close', event);
     }
 
+    private get propOpenTitle(): string {
+        return this.openTitle == undefined ? this.$i18n.translate('m-tooltip:open') : this.openTitle;
+    }
+
+    private get propcloseTitle(): string {
+        return this.closeTitle == undefined ? this.$i18n.translate('m-tooltip:close') : this.closeTitle;
+    }
+
     private close(): void {
-        // ((this.$children[0] as MPopup).$children[0] as MPopper).propOpen = false;
+        this.propOpen = false;
     }
 }
 
