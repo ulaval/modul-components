@@ -235,6 +235,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.as<InputState>().isDisabled || this.waiting;
     }
 
+    public get hasLabel(): boolean {
+        return !!this.label;
+    }
+
     private onKeydownEnter($event: KeyboardEvent): void {
         if (!this.open) {
             this.open = true;

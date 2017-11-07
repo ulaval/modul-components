@@ -50,7 +50,7 @@
             width="100%"
             ref="popper"
             @open="onOpen">
-        <div slot="header" v-show="isMqMaxS" :aria-hidden="!isMqMaxS">
+        <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="filterable">
                 <input class="m-dropdown__header__research-input"
@@ -62,7 +62,7 @@
                     <m-i18n k="m-dropdown:research"></m-i18n>
                 </m-icon-button>
             </div>
-        </div>
+        </template>
         <ul class="m-dropdown__list"
             ref="items"
             :style="{ 'max-height': propMaxHeightList }">
