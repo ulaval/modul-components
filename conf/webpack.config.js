@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
+const DefinePlugin = require("webpack/lib/DefinePlugin");
 const path = require('path');
 
 function resolve(dir) {
@@ -39,73 +40,73 @@ module.exports = function (env) {
                 ],
             }],
             rules: [{
-                    enforce: 'post',
-                    test: /\.css$/,
-                    use: ['style-loader', 'css-loader']
-                },
-                {
-                    enforce: 'post',
-                    test: /\.scss$/,
-                    use: ['style-loader',
-                        'css-loader',
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                plugins: function () {
-                                    return [
-                                        require('autoprefixer')
-                                    ];
-                                }
+                enforce: 'post',
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                enforce: 'post',
+                test: /\.scss$/,
+                use: ['style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true,
+                            plugins: function () {
+                                return [
+                                    require('autoprefixer')
+                                ];
                             }
                         }
-                    ]
-                },
-                {
-                    enforce: 'pre',
-                    test: /\.scss$/,
-                    loader: "sass-loader",
-                    options: {
-                        sourceMap: true,
-                        includePaths: ["./src/styles"]
                     }
-                },
-                {
-                    test: /\.html$/,
-                    loader: 'vue-template-loader',
-                    exclude: resolve('tests/app/index.html'),
-                    options: {
-                        scoped: true
-                    }
-                },
-                {
-                    test: /\.ts$/,
-                    loader: 'awesome-typescript-loader',
-                    options: {
-                        configFileName: resolve(isProd ? 'tsconfig.json' : 'tsconfig.dev.json')
-                    }
-                },
-                {
-                    test: /\.ts$/,
-                    enforce: 'pre',
-                    loader: 'tslint-loader',
-                    include: [resolve('src'), resolve('test')],
-                    options: {
-                        configFile: 'conf/tslint.json',
-                        formatter: 'grouped',
-                        formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
-                        emitErrors: true,
-                    }
-                },
-                {
-                    test: /\.svg$/,
-                    loader: 'svg-inline-loader',
-                    options: {
-                        removeTags: true,
-                        removingTags: ['desc', 'defs', 'style'],
-                        removeSVGTagAttrs: true
-                    }
+                ]
+            },
+            {
+                enforce: 'pre',
+                test: /\.scss$/,
+                loader: "sass-loader",
+                options: {
+                    sourceMap: true,
+                    includePaths: ["./src/styles"]
                 }
+            },
+            {
+                test: /\.html$/,
+                loader: 'vue-template-loader',
+                exclude: resolve('tests/app/index.html'),
+                options: {
+                    scoped: true
+                }
+            },
+            {
+                test: /\.ts$/,
+                loader: 'awesome-typescript-loader',
+                options: {
+                    configFileName: resolve(isProd ? 'tsconfig.json' : 'tsconfig.dev.json')
+                }
+            },
+            {
+                test: /\.ts$/,
+                enforce: 'pre',
+                loader: 'tslint-loader',
+                include: [resolve('src'), resolve('test')],
+                options: {
+                    configFile: 'conf/tslint.json',
+                    formatter: 'grouped',
+                    formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
+                    emitErrors: true,
+                }
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-inline-loader',
+                options: {
+                    removeTags: true,
+                    removingTags: ['desc', 'defs', 'style'],
+                    removeSVGTagAttrs: true
+                }
+            }
             ]
         },
         plugins: [
@@ -116,7 +117,12 @@ module.exports = function (env) {
             new ContextReplacementPlugin(
                 /moment[\/\\]locale$/,
                 /en-ca|fr-ca/
-            )
+            ),
+            new DefinePlugin({
+                'process.env': {
+                    NODE_ENV: '"patate"'
+                }
+            })
         ]
     }
 

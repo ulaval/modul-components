@@ -29,6 +29,9 @@ Vue.use(I18nLanguagePlugin);
 Vue.use(FrenchPlugin);
 Vue.use(DefaultSpritesPlugin);
 
+console.log('process', process);
+// console.log('patate', patate);
+
 const vue = new Vue({
     router,
     template: '<router-view></router-view>'
