@@ -1,4 +1,5 @@
 @import 'abstracts/variables';
+@import 'm-popper';
 $m-popper--scale: 0.96 !default;
 $m-popper--margin: $m-margin !default;
 
@@ -7,6 +8,8 @@ $m-popper--margin: $m-margin !default;
     cursor: pointer;
 
     &__article {
+        position: relative;
+
         &.m--is-default-anim {
             transition: transform $m-transition-duration ease-in-out, opacity $m-transition-duration ease;
             opacity: 0;

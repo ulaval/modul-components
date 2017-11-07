@@ -5,6 +5,8 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './input-style.html?style=./input-style.scss';
 import { INPUT_STYLE_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import IconPlugin from '../icon/icon';
+import SpinnerPlugin from '../spinner/spinner';
 
 @WithRender
 @Component({
@@ -20,6 +22,20 @@ export class MInputStyle extends ModulVue {
     @Prop({ default: true })
     public empty: boolean;
 
+    @Prop({ default: 'auto' })
+    public width: boolean;
+
+    @Prop({ default: false })
+    public waiting: boolean;
+
+    private animActive: boolean = false;
+
+    protected mounted(): void {
+        setTimeout(() => {
+            this.animActive = true;
+        }, 0);
+    }
+
     private get hasValue(): boolean {
         return this.hasDefaultSlot && !this.empty;
     }
@@ -29,11 +45,11 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return !!this.label;
+        return !!this.label && this.label != '';
     }
 
     private get isFocus(): boolean {
-        let focus: boolean = this.focus && !this.as<InputState>().disabled;
+        let focus: boolean = this.focus && !this.as<InputState>().disabled && !this.waiting;
         this.$emit('focus', focus);
         return focus;
     }
@@ -46,6 +62,10 @@ export class MInputStyle extends ModulVue {
         return !!this.$slots['right-content'];
     }
 
+    private hasAdjustWidthAutoSlot(): boolean {
+        return !!this.$slots['adjust-width-auto'];
+    }
+
     private onClick(event): void {
         this.$emit('click', event);
     }
@@ -53,6 +73,8 @@ export class MInputStyle extends ModulVue {
 
 const InputStylePlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(IconPlugin);
+        v.use(SpinnerPlugin);
         v.component(INPUT_STYLE_NAME, MInputStyle);
     }
 };

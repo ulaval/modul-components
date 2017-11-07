@@ -18,7 +18,7 @@ import TextFieldPlugin from '../text-field/text-field';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import PopupPlugin from '../popup/popup';
 
-const DROPDOWN_MAX_HEIGHT: number = 220;
+const DROPDOWN_MAX_HEIGHT: string = '220px';
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
 const TEXTFIELD_MIN_WIDTH: string = '130px'; // from text-field.scss
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
@@ -37,7 +37,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public label: string;
     @Prop()
-    public defaultText: string;
+    public placeholder: string;
     @Prop({ default: false })
     public disabled: boolean;
     @Prop({ default: false })
@@ -46,6 +46,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public filterable: boolean;
     @Prop({ default: DROPDOWN_MAX_WIDTH })
     public width: string;
+    @Prop({ default: DROPDOWN_MAX_HEIGHT })
+    public maxHeightList: string;
     @Prop()
     public textNoData: string;
     @Prop()
@@ -63,6 +65,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private internalOpen: boolean = false;
     private dirty: boolean = false;
+
+    private mouseIsDown: boolean = false;
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
@@ -108,8 +112,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.internalOpen = value;
         this.dirty = false;
         this.$nextTick(() => {
-            if (value) {
+            let inputEl: any = this.$refs.input;
+            if (this.internalOpen) {
                 this.$emit('open');
+                inputEl.focus();
+                if (this.filterable) {
+                    inputEl.setSelectionRange(0, this.selectedText.length);
+                }
+                this.scrollToFocused();
             } else {
                 this.$emit('close');
             }
@@ -161,6 +171,18 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.internalFilterRegExp = new RegExp(parsedQuery, 'i');
     }
 
+    public get isEmpty(): boolean {
+        return (this.filterable && this.open) || this.hasValue || (this.hasPlaceholder() && this.open) ? false : true;
+    }
+
+    private get hasValue(): boolean {
+        return this.selectedText != undefined && this.selectedText != '';
+    }
+
+    private hasPlaceholder(): boolean {
+        return this.placeholder != undefined && this.placeholder != '';
+    }
+
     private buildItemsMap(): void {
         this.focusedIndex = -1;
 
@@ -197,6 +219,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return (this.textNoMatch ? this.textNoMatch : this.$i18n.translate('m-dropdown:no-result'));
     }
 
+    private get propMaxHeightList(): string | undefined {
+        return this.as<MediaQueries>().isMqMinS ? this.maxHeightList : undefined;
+    }
+
     private get hasItems(): boolean {
         return this.internalItems.length > 0;
     }
@@ -206,22 +232,17 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get inactive(): boolean {
-        return this.disabled || this.waiting;
+        return this.as<InputState>().isDisabled || this.waiting;
     }
 
-    private onFocus(event: Event): void {
-        this.open = true;
-    }
-
-    private onBlur(event): void {
-        this.open = false;
-    }
-
-    private onMousedown(event): void {
-        this.open = !this.open;
+    public get hasLabel(): boolean {
+        return !!this.label;
     }
 
     private onKeydownEnter($event: KeyboardEvent): void {
+        if (!this.open) {
+            this.open = true;
+        }
         if (this.focusedIndex > -1) {
             let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
             this.model = item.value;
@@ -258,8 +279,43 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private onMousedown() {
+        this.mouseIsDown = true;
+    }
+
+    private onMouseup() {
+        setTimeout(() => {
+            this.mouseIsDown = false;
+        }, 30);
+    }
+
+    private arrowOnKeydownEnter(): void {
+        if (!this.inactive) {
+            this.open = !this.open;
+        }
+    }
+
     private onOpen(): void {
         this.focusSelected();
+        this.open = true;
+    }
+
+    private onFocus(): void {
+        if (!this.mouseIsDown && !this.open && !this.inactive && this.as<MediaQueries>().isMqMinS) {
+            setTimeout(() => {
+                this.open = true;
+            }, 300);
+        }
+    }
+
+    private onBlur(): void {
+        if (!this.mouseIsDown && this.as<MediaQueries>().isMqMinS) {
+            this.open = false;
+        }
+    }
+
+    private focusOnResearchInput(): void {
+        (this.$refs.researchInput as HTMLElement).focus();
     }
 
     private focusSelected(): void {
@@ -299,9 +355,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private scrollToFocused(): void {
-        if (this.focusedIndex > -1) {
+        if (this.focusedIndex > -1 && this.as<MediaQueriesMixin>().isMqMinS) {
             this.$nextTick(() => {
-                let container: Element = (this.$refs.popper as any).popupBody;
+                let container: HTMLElement = this.$refs.items as HTMLElement;
                 if (container) {
                     let focusedItem: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
                     let top = focusedItem.$el.offsetTop;
@@ -321,33 +377,25 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
-            // TODO: mobile
-            // if (this.as<MediaQueriesMixin>().isMqMinS) {
-            let height: number = el.clientHeight > DROPDOWN_MAX_HEIGHT ? DROPDOWN_MAX_HEIGHT : el.clientHeight;
-            el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
-            el.style.transition = DROPDOWN_STYLE_TRANSITION;
-            el.style.overflowY = 'hidden';
-            el.style.maxHeight = '0';
-            el.style.width = this.$el.clientWidth + 'px';
-            setTimeout(() => {
-                el.style.maxHeight = height + 'px';
+            if (this.as<MediaQueriesMixin>().isMqMinS) {
+                el.style.opacity = '0';
+                setTimeout(() => {
+                    let height: number = el.clientHeight;
+                    el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+                    el.style.transition = DROPDOWN_STYLE_TRANSITION;
+                    el.style.overflowY = 'hidden';
+                    el.style.maxHeight = '0';
+                    el.style.removeProperty('opacity');
+                    el.style.width = this.$el.clientWidth + 'px';
+                    setTimeout(() => {
+                        el.style.maxHeight = height + 'px';
+                        done();
+                    }, 0);
+                }, 0);
+            } else {
                 done();
-            }, 0);
-            // } else {
-            //     done();
-            // }
+            }
         });
-    }
-
-    private transitionAfterEnter(el: HTMLElement): void {
-        // TODO: mobile
-        // if (this.as<MediaQueriesMixin>().isMqMinS) {
-        setTimeout(() => {
-            el.style.maxHeight = DROPDOWN_MAX_HEIGHT + 'px';
-            el.style.overflowY = 'auto';
-            this.scrollToFocused();
-        }, 300);
-        // }
     }
 
     private transitionLeave(el: HTMLElement, done: any): void {
@@ -356,7 +404,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 let height: number = el.clientHeight;
                 el.style.width = this.$el.clientWidth + 'px';
                 el.style.maxHeight = height + 'px';
-                el.style.overflowY = 'hidden';
                 el.style.maxHeight = '0';
                 setTimeout(() => {
                     el.style.maxHeight = 'none';

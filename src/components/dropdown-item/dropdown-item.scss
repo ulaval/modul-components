@@ -1,8 +1,7 @@
 @import 'abstracts/variables';
-$m-dropdown-item--color-hover: $m-color--grey-lightest !default;
+$m-dropdown-item--color-hover: $m-color--interactive-lightest !default;
 $m-dropdown-item--color-select: $m-color--grey-light !default;
-$m-dropdown-item--color-focus: $m-color--interactive-lightest !default;
-$m-dropdown-item--color-active: $m-color--interactive-lightest !default;
+$m-dropdown-item--color-active: $m-color--grey-lightest !default;
 
 .m-dropdown-item {
     transition: background $m-transition-duration ease;
@@ -17,35 +16,37 @@ $m-dropdown-item--color-active: $m-color--interactive-lightest !default;
 
     @include m-word-wrap();
 
-    &:not(.m--is-disabled) {
-        &:not(.m--is-inactive) {
-            &:not(.m--is-selected) {
-                cursor: pointer;
+    @media (min-width: $m-bp--min--s) {
+        &:not(.m--is-disabled) {
+            &:not(.m--is-inactive) {
+                &:not(.m--is-selected) {
+                    cursor: pointer;
 
-                &:hover,
-                &:focus,
-                &.m--is-focus {
-                    background: $m-dropdown-item--color-hover;
-                }
+                    &:hover,
+                    &:focus,
+                    &.m--is-focus {
+                        background: $m-dropdown-item--color-hover;
+                    }
 
-                &:active {
-                    background: $m-dropdown-item--color-active;
+                    &:active {
+                        background: $m-dropdown-item--color-active;
+                    }
                 }
             }
         }
-    }
 
-    &.m--is-disabled {
-        cursor: not-allowed;
-        color: $m-color--grey;
-    }
+        &.m--is-disabled {
+            cursor: not-allowed;
+            color: $m-color--grey;
+        }
 
-    &.m--is-selected {
-        background: $m-dropdown-item--color-select;
-
-        .m-dropdown__list__element-text {
-            cursor: default;
+        &.m--is-selected {
             background: $m-dropdown-item--color-select;
+
+            .m-dropdown__list__element-text {
+                cursor: default;
+                background: $m-dropdown-item--color-select;
+            }
         }
     }
 }

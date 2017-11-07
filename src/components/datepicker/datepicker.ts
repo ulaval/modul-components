@@ -211,12 +211,6 @@ export class MDatepicker extends ModulVue {
         return this.prepareDataForTableLayout([...this.previousDays, ...this.days, ...this.nextDays], 7);
     }
 
-    private openCalendar() {
-        this.view = VIEW_DAY;
-        this.isOpen = true;
-        this.$emit('open');
-    }
-
     private onBlur(event) {
         if (event.target.value == '') {
             this.selectedMomentDate = moment();

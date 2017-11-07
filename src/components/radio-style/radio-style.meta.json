@@ -1,0 +1,15 @@
+{
+    "tag": "m-radio-style",
+    "name": "m-radio-style-meta:name",
+    "attributes": {
+        "position": {
+            "type": "string",
+            "values": [
+                "left",
+                "right"
+            ],
+            "default": 0
+        }
+    },
+    "overview": "radio-style.overview"
+}

@@ -1,20 +1,26 @@
-<div class="m-input-style" :class="{ 'm--is-focus' : isFocus,
-               'm--is-label-up': labelIsUp,
-               'm--is-disabled' : isDisabled,
-               'm--has-error' : hasError,
-               'm--is-valid' : isValid,
-               'm--has-label': hasLabel,
-               'm--has-value': hasValue }" @click="onClick">
-    <label class="m-input-style__label" v-if="hasLabel">
-        <m-icon class="m-input-style__disabled-icon" name="default" v-if="disabled">
-        </m-icon>{{ label }}</label>
-    <div class="m-input-style__body">
+<div class="m-input-style"
+    :class="{ 'm--is-focus' : isFocus,
+    'm--is-label-up': labelIsUp,
+    'm--is-disabled' : isDisabled,
+    'm--is-waiting' : waiting,
+    'm--has-error' : hasError,
+    'm--is-valid' : isValid,
+    'm--has-label': hasLabel,
+    'm--has-value': hasValue,
+    'm--is-anim-active': animActive }"
+    @click="onClick"
+    :style="{ width: width }">
+    <label class="m-input-style__label" v-if="hasLabel">{{ label }}</label>
+    <div class="m-input-style__body" :style="{ width: width }">
         <div class="m-input-style__body__left">
             <slot></slot>
-            <m-i18n k="m-input-style:empty-value" class="m-input-style__body__transparent-text" v-if="!hasDefaultSlot"></m-i18n>
+            <m-i18n k="m-input-style:empty-value" class="m-input-style__body__transparent-text" aria-hidden="true" v-if="!hasDefaultSlot"></m-i18n>
+            <div class="m-input-style__body__adjust-width-auto" aria-hidden="true" v-if="hasAdjustWidthAutoSlot"><slot name="adjust-width-auto"></slot></div>
         </div>
-        <div class="m-input-style__body__right" v-if="hasRightContentSlot">
+        <div class="m-input-style__body__right" v-if="hasRightContentSlot && !isDisabled">
             <slot name="right-content"></slot>
         </div>
+        <m-spinner size="small" class="m-input-style__spinner" v-if="waiting"></m-spinner>
+        <m-icon class="m-input-style__disabled-icon" name="default" v-if="isDisabled && !waiting"></m-icon>
     </div>
 </div>

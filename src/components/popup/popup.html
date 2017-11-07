@@ -1,4 +1,4 @@
-<div class="m-popup" :id="id" :style="{ width: width }">
+<div class="m-popup" :id="id" :style="{ width: width }" aria-hidden="true">
     <m-popper :open.sync="propOpen"
               @open="onOpen()"
               @close="onClose()"

@@ -1,54 +1,71 @@
-<div class="m-dropdown" ref="mDropdown" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }" :style="{ maxWidth: width }">
-    <m-text-field ref="mDropdownTextField"
-        mode="dropdown"
-        :label="label"
-        v-model="selectedText"
-        :state="propState"
-        :editable="filterable && !isMqMaxS"
-        :force-focus="open"
-        :placeholder="defaultText"
-        :disabled="disabled"
-        :waiting="waiting"
-        v-m-popup:popper
-        @keydown.enter.prevent="onKeydownEnter($event)"
-        @keydown.return.prevent="onKeydownEnter($event)"
-        @keydown.esc.prevent="onKeydownEscape($event)"
-        @keydown.up.prevent="onKeydownUp($event)"
-        @keydown.down.prevent="onKeydownDown($event)"
-        @keydown="onKeydown($event)"
-        @focus="onFocus($event)"
-        @blur="onBlur($event)"
-        @mousedown="onMousedown($event)">
-    </m-text-field>
+<div class="m-dropdown"
+     :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting, 'm--is-filterable': filterable }"
+     :style="{ width: width, 'max-width': maxWidth }"
+     ref="mDropdown"
+     @mousedown="onMousedown"
+     @mouseup="onMouseup">
+    <m-input-style ref="mDropdownValue"
+      v-m-popup:popper
+     :label="label"
+     :disabled="isDisabled"
+     :waiting="waiting"
+     :focus="open"
+     :empty="isEmpty"
+     :error="hasError"
+     :valid="isValid"
+     :width="width">
+        <input type="text"
+            ref="input"
+            class="m-dropdown__input"
+            :disabled="inactive"
+            :readonly="!filterable"
+            :placeholder="placeholder"
+            @keydown.enter.prevent="onKeydownEnter($event)"
+            @keydown.return.prevent="onKeydownEnter($event)"
+            @keydown.esc.prevent="onKeydownEscape($event)"
+            @keydown.up.prevent="onKeydownUp($event)"
+            @keydown.down.prevent="onKeydownDown($event)"
+            @focus="onFocus"
+            @blur="onBlur"
+            v-model="selectedText">
+
+        <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
+        <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="!waiting">
+            <m-icon-button icon-name="dropdown-arrow" button-size="22px" @keydown.enter.prevent="arrowOnKeydownEnter">
+                <m-i18n k="m-dropdown:open" v-if="!open"></m-i18n>
+                <m-i18n k="m-dropdown:close" v-if="open"></m-i18n>
+            </m-icon-button>
+        </div>
+    </m-input-style>
 
     <m-popup placement="bottom-start"
             :disabled="inactive"
             :open.sync="open"
             :enter="transitionEnter"
-            :after-enter="transitionAfterEnter"
             :leave="transitionLeave"
             :padding-header="false"
             :padding-body="false"
             :focus-management="false"
-            :close-on-backdrop="false"
-            open-trigger="manual"
+            :close-on-backdrop="true"
             width="100%"
             ref="popper"
             @open="onOpen">
-        <!-- <template slot="header" v-if="hasLabel && isMqMaxS">
-            <h2 class="m-dropdown__header__label">{{ label }}</h2>
-            <div class="m-dropdown__header__research" v-if="editable">
-                <input type="text"
-                    class="m-dropdown__header__research-input"
-                    :placeholder="researchText"
-                    v-model="textElement">
-                <m-icon-button icon-name="default" @click="focusOnResearchInput">
-                    <m-i18n k="m-dropdown:search"></m-i18n>
+        <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
+            <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
+            <div class="m-dropdown__header__research" v-if="filterable">
+                <input class="m-dropdown__header__research-input"
+                        type="text"
+                        placeholder="Recherche"
+                        ref="researchInput"
+                        v-model="selectedText">
+                <m-icon-button class="m-dropdown__header__research-button" icon-name="search" @click="focusOnResearchInput">
+                    <m-i18n k="m-dropdown:research"></m-i18n>
                 </m-icon-button>
             </div>
-        </template> -->
+        </template>
         <ul class="m-dropdown__list"
-            ref="items">
+            ref="items"
+            :style="{ 'max-height': propMaxHeightList }">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
             <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>
@@ -60,7 +77,8 @@
     </m-popup>
 
     <m-validation-message
-        :error-message="propErrorMessage"
-        :valid-message="propValidMessage"
+        :disabled="isDisabled"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
 </div>

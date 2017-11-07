@@ -1,0 +1,15 @@
+
+<div class="m-radio-style"
+     :class="{
+         'm--is-full-width': fullWidth,
+         'm--is-input-right': isInputRight,
+         'm--is-checked': checked,
+         'm--is-disabled': disabled,
+         'm--is-focus': focus }"
+     @click="onClick">
+    <div class="m-radio-style__input" :style="{ width: inputSize, height: inputSize }">
+    </div>
+    <div class="m-radio-style__label">
+        <slot></slot>
+    </div>
+</div>
