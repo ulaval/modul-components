@@ -15,7 +15,6 @@ export class MValidationMessage extends ModulVue {
     private titleValidIcon: string = this.$i18n.translate('m-validation-message:title-valid-icon');
 
     private onClick(event: MouseEvent): void {
-        console.log('teshjadj43');
         this.$emit('click', event);
     }
 }
