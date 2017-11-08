@@ -9,6 +9,9 @@
         :placeholder="defaultText"
         :disabled="disabled"
         :waiting="waiting"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"
         v-m-popup:popper
         @keydown.enter.prevent="onKeydownEnter($event)"
         @keydown.return.prevent="onKeydownEnter($event)"
@@ -58,9 +61,4 @@
             <slot name="footer"></slot>
         </template>
     </m-popup>
-
-    <m-validation-message
-        :error-message="propErrorMessage"
-        :valid-message="propValidMessage"
-        :helper-message="helperMessage"></m-validation-message>
 </div>
