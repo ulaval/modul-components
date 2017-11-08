@@ -9,18 +9,15 @@
                             className]"
                  ref="dialogWrap">
                 <article class="m-modal__article" ref="article">
-                    <header class="m-modal__header" :class="{ 'm--no-padding': !padding || !paddingHeader }" v-if="hasHeader">
-                        <h2 v-if="hasTitle">{{ title }}</h2>
-                        <slot name="header"></slot>
+                    <header class="m-modal__header" v-if="hasTitle">
+                        <h2>{{ title }}</h2>
                     </header>
-                    <div class="m-modal__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot || hasMessage">
+                    <div class="m-modal__body" v-if="hasDefaultSlot || hasMessage">
                         <p v-if="hasMessage">{{ message }}</p>
                         <slot></slot>
                     </div>
-                    <footer class="m-modal__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }">
-                        <div>
-                            <slot name="footer"></slot>
-                        </div>
+                    <footer class="m-modal__footer">
+                        <slot name="footer"></slot>
                         <nav class="m-modal__footer__nav" v-if="!hasFooterSlot">
                             <m-button @click="onOk()">
                                 <m-i18n k="m-base-window:ok"></m-i18n>

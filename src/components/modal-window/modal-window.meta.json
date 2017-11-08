@@ -1,6 +1,7 @@
 {
     "tag": "m-modal",
     "name": "m-modal-meta:name",
+    "production": true,
     "attributes": {},
     "overview": "modal-window.overview",
     "preview": "modal.preview"

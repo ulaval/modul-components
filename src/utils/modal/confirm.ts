@@ -44,7 +44,6 @@ export const confirmFunction: ConfirmFunction = (message: string) => {
             if (confirmInstance) {
                 confirmInstance.$off('ok', onOk);
                 confirmInstance.$off('cancel', onCancel);
-                confirmInstance.$props['open'] = false;
             }
         };
 

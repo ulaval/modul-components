@@ -1,6 +1,7 @@
 {
     "tag": "m-message",
     "name": "m-message-meta:name",
+    "production": true,
     "attributes": {
         "state": {
             "type": "string",

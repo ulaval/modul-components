@@ -4,7 +4,7 @@ import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
 import WithRender from './modal-window.html?style=./modal-window.scss';
-import { Portal, PortalMixinImpl } from '../../mixins/portal/portal';
+import { Portal, PortalMixinImpl, PortalMixin } from '../../mixins/portal/portal';
 
 @WithRender
 @Component({
@@ -17,14 +17,6 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     public message: string;
     @Prop()
     public className: string;
-    @Prop({ default: true })
-    public padding: boolean;
-    @Prop({ default: true })
-    public paddingHeader: boolean;
-    @Prop({ default: true })
-    public paddingBody: boolean;
-    @Prop({ default: true })
-    public paddingFooter: boolean;
 
     public handlesFocus(): boolean {
         return true;
@@ -43,24 +35,21 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     }
 
     private onOk(): void {
+        this.as<PortalMixin>().propOpen = false;
         this.$emit('ok');
     }
 
     private onCancel(): void {
+        this.as<PortalMixin>().propOpen = false;
         this.$emit('cancel');
     }
 
     private get hasDefaultSlot(): boolean {
-        // todo: header or title?
         return !!this.$slots.default;
     }
 
     private get hasFooterSlot(): boolean {
         return !!this.$slots.footer;
-    }
-
-    private get hasHeader(): boolean {
-        return !!this.$slots.header || this.hasTitle;
     }
 
     private get hasTitle(): boolean {

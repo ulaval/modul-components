@@ -1,6 +1,7 @@
 {
     "tag": "m-dropdown",
     "name": "m-dropdown-meta:name",
+    "production": true,
     "attributes": {
         "value": {
             "type": "any"

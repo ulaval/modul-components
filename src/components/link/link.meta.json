@@ -1,6 +1,7 @@
 {
     "tag": "m-link",
     "name": "m-link-meta:name",
+    "production": true,
     "attributes": {
         "mode": {
             "type": "string",

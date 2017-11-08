@@ -1,6 +1,7 @@
 {
     "tag": "m-step",
     "name": "m-step-meta:name",
+    "production": true,
     "attributes": {
         "state": {
             "type": "string",

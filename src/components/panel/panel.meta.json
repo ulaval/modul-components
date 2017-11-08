@@ -1,6 +1,7 @@
 {
     "tag": "m-panel",
     "name": "m-panel-meta:name",
+    "production": true,
     "attributes": {
         "mode": {
             "type": "string",

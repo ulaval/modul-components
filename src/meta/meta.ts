@@ -48,6 +48,7 @@ export interface ComponentMeta {
     tag: string;
     name?: string;
     attributes?: ComponentAttributes;
+    production?: boolean;
     methods?: ComponentMethods;
     overview?: string;
     category?: string;
@@ -65,6 +66,7 @@ export type CategoryComponentMap = {
 export class Meta {
     private componentMeta: ComponentMetaMap = {};
     private categories: CategoryComponentMap = {};
+    private categoriesForProd: CategoryComponentMap = {};
 
     constructor() {
         components.forEach(componentTag => {
@@ -90,6 +92,15 @@ export class Meta {
             }
             this.componentMeta[tag].category = category;
             categoryComponents.push(this.componentMeta[tag]);
+
+            if (this.componentMeta[tag].production) {
+                let categoryComponentsForProd: ComponentMeta[] = this.categoriesForProd[category];
+                if (!categoryComponentsForProd) {
+                    categoryComponentsForProd = [];
+                    this.categoriesForProd[category] = categoryComponentsForProd;
+                }
+                categoryComponentsForProd.push(this.componentMeta[tag]);
+            }
         }
     }
 
@@ -109,8 +120,12 @@ export class Meta {
         return this.componentMeta[tag];
     }
 
-    public getMetaByCategory(category: string): ComponentMeta[] {
-        return this.categories[category];
+    public getMetaByCategory(category: string, production: boolean = false): ComponentMeta[] {
+        if (production) {
+            return this.categoriesForProd[category];
+        } else {
+            return this.categories[category];
+        }
     }
 
     public getComponentAttributes(componentMeta: ComponentMeta): string[] {

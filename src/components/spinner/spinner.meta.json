@@ -1,6 +1,7 @@
 {
     "tag": "m-spinner",
     "name": "m-spinner-meta:name",
+    "production": true,
     "attributes": {
         "modal": {
             "type": "boolean",

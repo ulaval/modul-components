@@ -1,6 +1,7 @@
 {
     "tag": "m-radio",
     "name": "m-radio-meta:name",
+    "production": true,
     "attributes": {
         "modelValue": {
             "type": "string"
