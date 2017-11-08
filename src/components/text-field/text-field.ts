@@ -115,6 +115,11 @@ export class MTextField extends ModulVue {
         return type;
     }
 
+    @Watch('value')
+    private onValueChange(value: string): void {
+        this.internalValue = value;
+    }
+
     private set model(value: string) {
         this.internalValue = value;
         this.$emit('change', value);

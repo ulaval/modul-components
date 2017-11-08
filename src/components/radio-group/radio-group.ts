@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
+import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './radio-group.html?style=./radio-group.scss';
 import { RADIO_GROUP_NAME } from '../component-names';
 import RadioPlugin, { MRadioPosition, BaseRadioGroup, RadioGroup } from '../radio/radio';
@@ -46,6 +46,11 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
     public updateValue(value: string): void {
         this.model = value;
+    }
+
+    @Watch('value')
+    private onValueChange(value: string) {
+        this.internalValue = value;
     }
 
     private get model(): string {
