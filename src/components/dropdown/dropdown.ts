@@ -126,6 +126,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
+    @Watch('value')
+    private setInternalValue(value: any): void {
+        this.internalValue = value;
+    }
+
     public get model(): any {
         return this.value == undefined ? this.internalValue : this.value;
     }
