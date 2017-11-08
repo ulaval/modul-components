@@ -1,6 +1,7 @@
 {
     "tag": "m-template",
     "name": "m-template-meta:name",
+    "production": false,
     "attributes": {
         "footerFullWidth": {
             "type": "boolean",

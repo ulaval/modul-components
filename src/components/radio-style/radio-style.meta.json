@@ -1,6 +1,7 @@
 {
     "tag": "m-radio-style",
     "name": "m-radio-style-meta:name",
+    "production": false,
     "attributes": {
         "position": {
             "type": "string",

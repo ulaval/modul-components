@@ -120,11 +120,11 @@ export class Meta {
         return this.componentMeta[tag];
     }
 
-    public getMetaByCategory(category: string, production: boolean = false): ComponentMeta[] {
-        if (production) {
-            return this.categoriesForProd[category];
-        } else {
+    public getMetaByCategory(category: string, env): ComponentMeta[] {
+        if (env && env.dev) {
             return this.categories[category];
+        } else {
+            return this.categoriesForProd[category];
         }
     }
 

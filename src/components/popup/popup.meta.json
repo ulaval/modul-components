@@ -1,6 +1,7 @@
 {
     "tag": "m-popup",
     "name": "m-popup-meta:name",
+    "production": false,
     "attributes": {
         "open": {
             "type": "boolean"

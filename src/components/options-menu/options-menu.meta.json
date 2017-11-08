@@ -1,6 +1,7 @@
 {
     "tag": "m-options-menu",
     "name": "m-options-menu-meta:name",
+    "production": false,
     "attributes": {
         "options": {
             "type": "any",

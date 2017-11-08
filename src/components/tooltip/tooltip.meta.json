@@ -1,6 +1,7 @@
 {
     "tag": "m-tooltip",
     "name": "m-tooltip-meta:name",
+    "production": false,
     "attributes": {
         "open": {
             "type": "boolean",

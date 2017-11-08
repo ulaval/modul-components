@@ -1,6 +1,7 @@
 {
     "tag": "m-tab-pane",
     "name": "m-tab-pane-meta:name",
+    "production": false,
     "attributes": {
         "label": {
             "type": "string"

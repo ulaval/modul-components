@@ -1,6 +1,7 @@
 {
     "tag": "m-dynamic-template",
     "name": "m-dynamic-template-meta:name",
+    "production": false,
     "attributes": {
         "template": {
             "type": "string",

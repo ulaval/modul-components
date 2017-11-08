@@ -1,6 +1,7 @@
 {
     "tag": "m-upload-dragdrop",
     "name": "m-upload-dragdrop-meta:name",
+    "production": false,
     "attributes": {},
     "overview": "upload-dragdrop.overview",
     "preview": false

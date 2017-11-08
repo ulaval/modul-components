@@ -1,6 +1,7 @@
 {
     "tag": "m-upload-fileslist",
     "name": "m-upload-fileslist-meta:name",
+    "production": false,
     "attributes": {},
     "overview": "upload-filelist.overview",
     "preview": false

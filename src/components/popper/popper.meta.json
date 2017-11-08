@@ -1,6 +1,7 @@
 {
     "tag": "m-popper",
     "name": "m-popper-meta:name",
+    "production": false,
     "attributes": {
         "open": {
             "type": "boolean",

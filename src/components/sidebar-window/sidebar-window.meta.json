@@ -1,6 +1,7 @@
 {
     "tag": "m-sidebar",
     "name": "m-sidebar-meta:name",
+    "production": false,
     "attributes": {
         "from": {
             "type": "string",

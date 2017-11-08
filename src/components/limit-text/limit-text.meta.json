@@ -1,6 +1,7 @@
 {
     "tag": "m-limit-text",
     "name": "m-limit-text-meta:name",
+    "production": false,
     "attributes": {
         "maxNumberOfLine": {
             "type": "number",

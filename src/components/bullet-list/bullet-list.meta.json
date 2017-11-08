@@ -1,6 +1,7 @@
 {
     "tag": "m-bullet-list",
     "name": "m-bullet-list-meta:name",
+    "production": false,
     "attributes": {
         "title": {
             "type": "string"

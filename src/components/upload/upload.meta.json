@@ -1,6 +1,7 @@
 {
     "tag": "m-upload",
     "name": "m-upload-meta:name",
+    "production": false,
     "attributes": {
         "extensions": {
             "type": "string[]",

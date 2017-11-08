@@ -1,6 +1,7 @@
 {
     "tag": "m-input-style",
     "name": "m-input-style-meta:name",
+    "production": false,
     "attributes": {
         "label": {
             "type": "string"

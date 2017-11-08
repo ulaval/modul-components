@@ -1,6 +1,7 @@
 {
     "tag": "m-nav-bar-item",
     "name": "m-nav-bar-item-meta:name",
+    "production": false,
     "attributes": {
         "selected": {
             "type": "boolean",

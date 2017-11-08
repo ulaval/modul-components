@@ -1,6 +1,7 @@
 {
     "tag": "m-nav-bar",
     "name": "m-nav-bar-meta:name",
+    "production": false,
     "attributes": {
         "skin": {
             "type": "string",

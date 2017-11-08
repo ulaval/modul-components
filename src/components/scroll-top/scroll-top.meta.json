@@ -1,6 +1,7 @@
 {
     "tag": "m-scroll-top",
     "name": "m-scroll-top-meta:name",
+    "production": false,
     "attributes": {
         "position": {
             "type": "string",

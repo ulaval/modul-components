@@ -1,6 +1,7 @@
 {
     "tag": "m-slider",
     "name": "m-slider-meta:name",
+    "production": false,
     "attributes": {
         "value": {
             "type": "number",

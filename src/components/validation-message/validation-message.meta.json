@@ -1,6 +1,7 @@
 {
     "tag": "m-validation-message",
     "name": "m-validation-message-meta:name",
+    "production": false,
     "attributes": {},
     "overview": "validation-mesage",
     "preview": false
