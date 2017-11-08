@@ -14,7 +14,7 @@
     "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
     "unit": "karma start conf/karma.conf.js --browsers PhantomJS",
     "unitChrome": "karma start conf/karma.conf.js --browsers Chrome",
-    "unitall": "karma start conf/karma.conf.js --single-run  --junitReport",
+    "unitall": "karma start conf/karma.conf.js --single-run --junitReport",
     "e2e": "node tests/e2e/index.js",
     "test": "npm run unitall && npm run e2e",
     "tslint": "tslint -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
