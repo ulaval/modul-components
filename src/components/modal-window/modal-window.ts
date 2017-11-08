@@ -17,14 +17,6 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     public message: string;
     @Prop()
     public className: string;
-    @Prop({ default: true })
-    public padding: boolean;
-    @Prop({ default: true })
-    public paddingHeader: boolean;
-    @Prop({ default: true })
-    public paddingBody: boolean;
-    @Prop({ default: true })
-    public paddingFooter: boolean;
 
     public handlesFocus(): boolean {
         return true;
@@ -53,16 +45,11 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     }
 
     private get hasDefaultSlot(): boolean {
-        // todo: header or title?
         return !!this.$slots.default;
     }
 
     private get hasFooterSlot(): boolean {
         return !!this.$slots.footer;
-    }
-
-    private get hasHeader(): boolean {
-        return !!this.$slots.header || this.hasTitle;
     }
 
     private get hasTitle(): boolean {
