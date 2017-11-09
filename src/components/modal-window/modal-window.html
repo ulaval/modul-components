@@ -5,8 +5,7 @@
             <div v-show="propOpen"
                  class="m-modal__wrap"
                  :class="[{ 'm--is-open': propOpen,
-                            'm--is-disabled':disabled },
-                            className]"
+                            'm--is-disabled':disabled }]"
                  ref="dialogWrap">
                 <article class="m-modal__article" ref="article">
                     <header class="m-modal__header" v-if="hasTitle">
@@ -20,10 +19,12 @@
                         <slot name="footer"></slot>
                         <nav class="m-modal__footer__nav" v-if="!hasFooterSlot">
                             <m-button @click="onOk()">
-                                <m-i18n k="m-base-window:ok"></m-i18n>
+                                <template v-if="hasPositiveLabel">{{ positiveLabel }}</template>
+                                <m-i18n v-else k="m-base-window:ok"></m-i18n>
                             </m-button>
                             <m-link mode="button" @click="onCancel()">
-                                <m-i18n k="m-base-window:cancel"></m-i18n>
+                                <template v-if="hasNegativeLabel">{{ negativeLabel }}</template>
+                                <m-i18n v-else k="m-base-window:cancel"></m-i18n>
                             </m-link>
                         </nav>
                     </footer>
