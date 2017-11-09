@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "dev": "webpack-dev-server --config conf/webpack.config.js --env.patate --content-base src --colors --port 8082 --open --history-api-fallback",
-    "buildWebpack": "rimraf dist/*.d.ts && webpack --env.prod --config conf/webpack.config.js --colors && npm run dtsToDist && npm run scssToDist",
+    "buildWebpack": "webpack --config conf/webpack.config.js --colors",
     "build": "tsc && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist",
     "dtsToDist": "copyfiles -f \"./src/**/*.d.ts\" dist",
     "scssToDist": "copyfiles -u 1 \"./src/styles/**/*.scss\" dist && copyfiles -u 1 \"./src/styles/**/*.css\" dist",
