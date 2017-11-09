@@ -1,10 +1,9 @@
 pipeline {
-    agent any
-
-    node {
-            withEnv(['PATH=/bin/bash']) {
-        }
+    environment {
+        PATH = "/bin/bash"
     }
+
+    agent any
 
     options {
         // Discarter après 10 builds
