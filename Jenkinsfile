@@ -26,6 +26,7 @@ pipeline {
             }
 
             steps {
+                echo "$PATH"
                 sh 'pwd'
                 echo 'Clean up...'
                 sh 'rm -rf dist'
