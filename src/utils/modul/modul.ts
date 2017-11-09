@@ -185,10 +185,10 @@ export class Modul {
         // if (viewportIsSmall) {
         this.bodyStyle.position = 'fixed';
         // }
-        this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
+        this.bodyStyle.top = '-' + this.stopScrollPosition + 'px'; // Not working in IE11
         this.bodyStyle.right = '0';
         this.bodyStyle.left = '0';
-        this.bodyStyle.bottom = '0'; // Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
+        // this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
         this.bodyStyle.overflow = 'hidden';
         this.htmlEl.style.overflow = 'hidden';
     }
