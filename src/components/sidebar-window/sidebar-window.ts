@@ -4,7 +4,10 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { SIDEBAR_NAME } from '../component-names';
 import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
-import WithRender from './sidebar-window.html?style=./sidebar-window.scss';
+//import WithRender from './sidebar-window.html?style=./sidebar-window.scss';
+
+
+
 
 export enum MSidebarOrigin {
     Top = 'top',
