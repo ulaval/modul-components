@@ -1,7 +1,7 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './switch.html?style=./switch.scss';
 import { SWITCH_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
@@ -19,6 +19,7 @@ export enum MSwitchPosition {
 })
 export class MSwitch extends ModulVue {
 
+    @Model('change')
     @Prop()
     public value: boolean;
     @Prop({ default: MSwitchPosition.Left })
@@ -26,18 +27,22 @@ export class MSwitch extends ModulVue {
     @Prop({ default: true })
     public helperText: boolean;
 
-    private internalPropChecked: boolean = false;
+    private internalValue: boolean = false;
     private isFocus = false;
     private id: string = `switch${uuid.generate()}`;
 
-    protected get propChecked(): boolean {
-        return this.value != undefined ? this.value : this.internalPropChecked;
+    @Watch('value')
+    private onValueChange(value: boolean): void {
+        this.internalValue = value;
     }
 
-    protected set propChecked(value: boolean) {
-        this.$emit('input', value);
-        this.$emit('checked', value);
-        this.internalPropChecked = value;
+    private get propChecked(): boolean {
+        return this.value != undefined ? this.value : this.internalValue;
+    }
+
+    private set propChecked(value: boolean) {
+        this.$emit('change', value);
+        this.internalValue = value;
     }
 
     private onClick(event): void {
