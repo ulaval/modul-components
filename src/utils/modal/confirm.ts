@@ -4,7 +4,7 @@ import { MModal } from '../../components/modal-window/modal-window';
 export type ConfirmFunction = (message: string) => Promise<any>;
 
 let confirmInstance: MModal | undefined = undefined;
-
+//crash the build
 export const confirmFunction: ConfirmFunction = (message: string) => {
     if (!confirmInstance) {
         confirmInstance = new MModal({
