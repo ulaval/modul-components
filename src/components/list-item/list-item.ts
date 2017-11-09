@@ -23,7 +23,7 @@ export class MListItem extends ModulVue {
     private visible: boolean = true;
 
     private toDelete(event): void {
-        this.$emit('toDelete', event);
+        this.$emit('delete', event);
     }
 
 }
