@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    node {
+            withEnv(['PATH=/bin/bash']) {
+        }
+    }
+
     options {
         // Discarter après 10 builds
         buildDiscarder(logRotator(numToKeepStr: '10'))
