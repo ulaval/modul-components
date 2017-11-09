@@ -26,6 +26,7 @@ pipeline {
             }
 
             steps {
+                echo "Building..."
                 echo "$PATH"
                 sh 'pwd'
                 echo 'Clean up...'
