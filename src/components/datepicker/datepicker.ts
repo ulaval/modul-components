@@ -6,7 +6,8 @@ import WithRender from './datepicker.html?style=./datepicker.scss';
 import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
 import { curLang } from '../../utils/i18n/i18n';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { InputState } from '../../mixins/input-state/input-state';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { KeyCode } from '../../utils/keycode/keycode';
 import PopupPlugin from '../popup/popup';
 import TextFieldPlugin from '../text-field/text-field';
@@ -29,7 +30,10 @@ export interface DatepickerDate {
 
 @WithRender
 @Component({
-    mixins: [InputState]
+    mixins: [
+        InputState,
+        MediaQueries
+    ]
 })
 export class MDatepicker extends ModulVue {
 
@@ -47,24 +51,24 @@ export class MDatepicker extends ModulVue {
     public max: moment.Moment | Date;
 
     @Prop({ default: false })
-    public disabled: boolean;
-
-    @Prop({ default: false })
     public required: boolean;
 
-    private isOpen: boolean = false;
+    @Prop()
+    public label: string;
+
+    private internalOpen: boolean = false;
     private view: string = 'day';
     private internalValue = '';
-    private error: string = '';
     private placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
-    private openCalendarDesc: string = this.$i18n.translate('m-datepicker:open-calendar-desc');
-    private closeCalendarDesc: string = this.$i18n.translate('m-datepicker:close-calendar-desc');
     private previousDays: DatepickerDate[] = [];
     private days: DatepickerDate[] = [];
     private nextDays: DatepickerDate[] = [];
     private selectedYear: number = 0;
     private selectedMonth: number = 0;
     private selectedDay: number = 0;
+
+    private mouseIsDown: boolean = false;
+    private internalCalandarErrorMessage: string = '';
 
     protected created(): void {
         moment.locale([curLang, 'en-ca']);
@@ -167,7 +171,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private get formattedDate(): string {
-        return this.error || !this.value ? this.internalValue : moment(this.value).format(this.format);
+        return this.internalCalandarErrorMessage || !this.value ? this.internalValue : moment(this.internalValue).format(this.format);
     }
 
     private set formattedDate(value: string) {
@@ -211,14 +215,85 @@ export class MDatepicker extends ModulVue {
         return this.prepareDataForTableLayout([...this.previousDays, ...this.days, ...this.nextDays], 7);
     }
 
-    private onBlur(event) {
+    private get calandarError(): boolean {
+        return this.internalCalandarErrorMessage != '' || this.as<InputState>().hasError;
+    }
+
+    private get calandarErrorMessage(): string {
+        return this.as<InputState>().errorMessage != undefined ? this.as<InputState>().errorMessage : this.internalCalandarErrorMessage;
+    }
+
+    private get isEmpty(): boolean {
+        return this.hasValue() || (this.hasPlaceholder() && this.open) ? false : true;
+    }
+
+    private hasValue(): boolean {
+        return this.formattedDate != undefined && this.formattedDate != '';
+    }
+
+    private hasPlaceholder(): boolean {
+        return this.placeholder != undefined && this.placeholder != '';
+    }
+
+    private get open(): boolean {
+        return this.internalOpen;
+    }
+
+    private set open(open: boolean) {
+        this.internalOpen = open;
+        this.$nextTick(() => {
+            if (this.internalOpen) {
+                this.$emit('open');
+                let inputEl: any = this.$refs.input;
+                inputEl.focus();
+                inputEl.setSelectionRange(0, this.formattedDate.length);
+            } else {
+                this.$emit('close');
+            }
+        });
+    }
+
+    private onMousedown(event): void {
+        this.mouseIsDown = true;
+    }
+
+    private onMouseup(event): void {
+        setTimeout(() => {
+            this.mouseIsDown = false;
+        }, 30);
+    }
+
+    private onKeydownEnter($event: KeyboardEvent): void {
+        if (!this.open) {
+            this.open = true;
+        }
+    }
+
+    private onKeydown($event: KeyboardEvent): void {
+        if ($event.keyCode != KeyCode.M_RETURN &&
+            $event.keyCode != KeyCode.M_ENTER &&
+            $event.keyCode != KeyCode.M_TAB &&
+            $event.keyCode != KeyCode.M_ESCAPE && !this.open) {
+            this.open = true;
+        }
+    }
+
+    private onFocus(): void {
+        if (!this.mouseIsDown && !this.open && !this.as<InputState>().isDisabled) {
+            setTimeout(() => {
+                this.open = true;
+            }, 300);
+        }
+    }
+
+    private onBlur(event): void {
         if (event.target.value == '') {
             this.selectedMomentDate = moment();
             if (this.required) {
-                this.error = this.$i18n.translate('m-datepicker:required-error');
+                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');
             } else {
                 this.$emit('change', '');
-                this.error = '';
+                this.internalCalandarErrorMessage = '';
             }
         } else if (moment(event.target.value, this.format).isValid()) {
             let newDate = moment(event.target.value, this.format);
@@ -226,20 +301,14 @@ export class MDatepicker extends ModulVue {
                 this.selectedMomentDate = newDate;
                 this.formattedDate = this.selectedMomentDate.format(this.format);
                 this.$emit('change', newDate);
-                this.error = '';
+                this.internalCalandarErrorMessage = '';
             } else {
                 this.formattedDate = newDate.format(this.format);
-                this.error = this.$i18n.translate('m-datepicker:out-of-range-error');
+                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
             }
         } else {
-            this.error = this.$i18n.translate('m-datepicker:format-error');
+            this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
         }
-        this.closeCalendar();
-    }
-
-    private closeCalendar(): void {
-        this.isOpen = false;
-        this.$emit('close');
     }
 
     private keepDateInRange(date: moment.Moment): moment.Moment {
@@ -272,10 +341,10 @@ export class MDatepicker extends ModulVue {
     private selectDate(selectedDate: DatepickerDate): void {
         if (!selectedDate.isDisabled) {
             this.selectedMomentDate = moment(selectedDate);
-            this.error = '';
+            this.internalCalandarErrorMessage = '';
             this.formattedDate = this.selectedMomentDate.format(this.format);
             this.$emit('change', this.value instanceof Date ? this.selectedMomentDate.toDate() : this.selectedMomentDate);
-            this.closeCalendar();
+            this.open = false;
         }
     }
 }

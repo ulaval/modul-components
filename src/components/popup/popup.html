@@ -1,4 +1,4 @@
-<div class="m-popup" :id="id" :style="{ width: width }" aria-hidden="true">
+<div class="m-popup" :style="{ width: width }" aria-hidden="true">
     <m-popper :open.sync="propOpen"
               @open="onOpen()"
               @close="onClose()"
@@ -16,13 +16,20 @@
               :leave="leave"
               :after-leave="afterLeave"
               :leave-cancelled="leaveCancelled"
+              :shadow="shadow"
               v-if="!isMqMaxS || desktopOnly"
               :style="{ width: width }">
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
-        <div class="m-popup__body" :class="{ 'm--has-shadow': shadow }">
+        <div class="m-popup__header" v-if="hasHeaderSlot">
+            <slot name="header"></slot>
+        </div>
+        <div class="m-popup__body">
             <slot></slot>
+        </div>
+        <div class="m-popup__footer" v-if="hasFooterSlot">
+            <slot name="footer"></slot>
         </div>
     </m-popper>
     <m-sidebar :open.sync="propOpen"

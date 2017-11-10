@@ -1,12 +1,13 @@
-<m-popup :open.sync="propOpen"
-            @open="onOpen"
-            @close="onClose"
-            padding=""
-            :placement="placement"
-            :disabled="disabled"
-            :close-on-backdrop="true"
-            class="m-tooltip" :class="{ 'm--is-disabled': disabled }">
-    <m-icon-button slot="trigger" class="m-tooltip__icon" icon-name="information" :title="propTitle" v-if="propMode == 'icon'">
+<m-popup class="m-tooltip"
+         :class="{ 'm--is-disabled': disabled }"
+         :open.sync="propOpen"
+         :padding="false"
+         :placement="placement"
+         :disabled="disabled"
+         :close-on-backdrop="true"
+         @open="onOpen"
+         @close="onClose">
+    <m-icon-button slot="trigger" class="m-tooltip__icon" icon-name="information" :title="propTitle" button-size="22px" v-if="propMode == 'icon'">
         <span aria-hidden="true">{{ open ? propCloseTitle : propOpenTitle }}</span>
     </m-icon-button>
     <m-link slot="trigger" class="m-tooltip__link" mode="button" v-if="propMode != 'icon'">

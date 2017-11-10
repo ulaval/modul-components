@@ -55,7 +55,6 @@
 //     @Prop({ default: true })
 //     public paddingFooter: boolean;
 
-//     public componentName: string;
 //     public from: string;
 
 //     private internalPropOpen: boolean = false;

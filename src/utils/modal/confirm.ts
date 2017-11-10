@@ -1,16 +1,18 @@
 import { PluginObject } from 'vue';
-import { MModal } from '../../components/modal-window/modal-window';
+import { MModal } from '../../components/modal/modal';
 
-export type ConfirmFunction = (message: string) => Promise<any>;
+export type ConfirmFunction = (message: string, positiveLabel: string, negativeLabel: string ) => Promise<any>;
 
 let confirmInstance: MModal | undefined = undefined;
 
-export const confirmFunction: ConfirmFunction = (message: string) => {
+export const confirmFunction: ConfirmFunction = (message: string, positiveLabel: string, negativeLabel: string) => {
     if (!confirmInstance) {
         confirmInstance = new MModal({
             el: document.createElement('div'),
             propsData: {
-                message: message
+                message: message,
+                positiveLabel: positiveLabel,
+                negativeLabel: negativeLabel
             }
         });
 
@@ -44,6 +46,7 @@ export const confirmFunction: ConfirmFunction = (message: string) => {
             if (confirmInstance) {
                 confirmInstance.$off('ok', onOk);
                 confirmInstance.$off('cancel', onCancel);
+                confirmInstance.$props['open'] = false;
             }
         };
 

@@ -4,15 +4,13 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { SIDEBAR_NAME } from '../component-names';
 import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
-import WithRender from './sidebar-window.html?style=./sidebar-window.scss';
+import WithRender from './sidebar.html?style=./sidebar.scss';
 
 export enum MSidebarOrigin {
     Top = 'top',
     Right = 'right',
     Bottom = 'bottom',
-    Left = 'left',
-    BottomRight = 'bottom-right',
-    BottomLeft = 'bottom-left'
+    Left = 'left'
 }
 export enum MSidebarCloseButtonPosition {
     Left = 'left',
@@ -30,15 +28,12 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
             value == MSidebarOrigin.Top ||
             value == MSidebarOrigin.Right ||
             value == MSidebarOrigin.Left ||
-            value == MSidebarOrigin.Bottom ||
-            value == MSidebarOrigin.BottomRight ||
-            value == MSidebarOrigin.BottomLeft
+            value == MSidebarOrigin.Bottom
     })
     public origin: MSidebarOrigin;
 
     @Prop()
     public width: string;
-
     @Prop()
     public title: string;
     @Prop({ default: true })
@@ -117,19 +112,17 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     }
 
     private get marginLeft(): string {
-        return this.origin == MSidebarOrigin.Right || this.origin == MSidebarOrigin.BottomRight ? 'calc(100% - ' + this.propWidth + ')' : '';
+        return this.origin == MSidebarOrigin.Right ? 'calc(100% - ' + this.propWidth + ')' : '';
     }
 
     private get propWidth(): string {
-        if (!this.width) {
-            if (this.origin == MSidebarOrigin.Top || this.origin == MSidebarOrigin.Bottom) {
-                return '100%';
-            } else {
-                return '50%';
-            }
+
+        if (this.origin == MSidebarOrigin.Left || this.origin == MSidebarOrigin.Right) {
+            return this.width ? this.width : '50%' ;
         } else {
-            return this.width;
+            return '100%';
         }
+
     }
 }
 

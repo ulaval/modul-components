@@ -15,7 +15,7 @@ export enum MMessageState {
     Error = 'error'
 }
 
-export enum MMessageMode {
+export enum MMessageSkin {
     Regular = 'regular',
     Light = 'light'
 }
@@ -23,10 +23,16 @@ export enum MMessageMode {
 @WithRender
 @Component
 export class MMessage extends Vue {
-    @Prop({ default: MMessageState.Success })
+    @Prop({
+        default: MMessageState.Success,
+        validator: value => value == MMessageState.Success || value == MMessageState.Information || value == MMessageState.Warning || value == MMessageState.Error
+    })
     public state: MMessageState;
-    @Prop({ default: MMessageMode.Regular })
-    public mode: MMessageMode;
+    @Prop({
+        default: MMessageSkin.Regular,
+        validator: value => value == MMessageSkin.Regular || value == MMessageSkin.Light
+    })
+    public skin: MMessageSkin;
     @Prop({ default: true })
     public icon: boolean;
     @Prop({ default: true })
@@ -43,6 +49,7 @@ export class MMessage extends Vue {
     private set propVisible(visible: boolean) {
         this.internalPropVisible = visible;
         this.$emit('input', visible);
+        this.$emit('update:visible', visible);
     }
 
     private onClose(event): void {
@@ -72,7 +79,7 @@ export class MMessage extends Vue {
     }
 
     private get showCloseButton(): boolean {
-        return this.mode == MMessageMode.Regular && this.closeButton;
+        return this.skin == MMessageSkin.Regular && this.closeButton;
     }
 
 }

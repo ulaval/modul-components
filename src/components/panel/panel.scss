@@ -5,17 +5,22 @@ $m-panel--screen--min: 640px;
 
 .m-panel {
     position: relative;
-    border: $m-panel--border-width solid $m-color--grey-light;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
-    box-shadow: 0 1px 1px rgba($m-color--black, 0.05);
 
     @include m-is-ie() {
         display: block;
     }
 
-    &.m--is-primary {
-        background: $m-color--white;
+    &:not(.m--no-border) {
+        border: $m-panel--border-width solid $m-color--grey-light;
+    }
+
+    &:not(.m--no-shadow) {
+        box-shadow: $m-box-shadow--s;
+    }
+
+    &.m--has-highlighting-border {
         border-top: 0;
         padding-top: 4px;
 
@@ -31,7 +36,11 @@ $m-panel--screen--min: 640px;
         }
     }
 
-    &.m--is-secondary {
+    &.m--is-skin-light {
+        background: $m-color--white;
+    }
+
+    &.m--is-skin-dark {
         background: $m-color--grey-lightest;
 
         .m-panel {
@@ -40,14 +49,6 @@ $m-panel--screen--min: 640px;
                 border-bottom: 1px solid $m-color--grey;
             }
         }
-    }
-
-    &.m--no-shadow {
-        box-shadow: none;
-    }
-
-    &.m--no-border {
-        border: 0;
     }
 
     &__body,

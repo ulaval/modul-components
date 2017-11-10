@@ -19,6 +19,6 @@
             "default": "100%"
         }
     },
-    "overview": "sidebar-window.overview",
+    "overview": "sidebar.overview",
     "preview": "sidebar.preview"
 }

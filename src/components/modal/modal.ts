@@ -3,7 +3,7 @@ import { PluginObject } from 'vue';
 import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
-import WithRender from './modal-window.html?style=./modal-window.scss';
+import WithRender from './modal.html?style=./modal.scss';
 import { Portal, PortalMixinImpl, PortalMixin } from '../../mixins/portal/portal';
 
 @WithRender

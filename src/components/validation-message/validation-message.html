@@ -3,7 +3,7 @@
         <m-icon name="default" :svg-title="titleErrorIcon" class="m-validation-message__error__icon">
         </m-icon><span class="m-validation-message__text">{{ errorMessage }}</span>
     </p>
-    <p class="m-validation-message__valid" v-if="hasValidMessage">
+    <p class="m-validation-message__valid" v-if="hasValidMessage && !hasErrorMessage">
         <m-icon name="default" :svg-title="titleValidIcon" class="m-validation-message__valid__icon"></m-icon>
         <span class="m-validation-message__text">{{ validMessage }}</span>
     </p>

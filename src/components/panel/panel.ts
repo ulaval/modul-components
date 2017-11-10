@@ -6,9 +6,9 @@ import WithRender from './panel.html?style=./panel.scss';
 import { PANEL_NAME } from '../component-names';
 import ElementQueries from 'css-element-queries/src/ElementQueries';
 
-export enum MPanelMode {
-    Primary = 'primary',
-    Secondary = 'secondary'
+export enum MPanelSkin {
+    Light = 'light',
+    Dark = 'dark'
 }
 
 const HEADER_RIGHT_CONTENT: string = 'header-right-content';
@@ -16,8 +16,13 @@ const HEADER_RIGHT_CONTENT: string = 'header-right-content';
 @WithRender
 @Component
 export class MPanel extends Vue {
-    @Prop({ default: MPanelMode.Primary })
-    public mode: MPanelMode;
+    @Prop({
+        default: MPanelSkin.Light,
+        validator: value => value == MPanelSkin.Light || value == MPanelSkin.Dark
+    })
+    public skin: MPanelSkin;
+    @Prop({ default : true })
+    public highlightingBorder: boolean;
     @Prop({ default: true })
     public shadow: boolean;
     @Prop({ default: true })
@@ -39,8 +44,12 @@ export class MPanel extends Vue {
         ElementQueries.detach(this.$el);
     }
 
-    private get propMode(): MPanelMode {
-        return this.mode == MPanelMode.Secondary ? MPanelMode.Secondary : MPanelMode.Primary;
+    private get lightSkin(): boolean {
+        return this.skin == MPanelSkin.Light;
+    }
+
+    private get darkSkin(): boolean {
+        return this.skin == MPanelSkin.Dark;
     }
 
     private get hasHeader(): boolean {

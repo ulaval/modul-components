@@ -36,7 +36,7 @@ export class Modul {
     private doneResizeEvent: any;
 
     constructor() {
-        this.scrollPosition = window.scrollY;
+        this.scrollPosition = window.pageYOffset;
         window.addEventListener('click', (e: MouseEvent) => this.onClick(e));
         window.addEventListener('scroll', (e) => this.onScroll(e));
         window.addEventListener('resize', (e) => this.onResize(e));
@@ -47,7 +47,7 @@ export class Modul {
     }
 
     public onScroll(event): void {
-        this.scrollPosition = window.scrollY == undefined ? document.documentElement.scrollTop : window.scrollY;
+        this.scrollPosition = window.pageYOffset;
         if (this.lastScrollPosition > this.scrollPosition) {
             this.scrollUp = true;
             this.scrollDown = false;
@@ -172,9 +172,9 @@ export class Modul {
         this.bodyStyle.removeProperty('top');
         this.bodyStyle.removeProperty('right');
         this.bodyStyle.removeProperty('left');
-        this.bodyStyle.removeProperty('buttom');
+        this.bodyStyle.removeProperty('bottom');
         this.bodyStyle.removeProperty('overflow');
-        window.scrollBy(0, this.stopScrollPosition);
+        window.scrollTo(0, this.stopScrollPosition);
         this.stopScrollPosition = this.scrollPosition;
         if (this.bodyStyle.length == 0) {
             this.bodyEl.removeAttribute('style');
@@ -183,13 +183,11 @@ export class Modul {
 
     private stopScollBody(viewportIsSmall: boolean): void {
         this.stopScrollPosition = this.scrollPosition;
-        // if (viewportIsSmall) {
         this.bodyStyle.position = 'fixed';
-        // }
         this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
         this.bodyStyle.right = '0';
         this.bodyStyle.left = '0';
-        this.bodyStyle.bottom = '0'; // Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
+        this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
         this.bodyStyle.overflow = 'hidden';
         this.htmlEl.style.overflow = 'hidden';
     }

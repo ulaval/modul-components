@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import MessagePlugin, { MMessage, MMessageState, MMessageMode } from './message';
+import MessagePlugin, { MMessage, MMessageState, MMessageSkin } from './message';
 
 const STATE_SUCCESS_CSS: string = 'm--is-success';
 const STATE_INFORMATION_CSS: string = 'm--is-information';
 const STATE_WARNING_CSS: string = 'm--is-warning';
 const STATE_ERROR_CSS: string = 'm--is-error';
-const MODE_REGULAR_CSS: string = 'm--is-regular';
-const MODE_LIGHT_CSS: string = 'm--is-light';
+const SKIN_REGULAR_CSS: string = 'm--is-regular';
+const SKIN_LIGHT_CSS: string = 'm--is-light';
 const CLOSE_BUTTON_CSS: string = 'm--has-close-button';
 
 let message: MMessage;
@@ -21,10 +21,10 @@ describe('MMessageState', () => {
     });
 });
 
-describe('MMessageMode', () => {
+describe('MMessageSkin', () => {
     it('validates enum', () => {
-        expect(MMessageMode.Regular).toEqual('regular');
-        expect(MMessageMode.Light).toEqual('light');
+        expect(MMessageSkin.Regular).toEqual('regular');
+        expect(MMessageSkin.Light).toEqual('light');
     });
 });
 
@@ -38,7 +38,7 @@ describe('message', () => {
         expect(message.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
         expect(message.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
         expect(message.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
-        expect(message.$el.classList.contains(MODE_LIGHT_CSS)).toBeFalsy();
+        expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
     });
 
     it('state prop', () => {
@@ -71,18 +71,18 @@ describe('message', () => {
         });
     });
 
-    it('mode prop', () => {
-        expect(message.$el.classList.contains(MODE_LIGHT_CSS)).toBeFalsy();
+    it('skin prop', () => {
+        expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
 
-        message.mode = MMessageMode.Light;
+        message.skin = MMessageSkin.Light;
         Vue.nextTick(() => {
-            expect(message.$el.classList.contains(MODE_LIGHT_CSS)).toBeTruthy();
-            expect(message.$el.classList.contains(MODE_REGULAR_CSS)).toBeFalsy();
+            expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
+            expect(message.$el.classList.contains(SKIN_REGULAR_CSS)).toBeFalsy();
 
-            message.mode = MMessageMode.Regular;
+            message.skin = MMessageSkin.Regular;
             Vue.nextTick(() => {
-                expect(message.$el.classList.contains(MODE_REGULAR_CSS)).toBeTruthy();
-                expect(message.$el.classList.contains(MODE_LIGHT_CSS)).toBeFalsy();
+                expect(message.$el.classList.contains(SKIN_REGULAR_CSS)).toBeTruthy();
+                expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
             });
         });
     });
