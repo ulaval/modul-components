@@ -39,15 +39,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public placeholder: string;
     @Prop({ default: false })
-    public disabled: boolean;
-    @Prop({ default: false })
     public waiting: boolean;
     @Prop({ default: false })
     public filterable: boolean;
     @Prop({ default: DROPDOWN_MAX_WIDTH })
     public width: string;
-    @Prop({ default: DROPDOWN_MAX_HEIGHT })
-    public maxHeightList: string;
     @Prop()
     public textNoData: string;
     @Prop()
@@ -67,6 +63,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private dirty: boolean = false;
 
     private mouseIsDown: boolean = false;
+
+    private maxHeight: string = DROPDOWN_MAX_HEIGHT;
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
@@ -224,8 +222,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return (this.textNoMatch ? this.textNoMatch : this.$i18n.translate('m-dropdown:no-result'));
     }
 
-    private get propMaxHeightList(): string | undefined {
-        return this.as<MediaQueries>().isMqMinS ? this.maxHeightList : undefined;
+    private get propMaxHeight(): string | undefined {
+        return this.as<MediaQueries>().isMqMinS ? this.maxHeight : undefined;
     }
 
     private get hasItems(): boolean {

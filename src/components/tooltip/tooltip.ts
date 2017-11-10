@@ -67,12 +67,16 @@ export class MTooltip extends ModulVue {
         this.$emit('close', event);
     }
 
-    private get propOpenTitle(): string {
+    private getOpenTitle(): string {
         return this.openTitle == undefined ? this.$i18n.translate('m-tooltip:open') : this.openTitle;
     }
 
-    private get propcloseTitle(): string {
+    private getCloseTitle(): string {
         return this.closeTitle == undefined ? this.$i18n.translate('m-tooltip:close') : this.closeTitle;
+    }
+
+    private get propTitle(): string {
+        return this.propOpen ? this.getCloseTitle() : this.getOpenTitle();
     }
 
     private close(): void {

@@ -65,7 +65,7 @@
         </template>
         <ul class="m-dropdown__list"
             ref="items"
-            :style="{ 'max-height': propMaxHeightList }">
+            :style="{ 'max-height': propMaxHeight }">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
             <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>
