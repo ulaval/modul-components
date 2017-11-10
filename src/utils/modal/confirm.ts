@@ -1,5 +1,5 @@
 import { PluginObject } from 'vue';
-import { MModal } from '../../components/modal-window/modal-window';
+import { MModal } from '../../components/modal/modal';
 
 export type ConfirmFunction = (message: string) => Promise<any>;
 
