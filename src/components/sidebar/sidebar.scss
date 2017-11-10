@@ -46,7 +46,7 @@
 
             &-bottom {
                 .m-sidebar__article {
-                    top: #{ $m-touch-size * 2 };
+                    max-height: calc(100% - #{ $m-touch-size * 2 });
                     bottom: 0;
                 }
 

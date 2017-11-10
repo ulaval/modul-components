@@ -2,8 +2,8 @@
                 'm--is-information': state=='information',
                 'm--is-warning': state=='warning',
                 'm--is-error': state=='error',
-                'm--is-regular': mode!='light',
-                'm--is-light': mode=='light'}" v-if="propVisible">
+                'm--is-regular': skin!='light',
+                'm--is-light': skin=='light'}" v-if="propVisible">
     <div class="m-message__wrap">
         <div class="m-message__icon" v-if="icon">
             <m-icon :name="getIcon()"></m-icon>

@@ -5,35 +5,21 @@
     list-style: none;
     border-bottom: 2px solid $m-color--grey-lighter;
     transition: color 0.3 ease;
-    padding: $m-padding;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background-color: $m-color--white;
+    padding: $m-padding $m-touch-size $m-padding $m-padding;
+    transform-style: preserve-3d;
 
     @media (max-width: $m-bp--max--s) {
         padding-left: 0;
         padding-right: 0;
     }
 
-    &__content {
-        flex: 1;
-
-        // > :first-child {
-        //     &,
-        //     > :first-child {
-        //         margin-top: 0;
-        //     }
-        // }
-    }
-
     &__button {
-        display: flex;
-
-        .m-button {
-            min-width: auto !important;
-            min-height: auto !important;
-        }
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        width: $m-touch-size;
     }
 
     &.m--is-disabled {
