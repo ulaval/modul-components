@@ -41,7 +41,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
+        return (this.hasValue || (this.isFocus && this.hasValue )) && this.hasLabel;
     }
 
     private get hasLabel(): boolean {
@@ -68,6 +68,14 @@ export class MInputStyle extends ModulVue {
 
     private onClick(event): void {
         this.$emit('click', event);
+    }
+
+    private onMousedown(event): void {
+        this.$emit('mousedown', event);
+    }
+
+    private onMouseup(event): void {
+        this.$emit('mouseup', event);
     }
 }
 
