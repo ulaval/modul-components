@@ -1,6 +1,4 @@
-import Vue from 'vue';
-import { PluginObject } from 'vue';
-
+import Vue, { PluginObject } from 'vue';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import ListItemPlugin from './list-item/list-item';

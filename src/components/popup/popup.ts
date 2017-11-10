@@ -19,7 +19,7 @@ export class MPopup extends ModulVue {
     public open: boolean;
     @Prop({ default: MPopperPlacement.Bottom })
     public placement: MPopperPlacement;
-    @Prop({default: MOpenTrigger.Click})
+    @Prop({ default: MOpenTrigger.Click })
     public openTrigger: MOpenTrigger;
     @Prop()
     public closeOnBackdrop: boolean;

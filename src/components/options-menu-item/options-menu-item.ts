@@ -1,6 +1,5 @@
-import Vue from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './options-menu-item.html?style=./options-menu-item.scss';

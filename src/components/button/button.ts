@@ -1,10 +1,8 @@
-import Vue from 'vue';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './button.html?style=./button.scss';
-import { BUTTON_NAME } from '../component-names';
-import { ICON_NAME } from '../component-names';
+import { BUTTON_NAME, ICON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
 
