@@ -47,7 +47,7 @@ export class Modul {
     }
 
     public onScroll(event): void {
-        this.scrollPosition = window.scrollY;
+        this.scrollPosition = window.scrollY == undefined ? document.documentElement.scrollTop : window.scrollY;
         if (this.lastScrollPosition > this.scrollPosition) {
             this.scrollUp = true;
             this.scrollDown = false;
@@ -172,6 +172,7 @@ export class Modul {
         this.bodyStyle.removeProperty('top');
         this.bodyStyle.removeProperty('right');
         this.bodyStyle.removeProperty('left');
+        this.bodyStyle.removeProperty('buttom');
         this.bodyStyle.removeProperty('overflow');
         window.scrollBy(0, this.stopScrollPosition);
         this.stopScrollPosition = this.scrollPosition;

@@ -48,20 +48,6 @@ describe('dropdown', () => {
         expect(input).not.toBeNull();
     });
 
-    it('enabled prop disabled', () => {
-        expect(dropdown.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
-
-        dropdown.disabled = true;
-        Vue.nextTick(() => {
-            expect(dropdown.$el.classList.contains(DISABLED_CSS)).toBeTruthy();
-
-            dropdown.disabled = false;
-            Vue.nextTick(() => {
-                expect(dropdown.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
-            });
-        });
-    });
-
     it('enabled prop waiting', () => {
         expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeFalsy();
 
