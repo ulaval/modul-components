@@ -1,19 +1,19 @@
 <div class="m-dropdown"
      :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting, 'm--is-filterable': filterable }"
      :style="{ width: width, 'max-width': maxWidth }"
-     ref="mDropdown"
-     @mousedown="onMousedown"
-     @mouseup="onMouseup">
+     ref="mDropdown">
     <m-input-style ref="mDropdownValue"
-      v-m-popup:popper
-     :label="label"
-     :disabled="isDisabled"
-     :waiting="waiting"
-     :focus="open"
-     :empty="isEmpty"
-     :error="hasError"
-     :valid="isValid"
-     :width="width">
+                   :label="label"
+                   :disabled="isDisabled"
+                   :waiting="waiting"
+                   :focus="open"
+                   :empty="isEmpty"
+                   :error="hasError"
+                   :valid="isValid"
+                   :width="width"
+                   @mousedown="onMousedown"
+                   @mouseup="onMouseup"
+                   v-m-popup:popup>
         <input type="text"
             ref="input"
             class="m-dropdown__input"
@@ -28,15 +28,19 @@
             @focus="onFocus"
             @blur="onBlur"
             v-model="selectedText">
-
         <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
         <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="!waiting">
-            <m-icon-button icon-name="dropdown-arrow" button-size="22px" @keydown.enter.prevent="arrowOnKeydownEnter">
+            <m-icon-button ref="arrow" icon-name="dropdown-arrow" button-size="22px" :disabled="inactive" @keydown.enter.prevent="open = !inactive">
                 <m-i18n k="m-dropdown:open" v-if="!open"></m-i18n>
                 <m-i18n k="m-dropdown:close" v-if="open"></m-i18n>
             </m-icon-button>
         </div>
     </m-input-style>
+    <m-validation-message
+        :disabled="isDisabled"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"></m-validation-message>
 
     <m-popup placement="bottom-start"
             :disabled="inactive"
@@ -45,10 +49,10 @@
             :leave="transitionLeave"
             :padding-header="false"
             :padding-body="false"
-            :focus-management="false"
+            :focus-management="isMqMaxS"
             :close-on-backdrop="true"
             width="100%"
-            ref="popper"
+            ref="popup"
             @open="onOpen">
         <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
@@ -75,10 +79,4 @@
             <slot name="footer"></slot>
         </template>
     </m-popup>
-
-    <m-validation-message
-        :disabled="isDisabled"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"></m-validation-message>
 </div>

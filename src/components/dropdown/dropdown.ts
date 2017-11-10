@@ -193,7 +193,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         let items: MDropdownItem[] = [];
         // items that can be reached with the keyboard (!disabled)
         let navigation: MDropdownItem[] = [];
-        (this.$refs.popper as Vue).$children[0].$children.forEach(item => {
+        (this.$refs.popup as Vue).$children[0].$children.forEach(item => {
             if (item instanceof MDropdownItem && !item.inactive && !item.filtered) {
                 items.push(item);
                 if (!item.disabled) {
@@ -282,20 +282,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
-    private onMousedown() {
+    private onMousedown(event): void {
         this.mouseIsDown = true;
     }
 
-    private onMouseup() {
+    private onMouseup(event): void {
         setTimeout(() => {
             this.mouseIsDown = false;
         }, 30);
-    }
-
-    private arrowOnKeydownEnter(): void {
-        if (!this.inactive) {
-            this.open = !this.open;
-        }
     }
 
     private onOpen(): void {
@@ -304,7 +298,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onFocus(): void {
-        if (!this.mouseIsDown && !this.open && !this.inactive && this.as<MediaQueries>().isMqMinS) {
+        if (!this.mouseIsDown && !this.open && !this.inactive) {
             setTimeout(() => {
                 this.open = true;
             }, 300);
