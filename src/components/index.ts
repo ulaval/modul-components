@@ -3,7 +3,6 @@ import { PluginObject } from 'vue';
 
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
-import BulletListPlugin from './bullet-list/bullet-list';
 import ListItemPlugin from './list-item/list-item';
 import ButtonPlugin from './button/button';
 import ButtonGroupPlugin from './button-group/button-group';
@@ -73,7 +72,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(InputStylePlugin);
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);
-        Vue.use(BulletListPlugin);
         Vue.use(ListItemPlugin);
         Vue.use(MessagePlugin);
         Vue.use(ModalPlugin);
