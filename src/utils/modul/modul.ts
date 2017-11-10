@@ -47,7 +47,7 @@ export class Modul {
     }
 
     public onScroll(event): void {
-        this.scrollPosition = window.scrollY;
+        this.scrollPosition = window.scrollY == undefined ? document.documentElement.scrollTop : window.scrollY;
         if (this.lastScrollPosition > this.scrollPosition) {
             this.scrollUp = true;
             this.scrollDown = false;
@@ -172,6 +172,7 @@ export class Modul {
         this.bodyStyle.removeProperty('top');
         this.bodyStyle.removeProperty('right');
         this.bodyStyle.removeProperty('left');
+        this.bodyStyle.removeProperty('buttom');
         this.bodyStyle.removeProperty('overflow');
         window.scrollBy(0, this.stopScrollPosition);
         this.stopScrollPosition = this.scrollPosition;
@@ -185,10 +186,10 @@ export class Modul {
         // if (viewportIsSmall) {
         this.bodyStyle.position = 'fixed';
         // }
-        this.bodyStyle.top = '-' + this.stopScrollPosition + 'px'; // Not working in IE11
+        this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
         this.bodyStyle.right = '0';
         this.bodyStyle.left = '0';
-        // this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
+        this.bodyStyle.bottom = '0'; // Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
         this.bodyStyle.overflow = 'hidden';
         this.htmlEl.style.overflow = 'hidden';
     }
