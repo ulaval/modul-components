@@ -70,8 +70,6 @@ $m-tooltip--max-height: 280px !default;
     &__body {
         padding: $m-padding;
         background: $m-color--information;
-        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
-        border-radius: $m-border-radius--s;
 
         @media (max-width: $m-bp--max--s) {
             position: relative;
@@ -93,6 +91,7 @@ $m-tooltip--max-height: 280px !default;
             overflow-x: hidden;
             overflow-y: auto;
             border: 1px solid $m-color--interactive;
+            border-radius: $m-border-radius--s;
         }
 
         @media (max-height: $m-tooltip--max-height) {
