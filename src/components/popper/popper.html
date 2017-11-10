@@ -10,8 +10,14 @@
             @leave="onLeave"
             @after-leave="onAfterLeave"
             @leave-cancelled="onLeaveCancelled">
-            <article class="m-popper__article" :class="[{ 'm--is-default-anim': defaultAnim, 'm--is-open': defaultAnimOpen }, 'm--is-placement-' + placement ]"
-                ref="popper" :aria-hidden="!propOpen" v-show="propOpen">
+            <article ref="popper"
+                     class="m-popper__article"
+                     :class="[{ 'm--is-default-anim': defaultAnim,
+                                'm--is-open': defaultAnimOpen,
+                                'm--has-shadow': shadow },
+                                'm--is-placement-' + placement ]"
+                     :aria-hidden="!propOpen"
+                     v-show="propOpen">
                 <slot></slot>
             </article>
         </transition>

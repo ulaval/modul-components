@@ -53,6 +53,9 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     @Prop({ default: true })
     public focusManagement: boolean;
 
+    @Prop({ default: true })
+    public shadow: boolean;
+
     @Prop()
     public beforeEnter: any;
 
@@ -174,8 +177,10 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         if (this.enter) {
             this.enter(el.children[0], done);
         } else {
-            this.defaultAnimOpen = true;
-            done();
+            this.$nextTick(() => {
+                this.defaultAnimOpen = true;
+                done();
+            });
         }
     }
 
@@ -187,9 +192,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         this.as<PortalMixin>().setFocusToPortal();
 
         setTimeout(() => {
-            if (this.popper) {
-                this.popper.update();
-            }
+            this.update();
         }, 200);
     }
 
