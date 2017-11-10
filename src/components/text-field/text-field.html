@@ -22,9 +22,9 @@
             ref="input"
             v-model="model">
         <template slot="right-content">
-            <m-icon-button :icon-name="iconName" v-if="hasIcon">{{ iconDescription }}</m-icon-button>
+            <m-icon-button :icon-name="iconName" button-size="22px" v-if="hasIcon">{{ iconDescription }}</m-icon-button>
             <div class="m-text-field__icon-password" :class="{ 'm--is-transparent': !hasValue }" v-if="propIconPassword">
-                <m-icon-button :icon-name="iconNamePassword" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
+                <m-icon-button :icon-name="iconNamePassword" button-size="22px" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
             </div>
         </template>
     </m-input-style>
