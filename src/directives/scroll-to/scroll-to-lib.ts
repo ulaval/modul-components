@@ -40,7 +40,7 @@ export class ScrollTo {
         let startTime = Date.now();
         let endTime = startTime + time;
 
-        let startTop = window.scrollY;
+        let startTop = window.pageYOffset;
         let distance = target - startTop;
 
         // based on http://en.wikipedia.org/wiki/Smoothstep
@@ -54,11 +54,11 @@ export class ScrollTo {
         return new Promise((resolve, reject) => {
             // This is to keep track of where the element's scrollTop is
             // supposed to be, based on what we're doing
-            let previousTop = window.scrollY;
+            let previousTop = window.pageYOffset;
 
             // This is like a think function from a game loop
             let scrollFrame = () => {
-                if (window.scrollY != previousTop) {
+                if (window.pageYOffset != previousTop) {
                     resolve();
                     return;
                 }
@@ -78,12 +78,12 @@ export class ScrollTo {
                 // If we were supposed to scroll but didn't, then we
                 // probably hit the limit, so consider it done; not
                 // interrupted.
-                if (window.scrollY === previousTop
-                    && window.scrollY !== frameTop) {
+                if (window.pageYOffset === previousTop
+                    && window.pageYOffset !== frameTop) {
                     resolve();
                     return;
                 }
-                previousTop = window.scrollY;
+                previousTop = window.pageYOffset;
 
                 // schedule next frame for execution
                 setTimeout(scrollFrame, 0);
