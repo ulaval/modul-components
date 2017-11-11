@@ -91,7 +91,7 @@ export class MButton extends Vue {
         return this.iconPosition == MButtonIconPosition.Right && this.hasIcone && !this.waiting ? true : false;
     }
 
-    private get hasMoreInfo(): boolean {
+    private get hasMoreInfoSlot(): boolean {
         return !!this.$slots['more-info'];
     }
 }
