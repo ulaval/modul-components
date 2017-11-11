@@ -187,6 +187,11 @@ $m-input-style--padding: 4px !default;
         }
     }
 
+    &__label,
+    &__body__adjust-width-auto {
+        padding-right: $m-padding;
+    }
+
     &__label {
         position: relative;
         z-index: 0;
@@ -267,7 +272,6 @@ $m-input-style--padding: 4px !default;
         &__adjust-width-auto {
             height: 0;
             opacity: 0;
-            margin-right: $m-margin--s;
             user-select: none;
             white-space: nowrap;
         }

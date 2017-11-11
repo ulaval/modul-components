@@ -1,35 +1,34 @@
 <div class="m-text-field"
      :class="[{ 'm--is-disabled' : isDisabled,
-            'm--is-waiting' : isWaiting,
-            'm--has-error' : hasError,
-            'm--is-valid' : isValid,
-            'm--has-icon' : hasIcon,
-            'm--has-label': hasLabel },
-            'm--is-type-' + inputType ]"
+                'm--is-waiting' : isWaiting,
+                'm--has-error' : hasError,
+                'm--is-valid' : isValid,
+                'm--has-icon' : hasIcon,
+                'm--has-label': hasLabel },
+                'm--is-type-' + inputType ]"
      @click="onClick">
     <m-input-style :disabled="isDisabled"
+                   :waiting="isWaiting"
                    :error="hasError"
                    :valid="isValid"
                    :label="label"
                    :focus="isFocus"
                    :empty="isEmpty">
         <input class="m-text-field__input"
-            :disabled="isDisabled"
-            :placeholder="placeholder"
-            @focus="onFocus"
-            @blur="onBlur"
-            @keyup="onKeyup"
-            ref="input"
-            v-model="model">
-        <template slot="right-content">
-            <m-icon-button :icon-name="iconName" button-size="22px" v-if="hasIcon">{{ iconDescription }}</m-icon-button>
-            <div class="m-text-field__icon-password" :class="{ 'm--is-transparent': !hasValue }" v-if="propIconPassword">
-                <m-icon-button :icon-name="iconNamePassword" button-size="22px" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
-            </div>
-        </template>
+               :disabled="!active"
+               :placeholder="placeholder"
+               @focus="onFocus"
+               @blur="onBlur"
+               @keyup="onKeyup"
+               ref="input"
+               v-model="model">
+        <div slot="right-content" class="m-text-field__icon-password" :class="{ 'm--is-transparent': !hasValue }" v-if="propPasswordIcon">
+            <m-icon-button :icon-name="iconNamePassword" button-size="22px" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
+        </div>
     </m-input-style>
     <m-validation-message
         :disabled="isDisabled"
+        :waiting="isWaiting"
         :error-message="errorMessage"
         :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>

@@ -1,11 +1,11 @@
-<div class="m-validation-message" v-if="(hasErrorMessage || hasValidMessage || hasHelper) && !isDisabled" @click="onClick">
+<div class="m-validation-message" v-if="(hasErrorMessage || hasValidMessage || hasHelperMessage) && active" @click="onClick">
     <p class="m-validation-message__error" v-if="hasErrorMessage">
         <m-icon name="default" :svg-title="titleErrorIcon" class="m-validation-message__error__icon">
         </m-icon><span class="m-validation-message__text">{{ errorMessage }}</span>
     </p>
-    <p class="m-validation-message__valid" v-if="hasValidMessage && !hasErrorMessage">
+    <p class="m-validation-message__valid" v-if="hasValidMessage">
         <m-icon name="default" :svg-title="titleValidIcon" class="m-validation-message__valid__icon"></m-icon>
         <span class="m-validation-message__text">{{ validMessage }}</span>
     </p>
-    <p class="m-validation-message__helper" v-if="hasHelper">{{ helperMessage }}</p>
+    <p class="m-validation-message__helper" v-if="hasHelperMessage">{{ helperMessage }}</p>
 </div>

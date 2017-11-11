@@ -39,7 +39,7 @@ export class MTextField extends ModulVue {
     @Prop({ default: false })
     public forceFocus: boolean;
     @Prop({ default: true })
-    public iconPassword: boolean;
+    public passwordIcon: boolean;
     @Prop()
     public label: string;
     @Prop()
@@ -149,8 +149,8 @@ export class MTextField extends ModulVue {
         return this.passwordAsText ? this.iconDescriptionHidePassword : this.iconDescriptionShowPassword;
     }
 
-    private get propIconPassword(): boolean {
-        return this.iconPassword && this.type == MTextFieldType.Password && !this.as<InputStateMixin>().isDisabled;
+    private get propPasswordIcon(): boolean {
+        return this.passwordIcon && this.type == MTextFieldType.Password && this.as<InputStateMixin>().active;
     }
 
     private get hasLabel(): boolean {

@@ -7,6 +7,8 @@ import { INPUT_STYLE_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
+import { log } from 'util';
+import { loadavg } from 'os';
 
 @WithRender
 @Component({
@@ -22,18 +24,34 @@ export class MInputStyle extends ModulVue {
     @Prop({ default: true })
     public empty: boolean;
 
-    @Prop({ default: 'auto' })
-    public width: boolean;
-
-    @Prop({ default: false })
-    public waiting: boolean;
+    @Prop()
+    public width: string;
 
     private animActive: boolean = false;
 
+    public setInputWidth(): void {
+        this.$nextTick(() => {
+            let labelEl: HTMLElement = this.$refs.label as HTMLElement;
+            let inputEl: HTMLElement = this.$el.querySelector('input') as HTMLElement;
+            let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
+            if (inputEl) {
+                if (this.width == 'auto' && this.hasAdjustWidthAutoSlot) {
+                    inputEl.style.width = '0px';
+                    let width: number = !this.labelIsUp && (labelEl.clientWidth > adjustWidthAutoEl.clientWidth ) ? labelEl.clientWidth : adjustWidthAutoEl.clientWidth;
+                    inputEl.style.width = width + 'px';
+                } else {
+                    if (inputEl.style.width) {
+                        inputEl.style.removeProperty('width');
+                    }
+                }
+            }
+        });
+    }
     protected mounted(): void {
         setTimeout(() => {
             this.animActive = true;
         }, 0);
+        this.setInputWidth();
     }
 
     private get hasValue(): boolean {
@@ -41,7 +59,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue )) && this.hasLabel;
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && this.as<InputState>().active;
     }
 
     private get hasLabel(): boolean {
@@ -49,7 +67,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get isFocus(): boolean {
-        let focus: boolean = this.focus && !this.as<InputState>().disabled && !this.waiting;
+        let focus: boolean = this.focus && this.as<InputState>().active;
         this.$emit('focus', focus);
         return focus;
     }
