@@ -55,6 +55,10 @@ $m-dropdown--margin: $m-padding--xs !default;
 
         @include m-scrollbar-ie();
 
+        @media (min-width: $m-bp--min--s) {
+            max-height: 208px;
+        }
+
         &::-webkit-scrollbar {
             @include m-scrollbar();
 
@@ -90,9 +94,5 @@ $m-dropdown--margin: $m-padding--xs !default;
 
     .m-input-style {
         width: 100%;
-    }
-
-    .m-validation-message {
-        cursor: pointer;
     }
 }

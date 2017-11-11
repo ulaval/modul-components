@@ -14,13 +14,12 @@ import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import i18nPlugin from '../../utils/i18n/i18n';
 import DropdownItemPlugin from '../dropdown-item/dropdown-item';
 import ButtonPlugin from '../button/button';
-import TextFieldPlugin from '../text-field/text-field';
+import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import PopupPlugin from '../popup/popup';
+import { log } from 'util';
 
-const DROPDOWN_MAX_HEIGHT: string = '220px';
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
-const TEXTFIELD_MIN_WIDTH: string = '130px'; // from text-field.scss
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 @WithRender
@@ -38,8 +37,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public label: string;
     @Prop()
     public placeholder: string;
-    @Prop({ default: false })
-    public waiting: boolean;
     @Prop({ default: false })
     public filterable: boolean;
     @Prop({ default: DROPDOWN_MAX_WIDTH })
@@ -64,8 +61,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private mouseIsDown: boolean = false;
 
-    private maxHeight: string = DROPDOWN_MAX_HEIGHT;
-
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
         if (text !== undefined && this.dirty && (this.internalFilterRegExp)) {
@@ -78,10 +73,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.internalItems.some(i => {
             return i.group == group;
         });
-    }
-
-    public focus(): void {
-        ((this.$refs.mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement).focus();
     }
 
     protected mounted(): void {
@@ -117,6 +108,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 if (this.filterable) {
                     inputEl.setSelectionRange(0, this.selectedText.length);
                 }
+                this.focusSelected();
                 this.scrollToFocused();
             } else {
                 this.$emit('close');
@@ -138,6 +130,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$emit('change', value);
         this.dirty = false;
         this.internalOpen = false;
+        this.setInputWidth();
+    }
+
+    private setInputWidth(): void {
+        this.$nextTick(() => {
+            (this.$refs.mInputStyle as MInputStyle).setInputWidth();
+        });
     }
 
     public get focused(): any {
@@ -222,10 +221,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return (this.textNoMatch ? this.textNoMatch : this.$i18n.translate('m-dropdown:no-result'));
     }
 
-    private get propMaxHeight(): string | undefined {
-        return this.as<MediaQueries>().isMqMinS ? this.maxHeight : undefined;
-    }
-
     private get hasItems(): boolean {
         return this.internalItems.length > 0;
     }
@@ -235,7 +230,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get inactive(): boolean {
-        return this.as<InputState>().isDisabled || this.waiting;
+        return this.as<InputState>().isDisabled || this.as<InputState>().isWaiting;
     }
 
     public get hasLabel(): boolean {
@@ -292,13 +287,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }, 30);
     }
 
-    private onOpen(): void {
-        this.focusSelected();
-        this.open = true;
-    }
-
     private onFocus(): void {
-        if (!this.mouseIsDown && !this.open && !this.inactive) {
+        if (!this.mouseIsDown && !this.open && this.as<InputState>().active) {
             setTimeout(() => {
                 this.open = true;
             }, 300);
@@ -409,22 +399,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             }
         });
     }
-
-    private get computedWidth(): string {
-        if (this.width == 'min') {
-            return TEXTFIELD_MIN_WIDTH;
-        } else if (this.width == 'max') {
-            return DROPDOWN_MAX_WIDTH;
-        } else {
-            return this.width;
-        }
-    }
 }
 
 const DropdownPlugin: PluginObject<any> = {
     install(v, options) {
         Vue.use(DropdownItemPlugin);
-        Vue.use(TextFieldPlugin);
+        Vue.use(InputStylePlugin);
         Vue.use(ButtonPlugin);
         Vue.use(PopupPlugin);
         Vue.use(ValidationMessagePlugin);

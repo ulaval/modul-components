@@ -12,6 +12,10 @@
         "placeholder": {
             "type": "string"
         },
+        "filterable": {
+            "type": "boolean",
+            "default": false
+        },
         "width": {
             "type": "string"
         },
@@ -21,15 +25,7 @@
         "textNoMatch": {
             "type": "string"
         },
-        "disabled": {
-            "type": "boolean",
-            "default": false
-        },
         "waiting": {
-            "type": "boolean",
-            "default": false
-        },
-        "editable": {
             "type": "boolean",
             "default": false
         },

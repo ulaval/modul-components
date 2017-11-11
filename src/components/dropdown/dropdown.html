@@ -2,10 +2,10 @@
      :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting, 'm--is-filterable': filterable }"
      :style="{ width: width, 'max-width': maxWidth }"
      ref="mDropdown">
-    <m-input-style ref="mDropdownValue"
+    <m-input-style ref="mInputStyle"
                    :label="label"
                    :disabled="isDisabled"
-                   :waiting="waiting"
+                   :waiting="isWaiting"
                    :focus="open"
                    :empty="isEmpty"
                    :error="hasError"
@@ -17,7 +17,7 @@
         <input type="text"
             ref="input"
             class="m-dropdown__input"
-            :disabled="inactive"
+            :disabled="!active"
             :readonly="!filterable"
             :placeholder="placeholder"
             @keydown.enter.prevent="onKeydownEnter($event)"
@@ -29,8 +29,8 @@
             @blur="onBlur"
             v-model="selectedText">
         <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
-        <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="!waiting">
-            <m-icon-button ref="arrow" icon-name="dropdown-arrow" button-size="22px" :disabled="inactive" @keydown.enter.prevent="open = !inactive">
+        <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="active">
+            <m-icon-button ref="arrow" icon-name="dropdown-arrow" button-size="22px" :disabled="!active" @keydown.enter.prevent="open = active">
                 <m-i18n k="m-dropdown:open" v-if="!open"></m-i18n>
                 <m-i18n k="m-dropdown:close" v-if="open"></m-i18n>
             </m-icon-button>
@@ -38,12 +38,13 @@
     </m-input-style>
     <m-validation-message
         :disabled="isDisabled"
+        :waiting="isWaiting"
         :error-message="errorMessage"
         :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
 
     <m-popup placement="bottom-start"
-            :disabled="inactive"
+            :disabled="!active"
             :open.sync="open"
             :enter="transitionEnter"
             :leave="transitionLeave"
@@ -52,8 +53,7 @@
             :focus-management="isMqMaxS"
             :close-on-backdrop="true"
             width="100%"
-            ref="popup"
-            @open="onOpen">
+            ref="popup">
         <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="filterable">
@@ -68,8 +68,7 @@
             </div>
         </template>
         <ul class="m-dropdown__list"
-            ref="items"
-            :style="{ 'max-height': propMaxHeight }">
+            ref="items">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
             <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>

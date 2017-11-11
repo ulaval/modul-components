@@ -1,7 +1,7 @@
 <div class="m-datepicker">
     <m-input-style :label="label"
                    :disabled="isDisabled"
-                   :waiting="waiting"
+                   :waiting="isWaiting"
                    :focus="open"
                    :empty="isEmpty"
                    :error="calandarError"
@@ -11,7 +11,7 @@
                    v-m-popup:pupup>
         <input type="text"
                ref="input"
-               :disabled="isDisabled"
+               :disabled="!active"
                :placeholder="placeholder"
                @keydown.enter.prevent="onKeydownEnter($event)"
                @keydown.return.prevent="onKeydownEnter($event)"
@@ -22,7 +22,7 @@
         <m-icon-button ref="calandarIcon"
                        slot="right-content"
                        icon-name="calendar"
-                       :disabled="isDisabled"
+                       :disabled="!active"
                        button-size="22px"
                        @keydown.enter.prevent="open = !isDisabled">
             <m-i18n k="m-datepicker:open" v-if="!open"></m-i18n>
@@ -31,10 +31,11 @@
     </m-input-style>
     <m-validation-message
         :disabled="isDisabled"
+        :waiting="isWaiting"
         :error-message="calandarErrorMessage"
         :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
-    <m-popup ref="pupup" :open.sync="open" :disabled="disabled" :close-on-backdrop="true" :focus-management="isMqMaxS" :padding="false" placement="bottom">
+    <m-popup ref="pupup" :open.sync="open" :disabled="!active" :close-on-backdrop="true" :focus-management="isMqMaxS" :padding="false" placement="bottom">
         <div slot="header" class="m-datepicker__header">
             <nav class="m-datepicker__header__nav">
                 <m-icon-button icon-name="left-arrow" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>

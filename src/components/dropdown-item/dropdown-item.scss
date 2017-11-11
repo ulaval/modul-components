@@ -7,10 +7,10 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
     transition: background $m-transition-duration ease;
     display: inline-block;
     width: 100%;
-    padding: $m-padding;
+    padding: $m-padding $m-padding--s;
     margin: 0;
     color: $m-color--text;
-    font-size: $m-font-size--l;
+    font-size: $m-font-size;
     text-decoration: none;
     outline: none;
 
