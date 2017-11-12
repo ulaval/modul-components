@@ -9,11 +9,11 @@ $m-datepicker--item-dimension: $m-touch-size !default;
     &__body {
         background: $m-color--white;
 
-        @media (max-width: $m-bp--max--s) {
+        @media (max-width: $m-mq--max--s) {
             width: 100%;
         }
 
-        @media (min-width: $m-bp--min--s) {
+        @media (min-width: $m-mq--min--s) {
             width: 7 * $m-datepicker--item-dimension + 2 * $m-padding--s + 2;
         }
     }
@@ -22,11 +22,11 @@ $m-datepicker--item-dimension: $m-touch-size !default;
         justify-content: space-around;
         padding: $m-padding--s 0;
 
-        @media (max-width: $m-bp--max--s) {
+        @media (max-width: $m-mq--max--s) {
             border-bottom: $m-border-width--s solid $m-color--grey-light;
         }
 
-        @media (min-width: $m-bp--min--s) {
+        @media (min-width: $m-mq--min--s) {
             border: $m-border-width--s solid $m-color--grey-light;
         }
 
@@ -73,7 +73,7 @@ $m-datepicker--item-dimension: $m-touch-size !default;
         height: $m-datepicker--item-dimension * 7 + $m-padding + $m-border-width--s;
         padding: $m-padding--s;
 
-        @media (min-width: $m-bp--min--s) {
+        @media (min-width: $m-mq--min--s) {
             border-right: $m-border-width--s solid $m-color--grey-light;
             border-bottom: $m-border-width--s solid $m-color--grey-light;
             border-left: $m-border-width--s solid $m-color--grey-light;

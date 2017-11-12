@@ -55,7 +55,7 @@ $m-dropdown--margin: $m-padding--xs !default;
 
         @include m-scrollbar-ie();
 
-        @media (min-width: $m-bp--min--s) {
+        @media (min-width: $m-mq--min--s) {
             max-height: 208px;
         }
 

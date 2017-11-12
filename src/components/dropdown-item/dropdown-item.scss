@@ -16,7 +16,7 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
 
     @include m-word-wrap();
 
-    @media (min-width: $m-bp--min--s) {
+    @media (min-width: $m-mq--min--s) {
         &:not(.m--is-disabled) {
             &:not(.m--is-inactive) {
                 &:not(.m--is-selected) {

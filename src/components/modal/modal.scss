@@ -22,11 +22,11 @@ $m-modal--max-width: 380px !default;
             display: block;
         }
 
-        @media screen and (min-width: $m-bp--min--s) {
+        @media screen and (min-width: $m-mq--min--s) {
             padding: $m-padding--l;
         }
 
-        @media screen and (max-width: $m-bp--max--s) {
+        @media screen and (max-width: $m-mq--max--s) {
             padding: $m-padding;
         }
 

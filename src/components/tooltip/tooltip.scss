@@ -71,7 +71,7 @@ $m-tooltip--max-height: 280px !default;
         padding: $m-padding;
         background: $m-color--information;
 
-        @media (max-width: $m-bp--max--s) {
+        @media (max-width: $m-mq--max--s) {
             position: relative;
 
             &::after {
@@ -85,7 +85,7 @@ $m-tooltip--max-height: 280px !default;
             }
         }
 
-        @media (min-width: $m-bp--min--s) {
+        @media (min-width: $m-mq--min--s) {
             width: $m-tooltip--width;
             max-height: $m-tooltip--max-height;
             overflow-x: hidden;
