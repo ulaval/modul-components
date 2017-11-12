@@ -53,11 +53,11 @@ $m-dropdown--margin: $m-padding--xs !default;
         text-align: left;
         background: $m-color--white;
 
-        @include m-scrollbar-ie();
-
         @media (min-width: $m-mq--min--s) {
             max-height: 208px;
         }
+
+        @include m-scrollbar-ie();
 
         &::-webkit-scrollbar {
             @include m-scrollbar();

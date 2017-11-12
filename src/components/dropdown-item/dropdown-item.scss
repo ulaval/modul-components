@@ -7,7 +7,7 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
     transition: background $m-transition-duration ease;
     display: inline-block;
     width: 100%;
-    padding: $m-padding $m-padding--s;
+    padding: $m-padding;
     margin: 0;
     color: $m-color--text;
     font-size: $m-font-size;
@@ -17,6 +17,8 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
     @include m-word-wrap();
 
     @media (min-width: $m-mq--min--s) {
+        padding: $m-padding $m-padding--s;
+
         &:not(.m--is-disabled) {
             &:not(.m--is-inactive) {
                 &:not(.m--is-selected) {

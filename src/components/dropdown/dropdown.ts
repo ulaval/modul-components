@@ -119,6 +119,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Watch('value')
     private setInternalValue(value: any): void {
         this.internalValue = value;
+        this.setInputWidth();
     }
 
     public get model(): any {
@@ -365,21 +366,24 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
-                el.style.removeProperty('opacity');
-                let height: number = el.clientHeight;
-                el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
-                el.style.transition = DROPDOWN_STYLE_TRANSITION;
-                el.style.overflowY = 'hidden';
-                el.style.maxHeight = '0';
+                el.style.opacity = '0';
                 el.style.width = this.$el.clientWidth + 'px';
                 setTimeout(() => {
-                    el.style.maxHeight = height + 'px';
-                    done();
+                    el.style.removeProperty('opacity');
+                    let height: number = el.clientHeight;
+                    el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+                    el.style.transition = DROPDOWN_STYLE_TRANSITION;
+                    el.style.overflowY = 'hidden';
+                    el.style.maxHeight = '0';
+                    setTimeout(() => {
+                        el.style.maxHeight = height + 'px';
+                        done();
+                    }, 0);
+
                 }, 0);
             } else {
                 done();
             }
-
         });
     }
 

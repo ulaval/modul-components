@@ -9,6 +9,7 @@ import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
 import { log } from 'util';
 import { loadavg } from 'os';
+import { setTimeout } from 'timers';
 
 @WithRender
 @Component({
@@ -37,8 +38,13 @@ export class MInputStyle extends ModulVue {
             if (inputEl) {
                 if (this.width == 'auto' && this.hasAdjustWidthAutoSlot) {
                     inputEl.style.width = '0px';
-                    let width: number = !this.labelIsUp && (labelEl.clientWidth > adjustWidthAutoEl.clientWidth ) ? labelEl.clientWidth : adjustWidthAutoEl.clientWidth;
-                    inputEl.style.width = width + 'px';
+                    setTimeout(() => {
+                        let width: number = adjustWidthAutoEl.clientWidth < 60 ? 60 : adjustWidthAutoEl.clientWidth;
+                        if (this.hasLabel) {
+                            width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                        }
+                        inputEl.style.width = width + 'px';
+                    }, 0);
                 } else {
                     if (inputEl.style.width) {
                         inputEl.style.removeProperty('width');
