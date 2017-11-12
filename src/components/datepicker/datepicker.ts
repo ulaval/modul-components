@@ -269,6 +269,12 @@ export class MDatepicker extends ModulVue {
         }
     }
 
+    private onKeydownTab(): void {
+        if (!this.mouseIsDown && this.as<MediaQueries>().isMqMinS) {
+            this.open = false;
+        }
+    }
+
     private onKeydown($event: KeyboardEvent): void {
         if ($event.keyCode != KeyCode.M_RETURN &&
             $event.keyCode != KeyCode.M_ENTER &&

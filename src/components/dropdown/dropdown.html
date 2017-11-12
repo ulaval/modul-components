@@ -20,13 +20,13 @@
             :disabled="!active"
             :readonly="!filterable"
             :placeholder="placeholder"
-            @keydown.enter.prevent="onKeydownEnter($event)"
-            @keydown.return.prevent="onKeydownEnter($event)"
-            @keydown.esc.prevent="onKeydownEscape($event)"
-            @keydown.up.prevent="onKeydownUp($event)"
-            @keydown.down.prevent="onKeydownDown($event)"
+            @keydown.enter.prevent="onKeydownEnter"
+            @keydown.return.prevent="onKeydownEnter"
+            @keydown.esc.prevent="onKeydownEscape"
+            @keydown.up.prevent="onKeydownUp"
+            @keydown.down.prevent="onKeydownDown"
+            @keydown.tab="onKeydownTab"
             @focus="onFocus"
-            @blur="onBlur"
             v-model="selectedText">
         <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
         <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="active">

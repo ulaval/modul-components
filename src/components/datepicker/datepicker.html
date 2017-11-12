@@ -16,6 +16,7 @@
                @keydown.enter.prevent="onKeydownEnter($event)"
                @keydown.return.prevent="onKeydownEnter($event)"
                @keydown.esc.prevent="closeCalendar"
+               @keydown.tab="onKeydownTab"
                @focus="onFocus"
                @blur="onBlur"
                v-model="formattedDate">

@@ -268,6 +268,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private onKeydownTab(): void {
+        if (!this.mouseIsDown && this.as<MediaQueries>().isMqMinS) {
+            this.open = false;
+        }
+    }
+
     private onKeydown($event: KeyboardEvent): void {
         if ($event.keyCode != KeyCode.M_RETURN &&
             $event.keyCode != KeyCode.M_ENTER &&
@@ -293,12 +299,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             setTimeout(() => {
                 this.open = true;
             }, 300);
-        }
-    }
-
-    private onBlur(): void {
-        if (!this.mouseIsDown && this.as<MediaQueries>().isMqMinS) {
-            this.open = false;
         }
     }
 
