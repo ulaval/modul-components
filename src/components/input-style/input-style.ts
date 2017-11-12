@@ -18,15 +18,14 @@ import { setTimeout } from 'timers';
 export class MInputStyle extends ModulVue {
     @Prop()
     public label: string;
-
     @Prop({ default: false })
     public focus: boolean;
-
     @Prop({ default: true })
     public empty: boolean;
-
     @Prop()
     public width: string;
+    @Prop()
+    public iconName: string;
 
     private animActive: boolean = false;
 
@@ -69,6 +68,10 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasLabel(): boolean {
+        return this.hasIcon || this.hasLabelText ;
+    }
+
+    private get hasLabelText(): boolean {
         return !!this.label && this.label != '';
     }
 
@@ -76,6 +79,10 @@ export class MInputStyle extends ModulVue {
         let focus: boolean = this.focus && this.as<InputState>().active;
         this.$emit('focus', focus);
         return focus;
+    }
+
+    private get hasIcon(): boolean {
+        return !!this.iconName && this.iconName != '';
     }
 
     private get hasDefaultSlot(): boolean {

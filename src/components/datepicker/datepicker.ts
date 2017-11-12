@@ -40,21 +40,18 @@ export class MDatepicker extends ModulVue {
     @Model('change')
     @Prop()
     public value: moment.Moment | Date;
-
-    @Prop({ default: 'DD/MM/Y' })
-    public format: string;
-
-    @Prop({ default: () => { return moment().subtract(10, 'year'); } })
-    public min: moment.Moment | Date;
-
-    @Prop({ default: () => { return moment().add(10, 'year'); } })
-    public max: moment.Moment | Date;
-
-    @Prop({ default: false })
-    public required: boolean;
-
     @Prop()
     public label: string;
+    @Prop()
+    public iconName: boolean;
+    @Prop({ default: false })
+    public required: boolean;
+    @Prop({ default: 'DD/MM/Y' })
+    public format: string;
+    @Prop({ default: () => { return moment().subtract(10, 'year'); } })
+    public min: moment.Moment | Date;
+    @Prop({ default: () => { return moment().add(10, 'year'); } })
+    public max: moment.Moment | Date;
 
     private internalOpen: boolean = false;
     private view: string = 'day';

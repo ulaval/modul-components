@@ -19,11 +19,18 @@
         "width": {
             "type": "string"
         },
+        "iconName": {
+            "type": "string"
+        },
         "textNoData": {
             "type": "string"
         },
         "textNoMatch": {
             "type": "string"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
         },
         "waiting": {
             "type": "boolean",

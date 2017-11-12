@@ -197,10 +197,17 @@ $m-input-style--padding: 4px !default;
         z-index: 0;
         transform-origin: 0 0;
         transform: translate3d(0, 13px, 0); // Magic number
+        display: inline-flex;
+        align-items: center;
         width: 100%;
         margin-bottom: $m-margin--xs;
         font-size: $m-font-size;
         font-weight: $m-font-weight;
+
+        .m-icon {
+            font-size: 85%;
+            margin-right: $m-padding--xs;
+        }
     }
 
     &__placeholder,
