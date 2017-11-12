@@ -97,6 +97,7 @@
         width: 100%;
         min-height: $m-touch-size--l;
         max-height: 100%;
+        background: $m-color--white;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
         cursor: auto;
     }
@@ -131,7 +132,6 @@
     &__body,
     &__footer {
         position: relative;
-        background: $m-color--white;
 
         &.m--no-padding {
             padding: 0;

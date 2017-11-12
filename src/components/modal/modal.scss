@@ -115,11 +115,15 @@ $m-modal--max-width: 380px !default;
                 @include m-scrollbar-thumb();
             }
         }
+
+        ~ .m-modal__footer {
+            padding-top: 0;
+        }
     }
 
     &__footer {
         width: 100%;
-        padding: 0 $m-padding $m-padding $m-padding;
+        padding: $m-padding;
         display: inline-flex;
         justify-content: center;
         flex-direction: column;
