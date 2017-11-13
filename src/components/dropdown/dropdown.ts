@@ -12,13 +12,12 @@ import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/medi
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import i18nPlugin from '../../utils/i18n/i18n';
 import ButtonPlugin from '../button/button';
-import TextFieldPlugin from '../text-field/text-field';
+import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import PopupPlugin from '../popup/popup';
+import { log } from 'util';
 
-const DROPDOWN_MAX_HEIGHT: string = '220px';
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
-const TEXTFIELD_MIN_WIDTH: string = '130px'; // from text-field.scss
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 @WithRender
@@ -36,8 +35,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public label: string;
     @Prop()
     public placeholder: string;
-    @Prop({ default: false })
-    public waiting: boolean;
+    @Prop()
+    public iconName: string;
     @Prop({ default: false })
     public filterable: boolean;
     @Prop({ default: DROPDOWN_MAX_WIDTH })
@@ -62,8 +61,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private mouseIsDown: boolean = false;
 
-    private maxHeight: string = DROPDOWN_MAX_HEIGHT;
-
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
         if (text !== undefined && this.dirty && (this.internalFilterRegExp)) {
@@ -76,10 +73,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.internalItems.some(i => {
             return i.group == group;
         });
-    }
-
-    public focus(): void {
-        ((this.$refs.mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement).focus();
     }
 
     protected mounted(): void {
@@ -115,6 +108,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 if (this.filterable) {
                     inputEl.setSelectionRange(0, this.selectedText.length);
                 }
+                this.focusSelected();
                 this.scrollToFocused();
             } else {
                 this.$emit('close');
@@ -125,6 +119,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Watch('value')
     private setInternalValue(value: any): void {
         this.internalValue = value;
+        this.setInputWidth();
     }
 
     public get model(): any {
@@ -136,6 +131,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$emit('change', value);
         this.dirty = false;
         this.internalOpen = false;
+        this.setInputWidth();
+    }
+
+    private setInputWidth(): void {
+        this.$nextTick(() => {
+            (this.$refs.mInputStyle as MInputStyle).setInputWidth();
+        });
     }
 
     public get focused(): any {
@@ -191,7 +193,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         let items: MDropdownItem[] = [];
         // items that can be reached with the keyboard (!disabled)
         let navigation: MDropdownItem[] = [];
-        (this.$refs.popper as Vue).$children[0].$children.forEach(item => {
+        (this.$refs.popup as Vue).$children[0].$children.forEach(item => {
             if (item instanceof MDropdownItem && !item.inactive && !item.filtered) {
                 items.push(item);
                 if (!item.disabled) {
@@ -220,10 +222,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return (this.textNoMatch ? this.textNoMatch : this.$i18n.translate('m-dropdown:no-result'));
     }
 
-    private get propMaxHeight(): string | undefined {
-        return this.as<MediaQueries>().isMqMinS ? this.maxHeight : undefined;
-    }
-
     private get hasItems(): boolean {
         return this.internalItems.length > 0;
     }
@@ -233,7 +231,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get inactive(): boolean {
-        return this.as<InputState>().isDisabled || this.waiting;
+        return this.as<InputState>().isDisabled || this.as<InputState>().isWaiting;
     }
 
     public get hasLabel(): boolean {
@@ -270,6 +268,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private onKeydownTab(): void {
+        if (!this.mouseIsDown && this.as<MediaQueries>().isMqMinS) {
+            this.open = false;
+        }
+    }
+
     private onKeydown($event: KeyboardEvent): void {
         if ($event.keyCode != KeyCode.M_RETURN &&
             $event.keyCode != KeyCode.M_ENTER &&
@@ -280,38 +284,21 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
-    private onMousedown() {
+    private onMousedown(event): void {
         this.mouseIsDown = true;
     }
 
-    private onMouseup() {
+    private onMouseup(event): void {
         setTimeout(() => {
             this.mouseIsDown = false;
         }, 30);
     }
 
-    private arrowOnKeydownEnter(): void {
-        if (!this.inactive) {
-            this.open = !this.open;
-        }
-    }
-
-    private onOpen(): void {
-        this.focusSelected();
-        this.open = true;
-    }
-
     private onFocus(): void {
-        if (!this.mouseIsDown && !this.open && !this.inactive && this.as<MediaQueries>().isMqMinS) {
+        if (!this.mouseIsDown && !this.open && this.as<InputState>().active) {
             setTimeout(() => {
                 this.open = true;
             }, 300);
-        }
-    }
-
-    private onBlur(): void {
-        if (!this.mouseIsDown && this.as<MediaQueries>().isMqMinS) {
-            this.open = false;
         }
     }
 
@@ -379,15 +366,20 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
-                let height: number = el.clientHeight;
-                el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
-                el.style.transition = DROPDOWN_STYLE_TRANSITION;
-                el.style.overflowY = 'hidden';
-                el.style.maxHeight = '0';
+                el.style.opacity = '0';
                 el.style.width = this.$el.clientWidth + 'px';
                 setTimeout(() => {
-                    el.style.maxHeight = height + 'px';
-                    done();
+                    el.style.removeProperty('opacity');
+                    let height: number = el.clientHeight;
+                    el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+                    el.style.transition = DROPDOWN_STYLE_TRANSITION;
+                    el.style.overflowY = 'hidden';
+                    el.style.maxHeight = '0';
+                    setTimeout(() => {
+                        el.style.maxHeight = height + 'px';
+                        done();
+                    }, 0);
+
                 }, 0);
             } else {
                 done();
@@ -411,22 +403,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             }
         });
     }
-
-    private get computedWidth(): string {
-        if (this.width == 'min') {
-            return TEXTFIELD_MIN_WIDTH;
-        } else if (this.width == 'max') {
-            return DROPDOWN_MAX_WIDTH;
-        } else {
-            return this.width;
-        }
-    }
 }
 
 const DropdownPlugin: PluginObject<any> = {
     install(v, options) {
         Vue.use(DropdownItemPlugin);
-        Vue.use(TextFieldPlugin);
+        Vue.use(InputStylePlugin);
         Vue.use(ButtonPlugin);
         Vue.use(PopupPlugin);
         Vue.use(ValidationMessagePlugin);

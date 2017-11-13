@@ -6,8 +6,8 @@ import { PANEL_NAME } from '../component-names';
 import ElementQueries from 'css-element-queries/src/ElementQueries';
 
 export enum MPanelSkin {
-    Primary = 'primary',
-    Secondary = 'secondary'
+    Light = 'light',
+    Dark = 'dark'
 }
 
 const HEADER_RIGHT_CONTENT: string = 'header-right-content';
@@ -16,12 +16,12 @@ const HEADER_RIGHT_CONTENT: string = 'header-right-content';
 @Component
 export class MPanel extends Vue {
     @Prop({
-        default: MPanelSkin.Primary,
-        validator: value =>
-            value == MPanelSkin.Primary ||
-            value == MPanelSkin.Secondary
+        default: MPanelSkin.Light,
+        validator: value => value == MPanelSkin.Light || value == MPanelSkin.Dark
     })
     public skin: MPanelSkin;
+    @Prop({ default : true })
+    public highlightingBorder: boolean;
     @Prop({ default: true })
     public shadow: boolean;
     @Prop({ default: true })
@@ -41,6 +41,14 @@ export class MPanel extends Vue {
 
     protected beforeDestroy(): void {
         ElementQueries.detach(this.$el);
+    }
+
+    private get lightSkin(): boolean {
+        return this.skin == MPanelSkin.Light;
+    }
+
+    private get darkSkin(): boolean {
+        return this.skin == MPanelSkin.Dark;
     }
 
     private get hasHeader(): boolean {

@@ -53,6 +53,10 @@ $m-dropdown--margin: $m-padding--xs !default;
         text-align: left;
         background: $m-color--white;
 
+        @media (min-width: $m-mq--min--s) {
+            max-height: 208px;
+        }
+
         @include m-scrollbar-ie();
 
         &::-webkit-scrollbar {
@@ -90,9 +94,5 @@ $m-dropdown--margin: $m-padding--xs !default;
 
     .m-input-style {
         width: 100%;
-    }
-
-    .m-validation-message {
-        cursor: pointer;
     }
 }

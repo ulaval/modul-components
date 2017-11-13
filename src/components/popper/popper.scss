@@ -10,6 +10,10 @@ $m-popper--margin: $m-margin !default;
     &__article {
         position: relative;
 
+        &.m--has-shadow {
+            box-shadow: $m-box-shadow;
+        }
+
         &.m--is-default-anim {
             transition: transform $m-transition-duration ease-in-out, opacity $m-transition-duration ease;
             opacity: 0;
@@ -38,7 +42,7 @@ $m-popper--margin: $m-margin !default;
                 transform: translate3d(-$m-popper--margin, 0, 0) scale($m-popper--scale);
             }
 
-            &.m--is-open.m--is-open {
+            &.m--is-open.m--is-open.m--is-open {
                 transform: translate3d(0, 0, 0);
                 opacity: 1;
             }

@@ -41,8 +41,9 @@
             "type": "boolean",
             "default": false
         },
-        "classNamePortalTarget": {
-            "type": "string"
+        "shadow": {
+            "type": "boolean",
+            "default": false
         },
         "closeOnClickOutside": {
             "type": "boolean",

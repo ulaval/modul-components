@@ -2,8 +2,9 @@ import Vue from 'vue';
 import '../../utils/polyfills';
 import PanelPlugin, { MPanel, MPanelSkin } from './panel';
 
-const SKIN_PRIMARY_CSS: string = 'm--is-primary';
-const SKIN_SECONDARY_CSS: string = 'm--is-secondary';
+const SKIN_LIGHT_CSS: string = 'm--is-skin-light';
+const SKIN_DARK_CSS: string = 'm--is-skin-dark';
+const HAS_HIGHLIGHTING_BORDER_CSS: string = 'm--has-highlighting-Border';
 const NO_SHADOW_CSS: string = 'm--no-shadow';
 const NO_BORDER_CSS: string = 'm--no-border';
 const NO_PADDING_CSS: string = 'm--no-padding';
@@ -12,8 +13,8 @@ let panel: MPanel;
 
 describe('MPanelSkin', () => {
     it('validates enum', () => {
-        expect(MPanelSkin.Primary).toEqual('primary');
-        expect(MPanelSkin.Secondary).toEqual('secondary');
+        expect(MPanelSkin.Light).toEqual('light');
+        expect(MPanelSkin.Dark).toEqual('dark');
     });
 });
 
@@ -24,23 +25,37 @@ describe('panel', () => {
     });
 
     it('css class for panel are not present', () => {
-        expect(panel.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
         expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
         expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
     });
 
     it('skin prop', () => {
-        expect(panel.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
 
-        panel.skin = MPanelSkin.Secondary;
+        panel.skin = MPanelSkin.Dark;
         Vue.nextTick(() => {
-            expect(panel.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeTruthy();
-            expect(panel.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeFalsy();
+            expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeTruthy();
+            expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
 
-            panel.skin = MPanelSkin.Primary;
+            panel.skin = MPanelSkin.Light;
             Vue.nextTick(() => {
-                expect(panel.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeTruthy();
-                expect(panel.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
+                expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
+                expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+            });
+        });
+    });
+
+    it('highlightingBorder prop', () => {
+        expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeTruthy();
+
+        panel.highlightingBorder = false;
+        Vue.nextTick(() => {
+            expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeFalsy();
+
+            panel.highlightingBorder = true;
+            Vue.nextTick(() => {
+                expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeTruthy();
             });
         });
     });

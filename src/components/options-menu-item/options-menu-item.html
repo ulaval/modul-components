@@ -1,4 +1,9 @@
-<li class="m-options-menu-item" :class="{ 'm-is--disabled' : disabled }" tabindex="0" @keydown.enter.prevent="onKeydownEnter" @click.prevent="onClick" ref="m-options-menu-item">
+<li ref="m-options-menu-item"
+    tabindex="0"
+    class="m-options-menu-item"
+    :class="{ 'm--is-disabled' : disabled }"
+    @keydown.enter.prevent="onKeydownEnter"
+    @click.prevent="onClick">
     <span class="m-options-menu-item__icon" ref="icon">
         <m-icon :name="iconName" v-if="hasIcon"></m-icon>
     </span>

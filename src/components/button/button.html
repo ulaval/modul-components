@@ -17,7 +17,7 @@
     <m-spinner aria-hidden="true" class="m-button__icon m--is-left" skin="lighter" size="small" v-if="isWaiting"></m-spinner>
     <span class="m-button__text">
         <slot></slot>
-        <span class="m-button__more-info" v-if="hasMoreInfo">
+        <span class="m-button__more-info" v-if="hasMoreInfoSlot">
             <slot name="more-info"></slot>
         </span>
     </span>

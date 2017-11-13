@@ -48,20 +48,6 @@ describe('dropdown', () => {
         expect(input).not.toBeNull();
     });
 
-    it('enabled prop waiting', () => {
-        expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeFalsy();
-
-        dropdown.waiting = true;
-        Vue.nextTick(() => {
-            expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeTruthy();
-
-            dropdown.waiting = false;
-            Vue.nextTick(() => {
-                expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeFalsy();
-            });
-        });
-    });
-
     it('v-model change', () => {
         let vm = new Vue({
             data: {

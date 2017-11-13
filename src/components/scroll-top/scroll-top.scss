@@ -7,7 +7,7 @@
             right: $m-padding;
             bottom: $m-padding;
 
-            @media (min-width: $m-bp--min--s) {
+            @media (min-width: $m-mq--min--s) {
                 right: $m-padding--l;
                 bottom: $m-padding--l;
             }

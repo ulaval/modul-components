@@ -10,13 +10,15 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
     padding: $m-padding;
     margin: 0;
     color: $m-color--text;
-    font-size: $m-font-size--l;
+    font-size: $m-font-size;
     text-decoration: none;
     outline: none;
 
     @include m-word-wrap();
 
-    @media (min-width: $m-bp--min--s) {
+    @media (min-width: $m-mq--min--s) {
+        padding: $m-padding $m-padding--s;
+
         &:not(.m--is-disabled) {
             &:not(.m--is-inactive) {
                 &:not(.m--is-selected) {
