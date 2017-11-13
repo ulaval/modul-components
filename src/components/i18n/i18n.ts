@@ -13,6 +13,8 @@ export class MI18n extends ModulVue {
     public i18nKey: string;
     @Prop()
     public k: string;
+    @Prop()
+    public params: string[];
 
     public created(): void {
         if (!this.$i18n) {
@@ -23,9 +25,10 @@ export class MI18n extends ModulVue {
     private get text(): string {
         let result = '';
         if (this.k) {
-            result = this.$i18n.translate(this.k);
+            let p: string[] = this.params === undefined ? [] : this.params;
+            result = this.$i18n.translate(this.k, p);
         } else if (this.i18nKey) {
-            console.warn('<' + I18N_NAME + '>: Prop i18n-key is deprecated; use prop "k" instead.');
+            console.error('<' + I18N_NAME + '>: Prop i18n-key is deprecated and will be removed in the next major release; use prop "k" instead.');
             result = this.$i18n.translate(this.i18nKey);
         }
 
