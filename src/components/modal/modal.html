@@ -19,11 +19,11 @@
                         <slot name="footer"></slot>
                         <nav class="m-modal__footer__nav" v-if="!hasFooterSlot">
                             <m-button @click="onOk()">
-                                <template v-if="hasPositiveLabel">{{ positiveLabel }}</template>
+                                <template v-if="hasOkLabel">{{ okLabel }}</template>
                                 <m-i18n v-else k="m-base-window:ok"></m-i18n>
                             </m-button>
                             <m-link mode="button" @click="onCancel()">
-                                <template v-if="hasNegativeLabel">{{ negativeLabel }}</template>
+                                <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
                                 <m-i18n v-else k="m-base-window:cancel"></m-i18n>
                             </m-link>
                         </nav>

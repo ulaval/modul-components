@@ -16,9 +16,9 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     @Prop()
     public message: string;
     @Prop()
-    public positiveLabel: string;
+    public okLabel: string | undefined;
     @Prop()
-    public negativeLabel: string;
+    public cancelLabel: string | undefined;
 
     public handlesFocus(): boolean {
         return true;
@@ -62,12 +62,12 @@ export class MModal extends ModulVue implements PortalMixinImpl {
         return !!this.message;
     }
 
-    private get hasPositiveLabel(): boolean {
-        return !!this.positiveLabel;
+    private get hasOkLabel(): boolean {
+        return !!this.okLabel;
     }
 
-    private get hasNegativeLabel(): boolean {
-        return !!this.negativeLabel;
+    private get hasCancelLabel(): boolean {
+        return !!this.cancelLabel;
     }
 }
 

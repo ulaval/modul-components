@@ -1,23 +1,27 @@
 import { PluginObject } from 'vue';
 import { MModal } from '../../components/modal/modal';
 
-export type ConfirmFunction = (message: string, positiveLabel: string, negativeLabel: string ) => Promise<any>;
+export interface ConfirmOptions {
+    okLabel?: string;
+    cancelLabel?: string;
+    silentCancel?: boolean;
+}
+
+export type ConfirmFunction = (message: string, options?: ConfirmOptions) => Promise<any>;
 
 let confirmInstance: MModal | undefined = undefined;
 
-export const confirmFunction: ConfirmFunction = (message: string, positiveLabel: string, negativeLabel: string) => {
+export const confirmFunction: ConfirmFunction = (message: string, options?: ConfirmOptions) => {
     if (!confirmInstance) {
         confirmInstance = new MModal({
-            el: document.createElement('div'),
-            propsData: {
-                message: message,
-                positiveLabel: positiveLabel,
-                negativeLabel: negativeLabel
-            }
+            el: document.createElement('div')
         });
 
         document.body.appendChild(confirmInstance.$el);
     }
+    confirmInstance.message = message;
+    confirmInstance.okLabel = options && options.okLabel ? options.okLabel : undefined;
+    confirmInstance.cancelLabel = options && options.cancelLabel ? options.cancelLabel : undefined;
 
     return new Promise((resolve, reject) => {
         let onOk = () => {
@@ -31,7 +35,9 @@ export const confirmFunction: ConfirmFunction = (message: string, positiveLabel:
             if (confirmInstance) {
                 unhook();
             }
-            reject();
+            if (!(options && options.silentCancel)) {
+                reject();
+            }
         };
 
         let hook = () => {
