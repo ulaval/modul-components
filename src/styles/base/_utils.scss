@@ -192,39 +192,130 @@
 }
 
 // ======================================================================
-//  List
+//  formulaire
 // ======================================================================
-.m-u--list-header {
+.m-u--label {
+    font-size: $m-font-size--l;
+    font-weight: $m-font-weight--bold;
+}
+
+// ======================================================================
+//  table
+// ======================================================================
+.m-u--table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; // AEL-33
+
+    th {
+        padding: 0 $m-padding--s $m-margin--s;
+        font-weight: $m-font-weight--bold;
+        color: $m-color--black;
+        border-bottom: 2px solid $m-color--grey-light;
+        text-align: left;
+
+        &:first-child {
+            padding-left: $m-padding;
+        }
+
+        &:last-child {
+            padding-right: $m-padding;
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid $m-color--grey-light;
+        }
+    }
+
+    td {
+        padding: $m-padding $m-padding--s;
+        margin: 1px 0;
+        vertical-align: top;
+        text-align: left;
+
+        &:first-child {
+            padding-left: $m-padding;
+            text-align: left;
+        }
+
+        &:last-child {
+            padding-right: $m-padding;
+        }
+    }
+
+    &.m--has-option-menu {
+        th,
+        td {
+            &:last-child {
+                padding-left: 0;
+                padding-right: 0;
+                width: 44px;
+                text-align: center;
+            }
+        }
+
+        td {
+            padding: 0 $m-padding--s;
+            vertical-align: middle;
+        }
+    }
+}
+
+// ======================================================================
+//  header (list, table)
+// ======================================================================
+.m-u--header {
+    font-size: $m-font-size--l;
+    font-weight: $m-font-weight--bold;
     padding: $m-padding;
     background-color: $m-color--grey-lighter;
+    position: relative;
 
-    > p,
-    > h1,
-    > h2,
-    > h3,
-    > h4,
-    > h5,
-    > h6 {
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         margin-top: 0;
         margin-bottom: 0;
         font-size: $m-font-size--l;
         font-weight: $m-font-weight--bold;
     }
 
-    @media (max-width: $m-mq--max--s) {
-        flex-direction: column;
-        align-items: flex-start;
+    &.m--has-option-menu {
+        padding-right: $m-touch-size;
+
+        :last-child {
+            width: $m-touch-size;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+        }
+    }
+
+    &:not(.m--has-option-menu) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media screen and (max-width: $m-mq--max--s) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 
     & + ul {
         margin-top: 0;
     }
-}
 
-// ======================================================================
-//  List
-// ======================================================================
-.m-u--label {
-    font-size: $m-font-size--l;
-    font-weight: $m-font-weight--bold;
+    & + .m-u--table {
+        th {
+            padding-top: $m-padding;
+        }
+    }
 }

@@ -40,7 +40,6 @@ import Status from './status/status';
 import StepPlugin from './step/step';
 import SwitchPlugin from './switch/switch';
 import TabPanePlugin from './tab-pane/tab-pane';
-import TablePlugin from './table/table';
 import TabsPlugin from './tabs/tabs';
 import Template from './template/template';
 import TextFieldPlugin from './text-field/text-field';
@@ -93,7 +92,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(StepPlugin);
         Vue.use(SwitchPlugin);
         Vue.use(TabPanePlugin);
-        Vue.use(TablePlugin);
         Vue.use(TabsPlugin);
         Vue.use(Template);
         Vue.use(TextFieldPlugin);

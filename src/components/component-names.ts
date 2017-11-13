@@ -37,7 +37,6 @@ export const STATUS_NAME: string = 'm-status';
 export const STEP_NAME: string = 'm-step';
 export const SWITCH_NAME: string = 'm-switch';
 export const TAB_PANE_NAME: string = 'm-tab-pane';
-export const TABLE_NAME: string = 'm-table';
 export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
 export const TEXT_FIELD_NAME: string = 'm-text-field';
@@ -88,7 +87,6 @@ export const components: string[] = [
     STEP_NAME,
     SWITCH_NAME,
     TAB_PANE_NAME,
-    TABLE_NAME,
     TABS_NAME,
     TEMPLATE_NAME,
     TEXT_FIELD_NAME,
