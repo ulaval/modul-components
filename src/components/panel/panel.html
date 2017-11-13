@@ -1,16 +1,19 @@
-<article class="m-panel" :class="{ 'm--is-primary': propMode == 'primary',
-                'm--is-secondary': propMode == 'secondary',
-                'm--no-shadow': !shadow,
-                'm--no-border': !border }">
+<article class="m-panel"
+         :class="{ 'm--is-skin-light': lightSkin,
+                   'm--is-skin-dark': darkSkin,
+                   'm--has-highlighting-border': highlightingBorder,
+                   'm--no-shadow': !shadow,
+                   'm--no-border': !border }">
     <header class="m-panel__header" :class="{ 'm--no-padding': !hasPaddingHeader, 'm--is-right-content-alone': !hasHeaderSlot }" v-if="hasHeader">
         <div class="m-panel__header__content"><slot name="header"></slot></div>
         <div class="m-panel__header__content-right" v-if="hasHeaderRightContentSlot">
             <slot name="header-right-content"></slot>
         </div>
     </header>
-    <div class="m-panel__body" :class="{ 'm--no-padding': !hasPaddingBody, 'm--has-padding-top': !hasHeader && hasPaddingBody }" v-if="hasDefaultSlot">
-        <slot></slot>
-    </div>
+    <div class="m-panel__body"
+         :class="{ 'm--no-padding': !hasPaddingBody,
+                   'm--has-padding-top': !hasHeader && hasPaddingBody }"
+                   v-if="hasDefaultSlot"><slot></slot></div>
     <footer class="m-panel__footer" :class="{ 'm--no-padding': !hasPaddingFooter }" v-if="hasFooterSlot">
         <slot name="footer"></slot>
     </footer>

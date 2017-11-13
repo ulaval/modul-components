@@ -1,4 +1,7 @@
 @import 'abstracts/variables';
+$m-options-menu-item--color-hover: $m-color--interactive-lightest !default;
+$m-options-menu-item--color-select: $m-color--grey-light !default;
+$m-options-menu-item--color-active: $m-color--grey-lightest !default;
 
 .m-options-menu-item {
     display: table-row;
@@ -7,8 +10,8 @@
     &__icon,
     &__text {
         display: table-cell;
-        padding-top: $m-margin;
-        padding-bottom: $m-margin;
+        padding-top: $m-padding;
+        padding-bottom: $m-padding;
     }
 
     &__icon {
@@ -23,24 +26,31 @@
         padding-left: 10px;
     }
 
-    &.m-is--disabled {
-        cursor: default;
+    &.m--is-disabled {
+        cursor: not-allowed;
     }
 
-    &:hover:not(.m-is--disabled),
-    &:focus:not(.m-is--disabled) {
-        background-color: $m-color--grey-lighter;
+    &:not(.m--is-disabled) {
+        transition: background $m-transition-duration ease;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background-color: $m-options-menu-item--color-hover;
+
+            .m-options-menu-item {
+                &__icon {
+                    color: $m-color--black-grey;
+                }
+            }
+        }
+
+        &:active {
+            background-color: $m-options-menu-item--color-active;
+        }
     }
 
     &:focus {
         outline: 0;
-    }
-
-    &:hover:not(.m-is--disabled) &__icon {
-        color: $m-color--black-grey;
-    }
-
-    &:active:not(.m-is--disabled) {
-        background-color: $m-color--interactive-lightest;
     }
 }

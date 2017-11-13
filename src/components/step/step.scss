@@ -9,7 +9,7 @@ $m-step--badge--size-s: 10px;
     display: block;
     padding-bottom: $m-padding--l;
 
-    &[max-width~="#{$m-bp--max--s - $m-padding *2}"] {
+    &[max-width~="#{$m-mq--max--s - $m-padding *2}"] {
         &::before {
             left: #{ ($m-step--icon--size-s / 2) - 1 }; // Magic number
         }

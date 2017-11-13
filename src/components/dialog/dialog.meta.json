@@ -14,6 +14,6 @@
             "default": 2
         }
     },
-    "overview": "dialog-window.overview",
-    "preview": "dialog-window.preview"
+    "overview": "dialog.overview",
+    "preview": "dialog.preview"
 }

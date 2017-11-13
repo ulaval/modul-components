@@ -187,15 +187,27 @@ $m-input-style--padding: 4px !default;
         }
     }
 
+    &__label,
+    &__body__adjust-width-auto {
+        padding-right: $m-padding;
+    }
+
     &__label {
         position: relative;
         z-index: 0;
         transform-origin: 0 0;
         transform: translate3d(0, 13px, 0); // Magic number
+        display: inline-flex;
+        align-items: center;
         width: 100%;
         margin-bottom: $m-margin--xs;
         font-size: $m-font-size;
         font-weight: $m-font-weight;
+
+        .m-icon {
+            font-size: 85%;
+            margin-right: $m-padding--xs;
+        }
     }
 
     &__placeholder,
@@ -267,7 +279,6 @@ $m-input-style--padding: 4px !default;
         &__adjust-width-auto {
             height: 0;
             opacity: 0;
-            margin-right: $m-margin--s;
             user-select: none;
             white-space: nowrap;
         }

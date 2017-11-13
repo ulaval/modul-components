@@ -6,7 +6,7 @@ import WithRender from './flex-template.html?style=./flex-template.scss';
 import { FLEX_TEMPLATE_NAME } from '../component-names';
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
 
-export enum MFlexTemplateFrom {
+export enum MFlexTemplateOrigin {
     Left = 'left',
     Right = 'right'
 }
@@ -24,8 +24,8 @@ export class MFlexTemplate extends ModulVue {
     public menuWidth: string;
     @Prop({ default: true })
     public menuFixe: boolean;
-    @Prop({ default: MFlexTemplateFrom.Left })
-    public menuFrom: MFlexTemplateFrom;
+    @Prop({ default: MFlexTemplateOrigin.Left })
+    public menuOrigin: MFlexTemplateOrigin;
     @Prop({ default: false })
     public menuOpen: boolean;
     @Prop({ default: false })
@@ -173,8 +173,8 @@ export class MFlexTemplate extends ModulVue {
         return this.pageMinHeight == undefined || this.pageMinHeight == '' ? '100vh' : this.pageMinHeight;
     }
 
-    private get isMenuFromRight(): boolean {
-        return this.menuFrom == MFlexTemplateFrom.Right;
+    private get isMenuOriginRight(): boolean {
+        return this.menuOrigin == MFlexTemplateOrigin.Right;
     }
 
     private get isMenuFixeFake(): boolean {

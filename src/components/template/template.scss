@@ -125,7 +125,7 @@ $m-template--column-color: $m-color--grey-light;
     }
 }
 
-@media (max-width: $m-bp--max--s) {
+@media (max-width: $m-mq--max--s) {
     .m-template {
         &__header,
         &__body__content,
@@ -135,7 +135,7 @@ $m-template--column-color: $m-color--grey-light;
     }
 }
 
-@media (min-width: $m-bp--min--s) {
+@media (min-width: $m-mq--min--s) {
     .m-template {
         &__body__content,
         &__column {

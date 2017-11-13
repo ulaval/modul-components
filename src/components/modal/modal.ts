@@ -3,7 +3,7 @@ import { PluginObject } from 'vue';
 import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
-import WithRender from './modal-window.html?style=./modal-window.scss';
+import WithRender from './modal.html?style=./modal.scss';
 import { Portal, PortalMixinImpl, PortalMixin } from '../../mixins/portal/portal';
 
 @WithRender
@@ -16,7 +16,9 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     @Prop()
     public message: string;
     @Prop()
-    public className: string;
+    public okLabel: string | undefined;
+    @Prop()
+    public cancelLabel: string | undefined;
 
     public handlesFocus(): boolean {
         return true;
@@ -58,6 +60,14 @@ export class MModal extends ModulVue implements PortalMixinImpl {
 
     private get hasMessage(): boolean {
         return !!this.message;
+    }
+
+    private get hasOkLabel(): boolean {
+        return !!this.okLabel;
+    }
+
+    private get hasCancelLabel(): boolean {
+        return !!this.cancelLabel;
     }
 }
 

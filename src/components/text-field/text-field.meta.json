@@ -23,7 +23,7 @@
         "placeholder": {
             "type": "string"
         },
-        "filterable": {
+        "passwordIcon": {
             "type": "boolean",
             "default": true
         },
@@ -32,6 +32,10 @@
             "default": false
         },
         "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
             "type": "boolean",
             "default": false
         },

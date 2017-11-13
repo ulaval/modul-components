@@ -7,6 +7,7 @@ import { DROPDOWN_ITEM_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import RadioStylePlugin from '../radio-style/radio-style';
+import { log } from 'util';
 
 export interface MDropdownInterface {
     model: any;
@@ -89,7 +90,7 @@ export class MDropdownItem extends ModulVue {
         return (this.root as MDropdownInterface).focused == this.value;
     }
 
-    private onMousedown(): void {
+    private onClick(): void {
         if (!this.inactive && !this.root.inactive && !this.disabled) {
             this.root.model = this.value;
         }

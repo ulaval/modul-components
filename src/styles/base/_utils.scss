@@ -211,7 +211,7 @@
         font-weight: $m-font-weight--bold;
     }
 
-    @media (max-width: $m-bp--max--s) {
+    @media (max-width: $m-mq--max--s) {
         flex-direction: column;
         align-items: flex-start;
     }

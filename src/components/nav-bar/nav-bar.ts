@@ -22,45 +22,31 @@ export enum MNavbarSkin {
 @Component
 export class MNavbar extends BaseNavBar {
 
-    @Prop({ default: MNavbarSkin.Dark })
+    @Prop({
+        default: MNavbarSkin.Dark,
+        validator: value => value == MNavbarSkin.Regular || value == MNavbarSkin.Light || value == MNavbarSkin.Dark || value == MNavbarSkin.Vanilla || value == MNavbarSkin.Arrow
+    })
     public skin: string;
     @Prop()
     public line: boolean;
     @Prop()
     public value: string;
-
-    private isAnimActive: boolean = false;
-    private internalSelectedID: string;
-
-    private itemCount: number = 0;
-    private arrItem = new Array();
-    private childrenIndexSelected: number;
+    @Prop({ default: true })
+    public margin: string;
 
     public isItemSelected(value, el): boolean {
-        if (this.propSkin == MNavbarSkin.Light && this.value == value && el != undefined) {
+        if (this.skin == MNavbarSkin.Light && this.value == value && el != undefined) {
             this.setLinePosition(el);
         }
-        if (this.propSkin == MNavbarSkin.Arrow && this.value == value && el != undefined) {
+        if (this.skin == MNavbarSkin.Arrow && this.value == value && el != undefined) {
             this.setArrowPosition(el);
         }
         return this.value == value;
     }
 
     protected mounted() {
-        this.setItem();
         this.$nextTick(() => {
             this.initLine();
-        });
-    }
-
-    private setItem(): void {
-        this.$children.forEach((child, index, arr) => {
-            if (index == 0) {
-                child['isFirtsItem'] = true;
-            }
-            if (arr.length - 1 === index) {
-                child['isLastItem'] = true;
-            }
         });
     }
 
@@ -97,20 +83,16 @@ export class MNavbar extends BaseNavBar {
         });
     }
 
-    private get propSkin(): MNavbarSkin {
-        return this.skin == MNavbarSkin.Regular || this.skin == MNavbarSkin.Dark || this.skin == MNavbarSkin.Vanilla || this.skin == MNavbarSkin.Arrow ? this.skin : MNavbarSkin.Light;
-    }
-
     private get propLine(): boolean {
         if (this.line == undefined || this.line == true) {
-            return this.propSkin == MNavbarSkin.Light;
+            return this.skin == MNavbarSkin.Light;
         }
         return this.line;
     }
 
     private get propArrow(): boolean {
         if (this.line == undefined || this.line == true) {
-            return this.propSkin == MNavbarSkin.Arrow;
+            return this.skin == MNavbarSkin.Arrow;
         }
         return this.line;
     }

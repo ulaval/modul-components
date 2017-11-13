@@ -258,4 +258,10 @@
             }
         }
     }
+
+    &.m--no-margin {
+        .m-nav-bar-item {
+            margin: 0;
+        }
+    }
 }

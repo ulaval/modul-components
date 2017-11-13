@@ -7,7 +7,7 @@ import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import PopperPlugin, { MPopperPlacement } from '../popper/popper';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
-import SidebarPlugin from '../sidebar-window/sidebar-window';
+import SidebarPlugin from '../sidebar/sidebar';
 
 @WithRender
 @Component({

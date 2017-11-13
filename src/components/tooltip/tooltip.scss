@@ -70,10 +70,8 @@ $m-tooltip--max-height: 280px !default;
     &__body {
         padding: $m-padding;
         background: $m-color--information;
-        box-shadow: rgba($m-color--black, 0.3) 0 1px 3px 0;
-        border-radius: $m-border-radius--s;
 
-        @media (max-width: $m-bp--max--s) {
+        @media (max-width: $m-mq--max--s) {
             position: relative;
 
             &::after {
@@ -87,12 +85,13 @@ $m-tooltip--max-height: 280px !default;
             }
         }
 
-        @media (min-width: $m-bp--min--s) {
+        @media (min-width: $m-mq--min--s) {
             width: $m-tooltip--width;
             max-height: $m-tooltip--max-height;
             overflow-x: hidden;
             overflow-y: auto;
             border: 1px solid $m-color--interactive;
+            border-radius: $m-border-radius--s;
         }
 
         @media (max-height: $m-tooltip--max-height) {

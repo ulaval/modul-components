@@ -4,10 +4,10 @@
 .m-popup {
     display: inline-flex;
 
-    &__body {
-        &.m--has-shadow {
-            box-shadow: $m-box-shadow;
-        }
+    &__header,
+    &__body,
+    &__footer {
+        position: relative;
     }
 }
 

@@ -5,7 +5,7 @@
             <h1>Attributes list</h1>
         </div>
         <h2>Attributes by component</h2>
-        <m-bullet-list class="m-u--margin-top">
+        <ul class="m-u--margin-top m-u--bullet-list">
             <li v-for="meta in allMeta">
                 {{meta.tag}}
                 <ul>
@@ -20,9 +20,9 @@
                     </li>
                 </ul>
             </li>
-        </m-bullet-list>
+        </ul>
         <h2>Components by attribute</h2>
-        <m-bullet-list class="m-u--margin-top">
+        <ul class="m-u--margin-top m-u--bullet-list">
             <li v-for="attribute in getAllAttributes()">
                 {{attribute}}
                 <ul>
@@ -31,6 +31,6 @@
                     </li>
                 </ul>
             </li>
-        </m-bullet-list>
+        </ul>
     </m-template>
 </m-flex-template>

@@ -3,6 +3,6 @@
     "name": "m-modal-meta:name",
     "production": true,
     "attributes": {},
-    "overview": "modal-window.overview",
+    "overview": "modal.overview",
     "preview": "modal.preview"
 }

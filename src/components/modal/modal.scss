@@ -22,11 +22,11 @@ $m-modal--max-width: 380px !default;
             display: block;
         }
 
-        @media screen and (min-width: $m-bp--min--s) {
+        @media screen and (min-width: $m-mq--min--s) {
             padding: $m-padding--l;
         }
 
-        @media screen and (max-width: $m-bp--max--s) {
+        @media screen and (max-width: $m-mq--max--s) {
             padding: $m-padding;
         }
 
@@ -115,26 +115,24 @@ $m-modal--max-width: 380px !default;
                 @include m-scrollbar-thumb();
             }
         }
+
+        ~ .m-modal__footer {
+            padding-top: 0;
+        }
     }
 
     &__footer {
         width: 100%;
-        padding: 0 $m-padding $m-padding $m-padding;
+        padding: $m-padding;
         display: inline-flex;
         justify-content: center;
-
-        > div {
-            display: inline-flex;
-            flex-direction: column;
-
-            .m-link + .m-link {
-                margin-top: $m-margin;
-            }
-        }
+        flex-direction: column;
+        align-items: center;
 
         &__nav {
             display: inline-flex;
             flex-direction: column;
+            align-items: center;
 
             .m-link {
                 margin-top: $m-margin;
