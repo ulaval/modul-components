@@ -1,9 +1,10 @@
 <div class="m-nav-bar" :class="{
-         'm--is-regular': propSkin == 'regular' || propSkin == 'dark',
-         'm--is-light': propSkin == 'light',
-         'm--is-dark': propSkin == 'dark',
-         'm--is-vanilla': propSkin == 'vanilla',
-         'm--is-arrow': propSkin == 'arrow' }">
+         'm--is-regular': skin == 'regular' || skin == 'dark',
+         'm--is-light': skin == 'light',
+         'm--is-dark': skin == 'dark',
+         'm--is-vanilla': skin == 'vanilla',
+         'm--is-arrow': skin == 'arrow',
+         'm--no-margin': !margin }">
     <nav class="m-nav-bar__wrap">
         <ul class="m-nav-bar__list" aria-hidden="true">
             <slot></slot>
