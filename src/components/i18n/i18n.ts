@@ -15,6 +15,8 @@ export class MI18n extends ModulVue {
     public k: string;
     @Prop()
     public params: string[];
+    @Prop({ default: true })
+    public htmlEncode: boolean;
 
     public created(): void {
         if (!this.$i18n) {
@@ -26,7 +28,7 @@ export class MI18n extends ModulVue {
         let result = '';
         if (this.k) {
             let p: string[] = this.params === undefined ? [] : this.params;
-            result = this.$i18n.translate(this.k, p);
+            result = this.$i18n.translate(this.k, p, undefined, undefined, this.htmlEncode);
         } else if (this.i18nKey) {
             console.error('<' + I18N_NAME + '>: Prop i18n-key is deprecated and will be removed in the next major release; use prop "k" instead.');
             result = this.$i18n.translate(this.i18nKey);
