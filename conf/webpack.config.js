@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
-const DefinePlugin = require("webpack/lib/DefinePlugin");
 const path = require('path');
 
 function resolve(dir) {
@@ -117,12 +116,7 @@ module.exports = function (env) {
             new ContextReplacementPlugin(
                 /moment[\/\\]locale$/,
                 /en-ca|fr-ca/
-            ),
-            new DefinePlugin({
-                'process.env': {
-                    NODE_ENV: '"patate"'
-                }
-            })
+            )
         ]
     }
 
