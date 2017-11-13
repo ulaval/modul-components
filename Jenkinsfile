@@ -47,10 +47,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            envoyerNotifications currentBuild.result
-        }
-    }
 }
