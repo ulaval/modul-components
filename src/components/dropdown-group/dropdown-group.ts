@@ -21,6 +21,8 @@ export class MDropdownGroup extends BaseDropdownGroup {
         }
     }
 
+    //fdsfsadfdsaf
+
     public get visible(): boolean {
         return ((this.root as any) as MDropdownInterface).groupHasItems(this);
     }
