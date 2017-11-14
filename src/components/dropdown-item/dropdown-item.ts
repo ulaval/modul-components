@@ -60,7 +60,7 @@ export class MDropdownItem extends ModulVue {
     }
 
     public get inactive(): boolean {
-        return this.value === undefined;
+        return this.value == undefined;
     }
 
     // Value and label rules

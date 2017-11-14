@@ -67,7 +67,7 @@ export class MPopup extends ModulVue {
     }
 
     private get propOpen(): boolean {
-        return this.open === undefined ? this.internalOpen : this.open;
+        return this.open == undefined ? this.internalOpen : this.open;
     }
 
     private set propOpen(value: boolean) {

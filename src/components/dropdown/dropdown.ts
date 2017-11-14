@@ -77,6 +77,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
+    protected created(): void {
+        this.internalValue = undefined;
+    }
+
     protected mounted(): void {
         this.$nextTick(() => {
             this.buildItemsMap();
@@ -125,7 +129,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get model(): any {
-        return this.value === undefined ? this.internalValue : this.value;
+        return this.value == undefined ? this.internalValue : this.value;
     }
 
     public set model(value: any) {

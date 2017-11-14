@@ -16,7 +16,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
     @Model('change')
     @Prop()
-    public value: string;
+    public value: any;
     @Prop({
         default: MRadioPosition.Left,
         validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
@@ -26,11 +26,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     public inline: boolean;
 
     public name: string = uuid.generate();
-    private internalValue: string = '';
-
-    public getValue(): string {
-        return this.model;
-    }
+    private internalValue: any | undefined = '';
 
     public get stateIsDisabled(): boolean {
         return this.as<InputState>().isDisabled;
@@ -44,20 +40,28 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
         return this.as<InputState>().isValid;
     }
 
-    public updateValue(value: string): void {
+    public getValue(): any {
+        return this.model;
+    }
+
+    public updateValue(value: any): void {
         this.model = value;
     }
 
+    protected created() {
+        this.internalValue = undefined;
+    }
+
     @Watch('value')
-    private onValueChange(value: string) {
+    private onValueChange(value: any) {
         this.internalValue = value;
     }
 
-    private get model(): string {
+    private get model(): any {
         return this.value == undefined ? this.internalValue : this.value;
     }
 
-    private set model(value: string) {
+    private set model(value: any) {
         this.internalValue = value;
         this.$emit('change', value);
     }
