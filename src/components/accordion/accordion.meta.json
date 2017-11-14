@@ -24,13 +24,9 @@
             ],
             "default": 1
         },
-        "iconSkin": {
-            "type": "string",
-            "values": [
-                "regular",
-                "light"
-            ],
-            "default": 1
+        "iconBorder": {
+            "type": "boolean",
+            "default": false
         },
         "iconSize": {
             "type": "string",
