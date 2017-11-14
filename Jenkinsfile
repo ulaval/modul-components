@@ -52,7 +52,7 @@ pipeline {
             echo 'Always'
         }
         failure {
-            withEnv("Dhudson.tasks.MailSender.SEND_TO_UNKNOWN_USERS=true") {
+            withEnv(["Dhudson.tasks.MailSender.SEND_TO_UNKNOWN_USERS=true"]) {
                 echo 'Failure'
                 println currentBuild.result
                 step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca jean-philippe.guilmette@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
