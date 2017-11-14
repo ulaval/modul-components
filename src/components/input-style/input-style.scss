@@ -252,10 +252,6 @@ $m-input-style--padding: 4px !default;
             width: 100%;
             padding: 0;
 
-            &[type=password] {
-                letter-spacing: 2px;
-            }
-
             &[readonly=readonly] {
                 cursor: pointer;
             }

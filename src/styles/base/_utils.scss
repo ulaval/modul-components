@@ -211,7 +211,7 @@
         padding: 0 $m-padding--s $m-margin--s;
         font-weight: $m-font-weight--bold;
         color: $m-color--black;
-        border-bottom: 2px solid $m-color--grey-light;
+        border-bottom: 2px solid $m-color--border;
         text-align: left;
 
         &:first-child {
@@ -225,7 +225,7 @@
 
     tbody {
         tr {
-            border-bottom: 1px solid $m-color--grey-light;
+            border-bottom: 1px solid $m-color--border;
         }
     }
 
