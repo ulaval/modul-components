@@ -27,17 +27,16 @@ pipeline {
             }
 
             steps {
-                echo "Building..."
-                echo "$PATH"
+                echo 'Building...'
                 sh 'pwd'
                 echo 'Clean up...'
                 sh 'rm -rf dist'
                 sh 'rm -rf node_modules'
 
-                echo "Initializing npm..."
+                echo 'Initializing npm...'
                 sh 'npm install'
 
-                echo "Building..."
+                echo 'Building...'
                 sh 'npm run buildWebpack'
             }
         }
@@ -45,6 +44,18 @@ pipeline {
             steps {
                 echo 'Testing..'
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Success'
+            println currentBuild.result
+        }
+        failure {
+            echo 'Failure'
+            println currentBuild.result
+            step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'martin.simard@dti.ulaval.ca', sendToIndividuals: true])
         }
     }
 }
