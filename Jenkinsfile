@@ -11,7 +11,6 @@ pipeline {
 
     environment {
         // Pour éviter une erreur: EACCES: permission denied, mkdir '/.npm'
-        Dhudson.tasks.MailSender.SEND_TO_UNKNOWN_USERS = 'true'
         PATH = '/usr/local/bin:/usr/bin'
         npm_config_cache = 'npm-cache'
         DOCKER_REPOSITORY = 'docker-local.maven.at.ulaval.ca/modul'
@@ -53,9 +52,11 @@ pipeline {
             echo 'Always'
         }
         failure {
-            echo 'Failure'
-            println currentBuild.result
-            step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca jean-philippe.guilmette@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
+            withEnv("Dhudson.tasks.MailSender.SEND_TO_UNKNOWN_USERS=true") {
+                echo 'Failure'
+                println currentBuild.result
+                step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca jean-philippe.guilmette@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
+            }
         }
     }
 }
