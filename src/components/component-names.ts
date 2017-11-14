@@ -39,6 +39,7 @@ export const SWITCH_NAME: string = 'm-switch';
 export const TAB_PANE_NAME: string = 'm-tab-pane';
 export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
+export const TEXTAREA_NAME: string = 'm-textarea';
 export const TEXT_FIELD_NAME: string = 'm-text-field';
 export const TIMEPICKER_NAME: string = 'm-timepicker';
 export const TOOLTIP_NAME: string = 'm-tooltip';
@@ -89,6 +90,7 @@ export const components: string[] = [
     TAB_PANE_NAME,
     TABS_NAME,
     TEMPLATE_NAME,
+    TEXTAREA_NAME,
     TEXT_FIELD_NAME,
     TIMEPICKER_NAME,
     TOOLTIP_NAME,

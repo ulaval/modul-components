@@ -32,10 +32,10 @@ export class Mtemplate extends Vue {
     }
 }
 
-const Template: PluginObject<any> = {
+const TemplatePlugin: PluginObject<any> = {
     install(v, options) {
         v.component(TEMPLATE_NAME, Mtemplate);
     }
 };
 
-export default Template;
+export default TemplatePlugin;

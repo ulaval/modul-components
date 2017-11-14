@@ -18,10 +18,12 @@ import { setTimeout } from 'timers';
 export class MInputStyle extends ModulVue {
     @Prop()
     public label: string;
-    @Prop({ default: false })
+    @Prop()
     public focus: boolean;
     @Prop({ default: true })
     public empty: boolean;
+    @Prop()
+    public textarea: boolean;
     @Prop()
     public width: string;
     @Prop()

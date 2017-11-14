@@ -76,7 +76,7 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    &:not(.m--is-label-up) {
+    &:not(.m--is-label-up):not(.m--has-textarea) {
         &.m--has-label .m-input-style__body__left {
             opacity: 0;
         }
@@ -176,7 +176,7 @@ $m-input-style--padding: 4px !default;
     &.m--is-anim-active {
         .m-input-style {
             &__label {
-                transition-property: color, transform;
+                transition-property: color, transform, top, left;
                 transition-duration: $m-transition-duration--l;
                 transition-timing-function: ease;
             }
@@ -187,6 +187,37 @@ $m-input-style--padding: 4px !default;
         }
     }
 
+    &:not(.m--has-textarea) {
+        .m-input-style {
+            &__body {
+                padding: 0 0 $m-input-style--padding 0;
+            }
+        }
+    }
+
+    &.m--has-textarea {
+        &:not(.m--is-label-up) {
+            .m-input-style {
+                &__label {
+                    top: $m-margin;
+                    left: $m-padding--s;
+                }
+            }
+
+            textarea {
+                &,
+                &::placeholder {
+                    color: transparent;
+                }
+            }
+        }
+    }
+
+    ::placeholder {
+        transition: color $m-transition-duration ease;
+        color: $m-color--grey-dark;
+    }
+
     &__label,
     &__body__adjust-width-auto {
         padding-right: $m-padding;
@@ -194,7 +225,9 @@ $m-input-style--padding: 4px !default;
 
     &__label {
         position: relative;
-        z-index: 0;
+        top: 0;
+        left: 0;
+        z-index: 1;
         transform-origin: 0 0;
         transform: translate3d(0, 13px, 0); // Magic number
         display: inline-flex;
@@ -210,20 +243,14 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    &__placeholder,
-    input::placeholder {
-        color: $m-color--grey-dark;
-    }
-
     &__body {
         position: relative;
-        z-index: 1;
+        z-index: 0;
         display: flex;
         align-items: center;
         flex: 1 1 auto;
         width: 100%;
         min-height: 30px; // Magic number
-        padding: 0 0 $m-input-style--padding 0;
         font-weight: $m-font-weight;
         text-decoration: none;
 
@@ -234,7 +261,8 @@ $m-input-style--padding: 4px !default;
         }
 
         &,
-        input {
+        input,
+        textarea {
             outline: none;
             text-overflow: ellipsis;
             font-family: $m-font-family;
@@ -255,6 +283,15 @@ $m-input-style--padding: 4px !default;
             &[readonly=readonly] {
                 cursor: pointer;
             }
+        }
+
+        textarea {
+            margin: $m-padding--s 0 -4px 0; //Margin number
+            padding: $m-margin--s $m-padding--s;
+            width: 100%;
+            min-width: 210px;
+            min-height: 60px;
+            border: 1px solid $m-color--border;
         }
 
         &__left {

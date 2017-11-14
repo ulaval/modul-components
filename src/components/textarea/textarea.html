@@ -1,0 +1,33 @@
+<div class="m-textarea"
+        :class="{ 'm--is-disabled' : isDisabled,
+                  'm--is-waiting' : isWaiting,
+                  'm--has-error' : hasError,
+                  'm--is-valid' : isValid,
+                  'm--has-icon' : hasIcon,
+                  'm--has-label': hasLabel }"
+     @click="onClick">
+    <m-input-style :disabled="isDisabled"
+                   :waiting="isWaiting"
+                   :error="hasError"
+                   :valid="isValid"
+                   :label="label"
+                   :focus="isFocus"
+                   :empty="isEmpty"
+                   :icon-name="iconName"
+                   :textarea="true">
+        <textarea class="m-textarea__input"
+                  :disabled="!active"
+                  :placeholder="placeholder"
+                  @focus="onFocus"
+                  @blur="onBlur"
+                  @keyup="onKeyup"
+                  ref="input"
+                  v-model="model"></textarea>
+    </m-input-style>
+    <m-validation-message
+        :disabled="isDisabled"
+        :waiting="isWaiting"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"></m-validation-message>
+</div>
