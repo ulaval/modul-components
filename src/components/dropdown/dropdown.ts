@@ -77,7 +77,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     protected created(): void {
-        this.internalValue = undefined;
+        this.as<InputPopup>().internalValue = undefined;
     }
 
     protected mounted(): void {
