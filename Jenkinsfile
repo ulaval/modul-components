@@ -15,7 +15,6 @@ pipeline {
         npm_config_cache = 'npm-cache'
         DOCKER_REPOSITORY = 'docker-local.maven.at.ulaval.ca/modul'
         DOCKER_REPOSITORY_URL = 'https://docker-local.maven.at.ulaval.ca'
-        'Dhudson.tasks.MailSender.SEND_TO_UNKNOWN_USERS' = 'true'
     }
 
     stages {
