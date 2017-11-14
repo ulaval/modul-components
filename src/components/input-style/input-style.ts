@@ -36,14 +36,17 @@ export class MInputStyle extends ModulVue {
             let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
             if (inputEl) {
                 if (this.width == 'auto' && this.hasAdjustWidthAutoSlot) {
-                    inputEl.style.width = '0px';
                     setTimeout(() => {
-                        let width: number = adjustWidthAutoEl.clientWidth < 60 ? 60 : adjustWidthAutoEl.clientWidth;
-                        if (this.hasLabel) {
-                            width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
-                        }
-                        inputEl.style.width = width + 'px';
+                        inputEl.style.width = '0px';
+                        setTimeout(() => {
+                            let width: number = adjustWidthAutoEl.clientWidth < 60 ? 60 : adjustWidthAutoEl.clientWidth;
+                            if (this.hasLabel) {
+                                width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                            }
+                            inputEl.style.width = width + 'px';
+                        }, 0);
                     }, 0);
+
                 } else {
                     if (inputEl.style.width) {
                         inputEl.style.removeProperty('width');
@@ -68,7 +71,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return this.hasIcon || this.hasLabelText ;
+        return this.hasIcon || this.hasLabelText;
     }
 
     private get hasLabelText(): boolean {

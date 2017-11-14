@@ -45,8 +45,20 @@ export class MNavbar extends BaseNavBar {
     }
 
     protected mounted() {
+        this.setItem();
         this.$nextTick(() => {
             this.initLine();
+        });
+    }
+
+    private setItem(): void {
+        this.$children.forEach((child, index, arr) => {
+            if (index == 0 && arr.length >= 1) {
+                child['isFirst'] = true;
+            }
+            if (arr.length - 1 === index && arr.length > 1) {
+                child['isLast'] = true;
+            }
         });
     }
 
@@ -65,21 +77,30 @@ export class MNavbar extends BaseNavBar {
 
     private setLinePosition(el: HTMLElement): void {
         this.$nextTick(() => {
-            let positionX: number = el.offsetLeft;
-            let width: number = el.clientWidth;
-            let lineEL: HTMLElement = this.$refs.line as HTMLElement;
-            lineEL.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
-            lineEL.style.width = width + 'px';
+            setTimeout(() => {
+                setTimeout(() => {
+                    let positionX: number = el.offsetLeft;
+                    let width: number = el.clientWidth;
+                    let lineEL: HTMLElement = this.$refs.line as HTMLElement;
+                    lineEL.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
+                    lineEL.style.width = width + 'px';
+                }, 0);
+            }, 0);
         });
+
     }
 
     private setArrowPosition(el: HTMLElement): void {
         this.$nextTick(() => {
-            let positionX: number = el.offsetLeft;
-            let width: number = el.clientWidth;
-            let arrowEL: HTMLElement = this.$refs.Arrow as HTMLElement;
-            arrowEL.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
-            arrowEL.style.width = width + 'px';
+            setTimeout(() => {
+                setTimeout(() => {
+                    let positionX: number = el.offsetLeft;
+                    let width: number = el.clientWidth;
+                    let arrowEL: HTMLElement = this.$refs.Arrow as HTMLElement;
+                    arrowEL.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
+                    arrowEL.style.width = width + 'px';
+                }, 0);
+            }, 0);
         });
     }
 
