@@ -17,6 +17,9 @@ export class MNavBarItem extends Vue {
     @Prop()
     public value: string;
 
+    public isFirst: boolean = false;
+    public isLast: boolean = false;
+
     private internalSelected: boolean = false;
     private numberChild: number;
     private childIndex: string;
@@ -27,22 +30,6 @@ export class MNavBarItem extends Vue {
         if (!this.$el.querySelector('a, button')) {
             this.$el.setAttribute('tabindex', '0');
         }
-    }
-
-    private get propSelected(): boolean {
-        if (this.$parent instanceof BaseNavBar) {
-            return this.$parent.isItemSelected(this.value, this.$el);
-        } else if (this.selected != undefined) {
-            return this.selected;
-        }
-        return this.internalSelected;
-    }
-
-    private get isFirst(): boolean {
-        return (this.$parent instanceof BaseNavBar && this.$parent.$children.length >= 1) ? this.$parent.$children['0'].value == this.value : false;
-    }
-
-    private get isLast(): boolean {
         if (this.$parent instanceof BaseNavBar) {
             this.numberChild = this.$parent.$children.length;
             this.childIndex = (this.numberChild - 1).toString();
@@ -56,11 +43,15 @@ export class MNavBarItem extends Vue {
                 });
             }
         }
-        return (this.$parent instanceof BaseNavBar && this.$parent.$children.length > 1) ? this.internalIsLast : false;
     }
 
-    private set isLast(value) {
-        this.internalIsLast = value;
+    private get propSelected(): boolean {
+        if (this.$parent instanceof BaseNavBar) {
+            return this.$parent.isItemSelected(this.value, this.$el);
+        } else if (this.selected != undefined) {
+            return this.selected;
+        }
+        return this.internalSelected;
     }
 
     private onClick(): void {
