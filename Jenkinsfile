@@ -54,7 +54,7 @@ pipeline {
         failure {
             echo 'Failure'
             println currentBuild.result
-            step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
+            step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca jean-philippe.guilmette', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
         }
     }
 }
