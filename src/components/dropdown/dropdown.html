@@ -44,17 +44,19 @@
         :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
 
-    <m-popup placement="bottom-start"
-            :disabled="!active"
-            :open.sync="open"
-            :enter="transitionEnter"
-            :leave="transitionLeave"
-            :padding-header="false"
-            :padding-body="false"
-            :focus-management="isMqMaxS"
-            :close-on-backdrop="true"
-            width="100%"
-            ref="popup">
+    <m-popup ref="popup"
+             width="100%"
+             placement="bottom-start"
+             :open="open"
+             :disabled="!active"
+             :enter="transitionEnter"
+             :leave="transitionLeave"
+             :padding-header="false"
+             :padding-body="false"
+             :focus-management="isMqMaxS"
+             :close-on-backdrop="true"
+             @open="onOpen"
+             @close="onClose">
         <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="filterable">

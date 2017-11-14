@@ -14,8 +14,8 @@
                ref="input"
                :disabled="!active"
                :placeholder="placeholder"
-               @keydown.enter.prevent="onKeydownEnter($event)"
-               @keydown.return.prevent="onKeydownEnter($event)"
+               @keydown.enter.prevent="onKeydownEnter"
+               @keydown.return.prevent="onKeydownEnter"
                @keydown.esc.prevent="closeCalendar"
                @keydown.tab="onKeydownTab"
                @focus="onFocus"
@@ -37,7 +37,15 @@
         :error-message="calandarErrorMessage"
         :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
-    <m-popup ref="pupup" :open.sync="open" :disabled="!active" :close-on-backdrop="true" :focus-management="isMqMaxS" :padding="false" placement="bottom">
+    <m-popup ref="pupup"
+             :open="open"
+             :disabled="!active"
+             :close-on-backdrop="true"
+             :focus-management="isMqMaxS"
+             :padding="false"
+             placement="bottom"
+             @open="onOpen"
+             @close="onClose">
         <div slot="header" class="m-datepicker__header">
             <nav class="m-datepicker__header__nav">
                 <m-icon-button icon-name="left-arrow" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>

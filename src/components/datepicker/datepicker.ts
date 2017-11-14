@@ -240,10 +240,10 @@ export class MDatepicker extends ModulVue {
         this.internalOpen = open;
         this.$nextTick(() => {
             if (this.internalOpen) {
-                this.$emit('open');
                 let inputEl: any = this.$refs.input;
                 inputEl.focus();
                 inputEl.setSelectionRange(0, this.formattedDate.length);
+                this.$emit('open');
             } else {
                 this.$emit('close');
             }
@@ -282,7 +282,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private onFocus(): void {
-        if (!this.mouseIsDown && !this.open && !this.as<InputState>().isDisabled) {
+        if (!this.mouseIsDown && !this.open && !this.as<InputState>().isDisabled && this.as<MediaQueries>().isMqMinS) {
             setTimeout(() => {
                 this.open = true;
             }, 300);
@@ -311,6 +311,18 @@ export class MDatepicker extends ModulVue {
             }
         } else {
             this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
+        }
+    }
+
+    private onOpen(): void {
+        if (!this.open) {
+            this.open = true;
+        }
+    }
+
+    private onClose(): void {
+        if (this.open) {
+            this.open = false;
         }
     }
 

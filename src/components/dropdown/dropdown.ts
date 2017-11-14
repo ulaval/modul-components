@@ -105,13 +105,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$nextTick(() => {
             let inputEl: any = this.$refs.input;
             if (this.internalOpen) {
-                this.$emit('open');
                 inputEl.focus();
                 if (this.filterable) {
                     inputEl.setSelectionRange(0, this.selectedText.length);
                 }
                 this.focusSelected();
                 this.scrollToFocused();
+                this.$emit('open');
             } else {
                 this.$emit('close');
             }
@@ -297,10 +297,22 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onFocus(): void {
-        if (!this.mouseIsDown && !this.open && this.as<InputState>().active) {
+        if (!this.mouseIsDown && !this.open && this.as<InputState>().active && this.as<MediaQueries>().isMqMinS) {
             setTimeout(() => {
                 this.open = true;
             }, 300);
+        }
+    }
+
+    private onOpen(): void {
+        if (!this.open) {
+            this.open = true;
+        }
+    }
+
+    private onClose(): void {
+        if (this.open) {
+            this.open = false;
         }
     }
 
@@ -368,20 +380,15 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private transitionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
-                el.style.opacity = '0';
+                let height: number = el.clientHeight;
+                el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
+                el.style.transition = DROPDOWN_STYLE_TRANSITION;
+                el.style.overflowY = 'hidden';
+                el.style.maxHeight = '0';
                 el.style.width = this.$el.clientWidth + 'px';
                 setTimeout(() => {
-                    el.style.removeProperty('opacity');
-                    let height: number = el.clientHeight;
-                    el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
-                    el.style.transition = DROPDOWN_STYLE_TRANSITION;
-                    el.style.overflowY = 'hidden';
-                    el.style.maxHeight = '0';
-                    setTimeout(() => {
-                        el.style.maxHeight = height + 'px';
-                        done();
-                    }, 0);
-
+                    el.style.maxHeight = height + 'px';
+                    done();
                 }, 0);
             } else {
                 done();
