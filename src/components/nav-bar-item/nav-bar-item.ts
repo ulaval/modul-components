@@ -28,6 +28,7 @@ export class MNavBarItem extends Vue {
             this.$el.setAttribute('tabindex', '0');
         }
     }
+
     private get propSelected(): boolean {
         if (this.$parent instanceof BaseNavBar) {
             return this.$parent.isItemSelected(this.value, this.$el);
