@@ -2,7 +2,6 @@
 $m-timepicker--color-hover: $m-color--interactive-lightest !default;
 $m-timepicker--color-select: $m-color--grey-light !default;
 $m-timepicker--color-active: $m-color--grey-lightest !default;
-$m-timepicker--scroll-height: $m-touch-size * 5 !default;
 
 .m-timepicker {
     display: inline-flex;
@@ -51,9 +50,6 @@ $m-timepicker--scroll-height: $m-touch-size * 5 !default;
 
         &__hours,
         &__minutes {
-            position: absolute;
-            top: 0;
-            bottom: 0;
             width: 50%;
             flex: 1 0 auto;
             list-style: none;
@@ -103,14 +99,6 @@ $m-timepicker--scroll-height: $m-touch-size * 5 !default;
                     background: $m-timepicker--color-select;
                 }
             }
-        }
-
-        &__hours {
-            left: 0;
-        }
-
-        &__minutes {
-            right: 0;
         }
     }
 
