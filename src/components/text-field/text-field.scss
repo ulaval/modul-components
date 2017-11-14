@@ -1,10 +1,4 @@
 @import 'abstracts/variables';
-$m-text-field--color-default-text: $m-color--grey-darker !default;
-$m-text-field--color-focus: $m-color--interactive !default;
-$m-text-field--color-error: $m-color--error !default;
-$m-text-field--color-valid: $m-color--success !default;
-$m-text-field--color-disabled: $m-color--grey-darker !default;
-$m-text-field--margin: $m-margin--s !default;
 
 .m-text-field {
     position: relative;
@@ -17,13 +11,5 @@ $m-text-field--margin: $m-margin--s !default;
         &.m--is-transparent {
             opacity: 0;
         }
-    }
-
-    .m-spinner {
-        min-height: 20px;
-        min-width: 26px;
-        display: flex;
-        align-content: center;
-        justify-content: center;
     }
 }

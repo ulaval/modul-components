@@ -45,8 +45,6 @@ export class MTextField extends ModulVue {
     @Prop()
     public iconName: string;
     @Prop()
-    public iconDescription: string;
-    @Prop()
     public placeholder: string;
     @Prop({ default: false })
     public waiting: boolean;
