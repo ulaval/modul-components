@@ -53,10 +53,10 @@ export class MNavbar extends BaseNavBar {
 
     private setItem(): void {
         this.$children.forEach((child, index, arr) => {
-            if (index == 0) {
+            if (index == 0 && arr.length >= 1) {
                 child['isFirst'] = true;
             }
-            if (arr.length - 1 === index) {
+            if (arr.length - 1 === index && arr.length > 1) {
                 child['isLast'] = true;
             }
         });
