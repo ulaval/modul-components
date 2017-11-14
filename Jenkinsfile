@@ -27,6 +27,8 @@ pipeline {
             }
 
             steps {
+                sh '-Dhudson.tasks.MailSender.SEND_TO_UNKNOWN_USERS=true'
+
                 echo 'Building...'
                 sh 'pwd'
                 echo 'Clean up...'
@@ -54,7 +56,6 @@ pipeline {
         failure {
             echo 'Failure'
             println currentBuild.result
-            step.sh '-Dhudson.tasks.MailSender.SEND_TO_UNKNOWN_USERS=true'
             step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
         }
     }
