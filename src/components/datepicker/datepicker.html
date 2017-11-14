@@ -7,22 +7,22 @@
                    :error="calandarError"
                    :valid="isValid"
                    :icon-name="iconName"
-                   @mousedown="onMousedown"
-                   @mouseup="onMouseup"
-                   v-m-popup:pupup>
+                   @mousedown="inputOnMousedown"
+                   @mouseup="inputOnMouseup"
+                   v-m-popup:popup>
         <input type="text"
                ref="input"
                :disabled="!active"
                :placeholder="placeholder"
-               @keydown.enter.prevent="onKeydownEnter"
-               @keydown.return.prevent="onKeydownEnter"
-               @keydown.esc.prevent="closeCalendar"
-               @keydown.tab="onKeydownTab"
-               @focus="onFocus"
-               @blur="onBlur"
+               @keydown.enter="inputOnKeydownEnter"
+               @keydown.return="inputOnKeydownEnter"
+               @keydown.esc="inputOnKeydownEsc"
+               @keydown.tab="inputOnKeydownTab"
+               @keydown="inputOnKeydown"
+               @focus="inputOnFocus"
+               @change="validateDate"
                v-model="formattedDate">
-        <m-icon-button ref="calandarIcon"
-                       slot="right-content"
+        <m-icon-button slot="right-content"
                        icon-name="calendar"
                        :disabled="!active"
                        button-size="22px"
@@ -37,15 +37,13 @@
         :error-message="calandarErrorMessage"
         :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
-    <m-popup ref="pupup"
-             :open="open"
+    <m-popup ref="popup"
+             :open.sync="open"
              :disabled="!active"
              :close-on-backdrop="true"
              :focus-management="isMqMaxS"
              :padding="false"
-             placement="bottom"
-             @open="onOpen"
-             @close="onClose">
+             placement="bottom">
         <div slot="header" class="m-datepicker__header">
             <nav class="m-datepicker__header__nav">
                 <m-icon-button icon-name="left-arrow" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>

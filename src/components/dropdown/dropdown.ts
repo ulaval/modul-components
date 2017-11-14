@@ -9,6 +9,7 @@ import { normalizeString } from '../../utils/str/str';
 import { MDropdownInterface, MDropdownItem, BaseDropdown, BaseDropdownGroup } from '../dropdown-item/dropdown-item';
 import { MDropdownGroup } from '../dropdown-group/dropdown-group';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import i18nPlugin from '../../utils/i18n/i18n';
@@ -26,6 +27,7 @@ const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 @Component({
     mixins: [
         InputState,
+        InputPopup,
         MediaQueries
     ]
 })
@@ -51,7 +53,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalFilter: string = '';
     private internalFilterRegExp: RegExp = / /;
 
-    private internalValue: any | undefined = '';
     private internalItems: MDropdownItem[] = [];
     private internalNavigationItems: MDropdownItem[];
     private internalSelectedText: string | undefined = '';
@@ -60,8 +61,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private internalOpen: boolean = false;
     private dirty: boolean = false;
-
-    private mouseIsDown: boolean = false;
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
@@ -120,16 +119,15 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     @Watch('value')
     private setInternalValue(value: any): void {
-        this.internalValue = value;
-        this.setInputWidth();
+        this.model = value;
     }
 
     public get model(): any {
-        return this.value == undefined ? this.internalValue : this.value;
+        return this.value == undefined ? this.as<InputPopup>().internalValue : this.value;
     }
 
     public set model(value: any) {
-        this.internalValue = value;
+        this.as<InputPopup>().internalValue = value;
         this.$emit('change', value);
         this.dirty = false;
         this.internalOpen = false;
@@ -177,15 +175,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get isEmpty(): boolean {
-        return (this.filterable && this.open) || this.hasValue || (this.hasPlaceholder() && this.open) ? false : true;
-    }
-
-    private get hasValue(): boolean {
-        return this.selectedText != undefined && this.selectedText != '';
-    }
-
-    private hasPlaceholder(): boolean {
-        return this.placeholder != undefined && this.placeholder != '';
+        return (this.filterable && this.open) || this.as<InputPopup>().hasValue() || (this.as<InputPopup>().hasPlaceholder() && this.open) ? false : true;
     }
 
     private buildItemsMap(): void {
@@ -240,20 +230,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return !!this.label;
     }
 
-    private onKeydownEnter($event: KeyboardEvent): void {
-        if (!this.open) {
-            this.open = true;
-        }
-        if (this.focusedIndex > -1) {
-            let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
-            this.model = item.value;
-        }
-    }
-
-    private onKeydownEscape($event: KeyboardEvent): void {
-        this.open = false;
-    }
-
     private onKeydownUp($event: KeyboardEvent): void {
         if (!this.open) {
             this.open = true;
@@ -270,9 +246,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
-    private onKeydownTab(): void {
-        if (!this.mouseIsDown && this.as<MediaQueries>().isMqMinS) {
-            this.open = false;
+    private onKeydownEnter($event: KeyboardEvent): void {
+        if (!this.open) {
+            this.open = true;
+        }
+        if (this.focusedIndex > -1) {
+            let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
+            this.model = item.value;
         }
     }
 
@@ -283,36 +263,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             $event.keyCode != KeyCode.M_ESCAPE && !this.open) {
             this.focusedIndex = -1;
             this.open = true;
-        }
-    }
-
-    private onMousedown(event): void {
-        this.mouseIsDown = true;
-    }
-
-    private onMouseup(event): void {
-        setTimeout(() => {
-            this.mouseIsDown = false;
-        }, 30);
-    }
-
-    private onFocus(): void {
-        if (!this.mouseIsDown && !this.open && this.as<InputState>().active && this.as<MediaQueries>().isMqMinS) {
-            setTimeout(() => {
-                this.open = true;
-            }, 300);
-        }
-    }
-
-    private onOpen(): void {
-        if (!this.open) {
-            this.open = true;
-        }
-    }
-
-    private onClose(): void {
-        if (this.open) {
-            this.open = false;
         }
     }
 

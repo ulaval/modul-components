@@ -1,80 +1,126 @@
 @import 'abstracts/variables';
-$m-timepicker--color-hover: $m-color--grey-lightest !default;
+$m-timepicker--color-hover: $m-color--interactive-lightest !default;
 $m-timepicker--color-select: $m-color--grey-light !default;
-$m-timepicker--color-focus: $m-color--interactive-lightest !default;
-$m-timepicker--color-active: $m-color--interactive-lightest !default;
+$m-timepicker--color-active: $m-color--grey-lightest !default;
 $m-timepicker--scroll-height: $m-touch-size * 5 !default;
 
 .m-timepicker {
-    &__article {
-        width: 210px;
-        height: $m-timepicker--scroll-height + $m-touch-size;
+    display: inline-flex;
+
+    &__header,
+    &__body,
+    &__footer {
         background: $m-color--white;
+
+        @media (min-width: #{$m-mq--min--s}) {
+            border-right: $m-border-width--s solid $m-color--border;
+            border-left: $m-border-width--s solid $m-color--border;
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: $m-touch-size;
+        padding: $m-margin 0;
+        border-bottom: $m-border-width--s solid $m-color--border;
+        font-weight: $m-font-weight--bold;
+
+        @media (min-width: #{$m-mq--min--s}) {
+            border-top: $m-border-width--s solid $m-color--border;
+        }
+
+        &__hours,
+        &__minutes {
+            flex: 1 1 auto;
+            text-align: center;
+        }
     }
 
     &__body {
+        position: relative;
         display: flex;
-    }
+        width: 100%;
+        height: $m-touch-size * 3;
 
-    &__hours,
-    &__minutes {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: center;
-        overflow: auto;
-        max-height: $m-timepicker--scroll-height;
-        flex: 1 0 auto;
+        @media (min-width: #{$m-mq--min--s}) {
+            width: 210px;
+            height: $m-touch-size * 5;
+        }
 
-        @include m-scrollbar-ie();
+        &__hours,
+        &__minutes {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            flex: 1 0 auto;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            overflow: auto;
 
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
+            @include m-scrollbar-ie();
 
-            &-track-piece {
-                @include m-scrollbar-track-piece();
+            &::-webkit-scrollbar {
+                @include m-scrollbar();
+
+                &-track-piece {
+                    @include m-scrollbar-track-piece();
+                }
+
+                &-thumb {
+                    @include m-scrollbar-thumb();
+                }
             }
 
-            &-thumb {
-                @include m-scrollbar-thumb();
+            &-item {
+                transition: background $m-transition-duration ease;
+                outline: 0;
+                color: inherit;
+                height: $m-touch-size;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:not(.m--is-selected) {
+                    cursor: pointer;
+
+                    &:hover,
+                    &:focus {
+                        background: $m-timepicker--color-hover;
+                    }
+
+                    &:active {
+                        background: $m-timepicker--color-active;
+                    }
+                }
+
+                &.m--is-selected {
+                    cursor: not-allowed;
+                    background: $m-timepicker--color-select;
+                }
             }
         }
 
-        &__item {
-            transition: background $m-transition-duration ease;
-            outline: 0;
-            color: inherit;
-            height: $m-touch-size;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        &__hours {
+            left: 0;
+        }
 
-            &:not(.m--is-selected) {
-                cursor: pointer;
-
-                &:hover {
-                    background: $m-timepicker--color-hover;
-                }
-
-                &:focus {
-                    background: $m-timepicker--color-focus;
-                }
-
-                &:active {
-                    background: $m-timepicker--color-active;
-                }
-            }
-
-            &.m--is-selected {
-                cursor: not-allowed;
-                background: $m-timepicker--color-select;
-            }
+        &__minutes {
+            right: 0;
         }
     }
 
     &__footer {
-        height: $m-touch-size;
-        padding: $m-margin $m-padding;
+        border-top: $m-border-width--s solid $m-color--border;
+        padding: $m-margin--s $m-padding;
         text-align: center;
+
+        @media (min-width: #{$m-mq--min--s}) {
+            border-bottom: $m-border-width--s solid $m-color--border;
+        }
     }
 }

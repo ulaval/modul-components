@@ -7,11 +7,15 @@ import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
 import { curLang } from '../../utils/i18n/i18n';
 import { InputState } from '../../mixins/input-state/input-state';
+import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { KeyCode } from '../../utils/keycode/keycode';
-import PopupPlugin from '../popup/popup';
-import TextFieldPlugin from '../text-field/text-field';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import i18nPlugin from '../../utils/i18n/i18n';
 import ButtonPlugin from '../button/button';
+import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
+import ValidationMessagePlugin from '../validation-message/validation-message';
+import PopupPlugin from '../popup/popup';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -32,6 +36,7 @@ export interface DatepickerDate {
 @Component({
     mixins: [
         InputState,
+        InputPopup,
         MediaQueries
     ]
 })
@@ -53,10 +58,9 @@ export class MDatepicker extends ModulVue {
     @Prop({ default: () => { return moment().add(10, 'year'); } })
     public max: moment.Moment | Date;
 
+    public placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
     private internalOpen: boolean = false;
     private view: string = 'day';
-    private internalValue = '';
-    private placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
     private previousDays: DatepickerDate[] = [];
     private days: DatepickerDate[] = [];
     private nextDays: DatepickerDate[] = [];
@@ -168,11 +172,11 @@ export class MDatepicker extends ModulVue {
     }
 
     private get formattedDate(): string {
-        return this.internalCalandarErrorMessage || !this.value ? this.internalValue : moment(this.internalValue).format(this.format);
+        return this.internalCalandarErrorMessage || !this.value ? this.as<InputPopup>().internalValue : moment(this.as<InputPopup>().internalValue).format(this.format);
     }
 
     private set formattedDate(value: string) {
-        this.internalValue = value;
+        this.as<InputPopup>().internalValue = value;
     }
 
     private get selectedMomentDate(): moment.Moment {
@@ -220,18 +224,6 @@ export class MDatepicker extends ModulVue {
         return this.as<InputState>().errorMessage != undefined ? this.as<InputState>().errorMessage : this.internalCalandarErrorMessage;
     }
 
-    private get isEmpty(): boolean {
-        return this.hasValue() || (this.hasPlaceholder() && this.open) ? false : true;
-    }
-
-    private hasValue(): boolean {
-        return this.formattedDate != undefined && this.formattedDate != '';
-    }
-
-    private hasPlaceholder(): boolean {
-        return this.placeholder != undefined && this.placeholder != '';
-    }
-
     private get open(): boolean {
         return this.internalOpen;
     }
@@ -250,47 +242,8 @@ export class MDatepicker extends ModulVue {
         });
     }
 
-    private onMousedown(event): void {
-        this.mouseIsDown = true;
-    }
-
-    private onMouseup(event): void {
-        setTimeout(() => {
-            this.mouseIsDown = false;
-        }, 30);
-    }
-
-    private onKeydownEnter($event: KeyboardEvent): void {
-        if (!this.open) {
-            this.open = true;
-        }
-    }
-
-    private onKeydownTab(): void {
-        if (!this.mouseIsDown && this.as<MediaQueries>().isMqMinS) {
-            this.open = false;
-        }
-    }
-
-    private onKeydown($event: KeyboardEvent): void {
-        if ($event.keyCode != KeyCode.M_RETURN &&
-            $event.keyCode != KeyCode.M_ENTER &&
-            $event.keyCode != KeyCode.M_TAB &&
-            $event.keyCode != KeyCode.M_ESCAPE && !this.open) {
-            this.open = true;
-        }
-    }
-
-    private onFocus(): void {
-        if (!this.mouseIsDown && !this.open && !this.as<InputState>().isDisabled && this.as<MediaQueries>().isMqMinS) {
-            setTimeout(() => {
-                this.open = true;
-            }, 300);
-        }
-    }
-
-    private onBlur(event): void {
-        if (event.target.value == '') {
+    private validateDate(value: string): void {
+        if (value == '') {
             this.selectedMomentDate = moment();
             if (this.required) {
                 this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');
@@ -298,8 +251,8 @@ export class MDatepicker extends ModulVue {
                 this.$emit('change', '');
                 this.internalCalandarErrorMessage = '';
             }
-        } else if (moment(event.target.value, this.format).isValid()) {
-            let newDate = moment(event.target.value, this.format);
+        } else if (moment(value, this.format).isValid()) {
+            let newDate = moment(value, this.format);
             if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
                 this.selectedMomentDate = newDate;
                 this.formattedDate = this.selectedMomentDate.format(this.format);
@@ -311,18 +264,6 @@ export class MDatepicker extends ModulVue {
             }
         } else {
             this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
-        }
-    }
-
-    private onOpen(): void {
-        if (!this.open) {
-            this.open = true;
-        }
-    }
-
-    private onClose(): void {
-        if (this.open) {
-            this.open = false;
         }
     }
 
@@ -366,9 +307,12 @@ export class MDatepicker extends ModulVue {
 
 const DatepickerPlugin: PluginObject<any> = {
     install(v, options) {
-        v.use(PopupPlugin);
-        v.use(TextFieldPlugin);
+        v.use(InputStylePlugin);
         v.use(ButtonPlugin);
+        v.use(PopupPlugin);
+        v.use(ValidationMessagePlugin);
+        v.use(MediaQueriesPlugin);
+        v.use(i18nPlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };
