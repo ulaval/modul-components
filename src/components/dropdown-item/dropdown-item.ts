@@ -33,7 +33,7 @@ export class MDropdownItem extends ModulVue {
     public label: string;
     @Prop()
     public value: any;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     public root: MDropdownInterface; // Dropdown component

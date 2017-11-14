@@ -39,7 +39,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public placeholder: string;
     @Prop()
     public iconName: string;
-    @Prop({ default: false })
+    @Prop()
     public filterable: boolean;
     @Prop({ default: DROPDOWN_MAX_WIDTH })
     public width: string;
