@@ -49,13 +49,11 @@ pipeline {
 
     post {
         always {
-            echo 'Success'
-            println currentBuild.result
         }
         failure {
             echo 'Failure'
             println currentBuild.result
-            step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'martin.simard@dti.ulaval.ca', sendToIndividuals: true])
+            step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
         }
     }
 }
