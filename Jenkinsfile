@@ -15,7 +15,6 @@ pipeline {
         npm_config_cache = 'npm-cache'
         DOCKER_REPOSITORY = 'docker-local.maven.at.ulaval.ca/modul'
         DOCKER_REPOSITORY_URL = 'https://docker-local.maven.at.ulaval.ca'
-        SEND_TO_UNKNOWN_USERS = 'true'
     }
 
     stages {
@@ -55,6 +54,7 @@ pipeline {
         failure {
             echo 'Failure'
             println currentBuild.result
+            step.sh '-Dhudson.tasks.MailSender.SEND_TO_UNKNOWN_USERS=true'
             step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
         }
     }
