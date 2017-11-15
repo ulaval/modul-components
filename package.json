@@ -65,6 +65,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-spec-reporter": "^0.0.31",
     "karma-webpack": "^2.0.4",
+    "phantomjs-prebuilt": "^2.1.16",
     "nightwatch": "^0.9.12",
     "qs": "^6.5.0",
     "rimraf": "^2.6.1",

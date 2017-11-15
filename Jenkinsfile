@@ -21,7 +21,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'jribar/node-phantomjs:latest'
+                    image 'node:8.2-alpine'
                     reuseNode true
                 }
             }
@@ -42,7 +42,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'jribar/node-phantomjs:latest'
+                    image 'node:8.2-alpine'
                     reuseNode true
                 }
             }
