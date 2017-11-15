@@ -26,9 +26,9 @@ export class MIconButton extends Vue {
     @Prop({ default: '44px' })
     public buttonSize: string;
     @Prop({ default: 'default' })
-    public iconName: string;
+    public name: string;
     @Prop({ default: '16px' })
-    public iconSize: string;
+    public size: string;
     @Prop()
     public title: string;
 
