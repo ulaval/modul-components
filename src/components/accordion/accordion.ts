@@ -12,7 +12,7 @@ export enum MAccordionSkin {
     Light = 'light',
     Plain = 'plain'
 }
-//hyhh
+
 export enum MAccordionIconPosition {
     Left = 'left',
     Right = 'right'

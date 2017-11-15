@@ -8,6 +8,11 @@ import { ICON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
 
+export enum MButtonType {
+    Button = 'button',
+    Submit = 'submit',
+    Reset = 'reset'
+}
 
 export enum MButtonSkin {
     Primary = 'primary',
