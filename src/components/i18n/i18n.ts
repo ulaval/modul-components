@@ -18,7 +18,7 @@ export class MI18n extends ModulVue {
     @Prop({ default: true })
     public htmlEncode: boolean;
 
-    public created(): void {
+    protected created(): void {
         if (!this.$i18n) {
             throw new Error('<' + I18N_NAME + '>: this.$i18n is undefined, you must register the i18n plugin.');
         }
