@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        node {
-            label 'docker'
-        }
-    }
+    agent any
 
     options {
         // Discarter après 10 builds
