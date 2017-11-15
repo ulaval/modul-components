@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'docker'
+        }
+    }
 
     options {
         // Discarter après 10 builds
@@ -17,15 +21,14 @@ pipeline {
         DOCKER_REPOSITORY_URL = 'https://docker-local.maven.at.ulaval.ca'
     }
 
-    agent {
-        docker {
-            image 'node:8.2-alpine'
-            reuseNode true
-        }
-    }
-
     stages {
         stage('Build') {
+            agent {
+                docker {
+                    image 'node:8.2-alpine'
+                    reuseNode true
+                }
+            }
             steps {
                 echo 'Building...'
                 sh 'pwd'
@@ -41,6 +44,12 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+                docker {
+                    image 'node:8.2-alpine'
+                    reuseNode true
+                }
+            }
             steps {
                 echo 'Testing...'
                 sh 'npm run unit -- --single-run --junitReport'
