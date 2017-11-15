@@ -21,7 +21,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'wernight/phantomjs:latest'
+                    image 'jribar/node-phantomjs:latest'
                     reuseNode true
                 }
             }
