@@ -21,7 +21,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:8.2-alpine'
+                    image 'wernight/phantomjs:latest'
                     reuseNode true
                 }
             }
