@@ -196,12 +196,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--has-textarea {
-        &:not(.m--is-label-up) {
-            .m-input-style {
-                &__label {
-                    top: $m-margin;
-                    left: $m-padding--s;
-                }
+        &.m--has-label:not(.m--is-label-up) {
+            .m-input-style__label {
+                top: $m-margin;
+                left: $m-padding--s;
             }
 
             textarea {
@@ -290,7 +288,7 @@ $m-input-style--padding: 4px !default;
             padding: $m-margin--s $m-padding--s;
             width: 100%;
             min-width: 210px;
-            min-height: 60px;
+            min-height: 54px; //Magic number -> height of rows 2
             border: 1px solid $m-color--border;
         }
 

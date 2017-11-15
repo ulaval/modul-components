@@ -5,6 +5,7 @@ import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './text-field.html?style=./text-field.scss';
 import { TEXT_FIELD_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { InputManagement } from '../../mixins/input-management/input-management';
 import { KeyCode } from '../../utils/keycode/keycode';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
@@ -23,7 +24,10 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
 
 @WithRender
 @Component({
-    mixins: [InputState]
+    mixins: [
+        InputState,
+        InputManagement
+    ]
 })
 export class MTextField extends ModulVue {
 
@@ -33,25 +37,10 @@ export class MTextField extends ModulVue {
             value == MTextFieldType.Telephone || value == MTextFieldType.Text || value == MTextFieldType.Url
     })
     public type: MTextFieldType;
-    @Prop()
-    @Model('change')
-    public value: string;
-    @Prop({ default: false })
-    public forceFocus: boolean;
     @Prop({ default: true })
     public passwordIcon: boolean;
-    @Prop()
-    public label: string;
-    @Prop()
-    public iconName: string;
-    @Prop()
-    public placeholder: string;
-    @Prop({ default: false })
-    public waiting: boolean;
 
-    private internalValue: string = '';
     private passwordAsText: boolean = false;
-    private internalIsFocus: boolean = false;
 
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-text-field:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-text-field:hide-password');
@@ -64,32 +53,6 @@ export class MTextField extends ModulVue {
     private typeChanged(type: MTextFieldType): void {
         console.warn('<' + TEXT_FIELD_NAME + '>: Change of property "type" is not supported');
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
-    }
-
-    private onClick(event: MouseEvent): void {
-        this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
-        if (this.internalIsFocus) {
-            (this.$refs.input as HTMLElement).focus();
-        }
-        this.$emit('click');
-    }
-
-    private onFocus(event: FocusEvent): void {
-        this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
-        if (this.internalIsFocus) {
-            this.$emit('focus', event);
-        }
-    }
-
-    private onBlur(event: Event): void {
-        this.internalIsFocus = false;
-        this.$emit('blur', event);
-    }
-
-    private onKeyup(event): void {
-        if (!this.as<InputStateMixin>().isDisabled) {
-            this.$emit('keyup', event, this.model);
-        }
     }
 
     private togglePasswordVisibility(event): void {
@@ -113,32 +76,6 @@ export class MTextField extends ModulVue {
         return type;
     }
 
-    @Watch('value')
-    private onValueChange(value: string): void {
-        this.internalValue = value;
-    }
-
-    private set model(value: string) {
-        this.internalValue = value;
-        this.$emit('change', value);
-    }
-
-    private get model(): string {
-        return this.value == undefined ? this.internalValue : this.value;
-    }
-
-    private get hasValue(): boolean {
-        return this.model != '';
-    }
-
-    private get isEmpty(): boolean {
-        return this.isFocus || this.hasValue ? false : true;
-    }
-
-    private get isFocus(): boolean {
-        return this.forceFocus ? true : this.internalIsFocus;
-    }
-
     private get iconNamePassword() {
         return this.passwordAsText ? ICON_NAME_PASSWORD_HIDDEN : ICON_NAME_PASSWORD_VISIBLE;
     }
@@ -149,22 +86,6 @@ export class MTextField extends ModulVue {
 
     private get propPasswordIcon(): boolean {
         return this.passwordIcon && this.type == MTextFieldType.Password && this.as<InputStateMixin>().active;
-    }
-
-    private get hasLabel(): boolean {
-        return !!this.label;
-    }
-
-    private get hasIcon(): boolean {
-        return !!this.iconName && !this.as<InputStateMixin>().isDisabled;
-    }
-
-    private get tabindex(): number | undefined {
-        if (this.as<InputStateMixin>().isDisabled) {
-            return undefined;
-        } else {
-            return 0;
-        }
     }
 }
 

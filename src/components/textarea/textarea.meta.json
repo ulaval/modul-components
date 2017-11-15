@@ -3,40 +3,52 @@
     "name": "m-step-meta:name",
     "production": true,
     "attributes": {
-        "state": {
-            "type": "string",
-            "values": [
-                "warning",
-                "in-progress",
-                "information",
-                "locked",
-                "success"
-            ],
-            "default": 3
+        "value": {
+            "type": "string"
         },
-        "mode": {
-            "type": "string",
-            "values": [
-                "default",
-                "accordion"
-            ],
-            "default": 0
+        "label": {
+            "type": "string"
         },
-        "open": {
+        "placeholder": {
+            "type": "string"
+        },
+        "maxlength": {
+            "type": "number"
+        },
+        "rows": {
+            "type": "number"
+        },
+        "readonly": {
             "type": "boolean",
             "default": false
         },
-        "required": {
+        "disabled": {
             "type": "boolean",
             "default": false
         },
-        "iconName": {
+        "waiting": {
+            "type": "boolean",
+            "default": false
+        },
+        "error": {
+            "type": "boolean",
+            "default": false
+        },
+        "valid": {
+            "type": "boolean",
+            "default": false
+        },
+        "error-message": {
             "type": "string",
-            "default": "default"
+            "default": ""
         },
-        "last": {
-            "type": "boolean",
-            "default": false
+        "valid-message": {
+            "type": "string",
+            "default": ""
+        },
+        "helper-message": {
+            "type": "string",
+            "default": ""
         }
     },
     "overview": "step.overview",

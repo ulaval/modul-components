@@ -27,7 +27,7 @@
             "type": "boolean",
             "default": true
         },
-        "forceFocus": {
+        "readonly": {
             "type": "boolean",
             "default": false
         },

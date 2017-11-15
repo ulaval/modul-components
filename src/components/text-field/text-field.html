@@ -15,13 +15,14 @@
                    :focus="isFocus"
                    :empty="isEmpty"
                    :icon-name="iconName">
-        <input class="m-text-field__input"
+        <input ref="input"
+               class="m-text-field__input"
                :disabled="!active"
                :placeholder="placeholder"
+               :readonly="readonly"
                @focus="onFocus"
                @blur="onBlur"
                @keyup="onKeyup"
-               ref="input"
                v-model="model">
         <div slot="right-content" class="m-text-field__icon-password" :class="{ 'm--is-transparent': !hasValue }" v-if="propPasswordIcon">
             <m-icon-button :icon-name="iconNamePassword" button-size="22px" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
