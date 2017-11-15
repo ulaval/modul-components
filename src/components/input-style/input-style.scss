@@ -51,6 +51,12 @@ $m-input-style--padding: 4px !default;
         }
     }
 
+    &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus) {
+        textarea {
+            border-color: $m-color--border-dark;
+        }
+    }
+
     &.m--is-focus {
         &::after {
             width: 100%;
@@ -60,6 +66,10 @@ $m-input-style--padding: 4px !default;
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             color: $m-input-style--color-focus;
+        }
+
+        textarea {
+            border-color: $m-color--interactive-lighter;
         }
     }
 
@@ -284,6 +294,7 @@ $m-input-style--padding: 4px !default;
         }
 
         textarea {
+            transition: border-color $m-transition-duration ease;
             margin: $m-padding--s 0 -4px 0; //Margin number
             padding: $m-margin--s $m-padding--s;
             width: 100%;
