@@ -10,7 +10,7 @@ import { ElementQueries } from '../../mixins/element-queries/element-queries';
     mixins: [ElementQueries]
 })
 export class Mtemplate extends Vue {
-    @Prop({ default: false })
+    @Prop()
     public footerFullWidth: boolean;
     @Prop()
     public contentWidth: string;

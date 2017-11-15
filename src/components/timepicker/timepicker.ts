@@ -28,7 +28,7 @@ export class MTimepicker extends ModulVue {
 
     @Prop()
     public label: string;
-    @Prop({ default: false })
+    @Prop()
     public duration: boolean;
     @Prop({ default: function() { return this.duration ? moment.duration('1:0') : moment(); } })
     public time: moment.Moment | moment.Duration;

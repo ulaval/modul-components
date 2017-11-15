@@ -22,7 +22,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
         validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
     })
     public position: MRadioPosition;
-    @Prop({ default: false })
+    @Prop()
     public inline: boolean;
 
     public name: string = uuid.generate();

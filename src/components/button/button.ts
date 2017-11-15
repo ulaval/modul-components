@@ -38,11 +38,11 @@ export class MButton extends Vue {
         validator: value => value == MButtonSkin.Primary || value == MButtonSkin.Secondary
     })
     public skin: MButtonSkin;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
-    @Prop({ default: false })
+    @Prop()
     public waiting: boolean;
-    @Prop({ default: false })
+    @Prop()
     public fullSize: boolean;
     @Prop()
     public iconName: string;

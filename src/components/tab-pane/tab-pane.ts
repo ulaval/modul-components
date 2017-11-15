@@ -18,7 +18,7 @@ export class MTabPane extends ModulVue {
     public label: string;
     @Prop()
     public value: any;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     public root: Vue;

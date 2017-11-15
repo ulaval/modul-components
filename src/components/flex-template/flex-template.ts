@@ -26,9 +26,9 @@ export class MFlexTemplate extends ModulVue {
     public menuFixe: boolean;
     @Prop({ default: MFlexTemplateOrigin.Left })
     public menuOrigin: MFlexTemplateOrigin;
-    @Prop({ default: false })
+    @Prop()
     public menuOpen: boolean;
-    @Prop({ default: false })
+    @Prop()
     public smallMenu: boolean;
     @Prop({ default: '44px' })
     public smallMenuWidth: string;

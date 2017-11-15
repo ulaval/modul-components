@@ -49,7 +49,7 @@ export class MDatepicker extends ModulVue {
     public label: string;
     @Prop()
     public iconName: boolean;
-    @Prop({ default: false })
+    @Prop()
     public required: boolean;
     @Prop({ default: 'DD/MM/Y' })
     public format: string;

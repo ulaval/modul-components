@@ -15,9 +15,9 @@ export class MListItem extends ModulVue {
 
     @Prop({ default: true })
     public deleteButton: boolean;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
-    @Prop({ default: false })
+    @Prop()
     public waiting: boolean;
 
     private visible: boolean = true;

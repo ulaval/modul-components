@@ -27,15 +27,15 @@ export class MLink extends ModulVue {
     public url: string;
     @Prop({ default: MLinkMode.RouterLink })
     public mode: MLinkMode;
-    @Prop({ default: false })
+    @Prop()
     public unvisited: boolean;
     @Prop({ default: true })
     public underline: boolean;
-    @Prop({ default: false })
+    @Prop()
     public vanilla: boolean;
     @Prop()
     public hiddenText: string;
-    @Prop({ default: false })
+    @Prop()
     public icon: boolean;
     @Prop()
     public iconName: string;
@@ -43,7 +43,7 @@ export class MLink extends ModulVue {
     public iconPosition: string;
     @Prop({ default: '12px' })
     public iconSize: string;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     protected mounted(): void {

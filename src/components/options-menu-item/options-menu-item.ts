@@ -13,7 +13,7 @@ export class MOptionsMenuItem extends ModulVue {
 
     @Prop()
     public iconName: string;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     private onClick(event: MouseEvent): void {

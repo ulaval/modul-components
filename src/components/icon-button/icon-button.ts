@@ -21,7 +21,7 @@ export class MIconButton extends Vue {
         validator: value => value == MIconButtonSkin.Light || value == MIconButtonSkin.Dark || value == MIconButtonSkin.Primary || value == MIconButtonSkin.Secondary
     })
     public skin: MIconButtonSkin;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
     @Prop({ default: '44px' })
     public buttonSize: string;

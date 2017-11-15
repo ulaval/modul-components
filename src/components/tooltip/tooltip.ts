@@ -23,7 +23,7 @@ export enum MTooltipMode {
     mixins: [MediaQueries]
 })
 export class MTooltip extends ModulVue {
-    @Prop({ default: false })
+    @Prop()
     public open: boolean;
     @Prop({ default: MTooltipMode.Icon })
     public mode: string;
@@ -33,7 +33,7 @@ export class MTooltip extends ModulVue {
     public closeButton: boolean;
     @Prop({ default: '' })
     public classNamePortalTarget: string;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
     @Prop()
     public openTitle: string;

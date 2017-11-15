@@ -12,7 +12,7 @@ export abstract class BaseNavBar extends Vue {
 @WithRender
 @Component
 export class MNavBarItem extends Vue {
-    @Prop({ default: false })
+    @Prop()
     public selected: boolean;
     @Prop()
     public value: string;
