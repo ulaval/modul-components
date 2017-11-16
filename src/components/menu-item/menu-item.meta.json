@@ -1,0 +1,16 @@
+{
+    "tag": "m-menu-item",
+    "name": "m-menu-item-meta:name",
+    "production": false,
+    "attributes": {
+        "iconName": {
+            "type": "string"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "overview": "menu-item.overview",
+    "preview": false
+}

@@ -1,0 +1,20 @@
+{
+    "tag": "m-menu",
+    "name": "m-menu-meta:name",
+    "production": false,
+    "attributes": {
+        "options": {
+            "type": "any",
+            "values": "see popper.js options",
+            "default": {
+                "placement": "bottom"
+            }
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "overview": "menu.overview",
+    "preview": "menu.preview"
+}

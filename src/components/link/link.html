@@ -6,7 +6,7 @@
                            'm--is-button': isButton,
                            'm--is-vanilla': vanilla,
                            'm--has-right-icon' : isIconPositionRight }"
-                 :to="{ path: propUrl }"
+                 :to="rooterLinkUrl"
                  v-if="isRouterLink">
         <m-icon :name="iconName" :style="{ fontSize: iconSize }" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon>
         <span class="m-link__text">

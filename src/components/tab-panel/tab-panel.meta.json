@@ -1,0 +1,16 @@
+{
+    "tag": "m-tab-panel",
+    "name": "m-tab-panel-meta:name",
+    "production": false,
+    "attributes": {
+        "label": {
+            "type": "string"
+        },
+        "selected": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "overview": "tab-panel.overview",
+    "preview": false
+}
