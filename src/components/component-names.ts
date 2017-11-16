@@ -36,7 +36,7 @@ export const SPINNER_NAME: string = 'm-spinner';
 export const STATUS_NAME: string = 'm-status';
 export const STEP_NAME: string = 'm-step';
 export const SWITCH_NAME: string = 'm-switch';
-export const TAB_PANE_NAME: string = 'm-tab-pane';
+export const TAB_PANEL_NAME: string = 'm-tab-panel';
 export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
 export const TEXTAREA_NAME: string = 'm-textarea';
@@ -88,7 +88,7 @@ export const components: string[] = [
     STATUS_NAME,
     STEP_NAME,
     SWITCH_NAME,
-    TAB_PANE_NAME,
+    TAB_PANEL_NAME,
     TABS_NAME,
     TEMPLATE_NAME,
     TEXTAREA_NAME,

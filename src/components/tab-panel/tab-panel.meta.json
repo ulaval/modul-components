@@ -1,6 +1,6 @@
 {
-    "tag": "m-tab-pane",
-    "name": "m-tab-pane-meta:name",
+    "tag": "m-tab-panel",
+    "name": "m-tab-panel-meta:name",
     "production": false,
     "attributes": {
         "label": {
@@ -11,6 +11,6 @@
             "default": false
         }
     },
-    "overview": "tab-pane.overview",
+    "overview": "tab-panel.overview",
     "preview": false
 }

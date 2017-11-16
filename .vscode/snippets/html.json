@@ -309,13 +309,13 @@
 		],
 		"description": "Create a modul tabs tag"
 	},
-	"tab-pane": {
-		"prefix": "m-tab-pane",
+	"tab-panel": {
+		"prefix": "m-tab-panel",
 		"body": [
-			"<m-tab-pane>$1</m-tab-pane>",
+			"<m-tab-panel>$1</m-tab-panel>",
 			"$2"
 		],
-		"description": "Create a modul tab-pane tag"
+		"description": "Create a modul tab-panel tag"
 	},
 	"table": {
 		"prefix": "m-table",

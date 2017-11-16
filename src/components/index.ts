@@ -39,7 +39,7 @@ import SpinnerPlugin from './spinner/spinner';
 import Status from './status/status';
 import StepPlugin from './step/step';
 import SwitchPlugin from './switch/switch';
-import TabPanePlugin from './tab-pane/tab-pane';
+import TabPanelPlugin from './tab-panel/tab-panel';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
 import TextareaPlugin from './textarea/textarea';
@@ -92,7 +92,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(Status);
         Vue.use(StepPlugin);
         Vue.use(SwitchPlugin);
-        Vue.use(TabPanePlugin);
+        Vue.use(TabPanelPlugin);
         Vue.use(TabsPlugin);
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);

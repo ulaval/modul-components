@@ -3,8 +3,8 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Model } from 'vue-property-decorator';
-import WithRender from './tab-pane.html?style=./tab-pane.scss';
-import { TAB_PANE_NAME } from '../component-names';
+import WithRender from './tab-panel.html?style=./tab-panel.scss';
+import { TAB_PANEL_NAME } from '../component-names';
 import { MTabsInterface } from '../tabs/tabs';
 
 export abstract class BaseTabs extends ModulVue {
@@ -50,7 +50,7 @@ export class MTabPane extends ModulVue {
 
 const TabPannePlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(TAB_PANE_NAME, MTabPane);
+        v.component(TAB_PANEL_NAME, MTabPane);
     }
 };
 
