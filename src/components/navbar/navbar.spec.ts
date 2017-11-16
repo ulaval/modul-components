@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import NavbarPlugin, { MNavbar, MNavbarSkin } from './nav-bar';
+import NavbarPlugin, { MNavbar, MNavbarSkin } from './navbar';
 
 const SKIN_REGULAR_CSS: string = 'm--is-regular';
 const SKIN_LIGHT_CSS: string = 'm--is-light';
@@ -72,21 +72,21 @@ describe('navbar', () => {
 
     it('line prop', () => {
         navbar.skin = MNavbarSkin.Light;
-        expect(navbar.$el.querySelector('.m-nav-bar__line')).toBeFalsy();
+        expect(navbar.$el.querySelector('.m-navbar__line')).toBeFalsy();
         Vue.nextTick(() => {
-            expect(navbar.$el.querySelector('.m-nav-bar__line')).toBeTruthy();
+            expect(navbar.$el.querySelector('.m-navbar__line')).toBeTruthy();
             navbar.line = false;
             Vue.nextTick(() => {
-                expect(navbar.$el.querySelector('.m-nav-bar__line')).toBeFalsy();
+                expect(navbar.$el.querySelector('.m-navbar__line')).toBeFalsy();
                 Vue.nextTick(() => {
                     navbar.skin = MNavbarSkin.Arrow;
                     navbar.line = true;
-                    expect(navbar.$el.querySelector('.m-nav-bar__arrow')).toBeFalsy();
+                    expect(navbar.$el.querySelector('.m-navbar__arrow')).toBeFalsy();
                     Vue.nextTick(() => {
-                        expect(navbar.$el.querySelector('.m-nav-bar__arrow')).toBeTruthy();
+                        expect(navbar.$el.querySelector('.m-navbar__arrow')).toBeTruthy();
                         navbar.line = false;
                         Vue.nextTick(() => {
-                            expect(navbar.$el.querySelector('.m-nav-bar__arrow')).toBeFalsy();
+                            expect(navbar.$el.querySelector('.m-navbar__arrow')).toBeFalsy();
                         });
                     });
                 });
@@ -99,14 +99,14 @@ describe('navbar', () => {
     //     let clickSpy = jasmine.createSpy('clickSpy');
     //     let vm = new Vue({
     //         template: `
-    //             <m-nav-bar @click="onClick($event)"></m-nav-bar>
+    //             <m-navbar @click="onClick($event)"></m-navbar>
     //         `,
     //         methods: {
     //             onClick: clickSpy
     //         }
     //     }).$mount();
 
-    //     let element = vm.$el.querySelector('.m-nav-bar-item');
+    //     let element = vm.$el.querySelector('.m-navbar-item');
     //     console.log(vm.$el);
 
     //     if (element) {

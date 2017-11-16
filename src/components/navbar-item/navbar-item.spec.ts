@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import NavBarItemPlugin, { MNavBarItem } from './nav-bar-item';
+import NavBarItemPlugin, { MNavBarItem } from './navbar-item';
 
 const SELECTED_CSS: string = 'm--is-selected';
 
@@ -30,7 +30,7 @@ describe('navbar-item', () => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
             template: `
-                <m-nav-bar-item @click="onClick($event)"></m-nav-bar-item>
+                <m-navbar-item @click="onClick($event)"></m-navbar-item>
             `,
             methods: {
                 onClick: clickSpy

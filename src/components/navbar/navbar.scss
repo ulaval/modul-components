@@ -1,6 +1,6 @@
 @import 'abstracts/variables';
 
-.m-nav-bar {
+.m-navbar {
     &__wrap {
         position: relative;
         width: 100%;
@@ -94,8 +94,8 @@
     }
 
     &.m--is-regular {
-        .m-nav-bar-item {
-            + .m-nav-bar-item {
+        .m-navbar-item {
+            + .m-navbar-item {
                 margin-left: 1px;
             }
 
@@ -145,7 +145,7 @@
     }
 
     &.m--is-dark {
-        .m-nav-bar-item {
+        .m-navbar-item {
             &.m--is-selected {
                 &[tabindex],
                 a,
@@ -158,7 +158,7 @@
     }
 
     &.m--is-light {
-        .m-nav-bar-item {
+        .m-navbar-item {
             margin: 0 $m-margin;
 
             a:visited {
@@ -214,13 +214,13 @@
     }
 
     &.m--is-arrow {
-        .m-nav-bar__wrap {
+        .m-navbar__wrap {
             border-bottom: $m-border-width--s solid $m-color--grey;
             margin-bottom: $m-margin;
             overflow: visible;
         }
 
-        .m-nav-bar-item {
+        .m-navbar-item {
             margin: 0 $m-margin;
 
             a:visited {
@@ -260,7 +260,7 @@
     }
 
     &.m--no-margin {
-        .m-nav-bar-item {
+        .m-navbar-item {
             margin: 0;
         }
     }

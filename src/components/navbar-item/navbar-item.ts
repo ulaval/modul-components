@@ -2,8 +2,8 @@ import Vue from 'vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './nav-bar-item.html?style=./nav-bar-item.scss';
-import { NAV_BAR_ITEM_NAME } from '../component-names';
+import WithRender from './navbar-item.html?style=./navbar-item.scss';
+import { NAVBAR_ITEM_NAME } from '../component-names';
 
 export abstract class BaseNavBar extends Vue {
     abstract isItemSelected(value: string, el: HTMLElement): boolean;
@@ -43,7 +43,7 @@ export class MNavBarItem extends Vue {
 
 const NavBarItemPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(NAV_BAR_ITEM_NAME, MNavBarItem);
+        v.component(NAVBAR_ITEM_NAME, MNavBarItem);
     }
 };
 

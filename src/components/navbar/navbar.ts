@@ -2,9 +2,9 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './nav-bar.html?style=./nav-bar.scss';
-import { NAV_BAR_NAME, NAV_BAR_ITEM_NAME } from '../component-names';
-import NavBarItemPlugin, { BaseNavBar } from '../nav-bar-item/nav-bar-item';
+import WithRender from './navbar.html?style=./navbar.scss';
+import { NAVBAR_NAME, NAVBAR_ITEM_NAME } from '../component-names';
+import NavBarItemPlugin, { BaseNavBar } from '../navbar-item/navbar-item';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -121,7 +121,7 @@ export class MNavbar extends BaseNavBar {
 
 const NavbarPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(NAV_BAR_NAME, MNavbar);
+        v.component(NAVBAR_NAME, MNavbar);
     }
 };
 
