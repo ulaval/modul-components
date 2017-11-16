@@ -1,6 +1,6 @@
 {
-    "tag": "m-text-field",
-    "name": "m-text-field-meta:name",
+    "tag": "m-textfield",
+    "name": "m-textfield-meta:name",
     "production": true,
     "attributes": {
         "value": {
@@ -60,6 +60,6 @@
             "default": ""
         }
     },
-    "overview": "text-field.overview",
-    "preview": "text-field.preview"
+    "overview": "textfield.overview",
+    "preview": "textfield.preview"
 }

@@ -2,8 +2,8 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Model, Watch } from 'vue-property-decorator';
-import WithRender from './text-field.html?style=./text-field.scss';
-import { TEXT_FIELD_NAME } from '../component-names';
+import WithRender from './textfield.html?style=./textfield.scss';
+import { TEXTFIELD_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { KeyCode } from '../../utils/keycode/keycode';
@@ -42,8 +42,8 @@ export class MTextField extends ModulVue {
 
     private passwordAsText: boolean = false;
 
-    private iconDescriptionShowPassword: string = this.$i18n.translate('m-text-field:show-password');
-    private iconDescriptionHidePassword: string = this.$i18n.translate('m-text-field:hide-password');
+    private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
+    private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
 
     protected mounted(): void {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
@@ -51,7 +51,7 @@ export class MTextField extends ModulVue {
 
     @Watch('type')
     private typeChanged(type: MTextFieldType): void {
-        console.warn('<' + TEXT_FIELD_NAME + '>: Change of property "type" is not supported');
+        console.warn('<' + TEXTFIELD_NAME + '>: Change of property "type" is not supported');
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
 
@@ -94,7 +94,7 @@ const TextFieldPlugin: PluginObject<any> = {
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(ButtonPlugin);
-        v.component(TEXT_FIELD_NAME, MTextField);
+        v.component(TEXTFIELD_NAME, MTextField);
     }
 };
 

@@ -43,7 +43,7 @@ import TabPanelPlugin from './tab-panel/tab-panel';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
 import TextareaPlugin from './textarea/textarea';
-import TextFieldPlugin from './text-field/text-field';
+import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
 import UploadPlugin from './upload/upload';
@@ -96,7 +96,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TabsPlugin);
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);
-        Vue.use(TextFieldPlugin);
+        Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
         Vue.use(TooltipPlugin);
         Vue.use(UploadPlugin);

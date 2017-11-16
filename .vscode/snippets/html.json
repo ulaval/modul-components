@@ -333,13 +333,13 @@
 		],
 		"description": "Create a modul template tag"
 	},
-	"text-field": {
-		"prefix": "m-text-field",
+	"textfield": {
+		"prefix": "m-textfield",
 		"body": [
-			"<m-text-field>$1</m-text-field>",
+			"<m-textfield>$1</m-textfield>",
 			"$2"
 		],
-		"description": "Create a modul text-field tag"
+		"description": "Create a modul textfield tag"
 	},
 	"timepicker": {
 		"prefix": "m-timepicker",
