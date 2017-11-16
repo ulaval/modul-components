@@ -1,9 +1,9 @@
 @import 'abstracts/variables';
-$m-options-menu-item--color-hover: $m-color--interactive-lightest !default;
-$m-options-menu-item--color-select: $m-color--grey-light !default;
-$m-options-menu-item--color-active: $m-color--grey-lightest !default;
+$m-menu-item--color-hover: $m-color--interactive-lightest !default;
+$m-menu-item--color-select: $m-color--grey-light !default;
+$m-menu-item--color-active: $m-color--grey-lightest !default;
 
-.m-options-menu-item {
+.m-menu-item {
     display: table-row;
     text-decoration: none;
 
@@ -36,9 +36,9 @@ $m-options-menu-item--color-active: $m-color--grey-lightest !default;
 
         &:hover,
         &:focus {
-            background-color: $m-options-menu-item--color-hover;
+            background-color: $m-menu-item--color-hover;
 
-            .m-options-menu-item {
+            .m-menu-item {
                 &__icon {
                     color: $m-color--black-grey;
                 }
@@ -46,7 +46,7 @@ $m-options-menu-item--color-active: $m-color--grey-lightest !default;
         }
 
         &:active {
-            background-color: $m-options-menu-item--color-active;
+            background-color: $m-menu-item--color-active;
         }
     }
 

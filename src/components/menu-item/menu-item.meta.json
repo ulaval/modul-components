@@ -1,6 +1,6 @@
 {
-    "tag": "m-options-menu-item",
-    "name": "m-options-menu-item-meta:name",
+    "tag": "m-menu-item",
+    "name": "m-menu-item-meta:name",
     "production": false,
     "attributes": {
         "iconName": {
@@ -11,6 +11,6 @@
             "default": false
         }
     },
-    "overview": "options-menu-item.overview",
+    "overview": "menu-item.overview",
     "preview": false
 }

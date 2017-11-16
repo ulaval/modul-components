@@ -1,6 +1,6 @@
 {
-    "tag": "m-options-menu",
-    "name": "m-options-menu-meta:name",
+    "tag": "m-menu",
+    "name": "m-menu-meta:name",
     "production": false,
     "attributes": {
         "options": {
@@ -15,6 +15,6 @@
             "default": false
         }
     },
-    "overview": "options-menu.overview",
-    "preview": "options-menu.preview"
+    "overview": "menu.overview",
+    "preview": "menu.preview"
 }

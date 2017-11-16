@@ -3,8 +3,8 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './options-menu.html?style=./options-menu.scss';
-import { OPTIONS_MENU_NAME } from '../component-names';
+import WithRender from './menu.html?style=./menu.scss';
+import { MENU_NAME } from '../component-names';
 import PopupPlugin from '../popup/popup';
 import I18nPlugin from '../i18n/i18n';
 import { MPopperPlacement } from '../popper/popper';
@@ -41,7 +41,7 @@ export class MOptionsMenu extends ModulVue {
         let containsIcon: boolean = false;
         let containsText: boolean = false;
         this.$children[0].$children.forEach((child) => {
-            if (child.$refs['m-options-menu-item']) {
+            if (child.$refs['m-menu-item']) {
                 containsIcon = child['hasIcon'];
                 containsText = child['hasSlot'];
             }
@@ -49,7 +49,7 @@ export class MOptionsMenu extends ModulVue {
         // add classes for padding right of icon or left of text
         if (containsIcon ? !containsText : containsText) {
             this.$children[0].$children.forEach((child) => {
-                if (child.$refs['m-options-menu-item']) {
+                if (child.$refs['m-menu-item']) {
                     if (!containsIcon) {
                         child.$refs['icon']['className'] += ' is-empty';
                     } else {
@@ -82,7 +82,7 @@ const MenuPlugin: PluginObject<any> = {
         v.use(PopupPlugin);
         v.use(I18nPlugin);
         v.use(IconButtonPlugin);
-        v.component(OPTIONS_MENU_NAME, MOptionsMenu);
+        v.component(MENU_NAME, MOptionsMenu);
     }
 };
 

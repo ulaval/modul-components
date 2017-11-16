@@ -197,21 +197,21 @@
 		],
 		"description": "Create a modul nav-bar tag"
 	},
-	"options-menu": {
-		"prefix": "m-options-menu",
+	"menu": {
+		"prefix": "m-menu",
 		"body": [
-			"<m-options-menu>$1</m-options-menu>",
+			"<m-menu>$1</m-menu>",
 			"$2"
 		],
-		"description": "Create a modul options-menu tag"
+		"description": "Create a modul menu tag"
 	},
-	"options-menu-item": {
-		"prefix": "m-options-menu-item",
+	"menu-item": {
+		"prefix": "m-menu-item",
 		"body": [
-			"<m-options-menu-item>$1</m-options-menu-item>",
+			"<m-menu-item>$1</m-menu-item>",
 			"$2"
 		],
-		"description": "Create a modul options-menu-item tag"
+		"description": "Create a modul menu-item tag"
 	},
 	"panel": {
 		"prefix": "m-panel",

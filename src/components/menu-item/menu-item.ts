@@ -3,9 +3,9 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './options-menu-item.html?style=./options-menu-item.scss';
-import { OPTIONS_MENU_ITEM_NAME } from '../component-names';
-import { MOptionsMenu } from '../options-menu/options-menu';
+import WithRender from './menu-item.html?style=./menu-item.scss';
+import { MENU_ITEM_NAME } from '../component-names';
+import { MOptionsMenu } from '../menu/menu';
 
 @WithRender
 @Component
@@ -48,7 +48,7 @@ export class MOptionsMenuItem extends ModulVue {
 
 const MenuPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(OPTIONS_MENU_ITEM_NAME, MOptionsMenuItem);
+        v.component(MENU_ITEM_NAME, MOptionsMenuItem);
     }
 };
 

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import MenuPlugin, { MOptionsMenu } from './options-menu';
+import MenuPlugin, { MOptionsMenu } from './menu';
 
 const STATE_DISABLED_CSS: string = 'm--is-disabled';
 
@@ -39,7 +39,7 @@ describe('optionsMenu', () => {
     //         },
     //         template: `
     //         <div>
-    //             <m-options-menu ref="a" @open="onClick"></m-options-menu>
+    //             <m-menu ref="a" @open="onClick"></m-menu>
     //         </div>`,
     //         methods: {
     //             onClick: clickSpy

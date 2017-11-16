@@ -21,8 +21,8 @@ export const MESSAGE_NAME: string = 'm-message';
 export const MODAL_NAME: string = 'm-modal';
 export const NAVBAR_NAME: string = 'm-navbar';
 export const NAVBAR_ITEM_NAME: string = 'm-navbar-item';
-export const OPTIONS_MENU_NAME: string = 'm-options-menu';
-export const OPTIONS_MENU_ITEM_NAME: string = 'm-options-menu-item';
+export const MENU_NAME: string = 'm-menu';
+export const MENU_ITEM_NAME: string = 'm-menu-item';
 export const PANEL_NAME: string = 'm-panel';
 export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
@@ -73,8 +73,8 @@ export const components: string[] = [
     MODAL_NAME,
     NAVBAR_NAME,
     NAVBAR_ITEM_NAME,
-    OPTIONS_MENU_NAME,
-    OPTIONS_MENU_ITEM_NAME,
+    MENU_NAME,
+    MENU_ITEM_NAME,
     PANEL_NAME,
     POPPER_NAME,
     POPUP_NAME,
