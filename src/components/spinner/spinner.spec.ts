@@ -34,68 +34,155 @@ describe('spinner', () => {
     });
 
     it('css class for spinner are not present', () => {
-        let wrap: Element | null = (spinner as Vue).$el.querySelector('m-spinner__wrap');
-        if (wrap) {
+        Vue.nextTick(() => {
+            let wrap: Element = spinner.$refs.spinnerWrap as Element;
+
             expect(wrap.classList.contains(MODE_PROCESSING_CSS)).toBeFalsy();
             expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
             expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
             expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeFalsy();
-        }
+        });
     });
 
-    it('skin prop', () => {
-        let wrap: Element | null = (spinner as Vue).$el.querySelector('m-spinner__wrap');
-        if (wrap) {
-            expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
-            expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
-            expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeFalsy();
-        }
-        spinner.skin = MSpinnerStyle.Dark;
+    it('title prop', () => {
         Vue.nextTick(() => {
-            let wrap: Element | null = (spinner as Vue).$el.querySelector('m-spinner__wrap');
-            if (wrap) {
-                expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeTruthy();
-            }
-            spinner.skin = MSpinnerStyle.Light;
+            const titleClass: string = '.m-spinner__title';
+            let title: HTMLElement = spinner.$el.querySelector(titleClass) as HTMLElement;
+            expect(title).toBeFalsy();
+
+            spinner.title = 'test';
             Vue.nextTick(() => {
-                if (wrap) {
-                    expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
-                }
+                // don't know why (probably portal) but we need two cycles
+                Vue.nextTick(() => {
+                    title = spinner.$el.querySelector(titleClass) as HTMLElement;
+                    expect(title).toBeTruthy();
+                    expect(title.innerText).toBe('test');
+                });
+            });
+        });
+    });
+
+    it('description prop', () => {
+        Vue.nextTick(() => {
+            const descClass: string = '.m-spinner__description';
+            let desc: HTMLElement = spinner.$el.querySelector(descClass) as HTMLElement;
+            expect(desc).toBeFalsy();
+
+            spinner.description = 'desc';
+            Vue.nextTick(() => {
+                // portal
+                Vue.nextTick(() => {
+                    desc = spinner.$el.querySelector(descClass) as HTMLElement;
+                    expect(desc).toBeTruthy();
+                    expect(desc.innerText).toBe('desc');
+                });
+            });
+        });
+    });
+
+    describe('skin prop', () => {
+        it('dark', () => {
+            Vue.nextTick(() => {
+                let wrap: Element = spinner.$refs.spinnerWrap as Element;
+                expect(wrap).toBeTruthy();
+                expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+
+                spinner.skin = MSpinnerStyle.Dark;
+                Vue.nextTick(() => {
+                    // portal
+                    Vue.nextTick(() => {
+                        expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeTruthy();
+                    });
+                });
+            });
+        });
+
+        it('light', () => {
+            Vue.nextTick(() => {
+                let wrap: Element = spinner.$refs.spinnerWrap as Element;
+                expect(wrap).toBeTruthy();
+                expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
+
+                spinner.skin = MSpinnerStyle.Light;
+                Vue.nextTick(() => {
+                    // portal
+                    Vue.nextTick(() => {
+                        expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
+                    });
+                });
+            });
+        });
+
+        it('lighter', () => {
+            Vue.nextTick(() => {
+                let wrap: Element = spinner.$refs.spinnerWrap as Element;
+                expect(wrap).toBeTruthy();
+                expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeFalsy();
+
                 spinner.skin = MSpinnerStyle.Lighter;
                 Vue.nextTick(() => {
-                    if (wrap) {
-                        expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeTruthy();
-                    }
-                    spinner.skin = MSpinnerStyle.Regular;
+                    // portal
                     Vue.nextTick(() => {
-                        if (wrap) {
-                            expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
-                            expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
-                            expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeFalsy();
-                        }
+                        expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeTruthy();
+                    });
+                });
+            });
+        });
+
+        it('regular', () => {
+            Vue.nextTick(() => {
+                let wrap: Element = spinner.$refs.spinnerWrap as Element;
+                expect(wrap).toBeTruthy();
+                expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+                expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
+                expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeFalsy();
+
+                spinner.skin = MSpinnerStyle.Regular;
+                Vue.nextTick(() => {
+                    // portal
+                    Vue.nextTick(() => {
+                        expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+                        expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
+                        expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeFalsy();
                     });
                 });
             });
         });
     });
 
-    it('size prop', () => {
-        let spinnerIcon: Element | null = (spinner as Vue).$el.querySelector('m-spinner__icon');
-        if (spinnerIcon) {
-            expect(spinnerIcon.classList.contains(SIZE_SMALL_CSS)).toBeFalsy();
-        }
-        spinner.size = MSpinnerSize.Small;
-        Vue.nextTick(() => {
-            if (spinnerIcon) {
-                expect(spinnerIcon.classList.contains(SIZE_SMALL_CSS)).toBeTruthy();
-            }
-            spinner.size = MSpinnerSize.Small;
+    describe('size prop', () => {
+        it('small', () => {
             Vue.nextTick(() => {
-                if (spinnerIcon) {
-                    expect(spinnerIcon.classList.contains(SIZE_SMALL_CSS)).toBeFalsy();
-                }
+                const iconClass: string = '.m-spinner__icon';
+                let icon: Element = spinner.$el.querySelector(iconClass) as Element;
+                expect(icon).toBeTruthy();
+                expect(icon.classList.contains(SIZE_SMALL_CSS)).toBeFalsy();
+
+                spinner.size = MSpinnerSize.Small;
+                Vue.nextTick(() => {
+                    // portal
+                    Vue.nextTick(() => {
+                        expect(icon.classList.contains(SIZE_SMALL_CSS)).toBeTruthy();
+                    });
+                });
+            });
+        });
+
+        it('large', () => {
+            Vue.nextTick(() => {
+                const iconClass: string = '.m-spinner__icon';
+                let icon: Element = spinner.$el.querySelector(iconClass) as Element;
+                expect(icon).toBeTruthy();
+                expect(icon.classList.contains(SIZE_SMALL_CSS)).toBeFalsy();
+
+                spinner.size = MSpinnerSize.Large;
+                Vue.nextTick(() => {
+                    // portal
+                    Vue.nextTick(() => {
+                        expect(icon.classList.contains(SIZE_SMALL_CSS)).toBeFalsy();
+                    });
+                });
             });
         });
     });
-
 });

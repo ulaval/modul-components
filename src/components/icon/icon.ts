@@ -36,6 +36,7 @@ export class MIcon extends Vue {
 
 const IconPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(ICON_NAME, 'plugin.install');
         v.component(ICON_NAME, MIcon);
     }
 };
