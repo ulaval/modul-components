@@ -1,0 +1,19 @@
+{
+    "tag": "m-dialog",
+    "name": "m-dialog-meta:name",
+    "production": false,
+    "attributes": {
+        "size": {
+            "type": "string",
+            "value": [
+                "full-size",
+                "large",
+                "default",
+                "small"
+            ],
+            "default": 2
+        }
+    },
+    "overview": "dialog.overview",
+    "preview": "dialog.preview"
+}

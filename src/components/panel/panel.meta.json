@@ -1,14 +1,19 @@
 {
     "tag": "m-panel",
     "name": "m-panel-meta:name",
+    "production": true,
     "attributes": {
-        "mode": {
+        "skin": {
             "type": "string",
             "values": [
-                "primary",
-                "secondary"
+                "light",
+                "dark"
             ],
             "default": 0
+        },
+        "highlightingBorder": {
+            "type": "boolean",
+            "default": true
         },
         "shadow": {
             "type": "boolean",

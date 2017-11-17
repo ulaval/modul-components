@@ -1,6 +1,7 @@
 {
     "tag": "m-dropdown",
     "name": "m-dropdown-meta:name",
+    "production": true,
     "attributes": {
         "value": {
             "type": "any"
@@ -8,7 +9,23 @@
         "label": {
             "type": "string"
         },
-        "defaultText": {
+        "placeholder": {
+            "type": "string"
+        },
+        "filterable": {
+            "type": "boolean",
+            "default": false
+        },
+        "width": {
+            "type": "string"
+        },
+        "iconName": {
+            "type": "string"
+        },
+        "textNoData": {
+            "type": "string"
+        },
+        "textNoMatch": {
             "type": "string"
         },
         "disabled": {
@@ -19,18 +36,25 @@
             "type": "boolean",
             "default": false
         },
-        "editable": {
+        "error": {
             "type": "boolean",
             "default": false
         },
-        "width": {
-            "type": "string"
+        "valid": {
+            "type": "boolean",
+            "default": false
         },
-        "textNoData": {
-            "type": "string"
+        "error-message": {
+            "type": "string",
+            "default": ""
         },
-        "textNoMatch": {
-            "type": "string"
+        "valid-message": {
+            "type": "string",
+            "default": ""
+        },
+        "helper-message": {
+            "type": "string",
+            "default": ""
         }
     },
     "overview": "dropdown.overview",

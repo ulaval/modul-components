@@ -1,0 +1,15 @@
+<div class="m-navbar" :class="{
+         'm--is-regular': skin == 'regular' || skin == 'dark',
+         'm--is-light': skin == 'light',
+         'm--is-dark': skin == 'dark',
+         'm--is-vanilla': skin == 'vanilla',
+         'm--is-arrow': skin == 'arrow',
+         'm--no-margin': !margin }">
+    <nav class="m-navbar__wrap">
+        <ul class="m-navbar__list" aria-hidden="true">
+            <slot></slot>
+        </ul>
+        <div aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propLine" ref="line"></div>
+        <div aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propArrow" ref="Arrow"></div>
+    </nav>
+</div>

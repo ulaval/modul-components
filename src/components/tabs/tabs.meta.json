@@ -1,6 +1,7 @@
 {
     "tag": "m-tabs",
     "name": "m-tabs-meta:name",
+    "production": false,
     "attributes": {
         "mode": {
             "type": "string",

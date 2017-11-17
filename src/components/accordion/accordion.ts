@@ -18,11 +18,6 @@ export enum MAccordionIconPosition {
     Right = 'right'
 }
 
-export enum MAccordionIconSkin {
-    Default = 'default',
-    Border = 'border'
-}
-
 export enum MAccordionIconSize {
     Small = 'small',
     Large = 'large'
@@ -45,16 +40,30 @@ export class MAccordion extends Vue {
     @Prop()
     public open: boolean;
 
-    @Prop({ default: MAccordionSkin.Regular })
+    @Prop({
+        default: MAccordionSkin.Regular,
+        validator: value =>
+            value == MAccordionSkin.Regular ||
+            value == MAccordionSkin.Light ||
+            value == MAccordionSkin.Plain
+    })
     public skin: MAccordionSkin;
 
-    @Prop()
+    @Prop({
+        validator: value =>
+            value == MAccordionIconPosition.Left ||
+            value == MAccordionIconPosition.Right
+    })
     public iconPosition: MAccordionIconPosition;
 
     @Prop()
-    public iconSkin: MAccordionIconSkin;
+    public iconBorder: boolean;
 
-    @Prop()
+    @Prop({
+        validator: value =>
+            value == MAccordionIconSize.Small ||
+            value == MAccordionIconSize.Large
+    })
     public iconSize: MAccordionIconSize;
 
     @Prop()
@@ -107,8 +116,12 @@ export class MAccordion extends Vue {
         return this.iconSize || MAccordionIconSize.Large;
     }
 
-    private get propIconSkin(): MAccordionIconSkin {
-        return this.iconSkin || MAccordionIconSkin.Default;
+    private get propIconBorder(): boolean {
+        if (this.propSkin == MAccordionSkin.Light) {
+            return this.iconBorder || true;
+        } else {
+            return this.iconBorder || false;
+        }
     }
 
     private toggleAccordion(): void {

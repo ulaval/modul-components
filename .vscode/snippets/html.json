@@ -1,6 +1,6 @@
 {
 	/*
-	 // Place your snippets for HTML here. Each snippet is defined under a snippet name and has a prefix, body and 
+	 // Place your snippets for HTML here. Each snippet is defined under a snippet name and has a prefix, body and
 	 // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
 	 // $1, $2 for tab stops, ${id} and ${id:label} and ${1:label} for variables. Variables with the same id are connected.
 	 // Example:
@@ -189,29 +189,29 @@
 		],
 		"description": "Create a modul modal tag"
 	},
-	"nav-bar": {
-		"prefix": "m-nav-bar",
+	"navbar": {
+		"prefix": "m-navbar",
 		"body": [
-			"<m-nav-bar>$1</m-nav-bar>",
+			"<m-navbar>$1</m-navbar>",
 			"$2"
 		],
 		"description": "Create a modul nav-bar tag"
 	},
-	"options-menu": {
-		"prefix": "m-options-menu",
+	"menu": {
+		"prefix": "m-menu",
 		"body": [
-			"<m-options-menu>$1</m-options-menu>",
+			"<m-menu>$1</m-menu>",
 			"$2"
 		],
-		"description": "Create a modul options-menu tag"
+		"description": "Create a modul menu tag"
 	},
-	"options-menu-item": {
-		"prefix": "m-options-menu-item",
+	"menu-item": {
+		"prefix": "m-menu-item",
 		"body": [
-			"<m-options-menu-item>$1</m-options-menu-item>",
+			"<m-menu-item>$1</m-menu-item>",
 			"$2"
 		],
-		"description": "Create a modul options-menu-item tag"
+		"description": "Create a modul menu-item tag"
 	},
 	"panel": {
 		"prefix": "m-panel",
@@ -309,13 +309,13 @@
 		],
 		"description": "Create a modul tabs tag"
 	},
-	"tab-pane": {
-		"prefix": "m-tab-pane",
+	"tab-panel": {
+		"prefix": "m-tab-panel",
 		"body": [
-			"<m-tab-pane>$1</m-tab-pane>",
+			"<m-tab-panel>$1</m-tab-panel>",
 			"$2"
 		],
-		"description": "Create a modul tab-pane tag"
+		"description": "Create a modul tab-panel tag"
 	},
 	"table": {
 		"prefix": "m-table",
@@ -333,13 +333,13 @@
 		],
 		"description": "Create a modul template tag"
 	},
-	"text-field": {
-		"prefix": "m-text-field",
+	"textfield": {
+		"prefix": "m-textfield",
 		"body": [
-			"<m-text-field>$1</m-text-field>",
+			"<m-textfield>$1</m-textfield>",
 			"$2"
 		],
-		"description": "Create a modul text-field tag"
+		"description": "Create a modul textfield tag"
 	},
 	"timepicker": {
 		"prefix": "m-timepicker",

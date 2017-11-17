@@ -1,6 +1,7 @@
 {
     "tag": "m-accordion",
     "name": "m-accordion-meta:name",
+    "production": false,
     "attributes": {
         "skin": {
             "type": "string",
@@ -23,13 +24,9 @@
             ],
             "default": 1
         },
-        "iconSkin": {
-            "type": "string",
-            "values": [
-                "regular",
-                "light"
-            ],
-            "default": 1
+        "iconBorder": {
+            "type": "boolean",
+            "default": false
         },
         "iconSize": {
             "type": "string",

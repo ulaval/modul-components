@@ -1,6 +1,5 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
-export const BULLET_LIST_NAME: string = 'm-bullet-list';
 export const LIST_ITEM_NAME: string = 'm-list-item';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
@@ -20,15 +19,16 @@ export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
 export const MESSAGE_NAME: string = 'm-message';
 export const MODAL_NAME: string = 'm-modal';
-export const NAV_BAR_NAME: string = 'm-nav-bar';
-export const NAV_BAR_ITEM_NAME: string = 'm-nav-bar-item';
-export const OPTIONS_MENU_NAME: string = 'm-options-menu';
-export const OPTIONS_MENU_ITEM_NAME: string = 'm-options-menu-item';
+export const NAVBAR_NAME: string = 'm-navbar';
+export const NAVBAR_ITEM_NAME: string = 'm-navbar-item';
+export const MENU_NAME: string = 'm-menu';
+export const MENU_ITEM_NAME: string = 'm-menu-item';
 export const PANEL_NAME: string = 'm-panel';
 export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const RADIO_NAME: string = 'm-radio';
 export const RADIO_GROUP_NAME: string = 'm-radio-group';
+export const RADIO_STYLE_NAME: string = 'm-radio-style';
 export const SCROLL_TOP_NAME: string = 'm-scroll-top';
 export const SIDEBAR_NAME: string = 'm-sidebar';
 export const SLIDER_NAME: string = 'm-slider';
@@ -36,11 +36,11 @@ export const SPINNER_NAME: string = 'm-spinner';
 export const STATUS_NAME: string = 'm-status';
 export const STEP_NAME: string = 'm-step';
 export const SWITCH_NAME: string = 'm-switch';
-export const TAB_PANE_NAME: string = 'm-tab-pane';
-export const TABLE_NAME: string = 'm-table';
+export const TAB_PANEL_NAME: string = 'm-tab-panel';
 export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
-export const TEXT_FIELD_NAME: string = 'm-text-field';
+export const TEXTAREA_NAME: string = 'm-textarea';
+export const TEXTFIELD_NAME: string = 'm-textfield';
 export const TIMEPICKER_NAME: string = 'm-timepicker';
 export const TOOLTIP_NAME: string = 'm-tooltip';
 export const UPLOAD_NAME: string = 'm-upload';
@@ -52,7 +52,6 @@ export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
 export const components: string[] = [
     ACCORDION_GROUP_NAME,
     ACCORDION_NAME,
-    BULLET_LIST_NAME,
     BUTTON_NAME,
     BUTTON_GROUP_NAME,
     CHECKBOX_NAME,
@@ -72,14 +71,16 @@ export const components: string[] = [
     LIST_ITEM_NAME,
     MESSAGE_NAME,
     MODAL_NAME,
-    NAV_BAR_NAME,
-    OPTIONS_MENU_NAME,
-    OPTIONS_MENU_ITEM_NAME,
+    NAVBAR_NAME,
+    NAVBAR_ITEM_NAME,
+    MENU_NAME,
+    MENU_ITEM_NAME,
     PANEL_NAME,
     POPPER_NAME,
     POPUP_NAME,
     RADIO_NAME,
     RADIO_GROUP_NAME,
+    RADIO_STYLE_NAME,
     SCROLL_TOP_NAME,
     SIDEBAR_NAME,
     SLIDER_NAME,
@@ -87,11 +88,11 @@ export const components: string[] = [
     STATUS_NAME,
     STEP_NAME,
     SWITCH_NAME,
-    TAB_PANE_NAME,
-    TABLE_NAME,
+    TAB_PANEL_NAME,
     TABS_NAME,
     TEMPLATE_NAME,
-    TEXT_FIELD_NAME,
+    TEXTAREA_NAME,
+    TEXTFIELD_NAME,
     TIMEPICKER_NAME,
     TOOLTIP_NAME,
     UPLOAD_NAME,

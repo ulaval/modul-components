@@ -1,6 +1,7 @@
 {
     "tag": "m-dropdown-group",
     "name": "m-dropdown-group-meta:name",
+    "production": true,
     "attributes": {
         "label": {
             "type": "string"

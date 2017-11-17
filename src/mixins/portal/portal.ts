@@ -43,7 +43,7 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop({ default: 'mPortal' })
     public id: string;
 
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     @Prop()
@@ -57,8 +57,8 @@ export class Portal extends ModulVue implements PortalMixin {
     public setFocusToPortal(): void {
         if (this.as<PortalMixinImpl>().handlesFocus()) {
             let el: HTMLElement = this.as<PortalMixinImpl>().getPortalElement();
-            let x: number = window.scrollX; // AEL-53
-            let y: number = window.scrollY; // AEL-53
+            let x: number = window.pageXOffset; // AEL-53
+            let y: number = window.pageYOffset; // AEL-53
             el.setAttribute('tabindex', '0');
             el.focus();
             window.scrollTo(x, y); // AEL-53
@@ -117,7 +117,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public get propOpen(): boolean {
-        return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
+        return (this.open == undefined ? this.internalOpen : this.open) && !this.disabled;
     }
 
     public set propOpen(value: boolean) {

@@ -55,13 +55,13 @@ export class MUpload extends ModulVue implements MUploadInterface {
 
     @Prop({ default: () => [] })
     public extensions: string[];
-    @Prop({ default: false })
+    @Prop()
     public multiple: boolean;
     @Prop({ default: 10 })
     public maxFilesAllow: number;
     @Prop({ default: 26214400 }) // 25 Mo
     public maxSizeBytes: number;
-    @Prop({ default: false })
+    @Prop()
     public showImage: boolean;
 
     public globalFileList: GlobalFileList[] = [];

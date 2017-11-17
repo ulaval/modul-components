@@ -1,6 +1,7 @@
 {
     "tag": "m-icon",
     "name": "m-icon-meta:name",
+    "production": true,
     "attributes": {
         "name": {
             "type": "string",

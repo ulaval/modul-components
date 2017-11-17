@@ -1,0 +1,35 @@
+<div class="m-modal" ref="baseWindow">
+    <slot name="trigger"></slot>
+    <portal :target-el="'#' + propId">
+        <transition name="m--is">
+            <div v-show="propOpen"
+                 class="m-modal__wrap"
+                 :class="[{ 'm--is-open': propOpen,
+                            'm--is-disabled':disabled }]"
+                 ref="dialogWrap">
+                <article class="m-modal__article" ref="article">
+                    <header class="m-modal__header" v-if="hasTitle">
+                        <h2>{{ title }}</h2>
+                    </header>
+                    <div class="m-modal__body" v-if="hasDefaultSlot || hasMessage">
+                        <p v-if="hasMessage">{{ message }}</p>
+                        <slot></slot>
+                    </div>
+                    <footer class="m-modal__footer">
+                        <slot name="footer"></slot>
+                        <nav class="m-modal__footer__nav" v-if="!hasFooterSlot">
+                            <m-button @click="onOk()">
+                                <template v-if="hasOkLabel">{{ okLabel }}</template>
+                                <m-i18n v-else k="m-base-window:ok"></m-i18n>
+                            </m-button>
+                            <m-link mode="button" @click="onCancel()">
+                                <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
+                                <m-i18n v-else k="m-base-window:cancel"></m-i18n>
+                            </m-link>
+                        </nav>
+                    </footer>
+                </article>
+            </div>
+        </transition>
+    </portal>
+</div>

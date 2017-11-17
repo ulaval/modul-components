@@ -1,0 +1,8 @@
+{
+    "tag": "m-modal",
+    "name": "m-modal-meta:name",
+    "production": true,
+    "attributes": {},
+    "overview": "modal.overview",
+    "preview": "modal.preview"
+}

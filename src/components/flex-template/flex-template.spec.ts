@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import FlexTemplatePlugin, { MFlexTemplate, MFlexTemplateFrom } from './flex-template';
+import FlexTemplatePlugin, { MFlexTemplate, MFlexTemplateOrigin } from './flex-template';
 
 const MENU_OPEN_CSS: string = 'm--is-menu-open';
 const MENU_RIGHT_CSS: string = 'm--is-menu-right';
@@ -15,10 +15,10 @@ const EQ_MAX_S_CSS: string = 'm--is-eq-max-s';
 let flex: MFlexTemplate;
 let flexTemplate: Vue;
 
-describe('MFlexTemplateFrom', () => {
+describe('MFlexTemplateOrigin', () => {
     it('validates enum', () => {
-        expect(MFlexTemplateFrom.Left).toEqual('left');
-        expect(MFlexTemplateFrom.Right).toEqual('right');
+        expect(MFlexTemplateOrigin.Left).toEqual('left');
+        expect(MFlexTemplateOrigin.Right).toEqual('right');
     });
 });
 
@@ -28,7 +28,7 @@ describe('flex-template', () => {
         flex = new MFlexTemplate().$mount();
         flexTemplate = new Vue({
             template: `
-                <m-flex-template :headerFixe="headerFixe" :menuFixe="menuFixe" :menuFrom="menuFrom" :menuOpen="menuOpen" :smallMenu="smallMenu" :smallMenuWidth="smallMenuWidth" :pageMinHeight="pageMinHeight">
+                <m-flex-template :headerFixe="headerFixe" :menuFixe="menuFixe" :menuOrigin="menuOrigin" :menuOpen="menuOpen" :smallMenu="smallMenu" :smallMenuWidth="smallMenuWidth" :pageMinHeight="pageMinHeight">
                     <span slot="header" ref="menu">header</span>
                     <span slot="menu">menu</span>
                     body
@@ -37,7 +37,7 @@ describe('flex-template', () => {
             data: {
                 headerFixe: true,
                 menuFixe: true,
-                menuFrom: MFlexTemplateFrom.Left,
+                menuOrigin: MFlexTemplateOrigin.Left,
                 menuOpen: false,
                 smallMenu : false,
                 smallMenuWidth : '44px',
@@ -85,12 +85,12 @@ describe('flex-template', () => {
         });
     });
 
-    it('menuFrom prop', () => {
+    it('menuOrigin prop', () => {
         expect(flexTemplate.$el.classList.contains(MENU_RIGHT_CSS)).toBeFalsy();
-        (flexTemplate as any).menuFrom = MFlexTemplateFrom.Right;
+        (flexTemplate as any).menuOrigin = MFlexTemplateOrigin.Right;
         Vue.nextTick(() => {
             expect(flexTemplate.$el.classList.contains(MENU_RIGHT_CSS)).toBeTruthy();
-            (flexTemplate as any).menuFrom = MFlexTemplateFrom.Left;
+            (flexTemplate as any).menuOrigin = MFlexTemplateOrigin.Left;
             Vue.nextTick(() => {
                 expect(flexTemplate.$el.classList.contains(MENU_RIGHT_CSS)).toBeFalsy();
             });

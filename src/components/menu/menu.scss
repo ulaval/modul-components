@@ -1,0 +1,28 @@
+@import 'abstracts/variables';
+
+.m-menu {
+    display: inline-flex;
+
+    &__wrap {
+        background-color: $m-color--white;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        max-height: 208px; // magic number
+        overflow: auto;
+
+        @include m-scrollbar-ie();
+
+        &::-webkit-scrollbar {
+            @include m-scrollbar();
+
+            &-track-piece {
+                @include m-scrollbar-track-piece();
+            }
+
+            &-thumb {
+                @include m-scrollbar-thumb();
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 {
     "tag": "m-timepicker",
     "name": "m-timepicker-meta:name",
+    "production": false,
     "attributes": {
         "isDuration": {
             "type": "boolean",

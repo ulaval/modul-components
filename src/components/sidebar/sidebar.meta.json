@@ -1,0 +1,24 @@
+{
+    "tag": "m-sidebar",
+    "name": "m-sidebar-meta:name",
+    "production": false,
+    "attributes": {
+        "from": {
+            "type": "string",
+            "value": [
+                "right",
+                "bottom",
+                "left",
+                "bottom-right",
+                "bottom-left"
+            ],
+            "default": 1
+        },
+        "width": {
+            "type": "string",
+            "default": "100%"
+        }
+    },
+    "overview": "sidebar.overview",
+    "preview": "sidebar.preview"
+}

@@ -5,6 +5,8 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
 import { DROPDOWN_ITEM_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import RadioStylePlugin from '../radio-style/radio-style';
 
 export interface MDropdownInterface {
     model: any;
@@ -22,13 +24,15 @@ export abstract class BaseDropdownGroup extends ModulVue {
 }
 
 @WithRender
-@Component
+@Component({
+    mixins: [MediaQueries]
+})
 export class MDropdownItem extends ModulVue {
     @Prop()
     public label: string;
     @Prop()
     public value: any;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     public root: MDropdownInterface; // Dropdown component
@@ -55,7 +59,7 @@ export class MDropdownItem extends ModulVue {
     }
 
     public get inactive(): boolean {
-        return this.value === undefined;
+        return this.value == undefined;
     }
 
     // Value and label rules
@@ -85,7 +89,7 @@ export class MDropdownItem extends ModulVue {
         return (this.root as MDropdownInterface).focused == this.value;
     }
 
-    private onMousedown(): void {
+    private onClick(): void {
         if (!this.inactive && !this.root.inactive && !this.disabled) {
             this.root.model = this.value;
         }
@@ -94,6 +98,7 @@ export class MDropdownItem extends ModulVue {
 
 const DropdownItemPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(RadioStylePlugin);
         v.component(DROPDOWN_ITEM_NAME, MDropdownItem);
     }
 };

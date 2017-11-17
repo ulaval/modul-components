@@ -13,9 +13,9 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     @Model('change')
     @Prop()
     public value: string;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
-    @Prop({ default: false })
+    @Prop()
     public fullsize: boolean;
     @Prop({ default: true })
     public inline: boolean;

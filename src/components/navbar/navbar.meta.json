@@ -1,0 +1,23 @@
+{
+    "tag": "m-navbar",
+    "name": "m-navbar-meta:name",
+    "production": false,
+    "attributes": {
+        "skin": {
+            "type": "string",
+            "value": [
+                "regular",
+                "light",
+                "dark",
+                "vanilla",
+                "arrow"
+            ],
+            "default": 2
+        },
+        "line": {
+            "type": "boolean"
+        }
+    },
+    "overview": "nav-bar.overview",
+    "preview": "nav-bar.preview"
+}

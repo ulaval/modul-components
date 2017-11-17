@@ -1,6 +1,7 @@
 {
     "tag": "m-i18n",
     "name": "m-i18n-meta:name",
+    "production": false,
     "attributes": {
         "i18n-key": {
             "type": "string",

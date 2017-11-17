@@ -1,6 +1,7 @@
 {
     "tag": "m-status",
     "name": "m-status-meta:name",
+    "production": false,
     "attributes": {
         "listData": {
             "type": "object",

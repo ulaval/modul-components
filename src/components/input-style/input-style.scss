@@ -1,10 +1,11 @@
 @import 'abstracts/variables';
-$m-input-style--color-default-text: $m-color--grey-darker !default;
+$m-input-style--color-default-text: $m-color--disabled !default;
 $m-input-style--color-focus: $m-color--interactive !default;
 $m-input-style--color-error: $m-color--error !default;
 $m-input-style--color-valid: $m-color--success !default;
-$m-input-style--color-disabled: $m-color--grey-darker !default;
-$m-input-style--padding: 5px !default;
+$m-input-style--color-disabled: $m-color--disabled !default;
+$m-input-style--color-waiting: $m-color--active !default;
+$m-input-style--padding: 4px !default;
 
 .m-input-style {
     position: relative;
@@ -13,7 +14,6 @@ $m-input-style--padding: 5px !default;
     flex-direction: column;
     outline: none;
     cursor: pointer;
-    min-width: 130px;
 
     &::before,
     &::after {
@@ -39,15 +39,21 @@ $m-input-style--padding: 5px !default;
         background: $m-input-style--color-focus;
     }
 
-    &:hover:not(.m--is-disabled):not(.m--has-error):not(.m--is-valid),
+    &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus),
     &.m--has-value {
         &::before {
             border-color: $m-color--text;
         }
 
-        .m-button.m--is-mode-icon,
+        .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             color: $m-color--text;
+        }
+    }
+
+    &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus) {
+        textarea {
+            border-color: $m-color--border-dark;
         }
     }
 
@@ -57,9 +63,13 @@ $m-input-style--padding: 5px !default;
         }
 
         .m-input-style__label,
-        .m-button.m--is-mode-icon,
+        .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             color: $m-input-style--color-focus;
+        }
+
+        textarea {
+            border-color: $m-color--border-dark;
         }
     }
 
@@ -68,27 +78,16 @@ $m-input-style--padding: 5px !default;
 
         .m-input-style {
             &__label {
-                transform: translate(0, 100%);
-                bottom: 100%;
+                transform: translate3d(0, -3px, 0) scale(0.8); // Magic number
                 z-index: 1;
                 width: 100%;
-                font-size: $m-font-size--s;
                 cursor: pointer;
-            }
-
-            &__disabled-icon {
-                stroke-width: 3px;
-                font-size: 8px; // Magic number
             }
         }
     }
 
-    &.m--has-label {
-        padding-top: 16px; // Magic number
-    }
-
-    &:not(.m--is-label-up) {
-        .m-input-style__body__left {
+    &:not(.m--is-label-up):not(.m--has-textarea) {
+        &.m--has-label .m-input-style__body__left {
             opacity: 0;
         }
     }
@@ -103,7 +102,7 @@ $m-input-style--padding: 5px !default;
         }
 
         .m-input-style__label,
-        .m-button.m--is-mode-icon,
+        .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             color: $m-input-style--color-error;
         }
@@ -119,29 +118,34 @@ $m-input-style--padding: 5px !default;
         }
 
         .m-input-style__label,
-        .m-button.m--is-mode-icon,
+        .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             color: $m-input-style--color-valid;
         }
     }
 
-    &.m--is-disabled {
+    &.m--is-disabled,
+    &.m--is-waiting {
         &::before {
             border-bottom-style: dashed;
             border-color: $m-input-style--color-disabled;
         }
 
         &::after {
+            width: 0;
             background: $m-input-style--color-disabled;
         }
 
         .m-input-style__label,
         .m-input-style__body,
-        .m-button.m--is-mode-icon,
-        .m-icon.m-icon {
+        .m-icon-button.m-icon-button,
+        .m-icon.m-icon,
+        input {
             color: $m-input-style--color-disabled;
         }
+    }
 
+    &.m--is-disabled {
         &,
         .m-input-style__label,
         .m-input-style__body,
@@ -150,7 +154,7 @@ $m-input-style--padding: 5px !default;
         .m-input-style__body input,
         .m-input-style__body div,
         .m-input-style__body span,
-        .m-button.m--is-mode-icon,
+        .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             color: $m-input-style--color-disabled;
             cursor: not-allowed;
@@ -158,28 +162,105 @@ $m-input-style--padding: 5px !default;
         }
     }
 
+    &.m--is-waiting {
+        &,
+        .m-input-style__label,
+        .m-input-style__body,
+        .m-input-style__body__left,
+        .m-input-style__body__right,
+        .m-input-style__body input,
+        .m-input-style__body div,
+        .m-input-style__body span,
+        .m-icon-button.m-icon-button,
+        .m-icon.m-icon {
+            cursor: wait;
+        }
+    }
+
+    &.m--has-label {
+        .m-input-style__body {
+            margin-top: -12px; // Magic number
+        }
+    }
+
+    &.m--is-anim-active {
+        .m-input-style {
+            &__label {
+                transition-property: color, transform, top, left;
+                transition-duration: $m-transition-duration--l;
+                transition-timing-function: ease;
+            }
+
+            &__body__left {
+                transition: opacity 0.3s ease;
+            }
+        }
+    }
+
+    &:not(.m--has-textarea) {
+        .m-input-style {
+            &__body {
+                padding: 0 0 $m-input-style--padding 0;
+            }
+        }
+    }
+
+    &.m--has-textarea {
+        &.m--has-label:not(.m--is-label-up) {
+            .m-input-style__label {
+                top: $m-margin;
+                left: $m-padding--s;
+            }
+
+            textarea {
+                &,
+                &::placeholder {
+                    color: transparent;
+                }
+            }
+        }
+    }
+
+    ::placeholder {
+        transition: color $m-transition-duration ease;
+        color: $m-color--grey-dark;
+    }
+
+    &__label,
+    &__body__adjust-width-auto {
+        padding-right: $m-padding;
+    }
+
     &__label {
-        transition-property: color, top, bottom, transform, font-size;
-        transition-duration: $m-transition-duration--l;
-        transition-timing-function: ease;
-        position: absolute;
-        z-index: 0;
-        bottom: $m-input-style--padding;
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        transform-origin: 0 0;
+        transform: translate3d(0, 13px, 0); // Magic number
+        display: inline-flex;
+        align-items: center;
         width: 100%;
-        font-size: $m-font-size--l;
-        font-weight: $m-font-weight--bold;
-        white-space: nowrap;
+        margin-bottom: $m-margin--xs;
+        font-size: $m-font-size;
+        font-weight: $m-font-weight;
+
+        .m-icon {
+            font-size: 85%;
+            margin-right: $m-padding--xs;
+        }
     }
 
     &__body {
         position: relative;
-        z-index: 1;
+        z-index: 0;
         display: flex;
         align-items: center;
-        padding: 0 0 $m-input-style--padding 0;
+        flex: 1 1 auto;
+        width: 100%;
+        min-height: 30px; // Magic number
         font-weight: $m-font-weight;
         text-decoration: none;
-        flex: 1 1 auto;
 
         &,
         div,
@@ -188,20 +269,42 @@ $m-input-style--padding: 5px !default;
         }
 
         &,
-        input {
+        input,
+        textarea {
             outline: none;
+            text-overflow: ellipsis;
             font-family: $m-font-family;
-            font-size: $m-font-size--l;
-            font-weight: $m-font-weight;
+            font-size: $m-font-size;
+            font-weight: $m-font-weight--bold;
             text-align: left;
             color: $m-color--text;
             border: none;
             background: none;
+        }
+
+        input {
             cursor: text;
+            overflow: hidden;
+            width: 100%;
+            padding: 0;
+
+            &[readonly=readonly] {
+                cursor: pointer;
+            }
+        }
+
+        textarea {
+            transition: border-color $m-transition-duration ease;
+            margin: $m-padding--s 0 -4px 0; //Margin number
+            padding: $m-margin--s $m-padding--s;
+            width: 100%;
+            min-width: 210px;
+            min-height: 54px; //Magic number -> height of rows 2
+            border: 1px solid $m-color--border;
         }
 
         &__left {
-            transition: opacity 0.3s ease;
+            overflow: hidden;
             flex: 1 1 auto;
         }
 
@@ -212,17 +315,25 @@ $m-input-style--padding: 5px !default;
         &__transparent-text {
             opacity: 0;
             width: 0;
+            user-select: none;
         }
 
-        .m-button.m--is-mode-icon,
+        &__adjust-width-auto {
+            height: 0;
+            opacity: 0;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             position: relative;
             z-index: 0;
-            font-size: 16px;
+            font-size: 16px; // Magic number
             color: $m-color--grey-darker;
         }
 
-        .m-button.m--is-mode-icon {
+        .m-icon-button.m-icon-button {
             min-width: auto;
             min-height: auto;
         }
@@ -232,12 +343,7 @@ $m-input-style--padding: 5px !default;
         }
     }
 
-    &__disabled-icon {
-        transition: font-size $m-transition-duration--l ease, stroke-width $m-transition-duration--l ease;
-        z-index: 1;
-        display: inline-block;
-        stroke-width: 2px;
-        font-size: 12px; // Magic number
-        margin-right: $m-margin--s;
+    div {
+        outline: none;
     }
 }

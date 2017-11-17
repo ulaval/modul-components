@@ -21,7 +21,7 @@ export class MIconButton extends Vue {
         validator: value => value == MIconButtonSkin.Light || value == MIconButtonSkin.Dark || value == MIconButtonSkin.Primary || value == MIconButtonSkin.Secondary
     })
     public skin: MIconButtonSkin;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
     @Prop({ default: '44px' })
     public buttonSize: string;
@@ -29,6 +29,8 @@ export class MIconButton extends Vue {
     public iconName: string;
     @Prop({ default: '16px' })
     public iconSize: string;
+    @Prop()
+    public title: string;
 
     protected mounted(): void {
         this.hasSlots();

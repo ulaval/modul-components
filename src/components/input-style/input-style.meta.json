@@ -1,29 +1,48 @@
 {
     "tag": "m-input-style",
     "name": "m-input-style-meta:name",
+    "production": false,
     "attributes": {
         "label": {
             "type": "string"
         },
-        "state": {
-            "type": "string",
-            "values": [
-                "default",
-                "disabled",
-                "error",
-                "valid"
-            ],
-            "default": 0
-        },
-        "editable": {
+        "focus": {
             "type": "boolean",
-            "default": true
+            "default": false
         },
-        "errorMessage": {
+        "empty": {
+            "type": "boolean",
+            "default": false
+        },
+        "width": {
             "type": "string"
         },
-        "helperMessage": {
+        "iconName": {
             "type": "string"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
+            "type": "boolean",
+            "default": false
+        },
+        "error": {
+            "type": "boolean",
+            "default": false
+        },
+        "valid": {
+            "type": "boolean",
+            "default": false
+        },
+        "error-message": {
+            "type": "string",
+            "default": ""
+        },
+        "valid-message": {
+            "type": "string",
+            "default": ""
         }
     },
     "overview": "input-style.overview",

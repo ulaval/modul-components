@@ -1,6 +1,7 @@
 {
     "tag": "m-checkbox",
     "name": "m-checkbox-meta:name",
+    "production": true,
     "attributes": {
         "value": {
             "type": "boolean",

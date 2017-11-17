@@ -1,7 +1,7 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
+import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './checkbox.html?style=./checkbox.scss';
 import { CHECKBOX_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
@@ -28,15 +28,20 @@ export class MCheckbox extends ModulVue {
 
     private isFocus = false;
     private id: string = `mCheckbox-${uuid.generate()}`;
-    private internalPropValue: boolean = false;
+    private internalValue: boolean = false;
+
+    @Watch('value')
+    private onValueChange(value: boolean): void {
+        this.internalValue = value;
+    }
 
     private get propValue(): boolean {
-        return this.value != undefined ? this.value : this.internalPropValue;
+        return this.value != undefined ? this.value : this.internalValue;
     }
 
     private set propValue(value: boolean) {
         this.$emit('change', value);
-        this.internalPropValue = value;
+        this.internalValue = value;
     }
 
     private onClick(event: MouseEvent): void {

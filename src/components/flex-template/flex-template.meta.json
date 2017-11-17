@@ -1,6 +1,7 @@
 {
     "tag": "m-flex-template",
     "name": "m-flex-template-meta:name",
+    "production": false,
     "attributes": {
         "dynamicHeader": {
             "type": "boolean",

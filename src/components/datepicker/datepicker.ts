@@ -6,11 +6,16 @@ import WithRender from './datepicker.html?style=./datepicker.scss';
 import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
 import { curLang } from '../../utils/i18n/i18n';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { InputState } from '../../mixins/input-state/input-state';
+import { InputPopup } from '../../mixins/input-popup/input-popup';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { KeyCode } from '../../utils/keycode/keycode';
-import PopupPlugin from '../popup/popup';
-import TextFieldPlugin from '../text-field/text-field';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import i18nPlugin from '../../utils/i18n/i18n';
 import ButtonPlugin from '../button/button';
+import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
+import ValidationMessagePlugin from '../validation-message/validation-message';
+import PopupPlugin from '../popup/popup';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -29,42 +34,42 @@ export interface DatepickerDate {
 
 @WithRender
 @Component({
-    mixins: [InputState]
+    mixins: [
+        InputState,
+        InputPopup,
+        MediaQueries
+    ]
 })
 export class MDatepicker extends ModulVue {
 
     @Model('change')
     @Prop()
     public value: moment.Moment | Date;
-
+    @Prop()
+    public label: string;
+    @Prop()
+    public iconName: boolean;
+    @Prop()
+    public required: boolean;
     @Prop({ default: 'DD/MM/Y' })
     public format: string;
-
     @Prop({ default: () => { return moment().subtract(10, 'year'); } })
     public min: moment.Moment | Date;
-
     @Prop({ default: () => { return moment().add(10, 'year'); } })
     public max: moment.Moment | Date;
 
-    @Prop({ default: false })
-    public disabled: boolean;
-
-    @Prop({ default: false })
-    public required: boolean;
-
-    private isOpen: boolean = false;
+    public placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
+    private internalOpen: boolean = false;
     private view: string = 'day';
-    private internalValue = '';
-    private error: string = '';
-    private placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
-    private openCalendarDesc: string = this.$i18n.translate('m-datepicker:open-calendar-desc');
-    private closeCalendarDesc: string = this.$i18n.translate('m-datepicker:close-calendar-desc');
     private previousDays: DatepickerDate[] = [];
     private days: DatepickerDate[] = [];
     private nextDays: DatepickerDate[] = [];
     private selectedYear: number = 0;
     private selectedMonth: number = 0;
     private selectedDay: number = 0;
+
+    private mouseIsDown: boolean = false;
+    private internalCalandarErrorMessage: string = '';
 
     protected created(): void {
         moment.locale([curLang, 'en-ca']);
@@ -167,11 +172,11 @@ export class MDatepicker extends ModulVue {
     }
 
     private get formattedDate(): string {
-        return this.error || !this.value ? this.internalValue : moment(this.value).format(this.format);
+        return this.internalCalandarErrorMessage || !this.value ? this.as<InputPopup>().internalValue : moment(this.as<InputPopup>().internalValue).format(this.format);
     }
 
     private set formattedDate(value: string) {
-        this.internalValue = value;
+        this.as<InputPopup>().internalValue = value;
     }
 
     private get selectedMomentDate(): moment.Moment {
@@ -211,41 +216,55 @@ export class MDatepicker extends ModulVue {
         return this.prepareDataForTableLayout([...this.previousDays, ...this.days, ...this.nextDays], 7);
     }
 
-    private openCalendar() {
-        this.view = VIEW_DAY;
-        this.isOpen = true;
-        this.$emit('open');
+    private get calandarError(): boolean {
+        return this.internalCalandarErrorMessage != '' || this.as<InputState>().hasError;
     }
 
-    private onBlur(event) {
-        if (event.target.value == '') {
+    private get calandarErrorMessage(): string {
+        return this.as<InputState>().errorMessage != undefined ? this.as<InputState>().errorMessage : this.internalCalandarErrorMessage;
+    }
+
+    private get open(): boolean {
+        return this.internalOpen;
+    }
+
+    private set open(open: boolean) {
+        this.internalOpen = open;
+        this.$nextTick(() => {
+            if (this.internalOpen) {
+                let inputEl: any = this.$refs.input;
+                inputEl.focus();
+                inputEl.setSelectionRange(0, this.formattedDate.length);
+                this.$emit('open');
+            } else {
+                this.$emit('close');
+            }
+        });
+    }
+
+    private validateDate(value: string): void {
+        if (value == '') {
             this.selectedMomentDate = moment();
             if (this.required) {
-                this.error = this.$i18n.translate('m-datepicker:required-error');
+                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');
             } else {
                 this.$emit('change', '');
-                this.error = '';
+                this.internalCalandarErrorMessage = '';
             }
-        } else if (moment(event.target.value, this.format).isValid()) {
-            let newDate = moment(event.target.value, this.format);
+        } else if (moment(value, this.format).isValid()) {
+            let newDate = moment(value, this.format);
             if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
                 this.selectedMomentDate = newDate;
                 this.formattedDate = this.selectedMomentDate.format(this.format);
                 this.$emit('change', newDate);
-                this.error = '';
+                this.internalCalandarErrorMessage = '';
             } else {
                 this.formattedDate = newDate.format(this.format);
-                this.error = this.$i18n.translate('m-datepicker:out-of-range-error');
+                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
             }
         } else {
-            this.error = this.$i18n.translate('m-datepicker:format-error');
+            this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
         }
-        this.closeCalendar();
-    }
-
-    private closeCalendar(): void {
-        this.isOpen = false;
-        this.$emit('close');
     }
 
     private keepDateInRange(date: moment.Moment): moment.Moment {
@@ -278,19 +297,22 @@ export class MDatepicker extends ModulVue {
     private selectDate(selectedDate: DatepickerDate): void {
         if (!selectedDate.isDisabled) {
             this.selectedMomentDate = moment(selectedDate);
-            this.error = '';
+            this.internalCalandarErrorMessage = '';
             this.formattedDate = this.selectedMomentDate.format(this.format);
             this.$emit('change', this.value instanceof Date ? this.selectedMomentDate.toDate() : this.selectedMomentDate);
-            this.closeCalendar();
+            this.open = false;
         }
     }
 }
 
 const DatepickerPlugin: PluginObject<any> = {
     install(v, options) {
-        v.use(PopupPlugin);
-        v.use(TextFieldPlugin);
+        v.use(InputStylePlugin);
         v.use(ButtonPlugin);
+        v.use(PopupPlugin);
+        v.use(ValidationMessagePlugin);
+        v.use(MediaQueriesPlugin);
+        v.use(i18nPlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };

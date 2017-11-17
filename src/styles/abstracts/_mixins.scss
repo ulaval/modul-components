@@ -15,7 +15,7 @@
 }
 
 @mixin m-scrollbar-track-piece() {
-    background: $m-color--scrollbar--light;
+    background: $m-color--scrollbar-light;
 }
 
 @mixin m-scrollbar-thumb() {

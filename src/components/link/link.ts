@@ -25,25 +25,37 @@ const ICON_NAME_DEFAULT: string = 'right-arrow';
 export class MLink extends ModulVue {
     @Prop({ default: '/' })
     public url: string;
-    @Prop({ default: MLinkMode.RouterLink })
+    @Prop({
+        default: MLinkMode.RouterLink,
+        validator: value =>
+            value == MLinkMode.RouterLink ||
+            value == MLinkMode.ExternalLink ||
+            value == MLinkMode.Link ||
+            value == MLinkMode.Button
+    })
     public mode: MLinkMode;
-    @Prop({ default: false })
+    @Prop()
     public unvisited: boolean;
     @Prop({ default: true })
     public underline: boolean;
-    @Prop({ default: false })
+    @Prop()
     public vanilla: boolean;
     @Prop()
     public hiddenText: string;
-    @Prop({ default: false })
+    @Prop()
     public icon: boolean;
     @Prop()
     public iconName: string;
-    @Prop({ default: MLinkIconPosition.Left })
+    @Prop({
+        default: MLinkIconPosition.Left,
+        validator: value =>
+            value == MLinkIconPosition.Left ||
+            value == MLinkIconPosition.Right
+    })
     public iconPosition: string;
     @Prop({ default: '12px' })
     public iconSize: string;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     protected mounted(): void {
@@ -64,7 +76,7 @@ export class MLink extends ModulVue {
     }
 
     private get isRouterLink(): boolean {
-        return this.mode == MLinkMode.RouterLink || (this.mode != MLinkMode.Button && this.mode != MLinkMode.ExternalLink && this.mode != MLinkMode.Link);
+        return this.mode == MLinkMode.RouterLink;
     }
 
     private get isLink(): boolean {
@@ -101,6 +113,14 @@ export class MLink extends ModulVue {
 
     private get hasHiddenText(): boolean {
         return this.hiddenText == undefined || this.hiddenText == '' ? false : true;
+    }
+
+    private get rooterLinkUrl(): string | Object {
+        return !this.isObject(this.url) ? { path: this.url } : this.url ;
+    }
+
+    private isObject(a) {
+        return (!!a) && (a.constructor === Object);
     }
 }
 

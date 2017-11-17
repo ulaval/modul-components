@@ -32,7 +32,7 @@ describe('dropdown', () => {
             </m-dropdown>`
         }).$mount();
 
-        let input = vm.$el.querySelector('.m-text-field__input');
+        let input = vm.$el.querySelector('.m-textfield__input');
 
         expect((input as HTMLElement).attributes.getNamedItem('readonly')).toBeTruthy();
 
@@ -46,34 +46,6 @@ describe('dropdown', () => {
     it('has input to focus', () => {
         let input = ((dropdown.$refs.mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement);
         expect(input).not.toBeNull();
-    });
-
-    it('enabled prop disabled', () => {
-        expect(dropdown.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
-
-        dropdown.disabled = true;
-        Vue.nextTick(() => {
-            expect(dropdown.$el.classList.contains(DISABLED_CSS)).toBeTruthy();
-
-            dropdown.disabled = false;
-            Vue.nextTick(() => {
-                expect(dropdown.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
-            });
-        });
-    });
-
-    it('enabled prop waiting', () => {
-        expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeFalsy();
-
-        dropdown.waiting = true;
-        Vue.nextTick(() => {
-            expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeTruthy();
-
-            dropdown.waiting = false;
-            Vue.nextTick(() => {
-                expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeFalsy();
-            });
-        });
     });
 
     it('v-model change', () => {
@@ -163,7 +135,7 @@ describe('dropdown', () => {
     //             </m-dropdown>`
     //     }).$mount();
 
-    //     let input: Element | null = vm.$el.querySelector('.m-text-field__input');
+    //     let input: Element | null = vm.$el.querySelector('.m-textfield__input');
 
     //     // let eKeyboard = new KeyboardEvent('keypress', {code: '65'});
 

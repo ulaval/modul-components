@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
+import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './radio-group.html?style=./radio-group.scss';
 import { RADIO_GROUP_NAME } from '../component-names';
 import RadioPlugin, { MRadioPosition, BaseRadioGroup, RadioGroup } from '../radio/radio';
@@ -16,21 +16,17 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
     @Model('change')
     @Prop()
-    public value: string;
+    public value: any;
     @Prop({
         default: MRadioPosition.Left,
         validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
     })
     public position: MRadioPosition;
-    @Prop({ default: false })
+    @Prop()
     public inline: boolean;
 
     public name: string = uuid.generate();
-    private internalValue: string = '';
-
-    public getValue(): string {
-        return this.model;
-    }
+    private internalValue: any | undefined = '';
 
     public get stateIsDisabled(): boolean {
         return this.as<InputState>().isDisabled;
@@ -44,15 +40,28 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
         return this.as<InputState>().isValid;
     }
 
-    public updateValue(value: string): void {
+    public getValue(): any {
+        return this.model;
+    }
+
+    public updateValue(value: any): void {
         this.model = value;
     }
 
-    private get model(): string {
+    protected created() {
+        this.internalValue = undefined;
+    }
+
+    @Watch('value')
+    private onValueChange(value: any) {
+        this.internalValue = value;
+    }
+
+    private get model(): any {
         return this.value == undefined ? this.internalValue : this.value;
     }
 
-    private set model(value: string) {
+    private set model(value: any) {
         this.internalValue = value;
         this.$emit('change', value);
     }

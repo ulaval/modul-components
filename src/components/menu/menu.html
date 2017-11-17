@@ -1,0 +1,16 @@
+<m-popup :open.sync="open"
+            @open="onOpen"
+            @close="onClose"
+            padding=""
+            :placement="placement"
+            :disabled="disabled"
+            :close-on-backdrop="true"
+            class="m-menu" :class="{ 'm--is-disabled': disabled }">
+    <m-icon-button slot="trigger" class="m-menu__button" icon-name="options" :disabled="disabled"  :skin="skin" :size="size">
+        <m-i18n k="m-menu:open" v-if="!open"></m-i18n>
+        <m-i18n k="m-menu:close" v-if="open"></m-i18n>
+    </m-icon-button>
+    <ul class="m-menu__wrap" ref="menu">
+        <slot></slot>
+    </ul>
+</m-popup>
