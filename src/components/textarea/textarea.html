@@ -5,16 +5,17 @@
                   'm--is-valid' : isValid,
                   'm--has-icon' : hasIcon,
                   'm--has-label': hasLabel }"
-     @click="onClick">
-    <m-input-style :disabled="isDisabled"
+     @click="onClick"
+     :style="{ maxWidth: '720px' }">
+    <m-input-style class="m--has-textarea"
+                   :disabled="isDisabled"
                    :waiting="isWaiting"
                    :error="hasError"
                    :valid="isValid"
                    :label="label"
                    :focus="isFocus"
                    :empty="isEmpty"
-                   :icon-name="iconName"
-                   :textarea="true">
+                   :icon-name="iconName">
         <textarea class="m-textarea__input"
                   :disabled="!active"
                   :placeholder="placeholder"
@@ -25,7 +26,8 @@
                   @blur="onBlur"
                   @keyup="onKeyup"
                   ref="input"
-                  v-model="model"></textarea>
+                  v-model="model"
+                  :style="{ maxWidth: '720px' }"></textarea>
     </m-input-style>
     <m-validation-message
         :disabled="isDisabled"

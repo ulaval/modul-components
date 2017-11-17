@@ -15,6 +15,10 @@
         "maxlength": {
             "type": "number"
         },
+        "maxWidth": {
+            "type": "string",
+            "default": "720px"
+        },
         "rows": {
             "type": "number"
         },
