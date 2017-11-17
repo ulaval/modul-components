@@ -13,7 +13,6 @@ $m-input-style--padding: 4px !default;
     display: inline-flex;
     flex-direction: column;
     outline: none;
-    cursor: pointer;
 
     &::before,
     &::after {
@@ -81,7 +80,6 @@ $m-input-style--padding: 4px !default;
                 transform: translate3d(0, -2px, 0) scale(0.8); // Magic number
                 z-index: 1;
                 width: 100%;
-                cursor: pointer;
             }
         }
     }
@@ -181,6 +179,10 @@ $m-input-style--padding: 4px !default;
         .m-input-style__body {
             margin-top: -12px; // Magic number
         }
+
+        textarea {
+            margin-top: $m-padding--s; // Magic number
+        }
     }
 
     &.m--is-anim-active {
@@ -244,6 +246,7 @@ $m-input-style--padding: 4px !default;
         margin-bottom: $m-margin--xs;
         font-size: $m-font-size;
         font-weight: $m-font-weight;
+        cursor: pointer;
 
         .m-icon {
             font-size: 85%;
@@ -295,7 +298,7 @@ $m-input-style--padding: 4px !default;
 
         textarea {
             transition: border-color $m-transition-duration ease;
-            margin: $m-padding--s 0 -4px 0; //Margin number
+            margin-bottom: -4px; //Margin number
             padding: $m-margin--s $m-padding--s;
             width: 100%;
             min-width: 272px;
