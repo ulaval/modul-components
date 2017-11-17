@@ -3,20 +3,57 @@
     "name": "m-sidebar-meta:name",
     "production": false,
     "attributes": {
-        "from": {
+        "origin": {
             "type": "string",
             "value": [
                 "right",
                 "bottom",
                 "left",
-                "bottom-right",
-                "bottom-left"
+                "top"
             ],
             "default": 1
         },
         "width": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "closeButton": {
+            "type": "boolean",
+            "default": true
+        },
+        "closeButtonPosition": {
             "type": "string",
-            "default": "100%"
+            "value": [
+                "right",
+                "left"
+            ],
+            "default": 0
+        },
+        "focusManagement": {
+            "type": "boolean",
+            "default": true
+        },
+        "closeOnBackdrop": {
+            "type": "boolean",
+            "default": true
+        },
+        "padding": {
+            "type": "boolean",
+            "default": true
+        },
+        "paddingHeader": {
+            "type": "boolean",
+            "default": true
+        },
+        "paddingBody": {
+            "type": "boolean",
+            "default": true
+        },
+        "paddingFooter": {
+            "type": "boolean",
+            "default": true
         }
     },
     "overview": "sidebar.overview",

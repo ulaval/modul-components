@@ -12,11 +12,7 @@
             "type": "string",
             "description": "m-icon-meta:svg-title-desc"
         },
-        "width": {
-            "type": "string",
-            "default": "1em"
-        },
-        "heigth": {
+        "size": {
             "type": "string",
             "default": "1em"
         }

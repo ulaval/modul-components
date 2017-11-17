@@ -33,8 +33,12 @@ export class MTextField extends ModulVue {
 
     @Prop({
         default: MTextFieldType.Text,
-        validator: value => value == MTextFieldType.EMail || value == MTextFieldType.Password ||
-            value == MTextFieldType.Telephone || value == MTextFieldType.Text || value == MTextFieldType.Url
+        validator: value =>
+            value == MTextFieldType.EMail ||
+            value == MTextFieldType.Password ||
+            value == MTextFieldType.Telephone ||
+            value == MTextFieldType.Text ||
+            value == MTextFieldType.Url
     })
     public type: MTextFieldType;
     @Prop({ default: true })

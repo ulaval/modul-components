@@ -18,7 +18,11 @@ export enum MIconButtonSkin {
 export class MIconButton extends Vue {
     @Prop({
         default: MIconButtonSkin.Light,
-        validator: value => value == MIconButtonSkin.Light || value == MIconButtonSkin.Dark || value == MIconButtonSkin.Primary || value == MIconButtonSkin.Secondary
+        validator: value =>
+            value == MIconButtonSkin.Light ||
+            value == MIconButtonSkin.Dark ||
+            value == MIconButtonSkin.Primary ||
+            value == MIconButtonSkin.Secondary
     })
     public skin: MIconButtonSkin;
     @Prop()

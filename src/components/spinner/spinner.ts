@@ -43,7 +43,9 @@ export class MSpinner extends ModulVue {
 
     @Prop({
         default: MSpinnerSize.Large,
-        validator: value => value == MSpinnerSize.Large || value == MSpinnerSize.Small
+        validator: value =>
+            value == MSpinnerSize.Large ||
+            value == MSpinnerSize.Small
     })
     public size: MSpinnerSize;
 

@@ -9,6 +9,13 @@
         },
         "k": {
             "type": "string"
+        },
+        "params": {
+            "type": "string"
+        },
+        "htmlEncode": {
+            "type": "boolean",
+            "default": true
         }
     },
     "overview": "i18n.overview",
