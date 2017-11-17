@@ -1,13 +1,25 @@
 @charset 'utf-8';
 
+// ======================================================================
+//  abstracts
+// ======================================================================
+@import 'abstracts/variables';
+@import 'abstracts/var-color-calendar';
+
+// ======================================================================
+//  Base
+// ======================================================================
 @import
-    'abstracts/variables',
-    'abstracts/var-color-calendar',
     'base/fonts',
     'base/base',
     'base/typography',
     'base/layout',
-    'base/utils',
-    'base/button',
-    'base/bullet-list',
     'base/animations';
+
+// ======================================================================
+//  utils
+// ======================================================================
+@import 'utils/utils';
+@import 'utils/button';
+@import 'utils/bullet-list';
+@import 'utils/table';
