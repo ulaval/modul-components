@@ -33,13 +33,13 @@ export class MStep extends ModulVue {
     public state: MStepState;
     @Prop({ default: MStepMode.Default })
     public mode: MStepMode;
-    @Prop({ default: false })
+    @Prop()
     public open: boolean;
-    @Prop({ default: false })
+    @Prop()
     public required: boolean;
     @Prop({ default: 'default' })
     public iconName: string;
-    @Prop({ default: false })
+    @Prop()
     public last: boolean;
 
     private internalOpen: boolean = false;

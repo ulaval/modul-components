@@ -24,13 +24,13 @@ export interface InputStateMixin {
 
 @Component
 export class InputState extends Vue implements InputStateMixin {
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
-    @Prop({ default: false })
+    @Prop()
     public waiting: boolean;
-    @Prop({ default: false })
+    @Prop()
     public error: boolean;
-    @Prop({ default: false })
+    @Prop()
     public valid: boolean;
     @Prop()
     public errorMessage: string;

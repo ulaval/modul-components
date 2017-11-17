@@ -43,7 +43,7 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop({ default: 'mPortal' })
     public id: string;
 
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     @Prop()

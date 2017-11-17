@@ -28,7 +28,7 @@ export class MTimepicker extends ModulVue {
 
     @Prop()
     public label: string;
-    @Prop({ default: false })
+    @Prop()
     public duration: boolean;
     @Prop({ default: function() { return this.duration ? moment.duration('1:0') : moment(); } })
     public time: moment.Moment | moment.Duration;
@@ -40,8 +40,6 @@ export class MTimepicker extends ModulVue {
     public step: number;
     @Prop({ default: 'LT' })
     public format: string;
-    @Prop({ default: () => ({ placement: 'bottom-start' }) })
-    public options: any;
 
     private hours: object = {};
     private selectedHour: number = NaN;

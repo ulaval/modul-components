@@ -1,0 +1,43 @@
+{
+    "tag": "m-menu",
+    "name": "m-menu-meta:name",
+    "production": false,
+    "attributes": {
+        "placement": {
+            "type": "MPopperPlacement",
+            "values": [
+                "top",
+                "top-start",
+                "top-end",
+                "right",
+                "right-start",
+                "right-end",
+                "bottom",
+                "bottom-start",
+                "bottom-end",
+                "left",
+                "left-start",
+                "left-end"
+            ],
+            "default": 6
+        },
+        "skin": {
+            "type": "string",
+            "values": [
+                "light",
+                "dark"
+            ],
+            "default": 0
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "size": {
+            "type": "string",
+            "default": "44px"
+        }
+    },
+    "overview": "menu.overview",
+    "preview": "menu.preview"
+}

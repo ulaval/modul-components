@@ -13,15 +13,17 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     @Model('change')
     @Prop()
     public value: string;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
-    @Prop({ default: false })
+    @Prop()
     public fullsize: boolean;
     @Prop({ default: true })
     public inline: boolean;
     @Prop({
         default: MRadioPosition.Left,
-        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+        validator: value =>
+            value == MRadioPosition.Left ||
+            value == MRadioPosition.Right
     })
     public position: MRadioPosition;
 

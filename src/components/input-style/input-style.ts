@@ -7,9 +7,6 @@ import { INPUT_STYLE_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
-import { log } from 'util';
-import { loadavg } from 'os';
-import { setTimeout } from 'timers';
 
 @WithRender
 @Component({

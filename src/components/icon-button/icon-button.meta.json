@@ -17,11 +17,7 @@
             "type": "boolean",
             "default": false
         },
-        "waiting": {
-            "type": "boolean",
-            "default": false
-        },
-        "size": {
+        "buttonSize": {
             "type": "string",
             "default": "44px"
         },
@@ -30,7 +26,7 @@
         },
         "iconSize": {
             "type": "string",
-            "default": "12px"
+            "default": "16px"
         }
     },
     "overview": "button.overview",

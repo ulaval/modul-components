@@ -18,7 +18,6 @@ import ButtonPlugin from '../button/button';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import PopupPlugin from '../popup/popup';
-import { log } from 'util';
 
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';

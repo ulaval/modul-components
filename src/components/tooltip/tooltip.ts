@@ -23,17 +23,37 @@ export enum MTooltipMode {
     mixins: [MediaQueries]
 })
 export class MTooltip extends ModulVue {
-    @Prop({ default: false })
+    @Prop()
     public open: boolean;
-    @Prop({ default: MTooltipMode.Icon })
+    @Prop({
+        default: MTooltipMode.Icon,
+        validator: value =>
+            value == MTooltipMode.Icon ||
+            value == MTooltipMode.Link
+    })
     public mode: string;
-    @Prop({ default: MPopperPlacement.Bottom })
+    @Prop({
+        default: MPopperPlacement.Bottom,
+        validator: value =>
+            value == MPopperPlacement.Bottom ||
+            value == MPopperPlacement.BottomEnd ||
+            value == MPopperPlacement.BottomStart ||
+            value == MPopperPlacement.Left ||
+            value == MPopperPlacement.LeftEnd ||
+            value == MPopperPlacement.LeftStart ||
+            value == MPopperPlacement.Right ||
+            value == MPopperPlacement.RightEnd ||
+            value == MPopperPlacement.RightStart ||
+            value == MPopperPlacement.Top ||
+            value == MPopperPlacement.TopEnd ||
+            value == MPopperPlacement.TopStart
+    })
     public placement: MPopperPlacement;
     @Prop({ default: true })
     public closeButton: boolean;
     @Prop({ default: '' })
     public classNamePortalTarget: string;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
     @Prop()
     public openTitle: string;

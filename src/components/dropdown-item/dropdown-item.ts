@@ -7,7 +7,6 @@ import { DROPDOWN_ITEM_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import RadioStylePlugin from '../radio-style/radio-style';
-import { log } from 'util';
 
 export interface MDropdownInterface {
     model: any;

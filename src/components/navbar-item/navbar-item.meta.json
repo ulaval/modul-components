@@ -1,0 +1,16 @@
+{
+    "tag": "m-navbar-item",
+    "name": "m-navbar-item-meta:name",
+    "production": false,
+    "attributes": {
+        "selected": {
+            "type": "boolean",
+            "default": false
+        },
+        "value": {
+            "type": "string"
+        }
+    },
+    "overview": "nav-bar-item.overview",
+    "preview": false
+}

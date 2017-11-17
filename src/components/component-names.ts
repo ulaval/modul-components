@@ -19,10 +19,10 @@ export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
 export const MESSAGE_NAME: string = 'm-message';
 export const MODAL_NAME: string = 'm-modal';
-export const NAV_BAR_NAME: string = 'm-nav-bar';
-export const NAV_BAR_ITEM_NAME: string = 'm-nav-bar-item';
-export const OPTIONS_MENU_NAME: string = 'm-options-menu';
-export const OPTIONS_MENU_ITEM_NAME: string = 'm-options-menu-item';
+export const NAVBAR_NAME: string = 'm-navbar';
+export const NAVBAR_ITEM_NAME: string = 'm-navbar-item';
+export const MENU_NAME: string = 'm-menu';
+export const MENU_ITEM_NAME: string = 'm-menu-item';
 export const PANEL_NAME: string = 'm-panel';
 export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
@@ -36,11 +36,11 @@ export const SPINNER_NAME: string = 'm-spinner';
 export const STATUS_NAME: string = 'm-status';
 export const STEP_NAME: string = 'm-step';
 export const SWITCH_NAME: string = 'm-switch';
-export const TAB_PANE_NAME: string = 'm-tab-pane';
+export const TAB_PANEL_NAME: string = 'm-tab-panel';
 export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
 export const TEXTAREA_NAME: string = 'm-textarea';
-export const TEXT_FIELD_NAME: string = 'm-text-field';
+export const TEXTFIELD_NAME: string = 'm-textfield';
 export const TIMEPICKER_NAME: string = 'm-timepicker';
 export const TOOLTIP_NAME: string = 'm-tooltip';
 export const UPLOAD_NAME: string = 'm-upload';
@@ -71,9 +71,10 @@ export const components: string[] = [
     LIST_ITEM_NAME,
     MESSAGE_NAME,
     MODAL_NAME,
-    NAV_BAR_NAME,
-    OPTIONS_MENU_NAME,
-    OPTIONS_MENU_ITEM_NAME,
+    NAVBAR_NAME,
+    NAVBAR_ITEM_NAME,
+    MENU_NAME,
+    MENU_ITEM_NAME,
     PANEL_NAME,
     POPPER_NAME,
     POPUP_NAME,
@@ -87,11 +88,11 @@ export const components: string[] = [
     STATUS_NAME,
     STEP_NAME,
     SWITCH_NAME,
-    TAB_PANE_NAME,
+    TAB_PANEL_NAME,
     TABS_NAME,
     TEMPLATE_NAME,
     TEXTAREA_NAME,
-    TEXT_FIELD_NAME,
+    TEXTFIELD_NAME,
     TIMEPICKER_NAME,
     TOOLTIP_NAME,
     UPLOAD_NAME,

@@ -25,12 +25,18 @@ export enum MMessageSkin {
 export class MMessage extends Vue {
     @Prop({
         default: MMessageState.Success,
-        validator: value => value == MMessageState.Success || value == MMessageState.Information || value == MMessageState.Warning || value == MMessageState.Error
+        validator: value =>
+            value == MMessageState.Success ||
+            value == MMessageState.Information ||
+            value == MMessageState.Warning ||
+            value == MMessageState.Error
     })
     public state: MMessageState;
     @Prop({
         default: MMessageSkin.Regular,
-        validator: value => value == MMessageSkin.Regular || value == MMessageSkin.Light
+        validator: value =>
+            value == MMessageSkin.Regular ||
+            value == MMessageSkin.Light
     })
     public skin: MMessageSkin;
     @Prop({ default: true })

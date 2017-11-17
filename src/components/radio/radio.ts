@@ -50,10 +50,12 @@ export class MRadio extends ModulVue {
     public name: string;
     @Prop({
         default: MRadioPosition.Left,
-        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+        validator: value =>
+            value == MRadioPosition.Left ||
+            value == MRadioPosition.Right
     })
     public position: MRadioPosition;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     // ----- For Button Group -----
@@ -61,7 +63,9 @@ export class MRadio extends ModulVue {
     public iconName: string;
     @Prop({
         default: MRadioPosition.Left,
-        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+        validator: value =>
+            value == MRadioPosition.Left ||
+            value == MRadioPosition.Right
     })
     public iconPosition: MRadioPosition;
 

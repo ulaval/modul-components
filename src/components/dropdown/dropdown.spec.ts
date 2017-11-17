@@ -32,7 +32,7 @@ describe('dropdown', () => {
             </m-dropdown>`
         }).$mount();
 
-        let input = vm.$el.querySelector('.m-text-field__input');
+        let input = vm.$el.querySelector('.m-textfield__input');
 
         expect((input as HTMLElement).attributes.getNamedItem('readonly')).toBeTruthy();
 
@@ -135,7 +135,7 @@ describe('dropdown', () => {
     //             </m-dropdown>`
     //     }).$mount();
 
-    //     let input: Element | null = vm.$el.querySelector('.m-text-field__input');
+    //     let input: Element | null = vm.$el.querySelector('.m-textfield__input');
 
     //     // let eKeyboard = new KeyboardEvent('keypress', {code: '65'});
 

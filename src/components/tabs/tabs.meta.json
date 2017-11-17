@@ -3,15 +3,8 @@
     "name": "m-tabs-meta:name",
     "production": false,
     "attributes": {
-        "mode": {
-            "type": "string",
-            "values": [
-                "regular",
-                "light",
-                "dark",
-                "vanilla"
-            ],
-            "default": 1
+        "value": {
+            "type": "string"
         }
     },
     "overview": "tabs.overview",

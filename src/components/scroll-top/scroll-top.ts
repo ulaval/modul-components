@@ -29,9 +29,21 @@ const SCROLL_TOP_ID: string = 'MScrollTop';
     // mixins: [Portal]
 })
 export class MScrollTop extends ModulVue {
-    @Prop({ default: MScrollTopPosition.Fixe })
+    @Prop({
+        default: MScrollTopPosition.Fixe,
+        validator: value =>
+            value == MScrollTopPosition.Fixe ||
+            value == MScrollTopPosition.Relative
+    })
     public position: string;
-    @Prop({ default: ScrollToDuration.Regular })
+    @Prop({
+        default: ScrollToDuration.Regular,
+        validator: value =>
+            value == ScrollToDuration.Regular ||
+            value == ScrollToDuration.Slow ||
+            value == ScrollToDuration.Fast ||
+            value == ScrollToDuration.Null
+    })
     public duration: string;
 
     private scrollBreakPoint: number = window.innerHeight * 1.5;

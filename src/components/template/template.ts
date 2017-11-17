@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './template.html?style=./template.scss';
 import { TEMPLATE_NAME } from '../component-names';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
@@ -10,7 +10,7 @@ import { ElementQueries } from '../../mixins/element-queries/element-queries';
     mixins: [ElementQueries]
 })
 export class Mtemplate extends Vue {
-    @Prop({ default: false })
+    @Prop()
     public footerFullWidth: boolean;
     @Prop()
     public contentWidth: string;

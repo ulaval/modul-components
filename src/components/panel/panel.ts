@@ -18,10 +18,12 @@ const HEADER_RIGHT_CONTENT: string = 'header-right-content';
 export class MPanel extends Vue {
     @Prop({
         default: MPanelSkin.Light,
-        validator: value => value == MPanelSkin.Light || value == MPanelSkin.Dark
+        validator: value =>
+            value == MPanelSkin.Light ||
+            value == MPanelSkin.Dark
     })
     public skin: MPanelSkin;
-    @Prop({ default : true })
+    @Prop({ default: true })
     public highlightingBorder: boolean;
     @Prop({ default: true })
     public shadow: boolean;

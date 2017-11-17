@@ -4,8 +4,8 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './tabs.html?style=./tabs.scss';
-import { TABS_NAME, TAB_PANE_NAME } from '../component-names';
-import { BaseTabs } from '../tab-pane/tab-pane';
+import { TABS_NAME, TAB_PANEL_NAME } from '../component-names';
+import { BaseTabs } from '../tab-panel/tab-panel';
 
 export interface MTabsInterface extends Vue {
     model: any;
