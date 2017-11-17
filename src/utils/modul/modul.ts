@@ -104,7 +104,7 @@ export class Modul {
 
     private ensureBackdrop(viewportIsSmall: boolean): void {
         if (!this.backdropElement) {
-            this.stopScollBody(viewportIsSmall);
+            this.stopScrollBody(viewportIsSmall);
 
             let element: HTMLElement = document.createElement('div');
             let id: string = BACKDROP_ID + '-' + uuid.generate();
@@ -156,7 +156,7 @@ export class Modul {
                         document.body.removeChild(this.backdropElement);
                         this.backdropElement = undefined;
 
-                        this.activeScollBody();
+                        this.activeScrollBody();
                     }
                 }, speed);
             }
@@ -166,28 +166,38 @@ export class Modul {
         }
     }
 
-    private activeScollBody(): void {
+    private isIphone(): boolean {
+        return navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPod') != -1;
+    }
+
+    private activeScrollBody(): void {
         this.htmlEl.style.removeProperty('overflow');
-        this.bodyStyle.removeProperty('position');
-        this.bodyStyle.removeProperty('top');
-        this.bodyStyle.removeProperty('right');
-        this.bodyStyle.removeProperty('left');
-        this.bodyStyle.removeProperty('bottom');
+        if (this.isIphone()) {
+            this.bodyStyle.removeProperty('position');
+            this.bodyStyle.removeProperty('top');
+            this.bodyStyle.removeProperty('right');
+            this.bodyStyle.removeProperty('left');
+            this.bodyStyle.removeProperty('bottom');
+        }
         this.bodyStyle.removeProperty('overflow');
-        window.scrollTo(0, this.stopScrollPosition);
-        this.stopScrollPosition = this.scrollPosition;
+        if (this.isIphone()) {
+            window.scrollTo(0, this.stopScrollPosition);
+            this.stopScrollPosition = this.scrollPosition;
+        }
         if (this.bodyStyle.length == 0) {
             this.bodyEl.removeAttribute('style');
         }
     }
 
-    private stopScollBody(viewportIsSmall: boolean): void {
-        this.stopScrollPosition = this.scrollPosition;
-        this.bodyStyle.position = 'fixed';
-        this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
-        this.bodyStyle.right = '0';
-        this.bodyStyle.left = '0';
-        this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
+    private stopScrollBody(viewportIsSmall: boolean): void {
+        if (this.isIphone()) {
+            this.stopScrollPosition = this.scrollPosition;
+            this.bodyStyle.position = 'fixed';
+            this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
+            this.bodyStyle.right = '0';
+            this.bodyStyle.left = '0';
+            this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
+        }
         this.bodyStyle.overflow = 'hidden';
         this.htmlEl.style.overflow = 'hidden';
     }
