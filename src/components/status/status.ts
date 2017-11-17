@@ -29,6 +29,18 @@ export class MStatus extends Vue {
         return state == MStatusListStates.Error ? MStatusListIconName.Error : MStatusListIconName.Check;
     }
 
+    private get isCompleted() {
+        return this.status === this.statusEnum.Completed;
+    }
+
+    private get isPending() {
+        return this.status === this.statusEnum.Pending;
+    }
+
+    private get isError() {
+        return this.status === this.statusEnum.Error;
+    }
+
 }
 
 const Status: PluginObject<any> = {
