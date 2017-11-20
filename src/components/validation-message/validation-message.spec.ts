@@ -172,4 +172,28 @@ describe('validation-message', () => {
             });
         });
     });
+
+    it('click event', () => {
+        let clickSpy = jasmine.createSpy('clickSpy');
+        let vm = new Vue({
+            template: `
+            <div>
+                <m-validation-message ref="a" @click="onClick" helper-message="helper" ></m-validation-message>
+            </div>`,
+            methods: {
+                onClick: clickSpy
+            }
+        }).$mount();
+
+        let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
+
+        let e: any = document.createEvent('HTMLEvents');
+        e.initEvent('click', true, true);
+
+        element.dispatchEvent(e);
+
+        Vue.nextTick(() => {
+            expect(clickSpy).toHaveBeenCalledWith(e);
+        });
+    });
 });
