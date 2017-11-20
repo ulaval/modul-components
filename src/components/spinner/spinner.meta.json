@@ -3,10 +3,6 @@
     "name": "m-spinner-meta:name",
     "production": true,
     "attributes": {
-        "modal": {
-            "type": "boolean",
-            "default": false
-        },
         "title": {
             "type": "string"
         },
@@ -31,6 +27,10 @@
                 "small"
             ],
             "default": 0
+        },
+        "modal": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "spinner.overview",

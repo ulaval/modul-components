@@ -8,7 +8,7 @@
             "values": [
                 "regular",
                 "light",
-                "vanilla"
+                "plain"
             ],
             "default": 0
         },
@@ -16,9 +16,8 @@
             "type": "boolean",
             "default": false
         },
-        "allOpen": {
-            "type": "boolean",
-            "default": false
+        "value": {
+            "type": "string"
         }
     },
     "overview": "accordion-group.overview",

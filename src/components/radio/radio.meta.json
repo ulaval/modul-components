@@ -20,6 +20,10 @@
             ],
             "default": 0
         },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
         "iconName": {
             "type": "string"
         },
@@ -30,18 +34,6 @@
                 "right"
             ],
             "default": 0
-        },
-        "disabled": {
-            "type": "boolean",
-            "default": false
-        },
-        "error": {
-            "type": "boolean",
-            "default": false
-        },
-        "valid": {
-            "type": "boolean",
-            "default": false
         }
     },
     "overview": "radio.overview",

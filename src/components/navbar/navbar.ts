@@ -24,7 +24,12 @@ export class MNavbar extends BaseNavBar {
 
     @Prop({
         default: MNavbarSkin.Dark,
-        validator: value => value == MNavbarSkin.Regular || value == MNavbarSkin.Light || value == MNavbarSkin.Dark || value == MNavbarSkin.Vanilla || value == MNavbarSkin.Arrow
+        validator: value =>
+            value == MNavbarSkin.Regular ||
+            value == MNavbarSkin.Light ||
+            value == MNavbarSkin.Dark ||
+            value == MNavbarSkin.Vanilla ||
+            value == MNavbarSkin.Arrow
     })
     public skin: string;
     @Prop()
@@ -32,7 +37,7 @@ export class MNavbar extends BaseNavBar {
     @Prop()
     public value: string;
     @Prop({ default: true })
-    public margin: string;
+    public margin: boolean;
 
     public isItemSelected(value, el): boolean {
         if (this.skin == MNavbarSkin.Light && this.value == value && el != undefined) {

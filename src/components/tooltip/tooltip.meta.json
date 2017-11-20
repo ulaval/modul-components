@@ -35,11 +35,7 @@
         },
         "closeButton": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": "0"
+            "default": true
         },
         "classNamePortalTarget": {
             "type": "string"
@@ -47,6 +43,12 @@
         "disabled": {
             "type": "boolean",
             "default": false
+        },
+        "openTitle": {
+            "type": "string"
+        },
+        "closeTitle": {
+            "type": "string"
         }
     },
     "overview": "tooltip.overview",

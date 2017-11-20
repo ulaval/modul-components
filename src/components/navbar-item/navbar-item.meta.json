@@ -6,6 +6,9 @@
         "selected": {
             "type": "boolean",
             "default": false
+        },
+        "value": {
+            "type": "string"
         }
     },
     "overview": "nav-bar-item.overview",

@@ -15,7 +15,7 @@
             "type": "string"
         },
         "required": {
-            "type": "string",
+            "type": "boolean",
             "default": false
         },
         "format": {
@@ -32,34 +32,6 @@
             "type": "string",
             "values": "see Moment.js constructor arguments",
             "default": "now plus 10 years"
-        },
-        "disabled": {
-            "type": "boolean",
-            "default": false
-        },
-        "waiting": {
-            "type": "boolean",
-            "default": false
-        },
-        "error": {
-            "type": "boolean",
-            "default": false
-        },
-        "valid": {
-            "type": "boolean",
-            "default": false
-        },
-        "error-message": {
-            "type": "string",
-            "default": ""
-        },
-        "valid-message": {
-            "type": "string",
-            "default": ""
-        },
-        "helper-message": {
-            "type": "string",
-            "default": ""
         }
     },
     "overview": "datepicker.overview",

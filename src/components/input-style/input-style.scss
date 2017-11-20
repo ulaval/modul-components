@@ -13,7 +13,6 @@ $m-input-style--padding: 4px !default;
     display: inline-flex;
     flex-direction: column;
     outline: none;
-    cursor: pointer;
 
     &::before,
     &::after {
@@ -78,10 +77,9 @@ $m-input-style--padding: 4px !default;
 
         .m-input-style {
             &__label {
-                transform: translate3d(0, -3px, 0) scale(0.8); // Magic number
+                transform: translate3d(0, -2px, 0) scale(0.8); // Magic number
                 z-index: 1;
                 width: 100%;
-                cursor: pointer;
             }
         }
     }
@@ -181,6 +179,10 @@ $m-input-style--padding: 4px !default;
         .m-input-style__body {
             margin-top: -12px; // Magic number
         }
+
+        textarea {
+            margin-top: $m-padding--s; // Magic number
+        }
     }
 
     &.m--is-anim-active {
@@ -237,13 +239,14 @@ $m-input-style--padding: 4px !default;
         left: 0;
         z-index: 1;
         transform-origin: 0 0;
-        transform: translate3d(0, 13px, 0); // Magic number
+        transform: translate3d(0, $m-font-size, 0); // Magic number
         display: inline-flex;
         align-items: center;
         width: 100%;
         margin-bottom: $m-margin--xs;
         font-size: $m-font-size;
         font-weight: $m-font-weight;
+        cursor: pointer;
 
         .m-icon {
             font-size: 85%;
@@ -295,12 +298,14 @@ $m-input-style--padding: 4px !default;
 
         textarea {
             transition: border-color $m-transition-duration ease;
-            margin: $m-padding--s 0 -4px 0; //Margin number
+            margin-bottom: -4px; //Margin number
             padding: $m-margin--s $m-padding--s;
             width: 100%;
-            min-width: 210px;
+            min-width: 272px;
             min-height: 54px; //Magic number -> height of rows 2
-            border: 1px solid $m-color--border;
+            border-top: 1px solid $m-color--border;
+            border-right: 1px solid $m-color--border;
+            border-left: 1px solid $m-color--border;
         }
 
         &__left {

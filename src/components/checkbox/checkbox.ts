@@ -19,7 +19,12 @@ export enum MCheckboxPosition {
 })
 export class MCheckbox extends ModulVue {
 
-    @Prop({ default: MCheckboxPosition.Left })
+    @Prop({
+        default: MCheckboxPosition.Left,
+        validator: value =>
+            value == MCheckboxPosition.Left ||
+            value == MCheckboxPosition.Right
+    })
     public position: MCheckboxPosition;
 
     @Model('change')

@@ -30,12 +30,17 @@ export class MButton extends Vue {
 
     @Prop({
         default: MButtonType.Button,
-        validator: value => value == MButtonType.Button || value == MButtonType.Submit || value == MButtonType.Reset
+        validator: value =>
+            value == MButtonType.Button ||
+            value == MButtonType.Submit ||
+            value == MButtonType.Reset
     })
     public type: MButtonType;
     @Prop({
         default: MButtonSkin.Primary,
-        validator: value => value == MButtonSkin.Primary || value == MButtonSkin.Secondary
+        validator: value =>
+            value == MButtonSkin.Primary ||
+            value == MButtonSkin.Secondary
     })
     public skin: MButtonSkin;
     @Prop()
@@ -48,7 +53,9 @@ export class MButton extends Vue {
     public iconName: string;
     @Prop({
         default: MButtonIconPosition.Left,
-        validator: value => value == MButtonIconPosition.Left || value == MButtonIconPosition.Right
+        validator: value =>
+            value == MButtonIconPosition.Left ||
+            value == MButtonIconPosition.Right
     })
     public iconPosition: MButtonIconPosition;
     @Prop({ default: '12px' })
