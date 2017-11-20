@@ -39,18 +39,19 @@ describe('button', () => {
     beforeEach(() => {
         Vue.use(ButtonPlugin);
         Vue.use(SpritesHelper);
-        button = new MButton().$mount();
     });
 
     afterEach(() => {
-        document.body.innerHTML = '';
+        // do not clear document.html since sprites defaults are loaded in the DOM
     });
 
     it('css class for button are present', () => {
+        button = new MButton().$mount();
         expect(button.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeTruthy();
     });
 
     it('css class for button are not present', () => {
+        button = new MButton().$mount();
         expect(button.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
         expect(button.$el.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
         expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
@@ -58,6 +59,7 @@ describe('button', () => {
     });
 
     it('type prop', () => {
+        button = new MButton().$mount();
         let buttonEl: HTMLButtonElement = button.$el as HTMLButtonElement;
         expect(buttonEl.type).toBe('button');
 
@@ -73,6 +75,7 @@ describe('button', () => {
     });
 
     it('skin prop', () => {
+        button = new MButton().$mount();
         expect(button.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeTruthy();
         expect(button.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
 
@@ -90,6 +93,7 @@ describe('button', () => {
     });
 
     it('disabled prop', () => {
+        button = new MButton().$mount();
         expect(button.$el.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
 
         button.disabled = true;
@@ -104,6 +108,7 @@ describe('button', () => {
     });
 
     it('waiting prop', () => {
+        button = new MButton().$mount();
         const spinnerClass: string = '.m-spinner';
 
         expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
@@ -123,6 +128,7 @@ describe('button', () => {
     });
 
     it('full-size prop', () => {
+        button = new MButton().$mount();
         expect(button.$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
 
         button.fullSize = true;
@@ -137,6 +143,7 @@ describe('button', () => {
     });
 
     it('icon-size prop', () => {
+        button = new MButton().$mount();
         expect(button.iconSize).toEqual('12px');
 
         button.iconSize = '20px';
@@ -146,6 +153,10 @@ describe('button', () => {
     });
 
     describe('icon-position', () => {
+        beforeEach(() => {
+            button = new MButton().$mount();
+        });
+
         it('left', () => {
             const iconClass: string = '.m-icon';
 

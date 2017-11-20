@@ -29,15 +29,15 @@ describe('MSpinnerSize', () => {
     });
 });
 
-beforeEach(() => {
-    Vue.use(SpinnerPlugin);
-});
-
-afterEach(() => {
-    document.body.innerHTML = '';
-});
-
 describe('spinner', () => {
+    beforeEach(() => {
+        Vue.use(SpinnerPlugin);
+    });
+
+    afterEach(() => {
+        document.body.innerHTML = '';
+    });
+
     it('css class for spinner are not present', () => {
         spinner = new MSpinner().$mount();
         Vue.nextTick(() => {
@@ -91,7 +91,10 @@ describe('spinner', () => {
     });
 
     describe('skin prop', () => {
-        spinner = new MSpinner().$mount();
+        beforeEach(() => {
+            spinner = new MSpinner().$mount();
+        });
+
         it('dark', () => {
             Vue.nextTick(() => {
                 let wrap: Element = spinner.$refs.spinnerWrap as Element;
@@ -109,7 +112,6 @@ describe('spinner', () => {
         });
 
         it('light', () => {
-            spinner = new MSpinner().$mount();
             Vue.nextTick(() => {
                 let wrap: Element = spinner.$refs.spinnerWrap as Element;
                 expect(wrap).toBeTruthy();
@@ -126,7 +128,6 @@ describe('spinner', () => {
         });
 
         it('lighter', () => {
-            spinner = new MSpinner().$mount();
             Vue.nextTick(() => {
                 let wrap: Element = spinner.$refs.spinnerWrap as Element;
                 expect(wrap).toBeTruthy();
@@ -143,7 +144,6 @@ describe('spinner', () => {
         });
 
         it('regular', () => {
-            spinner = new MSpinner().$mount();
             Vue.nextTick(() => {
                 let wrap: Element = spinner.$refs.spinnerWrap as Element;
                 expect(wrap).toBeTruthy();
@@ -165,8 +165,11 @@ describe('spinner', () => {
     });
 
     describe('size prop', () => {
-        it('small', () => {
+        beforeEach(() => {
             spinner = new MSpinner().$mount();
+        });
+
+        it('small', () => {
             Vue.nextTick(() => {
                 const iconClass: string = '.m-spinner__icon';
                 let icon: Element = spinner.$el.querySelector(iconClass) as Element;
@@ -184,7 +187,6 @@ describe('spinner', () => {
         });
 
         it('large', () => {
-            spinner = new MSpinner().$mount();
             Vue.nextTick(() => {
                 const iconClass: string = '.m-spinner__icon';
                 let icon: Element = spinner.$el.querySelector(iconClass) as Element;
