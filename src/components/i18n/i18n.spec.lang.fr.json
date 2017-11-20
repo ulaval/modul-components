@@ -1,0 +1,8 @@
+{
+    "m-i18n-spec": {
+        "a": "test a",
+        "b": "test b",
+        "with-params": "test {0}, test {1}",
+        "html-encode": "{0}test{1}"
+    }
+}
