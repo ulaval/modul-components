@@ -42,6 +42,10 @@ describe('button', () => {
         button = new MButton().$mount();
     });
 
+    afterEach(() => {
+        document.body.innerHTML = '';
+    });
+
     it('css class for button are present', () => {
         expect(button.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeTruthy();
     });
@@ -227,8 +231,6 @@ describe('button', () => {
     it('click event', () => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
-            data: {
-            },
             template: `
             <div>
                 <m-button ref="a" @click="onClick"></m-button>

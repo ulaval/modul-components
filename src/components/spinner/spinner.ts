@@ -20,6 +20,7 @@ export enum MSpinnerSize {
     Small = 'small'
 }
 
+export const MODAL_WARN: string = 'Change of property "modal" is not supported';
 const SPINNER_ID: string = 'MSpinner';
 
 @WithRender
@@ -71,7 +72,7 @@ export class MSpinner extends ModulVue {
 
     @Watch('modal')
     private onModalChange(value: boolean): void {
-        console.warn('<' + SPINNER_NAME + '>: Change of property "modal" is not supported while the component is visible');
+        console.warn(`<${SPINNER_NAME}>: ${MODAL_WARN}`);
         if (!value) {
             this.removeBackdrop();
         }
