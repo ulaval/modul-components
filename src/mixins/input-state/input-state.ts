@@ -24,6 +24,8 @@ export interface InputStateMixin {
     helperMessage: string;
     validMessage: string;
     errorMessage: string;
+
+    disabled: boolean;
 }
 
 @Component
