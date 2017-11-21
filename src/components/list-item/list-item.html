@@ -1,15 +1,15 @@
 <!-- <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave"> -->
-    <li v-if="visible" class="m-list-item" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': waiting }">
+    <li v-if="visible" class="m-list-item" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': isWaiting }">
         <div class="m-list-item__content">
             <slot></slot>
         </div>
         <template v-if="!disabled">
-            <div v-if="deleteButton && !waiting" class="m-list-item__button">
+            <div v-if="deleteButton && !isWaiting" class="m-list-item__button">
                 <m-icon-button icon-name="chip-error" @click="toDelete($event)">
                     <m-i18n k="m-list-item:delete"></m-i18n>
                 </m-icon-button>
             </div>
-            <div v-else-if="waiting" class="m-list-item__button">
+            <div v-else-if="isWaiting" class="m-list-item__button">
                 <m-spinner size="small"></m-spinner>
             </div>
         </template>

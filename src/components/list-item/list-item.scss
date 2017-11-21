@@ -22,14 +22,14 @@
         width: $m-touch-size;
     }
 
-    &.m--is-disabled {
-        color: rgba($m-color--grey-darker, 0.6);
-        background-color: $m-color--grey-lightest;
-        cursor: not-allowed;
-    }
+    // &.m--is-disabled {
+    //     color: rgba($m-color--grey-darker, 0.6);
+    //     background-color: $m-color--grey-lightest;
+    //     cursor: not-allowed;
+    // }
 
     &.m--is-waiting {
-        color: $m-color--grey-darker;
+        // color: $m-color--grey-darker;
         cursor: wait;
     }
 

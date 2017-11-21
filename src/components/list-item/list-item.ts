@@ -26,6 +26,16 @@ export class MListItem extends ModulVue {
         this.$emit('delete', event);
     }
 
+    private get isWaiting() {
+        if (this.disabled === true && this.waiting === true) {
+            return false;
+        } else if ( this.waiting === true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 const ListItemPlugin: PluginObject<any> = {
