@@ -38,8 +38,6 @@ import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
 import Status from './status/status';
 import StepPlugin from './step/step';
-import SteppersPlugin from './steppers/steppers';
-import SteppersItemPlugin from './steppers-item/steppers-item';
 import SwitchPlugin from './switch/switch';
 import TabPanelPlugin from './tab-panel/tab-panel';
 import TabsPlugin from './tabs/tabs';
@@ -93,8 +91,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(SpinnerPlugin);
         Vue.use(Status);
         Vue.use(StepPlugin);
-        Vue.use(SteppersPlugin);
-        Vue.use(SteppersItemPlugin);
         Vue.use(SwitchPlugin);
         Vue.use(TabPanelPlugin);
         Vue.use(TabsPlugin);

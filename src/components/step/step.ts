@@ -47,7 +47,7 @@ export class MStep extends ModulVue {
 
     @Watch('open')
     protected openChanged(open: boolean): void {
-        this.as<TransitionAccordionMixin>().isAnimActive = true;
+        this.as<TransitionAccordionMixin>().accordionAnim = true;
         this.propOpen = open;
     }
 
@@ -62,13 +62,13 @@ export class MStep extends ModulVue {
 
     private openStep(event): void {
         if (this.propMode == MStepMode.Accordion) {
-            this.as<TransitionAccordionMixin>().isAnimActive = true;
+            this.as<TransitionAccordionMixin>().accordionAnim = true;
             this.propOpen = !this.propOpen;
             this.$emit('open');
             event.currentTarget.blur();
         } else {
             if (!this.propOpen) {
-                this.as<TransitionAccordionMixin>().isAnimActive = true;
+                this.as<TransitionAccordionMixin>().accordionAnim = true;
                 this.propOpen = true;
                 this.$emit('open');
                 event.currentTarget.blur();
@@ -78,7 +78,7 @@ export class MStep extends ModulVue {
 
     private closeStep(): void {
         if (this.propOpen) {
-            this.as<TransitionAccordionMixin>().isAnimActive = true;
+            this.as<TransitionAccordionMixin>().accordionAnim = true;
             this.propOpen = false;
             this.$emit('closeStep');
         }

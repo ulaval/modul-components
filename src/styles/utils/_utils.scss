@@ -1,3 +1,8 @@
+@import
+    'bullet-list',
+    'button',
+    'table';
+
 // ======================================================================
 //  border
 // ======================================================================
@@ -152,19 +157,7 @@
     &--auto,
     &--scroll,
     &--visible {
-        @include m-scrollbar-ie();
-
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
-        }
-
-        &::-webkit-scrollbar-track-piece {
-            @include m-scrollbar-track-piece();
-        }
-
-        &::-webkit-scrollbar-thumb {
-            @include m-scrollbar-thumb();
-        }
+        @include m-scrollbar();
     }
 
     &--auto {
@@ -255,3 +248,4 @@
         }
     }
 }
+

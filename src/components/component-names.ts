@@ -35,8 +35,6 @@ export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
 export const STATUS_NAME: string = 'm-status';
 export const STEP_NAME: string = 'm-step';
-export const STEPPERS_NAME: string = 'm-steppers';
-export const STEPPERS_ITEM_NAME: string = 'm-steppers-item';
 export const SWITCH_NAME: string = 'm-switch';
 export const TAB_PANEL_NAME: string = 'm-tab-panel';
 export const TABS_NAME: string = 'm-tabs';
@@ -89,8 +87,6 @@ export const components: string[] = [
     SPINNER_NAME,
     STATUS_NAME,
     STEP_NAME,
-    STEPPERS_NAME,
-    STEPPERS_ITEM_NAME,
     SWITCH_NAME,
     TAB_PANEL_NAME,
     TABS_NAME,
