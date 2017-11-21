@@ -1,0 +1,13 @@
+@import 'abstracts/variables';
+$m-step--icon--size: 44px;
+$m-step--icon--size-s: 34px;
+$m-step--badge--size: 14px;
+$m-step--badge--size-s: 10px;
+
+.m-steppers {
+    display: flex;
+    justify-content: space-between;
+    padding: $m-padding 0;
+    margin: 0;
+    background-color: $m-color--grey-lighter;
+}
