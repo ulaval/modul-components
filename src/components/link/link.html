@@ -6,12 +6,13 @@
                            'm--is-vanilla': vanilla,
                            'm--has-right-icon' : isIconPositionRight }"
                  :to="routerLinkUrl"
+                 :target="target"
                  v-if="isRouterLink">
         <m-icon :name="propIconName" :size="iconSize" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon>
         <span class="m-link__text">
             <slot></slot>
         </span>
-        <span class="m-link__hidden" v-if="hasHiddenText">{{ hiddenText }}</span>
+        <m-i18n class="m-link__hidden" v-if="isTargetBlank" k="m-link:open-new-tab"></m-i18n>
     </router-link>
     <a class="m-link" :class="{ 'm--is-unvisited': isUnvisited,
                  'm--is-disabled': disabled,
@@ -20,12 +21,13 @@
                  'm--is-vanilla': vanilla,
                  'm--has-right-icon' : isIconPositionRight }"
        :href="propUrl"
+       :target="target"
        v-if="!isRouterLink"
        ref="link" @click="onClick">
         <m-icon class="m-link__icon" :name="propIconName" :size="iconSize" v-if="hasIcon" aria-hidden="true"></m-icon>
         <span class="m-link__text">
             <slot></slot>
         </span>
-        <span class="m-link__hidden" v-if="hasHiddenText">{{ hiddenText }}</span>
+        <m-i18n class="m-link__hidden" v-if="isTargetBlank" k="m-link:open-new-tab"></m-i18n>
     </a>
 </transition>

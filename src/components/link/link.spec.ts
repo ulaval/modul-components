@@ -466,43 +466,6 @@ describe('link', () => {
         });
     });
 
-    describe('hidden-text prop', () => {
-        beforeEach(() => {
-            vm = new Vue({
-                router,
-                data: {
-                    mode: MLinkMode.RouterLink,
-                    text: ''
-                },
-                template: `
-                    <div>
-                        <m-link ref="a" :mode="mode" :hidden-text="text" url="/test"></m-link>
-                    </div>`
-            }).$mount();
-        });
-
-        const test = () => {
-            let element: HTMLElement | null = (vm.$refs.a as Vue).$el.querySelector('.m-link__hidden') as HTMLElement;
-            expect(element).toBeFalsy();
-
-            (vm as any).text = 'text';
-            Vue.nextTick(() => {
-                element = (vm.$refs.a as Vue).$el.querySelector('.m-link__hidden') as HTMLElement;
-                expect(element).toBeTruthy();
-                expect(element.textContent).toEqual('text');
-            });
-        };
-
-        it('router-link', () => {
-            test();
-        });
-
-        it('link', () => {
-            (vm as any).mode = MLinkMode.Link;
-            test();
-        });
-    });
-
     describe('text content', () => {
         beforeEach(() => {
             vm = new Vue({
@@ -549,13 +512,14 @@ describe('link', () => {
         });
 
         const test = () => {
-            let element: HTMLElement | null = (vm.$refs.a as Vue).$el.querySelector('.m-link__text') as HTMLElement;
-            expect(element).toBeFalsy();
+            let hidden: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-link__hidden');
+            expect(hidden).toBeFalsy();
 
             (vm as any).target = '_blank';
             Vue.nextTick(() => {
-                element = (vm.$refs.a as Vue).$el.querySelector('.m-link__text') as HTMLElement;
-                expect(element).toBeTruthy();
+                hidden = (vm.$refs.a as Vue).$el.querySelector('.m-link__hidden');
+                expect(hidden).toBeTruthy();
+                expect((vm.$refs.a as Vue).$el.getAttribute('target')).toEqual('_blank');
             });
         };
 

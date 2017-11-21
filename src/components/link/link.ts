@@ -8,7 +8,6 @@ import IconPlugin from '../icon/icon';
 
 export enum MLinkMode {
     RouterLink = 'router-link',
-    // ExternalLink = 'external-link',
     Link = 'link',
     Button = 'button'
 }
@@ -30,7 +29,6 @@ export class MLink extends ModulVue {
         default: MLinkMode.RouterLink,
         validator: value =>
             value == MLinkMode.RouterLink ||
-            // value == MLinkMode.ExternalLink ||
             value == MLinkMode.Link ||
             value == MLinkMode.Button
     })
@@ -44,9 +42,6 @@ export class MLink extends ModulVue {
 
     @Prop()
     public vanilla: boolean;
-
-    // @Prop()
-    // public hiddenText: string;
 
     @Prop()
     public target: string;
@@ -71,13 +66,6 @@ export class MLink extends ModulVue {
     @Prop()
     public disabled: boolean;
 
-    // protected mounted(): void {
-    //     if (this.isExternalLink) {
-    //         this.$refs['link']['setAttribute']('title', this.$i18n.translate('m-link:open-new-tab'));
-    //         this.$refs['link']['setAttribute']('target', '_blank');
-    //     }
-    // }
-
     private onClick(event): void {
         this.$el.blur();
         if (this.isButton || this.disabled) {
@@ -91,14 +79,6 @@ export class MLink extends ModulVue {
     private get isRouterLink(): boolean {
         return this.mode == MLinkMode.RouterLink;
     }
-
-    // private get isLink(): boolean {
-    //     return this.mode == MLinkMode.Link;
-    // }
-
-    // private get isExternalLink(): boolean {
-    //     return this.mode == MLinkMode.ExternalLink;
-    // }
 
     private get isButton(): boolean {
         return this.mode == MLinkMode.Button;
@@ -124,9 +104,9 @@ export class MLink extends ModulVue {
         return this.mode == MLinkMode.Button ? '#' : this.url;
     }
 
-    // private get hasHiddenText(): boolean {
-    //     return this.hiddenText == undefined || this.hiddenText == '' ? false : true;
-    // }
+    private get isTargetBlank(): boolean {
+        return this.target == '_blank';
+    }
 
     private get routerLinkUrl(): string | Object {
         return !this.isObject(this.url) ? { path: this.url } : this.url ;
