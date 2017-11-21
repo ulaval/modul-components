@@ -133,7 +133,7 @@ describe('icon-button', () => {
             }
         }).$mount();
 
-        let element: HTMLElement | null = (vm.$refs.a as Vue).$el;
+        let element: HTMLElement = (vm.$refs.a as Vue).$el;
 
         let e: any = document.createEvent('HTMLEvents');
         e.initEvent('click', true, true);
