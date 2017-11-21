@@ -13,7 +13,7 @@
                         'm--is-large': propIconSize=='large',
                         'm--has-border': propIconBorder }"></span>
     </header>
-    <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
+    <transition @enter="accordionEnter" @after-enter="accordionAfterEnter" @leave="accordionLeave">
         <div class="m-accordion__body-wrap" v-if="propOpen">
             <div class="m-accordion__body">
                 <slot></slot>
