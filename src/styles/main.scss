@@ -3,8 +3,9 @@
 // ======================================================================
 //  abstracts
 // ======================================================================
-@import 'abstracts/variables';
-@import 'abstracts/var-color-calendar';
+@import
+    'abstracts/variables',
+    'abstracts/var-color-calendar';
 
 // ======================================================================
 //  Base
@@ -20,6 +21,3 @@
 //  utils
 // ======================================================================
 @import 'utils/utils';
-@import 'utils/button';
-@import 'utils/bullet-list';
-@import 'utils/table';
