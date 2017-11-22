@@ -3,15 +3,7 @@ import '../../utils/polyfills';
 import SpinnerPlugin, { MSpinner, MSpinnerStyle, MSpinnerSize, MODAL_WARN } from './spinner';
 import { SPINNER_NAME } from '../component-names';
 
-const MODE_PROCESSING_CSS: string = 'm--is-processing';
-const SKIN_DARK_CSS: string = 'm--is-dark';
-const SKIN_LIGHT_CSS: string = 'm--is-light';
-const SKIN_LIGHTER_CSS: string = 'm--is-lighter';
-const SIZE_SMALL_CSS: string = 'm--is-small';
-
-const BACKDROP_QUERY: string = '.m-backdrop';
-
-let spinner: MSpinner;
+export const SPINNER_CLASS: string = '.m-spinner';
 
 describe('MSpinnerStyle', () => {
     it('validates enum', () => {
@@ -30,12 +22,28 @@ describe('MSpinnerSize', () => {
 });
 
 describe('spinner', () => {
+    const MODE_PROCESSING_CSS: string = 'm--is-processing';
+    const SKIN_DARK_CSS: string = 'm--is-dark';
+    const SKIN_LIGHT_CSS: string = 'm--is-light';
+    const SKIN_LIGHTER_CSS: string = 'm--is-lighter';
+    const SIZE_SMALL_CSS: string = 'm--is-small';
+
+    const BACKDROP_QUERY: string = '.m-backdrop';
+
+    let spinner: MSpinner;
+
     beforeEach(() => {
+        spyOn(console, 'error');
+
         Vue.use(SpinnerPlugin);
     });
 
     afterEach(() => {
         document.body.innerHTML = '';
+
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
     });
 
     it('css class for spinner are not present', () => {
@@ -231,10 +239,7 @@ describe('spinner', () => {
                     modal: false,
                     visible: true
                 },
-                template: `
-                <div>
-                    <m-spinner :modal="modal" v-show="visible"></m-spinner>
-                </div>`
+                template: `<m-spinner :modal="modal" v-show="visible"></m-spinner>`
             }).$mount();
 
             Vue.nextTick(() => {
@@ -259,10 +264,7 @@ describe('spinner', () => {
                     modal: false,
                     visible: false
                 },
-                template: `
-                <div>
-                    <m-spinner :modal="modal" v-if="visible"></m-spinner>
-                </div>`
+                template: `<m-spinner :modal="modal" v-if="visible"></m-spinner>`
             }).$mount();
 
             Vue.nextTick(() => {
@@ -285,10 +287,7 @@ describe('spinner', () => {
                 data: {
                     modal: true
                 },
-                template: `
-                <div>
-                    <m-spinner :modal="modal"></m-spinner>
-                </div>`
+                template: `<m-spinner :modal="modal"></m-spinner>`
             }).$mount();
 
             let wrap: Element | null = document.body.querySelector('.m-spinner__wrap');

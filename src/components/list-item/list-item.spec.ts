@@ -1,15 +1,17 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
 import ListItemPlugin, { MListItem } from './list-item';
+import { SPINNER_CLASS } from '../spinner/spinner.spec';
+import { ICON_BUTTON_CLASS } from '../icon-button/icon-button.spec';
 import SpritesHelper from '../../../tests/helpers/sprites';
 import LangHelper from '../../../tests/helpers/lang';
 
-const DISABLED_CSS: string = 'm--is-disabled';
-const WAITING_CSS: string = 'm--is-waiting';
-
-let list: MListItem;
-
 describe('list-item', () => {
+    const DISABLED_CSS: string = 'm--is-disabled';
+    const WAITING_CSS: string = 'm--is-waiting';
+
+    let list: MListItem;
+
     beforeEach(() => {
         spyOn(console, 'error');
 
@@ -44,9 +46,7 @@ describe('list-item', () => {
 
     it('text content', () => {
         let vm = new Vue({
-            template: `
-                <m-list-item>item 1</m-list-item>
-            `
+            template: `<m-list-item>item 1</m-list-item>`
         }).$mount();
 
         let element: HTMLElement = vm.$el.querySelector('.m-list-item__content') as HTMLElement;
@@ -58,17 +58,15 @@ describe('list-item', () => {
             data: {
                 deleteButton: false
             },
-            template: `
-                <m-list-item :delete-button="deleteButton">item 1</m-list-item>
-            `
+            template: `<m-list-item :delete-button="deleteButton">item 1</m-list-item>`
         }).$mount();
 
-        let element: Element | null = vm.$el.querySelector('.m-icon-button');
+        let element: Element | null = vm.$el.querySelector(ICON_BUTTON_CLASS);
         expect(element).toBeFalsy();
 
         (vm as any).deleteButton = true;
         Vue.nextTick(() => {
-            element = vm.$el.querySelector('.m-icon-button');
+            element = vm.$el.querySelector(ICON_BUTTON_CLASS);
             expect(element).toBeTruthy();
         });
     });
@@ -79,17 +77,15 @@ describe('list-item', () => {
                 data: {
                     disabled: false
                 },
-                template: `
-                <m-list-item :disabled="disabled">item 1</m-list-item>
-            `
+                template: `<m-list-item :disabled="disabled">item 1</m-list-item>`
             }).$mount();
 
-            let icon: Element | null = vm.$el.querySelector('.m-icon-button');
+            let icon: Element | null = vm.$el.querySelector(ICON_BUTTON_CLASS);
             expect(icon).toBeTruthy();
 
             (vm as any).disabled = true;
             Vue.nextTick(() => {
-                let icon = vm.$el.querySelector('.m-icon-button');
+                let icon = vm.$el.querySelector(ICON_BUTTON_CLASS);
                 expect(icon).toBeFalsy();
             });
         });
@@ -100,18 +96,16 @@ describe('list-item', () => {
                     disabled: false,
                     waiting: true
                 },
-                template: `
-                <m-list-item :waiting="waiting" :disabled="disabled">item 1</m-list-item>
-            `
+                template: `<m-list-item :waiting="waiting" :disabled="disabled">item 1</m-list-item>`
             }).$mount();
 
-            let spinner: Element | null = vm.$el.querySelector('.m-spinner');
+            let spinner: Element | null = vm.$el.querySelector(SPINNER_CLASS);
             expect(spinner).toBeTruthy();
             expect(vm.$el.classList.contains(WAITING_CSS)).toBeTruthy();
 
             (vm as any).disabled = true;
             Vue.nextTick(() => {
-                let spinner = vm.$el.querySelector('.m-spinner');
+                let spinner = vm.$el.querySelector(SPINNER_CLASS);
                 expect(spinner).toBeFalsy();
                 expect(vm.$el.classList.contains(WAITING_CSS)).toBeFalsy();
             });
@@ -123,20 +117,18 @@ describe('list-item', () => {
             data: {
                 waiting: false
             },
-            template: `
-                <m-list-item :waiting="waiting">item 1</m-list-item>
-            `
+            template: `<m-list-item :waiting="waiting">item 1</m-list-item>`
         }).$mount();
 
-        let icon: Element | null = vm.$el.querySelector('.m-icon-button');
-        let spinner: Element | null = vm.$el.querySelector('.m-spinner');
+        let icon: Element | null = vm.$el.querySelector(ICON_BUTTON_CLASS);
+        let spinner: Element | null = vm.$el.querySelector(SPINNER_CLASS);
         expect(icon).toBeTruthy();
         expect(spinner).toBeFalsy();
 
         (vm as any).waiting = true;
         Vue.nextTick(() => {
-            let icon = vm.$el.querySelector('.m-icon-button');
-            let spinner = vm.$el.querySelector('.m-spinner');
+            let icon = vm.$el.querySelector(ICON_BUTTON_CLASS);
+            let spinner = vm.$el.querySelector(SPINNER_CLASS);
             expect(icon).toBeFalsy();
             expect(spinner).toBeTruthy();
         });
@@ -146,9 +138,7 @@ describe('list-item', () => {
         list = new MListItem().$mount();
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
-            template: `
-                <m-list-item @delete="onClick($event)">item 1</m-list-item>
-            `,
+            template: `<m-list-item @delete="onClick($event)">item 1</m-list-item>`,
             methods: {
                 onClick: clickSpy
             }

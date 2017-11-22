@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
 import MessagePlugin, { MMessage, MMessageState, MMessageSkin } from './message';
+import { ICON_CLASS, validateIconSvg } from '../icon/icon.spec';
+import { ICON_BUTTON_CLASS } from '../icon-button/icon-button.spec';
 import SpritesHelper from '../../../tests/helpers/sprites';
 import LangHelper from '../../../tests/helpers/lang';
 
@@ -33,6 +35,7 @@ describe('MMessageSkin', () => {
 describe('message', () => {
     beforeEach(() => {
         spyOn(console, 'error');
+
         Vue.use(MessagePlugin);
         Vue.use(SpritesHelper);
         Vue.use(LangHelper);
@@ -71,8 +74,7 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
-                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
-                expect(element.href.baseVal).toEqual('#chip-info');
+                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-info');
             });
         });
 
@@ -84,8 +86,7 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
-                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
-                expect(element.href.baseVal).toEqual('#chip-warning');
+                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-warning');
             });
         });
 
@@ -97,8 +98,7 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeTruthy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
-                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
-                expect(element.href.baseVal).toEqual('#chip-error');
+                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-error');
             });
         });
 
@@ -110,8 +110,7 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeTruthy();
 
-                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
-                expect(element.href.baseVal).toEqual('#chip-check');
+                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-check');
             });
         });
     });
@@ -151,12 +150,12 @@ describe('message', () => {
             }
         }).$mount();
 
-        let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector('svg');
+        let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS);
         expect(icon).toBeTruthy();
 
         (vm as any).hasIcon = false;
         Vue.nextTick(() => {
-            let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector('svg');
+            let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS);
             expect(icon).toBeFalsy();
         });
     });
@@ -174,7 +173,7 @@ describe('message', () => {
             }
         }).$mount();
 
-        let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector('svg');
+        let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS);
         let body: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-message__body');
         expect(icon).toBeTruthy();
         expect(body).toBeTruthy();
@@ -184,7 +183,7 @@ describe('message', () => {
 
         (vm as any).hasCloseButton = false;
         Vue.nextTick(() => {
-            icon = (vm.$refs.a as Vue).$el.querySelector('svg');
+            icon = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS);
             body = (vm.$refs.a as Vue).$el.querySelector('.m-message__body');
             expect(icon).toBeFalsy();
             expect(body).toBeTruthy();
@@ -226,7 +225,7 @@ describe('message', () => {
         it('with close no sync', () => {
             expect(vm.$el.querySelector('.m-message')).toBeTruthy();
 
-            let closeButton: HTMLElement = vm.$el.querySelector('button') as HTMLElement;
+            let closeButton: HTMLElement = vm.$el.querySelector(ICON_BUTTON_CLASS) as HTMLElement;
             expect(closeButton).toBeTruthy();
             closeButton.click();
 
@@ -247,7 +246,7 @@ describe('message', () => {
             </div>`
         }).$mount();
 
-        let closeButton: HTMLElement = vm.$el.querySelector('button') as HTMLElement;
+        let closeButton: HTMLElement = vm.$el.querySelector(ICON_BUTTON_CLASS) as HTMLElement;
         expect(closeButton).toBeTruthy();
         closeButton.click();
 
@@ -272,7 +271,7 @@ describe('message', () => {
             }
         }).$mount();
 
-        let closeButton = vm.$el.querySelector('button');
+        let closeButton: HTMLElement = vm.$el.querySelector(ICON_BUTTON_CLASS) as HTMLElement;
 
         if (closeButton) {
             closeButton.click();

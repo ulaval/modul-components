@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
 import ButtonPlugin, { MButton, MButtonType, MButtonSkin, MButtonIconPosition } from './button';
+import { SPINNER_CLASS } from '../spinner/spinner.spec';
+import { ICON_CLASS, validateIconSize } from '../icon/icon.spec';
 import SpritesHelper from '../../../tests/helpers/sprites';
 
 const SKIN_PRIMARY_CSS: string = 'm--is-skin-primary';
@@ -37,12 +39,16 @@ describe('MButtonIconPosition', () => {
 
 describe('button', () => {
     beforeEach(() => {
+        spyOn(console, 'error');
+
         Vue.use(ButtonPlugin);
         Vue.use(SpritesHelper);
     });
 
     afterEach(() => {
-        // do not clear document.html since sprites defaults are loaded in the DOM
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
     });
 
     it('css class for button are present', () => {
@@ -109,20 +115,18 @@ describe('button', () => {
 
     it('waiting prop', () => {
         button = new MButton().$mount();
-        const spinnerClass: string = '.m-spinner';
-
         expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
-        expect(button.$el.querySelector(spinnerClass)).toBeFalsy();
+        expect(button.$el.querySelector(SPINNER_CLASS)).toBeFalsy();
 
         button.waiting = true;
         Vue.nextTick(() => {
             expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeTruthy();
-            expect(button.$el.querySelector(spinnerClass)).toBeTruthy();
+            expect(button.$el.querySelector(SPINNER_CLASS)).toBeTruthy();
 
             button.waiting = false;
             Vue.nextTick(() => {
                 expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
-                expect(button.$el.querySelector(spinnerClass)).toBeFalsy();
+                expect(button.$el.querySelector(SPINNER_CLASS)).toBeFalsy();
             });
         });
     });
@@ -144,11 +148,20 @@ describe('button', () => {
 
     it('icon-size prop', () => {
         button = new MButton().$mount();
-        expect(button.iconSize).toEqual('12px');
+        button.iconName = 'default';
 
-        button.iconSize = '20px';
         Vue.nextTick(() => {
-            expect(button.iconSize).toEqual('20px');
+            let icon: Element | null = button.$el.querySelector(ICON_CLASS);
+            expect(icon).toBeTruthy();
+            if (icon) {
+                validateIconSize(icon, '12px');
+            }
+
+            button.iconSize = '20px';
+            Vue.nextTick(() => {
+                icon = button.$el.querySelector(ICON_CLASS) as Element;
+                validateIconSize(icon, '20px');
+            });
         });
     });
 
@@ -158,13 +171,11 @@ describe('button', () => {
         });
 
         it('left', () => {
-            const iconClass: string = '.m-icon';
-
-            expect(button.$el.querySelector(iconClass)).toBeFalsy();
+            expect(button.$el.querySelector(ICON_CLASS)).toBeFalsy();
 
             button.iconName = 'default';
             Vue.nextTick(() => {
-                let leftEl: Element | null = button.$el.querySelector(iconClass);
+                let leftEl: Element | null = button.$el.querySelector(ICON_CLASS);
                 expect(leftEl).toBeTruthy();
                 if (leftEl) {
                     expect(leftEl.classList.contains('m--is-left')).toBeTruthy();
@@ -172,7 +183,7 @@ describe('button', () => {
 
                 button.iconPosition = MButtonIconPosition.Left;
                 Vue.nextTick(() => {
-                    let leftEl: Element | null = button.$el.querySelector(iconClass);
+                    let leftEl: Element | null = button.$el.querySelector(ICON_CLASS);
                     expect(leftEl).toBeTruthy();
                     if (leftEl) {
                         expect(leftEl.classList.contains('m--is-left')).toBeTruthy();
@@ -182,14 +193,12 @@ describe('button', () => {
         });
 
         it('right', () => {
-            const iconClass: string = '.m-icon';
-
-            expect(button.$el.querySelector(iconClass)).toBeFalsy();
+            expect(button.$el.querySelector(ICON_CLASS)).toBeFalsy();
 
             button.iconName = 'default';
             button.iconPosition = MButtonIconPosition.Right;
             Vue.nextTick(() => {
-                let rightEl: Element | null = button.$el.querySelector(iconClass);
+                let rightEl: Element | null = button.$el.querySelector(ICON_CLASS);
                 expect(rightEl).toBeTruthy();
                 if (rightEl) {
                     expect(rightEl.classList.contains('m--is-right')).toBeTruthy();
@@ -203,15 +212,10 @@ describe('button', () => {
 
         it('with', () => {
             let vm = new Vue({
-                template: `
-                <div>
-                    <m-button ref="a"><template slot="more-info">Label</template></m-button>
-                </div>`
+                template: `<m-button><template slot="more-info">Label</template></m-button>`
             }).$mount();
 
-            let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
-            expect(element.querySelector(moreInfoClass)).toBeTruthy();
+            expect(vm.$el.querySelector(moreInfoClass)).toBeTruthy();
         });
 
         it('without', () => {
@@ -221,15 +225,10 @@ describe('button', () => {
 
     it('text rendering', () => {
         let vm = new Vue({
-            template: `
-                <div>
-                    <m-button ref="a">Label</m-button>
-                </div>`
+            template: `<m-button>Label</m-button>`
         }).$mount();
 
-        let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
-        let textSlot: Element | null = element.querySelector('.m-button__text');
+        let textSlot: Element | null = vm.$el.querySelector('.m-button__text');
         expect(textSlot).toBeTruthy();
         if (textSlot) {
             expect(textSlot.textContent).toBeTruthy();
@@ -242,21 +241,16 @@ describe('button', () => {
     it('click event', () => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
-            template: `
-            <div>
-                <m-button ref="a" @click="onClick"></m-button>
-            </div>`,
+            template: `<m-button @click="onClick"></m-button>`,
             methods: {
                 onClick: clickSpy
             }
         }).$mount();
 
-        let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
         let e: any = document.createEvent('HTMLEvents');
         e.initEvent('click', true, true);
 
-        element.dispatchEvent(e);
+        vm.$el.dispatchEvent(e);
 
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalledWith(e);

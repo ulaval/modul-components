@@ -26,9 +26,17 @@ describe('MCheckboxPosition', () => {
 
 describe('checkbox', () => {
     beforeEach(() => {
+        spyOn(console, 'error');
+
         Vue.use(CheckboxPlugin);
         Vue.use(SpritesHelper);
         Vue.use(LangHelper);
+    });
+
+    afterEach(() => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
     });
 
     it('css class for checkbox are not present', () => {
@@ -112,18 +120,13 @@ describe('checkbox', () => {
             data: {
                 model: false
             },
-            template: `
-            <div>
-                <m-checkbox ref="a" :value="model"></m-checkbox>
-            </div>`
+            template: `<m-checkbox :value="model"></m-checkbox>`
         }).$mount();
 
-        let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
-        expect(element.classList.contains(CHECKED_CSS)).toBeFalsy();
+        expect(vm.$el.classList.contains(CHECKED_CSS)).toBeFalsy();
         (vm as any).model = true;
         Vue.nextTick(() => {
-            expect(element.classList.contains(CHECKED_CSS)).toBeTruthy();
+            expect(vm.$el.classList.contains(CHECKED_CSS)).toBeTruthy();
         });
     });
 
@@ -134,19 +137,14 @@ describe('checkbox', () => {
             data: {
                 label: 'label'
             },
-            template: `
-            <div>
-                <m-checkbox ref="a">{{label}}</m-checkbox>
-            </div>`
+            template: `<m-checkbox>{{label}}</m-checkbox>`
         }).$mount();
 
-        let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
-        expect(element.querySelector(LABEL)).toBeTruthy();
-        (vm as any).label = undefined;
-        Vue.nextTick(() => {
-            expect(element.querySelector(LABEL)).toBeFalsy();
-        });
+        let label: Element | null = vm.$el.querySelector(LABEL);
+        expect(label).toBeTruthy();
+        if (label) {
+            expect(label.textContent).toEqual('label');
+        }
     });
 
     it('click event', () => {
@@ -155,16 +153,13 @@ describe('checkbox', () => {
             data: {
                 model: false
             },
-            template: `
-            <div>
-                <m-checkbox ref="a" @click="onClick" value="model"></m-checkbox>
-            </div>`,
+            template: `<m-checkbox @click="onClick" value="model"></m-checkbox>`,
             methods: {
                 onClick: clickSpy
             }
         }).$mount();
 
-        let input: HTMLInputElement | null = (vm.$refs.a as Vue).$el.querySelector('input');
+        let input: HTMLInputElement | null = vm.$el.querySelector('input');
 
         let e: any = document.createEvent('HTMLEvents');
         e.initEvent('click', true, true);
@@ -187,10 +182,7 @@ describe('checkbox', () => {
                     helper: 'helper',
                     disabled: false
                 },
-                template: `
-            <div>
-                <m-checkbox ref="a" :error-message="error" :valid-message="valid" :helper-message="helper" :disabled="disabled"></m-checkbox>
-            </div>`
+                template: `<m-checkbox ref="a" :error-message="error" :valid-message="valid" :helper-message="helper" :disabled="disabled"></m-checkbox>`
             }).$mount();
         });
 
