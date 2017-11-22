@@ -54,7 +54,7 @@ export class MIconButton extends Vue {
     }
 
     private get isSkinLight(): boolean {
-        return this.skin != MIconButtonSkin.Dark && this.skin != MIconButtonSkin.Primary && this.skin != MIconButtonSkin.Secondary;
+        return this.skin == MIconButtonSkin.Light;
     }
 
     private get isSkinDark(): boolean {
@@ -72,7 +72,7 @@ export class MIconButton extends Vue {
     private hasSlots(): boolean {
         let hasSlot: boolean = !!this.$slots.default;
         if (!hasSlot) {
-            console.warn('<' + ICON_BUTTON_NAME + '> needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
+            // console.warn('<' + ICON_BUTTON_NAME + '> needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
         }
         return hasSlot;
     }
@@ -80,6 +80,7 @@ export class MIconButton extends Vue {
 
 const IconButtonPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(ICON_BUTTON_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.component(ICON_BUTTON_NAME, MIconButton);
     }

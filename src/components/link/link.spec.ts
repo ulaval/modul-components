@@ -1,20 +1,21 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
 import LinkPlugin, { MLink, MLinkMode, MLinkIconPosition } from './link';
+import Router from 'vue-router';
+import SpritesHelper from '../../../tests/helpers/sprites';
+import LangHelper from '../../../tests/helpers/lang';
 
 const UNVISITED_CSS: string = 'm--is-unvisited';
 const NO_UNDERLINE_CSS: string = 'm--no-underline';
 const MODE_BUTTON_CSS: string = 'm--is-button';
 const VANILLA_CSS: string = 'm--is-vanilla';
 const ICON_POSITION_RIGHT_CSS: string = 'm--has-right-icon';
-
-let link: MLink;
+const DISABLED_CSS: string = 'm--is-disabled';
 
 describe('MLinkMode', () => {
     it('validates enum', () => {
         expect(MLinkMode.Link).toEqual('link');
         expect(MLinkMode.Button).toEqual('button');
-        expect(MLinkMode.ExternalLink).toEqual('external-link');
         expect(MLinkMode.RouterLink).toEqual('router-link');
     });
 });
@@ -27,16 +28,512 @@ describe('MLinkIconPosition', () => {
 });
 
 describe('link', () => {
+    let vm: Vue;
+    let router: Router;
 
-    // Todo: Rooter-link problem on mount
+    beforeEach(() => {
+        spyOn(console, 'error');
 
-    // beforeEach(() => {
-    //     Vue.use(LinkPlugin);
-    //     link = new MLink().$mount();
-    // });
+        Vue.use(SpritesHelper);
+        Vue.use(LangHelper);
+        Vue.use(Router);
+        Vue.use(LinkPlugin);
 
-    // it('css class for link are present', () => {
-    //     console.log(link.$el);
-    // });
+        router = new Router({
+            mode: 'history',
+            routes: [
+                { path: '/test', component: { template: '<div></div>' } },
+                { path: '/named/:paramId', name: 'named', component: { template: '<div></div>' } }
+            ]
+        });
+    });
 
+    afterEach(() => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('css class for router-link are not present', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: Vue = vm.$refs.a as Vue;
+
+            expect(element.$el.classList.contains(UNVISITED_CSS)).toBeFalsy();
+            expect(element.$el.classList.contains(NO_UNDERLINE_CSS)).toBeFalsy();
+            expect(element.$el.classList.contains(MODE_BUTTON_CSS)).toBeFalsy();
+            expect(element.$el.classList.contains(VANILLA_CSS)).toBeFalsy();
+            expect(element.$el.classList.contains(ICON_POSITION_RIGHT_CSS)).toBeFalsy();
+            expect(element.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('url prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    url: '/test'
+                },
+                template: `
+                <div>
+                    <m-link ref="a" :mode="mode" :url="url"></m-link>
+                </div>`
+            }).$mount();
+        });
+
+        describe('url', () => {
+            const test = () => {
+                let element: HTMLAnchorElement = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
+
+                expect(element.getAttribute('href')).toEqual('/test');
+                (vm as any).url = '/path';
+                Vue.nextTick(() => {
+                    element = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
+                    expect(element.getAttribute('href')).toEqual('/path');
+                });
+            };
+
+            it('router-link', () => {
+                test();
+            });
+
+            it('link', () => {
+                (vm as any).mode = MLinkMode.Link;
+                test();
+            });
+        });
+
+        describe('button url', () => {
+            it('anchor', () => {
+                (vm as any).mode = MLinkMode.Button;
+
+                Vue.nextTick(() => {
+                    let element: HTMLAnchorElement = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
+
+                    expect(element.getAttribute('href')).toEqual('#');
+                    (vm as any).url = '/path';
+                    Vue.nextTick(() => {
+                        element = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
+                        expect(element.getAttribute('href')).toEqual('#');
+                    });
+                });
+            });
+        });
+
+        describe('object url', () => {
+            it('anchor', () => {
+                (vm as any).mode = MLinkMode.Button;
+
+                Vue.nextTick(() => {
+                    let element: HTMLAnchorElement = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
+
+                    expect(element.getAttribute('href')).toEqual('#');
+                    (vm as any).url = '/path';
+                    Vue.nextTick(() => {
+                        element = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
+                        expect(element.getAttribute('href')).toEqual('#');
+                    });
+                });
+            });
+        });
+
+        describe('named routes', () => {
+            it('anchor', () => {
+                (vm as any).mode = MLinkMode.RouterLink;
+
+                Vue.nextTick(() => {
+                    let element: HTMLAnchorElement = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
+
+                    expect(element.getAttribute('href')).toEqual('/test');
+                    (vm as any).url = { name: 'named', params: { paramId: 123 } };
+                    Vue.nextTick(() => {
+                        element = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
+                        expect(element.getAttribute('href')).toEqual('/named/123');
+                    });
+                });
+            });
+        });
+    });
+
+    describe('unvisited prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    unvisited: false
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" :unvisited="unvisited" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: Vue = vm.$refs.a as Vue;
+
+            expect(element.$el.classList.contains(UNVISITED_CSS)).toBeFalsy();
+            (vm as any).unvisited = true;
+            Vue.nextTick(() => {
+                expect(element.$el.classList.contains(UNVISITED_CSS)).toBeTruthy();
+            });
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('disabled prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    disabled: false
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" :disabled="disabled" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: Vue = vm.$refs.a as Vue;
+
+            expect(element.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
+            (vm as any).disabled = true;
+            Vue.nextTick(() => {
+                expect(element.$el.classList.contains(DISABLED_CSS)).toBeTruthy();
+            });
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('underline prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    underline: false
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" :underline="underline" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: Vue = vm.$refs.a as Vue;
+
+            expect(element.$el.classList.contains(NO_UNDERLINE_CSS)).toBeTruthy();
+            (vm as any).underline = true;
+            Vue.nextTick(() => {
+                expect(element.$el.classList.contains(NO_UNDERLINE_CSS)).toBeFalsy();
+            });
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('vanilla prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    vanilla: false
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" :vanilla="vanilla" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: Vue = vm.$refs.a as Vue;
+
+            expect(element.$el.classList.contains(VANILLA_CSS)).toBeFalsy();
+            (vm as any).vanilla = true;
+            Vue.nextTick(() => {
+                expect(element.$el.classList.contains(VANILLA_CSS)).toBeTruthy();
+            });
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('icon prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    icon: false
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" :icon="icon" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-link__icon');
+            expect(element).toBeFalsy();
+
+            (vm as any).icon = true;
+            Vue.nextTick(() => {
+                element = (vm.$refs.a as Vue).$el.querySelector('.m-link__icon');
+                expect(element).toBeTruthy();
+                if (element) {
+                    let use: SVGUseElement = element.querySelector('use') as SVGUseElement;
+                    expect(use.href['baseVal']).toEqual('#right-arrow');
+                }
+            });
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('icon-name prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    icon: ''
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" :icon-name="icon" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-link__icon');
+            expect(element).toBeFalsy();
+
+            (vm as any).icon = 'clock';
+            Vue.nextTick(() => {
+                element = (vm.$refs.a as Vue).$el.querySelector('.m-link__icon');
+                expect(element).toBeTruthy();
+                if (element) {
+                    let use: SVGUseElement = element.querySelector('use') as SVGUseElement;
+                    expect(use.href['baseVal']).toEqual('#clock');
+                }
+            });
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('icon-position prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    position: MLinkIconPosition.Left
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" :icon-position="position" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: Vue = vm.$refs.a as Vue;
+
+            expect(element.$el.classList.contains(ICON_POSITION_RIGHT_CSS)).toBeFalsy();
+            (vm as any).position = MLinkIconPosition.Right;
+            Vue.nextTick(() => {
+                expect(element.$el.classList.contains(ICON_POSITION_RIGHT_CSS)).toBeTruthy();
+            });
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('icon-size prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    size: '12px'
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" :icon="true" :icon-size="size" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: HTMLElement | null = (vm.$refs.a as Vue).$el.querySelector('.m-link__icon') as HTMLElement;
+            expect(element).toBeTruthy();
+
+            expect(element.getAttribute('height')).toEqual('12px');
+            (vm as any).size = '16px';
+            Vue.nextTick(() => {
+                element = (vm.$refs.a as Vue).$el.querySelector('.m-link__icon') as HTMLElement;
+                expect(element.getAttribute('width')).toBe('16px');
+            });
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('text content', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" url="/test">Link</m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let element: HTMLElement | null = (vm.$refs.a as Vue).$el.querySelector('.m-link__text') as HTMLElement;
+            expect(element).toBeTruthy();
+            expect(element.textContent).toEqual('Link');
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
+
+    describe('target prop', () => {
+        beforeEach(() => {
+            vm = new Vue({
+                router,
+                data: {
+                    mode: MLinkMode.RouterLink,
+                    target: '_self'
+                },
+                template: `
+                    <div>
+                        <m-link ref="a" :mode="mode" :target="target" url="/test"></m-link>
+                    </div>`
+            }).$mount();
+        });
+
+        const test = () => {
+            let hidden: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-link__hidden');
+            expect(hidden).toBeFalsy();
+
+            (vm as any).target = '_blank';
+            Vue.nextTick(() => {
+                hidden = (vm.$refs.a as Vue).$el.querySelector('.m-link__hidden');
+                expect(hidden).toBeTruthy();
+                expect((vm.$refs.a as Vue).$el.getAttribute('target')).toEqual('_blank');
+            });
+        };
+
+        it('router-link', () => {
+            test();
+        });
+
+        it('link', () => {
+            (vm as any).mode = MLinkMode.Link;
+            test();
+        });
+    });
 });

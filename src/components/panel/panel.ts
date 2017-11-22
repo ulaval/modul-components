@@ -23,18 +23,25 @@ export class MPanel extends Vue {
             value == MPanelSkin.Dark
     })
     public skin: MPanelSkin;
+
     @Prop({ default: true })
     public highlightingBorder: boolean;
+
     @Prop({ default: true })
     public shadow: boolean;
+
     @Prop({ default: true })
     public border: boolean;
+
     @Prop({ default: true })
     public padding: boolean;
+
     @Prop({ default: true })
     public paddingHeader: boolean;
+
     @Prop({ default: true })
     public paddingBody: boolean;
+
     @Prop({ default: true })
     public paddingFooter: boolean;
 

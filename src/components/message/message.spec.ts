@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
 import MessagePlugin, { MMessage, MMessageState, MMessageSkin } from './message';
+import SpritesHelper from '../../../tests/helpers/sprites';
+import LangHelper from '../../../tests/helpers/lang';
 
 const STATE_SUCCESS_CSS: string = 'm--is-success';
 const STATE_INFORMATION_CSS: string = 'm--is-information';
@@ -30,59 +32,108 @@ describe('MMessageSkin', () => {
 
 describe('message', () => {
     beforeEach(() => {
+        spyOn(console, 'error');
         Vue.use(MessagePlugin);
-        message = new MMessage().$mount();
+        Vue.use(SpritesHelper);
+        Vue.use(LangHelper);
+    });
+
+    afterEach(() => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
     });
 
     it('css class for message are not present', () => {
+        message = new MMessage().$mount();
         expect(message.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
         expect(message.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
         expect(message.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
         expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
     });
 
-    it('state prop', () => {
-        expect(message.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
-        expect(message.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
-        expect(message.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
+    describe('state prop', () => {
+        let vm: Vue;
+        beforeEach(() => {
+            vm = new Vue({
+                data: {
+                    state: MMessageState.Information
+                },
+                template: `<m-message :state="state" :closeButton="false">Consequat ut proident est ullamco consequat ullamco.</m-message>`
+            }).$mount();
+        });
 
-        message.state = MMessageState.Information;
-        Vue.nextTick(() => {
-            expect(message.$el.classList.contains(STATE_INFORMATION_CSS)).toBeTruthy();
-            expect(message.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
-
-            message.state = MMessageState.Warning;
+        it('information', () => {
+            (vm as any).state = MMessageState.Information;
             Vue.nextTick(() => {
-                expect(message.$el.classList.contains(STATE_WARNING_CSS)).toBeTruthy();
-                expect(message.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_INFORMATION_CSS)).toBeTruthy();
+                expect(vm.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
-                message.state = MMessageState.Error;
-                Vue.nextTick(() => {
-                    expect(message.$el.classList.contains(STATE_ERROR_CSS)).toBeTruthy();
-                    expect(message.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
+                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
+                expect(element.href.baseVal).toEqual('#chip-info');
+            });
+        });
 
-                    message.state = MMessageState.Success;
-                    Vue.nextTick(() => {
-                        expect(message.$el.classList.contains(STATE_SUCCESS_CSS)).toBeTruthy();
-                        expect(message.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
-                    });
-                });
+        it('warning', () => {
+            (vm as any).state = MMessageState.Warning;
+            Vue.nextTick(() => {
+                expect(vm.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_WARNING_CSS)).toBeTruthy();
+                expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
+
+                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
+                expect(element.href.baseVal).toEqual('#chip-warning');
+            });
+        });
+
+        it('error', () => {
+            (vm as any).state = MMessageState.Error;
+            Vue.nextTick(() => {
+                expect(vm.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeTruthy();
+                expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
+
+                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
+                expect(element.href.baseVal).toEqual('#chip-error');
+            });
+        });
+
+        it('success', () => {
+            (vm as any).state = MMessageState.Success;
+            Vue.nextTick(() => {
+                expect(vm.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
+                expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeTruthy();
+
+                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
+                expect(element.href.baseVal).toEqual('#chip-check');
             });
         });
     });
 
-    it('skin prop', () => {
-        expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
+    describe('skin prop', () => {
+        beforeEach(() => {
+            message = new MMessage().$mount();
+        });
 
-        message.skin = MMessageSkin.Light;
-        Vue.nextTick(() => {
-            expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
-            expect(message.$el.classList.contains(SKIN_REGULAR_CSS)).toBeFalsy();
+        it('light', () => {
+            message.skin = MMessageSkin.Light;
+            Vue.nextTick(() => {
+                expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
+                expect(message.$el.classList.contains(SKIN_REGULAR_CSS)).toBeFalsy();
+            });
+        });
 
+        it('regular', () => {
             message.skin = MMessageSkin.Regular;
             Vue.nextTick(() => {
-                expect(message.$el.classList.contains(SKIN_REGULAR_CSS)).toBeTruthy();
                 expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
+                expect(message.$el.classList.contains(SKIN_REGULAR_CSS)).toBeTruthy();
             });
         });
     });
@@ -117,7 +168,7 @@ describe('message', () => {
             },
             template: `
             <div>
-                <m-message ref="a" :icon="false" :closeButton="hasCloseButton">Consequat ut proident est ullamco consequat ullamco.</m-message>
+                <m-message ref="a" :icon="false" :close-button="hasCloseButton">Consequat ut proident est ullamco consequat ullamco.</m-message>
             </div>`,
             methods: {
             }
@@ -126,50 +177,96 @@ describe('message', () => {
         let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector('svg');
         let body: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-message__body');
         expect(icon).toBeTruthy();
+        expect(body).toBeTruthy();
         if (body) {
             expect(body.classList.contains(CLOSE_BUTTON_CSS)).toBeTruthy();
         }
 
         (vm as any).hasCloseButton = false;
         Vue.nextTick(() => {
-            let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector('svg');
-            let body: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-message__body');
+            icon = (vm.$refs.a as Vue).$el.querySelector('svg');
+            body = (vm.$refs.a as Vue).$el.querySelector('.m-message__body');
             expect(icon).toBeFalsy();
+            expect(body).toBeTruthy();
             if (body) {
                 expect(body.classList.contains(CLOSE_BUTTON_CSS)).toBeFalsy();
             }
         });
     });
 
-    it('visible prop', () => {
+    describe('visible prop', () => {
+        let vm: Vue;
+        beforeEach(() => {
+            vm = new Vue({
+                data: {
+                    isVisible: true
+                },
+                template: `
+            <div>
+                <m-message ref="a" :visible="isVisible">Consequat ut proident est ullamco consequat ullamco.</m-message>
+            </div>`
+            }).$mount();
+        });
+
+        it('standard', () => {
+            expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+
+            (vm as any).isVisible = false;
+            Vue.nextTick(() => {
+                expect(vm.$el.querySelector('.m-message')).toBeFalsy();
+
+                (vm as any).isVisible = undefined;
+
+                Vue.nextTick(() => {
+                    expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+                });
+            });
+        });
+
+        it('with close no sync', () => {
+            expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+
+            let closeButton: HTMLElement = vm.$el.querySelector('button') as HTMLElement;
+            expect(closeButton).toBeTruthy();
+            closeButton.click();
+
+            Vue.nextTick(() => {
+                expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+            });
+        });
+    });
+
+    it('sync', () => {
         let vm = new Vue({
             data: {
                 isVisible: true
             },
             template: `
             <div>
-                <m-message ref="a" :visible="isVisible">Consequat ut proident est ullamco consequat ullamco.</m-message>
-            </div>`,
-            methods: {
-            }
+                <m-message ref="a" :visible.sync="isVisible">Consequat ut proident est ullamco consequat ullamco.</m-message>
+            </div>`
         }).$mount();
 
-        let message: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-message__wrap');
-        expect(message).toBeTruthy();
+        let closeButton: HTMLElement = vm.$el.querySelector('button') as HTMLElement;
+        expect(closeButton).toBeTruthy();
+        closeButton.click();
 
-        (vm as any).isVisible = false;
         Vue.nextTick(() => {
-            let message: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-message__wrap');
-            expect(message).toBeFalsy();
+            expect((vm as any).isVisible).toEqual(false);
+
+            // reset to default value
+            (vm as any).isVisible = undefined;
+
+            Vue.nextTick(() => {
+                expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+            });
         });
     });
 
     it('close button event', () => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
-            template: `
-                <m-message @close="onClick($event)">Consequat ut proident est ullamco consequat ullamco.</m-message>
-            `,
+            template: `<m-message @close="onClick($event)">Consequat ut proident est ullamco consequat ullamco.</m-message>`,
             methods: {
                 onClick: clickSpy
             }
@@ -186,4 +283,13 @@ describe('message', () => {
         });
     });
 
+    it('text content', () => {
+        let vm = new Vue({
+            template: `<m-message>Message</m-message>`
+        }).$mount();
+
+        let element: HTMLElement = vm.$el.querySelector('.m-message__body__content') as HTMLElement;
+        expect(element).toBeTruthy();
+        expect(element.textContent).toEqual('Message');
+    });
 });

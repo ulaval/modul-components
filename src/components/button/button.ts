@@ -75,7 +75,7 @@ export class MButton extends Vue {
     }
 
     private get isSkinPrimary(): boolean {
-        return this.skin != MButtonSkin.Secondary;
+        return this.skin == MButtonSkin.Primary;
     }
 
     private get isSkinSecondary(): boolean {
@@ -105,6 +105,7 @@ export class MButton extends Vue {
 
 const ButtonPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(BUTTON_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(SpinnerPlugin);
         v.component(BUTTON_NAME, MButton);

@@ -20,6 +20,7 @@ export enum MSpinnerSize {
     Small = 'small'
 }
 
+export const MODAL_WARN: string = 'Change of property "modal" is not supported';
 const SPINNER_ID: string = 'MSpinner';
 
 @WithRender
@@ -53,9 +54,14 @@ export class MSpinner extends ModulVue {
     public modal: boolean;
 
     private spinnerId: string = SPINNER_ID + '-' + uuid.generate();
-    private portalTargetEl: HTMLElement | undefined = undefined;
+    private portalTargetEl: HTMLElement | undefined = {} as HTMLElement; // initialized to be responsive
 
+    private initialized: boolean = false; // seems to be necessary since $refs are not responsive
     private visible: boolean = false;
+
+    protected created(): void {
+        this.portalTargetEl = undefined;
+    }
 
     protected beforeDestroy(): void {
         if (this.modal) {
@@ -66,6 +72,18 @@ export class MSpinner extends ModulVue {
         }
     }
 
+    @Watch('modal')
+    private onModalChange(value: boolean): void {
+        console.warn(`<${SPINNER_NAME}>: ${MODAL_WARN}`);
+        if (!value) {
+            this.removeBackdrop();
+        }
+    }
+
+    private get spinnerElement(): HTMLElement | undefined {
+        return this.modal ? this.portalTargetEl : this.$refs.spinnerContainer as HTMLElement;
+    }
+
     private get hasTitle(): boolean {
         return !!this.title;
     }
@@ -74,27 +92,28 @@ export class MSpinner extends ModulVue {
         return !!this.description;
     }
 
-    private onBeforeEnter(): void {
-        let el: HTMLElement = document.getElementById(this.spinnerId) as HTMLElement;
-        if (this.modal && !el) {
+    private onEnter(): void {
+        if (!this.portalTargetEl && this.modal) {
             let element: HTMLElement = document.createElement('div');
             element.setAttribute('id', this.spinnerId);
             document.body.appendChild(element);
-        }
-    }
-
-    private onEnter(): void {
-        if (!this.portalTargetEl && this.modal) {
             this.portalTargetEl = document.getElementById(this.spinnerId) as HTMLElement;
             this.$modul.pushElement(this.portalTargetEl, true, false);
             this.portalTargetEl.style.position = 'absolute';
         }
+        this.initialized = true;
         this.visible = true;
     }
 
     private onLeave(): void {
         this.visible = false;
-        if (this.modal && this.portalTargetEl) {
+        if (this.modal) {
+            this.removeBackdrop();
+        }
+    }
+
+    private removeBackdrop(): void {
+        if (this.portalTargetEl) {
             this.$modul.popElement(this.portalTargetEl, true, false);
             this.portalTargetEl.style.position = '';
             this.portalTargetEl = undefined;
@@ -104,6 +123,7 @@ export class MSpinner extends ModulVue {
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(SPINNER_NAME, 'plugin.install');
         v.use(PortalPlugin);
         v.use(ModulPlugin);
         v.component(SPINNER_NAME, MSpinner);

@@ -4,7 +4,7 @@ import PanelPlugin, { MPanel, MPanelSkin } from './panel';
 
 const SKIN_LIGHT_CSS: string = 'm--is-skin-light';
 const SKIN_DARK_CSS: string = 'm--is-skin-dark';
-const HAS_HIGHLIGHTING_BORDER_CSS: string = 'm--has-highlighting-Border';
+const HAS_HIGHLIGHTING_BORDER_CSS: string = 'm--has-highlighting-border';
 const NO_SHADOW_CSS: string = 'm--no-shadow';
 const NO_BORDER_CSS: string = 'm--no-border';
 const NO_PADDING_CSS: string = 'm--no-padding';
@@ -20,8 +20,15 @@ describe('MPanelSkin', () => {
 
 describe('panel', () => {
     beforeEach(() => {
+        spyOn(console, 'error');
         Vue.use(PanelPlugin);
         panel = new MPanel().$mount();
+    });
+
+    afterEach(() => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
     });
 
     it('css class for panel are not present', () => {
@@ -46,17 +53,12 @@ describe('panel', () => {
         });
     });
 
-    it('highlightingBorder prop', () => {
+    it('highlighting-border prop', () => {
         expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeTruthy();
 
         panel.highlightingBorder = false;
         Vue.nextTick(() => {
             expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeFalsy();
-
-            panel.highlightingBorder = true;
-            Vue.nextTick(() => {
-                expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeTruthy();
-            });
         });
     });
 
@@ -66,11 +68,6 @@ describe('panel', () => {
         panel.shadow = false;
         Vue.nextTick(() => {
             expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeTruthy();
-
-            panel.shadow = true;
-            Vue.nextTick(() => {
-                expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
-            });
         });
     });
 
@@ -80,11 +77,6 @@ describe('panel', () => {
         panel.border = false;
         Vue.nextTick(() => {
             expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeTruthy();
-
-            panel.border = true;
-            Vue.nextTick(() => {
-                expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
-            });
         });
     });
 
