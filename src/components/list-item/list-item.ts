@@ -23,13 +23,7 @@ export class MListItem extends Vue {
     }
 
     private get isWaiting() {
-        if (this.disabled === true && this.waiting === true) {
-            return false;
-        } else if ( this.waiting === true) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.waiting && !this.disabled;
     }
 
 }

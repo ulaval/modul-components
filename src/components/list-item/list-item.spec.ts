@@ -107,11 +107,13 @@ describe('list-item', () => {
 
             let spinner: Element | null = vm.$el.querySelector('.m-spinner');
             expect(spinner).toBeTruthy();
+            expect(vm.$el.classList.contains(WAITING_CSS)).toBeTruthy();
 
             (vm as any).disabled = true;
             Vue.nextTick(() => {
                 let spinner = vm.$el.querySelector('.m-spinner');
                 expect(spinner).toBeFalsy();
+                expect(vm.$el.classList.contains(WAITING_CSS)).toBeFalsy();
             });
         });
     });
