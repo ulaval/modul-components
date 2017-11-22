@@ -1,17 +1,15 @@
-import { PluginObject } from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './list-item.html?style=./list-item.scss';
 import { LIST_ITEM_NAME } from '../component-names';
-import { TransitionAccordion } from '../../mixins/transition-accordion/transition-accordion';
-import ButtonPlugin from '../button/button';
+import IconButtonPlugin from '../icon-button/icon-button';
 import SpinnerPlugin from '../spinner/spinner';
 import I18nPlugin from '../i18n/i18n';
 
 @WithRender
 @Component
-export class MListItem extends ModulVue {
+export class MListItem extends Vue {
 
     @Prop({ default: true })
     public deleteButton: boolean;
@@ -19,8 +17,6 @@ export class MListItem extends ModulVue {
     public disabled: boolean;
     @Prop()
     public waiting: boolean;
-
-    private visible: boolean = true;
 
     private toDelete(event): void {
         this.$emit('delete', event);
@@ -30,7 +26,8 @@ export class MListItem extends ModulVue {
 
 const ListItemPlugin: PluginObject<any> = {
     install(v, options) {
-        v.use(ButtonPlugin);
+        console.debug(LIST_ITEM_NAME, 'plugin.install');
+        v.use(IconButtonPlugin);
         v.use(SpinnerPlugin);
         v.use(I18nPlugin);
         v.component(LIST_ITEM_NAME, MListItem);
