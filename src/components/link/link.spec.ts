@@ -3,6 +3,7 @@ import '../../utils/polyfills';
 import LinkPlugin, { MLink, MLinkMode, MLinkIconPosition } from './link';
 import Router from 'vue-router';
 import SpritesHelper from '../../../tests/helpers/sprites';
+import LangHelper from '../../../tests/helpers/lang';
 
 const UNVISITED_CSS: string = 'm--is-unvisited';
 const NO_UNDERLINE_CSS: string = 'm--no-underline';
@@ -15,7 +16,6 @@ describe('MLinkMode', () => {
     it('validates enum', () => {
         expect(MLinkMode.Link).toEqual('link');
         expect(MLinkMode.Button).toEqual('button');
-        // expect(MLinkMode.ExternalLink).toEqual('external-link');
         expect(MLinkMode.RouterLink).toEqual('router-link');
     });
 });
@@ -33,7 +33,9 @@ describe('link', () => {
 
     beforeEach(() => {
         spyOn(console, 'error');
+
         Vue.use(SpritesHelper);
+        Vue.use(LangHelper);
         Vue.use(Router);
         Vue.use(LinkPlugin);
 
@@ -47,7 +49,9 @@ describe('link', () => {
     });
 
     afterEach(() => {
-        expect(console.error).not.toHaveBeenCalled();
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
     });
 
     describe('css class for router-link are not present', () => {

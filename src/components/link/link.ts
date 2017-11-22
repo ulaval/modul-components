@@ -5,6 +5,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './link.html?style=./link.scss';
 import { LINK_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
+import I18nPlugin from '../i18n/i18n';
 
 export enum MLinkMode {
     RouterLink = 'router-link',
@@ -121,6 +122,7 @@ const LinkPlugin: PluginObject<any> = {
     install(v, options) {
         console.debug(LINK_NAME, 'plugin.install');
         v.use(IconPlugin);
+        v.use(I18nPlugin);
         v.component(LINK_NAME, MLink);
     }
 };
