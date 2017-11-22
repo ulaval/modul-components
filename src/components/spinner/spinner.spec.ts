@@ -239,10 +239,7 @@ describe('spinner', () => {
                     modal: false,
                     visible: true
                 },
-                template: `
-                <div>
-                    <m-spinner :modal="modal" v-show="visible"></m-spinner>
-                </div>`
+                template: `<m-spinner :modal="modal" v-show="visible"></m-spinner>`
             }).$mount();
 
             Vue.nextTick(() => {
@@ -267,10 +264,7 @@ describe('spinner', () => {
                     modal: false,
                     visible: false
                 },
-                template: `
-                <div>
-                    <m-spinner :modal="modal" v-if="visible"></m-spinner>
-                </div>`
+                template: `<m-spinner :modal="modal" v-if="visible"></m-spinner>`
             }).$mount();
 
             Vue.nextTick(() => {
@@ -293,10 +287,7 @@ describe('spinner', () => {
                 data: {
                     modal: true
                 },
-                template: `
-                <div>
-                    <m-spinner :modal="modal"></m-spinner>
-                </div>`
+                template: `<m-spinner :modal="modal"></m-spinner>`
             }).$mount();
 
             let wrap: Element | null = document.body.querySelector('.m-spinner__wrap');

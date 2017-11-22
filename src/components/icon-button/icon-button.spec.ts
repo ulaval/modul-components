@@ -4,15 +4,7 @@ import IconButtonPlugin, { MIconButton, MIconButtonSkin } from './icon-button';
 import { MIcon } from '../icon/icon';
 import SpritesHelper from '../../../tests/helpers/sprites';
 
-const SKIN_LIGHT_CSS: string = 'm--is-skin-light';
-const SKIN_DARK_CSS: string = 'm--is-skin-dark';
-const SKIN_PRIMARY_CSS: string = 'm--is-skin-primary';
-const SKIN_SECONDARY_CSS: string = 'm--is-skin-secondary';
-const STATE_DISABLED_CSS: string = 'm--is-disabled';
-
-const ICON_BUTTON_CLASS: string = '.m-icon-button__icon';
-
-let iconButton: MIconButton;
+export const ICON_BUTTON_CLASS: string = '.m-icon-button';
 
 describe('MButtonSkin', () => {
     it('validates enum', () => {
@@ -24,9 +16,25 @@ describe('MButtonSkin', () => {
 });
 
 describe('icon-button', () => {
+    const SKIN_LIGHT_CSS: string = 'm--is-skin-light';
+    const SKIN_DARK_CSS: string = 'm--is-skin-dark';
+    const SKIN_PRIMARY_CSS: string = 'm--is-skin-primary';
+    const SKIN_SECONDARY_CSS: string = 'm--is-skin-secondary';
+    const STATE_DISABLED_CSS: string = 'm--is-disabled';
+
+    let iconButton: MIconButton;
+
     beforeEach(() => {
+        spyOn(console, 'error');
+
         Vue.use(IconButtonPlugin);
         Vue.use(SpritesHelper);
+    });
+
+    afterEach(() => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
     });
 
     it('css class for icon-button are present', () => {
@@ -124,23 +132,17 @@ describe('icon-button', () => {
     it('click event', () => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
-            template: `
-                <div>
-                    <m-icon-button ref="a" @click="onClick"></m-icon-button>
-                </div>`,
+            template: `<m-icon-button @click="onClick"></m-icon-button>`,
             methods: {
                 onClick: clickSpy
             }
         }).$mount();
 
-        let element: HTMLElement = (vm.$refs.a as Vue).$el;
-
         let e: any = document.createEvent('HTMLEvents');
         e.initEvent('click', true, true);
 
-        if (element) {
-            element.dispatchEvent(e);
-        }
+        vm.$el.dispatchEvent(e);
+
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalledWith(e);
         });

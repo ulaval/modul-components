@@ -21,6 +21,7 @@ describe('MPanelSkin', () => {
 describe('panel', () => {
     beforeEach(() => {
         spyOn(console, 'error');
+
         Vue.use(PanelPlugin);
         panel = new MPanel().$mount();
     });

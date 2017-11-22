@@ -5,7 +5,6 @@ import { SPINNER_CLASS } from '../spinner/spinner.spec';
 import { ICON_CLASS, validateIconSize } from '../icon/icon.spec';
 import SpritesHelper from '../../../tests/helpers/sprites';
 
-
 const SKIN_PRIMARY_CSS: string = 'm--is-skin-primary';
 const SKIN_SECONDARY_CSS: string = 'm--is-skin-secondary';
 const STATE_DISABLED_CSS: string = 'm--is-disabled';
@@ -213,15 +212,10 @@ describe('button', () => {
 
         it('with', () => {
             let vm = new Vue({
-                template: `
-                <div>
-                    <m-button ref="a"><template slot="more-info">Label</template></m-button>
-                </div>`
+                template: `<m-button><template slot="more-info">Label</template></m-button>`
             }).$mount();
 
-            let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
-            expect(element.querySelector(moreInfoClass)).toBeTruthy();
+            expect(vm.$el.querySelector(moreInfoClass)).toBeTruthy();
         });
 
         it('without', () => {
@@ -231,15 +225,10 @@ describe('button', () => {
 
     it('text rendering', () => {
         let vm = new Vue({
-            template: `
-                <div>
-                    <m-button ref="a">Label</m-button>
-                </div>`
+            template: `<m-button>Label</m-button>`
         }).$mount();
 
-        let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
-        let textSlot: Element | null = element.querySelector('.m-button__text');
+        let textSlot: Element | null = vm.$el.querySelector('.m-button__text');
         expect(textSlot).toBeTruthy();
         if (textSlot) {
             expect(textSlot.textContent).toBeTruthy();
@@ -252,21 +241,16 @@ describe('button', () => {
     it('click event', () => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
-            template: `
-            <div>
-                <m-button ref="a" @click="onClick"></m-button>
-            </div>`,
+            template: `<m-button @click="onClick"></m-button>`,
             methods: {
                 onClick: clickSpy
             }
         }).$mount();
 
-        let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
         let e: any = document.createEvent('HTMLEvents');
         e.initEvent('click', true, true);
 
-        element.dispatchEvent(e);
+        vm.$el.dispatchEvent(e);
 
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalledWith(e);

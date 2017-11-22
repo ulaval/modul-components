@@ -15,13 +15,17 @@ describe('validation-message', () => {
     const MESSAGE_TEXT: string = '.m-validation-message__text';
 
     beforeEach(() => {
+        spyOn(console, 'error');
+
         Vue.use(ValidationMessagePlugin);
         Vue.use(SpritesHelper);
         Vue.use(LangHelper);
     });
 
     afterEach(() => {
-        // do not clear document.html since sprites defaults are loaded in the DOM
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
     });
 
     it('displays nothing if no message', () => {
@@ -93,17 +97,12 @@ describe('validation-message', () => {
                     valid: 'valid',
                     helper: 'help'
                 },
-                template: `
-                <div>
-                    <m-validation-message ref="a" :error-message="error" :valid-message="valid" :helper-message="helper" ></m-validation-message>
-                </div>`
+                template: `<m-validation-message :error-message="error" :valid-message="valid" :helper-message="helper" ></m-validation-message>`
             }).$mount();
         });
 
         it('error message overrides helper & valid messages', () => {
-            let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
-            let text: Element | null = element.querySelector(MESSAGE_TEXT);
+            let text: Element | null = vm.$el.querySelector(MESSAGE_TEXT);
             expect(text).toBeTruthy();
             if (text) {
                 expect(text.textContent).toBe('error');
@@ -111,7 +110,7 @@ describe('validation-message', () => {
 
             (vm as any).valid = undefined;
             Vue.nextTick(() => {
-                let text: Element | null = element.querySelector(MESSAGE_TEXT);
+                let text: Element | null = vm.$el.querySelector(MESSAGE_TEXT);
                 expect(text).toBeTruthy();
                 if (text) {
                     expect(text.textContent).toBe('error');
@@ -122,8 +121,7 @@ describe('validation-message', () => {
         it('valid message overrides helper message', () => {
             (vm as any).error = undefined;
             Vue.nextTick(() => {
-                let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-                let text: Element | null = element.querySelector(MESSAGE_TEXT);
+                let text: Element | null = vm.$el.querySelector(MESSAGE_TEXT);
                 expect(text).toBeTruthy();
                 if (text) {
                     expect(text.textContent).toBe('valid');
@@ -145,7 +143,7 @@ describe('validation-message', () => {
                 },
                 template: `
                     <div>
-                        <m-validation-message ref="a" :disabled="disabled" :waiting="waiting" :error-message="error" :valid-message="valid" :helper-message="helper" ></m-validation-message>
+                        <m-validation-message :disabled="disabled" :waiting="waiting" :error-message="error" :valid-message="valid" :helper-message="helper" ></m-validation-message>
                     </div>`
             }).$mount();
         });
@@ -176,21 +174,16 @@ describe('validation-message', () => {
     it('click event', () => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
-            template: `
-            <div>
-                <m-validation-message ref="a" @click="onClick" helper-message="helper" ></m-validation-message>
-            </div>`,
+            template: `<m-validation-message ref="a" @click="onClick" helper-message="helper" ></m-validation-message>`,
             methods: {
                 onClick: clickSpy
             }
         }).$mount();
 
-        let element: HTMLElement = (vm.$refs.a as Vue).$el as HTMLElement;
-
         let e: any = document.createEvent('HTMLEvents');
         e.initEvent('click', true, true);
 
-        element.dispatchEvent(e);
+        vm.$el.dispatchEvent(e);
 
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalledWith(e);

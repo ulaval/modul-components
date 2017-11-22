@@ -10,7 +10,7 @@ Function.prototype.bind = require("function-bind");
 
 // require all test files (files that ends with .spec.js)
 // var testsContext = crequire.context("../src", true, /\.spec$/);
-var testsContext = crequire.context("../src", true, /\.spec$/);
+var testsContext = crequire.context("../src", true, /(icon|spinner|button|checkbox|i18n|icon-button|link|list-item|message|panel|radio|radio-group|validation-message)\.spec$/);
 testsContext.keys().forEach(testsContext);
 
 // require all src files except main.js and *.d.ts for coverage.
