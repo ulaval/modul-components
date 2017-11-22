@@ -83,6 +83,9 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_WARNING_CSS)).toBeTruthy();
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
+
+                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
+                expect(element.href.baseVal).toEqual('#chip-warning');
             });
         });
 
@@ -93,6 +96,9 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeTruthy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
+
+                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
+                expect(element.href.baseVal).toEqual('#chip-error');
             });
         });
 
@@ -103,6 +109,9 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_WARNING_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeTruthy();
+
+                let element: SVGUseElement = vm.$el.querySelector('use') as SVGUseElement;
+                expect(element.href.baseVal).toEqual('#chip-check');
             });
         });
     });
