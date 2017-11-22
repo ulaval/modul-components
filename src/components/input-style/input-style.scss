@@ -306,6 +306,8 @@ $m-input-style--padding: 4px !default;
             border-top: 1px solid $m-color--border;
             border-right: 1px solid $m-color--border;
             border-left: 1px solid $m-color--border;
+
+            @include m-scrollbar();
         }
 
         &__left {

@@ -1,0 +1,12 @@
+<li class="m-steppers-item" :class="{ 'm--is-last': last,
+            'm--is-completed' : isCompleted,
+            'm--is-in-progress' : isInProgress,
+            'm--is-error' : isError,
+            'm--is-disabled' : isDisabled}">
+    <div class="m-steppers-item__icon">
+        <m-icon :name="iconName" :svg-title="iconTitle"></m-icon>
+    </div>
+    <div class="m-steppers-item__title">
+        <slot>Choix de programme(s)</slot>
+    </div>
+</li>

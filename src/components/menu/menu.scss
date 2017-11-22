@@ -11,18 +11,6 @@
         max-height: 208px; // magic number
         overflow: auto;
 
-        @include m-scrollbar-ie();
-
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
-
-            &-track-piece {
-                @include m-scrollbar-track-piece();
-            }
-
-            &-thumb {
-                @include m-scrollbar-thumb();
-            }
-        }
+        @include m-scrollbar();
     }
 }
