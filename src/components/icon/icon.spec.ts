@@ -3,16 +3,31 @@ import '../../utils/polyfills';
 import IconPlugin, { MIcon } from './icon';
 import SpritesHelper from '../../../tests/helpers/sprites';
 
-const ICON_DEFAULT: string = 'default';
-const ICON_OPTIONS: string = 'options';
+export const ICON_CLASS: string = '.m-icon';
 
-let icon: MIcon;
+export function validateIconSize(el: Element, value: string): void {
+    expect(el.getAttribute('width')).toEqual(value);
+    expect(el.getAttribute('height')).toEqual(value);
+}
 
 describe('icon', () => {
+    const ICON_DEFAULT: string = 'default';
+    const ICON_OPTIONS: string = 'options';
+
+    let icon: MIcon;
+
     beforeEach(() => {
+        spyOn(console, 'error');
+
         Vue.use(IconPlugin);
         Vue.use(SpritesHelper);
         icon = new MIcon().$mount();
+    });
+
+    afterEach(() => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+        });
     });
 
     it('name prop', () => {
@@ -20,18 +35,18 @@ describe('icon', () => {
         expect(use).toBeTruthy();
 
         if (use) {
-            expect(use.href['baseVal']).toEqual('#' + ICON_DEFAULT);
+            expect(use.href.baseVal).toEqual('#' + ICON_DEFAULT);
         }
 
         icon.name = ICON_OPTIONS;
         Vue.nextTick(() => {
             if (use) {
-                expect(use.href['baseVal']).toEqual('#' + ICON_OPTIONS);
+                expect(use.href.baseVal).toEqual('#' + ICON_OPTIONS);
             }
             icon.name = 'default';
             Vue.nextTick(() => {
                 if (use) {
-                    expect(use.href['baseVal']).toEqual('#' + ICON_DEFAULT);
+                    expect(use.href.baseVal).toEqual('#' + ICON_DEFAULT);
                 }
             });
         });
@@ -50,10 +65,14 @@ describe('icon', () => {
     });
 
     it('size prop', () => {
-        expect(icon.$el.getAttribute('width')).toEqual('1em');
+        validateIconSize(icon.$el, '1em');
+        // expect(icon.$el.getAttribute('width')).toEqual('1em');
+        // expect(icon.$el.getAttribute('height')).toEqual('1em');
         icon.size = '20px';
         Vue.nextTick(() => {
-            expect(icon.$el.getAttribute('width')).toEqual('20px');
+            validateIconSize(icon.$el, '20px');
+            // expect(icon.$el.getAttribute('width')).toEqual('20px');
+            // expect(icon.$el.getAttribute('height')).toEqual('20px');
         });
     });
 
