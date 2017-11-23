@@ -4,29 +4,32 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './steppers.html?style=./steppers.scss';
 import { STEPPERS_NAME } from '../component-names';
-import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
-import ElementQueries from 'css-element-queries/src/ElementQueries';
-import IconPlugin from '../icon/icon';
-import LinkPlugin from '../link/link';
+import NavBarItemPlugin, { BaseSteppers, MSteppersItemState } from '../steppers-item/steppers-item';
 
 @WithRender
-@Component({
-    mixins: [
-        TransitionAccordion
-    ]
-})
-export class MSteppers extends ModulVue {
-    @Prop()
-    public last: boolean;
+@Component
+export class MSteppers extends BaseSteppers {
 
-    private internalOpen: boolean = false;
+    public setLineWidth(): void {
+        let lineEL: HTMLElement = this.$refs.line as HTMLElement;
+        this.$children.forEach((child) => {
+            if (child.$props.state == MSteppersItemState.InProgress) {
+                let parentWidth = this.$el.clientWidth;
+                let childWidth = child.$el.offsetLeft;
+                let width = (childWidth / parentWidth) * 100;
+                lineEL.style.width = width + '%';
+            }
+        });
+    }
 
+    protected mounted() {
+        this.setLineWidth();
+        this.$modul.event.$on('resizeDone', this.setLineWidth);
+    }
 }
 
 const SteppersPlugin: PluginObject<any> = {
     install(v, options) {
-        v.use(IconPlugin);
-        v.use(LinkPlugin);
         v.component(STEPPERS_NAME, MSteppers);
     }
 };

@@ -1,13 +1,32 @@
 @import 'abstracts/variables';
-$m-step--icon--size: 44px;
-$m-step--icon--size-s: 34px;
-$m-step--badge--size: 14px;
-$m-step--badge--size-s: 10px;
+$m-steppers-item--circle-size: 30px;
+$m-steppers-item--max-width: 90px;
 
 .m-steppers {
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: $m-padding 0;
     margin: 0;
-    background-color: $m-color--grey-lighter;
+
+    &::before {
+        position: absolute;
+        top: calc(#{$m-padding} + (#{$m-steppers-item--circle-size} / 2));
+        left: calc(#{$m-steppers-item--max-width} / 2);
+        right: calc(#{$m-steppers-item--max-width} / 2);
+        content: '';
+        height: 2px;
+        background: $m-color--grey-darker;
+    }
+
+    &__line {
+        position: absolute;
+        top: calc(#{$m-padding} + (#{$m-steppers-item--circle-size} / 2));
+        left: calc(#{$m-steppers-item--max-width} / 2);
+        width: 0;
+        content: '';
+        height: 2px;
+        background: $m-color--ul-blue;
+        // transition: width $m-transition-duration--xl;
+    }
 }

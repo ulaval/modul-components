@@ -3,10 +3,10 @@
             'm--is-in-progress' : isInProgress,
             'm--is-error' : isError,
             'm--is-disabled' : isDisabled}">
-    <div class="m-steppers-item__icon">
+    <div class="m-steppers-item__icon" @click="onClick">
         <m-icon :name="iconName" :svg-title="iconTitle"></m-icon>
     </div>
-    <div class="m-steppers-item__title">
-        <slot>Choix de programme(s)</slot>
+    <div :tabindex="isTabIndex" class="m-steppers-item__title" @click="onClick()" ref="title">
+        <slot></slot>
     </div>
 </li>

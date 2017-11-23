@@ -4,10 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './steppers-item.html?style=./steppers-item.scss';
 import { STEPPERS_ITEM_NAME } from '../component-names';
-import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
-import ElementQueries from 'css-element-queries/src/ElementQueries';
 import IconPlugin from '../icon/icon';
-import LinkPlugin from '../link/link';
 
 export enum MSteppersItemState {
     Completed = 'completed',
@@ -15,12 +12,12 @@ export enum MSteppersItemState {
     Disabled = 'disabled'
 }
 
+export abstract class BaseSteppers extends ModulVue {
+    abstract setLineWidth(): void;
+}
+
 @WithRender
-@Component({
-    mixins: [
-        TransitionAccordion
-    ]
-})
+@Component
 export class MSteppersItem extends ModulVue {
     @Prop({
         default: MSteppersItemState.Disabled,
@@ -29,26 +26,41 @@ export class MSteppersItem extends ModulVue {
             value == MSteppersItemState.InProgress ||
             value == MSteppersItemState.Disabled
     })
-    public status: MSteppersItemState;
-    @Prop({ default: 'default' })
+    public state: MSteppersItemState;
+    @Prop()
     public iconName: string;
     @Prop()
     public iconTitle: string;
-    @Prop()
-    public last: boolean;
 
-    private internalOpen: boolean = false;
+    @Watch('state')
+    private stateChanged(value?: string[]): void {
+        if (this.$parent instanceof BaseSteppers) {
+            this.$parent.setLineWidth();
+        }
+        this.$emit('update:value', this.state);
+    }
 
     private get isCompleted() {
-        return this.status === MSteppersItemState.Completed;
+        return this.state === MSteppersItemState.Completed;
     }
 
     private get isInProgress() {
-        return this.status === MSteppersItemState.InProgress;
+        return this.state === MSteppersItemState.InProgress;
     }
 
     private get isDisabled() {
-        return this.status === MSteppersItemState.Disabled;
+        return this.state === MSteppersItemState.Disabled;
+    }
+
+    private get isTabIndex() {
+        return this.state !== MSteppersItemState.Disabled ? 0 : -1;
+    }
+
+    private onClick(event: Event): void {
+        if (this.state != MSteppersItemState.Disabled) {
+            this.$emit('click', event);
+            (this.$refs.title as HTMLElement).blur();
+        }
     }
 
 }
@@ -56,7 +68,6 @@ export class MSteppersItem extends ModulVue {
 const SteppersItemPlugin: PluginObject<any> = {
     install(v, options) {
         v.use(IconPlugin);
-        v.use(LinkPlugin);
         v.component(STEPPERS_ITEM_NAME, MSteppersItem);
     }
 };
