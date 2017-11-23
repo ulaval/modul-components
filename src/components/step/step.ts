@@ -76,14 +76,6 @@ export class MStep extends ModulVue {
         }
     }
 
-    private closeStep(): void {
-        if (this.propOpen) {
-            this.as<TransitionAccordionMixin>().accordionAnim = true;
-            this.propOpen = false;
-            this.$emit('closeStep');
-        }
-    }
-
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
