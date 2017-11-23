@@ -1,6 +1,6 @@
 {
-    "tag": "m-button",
-    "name": "m-button-meta:name",
+    "tag": "m-icon-button",
+    "name": "m-icon-button-meta:name",
     "production": false,
     "attributes": {
         "skin": {
