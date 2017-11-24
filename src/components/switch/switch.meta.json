@@ -1,7 +1,7 @@
 {
     "tag": "m-switch",
     "name": "m-switch-meta:name",
-    "production": true,
+    "production": false,
     "attributes": {
         "value": {
             "type": "boolean",

@@ -1,7 +1,7 @@
 {
     "tag": "m-step",
     "name": "m-step-meta:name",
-    "production": true,
+    "production": false,
     "attributes": {
         "maxlength": {
             "type": "number"
