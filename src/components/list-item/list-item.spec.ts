@@ -53,18 +53,18 @@ describe('list-item', () => {
         expect(element.textContent).toEqual('item 1');
     });
 
-    it('delete-button prop', () => {
+    it('icon-name prop', () => {
         let vm = new Vue({
             data: {
-                deleteButton: false
+                iconNameTest: ''
             },
-            template: `<m-list-item :delete-button="deleteButton">item 1</m-list-item>`
+            template: `<m-list-item :icon-name="iconNameTest">item 1</m-list-item>`
         }).$mount();
 
         let element: Element | null = vm.$el.querySelector(ICON_BUTTON_CLASS);
         expect(element).toBeFalsy();
 
-        (vm as any).deleteButton = true;
+        (vm as any).iconNameTest = 'chip-error';
         Vue.nextTick(() => {
             element = vm.$el.querySelector(ICON_BUTTON_CLASS);
             expect(element).toBeTruthy();
@@ -77,7 +77,7 @@ describe('list-item', () => {
                 data: {
                     disabled: false
                 },
-                template: `<m-list-item :disabled="disabled">item 1</m-list-item>`
+                template: `<m-list-item icon-name="chip-error" :disabled="disabled">item 1</m-list-item>`
             }).$mount();
 
             let icon: Element | null = vm.$el.querySelector(ICON_BUTTON_CLASS);
@@ -117,7 +117,7 @@ describe('list-item', () => {
             data: {
                 waiting: false
             },
-            template: `<m-list-item :waiting="waiting">item 1</m-list-item>`
+            template: `<m-list-item icon-name="chip-error" :waiting="waiting">item 1</m-list-item>`
         }).$mount();
 
         let icon: Element | null = vm.$el.querySelector(ICON_BUTTON_CLASS);
@@ -138,7 +138,7 @@ describe('list-item', () => {
         list = new MListItem().$mount();
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
-            template: `<m-list-item @delete="onClick($event)">item 1</m-list-item>`,
+            template: `<m-list-item icon-name="chip-error" @click="onClick($event)">item 1</m-list-item>`,
             methods: {
                 onClick: clickSpy
             }
