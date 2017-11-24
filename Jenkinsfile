@@ -54,6 +54,9 @@ pipeline {
     }
 
     post {
+        always {
+            sh 'svn status --show-updates'
+        }
         changed {
             echo 'Build status changed'
             step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
