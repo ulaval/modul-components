@@ -1,7 +1,7 @@
 {
     "tag": "m-dialog",
     "name": "m-dialog-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
         "size": {
             "type": "string",
