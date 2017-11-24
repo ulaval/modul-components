@@ -11,15 +11,21 @@ import I18nPlugin from '../i18n/i18n';
 @Component
 export class MListItem extends Vue {
 
-    @Prop({ default: true })
-    public deleteButton: boolean;
+    @Prop()
+    public iconName: string;
+    @Prop()
+    public iconHiddenText: string;
     @Prop()
     public disabled: boolean;
     @Prop()
     public waiting: boolean;
 
-    private toDelete(event): void {
-        this.$emit('delete', event);
+    private click(event): void {
+        this.$emit('click', event);
+    }
+
+    private get hasIcon() {
+        return this.iconName ? true : false;
     }
 
     private get isWaiting() {
