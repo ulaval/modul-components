@@ -22,38 +22,6 @@
     }
 }
 
-// @include m-scrollbar-ie();
-
-//         &::-webkit-scrollbar {
-//             @include m-scrollbar();
-
-//             &-track-piece {
-//                 @include m-scrollbar-track-piece();
-//             }
-
-//             &-thumb {
-//                 @include m-scrollbar-thumb();
-//             }
-//         }
-
-// @mixin m-scrollbar-ie() {
-//     scrollbar-face-color: $m-color--scrollbar;
-//     scrollbar-shadow-color: $m-color--scrollbar;
-//     scrollbar-highlight-color: $m-color--white;
-//     // scrollbar-3dlight-color: $m-color--white;
-//     scrollbar-darkshadow-color: $m-color--white;
-//     scrollbar-track-color: $m-color--white;
-//     scrollbar-arrow-color: $m-color--scrollbar;
-// }
-
-// @mixin m-scrollbar-track-piece() {
-//     background: $m-color--scrollbar-light;
-// }
-
-// @mixin m-scrollbar-thumb() {
-//     background: $m-color--scrollbar;
-// }
-
 @mixin m-visually-hidden() {
     position: absolute;
     overflow: hidden;
