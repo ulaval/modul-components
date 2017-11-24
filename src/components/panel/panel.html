@@ -3,7 +3,8 @@
                    'm--is-skin-dark': darkSkin,
                    'm--has-highlighting-border': highlightingBorder,
                    'm--no-shadow': !shadow,
-                   'm--no-border': !border }">
+                   'm--no-border': !border }"
+            @click="onClick">
     <header class="m-panel__header" :class="{ 'm--no-padding': !hasPaddingHeader, 'm--is-right-content-alone': !hasHeaderSlot }" v-if="hasHeader">
         <div class="m-panel__header__content"><slot name="header"></slot></div>
         <div class="m-panel__header__content-right" v-if="hasHeaderRightContentSlot">

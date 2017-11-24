@@ -95,6 +95,10 @@ export class MPanel extends Vue {
     private get hasPaddingFooter(): boolean {
         return this.paddingFooter && this.padding;
     }
+
+    private onClick(): void {
+        this.$emit('click');
+    }
 }
 
 const PanelPlugin: PluginObject<any> = {

@@ -4,9 +4,9 @@
             <slot></slot>
         </div>
         <template v-if="!disabled">
-            <div v-if="deleteButton && !isWaiting" class="m-list-item__button">
-                <m-icon-button icon-name="chip-error" @click="toDelete($event)">
-                    <m-i18n k="m-list-item:delete"></m-i18n>
+            <div v-if="hasIcon && !isWaiting" class="m-list-item__button">
+                <m-icon-button :icon-name="iconName" @click="click($event)">
+                    <m-i18n :k="iconHiddenText"></m-i18n>
                 </m-icon-button>
             </div>
             <div v-else-if="isWaiting" class="m-list-item__button">

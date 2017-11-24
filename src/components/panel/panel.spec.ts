@@ -221,4 +221,7 @@ describe('panel', () => {
         });
     });
 
+    it('click event', () => {
+        console.log('TODO');
+    });
 });
