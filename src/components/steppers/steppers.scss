@@ -3,32 +3,30 @@ $m-steppers-item--circle-size: 30px;
 $m-steppers-item--max-width: 90px;
 
 .m-steppers {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    padding: $m-padding 0;
-    margin: 0;
+    &__wrap {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
 
-    &::before {
-        position: absolute;
-        top: calc(#{$m-padding} + (#{$m-steppers-item--circle-size} / 2));
-        // top: calc(#{$m-steppers-item--circle-size} / 2);
-        left: calc(#{$m-steppers-item--max-width} / 2);
-        right: calc(#{$m-steppers-item--max-width} / 2);
-        content: '';
-        height: 2px;
-        background: $m-color--grey-darker;
+        &::before {
+            position: absolute;
+            top: calc(#{$m-steppers-item--circle-size} / 2);
+            left: calc(#{$m-steppers-item--max-width} / 2);
+            right: calc(#{$m-steppers-item--max-width} / 2);
+            content: '';
+            height: 2px;
+            background: $m-color--grey-darker;
+        }
     }
 
     &__line {
         position: absolute;
-        top: calc(#{$m-padding} + (#{$m-steppers-item--circle-size} / 2));
-        // top: calc(#{$m-steppers-item--circle-size} / 2);
+        top: calc(#{$m-steppers-item--circle-size} / 2);
         left: calc(#{$m-steppers-item--max-width} / 2);
         width: 0;
         content: '';
         height: 2px;
         background: $m-color--ul-blue;
-        // transition: width $m-transition-duration--xl;
     }
 }

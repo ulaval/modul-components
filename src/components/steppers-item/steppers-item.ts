@@ -53,11 +53,11 @@ export class MSteppersItem extends ModulVue {
     }
 
     private get isTabIndex() {
-        return this.state !== MSteppersItemState.Disabled ? 0 : -1;
+        return this.state === MSteppersItemState.Completed ? 0 : -1;
     }
 
     private onClick(event: Event): void {
-        if (this.state != MSteppersItemState.Disabled) {
+        if (this.state == MSteppersItemState.Completed) {
             this.$emit('click', event);
             (this.$refs.title as HTMLElement).blur();
         }
