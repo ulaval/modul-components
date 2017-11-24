@@ -37,8 +37,7 @@
             "default": false
         },
         "iconName" : {
-            "type": "string",
-            "default": "right-arrow"
+            "type": "string"
         },
         "iconPosition" : {
             "type": "string",
@@ -47,6 +46,14 @@
                 "right"
             ],
             "default": 0
+        },
+        "iconSize" : {
+            "type": "string",
+            "default": "12px"
+        },
+        "disabled" : {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "link.overview",

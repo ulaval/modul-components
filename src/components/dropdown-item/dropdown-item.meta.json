@@ -12,10 +12,6 @@
         "disabled": {
             "type": "boolean",
             "default": false
-        },
-        "noDataDefaultItem": {
-            "type": "boolean",
-            "default": false
         }
     },
     "overview": "dropdown-item.overview",

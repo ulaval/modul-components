@@ -3,8 +3,13 @@
     "name": "m-status-meta:name",
     "production": false,
     "attributes": {
-        "listData": {
-            "type": "object",
+        "status": {
+            "type": "string",
+            "values": [
+                "completed",
+                "pending",
+                "error"
+            ],
             "description": "m-status-meta:states-desc"
         }
     },

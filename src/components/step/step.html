@@ -20,7 +20,7 @@
             <slot name="header"></slot>
         </div>
     </header>
-    <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
+    <transition @enter="accordionEnter" @after-enter="accordionAfterEnter" @leave="accordionLeave">
         <div class="m-step__body" v-if="propOpen">
             <slot></slot>
         </div>

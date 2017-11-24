@@ -1,3 +1,8 @@
+@import
+    'bullet-list',
+    'button',
+    'table';
+
 // ======================================================================
 //  border
 // ======================================================================
@@ -152,19 +157,7 @@
     &--auto,
     &--scroll,
     &--visible {
-        @include m-scrollbar-ie();
-
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
-        }
-
-        &::-webkit-scrollbar-track-piece {
-            @include m-scrollbar-track-piece();
-        }
-
-        &::-webkit-scrollbar-thumb {
-            @include m-scrollbar-thumb();
-        }
+        @include m-scrollbar();
     }
 
     &--auto {
@@ -200,70 +193,6 @@
 }
 
 // ======================================================================
-//  table
-// ======================================================================
-.m-u--table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed; // AEL-33
-
-    th {
-        padding: 0 $m-padding--s $m-margin--s;
-        font-weight: $m-font-weight--bold;
-        color: $m-color--black;
-        border-bottom: 2px solid $m-color--border;
-        text-align: left;
-
-        &:first-child {
-            padding-left: $m-padding;
-        }
-
-        &:last-child {
-            padding-right: $m-padding;
-        }
-    }
-
-    tbody {
-        tr {
-            border-bottom: 1px solid $m-color--border;
-        }
-    }
-
-    td {
-        padding: $m-padding $m-padding--s;
-        margin: 1px 0;
-        vertical-align: top;
-        text-align: left;
-
-        &:first-child {
-            padding-left: $m-padding;
-            text-align: left;
-        }
-
-        &:last-child {
-            padding-right: $m-padding;
-        }
-    }
-
-    &.m--has-option-menu {
-        th,
-        td {
-            &:last-child {
-                padding-left: 0;
-                padding-right: 0;
-                width: 44px;
-                text-align: center;
-            }
-        }
-
-        td {
-            padding: 0 $m-padding--s;
-            vertical-align: middle;
-        }
-    }
-}
-
-// ======================================================================
 //  header (list, table)
 // ======================================================================
 .m-u--header {
@@ -286,7 +215,7 @@
         font-weight: $m-font-weight--bold;
     }
 
-    &.m--has-option-menu {
+    &.m-u-has-menu {
         padding-right: $m-touch-size;
 
         :last-child {
@@ -298,7 +227,7 @@
         }
     }
 
-    &:not(.m--has-option-menu) {
+    &:not(.m-u-has-menu) {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -319,3 +248,4 @@
         }
     }
 }
+

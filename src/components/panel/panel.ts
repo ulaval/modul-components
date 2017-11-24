@@ -18,21 +18,30 @@ const HEADER_RIGHT_CONTENT: string = 'header-right-content';
 export class MPanel extends Vue {
     @Prop({
         default: MPanelSkin.Light,
-        validator: value => value == MPanelSkin.Light || value == MPanelSkin.Dark
+        validator: value =>
+            value == MPanelSkin.Light ||
+            value == MPanelSkin.Dark
     })
     public skin: MPanelSkin;
-    @Prop({ default : true })
+
+    @Prop({ default: true })
     public highlightingBorder: boolean;
+
     @Prop({ default: true })
     public shadow: boolean;
+
     @Prop({ default: true })
     public border: boolean;
+
     @Prop({ default: true })
     public padding: boolean;
+
     @Prop({ default: true })
     public paddingHeader: boolean;
+
     @Prop({ default: true })
     public paddingBody: boolean;
+
     @Prop({ default: true })
     public paddingFooter: boolean;
 
@@ -86,10 +95,15 @@ export class MPanel extends Vue {
     private get hasPaddingFooter(): boolean {
         return this.paddingFooter && this.padding;
     }
+
+    private onClick(): void {
+        this.$emit('click');
+    }
 }
 
 const PanelPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(PANEL_NAME, 'plugin.install');
         v.component(PANEL_NAME, MPanel);
     }
 };

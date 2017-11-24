@@ -1,7 +1,7 @@
-<transition :appear="true" :css="false" @before-enter="onBeforeEnter()" @enter="onEnter()" @leave="onLeave()">
+<transition :appear="true" :css="false" @enter="onEnter()" @leave="onLeave()">
     <div class="m-spinner">
-        <portal :target-el="'#' + spinnerId" v-if="visible">
-            <div class="m-spinner__wrap" :class="{'m--is-processing': modal,
+        <portal :target-el="spinnerElement" v-if="initialized">
+            <div ref="spinnerWrap" class="m-spinner__wrap" :class="{'m--is-processing': modal,
                  'm--is-dark': skin == 'dark',
                  'm--is-light': skin == 'light',
                  'm--is-lighter': skin == 'lighter'}">
@@ -10,6 +10,6 @@
                 <p class="m-spinner__description" v-if="hasDescription">{{ description }}</p>
             </div>
         </portal>
-        <div :id="spinnerId" v-if="!modal"></div>
+        <div ref="spinnerContainer" v-if="!modal"></div>
     </div>
 </transition>

@@ -21,7 +21,9 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     public inline: boolean;
     @Prop({
         default: MRadioPosition.Left,
-        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+        validator: value =>
+            value == MRadioPosition.Left ||
+            value == MRadioPosition.Right
     })
     public position: MRadioPosition;
 

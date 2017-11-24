@@ -24,30 +24,46 @@
             ],
             "default": 6
         },
-        "openOnclick": {
+        "openTrigger": {
+            "type": "MOpenTrigger",
+            "default": "Click"
+        },
+        "closeOnBackdrop": {
             "type": "boolean",
             "default": true
         },
-        "openOnHover": {
+        "focusManagement": {
             "type": "boolean",
-            "default": false
+            "default": true
+        },
+        "width": {
+            "type": "string",
+            "default": "auto"
         },
         "id": {
-            "type": "string",
-            "default": "mPopper"
+            "type": "string"
         },
         "disable": {
             "type": "boolean",
             "default": false
         },
-        "classNamePortalTarget": {
-            "type": "string"
-        },
-        "closeOnClickOutside": {
+        "shadow": {
             "type": "boolean",
             "default": true
         },
-        "focusManagement": {
+        "padding": {
+            "type": "boolean",
+            "default": true
+        },
+        "paddingHeader": {
+            "type": "boolean",
+            "default": true
+        },
+        "paddingBody": {
+            "type": "boolean",
+            "default": true
+        },
+        "paddingFooter": {
             "type": "boolean",
             "default": true
         },
@@ -74,6 +90,10 @@
         },
         "leaveCancelled": {
             "type": "any"
+        },
+        "desktopOnly": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "popup.overview",

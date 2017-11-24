@@ -20,8 +20,6 @@ export class MInputStyle extends ModulVue {
     @Prop({ default: true })
     public empty: boolean;
     @Prop()
-    public textarea: boolean;
-    @Prop()
     public width: string;
     @Prop()
     public iconName: string;

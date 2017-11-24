@@ -1,3 +1,4 @@
+import { ModulVue } from '../../utils/vue/vue';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
@@ -35,7 +36,7 @@ export abstract class BaseAccordionGroup extends Vue {
 @Component({
     mixins: [TransitionAccordion]
 })
-export class MAccordion extends Vue {
+export class MAccordion extends ModulVue {
 
     @Prop()
     public open: boolean;
@@ -87,7 +88,11 @@ export class MAccordion extends Vue {
     }
 
     protected created(): void {
+        this.as<TransitionAccordion>().accordionAnim = false;
         if (this.$parent instanceof BaseAccordionGroup) this.$parent.addAccordion(this.propId, this.open);
+        this.$nextTick(() => {
+            this.as<TransitionAccordion>().accordionAnim = true;
+        });
     }
 
     protected beforeDestroy(): void {

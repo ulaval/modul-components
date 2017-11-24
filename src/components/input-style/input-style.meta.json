@@ -12,6 +12,10 @@
         },
         "empty": {
             "type": "boolean",
+            "default": true
+        },
+        "textarea": {
+            "type": "boolean",
             "default": false
         },
         "width": {
@@ -19,30 +23,6 @@
         },
         "iconName": {
             "type": "string"
-        },
-        "disabled": {
-            "type": "boolean",
-            "default": false
-        },
-        "waiting": {
-            "type": "boolean",
-            "default": false
-        },
-        "error": {
-            "type": "boolean",
-            "default": false
-        },
-        "valid": {
-            "type": "boolean",
-            "default": false
-        },
-        "error-message": {
-            "type": "string",
-            "default": ""
-        },
-        "valid-message": {
-            "type": "string",
-            "default": ""
         }
     },
     "overview": "input-style.overview",

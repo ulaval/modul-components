@@ -20,7 +20,10 @@ export enum MStatusListIconName {
 @Component
 export class MStatus extends Vue {
     @Prop({
-        validator: value => value == MStatusListStates.Completed || value == MStatusListStates.Pending || value == MStatusListStates.Error
+        validator: value =>
+            value == MStatusListStates.Completed ||
+            value == MStatusListStates.Pending ||
+            value == MStatusListStates.Error
     })
     public status: MStatusListStates;
     private statusEnum = MStatusListStates;

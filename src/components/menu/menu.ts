@@ -19,11 +19,28 @@ export enum MOptionsMenuSkin {
 @Component
 export class MOptionsMenu extends ModulVue {
 
-    @Prop({ default: MPopperPlacement.BottomStart })
+    @Prop({
+        default: MPopperPlacement.BottomStart,
+        validator: value =>
+            value == MPopperPlacement.Bottom ||
+            value == MPopperPlacement.BottomEnd ||
+            value == MPopperPlacement.BottomStart ||
+            value == MPopperPlacement.Left ||
+            value == MPopperPlacement.LeftEnd ||
+            value == MPopperPlacement.LeftStart ||
+            value == MPopperPlacement.Right ||
+            value == MPopperPlacement.RightEnd ||
+            value == MPopperPlacement.RightStart ||
+            value == MPopperPlacement.Top ||
+            value == MPopperPlacement.TopEnd ||
+            value == MPopperPlacement.TopStart
+    })
     public placement: MPopperPlacement;
     @Prop({
         default: MOptionsMenuSkin.Light,
-        validator: value => value == MOptionsMenuSkin.Light || value == MOptionsMenuSkin.Dark
+        validator: value =>
+            value == MOptionsMenuSkin.Light ||
+            value == MOptionsMenuSkin.Dark
     })
     public skin: MOptionsMenuSkin;
     @Prop()

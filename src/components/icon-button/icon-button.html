@@ -11,6 +11,6 @@
         @blur="onBlur"
         :title="title"
         :style="{ width: buttonSize, height: buttonSize, fontSize: iconSize }">
-    <m-icon class="m-icon-button__icon" :name="iconName"></m-icon>
+    <m-icon ref="icon" class="m-icon-button__icon" :name="iconName"></m-icon>
     <span class="m-icon-button__hidden" v-if="hasSlots"><slot></slot></span>
 </button>

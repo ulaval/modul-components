@@ -91,30 +91,18 @@ $m-panel--screen--min: 640px;
 
     &__body {
         flex: 1 1 auto;
-        padding-bottom: #{ $m-padding + $m-margin--s };
 
         &:not(.m--no-padding) {
             padding-right: $m-padding--s;
             padding-left: $m-padding--s;
+            padding-bottom: #{ $m-padding + $m-margin--s };
         }
 
         &.m--has-padding-top {
             padding-top: $m-padding;
         }
 
-        @include m-scrollbar-ie();
-
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
-
-            &-track-piece {
-                @include m-scrollbar-track-piece();
-            }
-
-            &-thumb {
-                @include m-scrollbar-thumb();
-            }
-        }
+        @include m-scrollbar();
     }
 
     &__footer {

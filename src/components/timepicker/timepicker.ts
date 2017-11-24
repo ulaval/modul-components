@@ -40,8 +40,6 @@ export class MTimepicker extends ModulVue {
     public step: number;
     @Prop({ default: 'LT' })
     public format: string;
-    @Prop({ default: () => ({ placement: 'bottom-start' }) })
-    public options: any;
 
     private hours: object = {};
     private selectedHour: number = NaN;

@@ -15,7 +15,15 @@
             "default": 2
         },
         "line": {
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
+        },
+        "value": {
+            "type": "string"
+        },
+        "margin": {
+            "type": "boolean",
+            "default": true
         }
     },
     "overview": "nav-bar.overview",

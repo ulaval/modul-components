@@ -1,14 +1,14 @@
 {
     "tag": "m-accordion",
     "name": "m-accordion-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
         "skin": {
             "type": "string",
             "values": [
                 "regular",
                 "light",
-                "vanilla"
+                "plain"
             ],
             "default": 0
         },

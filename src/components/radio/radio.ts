@@ -50,7 +50,9 @@ export class MRadio extends ModulVue {
     public name: string;
     @Prop({
         default: MRadioPosition.Left,
-        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+        validator: value =>
+            value == MRadioPosition.Left ||
+            value == MRadioPosition.Right
     })
     public position: MRadioPosition;
     @Prop()
@@ -61,7 +63,9 @@ export class MRadio extends ModulVue {
     public iconName: string;
     @Prop({
         default: MRadioPosition.Left,
-        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+        validator: value =>
+            value == MRadioPosition.Left ||
+            value == MRadioPosition.Right
     })
     public iconPosition: MRadioPosition;
 
@@ -153,6 +157,7 @@ export class MRadio extends ModulVue {
 
 const RadioPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(RADIO_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(ValidationMessagePlugin);
         v.component(RADIO_NAME, MRadio);

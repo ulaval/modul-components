@@ -10,8 +10,6 @@ import { ModulVue } from '../../utils/vue/vue';
 @Component
 export class MI18n extends ModulVue {
     @Prop()
-    public i18nKey: string;
-    @Prop()
     public k: string;
     @Prop()
     public params: string[];
@@ -29,9 +27,6 @@ export class MI18n extends ModulVue {
         if (this.k) {
             let p: string[] = this.params === undefined ? [] : this.params;
             result = this.$i18n.translate(this.k, p, undefined, undefined, this.htmlEncode);
-        } else if (this.i18nKey) {
-            console.error('<' + I18N_NAME + '>: Prop i18n-key is deprecated and will be removed in the next major release; use prop "k" instead.');
-            result = this.$i18n.translate(this.i18nKey);
         }
 
         return result;
@@ -40,6 +35,7 @@ export class MI18n extends ModulVue {
 
 const I18nPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(I18N_NAME, 'plugin.install');
         v.component(I18N_NAME, MI18n);
     }
 };

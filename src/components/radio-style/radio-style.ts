@@ -25,7 +25,9 @@ export class MRadioStyle extends ModulVue {
 
     @Prop({
         default: MRadioStylePosition.Right,
-        validator: value => value == MRadioStylePosition.Left || value == MRadioStylePosition.Right
+        validator: value =>
+            value == MRadioStylePosition.Left ||
+            value == MRadioStylePosition.Right
     })
     public position: MRadioStylePosition;
     @Prop({ default: '1em' })
