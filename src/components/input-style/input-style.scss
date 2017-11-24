@@ -302,7 +302,7 @@ $m-input-style--padding: 4px !default;
             padding: $m-margin--s $m-padding--s;
             width: 100%;
             min-width: 272px;
-            min-height: 54px; //Magic number -> height of rows 2
+            min-height: 63px; //Magic number -> height of rows 2
             border-top: 1px solid $m-color--border;
             border-right: 1px solid $m-color--border;
             border-left: 1px solid $m-color--border;
