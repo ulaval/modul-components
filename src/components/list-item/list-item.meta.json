@@ -3,9 +3,11 @@
     "name": "m-list-item-meta:name",
     "production": true,
     "attributes": {
-        "deleteButton": {
-            "type": "boolean",
-            "default": true
+        "iconName": {
+            "type": "string"
+        },
+        "iconHiddenText": {
+            "type": "string"
         },
         "disabled": {
             "type": "boolean",

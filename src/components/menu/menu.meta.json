@@ -1,7 +1,7 @@
 {
     "tag": "m-menu",
     "name": "m-menu-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
         "placement": {
             "type": "MPopperPlacement",
