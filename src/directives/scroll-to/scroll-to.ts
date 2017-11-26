@@ -29,11 +29,13 @@ const MScrollTo: DirectiveOptions = {
                 }
                 ScrollTo.startScroll(scrollEl, targetPosition, duration);
             };
+            element.addEventListener('touchstart', binding.listener);
             element.addEventListener('click', binding.listener);
         }
     },
     unbind(element: HTMLElement, binding: ScrollToBinding) {
         if (element && binding.listener) {
+            element.removeEventListener('touchstart', binding.listener);
             element.removeEventListener('click', binding.listener);
         }
     }
