@@ -215,7 +215,8 @@
         font-weight: $m-font-weight--bold;
     }
 
-    &.m-u-has-menu {
+    &.m-u-has-menu, // deprecated
+    &.m-u--has-menu {
         padding-right: $m-touch-size;
 
         :last-child {
@@ -227,7 +228,7 @@
         }
     }
 
-    &:not(.m-u-has-menu) {
+    &:not(.m-u-has-menu):not(.m-u--has-menu) {
         display: flex;
         align-items: center;
         justify-content: space-between;
