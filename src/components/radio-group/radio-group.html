@@ -3,6 +3,7 @@
               'm--is-disabled': stateIsDisabled,
               'm--has-error': hasError,
               'm--is-valid': isValid }">
+    <p class="m-radio-group__label" v-if="hasLabel">{{ label }}</p>
     <ul class="m-radio-group__wrap">
         <slot></slot>
     </ul>

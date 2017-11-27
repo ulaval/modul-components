@@ -8,7 +8,7 @@ import Meta from '../../../src/meta/meta';
 export class Navigation extends ModulVue {
     public routes: string[] = [];
 
-    public mounted(): void {
+    protected mounted(): void {
         let meta: string[] = [];
         Meta.getTags().forEach(tag => {
             meta.push(tag);

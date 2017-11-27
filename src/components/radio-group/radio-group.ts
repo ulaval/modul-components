@@ -26,6 +26,8 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     public position: MRadioPosition;
     @Prop()
     public inline: boolean;
+    @Prop()
+    public label: string;
 
     public name: string = uuid.generate();
     private internalValue: any | undefined = '';
@@ -61,6 +63,10 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
     private get model(): any {
         return this.value == undefined ? this.internalValue : this.value;
+    }
+
+    private get hasLabel(): boolean {
+        return !!this.label;
     }
 
     private set model(value: any) {
