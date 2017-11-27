@@ -210,7 +210,8 @@
         }
     }
 
-    &.m-u-has-menu {
+    &.m-u-has-menu, // deprecated
+    &.m-u--has-menu {
         th,
         td {
             &:last-child:not(:only-child) {
