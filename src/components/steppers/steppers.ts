@@ -11,16 +11,29 @@ import NavBarItemPlugin, { BaseSteppers, MSteppersItemState } from '../steppers-
 export class MSteppers extends BaseSteppers {
 
     public setLineWidth(): void {
-        let lineEL: HTMLElement = this.$refs.line as HTMLElement;
-        this.$children.forEach((child) => {
+        let defaultLineEL: HTMLElement = this.$refs.defaultLine as HTMLElement;
+        let selectedLineEL: HTMLElement = this.$refs.selectedLine as HTMLElement;
+        let leftSpacing: number;
+        let rightSpacing: number;
+        this.$children.forEach((child, index, arr) => {
+            if (index == 0 && arr.length >= 1) {
+                leftSpacing = child.$el.clientWidth / 2;
+            }
+            if (arr.length - 1 === index && arr.length > 1) {
+                rightSpacing = child.$el.clientWidth / 2;
+                console.log(child.$el.clientWidth,rightSpacing);
+
+            }
             if (child.$props.state == MSteppersItemState.InProgress) {
                 let parentWidth = this.$el.clientWidth;
                 let childWidth = child.$el.clientWidth;
-                let leftPadding = 15;
                 let childOffset = child.$el.offsetLeft;
-                let lineWidth = ((childOffset - leftPadding + (childWidth / 2)) / parentWidth) * 100;
-                lineEL.style.width = lineWidth + '%';
+                let lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;
+                selectedLineEL.style.width = lineWidth + '%';
+                selectedLineEL.style.left = leftSpacing + 'px';
             }
+            defaultLineEL.style.left = leftSpacing + 'px';
+            defaultLineEL.style.right = rightSpacing + 'px';
         });
     }
 
