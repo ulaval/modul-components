@@ -172,7 +172,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private get formattedDate(): string {
-        return this.internalCalandarErrorMessage || !this.value ? this.as<InputPopup>().internalValue : moment(this.as<InputPopup>().internalValue).format(this.format);
+        return this.internalCalandarErrorMessage || !this.value ? this.as<InputPopup>().internalValue : moment(this.value).format(this.format);
     }
 
     private set formattedDate(value: string) {
@@ -242,8 +242,8 @@ export class MDatepicker extends ModulVue {
         });
     }
 
-    private validateDate(value: string): void {
-        if (value == '') {
+    private validateDate(event): void {
+        if (event.target.value == '') {
             this.selectedMomentDate = moment();
             if (this.required) {
                 this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');
@@ -251,8 +251,8 @@ export class MDatepicker extends ModulVue {
                 this.$emit('change', '');
                 this.internalCalandarErrorMessage = '';
             }
-        } else if (moment(value, this.format).isValid()) {
-            let newDate = moment(value, this.format);
+        } else if (moment(event.target.value, this.format).isValid()) {
+            let newDate = moment(event.target.value, this.format);
             if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
                 this.selectedMomentDate = newDate;
                 this.formattedDate = this.selectedMomentDate.format(this.format);
