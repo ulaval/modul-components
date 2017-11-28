@@ -15,9 +15,11 @@ export class MSteppers extends BaseSteppers {
         this.$children.forEach((child) => {
             if (child.$props.state == MSteppersItemState.InProgress) {
                 let parentWidth = this.$el.clientWidth;
-                let childWidth = child.$el.offsetLeft;
-                let width = (childWidth / parentWidth) * 100;
-                lineEL.style.width = width + '%';
+                let childWidth = child.$el.clientWidth;
+                let leftPadding = 15;
+                let childOffset = child.$el.offsetLeft;
+                let lineWidth = ((childOffset - leftPadding + (childWidth / 2)) / parentWidth) * 100;
+                lineEL.style.width = lineWidth + '%';
             }
         });
     }

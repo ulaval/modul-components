@@ -5,6 +5,21 @@ $m-steppers-item--max-width: 90px;
 .m-steppers {
     &__wrap {
         position: relative;
+    }
+
+    &__line {
+        position: absolute;
+        top: calc(#{$m-steppers-item--circle-size} / 2);
+        left: calc(#{$m-steppers-item--circle-size} / 2);
+        width: 0;
+        content: '';
+        height: 2px;
+        background: $m-color--ul-blue;
+        z-index: 1;
+    }
+
+    &__content {
+        position: relative;
         display: flex;
         justify-content: space-between;
         margin: 0;
@@ -12,21 +27,41 @@ $m-steppers-item--max-width: 90px;
         &::before {
             position: absolute;
             top: calc(#{$m-steppers-item--circle-size} / 2);
-            left: calc(#{$m-steppers-item--max-width} / 2);
-            right: calc(#{$m-steppers-item--max-width} / 2);
+            left: calc(#{$m-steppers-item--circle-size} / 2);
+            right: calc(#{$m-steppers-item--circle-size} / 2);
             content: '';
             height: 2px;
             background: $m-color--grey-darker;
         }
     }
 
-    &__line {
-        position: absolute;
-        top: calc(#{$m-steppers-item--circle-size} / 2);
-        left: calc(#{$m-steppers-item--max-width} / 2);
-        width: 0;
-        content: '';
-        height: 2px;
-        background: $m-color--ul-blue;
+    .m-steppers-item:first-child {
+        position: relative;
+
+        &::before {
+            position: absolute;
+            top: calc(#{$m-steppers-item--circle-size} / 2);
+            left: 0;
+            right: 50%;
+            content: '';
+            height: 2px;
+            background: $m-color--white;
+            z-index: -1;
+        }
+    }
+
+    .m-steppers-item:last-child {
+        position: relative;
+
+        &::before {
+            position: absolute;
+            top: calc(#{$m-steppers-item--circle-size} / 2);
+            left: 50%;
+            right: 0;
+            content: '';
+            height: 2px;
+            background: $m-color--white;
+            z-index: -1;
+        }
     }
 }
