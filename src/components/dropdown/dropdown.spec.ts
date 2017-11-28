@@ -109,6 +109,10 @@ describe('dropdown', () => {
         });
     });
 
+    it('change event - called once', () => {
+        console.log('TODO');
+    });
+
     // En attente d'un changement pour Portal
     // it('0 items', () => {
     //     let vm = new Vue({

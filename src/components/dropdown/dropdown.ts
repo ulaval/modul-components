@@ -122,7 +122,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     @Watch('value')
     private setInternalValue(value: any): void {
-        this.model = value;
+        this.setModel(value, false);
     }
 
     public get model(): any {
@@ -130,8 +130,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public set model(value: any) {
+        this.setModel(value, true);
+    }
+
+    private setModel(value: any, emit: boolean): void {
         this.as<InputPopup>().internalValue = value;
-        this.$emit('change', value);
+        if (emit) {
+            this.$emit('change', value);
+        }
         this.dirty = false;
         this.internalOpen = false;
         this.setInputWidth();

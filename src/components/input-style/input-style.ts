@@ -89,10 +89,6 @@ export class MInputStyle extends ModulVue {
         return !!this.$slots.default;
     }
 
-    private get hasRightContentSlot(): boolean {
-        return !!this.$slots['right-content'];
-    }
-
     private hasAdjustWidthAutoSlot(): boolean {
         return !!this.$slots['adjust-width-auto'];
     }

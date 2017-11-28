@@ -19,7 +19,7 @@
             <m-i18n k="m-input-style:empty-value" class="m-input-style__body__transparent-text" aria-hidden="true" v-if="!hasDefaultSlot"></m-i18n>
             <div class="m-input-style__body__adjust-width-auto" ref="adjustWidthAuto" aria-hidden="true" v-if="hasAdjustWidthAutoSlot"><slot name="adjust-width-auto"></slot></div>
         </div>
-        <div class="m-input-style__body__right" v-if="hasRightContentSlot && active">
+        <div class="m-input-style__body__right">
             <slot name="right-content"></slot>
         </div>
         <m-spinner size="small" class="m-input-style__spinner" v-if="isWaiting"></m-spinner>
