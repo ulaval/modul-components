@@ -1,44 +1,25 @@
 {
-    "tag": "m-step",
-    "name": "m-step-meta:name",
+    "tag": "m-steppers-item",
+    "name": "m-steppers-item-meta:name",
     "production": false,
     "attributes": {
         "state": {
             "type": "string",
             "values": [
-                "warning",
+                "completed",
                 "in-progress",
-                "information",
-                "locked",
-                "success"
+                "disabled"
             ],
-            "default": 3
-        },
-        "mode": {
-            "type": "string",
-            "values": [
-                "default",
-                "accordion"
-            ],
-            "default": 0
-        },
-        "open": {
-            "type": "boolean",
-            "default": false
-        },
-        "required": {
-            "type": "boolean",
-            "default": false
+            "default": 2
         },
         "iconName": {
             "type": "string",
             "default": "default"
         },
-        "last": {
-            "type": "boolean",
-            "default": false
+        "iconTitle": {
+            "type": "string"
         }
     },
-    "overview": "step.overview",
-    "preview": "step.preview"
+    "overview": "steppers-item.overview",
+    "preview": "steppers-item.preview"
 }

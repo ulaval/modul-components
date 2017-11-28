@@ -5,26 +5,42 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './steppers.html?style=./steppers.scss';
 import { STEPPERS_NAME } from '../component-names';
 import NavBarItemPlugin, { BaseSteppers, MSteppersItemState } from '../steppers-item/steppers-item';
+import { ElementQueries } from '../../mixins/element-queries/element-queries';
 
 @WithRender
-@Component
+@Component({
+    mixins: [ElementQueries]
+})
 export class MSteppers extends BaseSteppers {
 
     public setLineWidth(): void {
-        let lineEL: HTMLElement = this.$refs.line as HTMLElement;
-        this.$children.forEach((child) => {
+        let defaultLineEL: HTMLElement = this.$refs.defaultLine as HTMLElement;
+        let selectedLineEL: HTMLElement = this.$refs.selectedLine as HTMLElement;
+        let leftSpacing: number;
+        let rightSpacing: number;
+        this.$children.forEach((child, index, arr) => {
+            if (index == 0 && arr.length >= 1) {
+                leftSpacing = child.$el.clientWidth / 2;
+            }
+            if (arr.length - 1 === index && arr.length > 1) {
+                rightSpacing = child.$el.clientWidth / 2;
+            }
             if (child.$props.state == MSteppersItemState.InProgress) {
                 let parentWidth = this.$el.clientWidth;
-                let childWidth = child.$el.offsetLeft;
-                let width = (childWidth / parentWidth) * 100;
-                lineEL.style.width = width + '%';
+                let childWidth = child.$el.clientWidth;
+                let childOffset = child.$el.offsetLeft;
+                let lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;
+                selectedLineEL.style.width = lineWidth + '%';
+                selectedLineEL.style.left = leftSpacing + 'px';
             }
+            defaultLineEL.style.left = leftSpacing + 'px';
+            defaultLineEL.style.right = rightSpacing + 'px';
         });
     }
 
     protected mounted() {
         this.setLineWidth();
-        this.$modul.event.$on('resizeDone', this.setLineWidth);
+        this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
     }
 }
 

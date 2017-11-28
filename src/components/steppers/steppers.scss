@@ -8,25 +8,27 @@ $m-steppers-item--max-width: 90px;
         display: flex;
         justify-content: space-between;
         margin: 0;
-
-        &::before {
-            position: absolute;
-            top: calc(#{$m-steppers-item--circle-size} / 2);
-            left: calc(#{$m-steppers-item--max-width} / 2);
-            right: calc(#{$m-steppers-item--max-width} / 2);
-            content: '';
-            height: 2px;
-            background: $m-color--grey-darker;
-        }
     }
 
-    &__line {
+    &__selected-line {
         position: absolute;
         top: calc(#{$m-steppers-item--circle-size} / 2);
-        left: calc(#{$m-steppers-item--max-width} / 2);
+        left: 0;
         width: 0;
         content: '';
         height: 2px;
         background: $m-color--ul-blue;
+        z-index: 1;
+    }
+
+    &__default-line {
+        position: absolute;
+        top: calc(#{$m-steppers-item--circle-size} / 2);
+        left: 0;
+        right: 0;
+        content: '';
+        height: 2px;
+        background: $m-color--grey-darker;
+        z-index: 1;
     }
 }
