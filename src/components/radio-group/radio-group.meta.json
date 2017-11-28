@@ -17,6 +17,9 @@
         "inline": {
             "type": "boolean",
             "default": false
+        },
+        "label": {
+            "type": "string"
         }
     },
     "overview": "radio-group.overview",

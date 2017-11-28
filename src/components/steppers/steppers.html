@@ -1,7 +1,7 @@
 <div class="m-steppers">
     <ul class="m-steppers__wrap" :class="{ 'm--is-last': last }">
+        <div aria-hidden="true" class="m-steppers__default-line" :class="{ 'm--is-anim-active': isAnimActive }" ref="defaultLine"></div>
+        <div aria-hidden="true" class="m-steppers__selected-line" :class="{ 'm--is-anim-active': isAnimActive }" ref="selectedLine"></div>
         <slot></slot>
-        <div aria-hidden="true" class="m-steppers__line" :class="{ 'm--is-anim-active': isAnimActive }" ref="line"></div>
     </ul>
 </div>
-

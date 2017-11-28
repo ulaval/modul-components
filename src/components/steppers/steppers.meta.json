@@ -1,44 +1,7 @@
 {
-    "tag": "m-step",
-    "name": "m-step-meta:name",
+    "tag": "m-steppers",
+    "name": "m-steppers-meta:name",
     "production": false,
-    "attributes": {
-        "state": {
-            "type": "string",
-            "values": [
-                "warning",
-                "in-progress",
-                "information",
-                "locked",
-                "success"
-            ],
-            "default": 3
-        },
-        "mode": {
-            "type": "string",
-            "values": [
-                "default",
-                "accordion"
-            ],
-            "default": 0
-        },
-        "open": {
-            "type": "boolean",
-            "default": false
-        },
-        "required": {
-            "type": "boolean",
-            "default": false
-        },
-        "iconName": {
-            "type": "string",
-            "default": "default"
-        },
-        "last": {
-            "type": "boolean",
-            "default": false
-        }
-    },
-    "overview": "step.overview",
-    "preview": "step.preview"
+    "overview": "steppers.overview",
+    "preview": "steppers.preview"
 }

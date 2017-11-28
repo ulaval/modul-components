@@ -21,6 +21,11 @@ $m-steppers--max-width: 90px;
             color: $m-color--interactive;
         }
 
+        &::before,
+        &::after {
+            cursor: pointer;
+        }
+
         .m-steppers-item__icon {
             border-color: $m-color--ul-blue;
         }
@@ -38,6 +43,11 @@ $m-steppers--max-width: 90px;
 
     &.m--is-disabled {
         cursor: not-allowed;
+
+        &::before,
+        &::after {
+            cursor: not-allowed;
+        }
 
         .m-steppers-item__icon {
             border-color: $m-color--grey-darker;
