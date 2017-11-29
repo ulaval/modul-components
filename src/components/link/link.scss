@@ -1,8 +1,12 @@
 @import 'abstracts/variables';
 
 .m-link {
+    transition: color $m-transition-duration ease;
+    position: relative;
     display: inline-flex;
     align-items: center;
+    font-weight: $m-font-weight--bold;
+    color: $m-color--interactive;
 
     @include m-is-ie() {
         display: inline-block;
@@ -26,11 +30,7 @@
         }
     }
 
-    &:not(.m--is-plain) {
-        transition: color $m-transition-duration ease;
-        position: relative;
-        font-weight: $m-font-weight--bold;
-        color: $m-color--interactive;
+    &:not(.m--is-multi-line) {
         text-decoration: none;
 
         &:not(.m--is-disabled) {
@@ -51,17 +51,9 @@
                 }
             }
 
-            &:not(.m--is-unvisited) {
-                &:visited {
-                    color: $m-color--interactive-darker;
-                }
-            }
-
             &:not(:active) {
                 &:focus,
                 &:hover {
-                    color: $m-color--interactive-light;
-
                     .m-link__text {
                         &::after {
                             width: 100%;
@@ -73,8 +65,6 @@
             }
 
             &:active {
-                color: $m-color--interactive-dark;
-
                 .m-link__text {
                     &::after {
                         right: 0;
@@ -86,32 +76,77 @@
                 }
             }
         }
+    }
 
-        &.m--is-disabled {
-            color: $m-color--disabled;
-            cursor: default;
-        }
+    &.m--is-multi-line {
+        @media (min-width: #{$m-mq--min--s}) {
+            text-decoration: none;
 
-        &:focus {
-            outline: none;
-        }
-
-        .m-link {
-            &__text {
-                position: relative;
-                flex: 1;
-                vertical-align: middle;
-            }
-
-            &__icon {
-                display: inline-flex;
-                vertical-align: middle;
-                stroke-width: 2px;
-            }
-
-            &__hidden {
-                @include m-visually-hidden;
+            &:focus,
+            &:hover {
+                text-decoration: underline;
             }
         }
+    }
+
+    &:not(.m--is-disabled) {
+        &:not(.m--no-underline) {
+            .m-link__text {
+                &::after {
+                    transition: width $m-transition-duration ease, opacity $m-transition-duration ease;
+                    position: absolute;
+                    right: 0;
+                    bottom: 1px; //Magic number
+                    left: 0;
+                    content: '';
+                    width: 8%;
+                    height: 1px;
+                    background: $m-color--interactive;
+                    opacity: 0;
+                }
+            }
+        }
+
+        &:not(.m--is-unvisited) {
+            &:visited {
+                color: $m-color--interactive-darker;
+            }
+        }
+
+        &:not(:active) {
+            &:focus,
+            &:hover {
+                color: $m-color--interactive-light;
+            }
+        }
+
+        &:active {
+            color: $m-color--interactive-dark;
+        }
+    }
+
+    &.m--is-disabled {
+        color: $m-color--disabled;
+        cursor: default;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &__text {
+        position: relative;
+        flex: 1 1 auto;
+        vertical-align: middle;
+    }
+
+    &__icon {
+        display: inline-flex;
+        vertical-align: middle;
+        stroke-width: 2px;
+    }
+
+    &__hidden {
+        @include m-visually-hidden();
     }
 }

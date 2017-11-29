@@ -1,13 +1,14 @@
 <transition :css="false">
-    <router-link ref="router" class="m-link"
+    <router-link class="m-link"
                  :class="{ 'm--is-unvisited': isUnvisited,
                            'm--is-disabled': disabled,
                            'm--no-underline': !underline,
-                           'm--is-plain': plain,
+                           'm--is-multi-line': multiLine,
                            'm--has-right-icon' : isIconPositionRight }"
                  :to="routerLinkUrl"
                  :target="target"
-                 v-if="isRouterLink">
+                 v-if="isRouterLink"
+                 ref="router">
         <m-icon :name="propIconName" :size="iconSize" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon>
         <span class="m-link__text">
             <slot></slot>
@@ -18,12 +19,13 @@
                  'm--is-disabled': disabled,
                  'm--no-underline': !underline,
                  'm--is-button': isButton,
-                 'm--is-plain': plain,
+                 'm--is-multi-line': multiLine,
                  'm--has-right-icon' : isIconPositionRight }"
        :href="propUrl"
        :target="target"
+       @click="onClick"
        v-if="!isRouterLink"
-       ref="link" @click="onClick">
+       ref="link">
         <m-icon class="m-link__icon" :name="propIconName" :size="iconSize" v-if="hasIcon" aria-hidden="true"></m-icon>
         <span class="m-link__text">
             <slot></slot>

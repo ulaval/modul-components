@@ -42,7 +42,7 @@ export class MLink extends ModulVue {
     public underline: boolean;
 
     @Prop()
-    public plain: boolean;
+    public multiLine: boolean;
 
     @Prop()
     public target: string;
@@ -101,8 +101,8 @@ export class MLink extends ModulVue {
         return this.iconName != undefined && this.iconName != '' ? this.iconName : ICON_NAME_DEFAULT;
     }
 
-    private get propUrl(): string {
-        return this.mode == MLinkMode.Button ? '#' : this.url;
+    private get propUrl(): string | undefined {
+        return this.mode == MLinkMode.Button ? '#' : !this.disabled ? this.url : undefined;
     }
 
     private get isTargetBlank(): boolean {
@@ -110,7 +110,7 @@ export class MLink extends ModulVue {
     }
 
     private get routerLinkUrl(): string | Object {
-        return !this.isObject(this.url) ? { path: this.url } : this.url ;
+        return !this.isObject(this.url) ? { path: this.url } : this.url;
     }
 
     private isObject(a) {
