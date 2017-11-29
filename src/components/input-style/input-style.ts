@@ -52,11 +52,11 @@ export class MInputStyle extends ModulVue {
             }
         });
     }
-    protected mounted(): void {
+    protected created(): void {
         setTimeout(() => {
             this.animActive = true;
+            this.setInputWidth();
         }, 0);
-        this.setInputWidth();
     }
 
     private get hasValue(): boolean {
