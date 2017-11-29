@@ -42,7 +42,7 @@ export class MLink extends ModulVue {
     public underline: boolean;
 
     @Prop()
-    public vanilla: boolean;
+    public plain: boolean;
 
     @Prop()
     public target: string;

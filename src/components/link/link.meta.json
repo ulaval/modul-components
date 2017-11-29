@@ -25,7 +25,7 @@
             "type": "boolean",
             "default": true
         },
-        "vanilla": {
+        "plain": {
             "type": "boolean",
             "default": false
         },

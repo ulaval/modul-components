@@ -10,7 +10,7 @@ import LangHelper from '../../../tests/helpers/lang';
 const UNVISITED_CSS: string = 'm--is-unvisited';
 const NO_UNDERLINE_CSS: string = 'm--no-underline';
 const MODE_BUTTON_CSS: string = 'm--is-button';
-const VANILLA_CSS: string = 'm--is-vanilla';
+const PLAIN_CSS: string = 'm--is-plain';
 const ICON_POSITION_RIGHT_CSS: string = 'm--has-right-icon';
 const DISABLED_CSS: string = 'm--is-disabled';
 
@@ -71,7 +71,7 @@ describe('link', () => {
             expect(vm.$el.classList.contains(UNVISITED_CSS)).toBeFalsy();
             expect(vm.$el.classList.contains(NO_UNDERLINE_CSS)).toBeFalsy();
             expect(vm.$el.classList.contains(MODE_BUTTON_CSS)).toBeFalsy();
-            expect(vm.$el.classList.contains(VANILLA_CSS)).toBeFalsy();
+            expect(vm.$el.classList.contains(PLAIN_CSS)).toBeFalsy();
             expect(vm.$el.classList.contains(ICON_POSITION_RIGHT_CSS)).toBeFalsy();
             expect(vm.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
         };
@@ -268,25 +268,25 @@ describe('link', () => {
         });
     });
 
-    describe('vanilla prop', () => {
+    describe('Plain prop', () => {
         beforeEach(() => {
             vm = new Vue({
                 router,
                 data: {
                     mode: MLinkMode.RouterLink,
-                    vanilla: false
+                    plain: false
                 },
-                template: `<m-link ref="a" :mode="mode" :vanilla="vanilla" url="/test"></m-link>`
+                template: `<m-link ref="a" :mode="mode" :plain="plain" url="/test"></m-link>`
             }).$mount();
         });
 
         const test = () => {
             let element: Vue = vm.$refs.a as Vue;
 
-            expect(element.$el.classList.contains(VANILLA_CSS)).toBeFalsy();
-            (vm as any).vanilla = true;
+            expect(element.$el.classList.contains(PLAIN_CSS)).toBeFalsy();
+            (vm as any).plain = true;
             Vue.nextTick(() => {
-                expect(element.$el.classList.contains(VANILLA_CSS)).toBeTruthy();
+                expect(element.$el.classList.contains(PLAIN_CSS)).toBeTruthy();
             });
         };
 

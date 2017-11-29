@@ -5,7 +5,7 @@ import NavbarPlugin, { MNavbar, MNavbarSkin } from './navbar';
 const SKIN_REGULAR_CSS: string = 'm--is-regular';
 const SKIN_LIGHT_CSS: string = 'm--is-light';
 const SKIN_DARK_CSS: string = 'm--is-dark';
-const SKIN_VANILLA_CSS: string = 'm--is-vanilla';
+const SKIN_PLAIN_CSS: string = 'm--is-plain';
 const SKIN_ARROW_CSS: string = 'm--is-arrow';
 const ACTIVE_CSS: string = 'm--is-anim-active';
 
@@ -16,7 +16,7 @@ describe('MNavbarSkin', () => {
         expect(MNavbarSkin.Regular).toEqual('regular');
         expect(MNavbarSkin.Light).toEqual('light');
         expect(MNavbarSkin.Dark).toEqual('dark');
-        expect(MNavbarSkin.Vanilla).toEqual('vanilla');
+        expect(MNavbarSkin.Plain).toEqual('plain');
         expect(MNavbarSkin.Arrow).toEqual('arrow');
     });
 });
@@ -34,7 +34,7 @@ describe('navbar', () => {
 
     it('css class for navbar are not present', () => {
         expect(navbar.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
-        expect(navbar.$el.classList.contains(SKIN_VANILLA_CSS)).toBeFalsy();
+        expect(navbar.$el.classList.contains(SKIN_PLAIN_CSS)).toBeFalsy();
         expect(navbar.$el.classList.contains(SKIN_ARROW_CSS)).toBeFalsy();
     });
 
@@ -42,7 +42,7 @@ describe('navbar', () => {
         expect(navbar.$el.classList.contains(SKIN_DARK_CSS)).toBeTruthy();
         expect(navbar.$el.classList.contains(SKIN_REGULAR_CSS)).toBeTruthy();
         expect(navbar.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
-        expect(navbar.$el.classList.contains(SKIN_VANILLA_CSS)).toBeFalsy();
+        expect(navbar.$el.classList.contains(SKIN_PLAIN_CSS)).toBeFalsy();
         expect(navbar.$el.classList.contains(SKIN_ARROW_CSS)).toBeFalsy();
 
         navbar.skin = MNavbarSkin.Regular;
@@ -55,15 +55,15 @@ describe('navbar', () => {
                 expect(navbar.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
                 expect(navbar.$el.classList.contains(SKIN_REGULAR_CSS)).toBeFalsy();
 
-                navbar.skin = MNavbarSkin.Vanilla;
+                navbar.skin = MNavbarSkin.Plain;
                 Vue.nextTick(() => {
-                    expect(navbar.$el.classList.contains(SKIN_VANILLA_CSS)).toBeTruthy();
+                    expect(navbar.$el.classList.contains(SKIN_PLAIN_CSS)).toBeTruthy();
                     expect(navbar.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
 
                     navbar.skin = MNavbarSkin.Arrow;
                     Vue.nextTick(() => {
                         expect(navbar.$el.classList.contains(SKIN_ARROW_CSS)).toBeTruthy();
-                        expect(navbar.$el.classList.contains(SKIN_VANILLA_CSS)).toBeFalsy();
+                        expect(navbar.$el.classList.contains(SKIN_PLAIN_CSS)).toBeFalsy();
                     });
                 });
             });

@@ -26,7 +26,7 @@
         }
     }
 
-    &:not(.m--is-vanilla) {
+    &:not(.m--is-plain) {
         transition: color $m-transition-duration ease;
         position: relative;
         font-weight: $m-font-weight--bold;

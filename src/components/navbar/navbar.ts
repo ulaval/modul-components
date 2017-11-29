@@ -14,7 +14,7 @@ export enum MNavbarSkin {
     Regular = 'regular',
     Light = 'light',
     Dark = 'dark',
-    Vanilla = 'vanilla',
+    Plain = 'plain',
     Arrow = 'arrow'
 }
 
@@ -28,7 +28,7 @@ export class MNavbar extends BaseNavBar {
             value == MNavbarSkin.Regular ||
             value == MNavbarSkin.Light ||
             value == MNavbarSkin.Dark ||
-            value == MNavbarSkin.Vanilla ||
+            value == MNavbarSkin.Plain ||
             value == MNavbarSkin.Arrow
     })
     public skin: string;
