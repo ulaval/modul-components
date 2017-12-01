@@ -26,7 +26,7 @@ export interface RadioGroup {
 }
 
 export interface ButtonGroup extends RadioGroup {
-    fullsize: boolean;
+    fullSize: boolean;
 }
 
 export abstract class BaseRadioGroup extends ModulVue {
@@ -105,8 +105,8 @@ export class MRadio extends ModulVue {
         return this.isGroup() ? this.parentGroup.inline : false;
     }
 
-    public get propFullsize(): boolean {
-        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullsize : false;
+    public get propFullSize(): boolean {
+        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullSize : false;
     }
 
     protected get model(): string {
