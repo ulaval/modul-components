@@ -102,8 +102,10 @@ a {
 // ======================================================================
 .m-u--font {
     &-size {
+        font-size: $m-font-size;
+
         &--l {
-            font-size: $m-font-size--s;
+            font-size: $m-font-size--l;
         }
 
         &--s {
