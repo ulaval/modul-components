@@ -213,6 +213,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
         this.internalItems = items;
         this.internalNavigationItems = navigation;
+        this.focusSelected();
     }
 
     private get propTextNoData(): string {
@@ -265,30 +266,20 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
-    private onKeydown($event: KeyboardEvent): void {
-        if ($event.keyCode != KeyCode.M_RETURN &&
-            $event.keyCode != KeyCode.M_ENTER &&
-            $event.keyCode != KeyCode.M_TAB &&
-            $event.keyCode != KeyCode.M_ESCAPE && !this.open) {
-            this.focusedIndex = -1;
-            this.open = true;
-        }
-    }
-
     private focusOnResearchInput(): void {
         (this.$refs.researchInput as HTMLElement).focus();
     }
 
     private focusSelected(): void {
-        if (this.focusedIndex == -1 && this.model) {
-            this.internalNavigationItems.every((item, i) => {
-                if (item.value == this.model) {
-                    this.focusedIndex = i;
-                    return false;
-                }
+        this.internalNavigationItems.every((item, i) => {
+            if (item.value == this.model) {
+                this.focusedIndex = i;
+                return false;
+            } else {
+                this.focusedIndex = 0;
                 return true;
-            });
-        }
+            }
+        });
     }
 
     private focusNextItem(): void {
