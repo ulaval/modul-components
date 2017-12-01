@@ -45,6 +45,10 @@
     &--margin {
         margin: $m-margin;
 
+        &--xl {
+            margin: $m-margin--xl;
+        }
+
         &--l {
             margin: $m-margin--l;
         }
@@ -55,6 +59,10 @@
 
         &-top {
             margin-top: $m-margin;
+
+            &--xl {
+                margin-top: $m-margin--xl;
+            }
 
             &--l {
                 margin-top: $m-margin--l;
