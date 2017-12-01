@@ -6,7 +6,7 @@ import ButtonGroupPlugin, { MButtonGroup } from './button-group';
 const DISABLED_CSS: string = 'm--is-disabled';
 const POSITION_RIGHT_CSS: string = 'm--is-input-right';
 const INLINE_CSS: string = 'm--is-inline';
-const FULLSIZE_CSS: string = 'm--is-full-size';
+const FULL_SIZE_CSS: string = 'm--is-full-size';
 const CHECKED_CSS: string = 'm--is-checked';
 const ICON_LEFT_CSS: string = 'm--is-left';
 const ICON_RIGHT_CSS: string = 'm--is-right';
@@ -72,35 +72,35 @@ describe('button-group', () => {
         });
     });
 
-    it('fullsize prop', () => {
+    it('fullSize prop', () => {
         let vm = new Vue({
             template: `
             <div>
-                <m-button-group ref="g" :fullsize="fullsize" >
+                <m-button-group ref="g" :full-size="fullSize" >
                     <m-radio ref="a" value="radio1"></m-radio>
                     <m-radio ref="b" value="radio2"></m-radio>
                 </m-button-group>
             </div>`,
             data: {
-                fullsize: undefined
+                fullSize: undefined
             }
         }).$mount();
 
-        expect((vm.$refs.g as Vue).$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
-        expect((vm.$refs.a as Vue).$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
-        expect((vm.$refs.b as Vue).$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
+        expect((vm.$refs.g as Vue).$el.classList.contains(FULL_SIZE_CSS)).toBeFalsy();
+        expect((vm.$refs.a as Vue).$el.classList.contains(FULL_SIZE_CSS)).toBeFalsy();
+        expect((vm.$refs.b as Vue).$el.classList.contains(FULL_SIZE_CSS)).toBeFalsy();
 
         (vm as any).fullsize = true;
         Vue.nextTick(() => {
-            expect((vm.$refs.g as Vue).$el.classList.contains(FULLSIZE_CSS)).toBeTruthy();
-            expect((vm.$refs.a as Vue).$el.classList.contains(FULLSIZE_CSS)).toBeTruthy();
-            expect((vm.$refs.b as Vue).$el.classList.contains(FULLSIZE_CSS)).toBeTruthy();
+            expect((vm.$refs.g as Vue).$el.classList.contains(FULL_SIZE_CSS)).toBeTruthy();
+            expect((vm.$refs.a as Vue).$el.classList.contains(FULL_SIZE_CSS)).toBeTruthy();
+            expect((vm.$refs.b as Vue).$el.classList.contains(FULL_SIZE_CSS)).toBeTruthy();
 
             (vm as any).fullsize = false;
             Vue.nextTick(() => {
-                expect((vm.$refs.g as Vue).$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
-                expect((vm.$refs.a as Vue).$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
-                expect((vm.$refs.b as Vue).$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
+                expect((vm.$refs.g as Vue).$el.classList.contains(FULL_SIZE_CSS)).toBeFalsy();
+                expect((vm.$refs.a as Vue).$el.classList.contains(FULL_SIZE_CSS)).toBeFalsy();
+                expect((vm.$refs.b as Vue).$el.classList.contains(FULL_SIZE_CSS)).toBeFalsy();
             });
         });
     });

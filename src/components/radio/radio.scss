@@ -3,14 +3,14 @@ $m-radio--width: 16px !default;
 $m-radio--color-disabled: $m-color--disabled !default;
 
 .m-radio {
-    display: flex;
-    flex-direction: column;
     user-select: none;
     line-height: 1;
     list-style: none;
     padding-left: 0;
 
     &:not(.m--is-mode-button) {
+        display: inline;
+
         &:not(.m--is-disabled) {
             &:not(.m--is-error):not(.m--is-valid) {
                 &:not(.m--is-checked) .m-radio__wrap:hover,
@@ -191,6 +191,9 @@ $m-radio--color-disabled: $m-color--disabled !default;
     }
 
     &.m--is-mode-button {
+        display: flex;
+        flex-direction: column;
+
         &:not(.m--is-disabled) {
             &.m--is-checked {
                 .m-radio {

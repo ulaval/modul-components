@@ -1,45 +1,41 @@
 @import 'abstracts/variables';
-$m-radio--width: 16px;
 
 .m-radio-group {
     &__label {
         margin-top: 0;
         margin-bottom: $m-margin--s;
-        font-size: $m-font-size--l;
+        font-size: $m-font-size;
         font-weight: $m-font-weight--bold;
     }
 
-    &__wrap {
+    &__body {
         margin: 0;
         padding: 0;
     }
 
     &.m--is-inline {
-        display: inline-flex;
-        flex-direction: column;
-
-        .m-radio-group__wrap {
-            display: inline-block;
-        }
-
         .m-radio {
             display: inline;
 
             + .m-radio {
                 margin-left: $m-padding--s;
             }
+
+            &-group__body {
+                display: inline-block;
+            }
         }
     }
 
     &:not(.m--is-inline) {
-        &,
-        .m-radio-group__wrap {
-            display: block;
-        }
-
         .m-radio {
             + .m-radio {
                 margin-top: $m-margin--s;
+            }
+
+            &-group__body {
+                display: flex;
+                flex-direction: column;
             }
         }
     }

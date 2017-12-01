@@ -6,7 +6,7 @@
         "value": {
             "type": "string"
         },
-        "enabled": {
+        "disabled": {
             "type": "boolean",
             "default": false
         },

@@ -188,7 +188,7 @@
 //  formulaire
 // ======================================================================
 .m-u--label {
-    font-size: $m-font-size--l;
+    font-size: $m-font-size;
     font-weight: $m-font-weight--bold;
 }
 
@@ -215,7 +215,7 @@
         font-weight: $m-font-weight--bold;
     }
 
-    &.m-u-has-menu {
+    &.m-u--has-menu {
         padding-right: $m-touch-size;
 
         :last-child {
@@ -227,7 +227,7 @@
         }
     }
 
-    &:not(.m-u-has-menu) {
+    &:not(.m-u--has-menu) {
         display: flex;
         align-items: center;
         justify-content: space-between;
