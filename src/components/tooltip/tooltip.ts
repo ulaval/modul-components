@@ -59,6 +59,8 @@ export class MTooltip extends ModulVue {
     public openTitle: string;
     @Prop()
     public closeTitle: string;
+    @Prop({ default: true })
+    public underline: string;
 
     private propOpen = false;
 
