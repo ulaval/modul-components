@@ -25,18 +25,20 @@ export class MRadioStyle extends ModulVue {
 
     @Prop({
         default: MRadioStylePosition.Right,
-        validator: value => value == MRadioStylePosition.Left || value == MRadioStylePosition.Right
+        validator: value =>
+            value == MRadioStylePosition.Left ||
+            value == MRadioStylePosition.Right
     })
     public position: MRadioStylePosition;
     @Prop({ default: '1em' })
     public inputSize: string;
-    @Prop({ default: false })
+    @Prop()
     public focus: boolean;
-    @Prop({ default: false })
+    @Prop()
     public checked: boolean;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
-    @Prop({ default: false })
+    @Prop()
     public fullWidth: boolean;
 
     private get isInputRight(): boolean {

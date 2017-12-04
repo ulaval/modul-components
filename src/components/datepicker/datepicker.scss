@@ -23,11 +23,11 @@ $m-datepicker--item-dimension: $m-touch-size !default;
         padding: $m-padding--s 0;
 
         @media (max-width: $m-mq--max--s) {
-            border-bottom: $m-border-width--s solid $m-color--grey-light;
+            border-bottom: $m-border-width--s solid $m-color--border;
         }
 
         @media (min-width: $m-mq--min--s) {
-            border: $m-border-width--s solid $m-color--grey-light;
+            border: $m-border-width--s solid $m-color--border;
         }
 
         &,
@@ -58,11 +58,11 @@ $m-datepicker--item-dimension: $m-touch-size !default;
     &__months {
         transition: color $m-transition-duration ease;
         font-weight: $m-font-weight--bold;
-        color: $m-color--black-grey-lighter;
+        color: $m-color--text;
 
         &:hover,
         &:focus {
-            color: $m-color--text;
+            color: $m-color--black-grey-lighter;
         }
     }
 
@@ -74,9 +74,9 @@ $m-datepicker--item-dimension: $m-touch-size !default;
         padding: $m-padding--s;
 
         @media (min-width: $m-mq--min--s) {
-            border-right: $m-border-width--s solid $m-color--grey-light;
-            border-bottom: $m-border-width--s solid $m-color--grey-light;
-            border-left: $m-border-width--s solid $m-color--grey-light;
+            border-right: $m-border-width--s solid $m-color--border;
+            border-bottom: $m-border-width--s solid $m-color--border;
+            border-left: $m-border-width--s solid $m-color--border;
         }
 
         &-table {

@@ -1,0 +1,24 @@
+{
+    "tag": "m-textfield",
+    "name": "m-textfield-meta:name",
+    "production": true,
+    "attributes": {
+        "type": {
+            "type": "string",
+            "values": [
+                "text",
+                "password",
+                "email",
+                "url",
+                "tel"
+            ],
+            "default": 0
+        },
+        "passwordIcon": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "overview": "textfield.overview",
+    "preview": "textfield.preview"
+}

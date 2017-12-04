@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import AccordionPlugin, { MAccordion, MAccordionIconPosition, MAccordionIconSize, MAccordionIconSkin, MAccordionSkin } from './accordion';
+import AccordionPlugin, { MAccordion, MAccordionIconPosition, MAccordionIconSize, MAccordionSkin } from './accordion';
 
 const CLOSED_CSS: string = 'm--is-closed';
 const SKIN_LIGHT_CSS: string = 'm--is-light';
@@ -8,7 +8,7 @@ const SKIN_REGULAR_CSS: string = 'm--is-regular';
 const SKIN_PLAIN_CSS: string = 'm--is-plain';
 const ICON_POSITION_LEFT_CSS: string = 'm--is-icon-left';
 const ICON_SIZE_LARGE_CSS: string = 'm--is-large';
-const ICON_SKIN_BORDER_CSS: string = 'm--has-border';
+const ICON_BORDER_CSS: string = 'm--has-border';
 
 let accordion: MAccordion;
 
@@ -24,13 +24,6 @@ describe('MAccordionIconPosition', () => {
     it('validates enum', () => {
         expect(MAccordionIconPosition.Left).toEqual('left');
         expect(MAccordionIconPosition.Right).toEqual('right');
-    });
-});
-
-describe('MAccordionIconSkin', () => {
-    it('validates enum', () => {
-        expect(MAccordionIconSkin.Border).toEqual('border');
-        expect(MAccordionIconSkin.Default).toEqual('default');
     });
 });
 
@@ -51,7 +44,7 @@ describe('accordion', () => {
         expect(accordion.$el.classList.contains(CLOSED_CSS)).toBeTruthy();
         expect(accordion.$el.classList.contains(SKIN_REGULAR_CSS)).toBeTruthy();
         expect(accordion.$el.querySelector('.' + ICON_SIZE_LARGE_CSS)).not.toBeNull();
-        expect(accordion.$el.querySelector('.' + ICON_SKIN_BORDER_CSS)).toBeNull();
+        expect(accordion.$el.querySelector('.' + ICON_BORDER_CSS)).toBeNull();
     });
 
     it('css classes are not present', () => {
@@ -119,14 +112,14 @@ describe('accordion', () => {
         });
     });
 
-    it('icon skin prop', () => {
-        accordion.iconSkin = MAccordionIconSkin.Border;
+    it('iconBorder skin prop', () => {
+        accordion.iconBorder = true;
         Vue.nextTick(() => {
-            expect(accordion.$el.querySelector('.' + ICON_SKIN_BORDER_CSS)).not.toBeNull();
+            expect(accordion.$el.querySelector('.' + ICON_BORDER_CSS)).not.toBeNull();
 
-            accordion.iconSkin = MAccordionIconSkin.Default;
+            accordion.iconBorder = false;
             Vue.nextTick(() => {
-                expect(accordion.$el.querySelector('.' + ICON_SKIN_BORDER_CSS)).toBeNull();
+                expect(accordion.$el.querySelector('.' + ICON_BORDER_CSS)).toBeNull();
             });
         });
     });

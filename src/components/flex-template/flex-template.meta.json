@@ -11,19 +11,15 @@
             "type": "boolean",
             "default": true
         },
-        "menuFixe": {
-            "type": "boolean",
-            "default": true
-        },
         "menuWidth": {
             "type": "string",
             "default": "300px"
         },
-        "minHeight": {
-            "type": "string",
-            "default": "100vh"
+        "menuFixe": {
+            "type": "boolean",
+            "default": true
         },
-        "menuFrom": {
+        "menuOrigin": {
             "type": "string",
             "value": [
                 "left",
@@ -39,9 +35,12 @@
             "type": "boolean",
             "default": false
         },
-        "smallMenuSize": {
+        "smallMenuWidth": {
             "type": "string",
             "default": "44px"
+        },
+        "pageMinHeight": {
+            "type": "string"
         }
     },
     "overview": "flex-template.overview",

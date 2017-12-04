@@ -28,25 +28,32 @@ export class MButton extends Vue {
 
     @Prop({
         default: MButtonType.Button,
-        validator: value => value == MButtonType.Button || value == MButtonType.Submit || value == MButtonType.Reset
+        validator: value =>
+            value == MButtonType.Button ||
+            value == MButtonType.Submit ||
+            value == MButtonType.Reset
     })
     public type: MButtonType;
     @Prop({
         default: MButtonSkin.Primary,
-        validator: value => value == MButtonSkin.Primary || value == MButtonSkin.Secondary
+        validator: value =>
+            value == MButtonSkin.Primary ||
+            value == MButtonSkin.Secondary
     })
     public skin: MButtonSkin;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
-    @Prop({ default: false })
+    @Prop()
     public waiting: boolean;
-    @Prop({ default: false })
+    @Prop()
     public fullSize: boolean;
     @Prop()
     public iconName: string;
     @Prop({
         default: MButtonIconPosition.Left,
-        validator: value => value == MButtonIconPosition.Left || value == MButtonIconPosition.Right
+        validator: value =>
+            value == MButtonIconPosition.Left ||
+            value == MButtonIconPosition.Right
     })
     public iconPosition: MButtonIconPosition;
     @Prop({ default: '12px' })
@@ -66,7 +73,7 @@ export class MButton extends Vue {
     }
 
     private get isSkinPrimary(): boolean {
-        return this.skin != MButtonSkin.Secondary;
+        return this.skin == MButtonSkin.Primary;
     }
 
     private get isSkinSecondary(): boolean {
@@ -96,6 +103,7 @@ export class MButton extends Vue {
 
 const ButtonPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(BUTTON_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(SpinnerPlugin);
         v.component(BUTTON_NAME, MButton);

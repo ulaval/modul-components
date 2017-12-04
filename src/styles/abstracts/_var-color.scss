@@ -87,5 +87,11 @@ $m-color--disabled: $m-color--grey !default;
 // ======================================================================
 //  Scrollbar colors
 // ======================================================================
-$m-color--scrollbar: $m-color--grey;
-$m-color--scrollbar--light: $m-color--grey-lighter;
+$m-color--scrollbar: $m-color--grey !default;
+$m-color--scrollbar-light: $m-color--grey-lighter !default;
+
+// ======================================================================
+//  Boder colors
+// ======================================================================
+$m-color--border-dark: $m-color--grey-dark !default;
+$m-color--border: $m-color--grey-light !default;

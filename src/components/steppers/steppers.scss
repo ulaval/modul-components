@@ -1,0 +1,34 @@
+@import 'abstracts/variables';
+$m-steppers-item--circle-size: 30px;
+$m-steppers-item--max-width: 90px;
+
+.m-steppers {
+    &__wrap {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+    }
+
+    &__selected-line {
+        position: absolute;
+        top: calc(#{$m-steppers-item--circle-size} / 2);
+        left: 0;
+        width: 0;
+        content: '';
+        height: 2px;
+        background: $m-color--ul-blue;
+        z-index: 1;
+    }
+
+    &__default-line {
+        position: absolute;
+        top: calc(#{$m-steppers-item--circle-size} / 2);
+        left: 0;
+        right: 0;
+        content: '';
+        height: 2px;
+        background: $m-color--grey-darker;
+        z-index: 1;
+    }
+}

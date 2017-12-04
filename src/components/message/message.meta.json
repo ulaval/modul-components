@@ -13,7 +13,7 @@
             ],
             "default": 4
         },
-        "mode": {
+        "skin": {
             "type": "string",
             "values": [
                 "light",
@@ -31,7 +31,7 @@
         },
         "visible": {
             "type": "boolean",
-            "default": true
+            "default": false
         }
     },
     "overview": "message.overview",

@@ -4,24 +4,23 @@
     padding: 0;
 
     &:not(.m--is-inline) {
-        .m-button-group__wrap {
+        .m-button-group__body {
             flex-direction: column;
         }
     }
 
     &.m--is-full-size {
         &,
-        .m-button-group__wrap {
+        .m-button-group__body {
             width: 100%;
         }
     }
 
-    &,
-    &__wrap {
+    &__body {
         display: inline-flex;
     }
 
-    &__wrap {
+    &__body {
         margin: 0;
     }
 }

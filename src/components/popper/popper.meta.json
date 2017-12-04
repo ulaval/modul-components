@@ -3,10 +3,6 @@
     "name": "m-popper-meta:name",
     "production": false,
     "attributes": {
-        "open": {
-            "type": "boolean",
-            "default": false
-        },
         "placement": {
             "type": "MPopperPlacement",
             "values": [
@@ -25,26 +21,6 @@
             ],
             "default": 6
         },
-        "openOnclick": {
-            "type": "boolean",
-            "default": true
-        },
-        "openOnHover": {
-            "type": "boolean",
-            "default": false
-        },
-        "id": {
-            "type": "string",
-            "default": "mPopper"
-        },
-        "disable": {
-            "type": "boolean",
-            "default": false
-        },
-        "shadow": {
-            "type": "boolean",
-            "default": false
-        },
         "closeOnClickOutside": {
             "type": "boolean",
             "default": true
@@ -52,6 +28,10 @@
         "focusManagement": {
             "type": "boolean",
             "default": true
+        },
+        "shadow": {
+            "type": "boolean",
+            "default": false
         },
         "beforeEnter": {
             "type": "any"

@@ -7,9 +7,6 @@ import { INPUT_STYLE_NAME } from '../component-names';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
-import { log } from 'util';
-import { loadavg } from 'os';
-import { setTimeout } from 'timers';
 
 @WithRender
 @Component({
@@ -18,7 +15,7 @@ import { setTimeout } from 'timers';
 export class MInputStyle extends ModulVue {
     @Prop()
     public label: string;
-    @Prop({ default: false })
+    @Prop()
     public focus: boolean;
     @Prop({ default: true })
     public empty: boolean;
@@ -36,14 +33,17 @@ export class MInputStyle extends ModulVue {
             let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
             if (inputEl) {
                 if (this.width == 'auto' && this.hasAdjustWidthAutoSlot) {
-                    inputEl.style.width = '0px';
                     setTimeout(() => {
-                        let width: number = adjustWidthAutoEl.clientWidth < 60 ? 60 : adjustWidthAutoEl.clientWidth;
-                        if (this.hasLabel) {
-                            width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
-                        }
-                        inputEl.style.width = width + 'px';
+                        inputEl.style.width = '0px';
+                        setTimeout(() => {
+                            let width: number = adjustWidthAutoEl.clientWidth < 60 ? 60 : adjustWidthAutoEl.clientWidth;
+                            if (this.hasLabel) {
+                                width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                            }
+                            inputEl.style.width = width + 'px';
+                        }, 0);
                     }, 0);
+
                 } else {
                     if (inputEl.style.width) {
                         inputEl.style.removeProperty('width');
@@ -52,11 +52,11 @@ export class MInputStyle extends ModulVue {
             }
         });
     }
-    protected mounted(): void {
+    protected created(): void {
         setTimeout(() => {
             this.animActive = true;
+            this.setInputWidth();
         }, 0);
-        this.setInputWidth();
     }
 
     private get hasValue(): boolean {
@@ -68,7 +68,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return this.hasIcon || this.hasLabelText ;
+        return this.hasIcon || this.hasLabelText;
     }
 
     private get hasLabelText(): boolean {
@@ -87,10 +87,6 @@ export class MInputStyle extends ModulVue {
 
     private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
-    }
-
-    private get hasRightContentSlot(): boolean {
-        return !!this.$slots['right-content'];
     }
 
     private hasAdjustWidthAutoSlot(): boolean {

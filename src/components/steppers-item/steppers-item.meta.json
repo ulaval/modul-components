@@ -1,0 +1,25 @@
+{
+    "tag": "m-steppers-item",
+    "name": "m-steppers-item-meta:name",
+    "production": false,
+    "attributes": {
+        "state": {
+            "type": "string",
+            "values": [
+                "completed",
+                "in-progress",
+                "disabled"
+            ],
+            "default": 2
+        },
+        "iconName": {
+            "type": "string",
+            "default": "default"
+        },
+        "iconTitle": {
+            "type": "string"
+        }
+    },
+    "overview": "steppers-item.overview",
+    "preview": "steppers-item.preview"
+}

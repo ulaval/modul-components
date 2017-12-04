@@ -29,21 +29,6 @@ if (!Array.prototype['find']) {
     });
 }
 
-// https://github.com/FabioVergani/js-Polyfill_StringIncludes/blob/master/StringIncludes.js
-if (!String.prototype['includes']) {
-    String.prototype['includes'] = function(search, start) {
-        'use strict';
-        if (typeof start !== 'number') {
-            start = 0;
-        }
-        if (start + search.length > this.length) {
-            return false;
-        } else {
-            return this.indexOf(search, start) !== -1;
-        }
-    };
-}
-
 // https://tc39.github.io/ecma262/#sec-array.prototype.includes
 if (!Array.prototype['includes']) {
     Object.defineProperty(Array.prototype, 'includes', {
@@ -91,4 +76,26 @@ if (!Array.prototype['includes']) {
             return false;
         }
     });
+}
+
+// https://github.com/FabioVergani/js-Polyfill_StringIncludes/blob/master/StringIncludes.js
+if (!String.prototype['includes']) {
+    String.prototype['includes'] = function(search, start) {
+        'use strict';
+        if (typeof start !== 'number') {
+            start = 0;
+        }
+        if (start + search.length > this.length) {
+            return false;
+        } else {
+            return this.indexOf(search, start) !== -1;
+        }
+    };
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith#Polyfill
+if (!String.prototype['startsWith']) {
+    String.prototype['startsWith'] = function(searchString, position) {
+        return this.substr(position || 0, searchString.length) === searchString;
+    };
 }

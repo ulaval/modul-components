@@ -10,6 +10,26 @@
                 "right"
             ],
             "default": 0
+        },
+        "inputSize": {
+            "type": "string",
+            "default": "1em"
+        },
+        "focus": {
+            "type": "boolean",
+            "default": false
+        },
+        "checked": {
+            "type": "boolean",
+            "default": false
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "fullWidth": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "radio-style.overview"

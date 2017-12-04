@@ -177,6 +177,7 @@ export class Messages {
  */
 function format(val: string, params: any[]): string {
     return val.replace(FORMAT_REGEX, match => {
+        // TODO: should use the regex variable notation instead of parsing the regex match
         let index = parseInt(match.substring(1, match.length - 1), 10);
 
         if (index >= params.length) {
@@ -201,6 +202,7 @@ function htmlEncode(val: string) {
 
 const MessagePlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug('$i18n', 'plugin.install');
         let msg: Messages = new Messages();
         (v as any).$i18n = msg;
         (v.prototype as any).$i18n = msg;

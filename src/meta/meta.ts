@@ -65,6 +65,7 @@ export type CategoryComponentMap = {
 
 export class Meta {
     private componentMeta: ComponentMetaMap = {};
+    private componentMetaForProd: ComponentMetaMap = {};
     private categories: CategoryComponentMap = {};
     private categoriesForProd: CategoryComponentMap = {};
 
@@ -95,6 +96,7 @@ export class Meta {
 
             if (this.componentMeta[tag].production) {
                 let categoryComponentsForProd: ComponentMeta[] = this.categoriesForProd[category];
+                this.componentMetaForProd[tag] = this.componentMeta[tag];
                 if (!categoryComponentsForProd) {
                     categoryComponentsForProd = [];
                     this.categoriesForProd[category] = categoryComponentsForProd;
@@ -106,6 +108,10 @@ export class Meta {
 
     public getMeta(): any {
         return this.componentMeta;
+    }
+
+    public getMetaForProd(): any {
+        return this.componentMetaForProd;
     }
 
     public getTags(): string[] {

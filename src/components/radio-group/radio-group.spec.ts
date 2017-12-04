@@ -216,14 +216,13 @@ describe('radio-group', () => {
             }
         }).$mount();
 
-        let input: HTMLInputElement | null = (vm.$refs.a as Vue).$el.querySelector('input');
+        let input: HTMLInputElement = (vm.$refs.a as Vue).$el.querySelector('input') as HTMLInputElement;
 
         let e: any = document.createEvent('HTMLEvents');
         e.initEvent('change', true, true);
 
-        if (input) {
-            input.dispatchEvent(e);
-        }
+        input.dispatchEvent(e);
+
         Vue.nextTick(() => {
             expect(changeSpy).toHaveBeenCalledWith('radio1');
         });

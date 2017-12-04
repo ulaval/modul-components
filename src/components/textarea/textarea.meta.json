@@ -1,0 +1,20 @@
+{
+    "tag": "m-step",
+    "name": "m-step-meta:name",
+    "production": false,
+    "attributes": {
+        "maxlength": {
+            "type": "number"
+        },
+        "maxWidth": {
+            "type": "string",
+            "default": "720px"
+        },
+        "rows": {
+            "type": "number",
+            "default": 3
+        }
+    },
+    "overview": "step.overview",
+    "preview": "step.preview"
+}

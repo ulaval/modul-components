@@ -172,19 +172,7 @@ $m-dialog--max-width--s: 420px !default;
             flex: none;
         }
 
-        @include m-scrollbar-ie();
-
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
-
-            &-track-piece {
-                @include m-scrollbar-track-piece();
-            }
-
-            &-thumb {
-                @include m-scrollbar-thumb();
-            }
-        }
+        @include m-scrollbar();
     }
 
     &__footer {

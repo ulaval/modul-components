@@ -2,9 +2,11 @@
     "m-timepicker": {
         "button-ok": "OK",
         "placeholder": "hh mm",
-        "desc-open-time-selector": "ouvrir le sélecteur de temps",
-        "desc-close-time-selector": "fermer le sélecteur de temps",
-        "out-of-bounds-error": "temps hors limites",
-        "error-format": "format invalide"
+        "hours": "Heures",
+        "minutes": "Minutes",
+        "open": "Ouvrir le sélecteur de temps",
+        "close": "Fermer le sélecteur de temps",
+        "out-of-bounds-error": "Temps hors limites",
+        "error-format": "Format invalide"
     }
 }
