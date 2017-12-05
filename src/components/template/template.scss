@@ -125,7 +125,17 @@ $m-template--column-color: $m-color--grey-light;
     }
 }
 
-@media (max-width: $m-mq--max--s) {
+@media (max-width: $m-mq--max--xs) {
+    .m-template {
+        &__header,
+        &__body__content,
+        &__column {
+            padding: $m-padding--s;
+        }
+    }
+}
+
+@media (min-width: $m-mq--min--xs) and (max-width: $m-mq--max--s) {
     .m-template {
         &__header,
         &__body__content,
