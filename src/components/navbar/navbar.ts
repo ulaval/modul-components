@@ -23,7 +23,7 @@ export enum MNavbarSkin {
 export class MNavbar extends BaseNavBar {
 
     @Prop({
-        default: MNavbarSkin.Dark,
+        default: MNavbarSkin.Regular,
         validator: value =>
             value == MNavbarSkin.Regular ||
             value == MNavbarSkin.Light ||

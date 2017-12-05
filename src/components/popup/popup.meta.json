@@ -90,10 +90,6 @@
         },
         "leaveCancelled": {
             "type": "any"
-        },
-        "desktopOnly": {
-            "type": "boolean",
-            "default": false
         }
     },
     "overview": "popup.overview",

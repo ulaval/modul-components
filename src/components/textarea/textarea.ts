@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './textarea.html?style=./textarea.scss';
 import { TEXTAREA_NAME } from '../component-names';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { InputState } from '../../mixins/input-state/input-state';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { KeyCode } from '../../utils/keycode/keycode';
 import InputStyle from '../input-style/input-style';

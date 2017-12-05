@@ -13,8 +13,7 @@
             "default": 2
         },
         "iconName": {
-            "type": "string",
-            "default": "default"
+            "type": "string"
         },
         "iconTitle": {
             "type": "string"

@@ -12,7 +12,7 @@
                 "plain",
                 "arrow"
             ],
-            "default": 2
+            "default": 0
         },
         "line": {
             "type": "boolean",

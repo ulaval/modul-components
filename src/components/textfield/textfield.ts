@@ -4,14 +4,14 @@ import Component from 'vue-class-component';
 import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './textfield.html?style=./textfield.scss';
 import { TEXTFIELD_NAME } from '../component-names';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { InputState } from '../../mixins/input-state/input-state';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { KeyCode } from '../../utils/keycode/keycode';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import ButtonPlugin from '../button/button';
 
-export enum MTextFieldType {
+export enum MTextfieldType {
     Text = 'text',
     Password = 'password',
     EMail = 'email',
@@ -29,18 +29,18 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
         InputManagement
     ]
 })
-export class MTextField extends ModulVue {
+export class MTextfield extends ModulVue {
 
     @Prop({
-        default: MTextFieldType.Text,
+        default: MTextfieldType.Text,
         validator: value =>
-            value == MTextFieldType.EMail ||
-            value == MTextFieldType.Password ||
-            value == MTextFieldType.Telephone ||
-            value == MTextFieldType.Text ||
-            value == MTextFieldType.Url
+            value == MTextfieldType.EMail ||
+            value == MTextfieldType.Password ||
+            value == MTextfieldType.Telephone ||
+            value == MTextfieldType.Text ||
+            value == MTextfieldType.Url
     })
-    public type: MTextFieldType;
+    public type: MTextfieldType;
     @Prop({ default: true })
     public passwordIcon: boolean;
 
@@ -54,7 +54,7 @@ export class MTextField extends ModulVue {
     }
 
     @Watch('type')
-    private typeChanged(type: MTextFieldType): void {
+    private typeChanged(type: MTextfieldType): void {
         console.warn('<' + TEXTFIELD_NAME + '>: Change of property "type" is not supported');
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
@@ -63,12 +63,12 @@ export class MTextField extends ModulVue {
         this.passwordAsText = !this.passwordAsText;
     }
 
-    private get inputType(): MTextFieldType {
-        let type: MTextFieldType = MTextFieldType.Text;
-        if (this.type == MTextFieldType.Password && this.passwordAsText) {
-            type = MTextFieldType.Text;
-        } else if (this.type == MTextFieldType.Password || this.type == MTextFieldType.EMail || this.type == MTextFieldType.Url ||
-            this.type == MTextFieldType.Telephone) {
+    private get inputType(): MTextfieldType {
+        let type: MTextfieldType = MTextfieldType.Text;
+        if (this.type == MTextfieldType.Password && this.passwordAsText) {
+            type = MTextfieldType.Text;
+        } else if (this.type == MTextfieldType.Password || this.type == MTextfieldType.EMail || this.type == MTextfieldType.Url ||
+            this.type == MTextfieldType.Telephone) {
             type = this.type;
         }
         this.$nextTick(() => {
@@ -89,17 +89,17 @@ export class MTextField extends ModulVue {
     }
 
     private get propPasswordIcon(): boolean {
-        return this.passwordIcon && this.type == MTextFieldType.Password && this.as<InputStateMixin>().active;
+        return this.passwordIcon && this.type == MTextfieldType.Password && this.as<InputState>().active;
     }
 }
 
-const TextFieldPlugin: PluginObject<any> = {
+const TextfieldPlugin: PluginObject<any> = {
     install(v, options) {
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(ButtonPlugin);
-        v.component(TEXTFIELD_NAME, MTextField);
+        v.component(TEXTFIELD_NAME, MTextfield);
     }
 };
 
-export default TextFieldPlugin;
+export default TextfieldPlugin;

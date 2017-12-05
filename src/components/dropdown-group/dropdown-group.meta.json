@@ -5,6 +5,9 @@
     "attributes": {
         "label": {
             "type": "string"
+        },
+        "root": {
+            "type": "string"
         }
     },
     "overview": "dropdown-group.overview",

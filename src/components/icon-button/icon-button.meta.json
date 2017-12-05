@@ -27,6 +27,9 @@
         "iconSize": {
             "type": "string",
             "default": "16px"
+        },
+        "title": {
+            "type": "string"
         }
     },
     "overview": "button.overview",
