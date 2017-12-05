@@ -1,7 +1,7 @@
 {
     "tag": "m-radio-group",
     "name": "m-radio-group-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
         "value": {
             "type": "string"
