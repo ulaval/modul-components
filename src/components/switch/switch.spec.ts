@@ -6,7 +6,7 @@ const SWITCH_LEFT_CSS: string = 'm--is-switch-left';
 const SWITCH_RIGHT_CSS: string = 'm--is-switch-right';
 const CHECKED_CSS: string = 'm--is-checked';
 const FOCUS_CSS: string = 'm--is-focus';
-const NO_HELPER_TEXT_CSS: string = 'm--no-helperText';
+const NO_STATE_TEXT_CSS: string = 'm--no-state-text';
 
 let switchVar: MSwitch;
 
@@ -31,7 +31,7 @@ describe('switch', () => {
         expect(switchVar.$el.classList.contains(SWITCH_RIGHT_CSS)).toBeFalsy();
         expect(switchVar.$el.classList.contains(CHECKED_CSS)).toBeFalsy();
         expect(switchVar.$el.classList.contains(FOCUS_CSS)).toBeFalsy();
-        expect(switchVar.$el.classList.contains(NO_HELPER_TEXT_CSS)).toBeFalsy();
+        expect(switchVar.$el.classList.contains(NO_STATE_TEXT_CSS)).toBeFalsy();
     });
 
     it('position prop', () => {
@@ -50,13 +50,13 @@ describe('switch', () => {
     });
 
     it('helper text prop', () => {
-        expect(switchVar.$el.classList.contains(NO_HELPER_TEXT_CSS)).toBeFalsy();
-        switchVar.helperText = false;
+        expect(switchVar.$el.classList.contains(NO_STATE_TEXT_CSS)).toBeFalsy();
+        switchVar.stateText = false;
         Vue.nextTick(() => {
-            expect(switchVar.$el.classList.contains(NO_HELPER_TEXT_CSS)).toBeTruthy();
-            switchVar.helperText = true;
+            expect(switchVar.$el.classList.contains(NO_STATE_TEXT_CSS)).toBeTruthy();
+            switchVar.stateText = true;
             Vue.nextTick(() => {
-                expect(switchVar.$el.classList.contains(NO_HELPER_TEXT_CSS)).toBeFalsy();
+                expect(switchVar.$el.classList.contains(NO_STATE_TEXT_CSS)).toBeFalsy();
             });
         });
     });

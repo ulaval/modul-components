@@ -30,7 +30,7 @@ export class MSwitch extends ModulVue {
     })
     public position: string;
     @Prop({ default: true })
-    public helperText: boolean;
+    public stateText: boolean;
 
     private internalValue: boolean = false;
     private isFocus = false;
