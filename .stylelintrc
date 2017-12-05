@@ -7,6 +7,8 @@
         "indentation": 4,
         "scss/dollar-variable-pattern": "^m-",
         "scss/selector-no-redundant-nesting-selector": null,
-        "at-rule-no-unknown": null
+        "at-rule-no-unknown": null,
+        "no-descending-specificity": null,
+        "no-duplicate-selectors": null
     }
 }
