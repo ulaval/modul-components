@@ -10,7 +10,7 @@ $m-accordion--color: $m-color--accent;
 .m-accordion {
     &.m--is-regular,
     &.m--is-light {
-        > .m-accordion__header__title {
+        > .m-accordion__header__content {
             &,
             h1,
             h2,
@@ -29,10 +29,14 @@ $m-accordion--color: $m-color--accent;
         margin-top: - $m-accordion--border-size;
 
         > .m-accordion {
+            &__header,
+            &__body-wrap > .m-accordion__body {
+                padding: $m-padding $m-padding $m-padding 20px; // Magic number
+            }
+
             &__header {
                 position: relative;
                 min-height: 56px;
-                padding: $m-padding $m-padding $m-padding $m-margin;
                 border-top: $m-accordion--border-size solid $m-accordion--border-color;
                 border-bottom: $m-accordion--border-size solid $m-accordion--border-color;
 
@@ -65,7 +69,6 @@ $m-accordion--color: $m-color--accent;
 
                 > .m-accordion__body {
                     transition: opacity $m-transition-duration--l ease, transform $m-transition-duration ease;
-                    padding: $m-padding;
                 }
             }
         }
@@ -77,7 +80,7 @@ $m-accordion--color: $m-color--accent;
         > .m-accordion {
             &__header {
                 &:hover {
-                    .m-accordion__header__title {
+                    .m-accordion__header__content {
                         transition: color $m-transition-duration ease;
                         color: $m-color--interactive;
                     }
@@ -113,7 +116,7 @@ $m-accordion--color: $m-color--accent;
             text-decoration: none;
         }
 
-        &__title {
+        &__content {
             flex: 1;
         }
 

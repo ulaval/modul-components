@@ -49,6 +49,10 @@
         },
         "closeTitle": {
             "type": "string"
+        },
+        "underline": {
+            "type": "boolean",
+            "default": true
         }
     },
     "overview": "tooltip.overview",

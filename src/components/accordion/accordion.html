@@ -1,8 +1,8 @@
 <article class="m-accordion" :class="['m--is-' + propSkin, {'m--is-closed': !propOpen}]">
     <header tabindex="0" class="m-accordion__header" :class="{ 'm--is-icon-left': propIconPosition != 'right' }" @keyup.enter="toggleAccordion"
         @click.prevent="toggleAccordion" ref="accordionHeader">
-        <div class="m-accordion__header__title">
-            <slot name="title"></slot>
+        <div class="m-accordion__header__content">
+            <slot name="header"></slot>
             <m-i18n k="m-accordion:open" class="m-accordion__hidden" v-if="!propOpen"></m-i18n>
             <m-i18n k="m-accordion:close" class="m-accordion__hidden" v-if="propOpen"></m-i18n>
         </div>

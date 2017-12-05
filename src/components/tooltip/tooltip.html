@@ -10,7 +10,7 @@
     <m-icon-button slot="trigger" class="m-tooltip__icon" icon-name="information" :title="propTitle" button-size="22px" v-if="propMode == 'icon'">
         <span aria-hidden="true">{{ open ? propCloseTitle : propOpenTitle }}</span>
     </m-icon-button>
-    <m-link slot="trigger" class="m-tooltip__link" mode="button" v-if="propMode != 'icon'">
+    <m-link slot="trigger" class="m-tooltip__link" mode="button" :underline="underline" v-if="propMode != 'icon'">
         <slot name="link"></slot>
     </m-link>
 
