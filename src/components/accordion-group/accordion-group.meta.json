@@ -1,7 +1,7 @@
 {
     "tag": "m-accordion-group",
     "name": "m-accordion-group-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
         "skin": {
             "type": "string",
