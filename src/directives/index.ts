@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 
 import PopupPlugin from './popup/popup';
 import RippleEffectPlugin from './ripple-effect/ripple-effect';

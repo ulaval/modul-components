@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './panel.html?style=./panel.scss';

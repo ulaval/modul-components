@@ -71,17 +71,17 @@ export class Meta {
 
     constructor() {
         components.forEach(componentTag => {
-            this.componentMeta[componentTag] = {tag: componentTag};
+            this.componentMeta[componentTag] = { tag: componentTag };
         });
 
         directives.forEach(directiveTag => {
-            this.componentMeta[directiveTag] = {tag: directiveTag};
+            this.componentMeta[directiveTag] = { tag: directiveTag };
         });
     }
 
     public mergeComponentMeta(tag: string, meta: ComponentMeta, category?: string): void {
         let metaObject: ComponentMeta = this.componentMeta[tag];
-        this.componentMeta[tag] = {...metaObject, ...meta};
+        this.componentMeta[tag] = { ...metaObject, ...meta };
         if (this.componentMeta[tag].preview == undefined) {
             this.componentMeta[tag].preview = true;
         }

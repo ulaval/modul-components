@@ -111,7 +111,7 @@ module.exports = function (env) {
         plugins: [
             new StyleLintPlugin({
                 configFile: '.stylelintrc',
-                emitErrors: true
+                emitErrors: false
             }),
             new ContextReplacementPlugin(
                 /moment[\/\\]locale$/,

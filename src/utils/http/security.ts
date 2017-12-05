@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { PluginObject } from 'vue';
 import axios from 'axios';
 import * as strUtils from '../str/str';
