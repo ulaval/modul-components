@@ -13,7 +13,7 @@
                 "icon",
                 "link"
             ],
-            "default": "0"
+            "default": 0
         },
         "placement": {
             "type": "MPopperPlacement",
@@ -36,9 +36,6 @@
         "closeButton": {
             "type": "boolean",
             "default": true
-        },
-        "classNamePortalTarget": {
-            "type": "string"
         },
         "disabled": {
             "type": "boolean",

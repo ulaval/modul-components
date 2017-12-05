@@ -7,7 +7,7 @@
     <div class="m-template__wrap" v-if="hasDefaultSlot || hasColumnSlot || hasFooterSlot ">
         <div class="m-template__body-container" v-if="hasDefaultSlot || (hasFooterSlot && !footerFullWidth)">
             <div class="m-template__body">
-                <div class="m-template__body__content" :style="{ maxWidth: contentWidth }" v-if="hasDefaultSlot">
+                <div class="m-template__body__content" v-if="hasDefaultSlot">
                     <slot></slot>
                 </div>
                 <footer class="m-template__body__footer" v-if="hasFooterSlot && !footerFullWidth">

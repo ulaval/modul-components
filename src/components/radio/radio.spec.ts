@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
 import RadioPlugin, { MRadio, MRadioPosition } from './radio';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 
 const DISABLED_CSS: string = 'm--is-disabled';
 const POSITION_RIGHT_CSS: string = 'm--is-input-right';

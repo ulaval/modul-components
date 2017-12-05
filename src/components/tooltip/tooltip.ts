@@ -51,8 +51,6 @@ export class MTooltip extends ModulVue {
     public placement: MPopperPlacement;
     @Prop({ default: true })
     public closeButton: boolean;
-    @Prop({ default: '' })
-    public classNamePortalTarget: string;
     @Prop()
     public disabled: boolean;
     @Prop()
@@ -60,7 +58,7 @@ export class MTooltip extends ModulVue {
     @Prop()
     public closeTitle: string;
     @Prop({ default: true })
-    public underline: string;
+    public underline: boolean;
 
     private propOpen = false;
 

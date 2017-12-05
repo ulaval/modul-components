@@ -12,8 +12,6 @@ import { ElementQueries } from '../../mixins/element-queries/element-queries';
 export class Mtemplate extends Vue {
     @Prop()
     public footerFullWidth: boolean;
-    @Prop()
-    public contentWidth: string;
 
     private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;

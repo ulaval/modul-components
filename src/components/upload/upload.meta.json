@@ -4,8 +4,7 @@
     "production": false,
     "attributes": {
         "extensions": {
-            "type": "string[]",
-            "default": []
+            "type": "string[]"
         },
         "multiple": {
             "type": "boolean",

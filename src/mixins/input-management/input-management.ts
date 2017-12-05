@@ -10,8 +10,6 @@ export class InputManagement extends ModulVue {
     @Prop()
     @Model('change')
     public value: string;
-    @Prop({ default: true })
-    public passwordIcon: boolean;
     @Prop()
     public label: string;
     @Prop()
