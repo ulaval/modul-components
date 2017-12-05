@@ -1,7 +1,3 @@
-$m-color--black: #000;
-$m-color--text: $m-color--black;
-$m-color--white: #fff;
-
 // ======================================================================
 //  Official color of Université Laval
 // ======================================================================
@@ -27,6 +23,13 @@ $m-color--grey: #dadada !default;
 $m-color--grey-light: #e8e8e8 !default;
 $m-color--grey-lighter: #f1f1f1 !default;
 $m-color--grey-lightest: #f7f7f7 !default;
+
+// ======================================================================
+//  General color
+// ======================================================================
+$m-color--black: #000;
+$m-color--text: $m-color--black;
+$m-color--white: #fff;
 
 // ======================================================================
 //  Success colors

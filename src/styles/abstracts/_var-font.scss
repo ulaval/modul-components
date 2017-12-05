@@ -2,7 +2,7 @@
 //  Fonts property
 // ======================================================================
 $m-font-name: 'Source Sans Pro' !default;
-$m-font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif !default;
+$m-font-family: 'Overpass', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif !default;
 
 // ======================================================================
 //  App font size
@@ -19,8 +19,8 @@ $m-font-size--h1: 32px !default;
 $m-font-size--h2: 28px !default;
 $m-font-size--h3: 24px !default;
 $m-font-size--h4: 20px !default;
-$m-font-size--h5: 18px !default;
-$m-font-size--h6: 18px !default;
+$m-font-size--h5: 16px !default;
+$m-font-size--h6: 16px !default;
 
 // ======================================================================
 //  Font weight
@@ -29,6 +29,7 @@ $m-font-weight--black: 600 !default;
 $m-font-weight--bold: 400 !default;
 $m-font-weight: 300 !default;
 $m-font-weight--regular: 300 !default;
+$m-font-weight--light: 200 !default;
 
 // ======================================================================
 //  Line height

@@ -1,18 +1,21 @@
 // ======================================================================
 //  Titles
 // ======================================================================
+
 h1,
 h2,
 h3,
 h4,
 h5,
+h6,
 .m-u--h1,
 .m-u--h2,
 .m-u--h3,
 .m-u--h4,
-.m-u--h5 {
-    font-weight: $m-font-weight--bold;
-    line-height: 1;
+.m-u--h5,
+.m-u--h6 {
+    font-family: $m-font-family;
+    line-height: 1.1;
 }
 
 h4,
@@ -26,37 +29,41 @@ h6,
 
 h1,
 .m-u--h1 {
-    font-size: $m-font-size--h1;
     margin: 0;
+    font-size: $m-font-size--h1;
+    font-weight: $m-font-weight--black;
 }
 
 h2,
 .m-u--h2 {
-    font-size: $m-font-size--h2;
     margin: $m-padding--l 0 0 0;
+    font-size: $m-font-size--h2;
+    font-weight: $m-font-weight--bold;
 }
 
 h3,
 .m-u--h3 {
-    font-size: $m-font-size--h3;
     margin: $m-padding--l 0 0 0;
+    font-size: $m-font-size--h3;
+    font-weight: $m-font-weight--bold;
 }
 
 h4,
 .m-u--h4 {
     font-size: $m-font-size--h4;
+    font-weight: $m-font-weight--black;
 }
 
 h5,
 .m-u--h5 {
     font-size: $m-font-size--h5;
+    font-weight: $m-font-weight--black;
 }
 
 h6,
 .m-u--h6 {
-    font-weight: $m-font-weight--regular;
     font-size: $m-font-size--h6;
-    line-height: 1;
+    font-weight: $m-font-weight--bold;
 }
 
 // ======================================================================
@@ -64,7 +71,9 @@ h6,
 // ======================================================================
 p,
 .m-u--p {
+    font-family: $m-font-family;
     margin: $m-margin 0 0 0;
+    color: $m-color--text;
 }
 
 b,
@@ -95,6 +104,7 @@ code {
 // ======================================================================
 a {
     color: $m-color--interactive;
+    font-family: $m-font-family;
 }
 
 // ======================================================================
@@ -115,6 +125,13 @@ a {
         &--xs {
             font-size: $m-font-size--xs;
         }
+
+        &,
+        &--l,
+        &--s,
+        &--xs {
+            font-family: $m-font-family;
+        }
     }
 
     &-style {
@@ -124,6 +141,13 @@ a {
 
         &--italic {
             font-style: italic;
+        }
+
+        &,
+        &--l,
+        &--s,
+        &--xs {
+            font-family: $m-font-family;
         }
     }
 
@@ -139,6 +163,13 @@ a {
         &--normal {
             font-weight: $m-font-weight;
         }
+
+        &,
+        &--l,
+        &--s,
+        &--xs {
+            font-family: $m-font-family;
+        }
     }
 }
 
@@ -147,6 +178,7 @@ a {
 // ======================================================================
 .m-u--typo {
     &--precision {
+        font-family: $m-font-family;
         font-size: $m-font-size--s;
         font-style: italic;
         color: $m-color--grey-darker;
@@ -154,6 +186,7 @@ a {
 
     &--highlighting {
         display: inline;
+        font-family: $m-font-family;
         font-size: $m-font-size--s;
         font-weight: $m-font-weight--bold;
         background: $m-color--warning-light;
