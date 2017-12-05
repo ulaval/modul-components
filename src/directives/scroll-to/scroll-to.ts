@@ -1,7 +1,5 @@
-import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
-import { PluginObject } from 'vue';
-import ScrollTo from './scroll-to-lib';
-import { ScrollToDuration } from './scroll-to-lib';
+import { PluginObject, DirectiveOptions, VNodeDirective } from 'vue';
+import ScrollTo, { ScrollToDuration } from './scroll-to-lib';
 import { SCROLL_TO_NAME } from '../directive-names';
 
 const MOUSE_DOWN_MODIFIER: string = 'ripple-effect_mouse-down';

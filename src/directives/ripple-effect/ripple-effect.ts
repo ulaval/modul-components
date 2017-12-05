@@ -1,5 +1,4 @@
-import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
-import { PluginObject } from 'vue';
+import { PluginObject, DirectiveOptions, VNodeDirective } from 'vue';
 import RippleEffect from './ripple-effect-lib';
 import { RIPPLE_EFFECT_NAME } from '../directive-names';
 

@@ -39,7 +39,7 @@ describe('icon', () => {
         });
     });
 
-    it('name prop', () => {
+    it('name prop', done => {
         validateIconSvg(icon.$el, ICON_DEFAULT);
 
         icon.name = ICON_OPTIONS;
@@ -48,11 +48,13 @@ describe('icon', () => {
             icon.name = 'default';
             Vue.nextTick(() => {
                 validateIconSvg(icon.$el, ICON_DEFAULT);
+
+                done();
             });
         });
     });
 
-    it('svgTitle prop', () => {
+    it('svgTitle prop', done => {
         let svgTitle: HTMLTitleElement | null = icon.$el.querySelector('title');
         expect(svgTitle).toBeFalsy();
 
@@ -61,18 +63,22 @@ describe('icon', () => {
             if (svgTitle) {
                 expect(svgTitle.textContent).toEqual('options');
             }
+
+            done();
         });
     });
 
-    it('size prop', () => {
+    it('size prop', done => {
         validateIconSize(icon.$el, '1em');
         icon.size = '20px';
         Vue.nextTick(() => {
             validateIconSize(icon.$el, '20px');
+
+            done();
         });
     });
 
-    it('click event', () => {
+    it('click event', done => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
             template: `<m-icon @click="onClick"></m-icon>`,
@@ -88,6 +94,8 @@ describe('icon', () => {
 
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalledWith(e);
+
+            done();
         });
     });
 

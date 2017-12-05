@@ -2,6 +2,7 @@ import Vue from 'vue';
 import '../../utils/polyfills';
 import { MRadioPosition } from '../radio/radio';
 import RadioGroupPlugin, { MRadioGroup } from './radio-group';
+import LangHelper from '../../../tests/helpers/lang';
 
 const DISABLED_CSS: string = 'm--is-disabled';
 const POSITION_RIGHT_CSS: string = 'm--is-input-right';
@@ -10,7 +11,18 @@ const CHECKED_CSS: string = 'm--is-checked';
 
 describe('radio-group', () => {
     beforeEach(() => {
+        spyOn(console, 'error');
+
         Vue.use(RadioGroupPlugin);
+        Vue.use(LangHelper);
+    });
+
+    afterEach(done => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+
+            done();
+        });
     });
 
     it('name is applied on each radio item', () => {
@@ -37,7 +49,7 @@ describe('radio-group', () => {
         }
     });
 
-    it('iconname prop is ignored', () => {
+    it('iconname prop is ignored', done => {
         let vm = new Vue({
             template: `
             <div>
@@ -58,6 +70,8 @@ describe('radio-group', () => {
         Vue.nextTick(() => {
             svg = (vm.$refs.a as Vue).$el.querySelector('svg');
             expect(svg).toBeFalsy();
+
+            done();
         });
     });
 
@@ -80,7 +94,7 @@ describe('radio-group', () => {
             }).$mount();
         });
 
-        it('position prop left', () => {
+        it('position prop left', done => {
             expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
@@ -90,10 +104,12 @@ describe('radio-group', () => {
                 expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
                 expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
                 expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
+
+                done();
             });
         });
 
-        it('position prop right', () => {
+        it('position prop right', done => {
             expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
@@ -103,11 +119,13 @@ describe('radio-group', () => {
                 expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
                 expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
                 expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
+
+                done();
             });
         });
     });
 
-    it('inline prop', () => {
+    it('inline prop', done => {
         let vm = new Vue({
             template: `
             <div>
@@ -136,11 +154,13 @@ describe('radio-group', () => {
                 expect((vm.$refs.g as Vue).$el.classList.contains(INLINE_CSS)).toBeFalsy();
                 expect((vm.$refs.a as Vue).$el.classList.contains(INLINE_CSS)).toBeFalsy();
                 expect((vm.$refs.b as Vue).$el.classList.contains(INLINE_CSS)).toBeFalsy();
+
+                done();
             });
         });
     });
 
-    it('disabled prop', () => {
+    it('disabled prop', done => {
         let vm = new Vue({
             template: `
             <div>
@@ -168,11 +188,13 @@ describe('radio-group', () => {
                 expect((vm.$refs.a as Vue).$el.classList.contains(DISABLED_CSS)).toBeFalsy();
                 // override
                 expect((vm.$refs.b as Vue).$el.classList.contains(DISABLED_CSS)).toBeTruthy();
+
+                done();
             });
         });
     });
 
-    it('v-model', () => {
+    it('v-model', done => {
         let vm = new Vue({
             template: `
             <div>
@@ -195,10 +217,12 @@ describe('radio-group', () => {
         Vue.nextTick(() => {
             expect(li1.classList.contains(CHECKED_CSS)).toBeTruthy();
             expect(li2.classList.contains(CHECKED_CSS)).toBeFalsy();
+
+            done();
         });
     });
 
-    it('change event', () => {
+    it('change event', done => {
         let changeSpy = jasmine.createSpy('changeSpy');
         let vm = new Vue({
             data: {
@@ -225,6 +249,8 @@ describe('radio-group', () => {
 
         Vue.nextTick(() => {
             expect(changeSpy).toHaveBeenCalledWith('radio1');
+
+            done();
         });
     });
 });

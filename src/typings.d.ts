@@ -1,6 +1,6 @@
 // vue-template-loader (@see https://github.com/ktsn/vue-template-loader)
 /* tslint:disable:interface-name no-duplicate-imports */
-declare module "*.html" {
+declare module '*.html' {
     import Vue, { ComponentOptions } from 'vue';
     interface WithRender {
         <V extends Vue>(options: ComponentOptions<V>): ComponentOptions<V>;
@@ -10,7 +10,7 @@ declare module "*.html" {
     export = withRender;
 }
 
-declare module "*.scss" {
+declare module '*.scss' {
     import Vue, { ComponentOptions } from 'vue';
     interface WithRender {
         <V extends Vue>(options: ComponentOptions<V>): ComponentOptions<V>;
@@ -20,7 +20,7 @@ declare module "*.scss" {
     export = withRender;
 }
 
-declare module "*.css" {
+declare module '*.css' {
     import Vue, { ComponentOptions } from 'vue';
     interface WithRender {
         <V extends Vue>(options: ComponentOptions<V>): ComponentOptions<V>;

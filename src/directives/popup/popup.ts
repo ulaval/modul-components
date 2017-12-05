@@ -1,5 +1,4 @@
-import Vue, { DirectiveOptions, VNodeDirective, VNode } from 'vue';
-import { PluginObject } from 'vue';
+import { PluginObject, DirectiveOptions, VNodeDirective, VNode } from 'vue';
 import { POPUP_NAME } from '../directive-names';
 import { OpenTrigger } from '../../mixins/open-trigger/open-trigger';
 

@@ -50,9 +50,11 @@ describe('link', () => {
         });
     });
 
-    afterEach(() => {
+    afterEach(done => {
         Vue.nextTick(() => {
             expect(console.error).not.toHaveBeenCalled();
+
+            done();
         });
     });
 
@@ -121,7 +123,7 @@ describe('link', () => {
         });
 
         describe('button url', () => {
-            it('anchor', () => {
+            it('anchor', done => {
                 (vm as any).mode = MLinkMode.Button;
 
                 Vue.nextTick(() => {
@@ -132,13 +134,15 @@ describe('link', () => {
                     Vue.nextTick(() => {
                         element = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
                         expect(element.getAttribute('href')).toEqual('#');
+
+                        done();
                     });
                 });
             });
         });
 
         describe('object url', () => {
-            it('anchor', () => {
+            it('anchor', done => {
                 (vm as any).mode = MLinkMode.Button;
 
                 Vue.nextTick(() => {
@@ -149,13 +153,15 @@ describe('link', () => {
                     Vue.nextTick(() => {
                         element = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
                         expect(element.getAttribute('href')).toEqual('#');
+
+                        done();
                     });
                 });
             });
         });
 
         describe('named routes', () => {
-            it('anchor', () => {
+            it('anchor', done => {
                 (vm as any).mode = MLinkMode.RouterLink;
 
                 Vue.nextTick(() => {
@@ -166,6 +172,8 @@ describe('link', () => {
                     Vue.nextTick(() => {
                         element = (vm.$refs.a as Vue).$el as HTMLAnchorElement;
                         expect(element.getAttribute('href')).toEqual('/named/123');
+
+                        done();
                     });
                 });
             });
@@ -184,23 +192,25 @@ describe('link', () => {
             }).$mount();
         });
 
-        const test = () => {
+        const test = done => {
             let element: Vue = vm.$refs.a as Vue;
 
             expect(element.$el.classList.contains(UNVISITED_CSS)).toBeFalsy();
             (vm as any).unvisited = true;
             Vue.nextTick(() => {
                 expect(element.$el.classList.contains(UNVISITED_CSS)).toBeTruthy();
+
+                done();
             });
         };
 
-        it('router-link', () => {
-            test();
+        it('router-link', done => {
+            test(done);
         });
 
-        it('link', () => {
+        it('link', done => {
             (vm as any).mode = MLinkMode.Link;
-            test();
+            test(done);
         });
     });
 
@@ -216,23 +226,25 @@ describe('link', () => {
             }).$mount();
         });
 
-        const test = () => {
+        const test = done => {
             let element: Vue = vm.$refs.a as Vue;
 
             expect(element.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
             (vm as any).disabled = true;
             Vue.nextTick(() => {
                 expect(element.$el.classList.contains(DISABLED_CSS)).toBeTruthy();
+
+                done();
             });
         };
 
-        it('router-link', () => {
-            test();
+        it('router-link', done => {
+            test(done);
         });
 
-        it('link', () => {
+        it('link', done => {
             (vm as any).mode = MLinkMode.Link;
-            test();
+            test(done);
         });
     });
 
@@ -248,23 +260,25 @@ describe('link', () => {
             }).$mount();
         });
 
-        const test = () => {
+        const test = done => {
             let element: Vue = vm.$refs.a as Vue;
 
             expect(element.$el.classList.contains(NO_UNDERLINE_CSS)).toBeTruthy();
             (vm as any).underline = true;
             Vue.nextTick(() => {
                 expect(element.$el.classList.contains(NO_UNDERLINE_CSS)).toBeFalsy();
+
+                done();
             });
         };
 
-        it('router-link', () => {
-            test();
+        it('router-link', done => {
+            test(done);
         });
 
-        it('link', () => {
+        it('link', done => {
             (vm as any).mode = MLinkMode.Link;
-            test();
+            test(done);
         });
     });
 
@@ -280,23 +294,25 @@ describe('link', () => {
             }).$mount();
         });
 
-        const test = () => {
+        const test = done => {
             let element: Vue = vm.$refs.a as Vue;
 
             expect(element.$el.classList.contains(MULTI_LINE_CSS)).toBeFalsy();
             (vm as any).multiLine = true;
             Vue.nextTick(() => {
                 expect(element.$el.classList.contains(MULTI_LINE_CSS)).toBeTruthy();
+
+                done();
             });
         };
 
-        it('router-link', () => {
-            test();
+        it('router-link', done => {
+            test(done);
         });
 
-        it('link', () => {
+        it('link', done => {
             (vm as any).mode = MLinkMode.Link;
-            test();
+            test(done);
         });
     });
 
@@ -312,7 +328,7 @@ describe('link', () => {
             }).$mount();
         });
 
-        const test = () => {
+        const test = done => {
             let element: Element | null = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS);
             expect(element).toBeFalsy();
 
@@ -323,16 +339,18 @@ describe('link', () => {
                 if (element) {
                     validateIconSvg(element, 'right-arrow');
                 }
+
+                done();
             });
         };
 
-        it('router-link', () => {
-            test();
+        it('router-link', done => {
+            test(done);
         });
 
-        it('link', () => {
+        it('link', done => {
             (vm as any).mode = MLinkMode.Link;
-            test();
+            test(done);
         });
     });
 
@@ -348,7 +366,7 @@ describe('link', () => {
             }).$mount();
         });
 
-        const test = () => {
+        const test = done => {
             let element: Element | null = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS);
             expect(element).toBeFalsy();
 
@@ -359,16 +377,18 @@ describe('link', () => {
                 if (element) {
                     validateIconSvg(element, 'clock');
                 }
+
+                done();
             });
         };
 
-        it('router-link', () => {
-            test();
+        it('router-link', done => {
+            test(done);
         });
 
-        it('link', () => {
+        it('link', done => {
             (vm as any).mode = MLinkMode.Link;
-            test();
+            test(done);
         });
     });
 
@@ -384,23 +404,25 @@ describe('link', () => {
             }).$mount();
         });
 
-        const test = () => {
+        const test = done => {
             let element: Vue = vm.$refs.a as Vue;
 
             expect(element.$el.classList.contains(ICON_POSITION_RIGHT_CSS)).toBeFalsy();
             (vm as any).position = MLinkIconPosition.Right;
             Vue.nextTick(() => {
                 expect(element.$el.classList.contains(ICON_POSITION_RIGHT_CSS)).toBeTruthy();
+
+                done();
             });
         };
 
-        it('router-link', () => {
-            test();
+        it('router-link', done => {
+            test(done);
         });
 
-        it('link', () => {
+        it('link', done => {
             (vm as any).mode = MLinkMode.Link;
-            test();
+            test(done);
         });
     });
 
@@ -416,7 +438,7 @@ describe('link', () => {
             }).$mount();
         });
 
-        const test = () => {
+        const test = done => {
             let element: HTMLElement | null = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS) as HTMLElement;
             expect(element).toBeTruthy();
 
@@ -425,16 +447,18 @@ describe('link', () => {
             Vue.nextTick(() => {
                 element = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS) as HTMLElement;
                 expect(element.getAttribute('width')).toBe('16px');
+
+                done();
             });
         };
 
-        it('router-link', () => {
-            test();
+        it('router-link', done => {
+            test(done);
         });
 
-        it('link', () => {
+        it('link', done => {
             (vm as any).mode = MLinkMode.Link;
-            test();
+            test(done);
         });
     });
 
@@ -477,7 +501,7 @@ describe('link', () => {
             }).$mount();
         });
 
-        const test = () => {
+        const test = done => {
             let hidden: Element | null = (vm.$refs.a as Vue).$el.querySelector(I18N_CLASS);
             expect(hidden).toBeFalsy();
 
@@ -486,16 +510,18 @@ describe('link', () => {
                 hidden = (vm.$refs.a as Vue).$el.querySelector(I18N_CLASS);
                 expect(hidden).toBeTruthy();
                 expect((vm.$refs.a as Vue).$el.getAttribute('target')).toEqual('_blank');
+
+                done();
             });
         };
 
-        it('router-link', () => {
-            test();
+        it('router-link', done => {
+            test(done);
         });
 
-        it('link', () => {
+        it('link', done => {
             (vm as any).mode = MLinkMode.Link;
-            test();
+            test(done);
         });
     });
 });
