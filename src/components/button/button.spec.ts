@@ -45,9 +45,11 @@ describe('button', () => {
         Vue.use(SpritesHelper);
     });
 
-    afterEach(() => {
+    afterEach(done => {
         Vue.nextTick(() => {
             expect(console.error).not.toHaveBeenCalled();
+
+            done();
         });
     });
 
@@ -64,7 +66,7 @@ describe('button', () => {
         expect(button.$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
     });
 
-    it('type prop', () => {
+    it('type prop', done => {
         button = new MButton().$mount();
         let buttonEl: HTMLButtonElement = button.$el as HTMLButtonElement;
         expect(buttonEl.type).toBe('button');
@@ -76,11 +78,13 @@ describe('button', () => {
             button.type = MButtonType.Submit;
             Vue.nextTick(() => {
                 expect(buttonEl.type).toBe('submit');
+
+                done();
             });
         });
     });
 
-    it('skin prop', () => {
+    it('skin prop', done => {
         button = new MButton().$mount();
         expect(button.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeTruthy();
         expect(button.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
@@ -94,11 +98,13 @@ describe('button', () => {
             Vue.nextTick(() => {
                 expect(button.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeTruthy();
                 expect(button.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
+
+                done();
             });
         });
     });
 
-    it('disabled prop', () => {
+    it('disabled prop', done => {
         button = new MButton().$mount();
         expect(button.$el.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
 
@@ -109,11 +115,13 @@ describe('button', () => {
             button.disabled = false;
             Vue.nextTick(() => {
                 expect(button.$el.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
+
+                done();
             });
         });
     });
 
-    it('waiting prop', () => {
+    it('waiting prop', done => {
         button = new MButton().$mount();
         expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
         expect(button.$el.querySelector(SPINNER_CLASS)).toBeFalsy();
@@ -127,11 +135,13 @@ describe('button', () => {
             Vue.nextTick(() => {
                 expect(button.$el.classList.contains(STATE_WAITING_CSS)).toBeFalsy();
                 expect(button.$el.querySelector(SPINNER_CLASS)).toBeFalsy();
+
+                done();
             });
         });
     });
 
-    it('full-size prop', () => {
+    it('full-size prop', done => {
         button = new MButton().$mount();
         expect(button.$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
 
@@ -142,11 +152,13 @@ describe('button', () => {
             button.fullSize = false;
             Vue.nextTick(() => {
                 expect(button.$el.classList.contains(FULLSIZE_CSS)).toBeFalsy();
+
+                done();
             });
         });
     });
 
-    it('icon-size prop', () => {
+    it('icon-size prop', done => {
         button = new MButton().$mount();
         button.iconName = 'default';
 
@@ -161,6 +173,8 @@ describe('button', () => {
             Vue.nextTick(() => {
                 icon = button.$el.querySelector(ICON_CLASS) as Element;
                 validateIconSize(icon, '20px');
+
+                done();
             });
         });
     });
@@ -170,7 +184,7 @@ describe('button', () => {
             button = new MButton().$mount();
         });
 
-        it('left', () => {
+        it('left', done => {
             expect(button.$el.querySelector(ICON_CLASS)).toBeFalsy();
 
             button.iconName = 'default';
@@ -188,11 +202,13 @@ describe('button', () => {
                     if (leftEl) {
                         expect(leftEl.classList.contains('m--is-left')).toBeTruthy();
                     }
+
+                    done();
                 });
             });
         });
 
-        it('right', () => {
+        it('right', done => {
             expect(button.$el.querySelector(ICON_CLASS)).toBeFalsy();
 
             button.iconName = 'default';
@@ -203,6 +219,8 @@ describe('button', () => {
                 if (rightEl) {
                     expect(rightEl.classList.contains('m--is-right')).toBeTruthy();
                 }
+
+                done();
             });
         });
     });
@@ -238,7 +256,7 @@ describe('button', () => {
         }
     });
 
-    it('click event', () => {
+    it('click event', done => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
             template: `<m-button @click="onClick"></m-button>`,
@@ -254,6 +272,8 @@ describe('button', () => {
 
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalledWith(e);
+
+            done();
         });
     });
 

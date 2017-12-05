@@ -33,9 +33,11 @@ describe('checkbox', () => {
         Vue.use(LangHelper);
     });
 
-    afterEach(() => {
+    afterEach(done => {
         Vue.nextTick(() => {
             expect(console.error).not.toHaveBeenCalled();
+
+            done();
         });
     });
 
@@ -61,7 +63,7 @@ describe('checkbox', () => {
         }
     });
 
-    it('position prop left', () => {
+    it('position prop left', done => {
         checkbox = new MCheckbox().$mount();
         expect(checkbox.$el.classList.contains(POSITION_LEFT_CSS)).toBeTruthy();
         expect(checkbox.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
@@ -70,10 +72,12 @@ describe('checkbox', () => {
         Vue.nextTick(() => {
             expect(checkbox.$el.classList.contains(POSITION_LEFT_CSS)).toBeTruthy();
             expect(checkbox.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
+
+            done();
         });
     });
 
-    it('position prop right', () => {
+    it('position prop right', done => {
         checkbox = new MCheckbox().$mount();
         expect(checkbox.$el.classList.contains(POSITION_LEFT_CSS)).toBeTruthy();
         expect(checkbox.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
@@ -82,10 +86,12 @@ describe('checkbox', () => {
         Vue.nextTick(() => {
             expect(checkbox.$el.classList.contains(POSITION_LEFT_CSS)).toBeFalsy();
             expect(checkbox.$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
+
+            done();
         });
     });
 
-    it('value prop', () => {
+    it('value prop', done => {
         checkbox = new MCheckbox().$mount();
         let input: HTMLInputElement | null = checkbox.$el.querySelector('input');
         expect(input).toBeTruthy();
@@ -96,11 +102,13 @@ describe('checkbox', () => {
                 if (input) {
                     expect(input.checked).toBeTruthy();
                 }
+
+                done();
             });
         }
     });
 
-    it('disabled prop', () => {
+    it('disabled prop', done => {
         checkbox = new MCheckbox().$mount();
         let input: HTMLInputElement | null = checkbox.$el.querySelector('input');
         expect(input).toBeTruthy();
@@ -111,11 +119,13 @@ describe('checkbox', () => {
                 if (input) {
                     expect(input.disabled).toBeTruthy();
                 }
+
+                done();
             });
         }
     });
 
-    it('v-model', () => {
+    it('v-model', done => {
         let vm = new Vue({
             data: {
                 model: false
@@ -127,6 +137,8 @@ describe('checkbox', () => {
         (vm as any).model = true;
         Vue.nextTick(() => {
             expect(vm.$el.classList.contains(CHECKED_CSS)).toBeTruthy();
+
+            done();
         });
     });
 
@@ -147,7 +159,7 @@ describe('checkbox', () => {
         }
     });
 
-    it('click event', () => {
+    it('click event', done => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
             data: {
@@ -169,6 +181,8 @@ describe('checkbox', () => {
         }
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalledWith(e);
+
+            done();
         });
     });
 
@@ -191,27 +205,33 @@ describe('checkbox', () => {
             expect((((vm.$refs.a as Vue).$refs.validation as any) as InputStateMixin).errorMessage).toEqual((vm as any).error);
         });
 
-        it('valid message', () => {
+        it('valid message', done => {
             (vm as any).error = undefined;
             Vue.nextTick(() => {
                 expect(vm.$el.querySelector(VALIDATION_MESSAGE_CLASS)).toBeTruthy();
                 expect((((vm.$refs.a as Vue).$refs.validation as any) as InputStateMixin).validMessage).toEqual((vm as any).valid);
+
+                done();
             });
         });
 
-        it('helper message', () => {
+        it('helper message', done => {
             (vm as any).error = undefined;
             (vm as any).valid = undefined;
             Vue.nextTick(() => {
                 expect(vm.$el.querySelector(VALIDATION_MESSAGE_CLASS)).toBeTruthy();
                 expect((((vm.$refs.a as Vue).$refs.validation as any) as InputStateMixin).helperMessage).toEqual((vm as any).helper);
+
+                done();
             });
         });
 
-        it('disabled', () => {
+        it('disabled', done => {
             (vm as any).disabled = true;
             Vue.nextTick(() => {
                 expect(vm.$el.querySelector(VALIDATION_MESSAGE_CLASS)).toBeFalsy();
+
+                done();
             });
         });
     });

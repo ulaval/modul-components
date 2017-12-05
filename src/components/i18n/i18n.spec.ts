@@ -20,13 +20,15 @@ describe('i18n', () => {
         spyOn(console, 'error');
     });
 
-    afterEach(() => {
+    afterEach(done => {
         Vue.nextTick(() => {
             expect(console.error).not.toHaveBeenCalled();
+
+            done();
         });
     });
 
-    it('k prop', () => {
+    it('k prop', done => {
         let vm: Vue = new Vue({
             data: {
                 key: 'm-i18n-spec:a'
@@ -39,6 +41,8 @@ describe('i18n', () => {
         (vm as any).key = 'm-i18n-spec:b';
         Vue.nextTick(() => {
             expect(vm.$el.textContent).toBe('test b');
+
+            done();
         });
     });
 
@@ -54,7 +58,7 @@ describe('i18n', () => {
         expect(console.warn).toHaveBeenCalledWith(warn);
     });
 
-    it('params prop', () => {
+    it('params prop', done => {
         let vm: Vue = new Vue({
             data: {
                 prm: ['a', 'b']
@@ -67,10 +71,12 @@ describe('i18n', () => {
         (vm as any).prm = [1, 2];
         Vue.nextTick(() => {
             expect(vm.$el.textContent).toBe('test 1, test 2');
+
+            done();
         });
     });
 
-    it('html-encode prop', () => {
+    it('html-encode prop', done => {
         let vm: Vue = new Vue({
             data: {
                 encode: false
@@ -83,6 +89,8 @@ describe('i18n', () => {
         (vm as any).encode = true;
         Vue.nextTick(() => {
             expect(vm.$el.innerHTML).toBe('&lt;i&gt;test&lt;/i&gt;');
+
+            done();
         });
     });
 });

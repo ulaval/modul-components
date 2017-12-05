@@ -41,9 +41,11 @@ describe('message', () => {
         Vue.use(LangHelper);
     });
 
-    afterEach(() => {
+    afterEach(done => {
         Vue.nextTick(() => {
             expect(console.error).not.toHaveBeenCalled();
+
+            done();
         });
     });
 
@@ -66,7 +68,7 @@ describe('message', () => {
             }).$mount();
         });
 
-        it('information', () => {
+        it('information', done => {
             (vm as any).state = MMessageState.Information;
             Vue.nextTick(() => {
                 expect(vm.$el.classList.contains(STATE_INFORMATION_CSS)).toBeTruthy();
@@ -75,10 +77,12 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
                 validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-info');
+
+                done();
             });
         });
 
-        it('warning', () => {
+        it('warning', done => {
             (vm as any).state = MMessageState.Warning;
             Vue.nextTick(() => {
                 expect(vm.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
@@ -87,10 +91,12 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
                 validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-warning');
+
+                done();
             });
         });
 
-        it('error', () => {
+        it('error', done => {
             (vm as any).state = MMessageState.Error;
             Vue.nextTick(() => {
                 expect(vm.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
@@ -99,10 +105,12 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
                 validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-error');
+
+                done();
             });
         });
 
-        it('success', () => {
+        it('success', done => {
             (vm as any).state = MMessageState.Success;
             Vue.nextTick(() => {
                 expect(vm.$el.classList.contains(STATE_INFORMATION_CSS)).toBeFalsy();
@@ -111,6 +119,8 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeTruthy();
 
                 validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-check');
+
+                done();
             });
         });
     });
@@ -120,24 +130,28 @@ describe('message', () => {
             message = new MMessage().$mount();
         });
 
-        it('light', () => {
+        it('light', done => {
             message.skin = MMessageSkin.Light;
             Vue.nextTick(() => {
                 expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
                 expect(message.$el.classList.contains(SKIN_REGULAR_CSS)).toBeFalsy();
+
+                done();
             });
         });
 
-        it('regular', () => {
+        it('regular', done => {
             message.skin = MMessageSkin.Regular;
             Vue.nextTick(() => {
                 expect(message.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
                 expect(message.$el.classList.contains(SKIN_REGULAR_CSS)).toBeTruthy();
+
+                done();
             });
         });
     });
 
-    it('icon prop', () => {
+    it('icon prop', done => {
         let vm = new Vue({
             data: {
                 hasIcon: true
@@ -157,10 +171,12 @@ describe('message', () => {
         Vue.nextTick(() => {
             let icon: Element | null = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS);
             expect(icon).toBeFalsy();
+
+            done();
         });
     });
 
-    it('closeButton prop', () => {
+    it('closeButton prop', done => {
         let vm = new Vue({
             data: {
                 hasCloseButton: true
@@ -190,6 +206,8 @@ describe('message', () => {
             if (body) {
                 expect(body.classList.contains(CLOSE_BUTTON_CSS)).toBeFalsy();
             }
+
+            done();
         });
     });
 
@@ -207,7 +225,7 @@ describe('message', () => {
             }).$mount();
         });
 
-        it('standard', () => {
+        it('standard', done => {
             expect(vm.$el.querySelector('.m-message')).toBeTruthy();
 
             (vm as any).isVisible = false;
@@ -218,11 +236,13 @@ describe('message', () => {
 
                 Vue.nextTick(() => {
                     expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+
+                    done();
                 });
             });
         });
 
-        it('with close no sync', () => {
+        it('with close no sync', done => {
             expect(vm.$el.querySelector('.m-message')).toBeTruthy();
 
             let closeButton: HTMLElement = vm.$el.querySelector(ICON_BUTTON_CLASS) as HTMLElement;
@@ -231,11 +251,13 @@ describe('message', () => {
 
             Vue.nextTick(() => {
                 expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+
+                done();
             });
         });
     });
 
-    it('sync', () => {
+    it('sync', done => {
         let vm = new Vue({
             data: {
                 isVisible: true
@@ -258,11 +280,13 @@ describe('message', () => {
 
             Vue.nextTick(() => {
                 expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+
+                done();
             });
         });
     });
 
-    it('close button event', () => {
+    it('close button event', done => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
             template: `<m-message @close="onClick($event)">Consequat ut proident est ullamco consequat ullamco.</m-message>`,
@@ -279,6 +303,8 @@ describe('message', () => {
 
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalled();
+
+            done();
         });
     });
 

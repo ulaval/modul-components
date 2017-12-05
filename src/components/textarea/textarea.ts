@@ -20,7 +20,7 @@ import ValidationMesagePlugin from '../validation-message/validation-message';
 export class MTextarea extends ModulVue {
     @Prop()
     public maxlength: number;
-    @Prop({ default: '720px'})
+    @Prop({ default: '720px' })
     public maxWidth: string;
     @Prop({ default: 3 })
     public rows: number;

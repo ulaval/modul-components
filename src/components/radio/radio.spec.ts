@@ -20,8 +20,18 @@ describe('MRadioPosition', () => {
 
 describe('radio', () => {
     beforeEach(() => {
+        spyOn(console, 'error');
+
         Vue.use(RadioPlugin);
         radio = new MRadio().$mount();
+    });
+
+    afterEach(done => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+
+            done();
+        });
     });
 
     it('css class for button group are not present', () => {
@@ -30,13 +40,15 @@ describe('radio', () => {
         expect(radio.$el.classList.contains(INLINE_CSS)).toBeFalsy();
     });
 
-    it('iconname prop is ignored if not in button group', () => {
+    it('iconname prop is ignored if not in button group', done => {
         let svg: SVGSVGElement | null = radio.$el.querySelector('svg');
         expect(svg).toBeFalsy();
         radio.iconName = 'chip-error';
         Vue.nextTick(() => {
             svg = radio.$el.querySelector('svg');
             expect(svg).toBeFalsy();
+
+            done();
         });
     });
 
@@ -53,7 +65,7 @@ describe('radio', () => {
         }
     });
 
-    it('disabled prop', () => {
+    it('disabled prop', done => {
         expect(radio.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
 
         radio.disabled = true;
@@ -63,11 +75,13 @@ describe('radio', () => {
             radio.disabled = false;
             Vue.nextTick(() => {
                 expect(radio.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
+
+                done();
             });
         });
     });
 
-    it('name prop', () => {
+    it('name prop', done => {
         let input: HTMLInputElement | null = radio.$el.querySelector('input');
         expect(input).toBeTruthy();
         if (input) {
@@ -77,27 +91,33 @@ describe('radio', () => {
                 if (input) {
                     expect(input.name).toEqual('name');
                 }
+
+                done();
             });
         }
     });
 
-    it('position prop left', () => {
+    it('position prop left', done => {
         expect(radio.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
         radio.position = MRadioPosition.Left;
         Vue.nextTick(() => {
             expect(radio.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
+
+            done();
         });
     });
 
-    it('position prop right', () => {
+    it('position prop right', done => {
         expect(radio.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
         radio.position = MRadioPosition.Right;
         Vue.nextTick(() => {
             expect(radio.$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
+
+            done();
         });
     });
 
-    it('value prop', () => {
+    it('value prop', done => {
         let input: HTMLInputElement | null = radio.$el.querySelector('input');
         expect(input).toBeTruthy();
         if (input) {
@@ -107,11 +127,13 @@ describe('radio', () => {
                 if (input) {
                     expect(input.value).toEqual('value');
                 }
+
+                done();
             });
         }
     });
 
-    it('v-model', () => {
+    it('v-model', done => {
         let vm = new Vue({
             data: {
                 model: 'radio2'
@@ -132,10 +154,12 @@ describe('radio', () => {
         Vue.nextTick(() => {
             expect(li1.classList.contains(CHECKED_CSS)).toBeTruthy();
             expect(li2.classList.contains(CHECKED_CSS)).toBeFalsy();
+
+            done();
         });
     });
 
-    it('change event', () => {
+    it('change event', done => {
         let changeSpy = jasmine.createSpy('changeSpy');
         let vm = new Vue({
             data: {
@@ -160,6 +184,8 @@ describe('radio', () => {
         }
         Vue.nextTick(() => {
             expect(changeSpy).toHaveBeenCalledWith('radio1');
+
+            done();
         });
     });
 });

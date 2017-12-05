@@ -38,15 +38,17 @@ describe('spinner', () => {
         Vue.use(SpinnerPlugin);
     });
 
-    afterEach(() => {
+    afterEach(done => {
         document.body.innerHTML = '';
 
         Vue.nextTick(() => {
             expect(console.error).not.toHaveBeenCalled();
+
+            done();
         });
     });
 
-    it('css class for spinner are not present', () => {
+    it('css class for spinner are not present', done => {
         spinner = new MSpinner().$mount();
         Vue.nextTick(() => {
             let wrap: Element = spinner.$refs.spinnerWrap as Element;
@@ -57,10 +59,12 @@ describe('spinner', () => {
             expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeFalsy();
 
             expect(document.body.querySelector(BACKDROP_QUERY)).toBeFalsy();
+
+            done();
         });
     });
 
-    it('title prop', () => {
+    it('title prop', done => {
         spinner = new MSpinner().$mount();
         Vue.nextTick(() => {
             const titleClass: string = '.m-spinner__title';
@@ -74,12 +78,14 @@ describe('spinner', () => {
                     title = spinner.$el.querySelector(titleClass) as HTMLElement;
                     expect(title).toBeTruthy();
                     expect(title.innerText).toBe('test');
+
+                    done();
                 });
             });
         });
     });
 
-    it('description prop', () => {
+    it('description prop', done => {
         spinner = new MSpinner().$mount();
         Vue.nextTick(() => {
             const descClass: string = '.m-spinner__description';
@@ -93,6 +99,8 @@ describe('spinner', () => {
                     desc = spinner.$el.querySelector(descClass) as HTMLElement;
                     expect(desc).toBeTruthy();
                     expect(desc.innerText).toBe('desc');
+
+                    done();
                 });
             });
         });
@@ -103,7 +111,7 @@ describe('spinner', () => {
             spinner = new MSpinner().$mount();
         });
 
-        it('dark', () => {
+        it('dark', done => {
             Vue.nextTick(() => {
                 let wrap: Element = spinner.$refs.spinnerWrap as Element;
                 expect(wrap).toBeTruthy();
@@ -114,12 +122,14 @@ describe('spinner', () => {
                     // portal
                     Vue.nextTick(() => {
                         expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeTruthy();
+
+                        done();
                     });
                 });
             });
         });
 
-        it('light', () => {
+        it('light', done => {
             Vue.nextTick(() => {
                 let wrap: Element = spinner.$refs.spinnerWrap as Element;
                 expect(wrap).toBeTruthy();
@@ -130,12 +140,14 @@ describe('spinner', () => {
                     // portal
                     Vue.nextTick(() => {
                         expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
+
+                        done();
                     });
                 });
             });
         });
 
-        it('lighter', () => {
+        it('lighter', done => {
             Vue.nextTick(() => {
                 let wrap: Element = spinner.$refs.spinnerWrap as Element;
                 expect(wrap).toBeTruthy();
@@ -146,12 +158,14 @@ describe('spinner', () => {
                     // portal
                     Vue.nextTick(() => {
                         expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeTruthy();
+
+                        done();
                     });
                 });
             });
         });
 
-        it('regular', () => {
+        it('regular', done => {
             Vue.nextTick(() => {
                 let wrap: Element = spinner.$refs.spinnerWrap as Element;
                 expect(wrap).toBeTruthy();
@@ -166,6 +180,8 @@ describe('spinner', () => {
                         expect(wrap.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
                         expect(wrap.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
                         expect(wrap.classList.contains(SKIN_LIGHTER_CSS)).toBeFalsy();
+
+                        done();
                     });
                 });
             });
@@ -177,7 +193,7 @@ describe('spinner', () => {
             spinner = new MSpinner().$mount();
         });
 
-        it('small', () => {
+        it('small', done => {
             Vue.nextTick(() => {
                 const iconClass: string = '.m-spinner__icon';
                 let icon: Element = spinner.$el.querySelector(iconClass) as Element;
@@ -189,12 +205,14 @@ describe('spinner', () => {
                     // portal
                     Vue.nextTick(() => {
                         expect(icon.classList.contains(SIZE_SMALL_CSS)).toBeTruthy();
+
+                        done();
                     });
                 });
             });
         });
 
-        it('large', () => {
+        it('large', done => {
             Vue.nextTick(() => {
                 const iconClass: string = '.m-spinner__icon';
                 let icon: Element = spinner.$el.querySelector(iconClass) as Element;
@@ -206,6 +224,8 @@ describe('spinner', () => {
                     // portal
                     Vue.nextTick(() => {
                         expect(icon.classList.contains(SIZE_SMALL_CSS)).toBeFalsy();
+
+                        done();
                     });
                 });
             });
@@ -213,7 +233,7 @@ describe('spinner', () => {
     });
 
     describe('modal prop', () => {
-        it('should warn if set while visible', () => {
+        it('should warn if set while visible', done => {
             spinner = new MSpinner().$mount();
             spyOn(console, 'warn');
             Vue.nextTick(() => {
@@ -227,12 +247,14 @@ describe('spinner', () => {
                     Vue.nextTick(() => {
                         const warn: string = `<${SPINNER_NAME}>: ${MODAL_WARN}`;
                         expect(console.warn).toHaveBeenCalledWith(warn);
+
+                        done();
                     });
                 });
             });
         });
 
-        it('should warn if set while visible of not (v-show)', () => {
+        it('should warn if set while visible of not (v-show)', done => {
             spyOn(console, 'warn');
             let vm = new Vue({
                 data: {
@@ -251,13 +273,15 @@ describe('spinner', () => {
                         Vue.nextTick(() => {
                             const warn: string = `<${SPINNER_NAME}>: ${MODAL_WARN}`;
                             expect(console.warn).toHaveBeenCalledWith(warn);
+
+                            done();
                         });
                     });
                 });
             });
         });
 
-        it('can be set while not visible (v-if)', () => {
+        it('can be set while not visible (v-if)', done => {
             spyOn(console, 'warn');
             let vm = new Vue({
                 data: {
@@ -276,13 +300,15 @@ describe('spinner', () => {
                         Vue.nextTick(() => {
                             const warn: string = `<${SPINNER_NAME}>: ${MODAL_WARN}`;
                             expect(console.warn).not.toHaveBeenCalledWith(warn);
+
+                            done();
                         });
                     });
                 });
             });
         });
 
-        it('css', () => {
+        it('css', done => {
             let vm = new Vue({
                 data: {
                     modal: true
@@ -290,11 +316,15 @@ describe('spinner', () => {
                 template: `<m-spinner :modal="modal"></m-spinner>`
             }).$mount();
 
-            let wrap: Element | null = document.body.querySelector('.m-spinner__wrap');
-            expect(wrap).toBeTruthy();
-            if (wrap) {
-                expect(wrap.classList.contains(MODE_PROCESSING_CSS)).toBeTruthy();
-            }
+            Vue.nextTick(() => {
+                let wrap: Element | null = document.body.querySelector('.m-spinner__wrap');
+                expect(wrap).toBeTruthy();
+                if (wrap) {
+                    expect(wrap.classList.contains(MODE_PROCESSING_CSS)).toBeTruthy();
+                }
+
+                done();
+            });
         });
     });
 });

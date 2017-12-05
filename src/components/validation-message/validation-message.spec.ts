@@ -22,9 +22,11 @@ describe('validation-message', () => {
         Vue.use(LangHelper);
     });
 
-    afterEach(() => {
+    afterEach(done => {
         Vue.nextTick(() => {
             expect(console.error).not.toHaveBeenCalled();
+
+            done();
         });
     });
 
@@ -33,7 +35,7 @@ describe('validation-message', () => {
         expect(validationMessage.$el.querySelector).toBeFalsy(); // element not even rendered
     });
 
-    it('helper message', () => {
+    it('helper message', done => {
         validationMessage = new MValidationMessage().$mount();
         expect(validationMessage.$el.querySelector).toBeFalsy();
 
@@ -47,10 +49,12 @@ describe('validation-message', () => {
 
             expect(validationMessage.$el.querySelector(VALID_CLASS)).toBeFalsy();
             expect(validationMessage.$el.querySelector(ERROR_CLASS)).toBeFalsy();
+
+            done();
         });
     });
 
-    it('valid message', () => {
+    it('valid message', done => {
         validationMessage = new MValidationMessage().$mount();
         expect(validationMessage.$el.querySelector).toBeFalsy();
 
@@ -66,10 +70,12 @@ describe('validation-message', () => {
 
             expect(validationMessage.$el.querySelector(HELPER_CLASS)).toBeFalsy();
             expect(validationMessage.$el.querySelector(ERROR_CLASS)).toBeFalsy();
+
+            done();
         });
     });
 
-    it('error message', () => {
+    it('error message', done => {
         validationMessage = new MValidationMessage().$mount();
         expect(validationMessage.$el.querySelector).toBeFalsy();
 
@@ -85,6 +91,8 @@ describe('validation-message', () => {
 
             expect(validationMessage.$el.querySelector(HELPER_CLASS)).toBeFalsy();
             expect(validationMessage.$el.querySelector(VALID_CLASS)).toBeFalsy();
+
+            done();
         });
     });
 
@@ -101,7 +109,7 @@ describe('validation-message', () => {
             }).$mount();
         });
 
-        it('error message overrides helper & valid messages', () => {
+        it('error message overrides helper & valid messages', done => {
             let text: Element | null = vm.$el.querySelector(MESSAGE_TEXT);
             expect(text).toBeTruthy();
             if (text) {
@@ -115,10 +123,12 @@ describe('validation-message', () => {
                 if (text) {
                     expect(text.textContent).toBe('error');
                 }
+
+                done();
             });
         });
 
-        it('valid message overrides helper message', () => {
+        it('valid message overrides helper message', done => {
             (vm as any).error = undefined;
             Vue.nextTick(() => {
                 let text: Element | null = vm.$el.querySelector(MESSAGE_TEXT);
@@ -126,6 +136,8 @@ describe('validation-message', () => {
                 if (text) {
                     expect(text.textContent).toBe('valid');
                 }
+
+                done();
             });
         });
     });
@@ -148,7 +160,7 @@ describe('validation-message', () => {
             }).$mount();
         });
 
-        it('disabled', () => {
+        it('disabled', done => {
             let element: Element | null = vm.$el.querySelector(VALIDATION_MESSAGE_CLASS);
             expect(element).toBeTruthy();
 
@@ -156,10 +168,12 @@ describe('validation-message', () => {
             Vue.nextTick(() => {
                 element = vm.$el.querySelector(VALIDATION_MESSAGE_CLASS);
                 expect(element).toBeFalsy();
+
+                done();
             });
         });
 
-        it('waiting', () => {
+        it('waiting', done => {
             let element: Element | null = vm.$el.querySelector(VALIDATION_MESSAGE_CLASS);
             expect(element).toBeTruthy();
 
@@ -167,11 +181,13 @@ describe('validation-message', () => {
             Vue.nextTick(() => {
                 element = vm.$el.querySelector(VALIDATION_MESSAGE_CLASS);
                 expect(element).toBeFalsy();
+
+                done();
             });
         });
     });
 
-    it('click event', () => {
+    it('click event', done => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
             template: `<m-validation-message ref="a" @click="onClick" helper-message="helper" ></m-validation-message>`,
@@ -187,6 +203,8 @@ describe('validation-message', () => {
 
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalledWith(e);
+
+            done();
         });
     });
 });
