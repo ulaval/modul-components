@@ -19,6 +19,10 @@ export enum MCheckboxPosition {
 })
 export class MCheckbox extends ModulVue {
 
+    @Model('change')
+    @Prop()
+    public value: boolean;
+
     @Prop({
         default: MCheckboxPosition.Left,
         validator: value =>
@@ -26,10 +30,6 @@ export class MCheckbox extends ModulVue {
             value == MCheckboxPosition.Right
     })
     public position: MCheckboxPosition;
-
-    @Model('change')
-    @Prop()
-    public value: boolean;
 
     private isFocus = false;
     private id: string = `mCheckbox-${uuid.generate()}`;

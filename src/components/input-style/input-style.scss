@@ -54,6 +54,10 @@ $m-input-style--padding: 4px !default;
         textarea {
             border-color: $m-color--border-dark;
         }
+
+        .m-input-style__label {
+            color: $m-color--text;
+        }
     }
 
     &.m--is-focus {
@@ -246,6 +250,7 @@ $m-input-style--padding: 4px !default;
         margin-bottom: $m-margin--xs;
         font-size: $m-font-size;
         font-weight: $m-font-weight;
+        color: $m-color--black-grey-lighter;
         cursor: pointer;
 
         .m-icon {

@@ -14,14 +14,35 @@
             "type": "boolean",
             "default": true
         },
-        "textarea": {
-            "type": "boolean",
-            "default": false
-        },
         "width": {
             "type": "string"
         },
         "iconName": {
+            "type": "string"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
+            "type": "boolean",
+            "default": false
+        },
+        "error": {
+            "type": "boolean",
+            "default": false
+        },
+        "valid": {
+            "type": "boolean",
+            "default": false
+        },
+        "errorMessage": {
+            "type": "string"
+        },
+        "validMessage": {
+            "type": "string"
+        },
+        "helperMessage": {
             "type": "string"
         }
     },

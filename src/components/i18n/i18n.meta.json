@@ -3,15 +3,12 @@
     "name": "m-i18n-meta:name",
     "production": false,
     "attributes": {
-        "i18n-key": {
+        "k": {
             "type": "string",
             "description": "m-i18n-meta:i18n-key-desc"
         },
-        "k": {
-            "type": "string"
-        },
         "params": {
-            "type": "string"
+            "type": "string[]"
         },
         "htmlEncode": {
             "type": "boolean",

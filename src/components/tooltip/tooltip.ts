@@ -5,9 +5,8 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './tooltip.html?style=./tooltip.scss';
 import { TOOLTIP_NAME } from '../component-names';
 import { MPopup } from '../popup/popup';
-import { MPopper } from '../popper/popper';
+import { MPopper, MPopperPlacement } from '../popper/popper';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { MPopperPlacement } from '../popper/popper';
 import ButtonPlugin from '../button/button';
 import LinkPlugin from '../link/link';
 import I18nPlugin from '../i18n/i18n';
@@ -51,14 +50,14 @@ export class MTooltip extends ModulVue {
     public placement: MPopperPlacement;
     @Prop({ default: true })
     public closeButton: boolean;
-    @Prop({ default: '' })
-    public classNamePortalTarget: string;
     @Prop()
     public disabled: boolean;
     @Prop()
     public openTitle: string;
     @Prop()
     public closeTitle: string;
+    @Prop({ default: true })
+    public underline: boolean;
 
     private propOpen = false;
 

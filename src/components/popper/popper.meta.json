@@ -56,6 +56,30 @@
         },
         "leaveCancelled": {
             "type": "any"
+        },
+        "openTrigger": {
+            "type": "string",
+            "value": [
+                "click",
+                "hover",
+                "manual"
+            ],
+            "default": 0
+        },
+        "open": {
+            "type": "boolean",
+            "default": false
+        },
+        "id": {
+            "type": "string",
+            "default": "mPortal"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "trigger": {
+            "type": "HTMLElement"
         }
     },
     "overview": "popper.overview",

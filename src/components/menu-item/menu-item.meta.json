@@ -1,7 +1,7 @@
 {
     "tag": "m-menu-item",
     "name": "m-menu-item-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
         "iconName": {
             "type": "string"

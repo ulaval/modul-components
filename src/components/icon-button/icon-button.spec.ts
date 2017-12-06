@@ -31,9 +31,11 @@ describe('icon-button', () => {
         Vue.use(SpritesHelper);
     });
 
-    afterEach(() => {
+    afterEach(done => {
         Vue.nextTick(() => {
             expect(console.error).not.toHaveBeenCalled();
+
+            done();
         });
     });
 
@@ -55,48 +57,56 @@ describe('icon-button', () => {
             iconButton = new MIconButton().$mount();
         });
 
-        it('light', () => {
+        it('light', done => {
             iconButton.skin = MIconButtonSkin.Light;
             Vue.nextTick(() => {
                 expect(iconButton.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
                 expect(iconButton.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
                 expect(iconButton.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeFalsy();
                 expect(iconButton.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
+
+                done();
             });
         });
 
-        it('dark', () => {
+        it('dark', done => {
             iconButton.skin = MIconButtonSkin.Dark;
             Vue.nextTick(() => {
                 expect(iconButton.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
                 expect(iconButton.$el.classList.contains(SKIN_DARK_CSS)).toBeTruthy();
                 expect(iconButton.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeFalsy();
                 expect(iconButton.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
+
+                done();
             });
         });
 
-        it('primary', () => {
+        it('primary', done => {
             iconButton.skin = MIconButtonSkin.Primary;
             Vue.nextTick(() => {
                 expect(iconButton.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
                 expect(iconButton.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
                 expect(iconButton.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeTruthy();
                 expect(iconButton.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
+
+                done();
             });
         });
 
-        it('secondary', () => {
+        it('secondary', done => {
             iconButton.skin = MIconButtonSkin.Secondary;
             Vue.nextTick(() => {
                 expect(iconButton.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
                 expect(iconButton.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
                 expect(iconButton.$el.classList.contains(SKIN_PRIMARY_CSS)).toBeFalsy();
                 expect(iconButton.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeTruthy();
+
+                done();
             });
         });
     });
 
-    it('button-size prop', () => {
+    it('button-size prop', done => {
         iconButton = new MIconButton().$mount();
         expect(iconButton.$el.style.width).toEqual('44px');
         expect(iconButton.$el.style.height).toEqual('44px');
@@ -105,10 +115,12 @@ describe('icon-button', () => {
         Vue.nextTick(() => {
             expect(iconButton.$el.style.width).toEqual('58px');
             expect(iconButton.$el.style.height).toEqual('58px');
+
+            done();
         });
     });
 
-    it('icon-name prop', () => {
+    it('icon-name prop', done => {
         iconButton = new MIconButton().$mount();
         let element: Vue = (iconButton.$refs.icon as Vue);
         expect((element as MIcon).name).toEqual('default');
@@ -116,20 +128,24 @@ describe('icon-button', () => {
         iconButton.iconName = 'clock';
         Vue.nextTick(() => {
             expect((element as MIcon).name).toEqual('clock');
+
+            done();
         });
     });
 
-    it('icon-size prop', () => {
+    it('icon-size prop', done => {
         iconButton = new MIconButton().$mount();
         expect(iconButton.$el.style.fontSize).toEqual('16px');
 
         iconButton.iconSize = '20px';
         Vue.nextTick(() => {
             expect(iconButton.$el.style.fontSize).toEqual('20px');
+
+            done();
         });
     });
 
-    it('click event', () => {
+    it('click event', done => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
             template: `<m-icon-button @click="onClick"></m-icon-button>`,
@@ -145,6 +161,8 @@ describe('icon-button', () => {
 
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalledWith(e);
+
+            done();
         });
     });
 });

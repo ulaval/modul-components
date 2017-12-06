@@ -81,7 +81,9 @@
     &.m--is-multi-line {
         @media (min-width: #{$m-mq--min--s}) {
             text-decoration: none;
+        }
 
+        &:not(.m--no-underline) {
             &:focus,
             &:hover {
                 text-decoration: underline;

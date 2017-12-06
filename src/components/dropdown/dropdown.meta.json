@@ -17,7 +17,8 @@
             "default": false
         },
         "width": {
-            "type": "string"
+            "type": "string",
+            "default": "288px"
         },
         "iconName": {
             "type": "string"
@@ -26,6 +27,31 @@
             "type": "string"
         },
         "textNoMatch": {
+            "type": "string"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
+            "type": "boolean",
+            "default": false
+        },
+        "error": {
+            "type": "boolean",
+            "default": false
+        },
+        "valid": {
+            "type": "boolean",
+            "default": false
+        },
+        "errorMessage": {
+            "type": "string"
+        },
+        "validMessage": {
+            "type": "string"
+        },
+        "helperMessage": {
             "type": "string"
         }
     },

@@ -13,6 +13,44 @@
         "rows": {
             "type": "number",
             "default": 3
+        },
+        "label": {
+            "type": "string"
+        },
+        "iconName": {
+            "type": "string"
+        },
+        "placeholder": {
+            "type": "string"
+        },
+        "readonly": {
+            "type": "boolean",
+            "default": false
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
+            "type": "boolean",
+            "default": false
+        },
+        "error": {
+            "type": "boolean",
+            "default": false
+        },
+        "valid": {
+            "type": "boolean",
+            "default": false
+        },
+        "errorMessage": {
+            "type": "string"
+        },
+        "validMessage": {
+            "type": "string"
+        },
+        "helperMessage": {
+            "type": "string"
         }
     },
     "overview": "step.overview",

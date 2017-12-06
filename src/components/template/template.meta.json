@@ -6,9 +6,6 @@
         "footerFullWidth": {
             "type": "boolean",
             "default": false
-        },
-        "contentWidth": {
-            "type": "string"
         }
     },
     "overview": "template.overview",

@@ -36,6 +36,9 @@ export class MLink extends ModulVue {
     public mode: MLinkMode;
 
     @Prop()
+    public disabled: boolean;
+
+    @Prop()
     public unvisited: boolean;
 
     @Prop({ default: true })
@@ -63,9 +66,6 @@ export class MLink extends ModulVue {
 
     @Prop({ default: '12px' })
     public iconSize: string;
-
-    @Prop()
-    public disabled: boolean;
 
     private onClick(event): void {
         this.$el.blur();

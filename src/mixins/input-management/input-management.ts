@@ -2,18 +2,14 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Model, Watch } from 'vue-property-decorator';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { InputStateMixin } from '../../mixins/input-state/input-state';
 import { KeyCode } from '../../utils/keycode/keycode';
 
-@Component({
-    mixins: [InputState]
-})
+@Component
 export class InputManagement extends ModulVue {
     @Prop()
     @Model('change')
     public value: string;
-    @Prop({ default: true })
-    public passwordIcon: boolean;
     @Prop()
     public label: string;
     @Prop()

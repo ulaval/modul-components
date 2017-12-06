@@ -1,0 +1,12 @@
+{
+    "m-dropdown": {
+        "no-data": "No data",
+        "no-result": "No result",
+        "none": "(none)",
+        "research" : "Research",
+        "search" : "Search",
+        "open": "Open drop-down",
+        "close": "Close drop-down"
+    }
+}
+

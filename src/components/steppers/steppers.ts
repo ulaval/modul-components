@@ -25,7 +25,7 @@ export class MSteppers extends BaseSteppers {
             if (arr.length - 1 === index && arr.length > 1) {
                 rightSpacing = child.$el.clientWidth / 2;
             }
-            if (child.$props.state == MSteppersItemState.InProgress) {
+            if (child.$props.state == MSteppersItemState.InProgress || child.$props.state == MSteppersItemState.Completed) {
                 let parentWidth = this.$el.clientWidth;
                 let childWidth = child.$el.clientWidth;
                 let childOffset = child.$el.offsetLeft;

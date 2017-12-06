@@ -26,6 +26,7 @@ export class MStatus extends Vue {
             value == MStatusListStates.Error
     })
     public status: MStatusListStates;
+
     private statusEnum = MStatusListStates;
 
     private getIconName(state: MStatusListStates): string {

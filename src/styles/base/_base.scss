@@ -15,18 +15,18 @@ html {
     box-sizing: border-box;
 }
 
-body {
+::selection {
+    background: $m-color--ul-yellow;
+    color: $m-color--text;
+}
+
+.m-u--app-body {
     font-family: $m-font-family;
-    font-weight: $m-font-weight--regular;
+    font-weight: $m-font-weight--light;
     font-style: normal;
     font-size: $m-font-size;
     line-height: $m-line-height;
     margin: 0;
-}
-
-::selection {
-    background: $m-color--ul-yellow;
-    color: $m-color--text;
 }
 
 ul,

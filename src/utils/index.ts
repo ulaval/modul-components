@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 
 import MediaQueriesPlugin from './media-queries/media-queries';
 import ModulPlugin from './modul/modul';

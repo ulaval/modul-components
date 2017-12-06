@@ -3,6 +3,10 @@
     "name": "m-accordion-meta:name",
     "production": true,
     "attributes": {
+        "open": {
+            "type": "boolean",
+            "default": false
+        },
         "skin": {
             "type": "string",
             "values": [
@@ -11,10 +15,6 @@
                 "plain"
             ],
             "default": 0
-        },
-        "open": {
-            "type": "boolean",
-            "default": false
         },
         "iconPosition": {
             "type": "string",
@@ -35,6 +35,9 @@
                 "large"
             ],
             "default": 1
+        },
+        "id": {
+            "type": "string"
         }
     },
     "overview": "accordion.overview",

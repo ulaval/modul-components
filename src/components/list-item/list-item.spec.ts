@@ -20,27 +20,33 @@ describe('list-item', () => {
         Vue.use(LangHelper);
     });
 
-    afterEach(() => {
+    afterEach(done => {
         Vue.nextTick(() => {
             expect(console.error).not.toHaveBeenCalled();
+
+            done();
         });
     });
 
-    it('m--is-disabled class is present when disabled', () => {
+    it('m--is-disabled class is present when disabled', done => {
         list = new MListItem().$mount();
         expect(list.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
         list.disabled = true;
         Vue.nextTick(() => {
             expect(list.$el.classList.contains(DISABLED_CSS)).toBeTruthy();
+
+            done();
         });
     });
 
-    it('m--is-waiting class is present when waiting props is true', () => {
+    it('m--is-waiting class is present when waiting props is true', done => {
         list = new MListItem().$mount();
         expect(list.$el.classList.contains(WAITING_CSS)).toBeFalsy();
         list.waiting = true;
         Vue.nextTick(() => {
             expect(list.$el.classList.contains(WAITING_CSS)).toBeTruthy();
+
+            done();
         });
     });
 
@@ -53,7 +59,7 @@ describe('list-item', () => {
         expect(element.textContent).toEqual('item 1');
     });
 
-    it('icon-name prop', () => {
+    it('icon-name prop', done => {
         let vm = new Vue({
             data: {
                 iconNameTest: ''
@@ -68,11 +74,13 @@ describe('list-item', () => {
         Vue.nextTick(() => {
             element = vm.$el.querySelector(ICON_BUTTON_CLASS);
             expect(element).toBeTruthy();
+
+            done();
         });
     });
 
     describe('disabled prop', () => {
-        it('delete button', () => {
+        it('delete button', done => {
             let vm = new Vue({
                 data: {
                     disabled: false
@@ -87,10 +95,12 @@ describe('list-item', () => {
             Vue.nextTick(() => {
                 let icon = vm.$el.querySelector(ICON_BUTTON_CLASS);
                 expect(icon).toBeFalsy();
+
+                done();
             });
         });
 
-        it('waiting', () => {
+        it('waiting', done => {
             let vm = new Vue({
                 data: {
                     disabled: false,
@@ -108,11 +118,13 @@ describe('list-item', () => {
                 let spinner = vm.$el.querySelector(SPINNER_CLASS);
                 expect(spinner).toBeFalsy();
                 expect(vm.$el.classList.contains(WAITING_CSS)).toBeFalsy();
+
+                done();
             });
         });
     });
 
-    it('waiting prop', () => {
+    it('waiting prop', done => {
         let vm = new Vue({
             data: {
                 waiting: false
@@ -131,10 +143,12 @@ describe('list-item', () => {
             let spinner = vm.$el.querySelector(SPINNER_CLASS);
             expect(icon).toBeFalsy();
             expect(spinner).toBeTruthy();
+
+            done();
         });
     });
 
-    it('delete button event', () => {
+    it('delete button event', done => {
         list = new MListItem().$mount();
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
@@ -152,6 +166,8 @@ describe('list-item', () => {
 
         Vue.nextTick(() => {
             expect(clickSpy).toHaveBeenCalled();
+
+            done();
         });
     });
 
