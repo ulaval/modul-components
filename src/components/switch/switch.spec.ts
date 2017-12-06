@@ -49,7 +49,7 @@ describe('switch', () => {
         });
     });
 
-    it('helper text prop', () => {
+    it('stateText text prop', () => {
         expect(switchVar.$el.classList.contains(NO_STATE_TEXT_CSS)).toBeFalsy();
         switchVar.stateText = false;
         Vue.nextTick(() => {
