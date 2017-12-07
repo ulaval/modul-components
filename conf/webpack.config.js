@@ -18,6 +18,7 @@ module.exports = function (env) {
         externals: [],
 
         output: {
+            path: resolve('dist'),
             publicPath: '/',
             filename: 'app.js'
         },
