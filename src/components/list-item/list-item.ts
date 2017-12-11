@@ -19,6 +19,8 @@ export class MListItem extends Vue {
     public disabled: boolean;
     @Prop()
     public waiting: boolean;
+    @Prop({ default: false })
+    public fullLenght: boolean;
 
     private click(event): void {
         this.$emit('click', event);
@@ -26,6 +28,14 @@ export class MListItem extends Vue {
 
     private get hasIcon() {
         return this.iconName ? true : false;
+    }
+
+    private get hasSlot() {
+        return this.$slots['trigger'] ? true : false;
+    }
+
+    private get hasMenu() {
+        return this.$slots['menu'] ? true : false;
     }
 
     private get isWaiting() {

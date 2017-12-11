@@ -1,17 +1,27 @@
 <!-- <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave"> -->
-    <li class="m-list-item" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': isWaiting }">
-        <div class="m-list-item__content" :class="{ 'm--has-icon': hasIcon }">
-            <slot></slot>
+<li class="m-list-item" :class="{ 'm--is-disabled': disabled, 'm--is-waiting': isWaiting, 'm--has-slot': hasSlot, 'm--has-icon': hasIcon, 'm--has-icon': hasMenu, 'm--is-full-lenght': fullLenght }">
+    <div class="m-list-item__content">
+        <slot></slot>
+    </div>
+    <template v-if="!disabled">
+
+        <div v-if="hasIcon && !isWaiting" class="m-list-item__icon">
+            <m-icon-button :icon-name="iconName" @click="click($event)">
+                <m-i18n :k="iconHiddenText"></m-i18n>
+            </m-icon-button>
         </div>
-        <template v-if="!disabled">
-            <div v-if="hasIcon && !isWaiting" class="m-list-item__button">
-                <m-icon-button :icon-name="iconName" @click="click($event)">
-                    <m-i18n :k="iconHiddenText"></m-i18n>
-                </m-icon-button>
-            </div>
-            <div v-else-if="isWaiting" class="m-list-item__button">
-                <m-spinner size="small"></m-spinner>
-            </div>
-        </template>
-    </li>
+
+        <div class="m-list-item__icon" v-if="hasMenu && !hasIcon && !isWaiting">
+            <slot name="menu"></slot>
+        </div>
+
+        <div class="m-list-item__slot" v-if="hasSlot && !hasIcon && !isWaiting">
+            <slot name="trigger"></slot>
+        </div>
+
+        <div v-else-if="isWaiting" class="m-list-item__icon">
+            <m-spinner size="small"></m-spinner>
+        </div>
+    </template>
+</li>
 <!-- </transition> -->
