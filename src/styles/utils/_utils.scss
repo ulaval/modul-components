@@ -212,10 +212,10 @@
         font-weight: $m-font-weight--bold;
     }
 
-    &.m-u--has-menu {
+    &.m-u--has-icon {
         padding-right: $m-touch-size;
 
-        :last-child {
+        > :last-child {
             width: $m-touch-size;
             position: absolute;
             top: 50%;
@@ -224,7 +224,7 @@
         }
     }
 
-    &:not(.m-u--has-menu) {
+    &:not(.m-u--has-icon) {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -245,4 +245,3 @@
         }
     }
 }
-
