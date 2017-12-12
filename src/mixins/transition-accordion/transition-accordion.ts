@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import { log } from 'util';
 
 const ACCORDION_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
@@ -19,19 +20,19 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
     }
 
     private accordionEnter(el: HTMLElement, done): void {
-        if (this.accordionAnim || this.accordionAnim == undefined) {
-            this.$nextTick(() => {
+        this.$nextTick(() => {
+            if (this.accordionAnim || this.accordionAnim == undefined) {
                 let height: number = el.clientHeight;
-                this.setTransitionStart(el);
                 el.style.maxHeight = '0';
+                this.setTransitionStart(el);
                 setTimeout(() => {
                     el.style.maxHeight = height + 'px';
                     done();
-                });
-            });
-        } else {
-            done();
-        }
+                }, 50);
+            } else {
+                done();
+            }
+        });
     }
 
     private accordionAfterEnter(el: HTMLElement): void {
@@ -44,18 +45,20 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
     }
 
     private accordionLeave(el: HTMLElement, done): void {
-        if (this.accordionAnim || this.accordionAnim == undefined) {
-            this.setTransitionStart(el);
-            let height: number = el.clientHeight;
-            el.style.maxHeight = height + 'px';
-            setTimeout(() => {
-                el.style.maxHeight = '0';
+        this.$nextTick(() => {
+            if (this.accordionAnim || this.accordionAnim == undefined) {
+                let height: number = el.clientHeight;
+                el.style.maxHeight = height + 'px';
+                this.setTransitionStart(el);
                 setTimeout(() => {
-                    done();
-                }, 300);
-            }, 10);
-        } else {
-            done();
-        }
+                    el.style.maxHeight = '0';
+                    setTimeout(() => {
+                        done();
+                    }, 300);
+                }, 50);
+            } else {
+                done();
+            }
+        });
     }
 }
