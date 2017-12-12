@@ -5,4 +5,35 @@
     display: inline-flex;
     flex-direction: column;
     max-width: $m-max-width--text;
+
+    &.m--has-error {
+        .m-textarea {
+            &__validation__maxlenght {
+                color: $m-color--error;
+            }
+        }
+    }
+
+    &.m--is-valid {
+        .m-textarea {
+            &__validation__maxlenght {
+                color: $m-color--success;
+            }
+        }
+    }
+
+    &__validation {
+        display: flex;
+        justify-content: flex-end;
+
+        &__message {
+            flex: 1 1 auto;
+        }
+
+        &__maxlenght {
+            transition: color $m-transition-duration ease;
+            margin-top: $m-margin--xs;
+            font-size: $m-font-size--xs;
+        }
+    }
 }
