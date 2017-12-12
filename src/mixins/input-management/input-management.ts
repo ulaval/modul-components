@@ -19,7 +19,7 @@ export class InputManagement extends ModulVue {
     @Prop()
     public readonly: boolean;
 
-    private internalValue: string = '';
+    public internalValue: string = '';
     private internalIsFocus: boolean = false;
 
     private onClick(event: MouseEvent): void {
