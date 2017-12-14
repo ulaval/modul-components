@@ -25,6 +25,7 @@ import NavBarItemPlugin from './navbar-item/navbar-item';
 import menuPlugin from './menu/menu';
 import menuItemPlugin from './menu-item/menu-item';
 import PanelPlugin from './panel/panel';
+import PhoneNumberPlugin from './phone-number/phone-number';
 import PopperPlugin from './popper/popper';
 import PopupPlugin from './popup/popup';
 import RadioPlugin from './radio/radio';
@@ -80,6 +81,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(menuPlugin);
         Vue.use(menuItemPlugin);
         Vue.use(PanelPlugin);
+        Vue.use(PhoneNumberPlugin);
         Vue.use(PopperPlugin);
         Vue.use(PopupPlugin);
         Vue.use(RadioPlugin);

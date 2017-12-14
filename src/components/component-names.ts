@@ -24,6 +24,7 @@ export const NAVBAR_ITEM_NAME: string = 'm-navbar-item';
 export const MENU_NAME: string = 'm-menu';
 export const MENU_ITEM_NAME: string = 'm-menu-item';
 export const PANEL_NAME: string = 'm-panel';
+export const PHONE_NUMBER_NAME: string = 'm-phone-number';
 export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const RADIO_NAME: string = 'm-radio';
@@ -78,6 +79,7 @@ export const components: string[] = [
     MENU_NAME,
     MENU_ITEM_NAME,
     PANEL_NAME,
+    PHONE_NUMBER_NAME,
     POPPER_NAME,
     POPUP_NAME,
     RADIO_NAME,
