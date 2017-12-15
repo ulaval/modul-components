@@ -6,6 +6,7 @@ import ButtonPlugin from './button/button';
 import ButtonGroupPlugin from './button-group/button-group';
 import CarouselPlugin from './carousel/carousel';
 import CheckboxPlugin from './checkbox/checkbox';
+import DateFieldsPlugin from './date-fields/date-fields';
 import DatepickerPlugin from './datepicker/datepicker';
 import DialogPlugin from './dialog/dialog';
 import DropdownPlugin from './dropdown/dropdown';
@@ -62,6 +63,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ButtonGroupPlugin);
         Vue.use(CarouselPlugin);
         Vue.use(CheckboxPlugin);
+        Vue.use(DateFieldsPlugin);
         Vue.use(DatepickerPlugin);
         Vue.use(DialogPlugin);
         Vue.use(DropdownPlugin);

@@ -9,6 +9,7 @@ const FrenchPlugin: PluginObject<any> = {
             (v as any).$i18n.addMessages(FRENCH, require('../components/accordion-group/accordion-group.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/list-item/list-item.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dialog/dialog.lang.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/date-fields/date-fields.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/datepicker/datepicker.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown-item/dropdown-item.lang.fr.json'));

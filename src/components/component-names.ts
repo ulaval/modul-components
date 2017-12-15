@@ -5,6 +5,7 @@ export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CAROUSEL_NAME: string = 'm-carousel';
 export const CHECKBOX_NAME: string = 'm-checkbox';
+export const DATEFIELDS_NAME: string = 'm-date-fields';
 export const DATEPICKER_NAME: string = 'm-datepicker';
 export const DIALOG_NAME: string = 'm-dialog';
 export const DROPDOWN_NAME: string = 'm-dropdown';
@@ -60,6 +61,7 @@ export const components: string[] = [
     BUTTON_GROUP_NAME,
     CAROUSEL_NAME,
     CHECKBOX_NAME,
+    DATEFIELDS_NAME,
     DATEPICKER_NAME,
     DIALOG_NAME,
     DROPDOWN_NAME,
