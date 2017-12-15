@@ -20,6 +20,9 @@
             "type": "string",
             "default": "288px"
         },
+        "listMinWidth": {
+            "type": "string"
+        },
         "iconName": {
             "type": "string"
         },
