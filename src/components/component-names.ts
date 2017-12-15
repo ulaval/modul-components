@@ -3,6 +3,7 @@ export const ACCORDION_NAME: string = 'm-accordion';
 export const LIST_ITEM_NAME: string = 'm-list-item';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
+export const CAROUSEL_NAME: string = 'm-carousel';
 export const CHECKBOX_NAME: string = 'm-checkbox';
 export const DATEPICKER_NAME: string = 'm-datepicker';
 export const DIALOG_NAME: string = 'm-dialog';
@@ -57,6 +58,7 @@ export const components: string[] = [
     ACCORDION_NAME,
     BUTTON_NAME,
     BUTTON_GROUP_NAME,
+    CAROUSEL_NAME,
     CHECKBOX_NAME,
     DATEPICKER_NAME,
     DIALOG_NAME,

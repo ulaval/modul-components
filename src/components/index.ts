@@ -4,6 +4,7 @@ import AccordionPlugin from './accordion/accordion';
 import ListItemPlugin from './list-item/list-item';
 import ButtonPlugin from './button/button';
 import ButtonGroupPlugin from './button-group/button-group';
+import CarouselPlugin from './carousel/carousel';
 import CheckboxPlugin from './checkbox/checkbox';
 import DatepickerPlugin from './datepicker/datepicker';
 import DialogPlugin from './dialog/dialog';
@@ -59,6 +60,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
         Vue.use(ButtonGroupPlugin);
+        Vue.use(CarouselPlugin);
         Vue.use(CheckboxPlugin);
         Vue.use(DatepickerPlugin);
         Vue.use(DialogPlugin);
