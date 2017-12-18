@@ -4,7 +4,7 @@ $m-message-size: 22px;
 .m-message {
     display: block;
 
-    &.m--is-regular {
+    &.m--is-skin-regular {
         &.m--is-success {
             border: 1px solid $m-color--success;
 
@@ -47,7 +47,7 @@ $m-message-size: 22px;
             }
         }
 
-        &.m--is-error {
+        &.m--has-error {
             border: 1px solid $m-color--error;
 
             .m-message__icon {
@@ -101,7 +101,7 @@ $m-message-size: 22px;
         }
     }
 
-    &.m--is-light {
+    &.m--is-skin-light {
         &.m--is-success {
             .m-message__wrap {
                 background: $m-color--success-lightest;
@@ -120,7 +120,7 @@ $m-message-size: 22px;
             }
         }
 
-        &.m--is-error {
+        &.m--has-error {
             .m-message__wrap {
                 background: $m-color--error-lightest;
             }
