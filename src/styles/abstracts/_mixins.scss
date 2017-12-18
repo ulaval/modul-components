@@ -239,19 +239,6 @@
     padding-top: $m-spacing;
     padding-bottom: $m-spacing;
 
-    // doesn't work for slot content because of the scoped style... >_<
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin: 0;
-        font-size: $m-font-size--h4;
-        font-weight: $m-font-weight--bold;
-    }
-    ////////////////////////////////////////////
-
     &.m--no-padding,
     .m--no-padding & {
         padding: 0;
