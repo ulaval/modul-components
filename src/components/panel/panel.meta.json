@@ -7,13 +7,9 @@
             "type": "string",
             "values": [
                 "light",
-                "dark"
+                "prism"
             ],
-            "default": 0
-        },
-        "highlightingBorder": {
-            "type": "boolean",
-            "default": true
+            "default": "light"
         },
         "shadow": {
             "type": "boolean",

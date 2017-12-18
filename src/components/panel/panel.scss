@@ -20,7 +20,8 @@ $m-panel--screen--min: 640px;
         box-shadow: $m-box-shadow--s;
     }
 
-    &.m--has-highlighting-border {
+    &.m--is-skin-light {
+        background: $m-color--white;
         border-top: 0;
         padding-top: 4px;
 
@@ -36,17 +37,27 @@ $m-panel--screen--min: 640px;
         }
     }
 
-    &.m--is-skin-light {
+    &.m--is-skin-prism {
         background: $m-color--white;
-    }
 
-    &.m--is-skin-dark {
-        background: $m-color--grey-lightest;
+        .m-panel__header {
+            border-bottom: 1px solid $m-color--grey;
 
-        .m-panel {
-            > .m-panel__header {
-                background-color: $m-color--grey-lighter;
-                border-bottom: 1px solid $m-color--grey;
+            @include m-box-header-pading(__menu);
+        }
+
+        .m-panel__body {
+            padding-top: $m-spacing--xl;
+            padding-bottom: $m-spacing--xl;
+
+            @media (min-width: $m-mq--min--s) {
+                padding-left: $m-spacing--l;
+                padding-right: $m-spacing--l;
+            }
+
+            @media (max-width: $m-mq--max--s) {
+                padding-left: $m-spacing;
+                padding-right: $m-spacing;
             }
         }
     }
@@ -55,6 +66,7 @@ $m-panel--screen--min: 640px;
     &__footer {
         > :first-child {
             margin-top: 0;
+            padding-top: 0;
 
             > :first-child {
                 margin-top: 0;
@@ -63,12 +75,11 @@ $m-panel--screen--min: 640px;
     }
 
     &__header {
-        &:not(.m--no-padding) {
-            padding: $m-padding $m-padding--s #{ $m-padding + $m-margin--s } $m-padding--s;
-        }
+        position: relative;
 
-        &__content,
-        &__content-left {
+        &__content {
+            flex: 1;
+
             > :first-child {
                 margin-top: 0;
 
@@ -78,8 +89,24 @@ $m-panel--screen--min: 640px;
             }
         }
 
-        &__content {
-            flex: 1;
+        &__menu {
+            .m--is-skin-light & {
+                right: $m-spacing;
+            }
+        }
+
+        .m--has-menu.m--is-skin-light & {
+            padding-right: $m-spacing + $m-touch-size;
+        }
+
+        .m--has-menu.m--is-skin-prism & {
+            @media (min-width: $m-mq--min--s) {
+                padding-right: $m-spacing--l + $m-touch-size;
+            }
+
+            @media (max-width: $m-mq--max--s) {
+                padding-right: $m-spacing + $m-touch-size;
+            }
         }
 
         &.m--is-right-content-alone {
@@ -91,11 +118,11 @@ $m-panel--screen--min: 640px;
 
     &__body {
         flex: 1 1 auto;
+        position: relative;
 
         &:not(.m--no-padding) {
             padding-right: $m-padding--s;
             padding-left: $m-padding--s;
-            padding-bottom: #{ $m-padding + $m-margin--s };
         }
 
         &.m--has-padding-top {
@@ -108,25 +135,14 @@ $m-panel--screen--min: 640px;
     &__footer {
         border-top: 1px solid $m-color--grey;
 
-        &:not(.m--no-padding) {
-            padding: $m-padding--s;
-        }
-    }
-
-    &__header,
-    &__body,
-    &__footer {
-        &:not(.m--no-padding) {
-            @media (min-width: $m-mq--min--s) {
-                padding-right: $m-padding;
-                padding-left: $m-padding;
-            }
-        }
+        @include m-box-header-pading();
     }
 
     &[max-width~="#{ $m-panel--screen--max }"] {
-        .m-panel__header {
-            display: block;
+        &.m--is-skin-light {
+            .m-panel__header {
+                display: block;
+            }
         }
 
         &:not(.m--is-right-content-alone) {
@@ -138,8 +154,6 @@ $m-panel--screen--min: 640px;
 
     &[min-width~="#{ $m-panel--screen--min }"] {
         .m-panel__header {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
         }
     }

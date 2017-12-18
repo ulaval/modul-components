@@ -3,7 +3,7 @@ import '../../utils/polyfills';
 import PanelPlugin, { MPanel, MPanelSkin } from './panel';
 
 const SKIN_LIGHT_CSS: string = 'm--is-skin-light';
-const SKIN_DARK_CSS: string = 'm--is-skin-dark';
+const SKIN_PRISM_CSS: string = 'm--is-skin-prism';
 const HAS_HIGHLIGHTING_BORDER_CSS: string = 'm--has-highlighting-border';
 const NO_SHADOW_CSS: string = 'm--no-shadow';
 const NO_BORDER_CSS: string = 'm--no-border';
@@ -14,7 +14,7 @@ let panel: MPanel;
 describe('MPanelSkin', () => {
     it('validates enum', () => {
         expect(MPanelSkin.Light).toEqual('light');
-        expect(MPanelSkin.Dark).toEqual('dark');
+        expect(MPanelSkin.Prism).toEqual('prism');
     });
 });
 
@@ -35,37 +35,26 @@ describe('panel', () => {
     });
 
     it('css class for panel are not present', () => {
-        expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(SKIN_PRISM_CSS)).toBeFalsy();
         expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
         expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
     });
 
     it('skin prop', done => {
-        expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(SKIN_PRISM_CSS)).toBeFalsy();
 
-        panel.skin = MPanelSkin.Dark;
+        panel.skin = MPanelSkin.Prism;
         Vue.nextTick(() => {
-            expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeTruthy();
+            expect(panel.$el.classList.contains(SKIN_PRISM_CSS)).toBeTruthy();
             expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
 
             panel.skin = MPanelSkin.Light;
             Vue.nextTick(() => {
                 expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
-                expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+                expect(panel.$el.classList.contains(SKIN_PRISM_CSS)).toBeFalsy();
 
                 done();
             });
-        });
-    });
-
-    it('highlighting-border prop', done => {
-        expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeTruthy();
-
-        panel.highlightingBorder = false;
-        Vue.nextTick(() => {
-            expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeFalsy();
-
-            done();
         });
     });
 

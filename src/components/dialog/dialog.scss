@@ -1,6 +1,6 @@
 @import '../../styles/abstracts/variables';
 $m-dialog--max-width--l: $m-max-width !default;
-$m-dialog--max-width: 640px !default;
+$m-dialog--max-width: 600px !default;
 $m-dialog--max-width--s: 420px !default;
 
 .m-dialog {
@@ -137,36 +137,27 @@ $m-dialog--max-width--s: 420px !default;
         position: relative;
         background: $m-color--black-grey;
         color: $m-color--white;
-        padding: $m-margin $m-touch-size $m-margin $m-padding;
 
-        &.m--no-padding {
-            padding: 0 $m-touch-size 0 0;
-        }
-
-        &__close-button.m-icon-button {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translate3d(0, -50%, 0);
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin: 0;
-            font-size: $m-font-size--h2;
-            font-weight: $m-font-weight--bold;
-        }
+        @include m-box-header-pading(__close-button);
     }
 
     &__body {
-        padding: $m-padding;
         flex: 1 1 auto;
         overflow-x: hidden;
         overflow-y: auto;
+        position: relative;
+        padding-top: $m-spacing--xl;
+        padding-bottom: $m-spacing--xl;
+
+        @media (min-width: $m-mq--min--s) {
+            padding-left: $m-spacing--l;
+            padding-right: $m-spacing--l;
+        }
+
+        @media (max-width: $m-mq--max--s) {
+            padding-left: $m-spacing;
+            padding-right: $m-spacing;
+        }
 
         @include m-is-ie() {
             flex: none;
@@ -176,10 +167,8 @@ $m-dialog--max-width--s: 420px !default;
     }
 
     &__footer {
-        display: flex;
-        align-items: center;
-        min-height: $m-touch-size;
-        padding: $m-margin $m-padding;
         border-top: 1px solid $m-color--grey;
+
+        @include m-box-header-pading();
     }
 }

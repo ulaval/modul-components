@@ -232,6 +232,78 @@
     }
 }
 
+@mixin m-box-header-pading($menuClass: false) {
+    display: flex;
+    align-items: center;
+    min-height: $m-touch-size*2;
+    padding-top: $m-spacing;
+    padding-bottom: $m-spacing;
+
+    // doesn't work for slot content because of the scoped style... >_<
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-size: $m-font-size--h4;
+        font-weight: $m-font-weight--bold;
+    }
+    ////////////////////////////////////////////
+
+    &.m--no-padding,
+    .m--no-padding & {
+        padding: 0;
+    }
+
+    @media (min-width: $m-mq--min--s) {
+        padding-left: $m-spacing--l;
+        padding-right: $m-spacing--l;
+    }
+
+    @media (max-width: $m-mq--max--s) {
+        padding-left: $m-spacing;
+        padding-right: $m-spacing;
+    }
+
+    @if $menuClass {
+        @media (min-width: $m-mq--min--s) {
+            padding-left: $m-spacing--l;
+            padding-right: $m-touch-size + $m-spacing--l;
+        }
+
+        @media (max-width: $m-mq--max--s) {
+            padding-left: $m-spacing;
+            padding-right: $m-touch-size + $m-spacing;
+        }
+
+        &.m--no-padding,
+        .m--no-padding & {
+            padding: 0 $m-touch-size 0 0;
+        }
+
+        &#{$menuClass} {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: $m-touch-size;
+
+            @media (min-width: $m-mq--min--s) {
+                right: $m-spacing--l;
+            }
+
+            @media (max-width: $m-mq--max--s) {
+                right: $m-spacing;
+            }
+
+            .m--no-padding & {
+                right: 0;
+            }
+        }
+    }
+}
+
 @mixin m-triangle($m-direction, $m-color: currentcolor, $m-size: 1em) {
     @if not index(top right bottom left, $m-direction) {
         @error "Direction must be either `top`, `right`, `bottom` or `left`.";
