@@ -9,9 +9,9 @@ import LangHelper from '../../../tests/helpers/lang';
 const STATE_SUCCESS_CSS: string = 'm--is-success';
 const STATE_INFORMATION_CSS: string = 'm--is-information';
 const STATE_WARNING_CSS: string = 'm--is-warning';
-const STATE_ERROR_CSS: string = 'm--is-error';
-const SKIN_REGULAR_CSS: string = 'm--is-regular';
-const SKIN_LIGHT_CSS: string = 'm--is-light';
+const STATE_ERROR_CSS: string = 'm--has-error';
+const SKIN_REGULAR_CSS: string = 'm--is-skin-regular';
+const SKIN_LIGHT_CSS: string = 'm--is-skin-light';
 const CLOSE_BUTTON_CSS: string = 'm--has-close-button';
 
 let message: MMessage;

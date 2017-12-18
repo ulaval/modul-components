@@ -1,0 +1,95 @@
+@import 'abstracts/variables';
+
+.m-phone-number {
+    display: flex;
+    flex-flow: row wrap;
+
+    > div + div {
+        margin-top: $m-margin--l;
+    }
+
+    &__country {
+        flex: 1 100%;
+
+        &__label {
+            margin-top: 0;
+            font-size: $m-font-size;
+            font-weight: $m-font-weight--bold;
+        }
+    }
+
+    &__phone {
+        flex: 1 70%;
+        padding-right: $m-margin--l;
+
+        &__label {
+            margin-top: 0;
+            font-size: $m-font-size;
+            font-weight: $m-font-weight--bold;
+        }
+
+        &__input {
+            width: 100%;
+        }
+
+        &__exemple {
+            margin-top: $m-margin--s;
+            font-family: $m-font-family;
+            font-size: $m-font-size--s;
+            font-style: italic;
+            color: $m-color--grey-darker;
+        }
+    }
+
+    &__extension {
+        flex: 1 30%;
+
+        &__label {
+            margin-top: 0;
+            font-size: $m-font-size;
+            font-weight: $m-font-weight--bold;
+        }
+    }
+
+    @media (min-width: $m-mq--min--xs) {
+        &__country__input {
+            max-width: 288px;
+        }
+
+        &__phone {
+            flex: 1 auto;
+            max-width: 180px;
+            padding-right: 0;
+            margin-right: $m-margin--l;
+        }
+
+        &__extension {
+            flex: 1 auto;
+            max-width: 84px;
+        }
+    }
+
+    @media (min-width: $m-mq--min--s) {
+        > div + div {
+            margin-top: 0;
+        }
+
+        &__country {
+            flex: 1;
+            max-width: 288px;
+            min-width: 288px;
+            margin-right: $m-margin--l;
+        }
+
+        &__phone {
+            flex: 1;
+            max-width: 288px;
+            min-width: 288px;
+        }
+
+        &__extension {
+            flex: 1;
+            max-width: 120px;
+        }
+    }
+}

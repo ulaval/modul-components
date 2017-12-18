@@ -46,6 +46,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public textNoData: string;
     @Prop()
     public textNoMatch: string;
+    @Prop()
+    public listMinWidth: string;
 
     private internalFilter: string = '';
     private internalFilterRegExp: RegExp = / /;
@@ -337,6 +339,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                     el.style.overflowY = 'hidden';
                     el.style.maxHeight = '0';
                     el.style.width = this.$el.clientWidth + 'px';
+                    el.style.minWidth = this.listMinWidth;
                     el.style.removeProperty('opacity');
                     setTimeout(() => {
                         el.style.maxHeight = height + 'px';
@@ -354,6 +357,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
                 let height: number = el.clientHeight;
                 el.style.width = this.$el.clientWidth + 'px';
+                el.style.minWidth = this.listMinWidth;
                 el.style.maxHeight = height + 'px';
                 el.style.maxHeight = '0';
                 setTimeout(() => {

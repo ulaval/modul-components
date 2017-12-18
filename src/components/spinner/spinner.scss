@@ -20,6 +20,7 @@ $m-loading-speed: 0.7s;
             left: 0;
         }
 
+        &.m--is-processing,
         &.m--is-light,
         &.m--is-lighter {
             .m-spinner {

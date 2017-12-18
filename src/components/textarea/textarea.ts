@@ -24,6 +24,30 @@ export class MTextarea extends ModulVue {
     public maxWidth: string;
     @Prop({ default: 3 })
     public rows: number;
+
+    private internalTextareaError: boolean = false;
+
+    private get valueLenght(): number {
+        let lenght: number = this.as<InputManagement>().internalValue.length;
+        if (lenght > this.maxlength) {
+            this.internalTextareaError = true;
+        } else {
+            this.internalTextareaError = false;
+        }
+        return lenght;
+    }
+
+    private get hasMaxlenght(): boolean {
+        return this.maxlength > 0;
+    }
+
+    private get textareaError(): boolean {
+        return this.internalTextareaError || this.as<InputState>().hasError;
+    }
+
+    private get textareaValid(): boolean {
+        return !this.textareaError && this.as<InputState>().isValid;
+    }
 }
 
 const TextareaPlugin: PluginObject<any> = {

@@ -9,6 +9,7 @@ const FrenchPlugin: PluginObject<any> = {
             (v as any).$i18n.addMessages(FRENCH, require('../components/accordion-group/accordion-group.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/list-item/list-item.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dialog/dialog.lang.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/date-fields/date-fields.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/datepicker/datepicker.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown-item/dropdown-item.lang.fr.json'));
@@ -19,6 +20,7 @@ const FrenchPlugin: PluginObject<any> = {
             (v as any).$i18n.addMessages(FRENCH, require('../components/message/message.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/menu/menu.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/modal/modal.lang.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/phone-number/phone-number.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/scroll-top/scroll-top.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/sidebar/sidebar.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/spinner/spinner.lang.fr.json'));

@@ -1,15 +1,24 @@
 <transition :appear="true" :css="false" @enter="onEnter()" @leave="onLeave()">
     <div class="m-spinner">
         <portal :target-el="spinnerElement" v-if="initialized">
-            <div ref="spinnerWrap" class="m-spinner__wrap" :class="{'m--is-processing': modal,
+            <div ref="spinnerWrap" class="m-spinner__wrap" :class="{'m--is-processing': processing,
                  'm--is-dark': skin == 'dark',
                  'm--is-light': skin == 'light',
                  'm--is-lighter': skin == 'lighter'}">
                 <div aria-hidden="true" class="m-spinner__icon" :class="{ 'm--is-small' : size == 'small'}"></div>
-                <h2 class="m-spinner__title" v-if="hasTitle">{{ title }}</h2>
-                <p class="m-spinner__description" v-if="hasDescription">{{ description }}</p>
+                <h2 class="m-spinner__title" v-if="hasTitle">
+                    <template v-if="hasTitleMessage">{{ titleMessage }}</template>
+                    <template v-else>
+                        <m-i18n v-if="processing" k="m-spinner:processing"></m-i18n>
+                        <m-i18n v-if="!processing" k="m-spinner:loading"></m-i18n>
+                    </template>
+                </h2>
+                <p class="m-spinner__description" v-if="hasDescription">
+                    <template v-if="hasDescriptionMessage">{{ descriptionMessage }}</template>
+                    <m-i18n v-else k="m-spinner:description"></m-i18n>
+                </p>
             </div>
         </portal>
-        <div ref="spinnerContainer" v-if="!modal"></div>
+        <div ref="spinnerContainer" v-if="!processing"></div>
     </div>
 </transition>

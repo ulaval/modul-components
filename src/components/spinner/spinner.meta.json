@@ -4,9 +4,17 @@
     "production": true,
     "attributes": {
         "title": {
+            "type": "boolean",
+            "default": false
+        },
+        "titleMessage": {
             "type": "string"
         },
         "description": {
+            "type": "boolean",
+            "default": false
+        },
+        "descriptionMessage": {
             "type": "string"
         },
         "skin": {
@@ -27,7 +35,7 @@
             ],
             "default": 0
         },
-        "modal": {
+        "processing": {
             "type": "boolean",
             "default": false
         }

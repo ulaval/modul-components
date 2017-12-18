@@ -1,0 +1,18 @@
+@import 'abstracts/variables';
+
+.m-carousel {
+    max-width: 1100px;
+
+    &__viewer {
+        background-color: $m-color--black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+
+        img,
+        video {
+            max-height: 50vh;
+        }
+    }
+}

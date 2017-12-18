@@ -1,0 +1,51 @@
+<div class="m-date-fields" ref="mDateFields">
+     <m-dropdown v-if="year"
+                 v-model="activeYear"
+                 class="m-date-fields_years"
+                 width="65px"
+                 :placeholder="getPlaceholder('year')"
+                 :filterable="true"
+                 :disabled="disabled"
+                 @change="updateInternal()">
+         <m-dropdown-item v-for="year in years" :value="year"></m-dropdown-item>
+     </m-dropdown>
+     <m-dropdown v-if="month"
+                 v-model="activeMonth"
+                 class="m-date-fields_months"
+                 width="50px"
+                 :placeholder="getPlaceholder('month')"
+                 :filterable="true"
+                 :disabled="disabled"
+                 @change="updateInternal()">
+        <m-dropdown-item v-for="month in months" :value="month" :label="getLabel(month)"></m-dropdown-item>
+     </m-dropdown>
+     <m-dropdown v-if="date"
+                 v-model="activeDate"
+                 class="m-date-fields_dates"
+                 width="50px"
+                 :placeholder="getPlaceholder('date')"
+                 :filterable="true"
+                 :disabled="disabled"
+                 @change="updateInternal()">
+        <m-dropdown-item v-for="date in dates" :value="date" :label="getLabel(date)"></m-dropdown-item>
+     </m-dropdown>
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     M: {{ model }}
+     <br />
+     Y: {{ activeYear }}
+     <br />
+     M: {{ activeMonth }}
+     <br />
+     D: {{ activeDate }}
+</div>

@@ -2,11 +2,11 @@ import Vue from 'vue';
 import '../../utils/polyfills';
 import NavbarPlugin, { MNavbar, MNavbarSkin } from './navbar';
 
-const SKIN_REGULAR_CSS: string = 'm--is-regular';
-const SKIN_LIGHT_CSS: string = 'm--is-light';
-const SKIN_DARK_CSS: string = 'm--is-dark';
-const SKIN_PLAIN_CSS: string = 'm--is-plain';
-const SKIN_ARROW_CSS: string = 'm--is-arrow';
+const SKIN_REGULAR_CSS: string = 'm--is-skin-regular';
+const SKIN_LIGHT_CSS: string = 'm--is-skin-light';
+const SKIN_DARK_CSS: string = 'm--is-skin-dark';
+const SKIN_PLAIN_CSS: string = 'm--is-skin-plain';
+const SKIN_ARROW_CSS: string = 'm--is-skin-arrow';
 const ACTIVE_CSS: string = 'm--is-anim-active';
 
 let navbar: MNavbar;

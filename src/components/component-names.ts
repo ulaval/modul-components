@@ -3,7 +3,9 @@ export const ACCORDION_NAME: string = 'm-accordion';
 export const LIST_ITEM_NAME: string = 'm-list-item';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
+export const CAROUSEL_NAME: string = 'm-carousel';
 export const CHECKBOX_NAME: string = 'm-checkbox';
+export const DATEFIELDS_NAME: string = 'm-date-fields';
 export const DATEPICKER_NAME: string = 'm-datepicker';
 export const DIALOG_NAME: string = 'm-dialog';
 export const DROPDOWN_NAME: string = 'm-dropdown';
@@ -24,6 +26,7 @@ export const NAVBAR_ITEM_NAME: string = 'm-navbar-item';
 export const MENU_NAME: string = 'm-menu';
 export const MENU_ITEM_NAME: string = 'm-menu-item';
 export const PANEL_NAME: string = 'm-panel';
+export const PHONE_NUMBER_NAME: string = 'm-phone-number';
 export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const RADIO_NAME: string = 'm-radio';
@@ -56,7 +59,9 @@ export const components: string[] = [
     ACCORDION_NAME,
     BUTTON_NAME,
     BUTTON_GROUP_NAME,
+    CAROUSEL_NAME,
     CHECKBOX_NAME,
+    DATEFIELDS_NAME,
     DATEPICKER_NAME,
     DIALOG_NAME,
     DROPDOWN_NAME,
@@ -78,6 +83,7 @@ export const components: string[] = [
     MENU_NAME,
     MENU_ITEM_NAME,
     PANEL_NAME,
+    PHONE_NUMBER_NAME,
     POPPER_NAME,
     POPUP_NAME,
     RADIO_NAME,

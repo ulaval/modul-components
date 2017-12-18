@@ -7,10 +7,11 @@ import ElementQueries from 'css-element-queries/src/ElementQueries';
 
 export enum MPanelSkin {
     Light = 'light',
-    Dark = 'dark'
+    Prism = 'prism'
 }
 
 const HEADER_RIGHT_CONTENT: string = 'header-right-content';
+const MENU: string = 'menu';
 
 @WithRender
 @Component
@@ -19,12 +20,9 @@ export class MPanel extends Vue {
         default: MPanelSkin.Light,
         validator: value =>
             value == MPanelSkin.Light ||
-            value == MPanelSkin.Dark
+            value == MPanelSkin.Prism
     })
     public skin: MPanelSkin;
-
-    @Prop({ default: true })
-    public highlightingBorder: boolean;
 
     @Prop({ default: true })
     public shadow: boolean;
@@ -56,8 +54,8 @@ export class MPanel extends Vue {
         return this.skin == MPanelSkin.Light;
     }
 
-    private get darkSkin(): boolean {
-        return this.skin == MPanelSkin.Dark;
+    private get prismSkin(): boolean {
+        return this.skin == MPanelSkin.Prism;
     }
 
     private get hasHeader(): boolean {
@@ -69,6 +67,10 @@ export class MPanel extends Vue {
 
     private get hasHeaderRightContentSlot(): boolean {
         return !!this.$slots[HEADER_RIGHT_CONTENT];
+    }
+
+    private get hasHeaderMenuSlot(): boolean {
+        return !!this.$slots[MENU];
     }
 
     private get hasHeaderSlot(): boolean {

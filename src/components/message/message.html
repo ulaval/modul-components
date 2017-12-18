@@ -1,9 +1,9 @@
 <div class="m-message" :class="{'m--is-success': state=='success',
                 'm--is-information': state=='information',
                 'm--is-warning': state=='warning',
-                'm--is-error': state=='error',
-                'm--is-regular': skin!='light',
-                'm--is-light': skin=='light'}" v-if="propVisible">
+                'm--has-error': state=='error',
+                'm--is-skin-regular': skin!='light',
+                'm--is-skin-light': skin=='light'}" v-if="propVisible">
     <div class="m-message__wrap">
         <div class="m-message__icon" v-if="icon">
             <m-icon :name="getIcon()"></m-icon>

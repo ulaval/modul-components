@@ -1,15 +1,16 @@
-<div class="m-navbar" :class="{
-         'm--is-regular': skin == 'regular' || skin == 'dark',
-         'm--is-light': skin == 'light',
-         'm--is-dark': skin == 'dark',
-         'm--is-plain': skin == 'plain',
-         'm--is-arrow': skin == 'arrow',
-         'm--no-margin': !margin }">
+<div class="m-navbar"
+    :class="{ 'm--is-disabled': disabled,
+              'm--is-skin-regular': skin == 'regular' || skin == 'dark',
+              'm--is-skin-light': skin == 'light',
+              'm--is-skin-dark': skin == 'dark',
+              'm--is-skin-plain': skin == 'plain',
+              'm--is-skin-arrow': skin == 'arrow',
+              'm--no-margin': !margin }">
     <nav class="m-navbar__wrap">
         <ul class="m-navbar__list" aria-hidden="true">
             <slot></slot>
         </ul>
-        <div aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propLine" ref="line"></div>
-        <div aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="propArrow" ref="Arrow"></div>
+        <div aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasLine" ref="line"></div>
+        <div aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasArrow" ref="Arrow"></div>
     </nav>
 </div>

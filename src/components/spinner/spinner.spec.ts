@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import SpinnerPlugin, { MSpinner, MSpinnerStyle, MSpinnerSize, MODAL_WARN } from './spinner';
+import SpinnerPlugin, { MSpinner, MSpinnerStyle, MSpinnerSize, PROCESSING_WARN } from './spinner';
 import { SPINNER_NAME } from '../component-names';
 
 export const SPINNER_CLASS: string = '.m-spinner';
@@ -71,14 +71,32 @@ describe('spinner', () => {
             let title: HTMLElement = spinner.$el.querySelector(titleClass) as HTMLElement;
             expect(title).toBeFalsy();
 
-            spinner.title = 'test';
+            spinner.title = true;
             Vue.nextTick(() => {
                 // don't know why (probably portal) but we need two cycles
                 Vue.nextTick(() => {
                     title = spinner.$el.querySelector(titleClass) as HTMLElement;
                     expect(title).toBeTruthy();
-                    expect(title.innerText).toBe('test');
+                    done();
+                });
+            });
+        });
+    });
 
+    it('titleMessage prop', done => {
+        spinner = new MSpinner().$mount();
+        Vue.nextTick(() => {
+            const titleClass: string = '.m-spinner__title';
+            let title: HTMLElement = spinner.$el.querySelector(titleClass) as HTMLElement;
+            expect(title).toBeFalsy();
+
+            spinner.titleMessage = 'title';
+            Vue.nextTick(() => {
+                // don't know why (probably portal) but we need two cycles
+                Vue.nextTick(() => {
+                    title = spinner.$el.querySelector(titleClass) as HTMLElement;
+                    expect(title).toBeTruthy();
+                    expect(title.innerText).toBe('title');
                     done();
                 });
             });
@@ -92,7 +110,26 @@ describe('spinner', () => {
             let desc: HTMLElement = spinner.$el.querySelector(descClass) as HTMLElement;
             expect(desc).toBeFalsy();
 
-            spinner.description = 'desc';
+            spinner.description = true;
+            Vue.nextTick(() => {
+                // portal
+                Vue.nextTick(() => {
+                    desc = spinner.$el.querySelector(descClass) as HTMLElement;
+                    expect(desc).toBeTruthy();
+                    done();
+                });
+            });
+        });
+    });
+
+    it('descriptionMessage prop', done => {
+        spinner = new MSpinner().$mount();
+        Vue.nextTick(() => {
+            const descClass: string = '.m-spinner__description';
+            let desc: HTMLElement = spinner.$el.querySelector(descClass) as HTMLElement;
+            expect(desc).toBeFalsy();
+
+            spinner.descriptionMessage = 'desc';
             Vue.nextTick(() => {
                 // portal
                 Vue.nextTick(() => {
@@ -232,7 +269,7 @@ describe('spinner', () => {
         });
     });
 
-    describe('modal prop', () => {
+    describe('processing prop', () => {
         it('should warn if set while visible', done => {
             spinner = new MSpinner().$mount();
             spyOn(console, 'warn');
@@ -241,11 +278,11 @@ describe('spinner', () => {
                 expect(wrap).toBeTruthy();
                 expect(wrap.classList.contains(MODE_PROCESSING_CSS)).toBeFalsy();
 
-                spinner.modal = true;
+                spinner.processing = true;
                 Vue.nextTick(() => {
                     // portal
                     Vue.nextTick(() => {
-                        const warn: string = `<${SPINNER_NAME}>: ${MODAL_WARN}`;
+                        const warn: string = `<${SPINNER_NAME}>: ${PROCESSING_WARN}`;
                         expect(console.warn).toHaveBeenCalledWith(warn);
 
                         done();
@@ -258,20 +295,20 @@ describe('spinner', () => {
             spyOn(console, 'warn');
             let vm = new Vue({
                 data: {
-                    modal: false,
+                    processing: false,
                     visible: true
                 },
-                template: `<m-spinner :modal="modal" v-show="visible"></m-spinner>`
+                template: `<m-spinner :processing="processing" v-show="visible"></m-spinner>`
             }).$mount();
 
             Vue.nextTick(() => {
                 (vm as any).visible = false;
                 Vue.nextTick(() => {
-                    (vm as any).modal = true;
+                    (vm as any).processing = true;
                     Vue.nextTick(() => {
                         (vm as any).visible = true;
                         Vue.nextTick(() => {
-                            const warn: string = `<${SPINNER_NAME}>: ${MODAL_WARN}`;
+                            const warn: string = `<${SPINNER_NAME}>: ${PROCESSING_WARN}`;
                             expect(console.warn).toHaveBeenCalledWith(warn);
 
                             done();
@@ -285,10 +322,10 @@ describe('spinner', () => {
             spyOn(console, 'warn');
             let vm = new Vue({
                 data: {
-                    modal: false,
+                    processing: false,
                     visible: false
                 },
-                template: `<m-spinner :modal="modal" v-if="visible"></m-spinner>`
+                template: `<m-spinner :processing="processing" v-if="visible"></m-spinner>`
             }).$mount();
 
             Vue.nextTick(() => {
@@ -298,7 +335,7 @@ describe('spinner', () => {
                     Vue.nextTick(() => {
                         (vm as any).visible = true;
                         Vue.nextTick(() => {
-                            const warn: string = `<${SPINNER_NAME}>: ${MODAL_WARN}`;
+                            const warn: string = `<${SPINNER_NAME}>: ${PROCESSING_WARN}`;
                             expect(console.warn).not.toHaveBeenCalledWith(warn);
 
                             done();
@@ -311,9 +348,9 @@ describe('spinner', () => {
         it('css', done => {
             let vm = new Vue({
                 data: {
-                    modal: true
+                    processing: true
                 },
-                template: `<m-spinner :modal="modal"></m-spinner>`
+                template: `<m-spinner :processing="processing"></m-spinner>`
             }).$mount();
 
             Vue.nextTick(() => {

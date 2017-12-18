@@ -1,0 +1,15 @@
+{
+    "m-phone-number": {
+        "label.country": "Pays",
+        "label.phone": "Numéro de téléphone",
+        "label.extension": "Poste",
+        "placeholder.country": "Choisissez un pays",
+        "placeholder.number": "Numéro",
+        "placeholder.extension": "Poste",
+        "example": "Exemple:",
+        "canada": "Canada",
+        "usa": "États-Unis",
+        "france": "France",
+        "others": "Autres"
+    }
+}

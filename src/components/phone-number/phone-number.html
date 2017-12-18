@@ -1,0 +1,17 @@
+<div class="m-phone-number">
+    <div class="m-phone-number__country">
+        <p class="m-phone-number__country__label">{{ countryLabel }}</p>
+        <m-dropdown class="m-phone-number__country__input" v-model="countryModel" :filterable="true" :placeholder="countryPlaceholder" @change="" width="100%">
+            <m-dropdown-item v-for="country in countries" :value="country">{{ country }}</m-dropdown-item>
+        </m-dropdown>
+    </div>
+    <div class="m-phone-number__phone">
+        <p class="m-phone-number__phone__label">{{ phoneLabel }}</p>
+        <m-textfield class="m-phone-number__phone__input" type="tel" ref="phone" :disabled="isNumberDisable"></m-textfield>
+        <p v-if="asExample" class="m-phone-number__phone__exemple">{{ phoneExample }} {{ exampleText }}</p>
+    </div>
+    <div class="m-phone-number__extension">
+        <p class="m-phone-number__extension__label">{{ extensionLabel }}</p>
+        <m-textfield class="m-phone-number__extension__input" type="tel" ref="extension" :disabled="isNumberDisable"></m-textfield>
+    </div>
+</div>
