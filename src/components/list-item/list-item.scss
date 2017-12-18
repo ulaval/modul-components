@@ -8,6 +8,7 @@
     background-color: $m-color--white;
     transform-style: preserve-3d;
     padding: $m-padding;
+    word-break: break-all;
 
     @media (max-width: $m-mq--max--s) {
         padding-left: 0;

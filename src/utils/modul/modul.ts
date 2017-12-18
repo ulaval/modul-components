@@ -87,6 +87,7 @@ export class Modul {
     }
 
     public popElement(element: HTMLElement, withBackdrop: boolean, slow: boolean): void {
+        console.log('popElement: ', element);
         this.windowZIndex--;
         this.windowStack.pop();
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {

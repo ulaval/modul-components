@@ -48,6 +48,18 @@ export class Messages {
     private messages: LanguageBundlesMap = {};
 
     /**
+     * Set the application language globally
+     *
+     * @param lang The language, for example: 'en'
+     */
+    public currentLang(lang?: string): string {
+        if (lang) {
+            curLang = lang;
+        }
+        return curLang;
+    }
+
+    /**
      * Adds the messages so that they can be resolved.
      *
      * @param lang The language, for example: 'en'
