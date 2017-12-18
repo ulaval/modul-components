@@ -6,9 +6,8 @@
                   'm--has-icon' : hasIcon,
                   'm--has-label': hasLabel }"
      @click="onClick"
-     :style="{ maxWidth: '720px' }">
-    <m-input-style class="m--has-textarea"
-                   :disabled="isDisabled"
+     :style="{ width: width, maxWidth: maxWidth }">
+    <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
                    :error="textareaError"
                    :valid="isValid"
@@ -20,13 +19,13 @@
                   :disabled="!active"
                   :placeholder="placeholder"
                   :readonly="readonly"
-                  :rows="rows"
+                  rows="1"
                   @focus="onFocus"
                   @blur="onBlur"
-                  @keyup="onKeyup"
+                  @keydown="onKeydown"
                   ref="input"
                   v-model="model"
-                  :style="{ maxWidth: '720px' }"></textarea>
+                  :style="{ maxWidth: maxWidth }"></textarea>
     </m-input-style>
     <div class="m-textarea__validation">
         <m-validation-message

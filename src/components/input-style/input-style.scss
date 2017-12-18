@@ -51,10 +51,6 @@ $m-input-style--padding: 4px !default;
     }
 
     &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus) {
-        textarea {
-            border-color: $m-color--border-dark;
-        }
-
         .m-input-style__label {
             color: $m-color--text;
         }
@@ -70,10 +66,6 @@ $m-input-style--padding: 4px !default;
         .m-icon.m-icon {
             color: $m-input-style--color-focus;
         }
-
-        textarea {
-            border-color: $m-color--border-dark;
-        }
     }
 
     &.m--is-label-up {
@@ -88,7 +80,7 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    &:not(.m--is-label-up):not(.m--has-textarea) {
+    &:not(.m--is-label-up) {
         &.m--has-label .m-input-style__body__left {
             opacity: 0;
         }
@@ -183,10 +175,6 @@ $m-input-style--padding: 4px !default;
         .m-input-style__body {
             margin-top: -12px; // Magic number
         }
-
-        textarea {
-            margin-top: $m-padding--s; // Magic number
-        }
     }
 
     &.m--is-anim-active {
@@ -199,30 +187,6 @@ $m-input-style--padding: 4px !default;
 
             &__body__left {
                 transition: opacity 0.3s ease;
-            }
-        }
-    }
-
-    &:not(.m--has-textarea) {
-        .m-input-style {
-            &__body {
-                padding: 0 0 $m-input-style--padding 0;
-            }
-        }
-    }
-
-    &.m--has-textarea {
-        &.m--has-label:not(.m--is-label-up) {
-            .m-input-style__label {
-                top: $m-margin;
-                left: $m-padding--s;
-            }
-
-            textarea {
-                &,
-                &::placeholder {
-                    color: transparent;
-                }
             }
         }
     }
@@ -269,6 +233,7 @@ $m-input-style--padding: 4px !default;
         min-height: 30px; // Magic number
         font-weight: $m-font-weight;
         text-decoration: none;
+        padding: 0 0 $m-input-style--padding 0;
 
         &,
         div,
@@ -288,13 +253,13 @@ $m-input-style--padding: 4px !default;
             color: $m-color--text;
             border: none;
             background: none;
+            padding: 0;
         }
 
         input {
             cursor: text;
             overflow: hidden;
             width: 100%;
-            padding: 0;
 
             &[readonly=readonly] {
                 cursor: pointer;
@@ -302,17 +267,9 @@ $m-input-style--padding: 4px !default;
         }
 
         textarea {
-            transition: border-color $m-transition-duration ease;
             margin-bottom: -4px; //Margin number
-            padding: $m-margin--s $m-padding--s;
             width: 100%;
             min-width: 272px;
-            min-height: 63px; //Magic number -> height of rows 2
-            border-top: 1px solid $m-color--border;
-            border-right: 1px solid $m-color--border;
-            border-left: 1px solid $m-color--border;
-
-            @include m-scrollbar();
         }
 
         &__left {
