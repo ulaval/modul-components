@@ -1,33 +1,33 @@
-<div class="m-date-fields" ref="mDateFields">
+<div class="m-date-fields" ref="mDateFields" :class="{ complete: complete }">
      <m-dropdown v-if="year"
-                 v-model="activeYear"
+                 v-model="internalYear"
                  class="m-date-fields_years"
-                 width="65px"
+                 width="70px"
                  :placeholder="getPlaceholder('year')"
                  :filterable="true"
                  :disabled="disabled"
-                 @change="updateInternal()">
+                 @change="emitDate()">
          <m-dropdown-item v-for="year in years" :value="year"></m-dropdown-item>
      </m-dropdown>
      <m-dropdown v-if="month"
-                 v-model="activeMonth"
+                 v-model="internalMonth"
                  class="m-date-fields_months"
-                 width="50px"
+                 width="105px"
                  :placeholder="getPlaceholder('month')"
                  :filterable="true"
                  :disabled="disabled"
-                 @change="updateInternal()">
-        <m-dropdown-item v-for="month in months" :value="month" :label="getLabel(month)"></m-dropdown-item>
+                 @change="emitDate()">
+        <m-dropdown-item v-for="month in months" :value="month" :label="getMonthLabel(month)"></m-dropdown-item>
      </m-dropdown>
      <m-dropdown v-if="date"
-                 v-model="activeDate"
+                 v-model="internalDate"
                  class="m-date-fields_dates"
-                 width="50px"
+                 width="60px"
                  :placeholder="getPlaceholder('date')"
                  :filterable="true"
                  :disabled="disabled"
-                 @change="updateInternal()">
-        <m-dropdown-item v-for="date in dates" :value="date" :label="getLabel(date)"></m-dropdown-item>
+                 @change="emitDate()">
+        <m-dropdown-item v-for="date in dates" :value="date" :label="getDateLabel(date)"></m-dropdown-item>
      </m-dropdown>
      <br />
      <br />
@@ -41,11 +41,11 @@
      <br />
      <br />
      <br />
-     M: {{ model }}
+     <!-- Model: {{ model }} -->
      <br />
-     Y: {{ activeYear }}
+     Y: {{ internalYear }}
      <br />
-     M: {{ activeMonth }}
+     M: {{ internalMonth }}
      <br />
-     D: {{ activeDate }}
+     D: {{ internalDate }}
 </div>
