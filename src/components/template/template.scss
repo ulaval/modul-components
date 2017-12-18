@@ -130,7 +130,7 @@ $m-template--column-color: $m-color--grey-light;
         &__header,
         &__body__content,
         &__column {
-            padding: $m-padding--s;
+            padding: $m-padding $m-padding--s;
         }
     }
 }
