@@ -1,49 +1,70 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
-import { NAVBAR_ITEM_NAME } from '../component-names';
+import { NAVBAR_ITEM_NAME, components } from '../component-names';
 
-export abstract class BaseNavBar extends Vue {
-    abstract isItemSelected(value: string, el: HTMLElement): boolean;
+export abstract class BaseNavbar extends ModulVue {
+    model: string;
+    disabled: boolean;
+}
+
+export interface MNavbarInterface {
+    model: string;
+    selecteItem(el: HTMLElement): void;
 }
 
 @WithRender
 @Component
-export class MNavBarItem extends Vue {
-    @Prop()
-    public selected: boolean;
+export class MNavbarItem extends ModulVue {
+
     @Prop()
     public value: string;
+    @Prop()
+    public disabled: boolean;
 
-    private isFirst: boolean = false;
-    private isLast: boolean = false;
+    public root: MNavbarInterface; // Dropdown component
+
+    public isFirst: boolean = false;
+    public isLast: boolean = false;
     private internalSelected: boolean = false;
 
     protected mounted() {
+        let rootNode: BaseNavbar | undefined = this.getParent<BaseNavbar>(p => p instanceof BaseNavbar);
+
+        if (rootNode) {
+            this.root = (rootNode as any) as MNavbarInterface;
+        } else {
+            console.error('m-navbar-item need to be inside m-navbar');
+        }
+
         if (!this.$el.querySelector('a, button')) {
             this.$el.setAttribute('tabindex', '0');
         }
     }
 
-    private get propSelected(): boolean {
-        if (this.$parent instanceof BaseNavBar) {
-            return this.$parent.isItemSelected(this.value, this.$el);
-        } else if (this.selected != undefined) {
-            return this.selected;
-        }
-        return this.internalSelected;
+    private get selected(): boolean {
+        return this.$parent instanceof BaseNavbar && this.$parent.model == this.value && !this.disabled;
     }
 
-    private onClick(): void {
-        this.$emit('click', this.value);
+    private get isDisabled(): boolean {
+        return (this.$parent instanceof BaseNavbar && this.$parent.disabled) || this.disabled;
+    }
+
+    private onClick(event): void {
+        if (!this.disabled) {
+            (this.root as MNavbarInterface).model = this.value;
+            (this.root as MNavbarInterface).selecteItem(this.$el);
+            this.$emit('click', event, this.value);
+        }
     }
 }
 
-const NavBarItemPlugin: PluginObject<any> = {
+const NavbarItemPlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(NAVBAR_ITEM_NAME, MNavBarItem);
+        v.component(NAVBAR_ITEM_NAME, MNavbarItem);
     }
 };
 
-export default NavBarItemPlugin;
+export default NavbarItemPlugin;

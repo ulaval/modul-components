@@ -1,6 +1,9 @@
-<li class="m-navbar-item" :class="{
-        'm--is-selected': propSelected,
-        'm--is-first' : isFirst,
-        'm--is-last' : isLast}" @keyup.enter="onClick" @click="onClick">
+<li class="m-navbar-item"
+    :class="{'m--is-selected': selected,
+             'm--is-disabled': isDisabled,
+             'm--is-first' : isFirst,
+             'm--is-last' : isLast}"
+    @keyup.enter="onClick"
+    @click="onClick">
     <slot></slot>
 </li>

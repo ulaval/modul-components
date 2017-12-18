@@ -1,27 +1,27 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import NavBarItemPlugin, { MNavBarItem } from './navbar-item';
+import NavBarItemPlugin, { MNavbarItem } from './navbar-item';
 
-const SELECTED_CSS: string = 'm--is-selected';
+const DISABLED_CSS: string = 'm--is-disabled';
 
-let navbaritem: MNavBarItem;
+let navbaritem: MNavbarItem;
 
 describe('navbar-item', () => {
     beforeEach(() => {
         Vue.use(NavBarItemPlugin);
-        navbaritem = new MNavBarItem().$mount();
+        navbaritem = new MNavbarItem().$mount();
     });
 
-    it('selected prop', () => {
-        expect(navbaritem.$el.classList.contains(SELECTED_CSS)).toBeFalsy();
+    it('disabled prop', () => {
+        expect(navbaritem.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
 
-        navbaritem.selected = true;
+        navbaritem.disabled = true;
         Vue.nextTick(() => {
-            expect(navbaritem.$el.classList.contains(SELECTED_CSS)).toBeTruthy();
+            expect(navbaritem.$el.classList.contains(DISABLED_CSS)).toBeTruthy();
 
-            navbaritem.selected = false;
+            navbaritem.disabled = false;
             Vue.nextTick(() => {
-                expect(navbaritem.$el.classList.contains(SELECTED_CSS)).toBeFalsy();
+                expect(navbaritem.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
             });
         });
     });
