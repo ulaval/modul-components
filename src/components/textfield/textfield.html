@@ -23,6 +23,7 @@
                @focus="onFocus"
                @blur="onBlur"
                @keyup="onKeyup"
+               @change="onChange"
                v-model="model">
         <div slot="right-content" class="m-textfield__icon-password" :class="{ 'm--is-transparent': !hasValue }" v-if="propPasswordIcon">
             <m-icon-button :icon-name="iconNamePassword" button-size="22px" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
