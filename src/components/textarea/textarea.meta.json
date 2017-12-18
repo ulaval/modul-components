@@ -6,13 +6,13 @@
         "maxlength": {
             "type": "number"
         },
+        "width": {
+            "type": "string",
+            "default": "100%"
+        },
         "maxWidth": {
             "type": "string",
-            "default": "720px"
-        },
-        "rows": {
-            "type": "number",
-            "default": 3
+            "default": "420px"
         },
         "label": {
             "type": "string"
