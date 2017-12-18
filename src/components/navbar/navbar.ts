@@ -5,6 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './navbar.html?style=./navbar.scss';
 import { NAVBAR_NAME, NAVBAR_ITEM_NAME } from '../component-names';
 import NavbarItemPlugin, { BaseNavbar, MNavbarInterface } from '../navbar-item/navbar-item';
+import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -19,7 +20,9 @@ export enum MNavbarSkin {
 }
 
 @WithRender
-@Component
+@Component({
+    mixins: [ElementQueries]
+})
 export class MNavbar extends BaseNavbar implements MNavbarInterface {
 
     @Prop({
@@ -41,8 +44,11 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
     @Prop()
     public disabled: boolean;
 
+    public selectedElem: HTMLElement;
+
     private isAnimActive: boolean = false;
     private internalValue: string = '';
+    private hasNagigation: boolean = false;
 
     public selecteItem(el): void {
         if (this.skin == MNavbarSkin.Light && el != undefined) {
@@ -53,12 +59,46 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
         }
     }
 
-    protected mounted() {
+    protected mounted(): void {
         this.model = this.value;
         this.setItem();
         this.$nextTick(() => {
             this.initLine();
+            this.setupArrow();
+            this.as<ElementQueries>().$on('resize', this.setupArrow);
         });
+    }
+
+    protected beforeDestroy(): void {
+        this.as<ElementQueries>().$off('resize', this.setupArrow);
+    }
+
+    private setupArrow(): void {
+        let listEl: HTMLElement = this.$refs.list as HTMLElement;
+        let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
+        if (this.$el.clientWidth < listEl.clientWidth) {
+            let height: number = listEl.clientHeight;
+            this.hasNagigation = true;
+            wrapEl.style.height = height + 40 + 'px';
+            this.$el.style.height = height + 'px';
+            setTimeout(() => {
+                wrapEl.scrollLeft = this.selectedElem.offsetLeft;
+            }, 0);
+        } else {
+            this.hasNagigation = false;
+            wrapEl.style.removeProperty('height');
+            this.$el.style.removeProperty('height');
+        }
+    }
+
+    private scrollLeft(event: MouseEvent): void {
+        let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
+        wrapEl.scrollLeft = wrapEl.scrollLeft - ((this.$el.clientWidth - 88) / 2.5);
+    }
+
+    private scrollRight(event: MouseEvent): void {
+        let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
+        wrapEl.scrollLeft = wrapEl.scrollLeft + ((this.$el.clientWidth - 88) / 2.5);
     }
 
     public get model(): string {
@@ -66,7 +106,6 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
     }
 
     public set model(value: string) {
-        console.log('value', value);
         this.internalValue = this.disabled ? '' : value;
     }
 

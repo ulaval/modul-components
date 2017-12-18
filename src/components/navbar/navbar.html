@@ -6,11 +6,13 @@
               'm--is-skin-plain': skin == 'plain',
               'm--is-skin-arrow': skin == 'arrow',
               'm--no-margin': !margin }">
-    <nav class="m-navbar__wrap">
-        <ul class="m-navbar__list" aria-hidden="true">
+    <m-icon-button class="m-navbar__button" icon-name="left-arrow" @click="scrollLeft" v-if="hasNagigation"></m-icon-button>
+    <nav class="m-navbar__wrap" ref="wrap">
+        <ul class="m-navbar__list" aria-hidden="true" ref="list">
             <slot></slot>
+            <li aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasLine" ref="line"></li>
+            <li aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasArrow" ref="Arrow"></li>
         </ul>
-        <div aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasLine" ref="line"></div>
-        <div aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasArrow" ref="Arrow"></div>
     </nav>
+    <m-icon-button class="m-navbar__button" icon-name="right-arrow" @click="scrollRight" v-if="hasNagigation"></m-icon-button>
 </div>

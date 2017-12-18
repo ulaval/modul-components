@@ -1,36 +1,281 @@
 @import 'abstracts/variables';
 
 .m-navbar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+    &.m--is-skin-regular {
+        .m-navbar-item {
+            + .m-navbar-item {
+                margin-left: 1px;
+            }
+
+            &[tabindex],
+            a,
+            button {
+                padding: $m-padding;
+                background: $m-color--grey-light;
+                color: $m-color--text;
+            }
+
+            &.m--is-selected {
+                position: relative;
+
+                &[tabindex],
+                a,
+                button {
+                    background: $m-color--white;
+
+                    &::before {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        left: 0;
+                        content: '';
+                        height: $m-border-width--l;
+                        background: $m-color--active;
+                    }
+                }
+
+                &.m--is-first {
+                    &::after {
+                        position: absolute;
+                        top: $m-border-width--l;
+                        bottom: 0;
+                        left: 0;
+                        content: '';
+                        width: $m-border-width--s;
+                        background: $m-color--grey;
+                    }
+                }
+
+                &.m--is-last {
+                    &::after {
+                        position: absolute;
+                        top: $m-border-width--l;
+                        right: 0;
+                        bottom: 0;
+                        content: '';
+                        width: $m-border-width--s;
+                        background: $m-color--grey;
+                    }
+                }
+            }
+
+            &:not(.m--is-selected):not(.m--is-disabled) {
+                &[tabindex],
+                a,
+                button {
+                    transition: background $m-transition-duration ease;
+
+                    &:hover,
+                    &:focus {
+                        background: $m-color--grey-lighter;
+                    }
+
+                    &:active {
+                        background: $m-color--grey;
+                    }
+                }
+            }
+        }
+    }
+
+    &.m--is-skin-dark {
+        .m-navbar-item {
+            &.m--is-selected {
+                &[tabindex],
+                a,
+                button {
+                    color: $m-color--white;
+                    background: $m-color--black-grey;
+                }
+            }
+        }
+    }
+
+    &.m--is-skin-light {
+        &::before {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: $m-border-width--l;
+            width: 100%;
+            content: '';
+            background: $m-color--border;
+        }
+
+        .m-navbar-item {
+            margin: 0 $m-margin;
+
+            &:not(.m--is-disabled) {
+                &[tabindex],
+                a,
+                button {
+                    &:hover,
+                    &:focus {
+                        color: $m-color--text;
+
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            a:visited {
+                color: $m-color--grey-darker;
+            }
+
+            &[tabindex],
+            a,
+            button {
+                transition: color $m-transition-duration ease;
+                color: $m-color--grey-darker;
+                padding: $m-margin 0;
+
+                &::after {
+                    transition: opacity $m-transition-duration ease;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    content: '';
+                    width: 100%;
+                    height: $m-border-width--l;
+                    background: $m-color--grey;
+                    opacity: 0;
+                }
+            }
+
+            &.m--is-selected {
+                &[tabindex],
+                a,
+                button {
+                    color: $m-color--text;
+                }
+            }
+
+            &.m--is-first {
+                margin-left: 0;
+            }
+
+            &.m--is-last {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &.m--is-skin-arrow {
+        &::before {
+            position: absolute;
+            right: 0;
+            bottom: $m-margin--s;
+            left: 0;
+            content: '';
+            width: 100%;
+            height: $m-border-width--s;
+            background: $m-color--grey;
+        }
+
+        .m-navbar {
+            &__list {
+                padding-bottom: $m-margin--s;
+            }
+        }
+
+        .m-navbar-item {
+            margin: 0 $m-margin;
+
+            &:not(.m--is-disabled) {
+                &[tabindex],
+                a,
+                button {
+                    &:hover,
+                    &:focus {
+                        color: $m-color--text;
+                    }
+                }
+            }
+
+            a:visited {
+                color: $m-color--grey-darker;
+            }
+
+            &[tabindex],
+            a,
+            button {
+                transition: color $m-transition-duration ease;
+                color: $m-color--grey-darker;
+                padding: $m-margin 0;
+                font-weight: $m-font-weight--bold;
+            }
+
+            &.m--is-selected {
+                &[tabindex],
+                a,
+                button {
+                    color: $m-color--text;
+                }
+            }
+
+            &.m--is-first {
+                margin-left: 0;
+            }
+
+            &.m--is-last {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &.m--no-margin {
+        .m-navbar-item {
+            margin: 0;
+        }
+    }
+
+    &__button {
+        position: relative;
+    }
+
     &__wrap {
         position: relative;
+        flex: 1 1 auto;
         width: 100%;
         overflow-x: auto;
         overflow-y: hidden;
     }
 
     &__list {
+        position: relative;
         list-style: none;
         padding: 0;
         margin: 0;
         display: inline-flex;
+        white-space: nowrap;
     }
 
     &__line,
     &__arrow {
+        position: absolute;
+
         &.m--is-anim-active {
             transition: transform $m-transition-duration ease, width $m-transition-duration ease;
         }
     }
 
     &__line {
-        position: absolute;
         bottom: 0;
         background: $m-color--active;
         height: $m-border-width--l;
     }
 
     &__arrow {
-        position: relative;
+        bottom: $m-margin--s;
 
         &::before,
         &::after {
@@ -98,201 +343,6 @@
         &,
         :focus {
             outline: none;
-        }
-    }
-
-    &.m--is-skin-regular {
-        .m-navbar-item {
-            + .m-navbar-item {
-                margin-left: 1px;
-            }
-
-            &[tabindex],
-            a,
-            button {
-                padding: $m-padding;
-                background: $m-color--grey-light;
-                color: $m-color--text;
-            }
-
-            &.m--is-selected {
-                &[tabindex],
-                a,
-                button {
-                    background: $m-color--white;
-
-                    &::before {
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        left: 0;
-                        content: '';
-                        height: $m-border-width--l;
-                        background: $m-color--active;
-                    }
-                }
-            }
-
-            &:not(.m--is-selected):not(.m--is-disabled) {
-                &[tabindex],
-                a,
-                button {
-                    transition: background $m-transition-duration ease;
-
-                    &:hover,
-                    &:focus {
-                        background: $m-color--grey-lighter;
-                    }
-
-                    &:active {
-                        background: $m-color--grey;
-                    }
-                }
-            }
-        }
-    }
-
-    &.m--is-skin-dark {
-        .m-navbar-item {
-            &.m--is-selected {
-                &[tabindex],
-                a,
-                button {
-                    color: $m-color--white;
-                    background: $m-color--black-grey;
-                }
-            }
-        }
-    }
-
-    &.m--is-skin-light {
-        .m-navbar__wrap::before {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: $m-border-width--l;
-            width: 100%;
-            content: '';
-            background: $m-color--border;
-        }
-
-        .m-navbar-item {
-            margin: 0 $m-margin;
-
-            &:not(.m--is-disabled) {
-                &[tabindex],
-                a,
-                button {
-                    &:hover,
-                    &:focus {
-                        color: $m-color--text;
-
-                        &::after {
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
-
-            a:visited {
-                color: $m-color--grey-darker;
-            }
-
-            &[tabindex],
-            a,
-            button {
-                transition: color $m-transition-duration ease;
-                color: $m-color--grey-darker;
-                padding: 0 0 $m-margin 0;
-
-                &::after {
-                    transition: opacity $m-transition-duration ease;
-                    position: absolute;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    content: '';
-                    width: 100%;
-                    height: $m-border-width--l;
-                    background: $m-color--grey;
-                    opacity: 0;
-                }
-            }
-
-            &.m--is-selected {
-                &[tabindex],
-                a,
-                button {
-                    color: $m-color--text;
-                }
-            }
-
-            &.m--is-first {
-                margin-left: 0;
-            }
-
-            &.m--is-last {
-                margin-right: 0;
-            }
-        }
-    }
-
-    &.m--is-skin-arrow {
-        .m-navbar__wrap {
-            border-bottom: $m-border-width--s solid $m-color--grey;
-            margin-bottom: $m-margin;
-            overflow: visible;
-        }
-
-        .m-navbar-item {
-            margin: 0 $m-margin;
-
-            &:not(.m--is-disabled) {
-                &[tabindex],
-                a,
-                button {
-                    &:hover,
-                    &:focus {
-                        color: $m-color--text;
-                    }
-                }
-            }
-
-            a:visited {
-                color: $m-color--grey-darker;
-            }
-
-            &[tabindex],
-            a,
-            button {
-                transition: color $m-transition-duration ease;
-                color: $m-color--grey-darker;
-                padding: $m-margin 0;
-                font-weight: $m-font-weight--bold;
-            }
-
-            &.m--is-selected {
-                &[tabindex],
-                a,
-                button {
-                    color: $m-color--text;
-                }
-            }
-
-            &.m--is-first {
-                margin-left: 0;
-            }
-
-            &.m--is-last {
-                margin-right: 0;
-            }
-        }
-    }
-
-    &.m--no-margin {
-        .m-navbar-item {
-            margin: 0;
         }
     }
 }

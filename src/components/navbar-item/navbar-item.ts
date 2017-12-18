@@ -12,6 +12,7 @@ export abstract class BaseNavbar extends ModulVue {
 
 export interface MNavbarInterface {
     model: string;
+    selectedElem: HTMLElement;
     selecteItem(el: HTMLElement): void;
 }
 
@@ -45,7 +46,11 @@ export class MNavbarItem extends ModulVue {
     }
 
     private get selected(): boolean {
-        return this.$parent instanceof BaseNavbar && this.$parent.model == this.value && !this.disabled;
+        let selected: boolean = this.$parent instanceof BaseNavbar && this.$parent.model == this.value && !this.disabled;
+        if (selected) {
+            (this.root as MNavbarInterface).selectedElem = this.$el;
+        }
+        return selected;
     }
 
     private get isDisabled(): boolean {
