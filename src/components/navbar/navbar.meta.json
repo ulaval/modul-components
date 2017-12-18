@@ -24,6 +24,10 @@
         "margin": {
             "type": "boolean",
             "default": true
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "nav-bar.overview",
