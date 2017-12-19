@@ -2,7 +2,6 @@
 $m-steppers--icon-circle--size: 30px;
 $m-steppers--icon--size: 14px;
 $m-steppers--badge--size: 14px;
-$m-steppers--max-width: 90px;
 
 .m-steppers-item {
     display: inline-flex;
@@ -73,7 +72,6 @@ $m-steppers--max-width: 90px;
 
     &__title {
         margin-top: $m-margin--s;
-        max-width: $m-steppers--max-width;
         text-align: center;
         font-size: $m-font-size--s;
         color: $m-color--text;
