@@ -25,7 +25,7 @@ $m-panel--screen--min: 640px;
     }
 
     &.m--has-border {
-        border: $m-border-width solid $m-color--border;
+        border: $m-border-width--s solid $m-color--border;
     }
 
     &.m--has-shadow {
@@ -38,13 +38,26 @@ $m-panel--screen--min: 640px;
         &::before {
             position: relative;
             top: 0;
-            right: - $m-border-width;
-            left: - $m-border-width;
-            width: calc(100% + 2px); // Magic number
             content: '';
             display: block;
             height: 4px;
             background-color: $m-color--accent;
+        }
+
+        &.m--has-border {
+            &::before {
+                right: - $m-border-width--s;
+                left: - $m-border-width--s;
+                width: calc(100% + #{$m-border-width--s * 2}); // Magic number
+            }
+        }
+
+        &:not(.m--has-border) {
+            &::before {
+                right: 0;
+                left: 0;
+                width: 100%;
+            }
         }
     }
 

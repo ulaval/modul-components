@@ -31,7 +31,7 @@ export class MPanel extends Vue {
     @Prop({ default: true })
     public shadow: boolean;
 
-    @Prop({ default: true })
+    @Prop({ default: false })
     public border: boolean;
 
     @Prop({ default: true })
