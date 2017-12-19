@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { InputState } from '../../mixins/input-state/input-state';
 import DropdownPlugin from '../dropdown/dropdown';
 import DropdownItemPlugin from '../dropdown-item/dropdown-item';
+import SpinnerPlugin from '../spinner/spinner';
 
 const VIEW_DATE = 'date';
 const VIEW_MONTH = 'month';
@@ -147,6 +148,7 @@ const DateFieldsPlugin: PluginObject<any> = {
     install(v, options) {
         Vue.use(DropdownPlugin);
         Vue.use(DropdownItemPlugin);
+        Vue.use(SpinnerPlugin);
         v.component(DATEFIELDS_NAME, MDateFields);
     }
 };
