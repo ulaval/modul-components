@@ -4,7 +4,7 @@
                'm--is-waiting': isWaiting,
                'm--is-disabled': disabled,
                'm--is-full-size': fullSize }"
-        :disabled="disabled"
+        :disabled="disabled || isWaiting"
         :type="type"
         @click="onClick"
         @focus="onFocus"

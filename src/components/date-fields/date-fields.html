@@ -5,8 +5,7 @@
                  width="70px"
                  :placeholder="getPlaceholder('year')"
                  :filterable="true"
-                 :waiting="waiting"
-                 :disabled="disabled"
+                 :disabled="disabled || waiting"
                  @change="emitDate()">
          <m-dropdown-item v-for="year in years" :value="year"></m-dropdown-item>
      </m-dropdown>
@@ -16,8 +15,7 @@
                  width="105px"
                  :placeholder="getPlaceholder('month')"
                  :filterable="true"
-                 :waiting="waiting"
-                 :disabled="disabled"
+                 :disabled="disabled || waiting"
                  @change="emitDate()">
         <m-dropdown-item v-for="month in months" :value="month" :label="getMonthLabel(month)"></m-dropdown-item>
      </m-dropdown>
@@ -27,9 +25,10 @@
                  width="60px"
                  :placeholder="getPlaceholder('date')"
                  :filterable="true"
-                 :waiting="waiting"
-                 :disabled="disabled"
+                 :disabled="disabled || waiting"
                  @change="emitDate()">
         <m-dropdown-item v-for="date in dates" :value="date" :label="getDateLabel(date)"></m-dropdown-item>
      </m-dropdown>
+     <m-spinner v-if="waiting" size="small"></m-spinner>
+
 </div>
