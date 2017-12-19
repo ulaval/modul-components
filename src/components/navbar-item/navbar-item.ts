@@ -6,8 +6,8 @@ import WithRender from './navbar-item.html?style=./navbar-item.scss';
 import { NAVBAR_ITEM_NAME, components } from '../component-names';
 
 export abstract class BaseNavbar extends ModulVue {
-    model: string;
-    disabled: boolean;
+    abstract model: string;
+    abstract disabled: boolean;
 }
 
 export interface MNavbarInterface {
@@ -25,7 +25,7 @@ export class MNavbarItem extends ModulVue {
     @Prop()
     public disabled: boolean;
 
-    public root: MNavbarInterface; // Dropdown component
+    public root: MNavbarInterface; // Navbar component
 
     public isFirst: boolean = false;
     public isLast: boolean = false;
