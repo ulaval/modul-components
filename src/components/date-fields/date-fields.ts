@@ -5,13 +5,9 @@ import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './date-fields.html?style=./date-fields.scss';
 import { DATEFIELDS_NAME } from '../component-names';
 import * as moment from 'moment';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
-import { InputPopup } from '../../mixins/input-popup/input-popup';
-import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import i18nPlugin from '../../utils/i18n/i18n';
-import ValidationMessagePlugin from '../validation-message/validation-message';
-import { currentId } from 'async_hooks';
+import { InputState } from '../../mixins/input-state/input-state';
+import DropdownPlugin from '../dropdown/dropdown';
+import DropdownItemPlugin from '../dropdown-item/dropdown-item';
 
 const VIEW_DATE = 'date';
 const VIEW_MONTH = 'month';
@@ -20,9 +16,7 @@ const VIEW_YEAR = 'year';
 @WithRender
 @Component({
     mixins: [
-        InputState,
-        InputPopup,
-        MediaQueries
+        InputState
     ]
 })
 export class MDateFields extends ModulVue {
@@ -39,8 +33,6 @@ export class MDateFields extends ModulVue {
     public month: boolean;
     @Prop({ default: true })
     public date: boolean;
-    @Prop()
-    public disabled: boolean;
 
     private months: number = 12;
 
@@ -49,9 +41,9 @@ export class MDateFields extends ModulVue {
     private internalMonth: number | undefined = 0;
     private internalDate: number | undefined = 0;
 
-    // protected created(): void {
-    //     this.setInternal(this.value);
-    // }
+    protected created(): void {
+        this.setInternal(this.value);
+    }
 
     @Watch('value')
     private setInternal(value: moment.Moment | Date | undefined): void {
@@ -105,33 +97,33 @@ export class MDateFields extends ModulVue {
     }
 
     private emitDate(): void {
+        let date: object = {};
+        let emitValue: boolean = true;
+        let model: moment.Moment | Date | undefined = undefined;
+
         if (this.complete) {
-
-            let emit: boolean = true;
-            let date: object = {};
-
             if (this.year && this.internalYear) {
-                date['year'] = this.internalYear;
+                date[VIEW_YEAR] = this.internalYear;
             }
             if (this.month && this.internalMonth) {
-                date['month'] = this.internalMonth - 1;
+                date[VIEW_MONTH] = this.internalMonth - 1;
             }
             if (this.date && this.internalDate) {
                 if (this.internalDate <= moment(`${this.year && this.internalYear ? this.internalYear : 2000}-${this.month && this.internalMonth ? this.internalMonth : 1}`, 'YYYY-MM').daysInMonth()) {
-                    date['date'] = this.internalDate;
+                    date[VIEW_DATE] = this.internalDate;
                 } else {
                     this.internalDate = undefined;
-                    emit = false;
+                    emitValue = false;
                 }
             }
 
-            if (emit) {
-        //     // this.model = value ? (value instanceof Date ? moment(value) : value) : undefined;
-
-                let model: moment.Moment | undefined = moment(date);
+            if (emitValue) {
+                model = this.value instanceof Date ? moment(date).toDate() : moment(date);
                 this.$emit('change', model);
             }
         }
+
+        this.$emit('complete', this.complete && emitValue);
     }
 
     private getMonthLabel(value: number): string {
@@ -153,13 +145,8 @@ export class MDateFields extends ModulVue {
 
 const DateFieldsPlugin: PluginObject<any> = {
     install(v, options) {
-        // Vue.use(DropdownItemPlugin);
-        // Vue.use(InputStylePlugin);
-        // Vue.use(ButtonPlugin);
-        // Vue.use(PopupPlugin);
-        // Vue.use(ValidationMessagePlugin);
-        // Vue.use(MediaQueriesPlugin);
-        // Vue.use(i18nPlugin);
+        Vue.use(DropdownPlugin);
+        Vue.use(DropdownItemPlugin);
         v.component(DATEFIELDS_NAME, MDateFields);
     }
 };
