@@ -7,6 +7,7 @@ import { MENU_NAME } from '../component-names';
 import PopupPlugin from '../popup/popup';
 import I18nPlugin from '../i18n/i18n';
 import { MPopperPlacement } from '../popper/popper';
+import MMenuItemPlugin, { BaseMenu, MMenuInterface } from '../menu-item/menu-item';
 import IconButtonPlugin from '../icon-button/icon-button';
 
 export enum MOptionsMenuSkin {
@@ -16,8 +17,10 @@ export enum MOptionsMenuSkin {
 
 @WithRender
 @Component
-export class MOptionsMenu extends ModulVue {
+export class MMenu extends BaseMenu implements MMenuInterface {
 
+    @Prop()
+    public value: string;
     @Prop({
         default: MPopperPlacement.BottomStart,
         validator: value =>
@@ -47,33 +50,23 @@ export class MOptionsMenu extends ModulVue {
     @Prop({ default: '44px' })
     public size: string;
 
+    public hasIcon: boolean = false;
+
     private open = false;
+
+    public checkIcon(icon: boolean) {
+        if (icon) {
+            this.hasIcon = true;
+        }
+    }
+
+    public setValue(value: string): void {
+        this.$emit('input', value);
+    }
 
     public close(): void {
         this.open = false;
-    }
-
-    protected mounted(): void {
-        let containsIcon: boolean = false;
-        let containsText: boolean = false;
-        this.$children[0].$children.forEach((child) => {
-            if (child.$refs['m-menu-item']) {
-                containsIcon = child['hasIcon'];
-                containsText = child['hasSlot'];
-            }
-        });
-        // add classes for padding right of icon or left of text
-        if (containsIcon ? !containsText : containsText) {
-            this.$children[0].$children.forEach((child) => {
-                if (child.$refs['m-menu-item']) {
-                    if (!containsIcon) {
-                        child.$refs['icon']['className'] += ' is-empty';
-                    } else {
-                        child.$refs['text']['className'] += ' is-empty';
-                    }
-                }
-            });
-        }
+        this.onClose();
     }
 
     private onFocus(): void {
@@ -97,8 +90,9 @@ const MenuPlugin: PluginObject<any> = {
     install(v, options) {
         v.use(PopupPlugin);
         v.use(I18nPlugin);
+        v.use(MMenuItemPlugin);
         v.use(IconButtonPlugin);
-        v.component(MENU_NAME, MOptionsMenu);
+        v.component(MENU_NAME, MMenu);
     }
 };
 
