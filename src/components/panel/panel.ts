@@ -34,7 +34,7 @@ export class MPanel extends Vue {
     @Prop()
     public border: boolean;
 
-    @Prop({)
+    @Prop()
     public borderLarge: boolean;
 
     @Prop({ default: true })
