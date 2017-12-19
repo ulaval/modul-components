@@ -1,9 +1,15 @@
-<article class="m-panel" :class="{ 'm--is-skin-light': lightSkin,
-                   'm--is-skin-prism': prismSkin,
-                   'm--no-shadow': !shadow,
-                   'm--has-menu': hasHeaderMenuSlot,
-                   'm--no-border': !border }" @click="onClick">
-    <header class="m-panel__header" :class="{ 'm--no-padding': !hasPaddingHeader, 'm--is-right-content-alone': !hasHeaderSlot }"
+<article class="m-panel"
+         :class="{ 'm--is-skin-light': lightSkin,
+                   'm--is-skin-dark': darkSkin,
+                   'm--is-skin-darker': darkerSkin,
+                   'm--has-shadow': shadow,
+                   'm--has-border': border,
+                   'm--is-padding-large': paddingLarge,
+                   'm--is-highlighted': highlighted}" @click="onClick">
+    <header class="m-panel__header"
+            :class="{ 'm--no-padding': !hasPaddingHeader,
+                      'm--is-right-content-alone': !hasHeaderSlot,
+                      'm--has-menu': hasHeaderMenuSlot, }"
         v-if="hasHeader">
         <div class="m-panel__header__content">
             <slot name="header"></slot>
@@ -15,9 +21,12 @@
             <slot name="menu"></slot>
         </div>
     </header>
-    <div class="m-panel__body" :class="{ 'm--no-padding': !hasPaddingBody,
-                   'm--has-padding-top': !hasHeader && hasPaddingBody }" v-if="hasDefaultSlot">
-        <slot></slot>
+    <div class="m-panel__body"
+         :class="{ 'm--no-padding': !hasPaddingBody,
+                   'm--has-padding-top': !hasHeader && hasPaddingBody,
+                   'm--has-padding-bottom': !hasFooterSlot && hasPaddingBody }"
+         v-if="hasDefaultSlot">
+        <slot></slot>{{border}}
     </div>
     <footer class="m-panel__footer" :class="{ 'm--no-padding': !hasPaddingFooter }" v-if="hasFooterSlot">
         <slot name="footer"></slot>

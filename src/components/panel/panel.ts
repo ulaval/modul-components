@@ -7,7 +7,8 @@ import ElementQueries from 'css-element-queries/src/ElementQueries';
 
 export enum MPanelSkin {
     Light = 'light',
-    Prism = 'prism'
+    Dark = 'dark',
+    Darker = 'darker'
 }
 
 const HEADER_RIGHT_CONTENT: string = 'header-right-content';
@@ -20,9 +21,12 @@ export class MPanel extends Vue {
         default: MPanelSkin.Light,
         validator: value =>
             value == MPanelSkin.Light ||
-            value == MPanelSkin.Prism
+            value == MPanelSkin.Dark
     })
     public skin: MPanelSkin;
+
+    @Prop()
+    public highlighted: boolean;
 
     @Prop({ default: true })
     public shadow: boolean;
@@ -32,6 +36,9 @@ export class MPanel extends Vue {
 
     @Prop({ default: true })
     public padding: boolean;
+
+    @Prop()
+    public paddingLarge: boolean;
 
     @Prop({ default: true })
     public paddingHeader: boolean;
@@ -54,8 +61,12 @@ export class MPanel extends Vue {
         return this.skin == MPanelSkin.Light;
     }
 
-    private get prismSkin(): boolean {
-        return this.skin == MPanelSkin.Prism;
+    private get darkSkin(): boolean {
+        return this.skin == MPanelSkin.Dark;
+    }
+
+    private get darkerSkin(): boolean {
+        return this.skin == MPanelSkin.Darker;
     }
 
     private get hasHeader(): boolean {

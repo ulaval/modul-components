@@ -1,5 +1,4 @@
 @import 'abstracts/variables';
-$m-panel--border-width: 1px;
 $m-panel--screen--max: 639px;
 $m-panel--screen--min: 640px;
 
@@ -12,24 +11,36 @@ $m-panel--screen--min: 640px;
         display: block;
     }
 
-    &:not(.m--no-border) {
-        border: $m-panel--border-width solid $m-color--grey-light;
+    &.m--is-skin-light {
+        background: $m-color--white;
     }
 
-    &:not(.m--no-shadow) {
+    &.m--is-skin-dark {
+        background: $m-color--grey-light;
+    }
+
+    &.m--is-skin-darker {
+        background: $m-color--black-grey;
+        color: $m-color--white;
+    }
+
+    &.m--has-border {
+        border: $m-border-width solid $m-color--border;
+    }
+
+    &.m--has-shadow {
         box-shadow: $m-box-shadow--s;
     }
 
-    &.m--is-skin-light {
-        background: $m-color--white;
+    &.m--is-highlighted {
         border-top: 0;
-        padding-top: 4px;
 
         &::before {
-            position: absolute;
+            position: relative;
             top: 0;
-            right: - $m-panel--border-width;
-            left: - $m-panel--border-width;
+            right: - $m-border-width;
+            left: - $m-border-width;
+            width: calc(100% + 2px); // Magic number
             content: '';
             display: block;
             height: 4px;
@@ -37,45 +48,72 @@ $m-panel--screen--min: 640px;
         }
     }
 
-    &.m--is-skin-prism {
-        background: $m-color--white;
+    &.m--is-padding-large {
+        .m-panel {
+            &__header,
+            &__footer {
+                &:not(.m--no-padding) {
+                    padding: $m-padding;
 
-        .m-panel__header {
-            border-bottom: 1px solid $m-color--grey;
-
-            @include m-box-header-pading(__menu);
-        }
-
-        .m-panel__body {
-            padding-top: $m-spacing--xl;
-            padding-bottom: $m-spacing--xl;
-
-            @media (min-width: $m-mq--min--s) {
-                padding-left: $m-spacing--l;
-                padding-right: $m-spacing--l;
+                    @media (min-width: $m-mq--min--s) {
+                        padding: $m-padding--l;
+                    }
+                }
             }
 
-            @media (max-width: $m-mq--max--s) {
-                padding-left: $m-spacing;
-                padding-right: $m-spacing;
+            &__body {
+                &:not(.m--no-padding) {
+                    padding-right: $m-padding;
+                    padding-left: $m-padding;
+
+                    @media (min-width: $m-mq--min--s) {
+                        padding-left: $m-padding--l;
+                        padding-right: $m-padding--l;
+                    }
+                }
+
+                &.m--has-padding-top {
+                    padding-top: $m-padding;
+
+                    @media (min-width: $m-mq--min--s) {
+                        padding-top: $m-padding--l;
+                    }
+                }
+
+                &.m--has-padding-bottom {
+                    padding-bottom: $m-padding;
+
+                    @media (min-width: $m-mq--min--s) {
+                        padding-bottom: $m-padding--l;
+                    }
+                }
             }
         }
     }
 
-    &__body,
+    &__header,
     &__footer {
-        > :first-child {
-            margin-top: 0;
-            padding-top: 0;
+        &:not(.m--no-padding) {
+            padding: $m-padding--s;
 
-            > :first-child {
-                margin-top: 0;
+            @media (min-width: $m-mq--min--s) {
+                padding: $m-padding;
             }
         }
     }
 
     &__header {
         position: relative;
+
+        &.m--has-menu {
+            padding-right: $m-touch-size;
+        }
+
+        &:not(.m--no-padding) {
+            &.m--has-menu {
+                padding-right: $m-margin--xs + $m-touch-size;
+            }
+        }
 
         &__content {
             flex: 1;
@@ -95,23 +133,21 @@ $m-panel--screen--min: 640px;
             }
         }
 
-        .m--has-menu.m--is-skin-light & {
-            padding-right: $m-spacing + $m-touch-size;
-        }
-
-        .m--has-menu.m--is-skin-prism & {
-            @media (min-width: $m-mq--min--s) {
-                padding-right: $m-spacing--l + $m-touch-size;
-            }
-
-            @media (max-width: $m-mq--max--s) {
-                padding-right: $m-spacing + $m-touch-size;
-            }
-        }
-
         &.m--is-right-content-alone {
             &[min-width~="#{ $m-panel--screen--min }"] {
                 justify-content: flex-end;
+            }
+        }
+    }
+
+    &__body,
+    &__footer {
+        > :first-child {
+            margin-top: 0;
+            padding-top: 0;
+
+            > :first-child {
+                margin-top: 0;
             }
         }
     }
@@ -123,10 +159,19 @@ $m-panel--screen--min: 640px;
         &:not(.m--no-padding) {
             padding-right: $m-padding--s;
             padding-left: $m-padding--s;
+
+            @media (min-width: $m-mq--min--s) {
+                padding-left: $m-padding;
+                padding-right: $m-padding;
+            }
         }
 
         &.m--has-padding-top {
             padding-top: $m-padding;
+        }
+
+        &.m--has-padding-bottom {
+            padding-bottom: $m-padding;
         }
 
         @include m-scrollbar();
@@ -134,8 +179,6 @@ $m-panel--screen--min: 640px;
 
     &__footer {
         border-top: 1px solid $m-color--grey;
-
-        @include m-box-header-pading();
     }
 
     &[max-width~="#{ $m-panel--screen--max }"] {
