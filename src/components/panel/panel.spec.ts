@@ -5,7 +5,7 @@ import PanelPlugin, { MPanel, MPanelSkin } from './panel';
 const SKIN_LIGHT_CSS: string = 'm--is-skin-light';
 const SKIN_DARK_CSS: string = 'm--is-skin-dark';
 const SKIN_DARKER_CSS: string = 'm--is-skin-darker';
-const HIGHLIGHTED_CSS: string = 'm--has-highlighted';
+const HIGHLIGHTED_CSS: string = 'm--is-highlighted';
 const SHADOW_CSS: string = 'm--has-shadow';
 const BORDER_CSS: string = 'm--has-border';
 const NO_PADDING_CSS: string = 'm--no-padding';

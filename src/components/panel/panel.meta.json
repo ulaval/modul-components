@@ -24,6 +24,10 @@
             "type": "boolean",
             "default": false
         },
+        "borderLarge": {
+            "type": "boolean",
+            "default": false
+        },
         "padding": {
             "type": "boolean",
             "default": true

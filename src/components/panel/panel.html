@@ -4,7 +4,8 @@
                    'm--is-skin-darker': darkerSkin,
                    'm--has-shadow': shadow,
                    'm--has-border': border,
-                   'm--is-padding-large': paddingLarge,
+                   'm--has-border-large': borderLarge,
+                   'm--has-padding-large': paddingLarge,
                    'm--is-highlighted': highlighted}" @click="onClick">
     <header class="m-panel__header"
             :class="{ 'm--no-padding': !hasPaddingHeader,
@@ -26,7 +27,7 @@
                    'm--has-padding-top': !hasHeader && hasPaddingBody,
                    'm--has-padding-bottom': !hasFooterSlot && hasPaddingBody }"
          v-if="hasDefaultSlot">
-        <slot></slot>{{border}}
+        <slot></slot>
     </div>
     <footer class="m-panel__footer" :class="{ 'm--no-padding': !hasPaddingFooter }" v-if="hasFooterSlot">
         <slot name="footer"></slot>
