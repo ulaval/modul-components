@@ -45,9 +45,6 @@ export class MLink extends ModulVue {
     public underline: boolean;
 
     @Prop()
-    public multiLine: boolean;
-
-    @Prop()
     public target: string;
 
     @Prop()
