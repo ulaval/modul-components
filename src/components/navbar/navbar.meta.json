@@ -28,6 +28,10 @@
         "disabled": {
             "type": "boolean",
             "default": false
+        },
+        "arrowMobile": {
+            "type": "boolean",
+            "default": true
         }
     },
     "overview": "nav-bar.overview",

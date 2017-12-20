@@ -6,7 +6,7 @@
               'm--is-skin-plain': skin == 'plain',
               'm--is-skin-arrow': skin == 'arrow',
               'm--no-margin': !margin }">
-    <m-icon-button class="m-navbar__button" icon-name="left-arrow" @click="scrollLeft" v-if="hasNagigation"></m-icon-button>
+    <m-icon-button class="m-navbar__button" icon-name="left-arrow" @click="scrollLeft" v-if="hasNagigation && arrowMobile"></m-icon-button>
     <nav class="m-navbar__wrap" ref="wrap">
         <ul class="m-navbar__list" aria-hidden="true" ref="list">
             <slot></slot>
@@ -14,5 +14,5 @@
             <li aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasArrow" ref="Arrow"></li>
         </ul>
     </nav>
-    <m-icon-button class="m-navbar__button" icon-name="right-arrow" @click="scrollRight" v-if="hasNagigation"></m-icon-button>
+    <m-icon-button class="m-navbar__button" icon-name="right-arrow" @click="scrollRight" v-if="hasNagigation && arrowMobile"></m-icon-button>
 </div>

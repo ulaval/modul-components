@@ -43,6 +43,8 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
     public margin: boolean;
     @Prop()
     public disabled: boolean;
+    @Prop({ default: true })
+    public arrowMobile: boolean;
 
     public selectedElem: HTMLElement;
 
