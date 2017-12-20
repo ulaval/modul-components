@@ -25,11 +25,11 @@
     &:not(.m--is-disabled) {
         &:not(.m--no-underline) {
             .m-link__text {
-                transition: background-image $m-transition-duration ease;
+                transition: background $m-transition-duration ease;
                 background-image: linear-gradient(to bottom, transparent 0%, transparent 100%);
                 background-size: 100%;
                 background-repeat: no-repeat;
-                background-position: 0 0.9em;
+                background-position: 0 0.95em;
             }
 
             &:not(.m--is-unvisited):visited {
