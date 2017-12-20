@@ -1,0 +1,32 @@
+{
+    "tag": "m-date-fields",
+    "name": "m-date-fields-meta:name",
+    "production": false,
+    "attributes": {
+        "value": {
+            "type": "moment.Moment | Date | undefined"
+        },
+        "minYear": {
+            "type": "number",
+            "default": 1900
+        },
+        "maxYear": {
+            "type": "number",
+            "default": "Date.year() + 5"
+        },
+        "year": {
+            "type": "boolean",
+            "default": true
+        },
+        "month": {
+            "type": "boolean",
+            "default": true
+        },
+        "date": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "overview": "date-fields.overview",
+    "preview": "date-fields.preview"
+}
