@@ -223,6 +223,10 @@ $m-input-style--padding: 4px !default;
         }
     }
 
+    &__asterisk {
+        color: $m-color--accent;
+    }
+
     &__body {
         position: relative;
         z-index: 0;
