@@ -19,8 +19,6 @@ export enum MOptionsMenuSkin {
 @Component
 export class MMenu extends BaseMenu implements MMenuInterface {
 
-    @Prop()
-    public value: string;
     @Prop({
         default: MPopperPlacement.BottomStart,
         validator: value =>
@@ -60,21 +58,9 @@ export class MMenu extends BaseMenu implements MMenuInterface {
         }
     }
 
-    public setValue(value: string): void {
-        this.$emit('input', value);
-    }
-
     public close(): void {
         this.open = false;
         this.onClose();
-    }
-
-    private onFocus(): void {
-        console.log('focus');
-    }
-
-    private onBlur(): void {
-        console.log('blur');
     }
 
     private onOpen(): void {
