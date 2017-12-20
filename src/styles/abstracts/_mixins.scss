@@ -210,7 +210,7 @@
         }
     }
 
-    &.m-u--has-menu {
+    &.m-u--has-icon {
         th,
         td {
             &:last-child:not(:only-child) {
@@ -235,22 +235,9 @@
 @mixin m-box-header-pading($menuClass: false) {
     display: flex;
     align-items: center;
-    min-height: $m-touch-size*2;
+    min-height: 72px; // magic number from MH
     padding-top: $m-spacing;
     padding-bottom: $m-spacing;
-
-    // doesn't work for slot content because of the scoped style... >_<
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin: 0;
-        font-size: $m-font-size--h4;
-        font-weight: $m-font-weight--bold;
-    }
-    ////////////////////////////////////////////
 
     &.m--no-padding,
     .m--no-padding & {
@@ -270,12 +257,12 @@
     @if $menuClass {
         @media (min-width: $m-mq--min--s) {
             padding-left: $m-spacing--l;
-            padding-right: $m-touch-size + $m-spacing--l;
+            padding-right: $m-touch-size + $m-spacing;
         }
 
         @media (max-width: $m-mq--max--s) {
             padding-left: $m-spacing;
-            padding-right: $m-touch-size + $m-spacing;
+            padding-right: $m-touch-size;
         }
 
         &.m--no-padding,
@@ -290,11 +277,11 @@
             width: $m-touch-size;
 
             @media (min-width: $m-mq--min--s) {
-                right: $m-spacing--l;
+                right: $m-spacing;
             }
 
             @media (max-width: $m-mq--max--s) {
-                right: $m-spacing;
+                right: 0;
             }
 
             .m--no-padding & {

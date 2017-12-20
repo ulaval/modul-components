@@ -1,3 +1,4 @@
+
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
@@ -43,6 +44,8 @@ export class MTextfield extends ModulVue {
     public type: MTextfieldType;
     @Prop({ default: true })
     public passwordIcon: boolean;
+    @Prop({ default: false })
+    public asterisk: boolean;
 
     private passwordAsText: boolean = false;
 

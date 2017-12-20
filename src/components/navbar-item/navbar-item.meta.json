@@ -3,12 +3,12 @@
     "name": "m-navbar-item-meta:name",
     "production": false,
     "attributes": {
-        "selected": {
-            "type": "boolean",
-            "default": false
-        },
         "value": {
             "type": "string"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "nav-bar-item.overview",

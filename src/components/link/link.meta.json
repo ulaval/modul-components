@@ -28,10 +28,6 @@
             "type": "boolean",
             "default": true
         },
-        "multiLine": {
-            "type": "boolean",
-            "default": false
-        },
         "icon" : {
             "type": "boolean",
             "default": false

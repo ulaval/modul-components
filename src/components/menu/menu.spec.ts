@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import MenuPlugin, { MOptionsMenu } from './menu';
+import MenuPlugin, { MMenu } from './menu';
 
 const STATE_DISABLED_CSS: string = 'm--is-disabled';
 
-let menu: MOptionsMenu;
+let menu: MMenu;
 
 describe('optionsMenu', () => {
     beforeEach(() => {
         Vue.use(MenuPlugin);
-        menu = new MOptionsMenu().$mount();
+        menu = new MMenu().$mount();
     });
 
     it('disabled prop', () => {

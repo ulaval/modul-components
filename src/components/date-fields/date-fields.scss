@@ -1,17 +1,20 @@
 @import '../../styles/abstracts/variables';
-$m-datepicker--item-dimension: $m-touch-size !default;
 
 .m-date-fields {
     display: inline-block;
 }
 
-// .m-date-fields_years {
+.m-spinner {
+    display: inline-flex;
+}
 
-// }
+.m-date-fields_years {
+    margin-right: $m-margin--l;
+}
 
-// .m-date-fields_months {
-
-// }
+.m-date-fields_months {
+    margin-right: $m-margin--l;
+}
 
 // .m-date-fields_days {
 

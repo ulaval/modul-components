@@ -6,12 +6,13 @@ import WithRender from './navbar-item.html?style=./navbar-item.scss';
 import { NAVBAR_ITEM_NAME, components } from '../component-names';
 
 export abstract class BaseNavbar extends ModulVue {
-    model: string;
-    disabled: boolean;
+    abstract model: string;
+    abstract disabled: boolean;
 }
 
 export interface MNavbarInterface {
     model: string;
+    selectedElem: HTMLElement;
     selecteItem(el: HTMLElement): void;
 }
 
@@ -24,7 +25,7 @@ export class MNavbarItem extends ModulVue {
     @Prop()
     public disabled: boolean;
 
-    public root: MNavbarInterface; // Dropdown component
+    public root: MNavbarInterface; // Navbar component
 
     public isFirst: boolean = false;
     public isLast: boolean = false;
@@ -45,7 +46,11 @@ export class MNavbarItem extends ModulVue {
     }
 
     private get selected(): boolean {
-        return this.$parent instanceof BaseNavbar && this.$parent.model == this.value && !this.disabled;
+        let selected: boolean = this.$parent instanceof BaseNavbar && this.$parent.model == this.value && !this.disabled;
+        if (selected) {
+            (this.root as MNavbarInterface).selectedElem = this.$el;
+        }
+        return selected;
     }
 
     private get isDisabled(): boolean {

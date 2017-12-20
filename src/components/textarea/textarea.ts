@@ -20,12 +20,13 @@ import ValidationMesagePlugin from '../validation-message/validation-message';
 export class MTextarea extends ModulVue {
     @Prop()
     public maxlength: number;
-    @Prop({ default: '720px' })
+    @Prop({ default: '100%' })
+    public width: string;
+    @Prop({ default: '420px' })
     public maxWidth: string;
-    @Prop({ default: 3 })
-    public rows: number;
 
     private internalTextareaError: boolean = false;
+    private textareaHeight: string;
 
     private get valueLenght(): number {
         let lenght: number = this.as<InputManagement>().internalValue.length;
@@ -47,6 +48,14 @@ export class MTextarea extends ModulVue {
 
     private get textareaValid(): boolean {
         return !this.textareaError && this.as<InputState>().isValid;
+    }
+
+    private onKeydown(event): void {
+        let el: HTMLElement = (this.$refs.input as HTMLElement);
+        setTimeout(() => {
+            el.style.height = 'auto';
+            el.style.height = el.scrollHeight + 'px';
+        });
     }
 }
 

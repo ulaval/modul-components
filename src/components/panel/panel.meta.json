@@ -7,9 +7,14 @@
             "type": "string",
             "values": [
                 "light",
-                "prism"
+                "dark",
+                "darker"
             ],
-            "default": "light"
+            "default": 0
+        },
+        "highlighted": {
+            "type": "boolean",
+            "default": false
         },
         "shadow": {
             "type": "boolean",
@@ -17,11 +22,19 @@
         },
         "border": {
             "type": "boolean",
-            "default": true
+            "default": false
+        },
+        "borderLarge": {
+            "type": "boolean",
+            "default": false
         },
         "padding": {
             "type": "boolean",
             "default": true
+        },
+        "paddingLarge": {
+            "type": "boolean",
+            "default": false
         },
         "paddingHeader": {
             "type": "boolean",

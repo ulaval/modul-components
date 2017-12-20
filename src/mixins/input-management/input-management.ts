@@ -8,7 +8,7 @@ import { KeyCode } from '../../utils/keycode/keycode';
 @Component
 export class InputManagement extends ModulVue {
     @Prop()
-    @Model('change')
+    @Model('input')
     public value: string;
     @Prop()
     public label: string;
@@ -48,6 +48,10 @@ export class InputManagement extends ModulVue {
         }
     }
 
+    private onChange(event): void {
+        this.$emit('change', this.model);
+    }
+
     @Watch('value')
     private onValueChange(value: string): void {
         this.internalValue = value;
@@ -55,7 +59,7 @@ export class InputManagement extends ModulVue {
 
     private set model(value: string) {
         this.internalValue = value;
-        this.$emit('change', value);
+        this.$emit('input', value);
     }
 
     private get model(): string {
