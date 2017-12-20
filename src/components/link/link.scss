@@ -11,70 +11,56 @@
     &.m--has-right-icon {
         flex-direction: row-reverse;
 
-        .m-link {
-            &__icon {
-                margin-left: $m-margin--xs;
-            }
+        .m-link__icon {
+            margin-left: $m-margin--xs;
         }
     }
 
-    &:not(.m--has-right-icon) {
-        .m-link {
-            &__icon {
-                margin-right: $m-margin--xs;
-            }
+    &.m--has-left-icon {
+        .m-link__icon {
+            margin-right: $m-margin--xs;
         }
     }
 
     &:not(.m--is-disabled) {
         &:not(.m--no-underline) {
             .m-link__text {
-                transition: background $m-transition-duration--s ease;
-                background-image: linear-gradient(to bottom, $m-color--interactive 0%, $m-color--interactive 100%);
+                transition: background-image $m-transition-duration ease;
+                background-image: linear-gradient(to bottom, transparent 0%, transparent 100%);
                 background-size: 100%;
                 background-repeat: no-repeat;
-                background-position: 0 2em;
+                background-position: 0 0.9em;
             }
 
-            &:not(.m--is-unvisited) {
-                &:visited {
-                    color: $m-color--interactive-darker;
+            &:not(.m--is-unvisited):visited {
+                color: $m-color--interactive-darker;
 
-                    .m-link__text {
-                        background-image: linear-gradient(to bottom, $m-color--interactive-darker 0%, $m-color--interactive-darker 100%);
-                    }
+                .m-link__text {
+                    background-image: linear-gradient(to bottom, $m-color--interactive-darker 0%, $m-color--interactive-darker 100%);
                 }
             }
 
-            &:not(:active) {
-                &:focus,
-                &:hover {
-                    .m-link__text {
-                        background-position: 0 0.9em;
-                        background-image: linear-gradient(to bottom, $m-color--interactive-light 0%, $m-color--interactive-light 100%);
-                    }
+            &:focus,
+            &:hover {
+                .m-link__text {
+                    background-image: linear-gradient(to bottom, $m-color--interactive-light 0%, $m-color--interactive-light 100%);
                 }
             }
 
             &:active {
                 .m-link__text {
-                    background-position: 0 1em;
                     background-image: linear-gradient(to bottom, $m-color--interactive-dark 0%, $m-color--interactive-dark 100%);
                 }
             }
         }
 
-        &:not(.m--is-unvisited) {
-            &:visited {
-                color: $m-color--interactive-darker;
-            }
+        &:not(.m--is-unvisited):visited {
+            color: $m-color--interactive-darker;
         }
 
-        &:not(:active) {
-            &:focus,
-            &:hover {
-                color: $m-color--interactive-light;
-            }
+        &:focus,
+        &:hover {
+            color: $m-color--interactive-light;
         }
 
         &:active {

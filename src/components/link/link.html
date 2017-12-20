@@ -3,7 +3,8 @@
                  :class="{ 'm--is-unvisited': isUnvisited,
                            'm--is-disabled': disabled,
                            'm--no-underline': !underline,
-                           'm--has-right-icon' : isIconPositionRight }"
+                           'm--has-right-icon' : isIconPositionRight,
+                           'm--has-left-icon' : !isIconPositionRight }"
                  :to="routerLinkUrl"
                  :target="target"
                  v-if="isRouterLink"
@@ -18,7 +19,8 @@
                  'm--is-disabled': disabled,
                  'm--no-underline': !underline,
                  'm--is-button': isButton,
-                 'm--has-right-icon' : isIconPositionRight }"
+                 'm--has-right-icon' : isIconPositionRight,
+                 'm--has-left-icon' : !isIconPositionRight }"
        :href="propUrl"
        :target="target"
        @click="onClick"

@@ -157,7 +157,7 @@ $m-message-size: 22px;
         .m-message {
             &__wrap {
                 display: inline-flex;
-                padding: $m-padding--s $m-margin $m-padding--s $m-spacing--s; // Magic number
+                padding: $m-padding--s $m-margin; // Magic number
             }
 
             &__body {
