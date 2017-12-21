@@ -19,7 +19,7 @@ export class MListItem extends Vue {
     public disabled: boolean;
     @Prop()
     public waiting: boolean;
-    @Prop({ default: false })
+    @Prop()
     public fullLenght: boolean;
 
     private click(event): void {

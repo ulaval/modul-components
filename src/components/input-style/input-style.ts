@@ -23,7 +23,7 @@ export class MInputStyle extends ModulVue {
     public width: string;
     @Prop()
     public iconName: string;
-    @Prop({ default: false })
+    @Prop()
     public asterisk: boolean;
 
     private animActive: boolean = false;
