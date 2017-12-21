@@ -1,5 +1,6 @@
 @import 'abstracts/variables';
 $m-steppers-item--circle-size: 30px;
+$m-steppers-item--line-width: 2px;
 
 .m-steppers {
     &__wrap {
@@ -11,22 +12,22 @@ $m-steppers-item--circle-size: 30px;
 
     &__selected-line {
         position: absolute;
-        top: calc(#{$m-steppers-item--circle-size} / 2);
+        top: calc((#{$m-steppers-item--circle-size} / 2) - #{$m-steppers-item--line-width} / 2);
         left: 0;
         width: 0;
         content: '';
-        height: 2px;
+        height: $m-steppers-item--line-width;
         background: $m-color--ul-blue;
         z-index: 1;
     }
 
     &__default-line {
         position: absolute;
-        top: calc(#{$m-steppers-item--circle-size} / 2);
+        top: calc((#{$m-steppers-item--circle-size} / 2) - #{$m-steppers-item--line-width} / 2);
         left: 0;
         right: 0;
         content: '';
-        height: 2px;
+        height: $m-steppers-item--line-width;
         background: $m-color--grey-darker;
         z-index: 1;
     }
