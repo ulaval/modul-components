@@ -150,8 +150,13 @@ $m-dialog--max-width--s: 420px !default;
         position: relative;
         background: $m-color--black-grey;
         color: $m-color--white;
+        justify-content: space-between;
 
-        @include m-box-pading(__close-button);
+        @include m-box-pading();
+
+        &__close-button {
+            margin-right: -12px; // Magic number: visually align button
+        }
     }
 
     &__body {

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+// import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Watch } from 'vue-property-decorator';
 import WithRender from './viewer.html';
@@ -8,6 +9,7 @@ import WithRender from './viewer.html';
 export class Viewer extends Vue {
     public tag: string = '';
     public menuOpen: boolean = true;
+    private a: string = 'test 6';
 
     public mounted() {
         this.buildTag();
