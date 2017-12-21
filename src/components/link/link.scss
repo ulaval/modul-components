@@ -6,7 +6,6 @@
     font-weight: $m-font-weight--bold;
     color: $m-color--interactive;
     text-decoration: none;
-    line-height: 1.3;
 
     &.m--has-right-icon {
         flex-direction: row-reverse;
@@ -25,41 +24,43 @@
     &:not(.m--is-disabled) {
         &:not(.m--no-underline) {
             .m-link__text {
-                transition: background $m-transition-duration ease;
-                background-image: linear-gradient(to bottom, transparent 0%, transparent 100%);
-                background-size: 100%;
-                background-repeat: no-repeat;
-                background-position: 0 0.95em;
+                transition: box-shadow $m-transition-duration--s ease;
+                box-shadow: 0 0 transparent;
             }
 
             &:not(.m--is-unvisited):visited {
                 color: $m-color--interactive-darker;
-
-                .m-link__text {
-                    background-image: linear-gradient(to bottom, $m-color--interactive-darker 0%, $m-color--interactive-darker 100%);
-                }
             }
 
-            &:focus,
-            &:hover {
+            &:hover,
+            &:focus {
                 .m-link__text {
-                    background-image: linear-gradient(to bottom, $m-color--interactive-light 0%, $m-color--interactive-light 100%);
+                    box-shadow: 0 1px $m-color--interactive-light;
                 }
             }
 
             &:active {
                 .m-link__text {
-                    background-image: linear-gradient(to bottom, $m-color--interactive-dark 0%, $m-color--interactive-dark 100%);
+                    box-shadow: 0 1px $m-color--interactive-dark;
                 }
             }
         }
 
         &:not(.m--is-unvisited):visited {
             color: $m-color--interactive-darker;
+
+            &:hover,
+            &:focus {
+                color: $m-color--interactive-light;
+            }
+
+            &:active {
+                color: $m-color--interactive-dark;
+            }
         }
 
-        &:focus,
-        &:hover {
+        &:hover,
+        &:focus {
             color: $m-color--interactive-light;
         }
 
