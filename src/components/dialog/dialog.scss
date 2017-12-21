@@ -70,7 +70,7 @@ $m-dialog--max-width--s: 420px !default;
             }
         }
 
-        &.m--is-full-size {
+        &.m--is-full-screen {
             .m-dialog__article {
                 @media screen and (min-width: #{$m-mq--min--s}) {
                     max-width: 100%;
@@ -155,7 +155,7 @@ $m-dialog--max-width--s: 420px !default;
         @include m-box-pading();
 
         &__close-button {
-            margin-right: -12px; // Magic number: visually align button
+            margin-right: -12px; // Magic number: visually align
         }
     }
 

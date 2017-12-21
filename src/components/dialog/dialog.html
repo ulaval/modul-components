@@ -6,7 +6,7 @@
                  class="m-dialog__wrap m--is-dialog"
                  :class="[{ 'm--is-open': propOpen,
                             'm--is-small': size == 'small',
-                            'm--is-full-size': size == 'full-size',
+                            'm--is-full-screen': size == 'full-screen',
                             'm--is-close-on-backdrop': closeOnBackdrop,
                             'm--is-disabled':disabled }, className]"
                  @click.self="backdropClick()"
