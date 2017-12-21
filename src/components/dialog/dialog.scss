@@ -151,7 +151,7 @@ $m-dialog--max-width--s: 420px !default;
         background: $m-color--black-grey;
         color: $m-color--white;
 
-        @include m-box-header-pading(__close-button);
+        @include m-box-pading(__close-button);
     }
 
     &__body {
@@ -159,17 +159,17 @@ $m-dialog--max-width--s: 420px !default;
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;
-        padding-top: $m-spacing--xl;
-        padding-bottom: $m-spacing--xl;
+        padding-top: $m-padding--l;
+        padding-bottom: $m-padding--l;
 
         @media (min-width: $m-mq--min--s) {
-            padding-left: $m-spacing--l;
-            padding-right: $m-spacing--l;
+            padding-left: $m-padding--l;
+            padding-right: $m-padding--l;
         }
 
         @media (max-width: $m-mq--max--s) {
-            padding-left: $m-spacing;
-            padding-right: $m-spacing;
+            padding-left: $m-padding;
+            padding-right: $m-padding;
         }
 
         @include m-is-ie() {
@@ -182,6 +182,6 @@ $m-dialog--max-width--s: 420px !default;
     &__footer {
         border-top: 1px solid $m-color--grey;
 
-        @include m-box-header-pading();
+        @include m-box-pading();
     }
 }
