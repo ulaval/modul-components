@@ -13,6 +13,8 @@ import { ElementQueries } from '../../mixins/element-queries/element-queries';
 })
 export class MSteppers extends BaseSteppers {
 
+    private isAnimActive: boolean = false;
+
     public setLineWidth(): void {
         let defaultLineEL: HTMLElement = this.$refs.defaultLine as HTMLElement;
         let selectedLineEL: HTMLElement = this.$refs.selectedLine as HTMLElement;
@@ -36,6 +38,16 @@ export class MSteppers extends BaseSteppers {
             defaultLineEL.style.left = leftSpacing + 'px';
             defaultLineEL.style.right = rightSpacing + 'px';
         });
+    }
+
+    public setAnim(value): void {
+        if (value === true) {
+            this.isAnimActive = value;
+        } else {
+            setTimeout(() => {
+                this.isAnimActive = value;
+            }, 1000);
+        }
     }
 
     protected mounted() {

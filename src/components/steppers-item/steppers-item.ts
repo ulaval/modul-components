@@ -14,6 +14,7 @@ export enum MSteppersItemState {
 
 export abstract class BaseSteppers extends ModulVue {
     abstract setLineWidth(): void;
+    abstract setAnim(value): void;
 }
 
 @WithRender
@@ -35,7 +36,9 @@ export class MSteppersItem extends ModulVue {
     @Watch('state')
     private stateChanged(value?: string[]): void {
         if (this.$parent instanceof BaseSteppers) {
+            this.$parent.setAnim(true);
             this.$parent.setLineWidth();
+            this.$parent.setAnim(false);
         }
         this.$emit('update:value', this.state);
     }

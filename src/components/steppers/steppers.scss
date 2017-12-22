@@ -19,6 +19,10 @@ $m-steppers-item--line-width: 2px;
         height: $m-steppers-item--line-width;
         background: $m-color--ul-blue;
         z-index: 1;
+
+        &.m--is-anim-active {
+            transition: width $m-transition-duration--xl ease;
+        }
     }
 
     &__default-line {
@@ -28,7 +32,7 @@ $m-steppers-item--line-width: 2px;
         right: 0;
         content: '';
         height: $m-steppers-item--line-width;
-        background: $m-color--grey-darker;
+        background: $m-color--grey;
         z-index: 1;
     }
 }
