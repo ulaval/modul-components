@@ -234,7 +234,6 @@ $m-input-style--padding: 4px !default;
         align-items: center;
         flex: 1 1 auto;
         width: 100%;
-        min-height: 30px; // Magic number
         font-weight: $m-font-weight;
         text-decoration: none;
         padding: 0 0 $m-input-style--padding 0;
@@ -257,6 +256,10 @@ $m-input-style--padding: 4px !default;
             color: $m-color--text;
             border: none;
             background: none;
+        }
+
+        input,
+        textarea {
             padding: 0;
         }
 
