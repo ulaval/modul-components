@@ -1,6 +1,7 @@
-import { PluginObject, DirectiveOptions, VNodeDirective } from 'vue';
+import { PluginObject, DirectiveOptions, VNodeDirective, VNode } from 'vue';
 import ScrollTo, { ScrollToDuration } from './scroll-to-lib';
 import { SCROLL_TO_NAME } from '../directive-names';
+import { log } from 'util';
 
 const MOUSE_DOWN_MODIFIER: string = 'ripple-effect_mouse-down';
 
@@ -9,26 +10,30 @@ interface ScrollToBinding extends VNodeDirective {
 }
 
 const MScrollTo: DirectiveOptions = {
-    bind(element: HTMLElement, binding: ScrollToBinding) {
-        if (element) {
-            binding.listener = (event: MouseEvent) => {
-                let scrollEl: HTMLElement = binding.value[3] == undefined || binding.value[3].length <= 2 ? document.body : document.querySelector(binding.value[3]);
-                let target: HTMLElement = document.querySelector((binding.value[0] == undefined || binding.value[0].length >= 2 ? binding.value[0] : 'body')) as HTMLElement;
-                let targetPosition: number = target ? target.offsetTop : 0;
-                let duration: string;
-                switch (binding.value[1]) {
-                    case ScrollToDuration.Null:
-                    case ScrollToDuration.Slow:
-                    case ScrollToDuration.Fast:
-                        duration = binding.value[1];
-                        break;
-                    default:
-                        duration = ScrollToDuration.Regular;
+    bind(element: HTMLElement, binding: ScrollToBinding, node: VNode) {
+        if (node.context) {
+            node.context.$nextTick(() => {
+                if (node.context) {
+                    if (element) {
+                        binding.listener = (event: MouseEvent) => {
+                            let target: HTMLElement = node.context != undefined && node.context.$refs[binding.arg] ? node.context.$refs[binding.arg] as HTMLElement : document.body;
+                            let duration: string;
+                            switch (binding.value) {
+                                case ScrollToDuration.Null:
+                                case ScrollToDuration.Slow:
+                                case ScrollToDuration.Fast:
+                                    duration = binding.value;
+                                    break;
+                                default:
+                                    duration = ScrollToDuration.Regular;
+                            }
+                            ScrollTo.startScroll(element, target.offsetTop, duration);
+                        };
+                        element.addEventListener('touchstart', binding.listener);
+                        element.addEventListener('click', binding.listener);
+                    }
                 }
-                ScrollTo.startScroll(scrollEl, targetPosition, duration);
-            };
-            element.addEventListener('touchstart', binding.listener);
-            element.addEventListener('click', binding.listener);
+            });
         }
     },
     unbind(element: HTMLElement, binding: ScrollToBinding) {
