@@ -6,6 +6,7 @@ import WithRender from './navbar.html?style=./navbar.scss';
 import { NAVBAR_NAME, NAVBAR_ITEM_NAME } from '../component-names';
 import NavbarItemPlugin, { BaseNavbar, MNavbarInterface } from '../navbar-item/navbar-item';
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
+import { ComputedOptions } from 'vue/types/options';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -50,7 +51,7 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
 
     private isAnimActive: boolean = false;
     private internalValue: string = '';
-    private hasNagigation: boolean = false;
+    private hasScrolllH: boolean = false;
 
     public selecteItem(el): void {
         if (this.skin == MNavbarSkin.Light && el != undefined) {
@@ -66,28 +67,32 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
         this.setItem();
         this.$nextTick(() => {
             this.initLine();
-            this.setupArrow();
-            this.as<ElementQueries>().$on('resize', this.setupArrow);
+            this.setupScrolllH();
+            this.as<ElementQueries>().$on('resize', this.setupScrolllH);
         });
     }
 
     protected beforeDestroy(): void {
-        this.as<ElementQueries>().$off('resize', this.setupArrow);
+        this.as<ElementQueries>().$off('resize', this.setupScrolllH);
     }
 
-    private setupArrow(): void {
+    private setupScrolllH(): void {
         let listEl: HTMLElement = this.$refs.list as HTMLElement;
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        if (this.$el.clientWidth < listEl.clientWidth) {
+        let elComputedStyle: any = (this.$el as any).currentStyle || window.getComputedStyle(this.$el);
+        let width: number = this.$el.clientWidth - parseInt(elComputedStyle.paddingLeft, 10) -
+            parseInt(elComputedStyle.paddingRight, 10) - parseInt(elComputedStyle.borderLeftWidth, 10) -
+            parseInt(elComputedStyle.borderRightWidth, 10);
+        if (width < listEl.clientWidth) {
             let height: number = listEl.clientHeight;
-            this.hasNagigation = true;
+            this.hasScrolllH = true;
             wrapEl.style.height = height + 40 + 'px';
             this.$el.style.height = height + 'px';
             setTimeout(() => {
                 wrapEl.scrollLeft = this.selectedElem.offsetLeft;
             }, 0);
         } else {
-            this.hasNagigation = false;
+            this.hasScrolllH = false;
             wrapEl.style.removeProperty('height');
             this.$el.style.removeProperty('height');
         }
