@@ -5,7 +5,7 @@ $m-input-style--color-error: $m-color--error !default;
 $m-input-style--color-valid: $m-color--success !default;
 $m-input-style--color-disabled: $m-color--disabled !default;
 $m-input-style--color-waiting: $m-color--active !default;
-$m-input-style--padding: 4px !default;
+$m-input-style--padding: 6px !default;
 
 .m-input-style {
     position: relative;
@@ -73,7 +73,7 @@ $m-input-style--padding: 4px !default;
 
         .m-input-style {
             &__label {
-                transform: translate3d(0, -2px, 0) scale(0.8); // Magic number
+                transform: translate3d(0, -3px, 0) scale(0.8); // Magic number
                 z-index: 1;
                 width: 100%;
             }
@@ -180,7 +180,7 @@ $m-input-style--padding: 4px !default;
     &.m--is-anim-active {
         .m-input-style {
             &__label {
-                transition-property: color, transform, top, left;
+                transition-property: color, transform;
                 transition-duration: $m-transition-duration--l;
                 transition-timing-function: ease;
             }
@@ -207,11 +207,11 @@ $m-input-style--padding: 4px !default;
         left: 0;
         z-index: 1;
         transform-origin: 0 0;
-        transform: translate3d(0, $m-font-size, 0); // Magic number
+        transform: translate3d(0, 12px, 0); // Magic number
         display: inline-flex;
         align-items: center;
         width: 100%;
-        margin-bottom: $m-margin--xs;
+        margin-bottom: 4px; // Magic number
         font-size: $m-font-size;
         font-weight: $m-font-weight;
         color: $m-color--black-grey-lighter;
