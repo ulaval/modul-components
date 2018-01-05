@@ -25,7 +25,7 @@ export class MLimitText extends ModulVue {
 
     private openHiddenText: string = this.$i18n.translate('m-limit-text:open');
     private closeHiddenText: string = this.$i18n.translate('m-limit-text:close');
-    private internalPropOpen: boolean = false;
+    private internalOpen: boolean = false;
     private contentHeight: number = 0;
     private maxHeight: number = 0;
     private overflow: boolean = false;
@@ -46,7 +46,7 @@ export class MLimitText extends ModulVue {
         this.overflow = this.contentHeight > this.maxHeight;
     }
 
-    private get style() {
+    private get maxHeightStyle() {
         console.log('GET STYLE', this.contentHeight, this.maxHeight);
         if (this.overflow) {
             console.log('OVERFLOW');
@@ -59,16 +59,16 @@ export class MLimitText extends ModulVue {
         if (this.open !== undefined) {
             return this.open;
         }
-        return this.internalPropOpen;
+        return this.internalOpen;
     }
 
     private onOpen() {
-        this.internalPropOpen = true;
+        this.internalOpen = true;
         this.$emit('update:open', true);
     }
 
     private onClose() {
-        this.internalPropOpen = false;
+        this.internalOpen = false;
         this.$emit('update:open', false);
     }
 }
