@@ -1,19 +1,25 @@
 <div class="m-carousel">
-    <h1 v-if="title">{{title}}</h1>
-    <p v-if="description">{{description}}</p>
+    <div class="m-carousel__header" v-if="title || description">
+        <h3 class="m-carousel__title" v-if="title">{{title}}</h3>
+        <p class="m-carousel__desc" v-if="description">{{description}}</p>
+    </div>
     <v-touch class="m-carousel__viewer" @swipeleft="showNextItem" @swiperight="showPrevItem" :swipe-options="{direction: 'horizontal'}">
         <template v-for="(media, index) in medias">
             <component :key="index" :is="media" v-show="index === activeItemIndex"></component>
         </template>
     </v-touch>
-    <div>
-        <template v-if="items && items.length > 1">
-            <m-icon-button icon-name="mpo-chevron-gauche" :disabled="prevDisabled" @click="showPrevItem"></m-icon-button>
-            <m-icon-button icon-name="mpo-chevron-droit" :disabled="nextDisabled" @click="showNextItem"></m-icon-button>
-            <span>{{activeItemIndex + 1}}/{{items.length}} : </span>
-        </template>
-        <span>{{activeItem.title}}</span>
+    <div class="m-carousel__panel">
+        <div class="m-carousel__arrows" v-if="items && items.length > 1">
+            <m-icon-button icon-name="left-arrow" icon-size="18px" :disabled="prevDisabled" @click="showPrevItem"></m-icon-button>
+            <m-icon-button icon-name="right-arrow" icon-size="18px" :disabled="nextDisabled" @click="showNextItem"></m-icon-button>
+        </div>
+        <div class="m-carousel__infos">
+            <span class="m-carousel__counter" v-if="items && items.length > 1">{{activeItemIndex + 1}}/{{items.length}} : </span>
+            <span class="m-carousel__elem-title">{{activeItem.title}}</span>
+            <m-limit-text class="m-carousel__elem-desc" :lines="2">
+                <p>{{activeItem.description}}</p>
+            </m-limit-text>
+            <p class="m-carousel__source">{{activeItem.source}}</p>
+        </div>
     </div>
-    <m-limit-text :lines="2">{{activeItem.description}}</m-limit-text>
-    <div>{{activeItem.source}}</div>
 </div>

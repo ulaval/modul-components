@@ -3,5 +3,21 @@
 
     &__container {
         overflow: hidden;
+        transition: max-height 0.5s;
+
+        & > *:first-child {
+            margin-top: 0 !important;
+        }
+
+        & > *:last-child {
+            margin-bottom: 0 !important;
+        }
+    }
+
+    &__test {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+        visibility: hidden;
     }
 }

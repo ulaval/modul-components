@@ -1,53 +1,56 @@
 import { ModulVue } from '../../utils/vue/vue';
-import Vue, { PluginObject, VNode, CreateElement, VNodeComponentOptions, ComponentOptions } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './limit-text.html?style=./limit-text.scss';
 import { LIMIT_TEXT_NAME } from '../component-names';
-import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import I18nPlugin from '../i18n/i18n';
+import LinkPlugin from '../link/link';
 
 @WithRender
-@Component({
-    mixins: [MediaQueries]
-})
+@Component
 export class MLimitText extends ModulVue {
     @Prop({ default: 4 })
     public lines: number;
 
-    @Prop({ default: '\xa0+\xa0' })
+    // TODO: force non-breakable spaces, brackets, default values?
+    @Prop({ default: '[ + ]' })
     public openLabel: string;
 
-    @Prop({ default: '\xa0-\xa0' })
+    @Prop({ default: '[ - ]' })
     public closeLabel: string;
 
     @Prop()
     public open: boolean;
 
+    private openHiddenText: string = this.$i18n.translate('m-limit-text:open');
+    private closeHiddenText: string = this.$i18n.translate('m-limit-text:close');
     private internalPropOpen: boolean = false;
     private contentHeight: number = 0;
     private maxHeight: number = 0;
+    private overflow: boolean = false;
 
     protected mounted() {
+        console.log('MOUNTED');
         this.computeHeight();
     }
 
     protected updated() {
+        console.log('UPDATED');
         this.computeHeight();
     }
 
     private computeHeight() {
-        this.contentHeight = (this.$refs.container as HTMLElement).clientHeight;
-        let lineHeight = window.getComputedStyle(this.$refs.container as HTMLElement).getPropertyValue('line-height');
-        this.maxHeight = parseFloat(lineHeight) * this.lines;
-    }
-
-    private get overflow(): number {
-        return this.lines ? Math.max(this.contentHeight - this.maxHeight, 0) : 0;
+        this.contentHeight = (this.$refs.container as HTMLElement).scrollHeight;
+        this.maxHeight = (this.$refs.test as HTMLElement).clientHeight * this.lines;
+        this.overflow = this.contentHeight > this.maxHeight;
     }
 
     private get style() {
-        if (this.overflow && !this.propOpen) {
-            return this.maxHeight + 'px';
+        console.log('GET STYLE', this.contentHeight, this.maxHeight);
+        if (this.overflow) {
+            console.log('OVERFLOW');
+            return this.propOpen ? this.contentHeight + 'px' : this.maxHeight + 'px';
         }
         return 'none';
     }
@@ -57,22 +60,6 @@ export class MLimitText extends ModulVue {
             return this.open;
         }
         return this.internalPropOpen;
-    }
-
-    private get openHiddenText(): string {
-        return this.$i18n.translate('m-limit-text:open');
-    }
-
-    private get openLinkText() {
-        return '[' + this.openLabel.replace(/\s/g, '\xa0') + ']';
-    }
-
-    private get closeHiddenText(): string {
-        return this.$i18n.translate('m-limit-text:close');
-    }
-
-    private get closeLinkText() {
-        return '[' + this.closeLabel.replace(/\s/g, '\xa0') + ']';
     }
 
     private onOpen() {
@@ -88,6 +75,8 @@ export class MLimitText extends ModulVue {
 
 const LimitTextPlugin: PluginObject<any> = {
     install(v, options) {
+        v.use(I18nPlugin);
+        v.use(LinkPlugin);
         v.component(LIMIT_TEXT_NAME, MLimitText);
     }
 };
