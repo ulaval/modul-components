@@ -2,6 +2,7 @@
     <div ref="container" class="m-limit-text__container" :style="{'max-height': style}">
         <slot></slot>
     </div>
-    <m-link v-if="overflow && !propOpen" mode="button" @click="onOpen" hiddenText="openHiddenText" :underline="false">{{openLinkText}}</m-link>
-    <m-link v-if="overflow && propOpen" mode="button" @click="onClose" hiddenText="closeHiddenText" :underline="false">{{closeLinkText}}</m-link>
+    <div class="m-limit-text__test" ref="test">&nbsp;</div>
+    <m-link v-if="overflow && !propOpen" mode="button" @click="onOpen" hiddenText="openHiddenText" :underline="false">{{openLabel}}</m-link>
+    <m-link v-if="overflow && propOpen" mode="button" @click="onClose" hiddenText="closeHiddenText" :underline="false">{{closeLabel}}</m-link>
 </div>
