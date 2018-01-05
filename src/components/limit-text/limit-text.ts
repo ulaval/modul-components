@@ -10,6 +10,10 @@ import LinkPlugin from '../link/link';
 @WithRender
 @Component
 export class MLimitText extends ModulVue {
+
+    @Prop()
+    public open: boolean;
+
     @Prop({ default: 4 })
     public lines: number;
 
@@ -19,9 +23,6 @@ export class MLimitText extends ModulVue {
 
     @Prop({ default: '[ - ]' })
     public closeLabel: string;
-
-    @Prop()
-    public open: boolean;
 
     private openHiddenText: string = this.$i18n.translate('m-limit-text:open');
     private closeHiddenText: string = this.$i18n.translate('m-limit-text:close');
