@@ -13,25 +13,23 @@ const MScrollTo: DirectiveOptions = {
     bind(element: HTMLElement, binding: ScrollToBinding, node: VNode) {
         if (node.context) {
             node.context.$nextTick(() => {
-                if (node.context) {
-                    if (element) {
-                        binding.listener = (event: MouseEvent) => {
-                            let target: HTMLElement = node.context != undefined && node.context.$refs[binding.arg] ? node.context.$refs[binding.arg] as HTMLElement : document.body;
-                            let duration: string;
-                            switch (binding.value) {
-                                case ScrollToDuration.Null:
-                                case ScrollToDuration.Slow:
-                                case ScrollToDuration.Fast:
-                                    duration = binding.value;
-                                    break;
-                                default:
-                                    duration = ScrollToDuration.Regular;
-                            }
-                            ScrollTo.startScroll(element, target.offsetTop, duration);
-                        };
-                        element.addEventListener('touchstart', binding.listener);
-                        element.addEventListener('click', binding.listener);
-                    }
+                if (node.context && element) {
+                    binding.listener = (event: MouseEvent) => {
+                        let target: HTMLElement = node.context != undefined && node.context.$refs[binding.arg] ? node.context.$refs[binding.arg] as HTMLElement : document.body;
+                        let duration: string;
+                        switch (binding.value) {
+                            case ScrollToDuration.Null:
+                            case ScrollToDuration.Slow:
+                            case ScrollToDuration.Fast:
+                                duration = binding.value;
+                                break;
+                            default:
+                                duration = ScrollToDuration.Regular;
+                        }
+                        ScrollTo.startScroll(element, target.offsetTop, duration);
+                    };
+                    element.addEventListener('touchstart', binding.listener);
+                    element.addEventListener('click', binding.listener);
                 }
             });
         }
