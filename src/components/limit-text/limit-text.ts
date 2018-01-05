@@ -32,12 +32,10 @@ export class MLimitText extends ModulVue {
     private overflow: boolean = false;
 
     protected mounted() {
-        console.log('MOUNTED');
         this.computeHeight();
     }
 
     protected updated() {
-        console.log('UPDATED');
         this.computeHeight();
     }
 
@@ -48,9 +46,7 @@ export class MLimitText extends ModulVue {
     }
 
     private get maxHeightStyle() {
-        console.log('GET STYLE', this.contentHeight, this.maxHeight);
         if (this.overflow) {
-            console.log('OVERFLOW');
             return this.propOpen ? this.contentHeight + 'px' : this.maxHeight + 'px';
         }
         return 'none';
