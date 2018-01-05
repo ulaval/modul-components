@@ -39,6 +39,7 @@ export class MCarousel extends Vue {
         document.removeEventListener('keyup', this.changeItem);
     }
 
+    // TODO: verify if url contains file extension
     private get medias(): any[] {
         let mediaArray: any[] = [];
         this.activeItemIndex = Math.min(this.activeItemIndex, this.items.length - 1);
@@ -54,8 +55,6 @@ export class MCarousel extends Vue {
                         break;
                     case '.mp4':
                         mediaArray.push({ template: `<video src="${item.url}" controls></video>` });
-                        break;
-                    default:
                         break;
                 }
             }

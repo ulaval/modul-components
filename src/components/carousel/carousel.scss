@@ -2,17 +2,58 @@
 
 .m-carousel {
     max-width: 1100px;
+    background-color: $m-color--white;
+    border: 1px solid $m-color--grey-dark;
+
+    &__header {
+        padding: $m-margin--l;
+        padding-right: $m-padding--xl;
+    }
+
+    &__title {
+        margin: 0;
+    }
+
+    &__desc {
+        margin-top: $m-padding--s;
+    }
 
     &__viewer {
         background-color: $m-color--black;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 50vh;
+        height: 619px;
 
         img,
         video {
-            max-height: 50vh;
+            max-height: 619px;
         }
+    }
+
+    &__panel {
+        display: flex;
+        align-items: flex-start;
+        padding: $m-padding;
+    }
+
+    &__arrows {
+        margin-right: $m-padding--s;
+        flex-shrink: 0;
+    }
+
+    &__counter,
+    &__elem-title {
+        font-size: $m-font-size--h4;
+        font-weight: $m-font-weight;
+    }
+
+    &__elem-desc {
+        font-weight: $m-font-weight;
+        margin-top: $m-margin;
+    }
+
+    &__source {
+        font-size: $m-font-size--s;
     }
 }
