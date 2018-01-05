@@ -6,9 +6,10 @@ import { CAROUSEL_NAME } from '../component-names';
 
 export interface CarouselItem {
     url: string;
-    title: string;
-    description: string;
-    source: string;
+    type?: string;
+    title?: string;
+    description?: string;
+    source?: string;
 }
 
 @WithRender
@@ -47,19 +48,27 @@ export class MCarousel extends Vue {
         let mediaArray: any[] = [];
         this.activeItemIndex = Math.min(this.activeItemIndex, this.items.length - 1);
         this.items.forEach(item => {
-            let extension = item.url.match(/\.[^\.]*$/);
-            if (extension) {
-                switch (extension[0]) {
-                    case '.jpg':
-                    case '.jpeg':
-                    case '.png':
-                    case '.gif':
-                        mediaArray.push({ template: `<img src="${item.url}" alt="${item.title.substr(0, 125)}">`, backgroundImage: `url(${item.url})` });
-                        break;
-                    case '.mp4':
-                        mediaArray.push({ template: `<video src="${item.url}" controls></video>` });
-                        break;
-                }
+            switch (item.type) {
+                case 'image':
+                    mediaArray.push({ template: `<img src="${item.url}" alt="${item.title ? item.title.substr(0, 125) : ''}">`, backgroundImage: `url(${item.url})` });
+                    break;
+                case 'video':
+                    mediaArray.push({ template: `<video src="${item.url}" controls></video>` });
+                    break;
+                default:
+                    let extension = item.url.match(/\.[^\.]*$/);
+                    if (extension) {
+                        switch (extension[0]) {
+                            case '.jpg':
+                            case '.jpeg':
+                            case '.png':
+                            case '.gif':
+                                mediaArray.push({ template: `<img src="${item.url}" alt="${item.title ? item.title.substr(0, 125) : ''}">`, backgroundImage: `url(${item.url})` });
+                                break;
+                            case '.mp4':
+                        }
+                    }
+                    break;
             }
         });
         return mediaArray;
