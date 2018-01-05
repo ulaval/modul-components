@@ -17,6 +17,9 @@ export class MCarousel extends Vue {
     @Prop()
     title: string;
 
+    @Prop({ default: false })
+    strechImages: boolean;
+
     @Prop()
     description: string;
 
@@ -51,7 +54,7 @@ export class MCarousel extends Vue {
                     case '.jpeg':
                     case '.png':
                     case '.gif':
-                        mediaArray.push({ template: `<img src="${item.url}" alt="${item.title.substr(0, 125)}">` });
+                        mediaArray.push({ template: `<img src="${item.url}" alt="${item.title.substr(0, 125)}">`, backgroundImage: `url(${item.url})` });
                         break;
                     case '.mp4':
                         mediaArray.push({ template: `<video src="${item.url}" controls></video>` });
@@ -84,6 +87,10 @@ export class MCarousel extends Vue {
 
     private get nextDisabled() {
         return this.items && this.activeItemIndex === this.items.length - 1;
+    }
+
+    private get isStrechImages() {
+        return this.strechImages;
     }
 
     private get activeItem(): CarouselItem {

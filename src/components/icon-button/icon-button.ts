@@ -9,7 +9,8 @@ export enum MIconButtonSkin {
     Light = 'light',
     Dark = 'dark',
     Primary = 'primary',
-    Secondary = 'secondary'
+    Secondary = 'secondary',
+    Link = 'link'
 }
 
 @WithRender
@@ -21,7 +22,8 @@ export class MIconButton extends Vue {
             value == MIconButtonSkin.Light ||
             value == MIconButtonSkin.Dark ||
             value == MIconButtonSkin.Primary ||
-            value == MIconButtonSkin.Secondary
+            value == MIconButtonSkin.Secondary ||
+            value == MIconButtonSkin.Link
     })
     public skin: MIconButtonSkin;
     @Prop()
@@ -66,6 +68,10 @@ export class MIconButton extends Vue {
 
     private get isSkinSecondary(): boolean {
         return this.skin == MIconButtonSkin.Secondary;
+    }
+
+    private get isSkinLink(): boolean {
+        return this.skin == MIconButtonSkin.Link;
     }
 
     private hasSlots(): boolean {

@@ -5,13 +5,14 @@
     </div>
     <v-touch class="m-carousel__viewer" @swipeleft="showNextItem" @swiperight="showPrevItem" :swipe-options="{direction: 'horizontal'}">
         <template v-for="(media, index) in medias">
-            <component :key="index" :is="media" v-show="index === activeItemIndex"></component>
+            <div class="m-carousel__background-image" :style="{backgroundImage: media.backgroundImage}" v-show="index === activeItemIndex" v-if="isStrechImages && media.backgroundImage"></div>
+            <component :key="index" :is="media" v-show="index === activeItemIndex" v-if="!isStrechImages || (isStrechImages && !media.backgroundImage)"></component>
         </template>
     </v-touch>
     <div class="m-carousel__panel">
         <div class="m-carousel__arrows" v-if="items && items.length > 1">
-            <m-icon-button icon-name="left-arrow" icon-size="18px" :disabled="prevDisabled" @click="showPrevItem"></m-icon-button>
-            <m-icon-button icon-name="right-arrow" icon-size="18px" :disabled="nextDisabled" @click="showNextItem"></m-icon-button>
+            <m-icon-button skin="link" icon-name="left-arrow" icon-size="18px" :disabled="prevDisabled" @click="showPrevItem"></m-icon-button>
+            <m-icon-button skin="link" icon-name="right-arrow" icon-size="18px" :disabled="nextDisabled" @click="showNextItem"></m-icon-button>
         </div>
         <div class="m-carousel__infos">
             <span class="m-carousel__counter" v-if="items && items.length > 1">{{activeItemIndex + 1}}/{{items.length}} : </span>
