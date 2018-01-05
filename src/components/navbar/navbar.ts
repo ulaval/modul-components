@@ -59,6 +59,8 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
         if (this.skin == MNavbarSkin.Arrow && el != undefined) {
             this.setArrowPosition(el);
         }
+
+        this.scrollToSelectedElem();
     }
 
     protected mounted(): void {
@@ -66,16 +68,22 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
         this.setItem();
         this.$nextTick(() => {
             this.initLine();
-            this.setupArrow();
-            this.as<ElementQueries>().$on('resize', this.setupArrow);
+            this.setupWrapperHeight();
+            this.as<ElementQueries>().$on('resize', this.setupWrapperHeight);
         });
     }
 
     protected beforeDestroy(): void {
-        this.as<ElementQueries>().$off('resize', this.setupArrow);
+        this.as<ElementQueries>().$off('resize', this.setupWrapperHeight);
     }
 
-    private setupArrow(): void {
+    private scrollToSelectedElem() {
+        setTimeout(() => {
+            (this.$refs.wrap as HTMLElement).scrollLeft = this.selectedElem.offsetLeft;
+        }, 0);
+    }
+
+    private setupWrapperHeight(): void {
         let listEl: HTMLElement = this.$refs.list as HTMLElement;
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
         if (this.$el.clientWidth < listEl.clientWidth) {
@@ -83,9 +91,7 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
             this.hasNagigation = true;
             wrapEl.style.height = height + 40 + 'px';
             this.$el.style.height = height + 'px';
-            setTimeout(() => {
-                wrapEl.scrollLeft = this.selectedElem.offsetLeft;
-            }, 0);
+            this.scrollToSelectedElem();
         } else {
             this.hasNagigation = false;
             wrapEl.style.removeProperty('height');
