@@ -3,11 +3,11 @@
 .m-carousel {
     max-width: 1100px;
     background-color: $m-color--white;
-    border: 1px solid $m-color--grey-dark;
+    border: 1px solid $m-color--grey-light;
 
     &__header {
-        padding: $m-margin--l;
-        padding-right: $m-padding--xl;
+        padding: $m-spacing--l;
+        padding-right: $m-spacing--xl;
     }
 
     &__title {
@@ -15,7 +15,7 @@
     }
 
     &__desc {
-        margin-top: $m-padding--s;
+        margin-top: $m-spacing--s;
     }
 
     &__viewer {
@@ -24,6 +24,7 @@
         justify-content: center;
         align-items: center;
         height: 619px;
+        position: relative;
 
         img,
         video {
@@ -31,15 +32,26 @@
         }
     }
 
+    &__background-image {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
     &__panel {
         display: flex;
         align-items: flex-start;
-        padding: $m-padding;
+        padding: $m-spacing--l $m-spacing;
     }
 
     &__arrows {
-        margin-right: $m-padding--s;
+        margin-right: $m-spacing--s;
         flex-shrink: 0;
+        margin-top: -10px; // magik number!
     }
 
     &__counter,
@@ -50,10 +62,11 @@
 
     &__elem-desc {
         font-weight: $m-font-weight;
-        margin-top: $m-margin;
+        margin-top: $m-spacing;
     }
 
     &__source {
         font-size: $m-font-size--s;
+        color: $m-color--grey-dark;
     }
 }
