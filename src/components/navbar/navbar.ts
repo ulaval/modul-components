@@ -60,6 +60,8 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
         if (this.skin == MNavbarSkin.Arrow && el != undefined) {
             this.setArrowPosition(el);
         }
+
+        this.scrollToSelectedElem();
     }
 
     protected mounted(): void {
@@ -88,9 +90,7 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
             this.hasScrolllH = true;
             wrapEl.style.height = height + 40 + 'px';
             this.$el.style.height = height + 'px';
-            setTimeout(() => {
-                wrapEl.scrollLeft = this.selectedElem.offsetLeft;
-            }, 0);
+            this.scrollToSelectedElem();
         } else {
             this.hasScrolllH = false;
             wrapEl.style.removeProperty('height');

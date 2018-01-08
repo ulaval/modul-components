@@ -3,12 +3,21 @@
     "name": "m-limit-text-meta:name",
     "production": false,
     "attributes": {
-        "maxNumberOfLine": {
+        "open": {
+            "type": "boolean",
+            "default": false
+        },
+        "lines": {
             "type": "number",
             "default": 4
         },
-        "label": {
-            "type": "string"
+        "openLabel": {
+            "type": "string",
+            "default": "[ + ]"
+        },
+        "closeLabel": {
+            "type": "string",
+            "default": "[ - ]"
         }
     },
     "overview": "limit-text.overview",

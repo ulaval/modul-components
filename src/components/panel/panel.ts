@@ -28,10 +28,10 @@ export class MPanel extends Vue {
     @Prop()
     public highlighted: boolean;
 
-    @Prop({ default: true })
+    @Prop()
     public shadow: boolean;
 
-    @Prop()
+    @Prop({ default: true })
     public border: boolean;
 
     @Prop()

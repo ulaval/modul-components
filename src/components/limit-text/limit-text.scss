@@ -1,9 +1,11 @@
+@import 'abstracts/variables';
+
 .m-limit-text {
     position: relative;
 
     &__container {
         overflow: hidden;
-        transition: max-height 0.5s;
+        transition: max-height $m-transition-duration ease;
 
         & > *:first-child {
             margin-top: 0 !important;

@@ -10,6 +10,10 @@ import LinkPlugin from '../link/link';
 @WithRender
 @Component
 export class MLimitText extends ModulVue {
+
+    @Prop()
+    public open: boolean;
+
     @Prop({ default: 4 })
     public lines: number;
 
@@ -20,23 +24,18 @@ export class MLimitText extends ModulVue {
     @Prop({ default: '[ - ]' })
     public closeLabel: string;
 
-    @Prop()
-    public open: boolean;
-
     private openHiddenText: string = this.$i18n.translate('m-limit-text:open');
     private closeHiddenText: string = this.$i18n.translate('m-limit-text:close');
-    private internalPropOpen: boolean = false;
+    private internalOpen: boolean = false;
     private contentHeight: number = 0;
     private maxHeight: number = 0;
     private overflow: boolean = false;
 
     protected mounted() {
-        console.log('MOUNTED');
         this.computeHeight();
     }
 
     protected updated() {
-        console.log('UPDATED');
         this.computeHeight();
     }
 
@@ -46,10 +45,8 @@ export class MLimitText extends ModulVue {
         this.overflow = this.contentHeight > this.maxHeight;
     }
 
-    private get style() {
-        console.log('GET STYLE', this.contentHeight, this.maxHeight);
+    private get maxHeightStyle() {
         if (this.overflow) {
-            console.log('OVERFLOW');
             return this.propOpen ? this.contentHeight + 'px' : this.maxHeight + 'px';
         }
         return 'none';
@@ -59,16 +56,16 @@ export class MLimitText extends ModulVue {
         if (this.open !== undefined) {
             return this.open;
         }
-        return this.internalPropOpen;
+        return this.internalOpen;
     }
 
     private onOpen() {
-        this.internalPropOpen = true;
+        this.internalOpen = true;
         this.$emit('update:open', true);
     }
 
     private onClose() {
-        this.internalPropOpen = false;
+        this.internalOpen = false;
         this.$emit('update:open', false);
     }
 }
