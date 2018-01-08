@@ -78,6 +78,12 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
     }
 
+    private scrollToSelectedElem(): void {
+        setTimeout(() => {
+            (this.$refs.wrap as HTMLElement).scrollLeft = this.selectedElem.offsetLeft;
+        }, 0);
+    }
+
     private setupScrolllH(): void {
         let listEl: HTMLElement = this.$refs.list as HTMLElement;
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
