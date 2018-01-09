@@ -50,7 +50,7 @@
         stroke-width: 2px;
     }
 
-    &__more-info,
+    &__precision,
     &__icon {
         &:empty {
             display: none;
@@ -76,11 +76,11 @@
         }
     }
 
-    &__more-info {
+    &__precision {
         display: block;
         font-size: $m-font-size--s;
         font-weight: $m-font-weight--regular;
-        margin-top: $m-margin--s;
+        margin-top: $m-margin--xs;
 
         &:empty {
             display: none;
