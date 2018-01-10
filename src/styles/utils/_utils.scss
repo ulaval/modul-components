@@ -254,7 +254,8 @@
     font-weight: $m-font-weight--black;
 }
 
-// .m-u--require {
-//     margin-top: -$m-spacing !important;
-//     margin-bottom: $m-spacing;
-// }
+.m-u--require {
+    margin-top: -$m-spacing !important;
+    // margin-bottom: $m-spacing;
+    float: right;
+}
