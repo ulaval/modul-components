@@ -27,7 +27,7 @@
         },
         "closeButton": {
             "type": "boolean",
-            "default": true
+            "default": false
         },
         "visible": {
             "type": "boolean",

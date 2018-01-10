@@ -6,3 +6,4 @@ tests
 .vscode
 .htmlhintrc
 *.tgz
+tsconfig.json

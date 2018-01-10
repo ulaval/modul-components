@@ -13,17 +13,18 @@
             class="m-button__icon m--is-left"
             :name="iconName"
             :size="iconSize"
-            v-if="hasIconeLeft"></m-icon>
-    <m-spinner aria-hidden="true" class="m-button__icon m--is-left" skin="lighter" size="small" v-if="isWaiting"></m-spinner>
+            v-if="hasIconLeft"></m-icon>
+    <m-spinner aria-hidden="true" class="m-button__icon m--is-left" skin="lighter" size="small" v-if="hasWaitingIconLeft"></m-spinner>
     <span class="m-button__text">
         <slot></slot>
-        <span class="m-button__more-info" v-if="hasMoreInfoSlot">
-            <slot name="more-info"></slot>
+        <span class="m-button__precision" v-if="hasPrecisionSlot">
+            <slot name="precision"></slot>
         </span>
     </span>
+    <m-spinner aria-hidden="true" class="m-button__icon m--is-right" skin="lighter" size="small" v-if="hasWaitingIconRight"></m-spinner>
     <m-icon aria-hidden="true"
             class="m-button__icon m--is-right"
             :name="iconName"
             :size="iconSize"
-            v-if="hasIconeRight"></m-icon>
+            v-if="hasIconRight"></m-icon>
 </button>

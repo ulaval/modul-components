@@ -18,11 +18,11 @@
         },
         "shadow": {
             "type": "boolean",
-            "default": true
+            "default": false
         },
         "border": {
             "type": "boolean",
-            "default": false
+            "default": true
         },
         "borderLarge": {
             "type": "boolean",

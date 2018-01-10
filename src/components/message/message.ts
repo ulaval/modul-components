@@ -43,7 +43,7 @@ export class MMessage extends Vue {
     @Prop({ default: true })
     public icon: boolean;
 
-    @Prop({ default: true })
+    @Prop()
     public closeButton: boolean;
 
     @Prop()

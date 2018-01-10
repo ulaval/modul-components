@@ -1,0 +1,341 @@
+import Vue from 'vue';
+import '../../utils/polyfills';
+import DateFieldsPlugin, { MDateFields } from './date-fields';
+import * as moment from 'moment';
+
+const DATEFIELDS_CSS: string = 'm-date-fields';
+const COMPLETE_CSS: string = 'complete';
+const YEAR_DD_CSS: string = 'm-date-fields_years';
+const MONTH_DD_CSS: string = 'm-date-fields_months';
+const DATE_DD_CSS: string = 'm-date-fields_dates';
+const SPINNER_CSS: string = 'm-spinner';
+
+let dateFields: MDateFields;
+
+describe('date-fields', () => {
+    Vue.use(DateFieldsPlugin);
+
+    it('css classes are present', () => {
+        new Vue({
+            template: `<m-date-fields></m-date-fields>`,
+            mounted() {
+                expect(this.$el.classList.contains(DATEFIELDS_CSS)).toBeTruthy();
+                expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
+            }
+        }).$mount();
+    });
+
+    it('All fields selected', () => {
+        let dateMoment = moment();
+
+        new Vue({
+            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            data: {
+                value: dateMoment
+            },
+            mounted() {
+                expect(this.$el.classList.contains(DATEFIELDS_CSS)).toBeTruthy();
+                expect(this.$el.classList.contains(COMPLETE_CSS)).toBeTruthy();
+            }
+        }).$mount();
+
+    });
+
+    it('V-model => Dropdown initialisation', () => {
+        let dateUndefined = undefined;
+        let dateMoment = moment({ 'year': 1999, 'month': 7, 'date': 12 });
+        let dateDate = moment({ 'year': 1999, 'month': 7, 'date': 12 }).toDate();
+
+        new Vue({
+            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            data: {
+                value: dateUndefined
+            },
+            mounted() {
+                Vue.nextTick(() => {
+                    Vue.nextTick(() => {
+                        let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                        let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                        let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                        expect(year.value).toEqual('');
+                        expect(month.value).toEqual('');
+                        expect(date.value).toEqual('');
+                    });
+                });
+            }
+        }).$mount();
+
+        new Vue({
+            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            data: {
+                value: dateMoment
+            },
+            mounted() {
+                Vue.nextTick(() => {
+                    Vue.nextTick(() => {
+                        let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                        let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                        let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                        expect(year.value).toEqual('1999');
+                        expect(month.value).toEqual('August');
+                        expect(date.value).toEqual('12');
+                    });
+                });
+            }
+        }).$mount();
+
+        new Vue({
+            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            data: {
+                value: dateDate
+            },
+            mounted() {
+                Vue.nextTick(() => {
+                    Vue.nextTick(() => {
+                        let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                        let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                        let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                        expect(year.value).toEqual('1999');
+                        expect(month.value).toEqual('August');
+                        expect(date.value).toEqual('12');
+                    });
+                });
+            }
+        }).$mount();
+    });
+
+    it('V-model format', () => {
+        let dateMoment = moment({ 'year': 1999, 'month': 7, 'date': 12 });
+        let dateDate = moment({ 'year': 1999, 'month': 7, 'date': 12 }).toDate();
+
+        new Vue({
+            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            data: {
+                value: dateMoment
+            },
+            mounted() {
+                Vue.nextTick(() => {
+                    Vue.nextTick(() => {
+                        expect(dateMoment instanceof Date).toBeFalsy();
+                    });
+                });
+            }
+        }).$mount();
+
+        new Vue({
+            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            data: {
+                value: dateDate
+            },
+            mounted() {
+                Vue.nextTick(() => {
+                    Vue.nextTick(() => {
+                        expect(dateDate instanceof Date).toBeTruthy();
+                    });
+                });
+            }
+        }).$mount();
+    });
+
+    it('disabled prop', () => {
+        new Vue({
+            template: `<m-date-fields></m-date-fields>`,
+            mounted() {
+                let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                expect(year.disabled).toBeFalsy();
+                expect(month.disabled).toBeFalsy();
+                expect(date.disabled).toBeFalsy();
+            }
+        }).$mount();
+
+        new Vue({
+            template: `<m-date-fields :disabled="disabled"></m-date-fields>`,
+            data: {
+                disabled: false
+            },
+            mounted() {
+                let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                expect(year.disabled).toBeFalsy();
+                expect(month.disabled).toBeFalsy();
+                expect(date.disabled).toBeFalsy();
+
+                (this as any).disabled = true;
+                Vue.nextTick(() => {
+                    expect(year.disabled).toBeTruthy();
+                    expect(month.disabled).toBeTruthy();
+                    expect(date.disabled).toBeTruthy();
+
+                    (this as any).disabled = false;
+                    Vue.nextTick(() => {
+                        expect(year.disabled).toBeFalsy();
+                        expect(month.disabled).toBeFalsy();
+                        expect(date.disabled).toBeFalsy();
+                    });
+                });
+            }
+        }).$mount();
+    });
+
+    it('waiting prop', () => {
+        new Vue({
+            template: `<m-date-fields></m-date-fields>`,
+            mounted() {
+                let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                let spinner = this.$el.querySelector('.' + SPINNER_CSS) as HTMLElement;
+                expect(year.disabled).toBeFalsy();
+                expect(month.disabled).toBeFalsy();
+                expect(date.disabled).toBeFalsy();
+                expect(spinner).toBeNull();
+
+            }
+        }).$mount();
+
+        new Vue({
+            template: `<m-date-fields :waiting="waiting"></m-date-fields>`,
+            data: {
+                waiting: false
+            },
+            mounted() {
+                let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
+                expect(year.disabled).toBeFalsy();
+                expect(month.disabled).toBeFalsy();
+                expect(date.disabled).toBeFalsy();
+                expect(this.$el.querySelector('.' + SPINNER_CSS)).toBeNull();
+
+                (this as any).waiting = true;
+                Vue.nextTick(() => {
+                    expect(year.disabled).toBeTruthy();
+                    expect(month.disabled).toBeTruthy();
+                    expect(date.disabled).toBeTruthy();
+                    expect(this.$el.querySelector('.' + SPINNER_CSS)).not.toBeNull();
+
+                    (this as any).waiting = false;
+                    Vue.nextTick(() => {
+                        expect(year.disabled).toBeFalsy();
+                        expect(month.disabled).toBeFalsy();
+                        expect(date.disabled).toBeFalsy();
+                        expect(this.$el.querySelector('.' + SPINNER_CSS)).toBeNull();
+                    });
+                });
+            }
+        }).$mount();
+    });
+
+    it('Remove dropdown', () => {
+        new Vue({
+            template: `<m-date-fields></m-date-fields>`,
+            mounted() {
+                let year = this.$el.querySelector('.' + YEAR_DD_CSS) as HTMLInputElement;
+                let month = this.$el.querySelector('.' + MONTH_DD_CSS) as HTMLInputElement;
+                let date = this.$el.querySelector('.' + DATE_DD_CSS) as HTMLInputElement;
+                expect(year).not.toBeNull();
+                expect(month).not.toBeNull();
+                expect(date).not.toBeNull();
+            }
+        }).$mount();
+
+        new Vue({
+            template: `<m-date-fields :year="year" :month="month" :date="date"></m-date-fields>`,
+            data: {
+                year: true,
+                month: true,
+                date: true
+            },
+            mounted() {
+                expect(this.$el.querySelector('.' + YEAR_DD_CSS)).not.toBeNull();
+                expect(this.$el.querySelector('.' + MONTH_DD_CSS)).not.toBeNull();
+                expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
+
+                (this as any).year = false;
+                Vue.nextTick(() => {
+                    expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
+                    expect(this.$el.querySelector('.' + MONTH_DD_CSS)).not.toBeNull();
+                    expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
+
+                    (this as any).month = false;
+                    Vue.nextTick(() => {
+                        expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
+                        expect(this.$el.querySelector('.' + MONTH_DD_CSS)).toBeNull();
+                        expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
+
+                        (this as any).date = false;
+                        Vue.nextTick(() => {
+                            expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
+                            expect(this.$el.querySelector('.' + MONTH_DD_CSS)).toBeNull();
+                            expect(this.$el.querySelector('.' + DATE_DD_CSS)).toBeNull();
+
+                            (this as any).date = true;
+                            Vue.nextTick(() => {
+                                expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
+                                expect(this.$el.querySelector('.' + MONTH_DD_CSS)).toBeNull();
+                                expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
+                            });
+                        });
+                    });
+                });
+            }
+        }).$mount();
+    });
+
+    it('minYear prop', () => {
+        let date = moment({ year: 2000, month: 0, date: 1 });
+
+        let vm = new Vue({
+            template: `<m-date-fields v-model="date" :minYear="min"></m-date-fields>`,
+            data: {
+                date: date,
+                min: 2000
+            },
+            mounted() {
+                Vue.nextTick(() => {
+                    Vue.nextTick(() => {
+                        expect(this.date).toBeDefined();
+                        expect(this.$el.classList.contains(COMPLETE_CSS)).toBeTruthy();
+
+                        this.date = moment({ year: 1999, month: 11, date: 31 });
+                        Vue.nextTick(() => {
+                            Vue.nextTick(() => {
+                                expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
+                            });
+                        });
+                    });
+                });
+            }
+        }).$mount();
+    });
+
+    it('maxYear prop', () => {
+        let date = moment({ year: 1999, month: 11, date: 31 });
+
+        let vm = new Vue({
+            template: `<m-date-fields v-model="date" :maxYear="max"></m-date-fields>`,
+            data: {
+                date: date,
+                max: 1999
+            },
+            mounted() {
+                Vue.nextTick(() => {
+                    Vue.nextTick(() => {
+                        expect(this.date).toBeDefined();
+                        expect(this.$el.classList.contains(COMPLETE_CSS)).toBeTruthy();
+
+                        this.date = moment({ year: 2000, month: 0, date: 1 });
+                        Vue.nextTick(() => {
+                            Vue.nextTick(() => {
+                                expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
+                            });
+                        });
+                    });
+                });
+            }
+        }).$mount();
+    });
+});

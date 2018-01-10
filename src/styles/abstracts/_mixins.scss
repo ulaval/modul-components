@@ -232,41 +232,39 @@
     }
 }
 
-@mixin m-box-header-pading($menuClass: false) {
+@mixin m-box-pading($menuClass: false) {
     display: flex;
     align-items: center;
-    min-height: 72px; // magic number from MH
-    padding-top: $m-spacing;
-    padding-bottom: $m-spacing;
+    min-height: $m-box--min-height;
+    padding-top: $m-padding;
+    padding-bottom: $m-padding;
 
-    &.m--no-padding,
-    .m--no-padding & {
+    &.m--no-padding {
         padding: 0;
     }
 
     @media (min-width: $m-mq--min--s) {
-        padding-left: $m-spacing--l;
-        padding-right: $m-spacing--l;
+        padding-left: $m-padding--l;
+        padding-right: $m-padding--l;
     }
 
     @media (max-width: $m-mq--max--s) {
-        padding-left: $m-spacing;
-        padding-right: $m-spacing;
+        padding-left: $m-padding;
+        padding-right: $m-padding;
     }
 
     @if $menuClass {
         @media (min-width: $m-mq--min--s) {
-            padding-left: $m-spacing--l;
-            padding-right: $m-touch-size + $m-spacing;
+            padding-left: $m-padding--l;
+            padding-right: $m-touch-size + $m-padding;
         }
 
         @media (max-width: $m-mq--max--s) {
-            padding-left: $m-spacing;
+            padding-left: $m-padding;
             padding-right: $m-touch-size;
         }
 
-        &.m--no-padding,
-        .m--no-padding & {
+        &.m--no-padding {
             padding: 0 $m-touch-size 0 0;
         }
 
@@ -281,10 +279,6 @@
             }
 
             @media (max-width: $m-mq--max--s) {
-                right: 0;
-            }
-
-            .m--no-padding & {
                 right: 0;
             }
         }

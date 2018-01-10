@@ -8,6 +8,9 @@ import * as moment from 'moment';
 import { InputState } from '../../mixins/input-state/input-state';
 import DropdownPlugin from '../dropdown/dropdown';
 import DropdownItemPlugin from '../dropdown-item/dropdown-item';
+import { curLang } from '../../utils/i18n/i18n';
+import I18nPlugin from '../i18n/i18n';
+import IconButtonPlugin from '../icon-button/icon-button';
 import SpinnerPlugin from '../spinner/spinner';
 
 const VIEW_DATE = 'date';
@@ -43,6 +46,7 @@ export class MDateFields extends ModulVue {
     private internalDate: number | undefined = 0;
 
     protected created(): void {
+        moment.locale([curLang, 'en-ca']);
         this.setInternal(this.value);
     }
 
@@ -148,6 +152,8 @@ const DateFieldsPlugin: PluginObject<any> = {
     install(v, options) {
         Vue.use(DropdownPlugin);
         Vue.use(DropdownItemPlugin);
+        Vue.use(I18nPlugin);
+        Vue.use(IconButtonPlugin);
         Vue.use(SpinnerPlugin);
         v.component(DATEFIELDS_NAME, MDateFields);
     }

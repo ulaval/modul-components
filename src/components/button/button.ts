@@ -88,16 +88,24 @@ export class MButton extends Vue {
         return !!this.iconName;
     }
 
-    private get hasIconeLeft(): boolean {
-        return this.iconPosition == MButtonIconPosition.Left && this.hasIcone && !this.waiting ? true : false;
+    private get hasIconLeft(): boolean {
+        return this.iconPosition == MButtonIconPosition.Left && this.hasIcone && !this.waiting;
     }
 
-    private get hasIconeRight(): boolean {
-        return this.iconPosition == MButtonIconPosition.Right && this.hasIcone && !this.waiting ? true : false;
+    private get hasIconRight(): boolean {
+        return this.iconPosition == MButtonIconPosition.Right && this.hasIcone && !this.waiting;
     }
 
-    private get hasMoreInfoSlot(): boolean {
-        return !!this.$slots['more-info'];
+    private get hasWaitingIconLeft(): boolean {
+        return this.iconPosition == MButtonIconPosition.Left && this.waiting;
+    }
+
+    private get hasWaitingIconRight(): boolean {
+        return this.iconPosition == MButtonIconPosition.Right && this.waiting;
+    }
+
+    private get hasPrecisionSlot(): boolean {
+        return !!this.$slots.precision;
     }
 }
 

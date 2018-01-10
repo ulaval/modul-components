@@ -8,8 +8,8 @@ $m-template--column-color: $m-color--grey-light;
     flex-direction: column;
     min-width: $m-min-width;
 
-    &__body__content,
-    &__body__footer,
+    &__body,
+    &__body-footer,
     &__column {
         > :first-child {
             &,
@@ -59,22 +59,22 @@ $m-template--column-color: $m-color--grey-light;
         flex: 1 1 auto;
     }
 
+    &__main {
+        width: 100%;
+        flex: 1 1 auto;
+        background: $m-color--white;
+
+        &-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    }
+
     &__body {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
+        flex: 1 1 auto;
 
-        &-container {
-            width: 100%;
-            flex: 1 1 auto;
-            background: $m-color--white;
-        }
-
-        &__content {
-            flex: 1 1 auto;
-        }
-
-        &__footer {
+        &-footer {
             width: 100%;
         }
     }
@@ -101,12 +101,12 @@ $m-template--column-color: $m-color--grey-light;
                 width: 100%;
             }
 
-            &__body {
-                flex: 1 1 auto;
+            &__main {
+                display: flex;
+                flex-direction: column;
 
-                &-container {
-                    display: flex;
-                    flex-direction: column;
+                &-content {
+                    flex: 1 1 auto;
                 }
             }
         }
@@ -128,7 +128,7 @@ $m-template--column-color: $m-color--grey-light;
 @media (max-width: $m-mq--max--xs) {
     .m-template {
         &__header,
-        &__body__content,
+        &__body,
         &__column {
             padding: $m-padding $m-padding--s;
         }
@@ -138,7 +138,7 @@ $m-template--column-color: $m-color--grey-light;
 @media (min-width: $m-mq--min--xs) and (max-width: $m-mq--max--s) {
     .m-template {
         &__header,
-        &__body__content,
+        &__body,
         &__column {
             padding: $m-padding;
         }
@@ -147,7 +147,7 @@ $m-template--column-color: $m-color--grey-light;
 
 @media (min-width: $m-mq--min--s) {
     .m-template {
-        &__body__content,
+        &__body,
         &__column {
             padding: $m-padding--l;
         }

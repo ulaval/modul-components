@@ -12,7 +12,7 @@
     <header class="m-flex-template__header" ref="header" v-if="hasHeaderSlot">
         <slot name="header"></slot>
     </header>
-    <div class="m-flex-template__corps">
+    <div class="m-flex-template__corps" :style="{ 'padding-top': paddingPage }">
         <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
             <div class="m-flex-template__menu-container" v-if="propMenuOpen"
                 ref="menuContainer">
@@ -25,7 +25,7 @@
         </transition>
 
         <div class="m-flex-template__page-container" ref="pageContainer">
-            <div class="m-flex-template__page" :style="{ 'padding-top': paddingPage, 'min-height': propPageMinHeight }">
+            <div class="m-flex-template__page" :style="{ 'min-height': propPageMinHeight }">
                 <div class="m-flex-template__page__body">
                     <slot></slot>
                 </div>

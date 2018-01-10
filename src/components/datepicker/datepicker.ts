@@ -50,7 +50,7 @@ export class MDatepicker extends ModulVue {
     public iconName: string;
     @Prop()
     public required: boolean;
-    @Prop({ default: 'DD/MM/Y' })
+    @Prop({ default: 'YYYY/MM/DD' })
     public format: string;
     @Prop({ default: () => { return moment().subtract(10, 'year'); } })
     public min: moment.Moment | Date;

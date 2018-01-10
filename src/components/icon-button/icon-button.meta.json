@@ -32,6 +32,6 @@
             "type": "string"
         }
     },
-    "overview": "button.overview",
-    "preview": "button.preview"
+    "overview": "icon-button.overview",
+    "preview": "icon-button.preview"
 }

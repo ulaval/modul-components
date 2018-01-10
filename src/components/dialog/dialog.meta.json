@@ -6,9 +6,9 @@
         "size": {
             "type": "string",
             "value": [
-                "full-size",
+                "full-screen",
                 "large",
-                "default",
+                "regular",
                 "small"
             ],
             "default": 2
