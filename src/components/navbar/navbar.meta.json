@@ -34,6 +34,6 @@
             "default": true
         }
     },
-    "overview": "nav-bar.overview",
-    "preview": "nav-bar.preview"
+    "overview": "navbar.overview",
+    "preview": "navbar.preview"
 }
