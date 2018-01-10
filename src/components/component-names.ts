@@ -4,6 +4,7 @@ export const LIST_ITEM_NAME: string = 'm-list-item';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CAROUSEL_NAME: string = 'm-carousel';
+export const CAROUSEL_ITEM_NAME: string = 'm-carousel-item';
 export const CHECKBOX_NAME: string = 'm-checkbox';
 export const DATEFIELDS_NAME: string = 'm-date-fields';
 export const DATEPICKER_NAME: string = 'm-datepicker';
@@ -60,6 +61,7 @@ export const components: string[] = [
     BUTTON_NAME,
     BUTTON_GROUP_NAME,
     CAROUSEL_NAME,
+    CAROUSEL_ITEM_NAME,
     CHECKBOX_NAME,
     DATEFIELDS_NAME,
     DATEPICKER_NAME,

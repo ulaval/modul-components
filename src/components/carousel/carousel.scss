@@ -1,72 +1,9 @@
 @import 'abstracts/variables';
 
 .m-carousel {
-    max-width: 1100px;
-    background-color: $m-color--white;
-    border: 1px solid $m-color--grey-light;
-
-    &__header {
-        padding: $m-spacing--l;
-        padding-right: $m-spacing--xl;
-    }
-
-    &__title {
-        margin: 0;
-    }
-
-    &__desc {
-        margin-top: $m-spacing--s;
-    }
-
-    &__viewer {
-        background-color: $m-color--black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 619px;
-        position: relative;
-
-        img,
-        video {
-            max-height: 619px;
-        }
-    }
-
-    &__background-image {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    &__panel {
-        display: flex;
-        align-items: flex-start;
-        padding: $m-spacing--l $m-spacing;
-    }
-
-    &__arrows {
-        margin-right: $m-spacing--s;
-        flex-shrink: 0;
-        margin-top: -10px; // magik number!
-    }
-
-    &__counter,
-    &__elem-title {
-        font-size: $m-font-size--h4;
-        font-weight: $m-font-weight;
-    }
-
-    &__elem-desc {
-        font-weight: $m-font-weight;
-        margin-top: $m-spacing;
-    }
-
-    &__source {
-        font-size: $m-font-size--s;
-        color: $m-color--grey-dark;
-    }
+    background-color: $m-color--black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }

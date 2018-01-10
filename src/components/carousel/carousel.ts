@@ -3,115 +3,96 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './carousel.html?style=./carousel.scss';
 import { CAROUSEL_NAME } from '../component-names';
-
-export interface CarouselItem {
-    url: string;
-    type?: string;
-    title?: string;
-    description?: string;
-    source?: string;
-}
+import carouselItem, { MCarouselItem, BaseCarousel } from '../carousel-item/carousel-item';
 
 @WithRender
 @Component
-export class MCarousel extends Vue {
+export class MCarousel extends BaseCarousel {
     @Prop()
-    title: string;
-
-    @Prop({ default: false })
-    strechImages: boolean;
+    public index: number;
 
     @Prop()
-    description: string;
+    public infinite: boolean;
 
-    @Prop({
-        default: () => [
-            { url: 'https://www.w3schools.com/html/pulpitrock.jpg', title: 'Une roche', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum mollitia beatae iusto pariatur quidem distinctio corporis debitis quisquam enim autem veritatis labore nesciunt, minima officia officiis accusamus illo accusantium culpa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum mollitia beatae iusto pariatur quidem distinctio corporis debitis quisquam enim autem veritatis labore nesciunt, minima officia officiis accusamus illo accusantium culpa.', source: 'paysage.com' },
-            { url: 'https://www.w3schools.com/html/img_girl.jpg', title: 'Une tuque', description: 'La tuque tendance...', source: 'mode.com' },
-            { url: 'https://www.w3schools.com/html/mov_bbb.mp4', title: 'Une vidéo', description: 'wouhou!!', source: 'pixar.com' }
-        ]
-    })
-    items: CarouselItem[];
+    @Prop({ default: 0 })
+    public interval: number;
 
-    private activeItemIndex: number = 0;
+    public rightToLeft: boolean = true;
 
-    protected created() {
+    private internalIndex: number = 0;
+    private updateInterval: any;
+    private itemIds: string[] = [];
+
+    public addItem(id) {
+        this.itemIds.push(id);
+    }
+
+    public removeItem(id) {
+        this.itemIds = this.itemIds.filter(item => {
+            return item != id;
+        });
+    }
+
+    public get activeId(): string {
+        return this.itemIds[this.propIndex];
+    }
+
+    protected mounted() {
         document.addEventListener('keyup', this.changeItem);
+        if (this.interval) {
+            this.updateInterval = setInterval(() => {
+                this.propIndex++;
+            }, this.interval);
+        }
     }
 
     protected beforeDestroy() {
         document.removeEventListener('keyup', this.changeItem);
-    }
-
-    // TODO: verify if url contains file extension
-    private get medias(): any[] {
-        let mediaArray: any[] = [];
-        this.activeItemIndex = Math.min(this.activeItemIndex, this.items.length - 1);
-        this.items.forEach(item => {
-            switch (item.type) {
-                case 'image':
-                    mediaArray.push({ template: `<img src="${item.url}" alt="${item.title ? item.title.substr(0, 125) : ''}">`, backgroundImage: `url(${item.url})` });
-                    break;
-                case 'video':
-                    mediaArray.push({ template: `<video src="${item.url}" controls></video>` });
-                    break;
-                default:
-                    let extension = item.url.match(/\.[^\.]*$/);
-                    if (extension) {
-                        switch (extension[0]) {
-                            case '.jpg':
-                            case '.jpeg':
-                            case '.png':
-                            case '.gif':
-                                mediaArray.push({ template: `<img src="${item.url}" alt="${item.title ? item.title.substr(0, 125) : ''}">`, backgroundImage: `url(${item.url})` });
-                                break;
-                            case '.mp4':
-                        }
-                    }
-                    break;
-            }
-        });
-        return mediaArray;
+        clearInterval(this.updateInterval);
     }
 
     private changeItem(e) {
-        if (e.keyCode === 37 && !this.prevDisabled) {
+        if (e.keyCode === 37) {
             this.showPrevItem();
-        } else if (e.keyCode === 39 && !this.nextDisabled) {
+        } else if (e.keyCode === 39) {
             this.showNextItem();
         }
     }
 
+    private get propIndex(): number {
+        if (this.index != undefined) {
+            return this.index;
+        }
+        return this.internalIndex;
+    }
+
+    private set propIndex(value) {
+        this.rightToLeft = value > this.propIndex;
+        if (value > this.itemIds.length - 1) {
+            value = this.infinite ? 0 : this.itemIds.length - 1;
+        } else if (value < 0) {
+            value = this.infinite ? this.itemIds.length - 1 : 0;
+        }
+        this.internalIndex = value;
+        this.$emit('update:index', value);
+    }
+
     private showPrevItem() {
-        this.activeItemIndex = Math.max(0, this.activeItemIndex - 1);
+        this.propIndex--;
+        this.resetInterval();
     }
 
     private showNextItem() {
-        this.activeItemIndex = Math.min(this.items.length - 1, this.activeItemIndex + 1);
+        this.propIndex++;
+        this.resetInterval();
     }
 
-    private get prevDisabled() {
-        return this.activeItemIndex === 0;
-    }
-
-    private get nextDisabled() {
-        return this.items && this.activeItemIndex === this.items.length - 1;
-    }
-
-    private get isStrechImages() {
-        return this.strechImages;
-    }
-
-    private get activeItem(): CarouselItem {
-        if (this.items && this.items.length > 0) {
-            return this.items[this.activeItemIndex];
-        } else {
-            return {
-                url: '',
-                title: '',
-                description: '',
-                source: ''
-            };
+    private resetInterval() {
+        if (this.interval) {
+            clearInterval(this.updateInterval);
+            this.updateInterval = setInterval(() => {
+                this.propIndex++;
+            }, this.interval);
         }
     }
 }

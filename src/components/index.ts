@@ -5,6 +5,7 @@ import ListItemPlugin from './list-item/list-item';
 import ButtonPlugin from './button/button';
 import ButtonGroupPlugin from './button-group/button-group';
 import CarouselPlugin from './carousel/carousel';
+import CarouselItemPlugin from './carousel-item/carousel-item';
 import CheckboxPlugin from './checkbox/checkbox';
 import DateFieldsPlugin from './date-fields/date-fields';
 import DatepickerPlugin from './datepicker/datepicker';
@@ -62,6 +63,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ButtonPlugin);
         Vue.use(ButtonGroupPlugin);
         Vue.use(CarouselPlugin);
+        Vue.use(CarouselItemPlugin);
         Vue.use(CheckboxPlugin);
         Vue.use(DateFieldsPlugin);
         Vue.use(DatepickerPlugin);
