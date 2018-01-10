@@ -16,6 +16,7 @@ import ButtonPlugin from '../button/button';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import PopupPlugin from '../popup/popup';
+import PopupPluginDirective from '../../directives/popup/popup';
 
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
@@ -377,6 +378,7 @@ const DropdownPlugin: PluginObject<any> = {
         Vue.use(InputStylePlugin);
         Vue.use(ButtonPlugin);
         Vue.use(PopupPlugin);
+        Vue.use(PopupPluginDirective);
         Vue.use(ValidationMessagePlugin);
         Vue.use(MediaQueriesPlugin);
         Vue.use(i18nPlugin);
