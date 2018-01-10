@@ -8,12 +8,15 @@
         </div>
     </header>
     <div class="m-template__wrap" v-if="hasDefaultSlot || hasColumnSlot || hasFooterSlot ">
-        <div class="m-template__body-container" v-if="hasDefaultSlot || (hasFooterSlot && !footerFullWidth)">
-            <div class="m-template__body">
-                <div class="m-template__body__content" v-if="hasDefaultSlot">
+        <div class="m-template__main" v-if="hasDefaultSlot || (hasFooterSlot && !footerFullWidth)">
+            <div class="m-template__main-content">
+                <div class="m-template__sub-header" v-if="hasSubHeaderSlot">
+                    <slot name="subHeader"></slot>
+                </div>
+                <div class="m-template__body" v-if="hasDefaultSlot">
                     <slot></slot>
                 </div>
-                <footer class="m-template__body__footer" v-if="hasFooterSlot && !footerFullWidth">
+                <footer class="m-template__body-footer" v-if="hasFooterSlot && !footerFullWidth">
                     <slot name="footer"></slot>
                 </footer>
             </div>

@@ -33,7 +33,7 @@ describe('datepicker', () => {
             },
             mounted() {
                 let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
-                expect(input.value).toEqual(date.format('DD/MM/YYYY'));
+                expect(input.value).toEqual(date.format('YYYY/MM/DD'));
             }
         }).$mount();
 
