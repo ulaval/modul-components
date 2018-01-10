@@ -12,7 +12,7 @@
                       'm--is-right-content-alone': !hasHeaderSlot,
                       'm--has-menu': hasHeaderMenuSlot, }"
         v-if="hasHeader">
-        <div class="m-panel__header__content">
+        <div class="m-panel__header__content" :aria-hidden="!hasHeaderSlot">
             <slot name="header"></slot>
         </div>
         <div class="m-panel__header__content-right" v-if="hasHeaderRightContentSlot">

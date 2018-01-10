@@ -17,6 +17,10 @@ export class Mtemplate extends Vue {
         return !!this.$slots.header;
     }
 
+    private get hasSubHeaderSlot(): boolean {
+        return !!this.$slots.subHeader;
+    }
+
     private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
     }
