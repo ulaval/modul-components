@@ -19,7 +19,7 @@
         },
         "format": {
             "type": "string",
-            "default": "DD/MM/Y"
+            "default": "YYYY/MM/DD"
         },
         "min": {
             "type": "moment.Moment | Date",
