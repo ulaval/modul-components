@@ -222,7 +222,18 @@ $m-panel--screen--min: 640px;
 
     &[min-width~="#{ $m-panel--screen--min }"] {
         .m-panel__header {
-            justify-content: space-between;
+            display: flex;
+            align-items: center;
+
+            &__content {
+                flex: 1 1 auto;
+            }
+        }
+
+        &:not(.m--is-right-content-alone) {
+            .m-panel__header {
+                justify-content: space-between;
+            }
         }
     }
 }
