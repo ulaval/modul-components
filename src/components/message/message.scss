@@ -170,6 +170,7 @@ $m-message-size: 22px;
                 .m-icon {
                     font-size: $m-font-size--l;
                     width: $m-font-size--l;
+                    margin-top: 2px; // Magic number
                 }
             }
         }
