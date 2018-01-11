@@ -9,6 +9,7 @@ import SecurityPlugin, { SecurityPluginOptions } from './http/security';
 import SpritesPlugin from './svg/sprites';
 import * as TouchPlugin from 'vue-touch';
 import ConfirmPlugin from './modal/confirm';
+import AlertPlugin from './modal/alert';
 
 export interface UtilsPluginOptions {
     securityPluginOptions: SecurityPluginOptions;
@@ -30,6 +31,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(SpritesPlugin);
         Vue.use(TouchPlugin, { name: 'v-touch' });
         Vue.use(ConfirmPlugin);
+        Vue.use(AlertPlugin);
     }
 };
 
