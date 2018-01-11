@@ -350,7 +350,7 @@ $m-radio--color-disabled: $m-color--disabled !default;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 10px $m-padding 9px $m-padding;
+                padding: 11px $m-padding 11px $m-padding; // Magic number
                 border-right: 1px solid;
                 border-bottom: 1px solid;
             }
