@@ -5,6 +5,7 @@
   "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
   "private": false,
   "scripts": {
+    "setup": "npm install --no-optional",
     "clean": "rimraf dist",
     "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
     "buildWebpack": "webpack --config conf/webpack.config.js --colors",
@@ -19,8 +20,7 @@
     "test": "npm run unitall && npm run e2e",
     "tslint": "tslint -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
     "stylelint": "stylelint \"src/**/*.css\" \"src/**/*.scss\" --config conf/stylelint.json",
-    "prepack": "npm run clean && npm run build",
-    "setup": "npm install --no-optional"
+    "prepack": "npm run clean && npm run build"
   },
   "peerDependencies": {
     "axios": "^0.17.1",
