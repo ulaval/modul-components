@@ -1,0 +1,17 @@
+@import '../../styles/abstracts/variables';
+
+.m-datefields {
+    display: inline-block;
+
+    &__years {
+        margin-right: $m-margin--l;
+    }
+
+    &__months {
+        margin-right: $m-margin--l;
+    }
+
+    .m-spinner {
+        display: inline-flex;
+    }
+}

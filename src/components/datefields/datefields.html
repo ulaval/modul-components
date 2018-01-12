@@ -1,7 +1,7 @@
-<div class="m-date-fields" ref="mDateFields" :class="{ complete: complete }">
+<div class="m-datefields" ref="mDateFields" :class="{ complete: complete }">
      <m-dropdown v-if="year"
                  v-model="internalYear"
-                 class="m-date-fields_years"
+                 class="m-datefields__years"
                  width="70px"
                  :placeholder="getPlaceholder('year')"
                  :filterable="true"
@@ -11,7 +11,7 @@
      </m-dropdown>
      <m-dropdown v-if="month"
                  v-model="internalMonth"
-                 class="m-date-fields_months"
+                 class="m-datefields__months"
                  width="105px"
                  :placeholder="getPlaceholder('month')"
                  :filterable="true"
@@ -21,7 +21,7 @@
      </m-dropdown>
      <m-dropdown v-if="date"
                  v-model="internalDate"
-                 class="m-date-fields_dates"
+                 class="m-datefields__dates"
                  width="60px"
                  :placeholder="getPlaceholder('date')"
                  :filterable="true"

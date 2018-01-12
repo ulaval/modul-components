@@ -1,6 +1,6 @@
 {
-    "tag": "m-date-fields",
-    "name": "m-date-fields-meta:name",
+    "tag": "m-datefields",
+    "name": "m-datefields-meta:name",
     "production": false,
     "attributes": {
         "value": {
@@ -52,6 +52,6 @@
             "type": "string"
         }
     },
-    "overview": "date-fields.overview",
-    "preview": "date-fields.preview"
+    "overview": "datefields.overview",
+    "preview": "datefields.preview"
 }

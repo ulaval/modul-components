@@ -2,7 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Model, Watch } from 'vue-property-decorator';
-import WithRender from './date-fields.html?style=./date-fields.scss';
+import WithRender from './datefields.html?style=./datefields.scss';
 import { DATEFIELDS_NAME } from '../component-names';
 import * as moment from 'moment';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -23,7 +23,7 @@ const VIEW_YEAR = 'year';
         InputState
     ]
 })
-export class MDateFields extends ModulVue {
+export class MDatefields extends ModulVue {
     @Model('change')
     @Prop()
     public value: moment.Moment | Date | undefined;
@@ -59,7 +59,7 @@ export class MDateFields extends ModulVue {
             this.internalMonth = !value ? undefined : value instanceof Date ? value.getMonth() + 1 : value.month() + 1;
             this.internalDate = !value ? undefined : value instanceof Date ? value.getDate() : value.date();
         } else {
-            console.error(this.$i18n.translate('m-date-fields:year-out-of-range'));
+            console.error(this.$i18n.translate('m-datefields:year-out-of-range'));
             this.internalYear = undefined;
             this.internalMonth = undefined;
             this.internalDate = undefined;
@@ -78,7 +78,7 @@ export class MDateFields extends ModulVue {
                     currentYear++;
                 }
             } else {
-                console.error(this.$i18n.translate('m-date-fields:year-range-error'));
+                console.error(this.$i18n.translate('m-datefields:year-range-error'));
             }
         }
 
@@ -144,19 +144,19 @@ export class MDateFields extends ModulVue {
     }
 
     private getPlaceholder(key: string): string {
-        return this.$i18n.translate('m-date-fields:' + key);
+        return this.$i18n.translate('m-datefields:' + key);
     }
 }
 
-const DateFieldsPlugin: PluginObject<any> = {
+const DatefieldsPlugin: PluginObject<any> = {
     install(v, options) {
         Vue.use(DropdownPlugin);
         Vue.use(DropdownItemPlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconButtonPlugin);
         Vue.use(SpinnerPlugin);
-        v.component(DATEFIELDS_NAME, MDateFields);
+        v.component(DATEFIELDS_NAME, MDatefields);
     }
 };
 
-export default DateFieldsPlugin;
+export default DatefieldsPlugin;
