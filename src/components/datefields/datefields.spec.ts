@@ -13,16 +13,25 @@ const SPINNER_CSS: string = 'm-spinner';
 let datefields: MDatefields;
 
 describe('datefields', () => {
-    Vue.use(DateFieldsPlugin);
+    beforeEach(() => {
+        spyOn(console, 'error');
+
+        Vue.use(DateFieldsPlugin);
+    });
+
+    afterEach(done => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+
+            done();
+        });
+    });
 
     it('css classes are present', () => {
-        new Vue({
-            template: `<m-datefields></m-datefields>`,
-            mounted() {
-                expect(this.$el.classList.contains(DATEFIELDS_CSS)).toBeTruthy();
-                expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
-            }
-        }).$mount();
+        datefields = new MDatefields().$mount();
+
+        expect(datefields.$el.classList.contains(DATEFIELDS_CSS)).toBeTruthy();
+        expect(datefields.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
     });
 
     it('All fields selected', () => {
@@ -41,7 +50,7 @@ describe('datefields', () => {
 
     });
 
-    it('V-model => Dropdown initialisation', () => {
+    it('V-model => Dropdown initialisation', done => {
         let dateUndefined = undefined;
         let dateMoment = moment({ 'year': 1999, 'month': 7, 'date': 12 });
         let dateDate = moment({ 'year': 1999, 'month': 7, 'date': 12 }).toDate();
@@ -60,6 +69,8 @@ describe('datefields', () => {
                         expect(year.value).toEqual('');
                         expect(month.value).toEqual('');
                         expect(date.value).toEqual('');
+
+                        done();
                     });
                 });
             }
@@ -79,6 +90,8 @@ describe('datefields', () => {
                         expect(year.value).toEqual('1999');
                         expect(month.value).toEqual('August');
                         expect(date.value).toEqual('12');
+
+                        done();
                     });
                 });
             }
@@ -98,13 +111,15 @@ describe('datefields', () => {
                         expect(year.value).toEqual('1999');
                         expect(month.value).toEqual('August');
                         expect(date.value).toEqual('12');
+
+                        done();
                     });
                 });
             }
         }).$mount();
     });
 
-    it('V-model format', () => {
+    it('V-model format', done => {
         let dateMoment = moment({ 'year': 1999, 'month': 7, 'date': 12 });
         let dateDate = moment({ 'year': 1999, 'month': 7, 'date': 12 }).toDate();
 
@@ -117,6 +132,8 @@ describe('datefields', () => {
                 Vue.nextTick(() => {
                     Vue.nextTick(() => {
                         expect(dateMoment instanceof Date).toBeFalsy();
+
+                        done();
                     });
                 });
             }
@@ -131,13 +148,15 @@ describe('datefields', () => {
                 Vue.nextTick(() => {
                     Vue.nextTick(() => {
                         expect(dateDate instanceof Date).toBeTruthy();
+
+                        done();
                     });
                 });
             }
         }).$mount();
     });
 
-    it('disabled prop', () => {
+    it('disabled prop', done => {
         new Vue({
             template: `<m-datefields></m-datefields>`,
             mounted() {
@@ -174,13 +193,15 @@ describe('datefields', () => {
                         expect(year.disabled).toBeFalsy();
                         expect(month.disabled).toBeFalsy();
                         expect(date.disabled).toBeFalsy();
+
+                        done();
                     });
                 });
             }
         }).$mount();
     });
 
-    it('waiting prop', () => {
+    it('waiting prop', done => {
         new Vue({
             template: `<m-datefields></m-datefields>`,
             mounted() {
@@ -223,13 +244,15 @@ describe('datefields', () => {
                         expect(month.disabled).toBeFalsy();
                         expect(date.disabled).toBeFalsy();
                         expect(this.$el.querySelector('.' + SPINNER_CSS)).toBeNull();
+
+                        done();
                     });
                 });
             }
         }).$mount();
     });
 
-    it('Remove dropdown', () => {
+    it('Remove dropdown', done => {
         new Vue({
             template: `<m-datefields></m-datefields>`,
             mounted() {
@@ -277,6 +300,8 @@ describe('datefields', () => {
                                 expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
                                 expect(this.$el.querySelector('.' + MONTH_DD_CSS)).toBeNull();
                                 expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
+
+                                done();
                             });
                         });
                     });
@@ -285,7 +310,7 @@ describe('datefields', () => {
         }).$mount();
     });
 
-    it('minYear prop', () => {
+    it('minYear prop', done => {
         let date = moment({ year: 2000, month: 0, date: 1 });
 
         let vm = new Vue({
@@ -304,6 +329,8 @@ describe('datefields', () => {
                         Vue.nextTick(() => {
                             Vue.nextTick(() => {
                                 expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
+
+                                done();
                             });
                         });
                     });
@@ -312,7 +339,7 @@ describe('datefields', () => {
         }).$mount();
     });
 
-    it('maxYear prop', () => {
+    it('maxYear prop', done => {
         let date = moment({ year: 1999, month: 11, date: 31 });
 
         let vm = new Vue({
@@ -331,6 +358,8 @@ describe('datefields', () => {
                         Vue.nextTick(() => {
                             Vue.nextTick(() => {
                                 expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
+
+                                done();
                             });
                         });
                     });
