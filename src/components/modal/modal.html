@@ -22,7 +22,7 @@
                                 <template v-if="hasOkLabel">{{ okLabel }}</template>
                                 <m-i18n v-else k="m-modal:ok"></m-i18n>
                             </m-button>
-                            <m-link mode="button" @click="onCancel()">
+                            <m-link mode="button" @click="onCancel()" v-if="negativeLink">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
                                 <m-i18n v-else k="m-modal:cancel"></m-i18n>
                             </m-link>

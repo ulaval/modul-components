@@ -1,35 +1,44 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
-import DateFieldsPlugin, { MDateFields } from './date-fields';
+import DateFieldsPlugin, { MDatefields } from './datefields';
 import * as moment from 'moment';
 
-const DATEFIELDS_CSS: string = 'm-date-fields';
+const DATEFIELDS_CSS: string = 'm-datefields';
 const COMPLETE_CSS: string = 'complete';
-const YEAR_DD_CSS: string = 'm-date-fields_years';
-const MONTH_DD_CSS: string = 'm-date-fields_months';
-const DATE_DD_CSS: string = 'm-date-fields_dates';
+const YEAR_DD_CSS: string = 'm-datefields_years';
+const MONTH_DD_CSS: string = 'm-datefields_months';
+const DATE_DD_CSS: string = 'm-datefields_dates';
 const SPINNER_CSS: string = 'm-spinner';
 
-let dateFields: MDateFields;
+let datefields: MDatefields;
 
-describe('date-fields', () => {
-    Vue.use(DateFieldsPlugin);
+describe('datefields', () => {
+    beforeEach(() => {
+        spyOn(console, 'error');
+
+        Vue.use(DateFieldsPlugin);
+    });
+
+    afterEach(done => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+
+            done();
+        });
+    });
 
     it('css classes are present', () => {
-        new Vue({
-            template: `<m-date-fields></m-date-fields>`,
-            mounted() {
-                expect(this.$el.classList.contains(DATEFIELDS_CSS)).toBeTruthy();
-                expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
-            }
-        }).$mount();
+        datefields = new MDatefields().$mount();
+
+        expect(datefields.$el.classList.contains(DATEFIELDS_CSS)).toBeTruthy();
+        expect(datefields.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
     });
 
     it('All fields selected', () => {
         let dateMoment = moment();
 
         new Vue({
-            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            template: `<m-datefields v-model="value"></m-datefields>`,
             data: {
                 value: dateMoment
             },
@@ -41,13 +50,13 @@ describe('date-fields', () => {
 
     });
 
-    it('V-model => Dropdown initialisation', () => {
+    it('V-model => Dropdown initialisation', done => {
         let dateUndefined = undefined;
         let dateMoment = moment({ 'year': 1999, 'month': 7, 'date': 12 });
         let dateDate = moment({ 'year': 1999, 'month': 7, 'date': 12 }).toDate();
 
         new Vue({
-            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            template: `<m-datefields v-model="value"></m-datefields>`,
             data: {
                 value: dateUndefined
             },
@@ -60,13 +69,15 @@ describe('date-fields', () => {
                         expect(year.value).toEqual('');
                         expect(month.value).toEqual('');
                         expect(date.value).toEqual('');
+
+                        done();
                     });
                 });
             }
         }).$mount();
 
         new Vue({
-            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            template: `<m-datefields v-model="value"></m-datefields>`,
             data: {
                 value: dateMoment
             },
@@ -79,13 +90,15 @@ describe('date-fields', () => {
                         expect(year.value).toEqual('1999');
                         expect(month.value).toEqual('August');
                         expect(date.value).toEqual('12');
+
+                        done();
                     });
                 });
             }
         }).$mount();
 
         new Vue({
-            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            template: `<m-datefields v-model="value"></m-datefields>`,
             data: {
                 value: dateDate
             },
@@ -98,18 +111,20 @@ describe('date-fields', () => {
                         expect(year.value).toEqual('1999');
                         expect(month.value).toEqual('August');
                         expect(date.value).toEqual('12');
+
+                        done();
                     });
                 });
             }
         }).$mount();
     });
 
-    it('V-model format', () => {
+    it('V-model format', done => {
         let dateMoment = moment({ 'year': 1999, 'month': 7, 'date': 12 });
         let dateDate = moment({ 'year': 1999, 'month': 7, 'date': 12 }).toDate();
 
         new Vue({
-            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            template: `<m-datefields v-model="value"></m-datefields>`,
             data: {
                 value: dateMoment
             },
@@ -117,13 +132,15 @@ describe('date-fields', () => {
                 Vue.nextTick(() => {
                     Vue.nextTick(() => {
                         expect(dateMoment instanceof Date).toBeFalsy();
+
+                        done();
                     });
                 });
             }
         }).$mount();
 
         new Vue({
-            template: `<m-date-fields v-model="value"></m-date-fields>`,
+            template: `<m-datefields v-model="value"></m-datefields>`,
             data: {
                 value: dateDate
             },
@@ -131,15 +148,17 @@ describe('date-fields', () => {
                 Vue.nextTick(() => {
                     Vue.nextTick(() => {
                         expect(dateDate instanceof Date).toBeTruthy();
+
+                        done();
                     });
                 });
             }
         }).$mount();
     });
 
-    it('disabled prop', () => {
+    it('disabled prop', done => {
         new Vue({
-            template: `<m-date-fields></m-date-fields>`,
+            template: `<m-datefields></m-datefields>`,
             mounted() {
                 let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
                 let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
@@ -151,7 +170,7 @@ describe('date-fields', () => {
         }).$mount();
 
         new Vue({
-            template: `<m-date-fields :disabled="disabled"></m-date-fields>`,
+            template: `<m-datefields :disabled="disabled"></m-datefields>`,
             data: {
                 disabled: false
             },
@@ -174,15 +193,17 @@ describe('date-fields', () => {
                         expect(year.disabled).toBeFalsy();
                         expect(month.disabled).toBeFalsy();
                         expect(date.disabled).toBeFalsy();
+
+                        done();
                     });
                 });
             }
         }).$mount();
     });
 
-    it('waiting prop', () => {
+    it('waiting prop', done => {
         new Vue({
-            template: `<m-date-fields></m-date-fields>`,
+            template: `<m-datefields></m-datefields>`,
             mounted() {
                 let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
                 let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
@@ -197,7 +218,7 @@ describe('date-fields', () => {
         }).$mount();
 
         new Vue({
-            template: `<m-date-fields :waiting="waiting"></m-date-fields>`,
+            template: `<m-datefields :waiting="waiting"></m-datefields>`,
             data: {
                 waiting: false
             },
@@ -223,15 +244,17 @@ describe('date-fields', () => {
                         expect(month.disabled).toBeFalsy();
                         expect(date.disabled).toBeFalsy();
                         expect(this.$el.querySelector('.' + SPINNER_CSS)).toBeNull();
+
+                        done();
                     });
                 });
             }
         }).$mount();
     });
 
-    it('Remove dropdown', () => {
+    it('Remove dropdown', done => {
         new Vue({
-            template: `<m-date-fields></m-date-fields>`,
+            template: `<m-datefields></m-datefields>`,
             mounted() {
                 let year = this.$el.querySelector('.' + YEAR_DD_CSS) as HTMLInputElement;
                 let month = this.$el.querySelector('.' + MONTH_DD_CSS) as HTMLInputElement;
@@ -243,7 +266,7 @@ describe('date-fields', () => {
         }).$mount();
 
         new Vue({
-            template: `<m-date-fields :year="year" :month="month" :date="date"></m-date-fields>`,
+            template: `<m-datefields :year="year" :month="month" :date="date"></m-datefields>`,
             data: {
                 year: true,
                 month: true,
@@ -277,6 +300,8 @@ describe('date-fields', () => {
                                 expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
                                 expect(this.$el.querySelector('.' + MONTH_DD_CSS)).toBeNull();
                                 expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
+
+                                done();
                             });
                         });
                     });
@@ -285,11 +310,11 @@ describe('date-fields', () => {
         }).$mount();
     });
 
-    it('minYear prop', () => {
+    it('minYear prop', done => {
         let date = moment({ year: 2000, month: 0, date: 1 });
 
         let vm = new Vue({
-            template: `<m-date-fields v-model="date" :minYear="min"></m-date-fields>`,
+            template: `<m-datefields v-model="date" :minYear="min"></m-datefields>`,
             data: {
                 date: date,
                 min: 2000
@@ -304,6 +329,8 @@ describe('date-fields', () => {
                         Vue.nextTick(() => {
                             Vue.nextTick(() => {
                                 expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
+
+                                done();
                             });
                         });
                     });
@@ -312,11 +339,11 @@ describe('date-fields', () => {
         }).$mount();
     });
 
-    it('maxYear prop', () => {
+    it('maxYear prop', done => {
         let date = moment({ year: 1999, month: 11, date: 31 });
 
         let vm = new Vue({
-            template: `<m-date-fields v-model="date" :maxYear="max"></m-date-fields>`,
+            template: `<m-datefields v-model="date" :maxYear="max"></m-datefields>`,
             data: {
                 date: date,
                 max: 1999
@@ -331,6 +358,8 @@ describe('date-fields', () => {
                         Vue.nextTick(() => {
                             Vue.nextTick(() => {
                                 expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
+
+                                done();
                             });
                         });
                     });

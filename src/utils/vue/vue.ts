@@ -4,6 +4,7 @@ import { HttpService } from '../http/http';
 import { MediaQueries } from '../media-queries/media-queries';
 import { Modul } from '../modul/modul';
 import { ConfirmFunction } from '../modal/confirm';
+import { AlertFunction } from '../modal/alert';
 
 export class ModulVue extends Vue {
     public $i18n: Messages;
@@ -11,6 +12,7 @@ export class ModulVue extends Vue {
     public $mq: MediaQueries;
     public $modul: Modul;
     public $confirm: ConfirmFunction;
+    public $alert: AlertFunction;
 
     protected getParent<T extends Vue>(test: (obj: Vue) => boolean): T | undefined {
         let p: Vue = this.$parent;

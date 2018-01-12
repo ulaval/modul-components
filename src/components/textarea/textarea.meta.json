@@ -1,6 +1,6 @@
 {
-    "tag": "m-step",
-    "name": "m-step-meta:name",
+    "tag": "m-textarea",
+    "name": "m-textarea-meta:name",
     "production": false,
     "attributes": {
         "maxlength": {
@@ -53,6 +53,6 @@
             "type": "string"
         }
     },
-    "overview": "step.overview",
-    "preview": "step.preview"
+    "overview": "textarea.overview",
+    "preview": "textarea.preview"
 }

@@ -8,7 +8,7 @@
     vertical-align: middle;
     font-size: 100%;
     border-radius: 4px;
-    padding: 12px $m-padding 10px $m-padding;
+    padding: 12px $m-padding 10px $m-padding; // Magic number
     font-weight: $m-font-weight--bold;
 
     @include m-button();
