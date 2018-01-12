@@ -65,7 +65,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(CarouselPlugin);
         Vue.use(CarouselItemPlugin);
         Vue.use(CheckboxPlugin);
-        Vue.use(DateFieldsPlugin);
+        Vue.use(DatefieldsPlugin);
         Vue.use(DatepickerPlugin);
         Vue.use(DialogPlugin);
         Vue.use(DropdownPlugin);
