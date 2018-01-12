@@ -1,57 +1,64 @@
 @import 'abstracts/variables';
 
 .m-list-item {
+    transition: color 0.3s ease;
     position: relative;
     list-style: none;
-    border-bottom: 2px solid $m-color--border;
-    transition: color 0.3s ease;
-    background-color: $m-color--white;
-    transform-style: preserve-3d;
-    padding: $m-padding;
-    word-break: break-all;
+    padding-right: 0;
+    padding-left: 0;
 
-    @media (max-width: $m-mq--max--s) {
-        padding-left: 0;
-        padding-right: 0;
+    @media (min-width: $m-mq--min--s) {
+        padding-right: $m-padding;
+        padding-left: $m-padding;
     }
 
-    &__content {
-        .m--has-icon & {
-            padding-right: $m-touch-size;
-        }
-
-        .m--has-slot & {
-            flex: 1;
-            padding-right: $m-padding;
-        }
+    + .m-list-item {
+        padding-top: $m-padding;
     }
 
-    &__icon {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 0;
-        width: $m-touch-size;
+    &:not(:last-child) {
+        border-bottom: $m-border-width solid $m-color--border;
+        padding-bottom: $m-padding;
     }
 
-    // &.m--is-disabled {
-    //     color: rgba($m-color--grey-darker, 0.6);
-    //     background-color: $m-color--grey-lightest;
-    //     cursor: not-allowed;
-    // }
+    &.m--is-disabled {
+        color: $m-color--disabled;
+        cursor: not-allowed;
+    }
 
-    &.m--has-slot {
+    &.m--has-trigger {
         display: flex;
         align-items: center;
     }
 
     &.m--is-waiting {
-        // color: $m-color--grey-darker;
         cursor: wait;
     }
 
-    &.m--is-full-lenght {
+    &.m--is-full-width {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    &.m--has-icon,
+    &.m--has-menu,
+    &.m--is-waiting {
+        .m-list-item {
+            &__content {
+                padding-right: $m-touch-size;
+            }
+
+            &__icon {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                width: $m-touch-size;
+            }
+        }
+    }
+
+    &__content {
+        flex: 1 1 auto;
     }
 }
