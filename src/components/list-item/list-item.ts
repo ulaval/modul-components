@@ -30,14 +30,6 @@ export class MListItem extends Vue {
         return this.iconName ? true : false;
     }
 
-    private get hasSlot() {
-        return this.$slots['trigger'] ? true : false;
-    }
-
-    private get hasMenu() {
-        return this.$slots['menu'] ? true : false;
-    }
-
     private get isWaiting() {
         return this.waiting && !this.disabled;
     }
