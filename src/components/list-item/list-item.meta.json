@@ -16,6 +16,10 @@
         "waiting": {
             "type": "boolean",
             "default": false
+        },
+        "fullWidth": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "list-item.overview",

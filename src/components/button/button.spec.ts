@@ -225,19 +225,19 @@ describe('button', () => {
         });
     });
 
-    describe('more information', () => {
-        const moreInfoClass: string = '.m-button__more-info';
+    describe('precision slot', () => {
+        const precision: string = '.m-button__precision';
 
         it('with', () => {
             let vm = new Vue({
-                template: `<m-button><template slot="more-info">Label</template></m-button>`
+                template: `<m-button><template slot="precision">Label</template></m-button>`
             }).$mount();
 
-            expect(vm.$el.querySelector(moreInfoClass)).toBeTruthy();
+            expect(vm.$el.querySelector(precision)).toBeTruthy();
         });
 
         it('without', () => {
-            expect(button.$el.querySelector(moreInfoClass)).toBeFalsy();
+            expect(button.$el.querySelector(precision)).toBeFalsy();
         });
     });
 

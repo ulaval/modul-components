@@ -40,7 +40,7 @@ describe('panel', () => {
         expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
         expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
         expect(panel.$el.classList.contains(SKIN_DARKER_CSS)).toBeFalsy();
-        expect(panel.$el.classList.contains(SHADOW_CSS)).toBeTruthy();
+        expect(panel.$el.classList.contains(SHADOW_CSS)).toBeFalsy();
         expect(panel.$el.classList.contains(BORDER_CSS)).toBeTruthy();
     });
 
@@ -73,11 +73,11 @@ describe('panel', () => {
     });
 
     it('shadow prop', done => {
-        expect(panel.$el.classList.contains(SHADOW_CSS)).toBeTruthy();
+        expect(panel.$el.classList.contains(SHADOW_CSS)).toBeFalsy();
 
-        panel.shadow = false;
+        panel.shadow = true;
         Vue.nextTick(() => {
-            expect(panel.$el.classList.contains(SHADOW_CSS)).toBeFalsy();
+            expect(panel.$el.classList.contains(SHADOW_CSS)).toBeTruthy();
 
             done();
         });

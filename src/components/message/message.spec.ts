@@ -216,11 +216,12 @@ describe('message', () => {
         beforeEach(() => {
             vm = new Vue({
                 data: {
-                    isVisible: true
+                    isVisible: true,
+                    closeButton: false
                 },
                 template: `
             <div>
-                <m-message ref="a" :visible="isVisible">Consequat ut proident est ullamco consequat ullamco.</m-message>
+                <m-message ref="a" :visible="isVisible" :close-button="closeButton">Consequat ut proident est ullamco consequat ullamco.</m-message>
             </div>`
             }).$mount();
         });
@@ -243,15 +244,15 @@ describe('message', () => {
         });
 
         it('with close no sync', done => {
-            expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+            expect(vm.$el.querySelector('.m-message')).toBeFalsy();
 
+            (vm as any).closeButton = true;
             let closeButton: HTMLElement = vm.$el.querySelector(ICON_BUTTON_CLASS) as HTMLElement;
             expect(closeButton).toBeTruthy();
             closeButton.click();
 
             Vue.nextTick(() => {
                 expect(vm.$el.querySelector('.m-message')).toBeTruthy();
-
                 done();
             });
         });
@@ -264,7 +265,7 @@ describe('message', () => {
             },
             template: `
             <div>
-                <m-message ref="a" :visible.sync="isVisible">Consequat ut proident est ullamco consequat ullamco.</m-message>
+                <m-message ref="a" :visible.sync="isVisible" :close-button="true">Consequat ut proident est ullamco consequat ullamco.</m-message>
             </div>`
         }).$mount();
 

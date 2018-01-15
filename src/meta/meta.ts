@@ -67,7 +67,6 @@ export class Meta {
     private componentMeta: ComponentMetaMap = {};
     private componentMetaForProd: ComponentMetaMap = {};
     private categories: CategoryComponentMap = {};
-    private categoriesForProd: CategoryComponentMap = {};
 
     constructor() {
         components.forEach(componentTag => {
@@ -93,16 +92,6 @@ export class Meta {
             }
             this.componentMeta[tag].category = category;
             categoryComponents.push(this.componentMeta[tag]);
-
-            if (this.componentMeta[tag].production) {
-                let categoryComponentsForProd: ComponentMeta[] = this.categoriesForProd[category];
-                this.componentMetaForProd[tag] = this.componentMeta[tag];
-                if (!categoryComponentsForProd) {
-                    categoryComponentsForProd = [];
-                    this.categoriesForProd[category] = categoryComponentsForProd;
-                }
-                categoryComponentsForProd.push(this.componentMeta[tag]);
-            }
         }
     }
 
@@ -119,19 +108,20 @@ export class Meta {
     }
 
     public getCategories(): string[] {
-        return Object.keys(this.categories).filter(key => this.categories.hasOwnProperty(key));
+        let categories: string[] = Object.keys(this.categories).filter(key => this.categories.hasOwnProperty(key));
+        if (!(process.env && (process.env.NODE_ENV as any).dev)) {
+            categories = categories.filter(category => this.categories[category].some(component => component.production === true));
+        }
+        return categories;
     }
 
     public getMetaByTag(tag: string): ComponentMeta {
         return this.componentMeta[tag];
     }
 
-    public getMetaByCategory(category: string, env): ComponentMeta[] {
-        if (env && env.dev) {
-            return this.categories[category];
-        } else {
-            return this.categoriesForProd[category];
-        }
+    public getMetaByCategory(category: string): ComponentMeta[] {
+        return process.env && (process.env.NODE_ENV as any).dev ? this.categories[category] :
+            this.categories[category].filter(component => component.production === true);
     }
 
     public getComponentAttributes(componentMeta: ComponentMeta): string[] {

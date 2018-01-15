@@ -135,11 +135,11 @@ describe('icon-button', () => {
 
     it('icon-size prop', done => {
         iconButton = new MIconButton().$mount();
-        expect(iconButton.$el.style.fontSize).toEqual('16px');
+        expect(iconButton.$el.style.fontSize).toEqual('20px');
 
-        iconButton.iconSize = '20px';
+        iconButton.iconSize = '14px';
         Vue.nextTick(() => {
-            expect(iconButton.$el.style.fontSize).toEqual('20px');
+            expect(iconButton.$el.style.fontSize).toEqual('14px');
 
             done();
         });
