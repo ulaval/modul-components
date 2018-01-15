@@ -1,9 +1,9 @@
 <li class="m-list-item"
     :class="{ 'm--is-disabled': disabled,
               'm--is-waiting': isWaiting,
-              'm--has-trigger': hasTriggerSlot,
+              'm--has-trigger': $slots['trigger'],
               'm--has-icon': hasIcon,
-              'm--has-menu': hasMenuSlot,
+              'm--has-menu': $slots['menu'],
               'm--is-full-width': fullWidth }">
     <div class="m-list-item__content">
         <slot></slot>
@@ -16,11 +16,11 @@
             </m-icon-button>
         </div>
 
-        <div class="m-list-item__icon" v-if="hasMenuSlot && !hasIcon && !isWaiting">
+        <div class="m-list-item__icon" v-if="$slots['menu'] && !hasIcon && !isWaiting">
             <slot name="menu"></slot>
         </div>
 
-        <div class="m-list-item__trigger" v-if="hasTriggerSlot && !hasIcon && !isWaiting">
+        <div class="m-list-item__trigger" v-if="$slots['trigger'] && !hasIcon && !isWaiting">
             <slot name="trigger"></slot>
         </div>
 
