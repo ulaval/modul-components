@@ -1,5 +1,5 @@
 import { ModulVue } from '../../utils/vue/vue';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './steppers.html?style=./steppers.scss';
@@ -14,10 +14,12 @@ import { ElementQueries } from '../../mixins/element-queries/element-queries';
 export class MSteppers extends BaseSteppers {
 
     private isAnimActive: boolean = false;
+    private overflowWrapperWidth: string;
 
     public setLineWidth(): void {
         let defaultLineEL: HTMLElement = this.$refs.defaultLine as HTMLElement;
         let selectedLineEL: HTMLElement = this.$refs.selectedLine as HTMLElement;
+        let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
         let leftSpacing: number;
         let rightSpacing: number;
         this.$children.forEach((child, index, arr) => {
@@ -28,7 +30,7 @@ export class MSteppers extends BaseSteppers {
                 rightSpacing = child.$el.clientWidth / 2;
             }
             if (child.$props.state == MSteppersItemState.InProgress || child.$props.state == MSteppersItemState.Completed) {
-                let parentWidth = this.$el.clientWidth;
+                let parentWidth = wrapItem.clientWidth;
                 let childWidth = child.$el.clientWidth;
                 let childOffset = child.$el.offsetLeft;
                 let lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;
@@ -52,7 +54,29 @@ export class MSteppers extends BaseSteppers {
 
     protected mounted() {
         this.setLineWidth();
+        this.setMinWidth();
+        this.setHiddenHeight();
         this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
+    }
+
+    private setMinWidth() {
+        let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
+        let childsWidth: number = 0;
+        this.$children.forEach((child, index, arr) => {
+            childsWidth += child.$el.clientWidth;
+        });
+        let minWidth: number;
+        let numberOfChild = this.$children.length;
+        minWidth = childsWidth + ((numberOfChild - 1) * 60);
+        wrapItem.style.minWidth = minWidth + 'px';
+    }
+
+    private setHiddenHeight() {
+        let overflowWrapper: HTMLElement = this.$refs.overflowWrapper as HTMLElement;
+        let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
+        let initHeight = wrapItem.clientHeight;
+        this.$el.style.height = initHeight + 'px';
+        overflowWrapper.style.height = initHeight + 40 + 'px';
     }
 }
 
