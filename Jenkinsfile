@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 pipeline {
     agent any
 
@@ -17,11 +19,10 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Build and test') {
             agent {
                 docker {
-                    image 'node:8.2-alpine'
-                    reuseNode true
+                    image 'node:9.4.0'
                 }
             }
             steps {
@@ -36,16 +37,7 @@ pipeline {
 
                 echo 'Building...'
                 sh 'npm run buildWebpack'
-            }
-        }
-        stage('Test') {
-            agent {
-                docker {
-                    image 'node:8.2-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
+
                 echo 'Testing...'
                 sh 'npm run unit -- --single-run --junitReport'
             }
@@ -53,9 +45,6 @@ pipeline {
     }
 
     post {
-        always {
-            sh 'svn status --show-updates'
-        }
         changed {
             echo 'Build status changed'
             step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
