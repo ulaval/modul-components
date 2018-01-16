@@ -19,10 +19,10 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Build and test') {
             agent {
                 docker {
-                    image 'node:8.2-alpine'
+                    image 'ubuntu'
                     reuseNode true
                 }
             }
@@ -38,16 +38,7 @@ pipeline {
 
                 echo 'Building...'
                 sh 'npm run buildWebpack'
-            }
-        }
-        stage('Test') {
-            agent {
-                docker {
-                    image 'node:8.2-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
+
                 echo 'Testing...'
                 sh 'npm run unit -- --single-run --junitReport'
             }
