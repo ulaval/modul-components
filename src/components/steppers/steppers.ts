@@ -53,22 +53,26 @@ export class MSteppers extends BaseSteppers {
     }
 
     protected mounted() {
-        this.setLineWidth();
         this.setMinWidth();
         this.setHiddenHeight();
+        this.setLineWidth();
         this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
     }
 
     private setMinWidth() {
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
+        wrapItem.style.opacity = '0';
+        wrapItem.style.display = 'block';
         let childsWidth: number = 0;
         this.$children.forEach((child, index, arr) => {
             childsWidth += child.$el.clientWidth;
         });
         let minWidth: number;
         let numberOfChild = this.$children.length;
-        minWidth = childsWidth + ((numberOfChild - 1) * 60);
+        minWidth = childsWidth + ((numberOfChild - 1) * 40);
         wrapItem.style.minWidth = minWidth + 'px';
+        wrapItem.style.display = 'flex';
+        wrapItem.style.opacity = '1';
     }
 
     private setHiddenHeight() {
