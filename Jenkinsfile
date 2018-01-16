@@ -22,8 +22,7 @@ pipeline {
         stage('Build and test') {
             agent {
                 docker {
-                    image 'wernight/phantomjs'
-                    reuseNode true
+                    image 'node:9.4.0'
                 }
             }
             steps {
