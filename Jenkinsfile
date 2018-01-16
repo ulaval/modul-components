@@ -20,11 +20,18 @@ pipeline {
 
     stages {
         stage('Build and test') {
+            when {
+                expression {
+                    env.BRANCH_NAME=='master' || env.BRANCH_NAME=='develop'
+                }
+            }
+
             agent {
                 docker {
                     image 'node:9.4.0'
                 }
             }
+
             steps {
                 echo 'Building...'
                 sh 'pwd'
