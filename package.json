@@ -14,6 +14,7 @@
     "scssToDist": "copyfiles -u 1 \"./src/styles/**/*.scss\" dist && copyfiles -u 1 \"./src/styles/**/*.css\" dist",
     "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
     "unit": "karma start conf/karma.conf.js --browsers PhantomJS",
+    "unitMeta": "node ./tests/meta/meta",
     "unitChrome": "karma start conf/karma.conf.js --browsers Chrome",
     "unitall": "karma start conf/karma.conf.js --single-run --junitReport",
     "e2e": "node tests/e2e/index.js",
