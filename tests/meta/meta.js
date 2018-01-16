@@ -1,6 +1,7 @@
 let fs = require('fs');
 
-const propRegExp = new RegExp('@Prop\\(([{}=>:.,|\'\\w\\d\\s]*)\\)\\s*public\\s*(\\w*):\\s*(\\w*);', 'g');
+let start = Date.now();
+const propRegExp = new RegExp('@Prop\\(([\\s\\S]*?)\\)\\s*public\\s*(\\w*):\\s*(\\w*);', 'g');
 
 readFolders('./src/components', (folder, done) => {
     let errors = [];
@@ -11,7 +12,6 @@ readFolders('./src/components', (folder, done) => {
             if (!meta.attributes) {
                 errors.push(`meta has no attributes`);
             } else {
-
                 let prod = undefined;
                 do {
                     prop = propRegExp.exec(source);
@@ -44,6 +44,9 @@ readFolders('./src/components', (folder, done) => {
 function readFolders(folder, cb) {
     let exitCode = 0;
     let toComplete = {};
+    let failed = 0;
+    let total = 0;
+
     fs.readdir(folder, (err, files) => {
         if (err) {
             throw err;
@@ -51,18 +54,30 @@ function readFolders(folder, cb) {
         files.forEach(file => {
             if (fs.statSync(folder + '/' + file).isDirectory()) {
                 toComplete[file] = false;
+                total++;
 
                 let done = errors => {
                     if (errors.length === 0) {
                         logSuccess(file);
                     } else {
                         exitCode = 1;
+                        failed++;
                         logError(file);
                         errors.forEach(error => logErrorIndent(error));
                     }
                     console.log();
                     delete toComplete[file];
                     if (Object.keys(toComplete).length === 0) {
+                        let end = Date.now();
+
+                        console.log(`Processed ${total} files in ${(end - start) / 1000} secs`);
+                        let status = `TOTAL: ${failed} FAILED, ${total - failed} SUCCESS`;
+                        if (failed === 0) {
+                            internalLog(false, 32, status);
+                        } else {
+                            internalLog(false, 31, status);
+                        }
+                        console.log();
                         process.exit(exitCode);
                     }
                 };
