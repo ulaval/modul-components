@@ -2,6 +2,8 @@ let fs = require('fs');
 
 let start = Date.now();
 const propRegExp = new RegExp('@Prop\\(([\\s\\S]*?)\\)\\s*public\\s*(\\w*):\\s*(\\w*);', 'g');
+const mixinsRegExp = new RegExp('mixins:\\s*\\[([\\s\\S]*?)\\]', 'g');
+const mixinNameRegExp = new RegExp('[\\w\\d]+', 'g');
 
 readFolders('./src/components', (folder, done) => {
     let errors = [];
@@ -9,26 +11,8 @@ readFolders('./src/components', (folder, done) => {
         read(`./src/components/${folder}/${folder}.meta.json`, rawMeta => {
             let meta = JSON.parse(rawMeta);
 
-            if (!meta.attributes) {
-                errors.push(`meta has no attributes`);
-            } else {
-                let prod = undefined;
-                do {
-                    prop = propRegExp.exec(source);
-                    if (prop) {
-                        if (meta.attributes[prop[2]] === undefined) {
-                            errors.push(`${prop[2]} not found in meta`);
-                        } else {
-                            delete meta.attributes[prop[2]];
-                        }
-                    }
-                }
-                while (prop);
-
-                Object.keys(meta.attributes).forEach(attribute => {
-                    errors.push(`${attribute} is not a component property`);
-                })
-            }
+            validateMeta(meta, source, errors);
+            validateMixins(meta, source, errors);
 
             done(errors);
         }, err => {
@@ -40,6 +24,54 @@ readFolders('./src/components', (folder, done) => {
         done(errors);
     });
 });
+
+function validateMeta(meta, source, errors) {
+    let prop = undefined;
+    do {
+        prop = propRegExp.exec(source);
+        if (prop) {
+            if (meta.attributes && meta.attributes[prop[2]] !== undefined) {
+                delete meta.attributes[prop[2]];
+            } else {
+                errors.push(`Property ${prop[2]} not found in meta`);
+            }
+        }
+    }
+    while (prop);
+
+    if (meta.attributes) {
+        Object.keys(meta.attributes).forEach(attribute => {
+            errors.push(`Property ${attribute} is not used by the component`);
+        });
+    }
+}
+
+function validateMixins(meta, source, errors) {
+    meta.mixinsObj = {}; // used as map for validation
+    if (meta.mixins) {
+        meta.mixins.forEach(mixin => meta.mixinsObj[mixin] = true);
+    }
+
+    let match = mixinsRegExp.exec(source);
+    if (match) {
+        let mixin = undefined;
+        do {
+            mixin = mixinNameRegExp.exec(match[1]);
+            if (mixin) {
+                if (meta.mixinsObj[mixin] === undefined) {
+                    errors.push(`Mixin ${mixin} not found in meta`);
+                } else {
+                    delete meta.mixinsObj[mixin];
+                }
+            }
+        }
+        while (mixin);
+    }
+
+    Object.keys(meta.mixinsObj).forEach(mixin => {
+        errors.push(`Mixin ${mixin} is not used by the component`);
+    });
+}
 
 function readFolders(folder, cb) {
     let exitCode = 0;
@@ -72,11 +104,8 @@ function readFolders(folder, cb) {
 
                         console.log(`Processed ${total} files in ${(end - start) / 1000} secs`);
                         let status = `TOTAL: ${failed} FAILED, ${total - failed} SUCCESS`;
-                        if (failed === 0) {
-                            internalLog(false, 32, status);
-                        } else {
-                            internalLog(false, 31, status);
-                        }
+                        internalLog(false, failed === 0 ? 32 : 31, status);
+
                         console.log();
                         process.exit(exitCode);
                     }

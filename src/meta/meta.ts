@@ -48,6 +48,7 @@ export interface ComponentMeta {
     tag: string;
     name?: string;
     attributes?: ComponentAttributes;
+    mixins?: string[];
     production?: boolean;
     methods?: ComponentMethods;
     overview?: string;
