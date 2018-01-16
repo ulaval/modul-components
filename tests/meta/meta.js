@@ -1,9 +1,10 @@
 let fs = require('fs');
 
 let start = Date.now();
-const propRegExp = new RegExp('@Prop\\(([\\s\\S]*?)\\)\\s*public\\s*(\\w*):\\s*(\\w*);', 'g');
+const propRegExp = new RegExp(`@Prop\\(([\\s\\S]*?)\\)\\s*(?:@Model\\(\\'?[\\w\\d]+\\'?\\)\\s*)?public\\s*(\\w*):\\s*(\\w\\s|.*);`, 'g');
 const mixinsRegExp = new RegExp('mixins:\\s*\\[([\\s\\S]*?)\\]', 'g');
 const mixinNameRegExp = new RegExp('[\\w\\d]+', 'g');
+const defaultValueRegExp = new RegExp('default:\\s*(.*?)[\\s,}]');
 
 readFolders('./src/components', (folder, done) => {
     let errors = [];
@@ -11,7 +12,7 @@ readFolders('./src/components', (folder, done) => {
         read(`./src/components/${folder}/${folder}.meta.json`, rawMeta => {
             let meta = JSON.parse(rawMeta);
 
-            validateMeta(meta, source, errors);
+            validateProps(meta, source, errors);
             validateMixins(meta, source, errors);
 
             done(errors);
@@ -25,12 +26,26 @@ readFolders('./src/components', (folder, done) => {
     });
 });
 
-function validateMeta(meta, source, errors) {
+function validateProps(meta, source, errors) {
     let prop = undefined;
     do {
         prop = propRegExp.exec(source);
         if (prop) {
             if (meta.attributes && meta.attributes[prop[2]] !== undefined) {
+                let attributeMeta = meta.attributes[prop[2]];
+                if (attributeMeta.type !== prop[3]) {
+                    errors.push(`Property ${prop[2]} should be of type ${prop[3]}, not ${attributeMeta.type}`);
+                }
+                if (prop[1]) {
+                    let defaultValueMatch = defaultValueRegExp.exec(prop[1]);
+                    let defaultValue = defaultValueMatch ? defaultValueMatch[1] : undefined;
+                    if (defaultValue && defaultValue[0] === '\'' && defaultValue[defaultValue.length - 1] === '\'') {
+                        defaultValue = defaultValue.slice(1, -1);
+                    }
+                    if (defaultValue !== 'function()' && String(attributeMeta.default) !== String(defaultValue)) {
+                        errors.push(`Property ${prop[2]} default value should be ${defaultValue}, not ${attributeMeta.default}`);
+                    }
+                }
                 delete meta.attributes[prop[2]];
             } else {
                 errors.push(`Property ${prop[2]} not found in meta`);
