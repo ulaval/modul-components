@@ -56,6 +56,11 @@ export class MSteppers extends BaseSteppers {
         this.setMinWidth();
         this.setHiddenHeight();
         this.setLineWidth();
+        this.$children.forEach((child, index, arr) => {
+            if (child.$props.state == MSteppersItemState.InProgress) {
+                this.scrollToElement(child.$el);
+            }
+        });
         this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
     }
 
@@ -69,7 +74,7 @@ export class MSteppers extends BaseSteppers {
         });
         let minWidth: number;
         let numberOfChild = this.$children.length;
-        minWidth = childsWidth + ((numberOfChild - 1) * 40);
+        minWidth = childsWidth + ((numberOfChild - 1) * 32);
         wrapItem.style.minWidth = minWidth + 'px';
         wrapItem.style.display = 'flex';
         wrapItem.style.opacity = '1';
@@ -81,6 +86,10 @@ export class MSteppers extends BaseSteppers {
         let initHeight = wrapItem.clientHeight;
         this.$el.style.height = initHeight + 'px';
         overflowWrapper.style.height = initHeight + 40 + 'px';
+    }
+
+    private scrollToElement(element) {
+        (this.$refs.overflowWrapper as HTMLElement).scrollLeft = element.offsetLeft - ((this.$el.clientWidth / 2) - (element.clientWidth / 2));
     }
 }
 
