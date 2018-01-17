@@ -27,7 +27,7 @@
         &:not(.m--no-underline) {
             .m-link__text {
                 transition: box-shadow $m-transition-duration--s ease;
-                box-shadow: 0 0 transparent;
+                box-shadow: 0 0 rgba($m-color--interactive, 0);
             }
 
             &:not(.m--is-unvisited):visited {

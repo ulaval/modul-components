@@ -9,7 +9,7 @@
     &::-webkit-scrollbar {
         width: $m-scrollbar-width;
         height: $m-scrollbar-width;
-        background: transparent;
+        background: none;
 
         &-track-piece {
             background: $m-color--scrollbar-light;
@@ -163,7 +163,7 @@
             height: 0;
             border-style: solid;
             border-width: 3px 0 3px 4px;
-            border-color: transparent transparent transparent $m-color--black-grey-light;
+            border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $m-color--black-grey-light;
         }
     }
 }
@@ -291,7 +291,7 @@
     }
 
     $m-size: $m-size/2;
-    $m-transparent: transparent;
+    $m-transparent: rgba(0, 0, 0 , 0);
     $m-opposite: (top:bottom, right:left, left:right, bottom:top);
 
     content: '';
