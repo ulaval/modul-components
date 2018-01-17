@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 pipeline {
     agent any
 
@@ -18,44 +20,49 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
-                docker {
-                    image 'node:8.2-alpine'
-                    reuseNode true
+            when {
+                expression {
+                    env.BRANCH_NAME=='master' || env.BRANCH_NAME=='develop'
                 }
             }
+
+            agent {
+                docker {
+                    image 'node:9.4.0'
+                }
+            }
+
             steps {
-                echo 'Building...'
-                sh 'pwd'
-                echo 'Clean up...'
-                sh 'rm -rf dist'
-                sh 'rm -rf node_modules'
-
-                echo 'Initializing npm...'
                 sh 'npm install'
-
-                echo 'Building...'
                 sh 'npm run buildWebpack'
+                // Probablement une étape de publish ici.
             }
         }
+    }
+
+    stages {
         stage('Test') {
-            agent {
-                docker {
-                    image 'node:8.2-alpine'
-                    reuseNode true
+            when {
+                expression {
+                    env.BRANCH_NAME=='master' || env.BRANCH_NAME=='develop'
                 }
             }
+
+            agent {
+                docker {
+                    image 'node:9.4.0'
+                }
+            }
+
             steps {
-                echo 'Testing...'
+                sh 'npm install'
+                sh 'npm run buildWebpack'
                 sh 'npm run unit -- --single-run --junitReport'
             }
         }
     }
 
     post {
-        always {
-            sh 'svn status --show-updates'
-        }
         changed {
             echo 'Build status changed'
             step([$class: 'Mailer', recipients: ['martin.simard@dti.ulaval.ca', emailextrecipients([[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
