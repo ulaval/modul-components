@@ -20,6 +20,14 @@
         "fullWidth": {
             "type": "boolean",
             "default": false
+        },
+        "borderTop": {
+            "type": "boolean",
+            "default": false
+        },
+        "borderBottom": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "list-item.overview",

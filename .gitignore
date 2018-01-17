@@ -5,3 +5,6 @@ npm-debug\.log
 tests/reports
 %temp%/
 *.tgz
+index.html
+app.js
+app.js.map

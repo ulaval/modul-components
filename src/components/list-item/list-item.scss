@@ -8,17 +8,23 @@
     padding-left: 0;
 
     @media (min-width: $m-mq--min--s) {
-        padding-right: $m-padding;
-        padding-left: $m-padding;
+        padding-right: $m-spacing;
+        padding-left: $m-spacing;
     }
 
     + .m-list-item {
-        padding-top: $m-padding;
+        padding-top: $m-spacing;
     }
 
-    &:not(:last-child) {
+    &:not(:last-child),
+    &.m--has-border-bottom:last-child {
         border-bottom: $m-border-width solid $m-color--border;
-        padding-bottom: $m-padding;
+        padding-bottom: $m-spacing;
+    }
+
+    &.m--has-border-top:first-child {
+        border-top: $m-border-width solid $m-color--border;
+        padding-top: $m-spacing;
     }
 
     &.m--is-disabled {

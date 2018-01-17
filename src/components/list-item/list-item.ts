@@ -21,6 +21,10 @@ export class MListItem extends Vue {
     public waiting: boolean;
     @Prop()
     public fullWidth: boolean;
+    @Prop({ default: false })
+    public borderTop: boolean;
+    @Prop({ default: false })
+    public borderBottom: boolean;
 
     private click(event): void {
         this.$emit('click', event);
