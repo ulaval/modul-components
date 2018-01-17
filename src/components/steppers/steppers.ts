@@ -17,6 +17,8 @@ export class MSteppers extends BaseSteppers {
     private overflowWrapperWidth: string;
 
     public setLineWidth(): void {
+        console.log('in');
+
         let defaultLineEL: HTMLElement = this.$refs.defaultLine as HTMLElement;
         let selectedLineEL: HTMLElement = this.$refs.selectedLine as HTMLElement;
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
@@ -37,6 +39,9 @@ export class MSteppers extends BaseSteppers {
                 selectedLineEL.style.width = lineWidth + '%';
                 selectedLineEL.style.left = leftSpacing + 'px';
             }
+            if (child.$props.state == MSteppersItemState.InProgress) {
+                this.scrollElement(child.$el);
+            }
             defaultLineEL.style.left = leftSpacing + 'px';
             defaultLineEL.style.right = rightSpacing + 'px';
         });
@@ -56,11 +61,11 @@ export class MSteppers extends BaseSteppers {
         this.setMinWidth();
         this.setHiddenHeight();
         this.setLineWidth();
-        this.$children.forEach((child, index, arr) => {
-            if (child.$props.state == MSteppersItemState.InProgress) {
-                this.scrollToElement(child.$el);
-            }
-        });
+        // this.$children.forEach((child, index, arr) => {
+        //     if (child.$props.state == MSteppersItemState.InProgress) {
+        //         this.centeringElement(child.$el);
+        //     }
+        // });
         this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
     }
 
@@ -88,8 +93,12 @@ export class MSteppers extends BaseSteppers {
         overflowWrapper.style.height = initHeight + 40 + 'px';
     }
 
-    private scrollToElement(element) {
+    private centeringElement(element) {
         (this.$refs.overflowWrapper as HTMLElement).scrollLeft = element.offsetLeft - ((this.$el.clientWidth / 2) - (element.clientWidth / 2));
+    }
+
+    private scrollElement(element) {
+        (this.$refs.overflowWrapper as HTMLElement).scrollLeft = element.offsetLeft;
     }
 }
 
