@@ -17,8 +17,6 @@ export class MSteppers extends BaseSteppers {
     private overflowWrapperWidth: string;
 
     public setLineWidth(): void {
-        console.log('in');
-
         let defaultLineEL: HTMLElement = this.$refs.defaultLine as HTMLElement;
         let selectedLineEL: HTMLElement = this.$refs.selectedLine as HTMLElement;
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
