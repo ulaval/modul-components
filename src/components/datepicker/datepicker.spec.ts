@@ -4,8 +4,8 @@ import DatepickerPlugin, { MDatepicker } from './datepicker';
 import * as moment from 'moment';
 
 const DATEPICKER_CSS: string = 'm-datepicker';
-const TEXT_FIELD_CSS: string = 'm-text-field';
-const TEXT_FIELD_INPUT_CSS: string = 'm-text-field__input';
+const TEXT_FIELD_CSS: string = 'm-textfield';
+const TEXT_FIELD_INPUT_CSS: string = 'm-textfield__input';
 const VALIDATION_MESSAGE_TEXT_CSS: string = 'm-validation-message__text';
 
 let datepicker: MDatepicker;
@@ -33,7 +33,7 @@ describe('datepicker', () => {
             },
             mounted() {
                 let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
-                expect(input.value).toEqual(date.format('DD/MM/YYYY'));
+                expect(input.value).toEqual(date.format('YYYY/MM/DD'));
             }
         }).$mount();
 

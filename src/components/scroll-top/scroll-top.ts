@@ -6,8 +6,7 @@ import uuid from '../../utils/uuid/uuid';
 import WithRender from './scroll-top.html?style=./scroll-top.scss';
 import { SCROLL_TOP_NAME } from '../component-names';
 // import { Portal, PortalMixin } from '../../mixins/portal/portal';
-import ScrollTo from '../../directives/scroll-to/scroll-to-lib';
-import { ScrollToDuration } from '../../directives/scroll-to/scroll-to-lib';
+import ScrollTo, { ScrollToDuration } from '../../directives/scroll-to/scroll-to-lib';
 import IconPlugin from '../icon/icon';
 import ButtonPlugin from '../button/button';
 import I18nPlugin from '../i18n/i18n';
@@ -29,9 +28,21 @@ const SCROLL_TOP_ID: string = 'MScrollTop';
     // mixins: [Portal]
 })
 export class MScrollTop extends ModulVue {
-    @Prop({ default: MScrollTopPosition.Fixe })
+    @Prop({
+        default: MScrollTopPosition.Fixe,
+        validator: value =>
+            value == MScrollTopPosition.Fixe ||
+            value == MScrollTopPosition.Relative
+    })
     public position: string;
-    @Prop({ default: ScrollToDuration.Regular })
+    @Prop({
+        default: ScrollToDuration.Regular,
+        validator: value =>
+            value == ScrollToDuration.Regular ||
+            value == ScrollToDuration.Slow ||
+            value == ScrollToDuration.Fast ||
+            value == ScrollToDuration.Null
+    })
     public duration: string;
 
     private scrollBreakPoint: number = window.innerHeight * 1.5;

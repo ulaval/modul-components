@@ -4,9 +4,10 @@ import PanelPlugin, { MPanel, MPanelSkin } from './panel';
 
 const SKIN_LIGHT_CSS: string = 'm--is-skin-light';
 const SKIN_DARK_CSS: string = 'm--is-skin-dark';
-const HAS_HIGHLIGHTING_BORDER_CSS: string = 'm--has-highlighting-Border';
-const NO_SHADOW_CSS: string = 'm--no-shadow';
-const NO_BORDER_CSS: string = 'm--no-border';
+const SKIN_DARKER_CSS: string = 'm--is-skin-darker';
+const HIGHLIGHTED_CSS: string = 'm--is-highlighted';
+const SHADOW_CSS: string = 'm--has-shadow';
+const BORDER_CSS: string = 'm--has-border';
 const NO_PADDING_CSS: string = 'm--no-padding';
 
 let panel: MPanel;
@@ -15,80 +16,85 @@ describe('MPanelSkin', () => {
     it('validates enum', () => {
         expect(MPanelSkin.Light).toEqual('light');
         expect(MPanelSkin.Dark).toEqual('dark');
+        expect(MPanelSkin.Darker).toEqual('darker');
     });
 });
 
 describe('panel', () => {
     beforeEach(() => {
+        spyOn(console, 'error');
+
         Vue.use(PanelPlugin);
         panel = new MPanel().$mount();
     });
 
-    it('css class for panel are not present', () => {
-        expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
-        expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
-        expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
+    afterEach(done => {
+        Vue.nextTick(() => {
+            expect(console.error).not.toHaveBeenCalled();
+
+            done();
+        });
     });
 
-    it('skin prop', () => {
+    it('css class for panel are not present', () => {
+        expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
         expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(SKIN_DARKER_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(SHADOW_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(BORDER_CSS)).toBeTruthy();
+    });
+
+    it('skin prop', done => {
+        expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+        expect(panel.$el.classList.contains(SKIN_DARKER_CSS)).toBeFalsy();
 
         panel.skin = MPanelSkin.Dark;
         Vue.nextTick(() => {
-            expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeTruthy();
             expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
+            expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeTruthy();
+            expect(panel.$el.classList.contains(SKIN_DARKER_CSS)).toBeFalsy();
 
-            panel.skin = MPanelSkin.Light;
+            panel.skin = MPanelSkin.Darker;
             Vue.nextTick(() => {
-                expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
+                expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
                 expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+                expect(panel.$el.classList.contains(SKIN_DARKER_CSS)).toBeTruthy();
+
+                panel.skin = MPanelSkin.Light;
+                Vue.nextTick(() => {
+                    expect(panel.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
+                    expect(panel.$el.classList.contains(SKIN_DARK_CSS)).toBeFalsy();
+                    expect(panel.$el.classList.contains(SKIN_DARKER_CSS)).toBeFalsy();
+
+                    done();
+                });
             });
         });
     });
 
-    it('highlightingBorder prop', () => {
-        expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeTruthy();
+    it('shadow prop', done => {
+        expect(panel.$el.classList.contains(SHADOW_CSS)).toBeFalsy();
 
-        panel.highlightingBorder = false;
+        panel.shadow = true;
         Vue.nextTick(() => {
-            expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeFalsy();
+            expect(panel.$el.classList.contains(SHADOW_CSS)).toBeTruthy();
 
-            panel.highlightingBorder = true;
-            Vue.nextTick(() => {
-                expect(panel.$el.classList.contains(HAS_HIGHLIGHTING_BORDER_CSS)).toBeTruthy();
-            });
+            done();
         });
     });
 
-    it('shadow prop', () => {
-        expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
-
-        panel.shadow = false;
-        Vue.nextTick(() => {
-            expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeTruthy();
-
-            panel.shadow = true;
-            Vue.nextTick(() => {
-                expect(panel.$el.classList.contains(NO_SHADOW_CSS)).toBeFalsy();
-            });
-        });
-    });
-
-    it('border prop', () => {
-        expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
+    it('border prop', done => {
+        expect(panel.$el.classList.contains(BORDER_CSS)).toBeTruthy();
 
         panel.border = false;
         Vue.nextTick(() => {
-            expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeTruthy();
+            expect(panel.$el.classList.contains(BORDER_CSS)).toBeFalsy();
 
-            panel.border = true;
-            Vue.nextTick(() => {
-                expect(panel.$el.classList.contains(NO_BORDER_CSS)).toBeFalsy();
-            });
+            done();
         });
     });
 
-    it('padding prop', () => {
+    it('padding prop', done => {
         let vm = new Vue({
             data: {
                 hasPadding: true
@@ -132,10 +138,12 @@ describe('panel', () => {
             if (footer) {
                 expect(footer.classList.contains(NO_PADDING_CSS)).toBeTruthy();
             }
+
+            done();
         });
     });
 
-    it('header padding prop', () => {
+    it('header padding prop', done => {
         let vm = new Vue({
             data: {
                 hasPadding: true
@@ -163,10 +171,12 @@ describe('panel', () => {
             if (header) {
                 expect(header.classList.contains(NO_PADDING_CSS)).toBeTruthy();
             }
+
+            done();
         });
     });
 
-    it('body padding prop', () => {
+    it('body padding prop', done => {
         let vm = new Vue({
             data: {
                 hasPadding: true
@@ -194,10 +204,12 @@ describe('panel', () => {
             if (body) {
                 expect(body.classList.contains(NO_PADDING_CSS)).toBeTruthy();
             }
+
+            done();
         });
     });
 
-    it('footer padding prop', () => {
+    it('footer padding prop', done => {
         let vm = new Vue({
             data: {
                 hasPadding: true
@@ -225,7 +237,11 @@ describe('panel', () => {
             if (footer) {
                 expect(footer.classList.contains(NO_PADDING_CSS)).toBeTruthy();
             }
+            done();
         });
     });
 
+    it('click event', () => {
+        console.log('TODO');
+    });
 });

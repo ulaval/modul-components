@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './upload-input.html?style=./upload-input.scss';

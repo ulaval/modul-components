@@ -12,7 +12,7 @@
         },
         "empty": {
             "type": "boolean",
-            "default": false
+            "default": true
         },
         "width": {
             "type": "string"
@@ -36,13 +36,14 @@
             "type": "boolean",
             "default": false
         },
-        "error-message": {
-            "type": "string",
-            "default": ""
+        "errorMessage": {
+            "type": "string"
         },
-        "valid-message": {
-            "type": "string",
-            "default": ""
+        "validMessage": {
+            "type": "string"
+        },
+        "helperMessage": {
+            "type": "string"
         }
     },
     "overview": "input-style.overview",

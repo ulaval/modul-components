@@ -1,7 +1,7 @@
 {
     "tag": "m-radio-group",
     "name": "m-radio-group-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
         "value": {
             "type": "string"
@@ -18,7 +18,14 @@
             "type": "boolean",
             "default": false
         },
+        "label": {
+            "type": "string"
+        },
         "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
             "type": "boolean",
             "default": false
         },
@@ -30,17 +37,14 @@
             "type": "boolean",
             "default": false
         },
-        "error-message": {
-            "type": "string",
-            "default": ""
+        "errorMessage": {
+            "type": "string"
         },
-        "valid-message": {
-            "type": "string",
-            "default": ""
+        "validMessage": {
+            "type": "string"
         },
-        "helper-message": {
-            "type": "string",
-            "default": ""
+        "helperMessage": {
+            "type": "string"
         }
     },
     "overview": "radio-group.overview",

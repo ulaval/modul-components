@@ -7,7 +7,7 @@
     v-if="!filtered || inactive"
     @click.prevent="onClick">
     <span class="m-dropdown-item__element-text" v-if="isMqMinS"><slot>{{ propLabel }}</slot></span>
-    <m-radio-style v-if="!isMqMinS" :full-width="true" position="right" :focus="hasFocus" :checked="selected" :disabled="disabled">
+    <m-radio-style :full-width="true" position="right" :focus="hasFocus" :checked="selected" :disabled="disabled" tabindex="0" v-if="!isMqMinS">
         <span class="m-dropdown-item__element-text"><slot>{{ propLabel }}</slot></span>
     </m-radio-style>
 </li>

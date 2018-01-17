@@ -3,19 +3,22 @@
     "name": "m-link-meta:name",
     "production": true,
     "attributes": {
+        "url" : {
+            "type": "string",
+            "default": "/"
+        },
         "mode": {
             "type": "string",
             "values": [
                 "router-link",
-                "button",
-                "external-link",
-                "link"
+                "link",
+                "button"
             ],
             "default": 0
         },
-        "url" : {
-            "type": "string",
-            "default": "/"
+        "disabled" : {
+            "type": "boolean",
+            "default": false
         },
         "unvisited" : {
             "type": "boolean",
@@ -25,20 +28,12 @@
             "type": "boolean",
             "default": true
         },
-        "vanilla": {
-            "type": "boolean",
-            "default": false
-        },
-        "hiddenText" : {
-            "type": "string"
-        },
         "icon" : {
             "type": "boolean",
             "default": false
         },
         "iconName" : {
-            "type": "string",
-            "default": "right-arrow"
+            "type": "string"
         },
         "iconPosition" : {
             "type": "string",
@@ -47,6 +42,10 @@
                 "right"
             ],
             "default": 0
+        },
+        "iconSize" : {
+            "type": "string",
+            "default": "12px"
         }
     },
     "overview": "link.overview",

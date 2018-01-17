@@ -7,7 +7,6 @@ import { DROPDOWN_ITEM_NAME } from '../component-names';
 import { normalizeString } from '../../utils/str/str';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import RadioStylePlugin from '../radio-style/radio-style';
-import { log } from 'util';
 
 export interface MDropdownInterface {
     model: any;
@@ -33,7 +32,7 @@ export class MDropdownItem extends ModulVue {
     public label: string;
     @Prop()
     public value: any;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     public root: MDropdownInterface; // Dropdown component
@@ -60,7 +59,7 @@ export class MDropdownItem extends ModulVue {
     }
 
     public get inactive(): boolean {
-        return this.value === undefined;
+        return this.value == undefined;
     }
 
     // Value and label rules

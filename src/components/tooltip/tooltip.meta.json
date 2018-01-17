@@ -13,7 +13,7 @@
                 "icon",
                 "link"
             ],
-            "default": "0"
+            "default": 0
         },
         "placement": {
             "type": "MPopperPlacement",
@@ -35,18 +35,21 @@
         },
         "closeButton": {
             "type": "boolean",
-            "values": [
-                "true",
-                "false"
-            ],
-            "default": "0"
-        },
-        "classNamePortalTarget": {
-            "type": "string"
+            "default": true
         },
         "disabled": {
             "type": "boolean",
             "default": false
+        },
+        "openTitle": {
+            "type": "string"
+        },
+        "closeTitle": {
+            "type": "string"
+        },
+        "underline": {
+            "type": "boolean",
+            "default": true
         }
     },
     "overview": "tooltip.overview",

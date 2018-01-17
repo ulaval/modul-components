@@ -1,0 +1,9 @@
+{
+    "m-datefields": {
+        "year": "Année",
+        "month": "Mois",
+        "date": "Jour",
+        "year-range-error": "Erreur sur la plage d'année",
+        "year-out-of-range": "L'année dans le model est hors de la plage permis"
+    }
+}

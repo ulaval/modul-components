@@ -1,9 +1,12 @@
 {
     "tag": "m-timepicker",
     "name": "m-timepicker-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
-        "isDuration": {
+        "label": {
+            "type": "string"
+        },
+        "duration": {
             "type": "boolean",
             "default": false
         },
@@ -23,21 +26,35 @@
             "type": "number",
             "default": 5
         },
-        "disabled": {
-            "type": "boolean",
-            "default": false
-        },
         "format": {
             "type": "string",
             "values": "see Moment.js formating options",
             "default": "LT"
         },
-        "options": {
-            "type": "any",
-            "values": "see Popper.js options",
-            "default": {
-                "placement": "bottom-start"
-            }
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
+            "type": "boolean",
+            "default": false
+        },
+        "error": {
+            "type": "boolean",
+            "default": false
+        },
+        "valid": {
+            "type": "boolean",
+            "default": false
+        },
+        "errorMessage": {
+            "type": "string"
+        },
+        "validMessage": {
+            "type": "string"
+        },
+        "helperMessage": {
+            "type": "string"
         }
     },
     "overview": "timepicker.overview",

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+// import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Watch } from 'vue-property-decorator';
 import WithRender from './viewer.html';
@@ -7,14 +8,9 @@ import WithRender from './viewer.html';
 @Component
 export class Viewer extends Vue {
     public tag: string = '';
-    public menuOpen: boolean = true;
 
     public mounted() {
         this.buildTag();
-    }
-
-    public toggleMenu(): void {
-        this.menuOpen = !this.menuOpen;
     }
 
     @Watch('$route')

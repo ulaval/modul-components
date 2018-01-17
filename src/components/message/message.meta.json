@@ -11,9 +11,9 @@
                 "information",
                 "success"
             ],
-            "default": 4
+            "default": 3
         },
-        "mode": {
+        "skin": {
             "type": "string",
             "values": [
                 "light",
@@ -27,11 +27,11 @@
         },
         "closeButton": {
             "type": "boolean",
-            "default": true
+            "default": false
         },
         "visible": {
             "type": "boolean",
-            "default": true
+            "default": false
         }
     },
     "overview": "message.overview",

@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './icon-button.html?style=./icon-button.scss';
@@ -10,7 +9,8 @@ export enum MIconButtonSkin {
     Light = 'light',
     Dark = 'dark',
     Primary = 'primary',
-    Secondary = 'secondary'
+    Secondary = 'secondary',
+    Link = 'link'
 }
 
 @WithRender
@@ -18,16 +18,21 @@ export enum MIconButtonSkin {
 export class MIconButton extends Vue {
     @Prop({
         default: MIconButtonSkin.Light,
-        validator: value => value == MIconButtonSkin.Light || value == MIconButtonSkin.Dark || value == MIconButtonSkin.Primary || value == MIconButtonSkin.Secondary
+        validator: value =>
+            value == MIconButtonSkin.Light ||
+            value == MIconButtonSkin.Dark ||
+            value == MIconButtonSkin.Primary ||
+            value == MIconButtonSkin.Secondary ||
+            value == MIconButtonSkin.Link
     })
     public skin: MIconButtonSkin;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
     @Prop({ default: '44px' })
     public buttonSize: string;
     @Prop({ default: 'default' })
     public iconName: string;
-    @Prop({ default: '16px' })
+    @Prop({ default: '20px' })
     public iconSize: string;
     @Prop()
     public title: string;
@@ -50,7 +55,7 @@ export class MIconButton extends Vue {
     }
 
     private get isSkinLight(): boolean {
-        return this.skin != MIconButtonSkin.Dark && this.skin != MIconButtonSkin.Primary && this.skin != MIconButtonSkin.Secondary;
+        return this.skin == MIconButtonSkin.Light;
     }
 
     private get isSkinDark(): boolean {
@@ -65,10 +70,14 @@ export class MIconButton extends Vue {
         return this.skin == MIconButtonSkin.Secondary;
     }
 
+    private get isSkinLink(): boolean {
+        return this.skin == MIconButtonSkin.Link;
+    }
+
     private hasSlots(): boolean {
         let hasSlot: boolean = !!this.$slots.default;
         if (!hasSlot) {
-            console.warn('<' + ICON_BUTTON_NAME + '> needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
+            // console.warn('<' + ICON_BUTTON_NAME + '> needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
         }
         return hasSlot;
     }
@@ -76,6 +85,7 @@ export class MIconButton extends Vue {
 
 const IconButtonPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(ICON_BUTTON_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.component(ICON_BUTTON_NAME, MIconButton);
     }

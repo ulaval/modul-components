@@ -1,6 +1,6 @@
 {
-    "tag": "m-button",
-    "name": "m-button-meta:name",
+    "tag": "m-icon-button",
+    "name": "m-icon-button-meta:name",
     "production": false,
     "attributes": {
         "skin": {
@@ -17,11 +17,7 @@
             "type": "boolean",
             "default": false
         },
-        "waiting": {
-            "type": "boolean",
-            "default": false
-        },
-        "size": {
+        "buttonSize": {
             "type": "string",
             "default": "44px"
         },
@@ -30,9 +26,12 @@
         },
         "iconSize": {
             "type": "string",
-            "default": "12px"
+            "default": "20px"
+        },
+        "title": {
+            "type": "string"
         }
     },
-    "overview": "button.overview",
-    "preview": "button.preview"
+    "overview": "icon-button.overview",
+    "preview": "icon-button.preview"
 }

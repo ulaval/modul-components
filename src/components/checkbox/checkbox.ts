@@ -19,12 +19,17 @@ export enum MCheckboxPosition {
 })
 export class MCheckbox extends ModulVue {
 
-    @Prop({ default: MCheckboxPosition.Left })
-    public position: MCheckboxPosition;
-
     @Model('change')
     @Prop()
     public value: boolean;
+
+    @Prop({
+        default: MCheckboxPosition.Left,
+        validator: value =>
+            value == MCheckboxPosition.Left ||
+            value == MCheckboxPosition.Right
+    })
+    public position: MCheckboxPosition;
 
     private isFocus = false;
     private id: string = `mCheckbox-${uuid.generate()}`;
@@ -64,6 +69,7 @@ export class MCheckbox extends ModulVue {
 
 const CheckboxPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(CHECKBOX_NAME, 'plugin.install');
         v.use(ValidationMessagePlugin);
         v.component(CHECKBOX_NAME, MCheckbox);
     }

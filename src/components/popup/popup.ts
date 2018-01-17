@@ -19,7 +19,7 @@ export class MPopup extends ModulVue {
     public open: boolean;
     @Prop({ default: MPopperPlacement.Bottom })
     public placement: MPopperPlacement;
-    @Prop({default: MOpenTrigger.Click})
+    @Prop({ default: MOpenTrigger.Click })
     public openTrigger: MOpenTrigger;
     @Prop()
     public closeOnBackdrop: boolean;
@@ -29,7 +29,7 @@ export class MPopup extends ModulVue {
     public width: string;
     @Prop()
     public id: string;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
     @Prop({ default: true })
     public shadow: boolean;
@@ -67,7 +67,7 @@ export class MPopup extends ModulVue {
     }
 
     private get propOpen(): boolean {
-        return this.open === undefined ? this.internalOpen : this.open;
+        return this.open == undefined ? this.internalOpen : this.open;
     }
 
     private set propOpen(value: boolean) {

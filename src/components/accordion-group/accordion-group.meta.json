@@ -1,14 +1,14 @@
 {
     "tag": "m-accordion-group",
     "name": "m-accordion-group-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
         "skin": {
             "type": "string",
             "values": [
                 "regular",
                 "light",
-                "vanilla"
+                "plain"
             ],
             "default": 0
         },
@@ -16,9 +16,8 @@
             "type": "boolean",
             "default": false
         },
-        "allOpen": {
-            "type": "boolean",
-            "default": false
+        "value": {
+            "type": "string"
         }
     },
     "overview": "accordion-group.overview",

@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './template.html?style=./template.scss';
 import { TEMPLATE_NAME } from '../component-names';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
@@ -10,13 +10,15 @@ import { ElementQueries } from '../../mixins/element-queries/element-queries';
     mixins: [ElementQueries]
 })
 export class Mtemplate extends Vue {
-    @Prop({ default: false })
-    public footerFullWidth: boolean;
     @Prop()
-    public contentWidth: string;
+    public footerFullWidth: boolean;
 
     private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;
+    }
+
+    private get hasSubHeaderSlot(): boolean {
+        return !!this.$slots.subHeader;
     }
 
     private get hasDefaultSlot(): boolean {
@@ -32,10 +34,10 @@ export class Mtemplate extends Vue {
     }
 }
 
-const Template: PluginObject<any> = {
+const TemplatePlugin: PluginObject<any> = {
     install(v, options) {
         v.component(TEMPLATE_NAME, Mtemplate);
     }
 };
 
-export default Template;
+export default TemplatePlugin;

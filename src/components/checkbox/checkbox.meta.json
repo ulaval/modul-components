@@ -10,12 +10,16 @@
         "position": {
             "type": "string",
             "values": [
-                "right",
-                "left"
+                "left",
+                "right"
             ],
-            "default": 1
+            "default": 0
         },
         "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "waiting": {
             "type": "boolean",
             "default": false
         },
@@ -27,17 +31,14 @@
             "type": "boolean",
             "default": false
         },
-        "error-message": {
-            "type": "string",
-            "default": ""
+        "errorMessage": {
+            "type": "string"
         },
-        "valid-message": {
-            "type": "string",
-            "default": ""
+        "validMessage": {
+            "type": "string"
         },
-        "helper-message": {
-            "type": "string",
-            "default": ""
+        "helperMessage": {
+            "type": "string"
         }
     },
     "overview": "checkbox.overview",

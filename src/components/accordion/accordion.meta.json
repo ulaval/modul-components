@@ -1,20 +1,20 @@
 {
     "tag": "m-accordion",
     "name": "m-accordion-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
+        "open": {
+            "type": "boolean",
+            "default": false
+        },
         "skin": {
             "type": "string",
             "values": [
                 "regular",
                 "light",
-                "vanilla"
+                "plain"
             ],
             "default": 0
-        },
-        "open": {
-            "type": "boolean",
-            "default": false
         },
         "iconPosition": {
             "type": "string",
@@ -24,13 +24,9 @@
             ],
             "default": 1
         },
-        "iconSkin": {
-            "type": "string",
-            "values": [
-                "regular",
-                "light"
-            ],
-            "default": 1
+        "iconBorder": {
+            "type": "boolean",
+            "default": false
         },
         "iconSize": {
             "type": "string",
@@ -39,6 +35,9 @@
                 "large"
             ],
             "default": 1
+        },
+        "id": {
+            "type": "string"
         }
     },
     "overview": "accordion.overview",

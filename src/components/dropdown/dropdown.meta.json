@@ -17,6 +17,10 @@
             "default": false
         },
         "width": {
+            "type": "string",
+            "default": "288px"
+        },
+        "listMinWidth": {
             "type": "string"
         },
         "iconName": {
@@ -44,17 +48,14 @@
             "type": "boolean",
             "default": false
         },
-        "error-message": {
-            "type": "string",
-            "default": ""
+        "errorMessage": {
+            "type": "string"
         },
-        "valid-message": {
-            "type": "string",
-            "default": ""
+        "validMessage": {
+            "type": "string"
         },
-        "helper-message": {
-            "type": "string",
-            "default": ""
+        "helperMessage": {
+            "type": "string"
         }
     },
     "overview": "dropdown.overview",

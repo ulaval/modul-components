@@ -1,0 +1,18 @@
+<div class="m-navbar"
+    :class="{ 'm--is-disabled': disabled,
+              'm--is-skin-regular': skin == 'regular' || skin == 'dark',
+              'm--is-skin-light': skin == 'light',
+              'm--is-skin-dark': skin == 'dark',
+              'm--is-skin-plain': skin == 'plain',
+              'm--is-skin-arrow': skin == 'arrow',
+              'm--no-margin': !margin }">
+    <m-icon-button class="m-navbar__button" icon-name="left-arrow" @click="scrollLeft" v-if="hasScrolllH && arrowMobile"></m-icon-button>
+    <nav class="m-navbar__wrap" ref="wrap">
+        <ul class="m-navbar__list" aria-hidden="true" ref="list">
+            <slot></slot>
+            <li aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasLine" ref="line"></li>
+            <li aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasArrow" ref="Arrow"></li>
+        </ul>
+    </nav>
+    <m-icon-button class="m-navbar__button" icon-name="right-arrow" @click="scrollRight" v-if="hasScrolllH && arrowMobile"></m-icon-button>
+</div>

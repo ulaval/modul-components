@@ -3,14 +3,18 @@
     "name": "m-spinner-meta:name",
     "production": true,
     "attributes": {
-        "modal": {
+        "title": {
             "type": "boolean",
             "default": false
         },
-        "title": {
+        "titleMessage": {
             "type": "string"
         },
         "description": {
+            "type": "boolean",
+            "default": false
+        },
+        "descriptionMessage": {
             "type": "string"
         },
         "skin": {
@@ -20,7 +24,6 @@
                 "regular",
                 "light",
                 "lighter"
-
             ],
             "default": 1
         },
@@ -31,6 +34,10 @@
                 "small"
             ],
             "default": 0
+        },
+        "processing": {
+            "type": "boolean",
+            "default": false
         }
     },
     "overview": "spinner.overview",

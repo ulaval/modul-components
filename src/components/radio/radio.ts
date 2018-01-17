@@ -26,7 +26,7 @@ export interface RadioGroup {
 }
 
 export interface ButtonGroup extends RadioGroup {
-    fullsize: boolean;
+    fullSize: boolean;
 }
 
 export abstract class BaseRadioGroup extends ModulVue {
@@ -50,10 +50,12 @@ export class MRadio extends ModulVue {
     public name: string;
     @Prop({
         default: MRadioPosition.Left,
-        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+        validator: value =>
+            value == MRadioPosition.Left ||
+            value == MRadioPosition.Right
     })
     public position: MRadioPosition;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     // ----- For Button Group -----
@@ -61,7 +63,9 @@ export class MRadio extends ModulVue {
     public iconName: string;
     @Prop({
         default: MRadioPosition.Left,
-        validator: value => value == MRadioPosition.Left || value == MRadioPosition.Right
+        validator: value =>
+            value == MRadioPosition.Left ||
+            value == MRadioPosition.Right
     })
     public iconPosition: MRadioPosition;
 
@@ -101,8 +105,8 @@ export class MRadio extends ModulVue {
         return this.isGroup() ? this.parentGroup.inline : false;
     }
 
-    public get propFullsize(): boolean {
-        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullsize : false;
+    public get propFullSize(): boolean {
+        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullSize : false;
     }
 
     protected get model(): string {
@@ -153,6 +157,7 @@ export class MRadio extends ModulVue {
 
 const RadioPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(RADIO_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(ValidationMessagePlugin);
         v.component(RADIO_NAME, MRadio);

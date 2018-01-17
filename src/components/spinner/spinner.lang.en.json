@@ -1,0 +1,7 @@
+{
+    "m-spinner": {
+        "loading": "Loading",
+        "processing": "Processing",
+        "description": "Please wait."
+    }
+}

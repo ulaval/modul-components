@@ -3,15 +3,21 @@
     "name": "m-list-item-meta:name",
     "production": true,
     "attributes": {
-        "deleteButton": {
-            "type": "boolean",
-            "default": true
+        "iconName": {
+            "type": "string"
+        },
+        "iconHiddenText": {
+            "type": "string"
         },
         "disabled": {
             "type": "boolean",
             "default": false
         },
         "waiting": {
+            "type": "boolean",
+            "default": false
+        },
+        "fullWidth": {
             "type": "boolean",
             "default": false
         }

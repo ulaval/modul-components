@@ -20,16 +20,23 @@ export enum MSpinnerSize {
     Small = 'small'
 }
 
+export const PROCESSING_WARN: string = 'Change of property "processing" is not supported';
 const SPINNER_ID: string = 'MSpinner';
 
 @WithRender
 @Component
 export class MSpinner extends ModulVue {
     @Prop()
-    public title: string;
+    public title: boolean;
 
     @Prop()
-    public description: string;
+    public titleMessage: string;
+
+    @Prop()
+    public description: boolean;
+
+    @Prop()
+    public descriptionMessage: string;
 
     @Prop({
         default: MSpinnerStyle.Regular,
@@ -43,20 +50,27 @@ export class MSpinner extends ModulVue {
 
     @Prop({
         default: MSpinnerSize.Large,
-        validator: value => value == MSpinnerSize.Large || value == MSpinnerSize.Small
+        validator: value =>
+            value == MSpinnerSize.Large ||
+            value == MSpinnerSize.Small
     })
     public size: MSpinnerSize;
 
     @Prop()
-    public modal: boolean;
+    public processing: boolean;
 
     private spinnerId: string = SPINNER_ID + '-' + uuid.generate();
-    private portalTargetEl: HTMLElement | undefined = undefined;
+    private portalTargetEl: HTMLElement | undefined = {} as HTMLElement; // initialized to be responsive
 
+    private initialized: boolean = false; // seems to be necessary since $refs are not responsive
     private visible: boolean = false;
 
+    protected created(): void {
+        this.portalTargetEl = undefined;
+    }
+
     protected beforeDestroy(): void {
-        if (this.modal) {
+        if (this.processing) {
             let el: HTMLElement = document.getElementById(this.spinnerId) as HTMLElement;
             if (el) {
                 document.body.removeChild(el);
@@ -64,44 +78,66 @@ export class MSpinner extends ModulVue {
         }
     }
 
-    private get hasTitle(): boolean {
-        return !!this.title;
-    }
-
-    private get hasDescription(): boolean {
-        return !!this.description;
-    }
-
-    private onBeforeEnter(): void {
-        let el: HTMLElement = document.getElementById(this.spinnerId) as HTMLElement;
-        if (this.modal && !el) {
-            let element: HTMLElement = document.createElement('div');
-            element.setAttribute('id', this.spinnerId);
-            document.body.appendChild(element);
+    @Watch('processing')
+    private onProcessingChange(value: boolean): void {
+        console.warn(`<${SPINNER_NAME}>: ${PROCESSING_WARN}`);
+        if (!value) {
+            this.removeBackdrop();
         }
     }
 
+    private get spinnerElement(): HTMLElement | undefined {
+        return this.processing ? this.portalTargetEl : this.$refs.spinnerContainer as HTMLElement;
+    }
+
     private onEnter(): void {
-        if (!this.portalTargetEl && this.modal) {
+        if (!this.portalTargetEl && this.processing) {
+            let element: HTMLElement = document.createElement('div');
+            element.setAttribute('id', this.spinnerId);
+            document.body.appendChild(element);
             this.portalTargetEl = document.getElementById(this.spinnerId) as HTMLElement;
             this.$modul.pushElement(this.portalTargetEl, true, false);
             this.portalTargetEl.style.position = 'absolute';
         }
+        this.initialized = true;
         this.visible = true;
     }
 
     private onLeave(): void {
         this.visible = false;
-        if (this.modal && this.portalTargetEl) {
+        if (this.processing) {
+            this.removeBackdrop();
+        }
+    }
+
+    private removeBackdrop(): void {
+        if (this.portalTargetEl) {
             this.$modul.popElement(this.portalTargetEl, true, false);
             this.portalTargetEl.style.position = '';
             this.portalTargetEl = undefined;
         }
     }
+
+    private get hasTitleMessage(): boolean {
+        return this.titleMessage != '' && this.titleMessage != undefined;
+    }
+
+    private get hasDescriptionMessage(): boolean {
+        return this.descriptionMessage != '' && this.descriptionMessage != undefined;
+    }
+
+    private get hasTitle(): boolean {
+        return this.title || this.hasTitleMessage;
+    }
+
+    private get hasDescription(): boolean {
+        return this.description || this.hasDescriptionMessage;
+    }
 }
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options) {
+        console.debug(SPINNER_NAME, 'plugin.install');
         v.use(PortalPlugin);
         v.use(ModulPlugin);
         v.component(SPINNER_NAME, MSpinner);

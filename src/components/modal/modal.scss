@@ -102,19 +102,7 @@ $m-modal--max-width: 380px !default;
     &__body {
         padding: $m-padding;
 
-        @include m-scrollbar-ie();
-
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
-
-            &-track-piece {
-                @include m-scrollbar-track-piece();
-            }
-
-            &-thumb {
-                @include m-scrollbar-thumb();
-            }
-        }
+        @include m-scrollbar();
 
         ~ .m-modal__footer {
             padding-top: 0;

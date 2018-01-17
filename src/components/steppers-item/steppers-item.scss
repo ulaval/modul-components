@@ -1,0 +1,81 @@
+@import 'abstracts/variables';
+$m-steppers--icon-circle--size: 30px;
+$m-steppers--icon--size: 14px;
+$m-steppers--badge--size: 14px;
+
+.m-steppers-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    outline: none;
+
+    &.m--is-completed {
+        cursor: pointer;
+
+        &:focus .m-steppers-item__icon,
+        &:focus .m-steppers-item__title,
+        &:hover .m-steppers-item__icon,
+        &:hover .m-steppers-item__title {
+            color: $m-color--interactive;
+        }
+
+        &::before,
+        &::after {
+            cursor: pointer;
+        }
+
+        .m-steppers-item__icon {
+            border-color: $m-color--ul-blue;
+        }
+    }
+
+    &.m--is-in-progress {
+        .m-steppers-item__icon {
+            border-color: $m-color--ul-yellow;
+        }
+
+        .m-steppers-item__title {
+            font-weight: $m-font-weight--bold;
+        }
+    }
+
+    &.m--is-disabled {
+        cursor: not-allowed;
+
+        &::before,
+        &::after {
+            cursor: not-allowed;
+        }
+
+        .m-steppers-item__icon {
+            border-color: $m-color--grey;
+        }
+
+        .m-steppers-item__title {
+            color: $m-color--grey-dark;
+        }
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: $m-steppers--icon-circle--size;
+        width: $m-steppers--icon-circle--size;
+        border-radius: 50%;
+        border: 2px solid;
+        background-color: $m-color--white;
+        font-size: $m-steppers--icon--size;
+        transition: color $m-transition-duration;
+    }
+
+    &__title {
+        margin-top: $m-margin--s;
+        text-align: center;
+        font-size: $m-font-size--s;
+        color: $m-color--text;
+        text-decoration: none;
+        transition: color $m-transition-duration;
+    }
+}

@@ -1,15 +1,16 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import { log } from 'util';
 
 const ACCORDION_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 export interface TransitionAccordionMixin {
-    isAnimActive: boolean;
+    accordionAnim: boolean;
 }
 
 @Component
 export class TransitionAccordion extends Vue implements TransitionAccordionMixin {
-    public isAnimActive: boolean;
+    public accordionAnim: boolean;
 
     private setTransitionStart(el: HTMLElement) {
         el.style.webkitTransition = ACCORDION_STYLE_TRANSITION;
@@ -18,22 +19,24 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
         el.style.overflow = 'hidden';
     }
 
-    private transitionEnter(el: HTMLElement, done): void {
-        if (this.isAnimActive || this.isAnimActive == undefined) {
-            let height: number = el.clientHeight;
-            this.setTransitionStart(el);
-            el.style.maxHeight = '0';
-            setTimeout(() => {
-                el.style.maxHeight = height + 'px';
+    private accordionEnter(el: HTMLElement, done): void {
+        this.$nextTick(() => {
+            if (this.accordionAnim || this.accordionAnim == undefined) {
+                let height: number = el.clientHeight;
+                el.style.maxHeight = '0';
+                this.setTransitionStart(el);
+                setTimeout(() => {
+                    el.style.maxHeight = height + 'px';
+                    done();
+                }, 50);
+            } else {
                 done();
-            });
-        } else {
-            done();
-        }
+            }
+        });
     }
 
-    private transitionAfterEnter(el: HTMLElement): void {
-        if (this.isAnimActive || this.isAnimActive == undefined) {
+    private accordionAfterEnter(el: HTMLElement): void {
+        if (this.accordionAnim || this.accordionAnim == undefined) {
             setTimeout(() => {
                 el.style.removeProperty('max-height');
                 el.style.removeProperty('overflow');
@@ -41,19 +44,21 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
         }
     }
 
-    private transitionLeave(el: HTMLElement, done): void {
-        if (this.isAnimActive || this.isAnimActive == undefined) {
-            this.setTransitionStart(el);
-            let height: number = el.clientHeight;
-            el.style.maxHeight = height + 'px';
-            setTimeout(() => {
-                el.style.maxHeight = '0';
+    private accordionLeave(el: HTMLElement, done): void {
+        this.$nextTick(() => {
+            if (this.accordionAnim || this.accordionAnim == undefined) {
+                let height: number = el.clientHeight;
+                el.style.maxHeight = height + 'px';
+                this.setTransitionStart(el);
                 setTimeout(() => {
-                    done();
-                }, 300);
-            }, 10);
-        } else {
-            done();
-        }
+                    el.style.maxHeight = '0';
+                    setTimeout(() => {
+                        done();
+                    }, 300);
+                }, 50);
+            } else {
+                done();
+            }
+        });
     }
 }

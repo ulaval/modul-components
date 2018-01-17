@@ -1,5 +1,7 @@
+[![npm version](https://badge.fury.io/js/%40ulaval%2Fmodul-components.svg)](https://badge.fury.io/js/%40ulaval%2Fmodul-components)
+
 # modul-components
-A set of VueJS components for Modul web applications (alpha release).
+A set of VueJS components for Modul web applications (beta release).
 
 ## Usage
 1. Clone this project
@@ -12,8 +14,8 @@ A set of VueJS components for Modul web applications (alpha release).
 
 > The `npm pack` command produces multiple .js files along with their definition files (.d.ts), html templates, scss files, etc.
 
-## Usage as a dependency in your project (release version)
+## Usage as a dependency in your project (npm release version)
 1. Run npm install @ulaval/modul-components --save
-1. Look at the [documentation][1] (not yet deployed)
+1. Look at the [documentation][1]
 
-[1]: https://ulaval.github.io
+[1]: https://ulaval.github.io/modul

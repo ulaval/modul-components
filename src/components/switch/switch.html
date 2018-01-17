@@ -1,9 +1,26 @@
-<span class="m-switch" :class="{ 'm--is-switch-left': hasSwitchLeft, 'm--is-switch-right': !hasSwitchLeft, 'm--is-checked': propChecked, 'm--is-focus': isFocus, 'm--no-helperText': !helperText }">
-    <input ref="switch" type="checkbox" :id="id" class="m-switch__hidden" v-model="propChecked" @click="onClick" @focus="isFocus=true" @blur="isFocus=false">
-    <label class="m-switch__wrap" :for="id" :aria-hidden="!label">
+<div class="m-switch"
+      :class="{ 'm--is-switch-left': hasSwitchLeft,
+                'm--is-switch-right': !hasSwitchLeft,
+                'm--is-disabled': isDisabled,
+                'm--is-waiting': isWaiting,
+                'm--has-error': hasError,
+                'm--is-valid': isValid,
+                'm--is-checked': propChecked,
+                'm--is-focus': isFocus,
+                'm--no-state-text': !stateText }">
+    <input class="m-switch__hidden"
+           ref="switch"
+           :disabled="isDisabled || isWaiting"
+           type="checkbox"
+           :id="id"
+           @click="onClick"
+           @focus="isFocus=true"
+           @blur="isFocus=false"
+           v-model="propChecked">
+    <label class="m-switch__body" :for="id" :aria-hidden="!label">
         <span class="m-switch__input" aria-hidden="true">
-            <span class="m-switch__button" aria-hidden="true"></span>
-            <span class="m-switch__text" aria-hidden="true" v-if="helperText">
+            <span class="m-switch__button"></span>
+            <span class="m-switch__text" v-if="stateText">
                 <span v-if="propChecked"><m-i18n k="m-switch:yes"></m-i18n></span>
                 <span v-if="!propChecked"><m-i18n k="m-switch:no"></m-i18n></span>
             </span>
@@ -13,8 +30,10 @@
         </span>
     </label>
     <m-validation-message
+        :disabled="isDisabled"
+        :waiting="isWaiting"
         :error-message="errorMessage"
         :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
-</span>
+</div>
 

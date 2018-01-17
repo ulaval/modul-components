@@ -54,12 +54,16 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
     public isEqM: boolean = false;
     public isEqL: boolean = false;
 
+    public active: boolean = true;
+
     private resizeSensor: ResizeSensor;
+    private doneResizeEvent: any;
 
     protected mounted(): void {
         this.resizeElement(this.$el);
         this.resizeSensor = new ResizeSensor(this.$el, () => this.resizeElement(this.$el));
     }
+
     protected beforeDestroy(): void {
         if (this.resizeSensor != undefined) {
             this.resizeSensor.detach();
@@ -69,10 +73,30 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
     }
 
     private resizeElement(el: HTMLElement): void {
-        this.setEqMin(el);
-        this.setEqMax(el);
-        this.setEq(el);
-        this.$emit('resize');
+        if (this.active) {
+            this.setEqMin(el);
+            this.setEqMax(el);
+            this.setEq(el);
+            this.$emit('resize');
+            clearTimeout(this.doneResizeEvent);
+            this.doneResizeEvent = setTimeout(() => {
+                this.$emit('resizeDone', event);
+            }, 200);
+        } else {
+            this.isEqMinXL = false;
+            this.isEqMinL = false;
+            this.isEqMinM = false;
+            this.isEqMinS = false;
+            this.isEqMinXS = false;
+            this.isEqMaxXL = false;
+            this.isEqMaxL = false;
+            this.isEqMaxM = false;
+            this.isEqMaxS = false;
+            this.isEqMaxXS = false;
+            this.isEqS = false;
+            this.isEqM = false;
+            this.isEqL = false;
+        }
     }
 
     private setEqMin(el: HTMLElement): void {

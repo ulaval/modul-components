@@ -24,11 +24,16 @@ export class MFlexTemplate extends ModulVue {
     public menuWidth: string;
     @Prop({ default: true })
     public menuFixe: boolean;
-    @Prop({ default: MFlexTemplateOrigin.Left })
+    @Prop({
+        default: MFlexTemplateOrigin.Left,
+        validator: value =>
+            value == MFlexTemplateOrigin.Left ||
+            value == MFlexTemplateOrigin.Right
+    })
     public menuOrigin: MFlexTemplateOrigin;
-    @Prop({ default: false })
+    @Prop()
     public menuOpen: boolean;
-    @Prop({ default: false })
+    @Prop()
     public smallMenu: boolean;
     @Prop({ default: '44px' })
     public smallMenuWidth: string;

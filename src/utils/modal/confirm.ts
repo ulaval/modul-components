@@ -59,9 +59,6 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
         if (confirmInstance) {
             confirmInstance.$nextTick(() => {
                 hook();
-                if (confirmInstance) {
-
-                }
             });
         } else {
             console.error('No instance of modal dialog');

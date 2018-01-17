@@ -6,6 +6,11 @@ $m-max-width--text: 720px !default;
 $m-min-width: 320px !default;
 
 // ======================================================================
+//  Box min-height and min width
+// ======================================================================
+$m-box--min-height: 72px !default;
+
+// ======================================================================
 //  Margin
 // ======================================================================
 $m-margin--xl: 48px !default;
@@ -22,3 +27,16 @@ $m-padding--l: 32px !default;
 $m-padding: 16px !default;
 $m-padding--s: 8px !default;
 $m-padding--xs: 4px !default;
+
+// ======================================================================
+//  spacing
+// ======================================================================
+$m-spacing--xxxxl: 64px !default;
+$m-spacing--xxxl: 56px !default;
+$m-spacing--xxl: 48px !default;
+$m-spacing--xl: 40px !default;
+$m-spacing--l: 32px !default;
+$m-spacing--m: 24px !default;
+$m-spacing: 16px !default;
+$m-spacing--s: 8px !default;
+$m-spacing--xs: 4px !default;

@@ -1,0 +1,34 @@
+<div class="m-datefields" ref="mDateFields" :class="{ complete: complete }">
+     <m-dropdown v-if="year"
+                 v-model="internalYear"
+                 class="m-datefields__years"
+                 width="70px"
+                 :placeholder="getPlaceholder('year')"
+                 :filterable="true"
+                 :disabled="disabled || waiting"
+                 @change="emitDate()">
+         <m-dropdown-item v-for="year in years" :value="year"></m-dropdown-item>
+     </m-dropdown>
+     <m-dropdown v-if="month"
+                 v-model="internalMonth"
+                 class="m-datefields__months"
+                 width="105px"
+                 :placeholder="getPlaceholder('month')"
+                 :filterable="true"
+                 :disabled="disabled || waiting"
+                 @change="emitDate()">
+        <m-dropdown-item v-for="month in months" :value="month" :label="getMonthLabel(month)"></m-dropdown-item>
+     </m-dropdown>
+     <m-dropdown v-if="date"
+                 v-model="internalDate"
+                 class="m-datefields__dates"
+                 width="60px"
+                 :placeholder="getPlaceholder('date')"
+                 :filterable="true"
+                 :disabled="disabled || waiting"
+                 @change="emitDate()">
+        <m-dropdown-item v-for="date in dates" :value="date" :label="getDateLabel(date)"></m-dropdown-item>
+     </m-dropdown>
+     <m-spinner v-if="waiting" size="small"></m-spinner>
+
+</div>

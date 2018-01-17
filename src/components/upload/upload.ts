@@ -1,6 +1,5 @@
-import Vue from 'vue';
+import Vue, { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './upload.html?style=./upload.scss';
@@ -55,13 +54,13 @@ export class MUpload extends ModulVue implements MUploadInterface {
 
     @Prop({ default: () => [] })
     public extensions: string[];
-    @Prop({ default: false })
+    @Prop()
     public multiple: boolean;
     @Prop({ default: 10 })
     public maxFilesAllow: number;
     @Prop({ default: 26214400 }) // 25 Mo
     public maxSizeBytes: number;
-    @Prop({ default: false })
+    @Prop()
     public showImage: boolean;
 
     public globalFileList: GlobalFileList[] = [];

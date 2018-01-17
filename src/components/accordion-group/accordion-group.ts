@@ -11,10 +11,16 @@ import LinkPlugin from '../link/link';
 @Component
 export class MAccordionGroup extends BaseAccordionGroup {
 
-    @Prop({ default: MAccordionSkin.Regular })
+    @Prop({
+        default: MAccordionSkin.Regular,
+        validator: value =>
+            value == MAccordionSkin.Regular ||
+            value == MAccordionSkin.Light ||
+            value == MAccordionSkin.Plain
+    })
     public skin: MAccordionSkin;
 
-    @Prop({ default: false })
+    @Prop()
     public concurrent: boolean;
 
     @Prop()

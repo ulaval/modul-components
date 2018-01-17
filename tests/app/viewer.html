@@ -1,7 +1,7 @@
 <m-flex-template :menuOpen="menuOpen">
     <m-template>
         <div slot="header">
-            <m-link :unvisited="true" icon-name="left-arrow">Menu</m-link>
+            <m-link :underline="false" :unvisited="true" icon-name="left-arrow">Menu</m-link>
             <h1>{{$route.meta}}</h1>
         </div>
         <m-dynamic-template :template="tag"></m-dynamic-template>

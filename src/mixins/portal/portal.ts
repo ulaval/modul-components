@@ -43,7 +43,7 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop({ default: 'mPortal' })
     public id: string;
 
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
 
     @Prop()
@@ -117,7 +117,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public get propOpen(): boolean {
-        return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
+        return (this.open == undefined ? this.internalOpen : this.open) && !this.disabled;
     }
 
     public set propOpen(value: boolean) {

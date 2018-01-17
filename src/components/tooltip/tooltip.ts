@@ -5,9 +5,8 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './tooltip.html?style=./tooltip.scss';
 import { TOOLTIP_NAME } from '../component-names';
 import { MPopup } from '../popup/popup';
-import { MPopper } from '../popper/popper';
+import { MPopper, MPopperPlacement } from '../popper/popper';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { MPopperPlacement } from '../popper/popper';
 import ButtonPlugin from '../button/button';
 import LinkPlugin from '../link/link';
 import I18nPlugin from '../i18n/i18n';
@@ -23,22 +22,42 @@ export enum MTooltipMode {
     mixins: [MediaQueries]
 })
 export class MTooltip extends ModulVue {
-    @Prop({ default: false })
+    @Prop()
     public open: boolean;
-    @Prop({ default: MTooltipMode.Icon })
+    @Prop({
+        default: MTooltipMode.Icon,
+        validator: value =>
+            value == MTooltipMode.Icon ||
+            value == MTooltipMode.Link
+    })
     public mode: string;
-    @Prop({ default: MPopperPlacement.Bottom })
+    @Prop({
+        default: MPopperPlacement.Bottom,
+        validator: value =>
+            value == MPopperPlacement.Bottom ||
+            value == MPopperPlacement.BottomEnd ||
+            value == MPopperPlacement.BottomStart ||
+            value == MPopperPlacement.Left ||
+            value == MPopperPlacement.LeftEnd ||
+            value == MPopperPlacement.LeftStart ||
+            value == MPopperPlacement.Right ||
+            value == MPopperPlacement.RightEnd ||
+            value == MPopperPlacement.RightStart ||
+            value == MPopperPlacement.Top ||
+            value == MPopperPlacement.TopEnd ||
+            value == MPopperPlacement.TopStart
+    })
     public placement: MPopperPlacement;
     @Prop({ default: true })
     public closeButton: boolean;
-    @Prop({ default: '' })
-    public classNamePortalTarget: string;
-    @Prop({ default: false })
+    @Prop()
     public disabled: boolean;
     @Prop()
     public openTitle: string;
     @Prop()
     public closeTitle: string;
+    @Prop({ default: true })
+    public underline: boolean;
 
     private propOpen = false;
 

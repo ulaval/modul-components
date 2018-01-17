@@ -5,13 +5,16 @@ import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './datepicker.html?style=./datepicker.scss';
 import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
-import { curLang } from '../../utils/i18n/i18n';
+import i18nPlugin, { curLang } from '../../utils/i18n/i18n';
 import { InputState } from '../../mixins/input-state/input-state';
+import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { KeyCode } from '../../utils/keycode/keycode';
-import PopupPlugin from '../popup/popup';
-import TextFieldPlugin from '../text-field/text-field';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import ButtonPlugin from '../button/button';
+import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
+import ValidationMessagePlugin from '../validation-message/validation-message';
+import PopupPlugin from '../popup/popup';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -32,6 +35,7 @@ export interface DatepickerDate {
 @Component({
     mixins: [
         InputState,
+        InputPopup,
         MediaQueries
     ]
 })
@@ -43,20 +47,19 @@ export class MDatepicker extends ModulVue {
     @Prop()
     public label: string;
     @Prop()
-    public iconName: boolean;
-    @Prop({ default: false })
+    public iconName: string;
+    @Prop()
     public required: boolean;
-    @Prop({ default: 'DD/MM/Y' })
+    @Prop({ default: 'YYYY/MM/DD' })
     public format: string;
     @Prop({ default: () => { return moment().subtract(10, 'year'); } })
     public min: moment.Moment | Date;
     @Prop({ default: () => { return moment().add(10, 'year'); } })
     public max: moment.Moment | Date;
 
+    public placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
     private internalOpen: boolean = false;
     private view: string = 'day';
-    private internalValue = '';
-    private placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
     private previousDays: DatepickerDate[] = [];
     private days: DatepickerDate[] = [];
     private nextDays: DatepickerDate[] = [];
@@ -168,11 +171,11 @@ export class MDatepicker extends ModulVue {
     }
 
     private get formattedDate(): string {
-        return this.internalCalandarErrorMessage || !this.value ? this.internalValue : moment(this.internalValue).format(this.format);
+        return this.internalCalandarErrorMessage || !this.value ? this.as<InputPopup>().internalValue : moment(this.value).format(this.format);
     }
 
     private set formattedDate(value: string) {
-        this.internalValue = value;
+        this.as<InputPopup>().internalValue = value;
     }
 
     private get selectedMomentDate(): moment.Moment {
@@ -220,18 +223,6 @@ export class MDatepicker extends ModulVue {
         return this.as<InputState>().errorMessage != undefined ? this.as<InputState>().errorMessage : this.internalCalandarErrorMessage;
     }
 
-    private get isEmpty(): boolean {
-        return this.hasValue() || (this.hasPlaceholder() && this.open) ? false : true;
-    }
-
-    private hasValue(): boolean {
-        return this.formattedDate != undefined && this.formattedDate != '';
-    }
-
-    private hasPlaceholder(): boolean {
-        return this.placeholder != undefined && this.placeholder != '';
-    }
-
     private get open(): boolean {
         return this.internalOpen;
     }
@@ -240,56 +231,17 @@ export class MDatepicker extends ModulVue {
         this.internalOpen = open;
         this.$nextTick(() => {
             if (this.internalOpen) {
-                this.$emit('open');
                 let inputEl: any = this.$refs.input;
                 inputEl.focus();
                 inputEl.setSelectionRange(0, this.formattedDate.length);
+                this.$emit('open');
             } else {
                 this.$emit('close');
             }
         });
     }
 
-    private onMousedown(event): void {
-        this.mouseIsDown = true;
-    }
-
-    private onMouseup(event): void {
-        setTimeout(() => {
-            this.mouseIsDown = false;
-        }, 30);
-    }
-
-    private onKeydownEnter($event: KeyboardEvent): void {
-        if (!this.open) {
-            this.open = true;
-        }
-    }
-
-    private onKeydownTab(): void {
-        if (!this.mouseIsDown && this.as<MediaQueries>().isMqMinS) {
-            this.open = false;
-        }
-    }
-
-    private onKeydown($event: KeyboardEvent): void {
-        if ($event.keyCode != KeyCode.M_RETURN &&
-            $event.keyCode != KeyCode.M_ENTER &&
-            $event.keyCode != KeyCode.M_TAB &&
-            $event.keyCode != KeyCode.M_ESCAPE && !this.open) {
-            this.open = true;
-        }
-    }
-
-    private onFocus(): void {
-        if (!this.mouseIsDown && !this.open && !this.as<InputState>().isDisabled) {
-            setTimeout(() => {
-                this.open = true;
-            }, 300);
-        }
-    }
-
-    private onBlur(event): void {
+    private validateDate(event): void {
         if (event.target.value == '') {
             this.selectedMomentDate = moment();
             if (this.required) {
@@ -354,9 +306,12 @@ export class MDatepicker extends ModulVue {
 
 const DatepickerPlugin: PluginObject<any> = {
     install(v, options) {
-        v.use(PopupPlugin);
-        v.use(TextFieldPlugin);
+        v.use(InputStylePlugin);
         v.use(ButtonPlugin);
+        v.use(PopupPlugin);
+        v.use(ValidationMessagePlugin);
+        v.use(MediaQueriesPlugin);
+        v.use(i18nPlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };

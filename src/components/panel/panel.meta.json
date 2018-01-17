@@ -7,25 +7,34 @@
             "type": "string",
             "values": [
                 "light",
-                "dark"
+                "dark",
+                "darker"
             ],
             "default": 0
         },
-        "highlightingBorder": {
+        "highlighted": {
             "type": "boolean",
-            "default": true
+            "default": false
         },
         "shadow": {
             "type": "boolean",
-            "default": true
+            "default": false
         },
         "border": {
             "type": "boolean",
             "default": true
         },
+        "borderLarge": {
+            "type": "boolean",
+            "default": false
+        },
         "padding": {
             "type": "boolean",
             "default": true
+        },
+        "paddingLarge": {
+            "type": "boolean",
+            "default": false
         },
         "paddingHeader": {
             "type": "boolean",

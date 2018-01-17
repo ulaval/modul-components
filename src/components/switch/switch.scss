@@ -2,15 +2,10 @@
 $m-switch-size: 23px;
 
 .m-switch {
-    display: inline-flex;
-    flex-direction: column;
-    user-select: none;
     line-height: 1;
 
-    &:not(.is-disabled) {
-        .m-switch__wrap {
-            display: inline-flex;
-            align-items: center;
+    &:not(.m--is-disabled):not(.m--is-waiting) {
+        .m-switch__body {
             cursor: pointer;
         }
 
@@ -52,11 +47,64 @@ $m-switch-size: 23px;
                 left: 0;
             }
         }
+
+        &.m--has-error {
+            .m-switch__input {
+                border-color: $m-color--error;
+                background: $m-color--error-lightest;
+            }
+
+            &:not(.m--is-checked) {
+                .m-switch__text {
+                    color: $m-color--error;
+                }
+            }
+
+            &.m--is-checked {
+                .m-switch__input {
+                    background: $m-color--error;
+                }
+            }
+        }
+
+        &.m--is-valid {
+            .m-switch__input {
+                border-color: $m-color--success;
+                background: $m-color--success-lightest;
+            }
+
+            &:not(.m--is-checked) {
+                .m-switch__text {
+                    color: $m-color--success;
+                }
+            }
+
+            &.m--is-checked {
+                .m-switch__input {
+                    background: $m-color--success;
+                }
+            }
+        }
+    }
+
+    &.m--is-disabled,
+    &.m--is-waiting {
+        .m-switch__input {
+            border-color: $m-color--disabled;
+            background: $m-color--disabled-light;
+        }
     }
 
     &.m--is-disabled {
-        border-color: $m-color--grey-light;
-        background: $m-color--grey-lighter;
+        .m-switch__body {
+            cursor: not-allowed;
+        }
+    }
+
+    &.m--is-waiting {
+        .m-switch__body {
+            cursor: wait;
+        }
     }
 
     &.m--is-switch-left {
@@ -75,10 +123,15 @@ $m-switch-size: 23px;
         }
     }
 
-    &.m--no-helperText {
+    &.m--no-state-text {
         .m-switch__input {
             min-width: 40px;
         }
+    }
+
+    &__body {
+        display: inline-flex;
+        align-items: center;
     }
 
     &__input {
@@ -109,6 +162,7 @@ $m-switch-size: 23px;
     &__text {
         transition: $m-transition-duration ease-in-out;
         display: flex;
+        user-select: none;
         height: 100%;
         width: calc(100% - #{$m-switch-size});
         left: calc(100% - (100% - #{$m-switch-size}));

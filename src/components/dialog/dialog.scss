@@ -1,6 +1,6 @@
 @import '../../styles/abstracts/variables';
 $m-dialog--max-width--l: $m-max-width !default;
-$m-dialog--max-width: 640px !default;
+$m-dialog--max-width: 600px !default;
 $m-dialog--max-width--s: 420px !default;
 
 .m-dialog {
@@ -19,6 +19,19 @@ $m-dialog--max-width--s: 420px !default;
         outline: none;
         min-width: $m-min-width;
         overflow: hidden;
+
+        // doesn't work for slot content because of the scoped style... >_<
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            font-size: $m-font-size--h4;
+            font-weight: $m-font-weight--bold;
+        }
+        ////////////////////////////////////////////
 
         @include m-is-ie() {
             display: block;
@@ -57,7 +70,7 @@ $m-dialog--max-width--s: 420px !default;
             }
         }
 
-        &.m--is-full-size {
+        &.m--is-full-screen {
             .m-dialog__article {
                 @media screen and (min-width: #{$m-mq--min--s}) {
                     max-width: 100%;
@@ -137,61 +150,43 @@ $m-dialog--max-width--s: 420px !default;
         position: relative;
         background: $m-color--black-grey;
         color: $m-color--white;
-        padding: $m-margin $m-touch-size $m-margin $m-padding;
+        justify-content: space-between;
 
-        &.m--no-padding {
-            padding: 0 $m-touch-size 0 0;
-        }
+        @include m-box-pading();
 
-        &__close-button.m-icon-button {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translate3d(0, -50%, 0);
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin: 0;
-            font-size: $m-font-size--h2;
-            font-weight: $m-font-weight--bold;
+        &__close-button {
+            margin-right: -12px; // Magic number: visually align
         }
     }
 
     &__body {
-        padding: $m-padding;
         flex: 1 1 auto;
         overflow-x: hidden;
         overflow-y: auto;
+        position: relative;
+        padding-top: $m-padding--l;
+        padding-bottom: $m-padding--l;
+
+        @media (min-width: $m-mq--min--s) {
+            padding-left: $m-padding--l;
+            padding-right: $m-padding--l;
+        }
+
+        @media (max-width: $m-mq--max--s) {
+            padding-left: $m-padding;
+            padding-right: $m-padding;
+        }
 
         @include m-is-ie() {
             flex: none;
         }
 
-        @include m-scrollbar-ie();
-
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
-
-            &-track-piece {
-                @include m-scrollbar-track-piece();
-            }
-
-            &-thumb {
-                @include m-scrollbar-thumb();
-            }
-        }
+        @include m-scrollbar();
     }
 
     &__footer {
-        display: flex;
-        align-items: center;
-        min-height: $m-touch-size;
-        padding: $m-margin $m-padding;
         border-top: 1px solid $m-color--grey;
+
+        @include m-box-pading();
     }
 }

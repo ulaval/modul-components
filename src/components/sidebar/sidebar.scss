@@ -54,12 +54,6 @@
                 &.m--is-leave-to {
                     .m-sidebar__article {
                         transform: translate3d(0, calc(100% + #{ $m-touch-size }), 0);
-                    }
-                }
-
-                &.m--is-enter,
-                &.m--is-leave-to {
-                    .m-sidebar__article {
                         bottom: 0;
                         max-height: calc(100vh - #{ $m-padding--xl });
                     }
@@ -193,19 +187,7 @@
         flex: 1 1 auto;
         overflow: auto;
 
-        @include m-scrollbar-ie();
-
-        &::-webkit-scrollbar {
-            @include m-scrollbar();
-
-            &-track-piece {
-                @include m-scrollbar-track-piece();
-            }
-
-            &-thumb {
-                @include m-scrollbar-thumb();
-            }
-        }
+        @include m-scrollbar();
     }
 
     &__footer {

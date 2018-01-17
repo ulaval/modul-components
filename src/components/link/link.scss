@@ -1,117 +1,97 @@
 @import 'abstracts/variables';
 
 .m-link {
+    transition: color $m-transition-duration ease;
+    position: relative;
     display: inline-flex;
     align-items: center;
-
-    @include m-is-ie() {
-        display: inline-block;
-    }
+    font-weight: $m-font-weight--bold;
+    color: $m-color--interactive;
+    text-decoration: none;
 
     &.m--has-right-icon {
         flex-direction: row-reverse;
 
-        .m-link {
-            &__icon {
-                margin-left: $m-margin--xs;
-            }
+        .m-link__icon {
+            margin-left: $m-margin--xs;
         }
     }
 
-    &:not(.m--has-right-icon) {
-        .m-link {
-            &__icon {
-                margin-right: $m-margin--xs;
-            }
+    &.m--has-left-icon {
+        .m-link__icon {
+            margin-right: $m-margin--xs;
         }
     }
 
-    &:not(.m--is-vanilla) {
-        transition: color $m-transition-duration ease;
-        position: relative;
-        font-weight: $m-font-weight--bold;
-        color: $m-color--interactive;
-        text-decoration: none;
+    &:not(.m--is-disabled) {
+        &:not(.m--no-underline) {
+            .m-link__text {
+                transition: box-shadow $m-transition-duration--s ease;
+                box-shadow: 0 0 transparent;
+            }
 
-        &:not(.m--is-disabled) {
-            &:not(.m--no-underline) {
+            &:not(.m--is-unvisited):visited {
+                color: $m-color--interactive-darker;
+            }
+
+            &:hover,
+            &:focus {
                 .m-link__text {
-                    &::after {
-                        transition: width $m-transition-duration ease, opacity $m-transition-duration ease;
-                        position: absolute;
-                        right: 0;
-                        bottom: 1px; //Magic number
-                        left: 0;
-                        content: '';
-                        width: 8%;
-                        height: 1px;
-                        background: $m-color--interactive;
-                        opacity: 0;
-                    }
-                }
-            }
-
-            &:not(.m--is-unvisited) {
-                &:visited {
-                    color: $m-color--interactive-darker;
-                }
-            }
-
-            &:not(:active) {
-                &:focus,
-                &:hover {
-                    color: $m-color--interactive-light;
-
-                    .m-link__text {
-                        &::after {
-                            width: 100%;
-                            background: $m-color--interactive-light;
-                            opacity: 1;
-                        }
-                    }
+                    box-shadow: 0 1px $m-color--interactive-light;
                 }
             }
 
             &:active {
-                color: $m-color--interactive-dark;
-
                 .m-link__text {
-                    &::after {
-                        right: 0;
-                        left: auto;
-                        width: 8%;
-                        background: $m-color--interactive-dark;
-                        opacity: 0;
-                    }
+                    box-shadow: 0 1px $m-color--interactive-dark;
                 }
             }
         }
 
-        &.m--is-disabled {
-            color: $m-color--disabled;
-            cursor: default;
+        &:not(.m--is-unvisited):visited {
+            color: $m-color--interactive-darker;
+
+            &:hover,
+            &:focus {
+                color: $m-color--interactive-light;
+            }
+
+            &:active {
+                color: $m-color--interactive-dark;
+            }
         }
 
+        &:hover,
         &:focus {
-            outline: none;
+            color: $m-color--interactive-light;
         }
 
-        .m-link {
-            &__text {
-                position: relative;
-                flex: 1;
-                vertical-align: middle;
-            }
-
-            &__icon {
-                display: inline-flex;
-                vertical-align: middle;
-                stroke-width: 2px;
-            }
-
-            &__hidden {
-                @include m-visually-hidden;
-            }
+        &:active {
+            color: $m-color--interactive-dark;
         }
+    }
+
+    &.m--is-disabled {
+        color: $m-color--disabled;
+        cursor: default;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &__text {
+        position: relative;
+        vertical-align: middle;
+    }
+
+    &__icon {
+        display: inline-flex;
+        vertical-align: middle;
+        stroke-width: 2px;
+    }
+
+    &__hidden {
+        @include m-visually-hidden();
     }
 }

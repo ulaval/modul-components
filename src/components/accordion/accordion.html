@@ -1,17 +1,19 @@
 <article class="m-accordion" :class="['m--is-' + propSkin, {'m--is-closed': !propOpen}]">
     <header tabindex="0" class="m-accordion__header" :class="{ 'm--is-icon-left': propIconPosition != 'right' }" @keyup.enter="toggleAccordion"
         @click.prevent="toggleAccordion" ref="accordionHeader">
-        <div class="m-accordion__header__title">
-            <slot name="title"></slot>
+        <div class="m-accordion__header__content">
+            <slot name="header"></slot>
             <m-i18n k="m-accordion:open" class="m-accordion__hidden" v-if="!propOpen"></m-i18n>
             <m-i18n k="m-accordion:close" class="m-accordion__hidden" v-if="propOpen"></m-i18n>
         </div>
-        <span aria-hidden="true" class="m-accordion__header-icon" :class="{ 'm--is-closed': propOpen,
-                     'm--is-left': propIconPosition != 'right',
-                     'm--is-large': propIconSize=='large',
-                     'm--has-border': propIconSkin=='border' }"></span>
+        <span aria-hidden="true"
+              class="m-accordion__header-icon"
+              :class="{ 'm--is-closed': propOpen,
+                        'm--is-left': propIconPosition != 'right',
+                        'm--is-large': propIconSize=='large',
+                        'm--has-border': propIconBorder }"></span>
     </header>
-    <transition @enter="transitionEnter" @after-enter="transitionAfterEnter" @leave="transitionLeave">
+    <transition @enter="accordionEnter" @after-enter="accordionAfterEnter" @leave="accordionLeave">
         <div class="m-accordion__body-wrap" v-if="propOpen">
             <div class="m-accordion__body">
                 <slot></slot>

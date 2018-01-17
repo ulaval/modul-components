@@ -19,6 +19,8 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     public okLabel: string | undefined;
     @Prop()
     public cancelLabel: string | undefined;
+    @Prop({ default: true })
+    public negativeLink: boolean;
 
     public handlesFocus(): boolean {
         return true;

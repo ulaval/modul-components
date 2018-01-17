@@ -1,0 +1,38 @@
+@import 'abstracts/variables';
+$m-steppers-item--circle-size: 30px;
+$m-steppers-item--line-width: 2px;
+
+.m-steppers {
+    &__wrap {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+    }
+
+    &__selected-line {
+        position: absolute;
+        top: calc((#{$m-steppers-item--circle-size} / 2) - #{$m-steppers-item--line-width} / 2);
+        left: 0;
+        width: 0;
+        content: '';
+        height: $m-steppers-item--line-width;
+        background: $m-color--ul-blue;
+        z-index: 1;
+
+        &.m--is-anim-active {
+            transition: width $m-transition-duration--xl ease;
+        }
+    }
+
+    &__default-line {
+        position: absolute;
+        top: calc((#{$m-steppers-item--circle-size} / 2) - #{$m-steppers-item--line-width} / 2);
+        left: 0;
+        right: 0;
+        content: '';
+        height: $m-steppers-item--line-width;
+        background: $m-color--grey;
+        z-index: 1;
+    }
+}

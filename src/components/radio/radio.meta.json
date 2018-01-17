@@ -35,6 +35,10 @@
             "type": "boolean",
             "default": false
         },
+        "waiting": {
+            "type": "boolean",
+            "default": false
+        },
         "error": {
             "type": "boolean",
             "default": false
@@ -42,6 +46,15 @@
         "valid": {
             "type": "boolean",
             "default": false
+        },
+        "errorMessage": {
+            "type": "string"
+        },
+        "validMessage": {
+            "type": "string"
+        },
+        "helperMessage": {
+            "type": "string"
         }
     },
     "overview": "radio.overview",

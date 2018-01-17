@@ -7,7 +7,7 @@ import { DIALOG_NAME } from '../component-names';
 import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 
 export enum MDialogSize {
-    FullSize = 'full-size',
+    FullScreen = 'full-screen',
     Large = 'large',
     Regular = 'regular',
     Small = 'small'
@@ -22,7 +22,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         default: MDialogSize.Regular,
         validator: value =>
             value == MDialogSize.Regular ||
-            value == MDialogSize.FullSize ||
+            value == MDialogSize.FullScreen ||
             value == MDialogSize.Large ||
             value == MDialogSize.Small
     })

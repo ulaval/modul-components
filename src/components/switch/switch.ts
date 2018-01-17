@@ -22,10 +22,15 @@ export class MSwitch extends ModulVue {
     @Model('change')
     @Prop()
     public value: boolean;
-    @Prop({ default: MSwitchPosition.Left })
+    @Prop({
+        default: MSwitchPosition.Left,
+        validator: value =>
+            value == MSwitchPosition.Left ||
+            value == MSwitchPosition.Right
+    })
     public position: string;
     @Prop({ default: true })
-    public helperText: boolean;
+    public stateText: boolean;
 
     private internalValue: boolean = false;
     private isFocus = false;

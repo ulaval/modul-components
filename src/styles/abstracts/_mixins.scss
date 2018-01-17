@@ -1,25 +1,24 @@
 @mixin m-scrollbar() {
-    width: $m-scrollbar-width;
-    height: $m-scrollbar-width;
-    background: transparent;
-}
-
-@mixin m-scrollbar-ie() {
     scrollbar-face-color: $m-color--scrollbar;
     scrollbar-shadow-color: $m-color--scrollbar;
     scrollbar-highlight-color: $m-color--white;
-    // scrollbar-3dlight-color: $m-color--white;
     scrollbar-darkshadow-color: $m-color--white;
     scrollbar-track-color: $m-color--white;
     scrollbar-arrow-color: $m-color--scrollbar;
-}
 
-@mixin m-scrollbar-track-piece() {
-    background: $m-color--scrollbar--light;
-}
+    &::-webkit-scrollbar {
+        width: $m-scrollbar-width;
+        height: $m-scrollbar-width;
+        background: transparent;
 
-@mixin m-scrollbar-thumb() {
-    background: $m-color--scrollbar;
+        &-track-piece {
+            background: $m-color--scrollbar-light;
+        }
+
+        &-thumb {
+            background: $m-color--scrollbar;
+        }
+    }
 }
 
 @mixin m-visually-hidden() {
@@ -167,4 +166,139 @@
             border-color: transparent transparent transparent $m-color--black-grey-light;
         }
     }
+}
+
+@mixin m-table() {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; // AEL-33
+
+    th {
+        padding: 0 $m-padding--s $m-margin--s;
+        font-weight: $m-font-weight--bold;
+        color: $m-color--black;
+        border-bottom: 2px solid $m-color--border;
+        text-align: left;
+
+        &:first-child {
+            padding-left: $m-padding;
+        }
+
+        &:last-child {
+            padding-right: $m-padding;
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid $m-color--border;
+        }
+    }
+
+    td {
+        padding: $m-padding $m-padding--s;
+        margin: 1px 0;
+        vertical-align: top;
+        text-align: left;
+
+        &:first-child {
+            padding-left: $m-padding;
+        }
+
+        &:last-child {
+            padding-right: $m-padding;
+        }
+    }
+
+    &.m-u--has-icon {
+        th,
+        td {
+            &:last-child:not(:only-child) {
+                padding: 0;
+                width: 44px;
+                text-align: center;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    // when inside a m-panel component
+    .m-panel & {
+        tbody {
+            tr:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+}
+
+@mixin m-box-pading($menuClass: false) {
+    display: flex;
+    align-items: center;
+    min-height: $m-box--min-height;
+    padding-top: $m-padding;
+    padding-bottom: $m-padding;
+
+    &.m--no-padding {
+        padding: 0;
+    }
+
+    @media (min-width: $m-mq--min--s) {
+        padding-left: $m-padding--l;
+        padding-right: $m-padding--l;
+    }
+
+    @media (max-width: $m-mq--max--s) {
+        padding-left: $m-padding;
+        padding-right: $m-padding;
+    }
+
+    @if $menuClass {
+        @media (min-width: $m-mq--min--s) {
+            padding-left: $m-padding--l;
+            padding-right: $m-touch-size + $m-padding;
+        }
+
+        @media (max-width: $m-mq--max--s) {
+            padding-left: $m-padding;
+            padding-right: $m-touch-size;
+        }
+
+        &.m--no-padding {
+            padding: 0 $m-touch-size 0 0;
+        }
+
+        &#{$menuClass} {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: $m-touch-size;
+
+            @media (min-width: $m-mq--min--s) {
+                right: $m-spacing;
+            }
+
+            @media (max-width: $m-mq--max--s) {
+                right: 0;
+            }
+        }
+    }
+}
+
+@mixin m-triangle($m-direction, $m-color: currentcolor, $m-size: 1em) {
+    @if not index(top right bottom left, $m-direction) {
+        @error "Direction must be either `top`, `right`, `bottom` or `left`.";
+    }
+
+    $m-size: $m-size/2;
+    $m-transparent: transparent;
+    $m-opposite: (top:bottom, right:left, left:right, bottom:top);
+
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: $m-size solid $m-transparent;
+    border-#{map-get($m-opposite, $m-direction)}-color: $m-color;
+    border-#{map-get($m-opposite, $m-direction)}-width: $m-size/1.5;
 }
