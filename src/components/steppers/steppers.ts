@@ -79,7 +79,7 @@ export class MSteppers extends BaseSteppers {
         });
         let minWidth: number;
         let numberOfChild = this.$children.length;
-        minWidth = childsWidth + ((numberOfChild - 1) * 32);
+        minWidth = childsWidth + ((numberOfChild - 1) * 24);
         wrapItem.style.minWidth = minWidth + 'px';
         wrapItem.style.display = 'flex';
         wrapItem.style.opacity = '1';
