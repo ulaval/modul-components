@@ -13,7 +13,6 @@ pipeline {
 
     environment {
         // Pour éviter une erreur: EACCES: permission denied, mkdir '/.npm'
-        PATH = '/usr/local/bin:/usr/bin'
         npm_config_cache = 'npm-cache'
         DOCKER_REPOSITORY = 'docker-local.maven.at.ulaval.ca/modul'
         DOCKER_REPOSITORY_URL = 'https://docker-local.maven.at.ulaval.ca'
