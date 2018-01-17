@@ -18,7 +18,7 @@ export enum MLinkIconPosition {
     Right = 'right'
 }
 
-const ICON_NAME_DEFAULT: string = 'right-arrow';
+const ICON_NAME_DEFAULT: string = 'chevron';
 
 @WithRender
 @Component
