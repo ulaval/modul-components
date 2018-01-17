@@ -3,6 +3,17 @@ $m-steppers-item--circle-size: 30px;
 $m-steppers-item--line-width: 2px;
 
 .m-steppers {
+    position: relative;
+    overflow: hidden;
+
+    &__overflow-wrapper {
+        position: relative;
+        flex: 1 1 auto;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
     &__wrap {
         position: relative;
         display: flex;
@@ -35,4 +46,12 @@ $m-steppers-item--line-width: 2px;
         background: $m-color--grey;
         z-index: 1;
     }
+
+    // .m-steppers-item {
+    //     margin-right: 60px;
+
+    //     &:last-child {
+    //         margin-right: 0;
+    //     }
+    // }
 }
