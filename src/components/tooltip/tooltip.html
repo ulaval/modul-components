@@ -13,11 +13,10 @@
     <m-link slot="trigger" class="m-tooltip__link" mode="button" :underline="underline" v-if="propMode != 'icon'">
         <slot name="link"></slot>
     </m-link>
-
     <div class="m-tooltip__body-container" :class="{ 'm--has-close-button': propCloseButton }">
-        <m-icon-button icon-name="close" icon-size="10px" @click="close" class="m-tooltip__close-button" v-if="propCloseButton">
-            <m-i18n k="m-tooltip:close"></m-i18n>
-        </m-icon-button>
+        <div class="m-tooltip__close-button" tabindex="0"  @keyup.enter="close" @click="close" v-if="propCloseButton">
+            <m-icon name="close" size="12px" :svg-tile="getCloseTitle"></m-icon>
+        </div>
         <div class="m-tooltip__body">
             <slot></slot>
         </div>
