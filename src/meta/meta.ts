@@ -64,9 +64,10 @@ export type CategoryComponentMap = {
     [key: string]: ComponentMeta[];
 };
 
+export type ComponentAttributeFn = (attribute: string, meta: ComponentMeta) => void;
+
 export class Meta {
     private componentMeta: ComponentMetaMap = {};
-    private componentMetaForProd: ComponentMetaMap = {};
     private categories: CategoryComponentMap = {};
 
     constructor() {
@@ -96,12 +97,16 @@ export class Meta {
         }
     }
 
-    public getMeta(): any {
-        return this.componentMeta;
-    }
-
-    public getMetaForProd(): any {
-        return this.componentMetaForProd;
+    // TODO: eval usage
+    public getMeta(): ComponentMeta[] {
+        let result: ComponentMeta[] = [];
+        Object.keys(this.componentMeta).filter(key => this.componentMeta.hasOwnProperty(key)).forEach(key => {
+            let meta: ComponentMeta = this.componentMeta[key];
+            if (process.env && (process.env.NODE_ENV as any).dev || meta.production === true) {
+                result.push(meta);
+            }
+        });
+        return result;
     }
 
     public getTags(): string[] {
@@ -125,11 +130,17 @@ export class Meta {
             this.categories[category].filter(component => component.production === true);
     }
 
-    public getComponentAttributes(componentMeta: ComponentMeta): string[] {
+    public getComponentAttributes(componentMeta: ComponentMeta, recurse: boolean, callback: ComponentAttributeFn): void {
         if (componentMeta.attributes) {
-            return Object.keys(componentMeta.attributes).filter(key => componentMeta.attributes && componentMeta.attributes.hasOwnProperty(key));
-        } else {
-            return [];
+            Object.keys(componentMeta.attributes)
+                .filter(key => componentMeta.attributes && componentMeta.attributes.hasOwnProperty(key))
+                .forEach(attribute => callback(attribute, componentMeta));
+            if (recurse && componentMeta.mixins) {
+                componentMeta.mixins.forEach(mixin => {
+                    let mixinMeta: ComponentMeta = this.getMetaByTag(mixin);
+                    this.getComponentAttributes(mixinMeta, true, callback);
+                });
+            }
         }
     }
 }

@@ -34,7 +34,9 @@ export class Attributes extends Vue {
     }
 
     public getAttributes(componentMeta: ComponentMeta): string[] {
-        return Meta.getComponentAttributes(componentMeta);
+        let result: string[] = [];
+        Meta.getComponentAttributes(componentMeta, false, (attribute, meta) => result.push(attribute));
+        return result;
     }
 
     public getAllAttributes(): string[] {
