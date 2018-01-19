@@ -43,11 +43,6 @@ $m-input-style--padding: 6px !default;
         &::before {
             border-color: $m-color--text;
         }
-
-        .m-icon-button.m-icon-button,
-        .m-icon.m-icon {
-            color: $m-color--text;
-        }
     }
 
     &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus) {
