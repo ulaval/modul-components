@@ -3,41 +3,28 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './carousel.html?style=./carousel.scss';
 import { CAROUSEL_NAME } from '../component-names';
-import carouselItem, { MCarouselItem, BaseCarousel } from '../carousel-item/carousel-item';
+import carouselItem, { MCarouselItem } from '../carousel-item/carousel-item';
+import i18n from 'src/components/i18n/i18n';
 
 @WithRender
 @Component
-export class MCarousel extends BaseCarousel {
+export class MCarousel extends Vue {
     @Prop()
     public index: number;
 
-    @Prop()
+    @Prop({ default: true })
     public infinite: boolean;
 
     @Prop({ default: 0 })
     public interval: number;
 
-    public rightToLeft: boolean = true;
+    private items: MCarouselItem[] = [];
 
     private internalIndex: number = 0;
     private updateInterval: any;
-    private itemIds: string[] = [];
-
-    public addItem(id) {
-        this.itemIds.push(id);
-    }
-
-    public removeItem(id) {
-        this.itemIds = this.itemIds.filter(item => {
-            return item != id;
-        });
-    }
-
-    public get activeId(): string {
-        return this.itemIds[this.propIndex];
-    }
 
     protected mounted() {
+        this.buildItems();
         document.addEventListener('keyup', this.changeItem);
         if (this.interval) {
             this.updateInterval = setInterval(() => {
@@ -46,9 +33,39 @@ export class MCarousel extends BaseCarousel {
         }
     }
 
+    protected updated() {
+        this.buildItems();
+        console.log('updated');
+    }
+
     protected beforeDestroy() {
         document.removeEventListener('keyup', this.changeItem);
         clearInterval(this.updateInterval);
+    }
+
+    private async buildItems() {
+        let items: MCarouselItem[] = [];
+        await Vue.nextTick();
+        if (this.$slots.default) {
+            let index = 0;
+            this.$slots.default.forEach((item) => {
+                if (item.componentInstance instanceof MCarouselItem) {
+                    if (index === this.propIndex) item.componentInstance.isVisible = true;
+                    item.componentInstance.$slots.default.forEach(content => {
+                        let el = content.componentInstance && content.componentInstance.$el || content.elm;
+                        if (el instanceof HTMLElement) {
+                            el.style.maxHeight = this.$el.style.height || '100vh';
+                            el.style.maxWidth = this.$el.clientWidth + 'px';
+                            el.style.display = 'block';
+                        }
+                    });
+                    items.push(item.componentInstance);
+                    index++;
+                }
+            });
+            this.items = items;
+        }
+        this.propIndex = Math.min(this.items.length - 1, this.propIndex);
     }
 
     private changeItem(e) {
@@ -67,14 +84,28 @@ export class MCarousel extends BaseCarousel {
     }
 
     private set propIndex(value) {
-        this.rightToLeft = value > this.propIndex;
-        if (value > this.itemIds.length - 1) {
-            value = this.infinite ? 0 : this.itemIds.length - 1;
-        } else if (value < 0) {
-            value = this.infinite ? this.itemIds.length - 1 : 0;
+        if (value != this.propIndex) {
+            let transition = value > this.propIndex;
+            if (value > this.items.length - 1) {
+                if (this.infinite) {
+                    value = 0;
+                } else {
+                    value = this.items.length - 1;
+                }
+            } else if (value < 0) {
+                if (this.infinite) {
+                    value = this.items.length - 1;
+                } else {
+                    value = 0;
+                }
+            }
+            this.items.forEach((item, index) => {
+                item.transitionForward = transition;
+                item.isVisible = index === value;
+            });
+            this.internalIndex = value;
+            this.$emit('update:index', value);
         }
-        this.internalIndex = value;
-        this.$emit('update:index', value);
     }
 
     private showPrevItem() {
