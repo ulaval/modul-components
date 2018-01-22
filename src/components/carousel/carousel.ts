@@ -12,7 +12,7 @@ export class MCarousel extends Vue {
     @Prop()
     public index: number;
 
-    @Prop({ default: true })
+    @Prop()
     public infinite: boolean;
 
     @Prop({ default: 0 })
