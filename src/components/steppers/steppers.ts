@@ -15,34 +15,42 @@ export class MSteppers extends BaseSteppers {
 
     private isAnimActive: boolean = false;
     private overflowWrapperWidth: string;
+    private lineWidth: number;
 
     public setLineWidth(): void {
         let defaultLineEL: HTMLElement = this.$refs.defaultLine as HTMLElement;
         let selectedLineEL: HTMLElement = this.$refs.selectedLine as HTMLElement;
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
-        let leftSpacing: number;
-        let rightSpacing: number;
-        this.$children.forEach((child, index, arr) => {
-            if (index == 0 && arr.length >= 1) {
-                leftSpacing = child.$el.clientWidth / 2;
+        let parentWidth = wrapItem.clientWidth;
+        let leftSpacing: number = 0;
+        let rightSpacing: number = 0;
+        let hasFindFirst: Boolean = false;
+
+        for (let i = 0 ; i <= this.$children.length - 1; i++) {
+            if (i === 0 && this.$children.length >= 1) {
+                leftSpacing = this.$children[i].$el.clientWidth / 2;
             }
-            if (arr.length - 1 === index && arr.length > 1) {
-                rightSpacing = child.$el.clientWidth / 2;
+            if (this.$children.length - 1 === i && this.$children.length > 1) {
+                rightSpacing = this.$children[i].$el.clientWidth / 2;
             }
-            if (child.$props.state == MSteppersItemState.InProgress || child.$props.state == MSteppersItemState.Completed) {
-                let parentWidth = wrapItem.clientWidth;
-                let childWidth = child.$el.clientWidth;
-                let childOffset = child.$el.offsetLeft;
-                let lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;
-                selectedLineEL.style.width = lineWidth + '%';
-                selectedLineEL.style.left = leftSpacing + 'px';
+            if (this.$children[i].$props.state == MSteppersItemState.InProgress) {
+                this.scrollElement(this.$children[i].$el);
             }
-            if (child.$props.state == MSteppersItemState.InProgress) {
-                this.scrollElement(child.$el);
+        }
+
+        for (let i = this.$children.length - 1; i >= 0; i--) {
+            if (hasFindFirst === false && this.$children[i].$props.state == MSteppersItemState.InProgress || hasFindFirst === false && this.$children[i].$props.state == MSteppersItemState.Completed) {
+                let childWidth = this.$children[i].$el.clientWidth;
+                let childOffset = this.$children[i].$el.offsetLeft;
+                this.lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;
+                hasFindFirst = true;
             }
-            defaultLineEL.style.left = leftSpacing + 'px';
-            defaultLineEL.style.right = rightSpacing + 'px';
-        });
+        }
+
+        defaultLineEL.style.left = leftSpacing + 'px';
+        defaultLineEL.style.right = rightSpacing + 'px';
+        selectedLineEL.style.width = this.lineWidth + '%';
+        selectedLineEL.style.left = leftSpacing + 'px';
     }
 
     public setAnim(value): void {
@@ -59,11 +67,6 @@ export class MSteppers extends BaseSteppers {
         this.setMinWidth();
         this.setHiddenHeight();
         this.setLineWidth();
-        // this.$children.forEach((child, index, arr) => {
-        //     if (child.$props.state == MSteppersItemState.InProgress) {
-        //         this.centeringElement(child.$el);
-        //     }
-        // });
         this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
     }
 
