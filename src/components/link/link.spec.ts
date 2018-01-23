@@ -301,7 +301,7 @@ describe('link', () => {
                 element = (vm.$refs.a as Vue).$el.querySelector(ICON_CLASS);
                 expect(element).toBeTruthy();
                 if (element) {
-                    validateIconSvg(element, 'right-arrow');
+                    validateIconSvg(element, 'chevron');
                 }
 
                 done();

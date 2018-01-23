@@ -54,7 +54,7 @@ $m-step--badge--size-s: 10px;
         height: 100%;
         z-index: 1;
         width: 2px;
-        background-color: $m-color--grey;
+        background: $m-color--grey;
         content: "";
         left: #{ ($m-step--icon--size / 2) - 1 }; // Magic number
     }
@@ -92,7 +92,7 @@ $m-step--badge--size-s: 10px;
             height: 0;
             z-index: 0;
             width: 0;
-            background-color: transparent;
+            background: none;
             content: "";
             left: auto;
         }
@@ -122,7 +122,7 @@ $m-step--badge--size-s: 10px;
             width: $m-step--icon--size;
             border-radius: 50%;
             border: 2px solid $m-color--grey;
-            background-color: $m-color--white;
+            background: $m-color--white;
             font-size: 18px;
 
             &-badge {

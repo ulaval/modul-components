@@ -76,7 +76,7 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
-                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-info');
+                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'information');
 
                 done();
             });
@@ -90,7 +90,7 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
-                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-warning');
+                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'warning');
 
                 done();
             });
@@ -104,7 +104,7 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeTruthy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeFalsy();
 
-                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-error');
+                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'error');
 
                 done();
             });
@@ -118,7 +118,7 @@ describe('message', () => {
                 expect(vm.$el.classList.contains(STATE_ERROR_CSS)).toBeFalsy();
                 expect(vm.$el.classList.contains(STATE_SUCCESS_CSS)).toBeTruthy();
 
-                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'chip-check');
+                validateIconSvg(vm.$el.querySelector(ICON_CLASS) as Element, 'check');
 
                 done();
             });
@@ -217,11 +217,11 @@ describe('message', () => {
             vm = new Vue({
                 data: {
                     isVisible: true,
-                    closeButton: false
+                    hasCloseButton: false
                 },
                 template: `
             <div>
-                <m-message ref="a" :visible="isVisible" :close-button="closeButton">Consequat ut proident est ullamco consequat ullamco.</m-message>
+                <m-message ref="a" :visible="isVisible" :close-button="hasCloseButton">Consequat ut proident est ullamco consequat ullamco.</m-message>
             </div>`
             }).$mount();
         });
@@ -244,16 +244,18 @@ describe('message', () => {
         });
 
         it('with close no sync', done => {
-            expect(vm.$el.querySelector('.m-message')).toBeFalsy();
+            expect(vm.$el.querySelector(ICON_BUTTON_CLASS)).toBeFalsy();
 
-            (vm as any).closeButton = true;
-            let closeButton: HTMLElement = vm.$el.querySelector(ICON_BUTTON_CLASS) as HTMLElement;
-            expect(closeButton).toBeTruthy();
-            closeButton.click();
-
+            (vm as any).hasCloseButton = true;
             Vue.nextTick(() => {
-                expect(vm.$el.querySelector('.m-message')).toBeTruthy();
-                done();
+                let hasCloseButton: HTMLElement = vm.$el.querySelector(ICON_BUTTON_CLASS) as HTMLElement;
+                expect(hasCloseButton).toBeTruthy();
+                hasCloseButton.click();
+
+                Vue.nextTick(() => {
+                    expect(vm.$el.querySelector('.m-message')).toBeTruthy();
+                    done();
+                });
             });
         });
     });
@@ -290,7 +292,7 @@ describe('message', () => {
     it('close button event', done => {
         let clickSpy = jasmine.createSpy('clickSpy');
         let vm = new Vue({
-            template: `<m-message @close="onClick($event)">Consequat ut proident est ullamco consequat ullamco.</m-message>`,
+            template: `<m-message @close="onClick($event)" close-button="true">Consequat ut proident est ullamco consequat ullamco.</m-message>`,
             methods: {
                 onClick: clickSpy
             }

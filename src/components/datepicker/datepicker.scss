@@ -161,7 +161,7 @@ $m-datepicker--item-dimension: $m-touch-size !default;
     }
 
     .m--is-disabled {
-        background-color: transparent;
+        background-color: none;
         color: $m-color--grey-light;
         cursor: not-allowed;
     }

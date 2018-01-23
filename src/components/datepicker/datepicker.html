@@ -51,14 +51,14 @@
              placement="bottom">
         <div slot="header" class="m-datepicker__header">
             <nav class="m-datepicker__header__nav">
-                <m-icon-button icon-name="left-arrow" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>
+                <m-icon-button icon-name="left-chevron" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>
                 <button type="button" class="m-datepicker__years" @click="showYears">{{selectedYear}}</button>
-                <m-icon-button icon-name="right-arrow" @click="selectYear(selectedYear + 1)" :disabled="isMaxYear">next year</m-icon-button>
+                <m-icon-button icon-name="chevron" @click="selectYear(selectedYear + 1)" :disabled="isMaxYear">next year</m-icon-button>
             </nav>
             <nav class="m-datepicker__header__nav">
-                <m-icon-button icon-name="left-arrow" @click="selectMonth(selectedMonth - 1)" :disabled="isMinMonth">previous month</m-icon-button>
+                <m-icon-button icon-name="left-chevron" @click="selectMonth(selectedMonth - 1)" :disabled="isMinMonth">previous month</m-icon-button>
                 <button type="button" class="m-datepicker__months" @click="view = 'month'">{{ selectedMonthName }}</button>
-                <m-icon-button icon-name="right-arrow" @click="selectMonth(selectedMonth + 1)" :disabled="isMaxMonth">next month</m-icon-button>
+                <m-icon-button icon-name="chevron" @click="selectMonth(selectedMonth + 1)" :disabled="isMaxMonth">next month</m-icon-button>
             </nav>
         </div>
         <div class="m-datepicker__body" ref="body">

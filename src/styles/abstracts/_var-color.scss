@@ -28,16 +28,16 @@ $m-color--grey-lightest: #f7f7f7 !default;
 //  General color
 // ======================================================================
 $m-color--black: #000;
-$m-color--text: $m-color--black;
+$m-color--text: $m-color--black-grey;
 $m-color--white: #fff;
 
 // ======================================================================
 //  Success colors
 // ======================================================================
-$m-color--success-dark: #55b26c !default;
-$m-color--success: #1dcd8d !default;
-$m-color--success-light: #50e2a7 !default;
-$m-color--success-lightest: #abe5c3 !default;
+$m-color--success-dark: #008964 !default;
+$m-color--success: #00c77f !default;
+$m-color--success-light: #abe5c3 !default;
+$m-color--success-lightest: #eaf9f1 !default;
 
 // ======================================================================
 //  Warning colors

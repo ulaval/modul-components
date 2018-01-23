@@ -50,7 +50,7 @@ export class MTextarea extends ModulVue {
         return !this.textareaError && this.as<InputState>().isValid;
     }
 
-    private onKeydown(event): void {
+    private onInput(event): void {
         let el: HTMLElement = (this.$refs.input as HTMLElement);
         setTimeout(() => {
             el.style.height = 'auto';

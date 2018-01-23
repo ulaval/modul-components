@@ -5,45 +5,14 @@ import WithRender from './carousel-item.html?style=./carousel-item.scss';
 import { CAROUSEL_ITEM_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 
-export abstract class BaseCarousel extends Vue {
-    abstract rightToLeft: boolean;
-    abstract activeId: string;
-    abstract addItem(id): void;
-    abstract removeItem(id): void;
-}
-
 @WithRender
 @Component
 export class MCarouselItem extends Vue {
-    @Prop()
-    public id: number;
+    public isVisible: boolean = false;
+    public transitionForward: boolean = true;
 
-    private uuid: string = uuid.generate();
-
-    protected mounted() {
-        if (this.$parent.$parent instanceof BaseCarousel) {
-            this.$parent.$parent.addItem(this.uuid);
-        }
-    }
-
-    protected beforeDestroy() {
-        if (this.$parent.$parent instanceof BaseCarousel) {
-            this.$parent.$parent.removeItem(this.uuid);
-        }
-    }
-
-    private get isVisible(): boolean {
-        if (this.$parent.$parent instanceof BaseCarousel) {
-            return this.$parent.$parent.activeId == this.uuid;
-        }
-        return false;
-    }
-
-    private get transitionName(): string {
-        if (this.$parent.$parent instanceof BaseCarousel) {
-            return this.$parent.$parent.rightToLeft ? 'right-to-left' : 'left-to-right';
-        }
-        return '';
+    private get transitionName() {
+        return this.transitionForward ? 'right-to-left' : 'left-to-right';
     }
 }
 

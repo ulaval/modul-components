@@ -5,6 +5,7 @@ $m-steppers-item--line-width: 2px;
 .m-steppers {
     position: relative;
     overflow: hidden;
+    user-select: none;
 
     &__overflow-wrapper {
         position: relative;
