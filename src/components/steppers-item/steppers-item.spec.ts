@@ -18,7 +18,7 @@ describe('MSteppersItemState', () => {
     });
 });
 
-describe('Steppers-item', () => {
+describe('MSteppers-item', () => {
     beforeEach(() => {
         spyOn(console, 'error');
 
@@ -107,8 +107,6 @@ describe('Steppers-item', () => {
                 onClick: clickSpy
             }
         }).$mount();
-
-        console.log(vm.$el);
 
         let icon = (vm as Vue).$el.querySelector('.m-steppers-item__icon') as Element;
         let title = (vm as Vue).$el.querySelector('.m-steppers-item__title') as Element;
