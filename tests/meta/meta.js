@@ -51,8 +51,7 @@ function validateProps(meta, source, errors) {
                 errors.push(`Property ${prop[2]} not found in meta`);
             }
         }
-    }
-    while (prop);
+    } while (prop);
 
     if (meta.attributes) {
         Object.keys(meta.attributes).forEach(attribute => {
