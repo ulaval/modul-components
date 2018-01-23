@@ -5,6 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './steppers-item.html?style=./steppers-item.scss';
 import { STEPPERS_ITEM_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
+import uuid from '../../utils/uuid/uuid';
 
 export enum MSteppersItemState {
     Completed = 'completed',
@@ -32,6 +33,10 @@ export class MSteppersItem extends ModulVue {
     public iconName: string;
     @Prop()
     public iconTitle: string;
+    @Prop()
+    public id: string;
+
+    private uuid: string = `mSteppersItem-${uuid.generate()}`;
 
     @Watch('state')
     private stateChanged(value?: string[]): void {
@@ -57,6 +62,10 @@ export class MSteppersItem extends ModulVue {
 
     private get isTabIndex() {
         return this.state === MSteppersItemState.Completed ? 0 : -1;
+    }
+
+    private get propId(): string {
+        return this.id || this.uuid;
     }
 
     private onClick(event: Event): void {

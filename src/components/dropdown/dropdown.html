@@ -31,7 +31,7 @@
                v-model="selectedText">
         <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
         <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="active">
-            <m-icon-button ref="arrow" icon-name="dropdown-arrow" button-size="22px" icon-size="16px" :disabled="!active" @keydown.enter.prevent="open = active">
+            <m-icon-button ref="arrow" icon-name="down-arrow" button-size="22px" icon-size="16px" :disabled="!active" @keydown.enter.prevent="open = active">
                 <m-i18n k="m-dropdown:open" v-if="!open"></m-i18n>
                 <m-i18n k="m-dropdown:close" v-if="open"></m-i18n>
             </m-icon-button>

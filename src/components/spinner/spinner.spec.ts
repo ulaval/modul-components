@@ -69,6 +69,7 @@ describe('spinner', () => {
         Vue.nextTick(() => {
             const titleClass: string = '.m-spinner__title';
             let title: HTMLElement = spinner.$el.querySelector(titleClass) as HTMLElement;
+            spinner.titleMessage = 'title';
             expect(title).toBeFalsy();
 
             spinner.title = true;
@@ -108,6 +109,7 @@ describe('spinner', () => {
         Vue.nextTick(() => {
             const descClass: string = '.m-spinner__description';
             let desc: HTMLElement = spinner.$el.querySelector(descClass) as HTMLElement;
+            spinner.descriptionMessage = 'desc';
             expect(desc).toBeFalsy();
 
             spinner.description = true;

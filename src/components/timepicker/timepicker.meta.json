@@ -1,7 +1,7 @@
 {
     "tag": "m-timepicker",
     "name": "m-timepicker-meta:name",
-    "production": false,
+    "production": true,
     "attributes": {
         "label": {
             "type": "string"

@@ -21,6 +21,10 @@ export class MListItem extends Vue {
     public waiting: boolean;
     @Prop()
     public fullWidth: boolean;
+    @Prop({ default: false })
+    public borderTop: boolean;
+    @Prop({ default: false })
+    public borderBottom: boolean;
 
     private click(event): void {
         this.$emit('click', event);
@@ -28,14 +32,6 @@ export class MListItem extends Vue {
 
     private get hasIcon() {
         return this.iconName != '' && this.iconName != undefined;
-    }
-
-    private get hasTriggerSlot() {
-        return !!this.$slots.trigger;
-    }
-
-    private get hasMenuSlot() {
-        return !!this.$slots.menu;
     }
 
     private get isWaiting() {

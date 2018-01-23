@@ -22,8 +22,7 @@
                   rows="1"
                   @focus="onFocus"
                   @blur="onBlur"
-                  @keydown="onKeydown"
-                  @change="onChange"
+                  @input="onInput"
                   ref="input"
                   v-model="model"
                   :style="{ maxWidth: maxWidth }"></textarea>

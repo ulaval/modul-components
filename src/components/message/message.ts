@@ -75,16 +75,16 @@ export class MMessage extends Vue {
         let icon: string = '';
         switch (this.state) {
             case MMessageState.Success:
-                icon = 'chip-check';
+                icon = 'check';
                 break;
             case MMessageState.Information:
-                icon = 'chip-info';
+                icon = 'information';
                 break;
             case MMessageState.Warning:
-                icon = 'chip-warning';
+                icon = 'warning';
                 break;
             case MMessageState.Error:
-                icon = 'chip-error';
+                icon = 'error';
                 break;
             default:
                 break;
