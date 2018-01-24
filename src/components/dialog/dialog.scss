@@ -4,7 +4,7 @@ $m-dialog--max-width: 600px !default;
 $m-dialog--max-width--s: 420px !default;
 
 .m-dialog {
-    display: inline-block;
+    // display: inline-block; // commented because the display property cause the div to show empty space. Related to https://github.com/ulaval/modul-components/issues/49
 
     &__wrap {
         position: fixed;
