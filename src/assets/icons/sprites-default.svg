@@ -37,6 +37,12 @@
             L9,15.9c0.2,0.2,0.4,0.3,0.6,0.3c0.3,0,0.5-0.1,0.6-0.3l6.9-6.5c0.2-0.2,0.3-0.4,0.3-0.7c0-0.5-0.4-0.9-0.9-0.9
             C16.4,7.8,16.1,7.9,16,8.1L16,8.1z"/>
     </symbol>
+    <symbol id="chip-close" viewBox="0 0 24 24">
+        <circle fill="currentColor" cx="12" cy="12" r="12"/>
+        <path fill="#fff" d="M13.1,12l4.4-4.4c0.3-0.3,0.3-0.8,0-1.1s-0.8-0.3-1.1,0L12,10.9L7.6,6.6c-0.3-0.3-0.8-0.3-1.1,0s-0.3,0.8,0,1.1
+            l4.4,4.4l-4.4,4.4c-0.3,0.3-0.3,0.8,0,1.1c0.1,0.1,0.3,0.2,0.5,0.2s0.4-0.1,0.5-0.2l4.4-4.4l4.4,4.4c0.1,0.1,0.3,0.2,0.5,0.2
+            s0.4-0.1,0.5-0.2c0.3-0.3,0.3-0.8,0-1.1L13.1,12z"/>
+    </symbol>
     <symbol id="chip-error" viewBox="0 0 24 24">
         <circle fill="currentColor" cx="12" cy="12" r="12"/>
         <path fill="#fff" d="M12,14.3c0.5,0,0.9-0.4,0.9-0.9V6c0-0.5-0.4-0.9-0.9-0.9S11.1,5.5,11.1,6v7.4C11.1,13.9,11.5,14.3,12,14.3z"/>
@@ -60,10 +66,8 @@
         </g>
     </symbol>
     <symbol id="close" viewBox="0 0 24 24">
-        <g stroke="currentColor">
-            <line x1="0" y1="0" x2="24" y2="24"/>
-            <line x1="24" y1="0" x2="0" y2="24"/>
-        </g>
+        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" x1="0.6" y1="0.6" x2="23.4" y2="23.4"/>
+        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" x1="23.4" y1="0.6" x2="0.6" y2="23.4"/>
     </symbol>
     <symbol id="code-chevrons" viewBox="0 0 24 24">
         <polyline stroke="currentColor" fill="none" points="7.5,17.5 0.5,11.8 7.1,6.5 "/>
