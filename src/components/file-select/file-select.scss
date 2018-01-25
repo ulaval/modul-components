@@ -1,9 +1,9 @@
 @import 'abstracts/variables';
 
 .m-file-select {
-    display: inline-flex;
+    display: inline;
 
-    .m-file-select__button {
+    .m-file-select__label {
         position: relative;
         display: inline-flex;
         align-items: center;
@@ -20,7 +20,7 @@
             display: inline;
         }
 
-        span:not(.m-button__hidden) {
+        span:not(.m-label__hidden) {
             position: relative;
         }
 
@@ -88,6 +88,14 @@
             &:empty {
                 display: none;
             }
+        }
+    }
+
+    &.m--is-full-size {
+        display: block;
+
+        .m-file-select__label {
+            width: 100%;
         }
     }
 

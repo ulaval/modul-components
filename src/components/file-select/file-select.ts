@@ -38,7 +38,6 @@ export class MFileSelect extends Vue {
     public iconSize: string;
 
     private id: string = `mFileSelect-${uuid.generate()}`;
-    private isDisabled: string;
 
     private onClick(event: Event): void {
         this.$emit('click', event);

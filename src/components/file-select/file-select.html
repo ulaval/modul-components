@@ -1,32 +1,25 @@
-<span class="m-file-select">
-    <input ref="inputFile" type="file" id="id" class="m-file-select__hidden" @click="onClick" @focus="onFocus" @blur="onBlur">
-    <label class="m-file-select__wrap" for="id">
-        <span class="m-file-select__button"
-                :class="{ 'm--is-skin-primary': isSkinPrimary,
-                    'm--is-skin-secondary': isSkinSecondary,
-                    'm--is-waiting': isWaiting,
-                    'm--is-disabled': disabled,
-                    'm--is-full-size': fullSize }" >
-            <m-icon aria-hidden="true"
-                    class="m-file-select__button__icon m--is-left"
-                    :name="iconName"
-                    :size="iconSize"
-                    v-if="hasIconLeft"></m-icon>
-            <m-spinner aria-hidden="true" class="m-file-select__button__icon m--is-left" skin="lighter" size="small" v-if="hasWaitingIconLeft && isWaiting"></m-spinner>
-            <span class="m-file-select__button__text">
-                <m-i18n v-if="!hasLabel" k="m-select-file:label"></m-i18n>
-                <template v-else>{{ label }}</template>
-                <span class="m-file-select__button__precision" v-if="hasPrecisionSlot">
-                    <slot name="precision">precision</slot>
-                </span>
+<span class="m-file-select" :class="{ 'm--is-full-size': fullSize }">
+    <input ref="inputFile" type="file" :id="id" class="m-file-select__hidden" @click="onClick" @focus="onFocus" @blur="onBlur" :disabled="disabled || isWaiting">
+    <label :for="id" class="m-file-select__label" :class="{ 'm--is-skin-primary': isSkinPrimary, 'm--is-skin-secondary': isSkinSecondary, 'm--is-waiting': isWaiting, 'm--is-disabled': disabled }" >
+        <m-icon aria-hidden="true"
+                class="m-file-select__label__icon m--is-left"
+                :name="iconName"
+                :size="iconSize"
+                v-if="hasIconLeft"></m-icon>
+        <m-spinner aria-hidden="true" class="m-file-select__label__icon m--is-left" skin="lighter" size="small" v-if="hasWaitingIconLeft && isWaiting"></m-spinner>
+        <span class="m-file-select__label__text">
+            <m-i18n v-if="!hasLabel" k="m-select-file:label"></m-i18n>
+            <template v-else>{{ label }}</template>
+            <span class="m-file-select__label__precision" v-if="hasPrecisionSlot">
+                <slot name="precision"></slot>
             </span>
-            <m-spinner aria-hidden="true" class="m-file-select__button__icon m--is-right" skin="lighter" size="small" v-if="hasWaitingIconRight && isWaiting"></m-spinner>
-            <m-icon aria-hidden="true"
-                    class="m-file-select__button__icon m--is-right"
-                    :name="iconName"
-                    :size="iconSize"
-                    v-if="hasIconRight"></m-icon>
         </span>
+        <m-spinner aria-hidden="true" class="m-file-select__label__icon m--is-right" skin="lighter" size="small" v-if="hasWaitingIconRight && isWaiting"></m-spinner>
+        <m-icon aria-hidden="true"
+                class="m-file-select__label__icon m--is-right"
+                :name="iconName"
+                :size="iconSize"
+                v-if="hasIconRight"></m-icon>
     </label>
     <m-validation-message ref="validation"
         :disabled="isDisabled"
