@@ -7,6 +7,7 @@ export class SpritesService {
         let div: HTMLDivElement = document.createElement('div');
         let id: string = uuid.generate();
         div.id = id;
+        div.setAttribute('aria-hidden', 'true');
         div.style.display = 'none';
         div.innerHTML = sprites;
         document.body.insertBefore(div, document.body.childNodes[0]);
