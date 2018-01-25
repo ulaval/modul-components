@@ -1,0 +1,18 @@
+{
+    "tag": "m-file-select",
+    "name": "m-file-select:name",
+    "production": false,
+    "attributes": {
+        "type": {
+            "type": "string",
+            "values": [
+                "button",
+                "submit",
+                "reset"
+            ],
+            "default": 0
+        }
+    },
+    "overview": "file-select.overview",
+    "preview": "file-select.preview"
+}

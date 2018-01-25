@@ -14,6 +14,7 @@ import DropdownPlugin from './dropdown/dropdown';
 import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DropdownGroupPlugin from './dropdown-group/dropdown-group';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
+import FileSelectPlugin from './file-select/file-select';
 import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
@@ -72,6 +73,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DropdownItemPlugin);
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
+        Vue.use(FileSelectPlugin);
         Vue.use(FlexTemplatePlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);

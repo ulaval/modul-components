@@ -13,6 +13,7 @@ export const DROPDOWN_NAME: string = 'm-dropdown';
 export const DROPDOWN_ITEM_NAME: string = 'm-dropdown-item';
 export const DROPDOWN_GROUP_NAME: string = 'm-dropdown-group';
 export const DYNAMIC_TEMPLATE_NAME: string = 'm-dynamic-template';
+export const FILE_SELECT_NAME: string = 'm-file-select';
 export const FLEX_TEMPLATE_NAME: string = 'm-flex-template';
 export const I18N_NAME: string = 'm-i18n';
 export const ICON_NAME: string = 'm-icon';
@@ -70,6 +71,7 @@ export const components: string[] = [
     DROPDOWN_ITEM_NAME,
     DROPDOWN_GROUP_NAME,
     DYNAMIC_TEMPLATE_NAME,
+    FILE_SELECT_NAME,
     FLEX_TEMPLATE_NAME,
     I18N_NAME,
     ICON_NAME,
