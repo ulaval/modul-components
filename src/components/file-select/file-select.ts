@@ -42,7 +42,7 @@ export class MFileSelect extends Vue {
 
     private onClick(event: Event): void {
         this.$emit('click', event);
-        this.$el.blur();
+        this.$refs['inputFile']['blur']();
     }
 
     private onFocus(event: Event): void {
