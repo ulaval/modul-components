@@ -12,6 +12,7 @@ readFolders('./src/components', (folder, done) => {
         read(`./src/components/${folder}/${folder}.meta.json`, rawMeta => {
             let meta = JSON.parse(rawMeta);
 
+            validateMeta(meta, errors);
             validateProps(meta, source, errors);
             validateMixins(meta, source, errors);
 
@@ -25,6 +26,25 @@ readFolders('./src/components', (folder, done) => {
         done(errors);
     });
 });
+
+function validateMeta(meta, errors) {
+    // from ComponentMeta interface
+    let supportedKeys = {
+        tag: null,
+        folder: null,
+        name: null,
+        attributes: null,
+        mixins: null,
+        production: null,
+        methods: null,
+        category: null,
+        preview: null
+    };
+
+    let keys = Object.keys(meta).filter(k => meta.hasOwnProperty(k) && supportedKeys[k] === undefined);
+
+    keys.forEach(k => errors.push(`Unknown component property ${k}`));
+}
 
 function validateProps(meta, source, errors) {
     let prop = undefined;
