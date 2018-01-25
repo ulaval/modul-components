@@ -2,15 +2,15 @@ import Vue from 'vue';
 import { components } from '../components/component-names';
 import { directives } from '../directives/directive-names';
 
-export type OverviewType = 'rubric' | 'do' | 'dont';
+// export type OverviewType = 'rubric' | 'do' | 'dont';
 
 export type Preview = string | boolean;
 
-export interface Overview {
-    type: OverviewType;
-    title: string;
-    content: string;
-}
+// export interface Overview {
+//     type: OverviewType;
+//     title: string;
+//     content: string;
+// }
 
 export interface ComponentAttribute {
     type: string;
@@ -46,12 +46,13 @@ export interface ComponentMethods {
 
 export interface ComponentMeta {
     tag: string;
+    folder: string;
     name?: string;
     attributes?: ComponentAttributes;
     mixins?: string[];
     production?: boolean;
     methods?: ComponentMethods;
-    overview?: string;
+    // overview?: string;
     category?: string;
     preview?: Preview;
 }
@@ -72,11 +73,11 @@ export class Meta {
 
     constructor() {
         components.forEach(componentTag => {
-            this.componentMeta[componentTag] = { tag: componentTag };
+            this.componentMeta[componentTag] = { tag: componentTag, folder: componentTag.substr(2) };
         });
 
         directives.forEach(directiveTag => {
-            this.componentMeta[directiveTag] = { tag: directiveTag };
+            this.componentMeta[directiveTag] = { tag: directiveTag, folder: directiveTag.substr(2) };
         });
     }
 
