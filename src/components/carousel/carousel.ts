@@ -22,6 +22,7 @@ export class MCarousel extends Vue {
 
     private internalIndex: number = 0;
     private updateInterval: any;
+    private moveForward: boolean = true;
 
     protected mounted() {
         this.buildItems();
@@ -35,7 +36,6 @@ export class MCarousel extends Vue {
 
     protected updated() {
         this.buildItems();
-        console.log('updated');
     }
 
     protected beforeDestroy() {
@@ -44,13 +44,17 @@ export class MCarousel extends Vue {
     }
 
     private async buildItems() {
+        let newIndex = this.limitIndex(this.propIndex);
+        this.moveForward = this.internalIndex < newIndex;
+        this.internalIndex = newIndex;
         let items: MCarouselItem[] = [];
         await Vue.nextTick();
         if (this.$slots.default) {
             let index = 0;
             this.$slots.default.forEach((item) => {
                 if (item.componentInstance instanceof MCarouselItem) {
-                    if (index === this.propIndex) item.componentInstance.isVisible = true;
+                    item.componentInstance.transitionForward = this.moveForward;
+                    item.componentInstance.isVisible = index === this.internalIndex;
                     item.componentInstance.$slots.default.forEach(content => {
                         let el = content.componentInstance && content.componentInstance.$el || content.elm;
                         if (el instanceof HTMLElement) {
@@ -65,7 +69,6 @@ export class MCarousel extends Vue {
             });
             this.items = items;
         }
-        this.propIndex = Math.min(this.items.length - 1, this.propIndex);
     }
 
     private changeItem(e) {
@@ -85,35 +88,36 @@ export class MCarousel extends Vue {
 
     private set propIndex(value) {
         if (value != this.propIndex) {
-            let transition = value > this.propIndex;
-            if (value > this.items.length - 1) {
-                if (this.infinite) {
-                    value = 0;
-                } else {
-                    value = this.items.length - 1;
-                }
-            } else if (value < 0) {
-                if (this.infinite) {
-                    value = this.items.length - 1;
-                } else {
-                    value = 0;
-                }
-            }
+            let newValue = this.limitIndex(value);
             this.items.forEach((item, index) => {
-                item.transitionForward = transition;
-                item.isVisible = index === value;
+                item.transitionForward = this.moveForward;
+                item.isVisible = index === newValue;
             });
-            this.internalIndex = value;
-            this.$emit('update:index', value);
+            this.internalIndex = newValue;
+            this.$emit('update:index', newValue);
         }
     }
 
+    private limitIndex(value): number {
+        if (this.infinite) {
+            if (value > this.items.length - 1) {
+                return 0;
+            } else if (value < 0) {
+                return this.items.length - 1;
+            }
+            return value;
+        }
+        return Math.max(Math.min(value, this.items.length - 1), 0);
+    }
+
     private showPrevItem() {
+        this.moveForward = false;
         this.propIndex--;
         this.resetInterval();
     }
 
     private showNextItem() {
+        this.moveForward = true;
         this.propIndex++;
         this.resetInterval();
     }
