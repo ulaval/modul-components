@@ -5,6 +5,14 @@
             <h1>{{$route.meta}}</h1>
         </div>
         <m-dynamic-template :template="tag"></m-dynamic-template>
+
+        <div style="width: 100px; height: 100px; background-color: blue" v-m-file-drop>
+        </div>
+
+        <ul>
+            <m-list-item v-for="(item, index) in allFiles">{{item.name}}</m-list-item>
+        </ul>
+
     </m-template>
     <div slot="footer">Footer</div>
 </m-flex-template>

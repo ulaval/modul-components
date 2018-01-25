@@ -1,5 +1,5 @@
 import uuid from '../uuid/uuid';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import { ModulVue } from '../vue/vue';
 
 export interface MFile {
@@ -27,27 +27,47 @@ export class FileService {
 
     public clear(storeName?: string) {
         this.getStore(storeName).clear();
+        delete this.stores[this.getStoreName(storeName)];
+    }
+
+    private getStoreName(name?: string): string {
+        return name ? name : DEFAULT_STORE_NAME;
     }
 
     private getStore(name?: string): FileStore {
-        return this.stores[name ? name : DEFAULT_STORE_NAME];
+        const storeName = this.getStoreName(name);
+        let store = this.stores[storeName];
+        if (!store) {
+            store = this.stores[storeName] = new FileStore();
+        }
+
+        return store;
     }
 }
 
+interface FileStoreRx extends Vue {
+    files: MFile[];
+}
+
 class FileStore {
-    private allfiles: { [uid: string]: MFile } = {};
+    private filesmap: { [uid: string]: MFile } = {};
+    private rx: FileStoreRx;
+
+    constructor() {
+        this.rx = new Vue({
+            data: {
+                files: []
+            }
+        });
+    }
 
     public get files(): MFile[] {
-        const file: MFile[] = [];
-        for (const f in this.allfiles) {
-            file.push(this.allfiles[f]);
-        }
-        return file;
+        return this.rx.files;
     }
 
     public add(files: FileList) {
         for (let i = 0; i < files.length; ++i) {
-            const file = files.item[i];
+            const file = files[i];
 
             const mfile: MFile = {
                 uid: uuid.generate(),
@@ -56,8 +76,10 @@ class FileStore {
             };
 
             Object.freeze(mfile); // disable vuejs reactivity
-            this.allfiles[mfile.uid] = mfile;
+            this.filesmap[mfile.uid] = mfile;
         }
+
+        this.refreshRx();
     }
 
     public remove(uid: string) {
@@ -65,7 +87,15 @@ class FileStore {
     }
 
     public clear() {
-        this.allfiles = {};
+        this.rx.$destroy();
+    }
+
+    private refreshRx() {
+        const files: MFile[] = [];
+        for (const f in this.filesmap) {
+            files.push(this.filesmap[f]);
+        }
+        this.rx.files = files;
     }
 }
 
