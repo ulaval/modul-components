@@ -3,6 +3,14 @@
 .m-file-select {
     display: inline;
 
+    &:focus {
+        color: red;
+
+        .m-file-select__label {
+            @include m-button--hover();
+        }
+    }
+
     .m-file-select__label {
         position: relative;
         display: inline-flex;
@@ -31,6 +39,12 @@
 
             &.m--is-skin-secondary {
                 @include m-button--secondary();
+            }
+
+            &.m--is-focus {
+                color: $m-color--white;
+                background: $m-color--interactive-light;
+                border-color: $m-color--interactive-light;
             }
 
             @include m-button--hover();

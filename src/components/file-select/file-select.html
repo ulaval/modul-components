@@ -1,6 +1,6 @@
 <span class="m-file-select" :class="{ 'm--is-full-size': fullSize }">
     <input ref="inputFile" type="file" :id="id" class="m-file-select__hidden" @click="onClick" @focus="onFocus" @blur="onBlur" :disabled="disabled || isWaiting">
-    <label :for="id" class="m-file-select__label" :class="{ 'm--is-skin-primary': isSkinPrimary, 'm--is-skin-secondary': isSkinSecondary, 'm--is-waiting': isWaiting, 'm--is-disabled': disabled }" >
+    <label :for="id" class="m-file-select__label" :class="{ 'm--is-skin-primary': isSkinPrimary, 'm--is-skin-secondary': isSkinSecondary, 'm--is-waiting': isWaiting, 'm--is-disabled': disabled, 'm--is-focus': focused }" >
         <m-icon aria-hidden="true"
                 class="m-file-select__label__icon m--is-left"
                 :name="iconName"

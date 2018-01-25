@@ -38,6 +38,7 @@ export class MFileSelect extends Vue {
     public iconSize: string;
 
     private id: string = `mFileSelect-${uuid.generate()}`;
+    private focused: boolean = false;
 
     private onClick(event: Event): void {
         this.$emit('click', event);
@@ -46,10 +47,12 @@ export class MFileSelect extends Vue {
 
     private onFocus(event: Event): void {
         this.$emit('focus');
+        this.focused = true;
     }
 
     private onBlur(event: Event): void {
         this.$emit('blur');
+        this.focused = false;
     }
 
     private get isSkinPrimary(): boolean {
