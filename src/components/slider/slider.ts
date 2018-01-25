@@ -20,13 +20,20 @@ export class MSlider extends ModulVue {
 
     private internalValue: number = 50;
     private range: number = this.max - this.min;
+    private setElOffset: any;
     private offsetLeft: number;
     private offsetRatio: number;
 
     protected mounted(): void {
-        this.offsetLeft = this.$el.offsetLeft;
-        this.offsetRatio = this.range / this.$el.clientWidth;
         this.model = this.value;
+        this.setElOffset = window.setInterval(() => {
+            this.offsetLeft = this.$el.getBoundingClientRect().left;
+            this.offsetRatio = this.range / this.$el.clientWidth;
+        }, 300);
+    }
+
+    protected beforeDestroy(): void {
+        window.clearInterval(this.setElOffset);
     }
 
     @Watch('value')
