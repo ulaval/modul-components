@@ -5,7 +5,7 @@ export enum MediaQueriesBpMin {
     XL = '(min-width: 1600px)',
     L = '(min-width: 1200px)',
     M = '(min-width: 1024px)',
-    S = '(min-width: 768px)',
+    S = '(min-width: 769px)',
     XS = '(min-width: 480px)'
 }
 
@@ -13,14 +13,14 @@ export enum MediaQueriesBpMax {
     XL = '(max-width: 1599px)',
     L = '(max-width: 1199px)',
     M = '(max-width: 1023px)',
-    S = '(max-width: 767px)',
+    S = '(max-width: 768px)',
     XS = '(max-width: 479px)'
 }
 
 export enum MediaQueriesBp {
     L = '(min-width: 1024px) and (max-width:1599px)',
-    M = '(min-width: 768px) and (max-width: 1023px)',
-    S = '(min-width: 480px) and (max-width: 767px)'
+    M = '(min-width: 769px) and (max-width: 1023px)',
+    S = '(min-width: 480px) and (max-width: 768px)'
 }
 
 const MATCH: string = 'match-';

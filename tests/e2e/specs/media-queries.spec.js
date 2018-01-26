@@ -3,13 +3,13 @@ module.exports = {
         const devServer = browser.globals.devServerURL;
 
         const min480 = 'min480';
-        const min768 = 'min768';
+        const min769 = 'min769';
         const min1024 = 'min1024';
         const min1200 = 'min1200';
         const min1600 = 'min1600';
 
         const in480_768 = 'in480-768';
-        const in768_1024 = 'in768-1024';
+        const in769_1024 = 'in769-1024';
         const in1024_1600 = 'in1024-1600';
 
         const max480 = 'max480';
