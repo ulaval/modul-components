@@ -1,4 +1,5 @@
-import Vue, { PluginObject } from 'vue';
+import { ModulVue } from '../../utils/vue/vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './file-select.html?style=./file-select.scss';
@@ -8,7 +9,7 @@ import uuid from '../../utils/uuid/uuid';
 
 @WithRender
 @Component
-export class MFileSelect extends Vue {
+export class MFileSelect extends ModulVue {
 
     @Prop()
     public label: string;
@@ -36,65 +37,30 @@ export class MFileSelect extends Vue {
     public iconPosition: MButtonIconPosition;
     @Prop({ default: '12px' })
     public iconSize: string;
+    @Prop()
+    public multiple: boolean;
 
     private id: string = `mFileSelect-${uuid.generate()}`;
-    private focused: boolean = false;
 
     private onClick(event: Event): void {
+        (this.$refs.inputFile as HTMLElement).click();
         this.$emit('click', event);
         this.$refs['inputFile']['blur']();
     }
 
     private onFocus(event: Event): void {
         this.$emit('focus');
-        this.focused = true;
     }
 
     private onBlur(event: Event): void {
         this.$emit('blur');
-        this.focused = false;
     }
 
-    private get isSkinPrimary(): boolean {
-        return this.skin == MButtonSkin.Primary;
-    }
-
-    private get isSkinSecondary(): boolean {
-        return this.skin == MButtonSkin.Secondary;
-    }
-
-    private get isWaiting(): boolean {
-        console.log(this.disabled, this.waiting);
-
-        return !this.disabled ? this.waiting : false;
-    }
-
-    private get hasIcone(): boolean {
-        return !!this.iconName;
-    }
-
-    private get hasIconLeft(): boolean {
-        return this.iconPosition == MButtonIconPosition.Left && this.hasIcone && !this.waiting;
-    }
-
-    private get hasIconRight(): boolean {
-        return this.iconPosition == MButtonIconPosition.Right && this.hasIcone && !this.waiting;
-    }
-
-    private get hasWaitingIconLeft(): boolean {
-        return this.iconPosition == MButtonIconPosition.Left && this.waiting;
-    }
-
-    private get hasWaitingIconRight(): boolean {
-        return this.iconPosition == MButtonIconPosition.Right && this.waiting;
-    }
-
-    private get hasPrecisionSlot(): boolean {
-        return !!this.$slots.precision;
-    }
-
-    private get hasLabel(): boolean {
-        return !!this.label;
+    private processFile(event: Event): void {
+        const file = (this.$refs.inputFile as HTMLInputElement).files;
+        if (file) {
+            this.$file.add(file) ;
+        }
     }
 }
 
