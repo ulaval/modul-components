@@ -65,6 +65,7 @@
     "@types/es6-promise": "^0.0.33",
     "@types/jasmine": "^2.8.2",
     "@types/node": "^8.0.54",
+        "@vue/test-utils": "^1.0.0-beta.10",
     "awesome-typescript-loader": "^3.4.1",
     "chromedriver": "^2.33.2",
     "copyfiles": "^1.2.0",
