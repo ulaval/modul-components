@@ -3,19 +3,10 @@ import { components } from '../components/component-names';
 import { directives } from '../directives/directive-names';
 import { mixins } from '../mixins/mixins-names';
 
-// export type OverviewType = 'rubric' | 'do' | 'dont';
-
 export type Preview = string | boolean;
-
-// export interface Overview {
-//     type: OverviewType;
-//     title: string;
-//     content: string;
-// }
 
 export interface ComponentAttribute {
     type: string;
-    // description: string;
     values: string[];
     default?: number;
     origin?: ComponentMeta;
@@ -48,31 +39,17 @@ export interface ComponentMethods {
 
 export interface ComponentMeta {
     tag: string;
-    // metaKey?: string; //
-    // folder?: string; //
-    // name?: string; //
     attributes?: ComponentAttributes;
     mixins?: string[];
-    // production?: boolean; //
     methods?: ComponentMethods;
-    // overview?: string; //
-    // category?: string; //
-    // preview?: Preview; //
 }
 
 export type ComponentMetaMap = {
     [key: string]: ComponentMeta;
 };
 
-// export type CategoryComponentMap = {
-//     [key: string]: ComponentMeta[];
-// };
-
-// export type ComponentAttributeFn = (attribute: string, meta: ComponentMeta) => void;
-
 export class Meta {
     private componentMeta: ComponentMetaMap = {};
-    // private categories: CategoryComponentMap = {};
 
     constructor() {
         components.forEach(componentTag => {
@@ -88,27 +65,10 @@ export class Meta {
         });
     }
 
-    public mergeComponentMeta(tag: string, meta: ComponentMeta/*, category?: string*/): ComponentMeta {
+    public mergeComponentMeta(tag: string, meta: ComponentMeta): ComponentMeta {
         let metaObject: ComponentMeta = this.componentMeta[tag];
         let mergedMeta: ComponentMeta = { ...metaObject, ...meta };
         this.componentMeta[tag] = mergedMeta;
-
-        // mergedMeta.name = mergedMeta.tag + '-meta:name';
-        // mergedMeta.overview = mergedMeta.overview
-
-        // if (mergedMeta.preview === undefined) {
-        //     mergedMeta.preview = true;
-        // }
-
-        // if (category) {
-        //     let categoryComponents: ComponentMeta[] = this.categories[category];
-        //     if (!categoryComponents) {
-        //         categoryComponents = [];
-        //         this.categories[category] = categoryComponents;
-        //     }
-        //     mergedMeta.category = category;
-        //     categoryComponents.push(mergedMeta);
-        // }
 
         if (mergedMeta.mixins) {
             mergedMeta.mixins.forEach(mixin => {
@@ -119,42 +79,17 @@ export class Meta {
         return mergedMeta;
     }
 
-    // public updateMeta(meta: ComponentMeta): void {
-    //     this.componentMeta[meta.tag] = meta;
-    // }
-
-    // TODO: eval usage
     public getMeta(): ComponentMeta[] {
-        let result: ComponentMeta[] = [];
-        Object.keys(this.componentMeta).filter(key => this.componentMeta.hasOwnProperty(key)).forEach(key => {
-            let meta: ComponentMeta = this.componentMeta[key];
-            // if (process.env && (process.env.NODE_ENV as any).dev || meta.production === true) {
-            result.push(meta);
-            // }
-        });
-        return result;
+        return Object.keys(this.componentMeta).filter(key => this.componentMeta.hasOwnProperty(key)).map(key => this.componentMeta[key]);
     }
 
     public getTags(): string[] {
         return Object.keys(this.componentMeta).filter(key => this.componentMeta.hasOwnProperty(key));
     }
 
-    // public getCategories(): string[] {
-    //     let categories: string[] = Object.keys(this.categories).filter(key => this.categories.hasOwnProperty(key));
-    //     if (!(process.env && (process.env.NODE_ENV as any).dev)) {
-    //         categories = categories.filter(category => this.categories[category].some(component => component.production === true));
-    //     }
-    //     return categories;
-    // }
-
     public getMetaByTag(tag: string): ComponentMeta {
         return this.componentMeta[tag];
     }
-
-    // public getMetaByCategory(category: string): ComponentMeta[] {
-    //     return process.env && (process.env.NODE_ENV as any).dev ? this.categories[category] :
-    //         this.categories[category].filter(component => component.production === true);
-    // }
 
     public getComponentAttributes(componentMeta: ComponentMeta): string[] {
         if (componentMeta.attributes) {
