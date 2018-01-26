@@ -15,10 +15,6 @@ export class Viewer extends ModulVue {
         this.buildTag();
     }
 
-    public get allFiles(): MFile[] {
-        return this.$file.files();
-    }
-
     @Watch('$route')
     private buildTag(): void {
         this.tag = `<${this.$route.meta}></${this.$route.meta}>`;
