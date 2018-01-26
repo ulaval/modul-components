@@ -1,16 +1,6 @@
 @import 'abstracts/variables';
 
 .m-file-select {
-    display: inline-block;
-
-    &.m--is-full-size {
-        display: block;
-
-        .m-file-select__label {
-            width: 100%;
-        }
-    }
-
     &__hidden {
         @include m-visually-hidden;
     }

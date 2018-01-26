@@ -5,10 +5,16 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './file-select.html?style=./file-select.scss';
 import { FILE_SELECT_NAME, BUTTON_NAME } from '../component-names';
 import ButtonPlugin, { MButtonSkin, MButtonType, MButtonIconPosition } from '../button/button';
+import ValidationMesagePlugin from '../validation-message/validation-message';
 import uuid from '../../utils/uuid/uuid';
+import { InputState } from '../../mixins/input-state/input-state';
 
 @WithRender
-@Component
+@Component({
+    mixins: [
+        InputState
+    ]
+})
 export class MFileSelect extends ModulVue {
 
     @Prop()
@@ -68,6 +74,7 @@ const FileSelectPlugin: PluginObject<any> = {
     install(v, options) {
         console.debug(FILE_SELECT_NAME, 'plugin.install');
         v.use(ButtonPlugin);
+        v.use(ValidationMesagePlugin);
         v.component(FILE_SELECT_NAME, MFileSelect);
     }
 };

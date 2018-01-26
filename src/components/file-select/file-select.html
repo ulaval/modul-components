@@ -1,6 +1,6 @@
-<span class="m-file-select" :class="{ 'm--is-full-size': fullSize }">
+<div class="m-file-select">
     <input ref="inputFile" type="file" :id="id" class="m-file-select__hidden" @change="processFile" :disabled="disabled || isWaiting" tabindex="-1" :multiple="multiple">
-    <label for="id" class="m-file-select__hidden">
+    <label :for="id" class="m-file-select__hidden">
             <m-i18n v-if="!hasLabel" k="m-select-file:label"></m-i18n>
             <template v-else>{{ label }}</template>
     </label>
@@ -21,4 +21,4 @@
         :error-message="errorMessage"
         :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
-</span>
+</div>
