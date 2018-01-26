@@ -1,30 +1,24 @@
-<span class="m-file-select" :class="{ 'm--is-full-size': fullSize }">
-    <input ref="inputFile" type="file" :id="id" class="m-file-select__hidden" @click="onClick" @focus="onFocus" @blur="onBlur" :disabled="disabled || isWaiting">
-    <label :for="id" class="m-file-select__label" :class="{ 'm--is-skin-primary': isSkinPrimary, 'm--is-skin-secondary': isSkinSecondary, 'm--is-waiting': isWaiting, 'm--is-disabled': disabled, 'm--is-focus': focused }" >
-        <m-icon aria-hidden="true"
-                class="m-file-select__label__icon m--is-left"
-                :name="iconName"
-                :size="iconSize"
-                v-if="hasIconLeft"></m-icon>
-        <m-spinner aria-hidden="true" class="m-file-select__label__icon m--is-left" skin="lighter" size="small" v-if="hasWaitingIconLeft && isWaiting"></m-spinner>
-        <span class="m-file-select__label__text">
+<div class="m-file-select">
+    <input ref="inputFile" type="file" :id="id" class="m-file-select__hidden" @change="processFile" :disabled="disabled || isWaiting" tabindex="-1" :multiple="multiple">
+    <label :for="id" class="m-file-select__hidden">
             <m-i18n v-if="!hasLabel" k="m-select-file:label"></m-i18n>
             <template v-else>{{ label }}</template>
-            <span class="m-file-select__label__precision" v-if="hasPrecisionSlot">
-                <slot name="precision"></slot>
-            </span>
-        </span>
-        <m-spinner aria-hidden="true" class="m-file-select__label__icon m--is-right" skin="lighter" size="small" v-if="hasWaitingIconRight && isWaiting"></m-spinner>
-        <m-icon aria-hidden="true"
-                class="m-file-select__label__icon m--is-right"
-                :name="iconName"
-                :size="iconSize"
-                v-if="hasIconRight"></m-icon>
     </label>
+    <m-button @click="onClick" @focus="onFocus" @blur="onBlur" aria-hidden="true"
+            :skin="skin"
+            :disabled="disabled"
+            :waiting="waiting"
+            :fullSize="fullSize"
+            :iconName="iconName"
+            :iconPosition="iconPosition"
+            :iconSize="iconSize">
+        <m-i18n v-if="!hasLabel" k="m-select-file:label"></m-i18n>
+        <template v-else>{{ label }}</template>
+    </m-button>
     <m-validation-message ref="validation"
         :disabled="isDisabled"
         :error="hasError"
         :error-message="errorMessage"
         :valid-message="validMessage"
         :helper-message="helperMessage"></m-validation-message>
-</span>
+</div>

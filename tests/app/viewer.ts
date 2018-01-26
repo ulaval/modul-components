@@ -3,10 +3,12 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch } from 'vue-property-decorator';
 import WithRender from './viewer.html';
+import { MFile } from '../../src/utils/file/file';
+import { ModulVue } from '../../src/utils/vue/vue';
 
 @WithRender
 @Component
-export class Viewer extends Vue {
+export class Viewer extends ModulVue {
     public tag: string = '';
 
     public mounted() {
