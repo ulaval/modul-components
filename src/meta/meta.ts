@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { components } from '../components/component-names';
 import { directives } from '../directives/directive-names';
+import { mixins } from '../mixins/mixins-names';
 
 // export type OverviewType = 'rubric' | 'do' | 'dont';
 
@@ -14,9 +15,10 @@ export type Preview = string | boolean;
 
 export interface ComponentAttribute {
     type: string;
-    description: string;
+    // description: string;
     values: string[];
     default?: number;
+    origin?: ComponentMeta;
 }
 
 export interface ComponentMethodArgument {
@@ -46,15 +48,16 @@ export interface ComponentMethods {
 
 export interface ComponentMeta {
     tag: string;
-    folder: string;
-    name?: string;
+    metaKey?: string; //
+    folder?: string; //
+    name?: string; //
     attributes?: ComponentAttributes;
     mixins?: string[];
-    production?: boolean;
+    production?: boolean; //
     methods?: ComponentMethods;
-    // overview?: string;
-    category?: string;
-    preview?: Preview;
+    overview?: string; //
+    category?: string; //
+    preview?: Preview; //
 }
 
 export type ComponentMetaMap = {
@@ -65,7 +68,7 @@ export type CategoryComponentMap = {
     [key: string]: ComponentMeta[];
 };
 
-export type ComponentAttributeFn = (attribute: string, meta: ComponentMeta) => void;
+// export type ComponentAttributeFn = (attribute: string, meta: ComponentMeta) => void;
 
 export class Meta {
     private componentMeta: ComponentMetaMap = {};
@@ -73,29 +76,47 @@ export class Meta {
 
     constructor() {
         components.forEach(componentTag => {
-            this.componentMeta[componentTag] = { tag: componentTag, folder: componentTag.substr(2) };
+            this.componentMeta[componentTag] = { tag: componentTag };
         });
 
         directives.forEach(directiveTag => {
-            this.componentMeta[directiveTag] = { tag: directiveTag, folder: directiveTag.substr(2) };
+            this.componentMeta[directiveTag] = { tag: directiveTag };
+        });
+
+        mixins.forEach(mixinTag => {
+            this.componentMeta[mixinTag] = { tag: mixinTag }; // TODO: folder will have to be added to provide mixin documentation (markdown files)
         });
     }
 
-    public mergeComponentMeta(tag: string, meta: ComponentMeta, category?: string): void {
+    public mergeComponentMeta(tag: string, meta: ComponentMeta, category?: string): ComponentMeta {
         let metaObject: ComponentMeta = this.componentMeta[tag];
-        this.componentMeta[tag] = { ...metaObject, ...meta };
-        if (this.componentMeta[tag].preview == undefined) {
-            this.componentMeta[tag].preview = true;
-        }
+        let mergedMeta: ComponentMeta = { ...metaObject, ...meta };
+        this.componentMeta[tag] = mergedMeta;
+
+        // mergedMeta.name = mergedMeta.tag + '-meta:name';
+        // mergedMeta.overview = mergedMeta.overview
+
+        // if (mergedMeta.preview === undefined) {
+        //     mergedMeta.preview = true;
+        // }
+
         if (category) {
             let categoryComponents: ComponentMeta[] = this.categories[category];
             if (!categoryComponents) {
                 categoryComponents = [];
                 this.categories[category] = categoryComponents;
             }
-            this.componentMeta[tag].category = category;
-            categoryComponents.push(this.componentMeta[tag]);
+            mergedMeta.category = category;
+            categoryComponents.push(mergedMeta);
         }
+
+        if (mergedMeta.mixins) {
+            mergedMeta.mixins.forEach(mixin => {
+                this.mergeComponentAttributes(mergedMeta, mixin);
+            });
+        }
+
+        return mergedMeta;
     }
 
     // TODO: eval usage
@@ -131,15 +152,28 @@ export class Meta {
             this.categories[category].filter(component => component.production === true);
     }
 
-    public getComponentAttributes(componentMeta: ComponentMeta, recurse: boolean, callback: ComponentAttributeFn): void {
+    public getComponentAttributes(componentMeta: ComponentMeta): string[] {
         if (componentMeta.attributes) {
-            Object.keys(componentMeta.attributes)
-                .filter(key => componentMeta.attributes && componentMeta.attributes.hasOwnProperty(key))
-                .forEach(attribute => callback(attribute, componentMeta));
-            if (recurse && componentMeta.mixins) {
-                componentMeta.mixins.forEach(mixin => {
-                    let mixinMeta: ComponentMeta = this.getMetaByTag(mixin);
-                    this.getComponentAttributes(mixinMeta, true, callback);
+            return Object.keys(componentMeta.attributes).filter(key => componentMeta.attributes && componentMeta.attributes.hasOwnProperty(key));
+        } else {
+            return [];
+        }
+    }
+
+    private mergeComponentAttributes(componentMeta: ComponentMeta, mixin: string): void {
+        let mixinMeta: ComponentMeta = this.getMetaByTag(mixin);
+        if (mixinMeta.attributes) {
+            Object.keys(mixinMeta.attributes)
+                .filter(key => mixinMeta.attributes && mixinMeta.attributes.hasOwnProperty(key))
+                .forEach(attribute => {
+                    if (mixinMeta.attributes) {
+                        mixinMeta.attributes[attribute].origin = mixinMeta;
+                    }
+                });
+            componentMeta.attributes = { ...componentMeta.attributes, ...mixinMeta.attributes };
+            if (mixinMeta.mixins) {
+                mixinMeta.mixins.forEach(mixin => {
+                    this.mergeComponentAttributes(componentMeta, mixin);
                 });
             }
         }

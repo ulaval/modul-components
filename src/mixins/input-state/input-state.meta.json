@@ -1,7 +1,5 @@
 {
     "tag": "InputState",
-    "name": "input-state:name",
-    "production": false,
     "attributes": {
         "disabled": {
             "type": "boolean",
@@ -28,7 +26,5 @@
         "helperMessage": {
             "type": "string"
         }
-    },
-    "overview": "input-state.overview",
-    "preview": "input-state.preview"
+    }
 }
