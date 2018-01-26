@@ -22,6 +22,7 @@ const MFileDropDirective: DirectiveOptions = {
         };
 
         const onDrop = (e: DragEvent) => {
+            e.preventDefault();
             $file.add(e.dataTransfer.files);
         };
 
