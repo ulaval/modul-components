@@ -11,13 +11,14 @@ readFolders(source, (root, path, done) => {
     let errors = [];
     read(`${root}/${path}.ts`, source => {
         let meta = {
-            x: path,
             attributes: {},
-            mixins: []
+            mixins: [],
+            enums: {}
         };
 
         createProps(meta, source, errors);
         createMixins(meta, source, errors);
+        createEnums(meta, source, errors);
 
         // console.log(path, meta.mixins);
         write(`${destination}/${path}/${path}.meta.json`, meta, _ => {
@@ -56,7 +57,7 @@ readFolders(source, (root, path, done) => {
 
 function createProps(meta, source, errors) {
     let prop = undefined;
-    const propRegExp = new RegExp(`@Prop\\(([\\s\\S]*?)\\)\\s*(?:@Model\\(\\'?[\\w\\d]+\\'?\\)\\s*)?public\\s*(\\w*):\\s*(\\w\\s|.*);`, 'g');
+    const propRegExp = new RegExp(/@Prop\(([\s\S]*?)\)\s*(?:@Model\(\'?[\w\d]+\'?\)\s*)?public\s*(\w*):\s*(\w\s|.*);/, 'g');
     do {
         prop = propRegExp.exec(source);
         if (prop) {
@@ -134,19 +135,18 @@ function createMixins(meta, source, errors) {
     //     meta.mixins.forEach(mixin => meta.mixinsObj[mixin] = true);
     // }
 
-    const mixinsRegExp = new RegExp('mixins:\\s*\\[([\\s\\S]*?)\\]');
+    const mixinsRegExp = new RegExp(/mixins:\s*\[([\s\S]*?)\]/);
     let match = mixinsRegExp.exec(source);
     if (match) {
         let mixinMatch = undefined;
-        const mixinNameRegExp = new RegExp('([\\w\\d]+)', 'g');
+        const mixinNameRegExp = new RegExp(/([\w\d]+)/, 'g');
         do {
             mixinMatch = mixinNameRegExp.exec(match[1]);
             if (mixinMatch) {
                 let mixin = mixinMatch[1];
                 meta.mixins.push(mixin);
             }
-        }
-        while (mixinMatch);
+        } while (mixinMatch);
     }
 
     // Object.keys(meta.mixinsObj).forEach(mixin => {
@@ -154,6 +154,26 @@ function createMixins(meta, source, errors) {
     // });
 }
 
+function createEnums(meta, source, errors) {
+    let match = undefined;
+    const enumRegex = new RegExp(/export enum ([\w\d]+)\s+{([\s\S]*?)}/, 'g');
+    do {
+        match = enumRegex.exec(source);
+        if (match) {
+            let enumName = match[1];
+            let enumValuesMatch = undefined;
+            let enumValues = [];
+            const enumValuesRegExp = new RegExp(/'([\w\d]+)'/, 'g');
+            do {
+                enumValuesMatch = enumValuesRegExp.exec(match[2]);
+                if (enumValuesMatch) {
+                    enumValues.push(enumValuesMatch[1]);
+                }
+            } while (enumValuesMatch);
+            meta.enums[enumName] = enumValues;
+        }
+    } while (match);
+}
 
 // function validateMixins(meta, source, errors) {
 //     meta.mixinsObj = {}; // used as map for validation
