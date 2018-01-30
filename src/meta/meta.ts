@@ -53,20 +53,6 @@ export type ComponentMetaMap = {
 export class Meta {
     private componentMeta: ComponentMetaMap = {};
 
-    // constructor() {
-    //     components.forEach(componentTag => {
-    //         this.componentMeta[componentTag] = { tag: componentTag };
-    //     });
-
-    //     directives.forEach(directiveTag => {
-    //         this.componentMeta[directiveTag] = { tag: directiveTag };
-    //     });
-
-    //     mixins.forEach(mixinTag => {
-    //         this.componentMeta[mixinTag] = { tag: mixinTag };
-    //     });
-    // }
-
     public mergeComponentMeta(tag: string, meta: ComponentMeta): ComponentMeta {
         let metaObject: ComponentMeta = this.componentMeta[tag];
         if (!metaObject) {
