@@ -1,7 +1,4 @@
 import Vue from 'vue';
-import { components } from '../components/component-names';
-import { directives } from '../directives/directive-names';
-import { mixins } from '../mixins/mixins-names';
 
 export type Preview = string | boolean;
 
@@ -51,22 +48,25 @@ export type ComponentMetaMap = {
 export class Meta {
     private componentMeta: ComponentMetaMap = {};
 
-    constructor() {
-        components.forEach(componentTag => {
-            this.componentMeta[componentTag] = { tag: componentTag };
-        });
+    // constructor() {
+    //     components.forEach(componentTag => {
+    //         this.componentMeta[componentTag] = { tag: componentTag };
+    //     });
 
-        directives.forEach(directiveTag => {
-            this.componentMeta[directiveTag] = { tag: directiveTag };
-        });
+    //     directives.forEach(directiveTag => {
+    //         this.componentMeta[directiveTag] = { tag: directiveTag };
+    //     });
 
-        mixins.forEach(mixinTag => {
-            this.componentMeta[mixinTag] = { tag: mixinTag }; // TODO: folder will have to be added to provide mixin documentation (markdown files)
-        });
-    }
+    //     mixins.forEach(mixinTag => {
+    //         this.componentMeta[mixinTag] = { tag: mixinTag };
+    //     });
+    // }
 
     public mergeComponentMeta(tag: string, meta: ComponentMeta): ComponentMeta {
         let metaObject: ComponentMeta = this.componentMeta[tag];
+        if (!metaObject) {
+            metaObject = { tag: tag };
+        }
         let mergedMeta: ComponentMeta = { ...metaObject, ...meta };
         this.componentMeta[tag] = mergedMeta;
 
@@ -100,7 +100,10 @@ export class Meta {
     }
 
     private mergeComponentAttributes(componentMeta: ComponentMeta, mixin: string): void {
-        let mixinMeta: ComponentMeta = this.getMetaByTag(mixin);
+        let mixinMeta: ComponentMeta = this.componentMeta[mixin];
+        if (!mixinMeta) {
+            throw new Error(`There is not meta information for mixin ${mixin}. Make sure to call the mergeComponentMeta('${mixin}', '<path-to-meta.json>', ...) method or to register the mixin before the ${componentMeta.tag} component.`);
+        }
         if (mixinMeta.attributes) {
             Object.keys(mixinMeta.attributes)
                 .filter(key => mixinMeta.attributes && mixinMeta.attributes.hasOwnProperty(key))
