@@ -17,11 +17,10 @@ export class MLimitText extends ModulVue {
     @Prop({ default: 4 })
     public lines: number;
 
-    // TODO: force non-breakable spaces, brackets, default values?
-    @Prop({ default: '[ + ]' })
+    @Prop()
     public openLabel: string;
 
-    @Prop({ default: '[ - ]' })
+    @Prop()
     public closeLabel: string;
 
     private openHiddenText: string = this.$i18n.translate('m-limit-text:open');
@@ -32,7 +31,9 @@ export class MLimitText extends ModulVue {
     private overflow: boolean = false;
 
     protected mounted() {
-        this.computeHeight();
+        Vue.nextTick(() => {
+            this.computeHeight();
+        });
     }
 
     protected updated() {
@@ -67,6 +68,14 @@ export class MLimitText extends ModulVue {
     private onClose() {
         this.internalOpen = false;
         this.$emit('update:open', false);
+    }
+
+    private get openText() {
+        return `[ ${this.openLabel || this.openHiddenText} ]`;
+    }
+
+    private get closeText() {
+        return `[ ${this.closeLabel || this.closeHiddenText} ]`;
     }
 }
 
