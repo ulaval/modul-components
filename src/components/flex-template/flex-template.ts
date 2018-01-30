@@ -251,6 +251,7 @@ export class MFlexTemplate extends ModulVue {
 
 const FlexTemplatePlugin: PluginObject<any> = {
     install(v, options) {
+        console.warn(FLEX_TEMPLATE_NAME + ' is not ready for production');
         v.component(FLEX_TEMPLATE_NAME, MFlexTemplate);
     }
 };

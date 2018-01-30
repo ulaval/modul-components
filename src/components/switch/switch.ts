@@ -66,6 +66,7 @@ export class MSwitch extends ModulVue {
 
 const SwitchPlugin: PluginObject<any> = {
     install(v, options) {
+        console.warn(SWITCH_NAME + ' is not ready for production');
         v.use(ValidationMessagePlugin);
         v.component(SWITCH_NAME, MSwitch);
     }

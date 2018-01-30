@@ -66,6 +66,7 @@ export class MPhoneNumber extends ModulVue {
 
 const PhoneNumberPlugin: PluginObject<any> = {
     install(v, options) {
+        console.warn(PHONE_NUMBER_NAME + ' is not ready for production');
         v.component(PHONE_NUMBER_NAME, MPhoneNumber);
     }
 };

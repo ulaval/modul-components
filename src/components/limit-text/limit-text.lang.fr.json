@@ -1,6 +1,6 @@
 {
     "m-limit-text": {
-        "open": "Afficher plus",
-        "close": "Afficher moins"
+        "open": "Afficher texte complet",
+        "close": "Réduire l'affichage"
     }
 }
