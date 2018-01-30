@@ -34,11 +34,16 @@ export interface ComponentMethods {
     [method: string]: ComponentMethod;
 }
 
+export interface ComponentEnums {
+    [enumName: string]: string[];
+}
+
 export interface ComponentMeta {
     tag: string;
     attributes?: ComponentAttributes;
     mixins?: string[];
     methods?: ComponentMethods;
+    enums?: ComponentEnums;
 }
 
 export type ComponentMetaMap = {
