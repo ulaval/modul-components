@@ -201,6 +201,7 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
 
 const NavbarPlugin: PluginObject<any> = {
     install(v, options) {
+        console.warn(NAVBAR_NAME + ' is not ready for production');
         v.component(NAVBAR_NAME, MNavbar);
     }
 };

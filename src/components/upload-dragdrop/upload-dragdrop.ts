@@ -24,6 +24,7 @@ export class MUploadDragdrop extends Vue {
 
 const UploadDragdropPlugin: PluginObject<any> = {
     install(v, options) {
+        console.error(UPLOAD_DRAGDROP_NAME + ' is deprecated');
         v.component(UPLOAD_DRAGDROP_NAME, MUploadDragdrop);
     }
 };

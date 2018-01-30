@@ -57,6 +57,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
 
 const ButtonGroupPlugin: PluginObject<any> = {
     install(v, options) {
+        console.warn(BUTTON_GROUP_NAME + ' is not ready for production');
         v.use(RadioPlugin);
         v.component(BUTTON_GROUP_NAME, MButtonGroup);
     }
