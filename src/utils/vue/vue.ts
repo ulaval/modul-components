@@ -6,6 +6,13 @@ import { Modul } from '../modul/modul';
 import { ConfirmFunction } from '../modal/confirm';
 import { AlertFunction } from '../modal/alert';
 
+console.debug('TODO: explore usage of TS declare syntax');
+// declare module 'vue/types/vue' {
+//     interface Vue {
+//         $i18n: Messages;
+//     }
+// }
+
 export class ModulVue extends Vue {
     public $i18n: Messages;
     public $http: HttpService;
