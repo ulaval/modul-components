@@ -18,6 +18,7 @@ export class MCarouselItem extends Vue {
 
 const CarouselItemPlugin: PluginObject<any> = {
     install(v, options) {
+        console.warn(CAROUSEL_ITEM_NAME + ' is not ready for production');
         v.component(CAROUSEL_ITEM_NAME, MCarouselItem);
         Vue.use(TouchPlugin, { name: 'v-touch' });
     }

@@ -94,6 +94,7 @@ export class MSlider extends ModulVue {
 
 const SliderPlugin: PluginObject<any> = {
     install(v, options) {
+        console.warn(SLIDER_NAME + ' is not ready for production');
         v.component(SLIDER_NAME, MSlider);
     }
 };
