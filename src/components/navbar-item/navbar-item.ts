@@ -3,7 +3,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
-import { NAVBAR_ITEM_NAME, components } from '../component-names';
+import { NAVBAR_ITEM_NAME } from '../component-names';
 
 export abstract class BaseNavbar extends ModulVue {
     abstract model: string;
@@ -68,6 +68,7 @@ export class MNavbarItem extends ModulVue {
 
 const NavbarItemPlugin: PluginObject<any> = {
     install(v, options) {
+        console.warn(NAVBAR_ITEM_NAME + ' is not ready for production');
         v.component(NAVBAR_ITEM_NAME, MNavbarItem);
     }
 };

@@ -86,6 +86,7 @@ export class MIconButton extends Vue {
 const IconButtonPlugin: PluginObject<any> = {
     install(v, options) {
         console.debug(ICON_BUTTON_NAME, 'plugin.install');
+        console.warn(ICON_BUTTON_NAME + ' is not ready for production');
         v.use(IconPlugin);
         v.component(ICON_BUTTON_NAME, MIconButton);
     }

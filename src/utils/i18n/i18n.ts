@@ -44,8 +44,21 @@ export function currentLang(lang?: string): string {
     return curLang;
 }
 
+export enum DebugMode {
+    Throw,
+    Warn,
+    Prod
+}
+
+export interface MessagesPluginOptions {
+    debug: DebugMode;
+}
+
 export class Messages {
     private messages: LanguageBundlesMap = {};
+
+    constructor(private options: MessagesPluginOptions | undefined) {
+    }
 
     /**
      * Set the application language globally
@@ -155,8 +168,17 @@ export class Messages {
             return val;
         }
 
-        console.warn(`The key ${key} does not exist. Current lang: ${curLang}`);
-        return key;
+        let error: string = `The key ${key} does not exist. Current lang: ${curLang}`;
+        if (this.options && this.options.debug === DebugMode.Throw) {
+            throw new Error(error);
+        } else {
+            if (!this.options || this.options.debug === DebugMode.Warn) {
+                console.warn(error);
+            } else {
+                console.debug(error);
+            }
+            return key;
+        }
     }
 
     /**
@@ -169,8 +191,17 @@ export class Messages {
         const parts = key.split(':');
 
         if (parts.length != 2) {
-            console.warn(`The key ${key} is invalid. The key needs to be in the format <bundle>:<id>`);
-            return undefined;
+            let error: string = `The key ${key} is invalid. The key needs to be in the format <bundle>:<id>`;
+            if (this.options && this.options.debug === DebugMode.Throw) {
+                throw new Error(error);
+            } else {
+                if (!this.options || this.options.debug === DebugMode.Warn) {
+                    console.warn(error);
+                } else {
+                    console.debug(error);
+                }
+                return undefined;
+            }
         }
 
         const bundleName = parts[0];
@@ -215,7 +246,8 @@ function htmlEncode(val: string) {
 const MessagePlugin: PluginObject<any> = {
     install(v, options) {
         console.debug('$i18n', 'plugin.install');
-        let msg: Messages = new Messages();
+
+        let msg: Messages = new Messages(options);
         (v as any).$i18n = msg;
         (v.prototype as any).$i18n = msg;
     }

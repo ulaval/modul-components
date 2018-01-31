@@ -255,6 +255,7 @@ export class MUpload extends ModulVue implements MUploadInterface {
 
 const UploadPlugin: PluginObject<any> = {
     install(v, options) {
+        console.error(UPLOAD_NAME + ' is deprecated');
         v.component(UPLOAD_NAME, MUpload);
     }
 };
