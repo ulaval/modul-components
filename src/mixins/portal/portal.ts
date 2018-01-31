@@ -203,7 +203,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     private handleMouseLeave(): void {
-        this.propOpen = false;
+        this.tryClose();
     }
 
     @Watch('open')
