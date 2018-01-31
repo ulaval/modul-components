@@ -1,0 +1,67 @@
+import Meta from '../../src/meta/meta';
+import * as Components from '../../src/components/component-names';
+
+const components: string[] = [
+    Components.ACCORDION_GROUP_NAME,
+    Components.ACCORDION_NAME,
+    Components.BUTTON_NAME,
+    Components.BUTTON_GROUP_NAME,
+    Components.CAROUSEL_NAME,
+    Components.CAROUSEL_ITEM_NAME,
+    Components.CHECKBOX_NAME,
+    Components.DATEFIELDS_NAME,
+    Components.DATEPICKER_NAME,
+    Components.DIALOG_NAME,
+    Components.DROPDOWN_NAME,
+    Components.DROPDOWN_ITEM_NAME,
+    Components.DROPDOWN_GROUP_NAME,
+    Components.DYNAMIC_TEMPLATE_NAME,
+    Components.FLEX_TEMPLATE_NAME,
+    Components.I18N_NAME,
+    Components.ICON_NAME,
+    Components.ICON_BUTTON_NAME,
+    Components.INPUT_STYLE_NAME,
+    Components.LIMIT_TEXT_NAME,
+    Components.LINK_NAME,
+    Components.LIST_ITEM_NAME,
+    Components.MESSAGE_NAME,
+    Components.MODAL_NAME,
+    Components.NAVBAR_NAME,
+    Components.NAVBAR_ITEM_NAME,
+    Components.MENU_NAME,
+    Components.MENU_ITEM_NAME,
+    Components.PANEL_NAME,
+    Components.PHONE_NUMBER_NAME,
+    Components.POPPER_NAME,
+    Components.POPUP_NAME,
+    Components.RADIO_NAME,
+    Components.RADIO_GROUP_NAME,
+    Components.RADIO_STYLE_NAME,
+    Components.SCROLL_TOP_NAME,
+    Components.SIDEBAR_NAME,
+    Components.SLIDER_NAME,
+    Components.SPINNER_NAME,
+    Components.STATUS_NAME,
+    Components.STEP_NAME,
+    Components.STEPPERS_NAME,
+    Components.STEPPERS_ITEM_NAME,
+    Components.SWITCH_NAME,
+    Components.TAB_PANEL_NAME,
+    Components.TABS_NAME,
+    Components.TEMPLATE_NAME,
+    Components.TEXTAREA_NAME,
+    Components.TEXTFIELD_NAME,
+    Components.TIMEPICKER_NAME,
+    Components.TOOLTIP_NAME,
+    Components.UPLOAD_NAME,
+    Components.UPLOAD_INPUT_NAME,
+    Components.UPLOAD_DRAGDROP_NAME,
+    Components.UPLOAD_FILESLIST_NAME,
+    Components.VALIDATION_MESSAGE_NAME
+];
+
+const factory = () => {
+    components.forEach(c => Meta.mergeComponentMeta(c, undefined));
+};
+
+export default factory;

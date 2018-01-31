@@ -53,7 +53,7 @@ export type ComponentMetaMap = {
 export class Meta {
     private componentMeta: ComponentMetaMap = {};
 
-    public mergeComponentMeta(tag: string, meta: ComponentMeta): ComponentMeta {
+    public mergeComponentMeta(tag: string, meta: ComponentMeta | undefined): ComponentMeta {
         let metaObject: ComponentMeta = this.componentMeta[tag];
         if (!metaObject) {
             metaObject = { tag: tag };

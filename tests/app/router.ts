@@ -8,44 +8,50 @@ import { Viewer } from './viewer';
 
 Vue.use(Router);
 
-const componentRoutes: RouteConfig[] = [{
-    path: '/',
-    component: Navigation
-}, {
-    path: '/attributes',
-    component: Attributes,
-    beforeEnter: (to, from, next) => {
-        next();
-    }
-}, {
-    path: '/media-queries',
-    component: MediaQueriesTest
-}];
+type RouterFactoryFn = () => Router;
 
-Meta.getTags().forEach(tag => {
-    componentRoutes.push({
-        path: '/' + tag,
-        meta: tag,
-        component: Viewer
+const routerFactory = () => {
+    const componentRoutes: RouteConfig[] = [{
+        path: '/',
+        component: Navigation
+    }, {
+        path: '/attributes',
+        component: Attributes,
+        beforeEnter: (to, from, next) => {
+            next();
+        }
+    }, {
+        path: '/media-queries',
+        component: MediaQueriesTest
+    }];
+
+    Meta.getTags().forEach(tag => {
+        componentRoutes.push({
+            path: '/' + tag,
+            meta: tag,
+            component: Viewer
+        });
     });
-});
 
-const router = new Router({
-    mode: 'history',
-    routes: componentRoutes,
-    scrollBehavior(to, from, savedPosition) {
-        if (savedPosition) {
-            return savedPosition;
+    let router: Router = new Router({
+        mode: 'history',
+        routes: componentRoutes,
+        scrollBehavior(to, from, savedPosition) {
+            if (savedPosition) {
+                return savedPosition;
+            }
+            if (to.hash) {
+                return { selector: to.hash };
+            }
+            return { x: 0, y: 0 };
         }
-        if (to.hash) {
-            return { selector: to.hash };
-        }
-        return { x: 0, y: 0 };
-    }
-});
+    });
 
-router.beforeEach((to, from, next) => {
-    next();
-});
+    router.beforeEach((to, from, next) => {
+        next();
+    });
 
-export default router;
+    return router;
+};
+
+export default routerFactory;
