@@ -77,16 +77,18 @@ export class Modul {
         this.event.$emit('updateAfterResize');
     }
 
-    public pushElement(element: HTMLElement, withBackdrop: boolean, viewportIsSmall: boolean): void {
+    public pushElement(element: HTMLElement, withBackdrop: boolean, viewportIsSmall: boolean, menageScroll: boolean = false): void {
         if (withBackdrop) {
             this.ensureBackdrop(viewportIsSmall);
+        } else if (menageScroll) {
+            this.stopScrollBody(true);
         }
         this.windowStack.push(element);
         this.windowZIndex++;
         element.style.zIndex = String(this.windowZIndex);
     }
 
-    public popElement(element: HTMLElement, withBackdrop: boolean, slow: boolean): void {
+    public popElement(element: HTMLElement, withBackdrop: boolean, slow: boolean, menageScroll: boolean = false): void {
         this.windowZIndex--;
         this.windowStack.pop();
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
@@ -95,6 +97,8 @@ export class Modul {
         }
         if (withBackdrop) {
             this.removeBackdrop(slow);
+        } else if (menageScroll) {
+            this.activeScrollBody();
         }
     }
 

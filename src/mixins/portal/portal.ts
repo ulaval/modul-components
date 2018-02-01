@@ -18,6 +18,7 @@ export interface PortalMixinImpl {
     doCustomPropOpen(value: boolean, el: HTMLElement): boolean;
     handlesFocus(): boolean;
     hasBackdrop(): boolean;
+    menageScroll?(): boolean;
     getPortalElement(): HTMLElement;
 }
 
@@ -121,10 +122,12 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public set propOpen(value: boolean) {
+        let thisPortal = this.as<PortalMixinImpl>();
+        let menageScroll = thisPortal.menageScroll ? thisPortal.menageScroll() : false;
         if (value != this.internalOpen) {
             if (value) {
                 if (this.portalTargetEl) {
-                    this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().hasBackdrop(), this.as<MediaQueriesMixin>().isMqMaxS);
+                    this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().hasBackdrop(), this.as<MediaQueriesMixin>().isMqMaxS, menageScroll);
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
                         this.portalTargetEl.style.position = 'absolute';
 
@@ -135,7 +138,7 @@ export class Portal extends ModulVue implements PortalMixin {
                 }
             } else {
                 if (this.portalTargetEl) {
-                    this.$modul.popElement(this.portalTargetEl, this.as<PortalMixinImpl>().hasBackdrop(), true);
+                    this.$modul.popElement(this.portalTargetEl, this.as<PortalMixinImpl>().hasBackdrop(), true, menageScroll);
 
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
                         setTimeout(() => {

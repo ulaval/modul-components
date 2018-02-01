@@ -125,4 +125,10 @@
         <path fill="currentColor" d="M12,16.2c0.5,0,0.9-0.4,0.9-0.9V7.9C12.9,7.4,12.5,7,12,7s-0.9,0.4-0.9,0.9v7.4C11.1,15.8,11.5,16.2,12,16.2z"/>
         <path fill="currentColor" d="M13.4,19.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4s0.6-1.4,1.4-1.4S13.4,18.7,13.4,19.5z"/>
     </symbol>
+    <symbol id="m-index" viewBox="0 0 38 32">
+        <title>galerie</title>
+        <path fill="#fff" style="fill: var(--color1, #fff)" d="M0 0h37.883v4h-37.883v-4z"></path>
+        <path fill="#fff" style="fill: var(--color1, #fff)" d="M0 14h29.274v4h-29.274v-4z"></path>
+        <path fill="#fff" style="fill: var(--color1, #fff)" d="M0 28h18.663v4h-18.663v-4z"></path>
+    </symbol>
 </svg>
