@@ -9,6 +9,7 @@ import DropdownItemPlugin, { MDropdownInterface, MDropdownItem, BaseDropdown, Ba
 import { MDropdownGroup } from '../dropdown-group/dropdown-group';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
+import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import i18nPlugin from '../../utils/i18n/i18n';
@@ -26,7 +27,8 @@ const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
     mixins: [
         InputState,
         InputPopup,
-        MediaQueries
+        MediaQueries,
+        InputWidth
     ]
 })
 export class MDropdown extends BaseDropdown implements MDropdownInterface {
@@ -41,8 +43,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public iconName: string;
     @Prop()
     public filterable: boolean;
-    @Prop({ default: DROPDOWN_MAX_WIDTH })
-    public width: string;
     @Prop()
     public textNoData: string;
     @Prop()

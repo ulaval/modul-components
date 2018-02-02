@@ -1,6 +1,6 @@
 <div class="m-dropdown"
      :class="{ 'm--is-open': open, 'm--is-disabled': disabled, 'm--is-waiting': waiting, 'm--is-filterable': filterable }"
-     :style="{ width: width, 'max-width': maxWidth }"
+     :style="{ width: width, maxWidth: inputMaxWidth }"
      ref="mDropdown">
     <m-input-style ref="mInputStyle"
                    :label="label"
@@ -10,7 +10,7 @@
                    :empty="isEmpty"
                    :error="hasError"
                    :valid="isValid"
-                   :width="width"
+                   width="100%"
                    :icon-name="iconName"
                    @mousedown="inputOnMousedown"
                    @mouseup="inputOnMouseup"

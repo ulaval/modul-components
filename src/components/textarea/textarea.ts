@@ -9,21 +9,21 @@ import { InputManagement } from '../../mixins/input-management/input-management'
 import { KeyCode } from '../../utils/keycode/keycode';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
+import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
 
 @WithRender
 @Component({
     mixins: [
         InputState,
-        InputManagement
+        InputManagement,
+        InputWidth
     ]
 })
 export class MTextarea extends ModulVue {
     @Prop()
     public maxlength: number;
-    @Prop({ default: '100%' })
-    public width: string;
-    @Prop({ default: '420px' })
-    public maxWidth: string;
+
+    public maxWidth: string = InputMaxWidth.Medium;
 
     private internalTextareaError: boolean = false;
     private textareaHeight: string;
