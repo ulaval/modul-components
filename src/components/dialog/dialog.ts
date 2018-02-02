@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import WithRender from './dialog.html?style=./dialog.scss';
 import { Prop } from 'vue-property-decorator';
 import { DIALOG_NAME } from '../component-names';
-import { Portal, PortalMixin, PortalMixinImpl, BackdropMode } from '../../mixins/portal/portal';
+import { Portal, PortalMixin, PortalMixinImpl, BackdropMode, PortalTransitionDuration } from '../../mixins/portal/portal';
 import { MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
 export enum MDialogSize {
@@ -52,11 +52,13 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public getBackdropMode(): BackdropMode {
-        return BackdropMode.BackdropFast;
+        return this.sizeFullSceen ? BackdropMode.None : BackdropMode.BackdropFast;
     }
 
     public get sizeFullSceen(): boolean {
-        return !this.as<MediaQueriesMixin>().isMqMinS ? true : this.size == MDialogSize.FullScreen ? true : false;
+        let fullScreen: boolean = !this.as<MediaQueriesMixin>().isMqMinS ? true : this.size == MDialogSize.FullScreen ? true : false
+        this.as<Portal>().transitionDuration = fullScreen ? PortalTransitionDuration.Slow : PortalTransitionDuration.Regular;
+        return fullScreen;
     }
 
     public get sizeLarge(): boolean {
