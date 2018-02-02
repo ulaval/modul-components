@@ -80,7 +80,7 @@
     }
 
     &__header {
-        background-color: $m-color--black-grey;
+        background-color: $m-color--grey-darker;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -104,7 +104,7 @@
             align-items: center;
             justify-content: center;
             width: var(--m-min-height-header);
-            background-color: $m-color--black-grey-darker;
+            background-color: $m-color--grey-darkest;
         }
 
         &__center {
