@@ -56,7 +56,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public get sizeFullSceen(): boolean {
-        let fullScreen: boolean = !this.as<MediaQueriesMixin>().isMqMinS ? true : this.size == MDialogSize.FullScreen ? true : false
+        let fullScreen: boolean = !this.as<MediaQueriesMixin>().isMqMinS ? true : this.size == MDialogSize.FullScreen ? true : false;
         this.as<Portal>().transitionDuration = fullScreen ? PortalTransitionDuration.Slow : PortalTransitionDuration.Regular;
         return fullScreen;
     }
