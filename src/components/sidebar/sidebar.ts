@@ -74,7 +74,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     }
 
     public getBackdropMode(): BackdropMode {
-        return BackdropMode.ScrollOnly;
+        return BackdropMode.BackdropFast;
     }
 
     public getPortalElement(): HTMLElement {
