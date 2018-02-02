@@ -86,13 +86,11 @@ export class Modul {
         this.event.$emit('updateAfterResize');
     }
 
-    public pushElement(element: HTMLElement, withBackdrop: boolean, viewportIsSmall: boolean, menageScroll: boolean = false): string {
+    public pushElement(element: HTMLElement, withBackdrop: boolean, viewportIsSmall: boolean): string {
         let stackId: string = uuid.generate();
         let backdropIndex: number | undefined = undefined;
         if (withBackdrop) {
             backdropIndex = this.ensureBackdrop(viewportIsSmall);
-        } else if (menageScroll) {
-            this.stopScrollBody(true);
         }
         let index: number = this.windowStack.push(stackId) - 1;
         this.windowStackMap[stackId] = {
@@ -106,7 +104,7 @@ export class Modul {
         return stackId;
     }
 
-    public popElement(stackId: string, withBackdrop: boolean, slow: boolean, menageScroll: boolean = false): void {
+    public popElement(stackId: string, withBackdrop: boolean, slow: boolean): void {
         if (this.peekElement() == stackId) {
             this.windowZIndex--;
             this.windowStack.pop();
@@ -121,8 +119,6 @@ export class Modul {
 
         if (withBackdrop) {
             this.removeBackdrop(slow);
-        } else if (menageScroll) {
-            this.activeScrollBody();
         }
 
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
