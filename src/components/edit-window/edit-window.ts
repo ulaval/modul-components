@@ -2,30 +2,16 @@ import { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { FULLPAGE_NAME } from '../component-names';
+import { EDIT_WINDOW_NAME } from '../component-names';
 import { Portal, PortalMixin, PortalMixinImpl, BackdropMode, PortalTransitionDuration } from '../../mixins/portal/portal';
-import WithRender from './fullpage.html?style=./fullpage.scss';
+import WithRender from './edit-window.html?style=./edit-window.scss';
 import { log } from 'util';
-
-export enum MSidebarOrigin {
-    Bottom = 'bottom'
-}
 
 @WithRender
 @Component({
     mixins: [Portal]
 })
-export class MFullpage extends ModulVue {
-
-    @Prop({
-        default: MSidebarOrigin.Bottom,
-        validator: value =>
-            value == MSidebarOrigin.Bottom
-    })
-    public origin: MSidebarOrigin;
-
-    @Prop({ default: true })
-    public center: boolean;
+export class MEditWindow extends ModulVue {
 
     @Prop({ default: true })
     public focusManagement: boolean;
@@ -65,11 +51,24 @@ export class MFullpage extends ModulVue {
     private get hasFooterSlot(): boolean {
         return !!this.$slots.footer;
     }
+
+    private save(e: MouseEvent): void {
+        this.$emit('save', e);
+    }
+
+    private cancel(e: MouseEvent): void {
+        this.$emit('cancel', e);
+        this.close();
+    }
+
+    private close(): void {
+        this.as<PortalMixin>().tryClose();
+    }
 }
 
 const FullpagePlugin: PluginObject<any> = {
     install(v, options) {
-        v.component(FULLPAGE_NAME, MFullpage);
+        v.component(EDIT_WINDOW_NAME, MEditWindow);
     }
 };
 

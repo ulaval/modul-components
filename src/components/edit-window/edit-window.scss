@@ -1,6 +1,6 @@
 @import '../../styles/abstracts/variables';
 
-.m-fullpage {
+.m-edit-window {
     &__wrap {
         position: fixed;
         top: 0;
@@ -18,7 +18,7 @@
         &.m--is-leave-active {
             transition: background $m-transition-duration--xl ease;
 
-            .m-fullpage__article {
+            .m-edit-window__article {
                 transition: transform $m-transition-duration--xl ease;
             }
         }
@@ -27,7 +27,7 @@
         &.m--is-leave-to {
             background: rgba($m-color--grey-lightest, 0);
 
-            .m-fullpage__article {
+            .m-edit-window__article {
                 transform: translate3d(0, 110%, 0);
             }
         }
@@ -110,5 +110,9 @@
         justify-content: space-between;
         padding: $m-spacing $m-spacing--l;
         border-top: $m-border-width--s solid $m-color--border;
+
+        &__save-button {
+            margin-right: $m-margin;
+        }
     }
 }
