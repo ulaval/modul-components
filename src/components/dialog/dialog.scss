@@ -44,7 +44,7 @@ $m-dialog--max-width--s: 420px !default;
         &.m--is-enter-active,
         &.m--is-leave-active {
             &.m--is-full-screen {
-                transition-duration: 0.6s;
+                transition-duration: $m-transition-duration--l;
             }
 
             &:not(.m--is-full-screen) {

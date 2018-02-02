@@ -3,7 +3,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { FULLPAGE_NAME } from '../component-names';
-import { Portal, PortalMixin, PortalMixinImpl, BackdropMode } from '../../mixins/portal/portal';
+import { Portal, PortalMixin, PortalMixinImpl, BackdropMode, PortalTransitionDuration } from '../../mixins/portal/portal';
 import WithRender from './fullpage.html?style=./fullpage.scss';
 import { log } from 'util';
 
@@ -15,7 +15,7 @@ export enum MSidebarOrigin {
 @Component({
     mixins: [Portal]
 })
-export class MFullpage extends ModulVue implements PortalMixinImpl {
+export class MFullpage extends ModulVue {
 
     @Prop({
         default: MSidebarOrigin.Bottom,
@@ -25,56 +25,46 @@ export class MFullpage extends ModulVue implements PortalMixinImpl {
     public origin: MSidebarOrigin;
 
     @Prop({ default: true })
-    public closeButton: boolean;
-    @Prop({ default: true })
-    public menuButton: boolean;
-    @Prop({ default: true })
     public center: boolean;
 
     @Prop({ default: true })
     public focusManagement: boolean;
 
+    protected mounted() {
+        this.as<Portal>().transitionDuration = PortalTransitionDuration.Slow;
+    }
+
     public get popupBody(): any {
         return (this.$refs.article as Element).querySelector('.m-popup__body');
     }
 
-    public handlesFocus(): boolean {
+    private handlesFocus(): boolean {
         return this.focusManagement;
     }
 
-    public doCustomPropOpen(value: boolean): boolean {
+    private doCustomPropOpen(value: boolean): boolean {
         return false;
     }
 
-    public get hasMenuButton(): boolean {
-        return this.menuButton;
-    }
-
-    public get isCentered(): boolean {
-        return this.center;
-    }
-
-    public getBackdropMode(): BackdropMode {
+    private getBackdropMode(): BackdropMode {
         return BackdropMode.ScrollOnly;
     }
 
-    public menageScroll(): boolean {
+    private menageScroll(): boolean {
         return true;
     }
 
-    public getPortalElement(): HTMLElement {
+    private getPortalElement(): HTMLElement {
         return this.$refs.article as HTMLElement;
     }
 
-    private closeDialog(): void {
-        this.as<PortalMixin>().tryClose();
+    private get hasHeaderRightSlot(): boolean {
+        return !!this.$slots['header-right'];
     }
 
-    private menu(event): void {
-        this.$emit('open-menu', event);
-        console.log('menu clicked');
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
     }
-
 }
 
 const FullpagePlugin: PluginObject<any> = {
