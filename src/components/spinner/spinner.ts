@@ -64,6 +64,7 @@ export class MSpinner extends ModulVue {
 
     private initialized: boolean = false; // seems to be necessary since $refs are not responsive
     private visible: boolean = false;
+    private stackId: string;
 
     protected created(): void {
         this.portalTargetEl = undefined;
@@ -96,7 +97,7 @@ export class MSpinner extends ModulVue {
             element.setAttribute('id', this.spinnerId);
             document.body.appendChild(element);
             this.portalTargetEl = document.getElementById(this.spinnerId) as HTMLElement;
-            this.$modul.pushElement(this.portalTargetEl, true, false);
+            this.stackId = this.$modul.pushElement(this.portalTargetEl, true, false);
             this.portalTargetEl.style.position = 'absolute';
         }
         this.initialized = true;
@@ -112,7 +113,7 @@ export class MSpinner extends ModulVue {
 
     private removeBackdrop(): void {
         if (this.portalTargetEl) {
-            this.$modul.popElement(this.portalTargetEl, true, false);
+            this.$modul.popElement(this.stackId, true, false);
             this.portalTargetEl.style.position = '';
             this.portalTargetEl = undefined;
         }

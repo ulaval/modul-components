@@ -16,6 +16,15 @@ const BACKDROP_STYLE_OPACITY_NOT_VISIBLE: string = '0';
 const Z_INDEZ_DEFAULT: number = 100;
 const DONE_EVENT_DURATION: number = 100;
 
+interface StackElement {
+    stackIndex: number;
+    backdropIndex: number | undefined;
+}
+
+type StackMap = {
+    [key: string]: StackElement
+};
+
 export class Modul {
     public bodyEl: HTMLElement = document.body || document.documentElement;
     public bodyStyle: any = this.bodyEl.style;
@@ -29,8 +38,8 @@ export class Modul {
     public backdropElement: HTMLElement | undefined;
     public windowZIndex: number = Z_INDEZ_DEFAULT;
 
-    private backdropIndex: number[] = [];
-    private windowStack: HTMLElement[] = [];
+    private windowStack: (string | undefined)[] = [];
+    private windowStackMap: StackMap = {};
     private lastScrollPosition: number = 0;
     private doneScrollEvent: any;
     private doneResizeEvent: any;
@@ -77,32 +86,54 @@ export class Modul {
         this.event.$emit('updateAfterResize');
     }
 
-    public pushElement(element: HTMLElement, withBackdrop: boolean, viewportIsSmall: boolean): void {
+    public pushElement(element: HTMLElement, withBackdrop: boolean, viewportIsSmall: boolean): string {
+        let stackId: string = uuid.generate();
+        let backdropIndex: number | undefined = undefined;
         if (withBackdrop) {
-            this.ensureBackdrop(viewportIsSmall);
+            backdropIndex = this.ensureBackdrop(viewportIsSmall);
         }
-        this.windowStack.push(element);
+        let index: number = this.windowStack.push(stackId) - 1;
+        this.windowStackMap[stackId] = {
+            stackIndex: index,
+            backdropIndex: backdropIndex
+        };
+
         this.windowZIndex++;
         element.style.zIndex = String(this.windowZIndex);
+
+        return stackId;
     }
 
-    public popElement(element: HTMLElement, withBackdrop: boolean, slow: boolean): void {
-        this.windowZIndex--;
-        this.windowStack.pop();
+    public popElement(stackId: string, withBackdrop: boolean, slow: boolean): void {
+        if (this.peekElement() == stackId) {
+            this.windowZIndex--;
+            this.windowStack.pop();
+        } else {
+            this.windowStack[this.windowStackMap[stackId].stackIndex] = undefined;
+        }
+
+        while (this.windowStack.length > 0 && this.windowStack[this.windowStack.length - 1] === undefined) {
+            this.windowZIndex--;
+            this.windowStack.pop();
+        }
+
+        if (withBackdrop) {
+            this.removeBackdrop(slow);
+        }
+
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
             console.warn('$modul: Invalid window ref count');
             this.windowZIndex = Z_INDEZ_DEFAULT;
         }
-        if (withBackdrop) {
-            this.removeBackdrop(slow);
-        }
+
+        delete this.windowStackMap[stackId];
     }
 
-    public peekElement(): HTMLElement | undefined {
+    public peekElement(): string | undefined {
         return this.windowStack.length > 0 ? this.windowStack[this.windowStack.length - 1] : undefined;
     }
 
-    private ensureBackdrop(viewportIsSmall: boolean): void {
+    private ensureBackdrop(viewportIsSmall: boolean): number {
         if (!this.backdropElement) {
             this.stopScrollBody(viewportIsSmall);
 
@@ -136,13 +167,25 @@ export class Modul {
                 }
             }, 5);
         } else {
-            this.backdropIndex.push(Number(this.backdropElement.style.zIndex));
             this.backdropElement.style.zIndex = String(this.windowZIndex);
         }
+
+        return this.windowZIndex;
     }
 
     private removeBackdrop(slow: boolean) {
-        if (this.backdropIndex.length == 0) {
+        let lastIndex: number | undefined = undefined;
+        for (let i: number = this.windowStack.length - 1; i >= 0; i--) {
+            let stackId: string | undefined = this.windowStack[i];
+            if (stackId) {
+                if (this.windowStackMap[stackId].backdropIndex) {
+                    lastIndex = this.windowStackMap[stackId].backdropIndex;
+                    break;
+                }
+            }
+        }
+
+        if (!lastIndex) {
             let speed: number = slow ? BACKDROP_STYLE_TRANSITION_SLOW_DURATION : BACKDROP_STYLE_TRANSITION_FAST_DURATION;
             if (this.backdropElement) {
                 let duration: string = String(speed / 1000) + 's';
@@ -150,19 +193,20 @@ export class Modul {
                 this.backdropElement.style.transitionDuration = duration;
 
                 this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_NOT_VISIBLE;
+                let b = this.backdropElement;
+                this.backdropElement = undefined;
 
                 setTimeout(() => {
-                    if (this.backdropElement) {
-                        document.body.removeChild(this.backdropElement);
-                        this.backdropElement = undefined;
-
+                    document.body.removeChild(b);
+                    if (!this.backdropElement) {
                         this.activeScrollBody();
                     }
                 }, speed);
             }
         } else if (this.backdropElement) {
-            let lastIndex: string = String(this.backdropIndex.pop());
-            this.backdropElement.style.zIndex = lastIndex;
+            this.backdropElement.style.zIndex = String(lastIndex);
+        } else {
+            throw new Error('backdropElement cannot be null');
         }
     }
 
