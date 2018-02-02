@@ -3,7 +3,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { FULLPAGE_NAME } from '../component-names';
-import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
+import { Portal, PortalMixin, PortalMixinImpl, BackdropMode } from '../../mixins/portal/portal';
 import WithRender from './fullpage.html?style=./fullpage.scss';
 import { log } from 'util';
 
@@ -54,8 +54,8 @@ export class MFullpage extends ModulVue implements PortalMixinImpl {
         return this.center;
     }
 
-    public hasBackdrop(): boolean {
-        return false;
+    public getBackdropMode(): BackdropMode {
+        return BackdropMode.ScrollOnly;
     }
 
     public menageScroll(): boolean {

@@ -1,5 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import uuid from '../../utils/uuid/uuid';
+import { BackdropMode } from '../../mixins/portal/portal';
 
 const BACKDROP_ID: string = 'mBackdropID';
 const BACKDROP_CLASS_NAME: string = 'm-backdrop';
@@ -19,6 +20,8 @@ const DONE_EVENT_DURATION: number = 100;
 interface StackElement {
     stackIndex: number;
     backdropIndex: number | undefined;
+    backdropIsFast: boolean;
+    scrollId: string | undefined;
 }
 
 type StackMap = {
@@ -43,6 +46,7 @@ export class Modul {
     private lastScrollPosition: number = 0;
     private doneScrollEvent: any;
     private doneResizeEvent: any;
+    private scrollActive: boolean = true;
 
     constructor() {
         this.scrollPosition = window.pageYOffset;
@@ -86,16 +90,24 @@ export class Modul {
         this.event.$emit('updateAfterResize');
     }
 
-    public pushElement(element: HTMLElement, withBackdrop: boolean, viewportIsSmall: boolean): string {
+    public pushElement(element: HTMLElement, backdropMode: BackdropMode, viewportIsSmall: boolean): string {
         let stackId: string = uuid.generate();
         let backdropIndex: number | undefined = undefined;
-        if (withBackdrop) {
+        let scrollId: string | undefined = undefined;
+
+        if (backdropMode != BackdropMode.None) {
+            scrollId = this.stopScrollBody(viewportIsSmall);
+        }
+        if (backdropMode == BackdropMode.BackdropFast || backdropMode == BackdropMode.BackdropSlow) {
             backdropIndex = this.ensureBackdrop(viewportIsSmall);
         }
+
         let index: number = this.windowStack.push(stackId) - 1;
         this.windowStackMap[stackId] = {
             stackIndex: index,
-            backdropIndex: backdropIndex
+            backdropIndex: backdropIndex,
+            backdropIsFast: backdropMode == BackdropMode.BackdropFast,
+            scrollId: scrollId
         };
 
         this.windowZIndex++;
@@ -104,7 +116,7 @@ export class Modul {
         return stackId;
     }
 
-    public popElement(stackId: string, withBackdrop: boolean, slow: boolean): void {
+    public popElement(stackId: string): void {
         if (this.peekElement() == stackId) {
             this.windowZIndex--;
             this.windowStack.pop();
@@ -117,8 +129,10 @@ export class Modul {
             this.windowStack.pop();
         }
 
-        if (withBackdrop) {
-            this.removeBackdrop(slow);
+        let stackElement = this.windowStackMap[stackId];
+
+        if (stackElement.backdropIndex || stackElement.scrollId) {
+            this.removeBackdrop(!stackElement.backdropIsFast);
         }
 
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
@@ -135,7 +149,7 @@ export class Modul {
 
     private ensureBackdrop(viewportIsSmall: boolean): number {
         if (!this.backdropElement) {
-            this.stopScrollBody(viewportIsSmall);
+            // this.stopScrollBody(viewportIsSmall);
 
             let element: HTMLElement = document.createElement('div');
             let id: string = BACKDROP_ID + '-' + uuid.generate();
@@ -174,18 +188,31 @@ export class Modul {
     }
 
     private removeBackdrop(slow: boolean) {
-        let lastIndex: number | undefined = undefined;
+        let lastBackdropIndex: number | undefined = undefined;
+        let lastScrollId: string | undefined = undefined;
         for (let i: number = this.windowStack.length - 1; i >= 0; i--) {
             let stackId: string | undefined = this.windowStack[i];
             if (stackId) {
-                if (this.windowStackMap[stackId].backdropIndex) {
-                    lastIndex = this.windowStackMap[stackId].backdropIndex;
+                if (!lastBackdropIndex && this.windowStackMap[stackId].backdropIndex) {
+                    lastBackdropIndex = this.windowStackMap[stackId].backdropIndex;
+                }
+                if (!lastScrollId && this.windowStackMap[stackId].scrollId) {
+                    lastScrollId = this.windowStackMap[stackId].scrollId;
+                }
+                if (lastBackdropIndex && lastScrollId) {
                     break;
                 }
             }
         }
 
-        if (!lastIndex) {
+        if (!lastScrollId && lastBackdropIndex) {
+            throw new Error('Backdrop should always hide scroll bar');
+        }
+
+        if (!lastScrollId && !this.backdropElement) {
+            this.scrollActive = true;
+            this.activeScrollBody();
+        } else if (!lastBackdropIndex) {
             let speed: number = slow ? BACKDROP_STYLE_TRANSITION_SLOW_DURATION : BACKDROP_STYLE_TRANSITION_FAST_DURATION;
             if (this.backdropElement) {
                 let duration: string = String(speed / 1000) + 's';
@@ -195,16 +222,20 @@ export class Modul {
                 this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_NOT_VISIBLE;
                 let b = this.backdropElement;
                 this.backdropElement = undefined;
+                this.scrollActive = true;
 
                 setTimeout(() => {
                     document.body.removeChild(b);
-                    if (!this.backdropElement) {
+                    // if (!this.backdropElement) {
+                    //     this.activeScrollBody();
+                    // }
+                    if (!lastScrollId && this.scrollActive) {
                         this.activeScrollBody();
                     }
                 }, speed);
             }
         } else if (this.backdropElement) {
-            this.backdropElement.style.zIndex = String(lastIndex);
+            this.backdropElement.style.zIndex = String(lastBackdropIndex);
         } else {
             throw new Error('backdropElement cannot be null');
         }
@@ -234,18 +265,22 @@ export class Modul {
         }
     }
 
-    private stopScrollBody(viewportIsSmall: boolean): void {
-        if (this.isIOSMobile()) {
-            this.stopScrollPosition = this.scrollPosition;
-            this.bodyStyle.position = 'fixed';
-            this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
-            this.bodyStyle.right = '0';
-            this.bodyStyle.left = '0';
-            this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
-            this.bodyStyle.height = '100%';
+    private stopScrollBody(viewportIsSmall: boolean): string {
+        if (this.scrollActive) {
+            this.scrollActive = false;
+            if (this.isIOSMobile()) {
+                this.stopScrollPosition = this.scrollPosition;
+                this.bodyStyle.position = 'fixed';
+                this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
+                this.bodyStyle.right = '0';
+                this.bodyStyle.left = '0';
+                this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
+                this.bodyStyle.height = '100%';
+            }
+            this.bodyStyle.overflow = 'hidden';
+            this.htmlEl.style.overflow = 'hidden';
         }
-        this.bodyStyle.overflow = 'hidden';
-        this.htmlEl.style.overflow = 'hidden';
+        return uuid.generate();
     }
 }
 
