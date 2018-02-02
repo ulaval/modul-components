@@ -63,7 +63,7 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        min-height: $m-min-height-header;
+        min-height: $m-box--min-height;
         color: $m-color--white;
         background: $m-color--black-grey;
 
@@ -83,7 +83,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: $m-min-height-header;
+            width: $m-box--min-height;
             background-color: $m-color--black-grey-darker;
         }
 
