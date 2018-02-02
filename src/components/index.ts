@@ -36,6 +36,7 @@ import RadioGroupPlugin from './radio-group/radio-group';
 import RadioStylePlugin from './radio-style/radio-style';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SidebarPlugin from './sidebar/sidebar';
+import FullpagePlugin from './fullpage/fullpage';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
 import Status from './status/status';
@@ -95,6 +96,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RadioStylePlugin);
         Vue.use(ScrollTopPlugin);
         Vue.use(SidebarPlugin);
+        Vue.use(FullpagePlugin);
         Vue.use(SliderPlugin);
         Vue.use(SpinnerPlugin);
         Vue.use(Status);

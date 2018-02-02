@@ -18,6 +18,7 @@ export interface PortalMixinImpl {
     doCustomPropOpen(value: boolean, el: HTMLElement): boolean;
     handlesFocus(): boolean;
     hasBackdrop(): boolean;
+    menageScroll?(): boolean;
     getPortalElement(): HTMLElement;
 }
 
@@ -122,6 +123,8 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public set propOpen(value: boolean) {
+        let thisPortal = this.as<PortalMixinImpl>();
+        let menageScroll = thisPortal.menageScroll ? thisPortal.menageScroll() : false;
         if (value != this.internalOpen) {
             if (value) {
                 if (this.portalTargetEl) {

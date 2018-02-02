@@ -40,3 +40,7 @@ $m-spacing--m: 24px !default;
 $m-spacing: 16px !default;
 $m-spacing--s: 8px !default;
 $m-spacing--xs: 4px !default;
+
+:root {
+    --m-min-height-header: 88px;
+}

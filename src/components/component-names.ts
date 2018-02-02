@@ -35,6 +35,7 @@ export const RADIO_GROUP_NAME: string = 'm-radio-group';
 export const RADIO_STYLE_NAME: string = 'm-radio-style';
 export const SCROLL_TOP_NAME: string = 'm-scroll-top';
 export const SIDEBAR_NAME: string = 'm-sidebar';
+export const FULLPAGE_NAME: string = 'm-fullpage';
 export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
 export const STATUS_NAME: string = 'm-status';
