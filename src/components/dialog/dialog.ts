@@ -35,6 +35,8 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop()
     public title: string;
     @Prop({ default: true })
+    public bodyMaxWidth: boolean;
+    @Prop({ default: true })
     public padding: boolean;
     @Prop({ default: true })
     public paddingHeader: boolean;
@@ -74,7 +76,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     protected mounted(): void {
-        if (!this.hasHeader()) {
+        if (!this.hasHeader) {
             console.warn('<' + DIALOG_NAME + '> needs a header slot or title prop.');
         }
     }
@@ -83,7 +85,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return !!this.$slots.default;
     }
 
-    private hasHeader(): boolean {
+    private get hasHeader(): boolean {
         return this.hasTitle || !!this.$slots.header;
     }
 

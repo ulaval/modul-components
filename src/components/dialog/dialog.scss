@@ -101,6 +101,13 @@ $m-dialog--max-width--s: 420px !default;
                 max-width: $m-dialog--max-width--s;
             }
         }
+
+        &.m--has-body-max-width {
+            .m-dialog__body {
+                max-width: $m-max-width--l;
+                margin: 0 auto;
+            }
+        }
     }
 
     &__article {
@@ -112,22 +119,6 @@ $m-dialog--max-width--s: 420px !default;
         display: flex;
         flex-direction: column;
         max-height: 100%;
-
-        // @media screen and (max-width: #{$m-mq--max--s}) {
-        //     transition: transform 0.6s ease;
-        //     position: absolute;
-        //     top: 0;
-        //     bottom: 0;
-        //     margin: 0 !important; //style for IE
-        // }
-
-        // @media screen and (min-width: #{$m-mq--min--s}) {
-        //     transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
-        //     margin-top: auto;
-        //     margin-bottom: auto;
-        //     max-width: $m-dialog--max-width;
-        //     transform: translate3d(0, 0, 0);
-        // }
 
         @include m-is-ie() {
             margin: $m-padding--l*2 auto;
@@ -164,13 +155,18 @@ $m-dialog--max-width--s: 420px !default;
         &__close-button {
             margin-right: -12px; // Magic number: visually align
         }
+
+        &:not(.m--has-content) {
+            justify-content: flex-end;
+        }
     }
 
     &__body {
+        position: relative;
+        width: 100%;
         flex: 1 1 auto;
         overflow-x: hidden;
         overflow-y: auto;
-        position: relative;
         padding-top: $m-padding--l;
         padding-bottom: $m-padding--l;
 
