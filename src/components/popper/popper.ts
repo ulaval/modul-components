@@ -7,7 +7,7 @@ import { POPPER_NAME } from '../component-names';
 import Popper from 'popper.js';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
-import { Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
+import { Portal, PortalMixin, PortalMixinImpl, BackdropMode } from '../../mixins/portal/portal';
 
 export enum MPopperPlacement {
     Top = 'top',
@@ -88,8 +88,8 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         return this.focusManagement;
     }
 
-    public hasBackdrop(): boolean {
-        return false;
+    public getBackdropMode(): BackdropMode {
+        return BackdropMode.None;
     }
 
     public getPortalElement(): HTMLElement {

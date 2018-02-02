@@ -1,5 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import uuid from '../../utils/uuid/uuid';
+import { BackdropMode } from '../../mixins/portal/portal';
 
 const BACKDROP_ID: string = 'mBackdropID';
 const BACKDROP_CLASS_NAME: string = 'm-backdrop';
@@ -16,6 +17,17 @@ const BACKDROP_STYLE_OPACITY_NOT_VISIBLE: string = '0';
 const Z_INDEZ_DEFAULT: number = 100;
 const DONE_EVENT_DURATION: number = 100;
 
+interface StackElement {
+    stackIndex: number;
+    backdropIndex: number | undefined;
+    backdropIsFast: boolean;
+    scrollId: string | undefined;
+}
+
+type StackMap = {
+    [key: string]: StackElement
+};
+
 export class Modul {
     public bodyEl: HTMLElement = document.body || document.documentElement;
     public bodyStyle: any = this.bodyEl.style;
@@ -29,11 +41,12 @@ export class Modul {
     public backdropElement: HTMLElement | undefined;
     public windowZIndex: number = Z_INDEZ_DEFAULT;
 
-    private backdropIndex: number[] = [];
-    private windowStack: HTMLElement[] = [];
+    private windowStack: (string | undefined)[] = [];
+    private windowStackMap: StackMap = {};
     private lastScrollPosition: number = 0;
     private doneScrollEvent: any;
     private doneResizeEvent: any;
+    private scrollActive: boolean = true;
 
     constructor() {
         this.scrollPosition = window.pageYOffset;
@@ -77,38 +90,66 @@ export class Modul {
         this.event.$emit('updateAfterResize');
     }
 
-    public pushElement(element: HTMLElement, withBackdrop: boolean, viewportIsSmall: boolean, menageScroll: boolean = false): void {
-        if (withBackdrop) {
-            this.ensureBackdrop(viewportIsSmall);
-        } else if (menageScroll) {
-            this.stopScrollBody(true);
+    public pushElement(element: HTMLElement, backdropMode: BackdropMode, viewportIsSmall: boolean): string {
+        let stackId: string = uuid.generate();
+        let backdropIndex: number | undefined = undefined;
+        let scrollId: string | undefined = undefined;
+
+        if (backdropMode != BackdropMode.None) {
+            scrollId = this.stopScrollBody(viewportIsSmall);
         }
-        this.windowStack.push(element);
+        if (backdropMode == BackdropMode.BackdropFast || backdropMode == BackdropMode.BackdropSlow) {
+            backdropIndex = this.ensureBackdrop(viewportIsSmall);
+        }
+
+        let index: number = this.windowStack.push(stackId) - 1;
+        this.windowStackMap[stackId] = {
+            stackIndex: index,
+            backdropIndex: backdropIndex,
+            backdropIsFast: backdropMode == BackdropMode.BackdropFast,
+            scrollId: scrollId
+        };
+
         this.windowZIndex++;
         element.style.zIndex = String(this.windowZIndex);
+
+        return stackId;
     }
 
-    public popElement(element: HTMLElement, withBackdrop: boolean, slow: boolean, menageScroll: boolean = false): void {
-        this.windowZIndex--;
-        this.windowStack.pop();
+    public popElement(stackId: string): void {
+        if (this.peekElement() == stackId) {
+            this.windowZIndex--;
+            this.windowStack.pop();
+        } else {
+            this.windowStack[this.windowStackMap[stackId].stackIndex] = undefined;
+        }
+
+        while (this.windowStack.length > 0 && this.windowStack[this.windowStack.length - 1] === undefined) {
+            this.windowZIndex--;
+            this.windowStack.pop();
+        }
+
+        let stackElement = this.windowStackMap[stackId];
+
+        if (stackElement.backdropIndex || stackElement.scrollId) {
+            this.removeBackdrop(!stackElement.backdropIsFast);
+        }
+
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
             console.warn('$modul: Invalid window ref count');
             this.windowZIndex = Z_INDEZ_DEFAULT;
         }
-        if (withBackdrop) {
-            this.removeBackdrop(slow);
-        } else if (menageScroll) {
-            this.activeScrollBody();
-        }
+
+        delete this.windowStackMap[stackId];
     }
 
-    public peekElement(): HTMLElement | undefined {
+    public peekElement(): string | undefined {
         return this.windowStack.length > 0 ? this.windowStack[this.windowStack.length - 1] : undefined;
     }
 
-    private ensureBackdrop(viewportIsSmall: boolean): void {
+    private ensureBackdrop(viewportIsSmall: boolean): number {
         if (!this.backdropElement) {
-            this.stopScrollBody(viewportIsSmall);
+            // this.stopScrollBody(viewportIsSmall);
 
             let element: HTMLElement = document.createElement('div');
             let id: string = BACKDROP_ID + '-' + uuid.generate();
@@ -140,13 +181,38 @@ export class Modul {
                 }
             }, 5);
         } else {
-            this.backdropIndex.push(Number(this.backdropElement.style.zIndex));
             this.backdropElement.style.zIndex = String(this.windowZIndex);
         }
+
+        return this.windowZIndex;
     }
 
     private removeBackdrop(slow: boolean) {
-        if (this.backdropIndex.length == 0) {
+        let lastBackdropIndex: number | undefined = undefined;
+        let lastScrollId: string | undefined = undefined;
+        for (let i: number = this.windowStack.length - 1; i >= 0; i--) {
+            let stackId: string | undefined = this.windowStack[i];
+            if (stackId) {
+                if (!lastBackdropIndex && this.windowStackMap[stackId].backdropIndex) {
+                    lastBackdropIndex = this.windowStackMap[stackId].backdropIndex;
+                }
+                if (!lastScrollId && this.windowStackMap[stackId].scrollId) {
+                    lastScrollId = this.windowStackMap[stackId].scrollId;
+                }
+                if (lastBackdropIndex && lastScrollId) {
+                    break;
+                }
+            }
+        }
+
+        if (!lastScrollId && lastBackdropIndex) {
+            throw new Error('Backdrop should always hide scroll bar');
+        }
+
+        if (!lastScrollId && !this.backdropElement) {
+            this.scrollActive = true;
+            this.activeScrollBody();
+        } else if (!lastBackdropIndex) {
             let speed: number = slow ? BACKDROP_STYLE_TRANSITION_SLOW_DURATION : BACKDROP_STYLE_TRANSITION_FAST_DURATION;
             if (this.backdropElement) {
                 let duration: string = String(speed / 1000) + 's';
@@ -154,19 +220,24 @@ export class Modul {
                 this.backdropElement.style.transitionDuration = duration;
 
                 this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_NOT_VISIBLE;
+                let b = this.backdropElement;
+                this.backdropElement = undefined;
+                this.scrollActive = true;
 
                 setTimeout(() => {
-                    if (this.backdropElement) {
-                        document.body.removeChild(this.backdropElement);
-                        this.backdropElement = undefined;
-
+                    document.body.removeChild(b);
+                    // if (!this.backdropElement) {
+                    //     this.activeScrollBody();
+                    // }
+                    if (!lastScrollId && this.scrollActive) {
                         this.activeScrollBody();
                     }
                 }, speed);
             }
         } else if (this.backdropElement) {
-            let lastIndex: string = String(this.backdropIndex.pop());
-            this.backdropElement.style.zIndex = lastIndex;
+            this.backdropElement.style.zIndex = String(lastBackdropIndex);
+        } else {
+            throw new Error('backdropElement cannot be null');
         }
     }
 
@@ -194,18 +265,22 @@ export class Modul {
         }
     }
 
-    private stopScrollBody(viewportIsSmall: boolean): void {
-        if (this.isIOSMobile()) {
-            this.stopScrollPosition = this.scrollPosition;
-            this.bodyStyle.position = 'fixed';
-            this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
-            this.bodyStyle.right = '0';
-            this.bodyStyle.left = '0';
-            this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
-            this.bodyStyle.height = '100%';
+    private stopScrollBody(viewportIsSmall: boolean): string {
+        if (this.scrollActive) {
+            this.scrollActive = false;
+            if (this.isIOSMobile()) {
+                this.stopScrollPosition = this.scrollPosition;
+                this.bodyStyle.position = 'fixed';
+                this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
+                this.bodyStyle.right = '0';
+                this.bodyStyle.left = '0';
+                this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
+                this.bodyStyle.height = '100%';
+            }
+            this.bodyStyle.overflow = 'hidden';
+            this.htmlEl.style.overflow = 'hidden';
         }
-        this.bodyStyle.overflow = 'hidden';
-        this.htmlEl.style.overflow = 'hidden';
+        return uuid.generate();
     }
 }
 
