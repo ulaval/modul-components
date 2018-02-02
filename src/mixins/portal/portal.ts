@@ -31,7 +31,8 @@ export enum BackdropMode {
 export enum PortalTransitionDuration {
     Fast = 200,
     Regular = 300,
-    Slow = 600
+    Slow = 450,
+    XSlow = 600
 }
 
 @Component({
@@ -168,7 +169,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public get transitionDuration(): number {
-        return this.as<MediaQueriesMixin>().isMqMaxS ? PortalTransitionDuration.Slow : this.internalTransitionDuration;
+        return this.internalTransitionDuration;
     }
 
     public set transitionDuration(speed: number) {

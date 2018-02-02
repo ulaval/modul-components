@@ -16,10 +16,10 @@
 
         &.m--is-enter-active,
         &.m--is-leave-active {
-            transition: background $m-transition-duration--l ease;
+            transition: background $m-transition-duration--xl ease;
 
             .m-fullpage__article {
-                transition: transform $m-transition-duration--l ease;
+                transition: transform $m-transition-duration--xl ease;
             }
         }
 

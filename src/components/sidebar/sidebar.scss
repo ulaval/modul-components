@@ -81,7 +81,7 @@
     }
 
     &__article {
-        transition: transform $m-transition-duration ease-in-out;
+        transition: transform $m-transition-duration--l ease-in-out;
         position: absolute;
         right: 0;
         left: 0;
@@ -97,7 +97,7 @@
     }
 
     &__close-button {
-        transition: color $m-transition-duration ease, background $m-transition-duration ease;
+        transition: color $m-transition-duration--l ease, background $m-transition-duration--l ease;
         position: absolute;
         top: 0;
         right: 0;

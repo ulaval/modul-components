@@ -44,7 +44,7 @@ $m-dialog--max-width--s: 420px !default;
         &.m--is-enter-active,
         &.m--is-leave-active {
             &.m--is-full-screen {
-                transition-duration: $m-transition-duration--l;
+                transition-duration: $m-transition-duration--xl;
             }
 
             &:not(.m--is-full-screen) {
@@ -82,7 +82,7 @@ $m-dialog--max-width--s: 420px !default;
 
         &.m--is-full-screen {
             .m-dialog__article {
-                transition: transform $m-transition-duration--l ease;
+                transition: transform $m-transition-duration--xl ease;
                 position: absolute;
                 top: 0;
                 bottom: 0;

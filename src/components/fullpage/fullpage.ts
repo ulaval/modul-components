@@ -30,8 +30,8 @@ export class MFullpage extends ModulVue {
     @Prop({ default: true })
     public focusManagement: boolean;
 
-    protected mounted() {
-        this.as<Portal>().transitionDuration = PortalTransitionDuration.Slow;
+    protected mounted(): void {
+        this.as<Portal>().transitionDuration = PortalTransitionDuration.XSlow;
     }
 
     public get popupBody(): any {
