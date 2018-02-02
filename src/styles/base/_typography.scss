@@ -15,6 +15,7 @@ h6,
 .m-u--h5,
 .m-u--h6 {
     font-family: $m-font-family;
+    font-weight: $m-font-weight--black;
     line-height: 1.1;
 }
 
@@ -31,39 +32,33 @@ h1,
 .m-u--h1 {
     margin: 0;
     font-size: $m-font-size--h1;
-    font-weight: $m-font-weight--black;
 }
 
 h2,
 .m-u--h2 {
     margin: $m-padding--l 0 0 0;
     font-size: $m-font-size--h2;
-    font-weight: $m-font-weight--bold;
 }
 
 h3,
 .m-u--h3 {
     margin: $m-padding--l 0 0 0;
     font-size: $m-font-size--h3;
-    font-weight: $m-font-weight--bold;
 }
 
 h4,
 .m-u--h4 {
     font-size: $m-font-size--h4;
-    font-weight: $m-font-weight--black;
 }
 
 h5,
 .m-u--h5 {
     font-size: $m-font-size--h5;
-    font-weight: $m-font-weight--black;
 }
 
 h6,
 .m-u--h6 {
     font-size: $m-font-size--h6;
-    font-weight: $m-font-weight--bold;
 }
 
 // ======================================================================
