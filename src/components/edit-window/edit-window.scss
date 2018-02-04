@@ -16,10 +16,26 @@
 
         &.m--is-enter-active,
         &.m--is-leave-active {
-            transition: background $m-transition-duration--xl ease;
+            transition: background ease;
 
             .m-edit-window__article {
-                transition: transform $m-transition-duration--xl ease;
+                transition: transform ease;
+            }
+        }
+
+        &.m--is-enter-active {
+            transition-duration: $m-transition-duration;
+
+            .m-edit-window__article {
+                transition-delay: $m-transition-duration--s;
+                transition-duration: $m-transition-duration--l;
+            }
+        }
+
+        &.m--is-leave-active {
+            &,
+            .m-edit-window__article {
+                transition-duration: $m-transition-duration--xl;
             }
         }
 
