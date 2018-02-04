@@ -137,20 +137,20 @@ $m-dialog--max-width--s: 420px !default;
         }
     }
 
-    &__body,
+    &__header,
     &__footer {
-        &.m--no-padding {
-            padding: 0;
-        }
+        min-height: $m-box--min-height;
+
+        @include m-box-padding($m-padding);
     }
 
     &__header {
         position: relative;
         background: $m-color--black-grey;
         color: $m-color--white;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
-
-        @include m-box-pading();
 
         &__close-button {
             margin-right: -12px; // Magic number: visually align
@@ -167,18 +167,9 @@ $m-dialog--max-width--s: 420px !default;
         flex: 1 1 auto;
         overflow-x: hidden;
         overflow-y: auto;
-        padding-top: $m-padding--l;
-        padding-bottom: $m-padding--l;
+        min-height: 120px;
 
-        @media (min-width: $m-mq--min--s) {
-            padding-left: $m-padding--l;
-            padding-right: $m-padding--l;
-        }
-
-        @media (max-width: $m-mq--max--s) {
-            padding-left: $m-padding;
-            padding-right: $m-padding;
-        }
+        @include m-box-padding();
 
         @include m-is-ie() {
             flex: none;
@@ -189,7 +180,5 @@ $m-dialog--max-width--s: 420px !default;
 
     &__footer {
         border-top: 1px solid $m-color--grey;
-
-        @include m-box-pading();
     }
 }

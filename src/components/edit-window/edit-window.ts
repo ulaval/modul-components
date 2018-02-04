@@ -16,6 +16,15 @@ export class MEditWindow extends ModulVue {
     @Prop({ default: true })
     public focusManagement: boolean;
 
+    @Prop({ default: true })
+    public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
+    @Prop({ default: true })
+    public paddingFooter: boolean;
+
     protected mounted(): void {
         this.as<Portal>().transitionDuration = PortalTransitionDuration.XSlow;
     }
