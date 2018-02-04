@@ -67,7 +67,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return this.as<MediaQueriesMixin>().isMqMinS && this.size == MDialogSize.Large;
     }
 
-    public get sizeSamll(): boolean {
+    public get sizeSmall(): boolean {
         return this.as<MediaQueriesMixin>().isMqMinS && this.size == MDialogSize.Small;
     }
 

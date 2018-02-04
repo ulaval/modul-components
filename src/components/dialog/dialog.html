@@ -4,13 +4,12 @@
         <transition name="m--is">
             <div v-show="propOpen"
                  class="m-dialog__wrap m--is-dialog"
-                 :class="[{ 'm--is-open': propOpen,
-                            'm--is-small': sizeSmall,
+                 :class="[{ 'm--is-small': sizeSmall,
                             'm--is-large': sizeLarge,
                             'm--is-full-screen': sizeFullSceen,
                             'm--has-body-max-width': bodyMaxWidth,
                             'm--is-close-on-backdrop': closeOnBackdrop,
-                            'm--is-disabled':disabled }, className]"
+                            'm--is-disabled':disabled }, className ]"
                  @click.self="backdropClick()"
                  ref="dialogWrap">
                 <article class="m-dialog__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">

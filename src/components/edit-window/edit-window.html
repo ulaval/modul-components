@@ -1,10 +1,9 @@
 <div class="m-edit-window" ref="baseWindow">
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
-        <transition name="m--is" :duration="6000">
+        <transition name="m--is" :duration="{ enter: 800, leave: 600 }">
             <div class="m-edit-window__wrap"
-                 :class="[{ 'm--is-open': propOpen,
-                            'm--is-disabled':disabled },
+                 :class="[{ 'm--is-disabled':disabled },
                             className ]"
                  ref="dialogWrap"
                  v-show="propOpen">

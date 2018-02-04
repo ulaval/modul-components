@@ -16,7 +16,7 @@
 
         &.m--is-enter-active,
         &.m--is-leave-active {
-            transition: background ease;
+            transition: background linear;
 
             .m-edit-window__article {
                 transition: transform ease;
@@ -28,7 +28,7 @@
 
             .m-edit-window__article {
                 transition-delay: $m-transition-duration--s;
-                transition-duration: $m-transition-duration--l;
+                transition-duration: $m-transition-duration--xl;
             }
         }
 
