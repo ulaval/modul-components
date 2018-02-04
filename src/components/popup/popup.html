@@ -17,6 +17,7 @@
               :after-leave="afterLeave"
               :leave-cancelled="leaveCancelled"
               :shadow="shadow"
+              :class-name="className"
               v-if="!isMqMaxS"
               :style="{ width: width }">
         <div slot="trigger" v-if="hasTriggerSlot">
@@ -45,6 +46,7 @@
                :padding-footer="paddingFooter"
                :open-trigger="propOpenTrigger"
                :trigger="trigger"
+               :class-name="className"
                v-if="isMqMaxS">
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>

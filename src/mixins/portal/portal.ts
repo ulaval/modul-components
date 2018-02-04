@@ -60,6 +60,9 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop()
     public trigger: HTMLElement;
 
+    @Prop()
+    public className: string;
+
     private internalTrigger: HTMLElement | undefined = undefined;
     private propId: string = '';
     private portalTargetEl: HTMLElement;
