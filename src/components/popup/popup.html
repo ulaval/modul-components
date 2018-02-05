@@ -1,4 +1,4 @@
-<div class="m-popup" :style="{ width: width }" aria-hidden="true">
+<div class="m-popup" aria-hidden="true">
     <m-popper :open.sync="propOpen"
               @open="onOpen()"
               @close="onClose()"
@@ -17,19 +17,20 @@
               :after-leave="afterLeave"
               :leave-cancelled="leaveCancelled"
               :shadow="shadow"
-              v-if="!isMqMaxS"
-              :style="{ width: width }">
+              v-if="!isMqMaxS">
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
-        <div class="m-popup__header" v-if="hasHeaderSlot">
-            <slot name="header"></slot>
-        </div>
-        <div class="m-popup__body">
-            <slot></slot>
-        </div>
-        <div class="m-popup__footer" v-if="hasFooterSlot">
-            <slot name="footer"></slot>
+        <div class="m-popup__body" :class="{ 'm--no-padding': !padding }" :style="{ width: width }">
+            <div class="m-popup__header" v-if="hasHeaderSlot">
+                <slot name="header"></slot>
+            </div>
+            <div class="m-popup__content">
+                <slot></slot>
+            </div>
+            <div class="m-popup__footer" v-if="hasFooterSlot">
+                <slot name="footer"></slot>
+            </div>
         </div>
     </m-popper>
     <m-sidebar :open.sync="propOpen"
@@ -49,14 +50,16 @@
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
-        <div slot="header" class="m-popup__header" v-if="hasHeaderSlot">
-            <slot name="header"></slot>
-        </div>
-        <div class="m-popup__body" v-if="hasDefaultSlot">
-            <slot></slot>
-        </div>
-        <div slot="footer" class="m-popup__footer" v-if="hasFooterSlot">
-            <slot name="footer"></slot>
+        <div class="m-popup__body" :class="{ 'm--no-padding': !padding }">
+            <div slot="header" class="m-popup__header" v-if="hasHeaderSlot">
+                <slot name="header"></slot>
+            </div>
+            <div class="m-popup__content" v-if="hasDefaultSlot">
+                <slot></slot>
+            </div>
+            <div slot="footer" class="m-popup__footer" v-if="hasFooterSlot">
+                <slot name="footer"></slot>
+            </div>
         </div>
     </m-sidebar>
 </div>

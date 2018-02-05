@@ -9,5 +9,21 @@
     &__footer {
         position: relative;
     }
+
+    &__body {
+        &:not(.m--no-padding) {
+            padding: $m-spacing;
+        }
+
+        background-color: $m-color--white;
+    }
+
+    &__header {
+        margin-bottom: $m-spacing--s;
+    }
+
+    &__footer {
+        margin-top: $m-spacing--s;
+    }
 }
 
