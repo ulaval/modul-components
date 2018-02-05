@@ -4,7 +4,7 @@ import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import { MODAL_NAME } from '../component-names';
 import WithRender from './modal.html?style=./modal.scss';
-import { Portal, PortalMixinImpl, PortalMixin } from '../../mixins/portal/portal';
+import { Portal, PortalMixinImpl, PortalMixin, BackdropMode } from '../../mixins/portal/portal';
 
 @WithRender
 @Component({
@@ -30,8 +30,8 @@ export class MModal extends ModulVue implements PortalMixinImpl {
         return false;
     }
 
-    public hasBackdrop(): boolean {
-        return true;
+    public getBackdropMode(): BackdropMode {
+        return BackdropMode.BackdropFast;
     }
 
     public getPortalElement(): HTMLElement {

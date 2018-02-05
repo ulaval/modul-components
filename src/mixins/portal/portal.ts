@@ -17,8 +17,15 @@ export interface PortalMixin {
 export interface PortalMixinImpl {
     doCustomPropOpen(value: boolean, el: HTMLElement): boolean;
     handlesFocus(): boolean;
-    hasBackdrop(): boolean;
+    getBackdropMode(): BackdropMode;
     getPortalElement(): HTMLElement;
+}
+
+export enum BackdropMode {
+    None,
+    ScrollOnly,
+    BackdropFast,
+    BackdropSlow
 }
 
 const TRANSITION_DURATION: number = 300;
@@ -53,6 +60,7 @@ export class Portal extends ModulVue implements PortalMixin {
     private propId: string = '';
     private portalTargetEl: HTMLElement;
     private internalOpen: boolean = false;
+    private stackId: string;
 
     public setFocusToPortal(): void {
         if (this.as<PortalMixinImpl>().handlesFocus()) {
@@ -85,7 +93,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public tryClose(): boolean {
-        if (this.$modul.peekElement() == this.portalTargetEl) {
+        if (this.$modul.peekElement() == this.stackId) {
             this.propOpen = false;
             return true;
         } else {
@@ -124,7 +132,7 @@ export class Portal extends ModulVue implements PortalMixin {
         if (value != this.internalOpen) {
             if (value) {
                 if (this.portalTargetEl) {
-                    this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().hasBackdrop(), this.as<MediaQueriesMixin>().isMqMaxS);
+                    this.stackId = this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().getBackdropMode(), this.as<MediaQueriesMixin>().isMqMaxS);
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
                         this.portalTargetEl.style.position = 'absolute';
 
@@ -135,7 +143,7 @@ export class Portal extends ModulVue implements PortalMixin {
                 }
             } else {
                 if (this.portalTargetEl) {
-                    this.$modul.popElement(this.portalTargetEl, this.as<PortalMixinImpl>().hasBackdrop(), true);
+                    this.$modul.popElement(this.stackId);
 
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
                         setTimeout(() => {

@@ -30,6 +30,11 @@
         max-width: $m-max-width;
     }
 
+    &--max-width--text {
+        max-width: $m-max-width--text;
+        display: flex !important;
+    }
+
     &--min-width {
         min-width: $m-min-width;
     }
