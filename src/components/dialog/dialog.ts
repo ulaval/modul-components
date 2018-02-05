@@ -54,7 +54,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public getBackdropMode(): BackdropMode {
-        return this.sizeFullSceen ? BackdropMode.None : BackdropMode.BackdropFast;
+        return this.sizeFullSceen ? BackdropMode.ScrollOnly : BackdropMode.BackdropFast;
     }
 
     public get sizeFullSceen(): boolean {
