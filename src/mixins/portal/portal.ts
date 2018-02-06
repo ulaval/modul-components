@@ -28,8 +28,12 @@ export enum BackdropMode {
     BackdropSlow
 }
 
-const TRANSITION_DURATION: number = 300;
-const TRANSITION_DURATION_LONG: number = 600;
+export enum PortalTransitionDuration {
+    Fast = 200,
+    Regular = 300,
+    Slow = 450,
+    XSlow = 600
+}
 
 @Component({
     mixins: [OpenTrigger, MediaQueries]
@@ -56,11 +60,15 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop()
     public trigger: HTMLElement;
 
+    @Prop()
+    public className: string;
+
     private internalTrigger: HTMLElement | undefined = undefined;
     private propId: string = '';
     private portalTargetEl: HTMLElement;
     private internalOpen: boolean = false;
     private stackId: string;
+    private internalTransitionDuration: number = PortalTransitionDuration.Regular;
 
     public setFocusToPortal(): void {
         if (this.as<PortalMixinImpl>().handlesFocus()) {
@@ -163,8 +171,12 @@ export class Portal extends ModulVue implements PortalMixin {
         this.$emit('update:open', value);
     }
 
-    private get transitionDuration(): number {
-        return this.as<MediaQueriesMixin>().isMqMaxS ? TRANSITION_DURATION_LONG : TRANSITION_DURATION;
+    public get transitionDuration(): number {
+        return this.internalTransitionDuration;
+    }
+
+    public set transitionDuration(speed: number) {
+        this.internalTransitionDuration = speed;
     }
 
     @Watch('trigger')

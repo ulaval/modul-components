@@ -14,6 +14,7 @@ const FrenchPlugin: PluginObject<any> = {
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown/dropdown.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown-item/dropdown-item.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/dropdown-group/dropdown-group.lang.fr.json'));
+            (v as any).$i18n.addMessages(FRENCH, require('../components/edit-window/edit-window.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/input-style/input-style.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/link/link.lang.fr.json'));
             (v as any).$i18n.addMessages(FRENCH, require('../components/limit-text/limit-text.lang.fr.json'));

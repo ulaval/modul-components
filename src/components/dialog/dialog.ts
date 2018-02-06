@@ -4,7 +4,8 @@ import Component from 'vue-class-component';
 import WithRender from './dialog.html?style=./dialog.scss';
 import { Prop } from 'vue-property-decorator';
 import { DIALOG_NAME } from '../component-names';
-import { Portal, PortalMixin, PortalMixinImpl, BackdropMode } from '../../mixins/portal/portal';
+import { Portal, PortalMixin, PortalMixinImpl, BackdropMode, PortalTransitionDuration } from '../../mixins/portal/portal';
+import { MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 
 export enum MDialogSize {
     FullScreen = 'full-screen',
@@ -34,6 +35,8 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop()
     public title: string;
     @Prop({ default: true })
+    public bodyMaxWidth: boolean;
+    @Prop({ default: true })
     public padding: boolean;
     @Prop({ default: true })
     public paddingHeader: boolean;
@@ -51,7 +54,21 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public getBackdropMode(): BackdropMode {
-        return BackdropMode.BackdropFast;
+        return this.sizeFullSceen ? BackdropMode.ScrollOnly : BackdropMode.BackdropFast;
+    }
+
+    public get sizeFullSceen(): boolean {
+        let fullScreen: boolean = !this.as<MediaQueriesMixin>().isMqMinS ? true : this.size == MDialogSize.FullScreen ? true : false;
+        this.as<Portal>().transitionDuration = fullScreen ? PortalTransitionDuration.XSlow : PortalTransitionDuration.Regular;
+        return fullScreen;
+    }
+
+    public get sizeLarge(): boolean {
+        return this.as<MediaQueriesMixin>().isMqMinS && this.size == MDialogSize.Large;
+    }
+
+    public get sizeSmall(): boolean {
+        return this.as<MediaQueriesMixin>().isMqMinS && this.size == MDialogSize.Small;
     }
 
     public getPortalElement(): HTMLElement {
@@ -59,7 +76,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     protected mounted(): void {
-        if (!this.hasHeader()) {
+        if (!this.hasHeader) {
             console.warn('<' + DIALOG_NAME + '> needs a header slot or title prop.');
         }
     }
@@ -68,7 +85,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return !!this.$slots.default;
     }
 
-    private hasHeader(): boolean {
+    private get hasHeader(): boolean {
         return this.hasTitle || !!this.$slots.header;
     }
 

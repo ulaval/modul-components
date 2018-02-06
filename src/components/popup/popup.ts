@@ -11,7 +11,7 @@ import SidebarPlugin from '../sidebar/sidebar';
 
 @WithRender
 @Component({
-    mixins: [MediaQueries, OpenTrigger]
+    mixins: [ MediaQueries, OpenTrigger]
 })
 export class MPopup extends ModulVue {
 
@@ -59,6 +59,8 @@ export class MPopup extends ModulVue {
     public leaveCancelled: any;
     @Prop()
     public desktopOnly: boolean;
+    @Prop()
+    public className: string;
 
     private internalOpen: boolean = false;
 
