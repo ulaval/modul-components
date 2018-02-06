@@ -45,10 +45,6 @@ export class MEditWindow extends ModulVue {
         return BackdropMode.ScrollOnly;
     }
 
-    private menageScroll(): boolean {
-        return true;
-    }
-
     private getPortalElement(): HTMLElement {
         return this.$refs.article as HTMLElement;
     }
