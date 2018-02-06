@@ -5,6 +5,7 @@
          :placement="placement"
          :disabled="disabled"
          :close-on-backdrop="true"
+         :class-name="className"
          @open="onOpen"
          @close="onClose">
     <m-icon-button slot="trigger" class="m-tooltip__icon" icon-name="information" :title="propTitle" button-size="22px" v-if="propMode == 'icon'">

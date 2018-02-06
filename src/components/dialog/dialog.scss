@@ -37,61 +37,75 @@ $m-dialog--max-width--s: 420px !default;
             display: block;
         }
 
-        @media screen and (min-width: $m-mq--min--s) {
-            padding: $m-padding--l $m-padding--l 0 $m-padding--l;
-        }
-
         &.m--is-close-on-backdrop {
             cursor: pointer;
         }
 
         &.m--is-enter-active,
         &.m--is-leave-active {
-            @media screen and (max-width: #{$m-mq--max--s}) {
-                transition-duration: 0.6s;
+            &.m--is-full-screen {
+                transition-duration: $m-transition-duration--xl;
             }
 
-            @media screen and (min-width: #{$m-mq--min--s}) {
+            &:not(.m--is-full-screen) {
                 transition-duration: $m-transition-duration;
             }
         }
 
         &.m--is-enter,
         &.m--is-leave-to {
-            .m-dialog__article {
-                @media screen and (max-width: #{$m-mq--max--s}) {
-                    transform: translate3d(0, 110%, 0);
-                }
-
-                @media screen and (min-width: #{$m-mq--min--s}) {
+            &:not(.m--is-full-screen) {
+                .m-dialog__article {
                     transform: translate3d(0, $m-padding--l, 0) scale(0.98);
                     opacity: 0;
                 }
+            }
+
+            &.m--is-full-screen {
+                .m-dialog__article {
+                    transform: translate3d(0, 110%, 0);
+                }
+            }
+        }
+
+        &:not(.m--is-full-screen) {
+            padding: $m-padding--l $m-padding--l 0 $m-padding--l;
+
+            .m-dialog__article {
+                transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
+                margin-top: auto;
+                margin-bottom: auto;
+                max-width: $m-dialog--max-width;
+                transform: translate3d(0, 0, 0);
             }
         }
 
         &.m--is-full-screen {
             .m-dialog__article {
-                @media screen and (min-width: #{$m-mq--min--s}) {
-                    max-width: 100%;
-                    height: 100%;
-                }
+                transition: transform $m-transition-duration--xl ease;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: 0 !important; //style for IE
             }
         }
 
         &.m--is-large {
             .m-dialog__article {
-                @media screen and (min-width: #{$m-mq--min--s}) {
-                    max-width: $m-dialog--max-width--l;
-                }
+                max-width: $m-dialog--max-width--l;
             }
         }
 
         &.m--is-small {
             .m-dialog__article {
-                @media screen and (min-width: #{$m-mq--min--s}) {
-                    max-width: $m-dialog--max-width--s;
-                }
+                max-width: $m-dialog--max-width--s;
+            }
+        }
+
+        &.m--has-body-max-width {
+            .m-dialog__body {
+                max-width: $m-max-width--l;
+                margin: 0 auto;
             }
         }
     }
@@ -105,22 +119,6 @@ $m-dialog--max-width--s: 420px !default;
         display: flex;
         flex-direction: column;
         max-height: 100%;
-
-        @media screen and (max-width: #{$m-mq--max--s}) {
-            transition: transform 0.6s ease;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            margin: 0 !important; //style for IE
-        }
-
-        @media screen and (min-width: #{$m-mq--min--s}) {
-            transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
-            margin-top: auto;
-            margin-bottom: auto;
-            max-width: $m-dialog--max-width;
-            transform: translate3d(0, 0, 0);
-        }
 
         @include m-is-ie() {
             margin: $m-padding--l*2 auto;
@@ -139,43 +137,39 @@ $m-dialog--max-width--s: 420px !default;
         }
     }
 
-    &__body,
+    &__header,
     &__footer {
-        &.m--no-padding {
-            padding: 0;
-        }
+        min-height: $m-box--min-height;
+
+        @include m-box-padding($m-padding);
     }
 
     &__header {
         position: relative;
         background: $m-color--black-grey;
         color: $m-color--white;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
-
-        @include m-box-pading();
 
         &__close-button {
             margin-right: -12px; // Magic number: visually align
         }
+
+        &:not(.m--has-content) {
+            justify-content: flex-end;
+        }
     }
 
     &__body {
+        position: relative;
+        width: 100%;
         flex: 1 1 auto;
         overflow-x: hidden;
         overflow-y: auto;
-        position: relative;
-        padding-top: $m-padding--l;
-        padding-bottom: $m-padding--l;
+        min-height: 120px;
 
-        @media (min-width: $m-mq--min--s) {
-            padding-left: $m-padding--l;
-            padding-right: $m-padding--l;
-        }
-
-        @media (max-width: $m-mq--max--s) {
-            padding-left: $m-padding;
-            padding-right: $m-padding;
-        }
+        @include m-box-padding();
 
         @include m-is-ie() {
             flex: none;
@@ -186,7 +180,5 @@ $m-dialog--max-width--s: 420px !default;
 
     &__footer {
         border-top: 1px solid $m-color--grey;
-
-        @include m-box-pading();
     }
 }

@@ -4,8 +4,7 @@
         <transition name="m--is">
             <div v-show="propOpen"
                  class="m-modal__wrap"
-                 :class="[{ 'm--is-open': propOpen,
-                            'm--is-disabled':disabled }]"
+                 :class="[{ 'm--is-disabled': disabled }, className ]"
                  ref="dialogWrap">
                 <article class="m-modal__article" ref="article">
                     <header class="m-modal__header" v-if="hasTitle">
