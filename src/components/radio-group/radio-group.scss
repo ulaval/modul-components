@@ -14,10 +14,10 @@
     }
 
     &__icon {
-        min-width: $m-touch-size;
         display: inline-flex;
         justify-content: center;
         align-items: center;
+        margin-left: $m-margin--xs;
     }
 
     &.m--is-inline {
