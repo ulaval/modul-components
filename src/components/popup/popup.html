@@ -22,7 +22,8 @@
             <slot name="trigger"></slot>
         </div>
         <div class="m-popup__body" :class="{ 'm--no-padding': !padding }" :style="{ width: width }">
-            <div class="m-popup__header" v-if="hasHeaderSlot">
+            <div class="m-popup__header"
+                 v-if="hasHeaderSlot">
                 <slot name="header"></slot>
             </div>
             <div class="m-popup__content">
