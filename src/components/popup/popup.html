@@ -21,12 +21,12 @@
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
-        <div class="m-popup__body" :class="{ 'm--no-padding': !padding }" :style="{ width: width }">
+        <div class="m-popup__wrap" :class="{ 'm--no-padding': !padding }" :style="{ width: width }">
             <div class="m-popup__header"
                  v-if="hasHeaderSlot">
                 <slot name="header"></slot>
             </div>
-            <div class="m-popup__content">
+            <div class="m-popup__body">
                 <slot></slot>
             </div>
             <div class="m-popup__footer" v-if="hasFooterSlot">

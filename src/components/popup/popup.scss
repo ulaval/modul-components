@@ -4,18 +4,17 @@
 .m-popup {
     display: inline-flex;
 
+    &__wrap,
     &__header,
     &__body,
     &__footer {
         position: relative;
     }
 
-    &__body {
+    &__wrap {
         &:not(.m--no-padding) {
-            padding: $m-spacing;
+            padding: $m-padding;
         }
-
-        background-color: $m-color--white;
     }
 
     &__header {
