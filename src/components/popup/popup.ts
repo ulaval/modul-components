@@ -35,6 +35,8 @@ export class MPopup extends ModulVue {
     public shadow: boolean;
     @Prop({ default: true })
     public padding: boolean;
+    @Prop({ default: true })
+    public background: boolean;
     @Prop()
     public beforeEnter: any;
     @Prop()
