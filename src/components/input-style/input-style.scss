@@ -224,7 +224,7 @@ $m-input-style--padding: 4px !default;
 
     &__body {
         position: relative;
-        z-index: 0;
+        z-index: 2;
         display: flex;
         align-items: center;
         flex: 1 1 auto;
