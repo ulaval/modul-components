@@ -6,7 +6,7 @@ $m-color--ul-yellow: #ffc103;
 $m-color--ul-red: #e30513;
 
 // ======================================================================
-//  Grey
+//  Seven Shades of Grey
 // ======================================================================
 $m-color--grey-darkest: #1f1f1f !default;
 $m-color--grey-darker: #3d3d3d !default;
@@ -34,9 +34,7 @@ $m-color--success-lightest: #eaf9f1 !default;
 // ======================================================================
 //  Warning colors
 // ======================================================================
-// $m-color--warning-dark: #edaf00 !default;
 $m-color--warning: $m-color--ul-yellow !default;
-// $m-color--warning-light: #ffec5d  !default;
 $m-color--warning-lightest: #fff8e6 !default;
 
 // ======================================================================
@@ -68,10 +66,7 @@ $m-color--accent-lightest: #ffeecf !default;
 // ======================================================================
 //  Active colors
 // ======================================================================
-// $m-color--active-dark: $m-color--warning-dark !default;
 $m-color--active: $m-color--ul-yellow !default;
-// $m-color--active-light: $m-color--warning-light !default;
-$m-color--active-lightest: $m-color--warning-lightest !default;
 
 // ======================================================================
 //  disabled colors
