@@ -20,7 +20,7 @@ export enum MOptionsMenuSkin {
 export class MMenu extends BaseMenu implements MMenuInterface {
 
     @Prop({
-        default: MPopperPlacement.BottomStart,
+        default: MPopperPlacement.Bottom,
         validator: value =>
             value == MPopperPlacement.Bottom ||
             value == MPopperPlacement.BottomEnd ||

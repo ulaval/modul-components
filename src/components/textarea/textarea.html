@@ -6,7 +6,7 @@
                   'm--has-icon' : hasIcon,
                   'm--has-label': hasLabel }"
      @click="onClick"
-     :style="{ width: width, maxWidth: maxWidth }">
+     :style="{ width: width, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
                    :error="textareaError"
@@ -23,7 +23,6 @@
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
-                  @input="onInput"
                   ref="input"
                   v-model="model"
                   :style="{ maxWidth: maxWidth }"></textarea>
