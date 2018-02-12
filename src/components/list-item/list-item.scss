@@ -7,7 +7,7 @@
     padding-right: 0;
     padding-left: 0;
 
-    @media (min-width: $m-mq--min--s) {
+    @media (min-width: $m-mq--min--s + 1) {
         padding-right: $m-spacing;
         padding-left: $m-spacing;
     }
@@ -44,6 +44,11 @@
     &.m--is-full-width {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    &.m--is-full-height {
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     &.m--has-icon,
