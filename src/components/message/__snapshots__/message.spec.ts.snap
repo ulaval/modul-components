@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MMessage should render correctly 1`] = `
+<div class="m-message m--is-success m--is-skin-regular">
+    <div class="m-message__wrap">
+        <div class="m-message__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use xlink:href="#check" aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-message__body">
+            <div class="m-message__body__content"></div>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MMessage should render correctly all possible states: Error 1`] = `
+<div class="m-message m--has-error m--is-skin-regular">
+    <div class="m-message__wrap">
+        <div class="m-message__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use xlink:href="#error" aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-message__body">
+            <div class="m-message__body__content"></div>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MMessage should render correctly all possible states: Information 1`] = `
+<div class="m-message m--is-information m--is-skin-regular">
+    <div class="m-message__wrap">
+        <div class="m-message__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use xlink:href="#information" aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-message__body">
+            <div class="m-message__body__content"></div>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MMessage should render correctly all possible states: Success 1`] = `
+<div class="m-message m--is-success m--is-skin-regular">
+    <div class="m-message__wrap">
+        <div class="m-message__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use xlink:href="#check" aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-message__body">
+            <div class="m-message__body__content"></div>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MMessage should render correctly all possible states: Warning 1`] = `
+<div class="m-message m--is-warning m--is-skin-regular">
+    <div class="m-message__wrap">
+        <div class="m-message__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use xlink:href="#warning" aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-message__body">
+            <div class="m-message__body__content"></div>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MMessage should render correctly close button when prop is set 1`] = `
+<div class="m-message m--is-success m--is-skin-regular">
+    <div class="m-message__wrap">
+        <div class="m-message__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use xlink:href="#check" aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-message__body m--has-close-button">
+            <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light" style="width:44px;height:44px;font-size:10px;">
+                <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
+                    <use xlink:href="#close" aria-hidden="true"></use>
+                </svg> <span class="m-icon-button__hidden"><span class="m-i18n">Close</span></span>
+            </button>
+            <div class="m-message__body__content"></div>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MMessage should render correctly content 1`] = `
+<div class="m-message m--is-success m--is-skin-regular">
+    <div class="m-message__wrap">
+        <div class="m-message__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use xlink:href="#check" aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-message__body">
+            <div class="m-message__body__content">message</div>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MMessage should render correctly light skin 1`] = `
+<div class="m-message m--is-success m--is-skin-light">
+    <div class="m-message__wrap">
+        <div class="m-message__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use xlink:href="#check" aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-message__body">
+            <div class="m-message__body__content"></div>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MMessage should render correctly when there is no icon 1`] = `
+<div class="m-message m--is-success m--is-skin-regular">
+    <div class="m-message__wrap">
+        <div class="m-message__body">
+            <div class="m-message__body__content"></div>
+        </div>
+    </div>
+</div>
+`;
