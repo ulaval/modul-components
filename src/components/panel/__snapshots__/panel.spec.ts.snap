@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MPanel should render correctly 1`] = `
+<article class="m-panel m--is-skin-light m--has-border">
+    <div class="m-panel__body m--has-padding-top m--has-padding-bottom">body</div>
+</article>
+`;
+
+exports[`MPanel should render correctly when a footer is provided 1`] = `
+<article class="m-panel m--is-skin-light m--has-border">
+    <div class="m-panel__body m--has-padding-top">body</div>
+    <footer class="m-panel__footer">footer</footer>
+</article>
+`;
+
+exports[`MPanel should render correctly when an header is provided 1`] = `
+<article class="m-panel m--is-skin-light m--has-border">
+    <header class="m-panel__header">
+        <div class="m-panel__header__content">header</div>
+    </header>
+    <div class="m-panel__body m--has-padding-bottom">body</div>
+</article>
+`;
+
+exports[`MPanel should render correctly with border 1`] = `<article class="m-panel m--is-skin-light m--has-border"> </article>`;
+
+exports[`MPanel should render correctly with no body padding 1`] = `
+<article class="m-panel m--is-skin-light m--has-border">
+    <div class="m-panel__body m--no-padding">body</div>
+</article>
+`;
+
+exports[`MPanel should render correctly with no footer padding 1`] = `
+<article class="m-panel m--is-skin-light m--has-border">
+    <footer class="m-panel__footer m--no-padding">footer</footer>
+</article>
+`;
+
+exports[`MPanel should render correctly with no header padding 1`] = `
+<article class="m-panel m--is-skin-light m--has-border">
+    <header class="m-panel__header m--no-padding">
+        <div class="m-panel__header__content">header</div>
+    </header>
+</article>
+`;
+
+exports[`MPanel should render correctly with no padding 1`] = `<article class="m-panel m--is-skin-light m--has-border"> </article>`;
+
+exports[`MPanel should render correctly with shadow 1`] = `<article class="m-panel m--is-skin-light m--has-shadow m--has-border"> </article>`;
+
+exports[`MPanel should render skink correctly: Dark 1`] = `
+<article class="m-panel m--is-skin-dark m--has-border">
+    <div class="m-panel__body m--has-padding-top m--has-padding-bottom">body</div>
+</article>
+`;
+
+exports[`MPanel should render skink correctly: Darker 1`] = `
+<article class="m-panel m--is-skin-darker m--has-border">
+    <div class="m-panel__body m--has-padding-top m--has-padding-bottom">body</div>
+</article>
+`;
+
+exports[`MPanel should render skink correctly: Light 1`] = `
+<article class="m-panel m--is-skin-light m--has-border">
+    <div class="m-panel__body m--has-padding-top m--has-padding-bottom">body</div>
+</article>
+`;
