@@ -1,14 +1,17 @@
 // ======================================================================
 //  Max and min width
 // ======================================================================
+$m-max-width--xl: 1400px !default;
+$m-max-width--l: 1200px !default;
 $m-max-width: 1000px !default;
+$m-max-width--s: 800px !default;
 $m-max-width--text: 720px !default;
 $m-min-width: 320px !default;
 
 // ======================================================================
 //  Box min-height and min width
 // ======================================================================
-$m-box--min-height: 72px !default;
+$m-box--min-height: 80px !default;
 
 // ======================================================================
 //  Margin

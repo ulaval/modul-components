@@ -4,8 +4,7 @@
         <transition name="m--is">
             <div v-show="propOpen"
                 class="m-sidebar__wrap m--is-sidebar"
-                :class="[{ 'm--is-open': propOpen,
-                           'm--is-close-on-backdrop': closeOnBackdrop,
+                :class="[{ 'm--is-close-on-backdrop': closeOnBackdrop,
                            'm--is-disabled':disabled },
                            'm--is-origin-' + origin,
                            className ]"

@@ -6,7 +6,8 @@
                 'm--has-icon' : hasIcon,
                 'm--has-label': hasLabel },
                 'm--is-type-' + inputType ]"
-     @click="onClick">
+     @click="onClick"
+     :style="{ width: width, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
                    :error="hasError"

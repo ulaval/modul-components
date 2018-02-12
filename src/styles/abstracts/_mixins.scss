@@ -232,54 +232,51 @@
     }
 }
 
-@mixin m-box-pading($menuClass: false) {
-    display: flex;
-    align-items: center;
-    min-height: $m-box--min-height;
-    padding-top: $m-padding;
-    padding-bottom: $m-padding;
-
-    &.m--no-padding {
-        padding: 0;
-    }
-
-    @media (min-width: $m-mq--min--s) {
-        padding-left: $m-padding--l;
-        padding-right: $m-padding--l;
-    }
-
-    @media (max-width: $m-mq--max--s) {
-        padding-left: $m-padding;
-        padding-right: $m-padding;
-    }
-
-    @if $menuClass {
-        @media (min-width: $m-mq--min--s) {
-            padding-left: $m-padding--l;
-            padding-right: $m-touch-size + $m-padding;
-        }
-
-        @media (max-width: $m-mq--max--s) {
-            padding-left: $m-padding;
-            padding-right: $m-touch-size;
-        }
-
-        &.m--no-padding {
-            padding: 0 $m-touch-size 0 0;
-        }
-
-        &#{$menuClass} {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: $m-touch-size;
-
-            @media (min-width: $m-mq--min--s) {
-                right: $m-spacing;
+@mixin m-box-padding($topBottom: $m-padding--l, $rightLeft: $m-padding--l) {
+    &:not(.m--no-padding) {
+        @if ($topBottom >= $m-padding && $topBottom >= $m-padding--s) {
+            @media (max-width: $m-mq--max--s) {
+                padding: #{$topBottom/2} #{$rightLeft/2};
             }
 
-            @media (max-width: $m-mq--max--s) {
-                right: 0;
+            @media (min-width: $m-mq--min--s) {
+                padding: $topBottom $rightLeft;
+            }
+        }
+
+        @else {
+            @if ($topBottom <= $m-padding) {
+                padding-top: $m-padding;
+                padding-bottom: $m-padding;
+            }
+
+            @else {
+                @media (max-width: $m-mq--max--s) {
+                    padding-top: $topBottom/2;
+                    padding-bottom: $topBottom/2;
+                }
+
+                @media (min-width: $m-mq--min--s) {
+                    padding-top: $topBottom;
+                    padding-bottom: $topBottom;
+                }
+            }
+
+            @if ($topBottom <= $m-padding--s) {
+                padding-right: $m-padding--s;
+                padding-left: $m-padding--s;
+            }
+
+            @else {
+                @media (max-width: $m-mq--max--s) {
+                    padding-right: $rightLeft/2;
+                    padding-left: $rightLeft/2;
+                }
+
+                @media (min-width: $m-mq--min--s) {
+                    padding-right: $rightLeft;
+                    padding-left: $rightLeft;
+                }
             }
         }
     }
