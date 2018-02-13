@@ -47,6 +47,15 @@ $m-color--error-lightest: #fcf2f3 !default;
 // ======================================================================
 //  Interactive colors
 // ======================================================================
+:root {
+    --m-color--interactive-darker: #0075c3;
+    --m-color--interactive-dark: #0587e1;
+    --m-color--interactive: $m-color--ul-blue;
+    --m-color--interactive-light: #36adff;
+    --m-color--interactive-lighter: #6ed2ff;
+    --m-color--interactive-lightest: #dffaff;
+}
+
 $m-color--interactive-darker: #0075c3 !default;
 $m-color--interactive-dark: #0587e1 !default;
 $m-color--interactive: $m-color--ul-blue !default;

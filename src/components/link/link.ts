@@ -10,12 +10,17 @@ import I18nPlugin from '../i18n/i18n';
 export enum MLinkMode {
     RouterLink = 'router-link',
     Link = 'link',
+    Text = 'text',
     Button = 'button'
 }
 
 export enum MLinkIconPosition {
     Left = 'left',
     Right = 'right'
+}
+
+export enum MLinkSkin {
+    light = 'light'
 }
 
 const ICON_NAME_DEFAULT: string = 'chevron';
@@ -31,6 +36,7 @@ export class MLink extends ModulVue {
         validator: value =>
             value == MLinkMode.RouterLink ||
             value == MLinkMode.Link ||
+            value == MLinkMode.Text ||
             value == MLinkMode.Button
     })
     public mode: MLinkMode;
@@ -43,6 +49,11 @@ export class MLink extends ModulVue {
 
     @Prop({ default: true })
     public underline: boolean;
+    @Prop({
+        validator: value =>
+            value == MLinkSkin.light
+    })
+    public skin: MLinkSkin;
 
     @Prop()
     public target: string;
@@ -80,6 +91,14 @@ export class MLink extends ModulVue {
 
     private get isButton(): boolean {
         return this.mode == MLinkMode.Button;
+    }
+
+    private get isTextLink(): boolean {
+        return this.mode == MLinkMode.Text;
+    }
+
+    private get isSkinLight(): boolean {
+        return this.skin == MLinkSkin.light;
     }
 
     private get isUnvisited(): boolean {
