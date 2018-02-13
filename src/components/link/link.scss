@@ -87,6 +87,8 @@
         --m-color--interactive-light: $m-color--white;
         --m-color--interactive-lighter: $m-color--white;
         --m-color--interactive-lightest: $m-color--white;
+
+        color: $m-color--white;
     }
 
     &:focus {
