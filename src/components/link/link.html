@@ -3,6 +3,7 @@
                  :class="{ 'm--is-unvisited': isUnvisited,
                            'm--is-disabled': disabled,
                            'm--no-underline': !underline,
+                           'm--is-skin-light': isSkinLight,
                            'm--has-right-icon' : isIconPositionRight,
                            'm--has-left-icon' : !isIconPositionRight }"
                  :to="routerLinkUrl"
@@ -19,6 +20,8 @@
                  'm--is-disabled': disabled,
                  'm--no-underline': !underline,
                  'm--is-button': isButton,
+                 'm--is-text-link': isTextLink,
+                 'm--is-skin-light': isSkinLight,
                  'm--has-right-icon' : isIconPositionRight,
                  'm--has-left-icon' : !isIconPositionRight }"
        :href="propUrl"
