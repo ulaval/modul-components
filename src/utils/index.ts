@@ -26,7 +26,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(ModulPlugin);
         Vue.use(MessagesPlugin);
         Vue.use(HttpPlugin);
-        Vue.use(PortalPlugin);
+        Vue.use({ install: PortalPluginInstall });
         Vue.use(SecurityPlugin, o.securityPluginOptions);
         Vue.use(SpritesPlugin);
         Vue.use(TouchPlugin, { name: 'v-touch' });
