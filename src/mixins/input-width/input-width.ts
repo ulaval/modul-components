@@ -2,7 +2,6 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { KeyCode } from '../../utils/keycode/keycode';
 
 export enum InputMaxWidth {
@@ -14,9 +13,7 @@ export enum InputMaxWidth {
     Large = 'large'
 }
 
-@Component({
-    mixins: [MediaQueries]
-})
+@Component
 export class InputWidth extends ModulVue {
     @Prop({ default: '100%' })
     public width: string;
