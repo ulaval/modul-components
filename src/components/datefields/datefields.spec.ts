@@ -138,8 +138,8 @@ describe('MDateFields', () => {
         });
 
         df.setData({
-            internalYear: 2018,
-            internalMonth: 13,
+            internalYear: 2017,
+            internalMonth: 12,
             internalDate: 40
         });
 
