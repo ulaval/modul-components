@@ -7,7 +7,7 @@
                 'm--has-label': hasLabel },
                 'm--is-type-' + inputType ]"
      @click="onClick"
-     :style="{ width: width, maxWidth: inputMaxWidth }">
+     :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
                    :error="hasError"
