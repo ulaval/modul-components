@@ -12,7 +12,7 @@ export class MCarouselItem extends Vue {
     public transitionForward: boolean = true;
 
     private get transitionName() {
-        return this.transitionForward ? 'right-to-left' : 'left-to-right';
+        return this.transitionForward ? 'm--is-right-to-left' : 'm--is-left-to-right';
     }
 }
 
