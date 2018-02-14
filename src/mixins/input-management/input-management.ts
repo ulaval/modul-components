@@ -18,6 +18,8 @@ export class InputManagement extends ModulVue {
     public placeholder: string;
     @Prop()
     public readonly: boolean;
+    @Prop()
+    public asterisk: boolean;
 
     public internalValue: string = '';
     private internalIsFocus: boolean = false;
