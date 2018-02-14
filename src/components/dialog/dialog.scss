@@ -146,7 +146,7 @@ $m-dialog--max-width--s: 420px !default;
 
     &__header {
         position: relative;
-        background: $m-color--grey-darker;
+        background-color: var(--m-color--header-dark);
         color: $m-color--white;
         display: flex;
         align-items: center;
