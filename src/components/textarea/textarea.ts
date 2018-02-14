@@ -61,10 +61,8 @@ export class MTextarea extends ModulVue {
 
     private adjustHeight(): void {
         let el: HTMLElement = (this.$refs.input as HTMLElement);
-        setTimeout(() => {
-            el.style.height = 'auto';
-            el.style.height = el.scrollHeight + 'px';
-        });
+        el.style.height = 'auto';
+        el.style.height = el.scrollHeight + 'px';
     }
 }
 
