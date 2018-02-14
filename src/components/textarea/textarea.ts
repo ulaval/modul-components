@@ -23,8 +23,6 @@ export class MTextarea extends ModulVue {
     @Prop()
     public maxlength: number;
 
-    public maxWidth: string = InputMaxWidth.Medium;
-
     private internalTextareaError: boolean = false;
     private textareaHeight: string;
 
