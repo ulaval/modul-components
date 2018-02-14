@@ -17,7 +17,7 @@ describe('MButton', () => {
             localVue: localVue
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when skin is secondary', () => {
@@ -28,7 +28,7 @@ describe('MButton', () => {
             }
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when disabled', () => {
@@ -39,7 +39,7 @@ describe('MButton', () => {
             }
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when waiting', () => {
@@ -50,7 +50,7 @@ describe('MButton', () => {
             }
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
     describe('icon', () => {
@@ -65,17 +65,17 @@ describe('MButton', () => {
         });
 
         it('should render correctly', () => {
-            expect(renderComponent(btnWithIcon.vm)).resolves.toMatchSnapshot();
+            return expect(renderComponent(btnWithIcon.vm)).resolves.toMatchSnapshot();
         });
 
         it('should render correctly when size is set', () => {
             btnWithIcon.setProps({ iconSize: '20px' });
-            expect(renderComponent(btnWithIcon.vm)).resolves.toMatchSnapshot();
+            return expect(renderComponent(btnWithIcon.vm)).resolves.toMatchSnapshot();
         });
 
         it('should render correctly position is set to right', () => {
             btnWithIcon.setProps({ iconPosition: MButtonIconPosition.Right });
-            expect(renderComponent(btnWithIcon.vm)).resolves.toMatchSnapshot();
+            return expect(renderComponent(btnWithIcon.vm)).resolves.toMatchSnapshot();
         });
     });
 
@@ -87,7 +87,7 @@ describe('MButton', () => {
             }
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly precision content', () => {
@@ -98,7 +98,7 @@ describe('MButton', () => {
             }
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
     it('should change html element based on type prop', () => {

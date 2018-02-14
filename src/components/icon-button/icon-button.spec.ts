@@ -17,17 +17,17 @@ describe('MIconButton', () => {
             localVue: localVue
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly selected skin', () => {
+    it('should render correctly selected skin', async () => {
         const btn = mount(MIconButton, {
             localVue: localVue
         });
 
         for (const skin in MIconButtonSkin) {
             btn.setProps({ skin: MIconButtonSkin[skin] });
-            expect(renderComponent(btn.vm)).resolves.toMatchSnapshot(skin);
+            expect(await renderComponent(btn.vm)).toMatchSnapshot(skin);
         }
     });
 
@@ -39,7 +39,7 @@ describe('MIconButton', () => {
             }
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly icon name when set', () => {
@@ -50,7 +50,7 @@ describe('MIconButton', () => {
             }
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly icon size when set', () => {
@@ -61,7 +61,7 @@ describe('MIconButton', () => {
             }
         });
 
-        expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
     it('should emit click event when clicked', () => {

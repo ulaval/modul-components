@@ -65,7 +65,7 @@ describe('MValidationMessage', () => {
             }
         });
 
-        expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when it is valid', () => {
@@ -76,7 +76,7 @@ describe('MValidationMessage', () => {
             }
         });
 
-        expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when it is in error', () => {
@@ -87,7 +87,7 @@ describe('MValidationMessage', () => {
             }
         });
 
-        expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when it is in error', () => {
@@ -98,7 +98,7 @@ describe('MValidationMessage', () => {
             }
         });
 
-        expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render error message even if there is a valid message', () => {
@@ -110,7 +110,7 @@ describe('MValidationMessage', () => {
             }
         });
 
-        expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
     });
 
     it('should emit click event when clicked', () => {
@@ -126,82 +126,4 @@ describe('MValidationMessage', () => {
 
         expect(valMsg.emitted('click')).toBeTruthy();
     });
-
-    /*
-    it('should render correctly when position prop is right', () => {
-        const valMsg = mount(MCheckbox, {
-            localVue: localVue,
-            propsData: {
-                position: MCheckboxPosition.Right
-            }
-        });
-
-        expect(renderComponent(valMsg.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should render correctly when value prop is true', () => {
-        const chkbox = mount(MCheckbox, {
-            localVue: localVue,
-            propsData: {
-                value: true
-            }
-        });
-
-        expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should render correctly when disabled', () => {
-        const chkbox = mount(MCheckbox, {
-            localVue: localVue,
-            propsData: {
-                disabled: true
-            }
-        });
-
-        expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should render correctly when a label is provided', () => {
-        const chkbox = mount(MCheckbox, {
-            localVue: localVue,
-            slots: { default: 'label' }
-        });
-
-        expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should emit click event when clicked', () => {
-        const chkbox = mount(MCheckbox, {
-            localVue: localVue
-        });
-
-        chkbox.find('input').trigger('click');
-
-        expect(chkbox.emitted('click')).toBeTruthy();
-    });
-
-    it('should flow down InputState mixin props to m-validation-message', () => {
-        const valMsgProps = {
-            disabled: false,
-            error: false,
-            errorMessage: 'error-message',
-            validMessage: 'valid-message',
-            helperMessage: 'helper-message'
-        };
-
-        const chkbox = mount(MCheckbox, {
-            localVue: localVue,
-            propsData: valMsgProps,
-            computed: {
-                hasError() {
-                    return false;
-                },
-                isDisabled() {
-                    return false;
-                }
-            }
-        });
-
-        expect(chkbox.find(MValidationMessage).props()).toEqual(valMsgProps);
-    }); */
 });

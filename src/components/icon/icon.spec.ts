@@ -21,7 +21,7 @@ describe('MIcon', () => {
             }
         });
 
-        expect(renderComponent(icon.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(icon.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render title when svgTitle prop is set', () => {
@@ -32,7 +32,7 @@ describe('MIcon', () => {
             }
         });
 
-        expect(renderComponent(icon.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(icon.vm)).resolves.toMatchSnapshot();
     });
 
     it('should emit click event when icon is clicked', () => {

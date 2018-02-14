@@ -22,7 +22,7 @@ describe('MI18n', () => {
             }
         });
 
-        expect(renderComponent(i18n.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(i18n.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly with params', () => {
@@ -34,7 +34,7 @@ describe('MI18n', () => {
             }
         });
 
-        expect(renderComponent(i18n.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(i18n.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly with html encoding', () => {
@@ -47,7 +47,7 @@ describe('MI18n', () => {
             }
         });
 
-        expect(renderComponent(i18n.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(i18n.vm)).resolves.toMatchSnapshot();
     });
 
     it('should warn if key not defined', () => {

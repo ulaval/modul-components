@@ -30,59 +30,59 @@ describe('MSpinner', () => {
     it('should render correctly', () => {
         const spinner = createSpinner();
 
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render custom title when prop is set', () => {
         const spinner = createSpinner();
         spinner.setProps({ titleMessage: 'title' });
 
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render default title when title prop is true ', () => {
         const spinner = createSpinner();
         spinner.setProps({ title: true });
 
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render custom description when prop is set', () => {
         const spinner = createSpinner();
         spinner.setProps({ descriptionMessage: 'description' });
 
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render default description when title prop is true ', () => {
         const spinner = createSpinner();
         spinner.setProps({ description: true });
 
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render default description when title prop is true ', () => {
         const spinner = createSpinner();
         spinner.setProps({ description: true });
 
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render skins correctly ', () => {
+    it('should render skins correctly ', async () => {
         const spinner = createSpinner();
 
         spinner.setProps({ skin: MSpinnerStyle.Light });
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot('light');
+        expect(await renderComponent(spinner.vm)).toMatchSnapshot('light');
         spinner.setProps({ skin: MSpinnerStyle.Lighter });
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot('lighter');
+        expect(await renderComponent(spinner.vm)).toMatchSnapshot('lighter');
         spinner.setProps({ skin: MSpinnerStyle.Dark });
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot('dark');
+        expect(await renderComponent(spinner.vm)).toMatchSnapshot('dark');
     });
 
     it('should render small size correctly', () => {
         const spinner = createSpinner();
 
         spinner.setProps({ size: MSpinnerSize.Small });
-        expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(spinner.vm)).resolves.toMatchSnapshot();
     });
 });

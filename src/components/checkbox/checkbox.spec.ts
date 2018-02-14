@@ -22,7 +22,7 @@ describe('MCheckbox', () => {
             localVue: localVue
         });
 
-        expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when position prop is right', () => {
@@ -33,7 +33,7 @@ describe('MCheckbox', () => {
             }
         });
 
-        expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when value prop is true', () => {
@@ -44,7 +44,7 @@ describe('MCheckbox', () => {
             }
         });
 
-        expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when disabled', () => {
@@ -55,7 +55,7 @@ describe('MCheckbox', () => {
             }
         });
 
-        expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when a label is provided', () => {
@@ -64,7 +64,7 @@ describe('MCheckbox', () => {
             slots: { default: 'label' }
         });
 
-        expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
     it('should emit click event when clicked', () => {
