@@ -47,15 +47,6 @@ $m-color--error-lightest: #fcf2f3 !default;
 // ======================================================================
 //  Interactive colors
 // ======================================================================
-:root {
-    --m-color--interactive-darker: #0075c3;
-    --m-color--interactive-dark: #0587e1;
-    --m-color--interactive: $m-color--ul-blue;
-    --m-color--interactive-light: #36adff;
-    --m-color--interactive-lighter: #6ed2ff;
-    --m-color--interactive-lightest: #dffaff;
-}
-
 $m-color--interactive-darker: #0075c3 !default;
 $m-color--interactive-dark: #0587e1 !default;
 $m-color--interactive: $m-color--ul-blue !default;
@@ -80,7 +71,7 @@ $m-color--active: $m-color--ul-yellow !default;
 // ======================================================================
 //  disabled colors
 // ======================================================================
-$m-color--disabled: $m-color--grey-light !default;
+$m-color--disabled: $m-color--grey-lighter !default;
 $m-color--disabled-light: $m-color--grey-lighter !default;
 
 // ======================================================================

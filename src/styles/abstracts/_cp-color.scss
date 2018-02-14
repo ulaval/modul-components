@@ -1,0 +1,93 @@
+// ======================================================================
+//  css customs properties
+// ======================================================================
+:root {
+
+    // ======================================================================
+    //  Official color of Université Laval
+    // ======================================================================
+    --m-color--ul-blue: #09f;
+    --m-color--ul-yellow: #ffc103;
+    --m-color--ul-red: #e00413;
+
+    // ======================================================================
+    //  Seven Shades of Grey to rules them all!
+    // ======================================================================
+    --m-color--grey-darkest: #1f1f1f;
+    --m-color--grey-darker: #3d3d3d;
+    --m-color--grey-dark: #696969;
+    --m-color--grey: #929292;
+    --m-color--grey-light: #d7d7d7;
+    --m-color--grey-lighter: #f4f4f4;
+    --m-color--grey-lightest: #f9f9f9;
+
+    // ======================================================================
+    //  General color
+    // ======================================================================
+    --m-color--black: #000;
+    --m-color--text: var(--m-color--grey-darker);
+    --m-color--white: #fff;
+
+    // ======================================================================
+    //  Success colors
+    // ======================================================================
+    --m-color--success-dark: #009962;
+    --m-color--success: #00c77f;
+    --m-color--success-light: #cdf3e3;
+    --m-color--success-lightest: #eaf9f1;
+
+    // ======================================================================
+    //  Warning colors
+    // ======================================================================
+    --m-color--warning: var(--m-color--ul-yellow);
+    --m-color--warning-lightest: #fff8e6;
+
+    // ======================================================================
+    //  Error colors
+    // ======================================================================
+    --m-color--error-dark: #b3040f;
+    --m-color--error: var(--m-color--ul-red);
+    --m-color--error-lightest: #fcf2f3;
+
+    // ======================================================================
+    //  Interactive colors
+    // ======================================================================
+    --m-color--interactive-darker: #0075c3;
+    --m-color--interactive-dark: #0587e1;
+    --m-color--interactive: var(--m-color--ul-blue);
+    --m-color--interactive-light: #36adff;
+    --m-color--interactive-lighter: #6ed2ff;
+    --m-color--interactive-lightest: #dffaff;
+
+    // ======================================================================
+    //  Accent colors
+    // ======================================================================
+    --m-color--accent-dark: #ed8514;
+    --m-color--accent: #f39612;
+    --m-color--accent-light: #ffaa26;
+    --m-color--accent-lightest: #ffeecf;
+
+    // ======================================================================
+    //  Active colors
+    // ======================================================================
+    --m-color--active: var(--m-color--ul-yellow);
+
+    // ======================================================================
+    //  disabled colors
+    // ======================================================================
+    --m-color--disabled: var(--m-color--grey-lighter);
+    --m-color--disabled-light: var(--m-color--grey-lighter);
+
+    // ======================================================================
+    //  Scrollbar colors
+    // ======================================================================
+    --m-color--scrollbar: var(--m-color--grey);
+    --m-color--scrollbar-light: var(--m-color--grey-lighter);
+
+    // ======================================================================
+    //  UI colors
+    // ======================================================================
+    --m-color--border-dark: var(--m-color--grey-dark);
+    --m-color--border: var(--m-color--grey-light);
+    --m-color--header-dark: var(--m-color--grey-darkest);
+}
