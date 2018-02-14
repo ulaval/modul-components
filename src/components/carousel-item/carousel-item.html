@@ -1,5 +1,5 @@
 <transition :name="transitionName">
-    <div class="m-carousel-item" v-show="isVisible">
+    <div class="m-carousel-item" :class="{ 'm--is-anim-active': animActive }" v-show="isVisible">
         <slot></slot>
     </div>
 </transition>

@@ -10,6 +10,13 @@ import * as TouchPlugin from 'vue-touch';
 export class MCarouselItem extends Vue {
     public isVisible: boolean = false;
     public transitionForward: boolean = true;
+    private animActive: boolean = false;
+
+    private mounted(): void {
+        setTimeout(() => {
+            this.animActive = true;
+        });
+    }
 
     private get transitionName() {
         return this.transitionForward ? 'm--is-right-to-left' : 'm--is-left-to-right';
