@@ -10,10 +10,14 @@
         "types": [
             "es6-promise",
             "node",
-            "jasmine"
+            "jest"
         ],
         "typeRoots": [
             "node_modules/@types"
         ]
-    }
+    },
+    "exclude": [
+        "src/**/*.spec.*",
+        "tests/**/*"
+    ]
 }
