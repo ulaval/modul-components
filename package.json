@@ -24,6 +24,9 @@
         "prepack": "npm run clean && npm run build"
     },
     "jest": {
+        "roots": [
+            "<rootDir>/src/"
+        ],
         "transform": {
             "^.+\\.tsx?$": "ts-jest",
             "^.+\\.html(\\?style=\\..+)?$": "<rootDir>/tests/jest/vue-template-transformer.js"
