@@ -19,8 +19,10 @@ export class MListItem extends Vue {
     public disabled: boolean;
     @Prop()
     public waiting: boolean;
-    @Prop()
+    @Prop({ default: false })
     public fullWidth: boolean;
+    @Prop({ default: false })
+    public fullHeight: boolean;
     @Prop({ default: false })
     public borderTop: boolean;
     @Prop({ default: false })
