@@ -13,9 +13,10 @@
         "dtsToDist": "copyfiles -f \"./src/**/*.d.ts\" dist",
         "scssToDist": "copyfiles -u 1 \"./src/styles/**/*.scss\" dist && copyfiles -u 1 \"./src/styles/**/*.css\" dist",
         "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
-        "unit": "jest --verbose --silent",
+        "unit": "jest --verbose",
+        "unitwatch": "jest --watch --verbose --silent",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
-        "unitall": "karma start conf/karma.conf.js --single-run --junitReport",
+        "unitall": "jest --ci --testResultsProcessor=jest-junit",
         "e2e": "node tests/e2e/index.js",
         "test": "npm run unitall && npm run e2e",
         "tslint": "tslint -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
@@ -49,6 +50,9 @@
             "<rootDir>/tests/polyfills.js",
             "<rootDir>/tests/setup.ts"
         ]
+    },
+    "jest-junit": {
+        "output": "./tests/reports/junit.xml"
     },
     "peerDependencies": {
         "axios": "^0.17.1",
@@ -88,6 +92,7 @@
         "file-loader": "^1.1.5",
         "html-webpack-plugin": "^2.30.1",
         "jest": "^22.1.4",
+        "jest-junit": "^3.6.0",
         "jest-serializer-vue": "^0.3.0",
         "moment": "^2.19.3",
         "nightwatch": "^0.9.19",
