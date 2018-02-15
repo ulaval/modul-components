@@ -56,7 +56,6 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
 
 const AlertPlugin: PluginObject<any> = {
     install(v, options) {
-        (v as any).$alert = alertFunction;
         (v.prototype as any).$alert = alertFunction;
     }
 };

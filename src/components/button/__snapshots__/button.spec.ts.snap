@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MButton icon should render correctly 1`] = `
+<button type="button" class="m-button m--is-skin-primary">
+    <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-button__icon m--is-left">
+        <use xlink:href="#default" aria-hidden="true"></use>
+    </svg> <span class="m-button__text"> </span> </button>
+`;
+
+exports[`MButton icon should render correctly position is set to right 1`] = `
+<button type="button" class="m-button m--is-skin-primary"> <span class="m-button__text"> </span>
+    <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-button__icon m--is-right">
+        <use xlink:href="#default" aria-hidden="true"></use>
+    </svg>
+</button>
+`;
+
+exports[`MButton icon should render correctly when size is set 1`] = `
+<button type="button" class="m-button m--is-skin-primary">
+    <svg aria-hidden="true" width="20px" height="20px" class="m-icon m-button__icon m--is-left">
+        <use xlink:href="#default" aria-hidden="true"></use>
+    </svg> <span class="m-button__text"> </span> </button>
+`;
+
+exports[`MButton should render correctly 1`] = `<button type="button" class="m-button m--is-skin-primary"> <span class="m-button__text"> </span> </button>`;
+
+exports[`MButton should render correctly precision content 1`] = `
+<button type="button" class="m-button m--is-skin-primary"> <span class="m-button__text"> <span class="m-button__precision">precision</span></span>
+</button>
+`;
+
+exports[`MButton should render correctly text content 1`] = `<button type="button" class="m-button m--is-skin-primary"> <span class="m-button__text">label </span> </button>`;
+
+exports[`MButton should render correctly when disabled 1`] = `<button disabled="disabled" type="button" class="m-button m--is-skin-primary m--is-disabled"> <span class="m-button__text"> </span> </button>`;
+
+exports[`MButton should render correctly when skin is secondary 1`] = `<button type="button" class="m-button m--is-skin-secondary"> <span class="m-button__text"> </span> </button>`;
+
+exports[`MButton should render correctly when waiting 1`] = `
+<button disabled="disabled" type="button" class="m-button m--is-skin-primary m--is-waiting">
+    <div aria-hidden="true" class="m-spinner m-button__icon m--is-left">
+        <div></div>
+    </div> <span class="m-button__text"> </span> </button>
+`;

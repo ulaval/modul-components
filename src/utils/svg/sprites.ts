@@ -1,5 +1,5 @@
 import { PluginObject } from 'vue';
-import { RequestConfig } from '../http/rest';
+
 import uuid from '../uuid/uuid';
 
 export class SpritesService {
@@ -18,7 +18,6 @@ const SpritesPlugin: PluginObject<any> = {
     install(v, options) {
         console.debug('$svg', 'plugin.install');
         let svg = new SpritesService();
-        (v as any).$svg = svg;
         (v.prototype as any).$svg = svg;
     }
 };
