@@ -3,6 +3,7 @@ import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import ListItemPlugin from './list-item/list-item';
 import ButtonPlugin from './button/button';
+import ButtonChipPlugin from './button-chip/button-chip';
 import ButtonGroupPlugin from './button-group/button-group';
 import CarouselPlugin from './carousel/carousel';
 import CarouselItemPlugin from './carousel-item/carousel-item';
@@ -62,6 +63,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
+        Vue.use(ButtonChipPlugin);
         Vue.use(ButtonGroupPlugin);
         Vue.use(CarouselPlugin);
         Vue.use(CarouselItemPlugin);
