@@ -49,7 +49,7 @@ export class MCarousel extends Vue {
                             if (el instanceof HTMLElement && (el.tagName == 'IMG' || el.tagName == 'PICTURE')) {
                                 el.style.display = 'block';
                                 el.style.maxWidth = this.$el.clientWidth + 'px';
-                                el.style.maxHeight = this.$el.clientHeight + 'px' || '100%';
+                                el.style.maxHeight = '100%';
                             }
                         });
                         items.push(item.componentInstance);
