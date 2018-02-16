@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './datefields.html?style=./datefields.scss';
 import { DATEFIELDS_NAME } from '../component-names';
-import * as moment from 'moment';
+import moment from 'moment';
 import { InputState } from '../../mixins/input-state/input-state';
 import DropdownPlugin from '../dropdown/dropdown';
 import DropdownItemPlugin from '../dropdown-item/dropdown-item';
@@ -97,8 +97,8 @@ export class MDatefields extends ModulVue {
 
     private get complete(): boolean {
         return !!((!this.year || (this.year && this.internalYear)) &&
-                  (!this.month || (this.month && this.internalMonth)) &&
-                  (!this.date || (this.date && this.internalDate)));
+            (!this.month || (this.month && this.internalMonth)) &&
+            (!this.date || (this.date && this.internalDate)));
     }
 
     private emitDate(): void {

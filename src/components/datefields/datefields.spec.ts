@@ -1,370 +1,150 @@
-import Vue from 'vue';
-import '../../utils/polyfills';
-import DateFieldsPlugin, { MDatefields } from './datefields';
-import * as moment from 'moment';
+import { createLocalVue, mount } from '@vue/test-utils';
+import moment from 'moment';
+import Vue, { VueConstructor } from 'vue';
 
-const DATEFIELDS_CSS: string = 'm-datefields';
-const COMPLETE_CSS: string = 'complete';
-const YEAR_DD_CSS: string = 'm-datefields_years';
-const MONTH_DD_CSS: string = 'm-datefields_months';
-const DATE_DD_CSS: string = 'm-datefields_dates';
-const SPINNER_CSS: string = 'm-spinner';
+import { addMessages } from '../../../tests/helpers/lang';
+import { renderComponent } from '../../../tests/helpers/render';
+import DatefieldsPlugin, { MDatefields } from './datefields';
 
-let datefields: MDatefields;
+describe('MDateFields', () => {
+    let localVue: VueConstructor<Vue>;
+    let mockDropDown: VueConstructor<Vue>;
 
-describe('datefields', () => {
     beforeEach(() => {
-        spyOn(console, 'error');
-
-        Vue.use(DateFieldsPlugin);
-    });
-
-    afterEach(done => {
-        Vue.nextTick(() => {
-            expect(console.error).not.toHaveBeenCalled();
-
-            done();
+        localVue = createLocalVue();
+        mockDropDown = localVue.component('m-dropdown', {
+            props: {
+                value: String
+            },
+            template: '<m-dropdown-mock :value="value"></m-dropdown-mock>'
         });
+        addMessages(localVue, [
+            'components/datefields/datefields.lang.en.json'
+        ]);
     });
 
-    it('css classes are present', () => {
-        datefields = new MDatefields().$mount();
+    it('should render correctly', () => {
+        const df = mount(MDatefields, {
+            localVue: localVue
+        });
 
-        expect(datefields.$el.classList.contains(DATEFIELDS_CSS)).toBeTruthy();
-        expect(datefields.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
+        return expect(renderComponent(df.vm)).resolves.toMatchSnapshot();
     });
 
-    it('All fields selected', () => {
-        let dateMoment = moment();
-
-        new Vue({
-            template: `<m-datefields v-model="value"></m-datefields>`,
-            data: {
-                value: dateMoment
-            },
-            mounted() {
-                expect(this.$el.classList.contains(DATEFIELDS_CSS)).toBeTruthy();
-                expect(this.$el.classList.contains(COMPLETE_CSS)).toBeTruthy();
+    it('should render correctly when waiting is set', () => {
+        const df = mount(MDatefields, {
+            localVue: localVue,
+            propsData: {
+                waiting: true
             }
-        }).$mount();
+        });
 
+        return expect(renderComponent(df.vm)).resolves.toMatchSnapshot();
     });
 
-    it('V-model => Dropdown initialisation', done => {
-        let dateUndefined = undefined;
-        let dateMoment = moment({ 'year': 1999, 'month': 7, 'date': 12 });
-        let dateDate = moment({ 'year': 1999, 'month': 7, 'date': 12 }).toDate();
-
-        new Vue({
-            template: `<m-datefields v-model="value"></m-datefields>`,
-            data: {
-                value: dateUndefined
-            },
-            mounted() {
-                Vue.nextTick(() => {
-                    Vue.nextTick(() => {
-                        let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                        let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                        let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                        expect(year.value).toEqual('');
-                        expect(month.value).toEqual('');
-                        expect(date.value).toEqual('');
-
-                        done();
-                    });
-                });
+    it('should render correctly when disabled is set', () => {
+        const df = mount(MDatefields, {
+            localVue: localVue,
+            propsData: {
+                disabled: true
             }
-        }).$mount();
+        });
 
-        new Vue({
-            template: `<m-datefields v-model="value"></m-datefields>`,
-            data: {
-                value: dateMoment
-            },
-            mounted() {
-                Vue.nextTick(() => {
-                    Vue.nextTick(() => {
-                        let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                        let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                        let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                        expect(year.value).toEqual('1999');
-                        expect(month.value).toEqual('August');
-                        expect(date.value).toEqual('12');
-
-                        done();
-                    });
-                });
-            }
-        }).$mount();
-
-        new Vue({
-            template: `<m-datefields v-model="value"></m-datefields>`,
-            data: {
-                value: dateDate
-            },
-            mounted() {
-                Vue.nextTick(() => {
-                    Vue.nextTick(() => {
-                        let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                        let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                        let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                        expect(year.value).toEqual('1999');
-                        expect(month.value).toEqual('August');
-                        expect(date.value).toEqual('12');
-
-                        done();
-                    });
-                });
-            }
-        }).$mount();
+        return expect(renderComponent(df.vm)).resolves.toMatchSnapshot();
     });
 
-    it('V-model format', done => {
-        let dateMoment = moment({ 'year': 1999, 'month': 7, 'date': 12 });
-        let dateDate = moment({ 'year': 1999, 'month': 7, 'date': 12 }).toDate();
+    it('should render correctly minYear/maxYear items', () => {
+        localVue.component(
+            'm-dropdown',
+            mockDropDown.extend({
+                template:
+                    '<m-dropdown-mock :value="value"><slot></slot></m-dropdown-mock>'
+            })
+        );
 
-        new Vue({
-            template: `<m-datefields v-model="value"></m-datefields>`,
-            data: {
-                value: dateMoment
-            },
-            mounted() {
-                Vue.nextTick(() => {
-                    Vue.nextTick(() => {
-                        expect(dateMoment instanceof Date).toBeFalsy();
-
-                        done();
-                    });
-                });
+        const df = mount(MDatefields, {
+            localVue: localVue,
+            propsData: {
+                minYear: 2017,
+                maxYear: 2018
             }
-        }).$mount();
+        });
 
-        new Vue({
-            template: `<m-datefields v-model="value"></m-datefields>`,
-            data: {
-                value: dateDate
-            },
-            mounted() {
-                Vue.nextTick(() => {
-                    Vue.nextTick(() => {
-                        expect(dateDate instanceof Date).toBeTruthy();
-
-                        done();
-                    });
-                });
-            }
-        }).$mount();
+        return expect(renderComponent(df.vm)).resolves.toMatchSnapshot();
     });
 
-    it('disabled prop', done => {
-        new Vue({
-            template: `<m-datefields></m-datefields>`,
-            mounted() {
-                let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                expect(year.disabled).toBeFalsy();
-                expect(month.disabled).toBeFalsy();
-                expect(date.disabled).toBeFalsy();
-            }
-        }).$mount();
+    it('should render correctly moment.js model type', () => {
+        const df = mount(MDatefields, {
+            localVue: localVue
+        });
 
-        new Vue({
-            template: `<m-datefields :disabled="disabled"></m-datefields>`,
-            data: {
-                disabled: false
-            },
-            mounted() {
-                let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                expect(year.disabled).toBeFalsy();
-                expect(month.disabled).toBeFalsy();
-                expect(date.disabled).toBeFalsy();
+        df.setProps({
+            value: moment({ year: 1999, month: 7, date: 12 })
+        });
 
-                (this as any).disabled = true;
-                Vue.nextTick(() => {
-                    expect(year.disabled).toBeTruthy();
-                    expect(month.disabled).toBeTruthy();
-                    expect(date.disabled).toBeTruthy();
-
-                    (this as any).disabled = false;
-                    Vue.nextTick(() => {
-                        expect(year.disabled).toBeFalsy();
-                        expect(month.disabled).toBeFalsy();
-                        expect(date.disabled).toBeFalsy();
-
-                        done();
-                    });
-                });
-            }
-        }).$mount();
+        return expect(renderComponent(df.vm)).resolves.toMatchSnapshot();
     });
 
-    it('waiting prop', done => {
-        new Vue({
-            template: `<m-datefields></m-datefields>`,
-            mounted() {
-                let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                let spinner = this.$el.querySelector('.' + SPINNER_CSS) as HTMLElement;
-                expect(year.disabled).toBeFalsy();
-                expect(month.disabled).toBeFalsy();
-                expect(date.disabled).toBeFalsy();
-                expect(spinner).toBeNull();
+    it('should render correctly model Date type', () => {
+        const df = mount(MDatefields, {
+            localVue: localVue
+        });
 
-            }
-        }).$mount();
+        df.setProps({
+            value: new Date('1999/8/12')
+        });
 
-        new Vue({
-            template: `<m-datefields :waiting="waiting"></m-datefields>`,
-            data: {
-                waiting: false
-            },
-            mounted() {
-                let year = this.$el.querySelector('.' + YEAR_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                let month = this.$el.querySelector('.' + MONTH_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                let date = this.$el.querySelector('.' + DATE_DD_CSS + ' .m-dropdown__input') as HTMLInputElement;
-                expect(year.disabled).toBeFalsy();
-                expect(month.disabled).toBeFalsy();
-                expect(date.disabled).toBeFalsy();
-                expect(this.$el.querySelector('.' + SPINNER_CSS)).toBeNull();
-
-                (this as any).waiting = true;
-                Vue.nextTick(() => {
-                    expect(year.disabled).toBeTruthy();
-                    expect(month.disabled).toBeTruthy();
-                    expect(date.disabled).toBeTruthy();
-                    expect(this.$el.querySelector('.' + SPINNER_CSS)).not.toBeNull();
-
-                    (this as any).waiting = false;
-                    Vue.nextTick(() => {
-                        expect(year.disabled).toBeFalsy();
-                        expect(month.disabled).toBeFalsy();
-                        expect(date.disabled).toBeFalsy();
-                        expect(this.$el.querySelector('.' + SPINNER_CSS)).toBeNull();
-
-                        done();
-                    });
-                });
-            }
-        }).$mount();
+        return expect(renderComponent(df.vm)).resolves.toMatchSnapshot();
     });
 
-    it('Remove dropdown', done => {
-        new Vue({
-            template: `<m-datefields></m-datefields>`,
-            mounted() {
-                let year = this.$el.querySelector('.' + YEAR_DD_CSS) as HTMLInputElement;
-                let month = this.$el.querySelector('.' + MONTH_DD_CSS) as HTMLInputElement;
-                let date = this.$el.querySelector('.' + DATE_DD_CSS) as HTMLInputElement;
-                expect(year).not.toBeNull();
-                expect(month).not.toBeNull();
-                expect(date).not.toBeNull();
-            }
-        }).$mount();
+    it('should render correctly when day/month/year is hidden', async () => {
+        const df = mount(MDatefields, {
+            localVue: localVue
+        });
 
-        new Vue({
-            template: `<m-datefields :year="year" :month="month" :date="date"></m-datefields>`,
-            data: {
-                year: true,
-                month: true,
-                date: true
-            },
-            mounted() {
-                expect(this.$el.querySelector('.' + YEAR_DD_CSS)).not.toBeNull();
-                expect(this.$el.querySelector('.' + MONTH_DD_CSS)).not.toBeNull();
-                expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
+        df.setProps({ year: false });
+        expect(await renderComponent(df.vm)).toMatchSnapshot('year');
 
-                (this as any).year = false;
-                Vue.nextTick(() => {
-                    expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
-                    expect(this.$el.querySelector('.' + MONTH_DD_CSS)).not.toBeNull();
-                    expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
+        df.setProps({ month: false, year: true });
+        expect(await renderComponent(df.vm)).toMatchSnapshot('month');
 
-                    (this as any).month = false;
-                    Vue.nextTick(() => {
-                        expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
-                        expect(this.$el.querySelector('.' + MONTH_DD_CSS)).toBeNull();
-                        expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
-
-                        (this as any).date = false;
-                        Vue.nextTick(() => {
-                            expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
-                            expect(this.$el.querySelector('.' + MONTH_DD_CSS)).toBeNull();
-                            expect(this.$el.querySelector('.' + DATE_DD_CSS)).toBeNull();
-
-                            (this as any).date = true;
-                            Vue.nextTick(() => {
-                                expect(this.$el.querySelector('.' + YEAR_DD_CSS)).toBeNull();
-                                expect(this.$el.querySelector('.' + MONTH_DD_CSS)).toBeNull();
-                                expect(this.$el.querySelector('.' + DATE_DD_CSS)).not.toBeNull();
-
-                                done();
-                            });
-                        });
-                    });
-                });
-            }
-        }).$mount();
+        df.setProps({ date: false, month: true });
+        expect(await renderComponent(df.vm)).toMatchSnapshot('day');
     });
 
-    it('minYear prop', done => {
-        let date = moment({ year: 2000, month: 0, date: 1 });
-
-        let vm = new Vue({
-            template: `<m-datefields v-model="date" :minYear="min"></m-datefields>`,
-            data: {
-                date: date,
-                min: 2000
-            },
-            mounted() {
-                Vue.nextTick(() => {
-                    Vue.nextTick(() => {
-                        expect(this.date).toBeDefined();
-                        expect(this.$el.classList.contains(COMPLETE_CSS)).toBeTruthy();
-
-                        this.date = moment({ year: 1999, month: 11, date: 31 });
-                        Vue.nextTick(() => {
-                            Vue.nextTick(() => {
-                                expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
-
-                                done();
-                            });
-                        });
-                    });
-                });
+    it('should emit complete event when date is valid', () => {
+        const df = mount(MDatefields, {
+            localVue: localVue,
+            propsData: {
+                value: new Date()
             }
-        }).$mount();
+        });
+
+        df.setData({
+            internalYear: 2018,
+            internalMonth: 5,
+            internalDate: 20
+        });
+
+        df.find({ name: 'm-dropdown' }).vm.$emit('change');
+
+        expect(df.emitted('complete'));
+        expect(df.emitted('change')[0][0]).toEqual(new Date('2018/5/20'));
     });
 
-    it('maxYear prop', done => {
-        let date = moment({ year: 1999, month: 11, date: 31 });
+    it('should not emit change when date is invalid', () => {
+        const df = mount(MDatefields, {
+            localVue: localVue
+        });
 
-        let vm = new Vue({
-            template: `<m-datefields v-model="date" :maxYear="max"></m-datefields>`,
-            data: {
-                date: date,
-                max: 1999
-            },
-            mounted() {
-                Vue.nextTick(() => {
-                    Vue.nextTick(() => {
-                        expect(this.date).toBeDefined();
-                        expect(this.$el.classList.contains(COMPLETE_CSS)).toBeTruthy();
+        df.setData({
+            internalYear: 2017,
+            internalMonth: 12,
+            internalDate: 40
+        });
 
-                        this.date = moment({ year: 2000, month: 0, date: 1 });
-                        Vue.nextTick(() => {
-                            Vue.nextTick(() => {
-                                expect(this.$el.classList.contains(COMPLETE_CSS)).toBeFalsy();
+        df.find({ name: 'm-dropdown' }).vm.$emit('change');
 
-                                done();
-                            });
-                        });
-                    });
-                });
-            }
-        }).$mount();
+        expect(df.emitted('change')).toBeFalsy();
     });
 });

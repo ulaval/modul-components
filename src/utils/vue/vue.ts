@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Component from 'vue-class-component';
 import { Messages } from '../i18n/i18n';
 import { HttpService } from '../http/http';
 import { MediaQueries } from '../media-queries/media-queries';
@@ -13,6 +14,7 @@ console.debug('TODO: explore usage of TS declare syntax');
 //     }
 // }
 
+@Component
 export class ModulVue extends Vue {
     public $i18n: Messages;
     public $http: HttpService;
