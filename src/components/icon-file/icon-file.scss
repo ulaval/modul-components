@@ -1,0 +1,40 @@
+@import 'abstracts/variables';
+
+.m-icon-file {
+    position: relative;
+    display: inline-flex;
+
+    &__body {
+        display: inline-flex;
+    }
+
+    &__icon {
+        display: inline-flex;
+        position: absolute;
+        bottom: -4px;
+        right: -4px;
+        opacity: 1;
+
+        &.m--is-completed {
+            color: $m-color--success;
+        }
+
+        &.m--is-warning {
+            color: $m-color--warning;
+        }
+
+        &.m--is-error {
+            color: $m-color--error;
+        }
+
+        &.m--is-enter-active,
+        &.m--is-leave-active {
+            transition: opacity $m-transition-duration--l;
+        }
+
+        &.m--is--enter,
+        &.m--is--leave-to {
+            opacity: 1;
+        }
+    }
+}
