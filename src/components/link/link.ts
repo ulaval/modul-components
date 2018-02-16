@@ -77,7 +77,7 @@ export class MLink extends ModulVue {
 
     private onClick(event): void {
         this.$el.blur();
-        if (this.isButton || this.disabled) {
+        if (this.isButton || this.disabled || this.isTextLink) {
             event.preventDefault();
         }
         if (!this.disabled) {
