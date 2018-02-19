@@ -1,9 +1,10 @@
-import { FileService, MFileStatus, MFile, MFileRejectionCause } from './file';
-import Vue from 'vue';
-import { ModulVue } from '../vue/vue';
-import { HttpService } from '../http/http';
 import axios, { AxiosRequestConfig, CancelTokenSource } from 'axios';
+import Vue from 'vue';
+
+import { HttpService } from '../http/http';
 import { RequestConfig } from '../http/rest';
+import { ModulVue } from '../vue/vue';
+import { FileService, MFile, MFileRejectionCause, MFileStatus } from './file';
 
 jest.mock('../http/http');
 
@@ -79,7 +80,7 @@ describe('FileService', () => {
     describe('validations', () => {
         it('should reject files with invalid extensions', () => {
             filesvc.setValidationOptions({
-                extensions: ['jpg', 'jpeg', 'pdf']
+                extensions: ['jpg', 'jpeg', 'pdf', 'mp4']
             });
 
             filesvc.add(
@@ -87,11 +88,12 @@ describe('FileService', () => {
                     createMockFile('valid.jpg'),
                     createMockFile('valid.jpeg'),
                     createMockFile('valid.pdf'),
+                    createMockFile('valid.mp4'),
                     createMockFile('invalid')
                 ])
             );
 
-            expectValidationResults(3, MFileRejectionCause.FILE_TYPE);
+            expectValidationResults(4, MFileRejectionCause.FILE_TYPE);
         });
 
         it('should reject files too big', () => {
@@ -141,6 +143,28 @@ describe('FileService', () => {
             expect(rejectedFiles[0].status).toEqual(MFileStatus.REJECTED);
             expect(rejectedFiles[0].rejection).toEqual(rejectionCause);
         };
+    });
+
+    describe('get', () => {
+        it('should return correct file extension', () => {
+            filesvc.add(
+                createMockFileList([
+                    createMockFile('file.jpg'),
+                    createMockFile('file.jpeg'),
+                    createMockFile('file.mp4')
+                ])
+            );
+
+            expect(filesvc.files()[0].extension()).toEqual('jpg');
+            expect(filesvc.files()[1].extension()).toEqual('jpeg');
+            expect(filesvc.files()[2].extension()).toEqual('mp4');
+        });
+
+        it('should return empty string when there is no extension', () => {
+            filesvc.add(createMockFileList([createMockFile('noextension')]));
+
+            expect(filesvc.files()[0].extension()).toEqual('');
+        });
     });
 
     describe('upload spec', () => {

@@ -1,25 +1,21 @@
-import uuid from '../uuid/uuid';
+import axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from 'axios';
 import Vue, { PluginObject } from 'vue';
-import { ModulVue } from '../vue/vue';
+
 import { RequestConfig } from '../http/rest';
-import { HttpService } from '../http/http';
-import axios, {
-    AxiosResponse,
-    AxiosRequestConfig,
-    CancelTokenSource,
-    CancelToken
-} from 'axios';
-import { MUploadFileslist } from '../../components/upload-fileslist/upload-fileslist';
-import { MFileSelect } from '../../components/file-select/file-select';
+import uuid from '../uuid/uuid';
+import { ModulVue } from '../vue/vue';
+
+const DEFAULT_STORE_NAME = 'DEFAULT';
 
 export interface MFile {
     uid: string;
     name: string;
-    extension: string;
     file: File;
     status: MFileStatus;
     progress: number;
     rejection?: MFileRejectionCause;
+
+    extension: () => string;
 }
 
 export enum MFileRejectionCause {
@@ -42,8 +38,6 @@ export interface MFileUploadOptions {
     config?: RequestConfig;
     onUploadProgress?: (progressEvent: ProgressEvent) => void;
 }
-
-const DEFAULT_STORE_NAME = 'DEFAULT';
 
 export interface MFileValidationOptions {
     maxFiles?: number;
@@ -109,6 +103,11 @@ interface FileStoreRx extends Vue {
     files: MFile[];
 }
 
+const extractExtension = (file: File) => {
+    const match = file.name.match(/\.([a-zA-Z0-9]{3,4})$/);
+    return match ? match[1] : '';
+};
+
 class FileStore {
     private filesmap: { [uid: string]: MFile } = {};
     private cancelTokens: { [uid: string]: CancelTokenSource } = {};
@@ -143,16 +142,11 @@ class FileStore {
             const mfile: MFile = {
                 uid: uuid.generate(),
                 name: file.name,
-                extension: '',
                 file: file,
                 status: MFileStatus.READY,
-                progress: 0
+                progress: 0,
+                extension: () => extractExtension(file)
             };
-
-            const match = file.name.match(/\.([a-zA-Z0-9]{3,4})$/);
-            if (match) {
-                mfile.extension = match[1];
-            }
 
             this.validate(mfile);
 
@@ -248,18 +242,9 @@ class FileStore {
     }
 
     private validateExtension(file: MFile) {
-        let valid = true;
+        const ext = extractExtension(file.file);
 
-        const match = file.name.match(/\.([a-zA-Z0-9]{3,4})$/);
-        if (match) {
-            if (this.options!.extensions!.indexOf(match[1]) === -1) {
-                valid = false;
-            }
-        } else {
-            valid = false;
-        }
-
-        if (!valid) {
+        if (this.options!.extensions!.indexOf(ext) === -1) {
             file.status = MFileStatus.REJECTED;
             file.rejection = MFileRejectionCause.FILE_TYPE;
         }
