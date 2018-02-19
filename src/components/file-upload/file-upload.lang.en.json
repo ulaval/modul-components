@@ -12,7 +12,8 @@
         "rejectFile": "The following file can not be added.",
         "rejectFiles": "The following files can not be added.",
         "extensionFileMsg": "The file extension is not accepted.",
-        "extensionFilesMsg": "The extension of the files is not accepted."
+        "extensionFilesMsg": "The extension of the files is not accepted.",
+        "errorMsg": "An error occurred during the upload."
     }
 }
 

@@ -92,7 +92,7 @@
             @include m-scrollbar();
 
             li {
-                max-height: $m-touch-size;
+                max-height: 60px;
                 display: flex;
 
                 &:last-child {
@@ -141,6 +141,12 @@
 
         &__name {
             font-weight: $m-font-weight--bold;
+        }
+
+        &__error-message {
+            color: $m-color--error;
+            font-size: $m-font-size--xs;
+            margin-top: 0;
         }
 
         &__size {
