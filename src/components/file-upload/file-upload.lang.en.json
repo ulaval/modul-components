@@ -1,0 +1,18 @@
+{
+    "m-file-upload": {
+        "header-title": "Add files",
+        "title": "Drag and drop files",
+        "choice": "or",
+        "format": "Accepted formats",
+        "import": "In import",
+        "file": "file",
+        "files": "files",
+        "add": "Add",
+        "cancel": "Cancel",
+        "rejectFile": "The following file can not be added.",
+        "rejectFiles": "The following files can not be added.",
+        "extensionFileMsg": "The file extension is not accepted.",
+        "extensionFilesMsg": "The extension of the files is not accepted."
+    }
+}
+

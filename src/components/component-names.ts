@@ -14,6 +14,7 @@ export const DROPDOWN_ITEM_NAME: string = 'm-dropdown-item';
 export const DROPDOWN_GROUP_NAME: string = 'm-dropdown-group';
 export const DYNAMIC_TEMPLATE_NAME: string = 'm-dynamic-template';
 export const FILE_SELECT_NAME: string = 'm-file-select';
+export const FILE_UPLOAD_NAME: string = 'm-file-upload';
 export const EDIT_WINDOW_NAME: string = 'm-edit-window';
 export const FLEX_TEMPLATE_NAME: string = 'm-flex-template';
 export const I18N_NAME: string = 'm-i18n';

@@ -16,6 +16,7 @@ import DropdownGroupPlugin from './dropdown-group/dropdown-group';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import EditWindow from './edit-window/edit-window';
 import FileSelectPlugin from './file-select/file-select';
+import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
