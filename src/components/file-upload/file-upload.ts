@@ -5,6 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 
 import FileDropPlugin from '../../directives/file-drop/file-drop';
 import FilePlugin, { MFile, MFileStatus } from '../../utils/file/file';
+import { Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { FILE_UPLOAD_NAME } from '../component-names';
@@ -24,11 +25,25 @@ interface MFileExt extends MFile {
     completeHinted: boolean;
 }
 
+let filesizeSymbols: { [name: string]: string } | undefined = undefined;
+
 @WithRender
 @Component({
     filters: {
         fileSize(bytes: number): string {
-            return filesize(bytes);
+            if (!filesizeSymbols) {
+                const i18n: Messages = (Vue.prototype as any).$i18n;
+                filesizeSymbols = {
+                    B: i18n.translate('m-file-upload:size-b'),
+                    KB: i18n.translate('m-file-upload:size-kb'),
+                    MB: i18n.translate('m-file-upload:size-mb'),
+                    GB: i18n.translate('m-file-upload:size-gb')
+                };
+            }
+
+            return filesize(bytes, {
+                symbols: filesizeSymbols
+            });
         }
     }
 })
