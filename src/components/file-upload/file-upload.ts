@@ -1,21 +1,28 @@
-import Component from 'vue-class-component';
-import WithRender from './file-upload.html?style=./file-upload.scss';
-import { FILE_UPLOAD_NAME } from '../component-names';
-import { PluginObject } from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
-import FilePlugin, { MFile, MFileStatus } from '../../utils/file/file';
-import { Watch, Prop } from 'vue-property-decorator';
 import filesize from 'filesize';
+import Vue, { PluginObject } from 'vue';
+import Component from 'vue-class-component';
+import { Prop, Watch } from 'vue-property-decorator';
+
 import FileDropPlugin from '../../directives/file-drop/file-drop';
+import FilePlugin, { MFile, MFileStatus } from '../../utils/file/file';
+import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
+import { FILE_UPLOAD_NAME } from '../component-names';
 import FileSelectPlugin from '../file-select/file-select';
-import ProgressPlugin, { MProgressState } from '../progress/progress';
-import ModalPlugin, { MModal } from '../modal/modal';
-import IconPlugin from '../icon/icon';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
-import ButtonPlugin from '../button/button';
-import MessagePlugin from '../message/message';
+import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
+import MessagePlugin from '../message/message';
+import ModalPlugin from '../modal/modal';
+import ProgressPlugin, { MProgressState } from '../progress/progress';
+import WithRender from './file-upload.html?style=./file-upload.scss';
+
+const COMPLETED_FILES_VISUAL_HINT_DELAY = 1000;
+
+interface MFileExt extends MFile {
+    completeHinted: boolean;
+}
 
 @WithRender
 @Component({
@@ -43,11 +50,25 @@ export class MFileUpload extends ModulVue {
 
     @Watch('readyFiles')
     private onFilesChanged() {
+        for (const f of this.readyFiles) {
+            this.$set(f, 'completeHinted', false);
+        }
         this.$emit('files-ready', this.readyFiles);
     }
 
+    @Watch('freshlyCompletedFiles')
+    private onFreshlyCompletedFilesChanged() {
+        if (this.freshlyCompletedFiles.length > 0) {
+            setTimeout(() => {
+                for (const f of this.freshlyCompletedFiles) {
+                    f.completeHinted = true;
+                }
+            }, COMPLETED_FILES_VISUAL_HINT_DELAY);
+        }
+    }
+
     @Watch('rejectedFiles')
-    private onRejectedFiles() {
+    private onRejectedFilesChanged() {
         if (this.rejectedFiles.length > 0) {
             this.isModalOpen = true;
         }
@@ -72,7 +93,9 @@ export class MFileUpload extends ModulVue {
     }
 
     private onUploadCancel(file: MFile) {
-        file.status === MFileStatus.UPLOADING ? this.$emit('file-upload-cancel', file) : this.onFileRemove(file);
+        file.status === MFileStatus.UPLOADING
+            ? this.$emit('file-upload-cancel', file)
+            : this.onFileRemove(file);
     }
 
     private onFileRemove(file: MFile) {
@@ -108,20 +131,37 @@ export class MFileUpload extends ModulVue {
         );
     }
 
-    private get readyFiles(): MFile[] {
-        return this.$file.files().filter(f => f.status === MFileStatus.READY);
+    private get readyFiles(): MFileExt[] {
+        return this.allFiles.filter(f => f.status === MFileStatus.READY);
     }
 
-    private get uploadingFiles(): MFile[] {
-        return this.$file
-            .files()
-            .filter(f => f.status === MFileStatus.UPLOADING || f.status === MFileStatus.FAILED);
+    private get freshlyCompletedFiles(): MFileExt[] {
+        return this.allFiles.filter(
+            f => f.status === MFileStatus.COMPLETED && !f.completeHinted
+        );
     }
 
-    private get completedFiles(): MFile[] {
-        return this.$file
-            .files()
-            .filter(f => f.status === MFileStatus.COMPLETED);
+    private get uploadingFiles(): MFileExt[] {
+        return this.allFiles.filter(
+            f =>
+                f.status === MFileStatus.UPLOADING ||
+                f.status === MFileStatus.FAILED ||
+                (f.status === MFileStatus.COMPLETED && !f.completeHinted)
+        );
+    }
+
+    private get completedFiles(): MFileExt[] {
+        return this.allFiles.filter(
+            f => f.status === MFileStatus.COMPLETED && f.completeHinted
+        );
+    }
+
+    private get rejectedFiles(): MFileExt[] {
+        return this.allFiles.filter(f => f.status === MFileStatus.REJECTED);
+    }
+
+    private get allFiles(): MFileExt[] {
+        return this.$file.files() as MFileExt[];
     }
 
     private get hasUploadingFiles(): boolean {
@@ -130,12 +170,6 @@ export class MFileUpload extends ModulVue {
 
     private get hasCompletedFiles(): boolean {
         return this.completedFiles.length === 0;
-    }
-
-    private get rejectedFiles(): MFile[] {
-        return this.$file
-            .files()
-            .filter(f => f.status === MFileStatus.REJECTED);
     }
 }
 
