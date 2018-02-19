@@ -310,7 +310,6 @@ describe('FileService', () => {
     };
 
     const createMockFile = (name: string, size?: number): File => {
-        // Note: for phantomjs support, see https://github.com/ariya/phantomjs/issues/14247
         const file: any = new Blob([new ArrayBuffer(size ? size : 1)]);
         file['name'] = name;
         return file as File;

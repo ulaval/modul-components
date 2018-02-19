@@ -95,8 +95,10 @@ export class MProgress extends ModulVue {
                 return undefined;
             } else if (this.value > 100) {
                 return '100%';
-            } else {
+            } else if (this.value != undefined) {
                 return this.value + '%';
+            } else {
+                return undefined;
             }
         } else {
             return undefined;
