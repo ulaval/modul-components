@@ -63,6 +63,10 @@ export class MIconFile extends Vue {
         return '-' + distance + 'px';
     }
 
+    private get hasState(): boolean {
+        return !!this.state;
+    }
+
 }
 
 const IconFilePlugin: PluginObject<any> = {

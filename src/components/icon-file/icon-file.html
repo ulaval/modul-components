@@ -3,12 +3,9 @@
         <m-icon ref="icon" :name="name" :size="size" :svg-title="svgTitle"></m-icon>
     </div>
     <transition name="m--is">
-        <span class="m-icon-file__icon" :style="{ right: rightDistance, bottom: bottomDistance }" v-if="state"
-            :class="{ 'm--is-completed': state=='completed',
-                      'm--is-warning': state=='warning',
-                      'm--is-error': state=='error' }">
+        <span class="m-icon-file__icon" :style="{ right: rightDistance, bottom: bottomDistance }" v-if="hasState"
+              :class="{ 'm--is-completed': state=='completed', 'm--is-warning': state=='warning', 'm--is-error': state=='error' }">
             <m-icon :name="getIcon()" :size="chipSize" :svg-title="svgChipTitle"></m-icon>
         </span>
     </transition>
-
 </div>
