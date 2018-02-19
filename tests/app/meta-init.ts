@@ -16,6 +16,7 @@ const components: string[] = [
     Components.DROPDOWN_ITEM_NAME,
     Components.DROPDOWN_GROUP_NAME,
     Components.DYNAMIC_TEMPLATE_NAME,
+    Components.FILE_SELECT_NAME,
     Components.FLEX_TEMPLATE_NAME,
     Components.I18N_NAME,
     Components.ICON_NAME,
