@@ -76,11 +76,9 @@ export class MFileUpload extends ModulVue {
 
     private onModalClose() {
         this.isModalOpen = false;
-        setTimeout(() => {
-            for (const f of this.rejectedFiles) {
-                this.$file.remove(f.uid);
-            }
-        }, 400);
+        for (const f of this.rejectedFiles) {
+            this.$file.remove(f.uid);
+        }
     }
 
     private onAddClick() {
