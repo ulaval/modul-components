@@ -27,7 +27,9 @@ describe('file-select', () => {
             localVue: localVue
         });
 
-        expect(renderComponent(fileSelect.vm)).resolves.toMatchSnapshot();
+        return expect(
+            renderComponent(fileSelect.vm)
+        ).resolves.toMatchSnapshot();
     });
 
     it('should flow down button props', () => {

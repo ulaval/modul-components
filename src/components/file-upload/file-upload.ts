@@ -9,6 +9,7 @@ import { Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { FILE_UPLOAD_NAME } from '../component-names';
+import DialogPlugin, { MDialog } from '../dialog/dialog';
 import FileSelectPlugin from '../file-select/file-select';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
@@ -51,6 +52,10 @@ export class MFileUpload extends ModulVue {
     @Prop() public extensions?: string[];
     @Prop() public maxSizeKb?: number;
     @Prop() public maxFiles?: number;
+
+    $refs: {
+        dialog: MDialog;
+    };
 
     private title: string = this.$i18n.translate('m-file-upload:header-title');
     private isModalOpen: boolean = false;
@@ -101,7 +106,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private onCancelClick() {
-        this.$refs['dialog']['closeDialog']();
+        this.$refs.dialog.closeDialog();
         this.$emit('cancel');
     }
 
@@ -192,6 +197,7 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(FilePlugin);
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);
+        v.use(DialogPlugin);
         v.use(ModalPlugin);
         v.use(ProgressPlugin);
         v.use(IconPlugin);
