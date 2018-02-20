@@ -25,7 +25,9 @@
                     <transition-group class="m-file-upload__import-list__overflow" name="m--is" tag="ul">
                         <li v-for="(file, index) in uploadingFiles" :key="file.uid">
                             <div class="m-file-upload__import-list__content">
-                                <m-icon name="chip-info" size="24px"></m-icon>
+                                <div>
+                                    <m-icon name="chip-info" size="24px"></m-icon>
+                                </div>
                                 <div class="m-file-upload__import-list__progress-wrap">
                                     <div class="m-file-upload__import-list__infos">
                                         <p class="m-file-upload__import-list__name">{{file.name}}</p>
@@ -36,7 +38,9 @@
                                         <m-i18n k="m-file-upload:errorMsg"></m-i18n>
                                     </p>
                                 </div>
-                                <m-icon-button class="m-file-upload__import-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
+                                <div>
+                                    <m-icon-button class="m-file-upload__import-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
+                                </div>
                             </div>
                         </li>
                     </transition-group>
@@ -49,7 +53,9 @@
                 <transition-group class="m-file-upload__completed-list__overflow" name="m--is" tag="ul">
                     <li v-for="(file, index) in completedFiles" :key="file.uid">
                         <div class="m-file-upload__completed-list__content">
-                            <m-icon name="chip-info" size="24px"></m-icon>
+                            <div>
+                                <m-icon name="chip-info" size="24px"></m-icon>
+                            </div>
                             <div class="m-file-upload__completed-list__infos">
                                 <p class="m-file-upload__completed-list__infos-label">
                                     <m-link :url="file.url" :mode="link" target="_blank" v-if="file.url">{{file.name}}</m-link>
@@ -57,7 +63,9 @@
                                 </p>
                                 <p class="m-file-upload__completed-list__infos-size">{{file.file.size | file-size}}</p>
                             </div>
-                            <m-icon-button class="m-file-upload__completed-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onFileRemove(file)"></m-icon-button>
+                            <div>
+                                <m-icon-button class="m-file-upload__completed-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onFileRemove(file)"></m-icon-button>
+                            </div>
                         </div>
                     </li>
                 </transition-group>

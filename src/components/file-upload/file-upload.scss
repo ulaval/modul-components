@@ -1,5 +1,8 @@
 @import 'abstracts/variables';
 
+$m-file-upload-max-height: 120px;
+$m-file-upload-max-height--s: 72px;
+
 .m-file-upload {
     &__wrap {
         &.m--no-padding {
@@ -47,10 +50,6 @@
         &__format {
             margin-top: $m-margin--l;
             font-weight: $m-font-weight--bold;
-
-            // &__label {
-            //     font-weight: $m-font-weight--bold;
-            // }
         }
 
         &.m--is-drag-over {
@@ -85,14 +84,14 @@
 
         &__overflow {
             margin: 0;
-            max-height: 120px;
+            max-height: $m-file-upload-max-height;
             overflow-y: auto;
             overflow-x: hidden;
 
             @include m-scrollbar();
 
             li {
-                max-height: 60px;
+                max-height: $m-file-upload-max-height;
                 display: flex;
 
                 &:last-child {
@@ -141,6 +140,9 @@
 
         &__name {
             font-weight: $m-font-weight--bold;
+            word-break: break-all;
+            flex: 1 0 0;
+            padding-right: $m-padding--xs;
         }
 
         &__error-message {
@@ -162,7 +164,7 @@
 
     &__completed-list {
         padding-top: $m-spacing--m;
-        max-height: 150px;
+        max-height: 144px;
         display: flex;
         flex-direction: column;
 
@@ -177,14 +179,14 @@
 
         &__overflow {
             margin: 0;
-            max-height: 120px;
+            max-height: $m-file-upload-max-height;
             overflow-y: auto;
             overflow-x: hidden;
 
             @include m-scrollbar();
 
             li {
-                max-height: $m-touch-size;
+                max-height: $m-file-upload-max-height--s;
                 display: flex;
 
                 &:last-child {
@@ -231,6 +233,7 @@
         &__infos-label {
             font-weight: $m-font-weight--bold;
             padding-bottom: $m-padding--xs;
+            word-break: break-all;
         }
 
         &__infos-size {
@@ -245,6 +248,8 @@
     }
 
     &__error-message {
+        display: block;
+
         &__title {
             font-weight: $m-font-weight--bold;
         }
