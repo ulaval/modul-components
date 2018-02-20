@@ -1,6 +1,7 @@
 import { createLocalVue, mount, Stubs } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
+import { createMockFile, createMockFileList } from '../../../tests/helpers/file';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
 import FilePlugin, { MFile, MFileStatus } from '../../utils/file/file';
@@ -200,24 +201,5 @@ describe('MFileUpload', () => {
                 ...stubs
             }
         });
-    };
-
-    const createMockFileList = (files: File[]): FileList => {
-        let fl = {
-            length: files.length,
-            item: i => {
-                return files[i];
-            }
-        };
-        for (let i = 0; i < files.length; ++i) {
-            fl[i] = files[i];
-        }
-        return fl;
-    };
-
-    const createMockFile = (name: string, size?: number): File => {
-        const file: any = new Blob([new ArrayBuffer(size ? size : 1)]);
-        file['name'] = name;
-        return file as File;
     };
 });

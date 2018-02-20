@@ -1,8 +1,10 @@
-import { createLocalVue, Wrapper, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-import FileDropPlugin from './file-drop';
+
+import { createMockFile } from '../../../tests/helpers/file';
 import FilePlugin from '../../utils/file/file';
 import { ModulVue } from '../../utils/vue/vue';
+import FileDropPlugin from './file-drop';
 
 describe('file-drop', () => {
     let localVue: VueConstructor<ModulVue>;
@@ -46,10 +48,4 @@ describe('file-drop', () => {
 
         expect(filedrop.vm.$file.clear).toHaveBeenCalledWith();
     });
-
-    const createMockFile = (name: string): File => {
-        const file: any = new Blob([]);
-        file['name'] = name;
-        return file as File;
-    };
 });
