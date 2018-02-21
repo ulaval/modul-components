@@ -49,9 +49,12 @@ let filesizeSymbols: { [name: string]: string } | undefined = undefined;
     }
 })
 export class MFileUpload extends ModulVue {
-    @Prop() public extensions?: string[];
-    @Prop() public maxSizeKb?: number;
-    @Prop() public maxFiles?: number;
+    @Prop()
+    public extensions?: string[];
+    @Prop()
+    public maxSizeKb?: number;
+    @Prop()
+    public maxFiles?: number;
 
     $refs: {
         dialog: MDialog;
