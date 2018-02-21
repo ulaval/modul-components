@@ -5,7 +5,7 @@ import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
 import { ModulVue } from '../vue/vue';
 
-const DEFAULT_STORE_NAME = 'DEFAULT';
+const DEFAULT_STORE_NAME: string = 'DEFAULT';
 
 export interface MFile {
     uid: string;
@@ -55,19 +55,19 @@ export class FileService {
     public setValidationOptions(
         options: MFileValidationOptions,
         storeName?: string
-    ) {
+    ): void {
         this.getStore(storeName).validationOptions = options;
     }
 
-    public add(files: FileList, storeName?: string) {
+    public add(files: FileList, storeName?: string): void {
         this.getStore(storeName).add(files);
     }
 
-    public remove(fileuid: string, storeName?: string) {
+    public remove(fileuid: string, storeName?: string): void {
         this.getStore(storeName).remove(fileuid);
     }
 
-    public clear(storeName?: string) {
+    public clear(storeName?: string): void {
         this.getStore(storeName).clear();
         delete this.stores[this.getStoreName(storeName)];
     }
@@ -80,7 +80,7 @@ export class FileService {
         return this.getStore(storeName).upload<T>(fileuid, options);
     }
 
-    public cancelUpload(fileuid: string, storeName?: string) {
+    public cancelUpload(fileuid: string, storeName?: string): void {
         this.getStore(storeName).cancelUpload(fileuid);
     }
 
@@ -103,7 +103,7 @@ interface FileStoreRx extends Vue {
     files: MFile[];
 }
 
-const extractExtension = (file: File) => {
+const extractExtension = (file: File): string => {
     const match = file.name.match(/\.([a-zA-Z0-9]{3,4})$/);
     return match ? match[1] : '';
 };
@@ -135,7 +135,7 @@ class FileStore {
         return this.filesmap[uid];
     }
 
-    public add(files: FileList) {
+    public add(files: FileList): void {
         for (let i = 0; i < files.length; ++i) {
             const file = files[i];
 
@@ -157,12 +157,12 @@ class FileStore {
         this.refreshRx();
     }
 
-    public remove(uid: string) {
+    public remove(uid: string): void {
         delete this.filesmap[uid];
         this.refreshRx();
     }
 
-    public clear() {
+    public clear(): void {
         this.rx.$destroy();
     }
 
@@ -220,12 +220,12 @@ class FileStore {
             });
     }
 
-    public cancelUpload(fileuid: string) {
+    public cancelUpload(fileuid: string): void {
         this.cancelTokens[fileuid].cancel();
         delete this.cancelTokens[fileuid];
     }
 
-    private validate(file: MFile) {
+    private validate(file: MFile): void {
         if (!this.options) return;
 
         if (this.options.extensions) {
@@ -241,7 +241,7 @@ class FileStore {
         }
     }
 
-    private validateExtension(file: MFile) {
+    private validateExtension(file: MFile): void {
         const ext = extractExtension(file.file);
 
         if (this.options!.extensions!.indexOf(ext) === -1) {
@@ -250,14 +250,14 @@ class FileStore {
         }
     }
 
-    private validateSize(file: MFile) {
+    private validateSize(file: MFile): void {
         if (file.file.size / 1024 > this.options!.maxSizeKb!) {
             file.status = MFileStatus.REJECTED;
             file.rejection = MFileRejectionCause.FILE_SIZE;
         }
     }
 
-    private validateMaxFiles(file: MFile) {
+    private validateMaxFiles(file: MFile): void {
         const nbValidFiles = Object.keys(this.filesmap).reduce((t, uid) => {
             let f = this.filesmap[uid];
             return (t =
@@ -274,7 +274,7 @@ class FileStore {
         }
     }
 
-    private refreshRx() {
+    private refreshRx(): void {
         const files: MFile[] = [];
         for (const f in this.filesmap) {
             files.push(this.filesmap[f]);

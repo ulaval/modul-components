@@ -20,7 +20,7 @@ import ModalPlugin from '../modal/modal';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
 
-const COMPLETED_FILES_VISUAL_HINT_DELAY = 1000;
+const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 
 interface MFileExt extends MFile {
     completeHinted: boolean;
@@ -63,7 +63,7 @@ export class MFileUpload extends ModulVue {
     private title: string = this.$i18n.translate('m-file-upload:header-title');
     private isModalOpen: boolean = false;
 
-    private created() {
+    private created(): void {
         this.$file.setValidationOptions({
             extensions: this.extensions,
             maxSizeKb: this.maxSizeKb,
@@ -72,7 +72,7 @@ export class MFileUpload extends ModulVue {
     }
 
     @Watch('readyFiles')
-    private onFilesChanged() {
+    private onFilesChanged(): void {
         for (const f of this.readyFiles) {
             this.$set(f, 'completeHinted', false);
         }
@@ -80,7 +80,7 @@ export class MFileUpload extends ModulVue {
     }
 
     @Watch('freshlyCompletedFiles')
-    private onFreshlyCompletedFilesChanged() {
+    private onFreshlyCompletedFilesChanged(): void {
         if (this.freshlyCompletedFiles.length > 0) {
             setTimeout(() => {
                 for (const f of this.freshlyCompletedFiles) {
@@ -91,44 +91,44 @@ export class MFileUpload extends ModulVue {
     }
 
     @Watch('rejectedFiles')
-    private onRejectedFilesChanged() {
+    private onRejectedFilesChanged(): void {
         if (this.rejectedFiles.length > 0) {
             this.isModalOpen = true;
         }
     }
 
-    private onModalClose() {
+    private onModalClose(): void {
         this.isModalOpen = false;
         for (const f of this.rejectedFiles) {
             this.$file.remove(f.uid);
         }
     }
 
-    private onAddClick() {
+    private onAddClick(): void {
         this.$emit('done', this.completedFiles);
     }
 
-    private onCancelClick() {
+    private onCancelClick(): void {
         this.$refs.dialog.closeDialog();
         this.$emit('cancel');
     }
 
-    private onUploadCancel(file: MFile) {
+    private onUploadCancel(file: MFile): void {
         file.status === MFileStatus.UPLOADING
             ? this.$emit('file-upload-cancel', file)
             : this.onFileRemove(file);
     }
 
-    private onFileRemove(file: MFile) {
+    private onFileRemove(file: MFile): void {
         this.$emit('file-remove', file);
         this.$file.remove(file.uid);
     }
 
-    private onOpen() {
+    private onOpen(): void {
         this.$emit('open');
     }
 
-    private onClose() {
+    private onClose(): void {
         this.$emit('close');
     }
 
