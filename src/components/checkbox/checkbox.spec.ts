@@ -1,238 +1,104 @@
-import Vue from 'vue';
-import '../../utils/polyfills';
-import CheckboxPlugin, { MCheckbox, MCheckboxPosition } from './checkbox';
-import { InputStateMixin } from '../../mixins/input-state/input-state';
-import SpritesHelper from '../../../tests/helpers/sprites';
-import LangHelper from '../../../tests/helpers/lang';
+import { createLocalVue, mount } from '@vue/test-utils';
+import Vue, { VueConstructor } from 'vue';
 
-const POSITION_LEFT_CSS: string = 'm--is-checkbox-left';
-const POSITION_RIGHT_CSS: string = 'm--is-checkbox-right';
-const CHECKED_CSS: string = 'm--is-checked';
-const FOCUS_CSS: string = 'm--is-focus';
-const DISABLED_CSS: string = 'm--is-disabled';
-const HAS_ERROR_CSS: string = 'm--has-error';
-const IS_VALID_CSS: string = 'm--is-valid';
+import { renderComponent } from '../../../tests/helpers/render';
+import uuid from '../../utils/uuid/uuid';
+import { MValidationMessage } from '../validation-message/validation-message';
+import MCheckboxPlugin, { MCheckbox, MCheckboxPosition } from './checkbox';
 
-const VALIDATION_MESSAGE_CLASS: string = '.m-validation-message';
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
-let checkbox: MCheckbox;
+describe('MCheckbox', () => {
+    let localVue: VueConstructor<Vue>;
 
-describe('MCheckboxPosition', () => {
-    it('validates enum', () => {
-        expect(MCheckboxPosition.Left).toEqual('left');
-        expect(MCheckboxPosition.Right).toEqual('right');
-    });
-});
-
-describe('checkbox', () => {
     beforeEach(() => {
-        spyOn(console, 'error');
-
-        Vue.use(CheckboxPlugin);
-        Vue.use(SpritesHelper);
-        Vue.use(LangHelper);
+        localVue = createLocalVue();
+        localVue.use(MCheckboxPlugin);
     });
 
-    afterEach(done => {
-        Vue.nextTick(() => {
-            expect(console.error).not.toHaveBeenCalled();
-
-            done();
+    it('should render correctly', () => {
+        const chkbox = mount(MCheckbox, {
+            localVue: localVue
         });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
-    it('css class for checkbox are not present', () => {
-        checkbox = new MCheckbox().$mount();
-        expect(checkbox.$el.classList.contains(CHECKED_CSS)).toBeFalsy();
-        expect(checkbox.$el.classList.contains(FOCUS_CSS)).toBeFalsy();
-        expect(checkbox.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
-        expect(checkbox.$el.classList.contains(HAS_ERROR_CSS)).toBeFalsy();
-        expect(checkbox.$el.classList.contains(IS_VALID_CSS)).toBeFalsy();
-
-        expect(checkbox.$el.querySelector(VALIDATION_MESSAGE_CLASS)).toBeFalsy();
-    });
-
-    it('checkboxID on the input and label elements', () => {
-        checkbox = new MCheckbox().$mount();
-        let input: HTMLInputElement | null = checkbox.$el.querySelector('input');
-        let label: HTMLLabelElement | null = checkbox.$el.querySelector('label');
-        expect(input).toBeTruthy();
-        expect(label).toBeTruthy();
-        if (input && label) {
-            expect(input.id).toEqual(label.htmlFor);
-        }
-    });
-
-    it('position prop left', done => {
-        checkbox = new MCheckbox().$mount();
-        expect(checkbox.$el.classList.contains(POSITION_LEFT_CSS)).toBeTruthy();
-        expect(checkbox.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-
-        checkbox.position = MCheckboxPosition.Left;
-        Vue.nextTick(() => {
-            expect(checkbox.$el.classList.contains(POSITION_LEFT_CSS)).toBeTruthy();
-            expect(checkbox.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-
-            done();
-        });
-    });
-
-    it('position prop right', done => {
-        checkbox = new MCheckbox().$mount();
-        expect(checkbox.$el.classList.contains(POSITION_LEFT_CSS)).toBeTruthy();
-        expect(checkbox.$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
-
-        checkbox.position = MCheckboxPosition.Right;
-        Vue.nextTick(() => {
-            expect(checkbox.$el.classList.contains(POSITION_LEFT_CSS)).toBeFalsy();
-            expect(checkbox.$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
-
-            done();
-        });
-    });
-
-    it('value prop', done => {
-        checkbox = new MCheckbox().$mount();
-        let input: HTMLInputElement | null = checkbox.$el.querySelector('input');
-        expect(input).toBeTruthy();
-        if (input) {
-            expect(input.checked).toBeFalsy();
-            checkbox.value = true;
-            Vue.nextTick(() => {
-                if (input) {
-                    expect(input.checked).toBeTruthy();
-                }
-
-                done();
-            });
-        }
-    });
-
-    it('disabled prop', done => {
-        checkbox = new MCheckbox().$mount();
-        let input: HTMLInputElement | null = checkbox.$el.querySelector('input');
-        expect(input).toBeTruthy();
-        if (input) {
-            expect(input.disabled).toBeFalsy();
-            ((checkbox as any) as InputStateMixin).disabled = true;
-            Vue.nextTick(() => {
-                if (input) {
-                    expect(input.disabled).toBeTruthy();
-                }
-
-                done();
-            });
-        }
-    });
-
-    it('v-model', done => {
-        let vm = new Vue({
-            data: {
-                model: false
-            },
-            template: `<m-checkbox :value="model"></m-checkbox>`
-        }).$mount();
-
-        expect(vm.$el.classList.contains(CHECKED_CSS)).toBeFalsy();
-        (vm as any).model = true;
-        Vue.nextTick(() => {
-            expect(vm.$el.classList.contains(CHECKED_CSS)).toBeTruthy();
-
-            done();
-        });
-    });
-
-    it('label', () => {
-        const LABEL: string = '.m-checkbox__label';
-
-        let vm = new Vue({
-            data: {
-                label: 'label'
-            },
-            template: `<m-checkbox>{{label}}</m-checkbox>`
-        }).$mount();
-
-        let label: Element | null = vm.$el.querySelector(LABEL);
-        expect(label).toBeTruthy();
-        if (label) {
-            expect(label.textContent).toEqual('label');
-        }
-    });
-
-    it('click event', done => {
-        let clickSpy = jasmine.createSpy('clickSpy');
-        let vm = new Vue({
-            data: {
-                model: false
-            },
-            template: `<m-checkbox @click="onClick" value="model"></m-checkbox>`,
-            methods: {
-                onClick: clickSpy
+    it('should render correctly when position prop is right', () => {
+        const chkbox = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                position: MCheckboxPosition.Right
             }
-        }).$mount();
-
-        let input: HTMLInputElement | null = vm.$el.querySelector('input');
-
-        let e: any = document.createEvent('HTMLEvents');
-        e.initEvent('click', true, true);
-
-        if (input) {
-            input.dispatchEvent(e);
-        }
-        Vue.nextTick(() => {
-            expect(clickSpy).toHaveBeenCalledWith(e);
-
-            done();
         });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
-    describe('validation message', () => {
-        let vm: Vue;
-        beforeEach(() => {
-            vm = new Vue({
-                data: {
-                    error: 'error',
-                    valid: 'valid',
-                    helper: 'helper',
-                    disabled: false
+    it('should render correctly when value prop is true', () => {
+        const chkbox = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                value: true
+            }
+        });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when disabled', () => {
+        const chkbox = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                disabled: true
+            }
+        });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when a label is provided', () => {
+        const chkbox = mount(MCheckbox, {
+            localVue: localVue,
+            slots: { default: 'label' }
+        });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should emit click event when clicked', () => {
+        const chkbox = mount(MCheckbox, {
+            localVue: localVue
+        });
+
+        chkbox.find('input').trigger('click');
+
+        expect(chkbox.emitted('click')).toBeTruthy();
+    });
+
+    it('should flow down InputState mixin props to m-validation-message', () => {
+        const valMsgProps = {
+            disabled: false,
+            error: false,
+            errorMessage: 'error-message',
+            validMessage: 'valid-message',
+            helperMessage: 'helper-message'
+        };
+
+        const chkbox = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: valMsgProps,
+            computed: {
+                hasError() {
+                    return false;
                 },
-                template: `<m-checkbox ref="a" :error-message="error" :valid-message="valid" :helper-message="helper" :disabled="disabled"></m-checkbox>`
-            }).$mount();
+                isDisabled() {
+                    return false;
+                }
+            }
         });
 
-        it('error message', () => {
-            expect(vm.$el.querySelector(VALIDATION_MESSAGE_CLASS)).toBeTruthy();
-            expect((((vm.$refs.a as Vue).$refs.validation as any) as InputStateMixin).errorMessage).toEqual((vm as any).error);
-        });
-
-        it('valid message', done => {
-            (vm as any).error = undefined;
-            Vue.nextTick(() => {
-                expect(vm.$el.querySelector(VALIDATION_MESSAGE_CLASS)).toBeTruthy();
-                expect((((vm.$refs.a as Vue).$refs.validation as any) as InputStateMixin).validMessage).toEqual((vm as any).valid);
-
-                done();
-            });
-        });
-
-        it('helper message', done => {
-            (vm as any).error = undefined;
-            (vm as any).valid = undefined;
-            Vue.nextTick(() => {
-                expect(vm.$el.querySelector(VALIDATION_MESSAGE_CLASS)).toBeTruthy();
-                expect((((vm.$refs.a as Vue).$refs.validation as any) as InputStateMixin).helperMessage).toEqual((vm as any).helper);
-
-                done();
-            });
-        });
-
-        it('disabled', done => {
-            (vm as any).disabled = true;
-            Vue.nextTick(() => {
-                expect(vm.$el.querySelector(VALIDATION_MESSAGE_CLASS)).toBeFalsy();
-
-                done();
-            });
-        });
+        expect(chkbox.find(MValidationMessage).props()).toEqual(valMsgProps);
     });
 });

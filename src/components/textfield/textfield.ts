@@ -10,6 +10,7 @@ import { InputManagement } from '../../mixins/input-management/input-management'
 import { KeyCode } from '../../utils/keycode/keycode';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
+import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
 import ButtonPlugin from '../button/button';
 
 export enum MTextfieldType {
@@ -27,7 +28,8 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
 @Component({
     mixins: [
         InputState,
-        InputManagement
+        InputManagement,
+        InputWidth
     ]
 })
 export class MTextfield extends ModulVue {
@@ -44,8 +46,6 @@ export class MTextfield extends ModulVue {
     public type: MTextfieldType;
     @Prop({ default: true })
     public passwordIcon: boolean;
-    @Prop()
-    public asterisk: boolean;
 
     private passwordAsText: boolean = false;
 
