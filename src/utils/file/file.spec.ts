@@ -156,15 +156,15 @@ describe('FileService', () => {
                 ])
             );
 
-            expect(filesvc.files()[0].extension()).toEqual('jpg');
-            expect(filesvc.files()[1].extension()).toEqual('jpeg');
-            expect(filesvc.files()[2].extension()).toEqual('mp4');
+            expect(filesvc.files()[0].extension).toEqual('jpg');
+            expect(filesvc.files()[1].extension).toEqual('jpeg');
+            expect(filesvc.files()[2].extension).toEqual('mp4');
         });
 
         it('should return empty string when there is no extension', () => {
             filesvc.add(createMockFileList([createMockFile('noextension')]));
 
-            expect(filesvc.files()[0].extension()).toEqual('');
+            expect(filesvc.files()[0].extension).toEqual('');
         });
     });
 

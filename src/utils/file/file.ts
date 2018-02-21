@@ -10,12 +10,11 @@ const DEFAULT_STORE_NAME: string = 'DEFAULT';
 export interface MFile {
     uid: string;
     name: string;
+    extension: string;
     file: File;
     status: MFileStatus;
     progress: number;
     rejection?: MFileRejectionCause;
-
-    extension: () => string;
 }
 
 export enum MFileRejectionCause {
@@ -145,7 +144,9 @@ class FileStore {
                 file: file,
                 status: MFileStatus.READY,
                 progress: 0,
-                extension: () => extractExtension(file)
+                get extension() {
+                    return extractExtension(file);
+                }
             };
 
             this.validate(mfile);
