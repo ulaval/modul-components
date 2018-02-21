@@ -98,7 +98,7 @@
         "nightwatch": "^0.9.19",
         "node-sass": "^4.7.2",
         "popper.js": "^1.12.9",
-        "portal-vue": "^1.1.1",
+        "portal-vue": "~1.1.1",
         "postcss-loader": "^2.0.9",
         "postcss-sass": "^0.2.0",
         "qs": "^6.5.1",
