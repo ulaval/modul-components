@@ -51,6 +51,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public listMinWidth: string;
     @Prop()
     public focus: boolean;
+    @Prop()
+    public asterisk: boolean;
 
     private internalFilter: string = '';
     private internalFilterRegExp: RegExp = / /;
