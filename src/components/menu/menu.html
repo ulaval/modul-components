@@ -7,7 +7,7 @@
          :close-on-backdrop="true"
          @open="onOpen"
          @close="onClose">
-    <m-icon-button slot="trigger" class="m-menu__button" icon-name="options" :disabled="disabled" :skin="skin" :size="size">
+    <m-icon-button slot="trigger" class="m-menu__button" icon-name="options" :disabled="disabled" :skin="skin" :size="size" @click="onClick">
         <m-i18n k="m-menu:open" v-if="!open"></m-i18n>
         <m-i18n k="m-menu:close" v-if="open"></m-i18n>
     </m-icon-button>

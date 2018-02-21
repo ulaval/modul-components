@@ -69,7 +69,6 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
 
 const ConfirmPlugin: PluginObject<any> = {
     install(v, options) {
-        (v as any).$confirm = confirmFunction;
         (v.prototype as any).$confirm = confirmFunction;
     }
 };

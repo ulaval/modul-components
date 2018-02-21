@@ -145,17 +145,17 @@
         > ul > li::before,
         &::before {
             border-radius: 50%;
-            border: 1px solid $m-color--black-grey-light;
+            border: 1px solid $m-color--grey-dark;
         }
 
         &::before,
         > ul > li > ul > li::before {
-            background: $m-color--black-grey-light;
+            background: $m-color--grey-dark;
         }
 
         > ul > li > ul > li::before,
         > ul > li > ul > li > ul > li::before {
-            border: 1px solid $m-color--black-grey-light;
+            border: 1px solid $m-color--grey-dark;
         }
 
         > ul > li > ul > li > ul > li > ul > li::before {
@@ -163,7 +163,7 @@
             height: 0;
             border-style: solid;
             border-width: 3px 0 3px 4px;
-            border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $m-color--black-grey-light;
+            border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $m-color--grey-dark;
         }
     }
 }

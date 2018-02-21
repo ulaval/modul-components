@@ -6,7 +6,7 @@
                   'm--has-icon' : hasIcon,
                   'm--has-label': hasLabel }"
      @click="onClick"
-     :style="{ width: width, maxWidth: inputMaxWidth }">
+     :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
                    :error="textareaError"
@@ -58,5 +58,4 @@
             {{ valueLenght }}<strong>/{{ maxlength }}</strong>
         </div>
     </div>
-
 </div>

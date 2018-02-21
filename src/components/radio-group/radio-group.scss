@@ -6,6 +6,8 @@
         margin-bottom: $m-margin--s;
         font-size: $m-font-size;
         font-weight: $m-font-weight--bold;
+        display: flex;
+        align-items: center;
     }
 
     &__body {
@@ -14,7 +16,7 @@
     }
 
     &__icon {
-        min-width: $m-touch-size;
+        margin-left: $m-spacing--xs;
         display: inline-flex;
         justify-content: center;
         align-items: center;

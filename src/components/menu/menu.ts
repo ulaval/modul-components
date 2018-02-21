@@ -20,7 +20,7 @@ export enum MOptionsMenuSkin {
 export class MMenu extends BaseMenu implements MMenuInterface {
 
     @Prop({
-        default: MPopperPlacement.BottomStart,
+        default: MPopperPlacement.Bottom,
         validator: value =>
             value == MPopperPlacement.Bottom ||
             value == MPopperPlacement.BottomEnd ||
@@ -69,6 +69,10 @@ export class MMenu extends BaseMenu implements MMenuInterface {
 
     private onClose(): void {
         this.$emit('close');
+    }
+
+    private onClick($event: MouseEvent): void {
+        this.$emit('click', $event);
     }
 }
 

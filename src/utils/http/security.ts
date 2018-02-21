@@ -41,7 +41,6 @@ const SecurityPlugin: PluginObject<any> = {
         }
 
         let security = new Security(options);
-        (v as any).$security = security;
         (v.prototype as any).$security = security;
     }
 };

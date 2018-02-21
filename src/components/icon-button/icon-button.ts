@@ -34,6 +34,8 @@ export class MIconButton extends Vue {
     public iconName: string;
     @Prop({ default: '20px' })
     public iconSize: string;
+    @Prop({ default: true })
+    public ripple: boolean;
     @Prop()
     public title: string;
 

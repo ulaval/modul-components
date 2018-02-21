@@ -287,7 +287,6 @@ export class Modul {
 const ModulPlugin: PluginObject<any> = {
     install(v, options) {
         let modul = new Modul();
-        (v as any).$modul = modul;
         (v.prototype as any).$modul = modul;
     }
 };
