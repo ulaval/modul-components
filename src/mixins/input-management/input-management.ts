@@ -25,7 +25,9 @@ export class InputManagement extends ModulVue {
     private internalIsFocus: boolean = false;
 
     protected mounted(): void {
-        this.focusChanged(this.focus);
+        if (this.focus) {
+            this.focusChanged(this.focus);
+        }
     }
 
     @Watch('focus')

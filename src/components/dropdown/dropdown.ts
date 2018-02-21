@@ -83,7 +83,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     protected mounted(): void {
-        this.focusChanged(this.focus);
+        if (this.focus) {
+            this.focusChanged(this.focus);
+        }
         this.$nextTick(() => {
             this.buildItemsMap();
 
