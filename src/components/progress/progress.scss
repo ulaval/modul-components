@@ -76,6 +76,7 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
             animation: m-progress-spinner-rotate 2s linear infinite;
 
             .m-progress__circle {
+                stroke: $m-color--ul-yellow;
                 animation: 4s infinite $m-circle-transition-speed;
             }
         }
@@ -102,6 +103,24 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
             .m-progress__draw {
                 transition: none;
             }
+
+            &.m--is-completed {
+                .m-progress__circle {
+                    stroke: $m-color--success;
+                }
+            }
+
+            &.m--is-in-progress {
+                .m-progress__circle {
+                    stroke: $m-color--ul-yellow;
+                }
+            }
+
+            &.m--is-error {
+                .m-progress__circle {
+                    stroke: $m-color--error;
+                }
+            }
         }
 
         .m-progress__wrap {
@@ -120,7 +139,6 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
 
         .m-progress__circle {
             fill: none;
-            stroke: $m-color--ul-yellow;
             transform-origin: center;
             transition: stroke-dashoffset 0.25s $m-circle-transition-speed;
             will-change: stroke-dashoffset, stroke-dasharray, stroke-width, animation-name, r;

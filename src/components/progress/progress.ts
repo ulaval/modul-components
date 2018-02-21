@@ -37,7 +37,7 @@ export class MProgress extends ModulVue {
     public state: MProgressState;
 
     private mode: string;
-    private styleTag;
+    private styleTag: HTMLElement | null;
 
     protected mounted(): void {
         this.attachStyleTag();
@@ -48,14 +48,7 @@ export class MProgress extends ModulVue {
         this.attachStyleTag();
     }
 
-    private getAnimationCSS() {
-        return INDETERMINATE_ANIMATION_TEMPLATE
-            .replace(/START_VALUE/g, `${0.95 * this.circleCircumference}`)
-            .replace(/END_VALUE/g, `${0.2 * this.circleCircumference}`)
-            .replace(/DIAMETER/g, `${this.diameter}`);
-    }
-
-    private attachStyleTag() {
+    private attachStyleTag(): void {
 
         if (!this.styleTag) {
             this.styleTag = document.getElementById('m-progress-spinner-styles');
@@ -68,40 +61,47 @@ export class MProgress extends ModulVue {
             document.head.appendChild(this.styleTag);
         }
 
-        if (this.styleTag && this.styleTag.sheet) {
-            this.styleTag.sheet.insertRule(this.getAnimationCSS(), 0);
+        if (this.styleTag && (this.styleTag as any).sheet) {
+            (this.styleTag as any).sheet.insertRule(this.animationCSS, 0);
         }
 
     }
 
-    private get propSize() {
-        return this.circle ? undefined : this.size + 'px';
+    private get animationCSS(): string {
+        return INDETERMINATE_ANIMATION_TEMPLATE
+            .replace(/START_VALUE/g, `${0.95 * this.circleCircumference}`)
+            .replace(/END_VALUE/g, `${0.2 * this.circleCircumference}`)
+            .replace(/DIAMETER/g, `${this.diameter}`);
     }
 
-    private get radiusSize() {
-        return this.circle ? undefined : this.size / 2 + 'px';
+    private get propSize(): string {
+        return this.circle ? '100%' : this.size + 'px';
     }
 
-    private get styleObject() {
+    private get radiusSize(): string {
+        return this.circle ? 'initial' : this.size / 2 + 'px';
+    }
+
+    private get styleObject(): { [name: string ]: string } {
         return {
             height: this.propSize,
             borderRadius: this.radiusSize
         };
     }
 
-    private get stringValue(): string | undefined {
+    private get stringValue(): string {
         if (!this.indeterminate) {
             if (this.value < 0) {
-                return undefined;
+                return '0%';
             } else if (this.value > 100) {
                 return '100%';
             } else if (this.value != undefined) {
                 return this.value + '%';
             } else {
-                return undefined;
+                return '0%';
             }
         } else {
-            return undefined;
+            return '0%';
         }
     }
 
@@ -119,14 +119,14 @@ export class MProgress extends ModulVue {
         }
     }
 
-    private get isDeterminate() {
+    private get isDeterminate(): boolean {
         if (this.circle === false) {
             this.mode = 'determinate';
         }
         return this.circle === false;
     }
 
-    private get isIndeterminate() {
+    private get isIndeterminate(): boolean {
         if (this.circle === true) {
             this.mode = 'indeterminate';
         }
@@ -134,14 +134,14 @@ export class MProgress extends ModulVue {
     }
 
     // Todo Not working
-    // private get isIE() {
+    // private get isIE(): boolean {
     //     if (!this.$isServer) {
     //         return (navigator.userAgent.toLowerCase() as any).includes('trident');
     //     }
     //     return false;
     // }
 
-    private get progressClasses() {
+    private get progressClasses(): { [name: string ]: boolean } {
         let animationClass = 'm-progress-spinner-indeterminate';
 
         // if (this.isIE) {
@@ -154,11 +154,11 @@ export class MProgress extends ModulVue {
         };
     }
 
-    private get svgViewbox() {
+    private get svgViewbox(): string {
         return `0 0 ${this.diameter} ${this.diameter}`;
     }
 
-    private get svgStyles() {
+    private get svgStyles(): { [name: string ]: string } {
         const circleSize = `${this.diameter}px`;
 
         return {
@@ -167,7 +167,7 @@ export class MProgress extends ModulVue {
         };
     }
 
-    private get circleStyles() {
+    private get circleStyles(): { [name: string ]: number | string } {
         return {
             'stroke-dashoffset': this.circleStrokeDashOffset,
             'stroke-dasharray': this.circleStrokeDashArray,
@@ -176,7 +176,7 @@ export class MProgress extends ModulVue {
         };
     }
 
-    private get backgroundCircleStyles() {
+    private get backgroundCircleStyles(): { [name: string ]: string } {
         return {
             'stroke-dasharray': this.circleStrokeDashArray,
             'stroke-width': this.circleStrokeWidth,
@@ -184,29 +184,29 @@ export class MProgress extends ModulVue {
         };
     }
 
-    private get circleRadius() {
+    private get circleRadius(): number {
         return (this.diameter - this.stroke) / 2;
     }
 
-    private get circleStrokeWidth() {
+    private get circleStrokeWidth(): string {
         return this.stroke + 'px';
     }
 
-    private get circleCircumference() {
+    private get circleCircumference(): number {
         return 2 * Math.PI * this.circleRadius;
     }
 
-    private get circleStrokeDashArray() {
+    private get circleStrokeDashArray(): string {
         return this.circleCircumference + 'px';
     }
 
-    private get circleStrokeDashOffset() {
+    private get circleStrokeDashOffset(): string {
         if (!this.indeterminate) {
             return this.circleCircumference * (100 - this.numberValue) / 100 + 'px';
         } else if (this.indeterminate) {
             return this.circleCircumference * 0.2 + 'px';
         }
-        return undefined;
+        return '0px';
     }
 
 }
