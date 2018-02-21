@@ -65,7 +65,6 @@ export class MTextarea extends ModulVue {
         if (el.scrollHeight != 0) {
             el.style.height = el.scrollHeight + 'px';
         }
-
     }
 }
 
