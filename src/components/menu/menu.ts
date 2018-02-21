@@ -70,6 +70,10 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     private onClose(): void {
         this.$emit('close');
     }
+
+    private onClick($event: MouseEvent): void {
+        this.$emit('click', $event);
+    }
 }
 
 const MenuPlugin: PluginObject<any> = {
