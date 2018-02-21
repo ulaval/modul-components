@@ -7,6 +7,7 @@
                   'm--has-label': hasLabel }"
      @click="onClick"
      :style="{ width: width, maxWidth: inputMaxWidth }">
+     {{focusTest}}
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
                    :error="textareaError"
@@ -14,7 +15,8 @@
                    :label="label"
                    :focus="isFocus"
                    :empty="isEmpty"
-                   :icon-name="iconName">
+                   :icon-name="iconName"
+                   v-if="!plain">
         <textarea class="m-textarea__input"
                   :disabled="!active"
                   :placeholder="placeholder"
@@ -23,10 +25,26 @@
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
+                  @keyup="onKeyup"
+                  @keydown="onKeydown"
                   ref="input"
-                  v-model="model"
-                  :style="{ maxWidth: maxWidth }"></textarea>
+                  v-model="model"></textarea>
     </m-input-style>
+    <template  v-if="plain">
+        <label class="m-textarea__label" v-if="hasLabel">{{ label }}</label>
+        <textarea class="m-textarea__input"
+                :disabled="!active"
+                :placeholder="placeholder"
+                :readonly="readonly"
+                rows="1"
+                @focus="onFocus"
+                @blur="onBlur"
+                @change="onChange"
+                @keyup="onKeyup"
+                @keydown="onKeydown"
+                ref="input"
+                v-model="model"></textarea>
+    </template>
     <div class="m-textarea__validation">
         <m-validation-message
             class="m-textarea__validation__message"

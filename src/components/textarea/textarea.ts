@@ -22,8 +22,8 @@ import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width'
 export class MTextarea extends ModulVue {
     @Prop()
     public maxlength: number;
-
-    public maxWidth: string = InputMaxWidth.Medium;
+    @Prop()
+    public plain: boolean;
 
     private internalTextareaError: boolean = false;
     private textareaHeight: string;
@@ -61,10 +61,11 @@ export class MTextarea extends ModulVue {
 
     private adjustHeight(): void {
         let el: HTMLElement = (this.$refs.input as HTMLElement);
-        setTimeout(() => {
-            el.style.height = 'auto';
+        el.style.height = 'auto';
+        if (el.scrollHeight != 0) {
             el.style.height = el.scrollHeight + 'px';
-        });
+        }
+
     }
 }
 

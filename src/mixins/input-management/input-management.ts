@@ -18,9 +18,25 @@ export class InputManagement extends ModulVue {
     public placeholder: string;
     @Prop()
     public readonly: boolean;
+    @Prop()
+    public focus: boolean;
 
     public internalValue: string = '';
     private internalIsFocus: boolean = false;
+
+    protected mounted(): void {
+        this.focusChanged(this.focus);
+    }
+
+    @Watch('focus')
+    private focusChanged(focus: boolean) {
+        this.internalIsFocus = focus && !this.as<InputStateMixin>().isDisabled;
+        if (this.internalIsFocus) {
+            (this.$refs.input as HTMLElement).focus();
+        } else {
+            (this.$refs.input as HTMLElement).blur();
+        }
+    }
 
     private onClick(event: MouseEvent): void {
         this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
@@ -42,9 +58,15 @@ export class InputManagement extends ModulVue {
         this.$emit('blur', event);
     }
 
-    private onKeyup(event): void {
+    private onKeyup(event: Event): void {
         if (!this.as<InputStateMixin>().isDisabled) {
             this.$emit('keyup', event, this.model);
+        }
+    }
+
+    private onKeydown(event: Event): void {
+        if (!this.as<InputStateMixin>().isDisabled) {
+            this.$emit('keydown', event);
         }
     }
 

@@ -49,6 +49,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public textNoMatch: string;
     @Prop()
     public listMinWidth: string;
+    @Prop()
+    public focus: boolean;
 
     private internalFilter: string = '';
     private internalFilterRegExp: RegExp = / /;
@@ -81,6 +83,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     protected mounted(): void {
+        this.focusChanged(this.focus);
         this.$nextTick(() => {
             this.buildItemsMap();
 
@@ -124,6 +127,16 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Watch('value')
     private setInternalValue(value: any): void {
         this.setModel(value, false);
+    }
+
+    @Watch('focus')
+    private focusChanged(focus: boolean) {
+        if (focus && !this.as<InputStateMixin>().isDisabled) {
+            (this.$refs.input as HTMLElement).focus();
+        } else {
+            (this.$refs.input as HTMLElement).blur();
+            this.internalOpen = false;
+        }
     }
 
     public get model(): any {
