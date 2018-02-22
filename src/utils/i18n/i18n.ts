@@ -248,7 +248,6 @@ const MessagePlugin: PluginObject<any> = {
         console.debug('$i18n', 'plugin.install');
 
         let msg: Messages = new Messages(options);
-        (v as any).$i18n = msg;
         (v.prototype as any).$i18n = msg;
     }
 };

@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios';
+
 export interface RequestConfig {
     method?: string;
     rawUrl?: string;
@@ -10,5 +12,5 @@ export interface RequestConfig {
 }
 
 export interface RestAdapter {
-    execute<T>(config: RequestConfig): Promise<T>;
+    execute<T>(config: RequestConfig): Promise<AxiosResponse<T>>;
 }

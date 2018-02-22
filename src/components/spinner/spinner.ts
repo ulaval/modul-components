@@ -8,6 +8,7 @@ import { SPINNER_NAME } from '../component-names';
 import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
 import { BackdropMode } from '../../mixins/portal/portal';
+import I18nPlugin from '../i18n/i18n';
 
 export enum MSpinnerStyle {
     Dark = 'dark',
@@ -142,6 +143,7 @@ const SpinnerPlugin: PluginObject<any> = {
         console.debug(SPINNER_NAME, 'plugin.install');
         v.use(PortalPlugin);
         v.use(ModulPlugin);
+        v.use(I18nPlugin);
         v.component(SPINNER_NAME, MSpinner);
     }
 };
