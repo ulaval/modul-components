@@ -1,11 +1,12 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import WithRender from './dialog.html?style=./dialog.scss';
 import { Prop } from 'vue-property-decorator';
-import { DIALOG_NAME } from '../component-names';
-import { Portal, PortalMixin, PortalMixinImpl, BackdropMode, PortalTransitionDuration } from '../../mixins/portal/portal';
+
 import { MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDuration } from '../../mixins/portal/portal';
+import { ModulVue } from '../../utils/vue/vue';
+import { DIALOG_NAME } from '../component-names';
+import WithRender from './dialog.html?style=./dialog.scss';
 
 export enum MDialogSize {
     FullScreen = 'full-screen',
@@ -44,6 +45,10 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
+
+    public closeDialog(): void {
+        this.as<PortalMixin>().tryClose();
+    }
 
     public handlesFocus(): boolean {
         return true;
@@ -101,10 +106,6 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         if (this.closeOnBackdrop) {
             this.as<PortalMixin>().tryClose();
         }
-    }
-
-    private closeDialog(): void {
-        this.as<PortalMixin>().tryClose();
     }
 }
 

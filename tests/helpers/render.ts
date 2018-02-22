@@ -13,3 +13,13 @@ export const PortalStub = {
         return children[0];
     }
 };
+
+export const WrapChildrenStub = (rootTag: string) => {
+    return {
+        render(h) {
+            let children = this.$options._renderChildren;
+            children = children.filter(c => c.tag);
+            return h(rootTag, {}, children);
+        }
+    };
+};

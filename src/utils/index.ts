@@ -9,6 +9,7 @@ import SpritesPlugin from './svg/sprites';
 import * as TouchPlugin from 'vue-touch';
 import ConfirmPlugin from './modal/confirm';
 import AlertPlugin from './modal/alert';
+import FilePlugin from '../utils/file/file';
 import { PortalPluginInstall } from 'portal-vue';
 
 export interface UtilsPluginOptions {
@@ -18,7 +19,9 @@ export interface UtilsPluginOptions {
 const UtilsPlugin: PluginObject<any> = {
     install(v, options) {
         if (!options) {
-            throw new Error('UtilsPlugin.install -> you must provide a UtilsPluginOptions option object.');
+            throw new Error(
+                'UtilsPlugin.install -> you must provide a UtilsPluginOptions option object.'
+            );
         }
         let o: UtilsPluginOptions = options as UtilsPluginOptions;
 
@@ -32,6 +35,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(TouchPlugin, { name: 'v-touch' });
         Vue.use(ConfirmPlugin);
         Vue.use(AlertPlugin);
+        Vue.use(FilePlugin);
     }
 };
 
