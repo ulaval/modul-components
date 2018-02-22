@@ -21,16 +21,13 @@
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
-        <div class="m-popup__body" :class="{ 'm--no-padding': !padding }" :style="{ width: width }">
-            <div class="m-popup__header" v-if="hasHeaderSlot">
-                <slot name="header"></slot>
-            </div>
-            <div class="m-popup__content">
-                <slot></slot>
-            </div>
-            <div class="m-popup__footer" v-if="hasFooterSlot">
-                <slot name="footer"></slot>
-            </div>
+        <div class="m-popup__body"
+             :class="{ 'm--has-padding': padding,
+                       'm--has--background': background }"
+             :style="{ width: width }">
+            <slot name="header"></slot>
+            <slot></slot>
+            <slot name="footer"></slot>
         </div>
     </m-popper>
     <m-sidebar :open.sync="propOpen"

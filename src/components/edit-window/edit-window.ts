@@ -26,7 +26,7 @@ export class MEditWindow extends ModulVue {
     public paddingFooter: boolean;
 
     protected mounted(): void {
-        this.as<Portal>().transitionDuration = PortalTransitionDuration.XSlow;
+        this.as<Portal>().transitionDuration = PortalTransitionDuration.Regular + PortalTransitionDuration.XSlow;
     }
 
     public get popupBody(): any {

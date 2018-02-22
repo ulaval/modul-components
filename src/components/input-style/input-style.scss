@@ -5,7 +5,7 @@ $m-input-style--color-error: $m-color--error !default;
 $m-input-style--color-valid: $m-color--success !default;
 $m-input-style--color-disabled: $m-color--disabled !default;
 $m-input-style--color-waiting: $m-color--active !default;
-$m-input-style--padding: 6px !default;
+$m-input-style--padding: 4px !default;
 
 .m-input-style {
     position: relative;
@@ -206,7 +206,7 @@ $m-input-style--padding: 6px !default;
         display: inline-flex;
         align-items: center;
         width: 100%;
-        margin-bottom: 4px; // Magic number
+        margin-bottom: 2px; // Magic number
         font-size: $m-font-size;
         font-weight: $m-font-weight;
         color: $m-color--grey-darker;
@@ -224,7 +224,7 @@ $m-input-style--padding: 6px !default;
 
     &__body {
         position: relative;
-        z-index: 0;
+        z-index: 2;
         display: flex;
         align-items: center;
         flex: 1 1 auto;
