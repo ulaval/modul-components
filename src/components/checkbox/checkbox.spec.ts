@@ -90,10 +90,10 @@ describe('MCheckbox', () => {
             localVue: localVue,
             propsData: valMsgProps,
             computed: {
-                hasError() {
+                hasError(): void {
                     return false;
                 },
-                isDisabled() {
+                isDisabled(): void {
                     return false;
                 }
             }

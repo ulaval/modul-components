@@ -373,7 +373,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 }
 
 const DropdownPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         Vue.use(DropdownItemPlugin);
         Vue.use(InputStylePlugin);
         Vue.use(ButtonPlugin);

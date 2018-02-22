@@ -72,7 +72,7 @@ export class MEditWindow extends ModulVue {
 }
 
 const FullpagePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(EDIT_WINDOW_NAME, MEditWindow);
     }
 };

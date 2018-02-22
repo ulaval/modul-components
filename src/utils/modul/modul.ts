@@ -187,7 +187,7 @@ export class Modul {
         return this.windowZIndex;
     }
 
-    private removeBackdrop(slow: boolean) {
+    private removeBackdrop(slow: boolean): void {
         let lastBackdropIndex: number | undefined = undefined;
         let lastScrollId: string | undefined = undefined;
         for (let i: number = this.windowStack.length - 1; i >= 0; i--) {
@@ -285,7 +285,7 @@ export class Modul {
 }
 
 const ModulPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         let modul = new Modul();
         (v.prototype as any).$modul = modul;
     }

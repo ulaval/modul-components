@@ -107,7 +107,7 @@ export class MPopup extends ModulVue {
 }
 
 const PopupPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(PopperPlugin);
         v.use(SidebarPlugin);
         v.component(POPUP_NAME, MPopup);

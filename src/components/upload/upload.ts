@@ -67,7 +67,7 @@ export class MUpload extends ModulVue implements MUploadInterface {
     public uploadErrors: IUploadError = {};
     public fileAPISupport: boolean = false;
 
-    public mounted() {
+    public mounted(): void {
         // Check for the various File API support.
         if ((window as any).File && (window as any).FileReader && (window as any).FileList && window.Blob) {
             this.fileAPISupport = true;
@@ -254,7 +254,7 @@ export class MUpload extends ModulVue implements MUploadInterface {
 }
 
 const UploadPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.error(UPLOAD_NAME + ' is deprecated');
         v.component(UPLOAD_NAME, MUpload);
     }

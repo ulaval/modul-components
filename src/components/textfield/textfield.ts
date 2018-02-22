@@ -97,7 +97,7 @@ export class MTextfield extends ModulVue {
 }
 
 const TextfieldPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(ButtonPlugin);

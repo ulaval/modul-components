@@ -13,7 +13,7 @@ const MFileDropDirective: DirectiveOptions = {
         binding: VNodeDirective,
         vnode: VNode,
         oldVnode: VNode
-    ) {
+    ): void {
         const $file: FileService = (vnode.context as ModulVue).$file;
 
         const onDragEnterOver = (e: DragEvent) => {
@@ -52,7 +52,7 @@ const MFileDropDirective: DirectiveOptions = {
         binding: VNodeDirective,
         vnode: VNode,
         oldVnode: VNode
-    ) {
+    ): void {
         el.cleanupMFileDropDirective();
         const $file: FileService = (vnode.context as ModulVue).$file;
         $file.clear();
@@ -60,7 +60,7 @@ const MFileDropDirective: DirectiveOptions = {
 };
 
 const FileDropPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.directive(FILE_DROP_NAME, MFileDropDirective);
     }
 };

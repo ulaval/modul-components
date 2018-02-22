@@ -33,7 +33,7 @@ export class MI18n extends ModulVue {
 }
 
 const I18nPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(I18N_NAME, 'plugin.install');
         v.component(I18N_NAME, MI18n);
     }

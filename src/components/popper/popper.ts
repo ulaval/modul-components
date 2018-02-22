@@ -149,7 +149,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         }
     }
 
-    private destroyPopper() {
+    private destroyPopper(): void {
         if (this.popper !== undefined) {
             this.popper.destroy();
             this.popper = undefined;
@@ -231,7 +231,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
 }
 
 const PopperPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(PortalPlugin);
         v.use(ModulPlugin);
         v.component(POPPER_NAME, MPopper);
