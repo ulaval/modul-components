@@ -42,22 +42,28 @@ export class MLink extends ModulVue {
     })
     public mode: MLinkMode;
 
-    @Prop() public disabled: boolean;
+    @Prop()
+    public disabled: boolean;
 
-    @Prop() public unvisited: boolean;
+    @Prop()
+    public unvisited: boolean;
 
     @Prop({ default: true })
     public underline: boolean;
+
     @Prop({
         validator: value => value == MLinkSkin.light
     })
     public skin: MLinkSkin;
 
-    @Prop() public target: string;
+    @Prop()
+    public target: string;
 
-    @Prop() public icon: boolean;
+    @Prop()
+    public icon: boolean;
 
-    @Prop() public iconName: string;
+    @Prop()
+    public iconName: string;
 
     @Prop({
         default: MLinkIconPosition.Left,
