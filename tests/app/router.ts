@@ -41,7 +41,7 @@ const routerFactory = () => {
     let router: Router = new Router({
         mode: 'history',
         routes: componentRoutes,
-        scrollBehavior(to, from, savedPosition) {
+        scrollBehavior: (to, from, savedPosition) => {
             if (savedPosition) {
                 return savedPosition;
             }

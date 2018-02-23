@@ -12,27 +12,29 @@ export class Rule extends Lint.Rules.AbstractRule {
 }
 
 class MustHaveReturnTypeWalker extends Lint.RuleWalker {
-    public visitMethodDeclaration(node: ts.MethodDeclaration) {
+    public visitMethodDeclaration(node: ts.MethodDeclaration): void {
         if (!node.type) {
             this.reportMissingReturnType(node, node.body);
         }
     }
 
-    public visitFunctionDeclaration(node: ts.FunctionDeclaration) {
+    public visitFunctionDeclaration(node: ts.FunctionDeclaration): void {
         if (!node.type) {
             this.reportMissingReturnType(node, node.body);
         }
     }
 
-    private reportMissingReturnType(node: ts.Node, body: ts.FunctionBody) {
-        const fix = Lint.Replacement.appendText(body.pos, ': void');
-        this.addFailure(
-            this.createFailure(
-                node.getStart(),
-                node.getWidth(),
-                FAILURE_STRING,
-                fix
-            )
-        );
+    private reportMissingReturnType(node: ts.Node, body: ts.FunctionBody | undefined): void {
+        if (body) {
+            const fix = Lint.Replacement.appendText(body.pos, ': void');
+            this.addFailure(
+                this.createFailure(
+                    node.getStart(),
+                    node.getWidth(),
+                    FAILURE_STRING,
+                    fix
+                )
+            );
+        }
     }
 }
