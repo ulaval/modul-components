@@ -29,7 +29,7 @@ export class MTabs extends BaseTabs implements MTabsInterface {
 }
 
 const TabsPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(TABS_NAME, MTabs);
     }
 };

@@ -69,7 +69,7 @@ export class MSteppersItem extends ModulVue {
 }
 
 const SteppersItemPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(IconPlugin);
         v.component(STEPPERS_ITEM_NAME, MSteppersItem);
     }

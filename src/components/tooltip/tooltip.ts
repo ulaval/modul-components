@@ -106,7 +106,7 @@ export class MTooltip extends ModulVue {
 }
 
 const TooltipPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(TOOLTIP_NAME + ' is not ready for production');
         v.use(ButtonPlugin);
         v.use(LinkPlugin);

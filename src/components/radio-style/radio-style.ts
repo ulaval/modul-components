@@ -53,7 +53,7 @@ export class MRadioStyle extends ModulVue {
 }
 
 const RadioStylePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(RADIO_STYLE_NAME, MRadioStyle);
     }
 };

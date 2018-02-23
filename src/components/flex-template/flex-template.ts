@@ -91,12 +91,12 @@ export class MFlexTemplate extends ModulVue {
         }
     }
 
-    private onScroll() {
+    private onScroll(): void {
         this.adjustFixeMenu();
         this.adjustDynamicHeader();
     }
 
-    private onResizeDone(e) {
+    private onResizeDone(e): void {
         this.setHeaderHeight();
         this.adjustFixeMenu();
         this.adjustDynamicHeader();
@@ -116,7 +116,7 @@ export class MFlexTemplate extends ModulVue {
         this.topMenu = ((this.propHeaderFixe || this.propMenuFixe) && !this.isMenuFixeFake) || this.as<ElementQueriesMixin>().isEqMaxS ? spacing + 'px' : '';
     }
 
-    private adjustDynamicHeader() {
+    private adjustDynamicHeader(): void {
         if (this.propDynamicHeader) {
             let position: number = this.$el.getBoundingClientRect().top;
             let maxPosition: number = position + this.headerHeight + 50;
@@ -250,7 +250,7 @@ export class MFlexTemplate extends ModulVue {
 }
 
 const FlexTemplatePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(FLEX_TEMPLATE_NAME + ' is not ready for production');
         v.component(FLEX_TEMPLATE_NAME, MFlexTemplate);
     }

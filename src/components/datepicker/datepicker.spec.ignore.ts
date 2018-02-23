@@ -16,7 +16,7 @@ describe('datepicker', () => {
     it('css classes are present', () => {
         new Vue({
             template: `<m-datepicker></m-datepicker>`,
-            mounted() {
+            mounted(): void {
                 expect(this.$el.classList.contains(DATEPICKER_CSS)).toBeTruthy();
                 expect(this.$el.querySelector('.' + TEXT_FIELD_CSS)).not.toBeNull();
             }
@@ -31,7 +31,7 @@ describe('datepicker', () => {
             data: {
                 value: date
             },
-            mounted() {
+            mounted(): void {
                 let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect(input.value).toEqual(date.format('YYYY/MM/DD'));
             }
@@ -43,7 +43,7 @@ describe('datepicker', () => {
                 value: date,
                 format: 'lll'
             },
-            mounted() {
+            mounted(): void {
                 let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect(input.value).toEqual(date.format('lll'));
             }
@@ -53,7 +53,7 @@ describe('datepicker', () => {
     it('disabled prop', () => {
         new Vue({
             template: `<m-datepicker></m-datepicker>`,
-            mounted() {
+            mounted(): void {
                 let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect(input.disabled).toBeFalsy();
             }
@@ -64,7 +64,7 @@ describe('datepicker', () => {
             data: {
                 disabled: false
             },
-            mounted() {
+            mounted(): void {
                 let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect(input.disabled).toBeFalsy();
 
@@ -87,7 +87,7 @@ describe('datepicker', () => {
             data: {
                 value: ''
             },
-            mounted() {
+            mounted(): void {
                 let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 input.blur();
                 Vue.nextTick(() => {
@@ -128,7 +128,7 @@ describe('datepicker', () => {
                 value: date,
                 min: date.add(1, 'day')
             },
-            mounted() {
+            mounted(): void {
                 let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect((this as any).value.isSame((this as any).min, 'day')).toBeTruthy();
             }
@@ -144,7 +144,7 @@ describe('datepicker', () => {
                 value: date,
                 max: date.subtract(1, 'day')
             },
-            mounted() {
+            mounted(): void {
                 let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect((this as any).value.isSame((this as any).max, 'day')).toBeTruthy();
             }

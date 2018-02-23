@@ -149,7 +149,7 @@ export class MDatefields extends ModulVue {
 }
 
 const DatefieldsPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(DATEFIELDS_NAME + ' is not ready for production');
         Vue.use(DropdownPlugin);
         Vue.use(DropdownItemPlugin);

@@ -28,7 +28,7 @@ describe('accordion-group', () => {
                 <m-accordion></m-accordion>
                 <m-accordion></m-accordion>
             </m-accordion-group>`,
-            mounted() {
+            mounted(): void {
                 expect(this.$el.querySelector('.' + SKIN_LIGHT_CSS)).toBeNull();
                 expect(this.$el.querySelector('.' + SKIN_REGULAR_CSS)).not.toBeNull();
                 expect(this.$el.querySelector('.' + SKIN_PLAIN_CSS)).toBeNull();
@@ -45,7 +45,7 @@ describe('accordion-group', () => {
             data: {
                 skin: MAccordionSkin.Light
             },
-            mounted() {
+            mounted(): void {
                 expect(this.$el.querySelector('.' + SKIN_LIGHT_CSS)).not.toBeNull();
                 expect(this.$el.querySelector('.' + SKIN_REGULAR_CSS)).toBeNull();
                 expect(this.$el.querySelector('.' + SKIN_PLAIN_CSS)).toBeNull();
@@ -75,7 +75,7 @@ describe('accordion-group', () => {
                 <m-accordion></m-accordion>
                 <m-accordion></m-accordion>
             </m-accordion-group>`,
-            mounted() {
+            mounted(): void {
                 Vue.nextTick(() => {
                     expect(this.$el.querySelector('.m-link')).not.toBeNull();
                 });
@@ -92,7 +92,7 @@ describe('accordion-group', () => {
             data: {
                 concurrent: true
             },
-            mounted() {
+            mounted(): void {
                 Vue.nextTick(() => {
                     expect(this.$el.querySelector('.m-link')).toBeNull();
 

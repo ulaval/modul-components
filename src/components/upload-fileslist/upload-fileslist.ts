@@ -23,7 +23,7 @@ export class MUploadFileslist extends Vue {
 }
 
 const UploadFileslistPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.error(UPLOAD_FILESLIST_NAME + ' is deprecated');
         v.component(UPLOAD_FILESLIST_NAME, MUploadFileslist);
     }

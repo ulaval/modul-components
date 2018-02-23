@@ -198,7 +198,7 @@ export class MTimepicker extends ModulVue {
         if (event.srcElement) this.positionScroll(event.srcElement);
     }
 
-    private positionScroll(el: Element) {
+    private positionScroll(el: Element): void {
         el.scrollTop = Math.round(el.scrollTop / 44) * 44;
     }
 
@@ -227,7 +227,7 @@ export class MTimepicker extends ModulVue {
 }
 
 const TimepickerPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(InputStylePlugin);
         v.use(ButtonPlugin);
         v.use(PopupPlugin);

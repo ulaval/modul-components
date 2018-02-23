@@ -94,7 +94,7 @@ export class MAccordionGroup extends BaseAccordionGroup {
 }
 
 const AccordionGroupPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(MAccordionPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);

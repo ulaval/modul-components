@@ -3,7 +3,7 @@ import { PluginObject } from 'vue';
 import { SpritesService } from './sprites';
 
 const DefaultSpritesPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug('sprites-default.svg', 'plugin.install');
         const svg: SpritesService = (v.prototype as any).$svg;
         if (svg) {
