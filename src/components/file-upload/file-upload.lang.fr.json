@@ -17,6 +17,8 @@
         "size-b": "o",
         "size-kb": "ko",
         "size-mb": "Mo",
-        "size-gb": "Go"
+        "size-gb": "Go",
+        "maxSizeMsg": "Certains fichiers sont refusés, car leur taille dépasse la limite permise",
+        "maxNumberMsg": "Le nombre maximal de fichiers pouvant être ajoutés simultanément est atteint"
     }
 }

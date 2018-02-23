@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import FileDropPlugin from '../../directives/file-drop/file-drop';
-import FilePlugin, { MFile, MFileStatus } from '../../utils/file/file';
+import FilePlugin, { MFile, MFileStatus, MFileRejectionCause } from '../../utils/file/file';
 import { Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -16,7 +16,6 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
-import ModalPlugin from '../modal/modal';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
 
@@ -61,7 +60,6 @@ export class MFileUpload extends ModulVue {
     };
 
     private title: string = this.$i18n.translate('m-file-upload:header-title');
-    private isModalOpen: boolean = false;
 
     private created(): void {
         this.$file.setValidationOptions({
@@ -76,7 +74,10 @@ export class MFileUpload extends ModulVue {
         for (const f of this.readyFiles) {
             this.$set(f, 'completeHinted', false);
         }
-        this.$emit('files-ready', this.readyFiles);
+
+        if (this.readyFiles.length !== 0) {
+            this.$emit('files-ready', this.readyFiles);
+        }
     }
 
     @Watch('freshlyCompletedFiles')
@@ -90,15 +91,7 @@ export class MFileUpload extends ModulVue {
         }
     }
 
-    @Watch('rejectedFiles')
-    private onRejectedFilesChanged(): void {
-        if (this.rejectedFiles.length > 0) {
-            this.isModalOpen = true;
-        }
-    }
-
-    private onModalClose(): void {
-        this.isModalOpen = false;
+    private onMessageClose(): void {
         for (const f of this.rejectedFiles) {
             this.$file.remove(f.uid);
         }
@@ -181,6 +174,18 @@ export class MFileUpload extends ModulVue {
         return this.allFiles.filter(f => f.status === MFileStatus.REJECTED);
     }
 
+    private get extensionsRejectedFiles(): MFileExt[] {
+        return this.allFiles.filter(f => f.status === MFileStatus.REJECTED && f.rejection === MFileRejectionCause.FILE_TYPE);
+    }
+
+    private get sizeRejectedFiles(): MFileExt[] {
+        return this.allFiles.filter(f => f.status === MFileStatus.REJECTED && f.rejection === MFileRejectionCause.FILE_SIZE);
+    }
+
+    private get maxFilesRejectedFiles(): MFileExt[] {
+        return this.allFiles.filter(f => f.status === MFileStatus.REJECTED && f.rejection === MFileRejectionCause.MAX_FILES);
+    }
+
     private get allFiles(): MFileExt[] {
         return this.$file.files() as MFileExt[];
     }
@@ -192,6 +197,22 @@ export class MFileUpload extends ModulVue {
     private get hasCompletedFiles(): boolean {
         return this.completedFiles.length === 0;
     }
+
+    private get hasRejectedFiles(): boolean {
+        return this.rejectedFiles.length !== 0;
+    }
+
+    private get hasExtensionsRejectedFiles(): boolean {
+        return this.extensionsRejectedFiles.length !== 0;
+    }
+
+    private get hasSizeRejectedFiles(): boolean {
+        return this.sizeRejectedFiles.length !== 0;
+    }
+
+    private get hasMaxFilesRejectedFiles(): boolean {
+        return this.maxFilesRejectedFiles.length !== 0;
+    }
 }
 
 const FileUploadPlugin: PluginObject<any> = {
@@ -201,7 +222,6 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);
         v.use(DialogPlugin);
-        v.use(ModalPlugin);
         v.use(ProgressPlugin);
         v.use(IconPlugin);
         v.use(I18nPlugin);

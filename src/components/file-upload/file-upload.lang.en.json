@@ -17,6 +17,8 @@
         "size-b": "b",
         "size-kb": "Kb",
         "size-mb": "Mb",
-        "size-gb": "Gb"
+        "size-gb": "Gb",
+        "maxSizeMsg": "Some files are rejected because their size exceeds the allowable limit",
+        "maxNumberMsg": "The maximum number of files that can be added simultaneously is reached"
     }
 }
