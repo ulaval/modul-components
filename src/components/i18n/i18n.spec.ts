@@ -37,6 +37,21 @@ describe('MI18n', () => {
         return expect(renderComponent(i18n.vm)).resolves.toMatchSnapshot();
     });
 
+    it('should render correctly in plural form', async () => {
+        const i18n = mount(MI18n, {
+            localVue: localVue,
+            propsData: {
+                k: 'm-i18n-spec:plural-test',
+                nb: 1
+            }
+        });
+
+        expect(await renderComponent(i18n.vm)).toMatchSnapshot('single');
+
+        i18n.setProps({ nb: 2 });
+        expect(await renderComponent(i18n.vm)).toMatchSnapshot('plural');
+    });
+
     it('should render correctly with html encoding', () => {
         const i18n = mount(MI18n, {
             localVue: localVue,

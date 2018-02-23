@@ -1,9 +1,10 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './i18n.html';
-import { I18N_NAME } from '../component-names';
+
 import { ModulVue } from '../../utils/vue/vue';
+import { I18N_NAME } from '../component-names';
+import WithRender from './i18n.html';
 
 @WithRender
 @Component
@@ -12,6 +13,8 @@ export class MI18n extends ModulVue {
     public k: string;
     @Prop()
     public params: string[];
+    @Prop()
+    public nb?: number;
     @Prop({ default: true })
     public htmlEncode: boolean;
 
@@ -25,7 +28,13 @@ export class MI18n extends ModulVue {
         let result = '';
         if (this.k) {
             let p: string[] = this.params === undefined ? [] : this.params;
-            result = this.$i18n.translate(this.k, p, undefined, undefined, this.htmlEncode);
+            result = this.$i18n.translate(
+                this.k,
+                p,
+                this.nb,
+                undefined,
+                this.htmlEncode
+            );
         }
 
         return result;

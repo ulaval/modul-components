@@ -2,6 +2,10 @@
 
 exports[`MI18n should render correctly 1`] = `<span class="m-i18n">test a</span>`;
 
+exports[`MI18n should render correctly in plural form: plural 1`] = `<span class="m-i18n">I have many yorkies!</span>`;
+
+exports[`MI18n should render correctly in plural form: single 1`] = `<span class="m-i18n">I have one yorkie!</span>`;
+
 exports[`MI18n should render correctly with html encoding 1`] = `<span class="m-i18n">&lt;i&gt;test&lt;/i&gt;</span>`;
 
 exports[`MI18n should render correctly with params 1`] = `<span class="m-i18n">test a, test b</span>`;
