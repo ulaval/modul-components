@@ -24,6 +24,8 @@ export class MEditWindow extends ModulVue {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
+    @Prop({ default: false })
+    public disableSaveButton: boolean;
 
     protected mounted(): void {
         this.as<Portal>().transitionDuration = PortalTransitionDuration.Regular + PortalTransitionDuration.XSlow;
@@ -51,6 +53,10 @@ export class MEditWindow extends ModulVue {
 
     private get hasHeaderRightSlot(): boolean {
         return !!this.$slots['header-right'];
+    }
+
+    private get isSaveButtonDisabled(): boolean {
+        return this.disableSaveButton;
     }
 
     private get hasFooterSlot(): boolean {
