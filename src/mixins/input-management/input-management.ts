@@ -11,17 +11,11 @@ export class InputManagement extends ModulVue {
     @Model('input')
     public value: string;
     @Prop()
-    public label: string;
-    @Prop()
-    public iconName: string;
-    @Prop()
     public placeholder: string;
     @Prop()
     public readonly: boolean;
     @Prop()
     public focus: boolean;
-    @Prop()
-    public asterisk: boolean;
 
     public internalValue: string = '';
     private internalIsFocus: boolean = false;
@@ -35,17 +29,21 @@ export class InputManagement extends ModulVue {
     @Watch('focus')
     private focusChanged(focus: boolean) {
         this.internalIsFocus = focus && !this.as<InputStateMixin>().isDisabled;
-        if (this.internalIsFocus) {
-            (this.$refs.input as HTMLElement).focus();
-        } else {
-            (this.$refs.input as HTMLElement).blur();
+        let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+        if (inputEl) {
+            if (this.internalIsFocus) {
+                inputEl.focus();
+            } else {
+                inputEl.blur();
+            }
         }
     }
 
     private onClick(event: MouseEvent): void {
         this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
-        if (this.internalIsFocus) {
-            (this.$refs.input as HTMLElement).focus();
+        let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+        if (this.internalIsFocus && inputEl) {
+            inputEl.focus();
         }
         this.$emit('click');
     }
@@ -106,13 +104,5 @@ export class InputManagement extends ModulVue {
 
     private get isFocus(): boolean {
         return this.internalIsFocus;
-    }
-
-    private get hasLabel(): boolean {
-        return !!this.label;
-    }
-
-    private get hasIcon(): boolean {
-        return !!this.iconName && !this.as<InputStateMixin>().isDisabled;
     }
 }

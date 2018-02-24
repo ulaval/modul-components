@@ -1,10 +1,11 @@
 <div class="m-textarea"
-        :class="{ 'm--is-disabled' : isDisabled,
-                  'm--is-waiting' : isWaiting,
-                  'm--has-error' : textareaError,
-                  'm--is-valid' : textareaValid,
-                  'm--has-icon' : hasIcon,
-                  'm--has-label': hasLabel }"
+     :class="{ 'm--is-disabled' : isDisabled,
+               'm--is-waiting' : isWaiting,
+               'm--has-error' : textareaError,
+               'm--is-valid' : textareaValid,
+               'm--is-focus' : isFocus,
+               'm--has-icon' : hasIcon,
+               'm--has-label': hasLabel }"
      @click="onClick"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
@@ -15,36 +16,22 @@
                    :focus="isFocus"
                    :empty="isEmpty"
                    :icon-name="iconName"
-                   :asterisk="asterisk"
-                   v-if="!plain">
-        <textarea class="m-textarea__input"
+                   :asterisk="asterisk">
+        <m-textarea-resize class="m-textarea__input"
                   :disabled="!active"
                   :placeholder="placeholder"
                   :readonly="readonly"
                   rows="1"
+                  :focus="focus"
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
                   @keyup="onKeyup"
                   @keydown="onKeydown"
                   @paste="onPaste"
-                  ref="input"
-                  v-model="model"></textarea>
+                  ref="textarea"
+                  v-model="model"></m-textarea-resize>
     </m-input-style>
-    <template  v-if="plain">
-        <label class="m-textarea__label" v-if="hasLabel">{{ label }}</label>
-        <textarea class="m-textarea__input"
-                :disabled="!active"
-                :placeholder="placeholder"
-                :readonly="readonly"
-                rows="1"
-                @focus="onFocus"
-                @blur="onBlur"
-                @change="onChange"
-                @keyup="onKeyup"
-                @keydown="onKeydown"
-                ref="input"
-                v-model="model"></textarea>
     </template>
     <div class="m-textarea__validation">
         <m-validation-message
