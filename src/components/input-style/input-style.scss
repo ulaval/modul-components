@@ -129,8 +129,14 @@ $m-input-style--padding: 6px !default;
         .m-input-style__body,
         .m-icon-button.m-icon-button,
         .m-icon.m-icon,
-        input {
+        input,
+        textarea {
             color: $m-input-style--color-disabled;
+        }
+
+        input,
+        textarea {
+            user-select: none;
         }
     }
 
@@ -248,7 +254,6 @@ $m-input-style--padding: 6px !default;
             font-size: $m-font-size;
             font-weight: $m-font-weight--bold;
             text-align: left;
-            color: $m-color--text;
             border: none;
             background: none;
         }
