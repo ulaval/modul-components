@@ -74,8 +74,12 @@ export class InputManagement extends ModulVue {
         }
     }
 
-    private onChange(event): void {
+    private onChange(event: Event): void {
         this.$emit('change', this.model);
+    }
+
+    private onPaste(event: Event): void {
+        this.$emit('paste', event);
     }
 
     @Watch('value')
