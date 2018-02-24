@@ -27,7 +27,7 @@ export class MDropdownGroup extends BaseDropdownGroup {
 }
 
 const DropdownGroupPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(DROPDOWN_GROUP_NAME + ' is not ready for production');
         v.component(DROPDOWN_GROUP_NAME, MDropdownGroup);
     }

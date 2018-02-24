@@ -35,12 +35,8 @@ export class MPopup extends ModulVue {
     public shadow: boolean;
     @Prop({ default: true })
     public padding: boolean;
-    @Prop({ default: false })
-    public paddingHeader: boolean;
-    @Prop({ default: false })
-    public paddingBody: boolean;
-    @Prop({ default: false })
-    public paddingFooter: boolean;
+    @Prop({ default: true })
+    public background: boolean;
     @Prop()
     public beforeEnter: any;
     @Prop()
@@ -111,7 +107,7 @@ export class MPopup extends ModulVue {
 }
 
 const PopupPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(PopperPlugin);
         v.use(SidebarPlugin);
         v.component(POPUP_NAME, MPopup);

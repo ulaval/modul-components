@@ -15,6 +15,8 @@ import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DropdownGroupPlugin from './dropdown-group/dropdown-group';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import EditWindow from './edit-window/edit-window';
+import FileSelectPlugin from './file-select/file-select';
+import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
@@ -32,6 +34,7 @@ import PanelPlugin from './panel/panel';
 import PhoneNumberPlugin from './phone-number/phone-number';
 import PopperPlugin from './popper/popper';
 import PopupPlugin from './popup/popup';
+import ProgressPluggin from './progress/progress';
 import RadioPlugin from './radio/radio';
 import RadioGroupPlugin from './radio-group/radio-group';
 import RadioStylePlugin from './radio-style/radio-style';
@@ -59,7 +62,7 @@ import UploadFileslistPlugin from './upload-fileslist/upload-fileslist';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 const ComponentsPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
@@ -75,6 +78,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(EditWindow);
+        Vue.use(FileSelectPlugin);
+        Vue.use(FileUploadPlugin);
         Vue.use(FlexTemplatePlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);
@@ -93,6 +98,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(PhoneNumberPlugin);
         Vue.use(PopperPlugin);
         Vue.use(PopupPlugin);
+        Vue.use(ProgressPluggin);
         Vue.use(RadioPlugin);
         Vue.use(RadioGroupPlugin);
         Vue.use(RadioStylePlugin);

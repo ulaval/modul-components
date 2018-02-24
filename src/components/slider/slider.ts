@@ -37,7 +37,7 @@ export class MSlider extends ModulVue {
     }
 
     @Watch('value')
-    private onValueChange(value: any) {
+    private onValueChange(value: any): void {
         this.model = value;
     }
 
@@ -93,7 +93,7 @@ export class MSlider extends ModulVue {
 }
 
 const SliderPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(SLIDER_NAME + ' is not ready for production');
         v.component(SLIDER_NAME, MSlider);
     }

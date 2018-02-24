@@ -68,7 +68,7 @@ export class MCheckbox extends ModulVue {
 }
 
 const CheckboxPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(CHECKBOX_NAME, 'plugin.install');
         v.use(ValidationMessagePlugin);
         v.component(CHECKBOX_NAME, MCheckbox);

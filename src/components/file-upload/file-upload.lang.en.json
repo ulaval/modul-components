@@ -1,0 +1,22 @@
+{
+    "m-file-upload": {
+        "header-title": "Upload files",
+        "title": "Drag and drop files",
+        "choice": "or",
+        "format": "Accepted formats",
+        "import": "Uploading",
+        "file": "file",
+        "files": "files",
+        "add": "Add",
+        "cancel": "Cancel",
+        "rejectFileMsg": "The following file can not be added.",
+        "rejectFilesMsg": "The following files can not be added.",
+        "extensionFileMsg": "The file extension is not accepted.",
+        "extensionFilesMsg": "The extension of the files is not accepted.",
+        "errorMsg": "An error occurred during the upload.",
+        "size-b": "b",
+        "size-kb": "Kb",
+        "size-mb": "Mb",
+        "size-gb": "Gb"
+    }
+}

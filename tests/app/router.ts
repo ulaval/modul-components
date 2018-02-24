@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
+
 import Meta from '../../src/meta/meta';
 import { Attributes } from './attributes/attributes';
-import { Navigation } from './navigation/navigation';
 import { MediaQueriesTest } from './media-queries/media-queries';
+import { Navigation } from './navigation/navigation';
 import { Viewer } from './viewer';
 
 Vue.use(Router);
@@ -11,19 +12,23 @@ Vue.use(Router);
 type RouterFactoryFn = () => Router;
 
 const routerFactory = () => {
-    const componentRoutes: RouteConfig[] = [{
-        path: '/',
-        component: Navigation
-    }, {
-        path: '/attributes',
-        component: Attributes,
-        beforeEnter: (to, from, next) => {
-            next();
+    const componentRoutes: RouteConfig[] = [
+        {
+            path: '/',
+            component: Navigation
+        },
+        {
+            path: '/attributes',
+            component: Attributes,
+            beforeEnter: (to, from, next) => {
+                next();
+            }
+        },
+        {
+            path: '/media-queries',
+            component: MediaQueriesTest
         }
-    }, {
-        path: '/media-queries',
-        component: MediaQueriesTest
-    }];
+    ];
 
     Meta.getTags().forEach(tag => {
         componentRoutes.push({

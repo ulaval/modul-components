@@ -12,7 +12,7 @@ export interface TransitionAccordionMixin {
 export class TransitionAccordion extends Vue implements TransitionAccordionMixin {
     public accordionAnim: boolean;
 
-    private setTransitionStart(el: HTMLElement) {
+    private setTransitionStart(el: HTMLElement): void {
         el.style.webkitTransition = ACCORDION_STYLE_TRANSITION;
         el.style.transition = ACCORDION_STYLE_TRANSITION;
         el.style.height = 'auto';

@@ -57,8 +57,7 @@ export interface MessagesPluginOptions {
 export class Messages {
     private messages: LanguageBundlesMap = {};
 
-    constructor(private options: MessagesPluginOptions | undefined) {
-    }
+    constructor(private options: MessagesPluginOptions | undefined) {}
 
     /**
      * Set the application language globally
@@ -95,7 +94,13 @@ export class Messages {
      * key.modifier
      * key
      */
-    public translate(key: string, params: any[] = [], nb?: number, modifier?: string, htmlEncodeParams: boolean = true): string {
+    public translate(
+        key: string,
+        params: any[] = [],
+        nb?: number,
+        modifier?: string,
+        htmlEncodeParams: boolean = true
+    ): string {
         if (!key) {
             throw new Error('The key is empty.');
         }
@@ -113,7 +118,13 @@ export class Messages {
         return val;
     }
 
-    private resolveKey(lang: string, key: string, nb?: number, modifier?: string, encodeParams?: boolean): string {
+    private resolveKey(
+        lang: string,
+        key: string,
+        nb?: number,
+        modifier?: string,
+        encodeParams?: boolean
+    ): string {
         let val: string | undefined = undefined;
 
         if (nb && modifier) {
@@ -224,7 +235,9 @@ function format(val: string, params: any[]): string {
         let index = parseInt(match.substring(1, match.length - 1), 10);
 
         if (index >= params.length) {
-            console.warn(`The parameter ${index} doesn't exist while translating: '${val}'`);
+            console.warn(
+                `The parameter ${index} doesn't exist while translating: '${val}'`
+            );
         }
 
         return params[index];
@@ -235,8 +248,9 @@ function format(val: string, params: any[]): string {
  * Encodes a value so that it can be inserted in an html string.
  * @param val The value to encode
  */
-function htmlEncode(val: string) {
-    return val.replace(/&/g, '&amp;')
+function htmlEncode(val: string): string {
+    return val
+        .replace(/&/g, '&amp;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;')
         .replace(/</g, '&lt;')
@@ -244,7 +258,7 @@ function htmlEncode(val: string) {
 }
 
 const MessagePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug('$i18n', 'plugin.install');
 
         let msg: Messages = new Messages(options);

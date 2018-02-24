@@ -3,7 +3,7 @@ import { PluginObject } from 'vue';
 import { BundleMessagesMap, FRENCH, Messages } from '../utils/i18n/i18n';
 
 const FrenchPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug('FrenchPlugin', 'plugin.install');
         const i18n: Messages = (v.prototype as any).$i18n;
         if (i18n) {
@@ -18,6 +18,8 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/dropdown-item/dropdown-item.lang.fr.json'),
                 require('../components/dropdown-group/dropdown-group.lang.fr.json'),
                 require('../components/edit-window/edit-window.lang.fr.json'),
+                require('../components/file-select/file-select.lang.fr.json'),
+                require('../components/file-upload/file-upload.lang.fr.json'),
                 require('../components/input-style/input-style.lang.fr.json'),
                 require('../components/link/link.lang.fr.json'),
                 require('../components/limit-text/limit-text.lang.fr.json'),

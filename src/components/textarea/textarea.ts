@@ -67,7 +67,7 @@ export class MTextarea extends ModulVue {
 }
 
 const TextareaPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(TEXTAREA_NAME + ' is not ready for production');
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);

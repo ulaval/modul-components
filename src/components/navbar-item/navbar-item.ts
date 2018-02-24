@@ -31,7 +31,7 @@ export class MNavbarItem extends ModulVue {
     public isLast: boolean = false;
     private internalSelected: boolean = false;
 
-    protected mounted() {
+    protected mounted(): void {
         let rootNode: BaseNavbar | undefined = this.getParent<BaseNavbar>(p => p instanceof BaseNavbar);
 
         if (rootNode) {
@@ -67,7 +67,7 @@ export class MNavbarItem extends ModulVue {
 }
 
 const NavbarItemPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(NAVBAR_ITEM_NAME + ' is not ready for production');
         v.component(NAVBAR_ITEM_NAME, MNavbarItem);
     }

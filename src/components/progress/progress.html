@@ -1,0 +1,28 @@
+<transition name="m--is" appear>
+    <div class="m-progress" :style="styleObject"
+         :class="{'m--is-circle': circle,
+         'm--is-indeterminate': indeterminate,
+         'm--is-determinate ': !indeterminate,
+         'm--is-completed': state=='completed',
+         'm--is-in-progress': state=='in-progress',
+         'm--is-error': state=='error', }">
+         <div class="m-progress__wrap">
+             <div v-if="!circle" class="m-progress__bar" :style="{ width: stringValue }"></div>
+            <template v-else>
+                <svg
+                    class="m-progress__draw"
+                    preserveAspectRatio="xMidYMid meet"
+                    focusable="false"
+                    :viewBox="svgViewbox"
+                    :style="svgStyles">
+                    <circle v-if="!indeterminate" class="m-progress__background" cx="50%" cy="50%" :r="circleRadius" :style="backgroundCircleStyles"></circle>
+                    <circle class="m-progress__circle" cx="50%" cy="50%" :r="circleRadius" :style="circleStyles"></circle>
+                </svg>
+            </template>
+         </div>
+        <div class="m-progress__slot" v-if="circle">
+            <slot></slot>
+        </div>
+    </div>
+</transition>
+

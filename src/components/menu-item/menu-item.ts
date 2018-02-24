@@ -28,7 +28,7 @@ export class MMenuItem extends ModulVue {
     public root: MMenuInterface; // Menu component
     private hasRoot: boolean = false;
 
-    protected mounted() {
+    protected mounted(): void {
         let rootNode: BaseMenu | undefined = this.getParent<BaseMenu>(p => p instanceof BaseMenu);
 
         if (rootNode) {
@@ -68,7 +68,7 @@ export class MMenuItem extends ModulVue {
 }
 
 const MenuPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(MENU_ITEM_NAME, MMenuItem);
     }
 };

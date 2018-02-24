@@ -7,7 +7,7 @@ describe('Media Queries plugin', () => {
         Vue.use(MediaQueriesPlugin);
 
         Vue.use({
-            install(v, options) {
+            install(v, options): void {
                 expect((v as any).$mq).toBeDefined();
             }
         });

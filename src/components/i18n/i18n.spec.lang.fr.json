@@ -3,6 +3,8 @@
         "a": "test a",
         "b": "test b",
         "with-params": "test {0}, test {1}",
-        "html-encode": "{0}test{1}"
+        "html-encode": "{0}test{1}",
+        "plural-test": "I have one yorkie!",
+        "plural-test.p": "I have many yorkies!"
     }
 }

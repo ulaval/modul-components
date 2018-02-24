@@ -26,7 +26,7 @@ export class MUploadInput extends Vue {
 }
 
 const UploadInputPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.error(UPLOAD_INPUT_NAME + ' is deprecated');
         v.component(UPLOAD_INPUT_NAME, MUploadInput);
     }

@@ -131,7 +131,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
 }
 
 const SidebarPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(SIDEBAR_NAME, MSidebar);
     }
 };

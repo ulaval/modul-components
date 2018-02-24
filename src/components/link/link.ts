@@ -1,11 +1,12 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './link.html?style=./link.scss';
+
+import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
-import IconPlugin from '../icon/icon';
 import I18nPlugin from '../i18n/i18n';
+import IconPlugin from '../icon/icon';
+import WithRender from './link.html?style=./link.scss';
 
 export enum MLinkMode {
     RouterLink = 'router-link',
@@ -49,9 +50,9 @@ export class MLink extends ModulVue {
 
     @Prop({ default: true })
     public underline: boolean;
+
     @Prop({
-        validator: value =>
-            value == MLinkSkin.light
+        validator: value => value == MLinkSkin.light
     })
     public skin: MLinkSkin;
 
@@ -67,8 +68,7 @@ export class MLink extends ModulVue {
     @Prop({
         default: MLinkIconPosition.Left,
         validator: value =>
-            value == MLinkIconPosition.Left ||
-            value == MLinkIconPosition.Right
+            value == MLinkIconPosition.Left || value == MLinkIconPosition.Right
     })
     public iconPosition: MLinkIconPosition;
 
@@ -114,15 +114,21 @@ export class MLink extends ModulVue {
     }
 
     private get hasIcon(): boolean {
-        return this.iconName != undefined && this.iconName != '' ? true : this.icon;
+        return this.iconName != undefined && this.iconName != ''
+            ? true
+            : this.icon;
     }
 
     private get propIconName(): string {
-        return this.iconName != undefined && this.iconName != '' ? this.iconName : ICON_NAME_DEFAULT;
+        return this.iconName != undefined && this.iconName != ''
+            ? this.iconName
+            : ICON_NAME_DEFAULT;
     }
 
     private get propUrl(): string | undefined {
-        return this.mode == MLinkMode.Button ? '#' : !this.disabled ? this.url : undefined;
+        return this.mode == MLinkMode.Button
+            ? '#'
+            : !this.disabled ? this.url : undefined;
     }
 
     private get isTargetBlank(): boolean {
@@ -133,13 +139,13 @@ export class MLink extends ModulVue {
         return !this.isObject(this.url) ? { path: this.url } : this.url;
     }
 
-    private isObject(a) {
-        return (!!a) && (a.constructor === Object);
+    private isObject(a): boolean {
+        return !!a && a.constructor === Object;
     }
 }
 
 const LinkPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(LINK_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(I18nPlugin);

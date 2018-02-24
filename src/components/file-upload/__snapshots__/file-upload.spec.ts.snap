@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MFileUpload completed should render completed files 1`] = `
+<m-dialog title="Upload files"><span slot="trigger"></span>
+    <div class="m-file-upload">
+        <div class="m-file-upload__drop-zone">
+            <h2>
+                <m-icon name="drag-drop" size="48px"></m-icon> <span class="m-i18n">Drag and drop files</span></h2>
+            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
+            <m-file-select skin="primary" class="m-file-upload__drop-zone__button"></m-file-select>
+        </div>
+        <div name="m--is" class="m-file-upload__completed-list">
+            <ul name="m--is" tag="ul" class="m-file-upload__completed-list__overflow">
+                <li>
+                    <div class="m-file-upload__completed-list__content">
+                        <div>
+                            <m-icon name="chip-info" size="24px"></m-icon>
+                        </div>
+                        <div class="m-file-upload__completed-list__infos">
+                            <p class="m-file-upload__completed-list__infos-label">completed-file</p>
+                            <p class="m-file-upload__completed-list__infos-size">1 b</p>
+                        </div>
+                        <div>
+                            <m-icon-button icon-name="default" button-size="32px" icon-size="12px" class="m-file-upload__completed-list__button"></m-icon-button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div slot="footer" class="m-file-upload__footer">
+        <m-button><span class="m-i18n">Add</span> <span slot="precision">1
+                <span class="m-i18n">file</span></span>
+        </m-button>
+        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+    </div>
+    <m-modal-stub class="m-file-upload__error-message"></m-modal-stub>
+</m-dialog>
+`;
+
+exports[`MFileUpload should render correctly 1`] = `
+<m-dialog title="Upload files"><span slot="trigger"></span>
+    <div class="m-file-upload">
+        <div class="m-file-upload__drop-zone">
+            <h2>
+                <m-icon name="drag-drop" size="48px"></m-icon> <span class="m-i18n">Drag and drop files</span></h2>
+            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
+            <m-file-select skin="primary" class="m-file-upload__drop-zone__button"></m-file-select>
+        </div>
+    </div>
+    <div slot="footer" class="m-file-upload__footer">
+        <m-button disabled="disabled"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
+                <span class="m-i18n">file</span></span>
+        </m-button>
+        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+    </div>
+    <m-modal-stub class="m-file-upload__error-message"></m-modal-stub>
+</m-dialog>
+`;
+
+exports[`MFileUpload uploading should render uploading files 1`] = `
+<m-dialog title="Upload files"><span slot="trigger"></span>
+    <div class="m-file-upload">
+        <div class="m-file-upload__drop-zone">
+            <h2>
+                <m-icon name="drag-drop" size="48px"></m-icon> <span class="m-i18n">Drag and drop files</span></h2>
+            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
+            <m-file-select skin="primary" class="m-file-upload__drop-zone__button"></m-file-select>
+        </div>
+        <div name="m--is" class="m-file-upload__top-section">
+            <h3 class="m-file-upload__title"><span class="m-i18n">Uploading</span> (1
+                <span class="m-i18n">file</span>)
+            </h3>
+            <div class="m-file-upload__import-list">
+                <ul name="m--is" tag="ul" class="m-file-upload__import-list__overflow">
+                    <li>
+                        <div class="m-file-upload__import-list__content">
+                            <div>
+                                <m-icon name="chip-info" size="24px"></m-icon>
+                            </div>
+                            <div class="m-file-upload__import-list__progress-wrap">
+                                <div class="m-file-upload__import-list__infos">
+                                    <p class="m-file-upload__import-list__name">uploading-file</p>
+                                    <p class="m-file-upload__import-list__size">1 b</p>
+                                </div>
+                                <m-progress value="33" state="in-progress"></m-progress>
+                            </div>
+                            <div>
+                                <m-icon-button icon-name="default" button-size="32px" icon-size="12px" class="m-file-upload__import-list__button"></m-icon-button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div slot="footer" class="m-file-upload__footer">
+        <m-button disabled="disabled"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
+                <span class="m-i18n">file</span></span>
+        </m-button>
+        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+    </div>
+    <m-modal-stub class="m-file-upload__error-message"></m-modal-stub>
+</m-dialog>
+`;
+
+exports[`MFileUpload validation should render accepted file extensions 1`] = `
+<m-dialog title="Upload files"><span slot="trigger"></span>
+    <div class="m-file-upload">
+        <div class="m-file-upload__drop-zone">
+            <h2>
+                <m-icon name="drag-drop" size="48px"></m-icon> <span class="m-i18n">Drag and drop files</span></h2>
+            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
+            <m-file-select skin="primary" multiple="multiple" class="m-file-upload__drop-zone__button"></m-file-select>
+            <p class="m-file-upload__drop-zone__format"><span class="m-i18n m-file-upload__drop-zone__format__label">Accepted formats</span>: jpg, png, mp4</p>
+        </div>
+    </div>
+    <div slot="footer" class="m-file-upload__footer">
+        <m-button disabled="disabled"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
+                <span class="m-i18n">file</span></span>
+        </m-button>
+        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+    </div>
+    <m-modal-stub class="m-file-upload__error-message"></m-modal-stub>
+</m-dialog>
+`;
+
+exports[`MFileUpload validation should render rejected files in modal 1`] = `
+<m-dialog title="Upload files"><span slot="trigger"></span>
+    <div class="m-file-upload">
+        <div class="m-file-upload__drop-zone">
+            <h2>
+                <m-icon name="drag-drop" size="48px"></m-icon> <span class="m-i18n">Drag and drop files</span></h2>
+            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
+            <m-file-select skin="primary" multiple="multiple" class="m-file-upload__drop-zone__button"></m-file-select>
+            <p class="m-file-upload__drop-zone__format"><span class="m-i18n m-file-upload__drop-zone__format__label">Accepted formats</span>: jpg, png, mp4</p>
+        </div>
+    </div>
+    <div slot="footer" class="m-file-upload__footer">
+        <m-button disabled="disabled"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
+                <span class="m-i18n">file</span></span>
+        </m-button>
+        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+    </div>
+    <m-modal open="open" class="m-file-upload__error-message">
+        <m-message state="error">
+            <p class="m-file-upload__error-message__title"><span class="m-i18n">The following file can not be added.</span></p>
+            <p class="m-file-upload__error-message__text"><span class="m-i18n">The file extension is not accepted.</span></p>
+            <ul class="m-file-upload__error-message__list">
+                <li>invalid-file-a</li>
+                <li>invalid-file-b</li>
+            </ul>
+        </m-message>
+    </m-modal>
+</m-dialog>
+`;

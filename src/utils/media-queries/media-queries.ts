@@ -85,7 +85,7 @@ export class MediaQueries {
 }
 
 const MediaQueriesPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         let mediaQueries = new MediaQueries();
         (v.prototype as any).$mq = mediaQueries;
     }

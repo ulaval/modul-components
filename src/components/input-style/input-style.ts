@@ -109,7 +109,7 @@ export class MInputStyle extends ModulVue {
 }
 
 const InputStylePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(IconPlugin);
         v.use(SpinnerPlugin);
         v.component(INPUT_STYLE_NAME, MInputStyle);

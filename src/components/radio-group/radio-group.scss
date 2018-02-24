@@ -16,10 +16,10 @@
     }
 
     &__icon {
-        margin-left: $m-spacing--xs;
         display: inline-flex;
         justify-content: center;
         align-items: center;
+        margin-left: $m-margin--xs;
     }
 
     &.m--is-inline {
