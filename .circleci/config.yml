@@ -38,10 +38,15 @@ jobs:
           name: npm test
           command: npm run unitall
           environment:
-            JEST_JUNIT_OUTPUT: "reports/jest/js-test-results.xml"
-            JEST_HTML_REPORTER_OUTPUT_PATH: "reports/jest/js-test-results.html"
+            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+            JEST_HTML_REPORTER_OUTPUT_PATH: "reports/junit/js-test-results.html"
             JEST_HTML_REPORTER_INCLUDE_FAILURE_MSG: true
+
+      - run:
+          name: tslint
+          command: npm run tslint-ci
+
       - store_test_results:
-          path: reports/jest
+          path: reports/junit
       - store_artifacts:
           path: reports/
