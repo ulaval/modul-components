@@ -33,7 +33,10 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
+      - run:
+          name: tslint
+          command: mkdir reports/junit; npm run tslint-ci
+
       - run:
           name: npm test
           command: npm run unitall
@@ -42,9 +45,7 @@ jobs:
             JEST_HTML_REPORTER_OUTPUT_PATH: "reports/junit/js-test-results.html"
             JEST_HTML_REPORTER_INCLUDE_FAILURE_MSG: true
 
-      - run:
-          name: tslint
-          command: npm run tslint-ci
+
 
       - store_test_results:
           path: reports/junit
