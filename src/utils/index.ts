@@ -17,7 +17,7 @@ export interface UtilsPluginOptions {
 }
 
 const UtilsPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         if (!options) {
             throw new Error(
                 'UtilsPlugin.install -> you must provide a UtilsPluginOptions option object.'

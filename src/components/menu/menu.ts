@@ -52,7 +52,7 @@ export class MMenu extends BaseMenu implements MMenuInterface {
 
     private open = false;
 
-    public checkIcon(icon: boolean) {
+    public checkIcon(icon: boolean): void {
         if (icon) {
             this.hasIcon = true;
         }
@@ -77,7 +77,7 @@ export class MMenu extends BaseMenu implements MMenuInterface {
 }
 
 const MenuPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(PopupPlugin);
         v.use(I18nPlugin);
         v.use(MMenuItemPlugin);

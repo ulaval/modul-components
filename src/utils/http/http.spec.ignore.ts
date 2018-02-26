@@ -9,7 +9,7 @@ describe('http plugin', () => {
         Vue.use(httpPlugin);
 
         Vue.use({
-            install(v, options) {
+            install(v, options): void {
                 expect((v as any).$http).toBeDefined();
             }
         });

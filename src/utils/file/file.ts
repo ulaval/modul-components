@@ -213,6 +213,7 @@ class FileStore {
                     file.status = axios.isCancel(ex)
                         ? MFileStatus.CANCELED
                         : MFileStatus.FAILED;
+                    throw new Error(ex);
                 }
             )
             .then<AxiosResponse<T>>(value => {
@@ -285,7 +286,7 @@ class FileStore {
 }
 
 const FilePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug('$file', 'plugin.install');
         let file: FileService = new FileService();
         (v as any).$file = file;

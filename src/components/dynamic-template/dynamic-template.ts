@@ -34,7 +34,7 @@ export class MDynamicTemplate extends Vue {
 }
 
 const DynamicTemplatePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(DYNAMIC_TEMPLATE_NAME, MDynamicTemplate);
     }
 };

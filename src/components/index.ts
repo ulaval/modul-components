@@ -61,7 +61,7 @@ import UploadFileslistPlugin from './upload-fileslist/upload-fileslist';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 const ComponentsPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);

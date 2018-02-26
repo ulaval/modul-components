@@ -110,7 +110,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 }
 
 const DialogPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(DIALOG_NAME, MDialog);
     }
 };
