@@ -21,7 +21,7 @@ export class Viewer extends ModulVue {
         this.buildTag();
     }
 
-    private onFilesReady(files) {
+    private onFilesReady(files): void {
         files.forEach(f => {
             const fd = new FormData();
             fd.append('file', f.file);
@@ -34,11 +34,11 @@ export class Viewer extends ModulVue {
         });
     }
 
-    private onFileUploadCancel(file) {
+    private onFileUploadCancel(file): void {
         this.$file.cancelUpload(file.uid);
     }
 
-    private onFilesUploadCompleted(files) {
+    private onFilesUploadCompleted(files): void {
         // Do something with uploaded files !
     }
 
