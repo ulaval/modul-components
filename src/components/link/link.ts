@@ -75,7 +75,7 @@ export class MLink extends ModulVue {
     @Prop({ default: '12px' })
     public iconSize: string;
 
-    private onClick(event): void {
+    private onClick(event) {
         this.$el.blur();
         if (this.isButton || this.isTextLink || this.disabled) {
             event.preventDefault();
