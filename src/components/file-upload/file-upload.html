@@ -8,19 +8,19 @@
 
         <m-message class="m-file-upload__error-message" state="error" v-if="hasRejectedFiles" :close-button="true" @close="onMessageClose">
             <p class="m-file-upload__error-message__title">
-                <m-i18n k="m-file-upload:rejectFileMsg"></m-i18n>
+                <m-i18n :nb="rejectedFiles.length" k="m-file-upload:rejectFileMsg"></m-i18n>
             </p>
             <ul class="m-file-upload__error-message__list">
                 <li v-for="file in rejectedFiles" :key="file.uid">
                     <p class="m-file-upload__error-message__file-name">{{file.name}}</p>
-                    <p class="m-file-upload__error-message__error" v-if="file.rejection == 'file-type'">
+                    <p class="m-file-upload__error-message__error" v-if="hasExtensionsRejection(file)">
                         <m-i18n k="m-file-upload:extensionFileMsg"></m-i18n>
                     </p>
-                    <p class="m-file-upload__error-message__error" v-if="file.rejection == 'file-size'">
-                        <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb | file-size}})
+                    <p class="m-file-upload__error-message__error" v-else-if="hasSizeRejection(file)">
+                        <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb | file-size}}).
                     </p>
-                    <p class="m-file-upload__error-message__error" v-if="file.rejection == 'max-files'">
-                        <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}} <m-i18n k="m-file-upload:file"></m-i18n>)
+                    <p class="m-file-upload__error-message__error" v-else-if="hasMaxFilesRejection(file)">
+                        <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}} <m-i18n :nb="maxFiles" k="m-file-upload:file"></m-i18n>)
                     </p>
                 </li>
             </ul>
@@ -38,8 +38,7 @@
 
         <h3 class="m-file-upload__title" v-if="!hasUploadingFiles">
             <m-i18n k="m-file-upload:import"></m-i18n> ({{uploadingFiles.length}}
-            <m-i18n v-if="uploadingFiles.length > 1" k="m-file-upload:files"></m-i18n>
-            <m-i18n v-else k="m-file-upload:file"></m-i18n>)
+            <m-i18n :nb="uploadingFiles.length" k="m-file-upload:file"></m-i18n>)
         </h3>
 
         <div class="m-file-upload__import-list" v-if="!hasUploadingFiles">
@@ -95,8 +94,7 @@
         <m-button @click="onAddClick" :disabled="!isAddBtnEnabled">
             <m-i18n k="m-file-upload:add"></m-i18n>
             <span slot="precision" v-show="completedFiles.length > 0">{{completedFiles.length}}
-                <m-i18n v-if="completedFiles.length > 1" k="m-file-upload:files"></m-i18n>
-                <m-i18n v-else k="m-file-upload:file"></m-i18n>
+                <m-i18n :nb="completedFiles.length" k="m-file-upload:file"></m-i18n>
             </span>
         </m-button>
         <m-button @click="onCancelClick" skin="secondary" class="m-u--margin-left">

@@ -135,6 +135,18 @@ export class MFileUpload extends ModulVue {
         }
     }
 
+    private hasExtensionsRejection(file): boolean {
+        return file.rejection === MFileRejectionCause.FILE_TYPE;
+    }
+
+    private hasSizeRejection(file): boolean {
+        return file.rejection === MFileRejectionCause.FILE_SIZE;
+    }
+
+    private hasMaxFilesRejection(file): boolean {
+        return file.rejection === MFileRejectionCause.MAX_FILES;
+    }
+
     private get fileExtensions(): string {
         return this.extensions ? this.extensions.join(', ') : '';
     }
@@ -174,18 +186,6 @@ export class MFileUpload extends ModulVue {
         return this.allFiles.filter(f => f.status === MFileStatus.REJECTED);
     }
 
-    private get extensionsRejectedFiles(): MFileExt[] {
-        return this.allFiles.filter(f => f.status === MFileStatus.REJECTED && f.rejection === MFileRejectionCause.FILE_TYPE);
-    }
-
-    private get sizeRejectedFiles(): MFileExt[] {
-        return this.allFiles.filter(f => f.status === MFileStatus.REJECTED && f.rejection === MFileRejectionCause.FILE_SIZE);
-    }
-
-    private get maxFilesRejectedFiles(): MFileExt[] {
-        return this.allFiles.filter(f => f.status === MFileStatus.REJECTED && f.rejection === MFileRejectionCause.MAX_FILES);
-    }
-
     private get allFiles(): MFileExt[] {
         return this.$file.files() as MFileExt[];
     }
@@ -200,18 +200,6 @@ export class MFileUpload extends ModulVue {
 
     private get hasRejectedFiles(): boolean {
         return this.rejectedFiles.length !== 0;
-    }
-
-    private get hasExtensionsRejectedFiles(): boolean {
-        return this.extensionsRejectedFiles.length !== 0;
-    }
-
-    private get hasSizeRejectedFiles(): boolean {
-        return this.sizeRejectedFiles.length !== 0;
-    }
-
-    private get hasMaxFilesRejectedFiles(): boolean {
-        return this.maxFilesRejectedFiles.length !== 0;
     }
 }
 
