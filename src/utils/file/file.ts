@@ -213,6 +213,7 @@ class FileStore {
                     file.status = axios.isCancel(ex)
                         ? MFileStatus.CANCELED
                         : MFileStatus.FAILED;
+                    throw new Error(ex);
                 }
             )
             .then<AxiosResponse<T>>(value => {
