@@ -44,4 +44,4 @@ jobs:
       - store_test_results:
           path: reports/jest
       - store_artifacts:
-          path: reports/jest
+          path: reports/
