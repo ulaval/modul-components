@@ -11,18 +11,26 @@ $m-file-upload-max-height--s: 72px;
             font-weight: $m-font-weight--bold;
         }
 
-        &__text {
-            margin-top: $m-margin--xs;
+        &__list {
+            margin: 0;
+
+            li {
+                margin-top: $m-margin--s;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
         }
 
-        &__list {
-            margin-top: $m-margin--xs;
+        &__file-name {
+            margin-top: 0;
+        }
 
-            &:last-child {
-                margin-bottom: 0;
-            }
-
-            @include m-bullet-list();
+        &__error {
+            margin-top: 0;
+            font-size: $m-font-size--xs;
+            color: $m-color--error;
         }
     }
 

@@ -10,30 +10,20 @@
             <p class="m-file-upload__error-message__title">
                 <m-i18n k="m-file-upload:rejectFileMsg"></m-i18n>
             </p>
-            <template v-if="hasExtensionsRejectedFiles">
-                <p class="m-file-upload__error-message__text">
-                    <m-i18n k="m-file-upload:extensionFileMsg"></m-i18n>
-                </p>
-                <ul class="m-file-upload__error-message__list">
-                    <li v-for="file in extensionsRejectedFiles" :key="file.uid">{{file.name}}</li>
-                </ul>
-            </template>
-            <template v-if="hasSizeRejectedFiles">
-                <p class="m-file-upload__error-message__text">
-                    <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb | file-size}})
-                </p>
-                <ul class="m-file-upload__error-message__list">
-                    <li v-for="file in sizeRejectedFiles" :key="file.uid">{{file.name}}</li>
-                </ul>
-            </template>
-            <template v-if="hasMaxFilesRejectedFiles">
-                <p class="m-file-upload__error-message__text">
-                    <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}} <m-i18n k="m-file-upload:file"></m-i18n>)
-                </p>
-                <ul class="m-file-upload__error-message__list">
-                    <li v-for="file in maxFilesRejectedFiles" :key="file.uid">{{file.name}}</li>
-                </ul>
-            </template>
+            <ul class="m-file-upload__error-message__list">
+                <li v-for="file in rejectedFiles" :key="file.uid">
+                    <p class="m-file-upload__error-message__file-name">{{file.name}}</p>
+                    <p class="m-file-upload__error-message__error" v-if="file.rejection == 'file-type'">
+                        <m-i18n k="m-file-upload:extensionFileMsg"></m-i18n>
+                    </p>
+                    <p class="m-file-upload__error-message__error" v-if="file.rejection == 'file-size'">
+                        <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb | file-size}})
+                    </p>
+                    <p class="m-file-upload__error-message__error" v-if="file.rejection == 'max-files'">
+                        <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}} <m-i18n k="m-file-upload:file"></m-i18n>)
+                    </p>
+                </li>
+            </ul>
         </m-message>
 
         <div class="m-file-upload__drop-zone">
