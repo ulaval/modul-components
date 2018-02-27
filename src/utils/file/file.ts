@@ -203,7 +203,7 @@ class FileStore {
         const promise = httpService.execute<T>(cfg, axiosOptions);
 
         return promise
-            .then<AxiosResponse<T>>(
+            .then<AxiosResponse<T>, any>(
                 value => {
                     file.status = MFileStatus.COMPLETED;
                     file.progress = 100;
@@ -213,7 +213,9 @@ class FileStore {
                     file.status = axios.isCancel(ex)
                         ? MFileStatus.CANCELED
                         : MFileStatus.FAILED;
-                    throw new Error(ex);
+                    if (file.status === MFileStatus.FAILED) {
+                        return Promise.reject(ex);
+                    }
                 }
             )
             .then<AxiosResponse<T>>(value => {
