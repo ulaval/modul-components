@@ -2,12 +2,18 @@
 @import 'abstracts/mixins';
 
 .m-popup {
-    display: inline-flex;
+    display: inline-block;
 
-    &__header,
-    &__body,
-    &__footer {
+    &__body {
         position: relative;
+
+        &.m--has-padding {
+            padding: $m-padding;
+        }
+
+        &.m--has--background {
+            background: $m-color--white;
+        }
     }
 }
 

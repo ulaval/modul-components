@@ -10,14 +10,21 @@ import * as TouchPlugin from 'vue-touch';
 export class MCarouselItem extends Vue {
     public isVisible: boolean = false;
     public transitionForward: boolean = true;
+    private animActive: boolean = false;
+
+    private mounted(): void {
+        setTimeout(() => {
+            this.animActive = true;
+        });
+    }
 
     private get transitionName() {
-        return this.transitionForward ? 'right-to-left' : 'left-to-right';
+        return this.transitionForward ? 'm--is-right-to-left' : 'm--is-left-to-right';
     }
 }
 
 const CarouselItemPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(CAROUSEL_ITEM_NAME + ' is not ready for production');
         v.component(CAROUSEL_ITEM_NAME, MCarouselItem);
         Vue.use(TouchPlugin, { name: 'v-touch' });

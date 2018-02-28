@@ -11,7 +11,7 @@ import SidebarPlugin from '../sidebar/sidebar';
 
 @WithRender
 @Component({
-    mixins: [MediaQueries, OpenTrigger]
+    mixins: [ MediaQueries, OpenTrigger]
 })
 export class MPopup extends ModulVue {
 
@@ -36,11 +36,7 @@ export class MPopup extends ModulVue {
     @Prop({ default: true })
     public padding: boolean;
     @Prop({ default: true })
-    public paddingHeader: boolean;
-    @Prop({ default: true })
-    public paddingBody: boolean;
-    @Prop({ default: true })
-    public paddingFooter: boolean;
+    public background: boolean;
     @Prop()
     public beforeEnter: any;
     @Prop()
@@ -59,6 +55,8 @@ export class MPopup extends ModulVue {
     public leaveCancelled: any;
     @Prop()
     public desktopOnly: boolean;
+    @Prop()
+    public className: string;
 
     private internalOpen: boolean = false;
 
@@ -109,7 +107,7 @@ export class MPopup extends ModulVue {
 }
 
 const PopupPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(PopperPlugin);
         v.use(SidebarPlugin);
         v.component(POPUP_NAME, MPopup);

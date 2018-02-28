@@ -9,7 +9,7 @@ interface RippleEffectBinding extends VNodeDirective {
 }
 
 const MRippleEffect: DirectiveOptions = {
-    bind(element: HTMLElement, binding: RippleEffectBinding) {
+    bind(element: HTMLElement, binding: RippleEffectBinding): void {
         RippleEffect.isActive = binding.value == undefined ? false : binding.value;
         element.style.overflow = 'hidden';
         if (element) {
@@ -19,10 +19,10 @@ const MRippleEffect: DirectiveOptions = {
             element.addEventListener('mousedown', binding.listener);
         }
     },
-    componentUpdated(element: HTMLElement, binding: RippleEffectBinding) {
+    componentUpdated(element: HTMLElement, binding: RippleEffectBinding): void {
         RippleEffect.isActive = binding.value == undefined ? false : binding.value;
     },
-    unbind(element: HTMLElement, binding: RippleEffectBinding) {
+    unbind(element: HTMLElement, binding: RippleEffectBinding): void {
         if (element && binding.listener) {
             element.removeEventListener('mousedown', binding.listener);
         }
@@ -30,7 +30,7 @@ const MRippleEffect: DirectiveOptions = {
 };
 
 const RippleEffectPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.directive(RIPPLE_EFFECT_NAME, MRippleEffect);
     }
 };

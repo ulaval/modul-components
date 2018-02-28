@@ -58,6 +58,8 @@ export class MTooltip extends ModulVue {
     public closeTitle: string;
     @Prop({ default: true })
     public underline: boolean;
+    @Prop()
+    public className: string;
 
     private propOpen = false;
 
@@ -104,7 +106,7 @@ export class MTooltip extends ModulVue {
 }
 
 const TooltipPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(TOOLTIP_NAME + ' is not ready for production');
         v.use(ButtonPlugin);
         v.use(LinkPlugin);

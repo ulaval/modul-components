@@ -275,7 +275,7 @@ export class MDatepicker extends ModulVue {
         return date;
     }
 
-    private showYears() {
+    private showYears(): void {
         this.view = VIEW_YEAR;
         let scrollTop = (Math.floor((moment(this.max).year() - this.selectedYear) / NB_YEARS_PER_ROW)) * ITEM_DIMENSION - (3 * ITEM_DIMENSION);
         setTimeout(() => {
@@ -305,7 +305,7 @@ export class MDatepicker extends ModulVue {
 }
 
 const DatepickerPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(InputStylePlugin);
         v.use(ButtonPlugin);
         v.use(PopupPlugin);

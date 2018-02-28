@@ -10,7 +10,7 @@ interface ScrollToBinding extends VNodeDirective {
 }
 
 const MScrollTo: DirectiveOptions = {
-    bind(element: HTMLElement, binding: ScrollToBinding, node: VNode) {
+    bind(element: HTMLElement, binding: ScrollToBinding, node: VNode): void {
         if (node.context) {
             node.context.$nextTick(() => {
                 if (node.context && element) {
@@ -34,7 +34,7 @@ const MScrollTo: DirectiveOptions = {
             });
         }
     },
-    unbind(element: HTMLElement, binding: ScrollToBinding) {
+    unbind(element: HTMLElement, binding: ScrollToBinding): void {
         if (element && binding.listener) {
             element.removeEventListener('touchstart', binding.listener);
             element.removeEventListener('click', binding.listener);
@@ -43,7 +43,7 @@ const MScrollTo: DirectiveOptions = {
 };
 
 const ScrollToPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.directive(SCROLL_TO_NAME, MScrollTo);
     }
 };

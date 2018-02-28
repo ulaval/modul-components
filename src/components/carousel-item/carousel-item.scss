@@ -1,39 +1,42 @@
 @import 'abstracts/variables';
 
-.right-to-left-enter {
-    transform: translateX(100%);
-    opacity: 0;
-}
+.m-carousel-item {
+    position: relative;
+    z-index: 1;
 
-.right-to-left-enter-active {
-    transition: transform $m-transition-duration--xl, opacity $m-transition-duration--xl;
-}
+    &.m--is-anim-active {
+        &.m--is {
+            &-left-to-right-enter,
+            &-left-to-right-leave-to,
+            &-right-to-left-enter,
+            &-right-to-left-leave-to {
+                opacity: 0;
+            }
 
-.right-to-left-leave-active {
-    transition: transform $m-transition-duration--xl, opacity $m-transition-duration--xl;
-    position: absolute;
-}
+            &-right-to-left-enter-active,
+            &-right-to-left-leave-active,
+            &-left-to-right-enter-active,
+            &-left-to-right-leave-active {
+                transition: transform $m-transition-duration--xl ease, opacity $m-transition-duration--xl ease;
+            }
 
-.right-to-left-leave-to {
-    transform: translateX(-100%);
-    opacity: 0;
-}
+            &-left-to-right-enter,
+            &-right-to-left-leave-to {
+                transform: translate3d(-100%, 0, 0) scale(0.85) rotateY(14deg);
+                transform-origin: 0 50%;
+            }
 
-.left-to-right-enter {
-    transform: translateX(-100%);
-    opacity: 0;
-}
+            &-left-to-right-leave-to,
+            &-right-to-left-enter {
+                transform: translate3d(100%, 0, 0) scale(0.85) rotateY(-14deg);
+                transform-origin: 100% 50%;
+            }
 
-.left-to-right-enter-active {
-    transition: transform $m-transition-duration--xl, opacity $m-transition-duration--xl;
-}
-
-.left-to-right-leave-active {
-    transition: transform $m-transition-duration--xl, opacity $m-transition-duration--xl;
-    position: absolute;
-}
-
-.left-to-right-leave-to {
-    transform: translateX(100%);
-    opacity: 0;
+            &-left-to-right-leave-active,
+            &-right-to-left-leave-active {
+                position: absolute;
+                z-index: 0;
+            }
+        }
+    }
 }

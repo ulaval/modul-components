@@ -1,5 +1,5 @@
+import enquire from 'enquire.js/dist/enquire';
 import Vue, { PluginObject } from 'vue';
-import * as enquire from 'enquire.js/dist/enquire';
 
 export enum MediaQueriesBpMin {
     XL = '(min-width: 1600px)',
@@ -85,9 +85,8 @@ export class MediaQueries {
 }
 
 const MediaQueriesPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         let mediaQueries = new MediaQueries();
-        (v as any).$mq = mediaQueries;
         (v.prototype as any).$mq = mediaQueries;
     }
 };

@@ -31,10 +31,14 @@ export class MIcon extends Vue {
     private onClick(event): void {
         this.$emit('click', event);
     }
+
+    private onKeydown(event): void {
+        this.$emit('keydown', event);
+    }
 }
 
 const IconPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(ICON_NAME, 'plugin.install');
         v.component(ICON_NAME, MIcon);
     }

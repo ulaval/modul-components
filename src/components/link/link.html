@@ -3,8 +3,9 @@
                  :class="{ 'm--is-unvisited': isUnvisited,
                            'm--is-disabled': disabled,
                            'm--no-underline': !underline,
+                           'm--is-skin-light': isSkinLight,
                            'm--has-right-icon' : isIconPositionRight,
-                           'm--has-left-icon' : !isIconPositionRight }"
+                           'm--has-left-icon' : isIconPositionLeft }"
                  :to="routerLinkUrl"
                  :target="target"
                  v-if="isRouterLink"
@@ -19,8 +20,10 @@
                  'm--is-disabled': disabled,
                  'm--no-underline': !underline,
                  'm--is-button': isButton,
+                 'm--is-text-link': isTextLink,
+                 'm--is-skin-light': isSkinLight,
                  'm--has-right-icon' : isIconPositionRight,
-                 'm--has-left-icon' : !isIconPositionRight }"
+                 'm--has-left-icon' : isIconPositionLeft }"
        :href="propUrl"
        :target="target"
        @click="onClick"

@@ -30,23 +30,23 @@ export class MLimitText extends ModulVue {
     private maxHeight: number = 0;
     private overflow: boolean = false;
 
-    protected mounted() {
+    protected mounted(): void {
         Vue.nextTick(() => {
             this.computeHeight();
         });
     }
 
-    protected updated() {
+    protected updated(): void {
         this.computeHeight();
     }
 
-    private computeHeight() {
+    private computeHeight(): void {
         this.contentHeight = (this.$refs.container as HTMLElement).scrollHeight;
         this.maxHeight = (this.$refs.test as HTMLElement).clientHeight * this.lines;
         this.overflow = this.contentHeight > this.maxHeight;
     }
 
-    private get maxHeightStyle() {
+    private get maxHeightStyle(): string | undefined {
         if (this.overflow) {
             return this.propOpen ? this.contentHeight + 'px' : this.maxHeight + 'px';
         }
@@ -60,12 +60,12 @@ export class MLimitText extends ModulVue {
         return this.internalOpen;
     }
 
-    private onOpen() {
+    private onOpen(): void {
         this.internalOpen = true;
         this.$emit('update:open', true);
     }
 
-    private onClose() {
+    private onClose(): void {
         this.internalOpen = false;
         this.$emit('update:open', false);
     }
@@ -80,7 +80,7 @@ export class MLimitText extends ModulVue {
 }
 
 const LimitTextPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(LIMIT_TEXT_NAME + ' is not ready for production');
         v.use(I18nPlugin);
         v.use(LinkPlugin);

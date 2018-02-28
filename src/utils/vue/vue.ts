@@ -1,6 +1,8 @@
 import Vue from 'vue';
+import Component from 'vue-class-component';
 import { Messages } from '../i18n/i18n';
 import { HttpService } from '../http/http';
+import { FileService } from '../file/file';
 import { MediaQueries } from '../media-queries/media-queries';
 import { Modul } from '../modul/modul';
 import { ConfirmFunction } from '../modal/confirm';
@@ -13,6 +15,7 @@ console.debug('TODO: explore usage of TS declare syntax');
 //     }
 // }
 
+@Component
 export class ModulVue extends Vue {
     public $i18n: Messages;
     public $http: HttpService;
@@ -20,6 +23,7 @@ export class ModulVue extends Vue {
     public $modul: Modul;
     public $confirm: ConfirmFunction;
     public $alert: AlertFunction;
+    public $file: FileService;
 
     protected getParent<T extends Vue>(test: (obj: Vue) => boolean): T | undefined {
         let p: Vue = this.$parent;

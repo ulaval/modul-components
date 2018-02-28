@@ -1,0 +1,7 @@
+@import 'abstracts/variables';
+
+.m-file-select {
+    &__hidden {
+        @include m-visually-hidden;
+    }
+}

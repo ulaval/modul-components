@@ -3,7 +3,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { SIDEBAR_NAME } from '../component-names';
-import { Portal, PortalMixin, PortalMixinImpl, BackdropMode } from '../../mixins/portal/portal';
+import { Portal, PortalMixin, PortalMixinImpl, BackdropMode, PortalTransitionDuration } from '../../mixins/portal/portal';
 import WithRender from './sidebar.html?style=./sidebar.scss';
 
 export enum MSidebarOrigin {
@@ -81,6 +81,10 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
         return this.$refs.article as HTMLElement;
     }
 
+    protected mounted(): void {
+        this.as<Portal>().transitionDuration = PortalTransitionDuration.Slow;
+    }
+
     private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;
     }
@@ -127,7 +131,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
 }
 
 const SidebarPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(SIDEBAR_NAME, MSidebar);
     }
 };

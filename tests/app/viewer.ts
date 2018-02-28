@@ -1,15 +1,16 @@
 import Vue from 'vue';
-// import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Watch } from 'vue-property-decorator';
+
 import WithRender from './viewer.html';
 
+// import { ModulVue } from '../../utils/vue/vue';
 @WithRender
 @Component
 export class Viewer extends Vue {
     public tag: string = '';
 
-    public mounted() {
+    public mounted(): void {
         this.buildTag();
     }
 

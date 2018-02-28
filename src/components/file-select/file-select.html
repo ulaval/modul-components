@@ -1,0 +1,24 @@
+<div class="m-file-select">
+    <input ref="inputFile" type="file" :id="id" class="m-file-select__hidden" @change="processFile" :disabled="disabled || isWaiting" tabindex="-1" :multiple="multiple">
+    <label :for="id" class="m-file-select__hidden">
+            <m-i18n v-if="!hasLabel" k="m-select-file:label"></m-i18n>
+            <template v-else>{{ label }}</template>
+    </label>
+    <m-button @click="onClick" @focus="onFocus" @blur="onBlur" aria-hidden="true"
+            :skin="skin"
+            :disabled="disabled"
+            :waiting="waiting"
+            :fullSize="fullSize"
+            :iconName="iconName"
+            :iconPosition="iconPosition"
+            :iconSize="iconSize">
+        <m-i18n v-if="!hasLabel" k="m-select-file:label"></m-i18n>
+        <template v-else>{{ label }}</template>
+    </m-button>
+    <m-validation-message ref="validation"
+        :disabled="isDisabled"
+        :error="hasError"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"></m-validation-message>
+</div>

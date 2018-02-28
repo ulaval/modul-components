@@ -52,12 +52,12 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
         this.model = value;
     }
 
-    protected created() {
+    protected created(): void {
         this.internalValue = undefined;
     }
 
     @Watch('value')
-    private onValueChange(value: any) {
+    private onValueChange(value: any): void {
         this.internalValue = value;
     }
 
@@ -76,7 +76,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 }
 
 const RadioGroupPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(RADIO_GROUP_NAME, 'plugin.install');
         v.use(RadioPlugin);
         v.use(ValidationMessagePlugin);

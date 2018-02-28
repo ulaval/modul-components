@@ -13,7 +13,7 @@ export class RippleEffect {
     private maxWidth: number;
     private dimension: number;
 
-    public initRipple(event: MouseEvent, el: HTMLElement) {
+    public initRipple(event: MouseEvent, el: HTMLElement): void {
         this.el = el;
         this.rippleEl = document.createElement('span');
         this.rippleELStyle = this.rippleEl.style;
@@ -23,7 +23,7 @@ export class RippleEffect {
         this.addRipple(event);
     }
 
-    private addRipple(event: MouseEvent) {
+    private addRipple(event: MouseEvent): void {
         if (this.isActive) {
             this.setPosition(event);
             this.setStyle();
@@ -33,7 +33,7 @@ export class RippleEffect {
         }
     }
 
-    private setPosition(event) {
+    private setPosition(event): void {
         this.positionX = event.offsetX;
 
         if (this.positionX !== undefined) {
@@ -53,7 +53,7 @@ export class RippleEffect {
         this.dimension = (this.maxWidth * 2);
     }
 
-    private setStyle() {
+    private setStyle(): void {
         this.rippleEl.className = RIPPLE_EFFECT_NAME;
         this.rippleELStyle.position = 'absolute';
         this.rippleELStyle.borderRadius = '50%';
@@ -73,7 +73,7 @@ export class RippleEffect {
         this.rippleELStyle.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
     }
 
-    private setStyleAnimation() {
+    private setStyleAnimation(): void {
         setTimeout(() => {
             this.rippleEl.className += ' enter-active';
             this.rippleELStyle.opacity = '0.4';
@@ -81,7 +81,7 @@ export class RippleEffect {
         }, 0);
     }
 
-    private removeRipple(event: MouseEvent) {
+    private removeRipple(event: MouseEvent): void {
         let releaseEvent = (event.type === 'mousedown' ? 'mouseup' : 'touchend');
 
         let release = () => {

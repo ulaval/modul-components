@@ -1,0 +1,261 @@
+@import 'abstracts/variables';
+
+$m-file-upload-max-height: 120px;
+$m-file-upload-max-height--s: 72px;
+
+.m-file-upload {
+    &__wrap {
+        &.m--no-padding {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        @media (min-width: $m-mq--min--s) {
+            padding: $m-padding--l $m-padding--l;
+        }
+
+        @media (max-width: $m-mq--max--s) {
+            padding: $m-padding $m-padding;
+        }
+    }
+
+    &__drop-zone {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: $m-color--grey $m-border-width dashed;
+        padding: $m-padding--l $m-padding;
+        text-align: center;
+        transition: background $m-transition-duration ease;
+
+        h2 {
+            font-weight: $m-font-weight--bold;
+            display: flex;
+            align-items: center;
+        }
+
+        & > :first-child {
+            margin-top: 0;
+        }
+
+        &__or {
+            font-weight: $m-font-weight--bold;
+        }
+
+        &__button {
+            margin-top: $m-margin;
+        }
+
+        &__format {
+            margin-top: $m-margin--l;
+            font-weight: $m-font-weight--bold;
+        }
+
+        &.m--is-drag-over {
+            border-style: solid;
+            border-color: $m-color--interactive;
+            background: $m-color--information;
+        }
+    }
+
+    &__top-section {
+        max-height: 240px;
+        display: flex;
+        flex-direction: column;
+
+        &.m--is-leave-active {
+            transition: opacity $m-transition-duration, max-height $m-transition-duration--l;
+        }
+
+        &.m--is-leave-to {
+            opacity: 0;
+            max-height: 0;
+        }
+    }
+
+    &__title {
+        border-bottom: $m-border-width--s solid $m-color--grey-light;
+        padding-bottom: 8px;
+    }
+
+    &__import-list {
+        margin-top: $m-margin--l;
+
+        &__overflow {
+            margin: 0;
+            max-height: $m-file-upload-max-height;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            @include m-scrollbar();
+
+            li {
+                max-height: $m-file-upload-max-height;
+                display: flex;
+
+                &:last-child {
+                    .m-file-upload__import-list__content {
+                        margin-bottom: 0;
+                    }
+                }
+
+                &.m--is-leave-active {
+                    transition: opacity $m-transition-duration, max-height $m-transition-duration--l;
+                }
+
+                &.m--is-leave-to {
+                    opacity: 0;
+                    max-height: 0;
+                }
+            }
+        }
+
+        &__content {
+            display: flex;
+            flex: 1 1 auto;
+            align-items: center;
+            margin-bottom: $m-margin;
+            overflow: hidden;
+        }
+
+        &__progress-wrap {
+            flex: 1 1 auto;
+            padding: 0 $m-padding;
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__infos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: $m-padding--xs;
+        }
+
+        &__name,
+        &__size {
+            margin-top: 0;
+        }
+
+        &__name {
+            font-weight: $m-font-weight--bold;
+            word-break: break-all;
+            flex: 1 0 0;
+            padding-right: $m-padding--xs;
+        }
+
+        &__error-message {
+            color: $m-color--error;
+            font-size: $m-font-size--xs;
+            margin-top: 0;
+        }
+
+        &__size {
+            color: $m-color--grey-dark;
+            font-size: $m-font-size--xs;
+        }
+
+        &__button:active::before {
+            width: 32px !important;
+            height: 32px !important;
+        }
+    }
+
+    &__completed-list {
+        padding-top: $m-spacing--m;
+        max-height: 144px;
+        display: flex;
+        flex-direction: column;
+
+        &.m--is-leave-active {
+            transition: opacity $m-transition-duration, max-height $m-transition-duration--l;
+        }
+
+        &.m--is-leave-to {
+            opacity: 0;
+            max-height: 0;
+        }
+
+        &__overflow {
+            margin: 0;
+            max-height: $m-file-upload-max-height;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            @include m-scrollbar();
+
+            li {
+                max-height: $m-file-upload-max-height--s;
+                display: flex;
+
+                &:last-child {
+                    .m-file-upload__completed-list__content {
+                        margin-bottom: 0;
+                    }
+                }
+
+                &.m--is-leave-active {
+                    transition: opacity $m-transition-duration, max-height $m-transition-duration--l;
+                }
+
+                &.m--is-leave-to {
+                    opacity: 0;
+                    max-height: 0;
+                }
+            }
+        }
+
+        &.m--has-border {
+            border-top: $m-border-width--s solid $m-color--grey-light;
+            margin-top: $m-margin--l;
+        }
+
+        &__content {
+            display: flex;
+            flex: 1 1 auto;
+            align-items: center;
+            margin-bottom: $m-margin;
+            overflow: hidden;
+        }
+
+        &__infos {
+            flex: 1 1 auto;
+            padding: 0 16px;
+        }
+
+        &__infos-label,
+        &__infos-size {
+            margin-top: 0;
+            line-height: 1;
+        }
+
+        &__infos-label {
+            font-weight: $m-font-weight--bold;
+            padding-bottom: $m-padding--xs;
+            word-break: break-all;
+        }
+
+        &__infos-size {
+            color: $m-color--grey-dark;
+            font-size: $m-font-size--xs;
+        }
+
+        &__button:active::before {
+            width: 32px !important;
+            height: 32px !important;
+        }
+    }
+
+    &__error-message {
+        display: block;
+
+        &__title {
+            font-weight: $m-font-weight--bold;
+        }
+
+        &__list {
+            @include m-bullet-list();
+        }
+    }
+}

@@ -35,7 +35,7 @@ export class Mtemplate extends Vue {
 }
 
 const TemplatePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(TEMPLATE_NAME, Mtemplate);
     }
 };

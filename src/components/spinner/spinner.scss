@@ -74,14 +74,14 @@ $m-loading-speed: 0.7s;
         width: 46px;
         height: 46px;
         background: none;
-        border: 4px solid;
+        border: $m-border-width--l solid;
         border-color: $m-color--active $m-color--grey-light $m-color--grey-light $m-color--grey-light;
         border-radius: 50%;
 
         &.m--is-small {
             width: 16px;
             height: 16px;
-            border-width: 2px;
+            border-width: $m-border-width;
         }
     }
 }

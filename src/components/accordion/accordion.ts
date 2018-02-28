@@ -138,7 +138,7 @@ export class MAccordion extends ModulVue {
 }
 
 const AccordionPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(I18nPlugin);
         v.component(ACCORDION_NAME, MAccordion);
     }
