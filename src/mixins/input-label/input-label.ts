@@ -12,7 +12,7 @@ export class InputLabel extends ModulVue {
     @Prop()
     public iconName: string;
     @Prop()
-    public asterisk: boolean;
+    public requiredMarker: boolean;
 
     private get hasLabel(): boolean {
         return !!this.label;

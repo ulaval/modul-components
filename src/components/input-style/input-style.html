@@ -12,7 +12,7 @@
     @mousedown="onMousedown"
     @mouseup="onMouseup"
     :style="{ width: width }">
-    <label class="m-input-style__label" ref="label" v-if="hasLabel"><m-icon :name="iconName" v-if="hasIcon"></m-icon><span v-if="hasLabelText">{{ label }}</span><span class="m-input-style__asterisk" v-if="asterisk">*</span></label>
+    <label class="m-input-style__label" ref="label" v-if="hasLabel"><m-icon :name="iconName" v-if="hasIcon"></m-icon><span v-if="hasLabelText">{{ label }}</span><sup class="m-input-style__required-marker" v-if="requiredMarker">*</sup></label>
     <div class="m-input-style__body">
         <div class="m-input-style__body__left">
             <slot></slot>
