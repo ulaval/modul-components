@@ -25,6 +25,9 @@ export const MAccordionTransition = Vue.extend({
                 },
                 beforeLeave(el: HTMLElement): void {
                     el.style.height = el.scrollHeight + 'px';
+                },
+                afterLeave(el: HTMLElement): void {
+                    el.style.removeProperty('height');
                 }
             }
         };
