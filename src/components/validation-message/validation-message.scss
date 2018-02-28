@@ -1,7 +1,7 @@
 @import 'abstracts/variables';
 $m-validation-message--color-error: $m-color--error !default;
 $m-validation-message--color-success: $m-color--success !default;
-$m-validation-message--color-helper: $m-color--grey-dark !default;
+$m-validation-message--color-helper: $m-color--grey !default;
 $m-validation-message--margin: $m-padding--xs !default;
 
 .m-validation-message {
