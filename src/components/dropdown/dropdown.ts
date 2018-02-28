@@ -150,6 +150,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
+    private get inputStyletWidth(): string {
+        return this.as<InputWidth>().inputWidth == 'auto' && this.as<InputWidth>().maxWidth == 'none' ? 'auto' : '100%';
+    }
+
     public get focused(): any {
         return this.focusedIndex > -1 ? this.internalNavigationItems[this.focusedIndex].value : this.model;
     }

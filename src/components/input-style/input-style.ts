@@ -38,7 +38,7 @@ export class MInputStyle extends ModulVue {
                     setTimeout(() => {
                         inputEl.style.width = '0px';
                         setTimeout(() => {
-                            let width: number = adjustWidthAutoEl.clientWidth < 60 ? 60 : adjustWidthAutoEl.clientWidth;
+                            let width: number = adjustWidthAutoEl.clientWidth < 50 ? 50 : adjustWidthAutoEl.clientWidth;
                             if (this.hasLabel) {
                                 width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
                             }
