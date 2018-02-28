@@ -25,7 +25,7 @@ export class MTextareaResize extends ModulVue {
     }
 
     @Watch('value')
-    private valueChanged() {
+    private valueChanged(): void {
         this.adjustHeight();
     }
 
@@ -39,7 +39,7 @@ export class MTextareaResize extends ModulVue {
 }
 
 const TextareaResizePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(TEXTAREA_RESIZE_NAME + ' is not ready for production');
         v.component(TEXTAREA_RESIZE_NAME, MTextareaResize);
     }

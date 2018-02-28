@@ -130,7 +130,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     @Watch('focus')
-    private focusChanged(focus: boolean) {
+    private focusChanged(focus: boolean): void {
         if (focus && !this.as<InputStateMixin>().isDisabled) {
             (this.$refs.input as HTMLElement).focus();
         } else {
