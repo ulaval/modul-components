@@ -17,7 +17,7 @@
                         <m-i18n k="m-file-upload:extensionFileMsg"></m-i18n>
                     </p>
                     <p class="m-file-upload__error-message__error" v-else-if="hasSizeRejection(file)">
-                        <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb | file-size}}).
+                        <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb * 1024 | file-size}}).
                     </p>
                     <p class="m-file-upload__error-message__error" v-else-if="hasMaxFilesRejection(file)">
                         <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}} <m-i18n :nb="maxFiles" k="m-file-upload:file"></m-i18n>)
