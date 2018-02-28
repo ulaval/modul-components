@@ -10,6 +10,7 @@ import { MDropdownGroup } from '../dropdown-group/dropdown-group';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
+import { InputLabel } from '../../mixins/input-label/input-label';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import i18nPlugin from '../../utils/i18n/i18n';
@@ -28,7 +29,8 @@ const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
         InputState,
         InputPopup,
         MediaQueries,
-        InputWidth
+        InputWidth,
+        InputLabel
     ]
 })
 export class MDropdown extends BaseDropdown implements MDropdownInterface {
@@ -36,11 +38,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public value: any;
     @Prop()
-    public label: string;
-    @Prop()
     public placeholder: string;
-    @Prop()
-    public iconName: string;
     @Prop()
     public filterable: boolean;
     @Prop()
@@ -49,6 +47,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public textNoMatch: string;
     @Prop()
     public listMinWidth: string;
+    @Prop()
+    public focus: boolean;
 
     private internalFilter: string = '';
     private internalFilterRegExp: RegExp = / /;
@@ -81,6 +81,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     protected mounted(): void {
+        if (this.focus) {
+            this.focusChanged(this.focus);
+        }
         this.$nextTick(() => {
             this.buildItemsMap();
 
@@ -124,6 +127,16 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Watch('value')
     private setInternalValue(value: any): void {
         this.setModel(value, false);
+    }
+
+    @Watch('focus')
+    private focusChanged(focus: boolean): void {
+        if (focus && !this.as<InputStateMixin>().isDisabled) {
+            (this.$refs.input as HTMLElement).focus();
+        } else {
+            (this.$refs.input as HTMLElement).blur();
+            this.internalOpen = false;
+        }
     }
 
     public get model(): any {
@@ -235,10 +248,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     public get inactive(): boolean {
         return this.as<InputState>().isDisabled || this.as<InputState>().isWaiting;
-    }
-
-    public get hasLabel(): boolean {
-        return !!this.label;
     }
 
     private onKeydownUp($event: KeyboardEvent): void {

@@ -129,8 +129,14 @@ $m-input-style--padding: 4px !default;
         .m-input-style__body,
         .m-icon-button.m-icon-button,
         .m-icon.m-icon,
-        input {
+        input,
+        textarea {
             color: $m-input-style--color-disabled;
+        }
+
+        input,
+        textarea {
+            user-select: none;
         }
     }
 
@@ -206,7 +212,7 @@ $m-input-style--padding: 4px !default;
         display: inline-flex;
         align-items: center;
         width: 100%;
-        margin-bottom: 2px; // Magic number
+        margin-bottom: 4px; // Magic number
         font-size: $m-font-size;
         font-weight: $m-font-weight;
         color: $m-color--grey-darker;
@@ -218,8 +224,9 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    &__asterisk {
+    &__required-marker {
         color: $m-color--accent;
+        margin-left: 2px;
     }
 
     &__body {
@@ -248,7 +255,6 @@ $m-input-style--padding: 4px !default;
             font-size: $m-font-size;
             font-weight: $m-font-weight--bold;
             text-align: left;
-            color: $m-color--text;
             border: none;
             background: none;
         }
@@ -275,7 +281,6 @@ $m-input-style--padding: 4px !default;
         textarea {
             margin-bottom: -4px; //Margin number
             width: 100%;
-            min-width: 272px;
         }
 
         &__left {

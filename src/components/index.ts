@@ -51,6 +51,7 @@ import TabPanelPlugin from './tab-panel/tab-panel';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
 import TextareaPlugin from './textarea/textarea';
+import TextareaResizePlugin from './textarea-resize/textarea-resize';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
@@ -114,6 +115,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TabsPlugin);
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);
+        Vue.use(TextareaResizePlugin);
         Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
         Vue.use(TooltipPlugin);
