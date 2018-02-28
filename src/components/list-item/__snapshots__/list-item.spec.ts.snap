@@ -1,30 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MDateFields disabled should not render icon 1`] = `
+exports[`MListItem disabled should not render icon 1`] = `
 <li class="m-list-item m--is-disabled m--has-icon">
     <div class="m-list-item__content"></div>
 </li>
 `;
 
-exports[`MDateFields disabled should not render spinner 1`] = `
+exports[`MListItem disabled should not render spinner 1`] = `
 <li class="m-list-item m--is-disabled">
     <div class="m-list-item__content"></div>
 </li>
 `;
 
-exports[`MDateFields disabled should render correctly 1`] = `
+exports[`MListItem disabled should render correctly 1`] = `
 <li class="m-list-item m--is-disabled">
     <div class="m-list-item__content"></div>
 </li>
 `;
 
-exports[`MDateFields should render correctly 1`] = `
+exports[`MListItem should render correctly 1`] = `
 <li class="m-list-item">
     <div class="m-list-item__content">item 1</div>
 </li>
 `;
 
-exports[`MDateFields should render correctly when icon is set 1`] = `
+exports[`MListItem should render correctly when icon is set 1`] = `
 <li class="m-list-item m--has-icon">
     <div class="m-list-item__content"></div>
     <div class="m-list-item__icon">
@@ -37,7 +37,7 @@ exports[`MDateFields should render correctly when icon is set 1`] = `
 </li>
 `;
 
-exports[`MDateFields should render correctly when waiting 1`] = `
+exports[`MListItem should render correctly when waiting 1`] = `
 <li class="m-list-item m--is-waiting">
     <div class="m-list-item__content"></div>
     <div class="m-list-item__icon">
