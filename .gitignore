@@ -1,5 +1,6 @@
 dist
 node_modules
+reports
 src/**/*.d.ts
 npm-debug\.log
 tests/reports

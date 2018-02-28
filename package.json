@@ -16,10 +16,11 @@
         "unit": "jest --verbose --silent",
         "unitwatch": "jest --watch --verbose --silent",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
-        "unitall": "jest --ci --testResultsProcessor=jest-junit",
+        "unitall": "jest --ci --coverage --testResultsProcessor=./tests/jest/ci-test-processor",
         "e2e": "node tests/e2e/index.js",
         "test": "npm run unitall && npm run e2e",
         "tslint": "tslint -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
+        "tslint-ci": "tslint  -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -t junit -o reports/junit/js-lint-results.xml 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
         "stylelint": "stylelint \"src/**/*.css\" \"src/**/*.scss\" --config conf/stylelint.json",
         "prepack": "npm run clean && npm run build"
     },
@@ -49,10 +50,15 @@
         "setupFiles": [
             "<rootDir>/tests/polyfills.js",
             "<rootDir>/tests/setup.ts"
-        ]
+        ],
+        "coverageDirectory": "<rootDir>/reports/coverage"
     },
     "jest-junit": {
-        "output": "./tests/reports/junit.xml"
+        "output": "reports/junit/js-test-results.xml"
+    },
+    "jest-html-reporter": {
+        "outputPath": "reports/junit/js-test-results.html",
+        "includeFailureMsg": true
     },
     "peerDependencies": {
         "axios": "^0.17.1",
@@ -95,6 +101,7 @@
         "filesize": "^3.6.0",
         "html-webpack-plugin": "^2.30.1",
         "jest": "^22.1.4",
+        "jest-html-reporter": "^2.0.0",
         "jest-junit": "^3.6.0",
         "jest-serializer-vue": "^0.3.0",
         "moment": "^2.19.3",

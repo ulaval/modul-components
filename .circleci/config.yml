@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: tslint
+          command: mkdir reports reports/junit; npm run tslint-ci
+
+      - run:
+          name: npm test
+          command: npm run unitall
+
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: reports/
