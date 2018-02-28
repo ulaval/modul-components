@@ -24,7 +24,7 @@ export class MInputStyle extends ModulVue {
     @Prop()
     public iconName: string;
     @Prop()
-    public asterisk: boolean;
+    public requiredMarker: boolean;
 
     private animActive: boolean = false;
 

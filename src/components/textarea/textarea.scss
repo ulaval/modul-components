@@ -37,10 +37,12 @@
         }
     }
 
+    &__label {
+        font-size: $m-font-size;
+        font-weight: $m-font-weight--bold;
+    }
+
     &__input {
-        transition: height 2s ease;
-        overflow: hidden;
-        resize: none;
         width: 100%;
     }
 }
