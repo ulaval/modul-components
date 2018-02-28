@@ -1,5 +1,6 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
+export const ACCORDION_TRANSITION_NAME: string = 'm-accordion-transition';
 export const LIST_ITEM_NAME: string = 'm-list-item';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';

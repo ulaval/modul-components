@@ -92,3 +92,21 @@
         transform: rotate(4680deg);
     }
 }
+
+// ======================================================================
+//  Global transitions
+// ======================================================================
+
+.accordion-enter {
+    height: 0;
+}
+
+.accordion-enter-active,
+.accordion-leave-active {
+    transition: height 0.3s ease-out;
+    overflow: hidden;
+}
+
+.accordion-leave-to {
+    height: 0 !important;
+}

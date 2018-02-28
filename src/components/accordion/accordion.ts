@@ -1,12 +1,13 @@
-import { ModulVue } from '../../utils/vue/vue';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './accordion.html?style=./accordion.scss';
-import { ACCORDION_NAME } from '../component-names';
-import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
+import { Prop } from 'vue-property-decorator';
+
 import uuid from '../../utils/uuid/uuid';
+import { ModulVue } from '../../utils/vue/vue';
+import { ACCORDION_NAME, ACCORDION_TRANSITION_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
+import { MAccordionTransition } from './accordion-transition';
+import WithRender from './accordion.html?style=./accordion.scss';
 
 export enum MAccordionSkin {
     Primary = 'primary',
@@ -35,15 +36,10 @@ export abstract class BaseAccordionGroup extends Vue {
 }
 
 @WithRender
-@Component({
-    mixins: [TransitionAccordion]
-})
+@Component
 export class MAccordion extends ModulVue {
-
-    @Prop()
-    public open: boolean;
-    @Prop()
-    public disabled: boolean;
+    @Prop() public open: boolean;
+    @Prop() public disabled: boolean;
 
     @Prop({
         default: MAccordionSkin.Secondary,
@@ -62,8 +58,7 @@ export class MAccordion extends ModulVue {
     })
     public iconPosition: MAccordionIconPosition;
 
-    @Prop()
-    public iconBorder: boolean;
+    @Prop() public iconBorder: boolean;
 
     @Prop({
         validator: value =>
@@ -72,8 +67,7 @@ export class MAccordion extends ModulVue {
     })
     public iconSize: MAccordionIconSize;
 
-    @Prop()
-    public id: string;
+    @Prop() public id: string;
 
     @Prop({ default: true })
     public padding: boolean;
@@ -100,15 +94,15 @@ export class MAccordion extends ModulVue {
     }
 
     protected created(): void {
-        this.as<TransitionAccordion>().accordionAnim = false;
-        if (this.$parent instanceof BaseAccordionGroup) this.$parent.addAccordion(this.propId, this.open);
-        this.$nextTick(() => {
-            this.as<TransitionAccordion>().accordionAnim = true;
-        });
+        if (this.$parent instanceof BaseAccordionGroup) {
+            this.$parent.addAccordion(this.propId, this.open);
+        }
     }
 
     protected beforeDestroy(): void {
-        if (this.$parent instanceof BaseAccordionGroup) this.$parent.removeAccordion(this.propId);
+        if (this.$parent instanceof BaseAccordionGroup) {
+            this.$parent.removeAccordion(this.propId);
+        }
     }
 
     private get propId(): string {
@@ -116,11 +110,15 @@ export class MAccordion extends ModulVue {
     }
 
     private get propSkin(): MAccordionSkin {
-        return this.$parent instanceof BaseAccordionGroup ? this.$parent.skin : this.skin;
+        return this.$parent instanceof BaseAccordionGroup
+            ? this.$parent.skin
+            : this.skin;
     }
 
     private get propDisabled(): boolean {
-        return this.$parent instanceof BaseAccordionGroup ? this.$parent.disabled : this.disabled;
+        return this.$parent instanceof BaseAccordionGroup
+            ? this.$parent.disabled
+            : this.disabled;
     }
 
     private get propIconPosition(): MAccordionIconPosition {
@@ -147,11 +145,18 @@ export class MAccordion extends ModulVue {
 
     private toggleAccordion(): void {
         if (!this.propDisabled) {
-            if (this.$parent instanceof BaseAccordionGroup) this.$parent.toggleAccordion(this.propId);
+            if (this.$parent instanceof BaseAccordionGroup)
+                this.$parent.toggleAccordion(this.propId);
             (this.$refs.accordionHeader as HTMLElement).blur();
             this.propOpen = !this.propOpen;
             this.$emit('click', this.internalPropOpen);
         }
+        if (this.$parent instanceof BaseAccordionGroup) {
+            this.$parent.toggleAccordion(this.propId);
+        }
+        (this.$refs.accordionHeader as HTMLElement).blur();
+        this.propOpen = !this.propOpen;
+        this.$emit('click', this.internalPropOpen);
     }
 }
 
@@ -159,6 +164,7 @@ const AccordionPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(I18nPlugin);
         v.component(ACCORDION_NAME, MAccordion);
+        v.component(ACCORDION_TRANSITION_NAME, MAccordionTransition);
     }
 };
 
