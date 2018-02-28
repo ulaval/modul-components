@@ -18,6 +18,7 @@ import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
+import ScrollTo, { ScrollToDuration } from '../../directives/scroll-to/scroll-to-lib';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 
@@ -60,6 +61,7 @@ export class MFileUpload extends ModulVue {
     };
 
     private title: string = this.$i18n.translate('m-file-upload:header-title');
+    private internalErrorNumber: number = 0;
 
     private created(): void {
         this.$file.setValidationOptions({
@@ -88,6 +90,17 @@ export class MFileUpload extends ModulVue {
                     f.completeHinted = true;
                 }
             }, COMPLETED_FILES_VISUAL_HINT_DELAY);
+        }
+    }
+
+    @Watch('rejectedFiles')
+    private onFilesRejected(): void {
+        if (this.rejectedFiles.length > 0 && this.internalErrorNumber !== this.rejectedFiles.length) {
+            this.internalErrorNumber = this.rejectedFiles.length;
+            let bodyRef: HTMLElement = (this.$refs.dialog.$refs.body as HTMLElement);
+            bodyRef.scrollTop = 0;
+            // TODO Change function to have a smooth scroll when it will work on a diferent element than the body of the page
+            // ScrollTo.startScroll(bodyRef, 0, ScrollToDuration.Regular);
         }
     }
 

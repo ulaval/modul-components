@@ -25,7 +25,7 @@
                             </m-icon-button>
                         </div>
                     </header>
-                    <div class="m-dialog__body"
+                    <div class="m-dialog__body" ref="body"
                          :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
                         <slot></slot>
                     </div>
