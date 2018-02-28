@@ -9,7 +9,8 @@ import uuid from '../../utils/uuid/uuid';
 import I18nPlugin from '../i18n/i18n';
 
 export enum MAccordionSkin {
-    Regular = 'regular',
+    Primary = 'primary',
+    Secondary = 'secondary',
     Light = 'light',
     Plain = 'plain'
 }
@@ -42,9 +43,10 @@ export class MAccordion extends ModulVue {
     public open: boolean;
 
     @Prop({
-        default: MAccordionSkin.Regular,
+        default: MAccordionSkin.Secondary,
         validator: value =>
-            value == MAccordionSkin.Regular ||
+            value == MAccordionSkin.Primary ||
+            value == MAccordionSkin.Secondary ||
             value == MAccordionSkin.Light ||
             value == MAccordionSkin.Plain
     })
@@ -69,6 +71,11 @@ export class MAccordion extends ModulVue {
 
     @Prop()
     public id: string;
+
+    @Prop({ default: true })
+    public paddingHeader: string;
+    @Prop({ default: true })
+    public paddingBody: string;
 
     private uuid: string = uuid.generate();
     private internalPropOpen: boolean = false;
