@@ -2,17 +2,13 @@
 
 exports[`MProgress bar mode should render correctly 1`] = `
 <div name="m--is" appear="" class="m-progress m--is-determinate  m--is-in-progress" style="height:6px;border-radius:3px;">
-    <div class="m-progress__wrap">
-        <div class="m-progress__bar" style="width:0%;"></div>
-    </div>
+    <div class="m-progress__bar" style="width:0%;border-bottom-left-radius:3px;border-top-left-radius:3px;"></div>
 </div>
 `;
 
 exports[`MProgress indeterminate mode should render correctly 1`] = `
 <div name="m--is" appear="" class="m-progress m--is-indeterminate m--is-in-progress" style="height:6px;border-radius:3px;">
-    <div class="m-progress__wrap">
-        <div class="m-progress__bar" style="width:0%;"></div>
-    </div>
+    <div class="m-progress__bar" style="width:0%;border-bottom-left-radius:3px;border-top-left-radius:3px;"></div>
 </div>
 `;
 

@@ -6,9 +6,9 @@
          'm--is-completed': state=='completed',
          'm--is-in-progress': state=='in-progress',
          'm--is-error': state=='error', }">
-         <div class="m-progress__wrap">
-             <div v-if="!circle" class="m-progress__bar" :style="{ width: stringValue }"></div>
-            <template v-else>
+         <div v-if="!circle" class="m-progress__bar" :style="barStyleObject"></div>
+         <div v-else class="m-progress__wrap">
+            <template>
                 <svg
                     class="m-progress__draw"
                     preserveAspectRatio="xMidYMid meet"
