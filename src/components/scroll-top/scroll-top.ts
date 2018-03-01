@@ -86,7 +86,7 @@ export class MScrollTop extends ModulVue {
         return this.position == MScrollTopPosition.Relative ? this.$el.offsetTop : 0;
     }
 
-    private onClick(event) {
+    private onClick(event): void {
         ScrollTo.startScroll(this.$modul.bodyEl, this.scrollTarget, this.propDuration);
         (this.$refs.scrollButton as HTMLElement).blur();
         this.$emit('click');
@@ -116,7 +116,7 @@ export class MScrollTop extends ModulVue {
 }
 
 const ScrollTopPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(SCROLL_TOP_NAME + ' is not ready for production');
         v.use(IconPlugin);
         v.use(ButtonPlugin);

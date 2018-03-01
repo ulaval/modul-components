@@ -1,22 +1,27 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import WithRender from './textarea.html?style=./textarea.scss';
 import { TEXTAREA_NAME } from '../component-names';
-import { InputState } from '../../mixins/input-state/input-state';
-import { InputManagement } from '../../mixins/input-management/input-management';
 import { KeyCode } from '../../utils/keycode/keycode';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
+import { InputState } from '../../mixins/input-state/input-state';
+import { InputManagement } from '../../mixins/input-management/input-management';
+import { InputLabel } from '../../mixins/input-label/input-label';
+import { ElementQueries } from '../../mixins/element-queries/element-queries';
+import { MTextareaResize } from '../textarea-resize/textarea-resize';
 
 @WithRender
 @Component({
     mixins: [
         InputState,
         InputManagement,
-        InputWidth
+        InputWidth,
+        InputLabel,
+        ElementQueries
     ]
 })
 export class MTextarea extends ModulVue {
@@ -27,12 +32,11 @@ export class MTextarea extends ModulVue {
     private textareaHeight: string;
 
     protected mounted(): void {
-        this.adjustHeight();
+        this.as<ElementQueries>().$on('resize', this.resizeInput);
     }
 
-    @Watch('value')
-    private valueChanged() {
-        this.adjustHeight();
+    protected beforeDestroy(): void {
+        this.as<ElementQueries>().$off('resize',this.resizeInput);
     }
 
     private get valueLenght(): number {
@@ -57,15 +61,13 @@ export class MTextarea extends ModulVue {
         return !this.textareaError && this.as<InputState>().isValid;
     }
 
-    private adjustHeight(): void {
-        let el: HTMLElement = (this.$refs.input as HTMLElement);
-        el.style.height = 'auto';
-        el.style.height = el.scrollHeight + 'px';
+    private resizeInput(): void {
+        (this.$refs.textarea as MTextareaResize).resize();
     }
 }
 
 const TextareaPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(TEXTAREA_NAME + ' is not ready for production');
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);

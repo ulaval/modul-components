@@ -13,18 +13,17 @@ export class HttpService implements RestAdapter {
         // });
     }
 
-    public execute<T>(config: RequestConfig): Promise<any> {
-        let axiosConfig: AxiosRequestConfig = this.buildConfig(config);
+    public execute<T>(
+        config: RequestConfig,
+        axiosOptions?: AxiosRequestConfig
+    ): Promise<AxiosResponse<T>> {
+        let mergedConfig: AxiosRequestConfig = this.buildConfig(config);
+        mergedConfig = {
+            ...mergedConfig,
+            ...axiosOptions
+        };
 
-        let response: AxiosPromise = axios(axiosConfig);
-
-        return new Promise((resolve, reject) => {
-            response.then(value => {
-                resolve(value);
-            }, reason => {
-                reject(reason);
-            });
-        });
+        return axios.request<T>(mergedConfig);
     }
 
     private buildConfig(config: RequestConfig): AxiosRequestConfig {
@@ -71,9 +70,8 @@ export class HttpService implements RestAdapter {
 }
 
 const HttpPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         let http = new HttpService();
-        (v as any).$http = http;
         (v.prototype as any).$http = http;
     }
 };

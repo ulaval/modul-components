@@ -1,0 +1,22 @@
+{
+    "m-file-upload": {
+        "header-title": "Ajouter des fichiers",
+        "title": "Glisser-déposer des fichiers",
+        "choice": "ou",
+        "format": "Formats acceptés",
+        "import": "En cours d'importation",
+        "file": "fichier",
+        "files": "fichiers",
+        "add": "Ajouter",
+        "cancel": "Annuler",
+        "rejectFileMsg": "Le fichier suivant ne peut être ajouté.",
+        "rejectFilesMsg": "Les fichiers suivants ne peuvent être ajoutés.",
+        "extensionFileMsg": "L'extension du fichier n’est pas acceptée.",
+        "extensionFilesMsg": "L'extension des fichiers n’est pas acceptée.",
+        "errorMsg": "Une erreur s'est produite durant le téléversement.",
+        "size-b": "o",
+        "size-kb": "ko",
+        "size-mb": "Mo",
+        "size-gb": "Go"
+    }
+}

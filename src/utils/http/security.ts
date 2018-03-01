@@ -35,13 +35,12 @@ class Security {
 }
 
 const SecurityPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         if (!options) {
             throw new Error('SecurityPlugin.install -> options cannot be null');
         }
 
         let security = new Security(options);
-        (v as any).$security = security;
         (v.prototype as any).$security = security;
     }
 };

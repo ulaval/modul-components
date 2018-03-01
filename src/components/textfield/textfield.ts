@@ -11,6 +11,7 @@ import { KeyCode } from '../../utils/keycode/keycode';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
+import { InputLabel } from '../../mixins/input-label/input-label';
 import ButtonPlugin from '../button/button';
 
 export enum MTextfieldType {
@@ -29,7 +30,8 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
     mixins: [
         InputState,
         InputManagement,
-        InputWidth
+        InputWidth,
+        InputLabel
     ]
 })
 export class MTextfield extends ModulVue {
@@ -97,7 +99,7 @@ export class MTextfield extends ModulVue {
 }
 
 const TextfieldPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(ButtonPlugin);

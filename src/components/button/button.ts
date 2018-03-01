@@ -110,7 +110,7 @@ export class MButton extends Vue {
 }
 
 const ButtonPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(BUTTON_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(SpinnerPlugin);

@@ -34,6 +34,8 @@ export class MIconButton extends Vue {
     public iconName: string;
     @Prop({ default: '20px' })
     public iconSize: string;
+    @Prop({ default: true })
+    public ripple: boolean;
     @Prop()
     public title: string;
 
@@ -84,7 +86,7 @@ export class MIconButton extends Vue {
 }
 
 const IconButtonPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(ICON_BUTTON_NAME, 'plugin.install');
         console.warn(ICON_BUTTON_NAME + ' is not ready for production');
         v.use(IconPlugin);

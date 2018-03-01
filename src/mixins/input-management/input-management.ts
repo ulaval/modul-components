@@ -11,23 +11,39 @@ export class InputManagement extends ModulVue {
     @Model('input')
     public value: string;
     @Prop()
-    public label: string;
-    @Prop()
-    public iconName: string;
-    @Prop()
     public placeholder: string;
     @Prop()
     public readonly: boolean;
     @Prop()
-    public asterisk: boolean;
+    public focus: boolean;
 
     public internalValue: string = '';
     private internalIsFocus: boolean = false;
 
+    protected mounted(): void {
+        if (this.focus) {
+            this.focusChanged(this.focus);
+        }
+    }
+
+    @Watch('focus')
+    private focusChanged(focus: boolean): void {
+        this.internalIsFocus = focus && !this.as<InputStateMixin>().isDisabled;
+        let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+        if (inputEl) {
+            if (this.internalIsFocus) {
+                inputEl.focus();
+            } else {
+                inputEl.blur();
+            }
+        }
+    }
+
     private onClick(event: MouseEvent): void {
         this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
-        if (this.internalIsFocus) {
-            (this.$refs.input as HTMLElement).focus();
+        let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+        if (this.internalIsFocus && inputEl) {
+            inputEl.focus();
         }
         this.$emit('click');
     }
@@ -44,14 +60,24 @@ export class InputManagement extends ModulVue {
         this.$emit('blur', event);
     }
 
-    private onKeyup(event): void {
+    private onKeyup(event: Event): void {
         if (!this.as<InputStateMixin>().isDisabled) {
             this.$emit('keyup', event, this.model);
         }
     }
 
-    private onChange(event): void {
+    private onKeydown(event: Event): void {
+        if (!this.as<InputStateMixin>().isDisabled) {
+            this.$emit('keydown', event);
+        }
+    }
+
+    private onChange(event: Event): void {
         this.$emit('change', this.model);
+    }
+
+    private onPaste(event: Event): void {
+        this.$emit('paste', event);
     }
 
     @Watch('value')
@@ -78,13 +104,5 @@ export class InputManagement extends ModulVue {
 
     private get isFocus(): boolean {
         return this.internalIsFocus;
-    }
-
-    private get hasLabel(): boolean {
-        return !!this.label;
-    }
-
-    private get hasIcon(): boolean {
-        return !!this.iconName && !this.as<InputStateMixin>().isDisabled;
     }
 }

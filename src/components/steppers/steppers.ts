@@ -63,14 +63,14 @@ export class MSteppers extends BaseSteppers {
         }
     }
 
-    protected mounted() {
+    protected mounted(): void {
         this.setMinWidth();
         this.setHiddenHeight();
         this.setLineWidth();
         this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
     }
 
-    private setMinWidth() {
+    private setMinWidth(): void {
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
         wrapItem.style.opacity = '0';
         wrapItem.style.display = 'block';
@@ -86,7 +86,7 @@ export class MSteppers extends BaseSteppers {
         wrapItem.style.opacity = '1';
     }
 
-    private setHiddenHeight() {
+    private setHiddenHeight(): void {
         let overflowWrapper: HTMLElement = this.$refs.overflowWrapper as HTMLElement;
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
         let initHeight = wrapItem.clientHeight;
@@ -94,17 +94,17 @@ export class MSteppers extends BaseSteppers {
         overflowWrapper.style.height = initHeight + 40 + 'px';
     }
 
-    private centeringElement(element) {
+    private centeringElement(element): void {
         (this.$refs.overflowWrapper as HTMLElement).scrollLeft = element.offsetLeft - ((this.$el.clientWidth / 2) - (element.clientWidth / 2));
     }
 
-    private scrollElement(element) {
+    private scrollElement(element): void {
         (this.$refs.overflowWrapper as HTMLElement).scrollLeft = element.offsetLeft;
     }
 }
 
 const SteppersPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(STEPPERS_NAME, MSteppers);
     }
 };

@@ -35,7 +35,7 @@ readFolders(source, (root, path, done) => {
 
 function createProps(meta, source, errors) {
     let prop = undefined;
-    const propRegExp = new RegExp(/@Prop\(([\s\S]*?)\)\s*(?:@Model\(\'?[\w\d]+\'?\)\s*)?public\s*(\w*):\s*(\w\s|.*);/, 'g');
+    const propRegExp = new RegExp(/@Prop\(([\s\S]*?)\)\s*(?:@Model\(\'?[\w\d]+\'?\)\s*)?public\s*(\w*)\??:\s*(\w\s|.*);/, 'g');
     do {
         prop = propRegExp.exec(source);
         if (prop) {

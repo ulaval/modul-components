@@ -54,7 +54,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
     public isEqM: boolean = false;
     public isEqL: boolean = false;
 
-    public active: boolean = true;
+    public eqActive: boolean = true;
 
     private resizeSensor: ResizeSensor;
     private doneResizeEvent: any;
@@ -73,7 +73,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
     }
 
     private resizeElement(el: HTMLElement): void {
-        if (this.active) {
+        if (this.eqActive) {
             this.setEqMin(el);
             this.setEqMax(el);
             this.setEq(el);

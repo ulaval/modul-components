@@ -1,5 +1,3 @@
-import { SCROLL_TO_NAME } from '../directive-names';
-
 export enum ScrollToDuration {
     Null = 'null',
     Slow = 'slow',
@@ -8,9 +6,12 @@ export enum ScrollToDuration {
 }
 
 export class ScrollTo {
-
     // https://coderwall.com/p/hujlhg/smooth-scrolling-without-jquery
-    public startScroll(element: HTMLElement = document.body, target: number = 0, duration: string = ScrollToDuration.Regular) {
+    public startScroll(
+        element: HTMLElement = document.body,
+        target: number = 0,
+        duration: string = ScrollToDuration.Regular
+    ): Promise<any> {
         target = Math.round(target);
         let time: number;
 
@@ -45,8 +46,12 @@ export class ScrollTo {
 
         // based on http://en.wikipedia.org/wiki/Smoothstep
         let smoothStep = (start, end, point) => {
-            if (point <= start) { return 0; }
-            if (point >= end) { return 1; }
+            if (point <= start) {
+                return 0;
+            }
+            if (point >= end) {
+                return 1;
+            }
             let x = (point - start) / (end - start); // interpolation
             return x * x * (3 - 2 * x);
         };
@@ -66,7 +71,7 @@ export class ScrollTo {
                 // set the scrollTop for this frame
                 let now = Date.now();
                 let point = smoothStep(startTime, endTime, now);
-                let frameTop = Math.round(startTop + (distance * point));
+                let frameTop = Math.round(startTop + distance * point);
                 window.scrollTo(0, frameTop);
 
                 // check if we're done!
@@ -78,8 +83,10 @@ export class ScrollTo {
                 // If we were supposed to scroll but didn't, then we
                 // probably hit the limit, so consider it done; not
                 // interrupted.
-                if (window.pageYOffset === previousTop
-                    && window.pageYOffset !== frameTop) {
+                if (
+                    window.pageYOffset === previousTop &&
+                    window.pageYOffset !== frameTop
+                ) {
                     resolve();
                     return;
                 }

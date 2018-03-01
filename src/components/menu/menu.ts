@@ -49,10 +49,9 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     public size: string;
 
     public hasIcon: boolean = false;
-
     private open = false;
 
-    public checkIcon(icon: boolean) {
+    public checkIcon(icon: boolean): void {
         if (icon) {
             this.hasIcon = true;
         }
@@ -70,10 +69,14 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     private onClose(): void {
         this.$emit('close');
     }
+
+    private onClick($event: MouseEvent): void {
+        this.$emit('click', $event);
+    }
 }
 
 const MenuPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(PopupPlugin);
         v.use(I18nPlugin);
         v.use(MMenuItemPlugin);
