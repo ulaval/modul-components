@@ -14,7 +14,7 @@ exports[`MProgress indeterminate mode should render correctly 1`] = `
 
 exports[`MProgress indeterminate mode should render correctly when circle 1`] = `
 <div name="m--is" appear="" class="m-progress m--is-circle m--is-determinate  m--is-in-progress" style="height:100%;border-radius:initial;">
-    <div class="m-progress__wrap">
+    <div class="m-progress__wrap" style="width:50px;height:50px;">
         <svg preserveAspectRatio="xMidYMid meet" focusable="false" viewBox="0 0 50 50" class="m-progress__draw" style="width:50px;height:50px;">
             <circle cx="50%" cy="50%" r="23" class="m-progress__background" style="stroke-dasharray:144.51326206513048px;stroke-width:4px;animation-name:m-progress-spinner-stroke-rotate-50;"></circle>
             <circle cx="50%" cy="50%" r="23" class="m-progress__circle" style="stroke-dashoffset:NaNpx;stroke-dasharray:144.51326206513048px;stroke-width:4px;animation-name:m-progress-spinner-stroke-rotate-50;"></circle>
