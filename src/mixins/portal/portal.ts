@@ -11,7 +11,7 @@ export interface PortalMixin {
     getTrigger(): HTMLElement | undefined;
     setFocusToPortal(): void;
     setFocusToTrigger(): void;
-    tryClose(): boolean;
+    tryClose(): void;
 }
 
 export interface PortalMixinImpl {
@@ -63,9 +63,6 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop()
     public className: string;
 
-    @Prop()
-    public stayOpen: boolean;
-
     private internalTrigger: HTMLElement | undefined = undefined;
     private propId: string = '';
     private portalTargetEl: HTMLElement;
@@ -103,17 +100,15 @@ export class Portal extends ModulVue implements PortalMixin {
         return this.internalTrigger;
     }
 
-    public tryClose(): boolean {
+    public tryClose(): void {
         if (this.$modul.peekElement() == this.stackId) {
-            if (this.stayOpen !== undefined) {
-                this.propOpen = this.stayOpen;
-                return !this.stayOpen;
+            if (this.$listeners && this.$listeners.beforeClose) {
+                this.$emit('beforeClose', (close: boolean) => {
+                    this.propOpen = !close;
+                });
             } else {
                 this.propOpen = false;
-                return true;
             }
-        } else {
-            return false;
         }
     }
 
