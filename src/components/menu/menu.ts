@@ -49,7 +49,6 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     public size: string;
 
     public hasIcon: boolean = false;
-
     private open = false;
 
     public checkIcon(icon: boolean): void {
