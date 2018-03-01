@@ -28,7 +28,7 @@
                              :class="{ 'm--no-padding': !padding || !paddingFooter }">
                             <slot name="footer">
                                 <div>
-                                    <m-button @click="save()" class="m-edit-window__footer__save-button"><m-i18n k="m-edit-window:save"></m-i18n></m-button>
+                                    <m-button @click="save()" :disabled="isSaveButtonDisabled" class="m-edit-window__footer__save-button"><m-i18n k="m-edit-window:save"></m-i18n></m-button>
                                     <m-button @click="cancel()" skin="secondary"><m-i18n k="m-edit-window:cancel"></m-i18n></m-button>
                                 </div>
                             </slot>

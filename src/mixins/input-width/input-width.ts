@@ -48,7 +48,7 @@ export class InputWidth extends ModulVue {
         return maxWidth;
     }
 
-    private get inputWidth(): string | undefined {
+    public get inputWidth(): string | undefined {
         return this.width == 'none' ? undefined : this.width;
     }
 }

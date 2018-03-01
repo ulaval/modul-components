@@ -1,10 +1,11 @@
 <div class="m-textarea"
-        :class="{ 'm--is-disabled' : isDisabled,
-                  'm--is-waiting' : isWaiting,
-                  'm--has-error' : textareaError,
-                  'm--is-valid' : textareaValid,
-                  'm--has-icon' : hasIcon,
-                  'm--has-label': hasLabel }"
+     :class="{ 'm--is-disabled' : isDisabled,
+               'm--is-waiting' : isWaiting,
+               'm--has-error' : textareaError,
+               'm--is-valid' : textareaValid,
+               'm--is-focus' : isFocus,
+               'm--has-icon' : hasIcon,
+               'm--has-label': hasLabel }"
      @click="onClick"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
@@ -14,19 +15,24 @@
                    :label="label"
                    :focus="isFocus"
                    :empty="isEmpty"
-                   :icon-name="iconName">
-        <textarea class="m-textarea__input"
+                   :icon-name="iconName"
+                   :required-marker="requiredMarker">
+        <m-textarea-resize class="m-textarea__input"
                   :disabled="!active"
                   :placeholder="placeholder"
                   :readonly="readonly"
                   rows="1"
+                  :focus="focus"
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
-                  ref="input"
-                  v-model="model"
-                  :style="{ maxWidth: maxWidth }"></textarea>
+                  @keyup="onKeyup"
+                  @keydown="onKeydown"
+                  @paste="onPaste"
+                  ref="textarea"
+                  v-model="model"></m-textarea-resize>
     </m-input-style>
+    </template>
     <div class="m-textarea__validation">
         <m-validation-message
             class="m-textarea__validation__message"

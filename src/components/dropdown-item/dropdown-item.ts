@@ -97,7 +97,7 @@ export class MDropdownItem extends ModulVue {
 }
 
 const DropdownItemPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.use(RadioStylePlugin);
         v.component(DROPDOWN_ITEM_NAME, MDropdownItem);
     }

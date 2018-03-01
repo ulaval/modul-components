@@ -89,6 +89,17 @@ export class MProgress extends ModulVue {
         };
     }
 
+    private get barStyleObject(): { [name: string ]: string } {
+        return this.value >= 100 ? {
+            width: this.stringValue,
+            borderRadius: this.radiusSize
+        } : {
+            width: this.stringValue,
+            'border-bottom-left-radius': this.radiusSize,
+            'border-top-left-radius': this.radiusSize
+        };
+    }
+
     private get stringValue(): string {
         if (!this.indeterminate) {
             if (this.value < 0) {
@@ -212,7 +223,7 @@ export class MProgress extends ModulVue {
 }
 
 const ProgressPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(PROGRESS_NAME, 'plugin.install');
         v.component(PROGRESS_NAME, MProgress);
     }

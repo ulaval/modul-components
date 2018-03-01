@@ -3,7 +3,7 @@ import { POPUP_NAME } from '../directive-names';
 import { OpenTrigger } from '../../mixins/open-trigger/open-trigger';
 
 const MPopupDirective: DirectiveOptions = {
-    bind(element: HTMLElement, binding: VNodeDirective, node: VNode) {
+    bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         if (node.context) {
             node.context.$nextTick(() => {
                 if (node.context) {
@@ -15,7 +15,7 @@ const MPopupDirective: DirectiveOptions = {
 };
 
 const PopupPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.directive(POPUP_NAME, MPopupDirective);
     }
 };

@@ -74,7 +74,7 @@ export class MModal extends ModulVue implements PortalMixinImpl {
 }
 
 const ModalPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(MODAL_NAME, MModal);
     }
 };

@@ -50,6 +50,7 @@ export const TAB_PANEL_NAME: string = 'm-tab-panel';
 export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
 export const TEXTAREA_NAME: string = 'm-textarea';
+export const TEXTAREA_RESIZE_NAME: string = 'm-textarea-resize';
 export const TEXTFIELD_NAME: string = 'm-textfield';
 export const TIMEPICKER_NAME: string = 'm-timepicker';
 export const TOOLTIP_NAME: string = 'm-tooltip';

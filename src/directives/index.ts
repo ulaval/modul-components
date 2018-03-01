@@ -6,7 +6,7 @@ import ScrollToPlugin from './scroll-to/scroll-to';
 import FileDropPlugin from './file-drop/file-drop';
 
 const DirectivesPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         Vue.use(PopupPlugin);
         Vue.use(RippleEffectPlugin);
         Vue.use(ScrollToPlugin);

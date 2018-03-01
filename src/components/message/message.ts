@@ -99,7 +99,7 @@ export class MMessage extends Vue {
 }
 
 const MessagePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(MESSAGE_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(IconButtonPlugin);

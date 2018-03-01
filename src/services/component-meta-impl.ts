@@ -1,6 +1,4 @@
-import { PluginObject } from 'vue';
-import Vue from 'vue';
-
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 
 // TODO-remove mixin test
@@ -41,7 +39,7 @@ const f3: GlobalFunc = (s: string) => {
 };
 
 const ComponentMetaService: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         (v as any).$globalF1 = f1;
         (v.prototype as any).$aa = 'aa';
         v.mixin(new GlobalMixin());

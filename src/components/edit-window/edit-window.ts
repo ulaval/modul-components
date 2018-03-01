@@ -24,6 +24,8 @@ export class MEditWindow extends ModulVue {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
+    @Prop({ default: false })
+    public disableSaveButton: boolean;
 
     protected mounted(): void {
         this.as<Portal>().transitionDuration = PortalTransitionDuration.Regular + PortalTransitionDuration.XSlow;
@@ -53,6 +55,10 @@ export class MEditWindow extends ModulVue {
         return !!this.$slots['header-right'];
     }
 
+    private get isSaveButtonDisabled(): boolean {
+        return this.disableSaveButton;
+    }
+
     private get hasFooterSlot(): boolean {
         return !!this.$slots.footer;
     }
@@ -72,7 +78,7 @@ export class MEditWindow extends ModulVue {
 }
 
 const FullpagePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         v.component(EDIT_WINDOW_NAME, MEditWindow);
     }
 };

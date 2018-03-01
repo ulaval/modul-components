@@ -48,7 +48,7 @@ export class MStatus extends Vue {
 }
 
 const Status: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(STATUS_NAME + ' is not ready for production');
         v.use(IconPlugin);
         v.component(STATUS_NAME, MStatus);

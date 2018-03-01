@@ -20,7 +20,7 @@ export class MValidationMessage extends ModulVue {
 }
 
 const ValidationMessagePlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(VALIDATION_MESSAGE_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.component(VALIDATION_MESSAGE_NAME, MValidationMessage);

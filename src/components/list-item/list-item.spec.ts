@@ -6,7 +6,7 @@ import { renderComponent } from '../../../tests/helpers/render';
 import IconPlugin from '../icon/icon';
 import ListItemPlugin, { MListItem } from './list-item';
 
-describe('MDateFields', () => {
+describe('MListItem', () => {
     let localVue: VueConstructor<Vue>;
     beforeEach(() => {
         localVue = createLocalVue();

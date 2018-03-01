@@ -24,7 +24,7 @@ export class MCarousel extends Vue {
     private updateInterval: any;
     private transitionForward: boolean = true;
 
-    protected mounted() {
+    protected mounted(): void {
         document.addEventListener('keyup', this.changeItem);
         if (this.interval) {
             this.updateInterval = setInterval(() => {
@@ -33,7 +33,7 @@ export class MCarousel extends Vue {
         }
     }
 
-    protected updated() {
+    protected updated(): void {
         if (this.isIndexValid(this.propIndex) || this.propIndex === 0 && this.items.length === 0) {
             this.transitionForward = this.internalIndex <= this.propIndex;
             this.internalIndex = this.propIndex;
@@ -45,11 +45,11 @@ export class MCarousel extends Vue {
                         item.componentInstance.transitionForward = this.transitionForward;
                         item.componentInstance.isVisible = index === this.internalIndex;
                         item.componentInstance.$slots.default.forEach(content => {
-                            let el = content.componentInstance && content.componentInstance.$el || content.elm;
-                            if (el instanceof HTMLElement) {
-                                el.style.maxHeight = this.$el.style.height || '100vh';
-                                el.style.maxWidth = this.$el.clientWidth + 'px';
+                            let el: HTMLElement = content.componentInstance && content.componentInstance.$el || content.elm as HTMLElement;
+                            if (el instanceof HTMLElement && (el.tagName == 'IMG' || el.tagName == 'PICTURE')) {
                                 el.style.display = 'block';
+                                el.style.maxWidth = this.$el.clientWidth + 'px';
+                                el.style.maxHeight = '100%';
                             }
                         });
                         items.push(item.componentInstance);
@@ -61,12 +61,12 @@ export class MCarousel extends Vue {
         }
     }
 
-    protected beforeDestroy() {
+    protected beforeDestroy(): void {
         document.removeEventListener('keyup', this.changeItem);
         clearInterval(this.updateInterval);
     }
 
-    private changeItem(e) {
+    private changeItem(e): void {
         if (e.keyCode === 37) {
             this.showPrevItem();
         } else if (e.keyCode === 39) {
@@ -96,7 +96,7 @@ export class MCarousel extends Vue {
         return value >= 0 && value < this.items.length;
     }
 
-    private showPrevItem(resetInterval: boolean = false) {
+    private showPrevItem(resetInterval: boolean = false): void {
         if (this.isIndexValid(this.propIndex - 1)) {
             this.showItem(this.propIndex - 1, false, resetInterval);
         } else if (this.infinite) {
@@ -104,7 +104,7 @@ export class MCarousel extends Vue {
         }
     }
 
-    private showNextItem(resetInterval: boolean = false) {
+    private showNextItem(resetInterval: boolean = false): void {
         if (this.isIndexValid(this.propIndex + 1)) {
             this.showItem(this.propIndex + 1, true, resetInterval);
         } else if (this.infinite) {
@@ -112,7 +112,7 @@ export class MCarousel extends Vue {
         }
     }
 
-    private showItem(index: number, transitionForward: boolean, resetInterval: boolean) {
+    private showItem(index: number, transitionForward: boolean, resetInterval: boolean): void {
         this.transitionForward = transitionForward;
         this.propIndex = index;
         if (resetInterval) {
@@ -120,7 +120,7 @@ export class MCarousel extends Vue {
         }
     }
 
-    private resetInterval() {
+    private resetInterval(): void {
         if (this.interval) {
             clearInterval(this.updateInterval);
             this.updateInterval = setInterval(() => {
@@ -131,7 +131,7 @@ export class MCarousel extends Vue {
 }
 
 const CarouselPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(CAROUSEL_NAME + ' is not ready for production');
         v.component(CAROUSEL_NAME, MCarousel);
     }

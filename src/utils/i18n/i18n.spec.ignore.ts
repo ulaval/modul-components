@@ -7,7 +7,7 @@ describe('i18n plugin', () => {
         Vue.use(i18nPlugin);
 
         Vue.use({
-            install(v, options) {
+            install(v, options): void {
                 expect((v as any).$i18n).toBeDefined();
             }
         });

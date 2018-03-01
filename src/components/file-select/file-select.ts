@@ -72,7 +72,7 @@ export class MFileSelect extends ModulVue {
 }
 
 const FileSelectPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug(FILE_SELECT_NAME, 'plugin.install');
         v.use(ButtonPlugin);
         v.use(ValidationMesagePlugin);

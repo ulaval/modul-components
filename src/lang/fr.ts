@@ -3,7 +3,7 @@ import { PluginObject } from 'vue';
 import { BundleMessagesMap, FRENCH, Messages } from '../utils/i18n/i18n';
 
 const FrenchPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.debug('FrenchPlugin', 'plugin.install');
         const i18n: Messages = (v.prototype as any).$i18n;
         if (i18n) {

@@ -60,12 +60,12 @@ export class MLimitText extends ModulVue {
         return this.internalOpen;
     }
 
-    private onOpen() {
+    private onOpen(): void {
         this.internalOpen = true;
         this.$emit('update:open', true);
     }
 
-    private onClose() {
+    private onClose(): void {
         this.internalOpen = false;
         this.$emit('update:open', false);
     }
@@ -80,7 +80,7 @@ export class MLimitText extends ModulVue {
 }
 
 const LimitTextPlugin: PluginObject<any> = {
-    install(v, options) {
+    install(v, options): void {
         console.warn(LIMIT_TEXT_NAME + ' is not ready for production');
         v.use(I18nPlugin);
         v.use(LinkPlugin);
