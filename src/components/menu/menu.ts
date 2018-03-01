@@ -47,11 +47,8 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     public disabled: boolean;
     @Prop({ default: '44px' })
     public size: string;
-    @Prop()
-    public buttonSize: string;
 
     public hasIcon: boolean = false;
-
     private open = false;
 
     public checkIcon(icon: boolean): void {
