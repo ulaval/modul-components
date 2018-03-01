@@ -63,6 +63,9 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop()
     public className: string;
 
+    @Prop()
+    public stayOpen: boolean;
+
     private internalTrigger: HTMLElement | undefined = undefined;
     private propId: string = '';
     private portalTargetEl: HTMLElement;
@@ -102,8 +105,13 @@ export class Portal extends ModulVue implements PortalMixin {
 
     public tryClose(): boolean {
         if (this.$modul.peekElement() == this.stackId) {
-            this.propOpen = false;
-            return true;
+            if (this.stayOpen !== undefined) {
+                this.propOpen = this.stayOpen;
+                return !this.stayOpen;
+            } else {
+                this.propOpen = false;
+                return true;
+            }
         } else {
             return false;
         }
