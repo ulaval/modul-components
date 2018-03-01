@@ -7,7 +7,7 @@
          'm--is-in-progress': state=='in-progress',
          'm--is-error': state=='error', }">
          <div v-if="!circle" class="m-progress__bar" :style="barStyleObject"></div>
-         <div v-else class="m-progress__wrap">
+         <div v-else class="m-progress__wrap" :style="svgStyles">
             <template>
                 <svg
                     class="m-progress__draw"
