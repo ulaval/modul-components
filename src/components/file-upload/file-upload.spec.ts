@@ -1,4 +1,4 @@
-import { createLocalVue, mount, Stubs } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { createMockFile, createMockFileList } from '../../../tests/helpers/file';
@@ -24,7 +24,9 @@ describe('MFileUpload', () => {
     });
 
     it('should render correctly', () => {
-        const fupd = mountFileUpd();
+        const fupd = mount(MFileUpload, {
+            localVue: localVue
+        });
 
         return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
     });
@@ -40,7 +42,10 @@ describe('MFileUpload', () => {
             const filesvc = (localVue.prototype as ModulVue).$file;
             jest.spyOn(filesvc, 'setValidationOptions');
 
-            const fupd = mountFileUpd(validationOpts);
+            const fupd = mount(MFileUpload, {
+                localVue: localVue,
+                propsData: validationOpts
+            });
 
             expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
                 validationOpts
@@ -48,7 +53,10 @@ describe('MFileUpload', () => {
         });
 
         it('should render accepted file extensions', () => {
-            const fupd = mountFileUpd(validationOpts);
+            const fupd = mount(MFileUpload, {
+                localVue: localVue,
+                propsData: validationOpts
+            });
 
             return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
         });
@@ -79,7 +87,9 @@ describe('MFileUpload', () => {
         });
 
         it('should emit files-ready event when $file managed files change', async () => {
-            const fupd = mountFileUpd();
+            const fupd = mount(MFileUpload, {
+                localVue: localVue
+            });
 
             fupd.vm.$file.add(createMockFileList([createMockFile('new-file')]));
             await Vue.nextTick();
@@ -109,7 +119,9 @@ describe('MFileUpload', () => {
 
         it('should emit done event when add button is clicked', () => {
             localVue.use(ButtonPlugin);
-            const fupd = mountFileUpd();
+            const fupd = mount(MFileUpload, {
+                localVue: localVue
+            });
 
             fupd.find('button:nth-child(1)').trigger('click');
 
@@ -118,7 +130,9 @@ describe('MFileUpload', () => {
 
         it('should emit cancel event when cancel button is clicked', () => {
             localVue.use(ButtonPlugin);
-            const fupd = mountFileUpd();
+            const fupd = mount(MFileUpload, {
+                localVue: localVue
+            });
             fupd.vm.$refs.dialog = { closeDialog: jest.fn() } as any;
 
             fupd.find('button:nth-child(2)').trigger('click');
@@ -138,8 +152,11 @@ describe('MFileUpload', () => {
         });
 
         it('should render uploading files', () => {
-            const fupd = mountFileUpd(undefined, {
-                'transition-group': WrapChildrenStub('ul')
+            const fupd = mount(MFileUpload, {
+                localVue: localVue,
+                stubs: {
+                    'transition-group': WrapChildrenStub('ul')
+                }
             });
 
             fupd.vm.$file.files()[0].progress = 33;
@@ -149,7 +166,9 @@ describe('MFileUpload', () => {
 
         it('should emit file-upload-cancel when an uploading file cancel button is clicked', () => {
             localVue.use(IconButtonPlugin);
-            const fupd = mountFileUpd();
+            const fupd = mount(MFileUpload, {
+                localVue: localVue
+            });
 
             fupd.find('button').trigger('click');
 
@@ -174,8 +193,11 @@ describe('MFileUpload', () => {
         });
 
         it('should render completed files', () => {
-            const fupd = mountFileUpd(undefined, {
-                'transition-group': WrapChildrenStub('ul')
+            const fupd = mount(MFileUpload, {
+                localVue: localVue,
+                stubs: {
+                    'transition-group': WrapChildrenStub('ul')
+                }
             });
 
             return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
@@ -183,7 +205,9 @@ describe('MFileUpload', () => {
 
         it('should emit file-remove when a completed file is deleted', () => {
             localVue.use(IconButtonPlugin);
-            const fupd = mountFileUpd();
+            const fupd = mount(MFileUpload, {
+                localVue: localVue
+            });
             const deletingFile = fupd.vm.$file.files()[0];
 
             fupd.find('button').trigger('click');
@@ -191,15 +215,4 @@ describe('MFileUpload', () => {
             expect(fupd.emitted('file-remove')[0][0]).toBe(deletingFile);
         });
     });
-
-    const mountFileUpd = (propsData?: object, stubs?: Stubs) => {
-        return mount(MFileUpload, {
-            localVue: localVue,
-            propsData: propsData,
-            stubs: {
-                'm-modal': '<m-modal-stub></m-modal-stub>',
-                ...stubs
-            }
-        });
-    };
 });
