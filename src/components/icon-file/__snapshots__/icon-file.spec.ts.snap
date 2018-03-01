@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MIconFile chip should render correctly 1`] = `
+<div class="m-icon-file">
+    <div class="m-icon-file__body">
+        <svg aria-hidden="true" width="30px" height="30px" class="m-icon">
+            <use xlink:href="#default" aria-hidden="true"></use>
+        </svg>
+    </div> <span name="m--is" class="m-icon-file__icon m--is-completed" style="right:-4.25px;bottom:-4px;"><svg aria-hidden="true" width="16px" height="16px" class="m-icon"> <use xlink:href="#chip-check" aria-hidden="true"></use></svg></span></div>
+`;
+
+exports[`MIconFile chip should render correctly when size is set 1`] = `
+<div class="m-icon-file">
+    <div class="m-icon-file__body">
+        <svg aria-hidden="true" width="30px" height="30px" class="m-icon">
+            <use xlink:href="#default" aria-hidden="true"></use>
+        </svg>
+    </div> <span name="m--is" class="m-icon-file__icon m--is-completed" style="right:-16.25px;bottom:-10px;"><svg aria-hidden="true" width="40px" height="40px" class="m-icon"> <use xlink:href="#chip-check" aria-hidden="true"></use></svg></span></div>
+`;
+
+exports[`MIconFile icon should render correctly 1`] = `
+<div class="m-icon-file">
+    <div class="m-icon-file__body">
+        <svg aria-hidden="true" width="30px" height="30px" class="m-icon">
+            <use xlink:href="#pdf" aria-hidden="true"></use>
+        </svg>
+    </div>
+</div>
+`;
+
+exports[`MIconFile icon should render correctly when size is set 1`] = `
+<div class="m-icon-file">
+    <div class="m-icon-file__body">
+        <svg aria-hidden="true" width="40px" height="40px" class="m-icon">
+            <use xlink:href="#pdf" aria-hidden="true"></use>
+        </svg>
+    </div>
+</div>
+`;
+
+exports[`MIconFile should render correctly 1`] = `
+<div class="m-icon-file">
+    <div class="m-icon-file__body">
+        <svg aria-hidden="true" width="30px" height="30px" class="m-icon">
+            <use xlink:href="#default" aria-hidden="true"></use>
+        </svg>
+    </div>
+</div>
+`;
+
+exports[`MIconFile should render correctly when state is completed 1`] = `
+<div class="m-icon-file">
+    <div class="m-icon-file__body">
+        <svg aria-hidden="true" width="30px" height="30px" class="m-icon">
+            <use xlink:href="#default" aria-hidden="true"></use>
+        </svg>
+    </div> <span name="m--is" class="m-icon-file__icon m--is-completed" style="right:-4.25px;bottom:-4px;"><svg aria-hidden="true" width="16px" height="16px" class="m-icon"> <use xlink:href="#chip-check" aria-hidden="true"></use></svg></span></div>
+`;
+
+exports[`MIconFile should render correctly when state is error 1`] = `
+<div class="m-icon-file">
+    <div class="m-icon-file__body">
+        <svg aria-hidden="true" width="30px" height="30px" class="m-icon">
+            <use xlink:href="#default" aria-hidden="true"></use>
+        </svg>
+    </div> <span name="m--is" class="m-icon-file__icon m--is-error" style="right:-4.25px;bottom:-4px;"><svg aria-hidden="true" width="16px" height="16px" class="m-icon"> <use xlink:href="#chip-error" aria-hidden="true"></use></svg></span></div>
+`;
+
+exports[`MIconFile should render correctly when state is warning 1`] = `
+<div class="m-icon-file">
+    <div class="m-icon-file__body">
+        <svg aria-hidden="true" width="30px" height="30px" class="m-icon">
+            <use xlink:href="#default" aria-hidden="true"></use>
+        </svg>
+    </div> <span name="m--is" class="m-icon-file__icon m--is-warning" style="right:-4.25px;bottom:-4px;"><svg aria-hidden="true" width="16px" height="16px" class="m-icon"> <use xlink:href="#chip-warning" aria-hidden="true"></use></svg></span></div>
+`;
