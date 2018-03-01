@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { Watch } from 'vue-property-decorator';
-
-=======
 import Component from 'vue-class-component';
 import { Watch } from 'vue-property-decorator';
 
 import { ModulVue } from '../../src/utils/vue/vue';
->>>>>>> test
 import WithRender from './viewer.html';
 
-// import { ModulVue } from '../../utils/vue/vue';
 @WithRender
 @Component
 export class Viewer extends ModulVue {
