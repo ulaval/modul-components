@@ -76,11 +76,11 @@ export class MAccordion extends ModulVue {
     public id: string;
 
     @Prop({ default: true })
-    public padding: string;
+    public padding: boolean;
     @Prop({ default: true })
-    public paddingHeader: string;
+    public paddingHeader: boolean;
     @Prop({ default: true })
-    public paddingBody: string;
+    public paddingBody: boolean;
 
     private uuid: string = uuid.generate();
     private internalPropOpen: boolean = false;
