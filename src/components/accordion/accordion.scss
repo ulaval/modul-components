@@ -60,6 +60,8 @@ $m-accordion--color-secondary: $m-color--accent;
         &.m--is-disabled {
             > .m-accordion {
                 &__header {
+                    border-color: $m-color--disabled-light;
+
                     &::after {
                         background: $m-color--disabled;
                     }

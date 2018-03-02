@@ -27,6 +27,9 @@ export class MAccordionGroup extends BaseAccordionGroup {
     @Prop()
     public value: string[];
 
+    @Prop()
+    public disabled: boolean;
+
     private accordions: string[] = [];
     private openAccordions: string[] = [];
 

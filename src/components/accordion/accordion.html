@@ -1,4 +1,4 @@
-<article class="m-accordion" :class="['m--is-' + propSkin, {'m--is-closed': !propOpen, 'm--is-disabled': disabled}]">
+<article class="m-accordion" :class="['m--is-' + propSkin, {'m--is-closed': !propOpen, 'm--is-disabled': propDisabled}]">
     <header tabindex="0" class="m-accordion__header" :class="{ 'm--is-icon-left': propIconPosition != 'right', 'm--has-padding': paddingHeader && padding }" @keyup.enter="toggleAccordion"
         @click.prevent="toggleAccordion" ref="accordionHeader">
         <div class="m-accordion__header__content">
