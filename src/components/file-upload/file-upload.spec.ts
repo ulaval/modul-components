@@ -19,9 +19,7 @@ describe('MFileUpload', () => {
         Vue.use(FilePlugin);
         Vue.use(I18nPlugin);
 
-        addMessages(Vue, [
-            'components/file-upload/file-upload.lang.en.json'
-        ]);
+        addMessages(Vue, ['components/file-upload/file-upload.lang.en.json']);
     });
 
     it('should render correctly', () => {
@@ -131,6 +129,7 @@ describe('MFileUpload', () => {
     });
 
     describe('main actions', () => {
+        let fupd: Wrapper<MFileUpload>;
         let completedFile: MFile;
 
         beforeEach(() => {
@@ -149,11 +148,12 @@ describe('MFileUpload', () => {
                 status: MFileStatus.COMPLETED,
                 completeHinted: true
             });
+
+            fupd = mount(MFileUpload);
+            fupd.vm.$refs.dialog = { closeDialog: jest.fn() } as any;
         });
 
         it('should emit done event when add button is clicked', () => {
-            const fupd = mount(MFileUpload);
-
             fupd
                 .find('.m-file-upload__footer button:nth-child(1)')
                 .trigger('click');
@@ -161,15 +161,28 @@ describe('MFileUpload', () => {
             expect(fupd.emitted('done')[0][0]).toEqual([completedFile]);
         });
 
-        it('should emit cancel event when cancel button is clicked', () => {
-            const fupd = mount(MFileUpload);
-            fupd.vm.$refs.dialog = { closeDialog: jest.fn() } as any;
+        it('should clear all files when add button is clicked', () => {
+            fupd
+                .find('.m-file-upload__footer button:nth-child(1)')
+                .trigger('click');
 
+            expect(fupd.vm.$file.files().length).toEqual(0);
+        });
+
+        it('should emit cancel event when cancel button is clicked', () => {
             fupd
                 .find('.m-file-upload__footer button:nth-child(2)')
                 .trigger('click');
 
             expect(fupd.emitted('cancel')).toBeTruthy();
+        });
+
+        it('should clear all files when cancel button is clicked', () => {
+            fupd
+                .find('.m-file-upload__footer button:nth-child(2)')
+                .trigger('click');
+
+            expect(fupd.vm.$file.files().length).toEqual(0);
         });
     });
 

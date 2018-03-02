@@ -117,12 +117,15 @@ export class MFileUpload extends ModulVue {
     }
 
     private onAddClick(): void {
+        this.$refs.dialog.closeDialog();
         this.$emit('done', this.completedFiles);
+        this.$file.clear();
     }
 
     private onCancelClick(): void {
         this.$refs.dialog.closeDialog();
         this.$emit('cancel');
+        this.$file.clear();
     }
 
     private onUploadCancel(file: MFile): void {
