@@ -4,7 +4,7 @@ a {
     text-decoration: none;
 }
 
-.m--is-skin-regular {
+.m--is-skin-tab {
     .m-navbar-item {
         + .m-navbar-item {
             margin-left: 1px;
@@ -83,7 +83,7 @@ a {
     }
 }
 
-.m--is-skin-dark {
+.m--is-skin-dark-tab {
     .m-navbar-item {
         &.m--is-selected {
             &[tabindex],
@@ -155,6 +155,25 @@ a {
         &.m--is-last {
             margin-right: 0;
         }
+    }
+}
+
+.m--is-skin-dark {
+    .m-navbar-item {
+        font-size: $m-font-size--h5;
+        color: $m-color--white;
+        text-transform: uppercase;
+        padding: $m-spacing--l;
+        // padding-right: $m-spacing--l;
+
+        // &.m--is-selected {
+        //     &[tabindex],
+        //     a,
+        //     button {
+        //         color: $m-color--white;
+        //         background: $m-color--grey-dark;
+        //     }
+        // }
     }
 }
 

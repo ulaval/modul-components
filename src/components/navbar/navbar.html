@@ -1,12 +1,14 @@
 <div class="m-navbar"
     :class="{ 'm--is-disabled': disabled,
-              'm--is-skin-regular': skin == 'regular' || skin == 'dark',
+              'm--is-skin-tab': skin == 'light-tab' || skin == 'dark-tab',
+              'm--is-skin-light-tab': skin == 'light-tab',
+              'm--is-skin-dark-tab': skin == 'dark-tab',
               'm--is-skin-light': skin == 'light',
               'm--is-skin-dark': skin == 'dark',
               'm--is-skin-plain': skin == 'plain',
               'm--is-skin-arrow': skin == 'arrow',
               'm--no-margin': !margin }">
-    <m-icon-button class="m-navbar__button" icon-name="left-chevron" @click="scrollLeft" v-if="hasScrolllH && arrowMobile"></m-icon-button>
+    <m-icon-button class="m-navbar__button" :skin="isSkinDark" :button-size="ComputedHeight" icon-name="left-chevron" @click="scrollLeft" v-if="hasScrolllH && arrowMobile"></m-icon-button>
     <nav class="m-navbar__wrap" ref="wrap">
         <ul class="m-navbar__list" aria-hidden="true" ref="list">
             <slot></slot>
@@ -14,5 +16,5 @@
             <li aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasArrow" ref="Arrow"></li>
         </ul>
     </nav>
-    <m-icon-button class="m-navbar__button" icon-name="chevron" @click="scrollRight" v-if="hasScrolllH && arrowMobile"></m-icon-button>
+    <m-icon-button class="m-navbar__button" :skin="isSkinDark" :button-size="ComputedHeight" icon-name="chevron" @click="scrollRight" v-if="hasScrolllH && arrowMobile"></m-icon-button>
 </div>

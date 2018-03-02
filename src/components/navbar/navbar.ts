@@ -13,9 +13,10 @@ const PAGE_STEP: number = 4;
 const POPPER_CLASS_NAME: string = '.m-popper__popper';
 
 export enum MNavbarSkin {
-    Regular = 'regular',
     Light = 'light',
     Dark = 'dark',
+    LightTab = 'light-tab',
+    DarkTab = 'dark-tab',
     Plain = 'plain',
     Arrow = 'arrow'
 }
@@ -27,11 +28,12 @@ export enum MNavbarSkin {
 export class MNavbar extends BaseNavbar implements MNavbarInterface {
 
     @Prop({
-        default: MNavbarSkin.Regular,
+        default: MNavbarSkin.LightTab,
         validator: value =>
-            value == MNavbarSkin.Regular ||
             value == MNavbarSkin.Light ||
             value == MNavbarSkin.Dark ||
+            value == MNavbarSkin.LightTab ||
+            value == MNavbarSkin.DarkTab ||
             value == MNavbarSkin.Plain ||
             value == MNavbarSkin.Arrow
     })
@@ -52,6 +54,7 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
     private isAnimActive: boolean = false;
     private internalValue: string = '';
     private hasScrolllH: boolean = false;
+    private computedHeight: number = 0;
 
     public selecteItem(el): void {
         if (this.skin == MNavbarSkin.Light && el != undefined) {
@@ -92,16 +95,24 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
             parseInt(elComputedStyle.paddingRight, 10) - parseInt(elComputedStyle.borderLeftWidth, 10) -
             parseInt(elComputedStyle.borderRightWidth, 10);
         if (width < listEl.clientWidth) {
-            let height: number = listEl.clientHeight;
+            this.computedHeight = listEl.clientHeight;
             this.hasScrolllH = true;
-            wrapEl.style.height = height + 40 + 'px';
-            this.$el.style.height = height + 'px';
+            wrapEl.style.height = this.computedHeight + 40 + 'px';
+            this.$el.style.height = this.computedHeight + 'px';
             this.scrollToSelectedElem();
         } else {
             this.hasScrolllH = false;
             wrapEl.style.removeProperty('height');
             this.$el.style.removeProperty('height');
         }
+    }
+
+    private get ComputedHeight(): string {
+        return this.computedHeight + 'px';
+    }
+
+    private get isSkinDark(): string {
+        return this.skin == 'dark' ? this.skin : 'light';
     }
 
     private scrollLeft(event: MouseEvent): void {
