@@ -9,6 +9,32 @@ $m-accordion--color-primary: $m-color--interactive;
 $m-accordion--color-secondary: $m-color--accent;
 
 .m-accordion {
+    &.m--is-disabled {
+        > .m-accordion {
+            &__header {
+                cursor: not-allowed;
+                outline: none;
+
+                &,
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    color: $m-color--disabled;
+                }
+
+                .m-accordion__header-icon {
+                    &::before,
+                    &::after {
+                        background: $m-color--disabled;
+                    }
+                }
+            }
+        }
+    }
+
     &.m--is-primary,
     &.m--is-secondary,
     &.m--is-light {
@@ -30,6 +56,16 @@ $m-accordion--color-secondary: $m-color--accent;
     &.m--is-primary,
     &.m--is-secondary {
         margin-top: - $m-accordion--border-size;
+
+        &.m--is-disabled {
+            > .m-accordion {
+                &__header {
+                    &::after {
+                        background: $m-color--disabled;
+                    }
+                }
+            }
+        }
 
         > .m-accordion {
             &__header,

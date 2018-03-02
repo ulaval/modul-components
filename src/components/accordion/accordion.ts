@@ -41,6 +41,8 @@ export class MAccordion extends ModulVue {
 
     @Prop()
     public open: boolean;
+    @Prop()
+    public disabled: boolean;
 
     @Prop({
         default: MAccordionSkin.Secondary,
@@ -139,10 +141,12 @@ export class MAccordion extends ModulVue {
     }
 
     private toggleAccordion(): void {
-        if (this.$parent instanceof BaseAccordionGroup) this.$parent.toggleAccordion(this.propId);
-        (this.$refs.accordionHeader as HTMLElement).blur();
-        this.propOpen = !this.propOpen;
-        this.$emit('click', this.internalPropOpen);
+        if (!this.disabled) {
+            if (this.$parent instanceof BaseAccordionGroup) this.$parent.toggleAccordion(this.propId);
+            (this.$refs.accordionHeader as HTMLElement).blur();
+            this.propOpen = !this.propOpen;
+            this.$emit('click', this.internalPropOpen);
+        }
     }
 }
 
