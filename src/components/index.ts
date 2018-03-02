@@ -37,8 +37,8 @@ import PopperPlugin from './popper/popper';
 import PopupPlugin from './popup/popup';
 import ProgressPluggin from './progress/progress';
 import RadioGroupPlugin from './radio-group/radio-group';
-import RadioStylePlugin from './radio-style/radio-style';
 import RadioPlugin from './radio/radio';
+import RadioStylePlugin from './radio-style/radio-style';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SidebarPlugin from './sidebar/sidebar';
 import SliderPlugin from './slider/slider';
@@ -56,6 +56,10 @@ import TextareaResizePlugin from './textarea-resize/textarea-resize';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
+import UploadPlugin from './upload/upload';
+import UploadInputPlugin from './upload-input/upload-input';
+import UploadDragdropPlugin from './upload-dragdrop/upload-dragdrop';
+import UploadFileslistPlugin from './upload-fileslist/upload-fileslist';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 const ComponentsPlugin: PluginObject<any> = {
@@ -116,6 +120,10 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
         Vue.use(TooltipPlugin);
+        Vue.use(UploadPlugin);
+        Vue.use(UploadInputPlugin);
+        Vue.use(UploadDragdropPlugin);
+        Vue.use(UploadFileslistPlugin);
         Vue.use(ValidationMessagePlugin);
     }
 };
