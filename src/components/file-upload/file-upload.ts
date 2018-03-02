@@ -124,6 +124,9 @@ export class MFileUpload extends ModulVue {
 
     private onCancelClick(): void {
         this.$refs.dialog.closeDialog();
+        this.allFiles
+            .filter(f => f.status === MFileStatus.UPLOADING)
+            .forEach(this.onUploadCancel);
         this.$emit('cancel');
         this.$file.clear();
     }

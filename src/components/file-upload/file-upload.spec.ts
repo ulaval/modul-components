@@ -184,6 +184,21 @@ describe('MFileUpload', () => {
 
             expect(fupd.vm.$file.files().length).toEqual(0);
         });
+
+        it('should emit file-upload-cancel event for each file being uploaded when cancel button is clicked', async () => {
+            fupd.vm.$file.add(
+                createMockFileList([createMockFile('uploading')])
+            );
+            const uploadingFile = fupd.vm.$file.files()[2];
+            uploadingFile.status = MFileStatus.UPLOADING;
+
+            fupd
+                .find('.m-file-upload__footer button:nth-child(2)')
+                .trigger('click');
+
+            const evt = fupd.emitted('file-upload-cancel');
+            expect(evt[0][0]).toEqual(uploadingFile);
+        });
     });
 
     describe('uploading', () => {
