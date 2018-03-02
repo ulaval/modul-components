@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import FileDropPlugin from '../../directives/file-drop/file-drop';
-import FilePlugin, { MFile, MFileStatus, MFileRejectionCause } from '../../utils/file/file';
+import FilePlugin, { MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
 import { Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -18,12 +18,12 @@ import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
-import ScrollTo, { ScrollToDuration } from '../../directives/scroll-to/scroll-to-lib';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 
 interface MFileExt extends MFile {
     completeHinted: boolean;
+    isOldRejection: boolean;
 }
 
 let filesizeSymbols: { [name: string]: string } | undefined = undefined;
@@ -61,7 +61,6 @@ export class MFileUpload extends ModulVue {
     };
 
     private title: string = this.$i18n.translate('m-file-upload:header-title');
-    private internalErrorNumber: number = 0;
 
     private created(): void {
         this.$file.setValidationOptions({
@@ -77,7 +76,7 @@ export class MFileUpload extends ModulVue {
             this.$set(f, 'completeHinted', false);
         }
 
-        if (this.readyFiles.length !== 0) {
+        if (this.readyFiles.length > 0) {
             this.$emit('files-ready', this.readyFiles);
         }
     }
@@ -95,10 +94,17 @@ export class MFileUpload extends ModulVue {
 
     @Watch('rejectedFiles')
     private onFilesRejected(): void {
-        if (this.rejectedFiles.length > 0 && this.internalErrorNumber !== this.rejectedFiles.length) {
-            this.internalErrorNumber = this.rejectedFiles.length;
-            let bodyRef: HTMLElement = (this.$refs.dialog.$refs.body as HTMLElement);
-            bodyRef.scrollTop = 0;
+        const nbNewRejection = this.rejectedFiles.reduce((cnt, f) => {
+            let nbNewRejection = 0;
+            if (!f.isOldRejection) {
+                ++nbNewRejection;
+                f.isOldRejection = true;
+            }
+            return cnt + nbNewRejection;
+        }, 0);
+
+        if (nbNewRejection > 0) {
+            this.$refs.dialog.$refs.body.scrollTop = 0;
             // TODO Change function to have a smooth scroll when it will work on a diferent element than the body of the page
             // ScrollTo.startScroll(bodyRef, 0, ScrollToDuration.Regular);
         }

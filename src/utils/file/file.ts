@@ -291,7 +291,6 @@ const FilePlugin: PluginObject<any> = {
     install(v, options): void {
         console.debug('$file', 'plugin.install');
         let file: FileService = new FileService();
-        (v as any).$file = file;
         (v.prototype as any).$file = file;
     }
 };
