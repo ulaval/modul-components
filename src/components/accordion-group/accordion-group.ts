@@ -1,16 +1,16 @@
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './accordion-group.html?style=./accordion-group.scss';
+
+import MAccordionPlugin, { AccordionGroupGateway, MAccordionSkin } from '../accordion/accordion';
 import { ACCORDION_GROUP_NAME } from '../component-names';
-import MAccordionPlugin, { MAccordionSkin, BaseAccordionGroup } from '../accordion/accordion';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import WithRender from './accordion-group.html?style=./accordion-group.scss';
 
 @WithRender
 @Component
-export class MAccordionGroup extends BaseAccordionGroup {
-
+export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     @Prop({
         default: MAccordionSkin.Secondary,
         validator: value =>
@@ -21,14 +21,11 @@ export class MAccordionGroup extends BaseAccordionGroup {
     })
     public skin: MAccordionSkin;
 
-    @Prop()
-    public concurrent: boolean;
+    @Prop() public concurrent: boolean;
 
-    @Prop()
-    public value: string[];
+    @Prop() public value: string[];
 
-    @Prop()
-    public disabled: boolean;
+    @Prop() public disabled: boolean;
 
     private accordions: string[] = [];
     private openAccordions: string[] = [];
@@ -55,7 +52,7 @@ export class MAccordionGroup extends BaseAccordionGroup {
     }
 
     public accordionIsOpen(id): boolean {
-        return (this.openAccordions.indexOf(id) != -1);
+        return this.openAccordions.indexOf(id) != -1;
     }
 
     protected created(): void {
@@ -81,7 +78,11 @@ export class MAccordionGroup extends BaseAccordionGroup {
     }
 
     private get propSkin(): MAccordionSkin {
-        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Plain || this.skin == MAccordionSkin.Primary ? this.skin : MAccordionSkin.Secondary;
+        return this.skin == MAccordionSkin.Light ||
+            this.skin == MAccordionSkin.Plain ||
+            this.skin == MAccordionSkin.Primary
+            ? this.skin
+            : MAccordionSkin.Secondary;
     }
 
     private get hasTitleSlot(): boolean {
