@@ -1,10 +1,10 @@
-import Vue, { VNode, VNodeData } from 'vue';
+import Vue, { VNode, VNodeData, VueConstructor } from 'vue';
 
 interface MAccordionTransitionProps {
     heightDelta?: number;
 }
 
-export const MAccordionTransition = Vue.extend({
+export const MAccordionTransition: VueConstructor<Vue> = Vue.extend({
     functional: true,
     render(createElement, context): VNode {
         let data: VNodeData = {
