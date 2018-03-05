@@ -1,5 +1,5 @@
-import * as Components from '../../src/components/component-names';
 import Meta from '../../src/meta/meta';
+import * as Components from '../../src/components/component-names';
 
 const components: string[] = [
     Components.ACCORDION_GROUP_NAME,
@@ -56,6 +56,10 @@ const components: string[] = [
     Components.TEXTFIELD_NAME,
     Components.TIMEPICKER_NAME,
     Components.TOOLTIP_NAME,
+    Components.UPLOAD_NAME,
+    Components.UPLOAD_INPUT_NAME,
+    Components.UPLOAD_DRAGDROP_NAME,
+    Components.UPLOAD_FILESLIST_NAME,
     Components.VALIDATION_MESSAGE_NAME
 ];
 
