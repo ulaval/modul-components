@@ -72,11 +72,16 @@ export class MFileUpload extends ModulVue {
 
     @Watch('readyFiles')
     private onFilesChanged(): void {
+        const newReadyFiles: MFileExt[] = [];
+
         for (const f of this.readyFiles) {
-            this.$set(f, 'completeHinted', false);
+            if (!f.hasOwnProperty('completeHinted')) {
+                this.$set(f, 'completeHinted', false);
+                newReadyFiles.push(f);
+            }
         }
 
-        if (this.readyFiles.length > 0) {
+        if (newReadyFiles.length > 0) {
             this.$emit('files-ready', this.readyFiles);
         }
     }
