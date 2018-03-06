@@ -130,31 +130,6 @@ module.exports = function (env) {
     }
 
     if (isProd) {
-        /*config.entry = {
-            'component-names': ['./src/components/component-names.ts'],
-            'meta': ['./src/meta/meta.ts'],
-            'meta-fr': ['./src/meta/meta-fr.ts'],
-            'background-color': ['./src/directives/background-color/background-color.ts'],
-            'button': ['./src/components/button/button.ts'],
-            'lang': ['./src/directives/lang/lang.ts'],
-            'list': ['./src/components/list/list.ts'],
-            'panel': ['./src/components/panel/panel.ts'],
-            'table': ['./src/components/table/table.ts'],
-            'dynamic-template': ['./src/components/dynamic-template/dynamic-template.ts'],
-            'i18n': ['./src/utils/i18n.ts'],
-            'uuid': ['./src/utils/uuid.ts'],
-            'services': ['./src/services/component-meta-impl']
-        };
-
-        config.externals = ['vue', 'vue-class-component', 'vue-property-decorator'];
-
-        config.output = {
-            path: resolve('dist'),
-            publicPath: '/',
-            libraryTarget: 'umd',
-            filename: '[name].js'
-        };*/
-
         console.log('Use npm run tsc instead (for the moment...)');
     }
 
