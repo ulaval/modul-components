@@ -3,7 +3,7 @@
         <div class="m-accordion-group__header__title" v-if="hasTitleSlot">
             <slot name="title"></slot>
         </div>
-        <div v-if="!concurrent">
+        <div v-if="!concurrent && !disabled">
             <m-link mode="button" @click="openAllAccordions" v-if="!propAllOpen">
                 <m-i18n k="m-accordion-group:open-all"></m-i18n>
             </m-link>

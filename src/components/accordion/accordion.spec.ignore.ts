@@ -4,7 +4,7 @@ import AccordionPlugin, { MAccordion, MAccordionIconPosition, MAccordionIconSize
 
 const CLOSED_CSS: string = 'm--is-closed';
 const SKIN_LIGHT_CSS: string = 'm--is-light';
-const SKIN_REGULAR_CSS: string = 'm--is-regular';
+const SKIN_SECONDARY_CSS: string = 'm--is-secondary';
 const SKIN_PLAIN_CSS: string = 'm--is-plain';
 const ICON_POSITION_LEFT_CSS: string = 'm--is-icon-left';
 const ICON_SIZE_LARGE_CSS: string = 'm--is-large';
@@ -15,7 +15,7 @@ let accordion: MAccordion;
 describe('MAccordionSkin', () => {
     it('validates enum', () => {
         expect(MAccordionSkin.Light).toEqual('light');
-        expect(MAccordionSkin.Regular).toEqual('regular');
+        expect(MAccordionSkin.Secondary).toEqual('secondary');
         expect(MAccordionSkin.Plain).toEqual('plain');
     });
 });
@@ -42,7 +42,7 @@ describe('accordion', () => {
 
     it('css classes are present', () => {
         expect(accordion.$el.classList.contains(CLOSED_CSS)).toBeTruthy();
-        expect(accordion.$el.classList.contains(SKIN_REGULAR_CSS)).toBeTruthy();
+        expect(accordion.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeTruthy();
         expect(accordion.$el.querySelector('.' + ICON_SIZE_LARGE_CSS)).not.toBeNull();
         expect(accordion.$el.querySelector('.' + ICON_BORDER_CSS)).toBeNull();
     });
@@ -69,19 +69,19 @@ describe('accordion', () => {
         accordion.skin = MAccordionSkin.Light;
         Vue.nextTick(() => {
             expect(accordion.$el.classList.contains(SKIN_LIGHT_CSS)).toBeTruthy();
-            expect(accordion.$el.classList.contains(SKIN_REGULAR_CSS)).toBeFalsy();
+            expect(accordion.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
             expect(accordion.$el.classList.contains(SKIN_PLAIN_CSS)).toBeFalsy();
 
-            accordion.skin = MAccordionSkin.Regular;
+            accordion.skin = MAccordionSkin.Secondary;
             Vue.nextTick(() => {
                 expect(accordion.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
-                expect(accordion.$el.classList.contains(SKIN_REGULAR_CSS)).toBeTruthy();
+                expect(accordion.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeTruthy();
                 expect(accordion.$el.classList.contains(SKIN_PLAIN_CSS)).toBeFalsy();
 
                 accordion.skin = MAccordionSkin.Plain;
                 Vue.nextTick(() => {
                     expect(accordion.$el.classList.contains(SKIN_LIGHT_CSS)).toBeFalsy();
-                    expect(accordion.$el.classList.contains(SKIN_REGULAR_CSS)).toBeFalsy();
+                    expect(accordion.$el.classList.contains(SKIN_SECONDARY_CSS)).toBeFalsy();
                     expect(accordion.$el.classList.contains(SKIN_PLAIN_CSS)).toBeTruthy();
                 });
             });

@@ -1,5 +1,5 @@
-<article class="m-accordion" :class="['m--is-' + propSkin, {'m--is-closed': !propOpen}]">
-    <header tabindex="0" class="m-accordion__header" :class="{ 'm--is-icon-left': propIconPosition != 'right' }" @keyup.enter="toggleAccordion"
+<article class="m-accordion" :class="['m--is-' + propSkin, {'m--is-closed': !propOpen, 'm--is-disabled': propDisabled}]">
+    <header tabindex="0" class="m-accordion__header" :class="{ 'm--is-icon-left': propIconPosition != 'right', 'm--has-padding': paddingHeader && padding }" @keyup.enter="toggleAccordion"
         @click.prevent="toggleAccordion" ref="accordionHeader">
         <div class="m-accordion__header__content">
             <slot name="header"></slot>
@@ -15,7 +15,7 @@
     </header>
     <transition @enter="accordionEnter" @after-enter="accordionAfterEnter" @leave="accordionLeave">
         <div class="m-accordion__body-wrap" v-if="propOpen">
-            <div class="m-accordion__body">
+            <div class="m-accordion__body" :class="{ 'm--has-padding': paddingBody && padding }">
                 <slot></slot>
             </div>
         </div>
