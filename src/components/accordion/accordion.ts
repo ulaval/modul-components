@@ -88,8 +88,8 @@ export class MAccordion extends ModulVue {
         accordionHeader: HTMLElement;
     };
 
-    private uuid: string;
-    private internalPropOpen: boolean;
+    private uuid: string = '';
+    private internalPropOpen: boolean = false;
 
     private created(): void {
         this.internalPropOpen = this.open !== undefined ? this.open : false;
