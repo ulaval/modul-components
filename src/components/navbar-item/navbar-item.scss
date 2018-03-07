@@ -39,7 +39,7 @@ a {
                 }
             }
 
-            &.m--is-first {
+            &:first-child {
                 &::after {
                     position: absolute;
                     top: $m-border-width--l;
@@ -51,7 +51,7 @@ a {
                 }
             }
 
-            &.m--is-last {
+            &:last-child {
                 &::after {
                     position: absolute;
                     top: $m-border-width--l;
@@ -148,11 +148,11 @@ a {
             }
         }
 
-        &.m--is-first {
+        &:first-child {
             margin-left: 0;
         }
 
-        &.m--is-last {
+        &:last-child {
             margin-right: 0;
         }
     }
@@ -225,11 +225,11 @@ a {
             }
         }
 
-        &.m--is-first {
+        &:first-child {
             margin-left: 0;
         }
 
-        &.m--is-last {
+        &:last-child {
             margin-right: 0;
         }
     }

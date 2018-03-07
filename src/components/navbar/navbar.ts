@@ -27,7 +27,6 @@ export enum MNavbarSkin {
 })
 export class MNavbar extends BaseNavbar implements Navbar {
 
-    @Model('change')
     @Prop()
     public selected: string;
     @Prop({
@@ -52,55 +51,30 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     public selectedElem: HTMLElement;
 
-    private isAnimActive: boolean = false;
+    private animActive: boolean = false;
     private internalValue: any | undefined = '';
     private hasScrolllH: boolean = false;
     private computedHeight: number = 0;
 
-    // public selecteItem(el): void {
-    //     if (el != undefined) {
-    //         if (this.skin == MNavbarSkin.Light) {
-    //             this.setLinePosition(el);
-    //         }
-    //         if (this.skin == MNavbarSkin.Arrow) {
-    //             this.setArrowPosition(el);
-    //         }
-    //         this.scrollToSelectedElem();
-    //     }
-    // }
-
-    ///////////////////
     public updateValue(value: any): void {
         this.model = value;
-        console.log('updateValue: ', value, this.model);
+    }
+
+    public get model(): any {
+        return this.selected == undefined ? this.internalValue : this.selected;
+    }
+
+    public set model(value: any) {
+        this.setAndUpdate(value);
+        this.$emit('update:selected', value);
     }
 
     protected created(): void {
         this.internalValue = undefined;
     }
 
-    @Watch('selected')
-    protected onValueChange(value: any): void {
-        this.internalValue = value;
-    }
-
-    public get model(): any {
-        // return this.selected == undefined || this.selected != this.internalValue ? this.internalValue : this.selected;
-        return this.selected == undefined ? this.internalValue : this.selected;
-    }
-
-    public set model(value: any) {
-        this.internalValue = value;
-        console.log('set model: ', value, this.internalValue);
-        this.$emit('change', value);
-    }
-
-    ///////////////////////////
-
     protected mounted(): void {
-        // this.setItem();
         this.$nextTick(() => {
-            this.initLine();
             this.setupScrolllH();
             this.as<ElementQueries>().$on('resize', this.setupScrolllH);
         });
@@ -110,11 +84,37 @@ export class MNavbar extends BaseNavbar implements Navbar {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
     }
 
-    // private scrollToSelectedElem(): void {
-    //     setTimeout(() => {
-    //         (this.$refs.wrap as HTMLElement).scrollLeft = this.selectedElem.offsetLeft;
-    //     }, 0);
-    // }
+    private scrollToSelected(value): void {
+        this.$children.forEach(element => {
+            if (element.$props.value === this.selected) {
+                (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
+
+                if (this.skin == MNavbarSkin.Light) {
+                    this.setPosition(element, 'line');
+                }
+                if (this.skin == MNavbarSkin.Arrow) {
+                    this.setPosition(element, 'arrow');
+                }
+            }
+        });
+    }
+
+    private setPosition(element, ref: string): void {
+
+        let positionX: number = element.$el.offsetLeft;
+        let width: number = element.$el.clientWidth;
+        let localRef: HTMLElement = this.$refs[ref] as HTMLElement;
+        localRef.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
+        localRef.style.width = width + 'px';
+        this.animActive = true;
+
+    }
+
+    @Watch('selected')
+    private setAndUpdate(value): void {
+        this.internalValue = value;
+        this.scrollToSelected(value);
+    }
 
     private setupScrolllH(): void {
         let listEl: HTMLElement = this.$refs.list as HTMLElement;
@@ -128,7 +128,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
             this.hasScrolllH = true;
             wrapEl.style.height = this.computedHeight + 40 + 'px';
             this.$el.style.height = this.computedHeight + 'px';
-            // this.scrollToSelectedElem();
         } else {
             this.hasScrolllH = false;
             wrapEl.style.removeProperty('height');
@@ -144,6 +143,10 @@ export class MNavbar extends BaseNavbar implements Navbar {
         return this.skin == 'dark' ? this.skin : 'light';
     }
 
+    private get isAnimActive(): boolean {
+        return this.animActive;
+    }
+
     private scrollLeft(event: MouseEvent): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
         let btnsWidth: any = ((this.$refs.buttonLeft as ModulVue).$el as HTMLElement).clientWidth + ((this.$refs.buttonRight as ModulVue).$el as HTMLElement).clientWidth;
@@ -154,68 +157,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
         let btnsWidth: any = ((this.$refs.buttonLeft as ModulVue).$el as HTMLElement).clientWidth + ((this.$refs.buttonRight as ModulVue).$el as HTMLElement).clientWidth;
         wrapEl.scrollLeft = wrapEl.scrollLeft + ((this.$el.clientWidth - btnsWidth) / 2.5);
-    }
-
-    // private setItem(): void {
-    //     this.$children.forEach((child, index, arr) => {
-    //         if (index == 0 && arr.length >= 1) {
-    //             child['isFirst'] = true;
-    //         }
-    //         if (arr.length - 1 === index && arr.length > 1) {
-    //             child['isLast'] = true;
-    //         }
-    //     });
-    // }
-
-    private initLine(): void {
-        this.$children.forEach((child, index, arr) => {
-            if (child.$props.value == this.selected) {
-                if (this.skin == MNavbarSkin.Light) {
-                    this.setLinePosition(child.$el);
-                }
-                if (this.skin == MNavbarSkin.Arrow) {
-                    this.setArrowPosition(child.$el);
-                }
-            }
-        });
-    }
-
-    private setLinePosition(el: HTMLElement): void {
-        if (!this.disabled) {
-            this.$nextTick(() => {
-                setTimeout(() => {
-                    setTimeout(() => {
-                        let positionX: number = el.offsetLeft;
-                        let width: number = el.clientWidth;
-                        let lineEL: HTMLElement = this.$refs.line as HTMLElement;
-                        lineEL.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
-                        lineEL.style.width = width + 'px';
-                        setTimeout(() => {
-                            this.isAnimActive = true;
-                        });
-                    }, 0);
-                }, 0);
-            });
-        }
-    }
-
-    private setArrowPosition(el: HTMLElement): void {
-        if (!this.disabled) {
-            this.$nextTick(() => {
-                setTimeout(() => {
-                    setTimeout(() => {
-                        let positionX: number = el.offsetLeft;
-                        let width: number = el.clientWidth;
-                        let arrowEL: HTMLElement = this.$refs.Arrow as HTMLElement;
-                        arrowEL.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
-                        arrowEL.style.width = width + 'px';
-                        setTimeout(() => {
-                            this.isAnimActive = true;
-                        });
-                    }, 0);
-                }, 0);
-            });
-        }
     }
 
     private get hasLine(): boolean {

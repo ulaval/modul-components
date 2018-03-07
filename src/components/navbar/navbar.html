@@ -13,7 +13,7 @@
         <ul class="m-navbar__list" aria-hidden="true" ref="list">
             <slot></slot>
             <li aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasLine" ref="line"></li>
-            <li aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasArrow" ref="Arrow"></li>
+            <li aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasArrow" ref="arrow"></li>
         </ul>
     </nav>
     <m-icon-button ref="buttonRight" class="m-navbar__button" :skin="isSkinDark" :button-size="ComputedHeight" icon-name="chevron" @click="scrollRight" v-if="hasScrolllH && arrowMobile"></m-icon-button>

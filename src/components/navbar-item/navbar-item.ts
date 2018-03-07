@@ -7,12 +7,6 @@ import { NAVBAR_ITEM_NAME } from '../component-names';
 
 export abstract class BaseNavbar extends ModulVue { }
 
-// export interface MNavbarInterface {
-//     model: string;
-//     selectedElem: HTMLElement;
-//     selecteItem(el: HTMLElement): void;
-// }
-
 export interface Navbar {
     model: string;
     updateValue(value: string): void;
@@ -22,14 +16,10 @@ export interface Navbar {
 @Component
 export class MNavbarItem extends ModulVue {
 
-    @Model('change')
     @Prop()
     public value: string;
     @Prop()
     public disabled: boolean;
-    public isFirst: boolean = false;
-    public isLast: boolean = false;
-    private selectedElem: HTMLElement;
     private hasParent: boolean = false;
     private parentNavbar: Navbar;
 
@@ -62,7 +52,6 @@ export class MNavbarItem extends ModulVue {
     private onClick(event): void {
         if (!this.disabled && this.hasParent) {
             this.parentNavbar.updateValue(this.value);
-            this.$emit('change', event, this.value);
         }
     }
 }
