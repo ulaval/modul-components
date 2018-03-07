@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 import uuid from '../../utils/uuid/uuid';
 import { ACCORDION_NAME, ACCORDION_TRANSITION_NAME } from '../component-names';
@@ -25,28 +25,36 @@ export enum MAccordionIconSize {
     Large = 'large'
 }
 
+export interface AccordionGateway extends Vue {
+    propId: string;
+    propOpen: boolean;
+}
+
 export interface AccordionGroupGateway {
     skin: MAccordionSkin;
     disabled: boolean;
-    accordionIsOpen(id: string): boolean;
-    addAccordion(id: string, open: boolean): void;
+    concurrent: boolean;
+    addAccordion(accordion: AccordionGateway): void;
     removeAccordion(id: string): void;
-    toggleAccordion(id: string): void;
+    closeAllAccordions();
 }
 
 function isAccordionGroup(parent: any): parent is AccordionGroupGateway {
     return parent && 'addAccordion' in parent;
-
 }
 
 @WithRender
 @Component
-export class MAccordion extends ModulVue {
+export class MAccordion extends Vue implements AccordionGateway {
 
-    @Prop() public disabled: boolean;
+    @Prop()
+    public id?: string;
 
     @Prop()
     public open?: boolean;
+
+    @Prop()
+    public disabled: boolean;
 
     @Prop({
         default: MAccordionSkin.Secondary,
@@ -65,7 +73,8 @@ export class MAccordion extends ModulVue {
     })
     public iconPosition?: MAccordionIconPosition;
 
-    @Prop() public iconBorder: boolean;
+    @Prop()
+    public iconBorder: boolean;
 
     @Prop({
         validator: value =>
@@ -74,29 +83,40 @@ export class MAccordion extends ModulVue {
     })
     public iconSize?: MAccordionIconSize;
 
-
     @Prop({ default: true })
     public padding: boolean;
     @Prop({ default: true })
     public paddingHeader: boolean;
     @Prop({ default: true })
     public paddingBody: boolean;
-    @Prop()
-    public id?: string;
 
     $refs: {
         accordionHeader: HTMLElement;
     };
 
-    private uuid: string = '';
+    private uuid: string = uuid.generate();
     private internalPropOpen: boolean = false;
+
+    public get propId(): string {
+        return this.id || this.uuid;
+    }
+
+    public get propOpen(): boolean {
+        return this.internalPropOpen;
+    }
+
+    public set propOpen(value) {
+        if (value != this.internalPropOpen) {
+            this.internalPropOpen = value;
+            this.$emit('update:open', value);
+        }
+    }
 
     private created(): void {
         this.internalPropOpen = this.open !== undefined ? this.open : false;
-        this.uuid = this.id !== undefined ? this.id : uuid.generate();
 
         if (isAccordionGroup(this.$parent)) {
-            this.$parent.addAccordion(this.propId, this.internalPropOpen);
+            this.$parent.addAccordion(this);
         }
     }
 
@@ -106,29 +126,12 @@ export class MAccordion extends ModulVue {
         }
     }
 
-    private get propOpen(): boolean {
-        if (isAccordionGroup(this.$parent)) {
-            return this.$parent.accordionIsOpen(this.propId);
-        } else {
-            return this.internalPropOpen;
-        }
-    }
-
-    private set propOpen(value) {
-        this.internalPropOpen = value;
-        this.$emit('update:open', value);
-    }
-
-    private get propId(): string {
-        return this.uuid;
-    }
-
     private get propSkin(): MAccordionSkin {
         return isAccordionGroup(this.$parent) ? this.$parent.skin : this.skin;
     }
 
     private get propDisabled(): boolean {
-        return this.$parent instanceof BaseAccordionGroup
+        return isAccordionGroup(this.$parent)
             ? this.$parent.disabled
             : this.disabled;
     }
@@ -163,21 +166,26 @@ export class MAccordion extends ModulVue {
 
     private toggleAccordion(): void {
         if (!this.propDisabled) {
-            if (this.$parent instanceof BaseAccordionGroup)
-                this.$parent.toggleAccordion(this.propId);
-            (this.$refs.accordionHeader as HTMLElement).blur();
-            this.propOpen = !this.propOpen;
+            const initialState = this.internalPropOpen;
+
+            if (
+                !this.internalPropOpen &&
+                isAccordionGroup(this.$parent) &&
+                this.$parent.concurrent
+            ) {
+                this.$parent.closeAllAccordions();
+            }
+
+            this.$refs.accordionHeader.blur();
+
+            this.propOpen = !initialState;
             this.$emit('click', this.internalPropOpen);
         }
-        if (this.$parent instanceof BaseAccordionGroup) {
-        if (isAccordionGroup(this.$parent)) {
-            this.$parent.toggleAccordion(this.propId);
-        }
+    }
 
-        this.$refs.accordionHeader.blur();
-
-        this.propOpen = !this.propOpen;
-        this.$emit('click', this.internalPropOpen);
+    @Watch('open')
+    private syncOpenProp(val: boolean): void {
+        this.internalPropOpen = val;
     }
 }
 

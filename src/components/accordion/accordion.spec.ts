@@ -27,6 +27,7 @@ describe('MAcordion', () => {
                 default: 'Content'
             }
         });
+
         return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
     });
 
@@ -75,6 +76,16 @@ describe('MAcordion', () => {
 
         acn.find('header').trigger('click');
         expect(acn.emitted('click')[1][0]).toBeFalsy();
+    });
+
+    it('should react to open prop changes', () => {
+        const acn = mount(MAccordion);
+
+        acn.setProps({ open: false });
+        expect(acn.find('.m-accordion__body').exists()).toBeFalsy();
+
+        acn.setProps({ open: true });
+        expect(acn.find('.m-accordion__body').exists()).toBeTruthy();
     });
 
     it('should sync open prop', () => {
