@@ -154,7 +154,7 @@ describe('MAcordionGroup', () => {
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
         for (let i = 0; i < acrds.length; ++i) {
-            expect(acrds.at(i).vm['propDisabled']).toEqual(true);
+            expect(acrds.at(i).vm.propDisabled).toEqual(true);
         }
     });
 
@@ -171,7 +171,7 @@ describe('MAcordionGroup', () => {
         });
 
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
-        expect(acrds.at(0).vm['propDisabled']).toEqual(true);
+        expect(acrds.at(0).vm.propDisabled).toEqual(true);
     });
 
     it('should open all accordions specified by id in value prop', () => {

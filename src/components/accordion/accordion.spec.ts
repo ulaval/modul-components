@@ -35,6 +35,9 @@ describe('MAcordion', () => {
         const acn = mount(MAccordion, {
             propsData: {
                 disabled: true
+            },
+            slots: {
+                default: 'Content'
             }
         });
 

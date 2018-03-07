@@ -28,6 +28,7 @@ export enum MAccordionIconSize {
 export interface AccordionGateway extends Vue {
     propId: string;
     propOpen: boolean;
+    propDisabled: boolean;
 }
 
 export interface AccordionGroupGateway {
@@ -115,6 +116,11 @@ export class MAccordion extends Vue implements AccordionGateway {
         }
     }
 
+    public get propDisabled(): boolean {
+        return (isAccordionGroup(this.$parent) && this.$parent.disabled) ||
+            this.disabled;
+    }
+
     private created(): void {
         this.internalPropOpen = this.open;
 
@@ -131,11 +137,6 @@ export class MAccordion extends Vue implements AccordionGateway {
 
     private get propSkin(): MAccordionSkin {
         return isAccordionGroup(this.$parent) ? this.$parent.skin : this.skin;
-    }
-
-    private get propDisabled(): boolean {
-        return (isAccordionGroup(this.$parent) && this.$parent.disabled) ||
-            this.disabled;
     }
 
     private get propIconPosition(): MAccordionIconPosition {
