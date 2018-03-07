@@ -107,7 +107,7 @@ export class MButton extends Vue {
     }
 
     private get hasPrecision(): boolean {
-        return (this.precision != '' && this.precision != undefined) || !!this.$slots.precision;
+        return !!this.precision || !!this.$slots.precision;
     }
 }
 
