@@ -31,6 +31,16 @@ describe('MAcordion', () => {
         return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
     });
 
+    it('should render correctly when disabled', async () => {
+        const acn = mount(MAccordion, {
+            propsData: {
+                disabled: true
+            }
+        });
+
+        return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
+    });
+
     it('should render skins correctly', async () => {
         const acn = mount(MAccordion);
 

@@ -46,14 +46,17 @@ function isAccordionGroup(parent: any): parent is AccordionGroupGateway {
 @WithRender
 @Component
 export class MAccordion extends Vue implements AccordionGateway {
-
     @Prop()
     public id?: string;
 
-    @Prop()
-    public open?: boolean;
+    @Prop({
+        default: false
+    })
+    public open: boolean;
 
-    @Prop()
+    @Prop({
+        default: false
+    })
     public disabled: boolean;
 
     @Prop({
@@ -74,7 +77,7 @@ export class MAccordion extends Vue implements AccordionGateway {
     public iconPosition?: MAccordionIconPosition;
 
     @Prop()
-    public iconBorder: boolean;
+    public iconBorder?: boolean;
 
     @Prop({
         validator: value =>
@@ -113,7 +116,7 @@ export class MAccordion extends Vue implements AccordionGateway {
     }
 
     private created(): void {
-        this.internalPropOpen = this.open !== undefined ? this.open : false;
+        this.internalPropOpen = this.open;
 
         if (isAccordionGroup(this.$parent)) {
             this.$parent.addAccordion(this);
@@ -131,9 +134,8 @@ export class MAccordion extends Vue implements AccordionGateway {
     }
 
     private get propDisabled(): boolean {
-        return isAccordionGroup(this.$parent)
-            ? this.$parent.disabled
-            : this.disabled;
+        return (isAccordionGroup(this.$parent) && this.$parent.disabled) ||
+            this.disabled;
     }
 
     private get propIconPosition(): MAccordionIconPosition {

@@ -146,6 +146,34 @@ describe('MAcordionGroup', () => {
         }
     });
 
+    it('should cascade down disabled prop to accordions', () => {
+        const acn = mountGroup({
+            disabled: true
+        });
+
+        const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
+        expect(acrds.length).toBeGreaterThan(0);
+        for (let i = 0; i < acrds.length; ++i) {
+            expect(acrds.at(i).vm['propDisabled']).toEqual(true);
+        }
+    });
+
+    it('should use accordion disabled prop if group has none defined', () => {
+        const acn = mount(MAccordionGroup, {
+            slots: {
+                default: `<m-accordion :disabled="true">
+                                <span slot="header">A</span>
+                            </m-accordion>
+                            <m-accordion>
+                                <span slot="header">B</span>
+                            </m-accordion>'`
+            }
+        });
+
+        const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
+        expect(acrds.at(0).vm['propDisabled']).toEqual(true);
+    });
+
     it('should open all accordions specified by id in value prop', () => {
         const acn = mountGroup({
             value: ['b']

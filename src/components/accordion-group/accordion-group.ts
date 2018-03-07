@@ -21,10 +21,14 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     })
     public skin: MAccordionSkin;
 
-    @Prop()
+    @Prop({
+        default: false
+    })
     public concurrent: boolean;
 
-    @Prop()
+    @Prop({
+        default: false
+    })
     public disabled: boolean;
 
     @Prop()

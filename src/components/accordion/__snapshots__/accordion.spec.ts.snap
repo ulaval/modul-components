@@ -7,6 +7,13 @@ exports[`MAcordion should render correctly 1`] = `
 </article>
 `;
 
+exports[`MAcordion should render correctly when disabled 1`] = `
+<article class="m-accordion m--is-secondary m--is-closed m--is-disabled">
+    <header tabindex="0" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+</article>
+`;
+
 exports[`MAcordion should render correctly when it is opened 1`] = `
 <article class="m-accordion m--is-secondary">
     <header tabindex="0" class="m-accordion__header m--has-padding">
