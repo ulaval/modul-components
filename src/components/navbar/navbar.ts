@@ -7,6 +7,7 @@ import { NAVBAR_NAME, NAVBAR_ITEM_NAME } from '../component-names';
 import NavbarItemPlugin, { BaseNavbar, Navbar } from '../navbar-item/navbar-item';
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
 import { ComputedOptions } from 'vue/types/options';
+import { log } from 'util';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -74,17 +75,16 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     protected mounted(): void {
-        this.$nextTick(() => {
-            this.setupScrolllH();
-            this.as<ElementQueries>().$on('resize', this.setupScrolllH);
-        });
+        this.scrollToSelected();
+        this.setupScrolllH();
+        this.as<ElementQueries>().$on('resize', this.setupScrolllH);
     }
 
     protected beforeDestroy(): void {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
     }
 
-    private scrollToSelected(value): void {
+    private scrollToSelected(): void {
         this.$children.forEach(element => {
             if (element.$props.value === this.selected) {
                 (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
@@ -99,21 +99,23 @@ export class MNavbar extends BaseNavbar implements Navbar {
         });
     }
 
-    private setPosition(element, ref: string): void {
+    private beforeEnter(): void {
+        console.log('beforeEnter');
+    }
 
+    private setPosition(element, ref: string): void {
         let positionX: number = element.$el.offsetLeft;
         let width: number = element.$el.clientWidth;
         let localRef: HTMLElement = this.$refs[ref] as HTMLElement;
         localRef.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
         localRef.style.width = width + 'px';
         this.animActive = true;
-
     }
 
     @Watch('selected')
     private setAndUpdate(value): void {
         this.internalValue = value;
-        this.scrollToSelected(value);
+        this.scrollToSelected();
     }
 
     private setupScrolllH(): void {
