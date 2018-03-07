@@ -161,19 +161,25 @@ a {
 .m--is-skin-dark {
     .m-navbar-item {
         font-size: $m-font-size--h5;
-        color: $m-color--white;
+        color: $m-color--grey-light;
         text-transform: uppercase;
         padding: $m-spacing--l;
         // padding-right: $m-spacing--l;
 
-        // &.m--is-selected {
-        //     &[tabindex],
-        //     a,
-        //     button {
-        //         color: $m-color--white;
-        //         background: $m-color--grey-dark;
-        //     }
-        // }
+        &.m--is-selected {
+            color: $m-color--white;
+
+            &::before {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                margin-left: -30px;
+                width: 60px;
+                content: '';
+                height: $m-border-width--l;
+                background: $m-color--active;
+            }
+        }
     }
 }
 

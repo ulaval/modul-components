@@ -1,10 +1,10 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop, Watch, Model } from 'vue-property-decorator';
 import WithRender from './navbar.html?style=./navbar.scss';
 import { NAVBAR_NAME, NAVBAR_ITEM_NAME } from '../component-names';
-import NavbarItemPlugin, { BaseNavbar, MNavbarInterface } from '../navbar-item/navbar-item';
+import NavbarItemPlugin, { BaseNavbar, Navbar } from '../navbar-item/navbar-item';
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
 import { ComputedOptions } from 'vue/types/options';
 
@@ -25,8 +25,11 @@ export enum MNavbarSkin {
 @Component({
     mixins: [ElementQueries]
 })
-export class MNavbar extends BaseNavbar implements MNavbarInterface {
+export class MNavbar extends BaseNavbar implements Navbar {
 
+    @Model('change')
+    @Prop()
+    public selected: string;
     @Prop({
         default: MNavbarSkin.LightTab,
         validator: value =>
@@ -40,8 +43,6 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
     public skin: string;
     @Prop()
     public line: boolean;
-    @Prop()
-    public value: string;
     @Prop({ default: true })
     public margin: boolean;
     @Prop()
@@ -52,24 +53,52 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
     public selectedElem: HTMLElement;
 
     private isAnimActive: boolean = false;
-    private internalValue: string = '';
+    private internalValue: any | undefined = '';
     private hasScrolllH: boolean = false;
     private computedHeight: number = 0;
 
-    public selecteItem(el): void {
-        if (this.skin == MNavbarSkin.Light && el != undefined) {
-            this.setLinePosition(el);
-        }
-        if (this.skin == MNavbarSkin.Arrow && el != undefined) {
-            this.setArrowPosition(el);
-        }
+    // public selecteItem(el): void {
+    //     if (el != undefined) {
+    //         if (this.skin == MNavbarSkin.Light) {
+    //             this.setLinePosition(el);
+    //         }
+    //         if (this.skin == MNavbarSkin.Arrow) {
+    //             this.setArrowPosition(el);
+    //         }
+    //         this.scrollToSelectedElem();
+    //     }
+    // }
 
-        this.scrollToSelectedElem();
+    ///////////////////
+    public updateValue(value: any): void {
+        this.model = value;
+        console.log('updateValue: ', value, this.model);
     }
 
+    protected created(): void {
+        this.internalValue = undefined;
+    }
+
+    @Watch('selected')
+    protected onValueChange(value: any): void {
+        this.internalValue = value;
+    }
+
+    public get model(): any {
+        // return this.selected == undefined || this.selected != this.internalValue ? this.internalValue : this.selected;
+        return this.selected == undefined ? this.internalValue : this.selected;
+    }
+
+    public set model(value: any) {
+        this.internalValue = value;
+        console.log('set model: ', value, this.internalValue);
+        this.$emit('change', value);
+    }
+
+    ///////////////////////////
+
     protected mounted(): void {
-        this.model = this.value;
-        this.setItem();
+        // this.setItem();
         this.$nextTick(() => {
             this.initLine();
             this.setupScrolllH();
@@ -81,11 +110,11 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
     }
 
-    private scrollToSelectedElem(): void {
-        setTimeout(() => {
-            (this.$refs.wrap as HTMLElement).scrollLeft = this.selectedElem.offsetLeft;
-        }, 0);
-    }
+    // private scrollToSelectedElem(): void {
+    //     setTimeout(() => {
+    //         (this.$refs.wrap as HTMLElement).scrollLeft = this.selectedElem.offsetLeft;
+    //     }, 0);
+    // }
 
     private setupScrolllH(): void {
         let listEl: HTMLElement = this.$refs.list as HTMLElement;
@@ -99,7 +128,7 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
             this.hasScrolllH = true;
             wrapEl.style.height = this.computedHeight + 40 + 'px';
             this.$el.style.height = this.computedHeight + 'px';
-            this.scrollToSelectedElem();
+            // this.scrollToSelectedElem();
         } else {
             this.hasScrolllH = false;
             wrapEl.style.removeProperty('height');
@@ -117,36 +146,30 @@ export class MNavbar extends BaseNavbar implements MNavbarInterface {
 
     private scrollLeft(event: MouseEvent): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        wrapEl.scrollLeft = wrapEl.scrollLeft - ((this.$el.clientWidth - 88) / 2.5);
+        let btnsWidth: any = ((this.$refs.buttonLeft as ModulVue).$el as HTMLElement).clientWidth + ((this.$refs.buttonRight as ModulVue).$el as HTMLElement).clientWidth;
+        wrapEl.scrollLeft = wrapEl.scrollLeft - ((this.$el.clientWidth - btnsWidth) / 2.5);
     }
 
     private scrollRight(event: MouseEvent): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        wrapEl.scrollLeft = wrapEl.scrollLeft + ((this.$el.clientWidth - 88) / 2.5);
+        let btnsWidth: any = ((this.$refs.buttonLeft as ModulVue).$el as HTMLElement).clientWidth + ((this.$refs.buttonRight as ModulVue).$el as HTMLElement).clientWidth;
+        wrapEl.scrollLeft = wrapEl.scrollLeft + ((this.$el.clientWidth - btnsWidth) / 2.5);
     }
 
-    public get model(): string {
-        return this.internalValue;
-    }
-
-    public set model(value: string) {
-        this.internalValue = this.disabled ? '' : value;
-    }
-
-    private setItem(): void {
-        this.$children.forEach((child, index, arr) => {
-            if (index == 0 && arr.length >= 1) {
-                child['isFirst'] = true;
-            }
-            if (arr.length - 1 === index && arr.length > 1) {
-                child['isLast'] = true;
-            }
-        });
-    }
+    // private setItem(): void {
+    //     this.$children.forEach((child, index, arr) => {
+    //         if (index == 0 && arr.length >= 1) {
+    //             child['isFirst'] = true;
+    //         }
+    //         if (arr.length - 1 === index && arr.length > 1) {
+    //             child['isLast'] = true;
+    //         }
+    //     });
+    // }
 
     private initLine(): void {
         this.$children.forEach((child, index, arr) => {
-            if (child.$props.value == this.value) {
+            if (child.$props.value == this.selected) {
                 if (this.skin == MNavbarSkin.Light) {
                     this.setLinePosition(child.$el);
                 }

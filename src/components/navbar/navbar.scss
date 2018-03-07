@@ -50,9 +50,11 @@
 
     &__button {
         position: relative;
+        // width: 44px !important;
 
         .m--is-skin-dark & {
-            color: $m-color--white;
+            color: $m-color--grey-light;
+            stroke-width: 2;
         }
     }
 
@@ -62,10 +64,6 @@
         width: 100%;
         overflow-x: auto;
         overflow-y: hidden;
-
-        // .m--is-skin-dark & {
-        //     align-self: center;
-        // }
     }
 
     &__list {
@@ -75,11 +73,6 @@
         margin: 0;
         display: inline-flex;
         white-space: nowrap;
-
-        // .m--is-skin-dark & {
-        //     justify-content: space-between;
-        //     width: 100%;
-        // }
     }
 
     &__line,
