@@ -4,7 +4,6 @@ import { Watch } from 'vue-property-decorator';
 
 import WithRender from './viewer.html';
 
-// import { ModulVue } from '../../utils/vue/vue';
 @WithRender
 @Component
 export class Viewer extends Vue {
