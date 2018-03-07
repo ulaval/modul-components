@@ -18,7 +18,7 @@
     <span class="m-button__text">
         <slot></slot>
         <span class="m-button__precision" v-if="hasPrecision">
-            <slot name="precision"></slot>{{precision}}
+            <slot name="precision"></slot><template v-if="precision"></template>{{precision}}</template>
         </span>
     </span>
     <m-spinner aria-hidden="true" class="m-button__icon m--is-right" skin="lighter" size="small" v-if="hasWaitingIconRight"></m-spinner>
