@@ -6,6 +6,8 @@
                  :placeholder="getPlaceholder('year')"
                  :filterable="true"
                  :disabled="disabled || waiting"
+                 :error="error"
+                 :valid="valid"
                  @change="emitDate()">
          <m-dropdown-item v-for="year in years" :value="year"></m-dropdown-item>
      </m-dropdown>
@@ -16,6 +18,8 @@
                  :placeholder="getPlaceholder('month')"
                  :filterable="true"
                  :disabled="disabled || waiting"
+                 :error="error"
+                 :valid="valid"
                  @change="emitDate()">
         <m-dropdown-item v-for="month in months" :value="month" :label="getMonthLabel(month)"></m-dropdown-item>
      </m-dropdown>
@@ -26,9 +30,16 @@
                  :placeholder="getPlaceholder('date')"
                  :filterable="true"
                  :disabled="disabled || waiting"
+                 :error="error"
+                 :valid="valid"
                  @change="emitDate()">
         <m-dropdown-item v-for="date in dates" :value="date" :label="getDateLabel(date)"></m-dropdown-item>
      </m-dropdown>
      <m-spinner v-if="waiting" size="small"></m-spinner>
-
+     <m-validation-message ref="validation"
+        :disabled="isDisabled"
+        :error="hasError"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"></m-validation-message>
 </div>
