@@ -83,7 +83,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public getPortalElement(): HTMLElement {
-        return this.$refs.article as HTMLElement;
+        return this.$refs.article;
     }
 
     protected mounted(): void {
