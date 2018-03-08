@@ -119,6 +119,7 @@
         "stylelint": "^9.1.1",
         "stylelint-config-standard": "^18.2.0",
         "stylelint-scss": "^2.5.0",
+        "stylelint-webpack-plugin": "git+https://github.com/KyKyPy3/stylelint-webpack-plugin.git#master",
         "svg-inline-loader": "^0.8.0",
         "thread-loader": "^1.1.5",
         "ts-jest": "^22.4.1",

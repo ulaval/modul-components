@@ -1,6 +1,7 @@
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 const path = require('path');
 
 function resolve(dir) {
@@ -10,6 +11,7 @@ function resolve(dir) {
 module.exports = function(env) {
     var isProd = !!(env && env.prod);
 
+
     var config = {
         entry: {
             app: ['./tests/app/main.ts']
@@ -17,7 +19,11 @@ module.exports = function(env) {
 
         mode: !isProd ? 'development' : 'production',
 
-        externals: [],
+        optimization: {
+            splitChunks: {
+                chunks: "all"
+            }
+        },
 
         output: {
             path: resolve('dist'),
@@ -33,7 +39,7 @@ module.exports = function(env) {
             }
         },
 
-        devtool: 'source-map',
+        devtool: 'inline-source-map',
 
         module: {
             rules: [
@@ -54,7 +60,6 @@ module.exports = function(env) {
                                 sourceMap: true,
                                 plugins: [
                                     require('autoprefixer')
-                                    //require('stylelint')({ configFile: resolve('.stylelintrc') })
                                 ]
                             }
                         }
@@ -84,7 +89,6 @@ module.exports = function(env) {
                         {
                             loader: 'thread-loader',
                             options: {
-                                // there should be 1 cpu for the fork-ts-checker-webpack-plugin
                                 workers: require('os').cpus().length - 1
                             }
                         },
@@ -96,7 +100,7 @@ module.exports = function(env) {
                                         ? 'tsconfig.json'
                                         : 'tsconfig.dev.json'
                                 ),
-                                happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+                                happyPackMode: true
                             }
                         }
                     ]
@@ -127,7 +131,11 @@ module.exports = function(env) {
         },
         plugins: [
             new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
-            new ContextReplacementPlugin(/moment[\/\\]locale$/, /en-ca|fr-ca/)
+            new ContextReplacementPlugin(/moment[\/\\]locale$/, /en-ca|fr-ca/),
+            new StyleLintPlugin({
+                configFile: '.stylelintrc',
+                emitErrors: true
+            }),
         ]
     };
 

@@ -16,7 +16,8 @@
         ],
         "typeRoots": [
             "node_modules/@types"
-        ]
+        ],
+        "sourceMap": true
     },
     "exclude": [
         "src/**/*.spec.*",
