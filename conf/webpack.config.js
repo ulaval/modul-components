@@ -1,13 +1,13 @@
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const path = require('path');
 
 function resolve(dir) {
-    return path.join(__dirname, '..', dir)
+    return path.join(__dirname, '..', dir);
 }
 
-module.exports = function (env) {
+module.exports = function(env) {
     var isProd = !!(env && env.prod);
 
     var config = {
@@ -15,7 +15,7 @@ module.exports = function (env) {
             app: ['./tests/app/main.ts']
         },
 
-        mode: !isProd ? "development" : "production",
+        mode: !isProd ? 'development' : 'production',
 
         externals: [],
 
@@ -28,7 +28,7 @@ module.exports = function (env) {
         resolve: {
             extensions: ['.js', '.ts', '.html'],
             alias: {
-                'vue$': 'vue/dist/vue.esm.js',
+                vue$: 'vue/dist/vue.esm.js',
                 '@': resolve('src')
             }
         },
@@ -36,104 +36,109 @@ module.exports = function (env) {
         devtool: 'source-map',
 
         module: {
-            rules: [{
-                enforce: 'post',
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
-            {
-                enforce: 'post',
-                test: /\.scss$/,
-                use: ['style-loader',
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            sourceMap: true,
-                            plugins: [
-                                    require('autoprefixer'),
+            rules: [
+                {
+                    enforce: 'post',
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader']
+                },
+                {
+                    enforce: 'post',
+                    test: /\.scss$/,
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                plugins: [
+                                    require('autoprefixer')
                                     //require('stylelint')({ configFile: resolve('.stylelintrc') })
                                 ]
+                            }
                         }
+                    ]
+                },
+                {
+                    enforce: 'pre',
+                    test: /\.scss$/,
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: true,
+                        includePaths: ['./src/styles']
                     }
-                ]
-            },
-            {
-                enforce: 'pre',
-                test: /\.scss$/,
-                loader: "sass-loader",
-                options: {
-                    sourceMap: true,
-                    includePaths: ["./src/styles"]
-                }
-            },
-            {
-                test: /\.html$/,
-                loader: 'vue-template-loader',
-                exclude: resolve('tests/app/index.html'),
-                options: {
-                    scoped: true
-                }
-            },
-            {
-                test: /\.ts$/,
-                use:
-                [
-                    { loader: 'cache-loader' },
-                    {
-                        loader: 'thread-loader',
-                        options: {
-                            // there should be 1 cpu for the fork-ts-checker-webpack-plugin
-                            workers: require('os').cpus().length - 1,
+                },
+                {
+                    test: /\.html$/,
+                    loader: 'vue-template-loader',
+                    exclude: resolve('tests/app/index.html'),
+                    options: {
+                        scoped: true
+                    }
+                },
+                {
+                    test: /\.ts$/,
+                    use: [
+                        { loader: 'cache-loader' },
+                        {
+                            loader: 'thread-loader',
+                            options: {
+                                // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+                                workers: require('os').cpus().length - 1
+                            }
                         },
-                    },
-                    {
-                loader: 'ts-loader',
-                options: {
-                    configFile: resolve(isProd ? 'tsconfig.json' : 'tsconfig.dev.json'),
-                            happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+                        {
+                            loader: 'ts-loader',
+                            options: {
+                                configFile: resolve(
+                                    isProd
+                                        ? 'tsconfig.json'
+                                        : 'tsconfig.dev.json'
+                                ),
+                                happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+                            }
                         }
+                    ]
+                },
+                {
+                    test: /\.ts$/,
+                    enforce: 'pre',
+                    loader: 'tslint-loader',
+                    include: [resolve('src'), resolve('test')],
+                    options: {
+                        configFile: 'conf/tslint.json',
+                        formatter: 'grouped',
+                        formattersDirectory:
+                            'node_modules/custom-tslint-formatters/formatters',
+                        emitErrors: true
+                    }
+                },
+                {
+                    test: /\.svg$/,
+                    loader: 'svg-inline-loader',
+                    options: {
+                        removeTags: true,
+                        removingTags: ['desc', 'defs', 'style'],
+                        removeSVGTagAttrs: true
+                    }
                 }
-                ]
-            },
-            {
-                test: /\.ts$/,
-                enforce: 'pre',
-                loader: 'tslint-loader',
-                include: [resolve('src'), resolve('test')],
-                options: {
-                    configFile: 'conf/tslint.json',
-                    formatter: 'grouped',
-                    formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
-                    emitErrors: true,
-                }
-            },
-            {
-                test: /\.svg$/,
-                loader: 'svg-inline-loader',
-                options: {
-                    removeTags: true,
-                    removingTags: ['desc', 'defs', 'style'],
-                    removeSVGTagAttrs: true
-                }
-            }
             ]
         },
         plugins: [
             new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
-            new ContextReplacementPlugin(
-                /moment[\/\\]locale$/,
-                /en-ca|fr-ca/
-            )
+            new ContextReplacementPlugin(/moment[\/\\]locale$/, /en-ca|fr-ca/)
         ]
-    }
+    };
 
     if (!isProd) {
-        config.plugins.push(new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: resolve('tests/app/index.html'),
-            inject: 'body'
-        }));
+        config.plugins.push(
+            new HtmlWebpackPlugin({
+                filename: 'index.html',
+                template: resolve('tests/app/index.html'),
+                inject: 'body'
+            })
+        );
     }
 
     if (isProd) {
@@ -166,4 +171,4 @@ module.exports = function (env) {
     }
 
     return config;
-}
+};
