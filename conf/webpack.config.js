@@ -1,5 +1,5 @@
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const path = require('path');
 
@@ -14,6 +14,8 @@ module.exports = function (env) {
         entry: {
             app: ['./tests/app/main.ts']
         },
+
+        mode: !isProd ? "development" : "production",
 
         externals: [],
 
@@ -34,11 +36,6 @@ module.exports = function (env) {
         devtool: 'source-map',
 
         module: {
-            loaders: [{
-                exclude: [
-                    'vue/**/*'
-                ],
-            }],
             rules: [{
                 enforce: 'post',
                 test: /\.css$/,
@@ -53,11 +50,10 @@ module.exports = function (env) {
                         loader: 'postcss-loader',
                         options: {
                             sourceMap: true,
-                            plugins: function () {
-                                return [
-                                    require('autoprefixer')
-                                ];
-                            }
+                            plugins: [
+                                    require('autoprefixer'),
+                                    //require('stylelint')({ configFile: resolve('.stylelintrc') })
+                                ]
                         }
                     }
                 ]
@@ -81,9 +77,10 @@ module.exports = function (env) {
             },
             {
                 test: /\.ts$/,
-                loader: 'awesome-typescript-loader',
+                loader: 'ts-loader',
                 options: {
-                    configFileName: resolve(isProd ? 'tsconfig.json' : 'tsconfig.dev.json')
+                    configFile: resolve(isProd ? 'tsconfig.json' : 'tsconfig.dev.json'),
+                    transpileOnly: true
                 }
             },
             {
@@ -110,10 +107,7 @@ module.exports = function (env) {
             ]
         },
         plugins: [
-            new StyleLintPlugin({
-                configFile: '.stylelintrc',
-                emitErrors: true
-            }),
+            new ForkTsCheckerWebpackPlugin(),
             new ContextReplacementPlugin(
                 /moment[\/\\]locale$/,
                 /en-ca|fr-ca/
