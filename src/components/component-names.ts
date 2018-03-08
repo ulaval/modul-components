@@ -59,3 +59,4 @@ export const UPLOAD_INPUT_NAME: string = 'm-upload-input';
 export const UPLOAD_DRAGDROP_NAME: string = 'm-upload-dragdrop';
 export const UPLOAD_FILESLIST_NAME: string = 'm-upload-fileslist';
 export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
+export const WRAPPER_INLINE_EDITION: string = 'm-wrapper-inline-edition';

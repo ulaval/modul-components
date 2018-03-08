@@ -61,6 +61,7 @@ import UploadInputPlugin from './upload-input/upload-input';
 import UploadDragdropPlugin from './upload-dragdrop/upload-dragdrop';
 import UploadFileslistPlugin from './upload-fileslist/upload-fileslist';
 import ValidationMessagePlugin from './validation-message/validation-message';
+import WrapperInlineEditionPlugin from './wrapper-inline-edition/wrapper-inline-edition';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -125,6 +126,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(UploadDragdropPlugin);
         Vue.use(UploadFileslistPlugin);
         Vue.use(ValidationMessagePlugin);
+        Vue.use(WrapperInlineEditionPlugin);
     }
 };
 

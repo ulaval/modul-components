@@ -60,7 +60,8 @@ const components: string[] = [
     Components.UPLOAD_INPUT_NAME,
     Components.UPLOAD_DRAGDROP_NAME,
     Components.UPLOAD_FILESLIST_NAME,
-    Components.VALIDATION_MESSAGE_NAME
+    Components.VALIDATION_MESSAGE_NAME,
+    Components.WRAPPER_INLINE_EDITION
 ];
 
 const factory = () => {
