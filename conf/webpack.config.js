@@ -77,11 +77,24 @@ module.exports = function (env) {
             },
             {
                 test: /\.ts$/,
+                use:
+                [
+                    { loader: 'cache-loader' },
+                    {
+                        loader: 'thread-loader',
+                        options: {
+                            // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+                            workers: require('os').cpus().length - 1,
+                        },
+                    },
+                    {
                 loader: 'ts-loader',
                 options: {
                     configFile: resolve(isProd ? 'tsconfig.json' : 'tsconfig.dev.json'),
-                    transpileOnly: true
+                            happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+                        }
                 }
+                ]
             },
             {
                 test: /\.ts$/,
@@ -107,7 +120,7 @@ module.exports = function (env) {
             ]
         },
         plugins: [
-            new ForkTsCheckerWebpackPlugin(),
+            new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
             new ContextReplacementPlugin(
                 /moment[\/\\]locale$/,
                 /en-ca|fr-ca/
