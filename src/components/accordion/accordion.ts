@@ -9,7 +9,8 @@ import uuid from '../../utils/uuid/uuid';
 import I18nPlugin from '../i18n/i18n';
 
 export enum MAccordionSkin {
-    Regular = 'regular',
+    Primary = 'primary',
+    Secondary = 'secondary',
     Light = 'light',
     Plain = 'plain'
 }
@@ -26,6 +27,7 @@ export enum MAccordionIconSize {
 
 export abstract class BaseAccordionGroup extends Vue {
     abstract skin: MAccordionSkin;
+    abstract disabled: boolean;
     abstract accordionIsOpen(id: string): boolean;
     abstract addAccordion(id: string, open: boolean): void;
     abstract removeAccordion(id: string): void;
@@ -40,11 +42,14 @@ export class MAccordion extends ModulVue {
 
     @Prop()
     public open: boolean;
+    @Prop()
+    public disabled: boolean;
 
     @Prop({
-        default: MAccordionSkin.Regular,
+        default: MAccordionSkin.Secondary,
         validator: value =>
-            value == MAccordionSkin.Regular ||
+            value == MAccordionSkin.Primary ||
+            value == MAccordionSkin.Secondary ||
             value == MAccordionSkin.Light ||
             value == MAccordionSkin.Plain
     })
@@ -69,6 +74,13 @@ export class MAccordion extends ModulVue {
 
     @Prop()
     public id: string;
+
+    @Prop({ default: true })
+    public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
 
     private uuid: string = uuid.generate();
     private internalPropOpen: boolean = false;
@@ -107,6 +119,10 @@ export class MAccordion extends ModulVue {
         return this.$parent instanceof BaseAccordionGroup ? this.$parent.skin : this.skin;
     }
 
+    private get propDisabled(): boolean {
+        return this.$parent instanceof BaseAccordionGroup ? this.$parent.disabled : this.disabled;
+    }
+
     private get propIconPosition(): MAccordionIconPosition {
         if (this.propSkin == MAccordionSkin.Light) {
             return this.iconPosition || MAccordionIconPosition.Left;
@@ -130,10 +146,12 @@ export class MAccordion extends ModulVue {
     }
 
     private toggleAccordion(): void {
-        if (this.$parent instanceof BaseAccordionGroup) this.$parent.toggleAccordion(this.propId);
-        (this.$refs.accordionHeader as HTMLElement).blur();
-        this.propOpen = !this.propOpen;
-        this.$emit('click', this.internalPropOpen);
+        if (!this.propDisabled) {
+            if (this.$parent instanceof BaseAccordionGroup) this.$parent.toggleAccordion(this.propId);
+            (this.$refs.accordionHeader as HTMLElement).blur();
+            this.propOpen = !this.propOpen;
+            this.$emit('click', this.internalPropOpen);
+        }
     }
 }
 

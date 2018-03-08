@@ -125,7 +125,7 @@ export class MRadio extends ModulVue {
         if (this.hasParentGroup === undefined) {
             let parentGroup: BaseRadioGroup | undefined;
             parentGroup = this.getParent<BaseRadioGroup>(
-                p => p.$options.name == 'MRadioGroup'
+                p => p.$options.name == 'MRadioGroup' || p.$options.name == 'MButtonGroup'
             );
             if (parentGroup) {
                 this.parentGroup = (parentGroup as any) as RadioGroup;

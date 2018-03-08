@@ -1,9 +1,32 @@
 <m-dialog :title="title" ref="dialog" @open="onOpen" @close="onClose" :close-on-backdrop="false">
+
     <span slot="trigger">
         <slot></slot>
     </span>
-    <div class="m-file-upload">
-        <div class="m-file-upload__drop-zone" v-m-file-drop>
+
+    <div class="m-file-upload" v-m-file-drop>
+
+        <m-message class="m-file-upload__error-message" state="error" v-if="hasRejectedFiles" :close-button="true" @close="onMessageClose">
+            <p class="m-file-upload__error-message__title">
+                <m-i18n :nb="rejectedFiles.length" k="m-file-upload:rejectFileMsg"></m-i18n>
+            </p>
+            <ul class="m-file-upload__error-message__list">
+                <li v-for="file in rejectedFiles" :key="file.uid">
+                    <p class="m-file-upload__error-message__file-name">{{file.name}}</p>
+                    <p class="m-file-upload__error-message__error" v-if="hasExtensionsRejection(file)">
+                        <m-i18n k="m-file-upload:extensionFileMsg"></m-i18n>
+                    </p>
+                    <p class="m-file-upload__error-message__error" v-else-if="hasSizeRejection(file)">
+                        <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb * 1024 | file-size}}).
+                    </p>
+                    <p class="m-file-upload__error-message__error" v-else-if="hasMaxFilesRejection(file)">
+                        <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}} <m-i18n :nb="maxFiles" k="m-file-upload:file"></m-i18n>)
+                    </p>
+                </li>
+            </ul>
+        </m-message>
+
+        <div class="m-file-upload__drop-zone">
             <h2>
                 <m-icon name="drag-drop" size="48px"></m-icon>
                 <m-i18n k="m-file-upload:title"></m-i18n>
@@ -11,92 +34,73 @@
             <p class="m-file-upload__drop-zone__or"><m-i18n k="m-file-upload:choice"></m-i18n></p>
             <m-file-select class="m-file-upload__drop-zone__button" skin="primary" :multiple="maxFiles > 1 ? true : false"></m-file-select>
             <p class="m-file-upload__drop-zone__format" v-if="extensions"><m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format"></m-i18n>: {{fileExtensions}}</p>
-
         </div>
 
-        <transition name="m--is">
-            <div class="m-file-upload__top-section" v-if="!hasUploadingFiles">
-               <h3 class="m-file-upload__title">
-                    <m-i18n k="m-file-upload:import"></m-i18n> ({{uploadingFiles.length}}
-                    <m-i18n v-if="uploadingFiles.length > 1" k="m-file-upload:files"></m-i18n>
-                    <m-i18n v-else k="m-file-upload:file"></m-i18n>)
-                </h3>
-                <div class="m-file-upload__import-list">
-                    <transition-group class="m-file-upload__import-list__overflow" name="m--is" tag="ul">
-                        <li v-for="(file, index) in uploadingFiles" :key="file.uid">
-                            <div class="m-file-upload__import-list__content">
-                                <div>
-                                    <m-icon name="chip-info" size="24px"></m-icon>
-                                </div>
-                                <div class="m-file-upload__import-list__progress-wrap">
-                                    <div class="m-file-upload__import-list__infos">
-                                        <p class="m-file-upload__import-list__name">{{file.name}}</p>
-                                        <p class="m-file-upload__import-list__size">{{file.file.size | file-size}}</p>
-                                    </div>
-                                    <m-progress :value="file.progress" :state="getFileStatus(file)"></m-progress>
-                                    <p class="m-file-upload__import-list__error-message" v-if="getFileStatus(file) == 'error'">
-                                        <m-i18n k="m-file-upload:errorMsg"></m-i18n>
-                                    </p>
-                                </div>
-                                <div>
-                                    <m-icon-button class="m-file-upload__import-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
-                                </div>
-                            </div>
-                        </li>
-                    </transition-group>
-                </div>
-            </div>
-        </transition>
+        <h3 class="m-file-upload__title" v-if="!hasUploadingFiles">
+            <m-i18n k="m-file-upload:import"></m-i18n> ({{uploadingFiles.length}}
+            <m-i18n :nb="uploadingFiles.length" k="m-file-upload:file"></m-i18n>)
+        </h3>
 
-        <transition name="m--is">
-            <div class="m-file-upload__completed-list" v-if="!hasCompletedFiles" :class="{ 'm--has-border': !hasUploadingFiles }">
-                <transition-group class="m-file-upload__completed-list__overflow" name="m--is" tag="ul">
-                    <li v-for="(file, index) in completedFiles" :key="file.uid">
-                        <div class="m-file-upload__completed-list__content">
-                            <div>
-                                <m-icon name="chip-info" size="24px"></m-icon>
-                            </div>
-                            <div class="m-file-upload__completed-list__infos">
-                                <p class="m-file-upload__completed-list__infos-label">
-                                    <m-link :url="file.url" :mode="link" target="_blank" v-if="file.url">{{file.name}}</m-link>
-                                    <template v-else>{{file.name}}</template>
-                                </p>
-                                <p class="m-file-upload__completed-list__infos-size">{{file.file.size | file-size}}</p>
-                            </div>
-                            <div>
-                                <m-icon-button class="m-file-upload__completed-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onFileRemove(file)"></m-icon-button>
-                            </div>
+        <div class="m-file-upload__import-list" v-if="!hasUploadingFiles">
+            <transition-group class="m-file-upload__import-list__wrap" name="m--is" tag="ul">
+                <li v-for="(file, index) in uploadingFiles" :key="file.uid">
+                    <div class="m-file-upload__import-list__content">
+                        <div class="m-file-upload__import-list__file-icon">
+                            <m-icon name="chip-info" size="24px"></m-icon>
                         </div>
-                    </li>
-                </transition-group>
-            </div>
-        </transition>
+                        <div class="m-file-upload__import-list__progress-wrap">
+                            <div class="m-file-upload__import-list__infos">
+                                <p class="m-file-upload__import-list__name">{{file.name}}</p>
+                                <p class="m-file-upload__import-list__size">{{file.file.size | file-size}}</p>
+                            </div>
+                            <m-progress :value="file.progress" :state="getFileStatus(file)"></m-progress>
+                            <p class="m-file-upload__import-list__error-message" v-if="getFileStatus(file) == 'error'">
+                                <m-i18n k="m-file-upload:errorMsg"></m-i18n>
+                            </p>
+                        </div>
+                        <div class="m-file-upload__import-list__delete">
+                            <m-icon-button class="m-file-upload__import-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
+                        </div>
+                    </div>
+                </li>
+            </transition-group>
+        </div>
+
+        <div class="m-file-upload__completed-list" v-if="!hasCompletedFiles" :class="{ 'm--has-border': !hasUploadingFiles }">
+            <transition-group class="m-file-upload__completed-list__wrap" name="m--is" tag="ul">
+                <li v-for="(file, index) in completedFiles" :key="file.uid">
+                    <div class="m-file-upload__completed-list__content">
+                        <div class="m-file-upload__completed-list__file-icon">
+                            <m-icon name="chip-info" size="24px"></m-icon>
+                        </div>
+                        <div class="m-file-upload__completed-list__infos">
+                            <p class="m-file-upload__completed-list__infos-label">
+                                <m-link :url="file.url" :mode="link" target="_blank" v-if="file.url">{{file.name}}</m-link>
+                                <template v-else>{{file.name}}</template>
+                            </p>
+                            <p class="m-file-upload__completed-list__infos-size">{{file.file.size | file-size}}</p>
+                        </div>
+                        <div class="m-file-upload__completed-list__delete">
+                            <m-icon-button class="m-file-upload__completed-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onFileRemove(file)"></m-icon-button>
+                        </div>
+                    </div>
+                </li>
+            </transition-group>
+        </div>
 
     </div>
+
     <div slot="footer" class="m-file-upload__footer">
         <m-button @click="onAddClick" :disabled="!isAddBtnEnabled">
             <m-i18n k="m-file-upload:add"></m-i18n>
             <span slot="precision" v-show="completedFiles.length > 0">{{completedFiles.length}}
-                <m-i18n v-if="completedFiles.length > 1" k="m-file-upload:files"></m-i18n>
-                <m-i18n v-else k="m-file-upload:file"></m-i18n>
+                <m-i18n :nb="completedFiles.length" k="m-file-upload:file"></m-i18n>
             </span>
         </m-button>
         <m-button @click="onCancelClick" skin="secondary" class="m-u--margin-left">
             <m-i18n k="m-file-upload:cancel"></m-i18n>
         </m-button>
     </div>
-    <m-modal :open="isModalOpen" @ok="onModalClose" :negative-link="false" class="m-file-upload__error-message">
-        <m-message state="error">
-            <p class="m-file-upload__error-message__title">
-                <m-i18n k="m-file-upload:rejectFileMsg"></m-i18n>
-            </p>
-            <p class="m-file-upload__error-message__text">
-                <m-i18n k="m-file-upload:extensionFileMsg"></m-i18n>
-            </p>
-            <ul class="m-file-upload__error-message__list" v-if="rejectedFiles">
-                <li v-for="file in rejectedFiles" :key="file.uid">{{file.name}}</li>
-            </ul>
-        </m-message>
-    </m-modal>
+
 </m-dialog>
 

@@ -63,10 +63,10 @@
         }
 
         &.m--is-skin-light {
-            color: $m-color--grey-darker;
+            color: $m-color--grey-dark;
 
             &:hover {
-                color: $m-color--text;
+                color: $m-color--black;
             }
 
             &::before {

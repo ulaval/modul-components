@@ -1,0 +1,23 @@
+import Vue from 'vue';
+
+export const resetModulPlugins = () => {
+    let vueCstr = Vue as any;
+
+    cleanComponentsOptions(vueCstr.options.components);
+
+    const modulServices = Object.keys(vueCstr.prototype).filter(
+        c => c != '$i18n' && typeof vueCstr.prototype[c] === 'object'
+    );
+    modulServices.forEach(m => delete vueCstr.prototype[m]);
+    vueCstr._installedPlugins = [];
+};
+
+const cleanComponentsOptions = components => {
+    if (components) {
+        cleanComponentsOptions(Object.getPrototypeOf(components));
+        const modulComponents = Object.keys(components).filter(c =>
+            c.startsWith('m-')
+        );
+        modulComponents.forEach(m => delete components[m]);
+    }
+};
