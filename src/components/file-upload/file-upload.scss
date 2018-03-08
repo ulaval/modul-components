@@ -4,6 +4,38 @@ $m-file-upload-max-height: 120px;
 $m-file-upload-max-height--s: 72px;
 
 .m-file-upload {
+    &__error-message {
+        margin-bottom: $m-margin--l;
+
+        &__title {
+            font-weight: $m-font-weight--bold;
+        }
+
+        &__list {
+            margin-top: $m-margin--s;
+            margin-bottom: 0;
+
+            li {
+                margin-top: $m-margin;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &__file-name {
+            margin-top: 0;
+            word-break: break-all;
+        }
+
+        &__error {
+            margin-top: 0;
+            font-size: $m-font-size--xs;
+            color: $m-color--error;
+        }
+    }
+
     &__wrap {
         &.m--no-padding {
             padding-left: 0;
@@ -16,6 +48,14 @@ $m-file-upload-max-height--s: 72px;
 
         @media (max-width: $m-mq--max--s) {
             padding: $m-padding $m-padding;
+        }
+    }
+
+    &.m--is-drag-over {
+        .m-file-upload__drop-zone {
+            border-style: solid;
+            border-color: $m-color--interactive;
+            background: $m-color--information;
         }
     }
 
@@ -51,27 +91,6 @@ $m-file-upload-max-height--s: 72px;
             margin-top: $m-margin--l;
             font-weight: $m-font-weight--bold;
         }
-
-        &.m--is-drag-over {
-            border-style: solid;
-            border-color: $m-color--interactive;
-            background: $m-color--information;
-        }
-    }
-
-    &__top-section {
-        max-height: 240px;
-        display: flex;
-        flex-direction: column;
-
-        &.m--is-leave-active {
-            transition: opacity $m-transition-duration, max-height $m-transition-duration--l;
-        }
-
-        &.m--is-leave-to {
-            opacity: 0;
-            max-height: 0;
-        }
     }
 
     &__title {
@@ -82,13 +101,9 @@ $m-file-upload-max-height--s: 72px;
     &__import-list {
         margin-top: $m-margin--l;
 
-        &__overflow {
+        &__wrap {
             margin: 0;
-            max-height: $m-file-upload-max-height;
-            overflow-y: auto;
-            overflow-x: hidden;
-
-            @include m-scrollbar();
+            max-height: initial;
 
             li {
                 max-height: $m-file-upload-max-height;
@@ -164,9 +179,6 @@ $m-file-upload-max-height--s: 72px;
 
     &__completed-list {
         padding-top: $m-spacing--m;
-        max-height: 144px;
-        display: flex;
-        flex-direction: column;
 
         &.m--is-leave-active {
             transition: opacity $m-transition-duration, max-height $m-transition-duration--l;
@@ -177,13 +189,9 @@ $m-file-upload-max-height--s: 72px;
             max-height: 0;
         }
 
-        &__overflow {
+        &__wrap {
             margin: 0;
-            max-height: $m-file-upload-max-height;
-            overflow-y: auto;
-            overflow-x: hidden;
-
-            @include m-scrollbar();
+            max-height: initial;
 
             li {
                 max-height: $m-file-upload-max-height--s;
@@ -244,18 +252,6 @@ $m-file-upload-max-height--s: 72px;
         &__button:active::before {
             width: 32px !important;
             height: 32px !important;
-        }
-    }
-
-    &__error-message {
-        display: block;
-
-        &__title {
-            font-weight: $m-font-weight--bold;
-        }
-
-        &__list {
-            @include m-bullet-list();
         }
     }
 }
