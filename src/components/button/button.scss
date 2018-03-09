@@ -9,7 +9,6 @@
     font-size: 100%;
     border-radius: 4px;
     padding: 10px $m-padding 12px $m-padding; // Magic number
-    font-family: $m-font-family;
     font-weight: $m-font-weight--bold;
 
     @include m-button();
