@@ -46,7 +46,7 @@ export class MAccordion extends ModulVue {
     public disabled: boolean;
 
     @Prop({
-        default: MAccordionSkin.Secondary,
+        default: MAccordionSkin.Primary,
         validator: value =>
             value == MAccordionSkin.Primary ||
             value == MAccordionSkin.Secondary ||

@@ -12,7 +12,7 @@ $m-accordion--color-secondary: $m-color--accent;
     &.m--is-disabled {
         > .m-accordion {
             &__header {
-                cursor: not-allowed;
+                // cursor: not-allowed;
                 outline: none;
 
                 &,
@@ -51,6 +51,12 @@ $m-accordion--color-secondary: $m-color--accent;
                 font-weight: $m-font-weight--bold;
             }
         }
+
+        .m-accordion__header-icon {
+            &.m--is-left {
+                margin-right: $m-margin;
+            }
+        }
     }
 
     &.m--is-primary,
@@ -79,7 +85,7 @@ $m-accordion--color-secondary: $m-color--accent;
 
             &__header {
                 position: relative;
-                min-height: 56px;
+                min-height: 80px;
                 border-top: $m-accordion--border-size solid $m-accordion--border-color;
                 border-bottom: $m-accordion--border-size solid $m-accordion--border-color;
 
