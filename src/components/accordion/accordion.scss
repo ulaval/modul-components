@@ -1,6 +1,6 @@
 @import '../../styles/abstracts/variables';
-$m-accordion--icon-l-width: 12px;
-$m-accordion--icon-width: 10px;
+$m-accordion--icon-l-width: 16px;
+$m-accordion--icon-width: 12px;
 $m-accordion--icon-l-height: 2px;
 $m-accordion--icon-height: 1px;
 $m-accordion--border-size: $m-border-width;
@@ -51,12 +51,6 @@ $m-accordion--color-secondary: $m-color--accent;
                 font-weight: $m-font-weight--bold;
             }
         }
-
-        .m-accordion__header-icon {
-            &.m--is-left {
-                margin-right: $m-margin;
-            }
-        }
     }
 
     &.m--is-primary,
@@ -72,6 +66,32 @@ $m-accordion--color-secondary: $m-color--accent;
                         background: $m-color--disabled;
                     }
                 }
+            }
+        }
+
+        &.m--has-icon-left {
+            > .m-accordion {
+                &__body-wrap > .m-accordion__body {
+                    &.m--has-padding {
+                        padding-left: 48px;
+                    }
+                }
+            }
+
+            &.m--has-icon-large {
+                > .m-accordion {
+                    &__body-wrap > .m-accordion__body {
+                        &.m--has-padding {
+                            padding-left: 52px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .m-accordion__header-icon {
+            &.m--is-left {
+                margin-right: $m-padding;
             }
         }
 
@@ -158,11 +178,42 @@ $m-accordion--color-secondary: $m-color--accent;
             &__body-wrap {
                 > .m-accordion__body {
                     &.m--has-padding {
-                        padding-left: $m-margin--l;
                         padding-top: $m-margin--s;
                         padding-bottom: $m-margin;
                     }
                 }
+            }
+        }
+
+        &.m--has-icon-left {
+            > .m-accordion {
+                &__body-wrap {
+                    > .m-accordion__body {
+                        &.m--has-padding {
+                            padding-left: 32px; // Magic number
+                        }
+                    }
+                }
+            }
+
+            &.m--has-icon-large {
+                > .m-accordion {
+                    &__body-wrap {
+                        > .m-accordion__body {
+                            &.m--has-padding {
+                                padding-left: 36px; // Magic number
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.m--has-icon-left {
+        > .m-accordion {
+            &__header {
+                flex-direction: row-reverse;
             }
         }
     }
@@ -175,10 +226,6 @@ $m-accordion--color-secondary: $m-color--accent;
         &:hover,
         &:active {
             outline: none;
-        }
-
-        &.m--is-icon-left {
-            flex-direction: row-reverse;
         }
 
         &:not(.m--is-plain) {
@@ -272,7 +319,7 @@ $m-accordion--color-secondary: $m-color--accent;
             }
 
             &.m--is-left {
-                margin-right: $m-padding--s;
+                margin-right: $m-margin;
             }
         }
     }

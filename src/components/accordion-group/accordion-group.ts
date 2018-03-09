@@ -12,7 +12,7 @@ import LinkPlugin from '../link/link';
 export class MAccordionGroup extends BaseAccordionGroup {
 
     @Prop({
-        default: MAccordionSkin.Secondary,
+        default: MAccordionSkin.Primary,
         validator: value =>
             value == MAccordionSkin.Primary ||
             value == MAccordionSkin.Secondary ||
