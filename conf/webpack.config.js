@@ -85,7 +85,6 @@ module.exports = function(env) {
                 {
                     test: /\.ts$/,
                     use: [
-                        { loader: 'cache-loader' },
                         {
                             loader: 'thread-loader',
                             options: {

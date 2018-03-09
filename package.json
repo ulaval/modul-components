@@ -7,8 +7,8 @@
     "scripts": {
         "setup": "npm install --no-optional",
         "clean": "rimraf dist",
-        "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
-        "buildWebpack": "webpack --config conf/webpack.config.js --colors",
+        "dev": "webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback --profile",
+        "buildWebpack": "webpack --config conf/webpack.config.js --colors --profile",
         "build": "tsc && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist && npm run metagen",
         "dtsToDist": "copyfiles -f \"./src/**/*.d.ts\" dist",
         "scssToDist": "copyfiles -u 1 \"./src/styles/**/*.scss\" dist && copyfiles -u 1 \"./src/styles/**/*.css\" dist",
