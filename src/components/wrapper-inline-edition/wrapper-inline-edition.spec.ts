@@ -22,6 +22,7 @@ const EDIT_SLOT: string = '<input class="' + EDIT_SLOT_CLASS + '" type="text" na
 describe('Component wrapper-inline-edition - Element wrapper edition inline with default values', () => {
 
     beforeEach(() => {
+        Vue.use(MediaQueriesPlugin);
         wrapperEditionInline = new MWrapperInlineEdition();
     });
 
@@ -48,9 +49,9 @@ describe('Component wrapper-inline-edition - Element wrapper edition inline with
 describe('Component wrapper-inline-edition - Element wrapper edition inline set to read mode', () => {
 
     beforeEach(() => {
+        Vue.use(MediaQueriesPlugin);
         propsData = { propsData: { editMode: false } };
         wrapperEditionInline = new MWrapperInlineEdition(propsData);
-        console.log('beforeTestComplete');
     });
 
     describe('when confirming', () => {
@@ -77,6 +78,7 @@ describe('Component wrapper-inline-edition - Element wrapper edition inline set 
 describe('Component wrapper-inline-edition - Element wrapper edition inline set to edit mode', () => {
 
     beforeEach(() => {
+        Vue.use(MediaQueriesPlugin);
         propsData = { propsData: {  editMode: true } };
         wrapperEditionInline = new MWrapperInlineEdition(propsData);
     });
@@ -105,6 +107,7 @@ describe('Component wrapper-inline-edition - Element wrapper edition inline set 
 describe('Component wrapper-edition-inline - Complete component by default', () => {
 
     beforeEach(() => {
+        Vue.use(MediaQueriesPlugin);
         Vue.use(WrapperInlineEditionPlugin);
 
         addMessages(Vue, ['components/wrapper-inline-edition/wrapper-inline-edition.lang.en.json']);
@@ -167,6 +170,7 @@ describe('Component wrapper-edition-inline - Complete component mobile', () => {
     let wrapper: Wrapper<ModulVue>;
 
     beforeEach(() => {
+        Vue.use(MediaQueriesPlugin);
         Vue.use(WrapperInlineEditionPlugin);
 
         addMessages(Vue, ['components/wrapper-inline-edition/wrapper-inline-edition.lang.en.json']);
