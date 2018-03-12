@@ -32,14 +32,14 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     public disabled: boolean;
 
     @Prop()
-    public value?: string[];
+    public openedIds?: string[];
 
     private accordions: { [id: string]: AccordionGateway } = {};
 
     public addAccordion(accordion: AccordionGateway): void {
         accordion.$on('update:open', this.emitValueChange);
         this.$set(this.accordions, accordion.propId, accordion);
-        if (this.value && this.value.find(v => v === accordion.propId)) {
+        if (this.openedIds && this.openedIds .find(v => v === accordion.propId)) {
             accordion.propOpen = true;
         }
     }
@@ -96,10 +96,10 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
             id => this.accordions[id].propOpen
         );
 
-        this.$emit('update:value', openedIds);
+        this.$emit('update:openedIds', openedIds);
     }
 
-    @Watch('value')
+    @Watch('openedIds')
     private applyValuePropChange(val: string[]): void {
         for (const id in this.accordions) {
             this.accordions[id].propOpen =

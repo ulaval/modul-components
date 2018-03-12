@@ -174,9 +174,9 @@ describe('MAcordionGroup', () => {
         expect(acrds.at(0).vm.propDisabled).toEqual(true);
     });
 
-    it('should open all accordions specified by id in value prop', () => {
+    it('should open all accordions specified by id in openedIds prop', () => {
         const acn = mountGroup({
-            value: ['b']
+            openedIds: ['b']
         });
 
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
@@ -184,9 +184,9 @@ describe('MAcordionGroup', () => {
         expect(acrds.at(1).vm.propOpen).toBeTruthy();
     });
 
-    it('should should sync value prop when a accordion is closed or opened', () => {
+    it('should should sync openedIds prop when a accordion is closed or opened', () => {
         const acn = mountGroup({
-            value: []
+            openedIds: []
         });
 
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
@@ -195,7 +195,7 @@ describe('MAcordionGroup', () => {
             .find('header')
             .trigger('click');
 
-        expect(acn.emitted('update:value')[0][0]).toEqual(['a']);
+        expect(acn.emitted('update:openedIds')[0][0]).toEqual(['a']);
     });
 
     const mountGroup = (propsData?: object, slots?: Slots) => {
