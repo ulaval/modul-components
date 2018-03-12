@@ -5,7 +5,7 @@ import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
 import { ModulVue } from '../vue/vue';
 
-const DEFAULT_STORE_NAME: string = 'DEFAULT';
+export const DEFAULT_STORE_NAME: string = 'DEFAULT';
 
 export interface MFile {
     uid: string;
@@ -68,6 +68,10 @@ export class FileService {
 
     public clear(storeName?: string): void {
         this.getStore(storeName).clear();
+    }
+
+    public destroy(storeName?: string): void {
+        this.getStore(storeName).destroy();
         delete this.stores[this.getStoreName(storeName)];
     }
 
@@ -164,6 +168,11 @@ class FileStore {
     }
 
     public clear(): void {
+        this.filesmap = {};
+        this.rx.files = [];
+    }
+
+    public destroy(): void {
         this.rx.$destroy();
     }
 
