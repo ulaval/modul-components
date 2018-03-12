@@ -17,10 +17,10 @@ import { ModulVue } from '../../utils/vue/vue';
 export class MWrapperInlineEdition extends ModulVue {
 
     @Prop({ default: () => { return false; } })
-    editMode: boolean;
+    public editMode: boolean;
 
     @Prop()
-    title: string;
+    public title: string;
 
     public confirm(): void {
         if (this.editMode) {
