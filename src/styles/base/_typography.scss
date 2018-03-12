@@ -172,10 +172,16 @@ a {
 // ======================================================================
 .m-u--typo {
     &--precision {
-        font-family: $m-font-family;
-        font-size: $m-font-size--s;
-        font-style: italic;
-        color: $m-color--grey-darker;
+        &,
+        &-italic {
+            font-family: $m-font-family;
+            font-size: $m-font-size--s;
+            color: $m-color--text-light;
+        }
+
+        &-italic {
+            font-style: italic;
+        }
     }
 
     &--highlighting {
