@@ -1,4 +1,6 @@
-import Vue, { VNode, VNodeData, VueConstructor } from 'vue';
+import Vue, { PluginObject, VNode, VNodeData, VueConstructor } from 'vue';
+
+import { ACCORDION_TRANSITION_NAME } from '../component-names';
 
 interface MAccordionTransitionProps {
     heightDelta?: number;
@@ -34,3 +36,11 @@ export const MAccordionTransition: VueConstructor<Vue> = Vue.extend({
         return createElement('transition', data, context.children);
     }
 });
+
+const AccordionTransitionPlugin: PluginObject<any> = {
+    install(v, options): void {
+        v.component(ACCORDION_TRANSITION_NAME, MAccordionTransition);
+    }
+};
+
+export default AccordionTransitionPlugin;
