@@ -32,7 +32,7 @@ exports[`MFileUpload completed should render completed files 1`] = `
         <m-button><span class="m-i18n">Add</span> <span slot="precision">1
                 <span class="m-i18n">file</span></span>
         </m-button>
-        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+        <m-button skin="secondary" class="m-file-upload__footer__cancel"><span class="m-i18n">Cancel</span></m-button>
     </div>
 </m-dialog>
 `;
@@ -51,7 +51,7 @@ exports[`MFileUpload should render correctly 1`] = `
         <m-button disabled="disabled"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
                 <span class="m-i18n">file</span></span>
         </m-button>
-        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+        <m-button skin="secondary" class="m-file-upload__footer__cancel"><span class="m-i18n">Cancel</span></m-button>
     </div>
 </m-dialog>
 `;
@@ -94,7 +94,7 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
         <m-button disabled="disabled"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
                 <span class="m-i18n">file</span></span>
         </m-button>
-        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+        <m-button skin="secondary" class="m-file-upload__footer__cancel"><span class="m-i18n">Cancel</span></m-button>
     </div>
 </m-dialog>
 `;
@@ -114,7 +114,7 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
         <m-button disabled="disabled"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
                 <span class="m-i18n">file</span></span>
         </m-button>
-        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+        <m-button skin="secondary" class="m-file-upload__footer__cancel"><span class="m-i18n">Cancel</span></m-button>
     </div>
 </m-dialog>
 `;
@@ -171,7 +171,7 @@ exports[`MFileUpload validation validation messages should render rejected files
         <m-button disabled="disabled"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
                 <span class="m-i18n">file</span></span>
         </m-button>
-        <m-button skin="secondary" class="m-u--margin-left"><span class="m-i18n">Cancel</span></m-button>
+        <m-button skin="secondary" class="m-file-upload__footer__cancel"><span class="m-i18n">Cancel</span></m-button>
     </div>
 </m-dialog>
 `;
