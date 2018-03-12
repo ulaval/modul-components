@@ -10,7 +10,7 @@ import { InputWidth } from '../../mixins/input-width/input-width';
 import { ModulVue } from '../../utils/vue/vue';
 import { TEXTAREA_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
-import TextareaResizePlugin, { MTextareaResize } from '../textarea-resize/textarea-resize';
+import TextareaResizePlugin from '../textarea-resize/textarea-resize';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textarea.html?style=./textarea.scss';
 
@@ -62,7 +62,7 @@ export class MTextarea extends ModulVue {
     }
 
     private resizeInput(): void {
-        (this.$refs.textarea as MTextareaResize).resize();
+      //  (this.$refs.textarea as MTextareaResize).resize();
     }
 }
 

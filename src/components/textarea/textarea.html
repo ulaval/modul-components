@@ -17,20 +17,24 @@
                    :empty="isEmpty"
                    :icon-name="iconName"
                    :required-marker="requiredMarker">
-        <m-textarea-resize class="m-textarea__input"
-                  :disabled="!active"
-                  :placeholder="placeholder"
-                  :readonly="readonly"
-                  rows="1"
-                  :focus="focus"
-                  @focus="onFocus"
-                  @blur="onBlur"
-                  @change="onChange"
-                  @keyup="onKeyup"
-                  @keydown="onKeydown"
-                  @paste="onPaste"
-                  ref="textarea"
-                  v-model="model"></m-textarea-resize>
+
+                <textarea class="m-textarea-resize m-textarea__input"
+                :class="{ 'm--is-diabled' : disabled,
+                        'm--is-readonly': readonly,
+                        'm--is-focus': isFocus }"
+                :disabled="!active"
+                :placeholder="placeholder"
+                :readonly="readonly"
+                rows="1"
+                @focus="onFocus"
+                @blur="onBlur"
+                @change="onChange"
+                @keyup="onKeyup"
+                @keydown="onKeydown"
+                @paste="onPaste"
+                ref="input"
+                v-model="model"></textarea>
+
     </m-input-style>
     <div class="m-textarea__validation">
         <m-validation-message
