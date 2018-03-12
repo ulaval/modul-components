@@ -5,7 +5,7 @@ exports[`MTextArea should render correctly 1`] = `
     <div class="m-input-style" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <m-textarea-resize rows="1" class="m-textarea__input"></m-textarea-resize>
+                <textarea rows="1" class="m-textarea-resize m-textarea__input"></textarea>
             </div>
             <div class="m-input-style__body__right"></div>
         </div>
