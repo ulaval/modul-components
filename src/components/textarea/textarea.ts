@@ -71,6 +71,7 @@ const TextareaPlugin: PluginObject<any> = {
         console.warn(TEXTAREA_NAME + ' is not ready for production');
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
+        v.use(TextareaResizePlugin);
         v.component(TEXTAREA_NAME, MTextarea);
     }
 };
