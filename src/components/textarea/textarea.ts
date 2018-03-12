@@ -1,18 +1,18 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './textarea.html?style=./textarea.scss';
-import { TEXTAREA_NAME } from '../component-names';
-import { KeyCode } from '../../utils/keycode/keycode';
-import InputStyle from '../input-style/input-style';
-import ValidationMesagePlugin from '../validation-message/validation-message';
-import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
-import { InputState } from '../../mixins/input-state/input-state';
-import { InputManagement } from '../../mixins/input-management/input-management';
-import { InputLabel } from '../../mixins/input-label/input-label';
+
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
-import { MTextareaResize } from '../textarea-resize/textarea-resize';
+import { InputLabel } from '../../mixins/input-label/input-label';
+import { InputManagement } from '../../mixins/input-management/input-management';
+import { InputState } from '../../mixins/input-state/input-state';
+import { InputWidth } from '../../mixins/input-width/input-width';
+import { ModulVue } from '../../utils/vue/vue';
+import { TEXTAREA_NAME } from '../component-names';
+import InputStyle from '../input-style/input-style';
+import TextareaResizePlugin, { MTextareaResize } from '../textarea-resize/textarea-resize';
+import ValidationMesagePlugin from '../validation-message/validation-message';
+import WithRender from './textarea.html?style=./textarea.scss';
 
 @WithRender
 @Component({
@@ -36,7 +36,7 @@ export class MTextarea extends ModulVue {
     }
 
     protected beforeDestroy(): void {
-        this.as<ElementQueries>().$off('resize',this.resizeInput);
+        this.as<ElementQueries>().$off('resize', this.resizeInput);
     }
 
     private get valueLenght(): number {

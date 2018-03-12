@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTextArea should render correctly 1`] = `
+<div class="m-textarea" style="width:100%;max-width:288px;">
+    <div class="m-input-style" style="width:undefined;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <m-textarea-resize rows="1" class="m-textarea__input"></m-textarea-resize>
+            </div>
+            <div class="m-input-style__body__right"></div>
+        </div>
+    </div>
+    <div class="m-textarea__validation"> </div>
+</div>
+`;
