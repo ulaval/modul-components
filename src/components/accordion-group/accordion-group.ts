@@ -12,10 +12,9 @@ import LinkPlugin from '../link/link';
 export class MAccordionGroup extends BaseAccordionGroup {
 
     @Prop({
-        default: MAccordionSkin.Primary,
+        default: MAccordionSkin.Default,
         validator: value =>
-            value == MAccordionSkin.Primary ||
-            value == MAccordionSkin.Secondary ||
+            value == MAccordionSkin.Default ||
             value == MAccordionSkin.Light ||
             value == MAccordionSkin.Plain
     })
@@ -81,7 +80,7 @@ export class MAccordionGroup extends BaseAccordionGroup {
     }
 
     private get propSkin(): MAccordionSkin {
-        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Plain || this.skin == MAccordionSkin.Primary ? this.skin : MAccordionSkin.Secondary;
+        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Plain || this.skin == MAccordionSkin.Default ? this.skin : MAccordionSkin.Default;
     }
 
     private get hasTitleSlot(): boolean {

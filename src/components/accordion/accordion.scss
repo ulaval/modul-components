@@ -4,9 +4,9 @@ $m-accordion--icon-width: 12px;
 $m-accordion--icon-l-height: 2px;
 $m-accordion--icon-height: 1px;
 $m-accordion--border-size: $m-border-width;
+$m-accordion--vertical-border-size: 6px;
 $m-accordion--border-color: $m-color--border;
-$m-accordion--color-primary: $m-color--interactive;
-$m-accordion--color-secondary: $m-color--accent;
+$m-accordion--color-default: $m-color--interactive;
 
 .m-accordion {
     &.m--is-disabled {
@@ -35,8 +35,7 @@ $m-accordion--color-secondary: $m-color--accent;
         }
     }
 
-    &.m--is-primary,
-    &.m--is-secondary,
+    &.m--is-default,
     &.m--is-light {
         > .m-accordion__header__content {
             &,
@@ -53,8 +52,7 @@ $m-accordion--color-secondary: $m-color--accent;
         }
     }
 
-    &.m--is-primary,
-    &.m--is-secondary {
+    &.m--is-default {
         margin-top: - $m-accordion--border-size;
 
         &.m--is-disabled {
@@ -82,16 +80,10 @@ $m-accordion--color-secondary: $m-color--accent;
                 > .m-accordion {
                     &__body-wrap > .m-accordion__body {
                         &.m--has-padding {
-                            padding-left: 52px;
+                            padding-left: $m-spacing*2 + $m-accordion--icon-l-width + $m-accordion--vertical-border-size;
                         }
                     }
                 }
-            }
-        }
-
-        .m-accordion__header-icon {
-            &.m--is-left {
-                margin-right: $m-padding;
             }
         }
 
@@ -99,7 +91,7 @@ $m-accordion--color-secondary: $m-color--accent;
             &__header,
             &__body-wrap > .m-accordion__body {
                 &.m--has-padding {
-                    padding: $m-padding $m-padding $m-padding 20px; // Magic number
+                    padding: $m-spacing $m-spacing $m-spacing ($m-spacing + $m-accordion--vertical-border-size);
                 }
             }
 
@@ -115,7 +107,8 @@ $m-accordion--color-secondary: $m-color--accent;
                     bottom: -$m-accordion--border-size;
                     left: 0;
                     content: '';
-                    width: $m-border-width--l;
+                    width: $m-accordion--vertical-border-size;
+                    background: $m-accordion--color-default;
                 }
             }
 
@@ -137,26 +130,6 @@ $m-accordion--color-secondary: $m-color--accent;
 
                 > .m-accordion__body {
                     transition: opacity $m-transition-duration--l ease, transform $m-transition-duration ease;
-                }
-            }
-        }
-    }
-
-    &.m--is-primary {
-        > .m-accordion {
-            &__header {
-                &::after {
-                    background: $m-accordion--color-primary;
-                }
-            }
-        }
-    }
-
-    &.m--is-secondary {
-        > .m-accordion {
-            &__header {
-                &::after {
-                    background: $m-accordion--color-secondary;
                 }
             }
         }
@@ -315,11 +288,11 @@ $m-accordion--color-secondary: $m-color--accent;
             }
 
             &:not(.m--is-left) {
-                margin-left: $m-margin;
+                margin-left: $m-spacing;
             }
 
             &.m--is-left {
-                margin-right: $m-margin;
+                margin-right: $m-spacing;
             }
         }
     }

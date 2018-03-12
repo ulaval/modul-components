@@ -9,8 +9,7 @@ import uuid from '../../utils/uuid/uuid';
 import I18nPlugin from '../i18n/i18n';
 
 export enum MAccordionSkin {
-    Primary = 'primary',
-    Secondary = 'secondary',
+    Default = 'default',
     Light = 'light',
     Plain = 'plain'
 }
@@ -46,16 +45,16 @@ export class MAccordion extends ModulVue {
     public disabled: boolean;
 
     @Prop({
-        default: MAccordionSkin.Primary,
+        default: MAccordionSkin.Default,
         validator: value =>
-            value == MAccordionSkin.Primary ||
-            value == MAccordionSkin.Secondary ||
+            value == MAccordionSkin.Default ||
             value == MAccordionSkin.Light ||
             value == MAccordionSkin.Plain
     })
     public skin: MAccordionSkin;
 
     @Prop({
+        default: MAccordionIconPosition.Left,
         validator: value =>
             value == MAccordionIconPosition.Left ||
             value == MAccordionIconPosition.Right
@@ -66,6 +65,7 @@ export class MAccordion extends ModulVue {
     public iconBorder: boolean;
 
     @Prop({
+        default: MAccordionIconSize.Large,
         validator: value =>
             value == MAccordionIconSize.Small ||
             value == MAccordionIconSize.Large
@@ -124,17 +124,11 @@ export class MAccordion extends ModulVue {
     }
 
     private get propIconPosition(): MAccordionIconPosition {
-        if (this.propSkin == MAccordionSkin.Light) {
-            return this.iconPosition || MAccordionIconPosition.Left;
-        }
-        return this.iconPosition || MAccordionIconPosition.Right;
+        return this.iconPosition;
     }
 
     private get propIconSize(): MAccordionIconSize {
-        if (this.propSkin == MAccordionSkin.Light) {
-            return this.iconSize || MAccordionIconSize.Small;
-        }
-        return this.iconSize || MAccordionIconSize.Large;
+        return this.iconSize;
     }
 
     private get propIconBorder(): boolean {

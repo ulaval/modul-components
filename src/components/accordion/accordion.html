@@ -6,9 +6,7 @@
             <m-i18n k="m-accordion:open" class="m-accordion__hidden" v-if="!propOpen"></m-i18n>
             <m-i18n k="m-accordion:close" class="m-accordion__hidden" v-if="propOpen"></m-i18n>
         </div>
-        <span aria-hidden="true"
-              class="m-accordion__header-icon"
-              :class="{ 'm--is-closed': propOpen,
+        <span aria-hidden="true" class="m-accordion__header-icon" :class="{ 'm--is-closed': propOpen,
                         'm--is-left': propIconPosition != 'right',
                         'm--is-large': propIconSize=='large',
                         'm--has-border': propIconBorder }"></span>
