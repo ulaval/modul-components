@@ -1,29 +1,27 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './file-select.html?style=./file-select.scss';
-import { FILE_SELECT_NAME, BUTTON_NAME } from '../component-names';
-import ButtonPlugin, { MButtonSkin, MButtonType, MButtonIconPosition } from '../button/button';
-import ValidationMesagePlugin from '../validation-message/validation-message';
-import uuid from '../../utils/uuid/uuid';
+
 import { InputState } from '../../mixins/input-state/input-state';
+import FilePlugin, { DEFAULT_STORE_NAME } from '../../utils/file/file';
+import uuid from '../../utils/uuid/uuid';
+import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin, { MButtonIconPosition, MButtonSkin } from '../button/button';
+import { FILE_SELECT_NAME } from '../component-names';
+import ValidationMesagePlugin from '../validation-message/validation-message';
+import WithRender from './file-select.html?style=./file-select.scss';
 
 @WithRender
 @Component({
-    mixins: [
-        InputState
-    ]
+    mixins: [InputState]
 })
 export class MFileSelect extends ModulVue {
-
     @Prop()
     public label: string;
     @Prop({
         default: MButtonSkin.Secondary,
         validator: value =>
-            value == MButtonSkin.Primary ||
-            value == MButtonSkin.Secondary
+            value == MButtonSkin.Primary || value == MButtonSkin.Secondary
     })
     public skin: MButtonSkin;
     @Prop()
@@ -45,13 +43,25 @@ export class MFileSelect extends ModulVue {
     public iconSize: string;
     @Prop()
     public multiple: boolean;
+    @Prop({
+        default: DEFAULT_STORE_NAME
+    })
+    public storeName: string;
+
+    $refs: {
+        inputFile: HTMLInputElement;
+    };
 
     private id: string = `mFileSelect-${uuid.generate()}`;
 
+    private destroyed(): void {
+        this.$file.destroy(this.storeName);
+    }
+
     private onClick(event: Event): void {
-        (this.$refs.inputFile as HTMLElement).click();
+        this.$refs.inputFile.click();
         this.$emit('click', event);
-        this.$refs['inputFile']['blur']();
+        this.$refs.inputFile.blur();
     }
 
     private onFocus(event: Event): void {
@@ -63,11 +73,11 @@ export class MFileSelect extends ModulVue {
     }
 
     private processFile(event: Event): void {
-        const file = (this.$refs.inputFile as HTMLInputElement).files;
+        const file = this.$refs.inputFile.files;
         if (file) {
-            this.$file.add(file) ;
+            this.$file.add(file, this.storeName);
         }
-        (this.$refs.inputFile as HTMLInputElement).value = '';
+        this.$refs.inputFile.value = '';
     }
 }
 
@@ -76,6 +86,7 @@ const FileSelectPlugin: PluginObject<any> = {
         console.debug(FILE_SELECT_NAME, 'plugin.install');
         v.use(ButtonPlugin);
         v.use(ValidationMesagePlugin);
+        v.use(FilePlugin);
         v.component(FILE_SELECT_NAME, MFileSelect);
     }
 };

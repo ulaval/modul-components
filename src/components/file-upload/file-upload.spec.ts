@@ -6,7 +6,7 @@ import { createMockFile, createMockFileList } from '../../../tests/helpers/file'
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
 import I18nPlugin from '../../components/i18n/i18n';
-import FilePlugin, { MFile, MFileStatus } from '../../utils/file/file';
+import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileStatus } from '../../utils/file/file';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import IconButtonPlugin from '../icon-button/icon-button';
@@ -28,6 +28,22 @@ describe('MFileUpload', () => {
         return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
     });
 
+    it('should support optional $file store name', async () => {
+        const fupd = mount(MFileUpload, {
+            propsData: {
+                storeName: 'unique-name'
+            }
+        });
+
+        fupd.vm.$file.add(
+            createMockFileList([createMockFile('file')]),
+            'unique-name'
+        );
+        await Vue.nextTick();
+
+        expect(fupd.emitted('files-ready')[0][0]).toHaveLength(1);
+    });
+
     describe('validation', () => {
         const validationOpts = {
             extensions: ['jpg', 'png', 'mp4'],
@@ -44,7 +60,8 @@ describe('MFileUpload', () => {
             });
 
             expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
-                validationOpts
+                validationOpts,
+                DEFAULT_STORE_NAME
             );
         });
 
