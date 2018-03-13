@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+import TextAreaAutoHeightPlugin from '../../directives/textarea-auto-height/textarea-auto-height';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
@@ -10,7 +11,6 @@ import { InputWidth } from '../../mixins/input-width/input-width';
 import { ModulVue } from '../../utils/vue/vue';
 import { TEXTAREA_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
-import TextareaResizePlugin from '../textarea-resize/textarea-resize';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textarea.html?style=./textarea.scss';
 
@@ -29,14 +29,6 @@ export class MTextarea extends ModulVue implements InputManagementData {
     public maxLength?: number;
 
     readonly internalValue: string;
-
-    // protected mounted(): void {
-        // this.as<ElementQueries>().$on('resize', this.resizeInput);
-    // }
-
-    // protected beforeDestroy(): void {
-        // this.as<ElementQueries>().$off('resize', this.resizeInput);
-    // }
 
     private get valueLength(): number {
         return this.internalValue.length;
@@ -59,10 +51,6 @@ export class MTextarea extends ModulVue implements InputManagementData {
             ? this.internalValue.length < this.maxLength
             : true;
     }
-
-    // private resizeInput(): void {
-        //  (this.$refs.textarea as MTextareaResize).resize();
-    // }
 }
 
 const TextareaPlugin: PluginObject<any> = {
@@ -70,7 +58,7 @@ const TextareaPlugin: PluginObject<any> = {
         console.warn(TEXTAREA_NAME + ' is not ready for production');
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
-        v.use(TextareaResizePlugin);
+        v.use(TextAreaAutoHeightPlugin);
         v.component(TEXTAREA_NAME, MTextarea);
     }
 };
