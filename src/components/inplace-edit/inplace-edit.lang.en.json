@@ -1,6 +1,6 @@
 {
     "m-inplace-edit": {
-        "confirm": "Confirm",
+        "save": "Save",
         "cancel": "Cancel",
         "newValue": "New value"
     }

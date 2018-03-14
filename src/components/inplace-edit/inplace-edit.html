@@ -3,7 +3,8 @@
         <slot name="readMode"></slot>
     </div>
     <div @click.stop v-show="editMode" >
-        <template v-if="isMqMinS">
+        <template v-if="isMqMinS" :class="[{RED-BACKGROUND: errorPresent}, {BLUE-BACKGROUND: !errorPresent}]">
+        <!-- <template v-if="isMqMinS" :class="[{RED-BACKGROUND: errorPresent}, {BLUE-BACKGROUND: !errorPresent}]"> -->
             <slot name="editMode" ></slot>
             <m-icon-button ref="confirm-control" skin="primary" iconName="ICONE_CROCHET" @click="confirm">
                 <m-i18n k="m-inplace-edit:confirm"></m-i18n>

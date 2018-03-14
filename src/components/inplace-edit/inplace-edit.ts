@@ -19,6 +19,9 @@ export class MInplaceEdit extends ModulVue {
     @Prop({ default: () => { return false; } })
     public editMode: boolean;
 
+    @Prop({ default: () => { return false; } })
+    public errorPresent: boolean;
+
     @Prop()
     public title: string;
 

@@ -1,10 +1,14 @@
-import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
+import {mount,  Wrapper} from '@vue/test-utils';
 import Vue from 'vue';
-import { Wrapper, mount } from '@vue/test-utils';
+
+import { addMessages } from '../../../tests/helpers/lang';
+import { renderComponent } from '../../../tests/helpers/render';
+
 import I18nPlugin from '../../components/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import { addMessages } from '../../../tests/helpers/lang';
+
+import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 
 let propsData: { propsData: { editMode: boolean } };
 
@@ -23,6 +27,7 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
+        Vue.use(InplaceEditPlugin);
         inplaceEdit = new MInplaceEdit();
     });
 
@@ -104,7 +109,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
     });
 });
 
-describe('Component wrapper-edition-inline - Complete component by default', () => {
+describe('Component inplace-edit - Complete component by default', () => {
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
@@ -166,7 +171,7 @@ describe('Component wrapper-edition-inline - Complete component by default', () 
     });
 });
 
-describe('Component wrapper-edition-inline - Complete component mobile', () => {
+describe('Component inplace-edit - Complete component mobile', () => {
     let wrapper: Wrapper<ModulVue>;
 
     beforeEach(() => {
