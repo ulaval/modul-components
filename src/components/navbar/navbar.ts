@@ -1,7 +1,7 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch, Model } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './navbar.html?style=./navbar.scss';
 import { NAVBAR_NAME, NAVBAR_ITEM_NAME } from '../component-names';
 import NavbarItemPlugin, { BaseNavbar, Navbar } from '../navbar-item/navbar-item';
@@ -19,6 +19,7 @@ export enum MNavbarSkin {
     LightTab = 'light-tab',
     DarkTab = 'dark-tab',
     Plain = 'plain',
+    Simple = 'simple',
     Arrow = 'arrow'
 }
 
@@ -38,11 +39,10 @@ export class MNavbar extends BaseNavbar implements Navbar {
             value == MNavbarSkin.LightTab ||
             value == MNavbarSkin.DarkTab ||
             value == MNavbarSkin.Plain ||
+            value == MNavbarSkin.Simple ||
             value == MNavbarSkin.Arrow
     })
     public skin: string;
-    @Prop()
-    public line: boolean;
     @Prop({ default: true })
     public margin: boolean;
     @Prop()
@@ -51,7 +51,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
     public arrowMobile: boolean;
 
     public selectedElem: HTMLElement;
-
     private animActive: boolean = false;
     private internalValue: any | undefined = '';
     private hasScrolllH: boolean = false;
@@ -99,17 +98,15 @@ export class MNavbar extends BaseNavbar implements Navbar {
         });
     }
 
-    private beforeEnter(): void {
-        console.log('beforeEnter');
-    }
-
     private setPosition(element, ref: string): void {
         let positionX: number = element.$el.offsetLeft;
         let width: number = element.$el.clientWidth;
         let localRef: HTMLElement = this.$refs[ref] as HTMLElement;
+
         localRef.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
         localRef.style.width = width + 'px';
         this.animActive = true;
+
     }
 
     @Watch('selected')
@@ -141,8 +138,16 @@ export class MNavbar extends BaseNavbar implements Navbar {
         return this.computedHeight + 'px';
     }
 
-    private get isSkinDark(): string {
+    private get buttonSkin(): string {
         return this.skin == 'dark' ? this.skin : 'light';
+    }
+
+    private get isLightSkin(): boolean {
+        return this.skin == 'light' ? true : false;
+    }
+
+    private get isArrowSkin(): boolean {
+        return this.skin == 'arrow' ? true : false;
     }
 
     private get isAnimActive(): boolean {
@@ -159,20 +164,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
         let btnsWidth: any = ((this.$refs.buttonLeft as ModulVue).$el as HTMLElement).clientWidth + ((this.$refs.buttonRight as ModulVue).$el as HTMLElement).clientWidth;
         wrapEl.scrollLeft = wrapEl.scrollLeft + ((this.$el.clientWidth - btnsWidth) / 2.5);
-    }
-
-    private get hasLine(): boolean {
-        if (this.line == undefined || this.line == true) {
-            return this.skin == MNavbarSkin.Light;
-        }
-        return this.line;
-    }
-
-    private get hasArrow(): boolean {
-        if (this.line == undefined || this.line == true) {
-            return this.skin == MNavbarSkin.Arrow;
-        }
-        return this.line;
     }
 }
 

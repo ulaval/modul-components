@@ -5,19 +5,18 @@
               'm--is-skin-light': skin == 'light',
               'm--is-skin-dark': skin == 'dark',
               'm--is-skin-plain': skin == 'plain',
+              'm--is-skin-simple': skin == 'simple',
               'm--is-skin-arrow': skin == 'arrow',
               'm--no-margin': !margin }">
-    <m-icon-button ref="buttonLeft" class="m-navbar__button" :skin="isSkinDark" :button-size="ComputedHeight" icon-name="left-chevron"
+    <m-icon-button ref="buttonLeft" class="m-navbar__button" :skin="buttonSkin" :button-size="ComputedHeight" icon-name="left-chevron"
         @click="scrollLeft" v-if="hasScrolllH && arrowMobile"></m-icon-button>
     <nav class="m-navbar__wrap" ref="wrap">
         <ul class="m-navbar__list" aria-hidden="true" ref="list">
             <slot></slot>
-            <transition @before-enter="beforeEnter()">
-                <li aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasLine" ref="line"></li>
-                <li aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="hasArrow" ref="arrow"></li>
-            </transition>
+            <li aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="isLightSkin" ref="line"></li>
+            <li aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': isAnimActive }" v-if="isArrowSkin" ref="arrow"></li>
         </ul>
     </nav>
-    <m-icon-button ref="buttonRight" class="m-navbar__button" :skin="isSkinDark" :button-size="ComputedHeight" icon-name="chevron"
+    <m-icon-button ref="buttonRight" class="m-navbar__button" :skin="buttonSkin" :button-size="ComputedHeight" icon-name="chevron"
         @click="scrollRight" v-if="hasScrolllH && arrowMobile"></m-icon-button>
 </div>
