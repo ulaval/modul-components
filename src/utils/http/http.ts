@@ -5,6 +5,7 @@ import { RestAdapter, RequestConfig } from './rest';
 
 export class HttpService implements RestAdapter {
     private instance: AxiosInstance;
+    private requestInterceptor: number | undefined;
     private responseInterceptor: number | undefined;
 
     constructor() {
@@ -13,9 +14,20 @@ export class HttpService implements RestAdapter {
         });
     }
 
+    public setupRequestInterceptor<T>(onFulfilled: (value: any) => any, onRejected: (error: any) => any): void {
+        if (this.requestInterceptor !== undefined) {
+            throw new Error('An request interceptor is already defined');
+        }
+        this.requestInterceptor = this.instance.interceptors.request.use((value: AxiosRequestConfig) => {
+            return onFulfilled(value);
+        }, (error: Error) => {
+            return onRejected(error);
+        });
+    }
+
     public setupResponseInterceptor<T>(onFulfilled: (value: any) => any, onRejected: (error: any) => any): void {
         if (this.responseInterceptor !== undefined) {
-            throw new Error('An interceptor is already defined');
+            throw new Error('An response interceptor is already defined');
         }
         this.responseInterceptor = this.instance.interceptors.response.use((response: AxiosResponse) => {
             return onFulfilled(response);
