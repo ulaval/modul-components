@@ -40,7 +40,7 @@ export class MTextareaResize extends ModulVue {
 
 const TextareaResizePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(TEXTAREA_RESIZE_NAME + ' is not ready for production');
+        console.error(TEXTAREA_RESIZE_NAME + ' is deprecated');
         v.component(TEXTAREA_RESIZE_NAME, MTextareaResize);
     }
 };
