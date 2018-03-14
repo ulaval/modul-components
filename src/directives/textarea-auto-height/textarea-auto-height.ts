@@ -13,7 +13,7 @@ interface MTextAreaAutoSizeData {
 
 const resizeHeight = (el: HTMLTextAreaElement) => {
     el.style.height = 'auto';
-    if (el.value && el.scrollHeight != 0) {
+    if (el.scrollHeight != 0) {
         el.style.height = el.scrollHeight + 'px';
     }
 };
@@ -45,8 +45,6 @@ const MTextAreaAutoSizeDirective: DirectiveOptions = {
                 }
             }
         };
-
-        window.addEventListener('resize', windowResize);
     },
     unbind(
         el: HTMLTextAreaElementExt,
