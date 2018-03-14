@@ -1,4 +1,6 @@
 @import '../../styles/abstracts/variables';
+@import './accordion-transition.scss';
+
 $m-accordion--icon-l-width: 12px;
 $m-accordion--icon-width: 10px;
 $m-accordion--icon-l-height: 2px;
@@ -94,15 +96,15 @@ $m-accordion--color-secondary: $m-color--accent;
             }
 
             &__body-wrap {
-                &.v-enter-to {
+                &.accordion-enter-to {
                     .m-accordion__body {
                         transform: translate3d(0, 0, 0);
                         opacity: 1;
                     }
                 }
 
-                &.v-enter,
-                &.v-leave-to {
+                &.accordion-enter,
+                &.accordion-leave-to {
                     .m-accordion__body {
                         transform: translate3d(0, $m-margin--l, 0);
                         opacity: 0;
