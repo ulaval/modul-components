@@ -6,10 +6,10 @@
         <template v-if="isMqMinS">
             <slot name="editMode" ></slot>
             <m-icon-button ref="confirm-control" skin="primary" iconName="ICONE_CROCHET" @click="confirm">
-                <m-i18n k="m-wrapper-inline-edition:confirm"></m-i18n>
+                <m-i18n k="m-inplace-edit:confirm"></m-i18n>
             </m-icon-button>
             <m-icon-button ref="cancel-control" skin="secondary" iconName="ICONE_X" @click="cancel">
-                <m-i18n k="m-wrapper-inline-edition:cancel"></m-i18n>
+                <m-i18n k="m-inplace-edit:cancel"></m-i18n>
             </m-icon-button>
         </template>
         <template v-else>
@@ -17,10 +17,10 @@
                 <slot name="editMode"></slot>
                 <template slot="footer">
                     <m-button ref="confirm-control-mobile" skin="primary" @click="confirm">
-                        <m-i18n k="m-wrapper-inline-edition:confirm"></m-i18n>
+                        <m-i18n k="m-inplace-edit:confirm"></m-i18n>
                     </m-button>
                     <m-button ref="cancel-control-mobile" skin="secondary" @click="cancel">
-                        <m-i18n k="m-wrapper-inline-edition:cancel"></m-i18n>
+                        <m-i18n k="m-inplace-edit:cancel"></m-i18n>
                     </m-button>
                 </template>
             </m-dialog>

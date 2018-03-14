@@ -1,5 +1,5 @@
 {
-    "m-wrapper-inline-edition": {
+    "m-inplace-edit": {
         "confirm": "Confirmer",
         "cancel": "Annuler",
         "newValue": "Nouvelle valeur"

@@ -1,4 +1,4 @@
-import WrapperInlineEditionPlugin, { MWrapperInlineEdition } from './wrapper-inline-edition';
+import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 import Vue from 'vue';
 import { Wrapper, mount } from '@vue/test-utils';
 import I18nPlugin from '../../components/i18n/i18n';
@@ -8,7 +8,7 @@ import { addMessages } from '../../../tests/helpers/lang';
 
 let propsData: { propsData: { editMode: boolean } };
 
-let wrapperEditionInline: MWrapperInlineEdition;
+let inplaceEdit: MInplaceEdit;
 let wrapper: Wrapper<ModulVue>;
 
 const CANCEL_EVENT: string = 'cancel';
@@ -19,46 +19,46 @@ const READ_SLOT: string = '<div class="' + READ_SLOT_CLASS + '">readSlot</div>';
 const EDIT_SLOT_CLASS: string = 'editSlot';
 const EDIT_SLOT: string = '<input class="' + EDIT_SLOT_CLASS + '" type="text" name="inputEditMode" value="myInput">';
 
-describe('Component wrapper-inline-edition - Element wrapper edition inline with default values', () => {
+describe('Component inplace-edit - Element wrapper edition inline with default values', () => {
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
-        wrapperEditionInline = new MWrapperInlineEdition();
+        inplaceEdit = new MInplaceEdit();
     });
 
     it(`must be in read mode by default`, () => {
 
-        expect(wrapperEditionInline.editMode).toBeFalsy();
+        expect(inplaceEdit.editMode).toBeFalsy();
     });
 
     it('must use default value for dialog title',() => {
 
-        expect(wrapperEditionInline.dialogTitle).toEqual(wrapperEditionInline.$i18n.translate('m-wrapper-inline-edition:newValue'));
+        expect(inplaceEdit.dialogTitle).toEqual(inplaceEdit.$i18n.translate('m-inplace-edit:newValue'));
     });
 
     describe('when defining title prop', () => {
         it('must use props value for dialog title',() => {
             let titleProp = 'myTitle';
-            wrapperEditionInline.title = titleProp;
+            inplaceEdit.title = titleProp;
 
-            expect(wrapperEditionInline.dialogTitle).toEqual(titleProp);
+            expect(inplaceEdit.dialogTitle).toEqual(titleProp);
         });
     });
 });
 
-describe('Component wrapper-inline-edition - Element wrapper edition inline set to read mode', () => {
+describe('Component inplace-edit - Element wrapper edition inline set to read mode', () => {
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
         propsData = { propsData: { editMode: false } };
-        wrapperEditionInline = new MWrapperInlineEdition(propsData);
+        inplaceEdit = new MInplaceEdit(propsData);
     });
 
     describe('when confirming', () => {
         test(`must not send events to parent`, () => {
-            let spy = jest.spyOn(wrapperEditionInline, '$emit');
+            let spy = jest.spyOn(inplaceEdit, '$emit');
 
-            wrapperEditionInline.confirm();
+            inplaceEdit.confirm();
 
             expect(spy).not.toBeCalled();
         });
@@ -66,28 +66,28 @@ describe('Component wrapper-inline-edition - Element wrapper edition inline set 
 
     describe('when cancelling', () => {
         it(`must not send event to parent`, () => {
-            let spy = jest.spyOn(wrapperEditionInline, '$emit');
+            let spy = jest.spyOn(inplaceEdit, '$emit');
 
-            wrapperEditionInline.cancel();
+            inplaceEdit.cancel();
 
             expect(spy).not.toBeCalled();
         });
     });
 });
 
-describe('Component wrapper-inline-edition - Element wrapper edition inline set to edit mode', () => {
+describe('Component inplace-edit - Element wrapper edition inline set to edit mode', () => {
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
         propsData = { propsData: {  editMode: true } };
-        wrapperEditionInline = new MWrapperInlineEdition(propsData);
+        inplaceEdit = new MInplaceEdit(propsData);
     });
 
     describe('when confirming', () => {
         it(`must emit confirmation event to parent`, () => {
-            let spy = jest.spyOn(wrapperEditionInline, '$emit');
+            let spy = jest.spyOn(inplaceEdit, '$emit');
 
-            wrapperEditionInline.confirm();
+            inplaceEdit.confirm();
 
             expect(spy).toBeCalledWith(CONFIRM_EVENT);
         });
@@ -95,9 +95,9 @@ describe('Component wrapper-inline-edition - Element wrapper edition inline set 
 
     describe('when cancelling', () => {
         it(`must not emit cancellation event to parent`, () => {
-            let spy = jest.spyOn(wrapperEditionInline, '$emit');
+            let spy = jest.spyOn(inplaceEdit, '$emit');
 
-            wrapperEditionInline.cancel();
+            inplaceEdit.cancel();
 
             expect(spy).toBeCalledWith(CANCEL_EVENT);
         });
@@ -108,11 +108,11 @@ describe('Component wrapper-edition-inline - Complete component by default', () 
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
-        Vue.use(WrapperInlineEditionPlugin);
+        Vue.use(InplaceEditPlugin);
 
-        addMessages(Vue, ['components/wrapper-inline-edition/wrapper-inline-edition.lang.en.json']);
+        addMessages(Vue, ['components/inplace-edit/inplace-edit.lang.en.json']);
 
-        wrapper = mount(MWrapperInlineEdition, {
+        wrapper = mount(MInplaceEdit, {
             localVue: Vue,
             slots: {
                 default: 'default',
@@ -171,11 +171,11 @@ describe('Component wrapper-edition-inline - Complete component mobile', () => {
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
-        Vue.use(WrapperInlineEditionPlugin);
+        Vue.use(InplaceEditPlugin);
 
-        addMessages(Vue, ['components/wrapper-inline-edition/wrapper-inline-edition.lang.en.json']);
+        addMessages(Vue, ['components/inplace-edit/inplace-edit.lang.en.json']);
 
-        wrapper = mount(MWrapperInlineEdition, {
+        wrapper = mount(MInplaceEdit, {
             localVue: Vue,
             slots: {
                 default: 'default',

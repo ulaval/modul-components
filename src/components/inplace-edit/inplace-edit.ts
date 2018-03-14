@@ -1,7 +1,7 @@
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { Component, Prop, Watch } from 'vue-property-decorator';
-import { WRAPPER_INLINE_EDITION } from '../component-names';
-import WithRender from './wrapper-inline-edition.html?style=./wrapper-inline-edition.scss';
+import { INPLACE_EDIT } from '../component-names';
+import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 import { PluginObject } from 'vue';
 import I18nPlugin from '../i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
@@ -14,7 +14,7 @@ import { ModulVue } from '../../utils/vue/vue';
 @Component({
     mixins: [MediaQueries]
 })
-export class MWrapperInlineEdition extends ModulVue {
+export class MInplaceEdit extends ModulVue {
 
     @Prop({ default: () => { return false; } })
     public editMode: boolean;
@@ -36,21 +36,21 @@ export class MWrapperInlineEdition extends ModulVue {
 
     public get dialogTitle(): string {
         if (!this.title) {
-            return this.$i18n.translate('m-wrapper-inline-edition:newValue');
+            return this.$i18n.translate('m-inplace-edit:newValue');
         }
         return this.title;
     }
 }
 
-const WrapperInlineEditionPlugin: PluginObject<any> = {
+const InplaceEditPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(WRAPPER_INLINE_EDITION + ' is not ready for production');
+        console.warn(INPLACE_EDIT + ' is not ready for production');
         v.use(MediaQueriesPlugin);
         v.use(IconButtonPlugin);
         v.use(ButtonPlugin);
         v.use(DialogPlugin);
-        v.component(WRAPPER_INLINE_EDITION, MWrapperInlineEdition);
+        v.component(INPLACE_EDIT, MInplaceEdit);
     }
 };
 
-export default WrapperInlineEditionPlugin;
+export default InplaceEditPlugin;

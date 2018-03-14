@@ -36,7 +36,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/tooltip/tooltip.lang.fr.json'),
                 require('../components/validation-message/validation-message.lang.fr.json'),
                 require('../components/upload/upload.lang.fr.json'),
-                require('../components/wrapper-inline-edition/wrapper-inline-edition.lang.fr.json')
+                require('../components/inplace-edit/inplace-edit.lang.fr.json')
             ];
 
             msgs.forEach(msgs => i18n.addMessages(FRENCH, msgs));
