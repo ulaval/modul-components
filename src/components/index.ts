@@ -37,8 +37,8 @@ import PopperPlugin from './popper/popper';
 import PopupPlugin from './popup/popup';
 import ProgressPluggin from './progress/progress';
 import RadioGroupPlugin from './radio-group/radio-group';
-import RadioPlugin from './radio/radio';
 import RadioStylePlugin from './radio-style/radio-style';
+import RadioPlugin from './radio/radio';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SidebarPlugin from './sidebar/sidebar';
 import SliderPlugin from './slider/slider';
@@ -52,14 +52,13 @@ import TabPanelPlugin from './tab-panel/tab-panel';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
 import TextareaPlugin from './textarea/textarea';
-import TextareaResizePlugin from './textarea-resize/textarea-resize';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
-import UploadPlugin from './upload/upload';
-import UploadInputPlugin from './upload-input/upload-input';
 import UploadDragdropPlugin from './upload-dragdrop/upload-dragdrop';
 import UploadFileslistPlugin from './upload-fileslist/upload-fileslist';
+import UploadInputPlugin from './upload-input/upload-input';
+import UploadPlugin from './upload/upload';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 const ComponentsPlugin: PluginObject<any> = {
@@ -116,7 +115,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TabsPlugin);
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);
-        Vue.use(TextareaResizePlugin);
         Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
         Vue.use(TooltipPlugin);
