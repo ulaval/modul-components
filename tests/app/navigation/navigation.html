@@ -7,18 +7,7 @@
         <h2>
             <m-link url="media-queries">Media Queries</m-link>
         </h2>
-            <button @click="editMode = !editMode">switch mode</button>
-            <button @click="errorPresent = !errorPresent">switch error</button>
-        <m-inplace-edit @confirm="submitted = true" :editMode="editMode" :submitted="submitted" :errorPresent="errorPresent">
-            <div slot="readMode">
-                <h4>Mon contenu lecture1</h4>
-                <p>Mon contenu lecture2</p>
-            </div>
-            <div slot="editMode">
-                <m-textarea :errorMessage="errorPresent ? 'en erreur': ''"  label="mon titre" placeholder="mon titre"></m-textarea>
-                <m-textarea  label="description" placeholder="ma description"></m-textarea>
-            </div>
-        </m-inplace-edit>
+
         <h2>Components list</h2>
         <nav class="m-u--margin-top">
             <ul class="m-u--bullet-list">
