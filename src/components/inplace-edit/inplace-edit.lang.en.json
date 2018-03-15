@@ -2,7 +2,7 @@
     "m-inplace-edit": {
         "save": "Save",
         "cancel": "Cancel",
-        "newValue": "New value"
+        "modify": "Modify"
     }
 }
 

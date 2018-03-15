@@ -22,10 +22,13 @@ export class MInplaceEdit extends ModulVue {
     @Prop({ default: () => { return false; } })
     public errorPresent: boolean;
 
+    @Prop({ default: () => { return false; } })
+    public submitted: boolean;
+
     @Prop()
     public title: string;
 
-    public confirm(): void {
+    public confirm(event: Event): void {
         if (this.editMode) {
             this.$emit('confirm');
         }
@@ -39,7 +42,7 @@ export class MInplaceEdit extends ModulVue {
 
     public get dialogTitle(): string {
         if (!this.title) {
-            return this.$i18n.translate('m-inplace-edit:newValue');
+            return this.$i18n.translate('m-inplace-edit:modify');
         }
         return this.title;
     }

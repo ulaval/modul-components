@@ -2,25 +2,26 @@
     <div v-show="!editMode" >
         <slot name="readMode"></slot>
     </div>
-    <div @click.stop v-show="editMode" >
-        <template v-if="isMqMinS" :class="[{RED-BACKGROUND: errorPresent}, {BLUE-BACKGROUND: !errorPresent}]">
-        <!-- <template v-if="isMqMinS" :class="[{RED-BACKGROUND: errorPresent}, {BLUE-BACKGROUND: !errorPresent}]"> -->
-            <slot name="editMode" ></slot>
-            <m-icon-button ref="confirm-control" skin="primary" iconName="ICONE_CROCHET" @click="confirm">
-                <m-i18n k="m-inplace-edit:confirm"></m-i18n>
-            </m-icon-button>
-            <m-icon-button ref="cancel-control" skin="secondary" iconName="ICONE_X" @click="cancel">
-                <m-i18n k="m-inplace-edit:cancel"></m-i18n>
-            </m-icon-button>
+    <div @click.stop v-show="editMode">
+        <template v-if="isMqMinS">
+            <div :class="{'BLUE-BACKGROUND': !errorPresent, 'RED-BACKGROUND': errorPresent}">
+                <slot name="editMode" ></slot>
+                <m-button :waiting="submitted" ref="confirm-control" skin="primary" @click="confirm">
+                    <m-i18n k="m-inplace-edit:save"></m-i18n>
+                </m-button>
+                <m-button :disabled="submitted" ref="cancel-control" skin="secondary" @click="cancel">
+                    <m-i18n k="m-inplace-edit:cancel"></m-i18n>
+                </m-button>
+            </div>
         </template>
         <template v-else>
             <m-dialog :title="dialogTitle" :open="editMode" @close="cancel">
                 <slot name="editMode"></slot>
                 <template slot="footer">
-                    <m-button ref="confirm-control-mobile" skin="primary" @click="confirm">
-                        <m-i18n k="m-inplace-edit:confirm"></m-i18n>
+                    <m-button :waiting="submitted" ref="confirm-control-mobile" skin="primary" @click="confirm">
+                        <m-i18n k="m-inplace-edit:save"></m-i18n>
                     </m-button>
-                    <m-button ref="cancel-control-mobile" skin="secondary" @click="cancel">
+                    <m-button :disabled="submitted" ref="cancel-control-mobile" skin="secondary" @click="cancel">
                         <m-i18n k="m-inplace-edit:cancel"></m-i18n>
                     </m-button>
                 </template>

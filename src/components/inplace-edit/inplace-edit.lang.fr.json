@@ -2,6 +2,6 @@
     "m-inplace-edit": {
         "save": "Enregistrer",
         "cancel": "Annuler",
-        "newValue": "Nouvelle valeur"
+        "modify": "Modifier"
     }
 }
