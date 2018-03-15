@@ -61,7 +61,11 @@ export class MTooltip extends ModulVue {
     @Prop()
     public className: string;
 
-    private propOpen = false;
+    private propOpen: boolean = false;
+
+    protected mounted(): void {
+        this.propOpen = this.open;
+    }
 
     @Watch('open')
     private openChanged(open: boolean): void {
