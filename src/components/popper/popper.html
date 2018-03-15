@@ -1,6 +1,6 @@
 <div class="m-popper" :class="{ 'm--is-open': propOpen }">
     <slot name="trigger"></slot>
-    <portal :target-el="'#' + propId" v-if="hasDefaultSlot">
+    <portal :target-el="'#' + propId" v-if="hasDefaultSlot" :trigger="trigger">
         <transition
             @before-enter="onBeforeEnter"
             @enter="onEnter"
@@ -18,7 +18,7 @@
                                 'm--is-placement-' + placement,
                                 className ]"
                      :aria-hidden="!propOpen"
-                     v-show="propOpen">
+                     v-show="propOpen" v-if="propOpen || preload || loaded">
                 <slot></slot>
             </article>
         </transition>

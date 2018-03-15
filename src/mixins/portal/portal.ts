@@ -7,6 +7,8 @@ import uuid from '../../utils/uuid/uuid';
 
 export interface PortalMixin {
     propOpen: boolean;
+    preload: boolean;
+    loaded: boolean;
     getPortalElement(): HTMLElement;
     getTrigger(): HTMLElement | undefined;
     setFocusToPortal(): void;
@@ -62,6 +64,11 @@ export class Portal extends ModulVue implements PortalMixin {
 
     @Prop()
     public className: string;
+
+    @Prop()
+    public preload: boolean;
+
+    public loaded: boolean = false;
 
     private internalTrigger: HTMLElement | undefined = undefined;
     private propId: string = '';
@@ -145,6 +152,7 @@ export class Portal extends ModulVue implements PortalMixin {
                 if (this.portalTargetEl) {
                     this.stackId = this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().getBackdropMode(), this.as<MediaQueriesMixin>().isMqMaxS);
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
+                        this.loaded = true;
                         this.portalTargetEl.style.position = 'absolute';
 
                         setTimeout(() => {

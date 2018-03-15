@@ -17,6 +17,7 @@
               :after-leave="afterLeave"
               :leave-cancelled="leaveCancelled"
               :shadow="shadow"
+              :preload="preload"
               v-if="!isMqMaxS">
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
@@ -44,6 +45,7 @@
                :open-trigger="propOpenTrigger"
                :trigger="trigger"
                :class-name="className"
+               :preload="preload"
                v-if="isMqMaxS">
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
