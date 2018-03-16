@@ -123,14 +123,6 @@ export class MAccordion extends ModulVue {
         return this.$parent instanceof BaseAccordionGroup ? this.$parent.disabled : this.disabled;
     }
 
-    private get propIconPosition(): MAccordionIconPosition {
-        return this.iconPosition;
-    }
-
-    private get propIconSize(): MAccordionIconSize {
-        return this.iconSize;
-    }
-
     private get propIconBorder(): boolean {
         if (this.propSkin == MAccordionSkin.Light) {
             return this.iconBorder || true;

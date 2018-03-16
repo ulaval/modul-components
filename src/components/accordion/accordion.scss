@@ -74,6 +74,12 @@ $m-accordion--color-default: $m-color--interactive;
                         padding-left: 48px;
                     }
                 }
+
+                &__header {
+                    .m-accordion__header-icon {
+                        margin-right: $m-spacing;
+                    }
+                }
             }
 
             &.m--has-icon-large {
@@ -161,11 +167,13 @@ $m-accordion--color-default: $m-color--interactive;
         }
 
         &.m--has-icon-left {
-            > .m-accordion {
-                &__body-wrap {
-                    > .m-accordion__body {
-                        &.m--has-padding {
-                            padding-left: 32px; // Magic number
+            &:not(.m--has-icon-large) {
+                > .m-accordion {
+                    &__body-wrap {
+                        > .m-accordion__body {
+                            &.m--has-padding {
+                                padding-left: 32px; // Magic number
+                            }
                         }
                     }
                 }
@@ -182,6 +190,17 @@ $m-accordion--color-default: $m-color--interactive;
                     }
                 }
             }
+            // &.m--has-icon-large {
+            //     > .m-accordion {
+            //         &__body-wrap {
+            //             > .m-accordion__body {
+            //                 &.m--has-padding {
+            //                     padding-left: 40px; // Magic number
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
         }
     }
 
@@ -294,7 +313,7 @@ $m-accordion--color-default: $m-color--interactive;
             }
 
             &.m--is-left {
-                margin-right: $m-spacing;
+                margin-right: $m-margin;
             }
         }
     }
