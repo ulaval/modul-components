@@ -8,20 +8,36 @@ function resolve(dir) {
 }
 
 module.exports = function (env) {
-    var isProd = !!(env && env.prod);
+    let isProd = !!(env && env.prod);
+    let isLib = !!(env && env.lib);
 
-    var config = {
-        entry: {
-            app: ['./tests/app/main.ts']
-        },
-
-        externals: [],
-
-        output: {
+    let outputObj;
+    if (isLib) {
+        outputObj = {
+            library: '@ulaval/modul-components',
+            libraryTarget: 'umd',
             path: resolve('dist'),
             publicPath: '/',
             filename: 'app.js'
+        }
+    } else {
+        outputObj = {
+            path: resolve('dist'),
+            publicPath: '/',
+            filename: 'app.js'
+        }
+    }
+
+    let externalsObj = isLib ? { vue: 'Vue' } : {};
+
+    var config = {
+        entry: {
+            app: [isLib ? './src/lib.ts' : './tests/app/main.ts']
         },
+
+        externals: externalsObj,
+
+        output: outputObj,
 
         resolve: {
             extensions: ['.js', '.ts', '.html'],
