@@ -1,11 +1,27 @@
-.DISPLAYFLEX {
-    display: flex;
-}
+@import 'abstracts/variables';
+@import '../accordion/accordion-transition.scss';
 
-.BLUE-BACKGROUND {
-    background-color: lightblue;
-}
+.inplace-edit {
+    transition: padding $m-transition-duration ease, background $m-transition-duration--s linear;
+    padding: 0;
+    background: $m-color--white;
 
-.RED-BACKGROUND {
-    background-color: lightpink;
+    &.m--is-edit-mode {
+        padding: 16px;
+        background: $m-color--information;
+    }
+
+    &.m--has-erreur {
+        background: $m-color--error-lightest;
+    }
+
+    &__buttons {
+        margin-top: $m-margin--l;
+    }
+
+    .m-textfield,
+    .m-textarea {
+        width: 100%;
+        max-width: none !important;
+    }
 }

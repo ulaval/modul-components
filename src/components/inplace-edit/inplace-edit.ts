@@ -16,13 +16,13 @@ import { ModulVue } from '../../utils/vue/vue';
 })
 export class MInplaceEdit extends ModulVue {
 
-    @Prop({ default: () => { return false; } })
+    @Prop()
     public editMode: boolean;
 
-    @Prop({ default: () => { return false; } })
-    public errorPresent: boolean;
+    @Prop()
+    public error: boolean;
 
-    @Prop({ default: () => { return false; } })
+    @Prop()
     public submitted: boolean;
 
     @Prop()
@@ -34,7 +34,7 @@ export class MInplaceEdit extends ModulVue {
         }
     }
 
-    public cancel(): void {
+    public cancel(event: Event): void {
         if (this.editMode) {
             this.$emit('cancel');
         }

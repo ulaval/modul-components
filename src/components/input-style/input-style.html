@@ -1,5 +1,5 @@
 <div class="m-input-style"
-    :class="{ 'm--is-focus' : isFocus,
+    :class="[{ 'm--is-focus' : isFocus,
               'm--is-label-up': labelIsUp,
               'm--is-disabled' : isDisabled,
               'm--is-waiting' : isWaiting,
@@ -7,7 +7,8 @@
               'm--is-valid' : isValid,
               'm--has-label': hasLabel,
               'm--has-value': hasValue,
-              'm--is-anim-active': animActive }"
+              'm--is-anim-active': animActive },
+              'm--is-tag-' + tagStyle]"
     @click="onClick"
     @mousedown="onMousedown"
     @mouseup="onMouseup"
