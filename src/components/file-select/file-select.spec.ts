@@ -1,8 +1,11 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
+import { resetModulPlugins } from '../../../tests/helpers/component';
+import { createMockFile, createMockFileList } from '../../../tests/helpers/file';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
+import { DEFAULT_STORE_NAME } from '../../utils/file/file';
 import uuid from '../../utils/uuid/uuid';
 import { MButton } from '../button/button';
 import FileSelectPlugin, { MFileSelect } from './file-select';
@@ -14,9 +17,9 @@ describe('file-select', () => {
     let localVue: VueConstructor<Vue>;
 
     beforeEach(() => {
-        localVue = createLocalVue();
-        localVue.use(FileSelectPlugin);
-        addMessages(localVue, [
+        resetModulPlugins();
+        Vue.use(FileSelectPlugin);
+        addMessages(Vue, [
             'components/file-select/file-select.lang.en.json',
             'components/validation-message/validation-message.lang.en.json'
         ]);
@@ -24,7 +27,7 @@ describe('file-select', () => {
 
     it('should render correctly', () => {
         const fileSelect = mount(MFileSelect, {
-            localVue: localVue
+            localVue: Vue
         });
 
         return expect(
@@ -44,7 +47,7 @@ describe('file-select', () => {
         };
 
         const fileSelect = mount(MFileSelect, {
-            localVue: localVue,
+            localVue: Vue,
             propsData: buttonProps
         });
 
@@ -53,7 +56,7 @@ describe('file-select', () => {
 
     it('should set multiple attribute on input based on prop value', () => {
         const fileSelect = mount(MFileSelect, {
-            localVue: localVue
+            localVue: Vue
         });
 
         fileSelect.setProps({ multiple: true });
@@ -69,11 +72,46 @@ describe('file-select', () => {
 
     it('should emit click event when button is clicked', () => {
         const fileSelect = mount(MFileSelect, {
-            localVue: localVue
+            localVue: Vue
         });
 
         fileSelect.find(MButton).trigger('click');
 
         expect(fileSelect.emitted('click')).toBeTruthy();
+    });
+
+    it('it should add selected files to $file', () => {
+        const mockFiles = createMockFileList([createMockFile('file')]);
+
+        const fileSelect = mount(MFileSelect, {
+            localVue: Vue
+        });
+        fileSelect.vm.$file.add = jest.fn();
+        (fileSelect.vm.$refs.inputFile as any) = {
+            files: mockFiles
+        };
+
+        fileSelect.find('input').trigger('change');
+
+        expect(fileSelect.vm.$file.add).toHaveBeenCalledWith(
+            mockFiles,
+            DEFAULT_STORE_NAME
+        );
+    });
+
+    it('it should support optional store name prop', () => {
+        const fileSelect = mount(MFileSelect, {
+            propsData: {
+                storeName: 'unique-store'
+            },
+            localVue: Vue
+        });
+
+        const addMock = jest.fn();
+        fileSelect.vm.$file.add = addMock;
+
+        fileSelect.find('input').trigger('change');
+
+        expect(addMock.mock.calls[0][1]).toEqual('unique-store');
     });
 });

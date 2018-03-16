@@ -21,7 +21,8 @@ export class MPanel extends Vue {
         default: MPanelSkin.Light,
         validator: value =>
             value == MPanelSkin.Light ||
-            value == MPanelSkin.Dark
+            value == MPanelSkin.Dark ||
+            value == MPanelSkin.Darker
     })
     public skin: MPanelSkin;
 

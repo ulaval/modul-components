@@ -17,6 +17,8 @@ $m-menu-item--color-active: $m-color--grey-lightest !default;
 
     &__icon,
     &__text {
+        display: flex;
+        align-items: center;
         padding-top: $m-padding;
         padding-bottom: $m-padding;
     }

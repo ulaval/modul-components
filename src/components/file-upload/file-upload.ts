@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import FileDropPlugin from '../../directives/file-drop/file-drop';
-import FilePlugin, { MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
+import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
 import { Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -56,6 +56,11 @@ export class MFileUpload extends ModulVue {
     @Prop()
     public maxFiles?: number;
 
+    @Prop({
+        default: DEFAULT_STORE_NAME
+    })
+    public storeName: string;
+
     $refs: {
         dialog: MDialog;
     };
@@ -63,11 +68,18 @@ export class MFileUpload extends ModulVue {
     private title: string = this.$i18n.translate('m-file-upload:header-title');
 
     private created(): void {
-        this.$file.setValidationOptions({
-            extensions: this.extensions,
-            maxSizeKb: this.maxSizeKb,
-            maxFiles: this.maxFiles
-        });
+        this.$file.setValidationOptions(
+            {
+                extensions: this.extensions,
+                maxSizeKb: this.maxSizeKb,
+                maxFiles: this.maxFiles
+            },
+            this.storeName
+        );
+    }
+
+    private destroyed(): void {
+        this.$file.destroy(this.storeName);
     }
 
     @Watch('readyFiles')
@@ -117,14 +129,14 @@ export class MFileUpload extends ModulVue {
 
     private onMessageClose(): void {
         for (const f of this.rejectedFiles) {
-            this.$file.remove(f.uid);
+            this.$file.remove(f.uid, this.storeName);
         }
     }
 
     private onAddClick(): void {
         this.$refs.dialog.closeDialog();
         this.$emit('done', this.completedFiles);
-        this.$file.clear();
+        this.$file.clear(this.storeName);
     }
 
     private onCancelClick(): void {
@@ -133,7 +145,7 @@ export class MFileUpload extends ModulVue {
             .filter(f => f.status === MFileStatus.UPLOADING)
             .forEach(this.onUploadCancel);
         this.$emit('cancel');
-        this.$file.clear();
+        this.$file.clear(this.storeName);
     }
 
     private onUploadCancel(file: MFile): void {
@@ -144,7 +156,7 @@ export class MFileUpload extends ModulVue {
 
     private onFileRemove(file: MFile): void {
         this.$emit('file-remove', file);
-        this.$file.remove(file.uid);
+        this.$file.remove(file.uid, this.storeName);
     }
 
     private onOpen(): void {
@@ -217,7 +229,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private get allFiles(): MFileExt[] {
-        return this.$file.files() as MFileExt[];
+        return this.$file.files(this.storeName) as MFileExt[];
     }
 
     private get hasUploadingFiles(): boolean {

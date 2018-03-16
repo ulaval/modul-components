@@ -47,9 +47,12 @@ export class MCarousel extends Vue {
                         item.componentInstance.$slots.default.forEach(content => {
                             let el: HTMLElement = content.componentInstance && content.componentInstance.$el || content.elm as HTMLElement;
                             if (el instanceof HTMLElement && (el.tagName == 'IMG' || el.tagName == 'PICTURE')) {
-                                el.style.display = 'block';
-                                el.style.maxWidth = this.$el.clientWidth + 'px';
+                                el.style.maxWidth = '100%';
                                 el.style.maxHeight = '100%';
+                                el.style.position = 'absolute';
+                                el.style.top = '50%';
+                                el.style.left = '50%';
+                                el.style.transform = 'translate(-50%, -50%)';
                             }
                         });
                         items.push(item.componentInstance);
