@@ -82,7 +82,7 @@ describe('MAcordionGroup', () => {
         const acn = mountGroup();
         acn.update();
 
-        acn.find('header a').trigger('click');
+        acn.find('.m-accordion-group__header a').trigger('click');
 
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
@@ -104,7 +104,7 @@ describe('MAcordionGroup', () => {
         });
         acn.update();
 
-        acn.find('header a').trigger('click');
+        acn.find('.m-accordion-group__header a').trigger('click');
 
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
@@ -121,14 +121,14 @@ describe('MAcordionGroup', () => {
 
         acrds
             .at(0)
-            .find('header')
+            .find('.m-accordion__header')
             .trigger('click');
         expect(acrds.at(0).vm.propOpen).toBeTruthy();
         expect(acrds.at(1).vm.propOpen).toBeFalsy();
 
         acrds
             .at(1)
-            .find('header')
+            .find('.m-accordion__header')
             .trigger('click');
         expect(acrds.at(0).vm.propOpen).toBeFalsy();
         expect(acrds.at(1).vm.propOpen).toBeTruthy();
@@ -192,7 +192,7 @@ describe('MAcordionGroup', () => {
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
         acrds
             .at(0)
-            .find('header')
+            .find('.m-accordion__header')
             .trigger('click');
 
         expect(acn.emitted('update:openedIds')[0][0]).toEqual(['a']);

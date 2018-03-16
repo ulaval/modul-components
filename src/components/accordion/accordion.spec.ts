@@ -84,10 +84,10 @@ describe('MAcordion', () => {
     it('should emit click event when it is opened or closed', () => {
         const acn = mount(MAccordion);
 
-        acn.find('header').trigger('click');
+        acn.find('.m-accordion__header').trigger('click');
         expect(acn.emitted('click')[0][0]).toBeTruthy();
 
-        acn.find('header').trigger('click');
+        acn.find('.m-accordion__header').trigger('click');
         expect(acn.emitted('click')[1][0]).toBeFalsy();
     });
 
@@ -104,7 +104,7 @@ describe('MAcordion', () => {
     it('should sync open prop', () => {
         const acn = mount(MAccordion);
 
-        acn.find('header').trigger('click');
+        acn.find('.m-accordion__header').trigger('click');
 
         expect(acn.emitted('update:open')[0][0]).toBeTruthy();
     });
