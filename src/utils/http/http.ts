@@ -5,8 +5,6 @@ import { RestAdapter, RequestConfig } from './rest';
 
 export class HttpService implements RestAdapter {
     private instance: AxiosInstance;
-    private requestInterceptor: number | undefined;
-    private responseInterceptor: number | undefined;
 
     constructor() {
         this.instance = axios.create({
@@ -14,33 +12,24 @@ export class HttpService implements RestAdapter {
         });
     }
 
-    public setupRequestInterceptor<T>(onFulfilled: (value: any) => any, onRejected: (error: any) => any): void {
-        if (this.requestInterceptor !== undefined) {
-            throw new Error('An request interceptor is already defined');
-        }
-        this.requestInterceptor = this.instance.interceptors.request.use((value: AxiosRequestConfig) => {
+    public setupRequestInterceptor<T>(onFulfilled: (value: any) => any, onRejected: (error: any) => any): number {
+        return this.instance.interceptors.request.use((value: AxiosRequestConfig) => {
             return onFulfilled(value);
         }, (error: Error) => {
             return onRejected(error);
         });
     }
 
-    public setupResponseInterceptor<T>(onFulfilled: (value: any) => any, onRejected: (error: any) => any): void {
-        if (this.responseInterceptor !== undefined) {
-            throw new Error('An response interceptor is already defined');
-        }
-        this.responseInterceptor = this.instance.interceptors.response.use((response: AxiosResponse) => {
+    public setupResponseInterceptor<T>(onFulfilled: (value: any) => any, onRejected: (error: any) => any): number {
+        return this.instance.interceptors.response.use((response: AxiosResponse) => {
             return onFulfilled(response);
         }, (error: Error) => {
             return onRejected(error);
         });
     }
 
-    public ejectResponseInterceptor(): void {
-        if (this.responseInterceptor !== undefined) {
-            this.instance.interceptors.response.eject(this.responseInterceptor);
-            this.responseInterceptor = undefined;
-        }
+    public ejectResponseInterceptor(interceptor: number): void {
+        this.instance.interceptors.response.eject(interceptor);
     }
 
     public execute<T>(config: RequestConfig, axiosOptions?: AxiosRequestConfig): AxiosPromise<T> {
