@@ -46,7 +46,7 @@ export class Messages {
     private curLang: string = ENGLISH;
     private messages: LanguageBundlesMap = {};
 
-    constructor(private options: I18nPluginOptions | undefined) {
+    constructor(private options?: I18nPluginOptions) {
         if (options && options.curLang) {
             this.curLang = options.curLang;
         }
