@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MAcordionGroup should not render both close all and open all link when state is mixed 1`] = `
+<article class="m-accordion-group">
+    <header class="m-accordion-group__header m--no-title">
+        <div>
+            <a href="#" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
+            </a>   |
+            <a href="#" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Close all</span></span>
+            </a>
+        </div>
+    </header>
+    <div class="m-accordion-group__body">
+        <article class="m-accordion m--is-secondary">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-accordion__header-icon m--is-closed m--is-large"></span></header>
+            <div class="m-accordion__body-wrap">
+                <div class="m-accordion__body m--has-padding"></div>
+            </div>
+        </article>
+        <article class="m-accordion m--is-secondary m--is-closed">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+        </article>'</div>
+</article>
+`;
+
+exports[`MAcordionGroup should not render close all link when all accordions are opened 1`] = `
+<article class="m-accordion-group">
+    <header class="m-accordion-group__header m--no-title">
+        <div>
+            <a href="#" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Close all</span></span>
+            </a>
+        </div>
+    </header>
+    <div class="m-accordion-group__body">
+        <article class="m-accordion m--is-secondary">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-accordion__header-icon m--is-closed m--is-large"></span></header>
+            <div class="m-accordion__body-wrap">
+                <div class="m-accordion__body m--has-padding"></div>
+            </div>
+        </article>
+        <article class="m-accordion m--is-secondary">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-accordion__header-icon m--is-closed m--is-large"></span></header>
+            <div class="m-accordion__body-wrap">
+                <div class="m-accordion__body m--has-padding"></div>
+            </div>
+        </article>'</div>
+</article>
+`;
+
+exports[`MAcordionGroup should not render open all link when all accordions are closed 1`] = `
+<article class="m-accordion-group">
+    <header class="m-accordion-group__header m--no-title">
+        <div>
+            <a href="#" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
+            </a>
+        </div>
+    </header>
+    <div class="m-accordion-group__body">
+        <article class="m-accordion m--is-secondary m--is-closed">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+        </article>
+        <article class="m-accordion m--is-secondary m--is-closed">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+        </article>'</div>
+</article>
+`;
+
+exports[`MAcordionGroup should not render toggle links when concurrent 1`] = `
+<article class="m-accordion-group">
+    <div class="m-accordion-group__body">
+        <article class="m-accordion m--is-secondary m--is-closed">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+        </article>
+        <article class="m-accordion m--is-secondary m--is-closed">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+        </article>'</div>
+</article>
+`;
+
+exports[`MAcordionGroup should render correctly 1`] = `
+<article class="m-accordion-group">
+    <header class="m-accordion-group__header m--no-title">
+        <div>
+            <a href="#" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
+            </a>
+        </div>
+    </header>
+    <div class="m-accordion-group__body">
+        <article class="m-accordion m--is-secondary m--is-closed">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+        </article>
+        <article class="m-accordion m--is-secondary m--is-closed">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+        </article>'</div>
+</article>
+`;
+
+exports[`MAcordionGroup should render correctly with title 1`] = `
+<article class="m-accordion-group">
+    <header class="m-accordion-group__header">
+        <div class="m-accordion-group__header__title">title</div>
+        <div>
+            <a href="#" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
+            </a>
+        </div>
+    </header>
+    <div class="m-accordion-group__body">
+        <article class="m-accordion m--is-secondary m--is-closed">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+        </article>
+        <article class="m-accordion m--is-secondary m--is-closed">
+            <header tabindex="0" class="m-accordion__header m--has-padding">
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+        </article>'</div>
+</article>
+`;

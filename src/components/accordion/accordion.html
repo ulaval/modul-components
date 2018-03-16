@@ -13,11 +13,11 @@
                         'm--is-large': propIconSize=='large',
                         'm--has-border': propIconBorder }"></span>
     </header>
-    <transition @enter="accordionEnter" @after-enter="accordionAfterEnter" @leave="accordionLeave">
-        <div class="m-accordion__body-wrap" v-if="propOpen">
+    <m-accordion-transition :height-delta="24">
+        <div class="m-accordion__body-wrap" v-if="!propDisabled && propOpen">
             <div class="m-accordion__body" :class="{ 'm--has-padding': paddingBody && padding }">
                 <slot></slot>
             </div>
         </div>
-    </transition>
+    </m-accordion-transition>
 </article>
