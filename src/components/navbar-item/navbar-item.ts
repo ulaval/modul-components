@@ -24,7 +24,8 @@ export class MNavbarItem extends ModulVue {
     private parentNavbar: Navbar;
 
     protected mounted(): void {
-        let parentNavbar: BaseNavbar | undefined = this.getParent<BaseNavbar>(p => p instanceof BaseNavbar);
+
+        let parentNavbar: BaseNavbar | undefined = this.getParent<BaseNavbar>(p => p.$options.name === 'MNavbar');
 
         if (parentNavbar) {
             this.parentNavbar = (parentNavbar as any) as Navbar;
@@ -45,7 +46,7 @@ export class MNavbarItem extends ModulVue {
         return this.disabled;
     }
 
-    private get isSelected(): boolean {
+    public get isSelected(): boolean {
         return this.hasParent && !this.disabled && this.value === this.parentNavbar.model;
     }
 
