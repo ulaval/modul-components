@@ -19,23 +19,4 @@ describe('i18n plugin', () => {
             expect(Vue.prototype.$http).toBeDefined();
         });
     });
-
-    describe('when registering interceptors', () => {
-        beforeEach(() => {
-            resetModulPlugins();
-            Vue.use(HttpPlugin);
-        });
-
-        it('should return an interceptor id for request interceptor', () => {
-            let id = undefined;
-            id = (Vue.prototype.$http as HttpService).setupRequestInterceptor(undefined, undefined);
-            expect(id).toBeDefined();
-        });
-
-        it('should return an interceptor id for response interceptor', () => {
-            let id = undefined;
-            id = (Vue.prototype.$http as HttpService).setupResponseInterceptor(undefined, undefined);
-            expect(id).toBeDefined();
-        });
-    });
 });

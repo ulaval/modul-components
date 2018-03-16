@@ -4,32 +4,12 @@ import qs from 'qs/lib';
 import { RestAdapter, RequestConfig } from './rest';
 
 export class HttpService implements RestAdapter {
-    private instance: AxiosInstance;
+    public instance: AxiosInstance;
 
     constructor() {
         this.instance = axios.create({
             timeout: 30000 // TODO configure from plugin options
         });
-    }
-
-    public setupRequestInterceptor<T>(onFulfilled: (value: any) => any, onRejected: (error: any) => any): number {
-        return this.instance.interceptors.request.use((value: AxiosRequestConfig) => {
-            return onFulfilled(value);
-        }, (error: Error) => {
-            return onRejected(error);
-        });
-    }
-
-    public setupResponseInterceptor<T>(onFulfilled: (value: any) => any, onRejected: (error: any) => any): number {
-        return this.instance.interceptors.response.use((response: AxiosResponse) => {
-            return onFulfilled(response);
-        }, (error: Error) => {
-            return onRejected(error);
-        });
-    }
-
-    public ejectResponseInterceptor(interceptor: number): void {
-        this.instance.interceptors.response.eject(interceptor);
     }
 
     public execute<T>(config: RequestConfig, axiosOptions?: AxiosRequestConfig): AxiosPromise<T> {
