@@ -113,6 +113,8 @@ $m-accordion--color-default: $m-color--interactive;
             }
 
             &__body-wrap {
+                border-bottom: 1px $m-color--border solid;
+
                 &.v-enter-to {
                     .m-accordion__body {
                         transform: translate3d(0, 0, 0);
