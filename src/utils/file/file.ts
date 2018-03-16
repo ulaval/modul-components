@@ -5,7 +5,7 @@ import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
 import { ModulVue } from '../vue/vue';
 
-const DEFAULT_STORE_NAME: string = 'DEFAULT';
+export const DEFAULT_STORE_NAME: string = 'DEFAULT';
 
 export interface MFile {
     uid: string;
@@ -68,6 +68,10 @@ export class FileService {
 
     public clear(storeName?: string): void {
         this.getStore(storeName).clear();
+    }
+
+    public destroy(storeName?: string): void {
+        this.getStore(storeName).destroy();
         delete this.stores[this.getStoreName(storeName)];
     }
 
@@ -164,6 +168,11 @@ class FileStore {
     }
 
     public clear(): void {
+        this.filesmap = {};
+        this.rx.files = [];
+    }
+
+    public destroy(): void {
         this.rx.$destroy();
     }
 
@@ -203,7 +212,7 @@ class FileStore {
         const promise = httpService.execute<T>(cfg, axiosOptions);
 
         return promise
-            .then<AxiosResponse<T>>(
+            .then<AxiosResponse<T>, any>(
                 value => {
                     file.status = MFileStatus.COMPLETED;
                     file.progress = 100;
@@ -213,7 +222,9 @@ class FileStore {
                     file.status = axios.isCancel(ex)
                         ? MFileStatus.CANCELED
                         : MFileStatus.FAILED;
-                    throw new Error(ex);
+                    if (file.status === MFileStatus.FAILED) {
+                        return Promise.reject(ex);
+                    }
                 }
             )
             .then<AxiosResponse<T>>(value => {
@@ -289,7 +300,6 @@ const FilePlugin: PluginObject<any> = {
     install(v, options): void {
         console.debug('$file', 'plugin.install');
         let file: FileService = new FileService();
-        (v as any).$file = file;
         (v.prototype as any).$file = file;
     }
 };

@@ -46,6 +46,12 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop({ default: true })
     public paddingFooter: boolean;
 
+    $refs: {
+        body: HTMLElement;
+        dialogWrap: HTMLElement;
+        article: HTMLElement;
+    };
+
     public closeDialog(): void {
         this.as<PortalMixin>().tryClose();
     }
@@ -77,7 +83,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public getPortalElement(): HTMLElement {
-        return this.$refs.article as HTMLElement;
+        return this.$refs.article;
     }
 
     protected mounted(): void {

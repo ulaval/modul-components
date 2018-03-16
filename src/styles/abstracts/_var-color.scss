@@ -21,6 +21,7 @@ $m-color--grey-lightest: #f9f9f9 !default;
 // ======================================================================
 $m-color--black: #000;
 $m-color--text: $m-color--grey-darker;
+$m-color--text-light: $m-color--grey;
 $m-color--white: #fff;
 
 // ======================================================================
@@ -71,8 +72,8 @@ $m-color--active: $m-color--ul-yellow !default;
 // ======================================================================
 //  disabled colors
 // ======================================================================
-$m-color--disabled: $m-color--grey !default;
-$m-color--disabled-light: $m-color--grey-light !default;
+$m-color--disabled: $m-color--grey-light !default;
+$m-color--disabled-light: $m-color--grey-lighter !default;
 
 // ======================================================================
 //  Scrollbar colors

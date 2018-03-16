@@ -1,0 +1,18 @@
+
+<textarea class="m-textarea-resize"
+          :class="{ 'm--is-diabled' : disabled,
+                    'm--is-readonly': readonly,
+                    'm--is-focus': isFocus }"
+          :disabled="disabled"
+          :placeholder="placeholder"
+          :readonly="readonly"
+          rows="1"
+          @focus="onFocus"
+          @blur="onBlur"
+          @change="onChange"
+          @keyup="onKeyup"
+          @keydown="onKeydown"
+          @paste="onPaste"
+          ref="input"
+          v-model="model"></textarea>
+

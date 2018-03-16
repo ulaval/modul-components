@@ -45,11 +45,14 @@ export class MCarousel extends Vue {
                         item.componentInstance.transitionForward = this.transitionForward;
                         item.componentInstance.isVisible = index === this.internalIndex;
                         item.componentInstance.$slots.default.forEach(content => {
-                            let el = content.componentInstance && content.componentInstance.$el || content.elm;
-                            if (el instanceof HTMLElement) {
-                                el.style.maxHeight = this.$el.style.height || '100vh';
-                                el.style.maxWidth = this.$el.clientWidth + 'px';
-                                el.style.display = 'block';
+                            let el: HTMLElement = content.componentInstance && content.componentInstance.$el || content.elm as HTMLElement;
+                            if (el instanceof HTMLElement && (el.tagName == 'IMG' || el.tagName == 'PICTURE')) {
+                                el.style.maxWidth = '100%';
+                                el.style.maxHeight = '100%';
+                                el.style.position = 'absolute';
+                                el.style.top = '50%';
+                                el.style.left = '50%';
+                                el.style.transform = 'translate(-50%, -50%)';
                             }
                         });
                         items.push(item.componentInstance);

@@ -53,6 +53,30 @@ describe('MDateFields', () => {
         return expect(renderComponent(df.vm)).resolves.toMatchSnapshot();
     });
 
+    it('should render correctly when error is set', () => {
+        const df = mount(MDatefields, {
+            localVue: localVue,
+            propsData: {
+                error: true,
+                errorMessage: 'Nostrud laboris quis velit voluptate aute elit elit non.'
+            }
+        });
+
+        return expect(renderComponent(df.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when valid is set', () => {
+        const df = mount(MDatefields, {
+            localVue: localVue,
+            propsData: {
+                valid: true,
+                validMessage: 'Nostrud laboris quis velit voluptate aute elit elit non.'
+            }
+        });
+
+        return expect(renderComponent(df.vm)).resolves.toMatchSnapshot();
+    });
+
     it('should render correctly minYear/maxYear items', () => {
         localVue.component(
             'm-dropdown',

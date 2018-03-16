@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import FileDropPlugin from '../../directives/file-drop/file-drop';
-import FilePlugin, { MFile, MFileStatus } from '../../utils/file/file';
+import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
 import { Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -16,7 +16,6 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
-import ModalPlugin from '../modal/modal';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
 
@@ -24,6 +23,7 @@ const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 
 interface MFileExt extends MFile {
     completeHinted: boolean;
+    isOldRejection: boolean;
 }
 
 let filesizeSymbols: { [name: string]: string } | undefined = undefined;
@@ -56,27 +56,46 @@ export class MFileUpload extends ModulVue {
     @Prop()
     public maxFiles?: number;
 
+    @Prop({
+        default: DEFAULT_STORE_NAME
+    })
+    public storeName: string;
+
     $refs: {
         dialog: MDialog;
     };
 
     private title: string = this.$i18n.translate('m-file-upload:header-title');
-    private isModalOpen: boolean = false;
 
     private created(): void {
-        this.$file.setValidationOptions({
-            extensions: this.extensions,
-            maxSizeKb: this.maxSizeKb,
-            maxFiles: this.maxFiles
-        });
+        this.$file.setValidationOptions(
+            {
+                extensions: this.extensions,
+                maxSizeKb: this.maxSizeKb,
+                maxFiles: this.maxFiles
+            },
+            this.storeName
+        );
+    }
+
+    private destroyed(): void {
+        this.$file.destroy(this.storeName);
     }
 
     @Watch('readyFiles')
     private onFilesChanged(): void {
+        const newReadyFiles: MFileExt[] = [];
+
         for (const f of this.readyFiles) {
-            this.$set(f, 'completeHinted', false);
+            if (!f.hasOwnProperty('completeHinted')) {
+                this.$set(f, 'completeHinted', false);
+                newReadyFiles.push(f);
+            }
         }
-        this.$emit('files-ready', this.readyFiles);
+
+        if (newReadyFiles.length > 0) {
+            this.$emit('files-ready', this.readyFiles);
+        }
     }
 
     @Watch('freshlyCompletedFiles')
@@ -91,26 +110,42 @@ export class MFileUpload extends ModulVue {
     }
 
     @Watch('rejectedFiles')
-    private onRejectedFilesChanged(): void {
-        if (this.rejectedFiles.length > 0) {
-            this.isModalOpen = true;
+    private onFilesRejected(): void {
+        const nbNewRejection = this.rejectedFiles.reduce((cnt, f) => {
+            let nbNewRejection = 0;
+            if (!f.isOldRejection) {
+                ++nbNewRejection;
+                f.isOldRejection = true;
+            }
+            return cnt + nbNewRejection;
+        }, 0);
+
+        if (nbNewRejection > 0) {
+            this.$refs.dialog.$refs.body.scrollTop = 0;
+            // TODO Change function to have a smooth scroll when it will work on a diferent element than the body of the page
+            // ScrollTo.startScroll(bodyRef, 0, ScrollToDuration.Regular);
         }
     }
 
-    private onModalClose(): void {
-        this.isModalOpen = false;
+    private onMessageClose(): void {
         for (const f of this.rejectedFiles) {
-            this.$file.remove(f.uid);
+            this.$file.remove(f.uid, this.storeName);
         }
     }
 
     private onAddClick(): void {
+        this.$refs.dialog.closeDialog();
         this.$emit('done', this.completedFiles);
+        this.$file.clear(this.storeName);
     }
 
     private onCancelClick(): void {
         this.$refs.dialog.closeDialog();
+        this.allFiles
+            .filter(f => f.status === MFileStatus.UPLOADING)
+            .forEach(this.onUploadCancel);
         this.$emit('cancel');
+        this.$file.clear(this.storeName);
     }
 
     private onUploadCancel(file: MFile): void {
@@ -121,7 +156,7 @@ export class MFileUpload extends ModulVue {
 
     private onFileRemove(file: MFile): void {
         this.$emit('file-remove', file);
-        this.$file.remove(file.uid);
+        this.$file.remove(file.uid, this.storeName);
     }
 
     private onOpen(): void {
@@ -140,6 +175,18 @@ export class MFileUpload extends ModulVue {
         } else {
             return MProgressState.InProgress;
         }
+    }
+
+    private hasExtensionsRejection(file): boolean {
+        return file.rejection === MFileRejectionCause.FILE_TYPE;
+    }
+
+    private hasSizeRejection(file): boolean {
+        return file.rejection === MFileRejectionCause.FILE_SIZE;
+    }
+
+    private hasMaxFilesRejection(file): boolean {
+        return file.rejection === MFileRejectionCause.MAX_FILES;
     }
 
     private get fileExtensions(): string {
@@ -182,7 +229,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private get allFiles(): MFileExt[] {
-        return this.$file.files() as MFileExt[];
+        return this.$file.files(this.storeName) as MFileExt[];
     }
 
     private get hasUploadingFiles(): boolean {
@@ -191,6 +238,10 @@ export class MFileUpload extends ModulVue {
 
     private get hasCompletedFiles(): boolean {
         return this.completedFiles.length === 0;
+    }
+
+    private get hasRejectedFiles(): boolean {
+        return this.rejectedFiles.length !== 0;
     }
 }
 
@@ -201,7 +252,6 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);
         v.use(DialogPlugin);
-        v.use(ModalPlugin);
         v.use(ProgressPlugin);
         v.use(IconPlugin);
         v.use(I18nPlugin);
