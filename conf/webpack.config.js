@@ -8,7 +8,7 @@ function resolve(dir) {
 }
 
 module.exports = function (env) {
-    var isProd = !!(env && env.prod);
+    var buildOnly = !!(env && env.buildonly);
 
     var config = {
         entry: {
@@ -83,7 +83,7 @@ module.exports = function (env) {
                 test: /\.ts$/,
                 loader: 'awesome-typescript-loader',
                 options: {
-                    configFileName: resolve(isProd ? 'tsconfig.json' : 'tsconfig.dev.json')
+                    configFileName: resolve('tsconfig.dev.json')
                 }
             },
             {
@@ -121,16 +121,12 @@ module.exports = function (env) {
         ]
     }
 
-    if (!isProd) {
+    if (!buildOnly) {
         config.plugins.push(new HtmlWebpackPlugin({
             filename: 'index.html',
             template: resolve('tests/app/index.html'),
             inject: 'body'
         }));
-    }
-
-    if (isProd) {
-        console.log('Use npm run tsc instead (for the moment...)');
     }
 
     return config;
