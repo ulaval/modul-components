@@ -1,6 +1,6 @@
 import Vue, { PluginObject, VNode } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './carousel.html?style=./carousel.scss';
 import { CAROUSEL_NAME } from '../component-names';
 import carouselItem, { MCarouselItem } from '../carousel-item/carousel-item';
@@ -28,7 +28,7 @@ export class MCarousel extends Vue {
     private transitionForward: boolean = true;
 
     protected mounted(): void {
-        if (this.keyboardNavigable) this.addKeyboardListener();
+        this.toggleKeyboardNavigation(this.keyboardNavigable);
         if (this.interval) {
             this.updateInterval = setInterval(() => {
                 this.showNextItem();
@@ -37,9 +37,6 @@ export class MCarousel extends Vue {
     }
 
     protected updated(): void {
-        this.removeKeyboardListener();
-        if (this.keyboardNavigable) this.addKeyboardListener();
-
         if (this.isIndexValid(this.propIndex) || this.propIndex === 0 && this.items.length === 0) {
             this.transitionForward = this.internalIndex <= this.propIndex;
             this.internalIndex = this.propIndex;
@@ -72,16 +69,16 @@ export class MCarousel extends Vue {
     }
 
     protected beforeDestroy(): void {
-        this.removeKeyboardListener();
+        this.toggleKeyboardNavigation(false);
         clearInterval(this.updateInterval);
     }
 
-    private addKeyboardListener(): void {
-        document.addEventListener('keyup', this.changeItem);
-    }
-
-    private removeKeyboardListener(): void {
+    @Watch('keyboardNavigable')
+    private toggleKeyboardNavigation(value: boolean): void {
         document.removeEventListener('keyup', this.changeItem);
+        if (value) {
+            document.addEventListener('keyup', this.changeItem);
+        }
     }
 
     private changeItem(e): void {
