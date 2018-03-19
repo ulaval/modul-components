@@ -58,7 +58,17 @@ export class MDroppable {
     }
 
     private onDragOver(event: MDragEvent): any {
-        MDroppable.currentOverElement = event.target as HTMLElement;
+        console.log('test', event, this.options.element);
+        event.stopPropagation();
+
+        if (MDroppable.currentOverElement) {
+            // TODO: remove this.
+            MDroppable.currentOverElement.style.backgroundColor = '';
+            MDroppable.currentOverElement.classList.remove(MDroppableClassNames.MOvering);
+            MDroppable.currentOverElement.classList.remove(MDroppableClassNames.MDroppable);
+        }
+
+        MDroppable.currentOverElement = this.options.element;
         MDroppable.currentOverElement.classList.add(MDroppableClassNames.MOvering);
 
         if (MDroppable.currentOverElement === MDraggable.currentlyDraggedElement) {

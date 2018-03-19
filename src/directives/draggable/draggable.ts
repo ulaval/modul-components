@@ -30,14 +30,22 @@ export class MDraggable {
 
     public cleanUp(): void {
         this.options.element.draggable = false;
+        this.options.element.removeEventListener('dragenter', this.onDragEnter.bind(this));
         this.options.element.removeEventListener('dragend', this.onDragEnd.bind(this));
         this.options.element.removeEventListener('dragstart', this.onDragStart.bind(this));
+        window.removeEventListener('touchmove', () => {});
     }
 
     private init(): void {
         this.options.element.draggable = true;
+        this.options.element.addEventListener('dragenter', this.onDragEnter.bind(this));
         this.options.element.addEventListener('dragend', this.onDragEnd.bind(this));
         this.options.element.addEventListener('dragstart', this.onDragStart.bind(this), false);
+        window.addEventListener('touchmove', () => {});
+    }
+
+    private onDragEnter(event: MDragEvent): void {
+        event.preventDefault();
     }
 
     private onDragEnd(event: MDragEvent): void {
