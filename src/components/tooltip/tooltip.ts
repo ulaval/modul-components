@@ -92,6 +92,10 @@ export class MTooltip extends ModulVue {
         this.$emit('close', event);
     }
 
+    private onClick(): void {
+        this.$emit('click');
+    }
+
     private getOpenTitle(): string {
         return this.openTitle == undefined ? this.$i18n.translate('m-tooltip:open') : this.openTitle;
     }

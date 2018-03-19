@@ -7,21 +7,11 @@ $m-tooltip--max-height: 280px !default;
         display: inline;
     }
 
-    &.m--is-mode-icon {
-        display: inline-flex;
-
+    &.m--is-disabled {
         .m-tooltip__icon {
-            position: relative;
-            top: -1px; // Magic number: align icon width text
-        }
-    }
-
-    &.m--is-mode-link {
-        display: inline;
-
-        .m-tooltip__link {
-            position: relative;
-            top: -2px; // Magic number: align link width text
+            &.m-icon-button.m-icon-button {
+                @include m-button--disabled();
+            }
         }
     }
 

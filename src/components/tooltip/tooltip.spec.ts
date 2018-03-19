@@ -1,99 +1,129 @@
-import Vue from 'vue';
-import '../../utils/polyfills';
+import { mount } from '@vue/test-utils';
+import Vue, { VueConstructor } from 'vue';
+
+import { resetModulPlugins } from '../../../tests/helpers/component';
+import { addMessages } from '../../../tests/helpers/lang';
+import { renderComponent } from '../../../tests/helpers/render';
+import uuid from '../../utils/uuid/uuid';
+import { MIconButton } from '../icon-button/icon-button';
 import TooltipPlugin, { MTooltip, MTooltipMode } from './tooltip';
 
-const MODE_ICON_CSS: string = 'm--is-mode-icon';
-const MODE_LINK_CSS: string = 'm--is-mode-link';
-const OPEN_CSS: string = 'm--is-open';
-
-let tooltip: MTooltip;
-
-describe('MTooltipMode', () => {
-    it('validates enum', () => {
-        expect(MTooltipMode.Link).toEqual('link');
-        expect(MTooltipMode.Icon).toEqual('icon');
-    });
-});
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('tooltip', () => {
+    let localVue: VueConstructor<Vue>;
+
     beforeEach(() => {
+        resetModulPlugins();
         Vue.use(TooltipPlugin);
-        tooltip = new MTooltip().$mount();
+        addMessages(Vue, [
+            'components/tooltip/tooltip.lang.en.json'
+        ]);
     });
 
-    it('css class for tooltip are not present', () => {
-        expect(tooltip.$el.classList.contains(MODE_LINK_CSS)).toBeFalsy();
-    });
-
-    it('open prop', () => {
-        let vm = new Vue({
-            template: `
-            <div>
-                <m-tooltip ref="a" :open="isOpen">Lorem<span slot="body">Lorem</span></m-tooltip>
-            </div>`,
-            data: {
-                isOpen: false
-            }
-        }).$mount();
-        let popper: Element | null = (vm.$refs.a as Vue).$el.querySelector('.m-popper__article');
-        if (popper) {
-            expect(popper.classList.contains(OPEN_CSS)).toBeFalsy();
-        }
-        (vm as any).isOpen = true;
-        Vue.nextTick(() => {
-            if (popper) {
-                expect(popper.classList.contains(OPEN_CSS)).toBeTruthy();
-            }
-            (vm as any).isOpen = false;
-            Vue.nextTick(() => {
-                if (popper) {
-                    expect(popper.classList.contains(OPEN_CSS)).toBeFalsy();
-                }
-            });
+    it('should render correctly', () => {
+        const tooltip = mount(MTooltip, {
+            localVue: Vue
         });
+
+        return expect(
+            renderComponent(tooltip.vm)
+        ).resolves.toMatchSnapshot();
     });
 
-    it('mode prop', () => {
-        expect(tooltip.$el.classList.contains(MODE_ICON_CSS)).toBeTruthy();
-        expect(tooltip.$el.classList.contains(MODE_LINK_CSS)).toBeFalsy();
-        tooltip.mode = MTooltipMode.Link;
-        Vue.nextTick(() => {
-            expect(tooltip.$el.classList.contains(MODE_LINK_CSS)).toBeTruthy();
-            expect(tooltip.$el.classList.contains(MODE_ICON_CSS)).toBeFalsy();
-            tooltip.mode = MTooltipMode.Icon;
-            Vue.nextTick(() => {
-                expect(tooltip.$el.classList.contains(MODE_ICON_CSS)).toBeTruthy();
-                expect(tooltip.$el.classList.contains(MODE_LINK_CSS)).toBeFalsy();
-            });
+    it('should render correctly when is open', () => {
+        const tooltip = mount(MTooltip, {
+            localVue: Vue,
+            propsData: {
+                open: true
+            }
         });
+
+        return expect(
+            renderComponent(tooltip.vm)
+        ).resolves.toMatchSnapshot();
     });
 
-    // Todo: Need to be edit, can't catch popper element
+    it('should render correctly with default slot', () => {
+        const tooltip = mount(MTooltip, {
+            localVue: localVue,
+            slots: {
+                default: 'Tooltip text'
+            }
+        });
 
-    // it('open event', () => {
-    //     let clickSpy = jasmine.createSpy('clickSpy');
-    //     let vm = new Vue({
-    //         template: `
-    //         <div>
-    //             <m-tooltip ref="a" @open="onOpen">Lorem<span slot="body">Lorem</span></m-tooltip>
-    //         </div>`,
-    //         methods: {
-    //             onOpen: clickSpy
-    //         }
-    //     }).$mount();
+        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+    });
 
-    //     let element: HTMLButtonElement | null = (vm.$refs.a as Vue).$el.querySelector('button');
-    //     console.log(vm.$el.outerHTML);
+    it('should render correctly when mode is link', () => {
+        const tooltip = mount(MTooltip, {
+            localVue: localVue,
+            propsData: {
+                mode: MTooltipMode.Link
+            },
+            slots: {
+                default: 'Tooltip text',
+                link: 'Link'
+            }
+        });
 
-    //     let e: any = document.createEvent('HTMLEvents');
-    //     e.initEvent('click', true, true);
+        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+    });
 
-    //     if (element) {
-    //         element.dispatchEvent(e);
-    //     }
-    //     Vue.nextTick(() => {
-    //         expect(clickSpy).toHaveBeenCalledWith(e);
-    //     });
-    // });
+    it('should render correctly when disabled', () => {
+        const tooltip = mount(MTooltip, {
+            localVue: localVue,
+            propsData: {
+                disabled: true
+            }
+        });
 
+        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when close-button is false', () => {
+        const tooltip = mount(MTooltip, {
+            localVue: localVue,
+            propsData: {
+                closeButton: false
+            }
+        });
+
+        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when open title is set', () => {
+        const tooltip = mount(MTooltip, {
+            localVue: localVue,
+            propsData: {
+                openTitle: 'test open'
+            }
+        });
+
+        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when close title is set', () => {
+        const tooltip = mount(MTooltip, {
+            localVue: localVue,
+            propsData: {
+                open: true,
+                closeTitle: 'test close'
+
+            }
+        });
+
+        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should emit click event when is clicked', () => {
+        const tooltip = mount(MTooltip, {
+            localVue: Vue
+        });
+
+        tooltip.find('.m-tooltip__icon').trigger('click');
+
+        expect(tooltip.emitted('click')).toBeTruthy();
+    });
 });
