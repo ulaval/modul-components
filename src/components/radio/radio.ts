@@ -125,7 +125,8 @@ export class MRadio extends ModulVue {
         if (this.hasParentGroup === undefined) {
             let parentGroup: BaseRadioGroup | undefined;
             parentGroup = this.getParent<BaseRadioGroup>(
-                p => p.$options.name == 'MRadioGroup' || p.$options.name == 'MButtonGroup'
+                p => p instanceof BaseRadioGroup || p instanceof BaseButtonGroup || // these will fail with Jest, but should pass in prod mode
+                    p.$options.name == 'MRadioGroup' || p.$options.name == 'MButtonGroup' // these are necessary for Jest, but the first two should pass in prod mode
             );
             if (parentGroup) {
                 this.parentGroup = (parentGroup as any) as RadioGroup;
