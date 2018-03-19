@@ -2,7 +2,7 @@ import { SORTABLE } from '../directive-names';
 import { PluginObject } from 'vue/types/plugin';
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { MDraggableElement, MDraggable } from '../draggable/draggable';
-import { MDroppable } from '../droppable/droppable';
+import { MDroppable, MDroppableElement } from '../droppable/droppable';
 
 export class MSortableOptions {
     public onDragStart: () => void;
@@ -19,7 +19,7 @@ const MSortable: DirectiveOptions = {
                 element: childs[i] as HTMLElement,
                 dragData: {}
             });
-            new MDroppable().setOptions({
+            new MDroppable().setOptions(true, {
                 acceptedActions: ['patate'],
                 element: childs[i] as HTMLElement
             });
@@ -33,7 +33,7 @@ const MSortable: DirectiveOptions = {
                 element: childs[i] as HTMLElement,
                 dragData: {}
             });
-            new MDroppable().setOptions({
+            new MDroppable().setOptions(true, {
                 acceptedActions: ['patate'],
                 element: childs[i] as HTMLElement
             });
@@ -42,7 +42,11 @@ const MSortable: DirectiveOptions = {
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         const childs: HTMLCollection = element.children;
         for (let i = 0; i < childs.length; i++) {
-            (childs[i] as MDraggableElement).cleanUp();
+            let draggablePart = childs[i] as MDraggableElement;
+            if (draggablePart.cleanUpDraggable) draggablePart.cleanUpDraggable();
+
+            let droppablePart = childs[i] as MDroppableElement;
+            if (droppablePart.cleanUpDroppable) droppablePart.cleanUpDroppable();
         }
     }
 };
