@@ -18,6 +18,9 @@ export class MCarousel extends Vue {
     @Prop({ default: 0 })
     public interval: number;
 
+    @Prop()
+    public keyboardNavigable: boolean;
+
     private items: MCarouselItem[] = [];
 
     private internalIndex: number = 0;
@@ -25,7 +28,7 @@ export class MCarousel extends Vue {
     private transitionForward: boolean = true;
 
     protected mounted(): void {
-        document.addEventListener('keyup', this.changeItem);
+        if (this.keyboardNavigable) this.addKeyboardListener();
         if (this.interval) {
             this.updateInterval = setInterval(() => {
                 this.showNextItem();
@@ -34,10 +37,14 @@ export class MCarousel extends Vue {
     }
 
     protected updated(): void {
+        this.removeKeyboardListener();
+        if (this.keyboardNavigable) this.addKeyboardListener();
+
         if (this.isIndexValid(this.propIndex) || this.propIndex === 0 && this.items.length === 0) {
             this.transitionForward = this.internalIndex <= this.propIndex;
             this.internalIndex = this.propIndex;
             let items: MCarouselItem[] = [];
+
             if (this.$slots.default) {
                 let index = 0;
                 this.$slots.default.forEach(item => {
@@ -65,8 +72,16 @@ export class MCarousel extends Vue {
     }
 
     protected beforeDestroy(): void {
-        document.removeEventListener('keyup', this.changeItem);
+        this.removeKeyboardListener();
         clearInterval(this.updateInterval);
+    }
+
+    private addKeyboardListener(): void {
+        document.addEventListener('keyup', this.changeItem);
+    }
+
+    private removeKeyboardListener(): void {
+        document.removeEventListener('keyup', this.changeItem);
     }
 
     private changeItem(e): void {
