@@ -59,8 +59,6 @@ export class MPopup extends ModulVue {
     public className: string;
     @Prop()
     public preload: boolean;
-    @Prop()
-    public trigger: HTMLElement;
 
     private internalOpen: boolean = false;
 
@@ -79,6 +77,10 @@ export class MPopup extends ModulVue {
 
     public get propOpenTrigger(): MOpenTrigger {
         return this.openTrigger; // todo: mobile + hover ??
+    }
+
+    public get trigger(): any {
+        return !this.as<OpenTriggerMixin>().triggerHook ? undefined : this.as<OpenTriggerMixin>().triggerHook;
     }
 
     private onOpen(): void {

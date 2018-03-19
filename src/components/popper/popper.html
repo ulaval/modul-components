@@ -1,6 +1,6 @@
 <div class="m-popper" :class="{ 'm--is-open': propOpen }">
     <slot name="trigger"></slot>
-    <portal :target-el="'#' + propId" v-if="hasDefaultSlot" :trigger="trigger">
+    <portal :target-el="'#' + propId" v-if="hasDefaultSlot">
         <transition
             @before-enter="onBeforeEnter"
             @enter="onEnter"
