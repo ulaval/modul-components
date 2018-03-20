@@ -2,7 +2,7 @@
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
         <transition name="m--is">
-            <div v-show="propOpen"
+            <div v-show="propOpen" v-if="propOpen || preload || loaded"
                 class="m-sidebar__wrap m--is-sidebar"
                 :class="[{ 'm--is-close-on-backdrop': closeOnBackdrop,
                            'm--is-disabled':disabled },

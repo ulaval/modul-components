@@ -8,7 +8,7 @@ import ComponentsPlugin from '../../src/components';
 import DirectivesPlugin from '../../src/directives';
 import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
 
-import I18nLanguagePlugin, { currentLang, FRENCH } from '../../src/utils/i18n/i18n';
+import I18nLanguagePlugin, { FRENCH, I18nPluginOptions } from '../../src/utils/i18n/i18n';
 import FrenchPlugin from '../../src/lang/fr';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 
@@ -22,12 +22,15 @@ const utilsPluginOptions: UtilsPluginOptions = {
     }
 };
 
+let i18nOptions: I18nPluginOptions = {
+    curLang: FRENCH
+};
+Vue.use(I18nLanguagePlugin, i18nOptions);
+
 Vue.use(ComponentsPlugin);
 Vue.use(DirectivesPlugin);
 Vue.use(UtilsPlugin, utilsPluginOptions);
 
-currentLang(FRENCH);
-Vue.use(I18nLanguagePlugin);
 Vue.use(FrenchPlugin);
 Vue.use(DefaultSpritesPlugin);
 

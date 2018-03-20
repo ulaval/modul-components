@@ -54,8 +54,7 @@
              :disabled="!active"
              :enter="transitionEnter"
              :leave="transitionLeave"
-             :padding-header="false"
-             :padding-body="false"
+             :padding="false"
              :focus-management="isMqMaxS"
              :close-on-backdrop="true">
         <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
