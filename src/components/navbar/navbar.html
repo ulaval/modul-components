@@ -10,7 +10,7 @@
               'm--no-margin': !margin }">
     <m-icon-button ref="buttonLeft" class="m-navbar__button" :skin="buttonSkin" :button-size="ComputedHeight" icon-name="left-chevron"
         @click="scrollLeft" v-if="hasScrolllH && arrowMobile"></m-icon-button>
-    <nav class="m-navbar__wrap" ref="wrap">
+    <nav class="m-navbar__wrap" role="menubar" ref="wrap">
         <ul class="m-navbar__list" aria-hidden="true" ref="list">
             <slot></slot>
             <li aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': isAnimActive }" v-if="isLightSkin" ref="line"></li>

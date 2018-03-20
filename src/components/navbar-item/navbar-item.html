@@ -1,6 +1,8 @@
 <li class="m-navbar-item"
     :class="{'m--is-selected': isSelected,
              'm--is-disabled': isDisabled}"
+    role="menuitem"
+    :aria-selected="isSelected"
     @keyup.enter="onClick"
     @click="onClick">
     <slot></slot>
