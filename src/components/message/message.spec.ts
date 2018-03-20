@@ -101,7 +101,7 @@ describe('MMessage', () => {
             }
         });
 
-        msg.find('button').trigger('click');
+        msg.find('.m-message__body__close-button').trigger('click');
         return expect(renderComponent(msg.vm)).resolves.toEqual('');
     });
 
@@ -113,7 +113,7 @@ describe('MMessage', () => {
             }
         });
 
-        msg.find('button').trigger('click');
+        msg.find('.m-message__body__close-button').trigger('click');
 
         expect(msg.emitted('close')).toBeTruthy();
     });
