@@ -18,7 +18,7 @@
                                 'm--is-placement-' + placement,
                                 className ]"
                      :aria-hidden="!propOpen"
-                     v-show="propOpen">
+                     v-show="propOpen" v-if="propOpen || preload || loaded">
                 <slot></slot>
             </article>
         </transition>

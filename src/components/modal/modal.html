@@ -2,7 +2,7 @@
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
         <transition name="m--is">
-            <div v-show="propOpen"
+            <div v-show="propOpen" v-if="propOpen || preload || loaded"
                  class="m-modal__wrap"
                  :class="[{ 'm--is-disabled': disabled }, className ]"
                  ref="dialogWrap">

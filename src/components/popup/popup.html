@@ -7,7 +7,7 @@
               :placement="placement"
               :focus-management="focusManagement"
               :open-trigger="propOpenTrigger"
-              :trigger="trigger"
+              :trigger="propTrigger"
               :before-enter="beforeEnter"
               :enter="enter"
               :after-enter="afterEnter"
@@ -17,6 +17,7 @@
               :after-leave="afterLeave"
               :leave-cancelled="leaveCancelled"
               :shadow="shadow"
+              :preload="preload"
               v-if="!isMqMaxS">
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
@@ -42,8 +43,9 @@
                :padding-body="paddingBody"
                :padding-footer="paddingFooter"
                :open-trigger="propOpenTrigger"
-               :trigger="trigger"
+               :trigger="propTrigger"
                :class-name="className"
+               :preload="preload"
                v-if="isMqMaxS">
         <div slot="trigger" v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
