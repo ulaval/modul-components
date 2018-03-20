@@ -2,11 +2,15 @@ import '../../utils/polyfills';
 
 import { mount, Slots } from '@vue/test-utils';
 import Vue from 'vue';
+import uuid from '../../utils/uuid/uuid';
 
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import { MAccordion, MAccordionSkin } from '../accordion/accordion';
 import AccordionGroupPlugin, { MAccordionGroup } from './accordion-group';
+
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('MAcordionGroup', () => {
     beforeEach(() => {
@@ -94,10 +98,10 @@ describe('MAcordionGroup', () => {
     it('should close all accordions when close all is clicked', () => {
         const acn = mount(MAccordionGroup, {
             slots: {
-                default: `<m-accordion :open="true">
+                default: `<m-accordion id="a" :open="true">
                                 <span slot="header">A</span>
                             </m-accordion>
-                            <m-accordion :open="true">
+                            <m-accordion id="b" :open="true">
                                 <span slot="header">B</span>
                             </m-accordion>'`
             }
@@ -108,6 +112,7 @@ describe('MAcordionGroup', () => {
 
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
+
         for (let i = 0; i < acrds.length; ++i) {
             expect(acrds.at(i).vm.propOpen).toBeFalsy();
         }

@@ -2,10 +2,14 @@ import '../../utils/polyfills';
 
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
+import uuid from '../../utils/uuid/uuid';
 
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import AccordionPlugin, { MAccordion, MAccordionIconPosition, MAccordionIconSize, MAccordionSkin } from './accordion';
+
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('MAcordion', () => {
     beforeEach(() => {
