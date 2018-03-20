@@ -14,7 +14,6 @@ $m-accordion--color-default: $m-color--interactive;
     &.m--is-disabled {
         > .m-accordion {
             &__header {
-                // cursor: not-allowed;
                 outline: none;
 
                 &,
@@ -192,17 +191,6 @@ $m-accordion--color-default: $m-color--interactive;
                     }
                 }
             }
-            // &.m--has-icon-large {
-            //     > .m-accordion {
-            //         &__body-wrap {
-            //             > .m-accordion__body {
-            //                 &.m--has-padding {
-            //                     padding-left: 40px; // Magic number
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
         }
     }
 
