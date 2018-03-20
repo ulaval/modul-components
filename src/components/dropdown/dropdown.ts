@@ -7,6 +7,7 @@ import { KeyCode } from '../../utils/keycode/keycode';
 import { normalizeString } from '../../utils/str/str';
 import DropdownItemPlugin, { MDropdownInterface, MDropdownItem, BaseDropdown, BaseDropdownGroup } from '../dropdown-item/dropdown-item';
 import { MDropdownGroup } from '../dropdown-group/dropdown-group';
+import uuid from '../../utils/uuid/uuid';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
@@ -61,6 +62,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private internalOpen: boolean = false;
     private dirty: boolean = false;
+    private id: string = `mDropdown-${uuid.generate()}`;
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;

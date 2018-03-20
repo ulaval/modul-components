@@ -18,7 +18,11 @@
                    v-m-popup:popup>
         <input type="text"
                ref="input"
+               :id="id"
                class="m-dropdown__input"
+               aria-haspopup="true"
+               :aria-controls="id+'-controls'"
+               :aria-expanded="open"
                :disabled="!active"
                :readonly="!filterable"
                :placeholder="placeholder"
@@ -70,8 +74,10 @@
                 </m-icon-button>
             </div>
         </template>
-        <ul class="m-dropdown__list"
-            ref="items">
+        <ul :id="id+'-controls'"
+            class="m-dropdown__list"
+            ref="items"
+            :aria-labelledby="id">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
             <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>
