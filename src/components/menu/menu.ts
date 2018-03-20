@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './menu.html?style=./menu.scss';
 import { MENU_NAME } from '../component-names';
 import PopupPlugin from '../popup/popup';
@@ -9,6 +9,7 @@ import I18nPlugin from '../i18n/i18n';
 import { MPopperPlacement } from '../popper/popper';
 import MMenuItemPlugin, { BaseMenu, MMenuInterface } from '../menu-item/menu-item';
 import IconButtonPlugin from '../icon-button/icon-button';
+import uuid from '../../utils/uuid/uuid';
 
 export enum MOptionsMenuSkin {
     Light = 'light',
@@ -18,7 +19,8 @@ export enum MOptionsMenuSkin {
 @WithRender
 @Component
 export class MMenu extends BaseMenu implements MMenuInterface {
-
+    @Prop()
+    public open: boolean;
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
@@ -44,12 +46,17 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     })
     public skin: MOptionsMenuSkin;
     @Prop()
+    public openTitle: string;
+    @Prop()
+    public closeTitle: string;
+    @Prop()
     public disabled: boolean;
     @Prop({ default: '44px' })
     public size: string;
 
     public hasIcon: boolean = false;
-    private open = false;
+    private propOpen = false;
+    private id: string = `mMenu-${uuid.generate()}`;
 
     public checkIcon(icon: boolean): void {
         if (icon) {
@@ -58,8 +65,17 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     }
 
     public close(): void {
-        this.open = false;
+        this.propOpen = false;
         this.onClose();
+    }
+
+    protected mounted(): void {
+        this.propOpen = this.open;
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
     }
 
     private onOpen(): void {
@@ -72,6 +88,18 @@ export class MMenu extends BaseMenu implements MMenuInterface {
 
     private onClick($event: MouseEvent): void {
         this.$emit('click', $event);
+    }
+
+    private getOpenTitle(): string {
+        return this.openTitle == undefined ? this.$i18n.translate('m-menu:open') : this.openTitle;
+    }
+
+    private getCloseTitle(): string {
+        return this.closeTitle == undefined ? this.$i18n.translate('m-menu:close') : this.closeTitle;
+    }
+
+    private get propTitle(): string {
+        return this.propOpen ? this.getCloseTitle() : this.getOpenTitle();
     }
 }
 
