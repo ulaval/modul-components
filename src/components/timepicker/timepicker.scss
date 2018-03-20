@@ -1,6 +1,6 @@
 @import 'abstracts/variables';
 $m-timepicker--color-hover: $m-color--interactive-lightest !default;
-$m-timepicker--color-select: $m-color--grey-light !default;
+$m-timepicker--color-select: $m-color--grey-lighter !default;
 $m-timepicker--color-active: $m-color--grey-lightest !default;
 
 .m-timepicker {
@@ -68,6 +68,7 @@ $m-timepicker--color-active: $m-color--grey-lightest !default;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                text-decoration: none;
 
                 &:not(.m--is-selected) {
                     cursor: pointer;

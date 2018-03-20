@@ -1,4 +1,4 @@
-<div class="m-popup" aria-hidden="true">
+<div class="m-popup">
     <m-popper :open.sync="propOpen"
               @open="onOpen()"
               @close="onClose()"
@@ -18,7 +18,8 @@
               :leave-cancelled="leaveCancelled"
               :shadow="shadow"
               v-if="!isMqMaxS">
-        <div slot="trigger" v-if="hasTriggerSlot">
+        <div slot="trigger"
+             v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
         <div class="m-popup__body"
@@ -45,7 +46,8 @@
                :trigger="trigger"
                :class-name="className"
                v-if="isMqMaxS">
-        <div slot="trigger" v-if="hasTriggerSlot">
+        <div slot="trigger"
+             v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
         <div class="m-popup__body" :class="{ 'm--no-padding': !padding }">

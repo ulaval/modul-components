@@ -14,6 +14,7 @@ import ButtonPlugin from '../button/button';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import PopupPlugin from '../popup/popup';
+import uuid from '../../utils/uuid/uuid';
 
 @WithRender
 @Component({
@@ -52,6 +53,7 @@ export class MTimepicker extends ModulVue {
 
     private internalOpen: boolean = false;
     private internalTimeErrorMessage: string = '';
+    private id: string = `mTimepicker-${uuid.generate()}`;
 
     private mounted(): void {
         moment.locale(curLang);
