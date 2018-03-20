@@ -136,7 +136,6 @@ export class Portal extends ModulVue implements PortalMixin {
         if (this.internalTrigger) {
             this.internalTrigger.removeEventListener('click', this.toggle);
             this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
-            this.internalTrigger.removeEventListener('mouseleave', this.handleMouseLeave);
         }
 
         document.body.removeChild(this.portalTargetEl);
@@ -216,11 +215,7 @@ export class Portal extends ModulVue implements PortalMixin {
                 this.internalTrigger.addEventListener('click', this.toggle);
             } else if (this.openTrigger == MOpenTrigger.Hover) {
                 this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
-                this.internalTrigger.addEventListener('mouseleave', this.handleMouseLeave);
-                this.$nextTick(() => {
-                    (this.$refs.popper as Element).addEventListener('mouseenter', this.handleMouseEnter);
-                    (this.$refs.popper as Element).addEventListener('mouseleave', this.handleMouseLeave);
-                });
+                // Closing not supported for the moment, check source code history for how was handled mouse leave
             }
         }
     }
@@ -231,10 +226,6 @@ export class Portal extends ModulVue implements PortalMixin {
 
     private handleMouseEnter(): void {
         this.propOpen = true;
-    }
-
-    private handleMouseLeave(): void {
-        this.propOpen = false;
     }
 
     @Watch('open')
