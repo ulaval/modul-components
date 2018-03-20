@@ -60,7 +60,7 @@ export class MPopup extends ModulVue {
     @Prop()
     public preload: boolean;
     @Prop()
-    public trigger: any;
+    public trigger: HTMLElement;
 
     private internalOpen: boolean = false;
 
