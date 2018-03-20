@@ -25,7 +25,11 @@ export class MNavbarItem extends ModulVue {
 
     protected mounted(): void {
 
-        let parentNavbar: BaseNavbar | undefined = this.getParent<BaseNavbar>(p => p.$options.name === 'MNavbar');
+        let parentNavbar: BaseNavbar | undefined;
+        parentNavbar = this.getParent<BaseNavbar>(
+            p => p instanceof BaseNavbar || // these will fail with Jest, but should pass in prod mode
+            p.$options.name === 'MNavbar' // these are necessary for Jest, but the first two should pass in prod mode
+        );
 
         if (parentNavbar) {
             this.parentNavbar = (parentNavbar as any) as Navbar;
