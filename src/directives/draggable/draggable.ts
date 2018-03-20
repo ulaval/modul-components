@@ -25,14 +25,13 @@ export class MDraggable {
     public static currentlyDraggedElement: MDraggableElement;
     private options: MDraggableOptions;
 
-    public setOptions(options: MDraggableOptions): void {
+    public attach(options: MDraggableOptions): void {
         this.options = options;
         this.init();
     }
 
-    public cleanUp(): void {
+    public detach(): void {
         this.options.element.draggable = false;
-        this.options.element.removeEventListener('dragenter', this.onDragEnter.bind(this));
         this.options.element.removeEventListener('dragend', this.onDragEnd.bind(this));
         this.options.element.removeEventListener('dragstart', this.onDragStart.bind(this));
         (this.options.element as MDraggableElement).cleanUpDraggable = undefined;
@@ -46,9 +45,9 @@ export class MDraggable {
         this.options.action = this.options.action ? this.options.action : 'any';
 
         element.draggable = true;
-        element.cleanUpDraggable = this.cleanUp.bind(this);
+        element.cleanUpDraggable = this.detach.bind(this);
         element.action = this.options.action;
-        element.addEventListener('dragenter', this.onDragEnter.bind(this));
+
         element.addEventListener('dragend', this.onDragEnd.bind(this));
         element.addEventListener('dragstart', this.onDragStart.bind(this), false);
         element.addEventListener('touchmove', () => {});
@@ -61,9 +60,7 @@ export class MDraggable {
     private onDragEnd(event: MDragEvent): void {
         MDraggable.currentlyDraggedElement.classList.remove(MDraggableClassNames.MDragging);
 
-        if (this.options.onDragEnd) {
-            this.options.onDragEnd(event);
-        }
+        if (this.options.onDragEnd) this.options.onDragEnd(event);
     }
 
     private onDragStart(event: MDragEvent): void {
@@ -78,20 +75,13 @@ export class MDraggable {
             event.dataTransfer.setData('text', this.options.dragData);
         }
 
-        if (this.options.onDragStart) {
-            this.options.onDragStart(event);
-        }
+        if (this.options.onDragStart) this.options.onDragStart(event);
     }
 }
 
-export interface MDraggableBindings extends VNodeDirective {
-    action: String;
-    anotherTest: () => void;
-}
-
 const Directive: DirectiveOptions = {
-    bind(element: HTMLElement, binding: MDraggableBindings, node: VNode): void {
-        new MDraggable().setOptions({
+    bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+        new MDraggable().attach({
             action: getVNodeAttributeValue(node, 'action'),
             element: element,
             dragData: {}
@@ -99,8 +89,8 @@ const Directive: DirectiveOptions = {
 
         console.log('Droppable binding done.');
     },
-    componentUpdated(element: MDraggableElement, binding: MDraggableBindings, node: VNode): void {
-        new MDraggable().setOptions({
+    componentUpdated(element: MDraggableElement, binding: VNodeDirective, node: VNode): void {
+        new MDraggable().attach({
             action: getVNodeAttributeValue(node, 'action'),
             element: element,
             dragData: {}

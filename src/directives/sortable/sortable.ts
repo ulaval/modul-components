@@ -14,12 +14,12 @@ const MSortable: DirectiveOptions = {
     bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         const childs: HTMLCollection = element.children;
         for (let i = 0; i < childs.length; i++) {
-            new MDraggable().setOptions({
+            new MDraggable().attach({
                 action: 'patate',
                 element: childs[i] as HTMLElement,
                 dragData: {}
             });
-            new MDroppable().setOptions(true, {
+            new MDroppable().attach(true, {
                 acceptedActions: ['patate'],
                 element: childs[i] as HTMLElement
             });
@@ -28,12 +28,12 @@ const MSortable: DirectiveOptions = {
     componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         const childs: HTMLCollection = element.children;
         for (let i = 0; i < childs.length; i++) {
-            new MDraggable().setOptions({
+            new MDraggable().attach({
                 action: 'patate',
                 element: childs[i] as HTMLElement,
                 dragData: {}
             });
-            new MDroppable().setOptions(true, {
+            new MDroppable().attach(true, {
                 acceptedActions: ['patate'],
                 element: childs[i] as HTMLElement
             });
