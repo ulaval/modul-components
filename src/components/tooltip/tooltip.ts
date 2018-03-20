@@ -10,6 +10,7 @@ import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/medi
 import ButtonPlugin from '../button/button';
 import LinkPlugin from '../link/link';
 import I18nPlugin from '../i18n/i18n';
+import uuid from '../../utils/uuid/uuid';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 export enum MTooltipMode {
@@ -62,6 +63,7 @@ export class MTooltip extends ModulVue {
     public className: string;
 
     private propOpen: boolean = false;
+    private id: string = `mTooltip-${uuid.generate()}`;
 
     protected mounted(): void {
         this.propOpen = this.open;
