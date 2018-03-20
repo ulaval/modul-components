@@ -103,7 +103,11 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
                     placement: this.placement,
                     eventsEnabled: false
                 };
-                this.popper = new Popper(this.as<PortalMixin>().getTrigger() as Element, el, options);
+                let reference: Element = this.as<PortalMixin>().getTrigger() as Element;
+                if (!reference) {
+                    reference = document.getElementsByTagName('body')[0];
+                }
+                this.popper = new Popper(reference, el, options);
             } else {
                 this.popper.update();
             }
