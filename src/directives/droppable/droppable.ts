@@ -14,128 +14,154 @@ export enum MDroppableOrientation {
     MAfter = 'after'
 }
 
-export interface MDragEvent extends DragEvent {}
+export enum MDropEffect {
+    MMove = 'move',
+    MNone = 'none'
+}
 
-export interface MDropEvent extends DragEvent {
+export interface MDropEvent<T> extends DragEvent {
     position: { element: HTMLElement, orientation: MDroppableOrientation };
+    dragInfo: MDragInfo<T>;
 }
 
 export interface MDroppableElement extends HTMLElement {
-    cleanUpDroppable?(): void;
+    __mdroppable__?: MDroppable;
 }
 
 export interface MDroppableOptions {
-    acceptedActions: String[];
-    element: HTMLElement;
-    onDragLeave?: (event: MDragEvent) => any;
-    onDragOver?: (event: MDragEvent) => any;
-    onDrop?: (event: MDragEvent) => any;
-    onDropAccept?: (event: MDropEvent) => any;
+    acceptedActions: string[];
+    grouping?: string;
 }
 
-export class MDroppable {
-    public static currentOverElement: HTMLElement | undefined;
-    private options: MDroppableOptions;
+export interface MDragInfo<T> {
+    action: string;
+    grouping?: string;
+    data: T;
+}
 
-    public attach(canDrop: boolean, options: MDroppableOptions): void {
+const DEFAULT_ACTION = 'any';
+export class MDroppable {
+    public static currentOverElement: MDroppableElement | undefined;
+    public options: MDroppableOptions;
+    private element: MDroppableElement;
+
+    constructor(element: HTMLElement, options: MDroppableOptions, canDrop?: boolean) {
+        this.element = element;
         this.options = options;
-        this.init(canDrop);
+        this.attach(canDrop);
     }
 
     public detach(): void {
-        this.options.element.removeEventListener('dragleave', this.onDragLeave.bind(this));
-        this.options.element.removeEventListener('dragenter', this.onDragEnter.bind(this));
-        this.options.element.removeEventListener('dragover', this.onDragOver.bind(this));
-        this.options.element.removeEventListener('drop', this.onDrop.bind(this));
-        (this.options.element as MDroppableElement).cleanUpDroppable = undefined;
-        this.options.element.removeEventListener('touchmove', () => {});
+        this.element.removeEventListener('dragleave', this.onDragLeave.bind(this));
+        this.element.removeEventListener('dragenter', this.onDragEnter.bind(this));
+        this.element.removeEventListener('dragover', this.onDragOver.bind(this));
+        this.element.removeEventListener('drop', this.onDrop.bind(this));
+        this.element.removeEventListener('touchmove', () => {});
+        this.element.__mdroppable__ = undefined;
     }
 
-    private init(canDrop: boolean): void {
-        const element = (this.options.element as MDroppableElement);
-        if (element.cleanUpDroppable) element.cleanUpDroppable();
+    private attach(canDrop?: boolean): void {
+        this.options.acceptedActions = canDrop ? this.options.acceptedActions || [DEFAULT_ACTION] : [];
 
-        this.options.acceptedActions = canDrop ? this.options.acceptedActions || ['any'] : [];
-
-        element.cleanUpDroppable = this.detach.bind(this);
-        element.addEventListener('dragleave', this.onDragLeave.bind(this));
-        element.addEventListener('dragenter', this.onDragEnter.bind(this));
-        element.addEventListener('dragover', this.onDragOver.bind(this));
+        this.element.addEventListener('dragleave', this.onDragLeave.bind(this));
+        this.element.addEventListener('dragenter', this.onDragEnter.bind(this));
+        this.element.addEventListener('dragover', this.onDragOver.bind(this));
 
         if (canDrop) {
-            element.addEventListener('drop', this.onDrop.bind(this));
+            this.element.addEventListener('drop', this.onDrop.bind(this));
         }
-        this.options.element.addEventListener('touchmove', () => {});
+        this.element.addEventListener('touchmove', () => {});
     }
 
-    private onDragLeave(event: MDragEvent): any {
+    private onDragLeave(event: DragEvent): any {
         MDroppable.currentOverElement = event.currentTarget as HTMLElement;
-        this.cleanupDroppableCssClasses(MDroppable.currentOverElement);
+        if (MDroppable.currentOverElement.__mdroppable__) MDroppable.currentOverElement.__mdroppable__.cleanupDroppableCssClasses();
         MDroppable.currentOverElement = undefined;
-        event.dataTransfer.dropEffect = 'none';
-
-        if (this.options.onDragLeave) this.options.onDragLeave(event);
+        event.dataTransfer.dropEffect = MDropEffect.MNone;
     }
 
-    private onDragEnter(event: MDragEvent): void {
+    private onDragEnter(event: DragEvent): void {
         event.preventDefault();
-        MDroppable.currentOverElement = this.options.element;
+        MDroppable.currentOverElement = this.element;
         MDroppable.currentOverElement.classList.add(MDroppableClassNames.MOvering);
     }
 
-    private onDragOver(event: MDragEvent): any {
+    private onDragOver(event: DragEvent): any {
         event.stopPropagation();
 
-        if (MDroppable.currentOverElement) {
-            this.cleanupDroppableCssClasses(MDroppable.currentOverElement);
+        if (MDroppable.currentOverElement && MDroppable.currentOverElement.__mdroppable__) {
+            MDroppable.currentOverElement.__mdroppable__.cleanupDroppableCssClasses();
         }
 
         const acceptAny = this.options.acceptedActions.find(action => action === 'any');
-        const isAllowedAction = this.options.acceptedActions.find(action => action === MDraggable.currentlyDraggedElement.action);
+        const draggableAction: string | undefined = MDraggable.currentlyDraggedElement.__mdraggable__
+            ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action
+            : undefined;
+        const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction);
         if (MDroppable.currentOverElement === MDraggable.currentlyDraggedElement || (!acceptAny && !isAllowedAction)) {
-            event.dataTransfer.dropEffect = 'none';
+            event.dataTransfer.dropEffect = MDropEffect.MNone;
             if (MDroppable.currentOverElement) MDroppable.currentOverElement.classList.add(MDroppableClassNames.MCantDrop);
         } else {
             event.preventDefault();
-            event.dataTransfer.dropEffect = 'move';
+            event.dataTransfer.dropEffect = MDropEffect.MMove;
             if (MDroppable.currentOverElement) MDroppable.currentOverElement.classList.add(MDroppableClassNames.MCanDrop);
         }
-
-        if (this.options.onDragOver) this.options.onDragOver(event);
     }
 
-    private onDrop(event: MDragEvent): any {
-        console.log('onDrop');
+    private onDrop(event: DragEvent): any {
         event.stopPropagation();
         event.preventDefault();
 
-        if (MDroppable.currentOverElement) this.cleanupDroppableCssClasses(MDroppable.currentOverElement);
-        if (this.options.onDrop) this.options.onDrop(event);
+        if (MDroppable.currentOverElement && MDroppable.currentOverElement.__mdroppable__) {
+            MDroppable.currentOverElement.__mdroppable__.cleanupDroppableCssClasses();
+        }
+
+        this.dispatchEvent(event, 'droppable:drop');
     }
 
-    private cleanupDroppableCssClasses(element: HTMLElement): void {
-        if (!MDroppable.currentOverElement) return;
-        MDroppable.currentOverElement.classList.remove(MDroppableClassNames.MOvering);
-        MDroppable.currentOverElement.classList.remove(MDroppableClassNames.MCanDrop);
-        MDroppable.currentOverElement.classList.remove(MDroppableClassNames.MCantDrop);
+    private cleanupDroppableCssClasses(): void {
+        this.element.classList.remove(MDroppableClassNames.MOvering);
+        this.element.classList.remove(MDroppableClassNames.MCanDrop);
+        this.element.classList.remove(MDroppableClassNames.MCantDrop);
+    }
+
+    private dispatchEvent(event: DragEvent, name: string): void {
+        const customEvent: CustomEvent = document.createEvent('CustomEvent');
+
+        const dragInfo: MDragInfo<any> = {
+            action: MDraggable.currentlyDraggedElement.__mdraggable__ ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action : DEFAULT_ACTION,
+            grouping: this.options.grouping,
+            data: JSON.parse(event.dataTransfer.getData('text'))
+        };
+
+        const test = Object.assign(event, { dragInfo });
+        customEvent.initCustomEvent(name, true, true, event);
+        this.element.dispatchEvent(Object.assign(customEvent, { dragInfo: dragInfo }));
     }
 }
 
+interface DraggableBinding extends VNodeDirective {
+    dropListener: (event: DragEvent) => void;
+}
+
+const emit = (vnode, name, data) => {
+    const handlers = (vnode.data && vnode.data.on) ||
+        (vnode.componentOptions && vnode.componentOptions.listeners);
+
+    if (handlers && handlers[name]) {
+        handlers[name].fns(data);
+    }
+};
+
 const Directive: DirectiveOptions = {
-    bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        new MDroppable().attach(binding.value, {
+    bind(element: MDroppableElement, binding: DraggableBinding, node: VNode): void {
+        element.__mdroppable__ = new MDroppable(element, {
             acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
-            element: element
-        });
-    },
-    componentUpdated(element: MDroppableElement, binding: VNodeDirective, node: VNode): void {
-        new MDroppable().attach(binding.value, {
-            acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
-            element: element
-        });
+            grouping: getVNodeAttributeValue(node, 'grouping')
+        }, binding.value);
     },
     unbind(element: MDroppableElement, binding: VNodeDirective): void {
-        if (element.cleanUpDroppable) element.cleanUpDroppable();
+        if (element.__mdroppable__) element.__mdroppable__.detach();
     }
 };
 

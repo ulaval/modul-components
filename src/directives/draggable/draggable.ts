@@ -2,11 +2,8 @@ import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DRAGGABLE } from '../directive-names';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
 
-export interface MDragEvent extends DragEvent {}
-
 export interface MDraggableElement extends HTMLElement {
-    action: string;
-    cleanUpDraggable?(): void;
+    __mdraggable__?: MDraggable;
 }
 
 export enum MDraggableClassNames {
@@ -16,89 +13,69 @@ export enum MDraggableClassNames {
 export interface MDraggableOptions {
     action: string;
     dragData: any;
-    element: HTMLElement;
-    onDragEnd?: (event: MDragEvent) => any;
-    onDragStart?: (event: MDragEvent) => any;
 }
 
 export class MDraggable {
     public static currentlyDraggedElement: MDraggableElement;
-    private options: MDraggableOptions;
+    public options: MDraggableOptions;
+    private element: MDraggableElement;
 
-    public attach(options: MDraggableOptions): void {
+    constructor(element: HTMLElement, options: MDraggableOptions) {
+        this.element = element;
         this.options = options;
-        this.init();
+        this.attach();
     }
 
     public detach(): void {
-        this.options.element.draggable = false;
-        this.options.element.removeEventListener('dragend', this.onDragEnd.bind(this));
-        this.options.element.removeEventListener('dragstart', this.onDragStart.bind(this));
-        (this.options.element as MDraggableElement).cleanUpDraggable = undefined;
-        this.options.element.removeEventListener('touchmove', () => {});
+        this.element.draggable = false;
+        this.element.removeEventListener('dragend', this.onDragEnd.bind(this));
+        this.element.removeEventListener('dragstart', this.onDragStart.bind(this));
+        this.element.removeEventListener('touchmove', () => {});
+        this.element.__mdraggable__ = undefined;
     }
 
-    private init(): void {
-        const element = (this.options.element as MDraggableElement);
-        if (element.cleanUpDraggable) element.cleanUpDraggable();
-
+    private attach(): void {
         this.options.action = this.options.action ? this.options.action : 'any';
 
-        element.draggable = true;
-        element.cleanUpDraggable = this.detach.bind(this);
-        element.action = this.options.action;
-
-        element.addEventListener('dragend', this.onDragEnd.bind(this));
-        element.addEventListener('dragstart', this.onDragStart.bind(this), false);
-        element.addEventListener('touchmove', () => {});
+        this.element.draggable = true;
+        this.element.addEventListener('dragend', this.onDragEnd.bind(this));
+        this.element.addEventListener('dragstart', this.onDragStart.bind(this), false);
+        this.element.addEventListener('touchmove', () => {});
     }
 
-    private onDragEnter(event: MDragEvent): void {
+    private onDragEnter(event: DragEvent): void {
         event.preventDefault();
     }
 
-    private onDragEnd(event: MDragEvent): void {
+    private onDragEnd(event: DragEvent): void {
         MDraggable.currentlyDraggedElement.classList.remove(MDraggableClassNames.MDragging);
-
-        if (this.options.onDragEnd) this.options.onDragEnd(event);
     }
 
-    private onDragStart(event: MDragEvent): void {
+    private onDragStart(event: DragEvent): void {
         event.stopPropagation();
 
         MDraggable.currentlyDraggedElement = event.currentTarget as MDraggableElement;
         MDraggable.currentlyDraggedElement.classList.add(MDraggableClassNames.MDragging);
 
-        if (typeof this.options.dragData.value === 'object') {
+        if (typeof this.options.dragData === 'object') {
             event.dataTransfer.setData('text', JSON.stringify(this.options.dragData));
         } else {
             event.dataTransfer.setData('text', this.options.dragData);
         }
-
-        if (this.options.onDragStart) this.options.onDragStart(event);
     }
 }
 
 const Directive: DirectiveOptions = {
-    bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        new MDraggable().attach({
+    bind(element: MDraggableElement, binding: VNodeDirective, node: VNode): void {
+        element.__mdraggable__ = new MDraggable(element, {
             action: getVNodeAttributeValue(node, 'action'),
-            element: element,
-            dragData: {}
+            dragData: getVNodeAttributeValue(node, 'drag-data')
         });
 
         console.log('Droppable binding done.');
     },
-    componentUpdated(element: MDraggableElement, binding: VNodeDirective, node: VNode): void {
-        new MDraggable().attach({
-            action: getVNodeAttributeValue(node, 'action'),
-            element: element,
-            dragData: {}
-        });
-        console.log('Droppable componentUpdated done.');
-    },
     unbind(element: MDraggableElement, binding: VNodeDirective): void {
-        if (element.cleanUpDraggable) element.cleanUpDraggable();
+        if (element.__mdraggable__) element.__mdraggable__.detach();
         console.log('Droppable unbind done.');
     }
 };
