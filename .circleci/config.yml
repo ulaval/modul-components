@@ -25,7 +25,7 @@ jobs:
           name: tslint
           command: mkdir reports reports/junit; npm run tslint-ci
 
-      -run:
+      - run:
           name: build
           command: npm run buildWebpack
 
