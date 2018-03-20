@@ -34,8 +34,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/textfield/textfield.lang.fr.json'),
                 require('../components/timepicker/timepicker.lang.fr.json'),
                 require('../components/tooltip/tooltip.lang.fr.json'),
-                require('../components/validation-message/validation-message.lang.fr.json'),
-                require('../components/upload/upload.lang.fr.json')
+                require('../components/validation-message/validation-message.lang.fr.json')
             ];
 
             msgs.forEach(msgs => i18n.addMessages(FRENCH, msgs));
