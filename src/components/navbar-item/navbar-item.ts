@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
-import { Prop, Watch, Model } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
 import { NAVBAR_ITEM_NAME } from '../component-names';
 
