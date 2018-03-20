@@ -1,29 +1,25 @@
 import { PluginObject } from 'vue';
-import axios, { AxiosRequestConfig, AxiosPromise, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise, AxiosResponse } from 'axios';
 import qs from 'qs/lib';
 import { RestAdapter, RequestConfig } from './rest';
 
 export class HttpService implements RestAdapter {
+    public instance: AxiosInstance;
+
     constructor() {
-        // default options needed? should be initialized by the plugin
-        // this.axiosInstance = axios.create({
-        //     baseURL: 'https://some-domain.com/api/',
-        //     timeout: 1000,
-        //     headers: { 'X-Custom-Header': 'foobar' }
-        // });
+        this.instance = axios.create({
+            timeout: 30000 // TODO configure from plugin options
+        });
     }
 
-    public execute<T>(
-        config: RequestConfig,
-        axiosOptions?: AxiosRequestConfig
-    ): Promise<AxiosResponse<T>> {
+    public execute<T>(config: RequestConfig, axiosOptions?: AxiosRequestConfig): AxiosPromise<T> {
         let mergedConfig: AxiosRequestConfig = this.buildConfig(config);
         mergedConfig = {
             ...mergedConfig,
             ...axiosOptions
         };
 
-        return axios.request<T>(mergedConfig);
+        return this.instance.request<T>(mergedConfig);
     }
 
     private buildConfig(config: RequestConfig): AxiosRequestConfig {
