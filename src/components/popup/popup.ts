@@ -81,8 +81,8 @@ export class MPopup extends ModulVue {
         return this.openTrigger; // todo: mobile + hover ??
     }
 
-    public get propTrigger(): any {
-        return this.trigger ? this.trigger : this.as<OpenTriggerMixin>().triggerHook ? this.as<OpenTriggerMixin>().triggerHook : undefined;
+    public get propTrigger(): HTMLElement {
+        return this.trigger || this.as<OpenTriggerMixin>().triggerHook || undefined;
     }
 
     private onOpen(): void {
