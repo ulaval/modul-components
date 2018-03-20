@@ -15,6 +15,7 @@ import ButtonPlugin from '../button/button';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import PopupPlugin from '../popup/popup';
+import uuid from '../../utils/uuid/uuid';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -69,6 +70,7 @@ export class MDatepicker extends ModulVue {
 
     private mouseIsDown: boolean = false;
     private internalCalandarErrorMessage: string = '';
+    private id: string = `mDatepicker-${uuid.generate()}`;
 
     protected created(): void {
         moment.locale([curLang, 'en-ca']);

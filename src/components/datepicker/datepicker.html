@@ -16,6 +16,9 @@
                    v-m-popup:popup>
         <input type="text"
                ref="input"
+               :id="id"
+               :aria-controls="id+'-controls-1 ' + id+'-controls-2'"
+               :aria-expanded="open"
                :disabled="!active"
                :placeholder="placeholder"
                @keydown.enter="inputOnKeydownEnter"
@@ -49,7 +52,7 @@
              :focus-management="isMqMaxS"
              :padding="false"
              placement="bottom">
-        <div slot="header" class="m-datepicker__header">
+        <div :id="id+'-controls-1'" class="m-datepicker__header" :aria-labelledby="id" slot="header">
             <nav class="m-datepicker__header__nav">
                 <m-icon-button icon-name="left-chevron" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>
                 <button type="button" class="m-datepicker__years" @click="showYears">{{selectedYear}}</button>
@@ -61,7 +64,7 @@
                 <m-icon-button icon-name="chevron" @click="selectMonth(selectedMonth + 1)" :disabled="isMaxMonth">next month</m-icon-button>
             </nav>
         </div>
-        <div class="m-datepicker__body" ref="body">
+        <div :id="id+'-controls-2'" class="m-datepicker__body" :aria-labelledby="id" ref="body">
             <table class="m-datepicker__body-table">
                 <template v-if="view == 'year'">
                     <tr v-for="yearRow in years">
