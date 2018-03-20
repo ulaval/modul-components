@@ -19,9 +19,9 @@ export enum MDropEffect {
     MNone = 'none'
 }
 
-export interface MDropEvent<T> extends DragEvent {
+export interface MDropEvent extends DragEvent {
     position: { element: HTMLElement, orientation: MDroppableOrientation };
-    dragInfo: MDragInfo<T>;
+    dragInfo: MDragInfo;
 }
 
 export interface MDroppableElement extends HTMLElement {
@@ -33,10 +33,10 @@ export interface MDroppableOptions {
     grouping?: string;
 }
 
-export interface MDragInfo<T> {
+export interface MDragInfo {
     action: string;
     grouping?: string;
-    data: T;
+    data: any;
 }
 
 const DEFAULT_ACTION = 'any';
@@ -128,15 +128,12 @@ export class MDroppable {
     private dispatchEvent(event: DragEvent, name: string): void {
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
 
-        const dragInfo: MDragInfo<any> = {
+        customEvent.initCustomEvent(name, true, true, event);
+        this.element.dispatchEvent(Object.assign(customEvent, { dragInfo: {
             action: MDraggable.currentlyDraggedElement.__mdraggable__ ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action : DEFAULT_ACTION,
             grouping: this.options.grouping,
             data: JSON.parse(event.dataTransfer.getData('text'))
-        };
-
-        const test = Object.assign(event, { dragInfo });
-        customEvent.initCustomEvent(name, true, true, event);
-        this.element.dispatchEvent(Object.assign(customEvent, { dragInfo: dragInfo }));
+        }}));
     }
 }
 
