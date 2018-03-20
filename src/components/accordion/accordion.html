@@ -5,7 +5,7 @@
          :id="propId"
          role="tab"
          :aria-expanded="propOpen"
-         :aria-controls="'controls-' +propId"
+         :aria-controls="propId + '-controls'"
          @keyup.enter="toggleAccordion"
          @click.prevent="toggleAccordion"
          ref="accordionHeader">
@@ -22,7 +22,7 @@
     <m-accordion-transition :height-delta="skin == 'default' ? 24 : 0">
         <div class="m-accordion__body-wrap"
              role="tabpanel"
-             :id="'controls-' +propId"
+             :id="propId + '-controls'"
              :aria-labelledby="propId"
              v-if="propOpen">
             <div class="m-accordion__body" :class="{ 'm--has-padding': paddingBody && padding }">
