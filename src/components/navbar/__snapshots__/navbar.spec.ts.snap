@@ -2,11 +2,11 @@
 
 exports[`MNavbar should render correctly 1`] = `
 <div class="m-navbar m--is-skin-tab m--is-skin-light-tab">
-    <nav class="m-navbar__wrap">
+    <nav role="menubar" class="m-navbar__wrap">
         <ul aria-hidden="true" class="m-navbar__list">
-            <li class="m-navbar-item"></li>
-            <li class="m-navbar-item"></li>
-            <li class="m-navbar-item"></li>
+            <li role="menuitem" class="m-navbar-item"></li>
+            <li role="menuitem" class="m-navbar-item"></li>
+            <li role="menuitem" class="m-navbar-item"></li>
         </ul>
     </nav>
 </div>
