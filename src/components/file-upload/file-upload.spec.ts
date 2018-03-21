@@ -95,7 +95,7 @@ describe('MFileUpload', () => {
                 stubMDialogRefs(fupd.vm);
             });
 
-            it('should render rejected files in m-message', async () => {
+            it('should render rejected files in modal', async () => {
                 fupd.vm.$file.add(
                     createMockFileList([
                         createMockFile('invalid-extensions'),
@@ -119,7 +119,7 @@ describe('MFileUpload', () => {
                 );
                 await Vue.nextTick();
 
-                fupd.find('.m-message .m-icon-button').trigger('click');
+                fupd.find('.m-message button').trigger('click');
 
                 expect(fupd.vm.$file.files().length).toEqual(0);
             });
@@ -210,7 +210,7 @@ describe('MFileUpload', () => {
             uploadingFile.status = MFileStatus.UPLOADING;
 
             fupd
-                .find('.m-file-upload__footer .m-file-upload__footer__cancel')
+                .find('.m-file-upload__footer button:nth-child(2)')
                 .trigger('click');
 
             const evt = fupd.emitted('file-upload-cancel');
@@ -244,7 +244,7 @@ describe('MFileUpload', () => {
             Vue.use(IconButtonPlugin);
             const fupd = mount(MFileUpload);
 
-            fupd.find('.m-file-upload__import-list__button').trigger('click');
+            fupd.find('button').trigger('click');
 
             expect(fupd.emitted('file-upload-cancel')[0][0]).toBe(
                 fupd.vm.$file.files()[0]
@@ -281,7 +281,7 @@ describe('MFileUpload', () => {
             const fupd = mount(MFileUpload);
             const deletingFile = fupd.vm.$file.files()[0];
 
-            fupd.find('.m-file-upload__completed-list__button').trigger('click');
+            fupd.find('button').trigger('click');
 
             expect(fupd.emitted('file-remove')[0][0]).toBe(deletingFile);
         });
