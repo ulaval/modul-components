@@ -44,4 +44,8 @@ describe('MNavbar', () => {
         expect(selectedItem.at(1).vm.isSelected).toEqual(true);
         expect(selectedItem.at(2).vm.isSelected).toEqual(false);
     });
+
+    it('dummy test', () => {
+        expect(true).toBeTruthy();
+    });
 });
