@@ -4,7 +4,6 @@
     position: relative;
     display: inline-flex;
     flex-direction: column;
-    max-width: $m-max-width--text;
 
     &.m--has-error {
         .m-textarea {

@@ -16,15 +16,12 @@
                    :focus="isFocus"
                    :empty="isEmpty"
                    :icon-name="iconName"
-                   :required-marker="requiredMarker">
+                   :required-marker="requiredMarker"
                    :input-type="inputType"
                    :tag-style="tagStyle">
         <textarea v-m-textarea-auto-height
                   ref="input"
                   class="m-textarea__input"
-                  :class="{ 'm--is-diabled' : disabled,
-                            'm--is-readonly': readonly,
-                            'm--is-focus': isFocus }"
                   :disabled="!active"
                   :placeholder="placeholder"
                   :readonly="readonly"

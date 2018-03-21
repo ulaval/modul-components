@@ -17,11 +17,9 @@
 
     &__buttons {
         margin-top: $m-margin--l;
-    }
 
-    .m-textfield,
-    .m-textarea {
-        width: 100%;
-        max-width: none !important;
+        > :first-child {
+            margin-right: $m-margin--s;
+        }
     }
 }

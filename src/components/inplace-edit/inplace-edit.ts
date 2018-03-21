@@ -46,6 +46,10 @@ export class MInplaceEdit extends ModulVue {
         }
         return this.title;
     }
+
+    private onClick(event: MouseEvent): void {
+        this.$emit('click', event);
+    }
 }
 
 const InplaceEditPlugin: PluginObject<any> = {
