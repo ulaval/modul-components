@@ -31,7 +31,7 @@ jobs:
 
       - run:
           name: npm test
-          command: npm run unitall
+          command: npm run unitall -- -w 1
 
       - store_test_results:
           path: reports/junit
