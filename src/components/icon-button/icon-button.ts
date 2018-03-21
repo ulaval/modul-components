@@ -44,16 +44,22 @@ export class MIconButton extends Vue {
     }
 
     private onClick(event: Event): void {
-        this.$emit('click', event);
-        this.$el.blur();
+        if (!this.disabled) {
+            this.$emit('click', event);
+            this.$el.blur();
+        }
     }
 
     private onFocus(event: Event): void {
-        this.$emit('focus');
+        if (!this.disabled) {
+            this.$emit('focus');
+        }
     }
 
     private onBlur(event: Event): void {
-        this.$emit('blur');
+        if (!this.disabled) {
+            this.$emit('blur');
+        }
     }
 
     private get isSkinLight(): boolean {
