@@ -31,10 +31,16 @@ export class MPopup extends ModulVue {
     public id: string;
     @Prop()
     public disabled: boolean;
-    @Prop({ default: true })
+    @Prop()
     public shadow: boolean;
     @Prop({ default: true })
     public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
+    @Prop({ default: true })
+    public paddingFooter: boolean;
     @Prop({ default: true })
     public background: boolean;
     @Prop()
@@ -57,6 +63,10 @@ export class MPopup extends ModulVue {
     public desktopOnly: boolean;
     @Prop()
     public className: string;
+    @Prop()
+    public preload: boolean;
+    @Prop()
+    public trigger: HTMLElement;
 
     private internalOpen: boolean = false;
 
@@ -77,8 +87,8 @@ export class MPopup extends ModulVue {
         return this.openTrigger; // todo: mobile + hover ??
     }
 
-    public get trigger(): any {
-        return !this.as<OpenTriggerMixin>().triggerHook ? undefined : this.as<OpenTriggerMixin>().triggerHook;
+    public get propTrigger(): HTMLElement {
+        return this.trigger || this.as<OpenTriggerMixin>().triggerHook || undefined;
     }
 
     private onOpen(): void {

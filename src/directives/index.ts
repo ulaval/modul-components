@@ -1,9 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 
+import FileDropPlugin from './file-drop/file-drop';
 import PopupPlugin from './popup/popup';
 import RippleEffectPlugin from './ripple-effect/ripple-effect';
 import ScrollToPlugin from './scroll-to/scroll-to';
-import FileDropPlugin from './file-drop/file-drop';
+import TextAreaAutoHeightPlugin from './textarea-auto-height/textarea-auto-height';
 
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -11,6 +12,7 @@ const DirectivesPlugin: PluginObject<any> = {
         Vue.use(RippleEffectPlugin);
         Vue.use(ScrollToPlugin);
         Vue.use(FileDropPlugin);
+        Vue.use(TextAreaAutoHeightPlugin);
     }
 };
 

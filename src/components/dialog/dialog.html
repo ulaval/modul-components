@@ -2,7 +2,7 @@
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
         <transition name="m--is">
-            <div v-show="propOpen"
+            <div v-show="propOpen" v-if="propOpen || preload || loaded"
                  class="m-dialog__wrap m--is-dialog"
                  :class="[{ 'm--is-small': sizeSmall,
                             'm--is-large': sizeLarge,

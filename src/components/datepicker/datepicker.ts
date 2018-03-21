@@ -5,7 +5,7 @@ import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './datepicker.html?style=./datepicker.scss';
 import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
-import i18nPlugin, { curLang } from '../../utils/i18n/i18n';
+import i18nPlugin from '../../utils/i18n/i18n';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -71,7 +71,7 @@ export class MDatepicker extends ModulVue {
     private internalCalandarErrorMessage: string = '';
 
     protected created(): void {
-        moment.locale([curLang, 'en-ca']);
+        moment.locale([this.$i18n.currentLang(), 'en-ca']);
         this.selectedMomentDate = this.valueIsValid() ? moment(this.value) : moment();
     }
 
