@@ -16,7 +16,7 @@
         "unit": "jest --verbose --silent",
         "unitwatch": "jest --watch --verbose --silent",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
-        "unitall": "jest --ci --coverage --testResultsProcessor=./tests/jest/ci-test-processor",
+        "unitall": "jest --ci --coverage --testResultsProcessor=./tests/jest/ci-test-processor --silent",
         "e2e": "node tests/e2e/index.js",
         "test": "npm run unitall && npm run e2e",
         "tslint": "tslint -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
