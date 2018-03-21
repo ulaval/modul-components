@@ -20,7 +20,6 @@ export enum MDropEffect {
 }
 
 export interface MDropEvent extends DragEvent {
-    position: { element: HTMLElement, orientation: MDroppableOrientation };
     dragInfo: MDragInfo;
 }
 
@@ -37,6 +36,7 @@ export interface MDragInfo {
     action: string;
     grouping?: string;
     data: any;
+    position: { element: HTMLElement, orientation: MDroppableOrientation };
 }
 
 const DEFAULT_ACTION = 'any';
@@ -93,18 +93,13 @@ export class MDroppable {
             MDroppable.currentOverElement.__mdroppable__.cleanupDroppableCssClasses();
         }
 
-        const acceptAny = this.options.acceptedActions.find(action => action === 'any');
-        const draggableAction: string | undefined = MDraggable.currentlyDraggedElement.__mdraggable__
-            ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action
-            : undefined;
-        const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction);
-        if (MDroppable.currentOverElement === MDraggable.currentlyDraggedElement || (!acceptAny && !isAllowedAction)) {
-            event.dataTransfer.dropEffect = MDropEffect.MNone;
-            if (MDroppable.currentOverElement) MDroppable.currentOverElement.classList.add(MDroppableClassNames.MCantDrop);
-        } else {
+        if (this.canDrop()) {
             event.preventDefault();
             event.dataTransfer.dropEffect = MDropEffect.MMove;
             if (MDroppable.currentOverElement) MDroppable.currentOverElement.classList.add(MDroppableClassNames.MCanDrop);
+        } else {
+            event.dataTransfer.dropEffect = MDropEffect.MNone;
+            if (MDroppable.currentOverElement) MDroppable.currentOverElement.classList.add(MDroppableClassNames.MCantDrop);
         }
     }
 
@@ -125,6 +120,16 @@ export class MDroppable {
         this.element.classList.remove(MDroppableClassNames.MCantDrop);
     }
 
+    private canDrop(): boolean {
+        const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
+        const draggableAction: string | undefined = MDraggable.currentlyDraggedElement.__mdraggable__
+            ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action
+            : undefined;
+        const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
+
+        return MDroppable.currentOverElement !== MDraggable.currentlyDraggedElement && (acceptAny || isAllowedAction);
+    }
+
     private dispatchEvent(event: DragEvent, name: string): void {
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
 
@@ -137,21 +142,8 @@ export class MDroppable {
     }
 }
 
-interface DraggableBinding extends VNodeDirective {
-    dropListener: (event: DragEvent) => void;
-}
-
-const emit = (vnode, name, data) => {
-    const handlers = (vnode.data && vnode.data.on) ||
-        (vnode.componentOptions && vnode.componentOptions.listeners);
-
-    if (handlers && handlers[name]) {
-        handlers[name].fns(data);
-    }
-};
-
 const Directive: DirectiveOptions = {
-    bind(element: MDroppableElement, binding: DraggableBinding, node: VNode): void {
+    bind(element: MDroppableElement, binding: VNodeDirective, node: VNode): void {
         element.__mdroppable__ = new MDroppable(element, {
             acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
             grouping: getVNodeAttributeValue(node, 'grouping')

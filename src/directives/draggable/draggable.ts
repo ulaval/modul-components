@@ -15,6 +15,7 @@ export interface MDraggableOptions {
     dragData: any;
 }
 
+const DEFAULT_ACTION = 'any';
 export class MDraggable {
     public static currentlyDraggedElement: MDraggableElement;
     public options: MDraggableOptions;
@@ -35,7 +36,7 @@ export class MDraggable {
     }
 
     private attach(): void {
-        this.options.action = this.options.action ? this.options.action : 'any';
+        this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
 
         this.element.draggable = true;
         this.element.addEventListener('dragend', this.onDragEnd.bind(this));
@@ -56,7 +57,6 @@ export class MDraggable {
 
         MDraggable.currentlyDraggedElement = event.currentTarget as MDraggableElement;
         MDraggable.currentlyDraggedElement.classList.add(MDraggableClassNames.MDragging);
-
         if (typeof this.options.dragData === 'object') {
             event.dataTransfer.setData('text', JSON.stringify(this.options.dragData));
         } else {
