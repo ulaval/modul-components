@@ -20,8 +20,10 @@ export class MNavbarItem extends ModulVue {
     public value: string;
     @Prop()
     public disabled: boolean;
-    private hasParent: boolean = false;
-    private parentNavbar: Navbar;
+
+    // should be initialized to be reactive
+    // tslint:disable-next-line:no-null-keyword
+    private parentNavbar: Navbar | null = null;
 
     protected mounted(): void {
 
@@ -33,14 +35,12 @@ export class MNavbarItem extends ModulVue {
 
         if (parentNavbar) {
             this.parentNavbar = (parentNavbar as any) as Navbar;
-            this.hasParent = true;
 
             if (!this.$el.querySelector('a, button')) {
                 this.$el.setAttribute('tabindex', '0');
             }
 
         } else {
-            this.hasParent = false;
             console.error('m-navbar-item need to be inside m-navbar');
         }
 
@@ -51,11 +51,11 @@ export class MNavbarItem extends ModulVue {
     }
 
     public get isSelected(): boolean {
-        return this.hasParent && !this.disabled && this.value === this.parentNavbar.model;
+        return !!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model;
     }
 
     private onClick(event): void {
-        if (!this.disabled && this.hasParent) {
+        if (!this.disabled && this.parentNavbar) {
             this.parentNavbar.updateValue(this.value);
         }
     }
