@@ -99,7 +99,7 @@ describe('MListItem', () => {
             }
         });
 
-        li.find('button').trigger('click');
+        li.find('.m-list-item__icon .m-icon-button').trigger('click');
 
         expect(li.emitted('click')).toBeTruthy();
     });

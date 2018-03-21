@@ -4,7 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './phone-number.html?style=./phone-number.scss';
 import { PHONE_NUMBER_NAME } from '../component-names';
-import i18nPlugin, { curLang } from '../../utils/i18n/i18n';
+import i18nPlugin from '../../utils/i18n/i18n';
 
 @WithRender
 @Component

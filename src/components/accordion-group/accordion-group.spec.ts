@@ -2,11 +2,15 @@ import '../../utils/polyfills';
 
 import { mount, Slots } from '@vue/test-utils';
 import Vue from 'vue';
+import uuid from '../../utils/uuid/uuid';
 
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import { MAccordion, MAccordionSkin } from '../accordion/accordion';
 import AccordionGroupPlugin, { MAccordionGroup } from './accordion-group';
+
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('MAcordionGroup', () => {
     beforeEach(() => {
@@ -82,7 +86,7 @@ describe('MAcordionGroup', () => {
         const acn = mountGroup();
         acn.update();
 
-        acn.find('header a').trigger('click');
+        acn.find('.m-accordion-group__header a').trigger('click');
 
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
@@ -94,20 +98,21 @@ describe('MAcordionGroup', () => {
     it('should close all accordions when close all is clicked', () => {
         const acn = mount(MAccordionGroup, {
             slots: {
-                default: `<m-accordion :open="true">
+                default: `<m-accordion id="a" :open="true">
                                 <span slot="header">A</span>
                             </m-accordion>
-                            <m-accordion :open="true">
+                            <m-accordion id="b" :open="true">
                                 <span slot="header">B</span>
                             </m-accordion>'`
             }
         });
         acn.update();
 
-        acn.find('header a').trigger('click');
+        acn.find('.m-accordion-group__header a').trigger('click');
 
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
+
         for (let i = 0; i < acrds.length; ++i) {
             expect(acrds.at(i).vm.propOpen).toBeFalsy();
         }
@@ -121,14 +126,14 @@ describe('MAcordionGroup', () => {
 
         acrds
             .at(0)
-            .find('header')
+            .find('.m-accordion__header')
             .trigger('click');
         expect(acrds.at(0).vm.propOpen).toBeTruthy();
         expect(acrds.at(1).vm.propOpen).toBeFalsy();
 
         acrds
             .at(1)
-            .find('header')
+            .find('.m-accordion__header')
             .trigger('click');
         expect(acrds.at(0).vm.propOpen).toBeFalsy();
         expect(acrds.at(1).vm.propOpen).toBeTruthy();
@@ -192,7 +197,7 @@ describe('MAcordionGroup', () => {
         const acrds = acn.findAll<MAccordion>({ name: 'MAccordion' });
         acrds
             .at(0)
-            .find('header')
+            .find('.m-accordion__header')
             .trigger('click');
 
         expect(acn.emitted('update:openedIds')[0][0]).toEqual(['a']);

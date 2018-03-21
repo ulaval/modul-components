@@ -1,12 +1,12 @@
 import Vue from 'vue';
 
-export const resetModulPlugins = () => {
+export const resetModulPlugins = (keepI18n: boolean = true) => {
     let vueCstr = Vue as any;
 
     cleanComponentsOptions(vueCstr.options.components);
 
     const modulServices = Object.keys(vueCstr.prototype).filter(
-        c => c != '$i18n' && typeof vueCstr.prototype[c] === 'object'
+        c => (!keepI18n || c != '$i18n') && typeof vueCstr.prototype[c] === 'object'
     );
     modulServices.forEach(m => delete vueCstr.prototype[m]);
     vueCstr._installedPlugins = [];

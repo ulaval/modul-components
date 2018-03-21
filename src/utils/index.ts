@@ -18,19 +18,14 @@ export interface UtilsPluginOptions {
 
 const UtilsPlugin: PluginObject<any> = {
     install(v, options): void {
-        if (!options) {
-            throw new Error(
-                'UtilsPlugin.install -> you must provide a UtilsPluginOptions option object.'
-            );
-        }
-        let o: UtilsPluginOptions = options as UtilsPluginOptions;
-
         Vue.use(MediaQueriesPlugin);
         Vue.use(ModulPlugin);
         Vue.use(MessagesPlugin);
         Vue.use(HttpPlugin);
         Vue.use({ install: PortalPluginInstall });
-        Vue.use(SecurityPlugin, o.securityPluginOptions);
+        if (options) {
+            Vue.use(SecurityPlugin, (options as UtilsPluginOptions).securityPluginOptions);
+        }
         Vue.use(SpritesPlugin);
         Vue.use(TouchPlugin, { name: 'v-touch' });
         Vue.use(ConfirmPlugin);

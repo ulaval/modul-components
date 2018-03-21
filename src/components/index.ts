@@ -56,10 +56,6 @@ import TextareaResizePlugin from './textarea-resize/textarea-resize';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
-import UploadPlugin from './upload/upload';
-import UploadInputPlugin from './upload-input/upload-input';
-import UploadDragdropPlugin from './upload-dragdrop/upload-dragdrop';
-import UploadFileslistPlugin from './upload-fileslist/upload-fileslist';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 const ComponentsPlugin: PluginObject<any> = {
@@ -120,10 +116,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
         Vue.use(TooltipPlugin);
-        Vue.use(UploadPlugin);
-        Vue.use(UploadInputPlugin);
-        Vue.use(UploadDragdropPlugin);
-        Vue.use(UploadFileslistPlugin);
         Vue.use(ValidationMessagePlugin);
     }
 };

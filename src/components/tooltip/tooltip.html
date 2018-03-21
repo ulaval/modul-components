@@ -11,6 +11,7 @@
          @close="onClose">
     <m-icon-button :id="id"
                    class="m-tooltip__icon"
+                   @click="onClick"
                    aria-haspopup="true"
                    :aria-controls="id+'-controls'"
                    :aria-expanded="propOpen"
@@ -18,16 +19,19 @@
                    icon-name="information"
                    :title="propTitle"
                    button-size="22px"
+                   :disabled="disabled"
                    v-if="propMode == 'icon'">
     </m-icon-button>
     <m-link :id="id"
             class="m-tooltip__link"
+            @click="onClick"
             aria-haspopup="true"
             :aria-controls="id+'-controls'"
             :aria-expanded="propOpen"
             slot="trigger"
             mode="button"
             :underline="underline"
+            :disabled="disabled"
             v-if="propMode != 'icon'">
         <slot name="link"></slot>
     </m-link>
