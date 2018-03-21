@@ -26,6 +26,10 @@ jobs:
           command: mkdir reports reports/junit; npm run tslint-ci
 
       - run:
+          name: build
+          command: npm run buildWebpack
+
+      - run:
           name: npm test
           command: npm run unitall
 
