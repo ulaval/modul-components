@@ -69,6 +69,67 @@ describe('MMenu', () => {
         return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
     });
 
+    it('should render correctly when skin is light', () => {
+        const menu = mountGroup({
+            skin: MOptionsMenuSkin.Light
+        });
+
+        menu.update();
+
+        return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when open title is set', () => {
+        const menu = mountGroup({
+            openTitle: 'Title open'
+        });
+
+        menu.update();
+
+        return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when close title is set', () => {
+        const menu = mountGroup({
+            closeTitle: 'Title close',
+            open: true
+        });
+
+        menu.update();
+
+        return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when size is set', () => {
+        const menu = mountGroup({
+            size: '200px'
+        });
+
+        menu.update();
+
+        return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should emit click event when clicked', () => {
+        const menu = mountGroup();
+
+        menu.find('.m-menu__button').trigger('click');
+        expect(menu.emitted('click')).toBeTruthy();
+
+        menu.find('.m-menu__button').trigger('click');
+        expect(menu.emitted('click')).toBeTruthy();
+    });
+
+    it('should react to open prop changes', () => {
+        const menu = mountGroup();
+
+        menu.setProps({ open: false });
+        expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+
+        menu.setProps({ open: true });
+        expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+    });
+
     const mountGroup = (propsData?: object, slots?: Slots) => {
         return mount(MMenu, {
             propsData: propsData,
