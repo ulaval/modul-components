@@ -36,7 +36,14 @@ export interface MDropInfo {
     action: string;
     grouping?: string;
     data: any;
-    position?: { element: HTMLElement, orientation: MDroppableOrientation };
+    canDrop: boolean;
+}
+
+export enum MDropEventNames {
+    OnDrop = 'droppable:drop',
+    OnDragEnter = 'droppable:dragenter',
+    OnDragLeave = 'droppable:dragleave',
+    OnDragOver = 'droppable:dragover'
 }
 
 const DEFAULT_ACTION = 'any';
@@ -76,28 +83,37 @@ export class MDroppable {
     private onDragLeave(event: DragEvent): any {
         if (this.element.__mdroppable__) this.element.__mdroppable__.cleanupDroppableCssClasses();
         event.dataTransfer.dropEffect = MDropEffect.MNone;
+
+        this.dispatchEvent(event, MDropEventNames.OnDragLeave);
     }
 
     private onDragEnter(event: DragEvent): void {
         event.preventDefault();
-        MDroppable.currentOverElement = this.element;
-        MDroppable.currentOverElement.classList.add(MDroppableClassNames.MOvering);
+        this.onDragIn(event);
+        this.dispatchEvent(event, MDropEventNames.OnDragEnter);
     }
 
     private onDragOver(event: DragEvent): any {
+        event.stopPropagation();
+        this.onDragIn(event);
+        this.dispatchEvent(event, MDropEventNames.OnDragOver);
+    }
+
+    private onDragIn(event: DragEvent): any {
         event.stopPropagation();
         if (this.element.__mdroppable__) {
             this.element.__mdroppable__.cleanupDroppableCssClasses();
         }
 
+        MDroppable.currentOverElement = this.element;
+        MDroppable.currentOverElement.classList.add(MDroppableClassNames.MOvering);
+
         if (this.canDrop()) {
             event.preventDefault();
             event.dataTransfer.dropEffect = MDropEffect.MMove;
-            this.element.classList.add(MDroppableClassNames.MOvering);
             this.element.classList.add(MDroppableClassNames.MCanDrop);
-        } else if (MDroppable.currentOverElement) {
+        } else {
             event.dataTransfer.dropEffect = MDropEffect.MNone;
-            this.element.classList.add(MDroppableClassNames.MOvering);
             this.element.classList.add(MDroppableClassNames.MCantDrop);
         }
     }
@@ -110,7 +126,8 @@ export class MDroppable {
             this.element.__mdroppable__.cleanupDroppableCssClasses();
         }
 
-        this.dispatchEvent(event, 'droppable:drop');
+        MDroppable.currentOverElement = undefined;
+        this.dispatchEvent(event, MDropEventNames.OnDrop);
     }
 
     private cleanupDroppableCssClasses(): void {
@@ -135,7 +152,8 @@ export class MDroppable {
         const dropInfo: MDropInfo = {
             action: MDraggable.currentlyDraggedElement.__mdraggable__ ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action : DEFAULT_ACTION,
             grouping: this.options.grouping,
-            data: data ? JSON.parse(event.dataTransfer.getData('text')) : undefined
+            data: data ? JSON.parse(event.dataTransfer.getData('text')) : undefined,
+            canDrop: this.canDrop()
         };
         const dropEvent: Event = Object.assign(customEvent, { dropInfo });
 
