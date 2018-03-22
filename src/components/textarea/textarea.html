@@ -1,8 +1,8 @@
 <div class="m-textarea"
      :class="{ 'm--is-disabled' : isDisabled,
                'm--is-waiting' : isWaiting,
-               'm--has-error' : textareaError,
-               'm--is-valid' : textareaValid,
+               'm--has-error' : hasTextAreaError,
+               'm--is-valid' : isTextAreaValid,
                'm--is-focus' : isFocus,
                'm--has-icon' : hasIcon,
                'm--has-label': hasLabel }"
@@ -10,40 +10,43 @@
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
-                   :error="textareaError"
-                   :valid="isValid"
+                   :error="hasTextAreaError"
+                   :valid="isTextAreaValid"
                    :label="label"
                    :focus="isFocus"
                    :empty="isEmpty"
                    :icon-name="iconName"
                    :required-marker="requiredMarker">
-        <m-textarea-resize class="m-textarea__input"
+        <textarea v-m-textarea-auto-height
+                  ref="input"
+                  class="m-textarea__input"
+                  :class="{ 'm--is-diabled' : disabled,
+                            'm--is-readonly': readonly,
+                            'm--is-focus': isFocus }"
                   :disabled="!active"
                   :placeholder="placeholder"
                   :readonly="readonly"
                   rows="1"
-                  :focus="focus"
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
                   @keyup="onKeyup"
                   @keydown="onKeydown"
                   @paste="onPaste"
-                  ref="textarea"
-                  v-model="model"></m-textarea-resize>
+                  v-model="model">
+        </textarea>
     </m-input-style>
-    </template>
     <div class="m-textarea__validation">
         <m-validation-message
             class="m-textarea__validation__message"
             :disabled="isDisabled"
             :waiting="isWaiting"
-            :error="textareaError"
+            :error="hasTextAreaError"
             :error-message="errorMessage"
             :valid-message="validMessage"
             :helper-message="helperMessage"></m-validation-message>
-        <div class="m-textarea__validation__maxlenght" v-if="hasMaxlenght">
-            {{ valueLenght }}<strong>/{{ maxlength }}</strong>
+        <div class="m-textarea__validation__maxlenght" v-if="hasMaxLength">
+            {{ valueLength }}<strong>/{{ maxLength }}</strong>
         </div>
     </div>
 </div>

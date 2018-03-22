@@ -18,7 +18,6 @@ export class OpenTrigger extends Vue implements OpenTriggerMixin {
     private internalTriggerHook: HTMLElement | null = null;
 
     public get triggerHook(): HTMLElement | undefined {
-        // tslint:disable-next-line:no-null-keyword
         return this.internalTriggerHook === null ? undefined : this.internalTriggerHook;
     }
 

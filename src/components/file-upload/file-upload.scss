@@ -254,4 +254,10 @@ $m-file-upload-max-height--s: 72px;
             height: 32px !important;
         }
     }
+
+    &__footer {
+        &__cancel {
+            margin-left: $m-margin;
+        }
+    }
 }

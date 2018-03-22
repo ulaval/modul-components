@@ -58,6 +58,7 @@
     user-select: none;
     text-decoration: none;
     line-height: 1;
+    font-family: $m-font-family;
 }
 
 @mixin m-button--primary() {

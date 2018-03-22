@@ -1,8 +1,12 @@
 @import 'abstracts/variables';
 
 .m-carousel-item {
-    position: relative;
+    position: absolute;
     z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
     &.m--is-anim-active {
         &.m--is {

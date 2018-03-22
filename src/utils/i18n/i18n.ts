@@ -31,33 +31,26 @@ type LanguageBundlesMap = {
     [language: string]: BundleMessagesMap;
 };
 
-/**
- * The default language is english.
- */
-export let curLang = ENGLISH;
-
-export function currentLang(lang?: string): string {
-    if (lang) {
-        curLang = lang;
-    }
-
-    return curLang;
-}
-
 export enum DebugMode {
     Throw,
     Warn,
     Prod
 }
 
-export interface MessagesPluginOptions {
-    debug: DebugMode;
+export interface I18nPluginOptions {
+    curLang?: string;
+    debug?: DebugMode;
 }
 
 export class Messages {
+    private curLang: string = ENGLISH;
     private messages: LanguageBundlesMap = {};
 
-    constructor(private options: MessagesPluginOptions | undefined) {}
+    constructor(private options?: I18nPluginOptions) {
+        if (options && options.curLang) {
+            this.curLang = options.curLang;
+        }
+    }
 
     /**
      * Set the application language globally
@@ -66,9 +59,9 @@ export class Messages {
      */
     public currentLang(lang?: string): string {
         if (lang) {
-            curLang = lang;
+            this.curLang = lang;
         }
-        return curLang;
+        return this.curLang;
     }
 
     /**
@@ -105,7 +98,7 @@ export class Messages {
             throw new Error('The key is empty.');
         }
 
-        let val = this.resolveKey(curLang, key, nb, modifier);
+        let val = this.resolveKey(this.curLang, key, nb, modifier);
 
         if (htmlEncodeParams && params.length) {
             for (let i = 0; i < params.length; ++i) {
@@ -179,7 +172,7 @@ export class Messages {
             return val;
         }
 
-        let error: string = `The key ${key} does not exist. Current lang: ${curLang}`;
+        let error: string = `The key ${key} does not exist. Current lang: ${this.curLang}`;
         if (this.options && this.options.debug === DebugMode.Throw) {
             throw new Error(error);
         } else {
