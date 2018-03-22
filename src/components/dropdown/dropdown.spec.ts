@@ -1,117 +1,137 @@
-import Vue from 'vue';
-import '../../utils/polyfills';
+import { mount, Slots } from '@vue/test-utils';
+import Vue, { VueConstructor } from 'vue';
+
+import { resetModulPlugins } from '../../../tests/helpers/component';
+import { addMessages } from '../../../tests/helpers/lang';
+import { renderComponent } from '../../../tests/helpers/render';
+import uuid from '../../utils/uuid/uuid';
+import { MIconButton } from '../icon-button/icon-button';
 import DropdownPlugin, { MDropdown } from './dropdown';
 
-const DISABLED_CSS: string = 'm--is-disabled';
-const WAITING_CSS: string = 'm--is-waiting';
-const SELECTED_CSS: string = 'm--is-selected';
-const INACTIF_CSS: string = 'm--is-inactif';
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
-let dropdown: MDropdown;
+describe('MDropdown', () => {
+    let localVue: VueConstructor<Vue>;
 
-describe('dropdown', () => {
     beforeEach(() => {
+        resetModulPlugins();
         Vue.use(DropdownPlugin);
-        dropdown = new MDropdown().$mount();
+        addMessages(Vue, [
+            'components/dropdown/dropdown.lang.en.json'
+        ]);
     });
 
-    it('css class for dropdown are not present', () => {
-        expect(dropdown.$el.classList.contains(DISABLED_CSS)).toBeFalsy();
-        expect(dropdown.$el.classList.contains(WAITING_CSS)).toBeFalsy();
+    it('should render correctly', () => {
+        const dropdown = mount(MDropdown, {
+            localVue: Vue
+        });
+
+        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
     });
 
-    it('enabled prop filterable', () => {
-        let vm = new Vue({
-            data: {
+    it('should render correctly when placeholder is set', () => {
+        const dropdown = mount(MDropdown, {
+            localVue: Vue,
+            propsData: {
+                placeholder: 'placeholder test'
+            }
+        });
+
+        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when is not filterable', () => {
+        const dropdown = mount(MDropdown, {
+            localVue: Vue,
+            propsData: {
                 filterable: false
-            },
-            template: `
-            <m-dropdown class="dd" :filterable="filterable">
-                <m-dropdown-item value="item A" label="*item A*"></m-dropdown-item>
-                <m-dropdown-item value="item B" label="*item B*"></m-dropdown-item>
-            </m-dropdown>`
-        }).$mount();
-
-        let input = vm.$el.querySelector('.m-textfield__input');
-
-        expect((input as HTMLElement).attributes.getNamedItem('readonly')).toBeTruthy();
-
-        (vm as any).filterable = true;
-
-        Vue.nextTick(() => {
-            expect((input as HTMLElement).attributes.getNamedItem('readonly')).toBeFalsy();
-        });
-    });
-
-    it('has input to focus', () => {
-        let input = ((dropdown.$refs.mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement);
-        expect(input).not.toBeNull();
-    });
-
-    it('v-model change', () => {
-        let vm = new Vue({
-            data: {
-                model: 'item B'
-            },
-            template: `
-            <m-dropdown>
-                <m-dropdown-item ref="a" class="a" value="item A" label="*item A*"></m-dropdown-item>
-                <m-dropdown-item ref="b" class="b" value="item B" label="*item B*"></m-dropdown-item>
-            </m-dropdown>`
-        }).$mount();
-
-        let li1 = vm.$el.querySelector('.a');
-        let li2 = vm.$el.querySelector('.b');
-
-        if (li1 && li2) {
-            expect(li1.classList.contains(SELECTED_CSS)).toBeFalsy();
-            expect(li2.classList.contains(SELECTED_CSS)).toBeTruthy();
-        }
-
-        (vm as any).model = 'Item A';
-
-        Vue.nextTick(() => {
-            if (li1 && li2) {
-                expect(li1.classList.contains(SELECTED_CSS)).toBeTruthy();
-                expect(li1.classList.contains(SELECTED_CSS)).toBeFalsy();
             }
         });
 
+        expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
     });
 
-    it('toggle dropdown / Emit Open and Close', () => {
-        let clickSpyOpen = jasmine.createSpy('clickSpyOpen');
-        let clickSpyClose = jasmine.createSpy('clickSpyClose');
-
-        let vm = new Vue({
-            template: `
-                <m-dropdown ref="dd" @open="onOpen" @close="onClose">
-                    <m-dropdown-item value="item A" label="*item A*"></m-dropdown-item>
-                    <m-dropdown-item value="item B" label="*item B*"></m-dropdown-item>
-                </m-dropdown>`,
-            methods: {
-                onOpen: clickSpyOpen,
-                onClose: clickSpyClose
+    const mountGroup = (propsData?: object, slots?: Slots) => {
+        return mount(MDropdown, {
+            propsData: propsData,
+            slots: {
+                default: `<m-dropdown>
+                            <m-dropdown-item value="a">A item</m-dropdown-item>
+                            <m-dropdown-item value="b">B item</m-dropdown-item>
+                            <m-dropdown-item value="c">C item</m-dropdown-item>
+                          </m-dropdown>`,
+                ...slots
             }
-        }).$mount();
-
-        let dd = vm.$refs.dd;
-
-        (dd as MDropdown).open = true;
-
-        Vue.nextTick(() => {
-            expect(clickSpyOpen).toHaveBeenCalled();
-
-            (dd as MDropdown).open = false;
-            Vue.nextTick(() => {
-                expect(clickSpyClose).toHaveBeenCalled();
-            });
         });
-    });
+    };
 
-    it('change event - called once', () => {
-        console.log('TODO');
-    });
+
+    // it('has input to focus', () => {
+    //     let input = ((dropdown.$refs.mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement);
+    //     expect(input).not.toBeNull();
+    // });
+
+    // it('v-model change', () => {
+    //     let vm = new Vue({
+    //         data: {
+    //             model: 'item B'
+    //         },
+    //         template: `
+    //         <m-dropdown>
+    //             <m-dropdown-item ref="a" class="a" value="item A" label="*item A*"></m-dropdown-item>
+    //             <m-dropdown-item ref="b" class="b" value="item B" label="*item B*"></m-dropdown-item>
+    //         </m-dropdown>`
+    //     }).$mount();
+
+    //     let li1 = vm.$el.querySelector('.a');
+    //     let li2 = vm.$el.querySelector('.b');
+
+    //     if (li1 && li2) {
+    //         expect(li1.classList.contains(SELECTED_CSS)).toBeFalsy();
+    //         expect(li2.classList.contains(SELECTED_CSS)).toBeTruthy();
+    //     }
+
+    //     (vm as any).model = 'Item A';
+
+    //     Vue.nextTick(() => {
+    //         if (li1 && li2) {
+    //             expect(li1.classList.contains(SELECTED_CSS)).toBeTruthy();
+    //             expect(li1.classList.contains(SELECTED_CSS)).toBeFalsy();
+    //         }
+    //     });
+
+    // });
+
+    // it('toggle dropdown / Emit Open and Close', () => {
+    //     let clickSpyOpen = jasmine.createSpy('clickSpyOpen');
+    //     let clickSpyClose = jasmine.createSpy('clickSpyClose');
+
+    //     let vm = new Vue({
+    //         template: `
+    //             <m-dropdown ref="dd" @open="onOpen" @close="onClose">
+    //                 <m-dropdown-item value="item A" label="*item A*"></m-dropdown-item>
+    //                 <m-dropdown-item value="item B" label="*item B*"></m-dropdown-item>
+    //             </m-dropdown>`,
+    //         methods: {
+    //             onOpen: clickSpyOpen,
+    //             onClose: clickSpyClose
+    //         }
+    //     }).$mount();
+
+    //     let dd = vm.$refs.dd;
+
+    //     (dd as MDropdown).open = true;
+
+    //     Vue.nextTick(() => {
+    //         expect(clickSpyOpen).toHaveBeenCalled();
+
+    //         (dd as MDropdown).open = false;
+    //         Vue.nextTick(() => {
+    //             expect(clickSpyClose).toHaveBeenCalled();
+    //         });
+    //     });
+    // });
 
     // En attente d'un changement pour Portal
     // it('0 items', () => {

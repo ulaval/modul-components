@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MDropdown should render correctly 1`] = `
+<div class="m-dropdown" style="width:100%;max-width:288px;">
+    <div class="m-input-style" style="width:100%;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" value="" class="m-dropdown__input"> </div>
+            <div class="m-input-style__body__right">
+                <div class="m-dropdown__arrow">
+                    <m-icon-button icon-name="down-arrow" button-size="18px" icon-size="16px"><span class="m-i18n">Open drop-down</span> </m-icon-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-popup">
+        <div class="m-popper">
+            <DIV class="v-portal" style="display:none;"></DIV>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MDropdown should render correctly when is not filterable 1`] = `
+<div class="m-dropdown" style="width:100%;max-width:288px;">
+    <div class="m-input-style" style="width:100%;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" value="" class="m-dropdown__input"> </div>
+            <div class="m-input-style__body__right">
+                <div class="m-dropdown__arrow">
+                    <m-icon-button icon-name="down-arrow" button-size="18px" icon-size="16px"><span class="m-i18n">Open drop-down</span> </m-icon-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-popup">
+        <div class="m-popper">
+            <DIV class="v-portal" style="display:none;"></DIV>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MDropdown should render correctly when placeholder is set 1`] = `
+<div class="m-dropdown" style="width:100%;max-width:288px;">
+    <div class="m-input-style" style="width:100%;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" placeholder="placeholder test" value="" class="m-dropdown__input"> </div>
+            <div class="m-input-style__body__right">
+                <div class="m-dropdown__arrow">
+                    <m-icon-button icon-name="down-arrow" button-size="18px" icon-size="16px"><span class="m-i18n">Open drop-down</span> </m-icon-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-popup">
+        <div class="m-popper">
+            <DIV class="v-portal" style="display:none;"></DIV>
+        </div>
+    </div>
+</div>
+`;
