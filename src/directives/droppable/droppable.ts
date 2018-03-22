@@ -20,7 +20,7 @@ export enum MDropEffect {
 }
 
 export interface MDropEvent extends DragEvent {
-    dragInfo: MDragInfo;
+    dropInfo: MDropInfo;
 }
 
 export interface MDroppableElement extends HTMLElement {
@@ -32,11 +32,11 @@ export interface MDroppableOptions {
     grouping?: string;
 }
 
-export interface MDragInfo {
+export interface MDropInfo {
     action: string;
     grouping?: string;
     data: any;
-    position: { element: HTMLElement, orientation: MDroppableOrientation };
+    position?: { element: HTMLElement, orientation: MDroppableOrientation };
 }
 
 const DEFAULT_ACTION = 'any';
@@ -74,9 +74,7 @@ export class MDroppable {
     }
 
     private onDragLeave(event: DragEvent): any {
-        MDroppable.currentOverElement = event.currentTarget as HTMLElement;
-        if (MDroppable.currentOverElement.__mdroppable__) MDroppable.currentOverElement.__mdroppable__.cleanupDroppableCssClasses();
-        MDroppable.currentOverElement = undefined;
+        if (this.element.__mdroppable__) this.element.__mdroppable__.cleanupDroppableCssClasses();
         event.dataTransfer.dropEffect = MDropEffect.MNone;
     }
 
@@ -88,18 +86,19 @@ export class MDroppable {
 
     private onDragOver(event: DragEvent): any {
         event.stopPropagation();
-
-        if (MDroppable.currentOverElement && MDroppable.currentOverElement.__mdroppable__) {
-            MDroppable.currentOverElement.__mdroppable__.cleanupDroppableCssClasses();
+        if (this.element.__mdroppable__) {
+            this.element.__mdroppable__.cleanupDroppableCssClasses();
         }
 
         if (this.canDrop()) {
             event.preventDefault();
             event.dataTransfer.dropEffect = MDropEffect.MMove;
-            if (MDroppable.currentOverElement) MDroppable.currentOverElement.classList.add(MDroppableClassNames.MCanDrop);
-        } else {
+            this.element.classList.add(MDroppableClassNames.MOvering);
+            this.element.classList.add(MDroppableClassNames.MCanDrop);
+        } else if (MDroppable.currentOverElement) {
             event.dataTransfer.dropEffect = MDropEffect.MNone;
-            if (MDroppable.currentOverElement) MDroppable.currentOverElement.classList.add(MDroppableClassNames.MCantDrop);
+            this.element.classList.add(MDroppableClassNames.MOvering);
+            this.element.classList.add(MDroppableClassNames.MCantDrop);
         }
     }
 
@@ -107,8 +106,8 @@ export class MDroppable {
         event.stopPropagation();
         event.preventDefault();
 
-        if (MDroppable.currentOverElement && MDroppable.currentOverElement.__mdroppable__) {
-            MDroppable.currentOverElement.__mdroppable__.cleanupDroppableCssClasses();
+        if (this.element.__mdroppable__) {
+            this.element.__mdroppable__.cleanupDroppableCssClasses();
         }
 
         this.dispatchEvent(event, 'droppable:drop');
@@ -126,19 +125,22 @@ export class MDroppable {
             ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action
             : undefined;
         const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
-
         return MDroppable.currentOverElement !== MDraggable.currentlyDraggedElement && (acceptAny || isAllowedAction);
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
 
-        customEvent.initCustomEvent(name, true, true, event);
-        this.element.dispatchEvent(Object.assign(customEvent, { dragInfo: {
+        const data: string = event.dataTransfer.getData('text');
+        const dropInfo: MDropInfo = {
             action: MDraggable.currentlyDraggedElement.__mdraggable__ ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action : DEFAULT_ACTION,
             grouping: this.options.grouping,
-            data: JSON.parse(event.dataTransfer.getData('text'))
-        }}));
+            data: data ? JSON.parse(event.dataTransfer.getData('text')) : undefined
+        };
+        const dropEvent: Event = Object.assign(customEvent, { dropInfo });
+
+        customEvent.initCustomEvent(name, true, true, event);
+        this.element.dispatchEvent(dropEvent);
     }
 }
 

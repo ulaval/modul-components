@@ -71,12 +71,9 @@ const Directive: DirectiveOptions = {
             action: getVNodeAttributeValue(node, 'action'),
             dragData: getVNodeAttributeValue(node, 'drag-data')
         });
-
-        console.log('Droppable binding done.');
     },
     unbind(element: MDraggableElement, binding: VNodeDirective): void {
         if (element.__mdraggable__) element.__mdraggable__.detach();
-        console.log('Droppable unbind done.');
     }
 };
 
