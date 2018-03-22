@@ -11,6 +11,7 @@ import { log } from 'util';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
+const THRESHOLD: number = 2.5;
 const POPPER_CLASS_NAME: string = '.m-popper__popper';
 
 export enum MNavbarSkin {
@@ -142,27 +143,23 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private get isLightSkin(): boolean {
-        return this.skin == 'light' ? true : false;
+        return this.skin == 'light';
     }
 
     private get isArrowSkin(): boolean {
-        return this.skin == 'arrow' ? true : false;
-    }
-
-    private get isAnimActive(): boolean {
-        return this.animActive;
+        return this.skin == 'arrow';
     }
 
     private scrollLeft(event: MouseEvent): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
         let btnsWidth: any = ((this.$refs.buttonLeft as ModulVue).$el as HTMLElement).clientWidth + ((this.$refs.buttonRight as ModulVue).$el as HTMLElement).clientWidth;
-        wrapEl.scrollLeft = wrapEl.scrollLeft - ((this.$el.clientWidth - btnsWidth) / 2.5);
+        wrapEl.scrollLeft = wrapEl.scrollLeft - ((this.$el.clientWidth - btnsWidth) / THRESHOLD);
     }
 
     private scrollRight(event: MouseEvent): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
         let btnsWidth: any = ((this.$refs.buttonLeft as ModulVue).$el as HTMLElement).clientWidth + ((this.$refs.buttonRight as ModulVue).$el as HTMLElement).clientWidth;
-        wrapEl.scrollLeft = wrapEl.scrollLeft + ((this.$el.clientWidth - btnsWidth) / 2.5);
+        wrapEl.scrollLeft = wrapEl.scrollLeft + ((this.$el.clientWidth - btnsWidth) / THRESHOLD);
     }
 }
 

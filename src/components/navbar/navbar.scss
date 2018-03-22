@@ -8,18 +8,6 @@
 
     &.m--is-skin-dark {
         background-color: $m-color--grey-darkest;
-        // min-height: $m-touch-size*2;
-
-        // &::before {
-        //     position: absolute;
-        //     left: 0;
-        //     right: 0;
-        //     bottom: 0;
-        //     height: $m-border-width--l;
-        //     width: 100%;
-        //     content: '';
-        //     background: $m-color--border;
-        // }
     }
 
     &.m--is-skin-light {
@@ -50,7 +38,6 @@
 
     &__button {
         position: relative;
-        // width: 44px !important;
 
         .m--is-skin-dark & {
             color: $m-color--grey-light;
@@ -95,11 +82,6 @@
 
         &::before,
         &::after {
-            // content: '';
-            // width: 0;
-            // height: 0;
-            // border-style: solid;
-            // border-width: 6px 10px 0;
             transform: translateX(-50%);
             position: absolute;
             left: 50%;
