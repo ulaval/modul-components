@@ -15,6 +15,7 @@ import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DropdownPlugin from './dropdown/dropdown';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import EditWindow from './edit-window/edit-window';
+import ErrorMessage from './error-message/error-message';
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
@@ -75,6 +76,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(EditWindow);
+        Vue.use(ErrorMessage);
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
         Vue.use(FlexTemplatePlugin);
