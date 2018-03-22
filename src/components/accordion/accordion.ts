@@ -9,8 +9,7 @@ import AccordionTransitionPlugin from './accordion-transition';
 import WithRender from './accordion.html?style=./accordion.scss';
 
 export enum MAccordionSkin {
-    Primary = 'primary',
-    Secondary = 'secondary',
+    Default = 'default',
     Light = 'light',
     Plain = 'plain'
 }
@@ -61,16 +60,16 @@ export class MAccordion extends Vue implements AccordionGateway {
     public disabled: boolean;
 
     @Prop({
-        default: MAccordionSkin.Secondary,
+        default: MAccordionSkin.Default,
         validator: value =>
-            value == MAccordionSkin.Primary ||
-            value == MAccordionSkin.Secondary ||
+            value == MAccordionSkin.Default ||
             value == MAccordionSkin.Light ||
             value == MAccordionSkin.Plain
     })
     public skin: MAccordionSkin;
 
     @Prop({
+        default: MAccordionIconPosition.Left,
         validator: value =>
             value == MAccordionIconPosition.Left ||
             value == MAccordionIconPosition.Right
@@ -81,6 +80,7 @@ export class MAccordion extends Vue implements AccordionGateway {
     public iconBorder?: boolean;
 
     @Prop({
+        default: MAccordionIconSize.Large,
         validator: value =>
             value == MAccordionIconSize.Small ||
             value == MAccordionIconSize.Large
@@ -137,26 +137,6 @@ export class MAccordion extends Vue implements AccordionGateway {
 
     private get propSkin(): MAccordionSkin {
         return isAccordionGroup(this.$parent) ? this.$parent.skin : this.skin;
-    }
-
-    private get propIconPosition(): MAccordionIconPosition {
-        if (this.iconPosition) {
-            return this.iconPosition;
-        }
-
-        return this.propSkin == MAccordionSkin.Light
-            ? MAccordionIconPosition.Left
-            : MAccordionIconPosition.Right;
-    }
-
-    private get propIconSize(): MAccordionIconSize {
-        if (this.iconSize) {
-            return this.iconSize;
-        }
-
-        return this.propSkin == MAccordionSkin.Light
-            ? MAccordionIconSize.Small
-            : MAccordionIconSize.Large;
     }
 
     private get propIconBorder(): boolean {

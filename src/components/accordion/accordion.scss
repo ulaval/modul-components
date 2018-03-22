@@ -1,20 +1,19 @@
 @import '../../styles/abstracts/variables';
-@import './accordion-transition.scss';
+@import 'accordion-transition';
 
-$m-accordion--icon-l-width: 12px;
-$m-accordion--icon-width: 10px;
+$m-accordion--icon-l-width: 16px;
+$m-accordion--icon-width: 12px;
 $m-accordion--icon-l-height: 2px;
 $m-accordion--icon-height: 1px;
 $m-accordion--border-size: $m-border-width;
+$m-accordion--vertical-border-size: 6px;
 $m-accordion--border-color: $m-color--border;
-$m-accordion--color-primary: $m-color--interactive;
-$m-accordion--color-secondary: $m-color--accent;
+$m-accordion--color-default: $m-color--interactive;
 
 .m-accordion {
     &.m--is-disabled {
         > .m-accordion {
             &__header {
-                cursor: not-allowed;
                 outline: none;
 
                 &,
@@ -37,8 +36,7 @@ $m-accordion--color-secondary: $m-color--accent;
         }
     }
 
-    &.m--is-primary,
-    &.m--is-secondary,
+    &.m--is-default,
     &.m--is-light {
         > .m-accordion__header__content {
             &,
@@ -55,8 +53,7 @@ $m-accordion--color-secondary: $m-color--accent;
         }
     }
 
-    &.m--is-primary,
-    &.m--is-secondary {
+    &.m--is-default {
         margin-top: - $m-accordion--border-size;
 
         &.m--is-disabled {
@@ -71,17 +68,43 @@ $m-accordion--color-secondary: $m-color--accent;
             }
         }
 
+        &.m--has-icon-left {
+            > .m-accordion {
+                &__body-wrap > .m-accordion__body {
+                    &.m--has-padding {
+                        padding-left: 48px;
+                    }
+                }
+
+                &__header {
+                    .m-accordion__header-icon {
+                        margin-right: $m-spacing;
+                    }
+                }
+            }
+
+            &.m--has-icon-large {
+                > .m-accordion {
+                    &__body-wrap > .m-accordion__body {
+                        &.m--has-padding {
+                            padding-left: $m-spacing*2 + $m-accordion--icon-l-width + $m-accordion--vertical-border-size;
+                        }
+                    }
+                }
+            }
+        }
+
         > .m-accordion {
             &__header,
             &__body-wrap > .m-accordion__body {
                 &.m--has-padding {
-                    padding: $m-padding $m-padding $m-padding 20px; // Magic number
+                    padding: $m-spacing $m-spacing $m-spacing ($m-spacing + $m-accordion--vertical-border-size);
                 }
             }
 
             &__header {
                 position: relative;
-                min-height: 56px;
+                min-height: 80px;
                 border-top: $m-accordion--border-size solid $m-accordion--border-color;
                 border-bottom: $m-accordion--border-size solid $m-accordion--border-color;
 
@@ -91,11 +114,14 @@ $m-accordion--color-secondary: $m-color--accent;
                     bottom: -$m-accordion--border-size;
                     left: 0;
                     content: '';
-                    width: $m-border-width--l;
+                    width: $m-accordion--vertical-border-size;
+                    background: $m-accordion--color-default;
                 }
             }
 
             &__body-wrap {
+                border-bottom: 1px $m-color--border solid;
+
                 &.accordion-enter-to {
                     .m-accordion__body {
                         transform: translate3d(0, 0, 0);
@@ -118,26 +144,6 @@ $m-accordion--color-secondary: $m-color--accent;
         }
     }
 
-    &.m--is-primary {
-        > .m-accordion {
-            &__header {
-                &::after {
-                    background: $m-accordion--color-primary;
-                }
-            }
-        }
-    }
-
-    &.m--is-secondary {
-        > .m-accordion {
-            &__header {
-                &::after {
-                    background: $m-accordion--color-secondary;
-                }
-            }
-        }
-    }
-
     &.m--is-light {
         margin: $m-margin--s 0;
 
@@ -154,11 +160,44 @@ $m-accordion--color-secondary: $m-color--accent;
             &__body-wrap {
                 > .m-accordion__body {
                     &.m--has-padding {
-                        padding-left: $m-margin--l;
                         padding-top: $m-margin--s;
                         padding-bottom: $m-margin;
                     }
                 }
+            }
+        }
+
+        &.m--has-icon-left {
+            &:not(.m--has-icon-large) {
+                > .m-accordion {
+                    &__body-wrap {
+                        > .m-accordion__body {
+                            &.m--has-padding {
+                                padding-left: 32px; // Magic number
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.m--has-icon-large {
+                > .m-accordion {
+                    &__body-wrap {
+                        > .m-accordion__body {
+                            &.m--has-padding {
+                                padding-left: 36px; // Magic number
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.m--has-icon-left {
+        > .m-accordion {
+            &__header {
+                flex-direction: row-reverse;
             }
         }
     }
@@ -171,10 +210,6 @@ $m-accordion--color-secondary: $m-color--accent;
         &:hover,
         &:active {
             outline: none;
-        }
-
-        &.m--is-icon-left {
-            flex-direction: row-reverse;
         }
 
         &:not(.m--is-plain) {
@@ -264,11 +299,11 @@ $m-accordion--color-secondary: $m-color--accent;
             }
 
             &:not(.m--is-left) {
-                margin-left: $m-margin;
+                margin-left: $m-spacing;
             }
 
             &.m--is-left {
-                margin-right: $m-padding--s;
+                margin-right: $m-margin;
             }
         }
     }

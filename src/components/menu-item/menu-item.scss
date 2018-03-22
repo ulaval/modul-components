@@ -1,11 +1,16 @@
 @import 'abstracts/variables';
-$m-menu-item--color-hover: $m-color--interactive-lightest !default;
+$m-menu-item--color-hover: $m-color--grey-lightest !default;
 $m-menu-item--color-select: $m-color--grey-light !default;
 $m-menu-item--color-active: $m-color--grey-lightest !default;
 
 .m-menu-item {
     display: flex;
     text-decoration: none;
+    border: 1px solid $m-color--grey-light;
+
+    & + & {
+        border-top: 0;
+    }
 
     .m--has-icon-spacing {
         .m-menu-item {
