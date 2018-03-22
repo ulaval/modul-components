@@ -5,15 +5,11 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
 import { NAVBAR_ITEM_NAME } from '../component-names';
 
-export abstract class BaseNavbar extends ModulVue {
-    abstract model: string;
-    abstract disabled: boolean;
-}
+export abstract class BaseNavbar extends ModulVue { }
 
-export interface MNavbarInterface {
+export interface Navbar {
     model: string;
-    selectedElem: HTMLElement;
-    selecteItem(el: HTMLElement): void;
+    updateValue(value: string): void;
 }
 
 @WithRender
@@ -25,43 +21,42 @@ export class MNavbarItem extends ModulVue {
     @Prop()
     public disabled: boolean;
 
-    public root: MNavbarInterface; // Navbar component
-
-    public isFirst: boolean = false;
-    public isLast: boolean = false;
-    private internalSelected: boolean = false;
+    // should be initialized to be reactive
+    // tslint:disable-next-line:no-null-keyword
+    private parentNavbar: Navbar | null = null;
 
     protected mounted(): void {
-        let rootNode: BaseNavbar | undefined = this.getParent<BaseNavbar>(p => p instanceof BaseNavbar);
 
-        if (rootNode) {
-            this.root = (rootNode as any) as MNavbarInterface;
+        let parentNavbar: BaseNavbar | undefined;
+        parentNavbar = this.getParent<BaseNavbar>(
+            p => p instanceof BaseNavbar || // these will fail with Jest, but should pass in prod mode
+            p.$options.name === 'MNavbar' // these are necessary for Jest, but the first two should pass in prod mode
+        );
+
+        if (parentNavbar) {
+            this.parentNavbar = (parentNavbar as any) as Navbar;
+
+            if (!this.$el.querySelector('a, button')) {
+                this.$el.setAttribute('tabindex', '0');
+            }
+
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
         }
 
-        if (!this.$el.querySelector('a, button')) {
-            this.$el.setAttribute('tabindex', '0');
-        }
-    }
-
-    private get selected(): boolean {
-        let selected: boolean = this.$parent instanceof BaseNavbar && this.$parent.model == this.value && !this.disabled;
-        if (selected) {
-            (this.root as MNavbarInterface).selectedElem = this.$el;
-        }
-        return selected;
     }
 
     private get isDisabled(): boolean {
-        return (this.$parent instanceof BaseNavbar && this.$parent.disabled) || this.disabled;
+        return this.disabled;
+    }
+
+    public get isSelected(): boolean {
+        return !!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model;
     }
 
     private onClick(event): void {
-        if (!this.disabled) {
-            (this.root as MNavbarInterface).model = this.value;
-            (this.root as MNavbarInterface).selecteItem(this.$el);
-            this.$emit('click', event, this.value);
+        if (!this.disabled && this.parentNavbar) {
+            this.parentNavbar.updateValue(this.value);
         }
     }
 }
