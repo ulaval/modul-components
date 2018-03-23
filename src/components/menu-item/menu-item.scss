@@ -12,6 +12,14 @@ $m-menu-item--color-active: $m-color--grey-lightest !default;
         border-top: 0;
     }
 
+    &:first-child {
+        border-radius: $m-border-radius--s $m-border-radius--s 0 0;
+    }
+
+    &:last-child {
+        border-radius: 0  0 $m-border-radius--s $m-border-radius--s;
+    }
+
     .m--has-icon-spacing {
         .m-menu-item {
             &__text {
