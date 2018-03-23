@@ -28,7 +28,7 @@ $m-input-style--padding: 4px !default;
     &::before {
         transition: border-color $m-transition-duration ease;
         width: 100%;
-        border-bottom: 1px solid $m-color--grey-darker;
+        border-bottom: 1px solid $m-color--grey;
     }
 
     &::after {
