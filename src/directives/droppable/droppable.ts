@@ -48,7 +48,7 @@ export enum MDropEventNames {
 
 const DEFAULT_ACTION = 'any';
 export class MDroppable {
-    public static currentOverElement: MDroppableElement | undefined;
+    public static currentHoverElement: MDroppableElement | undefined;
     public options: MDroppableOptions;
     private element: MDroppableElement;
 
@@ -105,8 +105,8 @@ export class MDroppable {
             this.element.__mdroppable__.cleanupDroppableCssClasses();
         }
 
-        MDroppable.currentOverElement = this.element;
-        MDroppable.currentOverElement.classList.add(MDroppableClassNames.MOvering);
+        MDroppable.currentHoverElement = this.element;
+        MDroppable.currentHoverElement.classList.add(MDroppableClassNames.MOvering);
 
         if (this.canDrop()) {
             event.preventDefault();
@@ -126,7 +126,7 @@ export class MDroppable {
             this.element.__mdroppable__.cleanupDroppableCssClasses();
         }
 
-        MDroppable.currentOverElement = undefined;
+        MDroppable.currentHoverElement = undefined;
         this.dispatchEvent(event, MDropEventNames.OnDrop);
     }
 
@@ -142,20 +142,23 @@ export class MDroppable {
             ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action
             : undefined;
         const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
-        return MDroppable.currentOverElement !== MDraggable.currentlyDraggedElement && (acceptAny || isAllowedAction);
+        return MDroppable.currentHoverElement !== MDraggable.currentlyDraggedElement && (acceptAny || isAllowedAction);
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
 
-        const data: string = event.dataTransfer.getData('text');
+        const data = MDraggable.currentlyDraggedElement && MDraggable.currentlyDraggedElement.__mdraggable__
+            ? MDraggable.currentlyDraggedElement.__mdraggable__.options.dragData
+            ? MDraggable.currentlyDraggedElement.__mdraggable__.options.dragData
+            : event.dataTransfer.getData('text') : undefined;
         const dropInfo: MDropInfo = {
             action: MDraggable.currentlyDraggedElement.__mdraggable__ ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action : DEFAULT_ACTION,
             grouping: this.options.grouping,
-            data: data ? JSON.parse(event.dataTransfer.getData('text')) : undefined,
+            data,
             canDrop: this.canDrop()
         };
-        const dropEvent: Event = Object.assign(customEvent, { dropInfo });
+        const dropEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { dropInfo });
 
         customEvent.initCustomEvent(name, true, true, event);
         this.element.dispatchEvent(dropEvent);

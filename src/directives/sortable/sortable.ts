@@ -1,3 +1,4 @@
+import { mousePositionElement } from './mouse';
 import { SORTABLE } from '../directive-names';
 import { PluginObject } from 'vue/types/plugin';
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
@@ -20,11 +21,37 @@ export enum MSortEventNames {
     OnMove = 'sortable:move'
 }
 
+export enum MSortInsertPositions {
+    Before = 'before',
+    After = 'after'
+}
+
 export abstract class MHTMLElementPluggin<PluginType> {
     public abstract attach(plugin: PluginType): void;
     public abstract detach(): void;
 }
 
+export interface MSortEvent extends DragEvent {
+    sortInfo: MSortInfo;
+}
+
+export interface MSortInfo {
+    action: string;
+    grouping?: string;
+    data: any;
+    canDrop: boolean;
+    oldPosition: number;
+    newPosition: number;
+}
+
+/*
+var observer = new MutationObserver(scrollToBottom);
+    var config = {childList: true};
+    observer.observe(this.el, config);
+    function scrollToBottom() {
+      // whatever it takes to scroll to the bottom
+    }
+*/
 const DEFAULT_ACTION = 'any';
 const MOVE_ACTION = 'move';
 export class MSortable {
@@ -33,6 +60,7 @@ export class MSortable {
     private emptyPlaceHolderElement: MDroppableElement | undefined;
     private placeHolderElement: MDroppableElement | undefined;
     private options: MSortableOptions;
+    private insertAtIndex: number = 0;
 
     constructor(element: HTMLElement, options: MSortableOptions) {
         this.element = element;
@@ -149,24 +177,26 @@ export class MSortable {
     }
 
     private hidePlaceHolder(): void {
+        this.insertAtIndex = 0;
         if (this.placeHolderElement) this.placeHolderElement.style.display = 'none';
     }
 
     private onDrop(event: MDropEvent): void {
         event.stopPropagation();
-        const customEvent: CustomEvent = document.createEvent('CustomEvent');
-        const dropInfo: MDropInfo = event.dropInfo;
-        const dropEvent: Event = Object.assign(customEvent, { dropInfo });
-
         let eventName: string;
+
+        const oldIndex = this.options.items.findIndex((item: any) => item === event.dropInfo.data);
         if (this.options.items.find((item: any) => item === event.dropInfo.data)) {
             eventName = MSortEventNames.OnMove;
         } else {
             eventName = MSortEventNames.OnAdd;
         }
 
+        const customEvent: CustomEvent = document.createEvent('CustomEvent');
+        const sortInfo: MSortInfo = Object.assign(event.dropInfo, { oldPosition: oldIndex, newPosition: this.insertAtIndex });
+        const sortEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { sortInfo });
         customEvent.initCustomEvent(eventName, true, true, event.detail);
-        this.element.dispatchEvent(dropEvent);
+        this.element.dispatchEvent(sortEvent);
         this.hidePlaceHolder();
     }
 
@@ -182,13 +212,13 @@ export class MSortable {
                 MSortable.currentActiveSort = this.element;
             }
         }
-        this.showPlaceHolder();
+        this.showPlaceHolder(event);
     }
 
     private onChildDragEnter(event: MDropEvent): void {
         event.preventDefault();
         event.stopImmediatePropagation();
-        this.showPlaceHolder();
+        this.showPlaceHolder(event);
     }
 
     private onChildDragLeave(event: MDropEvent): void {
@@ -200,7 +230,7 @@ export class MSortable {
     private onChildDragOver(event: MDropEvent): void {
         event.preventDefault();
         event.stopPropagation();
-        this.showPlaceHolder();
+        this.showPlaceHolder(event);
     }
 
     private setupPlaceholder(currentValue: MDroppableElement | undefined, selector: string, set: (element: MDroppableElement | undefined) => void): void {
@@ -219,15 +249,71 @@ export class MSortable {
         }
     }
 
-    private showPlaceHolder(): void {
-        if (this.placeHolderElement && MDroppable.currentOverElement && MDroppable.currentOverElement !== this.placeHolderElement) {
-            if (MDroppable.currentOverElement !== this.element) {
+    private showPlaceHolder(event: MDropEvent): void {
+        this.computeInsertPosition(event);
+        if (this.isHoveringEmptyPlaceholder()) {
+            return;
+        }
+
+        // We are hovering over the insertion place holder.  In that case we simply continue to display the placeholder.
+        if (this.isHoveringInsertionPlaceholder()) {
+            if (this.placeHolderElement) this.placeHolderElement.style.display = 'inherit';
+            return;
+        }
+
+        const insertPosition = this.computeInsertPosition(event);
+        const currentlyDraggedElement: MDraggableElement = MDraggable.currentlyDraggedElement as MDraggableElement;
+        const currentDraggable: MDraggable = currentlyDraggedElement.__mdraggable__ as MDraggable;
+        if (insertPosition === MSortInsertPositions.Before) {
+            this.insertAtIndex = this.options.items.indexOf(currentDraggable.options.dragData) - 1;
+        } else {
+            this.insertAtIndex = this.options.items.indexOf(currentDraggable.options.dragData) + 1;
+        }
+
+        // If we need to change the placeholder's place.
+        if (this.placeHolderElement) {
+            // We are hovering over one of the sortable's child.
+            if (MDroppable.currentHoverElement !== this.element) {
                 this.placeHolderElement.style.display = 'inherit';
-                MDroppable.currentOverElement.insertAdjacentElement('afterend', this.placeHolderElement);
+                if (currentlyDraggedElement) {
+                    const domInsertPos: InsertPosition = insertPosition === MSortInsertPositions.Before ? 'beforebegin' : 'afterend';
+                    currentlyDraggedElement.insertAdjacentElement(domInsertPos, this.placeHolderElement);
+                }
+            } else { // We are hovering the sortable itself.
+                this.placeHolderElement.style.display = 'inherit';
+                const domInsertPos: InsertPosition = insertPosition === MSortInsertPositions.Before ? 'afterbegin' : 'beforeend';
+                this.element.insertAdjacentElement(domInsertPos, this.placeHolderElement);
+            }
+
+            this.insertAtIndex = Array.from(this.element.children).indexOf(this.placeHolderElement) - 1;
+        }
+    }
+
+    private movePlaceholder(insertPosition: MSortInsertPositions, placeBefore: () => void, placeAfter: () => void): void {
+
+    }
+
+    private computeInsertPosition(event: MDropEvent): MSortInsertPositions {
+        if (MDroppable.currentHoverElement) {
+            const mousePosition = mousePositionElement(event);
+            if (mousePosition.y <= MDroppable.currentHoverElement.offsetHeight / 2) {
+                console.log('Before');
+                return MSortInsertPositions.Before;
             } else {
-                this.element.insertAdjacentElement('afterend', this.placeHolderElement);
+                console.log('After');
+                return MSortInsertPositions.After;
             }
         }
+
+        return MSortInsertPositions.After;
+    }
+
+    private isHoveringEmptyPlaceholder(): boolean | undefined {
+        return this.emptyPlaceHolderElement && MDroppable.currentHoverElement && this.emptyPlaceHolderElement === MDroppable.currentHoverElement;
+    }
+
+    private isHoveringInsertionPlaceholder(): boolean | undefined {
+        return this.placeHolderElement && MDroppable.currentHoverElement && this.placeHolderElement === MDroppable.currentHoverElement;
     }
 }
 
@@ -235,7 +321,7 @@ const Directive: DirectiveOptions = {
     componentUpdated(element: MSortableElement, binding: VNodeDirective, node: VNode): void {
         if (!element.__msortable__) {
             element.__msortable__ = new MSortable(element, {
-                items: binding.value,
+                items: getVNodeAttributeValue(node, 'items'),
                 acceptedActions: getVNodeAttributeValue(node, 'accepted-actions')
             });
         } else {

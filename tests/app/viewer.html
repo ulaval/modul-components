@@ -6,5 +6,27 @@
         </div>
         <m-dynamic-template :template="tag"></m-dynamic-template>
     </m-template>
+
+    <div v-m-draggable="true"
+        :drag-data="newItem"
+        :action="'addSomething'">
+        Create a new item
+    </div>
+
+    <div v-m-sortable
+        :items="items"
+        :accepted-actions="['addSomething']"
+        @sortable:add="addItem"
+        @sortable:move="moveItem">
+        <div class="emptyPlaceholder">Insert a new item!</div>
+        <div class="placeholder" style="height: 1px; background-color: black;"></div>
+        <div v-for="item in items">
+            {{ item.text }}
+            <button @click="changeItem(item)">Change</button>
+        </div>
+    </div>
+
+    {{ items }}
+
     <div slot="footer">Footer</div>
 </m-flex-template>
