@@ -5,7 +5,7 @@ exports[`MTimepicker should render correctly 1`] = `
     <div class="m-input-style m--has-value" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="12:00 PM"> </div>
+                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="3:50 PM"> </div>
             <div class="m-input-style__body__right">
                 <m-icon-button icon-name="clock" button-size="22px"><span class="m-i18n">Open time selector</span> </m-icon-button>
             </div>
@@ -43,7 +43,7 @@ exports[`MTimepicker should render correctly when disabled is set 1`] = `
     <div class="m-input-style m--is-disabled m--has-value" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="12:00 PM"> </div>
+                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="3:50 PM"> </div>
             <div class="m-input-style__body__right">
                 <m-icon-button icon-name="clock" disabled="disabled" button-size="22px"><span class="m-i18n">Open time selector</span> </m-icon-button>
             </div>
@@ -65,7 +65,7 @@ exports[`MTimepicker should render correctly when error is set 1`] = `
     <div class="m-input-style m--has-error m--has-value" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="12:00 PM"> </div>
+                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="3:50 PM"> </div>
             <div class="m-input-style__body__right">
                 <m-icon-button icon-name="clock" button-size="22px"><span class="m-i18n">Open time selector</span> </m-icon-button>
             </div>
@@ -91,7 +91,7 @@ exports[`MTimepicker should render correctly when valid is set 1`] = `
     <div class="m-input-style m--is-valid m--has-value" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="12:00 PM"> </div>
+                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="3:50 PM"> </div>
             <div class="m-input-style__body__right">
                 <m-icon-button icon-name="clock" button-size="22px"><span class="m-i18n">Open time selector</span> </m-icon-button>
             </div>
@@ -117,7 +117,7 @@ exports[`MTimepicker should render correctly when waiting is set 1`] = `
     <div class="m-input-style m--is-waiting m--has-value" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="12:00 PM"> </div>
+                <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="3:50 PM"> </div>
             <div class="m-input-style__body__right">
                 <m-icon-button icon-name="clock" disabled="disabled" button-size="22px"><span class="m-i18n">Open time selector</span> </m-icon-button>
             </div>
