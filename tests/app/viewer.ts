@@ -24,6 +24,7 @@ export class Viewer extends Vue {
     public items: any[] = [];
     public items2: any[] = [];
     public items3: any[] = [];
+    public newItem: MyObject = new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`);
 
     public mounted(): void {
         this.buildTag();
@@ -34,20 +35,38 @@ export class Viewer extends Vue {
         this.tag = `<${this.$route.meta}></${this.$route.meta}>`;
     }
 
-    private handleDrop(event: MDropEvent): void {
-        console.log('handle the drop here plz.', event.dropInfo);
-    }
-
     private getNewItem(actionName: string): MyObject {
         return new MyObject(0, `Hello from ${actionName}`);
     }
 
     private handleSortableAdd(event: MSortEvent, list: any[]): void {
-        list.push(event.sortInfo.data);
+        console.log(event.sortInfo);
+        list.splice(event.sortInfo.newPosition, 0, new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`));
+        this.refreshNewItem();
     }
 
     private handleSortableMove(event: MSortEvent, list: any[]): void {
-        list.push(event.sortInfo.data);
+        console.log(event.sortInfo);
+
+        if (event.sortInfo.oldPosition === -1) {
+            list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
+            this.refreshNewItem();
+            return;
+        }
+
+        if (event.sortInfo.newPosition > event.sortInfo.oldPosition) {
+            list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
+            list.splice(event.sortInfo.oldPosition, 1);
+        } else {
+            list.splice(event.sortInfo.oldPosition, 1);
+            list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
+        }
+
+        this.refreshNewItem();
+    }
+
+    private refreshNewItem(): void {
+        this.newItem = new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`);
     }
 
     private deleteItem(): void {

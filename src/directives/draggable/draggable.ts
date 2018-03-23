@@ -17,7 +17,7 @@ export interface MDraggableOptions {
 
 const DEFAULT_ACTION = 'any';
 export class MDraggable {
-    public static currentlyDraggedElement: MDraggableElement;
+    public static currentlyDraggedElement: MDraggableElement | undefined;
     public options: MDraggableOptions;
     private element: MDraggableElement;
 
@@ -35,6 +35,10 @@ export class MDraggable {
         this.element.__mdraggable__ = undefined;
     }
 
+    public cleanupCssClasses(): void {
+        this.element.classList.remove(MDraggableClassNames.MDragging);
+    }
+
     private attach(): void {
         this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
 
@@ -46,10 +50,11 @@ export class MDraggable {
 
     private onDragEnter(event: DragEvent): void {
         event.preventDefault();
+        MDraggable.currentlyDraggedElement = undefined;
     }
 
     private onDragEnd(event: DragEvent): void {
-        MDraggable.currentlyDraggedElement.classList.remove(MDraggableClassNames.MDragging);
+        if (MDraggable.currentlyDraggedElement) this.element.classList.remove(MDraggableClassNames.MDragging);
     }
 
     private onDragStart(event: DragEvent): void {

@@ -8,13 +8,14 @@
     </m-template>
     <div slot="footer">Footer</div>
 
+    {{ newItem }}
     <button @click="deleteItem">Delete an Item</button>
     <div v-m-draggable="true"
-        :drag-data="getNewItem('Any')">
+        :drag-data="newItem">
         Drag Any Action
     </div>
         <div v-m-draggable="true"
-        :drag-data="getNewItem('SomeAction')"
+        :drag-data="newItem"
         :action="'someAction'">
         Drag SomeAction
     </div>
@@ -26,7 +27,7 @@
         @sortable:move="handleSortableMove($event, items)"
         style="background-color: lightYellow; width: 50%; border: 1px solid red;">
         <div class="emptyPlaceholder" style="background-color: lightgreen; width: 100%;">No Items.  Drop SomeAction on me!</div>
-        <div class="placeholder" style="background-color: darkgreen; height: 3px;"></div>
+        <div class="placeholder" style="background-color: darkgreen; height: 1px;"></div>
         <div v-for="item in items">
             Hello from Item #{{ item.id }}: {{ item.text }}
         </div>
@@ -38,7 +39,7 @@
         @sortable:move="handleSortableMove($event, items2)"
         style="background-color: lightYellow; width: 50%; border: 1px solid blue;">
         <div class="emptyPlaceholder" style="background-color: lightblue; width: 100%;">No Items.  Drop SomeAction on me!</div>
-        <div class="placeholder" style="background-color: red; height: 3px;"></div>
+        <div class="placeholder" style="background-color: red; height: 1px;"></div>
         <div v-for="item in items2">
             Hello from Item #{{ item.id }}: {{ item.text }}
         </div>

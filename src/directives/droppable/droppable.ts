@@ -1,6 +1,6 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE } from '../directive-names';
-import { MDraggable } from '../draggable/draggable';
+import { MDraggable, MDraggableElement } from '../draggable/draggable';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
 
 export enum MDroppableClassNames {
@@ -81,7 +81,7 @@ export class MDroppable {
     }
 
     private onDragLeave(event: DragEvent): any {
-        if (this.element.__mdroppable__) this.element.__mdroppable__.cleanupDroppableCssClasses();
+        if (this.element.__mdroppable__) this.element.__mdroppable__.cleanupCssClasses();
         event.dataTransfer.dropEffect = MDropEffect.MNone;
 
         this.dispatchEvent(event, MDropEventNames.OnDragLeave);
@@ -102,7 +102,7 @@ export class MDroppable {
     private onDragIn(event: DragEvent): any {
         event.stopPropagation();
         if (this.element.__mdroppable__) {
-            this.element.__mdroppable__.cleanupDroppableCssClasses();
+            this.element.__mdroppable__.cleanupCssClasses();
         }
 
         MDroppable.currentHoverElement = this.element;
@@ -123,29 +123,40 @@ export class MDroppable {
         event.preventDefault();
 
         if (this.element.__mdroppable__) {
-            this.element.__mdroppable__.cleanupDroppableCssClasses();
+            this.element.__mdroppable__.cleanupCssClasses();
         }
 
-        MDroppable.currentHoverElement = undefined;
+        if (MDraggable.currentlyDraggedElement && MDraggable.currentlyDraggedElement.__mdraggable__) {
+            MDraggable.currentlyDraggedElement.__mdraggable__.cleanupCssClasses();
+        }
+
         this.dispatchEvent(event, MDropEventNames.OnDrop);
+        MDroppable.currentHoverElement = undefined;
+        MDraggable.currentlyDraggedElement = undefined;
     }
 
-    private cleanupDroppableCssClasses(): void {
+    private cleanupCssClasses(): void {
         this.element.classList.remove(MDroppableClassNames.MOvering);
         this.element.classList.remove(MDroppableClassNames.MCanDrop);
         this.element.classList.remove(MDroppableClassNames.MCantDrop);
     }
 
     private canDrop(): boolean {
+        const draggableElement = MDraggable.currentlyDraggedElement;
+        if (!draggableElement) return false;
+
         const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
-        const draggableAction: string | undefined = MDraggable.currentlyDraggedElement.__mdraggable__
-            ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action
+        const draggableAction: string | undefined = draggableElement.__mdraggable__
+            ? draggableElement.__mdraggable__.options.action
             : undefined;
         const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
         return MDroppable.currentHoverElement !== MDraggable.currentlyDraggedElement && (acceptAny || isAllowedAction);
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
+        const draggableElement = MDraggable.currentlyDraggedElement;
+        if (!draggableElement) return;
+
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
 
         const data = MDraggable.currentlyDraggedElement && MDraggable.currentlyDraggedElement.__mdraggable__
@@ -153,7 +164,7 @@ export class MDroppable {
             ? MDraggable.currentlyDraggedElement.__mdraggable__.options.dragData
             : event.dataTransfer.getData('text') : undefined;
         const dropInfo: MDropInfo = {
-            action: MDraggable.currentlyDraggedElement.__mdraggable__ ? MDraggable.currentlyDraggedElement.__mdraggable__.options.action : DEFAULT_ACTION,
+            action: draggableElement.__mdraggable__ ? draggableElement.__mdraggable__.options.action : DEFAULT_ACTION,
             grouping: this.options.grouping,
             data,
             canDrop: this.canDrop()
