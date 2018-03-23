@@ -65,6 +65,10 @@ export class Viewer extends Vue {
         this.refreshNewItem();
     }
 
+    private handleSortableRemove(event: MSortEvent, list: any[]): void {
+        list.splice(event.sortInfo.oldPosition, 1);
+    }
+
     private refreshNewItem(): void {
         this.newItem = new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`);
     }

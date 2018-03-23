@@ -59,8 +59,8 @@ export class MDroppable {
     }
 
     public detach(): void {
-        this.element.removeEventListener('dragleave', this.onDragLeave.bind(this));
         this.element.removeEventListener('dragenter', this.onDragEnter.bind(this));
+        this.element.removeEventListener('dragleave', this.onDragLeave.bind(this));
         this.element.removeEventListener('dragover', this.onDragOver.bind(this));
         this.element.removeEventListener('drop', this.onDrop.bind(this));
         this.element.removeEventListener('touchmove', () => {});
@@ -70,8 +70,8 @@ export class MDroppable {
     private attach(canDrop?: boolean): void {
         this.options.acceptedActions = canDrop ? this.options.acceptedActions || [DEFAULT_ACTION] : [];
 
-        this.element.addEventListener('dragleave', this.onDragLeave.bind(this));
         this.element.addEventListener('dragenter', this.onDragEnter.bind(this));
+        this.element.addEventListener('dragleave', this.onDragLeave.bind(this));
         this.element.addEventListener('dragover', this.onDragOver.bind(this));
 
         if (canDrop) {
@@ -80,17 +80,17 @@ export class MDroppable {
         this.element.addEventListener('touchmove', () => {});
     }
 
+    private onDragEnter(event: DragEvent): void {
+        event.preventDefault();
+        this.onDragIn(event);
+        this.dispatchEvent(event, MDropEventNames.OnDragEnter);
+    }
+
     private onDragLeave(event: DragEvent): any {
         if (this.element.__mdroppable__) this.element.__mdroppable__.cleanupCssClasses();
         event.dataTransfer.dropEffect = MDropEffect.MNone;
 
         this.dispatchEvent(event, MDropEventNames.OnDragLeave);
-    }
-
-    private onDragEnter(event: DragEvent): void {
-        event.preventDefault();
-        this.onDragIn(event);
-        this.dispatchEvent(event, MDropEventNames.OnDragEnter);
     }
 
     private onDragOver(event: DragEvent): any {

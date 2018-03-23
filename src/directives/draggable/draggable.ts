@@ -15,6 +15,17 @@ export interface MDraggableOptions {
     dragData: any;
 }
 
+export interface MDragInfo {
+    action: string;
+    grouping?: string;
+    data: any;
+}
+
+export enum MDraggableEventNames {
+    OnDragStart = 'draggable:dragstart',
+    OnDragEnd = 'draggable:dragend'
+}
+
 const DEFAULT_ACTION = 'any';
 export class MDraggable {
     public static currentlyDraggedElement: MDraggableElement | undefined;
@@ -48,13 +59,14 @@ export class MDraggable {
         this.element.addEventListener('touchmove', () => {});
     }
 
+    private onDragEnd(event: DragEvent): void {
+        if (MDraggable.currentlyDraggedElement) this.cleanupCssClasses();
+        this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
+    }
+
     private onDragEnter(event: DragEvent): void {
         event.preventDefault();
         MDraggable.currentlyDraggedElement = undefined;
-    }
-
-    private onDragEnd(event: DragEvent): void {
-        if (MDraggable.currentlyDraggedElement) this.element.classList.remove(MDraggableClassNames.MDragging);
     }
 
     private onDragStart(event: DragEvent): void {
@@ -67,6 +79,23 @@ export class MDraggable {
         } else {
             event.dataTransfer.setData('text', this.options.dragData);
         }
+        this.dispatchEvent(event, MDraggableEventNames.OnDragStart);
+    }
+
+    private dispatchEvent(event: DragEvent, name: string): void {
+        const customEvent: CustomEvent = document.createEvent('CustomEvent');
+        const data: any = this.options.dragData
+            ? this.options.dragData
+            : event.dataTransfer.getData('text');
+        const dropInfo: MDragInfo = {
+            action: this.options.action,
+            grouping: undefined,
+            data
+        };
+        const dropEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { dropInfo });
+
+        customEvent.initCustomEvent(name, true, true, event);
+        this.element.dispatchEvent(dropEvent);
     }
 }
 

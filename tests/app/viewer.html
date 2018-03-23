@@ -25,6 +25,7 @@
         :accepted-actions="['someAction']"
         @sortable:add="handleSortableAdd($event, items)"
         @sortable:move="handleSortableMove($event, items)"
+        @sortable:remove="handleSortableRemove($event, items)"
         style="background-color: lightYellow; width: 50%; border: 1px solid red;">
         <div class="emptyPlaceholder" style="background-color: lightgreen; width: 100%;">No Items.  Drop SomeAction on me!</div>
         <div class="placeholder" style="background-color: darkgreen; height: 1px;"></div>
@@ -37,6 +38,7 @@
         :accepted-actions="['someAction']"
         @sortable:add="handleSortableAdd($event, items2)"
         @sortable:move="handleSortableMove($event, items2)"
+        @sortable:remove="handleSortableRemove($event, items2)"
         style="background-color: lightYellow; width: 50%; border: 1px solid blue;">
         <div class="emptyPlaceholder" style="background-color: lightblue; width: 100%;">No Items.  Drop SomeAction on me!</div>
         <div class="placeholder" style="background-color: red; height: 1px;"></div>
@@ -49,6 +51,7 @@
         :accepted-actions="['someAction']"
         @sortable:add="handleSortableAdd($event, items3)"
         @sortable:move="handleSortableMove($event, items3)"
+        @sortable:remove="handleSortableRemove($event, items3)"
         style="background-color: lightYellow; width: 50%; border: 1px solid green; min-height: 20px;">
         <div v-for="item in items3">
             Hello from Item #{{ item.id }}: {{ item.text }}
