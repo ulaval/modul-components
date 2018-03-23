@@ -1,88 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MAcordion should render correctly 1`] = `
-<article class="m-accordion m--is-secondary m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+<article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
 </article>
 `;
 
 exports[`MAcordion should render correctly when disabled 1`] = `
-<article class="m-accordion m--is-secondary m--is-closed m--is-disabled">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+<article class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
 </article>
 `;
 
 exports[`MAcordion should render correctly when it is opened 1`] = `
-<article class="m-accordion m--is-secondary">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-accordion__header-icon m--is-closed m--is-large"></span></header>
-    <div class="m-accordion__body-wrap">
+<article class="m-accordion m--is-default m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-expanded="true" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-accordion__header-icon m--is-closed m--is-left m--is-large"></span></div>
+    <div role="tabpanel" id="uuid-controls" aria-labelledby="uuid"
+        class="m-accordion__body-wrap">
         <div class="m-accordion__body m--has-padding">Content</div>
     </div>
 </article>
 `;
 
 exports[`MAcordion should render correctly when there is an icon border 1`] = `
-<article class="m-accordion m--is-secondary m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large m--has-border"></span></header>
+<article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large m--has-border"></span></div>
 </article>
 `;
 
 exports[`MAcordion should render icon positions correctly: Left 1`] = `
-<article class="m-accordion m--is-left m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+<article class="m-accordion m--is-left m--is-closed m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
 </article>
 `;
 
 exports[`MAcordion should render icon positions correctly: Right 1`] = `
-<article class="m-accordion m--is-right m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+<article class="m-accordion m--is-right m--is-closed m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
 </article>
 `;
 
 exports[`MAcordion should render icon sizes correctly: Large 1`] = `
-<article class="m-accordion m--is-large m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+<article class="m-accordion m--is-large m--is-closed m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
 </article>
 `;
 
 exports[`MAcordion should render icon sizes correctly: Small 1`] = `
-<article class="m-accordion m--is-small m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+<article class="m-accordion m--is-small m--is-closed m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+</article>
+`;
+
+exports[`MAcordion should render skins correctly: Default 1`] = `
+<article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
 </article>
 `;
 
 exports[`MAcordion should render skins correctly: Light 1`] = `
-<article class="m-accordion m--is-light m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--is-icon-left m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--has-border"></span></header>
+<article class="m-accordion m--is-light m--is-closed m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large m--has-border"></span></div>
 </article>
 `;
 
 exports[`MAcordion should render skins correctly: Plain 1`] = `
-<article class="m-accordion m--is-plain m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
-</article>
-`;
-
-exports[`MAcordion should render skins correctly: Primary 1`] = `
-<article class="m-accordion m--is-primary m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
-</article>
-`;
-
-exports[`MAcordion should render skins correctly: Secondary 1`] = `
-<article class="m-accordion m--is-secondary m--is-closed">
-    <header tabindex="0" class="m-accordion__header m--has-padding">
-        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-large"></span></header>
+<article class="m-accordion m--is-plain m--is-closed m--has-icon-left m--has-icon-large">
+    <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
+        <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
 </article>
 `;

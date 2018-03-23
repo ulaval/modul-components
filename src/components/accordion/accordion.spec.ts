@@ -2,10 +2,14 @@ import '../../utils/polyfills';
 
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
+import uuid from '../../utils/uuid/uuid';
 
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import AccordionPlugin, { MAccordion, MAccordionIconPosition, MAccordionIconSize, MAccordionSkin } from './accordion';
+
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('MAcordion', () => {
     beforeEach(() => {
@@ -84,10 +88,10 @@ describe('MAcordion', () => {
     it('should emit click event when it is opened or closed', () => {
         const acn = mount(MAccordion);
 
-        acn.find('header').trigger('click');
+        acn.find('.m-accordion__header').trigger('click');
         expect(acn.emitted('click')[0][0]).toBeTruthy();
 
-        acn.find('header').trigger('click');
+        acn.find('.m-accordion__header').trigger('click');
         expect(acn.emitted('click')[1][0]).toBeFalsy();
     });
 
@@ -104,7 +108,7 @@ describe('MAcordion', () => {
     it('should sync open prop', () => {
         const acn = mount(MAccordion);
 
-        acn.find('header').trigger('click');
+        acn.find('.m-accordion__header').trigger('click');
 
         expect(acn.emitted('update:open')[0][0]).toBeTruthy();
     });
