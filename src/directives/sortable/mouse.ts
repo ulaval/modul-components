@@ -23,9 +23,9 @@ export const mousePositionDocument: (e: MouseEvent) => { x: number, y: number } 
     if (!e) {
         e = window.event as MouseEvent;
     }
-    if (e.clientX || e.clientY) {
-        posx = e.clientX;
-        posy = e.clientY;
+    if (e.pageX || e.pageY) {
+        posx = e.pageX;
+        posy = e.pageY;
     } else if (e.clientX || e.clientY) {
         posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
         posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
