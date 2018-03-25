@@ -13,6 +13,7 @@ export enum MDraggableClassNames {
 export interface MDraggableOptions {
     action: string;
     dragData: any;
+    grouping?: any;
 }
 
 export interface MDragInfo {
@@ -89,7 +90,7 @@ export class MDraggable {
             : event.dataTransfer.getData('text');
         const dropInfo: MDragInfo = {
             action: this.options.action,
-            grouping: undefined,
+            grouping: this.options.grouping,
             data
         };
         const dropEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { dropInfo });
@@ -103,7 +104,8 @@ const Directive: DirectiveOptions = {
     bind(element: MDraggableElement, binding: VNodeDirective, node: VNode): void {
         element.__mdraggable__ = new MDraggable(element, {
             action: getVNodeAttributeValue(node, 'action'),
-            dragData: getVNodeAttributeValue(node, 'drag-data')
+            dragData: getVNodeAttributeValue(node, 'drag-data'),
+            grouping: getVNodeAttributeValue(node, 'grouping')
         });
     },
     unbind(element: MDraggableElement, binding: VNodeDirective): void {

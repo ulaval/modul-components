@@ -5,6 +5,7 @@ import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { MDraggableElement, MDraggable, MDraggableEventNames } from '../draggable/draggable';
 import { MDroppable, MDroppableElement, MDropEvent, MDropEventNames, MDropInfo } from '../droppable/droppable';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
+import tabPanel from 'src/components/tab-panel/tab-panel';
 
 export interface MSortableElement extends MDroppableElement {
     __msortable__?: MSortable;
@@ -13,7 +14,7 @@ export interface MSortableElement extends MDroppableElement {
 export interface MSortableOptions {
     items: any[];
     acceptedActions: string[];
-    grouping?: string;
+    grouping?: any;
 }
 
 export enum MSortEventNames {
@@ -67,22 +68,27 @@ export class MSortable {
     private element: MSortableElement;
     private emptyPlaceHolderElement: MDroppableElement | undefined;
     private placeHolderElement: MDroppableElement | undefined;
-    private options: MSortableOptions;
+
+    private _options: MSortableOptions;
+    private get options(): MSortableOptions { return this._options; }
+    private set options(value) {
+        if (value.acceptedActions && value.acceptedActions.length) {
+            value.acceptedActions.push(MOVE_ACTION);
+        } else {
+            value.acceptedActions = value.acceptedActions ? value.acceptedActions : [DEFAULT_ACTION];
+        }
+        this._options = value;
+    }
 
     constructor(element: HTMLElement, options: MSortableOptions) {
         this.element = element;
         this.options = options;
-
-        if (this.options.acceptedActions && this.options.acceptedActions.length) {
-            this.options.acceptedActions.push(MOVE_ACTION);
-        } else {
-            this.options.acceptedActions = this.options.acceptedActions ? this.options.acceptedActions : [DEFAULT_ACTION];
-        }
-
         this.attach();
     }
 
-    public update(): void {
+    public update(options: MSortableOptions): void {
+        this.options = options;
+
         this.attachEmptyPlaceholder();
         this.attachPlaceholder();
         this.attachChilds();
@@ -124,19 +130,23 @@ export class MSortable {
                 if (!draggablePart.__mdraggable__) {
                     draggablePart.__mdraggable__ = new MDraggable(draggablePart, {
                         action: MOVE_ACTION,
-                        dragData: {}
+                        dragData: {},
+                        grouping: ''
                     });
                 }
                 draggablePart.__mdraggable__.options.dragData = this.options.items[itemCounter++];
+                draggablePart.__mdraggable__.options.grouping = this.options.grouping;
                 draggablePart.addEventListener(MDraggableEventNames.OnDragEnd, this.onChildDragEnd.bind(this));
                 draggablePart.addEventListener(MDraggableEventNames.OnDragStart, this.onChildDragStart.bind(this));
 
                 const droppablePart: MDroppableElement = currentElement as MDroppableElement;
                 if (!droppablePart.__mdroppable__) {
                     droppablePart.__mdroppable__ = new MDroppable(droppablePart, {
-                        acceptedActions: this.options.acceptedActions,
-                        grouping: this.options.grouping
+                        acceptedActions: [],
+                        grouping: ''
                     }, true);
+                    droppablePart.__mdroppable__.options.acceptedActions = this.options.acceptedActions;
+                    droppablePart.__mdroppable__.options.grouping = this.options.grouping;
                     droppablePart.addEventListener(MDropEventNames.OnDragEnter, this.onChildDragEnter.bind(this));
                     droppablePart.addEventListener(MDropEventNames.OnDragOver, this.onChildDragOver.bind(this));
                     droppablePart.addEventListener(MDropEventNames.OnDragLeave, this.onChildDragLeave.bind(this));
@@ -166,7 +176,7 @@ export class MSortable {
         this.setupPlaceholder(this.placeHolderElement, '.emptyPlaceholder', (element: MDroppableElement | undefined) => this.emptyPlaceHolderElement = element);
 
         if (this.emptyPlaceHolderElement) {
-            this.emptyPlaceHolderElement.style.display = this.options.items.length ? 'none' : '';
+            this.emptyPlaceHolderElement.style.display = this.options.items.length ? 'none' : 'inherit';
             this.emptyPlaceHolderElement.addEventListener(MDropEventNames.OnDragEnter, this.onChildDragEnter.bind(this));
             this.emptyPlaceHolderElement.addEventListener(MDropEventNames.OnDragOver, this.onChildDragOver.bind(this));
             this.emptyPlaceHolderElement.addEventListener(MDropEventNames.OnDragLeave, (e: DragEvent) => { e.stopImmediatePropagation(); e.stopPropagation(); });
@@ -223,12 +233,15 @@ export class MSortable {
         }
 
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
-        const sortInfo: MSortInfo = Object.assign(event.dropInfo, {
+        const sortInfo: MSortInfo = {
+            canDrop: event.dropInfo.canDrop,
+            data: event.dropInfo.data,
+            action: event.dropInfo.action,
             oldPosition: oldIndex,
             newPosition: this.getNewPosition(event),
             oldGrouping: MSortable.fromSortContainer ? (MSortable.fromSortContainer.__msortable__ as MSortable).options.grouping : undefined,
             newGrouping: this.options.grouping
-        });
+        };
         const sortEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { sortInfo });
         customEvent.initCustomEvent(eventName, true, true, event.detail);
         this.element.dispatchEvent(sortEvent);
@@ -268,15 +281,15 @@ export class MSortable {
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        if (MSortable.activeSortContainer && MSortable.activeSortContainer.__msortable__) {
-            MSortable.activeSortContainer.__msortable__.hidePlaceHolder();
-        }
+        console.log('you left');
+        MSortable.activeSortContainer = undefined;
+        this.hidePlaceHolder();
         this.cleanUpClasses();
     }
 
     private onChildDragOver(event: MDropEvent): void {
         event.preventDefault();
-        event.stopPropagation();
+        event.stopImmediatePropagation();
         this.positionPlaceholder(event);
     }
 
@@ -288,7 +301,15 @@ export class MSortable {
     }
 
     private positionPlaceholder(event: MDropEvent): void {
-        MSortable.activeSortContainer = this.element;
+        if (MSortable.activeSortContainer !== this.element) {
+            console.log('test');
+            if (MSortable.activeSortContainer && MSortable.activeSortContainer.__msortable__) {
+                MSortable.activeSortContainer.__msortable__.hidePlaceHolder();
+            }
+
+            MSortable.activeSortContainer = this.element;
+        }
+
         if (this.options.items.length === 0 || this.isHoveringInsertionPlaceholder() || !event.dropInfo.canDrop) {
             return;
         }
@@ -377,14 +398,34 @@ export class MSortable {
 }
 
 const Directive: DirectiveOptions = {
+    bind(element: MSortableElement, binding: VNodeDirective, node: VNode): void {
+        if (!element.__msortable__) {
+            element.__msortable__ = new MSortable(element, {
+                items: getVNodeAttributeValue(node, 'items'),
+                acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
+                grouping: getVNodeAttributeValue(node, 'grouping')
+            });
+        } else {
+            element.__msortable__.update({
+                items: getVNodeAttributeValue(node, 'items'),
+                acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
+                grouping: getVNodeAttributeValue(node, 'grouping')
+            });
+        }
+    },
     componentUpdated(element: MSortableElement, binding: VNodeDirective, node: VNode): void {
         if (!element.__msortable__) {
             element.__msortable__ = new MSortable(element, {
                 items: getVNodeAttributeValue(node, 'items'),
-                acceptedActions: getVNodeAttributeValue(node, 'accepted-actions')
+                acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
+                grouping: getVNodeAttributeValue(node, 'grouping')
             });
         } else {
-            element.__msortable__.update();
+            element.__msortable__.update({
+                items: getVNodeAttributeValue(node, 'items'),
+                acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
+                grouping: getVNodeAttributeValue(node, 'grouping')
+            });
         }
     },
     unbind(element: MSortableElement, binding: VNodeDirective): void {

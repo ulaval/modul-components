@@ -10,11 +10,14 @@ class MyObject {
     public id: number;
     public text: string;
     public counter: number;
+    public grouping: any;
+    public items: MyObject[] = [];
 
-    constructor(id: number, text: string) {
+    constructor(id: number, text: string, grouping?: any) {
         this.id = id;
         this.text = text;
         this.counter = 0;
+        this.grouping = grouping;
     }
 }
 @WithRender
@@ -25,6 +28,8 @@ export class Viewer extends Vue {
     public items2: any[] = [];
     public items3: any[] = [];
     public newItem: MyObject = new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`);
+    public groupingCount = 1;
+    public itemCount = 1;
 
     public mounted(): void {
         this.buildTag();
@@ -40,12 +45,22 @@ export class Viewer extends Vue {
     }
 
     private handleSortableAdd(event: MSortEvent, list: any[]): void {
-        console.log(event.sortInfo);
-        list.splice(event.sortInfo.newPosition, 0, new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`));
-        this.refreshNewItem();
+        event.stopImmediatePropagation();
+
+        const id: number = this.itemCount++;
+        switch (event.sortInfo.action) {
+            case 'addGrouping':
+                list.splice(event.sortInfo.newPosition, 0, new MyObject(id, `Hello from ${id}`, this.groupingCount++));
+                this.refreshNewItem();
+                break;
+            default:
+                list.splice(event.sortInfo.newPosition, 0, new MyObject(id, `Hello from ${id}`, event.sortInfo.newGrouping));
+                this.refreshNewItem();
+        }
     }
 
     private handleSortableMove(event: MSortEvent, list: any[]): void {
+        event.stopImmediatePropagation();
         console.log(event.sortInfo);
 
         if (event.sortInfo.oldPosition === -1) {
@@ -66,6 +81,7 @@ export class Viewer extends Vue {
     }
 
     private handleSortableRemove(event: MSortEvent, list: any[]): void {
+        event.stopImmediatePropagation();
         list.splice(event.sortInfo.oldPosition, 1);
     }
 

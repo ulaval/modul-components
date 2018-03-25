@@ -29,7 +29,7 @@ export interface MDroppableElement extends HTMLElement {
 
 export interface MDroppableOptions {
     acceptedActions: string[];
-    grouping?: string;
+    grouping?: any;
 }
 
 export interface MDropInfo {
@@ -100,6 +100,11 @@ export class MDroppable {
     }
 
     private onDragIn(event: DragEvent): any {
+        console.log(this.options);
+
+        if (MDraggable.currentlyDraggedElement) {
+            console.log((MDraggable.currentlyDraggedElement.__mdraggable__ as MDraggable).options);
+        }
         event.stopPropagation();
         if (this.element.__mdroppable__) {
             this.element.__mdroppable__.cleanupCssClasses();
@@ -145,12 +150,26 @@ export class MDroppable {
         const draggableElement = MDraggable.currentlyDraggedElement;
         if (!draggableElement) return false;
 
+        const isHoveringOverDraggingElement = MDroppable.currentHoverElement === MDraggable.currentlyDraggedElement;
         const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
         const draggableAction: string | undefined = draggableElement.__mdraggable__
             ? draggableElement.__mdraggable__.options.action
             : undefined;
         const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
-        return MDroppable.currentHoverElement !== MDraggable.currentlyDraggedElement && (acceptAny || isAllowedAction);
+        return !isHoveringOverDraggingElement && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
+    }
+
+    private isHoveringOverDraggedElementChild(): boolean {
+        let element: HTMLElement | undefined = MDroppable.currentHoverElement as HTMLElement;
+        if (!element) return false;
+
+        let hovering = false;
+        do {
+            hovering = element.parentNode === MDraggable.currentlyDraggedElement;
+            element = element.parentNode as HTMLElement;
+        } while (!hovering && element);
+
+        return hovering;
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
