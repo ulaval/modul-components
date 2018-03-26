@@ -264,6 +264,7 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(ButtonPlugin);
         v.use(MessagePlugin);
         v.use(LinkPlugin);
+        v.use(MediaQueriesPlugin);
         v.component(FILE_UPLOAD_NAME, MFileUpload);
     }
 };
