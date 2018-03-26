@@ -1,10 +1,7 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DRAGGABLE } from '../directive-names';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
-
-export interface MDraggableElement extends HTMLElement {
-    __mdraggable__?: MDraggable;
-}
+import { MElementPlugin } from '../plugin';
 
 export enum MDraggableClassNames {
     MDragging = 'm--is-dragging'
@@ -28,53 +25,52 @@ export enum MDraggableEventNames {
 }
 
 const DEFAULT_ACTION = 'any';
-export class MDraggable {
-    public static currentlyDraggedElement: MDraggableElement | undefined;
-    public options: MDraggableOptions;
-    private element: MDraggableElement;
 
-    constructor(element: HTMLElement, options: MDraggableOptions) {
-        this.element = element;
-        this.options = options;
-        this.attach();
+export interface MDraggableElement extends HTMLElement {
+    __mdraggable__: MDraggable;
+}
+
+export class MDraggable extends MElementPlugin<MDraggableOptions> {
+    public static currentDraggable?: MDraggable;
+
+    constructor(element: MDraggableElement, options: MDraggableOptions) {
+        super(element, options);
+    }
+
+    public attach(): void {
+        this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
+        this.element.draggable = true;
+
+        this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
+        this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
+        this.addEventListener('touchmove', (event: DragEvent) => () => {});
+    }
+
+    public update(options: MDraggableOptions): void {
+        this._options = options;
     }
 
     public detach(): void {
         this.element.draggable = false;
-        this.element.removeEventListener('dragend', this.onDragEnd.bind(this));
-        this.element.removeEventListener('dragstart', this.onDragStart.bind(this));
-        this.element.removeEventListener('touchmove', () => {});
-        this.element.__mdraggable__ = undefined;
+        this.cleanupCssClasses();
+        this.removeAllEvents();
+        delete (this.element as MDraggableElement).__mdraggable__;
     }
 
     public cleanupCssClasses(): void {
         this.element.classList.remove(MDraggableClassNames.MDragging);
     }
 
-    private attach(): void {
-        this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
-
-        this.element.draggable = true;
-        this.element.addEventListener('dragend', this.onDragEnd.bind(this));
-        this.element.addEventListener('dragstart', this.onDragStart.bind(this), false);
-        this.element.addEventListener('touchmove', () => {});
-    }
-
     private onDragEnd(event: DragEvent): void {
-        if (MDraggable.currentlyDraggedElement) this.cleanupCssClasses();
+        if (MDraggable.currentDraggable) this.cleanupCssClasses();
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
-    }
-
-    private onDragEnter(event: DragEvent): void {
-        event.preventDefault();
-        MDraggable.currentlyDraggedElement = undefined;
     }
 
     private onDragStart(event: DragEvent): void {
         event.stopPropagation();
 
-        MDraggable.currentlyDraggedElement = event.currentTarget as MDraggableElement;
-        MDraggable.currentlyDraggedElement.classList.add(MDraggableClassNames.MDragging);
+        MDraggable.currentDraggable = this;
+        this.element.classList.add(MDraggableClassNames.MDragging);
         if (typeof this.options.dragData === 'object') {
             event.dataTransfer.setData('text', JSON.stringify(this.options.dragData));
         } else {
@@ -102,14 +98,22 @@ export class MDraggable {
 
 const Directive: DirectiveOptions = {
     bind(element: MDraggableElement, binding: VNodeDirective, node: VNode): void {
+        console.log('bind!');
         element.__mdraggable__ = new MDraggable(element, {
             action: getVNodeAttributeValue(node, 'action'),
             dragData: getVNodeAttributeValue(node, 'drag-data'),
             grouping: getVNodeAttributeValue(node, 'grouping')
         });
     },
+    update(element: MDraggableElement, binding: VNodeDirective, node: VNode): void {
+        element.__mdraggable__.update({
+            action: getVNodeAttributeValue(node, 'action'),
+            dragData: getVNodeAttributeValue(node, 'drag-data'),
+            grouping: getVNodeAttributeValue(node, 'grouping')
+        });
+    },
     unbind(element: MDraggableElement, binding: VNodeDirective): void {
-        if (element.__mdraggable__) element.__mdraggable__.detach();
+        element.__mdraggable__.detach();
     }
 };
 

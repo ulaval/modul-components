@@ -100,11 +100,6 @@ export class MDroppable {
     }
 
     private onDragIn(event: DragEvent): any {
-        console.log(this.options);
-
-        if (MDraggable.currentlyDraggedElement) {
-            console.log((MDraggable.currentlyDraggedElement.__mdraggable__ as MDraggable).options);
-        }
         event.stopPropagation();
         if (this.element.__mdroppable__) {
             this.element.__mdroppable__.cleanupCssClasses();
@@ -131,13 +126,13 @@ export class MDroppable {
             this.element.__mdroppable__.cleanupCssClasses();
         }
 
-        if (MDraggable.currentlyDraggedElement && MDraggable.currentlyDraggedElement.__mdraggable__) {
-            MDraggable.currentlyDraggedElement.__mdraggable__.cleanupCssClasses();
+        if (MDraggable.currentDraggable) {
+            MDraggable.currentDraggable.cleanupCssClasses();
         }
 
         this.dispatchEvent(event, MDropEventNames.OnDrop);
         MDroppable.currentHoverElement = undefined;
-        MDraggable.currentlyDraggedElement = undefined;
+        MDraggable.currentDraggable = undefined;
     }
 
     private cleanupCssClasses(): void {
@@ -147,25 +142,22 @@ export class MDroppable {
     }
 
     private canDrop(): boolean {
-        const draggableElement = MDraggable.currentlyDraggedElement;
-        if (!draggableElement) return false;
+        if (!MDraggable.currentDraggable) return false;
 
-        const isHoveringOverDraggingElement = MDroppable.currentHoverElement === MDraggable.currentlyDraggedElement;
+        const isHoveringOverDraggingElement = MDroppable.currentHoverElement === MDraggable.currentDraggable.element;
         const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
-        const draggableAction: string | undefined = draggableElement.__mdraggable__
-            ? draggableElement.__mdraggable__.options.action
-            : undefined;
+        const draggableAction: string = MDraggable.currentDraggable.options.action;
         const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
         return !isHoveringOverDraggingElement && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
     }
 
     private isHoveringOverDraggedElementChild(): boolean {
-        let element: HTMLElement | undefined = MDroppable.currentHoverElement as HTMLElement;
-        if (!element) return false;
+        if (!MDraggable.currentDraggable) return false;
 
+        let element = MDraggable.currentDraggable.element;
         let hovering = false;
         do {
-            hovering = element.parentNode === MDraggable.currentlyDraggedElement;
+            hovering = element.parentNode === MDraggable.currentDraggable.element;
             element = element.parentNode as HTMLElement;
         } while (!hovering && element);
 
@@ -173,17 +165,16 @@ export class MDroppable {
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
-        const draggableElement = MDraggable.currentlyDraggedElement;
-        if (!draggableElement) return;
+        if (!MDraggable.currentDraggable) return;
 
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
 
-        const data = MDraggable.currentlyDraggedElement && MDraggable.currentlyDraggedElement.__mdraggable__
-            ? MDraggable.currentlyDraggedElement.__mdraggable__.options.dragData
-            ? MDraggable.currentlyDraggedElement.__mdraggable__.options.dragData
+        const data = MDraggable.currentDraggable
+            ? MDraggable.currentDraggable.options.dragData
+            ? MDraggable.currentDraggable.options.dragData
             : event.dataTransfer.getData('text') : undefined;
         const dropInfo: MDropInfo = {
-            action: draggableElement.__mdraggable__ ? draggableElement.__mdraggable__.options.action : DEFAULT_ACTION,
+            action: MDraggable.currentDraggable ? MDraggable.currentDraggable.options.action : DEFAULT_ACTION,
             grouping: this.options.grouping,
             data,
             canDrop: this.canDrop()

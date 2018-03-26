@@ -186,7 +186,7 @@ export class MSortable {
     private attachPlaceholder(): void {
         this.setupPlaceholder(this.placeHolderElement, '.placeholder', (element: MDroppableElement | undefined) => this.placeHolderElement = element);
 
-        if (this.placeHolderElement && !MDraggable.currentlyDraggedElement) {
+        if (this.placeHolderElement) {
             this.placeHolderElement.style.display = 'none';
             this.placeHolderElement.addEventListener(MDropEventNames.OnDragEnter, this.onChildDragEnter.bind(this));
             this.placeHolderElement.addEventListener(MDropEventNames.OnDragOver, this.onChildDragOver.bind(this));
@@ -293,8 +293,8 @@ export class MSortable {
         this.positionPlaceholder(event);
     }
 
-    private onChildDragStart(): void {
-        const element: MDraggableElement = MDraggable.currentlyDraggedElement as MDraggableElement;
+    private onChildDragStart(event: MDropEvent): void {
+        const element = MDraggable.currentDraggable ? MDraggable.currentDraggable.element : event.target as HTMLElement;
         const container: MSortableElement = this.findSortableContainer(element);
 
         MSortable.fromSortContainer = container;
@@ -314,8 +314,8 @@ export class MSortable {
             return;
         }
 
-        const draggableElement = MDraggable.currentlyDraggedElement;
-        if (MDroppable.currentHoverElement && MDraggable.currentlyDraggedElement && MDroppable.currentHoverElement === MDraggable.currentlyDraggedElement) {
+        const draggableElement = MDraggable.currentDraggable;
+        if (MDroppable.currentHoverElement && MDraggable.currentDraggable && MDroppable.currentHoverElement === MDraggable.currentDraggable.element) {
             this.hidePlaceHolder();
             return;
         } else {
@@ -355,13 +355,14 @@ export class MSortable {
         return MSortInsertPositions.After;
     }
 
-    private findSortableContainer(element: MSortableElement): MSortableElement {
+    private findSortableContainer(element: HTMLElement): MSortableElement {
+        let sortable: MSortableElement = element;
         do {
-            if (!element.__msortable__) {
-                element = element.parentNode as MSortableElement;
+            if (!sortable || !sortable.__msortable__) {
+                sortable = sortable.parentNode as MSortableElement;
             }
-        } while (element && !element.__msortable__);
-        return element;
+        } while (sortable && !sortable.__msortable__);
+        return sortable;
     }
 
     private getNewPosition(event: MDropEvent): number {
