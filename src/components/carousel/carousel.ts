@@ -112,7 +112,19 @@ export class MCarousel extends Vue {
     }
 
     private isIndexValid(value): boolean {
-        return value >= 0 && value < this.items.length;
+        return value >= 0 && value < this.numberOfCarouselItems();
+    }
+
+    private numberOfCarouselItems(): number {
+        let count: number = 0;
+        if (this.$slots.default) {
+            this.$slots.default.forEach(item => {
+                if (item.componentInstance instanceof MCarouselItem) {
+                    count ++;
+                }
+            });
+        }
+        return count;
     }
 
     private showPrevItem(resetInterval: boolean = false): void {
