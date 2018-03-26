@@ -34,14 +34,23 @@ export class MCarousel extends Vue {
                 this.showNextItem();
             }, this.interval);
         }
+        this.initialize();
     }
 
     protected updated(): void {
+        this.initialize();
+    }
+
+    protected beforeDestroy(): void {
+        this.toggleKeyboardNavigation(false);
+        clearInterval(this.updateInterval);
+    }
+
+    private initialize(): void {
         if (this.isIndexValid(this.propIndex) || this.propIndex === 0 && this.items.length === 0) {
             this.transitionForward = this.internalIndex <= this.propIndex;
             this.internalIndex = this.propIndex;
             let items: MCarouselItem[] = [];
-
             if (this.$slots.default) {
                 let index = 0;
                 this.$slots.default.forEach(item => {
@@ -66,11 +75,6 @@ export class MCarousel extends Vue {
                 this.items = items.length > 0 ? items : this.items;
             }
         }
-    }
-
-    protected beforeDestroy(): void {
-        this.toggleKeyboardNavigation(false);
-        clearInterval(this.updateInterval);
     }
 
     @Watch('keyboardNavigable')
