@@ -1,4 +1,4 @@
-import { mount, Wrapper, Slots } from '@vue/test-utils';
+import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
