@@ -27,11 +27,11 @@
         </m-message>
 
         <div class="m-file-upload__drop-zone">
-            <h2>
+            <h2 v-if="isMqMinS">
                 <m-icon name="drag-drop" size="48px"></m-icon>
                 <m-i18n k="m-file-upload:title"></m-i18n>
             </h2>
-            <p class="m-file-upload__drop-zone__or"><m-i18n k="m-file-upload:choice"></m-i18n></p>
+            <p  v-if="isMqMinS" class="m-file-upload__drop-zone__or"><m-i18n k="m-file-upload:choice"></m-i18n></p>
             <m-file-select class="m-file-upload__drop-zone__button" skin="primary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName"></m-file-select>
             <p class="m-file-upload__drop-zone__format" v-if="extensions"><m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format"></m-i18n>: {{fileExtensions}}</p>
         </div>

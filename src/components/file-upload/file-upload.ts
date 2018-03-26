@@ -18,6 +18,8 @@ import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 
@@ -46,7 +48,10 @@ let filesizeSymbols: { [name: string]: string } | undefined = undefined;
                 symbols: filesizeSymbols
             });
         }
-    }
+    },
+    mixins: [
+        MediaQueries
+    ]
 })
 export class MFileUpload extends ModulVue {
     @Prop()
@@ -259,6 +264,7 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(ButtonPlugin);
         v.use(MessagePlugin);
         v.use(LinkPlugin);
+        v.use(MediaQueriesPlugin);
         v.component(FILE_UPLOAD_NAME, MFileUpload);
     }
 };
