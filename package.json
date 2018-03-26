@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-feature-modul-shell-error-snaphot.18",
+    "version": "1.0.0-feature-modul-shell-error-snaphot.36",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -61,6 +61,7 @@
         "includeFailureMsg": true
     },
     "dependencies": {
+        "@ulaval/shell-ui": "^0.1.4",
         "axios": "^0.17.1",
         "css-loader": "^0.28.7",
         "enquire.js": "^2.1.6",
@@ -90,7 +91,6 @@
         "@types/jest": "^22.1.1",
         "@types/node": "^8.0.54",
         "@vue/test-utils": "^1.0.0-beta.11",
-        "@ulaval/shell-ui": "^0.1.4",
         "ajv": "^6.1.1",
         "awesome-typescript-loader": "^3.4.1",
         "bundle-loader": "^0.5.5",

@@ -16,11 +16,11 @@ import MetaFactory from './meta-init';
 
 Vue.config.productionTip = false;
 
-const utilsPluginOptions: UtilsPluginOptions = {
-    securityPluginOptions: {
-        protectedUrls: []
-    }
-};
+// const utilsPluginOptions: UtilsPluginOptions = {
+//     securityPluginOptions: {
+//         protectedUrls: []
+//     }
+// };
 
 let i18nOptions: I18nPluginOptions = {
     curLang: FRENCH
@@ -29,7 +29,7 @@ Vue.use(I18nLanguagePlugin, i18nOptions);
 
 Vue.use(ComponentsPlugin);
 Vue.use(DirectivesPlugin);
-Vue.use(UtilsPlugin, utilsPluginOptions);
+Vue.use(UtilsPlugin/*, utilsPluginOptions*/);
 
 Vue.use(FrenchPlugin);
 Vue.use(DefaultSpritesPlugin);

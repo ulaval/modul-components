@@ -26,6 +26,7 @@ import InputStylePlugin from './input-style/input-style';
 import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import ListItemPlugin from './list-item/list-item';
+import LoginPlugin from './login/login';
 import menuItemPlugin from './menu-item/menu-item';
 import menuPlugin from './menu/menu';
 import MessagePlugin from './message/message';
@@ -87,6 +88,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);
         Vue.use(ListItemPlugin);
+        Vue.use(LoginPlugin);
         Vue.use(MessagePlugin);
         Vue.use(ModalPlugin);
         Vue.use(NavbarPlugin);

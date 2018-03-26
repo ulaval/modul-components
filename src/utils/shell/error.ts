@@ -1,24 +1,25 @@
-// import { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
-// export class ModulError<T> {
-//     private _noPropagation: boolean = false;
+export class PromiseError extends Error {
+    private _noPropagation: boolean = false;
 
-//     constructor(public error: T) {
-//     }
+    constructor(public error: Error) {
+        super(error.message);
+    }
 
-//     public get noPropagation(): boolean {
-//         return this._noPropagation;
-//     }
+    public get noPropagation(): boolean {
+        return this._noPropagation;
+    }
 
-//     public stopPropagation(): void {
-//         this._noPropagation = true;
-//     }
+    public stopPropagation(): void {
+        this._noPropagation = true;
+    }
+}
+
+// export class PromiseJavascriptError extends PromiseError<Error> {
+
 // }
 
-// export class ModulJavascriptError extends ModulError<Error> {
-
-// }
-
-// export class ModulRestError extends ModulError<AxiosError> {
+// export class PromiseRestError extends PromiseError<AxiosError> {
 
 // }

@@ -9,7 +9,7 @@ import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ModalPlugin from '../modal/modal';
 
-export const ERROR_MESSAGE_NAME: string = 'm-error-message';
+const ERROR_MESSAGE_NAME: string = 'm-error-message';
 
 @WithRender
 @Component

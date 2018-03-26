@@ -1,7 +1,7 @@
 import Vue, { VueConstructor, PluginObject } from 'vue';
 import VueRouter, { Route } from 'vue-router';
 import { Shell, SHELL_GLOBAL_VAR } from '@ulaval/shell-ui/dist/shell/shell';
-// import { HttpService } from '@ulaval/modul-components/dist/utils/http/http';
+import { HttpService } from '../http/http';
 // import { ServiceErreurs, NOM_SERVICE_ERREURS } from '@ul/shell-services-api/dist/erreurs';
 // import { ServiceSecurite, NOM_SERVICE_SECURITE } from '@ul/shell-services-api/dist/securite';
 // import { ServiceAudit, NOM_SERVICE_AUDIT } from '@ul/shell-services-api/dist/audit';
@@ -10,6 +10,7 @@ import { Shell, SHELL_GLOBAL_VAR } from '@ulaval/shell-ui/dist/shell/shell';
 // import { startsWith } from '@ulaval/modul-components/dist/utils/str/str';
 // import uuid from '@ulaval/modul-components/dist/utils/uuid/uuid';
 import { AxiosResponse, AxiosError, AxiosProxyConfig, AxiosRequestConfig } from 'axios';
+import { PromiseError } from './error';
 // import ErreurTechniquePlugin, { TypesErreur } from './erreurs/erreur-technique/erreur-technique';
 // import FrancaisPlugin from './lang/fr';
 // import { ModulJavascriptError, ModulRestError, ModulError } from './error';
@@ -18,32 +19,32 @@ const AUTHORIZATION_HEADER: string = 'Authorization';
 
 declare module 'vue/types/vue' {
     interface Vue {
-        // $http: HttpService;
+        $http: HttpService;
     }
 }
 
-export interface ShellExtensionPluginOptions {
-    shell: Shell;
-    errorHandler?: (error: Error) => void;
-    restErrorHandler?: (restError: AxiosError) => void;
-    // auditUnhandledErrors?: boolean;
-    // protectedUrls?: string[];
-    // router?: VueRouter;
-}
+// export interface ShellExtensionPluginOptions {
+//     shell: Shell;
+//     errorHandler?: (error: Error) => void;
+//     restErrorHandler?: (restError: AxiosError) => void;
+//     // auditUnhandledErrors?: boolean;
+//     // protectedUrls?: string[];
+//     // router?: VueRouter;
+// }
 
 class ShellExtension {
     // private auditUnhandledErrors: boolean = false;
 
-    constructor(private options?: ShellExtensionPluginOptions) {
-        if (options) {
-            // this.auditUnhandledErrors = options !== undefined && !!options.auditUnhandledErrors;
+    constructor(/*private options?: ShellExtensionPluginOptions*/) {
+        // if (options) {
+        // this.auditUnhandledErrors = options !== undefined && !!options.auditUnhandledErrors;
 
-            this.setupErrorHandlers();
-            // this.setupHttpInterceptors();
-            // this.setupRouterHooks();
-        } else {
-            console.warn('Unable to install the ShellExtensionPlugin, you must provide ShellExtensionPluginOptions with a shell instance.');
-        }
+        this.setupErrorHandlers();
+        this.setupHttpInterceptors();
+        // this.setupRouterHooks();
+        // } else {
+        //     console.warn('Unable to install the ShellExtensionPlugin, you must provide ShellExtensionPluginOptions with a shell instance.');
+        // }
     }
 
     // public get audit(): ServiceAudit {
@@ -63,7 +64,7 @@ class ShellExtension {
     // }
 
     private setupErrorHandlers(): void {
-        // doit auditer parce que ça ne remonte pas dans le window onError
+        // les erreurs de parser Vue ne remontent pas dans le window onError
         Vue.config.errorHandler = (err, vm, info) => this.onError(err);
 
         // let svcErreurs: ServiceErreurs = this.getService<ServiceErreurs>(NOM_SERVICE_ERREURS);
@@ -72,12 +73,12 @@ class ShellExtension {
         // }
     }
 
-    // private setupHttpInterceptors(): void {
-    //     if (Vue.prototype.$http) {
-    //         this.setupRequestInterceptors();
-    //         this.setupResponseInterceptors();
-    //     }
-    // }
+    private setupHttpInterceptors(): void {
+        if (Vue.prototype.$http) {
+            // this.setupRequestInterceptors();
+            this.setupResponseInterceptors();
+        }
+    }
 
     // private setupRequestInterceptors(): void {
     //     (Vue.prototype.$http as HttpService).instance.interceptors.request.use((config: AxiosRequestConfig) => {
@@ -104,34 +105,61 @@ class ShellExtension {
     //     }, (error: Error) => error);
     // }
 
-    // private setupResponseInterceptors(): void {
-    //     (Vue.prototype.$http as HttpService).instance.interceptors.response.use((response: AxiosResponse) => response, (error: Error) => {
-    //         let erreur: Erreur<any>;
-    //         if ((error as AxiosError).response) {
-    //             erreur = new ErreurRest(error as AxiosError);
-    //             let axiosResponse: AxiosResponse = (error as AxiosError).response as AxiosResponse;
+    private setupResponseInterceptors(): void {
+        (Vue.prototype.$http as HttpService).instance.interceptors.response.use((response: AxiosResponse) => response, (error: Error) => {
+            let promiseError: PromiseError = new PromiseError(error);
+            this.onError(promiseError, true);
+            // if ((error as AxiosError).response) {
+            //     erreur = new ErreurRest(error as AxiosError);
+            //     let axiosResponse: AxiosResponse = (error as AxiosError).response as AxiosResponse;
 
-    //             let id: string;
-    //             if (axiosResponse.data) {
-    //                 if (axiosResponse.data.idRequete) {
-    //                     id = axiosResponse.data.idRequete;
-    //                 } else {
-    //                     id = uuid.generate();
-    //                 }
-    //             } else {
-    //                 id = 'no_id';
-    //             }
+            //     let id: string;
+            //     if (axiosResponse.data) {
+            //         if (axiosResponse.data.idRequete) {
+            //             id = axiosResponse.data.idRequete;
+            //         } else {
+            //             id = uuid.generate();
+            //         }
+            //     } else {
+            //         id = 'no_id';
+            //     }
 
-    //             let data: any = (axiosResponse.status === 403 || axiosResponse.status === 404 || axiosResponse.status === 503) ? undefined : axiosResponse.data;
+            //     let data: any = (axiosResponse.status === 403 || axiosResponse.status === 404 || axiosResponse.status === 503) ? undefined : axiosResponse.data;
 
-    //             this.onErrorRest(id, data, erreur);
-    //         } else {
-    //             erreur = new ErreurJavascript(error);
-    //             this.onError(erreur);
-    //         }
-    //         return Promise.reject(erreur);
-    //     });
-    // }
+            //     this.onErrorRest(id, data, erreur);
+            // } else {
+            //     erreur = new ErreurJavascript(error);
+            //     this.onError(erreur);
+            // }
+            return Promise.reject(promiseError);
+        });
+        // (Vue.prototype.$http as HttpService).instance.interceptors.response.use((response: AxiosResponse) => response, (error: Error) => {
+        //     let erreur: Erreur<any>;
+        //     if ((error as AxiosError).response) {
+        //         erreur = new ErreurRest(error as AxiosError);
+        //         let axiosResponse: AxiosResponse = (error as AxiosError).response as AxiosResponse;
+
+        //         let id: string;
+        //         if (axiosResponse.data) {
+        //             if (axiosResponse.data.idRequete) {
+        //                 id = axiosResponse.data.idRequete;
+        //             } else {
+        //                 id = uuid.generate();
+        //             }
+        //         } else {
+        //             id = 'no_id';
+        //         }
+
+        //         let data: any = (axiosResponse.status === 403 || axiosResponse.status === 404 || axiosResponse.status === 503) ? undefined : axiosResponse.data;
+
+        //         this.onErrorRest(id, data, erreur);
+        //     } else {
+        //         erreur = new ErreurJavascript(error);
+        //         this.onError(erreur);
+        //     }
+        //     return Promise.reject(erreur);
+        // });
+    }
 
     // private setupRouterHooks(): void {
     //     if (this.options && this.options.router) {
@@ -141,7 +169,10 @@ class ShellExtension {
     //     }
     // }
 
-    private onError(error: Error): void {
+    private onError(error: Error | PromiseError, defer: boolean = false): void {
+        let call = () => window.onerror.call(this, error);
+        defer ? setTimeout(() => call(), 0) : call();
+
         // setTimeout(() => {
         //     if (!error.noPropagation) {
         //         let id: string = uuid.generate();
@@ -149,9 +180,10 @@ class ShellExtension {
         //         // this.popupError(erreur.error, id, TypesErreur.Javascript);
         //     }
         // }, 0);
-        if (this.options && this.options.errorHandler) {
-            this.options.errorHandler(error);
-        }
+        // if (this.options && this.options.errorHandler) {
+        //     this.options.errorHandler(error);
+        // }
+
     }
 
     // private onErrorRest(id: string, data: any, erreur: ErreurRest) {
@@ -189,7 +221,7 @@ class ShellExtension {
 
 const ShellExtensionPlugin: PluginObject<any> = {
     install(v, options): void {
-        let shellExtension = new ShellExtension(options);
+        let shellExtension = new ShellExtension(/*options*/);
         // (v.prototype as any).$shell = shellExtension;
     }
 };
