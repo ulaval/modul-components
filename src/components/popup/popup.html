@@ -1,4 +1,4 @@
-<div class="m-popup" aria-hidden="true">
+<div class="m-popup" aria-hidden="true" :class="{ 'm--is-inline': hasTriggerSlot }">
     <m-popper :open.sync="propOpen"
               @open="onOpen()"
               @close="onClose()"
