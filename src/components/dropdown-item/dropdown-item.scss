@@ -38,7 +38,7 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
 
         &.m--is-disabled {
             cursor: not-allowed;
-            color: $m-color--grey;
+            color: $m-color--grey-light;
         }
 
         &.m--is-selected {
