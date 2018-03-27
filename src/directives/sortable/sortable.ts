@@ -2,10 +2,11 @@ import { mousePositionElement } from './mouse';
 import { SORTABLE } from '../directive-names';
 import { PluginObject } from 'vue/types/plugin';
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
-import { MDraggableElement, MDraggable, MDraggableEventNames } from '../draggable/draggable';
+import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
 import { MDroppable, MDroppableElement, MDropEvent, MDropEventNames, MDropInfo } from '../droppable/droppable';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
 import tabPanel from 'src/components/tab-panel/tab-panel';
+import { MDOMPlugin } from '../plugin';
 
 export interface MSortableElement extends MDroppableElement {
     __msortable__?: MSortable;
@@ -126,18 +127,18 @@ export class MSortable {
         for (let i = 0; i < this.element.children.length; i++) {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
             if (currentElement !== this.placeHolderElement && currentElement !== this.emptyPlaceHolderElement) {
-                const draggablePart: MDraggableElement = currentElement as MDraggableElement;
-                if (!draggablePart.__mdraggable__) {
-                    draggablePart.__mdraggable__ = new MDraggable(draggablePart, {
+                let draggablePart: MDraggable | undefined = MDOMPlugin.get(MDraggable, currentElement);
+                if (!draggablePart) {
+                    draggablePart = MDOMPlugin.attach(MDraggable, currentElement, {
                         action: MOVE_ACTION,
                         dragData: {},
                         grouping: ''
                     });
+                    draggablePart.addEventListener(MDraggableEventNames.OnDragEnd, () => this.onChildDragEnd());
+                    draggablePart.addEventListener(MDraggableEventNames.OnDragStart, (event: MDropEvent) => this.onChildDragStart(event));
                 }
-                draggablePart.__mdraggable__.options.dragData = this.options.items[itemCounter++];
-                draggablePart.__mdraggable__.options.grouping = this.options.grouping;
-                draggablePart.addEventListener(MDraggableEventNames.OnDragEnd, this.onChildDragEnd.bind(this));
-                draggablePart.addEventListener(MDraggableEventNames.OnDragStart, this.onChildDragStart.bind(this));
+                draggablePart.options.dragData = this.options.items[itemCounter++];
+                draggablePart.options.grouping = this.options.grouping;
 
                 const droppablePart: MDroppableElement = currentElement as MDroppableElement;
                 if (!droppablePart.__mdroppable__) {
@@ -161,9 +162,7 @@ export class MSortable {
             if (currentElement !== this.placeHolderElement && currentElement !== this.emptyPlaceHolderElement) {
                 const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
 
-                const draggablePart: MDraggableElement = currentElement as MDraggableElement;
-                if (draggablePart.__mdraggable__) draggablePart.__mdraggable__.detach();
-
+                MDOMPlugin.detach(MDraggable, currentElement);
                 const droppablePart: MDroppableElement = currentElement as MDroppableElement;
                 if (droppablePart.__mdroppable__) droppablePart.__mdroppable__.detach();
 
@@ -371,7 +370,7 @@ export class MSortable {
         // We are hovering over one of the sortable's child.
         const insertPosition: MSortInsertPositions = this.computeInsertPosition(event);
         if (MDroppable.currentHoverElement !== this.element) {
-            const currentHoverElement = (MDroppable.currentHoverElement as MDraggableElement).__mdraggable__ as MDraggable;
+            const currentHoverElement = MDraggable.currentDraggable as MDraggable;
             const itemIndex = this.options.items.indexOf(currentHoverElement.options.dragData);
             return insertPosition === MSortInsertPositions.Before
                 ? itemIndex

@@ -1,6 +1,6 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE } from '../directive-names';
-import { MDraggable, MDraggableElement } from '../draggable/draggable';
+import { MDraggable } from '../draggable/draggable';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
 
 export enum MDroppableClassNames {

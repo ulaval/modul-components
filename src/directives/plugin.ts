@@ -1,3 +1,36 @@
+export class MDOMPlugin {
+    public static attach<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+        defaultMountPoint: string;
+        new (element: HTMLElement, options: OptionsType): PluginType;
+    }, element: HTMLElement, options: OptionsType): PluginType {
+        const plugin = new c(element, options);
+        element[c.defaultMountPoint] = new c(element, options);
+        return plugin;
+    }
+
+    public static get<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+        defaultMountPoint: string;
+    }, element: HTMLElement): PluginType | undefined {
+        return element[c.defaultMountPoint];
+    }
+
+    public static update<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+        defaultMountPoint: string;
+    }, element: HTMLElement, options: OptionsType): void {
+        const plugin: PluginType = element[c.defaultMountPoint] as PluginType;
+        if (plugin) plugin.update(options);
+    }
+
+    public static detach<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+        defaultMountPoint: string;
+    }, element: HTMLElement): void {
+        const plugin: PluginType = element[c.defaultMountPoint] as PluginType;
+        if (plugin) {
+            plugin.detach();
+            delete element[c.defaultMountPoint];
+        }
+    }
+}
 export abstract class MElementPlugin<OptionsType> {
     protected _options: OptionsType;
     private readonly _element: HTMLElement;
@@ -12,6 +45,10 @@ export abstract class MElementPlugin<OptionsType> {
         this._options = options;
         this.attach();
     }
+
+    public abstract attach(): void;
+    public abstract update(options: any): void;
+    public abstract detach(): void;
 
     public addEventListener(eventName: string, listener: EventListenerOrEventListenerObject): void {
         let listeners = this.attachedEvents.get(eventName);
@@ -38,14 +75,10 @@ export abstract class MElementPlugin<OptionsType> {
         }
     }
 
-    public removeAllEvents(): void {
+    protected removeAllEvents(): void {
         this.attachedEvents
             .forEach((listeners: EventListenerOrEventListenerObject[], eventName: string) => {
                 listeners.forEach(listener => this.element.removeEventListener(eventName, listener));
             });
     }
-
-    public abstract attach(): void;
-    public abstract update(options: any): void;
-    public abstract detach(): void;
 }
