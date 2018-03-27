@@ -1,7 +1,7 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DRAGGABLE } from '../directive-names';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
-import { MElementPlugin, MDOMPlugin } from '../plugin';
+import { MElementPlugin, MDOMPlugin } from '../domPlugin';
 
 export enum MDraggableClassNames {
     MDragging = 'm--is-dragging'
@@ -26,8 +26,8 @@ export enum MDraggableEventNames {
 
 const DEFAULT_ACTION = 'any';
 export class MDraggable extends MElementPlugin<MDraggableOptions> {
-    public static currentDraggable?: MDraggable;
     public static defaultMountPoint: string = '__mdraggable__';
+    public static currentDraggable?: MDraggable;
     constructor(element: HTMLElement, options: MDraggableOptions) {
         super(element, options);
     }
@@ -75,9 +75,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     private dispatchEvent(event: DragEvent, name: string): void {
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
-        const data: any = this.options.dragData
-            ? this.options.dragData
-            : event.dataTransfer.getData('text');
+        const data: any = this.options.dragData ? this.options.dragData : event.dataTransfer.getData('text');
         const dropInfo: MDragInfo = {
             action: this.options.action,
             grouping: this.options.grouping,
@@ -90,20 +88,19 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     }
 }
 
+const extractVnodeAttributes: (node: VNode) => MDraggableOptions = (node: VNode) => {
+    return {
+        action: getVNodeAttributeValue(node, 'action'),
+        dragData: getVNodeAttributeValue(node, 'drag-data'),
+        grouping: getVNodeAttributeValue(node, 'grouping')
+    };
+};
 const Directive: DirectiveOptions = {
     bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attach(MDraggable, element, {
-            action: getVNodeAttributeValue(node, 'action'),
-            dragData: getVNodeAttributeValue(node, 'drag-data'),
-            grouping: getVNodeAttributeValue(node, 'grouping')
-        });
+        MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.update(MDraggable, element, {
-            action: getVNodeAttributeValue(node, 'action'),
-            dragData: getVNodeAttributeValue(node, 'drag-data'),
-            grouping: getVNodeAttributeValue(node, 'grouping')
-        });
+        MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MDraggable, element);

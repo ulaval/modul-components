@@ -19,15 +19,27 @@ export class MDOMPlugin {
 
     public static update<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
         defaultMountPoint: string;
-    }, element: HTMLElement, options: OptionsType): void {
+    }, element: HTMLElement, options: OptionsType): PluginType {
         const plugin: PluginType = element[c.defaultMountPoint] as PluginType;
         if (plugin) plugin.update(options);
+        return plugin;
+    }
+
+    public static attachUpdate<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+        defaultMountPoint: string;
+        new (element: HTMLElement, options: OptionsType): PluginType;
+    }, element: HTMLElement, options: OptionsType): PluginType {
+        if (MDOMPlugin.get(c, element)) {
+            return MDOMPlugin.update(c, element, options);
+        } else {
+            return MDOMPlugin.attach(c, element, options);
+        }
     }
 
     public static detach<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
         defaultMountPoint: string;
     }, element: HTMLElement): void {
-        const plugin: PluginType = element[c.defaultMountPoint] as PluginType;
+        const plugin: PluginType | undefined = MDOMPlugin.get(c, element);
         if (plugin) {
             plugin.detach();
             delete element[c.defaultMountPoint];
@@ -67,14 +79,19 @@ export abstract class MElementPlugin<OptionsType> {
         this.element.addEventListener(eventName, listener);
     }
 
-    public removeEventListener(eventName: string, listener: EventListenerOrEventListenerObject): void {
+    public removeEventListener(eventName: string, listener?: EventListenerOrEventListenerObject): void {
         let listeners: EventListenerOrEventListenerObject[] | undefined = this.attachedEvents.get(eventName);
         if (!listeners) return;
 
-        const eventIndex: number | undefined = listeners.indexOf(listener);
-        if (event) {
-            this.element.removeEventListener(eventName, listeners[eventIndex]);
-            this.attachedEvents.set(eventName, listeners.splice(eventIndex, 1));
+        if (listener) {
+            const eventIndex: number | undefined = listeners.indexOf(listener);
+            if (event) {
+                this.element.removeEventListener(eventName, listeners[eventIndex]);
+                this.attachedEvents.set(eventName, listeners.splice(eventIndex, 1));
+            }
+        } else {
+            listeners.forEach(listener => this.element.removeEventListener(eventName, listener));
+            this.attachedEvents.delete(eventName);
         }
     }
 

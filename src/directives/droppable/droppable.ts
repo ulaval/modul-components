@@ -2,7 +2,7 @@ import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE } from '../directive-names';
 import { MDraggable } from '../draggable/draggable';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
-import { MElementPlugin, MDOMPlugin } from '../plugin';
+import { MElementPlugin, MDOMPlugin } from '../domPlugin';
 
 export enum MDroppableClassNames {
     MOvering = 'm--is-dragover',
@@ -47,8 +47,8 @@ export enum MDropEventNames {
 const DEFAULT_ACTION = 'any';
 
 export class MDroppable extends MElementPlugin<MDroppableOptions> {
-    public static currentHoverDroppable?: MDroppable;
     public static defaultMountPoint: string = '__mdroppable__';
+    public static currentHoverDroppable?: MDroppable;
     constructor(element: HTMLElement, options: MDroppableOptions) {
         super(element, options);
     }
@@ -59,20 +59,25 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         this.addEventListener('dragenter', (event: DragEvent) => this.onDragEnter(event));
         this.addEventListener('dragleave', (event: DragEvent) => this.onDragLeave(event));
         this.addEventListener('dragover', (event: DragEvent) => this.onDragOver(event));
-
-        if (this.options.canDrop) {
-            this.addEventListener('drop', (event: DragEvent) => this.onDrop(event));
-        }
         this.addEventListener('touchmove', () => {});
+        this.bindDropEvent(this.options.canDrop);
     }
 
-    public update(options: any): void {
+    public update(options: MDroppableOptions): void {
         this._options = options;
+        this.bindDropEvent(options.canDrop);
     }
 
     public detach(): void {
         this.cleanupCssClasses();
         this.removeAllEvents();
+    }
+
+    private bindDropEvent(canDrop: boolean | undefined): void {
+        this.removeEventListener('drop');
+        if (canDrop) {
+            this.addEventListener('drop', (event: DragEvent) => this.onDrop(event));
+        }
     }
 
     private onDragEnter(event: DragEvent): void {
@@ -174,20 +179,19 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 }
 
+const extractVnodeAttributes: (binding: VNodeDirective, node: VNode) => MDroppableOptions = (binding: VNodeDirective, node: VNode) => {
+    return {
+        acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
+        grouping: getVNodeAttributeValue(node, 'grouping'),
+        canDrop: binding.value
+    };
+};
 const Directive: DirectiveOptions = {
     bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attach(MDroppable, element, {
-            acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
-            grouping: getVNodeAttributeValue(node, 'grouping'),
-            canDrop: binding.value
-        });
+        MDOMPlugin.attach(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.update(MDroppable, element, {
-            acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
-            grouping: getVNodeAttributeValue(node, 'grouping'),
-            canDrop: binding.value
-        });
+        MDOMPlugin.update(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MDroppable, element);
