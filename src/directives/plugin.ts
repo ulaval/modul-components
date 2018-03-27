@@ -3,8 +3,11 @@ export class MDOMPlugin {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
     }, element: HTMLElement, options: OptionsType): PluginType {
-        const plugin = new c(element, options);
-        element[c.defaultMountPoint] = new c(element, options);
+        let plugin: PluginType = element[c.defaultMountPoint] as PluginType;
+        if (plugin) plugin.detach();
+
+        plugin = new c(element, options);
+        element[c.defaultMountPoint] = plugin;
         return plugin;
     }
 

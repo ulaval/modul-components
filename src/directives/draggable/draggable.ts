@@ -25,10 +25,9 @@ export enum MDraggableEventNames {
 }
 
 const DEFAULT_ACTION = 'any';
-
 export class MDraggable extends MElementPlugin<MDraggableOptions> {
     public static currentDraggable?: MDraggable;
-    public static defaultMountPoint: '__mdraggable__';
+    public static defaultMountPoint: string = '__mdraggable__';
     constructor(element: HTMLElement, options: MDraggableOptions) {
         super(element, options);
     }
@@ -57,7 +56,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     }
 
     private onDragEnd(event: DragEvent): void {
-        if (MDraggable.currentDraggable) this.cleanupCssClasses();
+        this.cleanupCssClasses();
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
     }
 
