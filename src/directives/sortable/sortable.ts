@@ -3,12 +3,12 @@ import { SORTABLE } from '../directive-names';
 import { PluginObject } from 'vue/types/plugin';
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
-import { MDroppable, MDroppableElement, MDropEvent, MDropEventNames, MDropInfo } from '../droppable/droppable';
+import { MDroppable, MDropEvent, MDropEventNames, MDropInfo } from '../droppable/droppable';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
 import tabPanel from 'src/components/tab-panel/tab-panel';
 import { MDOMPlugin } from '../plugin';
 
-export interface MSortableElement extends MDroppableElement {
+export interface MSortableElement extends HTMLElement {
     __msortable__?: MSortable;
 }
 
@@ -67,8 +67,8 @@ export class MSortable {
     public static activeSortContainer: MSortableElement | undefined;
     public static fromSortContainer: MSortableElement | undefined;
     private element: MSortableElement;
-    private emptyPlaceHolderElement: MDroppableElement | undefined;
-    private placeHolderElement: MDroppableElement | undefined;
+    private emptyPlaceHolderElement: HTMLElement | undefined;
+    private placeHolderElement: HTMLElement | undefined;
 
     private _options: MSortableOptions;
     private get options(): MSortableOptions { return this._options; }
@@ -100,7 +100,7 @@ export class MSortable {
         this.element.removeEventListener(MDropEventNames.OnDragOver, this.onChildDragOver.bind(this));
         this.element.removeEventListener(MDropEventNames.OnDragLeave, this.onChildDragLeave.bind(this));
         this.element.__msortable__ = undefined;
-        if (this.element.__mdroppable__) this.element.__mdroppable__.detach();
+        MDOMPlugin.detach(MDroppable, this.element);
         this.detachPlaceholder(this.emptyPlaceHolderElement);
         this.detachPlaceholder(this.placeHolderElement);
         this.detachChilds();
@@ -165,10 +165,7 @@ export class MSortable {
                 const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
 
                 MDOMPlugin.detach(MDraggable, currentElement);
-                const droppablePart: MDroppableElement = currentElement as MDroppableElement;
-                if (droppablePart.__mdroppable__) droppablePart.__mdroppable__.detach();
-
-                // TODO: Remove events!!
+                MDOMPlugin.detach(MDroppable, currentElement);
             }
         }
     }
@@ -213,9 +210,7 @@ export class MSortable {
         if (placeHolder) {
             placeHolder.style.display = '';
 
-            const droppablePlaceholder = placeHolder as MDroppableElement;
-            if (droppablePlaceholder && droppablePlaceholder.__mdroppable__) droppablePlaceholder.__mdroppable__.detach();
-            // TODO : REMOVE EVENTS!!
+            MDOMPlugin.detach(MDroppable, placeHolder);
         }
     }
 

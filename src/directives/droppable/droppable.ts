@@ -24,10 +24,6 @@ export interface MDropEvent extends DragEvent {
     dropInfo: MDropInfo;
 }
 
-export interface MDroppableElement extends HTMLElement {
-    __mdroppable__?: MDroppable;
-}
-
 export interface MDroppableOptions {
     acceptedActions: string[];
     grouping?: any;
@@ -186,14 +182,14 @@ const Directive: DirectiveOptions = {
             canDrop: binding.value
         });
     },
-    update(element: MDroppableElement, binding: VNodeDirective, node: VNode): void {
+    update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.update(MDroppable, element, {
             acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
             grouping: getVNodeAttributeValue(node, 'grouping'),
             canDrop: binding.value
         });
     },
-    unbind(element: MDroppableElement, binding: VNodeDirective): void {
+    unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MDroppable, element);
     }
 };
