@@ -1,10 +1,9 @@
 import { AxiosError } from 'axios';
 
-export class PromiseError extends Error {
+export class PromiseError {
     private _noPropagation: boolean = false;
 
     constructor(public error: Error) {
-        super(error.message);
     }
 
     public get noPropagation(): boolean {
@@ -15,11 +14,3 @@ export class PromiseError extends Error {
         this._noPropagation = true;
     }
 }
-
-// export class PromiseJavascriptError extends PromiseError<Error> {
-
-// }
-
-// export class PromiseRestError extends PromiseError<AxiosError> {
-
-// }
