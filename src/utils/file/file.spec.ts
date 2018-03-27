@@ -87,6 +87,7 @@ describe('FileService', () => {
             filesvc.add(
                 createMockFileList([
                     createMockFile('valid.jpg'),
+                    createMockFile('valid.JpG'),
                     createMockFile('valid.jpeg'),
                     createMockFile('valid.pdf'),
                     createMockFile('valid.mp4'),
@@ -94,7 +95,7 @@ describe('FileService', () => {
                 ])
             );
 
-            expectValidationResults(4, MFileRejectionCause.FILE_TYPE);
+            expectValidationResults(5, MFileRejectionCause.FILE_TYPE);
         });
 
         it('should reject files too big', () => {
@@ -226,7 +227,7 @@ describe('FileService', () => {
                     await filesvc.upload(fileToUpload.uid, {
                         url: 'http://fake'
                     });
-                } catch {}
+                } catch { }
 
                 expect(fileToUpload.status).toEqual(MFileStatus.FAILED);
             });
