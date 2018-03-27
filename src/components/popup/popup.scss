@@ -2,7 +2,11 @@
 @import 'abstracts/mixins';
 
 .m-popup {
-    display: inline-block;
+    display: none;
+
+    &.m--is-inline {
+        display: inline-block;
+    }
 
     &__body {
         position: relative;
