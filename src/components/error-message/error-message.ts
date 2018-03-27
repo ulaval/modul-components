@@ -4,7 +4,7 @@ import WithRender from './error-message.html';
 import { Prop/*, Watch*/ } from 'vue-property-decorator';
 import moment from 'moment';
 import AccordionPlugin from '../accordion/accordion';
-import i18nPlugin from '../i18n/i18n';
+import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ModalPlugin from '../modal/modal';
@@ -61,7 +61,7 @@ export class MErrorMessage extends Vue {
 const ErrorMessagePlugin: PluginObject<any> = {
     install(v, options): void {
         console.debug(ERROR_MESSAGE_NAME, 'plugin.install');
-        v.use(i18nPlugin);
+        v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);
         v.use(MessagePlugin);
