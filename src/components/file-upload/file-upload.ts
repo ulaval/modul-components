@@ -60,11 +60,12 @@ export class MFileUpload extends ModulVue {
     public maxSizeKb?: number;
     @Prop()
     public maxFiles?: number;
-
     @Prop({
         default: DEFAULT_STORE_NAME
     })
     public storeName: string;
+    @Prop()
+    public open: boolean;
 
     $refs: {
         dialog: MDialog;
