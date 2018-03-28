@@ -30,6 +30,9 @@ export class Viewer extends Vue {
     public newItem: MyObject = new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`);
     public groupingCount = 1;
     public itemCount = 1;
+    public dummyText = 'Drag any';
+    public dummyData = {};
+    public eventCounter = 0;
 
     public mounted(): void {
         this.buildTag();
@@ -38,6 +41,17 @@ export class Viewer extends Vue {
     @Watch('$route')
     private buildTag(): void {
         this.tag = `<${this.$route.meta}></${this.$route.meta}>`;
+    }
+
+    private changeText(): void {
+        this.dummyText += '1';
+    }
+
+    private changeDummyData(): void {
+        this.dummyData = { text: 'lol' };
+    }
+
+    private doSomething(event: Event): void {
     }
 
     private getNewItem(actionName: string): MyObject {
@@ -63,6 +77,7 @@ export class Viewer extends Vue {
         event.stopImmediatePropagation();
         console.log(event.sortInfo);
 
+        event.sortInfo.data.grouping = event.sortInfo.newGrouping;
         if (event.sortInfo.oldPosition === -1) {
             list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
             this.refreshNewItem();
@@ -91,5 +106,13 @@ export class Viewer extends Vue {
 
     private deleteItem(): void {
         this.items.pop();
+    }
+
+    private log(message, data: Event): void {
+        data.preventDefault();
+        data.stopPropagation();
+        data.stopImmediatePropagation();
+        // console.clear();
+        console.log(message, this.eventCounter++, data);
     }
 }

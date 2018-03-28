@@ -11,9 +11,18 @@
     {{ newItem }}
     <button @click="deleteItem">Delete an Item</button>
     <div v-m-draggable="true"
-        :drag-data="newItem">
-        Drag Any Action
+        :drag-data="dummyData">
+        {{ dummyText }} <button @click="changeText()">Change my text</button> <button @click="changeDummyData()">Change my data</button>
     </div>
+
+    <div v-m-droppable="true"
+        :accepted-actions="['any']"
+        @droppable:dragleave="doSomething">
+        <div>Hello :)</div>
+        <div>Another child!</div>
+        <div>Wow</div>
+    </div>
+
     <div v-m-draggable="true"
         :drag-data="newItem"
         :action="'someAction'">
@@ -25,9 +34,17 @@
         Drag SomeAction grouping
     </div>
 
-    <div id="coordinates"></div>
-
-    {{ items }}
+    <!-- <div v-m-droppable="true" style="background-color: red;" @droppable:dragenter="log('true enter', $event);" @droppable:dragleave="log('true leave', $event);">
+        <div>Im a child</div>
+        <div>Me too!</div>
+        <div>hehe</div>
+        <div v-m-droppable="true">Im a nested droppable</div>
+        <div v-m-droppable="true">
+            <div>Same</div>
+            <div>with</div>
+            <div>childs</div>
+        </div>
+    </div> -->
 
     <div v-m-sortable
         :items="items"
@@ -35,9 +52,9 @@
         @sortable:add="handleSortableAdd($event, items)"
         @sortable:move="handleSortableMove($event, items)"
         @sortable:remove="handleSortableRemove($event, items)"
-        style="background-color: lightYellow; width: 100%; border: 1px solid red; margin-top: 10px;">
+        style="background-color: lightYellow; width: 50%; border: 1px solid red; margin-top: 10px;">
         <div class="emptyPlaceholder" style="background-color: lightgreen; width: 100%;">No Items.  Drop SomeAction on me!</div>
-        <div class="placeholder" style="background-color: darkgreen; height: 1px;"></div>
+        <div class="placeholder" style="background-color: darkgreen; height: 10px;"></div>
         <div v-for="item in items" style="padding: 5px;">
             Item #{{ item.id }}: {{ item.text }}.
             <span v-if="item.grouping">Group: {{ item.grouping }}</span>
@@ -51,7 +68,7 @@
                 @sortable:remove="handleSortableRemove($event, item.items)"
                 style="background-color: lightblue; width: 100%; border: 1px solid violet;">
                 <div class="emptyPlaceholder" style="background-color: lightgreen; width: 100%;">Ajouter un item au groupe {{ item.grouping }}</div>
-                <div class="placeholder" style="background-color: darkgreen; height: 1px;"></div>
+                <div class="placeholder" style="background-color: red; height: 1px;"></div>
                 <div v-for="subItem in item.items" style="padding: 5px;">Item #{{subItem.id}}</div>
             </div>
         </div>
@@ -80,8 +97,4 @@
             Hello from Item #{{ item.id }}: {{ item.text }}.  Group: {{ item.grouping }}
         </div>
     </div> -->
-    <div onclick="console.log('test')">
-        test
-        <div onclick="console.log('test')">test2</div>
-    </div>
 </m-flex-template>
