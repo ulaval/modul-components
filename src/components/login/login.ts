@@ -19,7 +19,7 @@ export class MLogin extends Vue {
     private password: string = '';
     private lastError: string = '';
 
-    public login(): void {
+    private login(): void {
         this.lastError = '';
 
         if (this.loginFn) {
@@ -27,14 +27,13 @@ export class MLogin extends Vue {
                 this.$emit('login');
             }, error => this.lastError = error);
         } else {
-            console.error('No login function provided');
+            console.warn('No login function provided (login-fn prop is undefined)');
         }
     }
 }
 
 const LoginPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(LOGIN_NAME, 'plugin.install');
         v.use(ButtonPlugin);
         v.use(IconButtonPlugin);
         v.use(TextFieldPlugin);

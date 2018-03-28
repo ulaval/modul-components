@@ -1,6 +1,6 @@
-<div>
-    <m-textfield v-model="user" label="User"></m-textfield><br/>
+<form @submit.prevent="login()">
+    <m-textfield v-model="user" label="User" :focus="true"></m-textfield><br/>
     <m-textfield v-model="password" label="Password" type="password"></m-textfield><br/>
-    <m-button @click="login()">Login</m-button><br/>
+    <m-button type="submit">Login</m-button><br/>
     <span v-if="lastError">{{lastError}}</span>
-</div>
+</form>
