@@ -10,7 +10,7 @@
             "description": "An example Node.js application with no database. For more information about using this template, including OpenShift considerations, see https://github.com/openshift/nodejs-ex/blob/master/README.md.",
             "iconClass": "icon-nodejs",
             "openshift.io/display-name": "modul-components",
-            "openshift.io/documentation-url": "https://github.com/openshift/nodejs-ex",
+            "openshift.io/documentation-url": "https://github.com/openshift/nodejs-ex et https://github.com/sclorg/s2i-nodejs-container",
             "openshift.io/long-description": "This template was copied from https://github.com/openshift/library/tree/master/official/nodejs/templates",
             "openshift.io/provider-display-name": "Université Laval",
             "tags": "quickstart,nodejs",
@@ -94,7 +94,7 @@
                     "sourceStrategy": {
                         "env": [
                             {
-                                "name": "NPM_ENV",
+                                "name": "NODE_ENV",
                                 "value": "development"
                             },
                             {
