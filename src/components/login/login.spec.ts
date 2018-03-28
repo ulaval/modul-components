@@ -1,13 +1,8 @@
 import Vue from 'vue';
 import { mount, Wrapper } from '@vue/test-utils';
-import { resetModulPlugins } from '../../../tests/helpers/component';
 import { MLogin } from './login';
 
 describe('MLogin', () => {
-
-    beforeEach(() => {
-        resetModulPlugins();
-    });
 
     describe('when login', () => {
         it('should call the login function with the provided credentials', () => {

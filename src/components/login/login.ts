@@ -34,6 +34,7 @@ export class MLogin extends Vue {
 
 const LoginPlugin: PluginObject<any> = {
     install(v, options): void {
+        console.debug(LOGIN_NAME, 'plugin.install');
         v.use(ButtonPlugin);
         v.use(IconButtonPlugin);
         v.use(TextFieldPlugin);

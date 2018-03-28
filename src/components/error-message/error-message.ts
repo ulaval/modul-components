@@ -1,7 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import WithRender from './error-message.html';
-import { Prop/*, Watch*/ } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import moment from 'moment';
 import AccordionPlugin from '../accordion/accordion';
 import I18nPlugin from '../i18n/i18n';
@@ -14,9 +14,6 @@ const ERROR_MESSAGE_NAME: string = 'm-error-message';
 @WithRender
 @Component
 export class MErrorMessage extends Vue {
-    // @Prop()
-    // public open: boolean;
-
     @Prop()
     public error: Error;
 
@@ -25,16 +22,6 @@ export class MErrorMessage extends Vue {
 
     @Prop()
     public referenceNumber: string;
-
-    // private internalOpen: boolean = false;
-
-    // private get propOpen(): boolean {
-    //     return this.internalOpen;
-    // }
-
-    // private set propOpen(value: boolean) {
-    //     this.internalOpen = value;
-    // }
 
     private get userAgent(): string {
         return window.navigator.userAgent;
@@ -47,15 +34,6 @@ export class MErrorMessage extends Vue {
         }
         return result;
     }
-
-    // @Watch('open')
-    // private openChanged(value: boolean): void {
-    //     this.propOpen = value;
-    // }
-
-    // private onOk(): void {
-    //     this.$emit('close');
-    // }
 }
 
 const ErrorMessagePlugin: PluginObject<any> = {
