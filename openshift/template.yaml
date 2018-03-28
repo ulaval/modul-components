@@ -94,14 +94,17 @@
                     "sourceStrategy": {
                         "env": [
                             {
+                                "name": "NPM_ENV",
+                                "value": "development"
+                            },
+                            {
                                 "name": "NPM_MIRROR",
                                 "value": "${NPM_MIRROR}"
                             }
                         ],
                         "from": {
                             "kind": "ImageStreamTag",
-                            "name": "nodejs:6",
-                            "namespace": "${NAMESPACE}"
+                            "name": "nodejs-modul:8"
                         }
                     },
                     "type": "Source"
@@ -177,7 +180,7 @@
                                         "path": "/",
                                         "port": 8080
                                     },
-                                    "initialDelaySeconds": 3,
+                                    "initialDelaySeconds": 20,
                                     "timeoutSeconds": 3
                                 },
                                 "resources": {
@@ -216,7 +219,7 @@
             "displayName": "Name",
             "name": "NAME",
             "required": true,
-            "value": "nodejs-example"
+            "value": "modul-components"
         },
         {
             "description": "The OpenShift Namespace where the ImageStream resides.",
@@ -237,7 +240,7 @@
             "displayName": "Git Repository URL",
             "name": "SOURCE_REPOSITORY_URL",
             "required": true,
-            "value": "https://github.com/openshift/nodejs-ex.git"
+            "value": "https://github.com/ulaval/modul-components.git"
         },
         {
             "description": "Set this to a branch name, tag or other ref of your repository if you are not using the default branch.",

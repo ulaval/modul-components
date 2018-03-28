@@ -13,7 +13,9 @@ echo Creating project %projectName%...
 oc new-project %projectName% --token=%token%
 
 echo Adding template...
-oc create -f template.yaml
+oc create -f imagestream.yaml --token=%token%
+oc create -f template.yaml --token=%token%
+
 
 ::echo Creation du secret pour Artifactory...
 ::oc secrets new-dockercfg artifactory --docker-server=%dockerServer% --docker-username=%dockerUsername% --docker-password=%dockerPassword% --docker-email=%dockerEmail% --token=%token%
