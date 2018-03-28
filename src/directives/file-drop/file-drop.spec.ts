@@ -53,7 +53,12 @@ describe('file-drop', () => {
     it('it should support optional $file store name argument', () => {
         filedrop = mount(
             {
-                template: '<div v-m-file-drop="unique-name"></div>'
+                template: '<div v-m-file-drop="uniqueName"></div>',
+                data: function() {
+                    return {
+                        uniqueName: 'uniqueValue'
+                    };
+                }
             },
             { localVue }
         );
@@ -63,10 +68,10 @@ describe('file-drop', () => {
         filedrop.find('div').trigger('drop', dropEvent);
         expect(filedrop.vm.$file.add).toHaveBeenCalledWith(
             dropEvent.dataTransfer.files,
-            'unique-name'
+            'uniqueValue'
         );
 
         filedrop.destroy();
-        expect(filedrop.vm.$file.destroy).toHaveBeenCalledWith('unique-name');
+        expect(filedrop.vm.$file.destroy).toHaveBeenCalledWith('uniqueValue');
     });
 });

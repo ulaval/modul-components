@@ -108,7 +108,7 @@ interface FileStoreRx extends Vue {
 
 const extractExtension = (file: File): string => {
     const match = file.name.match(/\.([a-zA-Z0-9]{3,4})$/);
-    return match ? match[1] : '';
+    return match ? match[1].toLowerCase() : '';
 };
 
 class FileStore {
@@ -275,8 +275,8 @@ class FileStore {
             let f = this.filesmap[uid];
             return (t =
                 f.status === MFileStatus.COMPLETED ||
-                f.status === MFileStatus.READY ||
-                f.status === MFileStatus.UPLOADING
+                    f.status === MFileStatus.READY ||
+                    f.status === MFileStatus.UPLOADING
                     ? t + 1
                     : t);
         }, 0);

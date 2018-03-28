@@ -34,7 +34,7 @@ const MFileDropDirective: DirectiveOptions = {
             e.preventDefault();
             $file.add(
                 e.dataTransfer.files,
-                binding.expression ? binding.expression : DEFAULT_STORE_NAME
+                binding.value ? binding.value : DEFAULT_STORE_NAME
             );
         };
 
@@ -60,7 +60,7 @@ const MFileDropDirective: DirectiveOptions = {
         el.cleanupMFileDropDirective();
         const $file: FileService = (vnode.context as ModulVue).$file;
         $file.destroy(
-            binding.expression ? binding.expression : DEFAULT_STORE_NAME
+            binding.value ? binding.value : DEFAULT_STORE_NAME
         );
     }
 };
