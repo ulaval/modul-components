@@ -18,12 +18,12 @@
 
     &:not(:last-child),
     &.m--has-border-bottom:last-child {
-        border-bottom: $m-border-width solid $m-color--border;
+        border-bottom: $m-border-width solid $m-color--border-light;
         padding-bottom: $m-spacing;
     }
 
     &.m--has-border-top:first-child {
-        border-top: $m-border-width solid $m-color--border;
+        border-top: $m-border-width solid $m-color--border-light;
         padding-top: $m-spacing;
     }
 
