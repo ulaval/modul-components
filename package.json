@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-feature-modul-shell-error-snaphot.41",
+    "version": "1.0.0-feature-modul-shell-error-snaphot.43",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -71,6 +71,7 @@
         "postcss-loader": "^2.0.9",
         "sass-loader": "^6.0.6",
         "style-loader": "^0.19.0",
+        "svg-inline-loader": "^0.8.0",
         "vue-class-component": "^6.1.1",
         "vue-property-decorator": "^6.0.0",
         "vue-template-compiler": "^2.5.9",
@@ -116,7 +117,6 @@
         "stylelint-config-standard": "^18.0.0",
         "stylelint-scss": "^2.2.0",
         "stylelint-webpack-plugin": "^0.9.0",
-        "svg-inline-loader": "^0.8.0",
         "ts-jest": "^22.0.3",
         "tslint": "^5.8.0",
         "tslint-config-standard": "^7.0.0",
