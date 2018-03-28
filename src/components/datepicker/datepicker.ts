@@ -285,12 +285,16 @@ export class MDatepicker extends ModulVue {
 
     private selectYear(year: number, showMonths: boolean = false): void {
         this.selectedMomentDate = this.keepDateInRange(moment(this.selectedMomentDate).year(year));
-        if (showMonths) this.view = VIEW_MONTH;
+        if (showMonths) {
+            this.view = VIEW_MONTH;
+        }
     }
 
     private selectMonth(month: number, showDays: boolean = false): void {
         this.selectedMomentDate = this.keepDateInRange(moment(this.selectedMomentDate).month(month));
-        if (showDays) this.view = VIEW_DAY;
+        if (showDays) {
+            this.view = VIEW_DAY;
+        }
     }
 
     private selectDate(selectedDate: DatepickerDate): void {

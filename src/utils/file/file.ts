@@ -239,7 +239,9 @@ class FileStore {
     }
 
     private validate(file: MFile): void {
-        if (!this.options) return;
+        if (!this.options) {
+            return;
+        }
 
         if (this.options.extensions) {
             this.validateExtension(file);
