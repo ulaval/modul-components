@@ -24,6 +24,10 @@
     </div>
 
     <div v-m-draggable="true"
+        :drag-data="newItem">
+        Drag any
+    </div>
+    <div v-m-draggable="true"
         :drag-data="newItem"
         :action="'someAction'">
         Drag SomeAction
@@ -34,7 +38,7 @@
         Drag SomeAction grouping
     </div>
 
-    <!-- <div v-m-droppable="true" style="background-color: red;" @droppable:dragenter="log('true enter', $event);" @droppable:dragleave="log('true leave', $event);">
+    <div v-m-droppable="true" style="background-color: red; margin: 20px;" @droppable:dragenter="log('true enter', $event);" @droppable:dragleave="log('true leave', $event);">
         <div>Im a child</div>
         <div>Me too!</div>
         <div>hehe</div>
@@ -44,7 +48,7 @@
             <div>with</div>
             <div>childs</div>
         </div>
-    </div> -->
+    </div>
 
     <div v-m-sortable
         :items="items"

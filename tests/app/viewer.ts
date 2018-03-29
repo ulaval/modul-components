@@ -77,7 +77,7 @@ export class Viewer extends Vue {
         event.stopImmediatePropagation();
         console.log(event.sortInfo);
 
-        event.sortInfo.data.grouping = event.sortInfo.newGrouping;
+        // event.sortInfo.data.grouping = event.sortInfo.newGrouping;
         if (event.sortInfo.oldPosition === -1) {
             list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
             this.refreshNewItem();
@@ -113,6 +113,6 @@ export class Viewer extends Vue {
         data.stopPropagation();
         data.stopImmediatePropagation();
         // console.clear();
-        console.log(message, this.eventCounter++, data);
+        // console.log(message, this.eventCounter++, data);
     }
 }

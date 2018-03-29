@@ -17,6 +17,18 @@ export class MDOMPlugin {
         return element[c.defaultMountPoint];
     }
 
+    public static getRecursive<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+        defaultMountPoint: string;
+    }, element: HTMLElement): PluginType | undefined {
+        let plugin: PluginType | undefined;
+        while (element && !plugin) {
+            plugin = MDOMPlugin.get(c, element);
+            element = element.parentNode as HTMLElement;
+        }
+
+        return plugin;
+    }
+
     public static update<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
         defaultMountPoint: string;
     }, element: HTMLElement, options: OptionsType): PluginType {
