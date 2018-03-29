@@ -15,7 +15,7 @@ export class InputPopup extends ModulVue {
     public open: boolean;
     public placeholder: string;
     public internalValue: any | undefined = '';
-    private inputMouseDown: boolean = false;
+    public inputMouseDown: boolean = false;
 
     public inputOnMousedown(event): void {
         this.inputMouseDown = true;
