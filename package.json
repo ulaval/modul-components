@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-feature-modul-shell-error-snaphot.43",
+    "version": "1.0.0-beta.23",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -61,7 +61,7 @@
         "includeFailureMsg": true
     },
     "dependencies": {
-        "@ulaval/shell-ui": "^0.1.4",
+        "@ulaval/shell-ui": "^0.1.5",
         "axios": "^0.17.1",
         "css-loader": "^0.28.7",
         "enquire.js": "^2.1.6",
