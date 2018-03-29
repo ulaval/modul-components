@@ -40,7 +40,7 @@ describe('file-drop', () => {
         );
     });
 
-    it('it should clear files when unbound', () => {
+    it('it should destroy files when unbound', () => {
         filedrop.vm.$file.destroy = jest.fn();
 
         filedrop.destroy();
@@ -48,6 +48,20 @@ describe('file-drop', () => {
         expect(filedrop.vm.$file.destroy).toHaveBeenCalledWith(
             DEFAULT_STORE_NAME
         );
+    });
+
+    it('it should not destroy files when unbound if keep-store modifier is set', () => {
+        const fp: Wrapper<ModulVue> = mount(
+            {
+                template: '<div v-m-file-drop.keep-store></div>'
+            },
+            { localVue: Vue }
+        );
+        fp.vm.$file.destroy = jest.fn();
+
+        fp.destroy();
+
+        expect(fp.vm.$file.destroy).not.toHaveBeenCalled();
     });
 
     it('it should support optional $file store name argument', () => {
