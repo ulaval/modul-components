@@ -3,28 +3,23 @@
 @echo off
 
 set projectName=%1
-::set dockerServer=%2
-::set dockerUsername=%3
-::set dockerPassword=%4
-::set dockerEmail=%5
 set token=%2
 
 echo Creating project %projectName%...
-oc new-project %projectName% --token=%token%
+oc new-project %projectName% --token=%token% || goto onerror
 
 echo Adding template...
-oc create -f imagestream.yaml --token=%token%
-oc create -f template.yaml --token=%token%
+oc create -f imagestream.yaml --token=%token% || goto onerror
+oc create -f template.yaml --token=%token% || goto onerror
 
+echo Creating jenkins service account...
+oc create sa jenkins --token=%token% || goto onerror
 
-::echo Creation du secret pour Artifactory...
-::oc secrets new-dockercfg artifactory --docker-server=%dockerServer% --docker-username=%dockerUsername% --docker-password=%dockerPassword% --docker-email=%dockerEmail% --token=%token%
+echo Granting edit role to jenkins service account...
+oc policy add-role-to-user edit -z jenkins --token=%token% || goto onerror
 
-::echo Creation du lien pour le compte de service par defaut...
-::oc secrets link default artifactory --for=pull --token=%token%
+exit /b 0
 
-::echo Creation du compte de service 
-::oc create sa jenkins --token=%token%
-
-::echo Autorisation du compte jenkins...
-::oc policy add-role-to-user edit -z jenkins --token=%token%
+:onerror
+echo Script failed.
+exit /b 1

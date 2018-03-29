@@ -3,4 +3,10 @@
 @echo off
 
 call delete-project.cmd modul-dv
-call create-project.cmd modul-dv
+call create-project.cmd modul-dv || goto onerror
+
+exit /b 0
+
+:onerror
+echo Script failed.
+exit /b 1

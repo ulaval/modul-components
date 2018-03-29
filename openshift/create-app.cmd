@@ -6,5 +6,13 @@ set projetName=%1
 set branch=%2
 set token=%3
 
-echo Creating application %projectName%/%branch%...
-oc new-app modul-components -p "NAME=mybranch" -p "SOURCE_REPOSITORY_REF=feature/openshift" -l app=%branch%
+set name=%branch:/=-%
+
+echo Creating application %projectName%/%name%...
+oc new-app modul-components -n=%projectName% -p NAME=%name% -p SOURCE_REPOSITORY_REF=%branch% -l app=%name% --token=%token% || goto onerror
+
+exit /b 0
+
+:onerror
+echo Script failed.
+exit /b 1

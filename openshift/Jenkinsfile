@@ -1,0 +1,28 @@
+pipeline {
+    agent {
+        docker {
+            image "docker-local.maven.ulaval.ca/ena2/ena2-openshift-client"
+            registryUrl 'https://docker-local.maven.ulaval.ca/v2'
+            registryCredentialsId 'artifactory-docker-registry-credentials'
+        }
+    }
+    properties([
+        parameters ([
+            string(name: 'token')
+        ])
+    ])
+    stages {
+        stage('Deploy') {
+            steps {
+                echo 'Building branch ${branch}'
+                script {
+                    env.NAME = env.BRANCH_NAME.replace('/', '-');
+                }
+                echo env.token
+                echo env.NAME
+                echo env.BRANCH_NAME
+                // sh 'oc start-build --server=https://pca.exp.ulaval.ca -n=modul-dv ${NAME} --wait --token=${token}'
+            }
+        }
+    }
+}

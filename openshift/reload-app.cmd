@@ -6,6 +6,12 @@ set projetName=%1
 set branch=%2
 set token=%3
 
-call delete-app.cmd "%projectName%" "%branch%" %token%
-call update-template.cmd "%projectName%" %token%
-call create-app.cmd "%projectName%" "%branch%" %token%
+call delete-app.cmd "%projectName%" "%branch%" %token% || goto onerror
+call update-template.cmd "%projectName%" %token% || goto onerror
+call create-app.cmd "%projectName%" "%branch%" %token% || goto onerror
+
+exit /b 0
+
+:onerror
+echo Script failed.
+exit /b 1

@@ -6,5 +6,13 @@ set projectName=%1
 set branch=%2
 set token=%3
 
-echo Deleting %projectName%/%branch%...
-oc delete all -n=%projectName% -l app=%branch% --token=%token% --ignore-not-found=true
+set name=%branch:/=-%
+
+echo Deleting %projectName%/%name%...
+oc delete all -n=%projectName% -l app=%name% --ignore-not-found=true --token=%token% || goto onerror
+
+exit /b 0
+
+:onerror
+echo Script failed.
+exit /b 1
