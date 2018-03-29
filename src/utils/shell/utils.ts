@@ -3,10 +3,10 @@ import { Shell, PackageOptions } from '@ulaval/shell-ui/dist/shell/shell';
 
 declare var __webpack_public_path__: string | undefined;
 
-export type CreerInstanceVueFn = (shell: Shell, rootPath: string) => Vue;
+export type CreateVueFn = (shell: Shell, rootPath: string) => Vue;
 
-export function setupShell(nomPackage: string, creerInstanceVue: CreerInstanceVueFn): void {
-    window[nomPackage] = {
+export function setupShell(packageName: string, createVueFn: CreerVueFn): void {
+    window[packageName] = {
         mount(shell: Shell, options: PackageOptions): Promise<void> {
             if (this.vue) {
                 console.warn('Already mounted.');
@@ -15,16 +15,16 @@ export function setupShell(nomPackage: string, creerInstanceVue: CreerInstanceVu
 
             __webpack_public_path__ = options.repoPublicPath;
 
-            this.idElementRacine = options.rootElement;
+            this.idRootElement = options.rootElement;
 
             let rootPath: string = options.rootPath as string;
             if (rootPath[rootPath.length - 1] !== '/') {
                 rootPath += '/';
             }
 
-            this.vue = creerInstanceVue(shell, rootPath);
+            this.vue = createVueFn(shell, rootPath);
 
-            this.vue.$mount('#' + this.idElementRacine);
+            this.vue.$mount('#' + this.idRootElement);
 
             return Promise.resolve();
         },
@@ -39,7 +39,7 @@ export function setupShell(nomPackage: string, creerInstanceVue: CreerInstanceVu
             this.vue = undefined;
 
             let div = document.createElement('div');
-            div.id = this.idElementRacine;
+            div.id = this.idRootElement;
             if (el.parentNode) {
                 el.parentNode.replaceChild(div, el);
             }
