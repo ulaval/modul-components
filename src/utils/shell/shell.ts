@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import VueRouter, { Route } from 'vue-router';
-import { Shell, SHELL_GLOBAL_VAR } from '@ulaval/shell-ui/dist/shell/shell';
+import { Shell } from '@ulaval/shell-ui/dist/shell/shell';
 import { HttpService } from '../http/http';
 import { AxiosResponse, AxiosError, AxiosProxyConfig, AxiosRequestConfig } from 'axios';
 import { PromiseError } from './error';

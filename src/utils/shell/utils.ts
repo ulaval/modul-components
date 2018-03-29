@@ -5,7 +5,7 @@ declare var __webpack_public_path__: string | undefined;
 
 export type CreateVueFn = (shell: Shell, rootPath: string) => Vue;
 
-export function setupShell(packageName: string, createVueFn: CreerVueFn): void {
+export function setupShell(packageName: string, createVueFn: CreateVueFn): void {
     window[packageName] = {
         mount(shell: Shell, options: PackageOptions): Promise<void> {
             if (this.vue) {
