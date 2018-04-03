@@ -107,7 +107,8 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
 
         const threshold: number = 3;
         const mousePosition = mousePositionElement(event, droppable.element);
-        return mousePosition.x < 0 || mousePosition.y < 0 || mousePosition.x + threshold > droppable.element.offsetWidth
+        return mousePosition.x <= 0 || mousePosition.y <= 0
+            || mousePosition.x + threshold > droppable.element.offsetWidth
             || mousePosition.y + threshold > droppable.element.offsetHeight || MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable;
     }
 
