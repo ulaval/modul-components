@@ -72,10 +72,9 @@ export class MFileUpload extends ModulVue {
     };
 
     private title: string = this.$i18n.translate('m-file-upload:header-title');
-    private propOpen: boolean = false;
+    private internalOpen: boolean = false;
 
     private created(): void {
-        this.propOpen = this.open;
         this.$file.setValidationOptions(
             {
                 extensions: this.extensions,
@@ -92,7 +91,7 @@ export class MFileUpload extends ModulVue {
 
     @Watch('open')
     private openChanged(open: boolean): void {
-        this.propOpen = open;
+        this.internalOpen = open;
     }
 
     @Watch('readyFiles')
@@ -257,6 +256,17 @@ export class MFileUpload extends ModulVue {
 
     private get hasRejectedFiles(): boolean {
         return this.rejectedFiles.length !== 0;
+    }
+
+    private get propOpen(): boolean {
+        return this.open ? this.open : this.internalOpen;
+    }
+
+    private set propOpen(value) {
+        if (value != this.internalOpen) {
+            this.internalOpen = value;
+            this.$emit('update:open', value);
+        }
     }
 }
 
