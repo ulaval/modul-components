@@ -111,18 +111,21 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
             || mousePosition.y + threshold > droppable.element.offsetHeight || MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable;
     }
 
-    private onDragEnter(event: DragEvent): void {
-        event.preventDefault();
-        this.onDragIn(event);
+    private onDragEnter(event: DragEvent): any {
+        return this.onDragIn(event);
     }
 
-    private onDragOver(event: DragEvent): void {
-        event.preventDefault();
-        this.onDragIn(event);
+    private onDragOver(event: DragEvent): any {
+        return this.onDragIn(event);
     }
 
-    private onDragIn(event: DragEvent): void {
+    private onDragIn(event: DragEvent): any {
         event.stopPropagation();
+
+        const element = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement;
+        const droppable = MDOMPlugin.getRecursive(MDroppable, element);
+        // Firefox sometime fires events on the wrong container for some reasons.  This fix it.
+        if (droppable !== this) { this.cleanupCssClasses(); return; }
 
         if (this.canDrop()) {
             event.preventDefault();
@@ -136,6 +139,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         MDroppable.previousHoverContainer = MDroppable.currentHoverDroppable;
         MDroppable.currentHoverDroppable = this;
         if (MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable) {
+            if (MDroppable.previousHoverContainer) { MDroppable.previousHoverContainer.cleanupCssClasses(); }
             this.cleanupCssClasses();
             this.element.classList.add(MDroppableClassNames.MOvering);
 
@@ -185,9 +189,9 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         if (!MDraggable.currentDraggable) { return false; }
 
         const currentHoverElement: HTMLElement | undefined = MDroppable.currentHoverDroppable ? MDroppable.currentHoverDroppable.element : undefined;
-        const currentDraggabke: HTMLElement | undefined = MDraggable.currentDraggable ? MDraggable.currentDraggable.element : undefined;
+        const currentDraggable: HTMLElement | undefined = MDraggable.currentDraggable ? MDraggable.currentDraggable.element : undefined;
 
-        const isHoveringOverDraggingElement = currentHoverElement === currentDraggabke;
+        const isHoveringOverDraggingElement = currentHoverElement === currentDraggable;
         const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
         const draggableAction: string = MDraggable.currentDraggable.options.action;
         const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
