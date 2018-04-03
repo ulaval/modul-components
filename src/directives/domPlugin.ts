@@ -59,13 +59,12 @@ export class MDOMPlugin {
     }
 }
 export abstract class MElementPlugin<OptionsType> {
+    protected attachedEvents: Map<string, EventListenerOrEventListenerObject[]> = new Map<string, EventListenerOrEventListenerObject[]>();
     protected _options: OptionsType;
     private readonly _element: HTMLElement;
     public get element(): HTMLElement { return this._element; }
 
     public get options(): OptionsType { return this._options; }
-
-    private attachedEvents: Map<string, EventListenerOrEventListenerObject[]> = new Map<string, EventListenerOrEventListenerObject[]>();
 
     constructor(element: HTMLElement, options: OptionsType) {
         this._element = element;

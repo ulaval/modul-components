@@ -57,6 +57,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     private onDragEnd(event: DragEvent): void {
         this.cleanupCssClasses();
+        MDraggable.currentDraggable = undefined;
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
     }
 

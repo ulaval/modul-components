@@ -89,20 +89,16 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
 
     private onDragLeave(event: DragEvent): void {
         event.preventDefault();
-
+        event.stopPropagation();
         const leaveContainer: MDroppable | undefined = MDOMPlugin.getRecursive(MDroppable, event.target as HTMLElement);
-        const isNestedDroppable: boolean = leaveContainer === this;
-        if (isNestedDroppable) {
-            event.stopPropagation();
-        }
 
         if (this.isLeavingDroppable(event, leaveContainer)) {
-            this.dispatchEvent(event, MDropEventNames.OnDragLeave);
             if (MDroppable.currentHoverDroppable === this) {
                 MDroppable.previousHoverContainer = this;
                 MDroppable.currentHoverDroppable = undefined;
             }
             this.cleanupCssClasses();
+            this.dispatchEvent(event, MDropEventNames.OnDragLeave);
         }
     }
 
@@ -121,7 +117,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     private onDragOver(event: DragEvent): void {
-        event.stopPropagation();
+        event.preventDefault();
         this.onDragIn(event);
     }
 
@@ -155,6 +151,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
 
         this.cleanupCssClasses();
         this.dispatchEvent(event, MDropEventNames.OnDrop);
+        MDraggable.currentDraggable = undefined;
         MDroppable.currentHoverDroppable = undefined;
     }
 
