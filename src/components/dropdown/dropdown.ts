@@ -281,7 +281,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private onKeydownTab($event: KeyboardEvent): void {
-        if (!this.as<InputPopup>().inputMouseDown && this.as<MediaQueries>().isMqMinS) {
+        if (this.as<MediaQueries>().isMqMinS) {
             if (this.focusedIndex > -1 && this.internalItems.length == 1) {
                 let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
                 this.model = item.value;
