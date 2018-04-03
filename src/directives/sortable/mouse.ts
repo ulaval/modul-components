@@ -1,5 +1,6 @@
 // https://gist.github.com/electricg/4435259
 // Which HTML element is the target of the event
+export type MousePositionEvent = (e: MouseEvent, relativeToEl?: HTMLElement) => { x: number, y: number };
 export const mouseTarget: (e: MouseEvent) => HTMLElement = (e: Event) => {
     let targ: HTMLElement = document.documentElement as HTMLElement;
     if (!e) { let e: Event | undefined = window.event; }
@@ -17,7 +18,7 @@ export const mouseTarget: (e: MouseEvent) => HTMLElement = (e: Event) => {
 
 // Mouse position relative to the document
 // From http://www.quirksmode.org/js/events_properties.html
-export const mousePositionDocument: (e: MouseEvent) => { x: number, y: number } = (e: MouseEvent) => {
+export const mousePositionDocument: MousePositionEvent = (e: MouseEvent) => {
     let posx: number = 0;
     let posy: number = 0;
     if (!e) {
@@ -56,7 +57,7 @@ export const findPos: (obj: HTMLElement) => { left: number, top: number } = (obj
 
 // Mouse position relative to the element
 // not working on IE7 and below
-export const mousePositionElement: (e: MouseEvent, relativeToEl?: HTMLElement) => { x: number, y: number } = (e: MouseEvent, relativeToEl?: HTMLElement) => {
+export const mousePositionElement: MousePositionEvent = (e: MouseEvent, relativeToEl?: HTMLElement) => {
     const mousePosDoc = mousePositionDocument(e);
     const target = mouseTarget(e);
     const targetPos = relativeToEl ? findPos(relativeToEl) : findPos(target);

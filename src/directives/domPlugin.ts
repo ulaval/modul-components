@@ -1,60 +1,60 @@
 export class MDOMPlugin {
-    public static attach<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+    public static attach<PluginType extends MElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
     }, element: HTMLElement, options: OptionsType): PluginType {
-        let plugin: PluginType = element[c.defaultMountPoint] as PluginType;
-        if (plugin) plugin.detach();
+        let plugin: PluginType = element[constructorFunction.defaultMountPoint] as PluginType;
+        if (plugin) { plugin.detach(); }
 
-        plugin = new c(element, options);
-        element[c.defaultMountPoint] = plugin;
+        plugin = new constructorFunction(element, options);
+        element[constructorFunction.defaultMountPoint] = plugin;
         return plugin;
     }
 
-    public static get<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+    public static get<PluginType extends MElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
     }, element: HTMLElement): PluginType | undefined {
-        return element[c.defaultMountPoint];
+        return element[constructorFunction.defaultMountPoint];
     }
 
-    public static getRecursive<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+    public static getRecursive<PluginType extends MElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
     }, element: HTMLElement): PluginType | undefined {
         let plugin: PluginType | undefined;
         while (element && !plugin) {
-            plugin = MDOMPlugin.get(c, element);
+            plugin = MDOMPlugin.get(constructorFunction, element);
             element = element.parentNode as HTMLElement;
         }
 
         return plugin;
     }
 
-    public static update<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+    public static update<PluginType extends MElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
     }, element: HTMLElement, options: OptionsType): PluginType {
-        const plugin: PluginType = element[c.defaultMountPoint] as PluginType;
-        if (plugin) plugin.update(options);
+        const plugin: PluginType = element[constructorFunction.defaultMountPoint] as PluginType;
+        if (plugin) { plugin.update(options); }
         return plugin;
     }
 
-    public static attachUpdate<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+    public static attachUpdate<PluginType extends MElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
     }, element: HTMLElement, options: OptionsType): PluginType {
-        if (MDOMPlugin.get(c, element)) {
-            return MDOMPlugin.update(c, element, options);
+        if (MDOMPlugin.get(constructorFunction, element)) {
+            return MDOMPlugin.update(constructorFunction, element, options);
         } else {
-            return MDOMPlugin.attach(c, element, options);
+            return MDOMPlugin.attach(constructorFunction, element, options);
         }
     }
 
-    public static detach<PluginType extends MElementPlugin<OptionsType>, OptionsType>(c: {
+    public static detach<PluginType extends MElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
     }, element: HTMLElement): void {
-        const plugin: PluginType | undefined = MDOMPlugin.get(c, element);
+        const plugin: PluginType | undefined = MDOMPlugin.get(constructorFunction, element);
         if (plugin) {
             plugin.detach();
-            delete element[c.defaultMountPoint];
+            delete element[constructorFunction.defaultMountPoint];
         }
     }
 }
@@ -92,7 +92,7 @@ export abstract class MElementPlugin<OptionsType> {
 
     public removeEventListener(eventName: string, listener?: EventListenerOrEventListenerObject): void {
         let listeners: EventListenerOrEventListenerObject[] | undefined = this.attachedEvents.get(eventName);
-        if (!listeners) return;
+        if (!listeners) { return; }
 
         if (listener) {
             const eventIndex: number | undefined = listeners.indexOf(listener);

@@ -1,7 +1,7 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DRAGGABLE } from '../directive-names';
-import { getVNodeAttributeValue } from '../../utils/vue/directive';
 import { MElementPlugin, MDOMPlugin } from '../domPlugin';
+import { getVNodeAttributeValue } from '../../utils/vue/directive';
 
 export enum MDraggableClassNames {
     MDragging = 'm--is-dragging'

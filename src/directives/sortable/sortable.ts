@@ -4,9 +4,9 @@ import { PluginObject } from 'vue/types/plugin';
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
 import { MDroppable, MDropEvent, MDropEventNames, MDropInfo } from '../droppable/droppable';
-import { getVNodeAttributeValue } from '../../utils/vue/directive';
 import tabPanel from 'src/components/tab-panel/tab-panel';
 import { MDOMPlugin, MElementPlugin } from '../domPlugin';
+import { getVNodeAttributeValue } from '../../utils/vue/directive';
 
 export interface MSortableOptions {
     items: any[];
@@ -151,11 +151,11 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private attachPlaceholder(element: HTMLElement): void {
         this.placeHolderElement = this.setupPlaceholder(element);
-        if (this.placeHolderElement) this.hidePlaceHolder();
+        if (this.placeHolderElement) { this.hidePlaceHolder(); }
     }
 
     private setupPlaceholder(element: HTMLElement): HTMLElement | undefined {
-        if (!element) return undefined;
+        if (!element) { return undefined; }
 
         if (element && !MDOMPlugin.get(MDroppable, element)) {
             const plugin = MDOMPlugin.attach(MDroppable, element, {
@@ -180,7 +180,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         event.preventDefault();
         const newContainer = MDroppable.currentHoverDroppable ? MDOMPlugin.getRecursive(MSortable, MDroppable.currentHoverDroppable.element) : undefined;
         if (!newContainer || newContainer !== this) {
-            if (!newContainer) MSortable.activeSortContainer = undefined;
+            if (!newContainer) { MSortable.activeSortContainer = undefined; }
             this.hidePlaceHolder();
             this.cleanUpInsertionClasses();
         }
@@ -252,10 +252,10 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private positionPlaceholder(event: MDropEvent): void {
-        if (!MDroppable.currentHoverDroppable) return;
+        if (!MDroppable.currentHoverDroppable) { return; }
 
         if (!this.hasItems() || this.isHoveringInsertionPlaceholder() || !MDroppable.currentHoverDroppable || !event.dropInfo.canDrop) {
-            if (this.isHoveringOverDraggedElement()) this.hidePlaceHolder();
+            if (this.isHoveringOverDraggedElement()) { this.hidePlaceHolder(); }
             return;
         }
 
@@ -286,9 +286,9 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         let index = 0;
         for (let i = 0; i < this.element.children.length; i++) {
             const child: HTMLElement = this.element.children[i] as HTMLElement;
-            if (child.classList.contains(MSortClassNames.MEmptyPlaceholder)) index--;
-            if (child.classList.contains(MSortClassNames.MPlaceHolder)) index--;
-            if (child.classList.contains(MSortClassNames.MSortBefore)) break;
+            if (child.classList.contains(MSortClassNames.MEmptyPlaceholder)) { index--; }
+            if (child.classList.contains(MSortClassNames.MPlaceHolder)) { index--; }
+            if (child.classList.contains(MSortClassNames.MSortBefore)) { break; }
             if (child.classList.contains(MSortClassNames.MSortAfter)) {
                 index++;
                 break;
@@ -313,11 +313,11 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private showPlaceHolder(): void {
-        if (this.placeHolderElement) this.placeHolderElement.style.display = 'inherit';
+        if (this.placeHolderElement) { this.placeHolderElement.style.display = 'inherit'; }
     }
 
     private hidePlaceHolder(): void {
-        if (this.placeHolderElement) this.placeHolderElement.style.display = 'none';
+        if (this.placeHolderElement) { this.placeHolderElement.style.display = 'none'; }
     }
 
     private isHoveringInsertionPlaceholder(): boolean | undefined {
@@ -339,11 +339,11 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private cleanUpInsertionClasses(): void {
         const mSortAfterElement = this.element.querySelector(`.${MSortClassNames.MSortAfter}`);
-        if (mSortAfterElement) mSortAfterElement.classList.remove(MSortClassNames.MSortAfter);
+        if (mSortAfterElement) { mSortAfterElement.classList.remove(MSortClassNames.MSortAfter); }
         this.element.classList.remove(MSortClassNames.MSortAfter);
 
         const mSortBeforeElement = this.element.querySelector(`.${MSortClassNames.MSortBefore}`);
-        if (mSortBeforeElement) mSortBeforeElement.classList.remove(MSortClassNames.MSortBefore);
+        if (mSortBeforeElement) { mSortBeforeElement.classList.remove(MSortClassNames.MSortBefore); }
         this.element.classList.remove(MSortClassNames.MSortBefore);
     }
 }

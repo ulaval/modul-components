@@ -1,9 +1,9 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE } from '../directive-names';
 import { MDraggable } from '../draggable/draggable';
-import { getVNodeAttributeValue } from '../../utils/vue/directive';
 import { MElementPlugin, MDOMPlugin } from '../domPlugin';
 import { mousePositionElement } from '../sortable/mouse';
+import { getVNodeAttributeValue } from '../../utils/vue/directive';
 
 export enum MDroppableClassNames {
     MOvering = 'm--is-dragover',
@@ -103,7 +103,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     private isLeavingDroppable(event: DragEvent, droppable?: MDroppable): boolean {
-        if (!droppable) return false;
+        if (!droppable) { return false; }
 
         const threshold: number = 3;
         const mousePosition = mousePositionElement(event, droppable.element);
@@ -156,7 +156,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
-        if (!MDraggable.currentDraggable) return;
+        if (!MDraggable.currentDraggable) { return; }
 
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
         customEvent.initCustomEvent(name, true, true, event);
@@ -182,7 +182,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     private canDrop(): boolean {
-        if (!MDraggable.currentDraggable) return false;
+        if (!MDraggable.currentDraggable) { return false; }
 
         const currentHoverElement: HTMLElement | undefined = MDroppable.currentHoverDroppable ? MDroppable.currentHoverDroppable.element : undefined;
         const currentDraggabke: HTMLElement | undefined = MDraggable.currentDraggable ? MDraggable.currentDraggable.element : undefined;
@@ -195,12 +195,12 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     private isHoveringOverDraggedElementChild(): boolean {
-        if (!MDroppable.currentHoverDroppable || !MDraggable.currentDraggable) return false;
+        if (!MDroppable.currentHoverDroppable || !MDraggable.currentDraggable) { return false; }
 
         let found: boolean = false;
         let element: HTMLElement | undefined = MDroppable.currentHoverDroppable.element;
         while (!found && element) {
-            if (element === MDraggable.currentDraggable.element) found = true;
+            if (element === MDraggable.currentDraggable.element) { found = true; }
             element = element.parentNode as HTMLElement;
         }
         return found;
