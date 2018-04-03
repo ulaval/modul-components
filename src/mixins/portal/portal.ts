@@ -212,7 +212,7 @@ export class Portal extends ModulVue implements PortalMixin {
         }
         if (this.internalTrigger) {
             if (this.openTrigger == MOpenTrigger.Click) {
-                this.internalTrigger.addEventListener('click', this.toggle);
+                this.internalTrigger.addEventListener('mousedown', this.toggle);
             } else if (this.openTrigger == MOpenTrigger.Hover) {
                 this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
                 // Closing not supported for the moment, check source code history for how was handled mouse leave

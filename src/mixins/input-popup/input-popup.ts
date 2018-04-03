@@ -15,17 +15,6 @@ export class InputPopup extends ModulVue {
     public open: boolean;
     public placeholder: string;
     public internalValue: any | undefined = '';
-    private inputMouseDown: boolean = false;
-
-    public inputOnMousedown(event): void {
-        this.inputMouseDown = true;
-    }
-
-    public inputOnMouseup(event): void {
-        setTimeout(() => {
-            this.inputMouseDown = false;
-        }, 30);
-    }
 
     public inputOnKeydownEnter($event: KeyboardEvent): void {
         if (!this.open) {
@@ -40,7 +29,7 @@ export class InputPopup extends ModulVue {
     }
 
     public inputOnKeydownTab($event: KeyboardEvent): void {
-        if (!this.inputMouseDown && this.as<MediaQueries>().isMqMinS) {
+        if (this.as<MediaQueries>().isMqMinS) {
             this.open = false;
         }
     }
@@ -55,10 +44,8 @@ export class InputPopup extends ModulVue {
     }
 
     public inputOnFocus(): void {
-        if (!this.inputMouseDown && !this.open && !this.as<InputState>().isDisabled && this.as<MediaQueries>().isMqMinS) {
-            setTimeout(() => {
-                this.open = true;
-            }, 300);
+        if (!this.open && !this.as<InputState>().isDisabled && this.as<MediaQueries>().isMqMinS) {
+            this.open = true;
         }
     }
 
