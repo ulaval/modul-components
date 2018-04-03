@@ -1,4 +1,4 @@
-<m-dialog :title="title" ref="dialog" @open="onOpen" @close="onClose" :close-on-backdrop="false">
+<m-dialog :title="title" ref="dialog" :open.sync="propOpen" @open="onOpen" @close="onClose" :close-on-backdrop="false">
 
     <span slot="trigger">
         <slot></slot>
