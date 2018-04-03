@@ -72,8 +72,10 @@ export class MFileUpload extends ModulVue {
     };
 
     private title: string = this.$i18n.translate('m-file-upload:header-title');
+    private propOpen: boolean = false;
 
     private created(): void {
+        this.propOpen = this.open;
         this.$file.setValidationOptions(
             {
                 extensions: this.extensions,
@@ -86,6 +88,11 @@ export class MFileUpload extends ModulVue {
 
     private destroyed(): void {
         this.$file.destroy(this.storeName);
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
     }
 
     @Watch('readyFiles')
@@ -146,6 +153,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private onCancelClick(): void {
+        this.propOpen = false;
         this.$refs.dialog.closeDialog();
         this.allFiles
             .filter(f => f.status === MFileStatus.UPLOADING)
@@ -170,6 +178,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private onClose(): void {
+        this.propOpen = false;
         this.$emit('close');
     }
 
