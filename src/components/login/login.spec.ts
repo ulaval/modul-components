@@ -1,10 +1,23 @@
 import Vue from 'vue';
 import { mount, Wrapper } from '@vue/test-utils';
-import { MLogin } from './login';
+import LoginPlugin, { MLogin } from './login';
+import { renderComponent } from '../../../tests/helpers/render';
+import { addMessages } from '../../../tests/helpers/lang';
 
 describe('MLogin', () => {
 
     describe('when login', () => {
+        it('should render correctly', () => {
+            Vue.use(LoginPlugin);
+            addMessages(Vue, ['components/login/login.lang.en.json']);
+
+            const login: Wrapper<MLogin> = mount(MLogin, {
+                localVue: Vue
+            });
+
+            return expect(renderComponent(login.vm)).resolves.toMatchSnapshot();
+        });
+
         it('should call the login function with the provided credentials', () => {
             let loginMock = jest.fn((user, password) => Promise.resolve());
 

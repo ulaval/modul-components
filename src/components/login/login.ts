@@ -5,19 +5,24 @@ import { Prop, Watch } from 'vue-property-decorator';
 import ButtonPlugin from '../button/button';
 import IconButtonPlugin from '../icon-button/icon-button';
 import TextFieldPlugin from '../textfield/textfield';
+import { ModulVue } from '../../utils/vue/vue';
+import I18nPlugin from '../i18n/i18n';
 
 const LOGIN_NAME: string = 'm-login';
 export type LoginFn = (username: string, password: string) => Promise<any>;
 
 @WithRender
 @Component
-export class MLogin extends Vue {
+export class MLogin extends ModulVue {
     @Prop()
     public loginFn: LoginFn;
 
     private user: string = '';
     private password: string = '';
     private lastError: string = '';
+
+    private labelUser: string = this.$i18n.translate('m-login:user');
+    private labelPassword: string = this.$i18n.translate('m-login:password');
 
     private login(): void {
         this.lastError = '';
@@ -35,6 +40,7 @@ export class MLogin extends Vue {
 const LoginPlugin: PluginObject<any> = {
     install(v, options): void {
         console.debug(LOGIN_NAME, 'plugin.install');
+        v.use(I18nPlugin);
         v.use(ButtonPlugin);
         v.use(IconButtonPlugin);
         v.use(TextFieldPlugin);
