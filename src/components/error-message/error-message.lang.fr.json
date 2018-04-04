@@ -1,5 +1,5 @@
 {
-    "erreur-popup": {
+    "m-error-message": {
         "message": "Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.",
         "directions.primary": "Vous pouvez attendre quelques minutes et réessayer.",
         "directions.secondary": "Si le problème persiste, vous pouvez contacter le soutien technique en leur fournissant le détail de l'erreur.",
