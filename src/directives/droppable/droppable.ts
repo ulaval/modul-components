@@ -6,14 +6,9 @@ import { mousePositionElement } from '../sortable/mouse';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
 
 export enum MDroppableClassNames {
-    MOvering = 'm--is-dragover',
-    MCanDrop = 'm--can-drop',
-    MCantDrop = 'm--cant-drop'
-}
-
-export enum MDroppableOrientation {
-    MBefore = 'before',
-    MAfter = 'after'
+    Overing = 'm--is-dragover',
+    CanDrop = 'm--can-drop',
+    CantDrop = 'm--cant-drop'
 }
 
 export enum MDropEffect {
@@ -76,9 +71,9 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     public cleanupCssClasses(): void {
-        this.element.classList.remove(MDroppableClassNames.MOvering);
-        this.element.classList.remove(MDroppableClassNames.MCanDrop);
-        this.element.classList.remove(MDroppableClassNames.MCantDrop);
+        this.element.classList.remove(MDroppableClassNames.Overing);
+        this.element.classList.remove(MDroppableClassNames.CanDrop);
+        this.element.classList.remove(MDroppableClassNames.CantDrop);
     }
 
     private setOptions(value: MDroppableOptions): void {
@@ -137,11 +132,11 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         if (this.canDrop()) {
             event.preventDefault();
             event.dataTransfer.dropEffect = MDropEffect.MMove;
-            this.element.classList.add(MDroppableClassNames.MCanDrop);
+            this.element.classList.add(MDroppableClassNames.CanDrop);
         } else {
             event.preventDefault();
             event.dataTransfer.dropEffect = MDropEffect.MNone;
-            this.element.classList.add(MDroppableClassNames.MCantDrop);
+            this.element.classList.add(MDroppableClassNames.CantDrop);
         }
 
         MDroppable.previousHoverContainer = MDroppable.currentHoverDroppable;
@@ -149,7 +144,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         if (MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable) {
             if (MDroppable.previousHoverContainer) { MDroppable.previousHoverContainer.cleanupCssClasses(); }
             this.cleanupCssClasses();
-            this.element.classList.add(MDroppableClassNames.MOvering);
+            this.element.classList.add(MDroppableClassNames.Overing);
 
             this.dispatchEvent(event, MDropEventNames.OnDragEnter);
         }

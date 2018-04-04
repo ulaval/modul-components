@@ -5,7 +5,7 @@ import { getVNodeAttributeValue } from '../../utils/vue/directive';
 import { MDroppable } from '../droppable/droppable';
 
 export enum MDraggableClassNames {
-    MDragging = 'm--is-dragging'
+    Dragging = 'm--is-dragging'
 }
 
 export interface MDraggableOptions {
@@ -34,7 +34,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     }
 
     public cleanupCssClasses(): void {
-        this.element.classList.remove(MDraggableClassNames.MDragging);
+        this.element.classList.remove(MDraggableClassNames.Dragging);
     }
 
     public attach(): void {
@@ -69,7 +69,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
         event.stopPropagation();
 
         MDraggable.currentDraggable = this;
-        this.element.classList.add(MDraggableClassNames.MDragging);
+        this.element.classList.add(MDraggableClassNames.Dragging);
         if (typeof this.options.dragData === 'object') {
             event.dataTransfer.setData('text', JSON.stringify(this.options.dragData));
         } else {

@@ -30,10 +30,10 @@ export interface MSortEvent extends DragEvent {
 }
 
 export enum MSortClassNames {
-    MSortBefore = 'm--is-sortbefore',
-    MSortAfter = 'm--is-sortafter',
-    MEmptyPlaceholder = 'emptyPlaceholder',
-    MPlaceHolder = 'placeholder'
+    SortBefore = 'm--is-sortbefore',
+    SortAfter = 'm--is-sortafter',
+    EmptyPlaceholder = 'emptyPlaceholder',
+    PlaceHolder = 'placeholder'
 }
 
 export interface MSortInfo {
@@ -46,14 +46,6 @@ export interface MSortInfo {
     newPosition: number;
 }
 
-/*
-var observer = new MutationObserver(scrollToBottom);
-    var config = {childList: true};
-    observer.observe(this.el, config);
-    function scrollToBottom() {
-      // whatever it takes to scroll to the bottom
-    }
-*/
 const DEFAULT_ACTION: string = 'any';
 const MOVE_ACTION: string = 'move';
 
@@ -280,7 +272,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private insertPlaceHolder(element: HTMLElement, insertPosition: InsertPosition): void {
         this.cleanUpInsertionClasses();
-        const insertionClass: string = insertPosition.includes('before') ? MSortClassNames.MSortBefore : MSortClassNames.MSortAfter;
+        const insertionClass: string = insertPosition.includes('before') ? MSortClassNames.SortBefore : MSortClassNames.SortAfter;
         element.classList.add(insertionClass);
         if (this.placeHolderElement) {
             this.showPlaceHolder();
@@ -292,10 +284,10 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         let index = 0;
         for (let i = 0; i < this.element.children.length; i++) {
             const child: HTMLElement = this.element.children[i] as HTMLElement;
-            if (child.classList.contains(MSortClassNames.MEmptyPlaceholder)) { index--; }
-            if (child.classList.contains(MSortClassNames.MPlaceHolder)) { index--; }
-            if (child.classList.contains(MSortClassNames.MSortBefore)) { break; }
-            if (child.classList.contains(MSortClassNames.MSortAfter)) {
+            if (child.classList.contains(MSortClassNames.EmptyPlaceholder)) { index--; }
+            if (child.classList.contains(MSortClassNames.PlaceHolder)) { index--; }
+            if (child.classList.contains(MSortClassNames.SortBefore)) { break; }
+            if (child.classList.contains(MSortClassNames.SortAfter)) {
                 index++;
                 break;
             }
@@ -344,13 +336,13 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private cleanUpInsertionClasses(): void {
-        const mSortAfterElement = this.element.querySelector(`.${MSortClassNames.MSortAfter}`);
-        if (mSortAfterElement) { mSortAfterElement.classList.remove(MSortClassNames.MSortAfter); }
-        this.element.classList.remove(MSortClassNames.MSortAfter);
+        const mSortAfterElement = this.element.querySelector(`.${MSortClassNames.SortAfter}`);
+        if (mSortAfterElement) { mSortAfterElement.classList.remove(MSortClassNames.SortAfter); }
+        this.element.classList.remove(MSortClassNames.SortAfter);
 
-        const mSortBeforeElement = this.element.querySelector(`.${MSortClassNames.MSortBefore}`);
-        if (mSortBeforeElement) { mSortBeforeElement.classList.remove(MSortClassNames.MSortBefore); }
-        this.element.classList.remove(MSortClassNames.MSortBefore);
+        const mSortBeforeElement = this.element.querySelector(`.${MSortClassNames.SortBefore}`);
+        if (mSortBeforeElement) { mSortBeforeElement.classList.remove(MSortClassNames.SortBefore); }
+        this.element.classList.remove(MSortClassNames.SortBefore);
     }
 }
 
