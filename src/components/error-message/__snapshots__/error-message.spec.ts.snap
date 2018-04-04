@@ -42,7 +42,7 @@ exports[`MErrorMessage should render correctly expanded 1`] = `
     <p><span class="m-i18n">Vous pouvez attendre quelques minutes et réessayer.</span></p>
     <p><span class="m-i18n">Si le problème persiste, vous pouvez contacter le soutien technique en leur fournissant le détail de l'erreur.</span></p>
     <div skin="light"><span><span class="m-i18n">Détails de l'erreur</span></span>
-        <p><strong><span class="m-i18n">Navigateur</span>: </strong>Mozilla/5.0 (win32) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/11.6.2</p>
+        <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong></p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
     </div>
