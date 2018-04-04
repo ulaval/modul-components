@@ -1,4 +1,4 @@
-<div class="inplace-edit"
+<div class="m-inplace-edit"
      :class="{'m--has-erreur': error && editMode,
               'm--is-edit-mode': editMode && isMqMinS }"
      @click="onClick">
@@ -8,9 +8,9 @@
             <form v-show="editMode" :aria-hidden="!editMode">
                 <slot name="editMode" v-if="editMode"></slot>
                 <m-accordion-transition>
-                    <div class="inplace-edit__buttons-wrap"
+                    <div class="m-inplace-edit__buttons-wrap"
                             v-if="editMode">
-                        <div class="inplace-edit__buttons">
+                        <div class="m-inplace-edit__buttons">
                             <m-button :waiting="submitted" ref="confirm-control" skin="primary" @click="confirm">
                                 <m-i18n k="m-inplace-edit:save"></m-i18n>
                             </m-button>
@@ -27,7 +27,7 @@
         <m-dialog :title="dialogTitle" :open="editMode" @close="cancel">
             <form>
                 <slot name="editMode"></slot>
-                <div class="inplace-edit__buttons">
+                <div class="m-inplace-edit__buttons">
                     <m-button :waiting="submitted" ref="confirm-control-mobile" skin="primary" @click="confirm">
                         <m-i18n k="m-inplace-edit:save"></m-i18n>
                     </m-button>

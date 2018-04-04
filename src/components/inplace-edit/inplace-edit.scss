@@ -1,7 +1,7 @@
 @import 'abstracts/variables';
 @import '../accordion/accordion-transition.scss';
 
-.inplace-edit {
+.m-inplace-edit {
     transition: padding $m-transition-duration ease, background $m-transition-duration--s linear;
     padding: 0;
     background: $m-color--white;
