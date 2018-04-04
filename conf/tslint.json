@@ -26,6 +26,7 @@
         "quotemark": [true, "single", "avoid-escape"],
         "no-empty": false,
         "no-debugger": true,
-        "no-null-keyword": true
+        "no-null-keyword": true,
+        "curly": true
     }
 }

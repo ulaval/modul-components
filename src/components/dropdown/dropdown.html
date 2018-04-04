@@ -13,8 +13,6 @@
                    :required-marker="requiredMarker"
                    :width="inputStyletWidth"
                    :icon-name="iconName"
-                   @mousedown="inputOnMousedown"
-                   @mouseup="inputOnMouseup"
                    v-m-popup:popup>
         <input type="text"
                ref="input"
@@ -27,7 +25,7 @@
                @keydown.esc="inputOnKeydownEsc"
                @keydown.up.prevent="onKeydownUp"
                @keydown.down.prevent="onKeydownDown"
-               @keydown.tab="inputOnKeydownTab"
+               @keydown.tab="onKeydownTab"
                @focus="inputOnFocus"
                v-model="selectedText">
         <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
