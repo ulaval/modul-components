@@ -25,13 +25,13 @@ describe('MLogin', () => {
                 localVue: Vue,
                 propsData: {
                     loginFn: loginMock
+                },
+                data: {
+                    user: 'username',
+                    password: 'pwd'
                 }
             });
 
-            wrapper.setData({
-                user: 'username',
-                password: 'pwd'
-            });
             let form: Wrapper<Vue> = wrapper.find('form');
             form.trigger('submit');
 
