@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch } from 'vue-property-decorator';
 
-import WithRender from './viewer.html';
+import WithRender from './viewer.html?style=./viewer.scss';
 import { MDropEvent } from '../../src/directives/droppable/droppable';
 import { MSortEvent } from '../../src/directives/sortable/sortable';
 
@@ -36,6 +36,7 @@ export class Viewer extends Vue {
 
     public mounted(): void {
         this.buildTag();
+        window.addEventListener('touchmove', () => {});
     }
 
     @Watch('$route')
@@ -114,5 +115,20 @@ export class Viewer extends Vue {
         data.stopImmediatePropagation();
         // console.clear();
         // console.log(message, this.eventCounter++, data);
+    }
+
+    private dragEnter(event: DragEvent, sendMessage: boolean): void {
+        event.preventDefault();
+        // (document.getElementById('messageSortable2') as HTMLElement).innerText = 'enter from viewer';
+        if (sendMessage) { (document.getElementById('messageSortable2') as HTMLElement).innerText = 'enter'; }
+    }
+
+    private dragLeave(event: DragEvent, sendMessage: boolean): void {
+        if (sendMessage) { (document.getElementById('messageSortable2') as HTMLElement).innerText = 'leave'; }
+        // (document.getElementById('messageSortable2') as HTMLElement).innerText = 'exit from viewer';
+    }
+
+    private dragOver(event: DragEvent, flag: boolean): void {
+        if (flag) { event.preventDefault(); }
     }
 }

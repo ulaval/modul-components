@@ -37,7 +37,7 @@
         :action="'addGrouping'">
         Drag SomeAction grouping
     </div>
-
+<!--
     <div v-m-droppable="true" style="background-color: red; margin: 20px;" @droppable:dragenter="log('true enter', $event);" @droppable:dragleave="log('true leave', $event);">
         <div>Im a child</div>
         <div>Me too!</div>
@@ -48,16 +48,15 @@
             <div>with</div>
             <div>childs</div>
         </div>
-    </div>
-
+    </div> -->
     <div v-m-sortable
         :items="items"
         :accepted-actions="['someAction', 'addGrouping']"
         @sortable:add="handleSortableAdd($event, items)"
         @sortable:move="handleSortableMove($event, items)"
         @sortable:remove="handleSortableRemove($event, items)"
-        style="background-color: lightYellow; width: 50%; border: 1px solid red; margin-top: 10px;">
-        <div class="emptyPlaceholder" style="background-color: lightgreen; width: 100%;">No Items.  Drop SomeAction on me!</div>
+        style="background-color: lightYellow; width: 100%; border: 1px solid red; margin-top: 10px;">
+        <div class="emptyPlaceholder" style="background-color: lightgreen;">No Items.  Drop SomeAction on me!</div>
         <div class="placeholder" style="background-color: darkgreen; height: 10px;"></div>
         <div v-for="item in items" style="padding: 5px;">
             Item #{{ item.id }}: {{ item.text }}.
@@ -71,34 +70,57 @@
                 @sortable:move="handleSortableMove($event, item.items)"
                 @sortable:remove="handleSortableRemove($event, item.items)"
                 style="background-color: lightblue; width: 100%; border: 1px solid violet;">
-                <div class="emptyPlaceholder" style="background-color: lightgreen; width: 100%;">Ajouter un item au groupe {{ item.grouping }}</div>
+                <div class="emptyPlaceholder" style="background-color: lightgreen;">Ajouter un item au groupe {{ item.grouping }}</div>
                 <div class="placeholder" style="background-color: red; height: 1px;"></div>
                 <div v-for="subItem in item.items" style="padding: 5px;">Item #{{subItem.id}}</div>
             </div>
         </div>
     </div>
-    <!-- <div v-m-sortable
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="messageSortable">
+    </div>
+    <div v-m-sortable
         :items="items2"
-        :accepted-actions="['someAction']"
+        :accepted-actions="['move']"
         @sortable:add="handleSortableAdd($event, items2)"
         @sortable:move="handleSortableMove($event, items2)"
         @sortable:remove="handleSortableRemove($event, items2)"
-        style="background-color: lightYellow; border: 1px solid blue; margin-top: 10px;">
-        <div class="emptyPlaceholder" style="background-color: lightblue; width: 100%;">No Items.  Drop SomeAction on me!</div>
-        <div class="placeholder" style="background-color: red; height: 1px;"></div>
-        <div v-for="item in items2" style="padding: 5px;">
-            Hello from Item #{{ item.id }}: {{ item.text }}.  Group: {{ item.grouping }}
+        class="sortable">
+        <div class="emptyPlaceholder empty-placeholder">
+            <div class="empty-placeholder__container">
+                <div class="empty-placeholder__inner empty-placeholder__inner--centered">Drop an item from another sortable on me!</div>
+            </div>
+        </div>
+        <div v-for="item in items2" class="sortable__item">
+            <div class="sortable__item--inner">
+                Item #{{ item.id }}: {{ item.text }}.
+                <span v-if="item.grouping">Group: {{ item.grouping }}</span>
+                <button>Can you click me?</button>
+                <div v-m-sortable
+                    v-if="item.grouping"
+                    :items="item.items"
+                    :accepted-actions="['someAction']"
+                    :grouping="item.grouping"
+                    @sortable:add="handleSortableAdd($event, item.items)"
+                    @sortable:move="handleSortableMove($event, item.items)"
+                    @sortable:remove="handleSortableRemove($event, item.items)"
+                    class="sortable sort-group">
+                    <div class="emptyPlaceholder empty-placeholder">
+                        <div class="empty-placeholder__container">
+                            <div class="empty-placeholder__inner empty-placeholder__inner--centered">Ajouter un item au groupe {{ item.grouping }}</div>
+                        </div>
+                    </div>
+                    <div v-for="subItem in item.items" class="sortable__item">
+                        <div class="sortable__item--inner">
+                                Item #{{subItem.id}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div v-m-sortable
-        :items="items3"
-        :accepted-actions="['someAction']"
-        @sortable:add="handleSortableAdd($event, items3)"
-        @sortable:move="handleSortableMove($event, items3)"
-        @sortable:remove="handleSortableRemove($event, items3)"
-        style="background-color: lightYellow; border: 1px solid green; min-height: 20px; margin-top: 10px;">
-        <div v-for="item in items3" style="padding: 5px;">
-            Hello from Item #{{ item.id }}: {{ item.text }}.  Group: {{ item.grouping }}
-        </div>
-    </div> -->
 </m-flex-template>

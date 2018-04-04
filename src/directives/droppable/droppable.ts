@@ -75,6 +75,12 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         this.removeAllEvents();
     }
 
+    public cleanupCssClasses(): void {
+        this.element.classList.remove(MDroppableClassNames.MOvering);
+        this.element.classList.remove(MDroppableClassNames.MCanDrop);
+        this.element.classList.remove(MDroppableClassNames.MCantDrop);
+    }
+
     private setOptions(value: MDroppableOptions): void {
         this._options = value;
         this._options.acceptedActions = this.options.canDrop ? this.options.acceptedActions || [DEFAULT_ACTION] : [];
@@ -107,7 +113,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
 
         const threshold: number = 3;
         const mousePosition = mousePositionElement(event, droppable.element);
-        return mousePosition.x <= 0 || mousePosition.y <= 0
+        return mousePosition.x < 0 || mousePosition.y < 0
             || mousePosition.x + threshold > droppable.element.offsetWidth
             || mousePosition.y + threshold > droppable.element.offsetHeight || MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable;
     }
@@ -133,6 +139,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
             event.dataTransfer.dropEffect = MDropEffect.MMove;
             this.element.classList.add(MDroppableClassNames.MCanDrop);
         } else {
+            event.preventDefault();
             event.dataTransfer.dropEffect = MDropEffect.MNone;
             this.element.classList.add(MDroppableClassNames.MCantDrop);
         }
@@ -209,12 +216,6 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
             element = element.parentNode as HTMLElement;
         }
         return found;
-    }
-
-    private cleanupCssClasses(): void {
-        this.element.classList.remove(MDroppableClassNames.MOvering);
-        this.element.classList.remove(MDroppableClassNames.MCanDrop);
-        this.element.classList.remove(MDroppableClassNames.MCantDrop);
     }
 }
 

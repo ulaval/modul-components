@@ -171,6 +171,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     private onDragEnter(event: MDropEvent): void {
         event.stopPropagation();
         event.preventDefault();
+        if (MSortable.activeSortContainer && MSortable.activeSortContainer !== this) { MSortable.activeSortContainer.doCleanUp(); }
         MSortable.activeSortContainer = this;
         this.positionPlaceholder(event);
     }
@@ -180,10 +181,15 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         event.preventDefault();
         const newContainer = MDroppable.currentHoverDroppable ? MDOMPlugin.getRecursive(MSortable, MDroppable.currentHoverDroppable.element) : undefined;
         if (!newContainer || newContainer !== this) {
+            if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
             if (!newContainer) { MSortable.activeSortContainer = undefined; }
-            this.hidePlaceHolder();
-            this.cleanUpInsertionClasses();
+            this.doCleanUp();
         }
+    }
+
+    private doCleanUp(): void {
+        this.hidePlaceHolder();
+        this.cleanUpInsertionClasses();
     }
 
     private onDragOver(event: MDropEvent): void {
@@ -239,10 +245,11 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     private onChildDragEnd(event: MDropEvent): void {
         event.preventDefault();
         event.stopPropagation();
+        if (MSortable.fromSortContainer) { MSortable.fromSortContainer.doCleanUp(); }
+        if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
+        this.doCleanUp();
         MSortable.fromSortContainer = undefined;
         MSortable.activeSortContainer = undefined;
-        this.hidePlaceHolder();
-        this.cleanUpInsertionClasses();
     }
 
     private onChildDragStart(event: MDropEvent): void {
@@ -273,12 +280,11 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private insertPlaceHolder(element: HTMLElement, insertPosition: InsertPosition): void {
         this.cleanUpInsertionClasses();
+        const insertionClass: string = insertPosition.includes('before') ? MSortClassNames.MSortBefore : MSortClassNames.MSortAfter;
+        element.classList.add(insertionClass);
         if (this.placeHolderElement) {
             this.showPlaceHolder();
-
-            const insertionClass: string = insertPosition.includes('before') ? MSortClassNames.MSortBefore : MSortClassNames.MSortAfter;
             element.insertAdjacentElement(insertPosition, this.placeHolderElement);
-            element.classList.add(insertionClass);
         }
     }
 
@@ -313,7 +319,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private showPlaceHolder(): void {
-        if (this.placeHolderElement) { this.placeHolderElement.style.display = 'inherit'; }
+        if (this.placeHolderElement) { this.placeHolderElement.style.display = ''; }
     }
 
     private hidePlaceHolder(): void {

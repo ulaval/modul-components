@@ -5,7 +5,8 @@ import { scrollBehaviourDragImageTranslateOverride } from 'mobile-drag-drop/scro
 // Polyfill for drag and drop on mobile.
 polyfill({
     holdToDrag: 200,
-    dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride
+    dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride,
+    iterationInterval: 50
 });
 
 // Polyfill for the Promise API

@@ -2,6 +2,7 @@ import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DRAGGABLE } from '../directive-names';
 import { MElementPlugin, MDOMPlugin } from '../domPlugin';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
+import { MDroppable } from '../droppable/droppable';
 
 export enum MDraggableClassNames {
     MDragging = 'm--is-dragging'
@@ -58,6 +59,9 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     private onDragEnd(event: DragEvent): void {
         this.cleanupCssClasses();
         MDraggable.currentDraggable = undefined;
+        if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.cleanupCssClasses(); }
+        MDroppable.currentHoverDroppable = undefined;
+
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
     }
 
