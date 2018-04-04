@@ -15,13 +15,15 @@ const ERROR_MESSAGE_NAME: string = 'm-error-message';
 @Component
 export class MErrorMessage extends Vue {
     @Prop()
-    public error: Error;
+    public error?: Error;
 
-    @Prop()
+    @Prop({
+        default: moment()
+    })
     public date: moment.Moment;
 
     @Prop()
-    public referenceNumber: string;
+    public referenceNumber?: string;
 
     private get userAgent(): string {
         return window.navigator.userAgent;
