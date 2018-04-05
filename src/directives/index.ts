@@ -8,6 +8,7 @@ import TextAreaAutoHeightPlugin from './textarea-auto-height/textarea-auto-heigh
 import DraggablePlugin from './draggable/draggable';
 import DroppablePlugin from './droppable/droppable';
 import SortablePlugin from './sortable/sortable';
+import SortableGroupPlugin from './sortable/sortable-group';
 
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -18,6 +19,7 @@ const DirectivesPlugin: PluginObject<any> = {
         Vue.use(RippleEffectPlugin);
         Vue.use(ScrollToPlugin);
         Vue.use(SortablePlugin);
+        Vue.use(SortableGroupPlugin);
         Vue.use(TextAreaAutoHeightPlugin);
     }
 };

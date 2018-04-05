@@ -78,20 +78,15 @@ export class Viewer extends Vue {
         event.stopImmediatePropagation();
         console.log(event.sortInfo);
 
-        // event.sortInfo.data.grouping = event.sortInfo.newGrouping;
+        event.sortInfo.data.grouping = event.sortInfo.newGrouping;
         if (event.sortInfo.oldPosition === -1) {
             list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
             this.refreshNewItem();
             return;
         }
 
-        if (event.sortInfo.newPosition > event.sortInfo.oldPosition) {
-            list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
-            list.splice(event.sortInfo.oldPosition, 1);
-        } else {
-            list.splice(event.sortInfo.oldPosition, 1);
-            list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
-        }
+        list.splice(event.sortInfo.oldPosition, 1);
+        list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
 
         this.refreshNewItem();
     }

@@ -7,6 +7,7 @@ import { MDroppable, MDropEvent, MDropEventNames, MDropInfo } from '../droppable
 import tabPanel from 'src/components/tab-panel/tab-panel';
 import { MDOMPlugin, MElementPlugin } from '../domPlugin';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
+import { MSortableGroup } from './sortable-group';
 
 export interface MSortableOptions {
     items: any[];
@@ -96,27 +97,28 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private attachChilds(): void {
         let itemCounter = 0;
+        const sortableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, this.element);
         for (let i = 0; i < this.element.children.length; i++) {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
-
             if (currentElement.classList.contains('emptyPlaceholder')) {
-                this.attachEmptyPlaceholder(currentElement);
+                this.attachEmptyPlaceholder(currentElement, sortableGroup ? sortableGroup.options : this.options.grouping);
             } else if (currentElement.classList.contains('placeholder')) {
-                this.attachPlaceholder(currentElement);
+                this.attachPlaceholder(currentElement, sortableGroup ? sortableGroup.options : this.options.grouping);
             } else {
+                const draggableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, currentElement);
                 const draggablePlugin: MDraggable = MDOMPlugin.attachUpdate(MDraggable, currentElement, {
                     action: MOVE_ACTION,
                     dragData: this.options.items[itemCounter++],
-                    grouping: this.options.grouping
+                    grouping: !sortableGroup ? draggableGroup ? draggableGroup.options : this.options.grouping : undefined
                 });
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragEnd);
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragStart);
                 draggablePlugin.addEventListener(MDraggableEventNames.OnDragEnd, (event: MDropEvent) => this.onChildDragEnd(event));
                 draggablePlugin.addEventListener(MDraggableEventNames.OnDragStart, (event: MDropEvent) => this.onChildDragStart(event));
 
-                const droppablePlugin = MDOMPlugin.attach(MDroppable, currentElement, {
+                MDOMPlugin.attachUpdate(MDroppable, currentElement, {
                     acceptedActions: this.options.acceptedActions,
-                    grouping: this.options.grouping,
+                    grouping: sortableGroup ? sortableGroup.options : this.options.grouping,
                     canDrop: true
                 });
             }
@@ -126,36 +128,31 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     private detachChilds(): void {
         for (let i = 0; i < this.element.children.length; i++) {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
-            if (currentElement !== this.placeHolderElement && currentElement !== this.emptyPlaceHolderElement) {
-                const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
-                MDOMPlugin.detach(MDraggable, currentElement);
-                MDOMPlugin.detach(MDroppable, currentElement);
-            }
+            MDOMPlugin.detach(MDraggable, currentElement);
+            MDOMPlugin.detach(MDroppable, currentElement);
         }
     }
 
-    private attachEmptyPlaceholder(element: HTMLElement): void {
-        this.emptyPlaceHolderElement = this.setupPlaceholder(element);
+    private attachEmptyPlaceholder(element: HTMLElement, grouping?: string): void {
+        this.emptyPlaceHolderElement = this.setupPlaceholder(element, grouping);
         if (this.emptyPlaceHolderElement) {
             this.emptyPlaceHolderElement.style.display = this.options.items.length ? 'none' : 'inherit';
         }
     }
 
-    private attachPlaceholder(element: HTMLElement): void {
-        this.placeHolderElement = this.setupPlaceholder(element);
+    private attachPlaceholder(element: HTMLElement, grouping?: string): void {
+        this.placeHolderElement = this.setupPlaceholder(element, grouping);
         if (this.placeHolderElement) { this.hidePlaceHolder(); }
     }
 
-    private setupPlaceholder(element: HTMLElement): HTMLElement | undefined {
+    private setupPlaceholder(element: HTMLElement, grouping?: string): HTMLElement | undefined {
         if (!element) { return undefined; }
 
-        if (element && !MDOMPlugin.get(MDroppable, element)) {
-            const plugin = MDOMPlugin.attach(MDroppable, element, {
-                acceptedActions: this.options.acceptedActions,
-                grouping: this.options.grouping,
-                canDrop: true
-            });
-        }
+        MDOMPlugin.attachUpdate(MDroppable, element, {
+            acceptedActions: this.options.acceptedActions,
+            grouping: grouping,
+            canDrop: true
+        });
 
         return element;
     }
@@ -208,10 +205,13 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
             data: event.dropInfo.data,
             action: event.dropInfo.action,
             oldPosition: oldIndex,
-            newPosition: this.getNewPosition(event),
+            newPosition: this.getNewPosition(event, oldIndex),
             oldGrouping: MSortable.fromSortContainer ? MSortable.fromSortContainer.options.grouping : undefined,
-            newGrouping: this.options.grouping
+            newGrouping: this.getNewGrouping(event, oldIndex)
         };
+        const changed: boolean = sortInfo.oldPosition !== sortInfo.newPosition || sortInfo.newGrouping !== sortInfo.oldGrouping;
+        if (!changed) { return; }
+
         const sortEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { sortInfo });
         customEvent.initCustomEvent(eventName, true, true, event.detail);
         this.element.dispatchEvent(sortEvent);
@@ -280,13 +280,15 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         }
     }
 
-    private getNewPosition(event: MDropEvent): number {
+    private getNewPosition(event: MDropEvent, oldPosition: number): number {
         let index = 0;
         for (let i = 0; i < this.element.children.length; i++) {
             const child: HTMLElement = this.element.children[i] as HTMLElement;
             if (child.classList.contains(MSortClassNames.EmptyPlaceholder)) { index--; }
             if (child.classList.contains(MSortClassNames.PlaceHolder)) { index--; }
-            if (child.classList.contains(MSortClassNames.SortBefore)) { break; }
+            if (child.classList.contains(MSortClassNames.SortBefore)) {
+                break;
+            }
             if (child.classList.contains(MSortClassNames.SortAfter)) {
                 index++;
                 break;
@@ -294,7 +296,17 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
             index++;
         }
 
-        return index;
+        let newIndex: number = index < 0 ? 0 : index;
+        if (oldPosition !== -1 && oldPosition < newIndex) {
+            newIndex--;
+        }
+        return newIndex;
+    }
+
+    private getNewGrouping(event: MDropEvent, oldPosition: number): string | undefined {
+        if (oldPosition !== -1) { return MDraggable.currentDraggable ? MDraggable.currentDraggable.options.grouping : undefined; }
+
+        return this.options.grouping;
     }
 
     private computeInsertPosition(event: MDropEvent): MSortInsertPositions {
@@ -349,16 +361,24 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 const extractVnodeAttributes: (node: VNode) => MSortableOptions = (node: VNode) => {
     return {
         items: getVNodeAttributeValue(node, 'items'),
-        acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
-        grouping: getVNodeAttributeValue(node, 'grouping')
+        acceptedActions: getVNodeAttributeValue(node, 'accepted-actions')
     };
 };
 const Directive: DirectiveOptions = {
     bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.attach(MSortable, element, extractVnodeAttributes(node));
     },
+    inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+        const options = extractVnodeAttributes(node);
+        const sortableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, element);
+        options.grouping = sortableGroup ? sortableGroup.options : undefined;
+        MDOMPlugin.update(MSortable, element, options);
+    },
     componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.update(MSortable, element, extractVnodeAttributes(node));
+        const options = extractVnodeAttributes(node);
+        const sortableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, element);
+        options.grouping = sortableGroup ? sortableGroup.options : undefined;
+        MDOMPlugin.update(MSortable, element, options);
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MSortable, element);

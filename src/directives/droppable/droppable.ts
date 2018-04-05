@@ -191,14 +191,13 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     private canDrop(): boolean {
         if (!MDraggable.currentDraggable) { return false; }
 
-        const currentHoverElement: HTMLElement | undefined = MDroppable.currentHoverDroppable ? MDroppable.currentHoverDroppable.element : undefined;
-        const currentDraggable: HTMLElement | undefined = MDraggable.currentDraggable ? MDraggable.currentDraggable.element : undefined;
-
-        const isHoveringOverDraggingElement = currentHoverElement === currentDraggable;
+        const isHoveringOverDraggingElement = this.options.grouping !== undefined && MDraggable.currentDraggable.options.grouping !== undefined &&
+            this.options.grouping === MDraggable.currentDraggable.options.grouping;
         const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
         const draggableAction: string = MDraggable.currentDraggable.options.action;
         const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
-        return !isHoveringOverDraggingElement && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
+        const isInsertingGroupInGroup = this.options.grouping !== undefined && MDraggable.currentDraggable.options.grouping !== undefined;
+        return !isHoveringOverDraggingElement && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction) && !isInsertingGroupInGroup;
     }
 
     private isHoveringOverDraggedElementChild(): boolean {
