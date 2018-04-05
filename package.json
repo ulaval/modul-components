@@ -61,7 +61,6 @@
         "includeFailureMsg": true
     },
     "dependencies": {
-        "@ulaval/shell-ui": "^0.1.5",
         "axios": "^0.17.1",
         "css-loader": "^0.28.7",
         "enquire.js": "^2.1.6",
