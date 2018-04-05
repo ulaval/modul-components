@@ -1,10 +1,14 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import { Prop } from 'vue-property-decorator';
+import PortalPlugin from 'portal-vue';
 import Component from 'vue-class-component';
-import { MODAL_NAME } from '../component-names';
 import WithRender from './modal.html?style=./modal.scss';
+import { ModulVue } from '../../utils/vue/vue';
+import { MODAL_NAME } from '../component-names';
 import { Portal, PortalMixinImpl, PortalMixin, BackdropMode } from '../../mixins/portal/portal';
+import ButtonPlugin from '../button/button';
+import I18nPlugin from '../i18n/i18n';
+import LinkPlugin from '../link/link';
 
 @WithRender
 @Component({
@@ -75,6 +79,10 @@ export class MModal extends ModulVue implements PortalMixinImpl {
 
 const ModalPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ButtonPlugin);
+        v.use(I18nPlugin);
+        v.use(LinkPlugin);
+        v.use(PortalPlugin);
         v.component(MODAL_NAME, MModal);
     }
 };
