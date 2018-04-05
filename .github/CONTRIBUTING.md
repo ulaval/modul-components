@@ -5,7 +5,7 @@ Je veux les instructions en [français](#fr)
 
 Before submitting your contribution, please read the following guidelines.
 
--
+- English instructions coming soon...
 
 # Project Structure
 
