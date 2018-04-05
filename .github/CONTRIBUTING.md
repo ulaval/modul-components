@@ -60,6 +60,10 @@ Avant de soumettre votre contribution, veuillez prendre note de ces quelques lig
 
 *Pour les contributeurs internes au projet, le billet sera créé dans JIRA.
 
+## Documentation technique des composantes
+
+- à venir
+
 # <a name="psfr"></a>Structure du projet
 
 **conf**: Contient les fichiers de configuration (webpack, linters, etc.).
