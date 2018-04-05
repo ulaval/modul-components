@@ -36,7 +36,6 @@ export class Viewer extends Vue {
 
     public mounted(): void {
         this.buildTag();
-        window.addEventListener('touchmove', () => {});
         this.refreshNewItem();
     }
 
