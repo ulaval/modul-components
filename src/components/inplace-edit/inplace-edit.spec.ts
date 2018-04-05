@@ -10,18 +10,20 @@ import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 
-let propsData: { propsData: { editMode: boolean } };
+let propsData: { propsData: { editMode: boolean, saveFn: () => Promise<void> } };
 
 let inplaceEdit: MInplaceEdit;
 let wrapper: Wrapper<ModulVue>;
 
 const CANCEL_EVENT: string = 'cancel';
-const CONFIRM_EVENT: string = 'confirm';
+const CONFIRM_EVENT: string = 'ok';
 
 const READ_SLOT_CLASS: string = 'readSlot';
 const READ_SLOT: string = '<div class="' + READ_SLOT_CLASS + '">readSlot</div>';
 const EDIT_SLOT_CLASS: string = 'editSlot';
 const EDIT_SLOT: string = '<input class="' + EDIT_SLOT_CLASS + '" type="text" name="inputEditMode" value="myInput">';
+
+const AN_EVENT: Event = new Event('An event');
 
 describe('Component inplace-edit - Element wrapper edition inline with default values', () => {
 
@@ -55,7 +57,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
-        propsData = { propsData: { editMode: false } };
+        propsData = { propsData: { editMode: false, saveFn: () => { return Promise.resolve(); } } };
         inplaceEdit = new MInplaceEdit(propsData);
     });
 
@@ -63,7 +65,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
         test(`must not send events to parent`, () => {
             let spy = jest.spyOn(inplaceEdit, '$emit');
 
-            inplaceEdit.confirm();
+            inplaceEdit.confirm(AN_EVENT);
 
             expect(spy).not.toBeCalled();
         });
@@ -73,7 +75,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
         it(`must not send event to parent`, () => {
             let spy = jest.spyOn(inplaceEdit, '$emit');
 
-            inplaceEdit.cancel();
+            inplaceEdit.cancel(AN_EVENT);
 
             expect(spy).not.toBeCalled();
         });
@@ -81,30 +83,73 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
 });
 
 describe('Component inplace-edit - Element wrapper edition inline set to edit mode', () => {
+    describe('and valide input',() => {
 
-    beforeEach(() => {
-        Vue.use(MediaQueriesPlugin);
-        propsData = { propsData: {  editMode: true } };
-        inplaceEdit = new MInplaceEdit(propsData);
-    });
+        beforeEach(() => {
+            Vue.use(MediaQueriesPlugin);
+            propsData = { propsData: {  editMode: true, saveFn: () => { return Promise.resolve(); } } };
+            inplaceEdit = new MInplaceEdit(propsData);
+        });
 
-    describe('when confirming', () => {
-        it(`must emit confirmation event to parent`, () => {
-            let spy = jest.spyOn(inplaceEdit, '$emit');
+        describe('when confirming', () => {
+            it(`must emit confirmation event to parent`, () => {
+                let spy = jest.spyOn(inplaceEdit, '$emit');
 
-            inplaceEdit.confirm();
+                inplaceEdit.confirm(AN_EVENT);
 
-            expect(spy).toBeCalledWith(CONFIRM_EVENT);
+                expect(spy).toHaveBeenCalledWith(CONFIRM_EVENT);
+            });
+
+            it(`must go back to readMode`, async () => {
+                let spy = jest.spyOn(inplaceEdit, '$emit');
+
+                await inplaceEdit.confirm(AN_EVENT);
+
+                expect(spy).toHaveBeenCalledWith('update:editMode', false);
+            });
+        });
+
+        describe('when cancelling', () => {
+            it(`must emit cancellation event to parent`, () => {
+                let spy = jest.spyOn(inplaceEdit, '$emit');
+
+                inplaceEdit.cancel(AN_EVENT);
+
+                expect(spy).toBeCalledWith(CANCEL_EVENT);
+            });
+            it(`must go back to readMode`, async () => {
+                let spy = jest.spyOn(inplaceEdit, '$emit');
+
+                await inplaceEdit.confirm(AN_EVENT);
+
+                expect(spy).toHaveBeenCalledWith('update:editMode', false);
+            });
         });
     });
+    describe('and invalide input',() => {
 
-    describe('when cancelling', () => {
-        it(`must not emit cancellation event to parent`, () => {
-            let spy = jest.spyOn(inplaceEdit, '$emit');
+        beforeEach(() => {
+            Vue.use(MediaQueriesPlugin);
+            propsData = { propsData: {  editMode: true, saveFn: () => { return Promise.reject('some reason'); } } };
+            inplaceEdit = new MInplaceEdit(propsData);
+        });
 
-            inplaceEdit.cancel();
+        describe('when confirming', () => {
+            it(`must emit confirmation event to parent`, () => {
+                let spy = jest.spyOn(inplaceEdit, '$emit');
 
-            expect(spy).toBeCalledWith(CANCEL_EVENT);
+                inplaceEdit.confirm(AN_EVENT);
+
+                expect(spy).toBeCalledWith(CONFIRM_EVENT);
+            });
+
+            it(`must not go back to readMode`, async () => {
+                let spy = jest.spyOn(inplaceEdit, '$emit');
+
+                await inplaceEdit.confirm(AN_EVENT);
+
+                expect(spy).not.toHaveBeenCalledWith('update:editMode', false);
+            });
         });
     });
 });
@@ -152,7 +197,7 @@ describe('Component inplace-edit - Complete component by default', () => {
             expect(slotFound.is('input')).toBe(true);
         });
         describe('when clicking on the confirm button',() => {
-            it('should emit cancel event', () => {
+            it('should emit confirm event', () => {
 
                 wrapper.find({ ref : 'confirm-control' }).trigger('click');
 

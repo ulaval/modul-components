@@ -19,34 +19,35 @@ export type SaveFn = () => Promise<void>;
 export class MInplaceEdit extends ModulVue {
 
     @Prop()
-    public saveFn: SaveFn;
-
-    @Prop()
     public editMode: boolean;
-
-    // @Prop()
-    public error: boolean = false;
-
-    public submitted: boolean = false;
 
     @Prop()
     public title: string;
 
-    private intEm: boolean = false;
+    @Prop()
+    public saveFn: SaveFn;
 
-    @Watch('editMode')
-    public onEditMode(v: boolean): void {
-        this.intEm = v;
-    }
+    private internalEditMode: boolean = false;
+
+    private error: boolean = false;
+
+    private submitted: boolean = false;
 
     public mounted(): void {
-        this.intEm = this.editMode;
+        this.internalEditMode = this.editMode;
+    }
+
+    public get dialogTitle(): string {
+        if (!this.title) {
+            return this.$i18n.translate('m-inplace-edit:modify');
+        }
+        return this.title;
     }
 
     public confirm(event: Event): void {
         if (this.editMode) {
             this.save();
-            this.$emit('confirm');
+            this.$emit('ok');
         }
     }
 
@@ -57,11 +58,9 @@ export class MInplaceEdit extends ModulVue {
         }
     }
 
-    public get dialogTitle(): string {
-        if (!this.title) {
-            return this.$i18n.translate('m-inplace-edit:modify');
-        }
-        return this.title;
+    @Watch('editMode')
+    public onEditMode(value: boolean): void {
+        this.internalEditMode = value;
     }
 
     private onClick(event: MouseEvent): void {
@@ -69,12 +68,12 @@ export class MInplaceEdit extends ModulVue {
     }
 
     private get propEditMode(): boolean {
-        return this.editMode === undefined ? this.intEm : this.editMode;
+        return this.editMode === undefined ? this.internalEditMode : this.editMode;
     }
 
-    private set propEditMode(v: boolean) {
-        this.intEm = v;
-        this.$emit('update:editMode', v);
+    private set propEditMode(value: boolean) {
+        this.internalEditMode = value;
+        this.$emit('update:editMode', value);
     }
 
     private save(): void {
@@ -83,12 +82,10 @@ export class MInplaceEdit extends ModulVue {
             this.error = false;
             this.saveFn().then(() => {
                 this.submitted = false;
-                console.log('yes!!!');
                 this.propEditMode = false;
             }, () => {
                 this.submitted = false;
                 this.error = true;
-                console.log('nooooooooo!!!');
             });
         } else {
             console.warn('No save function provided (save-fn prop is undefined)');
