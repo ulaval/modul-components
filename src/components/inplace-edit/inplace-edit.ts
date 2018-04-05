@@ -10,6 +10,8 @@ import ButtonPlugin from '../button/button';
 import DialogPlugin from '../dialog/dialog';
 import { ModulVue } from '../../utils/vue/vue';
 
+export type SaveFn = () => Promise<void>;
+
 @WithRender
 @Component({
     mixins: [MediaQueries]
@@ -17,25 +19,40 @@ import { ModulVue } from '../../utils/vue/vue';
 export class MInplaceEdit extends ModulVue {
 
     @Prop()
+    public saveFn: SaveFn;
+
+    @Prop()
     public editMode: boolean;
 
-    @Prop()
-    public error: boolean;
+    // @Prop()
+    public error: boolean = false;
 
-    @Prop()
-    public submitted: boolean;
+    public submitted: boolean = false;
 
     @Prop()
     public title: string;
 
+    private intEm: boolean = false;
+
+    @Watch('editMode')
+    public onEditMode(v: boolean): void {
+        this.intEm = v;
+    }
+
+    public mounted(): void {
+        this.intEm = this.editMode;
+    }
+
     public confirm(event: Event): void {
         if (this.editMode) {
+            this.save();
             this.$emit('confirm');
         }
     }
 
     public cancel(event: Event): void {
         if (this.editMode) {
+            this.propEditMode = false;
             this.$emit('cancel');
         }
     }
@@ -49,6 +66,33 @@ export class MInplaceEdit extends ModulVue {
 
     private onClick(event: MouseEvent): void {
         this.$emit('click', event);
+    }
+
+    private get propEditMode(): boolean {
+        return this.editMode === undefined ? this.intEm : this.editMode;
+    }
+
+    private set propEditMode(v: boolean) {
+        this.intEm = v;
+        this.$emit('update:editMode', v);
+    }
+
+    private save(): void {
+        if (this.saveFn) {
+            this.submitted = true;
+            this.error = false;
+            this.saveFn().then(() => {
+                this.submitted = false;
+                console.log('yes!!!');
+                this.propEditMode = false;
+            }, () => {
+                this.submitted = false;
+                this.error = true;
+                console.log('nooooooooo!!!');
+            });
+        } else {
+            console.warn('No save function provided (save-fn prop is undefined)');
+        }
     }
 }
 
