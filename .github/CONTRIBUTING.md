@@ -45,7 +45,7 @@ Avant de soumettre votre contribution, veuillez prendre note de ces quelques lig
 
 - Lire à propos de la [structure du projet](#psfr).
 - Créer une *feature branch* à partir de la branche désirée (typiquement `develop`). Le projet `modul-components` suit la convention [Git Flow](http://nvie.com/posts/a-successful-git-branching-model/). Le nom de votre branche devrait débuter par *feature-* ou *feature/*.
-- À moins d'avoir à modifier la structure même tu projet, le code touché par le *pull request* (PR) ne devrait concerner que le répertoire `src`.
+- À moins d'avoir à modifier la structure même du projet, le code touché par le *pull request* (PR) ne devrait concerner que le répertoire `src`.
 - S'assurer que votre code compile (`npm run dev` ou `npm run buildWebpack`).
 - S'assurer que les tests s'exécutent avec succès (`npm run unitall`).
 - S'il s'agit d'une correction de bogue:
@@ -68,7 +68,7 @@ Avant de soumettre votre contribution, veuillez prendre note de ces quelques lig
 
 **src/components**: Contient un répertoire pour chacune des composantes.
 
-**src/components/index.ts**: Plugin qui permet l'installation de tous les composantes à la fois.
+**src/components/index.ts**: Plugin qui permet l'installation de toutes les composantes à la fois.
 
 **src/components/--name--/name.ts**: Code de la composante.
 
@@ -80,13 +80,13 @@ Avant de soumettre votre contribution, veuillez prendre note de ces quelques lig
 
 **src/components/--name--/name.spec.ts**: Tests unitaires de la composante.
 
-**src/directives/**: Contient un répertoire pour chacune des directives. la structure est la même que celle des composantes.
+**src/directives/**: Contient un répertoire pour chacune des directives. La structure est la même que celle des composantes.
 
-**src/lang**: Contient les plugins pour chacun des langues.
+**src/lang**: Contient les plugins pour chacune des langues.
 
 **src/mixins**: Contient les mixins utilisées par les composantes.
 
-**src/styles**: Contient les classes de styles, mixin, etc. communes à toutes les composantes.
+**src/styles**: Contient les classes de styles, mixins, etc. communes à toutes les composantes.
 
 **src/utils**: Contient les classes utilitaires ainsi que les services.
 
