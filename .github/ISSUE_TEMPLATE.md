@@ -11,7 +11,7 @@ Content can be written in English or in French
 -->
 
 <!-- REQUIRED -->
-- [ ] Provide a description of the issue:
+- [ ] Provide a description of the issue
 <!-- Description here... -->
 
 If submitting a bug

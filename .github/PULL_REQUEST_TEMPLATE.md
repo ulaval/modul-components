@@ -11,17 +11,17 @@ Content can be written in English or in French
 -->
 
 <!-- REQUIRED -->
-- [ ] Provide a small description of the changes introduced by this PR:
+- [ ] Provide a small description of the changes introduced by this PR
 <!-- Description here... -->
 - [ ] Include links to issues
 <!-- Links here... -->
-- [ ] For internal contributors, please add a JIRA epic link.
+- [ ] For internal contributors, please add a JIRA epic link
 <!-- JIRA Epic number here... -->
 
 <!-- END_REQUIRED -->
 
 <!-- OPTIONAL, remove unused -->
-- [ ] Include this section in the release notes:
+- [ ] Include this section in the release notes
 <!-- Release notes here... -->
 - [ ] Other info
 <!-- Any other relevant information here... -->
