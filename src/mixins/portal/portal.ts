@@ -119,6 +119,12 @@ export class Portal extends ModulVue implements PortalMixin {
         }
     }
 
+    protected created(): void {
+        if (!this.$modul) {
+            throw new Error('Portal mixin -> this.$modul is undefined, you must install the Modul plugin.');
+        }
+    }
+
     protected beforeMount(): void {
         this.propId = this.id + '-' + uuid.generate();
         let element: HTMLElement = document.createElement('div');
