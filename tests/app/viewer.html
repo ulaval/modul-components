@@ -49,7 +49,7 @@
             <div>childs</div>
         </div>
     </div> -->
-    <!-- <div v-m-sortable
+    <div v-m-sortable
         :items="items"
         :accepted-actions="['someAction', 'addGrouping']"
         @sortable:add="handleSortableAdd($event, items)"
@@ -58,7 +58,7 @@
         style="background-color: lightYellow; width: 100%; border: 1px solid red; margin-top: 10px;">
         <div class="emptyPlaceholder" style="background-color: lightgreen;">No Items.  Drop SomeAction on me!</div>
         <div class="placeholder" style="background-color: darkgreen; height: 10px;"></div>
-        <div v-for="item in items" style="padding: 5px;">
+        <div v-for="item in items" style="padding: 5px;" v-m-sortable-group="item.grouping">
             Item #{{ item.id }}: {{ item.text }}.
             <span v-if="item.grouping">Group: {{ item.grouping }}</span>
             <div v-m-sortable
@@ -74,7 +74,7 @@
                 <div v-for="subItem in item.items" style="padding: 5px;">Item #{{subItem.id}}</div>
             </div>
         </div>
-    </div> -->
+    </div>
     <br>
     <br>
     <br>

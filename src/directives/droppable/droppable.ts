@@ -22,7 +22,6 @@ export interface MDropEvent extends DragEvent {
 
 export interface MDroppableOptions {
     acceptedActions: string[];
-    grouping?: any;
     canDrop?: boolean;
 }
 
@@ -175,14 +174,13 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
             fromElement: event.fromElement }, { dropInfo: this.extractDropInfo(event) }));
     }
 
-    private extractDropInfo(event: DragEvent): MDropInfo {
-        const data = MDraggable.currentDraggable
-            ? MDraggable.currentDraggable.options.dragData
-            ? MDraggable.currentDraggable.options.dragData
-            : event.dataTransfer.getData('text') : undefined;
+    private extractDropInfo(event: DragEvent): MDropInfo | undefined {
+        if (!MDraggable.currentDraggable) { return; }
+
+        const data = MDraggable.currentDraggable.options.dragData || event.dataTransfer.getData('text');
         return {
             action: MDraggable.currentDraggable ? MDraggable.currentDraggable.options.action : DEFAULT_ACTION,
-            grouping: this.options.grouping,
+            grouping: MDraggable.currentDraggable.options.grouping,
             data,
             canDrop: this.canDrop()
         };
@@ -191,13 +189,12 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     private canDrop(): boolean {
         if (!MDraggable.currentDraggable) { return false; }
 
-        const isHoveringOverDraggingElement = this.options.grouping !== undefined && MDraggable.currentDraggable.options.grouping !== undefined &&
-            this.options.grouping === MDraggable.currentDraggable.options.grouping;
+        console.log('group', MDraggable.currentDraggable.options, this.options);
+
         const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
         const draggableAction: string = MDraggable.currentDraggable.options.action;
         const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
-        const isInsertingGroupInGroup = this.options.grouping !== undefined && MDraggable.currentDraggable.options.grouping !== undefined;
-        return !isHoveringOverDraggingElement && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction) && !isInsertingGroupInGroup;
+        return !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
     }
 
     private isHoveringOverDraggedElementChild(): boolean {

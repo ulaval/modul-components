@@ -39,8 +39,7 @@ export enum MSortClassNames {
 
 export interface MSortInfo {
     action: string;
-    oldGrouping?: string;
-    newGrouping?: string;
+    grouping?: string;
     data: any;
     canDrop: boolean;
     oldPosition: number;
@@ -49,6 +48,7 @@ export interface MSortInfo {
 
 const DEFAULT_ACTION: string = 'any';
 const MOVE_ACTION: string = 'move';
+const MOVE_GROUP_ACTION: string = 'move_group';
 
 export class MSortable extends MElementPlugin<MSortableOptions> {
     public static defaultMountPoint: string = '__msortable__';
@@ -87,12 +87,19 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private setOptions(value: MSortableOptions): void {
-        if (value.acceptedActions && value.acceptedActions.length) {
-            value.acceptedActions.push(MOVE_ACTION);
+        const sortableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, this.element);
+        let acceptedActions: string[];
+        if (!value.acceptedActions.length) {
+            acceptedActions = [DEFAULT_ACTION];
         } else {
-            value.acceptedActions = value.acceptedActions ? value.acceptedActions : [DEFAULT_ACTION];
+            acceptedActions = [...value.acceptedActions];
         }
+
+        acceptedActions.push(MOVE_ACTION);
+        if (!sortableGroup) { acceptedActions.push(MOVE_GROUP_ACTION); }
+
         this._options = value;
+        this._options.acceptedActions = acceptedActions;
     }
 
     private attachChilds(): void {
@@ -100,16 +107,18 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         const sortableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, this.element);
         for (let i = 0; i < this.element.children.length; i++) {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
+
             if (currentElement.classList.contains('emptyPlaceholder')) {
                 this.attachEmptyPlaceholder(currentElement, sortableGroup ? sortableGroup.options : this.options.grouping);
             } else if (currentElement.classList.contains('placeholder')) {
                 this.attachPlaceholder(currentElement, sortableGroup ? sortableGroup.options : this.options.grouping);
             } else {
                 const draggableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, currentElement);
+                const grouping = !sortableGroup ? draggableGroup ? draggableGroup.options : undefined : undefined;
                 const draggablePlugin: MDraggable = MDOMPlugin.attachUpdate(MDraggable, currentElement, {
-                    action: MOVE_ACTION,
+                    action: !grouping ? MOVE_ACTION : MOVE_GROUP_ACTION,
                     dragData: this.options.items[itemCounter++],
-                    grouping: !sortableGroup ? draggableGroup ? draggableGroup.options : this.options.grouping : undefined
+                    grouping
                 });
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragEnd);
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragStart);
@@ -118,7 +127,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
                 MDOMPlugin.attachUpdate(MDroppable, currentElement, {
                     acceptedActions: this.options.acceptedActions,
-                    grouping: sortableGroup ? sortableGroup.options : this.options.grouping,
                     canDrop: true
                 });
             }
@@ -150,7 +158,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
         MDOMPlugin.attachUpdate(MDroppable, element, {
             acceptedActions: this.options.acceptedActions,
-            grouping: grouping,
             canDrop: true
         });
 
@@ -190,7 +197,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     private onDrop(event: MDropEvent): void {
         event.stopPropagation();
         const oldIndex: number = this.options.items.findIndex((item: any) => item === event.dropInfo.data);
-        const isMoving: boolean = oldIndex !== -1 || event.dropInfo.action === MOVE_ACTION;
+        const isMoving: boolean = oldIndex !== -1 || event.dropInfo.action === MOVE_ACTION || event.dropInfo.action === MOVE_GROUP_ACTION;
 
         let eventName: string;
         if (isMoving) {
@@ -206,10 +213,9 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
             action: event.dropInfo.action,
             oldPosition: oldIndex,
             newPosition: this.getNewPosition(event, oldIndex),
-            oldGrouping: MSortable.fromSortContainer ? MSortable.fromSortContainer.options.grouping : undefined,
-            newGrouping: this.getNewGrouping(event, oldIndex)
+            grouping: this.getNewGrouping(event, oldIndex)
         };
-        const changed: boolean = sortInfo.oldPosition !== sortInfo.newPosition || sortInfo.newGrouping !== sortInfo.oldGrouping;
+        const changed: boolean = sortInfo.oldPosition !== sortInfo.newPosition;
         if (!changed) { return; }
 
         const sortEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { sortInfo });
@@ -304,9 +310,11 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private getNewGrouping(event: MDropEvent, oldPosition: number): string | undefined {
-        if (oldPosition !== -1) { return MDraggable.currentDraggable ? MDraggable.currentDraggable.options.grouping : undefined; }
-
-        return this.options.grouping;
+        if (event.dropInfo.action === MOVE_GROUP_ACTION) {
+            return event.dropInfo.grouping;
+        } else {
+            return this.options.grouping;
+        }
     }
 
     private computeInsertPosition(event: MDropEvent): MSortInsertPositions {

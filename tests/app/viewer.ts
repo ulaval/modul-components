@@ -27,7 +27,7 @@ export class Viewer extends Vue {
     public items: any[] = [];
     public items2: any[] = [];
     public items3: any[] = [];
-    public newItem: MyObject = new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`);
+    public newItem: MyObject;
     public groupingCount = 1;
     public itemCount = 1;
     public dummyText = 'Drag any';
@@ -37,6 +37,7 @@ export class Viewer extends Vue {
     public mounted(): void {
         this.buildTag();
         window.addEventListener('touchmove', () => {});
+        this.refreshNewItem();
     }
 
     @Watch('$route')
@@ -69,7 +70,7 @@ export class Viewer extends Vue {
                 this.refreshNewItem();
                 break;
             default:
-                list.splice(event.sortInfo.newPosition, 0, new MyObject(id, `Hello from ${id}`, event.sortInfo.newGrouping));
+                list.splice(event.sortInfo.newPosition, 0, new MyObject(id, `Hello from ${id}`, event.sortInfo.grouping));
                 this.refreshNewItem();
         }
     }
@@ -78,7 +79,7 @@ export class Viewer extends Vue {
         event.stopImmediatePropagation();
         console.log(event.sortInfo);
 
-        event.sortInfo.data.grouping = event.sortInfo.newGrouping;
+        event.sortInfo.data.grouping = event.sortInfo.grouping;
         if (event.sortInfo.oldPosition === -1) {
             list.splice(event.sortInfo.newPosition, 0, event.sortInfo.data);
             this.refreshNewItem();
@@ -97,7 +98,7 @@ export class Viewer extends Vue {
     }
 
     private refreshNewItem(): void {
-        this.newItem = new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`);
+        this.newItem = new MyObject(this.items.length + this.items2.length + this.items3.length, `Hello from ${this.items.length + this.items2.length + this.items3.length}`, this.groupingCount);
     }
 
     private deleteItem(): void {
