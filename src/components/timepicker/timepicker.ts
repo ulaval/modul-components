@@ -59,7 +59,9 @@ export class MTimepicker extends ModulVue {
         let newTime = this.duration ? moment.duration(this.min.hours() + ':' + this.min.minutes()) : moment().hours(this.min.hours()).minutes(this.min.minutes());
         while (this.isTimeSameOrBeforeMax(newTime)) {
             let hour = newTime.hours();
-            if (!this.hours[hour]) this.hours[hour] = [];
+            if (!this.hours[hour]) {
+                this.hours[hour] = [];
+            }
             this.hours[hour].push(newTime.minutes());
             newTime.add(this.step, 'm');
         }
@@ -184,7 +186,9 @@ export class MTimepicker extends ModulVue {
         if (!this.isMousedown) {
             clearTimeout(this.scrollTimeout);
             this.scrollTimeout = setTimeout(() => {
-                if (event.srcElement) this.positionScroll(event.srcElement);
+                if (event.srcElement) {
+                    this.positionScroll(event.srcElement);
+                }
             }, 300);
         }
     }
@@ -195,7 +199,9 @@ export class MTimepicker extends ModulVue {
 
     private onMouseup(event: Event): void {
         this.isMousedown = false;
-        if (event.srcElement) this.positionScroll(event.srcElement);
+        if (event.srcElement) {
+            this.positionScroll(event.srcElement);
+        }
     }
 
     private positionScroll(el: Element): void {

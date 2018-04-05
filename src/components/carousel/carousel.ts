@@ -34,14 +34,23 @@ export class MCarousel extends Vue {
                 this.showNextItem();
             }, this.interval);
         }
+        this.initialize();
     }
 
     protected updated(): void {
+        this.initialize();
+    }
+
+    protected beforeDestroy(): void {
+        this.toggleKeyboardNavigation(false);
+        clearInterval(this.updateInterval);
+    }
+
+    private initialize(): void {
         if (this.isIndexValid(this.propIndex) || this.propIndex === 0 && this.items.length === 0) {
             this.transitionForward = this.internalIndex <= this.propIndex;
             this.internalIndex = this.propIndex;
             let items: MCarouselItem[] = [];
-
             if (this.$slots.default) {
                 let index = 0;
                 this.$slots.default.forEach(item => {
@@ -66,11 +75,6 @@ export class MCarousel extends Vue {
                 this.items = items.length > 0 ? items : this.items;
             }
         }
-    }
-
-    protected beforeDestroy(): void {
-        this.toggleKeyboardNavigation(false);
-        clearInterval(this.updateInterval);
     }
 
     @Watch('keyboardNavigable')
@@ -108,7 +112,19 @@ export class MCarousel extends Vue {
     }
 
     private isIndexValid(value): boolean {
-        return value >= 0 && value < this.items.length;
+        return value >= 0 && value < this.numberOfCarouselItems();
+    }
+
+    private numberOfCarouselItems(): number {
+        let count: number = 0;
+        if (this.$slots.default) {
+            this.$slots.default.forEach(item => {
+                if (item.componentInstance instanceof MCarouselItem) {
+                    count ++;
+                }
+            });
+        }
+        return count;
     }
 
     private showPrevItem(resetInterval: boolean = false): void {

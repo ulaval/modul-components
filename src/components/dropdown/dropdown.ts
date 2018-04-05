@@ -280,6 +280,16 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private onKeydownTab($event: KeyboardEvent): void {
+        if (this.as<MediaQueries>().isMqMinS) {
+            if (this.focusedIndex > -1 && this.internalItems.length == 1) {
+                let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
+                this.model = item.value;
+            }
+            this.open = false;
+        }
+    }
+
     private focusOnResearchInput(): void {
         (this.$refs.researchInput as HTMLElement).focus();
     }
