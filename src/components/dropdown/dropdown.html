@@ -13,8 +13,7 @@
                    :required-marker="requiredMarker"
                    :width="inputStyletWidth"
                    :icon-name="iconName"
-                   @mousedown="inputOnMousedown"
-                   @mouseup="inputOnMouseup"
+                   :tag-style="tagStyle"
                    v-m-popup:popup>
         <input type="text"
                ref="input"
@@ -31,7 +30,7 @@
                @keydown.esc="inputOnKeydownEsc"
                @keydown.up.prevent="onKeydownUp"
                @keydown.down.prevent="onKeydownDown"
-               @keydown.tab="inputOnKeydownTab"
+               @keydown.tab="onKeydownTab"
                @focus="inputOnFocus"
                v-model="selectedText">
         <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
@@ -60,7 +59,8 @@
              :leave="transitionLeave"
              :padding="false"
              :focus-management="isMqMaxS"
-             :close-on-backdrop="true">
+             :close-on-backdrop="true"
+             :preload="true">
         <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="filterable">

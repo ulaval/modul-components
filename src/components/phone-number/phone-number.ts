@@ -10,9 +10,6 @@ import i18nPlugin from '../../utils/i18n/i18n';
 @Component
 export class MPhoneNumber extends ModulVue {
 
-    @Prop({ default: true })
-    public passwordIcon: boolean;
-
     private countryLabel: string = this.$i18n.translate('m-phone-number:label.country');
     private phoneLabel: string = this.$i18n.translate('m-phone-number:label.phone');
     private extensionLabel: string = this.$i18n.translate('m-phone-number:label.extension');

@@ -18,6 +18,8 @@ import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 
@@ -46,7 +48,10 @@ let filesizeSymbols: { [name: string]: string } | undefined = undefined;
                 symbols: filesizeSymbols
             });
         }
-    }
+    },
+    mixins: [
+        MediaQueries
+    ]
 })
 export class MFileUpload extends ModulVue {
     @Prop()
@@ -55,17 +60,19 @@ export class MFileUpload extends ModulVue {
     public maxSizeKb?: number;
     @Prop()
     public maxFiles?: number;
-
     @Prop({
         default: DEFAULT_STORE_NAME
     })
     public storeName: string;
+    @Prop()
+    public open: boolean;
 
     $refs: {
         dialog: MDialog;
     };
 
     private title: string = this.$i18n.translate('m-file-upload:header-title');
+    private internalOpen: boolean = false;
 
     private created(): void {
         this.$file.setValidationOptions(
@@ -80,6 +87,11 @@ export class MFileUpload extends ModulVue {
 
     private destroyed(): void {
         this.$file.destroy(this.storeName);
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.internalOpen = open;
     }
 
     @Watch('readyFiles')
@@ -140,6 +152,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private onCancelClick(): void {
+        this.propOpen = false;
         this.$refs.dialog.closeDialog();
         this.allFiles
             .filter(f => f.status === MFileStatus.UPLOADING)
@@ -164,6 +177,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private onClose(): void {
+        this.propOpen = false;
         this.$emit('close');
     }
 
@@ -243,6 +257,17 @@ export class MFileUpload extends ModulVue {
     private get hasRejectedFiles(): boolean {
         return this.rejectedFiles.length !== 0;
     }
+
+    private get propOpen(): boolean {
+        return this.open ? this.open : this.internalOpen;
+    }
+
+    private set propOpen(value) {
+        if (value != this.internalOpen) {
+            this.internalOpen = value;
+            this.$emit('update:open', value);
+        }
+    }
 }
 
 const FileUploadPlugin: PluginObject<any> = {
@@ -259,6 +284,7 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(ButtonPlugin);
         v.use(MessagePlugin);
         v.use(LinkPlugin);
+        v.use(MediaQueriesPlugin);
         v.component(FILE_UPLOAD_NAME, MFileUpload);
     }
 };

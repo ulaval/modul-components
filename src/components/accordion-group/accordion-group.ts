@@ -38,7 +38,7 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     public addAccordion(accordion: AccordionGateway): void {
         accordion.$on('update:open', this.emitValueChange);
         this.$set(this.accordions, accordion.propId, accordion);
-        if (this.openedIds && this.openedIds .find(v => v === accordion.propId)) {
+        if (this.openedIds && this.openedIds.find(v => v === accordion.propId)) {
             accordion.propOpen = true;
         }
     }
@@ -58,7 +58,9 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
         let allOpened = true;
         for (const id in this.accordions) {
             allOpened = this.accordions[id].propOpen;
-            if (!allOpened && !this.accordions[id].propDisabled) break;
+            if (!allOpened && !this.accordions[id].propDisabled) {
+                break;
+            }
         }
         return allOpened;
     }
@@ -67,7 +69,9 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
         let allClosed = true;
         for (const id in this.accordions) {
             allClosed = !this.accordions[id].propOpen;
-            if (!allClosed && !this.accordions[id].propDisabled) break;
+            if (!allClosed && !this.accordions[id].propDisabled) {
+                break;
+            }
         }
         return allClosed;
     }

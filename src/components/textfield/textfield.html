@@ -16,7 +16,8 @@
                    :focus="isFocus"
                    :empty="isEmpty"
                    :required-marker="requiredMarker"
-                   :icon-name="iconName">
+                   :icon-name="iconName"
+                   :tag-style="tagStyle">
         <input ref="input"
                class="m-textfield__input"
                :disabled="!active"
@@ -29,8 +30,13 @@
                @change="onChange"
                @paste="onPaste"
                v-model="model">
-        <div slot="right-content" class="m-textfield__icon-password" :class="{ 'm--is-transparent': !hasValue }" v-if="propPasswordIcon">
-            <m-icon-button :icon-name="iconNamePassword" button-size="22px" @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
+        <div slot="right-content"
+             class="m-textfield__icon-password"
+             :class="{ 'm--is-transparent': !hasValue }"
+             v-if="propPasswordIcon">
+            <m-icon-button :icon-name="iconNamePassword"
+                           button-size="22px"
+                           @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
         </div>
     </m-input-style>
     <m-validation-message
