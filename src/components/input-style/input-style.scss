@@ -28,7 +28,7 @@ $m-input-style--padding: 4px !default;
     &::before {
         transition: border-color $m-transition-duration ease;
         width: 100%;
-        border-bottom: 1px solid $m-color--grey-darker;
+        border-bottom: 1px solid $m-color--grey;
     }
 
     &::after {
@@ -192,11 +192,6 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    ::placeholder {
-        transition: color $m-transition-duration ease;
-        color: $m-color--grey-dark;
-    }
-
     &__label,
     &__body__adjust-width-auto {
         padding-right: $m-padding;
@@ -246,43 +241,6 @@ $m-input-style--padding: 4px !default;
             cursor: pointer;
         }
 
-        &,
-        input,
-        textarea {
-            outline: none;
-            text-overflow: ellipsis;
-            font-family: $m-font-family;
-            font-size: $m-font-size;
-            font-weight: $m-font-weight--bold;
-            text-align: left;
-            border: none;
-            background: none;
-        }
-
-        input,
-        textarea {
-            padding: 0;
-        }
-
-        input {
-            cursor: text;
-            overflow: hidden;
-            width: 100%;
-
-            @include m-is-ie() {
-                vertical-align: middle;
-            }
-
-            &[readonly=readonly] {
-                cursor: pointer;
-            }
-        }
-
-        textarea {
-            margin-bottom: -4px; //Margin number
-            width: 100%;
-        }
-
         &__left {
             overflow: hidden;
             flex: 1 1 auto;
@@ -325,5 +283,97 @@ $m-input-style--padding: 4px !default;
 
     div {
         outline: none;
+    }
+
+    ::placeholder {
+        color: $m-color--disabled;
+    }
+
+    &__body,
+    input,
+    textarea {
+        outline: none;
+        text-overflow: ellipsis;
+        font-family: $m-font-family;
+        font-size: $m-font-size;
+        font-weight: $m-font-weight--bold;
+        text-align: left;
+        border: none;
+        background: none;
+        color: $m-color--text;
+    }
+
+    input,
+    textarea {
+        cursor: text;
+        overflow: hidden;
+        width: 100%;
+
+        @include m-is-ie() {
+            vertical-align: middle;
+        }
+
+        &[readonly=readonly] {
+            cursor: pointer;
+        }
+    }
+
+    textarea {
+        margin-bottom: -4px; //Margin number
+        width: 100%;
+    }
+
+    &.m--is-tag-h1 {
+        input,
+        textarea,
+        ::placeholder,
+        .m-input-style__body__transparent-text {
+            font-size: $m-font-size--h1;
+        }
+    }
+
+    &.m--is-tag-h2 {
+        input,
+        textarea,
+        ::placeholder,
+        .m-input-style__body__transparent-text {
+            font-size: $m-font-size--h2;
+        }
+    }
+
+    &.m--is-tag-h3 {
+        input,
+        textarea,
+        ::placeholder,
+        .m-input-style__body__transparent-text {
+            font-size: $m-font-size--h3;
+        }
+    }
+
+    &.m--is-tag-h4 {
+        input,
+        textarea,
+        ::placeholder,
+        .m-input-style__body__transparent-text {
+            font-size: $m-font-size--h4;
+        }
+    }
+
+    &.m--is-tag-h5 {
+        input,
+        textarea,
+        ::placeholder,
+        .m-input-style__body__transparent-text {
+            font-size: $m-font-size--h5;
+        }
+    }
+
+    &.m--is-tag-h6 {
+        input,
+        textarea,
+        ::placeholder,
+        .m-input-style__body__transparent-text {
+            font-size: $m-font-size--h6;
+        }
     }
 }

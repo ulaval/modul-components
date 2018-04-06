@@ -179,6 +179,9 @@ $m-dialog--max-width--s: 420px !default;
     }
 
     &__footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         border-top: 1px solid $m-color--grey;
     }
 }

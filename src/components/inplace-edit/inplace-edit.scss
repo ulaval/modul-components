@@ -1,0 +1,25 @@
+@import 'abstracts/variables';
+@import '../accordion/accordion-transition.scss';
+
+.m-inplace-edit {
+    transition: padding $m-transition-duration ease, background $m-transition-duration--s linear;
+    padding: 0;
+    background: $m-color--white;
+
+    &.m--is-edit-mode {
+        padding: 16px;
+        background: $m-color--information;
+    }
+
+    &.m--has-erreur {
+        background: $m-color--error-lightest;
+    }
+
+    &__buttons {
+        margin-top: $m-margin--l;
+
+        > :first-child {
+            margin-right: $m-margin--s;
+        }
+    }
+}

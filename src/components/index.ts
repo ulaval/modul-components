@@ -59,6 +59,7 @@ import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
 import ValidationMessagePlugin from './validation-message/validation-message';
+import InplaceEditPlugin from './inplace-edit/inplace-edit';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -121,6 +122,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TimepickerPlugin);
         Vue.use(TooltipPlugin);
         Vue.use(ValidationMessagePlugin);
+        Vue.use(InplaceEditPlugin);
     }
 };
 
