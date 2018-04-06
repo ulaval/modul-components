@@ -3,7 +3,7 @@
 exports[`MLogin when login should render correctly 1`] = `
 <form>
     <div class="m-textfield m--has-label m--is-type-text" style="width:100%;max-width:288px;">
-        <div class="m-input-style m--has-label" style="width:undefined;">
+        <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
             <label class="m-input-style__label"><span>Username</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
@@ -14,7 +14,7 @@ exports[`MLogin when login should render correctly 1`] = `
     </div>
     <br>
     <div class="m-textfield m--has-label m--is-type-password" style="width:100%;max-width:288px;">
-        <div class="m-input-style m--has-label" style="width:undefined;">
+        <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
             <label class="m-input-style__label"><span>Password</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
