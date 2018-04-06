@@ -64,6 +64,7 @@
         "axios": "^0.17.1",
         "css-loader": "^0.28.7",
         "enquire.js": "^2.1.6",
+        "mobile-drag-drop": "^2.3.0-rc.1",
         "moment": "^2.19.3",
         "node-sass": "^4.7.2",
         "portal-vue": "~1.1.1",
