@@ -33,10 +33,6 @@ export class MInplaceEdit extends ModulVue {
 
     private submitted: boolean = false;
 
-    public mounted(): void {
-        this.internalEditMode = this.editMode;
-    }
-
     public get dialogTitle(): string {
         if (!this.title) {
             return this.$i18n.translate('m-inplace-edit:modify');
@@ -81,12 +77,10 @@ export class MInplaceEdit extends ModulVue {
             this.submitted = true;
             this.error = false;
             this.saveFn().then(() => {
-                this.submitted = false;
                 this.propEditMode = false;
             }, () => {
-                this.submitted = false;
                 this.error = true;
-            });
+            }).then(() => this.submitted = false);
         } else {
             console.warn('No save function provided (save-fn prop is undefined)');
         }
