@@ -15,8 +15,6 @@ Content can be written in English or in French
 <!-- Description here... -->
 - [ ] Include links to issues
 <!-- Links here... -->
-- [ ] For internal contributors, please add a JIRA epic link
-<!-- JIRA Epic number here... -->
 
 <!-- END_REQUIRED -->
 
