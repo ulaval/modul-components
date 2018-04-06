@@ -14,7 +14,7 @@ $m-dialog--max-width--s: 420px !default;
         left: 0;
         background: none;
         display: flex;
-        justify-content: center;
+        // justify-content: center; // cause ENA2-760 et ne semble pas nécessaire anyway...
         align-items: center;
         outline: none;
         min-width: $m-min-width;
