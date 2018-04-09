@@ -156,7 +156,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
                 await inplaceEdit.confirm(AN_EVENT);
 
-                expect(inplaceEdit.error).toBeTruthy();
+                expect(inplaceEdit.isError).toBeTruthy();
             });
         });
 
@@ -166,7 +166,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
                 inplaceEdit.cancel(AN_EVENT);
 
-                expect(inplaceEdit.error).toBeFalsy();
+                expect(inplaceEdit.isError).toBeFalsy();
             });
         });
     });

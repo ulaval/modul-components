@@ -1,5 +1,5 @@
 <div class="m-inplace-edit"
-     :class="{'m--has-erreur': error && propEditMode,
+     :class="{'m--has-erreur': isError && propEditMode,
               'm--is-edit-mode': propEditMode && isMqMinS }"
      @click="onClick">
     <slot name="readMode" v-if="!propEditMode || !isMqMinS"></slot>

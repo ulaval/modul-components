@@ -27,7 +27,7 @@ export class MInplaceEdit extends ModulVue {
     @Prop()
     public saveFn: SaveFn;
 
-    public error: boolean = false;
+    private error: boolean = false;
 
     private internalEditMode: boolean = false;
 
@@ -38,6 +38,10 @@ export class MInplaceEdit extends ModulVue {
             return this.$i18n.translate('m-inplace-edit:modify');
         }
         return this.title;
+    }
+
+    public get isError(): boolean {
+        return this.error;
     }
 
     public confirm(event: Event): void {
