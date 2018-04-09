@@ -27,7 +27,10 @@ describe('MTimepicker', () => {
 
     it('should render correctly', () => {
         const tp = mount(MTimepicker, {
-            localVue: localVue
+            localVue: localVue,
+            propsData: {
+                time: moment('02:00 PM', 'h:mm A')
+            }
         });
 
         return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
@@ -37,7 +40,8 @@ describe('MTimepicker', () => {
         const tp = mount(MTimepicker, {
             localVue: localVue,
             propsData: {
-                waiting: true
+                waiting: true,
+                time: moment('02:00 PM', 'h:mm A')
             }
         });
 
@@ -48,7 +52,8 @@ describe('MTimepicker', () => {
         const tp = mount(MTimepicker, {
             localVue: localVue,
             propsData: {
-                disabled: true
+                disabled: true,
+                time: moment('02:00 PM', 'h:mm A')
             }
         });
 
@@ -60,6 +65,7 @@ describe('MTimepicker', () => {
             localVue: localVue,
             propsData: {
                 error: true,
+                time: moment('02:00 PM', 'h:mm A'),
                 errorMessage: 'Nostrud laboris quis velit voluptate aute elit elit non.'
             }
         });
@@ -72,6 +78,7 @@ describe('MTimepicker', () => {
             localVue: localVue,
             propsData: {
                 valid: true,
+                time: moment('02:00 PM', 'h:mm A'),
                 validMessage: 'Nostrud laboris quis velit voluptate aute elit elit non.'
             }
         });
@@ -84,6 +91,7 @@ describe('MTimepicker', () => {
             localVue: localVue,
             propsData: {
                 duration: true,
+                time: moment('03:00', 'h:mm A'),
                 min: moment.duration(2, 'hour'),
                 max: moment.duration(7, 'hour')
             }
