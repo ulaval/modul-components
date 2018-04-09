@@ -5,7 +5,7 @@ A set of VueJS components for Modul web applications (beta release).
 
 ## Usage
 1. Clone this project
-1. Run npm install
+1. Run npm run setup
 1. Run npm run dev
 
 ## Deployment for local usage

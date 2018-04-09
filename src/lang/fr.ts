@@ -21,6 +21,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/error-message/error-message.lang.fr.json'),
                 require('../components/file-select/file-select.lang.fr.json'),
                 require('../components/file-upload/file-upload.lang.fr.json'),
+                require('../components/inplace-edit/inplace-edit.lang.fr.json'),
                 require('../components/input-style/input-style.lang.fr.json'),
                 require('../components/link/link.lang.fr.json'),
                 require('../components/limit-text/limit-text.lang.fr.json'),

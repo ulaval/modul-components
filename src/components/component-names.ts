@@ -21,6 +21,7 @@ export const FLEX_TEMPLATE_NAME: string = 'm-flex-template';
 export const I18N_NAME: string = 'm-i18n';
 export const ICON_NAME: string = 'm-icon';
 export const ICON_BUTTON_NAME: string = 'm-icon-button';
+export const INPLACE_EDIT: string = 'm-inplace-edit';
 export const INPUT_STYLE_NAME: string = 'm-input-style';
 export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
