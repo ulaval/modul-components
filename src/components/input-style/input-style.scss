@@ -243,6 +243,7 @@ $m-input-style--padding: 4px !default;
 
         &__left {
             overflow: hidden;
+            min-height: 24px;
             flex: 1 1 auto;
         }
 
@@ -308,6 +309,7 @@ $m-input-style--padding: 4px !default;
         cursor: text;
         overflow: hidden;
         width: 100%;
+        padding: 0;
 
         @include m-is-ie() {
             vertical-align: middle;
@@ -319,7 +321,6 @@ $m-input-style--padding: 4px !default;
     }
 
     textarea {
-        margin-bottom: -4px; //Margin number
         width: 100%;
     }
 
