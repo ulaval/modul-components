@@ -144,7 +144,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     private attachEmptyPlaceholder(element: HTMLElement, grouping?: string): void {
         this.emptyPlaceHolderElement = this.setupPlaceholder(element, grouping);
         if (this.emptyPlaceHolderElement) {
-            this.emptyPlaceHolderElement.style.display = this.options.items.length ? 'none' : 'inherit';
+            this.emptyPlaceHolderElement.style.display = this.options.items.length ? 'none' : '';
         }
     }
 

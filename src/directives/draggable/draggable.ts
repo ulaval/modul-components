@@ -43,17 +43,34 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
         this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
         this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-        this.addEventListener('touchmove', (event: DragEvent) => () => {});
     }
 
     public update(options: MDraggableOptions): void {
         this._options = options;
+
+        // this.addEventListener('touchmove', (event: DragEvent) => () => {});
+        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
+        if (dragImage) {
+            this.element.removeChild(dragImage);
+            this.element.appendChild(dragImage);
+            this.element.style.height = `${this.element.offsetHeight - dragImage.offsetHeight}px`;
+            this.element.style.overflow = 'hidden';
+            dragImage.style.transform = `translateY(${this.element.offsetHeight}px)`;
+            dragImage.style.display = 'none';
+        }
     }
 
     public detach(): void {
         this.element.draggable = false;
         this.cleanupCssClasses();
         this.removeAllEvents();
+        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
+        if (dragImage) {
+            this.element.style.height = '';
+            this.element.style.overflow = '';
+            dragImage.style.transform = '';
+            dragImage.style.display = '';
+        }
     }
 
     private onDragEnd(event: DragEvent): void {
@@ -61,7 +78,6 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
         MDraggable.currentDraggable = undefined;
         if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.cleanupCssClasses(); }
         MDroppable.currentHoverDroppable = undefined;
-
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
     }
 
@@ -75,7 +91,20 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
         } else {
             event.dataTransfer.setData('text', this.options.dragData);
         }
+
+        this.setDragImage(event);
         this.dispatchEvent(event, MDraggableEventNames.OnDragStart);
+    }
+
+    private setDragImage(event: DragEvent): void {
+        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
+        if (dragImage) {
+            dragImage.style.display = '';
+            if (event.dataTransfer.setDragImage) { event.dataTransfer.setDragImage(dragImage, 0, 0); }
+            setTimeout(() => {
+                dragImage.style.display = 'none';
+            });
+        }
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
@@ -103,6 +132,9 @@ const extractVnodeAttributes: (node: VNode) => MDraggableOptions = (node: VNode)
 const Directive: DirectiveOptions = {
     bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(node));
+    },
+    inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+        MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(node));

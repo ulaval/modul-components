@@ -154,7 +154,6 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     private onDrop(event: DragEvent): void {
         event.stopPropagation();
         event.preventDefault();
-
         this.cleanupCssClasses();
         this.dispatchEvent(event, MDropEventNames.OnDrop);
         MDraggable.currentDraggable = undefined;
@@ -188,8 +187,6 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
 
     private canDrop(): boolean {
         if (!MDraggable.currentDraggable) { return false; }
-
-        console.log('group', MDraggable.currentDraggable.options, this.options);
 
         const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
         const draggableAction: string = MDraggable.currentDraggable.options.action;
