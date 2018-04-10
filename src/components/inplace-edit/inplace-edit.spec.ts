@@ -126,6 +126,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
             });
         });
     });
+
     describe('and invalide input',() => {
 
         beforeEach(() => {
@@ -149,6 +150,23 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
                 await inplaceEdit.confirm(AN_EVENT);
 
                 expect(spy).not.toHaveBeenCalledWith('update:editMode', false);
+            });
+
+            it('must be in error', async () => {
+
+                await inplaceEdit.confirm(AN_EVENT);
+
+                expect(inplaceEdit.isError).toBeTruthy();
+            });
+        });
+
+        describe('when cancelling after a failed confirmation', () => {
+            it('must not be in error', async () => {
+                await inplaceEdit.confirm(AN_EVENT);
+
+                inplaceEdit.cancel(AN_EVENT);
+
+                expect(inplaceEdit.isError).toBeFalsy();
             });
         });
     });
