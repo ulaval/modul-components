@@ -24,7 +24,7 @@
         </transition>
     </template>
     <template v-if="!isMqMinS">
-        <m-dialog :title="dialogTitle" :open="propEditMode" @close="cancel">
+        <m-dialog :title="title" :open="propEditMode" @close="cancel">
             <form>
                 <slot name="editMode"></slot>
                 <div class="m-inplace-edit__buttons">
