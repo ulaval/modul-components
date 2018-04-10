@@ -2,8 +2,9 @@ import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE } from '../directive-names';
 import { MDraggable } from '../draggable/draggable';
 import { MElementPlugin, MDOMPlugin } from '../domPlugin';
-import { mousePositionElement } from '../sortable/mouse';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
+import { mousePositionElement, isInElement } from '../../utils/mouse/mouse';
+import { MRemoveUserSelect } from '../user-select/remove-user-select';
 
 export enum MDroppableClassNames {
     Overing = 'm--is-dragover',
@@ -51,6 +52,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     public attach(): void {
+        MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
         this.setOptions(this.options);
         this.addEventListener('dragenter', (event: DragEvent) => this.onDragEnter(event));
         this.addEventListener('dragleave', (event: DragEvent) => this.onDragLeave(event));
@@ -65,6 +67,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     public detach(): void {
+        MDOMPlugin.detach(MRemoveUserSelect, this.element);
         this.cleanupCssClasses();
         this.removeAllEvents();
     }
@@ -107,9 +110,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
 
         const threshold: number = 3;
         const mousePosition = mousePositionElement(event, droppable.element);
-        return mousePosition.x < 0 || mousePosition.y < 0
-            || mousePosition.x + threshold > droppable.element.offsetWidth
-            || mousePosition.y + threshold > droppable.element.offsetHeight || MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable;
+        return !isInElement(event, droppable.element) || MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable;
     }
 
     private onDragEnter(event: DragEvent): any {

@@ -1,4 +1,3 @@
-import { mousePositionElement } from './mouse';
 import { SORTABLE } from '../directive-names';
 import { PluginObject } from 'vue/types/plugin';
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
@@ -8,6 +7,7 @@ import tabPanel from 'src/components/tab-panel/tab-panel';
 import { MDOMPlugin, MElementPlugin } from '../domPlugin';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
 import { MSortableGroup } from './sortable-group';
+import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
 
 export interface MSortableOptions {
     items: any[];
@@ -175,10 +175,14 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     private onDragLeave(event: MDropEvent): void {
         event.stopPropagation();
         event.preventDefault();
+
         const newContainer = MDroppable.currentHoverDroppable ? MDOMPlugin.getRecursive(MSortable, MDroppable.currentHoverDroppable.element) : undefined;
-        if (!newContainer || newContainer !== this) {
-            if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
-            if (!newContainer) { MSortable.activeSortContainer = undefined; }
+        if (!newContainer && !isInElement(event, this.element)) {
+            this.doCleanUp();
+            MSortable.activeSortContainer = undefined;
+        }
+
+        if (newContainer && newContainer !== this) {
             this.doCleanUp();
         }
     }

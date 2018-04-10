@@ -3,6 +3,8 @@ import { DRAGGABLE } from '../directive-names';
 import { MElementPlugin, MDOMPlugin } from '../domPlugin';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
 import { MDroppable } from '../droppable/droppable';
+import { clearUserSelection } from '../../utils/selection/selection';
+import { MRemoveUserSelect } from '../user-select/remove-user-select';
 
 export enum MDraggableClassNames {
     Dragging = 'm--is-dragging'
@@ -39,6 +41,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     public attach(): void {
         this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
+        MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
         this.element.draggable = true;
 
         this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
@@ -62,6 +65,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     public detach(): void {
         this.element.draggable = false;
+        MDOMPlugin.detach(MRemoveUserSelect, this.element);
         this.cleanupCssClasses();
         this.removeAllEvents();
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
@@ -83,6 +87,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     private onDragStart(event: DragEvent): void {
         event.stopPropagation();
+        clearUserSelection();
 
         MDraggable.currentDraggable = this;
         this.element.classList.add(MDraggableClassNames.Dragging);

@@ -9,6 +9,7 @@ import DraggablePlugin from './draggable/draggable';
 import DroppablePlugin from './droppable/droppable';
 import SortablePlugin from './sortable/sortable';
 import SortableGroupPlugin from './sortable/sortable-group';
+import RemoveUserSelectPlugin from './user-select/remove-user-select';
 
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -16,6 +17,7 @@ const DirectivesPlugin: PluginObject<any> = {
         Vue.use(DroppablePlugin);
         Vue.use(FileDropPlugin);
         Vue.use(PopupPlugin);
+        Vue.use(RemoveUserSelectPlugin);
         Vue.use(RippleEffectPlugin);
         Vue.use(ScrollToPlugin);
         Vue.use(SortablePlugin);
