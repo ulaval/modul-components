@@ -8,20 +8,19 @@ import TextAreaAutoHeightPlugin from './textarea-auto-height/textarea-auto-heigh
 import DraggablePlugin from './draggable/draggable';
 import DroppablePlugin from './droppable/droppable';
 import SortablePlugin from './sortable/sortable';
-import SortableGroupPlugin from './sortable/sortable-group';
 import RemoveUserSelectPlugin from './user-select/remove-user-select';
+import DroppableGroupPlugin from './droppable/droppable-group';
 
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
         Vue.use(DraggablePlugin);
-        Vue.use(DroppablePlugin);
+        Vue.use(DroppableGroupPlugin);
         Vue.use(FileDropPlugin);
         Vue.use(PopupPlugin);
         Vue.use(RemoveUserSelectPlugin);
         Vue.use(RippleEffectPlugin);
         Vue.use(ScrollToPlugin);
         Vue.use(SortablePlugin);
-        Vue.use(SortableGroupPlugin);
         Vue.use(TextAreaAutoHeightPlugin);
     }
 };

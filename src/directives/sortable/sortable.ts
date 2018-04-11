@@ -6,8 +6,8 @@ import { MDroppable, MDropEvent, MDropEventNames, MDropInfo } from '../droppable
 import tabPanel from 'src/components/tab-panel/tab-panel';
 import { MDOMPlugin, MElementPlugin } from '../domPlugin';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
-import { MSortableGroup } from './sortable-group';
 import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
+import { MDroppableGroup } from '../droppable/droppable-group';
 
 export interface MSortableOptions {
     items: any[];
@@ -87,7 +87,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private setOptions(value: MSortableOptions): void {
-        const sortableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, this.element);
+        const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
         let acceptedActions: string[];
         if (!value.acceptedActions.length) {
             acceptedActions = [DEFAULT_ACTION];
@@ -104,7 +104,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private attachChilds(): void {
         let itemCounter = 0;
-        const sortableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, this.element);
+        const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
         for (let i = 0; i < this.element.children.length; i++) {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
 
@@ -113,7 +113,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
             } else if (currentElement.classList.contains('placeholder')) {
                 this.attachPlaceholder(currentElement, sortableGroup ? sortableGroup.options : this.options.grouping);
             } else {
-                const draggableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, currentElement);
+                const draggableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, currentElement);
                 const grouping = !sortableGroup ? draggableGroup ? draggableGroup.options : undefined : undefined;
                 const draggablePlugin: MDraggable = MDOMPlugin.attachUpdate(MDraggable, currentElement, {
                     action: !grouping ? MOVE_ACTION : MOVE_GROUP_ACTION,
@@ -382,13 +382,13 @@ const Directive: DirectiveOptions = {
     },
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         const options = extractVnodeAttributes(node);
-        const sortableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, element);
+        const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, element);
         options.grouping = sortableGroup ? sortableGroup.options : undefined;
         MDOMPlugin.update(MSortable, element, options);
     },
     componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         const options = extractVnodeAttributes(node);
-        const sortableGroup: MSortableGroup | undefined = MDOMPlugin.getRecursive(MSortableGroup, element);
+        const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, element);
         options.grouping = sortableGroup ? sortableGroup.options : undefined;
         MDOMPlugin.update(MSortable, element, options);
     },
