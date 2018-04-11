@@ -31,6 +31,7 @@ const DEFAULT_ACTION = 'any';
 export class MDraggable extends MElementPlugin<MDraggableOptions> {
     public static defaultMountPoint: string = '__mdraggable__';
     public static currentDraggable?: MDraggable;
+
     constructor(element: HTMLElement, options: MDraggableOptions) {
         super(element, options);
     }
@@ -41,17 +42,16 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     public attach(): void {
         this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
-        MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
         this.element.draggable = true;
 
         this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
         this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
+        this.addEventListener('touchmove', () => {});
     }
 
     public update(options: MDraggableOptions): void {
         this._options = options;
 
-        // this.addEventListener('touchmove', (event: DragEvent) => () => {});
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
         if (dragImage) {
             this.element.removeChild(dragImage);
@@ -60,6 +60,13 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
             this.element.style.overflow = 'hidden';
             dragImage.style.transform = `translateY(${this.element.offsetHeight}px)`;
             dragImage.style.display = 'none';
+        }
+
+        const dragHandle: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
+        if (dragHandle) {
+            MDOMPlugin.detach(MRemoveUserSelect, this.element);
+        } else {
+            MDOMPlugin.attachUpdate(MRemoveUserSelect, this.element, true);
         }
     }
 

@@ -57,7 +57,6 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         this.addEventListener('dragenter', (event: DragEvent) => this.onDragEnter(event));
         this.addEventListener('dragleave', (event: DragEvent) => this.onDragLeave(event));
         this.addEventListener('dragover', (event: DragEvent) => this.onDragOver(event));
-        this.addEventListener('touchmove', () => {});
         this.bindDropEvent(this.options.canDrop);
     }
 
