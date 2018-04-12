@@ -235,7 +235,7 @@
 
 @mixin m-box-padding($topBottom: $m-padding--l, $rightLeft: $m-padding--l) {
     &:not(.m--no-padding) {
-        @if ($topBottom >= $m-padding && $topBottom >= $m-padding--s) {
+        @if ($topBottom >= $m-padding and $topBottom >= $m-padding--s) {
             @media (max-width: $m-mq--max--s) {
                 padding: #{$topBottom/2} #{$rightLeft/2};
             }
