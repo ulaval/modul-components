@@ -14,6 +14,7 @@ import DroppableGroupPlugin from './droppable/droppable-group';
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
         Vue.use(DraggablePlugin);
+        Vue.use(DroppablePlugin);
         Vue.use(DroppableGroupPlugin);
         Vue.use(FileDropPlugin);
         Vue.use(PopupPlugin);
