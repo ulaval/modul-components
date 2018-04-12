@@ -67,7 +67,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     public doSomething(mutations: MutationRecord[]): void {
-        console.log('doSomething');
         mutations.forEach(mutation => {
             if (mutation.type === 'childList') {
                 if (mutation.removedNodes.length) {
@@ -99,7 +98,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     public update(options: MSortableOptions): void {
-        console.log('update', options.items);
         this.setOptions(options);
         this.attachChilds();
     }

@@ -94,21 +94,14 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     }
 
     private onDragEnd(event: DragEvent): void {
-        const elem = document.querySelector('.messages') as HTMLElement;
-        elem.innerText += 'onDragEnd';
         this.cleanupCssClasses();
         MDraggable.currentDraggable = undefined;
         if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.cleanupCssClasses(); }
         MDroppable.currentHoverDroppable = undefined;
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
-        // if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
-        // if (MSortable.fromSortContainer) { MSortable.fromSortContainer.doCleanUp(); }
     }
 
     private onDragStart(event: DragEvent): void {
-        const elem = document.querySelector('.messages') as HTMLElement;
-        elem.innerText = '';
-        elem.innerText += 'onDragStart';
         event.stopPropagation();
         clearUserSelection();
 
