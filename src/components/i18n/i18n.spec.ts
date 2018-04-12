@@ -52,6 +52,20 @@ describe('MI18n', () => {
         expect(await renderComponent(i18n.vm)).toMatchSnapshot('plural');
     });
 
+    it('should render correctly with modifier', async () => {
+        const i18n = mount(MI18n, {
+            localVue: localVue,
+            propsData: {
+                k: 'm-i18n-spec:modifier-test',
+                nb: 1
+            }
+        });
+
+        expect(await renderComponent(i18n.vm)).toMatchSnapshot('not modified');
+        i18n.setProps({ modifier: 'm' });
+        expect(await renderComponent(i18n.vm)).toMatchSnapshot('modified');
+    });
+
     it('should render correctly with html encoding', () => {
         const i18n = mount(MI18n, {
             localVue: localVue,

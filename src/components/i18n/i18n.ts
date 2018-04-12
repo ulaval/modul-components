@@ -15,6 +15,8 @@ export class MI18n extends ModulVue {
     public params: string[];
     @Prop()
     public nb?: number;
+    @Prop()
+    public modifier: string;
     @Prop({ default: true })
     public htmlEncode: boolean;
 
@@ -32,7 +34,7 @@ export class MI18n extends ModulVue {
                 this.k,
                 p,
                 this.nb,
-                undefined,
+                this.modifier,
                 this.htmlEncode
             );
         }

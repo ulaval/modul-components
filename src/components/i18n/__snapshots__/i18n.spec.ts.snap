@@ -8,4 +8,8 @@ exports[`MI18n should render correctly in plural form: single 1`] = `<span class
 
 exports[`MI18n should render correctly with html encoding 1`] = `<span class="m-i18n">&lt;i&gt;test&lt;/i&gt;</span>`;
 
+exports[`MI18n should render correctly with modifier: modified 1`] = `<span class="m-i18n">I am modified!</span>`;
+
+exports[`MI18n should render correctly with modifier: not modified 1`] = `<span class="m-i18n">I am not modified!</span>`;
+
 exports[`MI18n should render correctly with params 1`] = `<span class="m-i18n">test a, test b</span>`;
