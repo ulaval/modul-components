@@ -43,6 +43,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     public attach(): void {
         this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
         this.element.draggable = true;
+        this.attachDragImage();
 
         this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
         this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
@@ -51,16 +52,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     public update(options: MDraggableOptions): void {
         this._options = options;
-
-        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
-        if (dragImage) {
-            this.element.removeChild(dragImage);
-            this.element.appendChild(dragImage);
-            this.element.style.height = `${this.element.offsetHeight - dragImage.offsetHeight}px`;
-            this.element.style.overflow = 'hidden';
-            dragImage.style.transform = `translateY(${this.element.offsetHeight}px)`;
-            dragImage.style.display = 'none';
-        }
+        this.attachDragImage();
 
         const dragHandle: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
         if (dragHandle) {
@@ -73,8 +65,24 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     public detach(): void {
         this.element.draggable = false;
         MDOMPlugin.detach(MRemoveUserSelect, this.element);
+        this.detachDragImage();
         this.cleanupCssClasses();
         this.removeAllEvents();
+    }
+
+    private attachDragImage(): void {
+        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
+        if (dragImage) {
+            this.element.removeChild(dragImage);
+            this.element.appendChild(dragImage);
+            this.element.style.height = `${this.element.offsetHeight - dragImage.offsetHeight}px`;
+            this.element.style.overflow = 'hidden';
+            dragImage.style.transform = `translateY(${this.element.offsetHeight}px)`;
+            dragImage.style.display = 'none';
+        }
+    }
+
+    private detachDragImage(): void {
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
         if (dragImage) {
             this.element.style.height = '';
@@ -142,13 +150,13 @@ const extractVnodeAttributes: (node: VNode) => MDraggableOptions = (node: VNode)
     };
 };
 const Directive: DirectiveOptions = {
-    bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(node));
-    },
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(node));
+        MDOMPlugin.attachUpdate(MDraggable, element, extractVnodeAttributes(node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+        MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(node));
+    },
+    componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
