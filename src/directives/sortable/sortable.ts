@@ -33,8 +33,7 @@ export interface MSortEvent extends DragEvent {
 export enum MSortClassNames {
     SortBefore = 'm--is-sortbefore',
     SortAfter = 'm--is-sortafter',
-    EmptyPlaceholder = 'emptyPlaceholder',
-    PlaceHolder = 'placeholder'
+    EmptyPlaceholder = 'emptyPlaceholder'
 }
 
 export interface MSortInfo {
@@ -56,19 +55,42 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     public static fromSortContainer: MSortable | undefined;
 
     private emptyPlaceHolderElement: HTMLElement | undefined;
-    private placeHolderElement: HTMLElement | undefined;
+
+    private observer: MutationObserver;
 
     constructor(element: HTMLElement, options: MSortableOptions) {
         super(element, options);
     }
 
+    public doCleanUp(): void {
+        this.cleanUpInsertionClasses();
+    }
+
+    public doSomething(mutations: MutationRecord[]): void {
+        console.log('doSomething');
+        mutations.forEach(mutation => {
+            if (mutation.type === 'childList') {
+                if (mutation.removedNodes.length) {
+                    for (let i = 0; i < mutation.removedNodes.length; i++) {
+                        const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
+                        MDOMPlugin.detach(MDraggable, currentElement);
+                        MDOMPlugin.detach(MDroppable, currentElement);
+                    }
+                }
+            }
+        });
+    }
+
     public attach(): void {
+        this.observer = new MutationObserver(mutations => this.doSomething(mutations));
+        this.observer.observe(this.element, { childList: true });
+
         this.setOptions(this.options);
         const plugin = MDOMPlugin.attach(MDroppable, this.element, {
             acceptedActions: this.options.acceptedActions,
             canDrop: true
         });
-        plugin.addEventListener(MDropEventNames.OnDrop, this.onDrop.bind(this));
+        plugin.addEventListener(MDropEventNames.OnDrop, (event: MDropEvent) => this.onDrop(event));
         plugin.addEventListener(MDropEventNames.OnDragEnter, (event: MDropEvent) => this.onDragEnter(event));
         plugin.addEventListener(MDropEventNames.OnDragLeave, (event: MDropEvent) => this.onDragLeave(event));
         plugin.addEventListener(MDropEventNames.OnDragOver, (event: MDropEvent) => this.onDragOver(event));
@@ -77,11 +99,13 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     public update(options: MSortableOptions): void {
+        console.log('update', options.items);
         this.setOptions(options);
         this.attachChilds();
     }
 
     public detach(): void {
+        this.observer.disconnect();
         MDOMPlugin.detach(MDroppable, this.element);
         this.detachChilds();
     }
@@ -110,8 +134,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
             if (currentElement.classList.contains('emptyPlaceholder')) {
                 this.attachEmptyPlaceholder(currentElement, sortableGroup ? sortableGroup.options : this.options.grouping);
-            } else if (currentElement.classList.contains('placeholder')) {
-                this.attachPlaceholder(currentElement, sortableGroup ? sortableGroup.options : this.options.grouping);
             } else {
                 const draggableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, currentElement);
                 const grouping = !sortableGroup ? draggableGroup ? draggableGroup.options : undefined : undefined;
@@ -148,11 +170,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         }
     }
 
-    private attachPlaceholder(element: HTMLElement, grouping?: string): void {
-        this.placeHolderElement = this.setupPlaceholder(element, grouping);
-        if (this.placeHolderElement) { this.hidePlaceHolder(); }
-    }
-
     private setupPlaceholder(element: HTMLElement, grouping?: string): HTMLElement | undefined {
         if (!element) { return undefined; }
 
@@ -169,7 +186,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         event.preventDefault();
         if (MSortable.activeSortContainer && MSortable.activeSortContainer !== this) { MSortable.activeSortContainer.doCleanUp(); }
         MSortable.activeSortContainer = this;
-        this.positionPlaceholder(event);
+        this.insertInsertionMarker(event);
     }
 
     private onDragLeave(event: MDropEvent): void {
@@ -187,15 +204,10 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         }
     }
 
-    private doCleanUp(): void {
-        this.hidePlaceHolder();
-        this.cleanUpInsertionClasses();
-    }
-
     private onDragOver(event: MDropEvent): void {
         event.stopPropagation();
         event.preventDefault();
-        this.positionPlaceholder(event);
+        this.insertInsertionMarker(event);
     }
 
     private onDrop(event: MDropEvent): void {
@@ -260,13 +272,8 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         MSortable.fromSortContainer = this;
     }
 
-    private positionPlaceholder(event: MDropEvent): void {
+    private insertInsertionMarker(event: MDropEvent): void {
         if (!MDroppable.currentHoverDroppable) { return; }
-
-        if (!this.hasItems() || this.isHoveringInsertionPlaceholder() || !MDroppable.currentHoverDroppable || !event.dropInfo.canDrop) {
-            if (this.isHoveringOverDraggedElement()) { this.hidePlaceHolder(); }
-            return;
-        }
 
         let element: HTMLElement;
         const insertPosition: MSortInsertPositions = this.computeInsertPosition(event);
@@ -277,17 +284,9 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
             element = MDroppable.currentHoverDroppable.element;
         }
 
-        this.insertPlaceHolder(element, insertPosition === MSortInsertPositions.Before ? 'beforebegin' : 'afterend');
-    }
-
-    private insertPlaceHolder(element: HTMLElement, insertPosition: InsertPosition): void {
         this.cleanUpInsertionClasses();
         const insertionClass: string = insertPosition.includes('before') ? MSortClassNames.SortBefore : MSortClassNames.SortAfter;
         element.classList.add(insertionClass);
-        if (this.placeHolderElement) {
-            this.showPlaceHolder();
-            element.insertAdjacentElement(insertPosition, this.placeHolderElement);
-        }
     }
 
     private getNewPosition(event: MDropEvent, oldPosition: number): number {
@@ -295,7 +294,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         for (let i = 0; i < this.element.children.length; i++) {
             const child: HTMLElement = this.element.children[i] as HTMLElement;
             if (child.classList.contains(MSortClassNames.EmptyPlaceholder)) { index--; }
-            if (child.classList.contains(MSortClassNames.PlaceHolder)) { index--; }
             if (child.classList.contains(MSortClassNames.SortBefore)) {
                 break;
             }
@@ -332,18 +330,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         }
 
         return MSortInsertPositions.After;
-    }
-
-    private showPlaceHolder(): void {
-        if (this.placeHolderElement) { this.placeHolderElement.style.display = ''; }
-    }
-
-    private hidePlaceHolder(): void {
-        if (this.placeHolderElement) { this.placeHolderElement.style.display = 'none'; }
-    }
-
-    private isHoveringInsertionPlaceholder(): boolean | undefined {
-        return this.placeHolderElement && MDroppable.currentHoverDroppable && this.placeHolderElement === MDroppable.currentHoverDroppable.element;
     }
 
     private isHoveringOverDraggedElement(): boolean {
@@ -387,7 +373,7 @@ const Directive: DirectiveOptions = {
         const options = extractVnodeAttributes(node);
         const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, element);
         options.grouping = sortableGroup ? sortableGroup.options : undefined;
-        MDOMPlugin.update(MSortable, element, options);
+        MDOMPlugin.attachUpdate(MSortable, element, options);
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MSortable, element);

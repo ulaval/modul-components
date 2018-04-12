@@ -152,6 +152,8 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     private onDrop(event: DragEvent): void {
+        const elem = document.querySelector('.messages') as HTMLElement;
+        elem.innerText += 'onDrop';
         event.stopPropagation();
         event.preventDefault();
         this.cleanupCssClasses();
