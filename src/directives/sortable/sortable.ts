@@ -89,7 +89,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     private setOptions(value: MSortableOptions): void {
         const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
         let acceptedActions: string[];
-        if (!value.acceptedActions.length) {
+        if (!value.acceptedActions || !value.acceptedActions.length) {
             acceptedActions = [DEFAULT_ACTION];
         } else {
             acceptedActions = [...value.acceptedActions];
@@ -377,14 +377,11 @@ const extractVnodeAttributes: (node: VNode) => MSortableOptions = (node: VNode) 
     };
 };
 const Directive: DirectiveOptions = {
-    bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attach(MSortable, element, extractVnodeAttributes(node));
-    },
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         const options = extractVnodeAttributes(node);
         const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, element);
         options.grouping = sortableGroup ? sortableGroup.options : undefined;
-        MDOMPlugin.update(MSortable, element, options);
+        MDOMPlugin.attachUpdate(MSortable, element, options);
     },
     componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         const options = extractVnodeAttributes(node);

@@ -215,10 +215,13 @@ const extractVnodeAttributes: (binding: VNodeDirective, node: VNode) => MDroppab
     };
 };
 const Directive: DirectiveOptions = {
-    bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+    inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.attach(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+        MDOMPlugin.update(MDroppable, element, extractVnodeAttributes(binding, node));
+    },
+    componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.update(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
