@@ -2,9 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './badge.html?style=./badge.scss';
-import { BADGE_NAME } from '../component-names';
-import IconPlugin from '../icon/icon';
-import SpinnerPlugin from '../spinner/spinner';
+import { BADGE } from '../directive-names';
 
 export enum MBadgeState {
     Completed = 'completed',
@@ -95,9 +93,8 @@ export class MBadge extends Vue {
 
 const BadgePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(BADGE_NAME, 'plugin.install');
-        v.use(IconPlugin);
-        v.component(BADGE_NAME, MBadge);
+        console.debug(BADGE, 'plugin.install');
+        v.component(BADGE, MBadge);
     }
 };
 

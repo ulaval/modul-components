@@ -2,7 +2,6 @@ import Vue, { PluginObject } from 'vue';
 
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
-import BadgePlugin from './badge/badge';
 import ButtonPlugin from './button/button';
 import ButtonGroupPlugin from './button-group/button-group';
 import CarouselItemPlugin from './carousel-item/carousel-item';
@@ -66,7 +65,6 @@ const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
-        Vue.use(BadgePlugin);
         Vue.use(ButtonPlugin);
         Vue.use(ButtonGroupPlugin);
         Vue.use(CarouselPlugin);

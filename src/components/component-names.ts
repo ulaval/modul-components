@@ -2,7 +2,6 @@ export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
 export const ACCORDION_TRANSITION_NAME: string = 'm-accordion-transition';
 export const LIST_ITEM_NAME: string = 'm-list-item';
-export const BADGE_NAME: string = 'm-badge';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CAROUSEL_NAME: string = 'm-carousel';

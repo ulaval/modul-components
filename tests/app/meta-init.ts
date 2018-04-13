@@ -4,7 +4,6 @@ import Meta from '../../src/meta/meta';
 const components: string[] = [
     Components.ACCORDION_GROUP_NAME,
     Components.ACCORDION_NAME,
-    Components.BADGE_NAME,
     Components.BUTTON_NAME,
     Components.BUTTON_GROUP_NAME,
     Components.CAROUSEL_NAME,

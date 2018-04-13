@@ -1,3 +1,4 @@
+export const BADGE: string = 'm-badge';
 export const DRAGGABLE: string = 'm-draggable';
 export const DROPPABLE: string = 'm-droppable';
 export const SORTABLE: string = 'm-sortable';
