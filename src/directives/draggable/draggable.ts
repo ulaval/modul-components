@@ -12,6 +12,7 @@ export enum MDraggableClassNames {
 }
 
 export interface MDraggableOptions {
+    canDrag: any;
     action: string;
     dragData: any;
     grouping?: any;
@@ -42,19 +43,22 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     }
 
     public attach(): void {
-        this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
-        this.element.draggable = true;
-        this.attachDragImage();
+        if (this.options.canDrag) {
+            this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
+            this.element.draggable = true;
+            this.attachDragImage();
 
-        this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
-        this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-        this.addEventListener('touchmove', () => {});
+            this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
+            this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
+            this.addEventListener('touchmove', () => {});
+        }
     }
 
     public update(options: MDraggableOptions): void {
         this._options = options;
         this.attachDragImage();
 
+        this.element.draggable = this.options.canDrag ? true : false;
         const dragHandle: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
         if (dragHandle) {
             MDOMPlugin.detach(MRemoveUserSelect, this.element);
@@ -143,8 +147,9 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     }
 }
 
-const extractVnodeAttributes: (node: VNode) => MDraggableOptions = (node: VNode) => {
+const extractVnodeAttributes: (binding: VNodeDirective, node: VNode) => MDraggableOptions = (binding: VNodeDirective, node: VNode) => {
     return {
+        canDrag: binding.value,
         action: getVNodeAttributeValue(node, 'action'),
         dragData: getVNodeAttributeValue(node, 'drag-data'),
         grouping: getVNodeAttributeValue(node, 'grouping')
@@ -152,13 +157,13 @@ const extractVnodeAttributes: (node: VNode) => MDraggableOptions = (node: VNode)
 };
 const Directive: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MDraggable, element, extractVnodeAttributes(node));
+        MDOMPlugin.attachUpdate(MDraggable, element, extractVnodeAttributes(binding, node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(node));
+        MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(binding, node));
     },
     componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(node));
+        MDOMPlugin.update(MDraggable, element, extractVnodeAttributes(binding, node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MDraggable, element);

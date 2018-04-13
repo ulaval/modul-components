@@ -98,22 +98,8 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         this.cleanUpInsertionClasses();
     }
 
-    public doSomething(mutations: MutationRecord[]): void {
-        mutations.forEach(mutation => {
-            if (mutation.type === 'childList') {
-                if (mutation.removedNodes.length) {
-                    for (let i = 0; i < mutation.removedNodes.length; i++) {
-                        const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
-                        MDOMPlugin.detach(MDraggable, currentElement);
-                        MDOMPlugin.detach(MDroppable, currentElement);
-                    }
-                }
-            }
-        });
-    }
-
     public attach(): void {
-        this.observer = new MutationObserver(mutations => this.doSomething(mutations));
+        this.observer = new MutationObserver(mutations => this.manageMutation(mutations));
         this.observer.observe(this.element, { childList: true });
 
         this.setOptions(this.options);
@@ -138,6 +124,21 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         this.observer.disconnect();
         MDOMPlugin.detach(MDroppable, this.element);
         this.detachChilds();
+    }
+
+    private manageMutation(mutations: MutationRecord[]): void {
+        mutations.forEach(mutation => {
+            // when an item leave the sortable we have to clean it up.
+            if (mutation.type === 'childList') {
+                if (mutation.removedNodes.length) {
+                    for (let i = 0; i < mutation.removedNodes.length; i++) {
+                        const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
+                        MDOMPlugin.detach(MDraggable, currentElement);
+                        MDOMPlugin.detach(MDroppable, currentElement);
+                    }
+                }
+            }
+        });
     }
 
     private setOptions(value: MSortableOptions): void {
@@ -170,7 +171,8 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
                 const draggablePlugin: MDraggable = MDOMPlugin.attachUpdate(MDraggable, currentElement, {
                     action: !grouping ? MOVE_ACTION : MOVE_GROUP_ACTION,
                     dragData: this.options.items[itemCounter++],
-                    grouping
+                    grouping,
+                    canDrag: true
                 });
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragEnd);
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragStart);
