@@ -106,6 +106,13 @@ export class Messages {
             throw new Error('The key is empty.');
         }
 
+        if (nb === undefined || nb === null) {
+            nb = params['nb'];
+        }
+        if (modifier === undefined || modifier === null) {
+            modifier = params['modifier'];
+        }
+
         let val = this.resolveKey(this.curLang, key, nb, modifier);
 
         if (htmlEncodeParams && params.length) {

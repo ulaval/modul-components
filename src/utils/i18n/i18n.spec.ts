@@ -80,4 +80,22 @@ describe('i18n plugin', () => {
             expect(Vue.prototype.$i18n.translate('exemples_avec_parametres:decompte_athletes_olympiques_pays', { nbAthletes: 2925, nbPays: 93 })).toEqual('Il y a 2925 athlètes olympiques et 93 pays participants.');
         });
     });
+
+    describe('with the possibility to pass nb and modifier parameters inside the parameter param', () => {
+        beforeEach(() => {
+            let options: I18nPluginOptions = {
+                formatMode: 'sprintf'
+            };
+
+            resetModulPlugins();
+            Vue.use(I18nPlugin, options);
+            addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
+        });
+        it(`calling translate('medaille-olympique', {}, 1, 'f') should return "La seule médaillée olympique"`, () => {
+            expect(Vue.prototype.$i18n.translate('exemples-avec-nombre-genre:medaille-olympique', {}, 1, 'f')).toEqual('La seule médaillée olympique');
+        });
+        it(`calling translate('medaille-olympique', {nb:1, modifier:'f'}) should return "La seule médaillée olympique"`, () => {
+            expect(Vue.prototype.$i18n.translate('exemples-avec-nombre-genre:medaille-olympique', { nb: 1, modifier: 'f' })).toEqual('La seule médaillée olympique');
+        });
+    });
 });
