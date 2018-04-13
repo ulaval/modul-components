@@ -86,12 +86,15 @@ export class MIconFile extends Vue {
 
     protected beforeMount(): void {
         if (!this.extension) {
-            console.error('You must have an extension attribute');
+            console.error('You must have an extension attribute with the icon-file component');
         }
     }
 
     private get spriteId(): string {
-        let cleanExtension = this.extension.split('.').join('').toLowerCase();
+        let cleanExtension;
+        if (this.extension) {
+            cleanExtension = this.extension.split('.').join('').toLowerCase();
+        }
         let id: string = '';
         switch (cleanExtension) {
             case TYPE_PDF:
