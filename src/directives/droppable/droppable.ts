@@ -30,7 +30,7 @@ export interface MDropInfo {
     action: string;
     grouping?: string;
     data: any;
-    canDrop: boolean;
+    canDrop: any;
 }
 
 export enum MDropEventNames {
@@ -154,10 +154,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     private onDrop(event: DragEvent): void {
         event.stopPropagation();
         event.preventDefault();
-        this.cleanupCssClasses();
         this.dispatchEvent(event, MDropEventNames.OnDrop);
-        MDraggable.currentDraggable = undefined;
-        MDroppable.currentHoverDroppable = undefined;
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
@@ -188,10 +185,11 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     private canDrop(): boolean {
         if (!MDraggable.currentDraggable) { return false; }
 
+        const canDrop = this.canDrop ? true : false;
         const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
         const draggableAction: string = MDraggable.currentDraggable.options.action;
         const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
-        return !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
+        return canDrop && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
     }
 
     private isHoveringOverDraggedElementChild(): boolean {
