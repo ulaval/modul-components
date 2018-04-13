@@ -194,7 +194,7 @@ describe('MFileUpload', () => {
 
         it('should emit done event when add button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(1)')
+                .find('.m-file-upload__footer-add')
                 .trigger('click');
 
             expect(fupd.emitted('done')[0][0]).toEqual([completedFile]);
@@ -202,7 +202,7 @@ describe('MFileUpload', () => {
 
         it('should clear all files when add button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(1)')
+                .find('.m-file-upload__footer-add')
                 .trigger('click');
 
             expect(fupd.vm.$file.files().length).toEqual(0);
@@ -210,7 +210,7 @@ describe('MFileUpload', () => {
 
         it('should emit cancel event when cancel button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(2)')
+                .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
             expect(fupd.emitted('cancel')).toBeTruthy();
@@ -218,7 +218,7 @@ describe('MFileUpload', () => {
 
         it('should clear all files when cancel button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(2)')
+                .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
             expect(fupd.vm.$file.files().length).toEqual(0);
@@ -232,7 +232,7 @@ describe('MFileUpload', () => {
             uploadingFile.status = MFileStatus.UPLOADING;
 
             fupd
-                .find('.m-file-upload__footer .m-file-upload__footer__cancel')
+                .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
             const evt = fupd.emitted('file-upload-cancel');
