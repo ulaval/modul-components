@@ -154,7 +154,9 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     private onDrop(event: DragEvent): void {
         event.stopPropagation();
         event.preventDefault();
+        this.cleanupCssClasses();
         this.dispatchEvent(event, MDropEventNames.OnDrop);
+        MDroppable.currentHoverDroppable = undefined;
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
