@@ -466,21 +466,52 @@ export function normalizeString(str: string): string {
 }
 
 export function isObjectString(str: string): boolean {
-    return str.includes(':') && str.includes('{') && str.includes('}');
+    return str.includes(':') && str.startsWith('{') && str.endsWith('}');
+}
+
+function getAttributeName(str: string): string {
+    return str.substring(0, str.indexOf(':')).trim();
+}
+
+function getAttributeValueHasString(str: string, attributeName: string): string {
+    return str.indexOf(',') != -1 ? str.substring(attributeName.length + 1, str.indexOf(','))
+                                    : str.substr(attributeName.length + 1);
+}
+
+function getNextAttribute(str: string, valueIsObject: boolean): string {
+    if (valueIsObject) {
+        return str.substring(str.indexOf('}') + 1);
+    }
+    return str.indexOf(',') != -1 ? str.substring(str.indexOf(',') + 1, str.length).trim() : '';
+}
+
+function getValueFromValueString(valueStr: string): string {
+    return valueStr.replace(/['']/g, '').trim();
 }
 
 export function stringToObject(str: string): any {
-    const obj = {};
     if (str && isObjectString(str)) {
-        str = str.replace(/[{}'']/g, '');
-        const attrs = str.split(',');
+        const obj = {};
+        str = str.substr(1, str.length - 2);
+        while (str.length) {
+            const name = getAttributeName(str);
+            const valueStr = getAttributeValueHasString(str, name);
+            let value = stringToObject(str.substr(name.length + 1));
 
-        for (const i in attrs) {
-            const KeyVal = attrs[i].split(':');
-            obj[KeyVal[0].trim()] = KeyVal[1].trim();
+            if (value) {
+                str = getNextAttribute(str, value);
+            } else {
+                value = getValueFromValueString(valueStr);
+            }
+
+            obj[name] = value;
+
+            str = getNextAttribute(str, false);
         }
+
+        return obj;
     }
-    return obj;
+    return undefined;
 }
 
 export const sprintf = require('sprintf-js').sprintf;

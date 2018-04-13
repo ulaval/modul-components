@@ -8,9 +8,13 @@ import { addMessages } from '../../../tests/helpers/lang';
 describe(`Étant donné la directive v-m-i18n`, () => {
     let element: Wrapper<Vue>;
     beforeEach(() => {
+        let options: I18nPluginOptions = {
+            formatMode: 'vsprintf'
+        };
+
         resetModulPlugins();
         Vue.use(I18nDirectivePlugin);
-        Vue.use(I18nPlugin);
+        Vue.use(I18nPlugin, options);
         addMessages(Vue, ['directives/i18n/i18n.spec.lang.fr.json']);
     });
 
@@ -146,6 +150,36 @@ describe(`Étant donné la directive v-m-i18n`, () => {
         });
         it(`l'élément devrait avoir le titre "Les deux seules médaillées olympiques"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('Les deux seules médaillées olympiques');
+        });
+    });
+
+    describe(`Étant donné l'argument :title.decompte_athletes_olympiques_pays="{params:{nbAthletes:2925, nbPays:93}}"`, () => {
+        beforeEach(() => {
+            element = mount(
+                {
+                    template:
+                        `<span v-m-i18n:title.exemples_avec_parametres:decompte_athletes_olympiques_pays="{params:{nbAthletes:2925, nbPays:93}}""></span>`
+                },
+                { localVue: Vue }
+            );
+        });
+        it(`l'élément devrait avoir le titre "Il y a 2925 athlètes olympiques et 93 pays participants."`, () => {
+            expect(element.vm.$el.getAttribute('title')).toEqual('Il y a 2925 athlètes olympiques et 93 pays participants.');
+        });
+    });
+
+    describe(`Étant donné l'argument :title.decompte_athletes_olympiques_pays="{modifier:'f', params:{nbAthletes:2925, nbPays:93}}"`, () => {
+        beforeEach(() => {
+            element = mount(
+                {
+                    template:
+                        `<span v-m-i18n:title.exemples_avec_parametres:decompte_athletes_olympiques_pays="{modifier:'f', params:{nbAthletes:2925, nbPays:93}}""></span>`
+                },
+                { localVue: Vue }
+            );
+        });
+        it(`l'élément devrait avoir le titre "Il y a 2925 femmes athlètes olympiques et 93 pays participants."`, () => {
+            expect(element.vm.$el.getAttribute('title')).toEqual('Il y a 2925 femmes athlètes olympiques et 93 pays participants.');
         });
     });
 

@@ -12,7 +12,7 @@ const I18nDirective: DirectiveOptions = {
         if (binding.arg) {
             let expression = binding.expression;
             const modifiers: string[] = Object.getOwnPropertyNames(binding.modifiers);
-            const options = stringToObject(expression);
+            const options = stringToObject(expression) || {};
 
             if (modifiers.length > 0) {
                 // do not use modifiers out of expression (like "medaille-olympique.f")
@@ -20,7 +20,7 @@ const I18nDirective: DirectiveOptions = {
 
                 expression = Vue.prototype.$i18n.translate(
                     modifiers[0],
-                    [],
+                    options.params,
                     options.nb,
                     options.modifier
                 );
