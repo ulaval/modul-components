@@ -482,3 +482,6 @@ export function stringToObject(str: string): any {
     }
     return obj;
 }
+
+export const sprintf = require('sprintf-js').sprintf;
+export const vsprintf = require('sprintf-js').vsprintf;

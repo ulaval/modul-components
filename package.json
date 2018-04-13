@@ -61,6 +61,7 @@
         "includeFailureMsg": true
     },
     "dependencies": {
+        "@types/sprintf-js": "^1.1.0",
         "axios": "^0.17.1",
         "css-loader": "^0.28.7",
         "enquire.js": "^2.1.6",
@@ -70,6 +71,7 @@
         "portal-vue": "~1.1.1",
         "postcss-loader": "^2.0.9",
         "sass-loader": "^6.0.6",
+        "sprintf-js": "^1.1.1",
         "style-loader": "^0.19.0",
         "svg-inline-loader": "^0.8.0",
         "vue-class-component": "^6.1.1",

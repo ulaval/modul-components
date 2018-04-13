@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import I18nPlugin, { Messages, ENGLISH, I18nPluginOptions } from './i18n';
 import { resetModulPlugins } from '../../../tests/helpers/component';
+import { addMessages } from '../../../tests/helpers/lang';
 
 describe('i18n plugin', () => {
     describe('when not installed', () => {
@@ -47,6 +48,36 @@ describe('i18n plugin', () => {
             let i18n: Messages = Vue.prototype.$i18n;
             i18n.currentLang('es');
             expect(i18n.currentLang()).toEqual('es');
+        });
+    });
+
+    describe('with formatOption = "vsprintf"', () => {
+        beforeEach(() => {
+            let options: I18nPluginOptions = {
+                formatMode: 'vsprintf'
+            };
+
+            resetModulPlugins();
+            Vue.use(I18nPlugin, options);
+            addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
+        });
+        it(`calling translate('decompte_athletes_olympiques_pays', {nbAthletes:2925, nbPays:93}) should return "Il y a 2925 athlètes olympiques et 93 pays participants."`, () => {
+            expect(Vue.prototype.$i18n.translate('exemples_avec_parametres:decompte_athletes_olympiques_pays', { nbAthletes: 2925, nbPays: 93 })).toEqual('Il y a 2925 athlètes olympiques et 93 pays participants.');
+        });
+    });
+
+    describe('with formatOption = "sprintf"', () => {
+        beforeEach(() => {
+            let options: I18nPluginOptions = {
+                formatMode: 'sprintf'
+            };
+
+            resetModulPlugins();
+            Vue.use(I18nPlugin, options);
+            addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
+        });
+        it(`calling translate('decompte_athletes_olympiques_pays', {nbAthletes:2925, nbPays:93}) should return "Il y a 2925 athlètes olympiques et 93 pays participants."`, () => {
+            expect(Vue.prototype.$i18n.translate('exemples_avec_parametres:decompte_athletes_olympiques_pays', { nbAthletes: 2925, nbPays: 93 })).toEqual('Il y a 2925 athlètes olympiques et 93 pays participants.');
         });
     });
 });
