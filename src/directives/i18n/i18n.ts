@@ -15,13 +15,14 @@ const I18nDirective: DirectiveOptions = {
             const options = stringToObject(expression);
 
             if (modifiers.length > 0) {
-                const modifier = modifiers[1] ? modifiers[1] : options.modifier;
+                // do not use modifiers out of expression (like "medaille-olympique.f")
+                // const modifier = options.modifier ? options.modifier : modifiers[1];
 
                 expression = Vue.prototype.$i18n.translate(
                     modifiers[0],
                     [],
                     options.nb,
-                    modifier
+                    options.modifier
                 );
             }
 

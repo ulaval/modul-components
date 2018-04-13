@@ -149,6 +149,9 @@ describe(`Étant donné la directive v-m-i18n`, () => {
         });
     });
 
+    /*  we don't use modifiers like "medaille-olympique.f" in the directive for now,
+        keep the tests in case we do some day
+
     describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique.f`, () => {
         beforeEach(() => {
             element = mount(
@@ -194,18 +197,18 @@ describe(`Étant donné la directive v-m-i18n`, () => {
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique.f="{nb:2, modifier:'m'}"`, () => {
+    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique.f="{nb:3, modifier:'m'}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
                     template:
-                        `<span v-m-i18n:title.exemples-avec-nombre-genre:medaille-olympique.f="{nb:2, modifier:'m'}"></span>`
+                        `<span v-m-i18n:title.exemples-avec-nombre-genre:medaille-olympique.f="{nb:3, modifier:'m'}"></span>`
                 },
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Les deux seules médaillées olympiques"`, () => {
-            expect(element.vm.$el.getAttribute('title')).toEqual('Les deux seules médaillées olympiques');
+        it(`l'élément devrait avoir le titre "Les médaillés olympiques masculins"`, () => {
+            expect(element.vm.$el.getAttribute('title')).toEqual('Les médaillés olympiques masculins');
         });
-    });
+    }); */
 });
