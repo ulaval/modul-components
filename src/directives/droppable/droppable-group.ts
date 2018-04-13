@@ -13,7 +13,7 @@ export class MDroppableGroup extends MElementPlugin<string> {
 }
 
 const Directive: DirectiveOptions = {
-    inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+    bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.attach(MDroppableGroup, element, binding.value);
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {

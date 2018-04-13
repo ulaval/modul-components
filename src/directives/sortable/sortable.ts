@@ -6,13 +6,12 @@ import { MDroppable, MDropEvent, MDropEventNames, MDropInfo } from '../droppable
 import tabPanel from 'src/components/tab-panel/tab-panel';
 import { MDOMPlugin, MElementPlugin } from '../domPlugin';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
-import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
+import { isInElement, mousePositionElement, RelativeMousePos, mousePositionDocument } from '../../utils/mouse/mouse';
 import { MDroppableGroup } from '../droppable/droppable-group';
 
 export interface MSortableOptions {
     items: any[];
     acceptedActions: string[];
-    grouping?: any;
 }
 
 export enum MSortEventNames {
@@ -23,6 +22,7 @@ export enum MSortEventNames {
 
 export enum MSortInsertPositions {
     Before = 'before',
+    In = 'in',
     After = 'after'
 }
 
@@ -32,6 +32,7 @@ export interface MSortEvent extends DragEvent {
 
 export enum MSortClassNames {
     SortBefore = 'm--is-sortbefore',
+    SortIn = 'm--is-sortin',
     SortAfter = 'm--is-sortafter',
     EmptyPlaceholder = 'emptyPlaceholder'
 }
@@ -48,6 +49,37 @@ export interface MSortInfo {
 const DEFAULT_ACTION: string = 'any';
 const MOVE_ACTION: string = 'move';
 const MOVE_GROUP_ACTION: string = 'move_group';
+
+export interface MSortableInsertionMarkerBehavior {
+    getInsertPosition(event: MDropEvent): MSortInsertPositions;
+}
+
+export class MSortableDefaultInsertionMarkerBehavior implements MSortableInsertionMarkerBehavior {
+    getInsertPosition(event: MDropEvent): MSortInsertPositions {
+        if (MDroppable.currentHoverDroppable) {
+            const mousePosition = mousePositionElement(event, MDroppable.currentHoverDroppable.element);
+            if (mousePosition.y < MDroppable.currentHoverDroppable.element.offsetHeight / 2) {
+                return MSortInsertPositions.Before;
+            } else {
+                return MSortInsertPositions.After;
+            }
+        }
+
+        return MSortInsertPositions.After;
+    }
+}
+
+export class MSortableGroupingInsertionMarkerBehavior implements MSortableInsertionMarkerBehavior {
+    getInsertPosition(event: MDropEvent): MSortInsertPositions {
+        if (!MDroppable.currentHoverDroppable) { return MSortInsertPositions.After; }
+
+        const mousePosition = mousePositionElement(event, MDroppable.currentHoverDroppable.element);
+        if (mousePosition.y <= 10) { return MSortInsertPositions.Before; }
+        if (mousePosition.y > MDroppable.currentHoverDroppable.element.offsetHeight - 10) { return MSortInsertPositions.After; }
+
+        return MSortInsertPositions.In;
+    }
+}
 
 export class MSortable extends MElementPlugin<MSortableOptions> {
     public static defaultMountPoint: string = '__msortable__';
@@ -131,9 +163,9 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
 
             if (currentElement.classList.contains('emptyPlaceholder')) {
-                this.attachEmptyPlaceholder(currentElement, sortableGroup ? sortableGroup.options : this.options.grouping);
+                this.attachEmptyPlaceholder(currentElement, sortableGroup ? sortableGroup.options : undefined);
             } else {
-                const draggableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, currentElement);
+                const draggableGroup: MDroppableGroup | undefined = MDOMPlugin.get(MDroppableGroup, currentElement);
                 const grouping = !sortableGroup ? draggableGroup ? draggableGroup.options : undefined : undefined;
                 const draggablePlugin: MDraggable = MDOMPlugin.attachUpdate(MDraggable, currentElement, {
                     action: !grouping ? MOVE_ACTION : MOVE_GROUP_ACTION,
@@ -274,8 +306,8 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         if (!MDroppable.currentHoverDroppable) { return; }
 
         let element: HTMLElement;
-        const insertPosition: MSortInsertPositions = this.computeInsertPosition(event);
-        if (!this.isInsertingAroundChild()) {
+        const insertPosition: MSortInsertPositions = this.getInsertionMarkerBehavior().getInsertPosition(event);
+        if (!this.isInsertingOnChild()) {
             element = insertPosition === MSortInsertPositions.Before
                 ? this.element.children[0] as HTMLElement : this.element.children[this.element.children.length - 1] as HTMLElement;
         } else {
@@ -283,8 +315,23 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         }
 
         this.cleanUpInsertionClasses();
-        const insertionClass: string = insertPosition.includes('before') ? MSortClassNames.SortBefore : MSortClassNames.SortAfter;
-        element.classList.add(insertionClass);
+        let insertionClass: string | undefined;
+        switch (insertPosition) {
+            case MSortInsertPositions.After: insertionClass = MSortClassNames.SortAfter; break;
+            case MSortInsertPositions.Before: insertionClass = MSortClassNames.SortBefore; break;
+            case MSortInsertPositions.In: insertionClass = MSortClassNames.SortIn; break;
+        }
+        if (insertionClass) { element.classList.add(insertionClass); }
+    }
+
+    private getInsertionMarkerBehavior(): MSortableInsertionMarkerBehavior {
+        /*const droppable: MDroppable = MDroppable.currentHoverDroppable as MDroppable;
+
+        if (MDOMPlugin.get(MDroppableGroup, droppable.element)) {
+            return new MSortableGroupingInsertionMarkerBehavior();
+        }
+*/
+        return new MSortableDefaultInsertionMarkerBehavior();
     }
 
     private getNewPosition(event: MDropEvent, oldPosition: number): number {
@@ -313,21 +360,8 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         if (event.dropInfo.action === MOVE_GROUP_ACTION) {
             return event.dropInfo.grouping;
         } else {
-            return this.options.grouping;
+            return undefined;
         }
-    }
-
-    private computeInsertPosition(event: MDropEvent): MSortInsertPositions {
-        if (MDroppable.currentHoverDroppable) {
-            const mousePosition = mousePositionElement(event);
-            if (mousePosition.y < MDroppable.currentHoverDroppable.element.offsetHeight / 2) {
-                return MSortInsertPositions.Before;
-            } else {
-                return MSortInsertPositions.After;
-            }
-        }
-
-        return MSortInsertPositions.After;
     }
 
     private isHoveringOverDraggedElement(): boolean {
@@ -335,7 +369,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
             && MDroppable.currentHoverDroppable.element === MDraggable.currentDraggable.element;
     }
 
-    private isInsertingAroundChild(): boolean {
+    private isInsertingOnChild(): boolean {
         return MDroppable.currentHoverDroppable !== undefined && MDroppable.currentHoverDroppable.element !== this.element;
     }
 
@@ -347,6 +381,10 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         const mSortAfterElement = this.element.querySelector(`.${MSortClassNames.SortAfter}`);
         if (mSortAfterElement) { mSortAfterElement.classList.remove(MSortClassNames.SortAfter); }
         this.element.classList.remove(MSortClassNames.SortAfter);
+
+        const mSortInElement = this.element.querySelector(`.${MSortClassNames.SortIn}`);
+        if (mSortInElement) { mSortInElement.classList.remove(MSortClassNames.SortIn); }
+        this.element.classList.remove(MSortClassNames.SortIn);
 
         const mSortBeforeElement = this.element.querySelector(`.${MSortClassNames.SortBefore}`);
         if (mSortBeforeElement) { mSortBeforeElement.classList.remove(MSortClassNames.SortBefore); }
@@ -362,16 +400,13 @@ const extractVnodeAttributes: (node: VNode) => MSortableOptions = (node: VNode) 
 };
 const Directive: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        const options = extractVnodeAttributes(node);
-        const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, element);
-        options.grouping = sortableGroup ? sortableGroup.options : undefined;
-        MDOMPlugin.attachUpdate(MSortable, element, options);
+        MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(node));
+    },
+    update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+        MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(node));
     },
     componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        const options = extractVnodeAttributes(node);
-        const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, element);
-        options.grouping = sortableGroup ? sortableGroup.options : undefined;
-        MDOMPlugin.attachUpdate(MSortable, element, options);
+        MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MSortable, element);

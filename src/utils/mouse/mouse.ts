@@ -58,7 +58,11 @@ export const findPos: (obj: HTMLElement) => { left: number, top: number } = (obj
 
 // Mouse position relative to the element
 // not working on IE7 and below
-export const mousePositionElement: MousePositionEvent<{ x: number, y: number }> = (e: MouseEvent, relativeToEl?: HTMLElement) => {
+export interface RelativeMousePos {
+    x: number;
+    y: number;
+}
+export const mousePositionElement: MousePositionEvent<RelativeMousePos> = (e: MouseEvent, relativeToEl?: HTMLElement) => {
     const mousePosDoc = mousePositionDocument(e);
     const target = mouseTarget(e);
     const targetPos = relativeToEl ? findPos(relativeToEl) : findPos(target);
