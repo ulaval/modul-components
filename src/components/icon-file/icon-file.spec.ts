@@ -2,46 +2,49 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import IconPlugin, { MIcon } from './icon';
+import IconFilePlugin, { MIconFile } from './icon-file';
 
-describe('MIcon', () => {
+describe('MIconFile', () => {
     let localVue: VueConstructor<Vue>;
 
     beforeEach(() => {
         localVue = createLocalVue();
-        localVue.use(IconPlugin);
+        localVue.use(IconFilePlugin);
     });
 
     it('should render correctly', () => {
-        const icon = mount(MIcon, {
+        const iconFile = mount(MIconFile, {
             localVue: localVue,
             propsData: {
-                name: 'options',
-                size: '20px'
+                extension: 'pdf'
             }
         });
 
-        return expect(renderComponent(icon.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(iconFile.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render title when svgTitle prop is set', () => {
-        const icon = mount(MIcon, {
+        const iconFile = mount(MIconFile, {
             localVue: localVue,
             propsData: {
-                svgTitle: 'options'
+                extension: 'pdf',
+                svgTitle: 'test'
             }
         });
 
-        return expect(renderComponent(icon.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(iconFile.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should emit click event when icon is clicked', () => {
-        const icon = mount(MIcon, {
-            localVue: localVue
+    it('should emit click event when icon-file is clicked', () => {
+        const iconFile = mount(MIconFile, {
+            localVue: localVue,
+            propsData: {
+                extension: 'pdf'
+            }
         });
 
-        icon.trigger('click');
+        iconFile.trigger('click');
 
-        expect(icon.emitted('click')).toBeTruthy();
+        expect(iconFile.emitted('click')).toBeTruthy();
     });
 });
