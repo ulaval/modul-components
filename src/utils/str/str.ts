@@ -464,3 +464,21 @@ export function normalizeString(str: string): string {
 
     return result;
 }
+
+export function isObjectString(str: string): boolean {
+    return str.includes(':') && str.includes('{') && str.includes('}');
+}
+
+export function stringToObject(str: string): any {
+    const obj = {};
+    if (str && isObjectString(str)) {
+        str = str.replace(/[{}'']/g, '');
+        const attrs = str.split(',');
+
+        for (const i in attrs) {
+            const KeyVal = attrs[i].split(':');
+            obj[KeyVal[0].trim()] = KeyVal[1].trim();
+        }
+    }
+    return obj;
+}
