@@ -7,6 +7,7 @@
         "plural-test": "I have one yorkie!",
         "plural-test.p": "I have many yorkies!",
         "modifier-test": "I am not modified!",
-        "modifier-test.m": "I am modified!"
+        "modifier-test.m": "I am modified!",
+        "decompte_athletes_olympiques_pays": "Il y a %(nbAthletes)s athlètes olympiques et %(nbPays)s pays participants."
     }
 }
