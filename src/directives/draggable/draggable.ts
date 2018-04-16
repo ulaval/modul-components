@@ -8,7 +8,9 @@ import { MRemoveUserSelect } from '../user-select/remove-user-select';
 import { MSortable } from '../sortable/sortable';
 
 export enum MDraggableClassNames {
-    Dragging = 'm--is-dragging'
+    Draggable = 'm--is-draggable',
+    Dragging = 'm--is-dragging',
+    Grabbing = 'm--is-grabbing'
 }
 
 export interface MDraggableOptions {
@@ -40,37 +42,45 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     public cleanupCssClasses(): void {
         this.element.classList.remove(MDraggableClassNames.Dragging);
+        this.element.classList.remove(MDraggableClassNames.Grabbing);
     }
 
     public attach(): void {
+        this.update(this.options);
+    }
+
+    public update(options: MDraggableOptions): void {
+        this._options = options;
         if (this.options.canDrag) {
+            this.element.classList.add(MDraggableClassNames.Draggable);
+
             this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
             this.element.draggable = true;
             this.attachDragImage();
 
             this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
             this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
+            this.addEventListener('mousedown', (event: MouseEvent) => {
+                this.element.classList.add(MDraggableClassNames.Grabbing);
+            });
+            this.addEventListener('mouseup', (event: MouseEvent) => {
+                this.cleanupCssClasses();
+            });
             this.addEventListener('touchmove', () => {});
-        }
-    }
-
-    public update(options: MDraggableOptions): void {
-        this._options = options;
-        this.attachDragImage();
-
-        this.element.draggable = this.options.canDrag ? true : false;
-        const dragHandle: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
-        if (dragHandle) {
-            MDOMPlugin.detach(MRemoveUserSelect, this.element);
         } else {
-            MDOMPlugin.attachUpdate(MRemoveUserSelect, this.element, true);
+            this.element.classList.remove(MDraggableClassNames.Draggable);
+            this.cleanupCssClasses();
+            this.removeAllEvents();
         }
+
+        MDOMPlugin.attachUpdate(MRemoveUserSelect, this.element, true);
     }
 
     public detach(): void {
         this.element.draggable = false;
         MDOMPlugin.detach(MRemoveUserSelect, this.element);
         this.detachDragImage();
+        this.element.classList.remove(MDraggableClassNames.Draggable);
         this.cleanupCssClasses();
         this.removeAllEvents();
     }
@@ -83,7 +93,6 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
             this.element.style.height = `${this.element.offsetHeight - dragImage.offsetHeight}px`;
             this.element.style.overflow = 'hidden';
             dragImage.style.transform = `translateY(${this.element.offsetHeight}px)`;
-            dragImage.style.display = 'none';
         }
     }
 
@@ -93,11 +102,11 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
             this.element.style.height = '';
             this.element.style.overflow = '';
             dragImage.style.transform = '';
-            dragImage.style.display = '';
         }
     }
 
     private onDragEnd(event: DragEvent): void {
+        event.stopPropagation();
         this.cleanupCssClasses();
         MDraggable.currentDraggable = undefined;
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
@@ -106,6 +115,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     private onDragStart(event: DragEvent): void {
         event.stopPropagation();
         clearUserSelection();
+        this.cleanupCssClasses();
 
         MDraggable.currentDraggable = this;
         this.element.classList.add(MDraggableClassNames.Dragging);
@@ -121,13 +131,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     private setDragImage(event: DragEvent): void {
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
-        if (dragImage) {
-            dragImage.style.display = '';
-            if (event.dataTransfer.setDragImage) { event.dataTransfer.setDragImage(dragImage, 0, 0); }
-            setTimeout(() => {
-                dragImage.style.display = 'none';
-            });
-        }
+        if (dragImage && event.dataTransfer.setDragImage) { event.dataTransfer.setDragImage(dragImage, 0, 0); }
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {

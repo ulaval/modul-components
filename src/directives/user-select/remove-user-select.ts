@@ -15,6 +15,8 @@ export class MRemoveUserSelect extends MElementPlugin<boolean> {
     public update(options: string): void {}
     public detach(): void {
         this.element.style.userSelect = '';
+        this.element.style.webkitUserSelect = '';
+        this.element.style.msUserSelect = '';
     }
 }
 

@@ -215,7 +215,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private onDragEnter(event: MDropEvent): void {
         event.stopPropagation();
-        event.preventDefault();
         if (MSortable.activeSortContainer && MSortable.activeSortContainer !== this) { MSortable.activeSortContainer.doCleanUp(); }
         MSortable.activeSortContainer = this;
         this.insertInsertionMarker(event);
@@ -223,7 +222,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private onDragLeave(event: MDropEvent): void {
         event.stopPropagation();
-        event.preventDefault();
 
         const newContainer = MDroppable.currentHoverDroppable ? MDOMPlugin.getRecursive(MSortable, MDroppable.currentHoverDroppable.element) : undefined;
         if (!newContainer && !isInElement(event, this.element)) {
@@ -238,7 +236,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private onDragOver(event: MDropEvent): void {
         event.stopPropagation();
-        event.preventDefault();
         this.insertInsertionMarker(event);
     }
 
@@ -289,7 +286,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private onChildDragEnd(event: MDropEvent): void {
-        event.preventDefault();
         event.stopPropagation();
         if (MSortable.fromSortContainer) { MSortable.fromSortContainer.doCleanUp(); }
         if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
@@ -299,13 +295,12 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private onChildDragStart(event: MDropEvent): void {
-        event.preventDefault();
         event.stopPropagation();
         MSortable.fromSortContainer = this;
     }
 
     private insertInsertionMarker(event: MDropEvent): void {
-        if (!MDroppable.currentHoverDroppable) { return; }
+        if (!MDroppable.currentHoverDroppable || this.isHoveringOverDraggedElement()) { return; }
 
         let element: HTMLElement;
         const insertPosition: MSortInsertPositions = this.getInsertionMarkerBehavior().getInsertPosition(event);
