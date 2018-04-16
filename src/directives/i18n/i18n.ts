@@ -1,7 +1,6 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { I_18_N } from '../directive-names';
 import { Messages } from '../../utils/i18n/i18n';
-import { stringToObject } from '../../utils/str/str';
 
 const I18nDirective: DirectiveOptions = {
     bind(
@@ -12,7 +11,7 @@ const I18nDirective: DirectiveOptions = {
         if (binding.arg) {
             let expression = binding.expression;
             const modifiers: string[] = Object.getOwnPropertyNames(binding.modifiers);
-            const options = stringToObject(expression) || {};
+            const options = binding.value || {};
 
             if (modifiers.length > 0) {
                 // do not use modifiers out of expression (like "medaille-olympique.f")
