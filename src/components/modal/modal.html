@@ -20,6 +20,7 @@
                             <m-button @click="onOk()">
                                 <template v-if="hasOkLabel">{{ okLabel }}</template>
                                 <m-i18n v-else k="m-modal:ok"></m-i18n>
+                                <template slot="precision" v-if="hasOkPrecision">{{ okPrecision }}</template>
                             </m-button>
                             <m-link mode="button" @click="onCancel()" v-if="negativeLink">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
