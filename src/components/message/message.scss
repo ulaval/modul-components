@@ -3,6 +3,7 @@ $m-message-size: 22px;
 
 .m-message {
     display: block;
+    text-align: left;
 
     &.m--is-success {
         .m-message__icon {

@@ -22,6 +22,8 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     @Prop()
     public okLabel: string | undefined;
     @Prop()
+    public okPrecision: string | undefined;
+    @Prop()
     public cancelLabel: string | undefined;
     @Prop({ default: true })
     public negativeLink: boolean;
@@ -70,6 +72,10 @@ export class MModal extends ModulVue implements PortalMixinImpl {
 
     private get hasOkLabel(): boolean {
         return !!this.okLabel;
+    }
+
+    private get hasOkPrecision(): boolean {
+        return !!this.okPrecision;
     }
 
     private get hasCancelLabel(): boolean {
