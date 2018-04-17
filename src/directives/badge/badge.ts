@@ -2,70 +2,33 @@ import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { BADGE } from '../directive-names';
+import { MIcon } from '../../components/icon/icon';
 
-// export enum MBadgeState {
-//     Completed = 'completed',
-//     Warning = 'warning',
-//     Error = 'error'
-// }
+// Icon state
+export enum MBadgeState {
+    Completed = 'completed',
+    Error = 'error'
+}
+// Icon name
+export const ICON_COMPLETED: string = 'chip-check';
+export const ICON_ERROR: string = 'chip-error';
+// Icon color
+export const COLOR_COMPLETED: string = '#00c77f';
+export const COLOR_ERROR: string = '#e30513';
+// Badge icon type
+export type BadgeIcon = {
+    [key: string]: string
+};
 
-// export class MBadge extends Vue {
+const BADGE_ICON: BadgeIcon = {
+    [MBadgeState.Completed]: ICON_COMPLETED,
+    [MBadgeState.Error]: ICON_ERROR
+};
 
-//     private mounted(): void {
-//         let id = this.$children[0]['name'];
-//         let svg = (document.getElementById(id) as HTMLElement).dataset.format;
-//         console.log(id, svg);
-//     }
-//
-    // private onClick(event: Event): void {
-    //     this.$emit('click', event);
-    //     this.$el.blur();
-    // }
-
-    // private onFocus(event: Event): void {
-    //     this.$emit('focus');
-    // }
-
-    // private onBlur(event: Event): void {
-    //     this.$emit('blur');
-    // }
-
-    // private getIcon(): string {
-    //     let icon: string = '';
-    //     switch (this.state) {
-    //         case MBadgeState.Completed:
-    //             icon = 'chip-check';
-    //             break;
-    //         case MBadgeState.Warning:
-    //             icon = 'chip-warning';
-    //             break;
-    //         case MBadgeState.Error:
-    //             icon = 'chip-error';
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    //     return icon;
-    // }
-
-    // private get rightDistance(): string {
-    //     let size = parseInt(this.size, 10);
-    //     let chipSise = parseInt(this.chipSize, 10);
-    //     let realSize = (size / (24 / 18));
-    //     let distance = ((size - realSize) / 2) - (chipSise / 2);
-    //     return distance + 'px';
-    // }
-
-    // private get bottomDistance(): string {
-    //     let chipSise = parseInt(this.chipSize, 10);
-    //     let distance = chipSise * (1 / 4);
-    //     return '-' + distance + 'px';
-    // }
-
-    // private get hasState(): boolean {
-    //     return !!this.state;
-    // }
-// }
+const BADGE_COLOR: BadgeIcon = {
+    [MBadgeState.Completed]: COLOR_COMPLETED,
+    [MBadgeState.Error]: COLOR_ERROR
+};
 
 const MBadgeDirective: DirectiveOptions = {
     bind(
@@ -75,56 +38,69 @@ const MBadgeDirective: DirectiveOptions = {
         oldVnode: VNode
     ): void {
 
-        el.style.position = 'fixed';
-        // const $file: FileService = (vnode.context as ModulVue).$file;
+        // Element data
+        let elWidth = parseInt(el.attributes['width']['value'], 10);
+        let elHeight = parseInt(el.attributes['height']['value'], 10);
+        let elID = (vnode.componentInstance as MIcon).name;
+        let elFormat = (document.getElementById(elID) as HTMLElement).dataset.format;
+        el.style.overflow = 'visible';
 
-        // const onDragEnterOver = (e: DragEvent) => {
-        //     el.classList.add('m--is-drag-over');
-        //     e.stopPropagation();
-        //     e.preventDefault();
-        // };
+        let iconInstance = new MIcon({
+            el: document.createElement('span')
+        });
 
-        // const onDragLeave = (e: DragEvent) => {
-        //     el.classList.remove('m--is-drag-over');
-        //     e.stopPropagation();
-        //     e.preventDefault();
-        // };
+        // Badge settings
+        let badgeSise = elWidth / (30 / 16) ;
+        let portraitRatio = (24 / 18);
+        let landscapeRatio = (24 / 18);
+        let offsetX = 0;
+        let offsetY = 0;
 
-        // const onDrop = (e: DragEvent) => {
-        //     el.classList.remove('m--is-drag-over');
-        //     e.preventDefault();
-        //     $file.add(
-        //         e.dataTransfer.files,
-        //         binding.value ? binding.value : DEFAULT_STORE_NAME
-        //     );
-        // };
+        if (binding.value.state != undefined) {
+            iconInstance.name = BADGE_ICON[binding.value.state];
+            iconInstance.$el.style.color = BADGE_COLOR[binding.value.state];
+        }
 
-        // const cleanup = () => {
-        //     el.removeEventListener('dragenter', onDragEnterOver);
-        //     el.removeEventListener('dragover', onDragEnterOver);
-        //     el.removeEventListener('dragleave', onDragLeave);
-        //     el.removeEventListener('drop', onDrop);
-        // };
+        if (binding.value.offsetX != undefined) {
+            offsetX = parseInt(binding.value.offsetX, 10);
+        }
 
-        // el.addEventListener('dragenter', onDragEnterOver);
-        // el.addEventListener('dragover', onDragEnterOver);
-        // el.addEventListener('dragleave', onDragLeave);
-        // el.addEventListener('drop', onDrop);
-        // el.cleanupMFileDropDirective = cleanup;
+        if (binding.value.offsetY != undefined) {
+            offsetY = parseInt(binding.value.offsetY, 10);
+        }
+
+        iconInstance.size = badgeSise + 'px';
+
+        if (elFormat != undefined) {
+            if (elFormat == 'portrait') {
+                let leftDistance = (elWidth - ((elWidth - (elWidth / portraitRatio)) * 0.5) - (badgeSise / 2)) + offsetX;
+                let topDistance = (elHeight - (badgeSise * 0.5)) + offsetY;
+                iconInstance.$el.setAttribute('x', leftDistance + 'px');
+                iconInstance.$el.setAttribute('y', topDistance + 'px');
+            } else if (elFormat == 'landscape') {
+                let leftDistance = (elWidth - (badgeSise * 0.5)) + offsetX;
+                let topDistance = (elHeight - ((elHeight - (elHeight / landscapeRatio)) * 0.5) - (badgeSise / 2)) + offsetY;
+                iconInstance.$el.setAttribute('x', leftDistance + 'px');
+                iconInstance.$el.setAttribute('y', topDistance + 'px');
+            } else {
+                console.error('Svg data-format is not recognized for the svg having the id #' + elID + '');
+            }
+        } else {
+            let leftDistance = (elWidth - (badgeSise * 0.5)) + offsetX;
+            let topDistance = (elHeight - (badgeSise * 0.5)) + offsetY;
+            iconInstance.$el.setAttribute('x', leftDistance + 'px');
+            iconInstance.$el.setAttribute('y', topDistance + 'px');
+        }
+
+        el.appendChild(iconInstance.$el);
     },
     unbind(
-        // el: MFileDropElement,
-        // binding: VNodeDirective,
-        // vnode: VNode,
-        // oldVnode: VNode
+        el: HTMLElement,
+        binding: VNodeDirective,
+        vnode: VNode,
+        oldVnode: VNode
     ): void {
-        // el.cleanupMFileDropDirective();
-        // const $file: FileService = (vnode.context as ModulVue).$file;
-        // if (!binding.modifiers['keep-store']) {
-        //     $file.destroy(
-        //         binding.value ? binding.value : DEFAULT_STORE_NAME
-        //     );
-        // }
+        //
     }
 };
 
