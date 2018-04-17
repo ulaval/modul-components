@@ -302,10 +302,15 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     private insertInsertionMarker(event: MDropEvent): void {
         if (!MDroppable.currentHoverDroppable || this.isHoveringOverDraggedElement()) { return; }
 
+        const currentInsertPosition = this.getCurrentInsertPosition();
+        const newInsertPosition: MSortInsertPositions = this.getInsertionMarkerBehavior().getInsertPosition(event);
+        if (MDroppable.currentHoverDroppable === MDroppable.previousHoverContainer && currentInsertPosition === newInsertPosition) {
+            return;
+        }
+
         let element: HTMLElement;
-        const insertPosition: MSortInsertPositions = this.getInsertionMarkerBehavior().getInsertPosition(event);
         if (!this.isInsertingOnChild()) {
-            element = insertPosition === MSortInsertPositions.Before
+            element = newInsertPosition === MSortInsertPositions.Before
                 ? this.element.children[0] as HTMLElement : this.element.children[this.element.children.length - 1] as HTMLElement;
         } else {
             element = MDroppable.currentHoverDroppable.element;
@@ -313,7 +318,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
         this.cleanUpInsertionClasses();
         let insertionClass: string | undefined;
-        switch (insertPosition) {
+        switch (newInsertPosition) {
             case MSortInsertPositions.After: insertionClass = MSortClassNames.SortAfter; break;
             case MSortInsertPositions.Before: insertionClass = MSortClassNames.SortBefore; break;
             case MSortInsertPositions.In: insertionClass = MSortClassNames.SortIn; break;
@@ -372,6 +377,19 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
     private hasItems(): boolean {
         return this.options.items.length > 0;
+    }
+
+    private getCurrentInsertPosition(): MSortInsertPositions {
+        const mSortAfterElement = this.element.querySelector(`.${MSortClassNames.SortAfter}`);
+        if (mSortAfterElement) { return MSortInsertPositions.After; }
+
+        const mSortBeforeElement = this.element.querySelector(`.${MSortClassNames.SortBefore}`);
+        if (mSortBeforeElement) { return MSortInsertPositions.Before; }
+
+        const mSortInElement = this.element.querySelector(`.${MSortClassNames.SortIn}`);
+        if (mSortInElement) { return MSortInsertPositions.In; }
+
+        return MSortInsertPositions.After;
     }
 
     private cleanUpInsertionClasses(): void {

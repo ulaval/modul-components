@@ -136,23 +136,23 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         // Firefox sometime fires events on the wrong container for some reasons.  This fix it.
         if (droppable !== this) { this.cleanupCssClasses(); return; }
 
+        let className: string;
         if (this.canDrop()) {
             event.preventDefault();
             event.dataTransfer.dropEffect = MDropEffect.MMove;
-            this.element.classList.add(MDroppableClassNames.CanDrop);
+            className = MDroppableClassNames.CanDrop;
         } else {
             event.preventDefault();
             event.dataTransfer.dropEffect = MDropEffect.MNone;
-            this.element.classList.add(MDroppableClassNames.CantDrop);
+            className = MDroppableClassNames.CantDrop;
         }
 
         MDroppable.previousHoverContainer = MDroppable.currentHoverDroppable;
         MDroppable.currentHoverDroppable = this;
         if (MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable) {
-            //  TODO: following 2 lines might be useless.  Please verify.
-            if (MDroppable.previousHoverContainer) { MDroppable.previousHoverContainer.cleanupCssClasses(); }
             this.cleanupCssClasses();
             this.element.classList.add(MDroppableClassNames.Overing);
+            this.element.classList.add(className);
 
             this.dispatchEvent(event, MDropEventNames.OnDragEnter);
         }

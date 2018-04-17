@@ -7,11 +7,7 @@ export class MRemoveUserSelect extends MElementPlugin<boolean> {
 
     public attach(): void {
         if (this.options) {
-            if (typeof this.element.onselectstart != 'undefined') {
-                this.addEventListener('onselectstart', () => { return false; });
-            } else {
-                this.addEventListener('onmousedown', () => { return false; });
-            }
+            this.addEventListener('onmouseover', (event: Event) => { event.preventDefault(); });
 
             this.element.style.webkitUserSelect = 'none';
             this.element.style.msUserSelect = 'none';
