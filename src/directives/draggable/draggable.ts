@@ -2,7 +2,7 @@ import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DRAGGABLE } from '../directive-names';
 import { MElementPlugin, MDOMPlugin } from '../domPlugin';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
-import { MDroppable } from '../droppable/droppable';
+import { MDroppable, MDroppableClassNames } from '../droppable/droppable';
 import { clearUserSelection } from '../../utils/selection/selection';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
 import { MSortable } from '../sortable/sortable';
@@ -60,12 +60,8 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
             this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
             this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-            this.addEventListener('mousedown', (event: MouseEvent) => {
-                this.element.classList.add(MDraggableClassNames.Grabbing);
-            });
-            this.addEventListener('mouseup', (event: MouseEvent) => {
-                this.cleanupCssClasses();
-            });
+            this.addEventListener('mousedown', (event: DragEvent) => this.element.classList.add(MDraggableClassNames.Grabbing));
+            this.addEventListener('mouseup', (event: DragEvent) => this.cleanupCssClasses());
             this.addEventListener('touchmove', () => {});
         } else {
             this.element.classList.remove(MDraggableClassNames.Draggable);
@@ -115,7 +111,6 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     private onDragStart(event: DragEvent): void {
         event.stopPropagation();
         clearUserSelection();
-        this.cleanupCssClasses();
 
         MDraggable.currentDraggable = this;
         this.element.classList.add(MDraggableClassNames.Dragging);
