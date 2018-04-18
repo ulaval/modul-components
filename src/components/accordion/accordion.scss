@@ -37,6 +37,7 @@ $m-accordion--color-default: $m-color--interactive;
     }
 
     &.m--is-default,
+    &.m--is-dark,
     &.m--is-light {
         > .m-accordion__header__content {
             &,
@@ -53,7 +54,8 @@ $m-accordion--color-default: $m-color--interactive;
         }
     }
 
-    &.m--is-default {
+    &.m--is-default,
+    &.m--is-dark, {
         margin-top: - $m-accordion--border-size;
 
         &.m--is-disabled {
@@ -105,8 +107,6 @@ $m-accordion--color-default: $m-color--interactive;
             &__header {
                 position: relative;
                 min-height: 80px;
-                border-top: $m-accordion--border-size solid $m-accordion--border-color;
-                border-bottom: $m-accordion--border-size solid $m-accordion--border-color;
 
                 &::after {
                     position: absolute;
@@ -194,6 +194,12 @@ $m-accordion--color-default: $m-color--interactive;
         }
     }
 
+    &.m--is-dark {
+        background-color: #303030; // warning new grey detected, send the greyminator! >_<
+        // background-color: $m-color--grey-darker;
+        color: #fff;
+    }
+
     &.m--has-icon-left {
         > .m-accordion {
             &__header {
@@ -219,6 +225,18 @@ $m-accordion--color-default: $m-color--interactive;
 
         &__content {
             flex: 1;
+        }
+
+        .m--is-default & {
+            border-top: $m-accordion--border-size solid $m-accordion--border-color;
+            border-bottom: $m-accordion--border-size solid $m-accordion--border-color;
+        }
+
+        .m--is-dark & {
+            color: #fff;
+            background-color: $m-color--grey-darker;
+            border-top: $m-accordion--border-size solid $m-color--grey-darkest;
+            border-bottom: $m-accordion--border-size solid $m-color--grey-darkest;
         }
 
         &-icon {
