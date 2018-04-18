@@ -91,6 +91,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
             dragImage.style.width = computedWidth && computedWidth !== 'auto' ? window.getComputedStyle(dragImage).width : '100%';
             dragImage.style.position = 'absolute';
             dragImage.style.overflow = 'hidden';
+            dragImage.style.zIndex = '1';
             dragImage.hidden = true;
         }
     }
@@ -103,6 +104,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
             dragImage.style.width = '';
             dragImage.style.position = '';
             dragImage.style.overflow = '';
+            dragImage.style.zIndex = '';
             dragImage.hidden = false;
         }
     }
