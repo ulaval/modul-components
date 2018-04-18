@@ -14,13 +14,13 @@
         outline: none;
     }
 
-    &.m--has-ripple {
-        &::before {
-            content: '';
-        }
-    }
-
     &:not(.m--is-disabled) {
+        &.m--has-ripple {
+            &::before {
+                content: '';
+            }
+        }
+
         &.m--is-skin-light,
         &.m--is-skin-link,
         &.m--is-skin-dark {
