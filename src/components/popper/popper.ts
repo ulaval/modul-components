@@ -115,6 +115,12 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         return true;
     }
 
+    public update(): void {
+        if (this.popper !== undefined) {
+            this.popper.update();
+        }
+    }
+
     protected mounted(): void {
         this.$modul.event.$on('scroll', this.update);
         this.$modul.event.$on('resize', this.update);
@@ -144,12 +150,6 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
                 (trigger && trigger.contains(event.target as HTMLElement)))) {
                 this.as<PortalMixin>().propOpen = false;
             }
-        }
-    }
-
-    private update(): void {
-        if (this.popper !== undefined) {
-            this.popper.update();
         }
     }
 
