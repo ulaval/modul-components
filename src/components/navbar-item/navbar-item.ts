@@ -4,7 +4,6 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
 import { NAVBAR_ITEM_NAME } from '../component-names';
-import { log } from 'util';
 
 export abstract class BaseNavbar extends ModulVue { }
 
