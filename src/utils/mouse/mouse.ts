@@ -76,7 +76,6 @@ export const mousePositionElement: MousePositionEvent<RelativeMousePos> = (e: Mo
 
 export const isInElement: MousePositionEvent<boolean> = (e: MouseEvent, relativeToEl: HTMLElement, threshold: number = 3) => {
     const mousePosition = mousePositionElement(e, relativeToEl);
-    console.log(mousePosition);
     return mousePosition.x > 0 && mousePosition.y > 0
             && mousePosition.x + threshold <= relativeToEl.offsetWidth
             && mousePosition.y + threshold <= relativeToEl.offsetHeight;

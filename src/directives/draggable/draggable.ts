@@ -84,7 +84,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     private attachDragImage(): void {
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
         if (dragImage) {
-            const origin: number = 0;
+            const origin: number = -9999;
             dragImage.style.left = `${origin}px`;
             dragImage.style.top = `${origin}px`;
             const computedWidth: string | null = window.getComputedStyle(dragImage).width;
