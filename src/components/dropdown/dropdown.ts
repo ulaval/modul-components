@@ -50,7 +50,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public focus: boolean;
 
-    $refs: {
+    public $refs: {
         popup: MPopup;
         items: HTMLUListElement;
         input: HTMLInputElement;
@@ -130,6 +130,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 this.scrollToFocused();
                 this.$emit('open');
             } else {
+                this.internalFilter = '';
                 this.$emit('close');
             }
         });
