@@ -84,20 +84,26 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     private attachDragImage(): void {
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
         if (dragImage) {
-            this.element.removeChild(dragImage);
-            this.element.appendChild(dragImage);
-            this.element.style.height = `${this.element.offsetHeight - dragImage.offsetHeight}px`;
-            this.element.style.overflow = 'hidden';
-            dragImage.style.transform = `translateY(${this.element.offsetHeight}px)`;
+            const origin: number = 0;
+            dragImage.style.left = `${origin}px`;
+            dragImage.style.top = `${origin}px`;
+            const computedWidth: string | null = window.getComputedStyle(dragImage).width;
+            dragImage.style.width = computedWidth && computedWidth !== 'auto' ? window.getComputedStyle(dragImage).width : '100%';
+            dragImage.style.position = 'absolute';
+            dragImage.style.overflow = 'hidden';
+            dragImage.hidden = true;
         }
     }
 
     private detachDragImage(): void {
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
         if (dragImage) {
-            this.element.style.height = '';
-            this.element.style.overflow = '';
-            dragImage.style.transform = '';
+            dragImage.style.left = '';
+            dragImage.style.top = '';
+            dragImage.style.width = '';
+            dragImage.style.position = '';
+            dragImage.style.overflow = '';
+            dragImage.hidden = false;
         }
     }
 
@@ -106,6 +112,9 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
         this.cleanupCssClasses();
         MDraggable.currentDraggable = undefined;
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
+
+        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
+        if (dragImage) { dragImage.hidden = true; }
     }
 
     private onDragStart(event: DragEvent): void {
@@ -126,7 +135,10 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
     private setDragImage(event: DragEvent): void {
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
-        if (dragImage && event.dataTransfer.setDragImage) { event.dataTransfer.setDragImage(dragImage, 0, 0); }
+        if (dragImage && event.dataTransfer.setDragImage) {
+            dragImage.hidden = false;
+            event.dataTransfer.setDragImage(dragImage, 0, 0);
+        }
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {

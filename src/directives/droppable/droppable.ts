@@ -114,7 +114,6 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
 
     private isLeavingDroppable(event: DragEvent, droppable?: MDroppable): boolean {
         if (!droppable) { return false; }
-
         const threshold: number = 3;
         const mousePosition = mousePositionElement(event, droppable.element);
         return !isInElement(event, droppable.element) || MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable;

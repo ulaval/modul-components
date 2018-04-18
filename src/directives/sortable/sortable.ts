@@ -302,7 +302,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private insertInsertionMarker(event: MDropEvent): void {
-        if (!MDroppable.currentHoverDroppable || this.isHoveringOverDraggedElement()) { return; }
+        if (!MDroppable.currentHoverDroppable || this.isHoveringOverDraggedElement()) { this.cleanUpInsertionClasses(); return; }
 
         const currentInsertPosition = this.getCurrentInsertPosition();
         const newInsertPosition: MSortInsertPositions = this.getInsertionMarkerBehavior().getInsertPosition(event);
