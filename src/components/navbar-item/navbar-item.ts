@@ -13,6 +13,7 @@ export interface Navbar {
     mouseover: boolean;
     updateValue(value: string): void;
     onMouseOver(value: string, event): void;
+    onClick(value: string, event): void;
 }
 
 @WithRender
@@ -60,6 +61,7 @@ export class MNavbarItem extends ModulVue {
     private onClick(event: Event): void {
         if (!this.disabled && this.parentNavbar && this.value != this.parentNavbar.model) {
             this.parentNavbar.updateValue(this.value);
+            this.parentNavbar.onClick(this.value, event);
         }
     }
 

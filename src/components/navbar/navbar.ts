@@ -65,6 +65,10 @@ export class MNavbar extends BaseNavbar implements Navbar {
         this.$emit('mouseover', value, event);
     }
 
+    public onClick(value: any, event: Event): void {
+        this.$emit('click', value, event);
+    }
+
     public get model(): any {
         return this.selected == undefined ? this.internalValue : this.selected;
     }
@@ -91,6 +95,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     private scrollToSelected(): void {
         this.$children.forEach(element => {
             if (element.$props.value === this.selected) {
+
                 (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
 
                 if (this.skin == MNavbarSkin.Light) {
@@ -117,7 +122,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Watch('selected')
     private setAndUpdate(value): void {
         this.internalValue = value;
-        this.scrollToSelected();
+        // this.scrollToSelected();
     }
 
     private setupScrolllH(): void {
