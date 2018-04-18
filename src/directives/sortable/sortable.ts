@@ -5,7 +5,7 @@ import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
 import { MDroppable, MDropEvent, MDropEventNames, MDropInfo } from '../droppable/droppable';
 import tabPanel from 'src/components/tab-panel/tab-panel';
 import { MDOMPlugin, MElementPlugin } from '../domPlugin';
-import { getVNodeAttributeValue } from '../../utils/vue/directive';
+import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
 import { isInElement, mousePositionElement, RelativeMousePos, mousePositionDocument } from '../../utils/mouse/mouse';
 import { MDroppableGroup } from '../droppable/droppable-group';
 
@@ -137,6 +137,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
                         MDOMPlugin.detach(MDroppable, currentElement);
                     }
                 }
+                if (mutation.addedNodes) { this.attachChilds(); }
             }
         });
     }
@@ -265,12 +266,13 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
         const sortEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { sortInfo });
         customEvent.initCustomEvent(eventName, true, true, event.detail);
-        this.element.dispatchEvent(sortEvent);
+        dispatchEvent(this.element, eventName, sortEvent);
 
         if (MSortable.fromSortContainer && MSortable.fromSortContainer !== MSortable.activeSortContainer) {
             MSortable.fromSortContainer.onRemove(event);
         }
 
+        // TODO: review => Verify this line is useful.
         this.onChildDragEnd(event);
     }
 
@@ -281,7 +283,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
             const sortInfo: MSortInfo = Object.assign(event.dropInfo, { oldPosition: oldIndex, newPosition: -1 });
             const sortEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { sortInfo });
             customEvent.initCustomEvent(MSortEventNames.OnRemove, true, true, event.detail);
-            this.element.dispatchEvent(sortEvent);
+            dispatchEvent(this.element, MSortEventNames.OnRemove, sortEvent);
         }
     }
 
@@ -418,9 +420,6 @@ const Directive: DirectiveOptions = {
         MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(node));
-    },
-    componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {

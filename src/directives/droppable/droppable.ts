@@ -2,7 +2,7 @@ import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE } from '../directive-names';
 import { MDraggable } from '../draggable/draggable';
 import { MElementPlugin, MDOMPlugin } from '../domPlugin';
-import { getVNodeAttributeValue } from '../../utils/vue/directive';
+import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
 import { mousePositionElement, isInElement } from '../../utils/mouse/mouse';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
 
@@ -175,7 +175,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
 
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
         customEvent.initCustomEvent(name, true, true, event);
-        this.element.dispatchEvent(Object.assign(customEvent, {
+        dispatchEvent(this.element, name, Object.assign(customEvent, {
             clientX: event.clientX,
             clientY: event.clientY,
             relatedTarget: event.relatedTarget,
