@@ -12,6 +12,7 @@ import { MDroppableGroup } from '../droppable/droppable-group';
 export interface MSortableOptions {
     items: any[];
     acceptedActions: string[];
+    canSort?: any;
 }
 
 export enum MSortEventNames {
@@ -99,31 +100,40 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     public attach(): void {
-        this.observer = new MutationObserver(mutations => this.manageMutation(mutations));
-        this.observer.observe(this.element, { childList: true });
-
         this.setOptions(this.options);
-        const plugin = MDOMPlugin.attach(MDroppable, this.element, {
-            acceptedActions: this.options.acceptedActions,
-            canDrop: true
-        });
-        plugin.addEventListener(MDropEventNames.OnDrop, (event: MDropEvent) => this.onDrop(event));
-        plugin.addEventListener(MDropEventNames.OnDragEnter, (event: MDropEvent) => this.onDragEnter(event));
-        plugin.addEventListener(MDropEventNames.OnDragLeave, (event: MDropEvent) => this.onDragLeave(event));
-        plugin.addEventListener(MDropEventNames.OnDragOver, (event: MDropEvent) => this.onDragOver(event));
+        if (this.options.canSort) {
+            this.observer = new MutationObserver(mutations => this.manageMutation(mutations));
+            this.observer.observe(this.element, { childList: true });
 
-        this.attachChilds();
+            const plugin = MDOMPlugin.attach(MDroppable, this.element, {
+                acceptedActions: this.options.acceptedActions,
+                canDrop: true
+            });
+            plugin.addEventListener(MDropEventNames.OnDrop, (event: MDropEvent) => this.onDrop(event));
+            plugin.addEventListener(MDropEventNames.OnDragEnter, (event: MDropEvent) => this.onDragEnter(event));
+            plugin.addEventListener(MDropEventNames.OnDragLeave, (event: MDropEvent) => this.onDragLeave(event));
+            plugin.addEventListener(MDropEventNames.OnDragOver, (event: MDropEvent) => this.onDragOver(event));
+
+            this.attachChilds();
+        } else {
+            MDOMPlugin.detach(MSortable, this.element);
+        }
     }
 
     public update(options: MSortableOptions): void {
         this.setOptions(options);
-        this.attachChilds();
+        if (this.options.canSort) {
+            this.attachChilds();
+        } else {
+            MDOMPlugin.detach(MSortable, this.element);
+        }
     }
 
     public detach(): void {
-        this.observer.disconnect();
-        MDOMPlugin.detach(MDroppable, this.element);
+        if (this.observer) { this.observer.disconnect(); }
+        this.doCleanUp();
         this.detachChilds();
+        MDOMPlugin.detach(MDroppable, this.element);
     }
 
     private manageMutation(mutations: MutationRecord[]): void {
@@ -143,6 +153,8 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private setOptions(value: MSortableOptions): void {
+        if (value.canSort === undefined) { value.canSort = true; }
+
         const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
         let acceptedActions: string[];
         if (!value.acceptedActions || !value.acceptedActions.length) {
@@ -409,18 +421,19 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 }
 
-const extractVnodeAttributes: (node: VNode) => MSortableOptions = (node: VNode) => {
+const extractVnodeAttributes: (binding: VNodeDirective, node: VNode) => MSortableOptions = (binding: VNodeDirective, node: VNode) => {
     return {
         items: getVNodeAttributeValue(node, 'items'),
-        acceptedActions: getVNodeAttributeValue(node, 'accepted-actions')
+        acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
+        canSort: binding.value
     };
 };
 const Directive: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(node));
+        MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(binding, node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(node));
+        MDOMPlugin.attachUpdate(MSortable, element, extractVnodeAttributes(binding, node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MSortable, element);

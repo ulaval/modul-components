@@ -53,14 +53,20 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     public attach(): void {
-        if (this.options.canDrop) { this.element.classList.add(MDroppableClassNames.Droppable); }
-
-        MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
         this.setOptions(this.options);
-        this.addEventListener('dragenter', (event: DragEvent) => this.onDragEnter(event));
-        this.addEventListener('dragleave', (event: DragEvent) => this.onDragLeave(event));
-        this.addEventListener('dragover', (event: DragEvent) => this.onDragOver(event));
-        this.bindDropEvent(this.options.canDrop);
+        if (this.options.canDrop) {
+            this.element.classList.add(MDroppableClassNames.Droppable);
+            MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
+            this.addEventListener('dragenter', (event: DragEvent) => this.onDragEnter(event));
+            this.addEventListener('dragleave', (event: DragEvent) => this.onDragLeave(event));
+
+            // Firefox doesn't handle dragLeave correctly.  We have to declare dragexit AND dragleave for that reason.
+            this.addEventListener('dragexit', (event: DragEvent) => this.onDragLeave(event));
+            this.addEventListener('dragover', (event: DragEvent) => this.onDragOver(event));
+            this.addEventListener('drop', (event: DragEvent) => this.onDrop(event));
+        } else {
+            MDOMPlugin.detach(MDroppable, this.element);
+        }
     }
 
     public update(options: MDroppableOptions): void {
@@ -68,9 +74,8 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         if (this.options.canDrop) {
             this.element.classList.add(MDroppableClassNames.Droppable);
         } else {
-            this.element.classList.remove(MDroppableClassNames.Droppable);
+            MDOMPlugin.detach(MDroppable, this.element);
         }
-        this.bindDropEvent(this.options.canDrop);
     }
 
     public detach(): void {
@@ -87,15 +92,9 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     private setOptions(value: MDroppableOptions): void {
+        if (value.canDrop === undefined) { value.canDrop = true; }
         this._options = value;
         this._options.acceptedActions = this.options.canDrop ? this.options.acceptedActions || [DEFAULT_ACTION] : [];
-    }
-
-    private bindDropEvent(canDrop: boolean | undefined): void {
-        this.removeEventListener('drop');
-        if (canDrop) {
-            this.addEventListener('drop', (event: DragEvent) => this.onDrop(event));
-        }
     }
 
     private onDragLeave(event: DragEvent): void {
@@ -141,7 +140,6 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
             event.dataTransfer.dropEffect = MDropEffect.MMove;
             className = MDroppableClassNames.CanDrop;
         } else {
-            event.preventDefault();
             event.dataTransfer.dropEffect = MDropEffect.MNone;
             className = MDroppableClassNames.CantDrop;
         }
@@ -229,10 +227,10 @@ const Directive: DirectiveOptions = {
         MDOMPlugin.attach(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.update(MDroppable, element, extractVnodeAttributes(binding, node));
+        MDOMPlugin.attachUpdate(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.update(MDroppable, element, extractVnodeAttributes(binding, node));
+        MDOMPlugin.attachUpdate(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MDroppable, element);

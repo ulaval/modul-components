@@ -29,14 +29,6 @@ export class MDOMPlugin {
         return plugin;
     }
 
-    public static update<PluginType extends MElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
-        defaultMountPoint: string;
-    }, element: HTMLElement, options: OptionsType): PluginType {
-        const plugin: PluginType = element[constructorFunction.defaultMountPoint] as PluginType;
-        if (plugin) { plugin.update(options); }
-        return plugin;
-    }
-
     public static attachUpdate<PluginType extends MElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
@@ -56,6 +48,14 @@ export class MDOMPlugin {
             plugin.detach();
             delete element[constructorFunction.defaultMountPoint];
         }
+    }
+
+    private static update<PluginType extends MElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+        defaultMountPoint: string;
+    }, element: HTMLElement, options: OptionsType): PluginType {
+        const plugin: PluginType = element[constructorFunction.defaultMountPoint] as PluginType;
+        if (plugin) { plugin.update(options); }
+        return plugin;
     }
 }
 export abstract class MElementPlugin<OptionsType> {
