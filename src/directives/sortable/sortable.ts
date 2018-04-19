@@ -100,12 +100,12 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     public attach(mount: MountFunction): void {
+        this.observer = new MutationObserver(mutations => this.manageMutation(mutations));
+        this.observer.observe(this.element, { childList: true });
         this.setOptions(this.options);
+        this.attachChilds();
         if (this.options.canSort) {
             mount(() => {
-                this.observer = new MutationObserver(mutations => this.manageMutation(mutations));
-                this.observer.observe(this.element, { childList: true });
-
                 const plugin = MDOMPlugin.attach(MDroppable, this.element, {
                     acceptedActions: this.options.acceptedActions,
                     canDrop: true
@@ -114,8 +114,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
                 plugin.addEventListener(MDropEventNames.OnDragEnter, (event: MDropEvent) => this.onDragEnter(event));
                 plugin.addEventListener(MDropEventNames.OnDragLeave, (event: MDropEvent) => this.onDragLeave(event));
                 plugin.addEventListener(MDropEventNames.OnDragOver, (event: MDropEvent) => this.onDragOver(event));
-
-                this.attachChilds();
             });
         }
     }
@@ -130,7 +128,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     public detach(): void {
-        if (this.observer) { this.observer.disconnect(); }
+        this.observer.disconnect();
         this.doCleanUp();
         this.detachChilds();
         MDOMPlugin.detach(MDroppable, this.element);
@@ -171,6 +169,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private attachChilds(): void {
+        console.log('attaching childs...');
         let itemCounter = 0;
         const sortableGroup = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
         for (let i = 0; i < this.element.children.length; i++) {
@@ -185,7 +184,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
                     action: !grouping ? MOVE_ACTION : MOVE_GROUP_ACTION,
                     dragData: this.options.items[itemCounter++],
                     grouping,
-                    canDrag: true
+                    canDrag: this.options.canSort
                 });
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragEnd);
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragStart);
@@ -194,7 +193,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
 
                 MDOMPlugin.attachUpdate(MDroppable, currentElement, {
                     acceptedActions: this.options.acceptedActions,
-                    canDrop: true
+                    canDrop: this.options.canSort
                 });
             }
         }
@@ -212,7 +211,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         if (element) {
             MDOMPlugin.attachUpdate(MDroppable, element, {
                 acceptedActions: this.options.acceptedActions,
-                canDrop: true
+                canDrop: this.options.canSort
             });
         }
 
