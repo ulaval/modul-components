@@ -60,7 +60,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
                 this.addEventListener('mousedown', (event: DragEvent) => this.element.classList.add(MDraggableClassNames.Grabbing));
                 this.addEventListener('mouseup', (event: DragEvent) => this.cleanupCssClasses());
                 this.addEventListener('touchmove', () => {});
-                MDOMPlugin.attachUpdate(MRemoveUserSelect, this.element, true);
+                MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
             });
         }
     }
@@ -170,13 +170,10 @@ const extractVnodeAttributes: (binding: VNodeDirective, node: VNode) => MDraggab
 };
 const Directive: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MDraggable, element, extractVnodeAttributes(binding, node));
+        MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(binding, node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MDraggable, element, extractVnodeAttributes(binding, node));
-    },
-    componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MDraggable, element, extractVnodeAttributes(binding, node));
+        MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(binding, node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MDraggable, element);

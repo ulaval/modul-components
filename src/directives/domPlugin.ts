@@ -1,20 +1,4 @@
 export class MDOMPlugin {
-    public static attach<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
-        defaultMountPoint: string;
-        new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement, options: OptionsType): IMElementPlugin<OptionsType> {
-        let plugin: IMElementPlugin<OptionsType> = element[constructorFunction.defaultMountPoint] as IMElementPlugin<OptionsType>;
-        if (plugin) { MDOMPlugin.detach(constructorFunction, element); }
-
-        plugin = new constructorFunction(element, options);
-        if (plugin.status === MElementPluginStatus.Mounted) {
-            element[constructorFunction.defaultMountPoint] = plugin;
-            return plugin;
-        } else {
-            return new NullObjectMElementPlugin(options);
-        }
-    }
-
     public static get<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
@@ -35,14 +19,14 @@ export class MDOMPlugin {
         return plugin;
     }
 
-    public static attachUpdate<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+    public static attach<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
     }, element: HTMLElement, options: OptionsType): IMElementPlugin<OptionsType> {
         if (MDOMPlugin.get(constructorFunction, element)) {
-            return MDOMPlugin.update(constructorFunction, element, options);
+            return MDOMPlugin.internalUpdate(constructorFunction, element, options);
         } else {
-            return MDOMPlugin.attach(constructorFunction, element, options);
+            return MDOMPlugin.internalAttach(constructorFunction, element, options);
         }
     }
 
@@ -57,7 +41,23 @@ export class MDOMPlugin {
         }
     }
 
-    private static update<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+    private static internalAttach<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+        defaultMountPoint: string;
+        new (element: HTMLElement, options: OptionsType): PluginType;
+    }, element: HTMLElement, options: OptionsType): IMElementPlugin<OptionsType> {
+        let plugin: IMElementPlugin<OptionsType> = element[constructorFunction.defaultMountPoint] as IMElementPlugin<OptionsType>;
+        if (plugin) { MDOMPlugin.detach(constructorFunction, element); }
+
+        plugin = new constructorFunction(element, options);
+        if (plugin.status === MElementPluginStatus.Mounted) {
+            element[constructorFunction.defaultMountPoint] = plugin;
+            return plugin;
+        } else {
+            return new NullObjectMElementPlugin(options);
+        }
+    }
+
+    private static internalUpdate<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
     }, element: HTMLElement, options: OptionsType): PluginType {

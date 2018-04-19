@@ -25,7 +25,7 @@ const Directive: DirectiveOptions = {
         MDOMPlugin.attach(MDroppableGroup, element, binding.value);
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MDroppableGroup, element, binding.value);
+        MDOMPlugin.attach(MDroppableGroup, element, binding.value);
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MDroppableGroup, element);

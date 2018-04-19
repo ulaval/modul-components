@@ -227,10 +227,10 @@ const Directive: DirectiveOptions = {
         MDOMPlugin.attach(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MDroppable, element, extractVnodeAttributes(binding, node));
+        MDOMPlugin.attach(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     componentUpdated(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MDroppable, element, extractVnodeAttributes(binding, node));
+        MDOMPlugin.attach(MDroppable, element, extractVnodeAttributes(binding, node));
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MDroppable, element);

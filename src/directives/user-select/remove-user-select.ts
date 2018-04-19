@@ -34,7 +34,7 @@ const Directive: DirectiveOptions = {
         MDOMPlugin.attach(MRemoveUserSelect, element, binding.value);
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attachUpdate(MRemoveUserSelect, element, binding.value);
+        MDOMPlugin.attach(MRemoveUserSelect, element, binding.value);
     },
     unbind(element: HTMLElement, binding: VNodeDirective): void {
         MDOMPlugin.detach(MRemoveUserSelect, element);
