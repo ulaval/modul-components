@@ -237,7 +237,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         event.stopPropagation();
 
         const newContainer = MDroppable.currentHoverDroppable ? MDOMPlugin.getRecursive(MSortable, MDroppable.currentHoverDroppable.element) : undefined;
-        if (!newContainer && !isInElement(event, this.element)) {
+        if (!newContainer || !isInElement(event, this.element)) {
             this.doCleanUp();
             MSortable.activeSortContainer = undefined;
         }
