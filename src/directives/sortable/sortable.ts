@@ -169,7 +169,6 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
     }
 
     private attachChilds(): void {
-        console.log('attaching childs...');
         let itemCounter = 0;
         const sortableGroup = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
         for (let i = 0; i < this.element.children.length; i++) {

@@ -96,6 +96,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
             MDroppable.previousHoverContainer = this;
             MDroppable.currentHoverDroppable = undefined;
         }
+
         this.cleanupCssClasses();
         this.dispatchEvent(event, MDropEventNames.OnDragLeave);
     }
@@ -107,9 +108,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     }
 
     private onDragLeave(event: DragEvent): void {
-        event.stopPropagation();
-        const leaveContainer = MDOMPlugin.getRecursive(MDroppable, event.target as HTMLElement);
-        this.leaveDroppable(event);
+        if (this.isLeavingDroppable(event, this)) { this.leaveDroppable(event); }
     }
 
     private isLeavingDroppable(event: DragEvent, droppable?: MDroppable): boolean {

@@ -46,7 +46,6 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     }
 
     public attach(mount: MountFunction): void {
-        console.log('attaching', this.element);
         this.attachDragImage();
         if (this.options.canDrag === undefined) { this.options.canDrag = true; }
         if (this.options.canDrag) {
