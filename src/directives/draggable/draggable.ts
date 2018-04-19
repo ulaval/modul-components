@@ -116,6 +116,10 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
 
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
         if (dragImage) { dragImage.hidden = true; }
+
+        // Fix for IE / Edge.  clientX / clientY don't appear to be out of element on dragLeave.
+        // We can't detect whether we're leaving de droppable for real therefore we have to force leave onDragEnd.
+        if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.leaveDroppable(event); }
     }
 
     private onDragStart(event: DragEvent): void {
