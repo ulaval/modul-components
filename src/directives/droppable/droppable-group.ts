@@ -1,13 +1,21 @@
-import { MElementPlugin, MDOMPlugin } from '../domPlugin';
+import { MElementPlugin, MDOMPlugin, MountFunction } from '../domPlugin';
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE_GROUP } from '../directive-names';
 
 export class MDroppableGroup extends MElementPlugin<string> {
     public static defaultMountPoint: string = '__mdroppablegroup__';
 
-    public attach(): void {}
+    public attach(mount: MountFunction): void {
+        if (this.options) {
+            mount(() => {});
+        }
+    }
     public update(options: string): void {
-        this._options = options;
+        if (options) {
+            this._options = options;
+        } else {
+            MDOMPlugin.detach(MDroppableGroup, this.element);
+        }
     }
     public detach(): void {}
 }

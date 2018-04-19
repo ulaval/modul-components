@@ -1,20 +1,26 @@
-import { MElementPlugin, MDOMPlugin } from '../domPlugin';
+import { MElementPlugin, MDOMPlugin, MountFunction } from '../domPlugin';
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { REMOVE_USER_SELECT } from '../directive-names';
 
 export class MRemoveUserSelect extends MElementPlugin<boolean> {
     public static defaultMountPoint: string = '__mremoveuserselect__';
 
-    public attach(): void {
+    public attach(mount: MountFunction): void {
         if (this.options) {
-            this.addEventListener('onmouseover', (event: Event) => { event.preventDefault(); });
+            mount(() => {
+                this.addEventListener('onmouseover', (event: Event) => { event.preventDefault(); });
 
-            this.element.style.webkitUserSelect = 'none';
-            this.element.style.msUserSelect = 'none';
-            this.element.style.userSelect = 'none';
+                this.element.style.webkitUserSelect = 'none';
+                this.element.style.msUserSelect = 'none';
+                this.element.style.userSelect = 'none';
+            });
         }
     }
-    public update(options: string): void {}
+    public update(options: string): void {
+        if (!this.options) {
+            MDOMPlugin.detach(MRemoveUserSelect, this.element);
+        }
+    }
     public detach(): void {
         this.removeAllEvents();
         this.element.style.userSelect = '';

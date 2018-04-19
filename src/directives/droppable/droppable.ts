@@ -1,7 +1,7 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE } from '../directive-names';
 import { MDraggable } from '../draggable/draggable';
-import { MElementPlugin, MDOMPlugin } from '../domPlugin';
+import { MElementPlugin, MDOMPlugin, MountFunction } from '../domPlugin';
 import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
 import { mousePositionElement, isInElement } from '../../utils/mouse/mouse';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
@@ -52,20 +52,20 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         super(element, options);
     }
 
-    public attach(): void {
+    public attach(mount: MountFunction): void {
         this.setOptions(this.options);
         if (this.options.canDrop) {
-            this.element.classList.add(MDroppableClassNames.Droppable);
-            MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
-            this.addEventListener('dragenter', (event: DragEvent) => this.onDragEnter(event));
-            this.addEventListener('dragleave', (event: DragEvent) => this.onDragLeave(event));
+            mount(() => {
+                this.element.classList.add(MDroppableClassNames.Droppable);
+                MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
+                this.addEventListener('dragenter', (event: DragEvent) => this.onDragEnter(event));
+                this.addEventListener('dragleave', (event: DragEvent) => this.onDragLeave(event));
 
-            // Firefox doesn't handle dragLeave correctly.  We have to declare dragexit AND dragleave for that reason.
-            this.addEventListener('dragexit', (event: DragEvent) => this.onDragLeave(event));
-            this.addEventListener('dragover', (event: DragEvent) => this.onDragOver(event));
-            this.addEventListener('drop', (event: DragEvent) => this.onDrop(event));
-        } else {
-            MDOMPlugin.detach(MDroppable, this.element);
+                // Firefox doesn't handle dragLeave correctly.  We have to declare dragexit AND dragleave for that reason.
+                this.addEventListener('dragexit', (event: DragEvent) => this.onDragLeave(event));
+                this.addEventListener('dragover', (event: DragEvent) => this.onDragOver(event));
+                this.addEventListener('drop', (event: DragEvent) => this.onDrop(event));
+            });
         }
     }
 
@@ -108,7 +108,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
 
     private onDragLeave(event: DragEvent): void {
         event.stopPropagation();
-        const leaveContainer: MDroppable | undefined = MDOMPlugin.getRecursive(MDroppable, event.target as HTMLElement);
+        const leaveContainer = MDOMPlugin.getRecursive(MDroppable, event.target as HTMLElement);
         this.leaveDroppable(event);
     }
 

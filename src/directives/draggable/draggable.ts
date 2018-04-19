@@ -1,6 +1,6 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DRAGGABLE } from '../directive-names';
-import { MElementPlugin, MDOMPlugin } from '../domPlugin';
+import { MElementPlugin, MDOMPlugin, MountFunction } from '../domPlugin';
 import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
 import { MDroppable, MDroppableClassNames } from '../droppable/droppable';
 import { clearUserSelection } from '../../utils/selection/selection';
@@ -45,30 +45,35 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
         this.element.classList.remove(MDraggableClassNames.Grabbing);
     }
 
-    public attach(): void {
-        this.update(this.options);
+    public attach(mount: MountFunction): void {
+        this.attachDragImage();
+        if (this.options.canDrag === undefined) { this.options.canDrag = true; }
+        if (this.options.canDrag) {
+            mount(() => {
+                this.element.classList.add(MDraggableClassNames.Draggable);
+
+                this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
+                this.element.draggable = true;
+
+                this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
+                this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
+                this.addEventListener('mousedown', (event: DragEvent) => this.element.classList.add(MDraggableClassNames.Grabbing));
+                this.addEventListener('mouseup', (event: DragEvent) => this.cleanupCssClasses());
+                this.addEventListener('touchmove', () => {});
+                MDOMPlugin.attachUpdate(MRemoveUserSelect, this.element, true);
+            });
+        }
     }
 
     public update(options: MDraggableOptions): void {
         if (options.canDrag === undefined) { options.canDrag = true; }
         this._options = options;
         if (this.options.canDrag) {
-            this.element.classList.add(MDraggableClassNames.Draggable);
-
             this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
-            this.element.draggable = true;
             this.attachDragImage();
-
-            this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
-            this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-            this.addEventListener('mousedown', (event: DragEvent) => this.element.classList.add(MDraggableClassNames.Grabbing));
-            this.addEventListener('mouseup', (event: DragEvent) => this.cleanupCssClasses());
-            this.addEventListener('touchmove', () => {});
         } else {
             MDOMPlugin.detach(MDraggable, this.element);
         }
-
-        MDOMPlugin.attachUpdate(MRemoveUserSelect, this.element, true);
     }
 
     public detach(): void {
@@ -98,13 +103,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
     private detachDragImage(): void {
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
         if (dragImage) {
-            dragImage.style.left = '';
-            dragImage.style.top = '';
-            dragImage.style.width = '';
-            dragImage.style.position = '';
-            dragImage.style.overflow = '';
-            dragImage.style.zIndex = '';
-            dragImage.hidden = false;
+            dragImage.hidden = true;
         }
     }
 
