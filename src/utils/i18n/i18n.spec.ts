@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import I18nPlugin, { Messages, ENGLISH, I18nPluginOptions } from './i18n';
+import I18nPlugin, { Messages, ENGLISH, I18nPluginOptions, FORMAT_MODE } from './i18n';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
 
@@ -54,7 +54,7 @@ describe('i18n plugin', () => {
     describe('with formatOption = "vsprintf"', () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {
-                formatMode: 'vsprintf'
+                formatMode: FORMAT_MODE.VSSPRINTF
             };
 
             resetModulPlugins();
@@ -69,7 +69,7 @@ describe('i18n plugin', () => {
     describe('with formatOption = "sprintf"', () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {
-                formatMode: 'sprintf'
+                formatMode: FORMAT_MODE.SPRINTF
             };
 
             resetModulPlugins();
@@ -84,7 +84,7 @@ describe('i18n plugin', () => {
     describe('with the possibility to pass nb and modifier parameters inside the parameter param', () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {
-                formatMode: 'sprintf'
+                formatMode: FORMAT_MODE.SPRINTF
             };
 
             resetModulPlugins();
