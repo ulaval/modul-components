@@ -465,5 +465,4 @@ export function normalizeString(str: string): string {
     return result;
 }
 
-export const sprintf = require('sprintf-js').sprintf;
-export const vsprintf = require('sprintf-js').vsprintf;
+export { sprintf, vsprintf } from 'sprintf-js';
