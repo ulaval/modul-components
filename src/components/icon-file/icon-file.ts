@@ -108,7 +108,7 @@ export class MIconFile extends Vue {
     private get spriteId(): string {
         let cleanExtension;
         if (this.extension) {
-            cleanExtension = this.extension.split('.').join('').toLowerCase();
+            cleanExtension = this.extension.replace('.', '').toLowerCase();
         }
         return FILES_ASSOCIATIONS[cleanExtension] || GROUP_OTHER;
     }
