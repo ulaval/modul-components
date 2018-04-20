@@ -1,5 +1,5 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-import { I_18_N } from '../directive-names';
+import { I18N_NAME } from '../directive-names';
 import { Messages } from '../../utils/i18n/i18n';
 
 const I18nDirective: DirectiveOptions = {
@@ -32,7 +32,7 @@ const I18nDirective: DirectiveOptions = {
 
 const I18nDirectivePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(I_18_N, I18nDirective);
+        v.directive(I18N_NAME, I18nDirective);
     }
 };
 

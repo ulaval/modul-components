@@ -1,6 +1,6 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
-import { TEXTAREA_AUTO_HEIGHT } from '../directive-names';
+import { TEXTAREA_AUTO_HEIGHT_NAME } from '../directive-names';
 
 interface HTMLTextAreaElementExt extends HTMLTextAreaElement {
     mTextAreaAutoSizeData: MTextAreaAutoSizeData;
@@ -69,7 +69,7 @@ const MTextAreaAutoSizeDirective: DirectiveOptions = {
 
 const TextAreaAutoHeightPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(TEXTAREA_AUTO_HEIGHT, MTextAreaAutoSizeDirective);
+        v.directive(TEXTAREA_AUTO_HEIGHT_NAME, MTextAreaAutoSizeDirective);
     }
 };
 
