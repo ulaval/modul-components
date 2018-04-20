@@ -36,12 +36,13 @@ export const TYPE_GTAR: string = 'gtar';
 export const TYPE_GZ: string = 'gz';
 
 // EXTENSIONS GROUPS
-export const GROUP_PDF: string = 'modulsvg-file-pdf';
-export const GROUP_DOC: string = 'modulsvg-file-other';
-export const GROUP_TEXT: string = 'modulsvg-file-other';
-export const GROUP_IMAGE: string = 'modulsvg-file-other';
-export const GROUP_VIDEO: string = 'modulsvg-file-other';
-export const GROUP_ARCHIVE: string = 'modulsvg-file-other';
+export const GROUP_PDF: string = 'm-svg__file-pdf';
+export const GROUP_DOC: string = 'm-svg__file-doc';
+export const GROUP_TEXT: string = 'm-svg__file-text';
+export const GROUP_IMAGE: string = 'm-svg__file-image';
+export const GROUP_VIDEO: string = 'm-svg__file-video';
+export const GROUP_ARCHIVE: string = 'm-svg__file-archive';
+export const GROUP_OTHER: string = 'm-svg__file-other';
 
 export type FileGroup = {
     [key: string]: string
@@ -95,85 +96,7 @@ export class MIconFile extends Vue {
         if (this.extension) {
             cleanExtension = this.extension.split('.').join('').toLowerCase();
         }
-        let id: string = '';
-        switch (cleanExtension) {
-            case TYPE_PDF:
-                id = FILES_ASSOCIATIONS[TYPE_PDF];
-                break;
-            case TYPE_DOC:
-                id = FILES_ASSOCIATIONS[TYPE_DOC];
-                break;
-            case TYPE_DOCX:
-                id = FILES_ASSOCIATIONS[TYPE_DOCX];
-                break;
-            case TYPE_TXT:
-                id = FILES_ASSOCIATIONS[TYPE_TXT];
-                break;
-            case TYPE_CSV:
-                id = FILES_ASSOCIATIONS[TYPE_CSV];
-                break;
-            case TYPE_BMP:
-                id = FILES_ASSOCIATIONS[TYPE_BMP];
-                break;
-            case TYPE_EPS:
-                id = FILES_ASSOCIATIONS[TYPE_EPS];
-                break;
-            case TYPE_GIF:
-                id = FILES_ASSOCIATIONS[TYPE_GIF];
-                break;
-            case TYPE_JPEG:
-                id = FILES_ASSOCIATIONS[TYPE_JPEG];
-                break;
-            case TYPE_JPG:
-                id = FILES_ASSOCIATIONS[TYPE_JPG];
-                break;
-            case TYPE_PNG:
-                id = FILES_ASSOCIATIONS[TYPE_PNG];
-                break;
-            case TYPE_TIF:
-                id = FILES_ASSOCIATIONS[TYPE_TIF];
-                break;
-            case TYPE_TIFF:
-                id = FILES_ASSOCIATIONS[TYPE_TIFF];
-                break;
-            case TYPE_PSD:
-                id = FILES_ASSOCIATIONS[TYPE_PSD];
-                break;
-            case TYPE_AI:
-                id = FILES_ASSOCIATIONS[TYPE_AI];
-                break;
-            case TYPE_INDD:
-                id = FILES_ASSOCIATIONS[TYPE_INDD];
-                break;
-            case TYPE_MPEG:
-                id = FILES_ASSOCIATIONS[TYPE_MPEG];
-                break;
-            case TYPE_MP4:
-                id = FILES_ASSOCIATIONS[TYPE_MP4];
-                break;
-            case TYPE_AVI:
-                id = FILES_ASSOCIATIONS[TYPE_AVI];
-                break;
-            case TYPE_ZIP:
-                id = FILES_ASSOCIATIONS[TYPE_ZIP];
-                break;
-            case TYPE_RAR:
-                id = FILES_ASSOCIATIONS[TYPE_RAR];
-                break;
-            case TYPE_TAR:
-                id = FILES_ASSOCIATIONS[TYPE_TAR];
-                break;
-            case TYPE_GTAR:
-                id = FILES_ASSOCIATIONS[TYPE_GTAR];
-                break;
-            case TYPE_GZ:
-                id = FILES_ASSOCIATIONS[TYPE_GZ];
-                break;
-            default:
-                id = 'modulsvg-file-other';
-                break;
-        }
-        return id;
+        return FILES_ASSOCIATIONS[cleanExtension] || GROUP_OTHER;
     }
 
     private onClick(event): void {
