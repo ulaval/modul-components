@@ -1,0 +1,20 @@
+{
+    "exemples-avec-nombre-genre": {
+        "medaille-olympique": "Le médaillé olympique",
+        "medaille-olympique.m": "Le médaillé olympique masculin",
+        "medaille-olympique.p.m": "Les médaillés olympiques masculins",
+        "medaille-olympique.p": "Les médaillés olympiques",
+        "medaille-olympique.f": "La médaillée olympique",
+        "medaille-olympique.p.f": "Les médaillées olympiques",
+        "medaille-olympique.1": "Le seul médaillé olympique",
+        "medaille-olympique.1.f": "La seule médaillée olympique",
+        "medaille-olympique.2": "Les deux seuls médaillés olympiques",
+        "medaille-olympique.2.f": "Les deux seules médaillées olympiques"
+    },
+    "exemples_avec_parametres": {
+        "decompte_athletes_olympiques_canada": "Il y a %(nbAthletes)s athlète olympique canadien.",
+        "decompte_athletes_olympiques_canada.p": "Il y a %(nbAthletes)s athlètes olympiques canadiens.",
+        "decompte_athletes_olympiques_pays": "Il y a %(nbAthletes)s athlètes olympiques et %(nbPays)s pays participants.",
+        "decompte_athletes_olympiques_pays.f": "Il y a %(nbAthletes)s femmes athlètes olympiques et %(nbPays)s pays participants."
+    }
+}

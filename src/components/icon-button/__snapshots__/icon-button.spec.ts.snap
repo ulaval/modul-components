@@ -1,64 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MIconButton should render correctly 1`] = `
-<div class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:20px;">
+<button type="button" class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:20px;">
     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
         <use xlink:href="#default" aria-hidden="true"></use>
-    </svg> <span class="m-icon-button__hidden"></span></div>
+    </svg> <span class="m-icon-button__hidden"></span></button>
 `;
 
 exports[`MIconButton should render correctly icon name when set 1`] = `
-<div class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:20px;">
+<button type="button" class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:20px;">
     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
         <use xlink:href="#clock" aria-hidden="true"></use>
-    </svg> <span class="m-icon-button__hidden"></span></div>
+    </svg> <span class="m-icon-button__hidden"></span></button>
 `;
 
 exports[`MIconButton should render correctly icon size when set 1`] = `
-<div class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:14px;">
+<button type="button" class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:14px;">
     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
         <use xlink:href="#default" aria-hidden="true"></use>
-    </svg> <span class="m-icon-button__hidden"></span></div>
+    </svg> <span class="m-icon-button__hidden"></span></button>
 `;
 
 exports[`MIconButton should render correctly selected skin: Dark 1`] = `
-<div class="m-icon-button m--is-skin-dark m--has-ripple" style="width:44px;height:44px;font-size:20px;">
+<button type="button" class="m-icon-button m--is-skin-dark m--has-ripple" style="width:44px;height:44px;font-size:20px;">
     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
         <use xlink:href="#default" aria-hidden="true"></use>
-    </svg> <span class="m-icon-button__hidden"></span></div>
+    </svg> <span class="m-icon-button__hidden"></span></button>
 `;
 
 exports[`MIconButton should render correctly selected skin: Light 1`] = `
-<div class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:20px;">
+<button type="button" class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:20px;">
     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
         <use xlink:href="#default" aria-hidden="true"></use>
-    </svg> <span class="m-icon-button__hidden"></span></div>
+    </svg> <span class="m-icon-button__hidden"></span></button>
 `;
 
 exports[`MIconButton should render correctly selected skin: Link 1`] = `
-<div class="m-icon-button m--is-skin-link m--has-ripple" style="width:44px;height:44px;font-size:20px;">
+<button type="button" class="m-icon-button m--is-skin-link m--has-ripple" style="width:44px;height:44px;font-size:20px;">
     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
         <use xlink:href="#default" aria-hidden="true"></use>
-    </svg> <span class="m-icon-button__hidden"></span></div>
+    </svg> <span class="m-icon-button__hidden"></span></button>
 `;
 
 exports[`MIconButton should render correctly selected skin: Primary 1`] = `
-<div class="m-icon-button m--is-skin-primary m--has-ripple" style="width:44px;height:44px;font-size:20px;">
+<button type="button" class="m-icon-button m--is-skin-primary m--has-ripple" style="width:44px;height:44px;font-size:20px;">
     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
         <use xlink:href="#default" aria-hidden="true"></use>
-    </svg> <span class="m-icon-button__hidden"></span></div>
+    </svg> <span class="m-icon-button__hidden"></span></button>
 `;
 
 exports[`MIconButton should render correctly selected skin: Secondary 1`] = `
-<div class="m-icon-button m--is-skin-secondary m--has-ripple" style="width:44px;height:44px;font-size:20px;">
+<button type="button" class="m-icon-button m--is-skin-secondary m--has-ripple" style="width:44px;height:44px;font-size:20px;">
     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
         <use xlink:href="#default" aria-hidden="true"></use>
-    </svg> <span class="m-icon-button__hidden"></span></div>
+    </svg> <span class="m-icon-button__hidden"></span></button>
 `;
 
 exports[`MIconButton should render correctly when button size is set 1`] = `
-<div class="m-icon-button m--is-skin-light m--has-ripple" style="width:58px;height:58px;font-size:20px;">
+<button type="button" class="m-icon-button m--is-skin-light m--has-ripple" style="width:58px;height:58px;font-size:20px;">
     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
         <use xlink:href="#default" aria-hidden="true"></use>
-    </svg> <span class="m-icon-button__hidden"></span></div>
+    </svg> <span class="m-icon-button__hidden"></span></button>
 `;

@@ -13,8 +13,7 @@
                    :required-marker="requiredMarker"
                    :width="inputStyletWidth"
                    :icon-name="iconName"
-                   @mousedown="inputOnMousedown"
-                   @mouseup="inputOnMouseup"
+                   :tag-style="tagStyle"
                    v-m-popup:popup>
         <input type="text"
                ref="input"
@@ -27,15 +26,15 @@
                @keydown.esc="inputOnKeydownEsc"
                @keydown.up.prevent="onKeydownUp"
                @keydown.down.prevent="onKeydownDown"
-               @keydown.tab="inputOnKeydownTab"
+               @keydown.tab="onKeydownTab"
                @focus="inputOnFocus"
                v-model="selectedText">
         <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
         <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="active">
-            <m-icon-button ref="arrow" icon-name="down-arrow" button-size="18px" icon-size="16px" :disabled="!active" @keydown.enter.prevent="open = active">
+            <m-icon class="m-dropdown__arrow__icon" ref="arrow" name="down-arrow" button-size="18px" icon-size="16px" :disabled="!active" @keydown.enter.prevent="open = active">
                 <m-i18n k="m-dropdown:open" v-if="!open"></m-i18n>
                 <m-i18n k="m-dropdown:close" v-if="open"></m-i18n>
-            </m-icon-button>
+            </m-icon>
         </div>
     </m-input-style>
     <m-validation-message

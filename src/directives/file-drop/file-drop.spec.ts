@@ -40,7 +40,7 @@ describe('file-drop', () => {
         );
     });
 
-    it('it should clear files when unbound', () => {
+    it('it should destroy files when unbound', () => {
         filedrop.vm.$file.destroy = jest.fn();
 
         filedrop.destroy();
@@ -50,10 +50,29 @@ describe('file-drop', () => {
         );
     });
 
+    it('it should not destroy files when unbound if keep-store modifier is set', () => {
+        const fp: Wrapper<ModulVue> = mount(
+            {
+                template: '<div v-m-file-drop.keep-store></div>'
+            },
+            { localVue: Vue }
+        );
+        fp.vm.$file.destroy = jest.fn();
+
+        fp.destroy();
+
+        expect(fp.vm.$file.destroy).not.toHaveBeenCalled();
+    });
+
     it('it should support optional $file store name argument', () => {
         filedrop = mount(
             {
-                template: '<div v-m-file-drop="unique-name"></div>'
+                template: '<div v-m-file-drop="uniqueName"></div>',
+                data: function() {
+                    return {
+                        uniqueName: 'uniqueValue'
+                    };
+                }
             },
             { localVue }
         );
@@ -63,10 +82,10 @@ describe('file-drop', () => {
         filedrop.find('div').trigger('drop', dropEvent);
         expect(filedrop.vm.$file.add).toHaveBeenCalledWith(
             dropEvent.dataTransfer.files,
-            'unique-name'
+            'uniqueValue'
         );
 
         filedrop.destroy();
-        expect(filedrop.vm.$file.destroy).toHaveBeenCalledWith('unique-name');
+        expect(filedrop.vm.$file.destroy).toHaveBeenCalledWith('uniqueValue');
     });
 });

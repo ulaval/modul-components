@@ -255,9 +255,7 @@ $m-file-upload-max-height--s: 72px;
         }
     }
 
-    &__footer {
-        &__cancel {
-            margin-left: $m-margin;
-        }
+    &__footer-cancel {
+        margin-left: $m-margin;
     }
 }

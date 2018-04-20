@@ -54,6 +54,12 @@ export class MTextfield extends ModulVue {
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
 
+    protected created(): void {
+        if (!this.$i18n) {
+            throw new Error('<m-text-field> -> this.$i18n is undefined, you must install the i18n plugin.');
+        }
+    }
+
     protected mounted(): void {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
