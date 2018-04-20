@@ -1,4 +1,4 @@
-import { MElementPlugin, MDOMPlugin, MountFunction } from '../domPlugin';
+import { MElementPlugin, MDOMPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE_GROUP } from '../directive-names';
 
@@ -10,11 +10,9 @@ export class MDroppableGroup extends MElementPlugin<string> {
             mount(() => {});
         }
     }
-    public update(options: string): void {
+    public update(options: string, refresh: RefreshFunction): void {
         if (options) {
-            this._options = options;
-        } else {
-            MDOMPlugin.detach(MDroppableGroup, this.element);
+            refresh(() => this._options = options);
         }
     }
     public detach(): void {}

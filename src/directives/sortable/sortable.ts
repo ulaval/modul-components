@@ -4,7 +4,7 @@ import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
 import { MDroppable, MDropEvent, MDropEventNames, MDropInfo } from '../droppable/droppable';
 import tabPanel from 'src/components/tab-panel/tab-panel';
-import { MDOMPlugin, MElementPlugin, IMElementPlugin, MountFunction } from '../domPlugin';
+import { MDOMPlugin, MElementPlugin, IMElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
 import { isInElement, mousePositionElement, RelativeMousePos, mousePositionDocument } from '../../utils/mouse/mouse';
 import { MDroppableGroup } from '../droppable/droppable-group';
@@ -118,12 +118,10 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
         }
     }
 
-    public update(options: MSortableOptions): void {
+    public update(options: MSortableOptions, refresh: RefreshFunction): void {
         this.setOptions(options);
         if (this.options.canSort) {
-            this.attachChilds();
-        } else {
-            MDOMPlugin.detach(MSortable, this.element);
+            refresh(() => this.attachChilds());
         }
     }
 
@@ -182,6 +180,7 @@ export class MSortable extends MElementPlugin<MSortableOptions> {
             } else {
                 const draggableGroup = MDOMPlugin.get(MDroppableGroup, currentElement);
                 const grouping = !sortableGroup ? draggableGroup ? draggableGroup.options : undefined : undefined;
+
                 const draggablePlugin = MDOMPlugin.attach(MDraggable, currentElement, {
                     action: !grouping ? MOVE_ACTION : MOVE_GROUP_ACTION,
                     dragData: this.options.items[itemCounter++],

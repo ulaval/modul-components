@@ -1,4 +1,4 @@
-import { MElementPlugin, MDOMPlugin, MountFunction } from '../domPlugin';
+import { MElementPlugin, MDOMPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { REMOVE_USER_SELECT } from '../directive-names';
 
@@ -16,9 +16,9 @@ export class MRemoveUserSelect extends MElementPlugin<boolean> {
             });
         }
     }
-    public update(options: string): void {
-        if (!this.options) {
-            MDOMPlugin.detach(MRemoveUserSelect, this.element);
+    public update(options: string, refresh: RefreshFunction): void {
+        if (this.options) {
+            refresh(() => {});
         }
     }
     public detach(): void {

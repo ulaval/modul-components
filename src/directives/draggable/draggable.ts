@@ -1,6 +1,6 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DRAGGABLE } from '../directive-names';
-import { MElementPlugin, MDOMPlugin, MountFunction } from '../domPlugin';
+import { MElementPlugin, MDOMPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
 import { MDroppable, MDroppableClassNames } from '../droppable/droppable';
 import { clearUserSelection } from '../../utils/selection/selection';
@@ -65,14 +65,14 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
         }
     }
 
-    public update(options: MDraggableOptions): void {
+    public update(options: MDraggableOptions, refresh: RefreshFunction): void {
         if (options.canDrag === undefined) { options.canDrag = true; }
         this._options = options;
         if (this.options.canDrag) {
-            this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
-            this.attachDragImage();
-        } else {
-            MDOMPlugin.detach(MDraggable, this.element);
+            refresh(() => {
+                this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
+                this.attachDragImage();
+            });
         }
     }
 
@@ -170,7 +170,7 @@ const extractVnodeAttributes: (binding: VNodeDirective, node: VNode) => MDraggab
 };
 const Directive: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(binding, node));
+        const test = MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(binding, node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(binding, node));

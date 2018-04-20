@@ -1,7 +1,7 @@
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE } from '../directive-names';
 import { MDraggable } from '../draggable/draggable';
-import { MElementPlugin, MDOMPlugin, MountFunction } from '../domPlugin';
+import { MElementPlugin, MDOMPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
 import { mousePositionElement, isInElement } from '../../utils/mouse/mouse';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
@@ -69,12 +69,10 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
         }
     }
 
-    public update(options: MDroppableOptions): void {
+    public update(options: MDroppableOptions, refresh: RefreshFunction): void {
         this.setOptions(this._options = options);
         if (this.options.canDrop) {
-            this.element.classList.add(MDroppableClassNames.Droppable);
-        } else {
-            MDOMPlugin.detach(MDroppable, this.element);
+            refresh(() => { this.element.classList.add(MDroppableClassNames.Droppable); });
         }
     }
 

@@ -1,3 +1,6 @@
+export type MountFunction = (callback: MountCallback) => void;
+export type RefreshFunction = (callback: MountCallback) => void;
+export type MountCallback = () => void;
 export class MDOMPlugin {
     public static get<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
@@ -49,7 +52,7 @@ export class MDOMPlugin {
         if (plugin) { MDOMPlugin.detach(constructorFunction, element); }
 
         plugin = new constructorFunction(element, options);
-        if (plugin.status === MElementPluginStatus.Mounted) {
+        if (this.mountPlugin(plugin)) {
             element[constructorFunction.defaultMountPoint] = plugin;
             return plugin;
         } else {
@@ -60,20 +63,42 @@ export class MDOMPlugin {
     private static internalUpdate<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement, options: OptionsType): PluginType {
+    }, element: HTMLElement, options: OptionsType): IMElementPlugin<OptionsType> {
         const plugin: PluginType = element[constructorFunction.defaultMountPoint] as PluginType;
-        if (plugin) { plugin.update(options); }
+        if (plugin) {
+            if (!this.refreshPlugin(plugin, options)) {
+                MDOMPlugin.detach(constructorFunction, element);
+                return new NullObjectMElementPlugin(options);
+            }
+        }
         return plugin;
+    }
+
+    private static mountPlugin(plugin: IMElementPlugin<any>): boolean {
+        let mounted: boolean = false;
+        plugin.attach(this.getMountFunction(() => mounted = true));
+        return mounted;
+    }
+
+    private static refreshPlugin(plugin: IMElementPlugin<any>, options): boolean {
+        let updated: boolean = false;
+        plugin.update(options, this.getMountFunction(() => updated = true));
+        return updated;
+    }
+
+    private static getMountFunction: (onSuccess: () => void) => MountFunction = (onSuccess: () => void) => {
+        return (callback: MountCallback) => {
+            callback();
+            onSuccess();
+        };
     }
 }
 
-export type MountFunction = (callback: () => void) => void;
 export interface IMElementPlugin<OptionsType> {
     element: HTMLElement;
     options: OptionsType;
-    status: MElementPluginStatus;
     attach(mount: MountFunction): void;
-    update(options: any): void;
+    update(options: any, refresh: RefreshFunction): void;
     detach(): void;
     addEventListener(eventName: string, listener: EventListenerOrEventListenerObject): void;
     removeEventListener(eventName: string, listener?: EventListenerOrEventListenerObject): void;
@@ -83,12 +108,11 @@ export interface IMElementPlugin<OptionsType> {
 class NullObjectMElementPlugin<OptionsType> implements IMElementPlugin<OptionsType> {
     element: HTMLElement;
     options: OptionsType;
-    status: MElementPluginStatus;
     constructor(options: OptionsType) {
         this.options = options;
     }
     attach(mount: MountFunction): void {}
-    update(options: any): void {}
+    update(options: any, refresh: RefreshFunction): void {}
     detach(): void {}
     addEventListener(eventName: string, listener: EventListenerOrEventListenerObject): void {}
     removeEventListener(eventName: string, listener?: EventListener | EventListenerObject | undefined): void {}
@@ -107,57 +131,44 @@ export abstract class MElementPlugin<OptionsType> implements IMElementPlugin<Opt
 
     public get element(): HTMLElement { return this._element; }
     public get options(): OptionsType { return this._options; }
-    public get status(): MElementPluginStatus { return this._status; }
 
     constructor(element: HTMLElement, options: OptionsType) {
         this._element = element;
         this._options = options;
-        this.attach(this.mount);
     }
 
     public abstract attach(mount: MountFunction): void;
-    public abstract update(options: any): void;
+    public abstract update(options: any, refresh: RefreshFunction): void;
     public abstract detach(): void;
 
     public addEventListener(eventName: string, listener: EventListenerOrEventListenerObject): void {
         let listeners = this.attachedEvents.get(eventName);
         if (!listeners) {
             this.attachedEvents.set(eventName, [listener]);
+            this.element.addEventListener(eventName, listener);
         } else {
             if (listeners.indexOf(listener) === -1) {
                 listeners.push(listener);
+                this.element.addEventListener(eventName, listener);
             }
             this.attachedEvents.set(eventName, listeners);
         }
-
-        this.element.addEventListener(eventName, listener);
     }
 
-    public removeEventListener(eventName: string, listener?: EventListenerOrEventListenerObject): void {
+    public removeEventListener(eventName: string): void {
         let listeners: EventListenerOrEventListenerObject[] | undefined = this.attachedEvents.get(eventName);
         if (!listeners) { return; }
 
-        if (listener) {
-            const eventIndex: number | undefined = listeners.indexOf(listener);
-            if (event) {
-                this.element.removeEventListener(eventName, listeners[eventIndex]);
-                this.attachedEvents.set(eventName, listeners.splice(eventIndex, 1));
-            }
-        } else {
-            listeners.forEach(listener => this.element.removeEventListener(eventName, listener));
-            this.attachedEvents.delete(eventName);
-        }
+        listeners.forEach(listener => {
+            this.element.removeEventListener(eventName, listener);
+        });
+        this.attachedEvents.delete(eventName);
     }
 
     public removeAllEvents(): void {
         this.attachedEvents
             .forEach((listeners: EventListenerOrEventListenerObject[], eventName: string) => {
-                listeners.forEach(listener => this.element.removeEventListener(eventName, listener));
+                this.removeEventListener(eventName);
             });
-    }
-
-    private mount: MountFunction = (callback: () => void) => {
-        callback();
-        this._status = MElementPluginStatus.Mounted;
     }
 }
