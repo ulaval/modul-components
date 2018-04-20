@@ -13,6 +13,7 @@
         "dtsToDist": "copyfiles -f \"./src/**/*.d.ts\" dist",
         "scssToDist": "copyfiles -u 1 \"./src/styles/**/*.scss\" dist && copyfiles -u 1 \"./src/styles/**/*.css\" dist",
         "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
+        "start": "webpack-dev-server --config conf/webpack.config.js --content-base src --port 8080 --history-api-fallback --host 0.0.0.0 --disable-host-check --inline=false",
         "unit": "jest --verbose --silent",
         "unitwatch": "jest --watch --verbose --silent",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
