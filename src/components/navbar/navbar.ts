@@ -122,7 +122,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Watch('selected')
     private setAndUpdate(value): void {
         this.internalValue = value;
-        // this.scrollToSelected();
     }
 
     private setupScrolllH(): void {
