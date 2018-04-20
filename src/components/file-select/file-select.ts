@@ -48,6 +48,9 @@ export class MFileSelect extends ModulVue {
     })
     public storeName: string;
 
+    @Prop({ default: false })
+    public keepStore: boolean;
+
     $refs: {
         inputFile: HTMLInputElement;
     };
@@ -55,7 +58,9 @@ export class MFileSelect extends ModulVue {
     private id: string = `mFileSelect-${uuid.generate()}`;
 
     private destroyed(): void {
-        this.$file.destroy(this.storeName);
+        if (!this.keepStore) {
+            this.$file.destroy(this.storeName);
+        }
     }
 
     private onClick(event: Event): void {

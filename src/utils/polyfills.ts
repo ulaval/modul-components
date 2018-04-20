@@ -1,4 +1,13 @@
 import Promise from 'es6-promise';
+import { polyfill } from 'mobile-drag-drop';
+import { scrollBehaviourDragImageTranslateOverride } from 'mobile-drag-drop/scroll-behaviour';
+
+// Polyfill for drag and drop on mobile.
+polyfill({
+    holdToDrag: 200,
+    dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride,
+    iterationInterval: 50
+});
 
 // Polyfill for the Promise API
 Promise.polyfill();

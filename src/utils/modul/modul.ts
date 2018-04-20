@@ -271,7 +271,8 @@ export class Modul {
             if (this.isIOSMobile()) {
                 this.stopScrollPosition = this.scrollPosition;
                 this.bodyStyle.position = 'fixed';
-                this.bodyStyle.top = '-' + this.stopScrollPosition + 'px';
+                this.bodyStyle.top = '0';
+                // this.bodyStyle.top = '-' + this.stopScrollPosition + 'px'; // --> ENA2-767
                 this.bodyStyle.right = '0';
                 this.bodyStyle.left = '0';
                 this.bodyStyle.bottom = '0';// ---Added bogue in IE11--- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.

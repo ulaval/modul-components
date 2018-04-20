@@ -12,18 +12,34 @@ import ButtonPlugin from '../button/button';
 import IconButtonPlugin from '../icon-button/icon-button';
 import MessagePlugin from '../message/message';
 import FileUploadPlugin, { MFileUpload } from './file-upload';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 describe('MFileUpload', () => {
     beforeEach(() => {
         resetModulPlugins();
         Vue.use(FilePlugin);
         Vue.use(I18nPlugin);
+        Vue.use(MediaQueriesPlugin);
 
         addMessages(Vue, ['components/file-upload/file-upload.lang.en.json']);
     });
 
     it('should render correctly', () => {
-        const fupd = mount(MFileUpload);
+        const fupd = mount(MFileUpload, {
+            data: {
+                isMqMinS: true
+            }
+        });
+
+        return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly in mobile', () => {
+        const fupd = mount(MFileUpload, {
+            data: {
+                isMqMinS: false
+            }
+        });
 
         return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
     });
@@ -67,7 +83,10 @@ describe('MFileUpload', () => {
 
         it('should render accepted file extensions', () => {
             const fupd = mount(MFileUpload, {
-                propsData: validationOpts
+                propsData: validationOpts,
+                data: {
+                    isMqMinS: true
+                }
             });
 
             return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
@@ -89,7 +108,10 @@ describe('MFileUpload', () => {
                 addMessages(Vue, ['components/message/message.lang.en.json']);
 
                 fupd = mount(MFileUpload, {
-                    propsData: validationOpts
+                    propsData: validationOpts,
+                    data: {
+                        isMqMinS: true
+                    }
                 });
 
                 stubMDialogRefs(fupd.vm);
@@ -172,7 +194,7 @@ describe('MFileUpload', () => {
 
         it('should emit done event when add button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(1)')
+                .find('.m-file-upload__footer-add')
                 .trigger('click');
 
             expect(fupd.emitted('done')[0][0]).toEqual([completedFile]);
@@ -180,7 +202,7 @@ describe('MFileUpload', () => {
 
         it('should clear all files when add button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(1)')
+                .find('.m-file-upload__footer-add')
                 .trigger('click');
 
             expect(fupd.vm.$file.files().length).toEqual(0);
@@ -188,7 +210,7 @@ describe('MFileUpload', () => {
 
         it('should emit cancel event when cancel button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(2)')
+                .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
             expect(fupd.emitted('cancel')).toBeTruthy();
@@ -196,7 +218,7 @@ describe('MFileUpload', () => {
 
         it('should clear all files when cancel button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(2)')
+                .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
             expect(fupd.vm.$file.files().length).toEqual(0);
@@ -210,7 +232,7 @@ describe('MFileUpload', () => {
             uploadingFile.status = MFileStatus.UPLOADING;
 
             fupd
-                .find('.m-file-upload__footer button:nth-child(2)')
+                .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
             const evt = fupd.emitted('file-upload-cancel');
@@ -232,6 +254,9 @@ describe('MFileUpload', () => {
             const fupd = mount(MFileUpload, {
                 stubs: {
                     'transition-group': WrapChildrenStub('ul')
+                },
+                data: {
+                    isMqMinS: true
                 }
             });
 
@@ -270,6 +295,9 @@ describe('MFileUpload', () => {
             const fupd = mount(MFileUpload, {
                 stubs: {
                     'transition-group': WrapChildrenStub('ul')
+                },
+                data: {
+                    isMqMinS: true
                 }
             });
 

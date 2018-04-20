@@ -3,8 +3,7 @@ import Vue, { PluginObject } from 'vue';
 import MediaQueriesPlugin from './media-queries/media-queries';
 import ModulPlugin from './modul/modul';
 import MessagesPlugin from './i18n/i18n';
-import HttpPlugin from './http/http';
-import SecurityPlugin, { SecurityPluginOptions } from './http/security';
+import HttpPlugin, { HttpPluginOptions } from './http/http';
 import SpritesPlugin from './svg/sprites';
 import * as TouchPlugin from 'vue-touch';
 import ConfirmPlugin from './modal/confirm';
@@ -13,7 +12,7 @@ import FilePlugin from '../utils/file/file';
 import { PortalPluginInstall } from 'portal-vue';
 
 export interface UtilsPluginOptions {
-    securityPluginOptions: SecurityPluginOptions;
+    httpPluginOptions?: HttpPluginOptions;
 }
 
 const UtilsPlugin: PluginObject<any> = {
@@ -21,11 +20,8 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(MediaQueriesPlugin);
         Vue.use(ModulPlugin);
         Vue.use(MessagesPlugin);
-        Vue.use(HttpPlugin);
+        Vue.use(HttpPlugin, options ? options.httpPluginOptions : undefined);
         Vue.use({ install: PortalPluginInstall });
-        if (options) {
-            Vue.use(SecurityPlugin, (options as UtilsPluginOptions).securityPluginOptions);
-        }
         Vue.use(SpritesPlugin);
         Vue.use(TouchPlugin, { name: 'v-touch' });
         Vue.use(ConfirmPlugin);

@@ -40,256 +40,73 @@
     }
 
     // ======================================================================
-    //  Margin
+    //  Margin & Padding
     // ======================================================================
-    &--margin {
-        margin: $m-margin;
-
-        &--xl {
-            margin: $m-margin--xl;
-        }
-
-        &--l {
-            margin: $m-margin--l;
-        }
-
-        &--s {
-            margin: $m-margin--s;
-        }
-
-        &-top {
-            margin-top: $m-margin;
-
-            &--xl {
-                margin-top: $m-margin--xl;
+    @function get-margin-padding-value($prop, $size) {
+        @if $prop == 'margin' {
+            @if $size == '' {
+                @return $m-margin;
             }
 
-            &--l {
-                margin-top: $m-margin--l;
+            @else if $size == '--xs' {
+                @return $m-margin--xs;
             }
 
-            &--s {
-                margin-top: $m-margin--s;
+            @else if $size == '--s' {
+                @return $m-margin--s;
+            }
+
+            @else if $size == '--l' {
+                @return $m-margin--l;
+            }
+
+            @else if $size == '--xl' {
+                @return $m-margin--xl;
             }
         }
 
-        &-right {
-            margin-right: $m-margin;
-
-            &--l {
-                margin-right: $m-margin--l;
+        @else if $prop == 'padding' {
+            @if $size == '' {
+                @return $m-padding;
             }
 
-            &--s {
-                margin-right: $m-margin--s;
-            }
-        }
-
-        &-bottom {
-            margin-bottom: $m-margin;
-
-            &--l {
-                margin-bottom: $m-margin--l;
+            @else if $size == '--xs' {
+                @return $m-padding--xs;
             }
 
-            &--s {
-                margin-bottom: $m-margin--s;
-            }
-        }
-
-        &-left {
-            margin-left: $m-margin;
-
-            &--l {
-                margin-left: $m-margin--l;
+            @else if $size == '--s' {
+                @return $m-padding--s;
             }
 
-            &--s {
-                margin-left: $m-margin--s;
-            }
-        }
-
-        &-top-bottom {
-            margin-top: $m-margin;
-            margin-bottom: $m-margin;
-
-            &--l {
-                margin-top: $m-margin--l;
-                margin-bottom: $m-margin--l;
+            @else if $size == '--l' {
+                @return $m-padding--l;
             }
 
-            &--s {
-                margin-top: $m-margin--s;
-                margin-bottom: $m-margin--s;
-            }
-        }
-
-        &-right-left {
-            margin-right: $m-margin;
-            margin-left: $m-margin;
-
-            &--l {
-                margin-right: $m-margin--l;
-                margin-left: $m-margin--l;
-            }
-
-            &--s {
-                margin-right: $m-margin--s;
-                margin-left: $m-margin--s;
+            @else if $size == '--xl' {
+                @return $m-padding--xl;
             }
         }
     }
 
-    &--no-margin {
-        margin: 0;
+    @mixin m-margin-padding() {
+        $m-props: 'margin', 'padding';
+        $m-directions: '', '-top', '-right', '-bottom', '-left';
+        $m-sizes: '--xs', '--s', '', '--l', '--xl';
 
-        &-top {
-            margin-top: 0;
-        }
+        @each $prop in $m-props {
+            @each $direction in $m-directions {
+                &--no-#{$prop}#{$direction} {
+                    #{$prop}#{$direction}: 0;
+                }
 
-        &-right {
-            margin-right: 0;
-        }
-
-        &-bottom {
-            margin-bottom: 0;
-        }
-
-        &-left {
-            margin-left: 0;
-        }
-
-        &-top-bottom {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        &-right-left {
-            margin-right: 0;
-            margin-left: 0;
-        }
-    }
-
-    // ======================================================================
-    //  Padding
-    // ======================================================================
-    &--padding {
-        padding: $m-padding;
-
-        &--l {
-            padding: $m-padding--l;
-        }
-
-        &--s {
-            padding: $m-padding--s;
-        }
-
-        &-top {
-            padding-top: $m-padding;
-
-            &--l {
-                padding-top: $m-padding--l;
-            }
-
-            &--s {
-                padding-top: $m-padding--s;
-            }
-        }
-
-        &-right {
-            padding-right: $m-padding;
-
-            &--l {
-                padding-right: $m-padding--l;
-            }
-
-            &--s {
-                padding-right: $m-padding--s;
-            }
-        }
-
-        &-bottom {
-            padding-bottom: $m-padding;
-
-            &--l {
-                padding-bottom: $m-padding--l;
-            }
-
-            &--s {
-                padding-bottom: $m-padding--s;
-            }
-        }
-
-        &-left {
-            padding-left: $m-padding;
-
-            &--l {
-                padding-left: $m-padding--l;
-            }
-
-            &--s {
-                padding-left: $m-padding--s;
-            }
-        }
-
-        &-top-bottom {
-            padding-top: $m-padding;
-            padding-bottom: $m-padding;
-
-            &--l {
-                padding-top: $m-padding--l;
-                padding-bottom: $m-padding--l;
-            }
-
-            &--s {
-                padding-top: $m-padding--s;
-                padding-bottom: $m-padding--s;
-            }
-        }
-
-        &-right-left {
-            padding-right: $m-padding;
-            padding-left: $m-padding;
-
-            &--l {
-                padding-right: $m-padding--l;
-                padding-left: $m-padding--l;
-            }
-
-            &--s {
-                padding-right: $m-padding--s;
-                padding-left: $m-padding--s;
+                @each $size in $m-sizes {
+                    &--#{$prop}#{$direction}#{$size} {
+                        #{$prop}#{$direction}: get-margin-padding-value(#{$prop}, #{$size});
+                    }
+                }
             }
         }
     }
 
-    &--no-padding {
-        padding: 0;
-
-        &-top {
-            padding-top: 0;
-        }
-
-        &-right {
-            padding-right: 0;
-        }
-
-        &-bottom {
-            padding-bottom: 0;
-        }
-
-        &-left {
-            padding-left: 0;
-        }
-
-        &-top-bottom {
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-
-        &-right-left {
-            padding-right: 0;
-            padding-left: 0;
-        }
-    }
+    @include m-margin-padding();
 }

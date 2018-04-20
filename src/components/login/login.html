@@ -1,0 +1,6 @@
+<form @submit.prevent="login()">
+    <m-textfield v-model="user" :label="labelUser" :focus="true"></m-textfield><br/>
+    <m-textfield v-model="password" :label="labelPassword" type="password"></m-textfield><br/>
+    <m-button type="submit"><m-i18n k="m-login:login"></m-i18n></m-button><br/>
+    <span v-if="lastError">{{lastError}}</span>
+</form>

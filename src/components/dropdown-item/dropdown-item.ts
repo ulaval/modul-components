@@ -34,6 +34,8 @@ export class MDropdownItem extends ModulVue {
     public value: any;
     @Prop()
     public disabled: boolean;
+    @Prop()
+    public nonFilterable: boolean;
 
     public root: MDropdownInterface; // Dropdown component
     public group: BaseDropdown | undefined; // Dropdown-group parent if there is one
@@ -51,7 +53,7 @@ export class MDropdownItem extends ModulVue {
     }
 
     public get filtered(): boolean {
-        if (this.propLabel) {
+        if (this.propLabel && !this.nonFilterable) {
             return !this.root.matchFilter(normalizeString(this.propLabel));
         } else {
             return false;
