@@ -9,6 +9,7 @@ import DraggablePlugin from './draggable/draggable';
 import DroppablePlugin from './droppable/droppable';
 import SortablePlugin from './sortable/sortable';
 import SortableGroupPlugin from './sortable/sortable-group';
+import I18nDirectivePlugin from './i18n/i18n';
 
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -21,6 +22,7 @@ const DirectivesPlugin: PluginObject<any> = {
         Vue.use(SortablePlugin);
         Vue.use(SortableGroupPlugin);
         Vue.use(TextAreaAutoHeightPlugin);
+        Vue.use(I18nDirectivePlugin);
     }
 };
 
