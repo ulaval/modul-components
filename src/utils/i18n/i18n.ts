@@ -41,10 +41,10 @@ export enum DebugMode {
 export interface I18nPluginOptions {
     curLang?: string;
     debug?: DebugMode;
-    formatMode?: FORMAT_MODE;
+    formatMode?: FormatMode;
 }
 
-export enum FORMAT_MODE {
+export enum FormatMode {
     DEFAULT = '',
     VSSPRINTF = 'vsprintf',
     SPRINTF = 'sprintf'
@@ -52,7 +52,7 @@ export enum FORMAT_MODE {
 
 export class Messages {
     private curLang: string = ENGLISH;
-    private formatMode: FORMAT_MODE;
+    private formatMode: FormatMode;
     private messages: LanguageBundlesMap = {};
 
     constructor(private options?: I18nPluginOptions) {
@@ -139,9 +139,9 @@ export class Messages {
      */
     private format(val: string, params: any[]): string {
         switch (this.formatMode) {
-            case FORMAT_MODE.VSSPRINTF:
+            case FormatMode.VSSPRINTF:
                 return vsprintf(val, params);
-            case FORMAT_MODE.SPRINTF:
+            case FormatMode.SPRINTF:
                 return sprintf(val, params);
             default:
                 return formatRegexp(val, params);

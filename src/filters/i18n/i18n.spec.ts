@@ -1,7 +1,7 @@
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import Vue, { VueConstructor } from 'vue';
 import { Wrapper, mount } from '@vue/test-utils';
-import I18nPlugin, { I18nPluginOptions, FORMAT_MODE } from '../../utils/i18n/i18n';
+import I18nPlugin, { I18nPluginOptions, FormatMode } from '../../utils/i18n/i18n';
 import { addMessages } from '../../../tests/helpers/lang';
 import I18nFilterPlugin from './i18n';
 
@@ -10,7 +10,7 @@ describe(`Étant donné le filtre f-m-i18n`, () => {
     beforeEach(() => {
         let localVue: VueConstructor<Vue>;
         let options: I18nPluginOptions = {
-            formatMode: FORMAT_MODE.VSSPRINTF
+            formatMode: FormatMode.VSSPRINTF
         };
 
         resetModulPlugins();
