@@ -6,22 +6,38 @@ pipeline {
             registryCredentialsId 'artifactory-docker-registry-credentials'
         }
     }
-    properties([
-        parameters ([
-            string(name: 'token')
-        ])
-    ])
+    environment {
+        token = credentials('openshift-modul-dv-token')
+        openshiftServer = 'https://pca.exp.ulaval.ca'
+        openshiftProject = 'modul-dv'
+    }
     stages {
-        stage('Deploy') {
+        stage('Build') {
             steps {
                 echo 'Building branch ${branch}'
+
                 script {
-                    env.NAME = env.BRANCH_NAME.replace('/', '-');
+                    env.branch = env.BRANCH_NAME
+                    env.appName = env.branch.replace('/', '-');
                 }
-                echo env.token
-                echo env.NAME
-                echo env.BRANCH_NAME
-                // sh 'oc start-build --server=https://pca.exp.ulaval.ca -n=modul-dv ${NAME} --wait --token=${token}'
+
+                echo "BRANCH_NAME = ${env.BRANCH_NAME}"
+                echo "branch = ${branch}"
+                echo "appName = ${appName}"
+
+                script {
+                    try {
+                        // If application doesn't exist, create it
+                        sh "oc get route --server=${openshiftServer} -n=${openshiftProject} ${appName} --token=${token}"
+                        echo "Application ${appName} already exists."
+
+                        echo "Starting build of ${appName}..."
+                        sh "oc start-build --server=${openshiftServer} -n=${openshiftProject} ${appName} --wait --token=${token}"
+                    } catch (e) {
+                        echo "Application ${appName} doesn\'t exists. Creating the app..."
+                        sh "oc new-app modul-components --server=${openshiftServer} -n=${openshiftProject} -p NAME=${appName} -p SOURCE_REPOSITORY_REF=${branch} -l app=${appName} --token=${token}"
+                    }
+                }
             }
         }
     }
