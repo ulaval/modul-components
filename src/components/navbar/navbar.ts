@@ -7,7 +7,6 @@ import { NAVBAR_NAME, NAVBAR_ITEM_NAME } from '../component-names';
 import NavbarItemPlugin, { BaseNavbar, Navbar } from '../navbar-item/navbar-item';
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
 import { ComputedOptions } from 'vue/types/options';
-import { log } from 'util';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -50,6 +49,8 @@ export class MNavbar extends BaseNavbar implements Navbar {
     public disabled: boolean;
     @Prop({ default: true })
     public arrowMobile: boolean;
+    @Prop({ default: false })
+    public mouseover: boolean;
 
     private animActive: boolean = false;
     private internalValue: any | undefined = '';
@@ -58,6 +59,14 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     public updateValue(value: any): void {
         this.model = value;
+    }
+
+    public onMouseOver(value: any, event: Event): void {
+        this.$emit('mouseover', value, event);
+    }
+
+    public onClick(value: any, event: Event): void {
+        this.$emit('click', value, event);
     }
 
     public get model(): any {
@@ -86,6 +95,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     private scrollToSelected(): void {
         this.$children.forEach(element => {
             if (element.$props.value === this.selected) {
+
                 (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
 
                 if (this.skin == MNavbarSkin.Light) {
@@ -112,7 +122,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Watch('selected')
     private setAndUpdate(value): void {
         this.internalValue = value;
-        this.scrollToSelected();
     }
 
     private setupScrolllH(): void {
