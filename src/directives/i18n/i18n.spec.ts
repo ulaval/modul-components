@@ -2,14 +2,14 @@ import { resetModulPlugins } from '../../../tests/helpers/component';
 import Vue from 'vue';
 import I18nDirectivePlugin from './i18n';
 import { Wrapper, mount } from '@vue/test-utils';
-import I18nPlugin, { I18nPluginOptions } from '../../utils/i18n/i18n';
+import I18nPlugin, { I18nPluginOptions, FORMAT_MODE } from '../../utils/i18n/i18n';
 import { addMessages } from '../../../tests/helpers/lang';
 
 describe(`Étant donné la directive v-m-i18n`, () => {
     let element: Wrapper<Vue>;
     beforeEach(() => {
         let options: I18nPluginOptions = {
-            formatMode: 'vsprintf'
+            formatMode: FORMAT_MODE.VSSPRINTF
         };
 
         resetModulPlugins();
@@ -18,7 +18,7 @@ describe(`Étant donné la directive v-m-i18n`, () => {
         addMessages(Vue, ['directives/i18n/i18n.spec.lang.fr.json']);
     });
 
-    describe(`Étant donné l'argument :title="test"`, () => {
+    describe(`Giving the argument :title="test"`, () => {
         beforeEach(() => {
             element = mount(
                 {
