@@ -14,10 +14,6 @@ const I18nDirective: DirectiveOptions = {
             const options = binding.value || {};
 
             if (modifiers.length > 0) {
-                /*  we don't use modifiers like "medaille-olympique.f" in the directive for now,
-                    keep the tests in case we do some day */
-                // const modifier = options.modifier ? options.modifier : modifiers[1];
-
                 expression = Vue.prototype.$i18n.translate(
                     modifiers[0],
                     options.params,

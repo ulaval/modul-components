@@ -45,9 +45,9 @@ export interface I18nPluginOptions {
 }
 
 export enum FormatMode {
-    DEFAULT = '',
-    VSSPRINTF = 'vsprintf',
-    SPRINTF = 'sprintf'
+    Default = '',
+    Vsprintf = 'vsprintf',
+    Sprintf = 'sprintf'
 }
 
 export class Messages {
@@ -112,13 +112,6 @@ export class Messages {
             throw new Error('The key is empty.');
         }
 
-        if (nb === undefined || nb === null) {
-            nb = params['nb'];
-        }
-        if (!modifier) {
-            modifier = params['modifier'];
-        }
-
         let val = this.resolveKey(this.curLang, key, nb, modifier);
 
         if (htmlEncodeParams && params.length) {
@@ -139,9 +132,9 @@ export class Messages {
      */
     private format(val: string, params: any[]): string {
         switch (this.formatMode) {
-            case FormatMode.VSSPRINTF:
+            case FormatMode.Vsprintf:
                 return vsprintf(val, params);
-            case FormatMode.SPRINTF:
+            case FormatMode.Sprintf:
                 return sprintf(val, params);
             default:
                 return formatRegexp(val, params);

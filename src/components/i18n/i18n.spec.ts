@@ -4,7 +4,7 @@ import Vue, { VueConstructor } from 'vue';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import MI18nPlugin, { MI18n } from './i18n';
-import I18nPlugin, { I18nPluginOptions } from '../../utils/i18n/i18n';
+import I18nPlugin, { I18nPluginOptions, FormatMode } from '../../utils/i18n/i18n';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 
 describe('MI18n', () => {
@@ -99,7 +99,7 @@ describe('MI18n', () => {
     describe(`given the formatOption = 'vsprintf'`, () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {
-                formatMode: 'vsprintf'
+                formatMode: FormatMode.Vsprintf
             };
             resetModulPlugins();
             Vue.use(I18nPlugin, options);
@@ -116,19 +116,5 @@ describe('MI18n', () => {
 
             expect(await renderComponent(i18n.vm)).toMatchSnapshot('with parameters');
         });
-
-        it('should render correctly with modifier in params', async () => {
-            const i18n = mount(MI18n, {
-                localVue: localVue,
-                propsData: {
-                    k: 'm-i18n-spec:modifier-test'
-                }
-            });
-
-            expect(await renderComponent(i18n.vm)).toMatchSnapshot('no parameters');
-            i18n.setProps({ params: { modifier: 'm' } });
-            expect(await renderComponent(i18n.vm)).toMatchSnapshot('with parameters');
-        });
     });
-
 });

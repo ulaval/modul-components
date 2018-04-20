@@ -54,14 +54,14 @@ describe('i18n plugin', () => {
     describe('with formatOption = "vsprintf"', () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {
-                formatMode: FormatMode.VSSPRINTF
+                formatMode: FormatMode.Vsprintf
             };
 
             resetModulPlugins();
             Vue.use(I18nPlugin, options);
             addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
         });
-        it(`calling translate('decompte_athletes_olympiques_pays', {nbAthletes:2925, nbPays:93}) should return "Il y a 2925 athlètes olympiques et 93 pays participants."`, () => {
+        it(`calling translate with params modifier should return the string with the params applied`, () => {
             expect(Vue.prototype.$i18n.translate('exemples_avec_parametres:decompte_athletes_olympiques_pays', { nbAthletes: 2925, nbPays: 93 })).toEqual('Il y a 2925 athlètes olympiques et 93 pays participants.');
         });
     });
@@ -69,33 +69,26 @@ describe('i18n plugin', () => {
     describe('with formatOption = "sprintf"', () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {
-                formatMode: FormatMode.SPRINTF
+                formatMode: FormatMode.Sprintf
             };
 
             resetModulPlugins();
             Vue.use(I18nPlugin, options);
             addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
         });
-        it(`calling translate('decompte_athletes_olympiques_pays', {nbAthletes:2925, nbPays:93}) should return "Il y a 2925 athlètes olympiques et 93 pays participants."`, () => {
+        it(`calling translate with params modifier should return the string with the params applied`, () => {
             expect(Vue.prototype.$i18n.translate('exemples_avec_parametres:decompte_athletes_olympiques_pays', { nbAthletes: 2925, nbPays: 93 })).toEqual('Il y a 2925 athlètes olympiques et 93 pays participants.');
         });
     });
 
-    describe('with the possibility to pass nb and modifier parameters inside the parameter param', () => {
+    describe('Given a translated messages files', () => {
         beforeEach(() => {
-            let options: I18nPluginOptions = {
-                formatMode: FormatMode.SPRINTF
-            };
-
             resetModulPlugins();
-            Vue.use(I18nPlugin, options);
+            Vue.use(I18nPlugin);
             addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
         });
-        it(`calling translate('medaille-olympique', {}, 1, 'f') should return "La seule médaillée olympique"`, () => {
+        it(`calling translate with modifiers should return the modified string`, () => {
             expect(Vue.prototype.$i18n.translate('exemples-avec-nombre-genre:medaille-olympique', {}, 1, 'f')).toEqual('La seule médaillée olympique');
-        });
-        it(`calling translate('medaille-olympique', {nb:1, modifier:'f'}) should return "La seule médaillée olympique"`, () => {
-            expect(Vue.prototype.$i18n.translate('exemples-avec-nombre-genre:medaille-olympique', { nb: 1, modifier: 'f' })).toEqual('La seule médaillée olympique');
         });
     });
 });

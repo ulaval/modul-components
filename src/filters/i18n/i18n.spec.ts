@@ -10,7 +10,7 @@ describe(`Étant donné le filtre f-m-i18n`, () => {
     beforeEach(() => {
         let localVue: VueConstructor<Vue>;
         let options: I18nPluginOptions = {
-            formatMode: FormatMode.VSSPRINTF
+            formatMode: FormatMode.Vsprintf
         };
 
         resetModulPlugins();
@@ -19,7 +19,7 @@ describe(`Étant donné le filtre f-m-i18n`, () => {
         addMessages(Vue, ['filters/i18n/i18n.spec.lang.fr.json']);
     });
 
-    describe(`giving the filter {{ exemples-avec-nombre-genre:medaille-olympique | f-m-i18n({}, 2, 'f') }}`, () => {
+    describe(`Given a filter with a number and a class modifiers`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -29,23 +29,8 @@ describe(`Étant donné le filtre f-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`the span's content should be "Les deux seules médaillées olympiques"`, () => {
+        it(`the result should be a string with the number and the class modifiers applied`, () => {
             expect(element.vm.$el.textContent).toEqual('Les deux seules médaillées olympiques');
-        });
-    });
-
-    describe(`Giving the attribute :title="'exemples-avec-nombre-genre:medaille-olympique' | f-m-i18n({nb:2, modifier:'f'})"`, () => {
-        beforeEach(() => {
-            element = mount(
-                {
-                    template:
-                        `<span :title="'exemples-avec-nombre-genre:medaille-olympique' | f-m-i18n({nb:2, modifier:'f'})"></span>`
-                },
-                { localVue: Vue }
-            );
-        });
-        it(`the element should have the title attribute "Les deux seules médaillées olympiques"`, () => {
-            expect(element.vm.$el.getAttribute('title')).toEqual('Les deux seules médaillées olympiques');
         });
     });
 });
