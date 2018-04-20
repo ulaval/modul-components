@@ -28,6 +28,13 @@ export const TYPE_INDD: string = 'indd';
 export const TYPE_MPEG: string = 'mpeg';
 export const TYPE_MP4: string = 'mp4';
 export const TYPE_AVI: string = 'avi';
+// MUSIC
+export const TYPE_MP3: string = 'mp3';
+export const TYPE_OGG: string = 'ogg';
+export const TYPE_WAV: string = 'wav';
+export const TYPE_AIFF: string = 'aiff';
+export const TYPE_AAC: string = 'aac';
+export const TYPE_RA: string = 'ra';
 // ARCHIVE
 export const TYPE_ZIP: string = 'zip';
 export const TYPE_RAR: string = 'rar';
@@ -41,6 +48,7 @@ export const GROUP_DOC: string = 'm-svg__file-doc';
 export const GROUP_TEXT: string = 'm-svg__file-text';
 export const GROUP_IMAGE: string = 'm-svg__file-image';
 export const GROUP_VIDEO: string = 'm-svg__file-video';
+export const GROUP_MUSIC: string = 'm-svg__file-music';
 export const GROUP_ARCHIVE: string = 'm-svg__file-archive';
 export const GROUP_OTHER: string = 'm-svg__file-other';
 
@@ -68,6 +76,12 @@ const FILES_ASSOCIATIONS: FileGroup = {
     [TYPE_MPEG]: GROUP_VIDEO,
     [TYPE_MP4]: GROUP_VIDEO,
     [TYPE_AVI]: GROUP_VIDEO,
+    [TYPE_MP3]: GROUP_MUSIC,
+    [TYPE_OGG]: GROUP_MUSIC,
+    [TYPE_WAV]: GROUP_MUSIC,
+    [TYPE_AIFF]: GROUP_MUSIC,
+    [TYPE_AAC]: GROUP_MUSIC,
+    [TYPE_RA]: GROUP_MUSIC,
     [TYPE_ZIP]: GROUP_ARCHIVE,
     [TYPE_RAR]: GROUP_ARCHIVE,
     [TYPE_TAR]: GROUP_ARCHIVE,
