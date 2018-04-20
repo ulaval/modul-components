@@ -28,27 +28,12 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "test"`, () => {
+        it(`the element should have the title attribute "test"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('test');
         });
     });
 
-    describe(`Étant donné l'argument :placeholder="test" sur un input`, () => {
-        beforeEach(() => {
-            element = mount(
-                {
-                    template:
-                        '<input v-m-i18n:placeholder="test"></input>'
-                },
-                { localVue: Vue }
-            );
-        });
-        it(`l'élément devrait avoir le placeholder "test"`, () => {
-            expect(element.vm.$el.getAttribute('placeholder')).toEqual('test');
-        });
-    });
-
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -58,12 +43,12 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Le médaillé olympique"`, () => {
+        it(`the element should have the title attribute "Le médaillé olympique"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('Le médaillé olympique');
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:3}"`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:3}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -73,12 +58,12 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Les médaillés olympiques"`, () => {
+        it(`the element should have the title attribute "Les médaillés olympiques"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('Les médaillés olympiques');
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique="{modifier:'f'}"`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique="{modifier:'f'}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -88,12 +73,12 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "La médaillée olympique"`, () => {
+        it(`the element should have the title attribute "La médaillée olympique"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('La médaillée olympique');
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:3, modifier:'f'}"`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:3, modifier:'f'}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -103,12 +88,12 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Les médaillées olympiques"`, () => {
+        it(`the element should have the title attribute "Les médaillées olympiques"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('Les médaillées olympiques');
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:1, modifier:'f'}"`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:1, modifier:'f'}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -118,42 +103,27 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "La seule médaillée olympique"`, () => {
+        it(`the element should have the title attribute "La seule médaillée olympique"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('La seule médaillée olympique');
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:2}"`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:2}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
                     template:
-                        `<span v-m-i18n:title.exemples-avec-nombre-genre:medaille-olympique="{nb:2}"></span>`
+                        `<span v-m-i18n:title.exemples-avec-nombre-genre:medaille-olympique="{nb:1}"></span>`
                 },
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Les deux seuls médaillés olympiques"`, () => {
-            expect(element.vm.$el.getAttribute('title')).toEqual('Les deux seuls médaillés olympiques');
+        it(`the element should have the title attribute "Le seul médaillé olympique"`, () => {
+            expect(element.vm.$el.getAttribute('title')).toEqual('Le seul médaillé olympique');
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:2, modifier:'f'}"`, () => {
-        beforeEach(() => {
-            element = mount(
-                {
-                    template:
-                        `<span v-m-i18n:title.exemples-avec-nombre-genre:medaille-olympique="{nb:2, modifier:'f'}"></span>`
-                },
-                { localVue: Vue }
-            );
-        });
-        it(`l'élément devrait avoir le titre "Les deux seules médaillées olympiques"`, () => {
-            expect(element.vm.$el.getAttribute('title')).toEqual('Les deux seules médaillées olympiques');
-        });
-    });
-
-    describe(`Étant donné l'argument :title.decompte_athletes_olympiques_pays="{params:{nbAthletes:2925, nbPays:93}}"`, () => {
+    describe(`Giving the argument :title.decompte_athletes_olympiques_pays="{params:{nbAthletes:2925, nbPays:93}}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -163,12 +133,12 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Il y a 2925 athlètes olympiques et 93 pays participants."`, () => {
+        it(`the element should have the title attribute "Il y a 2925 athlètes olympiques et 93 pays participants."`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('Il y a 2925 athlètes olympiques et 93 pays participants.');
         });
     });
 
-    describe(`Étant donné l'argument :title.decompte_athletes_olympiques_pays="{modifier:'f', params:{nbAthletes:2925, nbPays:93}}"`, () => {
+    describe(`Giving the argument :title.decompte_athletes_olympiques_pays="{modifier:'f', params:{nbAthletes:2925, nbPays:93}}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -178,7 +148,7 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Il y a 2925 femmes athlètes olympiques et 93 pays participants."`, () => {
+        it(`the element should have the title attribute "Il y a 2925 femmes athlètes olympiques et 93 pays participants."`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('Il y a 2925 femmes athlètes olympiques et 93 pays participants.');
         });
     });
@@ -186,7 +156,7 @@ describe(`Étant donné la directive v-m-i18n`, () => {
     /*  we don't use modifiers like "medaille-olympique.f" in the directive for now,
         keep the tests in case we do some day
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique.f`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique.f`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -196,12 +166,12 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "La médaillée olympique"`, () => {
+        it(`the element should have the title attribute "La médaillée olympique"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('La médaillée olympique');
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique.f="{nb:2}"`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique.f="{nb:2}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -211,12 +181,12 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Les deux seules médaillées olympiques"`, () => {
+        it(`the element should have the title attribute "Les deux seules médaillées olympiques"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('Les deux seules médaillées olympiques');
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:2, modifier:'m'}"`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique="{nb:2, modifier:'m'}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -226,12 +196,12 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Les médaillés olympiques masculins"`, () => {
+        it(`the element should have the title attribute "Les médaillés olympiques masculins"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('Les médaillés olympiques masculins');
         });
     });
 
-    describe(`Étant donné l'argument :title.exemples-avec-nombre-genre:medaille-olympique.f="{nb:3, modifier:'m'}"`, () => {
+    describe(`Giving the argument :title.exemples-avec-nombre-genre:medaille-olympique.f="{nb:3, modifier:'m'}"`, () => {
         beforeEach(() => {
             element = mount(
                 {
@@ -241,7 +211,7 @@ describe(`Étant donné la directive v-m-i18n`, () => {
                 { localVue: Vue }
             );
         });
-        it(`l'élément devrait avoir le titre "Les médaillés olympiques masculins"`, () => {
+        it(`the element should have the title attribute "Les médaillés olympiques masculins"`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('Les médaillés olympiques masculins');
         });
     }); */

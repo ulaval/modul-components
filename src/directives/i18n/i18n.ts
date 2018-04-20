@@ -14,7 +14,8 @@ const I18nDirective: DirectiveOptions = {
             const options = binding.value || {};
 
             if (modifiers.length > 0) {
-                // do not use modifiers out of expression (like "medaille-olympique.f")
+                /*  we don't use modifiers like "medaille-olympique.f" in the directive for now,
+                    keep the tests in case we do some day */
                 // const modifier = options.modifier ? options.modifier : modifiers[1];
 
                 expression = Vue.prototype.$i18n.translate(

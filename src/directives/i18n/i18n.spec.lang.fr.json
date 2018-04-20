@@ -7,9 +7,7 @@
         "medaille-olympique.f": "La médaillée olympique",
         "medaille-olympique.p.f": "Les médaillées olympiques",
         "medaille-olympique.1": "Le seul médaillé olympique",
-        "medaille-olympique.1.f": "La seule médaillée olympique",
-        "medaille-olympique.2": "Les deux seuls médaillés olympiques",
-        "medaille-olympique.2.f": "Les deux seules médaillées olympiques"
+        "medaille-olympique.1.f": "La seule médaillée olympique"
     },
     "exemples_avec_parametres": {
         "decompte_athletes_olympiques_canada": "Il y a %(nbAthletes)s athlète olympique canadien.",
