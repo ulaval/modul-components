@@ -34,8 +34,9 @@ pipeline {
                         echo "Starting build of ${appName}..."
                         sh "oc start-build --server=${openshiftServer} -n=${openshiftProject} ${appName} --wait --token=${token}"
                     } catch (e) {
-                        echo "Application ${appName} doesn\'t exists. Creating the app..."
-                        sh "oc new-app modul-components --server=${openshiftServer} -n=${openshiftProject} -p NAME=${appName} -p SOURCE_REPOSITORY_REF=${branch} -l app=${appName} --token=${token}"
+                        echo "The app does not exist on Openshift."
+                        // echo "Application ${appName} doesn\'t exists. Creating the app..."
+                        // sh "oc new-app modul-components --server=${openshiftServer} -n=${openshiftProject} -p NAME=${appName} -p SOURCE_REPOSITORY_REF=${branch} -l app=${appName} --token=${token}"
                     }
                 }
             }
