@@ -45,6 +45,11 @@ export class MIconFile extends Vue {
 
     private fileMap: FileGroup = {};
 
+    public get spriteId(): string {
+        let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
+        return this.fileMap[cleanExtension] || GROUP_OTHER;
+    }
+
     protected beforeMount(): void {
         this.mapExtensionsGroup(EXT_PDF, GROUP_PDF);
         this.mapExtensionsGroup(EXT_DOC, GROUP_DOC);
@@ -57,11 +62,6 @@ export class MIconFile extends Vue {
 
     private mapExtensionsGroup(extensions, category: string): void {
         extensions.split(',').forEach(ex => this.fileMap[ex] = category);
-    }
-
-    private get spriteId(): string {
-        let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
-        return this.fileMap[cleanExtension] || GROUP_OTHER;
     }
 
     private onClick(event): void {
