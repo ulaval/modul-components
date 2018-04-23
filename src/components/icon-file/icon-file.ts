@@ -53,9 +53,6 @@ export class MIconFile extends Vue {
         this.mapExtensionsGroup(EXT_VIDEO, GROUP_VIDEO);
         this.mapExtensionsGroup(EXT_MUSIC, GROUP_MUSIC);
         this.mapExtensionsGroup(EXT_ARCHIVE, GROUP_ARCHIVE);
-        if (!this.extension) {
-            console.error('You must have an extension attribute with the icon-file component');
-        }
     }
 
     private mapExtensionsGroup(extensions, category: string): void {
@@ -67,7 +64,7 @@ export class MIconFile extends Vue {
         if (this.extension) {
             cleanExtension = this.extension.replace('.', '').toLowerCase();
         }
-        return this.fileMap[cleanExtension] || GROUP_OTHER;
+        return this.extension != undefined ? this.fileMap[cleanExtension] || GROUP_OTHER : GROUP_OTHER;
     }
 
     private onClick(event): void {
