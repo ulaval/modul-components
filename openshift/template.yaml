@@ -233,7 +233,7 @@
             "displayName": "Memory Limit",
             "name": "MEMORY_LIMIT",
             "required": true,
-            "value": "128Mi"
+            "value": "512Mi"
         },
         {
             "description": "The URL of the repository with your application source code.",
