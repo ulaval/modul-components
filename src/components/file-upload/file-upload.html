@@ -46,7 +46,7 @@
                 <li v-for="(file, index) in uploadingFiles" :key="file.uid">
                     <div class="m-file-upload__import-list__content">
                         <div class="m-file-upload__import-list__file-icon">
-                            <m-icon name="chip-info" size="24px"></m-icon>
+                            <m-icon-file :extension="file.extension" size="30px"></m-icon-file>
                         </div>
                         <div class="m-file-upload__import-list__progress-wrap">
                             <div class="m-file-upload__import-list__infos">
@@ -71,7 +71,7 @@
                 <li v-for="(file, index) in completedFiles" :key="file.uid">
                     <div class="m-file-upload__completed-list__content">
                         <div class="m-file-upload__completed-list__file-icon">
-                            <m-icon name="chip-info" size="24px"></m-icon>
+                            <m-icon-file :extension="file.extension" size="30px"></m-icon-file>
                         </div>
                         <div class="m-file-upload__completed-list__infos">
                             <p class="m-file-upload__completed-list__infos-label">
@@ -81,7 +81,7 @@
                             <p class="m-file-upload__completed-list__infos-size">{{file.file.size | file-size}}</p>
                         </div>
                         <div class="m-file-upload__completed-list__delete">
-                            <m-icon-button class="m-file-upload__completed-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onFileRemove(file)"></m-icon-button>
+                            <m-icon-button class="m-file-upload__completed-list__button" icon-name="trash" button-size="32px" icon-size="20px" @click="onFileRemove(file)"></m-icon-button>
                         </div>
                     </div>
                 </li>
