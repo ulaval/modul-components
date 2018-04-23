@@ -20,8 +20,9 @@ import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
-import IconButtonPlugin from './icon-button/icon-button';
 import IconPlugin from './icon/icon';
+import IconButtonPlugin from './icon-button/icon-button';
+import IconFilePlugin from './icon-file/icon-file';
 import InputStylePlugin from './input-style/input-style';
 import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
@@ -85,6 +86,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);
         Vue.use(IconButtonPlugin);
+        Vue.use(IconFilePlugin);
         Vue.use(InputStylePlugin);
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);

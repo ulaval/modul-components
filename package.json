@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-beta.26",
+    "version": "1.0.0-beta.28",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -13,6 +13,7 @@
         "dtsToDist": "copyfiles -f \"./src/**/*.d.ts\" dist",
         "scssToDist": "copyfiles -u 1 \"./src/styles/**/*.scss\" dist && copyfiles -u 1 \"./src/styles/**/*.css\" dist",
         "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
+        "start": "webpack-dev-server --config conf/webpack.config.js --content-base src --port 8080 --history-api-fallback --host 0.0.0.0 --disable-host-check --inline=false",
         "unit": "jest --verbose --silent",
         "unitwatch": "jest --watch --verbose --silent",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
@@ -61,6 +62,7 @@
         "includeFailureMsg": true
     },
     "dependencies": {
+        "@types/sprintf-js": "^1.1.0",
         "axios": "^0.17.1",
         "css-loader": "^0.28.7",
         "enquire.js": "^2.1.6",
@@ -70,6 +72,7 @@
         "portal-vue": "~1.1.1",
         "postcss-loader": "^2.0.9",
         "sass-loader": "^6.0.6",
+        "sprintf-js": "^1.1.1",
         "style-loader": "^0.19.0",
         "svg-inline-loader": "^0.8.0",
         "vue-class-component": "^6.1.1",

@@ -40,7 +40,7 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
 
     it('must use default value for dialog title',() => {
 
-        expect(inplaceEdit.dialogTitle).toEqual(inplaceEdit.$i18n.translate('m-inplace-edit:modify'));
+        expect(inplaceEdit.title).toEqual(inplaceEdit.$i18n.translate('m-inplace-edit:modify'));
     });
 
     describe('when defining title prop', () => {
@@ -48,7 +48,7 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
             let titleProp = 'myTitle';
             inplaceEdit.title = titleProp;
 
-            expect(inplaceEdit.dialogTitle).toEqual(titleProp);
+            expect(inplaceEdit.title).toEqual(titleProp);
         });
     });
 });
@@ -126,6 +126,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
             });
         });
     });
+
     describe('and invalide input',() => {
 
         beforeEach(() => {
@@ -149,6 +150,23 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
                 await inplaceEdit.confirm(AN_EVENT);
 
                 expect(spy).not.toHaveBeenCalledWith('update:editMode', false);
+            });
+
+            it('must be in error', async () => {
+
+                await inplaceEdit.confirm(AN_EVENT);
+
+                expect(inplaceEdit.isError).toBeTruthy();
+            });
+        });
+
+        describe('when cancelling after a failed confirmation', () => {
+            it('must not be in error', async () => {
+                await inplaceEdit.confirm(AN_EVENT);
+
+                inplaceEdit.cancel(AN_EVENT);
+
+                expect(inplaceEdit.isError).toBeFalsy();
             });
         });
     });

@@ -69,7 +69,7 @@ describe('MIconButton', () => {
             localVue: localVue
         });
 
-        btn.find('.m-icon-button').trigger('click');
+        btn.find('button').trigger('click');
 
         expect(btn.emitted('click')).toBeTruthy();
     });

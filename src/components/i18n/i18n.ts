@@ -11,10 +11,12 @@ import WithRender from './i18n.html';
 export class MI18n extends ModulVue {
     @Prop()
     public k: string;
-    @Prop()
-    public params: string[];
+    @Prop({ default: [] })
+    public params: any[];
     @Prop()
     public nb?: number;
+    @Prop()
+    public modifier: string;
     @Prop({ default: true })
     public htmlEncode: boolean;
 
@@ -27,12 +29,11 @@ export class MI18n extends ModulVue {
     private get text(): string {
         let result = '';
         if (this.k) {
-            let p: string[] = this.params === undefined ? [] : this.params;
             result = this.$i18n.translate(
                 this.k,
-                p,
+                this.params,
                 this.nb,
-                undefined,
+                this.modifier,
                 this.htmlEncode
             );
         }

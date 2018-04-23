@@ -4,6 +4,8 @@ import Vue, { VueConstructor } from 'vue';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import MI18nPlugin, { MI18n } from './i18n';
+import I18nPlugin, { I18nPluginOptions, FormatMode } from '../../utils/i18n/i18n';
+import { resetModulPlugins } from '../../../tests/helpers/component';
 
 describe('MI18n', () => {
     let localVue: VueConstructor<Vue>;
@@ -52,6 +54,20 @@ describe('MI18n', () => {
         expect(await renderComponent(i18n.vm)).toMatchSnapshot('plural');
     });
 
+    it('should render correctly with modifier', async () => {
+        const i18n = mount(MI18n, {
+            localVue: localVue,
+            propsData: {
+                k: 'm-i18n-spec:modifier-test',
+                nb: 1
+            }
+        });
+
+        expect(await renderComponent(i18n.vm)).toMatchSnapshot('not modified');
+        i18n.setProps({ modifier: 'm' });
+        expect(await renderComponent(i18n.vm)).toMatchSnapshot('modified');
+    });
+
     it('should render correctly with html encoding', () => {
         const i18n = mount(MI18n, {
             localVue: localVue,
@@ -78,5 +94,27 @@ describe('MI18n', () => {
         expect(console.warn).toHaveBeenCalledWith(
             'The key undefined:key does not exist. Current lang: en'
         );
+    });
+
+    describe(`given the formatOption = 'vsprintf'`, () => {
+        beforeEach(() => {
+            let options: I18nPluginOptions = {
+                formatMode: FormatMode.Vsprintf
+            };
+            resetModulPlugins();
+            Vue.use(I18nPlugin, options);
+            addMessages(localVue, ['components/i18n/i18n.spec.lang.fr.json']);
+        });
+        it('should render correctly with params as object', async () => {
+            const i18n = mount(MI18n, {
+                localVue: localVue,
+                propsData: {
+                    k: 'm-i18n-spec:decompte_athletes_olympiques_pays',
+                    params: { nbAthletes: 2925, nbPays: 93 }
+                }
+            });
+
+            expect(await renderComponent(i18n.vm)).toMatchSnapshot('with parameters');
+        });
     });
 });

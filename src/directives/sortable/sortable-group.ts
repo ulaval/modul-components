@@ -1,6 +1,6 @@
 import { MElementPlugin, MDOMPlugin } from '../domPlugin';
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
-import { SORTABLE_GROUP } from '../directive-names';
+import { SORTABLE_GROUP_NAME } from '../directive-names';
 
 export class MSortableGroup extends MElementPlugin<string> {
     public static defaultMountPoint: string = '__msortablegroup__';
@@ -26,7 +26,7 @@ const Directive: DirectiveOptions = {
 
 const SortableGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(SORTABLE_GROUP, Directive);
+        v.directive(SORTABLE_GROUP_NAME, Directive);
     }
 };
 

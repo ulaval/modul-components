@@ -9,6 +9,7 @@ import RippleEffectPlugin from './ripple-effect/ripple-effect';
 import ScrollToPlugin from './scroll-to/scroll-to';
 import SortablePlugin from './sortable/sortable';
 import SortableGroupPlugin from './sortable/sortable-group';
+import I18nDirectivePlugin from './i18n/i18n';
 import TextAreaAutoHeightPlugin from './textarea-auto-height/textarea-auto-height';
 
 const DirectivesPlugin: PluginObject<any> = {
@@ -23,6 +24,7 @@ const DirectivesPlugin: PluginObject<any> = {
         Vue.use(SortablePlugin);
         Vue.use(SortableGroupPlugin);
         Vue.use(TextAreaAutoHeightPlugin);
+        Vue.use(I18nDirectivePlugin);
     }
 };
 
