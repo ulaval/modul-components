@@ -21,10 +21,10 @@ exports[`MLogin when login should render correctly 1`] = `
                     <input value="" class="m-textfield__input"> </div>
                 <div class="m-input-style__body__right">
                     <div class="m-textfield__icon-password m--is-transparent">
-                        <div class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
+                        <button type="button" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
                             <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
                                 <use xlink:href="#default" aria-hidden="true"></use>
-                            </svg> <span class="m-icon-button__hidden">m-textfield:show-password</span></div>
+                            </svg> <span class="m-icon-button__hidden">m-textfield:show-password</span></button>
                     </div>
                 </div>
             </div>

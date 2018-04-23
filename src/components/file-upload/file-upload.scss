@@ -134,6 +134,11 @@ $m-file-upload-max-height--s: 72px;
             overflow: hidden;
         }
 
+        &__file-icon {
+            display: flex;
+            align-items: center;
+        }
+
         &__progress-wrap {
             flex: 1 1 auto;
             padding: 0 $m-padding;
@@ -225,6 +230,11 @@ $m-file-upload-max-height--s: 72px;
             align-items: center;
             margin-bottom: $m-margin;
             overflow: hidden;
+        }
+
+        &__file-icon {
+            display: flex;
+            align-items: center;
         }
 
         &__infos {
