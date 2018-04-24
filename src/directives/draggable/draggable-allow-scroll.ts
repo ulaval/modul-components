@@ -15,7 +15,7 @@ export class MDraggableAllowScroll extends MElementPlugin<boolean> {
             return;
         }
 
-        // This is cheesy but we only need to fix the scrolling behavier if the polyfill is not active.
+        // This is cheesy but we only need to fix the scrolling behavior if the polyfill is not active.
         // The polyfill already includes a scroll behavior for mobile devices.  However, it doesn't allow to enable the scrolling behavior for desktops.
         if (polyFillActive.dragDrop) { return; }
 
