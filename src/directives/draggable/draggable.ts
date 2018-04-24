@@ -6,6 +6,7 @@ import { MDroppable, MDroppableClassNames } from '../droppable/droppable';
 import { clearUserSelection } from '../../utils/selection/selection';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
 import { MSortable } from '../sortable/sortable';
+import { MDraggableAllowScroll } from './draggable-allow-scroll';
 
 export enum MDraggableClassNames {
     Draggable = 'm--is-draggable',
@@ -115,6 +116,7 @@ export class MDraggable extends MElementPlugin<MDraggableOptions> {
         // Fix for IE / Edge.  clientX / clientY don't appear to be out of element on dragLeave.
         // We can't detect whether we're leaving de droppable for real therefore we have to force leave onDragEnd.
         if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.leaveDroppable(event); }
+        if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
 
         const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;

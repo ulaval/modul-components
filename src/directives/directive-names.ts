@@ -1,4 +1,5 @@
 export const DRAGGABLE: string = 'm-draggable';
+export const DRAGGABLE_ALLOW_SCROLL: string = 'm-draggable-allow-scroll';
 export const DROPPABLE: string = 'm-droppable';
 export const DROPPABLE_GROUP: string = 'm-droppable-group';
 export const SORTABLE: string = 'm-sortable';
