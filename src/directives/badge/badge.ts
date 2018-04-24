@@ -40,6 +40,14 @@ const MBadgeDirective: DirectiveOptions = {
         oldVnode: VNode
     ): void {
 
+        console.log(binding.modifiers);
+        console.log(binding.arg);
+        console.log(binding.expression);
+        console.log(binding.arg);
+        console.log(binding.name);
+        console.log(binding.value);
+        console.log(binding.oldValue);
+
         // Element data
         let elSize = parseInt((vnode.componentOptions as ComponentMeta)['propsData']['size'], 10);
         let elWidth = parseInt(el.attributes['width']['value'], 10);
