@@ -1,5 +1,5 @@
 import { PluginObject } from 'vue';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios';
 import qs from 'qs/lib';
 import { RestAdapter, RequestConfig } from './rest';
 import * as strUtils from '../str/str';
