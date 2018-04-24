@@ -169,4 +169,155 @@
         <path d="M0.466 20.506c-0.005-0-0.011-0-0.018-0-0.258 0-0.466 0.209-0.466 0.466s0.209 0.466 0.466 0.466c0.006 0 0.012-0 0.018-0l-0.001 0c0.005 0 0.011 0 0.018 0 0.257 0 0.466-0.209 0.466-0.466s-0.209-0.466-0.466-0.466c-0.006 0-0.012 0-0.018 0l0.001-0z"></path>
         <path stroke="currentColor" fill="none" stroke-width="0.6585" stroke-miterlimit="10" stroke-linecap="butt" stroke-linejoin="round" style="stroke: var(--color4, #000)" d="M13.505 25.529v-8.829c0.016-0.63 0.522-1.136 1.15-1.152l0.001-0c0.63 0.016 1.136 0.522 1.152 1.15l0 0.001v3.458h1.539c0.013-0.001 0.029-0.001 0.045-0.001 0.4 0 0.724 0.324 0.724 0.724 0 0.016-0 0.031-0.002 0.047l0-0.002h1.536c0.013-0.001 0.029-0.001 0.045-0.001 0.4 0 0.724 0.324 0.724 0.724 0 0.016-0 0.031-0.002 0.047l0-0.002h1.152c0.63 0.016 1.136 0.522 1.152 1.15l0 0.001v2.377c0.001 0.044 0.002 0.095 0.002 0.147 0 0.689-0.113 1.351-0.321 1.97l0.013-0.043-1.228 4.377h-6.914c-1.151-1.536-4.146-6.679-4.146-6.679-0.104-0.147-0.166-0.33-0.166-0.528 0-0.241 0.092-0.46 0.244-0.625l-0.001 0.001c0.169-0.167 0.402-0.27 0.658-0.27 0.215 0 0.414 0.072 0.572 0.194l-0.002-0.002z"></path>
     </symbol>
+    <symbol id="trash" viewBox="0 0 24 24">
+        <g>
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M21.7,5.8H2.3V3.7 c0-0.3,0.2-0.5,0.5-0.5h18.3c0.3,0,0.5,0.2,0.5,0.5V5.8z"/>
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M19.5,23.5h-15 C4.2,23.5,4,23.3,4,23V5.8h16V23C20,23.3,19.8,23.5,19.5,23.5z"/>
+            <rect x="8" y="0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="8" height="2.7"/>
+            <g>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="8" y1="9.5" x2="8" y2="19.8"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="12" y1="9.5" x2="12" y2="19.8"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="16" y1="9.5" x2="16" y2="19.8"/>
+            </g>
+        </g>
+    </symbol>
+    <symbol id="m-svg__file-pdf" viewBox="0 0 24 24">
+        <g>
+            <path fill="#FB3449" d="M9.5,20.1c0,0.2-0.1,0.7-0.9,0.7H8.2v-1.4h0.5C9.3,19.4,9.5,19.8,9.5,20.1z"/>
+            <path fill="#FB3449" d="M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1C12.7,20.2,12.5,19.4,11.9,19.4z
+                M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3
+                c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4
+                c0.2-0.3,0.3-0.6,0.3-1.1C12.7,20.2,12.5,19.4,11.9,19.4z M3.8,17.7v5.4h16.3v-5.4H3.8z M8.7,21.5H8.2v1.1c0,0.2-0.1,0.3-0.3,0.3
+                s-0.3-0.2-0.3-0.3v-3.5c0-0.2,0.2-0.3,0.3-0.3h0.8c1.1,0,1.5,0.7,1.5,1.4C10.2,20.8,9.7,21.5,8.7,21.5z M13.1,22.3
+                c-0.3,0.4-0.7,0.7-1.2,0.7h-0.6c-0.1,0-0.2,0-0.2-0.1c-0.1-0.1-0.1-0.2-0.1-0.2v-3.5c0-0.2,0.1-0.3,0.3-0.3h0.6
+                c0.9,0,1.5,0.8,1.5,2.1C13.4,21.4,13.3,21.9,13.1,22.3z M16.2,19.4l-1.2,0v1.4l0.8,0c0.2,0,0.3,0.1,0.3,0.3s-0.2,0.3-0.3,0.3H15
+                v1.2c0,0.2-0.1,0.3-0.3,0.3s-0.3-0.1-0.3-0.3v-1.5l0-2c0-0.2,0.2-0.3,0.3-0.3h1.5c0.2,0,0.3,0.2,0.3,0.3
+                C16.5,19.3,16.3,19.4,16.2,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
+                C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
+                C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
+                C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
+                C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
+                C12.7,20.2,12.5,19.4,11.9,19.4z"/>
+            <g>
+                <path fill="none" stroke="#FB3449" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5,5.5V23
+                    c0,0.3-0.2,0.5-0.5,0.5H4c-0.3,0-0.5-0.2-0.5-0.5V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5H20.5z"/>
+                <polygon fill="none" stroke="#FB3449" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="15.5,0.5
+                    15.5,5.5 20.5,5.5 		"/>
+            </g>
+            <g>
+                <path fill="#FFFFFF" d="M14.3,21.1L14.3,21.1C14.3,21.1,14.3,21.1,14.3,21.1C14.3,21.1,14.3,21.1,14.3,21.1z"/>
+            </g>
+            <path fill="none" stroke="#FB3449" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M7.5,4.9
+                c-0.7-1.1,1-2.2,1.4-1c0.7,2,1.9,7.5-0.8,11.2c-0.8,1-2.4,0.1-1.5-1c1.4-1.7,5.2-4.9,10.2-4.7c1.4,0.1,1.3,2,0.1,1.8
+                C15,10.9,10.6,9.9,7.5,4.9z"/>
+        </g>
+    </symbol>
+    <symbol id="m-svg__file-doc" viewBox="0 0 24 24">
+        <g>
+            <path fill="#004A94" d="M12.2,2.5H3c-0.4,0-0.7,0.3-0.7,0.7v9.2C2.3,12.7,2.6,13,3,13h9.2c0.4,0,0.7-0.3,0.7-0.7V3.2
+                C12.8,2.8,12.5,2.5,12.2,2.5z M11.1,5.4l-1.5,5c-0.1,0.2-0.3,0.3-0.5,0.3c-0.2,0-0.4-0.1-0.5-0.3l-1-3.4l-1,3.4
+                c-0.1,0.2-0.3,0.3-0.5,0.3c-0.2,0-0.4-0.1-0.5-0.3L4,5.4C4,5.1,4.1,4.8,4.4,4.8C4.6,4.7,4.9,4.8,5,5.1l1,3.4l1.1-3.4
+                c0.1-0.2,0.3-0.4,0.5-0.4C7.8,4.7,8,4.9,8,5.1l1,3.4l1.1-3.4c0.1-0.3,0.4-0.4,0.6-0.3C11,4.8,11.2,5.1,11.1,5.4z"/>
+            <g>
+                <g>
+                    <path fill="none" stroke="#004A94" stroke-linejoin="round" stroke-miterlimit="10" d="M4.7,1.8V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5 h5V23c0,0.3-0.2,0.5-0.5,0.5h-16c-0.3,0-0.5-0.2-0.5-0.5v-9.2"/>
+                    <polygon fill="none" stroke="#004A94" stroke-linejoin="round" stroke-miterlimit="10" points="16.7,0.5 16.7,5.5 21.7,5.5"/>
+                </g>
+            </g>
+            <line fill="none" stroke="#004A94" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="17.9" y1="11.3" x2="14.1" y2="11.3"/>
+            <line fill="none" stroke="#004A94" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="17.9" y1="14.3" x2="8.9" y2="14.3"/>
+            <line fill="none" stroke="#004A94" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="17.9" y1="17.3" x2="8.9" y2="17.3"/>
+            <line fill="none" stroke="#004A94" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="17.9" y1="20.3" x2="8.9" y2="20.3"/>
+        </g>
+    </symbol>
+    <symbol id="m-svg__file-text" viewBox="0 0 24 24">
+        <g>
+            <g>
+                <g>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5,5.5V23 c0,0.3-0.2,0.5-0.5,0.5H4c-0.3,0-0.5-0.2-0.5-0.5V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5H20.5z"/>
+                    <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="15.5,0.5 15.5,5.5 20.5,5.5 			"/>
+                </g>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="7.5" y1="6" x2="12" y2="6"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="7.5" y1="9" x2="16.5" y2="9"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="7.5" y1="12" x2="10" y2="12"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="7.5" y1="15" x2="10" y2="15"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="7.5" y1="18" x2="10" y2="18"/>
+            </g>
+            <g>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="14.1" y1="18" x2="14.1" y2="12"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="11.6" y1="12" x2="16.5" y2="12"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="13.1" y1="18" x2="15.1" y2="18"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="11.6" y1="12" x2="11.6" y2="12.8"/>
+                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="16.5" y1="12" x2="16.5" y2="12.8"/>
+            </g>
+        </g>
+    </symbol>
+    <symbol id="m-svg__file-image" viewBox="0 0 24 24">
+        <g>
+            <g>
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5,5.5V23 c0,0.3-0.2,0.5-0.5,0.5H4c-0.3,0-0.5-0.2-0.5-0.5V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5H20.5z"/>
+                <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="15.5,0.5 15.5,5.5 20.5,5.5 		"/>
+            </g>
+            <g>
+                <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="17.6,17.6 6.7,17.6 9,13.6 10.4,16.1 13.5,10.6 		"/>
+                <circle fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="7.7" cy="9.7" r="1.3"/>
+            </g>
+        </g>
+    </symbol>
+    <symbol id="m-svg__file-video" viewBox="0 0 24 24">
+        <g>
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5,5.5V23 c0,0.3-0.2,0.5-0.5,0.5H4c-0.3,0-0.5-0.2-0.5-0.5V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5H20.5z"/>
+            <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="15.5,0.5 15.5,5.5 20.5,5.5 	"/>
+        </g>
+        <g>
+            <polygon fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="10" points="17.3,14.8 14.5,13.6 14.5,11.6 17.3,10.4 	"/>
+            <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="10" d="M12.8,15.3H7.2c-0.3,0-0.5-0.2-0.5-0.5v-4.3 c0-0.3,0.2-0.5,0.5-0.5h5.6c0.3,0,0.5,0.2,0.5,0.5v4.3C13.3,15,13.1,15.3,12.8,15.3z"/>
+        </g>
+    </symbol>
+    <symbol id="m-svg__file-archive" viewBox="0 0 24 24">
+        <g>
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5,5.5V23 c0,0.3-0.2,0.5-0.5,0.5H4c-0.3,0-0.5-0.2-0.5-0.5V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5H20.5z"/>
+            <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="15.5,0.5 15.5,5.5 20.5,5.5 	"/>
+        </g>
+        <g>
+            <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="12.4,0.5 12.4,3.2 13.4,3.2 13.4,8.5 10.6,8.5 10.6,3.3"/>
+            <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="10.6" y1="5.5" x2="11.6" y2="5.5"/>
+        </g>
+        <g>
+            <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="12.1" y1="20.6" x2="12.1" y2="16.8"/>
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M14.3,20.6v-3.9h0.9 c0.8,0,0.9,0.4,0.9,1c0,0.5-0.1,1-0.9,1h-0.9"/>
+            <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="7.9,16.8 10.1,16.8 7.9,20.6 10.1,20.6 	"/>
+        </g>
+        <g>
+            <line fill="none" stroke="currentColor" stroke-width="0.7231" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="11.1" y1="10.6" x2="12.3" y2="10.6"/>
+            <line fill="none" stroke="currentColor" stroke-width="0.7231" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="11.7" y1="11.3" x2="12.9" y2="11.3"/>
+            <line fill="none" stroke="currentColor" stroke-width="0.7231" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="11.1" y1="12" x2="12.3" y2="12"/>
+            <line fill="none" stroke="currentColor" stroke-width="0.7231" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="11.7" y1="12.7" x2="12.9" y2="12.7"/>
+            <line fill="none" stroke="currentColor" stroke-width="0.7231" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="11.1" y1="13.4" x2="12.3" y2="13.4"/>
+            <line fill="none" stroke="currentColor" stroke-width="0.7231" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="11.7" y1="14.1" x2="12.9" y2="14.1"/>
+        </g>
+    </symbol>
+    <symbol id="m-svg__file-music" viewBox="0 0 24 24">
+        <g>
+            <g>
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5,5.5V23
+                    c0,0.3-0.2,0.5-0.5,0.5H4c-0.3,0-0.5-0.2-0.5-0.5V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5H20.5z"/>
+                <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="15.5,0.5
+                    15.5,5.5 20.5,5.5 		"/>
+            </g>
+            <g>
+                <g>
+                    <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                        10.3,10.2 15.4,13.5 10.3,16.8 			"/>
+                </g>
+                <circle fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="10" cx="12" cy="13.5" r="5.7"/>
+            </g>
+        </g>
+    </symbol>
+    <symbol id="m-svg__file-other" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5,5.5V23
+            c0,0.3-0.2,0.5-0.5,0.5H4c-0.3,0-0.5-0.2-0.5-0.5V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5H20.5z"/>
+        <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="15.5,0.5
+            15.5,5.5 20.5,5.5 	"/>
+    </symbol>
 </svg>

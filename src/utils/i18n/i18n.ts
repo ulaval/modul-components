@@ -1,4 +1,5 @@
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
+import { vsprintf, sprintf } from '../str/str';
 
 /**
  * This package provides language and locales utilities.
@@ -40,15 +41,28 @@ export enum DebugMode {
 export interface I18nPluginOptions {
     curLang?: string;
     debug?: DebugMode;
+    formatMode?: FormatMode;
+}
+
+export enum FormatMode {
+    Default = '',
+    Vsprintf = 'vsprintf',
+    Sprintf = 'sprintf'
 }
 
 export class Messages {
     private curLang: string = ENGLISH;
+    private formatMode: FormatMode;
     private messages: LanguageBundlesMap = {};
 
     constructor(private options?: I18nPluginOptions) {
-        if (options && options.curLang) {
-            this.curLang = options.curLang;
+        if (options) {
+            if (options.curLang) {
+                this.curLang = options.curLang;
+            }
+            if (options.formatMode) {
+                this.formatMode = options.formatMode;
+            }
         }
     }
 
@@ -106,9 +120,25 @@ export class Messages {
             }
         }
 
-        val = format(val, params);
+        val = this.format(val, params);
 
         return val;
+    }
+
+    /**
+     * format a string with depending on the option formatMode
+     * @param {string} val the string to format
+     * @param {any[]} params the values to insert in string
+     */
+    private format(val: string, params: any[]): string {
+        switch (this.formatMode) {
+            case FormatMode.Vsprintf:
+                return vsprintf(val, params);
+            case FormatMode.Sprintf:
+                return sprintf(val, params);
+            default:
+                return formatRegexp(val, params);
+        }
     }
 
     private resolveKey(
@@ -222,7 +252,7 @@ export class Messages {
  *
  * The format is 'This is a {0} containing {1}...'
  */
-function format(val: string, params: any[]): string {
+function formatRegexp(val: string, params: any[]): string {
     return val.replace(FORMAT_REGEX, match => {
         // TODO: should use the regex variable notation instead of parsing the regex match
         let index = parseInt(match.substring(1, match.length - 1), 10);

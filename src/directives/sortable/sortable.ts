@@ -1,5 +1,5 @@
 import { mousePositionElement } from './mouse';
-import { SORTABLE } from '../directive-names';
+import { SORTABLE_NAME } from '../directive-names';
 import { PluginObject } from 'vue/types/plugin';
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
@@ -395,7 +395,7 @@ const Directive: DirectiveOptions = {
 
 const SortablePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(SORTABLE, Directive);
+        v.directive(SORTABLE_NAME, Directive);
     }
 };
 

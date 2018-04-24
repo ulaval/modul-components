@@ -121,13 +121,11 @@ module.exports = function (env) {
         ]
     }
 
-    if (!buildOnly) {
-        config.plugins.push(new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: resolve('tests/app/index.html'),
-            inject: 'body'
-        }));
-    }
+    config.plugins.push(new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: resolve('tests/app/index.html'),
+        inject: 'body'
+    }));
 
     return config;
 }
