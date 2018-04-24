@@ -61,6 +61,7 @@ import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
 import ValidationMessagePlugin from './validation-message/validation-message';
 import InplaceEditPlugin from './inplace-edit/inplace-edit';
+import { Logger } from '../utils/logger/logger';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -125,6 +126,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TooltipPlugin);
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
+
+        Logger.setConsoleOptions(options.consoleOptions);
     }
 };
 
