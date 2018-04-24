@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MI18n given the formatOption = 'vsprintf' should render correctly with params as object: with parameters 1`] = `<span class="m-i18n">Il y a 2925 athlètes olympiques et 93 pays participants.</span>`;
+
 exports[`MI18n should render correctly 1`] = `<span class="m-i18n">test a</span>`;
 
 exports[`MI18n should render correctly in plural form: plural 1`] = `<span class="m-i18n">I have many yorkies!</span>`;
@@ -7,5 +9,9 @@ exports[`MI18n should render correctly in plural form: plural 1`] = `<span class
 exports[`MI18n should render correctly in plural form: single 1`] = `<span class="m-i18n">I have one yorkie!</span>`;
 
 exports[`MI18n should render correctly with html encoding 1`] = `<span class="m-i18n">&lt;i&gt;test&lt;/i&gt;</span>`;
+
+exports[`MI18n should render correctly with modifier: modified 1`] = `<span class="m-i18n">I am modified!</span>`;
+
+exports[`MI18n should render correctly with modifier: not modified 1`] = `<span class="m-i18n">I am not modified!</span>`;
 
 exports[`MI18n should render correctly with params 1`] = `<span class="m-i18n">test a, test b</span>`;

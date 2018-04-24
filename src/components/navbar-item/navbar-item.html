@@ -4,6 +4,7 @@
     role="menuitem"
     :aria-selected="isSelected"
     @keyup.enter="onClick"
-    @click="onClick">
+    @click="onClick"
+    @mouseover="onMouseOver">
     <slot></slot>
 </li>
