@@ -9,6 +9,7 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import ButtonPlugin from '../button/button';
 import DialogPlugin from '../dialog/dialog';
 import { ModulVue } from '../../utils/vue/vue';
+import { Logger } from '../../utils/logger/logger';
 
 export type SaveFn = () => Promise<void>;
 
@@ -82,14 +83,14 @@ export class MInplaceEdit extends ModulVue {
                 this.error = true;
             }).then(() => this.submitted = false);
         } else {
-            console.warn('No save function provided (save-fn prop is undefined)');
+            Logger.warn('No save function provided (save-fn prop is undefined)');
         }
     }
 }
 
 const InplaceEditPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(INPLACE_EDIT + ' is not ready for production');
+        Logger.warn(INPLACE_EDIT + ' is not ready for production');
         v.use(MediaQueriesPlugin);
         v.use(IconButtonPlugin);
         v.use(ButtonPlugin);

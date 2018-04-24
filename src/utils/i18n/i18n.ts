@@ -1,5 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import { vsprintf, sprintf } from '../str/str';
+import { Logger } from '../logger/logger';
 
 /**
  * This package provides language and locales utilities.
@@ -207,7 +208,7 @@ export class Messages {
             throw new Error(error);
         } else {
             if (!this.options || this.options.debug === DebugMode.Warn) {
-                console.warn(error);
+                Logger.warn(error);
             } else {
                 console.debug(error);
             }
@@ -230,7 +231,7 @@ export class Messages {
                 throw new Error(error);
             } else {
                 if (!this.options || this.options.debug === DebugMode.Warn) {
-                    console.warn(error);
+                    Logger.warn(error);
                 } else {
                     console.debug(error);
                 }
@@ -258,7 +259,7 @@ function formatRegexp(val: string, params: any[]): string {
         let index = parseInt(match.substring(1, match.length - 1), 10);
 
         if (index >= params.length) {
-            console.warn(
+            Logger.warn(
                 `The parameter ${index} doesn't exist while translating: '${val}'`
             );
         }

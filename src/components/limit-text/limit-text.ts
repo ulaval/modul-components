@@ -6,6 +6,7 @@ import WithRender from './limit-text.html?style=./limit-text.scss';
 import { LIMIT_TEXT_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component
@@ -81,7 +82,7 @@ export class MLimitText extends ModulVue {
 
 const LimitTextPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(LIMIT_TEXT_NAME + ' is not ready for production');
+        Logger.warn(LIMIT_TEXT_NAME + ' is not ready for production');
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.component(LIMIT_TEXT_NAME, MLimitText);

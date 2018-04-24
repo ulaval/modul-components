@@ -13,6 +13,7 @@ import { TEXTAREA_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textarea.html?style=./textarea.scss';
+import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component({
@@ -55,7 +56,7 @@ export class MTextarea extends ModulVue implements InputManagementData {
 
 const TextareaPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(TEXTAREA_NAME + ' is not ready for production');
+        Logger.warn(TEXTAREA_NAME + ' is not ready for production');
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(TextAreaAutoHeightPlugin);

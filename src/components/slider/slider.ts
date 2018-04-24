@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch, Model } from 'vue-property-decorator';
 import WithRender from './slider.html?style=./slider.scss';
 import { SLIDER_NAME } from '../component-names';
+import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component
@@ -94,7 +95,7 @@ export class MSlider extends ModulVue {
 
 const SliderPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(SLIDER_NAME + ' is not ready for production');
+        Logger.warn(SLIDER_NAME + ' is not ready for production');
         v.component(SLIDER_NAME, MSlider);
     }
 };

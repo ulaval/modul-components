@@ -7,6 +7,7 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import TextFieldPlugin from '../textfield/textfield';
 import { ModulVue } from '../../utils/vue/vue';
 import I18nPlugin from '../i18n/i18n';
+import { Logger } from '../../utils/logger/logger';
 
 const LOGIN_NAME: string = 'm-login';
 export type LoginFn = (username: string, password: string) => Promise<any>;
@@ -32,7 +33,7 @@ export class MLogin extends ModulVue {
                 this.$emit('login');
             }, error => this.lastError = error);
         } else {
-            console.warn('No login function provided (login-fn prop is undefined)');
+            Logger.warn('No login function provided (login-fn prop is undefined)');
         }
     }
 }

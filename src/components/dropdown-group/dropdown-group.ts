@@ -4,6 +4,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './dropdown-group.html?style=./dropdown-group.scss';
 import { DROPDOWN_GROUP_NAME } from '../component-names';
 import { BaseDropdownGroup, BaseDropdown, MDropdownInterface } from '../dropdown-item/dropdown-item';
+import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component
@@ -28,7 +29,7 @@ export class MDropdownGroup extends BaseDropdownGroup {
 
 const DropdownGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(DROPDOWN_GROUP_NAME + ' is not ready for production');
+        Logger.warn(DROPDOWN_GROUP_NAME + ' is not ready for production');
         v.component(DROPDOWN_GROUP_NAME, MDropdownGroup);
     }
 };

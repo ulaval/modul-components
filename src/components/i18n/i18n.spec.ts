@@ -6,6 +6,7 @@ import { renderComponent } from '../../../tests/helpers/render';
 import MI18nPlugin, { MI18n } from './i18n';
 import I18nPlugin, { I18nPluginOptions, FormatMode } from '../../utils/i18n/i18n';
 import { resetModulPlugins } from '../../../tests/helpers/component';
+import { Logger } from '../../utils/logger/logger';
 
 describe('MI18n', () => {
     let localVue: VueConstructor<Vue>;
@@ -82,7 +83,7 @@ describe('MI18n', () => {
     });
 
     it('should warn if key not defined', () => {
-        jest.spyOn(console, 'warn');
+        jest.spyOn(Logger, 'warn');
 
         const i18n = mount(MI18n, {
             localVue: localVue,
@@ -91,7 +92,7 @@ describe('MI18n', () => {
             }
         });
 
-        expect(console.warn).toHaveBeenCalledWith(
+        expect(Logger.warn).toHaveBeenCalledWith(
             'The key undefined:key does not exist. Current lang: en'
         );
     });

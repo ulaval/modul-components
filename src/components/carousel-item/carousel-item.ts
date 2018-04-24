@@ -4,6 +4,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './carousel-item.html?style=./carousel-item.scss';
 import { CAROUSEL_ITEM_NAME } from '../component-names';
 import * as TouchPlugin from 'vue-touch';
+import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component
@@ -25,7 +26,7 @@ export class MCarouselItem extends Vue {
 
 const CarouselItemPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(CAROUSEL_ITEM_NAME + ' is not ready for production');
+        Logger.warn(CAROUSEL_ITEM_NAME + ' is not ready for production');
         v.component(CAROUSEL_ITEM_NAME, MCarouselItem);
         Vue.use(TouchPlugin, { name: 'v-touch' });
     }

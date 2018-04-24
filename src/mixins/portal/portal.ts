@@ -4,6 +4,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../open-trigger/open-trigger';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
+import { Logger } from '../../utils/logger/logger';
 
 export interface PortalMixin {
     propOpen: boolean;
@@ -207,7 +208,7 @@ export class Portal extends ModulVue implements PortalMixin {
 
     private handleTrigger(): void {
         if (this.internalTrigger) {
-            console.warn('portal.ts : Trigger change or multiple triggers not supported');
+            Logger.warn('portal.ts : Trigger change or multiple triggers not supported');
         }
         if (this.trigger) {
             this.internalTrigger = this.trigger;

@@ -9,6 +9,7 @@ import PortalPlugin from 'portal-vue';
 import ModulPlugin from '../../utils/modul/modul';
 import { BackdropMode } from '../../mixins/portal/portal';
 import I18nPlugin from '../i18n/i18n';
+import { Logger } from '../../utils/logger/logger';
 
 export enum MSpinnerStyle {
     Dark = 'dark',
@@ -83,7 +84,7 @@ export class MSpinner extends ModulVue {
 
     @Watch('processing')
     private onProcessingChange(value: boolean): void {
-        console.warn(`<${SPINNER_NAME}>: ${PROCESSING_WARN}`);
+        Logger.warn(`<${SPINNER_NAME}>: ${PROCESSING_WARN}`);
         if (!value) {
             this.removeBackdrop();
         }

@@ -7,6 +7,7 @@ import { SWITCH_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import { Logger } from '../../utils/logger/logger';
 
 export enum MSwitchPosition {
     Left = 'left',
@@ -66,7 +67,7 @@ export class MSwitch extends ModulVue {
 
 const SwitchPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(SWITCH_NAME + ' is not ready for production');
+        Logger.warn(SWITCH_NAME + ' is not ready for production');
         v.use(ValidationMessagePlugin);
         v.component(SWITCH_NAME, MSwitch);
     }

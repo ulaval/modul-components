@@ -7,6 +7,7 @@ import { NAVBAR_NAME, NAVBAR_ITEM_NAME } from '../component-names';
 import NavbarItemPlugin, { BaseNavbar, Navbar } from '../navbar-item/navbar-item';
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
 import { ComputedOptions } from 'vue/types/options';
+import { Logger } from '../../utils/logger/logger';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -174,7 +175,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
 const NavbarPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(NAVBAR_NAME + ' is not ready for production');
+        Logger.warn(NAVBAR_NAME + ' is not ready for production');
         v.use(NavbarItemPlugin);
         v.component(NAVBAR_NAME, MNavbar);
     }

@@ -3,6 +3,7 @@ import { mount, Wrapper } from '@vue/test-utils';
 import LoginPlugin, { MLogin } from './login';
 import { renderComponent } from '../../../tests/helpers/render';
 import { addMessages } from '../../../tests/helpers/lang';
+import { Logger } from '../../utils/logger/logger';
 
 describe('MLogin', () => {
 
@@ -39,7 +40,7 @@ describe('MLogin', () => {
         });
 
         it('should warn when the login function is undefined', () => {
-            jest.spyOn(console, 'warn');
+            jest.spyOn(Logger, 'warn');
 
             let wrapper: Wrapper<MLogin> = mount(MLogin, {
                 localVue: Vue
@@ -48,7 +49,7 @@ describe('MLogin', () => {
             let form: Wrapper<Vue> = wrapper.find('form');
             form.trigger('submit');
 
-            expect(console.warn).toHaveBeenCalledWith('No login function provided (login-fn prop is undefined)');
+            expect(Logger.warn).toHaveBeenCalledWith('No login function provided (login-fn prop is undefined)');
         });
     });
 });

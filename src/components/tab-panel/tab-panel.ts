@@ -5,6 +5,7 @@ import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './tab-panel.html?style=./tab-panel.scss';
 import { TAB_PANEL_NAME } from '../component-names';
 import { MTabsInterface } from '../tabs/tabs';
+import { Logger } from '../../utils/logger/logger';
 
 export abstract class BaseTabs extends ModulVue {
 }
@@ -49,7 +50,7 @@ export class MTabPane extends ModulVue {
 
 const TabPannePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(TAB_PANEL_NAME + ' is not ready for production');
+        Logger.warn(TAB_PANEL_NAME + ' is not ready for production');
         v.component(TAB_PANEL_NAME, MTabPane);
     }
 };
