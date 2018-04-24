@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import '../../utils/polyfills';
 import DropdownPlugin, { MDropdown } from './dropdown';
+import { Logger } from '../../utils/logger/logger';
 
 const DISABLED_CSS: string = 'm--is-disabled';
 const WAITING_CSS: string = 'm--is-waiting';
@@ -110,7 +111,7 @@ describe('dropdown', () => {
     });
 
     it('change event - called once', () => {
-        console.log('TODO');
+        Logger.log('TODO');
     });
 
     // En attente d'un changement pour Portal
@@ -163,7 +164,7 @@ describe('dropdown', () => {
 
     //     Vue.nextTick(() => {
     //         items = (vm.$refs.dd as Vue).$el.querySelectorAll('.m-dropdown__list li');
-    //         console.log('*1*', items.length);
+    //         Logger.log('*1*', items.length);
     //         expect(items.length == 2).toBeTruthy();
 
     //         if (input) {
@@ -172,7 +173,7 @@ describe('dropdown', () => {
     //         }
 
     //         items = (vm.$refs.dd as Vue).$el.querySelectorAll('.m-dropdown__list li');
-    //         console.log('*2*', items);
+    //         Logger.log('*2*', items);
     //         expect(items.length == 1).toBeTruthy();
 
     //         if (input) {
@@ -181,7 +182,7 @@ describe('dropdown', () => {
     //         }
 
     //         items = (vm.$refs.dd as Vue).$el.querySelectorAll('.m-dropdown__list li');
-    //         console.log('*3*', items);
+    //         Logger.log('*3*', items);
     //         expect(items.length == 1).toBeTruthy();
     //         expect(items[1].classList.contains(INACTIF_CSS)).toBeTruthy();
 
