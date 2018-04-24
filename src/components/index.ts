@@ -127,7 +127,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
 
-        if (options) {
+        if (options && options.consoleOptions) {
             Logger.setConsoleOptions(options.consoleOptions);
         }
     }
