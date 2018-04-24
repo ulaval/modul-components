@@ -2,10 +2,11 @@ import { MElementPlugin, MDOMPlugin, MountFunction, RefreshFunction } from '../d
 import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { REMOVE_USER_SELECT } from '../directive-names';
 
-export class MRemoveUserSelect extends MElementPlugin<boolean> {
+export class MRemoveUserSelect extends MElementPlugin<boolean | undefined> {
     public static defaultMountPoint: string = '__mremoveuserselect__';
 
     public attach(mount: MountFunction): void {
+        if (this.options === undefined) { this._options = true; }
         if (this.options) {
             mount(() => {
                 this.addEventListener('onmouseover', (event: Event) => { event.preventDefault(); });
@@ -16,7 +17,9 @@ export class MRemoveUserSelect extends MElementPlugin<boolean> {
             });
         }
     }
-    public update(options: string, refresh: RefreshFunction): void {
+    public update(options: boolean, refresh: RefreshFunction): void {
+        if (options === undefined) { options = true; }
+        this._options = options;
         if (this.options) {
             refresh(() => {});
         }
