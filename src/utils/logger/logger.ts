@@ -14,7 +14,6 @@ export class Logger {
     private static displayDebugs: boolean = true;
     private static displayInfos: boolean = true;
     private static hideAll: boolean = false;
-    private static _instance: Logger;
 
     private constructor() {}
 
