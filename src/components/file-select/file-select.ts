@@ -10,6 +10,7 @@ import ButtonPlugin, { MButtonIconPosition, MButtonSkin } from '../button/button
 import { FILE_SELECT_NAME } from '../component-names';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './file-select.html?style=./file-select.scss';
+import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component({
@@ -88,7 +89,7 @@ export class MFileSelect extends ModulVue {
 
 const FileSelectPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(FILE_SELECT_NAME, 'plugin.install');
+        Logger.debug(FILE_SELECT_NAME, 'plugin.install');
         v.use(ButtonPlugin);
         v.use(ValidationMesagePlugin);
         v.use(FilePlugin);

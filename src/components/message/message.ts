@@ -6,6 +6,7 @@ import { MESSAGE_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import IconButtonPlugin from '../icon-button/icon-button';
 import I18nPlugin from '../i18n/i18n';
+import { Logger } from '../../utils/logger/logger';
 
 export enum MMessageState {
     Success = 'success',
@@ -100,7 +101,7 @@ export class MMessage extends Vue {
 
 const MessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(MESSAGE_NAME, 'plugin.install');
+        Logger.debug(MESSAGE_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(IconButtonPlugin);
         v.use(I18nPlugin);

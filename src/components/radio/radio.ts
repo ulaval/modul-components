@@ -8,6 +8,7 @@ import IconPlugin from '../icon/icon';
 import uuid from '../../utils/uuid/uuid';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import { Logger } from '../../utils/logger/logger';
 
 export enum MRadioPosition {
     Left = 'left',
@@ -161,7 +162,7 @@ export class MRadio extends ModulVue {
 
 const RadioPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(RADIO_NAME, 'plugin.install');
+        Logger.debug(RADIO_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(ValidationMessagePlugin);
         v.component(RADIO_NAME, MRadio);

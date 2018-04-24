@@ -40,7 +40,7 @@ export class MLogin extends ModulVue {
 
 const LoginPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(LOGIN_NAME, 'plugin.install');
+        Logger.debug(LOGIN_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(ButtonPlugin);
         v.use(IconButtonPlugin);

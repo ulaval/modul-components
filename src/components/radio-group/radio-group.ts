@@ -7,6 +7,7 @@ import RadioPlugin, { MRadioPosition, BaseRadioGroup, RadioGroup } from '../radi
 import uuid from '../../utils/uuid/uuid';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component({
@@ -77,7 +78,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
 const RadioGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(RADIO_GROUP_NAME, 'plugin.install');
+        Logger.debug(RADIO_GROUP_NAME, 'plugin.install');
         v.use(RadioPlugin);
         v.use(ValidationMessagePlugin);
         v.component(RADIO_GROUP_NAME, MRadioGroup);

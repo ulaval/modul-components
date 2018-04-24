@@ -210,7 +210,7 @@ export class Messages {
             if (!this.options || this.options.debug === DebugMode.Warn) {
                 Logger.warn(error);
             } else {
-                console.debug(error);
+                Logger.debug(error);
             }
             return key;
         }
@@ -233,7 +233,7 @@ export class Messages {
                 if (!this.options || this.options.debug === DebugMode.Warn) {
                     Logger.warn(error);
                 } else {
-                    console.debug(error);
+                    Logger.debug(error);
                 }
                 return undefined;
             }
@@ -283,7 +283,7 @@ function htmlEncode(val: string): string {
 
 const MessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug('$i18n', 'plugin.install');
+        Logger.debug('$i18n', 'plugin.install');
 
         let msg: Messages = new Messages(options);
         (v.prototype as any).$i18n = msg;

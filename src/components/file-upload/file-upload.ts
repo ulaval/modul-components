@@ -20,6 +20,7 @@ import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import { Logger } from '../../utils/logger/logger';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 
@@ -272,7 +273,7 @@ export class MFileUpload extends ModulVue {
 
 const FileUploadPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(FILE_UPLOAD_NAME, 'plugin.install');
+        Logger.debug(FILE_UPLOAD_NAME, 'plugin.install');
         v.use(FilePlugin);
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);

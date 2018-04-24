@@ -6,6 +6,7 @@ import { LIST_ITEM_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
 import SpinnerPlugin from '../spinner/spinner';
 import I18nPlugin from '../i18n/i18n';
+import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component
@@ -44,7 +45,7 @@ export class MListItem extends Vue {
 
 const ListItemPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(LIST_ITEM_NAME, 'plugin.install');
+        Logger.debug(LIST_ITEM_NAME, 'plugin.install');
         v.use(IconButtonPlugin);
         v.use(SpinnerPlugin);
         v.use(I18nPlugin);

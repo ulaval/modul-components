@@ -4,7 +4,7 @@ import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 
 const SpritesHelper: PluginObject<any> = {
     install(v, options) {
-        console.debug('SpritesHelper', 'plugin.install');
+        Logger.debug('SpritesHelper', 'plugin.install');
         v.use(SvgPlugin);
         v.use(DefaultSpritesPlugin);
     }

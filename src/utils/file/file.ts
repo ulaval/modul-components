@@ -4,6 +4,7 @@ import Vue, { PluginObject } from 'vue';
 import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
 import { ModulVue } from '../vue/vue';
+import { Logger } from '../logger/logger';
 
 export const DEFAULT_STORE_NAME: string = 'DEFAULT';
 
@@ -300,7 +301,7 @@ class FileStore {
 
 const FilePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug('$file', 'plugin.install');
+        Logger.debug('$file', 'plugin.install');
         let file: FileService = new FileService();
         (v.prototype as any).$file = file;
     }
