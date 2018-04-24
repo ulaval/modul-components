@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 
 import { SpritesService } from './sprites';
+import { Logger } from '../logger/logger';
 
 const DefaultSpritesPlugin: PluginObject<any> = {
     install(v, options): void {

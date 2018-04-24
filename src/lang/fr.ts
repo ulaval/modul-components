@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 
 import { BundleMessagesMap, FRENCH, Messages } from '../utils/i18n/i18n';
+import { Logger } from '../utils/logger/logger';
 
 const FrenchPlugin: PluginObject<any> = {
     install(v, options): void {

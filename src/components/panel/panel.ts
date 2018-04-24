@@ -4,6 +4,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './panel.html?style=./panel.scss';
 import { PANEL_NAME } from '../component-names';
 import ElementQueries from 'css-element-queries/src/ElementQueries';
+import { Logger } from '../../utils/logger/logger';
 
 export enum MPanelSkin {
     Light = 'light',

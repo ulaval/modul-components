@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 
 import uuid from '../uuid/uuid';
+import { Logger } from '../logger/logger';
 
 export class SpritesService {
     public addSprites(sprites: string): void {
