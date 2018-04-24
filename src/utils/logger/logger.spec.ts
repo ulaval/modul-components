@@ -67,7 +67,7 @@ describe(`Given the class Logger`, () => {
                 });
             });
 
-            it(`a log should be displayed`, () => {
+            it(`a log shouldn't be displayed`, () => {
                 Logger.log('test');
                 expect(console.log).not.toHaveBeenCalled();
             });
@@ -93,7 +93,7 @@ describe(`Given the class Logger`, () => {
                 });
             });
 
-            it(`a warn should be displayed`, () => {
+            it(`a warn shouldn't be displayed`, () => {
                 Logger.warn('test');
                 expect(console.warn).not.toHaveBeenCalled();
             });
@@ -119,7 +119,7 @@ describe(`Given the class Logger`, () => {
                 });
             });
 
-            it(`a debug should be displayed`, () => {
+            it(`a debug shouldn't be displayed`, () => {
                 Logger.debug('test');
                 expect(console.debug).not.toHaveBeenCalled();
             });
@@ -145,7 +145,7 @@ describe(`Given the class Logger`, () => {
                 });
             });
 
-            it(`an info should be displayed`, () => {
+            it(`an info shouldn't be displayed`, () => {
                 Logger.info('test');
                 expect(console.info).not.toHaveBeenCalled();
             });
