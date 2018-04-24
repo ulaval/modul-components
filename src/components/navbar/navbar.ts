@@ -108,6 +108,14 @@ export class MNavbar extends BaseNavbar implements Navbar {
         });
     }
 
+    private setPointers(skin: string): void {
+        this.$children.forEach(element => {
+            if (element.$props.value === this.selected) {
+                this.setPosition(element, skin);
+            }
+        });
+    }
+
     private setPosition(element, ref: string): void {
         let positionX: number = element.$el.offsetLeft;
         let width: number = element.$el.clientWidth;
@@ -122,6 +130,9 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Watch('selected')
     private setAndUpdate(value): void {
         this.internalValue = value;
+        if (this.skin == MNavbarSkin.Light || this.skin == MNavbarSkin.Arrow) {
+            this.setPointers(this.skin);
+        }
     }
 
     private setupScrolllH(): void {
