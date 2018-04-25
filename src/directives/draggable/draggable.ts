@@ -2,7 +2,7 @@ import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
 import { clearUserSelection } from '../../utils/selection/selection';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
-import { DRAGGABLE } from '../directive-names';
+import { DRAGGABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDroppable } from '../droppable/droppable';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
@@ -172,7 +172,7 @@ const extractVnodeAttributes: (binding: VNodeDirective, node: VNode) => MDraggab
 };
 const Directive: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        const test = MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(binding, node));
+        MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(binding, node));
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.attach(MDraggable, element, extractVnodeAttributes(binding, node));
@@ -184,7 +184,7 @@ const Directive: DirectiveOptions = {
 
 const DraggablePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(DRAGGABLE, Directive);
+        v.directive(DRAGGABLE_NAME, Directive);
     }
 };
 

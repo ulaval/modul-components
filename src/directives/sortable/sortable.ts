@@ -3,7 +3,7 @@ import { PluginObject } from 'vue/types/plugin';
 
 import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
-import { SORTABLE } from '../directive-names';
+import { SORTABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
 import { MDropEvent, MDropEventNames, MDroppable } from '../droppable/droppable';
@@ -438,7 +438,7 @@ const Directive: DirectiveOptions = {
 
 const SortablePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(SORTABLE, Directive);
+        v.directive(SORTABLE_NAME, Directive);
     }
 };
 

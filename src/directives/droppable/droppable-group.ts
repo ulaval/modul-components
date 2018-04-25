@@ -1,6 +1,6 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
-import { DROPPABLE_GROUP } from '../directive-names';
+import { DROPPABLE_GROUP_NAME } from '../directive-names';
 import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 
 export class MDroppableGroup extends MElementPlugin<string> {
@@ -33,7 +33,7 @@ const Directive: DirectiveOptions = {
 
 const DroppableGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(DROPPABLE_GROUP, Directive);
+        v.directive(DROPPABLE_GROUP_NAME, Directive);
     }
 };
 

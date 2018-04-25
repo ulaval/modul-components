@@ -2,7 +2,7 @@ import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
 import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
-import { DROPPABLE } from '../directive-names';
+import { DROPPABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable } from '../draggable/draggable';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
@@ -238,7 +238,7 @@ const Directive: DirectiveOptions = {
 
 const DroppablePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(DROPPABLE, Directive);
+        v.directive(DROPPABLE_NAME, Directive);
     }
 };
 

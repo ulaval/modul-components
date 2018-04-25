@@ -2,7 +2,7 @@ import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
 import { isInElement } from '../../utils/mouse/mouse';
 import { polyFillActive } from '../../utils/polyfills';
-import { DRAGGABLE_ALLOW_SCROLL } from '../directive-names';
+import { DRAGGABLE_ALLOW_SCROLL_NAME } from '../directive-names';
 import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 
 export class MDraggableAllowScroll extends MElementPlugin<boolean> {
@@ -11,7 +11,7 @@ export class MDraggableAllowScroll extends MElementPlugin<boolean> {
 
     public attach(mount: MountFunction): void {
         if (window.getComputedStyle(this.element).position !== 'fixed') {
-            console.error(`Directive v-${DRAGGABLE_ALLOW_SCROLL} expected element to have position: fixed.`);
+            console.error(`Directive v-${DRAGGABLE_ALLOW_SCROLL_NAME} expected element to have position: fixed.`);
             return;
         }
 
@@ -82,7 +82,7 @@ const Directive: DirectiveOptions = {
 
 const DraggableAllowScrollPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(DRAGGABLE_ALLOW_SCROLL, Directive);
+        v.directive(DRAGGABLE_ALLOW_SCROLL_NAME, Directive);
     }
 };
 
