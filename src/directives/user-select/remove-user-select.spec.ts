@@ -6,7 +6,6 @@ import RemoveUserSelectPlugin from './remove-user-select';
 
 describe('remove-user-select', () => {
     let localVue: VueConstructor<ModulVue>;
-    let removeUserSelect: Wrapper<ModulVue>;
 
     beforeEach(() => {
         resetModulPlugins();

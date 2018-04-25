@@ -119,15 +119,10 @@ class NullObjectMElementPlugin<OptionsType> implements IMElementPlugin<OptionsTy
     removeAllEvents(): void {}
 }
 
-export enum MElementPluginStatus {
-    Mounted = 'mounted',
-    UnMounted = 'unmounted'
-}
 export abstract class MElementPlugin<OptionsType> implements IMElementPlugin<OptionsType> {
     protected attachedEvents: Map<string, EventListenerOrEventListenerObject[]> = new Map<string, EventListenerOrEventListenerObject[]>();
     protected _options: OptionsType;
     private readonly _element: HTMLElement;
-    private _status: MElementPluginStatus = MElementPluginStatus.UnMounted;
 
     public get element(): HTMLElement { return this._element; }
     public get options(): OptionsType { return this._options; }
