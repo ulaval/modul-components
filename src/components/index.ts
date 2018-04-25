@@ -65,6 +65,10 @@ import { Logger } from '../utils/logger/logger';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
+        if (options && options.consoleOptions) {
+            Logger.setConsoleOptions(options.consoleOptions);
+        }
+
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
@@ -126,10 +130,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TooltipPlugin);
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
-
-        if (options && options.consoleOptions) {
-            Logger.setConsoleOptions(options.consoleOptions);
-        }
     }
 };
 
