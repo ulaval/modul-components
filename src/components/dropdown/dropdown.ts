@@ -75,9 +75,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (text !== undefined && this.dirty && (this.internalFilterRegExp)) {
             result = this.internalFilterRegExp.test(text);
         }
-        if (this.internalItems.length < 4 && this.filterable) {
-            this.$refs.popup.$refs.popper.update();
-        }
         return result;
     }
 
@@ -243,6 +240,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
         this.internalItems = items;
         this.internalNavigationItems = navigation;
+        this.$refs.popup.$refs.popper.update();
         this.focusSelected();
     }
 
