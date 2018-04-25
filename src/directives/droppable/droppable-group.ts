@@ -1,6 +1,7 @@
-import { MElementPlugin, MDOMPlugin, MountFunction, RefreshFunction } from '../domPlugin';
-import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
+import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
+
 import { DROPPABLE_GROUP } from '../directive-names';
+import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 
 export class MDroppableGroup extends MElementPlugin<string> {
     public static defaultMountPoint: string = '__mdroppablegroup__';

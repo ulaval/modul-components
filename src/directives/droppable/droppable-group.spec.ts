@@ -1,9 +1,10 @@
+import { mount } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-import { Wrapper, mount } from '@vue/test-utils';
+
+import { resetModulPlugins } from '../../../tests/helpers/component';
 import { ModulVue } from '../../utils/vue/vue';
 import { MDOMPlugin } from '../domPlugin';
 import DroppableGroupPlugin, { MDroppableGroup } from '../droppable/droppable-group';
-import { resetModulPlugins } from '../../../tests/helpers/component';
 import RemoveUserSelectPlugin from '../user-select/remove-user-select';
 
 describe('droppable-group', () => {

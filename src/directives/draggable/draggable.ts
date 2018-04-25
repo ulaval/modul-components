@@ -1,11 +1,11 @@
-import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
-import { DRAGGABLE } from '../directive-names';
-import { MElementPlugin, MDOMPlugin, MountFunction, RefreshFunction } from '../domPlugin';
-import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
-import { MDroppable, MDroppableClassNames } from '../droppable/droppable';
+import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
+
 import { clearUserSelection } from '../../utils/selection/selection';
+import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
+import { DRAGGABLE } from '../directive-names';
+import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import { MDroppable } from '../droppable/droppable';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
-import { MSortable } from '../sortable/sortable';
 import { MDraggableAllowScroll } from './draggable-allow-scroll';
 
 export enum MDraggableClassNames {

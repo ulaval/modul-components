@@ -1,12 +1,12 @@
-import { SORTABLE } from '../directive-names';
-import { PluginObject } from 'vue/types/plugin';
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
+import { PluginObject } from 'vue/types/plugin';
+
+import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
+import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
+import { SORTABLE } from '../directive-names';
+import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
-import { MDroppable, MDropEvent, MDropEventNames, MDropInfo } from '../droppable/droppable';
-import tabPanel from 'src/components/tab-panel/tab-panel';
-import { MDOMPlugin, MElementPlugin, IMElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
-import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
-import { isInElement, mousePositionElement, RelativeMousePos, mousePositionDocument } from '../../utils/mouse/mouse';
+import { MDropEvent, MDropEventNames, MDroppable } from '../droppable/droppable';
 import { MDroppableGroup } from '../droppable/droppable-group';
 
 export interface MSortableOptions {

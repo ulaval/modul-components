@@ -1,9 +1,10 @@
-import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
+import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
+
+import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
+import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { DROPPABLE } from '../directive-names';
+import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable } from '../draggable/draggable';
-import { MElementPlugin, MDOMPlugin, MountFunction, RefreshFunction } from '../domPlugin';
-import { getVNodeAttributeValue, dispatchEvent } from '../../utils/vue/directive';
-import { mousePositionElement, isInElement } from '../../utils/mouse/mouse';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
 
 export enum MDroppableClassNames {
