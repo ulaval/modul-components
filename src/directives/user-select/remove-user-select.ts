@@ -1,9 +1,9 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
 import { REMOVE_USER_SELECT_NAME } from '../directive-names';
-import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 
-export class MRemoveUserSelect extends MElementPlugin<boolean | undefined> {
+export class MRemoveUserSelect extends MElementDomPlugin<boolean | undefined> {
     public static defaultMountPoint: string = '__mremoveuserselect__';
 
     public attach(mount: MountFunction): void {

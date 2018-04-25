@@ -2,18 +2,18 @@ export type MountFunction = (callback: MountCallback) => void;
 export type RefreshFunction = (callback: MountCallback) => void;
 export type MountCallback = () => void;
 export class MDOMPlugin {
-    public static get<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+    public static get<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement): IMElementPlugin<OptionsType> | undefined {
+    }, element: HTMLElement): DomPlugin<OptionsType> | undefined {
         return element[constructorFunction.defaultMountPoint];
     }
 
-    public static getRecursive<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+    public static getRecursive<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement): IMElementPlugin<OptionsType> | undefined {
-        let plugin: IMElementPlugin<OptionsType> | undefined;
+    }, element: HTMLElement): DomPlugin<OptionsType> | undefined {
+        let plugin: DomPlugin<OptionsType> | undefined;
         while (element && !plugin) {
             plugin = MDOMPlugin.get(constructorFunction, element);
             element = element.parentNode as HTMLElement;
@@ -22,10 +22,10 @@ export class MDOMPlugin {
         return plugin;
     }
 
-    public static attach<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+    public static attach<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement, options: OptionsType): IMElementPlugin<OptionsType> {
+    }, element: HTMLElement, options: OptionsType): DomPlugin<OptionsType> {
         if (MDOMPlugin.get(constructorFunction, element)) {
             return MDOMPlugin.internalUpdate(constructorFunction, element, options);
         } else {
@@ -33,22 +33,22 @@ export class MDOMPlugin {
         }
     }
 
-    public static detach<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+    public static detach<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
     }, element: HTMLElement): void {
-        const plugin: IMElementPlugin<OptionsType> | undefined = MDOMPlugin.get(constructorFunction, element);
+        const plugin: DomPlugin<OptionsType> | undefined = MDOMPlugin.get(constructorFunction, element);
         if (plugin) {
             plugin.detach();
             delete element[constructorFunction.defaultMountPoint];
         }
     }
 
-    private static internalAttach<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+    private static internalAttach<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement, options: OptionsType): IMElementPlugin<OptionsType> {
-        let plugin: IMElementPlugin<OptionsType> = element[constructorFunction.defaultMountPoint] as IMElementPlugin<OptionsType>;
+    }, element: HTMLElement, options: OptionsType): DomPlugin<OptionsType> {
+        let plugin: DomPlugin<OptionsType> = element[constructorFunction.defaultMountPoint] as DomPlugin<OptionsType>;
         if (plugin) { MDOMPlugin.detach(constructorFunction, element); }
 
         plugin = new constructorFunction(element, options);
@@ -56,31 +56,31 @@ export class MDOMPlugin {
             element[constructorFunction.defaultMountPoint] = plugin;
             return plugin;
         } else {
-            return new NullObjectMElementPlugin(options);
+            return new NullObjectDomPlugin(options);
         }
     }
 
-    private static internalUpdate<PluginType extends IMElementPlugin<OptionsType>, OptionsType>(constructorFunction: {
+    private static internalUpdate<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement, options: OptionsType): IMElementPlugin<OptionsType> {
+    }, element: HTMLElement, options: OptionsType): DomPlugin<OptionsType> {
         const plugin: PluginType = element[constructorFunction.defaultMountPoint] as PluginType;
         if (plugin) {
             if (!this.refreshPlugin(plugin, options)) {
                 MDOMPlugin.detach(constructorFunction, element);
-                return new NullObjectMElementPlugin(options);
+                return new NullObjectDomPlugin(options);
             }
         }
         return plugin;
     }
 
-    private static mountPlugin(plugin: IMElementPlugin<any>): boolean {
+    private static mountPlugin(plugin: DomPlugin<any>): boolean {
         let mounted: boolean = false;
         plugin.attach(this.getMountFunction(() => mounted = true));
         return mounted;
     }
 
-    private static refreshPlugin(plugin: IMElementPlugin<any>, options): boolean {
+    private static refreshPlugin(plugin: DomPlugin<any>, options): boolean {
         let updated: boolean = false;
         plugin.update(options, this.getMountFunction(() => updated = true));
         return updated;
@@ -94,7 +94,7 @@ export class MDOMPlugin {
     }
 }
 
-export interface IMElementPlugin<OptionsType> {
+export interface DomPlugin<OptionsType> {
     element: HTMLElement;
     options: OptionsType;
     attach(mount: MountFunction): void;
@@ -105,7 +105,7 @@ export interface IMElementPlugin<OptionsType> {
     removeAllEvents(): void;
 }
 
-class NullObjectMElementPlugin<OptionsType> implements IMElementPlugin<OptionsType> {
+class NullObjectDomPlugin<OptionsType> implements DomPlugin<OptionsType> {
     element: HTMLElement;
     options: OptionsType;
     constructor(options: OptionsType) {
@@ -119,7 +119,7 @@ class NullObjectMElementPlugin<OptionsType> implements IMElementPlugin<OptionsTy
     removeAllEvents(): void {}
 }
 
-export abstract class MElementPlugin<OptionsType> implements IMElementPlugin<OptionsType> {
+export abstract class MElementDomPlugin<OptionsType> implements DomPlugin<OptionsType> {
     protected attachedEvents: Map<string, EventListenerOrEventListenerObject[]> = new Map<string, EventListenerOrEventListenerObject[]>();
     protected _options: OptionsType;
     private readonly _element: HTMLElement;

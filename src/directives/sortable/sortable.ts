@@ -4,7 +4,7 @@ import { PluginObject } from 'vue/types/plugin';
 import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { SORTABLE_NAME } from '../directive-names';
-import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
 import { MDropEvent, MDropEventNames, MDroppable } from '../droppable/droppable';
 import { MDroppableGroup } from '../droppable/droppable-group';
@@ -82,7 +82,7 @@ export class MSortableGroupingInsertionMarkerBehavior implements MSortableInsert
     }
 }
 
-export class MSortable extends MElementPlugin<MSortableOptions> {
+export class MSortable extends MElementDomPlugin<MSortableOptions> {
     public static defaultMountPoint: string = '__msortable__';
     public static activeSortContainer: MSortable | undefined;
     public static fromSortContainer: MSortable | undefined;

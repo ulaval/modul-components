@@ -5,7 +5,6 @@ import { resetModulPlugins } from '../../../tests/helpers/component';
 import { ModulVue } from '../../utils/vue/vue';
 import { MDOMPlugin } from '../domPlugin';
 import DroppableGroupPlugin, { MDroppableGroup } from '../droppable/droppable-group';
-import RemoveUserSelectPlugin from '../user-select/remove-user-select';
 
 describe('droppable-group', () => {
     let localVue: VueConstructor<ModulVue>;
@@ -13,14 +12,13 @@ describe('droppable-group', () => {
     beforeEach(() => {
         resetModulPlugins();
         Vue.use(DroppableGroupPlugin);
-        Vue.use(RemoveUserSelectPlugin);
     });
 
     it('it should make group resolvable from child element', () => {
         const childGroup: string = 'childGroup';
         const droppableGroup = mount({
             template: `
-                <div v-m-remove-user-select v-m-droppable-group="'${childGroup}'">
+                <div v-m-droppable-group="'${childGroup}'">
                     <div class="someChild">someChild</div>
                 </div>`
         }, { localVue: Vue });

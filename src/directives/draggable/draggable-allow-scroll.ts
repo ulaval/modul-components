@@ -3,9 +3,9 @@ import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { isInElement } from '../../utils/mouse/mouse';
 import { polyFillActive } from '../../utils/polyfills';
 import { DRAGGABLE_ALLOW_SCROLL_NAME } from '../directive-names';
-import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 
-export class MDraggableAllowScroll extends MElementPlugin<boolean> {
+export class MDraggableAllowScroll extends MElementDomPlugin<boolean> {
     public static currentDraggableScroll?: MDraggableAllowScroll;
     public static defaultMountPoint: string = '__mdraggableallowscroll__';
 

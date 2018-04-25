@@ -3,7 +3,7 @@ import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { DROPPABLE_NAME } from '../directive-names';
-import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable } from '../draggable/draggable';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
 
@@ -44,7 +44,7 @@ export enum MDropEventNames {
 
 const DEFAULT_ACTION = 'any';
 
-export class MDroppable extends MElementPlugin<MDroppableOptions> {
+export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     public static defaultMountPoint: string = '__mdroppable__';
     public static currentHoverDroppable?: MDroppable;
     public static previousHoverContainer?: MDroppable;

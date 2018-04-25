@@ -3,7 +3,7 @@ import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { clearUserSelection } from '../../utils/selection/selection';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { DRAGGABLE_NAME } from '../directive-names';
-import { MDOMPlugin, MElementPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDroppable } from '../droppable/droppable';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
 import { MDraggableAllowScroll } from './draggable-allow-scroll';
@@ -33,7 +33,7 @@ export enum MDraggableEventNames {
 }
 
 const DEFAULT_ACTION = 'any';
-export class MDraggable extends MElementPlugin<MDraggableOptions> {
+export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public static defaultMountPoint: string = '__mdraggable__';
     public static currentDraggable?: MDraggable;
 
