@@ -80,7 +80,6 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public detach(): void {
         this.element.draggable = false;
         MDOMPlugin.detach(MRemoveUserSelect, this.element);
-        this.detachDragImage();
         this.element.classList.remove(MDraggableClassNames.Draggable);
         this.cleanupCssClasses();
         this.removeAllEvents();
@@ -97,13 +96,6 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
             dragImage.style.position = 'absolute';
             dragImage.style.overflow = 'hidden';
             dragImage.style.zIndex = '1';
-            dragImage.hidden = true;
-        }
-    }
-
-    private detachDragImage(): void {
-        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
-        if (dragImage) {
             dragImage.hidden = true;
         }
     }
