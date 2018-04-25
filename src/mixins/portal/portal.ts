@@ -148,7 +148,11 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public get propOpen(): boolean {
-        return (this.open == undefined ? this.internalOpen : this.open) && !this.disabled;
+        let open: boolean = (this.open == undefined ? this.internalOpen : this.open) && !this.disabled;
+        if (open) {
+            this.loaded = true;
+        }
+        return open;
     }
 
     public set propOpen(value: boolean) {
@@ -157,7 +161,6 @@ export class Portal extends ModulVue implements PortalMixin {
                 if (this.portalTargetEl) {
                     this.stackId = this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().getBackdropMode(), this.as<MediaQueriesMixin>().isMqMaxS);
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
-                        this.loaded = true;
                         this.portalTargetEl.style.position = 'absolute';
 
                         setTimeout(() => {

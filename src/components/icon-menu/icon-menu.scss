@@ -1,0 +1,96 @@
+@import 'abstracts/variables';
+
+$m-icon-menu--color: $m-color--grey-darker;
+
+.m-icon-menu {
+    position: relative;
+
+    &::after {
+        transition: transform $m-transition-duration ease;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate3d(-50%, $m-margin, 0);
+        opacity: 0;
+
+        @include m-triangle('top', $m-icon-menu--color);
+    }
+
+    &.m--is-open {
+        &::after {
+            transition: transform $m-transition-duration ease, opacity $m-transition-duration ease;
+            transition-delay: 0.2s;
+            opacity: 1;
+            transform: translate3d(-50%, 0, 0);
+        }
+
+        button.m-icon-button {
+            color: $m-color--grey-darkest;
+        }
+    }
+
+    &__menu {
+        display: flex;
+        flex-direction: column;
+        min-width: 250px;
+        max-height: 80vh;
+        box-shadow: $m-box-shadow;
+        border-radius: $m-border-radius--s;
+        overflow: hidden;
+        background: $m-color--white;
+
+        @media (max-width: $m-mq--max--s) {
+            width: 100% !important;
+        }
+
+        &__header,
+        &__body,
+        &__footer {
+            &:not(.m--no-padding) {
+                padding: $m-padding;
+            }
+        }
+
+        &__header {
+            min-height: $m-touch-size;
+            background: $m-icon-menu--color;
+            color: $m-color--white;
+
+            // doesn't work for slot content because of the scoped style... >_<
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                margin: 0;
+                font-size: $m-font-size--h4;
+                font-weight: $m-font-weight--bold;
+            }
+            ////////////////////////////////////////////
+
+            > :first-child {
+                margin-top: 0;
+            }
+        }
+
+        &__body {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            flex: 1 1 auto;
+            overflow-x: hidden;
+            overflow-y: auto;
+            min-height: 80px;
+
+            @include m-scrollbar();
+        }
+
+        &__footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-top: 1px solid $m-color--grey-light;
+        }
+    }
+}

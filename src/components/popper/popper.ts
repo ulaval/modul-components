@@ -181,10 +181,10 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         if (this.enter) {
             this.enter(el.children[0], done);
         } else {
-            this.$nextTick(() => {
+            setTimeout(() => {
                 this.defaultAnimOpen = true;
                 done();
-            });
+            }, 300);
         }
     }
 
