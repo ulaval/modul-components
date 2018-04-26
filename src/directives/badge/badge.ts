@@ -93,6 +93,7 @@ const getBadgePosition: (element: HTMLElement, binding: VNodeDirective, vnode: V
 };
 
 const buildBadge = (element, binding, vnode) => {
+
     element.style.overflow = 'visible';
 
     let badge = getBadgePosition(element, binding, vnode);
@@ -117,7 +118,9 @@ const MBadgeDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-        buildBadge(element, binding, vnode);
+        if (binding.value.state != undefined && binding.value.state != '') {
+            buildBadge(element, binding, vnode);
+        }
     },
     update(
         element: HTMLElement,
@@ -125,8 +128,12 @@ const MBadgeDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-        element.removeChild(element.children[element.children.length - 1]);
-        buildBadge(element, binding, vnode);
+        if (element.children[element.children.length - 1].classList.contains('m-icon')) {
+            element.removeChild(element.children[element.children.length - 1]);
+        }
+        if (binding.value.state != undefined && binding.value.state != '') {
+            buildBadge(element, binding, vnode);
+        }
     },
     unbind(
         element: HTMLElement,
