@@ -240,7 +240,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
         this.internalItems = items;
         this.internalNavigationItems = navigation;
-        this.$refs.popup.$refs.popper.update();
+        this.$refs.popup.update();
         this.focusSelected();
     }
 
