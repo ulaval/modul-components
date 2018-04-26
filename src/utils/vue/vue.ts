@@ -9,7 +9,7 @@ import { ConfirmFunction } from '../modal/confirm';
 import { AlertFunction } from '../modal/alert';
 import { Logger } from '../logger/logger';
 
-Vue.prototype.$log.debug('TODO: explore usage of TS declare syntax');
+// TODO: explore usage of TS declare syntax
 // declare module 'vue/types/vue' {
 //     interface Vue {
 //         $i18n: Messages;
