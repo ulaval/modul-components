@@ -12,7 +12,7 @@ export class MI18n extends ModulVue {
     @Prop()
     public k: string;
     @Prop({ default: () => [] })
-    public params: any[];
+    public params: any;
     @Prop()
     public nb?: number;
     @Prop()

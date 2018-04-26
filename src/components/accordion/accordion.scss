@@ -11,195 +11,18 @@ $m-accordion--border-color: $m-color--border;
 $m-accordion--color-default: $m-color--interactive;
 
 .m-accordion {
-    &.m--is-disabled {
-        > .m-accordion {
-            &__header {
-                outline: none;
-
-                &,
-                h1,
-                h2,
-                h3,
-                h4,
-                h5,
-                h6 {
-                    color: $m-color--disabled;
-                }
-
-                .m-accordion__header-icon {
-                    &::before,
-                    &::after {
-                        background: $m-color--disabled;
-                    }
-                }
-            }
-        }
-    }
-
-    &.m--is-default,
-    &.m--is-light {
-        > .m-accordion__header__content {
-            &,
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                margin: 0;
-                font-size: $m-font-size--l;
-                font-weight: $m-font-weight--bold;
-            }
-        }
-    }
-
-    &.m--is-default {
-        margin-top: - $m-accordion--border-size;
-
-        &.m--is-disabled {
-            > .m-accordion {
-                &__header {
-                    border-color: $m-color--disabled-light;
-
-                    &::after {
-                        background: $m-color--disabled;
-                    }
-                }
-            }
-        }
-
-        &.m--has-icon-left {
-            > .m-accordion {
-                &__body-wrap > .m-accordion__body {
-                    &.m--has-padding {
-                        padding-left: 48px;
-                    }
-                }
-
-                &__header {
-                    .m-accordion__header-icon {
-                        margin-right: $m-spacing;
-                    }
-                }
-            }
-
-            &.m--has-icon-large {
-                > .m-accordion {
-                    &__body-wrap > .m-accordion__body {
-                        &.m--has-padding {
-                            padding-left: $m-spacing*2 + $m-accordion--icon-l-width + $m-accordion--vertical-border-size;
-                        }
-                    }
-                }
-            }
-        }
-
-        > .m-accordion {
-            &__header,
-            &__body-wrap > .m-accordion__body {
-                &.m--has-padding {
-                    padding: $m-spacing $m-spacing $m-spacing ($m-spacing + $m-accordion--vertical-border-size);
-                }
-            }
-
-            &__header {
-                position: relative;
-                min-height: 80px;
-                border-top: $m-accordion--border-size solid $m-accordion--border-color;
-                border-bottom: $m-accordion--border-size solid $m-accordion--border-color;
-
-                &::after {
-                    position: absolute;
-                    top: -$m-accordion--border-size;
-                    bottom: -$m-accordion--border-size;
-                    left: 0;
-                    content: '';
-                    width: $m-accordion--vertical-border-size;
-                    background: $m-accordion--color-default;
-                }
-            }
-
-            &__body-wrap {
-                border-bottom: 1px $m-color--border solid;
-
-                &.accordion-enter-to {
-                    .m-accordion__body {
-                        transform: translate3d(0, 0, 0);
-                        opacity: 1;
-                    }
-                }
-
-                &.accordion-enter,
-                &.accordion-leave-to {
-                    .m-accordion__body {
-                        transform: translate3d(0, $m-margin--l, 0);
-                        opacity: 0;
-                    }
-                }
-
-                > .m-accordion__body {
-                    transition: opacity $m-transition-duration--l ease, transform $m-transition-duration ease;
-                }
-            }
-        }
-    }
-
     &.m--is-light {
         margin: $m-margin--s 0;
-
-        > .m-accordion {
-            &__header {
-                &:hover {
-                    .m-accordion__header__content {
-                        transition: color $m-transition-duration ease;
-                        color: $m-color--interactive;
-                    }
-                }
-            }
-
-            &__body-wrap {
-                > .m-accordion__body {
-                    &.m--has-padding {
-                        padding-top: $m-margin--s;
-                        padding-bottom: $m-margin;
-                    }
-                }
-            }
-        }
-
-        &.m--has-icon-left {
-            &:not(.m--has-icon-large) {
-                > .m-accordion {
-                    &__body-wrap {
-                        > .m-accordion__body {
-                            &.m--has-padding {
-                                padding-left: 32px; // Magic number
-                            }
-                        }
-                    }
-                }
-            }
-
-            &.m--has-icon-large {
-                > .m-accordion {
-                    &__body-wrap {
-                        > .m-accordion__body {
-                            &.m--has-padding {
-                                padding-left: 36px; // Magic number
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
-    &.m--has-icon-left {
-        > .m-accordion {
-            &__header {
-                flex-direction: row-reverse;
-            }
-        }
+    &.m--is-dark,
+    &.m--is-default {
+        margin-top: - $m-accordion--border-size;
+    }
+
+    &.m--is-dark {
+        background-color: #303030; // warning new grey detected, send the greyminator! >_<
+        color: #fff;
     }
 
     &__header {
@@ -217,93 +40,261 @@ $m-accordion--color-default: $m-color--interactive;
             text-decoration: none;
         }
 
-        &__content {
-            flex: 1;
-        }
-
-        &-icon {
+        .m--is-dark &,
+        .m--is-default & {
             position: relative;
-            display: block;
+            min-height: 80px;
 
-            &::before,
             &::after {
                 position: absolute;
-                top: 50%;
-                left: 50%;
+                left: 0;
                 content: '';
-                background: $m-color--interactive;
-                transform: translate3d(-50%, -50%, 0);
-                transition: transform $m-transition-duration ease;
+                width: $m-accordion--vertical-border-size;
+                background: $m-accordion--color-default;
+            }
+
+            &.m--has-padding {
+                padding: $m-spacing $m-spacing $m-spacing ($m-spacing + $m-accordion--vertical-border-size);
+            }
+        }
+
+        .m--is-default & {
+            border-top: $m-accordion--border-size solid $m-accordion--border-color;
+            border-bottom: $m-accordion--border-size solid $m-accordion--border-color;
+
+            &::after {
+                top: -$m-accordion--border-size;
+                bottom: -$m-accordion--border-size;
+            }
+        }
+
+        .m--is-dark & {
+            color: #fff;
+            background-color: $m-color--grey-darker;
+            border-top: $m-accordion--border-size solid $m-color--grey-darkest;
+            border-bottom: $m-accordion--border-size solid $m-color--grey-darkest;
+
+            &::after {
+                top: 0;
+                bottom: 0;
+            }
+        }
+
+        .m--is-light & {
+            &:hover {
+                .m-accordion__header__content {
+                    transition: color $m-transition-duration ease;
+                    color: $m-color--interactive;
+                }
+            }
+        }
+
+        .m--is-disabled & {
+            outline: none;
+            border-color: $m-color--disabled-light;
+
+            &,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                color: $m-color--disabled;
             }
 
             &::after {
-                transition: transform $m-transition-duration ease, opacity 0.6s ease;
+                background: $m-color--disabled;
             }
 
-            &.m--is-closed {
+            &-icon {
                 &::before,
                 &::after {
-                    transform: translate3d(-50%, -50%, 0) rotate(90deg);
+                    background: $m-color--disabled;
                 }
+            }
+        }
 
-                &::before {
+        .m--is-dark.m--is-disabled & {
+            border-color: $m-color--disabled;
+        }
+
+        .m--has-icon-left & {
+            flex-direction: row-reverse;
+        }
+    }
+
+    &__header__content {
+        flex: 1;
+
+        .m--is-default &,
+        .m--is-dark &,
+        .m--is-light & {
+            &,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                margin: 0;
+                font-size: $m-font-size--l;
+                font-weight: $m-font-weight--bold;
+            }
+        }
+    }
+
+    &__header-icon {
+        position: relative;
+        display: block;
+
+        &::before,
+        &::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            content: '';
+            background: $m-color--interactive;
+            transform: translate3d(-50%, -50%, 0);
+            transition: transform $m-transition-duration ease;
+        }
+
+        &::after {
+            transition: transform $m-transition-duration ease, opacity 0.6s ease;
+        }
+
+        &.m--is-closed {
+            &::before,
+            &::after {
+                transform: translate3d(-50%, -50%, 0) rotate(90deg);
+            }
+
+            &::before {
+                opacity: 0;
+            }
+        }
+
+        &:not(.m--is-large) {
+            width: $m-accordion--icon-width;
+            height: $m-accordion--icon-width;
+
+            &::before {
+                width: $m-accordion--icon-width;
+                height: $m-accordion--icon-height;
+            }
+
+            &::after {
+                width: $m-accordion--icon-height;
+                height: $m-accordion--icon-width;
+            }
+
+            &.m--has-border {
+                width: $m-accordion--icon-width + 8;
+                height: $m-accordion--icon-width + 8;
+                border-width: $m-accordion--icon-height;
+            }
+        }
+
+        &.m--is-large {
+            width: $m-accordion--icon-l-width;
+            height: $m-accordion--icon-l-width;
+
+            &::before {
+                width: $m-accordion--icon-l-width;
+                height: $m-accordion--icon-l-height;
+            }
+
+            &::after {
+                width: $m-accordion--icon-l-height;
+                height: $m-accordion--icon-l-width;
+            }
+
+            &.m--has-border {
+                width: $m-accordion--icon-l-width + 8;
+                height: $m-accordion--icon-l-width + 8;
+                border-width: $m-accordion--icon-l-height;
+            }
+        }
+
+        &.m--has-border {
+            border-color: $m-color--interactive;
+            border-style: solid;
+        }
+
+        &:not(.m--is-left) {
+            margin-left: $m-spacing;
+        }
+
+        &.m--is-left {
+            margin-right: $m-margin;
+        }
+
+        .m--is-dark.m--has-icon-left &,
+        .m--is-default.m--has-icon-left & {
+            margin-right: $m-spacing;
+        }
+    }
+
+    &__body-wrap {
+        .m--is-dark &,
+        .m--is-default & {
+            &.accordion-enter-to {
+                .m-accordion__body {
+                    transform: translate3d(0, 0, 0);
+                    opacity: 1;
+                }
+            }
+
+            &.accordion-enter,
+            &.accordion-leave-to {
+                .m-accordion__body {
+                    transform: translate3d(0, $m-margin--l, 0);
                     opacity: 0;
                 }
             }
 
-            &:not(.m--is-large) {
-                width: $m-accordion--icon-width;
-                height: $m-accordion--icon-width;
+            > .m-accordion__body {
+                transition: opacity $m-transition-duration--l ease, transform $m-transition-duration ease;
+            }
+        }
 
-                &::before {
-                    width: $m-accordion--icon-width;
-                    height: $m-accordion--icon-height;
-                }
+        .m--is-dark & {
+            box-shadow: 0 0 7px $m-color--grey-darkest inset;
+        }
 
-                &::after {
-                    width: $m-accordion--icon-height;
-                    height: $m-accordion--icon-width;
-                }
+        .m--is-default & {
+            border-bottom: 1px $m-color--border solid;
+        }
+    }
 
-                &.m--has-border {
-                    width: $m-accordion--icon-width + 8;
-                    height: $m-accordion--icon-width + 8;
-                    border-width: $m-accordion--icon-height;
-                }
+    &__body {
+        &.m--has-padding {
+            .m--is-dark &,
+            .m--is-default & {
+                padding: $m-spacing $m-spacing $m-spacing ($m-spacing + $m-accordion--vertical-border-size);
             }
 
-            &.m--is-large {
-                width: $m-accordion--icon-l-width;
-                height: $m-accordion--icon-l-width;
-
-                &::before {
-                    width: $m-accordion--icon-l-width;
-                    height: $m-accordion--icon-l-height;
-                }
-
-                &::after {
-                    width: $m-accordion--icon-l-height;
-                    height: $m-accordion--icon-l-width;
-                }
-
-                &.m--has-border {
-                    width: $m-accordion--icon-l-width + 8;
-                    height: $m-accordion--icon-l-width + 8;
-                    border-width: $m-accordion--icon-l-height;
-                }
+            .m--is-dark.m--has-icon-left &,
+            .m--is-default.m--has-icon-left & {
+                padding-left: $m-spacing--xxl;
             }
 
-            &.m--has-border {
-                border-color: $m-color--interactive;
-                border-style: solid;
+            .m--is-dark.m--has-icon-left.m--has-icon-large &,
+            .m--is-default.m--has-icon-left.m--has-icon-large & {
+                padding-left: $m-spacing *2 + $m-accordion--icon-l-width + $m-accordion--vertical-border-size;
             }
 
-            &:not(.m--is-left) {
-                margin-left: $m-spacing;
+            .m--is-light & {
+                padding-top: $m-margin--s;
+                padding-bottom: $m-margin;
             }
 
-            &.m--is-left {
-                margin-right: $m-margin;
+            .m--is-light.m--has-icon-left & {
+                padding-left: 32px; // Magic number
+            }
+
+            .m--is-light.m--has-icon-left.m--has-icon-large & {
+                padding-left: 36px; // Magic number
             }
         }
     }

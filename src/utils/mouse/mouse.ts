@@ -1,6 +1,7 @@
+// Utils that allow to get mouse pointer relative to an element.
 // https://gist.github.com/electricg/4435259
 // Which HTML element is the target of the event
-export type MousePositionEvent = (e: MouseEvent, relativeToEl?: HTMLElement) => { x: number, y: number };
+export type MousePositionEvent<T> = (e: MouseEvent, relativeToEl?: HTMLElement) => T;
 export const mouseTarget: (e: MouseEvent) => HTMLElement = (e: Event) => {
     let targ: HTMLElement = document.documentElement as HTMLElement;
     if (!e) { let e: Event | undefined = window.event; }
@@ -18,7 +19,7 @@ export const mouseTarget: (e: MouseEvent) => HTMLElement = (e: Event) => {
 
 // Mouse position relative to the document
 // From http://www.quirksmode.org/js/events_properties.html
-export const mousePositionDocument: MousePositionEvent = (e: MouseEvent) => {
+export const mousePositionDocument: MousePositionEvent<{ x: number, y: number }> = (e: MouseEvent) => {
     let posx: number = 0;
     let posy: number = 0;
     if (!e) {
@@ -57,7 +58,11 @@ export const findPos: (obj: HTMLElement) => { left: number, top: number } = (obj
 
 // Mouse position relative to the element
 // not working on IE7 and below
-export const mousePositionElement: MousePositionEvent = (e: MouseEvent, relativeToEl?: HTMLElement) => {
+export interface RelativeMousePos {
+    x: number;
+    y: number;
+}
+export const mousePositionElement: MousePositionEvent<RelativeMousePos> = (e: MouseEvent, relativeToEl?: HTMLElement) => {
     const mousePosDoc = mousePositionDocument(e);
     const target = mouseTarget(e);
     const targetPos = relativeToEl ? findPos(relativeToEl) : findPos(target);
@@ -67,4 +72,11 @@ export const mousePositionElement: MousePositionEvent = (e: MouseEvent, relative
         x : posx,
         y : posy
     };
+};
+
+export const isInElement: MousePositionEvent<boolean> = (e: MouseEvent, relativeToEl: HTMLElement, threshold: number = 3) => {
+    const mousePosition = mousePositionElement(e, relativeToEl);
+    return mousePosition.x > 0 && mousePosition.y > 0
+            && mousePosition.x + threshold <= relativeToEl.offsetWidth
+            && mousePosition.y + threshold <= relativeToEl.offsetHeight;
 };
