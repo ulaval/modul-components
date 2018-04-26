@@ -9,7 +9,10 @@ export abstract class BaseNavbar extends ModulVue { }
 
 export interface Navbar {
     model: string;
+    mouseover: boolean;
     updateValue(value: string): void;
+    onMouseOver(value: string, event): void;
+    onClick(value: string, event): void;
 }
 
 @WithRender
@@ -30,7 +33,7 @@ export class MNavbarItem extends ModulVue {
         let parentNavbar: BaseNavbar | undefined;
         parentNavbar = this.getParent<BaseNavbar>(
             p => p instanceof BaseNavbar || // these will fail with Jest, but should pass in prod mode
-            p.$options.name === 'MNavbar' // these are necessary for Jest, but the first two should pass in prod mode
+                p.$options.name === 'MNavbar' // these are necessary for Jest, but the first two should pass in prod mode
         );
 
         if (parentNavbar) {
@@ -54,9 +57,16 @@ export class MNavbarItem extends ModulVue {
         return !!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model;
     }
 
-    private onClick(event): void {
-        if (!this.disabled && this.parentNavbar) {
+    private onClick(event: Event): void {
+        if (!this.disabled && this.parentNavbar && this.value != this.parentNavbar.model) {
             this.parentNavbar.updateValue(this.value);
+            this.parentNavbar.onClick(this.value, event);
+        }
+    }
+
+    private onMouseOver(event: Event): void {
+        if (!this.disabled && this.parentNavbar && this.parentNavbar.mouseover) {
+            this.parentNavbar.onMouseOver(this.value, event);
         }
     }
 }

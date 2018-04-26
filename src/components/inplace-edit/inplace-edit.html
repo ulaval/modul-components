@@ -11,10 +11,10 @@
                     <div class="m-inplace-edit__buttons-wrap"
                             v-if="propEditMode">
                         <div class="m-inplace-edit__buttons">
-                            <m-button :waiting="submitted" ref="confirm-control" skin="primary" @click="confirm">
+                            <m-button :waiting="submitted" ref="confirm-control" skin="primary" @click.stop="confirm">
                                 <m-i18n k="m-inplace-edit:save"></m-i18n>
                             </m-button>
-                            <m-button :disabled="submitted" ref="cancel-control" skin="secondary" @click="cancel">
+                            <m-button :disabled="submitted" ref="cancel-control" skin="secondary" @click.stop="cancel">
                                 <m-i18n k="m-inplace-edit:cancel"></m-i18n>
                             </m-button>
                         </div>
@@ -24,7 +24,7 @@
         </transition>
     </template>
     <template v-if="!isMqMinS">
-        <m-dialog :title="dialogTitle" :open="propEditMode" @close="cancel">
+        <m-dialog :title="title" :open="propEditMode" @close="cancel">
             <form>
                 <slot name="editMode"></slot>
                 <div class="m-inplace-edit__buttons">

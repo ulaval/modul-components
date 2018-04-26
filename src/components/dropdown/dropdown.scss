@@ -69,12 +69,12 @@ $m-dropdown--margin: $m-padding--xs !default;
         min-width: 22px;
         text-align: right;
 
-        .m-icon-button.m-icon-button {
-            transition: transform $m-transition-duration ease, color $m-transition-duration ease;
+        &__icon {
+            transition: transform $m-transition-duration ease, color $m-transition-duration ease !important;
         }
 
         &.m--is-open {
-            .m-icon-button {
+            .m-dropdown__arrow__icon {
                 transform: rotate(-180deg);
             }
         }

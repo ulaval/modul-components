@@ -32,7 +32,9 @@
                     <footer v-if="hasFooterSlot">
                         <div class="m-dialog__footer"
                              :class="{ 'm--no-padding': !padding || !paddingFooter }">
-                            <slot name="footer"></slot>
+                            <div>
+                                <slot name="footer"></slot>
+                            </div>
                         </div>
                     </footer>
                 </article>

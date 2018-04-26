@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MIconFile should render correctly 1`] = `<m-icon name="m-svg__file-pdf" size="24px" class="m-icon-file"></m-icon>`;
+
+exports[`MIconFile should render title when svgTitle prop is set 1`] = `<m-icon name="m-svg__file-pdf" svgTitle="test" size="24px" class="m-icon-file"></m-icon>`;

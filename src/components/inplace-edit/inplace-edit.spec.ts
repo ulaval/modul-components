@@ -40,7 +40,7 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
 
     it('must use default value for dialog title',() => {
 
-        expect(inplaceEdit.dialogTitle).toEqual(inplaceEdit.$i18n.translate('m-inplace-edit:modify'));
+        expect(inplaceEdit.title).toEqual(inplaceEdit.$i18n.translate('m-inplace-edit:modify'));
     });
 
     describe('when defining title prop', () => {
@@ -48,7 +48,7 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
             let titleProp = 'myTitle';
             inplaceEdit.title = titleProp;
 
-            expect(inplaceEdit.dialogTitle).toEqual(titleProp);
+            expect(inplaceEdit.title).toEqual(titleProp);
         });
     });
 });
