@@ -4,7 +4,6 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './panel.html?style=./panel.scss';
 import { PANEL_NAME } from '../component-names';
 import ElementQueries from 'css-element-queries/src/ElementQueries';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MPanelSkin {
     Light = 'light',
@@ -120,7 +119,7 @@ export class MPanel extends Vue {
 
 const PanelPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug(PANEL_NAME, 'plugin.install');
+        v.prototype.$log.debug(PANEL_NAME, 'plugin.install');
         v.component(PANEL_NAME, MPanel);
     }
 };

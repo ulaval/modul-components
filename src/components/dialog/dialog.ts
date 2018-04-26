@@ -7,7 +7,6 @@ import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDur
 import { ModulVue } from '../../utils/vue/vue';
 import { DIALOG_NAME } from '../component-names';
 import WithRender from './dialog.html?style=./dialog.scss';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MDialogSize {
     FullScreen = 'full-screen',
@@ -89,7 +88,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     protected mounted(): void {
         if (!this.hasHeader) {
-            Logger.warn('<' + DIALOG_NAME + '> needs a header slot or title prop.');
+            this.$log.warn('<' + DIALOG_NAME + '> needs a header slot or title prop.');
         }
     }
 

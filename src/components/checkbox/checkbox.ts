@@ -7,7 +7,6 @@ import { CHECKBOX_NAME } from '../component-names';
 import uuid from '../../utils/uuid/uuid';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import ValidationMessagePlugin from '../validation-message/validation-message';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MCheckboxPosition {
     Left = 'left',
@@ -70,7 +69,7 @@ export class MCheckbox extends ModulVue {
 
 const CheckboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug(CHECKBOX_NAME, 'plugin.install');
+        v.prototype.$log.debug(CHECKBOX_NAME, 'plugin.install');
         v.use(ValidationMessagePlugin);
         v.component(CHECKBOX_NAME, MCheckbox);
     }

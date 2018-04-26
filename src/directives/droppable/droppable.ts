@@ -1,10 +1,9 @@
-import { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
+import Vue, { DirectiveOptions, VNodeDirective, VNode, PluginObject } from 'vue';
 import { DROPPABLE } from '../directive-names';
 import { MDraggable } from '../draggable/draggable';
 import { MElementPlugin, MDOMPlugin } from '../domPlugin';
 import { mousePositionElement } from '../sortable/mouse';
 import { getVNodeAttributeValue } from '../../utils/vue/directive';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MDroppableClassNames {
     Overing = 'm--is-dragover',
@@ -190,7 +189,7 @@ export class MDroppable extends MElementPlugin<MDroppableOptions> {
     private canDrop(): boolean {
         if (!MDraggable.currentDraggable) { return false; }
 
-        Logger.log('group', MDraggable.currentDraggable.options, this.options);
+        Vue.prototype.$log.log('group', MDraggable.currentDraggable.options, this.options);
 
         const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
         const draggableAction: string = MDraggable.currentDraggable.options.action;

@@ -11,7 +11,6 @@ import IconPlugin from '../icon/icon';
 import ButtonPlugin from '../button/button';
 import I18nPlugin from '../i18n/i18n';
 import PortalPlugin from 'portal-vue';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MScrollTopPosition {
     Fixe = 'fixe',
@@ -118,7 +117,7 @@ export class MScrollTop extends ModulVue {
 
 const ScrollTopPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.warn(SCROLL_TOP_NAME + ' is not ready for production');
+        v.prototype.$log.warn(SCROLL_TOP_NAME + ' is not ready for production');
         v.use(IconPlugin);
         v.use(ButtonPlugin);
         v.use(I18nPlugin);

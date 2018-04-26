@@ -11,7 +11,6 @@ import ButtonPlugin from '../button/button';
 import LinkPlugin from '../link/link';
 import I18nPlugin from '../i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MTooltipMode {
     Icon = 'icon',
@@ -116,7 +115,7 @@ export class MTooltip extends ModulVue {
 
 const TooltipPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.warn(TOOLTIP_NAME + ' is not ready for production');
+        v.prototype.$log.warn(TOOLTIP_NAME + ' is not ready for production');
         v.use(ButtonPlugin);
         v.use(LinkPlugin);
         v.use(I18nPlugin);

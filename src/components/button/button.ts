@@ -5,7 +5,6 @@ import WithRender from './button.html?style=./button.scss';
 import { BUTTON_NAME, ICON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MButtonType {
     Button = 'button',
@@ -114,7 +113,7 @@ export class MButton extends Vue {
 
 const ButtonPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug(BUTTON_NAME, 'plugin.install');
+        v.prototype.$log.debug(BUTTON_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(SpinnerPlugin);
         v.component(BUTTON_NAME, MButton);

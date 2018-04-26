@@ -5,7 +5,6 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './progress.html?style=./progress.scss';
 import { PROGRESS_NAME } from '../component-names';
 import INDETERMINATE_ANIMATION_TEMPLATE from './progressSpinnerAnimation';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MProgressState {
     Completed = 'completed',
@@ -225,7 +224,7 @@ export class MProgress extends ModulVue {
 
 const ProgressPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug(PROGRESS_NAME, 'plugin.install');
+        v.prototype.$log.debug(PROGRESS_NAME, 'plugin.install');
         v.component(PROGRESS_NAME, MProgress);
     }
 };

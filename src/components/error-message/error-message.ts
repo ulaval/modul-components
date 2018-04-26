@@ -8,7 +8,6 @@ import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ModalPlugin from '../modal/modal';
-import { Logger } from '../../utils/logger/logger';
 
 const ERROR_MESSAGE_NAME: string = 'm-error-message';
 
@@ -41,7 +40,7 @@ export class MErrorMessage extends Vue {
 
 const ErrorMessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug(ERROR_MESSAGE_NAME, 'plugin.install');
+        v.prototype.$log.debug(ERROR_MESSAGE_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);

@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 
 import uuid from '../uuid/uuid';
-import { Logger } from '../logger/logger';
 
 export class SpritesService {
     public addSprites(sprites: string): void {
@@ -17,7 +16,7 @@ export class SpritesService {
 
 const SpritesPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug('$svg', 'plugin.install');
+        v.prototype.$log.debug('$svg', 'plugin.install');
         let svg = new SpritesService();
         (v.prototype as any).$svg = svg;
     }

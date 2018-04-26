@@ -1,6 +1,5 @@
 import Vue, { PluginObject } from 'vue';
 import { vsprintf, sprintf } from '../str/str';
-import { Logger } from '../logger/logger';
 
 /**
  * This package provides language and locales utilities.
@@ -208,9 +207,9 @@ export class Messages {
             throw new Error(error);
         } else {
             if (!this.options || this.options.debug === DebugMode.Warn) {
-                Logger.warn(error);
+                Vue.prototype.$log.warn(error);
             } else {
-                Logger.debug(error);
+                Vue.prototype.$log.debug(error);
             }
             return key;
         }
@@ -231,9 +230,9 @@ export class Messages {
                 throw new Error(error);
             } else {
                 if (!this.options || this.options.debug === DebugMode.Warn) {
-                    Logger.warn(error);
+                    Vue.prototype.$log.warn(error);
                 } else {
-                    Logger.debug(error);
+                    Vue.prototype.$log.debug(error);
                 }
                 return undefined;
             }
@@ -259,7 +258,7 @@ function formatRegexp(val: string, params: any[]): string {
         let index = parseInt(match.substring(1, match.length - 1), 10);
 
         if (index >= params.length) {
-            Logger.warn(
+            Vue.prototype.$log.warn(
                 `The parameter ${index} doesn't exist while translating: '${val}'`
             );
         }
@@ -283,7 +282,7 @@ function htmlEncode(val: string): string {
 
 const MessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug('$i18n', 'plugin.install');
+        v.prototype.$log.debug('$i18n', 'plugin.install');
 
         let msg: Messages = new Messages(options);
         (v.prototype as any).$i18n = msg;

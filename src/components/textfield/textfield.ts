@@ -13,7 +13,6 @@ import ValidationMesagePlugin from '../validation-message/validation-message';
 import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import ButtonPlugin from '../button/button';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MTextfieldType {
     Text = 'text',
@@ -67,7 +66,7 @@ export class MTextfield extends ModulVue {
 
     @Watch('type')
     private typeChanged(type: MTextfieldType): void {
-        Logger.warn('<' + TEXTFIELD_NAME + '>: Change of property "type" is not supported');
+        this.$log.warn('<' + TEXTFIELD_NAME + '>: Change of property "type" is not supported');
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
 

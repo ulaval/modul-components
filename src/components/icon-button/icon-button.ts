@@ -4,7 +4,6 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './icon-button.html?style=./icon-button.scss';
 import { ICON_BUTTON_NAME, ICON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MIconButtonSkin {
     Light = 'light',
@@ -80,7 +79,7 @@ export class MIconButton extends Vue {
     private hasSlots(): boolean {
         let hasSlot: boolean = !!this.$slots.default;
         if (!hasSlot) {
-            // Logger.warn('<' + ICON_BUTTON_NAME + '> needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
+            // Vue.prototype.$log.warn('<' + ICON_BUTTON_NAME + '> needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
         }
         return hasSlot;
     }
@@ -88,8 +87,8 @@ export class MIconButton extends Vue {
 
 const IconButtonPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug(ICON_BUTTON_NAME, 'plugin.install');
-        Logger.warn(ICON_BUTTON_NAME + ' is not ready for production');
+        v.prototype.$log.debug(ICON_BUTTON_NAME, 'plugin.install');
+        v.prototype.$log.warn(ICON_BUTTON_NAME + ' is not ready for production');
         v.use(IconPlugin);
         v.component(ICON_BUTTON_NAME, MIconButton);
     }

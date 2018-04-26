@@ -1,5 +1,7 @@
 /* tslint:disable:no-console */
 
+import { PluginObject } from 'vue';
+
 export interface ConsoleOptions {
     displayLogs?: boolean;
     displayWarnings?: boolean;
@@ -9,53 +11,69 @@ export interface ConsoleOptions {
 }
 
 export class Logger {
-    private static displayLogs: boolean = true;
-    private static displayWarnings: boolean = true;
-    private static displayDebugs: boolean = true;
-    private static displayInfos: boolean = true;
-    private static hideAll: boolean = false;
+    private displayLogs: boolean = true;
+    private displayWarnings: boolean = true;
+    private displayDebugs: boolean = true;
+    private displayInfos: boolean = true;
+    private hideAll: boolean = false;
 
-    private constructor() {}
+    public constructor(options: ConsoleOptions) {
+        this.setConsoleOptions(options);
+    }
 
-    static setConsoleOptions(options: ConsoleOptions): void {
-        if (typeof(options.displayLogs) === 'boolean') {
-            Logger.displayLogs = options.displayLogs;
-        }
-        if (typeof(options.displayWarnings) === 'boolean') {
-            Logger.displayWarnings = options.displayWarnings;
-        }
-        if (typeof(options.displayDebugs) === 'boolean') {
-            Logger.displayDebugs = options.displayDebugs;
-        }
-        if (typeof(options.displayInfos) === 'boolean') {
-            Logger.displayInfos = options.displayInfos;
-        }
-        if (typeof(options.hideAll) === 'boolean') {
-            Logger.hideAll = options.hideAll;
+    setConsoleOptions(options: ConsoleOptions): void {
+        if (options) {
+            if (typeof(options.displayLogs) === 'boolean') {
+                this.displayLogs = options.displayLogs;
+            }
+            if (typeof(options.displayWarnings) === 'boolean') {
+                this.displayWarnings = options.displayWarnings;
+            }
+            if (typeof(options.displayDebugs) === 'boolean') {
+                this.displayDebugs = options.displayDebugs;
+            }
+            if (typeof(options.displayInfos) === 'boolean') {
+                this.displayInfos = options.displayInfos;
+            }
+            if (typeof(options.hideAll) === 'boolean') {
+                this.hideAll = options.hideAll;
+            }
         }
     }
 
-    static log(message?: any, ...optionalParams: any[]): void {
-        if (!Logger.hideAll && Logger.displayLogs) {
+    log(message?: any, ...optionalParams: any[]): void {
+        if (!this.hideAll && this.displayLogs) {
             console.log(message, optionalParams);
         }
     }
 
-    static warn(message?: any, ...optionalParams: any[]): void {
-        if (!Logger.hideAll && Logger.displayWarnings) {
+    warn(message?: any, ...optionalParams: any[]): void {
+        if (!this.hideAll && this.displayWarnings) {
             console.warn(message, optionalParams);
         }
     }
 
-    static debug(message?: any, ...optionalParams: any[]): void {
-        if (!Logger.hideAll && Logger.displayDebugs) {
+    debug(message?: any, ...optionalParams: any[]): void {
+        if (!this.hideAll && this.displayDebugs) {
             console.debug(message, optionalParams);
         }
     }
 
-    static info(message?: any, ...optionalParams: any[]): void {
-        if (!Logger.hideAll && Logger.displayInfos) {
+    info(message?: any, ...optionalParams: any[]): void {
+        if (!this.hideAll && this.displayInfos) {
             console.info(message, optionalParams);
         }
     }
 }
+
+const LoggerPlugin: PluginObject<any> = {
+    install(v, options): void {
+        let logger = new Logger(options);
+        logger.debug('$logger', 'plugin.install');
+
+        (v.prototype as any).$log = logger;
+
+    }
+};
+
+export default LoggerPlugin;

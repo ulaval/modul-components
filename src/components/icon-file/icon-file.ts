@@ -3,7 +3,6 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import WithRender from './icon-file.html';
 import { ICON_FILE_NAME } from '../component-names';
-import { Logger } from '../../utils/logger/logger';
 
 // PDF
 const EXT_PDF: string = 'pdf';
@@ -76,7 +75,7 @@ export class MIconFile extends Vue {
 
 const IconFilePlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug(ICON_FILE_NAME, 'plugin.install');
+        v.prototype.$log.debug(ICON_FILE_NAME, 'plugin.install');
         v.component(ICON_FILE_NAME, MIconFile);
     }
 };

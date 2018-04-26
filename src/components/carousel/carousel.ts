@@ -5,7 +5,6 @@ import WithRender from './carousel.html?style=./carousel.scss';
 import { CAROUSEL_NAME } from '../component-names';
 import carouselItem, { MCarouselItem } from '../carousel-item/carousel-item';
 import i18n from 'src/components/i18n/i18n';
-import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component
@@ -164,7 +163,7 @@ export class MCarousel extends Vue {
 
 const CarouselPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.warn(CAROUSEL_NAME + ' is not ready for production');
+        v.prototype.$log.warn(CAROUSEL_NAME + ' is not ready for production');
         v.component(CAROUSEL_NAME, MCarousel);
     }
 };

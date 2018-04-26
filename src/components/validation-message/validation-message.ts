@@ -5,7 +5,6 @@ import WithRender from './validation-message.html?style=./validation-message.scs
 import { VALIDATION_MESSAGE_NAME } from '../component-names';
 import { InputState } from '../../mixins/input-state/input-state';
 import IconPlugin from '../icon/icon';
-import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component({
@@ -22,7 +21,7 @@ export class MValidationMessage extends ModulVue {
 
 const ValidationMessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug(VALIDATION_MESSAGE_NAME, 'plugin.install');
+        v.prototype.$log.debug(VALIDATION_MESSAGE_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.component(VALIDATION_MESSAGE_NAME, MValidationMessage);
     }

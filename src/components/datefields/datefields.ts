@@ -11,7 +11,6 @@ import DropdownItemPlugin from '../dropdown-item/dropdown-item';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import SpinnerPlugin from '../spinner/spinner';
-import { Logger } from '../../utils/logger/logger';
 
 const VIEW_DATE = 'date';
 const VIEW_MONTH = 'month';
@@ -150,7 +149,7 @@ export class MDatefields extends ModulVue {
 
 const DatefieldsPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.warn(DATEFIELDS_NAME + ' is not ready for production');
+        v.prototype.$log.warn(DATEFIELDS_NAME + ' is not ready for production');
         Vue.use(DropdownPlugin);
         Vue.use(DropdownItemPlugin);
         Vue.use(I18nPlugin);

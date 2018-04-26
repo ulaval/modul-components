@@ -5,7 +5,6 @@ import WithRender from './button-group.html?style=./button-group.scss';
 import { BUTTON_GROUP_NAME } from '../component-names';
 import RadioPlugin, { MRadioPosition, BaseButtonGroup, ButtonGroup } from '../radio/radio';
 import uuid from '../../utils/uuid/uuid';
-import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component
@@ -58,7 +57,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
 
 const ButtonGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.warn(BUTTON_GROUP_NAME + ' is not ready for production');
+        v.prototype.$log.warn(BUTTON_GROUP_NAME + ' is not ready for production');
         v.use(RadioPlugin);
         v.component(BUTTON_GROUP_NAME, MButtonGroup);
     }

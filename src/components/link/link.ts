@@ -7,7 +7,6 @@ import { LINK_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
 import WithRender from './link.html?style=./link.scss';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MLinkMode {
     RouterLink = 'router-link',
@@ -147,7 +146,7 @@ export class MLink extends ModulVue {
 
 const LinkPlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.debug(LINK_NAME, 'plugin.install');
+        v.prototype.$log.debug(LINK_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(I18nPlugin);
         v.component(LINK_NAME, MLink);

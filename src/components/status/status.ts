@@ -4,7 +4,6 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './status.html?style=./status.scss';
 import { STATUS_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
-import { Logger } from '../../utils/logger/logger';
 
 export enum MStatusListStates {
     Completed = 'completed',
@@ -50,7 +49,7 @@ export class MStatus extends Vue {
 
 const Status: PluginObject<any> = {
     install(v, options): void {
-        Logger.warn(STATUS_NAME + ' is not ready for production');
+        v.prototype.$log.warn(STATUS_NAME + ' is not ready for production');
         v.use(IconPlugin);
         v.component(STATUS_NAME, MStatus);
     }

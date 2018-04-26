@@ -5,7 +5,6 @@ import Component from 'vue-class-component';
 import WithRender from './textarea-resize.html?style=./textarea-resize.scss';
 import { TEXTAREA_RESIZE_NAME } from '../component-names';
 import { InputManagement } from '../../mixins/input-management/input-management';
-import { Logger } from '../../utils/logger/logger';
 
 @WithRender
 @Component({
@@ -41,7 +40,7 @@ export class MTextareaResize extends ModulVue {
 
 const TextareaResizePlugin: PluginObject<any> = {
     install(v, options): void {
-        Logger.warn(TEXTAREA_RESIZE_NAME + ' is deprecated');
+        v.prototype.$log.warn(TEXTAREA_RESIZE_NAME + ' is deprecated');
         v.component(TEXTAREA_RESIZE_NAME, MTextareaResize);
     }
 };

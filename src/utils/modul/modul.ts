@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import uuid from '../../utils/uuid/uuid';
 import { BackdropMode } from '../../mixins/portal/portal';
-import { Logger } from '../logger/logger';
 
 const BACKDROP_ID: string = 'mBackdropID';
 const BACKDROP_CLASS_NAME: string = 'm-backdrop';
@@ -137,7 +136,7 @@ export class Modul {
         }
 
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
-            Logger.warn('$modul: Invalid window ref count');
+            Vue.prototype.$log.warn('$modul: Invalid window ref count');
             this.windowZIndex = Z_INDEZ_DEFAULT;
         }
 
