@@ -9,6 +9,7 @@ import { MRemoveUserSelect } from '../user-select/remove-user-select';
 import { MDraggableAllowScroll } from './draggable-allow-scroll';
 
 export enum MDraggableClassNames {
+    DragImage = 'dragImage',
     Draggable = 'm--is-draggable',
     Dragging = 'm--is-dragging',
     Grabbing = 'm--is-grabbing'
@@ -25,6 +26,10 @@ export interface MDragInfo {
     action: string;
     grouping?: string;
     data: any;
+}
+
+export interface MDragEvent extends DragEvent {
+    dragInfo: MDragInfo;
 }
 
 export enum MDraggableEventNames {
@@ -86,7 +91,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private attachDragImage(): void {
-        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
+        const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         if (dragImage) {
             const origin: number = -9999;
             dragImage.style.left = `${origin}px`;
@@ -111,7 +116,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
 
-        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
+        const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         if (dragImage) { dragImage.hidden = true; }
     }
 
@@ -132,7 +137,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private setDragImage(event: DragEvent): void {
-        const dragImage: HTMLElement = this.element.querySelector('.dragImage') as HTMLElement;
+        const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         if (dragImage && event.dataTransfer.setDragImage) {
             dragImage.hidden = false;
             event.dataTransfer.setDragImage(dragImage, 0, 0);
@@ -141,16 +146,16 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private dispatchEvent(event: DragEvent, name: string): void {
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
+        customEvent.initCustomEvent(name, true, true, event);
         const data: any = this.options.dragData ? this.options.dragData : event.dataTransfer.getData('text');
-        const dropInfo: MDragInfo = {
+        const dragInfo: MDragInfo = {
             action: this.options.action,
             grouping: this.options.grouping,
             data
         };
-        const dropEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { dropInfo });
 
         customEvent.initCustomEvent(name, true, true, event);
-        dispatchEvent(this.element, name, dropEvent);
+        dispatchEvent(this.element, name, Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { dragInfo }));
     }
 }
 
