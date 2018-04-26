@@ -5,7 +5,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import PopperPlugin, { MPopperPlacement } from '../popper/popper';
+import PopperPlugin, { MPopperPlacement, MPopper } from '../popper/popper';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 import SidebarPlugin from '../sidebar/sidebar';
 
@@ -68,10 +68,18 @@ export class MPopup extends ModulVue {
     @Prop()
     public trigger: HTMLElement;
 
+    public $refs: {
+        popper: MPopper;
+    };
+
     private internalOpen: boolean = false;
 
     public get popupBody(): Element {
         return (this.$children[0] as any).popupBody;
+    }
+
+    public update(): void {
+        this.$refs.popper.update();
     }
 
     private get propOpen(): boolean {

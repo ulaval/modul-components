@@ -5,8 +5,15 @@ export const getVNodeAttributeValue = (node: VNode, attributeName: string): any 
     return node.data.attrs[attributeName];
 };
 
-export const dispatchEvent = (eventData, sourceEvent: any, name: string): void => {
-    const customEvent: CustomEvent = document.createEvent('CustomEvent');
-    customEvent.initCustomEvent(name, true, true, event);
-    this.element.dispatchEvent(Object.assign(customEvent, eventData));
+interface VueElement extends HTMLElement {
+    // tslint:disable-next-line:variable-name
+    __vue__: any;
+}
+export const dispatchEvent = (element: HTMLElement, eventName: string, eventData: any): void => {
+    const vueElement: VueElement = element as VueElement;
+    if (vueElement.__vue__) {
+        vueElement.__vue__.$emit(eventName, eventData);
+    } else {
+        element.dispatchEvent(eventData);
+    }
 };

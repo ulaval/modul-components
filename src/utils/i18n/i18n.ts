@@ -103,7 +103,7 @@ export class Messages {
      */
     public translate(
         key: string,
-        params: any[] = [],
+        params: any = [],
         nb?: number,
         modifier?: string,
         htmlEncodeParams: boolean = true
@@ -130,7 +130,7 @@ export class Messages {
      * @param {string} val the string to format
      * @param {any[]} params the values to insert in string
      */
-    private format(val: string, params: any[]): string {
+    private format(val: string, params: any): string {
         switch (this.formatMode) {
             case FormatMode.Vsprintf:
                 return vsprintf(val, params);
@@ -252,7 +252,7 @@ export class Messages {
  *
  * The format is 'This is a {0} containing {1}...'
  */
-function formatRegexp(val: string, params: any[]): string {
+function formatRegexp(val: string, params: string[]): string {
     return val.replace(FORMAT_REGEX, match => {
         // TODO: should use the regex variable notation instead of parsing the regex match
         let index = parseInt(match.substring(1, match.length - 1), 10);

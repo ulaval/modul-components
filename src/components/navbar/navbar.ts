@@ -1,5 +1,5 @@
 import { ModulVue } from '../../utils/vue/vue';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './navbar.html?style=./navbar.scss';
@@ -122,6 +122,12 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Watch('selected')
     private setAndUpdate(value): void {
         this.internalValue = value;
+        if (this.skin == MNavbarSkin.Light || this.skin == MNavbarSkin.Arrow) {
+            let selected: Vue | undefined = this.$children.find(element => element.$props.value === this.selected);
+            if (selected) {
+                this.setPosition(selected, this.skin);
+            }
+        }
     }
 
     private setupScrolllH(): void {
