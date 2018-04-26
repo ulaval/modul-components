@@ -17,6 +17,12 @@ $m-dialog--max-width--s: 420px !default;
         min-width: $m-min-width;
         overflow: hidden;
 
+        // MODUL-20, MODUL-87, ENA2-760
+        // the mq must stay sync with the component template and TS file
+        @media (min-width: $m-mq--min--s) {
+            justify-content: center;
+        }
+
         // doesn't work for slot content because of the scoped style... >_<
         h1,
         h2,

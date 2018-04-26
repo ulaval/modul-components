@@ -19,7 +19,7 @@
                         'm--is-large': iconSize=='large',
                         'm--has-border': propIconBorder }"></span>
     </div>
-    <m-accordion-transition :height-delta="skin == 'default' ? 24 : 0">
+    <m-accordion-transition :height-delta="skin == 'default' || skin == 'dark' ? 24 : 0">
         <div class="m-accordion__body-wrap"
              role="tabpanel"
              :id="propId + '-controls'"
