@@ -10,6 +10,7 @@ import WithRender from './accordion.html?style=./accordion.scss';
 
 export enum MAccordionSkin {
     Default = 'default',
+    Dark = 'dark',
     Light = 'light',
     Plain = 'plain'
 }
@@ -63,6 +64,7 @@ export class MAccordion extends Vue implements AccordionGateway {
         default: MAccordionSkin.Default,
         validator: value =>
             value == MAccordionSkin.Default ||
+            value == MAccordionSkin.Dark ||
             value == MAccordionSkin.Light ||
             value == MAccordionSkin.Plain
     })
