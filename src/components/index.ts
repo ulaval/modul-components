@@ -23,7 +23,7 @@ import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
 import IconButtonPlugin from './icon-button/icon-button';
 import IconFilePlugin from './icon-file/icon-file';
-import IconMenuPlugin from './icon-menu/icon-menu';
+import IconHeaderPlugin from './icon-header/icon-header';
 import InputStylePlugin from './input-style/input-style';
 import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
@@ -88,7 +88,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(IconPlugin);
         Vue.use(IconButtonPlugin);
         Vue.use(IconFilePlugin);
-        Vue.use(IconMenuPlugin);
+        Vue.use(IconHeaderPlugin);
         Vue.use(InputStylePlugin);
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);
