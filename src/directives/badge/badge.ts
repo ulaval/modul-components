@@ -1,6 +1,6 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
-import IconFilePlugin, { MIconFile } from '../../components/icon-file/icon-file';
+import { MIconFile } from '../../components/icon-file/icon-file';
 import { MIcon } from '../../components/icon/icon';
 import { ComponentMeta } from '../../meta/meta';
 import { BADGE } from '../directive-names';
@@ -149,7 +149,6 @@ const MBadgeDirective: DirectiveOptions = {
 
 const BadgePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(IconFilePlugin);
         v.directive(BADGE, MBadgeDirective);
     }
 };
