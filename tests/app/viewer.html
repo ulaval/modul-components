@@ -5,30 +5,6 @@
             <h1>{{$route.meta}}</h1>
         </div>
         <m-dynamic-template :template="tag"></m-dynamic-template>
-
-        <m-icon v-m-badge.test.a.x="{ state: test2 }" a="x" b="d" size="100px" name="default"></m-icon>
-        <m-icon-file v-m-badge="{ state: 'completed' }" extension="pdf" size="30px"></m-icon-file>
-        <m-icon v-m-badge="{ state: 'completed' }" name="m-svg__file-other" size="30px"></m-icon>
-        <m-icon-file v-m-badge="{ state: 'completed' }" size="100px" extension="pdf"></m-icon-file>
-        <m-icon-file v-m-badge="{ state: 'completed' }" size="100px" extension="pdf"></m-icon-file>
-        <div><m-icon-file v-m-badge="{ state: 'completed' }" size="24px" extension="pdf"></m-icon-file></div>
-        <div><m-icon-file v-m-badge="{ state: 'completed' }" size="30" extension="pdf"></m-icon-file></div>
-        <div><m-icon-file v-m-badge="{ state: 'completed' }" size="30px" extension="pdf"></m-icon-file></div>
-        <div><m-icon-file v-m-badge="{ state: 'completed' }" size="30px" extension="pdf"></m-icon-file></div>
-        <div><m-icon-file v-m-badge="{ state: 'error' }" size="30px" extension="pdf"></m-icon-file></div>
-        <div><m-icon-file v-m-badge="{ state: 'completed' }" size="200px" extension="pdf"></m-icon-file></div>
-        <div><m-icon-file v-m-badge="{ state: 'completed' }" size="200px" extension="pdf"></m-icon-file></div>
-        <div><m-icon-file v-m-badge="{ state: 'completed' }" size="200px" extension="pdf"></m-icon-file></div>
-        <div><m-icon-file v-m-badge="{ state: 'completed' }" size="100px" extension="pdf"></m-icon-file></div>
-        <div><m-icon-file v-m-badge="{ state: 'error' }" size="60px" extension="pdf"></m-icon-file></div>
-
-        <m-file-upload
-            @files-ready="onFilesReady"
-            @file-upload-cancel="onFileUploadCancel"
-            @done="onFilesUploadCompleted">
-            <m-button>Téléverser</m-button>
-        </m-file-upload>
-
     </m-template>
     <div slot="footer">Footer</div>
 </m-flex-template>
