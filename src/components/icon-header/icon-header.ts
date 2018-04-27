@@ -8,6 +8,11 @@ import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import IconPlugin from '../icon/icon';
 
+export enum MIconHeaderPosition {
+    Absolute = 'absolute',
+    Fixed = 'fixed'
+}
+
 export enum MIconHeaderPlacement {
     Right = 'right',
     Left = 'left'
@@ -32,6 +37,13 @@ export class MIconHeader extends ModulVue {
     public windowMaxHeight: string;
     @Prop()
     public headerHeight: string;
+    @Prop({
+        default: MIconHeaderPosition.Fixed,
+        validator: value =>
+            value == MIconHeaderPosition.Absolute ||
+            value == MIconHeaderPosition.Fixed
+    })
+    public position: string;
     @Prop({
         default: MIconHeaderPlacement.Right,
         validator: value =>

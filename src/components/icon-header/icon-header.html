@@ -9,7 +9,9 @@
     <transition name="m--is">
         <div class="m-icon-header__window"
              :style="{ top: headerHeight, maxWidth: styleMaxWidth, maxHeight: styleMaxHeight}"
-             :class="{ 'm--is-placement-right': placement == 'right',
+             :class="{ 'm--is-position-absolute': position == 'absolute',
+                       'm--is-position-fixed': position == 'fixed',
+                       'm--is-placement-right': placement == 'right',
                        'm--is-placement-left': placement == 'left'}"
              ref="window"
              v-if="isOpen">
