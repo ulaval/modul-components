@@ -61,9 +61,15 @@ import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
 import ValidationMessagePlugin from './validation-message/validation-message';
 import InplaceEditPlugin from './inplace-edit/inplace-edit';
+import LoggerPlugin from '../utils/logger/logger';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
+
+        if (!v.prototype.$log) {
+            Vue.use(LoggerPlugin);
+        }
+
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);

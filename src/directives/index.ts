@@ -12,9 +12,15 @@ import SortablePlugin from './sortable/sortable';
 import TextAreaAutoHeightPlugin from './textarea-auto-height/textarea-auto-height';
 import RemoveUserSelectPlugin from './user-select/remove-user-select';
 import I18nDirectivePlugin from './i18n/i18n';
+import LoggerPlugin from '../utils/logger/logger';
 
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
+
+        if (!v.prototype.$log) {
+            Vue.use(LoggerPlugin);
+        }
+
         Vue.use(DraggablePlugin);
         Vue.use(DraggableAllowScrollPlugin);
         Vue.use(DroppablePlugin);

@@ -19,7 +19,14 @@ export interface UtilsPluginOptions {
 
 const UtilsPlugin: PluginObject<any> = {
     install(v, options): void {
-        Vue.use(LoggerPlugin, options ? options.consoleOptions : undefined);
+        console.error(options);
+        if (!v.prototype.$log) {
+            Vue.use(LoggerPlugin, options ? options.consoleOptions : undefined);
+        } else if (options.consoleOptions) {
+            console.error("FUCK!");
+            v.prototype.$log.setConsoleOptions(options.consoleOptions);
+        }
+
         Vue.use(MediaQueriesPlugin);
         Vue.use(ModulPlugin);
         Vue.use(MessagesPlugin);
