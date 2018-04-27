@@ -8,8 +8,6 @@ import WithRender from './viewer.html';
 @Component
 export class Viewer extends Vue {
     public tag: string = '';
-    private test: boolean = false;
-    private test2: string | undefined = undefined;
 
     public mounted(): void {
         this.buildTag();
