@@ -16,7 +16,7 @@ export enum MDraggableClassNames {
 }
 
 export interface MDraggableOptions {
-    canDrag: any;
+    canDrag?: boolean;
     action: string;
     dragData: any;
     grouping?: any;

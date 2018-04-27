@@ -35,7 +35,8 @@ describe('draggable', () => {
         it(`it should render correctly when binding ${param} is provided`, () => {
             const userDefinedAction: string = 'someAction';
             const userDefinedData: string = 'someData';
-            const draggable: Wrapper<Vue> = getDraggableDirective(param, { dragData: userDefinedData, action: userDefinedAction, canDrag: true });
+            const userDefinedGrouping: string = 'someGrouping';
+            const draggable: Wrapper<Vue> = getDraggableDirective(param, { dragData: userDefinedData, action: userDefinedAction, grouping: userDefinedGrouping });
 
             expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
             expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe(userDefinedAction);
@@ -122,8 +123,7 @@ describe('draggable', () => {
             draggable = getDraggableDirective(true, {
                 action: userDefinedAction,
                 dragData: userDefinedData,
-                grouping: userDefinedGrouping,
-                canDrag: true
+                grouping: userDefinedGrouping
             }, dragImageTemplate);
         });
 
@@ -168,8 +168,7 @@ describe('draggable', () => {
             draggable = getDraggableDirective(true, {
                 action: userDefinedAction,
                 dragData: userDefinedData,
-                grouping: userDefinedGrouping,
-                canDrag: true
+                grouping: userDefinedGrouping
             }, dragImageTemplate);
         });
 

@@ -1,6 +1,6 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
-import { isInElement, mousePositionElement } from '../../utils/mouse/mouse';
+import { isInElement } from '../../utils/mouse/mouse';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { DROPPABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
@@ -35,7 +35,7 @@ export interface MDropInfo {
     canDrop: any;
 }
 
-export enum MDropEventNames {
+export enum MDroppableEventNames {
     OnDrop = 'droppable:drop',
     OnDragEnter = 'droppable:dragenter',
     OnDragLeave = 'droppable:dragleave',
@@ -97,7 +97,17 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
         }
 
         this.cleanupCssClasses();
-        this.dispatchEvent(event, MDropEventNames.OnDragLeave);
+        this.dispatchEvent(event, MDroppableEventNames.OnDragLeave);
+    }
+
+    public canDrop(draggable: MDraggable | undefined = MDraggable.currentDraggable): boolean {
+        if (!draggable) { return false; }
+
+        const canDrop = this.options.canDrop ? true : false;
+        const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
+        const draggableAction: string = draggable.options.action;
+        const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
+        return canDrop && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
     }
 
     private setOptions(value: MDroppableOptions): void {
@@ -113,7 +123,6 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     private isLeavingDroppable(event: DragEvent, droppable?: MDroppable): boolean {
         if (!droppable) { return false; }
         const threshold: number = 3;
-        const mousePosition = mousePositionElement(event, droppable.element);
         return !isInElement(event, droppable.element) || MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable;
     }
 
@@ -128,10 +137,12 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     private onDragIn(event: DragEvent): any {
         event.stopPropagation();
 
-        const element = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement;
-        const droppable = MDOMPlugin.getRecursive(MDroppable, element);
-        // Firefox sometime fires events on the wrong container for some reasons.  This fix it.
-        if (droppable !== this) { this.cleanupCssClasses(); return; }
+        if (document.elementFromPoint) {
+            const element = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement;
+            const droppable = MDOMPlugin.getRecursive(MDroppable, element);
+            // Firefox sometime fires events on the wrong container for some reasons.  This fix it.
+            if (droppable !== this) { this.cleanupCssClasses(); return; }
+        }
 
         let className: string;
         if (this.canDrop()) {
@@ -150,10 +161,10 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
             this.element.classList.add(MDroppableClassNames.Overing);
             this.element.classList.add(className);
 
-            this.dispatchEvent(event, MDropEventNames.OnDragEnter);
+            this.dispatchEvent(event, MDroppableEventNames.OnDragEnter);
         }
 
-        this.dispatchEvent(event, MDropEventNames.OnDragOver);
+        this.dispatchEvent(event, MDroppableEventNames.OnDragOver);
     }
 
     private onDrop(event: DragEvent): void {
@@ -163,7 +174,7 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
         event.preventDefault();
         this.cleanupCssClasses();
         MDroppable.currentHoverDroppable = undefined;
-        this.dispatchEvent(event, MDropEventNames.OnDrop);
+        this.dispatchEvent(event, MDroppableEventNames.OnDrop);
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
@@ -180,25 +191,13 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private extractDropInfo(event: DragEvent): MDropInfo | undefined {
-        if (!MDraggable.currentDraggable) { return; }
-
-        const data = MDraggable.currentDraggable.options.dragData || event.dataTransfer.getData('text');
+        const data = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.dragData || event.dataTransfer.getData('text') : undefined;
         return {
             action: MDraggable.currentDraggable ? MDraggable.currentDraggable.options.action : DEFAULT_ACTION,
-            grouping: MDraggable.currentDraggable.options.grouping,
+            grouping: MDraggable.currentDraggable ? MDraggable.currentDraggable.options.grouping : undefined,
             data,
             canDrop: this.canDrop()
         };
-    }
-
-    private canDrop(): boolean {
-        if (!MDraggable.currentDraggable) { return false; }
-
-        const canDrop = this.canDrop ? true : false;
-        const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
-        const draggableAction: string = MDraggable.currentDraggable.options.action;
-        const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
-        return canDrop && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
     }
 
     private isHoveringOverDraggedElementChild(): boolean {

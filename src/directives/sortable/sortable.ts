@@ -6,7 +6,7 @@ import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive
 import { SORTABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable, MDraggableEventNames } from '../draggable/draggable';
-import { MDropEvent, MDropEventNames, MDroppable } from '../droppable/droppable';
+import { MDropEvent, MDroppable, MDroppableEventNames } from '../droppable/droppable';
 import { MDroppableGroup } from '../droppable/droppable-group';
 
 export interface MSortableOptions {
@@ -110,10 +110,10 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
                     acceptedActions: this.options.acceptedActions,
                     canDrop: true
                 });
-                plugin.addEventListener(MDropEventNames.OnDrop, (event: MDropEvent) => this.onDrop(event));
-                plugin.addEventListener(MDropEventNames.OnDragEnter, (event: MDropEvent) => this.onDragEnter(event));
-                plugin.addEventListener(MDropEventNames.OnDragLeave, (event: MDropEvent) => this.onDragLeave(event));
-                plugin.addEventListener(MDropEventNames.OnDragOver, (event: MDropEvent) => this.onDragOver(event));
+                plugin.addEventListener(MDroppableEventNames.OnDrop, (event: MDropEvent) => this.onDrop(event));
+                plugin.addEventListener(MDroppableEventNames.OnDragEnter, (event: MDropEvent) => this.onDragEnter(event));
+                plugin.addEventListener(MDroppableEventNames.OnDragLeave, (event: MDropEvent) => this.onDragLeave(event));
+                plugin.addEventListener(MDroppableEventNames.OnDragOver, (event: MDropEvent) => this.onDragOver(event));
             });
         }
     }
