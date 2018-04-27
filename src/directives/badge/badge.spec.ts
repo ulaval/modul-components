@@ -1,37 +1,29 @@
 import { mount, Wrapper } from '@vue/test-utils';
-import Vue, { VueConstructor } from 'vue';
+import Vue from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { createMockFile } from '../../../tests/helpers/file';
-import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
-import FilePlugin, { DEFAULT_STORE_NAME } from '../../utils/file/file';
-import { ModulVue } from '../../utils/vue/vue';
-import BadgePlugin from './badge';
-import { addMessages } from '../../../tests/helpers/lang';
-import IconFilePluggin, { MIconFile } from '../../components/icon-file/icon-file';
+import { renderComponent } from '../../../tests/helpers/render';
+import IconFilePluggin from '../../components/icon-file/icon-file';
+import BadgePlugin, { MBadgeState } from './badge';
 
 describe('MBadge', () => {
-    let localVue: VueConstructor<ModulVue>;
-    let iconFile: Wrapper<ModulVue>;
+    const getBadgeDirective: (bindingValue: MBadgeState) => Wrapper<Vue> =
+    (bindingValue: MBadgeState) => {
+        return mount({
+            // template: `<m-icon-file v-m-badge=${JSON.stringify(`{ state: ${bindingValue} }`)} extension="pdf"></m-icon-file>`,
+            template: `<m-icon-file v-m-badge="{ state: 'completed' }" :size="'100px'" :extension="'pdf'"></m-icon-file>`,
+            data: () => bindingValue
+        }, { localVue: Vue });
+    };
 
     beforeEach(() => {
         resetModulPlugins();
         Vue.use(IconFilePluggin);
-
-        iconFile = mount(
-            {
-                template: '<m-icon-file v-m-badge=="{ state: state }"></m-icon-file>'
-            },
-            {
-                localVue: Vue,
-                data: {
-                    state: 'completed'
-                }
-            }
-        );
+        Vue.use(BadgePlugin);
     });
 
-    it('should render correctly', () => {
-        return expect(renderComponent(iconFile.vm)).resolves.toMatchSnapshot();
+    it(`should render correctly`, () => {
+        const badge = getBadgeDirective(MBadgeState.Completed);
+        return expect(renderComponent(badge.vm)).resolves.toMatchSnapshot();
     });
 });
