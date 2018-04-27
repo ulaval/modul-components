@@ -19,10 +19,9 @@ export interface UtilsPluginOptions {
 
 const UtilsPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error(options);
         if (!v.prototype.$log) {
             Vue.use(LoggerPlugin, options ? options.consoleOptions : undefined);
-        } else if (options.consoleOptions) {
+        } else if (options) {
             v.prototype.$log.setConsoleOptions(options.consoleOptions);
         }
 
