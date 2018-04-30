@@ -5,6 +5,7 @@ import WithRender from './icon-header.html?style=./icon-header.scss';
 import { ModulVue } from '../../utils/vue/vue';
 import { ICON_HEADER_NAME } from '../component-names';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { Portal, PortalMixinImpl, PortalMixin, BackdropMode } from '../../mixins/portal/portal';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import IconPlugin from '../icon/icon';
 
@@ -20,30 +21,23 @@ export enum MIconHeaderPlacement {
 
 @WithRender
 @Component({
-    mixins: [MediaQueries]
+    mixins: [MediaQueries, Portal]
 })
 export class MIconHeader extends ModulVue {
-    @Prop()
-    public open: boolean;
     @Prop()
     public iconName: string;
     @Prop()
     public title: string;
     @Prop()
-    public titreButton: string;
+    public buttonTitle: string;
     @Prop({ default: '300px' })
     public windowMaxWidth: string;
     @Prop({ default: '460px' })
     public windowMaxHeight: string;
     @Prop()
     public headerHeight: string;
-    @Prop({
-        default: MIconHeaderPosition.Fixed,
-        validator: value =>
-            value == MIconHeaderPosition.Absolute ||
-            value == MIconHeaderPosition.Fixed
-    })
-    public position: string;
+    @Prop({ default: true })
+    public outsideClose: boolean;
     @Prop({
         default: MIconHeaderPlacement.Right,
         validator: value =>
@@ -60,10 +54,27 @@ export class MIconHeader extends ModulVue {
     @Prop({ default: true })
     public paddingFooter: boolean;
 
-    private internalOpen: boolean = false;
+    private clickOnWindowActive: boolean;
+
+    private popper: Popper | undefined;
+
+    public handlesFocus(): boolean {
+        return true;
+    }
+
+    public getBackdropMode(): BackdropMode {
+        return BackdropMode.None;
+    }
+
+    public getPortalElement(): HTMLElement {
+        return this.$refs.window as HTMLElement;
+    }
+
+    public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
+        return true;
+    }
 
     protected mounted(): void {
-        this.isOpen = this.open;
         this.$modul.event.$on('click', this.onDocumentClick);
     }
 
@@ -71,22 +82,23 @@ export class MIconHeader extends ModulVue {
         this.$modul.event.$off('click', this.onDocumentClick);
     }
 
-    @Watch('open')
-    private openChanged(open: boolean): void {
-        this.isOpen = open;
-    }
-
-    private get isOpen(): boolean {
-        return this.internalOpen;
-    }
-
-    private set isOpen(open: boolean) {
-        this.internalOpen = open;
-        if (open) {
-            this.$emit('open');
-        } else {
-            this.$emit('close');
+    private onDocumentClick(event: MouseEvent): void {
+        if (this.as<PortalMixin>().propOpen && !this.clickOnWindowActive && this.outsideClose) {
+            let trigger: HTMLElement | undefined = this.as<PortalMixin>().getTrigger();
+            if (!(this.as<PortalMixin>().getPortalElement().contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
+                (trigger && trigger.contains(event.target as HTMLElement)))) {
+                this.as<PortalMixin>().propOpen = false;
+            }
         }
+
+    }
+
+    private onMousedown(): void {
+        this.clickOnWindowActive = true;
+
+        setTimeout(() => {
+            this.clickOnWindowActive = false;
+        }, 300);
     }
 
     private get hasTitle(): boolean {
@@ -101,25 +113,12 @@ export class MIconHeader extends ModulVue {
         return !!this.$slots.footer;
     }
 
-    private toggleOpen(): void {
-        this.isOpen = !this.isOpen;
-    }
-
     private get styleMaxWidth(): string | undefined {
         return this.as<MediaQueries>().isMqMinS ? this.windowMaxWidth : undefined;
     }
 
     private get styleMaxHeight(): string | undefined {
         return this.as<MediaQueries>().isMqMinS ? this.windowMaxHeight : undefined;
-    }
-
-    private onDocumentClick(event: MouseEvent): void {
-        if (this.isOpen) {
-            let trigger: HTMLElement = this.$refs.window as HTMLElement;
-            if (trigger && !trigger.contains(event.target as HTMLElement)) {
-                this.isOpen = false;
-            }
-        }
     }
 }
 

@@ -229,7 +229,8 @@ export class Portal extends ModulVue implements PortalMixin {
         }
     }
 
-    private toggle(): void {
+    private toggle(event): void {
+        this.$emit('click', event);
         this.propOpen = !this.propOpen;
     }
 

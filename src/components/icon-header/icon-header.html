@@ -1,39 +1,37 @@
 <div class="m-icon-header"
-     :class="{ 'm--is-open': isOpen }">
-    <template>
-        <slot name="icon" v-if="iconName"></slot>
-        <m-icon-button ref="test" @click="toggleOpen()" :icon-name="iconName">
-            {{ titreButton }}
-        </m-icon-button>
-    </template>
-    <transition name="m--is">
-        <div class="m-icon-header__window"
-             :style="{ top: headerHeight, maxWidth: styleMaxWidth, maxHeight: styleMaxHeight}"
-             :class="{ 'm--is-position-absolute': position == 'absolute',
-                       'm--is-position-fixed': position == 'fixed',
-                       'm--is-placement-right': placement == 'right',
-                       'm--is-placement-left': placement == 'left'}"
-             ref="window"
-             v-if="isOpen">
-            <div class="m-icon-header__header-wrap">
-                <div class="m-icon-header__header"
-                     :class="{ 'm--no-padding': !padding || !paddingHeader }">
-                    <h2 v-if="hasTitle">{{ title }}</h2>
-                    <slot name="header"></slot>
+     :class="{ 'm--is-open': propOpen }" :title="buttonTitle">
+    <slot name="trigger" v-if="!iconName">
+    </slot>
+    <m-icon-button @click="toggle" :icon-name="iconName"></m-icon-button>
+    <portal :target-el="'#' + propId">
+        <transition name="m--is">
+            <div class="m-icon-header__window"
+                :style="{ top: headerHeight, maxWidth: styleMaxWidth, maxHeight: styleMaxHeight}"
+                :class="{ 'm--is-placement-right': placement == 'right',
+                          'm--is-placement-left': placement == 'left'}"
+                ref="window"
+                @mousedown="onMousedown"
+                v-show="propOpen" v-if="preload || loaded">
+                <div class="m-icon-header__header-wrap">
+                    <div class="m-icon-header__header"
+                        :class="{ 'm--no-padding': !padding || !paddingHeader }">
+                        <h2 v-if="hasTitle">{{ title }}</h2>
+                        <slot name="header"></slot>
+                        </div>
+                    </div>
+                <div class="m-icon-header__body"
+                        :class="{ 'm--no-padding': !padding || !paddingBody }"
+                        v-if="hasDefaultSlot">
+                    <slot></slot>
+                </div>
+                <div class="m-icon-header__footer-wrap">
+                    <div class="m-icon-header__footer"
+                            :class="{ 'm--no-padding': !padding || !paddingFooter }"
+                            v-if="hasFooterSlot">
+                        <slot name="footer"></slot>
                     </div>
                 </div>
-            <div class="m-icon-header__body"
-                    :class="{ 'm--no-padding': !padding || !paddingBody }"
-                    v-if="hasDefaultSlot">
-                <slot></slot>
             </div>
-            <div class="m-icon-header__footer-wrap">
-                <div class="m-icon-header__footer"
-                        :class="{ 'm--no-padding': !padding || !paddingFooter }"
-                        v-if="hasFooterSlot">
-                    <slot name="footer"></slot>
-                </div>
-            </div>
-        </div>
-    </transition>
+        </transition>
+    </portal>
 </div>

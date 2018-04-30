@@ -32,6 +32,9 @@ $m-icon-header--color: $m-color--accent;
     }
 
     &__window {
+        position: fixed;
+        top: 0;
+        height: 100%;
         z-index: 3;
         display: flex;
         flex-direction: column;
@@ -50,40 +53,20 @@ $m-icon-header--color: $m-color--accent;
             border-radius: $m-border-radius--s;
         }
 
-        &.m--is-position-absolute {
-            position: absolute;
-
-            @media (max-width: $m-mq--max--s) {
-                position: fixed;
-                top: 0;
-                height: 100%;
-            }
-        }
-
-        &.m--is-position-fixed {
-            position: fixed;
-            top: 0;
-            height: 100%;
-
-            &.m--is-placement-right {
-                @media (min-width: $m-mq--min--s) {
-                    right: $m-padding;
-                }
-            }
-
-            &.m--is-placement-left {
-                @media (min-width: $m-mq--min--s) {
-                    left: $m-padding;
-                }
-            }
-        }
-
         &.m--is-placement-right {
             right: 0;
+
+            @media (min-width: $m-mq--min--s) {
+                right: $m-padding;
+            }
         }
 
         &.m--is-placement-left {
             left: 0;
+
+            @media (min-width: $m-mq--min--s) {
+                left: $m-padding;
+            }
         }
 
         &.m--is-enter-active,
