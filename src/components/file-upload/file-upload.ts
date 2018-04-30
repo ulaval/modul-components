@@ -190,6 +190,7 @@ export class MFileUpload extends ModulVue {
     private onClose(): void {
         this.propOpen = false;
         this.$emit('close');
+        this.onCancelClick();
         ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function(evt) {
             this.$refs.dialog.$refs.dialogWrap.removeEventListener(evt, function(e) {
                 e.preventDefault();
