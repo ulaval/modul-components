@@ -89,10 +89,19 @@ export class MLink extends ModulVue {
         return this.mode == MLinkMode.RouterLink;
     }
 
+    private onKeyup(event): void {
+        event = event || window.event;
+        if (event.keyCode === 32) { // contrôle la touche espace
+            this.onClick(event);
+        }
+    }
+
     private get isButton(): boolean {
         let isButtonMode: boolean = this.mode == MLinkMode.Button;
         if (isButtonMode) {
-            this.$el.setAttribute('role', 'button');
+            this.$nextTick(() => {
+                this.$el.setAttribute('role', 'button');
+            });
         }
         return isButtonMode;
     }
