@@ -91,7 +91,7 @@ export class MLink extends ModulVue {
 
     private onKeyup(event): void {
         event = event || window.event;
-        if (event.keyCode === 32) { // contrôle la touche espace
+        if (event.keyCode === 32 && this.isButton) {
             this.onClick(event);
         }
     }
