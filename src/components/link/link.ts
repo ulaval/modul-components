@@ -90,7 +90,11 @@ export class MLink extends ModulVue {
     }
 
     private get isButton(): boolean {
-        return this.mode == MLinkMode.Button;
+        let isButtonMode: boolean = this.mode == MLinkMode.Button;
+        if (isButtonMode) {
+            this.$el.setAttribute('role', 'button');
+        }
+        return isButtonMode;
     }
 
     private get isTextLink(): boolean {
