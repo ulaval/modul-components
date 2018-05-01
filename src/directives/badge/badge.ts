@@ -76,19 +76,15 @@ const getBadgePosition: (element: HTMLElement, binding: VNodeDirective, vnode: V
     let topDistance;
     let badgeOrigin = getBadgeOrigin(vnode);
     let badgeOffset = getBadgeOffset(binding);
-    let elSize = parseInt((vnode.componentOptions as ComponentMeta)['propsData']['size'], 10);
+
+    let elSize = (vnode.componentOptions as ComponentMeta)['propsData']['size'] ? parseInt((vnode.componentOptions as ComponentMeta)['propsData']['size'], 10) : (vnode.elm as HTMLElement).clientWidth;
     let badgeSize = elSize * (16 / 30);
     let elLeftOrigin = Number(parseFloat(badgeOrigin[0].replace(/,/g, '.')).toFixed(2));
     let elTopOrigin = Number(parseFloat(badgeOrigin[1].replace(/,/g, '.')).toFixed(2));
-    if (elSize == 24) {
-        leftDistance = elLeftOrigin - (badgeSize * 0.5) + badgeOffset.x;
-        topDistance = elTopOrigin - (badgeSize * (2 / 3)) + badgeOffset.y;
-    } else {
-        let elWidth = parseInt(element.attributes['width']['value'], 10);
-        let elHeight = parseInt(element.attributes['height']['value'], 10);
-        leftDistance = ((elLeftOrigin / 24) * elWidth) - (badgeSize * 0.5) + badgeOffset.x;
-        topDistance = ((elTopOrigin / 24) * elHeight) - (badgeSize * (2 / 3)) + badgeOffset.y;
-    }
+
+    leftDistance = ((elLeftOrigin / 24) * elSize) - (badgeSize * 0.5) + badgeOffset.x;
+    topDistance = ((elTopOrigin / 24) * elSize) - (badgeSize * (2 / 3)) + badgeOffset.y;
+
     return { size: badgeSize , leftDistance, topDistance };
 };
 
