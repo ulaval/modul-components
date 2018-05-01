@@ -315,7 +315,7 @@ describe('droppable', () => {
         });
 
         [MDroppableClassNames.CanDrop, MDroppableClassNames.CantDrop, MDroppableClassNames.Overing].forEach(className => {
-            it('it should clean up Overing class when it exists on element', () => {
+            it(`it should clean up ${className} class when it exists on element`, () => {
                 addClass(className);
                 const droppablePlugin = MDOMPlugin.get(MDroppable, droppable.element);
 

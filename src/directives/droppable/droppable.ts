@@ -5,7 +5,7 @@ import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive
 import { DROPPABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable } from '../draggable/draggable';
-import { MRemoveUserSelect } from '../user-select/remove-user-select';
+import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../user-select/remove-user-select';
 
 export enum MDroppableClassNames {
     Droppable = 'm--is-droppable',
@@ -237,6 +237,7 @@ const Directive: DirectiveOptions = {
 
 const DroppablePlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(RemoveUserSelectPlugin);
         v.directive(DROPPABLE_NAME, Directive);
     }
 };
