@@ -156,7 +156,7 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
 
         MDroppable.previousHoverContainer = MDroppable.currentHoverDroppable;
         MDroppable.currentHoverDroppable = this;
-        if (MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable) {
+        if (MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable || !this.element.classList.contains(className)) {
             this.cleanupCssClasses();
             this.element.classList.add(MDroppableClassNames.Overing);
             this.element.classList.add(className);
