@@ -55,7 +55,7 @@ export class MTextarea extends ModulVue implements InputManagementData {
 
 const TextareaPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(TEXTAREA_NAME + ' is not ready for production');
+        v.prototype.$log.warn(TEXTAREA_NAME + ' is not ready for production');
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(TextAreaAutoHeightPlugin);

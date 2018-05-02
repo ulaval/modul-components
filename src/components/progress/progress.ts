@@ -224,7 +224,7 @@ export class MProgress extends ModulVue {
 
 const ProgressPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(PROGRESS_NAME, 'plugin.install');
+        v.prototype.$log.debug(PROGRESS_NAME, 'plugin.install');
         v.component(PROGRESS_NAME, MProgress);
     }
 };

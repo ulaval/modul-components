@@ -27,6 +27,7 @@
         "no-empty": false,
         "no-debugger": true,
         "no-null-keyword": true,
-        "curly": true
+        "curly": true,
+        "no-console": [true, "debug", "log", "warn", "info"]
     }
 }

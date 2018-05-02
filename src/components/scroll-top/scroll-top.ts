@@ -117,7 +117,7 @@ export class MScrollTop extends ModulVue {
 
 const ScrollTopPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(SCROLL_TOP_NAME + ' is not ready for production');
+        v.prototype.$log.warn(SCROLL_TOP_NAME + ' is not ready for production');
         v.use(IconPlugin);
         v.use(ButtonPlugin);
         v.use(I18nPlugin);

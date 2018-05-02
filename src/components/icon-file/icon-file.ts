@@ -75,7 +75,7 @@ export class MIconFile extends Vue {
 
 const IconFilePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(ICON_FILE_NAME, 'plugin.install');
+        v.prototype.$log.debug(ICON_FILE_NAME, 'plugin.install');
         v.component(ICON_FILE_NAME, MIconFile);
     }
 };

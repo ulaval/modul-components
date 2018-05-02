@@ -207,7 +207,7 @@ export class Portal extends ModulVue implements PortalMixin {
 
     private handleTrigger(): void {
         if (this.internalTrigger) {
-            console.warn('portal.ts : Trigger change or multiple triggers not supported');
+            this.$log.warn('portal.ts : Trigger change or multiple triggers not supported');
         }
         if (this.trigger) {
             this.internalTrigger = this.trigger;

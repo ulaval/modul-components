@@ -163,7 +163,7 @@ export class MCarousel extends Vue {
 
 const CarouselPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(CAROUSEL_NAME + ' is not ready for production');
+        v.prototype.$log.warn(CAROUSEL_NAME + ' is not ready for production');
         v.component(CAROUSEL_NAME, MCarousel);
     }
 };

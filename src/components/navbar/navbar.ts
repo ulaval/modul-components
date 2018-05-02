@@ -180,7 +180,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
 const NavbarPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(NAVBAR_NAME + ' is not ready for production');
+        v.prototype.$log.warn(NAVBAR_NAME + ' is not ready for production');
         v.use(NavbarItemPlugin);
         v.component(NAVBAR_NAME, MNavbar);
     }

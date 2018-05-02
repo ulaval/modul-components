@@ -73,7 +73,7 @@ export class MNavbarItem extends ModulVue {
 
 const NavbarItemPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(NAVBAR_ITEM_NAME + ' is not ready for production');
+        v.prototype.$log.warn(NAVBAR_ITEM_NAME + ' is not ready for production');
         v.component(NAVBAR_ITEM_NAME, MNavbarItem);
     }
 };
