@@ -49,6 +49,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public cleanupCssClasses(): void {
         this.element.classList.remove(MDraggableClassNames.Dragging);
         this.element.classList.remove(MDraggableClassNames.Grabbing);
+        document.removeEventListener('mouseup', this.mouseUp);
     }
 
     public attach(mount: MountFunction): void {
@@ -63,8 +64,15 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
                 this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
                 this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-                this.addEventListener('mousedown', (event: DragEvent) => this.element.classList.add(MDraggableClassNames.Grabbing));
-                this.addEventListener('mouseup', (event: DragEvent) => this.cleanupCssClasses());
+                this.addEventListener('mousedown', (event: DragEvent) => {
+                    if (!MDraggable.currentDraggable) {
+                        event.stopImmediatePropagation();
+                        event.stopPropagation();
+                        this.element.classList.add(MDraggableClassNames.Grabbing);
+                        document.addEventListener('mouseup', this.mouseUp);
+                    }
+                });
+                this.addEventListener('mouseup', () => this.mouseUp());
                 this.addEventListener('touchmove', () => {});
                 MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
             });
@@ -156,6 +164,11 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
         customEvent.initCustomEvent(name, true, true, event);
         dispatchEvent(this.element, name, Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { dragInfo }));
+    }
+
+    private mouseUp(): void {
+        this.cleanupCssClasses();
+        document.removeEventListener('mouseup', this.mouseUp);
     }
 }
 

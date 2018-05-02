@@ -80,7 +80,7 @@ describe('draggable', () => {
         expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
     });
 
-    it('it should remove grabbing class on mouse up', () => {
+    it('it should remove grabbing class on document mouse up', () => {
         const draggable: Wrapper<Vue> = getDraggableDirective();
         draggable.trigger('mousedown');
         draggable.trigger('mouseup');
