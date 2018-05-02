@@ -237,7 +237,6 @@ describe('sortable', () => {
         });
 
         it('it should handle transition from one active sortable to another', () => {
-            const test = sortable.find('li');
             sortable.find('li').trigger('dragenter', getEventDummy());
             jest.spyOn(plugin, 'doCleanUp');
             secondSortable.find('li').trigger('dragenter', getEventDummy());
@@ -293,6 +292,27 @@ describe('sortable', () => {
             secondPlugin = MDOMPlugin.get(MSortable, secondSortable.element);
             makeDroppable(secondPlugin);
         });
+
+        it('should cleanup when leaving sortable', () => {
+            jest.spyOn(plugin, 'doCleanUp');
+
+            sortable.find('li').trigger('dragenter', getEventDummy());
+            sortable.find('li').trigger('dragleave', getEventDummy());
+
+            expect(plugin.doCleanUp).toHaveBeenCalled();
+            expect(MSortable.activeSortContainer).toBeUndefined();
+        });
+
+        it('should cleanup when leaving sortable for another sortable', () => {
+            jest.spyOn(plugin, 'doCleanUp');
+
+            sortable.find('li').trigger('dragenter', getEventDummy());
+            secondSortable.find('li').trigger('dragenter', getEventDummy());
+            sortable.find('li').trigger('dragleave', getEventDummy());
+
+            expect(plugin.doCleanUp).toHaveBeenCalled();
+            expect(MSortable.activeSortContainer).toBe(secondPlugin);
+        });
     });
 
     describe('onDrop', () => {
@@ -300,8 +320,6 @@ describe('sortable', () => {
             const sortable: Wrapper<Vue> = getSortableDirective(true, options);
             makeDroppable(MDOMPlugin.get(MSortable, sortable.element));
             return sortable;
-
-            ((MSortableDefaultInsertionMarkerBehavior as any) as jest.Mock).mockImplementation(() => ({ getInsertPosition: () => MSortInsertPositions.After }));
         };
 
         it('it should handle drop correctly when adding a new item to a sortable', () => {

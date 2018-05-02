@@ -1,7 +1,6 @@
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { PluginObject } from 'vue/types/plugin';
 
-import { isInElement } from '../../utils/mouse/mouse';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { SORTABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
@@ -206,7 +205,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
         event.stopPropagation();
 
         const newContainer = MDroppable.currentHoverDroppable ? MDOMPlugin.getRecursive(MSortable, MDroppable.currentHoverDroppable.element) : undefined;
-        if (!newContainer || !isInElement(event, this.element)) {
+        if (!newContainer) {
             this.doCleanUp();
             MSortable.activeSortContainer = undefined;
         }
