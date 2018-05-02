@@ -5,6 +5,7 @@ import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive
 import { DROPPABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable } from '../draggable/draggable';
+import { MSortableAction } from '../sortable/sortable';
 import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../user-select/remove-user-select';
 
 export enum MDroppableClassNames {
@@ -192,9 +193,11 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
 
     private extractDropInfo(event: DragEvent): MDropInfo | undefined {
         const data = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.dragData || event.dataTransfer.getData('text') : undefined;
+        const action: string = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.action : DEFAULT_ACTION;
+        const grouping: string = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.grouping : undefined;
         return {
-            action: MDraggable.currentDraggable ? MDraggable.currentDraggable.options.action : DEFAULT_ACTION,
-            grouping: MDraggable.currentDraggable ? MDraggable.currentDraggable.options.grouping : undefined,
+            action: action,
+            grouping: action === MSortableAction.MoveGroup || ![MSortableAction.MoveGroup, MSortableAction.Move].find(item => item === action) ? grouping : undefined,
             data,
             canDrop: this.canDrop()
         };

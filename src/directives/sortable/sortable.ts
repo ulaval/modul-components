@@ -16,7 +16,7 @@ export interface MSortableOptions {
     canSort?: any;
 }
 
-export enum MSortEventNames {
+export enum MSortableEventNames {
     OnAdd = 'sortable:add',
     OnMove = 'sortable:move',
     OnRemove = 'sortable:remove'
@@ -237,9 +237,9 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
 
         let eventName: string;
         if (isMoving) {
-            eventName = MSortEventNames.OnMove;
+            eventName = MSortableEventNames.OnMove;
         } else {
-            eventName = MSortEventNames.OnAdd;
+            eventName = MSortableEventNames.OnAdd;
         }
 
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
@@ -249,7 +249,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
             action: event.dropInfo.action,
             oldPosition: oldIndex,
             newPosition: this.getNewPosition(event, oldIndex),
-            grouping: this.getNewGrouping(event, oldIndex)
+            grouping: event.dropInfo.grouping
         };
         const changed: boolean = sortInfo.oldPosition !== sortInfo.newPosition;
         if (!changed) { return; }
@@ -272,8 +272,8 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
             const customEvent: CustomEvent = document.createEvent('CustomEvent');
             const sortInfo: MSortInfo = Object.assign(event.dropInfo, { oldPosition: oldIndex, newPosition: -1 });
             const sortEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { sortInfo });
-            customEvent.initCustomEvent(MSortEventNames.OnRemove, true, true, event.detail);
-            dispatchEvent(this.element, MSortEventNames.OnRemove, sortEvent);
+            customEvent.initCustomEvent(MSortableEventNames.OnRemove, true, true, event.detail);
+            dispatchEvent(this.element, MSortableEventNames.OnRemove, sortEvent);
         }
     }
 
@@ -348,14 +348,6 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
             newIndex--;
         }
         return newIndex;
-    }
-
-    private getNewGrouping(event: MDropEvent, oldPosition: number): string | undefined {
-        if (event.dropInfo.action === MSortableAction.MoveGroup) {
-            return event.dropInfo.grouping;
-        } else {
-            return undefined;
-        }
     }
 
     private isHoveringOverDraggedElement(): boolean {
