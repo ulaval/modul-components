@@ -4,8 +4,10 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import FileDropPlugin from '../../directives/file-drop/file-drop';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
 import { Messages } from '../../utils/i18n/i18n';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { FILE_UPLOAD_NAME } from '../component-names';
@@ -18,8 +20,6 @@ import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 

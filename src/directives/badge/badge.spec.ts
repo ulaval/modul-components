@@ -10,7 +10,6 @@ describe('MBadge', () => {
     const getBadgeDirective: (bindingValue: MBadgeState) => Wrapper<Vue> =
     (bindingValue: MBadgeState) => {
         return mount({
-            // template: `<m-icon-file v-m-badge=${JSON.stringify(`{ state: ${bindingValue} }`)} extension="pdf"></m-icon-file>`,
             template: `<m-icon-file v-m-badge="{ state: 'completed' }" :size="'100px'" :extension="'pdf'"></m-icon-file>`,
             data: () => bindingValue
         }, { localVue: Vue });
