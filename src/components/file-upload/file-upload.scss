@@ -4,6 +4,8 @@ $m-file-upload-max-height: 120px;
 $m-file-upload-max-height--s: 72px;
 
 .m-file-upload {
+    @include m-box-padding();
+
     &__error-message {
         margin-bottom: $m-margin--l;
 

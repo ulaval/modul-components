@@ -1,4 +1,4 @@
-<m-dialog :title="title" ref="dialog" :open.sync="propOpen" @open="onOpen" @close="onClose" :close-on-backdrop="false">
+<m-dialog :title="title" ref="dialog" :open.sync="propOpen" @open="onOpen" @close="onClose" :close-on-backdrop="false" :padding-body="false">
 
     <span slot="trigger">
         <slot></slot>
@@ -33,7 +33,7 @@
             </h2>
             <p  v-if="isMqMinS" class="m-file-upload__drop-zone__or"><m-i18n k="m-file-upload:choice"></m-i18n></p>
             <m-file-select class="m-file-upload__drop-zone__button" skin="primary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName" keep-store="true"></m-file-select>
-            <p class="m-file-upload__drop-zone__format" v-if="extensions"><m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format"></m-i18n>: {{fileExtensions}}</p>
+            <p class="m-file-upload__drop-zone__format" v-if="extensions"><m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format" :nb="extensions.length"></m-i18n>: {{fileExtensions}}</p>
         </div>
 
         <h3 class="m-file-upload__title" v-if="!hasUploadingFiles">
