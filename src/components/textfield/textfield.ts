@@ -1,18 +1,17 @@
-
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model, Watch } from 'vue-property-decorator';
-import WithRender from './textfield.html?style=./textfield.scss';
-import { TEXTFIELD_NAME } from '../component-names';
-import { InputState } from '../../mixins/input-state/input-state';
+import { Prop, Watch } from 'vue-property-decorator';
+
+import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
-import { KeyCode } from '../../utils/keycode/keycode';
+import { InputState } from '../../mixins/input-state/input-state';
+import { InputWidth } from '../../mixins/input-width/input-width';
+import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
+import { TEXTFIELD_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
-import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width';
-import { InputLabel } from '../../mixins/input-label/input-label';
-import ButtonPlugin from '../button/button';
+import WithRender from './textfield.html?style=./textfield.scss';
 
 export enum MTextfieldType {
     Text = 'text',
@@ -22,8 +21,8 @@ export enum MTextfieldType {
     Telephone = 'tel'
 }
 
-const ICON_NAME_PASSWORD_VISIBLE: string = 'default';
-const ICON_NAME_PASSWORD_HIDDEN: string = 'default';
+const ICON_NAME_PASSWORD_VISIBLE: string = 'show-password';
+const ICON_NAME_PASSWORD_HIDDEN: string = 'hidden-password';
 
 @WithRender
 @Component({
@@ -91,11 +90,11 @@ export class MTextfield extends ModulVue {
         return type;
     }
 
-    private get iconNamePassword() {
+    private get iconNamePassword(): string {
         return this.passwordAsText ? ICON_NAME_PASSWORD_HIDDEN : ICON_NAME_PASSWORD_VISIBLE;
     }
 
-    private get iconDescriptionPassword() {
+    private get iconDescriptionPassword(): string {
         return this.passwordAsText ? this.iconDescriptionHidePassword : this.iconDescriptionShowPassword;
     }
 
