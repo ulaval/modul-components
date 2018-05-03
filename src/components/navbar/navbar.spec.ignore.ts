@@ -107,7 +107,7 @@ describe('navbar', () => {
     //     }).$mount();
 
     //     let element = vm.$el.querySelector('.m-navbar-item');
-    //     console.log(vm.$el);
+    //     Vue.prototype.$log.log(vm.$el);
 
     //     if (element) {
     //         (element as any).click();

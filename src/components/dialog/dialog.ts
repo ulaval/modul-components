@@ -88,7 +88,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     protected mounted(): void {
         if (!this.hasHeader) {
-            console.warn('<' + DIALOG_NAME + '> needs a header slot or title prop.');
+            this.$log.warn('<' + DIALOG_NAME + '> needs a header slot or title prop.');
         }
     }
 

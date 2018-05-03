@@ -161,7 +161,7 @@ export class MRadio extends ModulVue {
 
 const RadioPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(RADIO_NAME, 'plugin.install');
+        v.prototype.$log.debug(RADIO_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(ValidationMessagePlugin);
         v.component(RADIO_NAME, MRadio);

@@ -272,7 +272,7 @@ export class MFileUpload extends ModulVue {
 
 const FileUploadPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(FILE_UPLOAD_NAME, 'plugin.install');
+        v.prototype.$log.debug(FILE_UPLOAD_NAME, 'plugin.install');
         v.use(FilePlugin);
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);

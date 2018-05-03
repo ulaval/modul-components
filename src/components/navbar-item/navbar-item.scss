@@ -164,16 +164,18 @@ a {
         transition: color 0.4s ease, font-weight 0.4s ease;
         position: relative;
 
-        &::after {
-            content: "";
-            display: block;
-            height: 16px;
-            width: 1px;
-            position: absolute;
-            background-color: $m-color--text;
-            right: 0;
-            top: 50%;
-            transform: translate3d(0, -50%, 0);
+        &:not(:last-child) {
+            &::after {
+                content: "";
+                display: block;
+                height: 16px;
+                width: 1px;
+                position: absolute;
+                background-color: $m-color--text;
+                right: 0;
+                top: 50%;
+                transform: translate3d(0, -50%, 0);
+            }
         }
 
         &:hover {

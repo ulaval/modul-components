@@ -82,7 +82,7 @@ describe('MI18n', () => {
     });
 
     it('should warn if key not defined', () => {
-        jest.spyOn(console, 'warn');
+        jest.spyOn(localVue.prototype.$log, 'warn');
 
         const i18n = mount(MI18n, {
             localVue: localVue,
@@ -91,7 +91,7 @@ describe('MI18n', () => {
             }
         });
 
-        expect(console.warn).toHaveBeenCalledWith(
+        expect(localVue.prototype.$log.warn).toHaveBeenCalledWith(
             'The key undefined:key does not exist. Current lang: en'
         );
     });
