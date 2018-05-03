@@ -36,7 +36,7 @@ const BADGE_COLOR: BadgeIcon = {
 };
 
 const getBadgeOrigin: (vnode: VNode) => String[] = (vnode: VNode) => {
-    let elTag = (vnode.componentOptions as ComponentMeta).tag;
+    let elTag: string = (vnode.componentOptions as ComponentMeta).tag;
     let elID: string = '';
     if (elTag == 'm-icon') {
         elID = (vnode.componentInstance as MIcon).name;
