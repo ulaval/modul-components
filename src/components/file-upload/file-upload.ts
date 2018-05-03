@@ -30,6 +30,12 @@ interface MFileExt extends MFile {
 
 let filesizeSymbols: { [name: string]: string } | undefined = undefined;
 
+const defaultDragEvent = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = 'none';
+};
+
 @WithRender
 @Component({
     filters: {
@@ -177,12 +183,9 @@ export class MFileUpload extends ModulVue {
         // We need 2 nextTick to be able to have the wrap element in the DOM - MODUL-118
         Vue.nextTick(() => {
             Vue.nextTick(() => {
-                ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function(evt) {
-                    this.$refs.dialog.$refs.dialogWrap.addEventListener(evt, function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }.bind(this), false);
-                }.bind(this));
+                ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
+                    this.$refs.dialog.$refs.dialogWrap.addEventListener(evt, defaultDragEvent);
+                });
             });
         });
     }
@@ -191,12 +194,9 @@ export class MFileUpload extends ModulVue {
         this.propOpen = false;
         this.$emit('close');
         this.onCancelClick();
-        ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function(evt) {
-            this.$refs.dialog.$refs.dialogWrap.removeEventListener(evt, function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }.bind(this), false);
-        }.bind(this));
+        ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
+            this.$refs.dialog.$refs.dialogWrap.removeEventListener(evt, defaultDragEvent);
+        });
     }
 
     private getFileStatus(file): string {
