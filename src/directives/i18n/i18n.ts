@@ -2,6 +2,18 @@ import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue'
 import { I18N_NAME } from '../directive-names';
 import { Messages } from '../../utils/i18n/i18n';
 
+const setAttribute = (el: HTMLElement, arg: string, expression: any) => {
+    if (arg === 'placeholder' && el instanceof HTMLDivElement) {
+        if (el.querySelector('textarea')) {
+            el.querySelector('textarea')!.setAttribute(arg, expression);
+        } else if (el.querySelector('input')) {
+            el.querySelector('input')!.setAttribute(arg, expression);
+        }
+    } else {
+        el.setAttribute(arg, expression);
+    }
+};
+
 const I18nDirective: DirectiveOptions = {
     bind(
         el: HTMLElement,
@@ -21,8 +33,7 @@ const I18nDirective: DirectiveOptions = {
                     options.modifier
                 );
             }
-
-            el.setAttribute(binding.arg, expression);
+            setAttribute(el, binding.arg, expression);
         }
     }
 };
