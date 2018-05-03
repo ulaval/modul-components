@@ -227,7 +227,7 @@ export class MFileUpload extends ModulVue {
 
     private get isAddBtnEnabled(): boolean {
         return (
-            this.completedFiles.length > 0 && this.uploadingFiles.length === 0
+            this.completedFiles.length > 0 && this.uploadingFilesOnly.length === 0
         );
     }
 
@@ -238,6 +238,14 @@ export class MFileUpload extends ModulVue {
     private get freshlyCompletedFiles(): MFileExt[] {
         return this.allFiles.filter(
             f => f.status === MFileStatus.COMPLETED && !f.completeHinted
+        );
+    }
+
+    private get uploadingFilesOnly(): MFileExt[] {
+        return this.allFiles.filter(
+            f =>
+                f.status === MFileStatus.UPLOADING ||
+                (f.status === MFileStatus.COMPLETED && !f.completeHinted)
         );
     }
 
