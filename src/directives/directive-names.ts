@@ -1,3 +1,4 @@
+export const BADGE_NAME: string = 'm-badge';
 export const DRAGGABLE_ALLOW_SCROLL_NAME: string = 'm-draggable-allow-scroll';
 export const DRAGGABLE_NAME: string = 'm-draggable';
 export const DROPPABLE_GROUP_NAME: string = 'm-droppable-group';

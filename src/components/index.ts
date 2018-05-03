@@ -2,8 +2,8 @@ import Vue, { PluginObject } from 'vue';
 
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
-import ButtonGroupPlugin from './button-group/button-group';
 import ButtonPlugin from './button/button';
+import ButtonGroupPlugin from './button-group/button-group';
 import CarouselItemPlugin from './carousel-item/carousel-item';
 import CarouselPlugin from './carousel/carousel';
 import CheckboxPlugin from './checkbox/checkbox';

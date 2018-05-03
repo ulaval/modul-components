@@ -1,8 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './icon-file.html';
+
 import { ICON_FILE_NAME } from '../component-names';
+import IconPluggin from '../icon/icon';
+import WithRender from './icon-file.html';
 
 // PDF
 const EXT_PDF: string = 'pdf';
@@ -45,6 +47,11 @@ export class MIconFile extends Vue {
 
     private fileMap: FileGroup = {};
 
+    public get spriteId(): string {
+        let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
+        return this.fileMap[cleanExtension] || GROUP_OTHER;
+    }
+
     protected beforeMount(): void {
         this.mapExtensionsGroup(EXT_PDF, GROUP_PDF);
         this.mapExtensionsGroup(EXT_DOC, GROUP_DOC);
@@ -59,11 +66,6 @@ export class MIconFile extends Vue {
         extensions.split(',').forEach(ex => this.fileMap[ex] = category);
     }
 
-    private get spriteId(): string {
-        let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
-        return this.fileMap[cleanExtension] || GROUP_OTHER;
-    }
-
     private onClick(event): void {
         this.$emit('click', event);
     }
@@ -76,6 +78,7 @@ export class MIconFile extends Vue {
 const IconFilePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(ICON_FILE_NAME, 'plugin.install');
+        v.use(IconPluggin);
         v.component(ICON_FILE_NAME, MIconFile);
     }
 };
