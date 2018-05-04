@@ -8,6 +8,7 @@
     justify-content: center;
     vertical-align: middle;
     border-radius: 50%;
+    padding: 0;
 
     &:active,
     &:focus {
@@ -124,7 +125,6 @@
     &.m--is-skin-link,
     &.m--is-skin-dark {
         transition: color $m-transition-duration ease;
-        padding: 0;
         cursor: pointer;
         border: none;
         background: transparent;

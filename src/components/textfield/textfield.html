@@ -36,7 +36,8 @@
              v-if="propPasswordIcon">
             <m-icon-button :icon-name="iconNamePassword"
                            button-size="22px"
-                           @click="togglePasswordVisibility">{{ iconDescriptionPassword }}</m-icon-button>
+                           :title="iconDescriptionPassword"
+                           @click="togglePasswordVisibility"></m-icon-button>
         </div>
     </m-input-style>
     <m-validation-message

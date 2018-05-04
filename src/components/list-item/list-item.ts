@@ -44,7 +44,7 @@ export class MListItem extends Vue {
 
 const ListItemPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(LIST_ITEM_NAME, 'plugin.install');
+        v.prototype.$log.debug(LIST_ITEM_NAME, 'plugin.install');
         v.use(IconButtonPlugin);
         v.use(SpinnerPlugin);
         v.use(I18nPlugin);

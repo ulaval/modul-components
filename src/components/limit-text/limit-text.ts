@@ -81,7 +81,7 @@ export class MLimitText extends ModulVue {
 
 const LimitTextPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(LIMIT_TEXT_NAME + ' is not ready for production');
+        v.prototype.$log.warn(LIMIT_TEXT_NAME + ' is not ready for production');
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.component(LIMIT_TEXT_NAME, MLimitText);

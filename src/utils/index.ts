@@ -10,13 +10,21 @@ import ConfirmPlugin from './modal/confirm';
 import AlertPlugin from './modal/alert';
 import FilePlugin from '../utils/file/file';
 import { PortalPluginInstall } from 'portal-vue';
+import LoggerPlugin, { ConsoleOptions } from './logger/logger';
 
 export interface UtilsPluginOptions {
     httpPluginOptions?: HttpPluginOptions;
+    consoleOptions?: ConsoleOptions;
 }
 
 const UtilsPlugin: PluginObject<any> = {
     install(v, options): void {
+        if (!v.prototype.$log) {
+            Vue.use(LoggerPlugin, options ? options.consoleOptions : undefined);
+        } else if (options) {
+            v.prototype.$log.setConsoleOptions(options.consoleOptions);
+        }
+
         Vue.use(MediaQueriesPlugin);
         Vue.use(ModulPlugin);
         Vue.use(MessagesPlugin);

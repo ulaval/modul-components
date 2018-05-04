@@ -39,7 +39,7 @@ describe('MLogin', () => {
         });
 
         it('should warn when the login function is undefined', () => {
-            jest.spyOn(console, 'warn');
+            jest.spyOn(Vue.prototype.$log, 'warn');
 
             let wrapper: Wrapper<MLogin> = mount(MLogin, {
                 localVue: Vue
@@ -48,7 +48,7 @@ describe('MLogin', () => {
             let form: Wrapper<Vue> = wrapper.find('form');
             form.trigger('submit');
 
-            expect(console.warn).toHaveBeenCalledWith('No login function provided (login-fn prop is undefined)');
+            expect(Vue.prototype.$log.warn).toHaveBeenCalledWith('No login function provided (login-fn prop is undefined)');
         });
     });
 });

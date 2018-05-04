@@ -2,8 +2,8 @@ import Vue, { PluginObject } from 'vue';
 
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
-import ButtonGroupPlugin from './button-group/button-group';
 import ButtonPlugin from './button/button';
+import ButtonGroupPlugin from './button-group/button-group';
 import CarouselItemPlugin from './carousel-item/carousel-item';
 import CarouselPlugin from './carousel/carousel';
 import CheckboxPlugin from './checkbox/checkbox';
@@ -61,9 +61,15 @@ import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
 import ValidationMessagePlugin from './validation-message/validation-message';
 import InplaceEditPlugin from './inplace-edit/inplace-edit';
+import LoggerPlugin from '../utils/logger/logger';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
+
+        if (!v.prototype.$log) {
+            Vue.use(LoggerPlugin);
+        }
+
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
