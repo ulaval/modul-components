@@ -82,14 +82,14 @@ export class MInplaceEdit extends ModulVue {
                 this.error = true;
             }).then(() => this.submitted = false);
         } else {
-            console.warn('No save function provided (save-fn prop is undefined)');
+            this.$log.warn('No save function provided (save-fn prop is undefined)');
         }
     }
 }
 
 const InplaceEditPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(INPLACE_EDIT + ' is not ready for production');
+        v.prototype.$log.warn(INPLACE_EDIT + ' is not ready for production');
         v.use(MediaQueriesPlugin);
         v.use(IconButtonPlugin);
         v.use(ButtonPlugin);

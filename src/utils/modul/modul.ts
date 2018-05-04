@@ -136,7 +136,7 @@ export class Modul {
         }
 
         if (this.windowZIndex < Z_INDEZ_DEFAULT) {
-            console.warn('$modul: Invalid window ref count');
+            Vue.prototype.$log.warn('$modul: Invalid window ref count');
             this.windowZIndex = Z_INDEZ_DEFAULT;
         }
 

@@ -300,7 +300,7 @@ class FileStore {
 
 const FilePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug('$file', 'plugin.install');
+        v.prototype.$log.debug('$file', 'plugin.install');
         let file: FileService = new FileService();
         (v.prototype as any).$file = file;
     }

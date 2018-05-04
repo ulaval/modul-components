@@ -1,12 +1,13 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-beta.30",
+    "version": "1.0.0-beta.31",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
     "scripts": {
         "setup": "npm install --no-optional",
         "clean": "rimraf dist",
+        "reset": "rmdir /S /Q node_modules",
         "dev": "rimraf dist/**/* && webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
         "buildWebpack": "webpack --config conf/webpack.config.js --colors --env.buildonly",
         "build": "rimraf dist/**/* && tsc && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist && npm run metagen",

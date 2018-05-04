@@ -13,12 +13,15 @@ import FrenchPlugin from '../../src/lang/fr';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 
 import MetaFactory from './meta-init';
+import LoggerPlugin from '../../src/utils/logger/logger';
 
 Vue.config.productionTip = false;
 
 let i18nOptions: I18nPluginOptions = {
     curLang: FRENCH
 };
+
+Vue.use(LoggerPlugin);
 Vue.use(I18nLanguagePlugin, i18nOptions);
 
 Vue.use(ComponentsPlugin);

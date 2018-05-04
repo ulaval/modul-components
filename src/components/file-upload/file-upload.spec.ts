@@ -7,12 +7,13 @@ import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
 import I18nPlugin from '../../components/i18n/i18n';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileStatus } from '../../utils/file/file';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import IconButtonPlugin from '../icon-button/icon-button';
 import MessagePlugin from '../message/message';
+import { MBadgeState } from './../../directives/badge/badge';
 import FileUploadPlugin, { MFileUpload } from './file-upload';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 describe('MFileUpload', () => {
     beforeEach(() => {
@@ -42,6 +43,14 @@ describe('MFileUpload', () => {
         });
 
         return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should completed file status match badge status', () => {
+        return expect(MFileStatus.COMPLETED).toEqual(MBadgeState.Completed);
+    });
+
+    it('should  failed file status match badge status', () => {
+        return expect(MFileStatus.FAILED).toEqual(MBadgeState.Failed);
     });
 
     it('should support optional $file store name', async () => {

@@ -32,14 +32,14 @@ export class MLogin extends ModulVue {
                 this.$emit('login');
             }, error => this.lastError = error);
         } else {
-            console.warn('No login function provided (login-fn prop is undefined)');
+            this.$log.warn('No login function provided (login-fn prop is undefined)');
         }
     }
 }
 
 const LoginPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(LOGIN_NAME, 'plugin.install');
+        v.prototype.$log.debug(LOGIN_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(ButtonPlugin);
         v.use(IconButtonPlugin);

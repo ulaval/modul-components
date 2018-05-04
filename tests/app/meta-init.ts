@@ -21,6 +21,7 @@ const components: string[] = [
     Components.FLEX_TEMPLATE_NAME,
     Components.I18N_NAME,
     Components.ICON_NAME,
+    Components.ICON_FILE_NAME,
     Components.ICON_BUTTON_NAME,
     Components.INPLACE_EDIT,
     Components.INPUT_STYLE_NAME,
