@@ -101,6 +101,10 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     private get propTitle(): string {
         return this.propOpen ? this.getCloseTitle() : this.getOpenTitle();
     }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
+    }
 }
 
 const MenuPlugin: PluginObject<any> = {

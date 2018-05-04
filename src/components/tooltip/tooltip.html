@@ -13,7 +13,7 @@
                    class="m-tooltip__icon"
                    @click="onClick"
                    aria-haspopup="true"
-                   :aria-controls="id+'-controls'"
+                   :aria-controls="ariaControls"
                    :aria-expanded="propOpen"
                    slot="trigger"
                    icon-name="information"
@@ -26,7 +26,7 @@
             class="m-tooltip__link"
             @click="onClick"
             aria-haspopup="true"
-            :aria-controls="id+'-controls'"
+            :aria-controls="ariaControls"
             :aria-expanded="propOpen"
             slot="trigger"
             mode="button"
@@ -35,7 +35,7 @@
             v-if="propMode != 'icon'">
         <slot name="link"></slot>
     </m-link>
-    <div :id="id+'-controls'"
+    <div :id="ariaControls"
          class="m-tooltip__body-container"
          :class="{ 'm--has-close-button': propCloseButton }"
          :aria-labelledby="id">

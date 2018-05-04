@@ -113,6 +113,10 @@ export class MTooltip extends ModulVue {
     private close(): void {
         this.propOpen = false;
     }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
+    }
 }
 
 const TooltipPlugin: PluginObject<any> = {

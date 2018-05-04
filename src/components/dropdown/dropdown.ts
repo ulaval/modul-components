@@ -252,6 +252,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return (!this.internalItems || this.internalItems.length == 0) ? this.propTextNoData : this.propTextNoMatch;
     }
 
+    private get ariaControls(): string {
+        return this.id + '-controls';
+    }
+
     public get inactive(): boolean {
         return this.as<InputState>().isDisabled || this.as<InputState>().isWaiting;
     }

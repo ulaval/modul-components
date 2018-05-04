@@ -10,7 +10,7 @@
     <m-icon-button :id="id"
                    class="m-menu__button"
                    aria-haspopup="true"
-                   :aria-controls="id+'-controls'"
+                   :aria-controls="ariaControls"
                    :aria-expanded="propOpen"
                    slot="trigger"
                    :skin="skin"
@@ -20,7 +20,7 @@
                    :button-size="size"
                    @click="onClick">
     </m-icon-button>
-    <ul :id="id+'-controls'"
+    <ul :id="ariaControls"
         class="m-menu__wrap"
         :aria-labelledby="id"
         ref="menu">

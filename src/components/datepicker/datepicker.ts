@@ -229,6 +229,14 @@ export class MDatepicker extends ModulVue {
         return this.internalOpen;
     }
 
+    private get ariaControls1(): string {
+        return this.id + '-controls-1';
+    }
+
+    private get ariaControls2(): string {
+        return this.id + '-controls-2';
+    }
+
     private set open(open: boolean) {
         this.internalOpen = open;
         this.$nextTick(() => {

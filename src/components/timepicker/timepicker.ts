@@ -232,6 +232,10 @@ export class MTimepicker extends ModulVue {
             this.$emit('change', moment().hours(hour).minutes(minute));
         }
     }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
+    }
 }
 
 const TimepickerPlugin: PluginObject<any> = {

@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
+import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
@@ -91,7 +91,7 @@ export class MLink extends ModulVue {
 
     private onKeyup(event): void {
         event = event || window.event;
-        if (event.keyCode === 32 && this.isButton) {
+        if (event.keyCode === KeyCode.M_SPACE && this.isButton) {
             this.onClick(event);
         }
     }
