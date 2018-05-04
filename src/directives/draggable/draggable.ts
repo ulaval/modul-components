@@ -153,17 +153,16 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
-        const customEvent: CustomEvent = document.createEvent('CustomEvent');
-        customEvent.initCustomEvent(name, true, true, event);
         const data: any = this.options.dragData ? this.options.dragData : event.dataTransfer.getData('text');
         const dragInfo: MDragInfo = {
             action: this.options.action,
             grouping: this.options.grouping,
             data
         };
-
-        customEvent.initCustomEvent(name, true, true, event);
-        dispatchEvent(this.element, name, Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { dragInfo }));
+        const customEvent: CustomEvent = document.createEvent('CustomEvent');
+        customEvent.initCustomEvent(name, true, true, Object.assign(event, { dragInfo }));
+        (customEvent as any).dragInfo = dragInfo;
+        dispatchEvent(this.element, name, customEvent);
     }
 
     private mouseUp(): void {

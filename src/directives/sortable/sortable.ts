@@ -241,7 +241,6 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
             eventName = MSortableEventNames.OnAdd;
         }
 
-        const customEvent: CustomEvent = document.createEvent('CustomEvent');
         const sortInfo: MSortInfo = {
             canDrop: event.dropInfo.canDrop,
             data: event.dropInfo.data,
@@ -253,9 +252,10 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
         const changed: boolean = sortInfo.oldPosition !== sortInfo.newPosition;
         if (!changed) { return; }
 
-        const sortEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { sortInfo });
-        customEvent.initCustomEvent(eventName, true, true, event.detail);
-        dispatchEvent(this.element, eventName, sortEvent);
+        const customEvent: CustomEvent = document.createEvent('CustomEvent');
+        customEvent.initCustomEvent(eventName, true, true, Object.assign(event, { sortInfo }));
+        (customEvent as any).sortInfo = sortInfo;
+        dispatchEvent(this.element, eventName, customEvent);
 
         if (MSortable.fromSortContainer && MSortable.fromSortContainer !== MSortable.activeSortContainer) {
             MSortable.fromSortContainer.onRemove(event);
@@ -268,11 +268,11 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
     private onRemove(event: MDropEvent): void {
         const oldIndex: number = this.options.items.findIndex((item: any) => item === event.dropInfo.data);
         if (oldIndex !== -1) {
-            const customEvent: CustomEvent = document.createEvent('CustomEvent');
             const sortInfo: MSortInfo = Object.assign(event.dropInfo, { oldPosition: oldIndex, newPosition: -1 });
-            const sortEvent: Event = Object.assign(customEvent, { clientX: event.clientX, clientY: event.clientY }, { sortInfo });
-            customEvent.initCustomEvent(MSortableEventNames.OnRemove, true, true, event.detail);
-            dispatchEvent(this.element, MSortableEventNames.OnRemove, sortEvent);
+            const customEvent: CustomEvent = document.createEvent('CustomEvent');
+            customEvent.initCustomEvent(MSortableEventNames.OnRemove, true, true, Object.assign(event, { sortInfo }));
+            (customEvent as any).dropInfo = sortInfo;
+            dispatchEvent(this.element, MSortableEventNames.OnRemove, customEvent);
         }
     }
 

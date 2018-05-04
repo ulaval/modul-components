@@ -182,17 +182,14 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     private dispatchEvent(event: DragEvent, name: string): void {
         if (!MDraggable.currentDraggable) { return; }
 
+        const dropInfo = this.extractDropInfo(event);
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
-        customEvent.initCustomEvent(name, true, true, event);
-        dispatchEvent(this.element, name, Object.assign(customEvent, {
-            clientX: event.clientX,
-            clientY: event.clientY,
-            relatedTarget: event.relatedTarget,
-            toElement: event.toElement,
-            fromElement: event.fromElement }, { dropInfo: this.extractDropInfo(event) }));
+        customEvent.initCustomEvent(name, true, true, Object.assign(event, { dropInfo }));
+        (customEvent as any).dropInfo = dropInfo;
+        dispatchEvent(this.element, name, customEvent);
     }
 
-    private extractDropInfo(event: DragEvent): MDropInfo | undefined {
+    private extractDropInfo(event: DragEvent): MDropInfo {
         const data = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.dragData || event.dataTransfer.getData('text') : undefined;
         const action: string = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.action : DEFAULT_ACTION;
         const grouping: string = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.grouping : undefined;
