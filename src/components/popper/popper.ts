@@ -126,6 +126,9 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         this.$modul.event.$on('scroll', this.update);
         this.$modul.event.$on('resize', this.update);
         this.$modul.event.$on('updateAfterResize', this.update);
+
+        // sometimes, the document.click event is stopped causing a menu to stay open, even if another menu has been clicked.
+        // mouseup will always be caught even if click is stopped.
         document.addEventListener('mouseup', this.onDocumentClick);
     }
 
