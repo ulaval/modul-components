@@ -1,13 +1,14 @@
-import { ModulVue } from '../../utils/vue/vue';
+import Popper from 'popper.js';
+import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './popper.html?style=./popper.scss';
-import { POPPER_NAME } from '../component-names';
-import Popper from 'popper.js';
-import PortalPlugin from 'portal-vue';
+
+import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import ModulPlugin from '../../utils/modul/modul';
-import { Portal, PortalMixin, PortalMixinImpl, BackdropMode } from '../../mixins/portal/portal';
+import { ModulVue } from '../../utils/vue/vue';
+import { POPPER_NAME } from '../component-names';
+import WithRender from './popper.html?style=./popper.scss';
 
 export enum MPopperPlacement {
     Top = 'top',
@@ -125,16 +126,14 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         this.$modul.event.$on('scroll', this.update);
         this.$modul.event.$on('resize', this.update);
         this.$modul.event.$on('updateAfterResize', this.update);
-
-        this.$modul.event.$on('click', this.onDocumentClick);
+        document.addEventListener('mouseup', this.onDocumentClick);
     }
 
     protected beforeDestroy(): void {
         this.$modul.event.$off('scroll', this.update);
         this.$modul.event.$off('resize', this.update);
         this.$modul.event.$off('updateAfterResize', this.update);
-
-        this.$modul.event.$off('click', this.onDocumentClick);
+        document.removeEventListener('mouseup', this.onDocumentClick);
 
         this.destroyPopper();
     }
