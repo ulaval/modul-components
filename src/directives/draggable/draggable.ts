@@ -43,6 +43,9 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public static defaultMountPoint: string = '__mdraggable__';
     public static currentDraggable?: MDraggable;
 
+    private grabEvents = ['mousedown', 'touchstart'];
+    private cancelGrabEvents = ['mouseup', 'touchend'];
+
     constructor(element: HTMLElement, options: MDraggableOptions) {
         super(element, options);
     }
@@ -50,7 +53,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public cleanupCssClasses(): void {
         this.element.classList.remove(MDraggableClassNames.Dragging);
         this.element.classList.remove(MDraggableClassNames.Grabbing);
-        document.removeEventListener('mouseup', this.mouseUp);
+        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.mouseUp));
     }
 
     public attach(mount: MountFunction): void {
@@ -65,15 +68,13 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
                 this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
                 this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-                this.addEventListener('mousedown', (event: DragEvent) => {
+                this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: DragEvent) => {
                     if (!MDraggable.currentDraggable) {
-                        event.stopImmediatePropagation();
-                        event.stopPropagation();
                         this.element.classList.add(MDraggableClassNames.Grabbing);
-                        document.addEventListener('mouseup', this.mouseUp);
+                        this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.mouseUp));
                     }
-                });
-                this.addEventListener('mouseup', () => this.mouseUp());
+                }));
+                this.cancelGrabEvents.forEach(eventName => this.addEventListener(eventName, () => this.mouseUp()));
                 this.addEventListener('touchmove', () => {});
 
                 // mobile ios will display a gray box over element on touch start.  We don't want that.
@@ -175,7 +176,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private mouseUp(): void {
         this.cleanupCssClasses();
-        document.removeEventListener('mouseup', this.mouseUp);
+        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.mouseUp));
     }
 }
 
