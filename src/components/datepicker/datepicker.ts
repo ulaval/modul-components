@@ -5,7 +5,6 @@ import { Prop, Model } from 'vue-property-decorator';
 import WithRender from './datepicker.html?style=./datepicker.scss';
 import { DATEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
-import i18nPlugin from '../../utils/i18n/i18n';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -315,7 +314,6 @@ const DatepickerPlugin: PluginObject<any> = {
         v.use(PopupPlugin);
         v.use(ValidationMessagePlugin);
         v.use(MediaQueriesPlugin);
-        v.use(i18nPlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };
