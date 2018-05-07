@@ -92,6 +92,21 @@ describe('draggable', () => {
         expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
     });
 
+    it('it should add grabbing class on touch start', () => {
+        const draggable: Wrapper<Vue> = getDraggableDirective();
+        draggable.trigger('touchstart');
+
+        expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+    });
+
+    it('it should remove grabbing class on document touch end', () => {
+        const draggable: Wrapper<Vue> = getDraggableDirective();
+        draggable.trigger('touchstart');
+        draggable.trigger('touchend');
+
+        expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+    });
+
     describe('unbind', () => {
         it('should clean up element correctly', () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, dragImageTemplate);
