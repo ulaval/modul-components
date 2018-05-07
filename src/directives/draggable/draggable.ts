@@ -75,6 +75,9 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                 });
                 this.addEventListener('mouseup', () => this.mouseUp());
                 this.addEventListener('touchmove', () => {});
+
+                // mobile ios will display a gray box over element on touch start.  We don't want that.
+                this.addEventListener('touchstart', (e: Event) => { e.preventDefault(); });
                 MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
             });
         }
