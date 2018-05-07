@@ -5,6 +5,7 @@ import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive
 import { DRAGGABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDroppable } from '../droppable/droppable';
+import { MSortable } from '../sortable/sortable';
 import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../user-select/remove-user-select';
 import { MDraggableAllowScroll } from './draggable-allow-scroll';
 
@@ -122,6 +123,10 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         // We can't detect whether we're leaving de droppable for real therefore we have to force leave onDragEnd.
         if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.leaveDroppable(event); }
         if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }
+        if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
+        if (MSortable.fromSortContainer) { MSortable.fromSortContainer.doCleanUp(); }
+        if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }
+
         this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
 
         const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
