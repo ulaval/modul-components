@@ -19,8 +19,6 @@ export enum MOptionsMenuSkin {
 @WithRender
 @Component
 export class MMenu extends BaseMenu implements MMenuInterface {
-    @Prop()
-    public open: boolean;
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
@@ -55,7 +53,7 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     public size: string;
 
     public hasIcon: boolean = false;
-    private propOpen = false;
+    private open = false;
     private id: string = `mMenu-${uuid.generate()}`;
 
     public checkIcon(icon: boolean): void {
@@ -65,17 +63,8 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     }
 
     public close(): void {
-        this.propOpen = false;
+        this.open = false;
         this.onClose();
-    }
-
-    protected mounted(): void {
-        this.propOpen = this.open;
-    }
-
-    @Watch('open')
-    private openChanged(open: boolean): void {
-        this.propOpen = open;
     }
 
     private onOpen(): void {
@@ -99,7 +88,7 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     }
 
     private get propTitle(): string {
-        return this.propOpen ? this.getCloseTitle() : this.getOpenTitle();
+        return this.open ? this.getCloseTitle() : this.getOpenTitle();
     }
 
     private get ariaControls(): string {
