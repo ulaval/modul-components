@@ -1,9 +1,11 @@
-import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../open-trigger/open-trigger';
+
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
+import { ModulVue } from '../../utils/vue/vue';
+import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../open-trigger/open-trigger';
+import { isLeftClick } from './../../utils/mouse/mouse';
 
 export interface PortalMixin {
     propOpen: boolean;
@@ -226,8 +228,10 @@ export class Portal extends ModulVue implements PortalMixin {
         }
     }
 
-    private toggle(): void {
-        this.propOpen = !this.propOpen;
+    private toggle(event: MouseEvent): void {
+        if (this.openTrigger !== MOpenTrigger.Click || (this.openTrigger === MOpenTrigger.Click && isLeftClick(event))) {
+            this.propOpen = !this.propOpen;
+        }
     }
 
     private handleMouseEnter(): void {

@@ -80,3 +80,7 @@ export const isInElement: MousePositionEvent<boolean> = (e: MouseEvent, relative
             && mousePosition.x + threshold <= relativeToEl.offsetWidth
             && mousePosition.y + threshold <= relativeToEl.offsetHeight;
 };
+
+export const isLeftClick: (event: MouseEvent) => boolean = (event: MouseEvent) => {
+    return event.which === 1;
+};
