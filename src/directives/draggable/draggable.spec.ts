@@ -11,18 +11,22 @@ describe('draggable', () => {
     const dragImageTemplate = `<div class="${MDraggableClassNames.DragImage}"></div>`;
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
     (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
+        let directive: Wrapper<Vue>;
         if (options) {
-            return mount({
+            directive = mount({
                 template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`
                     : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`,
                 data: () => options
             }, { localVue: Vue });
         } else {
-            return mount({
+            directive = mount({
                 template: bindingValue === undefined ? `<div v-m-draggable>${innerHtml || ''}</div>`
                     : `<div v-m-draggable="${bindingValue}">${innerHtml || ''}</div>`
             }, { localVue: Vue });
         }
+
+        Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => {});
+        return directive;
     };
 
     let localVue: VueConstructor<ModulVue>;

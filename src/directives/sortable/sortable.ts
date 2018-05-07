@@ -271,7 +271,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
             const sortInfo: MSortInfo = Object.assign(event.dropInfo, { oldPosition: oldIndex, newPosition: -1 });
             const customEvent: CustomEvent = document.createEvent('CustomEvent');
             customEvent.initCustomEvent(MSortableEventNames.OnRemove, true, true, Object.assign(event, { sortInfo }));
-            (customEvent as any).dropInfo = sortInfo;
+            (customEvent as any).sortInfo = sortInfo;
             dispatchEvent(this.element, MSortableEventNames.OnRemove, customEvent);
         }
     }

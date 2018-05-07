@@ -3,7 +3,7 @@ import Vue, { VueConstructor } from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { ModulVue } from '../../utils/vue/vue';
-import { MDraggable, MDraggableOptions } from '../draggable/draggable';
+import { MDraggable, MDraggableEventNames, MDraggableOptions } from '../draggable/draggable';
 import { MDroppable } from '../droppable/droppable';
 import DroppableGroupPlugin from '../droppable/droppable-group';
 import { MDOMPlugin } from './../domPlugin';
@@ -26,26 +26,34 @@ describe('sortable', () => {
                 : `<ul v-m-sortable="${bindingValue}">${innerHTML}</ul>`;
         }
 
-        return mount({
+        let directive: Wrapper<Vue>;
+        directive = mount({
             template,
             data: () => options || {}
         }, { localVue: Vue });
+
+        Object.keys(MSortableEventNames).forEach(key => directive.vm.$listeners[MSortableEventNames[key]] = () => {});
+        return directive;
     };
 
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
     (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
+        let directive: Wrapper<Vue>;
         if (options) {
-            return mount({
+            directive = mount({
                 template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData" :grouping="grouping"></div>`
                     : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data="dragData" :grouping="grouping"></div>`,
                 data: () => options
             }, { localVue: Vue });
         } else {
-            return mount({
+            directive = mount({
                 template: bindingValue === undefined ? `<div v-m-draggable></div>`
                     : `<div v-m-draggable="${bindingValue}"></div>`
             }, { localVue: Vue });
         }
+
+        Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => {});
+        return directive;
     };
 
     const getEventDummy: () => any = () => {

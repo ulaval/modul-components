@@ -7,6 +7,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { MDOMPlugin } from '../domPlugin';
 import DraggablePlugin, { MDraggable, MDraggableOptions } from '../draggable/draggable';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
+import { MDraggableEventNames } from './../draggable/draggable';
 import DroppablePlugin, { MDropEffect, MDroppable, MDroppableClassNames, MDroppableEventNames, MDroppableOptions } from './droppable';
 
 jest.mock('../../utils/mouse/mouse');
@@ -14,34 +15,42 @@ jest.mock('../../utils/mouse/mouse');
 describe('droppable', () => {
     const getDroppableDirective: (bindingValue?: boolean, options?: MDroppableOptions, innerHtml?: string) => Wrapper<Vue> =
     (bindingValue?: boolean, options?: MDroppableOptions, innerHtml?: string) => {
+        let directive: Wrapper<Vue>;
         if (options) {
-            return mount({
+            directive = mount({
                 template: bindingValue === undefined ? `<div v-m-droppable :accepted-actions="acceptedActions" :grouping="grouping">${innerHtml || ''}</div>`
                     : `<div v-m-droppable="${bindingValue}" :accepted-actions="acceptedActions" :grouping="grouping">${innerHtml || ''}</div>`,
                 data: () => options
             }, { localVue: Vue });
         } else {
-            return mount({
+            directive = mount({
                 template: bindingValue === undefined ? `<div v-m-droppable>${innerHtml || ''}</div>`
                     : `<div v-m-droppable="${bindingValue}">${innerHtml || ''}</div>`
             }, { localVue: Vue });
         }
+
+        Object.keys(MDroppableEventNames).forEach(key => directive.vm.$listeners[MDroppableEventNames[key]] = () => {});
+        return directive;
     };
 
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
     (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
+        let directive: Wrapper<Vue>;
         if (options) {
-            return mount({
+            directive = mount({
                 template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData" :grouping="grouping"></div>`
                     : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data="dragData" :grouping="grouping"></div>`,
                 data: () => options
             }, { localVue: Vue });
         } else {
-            return mount({
+            directive = mount({
                 template: bindingValue === undefined ? `<div v-m-draggable></div>`
                     : `<div v-m-draggable="${bindingValue}"></div>`
             }, { localVue: Vue });
         }
+
+        Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => {});
+        return directive;
     };
 
     const getEventDummy: () => any = () => {
