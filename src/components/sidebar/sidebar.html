@@ -11,12 +11,12 @@
                 @click.self="backdropClick"
                 ref="dialogWrap">
                 <article class="m-sidebar__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
-                    <button type="button" @click="closeDialog()" class="m-sidebar__close-button" v-if="closeButton && origin == 'bottom'">
+                    <button type="button" @click="closeDialog()" class="m-sidebar__close-button" v-if="closeButton && origin === 'bottom'">
                         <m-i18n k="m-sidebar:close"></m-i18n>
                     </button>
                     <header class="m-sidebar__header"
-                            :class="{ 'm--has-close-button-right': closeButton && closeButtonPosition == 'right' && origin != 'bottom',
-                                      'm--has-close-button-left': closeButton && closeButtonPosition == 'left' && origin != 'bottom',
+                            :class="{ 'm--has-close-button-right': closeButton && closeButtonPosition === 'right' && origin != 'bottom',
+                                      'm--has-close-button-left': closeButton && closeButtonPosition === 'left' && origin != 'bottom',
                                       'm--no-content': (!hasHeaderSlot || !hasTitle) && closeButton && origin != 'bottom',
                                       'm--no-padding': !padding || !paddingHeader }"
                             v-if="hasHeader">

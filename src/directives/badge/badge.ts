@@ -38,14 +38,14 @@ const BADGE_COLOR: BadgeIcon = {
 const getBadgeOrigin: (vnode: VNode) => String[] = (vnode: VNode) => {
     let elTag: string = (vnode.componentOptions as ComponentMeta).tag;
     let elID: string = '';
-    if (elTag == 'm-icon') {
+    if (elTag === 'm-icon') {
         elID = (vnode.componentInstance as MIcon).name;
-    } else if (elTag == 'm-icon-file') {
+    } else if (elTag === 'm-icon-file') {
         elID = (vnode.componentInstance as MIconFile).spriteId;
     }
 
     const element: HTMLElement = document.getElementById(elID) as HTMLElement;
-    if (element && element.dataset.badgeOrigin != undefined) {
+    if (element && element.dataset.badgeOrigin !== undefined) {
         return (((document.getElementById(elID) as HTMLElement).dataset.badgeOrigin) as string).split(',');
     } else {
         return DEFAULT_ORIGIN;
@@ -58,8 +58,8 @@ interface BadgeOffset {
 }
 const getBadgeOffset: (binding: VNodeDirective) => BadgeOffset = (binding: VNodeDirective) => {
     return {
-        x: binding.value.offsetX != undefined ? parseInt(binding.value.offsetX, 10) : 0,
-        y: binding.value.offsetY != undefined ? parseInt(binding.value.offsetY, 10) : 0
+        x: binding.value.offsetX !== undefined ? parseInt(binding.value.offsetX, 10) : 0,
+        y: binding.value.offsetY !== undefined ? parseInt(binding.value.offsetY, 10) : 0
     };
 };
 
@@ -113,7 +113,7 @@ const MBadgeDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-        if (binding.value.state != undefined && binding.value.state != '') {
+        if (binding.value.state !== undefined && binding.value.state !== '') {
             buildBadge(element, binding, vnode);
         }
     },
@@ -126,7 +126,7 @@ const MBadgeDirective: DirectiveOptions = {
         if (element.children[element.children.length - 1].classList.contains('m-icon')) {
             element.removeChild(element.children[element.children.length - 1]);
         }
-        if (binding.value.state != undefined && binding.value.state != '') {
+        if (binding.value.state !== undefined && binding.value.state !== '') {
             buildBadge(element, binding, vnode);
         }
     },
