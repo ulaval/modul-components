@@ -63,7 +63,7 @@
             <table class="m-datepicker__body-table">
                 <template v-if="view === 'year'">
                     <tr v-for="yearRow in years">
-                        <td v-for="y in yearRow" class="m-datepicker__body-cell" v-if="y != undefined">
+                        <td v-for="y in yearRow" class="m-datepicker__body-cell" v-if="y !== undefined">
                             <button type="button"
                                     class="m-datepicker__item"
                                     :class="{'m--is-selected': selectedYear === y}"
@@ -98,7 +98,7 @@
                                     :class="{ 'm--is-selected': d.isSelected,
                                                 'm--is-today': d.isToday,
                                                 'm--is-disabled': d.isDisabled,
-                                                'm--is-other-month': d.month != selectedMonth }"
+                                                'm--is-other-month': d.month !== selectedMonth }"
                                     @click.stop="selectDate(d)">
                                 <span class="m-datepicker__item__text">{{ d.date }}</span>
                             </button>

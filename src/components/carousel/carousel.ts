@@ -94,14 +94,14 @@ export class MCarousel extends Vue {
     }
 
     private get propIndex(): number {
-        if (this.index != undefined) {
+        if (this.index !== undefined) {
             return this.index;
         }
         return this.internalIndex;
     }
 
     private set propIndex(value) {
-        if (value != this.propIndex && this.isIndexValid(value)) {
+        if (value !== this.propIndex && this.isIndexValid(value)) {
             this.items.forEach((item, index) => {
                 item.transitionForward = this.transitionForward;
                 item.isVisible = index === value;

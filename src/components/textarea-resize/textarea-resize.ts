@@ -1,10 +1,11 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
-import { Prop, Watch } from 'vue-property-decorator';
 import Component from 'vue-class-component';
-import WithRender from './textarea-resize.html?style=./textarea-resize.scss';
-import { TEXTAREA_RESIZE_NAME } from '../component-names';
+import { Prop, Watch } from 'vue-property-decorator';
+
 import { InputManagement } from '../../mixins/input-management/input-management';
+import { ModulVue } from '../../utils/vue/vue';
+import { TEXTAREA_RESIZE_NAME } from '../component-names';
+import WithRender from './textarea-resize.html?style=./textarea-resize.scss';
 
 @WithRender
 @Component({
@@ -32,7 +33,7 @@ export class MTextareaResize extends ModulVue {
     private adjustHeight(): void {
         let el: HTMLTextAreaElement = (this.$refs.input as HTMLTextAreaElement);
         el.style.height = 'auto';
-        if (el.value && el.scrollHeight != 0) {
+        if (el.value && el.scrollHeight !== 0) {
             el.style.height = el.scrollHeight + 'px';
         }
     }
