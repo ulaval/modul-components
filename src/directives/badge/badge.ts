@@ -84,9 +84,7 @@ const getBadgePosition: (element: HTMLElement, binding: VNodeDirective, vnode: V
     let elTopOrigin: number = Number(parseFloat(badgeOrigin[1].replace(/,/g, '.')).toFixed(2));
 
     leftDistance = ((elLeftOrigin / 24) * elSize) - (badgeSize * 0.5) + badgeOffset.x;
-    binding.value.state != MBadgeState.Warning ?
-        topDistance = ((elTopOrigin / 24) * elSize) - (badgeSize * (2 / 3)) + badgeOffset.y :
-        topDistance = ((elTopOrigin / 24) * elSize) - (badgeSize - 1) + badgeOffset.y;
+    topDistance = ((elTopOrigin / 24) * elSize) - (badgeSize * (2 / 3)) + badgeOffset.y;
 
     return { size: badgeSize , leftDistance, topDistance };
 };
