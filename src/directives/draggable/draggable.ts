@@ -1,6 +1,6 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
-import { dragDropDelay } from '../../utils/polyfills';
+import { dragDropDelay, polyFillActive } from '../../utils/polyfills';
 import { clearUserSelection } from '../../utils/selection/selection';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { DRAGGABLE_NAME } from '../directive-names';
@@ -79,7 +79,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                         } else {
                             this.touchUp();
                         }
-                    }, dragDropDelay);
+                    }, polyFillActive.dragDrop ? dragDropDelay : 0);
                 }));
                 this.cancelGrabEvents.forEach(eventName => this.addEventListener(eventName, () => this.touchUp()));
                 this.addEventListener('touchmove', () => {});
