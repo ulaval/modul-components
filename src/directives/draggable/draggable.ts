@@ -44,9 +44,10 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public static defaultMountPoint: string = '__mdraggable__';
     public static currentDraggable?: MDraggable;
 
-    private grabEvents: string[] = ['mousedown', 'touchstart'];
-    private cancelGrabEvents: string[] = ['mouseup', 'touchend'];
-    private touchStarted: boolean = false;
+    private grabEvents: string[] = ['mousedown', 'touchstart', 'touchcancel'];
+    private cancelGrabEvents: string[] = ['mouseup', 'touchend', 'click'];
+    private touchUpListener: any = this.touchUp.bind(this);
+    private grabDelay: number | undefined = undefined;
 
     constructor(element: HTMLElement, options: MDraggableOptions) {
         super(element, options);
@@ -55,7 +56,6 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public cleanupCssClasses(): void {
         this.element.classList.remove(MDraggableClassNames.Dragging);
         this.element.classList.remove(MDraggableClassNames.Grabbing);
-        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUp));
     }
 
     public attach(mount: MountFunction): void {
@@ -71,17 +71,13 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                 this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
                 this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
                 this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: DragEvent) => {
-                    this.touchStarted = true;
-                    setTimeout(() => {
-                        if (!MDraggable.currentDraggable && this.touchStarted) {
+                    this.grabDelay = window.setTimeout(() => {
+                        if (!MDraggable.currentDraggable && this.grabDelay) {
                             this.element.classList.add(MDraggableClassNames.Grabbing);
-                            this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUp));
-                        } else {
-                            this.touchUp();
                         }
                     }, polyFillActive.dragDrop ? dragDropDelay : 0);
+                    this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUpListener));
                 }));
-                this.cancelGrabEvents.forEach(eventName => this.addEventListener(eventName, () => this.touchUp()));
                 this.addEventListener('touchmove', () => {});
 
                 MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
@@ -144,6 +140,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private onDragStart(event: DragEvent): void {
         event.stopPropagation();
+        this.touchUp();
         clearUserSelection();
 
         MDraggable.currentDraggable = this;
@@ -180,9 +177,10 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private touchUp(): void {
-        this.touchStarted = false;
+        console.log('touchup');
+        if (this.grabDelay) { window.clearTimeout(this.grabDelay); this.grabDelay = undefined; }
+        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUpListener));
         this.cleanupCssClasses();
-        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUp));
     }
 }
 
