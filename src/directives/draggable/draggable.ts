@@ -55,7 +55,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public cleanupCssClasses(): void {
         this.element.classList.remove(MDraggableClassNames.Dragging);
         this.element.classList.remove(MDraggableClassNames.Grabbing);
-        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.mouseUp));
+        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUp));
     }
 
     public attach(mount: MountFunction): void {
@@ -75,13 +75,13 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                     setTimeout(() => {
                         if (!MDraggable.currentDraggable && this.touchStarted) {
                             this.element.classList.add(MDraggableClassNames.Grabbing);
-                            this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.mouseUp));
+                            this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUp));
                         } else {
-                            this.mouseUp();
+                            this.touchUp();
                         }
                     }, dragDropDelay);
                 }));
-                this.cancelGrabEvents.forEach(eventName => this.addEventListener(eventName, () => this.mouseUp()));
+                this.cancelGrabEvents.forEach(eventName => this.addEventListener(eventName, () => this.touchUp()));
                 this.addEventListener('touchmove', () => {});
 
                 MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
@@ -179,9 +179,10 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         dispatchEvent(this.element, name, customEvent);
     }
 
-    private mouseUp(): void {
+    private touchUp(): void {
+        this.touchStarted = false;
         this.cleanupCssClasses();
-        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.mouseUp));
+        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUp));
     }
 }
 
