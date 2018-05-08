@@ -22,7 +22,6 @@ export const I18N_NAME: string = 'm-i18n';
 export const ICON_NAME: string = 'm-icon';
 export const ICON_BUTTON_NAME: string = 'm-icon-button';
 export const ICON_FILE_NAME: string = 'm-icon-file';
-export const ICON_HEADER_NAME: string = 'm-icon-header';
 export const INPLACE_EDIT: string = 'm-inplace-edit';
 export const INPUT_STYLE_NAME: string = 'm-input-style';
 export const LIMIT_TEXT_NAME: string = 'm-limit-text';
