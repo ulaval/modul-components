@@ -1,5 +1,6 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
+import { dragDropDelay } from '../../utils/polyfills';
 import { clearUserSelection } from '../../utils/selection/selection';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { DRAGGABLE_NAME } from '../directive-names';
@@ -43,8 +44,9 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public static defaultMountPoint: string = '__mdraggable__';
     public static currentDraggable?: MDraggable;
 
-    private grabEvents = ['mousedown', 'touchstart'];
-    private cancelGrabEvents = ['mouseup', 'touchend'];
+    private grabEvents: string[] = ['mousedown', 'touchstart'];
+    private cancelGrabEvents: string[] = ['mouseup', 'touchend'];
+    private touchStarted: boolean = false;
 
     constructor(element: HTMLElement, options: MDraggableOptions) {
         super(element, options);
@@ -69,10 +71,15 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                 this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
                 this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
                 this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: DragEvent) => {
-                    if (!MDraggable.currentDraggable) {
-                        this.element.classList.add(MDraggableClassNames.Grabbing);
-                        this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.mouseUp));
-                    }
+                    this.touchStarted = true;
+                    setTimeout(() => {
+                        if (!MDraggable.currentDraggable && this.touchStarted) {
+                            this.element.classList.add(MDraggableClassNames.Grabbing);
+                            this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.mouseUp));
+                        } else {
+                            this.mouseUp();
+                        }
+                    }, dragDropDelay);
                 }));
                 this.cancelGrabEvents.forEach(eventName => this.addEventListener(eventName, () => this.mouseUp()));
                 this.addEventListener('touchmove', () => {});

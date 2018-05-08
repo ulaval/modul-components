@@ -7,6 +7,8 @@ import { MDOMPlugin } from './../domPlugin';
 import { MRemoveUserSelect } from './../user-select/remove-user-select';
 import DraggablePlugin, { MDraggable, MDraggableClassNames, MDraggableEventNames, MDraggableOptions } from './draggable';
 
+jest.useFakeTimers();
+
 describe('draggable', () => {
     const dragImageTemplate = `<div class="${MDraggableClassNames.DragImage}"></div>`;
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
@@ -81,6 +83,7 @@ describe('draggable', () => {
         const draggable: Wrapper<Vue> = getDraggableDirective();
         draggable.trigger('mousedown');
 
+        jest.runOnlyPendingTimers();
         expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
     });
 
@@ -96,6 +99,7 @@ describe('draggable', () => {
         const draggable: Wrapper<Vue> = getDraggableDirective();
         draggable.trigger('touchstart');
 
+        jest.runOnlyPendingTimers();
         expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
     });
 
