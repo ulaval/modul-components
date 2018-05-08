@@ -154,6 +154,7 @@ export class MFileUpload extends ModulVue {
     private onAddClick(): void {
         this.$emit('done', this.completedFiles);
         this.$refs.dialog.closeDialog();
+        this.$file.clear(this.storeName);
     }
 
     private onCancelClick(): void {
