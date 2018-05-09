@@ -44,18 +44,20 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public static defaultMountPoint: string = '__mdraggable__';
     public static currentDraggable?: MDraggable;
 
-    private grabEvents: string[] = ['mousedown', 'touchstart', 'touchcancel'];
-    private cancelGrabEvents: string[] = ['mouseup', 'touchend', 'click'];
-    private touchUpListener: any = this.touchUp.bind(this);
+    private grabEvents: string[] = ['mousedown', 'touchstart'];
+    private cancelGrabEvents: string[] = ['mouseup', 'touchend', 'click', 'touchcancel'];
+    private touchUpListener: any = this.doCleanUp.bind(this);
     private grabDelay: number | undefined = undefined;
+    private touchHasMoved: boolean = false;
 
     constructor(element: HTMLElement, options: MDraggableOptions) {
         super(element, options);
     }
 
-    public cleanupCssClasses(): void {
-        this.element.classList.remove(MDraggableClassNames.Dragging);
-        this.element.classList.remove(MDraggableClassNames.Grabbing);
+    public doCleanUp(): void {
+        this.destroyGrabBehavior();
+        this.cleanupCssClasses();
+        MDraggable.currentDraggable = undefined;
     }
 
     public attach(mount: MountFunction): void {
@@ -63,6 +65,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         if (this.options.canDrag === undefined) { this.options.canDrag = true; }
         if (this.options.canDrag) {
             mount(() => {
+                this.doCleanUp();
                 this.element.classList.add(MDraggableClassNames.Draggable);
 
                 this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
@@ -70,16 +73,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
                 this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
                 this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-                this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: DragEvent) => {
-                    this.grabDelay = window.setTimeout(() => {
-                        if (!MDraggable.currentDraggable && this.grabDelay) {
-                            this.element.classList.add(MDraggableClassNames.Grabbing);
-                        }
-                    }, polyFillActive.dragDrop ? dragDropDelay : 0);
-                    this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUpListener));
-                }));
-                this.addEventListener('touchmove', () => {});
-
+                this.setupGrabBehavior();
                 MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
             });
         }
@@ -104,6 +98,34 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.removeAllEvents();
     }
 
+    private setupGrabBehavior(): void {
+        (this.element.style as any).webkitUserDrag = 'none';
+        this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: DragEvent) => {
+            this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUpListener));
+            this.addEventListener('touchmove', (event: MouseEvent) => {
+                this.touchHasMoved = true;
+                /* if (!isInElement(event, this.element)) {
+                    this.doCleanUp();
+                } */
+            });
+            this.grabDelay = window.setTimeout(() => {
+                if (!MDraggable.currentDraggable && this.grabDelay) {
+                    this.element.classList.add(MDraggableClassNames.Grabbing);
+                    (this.element.style as any).webkitUserDrag = '';
+                }
+            }, polyFillActive.dragDrop ? dragDropDelay : 0);
+        }));
+    }
+
+    private destroyGrabBehavior(): void {
+        // This allow to "delay" user drag on desktop.  When wanted delay is over, set webkitUserDrag to ''.
+        this.touchHasMoved = !polyFillActive.dragDrop;
+        (this.element.style as any).webkitUserDrag = 'none';
+        if (this.grabDelay) { window.clearTimeout(this.grabDelay); this.grabDelay = undefined; }
+        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUpListener));
+        this.removeEventListener('touchmove');
+    }
+
     private attachDragImage(): void {
         const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         if (dragImage) {
@@ -121,8 +143,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private onDragEnd(event: DragEvent): void {
         event.stopPropagation();
-        this.cleanupCssClasses();
-        MDraggable.currentDraggable = undefined;
+        this.doCleanUp();
 
         // Fix for IE / Edge.  clientX / clientY don't appear to be out of element on dragLeave.
         // We can't detect whether we're leaving de droppable for real therefore we have to force leave onDragEnd.
@@ -139,8 +160,16 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private onDragStart(event: DragEvent): void {
+        // On some mobile devices dragStart will be triggered even though user has not moved / dragged yet.  We want to avoid that.
+        if (!this.touchHasMoved) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            return;
+        }
+
         event.stopPropagation();
-        this.touchUp();
+        this.doCleanUp();
         clearUserSelection();
 
         MDraggable.currentDraggable = this;
@@ -176,11 +205,9 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         dispatchEvent(this.element, name, customEvent);
     }
 
-    private touchUp(): void {
-        console.log('touchup');
-        if (this.grabDelay) { window.clearTimeout(this.grabDelay); this.grabDelay = undefined; }
-        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUpListener));
-        this.cleanupCssClasses();
+    private cleanupCssClasses(): void {
+        this.element.classList.remove(MDraggableClassNames.Dragging);
+        this.element.classList.remove(MDraggableClassNames.Grabbing);
     }
 }
 

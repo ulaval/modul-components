@@ -12,8 +12,7 @@ export const polyFillActive: { dragDrop: boolean } = {
 polyFillActive.dragDrop = polyfill({
     holdToDrag: dragDropDelay,
     dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride,
-    iterationInterval: 50,
-    forceApply: true
+    iterationInterval: 50
 });
 
 // Polyfill for the Promise API
