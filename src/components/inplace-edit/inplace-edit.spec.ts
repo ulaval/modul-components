@@ -1,13 +1,10 @@
-import { mount, Wrapper } from '@vue/test-utils';
+import { mount, shallow, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
-
-import I18nPlugin from '../../components/i18n/i18n';
-import { ModulVue } from '../../utils/vue/vue';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-
+import { ModulVue } from '../../utils/vue/vue';
 import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 
 let propsData: { propsData: { editMode: boolean, saveFn: () => Promise<void> } };
@@ -243,12 +240,15 @@ describe('Component inplace-edit - Complete component mobile', () => {
 
         addMessages(Vue, ['components/inplace-edit/inplace-edit.lang.en.json']);
 
-        wrapper = mount(MInplaceEdit, {
+        wrapper = shallow(MInplaceEdit, {
             localVue: Vue,
             slots: {
                 default: 'default',
                 editMode: EDIT_SLOT,
                 readMode: READ_SLOT
+            },
+            stubs: {
+                'm-dialog': '<div><slot></slot></div>'
             },
             mixins: [{
                 data: function() {
@@ -269,6 +269,9 @@ describe('Component inplace-edit - Complete component mobile', () => {
     describe('when in editMode', () => {
         beforeEach(() => {
             wrapper.setProps({ editMode: 'true' });
+        });
+        it('should render correctly', () => {
+            return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
         it('must show mobile confirm controls', () => {
             let controlFound: Wrapper<Vue> = wrapper.find({ ref : 'confirm-control-mobile' });

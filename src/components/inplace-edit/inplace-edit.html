@@ -8,8 +8,7 @@
             <form v-show="propEditMode" :aria-hidden="!propEditMode">
                 <slot name="editMode" v-if="propEditMode"></slot>
                 <m-accordion-transition>
-                    <div class="m-inplace-edit__buttons-wrap"
-                            v-if="propEditMode">
+                    <div class="m-inplace-edit__buttons-wrap" v-if="propEditMode">
                         <div class="m-inplace-edit__buttons">
                             <m-button :waiting="submitted" ref="confirm-control" skin="primary" @click.stop="confirm">
                                 <m-i18n k="m-inplace-edit:save"></m-i18n>

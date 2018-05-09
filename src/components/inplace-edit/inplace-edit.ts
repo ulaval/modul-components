@@ -1,14 +1,14 @@
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import { Component, Prop, Watch } from 'vue-property-decorator';
-import { INPLACE_EDIT } from '../component-names';
-import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 import Vue, { PluginObject } from 'vue';
-import I18nPlugin from '../i18n/i18n';
+import { Component, Prop, Watch } from 'vue-property-decorator';
+
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import IconButtonPlugin from '../icon-button/icon-button';
-import ButtonPlugin from '../button/button';
-import DialogPlugin from '../dialog/dialog';
 import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
+import { INPLACE_EDIT } from '../component-names';
+import DialogPlugin from '../dialog/dialog';
+import IconButtonPlugin from '../icon-button/icon-button';
+import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 
 export type SaveFn = () => Promise<void>;
 
@@ -21,6 +21,9 @@ export class MInplaceEdit extends ModulVue {
     @Prop()
     public editMode: boolean;
 
+    @Prop()
+    public error: boolean;
+
     @Prop({
         default: () => (Vue.prototype as any).$i18n.translate('m-inplace-edit:modify')
     })
@@ -29,14 +32,12 @@ export class MInplaceEdit extends ModulVue {
     @Prop()
     public saveFn: SaveFn;
 
-    private error: boolean = false;
-
     private internalEditMode: boolean = false;
-
+    private internalError: boolean = false;
     private submitted: boolean = false;
 
     public get isError(): boolean {
-        return this.error;
+        return this.error ? this.error : this.internalError;
     }
 
     public confirm(event: Event): void {
@@ -48,7 +49,7 @@ export class MInplaceEdit extends ModulVue {
 
     public cancel(event: Event): void {
         if (this.editMode) {
-            this.error = false;
+            this.internalError = false;
             this.propEditMode = false;
             this.$emit('cancel');
         }
@@ -57,6 +58,11 @@ export class MInplaceEdit extends ModulVue {
     @Watch('editMode')
     public onEditMode(value: boolean): void {
         this.internalEditMode = value;
+    }
+
+    @Watch('error')
+    private errorChanged(value: boolean): void {
+        this.internalError = value;
     }
 
     private onClick(event: MouseEvent): void {
@@ -75,11 +81,11 @@ export class MInplaceEdit extends ModulVue {
     private save(): void {
         if (this.saveFn) {
             this.submitted = true;
-            this.error = false;
+            this.internalError = false;
             this.saveFn().then(() => {
                 this.propEditMode = false;
             }, () => {
-                this.error = true;
+                this.internalError = true;
             }).then(() => this.submitted = false);
         } else {
             this.$log.warn('No save function provided (save-fn prop is undefined)');
