@@ -8,7 +8,6 @@ function resolve(dir) {
 }
 
 module.exports = function (env) {
-    let isProd = !!(env && env.prod);
     let isLib = !!(env && env.lib);
 
     let outputObj;
@@ -18,7 +17,7 @@ module.exports = function (env) {
             libraryTarget: 'umd',
             path: resolve('dist'),
             publicPath: '/',
-            filename: 'app.js'
+            filename: 'modul.js'
         }
     } else {
         outputObj = {
@@ -32,7 +31,7 @@ module.exports = function (env) {
 
     var config = {
         entry: {
-            app: [isLib ? './src/lib.ts' : './tests/app/main.ts']
+            app: [isLib ? './lib/lib.ts' : './tests/app/main.ts']
         },
 
         externals: externalsObj,
@@ -137,11 +136,13 @@ module.exports = function (env) {
         ]
     }
 
-    config.plugins.push(new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: resolve('tests/app/index.html'),
-        inject: 'body'
-    }));
+    if (!isLib) {
+        config.plugins.push(new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: resolve('tests/app/index.html'),
+            inject: 'body'
+        }));
+    }
 
     return config;
 }
