@@ -13,7 +13,6 @@ import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width'
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import i18nPlugin from '../../utils/i18n/i18n';
 import ButtonPlugin from '../button/button';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
@@ -417,7 +416,6 @@ const DropdownPlugin: PluginObject<any> = {
         Vue.use(PopupPluginDirective);
         Vue.use(ValidationMessagePlugin);
         Vue.use(MediaQueriesPlugin);
-        Vue.use(i18nPlugin);
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };

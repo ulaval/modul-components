@@ -5,7 +5,6 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './timepicker.html?style=./timepicker.scss';
 import { TIMEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
-import i18nPlugin from '../../utils/i18n/i18n';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -239,7 +238,6 @@ const TimepickerPlugin: PluginObject<any> = {
         v.use(PopupPlugin);
         v.use(ValidationMessagePlugin);
         v.use(MediaQueriesPlugin);
-        v.use(i18nPlugin);
         v.component(TIMEPICKER_NAME, MTimepicker);
     }
 };
