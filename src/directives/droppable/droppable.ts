@@ -180,8 +180,6 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
-        if (!MDraggable.currentDraggable) { return; }
-
         const dropInfo = this.extractDropInfo(event);
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
         customEvent.initCustomEvent(name, true, true, Object.assign(event, { dropInfo }));

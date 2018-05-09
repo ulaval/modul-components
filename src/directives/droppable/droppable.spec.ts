@@ -3,6 +3,7 @@ import Vue, { VueConstructor } from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { isInElement } from '../../utils/mouse/mouse';
+import { polyFillActive } from '../../utils/polyfills';
 import { ModulVue } from '../../utils/vue/vue';
 import { MDOMPlugin } from '../domPlugin';
 import DraggablePlugin, { MDraggable, MDraggableOptions } from '../draggable/draggable';
@@ -13,6 +14,8 @@ import DroppablePlugin, { MDropEffect, MDroppable, MDroppableClassNames, MDroppa
 jest.mock('../../utils/mouse/mouse');
 
 describe('droppable', () => {
+    polyFillActive.dragDrop = false;
+
     const getDroppableDirective: (bindingValue?: boolean, options?: MDroppableOptions, innerHtml?: string) => Wrapper<Vue> =
     (bindingValue?: boolean, options?: MDroppableOptions, innerHtml?: string) => {
         let directive: Wrapper<Vue>;

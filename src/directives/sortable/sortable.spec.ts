@@ -2,6 +2,7 @@ import { mount, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
+import { polyFillActive } from '../../utils/polyfills';
 import { ModulVue } from '../../utils/vue/vue';
 import { MDraggable, MDraggableEventNames, MDraggableOptions } from '../draggable/draggable';
 import { MDroppable } from '../droppable/droppable';
@@ -13,6 +14,8 @@ import SortablePlugin, { MSortable, MSortableAction, MSortableClassNames, MSorta
 
 jest.mock('./insertion-behavior');
 describe('sortable', () => {
+    polyFillActive.dragDrop = false;
+
     const emptyPlaceholderTemplate = `<li v-for="item in items" v-if="items.length">Item #{{ $index }}</li>`;
     const getSortableDirective: (bindingValue?: boolean, options?: MSortableOptions, innerHtml?: string) => Wrapper<Vue> =
     (bindingValue?: boolean, options?: MSortableOptions, innerHtml?: string) => {

@@ -73,6 +73,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
                 this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
                 this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
+                this.addEventListener('touchmove', (event: MouseEvent) => { this.touchHasMoved = true; });
                 this.setupGrabBehavior();
                 MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
             });
@@ -102,12 +103,6 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         (this.element.style as any).webkitUserDrag = 'none';
         this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: DragEvent) => {
             this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUpListener));
-            this.addEventListener('touchmove', (event: MouseEvent) => {
-                this.touchHasMoved = true;
-                /* if (!isInElement(event, this.element)) {
-                    this.doCleanUp();
-                } */
-            });
             this.grabDelay = window.setTimeout(() => {
                 if (!MDraggable.currentDraggable && this.grabDelay) {
                     this.element.classList.add(MDraggableClassNames.Grabbing);
@@ -123,7 +118,6 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         (this.element.style as any).webkitUserDrag = 'none';
         if (this.grabDelay) { window.clearTimeout(this.grabDelay); this.grabDelay = undefined; }
         this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUpListener));
-        this.removeEventListener('touchmove');
     }
 
     private attachDragImage(): void {
@@ -161,7 +155,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private onDragStart(event: DragEvent): void {
         // On some mobile devices dragStart will be triggered even though user has not moved / dragged yet.  We want to avoid that.
-        if (!this.touchHasMoved) {
+        if (polyFillActive.dragDrop && !this.touchHasMoved) {
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();

@@ -2,6 +2,7 @@ import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { resetModulPlugins } from './../../../tests/helpers/component';
+import { polyFillActive } from './../../utils/polyfills';
 import { ModulVue } from './../../utils/vue/vue';
 import { MDOMPlugin } from './../domPlugin';
 import { MRemoveUserSelect } from './../user-select/remove-user-select';
@@ -10,6 +11,8 @@ import DraggablePlugin, { MDraggable, MDraggableClassNames, MDraggableEventNames
 jest.useFakeTimers();
 
 describe('draggable', () => {
+    polyFillActive.dragDrop = false;
+
     const dragImageTemplate = `<div class="${MDraggableClassNames.DragImage}"></div>`;
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
     (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
