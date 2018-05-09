@@ -96,19 +96,24 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         MDOMPlugin.detach(MRemoveUserSelect, this.element);
         this.element.classList.remove(MDraggableClassNames.Draggable);
         this.cleanupCssClasses();
+        (this.element.style as any).webkitUserDrag = '';
         this.removeAllEvents();
     }
 
     private setupGrabBehavior(): void {
         (this.element.style as any).webkitUserDrag = 'none';
         this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: DragEvent) => {
-            this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUpListener));
-            this.grabDelay = window.setTimeout(() => {
-                if (!MDraggable.currentDraggable && this.grabDelay) {
-                    this.element.classList.add(MDraggableClassNames.Grabbing);
-                    (this.element.style as any).webkitUserDrag = '';
-                }
-            }, polyFillActive.dragDrop ? dragDropDelay : 0);
+            // We can't call event.preventDefault or event.stopPropagation here for the drag to be handled correctly on mobile devices.
+            // So we make sure that the draggable affected by the dragEvent is the closest draggable parent of the event target.
+            if (MDOMPlugin.getRecursive(MDraggable, event.target as HTMLElement) === this) {
+                this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUpListener));
+                this.grabDelay = window.setTimeout(() => {
+                    if (!MDraggable.currentDraggable && this.grabDelay) {
+                        this.element.classList.add(MDraggableClassNames.Grabbing);
+                        (this.element.style as any).webkitUserDrag = '';
+                    }
+                }, polyFillActive.dragDrop ? dragDropDelay : 0);
+            }
         }));
     }
 

@@ -47,6 +47,7 @@ describe('draggable', () => {
             const userDefinedGrouping: string = 'someGrouping';
             const draggable: Wrapper<Vue> = getDraggableDirective(param, { dragData: userDefinedData, action: userDefinedAction, grouping: userDefinedGrouping });
 
+            expect((draggable.element.style as any).webkitUserDrag).toBe('none');
             expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
             expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe(userDefinedAction);
             expect(MDOMPlugin.get(MDraggable, draggable.element).options.dragData).toBe(userDefinedData);
@@ -82,36 +83,39 @@ describe('draggable', () => {
         });
     });
 
-    it('it should add grabbing class on mouse down', () => {
-        const draggable: Wrapper<Vue> = getDraggableDirective();
-        draggable.trigger('mousedown');
+    ['mousedown', 'touchstart'].forEach(eventName => {
+        it(`it should add grabbing class on ${eventName}`, () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective();
+            draggable.trigger(eventName);
+            jest.runOnlyPendingTimers();
 
-        jest.runOnlyPendingTimers();
-        expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+            expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+            expect((draggable.element.style as any).webkitUserDrag).toBe('');
+            expect(MDraggable.currentDraggable).toBeUndefined();
+        });
+
+        it(`it should not apply grabbing class to parent draggable on ${eventName}`, () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective(true, undefined, '<div class="childDraggable" v-m-draggable="true">child draggable</div>');
+            const childDraggable = draggable.find('.childDraggable');
+
+            childDraggable.trigger(eventName);
+            jest.runOnlyPendingTimers();
+
+            expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+            expect(childDraggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+        });
     });
 
-    it('it should remove grabbing class on document mouse up', () => {
-        const draggable: Wrapper<Vue> = getDraggableDirective();
-        draggable.trigger('mousedown');
-        draggable.trigger('mouseup');
+    ['mouseup', 'touchend', 'click', 'touchcancel'].forEach(eventName => {
+        it(`it should remove grabbing class on document ${eventName}`, () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective();
+            draggable.trigger('touchstart');
+            draggable.trigger('touchend');
 
-        expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
-    });
-
-    it('it should add grabbing class on touch start', () => {
-        const draggable: Wrapper<Vue> = getDraggableDirective();
-        draggable.trigger('touchstart');
-
-        jest.runOnlyPendingTimers();
-        expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
-    });
-
-    it('it should remove grabbing class on document touch end', () => {
-        const draggable: Wrapper<Vue> = getDraggableDirective();
-        draggable.trigger('touchstart');
-        draggable.trigger('touchend');
-
-        expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+            expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+            expect((draggable.element.style as any).webkitUserDrag).toBe('none');
+            expect(MDraggable.currentDraggable).toBeUndefined();
+        });
     });
 
     describe('unbind', () => {
@@ -123,6 +127,7 @@ describe('draggable', () => {
 
             expect(element.draggable).toBeFalsy();
             expect(dragImage.hidden).toBeTruthy();
+            expect((draggable.element.style as any).webkitUserDrag).toBe('');
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Draggable);
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Dragging);
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Grabbing);
