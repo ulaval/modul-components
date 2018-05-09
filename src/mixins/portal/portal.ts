@@ -7,6 +7,8 @@ import uuid from '../../utils/uuid/uuid';
 
 export interface PortalMixin {
     propOpen: boolean;
+    preload: boolean;
+    loaded: boolean;
     getPortalElement(): HTMLElement;
     getTrigger(): HTMLElement | undefined;
     setFocusToPortal(): void;
@@ -63,6 +65,11 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop()
     public className: string;
 
+    @Prop()
+    public preload: boolean;
+
+    public loaded: boolean = false;
+
     private internalTrigger: HTMLElement | undefined = undefined;
     private propId: string = '';
     private portalTargetEl: HTMLElement;
@@ -112,6 +119,12 @@ export class Portal extends ModulVue implements PortalMixin {
         }
     }
 
+    protected created(): void {
+        if (!this.$modul) {
+            throw new Error('Portal mixin -> this.$modul is undefined, you must install the Modul plugin.');
+        }
+    }
+
     protected beforeMount(): void {
         this.propId = this.id + '-' + uuid.generate();
         let element: HTMLElement = document.createElement('div');
@@ -129,7 +142,6 @@ export class Portal extends ModulVue implements PortalMixin {
         if (this.internalTrigger) {
             this.internalTrigger.removeEventListener('click', this.toggle);
             this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
-            this.internalTrigger.removeEventListener('mouseleave', this.handleMouseLeave);
         }
 
         document.body.removeChild(this.portalTargetEl);
@@ -145,6 +157,7 @@ export class Portal extends ModulVue implements PortalMixin {
                 if (this.portalTargetEl) {
                     this.stackId = this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().getBackdropMode(), this.as<MediaQueriesMixin>().isMqMaxS);
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
+                        this.loaded = true;
                         this.portalTargetEl.style.position = 'absolute';
 
                         setTimeout(() => {
@@ -194,7 +207,7 @@ export class Portal extends ModulVue implements PortalMixin {
 
     private handleTrigger(): void {
         if (this.internalTrigger) {
-            console.warn('portal.ts : Trigger change or multiple triggers not supported');
+            this.$log.warn('portal.ts : Trigger change or multiple triggers not supported');
         }
         if (this.trigger) {
             this.internalTrigger = this.trigger;
@@ -205,14 +218,10 @@ export class Portal extends ModulVue implements PortalMixin {
         }
         if (this.internalTrigger) {
             if (this.openTrigger == MOpenTrigger.Click) {
-                this.internalTrigger.addEventListener('click', this.toggle);
+                this.internalTrigger.addEventListener('mousedown', this.toggle);
             } else if (this.openTrigger == MOpenTrigger.Hover) {
                 this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
-                this.internalTrigger.addEventListener('mouseleave', this.handleMouseLeave);
-                this.$nextTick(() => {
-                    (this.$refs.popper as Element).addEventListener('mouseenter', this.handleMouseEnter);
-                    (this.$refs.popper as Element).addEventListener('mouseleave', this.handleMouseLeave);
-                });
+                // Closing not supported for the moment, check source code history for how was handled mouse leave
             }
         }
     }
@@ -223,10 +232,6 @@ export class Portal extends ModulVue implements PortalMixin {
 
     private handleMouseEnter(): void {
         this.propOpen = true;
-    }
-
-    private handleMouseLeave(): void {
-        this.propOpen = false;
     }
 
     @Watch('open')

@@ -1,6 +1,6 @@
 import Vue, { PluginObject, VNode } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './carousel.html?style=./carousel.scss';
 import { CAROUSEL_NAME } from '../component-names';
 import carouselItem, { MCarouselItem } from '../carousel-item/carousel-item';
@@ -18,6 +18,9 @@ export class MCarousel extends Vue {
     @Prop({ default: 0 })
     public interval: number;
 
+    @Prop()
+    public keyboardNavigable: boolean;
+
     private items: MCarouselItem[] = [];
 
     private internalIndex: number = 0;
@@ -25,15 +28,25 @@ export class MCarousel extends Vue {
     private transitionForward: boolean = true;
 
     protected mounted(): void {
-        document.addEventListener('keyup', this.changeItem);
+        this.toggleKeyboardNavigation(this.keyboardNavigable);
         if (this.interval) {
             this.updateInterval = setInterval(() => {
                 this.showNextItem();
             }, this.interval);
         }
+        this.initialize();
     }
 
     protected updated(): void {
+        this.initialize();
+    }
+
+    protected beforeDestroy(): void {
+        this.toggleKeyboardNavigation(false);
+        clearInterval(this.updateInterval);
+    }
+
+    private initialize(): void {
         if (this.isIndexValid(this.propIndex) || this.propIndex === 0 && this.items.length === 0) {
             this.transitionForward = this.internalIndex <= this.propIndex;
             this.internalIndex = this.propIndex;
@@ -64,9 +77,12 @@ export class MCarousel extends Vue {
         }
     }
 
-    protected beforeDestroy(): void {
+    @Watch('keyboardNavigable')
+    private toggleKeyboardNavigation(value: boolean): void {
         document.removeEventListener('keyup', this.changeItem);
-        clearInterval(this.updateInterval);
+        if (value) {
+            document.addEventListener('keyup', this.changeItem);
+        }
     }
 
     private changeItem(e): void {
@@ -96,7 +112,19 @@ export class MCarousel extends Vue {
     }
 
     private isIndexValid(value): boolean {
-        return value >= 0 && value < this.items.length;
+        return value >= 0 && value < this.numberOfCarouselItems();
+    }
+
+    private numberOfCarouselItems(): number {
+        let count: number = 0;
+        if (this.$slots.default) {
+            this.$slots.default.forEach(item => {
+                if (item.componentInstance instanceof MCarouselItem) {
+                    count ++;
+                }
+            });
+        }
+        return count;
     }
 
     private showPrevItem(resetInterval: boolean = false): void {
@@ -135,7 +163,7 @@ export class MCarousel extends Vue {
 
 const CarouselPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(CAROUSEL_NAME + ' is not ready for production');
+        v.prototype.$log.warn(CAROUSEL_NAME + ' is not ready for production');
         v.component(CAROUSEL_NAME, MCarousel);
     }
 };

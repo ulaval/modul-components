@@ -5,7 +5,6 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './timepicker.html?style=./timepicker.scss';
 import { TIMEPICKER_NAME } from '../component-names';
 import * as moment from 'moment';
-import i18nPlugin, { curLang } from '../../utils/i18n/i18n';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -54,12 +53,14 @@ export class MTimepicker extends ModulVue {
     private internalTimeErrorMessage: string = '';
 
     private mounted(): void {
-        moment.locale(curLang);
+        moment.locale(this.$i18n.currentLang());
 
         let newTime = this.duration ? moment.duration(this.min.hours() + ':' + this.min.minutes()) : moment().hours(this.min.hours()).minutes(this.min.minutes());
         while (this.isTimeSameOrBeforeMax(newTime)) {
             let hour = newTime.hours();
-            if (!this.hours[hour]) this.hours[hour] = [];
+            if (!this.hours[hour]) {
+                this.hours[hour] = [];
+            }
             this.hours[hour].push(newTime.minutes());
             newTime.add(this.step, 'm');
         }
@@ -184,7 +185,9 @@ export class MTimepicker extends ModulVue {
         if (!this.isMousedown) {
             clearTimeout(this.scrollTimeout);
             this.scrollTimeout = setTimeout(() => {
-                if (event.srcElement) this.positionScroll(event.srcElement);
+                if (event.srcElement) {
+                    this.positionScroll(event.srcElement);
+                }
             }, 300);
         }
     }
@@ -195,7 +198,9 @@ export class MTimepicker extends ModulVue {
 
     private onMouseup(event: Event): void {
         this.isMousedown = false;
-        if (event.srcElement) this.positionScroll(event.srcElement);
+        if (event.srcElement) {
+            this.positionScroll(event.srcElement);
+        }
     }
 
     private positionScroll(el: Element): void {
@@ -233,7 +238,6 @@ const TimepickerPlugin: PluginObject<any> = {
         v.use(PopupPlugin);
         v.use(ValidationMessagePlugin);
         v.use(MediaQueriesPlugin);
-        v.use(i18nPlugin);
         v.component(TIMEPICKER_NAME, MTimepicker);
     }
 };

@@ -6,6 +6,10 @@
     justify-content: center;
     overflow: hidden;
 
+    &.m--is-skin-dark {
+        background-color: $m-color--grey-darkest;
+    }
+
     &.m--is-skin-light {
         &::before {
             position: absolute;
@@ -34,6 +38,11 @@
 
     &__button {
         position: relative;
+
+        .m--is-skin-dark & {
+            color: $m-color--grey-light;
+            stroke-width: 2;
+        }
     }
 
     &__wrap {
@@ -73,11 +82,6 @@
 
         &::before,
         &::after {
-            // content: '';
-            // width: 0;
-            // height: 0;
-            // border-style: solid;
-            // border-width: 6px 10px 0;
             transform: translateX(-50%);
             position: absolute;
             left: 50%;

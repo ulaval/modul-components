@@ -8,7 +8,7 @@ import ComponentsPlugin from '../../src/components';
 import DirectivesPlugin from '../../src/directives';
 import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
 
-import I18nLanguagePlugin, { currentLang, FRENCH } from '../../src/utils/i18n/i18n';
+import { FRENCH } from '../../src/utils/i18n/i18n';
 import FrenchPlugin from '../../src/lang/fr';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 
@@ -16,18 +16,16 @@ import MetaFactory from './meta-init';
 
 Vue.config.productionTip = false;
 
-const utilsPluginOptions: UtilsPluginOptions = {
-    securityPluginOptions: {
-        protectedUrls: []
+let utilsOptions: UtilsPluginOptions = {
+    i18PluginOptions: {
+        curLang: FRENCH
     }
 };
 
 Vue.use(ComponentsPlugin);
 Vue.use(DirectivesPlugin);
-Vue.use(UtilsPlugin, utilsPluginOptions);
+Vue.use(UtilsPlugin, utilsOptions);
 
-currentLang(FRENCH);
-Vue.use(I18nLanguagePlugin);
 Vue.use(FrenchPlugin);
 Vue.use(DefaultSpritesPlugin);
 

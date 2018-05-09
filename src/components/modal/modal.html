@@ -2,7 +2,7 @@
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
         <transition name="m--is">
-            <div v-show="propOpen"
+            <div v-show="propOpen" v-if="propOpen || preload || loaded"
                  class="m-modal__wrap"
                  :class="[{ 'm--is-disabled': disabled }, className ]"
                  ref="dialogWrap">
@@ -20,6 +20,7 @@
                             <m-button @click="onOk()">
                                 <template v-if="hasOkLabel">{{ okLabel }}</template>
                                 <m-i18n v-else k="m-modal:ok"></m-i18n>
+                                <template slot="precision" v-if="hasOkPrecision">{{ okPrecision }}</template>
                             </m-button>
                             <m-link mode="button" @click="onCancel()" v-if="negativeLink">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>

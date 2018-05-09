@@ -12,10 +12,9 @@ import WithRender from './accordion-group.html?style=./accordion-group.scss';
 @Component
 export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     @Prop({
-        default: MAccordionSkin.Secondary,
+        default: MAccordionSkin.Default,
         validator: value =>
-            value == MAccordionSkin.Primary ||
-            value == MAccordionSkin.Secondary ||
+            value == MAccordionSkin.Default ||
             value == MAccordionSkin.Light ||
             value == MAccordionSkin.Plain
     })
@@ -39,7 +38,7 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     public addAccordion(accordion: AccordionGateway): void {
         accordion.$on('update:open', this.emitValueChange);
         this.$set(this.accordions, accordion.propId, accordion);
-        if (this.openedIds && this.openedIds .find(v => v === accordion.propId)) {
+        if (this.openedIds && this.openedIds.find(v => v === accordion.propId)) {
             accordion.propOpen = true;
         }
     }
@@ -59,7 +58,9 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
         let allOpened = true;
         for (const id in this.accordions) {
             allOpened = this.accordions[id].propOpen;
-            if (!allOpened && !this.accordions[id].propDisabled) break;
+            if (!allOpened && !this.accordions[id].propDisabled) {
+                break;
+            }
         }
         return allOpened;
     }
@@ -68,17 +69,15 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
         let allClosed = true;
         for (const id in this.accordions) {
             allClosed = !this.accordions[id].propOpen;
-            if (!allClosed && !this.accordions[id].propDisabled) break;
+            if (!allClosed && !this.accordions[id].propDisabled) {
+                break;
+            }
         }
         return allClosed;
     }
 
     private get propSkin(): MAccordionSkin {
-        return this.skin == MAccordionSkin.Light ||
-            this.skin == MAccordionSkin.Plain ||
-            this.skin == MAccordionSkin.Primary
-            ? this.skin
-            : MAccordionSkin.Secondary;
+        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Plain || this.skin == MAccordionSkin.Default ? this.skin : MAccordionSkin.Default;
     }
 
     private get hasTitleSlot(): boolean {

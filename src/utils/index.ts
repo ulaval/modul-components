@@ -2,35 +2,35 @@ import Vue, { PluginObject } from 'vue';
 
 import MediaQueriesPlugin from './media-queries/media-queries';
 import ModulPlugin from './modul/modul';
-import MessagesPlugin from './i18n/i18n';
-import HttpPlugin from './http/http';
-import SecurityPlugin, { SecurityPluginOptions } from './http/security';
+import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
+import HttpPlugin, { HttpPluginOptions } from './http/http';
 import SpritesPlugin from './svg/sprites';
 import * as TouchPlugin from 'vue-touch';
 import ConfirmPlugin from './modal/confirm';
 import AlertPlugin from './modal/alert';
 import FilePlugin from '../utils/file/file';
 import { PortalPluginInstall } from 'portal-vue';
+import LoggerPlugin, { ConsoleOptions } from './logger/logger';
 
 export interface UtilsPluginOptions {
-    securityPluginOptions: SecurityPluginOptions;
+    httpPluginOptions?: HttpPluginOptions;
+    consoleOptions?: ConsoleOptions;
+    i18PluginOptions?: I18nPluginOptions;
 }
 
 const UtilsPlugin: PluginObject<any> = {
     install(v, options): void {
-        if (!options) {
-            throw new Error(
-                'UtilsPlugin.install -> you must provide a UtilsPluginOptions option object.'
-            );
+        if (!v.prototype.$log) {
+            Vue.use(LoggerPlugin, options ? options.consoleOptions : undefined);
+        } else if (options) {
+            v.prototype.$log.setConsoleOptions(options.consoleOptions);
         }
-        let o: UtilsPluginOptions = options as UtilsPluginOptions;
 
         Vue.use(MediaQueriesPlugin);
         Vue.use(ModulPlugin);
-        Vue.use(MessagesPlugin);
-        Vue.use(HttpPlugin);
+        Vue.use(I18nPlugin, options ? options.i18PluginOptions : undefined);
+        Vue.use(HttpPlugin, options ? options.httpPluginOptions : undefined);
         Vue.use({ install: PortalPluginInstall });
-        Vue.use(SecurityPlugin, o.securityPluginOptions);
         Vue.use(SpritesPlugin);
         Vue.use(TouchPlugin, { name: 'v-touch' });
         Vue.use(ConfirmPlugin);
