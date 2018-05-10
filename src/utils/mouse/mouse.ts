@@ -45,7 +45,7 @@ const getRelativeMousePos: (event: Event, reference: HTMLElement) => RelativeMou
         let recursiveReference: HTMLElement = reference;
         let offset = { x: 0, y: 0 };
         while (recursiveReference) {
-            if (typeof (recursiveReference as any).mouseX != 'undefined') {
+            if (typeof (recursiveReference as any).mouseX !== 'undefined') {
                 x = (recursiveReference as any).mouseX - offset.x;
                 y = (recursiveReference as any).mouseY - offset.y;
                 break;
