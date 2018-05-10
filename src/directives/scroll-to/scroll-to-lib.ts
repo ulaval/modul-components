@@ -1,6 +1,7 @@
 export enum ScrollToDuration {
     Null = 'null',
     Slow = 'slow',
+    Slower = 'slower',
     Regular = 'regular',
     Fast = 'fast'
 }
@@ -43,6 +44,9 @@ export class ScrollTo {
                 break;
             case ScrollToDuration.Slow:
                 time = 1500;
+                break;
+            case ScrollToDuration.Slower:
+                time = 3000;
                 break;
             case ScrollToDuration.Fast:
                 time = 400;

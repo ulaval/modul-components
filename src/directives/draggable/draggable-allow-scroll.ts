@@ -51,7 +51,7 @@ export class MDraggableAllowScroll extends MElementDomPlugin<boolean> {
                     this.cancelScroll();
                 }
             } else if (!this.activeScroll) {
-                this.activeScroll = new ScrollTo().scrollToTop(document.documentElement, ScrollToDuration.Slow);
+                this.activeScroll = new ScrollTo().scrollToTop(document.documentElement, ScrollToDuration.Slower);
             }
         };
 
