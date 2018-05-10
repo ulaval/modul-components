@@ -136,9 +136,6 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private onDragIn(event: DragEvent): any {
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
         if (document.elementFromPoint) {
             const element = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement;
             const droppable = MDOMPlugin.getRecursive(MDroppable, element);

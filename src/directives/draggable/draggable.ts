@@ -147,7 +147,6 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         // Fix for IE / Edge.  clientX / clientY don't appear to be out of element on dragLeave.
         // We can't detect whether we're leaving de droppable for real therefore we have to force leave onDragEnd.
         if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.leaveDroppable(event); }
-        if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }
         if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
         if (MSortable.fromSortContainer) { MSortable.fromSortContainer.doCleanUp(); }
         if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }

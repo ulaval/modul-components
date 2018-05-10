@@ -240,11 +240,9 @@ describe('sortable', () => {
 
         it('it should handle event correctly', () => {
             const eventDummy = getEventDummy();
-            jest.spyOn(eventDummy, 'stopPropagation');
             sortable.find('li').trigger('dragenter', eventDummy);
 
             expect(MSortable.activeSortContainer).toBe(plugin);
-            expect(eventDummy.stopPropagation).toHaveBeenCalled();
         });
 
         it('it should handle transition from one active sortable to another', () => {

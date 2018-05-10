@@ -229,13 +229,11 @@ describe('droppable', () => {
             it('it should manage DragEvent correctly when canDrop is false', () => {
                 mockCanDrop(droppable, false);
                 const dropEventDummy: any = getEventDummy();
-                jest.spyOn(dropEventDummy, 'stopPropagation');
                 jest.spyOn(dropEventDummy, 'preventDefault');
 
                 droppable.trigger(eventSpec.associatedNativeDomEvent, dropEventDummy);
 
                 const event: any = droppable.emitted(eventSpec.shouldEmit)[0][0];
-                expect(dropEventDummy.stopPropagation).toHaveBeenCalled();
                 expect(dropEventDummy.preventDefault).not.toHaveBeenCalled();
                 expect(event.dropInfo).toEqual({ action: userDefinedAction, grouping: userDefinedGrouping, data: userDefinedData, canDrop: false });
             });
@@ -243,13 +241,11 @@ describe('droppable', () => {
             it('it should manage DragEvent correctly when canDrop is true', () => {
                 mockCanDrop(droppable, true);
                 const dropEventDummy: any = getEventDummy();
-                jest.spyOn(dropEventDummy, 'stopPropagation');
                 jest.spyOn(dropEventDummy, 'preventDefault');
 
                 droppable.trigger(eventSpec.associatedNativeDomEvent, dropEventDummy);
 
                 const event: any = droppable.emitted(eventSpec.shouldEmit)[0][0];
-                expect(dropEventDummy.stopPropagation).toHaveBeenCalled();
                 expect(dropEventDummy.preventDefault).toHaveBeenCalled();
                 expect(event.dropInfo).toEqual({ action: userDefinedAction, grouping: userDefinedGrouping, data: userDefinedData, canDrop: true });
             });
