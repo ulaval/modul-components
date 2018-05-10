@@ -4,6 +4,8 @@ $m-file-upload-max-height: 120px;
 $m-file-upload-max-height--s: 72px;
 
 .m-file-upload {
+    @include m-box-padding();
+
     &__error-message {
         margin-bottom: $m-margin--l;
 
@@ -134,6 +136,11 @@ $m-file-upload-max-height--s: 72px;
             overflow: hidden;
         }
 
+        &__file-icon {
+            display: flex;
+            align-items: center;
+        }
+
         &__progress-wrap {
             flex: 1 1 auto;
             padding: 0 $m-padding;
@@ -227,6 +234,11 @@ $m-file-upload-max-height--s: 72px;
             overflow: hidden;
         }
 
+        &__file-icon {
+            display: flex;
+            align-items: center;
+        }
+
         &__infos {
             flex: 1 1 auto;
             padding: 0 16px;
@@ -253,5 +265,9 @@ $m-file-upload-max-height--s: 72px;
             width: 32px !important;
             height: 32px !important;
         }
+    }
+
+    &__footer-cancel {
+        margin-left: $m-margin;
     }
 }

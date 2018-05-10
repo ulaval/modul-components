@@ -4,7 +4,7 @@ import { BundleMessagesMap, FRENCH, Messages } from '../utils/i18n/i18n';
 
 const FrenchPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug('FrenchPlugin', 'plugin.install');
+        v.prototype.$log.debug('FrenchPlugin', 'plugin.install');
         const i18n: Messages = (v.prototype as any).$i18n;
         if (i18n) {
             const msgs: BundleMessagesMap[] = [
@@ -18,11 +18,14 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/dropdown-item/dropdown-item.lang.fr.json'),
                 require('../components/dropdown-group/dropdown-group.lang.fr.json'),
                 require('../components/edit-window/edit-window.lang.fr.json'),
+                require('../components/error-message/error-message.lang.fr.json'),
                 require('../components/file-select/file-select.lang.fr.json'),
                 require('../components/file-upload/file-upload.lang.fr.json'),
+                require('../components/inplace-edit/inplace-edit.lang.fr.json'),
                 require('../components/input-style/input-style.lang.fr.json'),
                 require('../components/link/link.lang.fr.json'),
                 require('../components/limit-text/limit-text.lang.fr.json'),
+                require('../components/login/login.lang.fr.json'),
                 require('../components/message/message.lang.fr.json'),
                 require('../components/menu/menu.lang.fr.json'),
                 require('../components/modal/modal.lang.fr.json'),
@@ -34,8 +37,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/textfield/textfield.lang.fr.json'),
                 require('../components/timepicker/timepicker.lang.fr.json'),
                 require('../components/tooltip/tooltip.lang.fr.json'),
-                require('../components/validation-message/validation-message.lang.fr.json'),
-                require('../components/upload/upload.lang.fr.json')
+                require('../components/validation-message/validation-message.lang.fr.json')
             ];
 
             msgs.forEach(msgs => i18n.addMessages(FRENCH, msgs));

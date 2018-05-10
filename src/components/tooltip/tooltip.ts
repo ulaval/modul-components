@@ -61,7 +61,11 @@ export class MTooltip extends ModulVue {
     @Prop()
     public className: string;
 
-    private propOpen = false;
+    private propOpen: boolean = false;
+
+    protected mounted(): void {
+        this.propOpen = this.open;
+    }
 
     @Watch('open')
     private openChanged(open: boolean): void {
@@ -88,6 +92,10 @@ export class MTooltip extends ModulVue {
         this.$emit('close', event);
     }
 
+    private onClick(): void {
+        this.$emit('click');
+    }
+
     private getOpenTitle(): string {
         return this.openTitle == undefined ? this.$i18n.translate('m-tooltip:open') : this.openTitle;
     }
@@ -107,7 +115,7 @@ export class MTooltip extends ModulVue {
 
 const TooltipPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(TOOLTIP_NAME + ' is not ready for production');
+        v.prototype.$log.warn(TOOLTIP_NAME + ' is not ready for production');
         v.use(ButtonPlugin);
         v.use(LinkPlugin);
         v.use(I18nPlugin);

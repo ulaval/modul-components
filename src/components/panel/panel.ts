@@ -21,7 +21,8 @@ export class MPanel extends Vue {
         default: MPanelSkin.Light,
         validator: value =>
             value == MPanelSkin.Light ||
-            value == MPanelSkin.Dark
+            value == MPanelSkin.Dark ||
+            value == MPanelSkin.Darker
     })
     public skin: MPanelSkin;
 
@@ -118,7 +119,7 @@ export class MPanel extends Vue {
 
 const PanelPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(PANEL_NAME, 'plugin.install');
+        v.prototype.$log.debug(PANEL_NAME, 'plugin.install');
         v.component(PANEL_NAME, MPanel);
     }
 };

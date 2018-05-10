@@ -10,6 +10,17 @@ export enum InputStateValue {
     Valid = 'valid'
 }
 
+export enum InputStateTagStyle {
+    Default = 'default',
+    H1 = 'h1',
+    H2 = 'h2',
+    H3 = 'h3',
+    H4 = 'h4',
+    H5 = 'h5',
+    H6 = 'h6',
+    P = 'p'
+}
+
 export interface InputStateMixin {
     active: boolean;
     isDisabled: boolean;
@@ -44,6 +55,19 @@ export class InputState extends Vue implements InputStateMixin {
     public validMessage: string;
     @Prop()
     public helperMessage: string;
+    @Prop({
+        default: InputStateTagStyle.Default,
+        validator: value =>
+            value == InputStateTagStyle.Default ||
+            value == InputStateTagStyle.H1 ||
+            value == InputStateTagStyle.H2 ||
+            value == InputStateTagStyle.H3 ||
+            value == InputStateTagStyle.H4 ||
+            value == InputStateTagStyle.H5 ||
+            value == InputStateTagStyle.H6 ||
+            value == InputStateTagStyle.P
+    })
+    public tagStyle: string;
 
     public get active(): boolean {
         return !this.isDisabled && !this.isWaiting;

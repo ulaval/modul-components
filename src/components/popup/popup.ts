@@ -5,7 +5,7 @@ import { Prop } from 'vue-property-decorator';
 import WithRender from './popup.html?style=./popup.scss';
 import { POPUP_NAME } from '../component-names';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import PopperPlugin, { MPopperPlacement } from '../popper/popper';
+import PopperPlugin, { MPopperPlacement, MPopper } from '../popper/popper';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 import SidebarPlugin from '../sidebar/sidebar';
 
@@ -31,10 +31,16 @@ export class MPopup extends ModulVue {
     public id: string;
     @Prop()
     public disabled: boolean;
-    @Prop({ default: true })
+    @Prop()
     public shadow: boolean;
     @Prop({ default: true })
     public padding: boolean;
+    @Prop({ default: true })
+    public paddingHeader: boolean;
+    @Prop({ default: true })
+    public paddingBody: boolean;
+    @Prop({ default: true })
+    public paddingFooter: boolean;
     @Prop({ default: true })
     public background: boolean;
     @Prop()
@@ -57,11 +63,23 @@ export class MPopup extends ModulVue {
     public desktopOnly: boolean;
     @Prop()
     public className: string;
+    @Prop()
+    public preload: boolean;
+    @Prop()
+    public trigger: HTMLElement;
+
+    public $refs: {
+        popper: MPopper;
+    };
 
     private internalOpen: boolean = false;
 
     public get popupBody(): Element {
         return (this.$children[0] as any).popupBody;
+    }
+
+    public update(): void {
+        this.$refs.popper.update();
     }
 
     private get propOpen(): boolean {
@@ -77,8 +95,8 @@ export class MPopup extends ModulVue {
         return this.openTrigger; // todo: mobile + hover ??
     }
 
-    public get trigger(): any {
-        return !this.as<OpenTriggerMixin>().triggerHook ? undefined : this.as<OpenTriggerMixin>().triggerHook;
+    public get propTrigger(): HTMLElement {
+        return this.trigger || this.as<OpenTriggerMixin>().triggerHook || undefined;
     }
 
     private onOpen(): void {

@@ -1,12 +1,22 @@
-import { ModulVue } from '../../utils/vue/vue';
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model, Watch } from 'vue-property-decorator';
+import { Model, Prop, Watch } from 'vue-property-decorator';
+
 import { InputStateMixin } from '../../mixins/input-state/input-state';
-import { KeyCode } from '../../utils/keycode/keycode';
+import { ModulVue } from '../../utils/vue/vue';
+export interface InputManagementProps {
+    value: string;
+    placeholder: string;
+    readonly: boolean;
+    focus: boolean;
+}
+
+export interface InputManagementData {
+    internalValue: string;
+}
 
 @Component
-export class InputManagement extends ModulVue {
+export class InputManagement extends ModulVue
+    implements InputManagementProps, InputManagementData {
     @Prop()
     @Model('input')
     public value: string;
@@ -20,7 +30,11 @@ export class InputManagement extends ModulVue {
     public internalValue: string = '';
     private internalIsFocus: boolean = false;
 
-    protected mounted(): void {
+    private beforeMount(): void {
+        this.internalValue = this.value ? this.value : '';
+    }
+
+    private mounted(): void {
         if (this.focus) {
             this.focusChanged(this.focus);
         }

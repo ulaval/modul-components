@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MNavbarItem should render correctly 1`] = `<li role="menuitem" class="m-navbar-item">navbar item content</li>`;
+
+exports[`MNavbarItem should render correctly when disabled 1`] = `<li role="menuitem" class="m-navbar-item m--is-disabled">navbar item content</li>`;

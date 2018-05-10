@@ -6,7 +6,7 @@
                  :class="[{ 'm--is-disabled':disabled },
                             className ]"
                  ref="dialogWrap"
-                 v-show="propOpen">
+                 v-show="propOpen" v-if="propOpen || preload || loaded">
                 <section class="m-edit-window__article" ref="article">
                     <header>
                         <div class="m-edit-window__header"

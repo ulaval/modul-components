@@ -4,8 +4,10 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import FileDropPlugin from '../../directives/file-drop/file-drop';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
 import { Messages } from '../../utils/i18n/i18n';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { FILE_UPLOAD_NAME } from '../component-names';
@@ -28,6 +30,12 @@ interface MFileExt extends MFile {
 
 let filesizeSymbols: { [name: string]: string } | undefined = undefined;
 
+const defaultDragEvent = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = 'none';
+};
+
 @WithRender
 @Component({
     filters: {
@@ -46,7 +54,10 @@ let filesizeSymbols: { [name: string]: string } | undefined = undefined;
                 symbols: filesizeSymbols
             });
         }
-    }
+    },
+    mixins: [
+        MediaQueries
+    ]
 })
 export class MFileUpload extends ModulVue {
     @Prop()
@@ -55,17 +66,19 @@ export class MFileUpload extends ModulVue {
     public maxSizeKb?: number;
     @Prop()
     public maxFiles?: number;
-
     @Prop({
         default: DEFAULT_STORE_NAME
     })
     public storeName: string;
+    @Prop()
+    public open: boolean;
 
     $refs: {
         dialog: MDialog;
     };
 
     private title: string = this.$i18n.translate('m-file-upload:header-title');
+    private internalOpen: boolean = false;
 
     private created(): void {
         this.$file.setValidationOptions(
@@ -80,6 +93,11 @@ export class MFileUpload extends ModulVue {
 
     private destroyed(): void {
         this.$file.destroy(this.storeName);
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.internalOpen = open;
     }
 
     @Watch('readyFiles')
@@ -140,6 +158,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private onCancelClick(): void {
+        this.propOpen = false;
         this.$refs.dialog.closeDialog();
         this.allFiles
             .filter(f => f.status === MFileStatus.UPLOADING)
@@ -161,10 +180,23 @@ export class MFileUpload extends ModulVue {
 
     private onOpen(): void {
         this.$emit('open');
+        // We need 2 nextTick to be able to have the wrap element in the DOM - MODUL-118
+        Vue.nextTick(() => {
+            Vue.nextTick(() => {
+                ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
+                    this.$refs.dialog.$refs.dialogWrap.addEventListener(evt, defaultDragEvent);
+                });
+            });
+        });
     }
 
     private onClose(): void {
+        this.propOpen = false;
         this.$emit('close');
+        this.onCancelClick();
+        ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
+            this.$refs.dialog.$refs.dialogWrap.removeEventListener(evt, defaultDragEvent);
+        });
     }
 
     private getFileStatus(file): string {
@@ -195,7 +227,7 @@ export class MFileUpload extends ModulVue {
 
     private get isAddBtnEnabled(): boolean {
         return (
-            this.completedFiles.length > 0 && this.uploadingFiles.length === 0
+            this.completedFiles.length > 0 && this.uploadingFilesOnly.length === 0
         );
     }
 
@@ -206,6 +238,14 @@ export class MFileUpload extends ModulVue {
     private get freshlyCompletedFiles(): MFileExt[] {
         return this.allFiles.filter(
             f => f.status === MFileStatus.COMPLETED && !f.completeHinted
+        );
+    }
+
+    private get uploadingFilesOnly(): MFileExt[] {
+        return this.allFiles.filter(
+            f =>
+                f.status === MFileStatus.UPLOADING ||
+                (f.status === MFileStatus.COMPLETED && !f.completeHinted)
         );
     }
 
@@ -243,11 +283,22 @@ export class MFileUpload extends ModulVue {
     private get hasRejectedFiles(): boolean {
         return this.rejectedFiles.length !== 0;
     }
+
+    private get propOpen(): boolean {
+        return this.open ? this.open : this.internalOpen;
+    }
+
+    private set propOpen(value) {
+        if (value != this.internalOpen) {
+            this.internalOpen = value;
+            this.$emit('update:open', value);
+        }
+    }
 }
 
 const FileUploadPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(FILE_UPLOAD_NAME, 'plugin.install');
+        v.prototype.$log.debug(FILE_UPLOAD_NAME, 'plugin.install');
         v.use(FilePlugin);
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);
@@ -259,6 +310,7 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(ButtonPlugin);
         v.use(MessagePlugin);
         v.use(LinkPlugin);
+        v.use(MediaQueriesPlugin);
         v.component(FILE_UPLOAD_NAME, MFileUpload);
     }
 };

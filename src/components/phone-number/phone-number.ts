@@ -4,14 +4,11 @@ import Component from 'vue-class-component';
 import { Prop, Model, Watch } from 'vue-property-decorator';
 import WithRender from './phone-number.html?style=./phone-number.scss';
 import { PHONE_NUMBER_NAME } from '../component-names';
-import i18nPlugin, { curLang } from '../../utils/i18n/i18n';
+import i18nPlugin from '../../utils/i18n/i18n';
 
 @WithRender
 @Component
 export class MPhoneNumber extends ModulVue {
-
-    @Prop({ default: true })
-    public passwordIcon: boolean;
 
     private countryLabel: string = this.$i18n.translate('m-phone-number:label.country');
     private phoneLabel: string = this.$i18n.translate('m-phone-number:label.phone');
@@ -66,7 +63,7 @@ export class MPhoneNumber extends ModulVue {
 
 const PhoneNumberPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(PHONE_NUMBER_NAME + ' is not ready for production');
+        v.prototype.$log.warn(PHONE_NUMBER_NAME + ' is not ready for production');
         v.component(PHONE_NUMBER_NAME, MPhoneNumber);
     }
 };

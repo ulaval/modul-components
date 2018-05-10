@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MBadge should render correctly 1`] = `
+<svg aria-hidden="true" width="100px" height="100px" class="m-icon m-icon-file">
+    <use xlink:href="#m-svg__file-other" aria-hidden="true"></use>
+</svg>
+`;

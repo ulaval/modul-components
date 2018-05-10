@@ -2,8 +2,8 @@ import Vue, { PluginObject } from 'vue';
 
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
-import ButtonGroupPlugin from './button-group/button-group';
 import ButtonPlugin from './button/button';
+import ButtonGroupPlugin from './button-group/button-group';
 import CarouselItemPlugin from './carousel-item/carousel-item';
 import CarouselPlugin from './carousel/carousel';
 import CheckboxPlugin from './checkbox/checkbox';
@@ -15,16 +15,19 @@ import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DropdownPlugin from './dropdown/dropdown';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import EditWindow from './edit-window/edit-window';
+import ErrorMessage from './error-message/error-message';
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
-import IconButtonPlugin from './icon-button/icon-button';
 import IconPlugin from './icon/icon';
+import IconButtonPlugin from './icon-button/icon-button';
+import IconFilePlugin from './icon-file/icon-file';
 import InputStylePlugin from './input-style/input-style';
 import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import ListItemPlugin from './list-item/list-item';
+import LoginPlugin from './login/login';
 import menuItemPlugin from './menu-item/menu-item';
 import menuPlugin from './menu/menu';
 import MessagePlugin from './message/message';
@@ -55,14 +58,17 @@ import TextareaPlugin from './textarea/textarea';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
-import UploadDragdropPlugin from './upload-dragdrop/upload-dragdrop';
-import UploadFileslistPlugin from './upload-fileslist/upload-fileslist';
-import UploadInputPlugin from './upload-input/upload-input';
-import UploadPlugin from './upload/upload';
 import ValidationMessagePlugin from './validation-message/validation-message';
+import InplaceEditPlugin from './inplace-edit/inplace-edit';
+import LoggerPlugin from '../utils/logger/logger';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
+
+        if (!v.prototype.$log) {
+            Vue.use(LoggerPlugin);
+        }
+
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
@@ -78,16 +84,19 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(EditWindow);
+        Vue.use(ErrorMessage);
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
         Vue.use(FlexTemplatePlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);
         Vue.use(IconButtonPlugin);
+        Vue.use(IconFilePlugin);
         Vue.use(InputStylePlugin);
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);
         Vue.use(ListItemPlugin);
+        Vue.use(LoginPlugin);
         Vue.use(MessagePlugin);
         Vue.use(ModalPlugin);
         Vue.use(NavbarPlugin);
@@ -118,11 +127,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
         Vue.use(TooltipPlugin);
-        Vue.use(UploadPlugin);
-        Vue.use(UploadInputPlugin);
-        Vue.use(UploadDragdropPlugin);
-        Vue.use(UploadFileslistPlugin);
         Vue.use(ValidationMessagePlugin);
+        Vue.use(InplaceEditPlugin);
     }
 };
 

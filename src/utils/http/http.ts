@@ -1,29 +1,50 @@
 import { PluginObject } from 'vue';
-import axios, { AxiosRequestConfig, AxiosPromise, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios';
 import qs from 'qs/lib';
 import { RestAdapter, RequestConfig } from './rest';
+import * as strUtils from '../str/str';
+
+const AUTHORIZATION_HEADER: string = 'Authorization';
+
+export interface HttpPluginOptions {
+    protectedUrls: string[];
+    authorizationFn: () => string;
+}
 
 export class HttpService implements RestAdapter {
-    constructor() {
-        // default options needed? should be initialized by the plugin
-        // this.axiosInstance = axios.create({
-        //     baseURL: 'https://some-domain.com/api/',
-        //     timeout: 1000,
-        //     headers: { 'X-Custom-Header': 'foobar' }
-        // });
+    public instance: AxiosInstance;
+
+    constructor(private options?: HttpPluginOptions) {
+        this.instance = axios.create({
+            timeout: 30000 // TODO configure from plugin options
+        });
+
+        if (this.options) {
+            let opt: HttpPluginOptions = this.options;
+            this.instance.interceptors.request.use(config => {
+                opt.protectedUrls.every(url => {
+                    if (strUtils.startsWith(config.url, url)) {
+                        let token: string = opt.authorizationFn();
+                        config.headers = Object.assign({
+                            [AUTHORIZATION_HEADER]: token
+                        });
+                        return false;
+                    }
+                    return true;
+                });
+                return config;
+            });
+        }
     }
 
-    public execute<T>(
-        config: RequestConfig,
-        axiosOptions?: AxiosRequestConfig
-    ): Promise<AxiosResponse<T>> {
+    public execute<T>(config: RequestConfig, axiosOptions?: AxiosRequestConfig): AxiosPromise<T> {
         let mergedConfig: AxiosRequestConfig = this.buildConfig(config);
         mergedConfig = {
             ...mergedConfig,
             ...axiosOptions
         };
 
-        return axios.request<T>(mergedConfig);
+        return this.instance.request<T>(mergedConfig);
     }
 
     private buildConfig(config: RequestConfig): AxiosRequestConfig {
@@ -71,7 +92,7 @@ export class HttpService implements RestAdapter {
 
 const HttpPlugin: PluginObject<any> = {
     install(v, options): void {
-        let http = new HttpService();
+        let http = new HttpService(options);
         (v.prototype as any).$http = http;
     }
 };

@@ -77,7 +77,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
 const RadioGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(RADIO_GROUP_NAME, 'plugin.install');
+        v.prototype.$log.debug(RADIO_GROUP_NAME, 'plugin.install');
         v.use(RadioPlugin);
         v.use(ValidationMessagePlugin);
         v.component(RADIO_GROUP_NAME, MRadioGroup);
