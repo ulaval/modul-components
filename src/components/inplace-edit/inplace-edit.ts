@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
 
+import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
@@ -14,7 +15,7 @@ export type SaveFn = () => Promise<void>;
 
 @WithRender
 @Component({
-    mixins: [MediaQueries]
+    mixins: [MediaQueries, ElementQueries]
 })
 export class MInplaceEdit extends ModulVue {
 
@@ -35,6 +36,8 @@ export class MInplaceEdit extends ModulVue {
     private internalEditMode: boolean = false;
     private internalError: boolean = false;
     private submitted: boolean = false;
+    private isInitMobile: boolean;
+    private isInitTable: boolean;
 
     public get isError(): boolean {
         return this.error ? this.error : this.internalError;
@@ -65,6 +68,12 @@ export class MInplaceEdit extends ModulVue {
         this.internalError = value;
     }
 
+    private mounted(): void {
+        this.isInitMobile = this.as<MediaQueries>().isMqMaxS;
+        this.isInitTable = this.as<MediaQueries>().isMqMinS;
+        this.as<ElementQueries>().$on('resizeDone', this.resetEditMode);
+    }
+
     private onClick(event: MouseEvent): void {
         this.$emit('click', event);
     }
@@ -89,6 +98,17 @@ export class MInplaceEdit extends ModulVue {
             }).then(() => this.submitted = false);
         } else {
             this.$log.warn('No save function provided (save-fn prop is undefined)');
+        }
+    }
+
+    private resetEditMode(): void {
+        if (this.isInitMobile && this.as<MediaQueries>().isMqMinS && this.propEditMode) {
+            this.isInitMobile = false;
+            this.isInitTable = true;
+        } else if (this.isInitTable && this.as<MediaQueries>().isMqMaxS && this.propEditMode) {
+            this.isInitMobile = true;
+            this.isInitTable = false;
+            this.propEditMode = false;
         }
     }
 }
