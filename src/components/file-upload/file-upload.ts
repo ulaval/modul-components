@@ -4,8 +4,10 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import FileDropPlugin from '../../directives/file-drop/file-drop';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
 import { Messages } from '../../utils/i18n/i18n';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { FILE_UPLOAD_NAME } from '../component-names';
@@ -18,8 +20,6 @@ import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 
@@ -29,6 +29,12 @@ interface MFileExt extends MFile {
 }
 
 let filesizeSymbols: { [name: string]: string } | undefined = undefined;
+
+const defaultDragEvent = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = 'none';
+};
 
 @WithRender
 @Component({
@@ -174,11 +180,23 @@ export class MFileUpload extends ModulVue {
 
     private onOpen(): void {
         this.$emit('open');
+        // We need 2 nextTick to be able to have the wrap element in the DOM - MODUL-118
+        Vue.nextTick(() => {
+            Vue.nextTick(() => {
+                ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
+                    this.$refs.dialog.$refs.dialogWrap.addEventListener(evt, defaultDragEvent);
+                });
+            });
+        });
     }
 
     private onClose(): void {
         this.propOpen = false;
         this.$emit('close');
+        this.onCancelClick();
+        ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
+            this.$refs.dialog.$refs.dialogWrap.removeEventListener(evt, defaultDragEvent);
+        });
     }
 
     private getFileStatus(file): string {
@@ -209,7 +227,7 @@ export class MFileUpload extends ModulVue {
 
     private get isAddBtnEnabled(): boolean {
         return (
-            this.completedFiles.length > 0 && this.uploadingFiles.length === 0
+            this.completedFiles.length > 0 && this.uploadingFilesOnly.length === 0
         );
     }
 
@@ -220,6 +238,14 @@ export class MFileUpload extends ModulVue {
     private get freshlyCompletedFiles(): MFileExt[] {
         return this.allFiles.filter(
             f => f.status === MFileStatus.COMPLETED && !f.completeHinted
+        );
+    }
+
+    private get uploadingFilesOnly(): MFileExt[] {
+        return this.allFiles.filter(
+            f =>
+                f.status === MFileStatus.UPLOADING ||
+                (f.status === MFileStatus.COMPLETED && !f.completeHinted)
         );
     }
 
@@ -263,7 +289,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private set propOpen(value) {
-        if (value != this.internalOpen) {
+        if (value !== this.internalOpen) {
             this.internalOpen = value;
             this.$emit('update:open', value);
         }
@@ -272,7 +298,7 @@ export class MFileUpload extends ModulVue {
 
 const FileUploadPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(FILE_UPLOAD_NAME, 'plugin.install');
+        v.prototype.$log.debug(FILE_UPLOAD_NAME, 'plugin.install');
         v.use(FilePlugin);
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);

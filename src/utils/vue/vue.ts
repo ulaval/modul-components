@@ -7,8 +7,9 @@ import { MediaQueries } from '../media-queries/media-queries';
 import { Modul } from '../modul/modul';
 import { ConfirmFunction } from '../modal/confirm';
 import { AlertFunction } from '../modal/alert';
+import { Logger } from '../logger/logger';
 
-console.debug('TODO: explore usage of TS declare syntax');
+// TODO: explore usage of TS declare syntax
 // declare module 'vue/types/vue' {
 //     interface Vue {
 //         $i18n: Messages;
@@ -24,6 +25,7 @@ export class ModulVue extends Vue {
     public $confirm: ConfirmFunction;
     public $alert: AlertFunction;
     public $file: FileService;
+    public $log: Logger;
 
     protected getParent<T extends Vue>(test: (obj: Vue) => boolean): T | undefined {
         let p: Vue = this.$parent;

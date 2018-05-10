@@ -1,10 +1,11 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './steppers-item.html?style=./steppers-item.scss';
+
+import { ModulVue } from '../../utils/vue/vue';
 import { STEPPERS_ITEM_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
+import WithRender from './steppers-item.html?style=./steppers-item.scss';
 
 export enum MSteppersItemState {
     Completed = 'completed',
@@ -23,9 +24,9 @@ export class MSteppersItem extends ModulVue {
     @Prop({
         default: MSteppersItemState.Disabled,
         validator: value =>
-            value == MSteppersItemState.Completed ||
-            value == MSteppersItemState.InProgress ||
-            value == MSteppersItemState.Disabled
+            value === MSteppersItemState.Completed ||
+            value === MSteppersItemState.InProgress ||
+            value === MSteppersItemState.Disabled
     })
     public state: MSteppersItemState;
     @Prop()
@@ -60,7 +61,7 @@ export class MSteppersItem extends ModulVue {
     }
 
     private onClick(event: Event): void {
-        if (this.state == MSteppersItemState.Completed) {
+        if (this.state === MSteppersItemState.Completed) {
             this.$emit('click', event);
             (this.$refs.title as HTMLElement).blur();
         }

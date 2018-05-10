@@ -51,6 +51,17 @@ describe('i18n plugin', () => {
         });
     });
 
+    describe('without setting formatOption', () => {
+        beforeEach(() => {
+            resetModulPlugins();
+            Vue.use(I18nPlugin);
+            addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
+        });
+        it(`calling translate with params modifier should return the string with the params applied`, () => {
+            expect(Vue.prototype.$i18n.translate('exemples_avec_parametres:decompte_athletes_olympiques_pays_default_formatting', ['2925', '93'])).toEqual('Il y a 2925 athlètes olympiques et 93 pays participants.');
+        });
+    });
+
     describe('with formatOption = "vsprintf"', () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {

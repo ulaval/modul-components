@@ -1,8 +1,7 @@
-import { ModulVue } from '../../utils/vue/vue';
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { KeyCode } from '../../utils/keycode/keycode';
+
+import { ModulVue } from '../../utils/vue/vue';
 
 export enum InputMaxWidth {
     None = 'none',
@@ -49,6 +48,6 @@ export class InputWidth extends ModulVue {
     }
 
     public get inputWidth(): string | undefined {
-        return this.width == 'none' ? undefined : this.width;
+        return this.width === 'none' ? undefined : this.width;
     }
 }

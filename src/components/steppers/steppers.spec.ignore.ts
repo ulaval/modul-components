@@ -33,7 +33,7 @@ describe('MSteppers', () => {
     //     let defaultLine: Element | null = vm.$el.querySelector('.m-steppers__default-line');
     //     expect(defaultLine).toBeTruthy();
     //     if (defaultLine) {
-    //         console.log(defaultLine.getAttribute('left'));
+    //         Vue.prototype.$log.log(defaultLine.getAttribute('left'));
 
     //         expect(defaultLine.clientWidth).toBeGreaterThan(0);
     //         // if (textSlot.textContent) {
@@ -56,9 +56,9 @@ describe('MSteppers', () => {
 
     //     if (selectedLine) {
     //         Vue.nextTick(() => {
-    //             console.log(vm.$el.style.width);
-    //             // console.log(selectedLine.clientWidth);
-    //             // console.log(vm.$el.style.width);
+    //             Vue.prototype.$log.log(vm.$el.style.width);
+    //             // Vue.prototype.$log.log(selectedLine.clientWidth);
+    //             // Vue.prototype.$log.log(vm.$el.style.width);
 
     //             expect(selectedLine.getAttribute('width')).toBeGreaterThan(0);
     //             // if (textSlot.textContent) {

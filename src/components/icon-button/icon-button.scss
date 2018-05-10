@@ -8,6 +8,7 @@
     justify-content: center;
     vertical-align: middle;
     border-radius: 50%;
+    padding: 0;
 
     &:active,
     &:focus {
@@ -51,7 +52,7 @@
         }
 
         &.m--is-skin-dark {
-            color: rgba($m-color--white, 0.6);
+            color: $m-color--grey-light;
 
             &:hover {
                 color: $m-color--white;
@@ -124,7 +125,6 @@
     &.m--is-skin-link,
     &.m--is-skin-dark {
         transition: color $m-transition-duration ease;
-        padding: 0;
         cursor: pointer;
         border: none;
         background: transparent;
