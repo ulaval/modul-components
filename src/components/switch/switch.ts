@@ -1,12 +1,13 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model, Watch } from 'vue-property-decorator';
-import WithRender from './switch.html?style=./switch.scss';
-import { SWITCH_NAME } from '../component-names';
+import { Model, Prop, Watch } from 'vue-property-decorator';
+
+import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { ModulVue } from '../../utils/vue/vue';
+import { SWITCH_NAME } from '../component-names';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import WithRender from './switch.html?style=./switch.scss';
 
 export enum MSwitchPosition {
     Left = 'left',
@@ -25,8 +26,8 @@ export class MSwitch extends ModulVue {
     @Prop({
         default: MSwitchPosition.Left,
         validator: value =>
-            value == MSwitchPosition.Left ||
-            value == MSwitchPosition.Right
+            value === MSwitchPosition.Left ||
+            value === MSwitchPosition.Right
     })
     public position: string;
     @Prop({ default: true })
@@ -42,7 +43,7 @@ export class MSwitch extends ModulVue {
     }
 
     private get propChecked(): boolean {
-        return this.value != undefined ? this.value : this.internalValue;
+        return this.value !== undefined ? this.value : this.internalValue;
     }
 
     private set propChecked(value: boolean) {
@@ -56,7 +57,7 @@ export class MSwitch extends ModulVue {
     }
 
     public get hasSwitchLeft(): boolean {
-        return ((this.position == MSwitchPosition.Right) ? false : true);
+        return ((this.position === MSwitchPosition.Right) ? false : true);
     }
 
     public get label(): boolean {

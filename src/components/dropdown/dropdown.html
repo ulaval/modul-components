@@ -29,7 +29,7 @@
                @keydown.tab="onKeydownTab"
                @focus="inputOnFocus"
                v-model="selectedText">
-        <template slot="adjust-width-auto" v-if="width == 'auto'">{{ selectedText }}</template>
+        <template slot="adjust-width-auto" v-if="width === 'auto'">{{ selectedText }}</template>
         <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="active">
             <m-icon class="m-dropdown__arrow__icon" ref="arrow" name="down-arrow" button-size="18px" icon-size="16px" :disabled="!active" @keydown.enter.prevent="open = active">
                 <m-i18n k="m-dropdown:open" v-if="!open"></m-i18n>

@@ -21,7 +21,7 @@ export class MFileSelect extends ModulVue {
     @Prop({
         default: MButtonSkin.Secondary,
         validator: value =>
-            value == MButtonSkin.Primary || value == MButtonSkin.Secondary
+            value === MButtonSkin.Primary || value === MButtonSkin.Secondary
     })
     public skin: MButtonSkin;
     @Prop()
@@ -35,8 +35,8 @@ export class MFileSelect extends ModulVue {
     @Prop({
         default: MButtonIconPosition.Left,
         validator: value =>
-            value == MButtonIconPosition.Left ||
-            value == MButtonIconPosition.Right
+            value === MButtonIconPosition.Left ||
+            value === MButtonIconPosition.Right
     })
     public iconPosition: MButtonIconPosition;
     @Prop({ default: '12px' })

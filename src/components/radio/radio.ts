@@ -1,13 +1,14 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
-import WithRender from './radio.html?style=./radio.scss';
+import { Model, Prop } from 'vue-property-decorator';
+
+import { InputState } from '../../mixins/input-state/input-state';
+import uuid from '../../utils/uuid/uuid';
+import { ModulVue } from '../../utils/vue/vue';
 import { RADIO_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
-import uuid from '../../utils/uuid/uuid';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import WithRender from './radio.html?style=./radio.scss';
 
 export enum MRadioPosition {
     Left = 'left',
@@ -51,8 +52,8 @@ export class MRadio extends ModulVue {
     @Prop({
         default: MRadioPosition.Left,
         validator: value =>
-            value == MRadioPosition.Left ||
-            value == MRadioPosition.Right
+            value === MRadioPosition.Left ||
+            value === MRadioPosition.Right
     })
     public position: MRadioPosition;
     @Prop()
@@ -64,8 +65,8 @@ export class MRadio extends ModulVue {
     @Prop({
         default: MRadioPosition.Left,
         validator: value =>
-            value == MRadioPosition.Left ||
-            value == MRadioPosition.Right
+            value === MRadioPosition.Left ||
+            value === MRadioPosition.Right
     })
     public iconPosition: MRadioPosition;
 
@@ -126,7 +127,7 @@ export class MRadio extends ModulVue {
             let parentGroup: BaseRadioGroup | undefined;
             parentGroup = this.getParent<BaseRadioGroup>(
                 p => p instanceof BaseRadioGroup || p instanceof BaseButtonGroup || // these will fail with Jest, but should pass in prod mode
-                    p.$options.name == 'MRadioGroup' || p.$options.name == 'MButtonGroup' // these are necessary for Jest, but the first two should pass in prod mode
+                    p.$options.name === 'MRadioGroup' || p.$options.name === 'MButtonGroup' // these are necessary for Jest, but the first two should pass in prod mode
             );
             if (parentGroup) {
                 this.parentGroup = (parentGroup as any) as RadioGroup;
@@ -155,7 +156,7 @@ export class MRadio extends ModulVue {
     }
 
     private hasIconLeft(): boolean {
-        return this.iconPosition == MRadioPosition.Left;
+        return this.iconPosition === MRadioPosition.Left;
     }
 }
 

@@ -63,18 +63,18 @@ export class MAccordion extends Vue implements AccordionGateway {
     @Prop({
         default: MAccordionSkin.Default,
         validator: value =>
-            value == MAccordionSkin.Default ||
-            value == MAccordionSkin.Dark ||
-            value == MAccordionSkin.Light ||
-            value == MAccordionSkin.Plain
+            value === MAccordionSkin.Default ||
+            value === MAccordionSkin.Dark ||
+            value === MAccordionSkin.Light ||
+            value === MAccordionSkin.Plain
     })
     public skin: MAccordionSkin;
 
     @Prop({
         default: MAccordionIconPosition.Left,
         validator: value =>
-            value == MAccordionIconPosition.Left ||
-            value == MAccordionIconPosition.Right
+            value === MAccordionIconPosition.Left ||
+            value === MAccordionIconPosition.Right
     })
     public iconPosition?: MAccordionIconPosition;
 
@@ -84,8 +84,8 @@ export class MAccordion extends Vue implements AccordionGateway {
     @Prop({
         default: MAccordionIconSize.Large,
         validator: value =>
-            value == MAccordionIconSize.Small ||
-            value == MAccordionIconSize.Large
+            value === MAccordionIconSize.Small ||
+            value === MAccordionIconSize.Large
     })
     public iconSize?: MAccordionIconSize;
 
@@ -112,7 +112,7 @@ export class MAccordion extends Vue implements AccordionGateway {
     }
 
     public set propOpen(value) {
-        if (value != this.internalPropOpen) {
+        if (value !== this.internalPropOpen) {
             this.internalPropOpen = value;
             this.$emit('update:open', value);
         }
@@ -146,7 +146,7 @@ export class MAccordion extends Vue implements AccordionGateway {
             return this.iconBorder;
         }
 
-        return this.propSkin == MAccordionSkin.Light ? true : false;
+        return this.propSkin === MAccordionSkin.Light ? true : false;
     }
 
     private toggleAccordion(): void {

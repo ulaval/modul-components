@@ -1,9 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './icon-button.html?style=./icon-button.scss';
-import { ICON_BUTTON_NAME, ICON_NAME } from '../component-names';
+
+import { ICON_BUTTON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
+import WithRender from './icon-button.html?style=./icon-button.scss';
 
 export enum MIconButtonSkin {
     Light = 'light',
@@ -19,11 +20,11 @@ export class MIconButton extends Vue {
     @Prop({
         default: MIconButtonSkin.Light,
         validator: value =>
-            value == MIconButtonSkin.Light ||
-            value == MIconButtonSkin.Dark ||
-            value == MIconButtonSkin.Primary ||
-            value == MIconButtonSkin.Secondary ||
-            value == MIconButtonSkin.Link
+            value === MIconButtonSkin.Light ||
+            value === MIconButtonSkin.Dark ||
+            value === MIconButtonSkin.Primary ||
+            value === MIconButtonSkin.Secondary ||
+            value === MIconButtonSkin.Link
     })
     public skin: MIconButtonSkin;
     @Prop()
@@ -57,23 +58,23 @@ export class MIconButton extends Vue {
     }
 
     private get isSkinLight(): boolean {
-        return this.skin == MIconButtonSkin.Light;
+        return this.skin === MIconButtonSkin.Light;
     }
 
     private get isSkinDark(): boolean {
-        return this.skin == MIconButtonSkin.Dark;
+        return this.skin === MIconButtonSkin.Dark;
     }
 
     private get isSkinPrimary(): boolean {
-        return this.skin == MIconButtonSkin.Primary;
+        return this.skin === MIconButtonSkin.Primary;
     }
 
     private get isSkinSecondary(): boolean {
-        return this.skin == MIconButtonSkin.Secondary;
+        return this.skin === MIconButtonSkin.Secondary;
     }
 
     private get isSkinLink(): boolean {
-        return this.skin == MIconButtonSkin.Link;
+        return this.skin === MIconButtonSkin.Link;
     }
 
     private hasSlots(): boolean {

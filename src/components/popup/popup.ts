@@ -1,13 +1,14 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './popup.html?style=./popup.scss';
-import { POPUP_NAME } from '../component-names';
-import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import PopperPlugin, { MPopperPlacement, MPopper } from '../popper/popper';
+
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
+import { ModulVue } from '../../utils/vue/vue';
+import { POPUP_NAME } from '../component-names';
+import PopperPlugin, { MPopper, MPopperPlacement } from '../popper/popper';
 import SidebarPlugin from '../sidebar/sidebar';
+import WithRender from './popup.html?style=./popup.scss';
 
 @WithRender
 @Component({
@@ -83,7 +84,7 @@ export class MPopup extends ModulVue {
     }
 
     private get propOpen(): boolean {
-        return this.open == undefined ? this.internalOpen : this.open;
+        return this.open === undefined ? this.internalOpen : this.open;
     }
 
     private set propOpen(value: boolean) {

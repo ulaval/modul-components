@@ -1,7 +1,7 @@
-import { PluginObject, DirectiveOptions, VNodeDirective, VNode } from 'vue';
-import ScrollTo, { ScrollToDuration } from './scroll-to-lib';
+import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
+
 import { SCROLL_TO_NAME } from '../directive-names';
-import { log } from 'util';
+import ScrollTo, { ScrollToDuration } from './scroll-to-lib';
 
 const MOUSE_DOWN_MODIFIER: string = 'ripple-effect_mouse-down';
 
@@ -15,7 +15,7 @@ const MScrollTo: DirectiveOptions = {
             node.context.$nextTick(() => {
                 if (node.context && element) {
                     binding.listener = (event: MouseEvent) => {
-                        let target: HTMLElement = node.context != undefined && node.context.$refs[binding.arg] ? node.context.$refs[binding.arg] as HTMLElement : document.body;
+                        let target: HTMLElement = node.context !== undefined && node.context.$refs[binding.arg] ? node.context.$refs[binding.arg] as HTMLElement : document.body;
                         let duration: string;
                         switch (binding.value) {
                             case ScrollToDuration.Null:

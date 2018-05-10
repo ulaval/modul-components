@@ -1,14 +1,15 @@
-import { ModulVue } from '../../utils/vue/vue';
+import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import uuid from '../../utils/uuid/uuid';
-import WithRender from './spinner.html?style=./spinner.scss';
-import { SPINNER_NAME } from '../component-names';
-import PortalPlugin from 'portal-vue';
-import ModulPlugin from '../../utils/modul/modul';
+
 import { BackdropMode } from '../../mixins/portal/portal';
+import ModulPlugin from '../../utils/modul/modul';
+import uuid from '../../utils/uuid/uuid';
+import { ModulVue } from '../../utils/vue/vue';
+import { SPINNER_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
+import WithRender from './spinner.html?style=./spinner.scss';
 
 export enum MSpinnerStyle {
     Dark = 'dark',
@@ -43,18 +44,18 @@ export class MSpinner extends ModulVue {
     @Prop({
         default: MSpinnerStyle.Regular,
         validator: value =>
-            value == MSpinnerStyle.Dark ||
-            value == MSpinnerStyle.Light ||
-            value == MSpinnerStyle.Lighter ||
-            value == MSpinnerStyle.Regular
+            value === MSpinnerStyle.Dark ||
+            value === MSpinnerStyle.Light ||
+            value === MSpinnerStyle.Lighter ||
+            value === MSpinnerStyle.Regular
     })
     public skin: MSpinnerStyle;
 
     @Prop({
         default: MSpinnerSize.Large,
         validator: value =>
-            value == MSpinnerSize.Large ||
-            value == MSpinnerSize.Small
+            value === MSpinnerSize.Large ||
+            value === MSpinnerSize.Small
     })
     public size: MSpinnerSize;
 
@@ -122,11 +123,11 @@ export class MSpinner extends ModulVue {
     }
 
     private get hasTitleMessage(): boolean {
-        return this.titleMessage != '' && this.titleMessage != undefined;
+        return this.titleMessage !== '' && this.titleMessage !== undefined;
     }
 
     private get hasDescriptionMessage(): boolean {
-        return this.descriptionMessage != '' && this.descriptionMessage != undefined;
+        return this.descriptionMessage !== '' && this.descriptionMessage !== undefined;
     }
 
     private get hasTitle(): boolean {
