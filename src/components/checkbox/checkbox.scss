@@ -225,6 +225,10 @@ $m-checkbox--width: 16px;
         color: $m-color--text;
     }
 
+    &__message {
+        margin-top: $m-margin--xs;
+    }
+
     &__hidden {
         @include m-visually-hidden;
     }
