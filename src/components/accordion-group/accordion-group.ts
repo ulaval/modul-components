@@ -14,9 +14,9 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     @Prop({
         default: MAccordionSkin.Default,
         validator: value =>
-            value == MAccordionSkin.Default ||
-            value == MAccordionSkin.Light ||
-            value == MAccordionSkin.Plain
+            value === MAccordionSkin.Default ||
+            value === MAccordionSkin.Light ||
+            value === MAccordionSkin.Plain
     })
     public skin: MAccordionSkin;
 
@@ -77,7 +77,7 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     }
 
     private get propSkin(): MAccordionSkin {
-        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Plain || this.skin == MAccordionSkin.Default ? this.skin : MAccordionSkin.Default;
+        return this.skin === MAccordionSkin.Light || this.skin === MAccordionSkin.Plain || this.skin === MAccordionSkin.Default ? this.skin : MAccordionSkin.Default;
     }
 
     private get hasTitleSlot(): boolean {

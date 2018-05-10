@@ -12,7 +12,7 @@ export class MI18n extends ModulVue {
     @Prop()
     public k: string;
     @Prop({ default: () => [] })
-    public params: any[];
+    public params: any;
     @Prop()
     public nb?: number;
     @Prop()
@@ -44,7 +44,7 @@ export class MI18n extends ModulVue {
 
 const I18nPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(I18N_NAME, 'plugin.install');
+        v.prototype.$log.debug(I18N_NAME, 'plugin.install');
         v.component(I18N_NAME, MI18n);
     }
 };

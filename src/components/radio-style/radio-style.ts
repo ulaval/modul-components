@@ -1,9 +1,10 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './radio-style.html?style=./radio-style.scss';
+
+import { ModulVue } from '../../utils/vue/vue';
 import { RADIO_STYLE_NAME } from '../component-names';
+import WithRender from './radio-style.html?style=./radio-style.scss';
 
 export enum MRadioStylePosition {
     Left = 'left',
@@ -26,8 +27,8 @@ export class MRadioStyle extends ModulVue {
     @Prop({
         default: MRadioStylePosition.Right,
         validator: value =>
-            value == MRadioStylePosition.Left ||
-            value == MRadioStylePosition.Right
+            value === MRadioStylePosition.Left ||
+            value === MRadioStylePosition.Right
     })
     public position: MRadioStylePosition;
     @Prop({ default: '1em' })
@@ -42,7 +43,7 @@ export class MRadioStyle extends ModulVue {
     public fullWidth: boolean;
 
     private get isInputRight(): boolean {
-        return this.position == MRadioStylePosition.Right;
+        return this.position === MRadioStylePosition.Right;
     }
 
     private onClick(event: MouseEvent): void {

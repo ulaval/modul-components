@@ -23,6 +23,18 @@ describe('MIconFile', () => {
         return expect(renderComponent(iconFile.vm)).resolves.toMatchSnapshot();
     });
 
+    it('should render correctly with 100px size', () => {
+        const iconFile = mount(MIconFile, {
+            localVue: localVue,
+            propsData: {
+                extension: 'pdf',
+                size: '100px'
+            }
+        });
+
+        return expect(renderComponent(iconFile.vm)).resolves.toMatchSnapshot();
+    });
+
     it('should render title when svgTitle prop is set', () => {
         const iconFile = mount(MIconFile, {
             localVue: localVue,

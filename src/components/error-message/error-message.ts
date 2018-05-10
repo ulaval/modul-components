@@ -40,7 +40,7 @@ export class MErrorMessage extends Vue {
 
 const ErrorMessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(ERROR_MESSAGE_NAME, 'plugin.install');
+        v.prototype.$log.debug(ERROR_MESSAGE_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);

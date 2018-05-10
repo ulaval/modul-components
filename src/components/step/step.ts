@@ -1,13 +1,14 @@
-import { ModulVue } from '../../utils/vue/vue';
+import ElementQueries from 'css-element-queries/src/ElementQueries';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './step.html?style=./step.scss';
-import { STEP_NAME } from '../component-names';
+
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
-import ElementQueries from 'css-element-queries/src/ElementQueries';
+import { ModulVue } from '../../utils/vue/vue';
+import { STEP_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
+import WithRender from './step.html?style=./step.scss';
 
 export enum MStepState {
     Locked = 'locked',
@@ -61,7 +62,7 @@ export class MStep extends ModulVue {
     }
 
     private openStep(event): void {
-        if (this.propMode == MStepMode.Accordion) {
+        if (this.propMode === MStepMode.Accordion) {
             this.as<TransitionAccordionMixin>().accordionAnim = true;
             this.propOpen = !this.propOpen;
             this.$emit('open');
@@ -102,14 +103,14 @@ export class MStep extends ModulVue {
     }
 
     private set propOpen(open: boolean) {
-        this.internalOpen = open != undefined ? open : false;
+        this.internalOpen = open !== undefined ? open : false;
         if (this.internalOpen) {
             this.$emit('open');
         } else {
             this.$emit('close');
         }
         let refHeader: HTMLElement = this.$refs.header as HTMLElement;
-        if (this.propMode == MStepMode.Accordion) {
+        if (this.propMode === MStepMode.Accordion) {
             if (!refHeader.hasAttribute('tabindex')) {
                 refHeader.setAttribute('tabindex', '0');
             }
@@ -127,7 +128,7 @@ export class MStep extends ModulVue {
     }
 
     private get propMode(): MStepMode {
-        return this.mode == MStepMode.Accordion ? this.mode : MStepMode.Default;
+        return this.mode === MStepMode.Accordion ? this.mode : MStepMode.Default;
     }
 }
 

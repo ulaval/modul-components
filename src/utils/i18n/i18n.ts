@@ -1,5 +1,6 @@
 import Vue, { PluginObject } from 'vue';
-import { vsprintf, sprintf } from '../str/str';
+
+import { sprintf, vsprintf } from '../str/str';
 
 /**
  * This package provides language and locales utilities.
@@ -103,7 +104,7 @@ export class Messages {
      */
     public translate(
         key: string,
-        params: any[] = [],
+        params: any = [],
         nb?: number,
         modifier?: string,
         htmlEncodeParams: boolean = true
@@ -130,7 +131,7 @@ export class Messages {
      * @param {string} val the string to format
      * @param {any[]} params the values to insert in string
      */
-    private format(val: string, params: any[]): string {
+    private format(val: string, params: any): string {
         switch (this.formatMode) {
             case FormatMode.Vsprintf:
                 return vsprintf(val, params);
@@ -207,9 +208,9 @@ export class Messages {
             throw new Error(error);
         } else {
             if (!this.options || this.options.debug === DebugMode.Warn) {
-                console.warn(error);
+                Vue.prototype.$log.warn(error);
             } else {
-                console.debug(error);
+                Vue.prototype.$log.debug(error);
             }
             return key;
         }
@@ -224,15 +225,15 @@ export class Messages {
     private findKey(lang: string, key: string): string | undefined {
         const parts = key.split(':');
 
-        if (parts.length != 2) {
+        if (parts.length !== 2) {
             let error: string = `The key ${key} is invalid. The key needs to be in the format <bundle>:<id>`;
             if (this.options && this.options.debug === DebugMode.Throw) {
                 throw new Error(error);
             } else {
                 if (!this.options || this.options.debug === DebugMode.Warn) {
-                    console.warn(error);
+                    Vue.prototype.$log.warn(error);
                 } else {
-                    console.debug(error);
+                    Vue.prototype.$log.debug(error);
                 }
                 return undefined;
             }
@@ -252,13 +253,13 @@ export class Messages {
  *
  * The format is 'This is a {0} containing {1}...'
  */
-function formatRegexp(val: string, params: any[]): string {
+function formatRegexp(val: string, params: string[]): string {
     return val.replace(FORMAT_REGEX, match => {
         // TODO: should use the regex variable notation instead of parsing the regex match
         let index = parseInt(match.substring(1, match.length - 1), 10);
 
         if (index >= params.length) {
-            console.warn(
+            Vue.prototype.$log.warn(
                 `The parameter ${index} doesn't exist while translating: '${val}'`
             );
         }
@@ -282,7 +283,7 @@ function htmlEncode(val: string): string {
 
 const MessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug('$i18n', 'plugin.install');
+        v.prototype.$log.debug('$i18n', 'plugin.install');
 
         let msg: Messages = new Messages(options);
         (v.prototype as any).$i18n = msg;

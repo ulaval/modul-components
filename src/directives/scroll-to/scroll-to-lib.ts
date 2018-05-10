@@ -63,7 +63,7 @@ export class ScrollTo {
 
             // This is like a think function from a game loop
             let scrollFrame = () => {
-                if (window.pageYOffset != previousTop) {
+                if (window.pageYOffset !== previousTop) {
                     resolve();
                     return;
                 }

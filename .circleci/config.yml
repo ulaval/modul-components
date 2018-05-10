@@ -27,7 +27,7 @@ jobs:
 
       - run:
           name: build
-          command: npm run buildWebpack
+          command: npm run clean && npm run buildWebpack
 
       - run:
           name: npm test

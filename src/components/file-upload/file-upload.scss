@@ -4,6 +4,8 @@ $m-file-upload-max-height: 120px;
 $m-file-upload-max-height--s: 72px;
 
 .m-file-upload {
+    @include m-box-padding();
+
     &__error-message {
         margin-bottom: $m-margin--l;
 
@@ -131,7 +133,6 @@ $m-file-upload-max-height--s: 72px;
             flex: 1 1 auto;
             align-items: center;
             margin-bottom: $m-margin;
-            overflow: hidden;
         }
 
         &__file-icon {
@@ -229,7 +230,6 @@ $m-file-upload-max-height--s: 72px;
             flex: 1 1 auto;
             align-items: center;
             margin-bottom: $m-margin;
-            overflow: hidden;
         }
 
         &__file-icon {
