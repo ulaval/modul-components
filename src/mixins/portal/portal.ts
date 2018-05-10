@@ -5,7 +5,7 @@ import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/medi
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../open-trigger/open-trigger';
-import { isLeftClick } from './../../utils/mouse/mouse';
+import { MouseButtons } from './../../utils/mouse/mouse';
 
 export interface PortalMixin {
     propOpen: boolean;
@@ -229,7 +229,8 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     private toggle(event: MouseEvent): void {
-        if (this.openTrigger !== MOpenTrigger.Click || (this.openTrigger === MOpenTrigger.Click && isLeftClick(event))) {
+        if (this.openTrigger !== MOpenTrigger.Click ||
+                (this.openTrigger === MOpenTrigger.Click && event.button !== undefined && event.button === MouseButtons.LEFT)) {
             this.propOpen = !this.propOpen;
         }
     }
