@@ -25,7 +25,8 @@ exports[`MButton icon should render correctly when size is set 1`] = `
 exports[`MButton should render correctly 1`] = `<button type="button" class="m-button m--is-skin-primary"> <span class="m-button__text"> </span> </button>`;
 
 exports[`MButton should render correctly precision content 1`] = `
-<button type="button" class="m-button m--is-skin-primary"> <span class="m-button__text"> <span class="m-button__precision">precision</span></span>
+<button type="button" class="m-button m--is-skin-primary"> <span class="m-button__text"> <span class="m-button__precision">precision
+        </span></span>
 </button>
 `;
 

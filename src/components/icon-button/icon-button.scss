@@ -8,19 +8,20 @@
     justify-content: center;
     vertical-align: middle;
     border-radius: 50%;
+    padding: 0;
 
     &:active,
     &:focus {
         outline: none;
     }
 
-    &.m--has-ripple {
-        &::before {
-            content: '';
-        }
-    }
-
     &:not(.m--is-disabled) {
+        &.m--has-ripple {
+            &::before {
+                content: '';
+            }
+        }
+
         &.m--is-skin-light,
         &.m--is-skin-link,
         &.m--is-skin-dark {
@@ -58,7 +59,7 @@
             }
 
             &::before {
-                background: $m-color--grey-dark;
+                background: $m-color--grey-darker;
             }
         }
 
@@ -124,7 +125,6 @@
     &.m--is-skin-link,
     &.m--is-skin-dark {
         transition: color $m-transition-duration ease;
-        padding: 0;
         cursor: pointer;
         border: none;
         background: transparent;

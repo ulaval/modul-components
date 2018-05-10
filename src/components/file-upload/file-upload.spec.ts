@@ -7,12 +7,13 @@ import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
 import I18nPlugin from '../../components/i18n/i18n';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileStatus } from '../../utils/file/file';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import IconButtonPlugin from '../icon-button/icon-button';
 import MessagePlugin from '../message/message';
+import { MBadgeState } from './../../directives/badge/badge';
 import FileUploadPlugin, { MFileUpload } from './file-upload';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 describe('MFileUpload', () => {
     beforeEach(() => {
@@ -42,6 +43,14 @@ describe('MFileUpload', () => {
         });
 
         return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should completed file status match badge status', () => {
+        return expect(MFileStatus.COMPLETED).toEqual(MBadgeState.Completed);
+    });
+
+    it('should  failed file status match badge status', () => {
+        return expect(MFileStatus.FAILED).toEqual(MBadgeState.Failed);
     });
 
     it('should support optional $file store name', async () => {
@@ -117,7 +126,7 @@ describe('MFileUpload', () => {
                 stubMDialogRefs(fupd.vm);
             });
 
-            it('should render rejected files in m-message', async () => {
+            it('should render rejected files in modal', async () => {
                 fupd.vm.$file.add(
                     createMockFileList([
                         createMockFile('invalid-extensions'),
@@ -141,7 +150,7 @@ describe('MFileUpload', () => {
                 );
                 await Vue.nextTick();
 
-                fupd.find('.m-message .m-icon-button').trigger('click');
+                fupd.find('.m-message button').trigger('click');
 
                 expect(fupd.vm.$file.files().length).toEqual(0);
             });
@@ -194,7 +203,7 @@ describe('MFileUpload', () => {
 
         it('should emit done event when add button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(1)')
+                .find('.m-file-upload__footer-add')
                 .trigger('click');
 
             expect(fupd.emitted('done')[0][0]).toEqual([completedFile]);
@@ -202,7 +211,7 @@ describe('MFileUpload', () => {
 
         it('should clear all files when add button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(1)')
+                .find('.m-file-upload__footer-add')
                 .trigger('click');
 
             expect(fupd.vm.$file.files().length).toEqual(0);
@@ -210,7 +219,7 @@ describe('MFileUpload', () => {
 
         it('should emit cancel event when cancel button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(2)')
+                .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
             expect(fupd.emitted('cancel')).toBeTruthy();
@@ -218,7 +227,7 @@ describe('MFileUpload', () => {
 
         it('should clear all files when cancel button is clicked', () => {
             fupd
-                .find('.m-file-upload__footer button:nth-child(2)')
+                .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
             expect(fupd.vm.$file.files().length).toEqual(0);
@@ -232,7 +241,7 @@ describe('MFileUpload', () => {
             uploadingFile.status = MFileStatus.UPLOADING;
 
             fupd
-                .find('.m-file-upload__footer .m-file-upload__footer__cancel')
+                .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
             const evt = fupd.emitted('file-upload-cancel');
@@ -269,7 +278,7 @@ describe('MFileUpload', () => {
             Vue.use(IconButtonPlugin);
             const fupd = mount(MFileUpload);
 
-            fupd.find('.m-file-upload__import-list__button').trigger('click');
+            fupd.find('button').trigger('click');
 
             expect(fupd.emitted('file-upload-cancel')[0][0]).toBe(
                 fupd.vm.$file.files()[0]
@@ -309,7 +318,7 @@ describe('MFileUpload', () => {
             const fupd = mount(MFileUpload);
             const deletingFile = fupd.vm.$file.files()[0];
 
-            fupd.find('.m-file-upload__completed-list__button').trigger('click');
+            fupd.find('button').trigger('click');
 
             expect(fupd.emitted('file-remove')[0][0]).toBe(deletingFile);
         });

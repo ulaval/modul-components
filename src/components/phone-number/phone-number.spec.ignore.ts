@@ -283,7 +283,7 @@
 //                     // portal
 //                     Vue.nextTick(() => {
 //                         const warn: string = `<${SPINNER_NAME}>: ${PROCESSING_WARN}`;
-//                         expect(console.warn).toHaveBeenCalledWith(warn);
+//                         expect(Vue.prototype.$log.warn).toHaveBeenCalledWith(warn);
 
 //                         done();
 //                     });
@@ -309,7 +309,7 @@
 //                         (vm as any).visible = true;
 //                         Vue.nextTick(() => {
 //                             const warn: string = `<${SPINNER_NAME}>: ${PROCESSING_WARN}`;
-//                             expect(console.warn).toHaveBeenCalledWith(warn);
+//                             expect(Vue.prototype.$log.warn).toHaveBeenCalledWith(warn);
 
 //                             done();
 //                         });
@@ -336,7 +336,7 @@
 //                         (vm as any).visible = true;
 //                         Vue.nextTick(() => {
 //                             const warn: string = `<${SPINNER_NAME}>: ${PROCESSING_WARN}`;
-//                             expect(console.warn).not.toHaveBeenCalledWith(warn);
+//                             expect(Vue.prototype.$log.warn).not.toHaveBeenCalledWith(warn);
 
 //                             done();
 //                         });

@@ -2,7 +2,7 @@ import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { Component, Prop, Watch } from 'vue-property-decorator';
 import { INPLACE_EDIT } from '../component-names';
 import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import I18nPlugin from '../i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import IconButtonPlugin from '../icon-button/icon-button';
@@ -21,23 +21,22 @@ export class MInplaceEdit extends ModulVue {
     @Prop()
     public editMode: boolean;
 
-    @Prop()
+    @Prop({
+        default: () => (Vue.prototype as any).$i18n.translate('m-inplace-edit:modify')
+    })
     public title: string;
 
     @Prop()
     public saveFn: SaveFn;
 
-    private internalEditMode: boolean = false;
-
     private error: boolean = false;
+
+    private internalEditMode: boolean = false;
 
     private submitted: boolean = false;
 
-    public get dialogTitle(): string {
-        if (!this.title) {
-            return this.$i18n.translate('m-inplace-edit:modify');
-        }
-        return this.title;
+    public get isError(): boolean {
+        return this.error;
     }
 
     public confirm(event: Event): void {
@@ -49,6 +48,7 @@ export class MInplaceEdit extends ModulVue {
 
     public cancel(event: Event): void {
         if (this.editMode) {
+            this.error = false;
             this.propEditMode = false;
             this.$emit('cancel');
         }
@@ -82,14 +82,14 @@ export class MInplaceEdit extends ModulVue {
                 this.error = true;
             }).then(() => this.submitted = false);
         } else {
-            console.warn('No save function provided (save-fn prop is undefined)');
+            this.$log.warn('No save function provided (save-fn prop is undefined)');
         }
     }
 }
 
 const InplaceEditPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.warn(INPLACE_EDIT + ' is not ready for production');
+        v.prototype.$log.warn(INPLACE_EDIT + ' is not ready for production');
         v.use(MediaQueriesPlugin);
         v.use(IconButtonPlugin);
         v.use(ButtonPlugin);

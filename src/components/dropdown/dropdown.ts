@@ -14,11 +14,10 @@ import { InputWidth, InputMaxWidth } from '../../mixins/input-width/input-width'
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import i18nPlugin from '../../utils/i18n/i18n';
 import ButtonPlugin from '../button/button';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
-import PopupPlugin from '../popup/popup';
+import PopupPlugin, { MPopup } from '../popup/popup';
 import PopupPluginDirective from '../../directives/popup/popup';
 
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
@@ -50,6 +49,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public listMinWidth: string;
     @Prop()
     public focus: boolean;
+
+    public $refs: {
+        popup: MPopup;
+        items: HTMLUListElement;
+        input: HTMLInputElement;
+        mInputStyle: MInputStyle;
+        researchInput: HTMLInputElement;
+    };
 
     private internalFilter: string = '';
     private internalFilterRegExp: RegExp = / /;
@@ -95,7 +102,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
             if (this.$refs.items) {
                 // todo: mobile
-                this.observer.observe(this.$refs.items as HTMLUListElement, { subtree: true, childList: true });
+                this.observer.observe(this.$refs.items, { subtree: true, childList: true });
             }
         });
     }
@@ -121,6 +128,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 this.scrollToFocused();
                 this.$emit('open');
             } else {
+                this.internalFilter = '';
                 this.$emit('close');
             }
         });
@@ -134,9 +142,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Watch('focus')
     private focusChanged(focus: boolean): void {
         if (focus && !this.as<InputStateMixin>().isDisabled) {
-            (this.$refs.input as HTMLElement).focus();
+            this.$refs.input.focus();
         } else {
-            (this.$refs.input as HTMLElement).blur();
+            this.$refs.input.blur();
             this.internalOpen = false;
         }
     }
@@ -161,7 +169,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private setInputWidth(): void {
         this.$nextTick(() => {
-            (this.$refs.mInputStyle as MInputStyle).setInputWidth();
+            this.$refs.mInputStyle.setInputWidth();
         });
     }
 
@@ -214,7 +222,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         let items: MDropdownItem[] = [];
         // items that can be reached with the keyboard (!disabled)
         let navigation: MDropdownItem[] = [];
-        (this.$refs.popup as Vue).$children[0].$children.forEach(item => {
+        this.$refs.popup.$children[0].$children.forEach(item => {
             if (item instanceof MDropdownItem && !item.inactive && !item.filtered) {
                 items.push(item);
                 if (!item.disabled) {
@@ -233,6 +241,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
         this.internalItems = items;
         this.internalNavigationItems = navigation;
+        this.$refs.popup.update();
         this.focusSelected();
     }
 
@@ -297,7 +306,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private focusOnResearchInput(): void {
-        (this.$refs.researchInput as HTMLElement).focus();
+        this.$refs.researchInput.focus();
     }
 
     private focusSelected(): void {
@@ -305,8 +314,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             if (item.value == this.model) {
                 this.focusedIndex = i;
                 return false;
-            } else {
+            } else if (this.filterable && this.internalFilter != '' && this.model == undefined) {
                 this.focusedIndex = 0;
+                return false;
+            } else {
+                this.focusedIndex = -1;
                 return true;
             }
         });
@@ -339,7 +351,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private scrollToFocused(): void {
         if (this.focusedIndex > -1 && this.as<MediaQueriesMixin>().isMqMinS) {
             this.$nextTick(() => {
-                let container: HTMLElement = this.$refs.items as HTMLElement;
+                let container: HTMLElement = this.$refs.items;
                 if (container) {
                     let focusedItem: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
                     let top = focusedItem.$el.offsetTop;
@@ -410,7 +422,6 @@ const DropdownPlugin: PluginObject<any> = {
         Vue.use(PopupPluginDirective);
         Vue.use(ValidationMessagePlugin);
         Vue.use(MediaQueriesPlugin);
-        Vue.use(i18nPlugin);
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };

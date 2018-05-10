@@ -42,6 +42,8 @@ export class MButton extends Vue {
     })
     public skin: MButtonSkin;
     @Prop()
+    public precision: string;
+    @Prop()
     public disabled: boolean;
     @Prop()
     public waiting: boolean;
@@ -104,14 +106,14 @@ export class MButton extends Vue {
         return this.iconPosition == MButtonIconPosition.Right && this.waiting;
     }
 
-    private get hasPrecisionSlot(): boolean {
-        return !!this.$slots.precision;
+    private get hasPrecision(): boolean {
+        return !!this.precision || !!this.$slots.precision;
     }
 }
 
 const ButtonPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(BUTTON_NAME, 'plugin.install');
+        v.prototype.$log.debug(BUTTON_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(SpinnerPlugin);
         v.component(BUTTON_NAME, MButton);

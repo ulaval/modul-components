@@ -2,8 +2,8 @@ import Vue, { PluginObject } from 'vue';
 
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
-import ButtonGroupPlugin from './button-group/button-group';
 import ButtonPlugin from './button/button';
+import ButtonGroupPlugin from './button-group/button-group';
 import CarouselItemPlugin from './carousel-item/carousel-item';
 import CarouselPlugin from './carousel/carousel';
 import CheckboxPlugin from './checkbox/checkbox';
@@ -20,8 +20,9 @@ import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
-import IconButtonPlugin from './icon-button/icon-button';
 import IconPlugin from './icon/icon';
+import IconButtonPlugin from './icon-button/icon-button';
+import IconFilePlugin from './icon-file/icon-file';
 import InputStylePlugin from './input-style/input-style';
 import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
@@ -54,15 +55,20 @@ import TabPanelPlugin from './tab-panel/tab-panel';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
 import TextareaPlugin from './textarea/textarea';
-import TextareaResizePlugin from './textarea-resize/textarea-resize';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
 import ValidationMessagePlugin from './validation-message/validation-message';
 import InplaceEditPlugin from './inplace-edit/inplace-edit';
+import LoggerPlugin from '../utils/logger/logger';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
+
+        if (!v.prototype.$log) {
+            Vue.use(LoggerPlugin);
+        }
+
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
@@ -85,6 +91,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);
         Vue.use(IconButtonPlugin);
+        Vue.use(IconFilePlugin);
         Vue.use(InputStylePlugin);
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);
@@ -117,7 +124,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TabsPlugin);
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);
-        Vue.use(TextareaResizePlugin);
         Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
         Vue.use(TooltipPlugin);

@@ -83,7 +83,7 @@ export class MSpinner extends ModulVue {
 
     @Watch('processing')
     private onProcessingChange(value: boolean): void {
-        console.warn(`<${SPINNER_NAME}>: ${PROCESSING_WARN}`);
+        this.$log.warn(`<${SPINNER_NAME}>: ${PROCESSING_WARN}`);
         if (!value) {
             this.removeBackdrop();
         }
@@ -140,7 +140,7 @@ export class MSpinner extends ModulVue {
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.debug(SPINNER_NAME, 'plugin.install');
+        v.prototype.$log.debug(SPINNER_NAME, 'plugin.install');
         v.use(PortalPlugin);
         v.use(ModulPlugin);
         v.use(I18nPlugin);

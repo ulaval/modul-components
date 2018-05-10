@@ -100,6 +100,7 @@ $m-modal--max-width: 380px !default;
     }
 
     &__body {
+        text-align: center;
         padding: $m-padding;
 
         @include m-scrollbar();
