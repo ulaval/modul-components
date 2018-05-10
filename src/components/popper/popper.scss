@@ -17,7 +17,9 @@ $m-popper--margin: $m-margin !default;
         &.m--is-default-anim {
             &.m--is-enter-active,
             &.m--is-leave-active {
-                transition: transform $m-transition-duration ease, opacity $m-transition-duration ease;
+                transition-property: transform, opacity;
+                transition-duration: $m-transition-duration;
+                transition-timing-function: ease;
             }
 
             &.m--is-enter,
