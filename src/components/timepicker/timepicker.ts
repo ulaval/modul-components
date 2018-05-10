@@ -160,7 +160,7 @@ export class MTimepicker extends ModulVue {
 
     private set open(open: boolean) {
         this.internalOpen = open;
-        this.$nextTick(() => {
+        setTimeout(() => {
             if (this.internalOpen) {
                 let inputEl: any = this.$refs.input;
                 inputEl.focus();
@@ -175,8 +175,8 @@ export class MTimepicker extends ModulVue {
     }
 
     private scrollToSelection(container: HTMLElement): void {
-        let selectedElement = container.querySelector('.m--is-selected');
-        setTimeout(function() {
+        let selectedElement: HTMLElement = container.querySelector('.m--is-selected') as HTMLElement;
+        setTimeout(() => {
             if (selectedElement) {
                 container.scrollTop = selectedElement['offsetTop'] - container.clientHeight / 2 + selectedElement.clientHeight / 2;
             }
