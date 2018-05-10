@@ -8,7 +8,6 @@ import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import i18nPlugin from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { normalizeString } from '../../utils/str/str';
 import ButtonPlugin from '../button/button';
@@ -417,7 +416,6 @@ const DropdownPlugin: PluginObject<any> = {
         Vue.use(PopupPluginDirective);
         Vue.use(ValidationMessagePlugin);
         Vue.use(MediaQueriesPlugin);
-        Vue.use(i18nPlugin);
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };

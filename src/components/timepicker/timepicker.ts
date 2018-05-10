@@ -2,7 +2,6 @@ import * as moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -240,7 +239,6 @@ const TimepickerPlugin: PluginObject<any> = {
         v.use(PopupPlugin);
         v.use(ValidationMessagePlugin);
         v.use(MediaQueriesPlugin);
-        v.use(i18nPlugin);
         v.component(TIMEPICKER_NAME, MTimepicker);
     }
 };
