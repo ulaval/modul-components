@@ -6,6 +6,7 @@ import '../../src/styles/main.scss';
 
 import ComponentsPlugin from '../../src/components';
 import DirectivesPlugin from '../../src/directives';
+import FiltersPlugin from '../../src/filters';
 import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
 
 import { FRENCH } from '../../src/utils/i18n/i18n';
@@ -22,9 +23,10 @@ let utilsOptions: UtilsPluginOptions = {
     }
 };
 
+Vue.use(UtilsPlugin, utilsOptions);
 Vue.use(ComponentsPlugin);
 Vue.use(DirectivesPlugin);
-Vue.use(UtilsPlugin, utilsOptions);
+Vue.use(FiltersPlugin);
 
 Vue.use(FrenchPlugin);
 Vue.use(DefaultSpritesPlugin);
