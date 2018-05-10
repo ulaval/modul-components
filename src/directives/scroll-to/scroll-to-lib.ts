@@ -1,19 +1,42 @@
 export enum ScrollToDuration {
     Null = 'null',
     Slow = 'slow',
+    Slower = 'slower',
     Regular = 'regular',
     Fast = 'fast'
 }
 
+export interface CancelableScrollTo { promise: Promise<any>; cancel: () => void; }
 export class ScrollTo {
     // https://coderwall.com/p/hujlhg/smooth-scrolling-without-jquery
+    public scrollToTop(element: HTMLElement, duration: string = ScrollToDuration.Regular): CancelableScrollTo {
+        return this.intertnalStartScroll(element, 0, duration);
+    }
+
     public startScroll(
         element: HTMLElement = document.body,
         target: number = 0,
         duration: string = ScrollToDuration.Regular
     ): Promise<any> {
+        return this.intertnalStartScroll(element, target, duration).promise;
+    }
+
+    private intertnalStartScroll(
+        element: HTMLElement = document.body,
+        target: number = 0,
+        duration: string = ScrollToDuration.Regular
+    ): CancelableScrollTo {
         target = Math.round(target);
         let time: number;
+        let cancelled: boolean = false;
+        const cancel: () => void = () => {
+            cancelled = true;
+            if (currentFrame) {
+                cancelAnimationFrame(currentFrame);
+                currentFrame = undefined;
+            }
+        };
+        let currentFrame: number | undefined;
 
         switch (duration) {
             case ScrollToDuration.Null:
@@ -21,6 +44,9 @@ export class ScrollTo {
                 break;
             case ScrollToDuration.Slow:
                 time = 1500;
+                break;
+            case ScrollToDuration.Slower:
+                time = 3000;
                 break;
             case ScrollToDuration.Fast:
                 time = 400;
@@ -30,12 +56,12 @@ export class ScrollTo {
         }
 
         if (time < 0) {
-            return Promise.reject('bad duration');
+            return { promise: Promise.reject('bad duration'), cancel: () => cancel() };
         }
 
         if (time === 0) {
             element.scrollTop = target;
-            return Promise.resolve();
+            return { promise: Promise.resolve(), cancel: () => cancel() };
         }
 
         let startTime = Date.now();
@@ -56,14 +82,14 @@ export class ScrollTo {
             return x * x * (3 - 2 * x);
         };
 
-        return new Promise((resolve, reject) => {
+        return { promise: new Promise((resolve, reject) => {
             // This is to keep track of where the element's scrollTop is
             // supposed to be, based on what we're doing
             let previousTop = window.pageYOffset;
 
             // This is like a think function from a game loop
             let scrollFrame = () => {
-                if (window.pageYOffset !== previousTop) {
+                if (window.pageYOffset !== previousTop || cancelled) {
                     resolve();
                     return;
                 }
@@ -93,12 +119,12 @@ export class ScrollTo {
                 previousTop = window.pageYOffset;
 
                 // schedule next frame for execution
-                setTimeout(scrollFrame, 0);
+                currentFrame = requestAnimationFrame(scrollFrame);
             };
 
             // boostrap the animation process
-            setTimeout(scrollFrame, 0);
-        });
+            currentFrame = requestAnimationFrame(scrollFrame);
+        }), cancel: () => cancel()};
     }
 }
 

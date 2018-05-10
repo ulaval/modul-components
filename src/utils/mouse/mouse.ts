@@ -1,77 +1,81 @@
-// Utils that allow to get mouse pointer relative to an element.
-// https://gist.github.com/electricg/4435259
-// Which HTML element is the target of the event
-export type MousePositionEvent<T> = (e: MouseEvent, relativeToEl?: HTMLElement) => T;
-export const mouseTarget: (e: MouseEvent) => HTMLElement = (e: Event) => {
-    let targ: HTMLElement = document.documentElement as HTMLElement;
-    if (!e) { let e: Event | undefined = window.event; }
-    if (e.target) {
-        targ = e.target as HTMLElement;
-    } else if (e.srcElement) {
-        targ = e.srcElement as HTMLElement;
-    }
+// Inspiration => https://acko.net/blog/mouse-handling-and-absolute-positions-in-javascript/.
+const getRelativeMousePos: (event: Event, reference: HTMLElement) => RelativeMousePos =
+    (event: Event, reference: HTMLElement) => {
+        let x: number = 0;
+        let y: number = 0;
 
-    if (targ.nodeType === 3) { // defeat Safari bug
-        targ = targ.parentNode as HTMLElement;
-    }
-    return targ;
-};
+        const mouseEvent = event as MouseEvent;
+        let pos: any;
+        let el: HTMLElement | undefined = undefined;
+        if (mouseEvent && mouseEvent.offsetX !== undefined && mouseEvent.offsetY !== undefined) {
+            pos = { x: mouseEvent.offsetX, y: mouseEvent.offsetY };
+            el = mouseEvent.target as HTMLElement;
+        }
 
-// Mouse position relative to the document
-// From http://www.quirksmode.org/js/events_properties.html
-export const mousePositionDocument: MousePositionEvent<{ x: number, y: number }> = (e: MouseEvent) => {
-    let posx: number = 0;
-    let posy: number = 0;
-    if (!e) {
-        e = window.event as MouseEvent;
-    }
-    if (e.pageX || e.pageY) {
-        posx = e.pageX;
-        posy = e.pageY;
-    } else if (e.clientX || e.clientY) {
-        posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-        posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-    }
-    return {
-        x : posx,
-        y : posy
+        const customEvent = event as CustomEvent;
+        if (customEvent && customEvent.detail && customEvent.detail.offsetX !== undefined && customEvent.detail.offsetY !== undefined) {
+            pos = { x: customEvent.detail.offsetX, y: customEvent.detail.offsetY };
+            el = customEvent.detail.target as HTMLElement;
+        }
+
+        if (el === reference) {
+            return { x: pos.x, y: pos.y };
+        }
+
+        if (!pos || !el) {
+            return { x: 0, y: 0 };
+        }
+
+        // Fix for firefox.
+        let recursiveElement = el as HTMLElement;
+        while (recursiveElement.nodeType === Node.TEXT_NODE) {
+            recursiveElement = recursiveElement.parentElement as HTMLElement;
+        }
+
+        // Send the coordinates upwards through the offsetParent chain.
+        while (recursiveElement) {
+            (recursiveElement as any).mouseX = pos.x || 0;
+            (recursiveElement as any).mouseY = pos.y || 0;
+            pos.x += (recursiveElement as HTMLElement).offsetLeft || 0;
+            pos.y += (recursiveElement as HTMLElement).offsetTop || 0;
+            recursiveElement = (recursiveElement as HTMLElement).offsetParent as HTMLElement;
+        }
+
+        // Look for the coordinates starting from the reference element.
+        let recursiveReference: HTMLElement = reference;
+        let offset = { x: 0, y: 0 };
+        while (recursiveReference) {
+            if (typeof (recursiveReference as any).mouseX !== 'undefined') {
+                x = (recursiveReference as any).mouseX - offset.x;
+                y = (recursiveReference as any).mouseY - offset.y;
+                break;
+            }
+
+            offset.x += recursiveReference.offsetLeft || 0;
+            offset.y += recursiveReference.offsetTop || 0;
+            recursiveReference = recursiveReference.offsetParent as HTMLElement;
+        }
+
+        // Reset stored coordinates
+        let recursiveCleanup: HTMLElement = el;
+        while (recursiveCleanup) {
+            (recursiveCleanup as any).mouseX = undefined;
+            (recursiveCleanup as any).mouseY = undefined;
+            recursiveCleanup = recursiveCleanup.offsetParent as HTMLElement;
+        }
+
+        // Subtract distance to middle
+        return { x, y };
     };
-};
 
-// Find out where an element is on the page
-// From http://www.quirksmode.org/js/findpos.html
-export const findPos: (obj: HTMLElement) => { left: number, top: number } = (obj: HTMLElement) => {
-    let curleft: number = 0;
-    let curtop: number = 0;
-    if (obj.offsetParent) {
-        do {
-            curleft += obj.offsetLeft;
-            curtop += obj.offsetTop;
-            obj = obj.offsetParent as HTMLElement;
-        } while (obj);
-    }
-    return {
-        left : curleft,
-        top : curtop
-    };
-};
-
-// Mouse position relative to the element
-// not working on IE7 and below
 export interface RelativeMousePos {
     x: number;
     y: number;
 }
-export const mousePositionElement: MousePositionEvent<RelativeMousePos> = (e: MouseEvent, relativeToEl?: HTMLElement) => {
-    const mousePosDoc = mousePositionDocument(e);
-    const target = mouseTarget(e);
-    const targetPos = relativeToEl ? findPos(relativeToEl) : findPos(target);
-    const posx = mousePosDoc.x - targetPos.left;
-    const posy = mousePosDoc.y - targetPos.top;
-    return {
-        x : posx,
-        y : posy
-    };
+
+export type MousePositionEvent<T> = (e: MouseEvent, relativeToEl?: HTMLElement) => T;
+export const mousePositionElement: MousePositionEvent<RelativeMousePos> = (e: MouseEvent, relativeToEl: HTMLElement) => {
+    return getRelativeMousePos(e, relativeToEl);
 };
 
 export const isInElement: MousePositionEvent<boolean> = (e: MouseEvent, relativeToEl: HTMLElement, threshold: number = 3) => {
