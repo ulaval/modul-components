@@ -19,6 +19,7 @@ import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
+import { MBadgeState } from './../../directives/badge/badge';
 import WithRender from './file-upload.html?style=./file-upload.scss';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
@@ -206,6 +207,16 @@ export class MFileUpload extends ModulVue {
             return MProgressState.Completed;
         } else {
             return MProgressState.InProgress;
+        }
+    }
+
+    private getBadgeState(file): string | undefined {
+        if (file.status === MFileStatus.FAILED) {
+            return MBadgeState.Error;
+        } else if (file.status === MFileStatus.COMPLETED) {
+            return MBadgeState.Completed;
+        } else {
+            return undefined;
         }
     }
 
