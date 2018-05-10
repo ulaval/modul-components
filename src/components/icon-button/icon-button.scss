@@ -52,7 +52,7 @@
         }
 
         &.m--is-skin-dark {
-            color: rgba($m-color--white, 0.6);
+            color: $m-color--grey-light;
 
             &:hover {
                 color: $m-color--white;
