@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
+import { RADIO_NAME } from '../component-names';
 import WithRender from './sandbox.html';
 
 @WithRender
@@ -11,9 +12,7 @@ export class RadioSandbox extends Vue {
 
 const RadioSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        // tslint:disable-next-line:no-console
-        console.log('The name of my sandbox', RadioSandbox.name);
-        v.component(RadioSandbox.name, RadioSandbox);
+        v.component(`${RADIO_NAME}-sandbox`, RadioSandbox);
     }
 };
 

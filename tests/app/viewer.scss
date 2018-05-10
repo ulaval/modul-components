@@ -1,0 +1,91 @@
+.focuser {
+    :focus {
+        background-color: red;
+    }
+}
+
+.red {
+    background-color: red;
+}
+
+.sortable {
+    margin: 20px;
+
+    &__item {
+        background-color: lightblue;
+        position: relative;
+
+        &--inner {
+            padding: 10px 0 10px 0;
+        }
+
+        &.m--is-grabbing {
+            background-color: lightsalmon;
+        }
+
+        &.m--is-dragging {
+            opacity: 0.1;
+        }
+
+        &.m--is-sortin {
+            background-color: lightgreen;
+        }
+
+        &.m--is-sortbefore::before {
+            content: "";
+            width: 100%;
+            height: 3px;
+            background-color: orange;
+            display: block;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+        }
+
+        &.m--is-sortafter::after {
+            content: "";
+            width: 100%;
+            height: 3px;
+            background-color: orange;
+            display: block;
+            pointer-events: none;
+            position: absolute;
+            bottom: 0;
+        }
+    }
+}
+
+.sort-group {
+    margin: 10px;
+    background-color: lightcyan;
+}
+
+.empty-placeholder {
+    background-color: lightgray;
+
+    &.m--is-dragover {
+        opacity: 0.5;
+    }
+
+    &.m--can-drop {
+        background-color: lightgreen;
+    }
+
+    &.m--cant-drop {
+        background-color: pink;
+    }
+
+    &__container {
+        height: 200px;
+        width: 100%;
+        display: flex;
+    }
+
+    &__inner {
+        &--centered {
+            margin: auto;
+            width: 50%;
+            text-align: center;
+        }
+    }
+}
