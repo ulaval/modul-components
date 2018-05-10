@@ -10,6 +10,8 @@ export class Viewer extends Vue {
     public tag: string = '';
 
     public mounted(): void {
+        // tslint:disable-next-line:no-console
+        console.log(this.$parent.$options.components);
         this.buildTag();
     }
 
