@@ -7,6 +7,9 @@ import { ScrollTo } from '../scroll-to/scroll-to-lib';
 import { CancelableScrollTo, ScrollToDuration } from './../scroll-to/scroll-to-lib';
 
 interface ScrollPosition { left: number; top: number; }
+
+// Naive implementation for a single use case: allow autoscroll on a fixed element that appears at the absolute top of the viewport.
+// Furthermore, the user must be dragging something for it to work.
 export class MDraggableAllowScroll extends MElementDomPlugin<boolean> {
     public static currentDraggableScroll?: MDraggableAllowScroll;
     public static defaultMountPoint: string = '__mdraggableallowscroll__';
