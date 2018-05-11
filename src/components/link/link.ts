@@ -35,10 +35,10 @@ export class MLink extends ModulVue {
     @Prop({
         default: MLinkMode.RouterLink,
         validator: value =>
-            value == MLinkMode.RouterLink ||
-            value == MLinkMode.Link ||
-            value == MLinkMode.Text ||
-            value == MLinkMode.Button
+            value === MLinkMode.RouterLink ||
+            value === MLinkMode.Link ||
+            value === MLinkMode.Text ||
+            value === MLinkMode.Button
     })
     public mode: MLinkMode;
 
@@ -52,7 +52,7 @@ export class MLink extends ModulVue {
     public underline: boolean;
 
     @Prop({
-        validator: value => value == MLinkSkin.light
+        validator: value => value === MLinkSkin.light
     })
     public skin: MLinkSkin;
 
@@ -68,7 +68,7 @@ export class MLink extends ModulVue {
     @Prop({
         default: MLinkIconPosition.Left,
         validator: value =>
-            value == MLinkIconPosition.Left || value == MLinkIconPosition.Right
+            value === MLinkIconPosition.Left || value === MLinkIconPosition.Right
     })
     public iconPosition: MLinkIconPosition;
 
@@ -86,19 +86,19 @@ export class MLink extends ModulVue {
     }
 
     private get isRouterLink(): boolean {
-        return this.mode == MLinkMode.RouterLink;
+        return this.mode === MLinkMode.RouterLink;
     }
 
     private get isButton(): boolean {
-        return this.mode == MLinkMode.Button;
+        return this.mode === MLinkMode.Button;
     }
 
     private get isTextLink(): boolean {
-        return this.mode == MLinkMode.Text;
+        return this.mode === MLinkMode.Text;
     }
 
     private get isSkinLight(): boolean {
-        return this.skin == MLinkSkin.light;
+        return this.skin === MLinkSkin.light;
     }
 
     private get isUnvisited(): boolean {
@@ -106,33 +106,33 @@ export class MLink extends ModulVue {
     }
 
     private get isIconPositionLeft(): boolean {
-        return this.hasIcon && this.iconPosition == MLinkIconPosition.Left;
+        return this.hasIcon && this.iconPosition === MLinkIconPosition.Left;
     }
 
     private get isIconPositionRight(): boolean {
-        return this.hasIcon && this.iconPosition == MLinkIconPosition.Right;
+        return this.hasIcon && this.iconPosition === MLinkIconPosition.Right;
     }
 
     private get hasIcon(): boolean {
-        return this.iconName != undefined && this.iconName != ''
+        return this.iconName !== undefined && this.iconName !== ''
             ? true
             : this.icon;
     }
 
     private get propIconName(): string {
-        return this.iconName != undefined && this.iconName != ''
+        return this.iconName !== undefined && this.iconName !== ''
             ? this.iconName
             : ICON_NAME_DEFAULT;
     }
 
     private get propUrl(): string | undefined {
-        return this.mode == MLinkMode.Button
+        return this.mode === MLinkMode.Button
             ? '#'
             : !this.disabled ? this.url : undefined;
     }
 
     private get isTargetBlank(): boolean {
-        return this.target == '_blank';
+        return this.target === '_blank';
     }
 
     private get routerLinkUrl(): string | Object {

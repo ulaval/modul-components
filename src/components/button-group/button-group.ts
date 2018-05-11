@@ -1,10 +1,11 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
-import WithRender from './button-group.html?style=./button-group.scss';
-import { BUTTON_GROUP_NAME } from '../component-names';
-import RadioPlugin, { MRadioPosition, BaseButtonGroup, ButtonGroup } from '../radio/radio';
+import { Model, Prop } from 'vue-property-decorator';
+
 import uuid from '../../utils/uuid/uuid';
+import { BUTTON_GROUP_NAME } from '../component-names';
+import RadioPlugin, { BaseButtonGroup, ButtonGroup, MRadioPosition } from '../radio/radio';
+import WithRender from './button-group.html?style=./button-group.scss';
 
 @WithRender
 @Component
@@ -22,8 +23,8 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     @Prop({
         default: MRadioPosition.Left,
         validator: value =>
-            value == MRadioPosition.Left ||
-            value == MRadioPosition.Right
+            value === MRadioPosition.Left ||
+            value === MRadioPosition.Right
     })
     public position: MRadioPosition;
 
@@ -46,7 +47,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     }
 
     private get model(): string {
-        return this.value == undefined ? this.internalValue : this.value;
+        return this.value === undefined ? this.internalValue : this.value;
     }
 
     private set model(value: string) {

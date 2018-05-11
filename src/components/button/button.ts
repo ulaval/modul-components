@@ -1,10 +1,11 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './button.html?style=./button.scss';
-import { BUTTON_NAME, ICON_NAME } from '../component-names';
+
+import { BUTTON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
+import WithRender from './button.html?style=./button.scss';
 
 export enum MButtonType {
     Button = 'button',
@@ -29,16 +30,16 @@ export class MButton extends Vue {
     @Prop({
         default: MButtonType.Button,
         validator: value =>
-            value == MButtonType.Button ||
-            value == MButtonType.Submit ||
-            value == MButtonType.Reset
+            value === MButtonType.Button ||
+            value === MButtonType.Submit ||
+            value === MButtonType.Reset
     })
     public type: MButtonType;
     @Prop({
         default: MButtonSkin.Primary,
         validator: value =>
-            value == MButtonSkin.Primary ||
-            value == MButtonSkin.Secondary
+            value === MButtonSkin.Primary ||
+            value === MButtonSkin.Secondary
     })
     public skin: MButtonSkin;
     @Prop()
@@ -54,8 +55,8 @@ export class MButton extends Vue {
     @Prop({
         default: MButtonIconPosition.Left,
         validator: value =>
-            value == MButtonIconPosition.Left ||
-            value == MButtonIconPosition.Right
+            value === MButtonIconPosition.Left ||
+            value === MButtonIconPosition.Right
     })
     public iconPosition: MButtonIconPosition;
     @Prop({ default: '12px' })
@@ -75,11 +76,11 @@ export class MButton extends Vue {
     }
 
     private get isSkinPrimary(): boolean {
-        return this.skin == MButtonSkin.Primary;
+        return this.skin === MButtonSkin.Primary;
     }
 
     private get isSkinSecondary(): boolean {
-        return this.skin == MButtonSkin.Secondary;
+        return this.skin === MButtonSkin.Secondary;
     }
 
     private get isWaiting(): boolean {
@@ -91,19 +92,19 @@ export class MButton extends Vue {
     }
 
     private get hasIconLeft(): boolean {
-        return this.iconPosition == MButtonIconPosition.Left && this.hasIcone && !this.waiting;
+        return this.iconPosition === MButtonIconPosition.Left && this.hasIcone && !this.waiting;
     }
 
     private get hasIconRight(): boolean {
-        return this.iconPosition == MButtonIconPosition.Right && this.hasIcone && !this.waiting;
+        return this.iconPosition === MButtonIconPosition.Right && this.hasIcone && !this.waiting;
     }
 
     private get hasWaitingIconLeft(): boolean {
-        return this.iconPosition == MButtonIconPosition.Left && this.waiting;
+        return this.iconPosition === MButtonIconPosition.Left && this.waiting;
     }
 
     private get hasWaitingIconRight(): boolean {
-        return this.iconPosition == MButtonIconPosition.Right && this.waiting;
+        return this.iconPosition === MButtonIconPosition.Right && this.waiting;
     }
 
     private get hasPrecision(): boolean {

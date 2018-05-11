@@ -2,13 +2,15 @@ import Promise from 'es6-promise';
 import { polyfill } from 'mobile-drag-drop';
 import { scrollBehaviourDragImageTranslateOverride } from 'mobile-drag-drop/scroll-behaviour';
 
+export const dragDropDelay: number = 500;
+
 export const polyFillActive: { dragDrop: boolean } = {
     dragDrop: false
 };
 
 // Polyfill for drag and drop on mobile.
 polyFillActive.dragDrop = polyfill({
-    holdToDrag: 200,
+    holdToDrag: dragDropDelay,
     dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride,
     iterationInterval: 50
 });
@@ -48,7 +50,7 @@ if (!Array.prototype['includes']) {
         value: function(searchElement, fromIndex) {
 
             // 1. Let O be ? ToObject(this value).
-            if (this == undefined) {
+            if (this === undefined) {
                 throw new TypeError('"this" is null or not defined');
             }
 

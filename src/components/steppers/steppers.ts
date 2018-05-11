@@ -1,11 +1,10 @@
-import { ModulVue } from '../../utils/vue/vue';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './steppers.html?style=./steppers.scss';
+
+import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { STEPPERS_NAME } from '../component-names';
 import NavBarItemPlugin, { BaseSteppers, MSteppersItemState } from '../steppers-item/steppers-item';
-import { ElementQueries } from '../../mixins/element-queries/element-queries';
+import WithRender from './steppers.html?style=./steppers.scss';
 
 @WithRender
 @Component({
@@ -33,13 +32,13 @@ export class MSteppers extends BaseSteppers {
             if (this.$children.length - 1 === i && this.$children.length > 1) {
                 rightSpacing = this.$children[i].$el.clientWidth / 2;
             }
-            if (this.$children[i].$props.state == MSteppersItemState.InProgress) {
+            if (this.$children[i].$props.state === MSteppersItemState.InProgress) {
                 this.scrollElement(this.$children[i].$el);
             }
         }
 
         for (let i = this.$children.length - 1; i >= 0; i--) {
-            if (hasFindFirst === false && this.$children[i].$props.state == MSteppersItemState.InProgress || hasFindFirst === false && this.$children[i].$props.state == MSteppersItemState.Completed) {
+            if (hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.InProgress || hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.Completed) {
                 let childWidth = this.$children[i].$el.clientWidth;
                 let childOffset = this.$children[i].$el.offsetLeft;
                 this.lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;

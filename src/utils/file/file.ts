@@ -15,6 +15,7 @@ export interface MFile {
     status: MFileStatus;
     progress: number;
     rejection?: MFileRejectionCause;
+    url?: string;
 }
 
 export enum MFileRejectionCause {

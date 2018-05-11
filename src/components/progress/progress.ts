@@ -1,9 +1,10 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './progress.html?style=./progress.scss';
+
+import { ModulVue } from '../../utils/vue/vue';
 import { PROGRESS_NAME } from '../component-names';
+import WithRender from './progress.html?style=./progress.scss';
 import INDETERMINATE_ANIMATION_TEMPLATE from './progressSpinnerAnimation';
 
 export enum MProgressState {
@@ -30,9 +31,9 @@ export class MProgress extends ModulVue {
     @Prop({
         default: MProgressState.InProgress,
         validator: value =>
-            value == MProgressState.Completed ||
-            value == MProgressState.InProgress ||
-            value == MProgressState.Error
+            value === MProgressState.Completed ||
+            value === MProgressState.InProgress ||
+            value === MProgressState.Error
     })
     public state: MProgressState;
 
@@ -106,7 +107,7 @@ export class MProgress extends ModulVue {
                 return '0%';
             } else if (this.value > 100) {
                 return '100%';
-            } else if (this.value != undefined) {
+            } else if (this.value !== undefined) {
                 return this.value + '%';
             } else {
                 return '0%';

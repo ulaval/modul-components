@@ -9,10 +9,10 @@
          :class-name="className"
          @open="onOpen"
          @close="onClose">
-    <m-icon-button @click="onClick" slot="trigger" class="m-tooltip__icon" icon-name="information" :title="propTitle" button-size="22px" v-if="propMode == 'icon'" :disabled="disabled">
+    <m-icon-button @click="onClick" slot="trigger" class="m-tooltip__icon" icon-name="information" :title="propTitle" button-size="22px" v-if="propMode === 'icon'" :disabled="disabled">
         <span aria-hidden="true">{{ open ? propCloseTitle : propOpenTitle }}</span>
     </m-icon-button>
-    <m-link slot="trigger" class="m-tooltip__link" mode="button" :underline="underline" v-if="propMode != 'icon'" :disabled="disabled">
+    <m-link slot="trigger" class="m-tooltip__link" mode="button" :underline="underline" v-if="propMode !== 'icon'" :disabled="disabled">
         <slot name="link"></slot>
     </m-link>
     <div class="m-tooltip__body-container" :class="{ 'm--has-close-button': propCloseButton }">
