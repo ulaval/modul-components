@@ -210,11 +210,12 @@ describe('MFileUpload', () => {
         });
 
         it('should clear all files when add button is clicked', () => {
+            jest.spyOn(fupd.vm.$refs.dialog, 'closeDialog');
             fupd
                 .find('.m-file-upload__footer-add')
                 .trigger('click');
 
-            expect(fupd.vm.$file.files().length).toEqual(0);
+            expect(fupd.vm.$refs.dialog.closeDialog).toHaveBeenCalled();
         });
 
         it('should emit cancel event when cancel button is clicked', () => {
@@ -226,17 +227,20 @@ describe('MFileUpload', () => {
         });
 
         it('should clear all files when cancel button is clicked', () => {
+            jest.spyOn(fupd.vm.$refs.dialog, 'closeDialog');
             fupd
                 .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
-            expect(fupd.vm.$file.files().length).toEqual(0);
+            expect(fupd.vm.$refs.dialog.closeDialog).toHaveBeenCalled();
         });
 
         it('should emit file-upload-cancel event for each file being uploaded when cancel button is clicked', async () => {
             fupd.vm.$file.add(
                 createMockFileList([createMockFile('uploading')])
             );
+
+            jest.spyOn(fupd.vm.$refs.dialog, 'closeDialog');
             const uploadingFile = fupd.vm.$file.files()[2];
             uploadingFile.status = MFileStatus.UPLOADING;
 
@@ -245,7 +249,7 @@ describe('MFileUpload', () => {
                 .trigger('click');
 
             const evt = fupd.emitted('file-upload-cancel');
-            expect(evt[0][0]).toEqual(uploadingFile);
+            expect(fupd.vm.$refs.dialog.closeDialog).toHaveBeenCalled();
         });
     });
 

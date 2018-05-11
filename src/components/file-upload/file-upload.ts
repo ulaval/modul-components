@@ -152,19 +152,13 @@ export class MFileUpload extends ModulVue {
     }
 
     private onAddClick(): void {
-        this.$refs.dialog.closeDialog();
         this.$emit('done', this.completedFiles);
-        this.$file.clear(this.storeName);
+        this.$refs.dialog.closeDialog();
     }
 
     private onCancelClick(): void {
-        this.propOpen = false;
-        this.$refs.dialog.closeDialog();
-        this.allFiles
-            .filter(f => f.status === MFileStatus.UPLOADING)
-            .forEach(this.onUploadCancel);
         this.$emit('cancel');
-        this.$file.clear(this.storeName);
+        this.$refs.dialog.closeDialog();
     }
 
     private onUploadCancel(file: MFile): void {
@@ -180,6 +174,7 @@ export class MFileUpload extends ModulVue {
 
     private onOpen(): void {
         this.$emit('open');
+        this.propOpen = true;
         // We need 2 nextTick to be able to have the wrap element in the DOM - MODUL-118
         Vue.nextTick(() => {
             Vue.nextTick(() => {
@@ -193,7 +188,10 @@ export class MFileUpload extends ModulVue {
     private onClose(): void {
         this.propOpen = false;
         this.$emit('close');
-        this.onCancelClick();
+        this.allFiles
+            .filter(f => f.status === MFileStatus.UPLOADING)
+            .forEach(this.onUploadCancel);
+        this.$file.clear(this.storeName);
         ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
             this.$refs.dialog.$refs.dialogWrap.removeEventListener(evt, defaultDragEvent);
         });
