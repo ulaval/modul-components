@@ -1,9 +1,10 @@
 import { PluginObject } from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+
+import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDuration } from '../../mixins/portal/portal';
+import { ModulVue } from '../../utils/vue/vue';
 import { SIDEBAR_NAME } from '../component-names';
-import { Portal, PortalMixin, PortalMixinImpl, BackdropMode, PortalTransitionDuration } from '../../mixins/portal/portal';
 import WithRender from './sidebar.html?style=./sidebar.scss';
 
 export enum MSidebarOrigin {
@@ -25,10 +26,10 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     @Prop({
         default: MSidebarOrigin.Bottom,
         validator: value =>
-            value == MSidebarOrigin.Top ||
-            value == MSidebarOrigin.Right ||
-            value == MSidebarOrigin.Left ||
-            value == MSidebarOrigin.Bottom
+            value === MSidebarOrigin.Top ||
+            value === MSidebarOrigin.Right ||
+            value === MSidebarOrigin.Left ||
+            value === MSidebarOrigin.Bottom
     })
     public origin: MSidebarOrigin;
 
@@ -41,8 +42,8 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     @Prop({
         default: MSidebarCloseButtonPosition.Right,
         validator: value =>
-            value == MSidebarCloseButtonPosition.Right ||
-            value == MSidebarCloseButtonPosition.Left
+            value === MSidebarCloseButtonPosition.Right ||
+            value === MSidebarCloseButtonPosition.Left
     })
     public closeButtonPosition: MSidebarCloseButtonPosition;
 
@@ -94,7 +95,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     }
 
     private get hasHeader(): boolean {
-        return this.hasHeaderSlot || this.hasTitle || (this.closeButton && this.origin != MSidebarOrigin.Bottom);
+        return this.hasHeaderSlot || this.hasTitle || (this.closeButton && this.origin !== MSidebarOrigin.Bottom);
     }
 
     private get hasTitle(): boolean {
@@ -116,12 +117,12 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     }
 
     private get marginLeft(): string {
-        return this.origin == MSidebarOrigin.Right ? 'calc(100% - ' + this.propWidth + ')' : '';
+        return this.origin === MSidebarOrigin.Right ? 'calc(100% - ' + this.propWidth + ')' : '';
     }
 
     private get propWidth(): string {
 
-        if (this.origin == MSidebarOrigin.Left || this.origin == MSidebarOrigin.Right) {
+        if (this.origin === MSidebarOrigin.Left || this.origin === MSidebarOrigin.Right) {
             return this.width ? this.width : '50%' ;
         } else {
             return '100%';

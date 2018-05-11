@@ -1,12 +1,12 @@
 <div class="m-navbar" :class="{ 'm--is-disabled': disabled,
-              'm--is-skin-tab': skin == 'light-tab' || skin == 'dark-tab',
-              'm--is-skin-light-tab': skin == 'light-tab',
-              'm--is-skin-dark-tab': skin == 'dark-tab',
-              'm--is-skin-light': skin == 'light',
-              'm--is-skin-dark': skin == 'dark',
-              'm--is-skin-plain': skin == 'plain',
-              'm--is-skin-simple': skin == 'simple',
-              'm--is-skin-arrow': skin == 'arrow',
+              'm--is-skin-tab': skin === 'light-tab' || skin === 'dark-tab',
+              'm--is-skin-light-tab': skin === 'light-tab',
+              'm--is-skin-dark-tab': skin === 'dark-tab',
+              'm--is-skin-light': skin === 'light',
+              'm--is-skin-dark': skin === 'dark',
+              'm--is-skin-plain': skin === 'plain',
+              'm--is-skin-simple': skin === 'simple',
+              'm--is-skin-arrow': skin === 'arrow',
               'm--no-margin': !margin }">
     <m-icon-button ref="buttonLeft" class="m-navbar__button" :skin="buttonSkin" :button-size="ComputedHeight" icon-name="left-chevron"
         @click="scrollLeft" v-if="hasScrolllH && arrowMobile"></m-icon-button>

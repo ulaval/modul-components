@@ -1,12 +1,13 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
-import { DROPDOWN_ITEM_NAME } from '../component-names';
-import { normalizeString } from '../../utils/str/str';
+
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { normalizeString } from '../../utils/str/str';
+import { ModulVue } from '../../utils/vue/vue';
+import { DROPDOWN_ITEM_NAME } from '../component-names';
 import RadioStylePlugin from '../radio-style/radio-style';
+import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
 
 export interface MDropdownInterface {
     model: any;
@@ -61,7 +62,7 @@ export class MDropdownItem extends ModulVue {
     }
 
     public get inactive(): boolean {
-        return this.value == undefined;
+        return this.value === undefined;
     }
 
     // Value and label rules
@@ -73,7 +74,7 @@ export class MDropdownItem extends ModulVue {
         if (this.label) {
             return this.label;
         } else if (this.value) {
-            if (typeof this.value == 'string') {
+            if (typeof this.value === 'string') {
                 return this.value;
             } else {
                 return JSON.stringify(this.value);
@@ -84,11 +85,11 @@ export class MDropdownItem extends ModulVue {
     }
 
     private get selected(): boolean {
-        return (this.root as MDropdownInterface).model == this.value;
+        return (this.root as MDropdownInterface).model === this.value;
     }
 
     private get focused(): boolean {
-        return (this.root as MDropdownInterface).focused == this.value;
+        return (this.root as MDropdownInterface).focused === this.value;
     }
 
     private onClick(): void {

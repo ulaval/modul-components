@@ -3,6 +3,7 @@ import { Model, Prop, Watch } from 'vue-property-decorator';
 
 import { InputStateMixin } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
+
 export interface InputManagementProps {
     value: string;
     placeholder: string;
@@ -105,11 +106,11 @@ export class InputManagement extends ModulVue
     }
 
     private get model(): string {
-        return this.value == undefined ? this.internalValue : this.value;
+        return this.value === undefined ? this.internalValue : this.value;
     }
 
     private get hasValue(): boolean {
-        return this.model != '';
+        return this.model !== '';
     }
 
     private get isEmpty(): boolean {

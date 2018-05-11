@@ -3,7 +3,7 @@ export function startsWith(text: string | undefined, startsWith: string | undefi
     return (text === undef && startsWith === undef) // both undef
         || (text !== undef && startsWith !== undef && !text && !startsWith) // both empty
         || (!!text && startsWith !== undef && !startsWith) // startsWith empty
-        || (!!text && !!startsWith && text.slice(0, startsWith.length) == startsWith);
+        || (!!text && !!startsWith && text.slice(0, startsWith.length) === startsWith);
 }
 
 let diacriticsMap: Object = {};

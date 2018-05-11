@@ -1,12 +1,13 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './input-style.html?style=./input-style.scss';
+
+import { InputState } from '../../mixins/input-state/input-state';
+import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
+import WithRender from './input-style.html?style=./input-style.scss';
 
 @WithRender
 @Component({
@@ -34,7 +35,7 @@ export class MInputStyle extends ModulVue {
             let inputEl: HTMLElement = this.$el.querySelector('input') as HTMLElement;
             let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
             if (inputEl) {
-                if (this.width == 'auto' && this.hasAdjustWidthAutoSlot) {
+                if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
                     setTimeout(() => {
                         inputEl.style.width = '0px';
                         setTimeout(() => {
@@ -74,7 +75,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasLabelText(): boolean {
-        return !!this.label && this.label != '';
+        return !!this.label && this.label !== '';
     }
 
     private get isFocus(): boolean {
@@ -84,7 +85,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasIcon(): boolean {
-        return !!this.iconName && this.iconName != '';
+        return !!this.iconName && this.iconName !== '';
     }
 
     private get hasDefaultSlot(): boolean {

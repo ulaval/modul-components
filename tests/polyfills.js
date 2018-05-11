@@ -7,3 +7,5 @@ window.matchMedia =
             removeListener: () => {}
         };
     });
+
+window.MutationObserver =  window.MutationObserver || class { observe () {} disconnect () {} };
