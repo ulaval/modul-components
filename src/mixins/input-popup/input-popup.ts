@@ -1,9 +1,9 @@
-import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { KeyCode } from '../../utils/keycode/keycode';
+import { ModulVue } from '../../utils/vue/vue';
 
 @Component({
     mixins: [
@@ -35,10 +35,10 @@ export class InputPopup extends ModulVue {
     }
 
     public inputOnKeydown($event: KeyboardEvent): void {
-        if ($event.keyCode != KeyCode.M_RETURN &&
-            $event.keyCode != KeyCode.M_ENTER &&
-            $event.keyCode != KeyCode.M_TAB &&
-            $event.keyCode != KeyCode.M_ESCAPE && !this.open) {
+        if ($event.keyCode !== KeyCode.M_RETURN &&
+            $event.keyCode !== KeyCode.M_ENTER &&
+            $event.keyCode !== KeyCode.M_TAB &&
+            $event.keyCode !== KeyCode.M_ESCAPE && !this.open) {
             this.open = true;
         }
     }
@@ -54,10 +54,10 @@ export class InputPopup extends ModulVue {
     }
 
     public hasValue(): boolean {
-        return this.internalValue != undefined && this.internalValue != '' && this.internalValue != ' ';
+        return this.internalValue !== undefined && this.internalValue !== '' && this.internalValue !== ' ';
     }
 
     public hasPlaceholder(): boolean {
-        return this.placeholder != undefined && this.placeholder != '';
+        return this.placeholder !== undefined && this.placeholder !== '';
     }
 }

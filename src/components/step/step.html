@@ -7,7 +7,7 @@
                    'm--is-open': propOpen,
                    'm--is-close': !propOpen,
                    'm--is-last': last,
-                   'm--is-accordion': propMode == 'accordion' }">
+                   'm--is-accordion': propMode === 'accordion' }">
     <header class="m-step__header" @keyup.enter="openStep" @click="openStep" ref="header">
         <span class="m-step__header__icon">
             <m-icon :name="iconName"></m-icon>

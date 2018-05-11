@@ -1,10 +1,10 @@
-import Vue, { PluginObject, VNode } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './carousel.html?style=./carousel.scss';
-import { CAROUSEL_NAME } from '../component-names';
+
 import carouselItem, { MCarouselItem } from '../carousel-item/carousel-item';
-import i18n from 'src/components/i18n/i18n';
+import { CAROUSEL_NAME } from '../component-names';
+import WithRender from './carousel.html?style=./carousel.scss';
 
 @WithRender
 @Component
@@ -59,7 +59,7 @@ export class MCarousel extends Vue {
                         item.componentInstance.isVisible = index === this.internalIndex;
                         item.componentInstance.$slots.default.forEach(content => {
                             let el: HTMLElement = content.componentInstance && content.componentInstance.$el || content.elm as HTMLElement;
-                            if (el instanceof HTMLElement && (el.tagName == 'IMG' || el.tagName == 'PICTURE')) {
+                            if (el instanceof HTMLElement && (el.tagName === 'IMG' || el.tagName === 'PICTURE')) {
                                 el.style.maxWidth = '100%';
                                 el.style.maxHeight = '100%';
                                 el.style.position = 'absolute';
@@ -94,14 +94,14 @@ export class MCarousel extends Vue {
     }
 
     private get propIndex(): number {
-        if (this.index != undefined) {
+        if (this.index !== undefined) {
             return this.index;
         }
         return this.internalIndex;
     }
 
     private set propIndex(value) {
-        if (value != this.propIndex && this.isIndexValid(value)) {
+        if (value !== this.propIndex && this.isIndexValid(value)) {
             this.items.forEach((item, index) => {
                 item.transitionForward = this.transitionForward;
                 item.isVisible = index === value;

@@ -43,25 +43,25 @@ export class Logger {
 
     log(message?: any, ...optionalParams: any[]): void {
         if (!this.hideAll && this.displayLogs) {
-            console.log(message, optionalParams);
+            console.log(message, ...optionalParams);
         }
     }
 
     warn(message?: any, ...optionalParams: any[]): void {
         if (!this.hideAll && this.displayWarnings) {
-            console.warn(message, optionalParams);
+            console.warn(message, ...optionalParams);
         }
     }
 
     debug(message?: any, ...optionalParams: any[]): void {
         if (!this.hideAll && this.displayDebugs) {
-            console.debug(message, optionalParams);
+            console.debug(message, ...optionalParams);
         }
     }
 
     info(message?: any, ...optionalParams: any[]): void {
         if (!this.hideAll && this.displayInfos) {
-            console.info(message, optionalParams);
+            console.info(message, ...optionalParams);
         }
     }
 }

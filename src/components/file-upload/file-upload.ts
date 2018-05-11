@@ -289,7 +289,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private set propOpen(value) {
-        if (value != this.internalOpen) {
+        if (value !== this.internalOpen) {
             this.internalOpen = value;
             this.$emit('update:open', value);
         }

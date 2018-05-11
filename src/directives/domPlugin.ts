@@ -5,15 +5,15 @@ export class MDOMPlugin {
     public static get<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement): DomPlugin<OptionsType> | undefined {
+    }, element: HTMLElement): PluginType | undefined {
         return element[constructorFunction.defaultMountPoint];
     }
 
     public static getRecursive<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement): DomPlugin<OptionsType> | undefined {
-        let plugin: DomPlugin<OptionsType> | undefined;
+    }, element: HTMLElement): PluginType | undefined {
+        let plugin: PluginType | undefined;
         while (element && !plugin) {
             plugin = MDOMPlugin.get(constructorFunction, element);
             element = element.parentNode as HTMLElement;

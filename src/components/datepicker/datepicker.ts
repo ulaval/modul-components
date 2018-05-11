@@ -1,19 +1,19 @@
-import { ModulVue } from '../../utils/vue/vue';
+import * as moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
-import WithRender from './datepicker.html?style=./datepicker.scss';
-import { DATEPICKER_NAME } from '../component-names';
-import * as moment from 'moment';
-import { InputState } from '../../mixins/input-state/input-state';
+import { Model, Prop } from 'vue-property-decorator';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
+import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import { KeyCode } from '../../utils/keycode/keycode';
+import i18nPlugin from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
-import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
-import ValidationMessagePlugin from '../validation-message/validation-message';
+import { DATEPICKER_NAME } from '../component-names';
+import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
+import ValidationMessagePlugin from '../validation-message/validation-message';
+import WithRender from './datepicker.html?style=./datepicker.scss';
 
 const VIEW_DAY = 'day';
 const VIEW_MONTH = 'month';
@@ -215,11 +215,11 @@ export class MDatepicker extends ModulVue {
     }
 
     private get calandarError(): boolean {
-        return this.internalCalandarErrorMessage != '' || this.as<InputState>().hasError;
+        return this.internalCalandarErrorMessage !== '' || this.as<InputState>().hasError;
     }
 
     private get calandarErrorMessage(): string {
-        return this.as<InputState>().errorMessage != undefined ? this.as<InputState>().errorMessage : this.internalCalandarErrorMessage;
+        return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : this.internalCalandarErrorMessage;
     }
 
     private get open(): boolean {
@@ -241,7 +241,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private validateDate(event): void {
-        if (event.target.value == '') {
+        if (event.target.value === '') {
             this.selectedMomentDate = moment();
             if (this.required) {
                 this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');

@@ -1,12 +1,13 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model, Watch } from 'vue-property-decorator';
-import WithRender from './radio-group.html?style=./radio-group.scss';
-import { RADIO_GROUP_NAME } from '../component-names';
-import RadioPlugin, { MRadioPosition, BaseRadioGroup, RadioGroup } from '../radio/radio';
+import { Model, Prop, Watch } from 'vue-property-decorator';
+
+import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { RADIO_GROUP_NAME } from '../component-names';
+import RadioPlugin, { BaseRadioGroup, MRadioPosition, RadioGroup } from '../radio/radio';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import WithRender from './radio-group.html?style=./radio-group.scss';
 
 @WithRender
 @Component({
@@ -20,8 +21,8 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     @Prop({
         default: MRadioPosition.Left,
         validator: value =>
-            value == MRadioPosition.Left ||
-            value == MRadioPosition.Right
+            value === MRadioPosition.Left ||
+            value === MRadioPosition.Right
     })
     public position: MRadioPosition;
     @Prop()
@@ -62,7 +63,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     }
 
     private get model(): any {
-        return this.value == undefined ? this.internalValue : this.value;
+        return this.value === undefined ? this.internalValue : this.value;
     }
 
     private get hasLabel(): boolean {

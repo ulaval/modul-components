@@ -38,11 +38,11 @@ export class MTextfield extends ModulVue {
     @Prop({
         default: MTextfieldType.Text,
         validator: value =>
-            value == MTextfieldType.EMail ||
-            value == MTextfieldType.Password ||
-            value == MTextfieldType.Telephone ||
-            value == MTextfieldType.Text ||
-            value == MTextfieldType.Url
+            value === MTextfieldType.EMail ||
+            value === MTextfieldType.Password ||
+            value === MTextfieldType.Telephone ||
+            value === MTextfieldType.Text ||
+            value === MTextfieldType.Url
     })
     public type: MTextfieldType;
     @Prop({ default: true })
@@ -75,10 +75,10 @@ export class MTextfield extends ModulVue {
 
     private get inputType(): MTextfieldType {
         let type: MTextfieldType = MTextfieldType.Text;
-        if (this.type == MTextfieldType.Password && this.passwordAsText) {
+        if (this.type === MTextfieldType.Password && this.passwordAsText) {
             type = MTextfieldType.Text;
-        } else if (this.type == MTextfieldType.Password || this.type == MTextfieldType.EMail || this.type == MTextfieldType.Url ||
-            this.type == MTextfieldType.Telephone) {
+        } else if (this.type === MTextfieldType.Password || this.type === MTextfieldType.EMail || this.type === MTextfieldType.Url ||
+            this.type === MTextfieldType.Telephone) {
             type = this.type;
         }
         this.$nextTick(() => {
@@ -99,7 +99,7 @@ export class MTextfield extends ModulVue {
     }
 
     private get propPasswordIcon(): boolean {
-        return this.passwordIcon && this.type == MTextfieldType.Password && this.as<InputState>().active;
+        return this.passwordIcon && this.type === MTextfieldType.Password && this.as<InputState>().active;
     }
 }
 
