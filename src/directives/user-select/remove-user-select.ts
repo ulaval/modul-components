@@ -15,6 +15,9 @@ export class MRemoveUserSelect extends MElementDomPlugin<boolean | undefined> {
                 this.element.style.webkitUserSelect = 'none';
                 this.element.style.msUserSelect = 'none';
                 this.element.style.userSelect = 'none';
+
+                // mobile ios will display a gray box over element on touch start.  We don't want that.
+                this.element.style.webkitTapHighlightColor = 'rgba(0,0,0,0)';
             });
         }
     }
@@ -27,6 +30,7 @@ export class MRemoveUserSelect extends MElementDomPlugin<boolean | undefined> {
     }
     public detach(): void {
         this.removeAllEvents();
+        this.element.style.webkitTapHighlightColor = '';
         this.element.style.userSelect = '';
         this.element.style.msUserSelect = '';
         this.element.style.webkitUserSelect = '';

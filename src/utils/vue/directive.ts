@@ -1,4 +1,4 @@
-import { VNode } from 'vue';
+import Vue, { VNode } from 'vue';
 
 export const getVNodeAttributeValue = (node: VNode, attributeName: string): any | undefined => {
     if (!node.data || !node.data.attrs) { return undefined; }
@@ -7,13 +7,14 @@ export const getVNodeAttributeValue = (node: VNode, attributeName: string): any 
 
 interface VueElement extends HTMLElement {
     // tslint:disable-next-line:variable-name
-    __vue__: any;
+    __vue__: Vue;
 }
-export const dispatchEvent = (element: HTMLElement, eventName: string, eventData: any): void => {
+export const dispatchEvent = (element: HTMLElement, eventName: string, eventData: any): any => {
     const vueElement: VueElement = element as VueElement;
-    if (vueElement.__vue__) {
-        vueElement.__vue__.$emit(eventName, eventData);
+    if (vueElement.__vue__ &&
+        vueElement.__vue__.$listeners[eventName]) {
+        return vueElement.__vue__.$emit(eventName, eventData);
     } else {
-        element.dispatchEvent(eventData);
+        return element.dispatchEvent(eventData);
     }
 };

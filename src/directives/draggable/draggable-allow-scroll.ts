@@ -1,20 +1,22 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
-import { isInElement } from '../../utils/mouse/mouse';
 import { polyFillActive } from '../../utils/polyfills';
 import { DRAGGABLE_ALLOW_SCROLL_NAME } from '../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import { ScrollTo } from '../scroll-to/scroll-to-lib';
+import { CancelableScrollTo, ScrollToDuration } from './../scroll-to/scroll-to-lib';
 
+interface ScrollPosition { left: number; top: number; }
+
+// Naive implementation for a single use case: allow autoscroll on a fixed element that appears at the absolute top of the viewport.
+// Furthermore, the user must be dragging something for it to work.
 export class MDraggableAllowScroll extends MElementDomPlugin<boolean> {
     public static currentDraggableScroll?: MDraggableAllowScroll;
     public static defaultMountPoint: string = '__mdraggableallowscroll__';
 
-    public attach(mount: MountFunction): void {
-        if (window.getComputedStyle(this.element).position !== 'fixed') {
-            console.error(`Directive v-${DRAGGABLE_ALLOW_SCROLL_NAME} expected element to have position: fixed.`);
-            return;
-        }
+    private activeScroll: CancelableScrollTo | undefined;
 
+    public attach(mount: MountFunction): void {
         // This is cheesy but we only need to fix the scrolling behavior if the polyfill is not active.
         // The polyfill already includes a scroll behavior for mobile devices.  However, it doesn't allow to enable the scrolling behavior for desktops.
         if (polyFillActive.dragDrop) { return; }
@@ -22,7 +24,6 @@ export class MDraggableAllowScroll extends MElementDomPlugin<boolean> {
         if (this._options === undefined) { this._options = true; }
         mount(() => {
             this.addEventListener('dragover', (event: DragEvent) => this.handleScroll(event));
-            this.addEventListener('dragleave', (event: DragEvent) => this.dragLeave(event));
         });
     }
 
@@ -31,40 +32,48 @@ export class MDraggableAllowScroll extends MElementDomPlugin<boolean> {
         refresh(() => this._options = options);
     }
 
-    public detach(): void {}
-
-    public doCleanUp(): void {
-        if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll = undefined; }
-        this.element.style.top = '';
-        this.element.style.width = '';
-        this.element.style.height = '';
-        this.element.style.position = '';
-        document.removeEventListener('scroll', this.scrollCallback);
+    public detach(): void {
+        this.doCleanUp();
     }
 
-    private dragLeave(event: DragEvent): void {
-        if (!isInElement(event, this.element)) {
-            this.doCleanUp();
-        }
+    public doCleanUp(): void {
+        this.element.style.display = '';
+        this.cancelScroll();
     }
 
     private handleScroll(event: DragEvent): void {
         const scrollThreshold: number = 20;
-        if (event.clientY < scrollThreshold) {
-            MDraggableAllowScroll.currentDraggableScroll = this;
-            this.element.style.height = `${this.element.offsetHeight}px`;
-            this.element.style.width = `${this.element.offsetWidth}px`;
-            this.element.style.top = `${window.pageYOffset}px`;
-            this.element.style.position = 'absolute';
 
-            document.addEventListener('scroll', this.scrollCallback);
-        } else {
+        const watchMouseMove: (event: MouseEvent) => void = (event: MouseEvent) => {
+            if (event.clientY >= scrollThreshold && this.activeScroll) {
+                if (this.activeScroll) {
+                    document.removeEventListener('dragover', watchMouseMove);
+                    this.cancelScroll();
+                }
+            } else if (!this.activeScroll) {
+                this.activeScroll = new ScrollTo().scrollToTop(document.documentElement, ScrollToDuration.Slower);
+            }
+        };
+
+        if (event.clientY < scrollThreshold && window.getComputedStyle(this.element).position === 'fixed') {
+            MDraggableAllowScroll.currentDraggableScroll = this;
+            document.addEventListener('dragover', watchMouseMove);
+        }
+    }
+
+    private cancelScroll(): void {
+        if (this.activeScroll) {
+            this.activeScroll.cancel();
+            this.activeScroll = undefined;
             this.doCleanUp();
         }
     }
 
-    private scrollCallback: () => void = () => {
-        this.element.style.top = `${window.pageYOffset}px`;
+    private getViewportScrollPosition(): ScrollPosition {
+        const doc: HTMLElement = document.documentElement;
+        const left: number = doc.scrollLeft - (doc.clientLeft || 0);
+        const top: number = doc.scrollTop - (doc.clientTop || 0);
+        return { left, top };
     }
 }
 
