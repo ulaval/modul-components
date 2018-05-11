@@ -8,7 +8,7 @@ import { BADGE_NAME } from './../directive-names';
 // Icon state
 export enum MBadgeState {
     Completed = 'completed',
-    Error = 'failed',
+    Error = 'error',
     Warning = 'warning'
 }
 
