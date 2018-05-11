@@ -5,7 +5,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import ComponentsPlugin from '../../src/components';
-import SandboxesPlugin from '../../src/components/sandbox';
+import SandboxesPlugin from '../../src/sandbox';
 import DirectivesPlugin from '../../src/directives';
 import FrenchPlugin from '../../src/lang/fr';
 import FiltersPlugin from '../../src/filters';
