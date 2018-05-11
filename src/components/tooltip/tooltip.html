@@ -20,7 +20,7 @@
                    :title="propTitle"
                    button-size="22px"
                    :disabled="disabled"
-                   v-if="propMode == 'icon'">
+                   v-if="propMode === 'icon'">
     </m-icon-button>
     <m-link :id="id"
             class="m-tooltip__link"
@@ -32,7 +32,7 @@
             mode="button"
             :underline="underline"
             :disabled="disabled"
-            v-if="propMode != 'icon'">
+            v-if="propMode !=== 'icon'">
         <slot name="link"></slot>
     </m-link>
     <div :id="ariaControls"

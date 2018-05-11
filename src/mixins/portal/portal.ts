@@ -1,9 +1,10 @@
-import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../open-trigger/open-trigger';
+
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
+import { ModulVue } from '../../utils/vue/vue';
+import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../open-trigger/open-trigger';
 
 export interface PortalMixin {
     propOpen: boolean;
@@ -44,9 +45,9 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop({
         default: MOpenTrigger.Click,
         validator: value =>
-            value == MOpenTrigger.Click ||
-            value == MOpenTrigger.Hover ||
-            value == MOpenTrigger.Manual
+            value === MOpenTrigger.Click ||
+            value === MOpenTrigger.Hover ||
+            value === MOpenTrigger.Manual
     })
     public openTrigger: MOpenTrigger;
 
@@ -108,7 +109,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public tryClose(): void {
-        if (this.$modul.peekElement() == this.stackId) {
+        if (this.$modul.peekElement() === this.stackId) {
             if (this.$listeners && this.$listeners.beforeClose) {
                 this.$emit('beforeClose', (close: boolean) => {
                     this.propOpen = !close;
@@ -148,11 +149,11 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public get propOpen(): boolean {
-        return (this.open == undefined ? this.internalOpen : this.open) && !this.disabled;
+        return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
     }
 
     public set propOpen(value: boolean) {
-        if (value != this.internalOpen) {
+        if (value !== this.internalOpen) {
             if (value) {
                 if (this.portalTargetEl) {
                     this.stackId = this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().getBackdropMode(), this.as<MediaQueriesMixin>().isMqMaxS);
@@ -178,7 +179,7 @@ export class Portal extends ModulVue implements PortalMixin {
                     }
                 }
             }
-            if (value != this.internalOpen) {
+            if (value !== this.internalOpen) {
                 // really closing, reset focus
                 this.$emit(value ? 'open' : 'close');
             }
@@ -217,9 +218,9 @@ export class Portal extends ModulVue implements PortalMixin {
             this.internalTrigger = this.as<OpenTriggerMixin>().triggerHook;
         }
         if (this.internalTrigger) {
-            if (this.openTrigger == MOpenTrigger.Click) {
+            if (this.openTrigger === MOpenTrigger.Click) {
                 this.internalTrigger.addEventListener('mousedown', this.toggle);
-            } else if (this.openTrigger == MOpenTrigger.Hover) {
+            } else if (this.openTrigger === MOpenTrigger.Hover) {
                 this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
                 // Closing not supported for the moment, check source code history for how was handled mouse leave
             }

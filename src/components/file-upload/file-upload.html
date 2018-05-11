@@ -54,7 +54,7 @@
                                 <p class="m-file-upload__import-list__size">{{file.file.size | file-size}}</p>
                             </div>
                             <m-progress :value="file.progress" :state="getFileStatus(file)"></m-progress>
-                            <p class="m-file-upload__import-list__error-message" v-if="getFileStatus(file) == 'error'">
+                            <p class="m-file-upload__import-list__error-message" v-if="getFileStatus(file) === 'error'">
                                 <m-i18n k="m-file-upload:errorMsg"></m-i18n>
                             </p>
                         </div>

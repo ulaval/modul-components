@@ -23,10 +23,10 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop({
         default: MDialogSize.Regular,
         validator: value =>
-            value == MDialogSize.Regular ||
-            value == MDialogSize.FullScreen ||
-            value == MDialogSize.Large ||
-            value == MDialogSize.Small
+            value === MDialogSize.Regular ||
+            value === MDialogSize.FullScreen ||
+            value === MDialogSize.Large ||
+            value === MDialogSize.Small
     })
     public size: MDialogSize;
 
@@ -69,17 +69,17 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public get sizeFullSceen(): boolean {
-        let fullScreen: boolean = !this.as<MediaQueriesMixin>().isMqMinS ? true : this.size == MDialogSize.FullScreen ? true : false;
+        let fullScreen: boolean = !this.as<MediaQueriesMixin>().isMqMinS ? true : this.size === MDialogSize.FullScreen ? true : false;
         this.as<Portal>().transitionDuration = fullScreen ? PortalTransitionDuration.XSlow : PortalTransitionDuration.Regular;
         return fullScreen;
     }
 
     public get sizeLarge(): boolean {
-        return this.as<MediaQueriesMixin>().isMqMinS && this.size == MDialogSize.Large;
+        return this.as<MediaQueriesMixin>().isMqMinS && this.size === MDialogSize.Large;
     }
 
     public get sizeSmall(): boolean {
-        return this.as<MediaQueriesMixin>().isMqMinS && this.size == MDialogSize.Small;
+        return this.as<MediaQueriesMixin>().isMqMinS && this.size === MDialogSize.Small;
     }
 
     public getPortalElement(): HTMLElement {

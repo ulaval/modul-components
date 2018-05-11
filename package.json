@@ -10,7 +10,8 @@
         "reset": "rmdir /S /Q node_modules",
         "dev": "rimraf dist/**/* && webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
         "buildWebpack": "webpack --config conf/webpack.config.js --colors --env.buildonly",
-        "build": "rimraf dist/**/* && tsc && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist && npm run metagen",
+        "build": "tsc && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist && npm run metagen",
+        "buildlib": "webpack --config conf/webpack.config.js --colors --env.lib",
         "dtsToDist": "copyfiles -f \"./src/**/*.d.ts\" dist",
         "scssToDist": "copyfiles -u 1 \"./src/styles/**/*.scss\" dist && copyfiles -u 1 \"./src/styles/**/*.css\" dist",
         "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
@@ -24,7 +25,7 @@
         "tslint": "tslint -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
         "tslint-ci": "tslint  -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -t junit -o reports/junit/js-lint-results.xml 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
         "stylelint": "stylelint \"src/**/*.css\" \"src/**/*.scss\" --config conf/stylelint.json",
-        "prepack": "npm run clean && npm run build"
+        "prepack": "npm run clean && npm run build && npm run buildlib"
     },
     "jest": {
         "roots": [

@@ -1,10 +1,9 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model, Watch } from 'vue-property-decorator';
-import WithRender from './phone-number.html?style=./phone-number.scss';
+
+import { ModulVue } from '../../utils/vue/vue';
 import { PHONE_NUMBER_NAME } from '../component-names';
-import i18nPlugin from '../../utils/i18n/i18n';
+import WithRender from './phone-number.html?style=./phone-number.scss';
 
 @WithRender
 @Component
@@ -32,7 +31,7 @@ export class MPhoneNumber extends ModulVue {
     }
 
     private get asExample(): boolean {
-        return this.countryModel != '' && this.countryModel != this.others;
+        return this.countryModel !== '' && this.countryModel !== this.others;
     }
 
     private get exampleText(): string {
@@ -57,7 +56,7 @@ export class MPhoneNumber extends ModulVue {
     }
 
     private get isNumberDisable(): boolean {
-        return this.countryModel == '';
+        return this.countryModel === '';
     }
 }
 

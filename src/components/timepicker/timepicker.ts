@@ -1,19 +1,20 @@
-import { ModulVue } from '../../utils/vue/vue';
+import * as moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './timepicker.html?style=./timepicker.scss';
-import { TIMEPICKER_NAME } from '../component-names';
-import * as moment from 'moment';
-import { InputState } from '../../mixins/input-state/input-state';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
+import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import i18nPlugin from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
-import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
+import { TIMEPICKER_NAME } from '../component-names';
+import InputStylePlugin from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import PopupPlugin from '../popup/popup';
 import uuid from '../../utils/uuid/uuid';
+import WithRender from './timepicker.html?style=./timepicker.scss';
 
 @WithRender
 @Component({
@@ -129,7 +130,7 @@ export class MTimepicker extends ModulVue {
 
     private validateTime(event, value: string): void {
         let numbers = value.match(/\d+/g);
-        if (numbers && numbers.length == 2) {
+        if (numbers && numbers.length === 2) {
             if (isNaN(Number(numbers[0])) || isNaN(Number(numbers[1]))) {
                 this.internalTimeErrorMessage = this.$i18n.translate('m-timepicker:error-format');
             } else if (Number(numbers[0]) < this.min.hours() || Number(numbers[0]) > this.max.hours()
@@ -147,11 +148,11 @@ export class MTimepicker extends ModulVue {
     }
 
     private get timeError(): boolean {
-        return this.internalTimeErrorMessage != '' || this.as<InputState>().hasError;
+        return this.internalTimeErrorMessage !== '' || this.as<InputState>().hasError;
     }
 
     private get timeErrorMessage(): string {
-        return this.as<InputState>().errorMessage != undefined ? this.as<InputState>().errorMessage : this.internalTimeErrorMessage;
+        return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : this.internalTimeErrorMessage;
     }
 
     private get open(): boolean {

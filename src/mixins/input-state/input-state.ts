@@ -58,14 +58,14 @@ export class InputState extends Vue implements InputStateMixin {
     @Prop({
         default: InputStateTagStyle.Default,
         validator: value =>
-            value == InputStateTagStyle.Default ||
-            value == InputStateTagStyle.H1 ||
-            value == InputStateTagStyle.H2 ||
-            value == InputStateTagStyle.H3 ||
-            value == InputStateTagStyle.H4 ||
-            value == InputStateTagStyle.H5 ||
-            value == InputStateTagStyle.H6 ||
-            value == InputStateTagStyle.P
+            value === InputStateTagStyle.Default ||
+            value === InputStateTagStyle.H1 ||
+            value === InputStateTagStyle.H2 ||
+            value === InputStateTagStyle.H3 ||
+            value === InputStateTagStyle.H4 ||
+            value === InputStateTagStyle.H5 ||
+            value === InputStateTagStyle.H6 ||
+            value === InputStateTagStyle.P
     })
     public tagStyle: string;
 
@@ -74,19 +74,19 @@ export class InputState extends Vue implements InputStateMixin {
     }
 
     public get isDisabled(): boolean {
-        return this.state == InputStateValue.Disabled;
+        return this.state === InputStateValue.Disabled;
     }
 
     public get isWaiting(): boolean {
-        return this.state == InputStateValue.Waiting;
+        return this.state === InputStateValue.Waiting;
     }
 
     public get hasError(): boolean {
-        return this.state == InputStateValue.Error;
+        return this.state === InputStateValue.Error;
     }
 
     public get isValid(): boolean {
-        return this.state == InputStateValue.Valid;
+        return this.state === InputStateValue.Valid;
     }
 
     public get state(): InputStateValue {
@@ -110,14 +110,14 @@ export class InputState extends Vue implements InputStateMixin {
     }
 
     public get hasErrorMessage(): boolean {
-        return (!!this.errorMessage || this.errorMessage == ' ') && !this.disabled && !this.waiting;
+        return (!!this.errorMessage || this.errorMessage === ' ') && !this.disabled && !this.waiting;
     }
 
     public get hasValidMessage(): boolean {
-        return (!!this.validMessage || this.validMessage == ' ') && !this.disabled && !this.waiting && !this.hasErrorMessage;
+        return (!!this.validMessage || this.validMessage === ' ') && !this.disabled && !this.waiting && !this.hasErrorMessage;
     }
 
     public get hasHelperMessage(): boolean {
-        return (!!this.helperMessage || this.helperMessage == ' ') && !this.disabled && !this.waiting;
+        return (!!this.helperMessage || this.helperMessage === ' ') && !this.disabled && !this.waiting;
     }
 }

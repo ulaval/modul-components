@@ -1,17 +1,18 @@
-import { ModulVue } from '../../utils/vue/vue';
+import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import uuid from '../../utils/uuid/uuid';
-import WithRender from './scroll-top.html?style=./scroll-top.scss';
-import { SCROLL_TOP_NAME } from '../component-names';
-// import { Portal, PortalMixin } from '../../mixins/portal/portal';
-import ScrollTo, { ScrollToDuration } from '../../directives/scroll-to/scroll-to-lib';
-import IconPlugin from '../icon/icon';
-import ButtonPlugin from '../button/button';
-import I18nPlugin from '../i18n/i18n';
-import PortalPlugin from 'portal-vue';
 
+import ScrollTo, { ScrollToDuration } from '../../directives/scroll-to/scroll-to-lib';
+import uuid from '../../utils/uuid/uuid';
+import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
+import { SCROLL_TOP_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
+import IconPlugin from '../icon/icon';
+import WithRender from './scroll-top.html?style=./scroll-top.scss';
+
+// import { Portal, PortalMixin } from '../../mixins/portal/portal';
 export enum MScrollTopPosition {
     Fixe = 'fixe',
     Relative = 'relative'
@@ -31,17 +32,17 @@ export class MScrollTop extends ModulVue {
     @Prop({
         default: MScrollTopPosition.Fixe,
         validator: value =>
-            value == MScrollTopPosition.Fixe ||
-            value == MScrollTopPosition.Relative
+            value === MScrollTopPosition.Fixe ||
+            value === MScrollTopPosition.Relative
     })
     public position: string;
     @Prop({
         default: ScrollToDuration.Regular,
         validator: value =>
-            value == ScrollToDuration.Regular ||
-            value == ScrollToDuration.Slow ||
-            value == ScrollToDuration.Fast ||
-            value == ScrollToDuration.Null
+            value === ScrollToDuration.Regular ||
+            value === ScrollToDuration.Slow ||
+            value === ScrollToDuration.Fast ||
+            value === ScrollToDuration.Null
     })
     public duration: string;
 
@@ -56,7 +57,7 @@ export class MScrollTop extends ModulVue {
     private scrollTopPortalId: string;
 
     protected created(): void {
-        if (this.position != MScrollTopPosition.Relative) {
+        if (this.position !== MScrollTopPosition.Relative) {
             this.visible = false;
             this.defaultTargetElVisible = false;
             this.$nextTick(() => {
@@ -83,7 +84,7 @@ export class MScrollTop extends ModulVue {
     }
 
     private get scrollTarget(): number {
-        return this.position == MScrollTopPosition.Relative ? this.$el.offsetTop : 0;
+        return this.position === MScrollTopPosition.Relative ? this.$el.offsetTop : 0;
     }
 
     private onClick(event): void {
@@ -103,11 +104,11 @@ export class MScrollTop extends ModulVue {
     }
 
     private getScrollTopId(): string {
-        return this.position == MScrollTopPosition.Relative ? this.scrollTopId : this.scrollTopPortalId;
+        return this.position === MScrollTopPosition.Relative ? this.scrollTopId : this.scrollTopPortalId;
     }
 
     private get propDuration(): ScrollToDuration {
-        return this.duration == ScrollToDuration.Null || this.duration == ScrollToDuration.Slow || this.duration == ScrollToDuration.Fast ? this.duration : ScrollToDuration.Regular;
+        return this.duration === ScrollToDuration.Null || this.duration === ScrollToDuration.Slow || this.duration === ScrollToDuration.Fast ? this.duration : ScrollToDuration.Regular;
     }
 
     private get hasAdditionalContentSlot(): boolean {

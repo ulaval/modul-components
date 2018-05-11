@@ -1,11 +1,12 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './list-item.html?style=./list-item.scss';
+
 import { LIST_ITEM_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import SpinnerPlugin from '../spinner/spinner';
-import I18nPlugin from '../i18n/i18n';
+import WithRender from './list-item.html?style=./list-item.scss';
 
 @WithRender
 @Component
@@ -33,7 +34,7 @@ export class MListItem extends Vue {
     }
 
     private get hasIcon() {
-        return this.iconName != '' && this.iconName != undefined;
+        return this.iconName !== '' && this.iconName !== undefined;
     }
 
     private get isWaiting() {
