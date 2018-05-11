@@ -76,7 +76,7 @@ export class MLink extends ModulVue {
     public iconSize: string;
 
     protected mounted(): void {
-        this.isButtonChanged(this.mode == MLinkMode.Button);
+        this.isButtonChanged(this.mode === MLinkMode.Button);
     }
 
     @Watch('isButton')

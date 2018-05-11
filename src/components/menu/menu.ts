@@ -79,11 +79,11 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     }
 
     private getOpenTitle(): string {
-        return this.openTitle == undefined ? this.$i18n.translate('m-menu:open') : this.openTitle;
+        return this.openTitle === undefined ? this.$i18n.translate('m-menu:open') : this.openTitle;
     }
 
     private getCloseTitle(): string {
-        return this.closeTitle == undefined ? this.$i18n.translate('m-menu:close') : this.closeTitle;
+        return this.closeTitle === undefined ? this.$i18n.translate('m-menu:close') : this.closeTitle;
     }
 
     private get propTitle(): string {
