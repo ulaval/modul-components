@@ -12,7 +12,6 @@ import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import IconButtonPlugin from '../icon-button/icon-button';
 import MessagePlugin from '../message/message';
-import { MBadgeState } from './../../directives/badge/badge';
 import FileUploadPlugin, { MFileUpload } from './file-upload';
 
 describe('MFileUpload', () => {
@@ -43,14 +42,6 @@ describe('MFileUpload', () => {
         });
 
         return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should completed file status match badge status', () => {
-        return expect(MFileStatus.COMPLETED).toEqual(MBadgeState.Completed);
-    });
-
-    it('should  failed file status match badge status', () => {
-        return expect(MFileStatus.FAILED).toEqual(MBadgeState.Failed);
     });
 
     it('should support optional $file store name', async () => {

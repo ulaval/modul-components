@@ -8,7 +8,7 @@ import { BADGE_NAME } from './../directive-names';
 // Icon state
 export enum MBadgeState {
     Completed = 'completed',
-    Failed = 'failed',
+    Error = 'error',
     Warning = 'warning'
 }
 
@@ -17,10 +17,10 @@ type BadgeIcon = {
 };
 
 const ICON_COMPLETED: string = 'chip-check';
-const ICON_FAILED: string = 'chip-error';
+const ICON_ERROR: string = 'chip-error';
 const ICON_WARNING: string = 'chip-warning';
 const COLOR_COMPLETED: string = '#00c77f';
-const COLOR_FAILED: string = '#e30513';
+const COLOR_ERROR: string = '#e30513';
 const COLOR_WARNING: string = '#ffc103';
 
 const DEFAULT_ORIGIN: string[] = ['23.5', '23.5'];
@@ -29,13 +29,13 @@ const BADGE_SIZE_RATIO: number = 16 / 30;
 
 const BADGE_ICON: BadgeIcon = {
     [MBadgeState.Completed]: ICON_COMPLETED,
-    [MBadgeState.Failed]: ICON_FAILED,
+    [MBadgeState.Error]: ICON_ERROR,
     [MBadgeState.Warning]: ICON_WARNING
 };
 
 const BADGE_COLOR: BadgeIcon = {
     [MBadgeState.Completed]: COLOR_COMPLETED,
-    [MBadgeState.Failed]: COLOR_FAILED,
+    [MBadgeState.Error]: COLOR_ERROR,
     [MBadgeState.Warning]: COLOR_WARNING
 };
 
