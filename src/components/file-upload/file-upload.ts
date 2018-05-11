@@ -201,22 +201,24 @@ export class MFileUpload extends ModulVue {
     }
 
     private getFileStatus(file): string {
-        if (file.status === MFileStatus.FAILED) {
-            return MProgressState.Error;
-        } else if (file.status === MFileStatus.COMPLETED) {
-            return MProgressState.Completed;
-        } else {
-            return MProgressState.InProgress;
+        switch (file.status) {
+            case MFileStatus.FAILED:
+                return MProgressState.Error;
+            case MFileStatus.COMPLETED:
+                return MProgressState.Completed;
+            default:
+                return MProgressState.InProgress;
         }
     }
 
     private getBadgeState(file): string | undefined {
-        if (file.status === MFileStatus.FAILED) {
-            return MBadgeState.Error;
-        } else if (file.status === MFileStatus.COMPLETED) {
-            return MBadgeState.Completed;
-        } else {
-            return undefined;
+        switch (file.status) {
+            case MFileStatus.FAILED:
+                return MBadgeState.Error;
+            case MFileStatus.COMPLETED:
+                return MBadgeState.Completed;
+            default:
+                return undefined;
         }
     }
 
