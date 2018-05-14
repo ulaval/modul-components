@@ -150,7 +150,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public get propOpen(): boolean {
-        let open: boolean = (this.open == undefined ? this.internalOpen : this.open) && !this.disabled;
+        let open: boolean = (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
         if (open) {
             this.loaded = true;
         }
