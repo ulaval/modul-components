@@ -159,7 +159,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
                 (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
 
-                if (this.skin == MNavbarSkin.Light || this.skin == MNavbarSkin.Arrow) {
+                if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
                     this.setPosition(element, this.skin);
                 }
 

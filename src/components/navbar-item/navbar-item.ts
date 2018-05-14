@@ -62,7 +62,7 @@ export class MNavbarItem extends ModulVue {
     private onClick(event: Event): void {
         if (!this.disabled && this.parentNavbar) {
             this.parentNavbar.onClick(this.value, event);
-            if (this.value != this.parentNavbar.model) {
+            if (this.value !== this.parentNavbar.model) {
                 this.parentNavbar.updateValue(this.value);
             }
         }
