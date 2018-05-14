@@ -142,7 +142,7 @@ export class MFlexTemplate extends ModulVue {
     }
 
     private setMenuWidth(): void {
-        let width = this.propSmallMenu ? this.smallMenuWidth : this.menuWidth;
+        let width: string = this.propSmallMenu ? this.smallMenuWidth : this.menuWidth;
         let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;
         let menu: HTMLElement = this.$refs.menu as HTMLElement;
         let pageContainer: HTMLElement = this.$refs.pageContainer as HTMLElement;
@@ -163,11 +163,11 @@ export class MFlexTemplate extends ModulVue {
         return this.hasMenuSlot ? this.smallMenu : false;
     }
 
-    private get propHeaderFixe() {
+    private get propHeaderFixe(): boolean {
         return this.hasHeaderSlot && this.headerFixe;
     }
 
-    private get propMenuFixe() {
+    private get propMenuFixe(): boolean {
         return this.hasMenuSlot && this.menuFixe;
     }
 
@@ -187,7 +187,7 @@ export class MFlexTemplate extends ModulVue {
         return !this.propHeaderFixe && this.propMenuFixe;
     }
 
-    private get hasHeaderSlot() {
+    private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;
     }
 

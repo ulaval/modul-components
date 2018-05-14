@@ -1,4 +1,4 @@
-import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
+import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective, VueConstructor } from 'vue';
 
 import { MIconFile } from '../../components/icon-file/icon-file';
 import { MIcon } from '../../components/icon/icon';
@@ -89,12 +89,12 @@ const getBadgePosition: (element: HTMLElement, binding: VNodeDirective, vnode: V
     return { size: badgeSize , leftDistance, topDistance };
 };
 
-const buildBadge = (element, binding, vnode) => {
+const buildBadge: (element, binding, vnode) => void = (element, binding, vnode) => {
 
     element.style.overflow = 'visible';
 
     let badge: BadgePosition = getBadgePosition(element, binding, vnode);
-    const MyComponent = Vue.extend({
+    const MyComponent: VueConstructor<Vue> = Vue.extend({
         template: `<m-icon
                         :name="'${BADGE_ICON[binding.value.state]}'"
                         :size="'${badge.size}'"
@@ -104,7 +104,7 @@ const buildBadge = (element, binding, vnode) => {
     });
 
     Vue.nextTick(() => {
-        const component = new MyComponent().$mount();
+        const component: Vue = new MyComponent().$mount();
         component.$el.style.color = BADGE_COLOR[binding.value.state];
         element.appendChild(component.$el);
     });

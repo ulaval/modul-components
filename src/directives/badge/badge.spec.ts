@@ -22,7 +22,7 @@ describe('MBadge', () => {
     });
 
     it(`should render correctly`, () => {
-        const badge = getBadgeDirective(MBadgeState.Completed);
+        const badge: Wrapper<Vue> = getBadgeDirective(MBadgeState.Completed);
         return expect(renderComponent(badge.vm)).resolves.toMatchSnapshot();
     });
 });

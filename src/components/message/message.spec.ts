@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { addMessages } from '../../../tests/helpers/lang';
@@ -17,7 +17,7 @@ describe('MMessage', () => {
     });
 
     it('should render correctly', () => {
-        const msg = mount(MMessage, {
+        const msg: Wrapper<MMessage> = mount(MMessage, {
             localVue: localVue
         });
 
@@ -25,7 +25,7 @@ describe('MMessage', () => {
     });
 
     it('should render correctly content', () => {
-        const msg = mount(MMessage, {
+        const msg: Wrapper<MMessage> = mount(MMessage, {
             localVue: localVue,
             slots: {
                 default: 'message'
@@ -36,7 +36,7 @@ describe('MMessage', () => {
     });
 
     it('should render nothing if not visible', () => {
-        const msg = mount(MMessage, {
+        const msg: Wrapper<MMessage> = mount(MMessage, {
             localVue: localVue,
             propsData: {
                 visible: false
@@ -47,7 +47,7 @@ describe('MMessage', () => {
     });
 
     it('should render correctly light skin', () => {
-        const msg = mount(MMessage, {
+        const msg: Wrapper<MMessage> = mount(MMessage, {
             localVue: localVue,
             propsData: {
                 skin: MMessageSkin.Light
@@ -58,7 +58,7 @@ describe('MMessage', () => {
     });
 
     it('should render correctly all possible states', async () => {
-        const btn = mount(MMessage, {
+        const btn: Wrapper<MMessage> = mount(MMessage, {
             localVue: localVue
         });
 
@@ -69,7 +69,7 @@ describe('MMessage', () => {
     });
 
     it('should render correctly when there is no icon', () => {
-        const msg = mount(MMessage, {
+        const msg: Wrapper<MMessage> = mount(MMessage, {
             localVue: localVue,
             propsData: {
                 icon: false
@@ -83,7 +83,7 @@ describe('MMessage', () => {
         // For vue-test-utils bug, else m-icon is not rendered in m-button-icon
         Vue.component(ICON_NAME, MIcon);
 
-        const msg = mount(MMessage, {
+        const msg: Wrapper<MMessage> = mount(MMessage, {
             localVue: localVue,
             propsData: {
                 closeButton: true
@@ -94,7 +94,7 @@ describe('MMessage', () => {
     });
 
     it('should render nothing after close button is clicked', async () => {
-        const msg = mount(MMessage, {
+        const msg: Wrapper<MMessage> = mount(MMessage, {
             localVue: localVue,
             propsData: {
                 closeButton: true
@@ -106,7 +106,7 @@ describe('MMessage', () => {
     });
 
     it('should emit close event when close button is clicked', () => {
-        const msg = mount(MMessage, {
+        const msg: Wrapper<MMessage> = mount(MMessage, {
             localVue: localVue,
             propsData: {
                 closeButton: true

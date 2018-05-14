@@ -1,8 +1,10 @@
-import Vue from 'vue';
 import '../../utils/polyfills';
-import SteppersItemPlugin, { MSteppersItem, MSteppersItemState } from './steppers-item';
+
+import Vue from 'vue';
+
 import SpritesHelper from '../../../tests/helpers/sprites';
 import { ICON_CLASS, validateIconSvg } from '../icon/icon.spec';
+import SteppersItemPlugin, { MSteppersItem, MSteppersItemState } from './steppers-item';
 
 const STATE_COMPLETED_CSS: string = 'm--is-completed';
 const STATE_PROGRESS_CSS: string = 'm--is-in-progress';
@@ -85,7 +87,7 @@ describe('MSteppers-item', () => {
     });
 
     it('text rendering', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `<m-steppers-item>Label</m-steppers-item>`
         }).$mount();
 
@@ -100,16 +102,16 @@ describe('MSteppers-item', () => {
     });
 
     it('click event', done => {
-        let clickSpy = jasmine.createSpy('clickSpy');
-        let vm = new Vue({
+        let clickSpy: jasmine.Spy = jasmine.createSpy('clickSpy');
+        let vm: Vue = new Vue({
             template: `<m-steppers-item state="completed" @click="onClick">Label</m-steppers-item>`,
             methods: {
                 onClick: clickSpy
             }
         }).$mount();
 
-        let icon = (vm as Vue).$el.querySelector('.m-steppers-item__icon') as Element;
-        let title = (vm as Vue).$el.querySelector('.m-steppers-item__title') as Element;
+        let icon: Element = (vm as Vue).$el.querySelector('.m-steppers-item__icon') as Element;
+        let title: Element = (vm as Vue).$el.querySelector('.m-steppers-item__title') as Element;
 
         let e: any = document.createEvent('HTMLEvents');
         e.initEvent('click', true, true);

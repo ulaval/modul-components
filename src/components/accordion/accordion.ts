@@ -37,7 +37,7 @@ export interface AccordionGroupGateway {
     concurrent: boolean;
     addAccordion(accordion: AccordionGateway): void;
     removeAccordion(id: string): void;
-    closeAllAccordions();
+    closeAllAccordions(): any;
 }
 
 function isAccordionGroup(parent: any): parent is AccordionGroupGateway {
@@ -151,7 +151,7 @@ export class MAccordion extends Vue implements AccordionGateway {
 
     private toggleAccordion(): void {
         if (!this.propDisabled) {
-            const initialState = this.internalPropOpen;
+            const initialState: boolean = this.internalPropOpen;
 
             if (
                 !this.internalPropOpen &&

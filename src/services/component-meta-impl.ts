@@ -6,8 +6,8 @@ import Component from 'vue-class-component';
 export class ServiceMixin extends Vue {
     public beforeCreate(): void {
         // Vue.prototype.$log.log('before create mixin');
-        const options = this.$options;
-        (options as any).$serviceMixin = this;
+        const options: any = this.$options;
+        options.$serviceMixin = this;
     }
 
     public log(s: string): void {

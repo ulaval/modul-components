@@ -1,7 +1,9 @@
-import Vue from 'vue';
 import '../../utils/polyfills';
-import DatepickerPlugin, { MDatepicker } from './datepicker';
+
 import * as moment from 'moment';
+import Vue from 'vue';
+
+import DatepickerPlugin, { MDatepicker } from './datepicker';
 
 const DATEPICKER_CSS: string = 'm-datepicker';
 const TEXT_FIELD_CSS: string = 'm-textfield';
@@ -24,7 +26,7 @@ describe('datepicker', () => {
     });
 
     it('format prop', () => {
-        let date = moment();
+        let date: moment.Moment = moment();
 
         new Vue({
             template: `<m-datepicker v-model="value"></m-datepicker>`,
@@ -32,7 +34,7 @@ describe('datepicker', () => {
                 value: date
             },
             mounted(): void {
-                let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
+                let input: HTMLInputElement = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect(input.value).toEqual(date.format('YYYY/MM/DD'));
             }
         }).$mount();
@@ -44,7 +46,7 @@ describe('datepicker', () => {
                 format: 'lll'
             },
             mounted(): void {
-                let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
+                let input: HTMLInputElement = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect(input.value).toEqual(date.format('lll'));
             }
         }).$mount();
@@ -54,7 +56,7 @@ describe('datepicker', () => {
         new Vue({
             template: `<m-datepicker></m-datepicker>`,
             mounted(): void {
-                let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
+                let input: HTMLInputElement = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect(input.disabled).toBeFalsy();
             }
         }).$mount();
@@ -65,7 +67,7 @@ describe('datepicker', () => {
                 disabled: false
             },
             mounted(): void {
-                let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
+                let input: HTMLInputElement = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect(input.disabled).toBeFalsy();
 
                 (this as any).disabled = true;
@@ -88,7 +90,7 @@ describe('datepicker', () => {
                 value: ''
             },
             mounted(): void {
-                let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
+                let input: HTMLInputElement = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 input.blur();
                 Vue.nextTick(() => {
                     expect(this.$el.querySelector('.' + VALIDATION_MESSAGE_TEXT_CSS)).toBeNull();
@@ -120,32 +122,32 @@ describe('datepicker', () => {
     });
 
     it('min prop', () => {
-        let date = moment();
+        let date: moment.Moment = moment();
 
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `<m-datepicker v-model="value" :min="min"></m-datepicker>`,
             data: {
                 value: date,
                 min: date.add(1, 'day')
             },
             mounted(): void {
-                let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
+                let input: HTMLInputElement = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect((this as any).value.isSame((this as any).min, 'day')).toBeTruthy();
             }
         }).$mount();
     });
 
     it('max prop', () => {
-        let date = moment();
+        let date: moment.Moment = moment();
 
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `<m-datepicker v-model="value" :max="max"></m-datepicker>`,
             data: {
                 value: date,
                 max: date.subtract(1, 'day')
             },
             mounted(): void {
-                let input = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
+                let input: HTMLInputElement = this.$el.querySelector('.' + TEXT_FIELD_INPUT_CSS) as HTMLInputElement;
                 expect((this as any).value.isSame((this as any).max, 'day')).toBeTruthy();
             }
         }).$mount();

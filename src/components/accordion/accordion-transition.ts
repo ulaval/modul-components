@@ -16,7 +16,7 @@ export const MAccordionTransition: VueConstructor<Vue> = Vue.extend({
             on: {
                 enter(el: HTMLElement): void {
                     const props: MAccordionTransitionProps = context.props as MAccordionTransitionProps;
-                    const heightDelta = props.heightDelta
+                    const heightDelta: number = props.heightDelta
                         ? props.heightDelta
                         : 0;
 

@@ -1,5 +1,7 @@
-import Vue from 'vue';
 import '../../utils/polyfills';
+
+import Vue from 'vue';
+
 import NavBarItemPlugin, { MNavbarItem } from './navbar-item';
 
 const DISABLED_CSS: string = 'm--is-disabled';
@@ -27,8 +29,8 @@ describe('navbar-item', () => {
     });
 
     it('click event', () => {
-        let clickSpy = jasmine.createSpy('clickSpy');
-        let vm = new Vue({
+        let clickSpy: jasmine.Spy = jasmine.createSpy('clickSpy');
+        let vm: Vue = new Vue({
             template: `
                 <m-navbar-item @click="onClick($event)"></m-navbar-item>
             `,
@@ -37,7 +39,7 @@ describe('navbar-item', () => {
             }
         }).$mount();
 
-        let element = vm.$el;
+        let element: HTMLElement = vm.$el;
 
         if (element) {
             (element as any).click();

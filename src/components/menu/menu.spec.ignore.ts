@@ -1,5 +1,7 @@
-import Vue from 'vue';
 import '../../utils/polyfills';
+
+import Vue from 'vue';
+
 import MenuPlugin, { MMenu } from './menu';
 
 const STATE_DISABLED_CSS: string = 'm--is-disabled';
@@ -13,7 +15,7 @@ describe('optionsMenu', () => {
     });
 
     it('disabled prop', () => {
-        let button = menu.$el.querySelector('button');
+        let button: HTMLButtonElement = menu.$el.querySelector('button');
         if (button) {
             expect(button.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
         }
