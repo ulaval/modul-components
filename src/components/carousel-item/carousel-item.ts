@@ -12,6 +12,14 @@ export class MCarouselItem extends Vue {
     public transitionForward: boolean = true;
     private animActive: boolean = false;
 
+    public beforeEnter(): void {
+        this.$emit('animationStart');
+    }
+
+    public afterLeave(): void {
+        this.$emit('animationDone');
+    }
+
     private mounted(): void {
         setTimeout(() => {
             this.animActive = true;
