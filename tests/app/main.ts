@@ -5,11 +5,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import ComponentsPlugin from '../../src/components';
-import SandboxesPlugin from '../../src/sandbox';
 import DirectivesPlugin from '../../src/directives';
-import FrenchPlugin from '../../src/lang/fr';
 import FiltersPlugin from '../../src/filters';
-import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
+import FrenchPlugin from '../../src/lang/fr';
+import UtilsPlugin, { SandboxesPlugin, UtilsPluginOptions } from '../../src/utils';
 import { FRENCH } from '../../src/utils/i18n/i18n';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 import MetaFactory from './meta-init';

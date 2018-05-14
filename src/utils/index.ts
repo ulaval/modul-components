@@ -1,22 +1,29 @@
-import Vue, { PluginObject } from 'vue';
-
-import MediaQueriesPlugin from './media-queries/media-queries';
-import ModulPlugin from './modul/modul';
-import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
-import HttpPlugin, { HttpPluginOptions } from './http/http';
-import SpritesPlugin from './svg/sprites';
-import * as TouchPlugin from 'vue-touch';
-import ConfirmPlugin from './modal/confirm';
-import AlertPlugin from './modal/alert';
-import FilePlugin from '../utils/file/file';
 import { PortalPluginInstall } from 'portal-vue';
+import Vue, { PluginObject } from 'vue';
+import * as TouchPlugin from 'vue-touch';
+
+import RadioSandboxPlugin from '../components/radio/radio-sandbox';
+import FilePlugin from '../utils/file/file';
+import HttpPlugin, { HttpPluginOptions } from './http/http';
+import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
 import LoggerPlugin, { ConsoleOptions } from './logger/logger';
+import MediaQueriesPlugin from './media-queries/media-queries';
+import AlertPlugin from './modal/alert';
+import ConfirmPlugin from './modal/confirm';
+import ModulPlugin from './modul/modul';
+import SpritesPlugin from './svg/sprites';
 
 export interface UtilsPluginOptions {
     httpPluginOptions?: HttpPluginOptions;
     consoleOptions?: ConsoleOptions;
     i18PluginOptions?: I18nPluginOptions;
 }
+
+export const SandboxesPlugin: PluginObject<any> = {
+    install(v, options): void {
+        Vue.use(RadioSandboxPlugin);
+    }
+};
 
 const UtilsPlugin: PluginObject<any> = {
     install(v, options): void {
