@@ -33,18 +33,18 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
-            value == MPopperPlacement.Bottom ||
-            value == MPopperPlacement.BottomEnd ||
-            value == MPopperPlacement.BottomStart ||
-            value == MPopperPlacement.Left ||
-            value == MPopperPlacement.LeftEnd ||
-            value == MPopperPlacement.LeftStart ||
-            value == MPopperPlacement.Right ||
-            value == MPopperPlacement.RightEnd ||
-            value == MPopperPlacement.RightStart ||
-            value == MPopperPlacement.Top ||
-            value == MPopperPlacement.TopEnd ||
-            value == MPopperPlacement.TopStart
+            value === MPopperPlacement.Bottom ||
+            value === MPopperPlacement.BottomEnd ||
+            value === MPopperPlacement.BottomStart ||
+            value === MPopperPlacement.Left ||
+            value === MPopperPlacement.LeftEnd ||
+            value === MPopperPlacement.LeftStart ||
+            value === MPopperPlacement.Right ||
+            value === MPopperPlacement.RightEnd ||
+            value === MPopperPlacement.RightStart ||
+            value === MPopperPlacement.Top ||
+            value === MPopperPlacement.TopEnd ||
+            value === MPopperPlacement.TopStart
     })
     public placement: MPopperPlacement;
 
@@ -99,7 +99,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
         if (value) {
-            if (this.popper == undefined) {
+            if (this.popper === undefined) {
                 let options: object = {
                     placement: this.placement,
                     eventsEnabled: false

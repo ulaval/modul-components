@@ -2,10 +2,10 @@
     <div class="m-spinner">
         <portal :target-el="spinnerElement" v-if="initialized">
             <div ref="spinnerWrap" class="m-spinner__wrap" :class="{'m--is-processing': processing,
-                 'm--is-dark': skin == 'dark',
-                 'm--is-light': skin == 'light',
-                 'm--is-lighter': skin == 'lighter'}">
-                <div aria-hidden="true" class="m-spinner__icon" :class="{ 'm--is-small' : size == 'small'}"></div>
+                 'm--is-dark': skin === 'dark',
+                 'm--is-light': skin === 'light',
+                 'm--is-lighter': skin === 'lighter'}">
+                <div aria-hidden="true" class="m-spinner__icon" :class="{ 'm--is-small' : size === 'small'}"></div>
                 <h2 class="m-spinner__title" v-if="hasTitle">
                     <template v-if="hasTitleMessage">{{ titleMessage }}</template>
                     <template v-else>

@@ -1,11 +1,12 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './message.html?style=./message.scss';
+
 import { MESSAGE_NAME } from '../component-names';
-import IconPlugin from '../icon/icon';
-import IconButtonPlugin from '../icon-button/icon-button';
 import I18nPlugin from '../i18n/i18n';
+import IconButtonPlugin from '../icon-button/icon-button';
+import IconPlugin from '../icon/icon';
+import WithRender from './message.html?style=./message.scss';
 
 export enum MMessageState {
     Success = 'success',
@@ -25,18 +26,18 @@ export class MMessage extends Vue {
     @Prop({
         default: MMessageState.Success,
         validator: value =>
-            value == MMessageState.Success ||
-            value == MMessageState.Information ||
-            value == MMessageState.Warning ||
-            value == MMessageState.Error
+            value === MMessageState.Success ||
+            value === MMessageState.Information ||
+            value === MMessageState.Warning ||
+            value === MMessageState.Error
     })
     public state: MMessageState;
 
     @Prop({
         default: MMessageSkin.Regular,
         validator: value =>
-            value == MMessageSkin.Regular ||
-            value == MMessageSkin.Light
+            value === MMessageSkin.Regular ||
+            value === MMessageSkin.Light
     })
     public skin: MMessageSkin;
 
@@ -54,11 +55,11 @@ export class MMessage extends Vue {
     @Watch('visible')
     private onVisibleChange(value: boolean): void {
         // reset to true if prop reset to undefined
-        this.internalPropVisible = value == undefined ? true : value;
+        this.internalPropVisible = value === undefined ? true : value;
     }
 
     private get propVisible(): boolean {
-        return this.visible != undefined ? this.visible : this.internalPropVisible;
+        return this.visible !== undefined ? this.visible : this.internalPropVisible;
     }
 
     private set propVisible(visible: boolean) {
@@ -93,7 +94,7 @@ export class MMessage extends Vue {
     }
 
     private get showCloseButton(): boolean {
-        return this.skin == MMessageSkin.Regular && this.closeButton;
+        return this.skin === MMessageSkin.Regular && this.closeButton;
     }
 
 }

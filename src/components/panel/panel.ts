@@ -1,9 +1,10 @@
+import ElementQueries from 'css-element-queries/src/ElementQueries';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './panel.html?style=./panel.scss';
+
 import { PANEL_NAME } from '../component-names';
-import ElementQueries from 'css-element-queries/src/ElementQueries';
+import WithRender from './panel.html?style=./panel.scss';
 
 export enum MPanelSkin {
     Light = 'light',
@@ -20,9 +21,9 @@ export class MPanel extends Vue {
     @Prop({
         default: MPanelSkin.Light,
         validator: value =>
-            value == MPanelSkin.Light ||
-            value == MPanelSkin.Dark ||
-            value == MPanelSkin.Darker
+            value === MPanelSkin.Light ||
+            value === MPanelSkin.Dark ||
+            value === MPanelSkin.Darker
     })
     public skin: MPanelSkin;
 
@@ -62,15 +63,15 @@ export class MPanel extends Vue {
     }
 
     private get lightSkin(): boolean {
-        return this.skin == MPanelSkin.Light;
+        return this.skin === MPanelSkin.Light;
     }
 
     private get darkSkin(): boolean {
-        return this.skin == MPanelSkin.Dark;
+        return this.skin === MPanelSkin.Dark;
     }
 
     private get darkerSkin(): boolean {
-        return this.skin == MPanelSkin.Darker;
+        return this.skin === MPanelSkin.Darker;
     }
 
     private get hasHeader(): boolean {

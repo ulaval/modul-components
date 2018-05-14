@@ -3,9 +3,9 @@
               'm--is-disabled': propDisabled,
               'm--is-error': propError,
               'm--is-valid': propValid,
-              'm--is-checked': model == value,
+              'm--is-checked': model === value,
               'm--is-focus': hasFocus && !propDisabled,
-              'm--is-input-right': propPosition == 'right',
+              'm--is-input-right': propPosition === 'right',
               'm--is-full-size': propFullSize,
               'm--is-inline': propInline }">
     <input class="m-radio__hidden" :value="value" type="radio" v-model="model" :id="radioID" :name="propName"

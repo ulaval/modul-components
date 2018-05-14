@@ -7,9 +7,9 @@ import { BADGE_NAME } from './../directive-names';
 
 // Icon state
 export enum MBadgeState {
-    Empty = 'empty',
     Completed = 'completed',
-    Failed = 'failed'
+    Error = 'error',
+    Warning = 'warning'
 }
 
 type BadgeIcon = {
@@ -17,9 +17,11 @@ type BadgeIcon = {
 };
 
 const ICON_COMPLETED: string = 'chip-check';
-const ICON_FAILED: string = 'chip-error';
+const ICON_ERROR: string = 'chip-error';
+const ICON_WARNING: string = 'chip-warning';
 const COLOR_COMPLETED: string = '#00c77f';
-const COLOR_FAILED: string = '#e30513';
+const COLOR_ERROR: string = '#e30513';
+const COLOR_WARNING: string = '#ffc103';
 
 const DEFAULT_ORIGIN: string[] = ['23.5', '23.5'];
 
@@ -27,25 +29,27 @@ const BADGE_SIZE_RATIO: number = 16 / 30;
 
 const BADGE_ICON: BadgeIcon = {
     [MBadgeState.Completed]: ICON_COMPLETED,
-    [MBadgeState.Failed]: ICON_FAILED
+    [MBadgeState.Error]: ICON_ERROR,
+    [MBadgeState.Warning]: ICON_WARNING
 };
 
 const BADGE_COLOR: BadgeIcon = {
     [MBadgeState.Completed]: COLOR_COMPLETED,
-    [MBadgeState.Failed]: COLOR_FAILED
+    [MBadgeState.Error]: COLOR_ERROR,
+    [MBadgeState.Warning]: COLOR_WARNING
 };
 
 const getBadgeOrigin: (vnode: VNode) => String[] = (vnode: VNode) => {
     let elTag: string = (vnode.componentOptions as ComponentMeta).tag;
     let elID: string = '';
-    if (elTag == 'm-icon') {
+    if (elTag === 'm-icon') {
         elID = (vnode.componentInstance as MIcon).name;
-    } else if (elTag == 'm-icon-file') {
+    } else if (elTag === 'm-icon-file') {
         elID = (vnode.componentInstance as MIconFile).spriteId;
     }
 
     const element: HTMLElement = document.getElementById(elID) as HTMLElement;
-    if (element && element.dataset.badgeOrigin != undefined) {
+    if (element && element.dataset.badgeOrigin !== undefined) {
         return (((document.getElementById(elID) as HTMLElement).dataset.badgeOrigin) as string).split(',');
     } else {
         return DEFAULT_ORIGIN;
@@ -58,8 +62,8 @@ interface BadgeOffset {
 }
 const getBadgeOffset: (binding: VNodeDirective) => BadgeOffset = (binding: VNodeDirective) => {
     return {
-        x: binding.value.offsetX != undefined ? parseInt(binding.value.offsetX, 10) : 0,
-        y: binding.value.offsetY != undefined ? parseInt(binding.value.offsetY, 10) : 0
+        x: binding.value.offsetX !== undefined ? parseInt(binding.value.offsetX, 10) : 0,
+        y: binding.value.offsetY !== undefined ? parseInt(binding.value.offsetY, 10) : 0
     };
 };
 
@@ -113,7 +117,7 @@ const MBadgeDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-        if (binding.value.state != undefined && binding.value.state != '') {
+        if (binding.value.state !== undefined && binding.value.state !== '') {
             buildBadge(element, binding, vnode);
         }
     },
@@ -126,7 +130,7 @@ const MBadgeDirective: DirectiveOptions = {
         if (element.children[element.children.length - 1].classList.contains('m-icon')) {
             element.removeChild(element.children[element.children.length - 1]);
         }
-        if (binding.value.state != undefined && binding.value.state != '') {
+        if (binding.value.state !== undefined && binding.value.state !== '') {
             buildBadge(element, binding, vnode);
         }
     },
