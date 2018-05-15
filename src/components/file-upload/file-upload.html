@@ -46,7 +46,7 @@
                 <li v-for="(file, index) in uploadingFiles" :key="file.uid">
                     <div class="m-file-upload__import-list__content">
                         <div class="m-file-upload__import-list__file-icon">
-                            <m-icon-file v-m-badge="{ state: file.status }" :extension="file.extension" size="30px"></m-icon-file>
+                            <m-icon-file v-m-badge="{ state: getBadgeState(file) }" :extension="file.extension" size="30px"></m-icon-file>
                         </div>
                         <div class="m-file-upload__import-list__progress-wrap">
                             <div class="m-file-upload__import-list__infos">
@@ -71,7 +71,7 @@
                 <li v-for="(file, index) in completedFiles" :key="file.uid">
                     <div class="m-file-upload__completed-list__content">
                         <div class="m-file-upload__completed-list__file-icon">
-                            <m-icon-file v-m-badge="{ state: file.status }" :extension="file.extension" size="30px"></m-icon-file>
+                            <m-icon-file v-m-badge="{ state: getBadgeState(file) }" :extension="file.extension" size="30px"></m-icon-file>
                         </div>
                         <div class="m-file-upload__completed-list__infos">
                             <p class="m-file-upload__completed-list__infos-label">
