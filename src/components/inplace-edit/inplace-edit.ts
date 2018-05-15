@@ -34,25 +34,18 @@ export class MInplaceEdit extends ModulVue {
     public saveFn: SaveFn;
 
     private internalEditMode: boolean = false;
-    private internalError: boolean = false;
     private submitted: boolean = false;
     private isInitMobile: boolean;
     private isInitTable: boolean;
 
-    public get isError(): boolean {
-        return this.error ? this.error : this.internalError;
-    }
-
     public confirm(event: Event): void {
         if (this.editMode) {
-            this.save();
             this.$emit('ok');
         }
     }
 
     public cancel(event: Event): void {
         if (this.editMode) {
-            this.internalError = false;
             this.propEditMode = false;
             this.$emit('cancel');
         }
@@ -61,11 +54,6 @@ export class MInplaceEdit extends ModulVue {
     @Watch('editMode')
     public onEditMode(value: boolean): void {
         this.internalEditMode = value;
-    }
-
-    @Watch('error')
-    private errorChanged(value: boolean): void {
-        this.internalError = value;
     }
 
     private mounted(): void {
@@ -85,20 +73,6 @@ export class MInplaceEdit extends ModulVue {
     private set propEditMode(value: boolean) {
         this.internalEditMode = value;
         this.$emit('update:editMode', value);
-    }
-
-    private save(): void {
-        if (this.saveFn) {
-            this.submitted = true;
-            this.internalError = false;
-            this.saveFn().then(() => {
-                this.propEditMode = false;
-            }, () => {
-                this.internalError = true;
-            }).then(() => this.submitted = false);
-        } else {
-            this.$log.warn('No save function provided (save-fn prop is undefined)');
-        }
     }
 
     private resetEditMode(): void {
