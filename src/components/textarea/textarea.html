@@ -18,8 +18,7 @@
                    :icon-name="iconName"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
-        <textarea v-m-textarea-auto-height
-                  ref="input"
+        <textarea ref="input"
                   class="m-textarea__input"
                   :disabled="!active"
                   :placeholder="placeholder"
@@ -31,7 +30,17 @@
                   @keyup="onKeyup"
                   @keydown="onKeydown"
                   @paste="onPaste"
+                  :style="{ height: textareaHeight }"
                   v-model="model">
+        </textarea>
+        <textarea v-m-textarea-auto-height
+                  ref="inputHidden"
+                  class="m-textarea__input-hidden"
+                  :placeholder="placeholder"
+                  readonly="true"
+                  rows="1"
+                  v-model="model"
+                  aria-hidden="true">
         </textarea>
     </m-input-style>
     <div class="m-textarea__validation">

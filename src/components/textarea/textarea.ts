@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 import TextAreaAutoHeightPlugin from '../../directives/textarea-auto-height/textarea-auto-height';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
@@ -29,6 +29,35 @@ export class MTextarea extends ModulVue implements InputManagementData {
     public maxLength?: number;
 
     readonly internalValue: string;
+    private internalTextareaHeight: string = '0';
+
+    protected mounted(): void {
+        this.setHeight();
+        this.$modul.event.$emit('resize', this.setHeight);
+    }
+
+    protected updated(): void {
+        this.setHeight();
+    }
+
+    protected beforeDestroy(): void {
+        this.$modul.event.$off('resize', this.setHeight);
+    }
+
+    @Watch('value')
+    private setHeight(): void {
+        this.$nextTick(() => {
+            this.textareaHeight = (this.$refs.inputHidden as HTMLElement).style.height as string;
+        });
+    }
+
+    private get textareaHeight(): string {
+        return this.internalTextareaHeight;
+    }
+
+    private set textareaHeight(height: string) {
+        this.internalTextareaHeight = height;
+    }
 
     private get valueLength(): number {
         return this.internalValue.length;
