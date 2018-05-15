@@ -1,18 +1,18 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop } from 'vue-property-decorator';
+
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import i18nPlugin from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { DATEPICKER_NAME } from '../component-names';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
-import uuid from '../../utils/uuid/uuid';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './datepicker.html?style=./datepicker.scss';
 
