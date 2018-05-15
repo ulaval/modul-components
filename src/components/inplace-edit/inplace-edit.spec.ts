@@ -96,14 +96,6 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
                 expect(spy).toHaveBeenCalledWith(CONFIRM_EVENT);
             });
-
-            it(`must go back to readMode`, async () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
-
-                await inplaceEdit.confirm(AN_EVENT);
-
-                expect(spy).toHaveBeenCalledWith('update:editMode', false);
-            });
         });
 
         describe('when cancelling', () => {
@@ -113,13 +105,6 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
                 inplaceEdit.cancel(AN_EVENT);
 
                 expect(spy).toBeCalledWith(CANCEL_EVENT);
-            });
-            it(`must go back to readMode`, async () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
-
-                await inplaceEdit.confirm(AN_EVENT);
-
-                expect(spy).toHaveBeenCalledWith('update:editMode', false);
             });
         });
     });
@@ -140,21 +125,6 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
                 expect(spy).toBeCalledWith(CONFIRM_EVENT);
             });
-
-            it(`must not go back to readMode`, async () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
-
-                await inplaceEdit.confirm(AN_EVENT);
-
-                expect(spy).not.toHaveBeenCalledWith('update:editMode', false);
-            });
-
-            it('must be in error', async () => {
-
-                await inplaceEdit.confirm(AN_EVENT);
-
-                expect(inplaceEdit.isError).toBeTruthy();
-            });
         });
 
         describe('when cancelling after a failed confirmation', () => {
@@ -163,7 +133,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
                 inplaceEdit.cancel(AN_EVENT);
 
-                expect(inplaceEdit.isError).toBeFalsy();
+                expect(inplaceEdit.error).toBeFalsy();
             });
         });
     });
@@ -271,6 +241,10 @@ describe('Component inplace-edit - Complete component mobile', () => {
             wrapper.setProps({ editMode: 'true' });
         });
         it('should render correctly', () => {
+            return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+        it('should render correctly in waiting mode', () => {
+            wrapper.setProps({ waiting: 'true' });
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
         it('must show mobile confirm controls', () => {

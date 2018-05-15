@@ -21,20 +21,16 @@ export class MInplaceEdit extends ModulVue {
 
     @Prop()
     public editMode: boolean;
-
     @Prop()
     public error: boolean;
-
+    @Prop()
+    public waiting: boolean;
     @Prop({
         default: () => (Vue.prototype as any).$i18n.translate('m-inplace-edit:modify')
     })
     public title: string;
 
-    @Prop()
-    public saveFn: SaveFn;
-
     private internalEditMode: boolean = false;
-    private submitted: boolean = false;
     private isInitMobile: boolean;
     private isInitTable: boolean;
 
