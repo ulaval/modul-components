@@ -1,5 +1,6 @@
 import Vue, { PluginObject } from 'vue';
-import { vsprintf, sprintf } from '../str/str';
+
+import { sprintf, vsprintf } from '../str/str';
 
 /**
  * This package provides language and locales utilities.
@@ -224,7 +225,7 @@ export class Messages {
     private findKey(lang: string, key: string): string | undefined {
         const parts = key.split(':');
 
-        if (parts.length != 2) {
+        if (parts.length !== 2) {
             let error: string = `The key ${key} is invalid. The key needs to be in the format <bundle>:<id>`;
             if (this.options && this.options.debug === DebugMode.Throw) {
                 throw new Error(error);

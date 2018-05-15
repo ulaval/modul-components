@@ -2,26 +2,36 @@ import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { resetModulPlugins } from './../../../tests/helpers/component';
+import { polyFillActive } from './../../utils/polyfills';
 import { ModulVue } from './../../utils/vue/vue';
 import { MDOMPlugin } from './../domPlugin';
 import { MRemoveUserSelect } from './../user-select/remove-user-select';
-import DraggablePlugin, { MDraggable, MDraggableClassNames, MDraggableOptions } from './draggable';
+import DraggablePlugin, { MDraggable, MDraggableClassNames, MDraggableEventNames, MDraggableOptions } from './draggable';
+
+jest.useFakeTimers();
 
 describe('draggable', () => {
+    polyFillActive.dragDrop = false;
+
+    const dragImageTemplate = `<div class="${MDraggableClassNames.DragImage}"></div>`;
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
     (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
+        let directive: Wrapper<Vue>;
         if (options) {
-            return mount({
-                template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData">${innerHtml}</div>`
-                    : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data"dragData">${innerHtml}</div>`,
+            directive = mount({
+                template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`
+                    : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`,
                 data: () => options
             }, { localVue: Vue });
         } else {
-            return mount({
-                template: bindingValue === undefined ? `<div v-m-draggable>${innerHtml}</div>`
-                    : `<div v-m-draggable="${bindingValue}">${innerHtml}</div>`
+            directive = mount({
+                template: bindingValue === undefined ? `<div v-m-draggable>${innerHtml || ''}</div>`
+                    : `<div v-m-draggable="${bindingValue}">${innerHtml || ''}</div>`
             }, { localVue: Vue });
         }
+
+        Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => {});
+        return directive;
     };
 
     let localVue: VueConstructor<ModulVue>;
@@ -30,26 +40,28 @@ describe('draggable', () => {
         Vue.use(DraggablePlugin);
     });
 
-    [undefined, true].forEach(param => {
+    [true, undefined].forEach(param => {
         it(`it should render correctly when binding ${param} is provided`, () => {
-            const userDefinedAction = 'someAction';
-            const userDefinedData = 'someData';
-            const draggable = getDraggableDirective(param, { dragData: userDefinedData, action: userDefinedAction, canDrag: true });
+            const userDefinedAction: string = 'someAction';
+            const userDefinedData: string = 'someData';
+            const userDefinedGrouping: string = 'someGrouping';
+            const draggable: Wrapper<Vue> = getDraggableDirective(param, { dragData: userDefinedData, action: userDefinedAction, grouping: userDefinedGrouping });
 
-            // expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
-            // expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe(userDefinedAction);
-            // expect(MDOMPlugin.get(MDraggable, draggable.element).options.dragData).toBe(userDefinedData);
-            // expect(draggable.element.draggable).toBe(true);
-            // expect(MDOMPlugin.get(MRemoveUserSelect, draggable.element)).toBeDefined();
+            expect((draggable.element.style as any).webkitUserDrag).toBe('none');
+            expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
+            expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe(userDefinedAction);
+            expect(MDOMPlugin.get(MDraggable, draggable.element).options.dragData).toBe(userDefinedData);
+            expect(draggable.element.draggable).toBe(true);
+            expect(MDOMPlugin.get(MRemoveUserSelect, draggable.element)).toBeDefined();
         });
         it(`it should default action correctly when binding ${param} is provided and action is not user defined`, () => {
-            const draggable = getDraggableDirective(param);
+            const draggable: Wrapper<Vue> = getDraggableDirective(param);
             expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe('any');
         });
     });
 
     it('it should render correctly when binding false is provided', () => {
-        const draggable = getDraggableDirective(false);
+        const draggable: Wrapper<Vue> = getDraggableDirective(false);
 
         expect(draggable.element.classList).not.toContain(MDraggableClassNames.Draggable);
         expect(draggable.element.draggable).toBeUndefined();
@@ -59,44 +71,100 @@ describe('draggable', () => {
 
     [undefined, true, false].forEach(param => {
         it(`it should manage drag image correctly when binding ${param} is provided`, () => {
-            const draggable = getDraggableDirective(param, undefined, `<div class="dragImage"></div>`);
+            const draggable: Wrapper<Vue> = getDraggableDirective(param, undefined, dragImageTemplate);
 
-            const dragImage = draggable.find('.dragImage');
-            expect(dragImage.element.style.left).toBe('-9999px');
-            expect(dragImage.element.style.top).toBe('-9999px');
-            expect(dragImage.element.style.position).toBe('absolute');
-            expect(dragImage.element.style.overflow).toBe('hidden');
-            expect(dragImage.element.style.zIndex).toBe('1');
-            expect(dragImage.element.hidden).toBeTruthy();
+            const dragImage: HTMLElement = draggable.find('.dragImage').element;
+            expect(dragImage.style.left).toBe('-9999px');
+            expect(dragImage.style.top).toBe('-9999px');
+            expect(dragImage.style.position).toBe('absolute');
+            expect(dragImage.style.overflow).toBe('hidden');
+            expect(dragImage.style.zIndex).toBe('1');
+            expect(dragImage.hidden).toBeTruthy();
         });
     });
 
-    it('it should add grabbing class on mouse down', () => {
-        const draggable = getDraggableDirective();
-        draggable.trigger('mousedown');
+    ['mousedown', 'touchstart'].forEach(eventName => {
+        it(`it should add grabbing class on ${eventName}`, () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective();
+            draggable.trigger(eventName);
+            jest.runOnlyPendingTimers();
 
-        expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+            expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+            expect((draggable.element.style as any).webkitUserDrag).toBe('');
+            expect(MDraggable.currentDraggable).toBeUndefined();
+        });
+
+        it(`it should not apply grabbing class to parent draggable on ${eventName}`, () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective(true, undefined, '<div class="childDraggable" v-m-draggable="true">child draggable</div>');
+            const childDraggable = draggable.find('.childDraggable');
+
+            childDraggable.trigger(eventName);
+            jest.runOnlyPendingTimers();
+
+            expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+            expect(childDraggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+        });
     });
 
-    it('it should remove grabbing class on mouse up', () => {
-        const draggable = getDraggableDirective();
-        draggable.trigger('mousedown');
-        draggable.trigger('mouseup');
+    ['mouseup', 'touchend', 'click', 'touchcancel'].forEach(eventName => {
+        it(`it should remove grabbing class on document ${eventName}`, () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective();
+            draggable.trigger('touchstart');
+            draggable.trigger('touchend');
 
-        expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+            expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+            expect((draggable.element.style as any).webkitUserDrag).toBe('none');
+            expect(MDraggable.currentDraggable).toBeUndefined();
+        });
     });
 
-    /* describe('onDragStart', () => {
+    describe('unbind', () => {
+        it('should clean up element correctly', () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, dragImageTemplate);
+            const element: HTMLElement = draggable.element;
+            const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
+            draggable.destroy();
+
+            expect(element.draggable).toBeFalsy();
+            expect(dragImage.hidden).toBeTruthy();
+            expect((draggable.element.style as any).webkitUserDrag).toBe('');
+            expect(dragImage.classList).not.toContain(MDraggableClassNames.Draggable);
+            expect(dragImage.classList).not.toContain(MDraggableClassNames.Dragging);
+            expect(dragImage.classList).not.toContain(MDraggableClassNames.Grabbing);
+            expect(MDOMPlugin.get(MRemoveUserSelect, element)).toBeUndefined();
+        });
+
+        it('should clean up events correctly', () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, dragImageTemplate);
+            const element: HTMLElement = draggable.element;
+            const draggablePlugin: MDraggable = MDOMPlugin.get(MDraggable, element);
+            jest.spyOn(draggablePlugin, 'removeAllEvents');
+            draggable.destroy();
+
+            expect(draggablePlugin.removeAllEvents).toHaveBeenCalled();
+        });
+    });
+
+    describe('onDragStart', () => {
         let draggable: Wrapper<Vue>;
-        const userDefinedAction = 'someAction';
-        const dragImageClass = 'someDragImageClass';
+        const userDefinedAction: string = 'someAction';
+        const userDefinedData: any = { someKey: 'someValue' };
+        const userDefinedGrouping: string = 'someGrouping';
         beforeEach(() => {
-            draggable = mount({
-                template: `
-                    <div v-m-draggable :action="'${userDefinedAction}'">
-                        <div class="${dragImageClass}">DragImage</div>
-                    </div>`
-            }, { localVue: Vue }).find('div');
+            draggable = getDraggableDirective(true, {
+                action: userDefinedAction,
+                dragData: userDefinedData,
+                grouping: userDefinedGrouping
+            }, dragImageTemplate);
+        });
+
+        it('it should update element correctly', () => {
+            const options = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            draggable.trigger('dragstart', options);
+
+            expect(MDraggable.currentDraggable).toBe(MDOMPlugin.get(MDraggable, draggable.element));
+            expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
+            expect(draggable.element.classList).toContain(MDraggableClassNames.Dragging);
         });
 
         it('it should manage DragEvent correctly', () => {
@@ -104,8 +172,55 @@ describe('draggable', () => {
             jest.spyOn(options, 'stopPropagation');
             draggable.trigger('dragstart', options);
 
-            expect(MDraggable.currentDraggable).toBe(MDOMPlugin.get(MDraggable, draggable.element));
+            const event: any = draggable.emitted(MDraggableEventNames.OnDragStart)[0][0];
             expect(options.stopPropagation).toHaveBeenCalled();
+            expect(event.dragInfo).toBeDefined();
+            expect(event.dragInfo).toEqual({ action: userDefinedAction, data: userDefinedData, grouping: userDefinedGrouping });
         });
-    }); */
+
+        it('should populate dataTransfer correctly', () => {
+            const options = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            jest.spyOn(options.dataTransfer, 'setData');
+            jest.spyOn(options.dataTransfer, 'setDragImage');
+            draggable.trigger('dragstart', options);
+
+            const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
+            expect(options.dataTransfer.setData).toHaveBeenCalledWith('text', JSON.stringify(userDefinedData));
+            expect(options.dataTransfer.setDragImage).toHaveBeenCalledWith(dragImage, 0, 0);
+        });
+    });
+
+    describe('onDragEnd', () => {
+        let draggable: Wrapper<Vue>;
+        const userDefinedAction: string = 'someAction';
+        const userDefinedData: any = { someKey: 'someValue' };
+        const userDefinedGrouping: string = 'someGrouping';
+        beforeEach(() => {
+            draggable = getDraggableDirective(true, {
+                action: userDefinedAction,
+                dragData: userDefinedData,
+                grouping: userDefinedGrouping
+            }, dragImageTemplate);
+        });
+
+        it('it should update element correctly', () => {
+            const options = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            draggable.trigger('dragend', options);
+
+            expect(MDraggable.currentDraggable).toBeUndefined();
+            expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
+            expect(draggable.element.classList).not.toContain(MDraggableClassNames.Dragging);
+        });
+
+        it('it should manage DragEvent correctly', () => {
+            const options = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            jest.spyOn(options, 'stopPropagation');
+            draggable.trigger('dragend', options);
+
+            const event: any = draggable.emitted(MDraggableEventNames.OnDragEnd)[0][0];
+            expect(options.stopPropagation).toHaveBeenCalled();
+            expect(event.dragInfo).toBeDefined();
+            expect(event.dragInfo).toEqual({ action: userDefinedAction, data: userDefinedData, grouping: userDefinedGrouping });
+        });
+    });
 });

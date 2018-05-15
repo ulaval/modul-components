@@ -1,12 +1,12 @@
-import { ModulVue } from '../../utils/vue/vue';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './navbar.html?style=./navbar.scss';
-import { NAVBAR_NAME, NAVBAR_ITEM_NAME } from '../component-names';
+
+import { ElementQueries } from '../../mixins/element-queries/element-queries';
+import { ModulVue } from '../../utils/vue/vue';
+import { NAVBAR_NAME } from '../component-names';
 import NavbarItemPlugin, { BaseNavbar, Navbar } from '../navbar-item/navbar-item';
-import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
-import { ComputedOptions } from 'vue/types/options';
+import WithRender from './navbar.html?style=./navbar.scss';
 
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
@@ -34,13 +34,13 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Prop({
         default: MNavbarSkin.LightTab,
         validator: value =>
-            value == MNavbarSkin.Light ||
-            value == MNavbarSkin.Dark ||
-            value == MNavbarSkin.LightTab ||
-            value == MNavbarSkin.DarkTab ||
-            value == MNavbarSkin.Plain ||
-            value == MNavbarSkin.Simple ||
-            value == MNavbarSkin.Arrow
+            value === MNavbarSkin.Light ||
+            value === MNavbarSkin.Dark ||
+            value === MNavbarSkin.LightTab ||
+            value === MNavbarSkin.DarkTab ||
+            value === MNavbarSkin.Plain ||
+            value === MNavbarSkin.Simple ||
+            value === MNavbarSkin.Arrow
     })
     public skin: string;
     @Prop({ default: true })
@@ -70,7 +70,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     public get model(): any {
-        return this.selected == undefined ? this.internalValue : this.selected;
+        return this.selected === undefined ? this.internalValue : this.selected;
     }
 
     public set model(value: any) {
@@ -98,10 +98,10 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
                 (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
 
-                if (this.skin == MNavbarSkin.Light) {
+                if (this.skin === MNavbarSkin.Light) {
                     this.setPosition(element, 'line');
                 }
-                if (this.skin == MNavbarSkin.Arrow) {
+                if (this.skin === MNavbarSkin.Arrow) {
                     this.setPosition(element, 'arrow');
                 }
             }
@@ -122,7 +122,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Watch('selected')
     private setAndUpdate(value): void {
         this.internalValue = value;
-        if (this.skin == MNavbarSkin.Light || this.skin == MNavbarSkin.Arrow) {
+        if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
             let selected: Vue | undefined = this.$children.find(element => element.$props.value === this.selected);
             if (selected) {
                 this.setPosition(selected, this.skin);
@@ -154,15 +154,15 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private get buttonSkin(): string {
-        return this.skin == 'dark' ? this.skin : 'light';
+        return this.skin === 'dark' ? this.skin : 'light';
     }
 
     private get isLightSkin(): boolean {
-        return this.skin == 'light';
+        return this.skin === 'light';
     }
 
     private get isArrowSkin(): boolean {
-        return this.skin == 'arrow';
+        return this.skin === 'arrow';
     }
 
     private scrollLeft(event: MouseEvent): void {

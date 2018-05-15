@@ -8,20 +8,35 @@ function resolve(dir) {
 }
 
 module.exports = function (env) {
-    var buildOnly = !!(env && env.buildonly);
+    let isLib = !!(env && env.lib);
 
-    var config = {
-        entry: {
-            app: ['./tests/app/main.ts']
-        },
-
-        externals: [],
-
-        output: {
+    let outputObj;
+    if (isLib) {
+        outputObj = {
+            library: '@ulaval/modul-components',
+            libraryTarget: 'umd',
+            path: resolve('dist'),
+            publicPath: '/',
+            filename: 'modul.js'
+        }
+    } else {
+        outputObj = {
             path: resolve('dist'),
             publicPath: '/',
             filename: 'app.js'
+        }
+    }
+
+    let externalsObj = isLib ? { vue: 'Vue' } : {};
+
+    var config = {
+        entry: {
+            app: [isLib ? './lib/lib.ts' : './tests/app/main.ts']
         },
+
+        externals: externalsObj,
+
+        output: outputObj,
 
         resolve: {
             extensions: ['.js', '.ts', '.html'],
@@ -121,11 +136,13 @@ module.exports = function (env) {
         ]
     }
 
-    config.plugins.push(new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: resolve('tests/app/index.html'),
-        inject: 'body'
-    }));
+    if (!isLib) {
+        config.plugins.push(new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: resolve('tests/app/index.html'),
+            inject: 'body'
+        }));
+    }
 
     return config;
 }

@@ -1,12 +1,13 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model, Watch } from 'vue-property-decorator';
-import WithRender from './checkbox.html?style=./checkbox.scss';
-import { CHECKBOX_NAME } from '../component-names';
+import { Model, Prop, Watch } from 'vue-property-decorator';
+
+import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+import { ModulVue } from '../../utils/vue/vue';
+import { CHECKBOX_NAME } from '../component-names';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import WithRender from './checkbox.html?style=./checkbox.scss';
 
 export enum MCheckboxPosition {
     Left = 'left',
@@ -26,8 +27,8 @@ export class MCheckbox extends ModulVue {
     @Prop({
         default: MCheckboxPosition.Left,
         validator: value =>
-            value == MCheckboxPosition.Left ||
-            value == MCheckboxPosition.Right
+            value === MCheckboxPosition.Left ||
+            value === MCheckboxPosition.Right
     })
     public position: MCheckboxPosition;
 
@@ -41,7 +42,7 @@ export class MCheckbox extends ModulVue {
     }
 
     private get propValue(): boolean {
-        return this.value != undefined ? this.value : this.internalValue;
+        return this.value !== undefined ? this.value : this.internalValue;
     }
 
     private set propValue(value: boolean) {
@@ -59,7 +60,7 @@ export class MCheckbox extends ModulVue {
     }
 
     private get hasCheckboxLeft(): boolean {
-        return this.position == MCheckboxPosition.Left;
+        return this.position === MCheckboxPosition.Left;
     }
 
     private get hasLabelSlot(): boolean {

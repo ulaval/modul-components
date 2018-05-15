@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { log } from 'util';
 
 const ACCORDION_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
@@ -21,7 +20,7 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
 
     private accordionEnter(el: HTMLElement, done): void {
         this.$nextTick(() => {
-            if (this.accordionAnim || this.accordionAnim == undefined) {
+            if (this.accordionAnim || this.accordionAnim === undefined) {
                 let height: number = el.clientHeight;
                 el.style.maxHeight = '0';
                 this.setTransitionStart(el);
@@ -36,7 +35,7 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
     }
 
     private accordionAfterEnter(el: HTMLElement): void {
-        if (this.accordionAnim || this.accordionAnim == undefined) {
+        if (this.accordionAnim || this.accordionAnim === undefined) {
             setTimeout(() => {
                 el.style.removeProperty('max-height');
                 el.style.removeProperty('overflow');
@@ -46,7 +45,7 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
 
     private accordionLeave(el: HTMLElement, done): void {
         this.$nextTick(() => {
-            if (this.accordionAnim || this.accordionAnim == undefined) {
+            if (this.accordionAnim || this.accordionAnim === undefined) {
                 let height: number = el.clientHeight;
                 el.style.maxHeight = height + 'px';
                 this.setTransitionStart(el);

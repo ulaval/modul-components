@@ -1,10 +1,11 @@
 import Vue, { PluginObject } from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
-import WithRender from './tab-panel.html?style=./tab-panel.scss';
+import { Prop } from 'vue-property-decorator';
+
+import { ModulVue } from '../../utils/vue/vue';
 import { TAB_PANEL_NAME } from '../component-names';
 import { MTabsInterface } from '../tabs/tabs';
+import WithRender from './tab-panel.html?style=./tab-panel.scss';
 
 export abstract class BaseTabs extends ModulVue {
 }
@@ -29,7 +30,7 @@ export class MTabPane extends ModulVue {
     }
 
     public get selected(): boolean {
-        return (this.root as MTabsInterface).model == this.value;
+        return (this.root as MTabsInterface).model === this.value;
     }
 
     public onClick(): void {
