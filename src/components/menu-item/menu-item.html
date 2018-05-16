@@ -3,6 +3,7 @@
               'm--has-icon-spacing': hasIcon }"
     ref="m-menu-item"
     tabindex="0"
+    role="option"
     @keydown.enter.prevent="onClick"
     @click.prevent="onClick">
     <span class="m-menu-item__icon" ref="icon" v-if="hasIcon">

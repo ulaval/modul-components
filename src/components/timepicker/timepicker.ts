@@ -1,12 +1,13 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import i18nPlugin from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { TIMEPICKER_NAME } from '../component-names';
@@ -52,6 +53,7 @@ export class MTimepicker extends ModulVue {
 
     private internalOpen: boolean = false;
     private internalTimeErrorMessage: string = '';
+    private id: string = `mTimepicker-${uuid.generate()}`;
 
     private mounted(): void {
         moment.locale(this.$i18n.currentLang());
@@ -159,7 +161,7 @@ export class MTimepicker extends ModulVue {
 
     private set open(open: boolean) {
         this.internalOpen = open;
-        this.$nextTick(() => {
+        setTimeout(() => {
             if (this.internalOpen) {
                 let inputEl: any = this.$refs.input;
                 inputEl.focus();
@@ -174,8 +176,8 @@ export class MTimepicker extends ModulVue {
     }
 
     private scrollToSelection(container: HTMLElement): void {
-        let selectedElement = container.querySelector('.m--is-selected');
-        setTimeout(function() {
+        let selectedElement: HTMLElement = container.querySelector('.m--is-selected') as HTMLElement;
+        setTimeout(() => {
             if (selectedElement) {
                 container.scrollTop = selectedElement['offsetTop'] - container.clientHeight / 2 + selectedElement.clientHeight / 2;
             }
@@ -229,6 +231,10 @@ export class MTimepicker extends ModulVue {
         } else {
             this.$emit('change', moment().hours(hour).minutes(minute));
         }
+    }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
     }
 }
 

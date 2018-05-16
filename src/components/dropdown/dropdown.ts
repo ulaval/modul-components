@@ -1,7 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
+import { KeyCode } from '../../utils/keycode/keycode';
+import uuid from '../../utils/uuid/uuid';
 import { Model, Prop, Watch } from 'vue-property-decorator';
-
 import PopupPluginDirective from '../../directives/popup/popup';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
@@ -68,6 +69,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private internalOpen: boolean = false;
     private dirty: boolean = false;
+    private id: string = `mDropdown-${uuid.generate()}`;
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
@@ -257,6 +259,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private get noItemsLabel(): string {
         return (!this.internalItems || this.internalItems.length === 0) ? this.propTextNoData : this.propTextNoMatch;
+    }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
     }
 
     public get inactive(): boolean {

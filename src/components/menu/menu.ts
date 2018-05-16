@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { MENU_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
@@ -9,6 +8,7 @@ import MMenuItemPlugin, { BaseMenu, MMenuInterface } from '../menu-item/menu-ite
 import { MPopperPlacement } from '../popper/popper';
 import PopupPlugin from '../popup/popup';
 import WithRender from './menu.html?style=./menu.scss';
+import uuid from '../../utils/uuid/uuid';
 
 export enum MOptionsMenuSkin {
     Light = 'light',
@@ -18,7 +18,6 @@ export enum MOptionsMenuSkin {
 @WithRender
 @Component
 export class MMenu extends BaseMenu implements MMenuInterface {
-
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
@@ -44,12 +43,17 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     })
     public skin: MOptionsMenuSkin;
     @Prop()
+    public openTitle: string;
+    @Prop()
+    public closeTitle: string;
+    @Prop()
     public disabled: boolean;
     @Prop({ default: '44px' })
     public size: string;
 
     public hasIcon: boolean = false;
     private open = false;
+    private id: string = `mMenu-${uuid.generate()}`;
 
     public checkIcon(icon: boolean): void {
         if (icon) {
@@ -72,6 +76,22 @@ export class MMenu extends BaseMenu implements MMenuInterface {
 
     private onClick($event: MouseEvent): void {
         this.$emit('click', $event);
+    }
+
+    private getOpenTitle(): string {
+        return this.openTitle === undefined ? this.$i18n.translate('m-menu:open') : this.openTitle;
+    }
+
+    private getCloseTitle(): string {
+        return this.closeTitle === undefined ? this.$i18n.translate('m-menu:close') : this.closeTitle;
+    }
+
+    private get propTitle(): string {
+        return this.open ? this.getCloseTitle() : this.getOpenTitle();
+    }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
     }
 }
 
