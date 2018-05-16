@@ -1,13 +1,13 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { TOOLTIP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
+import uuid from '../../utils/uuid/uuid';
 import LinkPlugin from '../link/link';
 import { MPopperPlacement } from '../popper/popper';
 import WithRender from './tooltip.html?style=./tooltip.scss';
@@ -62,6 +62,7 @@ export class MTooltip extends ModulVue {
     public className: string;
 
     private propOpen: boolean = false;
+    private id: string = `mTooltip-${uuid.generate()}`;
 
     protected mounted(): void {
         this.propOpen = this.open;
@@ -110,6 +111,10 @@ export class MTooltip extends ModulVue {
 
     private close(): void {
         this.propOpen = false;
+    }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
     }
 }
 

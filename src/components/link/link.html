@@ -16,7 +16,8 @@
         </span>
         <m-i18n class="m-link__hidden" v-if="isTargetBlank" k="m-link:open-new-tab"></m-i18n>
     </router-link>
-    <a class="m-link" :class="{ 'm--is-unvisited': isUnvisited,
+    <a class="m-link"
+       :class="{ 'm--is-unvisited': isUnvisited,
                  'm--is-disabled': disabled,
                  'm--no-underline': !underline,
                  'm--is-button': isButton,
@@ -28,6 +29,7 @@
        :target="target"
        @click="onClick"
        v-if="!isRouterLink"
+       @keyup="onKeyup"
        ref="link">
         <m-icon class="m-link__icon" :name="propIconName" :size="iconSize" v-if="hasIcon" aria-hidden="true"></m-icon>
         <span class="m-link__text">

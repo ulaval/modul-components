@@ -1,12 +1,13 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop } from 'vue-property-decorator';
+
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import i18nPlugin from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { DATEPICKER_NAME } from '../component-names';
@@ -68,6 +69,7 @@ export class MDatepicker extends ModulVue {
 
     private mouseIsDown: boolean = false;
     private internalCalandarErrorMessage: string = '';
+    private id: string = `mDatepicker-${uuid.generate()}`;
 
     protected created(): void {
         moment.locale([this.$i18n.currentLang(), 'en-ca']);
@@ -224,6 +226,14 @@ export class MDatepicker extends ModulVue {
 
     private get open(): boolean {
         return this.internalOpen;
+    }
+
+    private get ariaControls1(): string {
+        return this.id + '-controls-1';
+    }
+
+    private get ariaControls2(): string {
+        return this.id + '-controls-2';
     }
 
     private set open(open: boolean) {
