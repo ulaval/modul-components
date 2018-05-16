@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
+import { Prop, Watch } from 'vue-property-decorator';
+import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
@@ -75,6 +75,25 @@ export class MLink extends ModulVue {
     @Prop({ default: '12px' })
     public iconSize: string;
 
+    protected mounted(): void {
+        this.isButtonChanged(this.mode === MLinkMode.Button);
+    }
+
+    @Watch('isButton')
+    private isButtonChanged(isButton: boolean): void {
+        if (isButton) {
+            this.$nextTick(() => {
+                this.$el.setAttribute('role', 'button');
+            });
+        } else {
+            this.$nextTick(() => {
+                if (this.$el.hasAttribute('role')) {
+                    this.$el.removeAttribute('role');
+                }
+            });
+        }
+    }
+
     private onClick(event): void {
         this.$el.blur();
         if (this.isButton || this.isTextLink || this.disabled) {
@@ -87,6 +106,13 @@ export class MLink extends ModulVue {
 
     private get isRouterLink(): boolean {
         return this.mode === MLinkMode.RouterLink;
+    }
+
+    private onKeyup(event): void {
+        event = event || window.event;
+        if (event.keyCode === KeyCode.M_SPACE && this.isButton) {
+            this.onClick(event);
+        }
     }
 
     private get isButton(): boolean {
@@ -126,7 +152,7 @@ export class MLink extends ModulVue {
     }
 
     private get propUrl(): string | undefined {
-        return this.mode === MLinkMode.Button
+        return this.isButton
             ? '#'
             : !this.disabled ? this.url : undefined;
     }

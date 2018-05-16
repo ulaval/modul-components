@@ -1,4 +1,4 @@
-<div class="m-popup" aria-hidden="true" :class="{ 'm--is-inline': hasTriggerSlot }">
+<div class="m-popup" :class="{ 'm--is-inline': hasTriggerSlot }">
     <m-popper :open.sync="propOpen"
               @open="onOpen()"
               @close="onClose()"
@@ -20,7 +20,8 @@
               :shadow="shadow"
               :preload="preload"
               v-if="!isMqMaxS">
-        <div slot="trigger" v-if="hasTriggerSlot">
+        <div slot="trigger"
+             v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
         <div class="m-popup__body"
@@ -48,7 +49,8 @@
                :class-name="className"
                :preload="preload"
                v-if="isMqMaxS">
-        <div slot="trigger" v-if="hasTriggerSlot">
+        <div slot="trigger"
+             v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
         <div class="m-popup__body" :class="{ 'm--no-padding': !padding }">

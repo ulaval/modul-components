@@ -2,7 +2,7 @@
 
 exports[`MRadioGroup should render correctly 1`] = `
 <div class="m-radio-group">
-    <ul class="m-radio-group__body">
+    <ul role="radiogroup" class="m-radio-group__body">
         <li class="m-radio">
             <input type="radio" id="uuid" name="uuid" value="rdo1" class="m-radio__hidden">
             <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
@@ -19,7 +19,7 @@ exports[`MRadioGroup should render correctly 1`] = `
 
 exports[`MRadioGroup should render correctly when disabled 1`] = `
 <div class="m-radio-group m--is-disabled">
-    <ul class="m-radio-group__body">
+    <ul role="radiogroup" class="m-radio-group__body">
         <li class="m-radio m--is-disabled">
             <input type="radio" id="uuid" name="uuid" disabled="disabled" aria-hidden="true" value="rdo1" class="m-radio__hidden">
             <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
@@ -36,7 +36,7 @@ exports[`MRadioGroup should render correctly when disabled 1`] = `
 
 exports[`MRadioGroup should render correctly when inline 1`] = `
 <div class="m-radio-group m--is-inline">
-    <ul class="m-radio-group__body">
+    <ul role="radiogroup" class="m-radio-group__body">
         <li class="m-radio m--is-inline">
             <input type="radio" id="uuid" name="uuid" value="rdo1" class="m-radio__hidden">
             <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
@@ -53,7 +53,7 @@ exports[`MRadioGroup should render correctly when inline 1`] = `
 
 exports[`MRadioGroup should render correctly when position is right 1`] = `
 <div class="m-radio-group">
-    <ul class="m-radio-group__body">
+    <ul role="radiogroup" class="m-radio-group__body">
         <li class="m-radio m--is-input-right">
             <input type="radio" id="uuid" name="uuid" value="rdo1" class="m-radio__hidden">
             <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>

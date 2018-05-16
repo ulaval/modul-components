@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import moment from 'moment';
 import Vue, { VueConstructor } from 'vue';
 
@@ -24,7 +24,7 @@ describe('MDateFields', () => {
     });
 
     it('should render correctly', () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue
         });
 
@@ -32,7 +32,7 @@ describe('MDateFields', () => {
     });
 
     it('should render correctly when waiting is set', () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue,
             propsData: {
                 waiting: true
@@ -43,7 +43,7 @@ describe('MDateFields', () => {
     });
 
     it('should render correctly when disabled is set', () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue,
             propsData: {
                 disabled: true
@@ -54,7 +54,7 @@ describe('MDateFields', () => {
     });
 
     it('should render correctly when error is set', () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue,
             propsData: {
                 error: true,
@@ -66,7 +66,7 @@ describe('MDateFields', () => {
     });
 
     it('should render correctly when valid is set', () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue,
             propsData: {
                 valid: true,
@@ -86,7 +86,7 @@ describe('MDateFields', () => {
             })
         );
 
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue,
             propsData: {
                 minYear: 2017,
@@ -98,7 +98,7 @@ describe('MDateFields', () => {
     });
 
     it('should render correctly moment.js model type', () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue
         });
 
@@ -110,7 +110,7 @@ describe('MDateFields', () => {
     });
 
     it('should render correctly model Date type', () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue
         });
 
@@ -122,7 +122,7 @@ describe('MDateFields', () => {
     });
 
     it('should render correctly when day/month/year is hidden', async () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue
         });
 
@@ -137,7 +137,7 @@ describe('MDateFields', () => {
     });
 
     it('should emit complete event when date is valid', () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue,
             propsData: {
                 value: new Date()
@@ -157,7 +157,7 @@ describe('MDateFields', () => {
     });
 
     it('should not emit change when date is invalid', () => {
-        const df = mount(MDatefields, {
+        const df: Wrapper<MDatefields> = mount(MDatefields, {
             localVue: localVue
         });
 

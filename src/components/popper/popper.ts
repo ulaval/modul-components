@@ -179,15 +179,16 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     private onEnter(el: HTMLElement, done): void {
         this.$nextTick(() => {
             this.update();
+            if (this.enter) {
+                this.enter(el.children[0], done);
+            } else {
+                let transitionDuration: number = (window.getComputedStyle(el).getPropertyValue('transition-duration').slice(1,-1) as any) * 1000;
+                setTimeout(() => {
+                    this.defaultAnimOpen = true;
+                    done();
+                }, transitionDuration);
+            }
         });
-        if (this.enter) {
-            this.enter(el.children[0], done);
-        } else {
-            this.$nextTick(() => {
-                this.defaultAnimOpen = true;
-                done();
-            });
-        }
     }
 
     private onAfterEnter(el: HTMLElement): void {

@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
@@ -11,7 +11,7 @@ describe('MPanel', () => {
     });
 
     it('should render correctly', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             slots: {
                 default: 'body'
@@ -22,7 +22,7 @@ describe('MPanel', () => {
     });
 
     it('should render correctly when an header is provided', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             slots: {
                 default: 'body',
@@ -34,7 +34,7 @@ describe('MPanel', () => {
     });
 
     it('should render correctly when a footer is provided', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             slots: {
                 default: 'body',
@@ -46,7 +46,7 @@ describe('MPanel', () => {
     });
 
     it('should render skink correctly', async () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             slots: {
                 default: 'body'
@@ -60,7 +60,7 @@ describe('MPanel', () => {
     });
 
     it('should render correctly with border', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             propsData: {
                 border: true
@@ -71,7 +71,7 @@ describe('MPanel', () => {
     });
 
     it('should render correctly with shadow', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             propsData: {
                 shadow: true
@@ -82,7 +82,7 @@ describe('MPanel', () => {
     });
 
     it('should render correctly with no padding', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             propsData: {
                 padding: false
@@ -93,7 +93,7 @@ describe('MPanel', () => {
     });
 
     it('should render correctly with no body padding', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             propsData: {
                 paddingBody: false
@@ -107,7 +107,7 @@ describe('MPanel', () => {
     });
 
     it('should render correctly with no header padding', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             propsData: {
                 paddingHeader: false
@@ -121,7 +121,7 @@ describe('MPanel', () => {
     });
 
     it('should render correctly with no footer padding', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             propsData: {
                 paddingFooter: false
@@ -135,7 +135,7 @@ describe('MPanel', () => {
     });
 
     it('should emit click event when panel is clicked on', () => {
-        const pnl = mount(MPanel, {
+        const pnl: Wrapper<MPanel> = mount(MPanel, {
             localVue: localVue,
             slots: {
                 default: 'body'

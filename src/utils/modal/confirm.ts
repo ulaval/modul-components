@@ -1,4 +1,5 @@
 import { PluginObject } from 'vue';
+
 import { MModal } from '../../components/modal/modal';
 
 export interface ConfirmOptions {
@@ -24,14 +25,14 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
     confirmInstance.cancelLabel = options && options.cancelLabel ? options.cancelLabel : undefined;
 
     return new Promise((resolve, reject) => {
-        let onOk = () => {
+        let onOk: () => void = () => {
             if (confirmInstance) {
                 unhook();
             }
             resolve();
         };
 
-        let onCancel = () => {
+        let onCancel: () => void = () => {
             if (confirmInstance) {
                 unhook();
             }
@@ -40,7 +41,7 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
             }
         };
 
-        let hook = () => {
+        let hook: () => void = () => {
             if (confirmInstance) {
                 confirmInstance.$on('ok', onOk);
                 confirmInstance.$on('cancel', onCancel);
@@ -48,7 +49,7 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
             }
         };
 
-        let unhook = () => {
+        let unhook: () => void = () => {
             if (confirmInstance) {
                 confirmInstance.$off('ok', onOk);
                 confirmInstance.$off('cancel', onCancel);

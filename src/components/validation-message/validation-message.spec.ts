@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { addMessages } from '../../../tests/helpers/lang';
@@ -17,7 +17,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should render nothing when there is no validation message', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue
         });
 
@@ -25,7 +25,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should render nothing when it is disabled', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue,
             propsData: {
                 disabled: true
@@ -36,7 +36,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should render nothing when it is waiting', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue,
             propsData: {
                 waiting: true
@@ -47,7 +47,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should render nothing when it is disabled', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue,
             propsData: {
                 disabled: true
@@ -58,7 +58,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should render helper message when prop is set', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue,
             propsData: {
                 helperMessage: 'help'
@@ -69,7 +69,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should render correctly when it is valid', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue,
             propsData: {
                 validMessage: 'valid'
@@ -80,7 +80,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should render correctly when it is in error', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue,
             propsData: {
                 errorMessage: 'error'
@@ -91,7 +91,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should render correctly when it is in error', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue,
             propsData: {
                 errorMessage: 'error'
@@ -102,7 +102,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should render error message even if there is a valid message', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue,
             propsData: {
                 validMessage: 'valid',
@@ -114,7 +114,7 @@ describe('MValidationMessage', () => {
     });
 
     it('should emit click event when clicked', () => {
-        const valMsg = mount(MValidationMessage, {
+        const valMsg: Wrapper<MValidationMessage> = mount(MValidationMessage, {
             localVue: localVue,
             propsData: {
                 validMessage: 'valid',

@@ -61,7 +61,7 @@ const components: string[] = [
     Components.VALIDATION_MESSAGE_NAME
 ];
 
-const factory = () => {
+const factory: () => void = () => {
     components.forEach(c => Meta.mergeComponentMeta(c, undefined));
 };
 

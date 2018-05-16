@@ -9,7 +9,7 @@ import LinkPlugin, { MLink, MLinkIconPosition, MLinkMode } from './link';
 describe('MLink', () => {
     let localVue: VueConstructor<Vue>;
 
-    const router = new VueRouter({
+    const router: VueRouter = new VueRouter({
         mode: 'history',
         routes: [
             {
@@ -28,7 +28,7 @@ describe('MLink', () => {
 
     describe('RouterLink mode', () => {
         it('should render correctly', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -40,7 +40,7 @@ describe('MLink', () => {
         });
 
         it('should render content correctly', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -55,7 +55,7 @@ describe('MLink', () => {
         });
 
         it('should render link target when prop is set', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -68,7 +68,7 @@ describe('MLink', () => {
         });
 
         it('should render open in new tab hidden text when target is _blank', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -81,7 +81,7 @@ describe('MLink', () => {
         });
 
         it('should render correctly when url prop is a string', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -94,7 +94,7 @@ describe('MLink', () => {
         });
 
         it('should pass route values to router-link using url prop', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -107,7 +107,7 @@ describe('MLink', () => {
         });
 
         it('should render correctly all link status', async () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -119,7 +119,7 @@ describe('MLink', () => {
         });
 
         it('should render correctly all icon style', async () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -134,7 +134,7 @@ describe('MLink', () => {
 
     describe('Link mode', () => {
         it('should render correctly', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -146,7 +146,7 @@ describe('MLink', () => {
         });
 
         it('should render link target when prop is set', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -159,7 +159,7 @@ describe('MLink', () => {
         });
 
         it('should render open in new tab hidden text when target is _blank', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -172,7 +172,7 @@ describe('MLink', () => {
         });
 
         it('should render content correctly', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -187,7 +187,7 @@ describe('MLink', () => {
         });
 
         it('should render correctly all link status', async () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -199,7 +199,7 @@ describe('MLink', () => {
         });
 
         it('should render correctly all icon style', async () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -214,7 +214,7 @@ describe('MLink', () => {
 
     describe('Button mode', () => {
         it('should render correctly', () => {
-            const link = mount(MLink, {
+            const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
@@ -226,7 +226,7 @@ describe('MLink', () => {
         });
     });
 
-    const renderAllLinkStyles = async (link: Wrapper<MLink>) => {
+    const renderAllLinkStyles: (link: Wrapper<MLink>) => Promise<void> = async (link: Wrapper<MLink>) => {
         link.setProps({ disabled: true });
         expect(await renderComponent(link.vm)).toMatchSnapshot('disabled');
         link.setProps({ unvisited: true, disabled: false });
@@ -235,7 +235,7 @@ describe('MLink', () => {
         expect(await renderComponent(link.vm)).toMatchSnapshot('underline');
     };
 
-    const renderAllIconStyle = async (link: Wrapper<MLink>) => {
+    const renderAllIconStyle: (link: Wrapper<MLink>) => Promise<void> = async (link: Wrapper<MLink>) => {
         link.setProps({ iconName: 'clock' });
         expect(await renderComponent(link.vm)).toMatchSnapshot('name');
         link.setProps({ iconSize: '24px', iconName: undefined });
