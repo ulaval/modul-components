@@ -192,10 +192,16 @@ a {
 .m--is-skin-dark {
     .m-navbar-item {
         font-size: $m-font-size--h5;
-        color: $m-color--grey-light;
+        font-weight: $m-font-weight--bold;
+        color: $m-color--grey;
         text-transform: uppercase;
         padding: $m-spacing--l;
         transition: color 0.4s ease;
+
+        // for multiline feature to come
+        // max-width: 200 + $m-spacing--l * 2;
+        // min-width: 120 + $m-spacing--l * 2;
+        // word-break: break-word;
 
         &::before {
             content: '';
@@ -209,6 +215,7 @@ a {
 
         &.m--is-selected {
             color: $m-color--white;
+            font-weight: $m-font-weight--black;
 
             &::before {
                 position: absolute;

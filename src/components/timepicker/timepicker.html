@@ -9,8 +9,12 @@
                    :width="width"
                    :icon-name="iconName"
                    v-m-popup:popup>
-        <input type="text"
+        <input :id="id"
+               type="text"
                ref="input"
+               aria-haspopup="true"
+               :aria-controls="ariaControls"
+               :aria-expanded="open"
                :disabled="!active"
                :placeholder="placeholder"
                @keydown.enter="inputOnKeydownEnter"
@@ -46,12 +50,12 @@
             <m-i18n k="m-timepicker:hours" class="m-timepicker__header__hours"></m-i18n>:
             <m-i18n k="m-timepicker:minutes" class="m-timepicker__header__minutes"></m-i18n>
         </div>
-        <div class="m-timepicker__body">
+        <div :id="ariaControls" class="m-timepicker__body" :aria-labelledby="id">
             <ul class="m-timepicker__body__hours" ref="hours" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
-                <li v-for="(h, i) in hours"><a class="m-timepicker__body__hours-item" :class="{'m--is-selected': i === tempHour}" @click.stop.prevent="selectHour(i)">{{formatHour(i)}}</a></li>
+                <li role="option" v-for="(h, i) in hours"><a href role="option" :aria-selected="i == tempHour" class="m-timepicker__body__hours-item" :class="{'m--is-selected': i == tempHour}" @click.stop.prevent="selectHour(i)">{{formatHour(i)}}</a></li>
             </ul>
             <ul class="m-timepicker__body__minutes" ref="minutes" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
-                <li v-for="m in minutes"><a class="m-timepicker__body__minutes-item" :class="{'m--is-selected': m === tempMinute}" @click.stop.prevent="selectMinute(m)">{{formatMinute(m)}}</a></li>
+                <li v-for="m in minutes"><a href role="option" :aria-selected="m == tempMinute" class="m-timepicker__body__minutes-item" :class="{'m--is-selected': m == tempMinute}" @click.stop.prevent="selectMinute(m)">{{formatMinute(m)}}</a></li>
             </ul>
         </div>
         <div slot="footer" class="m-timepicker__footer">

@@ -9,8 +9,6 @@ import { Viewer } from './viewer';
 
 Vue.use(Router);
 
-type RouterFactoryFn = () => Router;
-
 const routerFactory: () => Router = () => {
     const componentRoutes: RouteConfig[] = [
         {

@@ -8,35 +8,36 @@ import NavbarPlugin, { MNavbar } from './navbar';
 describe('MNavbar', () => {
     let localVue: VueConstructor<Vue>;
 
-    const slots: any = {
-        default: `
-            <m-navbar-item value="item1"></m-navbar-item>
-            <m-navbar-item value="item2"></m-navbar-item>
-            <m-navbar-item value="item3"></m-navbar-item>`
-    };
-
     beforeEach(() => {
         localVue = createLocalVue();
         localVue.use(NavbarPlugin);
     });
 
     it('should render correctly', () => {
-        const wrapper: Wrapper<MNavbar> = mount(MNavbar, {
-            localVue: localVue,
-            slots: slots
-        });
+
+        const wrapper = mount({
+            template: `
+        <m-navbar selected='item1'>
+            <m-navbar-item value="item1"></m-navbar-item>
+            <m-navbar-item value="item2"></m-navbar-item>
+            <m-navbar-item value="item3"></m-navbar-item>
+        </m-navbar>` },
+            { localVue });
 
         expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
     });
 
     it('should select the child value passed by the props', () => {
-        const wrapper: Wrapper<MNavbar> = mount(MNavbar, {
-            localVue: localVue,
-            propsData: {
-                selected: 'item2'
-            },
-            slots: slots
-        });
+        const wrapper = mount({
+            template: `
+        <m-navbar selected='item2'>
+            <m-navbar-item value="item1"></m-navbar-item>
+            <m-navbar-item value="item2"></m-navbar-item>
+            <m-navbar-item value="item3"></m-navbar-item>
+        </m-navbar>` },
+            {
+                localVue: localVue
+            });
 
         const selectedItem: WrapperArray<MNavbarItem> = wrapper.findAll<MNavbarItem>({ name: 'MNavbarItem' });
         expect(selectedItem.at(0).vm.isSelected).toEqual(false);
