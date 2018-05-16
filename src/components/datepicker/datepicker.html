@@ -14,6 +14,10 @@
                    v-m-popup:popup>
         <input type="text"
                ref="input"
+               :id="id"
+               aria-haspopup="true"
+               :aria-controls="ariaControls1 + ' ' + ariaControls2"
+               :aria-expanded="open"
                :disabled="!active"
                :placeholder="placeholder"
                @keydown.enter="inputOnKeydownEnter"
@@ -47,19 +51,19 @@
              :focus-management="isMqMaxS"
              :padding="false"
              placement="bottom">
-        <div slot="header" class="m-datepicker__header">
+        <div :id="ariaControls1" class="m-datepicker__header" :aria-labelledby="id" slot="header">
             <nav class="m-datepicker__header__nav">
                 <m-icon-button icon-name="left-chevron" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>
-                <button type="button" class="m-datepicker__years" @click="showYears">{{selectedYear}}</button>
+                <button type="button" class="m-datepicker__years" @click="showYears" aria-live="polite">{{selectedYear}}</button>
                 <m-icon-button icon-name="chevron" @click="selectYear(selectedYear + 1)" :disabled="isMaxYear">next year</m-icon-button>
             </nav>
             <nav class="m-datepicker__header__nav">
                 <m-icon-button icon-name="left-chevron" @click="selectMonth(selectedMonth - 1)" :disabled="isMinMonth">previous month</m-icon-button>
-                <button type="button" class="m-datepicker__months" @click="view = 'month'">{{ selectedMonthName }}</button>
+                <button type="button" class="m-datepicker__months" @click="view = 'month'" aria-live="polite">{{ selectedMonthName }}</button>
                 <m-icon-button icon-name="chevron" @click="selectMonth(selectedMonth + 1)" :disabled="isMaxMonth">next month</m-icon-button>
             </nav>
         </div>
-        <div class="m-datepicker__body" ref="body">
+        <div :id="ariaControls2" class="m-datepicker__body" ref="body" :aria-labelledby="id" aria-live="polite">
             <table class="m-datepicker__body-table">
                 <template v-if="view === 'year'">
                     <tr v-for="yearRow in years">

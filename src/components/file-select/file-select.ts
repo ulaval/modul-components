@@ -78,7 +78,7 @@ export class MFileSelect extends ModulVue {
     }
 
     private processFile(event: Event): void {
-        const file = this.$refs.inputFile.files;
+        const file: FileList | null = this.$refs.inputFile.files;
         if (file) {
             this.$file.add(file, this.storeName);
         }

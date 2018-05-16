@@ -43,7 +43,7 @@ export enum MDroppableEventNames {
     OnDragOver = 'droppable:dragover'
 }
 
-const DEFAULT_ACTION = 'any';
+const DEFAULT_ACTION: string = 'any';
 
 export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     public static defaultMountPoint: string = '__mdroppable__';
@@ -104,10 +104,10 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     public canDrop(draggable: MDraggable | undefined = MDraggable.currentDraggable): boolean {
         if (!draggable) { return false; }
 
-        const canDrop = this.options.canDrop ? true : false;
-        const acceptAny = this.options.acceptedActions.find(action => action === 'any') !== undefined;
+        const canDrop: boolean = this.options.canDrop ? true : false;
+        const acceptAny: boolean = this.options.acceptedActions.find(action => action === 'any') !== undefined;
         const draggableAction: string = draggable.options.action;
-        const isAllowedAction = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
+        const isAllowedAction: boolean = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
         return canDrop && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
     }
 
@@ -137,8 +137,8 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
 
     private onDragIn(event: DragEvent): any {
         if (document.elementFromPoint) {
-            const element = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement;
-            const droppable = MDOMPlugin.getRecursive(MDroppable, element);
+            const element: HTMLElement = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement;
+            const droppable: MDroppable | undefined = MDOMPlugin.getRecursive(MDroppable, element);
             // Firefox sometime fires events on the wrong container for some reasons.  This fix it.
             if (droppable !== this) { this.cleanupCssClasses(); return; }
         }
@@ -177,7 +177,7 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
-        const dropInfo = this.extractDropInfo(event);
+        const dropInfo: MDropInfo = this.extractDropInfo(event);
         const customEvent: CustomEvent = document.createEvent('CustomEvent');
         customEvent.initCustomEvent(name, true, true, Object.assign(event, { dropInfo }));
         (customEvent as any).dropInfo = dropInfo;
@@ -185,7 +185,7 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private extractDropInfo(event: DragEvent): MDropInfo {
-        const data = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.dragData || event.dataTransfer.getData('text') : undefined;
+        const data: any = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.dragData || event.dataTransfer.getData('text') : undefined;
         const action: string = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.action : DEFAULT_ACTION;
         const grouping: string = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.grouping : undefined;
         return {

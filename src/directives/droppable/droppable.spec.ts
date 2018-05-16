@@ -117,7 +117,7 @@ describe('droppable', () => {
         const userDefinedData: any = { someKey: 'someValue' };
         const userDefinedGrouping: string = 'someGrouping';
         beforeEach(() => {
-            const draggable = getDraggableDirective(true, { dragData: userDefinedData, grouping: userDefinedGrouping, action: userDefinedAction });
+            const draggable: Wrapper<Vue> = getDraggableDirective(true, { dragData: userDefinedData, grouping: userDefinedGrouping, action: userDefinedAction });
             droppable = getDroppableDirective(true, { acceptedActions: [userDefinedAction] }, '<div>content</div>');
             dragEventDummy = getEventDummy();
             draggable.trigger('dragstart', dragEventDummy);
@@ -196,7 +196,7 @@ describe('droppable', () => {
         };
 
         beforeEach(() => {
-            const draggable = getDraggableDirective(true, { dragData: userDefinedData, grouping: userDefinedGrouping, action: userDefinedAction });
+            const draggable: Wrapper<Vue> = getDraggableDirective(true, { dragData: userDefinedData, grouping: userDefinedGrouping, action: userDefinedAction });
             droppable = getDroppableDirective(true, { acceptedActions: [userDefinedAction] });
             dragEventDummy = getEventDummy();
             draggable.trigger('dragstart', dragEventDummy);
@@ -269,7 +269,7 @@ describe('droppable', () => {
         const userDefinedData: any = { someKey: 'someValue' };
         const userDefinedGrouping: string = 'someGrouping';
         beforeEach(() => {
-            const draggable = getDraggableDirective(true, { dragData: userDefinedData, grouping: userDefinedGrouping, action: userDefinedAction });
+            const draggable: Wrapper<Vue> = getDraggableDirective(true, { dragData: userDefinedData, grouping: userDefinedGrouping, action: userDefinedAction });
             droppable = getDroppableDirective(true, { acceptedActions: [userDefinedAction] });
             dragEventDummy = getEventDummy();
             draggable.trigger('dragstart', dragEventDummy);
@@ -277,7 +277,7 @@ describe('droppable', () => {
         });
 
         it('it should update element correctly', () => {
-            const droppablePlugin = MDOMPlugin.get(MDroppable, droppable.element);
+            const droppablePlugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element);
             jest.spyOn(droppablePlugin, 'cleanupCssClasses');
 
             droppable.trigger('drop', dragEventDummy);
@@ -303,7 +303,7 @@ describe('droppable', () => {
     describe('cleanupCssClasses', () => {
         let droppable: Wrapper<Vue>;
         beforeEach(() => {
-            const draggable = getDraggableDirective(true);
+            const draggable: Wrapper<Vue> = getDraggableDirective(true);
             droppable = getDroppableDirective(true);
         });
 
@@ -315,7 +315,7 @@ describe('droppable', () => {
 
         it('it should never clean up Droppable class', () => {
             addClass(MDroppableClassNames.Droppable);
-            const droppablePlugin = MDOMPlugin.get(MDroppable, droppable.element);
+            const droppablePlugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element);
 
             droppablePlugin.cleanupCssClasses();
 
@@ -325,7 +325,7 @@ describe('droppable', () => {
         [MDroppableClassNames.CanDrop, MDroppableClassNames.CantDrop, MDroppableClassNames.Overing].forEach(className => {
             it(`it should clean up ${className} class when it exists on element`, () => {
                 addClass(className);
-                const droppablePlugin = MDOMPlugin.get(MDroppable, droppable.element);
+                const droppablePlugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element);
 
                 droppablePlugin.cleanupCssClasses();
 
@@ -363,7 +363,7 @@ describe('droppable', () => {
         });
 
         it('it should return false if draggable action is not accepted by droppable', () => {
-            const draggablePlugin = MDOMPlugin.get(MDraggable, draggable.element);
+            const draggablePlugin: MDraggable = MDOMPlugin.get(MDraggable, draggable.element);
             draggablePlugin.options.action = 'wontBeAcceptedByDroppable';
             plugin.options.acceptedActions = ['iWontAcceptAnything'];
 
@@ -392,7 +392,6 @@ describe('droppable', () => {
                     </div>`
             }, { localVue: Vue });
             const child: Wrapper<Vue> = element.find('.someChild');
-            const test2 = MDOMPlugin.get(MDroppable, child.element);
             element.trigger('dragstart', getEventDummy());
             child.trigger('dragover', getEventDummy());
 

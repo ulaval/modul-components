@@ -3,6 +3,8 @@
               'm--is-disabled': disabled,
               'm--is-inactive': inactive,
               'm--is-focus': focused }"
+    role="option"
+    :aria-selected="selected"
     :disabled="disabled"
     v-if="!filtered || inactive"
     @click.prevent="onClick">

@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
@@ -26,7 +26,7 @@ describe('file-select', () => {
     });
 
     it('should render correctly', () => {
-        const fileSelect = mount(MFileSelect, {
+        const fileSelect: Wrapper<MFileSelect> = mount(MFileSelect, {
             localVue: Vue
         });
 
@@ -36,7 +36,7 @@ describe('file-select', () => {
     });
 
     it('should flow down button props', () => {
-        const buttonProps = {
+        const buttonProps: any = {
             skin: 'primary',
             disabled: true,
             waiting: true,
@@ -46,7 +46,7 @@ describe('file-select', () => {
             iconSize: '24px'
         };
 
-        const fileSelect = mount(MFileSelect, {
+        const fileSelect: Wrapper<MFileSelect> = mount(MFileSelect, {
             localVue: Vue,
             propsData: buttonProps
         });
@@ -55,7 +55,7 @@ describe('file-select', () => {
     });
 
     it('should set multiple attribute on input based on prop value', () => {
-        const fileSelect = mount(MFileSelect, {
+        const fileSelect: Wrapper<MFileSelect> = mount(MFileSelect, {
             localVue: Vue
         });
 
@@ -71,7 +71,7 @@ describe('file-select', () => {
     });
 
     it('should emit click event when button is clicked', () => {
-        const fileSelect = mount(MFileSelect, {
+        const fileSelect: Wrapper<MFileSelect> = mount(MFileSelect, {
             localVue: Vue
         });
 
@@ -81,9 +81,9 @@ describe('file-select', () => {
     });
 
     it('it should add selected files to $file', () => {
-        const mockFiles = createMockFileList([createMockFile('file')]);
+        const mockFiles: FileList = createMockFileList([createMockFile('file')]);
 
-        const fileSelect = mount(MFileSelect, {
+        const fileSelect: Wrapper<MFileSelect> = mount(MFileSelect, {
             localVue: Vue
         });
         fileSelect.vm.$file.add = jest.fn();
@@ -100,14 +100,14 @@ describe('file-select', () => {
     });
 
     it('it should support optional store name prop', () => {
-        const fileSelect = mount(MFileSelect, {
+        const fileSelect: Wrapper<MFileSelect> = mount(MFileSelect, {
             propsData: {
                 storeName: 'unique-store'
             },
             localVue: Vue
         });
 
-        const addMock = jest.fn();
+        const addMock: jest.Mock<{}> = jest.fn();
         fileSelect.vm.$file.add = addMock;
 
         fileSelect.find('input').trigger('change');

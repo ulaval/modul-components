@@ -13,7 +13,7 @@ jest.useFakeTimers();
 describe('draggable', () => {
     polyFillActive.dragDrop = false;
 
-    const dragImageTemplate = `<div class="${MDraggableClassNames.DragImage}"></div>`;
+    const dragImageTemplate: string = `<div class="${MDraggableClassNames.DragImage}"></div>`;
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
     (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
         let directive: Wrapper<Vue>;
@@ -96,7 +96,7 @@ describe('draggable', () => {
 
         it(`it should not apply grabbing class to parent draggable on ${eventName}`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(true, undefined, '<div class="childDraggable" v-m-draggable="true">child draggable</div>');
-            const childDraggable = draggable.find('.childDraggable');
+            const childDraggable: Wrapper<Vue> = draggable.find('.childDraggable');
 
             childDraggable.trigger(eventName);
             jest.runOnlyPendingTimers();
@@ -159,7 +159,7 @@ describe('draggable', () => {
         });
 
         it('it should update element correctly', () => {
-            const options = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
             draggable.trigger('dragstart', options);
 
             expect(MDraggable.currentDraggable).toBe(MDOMPlugin.get(MDraggable, draggable.element));
@@ -168,7 +168,7 @@ describe('draggable', () => {
         });
 
         it('it should manage DragEvent correctly', () => {
-            const options = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
             jest.spyOn(options, 'stopPropagation');
             draggable.trigger('dragstart', options);
 
@@ -179,7 +179,7 @@ describe('draggable', () => {
         });
 
         it('should populate dataTransfer correctly', () => {
-            const options = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
             jest.spyOn(options.dataTransfer, 'setData');
             jest.spyOn(options.dataTransfer, 'setDragImage');
             draggable.trigger('dragstart', options);
@@ -204,7 +204,7 @@ describe('draggable', () => {
         });
 
         it('it should update element correctly', () => {
-            const options = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
             draggable.trigger('dragend', options);
 
             expect(MDraggable.currentDraggable).toBeUndefined();
@@ -213,7 +213,7 @@ describe('draggable', () => {
         });
 
         it('it should manage DragEvent correctly', () => {
-            const options = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
             jest.spyOn(options, 'stopPropagation');
             draggable.trigger('dragend', options);
 

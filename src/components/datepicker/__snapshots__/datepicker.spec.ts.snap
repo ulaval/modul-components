@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MDatepicker should render correctly 1`] = `
+<div class="m-datepicker">
+    <div class="m-input-style m--is-tag-default" style="width:undefined;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="yyyy/mm/dd" value=""> </div>
+            <div class="m-input-style__body__right">
+                <m-icon-button icon-name="calendar" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+            </div>
+        </div>
+    </div>
+    <div class="m-popup">
+        <div class="m-popper">
+            <DIV class="v-portal" style="display:none;"></DIV>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MDatepicker should render correctly min/max time 1`] = `
+<div class="m-datepicker">
+    <div class="m-input-style m--is-tag-default" style="width:undefined;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="yyyy/mm/dd" value=""> </div>
+            <div class="m-input-style__body__right">
+                <m-icon-button icon-name="calendar" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+            </div>
+        </div>
+    </div>
+    <div class="m-popup">
+        <div class="m-popper">
+            <DIV class="v-portal" style="display:none;"></DIV>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MDatepicker should render correctly when disabled is set 1`] = `
+<div class="m-datepicker m--is-disabled">
+    <div class="m-input-style m--is-disabled m--is-tag-default" style="width:undefined;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" disabled="disabled" placeholder="yyyy/mm/dd" value=""> </div>
+            <div class="m-input-style__body__right">
+                <m-icon-button icon-name="calendar" disabled="disabled" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+            </div>
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-input-style__disabled-icon">
+                <use xlink:href="#default" aria-hidden="true"></use>
+            </svg>
+        </div>
+    </div>
+    <div class="m-popup">
+        <div class="m-popper">
+            <DIV class="v-portal" style="display:none;"></DIV>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MDatepicker should render correctly when error is set 1`] = `
+<div class="m-datepicker m--has-error">
+    <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="yyyy/mm/dd" value=""> </div>
+            <div class="m-input-style__body__right">
+                <m-icon-button icon-name="calendar" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+            </div>
+        </div>
+    </div>
+    <div class="m-validation-message">
+        <p class="m-validation-message__error">
+            <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
+                <title>m-validation-message:title-error-icon</title>
+                <use xlink:href="#error" aria-hidden="true"></use>
+            </svg><span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
+    </div>
+    <div class="m-popup">
+        <div class="m-popper">
+            <DIV class="v-portal" style="display:none;"></DIV>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MDatepicker should render correctly when valid is set 1`] = `
+<div class="m-datepicker m--is-valid">
+    <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="yyyy/mm/dd" value=""> </div>
+            <div class="m-input-style__body__right">
+                <m-icon-button icon-name="calendar" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+            </div>
+        </div>
+    </div>
+    <div class="m-validation-message">
+        <p class="m-validation-message__valid">
+            <svg width="1em" height="1em" class="m-icon m-validation-message__valid__icon">
+                <title>m-validation-message:title-valid-icon</title>
+                <use xlink:href="#check" aria-hidden="true"></use>
+            </svg> <span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
+    </div>
+    <div class="m-popup">
+        <div class="m-popper">
+            <DIV class="v-portal" style="display:none;"></DIV>
+        </div>
+    </div>
+</div>
+`;
+
+exports[`MDatepicker should render correctly when waiting is set 1`] = `
+<div class="m-datepicker m--is-waiting">
+    <div class="m-input-style m--is-waiting m--is-tag-default" style="width:undefined;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" disabled="disabled" placeholder="yyyy/mm/dd" value=""> </div>
+            <div class="m-input-style__body__right">
+                <m-icon-button icon-name="calendar" disabled="disabled" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+            </div>
+            <div class="m-spinner m-input-style__spinner">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div class="m-popup">
+        <div class="m-popper">
+            <DIV class="v-portal" style="display:none;"></DIV>
+        </div>
+    </div>
+</div>
+`;
