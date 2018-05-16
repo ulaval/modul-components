@@ -35,7 +35,8 @@ describe('MErrorMessage', () => {
         const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
             localVue: Vue,
             propsData: {
-                date: moment('2018-01-02T00:01:02')
+                date: moment('2018-01-02T00:01:02'),
+                referenceNumber: '123456879'
             },
             stubs: {
                 'm-accordion': WrapChildrenStub('div')
