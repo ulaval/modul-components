@@ -11,7 +11,7 @@ import WithRender from './navbar.html?style=./navbar.scss';
 const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
 const THRESHOLD: number = 2.5;
-const POPPER_CLASS_NAME: string = '.m-popper__popper';
+const OVERFLOWOFFSET: number = 20;
 
 export enum MNavbarSkin {
     Light = 'light',
@@ -50,19 +50,25 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Prop({ default: true })
     public arrowMobile: boolean;
     @Prop({ default: false })
-    public mouseover: boolean;
+    public mouseEvent: boolean;
 
     private animActive: boolean = false;
+    private animReady: boolean = false;
     private internalValue: any | undefined = '';
-    private hasScrolllH: boolean = false;
+    private showArrowLeft: boolean = false;
+    private showArrowRight: boolean = false;
     private computedHeight: number = 0;
 
     public updateValue(value: any): void {
         this.model = value;
     }
 
-    public onMouseOver(value: any, event: Event): void {
+    public onMouseover(value: any, event: Event): void {
         this.$emit('mouseover', value, event);
+    }
+
+    public onMouseleave(value: any, event: Event): void {
+        this.$emit('mouseleave', value, event);
     }
 
     public onClick(value: any, event: Event): void {
@@ -86,26 +92,15 @@ export class MNavbar extends BaseNavbar implements Navbar {
         this.scrollToSelected();
         this.setupScrolllH();
         this.as<ElementQueries>().$on('resize', this.setupScrolllH);
+
+        // delay the animation beyond initial load
+        setTimeout(() => {
+            this.animReady = true;
+        }, 0);
     }
 
     protected beforeDestroy(): void {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
-    }
-
-    private scrollToSelected(): void {
-        this.$children.forEach(element => {
-            if (element.$props.value === this.selected) {
-
-                (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
-
-                if (this.skin === MNavbarSkin.Light) {
-                    this.setPosition(element, 'line');
-                }
-                if (this.skin === MNavbarSkin.Arrow) {
-                    this.setPosition(element, 'arrow');
-                }
-            }
-        });
     }
 
     private setPosition(element, ref: string): void {
@@ -133,24 +128,53 @@ export class MNavbar extends BaseNavbar implements Navbar {
     private setupScrolllH(): void {
         let listEl: HTMLElement = this.$refs.list as HTMLElement;
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let elComputedStyle: any = (this.$el as any).currentStyle || window.getComputedStyle(this.$el);
-        let width: number = this.$el.clientWidth - parseInt(elComputedStyle.paddingLeft, 10) -
-            parseInt(elComputedStyle.paddingRight, 10) - parseInt(elComputedStyle.borderLeftWidth, 10) -
-            parseInt(elComputedStyle.borderRightWidth, 10);
-        if (width < listEl.clientWidth) {
+        let maxScrollLeft = wrapEl.scrollWidth - wrapEl.clientWidth;
+
+        if (wrapEl.scrollWidth > wrapEl.clientWidth) {
             this.computedHeight = listEl.clientHeight;
-            this.hasScrolllH = true;
-            wrapEl.style.height = this.computedHeight + 40 + 'px';
+            wrapEl.style.height = this.computedHeight + OVERFLOWOFFSET + 'px';
             this.$el.style.height = this.computedHeight + 'px';
+
+            wrapEl.scrollLeft = this.updateScrollPosition();
+
+            if (wrapEl.scrollLeft < maxScrollLeft) {
+                this.showArrowRight = true;
+            }
+
+            if (wrapEl.scrollLeft > 0) {
+                this.showArrowLeft = true;
+            }
+
         } else {
-            this.hasScrolllH = false;
+            this.showArrowLeft = false;
+            this.showArrowRight = false;
             wrapEl.style.removeProperty('height');
             this.$el.style.removeProperty('height');
         }
     }
 
-    private get ComputedHeight(): string {
-        return this.computedHeight + 'px';
+    private scrollToSelected(): void {
+        this.$children.forEach(element => {
+            if (element.$props.value === this.selected) {
+
+                (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
+
+                if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
+                    this.setPosition(element, this.skin);
+                }
+
+            }
+        });
+    }
+
+    private updateScrollPosition(): number {
+        let offsetLeft = 0;
+        this.$children.forEach(element => {
+            if (element.$props.value === this.selected) {
+                offsetLeft = element.$el.offsetLeft;
+            }
+        });
+        return offsetLeft;
     }
 
     private get buttonSkin(): string {
@@ -167,14 +191,30 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     private scrollLeft(event: MouseEvent): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let btnsWidth: any = ((this.$refs.buttonLeft as ModulVue).$el as HTMLElement).clientWidth + ((this.$refs.buttonRight as ModulVue).$el as HTMLElement).clientWidth;
-        wrapEl.scrollLeft = wrapEl.scrollLeft - ((this.$el.clientWidth - btnsWidth) / THRESHOLD);
+        let maxScrollLeft = wrapEl.scrollWidth - wrapEl.clientWidth;
+        wrapEl.scrollLeft = wrapEl.scrollLeft - (wrapEl.clientWidth / THRESHOLD);
+
+        if (wrapEl.scrollLeft === 0) {
+            this.showArrowLeft = false;
+        }
+
+        if (wrapEl.scrollLeft < maxScrollLeft) {
+            this.showArrowRight = true;
+        }
     }
 
     private scrollRight(event: MouseEvent): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let btnsWidth: any = ((this.$refs.buttonLeft as ModulVue).$el as HTMLElement).clientWidth + ((this.$refs.buttonRight as ModulVue).$el as HTMLElement).clientWidth;
-        wrapEl.scrollLeft = wrapEl.scrollLeft + ((this.$el.clientWidth - btnsWidth) / THRESHOLD);
+        let maxScrollLeft = wrapEl.scrollWidth - wrapEl.clientWidth;
+        wrapEl.scrollLeft = wrapEl.scrollLeft + (wrapEl.clientWidth / THRESHOLD);
+
+        if (wrapEl.scrollLeft > 0) {
+            this.showArrowLeft = true;
+        }
+
+        if (wrapEl.scrollLeft === maxScrollLeft) {
+            this.showArrowRight = false;
+        }
     }
 }
 
