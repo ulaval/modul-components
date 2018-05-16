@@ -4,11 +4,9 @@ import { PluginObject } from 'vue/types/plugin';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { SORTABLE_NAME } from '../directive-names';
 import { DomPlugin, MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
-import DraggablePlugin, { MDraggable, MDraggableEventNames } from '../draggable/draggable';
-import DroppablePlugin, { MDropEvent, MDroppable, MDroppableEventNames } from '../droppable/droppable';
+import DraggablePlugin, { MDraggable, MDraggableEventNames, MDraggableOptions } from '../draggable/draggable';
+import DroppablePlugin, { MDropEvent, MDroppable, MDroppableEventNames, MDroppableOptions } from '../droppable/droppable';
 import { MDroppableGroup } from '../droppable/droppable-group';
-import { MDraggableOptions } from './../../../dist/directives/draggable/draggable.d';
-import { MDroppableOptions } from './../droppable/droppable';
 import { MSortableDefaultInsertionMarkerBehavior, MSortableInsertionMarkerBehavior } from './insertion-behavior';
 
 export interface MSortableOptions {

@@ -11,7 +11,7 @@ Vue.use(Router);
 
 type RouterFactoryFn = () => Router;
 
-const routerFactory = () => {
+const routerFactory: () => void = () => {
     const componentRoutes: RouteConfig[] = [
         {
             path: '/',

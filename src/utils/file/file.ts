@@ -1,7 +1,7 @@
-import { HttpService } from '@ulaval/modul-components/dist/utils/http/http';
 import axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from 'axios';
 import Vue, { PluginObject } from 'vue';
 
+import { HttpService } from '../http/http';
 import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
 import { ModulVue } from '../vue/vue';
