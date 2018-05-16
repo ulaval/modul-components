@@ -111,7 +111,7 @@ const buildBadge: (element, binding, vnode) => void = (element, binding, vnode) 
 };
 
 const MBadgeDirective: DirectiveOptions = {
-    bind(
+    inserted(
         element: HTMLElement,
         binding: VNodeDirective,
         vnode: VNode,
