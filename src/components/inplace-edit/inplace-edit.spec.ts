@@ -2,12 +2,8 @@ import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 
 import { addMessages } from '../../../tests/helpers/lang';
-import { renderComponent } from '../../../tests/helpers/render';
-
-import I18nPlugin from '../../components/i18n/i18n';
-import { ModulVue } from '../../utils/vue/vue';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-
+import { ModulVue } from '../../utils/vue/vue';
 import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 
 let propsData: { propsData: { editMode: boolean, saveFn: () => Promise<void> } };
@@ -45,7 +41,7 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
 
     describe('when defining title prop', () => {
         it('must use props value for dialog title',() => {
-            let titleProp = 'myTitle';
+            let titleProp: string = 'myTitle';
             inplaceEdit.title = titleProp;
 
             expect(inplaceEdit.title).toEqual(titleProp);
@@ -63,7 +59,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
 
     describe('when confirming', () => {
         test(`must not send events to parent`, () => {
-            let spy = jest.spyOn(inplaceEdit, '$emit');
+            let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
             inplaceEdit.confirm(AN_EVENT);
 
@@ -73,7 +69,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
 
     describe('when cancelling', () => {
         it(`must not send event to parent`, () => {
-            let spy = jest.spyOn(inplaceEdit, '$emit');
+            let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
             inplaceEdit.cancel(AN_EVENT);
 
@@ -93,7 +89,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         describe('when confirming', () => {
             it(`must emit confirmation event to parent`, () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
+                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
                 inplaceEdit.confirm(AN_EVENT);
 
@@ -101,7 +97,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
             });
 
             it(`must go back to readMode`, async () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
+                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
                 await inplaceEdit.confirm(AN_EVENT);
 
@@ -111,14 +107,14 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         describe('when cancelling', () => {
             it(`must emit cancellation event to parent`, () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
+                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
                 inplaceEdit.cancel(AN_EVENT);
 
                 expect(spy).toBeCalledWith(CANCEL_EVENT);
             });
             it(`must go back to readMode`, async () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
+                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
                 await inplaceEdit.confirm(AN_EVENT);
 
@@ -137,7 +133,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         describe('when confirming', () => {
             it(`must emit confirmation event to parent`, () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
+                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
                 inplaceEdit.confirm(AN_EVENT);
 
@@ -145,7 +141,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
             });
 
             it(`must not go back to readMode`, async () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
+                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
                 await inplaceEdit.confirm(AN_EVENT);
 
@@ -188,7 +184,7 @@ describe('Component inplace-edit - Complete component by default', () => {
                 readMode: READ_SLOT
             },
             mixins: [{
-                data: function() {
+                data(): any {
                     return {
                         isMqMinS: true,
                         isMqMinM: false
@@ -251,7 +247,7 @@ describe('Component inplace-edit - Complete component mobile', () => {
                 readMode: READ_SLOT
             },
             mixins: [{
-                data: function() {
+                data(): any {
                     return {
                         isMqMinS: false
                     };

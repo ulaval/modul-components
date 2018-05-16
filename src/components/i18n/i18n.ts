@@ -27,7 +27,7 @@ export class MI18n extends ModulVue {
     }
 
     private get text(): string {
-        let result = '';
+        let result: string = '';
         if (this.k) {
             result = this.$i18n.translate(
                 this.k,

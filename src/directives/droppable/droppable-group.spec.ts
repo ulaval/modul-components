@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
@@ -16,13 +16,13 @@ describe('droppable-group', () => {
 
     it('it should make group resolvable from child element', () => {
         const childGroup: string = 'childGroup';
-        const droppableGroup = mount({
+        const droppableGroup: Wrapper<Vue> = mount({
             template: `
                 <div v-m-droppable-group="'${childGroup}'">
                     <div class="someChild">someChild</div>
                 </div>`
         }, { localVue: Vue });
-        const childElement = droppableGroup.find('.someChild');
+        const childElement: Wrapper<Vue> = droppableGroup.find('.someChild');
         expect(MDOMPlugin.getRecursive(MDroppableGroup, droppableGroup.element).options).toBe(childGroup);
     });
 });

@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from 'axios';
 import Vue, { PluginObject } from 'vue';
 
+import { HttpService } from '../http/http';
 import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
 import { ModulVue } from '../vue/vue';
@@ -93,8 +94,8 @@ export class FileService {
     }
 
     private getStore(name?: string): FileStore {
-        const storeName = this.getStoreName(name);
-        let store = this.stores[storeName];
+        const storeName: string = this.getStoreName(name);
+        let store: FileStore = this.stores[storeName];
         if (!store) {
             store = this.stores[storeName] = new FileStore();
         }
@@ -107,8 +108,8 @@ interface FileStoreRx extends Vue {
     files: MFile[];
 }
 
-const extractExtension = (file: File): string => {
-    const match = file.name.match(/\.([a-zA-Z0-9]{3,4})$/);
+const extractExtension: (file: File) => string = (file: File): string => {
+    const match: RegExpMatchArray | null = file.name.match(/\.([a-zA-Z0-9]{3,4})$/);
     return match ? match[1].toLowerCase() : '';
 };
 
@@ -140,8 +141,8 @@ class FileStore {
     }
 
     public add(files: FileList): void {
-        for (let i = 0; i < files.length; ++i) {
-            const file = files[i];
+        for (let i: number = 0; i < files.length; ++i) {
+            const file: File = files[i];
 
             const mfile: MFile = {
                 uid: uuid.generate(),
@@ -149,7 +150,7 @@ class FileStore {
                 file: file,
                 status: MFileStatus.READY,
                 progress: 0,
-                get extension() {
+                get extension(): string {
                     return extractExtension(file);
                 }
             };
@@ -181,16 +182,16 @@ class FileStore {
         fileuid: string,
         options: MFileUploadOptions
     ): Promise<AxiosResponse<T>> {
-        const file = this.getFile(fileuid);
+        const file: MFile = this.getFile(fileuid);
 
-        const onUploadProgress = (e: ProgressEvent) => {
+        const onUploadProgress: (e: ProgressEvent) => any = (e: ProgressEvent) => {
             file.progress = e.loaded / e.total * 100;
             if (options.onUploadProgress) {
                 options.onUploadProgress(e);
             }
         };
 
-        const httpService = (Vue.prototype as ModulVue).$http;
+        const httpService: HttpService = (Vue.prototype as ModulVue).$http;
         const cfg: RequestConfig = {
             method: 'POST',
             rawUrl: options.url,
@@ -201,7 +202,7 @@ class FileStore {
             ...options.config
         };
 
-        const cancelToken = axios.CancelToken.source();
+        const cancelToken: CancelTokenSource = axios.CancelToken.source();
         this.cancelTokens[fileuid] = cancelToken;
 
         const axiosOptions: AxiosRequestConfig = {
@@ -210,9 +211,8 @@ class FileStore {
         };
 
         file.status = MFileStatus.UPLOADING;
-        const promise = httpService.execute<T>(cfg, axiosOptions);
 
-        return promise
+        return httpService.execute<T>(cfg, axiosOptions)
             .then<AxiosResponse<T>, any>(
                 value => {
                     file.status = MFileStatus.COMPLETED;
@@ -258,7 +258,7 @@ class FileStore {
     }
 
     private validateExtension(file: MFile): void {
-        const ext = extractExtension(file.file);
+        const ext: string = extractExtension(file.file);
 
         if (this.options!.extensions!.indexOf(ext) === -1) {
             file.status = MFileStatus.REJECTED;
@@ -274,8 +274,8 @@ class FileStore {
     }
 
     private validateMaxFiles(file: MFile): void {
-        const nbValidFiles = Object.keys(this.filesmap).reduce((t, uid) => {
-            let f = this.filesmap[uid];
+        const nbValidFiles: number = Object.keys(this.filesmap).reduce((t, uid) => {
+            let f: MFile = this.filesmap[uid];
             return (t =
                 f.status === MFileStatus.COMPLETED ||
                     f.status === MFileStatus.READY ||

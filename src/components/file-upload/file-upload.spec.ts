@@ -12,6 +12,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import IconButtonPlugin from '../icon-button/icon-button';
 import MessagePlugin from '../message/message';
+import { FileService } from './../../utils/file/file';
 import FileUploadPlugin, { MFileUpload } from './file-upload';
 
 describe('MFileUpload', () => {
@@ -25,7 +26,7 @@ describe('MFileUpload', () => {
     });
 
     it('should render correctly', () => {
-        const fupd = mount(MFileUpload, {
+        const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
             data: {
                 isMqMinS: true
             }
@@ -35,7 +36,7 @@ describe('MFileUpload', () => {
     });
 
     it('should render correctly in mobile', () => {
-        const fupd = mount(MFileUpload, {
+        const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
             data: {
                 isMqMinS: false
             }
@@ -45,7 +46,7 @@ describe('MFileUpload', () => {
     });
 
     it('should support optional $file store name', async () => {
-        const fupd = mount(MFileUpload, {
+        const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
             propsData: {
                 storeName: 'unique-name'
             }
@@ -61,17 +62,17 @@ describe('MFileUpload', () => {
     });
 
     describe('validation', () => {
-        const validationOpts = {
+        const validationOpts: any = {
             extensions: ['jpg', 'png', 'mp4'],
             maxSizeKb: 1,
             maxFiles: 5
         };
 
         it('should pass validation options to $file service', () => {
-            const filesvc = (Vue.prototype as ModulVue).$file;
+            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
             jest.spyOn(filesvc, 'setValidationOptions');
 
-            const fupd = mount(MFileUpload, {
+            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                 propsData: validationOpts
             });
 
@@ -82,7 +83,7 @@ describe('MFileUpload', () => {
         });
 
         it('should render accepted file extensions', () => {
-            const fupd = mount(MFileUpload, {
+            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                 propsData: validationOpts,
                 data: {
                     isMqMinS: true
@@ -95,7 +96,7 @@ describe('MFileUpload', () => {
         describe('validation messages', () => {
             let fupd: Wrapper<MFileUpload>;
 
-            const stubMDialogRefs = (fu: MFileUpload) => {
+            const stubMDialogRefs: (fu: MFileUpload) => void = (fu: MFileUpload) => {
                 (fu.$refs.dialog as any) = {
                     $refs: {
                         body: document.createElement('div')
@@ -150,13 +151,13 @@ describe('MFileUpload', () => {
 
     describe('files selection / drop', () => {
         beforeEach(() => {
-            const filesvc = (Vue.prototype as ModulVue).$file;
+            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
             filesvc.add(createMockFileList([createMockFile('uploading')]));
             filesvc.files()[0].status = MFileStatus.UPLOADING;
         });
 
         it('should emit files-ready event when $file managed files change', async () => {
-            const fupd = mount(MFileUpload);
+            const fupd: Wrapper<MFileUpload> = mount(MFileUpload);
 
             fupd.vm.$file.add(createMockFileList([createMockFile('new-file')]));
             await Vue.nextTick();
@@ -174,7 +175,7 @@ describe('MFileUpload', () => {
         beforeEach(() => {
             Vue.use(ButtonPlugin);
 
-            const filesvc = (Vue.prototype as ModulVue).$file;
+            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
             filesvc.add(
                 createMockFileList([
                     createMockFile('ready'),
@@ -232,14 +233,14 @@ describe('MFileUpload', () => {
             );
 
             jest.spyOn(fupd.vm.$refs.dialog, 'closeDialog');
-            const uploadingFile = fupd.vm.$file.files()[2];
+            const uploadingFile: MFile = fupd.vm.$file.files()[2];
             uploadingFile.status = MFileStatus.UPLOADING;
 
             fupd
                 .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
-            const evt = fupd.emitted('file-upload-cancel');
+            const evt: any = fupd.emitted('file-upload-cancel');
             expect(fupd.vm.$refs.dialog.closeDialog).toHaveBeenCalled();
         });
     });
@@ -248,14 +249,14 @@ describe('MFileUpload', () => {
         let uploadingFileMock: File;
 
         beforeEach(() => {
-            const filesvc = (Vue.prototype as ModulVue).$file;
+            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
             uploadingFileMock = createMockFile('uploading-file');
             filesvc.add(createMockFileList([uploadingFileMock]));
             filesvc.files()[0].status = MFileStatus.UPLOADING;
         });
 
         it('should render uploading files', () => {
-            const fupd = mount(MFileUpload, {
+            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                 stubs: {
                     'transition-group': WrapChildrenStub('ul')
                 },
@@ -271,7 +272,7 @@ describe('MFileUpload', () => {
 
         it('should emit file-upload-cancel when an uploading file cancel button is clicked', () => {
             Vue.use(IconButtonPlugin);
-            const fupd = mount(MFileUpload);
+            const fupd: Wrapper<MFileUpload> = mount(MFileUpload);
 
             fupd.find('button').trigger('click');
 
@@ -285,7 +286,7 @@ describe('MFileUpload', () => {
         let completedFileMock: File;
 
         beforeEach(() => {
-            const filesvc = (Vue.prototype as ModulVue).$file;
+            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
             completedFileMock = createMockFile('completed-file');
             filesvc.add(createMockFileList([completedFileMock]));
             Object.assign(filesvc.files()[0], {
@@ -296,7 +297,7 @@ describe('MFileUpload', () => {
         });
 
         it('should render completed files', () => {
-            const fupd = mount(MFileUpload, {
+            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                 stubs: {
                     'transition-group': WrapChildrenStub('ul')
                 },
@@ -310,8 +311,8 @@ describe('MFileUpload', () => {
 
         it('should emit file-remove when a completed file is deleted', () => {
             Vue.use(IconButtonPlugin);
-            const fupd = mount(MFileUpload);
-            const deletingFile = fupd.vm.$file.files()[0];
+            const fupd: Wrapper<MFileUpload> = mount(MFileUpload);
+            const deletingFile: MFile = fupd.vm.$file.files()[0];
 
             fupd.find('button').trigger('click');
 

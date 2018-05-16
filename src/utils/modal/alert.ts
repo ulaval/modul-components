@@ -1,4 +1,5 @@
 import { PluginObject } from 'vue';
+
 import { MModal } from '../../components/modal/modal';
 
 export interface AlertOptions {
@@ -22,21 +23,21 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
     AlertInstance.negativeLink = false;
 
     return new Promise((resolve, reject) => {
-        let onOk = () => {
+        let onOk: () => void = () => {
             if (AlertInstance) {
                 unhook();
             }
             resolve();
         };
 
-        let hook = () => {
+        let hook: () => void = () => {
             if (AlertInstance) {
                 AlertInstance.$on('ok', onOk);
                 AlertInstance.$props['open'] = true;
             }
         };
 
-        let unhook = () => {
+        let unhook: () => void = () => {
             if (AlertInstance) {
                 AlertInstance.$off('ok', onOk);
                 AlertInstance.$props['open'] = false;

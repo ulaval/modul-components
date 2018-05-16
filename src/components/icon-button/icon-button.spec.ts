@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
@@ -13,7 +13,7 @@ describe('MIconButton', () => {
     });
 
     it('should render correctly', () => {
-        const btn = mount(MIconButton, {
+        const btn: Wrapper<MIconButton> = mount(MIconButton, {
             localVue: localVue
         });
 
@@ -21,7 +21,7 @@ describe('MIconButton', () => {
     });
 
     it('should render correctly selected skin', async () => {
-        const btn = mount(MIconButton, {
+        const btn: Wrapper<MIconButton> = mount(MIconButton, {
             localVue: localVue
         });
 
@@ -32,7 +32,7 @@ describe('MIconButton', () => {
     });
 
     it('should render correctly when button size is set', () => {
-        const btn = mount(MIconButton, {
+        const btn: Wrapper<MIconButton> = mount(MIconButton, {
             localVue: localVue,
             propsData: {
                 buttonSize: '58px'
@@ -43,7 +43,7 @@ describe('MIconButton', () => {
     });
 
     it('should render correctly icon name when set', () => {
-        const btn = mount(MIconButton, {
+        const btn: Wrapper<MIconButton> = mount(MIconButton, {
             localVue: localVue,
             propsData: {
                 iconName: 'clock'
@@ -54,7 +54,7 @@ describe('MIconButton', () => {
     });
 
     it('should render correctly icon size when set', () => {
-        const btn = mount(MIconButton, {
+        const btn: Wrapper<MIconButton> = mount(MIconButton, {
             localVue: localVue,
             propsData: {
                 iconSize: '14px'
@@ -65,7 +65,7 @@ describe('MIconButton', () => {
     });
 
     it('should emit click event when clicked', () => {
-        const btn = mount(MIconButton, {
+        const btn: Wrapper<MIconButton> = mount(MIconButton, {
             localVue: localVue
         });
 

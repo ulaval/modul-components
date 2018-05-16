@@ -13,7 +13,7 @@ describe('MButton', () => {
     });
 
     it('should render correctly', () => {
-        const btn = mount(MButton, {
+        const btn: Wrapper<MButton> = mount(MButton, {
             localVue: localVue
         });
 
@@ -21,7 +21,7 @@ describe('MButton', () => {
     });
 
     it('should render correctly when skin is secondary', () => {
-        const btn = mount(MButton, {
+        const btn: Wrapper<MButton> = mount(MButton, {
             localVue: localVue,
             propsData: {
                 skin: MButtonSkin.Secondary
@@ -32,7 +32,7 @@ describe('MButton', () => {
     });
 
     it('should render correctly when disabled', () => {
-        const btn = mount(MButton, {
+        const btn: Wrapper<MButton> = mount(MButton, {
             localVue: localVue,
             propsData: {
                 disabled: true
@@ -43,7 +43,7 @@ describe('MButton', () => {
     });
 
     it('should render correctly when waiting', () => {
-        const btn = mount(MButton, {
+        const btn: Wrapper<MButton> = mount(MButton, {
             localVue: localVue,
             propsData: {
                 waiting: true
@@ -80,7 +80,7 @@ describe('MButton', () => {
     });
 
     it('should render correctly text content', () => {
-        const btn = mount(MButton, {
+        const btn: Wrapper<MButton> = mount(MButton, {
             localVue: localVue,
             slots: {
                 default: 'label'
@@ -91,7 +91,7 @@ describe('MButton', () => {
     });
 
     it('should render correctly precision content', () => {
-        const btn = mount(MButton, {
+        const btn: Wrapper<MButton> = mount(MButton, {
             localVue: localVue,
             slots: {
                 precision: 'precision'
@@ -102,7 +102,7 @@ describe('MButton', () => {
     });
 
     it('should change html element based on type prop', () => {
-        const btn = mount(MButton, {
+        const btn: Wrapper<MButton> = mount(MButton, {
             localVue: localVue
         });
 
@@ -114,7 +114,7 @@ describe('MButton', () => {
     });
 
     it('should emit click event when clicked', () => {
-        const btn = mount(MButton, {
+        const btn: Wrapper<MButton> = mount(MButton, {
             localVue: localVue
         });
 

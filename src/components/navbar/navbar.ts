@@ -128,7 +128,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     private setupScrolllH(): void {
         let listEl: HTMLElement = this.$refs.list as HTMLElement;
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft = wrapEl.scrollWidth - wrapEl.clientWidth;
+        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
 
         if (wrapEl.scrollWidth > wrapEl.clientWidth) {
             this.computedHeight = listEl.clientHeight;
@@ -168,7 +168,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private updateScrollPosition(): number {
-        let offsetLeft = 0;
+        let offsetLeft: number = 0;
         this.$children.forEach(element => {
             if (element.$props.value === this.selected) {
                 offsetLeft = element.$el.offsetLeft;
@@ -191,7 +191,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     private scrollLeft(event: MouseEvent): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft = wrapEl.scrollWidth - wrapEl.clientWidth;
+        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
         wrapEl.scrollLeft = wrapEl.scrollLeft - (wrapEl.clientWidth / THRESHOLD);
 
         if (wrapEl.scrollLeft === 0) {
@@ -205,7 +205,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     private scrollRight(event: MouseEvent): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft = wrapEl.scrollWidth - wrapEl.clientWidth;
+        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
         wrapEl.scrollLeft = wrapEl.scrollLeft + (wrapEl.clientWidth / THRESHOLD);
 
         if (wrapEl.scrollLeft > 0) {

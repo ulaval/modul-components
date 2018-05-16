@@ -11,7 +11,7 @@ interface MTextAreaAutoSizeData {
     cleanup: () => void;
 }
 
-const resizeHeight = (el: HTMLTextAreaElement) => {
+const resizeHeight: (el: HTMLTextAreaElement) => void = (el: HTMLTextAreaElement) => {
     el.style.height = 'auto';
     if (el.scrollHeight !== 0) {
         el.style.height = el.scrollHeight + 'px';
@@ -25,7 +25,7 @@ const MTextAreaAutoSizeDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-        const windowResize = () => {
+        const windowResize: () => void = () => {
             resizeHeight(el);
         };
 
@@ -39,7 +39,7 @@ const MTextAreaAutoSizeDirective: DirectiveOptions = {
 
         el.mTextAreaAutoSizeData = {
             lastValue: '',
-            cleanup() {
+            cleanup(): void {
                 if (vnode.context) {
                     vnode.context.$off('resize', windowResize);
                 }
