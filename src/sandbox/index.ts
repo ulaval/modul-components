@@ -1,8 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 
-import IconFileSandboxPlugin from '../icon-file/icon-file.sandbox';
-import IconSandboxPlugin from '../icon/icon.sandbox';
-import RadioSandboxPlugin from '../radio/radio.sandbox';
+import IconFileSandboxPlugin from '../components/icon-file/icon-file.sandbox';
+import IconSandboxPlugin from '../components/icon/icon.sandbox';
+import RadioSandboxPlugin from '../components/radio/radio.sandbox';
 
 const SandboxesPlugin: PluginObject<any> = {
     install(v, options): void {
