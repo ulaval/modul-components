@@ -8,7 +8,8 @@ export interface OpenTriggerMixin {
 export enum MOpenTrigger {
     Hover = 'hover',
     Click = 'click',
-    Manual = 'manual'
+    Manual = 'manual',
+    MouseDown = 'mousedown'
 }
 
 @Component
