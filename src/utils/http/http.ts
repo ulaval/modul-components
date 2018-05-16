@@ -10,15 +10,14 @@ const AUTHORIZATION_HEADER: string = 'Authorization';
 export interface HttpPluginOptions {
     protectedUrls: string[];
     authorizationFn: () => string;
+    timeout?: number;
 }
 
 export class HttpService implements RestAdapter {
     public instance: AxiosInstance;
 
     constructor(private options?: HttpPluginOptions) {
-        this.instance = axios.create({
-            timeout: 30000 // TODO configure from plugin options
-        });
+        this.instance = axios.create();
 
         if (this.options) {
             let opt: HttpPluginOptions = this.options;
