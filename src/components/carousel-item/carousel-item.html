@@ -1,4 +1,4 @@
-<transition :name="transitionName">
+<transition :name="transitionName" @before-enter="beforeEnter" @after-leave="afterLeave">
     <div class="m-carousel-item" :class="{ 'm--is-anim-active': animActive }" v-show="isVisible">
         <slot></slot>
     </div>
