@@ -1,6 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 
+import LoggerPlugin from '../utils/logger/logger';
 import BadgePlugin from './badge/badge';
+import CharacterCountPlugin from './character-count/character-count';
 import DraggablePlugin from './draggable/draggable';
 import DraggableAllowScrollPlugin from './draggable/draggable-allow-scroll';
 import DroppablePlugin from './droppable/droppable';
@@ -13,7 +15,6 @@ import ScrollToPlugin from './scroll-to/scroll-to';
 import SortablePlugin from './sortable/sortable';
 import TextAreaAutoHeightPlugin from './textarea-auto-height/textarea-auto-height';
 import RemoveUserSelectPlugin from './user-select/remove-user-select';
-import LoggerPlugin from '../utils/logger/logger';
 
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -23,6 +24,7 @@ const DirectivesPlugin: PluginObject<any> = {
         }
 
         Vue.use(BadgePlugin);
+        Vue.use(CharacterCountPlugin);
         Vue.use(DraggablePlugin);
         Vue.use(DraggableAllowScrollPlugin);
         Vue.use(DroppablePlugin);
