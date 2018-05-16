@@ -137,7 +137,7 @@ export abstract class MElementDomPlugin<OptionsType> implements DomPlugin<Option
     public abstract detach(): void;
 
     public addEventListener(eventName: string, listener: EventListenerOrEventListenerObject): void {
-        let listeners = this.attachedEvents.get(eventName);
+        let listeners: EventListenerOrEventListenerObject[] | undefined = this.attachedEvents.get(eventName);
         if (!listeners) {
             this.attachedEvents.set(eventName, [listener]);
             this.element.addEventListener(eventName, listener);

@@ -1,7 +1,8 @@
-import { resetModulPlugins } from '../../../tests/helpers/component';
+import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
+
+import { resetModulPlugins } from '../../../tests/helpers/component';
 import { ModulVue } from '../../utils/vue/vue';
-import { Wrapper, mount } from '@vue/test-utils';
 import RemoveUserSelectPlugin from './remove-user-select';
 
 describe('remove-user-select', () => {
@@ -14,11 +15,11 @@ describe('remove-user-select', () => {
 
     [undefined, true].forEach(param => {
         it(`it should render correctly when binding ${param} is provided`, () => {
-            const removeUserSelect = mount({
+            const removeUserSelect: Wrapper<Vue> = mount({
                 template: param === undefined ? '<div v-m-remove-user-select></div>' : `<div v-m-remove-user-select="${param}"></div>`
             }, { localVue: Vue });
 
-            const options = { preventDefault: () => {} };
+            const options: any = { preventDefault: () => {} };
             jest.spyOn(options, 'preventDefault');
             removeUserSelect.trigger('onmouseover', options);
 
@@ -30,11 +31,11 @@ describe('remove-user-select', () => {
     });
 
     it('it should render correctly when binding equals false', () => {
-        const removeUserSelect = mount({
+        const removeUserSelect: Wrapper<Vue> = mount({
             template: '<div v-m-remove-user-select="false"></div>'
         }, { localVue: Vue });
 
-        const options = { preventDefault: () => {} };
+        const options: any = { preventDefault: () => {} };
         jest.spyOn(options, 'preventDefault');
         removeUserSelect.trigger('onmouseover', options);
 

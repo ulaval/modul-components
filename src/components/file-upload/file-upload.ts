@@ -31,7 +31,7 @@ interface MFileExt extends MFile {
 
 let filesizeSymbols: { [name: string]: string } | undefined = undefined;
 
-const defaultDragEvent = (e: DragEvent) => {
+const defaultDragEvent: (e: DragEvent) => void = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     e.dataTransfer.dropEffect = 'none';
@@ -130,8 +130,8 @@ export class MFileUpload extends ModulVue {
 
     @Watch('rejectedFiles')
     private onFilesRejected(): void {
-        const nbNewRejection = this.rejectedFiles.reduce((cnt, f) => {
-            let nbNewRejection = 0;
+        const nbNewRejection: number = this.rejectedFiles.reduce((cnt, f) => {
+            let nbNewRejection: number = 0;
             if (!f.isOldRejection) {
                 ++nbNewRejection;
                 f.isOldRejection = true;

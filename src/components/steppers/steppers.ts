@@ -20,12 +20,12 @@ export class MSteppers extends BaseSteppers {
         let defaultLineEL: HTMLElement = this.$refs.defaultLine as HTMLElement;
         let selectedLineEL: HTMLElement = this.$refs.selectedLine as HTMLElement;
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
-        let parentWidth = wrapItem.clientWidth;
+        let parentWidth: number = wrapItem.clientWidth;
         let leftSpacing: number = 0;
         let rightSpacing: number = 0;
         let hasFindFirst: Boolean = false;
 
-        for (let i = 0 ; i <= this.$children.length - 1; i++) {
+        for (let i: number = 0 ; i <= this.$children.length - 1; i++) {
             if (i === 0 && this.$children.length >= 1) {
                 leftSpacing = this.$children[i].$el.clientWidth / 2;
             }
@@ -37,10 +37,10 @@ export class MSteppers extends BaseSteppers {
             }
         }
 
-        for (let i = this.$children.length - 1; i >= 0; i--) {
+        for (let i: number = this.$children.length - 1; i >= 0; i--) {
             if (hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.InProgress || hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.Completed) {
-                let childWidth = this.$children[i].$el.clientWidth;
-                let childOffset = this.$children[i].$el.offsetLeft;
+                let childWidth: number = this.$children[i].$el.clientWidth;
+                let childOffset: number = this.$children[i].$el.offsetLeft;
                 this.lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;
                 hasFindFirst = true;
             }
@@ -78,7 +78,7 @@ export class MSteppers extends BaseSteppers {
             childsWidth += child.$el.clientWidth;
         });
         let minWidth: number;
-        let numberOfChild = this.$children.length;
+        let numberOfChild: number = this.$children.length;
         minWidth = childsWidth + ((numberOfChild - 1) * 24);
         wrapItem.style.minWidth = minWidth + 'px';
         wrapItem.style.display = 'flex';
@@ -88,7 +88,7 @@ export class MSteppers extends BaseSteppers {
     private setHiddenHeight(): void {
         let overflowWrapper: HTMLElement = this.$refs.overflowWrapper as HTMLElement;
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
-        let initHeight = wrapItem.clientHeight;
+        let initHeight: number = wrapItem.clientHeight;
         this.$el.style.height = initHeight + 'px';
         overflowWrapper.style.height = initHeight + 40 + 'px';
     }

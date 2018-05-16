@@ -1,22 +1,29 @@
 <div class="m-navbar" :class="{ 'm--is-disabled': disabled,
-              'm--is-skin-tab': skin === 'light-tab' || skin === 'dark-tab',
-              'm--is-skin-light-tab': skin === 'light-tab',
-              'm--is-skin-dark-tab': skin === 'dark-tab',
-              'm--is-skin-light': skin === 'light',
-              'm--is-skin-dark': skin === 'dark',
-              'm--is-skin-plain': skin === 'plain',
-              'm--is-skin-simple': skin === 'simple',
-              'm--is-skin-arrow': skin === 'arrow',
+              'm--is-skin-tab': skin == 'light-tab' || skin == 'dark-tab',
+              'm--is-skin-light-tab': skin == 'light-tab',
+              'm--is-skin-dark-tab': skin == 'dark-tab',
+              'm--is-skin-light': skin == 'light',
+              'm--is-skin-dark': skin == 'dark',
+              'm--is-skin-plain': skin == 'plain',
+              'm--is-skin-simple': skin == 'simple',
+              'm--is-skin-arrow': skin == 'arrow',
+              'm--is-anim-ready': animReady == true,
               'm--no-margin': !margin }">
-    <m-icon-button ref="buttonLeft" class="m-navbar__button" :skin="buttonSkin" :button-size="ComputedHeight" icon-name="left-chevron"
-        @click="scrollLeft" v-if="hasScrolllH && arrowMobile"></m-icon-button>
+    <transition name="show">
+        <div ref="buttonLeft" class="m-navbar__button" @click="scrollLeft" v-if="showArrowLeft && arrowMobile">
+            <m-icon-button :skin="buttonSkin" icon-name="left-chevron"></m-icon-button>
+        </div>
+    </transition>
     <nav class="m-navbar__wrap" role="menubar" ref="wrap">
         <ul class="m-navbar__list" aria-hidden="true" ref="list">
             <slot></slot>
-            <li aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': animActive }" v-if="isLightSkin" ref="line"></li>
+            <li aria-hidden="true" class="m-navbar__line" :class="{ 'm--is-anim-active': animActive }" v-if="isLightSkin" ref="light"></li>
             <li aria-hidden="true" class="m-navbar__arrow" :class="{ 'm--is-anim-active': animActive }" v-if="isArrowSkin" ref="arrow"></li>
         </ul>
     </nav>
-    <m-icon-button ref="buttonRight" class="m-navbar__button" :skin="buttonSkin" :button-size="ComputedHeight" icon-name="chevron"
-        @click="scrollRight" v-if="hasScrolllH && arrowMobile"></m-icon-button>
-</div>
+    <transition name="show">
+        <div ref="buttonRight" class="m-navbar__button" @click="scrollRight" v-if="showArrowRight && arrowMobile">
+            <m-icon-button :skin="buttonSkin" icon-name="chevron"></m-icon-button>
+        </div>
+    </transition>
+    </div>

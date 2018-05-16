@@ -65,7 +65,7 @@ export class MediaQueries {
     }
 
     private registerEnquire(breakingPoint: string, unregister?: boolean): void {
-        let obj = {
+        let obj: any = {
             match: () => this.notify(MATCH + breakingPoint),
             unmatch: () => { if (!unregister) { this.notify(UNMATCH + breakingPoint); } }
         };
@@ -86,7 +86,7 @@ export class MediaQueries {
 
 const MediaQueriesPlugin: PluginObject<any> = {
     install(v, options): void {
-        let mediaQueries = new MediaQueries();
+        let mediaQueries: MediaQueries = new MediaQueries();
         (v.prototype as any).$mq = mediaQueries;
     }
 };

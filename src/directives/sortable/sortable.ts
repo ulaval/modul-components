@@ -3,9 +3,9 @@ import { PluginObject } from 'vue/types/plugin';
 
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { SORTABLE_NAME } from '../directive-names';
-import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
-import DraggablePlugin, { MDraggable, MDraggableEventNames } from '../draggable/draggable';
-import DroppablePlugin, { MDropEvent, MDroppable, MDroppableEventNames } from '../droppable/droppable';
+import { DomPlugin, MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import DraggablePlugin, { MDraggable, MDraggableEventNames, MDraggableOptions } from '../draggable/draggable';
+import DroppablePlugin, { MDropEvent, MDroppable, MDroppableEventNames, MDroppableOptions } from '../droppable/droppable';
 import { MDroppableGroup } from '../droppable/droppable-group';
 import { MSortableDefaultInsertionMarkerBehavior, MSortableInsertionMarkerBehavior } from './insertion-behavior';
 
@@ -79,7 +79,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
         if (this.options.canSort) {
             mount(() => {
                 this.element.classList.add(MSortableClassNames.Sortable);
-                const plugin = MDOMPlugin.attach(MDroppable, this.element, {
+                const plugin: DomPlugin<MDroppableOptions> = MDOMPlugin.attach(MDroppable, this.element, {
                     acceptedActions: this.options.acceptedActions,
                     canDrop: true
                 });
@@ -112,7 +112,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
             // when an item leave the sortable we have to clean it up.
             if (mutation.type === 'childList') {
                 if (mutation.removedNodes.length) {
-                    for (let i = 0; i < mutation.removedNodes.length; i++) {
+                    for (let i: number = 0; i < mutation.removedNodes.length; i++) {
                         const currentElement: HTMLElement = mutation.removedNodes[i] as HTMLElement;
                         MDOMPlugin.detach(MDraggable, currentElement);
                         MDOMPlugin.detach(MDroppable, currentElement);
@@ -129,7 +129,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
         if (value.canSort === undefined) { value.canSort = true; }
         if (!value.items) { value.items = []; }
 
-        const sortableGroup = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
+        const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
         let acceptedActions: string[];
         if (!value.acceptedActions) {
             acceptedActions = [MSortableAction.Default];
@@ -145,18 +145,18 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
     }
 
     private attachChilds(): void {
-        let itemCounter = 0;
-        const sortableGroup = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
-        for (let i = 0; i < this.element.children.length; i++) {
+        let itemCounter: number = 0;
+        const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
+        for (let i: number = 0; i < this.element.children.length; i++) {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
 
             if (currentElement.classList.contains('emptyPlaceholder')) {
                 this.attachEmptyPlaceholder(currentElement, sortableGroup ? sortableGroup.options : undefined);
             } else {
-                const draggableGroup = MDOMPlugin.get(MDroppableGroup, currentElement);
-                const grouping = !sortableGroup ? draggableGroup ? draggableGroup.options : undefined : undefined;
+                const draggableGroup: MDroppableGroup | undefined = MDOMPlugin.get(MDroppableGroup, currentElement);
+                const grouping: string | undefined = !sortableGroup ? draggableGroup ? draggableGroup.options : undefined : undefined;
 
-                const draggablePlugin = MDOMPlugin.attach(MDraggable, currentElement, {
+                const draggablePlugin: DomPlugin<MDraggableOptions> = MDOMPlugin.attach(MDraggable, currentElement, {
                     action: !grouping ? MSortableAction.Move : MSortableAction.MoveGroup,
                     dragData: this.options.items[itemCounter++],
                     grouping,
@@ -176,7 +176,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
     }
 
     private detachChilds(): void {
-        for (let i = 0; i < this.element.children.length; i++) {
+        for (let i: number = 0; i < this.element.children.length; i++) {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
             MDOMPlugin.detach(MDraggable, currentElement);
             MDOMPlugin.detach(MDroppable, currentElement);
@@ -204,7 +204,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
     private onDragLeave(event: MDropEvent): void {
         event.stopPropagation();
 
-        const newContainer = MDroppable.currentHoverDroppable ? MDOMPlugin.getRecursive(MSortable, MDroppable.currentHoverDroppable.element) : undefined;
+        const newContainer: MSortable | undefined = MDroppable.currentHoverDroppable ? MDOMPlugin.getRecursive(MSortable, MDroppable.currentHoverDroppable.element) : undefined;
         if (!newContainer) {
             this.doCleanUp();
             MSortable.activeSortContainer = undefined;
@@ -221,7 +221,6 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
 
     private onDragIn(event: MDropEvent): void {
         event.stopPropagation();
-        const test = MSortable.activeSortContainer !== this;
         if (MSortable.activeSortContainer && MSortable.activeSortContainer !== this) {
             MSortable.activeSortContainer.doCleanUp();
         }
@@ -293,7 +292,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
     private insertInsertionMarker(event: MDropEvent): void {
         if (!MDroppable.currentHoverDroppable || this.isHoveringOverDraggedElement()) { this.doCleanUp(); return; }
 
-        const currentInsertPosition = this.getCurrentInsertPosition();
+        const currentInsertPosition: MSortInsertPositions = this.getCurrentInsertPosition();
         const newInsertPosition: MSortInsertPositions = this.getInsertionMarkerBehavior().getInsertPosition(event);
         if (MDroppable.currentHoverDroppable === MDroppable.previousHoverContainer && currentInsertPosition === newInsertPosition) {
             return;
@@ -328,8 +327,8 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
     }
 
     private getNewPosition(event: MDropEvent, oldPosition: number): number {
-        let index = 0;
-        for (let i = 0; i < this.element.children.length; i++) {
+        let index: number = 0;
+        for (let i: number = 0; i < this.element.children.length; i++) {
             const child: HTMLElement = this.element.children[i] as HTMLElement;
             if (child.classList.contains(MSortableClassNames.EmptyPlaceholder)) { index--; }
             if (child.classList.contains(MSortableClassNames.SortBefore)) {
@@ -363,28 +362,28 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
     }
 
     private getCurrentInsertPosition(): MSortInsertPositions {
-        const mSortAfterElement = this.element.querySelector(`.${MSortableClassNames.SortAfter}`);
+        const mSortAfterElement: Element | null = this.element.querySelector(`.${MSortableClassNames.SortAfter}`);
         if (mSortAfterElement) { return MSortInsertPositions.After; }
 
-        const mSortBeforeElement = this.element.querySelector(`.${MSortableClassNames.SortBefore}`);
+        const mSortBeforeElement: Element | null = this.element.querySelector(`.${MSortableClassNames.SortBefore}`);
         if (mSortBeforeElement) { return MSortInsertPositions.Before; }
 
-        const mSortInElement = this.element.querySelector(`.${MSortableClassNames.SortIn}`);
+        const mSortInElement: Element | null = this.element.querySelector(`.${MSortableClassNames.SortIn}`);
         if (mSortInElement) { return MSortInsertPositions.In; }
 
         return MSortInsertPositions.After;
     }
 
     private cleanUpInsertionClasses(): void {
-        const mSortAfterElement = this.element.querySelector(`.${MSortableClassNames.SortAfter}`);
+        const mSortAfterElement: Element | null = this.element.querySelector(`.${MSortableClassNames.SortAfter}`);
         if (mSortAfterElement) { mSortAfterElement.classList.remove(MSortableClassNames.SortAfter); }
         this.element.classList.remove(MSortableClassNames.SortAfter);
 
-        const mSortInElement = this.element.querySelector(`.${MSortableClassNames.SortIn}`);
+        const mSortInElement: Element | null = this.element.querySelector(`.${MSortableClassNames.SortIn}`);
         if (mSortInElement) { mSortInElement.classList.remove(MSortableClassNames.SortIn); }
         this.element.classList.remove(MSortableClassNames.SortIn);
 
-        const mSortBeforeElement = this.element.querySelector(`.${MSortableClassNames.SortBefore}`);
+        const mSortBeforeElement: Element | null = this.element.querySelector(`.${MSortableClassNames.SortBefore}`);
         if (mSortBeforeElement) { mSortBeforeElement.classList.remove(MSortableClassNames.SortBefore); }
         this.element.classList.remove(MSortableClassNames.SortBefore);
     }

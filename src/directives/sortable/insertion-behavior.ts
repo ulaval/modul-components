@@ -1,5 +1,6 @@
 import { mousePositionElement } from '../../utils/mouse/mouse';
 import { MDropEvent, MDroppable } from '../droppable/droppable';
+import { RelativeMousePos } from './../../utils/mouse/mouse';
 import { MSortInsertPositions } from './sortable';
 
 export interface MSortableInsertionMarkerBehavior {
@@ -9,7 +10,7 @@ export interface MSortableInsertionMarkerBehavior {
 export class MSortableDefaultInsertionMarkerBehavior implements MSortableInsertionMarkerBehavior {
     getInsertPosition(event: MDropEvent): MSortInsertPositions {
         if (MDroppable.currentHoverDroppable) {
-            const mousePosition = mousePositionElement(event, MDroppable.currentHoverDroppable.element);
+            const mousePosition: RelativeMousePos = mousePositionElement(event, MDroppable.currentHoverDroppable.element);
             if (mousePosition.y < MDroppable.currentHoverDroppable.element.offsetHeight / 2) {
                 return MSortInsertPositions.Before;
             } else {
@@ -25,7 +26,7 @@ export class MSortableGroupingInsertionMarkerBehavior implements MSortableInsert
     getInsertPosition(event: MDropEvent): MSortInsertPositions {
         if (!MDroppable.currentHoverDroppable) { return MSortInsertPositions.After; }
 
-        const mousePosition = mousePositionElement(event, MDroppable.currentHoverDroppable.element);
+        const mousePosition: RelativeMousePos = mousePositionElement(event, MDroppable.currentHoverDroppable.element);
         if (mousePosition.y <= 10) { return MSortInsertPositions.Before; }
         if (mousePosition.y > MDroppable.currentHoverDroppable.element.offsetHeight - 10) { return MSortInsertPositions.After; }
 

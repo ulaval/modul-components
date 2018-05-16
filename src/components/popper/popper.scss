@@ -15,36 +15,40 @@ $m-popper--margin: $m-margin !default;
         }
 
         &.m--is-default-anim {
-            transition: transform $m-transition-duration ease-in-out, opacity $m-transition-duration ease;
-            opacity: 0;
-
-            &.m--is-placement-top,
-            &.m--is-placement-top-start,
-            &.m--is-placement-top-end {
-                transform: translate3d(0, -$m-popper--margin, 0) scale($m-popper--scale);
+            &.m--is-enter-active,
+            &.m--is-leave-active {
+                transition-property: transform, opacity;
+                transition-duration: $m-transition-duration;
+                transition-timing-function: ease;
             }
 
-            &.m--is-placement-right,
-            &.m--is-placement-right-start,
-            &.m--is-placement-right-end {
-                transform: translate3d($m-popper--margin, 0, 0) scale($m-popper--scale);
-            }
+            &.m--is-enter,
+            &.m--is-leave-to {
+                opacity: 0;
 
-            &.m--is-placement-bottom,
-            &.m--is-placement-bottom-start,
-            &.m--is-placement-bottom-end {
-                transform: translate3d(0, $m-popper--margin, 0) scale($m-popper--scale);
-            }
+                &.m--is-placement-top,
+                &.m--is-placement-top-start,
+                &.m--is-placement-top-end {
+                    transform: translate3d(0, -$m-popper--margin, 0) scale($m-popper--scale);
+                }
 
-            &.m--is-placement-left,
-            &.m--is-placement-left-start,
-            &.m--is-placement-left-end {
-                transform: translate3d(-$m-popper--margin, 0, 0) scale($m-popper--scale);
-            }
+                &.m--is-placement-right,
+                &.m--is-placement-right-start,
+                &.m--is-placement-right-end {
+                    transform: translate3d($m-popper--margin, 0, 0) scale($m-popper--scale);
+                }
 
-            &.m--is-open.m--is-open.m--is-open {
-                transform: translate3d(0, 0, 0);
-                opacity: 1;
+                &.m--is-placement-bottom,
+                &.m--is-placement-bottom-start,
+                &.m--is-placement-bottom-end {
+                    transform: translate3d(0, $m-popper--margin, 0) scale($m-popper--scale);
+                }
+
+                &.m--is-placement-left,
+                &.m--is-placement-left-start,
+                &.m--is-placement-left-end {
+                    transform: translate3d(-$m-popper--margin, 0, 0) scale($m-popper--scale);
+                }
             }
         }
 

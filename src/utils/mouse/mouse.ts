@@ -4,7 +4,7 @@ const getRelativeMousePos: (event: Event, reference: HTMLElement) => RelativeMou
         let x: number = 0;
         let y: number = 0;
 
-        const mouseEvent = event as MouseEvent;
+        const mouseEvent: MouseEvent = event as MouseEvent;
         let pos: any;
         let el: HTMLElement | undefined = undefined;
         if (mouseEvent && mouseEvent.offsetX !== undefined && mouseEvent.offsetY !== undefined) {
@@ -12,7 +12,7 @@ const getRelativeMousePos: (event: Event, reference: HTMLElement) => RelativeMou
             el = mouseEvent.target as HTMLElement;
         }
 
-        const customEvent = event as CustomEvent;
+        const customEvent: CustomEvent = event as CustomEvent;
         if (customEvent && customEvent.detail && customEvent.detail.offsetX !== undefined && customEvent.detail.offsetY !== undefined) {
             pos = { x: customEvent.detail.offsetX, y: customEvent.detail.offsetY };
             el = customEvent.detail.target as HTMLElement;
@@ -27,7 +27,7 @@ const getRelativeMousePos: (event: Event, reference: HTMLElement) => RelativeMou
         }
 
         // Fix for firefox.
-        let recursiveElement = el as HTMLElement;
+        let recursiveElement: HTMLElement = el as HTMLElement;
         while (recursiveElement.nodeType === Node.TEXT_NODE) {
             recursiveElement = recursiveElement.parentElement as HTMLElement;
         }
@@ -43,7 +43,7 @@ const getRelativeMousePos: (event: Event, reference: HTMLElement) => RelativeMou
 
         // Look for the coordinates starting from the reference element.
         let recursiveReference: HTMLElement = reference;
-        let offset = { x: 0, y: 0 };
+        let offset: any = { x: 0, y: 0 };
         while (recursiveReference) {
             if (typeof (recursiveReference as any).mouseX !== 'undefined') {
                 x = (recursiveReference as any).mouseX - offset.x;
@@ -79,7 +79,7 @@ export const mousePositionElement: MousePositionEvent<RelativeMousePos> = (e: Mo
 };
 
 export const isInElement: MousePositionEvent<boolean> = (e: MouseEvent, relativeToEl: HTMLElement, threshold: number = 3) => {
-    const mousePosition = mousePositionElement(e, relativeToEl);
+    const mousePosition: RelativeMousePos = mousePositionElement(e, relativeToEl);
     return mousePosition.x > 0 && mousePosition.y > 0
             && mousePosition.x + threshold <= relativeToEl.offsetWidth
             && mousePosition.y + threshold <= relativeToEl.offsetHeight;
