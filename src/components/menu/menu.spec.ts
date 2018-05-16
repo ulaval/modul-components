@@ -23,7 +23,7 @@ describe('MMenu', () => {
 
     describe('Menu', () => {
         it('should render correctly', () => {
-            const menu = mountGroup();
+            const menu: Wrapper<MMenu> = mountGroup();
 
             return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
         });
@@ -31,7 +31,7 @@ describe('MMenu', () => {
 
     describe('Menu', () => {
         it('should render correctly placement top', () => {
-            const menu = mountGroup({
+            const menu: Wrapper<MMenu> = mountGroup({
                 placement: MPopperPlacement.Top
             });
 
@@ -41,7 +41,7 @@ describe('MMenu', () => {
 
     describe('Menu', () => {
         it('should render correctly placement left', () => {
-            const menu = mountGroup({
+            const menu: Wrapper<MMenu> = mountGroup({
                 placement: MPopperPlacement.Left
             });
 
@@ -51,7 +51,7 @@ describe('MMenu', () => {
 
     describe('Menu', () => {
         it('should render correctly placement right', () => {
-            const menu = mountGroup({
+            const menu: Wrapper<MMenu> = mountGroup({
                 placement: MPopperPlacement.Right
             });
 
@@ -60,7 +60,7 @@ describe('MMenu', () => {
     });
 
     it('should render correctly when skin is dark', () => {
-        const menu = mountGroup({
+        const menu: Wrapper<MMenu> = mountGroup({
             skin: MOptionsMenuSkin.Dark
         });
 
@@ -70,7 +70,7 @@ describe('MMenu', () => {
     });
 
     it('should render correctly when skin is light', () => {
-        const menu = mountGroup({
+        const menu: Wrapper<MMenu> = mountGroup({
             skin: MOptionsMenuSkin.Light
         });
 
@@ -80,7 +80,7 @@ describe('MMenu', () => {
     });
 
     it('should render correctly when open title is set', () => {
-        const menu = mountGroup({
+        const menu: Wrapper<MMenu> = mountGroup({
             openTitle: 'Title open'
         });
 
@@ -90,7 +90,7 @@ describe('MMenu', () => {
     });
 
     it('should render correctly when close title is set', () => {
-        const menu = mountGroup({
+        const menu: Wrapper<MMenu> = mountGroup({
             closeTitle: 'Title close',
             open: true
         });
@@ -101,7 +101,7 @@ describe('MMenu', () => {
     });
 
     it('should render correctly when size is set', () => {
-        const menu = mountGroup({
+        const menu: Wrapper<MMenu> = mountGroup({
             size: '200px'
         });
 
@@ -111,7 +111,7 @@ describe('MMenu', () => {
     });
 
     it('should emit click event when clicked', () => {
-        const menu = mountGroup();
+        const menu: Wrapper<MMenu> = mountGroup();
 
         menu.find('.m-menu__button').trigger('click');
         expect(menu.emitted('click')).toBeTruthy();
@@ -121,7 +121,7 @@ describe('MMenu', () => {
     });
 
     it('should react to open prop changes', () => {
-        const menu = mountGroup();
+        const menu: Wrapper<MMenu> = mountGroup();
 
         menu.setProps({ open: false });
         expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
@@ -130,7 +130,7 @@ describe('MMenu', () => {
         expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
     });
 
-    const mountGroup = (propsData?: object, slots?: Slots) => {
+    const mountGroup: (propsData?: object, slots?: Slots) => Wrapper<MMenu> = (propsData?: object, slots?: Slots) => {
         return mount(MMenu, {
             propsData: propsData,
             slots: {

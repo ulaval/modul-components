@@ -15,7 +15,7 @@ describe('MNavbar', () => {
 
     it('should render correctly', () => {
 
-        const wrapper = mount({
+        const wrapper: Wrapper<Vue> = mount({
             template: `
         <m-navbar selected='item1'>
             <m-navbar-item value="item1"></m-navbar-item>
@@ -28,7 +28,7 @@ describe('MNavbar', () => {
     });
 
     it('should select the child value passed by the props', () => {
-        const wrapper = mount({
+        const wrapper: Wrapper<Vue> = mount({
             template: `
         <m-navbar selected='item2'>
             <m-navbar-item value="item1"></m-navbar-item>

@@ -23,7 +23,7 @@ describe('MDropdown', () => {
     });
 
     it('should render correctly', () => {
-        const dropdown = mount(MDropdown, {
+        const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
             localVue: Vue
         });
 
@@ -31,7 +31,7 @@ describe('MDropdown', () => {
     });
 
     it('should render correctly when placeholder is set', () => {
-        const dropdown = mount(MDropdown, {
+        const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
             localVue: Vue,
             propsData: {
                 placeholder: 'placeholder test'
@@ -61,7 +61,7 @@ describe('MDropdown', () => {
     //     return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
     // });
 
-    const mountGroup = (propsData?: object, slots?: Slots) => {
+    const mountGroup: (propsData?: object, slots?: Slots) => Wrapper<MDropdown> = (propsData?: object, slots?: Slots) => {
         return mount(MDropdown, {
             propsData: propsData,
             slots: {
