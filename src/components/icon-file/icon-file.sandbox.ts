@@ -2,7 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { ICON_FILE_NAME } from '../component-names';
-import WithRender from './icon-file-sandbox.html';
+import WithRender from './icon-file.sandbox.html';
 
 @WithRender
 @Component
