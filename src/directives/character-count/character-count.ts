@@ -16,25 +16,29 @@ const displayMode: (binding: VNodeDirective) => MCharacterCountDisplay = (bindin
     return binding.value ? binding.value.display : MCharacterCountDisplay.Always;
 };
 
+const hasErrorMessage: (vnode: VNode) => Boolean = (vnode: VNode) => {
+    return !!(vnode.componentOptions as ComponentMeta)['propsData']['errorMessage'];
+};
+
+const hasError: (vnode: VNode) => Boolean = (vnode: VNode) => {
+    return !!(vnode.componentOptions as ComponentMeta)['propsData']['error'];
+};
+
 const buildCounter = (element, binding, vnode) => {
     let maxLength: number | undefined = (vnode.componentOptions as ComponentMeta)['propsData']['maxLength'];
-    let valueLegth: number = vnode.componentInstance.valueLength;
-    let hasErrorMessage: boolean = !!(vnode.componentOptions as ComponentMeta)['propsData']['errorMessage'];
-    let hasError: boolean = !!(vnode.componentOptions as ComponentMeta)['propsData']['error'];
-
-    // tslint:disable-next-line:no-console
-    console.log(element.children[1]);
+    let valueLength: number = vnode.componentInstance.valueLength;
 
     const MyComponent = Vue.extend({
-        template: `<p class="m-character-count-directive m-u--margin-top--xs m-u--font-size--xs">${valueLegth} / ${maxLength}</p>`
+        template: `<div class="m-character-count-directive m-u--margin-top--xs m-u--font-size--xs" aria-hidden="true">${valueLength}/${maxLength}</div>`
     });
 
     Vue.nextTick(() => {
         const component = new MyComponent().$mount();
         component.$el.style.textAlign = 'right';
-        maxLength && valueLegth > maxLength || hasErrorMessage || hasError ? component.$el.style.color = COLOR_ERROR : component.$el.style.color = COLOR_INIT;
-        if (hasErrorMessage) {
-            element.children[1].appendChild(component.$el);
+        component.$el.style.paddingLeft = '4px';
+        maxLength && valueLength > maxLength || hasErrorMessage(vnode) || hasError(vnode) ? component.$el.style.color = COLOR_ERROR : component.$el.style.color = COLOR_INIT;
+        if (hasErrorMessage(vnode)) {
+            element.children[element.children.length - 1].appendChild(component.$el);
         } else {
             element.appendChild(component.$el);
         }
@@ -48,9 +52,7 @@ const MCharacterCountDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-
-        // let displayMode: string = binding.value ? binding.value.display : MCharacterCountDisplay.Always;
-        if (displayMode !== MCharacterCountDisplay.None) {
+        if (displayMode(binding) !== MCharacterCountDisplay.None) {
             buildCounter(element, binding, vnode);
         }
     },
@@ -60,12 +62,14 @@ const MCharacterCountDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-        if (element.children[element.children.length - 1].classList.contains('m-character-count-directive')) {
+        let elementValidation: Element | undefined = element.children[element.children.length - 1].classList.contains('m-textfield__validation') ? element.children[element.children.length - 1] : undefined ;
+        if (element.children[element.children.length - 1].classList.contains('m-character-count-directive') && !hasErrorMessage(vnode)) {
             element.removeChild(element.children[element.children.length - 1]);
+        } else if (elementValidation && hasErrorMessage(vnode)) {
+            elementValidation.removeChild(elementValidation.children[1]);
         }
 
-        // let displayMode: string = binding.value ? binding.value.display : MCharacterCountDisplay.Always;
-        if (displayMode !== MCharacterCountDisplay.None) {
+        if (displayMode(binding) !== MCharacterCountDisplay.None) {
             buildCounter(element, binding, vnode);
         }
     },

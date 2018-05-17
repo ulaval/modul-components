@@ -5,11 +5,43 @@
     display: inline-flex;
     flex-direction: column;
 
+    &.m--has-error {
+        .m-textfield {
+            &__validation__maxlenght {
+                color: $m-color--error;
+            }
+        }
+    }
+
+    &.m--is-valid {
+        .m-textfield {
+            &__validation__maxlenght {
+                color: $m-color--success;
+            }
+        }
+    }
+
     &__icon-password {
         transition: opacity 0.3s ease;
 
         &.m--is-transparent {
             opacity: 0;
+        }
+    }
+
+    &__validation {
+        display: flex;
+        justify-content: flex-end;
+
+        &__message {
+            flex: 1 1 auto;
+        }
+
+        &__maxlenght {
+            transition: color $m-transition-duration ease;
+            margin-top: 2px; // Magic number
+            font-size: $m-font-size--xs;
+            padding-left: $m-padding--xs;
         }
     }
 }

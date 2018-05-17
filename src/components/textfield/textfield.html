@@ -1,8 +1,8 @@
 <div class="m-textfield"
      :class="[{ 'm--is-disabled' : isDisabled,
                 'm--is-waiting' : isWaiting,
-                'm--has-error' : hasError,
-                'm--is-valid' : isValid,
+                'm--has-error' : hasInputError,
+                'm--is-valid' : isInputValid,
                 'm--has-icon' : hasIcon,
                 'm--has-label': hasLabel },
                 'm--is-type-' + inputType ]"
@@ -10,8 +10,8 @@
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
-                   :error="hasError"
-                   :valid="isValid"
+                   :error="hasInputError"
+                   :valid="isInputValid"
                    :label="label"
                    :focus="isFocus"
                    :empty="isEmpty"
@@ -41,12 +41,15 @@
                            @click="togglePasswordVisibility"></m-icon-button>
         </div>
     </m-input-style>
-    <m-validation-message
-        :disabled="isDisabled"
-        :waiting="isWaiting"
-        :error="hasError"
-        :valid="isValid"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"></m-validation-message>
+    <div class="m-textfield__validation">
+        <m-validation-message
+            class="m-textfield__validation__message"
+            :disabled="isDisabled"
+            :waiting="isWaiting"
+            :error="hasInputError"
+            :error-message="errorMessage"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"></m-validation-message>
+        <div class="m-textfield__validation__maxlenght" v-if="hasMaxLength" aria-hidden="true">{{ valueLength }}<strong>/{{ maxLength }}</strong></div>
+    </div>
 </div>

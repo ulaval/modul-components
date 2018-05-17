@@ -36,24 +36,24 @@ export class MTextarea extends ModulVue implements InputManagementData {
         return this.internalValue.length;
     }
     private get maxLengthNumber(): number | undefined {
-        return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? undefined : this.maxLength;
+        return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? this.maxLength : undefined ;
     }
 
-    public get hasMaxLength(): boolean {
+    private get hasMaxLength(): boolean {
         return this.maxLength ? this.maxLength > 0 : false;
     }
 
-    private get hasTextAreaError(): boolean {
+    private get hasInputError(): boolean {
         return !this.isLengthValid || this.as<InputState>().hasError;
     }
 
-    private get isTextAreaValid(): boolean {
+    private get isInputValid(): boolean {
         return this.isLengthValid && this.as<InputState>().isValid;
     }
 
     private get isLengthValid(): boolean {
         return this.maxLength
-            ? this.internalValue.length < this.maxLength
+            ? this.internalValue.length <= this.maxLength
             : true;
     }
 }

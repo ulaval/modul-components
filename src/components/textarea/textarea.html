@@ -1,8 +1,8 @@
 <div class="m-textarea"
      :class="{ 'm--is-disabled' : isDisabled,
                'm--is-waiting' : isWaiting,
-               'm--has-error' : hasTextAreaError,
-               'm--is-valid' : isTextAreaValid,
+               'm--has-error' : hasInputError,
+               'm--is-valid' : isInputValid,
                'm--is-focus' : isFocus,
                'm--has-icon' : hasIcon,
                'm--has-label': hasLabel }"
@@ -10,8 +10,8 @@
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
-                   :error="hasTextAreaError"
-                   :valid="isTextAreaValid"
+                   :error="hasInputError"
+                   :valid="isInputValid"
                    :label="label"
                    :focus="isFocus"
                    :empty="isEmpty"
@@ -40,12 +40,10 @@
             class="m-textarea__validation__message"
             :disabled="isDisabled"
             :waiting="isWaiting"
-            :error="hasTextAreaError"
+            :error="hasInputError"
             :error-message="errorMessage"
             :valid-message="validMessage"
             :helper-message="helperMessage"></m-validation-message>
-        <div class="m-textarea__validation__maxlenght" v-if="hasMaxLength">
-            {{ valueLength }}<strong>/{{ maxLength }}</strong>
-        </div>
+        <div class="m-textarea__validation__maxlenght" v-if="hasMaxLength" aria-hidden="true">{{ valueLength }}<strong>/{{ maxLength }}</strong></div>
     </div>
 </div>

@@ -108,12 +108,32 @@ export class MTextfield extends ModulVue {
         return this.passwordIcon && this.type === MTextfieldType.Password && this.as<InputState>().active;
     }
 
+    public get valueLength(): number {
+        return this.internalValue.length;
+    }
     private get maxLengthNumber(): number | undefined {
-        return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? undefined : this.maxLength;
+        // tslint:disable-next-line:no-console
+        console.log(this.lengthOverflow && this.maxLength && this.maxLength > 0);
+
+        return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? this.maxLength : undefined ;
     }
 
-    private get valueLength(): number {
-        return this.internalValue.length;
+    private get hasMaxLength(): boolean {
+        return this.maxLength ? this.maxLength > 0 : false;
+    }
+
+    private get hasInputError(): boolean {
+        return !this.isLengthValid || this.as<InputState>().hasError;
+    }
+
+    private get isInputValid(): boolean {
+        return this.isLengthValid && this.as<InputState>().isValid;
+    }
+
+    private get isLengthValid(): boolean {
+        return this.maxLength
+            ? this.internalValue.length <= this.maxLength
+            : true;
     }
 }
 
