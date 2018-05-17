@@ -43,6 +43,9 @@
 
     &__input {
         width: 100%;
+        outline: none;
+        resize: none;
+        overflow: hidden;
 
         &-hidden {
             position: absolute;
