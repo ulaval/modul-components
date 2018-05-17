@@ -157,7 +157,7 @@ export class MAccordion extends ModulVue implements AccordionGateway {
             let target: any;
 
             if (event !== null) {
-                target = (event.target as HTMLElement).closest('[href], [onclick], button');
+                target = (event.target as HTMLElement).closest('[href], [onclick], button, input, textarea, radio');
             }
 
             if (!target) {
