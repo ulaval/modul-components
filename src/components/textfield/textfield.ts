@@ -47,6 +47,12 @@ export class MTextfield extends ModulVue {
     public type: MTextfieldType;
     @Prop({ default: true })
     public passwordIcon: boolean;
+    @Prop()
+    public maxLength?: number;
+    @Prop({ default: true })
+    public lengthOverflow: boolean;
+
+    readonly internalValue: string;
 
     private passwordAsText: boolean = false;
 
@@ -100,6 +106,14 @@ export class MTextfield extends ModulVue {
 
     private get propPasswordIcon(): boolean {
         return this.passwordIcon && this.type === MTextfieldType.Password && this.as<InputState>().active;
+    }
+
+    private get maxLengthNumber(): number | undefined {
+        return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? undefined : this.maxLength;
+    }
+
+    private get valueLength(): number {
+        return this.internalValue.length;
     }
 }
 

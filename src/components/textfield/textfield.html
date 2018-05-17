@@ -29,7 +29,8 @@
                @keydown="onKeydown"
                @change="onChange"
                @paste="onPaste"
-               v-model="model">
+               v-model="model"
+               :maxlength="maxLengthNumber">
         <div slot="right-content"
              class="m-textfield__icon-password"
              :class="{ 'm--is-transparent': !hasValue }"

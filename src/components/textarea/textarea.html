@@ -31,7 +31,8 @@
                   @keyup="onKeyup"
                   @keydown="onKeydown"
                   @paste="onPaste"
-                  v-model="model">
+                  v-model="model"
+                  :maxlength="maxLengthNumber">
         </textarea>
     </m-input-style>
     <div class="m-textarea__validation">
