@@ -242,6 +242,7 @@ $m-input-style--padding: 4px !default;
         }
 
         &__left {
+            position: relative;
             overflow: hidden;
             min-height: 24px;
             flex: 1 1 auto;

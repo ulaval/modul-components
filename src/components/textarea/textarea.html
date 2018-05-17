@@ -27,20 +27,16 @@
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
+                  @keypress.enter.prevent
                   @keyup="onKeyup"
                   @keydown="onKeydown"
                   @paste="onPaste"
-                  :style="{ height: textareaHeight }"
                   v-model="model">
         </textarea>
-        <textarea v-m-textarea-auto-height
-                  ref="inputHidden"
-                  class="m-textarea__input-hidden"
-                  :placeholder="placeholder"
-                  readonly="true"
-                  rows="1"
-                  v-model="model"
-                  aria-hidden="true">
+        <div class="m-textarea__input-hidden"
+             ref="inputHidden"
+             aria-hidden="true">{{ valueLength > 0 ? model : '&nbsp;'}}
+        </div>
         </textarea>
     </m-input-style>
     <div class="m-textarea__validation">

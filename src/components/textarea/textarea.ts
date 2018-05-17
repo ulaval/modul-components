@@ -32,31 +32,21 @@ export class MTextarea extends ModulVue implements InputManagementData {
     private internalTextareaHeight: string = '0';
 
     protected mounted(): void {
-        this.setHeight();
-        this.$modul.event.$emit('resize', this.setHeight);
+        this.setInputHiddenStyle();
     }
 
     protected updated(): void {
-        this.setHeight();
+        this.setInputHiddenStyle();
     }
 
-    protected beforeDestroy(): void {
-        this.$modul.event.$off('resize', this.setHeight);
-    }
-
-    @Watch('value')
-    private setHeight(): void {
-        this.$nextTick(() => {
-            this.textareaHeight = (this.$refs.inputHidden as HTMLElement).style.height as string;
-        });
-    }
-
-    private get textareaHeight(): string {
-        return this.internalTextareaHeight;
-    }
-
-    private set textareaHeight(height: string) {
-        this.internalTextareaHeight = height;
+    private setInputHiddenStyle(): void {
+        let inputHidden: HTMLElement = this.$refs.inputHidden as HTMLElement;
+        let computedElStyle = window.getComputedStyle(this.$refs.input as HTMLElement);
+        inputHidden.style.fontSize = computedElStyle.fontSize;
+        inputHidden.style.fontWeight = computedElStyle.fontWeight;
+        inputHidden.style.lineHeight = computedElStyle.lineHeight;
+        inputHidden.style.padding = computedElStyle.padding;
+        inputHidden.style.margin = computedElStyle.margin;
     }
 
     private get valueLength(): number {
