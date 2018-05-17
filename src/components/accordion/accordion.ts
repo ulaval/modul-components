@@ -151,29 +151,21 @@ export class MAccordion extends ModulVue implements AccordionGateway {
     }
 
     private toggleAccordion(event: Event): void {
-        if (!this.propDisabled) {
+        let target: Element | null;
+        target = (event.target as HTMLElement).closest('[href], [onclick], button, input, textarea, radio');
+
+        if (!this.propDisabled && !target) {
             const initialState: boolean = this.internalPropOpen;
 
-            let target: any;
-
-            if (event !== null) {
-                target = (event.target as HTMLElement).closest('[href], [onclick], button, input, textarea, radio');
+            if (!this.internalPropOpen &&
+                isAccordionGroup(this.$parent) &&
+                this.$parent.concurrent) {
+                this.$parent.closeAllAccordions();
             }
 
-            if (!target) {
-                if (
-                    !this.internalPropOpen &&
-                    isAccordionGroup(this.$parent) &&
-                    this.$parent.concurrent
-                ) {
-                    this.$parent.closeAllAccordions();
-                }
-
-                this.$refs.accordionHeader.blur();
-
-                this.propOpen = !initialState;
-                this.$emit('click', this.internalPropOpen);
-            }
+            this.$refs.accordionHeader.blur();
+            this.propOpen = !initialState;
+            this.$emit('click', this.internalPropOpen);
         }
     }
 
