@@ -15,6 +15,7 @@ Content can be written in English or in French
 <!-- Description here... -->
 - [ ] Include links to issues
 <!-- Links here... -->
+- [ ] Openshift deployment requested
 
 <!-- END_REQUIRED -->
 

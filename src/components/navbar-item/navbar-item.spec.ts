@@ -1,9 +1,8 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import NavbarItemPlugin, { MNavbarItem, BaseNavbar, Navbar } from './navbar-item';
-import { MNavbar } from '../navbar/navbar';
+import NavbarItemPlugin, { MNavbarItem } from './navbar-item';
 
 describe('MNavbarItem', () => {
     let localVue: VueConstructor<Vue>;
@@ -13,12 +12,12 @@ describe('MNavbarItem', () => {
         localVue.use(NavbarItemPlugin);
     });
 
-    const defaultSlot = {
+    const defaultSlot: any = {
         default: `navbar item content`
     };
 
     it('should render correctly', () => {
-        const wrapper = mount(MNavbarItem, {
+        const wrapper: Wrapper<MNavbarItem> = mount(MNavbarItem, {
             localVue: localVue,
             slots: defaultSlot
         });
@@ -27,7 +26,7 @@ describe('MNavbarItem', () => {
     });
 
     it('should render correctly when disabled', () => {
-        const wrapper = mount(MNavbarItem, {
+        const wrapper: Wrapper<MNavbarItem> = mount(MNavbarItem, {
             localVue: localVue,
             slots: defaultSlot,
             propsData: {

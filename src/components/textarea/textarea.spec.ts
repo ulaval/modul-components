@@ -1,9 +1,13 @@
-import { mount } from '@vue/test-utils';
+import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import TextareaPlugin from '../../components/textarea/textarea';
 import { MTextarea } from './textarea';
+import uuid from '../../utils/uuid/uuid';
+
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('MTextArea', () => {
     beforeEach(() => {
@@ -11,14 +15,14 @@ describe('MTextArea', () => {
     });
 
     it('should render correctly', () => {
-        const txtarea = mount(MTextarea);
+        const txtarea: Wrapper<MTextarea> = mount(MTextarea);
 
         return expect(renderComponent(txtarea.vm)).resolves.toMatchSnapshot();
     });
 
     describe('max-length', () => {
         it('should render correctly state when text length is lesser than max length', () => {
-            const txtarea = mount(MTextarea, {
+            const txtarea: Wrapper<MTextarea> = mount(MTextarea, {
                 propsData: {
                     maxLength: 8,
                     value: '1'
@@ -31,7 +35,7 @@ describe('MTextArea', () => {
         });
 
         it('should render invalid state when text length is greater than max length', () => {
-            const txtarea = mount(MTextarea, {
+            const txtarea: Wrapper<MTextarea> = mount(MTextarea, {
                 propsData: {
                     maxLength: 8,
                     value: '123456789'

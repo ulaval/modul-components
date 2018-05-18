@@ -39,7 +39,7 @@ export enum MDraggableEventNames {
     OnDragEnd = 'draggable:dragend'
 }
 
-const DEFAULT_ACTION = 'any';
+const DEFAULT_ACTION: string = 'any';
 export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     public static defaultMountPoint: string = '__mdraggable__';
     public static currentDraggable?: MDraggable;

@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
@@ -17,7 +17,7 @@ describe('MRadio', () => {
     });
 
     it('should render correctly', () => {
-        const rdo = mount(MRadio, {
+        const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {
                 value: 'radio'
@@ -31,7 +31,7 @@ describe('MRadio', () => {
     });
 
     it('should render correctly when radio is selected', () => {
-        const rdo = mount(MRadio, {
+        const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {
                 modelValue: 'radio',
@@ -43,7 +43,7 @@ describe('MRadio', () => {
     });
 
     it('should render correctly name when set', () => {
-        const rdo = mount(MRadio, {
+        const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {
                 name: 'name',
@@ -55,7 +55,7 @@ describe('MRadio', () => {
     });
 
     it('should render correctly when disabled', () => {
-        const rdo = mount(MRadio, {
+        const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {
                 disabled: true,
@@ -67,7 +67,7 @@ describe('MRadio', () => {
     });
 
     it('should not render icon when not part of a group', () => {
-        const rdo = mount(MRadio, {
+        const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {
                 iconName: 'chip-error',
@@ -79,7 +79,7 @@ describe('MRadio', () => {
     });
 
     it('should render correctly when position is right', () => {
-        const rdo = mount(MRadio, {
+        const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {
                 position: MRadioPosition.Right,
@@ -90,7 +90,7 @@ describe('MRadio', () => {
     });
 
     it('should emit change event when model is modified', () => {
-        const rdo = mount(MRadio, {
+        const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {
                 value: 'radio'

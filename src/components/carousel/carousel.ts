@@ -52,7 +52,7 @@ export class MCarousel extends Vue {
             this.internalIndex = this.propIndex;
             let items: MCarouselItem[] = [];
             if (this.$slots.default) {
-                let index = 0;
+                let index: number = 0;
                 this.$slots.default.forEach(item => {
                     if (item.componentInstance instanceof MCarouselItem) {
                         item.componentInstance.transitionForward = this.transitionForward;

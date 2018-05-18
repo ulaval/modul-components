@@ -57,6 +57,7 @@ Avant de soumettre votre contribution, veuillez prendre note de ces quelques lig
     - Suivre les mêmes indications que pour la correction de bogues. Les nouvelles fonctionnalités devraient avoir été **préalablement approuvées** via un billet de type **Suggestion**.
 - Si possible, identifier une ou plusieurs ressources pour procéder à la revue de code.
 - Plusieurs *commits* peuvent être effectués au cours du processus d'approbation d'un PR. Un *squash merge* est effectué lorsque le code est rapporté dans la branche `develop`.
+- Il est possible de faire valider fonctionnellement son PR en demandant que la branche soit déployée dans un environnement de test (option du formulaire de PR).
 
 *Pour les contributeurs internes au projet, le billet sera créé dans JIRA.
 

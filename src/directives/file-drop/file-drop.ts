@@ -5,7 +5,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { FILE_DROP_NAME } from '../directive-names';
 
 interface MFileDropElement extends HTMLElement {
-    cleanupMFileDropDirective();
+    cleanupMFileDropDirective(): any;
 }
 
 const MFileDropDirective: DirectiveOptions = {
@@ -17,19 +17,19 @@ const MFileDropDirective: DirectiveOptions = {
     ): void {
         const $file: FileService = (vnode.context as ModulVue).$file;
 
-        const onDragEnterOver = (e: DragEvent) => {
+        const onDragEnterOver: (e: DragEvent) => void = (e: DragEvent) => {
             el.classList.add('m--is-drag-over');
             e.stopPropagation();
             e.preventDefault();
         };
 
-        const onDragLeave = (e: DragEvent) => {
+        const onDragLeave: (e: DragEvent) => void = (e: DragEvent) => {
             el.classList.remove('m--is-drag-over');
             e.stopPropagation();
             e.preventDefault();
         };
 
-        const onDrop = (e: DragEvent) => {
+        const onDrop: (e: DragEvent) => void = (e: DragEvent) => {
             el.classList.remove('m--is-drag-over');
             e.preventDefault();
             $file.add(
@@ -38,7 +38,7 @@ const MFileDropDirective: DirectiveOptions = {
             );
         };
 
-        const cleanup = () => {
+        const cleanup: () => void = () => {
             el.removeEventListener('dragenter', onDragEnterOver);
             el.removeEventListener('dragover', onDragEnterOver);
             el.removeEventListener('dragleave', onDragLeave);

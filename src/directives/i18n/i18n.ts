@@ -1,6 +1,6 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
+
 import { I18N_NAME } from '../directive-names';
-import { Messages } from '../../utils/i18n/i18n';
 
 const I18nDirective: DirectiveOptions = {
     bind(
@@ -9,9 +9,9 @@ const I18nDirective: DirectiveOptions = {
         vnode: VNode
     ): void {
         if (binding.arg) {
-            let expression = binding.expression;
+            let expression: any = binding.expression;
             const modifiers: string[] = Object.getOwnPropertyNames(binding.modifiers);
-            const options = binding.value || {};
+            const options: any = binding.value || {};
 
             if (modifiers.length > 0) {
                 expression = Vue.prototype.$i18n.translate(

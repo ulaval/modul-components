@@ -2,7 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { RADIO_NAME } from '../component-names';
-import WithRender from './radio-sandbox.html';
+import WithRender from './radio.sandbox.html';
 
 @WithRender
 @Component

@@ -1,11 +1,12 @@
-import { ModulVue } from '../../utils/vue/vue';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './limit-text.html?style=./limit-text.scss';
+
+import { ModulVue } from '../../utils/vue/vue';
 import { LIMIT_TEXT_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import WithRender from './limit-text.html?style=./limit-text.scss';
 
 @WithRender
 @Component
@@ -53,7 +54,7 @@ export class MLimitText extends ModulVue {
         return 'none';
     }
 
-    private get propOpen() {
+    private get propOpen(): boolean {
         if (this.open !== undefined) {
             return this.open;
         }
@@ -70,11 +71,11 @@ export class MLimitText extends ModulVue {
         this.$emit('update:open', false);
     }
 
-    private get openText() {
+    private get openText(): string {
         return `[ ${this.openLabel || this.openHiddenText} ]`;
     }
 
-    private get closeText() {
+    private get closeText(): string {
         return `[ ${this.closeLabel || this.closeHiddenText} ]`;
     }
 }

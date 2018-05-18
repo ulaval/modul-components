@@ -1,8 +1,13 @@
-import Vue from 'vue';
 import { mount, Wrapper } from '@vue/test-utils';
-import LoginPlugin, { MLogin } from './login';
-import { renderComponent } from '../../../tests/helpers/render';
+import Vue from 'vue';
+
 import { addMessages } from '../../../tests/helpers/lang';
+import { renderComponent } from '../../../tests/helpers/render';
+import LoginPlugin, { MLogin } from './login';
+import uuid from '../../utils/uuid/uuid';
+
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('MLogin', () => {
 
@@ -19,7 +24,7 @@ describe('MLogin', () => {
         });
 
         it('should call the login function with the provided credentials', () => {
-            let loginMock = jest.fn((user, password) => Promise.resolve());
+            let loginMock: jest.Mock<Promise<void>> = jest.fn((user, password) => Promise.resolve());
 
             let wrapper: Wrapper<MLogin> = mount(MLogin, {
                 localVue: Vue,

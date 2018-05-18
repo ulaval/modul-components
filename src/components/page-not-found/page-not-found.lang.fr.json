@@ -1,0 +1,7 @@
+{
+    "m-page-not-found": {
+        "message": "La page demandée n'a pas été trouvée.",
+        "directions": "Elle a peut-être été déplacée ou retirée, ou son nom a changé. Veuillez vérifier l'adresse (URL) indiquée dans votre navigateur et réessayer.",
+        "back-to-portal": "Retour au portail"
+    }
+}

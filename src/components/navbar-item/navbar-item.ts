@@ -10,9 +10,10 @@ export abstract class BaseNavbar extends ModulVue { }
 
 export interface Navbar {
     model: string;
-    mouseover: boolean;
+    mouseEvent: boolean;
     updateValue(value: string): void;
-    onMouseOver(value: string, event): void;
+    onMouseover(value: string, event): void;
+    onMouseleave(value: string, event): void;
     onClick(value: string, event): void;
 }
 
@@ -59,15 +60,23 @@ export class MNavbarItem extends ModulVue {
     }
 
     private onClick(event: Event): void {
-        if (!this.disabled && this.parentNavbar && this.value !== this.parentNavbar.model) {
-            this.parentNavbar.updateValue(this.value);
+        if (!this.disabled && this.parentNavbar) {
             this.parentNavbar.onClick(this.value, event);
+            if (this.value !== this.parentNavbar.model) {
+                this.parentNavbar.updateValue(this.value);
+            }
         }
     }
 
-    private onMouseOver(event: Event): void {
-        if (!this.disabled && this.parentNavbar && this.parentNavbar.mouseover) {
-            this.parentNavbar.onMouseOver(this.value, event);
+    private onMouseover(event: Event): void {
+        if (!this.disabled && this.parentNavbar && this.parentNavbar.mouseEvent) {
+            this.parentNavbar.onMouseover(this.value, event);
+        }
+    }
+
+    private onMouseleave(event: Event): void {
+        if (!this.disabled && this.parentNavbar && this.parentNavbar.mouseEvent) {
+            this.parentNavbar.onMouseleave(this.value, event);
         }
     }
 }

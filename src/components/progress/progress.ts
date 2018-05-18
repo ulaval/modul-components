@@ -154,7 +154,7 @@ export class MProgress extends ModulVue {
     // }
 
     private get progressClasses(): { [name: string ]: boolean } {
-        let animationClass = 'm-progress-spinner-indeterminate';
+        let animationClass: string = 'm-progress-spinner-indeterminate';
 
         // if (this.isIE) {
         //     animationClass += '-fallback';
@@ -171,7 +171,7 @@ export class MProgress extends ModulVue {
     }
 
     private get svgStyles(): { [name: string ]: string } {
-        const circleSize = `${this.diameter}px`;
+        const circleSize: string = `${this.diameter}px`;
 
         return {
             width: circleSize,
