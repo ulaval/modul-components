@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
@@ -12,7 +12,7 @@ jest.mock('../../utils/uuid/uuid');
 describe('MRadioGroup', () => {
     let localVue: VueConstructor<Vue>;
 
-    const slots = {
+    const slots: any = {
         default: `
                 <m-radio value="rdo1"></m-radio>
                 <m-radio value="rdo2"></m-radio>`
@@ -24,7 +24,7 @@ describe('MRadioGroup', () => {
     });
 
     it('should render correctly', () => {
-        const grp = mount(MRadioGroup, {
+        const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             slots: slots
         });
@@ -33,7 +33,7 @@ describe('MRadioGroup', () => {
     });
 
     it('should render correctly when position is right', () => {
-        const grp = mount(MRadioGroup, {
+        const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             propsData: {
                 position: MRadioPosition.Right
@@ -45,7 +45,7 @@ describe('MRadioGroup', () => {
     });
 
     it('should render correctly when inline', () => {
-        const grp = mount(MRadioGroup, {
+        const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             propsData: {
                 inline: true
@@ -57,7 +57,7 @@ describe('MRadioGroup', () => {
     });
 
     it('should render correctly when disabled', () => {
-        const grp = mount(MRadioGroup, {
+        const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             propsData: {
                 disabled: true
@@ -69,7 +69,7 @@ describe('MRadioGroup', () => {
     });
 
     it('should emit change event when child radio is selected', () => {
-        const grp = mount(MRadioGroup, {
+        const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             slots: slots
         });

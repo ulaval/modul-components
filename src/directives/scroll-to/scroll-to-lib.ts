@@ -64,40 +64,40 @@ export class ScrollTo {
             return { promise: Promise.resolve(), cancel: () => cancel() };
         }
 
-        let startTime = Date.now();
-        let endTime = startTime + time;
+        let startTime: number = Date.now();
+        let endTime: number = startTime + time;
 
-        let startTop = window.pageYOffset;
-        let distance = target - startTop;
+        let startTop: number = window.pageYOffset;
+        let distance: number = target - startTop;
 
         // based on http://en.wikipedia.org/wiki/Smoothstep
-        let smoothStep = (start, end, point) => {
+        let smoothStep: (start, end, point) => number = (start, end, point) => {
             if (point <= start) {
                 return 0;
             }
             if (point >= end) {
                 return 1;
             }
-            let x = (point - start) / (end - start); // interpolation
+            let x: number = (point - start) / (end - start); // interpolation
             return x * x * (3 - 2 * x);
         };
 
         return { promise: new Promise((resolve, reject) => {
             // This is to keep track of where the element's scrollTop is
             // supposed to be, based on what we're doing
-            let previousTop = window.pageYOffset;
+            let previousTop: number = window.pageYOffset;
 
             // This is like a think function from a game loop
-            let scrollFrame = () => {
+            let scrollFrame: () => void = () => {
                 if (window.pageYOffset !== previousTop || cancelled) {
                     resolve();
                     return;
                 }
 
                 // set the scrollTop for this frame
-                let now = Date.now();
-                let point = smoothStep(startTime, endTime, now);
-                let frameTop = Math.round(startTop + distance * point);
+                let now: number = Date.now();
+                let point: number = smoothStep(startTime, endTime, now);
+                let frameTop: number = Math.round(startTop + distance * point);
                 window.scrollTo(0, frameTop);
 
                 // check if we're done!
@@ -128,6 +128,6 @@ export class ScrollTo {
     }
 }
 
-const ScrollToLib = new ScrollTo();
+const ScrollToLib: ScrollTo = new ScrollTo();
 
 export default ScrollToLib;

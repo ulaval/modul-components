@@ -55,7 +55,7 @@ describe('FileService', () => {
 
     describe('remove', () => {
         it('should remove the file identified by the unique id', () => {
-            let mockFile = createMockFile('to be removed');
+            let mockFile: File = createMockFile('to be removed');
             filesvc.add(createMockFileList([mockFile]), 'unique store');
 
             filesvc.remove(
@@ -128,14 +128,17 @@ describe('FileService', () => {
             expectValidationResults(1, MFileRejectionCause.MAX_FILES);
         });
 
-        const expectValidationResults = (
+        const expectValidationResults: (
+            expectedNbReadyFiles: number,
+            rejectionCause: MFileRejectionCause
+        ) => void = (
             expectedNbReadyFiles: number,
             rejectionCause: MFileRejectionCause
         ) => {
-            const readyFiles = filesvc
+            const readyFiles: MFile[] = filesvc
                 .files()
                 .filter(f => f.status === MFileStatus.READY);
-            const rejectedFiles = filesvc
+            const rejectedFiles: MFile[] = filesvc
                 .files()
                 .filter(f => f.status === MFileStatus.REJECTED);
 
@@ -174,7 +177,7 @@ describe('FileService', () => {
         let httpSvcMock: jest.Mocked<HttpService>;
         let originalHttpSvc: HttpService;
 
-        const mockHttpService = () => {
+        const mockHttpService: () => jest.Mocked<HttpService> = () => {
             httpSvcMock = new HttpService() as jest.Mocked<HttpService>;
             (Vue.prototype as ModulVue).$http = httpSvcMock;
             httpSvcMock.execute.mockReturnValue(Promise.resolve());
@@ -248,7 +251,7 @@ describe('FileService', () => {
             });
 
             it('should allow an upload progress callback when needed', () => {
-                let customUploadProgressCalled = false;
+                let customUploadProgressCalled: boolean = false;
 
                 filesvc.upload(fileToUpload.uid, {
                     url: 'http://fake',
@@ -269,8 +272,8 @@ describe('FileService', () => {
         describe('upload cancellation', () => {
             let cancelerMock: jest.Mocked<CancelTokenSource>;
 
-            const mockCanceler = (): jest.Mocked<CancelTokenSource> => {
-                const cancelerMock = {
+            const mockCanceler: () => jest.Mocked<CancelTokenSource> = (): jest.Mocked<CancelTokenSource> => {
+                const cancelerMock: any = {
                     token: jest.fn(),
                     cancel: jest.fn()
                 };

@@ -82,9 +82,9 @@ export class RippleEffect {
     }
 
     private removeRipple(event: MouseEvent): void {
-        let releaseEvent = (event.type === 'mousedown' ? 'mouseup' : 'touchend');
+        let releaseEvent: string = (event.type === 'mousedown' ? 'mouseup' : 'touchend');
 
-        let release = () => {
+        let release: () => void = () => {
             document.removeEventListener(releaseEvent, release);
             this.rippleEl.className = RIPPLE_EFFECT_NAME + ' leave-active';
             this.rippleELStyle.opacity = '0';
@@ -96,6 +96,6 @@ export class RippleEffect {
     }
 }
 
-const RippleEffectLib = new RippleEffect();
+const RippleEffectLib: RippleEffect = new RippleEffect();
 
 export default RippleEffectLib;

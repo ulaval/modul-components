@@ -29,6 +29,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/message/message.lang.fr.json'),
                 require('../components/menu/menu.lang.fr.json'),
                 require('../components/modal/modal.lang.fr.json'),
+                require('../components/page-not-found/page-not-found.lang.fr.json'),
                 require('../components/phone-number/phone-number.lang.fr.json'),
                 require('../components/scroll-top/scroll-top.lang.fr.json'),
                 require('../components/sidebar/sidebar.lang.fr.json'),

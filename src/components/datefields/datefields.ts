@@ -1,20 +1,21 @@
-import Vue, { PluginObject } from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
-import Component from 'vue-class-component';
-import { Prop, Model, Watch } from 'vue-property-decorator';
-import WithRender from './datefields.html?style=./datefields.scss';
-import { DATEFIELDS_NAME } from '../component-names';
 import moment from 'moment';
+import Vue, { PluginObject } from 'vue';
+import Component from 'vue-class-component';
+import { Model, Prop, Watch } from 'vue-property-decorator';
+
 import { InputState } from '../../mixins/input-state/input-state';
-import DropdownPlugin from '../dropdown/dropdown';
+import { ModulVue } from '../../utils/vue/vue';
+import { DATEFIELDS_NAME } from '../component-names';
 import DropdownItemPlugin from '../dropdown-item/dropdown-item';
+import DropdownPlugin from '../dropdown/dropdown';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import SpinnerPlugin from '../spinner/spinner';
+import WithRender from './datefields.html?style=./datefields.scss';
 
-const VIEW_DATE = 'date';
-const VIEW_MONTH = 'month';
-const VIEW_YEAR = 'year';
+const VIEW_DATE: string = 'date';
+const VIEW_MONTH: string = 'month';
+const VIEW_YEAR: string = 'year';
 
 @WithRender
 @Component({
@@ -51,7 +52,7 @@ export class MDatefields extends ModulVue {
 
     @Watch('value')
     private setInternal(value: moment.Moment | Date | undefined): void {
-        let valueYear = !value ? undefined : value instanceof Date ? value.getFullYear() : value.year();
+        let valueYear: number | undefined = !value ? undefined : value instanceof Date ? value.getFullYear() : value.year();
 
         if (!valueYear || (valueYear >= this.minYear && valueYear <= this.maxYear)) {
             this.internalYear = valueYear;

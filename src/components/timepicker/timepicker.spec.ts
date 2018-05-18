@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import moment from 'moment';
 
@@ -26,7 +26,7 @@ describe('MTimepicker', () => {
     });
 
     it('should render correctly', () => {
-        const tp = mount(MTimepicker, {
+        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
             localVue: localVue,
             propsData: {
                 time: moment('02:00 PM', 'h:mm A')
@@ -37,7 +37,7 @@ describe('MTimepicker', () => {
     });
 
     it('should render correctly when waiting is set', () => {
-        const tp = mount(MTimepicker, {
+        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
             localVue: localVue,
             propsData: {
                 waiting: true,
@@ -49,7 +49,7 @@ describe('MTimepicker', () => {
     });
 
     it('should render correctly when disabled is set', () => {
-        const tp = mount(MTimepicker, {
+        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
             localVue: localVue,
             propsData: {
                 disabled: true,
@@ -61,7 +61,7 @@ describe('MTimepicker', () => {
     });
 
     it('should render correctly when error is set', () => {
-        const tp = mount(MTimepicker, {
+        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
             localVue: localVue,
             propsData: {
                 error: true,
@@ -74,7 +74,7 @@ describe('MTimepicker', () => {
     });
 
     it('should render correctly when valid is set', () => {
-        const tp = mount(MTimepicker, {
+        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
             localVue: localVue,
             propsData: {
                 valid: true,
@@ -87,7 +87,7 @@ describe('MTimepicker', () => {
     });
 
     it('should render correctly min/max time', () => {
-        const tp = mount(MTimepicker, {
+        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
             localVue: localVue,
             propsData: {
                 duration: true,

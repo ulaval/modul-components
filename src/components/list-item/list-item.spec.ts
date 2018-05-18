@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { addMessages } from '../../../tests/helpers/lang';
@@ -16,7 +16,7 @@ describe('MListItem', () => {
     });
 
     it('should render correctly', () => {
-        const li = mount(MListItem, {
+        const li: Wrapper<MListItem> = mount(MListItem, {
             localVue: localVue,
             slots: {
                 default: 'item 1'
@@ -28,7 +28,7 @@ describe('MListItem', () => {
 
     describe('disabled', () => {
         it('should render correctly', () => {
-            const li = mount(MListItem, {
+            const li: Wrapper<MListItem> = mount(MListItem, {
                 localVue: localVue,
                 propsData: {
                     disabled: true
@@ -39,7 +39,7 @@ describe('MListItem', () => {
         });
 
         it('should not render icon', () => {
-            const li = mount(MListItem, {
+            const li: Wrapper<MListItem> = mount(MListItem, {
                 localVue: localVue,
                 propsData: {
                     iconName: 'chip-error',
@@ -52,7 +52,7 @@ describe('MListItem', () => {
         });
 
         it('should not render spinner', () => {
-            const li = mount(MListItem, {
+            const li: Wrapper<MListItem> = mount(MListItem, {
                 localVue: localVue,
                 propsData: {
                     waiting: true,
@@ -65,7 +65,7 @@ describe('MListItem', () => {
     });
 
     it('should render correctly when waiting', () => {
-        const li = mount(MListItem, {
+        const li: Wrapper<MListItem> = mount(MListItem, {
             localVue: localVue,
             propsData: {
                 waiting: true
@@ -79,7 +79,7 @@ describe('MListItem', () => {
     });
 
     it('should render correctly when icon is set', () => {
-        const li = mount(MListItem, {
+        const li: Wrapper<MListItem> = mount(MListItem, {
             localVue: localVue,
             propsData: {
                 iconName: 'chip-error',
@@ -91,7 +91,7 @@ describe('MListItem', () => {
     });
 
     it('should emit click event when icon is clicked', () => {
-        const li = mount(MListItem, {
+        const li: Wrapper<MListItem> = mount(MListItem, {
             localVue: localVue,
             propsData: {
                 iconName: 'chip-error',

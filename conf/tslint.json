@@ -22,6 +22,12 @@
                 "constructor": "never"
             }
         ],
+        "typedef": [
+            true,
+            "property-declaration",
+            "call-signature",
+            "variable-declaration"
+        ],
         "semicolon": [true, "always"],
         "quotemark": [true, "single", "avoid-escape"],
         "no-empty": false,

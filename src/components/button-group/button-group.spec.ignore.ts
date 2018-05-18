@@ -1,5 +1,7 @@
-import Vue from 'vue';
 import '../../utils/polyfills';
+
+import Vue from 'vue';
+
 import { MRadioPosition } from '../radio/radio';
 import ButtonGroupPlugin, { MButtonGroup } from './button-group';
 
@@ -17,7 +19,7 @@ describe('button-group', () => {
     });
 
     it('name is applied on each radio item', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `
             <div>
                 <m-button-group ref="g">
@@ -41,7 +43,7 @@ describe('button-group', () => {
     });
 
     it('disabled prop', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `
             <div>
                 <m-button-group ref="g" :disabled="disabled" >
@@ -73,7 +75,7 @@ describe('button-group', () => {
     });
 
     it('fullSize prop', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `
             <div>
                 <m-button-group ref="g" :full-size="fullSize" >
@@ -106,7 +108,7 @@ describe('button-group', () => {
     });
 
     it('inline prop', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `
             <div>
                 <m-button-group ref="g" :inline="inline" >
@@ -185,7 +187,7 @@ describe('button-group', () => {
     });
 
     it('icon position left', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `
             <div>
                 <m-button-group ref="g">
@@ -212,7 +214,7 @@ describe('button-group', () => {
     });
 
     it('icon position right', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `
             <div>
                 <m-button-group ref="g">
@@ -241,7 +243,7 @@ describe('button-group', () => {
     });
 
     it('v-model', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `
             <div>
                 <m-button-group ref="g" v-model="model" >
@@ -267,8 +269,8 @@ describe('button-group', () => {
     });
 
     it('change event', () => {
-        let changeSpy = jasmine.createSpy('changeSpy');
-        let vm = new Vue({
+        let changeSpy: jasmine.Spy = jasmine.createSpy('changeSpy');
+        let vm: Vue = new Vue({
             data: {
                 model: 'radio2'
             },

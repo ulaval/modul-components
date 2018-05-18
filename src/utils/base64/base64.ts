@@ -14,10 +14,10 @@ export function arrayBufferToBase64(arrayBuffer: ArrayBuffer): string {
     let b: number;
     let c: number;
     let d: number;
-    let chunk;
+    let chunk: any;
 
     // Main loop deals with bytes in chunks of 3
-    for (let i = 0; i < mainLength; i = i + 3) {
+    for (let i: number = 0; i < mainLength; i = i + 3) {
         // Combine the three bytes into a single integer
         chunk = (bytes[i] << 16) | (bytes[i + 1] << 8) | bytes[i + 2];
 

@@ -71,8 +71,8 @@ describe('MTextAreaAutoSizeDirective', () => {
         );
     });
 
-    const mockScrollHeight = (value: number) => {
-        const desc = Object.getOwnPropertyDescriptor(
+    const mockScrollHeight: (value: number) => void = (value: number) => {
+        const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(
             textarea.vm.$el,
             'scrollHeight'
         );

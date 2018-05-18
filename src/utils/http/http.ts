@@ -1,8 +1,9 @@
-import { PluginObject } from 'vue';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios';
+import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
 import qs from 'qs/lib';
-import { RestAdapter, RequestConfig } from './rest';
+import { PluginObject } from 'vue';
+
 import * as strUtils from '../str/str';
+import { RequestConfig, RestAdapter } from './rest';
 
 const AUTHORIZATION_HEADER: string = 'Authorization';
 
@@ -92,7 +93,7 @@ export class HttpService implements RestAdapter {
 
 const HttpPlugin: PluginObject<any> = {
     install(v, options): void {
-        let http = new HttpService(options);
+        let http: HttpService = new HttpService(options);
         (v.prototype as any).$http = http;
     }
 };

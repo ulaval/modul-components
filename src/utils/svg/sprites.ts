@@ -17,7 +17,7 @@ export class SpritesService {
 const SpritesPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug('$svg', 'plugin.install');
-        let svg = new SpritesService();
+        let svg: SpritesService = new SpritesService();
         (v.prototype as any).$svg = svg;
     }
 };

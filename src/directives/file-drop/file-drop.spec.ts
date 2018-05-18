@@ -11,7 +11,7 @@ describe('file-drop', () => {
     let localVue: VueConstructor<ModulVue>;
     let filedrop: Wrapper<ModulVue>;
 
-    const dropEvent = {
+    const dropEvent: any = {
         dataTransfer: {
             files: [createMockFile('mock file'), createMockFile('mock file 2')]
         }
@@ -68,7 +68,7 @@ describe('file-drop', () => {
         filedrop = mount(
             {
                 template: '<div v-m-file-drop="uniqueName"></div>',
-                data: function() {
+                data: () => {
                     return {
                         uniqueName: 'uniqueValue'
                     };

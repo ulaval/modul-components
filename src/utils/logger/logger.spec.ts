@@ -1,9 +1,10 @@
-import Vue from 'vue';
 import { createLocalVue } from '@vue/test-utils';
+import Vue, { VueConstructor } from 'vue';
+
 import LoggerPlugin from './logger';
 
 describe(`Given the class Logger`, () => {
-    const localVue = createLocalVue();
+    const localVue: VueConstructor<Vue> = createLocalVue();
 
     beforeEach(() => {
         console.log = jest.fn();

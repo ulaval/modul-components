@@ -1,10 +1,9 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import uuid from '../../utils/uuid/uuid';
-import NavbarPlugin, { MNavbar } from './navbar';
 import { MNavbarItem } from '../navbar-item/navbar-item';
+import NavbarPlugin, { MNavbar } from './navbar';
 
 describe('MNavbar', () => {
     let localVue: VueConstructor<Vue>;
@@ -16,7 +15,7 @@ describe('MNavbar', () => {
 
     it('should render correctly', () => {
 
-        const wrapper = mount({
+        const wrapper: Wrapper<Vue> = mount({
             template: `
         <m-navbar selected='item1'>
             <m-navbar-item value="item1"></m-navbar-item>
@@ -29,7 +28,7 @@ describe('MNavbar', () => {
     });
 
     it('should select the child value passed by the props', () => {
-        const wrapper = mount({
+        const wrapper: Wrapper<Vue> = mount({
             template: `
         <m-navbar selected='item2'>
             <m-navbar-item value="item1"></m-navbar-item>
@@ -40,7 +39,7 @@ describe('MNavbar', () => {
                 localVue: localVue
             });
 
-        const selectedItem = wrapper.findAll<MNavbarItem>({ name: 'MNavbarItem' });
+        const selectedItem: WrapperArray<MNavbarItem> = wrapper.findAll<MNavbarItem>({ name: 'MNavbarItem' });
         expect(selectedItem.at(0).vm.isSelected).toEqual(false);
         expect(selectedItem.at(1).vm.isSelected).toEqual(true);
         expect(selectedItem.at(2).vm.isSelected).toEqual(false);

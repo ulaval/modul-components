@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
@@ -18,7 +18,7 @@ describe('MCheckbox', () => {
     });
 
     it('should render correctly', () => {
-        const chkbox = mount(MCheckbox, {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue
         });
 
@@ -26,7 +26,7 @@ describe('MCheckbox', () => {
     });
 
     it('should render correctly when position prop is right', () => {
-        const chkbox = mount(MCheckbox, {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue,
             propsData: {
                 position: MCheckboxPosition.Right
@@ -37,7 +37,7 @@ describe('MCheckbox', () => {
     });
 
     it('should render correctly when value prop is true', () => {
-        const chkbox = mount(MCheckbox, {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue,
             propsData: {
                 value: true
@@ -48,7 +48,7 @@ describe('MCheckbox', () => {
     });
 
     it('should render correctly when disabled', () => {
-        const chkbox = mount(MCheckbox, {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue,
             propsData: {
                 disabled: true
@@ -59,7 +59,7 @@ describe('MCheckbox', () => {
     });
 
     it('should render correctly when a label is provided', () => {
-        const chkbox = mount(MCheckbox, {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue,
             slots: { default: 'label' }
         });
@@ -68,7 +68,7 @@ describe('MCheckbox', () => {
     });
 
     it('should emit click event when clicked', () => {
-        const chkbox = mount(MCheckbox, {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue
         });
 
@@ -78,7 +78,7 @@ describe('MCheckbox', () => {
     });
 
     it('should flow down InputState mixin props to m-validation-message', () => {
-        const valMsgProps = {
+        const valMsgProps: any = {
             disabled: false,
             error: false,
             errorMessage: 'error-message',
@@ -86,14 +86,14 @@ describe('MCheckbox', () => {
             helperMessage: 'helper-message'
         };
 
-        const chkbox = mount(MCheckbox, {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue,
             propsData: valMsgProps,
             computed: {
-                hasError(): void {
+                hasError(): boolean {
                     return false;
                 },
-                isDisabled(): void {
+                isDisabled(): boolean {
                     return false;
                 }
             }

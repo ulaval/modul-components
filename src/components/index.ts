@@ -23,10 +23,12 @@ import I18nPlugin from './i18n/i18n';
 import IconPlugin from './icon/icon';
 import IconButtonPlugin from './icon-button/icon-button';
 import IconFilePlugin from './icon-file/icon-file';
+import InplaceEditPlugin from './inplace-edit/inplace-edit';
 import InputStylePlugin from './input-style/input-style';
 import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import ListItemPlugin from './list-item/list-item';
+import LoggerPlugin from '../utils/logger/logger';
 import LoginPlugin from './login/login';
 import menuItemPlugin from './menu-item/menu-item';
 import menuPlugin from './menu/menu';
@@ -34,6 +36,7 @@ import MessagePlugin from './message/message';
 import ModalPlugin from './modal/modal';
 import NavbarItemPlugin from './navbar-item/navbar-item';
 import NavbarPlugin from './navbar/navbar';
+import PageNotFoundPlugin from './page-not-found/page-not-found';
 import PanelPlugin from './panel/panel';
 import PhoneNumberPlugin from './phone-number/phone-number';
 import PopperPlugin from './popper/popper';
@@ -59,8 +62,6 @@ import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
 import ValidationMessagePlugin from './validation-message/validation-message';
-import InplaceEditPlugin from './inplace-edit/inplace-edit';
-import LoggerPlugin from '../utils/logger/logger';
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -103,6 +104,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(NavbarItemPlugin);
         Vue.use(menuPlugin);
         Vue.use(menuItemPlugin);
+        Vue.use(PageNotFoundPlugin);
         Vue.use(PanelPlugin);
         Vue.use(PhoneNumberPlugin);
         Vue.use(PopperPlugin);

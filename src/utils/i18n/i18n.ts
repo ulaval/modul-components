@@ -113,10 +113,10 @@ export class Messages {
             throw new Error('The key is empty.');
         }
 
-        let val = this.resolveKey(this.curLang, key, nb, modifier);
+        let val: string = this.resolveKey(this.curLang, key, nb, modifier);
 
         if (htmlEncodeParams && params.length) {
-            for (let i = 0; i < params.length; ++i) {
+            for (let i: number = 0; i < params.length; ++i) {
                 params[i] = htmlEncode(params[i].toString());
             }
         }
@@ -223,7 +223,7 @@ export class Messages {
      * @param key The key to find
      */
     private findKey(lang: string, key: string): string | undefined {
-        const parts = key.split(':');
+        const parts: string[] = key.split(':');
 
         if (parts.length !== 2) {
             let error: string = `The key ${key} is invalid. The key needs to be in the format <bundle>:<id>`;
@@ -239,11 +239,11 @@ export class Messages {
             }
         }
 
-        const bundleName = parts[0];
-        const id = parts[1];
+        const bundleName: string = parts[0];
+        const id: string = parts[1];
 
-        const langMsgs = this.messages[lang];
-        const bundleMsgs = langMsgs && langMsgs[bundleName];
+        const langMsgs: BundleMessagesMap = this.messages[lang];
+        const bundleMsgs: MessageMap = langMsgs && langMsgs[bundleName];
         return bundleMsgs && bundleMsgs[id];
     }
 }
@@ -256,7 +256,7 @@ export class Messages {
 function formatRegexp(val: string, params: string[]): string {
     return val.replace(FORMAT_REGEX, match => {
         // TODO: should use the regex variable notation instead of parsing the regex match
-        let index = parseInt(match.substring(1, match.length - 1), 10);
+        let index: number = parseInt(match.substring(1, match.length - 1), 10);
 
         if (index >= params.length) {
             Vue.prototype.$log.warn(

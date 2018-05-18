@@ -96,9 +96,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$nextTick(() => {
             this.buildItemsMap();
 
-            this.observer = new MutationObserver(function(mutations) {
+            this.observer = new MutationObserver(() => {
                 this.buildItemsMap();
-            }.bind(this));
+            });
 
             if (this.$refs.items) {
                 // todo: mobile
@@ -207,7 +207,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private set selectedText(value: string) {
         this.dirty = true;
         this.internalFilter = value;
-        let parsedQuery = normalizeString(this.internalFilter).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
+        let parsedQuery: string = normalizeString(this.internalFilter).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
         this.internalFilterRegExp = new RegExp(parsedQuery, 'i');
     }
 
@@ -354,10 +354,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 let container: HTMLElement = this.$refs.items;
                 if (container) {
                     let focusedItem: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
-                    let top = focusedItem.$el.offsetTop;
-                    let bottom = focusedItem.$el.offsetTop + focusedItem.$el.offsetHeight;
-                    let viewRectTop = container.scrollTop;
-                    let viewRectBottom = viewRectTop + container.clientHeight;
+                    let top: number = focusedItem.$el.offsetTop;
+                    let bottom: number = focusedItem.$el.offsetTop + focusedItem.$el.offsetHeight;
+                    let viewRectTop: number = container.scrollTop;
+                    let viewRectBottom: number = viewRectTop + container.clientHeight;
 
                     if (top < viewRectTop) {
                         container.scrollTop = top;

@@ -1,0 +1,16 @@
+<div>
+    <h5>default</h5>
+    <div style="border: solid 1px black">
+        <m-error-message></m-error-message>
+    </div>
+
+    <hr/>
+
+    <h5>with #reference number</h5>
+    <m-error-message reference-number="123456489"></m-error-message>
+
+    <hr/>
+
+    <h5>with stack trace</h5>
+    <m-error-message reference-number="123456489" :error="e"></m-error-message>
+</div>
