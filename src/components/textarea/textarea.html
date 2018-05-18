@@ -13,12 +13,14 @@
                    :error="hasTextAreaError"
                    :valid="isTextAreaValid"
                    :label="label"
+                   :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
                    :icon-name="iconName"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
         <textarea ref="input"
+                  :id="id"
                   class="m-textarea__input"
                   :disabled="!active"
                   :placeholder="placeholder"
@@ -31,6 +33,7 @@
                   @keyup="onKeyup"
                   @keydown="onKeydown"
                   @paste="onPaste"
+                  :autocomplete="autocomplete"
                   v-model="model">
         </textarea>
         <div class="m-textarea__input-hidden"

@@ -4,6 +4,7 @@
                'm--has-error': calandarError,
                'm--is-valid': isValid }">
     <m-input-style :label="label"
+                   :label-for="id"
                    :disabled="isDisabled"
                    :waiting="isWaiting"
                    :focus="open"
@@ -32,6 +33,7 @@
                        icon-name="calendar"
                        :disabled="!active"
                        button-size="22px"
+                       :aria-controls="id"
                        @keydown.enter.prevent="open = !isDisabled">
             <m-i18n k="m-datepicker:open" v-if="!open"></m-i18n>
             <m-i18n k="m-datepicker:close" v-if="open"></m-i18n>
