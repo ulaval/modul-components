@@ -1,6 +1,8 @@
-import Vue from 'vue';
 import '../../utils/polyfills';
-import StepPlugin, { MStep, MStepState, MStepMode } from './step';
+
+import Vue from 'vue';
+
+import StepPlugin, { MStep, MStepMode, MStepState } from './step';
 
 const STATE_LOCKED_CSS: string = 'm--is-locked';
 const STATE_PROGRESS_CSS: string = 'm--is-in-progress';
@@ -116,8 +118,8 @@ describe('step', () => {
     });
 
     it('click event', () => {
-        let clickSpy = jasmine.createSpy('clickSpy');
-        let vm = new Vue({
+        let clickSpy: jasmine.Spy = jasmine.createSpy('clickSpy');
+        let vm: Vue = new Vue({
             template: `
                 <m-step @open="onClick($event)">Consequat ut proident est ullamco consequat ullamco.</m-step>
             `,
@@ -126,7 +128,7 @@ describe('step', () => {
             }
         }).$mount();
 
-        let header = vm.$el.querySelector('.m-step__header') as HTMLButtonElement;
+        let header: HTMLButtonElement = vm.$el.querySelector('.m-step__header') as HTMLButtonElement;
 
         if (header) {
             header.click();

@@ -9,7 +9,7 @@
             <m-i18n k="m-error-message:details"></m-i18n>
         </span>
         <p><strong><m-i18n k="m-error-message:browser"></m-i18n>: </strong>{{userAgent}}</p>
-        <p><strong><m-i18n k="m-error-message:reference-number"></m-i18n>: </strong>{{referenceNumber}}</p>
+        <p v-if="!!referenceNumber"><strong><m-i18n k="m-error-message:reference-number"></m-i18n>: </strong>{{referenceNumber}}</p>
         <p><m-i18n k="m-error-message:date" :params="dateInfo"></m-i18n></p>
         <pre v-if="error">{{error.stack}}</pre>
     </m-accordion>

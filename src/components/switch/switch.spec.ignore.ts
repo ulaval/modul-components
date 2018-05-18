@@ -1,5 +1,7 @@
-import Vue from 'vue';
 import '../../utils/polyfills';
+
+import Vue from 'vue';
+
 import SwitchPlugin, { MSwitch, MSwitchPosition } from './switch';
 
 const SWITCH_LEFT_CSS: string = 'm--is-switch-left';
@@ -62,7 +64,7 @@ describe('switch', () => {
     });
 
     it('v-model', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             data: {
                 model: false
             },
@@ -82,8 +84,8 @@ describe('switch', () => {
     });
 
     it('click event', () => {
-        let clickSpy = jasmine.createSpy('clickSpy');
-        let vm = new Vue({
+        let clickSpy: jasmine.Spy = jasmine.createSpy('clickSpy');
+        let vm: Vue = new Vue({
             template: `
             <div>
                 <m-switch ref="a" @click="onClick"></m-switch>

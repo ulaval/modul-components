@@ -1,5 +1,7 @@
 import '../polyfills';
-import Vue from 'vue';
+
+import Vue, { VueConstructor } from 'vue';
+
 import MediaQueriesPlugin from './media-queries';
 
 describe('Media Queries plugin', () => {
@@ -16,12 +18,12 @@ describe('Media Queries plugin', () => {
     it('registers $mq on vue prototype', () => {
         Vue.use(MediaQueriesPlugin);
 
-        let Ex = Vue.extend({
-            created: function() {
+        let Ex: VueConstructor<Vue> = Vue.extend({
+            created: () => {
                 expect((this as any).$mq).toBeDefined();
             }
         });
 
-        const ex = new Ex();
+        const ex: Vue = new Ex();
     });
 });

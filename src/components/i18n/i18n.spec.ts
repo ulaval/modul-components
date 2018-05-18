@@ -1,11 +1,11 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
+import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
+import I18nPlugin, { FormatMode, I18nPluginOptions } from '../../utils/i18n/i18n';
 import MI18nPlugin, { MI18n } from './i18n';
-import I18nPlugin, { I18nPluginOptions, FormatMode } from '../../utils/i18n/i18n';
-import { resetModulPlugins } from '../../../tests/helpers/component';
 
 describe('MI18n', () => {
     let localVue: VueConstructor<Vue>;
@@ -17,7 +17,7 @@ describe('MI18n', () => {
     });
 
     it('should render correctly', () => {
-        const i18n = mount(MI18n, {
+        const i18n: Wrapper<MI18n> = mount(MI18n, {
             localVue: localVue,
             propsData: {
                 k: 'm-i18n-spec:a'
@@ -28,7 +28,7 @@ describe('MI18n', () => {
     });
 
     it('should render correctly with params', () => {
-        const i18n = mount(MI18n, {
+        const i18n: Wrapper<MI18n> = mount(MI18n, {
             localVue: localVue,
             propsData: {
                 k: 'm-i18n-spec:with-params',
@@ -40,7 +40,7 @@ describe('MI18n', () => {
     });
 
     it('should render correctly in plural form', async () => {
-        const i18n = mount(MI18n, {
+        const i18n: Wrapper<MI18n> = mount(MI18n, {
             localVue: localVue,
             propsData: {
                 k: 'm-i18n-spec:plural-test',
@@ -55,7 +55,7 @@ describe('MI18n', () => {
     });
 
     it('should render correctly with modifier', async () => {
-        const i18n = mount(MI18n, {
+        const i18n: Wrapper<MI18n> = mount(MI18n, {
             localVue: localVue,
             propsData: {
                 k: 'm-i18n-spec:modifier-test',
@@ -69,7 +69,7 @@ describe('MI18n', () => {
     });
 
     it('should render correctly with html encoding', () => {
-        const i18n = mount(MI18n, {
+        const i18n: Wrapper<MI18n> = mount(MI18n, {
             localVue: localVue,
             propsData: {
                 k: 'm-i18n-spec:html-encode',
@@ -84,7 +84,7 @@ describe('MI18n', () => {
     it('should warn if key not defined', () => {
         jest.spyOn(localVue.prototype.$log, 'warn');
 
-        const i18n = mount(MI18n, {
+        const i18n: Wrapper<MI18n> = mount(MI18n, {
             localVue: localVue,
             propsData: {
                 k: 'undefined:key'
@@ -106,7 +106,7 @@ describe('MI18n', () => {
             addMessages(localVue, ['components/i18n/i18n.spec.lang.fr.json']);
         });
         it('should render correctly with params as object', async () => {
-            const i18n = mount(MI18n, {
+            const i18n: Wrapper<MI18n> = mount(MI18n, {
                 localVue: localVue,
                 propsData: {
                     k: 'm-i18n-spec:decompte_athletes_olympiques_pays',

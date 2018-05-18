@@ -25,7 +25,8 @@
         "tslint": "tslint -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
         "tslint-ci": "tslint  -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -t junit -o reports/junit/js-lint-results.xml 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
         "stylelint": "stylelint \"src/**/*.css\" \"src/**/*.scss\" --config conf/stylelint.json",
-        "prepack": "npm run clean && npm run build && npm run buildlib"
+        "prepack": "npm run clean && npm run build && npm run buildlib",
+        "component": "node ./tests/meta/component-generator"
     },
     "jest": {
         "roots": [

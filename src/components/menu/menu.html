@@ -7,11 +7,23 @@
          :close-on-backdrop="true"
          @open="onOpen"
          @close="onClose">
-    <m-icon-button slot="trigger" class="m-menu__button" icon-name="options" :disabled="disabled" :button-size="size" @click="onClick">
-        <m-i18n k="m-menu:open" v-if="!open"></m-i18n>
-        <m-i18n k="m-menu:close" v-if="open"></m-i18n>
+    <m-icon-button :id="id"
+                   class="m-menu__button"
+                   aria-haspopup="true"
+                   :aria-controls="ariaControls"
+                   :aria-expanded="open"
+                   slot="trigger"
+                   :skin="skin"
+                   :title="propTitle"
+                   icon-name="options"
+                   :disabled="disabled"
+                   :button-size="size"
+                   @click="onClick">
     </m-icon-button>
-    <ul class="m-menu__wrap" ref="menu">
+    <ul :id="ariaControls"
+        class="m-menu__wrap"
+        :aria-labelledby="id"
+        ref="menu">
         <slot></slot>
     </ul>
 </m-popup>

@@ -44,19 +44,19 @@ export class MSteppersItem extends ModulVue {
         this.$emit('update:value', this.state);
     }
 
-    private get isCompleted() {
+    private get isCompleted(): boolean {
         return this.state === MSteppersItemState.Completed;
     }
 
-    private get isInProgress() {
+    private get isInProgress(): boolean {
         return this.state === MSteppersItemState.InProgress;
     }
 
-    private get isDisabled() {
+    private get isDisabled(): boolean {
         return this.state === MSteppersItemState.Disabled;
     }
 
-    private get isTabIndex() {
+    private get isTabIndex(): 0 | -1 {
         return this.state === MSteppersItemState.Completed ? 0 : -1;
     }
 

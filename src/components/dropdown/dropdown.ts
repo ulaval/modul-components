@@ -1,7 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
+import { KeyCode } from '../../utils/keycode/keycode';
+import uuid from '../../utils/uuid/uuid';
 import { Model, Prop, Watch } from 'vue-property-decorator';
-
 import PopupPluginDirective from '../../directives/popup/popup';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
@@ -68,6 +69,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private internalOpen: boolean = false;
     private dirty: boolean = false;
+    private id: string = `mDropdown-${uuid.generate()}`;
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
@@ -94,9 +96,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.$nextTick(() => {
             this.buildItemsMap();
 
-            this.observer = new MutationObserver(function(mutations) {
+            this.observer = new MutationObserver(() => {
                 this.buildItemsMap();
-            }.bind(this));
+            });
 
             if (this.$refs.items) {
                 // todo: mobile
@@ -205,7 +207,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private set selectedText(value: string) {
         this.dirty = true;
         this.internalFilter = value;
-        let parsedQuery = normalizeString(this.internalFilter).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
+        let parsedQuery: string = normalizeString(this.internalFilter).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
         this.internalFilterRegExp = new RegExp(parsedQuery, 'i');
     }
 
@@ -257,6 +259,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private get noItemsLabel(): string {
         return (!this.internalItems || this.internalItems.length === 0) ? this.propTextNoData : this.propTextNoMatch;
+    }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
     }
 
     public get inactive(): boolean {
@@ -348,10 +354,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 let container: HTMLElement = this.$refs.items;
                 if (container) {
                     let focusedItem: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
-                    let top = focusedItem.$el.offsetTop;
-                    let bottom = focusedItem.$el.offsetTop + focusedItem.$el.offsetHeight;
-                    let viewRectTop = container.scrollTop;
-                    let viewRectBottom = viewRectTop + container.clientHeight;
+                    let top: number = focusedItem.$el.offsetTop;
+                    let bottom: number = focusedItem.$el.offsetTop + focusedItem.$el.offsetHeight;
+                    let viewRectTop: number = container.scrollTop;
+                    let viewRectBottom: number = viewRectTop + container.clientHeight;
 
                     if (top < viewRectTop) {
                         container.scrollTop = top;

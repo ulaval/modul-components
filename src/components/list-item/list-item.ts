@@ -33,11 +33,11 @@ export class MListItem extends Vue {
         this.$emit('click', event);
     }
 
-    private get hasIcon() {
+    private get hasIcon(): boolean {
         return this.iconName !== '' && this.iconName !== undefined;
     }
 
-    private get isWaiting() {
+    private get isWaiting(): boolean {
         return this.waiting && !this.disabled;
     }
 

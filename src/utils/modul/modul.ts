@@ -130,7 +130,7 @@ export class Modul {
             this.windowStack.pop();
         }
 
-        let stackElement = this.windowStackMap[stackId];
+        let stackElement: StackElement = this.windowStackMap[stackId];
 
         if (stackElement.backdropIndex || stackElement.scrollId) {
             this.removeBackdrop(!stackElement.backdropIsFast);
@@ -221,7 +221,7 @@ export class Modul {
                 this.backdropElement.style.transitionDuration = duration;
 
                 this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_NOT_VISIBLE;
-                let b = this.backdropElement;
+                let b: HTMLElement = this.backdropElement;
                 this.backdropElement = undefined;
                 this.scrollActive = true;
 
@@ -288,7 +288,7 @@ export class Modul {
 
 const ModulPlugin: PluginObject<any> = {
     install(v, options): void {
-        let modul = new Modul();
+        let modul: Modul = new Modul();
         (v.prototype as any).$modul = modul;
     }
 };
