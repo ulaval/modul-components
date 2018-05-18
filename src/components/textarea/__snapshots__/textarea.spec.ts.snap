@@ -5,7 +5,6 @@ exports[`MTextArea max-length should render correctly state when text length is 
     <div class="m-input-style m--has-value m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-
                 <textarea id="mTextarea-uuid" rows="1" class="m-textarea__input">1</textarea>
                 <div aria-hidden="true" class="m-textarea__input-hidden">1
                 </div>
