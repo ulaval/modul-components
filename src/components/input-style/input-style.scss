@@ -319,6 +319,16 @@ $m-input-style--padding: 4px !default;
         &[readonly=readonly] {
             cursor: pointer;
         }
+
+        &::-ms-clear,
+        &::-ms-reveal {
+            display: none;
+        }
+
+        &:-webkit-autofill {
+            background: rgba($m-color--white, 0);
+            -webkit-box-shadow: 0 0 0 1000px $m-color--white inset !important;
+        }
     }
 
     textarea {

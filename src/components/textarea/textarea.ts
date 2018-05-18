@@ -11,7 +11,7 @@ import { TEXTAREA_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textarea.html?style=./textarea.scss';
-
+import uuid from '../../utils/uuid/uuid';
 @WithRender
 @Component({
     mixins: [
@@ -28,6 +28,7 @@ export class MTextarea extends ModulVue implements InputManagementData {
 
     readonly internalValue: string;
     private internalTextareaHeight: string = '0';
+    private id: string = `mTextarea-${uuid.generate()}`;
 
     protected mounted(): void {
         this.setInputHiddenStyle();
@@ -41,6 +42,7 @@ export class MTextarea extends ModulVue implements InputManagementData {
         let inputHidden: HTMLElement = this.$refs.inputHidden as HTMLElement;
         let computedElStyle: CSSStyleDeclaration = window.getComputedStyle(this.$refs.input as HTMLElement);
         inputHidden.style.fontSize = computedElStyle.fontSize;
+        inputHidden.style.textTransform = computedElStyle.textTransform;
         inputHidden.style.fontWeight = computedElStyle.fontWeight;
         inputHidden.style.lineHeight = computedElStyle.lineHeight;
         inputHidden.style.padding = computedElStyle.padding;
