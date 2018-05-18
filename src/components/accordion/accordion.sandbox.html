@@ -1,23 +1,42 @@
 <div>
+
+    <h2>Toggles</h2>
+    <p>
+        Clicks from those children elements shouldn't toggle the accordion
+    </p>
+    <br>
     <m-accordion icon-position="right">
         <div slot="header">
-            <span>Header title</span>
             <m-menu>
                 <m-menu-item>Menu 1</m-menu-item>
                 <m-menu-item>Menu 2</m-menu-item>
                 <m-menu-item>Menu 3</m-menu-item>
             </m-menu>
-            <a href="poulet">Test du href</a>
-            <span @click="test">Test du @click</span>
+            <a href="poulet">link</a>
+            <button>
+                button
+            </button>
             <a href="patate">
-                <span>Test du parent</span>
-            </a>
+                    <span>element inside link</span>
+                </a>
             <button>
-                <span>Test d'un span dans un button</span>
+                <span>element inside button</span>
             </button>
-            <button>
-                Test d'un button
-            </button>
+            <input type="text" placeholder="input">
+            <textarea placeholder="textarea" name="" id="" cols="30" rows="1"></textarea>
+        </div>
+        <div>
+            Accordion content
+        </div>
+    </m-accordion>
+    <br>
+    <p>
+        Generic html elements with custom vuejs events aren't trapped and still should be use inside a @click.stop wrapper.
+    </p>
+    <br>
+    <m-accordion icon-position="right">
+        <div slot="header">
+            <div @click="log">generic element with custom event</div>
         </div>
         <div>
             Accordion content

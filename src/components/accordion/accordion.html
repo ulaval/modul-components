@@ -6,8 +6,8 @@
          role="tab"
          :aria-expanded="propOpen"
          :aria-controls="propId + '-controls'"
-         @keyup.self.enter="toggleAccordion($event)"
-         @click.prevent="toggleAccordion($event)"
+         @keyup.self.enter="toggleAccordion"
+         @click.prevent="toggleAccordion"
          ref="accordionHeader">
         <div class="m-accordion__header__content">
             <slot name="header"></slot>

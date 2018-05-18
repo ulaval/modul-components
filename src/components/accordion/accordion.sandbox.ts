@@ -8,7 +8,7 @@ import { ModulVue } from '../../utils/vue/vue';
 @Component
 export class MAccordionSandbox extends ModulVue {
 
-    public test(): void {
+    public log(): void {
         this.$log.log('click');
     }
 
