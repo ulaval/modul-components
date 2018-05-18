@@ -7,6 +7,7 @@ import { ACCORDION_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import AccordionTransitionPlugin from './accordion-transition';
 import WithRender from './accordion.html?style=./accordion.scss';
+import { ModulVue } from '../../utils/vue/vue';
 
 export enum MAccordionSkin {
     Default = 'default',
@@ -46,7 +47,7 @@ function isAccordionGroup(parent: any): parent is AccordionGroupGateway {
 
 @WithRender
 @Component
-export class MAccordion extends Vue implements AccordionGateway {
+export class MAccordion extends ModulVue implements AccordionGateway {
     @Prop()
     public id?: string;
 
@@ -149,20 +150,20 @@ export class MAccordion extends Vue implements AccordionGateway {
         return this.propSkin === MAccordionSkin.Light ? true : false;
     }
 
-    private toggleAccordion(): void {
-        if (!this.propDisabled) {
+    private toggleAccordion(event: Event): void {
+        let target: Element | null;
+        target = (event.target as HTMLElement).closest('[href], [onclick], button, input, textarea, radio');
+
+        if (!this.propDisabled && !target) {
             const initialState: boolean = this.internalPropOpen;
 
-            if (
-                !this.internalPropOpen &&
+            if (!this.internalPropOpen &&
                 isAccordionGroup(this.$parent) &&
-                this.$parent.concurrent
-            ) {
+                this.$parent.concurrent) {
                 this.$parent.closeAllAccordions();
             }
 
             this.$refs.accordionHeader.blur();
-
             this.propOpen = !initialState;
             this.$emit('click', this.internalPropOpen);
         }
