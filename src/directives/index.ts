@@ -2,7 +2,6 @@ import Vue, { PluginObject } from 'vue';
 
 import LoggerPlugin from '../utils/logger/logger';
 import BadgePlugin from './badge/badge';
-import CharacterCountPlugin from './character-count/character-count';
 import DraggablePlugin from './draggable/draggable';
 import DraggableAllowScrollPlugin from './draggable/draggable-allow-scroll';
 import DroppablePlugin from './droppable/droppable';
@@ -24,7 +23,6 @@ const DirectivesPlugin: PluginObject<any> = {
         }
 
         Vue.use(BadgePlugin);
-        Vue.use(CharacterCountPlugin);
         Vue.use(DraggablePlugin);
         Vue.use(DraggableAllowScrollPlugin);
         Vue.use(DroppablePlugin);
