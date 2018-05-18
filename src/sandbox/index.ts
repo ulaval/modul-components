@@ -5,6 +5,7 @@ import IconFileSandboxPlugin from '../components/icon-file/icon-file.sandbox';
 import IconSandboxPlugin from '../components/icon/icon.sandbox';
 import PageNotFoundSandboxPlugin from '../components/page-not-found/page-not-found.sandbox';
 import RadioSandboxPlugin from '../components/radio/radio.sandbox';
+import AccordionSandboxPlugin from '../components/accordion/accordion.sandbox';
 import TextfieldSandboxPlugin from '../components/textfield/textfield.sandbox';
 
 const SandboxesPlugin: PluginObject<any> = {
@@ -14,6 +15,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(IconSandboxPlugin);
         Vue.use(PageNotFoundSandboxPlugin);
         Vue.use(RadioSandboxPlugin);
+        Vue.use(AccordionSandboxPlugin);
         Vue.use(TextfieldSandboxPlugin);
     }
 };
