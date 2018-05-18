@@ -1,8 +1,8 @@
 <div class="m-textfield"
      :class="[{ 'm--is-disabled' : isDisabled,
                 'm--is-waiting' : isWaiting,
-                'm--has-error' : hasInputError,
-                'm--is-valid' : isInputValid,
+                'm--has-error' : hasTextfieldError,
+                'm--is-valid' : isTextfieldValid,
                 'm--has-icon' : hasIcon,
                 'm--has-label': hasLabel },
                 'm--is-type-' + inputType ]"
@@ -10,8 +10,8 @@
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
-                   :error="hasInputError"
-                   :valid="isInputValid"
+                   :error="hasTextfieldError"
+                   :valid="isTextfieldValid"
                    :label="label"
                    :focus="isFocus"
                    :empty="isEmpty"
@@ -46,10 +46,11 @@
             class="m-textfield__validation__message"
             :disabled="isDisabled"
             :waiting="isWaiting"
-            :error="hasInputError"
+            :error="hasTextfieldError"
             :error-message="errorMessage"
+            :valid="isTextfieldValid"
             :valid-message="validMessage"
             :helper-message="helperMessage"></m-validation-message>
-        <div class="m-textfield__validation__maxlenght" v-if="hasMaxLength" aria-hidden="true">{{ valueLength }}<strong>/{{ maxLength }}</strong></div>
+        <m-character-count :valueLength="valueLength" :maxLength="maxLength" :threshold="threshold" :transition="hasCounterTransition"></m-character-count>
     </div>
 </div>

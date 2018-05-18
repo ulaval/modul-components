@@ -8,6 +8,7 @@ const components: string[] = [
     Components.BUTTON_GROUP_NAME,
     Components.CAROUSEL_NAME,
     Components.CAROUSEL_ITEM_NAME,
+    Components.CHARACTER_COUNT_NAME,
     Components.CHECKBOX_NAME,
     Components.DATEFIELDS_NAME,
     Components.DATEPICKER_NAME,

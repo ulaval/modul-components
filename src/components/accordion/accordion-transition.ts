@@ -11,7 +11,7 @@ export const MAccordionTransition: VueConstructor<Vue> = Vue.extend({
     render(createElement, context): VNode {
         let data: VNodeData = {
             props: {
-                name: 'accordion'
+                name: 'm-accordion'
             },
             on: {
                 enter(el: HTMLElement): void {

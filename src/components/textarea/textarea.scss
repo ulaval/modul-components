@@ -6,18 +6,14 @@
     flex-direction: column;
 
     &.m--has-error {
-        .m-textarea {
-            &__validation__maxlenght {
-                color: $m-color--error;
-            }
+        .m-textarea__validation {
+            color: $m-color--error;
         }
     }
 
     &.m--is-valid {
-        .m-textarea {
-            &__validation__maxlenght {
-                color: $m-color--success;
-            }
+        .m-textarea__validation {
+            color: $m-color--success;
         }
     }
 
@@ -27,13 +23,6 @@
 
         &__message {
             flex: 1 1 auto;
-        }
-
-        &__maxlenght {
-            transition: color $m-transition-duration ease;
-            margin-top: 2px; // Magic number
-            font-size: $m-font-size--xs;
-            padding-left: $m-padding--xs;
         }
     }
 

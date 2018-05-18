@@ -29,6 +29,8 @@ export class MTextarea extends ModulVue implements InputManagementData {
     public maxLength?: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;
+    @Prop({ default: 0 })
+    public threshold: number;
 
     readonly internalValue: string;
 
@@ -39,22 +41,16 @@ export class MTextarea extends ModulVue implements InputManagementData {
         return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? this.maxLength : undefined ;
     }
 
-    private get hasMaxLength(): boolean {
-        return this.maxLength ? this.maxLength > 0 : false;
+    private get hasTextareaError(): boolean {
+        return this.as<InputState>().hasError;
     }
 
-    private get hasInputError(): boolean {
-        return !this.isLengthValid || this.as<InputState>().hasError;
+    private get isTextareaValid(): boolean {
+        return this.as<InputState>().isValid;
     }
 
-    private get isInputValid(): boolean {
-        return this.isLengthValid && this.as<InputState>().isValid;
-    }
-
-    private get isLengthValid(): boolean {
-        return this.maxLength
-            ? this.internalValue.length <= this.maxLength
-            : true;
+    private get hasCounterTransition(): boolean {
+        return !this.as<InputState>().hasErrorMessage;
     }
 }
 
