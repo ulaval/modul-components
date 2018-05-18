@@ -1,15 +1,15 @@
-<div>
-    <template v-if="!transition">
+<!-- <div> -->
+    <!-- <template v-if="!transition">
         <div class="m-character-count" aria-hidden="true">{{ valueLength }}<strong>/{{ maxLength }}</strong></div>
     </template>
-    <template v-else>
-        <m-accordion-transition>
-            <div>
-                <div class="m-character-count" aria-hidden="true">{{ valueLength }}<strong>/{{ maxLength }}</strong></div>
-            </div>
-        </m-accordion-transition>
-    </template>
-</div>
+    <template v-else> -->
+<m-accordion-transition :transition="transition">
+    <div v-if="hasCounter">
+        <div class="m-character-count" aria-hidden="true">{{ valueLength }}<strong>/{{ maxLength }}</strong></div>
+    </div>
+</m-accordion-transition>
+    <!-- </template> -->
+<!-- </div> -->
 
 
 
