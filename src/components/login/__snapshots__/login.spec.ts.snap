@@ -4,10 +4,10 @@ exports[`MLogin when login should render correctly 1`] = `
 <form>
     <div class="m-textfield m--has-label m--is-type-text" style="width:100%;max-width:288px;">
         <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
-            <label for="mTextfield-7619e184-069d-4402-81ca-34f9a8ea6dd9" class="m-input-style__label"><span>Username</span></label>
+            <label for="mTextfield-uuid" class="m-input-style__label"><span>Username</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
-                    <input id="mTextfield-7619e184-069d-4402-81ca-34f9a8ea6dd9" value="" class="m-textfield__input"> </div>
+                    <input id="mTextfield-uuid" value="" class="m-textfield__input"> </div>
                 <div class="m-input-style__body__right"></div>
             </div>
         </div>
@@ -15,10 +15,10 @@ exports[`MLogin when login should render correctly 1`] = `
     <br>
     <div class="m-textfield m--has-label m--is-type-password" style="width:100%;max-width:288px;">
         <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
-            <label for="mTextfield-27d05137-9b7c-4daa-958c-68efe56ebb85" class="m-input-style__label"><span>Password</span></label>
+            <label for="mTextfield-uuid" class="m-input-style__label"><span>Password</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
-                    <input id="mTextfield-27d05137-9b7c-4daa-958c-68efe56ebb85" value="" class="m-textfield__input"> </div>
+                    <input id="mTextfield-uuid" value="" class="m-textfield__input"> </div>
                 <div class="m-input-style__body__right"></div>
             </div>
         </div>
