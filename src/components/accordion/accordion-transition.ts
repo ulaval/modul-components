@@ -36,6 +36,9 @@ export const MAccordionTransition: VueConstructor<Vue> = Vue.extend({
                 },
                 beforeLeave(el: HTMLElement): void {
                     el.style.height = el.scrollHeight + 'px';
+                    if (props.transition === false && el.classList.contains(CLASS_HAS_TRANSITION)) {
+                        el.classList.remove(CLASS_HAS_TRANSITION);
+                    }
                 },
                 afterLeave(el: HTMLElement): void {
                     el.style.removeProperty('height');
