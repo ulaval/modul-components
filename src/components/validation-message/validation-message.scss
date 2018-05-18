@@ -1,11 +1,23 @@
 @import 'abstracts/variables';
+@import '../accordion/accordion-transition';
+
 $m-validation-message--color-error: $m-color--error !default;
 $m-validation-message--color-success: $m-color--success !default;
 $m-validation-message--color-helper: $m-color--text-light !default;
 $m-validation-message--margin: $m-padding--xs !default;
 
 .m-validation-message {
+    &__wrap {
+        &.m-accordion-enter,
+        &.m-accordion-leave-to {
+            p {
+                opacity: 0;
+            }
+        }
+    }
+
     p {
+        transition: opacity $m-transition-duration ease;
         margin: 0;
         font-size: $m-font-size--s;
     }

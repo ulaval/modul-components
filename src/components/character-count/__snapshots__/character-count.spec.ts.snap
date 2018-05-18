@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MCharacterCount should render correctly collapsed 1`] = `<m-accordion-transition transition="true"></m-accordion-transition>`;
