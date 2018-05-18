@@ -13,12 +13,14 @@
                    :error="hasError"
                    :valid="isValid"
                    :label="label"
+                   :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
                    :required-marker="requiredMarker"
                    :icon-name="iconName"
                    :tag-style="tagStyle">
         <input ref="input"
+               :id="id"
                class="m-textfield__input"
                :disabled="!active"
                :placeholder="placeholder"
@@ -29,16 +31,19 @@
                @keydown="onKeydown"
                @change="onChange"
                @paste="onPaste"
+               :autocomplete="autocomplete"
                v-model="model">
-        <div slot="right-content"
-             class="m-textfield__icon-password"
-             :class="{ 'm--is-transparent': !hasValue }"
-             v-if="propPasswordIcon">
-            <m-icon-button :icon-name="iconNamePassword"
-                           button-size="22px"
-                           :title="iconDescriptionPassword"
-                           @click="togglePasswordVisibility"></m-icon-button>
-        </div>
+        <template slot="right-content">
+            <transition name="m--is">
+                <m-icon-button class="m-textfield__icon-password"
+                               button-size="22px"
+                               :aria-controls="id"
+                               :title="iconDescriptionPassword"
+                               @click="togglePasswordVisibility"
+                               :icon-name="iconNamePassword"
+                               v-if="propPasswordIcon && hasValue"></m-icon-button>
+            </transition>
+        </template>
     </m-input-style>
     <m-validation-message
         :disabled="isDisabled"
