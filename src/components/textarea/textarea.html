@@ -18,8 +18,7 @@
                    :icon-name="iconName"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
-        <textarea v-m-textarea-auto-height
-                  ref="input"
+        <textarea ref="input"
                   class="m-textarea__input"
                   :disabled="!active"
                   :placeholder="placeholder"
@@ -28,11 +27,16 @@
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
+                  @keypress.enter.prevent
                   @keyup="onKeyup"
                   @keydown="onKeydown"
                   @paste="onPaste"
                   v-model="model">
         </textarea>
+        <div class="m-textarea__input-hidden"
+             ref="inputHidden"
+             aria-hidden="true">{{ valueLength > 0 ? model : '&nbsp;'}}
+        </div>
     </m-input-style>
     <div class="m-textarea__validation">
         <m-validation-message
