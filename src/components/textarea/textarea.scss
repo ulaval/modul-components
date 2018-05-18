@@ -42,6 +42,20 @@
     }
 
     &__input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
         width: 100%;
+        outline: none;
+        resize: none;
+        overflow: hidden;
+
+        &-hidden {
+            opacity: 0;
+            word-wrap: break-word;
+        }
     }
 }
