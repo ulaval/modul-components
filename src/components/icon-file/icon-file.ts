@@ -29,10 +29,7 @@ const EXT_ODG: string = 'odg';
 const EXT_ODS: string = 'ods';
 const EXT_ODF: string = 'odf';
 const EXT_ODB: string = 'odb';
-const EXT_SPSS: string = 'spss,sav,spo';
 const EXT_DWG: string = 'dwg,dao,cao,dxf,dwf';
-const EXT_ENL: string = 'enl,enlx,lib';
-const EXT_SAS: string = 'sas';
 
 // EXTENSIONS GROUPS
 const GROUP_IMAGE: string = 'm-svg__file-image';
@@ -57,10 +54,7 @@ const GROUP_ODG: string = 'm-svg__file-odg';
 const GROUP_ODS: string = 'm-svg__file-ods';
 const GROUP_ODF: string = 'm-svg__file-odf';
 const GROUP_ODB: string = 'm-svg__file-odb';
-const GROUP_SPSS: string = 'm-svg__file-spss';
 const GROUP_DWG: string = 'm-svg__file-dwg';
-const GROUP_ENL: string = 'm-svg__file-enl';
-const GROUP_SAS: string = 'm-svg__file-sas';
 const GROUP_OTHER: string = 'm-svg__file-other';
 
 type FileGroup = {
@@ -93,10 +87,10 @@ export class MIconFile extends Vue {
         this.mapExtensionsGroup(EXT_XLS, GROUP_XLS);
         this.mapExtensionsGroup(EXT_ACCDB, GROUP_ACCDB);
         this.mapExtensionsGroup(EXT_PDF, GROUP_PDF);
-        // this.mapExtensionsGroup(EXT_RM, GROUP_RM);
-        // this.mapExtensionsGroup(EXT_MOV, GROUP_MOV);
-        // this.mapExtensionsGroup(EXT_WMA, GROUP_WMA);
-        // this.mapExtensionsGroup(EXT_SWF, GROUP_SWF);
+        this.mapExtensionsGroup(EXT_RM, GROUP_RM);
+        this.mapExtensionsGroup(EXT_MOV, GROUP_MOV);
+        this.mapExtensionsGroup(EXT_WMA, GROUP_WMA);
+        this.mapExtensionsGroup(EXT_SWF, GROUP_SWF);
         this.mapExtensionsGroup(EXT_VIDEO, GROUP_VIDEO);
         this.mapExtensionsGroup(EXT_MUSIC, GROUP_MUSIC);
         this.mapExtensionsGroup(EXT_ARCHIVE, GROUP_ARCHIVE);
@@ -107,10 +101,7 @@ export class MIconFile extends Vue {
         this.mapExtensionsGroup(EXT_ODS, GROUP_ODS);
         this.mapExtensionsGroup(EXT_ODF, GROUP_ODF);
         this.mapExtensionsGroup(EXT_ODB, GROUP_ODB);
-        // this.mapExtensionsGroup(EXT_SPSS, GROUP_SPSS);
         this.mapExtensionsGroup(EXT_DWG, GROUP_DWG);
-        // this.mapExtensionsGroup(EXT_ENL, GROUP_ENL);
-        // this.mapExtensionsGroup(EXT_SAS, GROUP_SAS);
     }
 
     private mapExtensionsGroup(extensions, category: string): void {
