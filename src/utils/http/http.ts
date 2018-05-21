@@ -13,6 +13,8 @@ export interface HttpPluginOptions {
     timeout?: number;
 }
 
+export const NO_TIMEOUT: number = 0;
+
 export class HttpService implements RestAdapter {
     public instance: AxiosInstance;
 
@@ -20,6 +22,13 @@ export class HttpService implements RestAdapter {
         this.instance = axios.create();
 
         if (this.options) {
+            if (!this.options.timeout) {
+                this.instance.defaults.timeout = 30000; // On met 30 secondes par défaut
+            } else if (this.options.timeout === NO_TIMEOUT) {
+                this.instance.defaults.timeout = undefined; // On met un timeout infini
+            } else {
+                this.instance.defaults.timeout = this.options.timeout; // On met le timeout spécifié par l'utilisateur
+            }
             let opt: HttpPluginOptions = this.options;
             this.instance.interceptors.request.use(config => {
                 opt.protectedUrls.every(url => {
