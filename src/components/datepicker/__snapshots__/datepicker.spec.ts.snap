@@ -7,7 +7,7 @@ exports[`MDatepicker should render correctly 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="yyyy/mm/dd" value=""> </div>
             <div class="m-input-style__body__right">
-                <m-icon-button icon-name="calendar" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+                <m-icon-button icon-name="calendar" button-size="22px" aria-controls="mDatepicker-uuid"><span class="m-i18n">Open calendar</span> </m-icon-button>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@ exports[`MDatepicker should render correctly min/max time 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="yyyy/mm/dd" value=""> </div>
             <div class="m-input-style__body__right">
-                <m-icon-button icon-name="calendar" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+                <m-icon-button icon-name="calendar" button-size="22px" aria-controls="mDatepicker-uuid"><span class="m-i18n">Open calendar</span> </m-icon-button>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@ exports[`MDatepicker should render correctly when disabled is set 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" disabled="disabled" placeholder="yyyy/mm/dd" value=""> </div>
             <div class="m-input-style__body__right">
-                <m-icon-button icon-name="calendar" disabled="disabled" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+                <m-icon-button icon-name="calendar" disabled="disabled" button-size="22px" aria-controls="mDatepicker-uuid"><span class="m-i18n">Open calendar</span> </m-icon-button>
             </div>
             <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-input-style__disabled-icon">
                 <use xlink:href="#default" aria-hidden="true"></use>
@@ -67,7 +67,7 @@ exports[`MDatepicker should render correctly when error is set 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="yyyy/mm/dd" value=""> </div>
             <div class="m-input-style__body__right">
-                <m-icon-button icon-name="calendar" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+                <m-icon-button icon-name="calendar" button-size="22px" aria-controls="mDatepicker-uuid"><span class="m-i18n">Open calendar</span> </m-icon-button>
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@ exports[`MDatepicker should render correctly when valid is set 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="yyyy/mm/dd" value=""> </div>
             <div class="m-input-style__body__right">
-                <m-icon-button icon-name="calendar" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+                <m-icon-button icon-name="calendar" button-size="22px" aria-controls="mDatepicker-uuid"><span class="m-i18n">Open calendar</span> </m-icon-button>
             </div>
         </div>
     </div>
@@ -119,7 +119,7 @@ exports[`MDatepicker should render correctly when waiting is set 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" disabled="disabled" placeholder="yyyy/mm/dd" value=""> </div>
             <div class="m-input-style__body__right">
-                <m-icon-button icon-name="calendar" disabled="disabled" button-size="22px"><span class="m-i18n">Open calendar</span> </m-icon-button>
+                <m-icon-button icon-name="calendar" disabled="disabled" button-size="22px" aria-controls="mDatepicker-uuid"><span class="m-i18n">Open calendar</span> </m-icon-button>
             </div>
             <div class="m-spinner m-input-style__spinner">
                 <div></div>

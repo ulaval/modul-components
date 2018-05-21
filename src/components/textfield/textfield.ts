@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -12,6 +11,7 @@ import { TEXTFIELD_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
+import uuid from '../../utils/uuid/uuid';
 
 export enum MTextfieldType {
     Text = 'text',
@@ -52,6 +52,7 @@ export class MTextfield extends ModulVue {
 
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
+    private id: string = `mTextfield-${uuid.generate()}`;
 
     protected created(): void {
         if (!this.$i18n) {

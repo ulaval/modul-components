@@ -3,7 +3,6 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { InputStateMixin } from '../../mixins/input-state/input-state';
-import { KeyCode } from '../../utils/keycode/keycode';
 
 @Component
 export class InputLabel extends ModulVue {

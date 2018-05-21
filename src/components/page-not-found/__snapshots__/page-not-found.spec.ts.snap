@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MPageNotFound should render correctly collapsed 1`] = `
+<div>
+    <m-message state="warning">
+        <m-i18n k="m-page-not-found:message"></m-i18n>
+    </m-message>
+    <p>
+        <m-i18n k="m-page-not-found:directions"></m-i18n>
+    </p>
+    <p></p>
+    <m-link mode="link">
+        <m-i18n k="m-page-not-found:back-to-portal"></m-i18n>
+    </m-link>
+</div>
+`;
