@@ -14,7 +14,6 @@ exports[`MTextArea max-length should render correctly state when text length is 
         <div class="m-validation-message m-textarea__validation__message">
             <m-accordion-transition transition="true"></m-accordion-transition>
         </div>
-        <m-character-count valueLength="1" maxLength="8" threshold="0" transition="true"></m-character-count>
     </div>
 </div>
 `;
@@ -33,7 +32,6 @@ exports[`MTextArea max-length should render invalid state when text length is gr
         <div class="m-validation-message m-textarea__validation__message">
             <m-accordion-transition transition="true"></m-accordion-transition>
         </div>
-        <m-character-count valueLength="9" maxLength="8" threshold="0" transition="true"></m-character-count>
     </div>
 </div>
 `;
@@ -52,7 +50,6 @@ exports[`MTextArea should render correctly 1`] = `
         <div class="m-validation-message m-textarea__validation__message">
             <m-accordion-transition transition="true"></m-accordion-transition>
         </div>
-        <m-character-count valueLength="0" threshold="0" transition="true"></m-character-count>
     </div>
 </div>
 `;

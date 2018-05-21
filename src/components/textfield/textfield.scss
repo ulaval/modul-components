@@ -6,18 +6,14 @@
     flex-direction: column;
 
     &.m--has-error {
-        .m-textfield {
-            &__validation__maxlenght {
-                color: $m-color--error;
-            }
+        .m-textfield__validation {
+            color: $m-color--error;
         }
     }
 
     &.m--is-valid {
-        .m-textfield {
-            &__validation__maxlenght {
-                color: $m-color--success;
-            }
+        .m-textfield__validation {
+            color: $m-color--success;
         }
     }
 

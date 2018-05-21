@@ -48,6 +48,8 @@ export class MTextfield extends ModulVue {
     @Prop({ default: true })
     public passwordIcon: boolean;
     @Prop()
+    public characterCount: boolean;
+    @Prop()
     public maxLength?: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;

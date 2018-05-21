@@ -5,15 +5,6 @@
             <h1>{{$route.meta}}</h1>
         </div>
         <m-dynamic-template :template="tag"></m-dynamic-template>
-
-        <m-textfield max-length="20" :length-overflow="true" threshold="80"></m-textfield>
-        <m-textfield max-length="20" :length-overflow="false"></m-textfield>
-        <m-button @click="tagee='asdf sdfasdf sadfsa fsadfdddddddddddddd ddddddddddd  dddddddd   dasd fasd fasdf asda'">test</m-button>
-        <m-textarea max-length="20" :lengthOverflow="true" threshold="80" :error-message="tagee"></m-textarea>
-        <m-textarea max-length="20" :lengthOverflow="false" ></m-textarea>
-        <m-textarea max-length="20" :lengthOverflow="true" threshold="80" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textarea>
-        <m-textarea max-length="20" :lengthOverflow="false" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textarea>
-
     </m-template>
     <div slot="footer">Footer</div>
 </m-flex-template>

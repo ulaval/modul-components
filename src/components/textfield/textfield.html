@@ -51,6 +51,6 @@
             :valid="isTextfieldValid"
             :valid-message="validMessage"
             :helper-message="helperMessage"></m-validation-message>
-        <m-character-count :valueLength="valueLength" :maxLength="maxLength" :threshold="threshold" :transition="hasCounterTransition"></m-character-count>
+        <m-character-count v-if="characterCount" :valueLength="valueLength" :maxLength="maxLength" :threshold="threshold" :transition="hasCounterTransition"></m-character-count>
     </div>
 </div>
