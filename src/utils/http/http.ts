@@ -23,11 +23,11 @@ export class HttpService implements RestAdapter {
 
         if (this.options) {
             if (!this.options.timeout) {
-                this.instance.defaults.timeout = 30000; // On met 30 secondes par défaut
+                this.instance.defaults.timeout = 30000;
             } else if (this.options.timeout === NO_TIMEOUT) {
-                this.instance.defaults.timeout = undefined; // On met un timeout infini
+                this.instance.defaults.timeout = undefined;
             } else {
-                this.instance.defaults.timeout = this.options.timeout; // On met le timeout spécifié par l'utilisateur
+                this.instance.defaults.timeout = this.options.timeout;
             }
             let opt: HttpPluginOptions = this.options;
             this.instance.interceptors.request.use(config => {
