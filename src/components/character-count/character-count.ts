@@ -18,16 +18,11 @@ export class MCharacterCount extends Vue {
     public transition: boolean;
 
     private get hasCounter(): boolean {
-        // tslint:disable-next-line:no-console
-        console.log(this.isThresholdValid);
         return this.maxLength && this.maxLength > 0 ? this.isThresholdValid : false;
     }
 
     private get isThresholdValid(): boolean {
         let counterPourcentage: number = this.maxLength ? (this.valueLength / this.maxLength) * 100 : 100;
-        // tslint:disable-next-line:no-console
-        console.log(counterPourcentage);
-
         return counterPourcentage >= this.threshold ? true : false;
     }
 }
