@@ -5,6 +5,18 @@
             <h1>{{$route.meta}}</h1>
         </div>
         <m-dynamic-template :template="tag"></m-dynamic-template>
+        <m-radio v-bind="data" ref="radio">haha</m-radio>
+        <table>
+            <tr v-for="(value, key) in meta.attributes">
+                <td>{{ key }}</td>
+                <td>{{ value.type }}</td>
+                <td>
+                    <input v-if="value.type === 'boolean'" type="checkbox" v-model="data[key]" />
+                    <input v-if="value.type === 'string'" type="text" v-model="data[key]" />
+                </td>
+            </tr>
+        </table>
     </m-template>
     <div slot="footer">Footer</div>
+    <textarea v-model="model" v-m-textarea-auto-height @input="log" rows="1"></textarea>
 </m-flex-template>

@@ -67,7 +67,7 @@ export class InputState extends Vue implements InputStateMixin {
             value === InputStateTagStyle.H6 ||
             value === InputStateTagStyle.P
     })
-    public tagStyle: string;
+    public tagStyle: InputStateTagStyle;
 
     public get active(): boolean {
         return !this.isDisabled && !this.isWaiting;
