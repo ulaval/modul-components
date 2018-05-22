@@ -16,9 +16,9 @@ type BadgeIcon = {
     [key: string]: string
 };
 
-const ICON_COMPLETED: string = 'chip-check';
-const ICON_ERROR: string = 'chip-error';
-const ICON_WARNING: string = 'chip-warning';
+const ICON_COMPLETED: string = 'm-svg__check-chip';
+const ICON_ERROR: string = 'm-svg__error-chip';
+const ICON_WARNING: string = 'm-svg__warning-chip';
 const COLOR_COMPLETED: string = '#00c77f';
 const COLOR_ERROR: string = '#e30513';
 const COLOR_WARNING: string = '#ffc103';

@@ -81,16 +81,16 @@ export class MStep extends ModulVue {
         let icon: string = '';
         switch (this.state) {
             case MStepState.Locked:
-                icon = 'default';
+                icon = 'm-svg__default';
                 break;
             case MStepState.Success:
-                icon = 'chip-check';
+                icon = 'm-svg__check-chip';
                 break;
             case MStepState.Warning:
-                icon = 'chip-check-yellow';
+                icon = 'm-svg__warning-chip';
                 break;
             case MStepState.Error:
-                icon = 'chip-error';
+                icon = 'm-svg__error-chip';
                 break;
             default:
                 break;
