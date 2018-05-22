@@ -7,7 +7,7 @@ exports[`MLogin when login should render correctly 1`] = `
             <label class="m-input-style__label"><span>Username</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
-                    <input value="" class="m-textfield__input"> </div>
+                    <input maxlength="Infinity" value="" class="m-textfield__input"> </div>
                 <div class="m-input-style__body__right"></div>
             </div>
         </div>
@@ -23,7 +23,7 @@ exports[`MLogin when login should render correctly 1`] = `
             <label class="m-input-style__label"><span>Password</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
-                    <input value="" class="m-textfield__input"> </div>
+                    <input maxlength="Infinity" value="" class="m-textfield__input"> </div>
                 <div class="m-input-style__body__right">
                     <div class="m-textfield__icon-password m--is-transparent">
                         <button type="button" title="m-textfield:show-password" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
