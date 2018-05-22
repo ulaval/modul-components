@@ -382,29 +382,15 @@
             15.5,5.5 20.5,5.5 	"/>
     </symbol>
     <symbol id="m-svg__file-pdf" viewBox="0 0 24 24" data-badge-origin="20.5,23.5">
-        <path fill="#FB3449" d="M9.5,20.1c0,0.2-0.1,0.7-0.9,0.7H8.2v-1.4h0.5C9.3,19.4,9.5,19.8,9.5,20.1z"/>
-        <path fill="#FB3449" d="M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1C12.7,20.2,12.5,19.4,11.9,19.4z
-            M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3
-            c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4
-            c0.2-0.3,0.3-0.6,0.3-1.1C12.7,20.2,12.5,19.4,11.9,19.4z M3.8,17.7v5.4h16.3v-5.4H3.8z M8.7,21.5H8.2v1.1c0,0.2-0.1,0.3-0.3,0.3
-            s-0.3-0.2-0.3-0.3v-3.5c0-0.2,0.2-0.3,0.3-0.3h0.8c1.1,0,1.5,0.7,1.5,1.4C10.2,20.8,9.7,21.5,8.7,21.5z M13.1,22.3
-            c-0.3,0.4-0.7,0.7-1.2,0.7h-0.6c-0.1,0-0.2,0-0.2-0.1c-0.1-0.1-0.1-0.2-0.1-0.2v-3.5c0-0.2,0.1-0.3,0.3-0.3h0.6
-            c0.9,0,1.5,0.8,1.5,2.1C13.4,21.4,13.3,21.9,13.1,22.3z M16.2,19.4l-1.2,0v1.4l0.8,0c0.2,0,0.3,0.1,0.3,0.3s-0.2,0.3-0.3,0.3H15
-            v1.2c0,0.2-0.1,0.3-0.3,0.3s-0.3-0.1-0.3-0.3v-1.5l0-2c0-0.2,0.2-0.3,0.3-0.3h1.5c0.2,0,0.3,0.2,0.3,0.3
-            C16.5,19.3,16.3,19.4,16.2,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
-            C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
-            C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
-            C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
-            C12.7,20.2,12.5,19.4,11.9,19.4z M11.9,19.4h-0.3v2.9h0.3c0.3,0,0.5-0.1,0.6-0.4c0.2-0.3,0.3-0.6,0.3-1.1
-            C12.7,20.2,12.5,19.4,11.9,19.4z"/>
         <path fill="none" stroke="#FB3449" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5,5.5V23
             c0,0.3-0.2,0.5-0.5,0.5H4c-0.3,0-0.5-0.2-0.5-0.5V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5H20.5z"/>
         <polygon fill="none" stroke="#FB3449" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="15.5,0.5
             15.5,5.5 20.5,5.5 		"/>
         <path fill="#FFFFFF" d="M14.3,21.1L14.3,21.1C14.3,21.1,14.3,21.1,14.3,21.1C14.3,21.1,14.3,21.1,14.3,21.1z"/>
-        <path fill="none" stroke="#FB3449" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M7.5,4.9
+        <path fill="none" stroke="#FB3449" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M7.5,6.1
             c-0.7-1.1,1-2.2,1.4-1c0.7,2,1.9,7.5-0.8,11.2c-0.8,1-2.4,0.1-1.5-1c1.4-1.7,5.2-4.9,10.2-4.7c1.4,0.1,1.3,2,0.1,1.8
-            C15,10.9,10.6,9.9,7.5,4.9z"/>
+            C15,12.1,10.6,11.1,7.5,6.1z"/>
+        <rect x="3.4" y="19.8" fill="#FB3449" width="17" height="3.8"/>
     </symbol>
     <symbol id="m-svg__file-ppt" viewBox="0 0 24 24" data-badge-origin="21.68,23.5">
         <path fill="#FF671B" d="M8.8,6.4c0,0.3-0.1,1.2-1.5,1.2H6.4V5.2h0.9C8.7,5.2,8.8,6.1,8.8,6.4z"/>
@@ -578,7 +564,7 @@
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="0.5" y1="17.8" x2="23.5" y2="17.8"/>
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="0.5" y1="23.5" x2="16.5" y2="23.5"/>
     </symbol>
-    <symbol id="m-svg__picture-galery" viewBox="0 0 24 24">
+    <symbol id="m-svg__picture-slideshow" viewBox="0 0 24 24">
         <rect x="0.6" y="0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="18.3" height="18.3"/>
         <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="16.4,13
             3.4,13 6.1,8.3 7.8,11.2 11.5,4.7 			"/>
@@ -606,8 +592,10 @@
             c-2.1,2-4.9,3.2-8,3.2c-3,0-5.7-1.1-7.7-3C2,18.4,0.5,15.4,0.5,12C0.5,5.7,5.6,0.5,12,0.5C18.4,0.5,23.5,5.7,23.5,12z"/>
     </symbol>
     <symbol id="m-svg__search" viewBox="0 0 24 24">
-        <circle fill="none" stroke="currentColor" cx="8.5" cy="8.5" r="7.9"/>
-        <line fill="none" stroke="currentColor" stroke-linecap="round" x1="23.4" y1="23.4" x2="14.2" y2="14.2"/>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M23.1,23.1L23.1,23.1
+            c-0.5,0.5-1.3,0.5-1.8,0l-6-6c-0.5-0.5-0.5-1.3,0-1.8l0,0c0.5-0.5,1.3-0.5,1.8,0l6,6C23.6,21.8,23.6,22.6,23.1,23.1z"/>
+        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="15.1" y1="15.1" x2="14" y2="14"/>
+        <circle fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="8.3" cy="8.3" r="7.8"/>
     </symbol>
     <symbol id="m-svg__secure" viewBox="0 0 24 24">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M1.5,23.4l2.8,0.1
@@ -655,17 +643,6 @@
         <path d="M15.8,17.9H0.5c-0.3,0-0.5-0.2-0.5-0.5V6.6c0-0.3,0.2-0.5,0.5-0.5h15.3c0.3,0,0.5,0.2,0.5,0.5v10.8
             C16.3,17.7,16.1,17.9,15.8,17.9z"/>
     </symbol>
-    <symbol id="m-svg__video-galery" viewBox="0 0 24 24">
-        <rect x="0.6" y="0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="18.3" height="18.3"/>
-        <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="3.1,21.2
-            21.1,21.2 21.1,3.2 	"/>
-        <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="5.8,23.5
-            23.4,23.5 23.4,5.8 	"/>
-        <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="10" d="M15,11.8l-2.4-1.1
-            c-0.2-0.1-0.3-0.3-0.3-0.5V9c0-0.2,0.1-0.4,0.3-0.5L15,7.5V11.8z"/>
-        <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="10" d="M10.5,12.3H4.9c-0.3,0-0.5-0.2-0.5-0.5V7.5
-            C4.4,7.2,4.7,7,4.9,7h5.6C10.8,7,11,7.2,11,7.5v4.3C11,12.1,10.8,12.3,10.5,12.3z"/>
-    </symbol>
     <symbol id="m-svg__video-slideshow" viewBox="0 0 24 24">
         <rect x="0.5" y="0.5" width="18.26" height="18.26" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
         <polyline points="3.06 21.23 21.07 21.23 21.07 3.21" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -689,11 +666,5 @@
         <path stroke="currentColor" fill="none" d="M1.3,23.5h21.5c0.6,0,1-0.7,0.7-1.2L12.7,0.9c-0.3-0.6-1.2-0.6-1.4,0L0.6,22.4C0.3,22.8,0.7,23.5,1.3,23.5z"/>
         <path fill="currentColor" d="M12,16.2c0.5,0,0.9-0.4,0.9-0.9V7.9C12.9,7.4,12.5,7,12,7s-0.9,0.4-0.9,0.9v7.4C11.1,15.8,11.5,16.2,12,16.2z"/>
         <path fill="currentColor" d="M13.4,19.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4s0.6-1.4,1.4-1.4S13.4,18.7,13.4,19.5z"/>
-    </symbol>
-    <symbol id="m-svg__zoom" viewBox="0 0 24 24">
-        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M23.1,23.1L23.1,23.1
-            c-0.5,0.5-1.3,0.5-1.8,0l-6-6c-0.5-0.5-0.5-1.3,0-1.8l0,0c0.5-0.5,1.3-0.5,1.8,0l6,6C23.6,21.8,23.6,22.6,23.1,23.1z"/>
-        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="15.1" y1="15.1" x2="14" y2="14"/>
-        <circle fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="8.3" cy="8.3" r="7.8"/>
     </symbol>
 </svg>
