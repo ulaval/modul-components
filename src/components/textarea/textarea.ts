@@ -39,8 +39,8 @@ export class MTextarea extends ModulVue implements InputManagementData {
     private get valueLength(): number {
         return this.internalValue.length;
     }
-    private get maxLengthNumber(): number | undefined {
-        return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? this.maxLength : undefined ;
+    private get maxLengthNumber(): number {
+        return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? this.maxLength : Infinity ;
     }
 
     private get hasTextareaError(): boolean {
