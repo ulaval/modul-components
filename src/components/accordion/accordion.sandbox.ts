@@ -8,10 +8,9 @@ import { ModulVue } from '../../utils/vue/vue';
 @Component
 export class MAccordionSandbox extends ModulVue {
 
-    public log(): void {
-        this.$log.log('click');
+    doSomething(text): void {
+        window.alert('Something ' + text + '!');
     }
-
 }
 
 const AccordionSandboxPlugin: PluginObject<any> = {

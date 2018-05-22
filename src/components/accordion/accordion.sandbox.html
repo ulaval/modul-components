@@ -12,14 +12,14 @@
                 <m-menu-item>Menu 2</m-menu-item>
                 <m-menu-item>Menu 3</m-menu-item>
             </m-menu>
-            <a href="poulet">link</a>
-            <button>
+            <a @click="doSomething('funny')" href="https://www.google.ca/" target="_blank">link</a>
+            <button @click="doSomething('funny')">
                 button
             </button>
-            <a href="patate">
-                    <span>element inside link</span>
-                </a>
-            <button>
+            <a @click="doSomething('funny')" href="patate">
+                <span>element inside link</span>
+            </a>
+            <button @click="doSomething('funny')">
                 <span>element inside button</span>
             </button>
             <input type="text" placeholder="input">
@@ -31,12 +31,25 @@
     </m-accordion>
     <br>
     <p>
-        Generic html elements with custom vuejs events aren't trapped and still should be use inside a @click.stop wrapper.
+        Generic html elements with custom vuejs events aren't trapped and still should be use with a <b>@click.stop</b> modifier.
     </p>
     <br>
     <m-accordion icon-position="right">
         <div slot="header">
-            <div @click="log">generic element with custom event</div>
+            <div @click.stop="doSomething('not ideal but ok')">generic element with custom event</div>
+        </div>
+        <div>
+            Accordion content
+        </div>
+    </m-accordion>
+    <br>
+    <p>
+        without a @click.stop modifier.
+    </p>
+    <br>
+    <m-accordion icon-position="right">
+        <div slot="header">
+            <div @click="doSomething('not funny')">generic element with custom event</div>
         </div>
         <div>
             Accordion content
