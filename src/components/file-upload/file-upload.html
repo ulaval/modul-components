@@ -28,7 +28,7 @@
 
         <div class="m-file-upload__drop-zone">
             <h2 v-if="isMqMinS">
-                <m-icon name="drag-drop" size="48px"></m-icon>
+                <m-icon name="m-svg__drag-drop" size="48px"></m-icon>
                 <m-i18n k="m-file-upload:title"></m-i18n>
             </h2>
             <p  v-if="isMqMinS" class="m-file-upload__drop-zone__or"><m-i18n k="m-file-upload:choice"></m-i18n></p>
@@ -59,7 +59,7 @@
                             </p>
                         </div>
                         <div class="m-file-upload__import-list__delete">
-                            <m-icon-button class="m-file-upload__import-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
+                            <m-icon-button class="m-file-upload__import-list__button" icon-name="m-svg__close" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
                         </div>
                     </div>
                 </li>
@@ -81,7 +81,7 @@
                             <p class="m-file-upload__completed-list__infos-size">{{file.file.size | file-size}}</p>
                         </div>
                         <div class="m-file-upload__completed-list__delete">
-                            <m-icon-button class="m-file-upload__completed-list__button" icon-name="trash" button-size="32px" icon-size="20px" @click="onFileRemove(file)"></m-icon-button>
+                            <m-icon-button class="m-file-upload__completed-list__button" icon-name="m-svg__delete" button-size="32px" icon-size="20px" @click="onFileRemove(file)"></m-icon-button>
                         </div>
                     </div>
                 </li>

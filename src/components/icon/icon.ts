@@ -8,7 +8,7 @@ import WithRender from './icon.html?style=./icon.scss';
 @WithRender
 @Component
 export class MIcon extends Vue {
-    @Prop({ default: 'default' })
+    @Prop({ default: 'm-svg__default' })
     public name: string;
     @Prop()
     public svgTitle: string;

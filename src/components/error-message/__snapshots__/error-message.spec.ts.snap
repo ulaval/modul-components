@@ -6,7 +6,7 @@ exports[`MErrorMessage should render correctly collapsed 1`] = `
         <div class="m-message__wrap">
             <div class="m-message__icon">
                 <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use xlink:href="#m-svg__error-fill" aria-hidden="true"></use>
                 </svg>
             </div>
             <div class="m-message__body">
@@ -31,7 +31,7 @@ exports[`MErrorMessage should render correctly expanded 1`] = `
         <div class="m-message__wrap">
             <div class="m-message__icon">
                 <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use xlink:href="#m-svg__error-fill" aria-hidden="true"></use>
                 </svg>
             </div>
             <div class="m-message__body">

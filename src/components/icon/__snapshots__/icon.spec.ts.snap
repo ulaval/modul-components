@@ -9,6 +9,6 @@ exports[`MIcon should render correctly 1`] = `
 exports[`MIcon should render title when svgTitle prop is set 1`] = `
 <svg width="1em" height="1em" class="m-icon">
     <title>options</title>
-    <use xlink:href="#default" aria-hidden="true"></use>
+    <use xlink:href="#m-svg__default" aria-hidden="true"></use>
 </svg>
 `;

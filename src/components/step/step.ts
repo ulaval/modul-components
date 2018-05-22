@@ -38,7 +38,7 @@ export class MStep extends ModulVue {
     public open: boolean;
     @Prop()
     public required: boolean;
-    @Prop({ default: 'default' })
+    @Prop({ default: 'm-svg__default' })
     public iconName: string;
     @Prop()
     public last: boolean;

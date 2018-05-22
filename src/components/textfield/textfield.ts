@@ -1,17 +1,18 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { TEXTFIELD_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
-import uuid from '../../utils/uuid/uuid';
 
 export enum MTextfieldType {
     Text = 'text',
@@ -21,8 +22,8 @@ export enum MTextfieldType {
     Telephone = 'tel'
 }
 
-const ICON_NAME_PASSWORD_VISIBLE: string = 'show-password';
-const ICON_NAME_PASSWORD_HIDDEN: string = 'hidden-password';
+const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
+const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
 
 @WithRender
 @Component({

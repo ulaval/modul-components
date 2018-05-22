@@ -9,7 +9,7 @@ exports[`MDropdown should render correctly 1`] = `
             <div class="m-input-style__body__right">
                 <div class="m-dropdown__arrow">
                     <svg aria-hidden="true" width="1em" height="1em" button-size="18px" icon-size="16px" class="m-icon m-dropdown__arrow__icon">
-                        <use xlink:href="#down-arrow" aria-hidden="true"></use>
+                        <use xlink:href="#m-svg__arrowhead--bottom" aria-hidden="true"></use>
                     </svg>
                 </div>
             </div>
@@ -32,7 +32,7 @@ exports[`MDropdown should render correctly when placeholder is set 1`] = `
             <div class="m-input-style__body__right">
                 <div class="m-dropdown__arrow">
                     <svg aria-hidden="true" width="1em" height="1em" button-size="18px" icon-size="16px" class="m-icon m-dropdown__arrow__icon">
-                        <use xlink:href="#down-arrow" aria-hidden="true"></use>
+                        <use xlink:href="#m-svg__arrowhead--bottom" aria-hidden="true"></use>
                     </svg>
                 </div>
             </div>
