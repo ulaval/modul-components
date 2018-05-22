@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import { mount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
-import PageNotFoundPlugin, { MPageNotFound } from './page-not-found';
+import SessionExpiredPlugin, { MSessionExpired } from './session-expired';
 
-describe('MPageNotFound', () => {
+describe('MSessionExpired', () => {
     beforeEach(() => {
-        Vue.use(PageNotFoundPlugin);
+        Vue.use(SessionExpiredPlugin);
     });
     it('should render correctly', () => {
-        const component: Wrapper<MPageNotFound> = mount(MPageNotFound, {
+        const component: Wrapper<MSessionExpired> = mount(MSessionExpired, {
             localVue: Vue
         });
 
@@ -16,7 +16,7 @@ describe('MPageNotFound', () => {
     });
 
     it('should render correctly with back-to-label override', () => {
-        const component: Wrapper<MPageNotFound> = mount(MPageNotFound, {
+        const component: Wrapper<MSessionExpired> = mount(MSessionExpired, {
             localVue: Vue,
             propsData: {
                 backToLabel: 'Some back to label'

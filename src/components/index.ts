@@ -46,6 +46,7 @@ import RadioGroupPlugin from './radio-group/radio-group';
 import RadioStylePlugin from './radio-style/radio-style';
 import RadioPlugin from './radio/radio';
 import ScrollTopPlugin from './scroll-top/scroll-top';
+import SessionExpiredPlugin from './session-expired/session-expired';
 import SidebarPlugin from './sidebar/sidebar';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
@@ -114,6 +115,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RadioGroupPlugin);
         Vue.use(RadioStylePlugin);
         Vue.use(ScrollTopPlugin);
+        Vue.use(SessionExpiredPlugin);
         Vue.use(SidebarPlugin);
         Vue.use(SliderPlugin);
         Vue.use(SpinnerPlugin);

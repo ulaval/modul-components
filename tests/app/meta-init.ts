@@ -45,6 +45,7 @@ const components: string[] = [
     Components.RADIO_GROUP_NAME,
     Components.RADIO_STYLE_NAME,
     Components.SCROLL_TOP_NAME,
+    Components.SESSION_EXPIRED_NAME,
     Components.SIDEBAR_NAME,
     Components.SLIDER_NAME,
     Components.SPINNER_NAME,

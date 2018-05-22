@@ -7,6 +7,10 @@ import { PAGE_NOT_FOUND_NAME } from '../component-names';
 @WithRender
 @Component
 export class MPageNotFound extends Vue {
+    @Prop({
+        default: () => Vue.prototype.$i18n.translate('m-page-not-found:back-to-portal')
+    })
+    public backToLabel: string | undefined;
 }
 
 const PageNotFoundPlugin: PluginObject<any> = {
