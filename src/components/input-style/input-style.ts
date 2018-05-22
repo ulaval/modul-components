@@ -17,6 +17,8 @@ export class MInputStyle extends ModulVue {
     @Prop()
     public label: string;
     @Prop()
+    public labelFor: string;
+    @Prop()
     public focus: boolean;
     @Prop({ default: true })
     public empty: boolean;

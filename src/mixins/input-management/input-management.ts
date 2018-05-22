@@ -15,6 +15,10 @@ export interface InputManagementData {
     internalValue: string;
 }
 
+export enum InputManagementAutocomplete {
+    Off = 'off',
+    On = 'on'
+}
 @Component
 export class InputManagement extends ModulVue
     implements InputManagementProps, InputManagementData {
@@ -25,6 +29,14 @@ export class InputManagement extends ModulVue
     public placeholder: string;
     @Prop()
     public readonly: boolean;
+    @Prop({
+        default: undefined,
+        validator: value =>
+        value === InputManagementAutocomplete.Off ||
+        value === InputManagementAutocomplete.On ||
+        value === undefined
+    })
+    public autocomplete: string;
     @Prop()
     public focus: boolean;
 
