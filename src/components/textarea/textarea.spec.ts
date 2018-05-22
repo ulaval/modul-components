@@ -3,8 +3,9 @@ import Vue from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import TextareaPlugin from '../../components/textarea/textarea';
-import { MTextarea } from './textarea';
 import uuid from '../../utils/uuid/uuid';
+import { KeyCode } from './../../utils/keycode/keycode';
+import { MTextarea } from './textarea';
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -45,6 +46,35 @@ describe('MTextArea', () => {
             return expect(
                 renderComponent(txtarea.vm)
             ).resolves.toMatchSnapshot();
+        });
+    });
+
+    describe('allow-enter', () => {
+        let textArea: Wrapper<MTextarea>;
+        beforeEach(() => {
+            textArea = mount(MTextarea);
+        });
+
+        [false, undefined].forEach(value => {
+            it(`it should prevent enter keypress if allow-enter is ${value}`, () => {
+                textArea.setProps({ allowEnter: value });
+                const eventDummy: any = { preventDefault(): void {}, keyCode: KeyCode.M_RETURN };
+                jest.spyOn(eventDummy, 'preventDefault');
+
+                textArea.find('textarea').trigger('keypress', eventDummy);
+
+                expect(eventDummy.preventDefault).toHaveBeenCalled();
+            });
+        });
+
+        it('it should not prevent enter keypress if allow-enter is true', () => {
+            textArea.setProps({ allowEnter: true });
+            const eventDummy: any = { preventDefault(): void {}, keyCode: KeyCode.M_RETURN };
+            jest.spyOn(eventDummy, 'preventDefault');
+
+            textArea.find('textarea').trigger('keypress', eventDummy);
+
+            expect(eventDummy.preventDefault).not.toHaveBeenCalled();
         });
     });
 });

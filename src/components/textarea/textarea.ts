@@ -1,17 +1,19 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { TEXTAREA_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textarea.html?style=./textarea.scss';
-import uuid from '../../utils/uuid/uuid';
+
 @WithRender
 @Component({
     mixins: [
@@ -25,6 +27,8 @@ import uuid from '../../utils/uuid/uuid';
 export class MTextarea extends ModulVue implements InputManagementData {
     @Prop()
     public maxLength?: number;
+    @Prop({ default: true })
+    public allowEnter: boolean;
 
     readonly internalValue: string;
     private internalTextareaHeight: string = '0';
@@ -36,6 +40,10 @@ export class MTextarea extends ModulVue implements InputManagementData {
 
     protected updated(): void {
         this.setInputHiddenStyle();
+    }
+
+    private handleEnter(e: Event): void {
+        if (!this.allowEnter) { e.preventDefault(); }
     }
 
     private setInputHiddenStyle(): void {
