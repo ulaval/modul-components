@@ -24,7 +24,7 @@ $m-validation-message--margin: $m-padding--xs !default;
 
     &__error,
     &__valid {
-        display: inline-flex;
+        display: table-row;
         align-items: flex-start;
 
         ~ .m-validation-message__helper {
@@ -35,7 +35,9 @@ $m-validation-message--margin: $m-padding--xs !default;
             font-size: $m-font-size--xs;
             margin-right: $m-padding--xs;
             min-width: $m-font-size--xs;
-            margin-top: $m-padding--xs; // Magic number
+            display: table-cell;
+            position: relative;
+            top: 1px; // Magic number
         }
     }
 
@@ -53,5 +55,6 @@ $m-validation-message--margin: $m-padding--xs !default;
 
     &__text {
         flex: 1 1 auto;
+        display: table-cell;
     }
 }
