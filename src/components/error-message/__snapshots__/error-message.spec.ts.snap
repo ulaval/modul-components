@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MErrorMessage given error should render correctly expanded 1`] = `
-<div>
+<div class="m-error-message">
     <div class="m-message m--has-error m--is-skin-regular">
         <div class="m-message__wrap">
             <div class="m-message__icon">
@@ -19,7 +19,7 @@ exports[`MErrorMessage given error should render correctly expanded 1`] = `
     <div skin="light"><span><span class="m-i18n">Détails de l'erreur</span></span>
         <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
-        <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
+        <p><span class="m-i18n">Elle a eu lieu le <strong>January 2, 2018</strong> à <strong>00:01</strong></span></p>
     </div>
     <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
@@ -27,7 +27,7 @@ exports[`MErrorMessage given error should render correctly expanded 1`] = `
 `;
 
 exports[`MErrorMessage given error should render correctly expanded with stack trace on 1`] = `
-<div>
+<div class="m-error-message">
     <div class="m-message m--has-error m--is-skin-regular">
         <div class="m-message__wrap">
             <div class="m-message__icon">
@@ -45,14 +45,14 @@ exports[`MErrorMessage given error should render correctly expanded with stack t
     <div skin="light"><span><span class="m-i18n">Détails de l'erreur</span></span>
         <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
-        <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p><pre></pre></div>
+        <p><span class="m-i18n">Elle a eu lieu le <strong>January 2, 2018</strong> à <strong>00:01</strong></span></p><pre></pre></div>
     <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
 
 exports[`MErrorMessage given error with stack trace should render correctly expanded 1`] = `
-<div>
+<div class="m-error-message">
     <div class="m-message m--has-error m--is-skin-regular">
         <div class="m-message__wrap">
             <div class="m-message__icon">
@@ -70,7 +70,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
     <div skin="light"><span><span class="m-i18n">Détails de l'erreur</span></span>
         <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
-        <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
+        <p><span class="m-i18n">Elle a eu lieu le <strong>January 2, 2018</strong> à <strong>00:01</strong></span></p>
     </div>
     <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
@@ -78,7 +78,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
 `;
 
 exports[`MErrorMessage given error with stack trace should render correctly expanded with stack trace on 1`] = `
-<div>
+<div class="m-error-message">
     <div class="m-message m--has-error m--is-skin-regular">
         <div class="m-message__wrap">
             <div class="m-message__icon">
@@ -96,14 +96,14 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
     <div skin="light"><span><span class="m-i18n">Détails de l'erreur</span></span>
         <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
-        <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p><pre>This is a stack trace</pre></div>
+        <p><span class="m-i18n">Elle a eu lieu le <strong>January 2, 2018</strong> à <strong>00:01</strong></span></p><pre>This is a stack trace</pre></div>
     <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
 
 exports[`MErrorMessage should render correctly collapsed 1`] = `
-<div>
+<div class="m-error-message">
     <div class="m-message m--has-error m--is-skin-regular">
         <div class="m-message__wrap">
             <div class="m-message__icon">
@@ -128,7 +128,7 @@ exports[`MErrorMessage should render correctly collapsed 1`] = `
 `;
 
 exports[`MErrorMessage should render correctly expanded 1`] = `
-<div>
+<div class="m-error-message">
     <div class="m-message m--has-error m--is-skin-regular">
         <div class="m-message__wrap">
             <div class="m-message__icon">
@@ -146,7 +146,7 @@ exports[`MErrorMessage should render correctly expanded 1`] = `
     <div skin="light"><span><span class="m-i18n">Détails de l'erreur</span></span>
         <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
-        <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
+        <p><span class="m-i18n">Elle a eu lieu le <strong>January 2, 2018</strong> à <strong>00:01</strong></span></p>
     </div>
     <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
