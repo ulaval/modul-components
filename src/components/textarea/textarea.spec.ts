@@ -48,33 +48,4 @@ describe('MTextArea', () => {
             ).resolves.toMatchSnapshot();
         });
     });
-
-    describe('allow-enter', () => {
-        let textArea: Wrapper<MTextarea>;
-        beforeEach(() => {
-            textArea = mount(MTextarea);
-        });
-
-        [false, undefined].forEach(value => {
-            it(`it should prevent enter keypress if allow-enter is ${value}`, () => {
-                textArea.setProps({ allowEnter: value });
-                const eventDummy: any = { preventDefault(): void {}, keyCode: KeyCode.M_RETURN };
-                jest.spyOn(eventDummy, 'preventDefault');
-
-                textArea.find('textarea').trigger('keypress', eventDummy);
-
-                expect(eventDummy.preventDefault).toHaveBeenCalled();
-            });
-        });
-
-        it('it should not prevent enter keypress if allow-enter is true', () => {
-            textArea.setProps({ allowEnter: true });
-            const eventDummy: any = { preventDefault(): void {}, keyCode: KeyCode.M_RETURN };
-            jest.spyOn(eventDummy, 'preventDefault');
-
-            textArea.find('textarea').trigger('keypress', eventDummy);
-
-            expect(eventDummy.preventDefault).not.toHaveBeenCalled();
-        });
-    });
 });
