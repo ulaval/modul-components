@@ -37,7 +37,7 @@ export class MErrorMessage extends ModulVue {
     private get dateInfo(): string[] | undefined {
         let result: string[] | undefined = undefined;
         if (this.date) {
-            result = [this.date.format('LL'), this.date.format('HH:mm')];
+            result = [this.date.format('YYYY-MM-DD'), this.date.format('HH:mm:ss')];
         }
         return result;
     }
