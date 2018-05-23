@@ -1,0 +1,13 @@
+<div>
+    <slot :data="data"></slot>
+    <table>
+        <tr v-for="(value, key) in meta.attributes">
+            <td>{{ key }}</td>
+            <td>{{ value.type }}</td>
+            <td>
+                <input v-if="value.type === 'boolean'" type="checkbox" v-model="data[key]" />
+                <input v-if="value.type === 'string'" type="text" v-model="data[key]" />
+            </td>
+        </tr>
+    </table>
+</div>
