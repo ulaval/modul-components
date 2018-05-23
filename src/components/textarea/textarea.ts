@@ -27,8 +27,6 @@ import WithRender from './textarea.html?style=./textarea.scss';
 export class MTextarea extends ModulVue implements InputManagementData {
     @Prop()
     public maxLength?: number;
-    @Prop({ default: true })
-    public allowEnter: boolean;
 
     readonly internalValue: string;
     private internalTextareaHeight: string = '0';
@@ -40,10 +38,6 @@ export class MTextarea extends ModulVue implements InputManagementData {
 
     protected updated(): void {
         this.setInputHiddenStyle();
-    }
-
-    private handleEnter(e: Event): void {
-        if (!this.allowEnter) { e.preventDefault(); }
     }
 
     private setInputHiddenStyle(): void {

@@ -47,6 +47,8 @@ export class MTextfield extends ModulVue {
     public type: MTextfieldType;
     @Prop({ default: true })
     public passwordIcon: boolean;
+    @Prop({ default: false })
+    public wordWrap: boolean;
 
     private passwordAsText: boolean = false;
 
@@ -66,7 +68,7 @@ export class MTextfield extends ModulVue {
 
     @Watch('type')
     private typeChanged(type: MTextfieldType): void {
-        this.$log.warn('<' + TEXTFIELD_NAME + '>: Change of property "type" is not supported');
+        this.$log.warn(TEXTFIELD_NAME + ': Change of property "type" is not supported');
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
 
@@ -101,6 +103,13 @@ export class MTextfield extends ModulVue {
 
     private get propPasswordIcon(): boolean {
         return this.passwordIcon && this.type === MTextfieldType.Password && this.as<InputState>().active;
+    }
+
+    private get hasWordWrap(): boolean {
+        if (this.inputType !== MTextfieldType.Text && this.wordWrap) {
+            this.$log.warn(TEXTFIELD_NAME + ': If you want to use word-wrap prop, you need to set type prop at "text"');
+        }
+        return this.inputType === MTextfieldType.Text && this.wordWrap;
     }
 }
 

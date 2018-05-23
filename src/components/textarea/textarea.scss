@@ -52,10 +52,12 @@
         outline: none;
         resize: none;
         overflow: hidden;
+        word-break: break-all;
 
         &-hidden {
             opacity: 0;
             white-space: pre-wrap;
+            word-break: break-all;
         }
     }
 }
