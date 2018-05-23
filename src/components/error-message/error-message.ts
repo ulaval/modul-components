@@ -25,10 +25,6 @@ export class MErrorMessage extends ModulVue {
     @Prop()
     public referenceNumber?: string;
 
-    protected created(): void {
-        this.date.locale(this.$i18n.currentLang());
-    }
-
     private get userAgent(): string {
         return window.navigator.userAgent;
     }
