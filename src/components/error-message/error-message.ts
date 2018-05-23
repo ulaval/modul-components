@@ -24,6 +24,11 @@ export class MErrorMessage extends Vue {
     @Prop()
     public referenceNumber?: string;
 
+    @Prop({
+        default: false
+    })
+    public stacktrace: boolean;
+
     private get userAgent(): string {
         return window.navigator.userAgent;
     }
@@ -34,6 +39,10 @@ export class MErrorMessage extends Vue {
             result = [this.date.format('YYYY-MM-DD'), this.date.format('HH:mm:ss')];
         }
         return result;
+    }
+
+    private get propStacktrace(): boolean {
+        return this.stacktrace && !!this.error;
     }
 }
 
