@@ -18,10 +18,14 @@
                 <div v-else-if="value.type === 'number'">
                     <input type="number" v-model="data[key]" />
                 </div>
-                <div v-else>
+                <div v-else-if="meta.enums[value.type]">
                     <select v-model="data[key]">
                         <option v-for="value in meta.enums[value.type]" :value="value">{{ value }}</option>
                     </select>
+                </div>
+                <div v-else>
+                    <input type="text" v-model="data[key]" />
+                    This type is not supported by dynamicSandbox.  Some custom validator errors may arise.
                 </div>
             </td>
         </tr>
