@@ -106,10 +106,12 @@ export class MTextfield extends ModulVue {
     }
 
     private get hasWordWrap(): boolean {
+        let hasWordWrap: boolean = this.inputType === MTextfieldType.Text && this.wordWrap;
+        this.as<InputManagement>().trimWordWrap = hasWordWrap;
         if (this.inputType !== MTextfieldType.Text && this.wordWrap) {
             this.$log.warn(TEXTFIELD_NAME + ': If you want to use word-wrap prop, you need to set type prop at "text"');
         }
-        return this.inputType === MTextfieldType.Text && this.wordWrap;
+        return hasWordWrap;
     }
 }
 
