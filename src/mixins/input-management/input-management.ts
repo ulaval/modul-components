@@ -120,7 +120,7 @@ export class InputManagement extends ModulVue
 
     private get model(): string {
         if (this.trimWordWrap) {
-            this.internalValue = this.internalValue.replace(/\n/g, 'a');
+            this.internalValue = this.internalValue.replace(/\n/g, '');
         }
         return this.internalValue;
     }
