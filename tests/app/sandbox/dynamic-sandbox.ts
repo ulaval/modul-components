@@ -9,8 +9,6 @@ import WithRender from './dynamic-sandbox.html';
 @Component
 export class DynamicSandbox extends ModulVue {
     @Prop()
-    public ignoreProps: string[];
-    @Prop()
     public tag: string | undefined;
 
     public showSandbox: boolean = false;
