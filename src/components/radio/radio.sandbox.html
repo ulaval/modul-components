@@ -1,12 +1,7 @@
 <div>
     Hello from sandbox. I can show you my Vue{{ someData }}
-    <dynamic-sandbox>
-        <m-radio slot-scope="dynamicSandbox" v-bind="dynamicSandbox.data">Some text</m-radio>
-    </dynamic-sandbox>
-    <dynamic-sandbox>
-        <m-accordion slot-scope="dynamicSandbox" v-bind.sync="dynamicSandbox.data">
-            <span slot="header">header text</span>
-            Content text
-        </m-accordion>
-    </dynamic-sandbox>
+    <!-- <dynamic-sandbox>
+        <m-radio slot-scope="dynamicSandbox" v-bind.sync="dynamicSandbox.data">Some text</m-radio>
+    </dynamic-sandbox> -->
+    <dynamic-sandbox :tag="'m-radio'"></dynamic-sandbox>
 </div>

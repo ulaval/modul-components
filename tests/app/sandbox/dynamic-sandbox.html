@@ -1,12 +1,28 @@
-<div>
+<div v-if="!hasErrors" v-cloak>
     <slot :data="data"></slot>
+    <component :is="tag" v-model="data['value']" v-bind.sync="data"></component>
     <table>
         <tr v-for="(value, key) in meta.attributes">
             <td>{{ key }}</td>
             <td>{{ value.type }}</td>
             <td>
-                <input v-if="value.type === 'boolean'" type="checkbox" v-model="data[key]" />
-                <input v-if="value.type === 'string'" type="text" v-model="data[key]" />
+                <div v-if="value.type === 'boolean'">
+                    <input  type="checkbox" v-model="data[key]" />
+                </div>
+                <div v-else-if="value.type === 'string'">
+                    <input type="text" v-model="data[key]" />
+                </div>
+                <div v-else-if="value.type === 'string[]'">
+                    <input  type="text" :value="data[key]" @input="assignArrayProp(key, $event.target.value)" /> {{ data[key] }}
+                </div>
+                <div v-else-if="value.type === 'number'">
+                    <input type="number" v-model="data[key]" />
+                </div>
+                <div v-else>
+                    <select v-model="data[key]">
+                        <option v-for="value in meta.enums[value.type]" :value="value">{{ value }}</option>
+                    </select>
+                </div>
             </td>
         </tr>
     </table>
