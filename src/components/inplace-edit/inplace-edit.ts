@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
 import { INPLACE_EDIT_NAME } from '../component-names';
-import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -12,7 +11,7 @@ import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 
 @WithRender
 @Component({
-    mixins: [MediaQueries, ElementQueries]
+    mixins: [MediaQueries]
 })
 export class MInplaceEdit extends ModulVue {
 
@@ -28,8 +27,7 @@ export class MInplaceEdit extends ModulVue {
     public title: string;
 
     private internalEditMode: boolean = false;
-    private isInitMobile: boolean;
-    private isInitTable: boolean;
+    private mqMounted: boolean;
 
     public confirm(event: Event): void {
         if (this.editMode) {
@@ -49,10 +47,16 @@ export class MInplaceEdit extends ModulVue {
         this.internalEditMode = value;
     }
 
+    @Watch('isMqMaxS')
+    public onMaxS(value: boolean, old: boolean): void {
+        if (this.mqMounted) {
+            this.propEditMode = false;
+        }
+    }
+
     private mounted(): void {
-        this.isInitMobile = this.as<MediaQueries>().isMqMaxS;
-        this.isInitTable = this.as<MediaQueries>().isMqMinS;
-        this.as<ElementQueries>().$on('resizeDone', this.resetEditMode);
+        // should be in next tick to skip the media query initial trigger on mounted
+        this.$nextTick(() => this.mqMounted = true);
     }
 
     private onClick(event: MouseEvent): void {
@@ -60,23 +64,12 @@ export class MInplaceEdit extends ModulVue {
     }
 
     private get propEditMode(): boolean {
-        return this.editMode === undefined ? this.internalEditMode : this.editMode;
+        return this.editMode || this.internalEditMode;
     }
 
     private set propEditMode(value: boolean) {
         this.internalEditMode = value;
         this.$emit('update:editMode', value);
-    }
-
-    private resetEditMode(): void {
-        if (this.isInitMobile && this.as<MediaQueries>().isMqMinS && this.propEditMode) {
-            this.isInitMobile = false;
-            this.isInitTable = true;
-        } else if (this.isInitTable && this.as<MediaQueries>().isMqMaxS && this.propEditMode) {
-            this.isInitMobile = true;
-            this.isInitTable = false;
-            this.propEditMode = false;
-        }
     }
 }
 
