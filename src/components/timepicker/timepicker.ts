@@ -1,12 +1,13 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import i18nPlugin from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { TIMEPICKER_NAME } from '../component-names';
@@ -29,11 +30,11 @@ export class MTimepicker extends ModulVue {
     public label: string;
     @Prop()
     public duration: boolean;
-    @Prop({ default: function() { return this.duration ? moment.duration('1:0') : moment(); } })
+    @Prop({ default: function(): moment.Moment | moment.Duration { return this.duration ? moment.duration('1:0') : moment(); } })
     public time: moment.Moment | moment.Duration;
-    @Prop({ default: function() { return this.duration ? moment.duration('0:0') : moment().hours(0).minutes(0); } })
+    @Prop({ default: function(): moment.Moment | moment.Duration { return this.duration ? moment.duration('0:0') : moment().hours(0).minutes(0); } })
     public min: moment.Moment | moment.Duration;
-    @Prop({ default: function() { return this.duration ? moment.duration('4:0') : moment().hours(23).minutes(59); } })
+    @Prop({ default: function(): moment.Moment | moment.Duration { return this.duration ? moment.duration('4:0') : moment().hours(23).minutes(59); } })
     public max: moment.Moment | moment.Duration;
     @Prop({ default: 5 })
     public step: number;
@@ -52,13 +53,14 @@ export class MTimepicker extends ModulVue {
 
     private internalOpen: boolean = false;
     private internalTimeErrorMessage: string = '';
+    private id: string = `mTimepicker-${uuid.generate()}`;
 
     private mounted(): void {
         moment.locale(this.$i18n.currentLang());
 
-        let newTime = this.duration ? moment.duration(this.min.hours() + ':' + this.min.minutes()) : moment().hours(this.min.hours()).minutes(this.min.minutes());
+        let newTime: moment.Moment | moment.Duration = this.duration ? moment.duration(this.min.hours() + ':' + this.min.minutes()) : moment().hours(this.min.hours()).minutes(this.min.minutes());
         while (this.isTimeSameOrBeforeMax(newTime)) {
-            let hour = newTime.hours();
+            let hour: number = newTime.hours();
             if (!this.hours[hour]) {
                 this.hours[hour] = [];
             }
@@ -66,7 +68,7 @@ export class MTimepicker extends ModulVue {
             newTime.add(this.step, 'm');
         }
 
-        let roundedTime = this.time.add(Math.round(this.time.minutes() / this.step) * this.step - this.time.minutes(), 'm');
+        let roundedTime: moment.Moment | moment.Duration = this.time.add(Math.round(this.time.minutes() / this.step) * this.step - this.time.minutes(), 'm');
 
         if (this.isTimeSameOrBeforeMax(roundedTime)) {
             if (this.isTimeSameOrAfterMin(roundedTime)) {
@@ -127,7 +129,7 @@ export class MTimepicker extends ModulVue {
     }
 
     private validateTime(event, value: string): void {
-        let numbers = value.match(/\d+/g);
+        let numbers: RegExpMatchArray | null = value.match(/\d+/g);
         if (numbers && numbers.length === 2) {
             if (isNaN(Number(numbers[0])) || isNaN(Number(numbers[1]))) {
                 this.internalTimeErrorMessage = this.$i18n.translate('m-timepicker:error-format');
@@ -159,7 +161,7 @@ export class MTimepicker extends ModulVue {
 
     private set open(open: boolean) {
         this.internalOpen = open;
-        this.$nextTick(() => {
+        setTimeout(() => {
             if (this.internalOpen) {
                 let inputEl: any = this.$refs.input;
                 inputEl.focus();
@@ -174,8 +176,8 @@ export class MTimepicker extends ModulVue {
     }
 
     private scrollToSelection(container: HTMLElement): void {
-        let selectedElement = container.querySelector('.m--is-selected');
-        setTimeout(function() {
+        let selectedElement: Element | null = container.querySelector('.m--is-selected');
+        setTimeout(function(): void {
             if (selectedElement) {
                 container.scrollTop = selectedElement['offsetTop'] - container.clientHeight / 2 + selectedElement.clientHeight / 2;
             }
@@ -229,6 +231,10 @@ export class MTimepicker extends ModulVue {
         } else {
             this.$emit('change', moment().hours(hour).minutes(minute));
         }
+    }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
     }
 }
 

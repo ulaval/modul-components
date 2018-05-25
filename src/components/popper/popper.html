@@ -2,6 +2,7 @@
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId" v-if="hasDefaultSlot">
         <transition
+            name="m--is"
             @before-enter="onBeforeEnter"
             @enter="onEnter"
             @after-enter="onAfterEnter"
@@ -18,7 +19,7 @@
                                 'm--is-placement-' + placement,
                                 className ]"
                      :aria-hidden="!propOpen"
-                     v-show="propOpen" v-if="propOpen || preload || loaded">
+                     v-show="propOpen" v-if="preload || loaded">
                 <slot></slot>
             </article>
         </transition>

@@ -42,7 +42,7 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
 
     describe('when defining title prop', () => {
         it('must use props value for dialog title',() => {
-            let titleProp = 'myTitle';
+            let titleProp: string = 'myTitle';
             inplaceEdit.title = titleProp;
 
             expect(inplaceEdit.title).toEqual(titleProp);
@@ -60,7 +60,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
 
     describe('when confirming', () => {
         test(`must not send events to parent`, () => {
-            let spy = jest.spyOn(inplaceEdit, '$emit');
+            let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
             inplaceEdit.confirm(AN_EVENT);
 
@@ -70,7 +70,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
 
     describe('when cancelling', () => {
         it(`must not send event to parent`, () => {
-            let spy = jest.spyOn(inplaceEdit, '$emit');
+            let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
             inplaceEdit.cancel(AN_EVENT);
 
@@ -90,7 +90,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         describe('when confirming', () => {
             it(`must emit confirmation event to parent`, () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
+                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
                 inplaceEdit.confirm(AN_EVENT);
 
@@ -100,7 +100,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         describe('when cancelling', () => {
             it(`must emit cancellation event to parent`, () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
+                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
                 inplaceEdit.cancel(AN_EVENT);
 
@@ -119,7 +119,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         describe('when confirming', () => {
             it(`must emit confirmation event to parent`, () => {
-                let spy = jest.spyOn(inplaceEdit, '$emit');
+                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
 
                 inplaceEdit.confirm(AN_EVENT);
 
@@ -155,7 +155,7 @@ describe('Component inplace-edit - Complete component by default', () => {
                 readMode: READ_SLOT
             },
             mixins: [{
-                data: function() {
+                data(): any {
                     return {
                         isMqMinS: true,
                         isMqMinM: false
@@ -221,7 +221,7 @@ describe('Component inplace-edit - Complete component mobile', () => {
                 'm-dialog': '<div><slot></slot></div>'
             },
             mixins: [{
-                data: function() {
+                data(): any {
                     return {
                         isMqMinS: false
                     };

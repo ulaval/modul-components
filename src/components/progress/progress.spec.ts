@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
@@ -14,7 +14,7 @@ describe('MProgress', () => {
 
     describe('bar mode', () => {
         it('should render correctly', () => {
-            const pgr = mount(MProgress, {
+            const pgr: Wrapper<MProgress> = mount(MProgress, {
                 localVue: localVue
             });
 
@@ -24,7 +24,7 @@ describe('MProgress', () => {
 
     describe('indeterminate mode', () => {
         it('should render correctly', () => {
-            const pgr = mount(MProgress, {
+            const pgr: Wrapper<MProgress> = mount(MProgress, {
                 localVue: localVue,
                 propsData: {
                     indeterminate: true
@@ -35,7 +35,7 @@ describe('MProgress', () => {
         });
 
         it('should render correctly when circle', () => {
-            const pgr = mount(MProgress, {
+            const pgr: Wrapper<MProgress> = mount(MProgress, {
                 localVue: localVue,
                 propsData: {
                     circle: true

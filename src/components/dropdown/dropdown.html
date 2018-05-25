@@ -4,6 +4,7 @@
      ref="mDropdown">
     <m-input-style ref="mInputStyle"
                    :label="label"
+                   :label-for="id"
                    :disabled="isDisabled"
                    :waiting="isWaiting"
                    :focus="open"
@@ -17,7 +18,11 @@
                    v-m-popup:popup>
         <input type="text"
                ref="input"
+               :id="id"
                class="m-dropdown__input"
+               aria-haspopup="true"
+               :aria-controls="ariaControls"
+               :aria-expanded="open"
                :disabled="!active"
                :readonly="!filterable"
                :placeholder="placeholder"
@@ -56,7 +61,8 @@
              :padding="false"
              :focus-management="isMqMaxS"
              :close-on-backdrop="true"
-             :preload="true">
+             :preload="true"
+             :open-trigger="'mousedown'">
         <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="filterable">
@@ -70,8 +76,11 @@
                 </m-icon-button>
             </div>
         </template>
-        <ul class="m-dropdown__list"
-            ref="items">
+        <ul :id="ariaControls"
+            class="m-dropdown__list"
+            ref="items"
+            :aria-labelledby="id"
+            aria-live="polite">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
             <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>

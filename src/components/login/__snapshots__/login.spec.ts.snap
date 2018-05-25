@@ -4,10 +4,10 @@ exports[`MLogin when login should render correctly 1`] = `
 <form>
     <div class="m-textfield m--has-label m--is-type-text" style="width:100%;max-width:288px;">
         <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
-            <label class="m-input-style__label"><span>Username</span></label>
+            <label for="mTextfield-uuid" class="m-input-style__label"><span>Username</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
-                    <input value="" class="m-textfield__input"> </div>
+                    <input id="mTextfield-uuid" value="" class="m-textfield__input"> </div>
                 <div class="m-input-style__body__right"></div>
             </div>
         </div>
@@ -15,18 +15,11 @@ exports[`MLogin when login should render correctly 1`] = `
     <br>
     <div class="m-textfield m--has-label m--is-type-password" style="width:100%;max-width:288px;">
         <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
-            <label class="m-input-style__label"><span>Password</span></label>
+            <label for="mTextfield-uuid" class="m-input-style__label"><span>Password</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
-                    <input value="" class="m-textfield__input"> </div>
-                <div class="m-input-style__body__right">
-                    <div class="m-textfield__icon-password m--is-transparent">
-                        <button type="button" title="m-textfield:show-password" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
-                            <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
-                                <use xlink:href="#show-password" aria-hidden="true"></use>
-                            </svg> <span class="m-icon-button__hidden"></span></button>
-                    </div>
-                </div>
+                    <input id="mTextfield-uuid" value="" class="m-textfield__input"> </div>
+                <div class="m-input-style__body__right"></div>
             </div>
         </div>
     </div>

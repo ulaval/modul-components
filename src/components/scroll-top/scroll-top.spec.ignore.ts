@@ -1,6 +1,7 @@
+import '../../utils/polyfills';
 
 import Vue from 'vue';
-import '../../utils/polyfills';
+
 import ScrollTopPlugin, { MScrollTop, MScrollTopPosition } from './scroll-top';
 
 const RELATIVE_CSS: string = 'm--is-relative';
@@ -39,8 +40,8 @@ describe('scroll-top', () => {
     });
 
     it('click event', () => {
-        let clickSpy = jasmine.createSpy('clickSpy');
-        let vm = new Vue({
+        let clickSpy: jasmine.Spy = jasmine.createSpy('clickSpy');
+        let vm: Vue = new Vue({
             data: {
                 internalPosition: MScrollTopPosition.Relative
             },

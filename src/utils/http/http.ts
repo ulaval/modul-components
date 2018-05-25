@@ -1,25 +1,34 @@
-import { PluginObject } from 'vue';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios';
+import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
 import qs from 'qs/lib';
-import { RestAdapter, RequestConfig } from './rest';
+import { PluginObject } from 'vue';
+
 import * as strUtils from '../str/str';
+import { RequestConfig, RestAdapter } from './rest';
 
 const AUTHORIZATION_HEADER: string = 'Authorization';
 
 export interface HttpPluginOptions {
     protectedUrls: string[];
     authorizationFn: () => string;
+    timeout?: number;
 }
+
+export const NO_TIMEOUT: number = 0;
 
 export class HttpService implements RestAdapter {
     public instance: AxiosInstance;
 
     constructor(private options?: HttpPluginOptions) {
-        this.instance = axios.create({
-            timeout: 30000 // TODO configure from plugin options
-        });
+        this.instance = axios.create();
 
         if (this.options) {
+            if (!this.options.timeout) {
+                this.instance.defaults.timeout = 30000;
+            } else if (this.options.timeout === NO_TIMEOUT) {
+                this.instance.defaults.timeout = undefined;
+            } else {
+                this.instance.defaults.timeout = this.options.timeout;
+            }
             let opt: HttpPluginOptions = this.options;
             this.instance.interceptors.request.use(config => {
                 opt.protectedUrls.every(url => {
@@ -92,7 +101,7 @@ export class HttpService implements RestAdapter {
 
 const HttpPlugin: PluginObject<any> = {
     install(v, options): void {
-        let http = new HttpService(options);
+        let http: HttpService = new HttpService(options);
         (v.prototype as any).$http = http;
     }
 };

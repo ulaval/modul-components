@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
@@ -13,7 +13,7 @@ describe('MIcon', () => {
     });
 
     it('should render correctly', () => {
-        const icon = mount(MIcon, {
+        const icon: Wrapper<MIcon> = mount(MIcon, {
             localVue: localVue,
             propsData: {
                 name: 'options',
@@ -25,7 +25,7 @@ describe('MIcon', () => {
     });
 
     it('should render title when svgTitle prop is set', () => {
-        const icon = mount(MIcon, {
+        const icon: Wrapper<MIcon> = mount(MIcon, {
             localVue: localVue,
             propsData: {
                 svgTitle: 'options'
@@ -36,7 +36,7 @@ describe('MIcon', () => {
     });
 
     it('should emit click event when icon is clicked', () => {
-        const icon = mount(MIcon, {
+        const icon: Wrapper<MIcon> = mount(MIcon, {
             localVue: localVue
         });
 

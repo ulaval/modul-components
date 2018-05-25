@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-beta.33",
+    "version": "1.0.0-beta.34",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -25,7 +25,8 @@
         "tslint": "tslint -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
         "tslint-ci": "tslint  -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -t junit -o reports/junit/js-lint-results.xml 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
         "stylelint": "stylelint \"src/**/*.css\" \"src/**/*.scss\" --config conf/stylelint.json",
-        "prepack": "npm run clean && npm run build && npm run buildlib"
+        "prepack": "npm run clean && npm run build && npm run buildlib",
+        "component": "node ./tests/meta/component-generator"
     },
     "jest": {
         "roots": [
@@ -66,6 +67,7 @@
     "dependencies": {
         "@types/sprintf-js": "^1.1.0",
         "axios": "^0.17.1",
+        "css-element-queries": "^0.4.0",
         "css-loader": "^0.28.7",
         "enquire.js": "^2.1.6",
         "mobile-drag-drop": "^2.3.0-rc.1",
@@ -83,7 +85,6 @@
         "vue-template-loader": "^0.3.1"
     },
     "peerDependencies": {
-        "css-element-queries": "^0.4.0",
         "file-loader": "^1.1.5",
         "filesize": "^3.6.0",
         "popper.js": "^1.12.9",
@@ -102,7 +103,6 @@
         "bundle-loader": "^0.5.5",
         "chromedriver": "^2.33.2",
         "copyfiles": "^1.2.0",
-        "css-element-queries": "^0.4.0",
         "custom-tslint-formatters": "^2.1.1",
         "es6-promise": "^4.1.1",
         "file-loader": "^1.1.5",

@@ -48,7 +48,8 @@ export class Portal extends ModulVue implements PortalMixin {
         validator: value =>
             value === MOpenTrigger.Click ||
             value === MOpenTrigger.Hover ||
-            value === MOpenTrigger.Manual
+            value === MOpenTrigger.Manual ||
+            value === MOpenTrigger.MouseDown
     })
     public openTrigger: MOpenTrigger;
 
@@ -150,7 +151,11 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public get propOpen(): boolean {
-        return (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
+        let open: boolean = (this.open === undefined ? this.internalOpen : this.open) && !this.disabled;
+        if (open) {
+            this.loaded = true;
+        }
+        return open;
     }
 
     public set propOpen(value: boolean) {
@@ -159,7 +164,6 @@ export class Portal extends ModulVue implements PortalMixin {
                 if (this.portalTargetEl) {
                     this.stackId = this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().getBackdropMode(), this.as<MediaQueriesMixin>().isMqMaxS);
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
-                        this.loaded = true;
                         this.portalTargetEl.style.position = 'absolute';
 
                         setTimeout(() => {
@@ -219,19 +223,25 @@ export class Portal extends ModulVue implements PortalMixin {
             this.internalTrigger = this.as<OpenTriggerMixin>().triggerHook;
         }
         if (this.internalTrigger) {
-            if (this.openTrigger === MOpenTrigger.Click) {
-                this.internalTrigger.addEventListener('mousedown', this.toggle);
-            } else if (this.openTrigger === MOpenTrigger.Hover) {
-                this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
-                // Closing not supported for the moment, check source code history for how was handled mouse leave
+            switch (this.openTrigger) {
+                case MOpenTrigger.Click:
+                    this.internalTrigger.addEventListener('click', this.toggle);
+                    break;
+                case MOpenTrigger.MouseDown:
+                    this.internalTrigger.addEventListener('mousedown', this.toggle);
+                    break;
+                case MOpenTrigger.Hover:
+                    this.internalTrigger.addEventListener('mouseenter', this.handleMouseEnter);
+                    // Closing not supported for the moment, check source code history for how was handled mouse leave
+                    break;
             }
         }
     }
 
     private toggle(event: MouseEvent): void {
-        if (this.openTrigger !== MOpenTrigger.Click ||
-                (this.openTrigger === MOpenTrigger.Click && event.button !== undefined && event.button === MouseButtons.LEFT)) {
+        if (event.button !== undefined && event.button === MouseButtons.LEFT) {
             this.propOpen = !this.propOpen;
+            this.$emit('click', event);
         }
     }
 
