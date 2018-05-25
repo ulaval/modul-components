@@ -11,6 +11,9 @@ exports[`MTimepicker should render correctly 1`] = `
             </div>
         </div>
     </div>
+    <div class="m-validation-message">
+        <m-accordion-transition transition="true"></m-accordion-transition>
+    </div>
     <div class="m-popup">
         <div class="m-popper">
             <DIV class="v-portal" style="display:none;"></DIV>
@@ -29,6 +32,9 @@ exports[`MTimepicker should render correctly min/max time 1`] = `
                 <m-icon-button icon-name="clock" button-size="22px" aria-controls="mTimepicker-uuid"><span class="m-i18n">Open time selector</span> </m-icon-button>
             </div>
         </div>
+    </div>
+    <div class="m-validation-message">
+        <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
         <div class="m-popper">
@@ -52,6 +58,9 @@ exports[`MTimepicker should render correctly when disabled is set 1`] = `
             </svg>
         </div>
     </div>
+    <div class="m-validation-message">
+        <m-accordion-transition transition="true"></m-accordion-transition>
+    </div>
     <div class="m-popup">
         <div class="m-popper">
             <DIV class="v-portal" style="display:none;"></DIV>
@@ -72,11 +81,15 @@ exports[`MTimepicker should render correctly when error is set 1`] = `
         </div>
     </div>
     <div class="m-validation-message">
-        <p class="m-validation-message__error">
-            <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
-                <title>m-validation-message:title-error-icon</title>
-                <use xlink:href="#error" aria-hidden="true"></use>
-            </svg><span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
+        <m-accordion-transition transition="true">
+            <div class="m-validation-message__wrap">
+                <p class="m-validation-message__error">
+                    <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
+                        <title>m-validation-message:title-error-icon</title>
+                        <use xlink:href="#error" aria-hidden="true"></use>
+                    </svg><span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
+            </div>
+        </m-accordion-transition>
     </div>
     <div class="m-popup">
         <div class="m-popper">
@@ -98,11 +111,15 @@ exports[`MTimepicker should render correctly when valid is set 1`] = `
         </div>
     </div>
     <div class="m-validation-message">
-        <p class="m-validation-message__valid">
-            <svg width="1em" height="1em" class="m-icon m-validation-message__valid__icon">
-                <title>m-validation-message:title-valid-icon</title>
-                <use xlink:href="#check" aria-hidden="true"></use>
-            </svg> <span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
+        <m-accordion-transition transition="true">
+            <div class="m-validation-message__wrap">
+                <p class="m-validation-message__valid">
+                    <svg width="1em" height="1em" class="m-icon m-validation-message__valid__icon">
+                        <title>m-validation-message:title-valid-icon</title>
+                        <use xlink:href="#check" aria-hidden="true"></use>
+                    </svg> <span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
+            </div>
+        </m-accordion-transition>
     </div>
     <div class="m-popup">
         <div class="m-popper">
@@ -125,6 +142,9 @@ exports[`MTimepicker should render correctly when waiting is set 1`] = `
                 <div></div>
             </div>
         </div>
+    </div>
+    <div class="m-validation-message">
+        <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
         <div class="m-popper">
