@@ -3,7 +3,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import { InputLabel } from '../../mixins/input-label/input-label';
-import { InputManagement } from '../../mixins/input-management/input-management';
+import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { ModulVue } from '../../utils/vue/vue';
@@ -33,7 +33,7 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'hidden-password';
         InputLabel
     ]
 })
-export class MTextfield extends ModulVue {
+export class MTextfield extends ModulVue implements InputManagementData {
 
     @Prop({
         default: MTextfieldType.Text,
@@ -59,7 +59,6 @@ export class MTextfield extends ModulVue {
     readonly internalValue: string;
 
     private passwordAsText: boolean = false;
-
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
 
