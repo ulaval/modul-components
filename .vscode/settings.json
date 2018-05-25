@@ -8,5 +8,14 @@
     "css.validate": false,
     "scss.validate": false,
     "tslint.configFile": "conf/tslint.json",
-    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false
+    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "typescriptHero.imports.organizeOnSave": true, //Pour organiser sur le save
+    "typescriptHero.imports.multiLineTrailingComma": false, //Pour pas avoir de trailing comma
+    "typescriptHero.imports.multiLineWrapThreshold": 9999, //Pour garder sur une seule ligne
+    "typescriptHero.imports.grouping": [ //Ordre des imports
+        "Plains",
+        "/bootstrap/",
+        "Modules",
+        "Workspace"
+    ]
 }
