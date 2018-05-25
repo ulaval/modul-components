@@ -22,7 +22,7 @@ const I18nDirective: DirectiveOptions = {
     ): void {
         if (binding.arg) {
             if (vnode.componentInstance) {
-                Vue.prototype.$log.warn(`La directive i18n ne devrait pas etre utilisée sur un composant ${vnode.componentInstance.constructor.name}. Veuillez utiliser le filtre.`);
+                Vue.prototype.$log.warn(`i18n Directive souldn'y be used on a ${vnode.componentInstance.constructor.name} component. Please use the filter instead.`);
             }
             let expression = binding.expression;
             const modifiers: string[] = Object.getOwnPropertyNames(binding.modifiers);
