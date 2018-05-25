@@ -19,12 +19,7 @@ export class MCharacterCount extends Vue {
     public transition: boolean;
 
     private get hasCounter(): boolean {
-        return this.maxLength > 0 && this.isThresholdValid;
-    }
-
-    private get isThresholdValid(): boolean {
-        let counterThreshold: number = Math.max(0, Math.min(this.threshold, this.maxLength));
-        return this.valueLength >= counterThreshold;
+        return this.maxLength > 0 && this.valueLength >= Math.max(0, Math.min(this.threshold, this.maxLength));
     }
 }
 
