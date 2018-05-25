@@ -1,6 +1,5 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { PAGE_NOT_FOUND_NAME } from '../component-names';
 import WithRender from './page-not-found.sandbox.html';
 

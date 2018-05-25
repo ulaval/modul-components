@@ -1,18 +1,19 @@
+import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import WithRender from './error-message.html';
 import { Prop } from 'vue-property-decorator';
-import moment from 'moment';
+
+import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
+import { ERROR_MESSAGE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
-import ModalPlugin from '../modal/modal';
-import { ERROR_MESSAGE_NAME } from '../component-names';
+import WithRender from './error-message.html?style=./error-message.scss';
 
 @WithRender
 @Component
-export class MErrorMessage extends Vue {
+export class MErrorMessage extends ModulVue {
     @Prop()
     public error?: Error;
 
@@ -24,6 +25,11 @@ export class MErrorMessage extends Vue {
     @Prop()
     public referenceNumber?: string;
 
+    @Prop({
+        default: false
+    })
+    public stacktrace: boolean;
+
     private get userAgent(): string {
         return window.navigator.userAgent;
     }
@@ -34,6 +40,10 @@ export class MErrorMessage extends Vue {
             result = [this.date.format('YYYY-MM-DD'), this.date.format('HH:mm:ss')];
         }
         return result;
+    }
+
+    private get propStacktrace(): boolean {
+        return this.stacktrace && !!this.error;
     }
 }
 

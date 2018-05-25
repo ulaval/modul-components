@@ -43,6 +43,7 @@ import RadioSandboxPlugin from '../components/radio/radio.sandbox';
 import RadioGroupSandboxPlugin from '../components/radio-group/radio-group.sandbox';
 import RadioStyleSandboxPlugin from '../components/radio-style/radio-style.sandbox';
 import ScrollTopSandboxPlugin from '../components/scroll-top/scroll-top.sandbox';
+import SessionExpiredSandboxPlugin from '../components/session-expired/session-expired.sandbox';
 import SidebarSandboxPlugin from '../components/sidebar/sidebar.sandbox';
 import SliderSandboxPlugin from '../components/slider/slider.sandbox';
 import SpinnerSandboxPlugin from '../components/spinner/spinner.sandbox';
@@ -105,6 +106,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(RadioGroupSandboxPlugin);
         Vue.use(RadioStyleSandboxPlugin);
         Vue.use(ScrollTopSandboxPlugin);
+        Vue.use(SessionExpiredSandboxPlugin);
         Vue.use(SidebarSandboxPlugin);
         Vue.use(SliderSandboxPlugin);
         Vue.use(SpinnerSandboxPlugin);
