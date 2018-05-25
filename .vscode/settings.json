@@ -1,4 +1,3 @@
-// Placez vos paramètres dans ce fichier pour remplacer les paramètres par défaut et les paramètres utilisateur.
 {
     "editor.detectIndentation": false,
     "editor.tabSize": 4,
@@ -8,5 +7,14 @@
     "css.validate": false,
     "scss.validate": false,
     "tslint.configFile": "conf/tslint.json",
-    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false
+    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "typescriptHero.imports.organizeOnSave": true,
+    "typescriptHero.imports.multiLineTrailingComma": false,
+    "typescriptHero.imports.multiLineWrapThreshold": 9999,
+    "typescriptHero.imports.grouping": [
+        "Plains",
+        "/bootstrap/",
+        "Modules",
+        "Workspace"
+    ]
 }

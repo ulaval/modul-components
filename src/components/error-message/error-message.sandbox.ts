@@ -10,6 +10,16 @@ export class MErrorMessageSandbox extends Vue {
     private e: any = {
         stack: `An error occured
 error line
+from line
+because of this line
+a line
+last line
+before the last line
+where are in a loop
+error line
+from line
+because of this line
+a line
 last line
 before the last line`
     };

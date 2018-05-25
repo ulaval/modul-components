@@ -1,0 +1,9 @@
+<div>
+    <h3>default</h3>
+    <p>
+        <m-inplace-edit @click="ie1Click" :edit-mode.sync="editMode1">
+            <span slot="readMode">{{value1}}</span>
+            <m-textfield slot="editMode" label="Field #1" v-model="value1"></m-textfield>
+        </m-inplace-edit>
+    </p>
+</div>

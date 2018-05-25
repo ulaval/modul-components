@@ -2,7 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
-import { InputManagement } from '../../mixins/input-management/input-management';
+import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { ModulVue } from '../../utils/vue/vue';
@@ -33,7 +33,7 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'hidden-password';
         InputLabel
     ]
 })
-export class MTextfield extends ModulVue {
+export class MTextfield extends ModulVue implements InputManagementData {
 
     @Prop({
         default: MTextfieldType.Text,
@@ -47,9 +47,18 @@ export class MTextfield extends ModulVue {
     public type: MTextfieldType;
     @Prop({ default: true })
     public passwordIcon: boolean;
+    @Prop()
+    public characterCount: boolean;
+    @Prop({ default: Infinity })
+    public maxLength: number;
+    @Prop({ default: true })
+    public lengthOverflow: boolean;
+    @Prop({ default: 0 })
+    public threshold: number;
+
+    readonly internalValue: string;
 
     private passwordAsText: boolean = false;
-
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
     private id: string = `mTextfield-${uuid.generate()}`;
@@ -101,6 +110,26 @@ export class MTextfield extends ModulVue {
 
     private get propPasswordIcon(): boolean {
         return this.passwordIcon && this.type === MTextfieldType.Password && this.as<InputState>().active;
+    }
+
+    public get valueLength(): number {
+        return this.internalValue.length;
+    }
+
+    private get maxLengthNumber(): number {
+        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity ;
+    }
+
+    private get hasTextfieldError(): boolean {
+        return this.as<InputState>().hasError;
+    }
+
+    private get isTextfieldValid(): boolean {
+        return this.as<InputState>().isValid;
+    }
+
+    private get hasCounterTransition(): boolean {
+        return !this.as<InputState>().hasErrorMessage;
     }
 }
 

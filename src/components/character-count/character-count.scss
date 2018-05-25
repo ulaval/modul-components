@@ -1,0 +1,10 @@
+@import 'abstracts/variables';
+@import '../accordion/accordion-transition';
+
+.m-character-count {
+    transition: color $m-transition-duration ease;
+    margin-top: 2px; // Magic number
+    font-size: $m-font-size--xs;
+    padding-left: $m-padding--xs;
+    color: currentColor;
+}

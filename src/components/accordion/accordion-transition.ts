@@ -4,18 +4,27 @@ import { ACCORDION_TRANSITION_NAME } from '../component-names';
 
 interface MAccordionTransitionProps {
     heightDelta?: number;
+    transition?: boolean;
 }
 
 export const MAccordionTransition: VueConstructor<Vue> = Vue.extend({
     functional: true,
     render(createElement, context): VNode {
+        const props: MAccordionTransitionProps = context.props as MAccordionTransitionProps;
+        const CLASS_HAS_TRANSITION: string = 'm-accordion--has-transition';
         let data: VNodeData = {
             props: {
-                name: 'accordion'
+                name: 'm-accordion'
             },
             on: {
+                beforeEnter(el: HTMLElement): void {
+                    if (props.transition || props.transition === undefined) {
+                        el.classList.add(CLASS_HAS_TRANSITION);
+                    } else if (el.classList.contains(CLASS_HAS_TRANSITION)) {
+                        el.classList.remove(CLASS_HAS_TRANSITION);
+                    }
+                },
                 enter(el: HTMLElement): void {
-                    const props: MAccordionTransitionProps = context.props as MAccordionTransitionProps;
                     const heightDelta: number = props.heightDelta
                         ? props.heightDelta
                         : 0;
@@ -27,6 +36,9 @@ export const MAccordionTransition: VueConstructor<Vue> = Vue.extend({
                 },
                 beforeLeave(el: HTMLElement): void {
                     el.style.height = el.scrollHeight + 'px';
+                    if (props.transition === false && el.classList.contains(CLASS_HAS_TRANSITION)) {
+                        el.classList.remove(CLASS_HAS_TRANSITION);
+                    }
                 },
                 afterLeave(el: HTMLElement): void {
                     el.style.removeProperty('height');

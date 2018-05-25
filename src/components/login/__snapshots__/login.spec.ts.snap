@@ -7,8 +7,13 @@ exports[`MLogin when login should render correctly 1`] = `
             <label for="mTextfield-uuid" class="m-input-style__label"><span>Username</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
-                    <input id="mTextfield-uuid" value="" class="m-textfield__input"> </div>
+                    <input id="mTextfield-uuid" maxlength="Infinity" value="" class="m-textfield__input"> </div>
                 <div class="m-input-style__body__right"></div>
+            </div>
+        </div>
+        <div class="m-textfield__validation">
+            <div class="m-validation-message m-textfield__validation__message">
+                <m-accordion-transition transition="true"></m-accordion-transition>
             </div>
         </div>
     </div>
@@ -18,8 +23,13 @@ exports[`MLogin when login should render correctly 1`] = `
             <label for="mTextfield-uuid" class="m-input-style__label"><span>Password</span></label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
-                    <input id="mTextfield-uuid" value="" class="m-textfield__input"> </div>
+                    <input id="mTextfield-uuid" maxlength="Infinity" value="" class="m-textfield__input"> </div>
                 <div class="m-input-style__body__right"></div>
+            </div>
+        </div>
+        <div class="m-textfield__validation">
+            <div class="m-validation-message m-textfield__validation__message">
+                <m-accordion-transition transition="true"></m-accordion-transition>
             </div>
         </div>
     </div>

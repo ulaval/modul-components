@@ -1,0 +1,8 @@
+{
+    "m-session-expired": {
+        "message": "Votre session de travail est expirée.",
+        "directions-1": "En raison d'une trop grande période d'inactivité ou parce que vous vous êtes déconnecté d’un système partenaire, votre session de travail a été interrompue.",
+        "directions-2": "Vous devrez peut-être vous connecter de nouveau.",
+        "back-to-portal": "Retour au portail"
+    }
+}

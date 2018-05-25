@@ -1,16 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MPageNotFound should render correctly collapsed 1`] = `
+exports[`MPageNotFound should render correctly 1`] = `
 <div>
-    <m-message state="warning">
-        <m-i18n k="m-page-not-found:message"></m-i18n>
-    </m-message>
-    <p>
-        <m-i18n k="m-page-not-found:directions"></m-i18n>
-    </p>
+    <div class="m-message m--is-warning m--is-skin-regular">
+        <div class="m-message__wrap">
+            <div class="m-message__icon">
+                <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                    <use xlink:href="#warning" aria-hidden="true"></use>
+                </svg>
+            </div>
+            <div class="m-message__body">
+                <div class="m-message__body__content"><span class="m-i18n">m-page-not-found:message</span></div>
+            </div>
+        </div>
+    </div>
+    <p><span class="m-i18n">m-page-not-found:directions</span></p>
     <p></p>
-    <m-link mode="link">
-        <m-i18n k="m-page-not-found:back-to-portal"></m-i18n>
-    </m-link>
+    <a href="/" class="m-link"> <span class="m-link__text">
+        m-page-not-found:back-to-portal
+    </span> </a>
+</div>
+`;
+
+exports[`MPageNotFound should render correctly with back-to-label override 1`] = `
+<div>
+    <div class="m-message m--is-warning m--is-skin-regular">
+        <div class="m-message__wrap">
+            <div class="m-message__icon">
+                <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                    <use xlink:href="#warning" aria-hidden="true"></use>
+                </svg>
+            </div>
+            <div class="m-message__body">
+                <div class="m-message__body__content"><span class="m-i18n">m-page-not-found:message</span></div>
+            </div>
+        </div>
+    </div>
+    <p><span class="m-i18n">m-page-not-found:directions</span></p>
+    <p></p>
+    <a href="/" class="m-link"> <span class="m-link__text">
+        Some back to label
+    </span> </a>
 </div>
 `;

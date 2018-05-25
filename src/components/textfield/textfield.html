@@ -1,8 +1,8 @@
 <div class="m-textfield"
      :class="[{ 'm--is-disabled' : isDisabled,
                 'm--is-waiting' : isWaiting,
-                'm--has-error' : hasError,
-                'm--is-valid' : isValid,
+                'm--has-error' : hasTextfieldError,
+                'm--is-valid' : isTextfieldValid,
                 'm--has-icon' : hasIcon,
                 'm--has-label': hasLabel },
                 'm--is-type-' + inputType ]"
@@ -10,8 +10,8 @@
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
-                   :error="hasError"
-                   :valid="isValid"
+                   :error="hasTextfieldError"
+                   :valid="isTextfieldValid"
                    :label="label"
                    :label-for="id"
                    :focus="isFocus"
@@ -32,7 +32,8 @@
                @change="onChange"
                @paste="onPaste"
                :autocomplete="autocomplete"
-               v-model="model">
+               v-model="model"
+               :maxlength="maxLengthNumber">
         <template slot="right-content">
             <transition name="m--is">
                 <m-icon-button class="m-textfield__icon-password"
@@ -45,12 +46,16 @@
             </transition>
         </template>
     </m-input-style>
-    <m-validation-message
-        :disabled="isDisabled"
-        :waiting="isWaiting"
-        :error="hasError"
-        :valid="isValid"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"></m-validation-message>
+    <div class="m-textfield__validation">
+        <m-validation-message
+            class="m-textfield__validation__message"
+            :disabled="isDisabled"
+            :waiting="isWaiting"
+            :error="hasTextfieldError"
+            :error-message="errorMessage"
+            :valid="isTextfieldValid"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"></m-validation-message>
+        <m-character-count v-if="characterCount" :valueLength="valueLength" :maxLength="maxLength" :threshold="threshold" :transition="hasCounterTransition"></m-character-count>
+    </div>
 </div>
