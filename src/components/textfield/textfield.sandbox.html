@@ -1,8 +1,26 @@
 <div>
-    <m-textfield :character-count="true" max-length="20" :length-overflow="true" threshold="-5"></m-textfield>
-    <m-textfield :character-count="true" max-length="20" :length-overflow="true" threshold="200"></m-textfield>
-    <m-textfield :character-count="true" max-length="20" :length-overflow="true" threshold="10"></m-textfield>
-    <m-textfield :character-count="true" max-length="20" :length-overflow="false"></m-textfield>
-    <m-textfield :character-count="true" max-length="20" :length-overflow="true" threshold="10" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textfield>
-    <m-textfield :character-count="true" max-length="20" :length-overflow="false" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textfield>
+    <h6>Max-lenght(20) / Lenght-overflow(true) / Threshold(-5)</h6>
+    <div>
+        <m-textfield :character-count="true" max-length="20" :length-overflow="true" threshold="-5"></m-textfield>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(true) / Threshold(200)</h6>
+    <div>
+        <m-textfield :character-count="true" max-length="20" :length-overflow="true" threshold="200"></m-textfield>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(true) / Threshold(10)</h6>
+    <div>
+        <m-textfield :character-count="true" max-length="20" :length-overflow="true" threshold="10"></m-textfield>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(false) / Threshold(undefined)</h6>
+    <div>
+        <m-textfield :character-count="true" max-length="20" :length-overflow="false"></m-textfield>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(true) / Threshold(10)</h6>
+    <div>
+        <m-textfield :character-count="true" max-length="20" :length-overflow="true" threshold="10" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textfield>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(false) / Threshold(undefined)</h6>
+    <div>
+        <m-textfield :character-count="true" max-length="20" :length-overflow="false" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textfield>
+    </div>
 </div>

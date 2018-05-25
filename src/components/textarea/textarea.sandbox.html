@@ -1,6 +1,26 @@
 <div>
-    <m-textarea :character-count="true" max-length="20" :lengthOverflow="true" threshold="80" :error-message="tagee"></m-textarea>
-    <m-textarea :character-count="true" max-length="20" :lengthOverflow="false" ></m-textarea>
-    <m-textarea :character-count="true" max-length="20" :lengthOverflow="true" threshold="80" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textarea>
-    <m-textarea :character-count="true" max-length="20" :lengthOverflow="false" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textarea>
+    <h6>Max-lenght(20) / Lenght-overflow(true) / Threshold(-5)</h6>
+    <div>
+        <m-textarea :character-count="true" max-length="20" :lengthOverflow="true" threshold="-5" :error-message="tagee"></m-textarea>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(true) / Threshold(200)</h6>
+    <div>
+        <m-textarea :character-count="true" max-length="20" :lengthOverflow="true" threshold="200"></m-textarea>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(true) / Threshold(200)</h6>
+    <div>
+        <m-textarea :character-count="true" max-length="20" :lengthOverflow="true" threshold="10"></m-textarea>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(false) / Threshold(undefined)</h6>
+    <div>
+        <m-textarea :character-count="true" max-length="20" :lengthOverflow="false"></m-textarea>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(true) / Threshold(10)</h6>
+    <div>
+        <m-textarea :character-count="true" max-length="20" :lengthOverflow="true" threshold="10" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textarea>
+    </div>
+    <h6>Max-lenght(20) / Lenght-overflow(false) / Threshold(undefined)</h6>
+    <div>
+        <m-textarea :character-count="true" max-length="20" :lengthOverflow="false" error-message="Enim qui mollit proident incididunt et ad laborum sunt sint deserunt ipsum ut in duis."></m-textarea>
+    </div>
 </div>
