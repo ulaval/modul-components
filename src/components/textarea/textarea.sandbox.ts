@@ -7,7 +7,6 @@ import WithRender from './textarea.sandbox.html';
 @WithRender
 @Component
 export class MTextareaSandbox extends Vue {
-    public someData: number = 1;
 }
 
 const TextareaSandboxPlugin: PluginObject<any> = {

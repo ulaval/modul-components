@@ -7,7 +7,6 @@ import WithRender from './checkbox.sandbox.html';
 @WithRender
 @Component
 export class MCheckboxSandbox extends Vue {
-    public someData: number = 1;
 }
 
 const CheckboxSandboxPlugin: PluginObject<any> = {

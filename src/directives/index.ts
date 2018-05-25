@@ -12,7 +12,6 @@ import PopupPlugin from './popup/popup';
 import RippleEffectPlugin from './ripple-effect/ripple-effect';
 import ScrollToPlugin from './scroll-to/scroll-to';
 import SortablePlugin from './sortable/sortable';
-import TextAreaAutoHeightPlugin from './textarea-auto-height/textarea-auto-height';
 import RemoveUserSelectPlugin from './user-select/remove-user-select';
 
 const DirectivesPlugin: PluginObject<any> = {
@@ -33,7 +32,6 @@ const DirectivesPlugin: PluginObject<any> = {
         Vue.use(RippleEffectPlugin);
         Vue.use(ScrollToPlugin);
         Vue.use(SortablePlugin);
-        Vue.use(TextAreaAutoHeightPlugin);
         Vue.use(I18nDirectivePlugin);
     }
 };

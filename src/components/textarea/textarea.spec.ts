@@ -4,6 +4,10 @@ import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import TextareaPlugin from '../../components/textarea/textarea';
 import { MTextarea } from './textarea';
+import uuid from '../../utils/uuid/uuid';
+
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('MTextArea', () => {
     beforeEach(() => {

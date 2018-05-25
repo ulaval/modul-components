@@ -7,7 +7,6 @@ import WithRender from './radio-group.sandbox.html';
 @WithRender
 @Component
 export class MRadioGroupSandbox extends Vue {
-    public someData: number = 1;
 }
 
 const RadioGroupSandboxPlugin: PluginObject<any> = {

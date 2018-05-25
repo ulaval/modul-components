@@ -4,6 +4,10 @@ import Vue from 'vue';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import LoginPlugin, { MLogin } from './login';
+import uuid from '../../utils/uuid/uuid';
+
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('MLogin', () => {
 
