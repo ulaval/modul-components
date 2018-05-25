@@ -2,18 +2,6 @@ import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue'
 
 import { I18N_NAME } from '../directive-names';
 
-function setAttribute(el: HTMLElement, arg: string, expression: any): void {
-    if (arg === 'placeholder' && !(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) {
-        if (el.querySelector('textarea')) {
-            el.querySelector('textarea')!.setAttribute(arg, expression);
-        } else if (el.querySelector('input')) {
-            el.querySelector('input')!.setAttribute(arg, expression);
-        }
-    } else {
-        el.setAttribute(arg, expression);
-    }
-}
-
 const I18nDirective: DirectiveOptions = {
     bind(
         el: HTMLElement,
@@ -36,7 +24,7 @@ const I18nDirective: DirectiveOptions = {
                     options.modifier
                 );
             }
-            setAttribute(el, binding.arg, expression);
+            el.setAttribute(binding.arg, expression);
         }
     }
 };

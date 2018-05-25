@@ -1,11 +1,10 @@
-import { resetModulPlugins } from '../../../tests/helpers/component';
+import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-import I18nDirectivePlugin from './i18n';
-import { Wrapper, mount } from '@vue/test-utils';
-import I18nPlugin, { I18nPluginOptions, FormatMode } from '../../utils/i18n/i18n';
+
+import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
-import TextareaPlugin from '../../components/textarea/textarea';
-import TextfieldPlugin from '../../components/textfield/textfield';
+import I18nPlugin, { FormatMode, I18nPluginOptions } from '../../utils/i18n/i18n';
+import I18nDirectivePlugin from './i18n';
 
 describe(`Étant donné la directive v-m-i18n`, () => {
     let element: Wrapper<Vue>;
@@ -32,38 +31,6 @@ describe(`Étant donné la directive v-m-i18n`, () => {
         });
         it(`the element should have the title attribute set`, () => {
             expect(element.vm.$el.getAttribute('title')).toEqual('test');
-        });
-    });
-
-    describe(`Given a MTextarea and a placeholder argument`, () => {
-        beforeEach(() => {
-            Vue.use(TextareaPlugin);
-            element = mount(
-                {
-                    template:
-                        '<m-textarea v-m-i18n:placeholder="test"></m-textarea>'
-                },
-                { localVue: Vue }
-            );
-        });
-        it(`the textarea should have the placeholder attribute set`, () => {
-            expect(element.find('textarea').hasAttribute('placeholder', 'test')).toBeTruthy();
-        });
-    });
-
-    describe(`Given a MTextfield and a placeholder argument`, () => {
-        beforeEach(() => {
-            Vue.use(TextfieldPlugin);
-            element = mount(
-                {
-                    template:
-                        '<m-textfield v-m-i18n:placeholder="test"></m-textfield>'
-                },
-                { localVue: Vue }
-            );
-        });
-        it(`the input should have the placeholder attribute set`, () => {
-            expect(element.find('input').hasAttribute('placeholder', 'test')).toBeTruthy();
         });
     });
 
