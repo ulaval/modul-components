@@ -1,13 +1,13 @@
-import Vue, { VNode, VNodeComponentOptions } from 'vue';
+import Vue, { PluginObject, VNode, VNodeComponentOptions } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
-import { ModulVue } from './../../../src/utils/vue/vue';
+import { ModulVue } from '../utils/vue/vue';
 import WithRender from './dynamic-sandbox.html';
 
 @WithRender
 @Component
-export class DynamicSandbox extends ModulVue {
+export class MDynamicSandbox extends ModulVue {
     @Prop()
     public tag: string | undefined;
 
@@ -56,11 +56,11 @@ export class DynamicSandbox extends ModulVue {
 
     private buildDynamicSandbox(tag: string): void {
         const componentName: string = tag.replace('m-', '');
-        this.meta = require(`!!./../../../dist/components/${componentName}/${componentName}.meta.json`);
+        this.meta = require(`../../dist/components/${componentName}/${componentName}.meta.json`);
 
         if (this.meta.mixins) {
             const mixins: any[] = this.meta.mixins.map(mixin => {
-                return require(`../../../dist/mixins/${this.toKebabCase(mixin)}/${this.toKebabCase(mixin)}.meta.json`);
+                return require(`../../dist/mixins/${this.toKebabCase(mixin)}/${this.toKebabCase(mixin)}.meta.json`);
             });
 
             mixins.forEach(mixin => {
@@ -78,7 +78,7 @@ export class DynamicSandbox extends ModulVue {
 
     private fillSlots(tag): void {
         const componentName: string = tag.replace('m-', '');
-        const testComponentTemplate: string = require(`!html-loader!./../../../dist/components/${componentName}/${componentName}.html`);
+        const testComponentTemplate: string = require(`!html-loader!../../dist/components/${componentName}/${componentName}.html`);
         const testComponentVue: Vue = this.getTestComponentVue();
 
         const slotRegex: RegExp = /<slot(?: name=")?([a-zA-Z]*)"?>/g;
@@ -115,3 +115,11 @@ export class DynamicSandbox extends ModulVue {
         return (this.$el.children[0] as any).__vue__ as Vue;
     }
 }
+
+const DynamicSandboxPlugin: PluginObject<any> = {
+    install(v, options): void {
+        Vue.component('dynamic-sandbox', MDynamicSandbox);
+    }
+};
+
+export default DynamicSandboxPlugin;

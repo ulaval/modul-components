@@ -2,13 +2,10 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { RADIO_NAME } from '../component-names';
-import { DynamicSandbox } from './../../../tests/app/sandbox/dynamic-sandbox';
 import WithRender from './radio.sandbox.html';
 
 @WithRender
-@Component({
-    components: { DynamicSandbox }
-})
+@Component
 export class MRadioSandbox extends Vue {
     public someData: number = 1;
 }
