@@ -95,7 +95,7 @@ export class MDynamicSandbox extends ModulVue {
         testComponentVue.$forceUpdate();
     }
 
-    private getTestComponentVue(): any {
+    private getTestComponentVue(): Vue {
         return (this.$el.children[0] as any).__vue__ as Vue;
     }
 }
