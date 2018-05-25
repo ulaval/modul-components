@@ -7,7 +7,7 @@ import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 
-let propsData: { propsData: { editMode: boolean, saveFn: () => Promise<void> } };
+let propsData: { propsData: { editMode: boolean } };
 
 let inplaceEdit: MInplaceEdit;
 let wrapper: Wrapper<ModulVue>;

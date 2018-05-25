@@ -11,8 +11,6 @@ import DialogPlugin from '../dialog/dialog';
 import IconButtonPlugin from '../icon-button/icon-button';
 import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 
-export type SaveFn = () => Promise<void>;
-
 @WithRender
 @Component({
     mixins: [MediaQueries, ElementQueries]
