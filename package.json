@@ -67,6 +67,7 @@
     "dependencies": {
         "@types/sprintf-js": "^1.1.0",
         "axios": "^0.17.1",
+        "css-element-queries": "^0.4.0",
         "css-loader": "^0.28.7",
         "enquire.js": "^2.1.6",
         "mobile-drag-drop": "^2.3.0-rc.1",
@@ -84,7 +85,6 @@
         "vue-template-loader": "^0.3.1"
     },
     "peerDependencies": {
-        "css-element-queries": "^0.4.0",
         "file-loader": "^1.1.5",
         "filesize": "^3.6.0",
         "popper.js": "^1.12.9",
@@ -103,7 +103,6 @@
         "bundle-loader": "^0.5.5",
         "chromedriver": "^2.33.2",
         "copyfiles": "^1.2.0",
-        "css-element-queries": "^0.4.0",
         "custom-tslint-formatters": "^2.1.1",
         "es6-promise": "^4.1.1",
         "file-loader": "^1.1.5",
