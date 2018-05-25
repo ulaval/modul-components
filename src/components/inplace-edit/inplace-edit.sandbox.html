@@ -1,13 +1,9 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
+    <h3>default</h3>
     <p>
-        <m-inplace-edit><!-- Test case --></m-inplace-edit>
+        <m-inplace-edit @click="ie1Click" :edit-mode.sync="editMode1">
+            <span slot="readMode">{{value1}}</span>
+            <m-textfield slot="editMode" label="Field #1" v-model="value1"></m-textfield>
+        </m-inplace-edit>
     </p>
 </div>
