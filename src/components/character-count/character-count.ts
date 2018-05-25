@@ -8,17 +8,18 @@ import WithRender from './character-count.html?style=./character-count.scss';
 @WithRender
 @Component
 export class MCharacterCount extends Vue {
+
     @Prop()
     public valueLength: number;
-    @Prop()
-    public maxLength?: number;
+    @Prop({ default: Infinity })
+    public maxLength: number;
     @Prop({ default: 0 })
     public threshold: number;
     @Prop({ default: true })
     public transition: boolean;
 
     private get hasCounter(): boolean {
-        return this.maxLength && this.maxLength > 0 ? this.isThresholdValid : false;
+        return this.maxLength > 0 && this.isThresholdValid;
     }
 
     private get isThresholdValid(): boolean {

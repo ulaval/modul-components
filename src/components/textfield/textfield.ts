@@ -49,8 +49,8 @@ export class MTextfield extends ModulVue {
     public passwordIcon: boolean;
     @Prop()
     public characterCount: boolean;
-    @Prop()
-    public maxLength?: number;
+    @Prop({ default: Infinity })
+    public maxLength: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;
     @Prop({ default: 0 })
@@ -115,8 +115,9 @@ export class MTextfield extends ModulVue {
     public get valueLength(): number {
         return this.internalValue.length;
     }
+
     private get maxLengthNumber(): number {
-        return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? this.maxLength : Infinity ;
+        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity ;
     }
 
     private get hasTextfieldError(): boolean {

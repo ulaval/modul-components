@@ -27,8 +27,8 @@ import WithRender from './textarea.html?style=./textarea.scss';
 export class MTextarea extends ModulVue implements InputManagementData {
     @Prop()
     public characterCount: boolean;
-    @Prop()
-    public maxLength?: number;
+    @Prop({ default: Infinity })
+    public maxLength: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;
     @Prop({ default: 0 })
@@ -39,8 +39,9 @@ export class MTextarea extends ModulVue implements InputManagementData {
     private get valueLength(): number {
         return this.internalValue.length;
     }
+
     private get maxLengthNumber(): number {
-        return !this.lengthOverflow && this.maxLength && this.maxLength > 0 ? this.maxLength : Infinity ;
+        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity ;
     }
 
     private get hasTextareaError(): boolean {
