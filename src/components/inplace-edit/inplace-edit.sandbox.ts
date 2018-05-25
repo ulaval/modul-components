@@ -7,6 +7,12 @@ import WithRender from './inplace-edit.sandbox.html';
 @WithRender
 @Component
 export class MInplaceEditSandbox extends Vue {
+    private value1: string = 'a default value';
+    private editMode1: boolean = false;
+
+    private ie1Click(): void {
+        this.editMode1 = true;
+    }
 }
 
 const InplaceEditSandboxPlugin: PluginObject<any> = {

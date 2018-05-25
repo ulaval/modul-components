@@ -5,6 +5,18 @@
     display: inline-flex;
     flex-direction: column;
 
+    &.m--has-error {
+        .m-textfield__validation {
+            color: $m-color--error;
+        }
+    }
+
+    &.m--is-valid {
+        .m-textfield__validation {
+            color: $m-color--success;
+        }
+    }
+
     &__icon-password {
         margin-left: $m-margin--s;
 
@@ -16,6 +28,22 @@
         &.m--is-enter,
         &.m--is-leave-to {
             opacity: 0;
+        }
+    }
+
+    &__validation {
+        display: flex;
+        justify-content: flex-end;
+
+        &__message {
+            flex: 1 1 auto;
+        }
+
+        &__maxlenght {
+            transition: color $m-transition-duration ease;
+            margin-top: 2px; // Magic number
+            font-size: $m-font-size--xs;
+            padding-left: $m-padding--xs;
         }
     }
 }

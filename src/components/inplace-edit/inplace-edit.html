@@ -1,5 +1,5 @@
 <div class="m-inplace-edit"
-     :class="{'m--has-erreur': isError && propEditMode,
+     :class="{'m--has-erreur': error && propEditMode,
               'm--is-edit-mode': propEditMode && isMqMinS }"
      @click="onClick">
     <slot name="readMode" v-if="!propEditMode || !isMqMinS"></slot>
@@ -8,13 +8,12 @@
             <form v-show="propEditMode" :aria-hidden="!propEditMode">
                 <slot name="editMode" v-if="propEditMode"></slot>
                 <m-accordion-transition>
-                    <div class="m-inplace-edit__buttons-wrap"
-                            v-if="propEditMode">
+                    <div class="m-inplace-edit__buttons-wrap" v-if="propEditMode">
                         <div class="m-inplace-edit__buttons">
-                            <m-button :waiting="submitted" ref="confirm-control" skin="primary" @click.stop="confirm">
+                            <m-button :waiting="waiting" ref="confirm-control" skin="primary" @click.stop="confirm">
                                 <m-i18n k="m-inplace-edit:save"></m-i18n>
                             </m-button>
-                            <m-button :disabled="submitted" ref="cancel-control" skin="secondary" @click.stop="cancel">
+                            <m-button :disabled="waiting" ref="cancel-control" skin="secondary" @click.stop="cancel">
                                 <m-i18n k="m-inplace-edit:cancel"></m-i18n>
                             </m-button>
                         </div>
@@ -28,10 +27,10 @@
             <form>
                 <slot name="editMode"></slot>
                 <div class="m-inplace-edit__buttons">
-                    <m-button :waiting="submitted" ref="confirm-control-mobile" skin="primary" @click="confirm">
+                    <m-button :waiting="waiting" ref="confirm-control-mobile" skin="primary" @click="confirm">
                         <m-i18n k="m-inplace-edit:save"></m-i18n>
                     </m-button>
-                    <m-button :disabled="submitted" ref="cancel-control-mobile" skin="secondary" @click="cancel">
+                    <m-button :disabled="waiting" ref="cancel-control-mobile" skin="secondary" @click="cancel">
                         <m-i18n k="m-inplace-edit:cancel"></m-i18n>
                     </m-button>
                 </div>

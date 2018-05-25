@@ -7,9 +7,20 @@ describe('MPageNotFound', () => {
     beforeEach(() => {
         Vue.use(PageNotFoundPlugin);
     });
-    it('should render correctly collapsed', () => {
+    it('should render correctly', () => {
         const component: Wrapper<MPageNotFound> = mount(MPageNotFound, {
             localVue: Vue
+        });
+
+        return expect(renderComponent(component.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly with back-to-label override', () => {
+        const component: Wrapper<MPageNotFound> = mount(MPageNotFound, {
+            localVue: Vue,
+            propsData: {
+                backToLabel: 'Some back to label'
+            }
         });
 
         return expect(renderComponent(component.vm)).resolves.toMatchSnapshot();
