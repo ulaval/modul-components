@@ -2,4 +2,17 @@
 
 .m-error-message {
     text-align: left;
+
+    &__stacktrace {
+        margin-top: $m-margin;
+        max-height: 120px;
+        overflow: auto;
+        padding: $m-padding;
+
+        @include m-scrollbar();
+
+        pre {
+            margin: 0;
+        }
+    }
 }
