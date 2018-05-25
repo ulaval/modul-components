@@ -3,7 +3,7 @@ import { I18N_NAME } from '../directive-names';
 import { Messages } from '../../utils/i18n/i18n';
 
 const setAttribute = (el: HTMLElement, arg: string, expression: any) => {
-    if (arg === 'placeholder' && el instanceof HTMLDivElement) {
+    if (arg === 'placeholder' && !(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) {
         if (el.querySelector('textarea')) {
             el.querySelector('textarea')!.setAttribute(arg, expression);
         } else if (el.querySelector('input')) {
@@ -21,6 +21,9 @@ const I18nDirective: DirectiveOptions = {
         vnode: VNode
     ): void {
         if (binding.arg) {
+            if (vnode.componentInstance) {
+                Vue.prototype.$log.warn(`La directive i18n ne devrait pas etre utilisée sur un composant ${vnode.componentInstance.constructor.name}. Veuillez utiliser le filtre.`);
+            }
             let expression = binding.expression;
             const modifiers: string[] = Object.getOwnPropertyNames(binding.modifiers);
             const options = binding.value || {};
