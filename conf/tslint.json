@@ -10,7 +10,7 @@
         "no-unnecessary-qualifier": false,
         "strict-type-predicates": false,
         "indent": [true, "spaces"],
-        "triple-equals": false,
+        "triple-equals": true,
         "ter-indent": [true, 4, { "SwitchCase": 1 }],
         "space-before-function-paren": [
             true,
@@ -21,6 +21,12 @@
                 "method": "never",
                 "constructor": "never"
             }
+        ],
+        "typedef": [
+            true,
+            "property-declaration",
+            "call-signature",
+            "variable-declaration"
         ],
         "semicolon": [true, "always"],
         "quotemark": [true, "single", "avoid-escape"],

@@ -1,5 +1,4 @@
 /* tslint:disable:no-console */
-
 import { PluginObject } from 'vue';
 
 export interface ConsoleOptions {
@@ -43,7 +42,7 @@ export class Logger {
 
     log(message?: any, ...optionalParams: any[]): void {
         if (!this.hideAll && this.displayLogs) {
-            console.log(message, optionalParams);
+            console.log(message, ...optionalParams);
         }
     }
 
@@ -68,7 +67,7 @@ export class Logger {
 
 const LoggerPlugin: PluginObject<any> = {
     install(v, options): void {
-        let logger = new Logger(options);
+        let logger: Logger = new Logger(options);
         logger.debug('$logger', 'plugin.install');
 
         (v.prototype as any).$log = logger;

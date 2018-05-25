@@ -16,13 +16,15 @@ const components: string[] = [
     Components.DROPDOWN_ITEM_NAME,
     Components.DROPDOWN_GROUP_NAME,
     Components.DYNAMIC_TEMPLATE_NAME,
+    Components.ERROR_MESSAGE_NAME,
     Components.FILE_SELECT_NAME,
     Components.FILE_UPLOAD_NAME,
     Components.FLEX_TEMPLATE_NAME,
     Components.I18N_NAME,
     Components.ICON_NAME,
+    Components.ICON_FILE_NAME,
     Components.ICON_BUTTON_NAME,
-    Components.INPLACE_EDIT,
+    Components.INPLACE_EDIT_NAME,
     Components.INPUT_STYLE_NAME,
     Components.LIMIT_TEXT_NAME,
     Components.LINK_NAME,
@@ -33,6 +35,7 @@ const components: string[] = [
     Components.NAVBAR_ITEM_NAME,
     Components.MENU_NAME,
     Components.MENU_ITEM_NAME,
+    Components.PAGE_NOT_FOUND_NAME,
     Components.PANEL_NAME,
     Components.PHONE_NUMBER_NAME,
     Components.POPPER_NAME,
@@ -60,7 +63,7 @@ const components: string[] = [
     Components.VALIDATION_MESSAGE_NAME
 ];
 
-const factory = () => {
+const factory: () => void = () => {
     components.forEach(c => Meta.mergeComponentMeta(c, undefined));
 };
 

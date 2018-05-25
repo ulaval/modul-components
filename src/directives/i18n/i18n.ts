@@ -1,8 +1,8 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-import { I18N_NAME } from '../directive-names';
-import { Messages } from '../../utils/i18n/i18n';
 
-const setAttribute = (el: HTMLElement, arg: string, expression: any) => {
+import { I18N_NAME } from '../directive-names';
+
+function setAttribute(el: HTMLElement, arg: string, expression: any): void {
     if (arg === 'placeholder' && !(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) {
         if (el.querySelector('textarea')) {
             el.querySelector('textarea')!.setAttribute(arg, expression);
@@ -12,7 +12,7 @@ const setAttribute = (el: HTMLElement, arg: string, expression: any) => {
     } else {
         el.setAttribute(arg, expression);
     }
-};
+}
 
 const I18nDirective: DirectiveOptions = {
     bind(
@@ -24,9 +24,9 @@ const I18nDirective: DirectiveOptions = {
             if (vnode.componentInstance) {
                 Vue.prototype.$log.warn(`i18n Directive souldn'y be used on a ${vnode.componentInstance.constructor.name} component. Please use the filter instead.`);
             }
-            let expression = binding.expression;
+            let expression: any = binding.expression;
             const modifiers: string[] = Object.getOwnPropertyNames(binding.modifiers);
-            const options = binding.value || {};
+            const options: any = binding.value || {};
 
             if (modifiers.length > 0) {
                 expression = Vue.prototype.$i18n.translate(

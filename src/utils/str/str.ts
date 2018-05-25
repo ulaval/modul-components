@@ -3,7 +3,7 @@ export function startsWith(text: string | undefined, startsWith: string | undefi
     return (text === undef && startsWith === undef) // both undef
         || (text !== undef && startsWith !== undef && !text && !startsWith) // both empty
         || (!!text && startsWith !== undef && !startsWith) // startsWith empty
-        || (!!text && !!startsWith && text.slice(0, startsWith.length) == startsWith);
+        || (!!text && !!startsWith && text.slice(0, startsWith.length) === startsWith);
 }
 
 let diacriticsMap: Object = {};
@@ -456,7 +456,7 @@ diacriticsMap[0xA763] = 'z';
 export function normalizeString(str: string): string {
     let result: string = '';
     let val: string = str.toString(); // In case 'str' is a numeric value
-    for (let i = 0; i < val.length; ++i) {
+    for (let i: number = 0; i < val.length; ++i) {
         // Passer chaque cles et remplacer dans la chaine
         let converted: string = diacriticsMap[val.charAt(i).toLowerCase().charCodeAt(0)];
         result += converted ? converted : val.charAt(i);

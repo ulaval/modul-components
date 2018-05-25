@@ -1,4 +1,4 @@
-<m-dialog :title="title" ref="dialog" :open.sync="propOpen" @open="onOpen" @close="onClose" :close-on-backdrop="false">
+<m-dialog :title="title" ref="dialog" :open.sync="propOpen" @open="onOpen" @close="onClose" :close-on-backdrop="false" :padding-body="false">
 
     <span slot="trigger">
         <slot></slot>
@@ -33,7 +33,7 @@
             </h2>
             <p  v-if="isMqMinS" class="m-file-upload__drop-zone__or"><m-i18n k="m-file-upload:choice"></m-i18n></p>
             <m-file-select class="m-file-upload__drop-zone__button" skin="primary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName" keep-store="true"></m-file-select>
-            <p class="m-file-upload__drop-zone__format" v-if="extensions"><m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format"></m-i18n>: {{fileExtensions}}</p>
+            <p class="m-file-upload__drop-zone__format" v-if="extensions"><m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format" :nb="extensions.length"></m-i18n>: {{fileExtensions}}</p>
         </div>
 
         <h3 class="m-file-upload__title" v-if="!hasUploadingFiles">
@@ -46,7 +46,7 @@
                 <li v-for="(file, index) in uploadingFiles" :key="file.uid">
                     <div class="m-file-upload__import-list__content">
                         <div class="m-file-upload__import-list__file-icon">
-                            <m-icon-file :extension="file.extension" size="30px"></m-icon-file>
+                            <m-icon-file v-m-badge="{ state: getBadgeState(file) }" :extension="file.extension" size="30px"></m-icon-file>
                         </div>
                         <div class="m-file-upload__import-list__progress-wrap">
                             <div class="m-file-upload__import-list__infos">
@@ -54,7 +54,7 @@
                                 <p class="m-file-upload__import-list__size">{{file.file.size | file-size}}</p>
                             </div>
                             <m-progress :value="file.progress" :state="getFileStatus(file)"></m-progress>
-                            <p class="m-file-upload__import-list__error-message" v-if="getFileStatus(file) == 'error'">
+                            <p class="m-file-upload__import-list__error-message" v-if="getFileStatus(file) === 'error'">
                                 <m-i18n k="m-file-upload:errorMsg"></m-i18n>
                             </p>
                         </div>
@@ -71,7 +71,7 @@
                 <li v-for="(file, index) in completedFiles" :key="file.uid">
                     <div class="m-file-upload__completed-list__content">
                         <div class="m-file-upload__completed-list__file-icon">
-                            <m-icon-file :extension="file.extension" size="30px"></m-icon-file>
+                            <m-icon-file v-m-badge="{ state: getBadgeState(file) }" :extension="file.extension" size="30px"></m-icon-file>
                         </div>
                         <div class="m-file-upload__completed-list__infos">
                             <p class="m-file-upload__completed-list__infos-label">

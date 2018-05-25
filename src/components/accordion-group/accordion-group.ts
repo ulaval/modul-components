@@ -14,9 +14,9 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     @Prop({
         default: MAccordionSkin.Default,
         validator: value =>
-            value == MAccordionSkin.Default ||
-            value == MAccordionSkin.Light ||
-            value == MAccordionSkin.Plain
+            value === MAccordionSkin.Default ||
+            value === MAccordionSkin.Light ||
+            value === MAccordionSkin.Plain
     })
     public skin: MAccordionSkin;
 
@@ -55,7 +55,7 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     }
 
     private get propAllOpen(): boolean {
-        let allOpened = true;
+        let allOpened: boolean = true;
         for (const id in this.accordions) {
             allOpened = this.accordions[id].propOpen;
             if (!allOpened && !this.accordions[id].propDisabled) {
@@ -66,7 +66,7 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     }
 
     private get propAllClosed(): boolean {
-        let allClosed = true;
+        let allClosed: boolean = true;
         for (const id in this.accordions) {
             allClosed = !this.accordions[id].propOpen;
             if (!allClosed && !this.accordions[id].propDisabled) {
@@ -77,7 +77,7 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     }
 
     private get propSkin(): MAccordionSkin {
-        return this.skin == MAccordionSkin.Light || this.skin == MAccordionSkin.Plain || this.skin == MAccordionSkin.Default ? this.skin : MAccordionSkin.Default;
+        return this.skin === MAccordionSkin.Light || this.skin === MAccordionSkin.Plain || this.skin === MAccordionSkin.Default ? this.skin : MAccordionSkin.Default;
     }
 
     private get hasTitleSlot(): boolean {
@@ -91,7 +91,7 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     }
 
     private emitValueChange(): void {
-        const openedIds = Object.keys(this.accordions).filter(
+        const openedIds: string[] = Object.keys(this.accordions).filter(
             id => this.accordions[id].propOpen
         );
 

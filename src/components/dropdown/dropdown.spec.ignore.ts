@@ -1,5 +1,7 @@
-import Vue from 'vue';
 import '../../utils/polyfills';
+
+import Vue from 'vue';
+
 import DropdownPlugin, { MDropdown } from './dropdown';
 
 const DISABLED_CSS: string = 'm--is-disabled';
@@ -21,7 +23,7 @@ describe('dropdown', () => {
     });
 
     it('enabled prop filterable', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             data: {
                 filterable: false
             },
@@ -32,7 +34,7 @@ describe('dropdown', () => {
             </m-dropdown>`
         }).$mount();
 
-        let input = vm.$el.querySelector('.m-textfield__input');
+        let input: any = vm.$el.querySelector('.m-textfield__input');
 
         expect((input as HTMLElement).attributes.getNamedItem('readonly')).toBeTruthy();
 
@@ -44,12 +46,12 @@ describe('dropdown', () => {
     });
 
     it('has input to focus', () => {
-        let input = ((dropdown.$refs.mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement);
+        let input: any = (((dropdown.$refs as any).mDropdownTextField as Vue).$el.querySelector('input') as HTMLElement);
         expect(input).not.toBeNull();
     });
 
     it('v-model change', () => {
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             data: {
                 model: 'item B'
             },
@@ -60,8 +62,8 @@ describe('dropdown', () => {
             </m-dropdown>`
         }).$mount();
 
-        let li1 = vm.$el.querySelector('.a');
-        let li2 = vm.$el.querySelector('.b');
+        let li1: Element = vm.$el.querySelector('.a');
+        let li2: Element = vm.$el.querySelector('.b');
 
         if (li1 && li2) {
             expect(li1.classList.contains(SELECTED_CSS)).toBeFalsy();
@@ -80,10 +82,10 @@ describe('dropdown', () => {
     });
 
     it('toggle dropdown / Emit Open and Close', () => {
-        let clickSpyOpen = jasmine.createSpy('clickSpyOpen');
-        let clickSpyClose = jasmine.createSpy('clickSpyClose');
+        let clickSpyOpen: jasmine.Spy = jasmine.createSpy('clickSpyOpen');
+        let clickSpyClose: jasmine.Spy = jasmine.createSpy('clickSpyClose');
 
-        let vm = new Vue({
+        let vm: Vue = new Vue({
             template: `
                 <m-dropdown ref="dd" @open="onOpen" @close="onClose">
                     <m-dropdown-item value="item A" label="*item A*"></m-dropdown-item>
@@ -95,7 +97,7 @@ describe('dropdown', () => {
             }
         }).$mount();
 
-        let dd = vm.$refs.dd;
+        let dd: any = vm.$refs.dd;
 
         (dd as MDropdown).open = true;
 

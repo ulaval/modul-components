@@ -1,6 +1,6 @@
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { Component, Prop, Watch } from 'vue-property-decorator';
-import { INPLACE_EDIT } from '../component-names';
+import { INPLACE_EDIT_NAME } from '../component-names';
 import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 import Vue, { PluginObject } from 'vue';
 import I18nPlugin from '../i18n/i18n';
@@ -89,12 +89,12 @@ export class MInplaceEdit extends ModulVue {
 
 const InplaceEditPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(INPLACE_EDIT + ' is not ready for production');
+        v.prototype.$log.warn(INPLACE_EDIT_NAME + ' is not ready for production');
         v.use(MediaQueriesPlugin);
         v.use(IconButtonPlugin);
         v.use(ButtonPlugin);
         v.use(DialogPlugin);
-        v.component(INPLACE_EDIT, MInplaceEdit);
+        v.component(INPLACE_EDIT_NAME, MInplaceEdit);
     }
 };
 

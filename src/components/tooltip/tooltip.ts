@@ -1,16 +1,16 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './tooltip.html?style=./tooltip.scss';
-import { TOOLTIP_NAME } from '../component-names';
-import { MPopup } from '../popup/popup';
-import { MPopper, MPopperPlacement } from '../popper/popper';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import ButtonPlugin from '../button/button';
-import LinkPlugin from '../link/link';
-import I18nPlugin from '../i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
+import { TOOLTIP_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
+import uuid from '../../utils/uuid/uuid';
+import LinkPlugin from '../link/link';
+import { MPopperPlacement } from '../popper/popper';
+import WithRender from './tooltip.html?style=./tooltip.scss';
 
 export enum MTooltipMode {
     Icon = 'icon',
@@ -27,25 +27,25 @@ export class MTooltip extends ModulVue {
     @Prop({
         default: MTooltipMode.Icon,
         validator: value =>
-            value == MTooltipMode.Icon ||
-            value == MTooltipMode.Link
+            value === MTooltipMode.Icon ||
+            value === MTooltipMode.Link
     })
     public mode: string;
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
-            value == MPopperPlacement.Bottom ||
-            value == MPopperPlacement.BottomEnd ||
-            value == MPopperPlacement.BottomStart ||
-            value == MPopperPlacement.Left ||
-            value == MPopperPlacement.LeftEnd ||
-            value == MPopperPlacement.LeftStart ||
-            value == MPopperPlacement.Right ||
-            value == MPopperPlacement.RightEnd ||
-            value == MPopperPlacement.RightStart ||
-            value == MPopperPlacement.Top ||
-            value == MPopperPlacement.TopEnd ||
-            value == MPopperPlacement.TopStart
+            value === MPopperPlacement.Bottom ||
+            value === MPopperPlacement.BottomEnd ||
+            value === MPopperPlacement.BottomStart ||
+            value === MPopperPlacement.Left ||
+            value === MPopperPlacement.LeftEnd ||
+            value === MPopperPlacement.LeftStart ||
+            value === MPopperPlacement.Right ||
+            value === MPopperPlacement.RightEnd ||
+            value === MPopperPlacement.RightStart ||
+            value === MPopperPlacement.Top ||
+            value === MPopperPlacement.TopEnd ||
+            value === MPopperPlacement.TopStart
     })
     public placement: MPopperPlacement;
     @Prop({ default: true })
@@ -62,6 +62,7 @@ export class MTooltip extends ModulVue {
     public className: string;
 
     private propOpen: boolean = false;
+    private id: string = `mTooltip-${uuid.generate()}`;
 
     protected mounted(): void {
         this.propOpen = this.open;
@@ -73,7 +74,7 @@ export class MTooltip extends ModulVue {
     }
 
     private get propMode(): string {
-        return this.mode == MTooltipMode.Link ? this.mode : MTooltipMode.Icon;
+        return this.mode === MTooltipMode.Link ? this.mode : MTooltipMode.Icon;
     }
 
     private get propCloseButton(): boolean {
@@ -97,11 +98,11 @@ export class MTooltip extends ModulVue {
     }
 
     private getOpenTitle(): string {
-        return this.openTitle == undefined ? this.$i18n.translate('m-tooltip:open') : this.openTitle;
+        return this.openTitle === undefined ? this.$i18n.translate('m-tooltip:open') : this.openTitle;
     }
 
     private getCloseTitle(): string {
-        return this.closeTitle == undefined ? this.$i18n.translate('m-tooltip:close') : this.closeTitle;
+        return this.closeTitle === undefined ? this.$i18n.translate('m-tooltip:close') : this.closeTitle;
     }
 
     private get propTitle(): string {
@@ -110,6 +111,10 @@ export class MTooltip extends ModulVue {
 
     private close(): void {
         this.propOpen = false;
+    }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
     }
 }
 

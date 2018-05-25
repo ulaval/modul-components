@@ -1,26 +1,26 @@
-import { ModulVue } from '../../utils/vue/vue';
+import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Model } from 'vue-property-decorator';
-import WithRender from './datepicker.html?style=./datepicker.scss';
-import { DATEPICKER_NAME } from '../component-names';
-import * as moment from 'moment';
-import i18nPlugin from '../../utils/i18n/i18n';
-import { InputState } from '../../mixins/input-state/input-state';
-import { InputPopup } from '../../mixins/input-popup/input-popup';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import { KeyCode } from '../../utils/keycode/keycode';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import ButtonPlugin from '../button/button';
-import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
-import ValidationMessagePlugin from '../validation-message/validation-message';
-import PopupPlugin from '../popup/popup';
+import { Model, Prop } from 'vue-property-decorator';
 
-const VIEW_DAY = 'day';
-const VIEW_MONTH = 'month';
-const VIEW_YEAR = 'year';
-const NB_YEARS_PER_ROW = 5;
-const ITEM_DIMENSION = 40;
+import { InputPopup } from '../../mixins/input-popup/input-popup';
+import { InputState } from '../../mixins/input-state/input-state';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import uuid from '../../utils/uuid/uuid';
+import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
+import { DATEPICKER_NAME } from '../component-names';
+import InputStylePlugin from '../input-style/input-style';
+import PopupPlugin from '../popup/popup';
+import ValidationMessagePlugin from '../validation-message/validation-message';
+import WithRender from './datepicker.html?style=./datepicker.scss';
+
+const VIEW_DAY: string = 'day';
+const VIEW_MONTH: string = 'month';
+const VIEW_YEAR: string = 'year';
+const NB_YEARS_PER_ROW: number = 5;
+const ITEM_DIMENSION: number = 40;
 
 export interface DatepickerDate {
     date: number;
@@ -69,6 +69,7 @@ export class MDatepicker extends ModulVue {
 
     private mouseIsDown: boolean = false;
     private internalCalandarErrorMessage: string = '';
+    private id: string = `mDatepicker-${uuid.generate()}`;
 
     protected created(): void {
         moment.locale([this.$i18n.currentLang(), 'en-ca']);
@@ -81,7 +82,7 @@ export class MDatepicker extends ModulVue {
 
     private get years(): number[] {
         let years: number[] = [];
-        for (let year = moment(this.max).year(); year >= moment(this.min).year(); year--) {
+        for (let year: number = moment(this.max).year(); year >= moment(this.min).year(); year--) {
             years.push(year);
         }
         return this.prepareDataForTableLayout(years, NB_YEARS_PER_ROW);
@@ -89,7 +90,7 @@ export class MDatepicker extends ModulVue {
 
     private get months(): any[] {
         let months: any[] = [];
-        for (let index = 0; index <= 11; index++) {
+        for (let index: number = 0; index <= 11; index++) {
             months.push({
                 index,
                 name: moment.monthsShort()[index],
@@ -104,11 +105,11 @@ export class MDatepicker extends ModulVue {
     }
 
     private getDaysOfPreviousMonth(): DatepickerDate[] {
-        let monthStartsAt = moment(this.selectedMomentDate).startOf('month').weekday();
+        let monthStartsAt: number = moment(this.selectedMomentDate).startOf('month').weekday();
         let days: DatepickerDate[] = [];
 
-        for (let index = monthStartsAt; index > 0; index--) {
-            let date = moment(this.selectedMomentDate).startOf('month').subtract(index, 'days');
+        for (let index: number = monthStartsAt; index > 0; index--) {
+            let date: moment.Moment = moment(this.selectedMomentDate).startOf('month').subtract(index, 'days');
             days.push({
                 date: date.date(),
                 month: date.month(),
@@ -125,8 +126,8 @@ export class MDatepicker extends ModulVue {
         let lastDayOfMonth: number = this.selectedMomentDate.daysInMonth();
         let days: DatepickerDate[] = [];
 
-        for (let index = 1; index <= lastDayOfMonth; index++) {
-            let date = { year: this.selectedMomentDate.year(), month: this.selectedMomentDate.month(), date: index };
+        for (let index: number = 1; index <= lastDayOfMonth; index++) {
+            let date: any = { year: this.selectedMomentDate.year(), month: this.selectedMomentDate.month(), date: index };
             days.push({
                 ...date,
                 isDisabled: moment(date).isBefore(this.min, 'day') || moment(date).isAfter(this.max, 'day'),
@@ -138,11 +139,11 @@ export class MDatepicker extends ModulVue {
     }
 
     private getDaysOfNextMonth(): DatepickerDate[] {
-        let daysToDisplayFromNextMonth = 6 - moment(this.selectedMomentDate).endOf('month').weekday();
+        let daysToDisplayFromNextMonth: number = 6 - moment(this.selectedMomentDate).endOf('month').weekday();
         let days: DatepickerDate[] = [];
 
-        for (let index = 1; index <= daysToDisplayFromNextMonth; index++) {
-            let date = moment(this.selectedMomentDate).endOf('month').add(index, 'days');
+        for (let index: number = 1; index <= daysToDisplayFromNextMonth; index++) {
+            let date: moment.Moment = moment(this.selectedMomentDate).endOf('month').add(index, 'days');
             days.push({
                 date: date.date(),
                 month: date.month(),
@@ -159,9 +160,9 @@ export class MDatepicker extends ModulVue {
         let nbRow: number = Math.ceil(data.length / nbItemPerRow);
         let dataTable: any[] = [];
         let count: number = 0;
-        for (let row = 0; row < nbRow; row++) {
+        for (let row: number = 0; row < nbRow; row++) {
             let newRow: any[] = [];
-            for (let index = 0; index < nbItemPerRow; index++) {
+            for (let index: number = 0; index < nbItemPerRow; index++) {
                 newRow.push(data[count]);
                 count++;
             }
@@ -216,15 +217,23 @@ export class MDatepicker extends ModulVue {
     }
 
     private get calandarError(): boolean {
-        return this.internalCalandarErrorMessage != '' || this.as<InputState>().hasError;
+        return this.internalCalandarErrorMessage !== '' || this.as<InputState>().hasError;
     }
 
     private get calandarErrorMessage(): string {
-        return this.as<InputState>().errorMessage != undefined ? this.as<InputState>().errorMessage : this.internalCalandarErrorMessage;
+        return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : this.internalCalandarErrorMessage;
     }
 
     private get open(): boolean {
         return this.internalOpen;
+    }
+
+    private get ariaControls1(): string {
+        return this.id + '-controls-1';
+    }
+
+    private get ariaControls2(): string {
+        return this.id + '-controls-2';
     }
 
     private set open(open: boolean) {
@@ -242,7 +251,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private validateDate(event): void {
-        if (event.target.value == '') {
+        if (event.target.value === '') {
             this.selectedMomentDate = moment();
             if (this.required) {
                 this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');
@@ -251,7 +260,7 @@ export class MDatepicker extends ModulVue {
                 this.internalCalandarErrorMessage = '';
             }
         } else if (moment(event.target.value, this.format).isValid()) {
-            let newDate = moment(event.target.value, this.format);
+            let newDate: moment.Moment = moment(event.target.value, this.format);
             if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
                 this.selectedMomentDate = newDate;
                 this.formattedDate = this.selectedMomentDate.format(this.format);
@@ -277,7 +286,7 @@ export class MDatepicker extends ModulVue {
 
     private showYears(): void {
         this.view = VIEW_YEAR;
-        let scrollTop = (Math.floor((moment(this.max).year() - this.selectedYear) / NB_YEARS_PER_ROW)) * ITEM_DIMENSION - (3 * ITEM_DIMENSION);
+        let scrollTop: number = (Math.floor((moment(this.max).year() - this.selectedYear) / NB_YEARS_PER_ROW)) * ITEM_DIMENSION - (3 * ITEM_DIMENSION);
         setTimeout(() => {
             (this.$refs.body as Element).scrollTo(0, scrollTop);
         }, 10);
@@ -315,7 +324,6 @@ const DatepickerPlugin: PluginObject<any> = {
         v.use(PopupPlugin);
         v.use(ValidationMessagePlugin);
         v.use(MediaQueriesPlugin);
-        v.use(i18nPlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };

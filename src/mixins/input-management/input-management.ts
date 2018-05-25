@@ -3,6 +3,7 @@ import { Model, Prop, Watch } from 'vue-property-decorator';
 
 import { InputStateMixin } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
+
 export interface InputManagementProps {
     value: string;
     placeholder: string;
@@ -14,6 +15,10 @@ export interface InputManagementData {
     internalValue: string;
 }
 
+export enum InputManagementAutocomplete {
+    Off = 'off',
+    On = 'on'
+}
 @Component
 export class InputManagement extends ModulVue
     implements InputManagementProps, InputManagementData {
@@ -24,6 +29,14 @@ export class InputManagement extends ModulVue
     public placeholder: string;
     @Prop()
     public readonly: boolean;
+    @Prop({
+        default: undefined,
+        validator: value =>
+        value === InputManagementAutocomplete.Off ||
+        value === InputManagementAutocomplete.On ||
+        value === undefined
+    })
+    public autocomplete: string;
     @Prop()
     public focus: boolean;
 
@@ -105,11 +118,11 @@ export class InputManagement extends ModulVue
     }
 
     private get model(): string {
-        return this.value == undefined ? this.internalValue : this.value;
+        return this.value === undefined ? this.internalValue : this.value;
     }
 
     private get hasValue(): boolean {
-        return this.model != '';
+        return this.model !== '';
     }
 
     private get isEmpty(): boolean {

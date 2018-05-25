@@ -1,14 +1,14 @@
 import { PluginObject } from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './menu.html?style=./menu.scss';
 import { MENU_NAME } from '../component-names';
-import PopupPlugin from '../popup/popup';
 import I18nPlugin from '../i18n/i18n';
-import { MPopperPlacement } from '../popper/popper';
-import MMenuItemPlugin, { BaseMenu, MMenuInterface } from '../menu-item/menu-item';
 import IconButtonPlugin from '../icon-button/icon-button';
+import MMenuItemPlugin, { BaseMenu, MMenuInterface } from '../menu-item/menu-item';
+import { MPopperPlacement } from '../popper/popper';
+import PopupPlugin from '../popup/popup';
+import WithRender from './menu.html?style=./menu.scss';
+import uuid from '../../utils/uuid/uuid';
 
 export enum MOptionsMenuSkin {
     Light = 'light',
@@ -18,31 +18,34 @@ export enum MOptionsMenuSkin {
 @WithRender
 @Component
 export class MMenu extends BaseMenu implements MMenuInterface {
-
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
-            value == MPopperPlacement.Bottom ||
-            value == MPopperPlacement.BottomEnd ||
-            value == MPopperPlacement.BottomStart ||
-            value == MPopperPlacement.Left ||
-            value == MPopperPlacement.LeftEnd ||
-            value == MPopperPlacement.LeftStart ||
-            value == MPopperPlacement.Right ||
-            value == MPopperPlacement.RightEnd ||
-            value == MPopperPlacement.RightStart ||
-            value == MPopperPlacement.Top ||
-            value == MPopperPlacement.TopEnd ||
-            value == MPopperPlacement.TopStart
+            value === MPopperPlacement.Bottom ||
+            value === MPopperPlacement.BottomEnd ||
+            value === MPopperPlacement.BottomStart ||
+            value === MPopperPlacement.Left ||
+            value === MPopperPlacement.LeftEnd ||
+            value === MPopperPlacement.LeftStart ||
+            value === MPopperPlacement.Right ||
+            value === MPopperPlacement.RightEnd ||
+            value === MPopperPlacement.RightStart ||
+            value === MPopperPlacement.Top ||
+            value === MPopperPlacement.TopEnd ||
+            value === MPopperPlacement.TopStart
     })
     public placement: MPopperPlacement;
     @Prop({
         default: MOptionsMenuSkin.Light,
         validator: value =>
-            value == MOptionsMenuSkin.Light ||
-            value == MOptionsMenuSkin.Dark
+            value === MOptionsMenuSkin.Light ||
+            value === MOptionsMenuSkin.Dark
     })
     public skin: MOptionsMenuSkin;
+    @Prop()
+    public openTitle: string;
+    @Prop()
+    public closeTitle: string;
     @Prop()
     public disabled: boolean;
     @Prop({ default: '44px' })
@@ -50,6 +53,7 @@ export class MMenu extends BaseMenu implements MMenuInterface {
 
     public hasIcon: boolean = false;
     private open = false;
+    private id: string = `mMenu-${uuid.generate()}`;
 
     public checkIcon(icon: boolean): void {
         if (icon) {
@@ -72,6 +76,22 @@ export class MMenu extends BaseMenu implements MMenuInterface {
 
     private onClick($event: MouseEvent): void {
         this.$emit('click', $event);
+    }
+
+    private getOpenTitle(): string {
+        return this.openTitle === undefined ? this.$i18n.translate('m-menu:open') : this.openTitle;
+    }
+
+    private getCloseTitle(): string {
+        return this.closeTitle === undefined ? this.$i18n.translate('m-menu:close') : this.closeTitle;
+    }
+
+    private get propTitle(): string {
+        return this.open ? this.getCloseTitle() : this.getOpenTitle();
+    }
+
+    private get ariaControls(): string {
+        return this.id + '-controls';
     }
 }
 

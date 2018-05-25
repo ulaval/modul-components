@@ -8,8 +8,7 @@ import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ModalPlugin from '../modal/modal';
-
-const ERROR_MESSAGE_NAME: string = 'm-error-message';
+import { ERROR_MESSAGE_NAME } from '../component-names';
 
 @WithRender
 @Component
@@ -18,7 +17,7 @@ export class MErrorMessage extends Vue {
     public error?: Error;
 
     @Prop({
-        default: moment()
+        default: () => moment()
     })
     public date: moment.Moment;
 

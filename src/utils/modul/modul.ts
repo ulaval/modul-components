@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
-import uuid from '../../utils/uuid/uuid';
+
 import { BackdropMode } from '../../mixins/portal/portal';
+import uuid from '../../utils/uuid/uuid';
 
 const BACKDROP_ID: string = 'mBackdropID';
 const BACKDROP_CLASS_NAME: string = 'm-backdrop';
@@ -95,10 +96,10 @@ export class Modul {
         let backdropIndex: number | undefined = undefined;
         let scrollId: string | undefined = undefined;
 
-        if (backdropMode != BackdropMode.None) {
+        if (backdropMode !== BackdropMode.None) {
             scrollId = this.stopScrollBody(viewportIsSmall);
         }
-        if (backdropMode == BackdropMode.BackdropFast || backdropMode == BackdropMode.BackdropSlow) {
+        if (backdropMode === BackdropMode.BackdropFast || backdropMode === BackdropMode.BackdropSlow) {
             backdropIndex = this.ensureBackdrop(viewportIsSmall);
         }
 
@@ -106,7 +107,7 @@ export class Modul {
         this.windowStackMap[stackId] = {
             stackIndex: index,
             backdropIndex: backdropIndex,
-            backdropIsFast: backdropMode == BackdropMode.BackdropFast,
+            backdropIsFast: backdropMode === BackdropMode.BackdropFast,
             scrollId: scrollId
         };
 
@@ -117,7 +118,7 @@ export class Modul {
     }
 
     public popElement(stackId: string): void {
-        if (this.peekElement() == stackId) {
+        if (this.peekElement() === stackId) {
             this.windowZIndex--;
             this.windowStack.pop();
         } else {
@@ -129,7 +130,7 @@ export class Modul {
             this.windowStack.pop();
         }
 
-        let stackElement = this.windowStackMap[stackId];
+        let stackElement: StackElement = this.windowStackMap[stackId];
 
         if (stackElement.backdropIndex || stackElement.scrollId) {
             this.removeBackdrop(!stackElement.backdropIsFast);
@@ -220,7 +221,7 @@ export class Modul {
                 this.backdropElement.style.transitionDuration = duration;
 
                 this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_NOT_VISIBLE;
-                let b = this.backdropElement;
+                let b: HTMLElement = this.backdropElement;
                 this.backdropElement = undefined;
                 this.scrollActive = true;
 
@@ -260,7 +261,7 @@ export class Modul {
             window.scrollTo(0, this.stopScrollPosition);
             this.stopScrollPosition = this.scrollPosition;
         }
-        if (this.bodyStyle.length == 0) {
+        if (this.bodyStyle.length === 0) {
             this.bodyEl.removeAttribute('style');
         }
     }
@@ -287,7 +288,7 @@ export class Modul {
 
 const ModulPlugin: PluginObject<any> = {
     install(v, options): void {
-        let modul = new Modul();
+        let modul: Modul = new Modul();
         (v.prototype as any).$modul = modul;
     }
 };

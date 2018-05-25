@@ -5,15 +5,15 @@ export class MDOMPlugin {
     public static get<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement): DomPlugin<OptionsType> | undefined {
+    }, element: HTMLElement): PluginType | undefined {
         return element[constructorFunction.defaultMountPoint];
     }
 
     public static getRecursive<PluginType extends DomPlugin<OptionsType>, OptionsType>(constructorFunction: {
         defaultMountPoint: string;
         new (element: HTMLElement, options: OptionsType): PluginType;
-    }, element: HTMLElement): DomPlugin<OptionsType> | undefined {
-        let plugin: DomPlugin<OptionsType> | undefined;
+    }, element: HTMLElement): PluginType | undefined {
+        let plugin: PluginType | undefined;
         while (element && !plugin) {
             plugin = MDOMPlugin.get(constructorFunction, element);
             element = element.parentNode as HTMLElement;
@@ -137,7 +137,7 @@ export abstract class MElementDomPlugin<OptionsType> implements DomPlugin<Option
     public abstract detach(): void;
 
     public addEventListener(eventName: string, listener: EventListenerOrEventListenerObject): void {
-        let listeners = this.attachedEvents.get(eventName);
+        let listeners: EventListenerOrEventListenerObject[] | undefined = this.attachedEvents.get(eventName);
         if (!listeners) {
             this.attachedEvents.set(eventName, [listener]);
             this.element.addEventListener(eventName, listener);

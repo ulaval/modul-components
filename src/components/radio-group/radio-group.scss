@@ -22,6 +22,10 @@
         margin-left: $m-margin--xs;
     }
 
+    &__message {
+        margin-top: $m-margin--xs;
+    }
+
     &.m--is-inline {
         .m-radio {
             display: inline;

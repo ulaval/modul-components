@@ -6,7 +6,15 @@
                 'm--is-focus': isFocus,
                 'm--has-error': hasError,
                 'm--is-valid': isValid }">
-    <input ref="checkbox" type="checkbox" :id="id" class="m-checkbox__hidden" :disabled="isDisabled" v-model="propValue" @click="onClick" @focus="setFocus(true)" @blur="setFocus(false)">
+    <input ref="checkbox"
+           type="checkbox"
+           :id="id"
+           class="m-checkbox__hidden"
+           :disabled="isDisabled"
+           v-model="propValue"
+           @click="onClick"
+           @focus="setFocus(true)"
+           @blur="setFocus(false)">
     <label class="m-checkbox__wrap" :for="id" :aria-hidden="!hasLabelSlot">
         <span class="m-checkbox__input" aria-hidden="true">
             <span class="m-checkbox__input__icon"></span>
@@ -16,6 +24,7 @@
         </span>
     </label>
     <m-validation-message ref="validation"
+        class="m-checkbox__message"
         :disabled="isDisabled"
         :error="hasError"
         :error-message="errorMessage"

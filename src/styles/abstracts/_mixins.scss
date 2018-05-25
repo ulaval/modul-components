@@ -17,6 +17,8 @@
 
         &-thumb {
             background: $m-color--scrollbar;
+            border-radius: $m-scrollbar-width/2;
+            border: 1px solid $m-color--scrollbar-light;
         }
     }
 }

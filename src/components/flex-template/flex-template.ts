@@ -1,10 +1,11 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './flex-template.html?style=./flex-template.scss';
-import { FLEX_TEMPLATE_NAME } from '../component-names';
+
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
+import { ModulVue } from '../../utils/vue/vue';
+import { FLEX_TEMPLATE_NAME } from '../component-names';
+import WithRender from './flex-template.html?style=./flex-template.scss';
 
 export enum MFlexTemplateOrigin {
     Left = 'left',
@@ -27,8 +28,8 @@ export class MFlexTemplate extends ModulVue {
     @Prop({
         default: MFlexTemplateOrigin.Left,
         validator: value =>
-            value == MFlexTemplateOrigin.Left ||
-            value == MFlexTemplateOrigin.Right
+            value === MFlexTemplateOrigin.Left ||
+            value === MFlexTemplateOrigin.Right
     })
     public menuOrigin: MFlexTemplateOrigin;
     @Prop()
@@ -141,7 +142,7 @@ export class MFlexTemplate extends ModulVue {
     }
 
     private setMenuWidth(): void {
-        let width = this.propSmallMenu ? this.smallMenuWidth : this.menuWidth;
+        let width: string = this.propSmallMenu ? this.smallMenuWidth : this.menuWidth;
         let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;
         let menu: HTMLElement = this.$refs.menu as HTMLElement;
         let pageContainer: HTMLElement = this.$refs.pageContainer as HTMLElement;
@@ -162,11 +163,11 @@ export class MFlexTemplate extends ModulVue {
         return this.hasMenuSlot ? this.smallMenu : false;
     }
 
-    private get propHeaderFixe() {
+    private get propHeaderFixe(): boolean {
         return this.hasHeaderSlot && this.headerFixe;
     }
 
-    private get propMenuFixe() {
+    private get propMenuFixe(): boolean {
         return this.hasMenuSlot && this.menuFixe;
     }
 
@@ -175,18 +176,18 @@ export class MFlexTemplate extends ModulVue {
     }
 
     private get propPageMinHeight(): string {
-        return this.pageMinHeight == undefined || this.pageMinHeight == '' ? '100vh' : this.pageMinHeight;
+        return this.pageMinHeight === undefined || this.pageMinHeight === '' ? '100vh' : this.pageMinHeight;
     }
 
     private get isMenuOriginRight(): boolean {
-        return this.menuOrigin == MFlexTemplateOrigin.Right;
+        return this.menuOrigin === MFlexTemplateOrigin.Right;
     }
 
     private get isMenuFixeFake(): boolean {
         return !this.propHeaderFixe && this.propMenuFixe;
     }
 
-    private get hasHeaderSlot() {
+    private get hasHeaderSlot(): boolean {
         return !!this.$slots.header;
     }
 
@@ -226,7 +227,7 @@ export class MFlexTemplate extends ModulVue {
 
     private transitionAfterEnter(el: HTMLElement): void {
         let menuContent: HTMLElement = this.$refs.menuContent as HTMLElement;
-        if (this.menuOpenCount != 0) {
+        if (this.menuOpenCount !== 0) {
             menuContent.focus();
         }
         this.menuOpenCount++;

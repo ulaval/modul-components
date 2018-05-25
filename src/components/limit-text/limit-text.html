@@ -2,7 +2,7 @@
     <div ref="container" class="m-limit-text__container" :style="{ maxHeight: maxHeightStyle }">
         <slot></slot>
     </div>
-    <div class="m-limit-text__test" ref="test">&nbsp;</div>
+    <div class="m-limit-text__test" ref="test" aria-hidden="true">&nbsp;</div>
     <m-link v-if="overflow && !propOpen" mode="button" @click="onOpen" hiddenText="openHiddenText" :underline="false">{{openText}}</m-link>
     <m-link v-if="overflow && propOpen" mode="button" @click="onClose" hiddenText="closeHiddenText" :underline="false">{{closeText}}</m-link>
 </div>

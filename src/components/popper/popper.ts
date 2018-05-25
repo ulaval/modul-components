@@ -1,13 +1,14 @@
-import { ModulVue } from '../../utils/vue/vue';
+import Popper from 'popper.js';
+import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './popper.html?style=./popper.scss';
-import { POPPER_NAME } from '../component-names';
-import Popper from 'popper.js';
-import PortalPlugin from 'portal-vue';
+
+import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import ModulPlugin from '../../utils/modul/modul';
-import { Portal, PortalMixin, PortalMixinImpl, BackdropMode } from '../../mixins/portal/portal';
+import { ModulVue } from '../../utils/vue/vue';
+import { POPPER_NAME } from '../component-names';
+import WithRender from './popper.html?style=./popper.scss';
 
 export enum MPopperPlacement {
     Top = 'top',
@@ -32,18 +33,18 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
-            value == MPopperPlacement.Bottom ||
-            value == MPopperPlacement.BottomEnd ||
-            value == MPopperPlacement.BottomStart ||
-            value == MPopperPlacement.Left ||
-            value == MPopperPlacement.LeftEnd ||
-            value == MPopperPlacement.LeftStart ||
-            value == MPopperPlacement.Right ||
-            value == MPopperPlacement.RightEnd ||
-            value == MPopperPlacement.RightStart ||
-            value == MPopperPlacement.Top ||
-            value == MPopperPlacement.TopEnd ||
-            value == MPopperPlacement.TopStart
+            value === MPopperPlacement.Bottom ||
+            value === MPopperPlacement.BottomEnd ||
+            value === MPopperPlacement.BottomStart ||
+            value === MPopperPlacement.Left ||
+            value === MPopperPlacement.LeftEnd ||
+            value === MPopperPlacement.LeftStart ||
+            value === MPopperPlacement.Right ||
+            value === MPopperPlacement.RightEnd ||
+            value === MPopperPlacement.RightStart ||
+            value === MPopperPlacement.Top ||
+            value === MPopperPlacement.TopEnd ||
+            value === MPopperPlacement.TopStart
     })
     public placement: MPopperPlacement;
 
@@ -98,7 +99,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
         if (value) {
-            if (this.popper == undefined) {
+            if (this.popper === undefined) {
                 let options: object = {
                     placement: this.placement,
                     eventsEnabled: false
@@ -126,15 +127,16 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         this.$modul.event.$on('resize', this.update);
         this.$modul.event.$on('updateAfterResize', this.update);
 
-        this.$modul.event.$on('click', this.onDocumentClick);
+        // sometimes, the document.click event is stopped causing a menu to stay open, even if another menu has been clicked.
+        // mouseup will always be caught even if click is stopped.
+        document.addEventListener('mouseup', this.onDocumentClick);
     }
 
     protected beforeDestroy(): void {
         this.$modul.event.$off('scroll', this.update);
         this.$modul.event.$off('resize', this.update);
         this.$modul.event.$off('updateAfterResize', this.update);
-
-        this.$modul.event.$off('click', this.onDocumentClick);
+        document.removeEventListener('mouseup', this.onDocumentClick);
 
         this.destroyPopper();
     }
@@ -177,15 +179,16 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     private onEnter(el: HTMLElement, done): void {
         this.$nextTick(() => {
             this.update();
+            if (this.enter) {
+                this.enter(el.children[0], done);
+            } else {
+                let transitionDuration: number = (window.getComputedStyle(el).getPropertyValue('transition-duration').slice(1,-1) as any) * 1000;
+                setTimeout(() => {
+                    this.defaultAnimOpen = true;
+                    done();
+                }, transitionDuration);
+            }
         });
-        if (this.enter) {
-            this.enter(el.children[0], done);
-        } else {
-            this.$nextTick(() => {
-                this.defaultAnimOpen = true;
-                done();
-            });
-        }
     }
 
     private onAfterEnter(el: HTMLElement): void {
