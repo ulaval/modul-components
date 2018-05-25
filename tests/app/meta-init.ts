@@ -24,7 +24,7 @@ const components: string[] = [
     Components.ICON_NAME,
     Components.ICON_FILE_NAME,
     Components.ICON_BUTTON_NAME,
-    Components.INPLACE_EDIT,
+    Components.INPLACE_EDIT_NAME,
     Components.INPUT_STYLE_NAME,
     Components.LIMIT_TEXT_NAME,
     Components.LINK_NAME,
