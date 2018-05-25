@@ -122,7 +122,7 @@ describe('MValidationMessage', () => {
             }
         });
 
-        valMsg.find('div').trigger('click');
+        valMsg.find('div div').trigger('click');
 
         expect(valMsg.emitted('click')).toBeTruthy();
     });

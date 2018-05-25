@@ -1,27 +1,43 @@
 @import 'abstracts/variables';
+@import '../accordion/accordion-transition';
+
 $m-validation-message--color-error: $m-color--error !default;
 $m-validation-message--color-success: $m-color--success !default;
 $m-validation-message--color-helper: $m-color--text-light !default;
 $m-validation-message--margin: $m-padding--xs !default;
 
 .m-validation-message {
+    &__wrap {
+        &.m-accordion-enter,
+        &.m-accordion-leave-to {
+            p {
+                opacity: 0;
+            }
+        }
+    }
+
     p {
+        transition: opacity $m-transition-duration ease;
         margin: 0;
         font-size: $m-font-size--s;
     }
 
     &__error,
     &__valid {
-        display: inline-flex;
-        align-items: center;
+        display: table-row;
+        align-items: flex-start;
 
         ~ .m-validation-message__helper {
-            margin-top: 2px;
+            margin-top: 2px; // Magic number
         }
 
         &__icon {
             font-size: $m-font-size--xs;
             margin-right: $m-padding--xs;
+            min-width: $m-font-size--xs;
+            display: table-cell;
+            position: relative;
+            top: 1px; // Magic number
         }
     }
 
@@ -39,5 +55,6 @@ $m-validation-message--margin: $m-padding--xs !default;
 
     &__text {
         flex: 1 1 auto;
+        display: table-cell;
     }
 }

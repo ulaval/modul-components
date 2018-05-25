@@ -1,5 +1,6 @@
 import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
+import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import WithRender from './validation-message.html?style=./validation-message.scss';
 import { VALIDATION_MESSAGE_NAME } from '../component-names';
@@ -11,6 +12,9 @@ import IconPlugin from '../icon/icon';
     mixins: [InputState]
 })
 export class MValidationMessage extends ModulVue {
+    @Prop({ default: true })
+    public transition: boolean = true;
+
     private titleErrorIcon: string = this.$i18n.translate('m-validation-message:title-error-icon');
     private titleValidIcon: string = this.$i18n.translate('m-validation-message:title-valid-icon');
 

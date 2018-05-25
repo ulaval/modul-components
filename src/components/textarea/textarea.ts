@@ -24,7 +24,13 @@ import uuid from '../../utils/uuid/uuid';
 })
 export class MTextarea extends ModulVue implements InputManagementData {
     @Prop()
-    public maxLength?: number;
+    public characterCount: boolean;
+    @Prop({ default: Infinity })
+    public maxLength: number;
+    @Prop({ default: true })
+    public lengthOverflow: boolean;
+    @Prop({ default: 0 })
+    public threshold: number;
 
     readonly internalValue: string;
     private internalTextareaHeight: string = '0';
@@ -53,22 +59,20 @@ export class MTextarea extends ModulVue implements InputManagementData {
         return this.internalValue.length;
     }
 
-    public get hasMaxLength(): boolean {
-        return this.maxLength ? this.maxLength > 0 : false;
+    private get maxLengthNumber(): number {
+        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity ;
     }
 
-    private get hasTextAreaError(): boolean {
-        return !this.isLengthValid || this.as<InputState>().hasError;
+    private get hasTextareaError(): boolean {
+        return this.as<InputState>().hasError;
     }
 
-    private get isTextAreaValid(): boolean {
-        return this.isLengthValid && this.as<InputState>().isValid;
+    private get isTextareaValid(): boolean {
+        return this.as<InputState>().isValid;
     }
 
-    private get isLengthValid(): boolean {
-        return this.maxLength
-            ? this.internalValue.length < this.maxLength
-            : true;
+    private get hasCounterTransition(): boolean {
+        return !this.as<InputState>().hasErrorMessage;
     }
 }
 

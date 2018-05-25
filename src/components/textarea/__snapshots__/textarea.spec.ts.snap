@@ -5,7 +5,7 @@ exports[`MTextArea max-length should render correctly state when text length is 
     <div class="m-input-style m--has-value m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <textarea id="mTextarea-uuid" rows="1" class="m-textarea__input">1</textarea>
+                <textarea id="mTextarea-uuid" rows="1" maxlength="Infinity" class="m-textarea__input">1</textarea>
                 <div aria-hidden="true" class="m-textarea__input-hidden">1
                 </div>
             </div>
@@ -13,18 +13,19 @@ exports[`MTextArea max-length should render correctly state when text length is 
         </div>
     </div>
     <div class="m-textarea__validation">
-        <div class="m-textarea__validation__maxlenght">
-            1<strong>/8</strong></div>
+        <div class="m-validation-message m-textarea__validation__message">
+            <m-accordion-transition transition="true"></m-accordion-transition>
+        </div>
     </div>
 </div>
 `;
 
 exports[`MTextArea max-length should render invalid state when text length is greater than max length 1`] = `
-<div class="m-textarea m--has-error" style="width:100%;max-width:288px;">
-    <div class="m-input-style m--has-error m--has-value m--is-tag-default" style="width:undefined;">
+<div class="m-textarea" style="width:100%;max-width:288px;">
+    <div class="m-input-style m--has-value m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <textarea id="mTextarea-uuid" rows="1" class="m-textarea__input">123456789</textarea>
+                <textarea id="mTextarea-uuid" rows="1" maxlength="Infinity" class="m-textarea__input">123456789</textarea>
                 <div aria-hidden="true" class="m-textarea__input-hidden">123456789
                 </div>
             </div>
@@ -32,8 +33,9 @@ exports[`MTextArea max-length should render invalid state when text length is gr
         </div>
     </div>
     <div class="m-textarea__validation">
-        <div class="m-textarea__validation__maxlenght">
-            9<strong>/8</strong></div>
+        <div class="m-validation-message m-textarea__validation__message">
+            <m-accordion-transition transition="true"></m-accordion-transition>
+        </div>
     </div>
 </div>
 `;
@@ -43,13 +45,17 @@ exports[`MTextArea should render correctly 1`] = `
     <div class="m-input-style m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <textarea id="mTextarea-uuid" rows="1" class="m-textarea__input"></textarea>
+                <textarea id="mTextarea-uuid" rows="1" maxlength="Infinity" class="m-textarea__input"></textarea>
                 <div aria-hidden="true" class="m-textarea__input-hidden">
                 </div>
             </div>
             <div class="m-input-style__body__right"></div>
         </div>
     </div>
-    <div class="m-textarea__validation"> </div>
+    <div class="m-textarea__validation">
+        <div class="m-validation-message m-textarea__validation__message">
+            <m-accordion-transition transition="true"></m-accordion-transition>
+        </div>
+    </div>
 </div>
 `;
