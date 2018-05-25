@@ -465,4 +465,22 @@ export function normalizeString(str: string): string {
     return result;
 }
 
+export function toKebabCase(param: string): string {
+    const upperChars: RegExpMatchArray | null = param.match(/([A-Z])/g);
+    if (!upperChars) {
+        return param;
+    }
+
+    let str: string = param.toString();
+    for (let i: number = 0; i < upperChars.length; i++) {
+        str = str.replace(new RegExp(upperChars[i]), '-' + upperChars[i].toLowerCase());
+    }
+
+    if (str.slice(0, 1) === '-') {
+        str = str.slice(1);
+    }
+
+    return str;
+}
+
 export { sprintf, vsprintf } from 'sprintf-js';

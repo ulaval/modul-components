@@ -2,6 +2,7 @@ import Vue, { PluginObject, VNode, VNodeComponentOptions } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+import { toKebabCase } from '../utils/str/str';
 import { ModulVue } from '../utils/vue/vue';
 import WithRender from './dynamic-sandbox.html';
 
@@ -60,7 +61,8 @@ export class MDynamicSandbox extends ModulVue {
 
         if (this.meta.mixins) {
             const mixins: any[] = this.meta.mixins.map(mixin => {
-                return require(`../../dist/mixins/${this.toKebabCase(mixin)}/${this.toKebabCase(mixin)}.meta.json`);
+                const mixinName: string = toKebabCase(mixin);
+                return require(`../../dist/mixins/${mixinName}/${mixinName}.meta.json`);
             });
 
             mixins.forEach(mixin => {
@@ -91,24 +93,6 @@ export class MDynamicSandbox extends ModulVue {
             match = slotRegex.exec(testComponentTemplate);
         }
         testComponentVue.$forceUpdate();
-    }
-
-    private toKebabCase(param: string): string {
-        const upperChars: RegExpMatchArray | null = param.match(/([A-Z])/g);
-        if (!upperChars) {
-            return param;
-        }
-
-        let str: string = param.toString();
-        for (let i: number = 0; i < upperChars.length; i++) {
-            str = str.replace(new RegExp(upperChars[i]), '-' + upperChars[i].toLowerCase());
-        }
-
-        if (str.slice(0, 1) === '-') {
-            str = str.slice(1);
-        }
-
-        return str;
     }
 
     private getTestComponentVue(): any {
