@@ -1,12 +1,13 @@
-import { mount, Wrapper } from '@vue/test-utils';
+import { mount, shallow, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 
 import { addMessages } from '../../../tests/helpers/lang';
+import { renderComponent } from '../../../tests/helpers/render';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 
-let propsData: { propsData: { editMode: boolean, saveFn: () => Promise<void> } };
+let propsData: { propsData: { editMode: boolean } };
 
 let inplaceEdit: MInplaceEdit;
 let wrapper: Wrapper<ModulVue>;
@@ -95,14 +96,6 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
                 expect(spy).toHaveBeenCalledWith(CONFIRM_EVENT);
             });
-
-            it(`must go back to readMode`, async () => {
-                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
-
-                await inplaceEdit.confirm(AN_EVENT);
-
-                expect(spy).toHaveBeenCalledWith('update:editMode', false);
-            });
         });
 
         describe('when cancelling', () => {
@@ -112,13 +105,6 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
                 inplaceEdit.cancel(AN_EVENT);
 
                 expect(spy).toBeCalledWith(CANCEL_EVENT);
-            });
-            it(`must go back to readMode`, async () => {
-                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
-
-                await inplaceEdit.confirm(AN_EVENT);
-
-                expect(spy).toHaveBeenCalledWith('update:editMode', false);
             });
         });
     });
@@ -139,21 +125,6 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
                 expect(spy).toBeCalledWith(CONFIRM_EVENT);
             });
-
-            it(`must not go back to readMode`, async () => {
-                let spy: jest.SpyInstance = jest.spyOn(inplaceEdit, '$emit');
-
-                await inplaceEdit.confirm(AN_EVENT);
-
-                expect(spy).not.toHaveBeenCalledWith('update:editMode', false);
-            });
-
-            it('must be in error', async () => {
-
-                await inplaceEdit.confirm(AN_EVENT);
-
-                expect(inplaceEdit.isError).toBeTruthy();
-            });
         });
 
         describe('when cancelling after a failed confirmation', () => {
@@ -162,7 +133,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
                 inplaceEdit.cancel(AN_EVENT);
 
-                expect(inplaceEdit.isError).toBeFalsy();
+                expect(inplaceEdit.error).toBeFalsy();
             });
         });
     });
@@ -239,12 +210,15 @@ describe('Component inplace-edit - Complete component mobile', () => {
 
         addMessages(Vue, ['components/inplace-edit/inplace-edit.lang.en.json']);
 
-        wrapper = mount(MInplaceEdit, {
+        wrapper = shallow(MInplaceEdit, {
             localVue: Vue,
             slots: {
                 default: 'default',
                 editMode: EDIT_SLOT,
                 readMode: READ_SLOT
+            },
+            stubs: {
+                'm-dialog': '<div><slot></slot></div>'
             },
             mixins: [{
                 data(): any {
@@ -265,6 +239,13 @@ describe('Component inplace-edit - Complete component mobile', () => {
     describe('when in editMode', () => {
         beforeEach(() => {
             wrapper.setProps({ editMode: 'true' });
+        });
+        it('should render correctly', () => {
+            return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+        it('should render correctly in waiting mode', () => {
+            wrapper.setProps({ waiting: 'true' });
+            return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
         it('must show mobile confirm controls', () => {
             let controlFound: Wrapper<Vue> = wrapper.find({ ref : 'confirm-control-mobile' });

@@ -7,7 +7,7 @@ describe('{{class}}', () => {
     beforeEach(() => {
         Vue.use({{plugin}}Plugin);
     });
-    it('should render correctly collapsed', () => {
+    it('should render correctly', () => {
         const component: Wrapper<{{class}}> = mount({{class}}, {
             localVue: Vue
         });
