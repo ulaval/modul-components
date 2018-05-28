@@ -11,7 +11,13 @@ export class MCharacterCount extends Vue {
 
     @Prop()
     public valueLength: number;
-    @Prop({ default: Infinity })
+    @Prop({ required: true, validator: value => {
+        if (value === undefined) {
+            console.error('character-count component expects prop maxLength to be defined.');
+        }
+
+        return value !== undefined;
+    }})
     public maxLength: number;
     @Prop({ default: 0 })
     public threshold: number;
