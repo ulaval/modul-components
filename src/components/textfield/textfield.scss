@@ -32,12 +32,12 @@
             resize: none;
             overflow: hidden;
             margin: 0;
-            word-break: break-all;
+            word-break: break-word;
 
             &-hidden {
                 opacity: 0;
                 white-space: pre-wrap;
-                word-break: break-all;
+                word-break: break-word;
             }
         }
     }
