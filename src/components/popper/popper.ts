@@ -117,9 +117,11 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     }
 
     public update(): void {
-        if (this.popper !== undefined) {
-            this.popper.update();
-        }
+        this.$nextTick(() => {
+            if (this.popper !== undefined) {
+                this.popper.update();
+            }
+        });
     }
 
     protected mounted(): void {
