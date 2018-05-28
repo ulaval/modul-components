@@ -388,4 +388,13 @@ $m-input-style--padding: 4px !default;
             font-size: $m-font-size--h6;
         }
     }
+
+    &.m--is-tag-p {
+        input,
+        textarea,
+        ::placeholder,
+        .m-input-style__body__transparent-text {
+            font-weight: $m-font-weight;
+        }
+    }
 }
