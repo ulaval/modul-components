@@ -118,7 +118,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
 
     public update(): void {
         if (this.popper !== undefined) {
-            this.popper.update();
+            this.popper.scheduleUpdate();
         }
     }
 
