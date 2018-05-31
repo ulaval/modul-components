@@ -2,5 +2,7 @@
 //  table
 // ======================================================================
 .m-u--table {
+    padding: 0 $m-padding $m-padding;
+
     @include m-table();
 }
