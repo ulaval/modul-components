@@ -2,7 +2,13 @@
 //  table
 // ======================================================================
 .m-u--table {
-    padding: 0 $m-padding $m-padding;
+    padding: 0 $m-padding--s $m-padding--s;
 
     @include m-table();
+}
+
+@media (min-width: $m-mq--min--s) {
+    .m-u--table {
+        padding: 0 $m-padding $m-padding;
+    }
 }

@@ -206,11 +206,11 @@
             text-align: left;
 
             &:first-child {
-                padding-left: $m-padding;
+                padding-left: 0;
             }
 
             &:last-child {
-                padding-right: $m-padding;
+                padding-right: 0;
             }
         }
 
