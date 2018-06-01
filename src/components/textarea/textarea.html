@@ -52,6 +52,6 @@
             :valid="isTextareaValid"
             :valid-message="validMessage"
             :helper-message="helperMessage"></m-validation-message>
-        <m-character-count v-if="characterCount" :valueLength="valueLength" :maxLength="maxLength" :threshold="threshold" :transition="hasCounterTransition"></m-character-count>
+        <m-character-count v-if="characterCount" :value-length="valueLength" :max-length="maxLength" :threshold="characterCountThreshold" :transition="hasCounterTransition"></m-character-count>
     </div>
 </div>

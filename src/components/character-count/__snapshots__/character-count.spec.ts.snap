@@ -1,27 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MCharacterCount should render correctly 1`] = `<m-accordion-transition transition="true"></m-accordion-transition>`;
+exports[`MCharacterCount should render correctly 1`] = `""`;
 
 exports[`MCharacterCount should render correctly when maxLength prop is set 1`] = `
-<m-accordion-transition transition="true">
-    <div>
-        <div aria-hidden="true" class="m-character-count">20<strong>/40</strong></div>
-    </div>
-</m-accordion-transition>
+<div>
+    <div aria-hidden="true" class="m-character-count">20<strong>/40</strong></div>
+</div>
 `;
 
 exports[`MCharacterCount should render correctly when transition props is false 1`] = `
-<m-accordion-transition>
-    <div>
-        <div aria-hidden="true" class="m-character-count">20<strong>/40</strong></div>
-    </div>
-</m-accordion-transition>
-`;
-
-exports[`MCharacterCount should render correctly when valueLenght prop is set 1`] = `
-<m-accordion-transition transition="true">
-    <div>
-        <div aria-hidden="true" class="m-character-count">20<strong>/Infinity</strong></div>
-    </div>
-</m-accordion-transition>
+<div>
+    <div aria-hidden="true" class="m-character-count">20<strong>/40</strong></div>
+</div>
 `;

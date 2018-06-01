@@ -27,26 +27,26 @@
         <li>Dépassement autorisé : Oui</li>
     </ul>
     <h6>Affichage du compteur : à partir de 25 caractères</h6>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" threshold="25">
+    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="25">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de 0 caractère (en tout temps)</h6>
     <br>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" threshold="0">
+    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="0">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de 30 caractères (une fois la limite atteinte)</h6>
     <br>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" threshold="30">
+    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="30">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de 35 caractères (seuil supérieur à la limite)</h6>
     <br>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" threshold="35">
+    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="35">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de -5 caractères (seuil inférieur à 0)</h6>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" threshold="-5">
+    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="-5">
     </m-textarea>
 
     <h4>
@@ -69,12 +69,20 @@
         <li>Dépassement autorisé : oui</li>
         <li>Affichage du compteur : à partir de 180 caractères</li>
     </ul>
-    <p class="m-u--typo--precision">180 car. : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla risus ex, dignissim scelerisque vehicula eu,
-        tempor at massa. Cras ut orci ut ligula iaculis faucibus non a volutpat.</p>
+    <p class="m-u--typo--precision">176 car. : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla risus ex, dignissim scelerisque vehicula, mempor. Saisir quelques caractères pour faire apparaître le compteur...</p>
     <br>
-    <m-textarea placeholder="Je suis un sous-titre" :character-count="true" max-length="200" threshold="180" max-width="medium"
-        :length-overflow="true">
+    <m-textarea placeholder="Je suis un sous-titre" :character-count="true" max-length="200" character-count-threshold="180" max-width="medium"
+        :length-overflow="true" v-model="test4Model" :error="test4Model.length > 200 ? true : false">
     </m-textarea>
+
+    <h3>Test 5 : Ne pas afficher un compteur sur un champ de saisie sans limite de caractères</h3>
+    <p class="m-u--margin-bottom">
+        Lorsque qu'on ajoute un compteur sur un champ sans limite de caractère, le compteur doit être masqué. Nous n'avons pas de cas d'utilisation de compteur de mots sans imposer de limite.
+    </p>
+    <p>
+        <m-textfield :character-count="true" character-counter-threshold="20">
+        </m-textfield>
+    </p>
 
     <!-- Sandbox template -->
     <h3>Test Title</h3>

@@ -7,7 +7,7 @@ import WithRender from './textfield.sandbox.html';
 @WithRender
 @Component
 export class MTextfieldSandbox extends Vue {
-    public someData: number = 1;
+    public test4Model: string = '';
 }
 
 const TextfieldSandboxPlugin: PluginObject<any> = {

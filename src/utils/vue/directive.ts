@@ -11,10 +11,12 @@ interface VueElement extends HTMLElement {
 }
 export const dispatchEvent: (element: HTMLElement, eventName: string, eventData: any) => any = (element: HTMLElement, eventName: string, eventData: any): any => {
     const vueElement: VueElement = element as VueElement;
-    if (vueElement.__vue__ &&
-        vueElement.__vue__.$listeners[eventName]) {
-        return vueElement.__vue__.$emit(eventName, eventData);
-    } else {
-        return element.dispatchEvent(eventData);
+    if (vueElement.__vue__) {
+        if (vueElement.__vue__.$listeners[eventName]) {
+            return vueElement.__vue__.$emit(eventName, eventData);
+        } else if (vueElement.__vue__.$children.length > 0 && vueElement.__vue__.$children[0].$el === vueElement && vueElement.__vue__.$children[0].$listeners[eventName]) {
+            return vueElement.__vue__.$children[0].$emit(eventName, eventData);
+        }
     }
+    return element.dispatchEvent(eventData);
 };
