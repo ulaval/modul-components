@@ -1,17 +1,18 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { TEXTFIELD_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
-import uuid from '../../utils/uuid/uuid';
 
 export enum MTextfieldType {
     Text = 'text',
@@ -49,12 +50,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
     public passwordIcon: boolean;
     @Prop()
     public characterCount: boolean;
-    @Prop({ default: Infinity })
+    @Prop()
     public maxLength: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;
     @Prop({ default: 0 })
-    public threshold: number;
+    public characterCountThreshold: number;
 
     readonly internalValue: string;
 

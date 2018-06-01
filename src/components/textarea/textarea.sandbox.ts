@@ -7,6 +7,7 @@ import WithRender from './textarea.sandbox.html';
 @WithRender
 @Component
 export class MTextareaSandbox extends Vue {
+    public test4Model: string = '';
 }
 
 const TextareaSandboxPlugin: PluginObject<any> = {
