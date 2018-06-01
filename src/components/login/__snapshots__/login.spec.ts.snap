@@ -12,7 +12,9 @@ exports[`MLogin when login should render correctly 1`] = `
             </div>
         </div>
         <div class="m-textfield__validation">
-            <div class="m-validation-message m-textfield__validation__message"></div>
+            <div class="m-validation-message m-textfield__validation__message">
+                <m-accordion-transition transition="true"></m-accordion-transition>
+            </div>
         </div>
     </div>
     <br>
@@ -26,7 +28,9 @@ exports[`MLogin when login should render correctly 1`] = `
             </div>
         </div>
         <div class="m-textfield__validation">
-            <div class="m-validation-message m-textfield__validation__message"></div>
+            <div class="m-validation-message m-textfield__validation__message">
+                <m-accordion-transition transition="true"></m-accordion-transition>
+            </div>
         </div>
     </div>
     <br>
