@@ -2,6 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import { CHARACTER_COUNT_NAME } from '../component-names';
 import WithRender from './character-count.html?style=./character-count.scss';
 
@@ -11,7 +12,13 @@ export class MCharacterCount extends Vue {
 
     @Prop()
     public valueLength: number;
-    @Prop({ default: Infinity })
+    @Prop({ required: true, validator: value => {
+        if (value === undefined) {
+            console.error('character-count component expects prop maxLength to be defined.');
+        }
+
+        return value !== undefined;
+    }})
     public maxLength: number;
     @Prop({ default: 0 })
     public threshold: number;
@@ -26,6 +33,7 @@ export class MCharacterCount extends Vue {
 const CharacterCountPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(CHARACTER_COUNT_NAME, 'plugin.install');
+        v.use(AccordionTransitionPlugin);
         v.component(CHARACTER_COUNT_NAME, MCharacterCount);
     }
 };

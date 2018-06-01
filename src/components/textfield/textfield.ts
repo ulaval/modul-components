@@ -51,12 +51,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
     public passwordIcon: boolean;
     @Prop()
     public characterCount: boolean;
-    @Prop({ default: Infinity })
+    @Prop()
     public maxLength: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;
     @Prop({ default: 0 })
-    public threshold: number;
+    public characterCountThreshold: number;
 
     readonly internalValue: string;
 
