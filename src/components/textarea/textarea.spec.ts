@@ -4,7 +4,6 @@ import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import TextareaPlugin from '../../components/textarea/textarea';
 import uuid from '../../utils/uuid/uuid';
-import { KeyCode } from './../../utils/keycode/keycode';
 import { MTextarea } from './textarea';
 
 jest.mock('../../utils/uuid/uuid');
