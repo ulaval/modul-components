@@ -1,21 +1,17 @@
-<m-flex-template padding-top="52px">
-    <m-template>
-        <h1 slot="header">Menu</h1>
-        <h2>
-            <m-link url="attributes">Attributes list</m-link>
-        </h2>
-        <h2>
-            <m-link url="media-queries">Media Queries</m-link>
-        </h2>
+<div>
+    <h2>
+        <m-link url="attributes">Attributes list</m-link>
+    </h2>
+    <h2>
+        <m-link url="media-queries">Media Queries</m-link>
+    </h2>
 
-        <h2>Components list</h2>
-        <nav class="m-u--margin-top">
-            <ul class="m-u--bullet-list">
-                <li v-for="route in routes">
-                    <m-link :url="route">{{route}}</m-link>
-                </li>
-            </ul>
-        </nav>
-
-    </m-template>
-</m-flex-template>
+    <h2>Components list</h2>
+    <nav class="m-u--margin-top">
+        <ul class="m-u--bullet-list">
+            <li v-for="route in routes">
+                <m-link :url="route">{{route}}</m-link>
+            </li>
+        </ul>
+    </nav>
+</div>
