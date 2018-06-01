@@ -5,8 +5,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import ComponentsPlugin from '../../src/components';
-import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
-import LinkPlugin from '../../src/components/link/link';
 import DirectivesPlugin from '../../src/directives';
 import FiltersPlugin from '../../src/filters';
 import FrenchPlugin from '../../src/lang/fr';
@@ -26,8 +24,6 @@ let utilsOptions: UtilsPluginOptions = {
 };
 
 Vue.use(UtilsPlugin, utilsOptions);
-Vue.use(LinkPlugin);
-Vue.use(DynamicTemplatePlugin);
 Vue.use(ComponentsPlugin);
 Vue.use(DirectivesPlugin);
 Vue.use(SandboxesPlugin);
