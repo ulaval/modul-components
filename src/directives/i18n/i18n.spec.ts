@@ -1,9 +1,10 @@
-import { resetModulPlugins } from '../../../tests/helpers/component';
+import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-import I18nDirectivePlugin from './i18n';
-import { Wrapper, mount } from '@vue/test-utils';
-import I18nPlugin, { I18nPluginOptions, FormatMode } from '../../utils/i18n/i18n';
+
+import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
+import I18nPlugin, { FormatMode, I18nPluginOptions } from '../../utils/i18n/i18n';
+import I18nDirectivePlugin from './i18n';
 
 describe(`Étant donné la directive v-m-i18n`, () => {
     let element: Wrapper<Vue>;

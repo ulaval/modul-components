@@ -9,6 +9,9 @@ const I18nDirective: DirectiveOptions = {
         vnode: VNode
     ): void {
         if (binding.arg) {
+            if (vnode.componentInstance) {
+                Vue.prototype.$log.warn(`i18n Directive souldn't be used on a ${vnode.componentInstance.constructor.name} component. Please use the filter instead.`);
+            }
             let expression: any = binding.expression;
             const modifiers: string[] = Object.getOwnPropertyNames(binding.modifiers);
             const options: any = binding.value || {};
@@ -21,7 +24,6 @@ const I18nDirective: DirectiveOptions = {
                     options.modifier
                 );
             }
-
             el.setAttribute(binding.arg, expression);
         }
     }
