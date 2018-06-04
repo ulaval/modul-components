@@ -20,7 +20,8 @@
                         <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb * 1024 | file-size}}).
                     </p>
                     <p class="m-file-upload__error-message__error" v-else-if="hasMaxFilesRejection(file)">
-                        <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}} <m-i18n :nb="maxFiles" k="m-file-upload:file"></m-i18n>)
+                        <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}}
+                        <m-i18n :nb="maxFiles" k="m-file-upload:file"></m-i18n>)
                     </p>
                 </li>
             </ul>
@@ -31,9 +32,13 @@
                 <m-icon name="drag-drop" size="48px"></m-icon>
                 <m-i18n k="m-file-upload:title"></m-i18n>
             </h2>
-            <p  v-if="isMqMinS" class="m-file-upload__drop-zone__or"><m-i18n k="m-file-upload:choice"></m-i18n></p>
-            <m-file-select class="m-file-upload__drop-zone__button" skin="primary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName" keep-store="true"></m-file-select>
-            <p class="m-file-upload__drop-zone__format" v-if="extensions"><m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format" :nb="extensions.length"></m-i18n>: {{fileExtensions}}</p>
+            <p v-if="isMqMinS" class="m-file-upload__drop-zone__or">
+                <m-i18n k="m-file-upload:choice"></m-i18n>
+            </p>
+            <m-file-select class="m-file-upload__drop-zone__button" skin="primary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName"
+                keep-store="true"></m-file-select>
+            <p class="m-file-upload__drop-zone__format" v-if="extensions">
+                <m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format" :nb="extensions.length"></m-i18n>: {{fileExtensions}}</p>
         </div>
 
         <h3 class="m-file-upload__title" v-if="!hasUploadingFiles">
@@ -75,7 +80,7 @@
                         </div>
                         <div class="m-file-upload__completed-list__infos">
                             <p class="m-file-upload__completed-list__infos-label">
-                                <m-link :url="file.url" :mode="link" target="_blank" v-if="file.url">{{file.name}}</m-link>
+                                <m-link :url="file.url" mode="link" target="_blank" v-if="file.url">{{file.name}}</m-link>
                                 <template v-else>{{file.name}}</template>
                             </p>
                             <p class="m-file-upload__completed-list__infos-size">{{file.file.size | file-size}}</p>
