@@ -1,5 +1,3 @@
-import { AxiosError } from 'axios';
-
 export class PromiseError {
     private _noPropagation: boolean = false;
 
