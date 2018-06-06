@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 export enum InputStateValue {
     Default = 'default',
@@ -68,6 +68,28 @@ export class InputState extends Vue implements InputStateMixin {
             value === InputStateTagStyle.P
     })
     public tagStyle: string;
+
+    public setInputHiddenStyle(): void {
+        let inputHiddenEl: HTMLElement = this.$refs.inputHidden as HTMLElement;
+        if (inputHiddenEl) {
+            let computedElStyle: CSSStyleDeclaration = window.getComputedStyle(this.$refs.input as HTMLElement);
+            inputHiddenEl.style.fontSize = computedElStyle.fontSize;
+            inputHiddenEl.style.textTransform = computedElStyle.textTransform;
+            inputHiddenEl.style.fontWeight = computedElStyle.fontWeight;
+            inputHiddenEl.style.lineHeight = computedElStyle.lineHeight;
+            inputHiddenEl.style.padding = computedElStyle.padding;
+            inputHiddenEl.style.margin = computedElStyle.margin;
+        }
+    }
+
+    protected mounted(): void {
+        this.setInputHiddenStyle();
+    }
+
+    @Watch('tagStyle')
+    private tagStyleChanged(): void {
+        this.setInputHiddenStyle();
+    }
 
     public get active(): boolean {
         return !this.isDisabled && !this.isWaiting;
