@@ -1,17 +1,18 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+
 import { InputLabel } from '../../mixins/input-label/input-label';
-import { InputManagement } from '../../mixins/input-management/input-management';
+import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { TEXTFIELD_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
-import uuid from '../../utils/uuid/uuid';
 
 export enum MTextfieldType {
     Text = 'text',
@@ -33,7 +34,7 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'hidden-password';
         InputLabel
     ]
 })
-export class MTextfield extends ModulVue {
+export class MTextfield extends ModulVue implements InputManagementData {
 
     @Prop({
         default: MTextfieldType.Text,
@@ -49,9 +50,18 @@ export class MTextfield extends ModulVue {
     public passwordIcon: boolean;
     @Prop({ default: false })
     public wordWrap: boolean;
+    @Prop()
+    public characterCount: boolean;
+    @Prop()
+    public maxLength: number;
+    @Prop({ default: true })
+    public lengthOverflow: boolean;
+    @Prop({ default: 0 })
+    public characterCountThreshold: number;
+
+    readonly internalValue: string;
 
     private passwordAsText: boolean = false;
-
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
     private id: string = `mTextfield-${uuid.generate()}`;

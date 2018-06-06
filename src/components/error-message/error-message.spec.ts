@@ -1,10 +1,11 @@
-import Vue from 'vue';
 import { mount, Wrapper } from '@vue/test-utils';
+import moment from 'moment';
+import Vue from 'vue';
+
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
-import ErrorMessagePlugin, { MErrorMessage } from './error-message';
 import uuid from '../../utils/uuid/uuid';
-import moment from 'moment';
+import ErrorMessagePlugin, { MErrorMessage } from './error-message';
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -44,5 +45,85 @@ describe('MErrorMessage', () => {
         });
 
         return expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
+    });
+
+    describe('given error', () => {
+        it('should render correctly expanded', () => {
+            const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
+                localVue: Vue,
+                propsData: {
+                    date: moment('2018-01-02T00:01:02'),
+                    referenceNumber: '123456879',
+                    error: {
+                        message: 'An error message'
+                    }
+                },
+                stubs: {
+                    'm-accordion': WrapChildrenStub('div')
+                }
+            });
+
+            return expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
+        });
+
+        it('should render correctly expanded with stack trace on', () => {
+            const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
+                localVue: Vue,
+                propsData: {
+                    date: moment('2018-01-02T00:01:02'),
+                    referenceNumber: '123456879',
+                    error: {
+                        message: 'An error message'
+                    },
+                    stacktrace: true
+                },
+                stubs: {
+                    'm-accordion': WrapChildrenStub('div')
+                }
+            });
+
+            return expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
+        });
+    });
+
+    describe('given error with stack trace', () => {
+        it('should render correctly expanded', () => {
+            const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
+                localVue: Vue,
+                propsData: {
+                    date: moment('2018-01-02T00:01:02'),
+                    referenceNumber: '123456879',
+                    error: {
+                        message: 'An error message',
+                        stack: 'This is a stack trace'
+                    }
+                },
+                stubs: {
+                    'm-accordion': WrapChildrenStub('div')
+                }
+            });
+
+            return expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
+        });
+
+        it('should render correctly expanded with stack trace on', () => {
+            const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
+                localVue: Vue,
+                propsData: {
+                    date: moment('2018-01-02T00:01:02'),
+                    referenceNumber: '123456879',
+                    error: {
+                        message: 'An error message',
+                        stack: 'This is a stack trace'
+                    },
+                    stacktrace: true
+                },
+                stubs: {
+                    'm-accordion': WrapChildrenStub('div')
+                }
+            });
+
+            return expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
+        });
     });
 });

@@ -81,7 +81,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
             this.$emit('resize');
             clearTimeout(this.doneResizeEvent);
             this.doneResizeEvent = setTimeout(() => {
-                this.$emit('resizeDone', event);
+                this.$emit('resizeDone');
             }, 200);
         } else {
             this.isEqMinXL = false;

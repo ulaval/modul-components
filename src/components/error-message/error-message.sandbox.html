@@ -12,5 +12,11 @@
     <hr/>
 
     <h5>with stack trace</h5>
-    <m-error-message reference-number="123456489" :error="e"></m-error-message>
+    <m-error-message reference-number="123456489" :error="e" :stacktrace="true"></m-error-message>
+
+    <h5>unexpected error popup with stack</h5>
+    <m-button v-m-popup:errorpopup>pop me an error</m-button>
+    <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
+        <m-error-message :error="e" :referenceNumber="123456879" :stacktrace="true"></m-error-message>
+    </m-modal>
 </div>

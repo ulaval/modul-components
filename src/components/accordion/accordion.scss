@@ -234,15 +234,15 @@ $m-accordion--color-default: $m-color--interactive;
     &__body-wrap {
         .m--is-dark > &,
         .m--is-default > & {
-            &.accordion-enter-to {
+            &.m-accordion-enter-to {
                 .m-accordion__body {
                     transform: translate3d(0, 0, 0);
                     opacity: 1;
                 }
             }
 
-            &.accordion-enter,
-            &.accordion-leave-to {
+            &.m-accordion-enter,
+            &.m-accordion-leave-to {
                 .m-accordion__body {
                     transform: translate3d(0, $m-margin--l, 0);
                     opacity: 0;

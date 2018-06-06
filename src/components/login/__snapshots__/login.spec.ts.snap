@@ -11,6 +11,11 @@ exports[`MLogin when login should render correctly 1`] = `
                 <div class="m-input-style__body__right"></div>
             </div>
         </div>
+        <div class="m-textfield__validation">
+            <div class="m-validation-message m-textfield__validation__message">
+                <m-accordion-transition transition="true"></m-accordion-transition>
+            </div>
+        </div>
     </div>
     <br>
     <div class="m-textfield m--has-label m--is-type-password" style="width:100%;max-width:288px;">
@@ -20,6 +25,11 @@ exports[`MLogin when login should render correctly 1`] = `
                 <div class="m-input-style__body__left">
                     <input id="mTextfield-uuid" value="" class="m-textfield__input"> </div>
                 <div class="m-input-style__body__right"></div>
+            </div>
+        </div>
+        <div class="m-textfield__validation">
+            <div class="m-validation-message m-textfield__validation__message">
+                <m-accordion-transition transition="true"></m-accordion-transition>
             </div>
         </div>
     </div>
