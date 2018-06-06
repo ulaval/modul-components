@@ -72,6 +72,16 @@ export class MTextfield extends ModulVue {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
 
+    @Watch('inputType')
+    private inputTypeChanged(value: string): void {
+        this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
+    }
+
+    @Watch('wordWrap')
+    private wordWrapChanged(wordWrap: boolean): void {
+        this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
+    }
+
     private togglePasswordVisibility(event): void {
         this.passwordAsText = !this.passwordAsText;
     }
@@ -107,7 +117,6 @@ export class MTextfield extends ModulVue {
 
     private get hasWordWrap(): boolean {
         let hasWordWrap: boolean = this.inputType === MTextfieldType.Text && this.wordWrap;
-        this.as<InputManagement>().trimWordWrap = hasWordWrap;
         if (this.inputType !== MTextfieldType.Text && this.wordWrap) {
             this.$log.warn(TEXTFIELD_NAME + ': If you want to use word-wrap prop, you need to set type prop at "text"');
         }
