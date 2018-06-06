@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
@@ -27,7 +26,7 @@ import WithRender from './textarea.html?style=./textarea.scss';
 export class MTextarea extends ModulVue implements InputManagementData {
     @Prop()
     public characterCount: boolean;
-    @Prop()
+    @Prop({ default: 0 })
     public maxLength: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;

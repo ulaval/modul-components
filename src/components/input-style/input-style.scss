@@ -311,6 +311,7 @@ $m-input-style--padding: 4px !default;
         overflow: hidden;
         width: 100%;
         padding: 0;
+        line-height: $m-line-height;
 
         @include m-is-ie() {
             vertical-align: middle;
@@ -332,7 +333,23 @@ $m-input-style--padding: 4px !default;
     }
 
     textarea {
-        width: 100%;
+        resize: none;
+    }
+
+    &.m--is-tag-h1,
+    &.m--is-tag-h2,
+    &.m--is-tag-h3,
+    &.m--is-tag-h4,
+    &.m--is-tag-h5,
+    &.m--is-tag-h6 {
+        input,
+        textarea,
+        ::placeholder,
+        .m-input-style__body__transparent-text {
+            font-family: $m-font-family;
+            font-weight: $m-font-weight--bold;
+            line-height: 1.1;
+        }
     }
 
     &.m--is-tag-h1 {

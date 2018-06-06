@@ -66,6 +66,7 @@
     },
     "dependencies": {
         "@types/sprintf-js": "^1.1.0",
+        "autosize": "^4.0.2",
         "axios": "^0.17.1",
         "css-element-queries": "^0.4.0",
         "css-loader": "^0.28.7",

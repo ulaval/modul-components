@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+import autosize from 'autosize';
 
 export enum InputStateValue {
     Default = 'default',
@@ -69,26 +70,20 @@ export class InputState extends Vue implements InputStateMixin {
     })
     public tagStyle: string;
 
-    public setInputHiddenStyle(): void {
-        let inputHiddenEl: HTMLElement = this.$refs.inputHidden as HTMLElement;
-        if (inputHiddenEl) {
-            let computedElStyle: CSSStyleDeclaration = window.getComputedStyle(this.$refs.input as HTMLElement);
-            inputHiddenEl.style.fontSize = computedElStyle.fontSize;
-            inputHiddenEl.style.textTransform = computedElStyle.textTransform;
-            inputHiddenEl.style.fontWeight = computedElStyle.fontWeight;
-            inputHiddenEl.style.lineHeight = computedElStyle.lineHeight;
-            inputHiddenEl.style.padding = computedElStyle.padding;
-            inputHiddenEl.style.margin = computedElStyle.margin;
-        }
+    protected mounted(): void {
+        autosize(this.$refs.input);
+        setTimeout(() => {
+            autosize.update(this.$refs.input);
+        });
     }
 
-    protected mounted(): void {
-        this.setInputHiddenStyle();
+    protected beforeDestroy(): void {
+        autosize.destroy(this.$refs.input);
     }
 
     @Watch('tagStyle')
     private tagStyleChanged(): void {
-        this.setInputHiddenStyle();
+        autosize.update(this.$refs.input);
     }
 
     public get active(): boolean {

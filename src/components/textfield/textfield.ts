@@ -52,7 +52,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     public wordWrap: boolean;
     @Prop()
     public characterCount: boolean;
-    @Prop()
+    @Prop({ default: 0 })
     public maxLength: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;
@@ -138,7 +138,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     private get maxLengthNumber(): number {
-        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity ;
+        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity;
     }
 
     private get hasTextfieldError(): boolean {

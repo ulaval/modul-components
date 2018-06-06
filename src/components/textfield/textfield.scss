@@ -46,28 +46,4 @@
             padding-left: $m-padding--xs;
         }
     }
-
-    &.m--has-word-wrap {
-        .m-textfield__input {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 1;
-            width: 100%;
-            outline: none;
-            resize: none;
-            overflow: hidden;
-            margin: 0;
-            word-break: break-word;
-            white-space: pre-wrap;
-
-            &-hidden {
-                opacity: 0;
-                word-break: break-word;
-                white-space: pre-wrap;
-            }
-        }
-    }
 }
