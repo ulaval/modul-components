@@ -132,6 +132,26 @@ export class MTextfield extends ModulVue implements InputManagementData {
         }
         return hasWordWrap;
     }
+
+    public get valueLength(): number {
+        return this.internalValue.length;
+    }
+
+    private get maxLengthNumber(): number {
+        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity ;
+    }
+
+    private get hasTextfieldError(): boolean {
+        return this.as<InputState>().hasError;
+    }
+
+    private get isTextfieldValid(): boolean {
+        return this.as<InputState>().isValid;
+    }
+
+    private get hasCounterTransition(): boolean {
+        return !this.as<InputState>().hasErrorMessage;
+    }
 }
 
 const TextfieldPlugin: PluginObject<any> = {
