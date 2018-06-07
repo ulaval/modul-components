@@ -146,6 +146,7 @@ $m-message-size: 22px;
         &.m--is-warning {
             .m-message__wrap {
                 background: $m-color--warning-lightest;
+                align-items: baseline;
             }
         }
 
