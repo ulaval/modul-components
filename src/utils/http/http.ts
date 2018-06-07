@@ -1,16 +1,19 @@
-import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 import qs from 'qs/lib';
 import { PluginObject } from 'vue';
 
+import { ErrorHandler } from '../errors/error-handler';
+import { PromiseError } from '../errors/promise-error';
 import * as strUtils from '../str/str';
 import { RequestConfig, RestAdapter } from './rest';
 
 const AUTHORIZATION_HEADER: string = 'Authorization';
 
 export interface HttpPluginOptions {
-    protectedUrls: string[];
-    authorizationFn: () => string;
+    protectedUrls?: string[];
+    authorizationFn?: () => string;
     timeout?: number;
+    createPromiseError?: boolean;
 }
 
 export const NO_TIMEOUT: number = 0;
@@ -22,6 +25,7 @@ export class HttpService implements RestAdapter {
         this.instance = axios.create();
 
         if (this.options) {
+            // timeout
             if (!this.options.timeout) {
                 this.instance.defaults.timeout = 30000;
             } else if (this.options.timeout === NO_TIMEOUT) {
@@ -29,20 +33,37 @@ export class HttpService implements RestAdapter {
             } else {
                 this.instance.defaults.timeout = this.options.timeout;
             }
-            let opt: HttpPluginOptions = this.options;
-            this.instance.interceptors.request.use(config => {
-                opt.protectedUrls.every(url => {
-                    if (strUtils.startsWith(config.url, url)) {
-                        let token: string = opt.authorizationFn();
-                        config.headers = Object.assign({
-                            [AUTHORIZATION_HEADER]: token
-                        });
-                        return false;
-                    }
-                    return true;
+
+            // request interceptor for authorization header
+            if (this.options.protectedUrls && this.options.authorizationFn) {
+                let protectedUrls: string[] = this.options.protectedUrls;
+                let authFn: () => string = this.options.authorizationFn;
+                this.instance.interceptors.request.use(config => {
+                    protectedUrls.every(url => {
+                        if (strUtils.startsWith(config.url, url)) {
+                            let token: string = authFn();
+                            config.headers = Object.assign({
+                                [AUTHORIZATION_HEADER]: token
+                            });
+                            return false;
+                        }
+                        return true;
+                    });
+                    return config;
                 });
-                return config;
-            });
+            }
+
+            // response interceptor to progagate PromiseError
+            if (this.options.createPromiseError === undefined || this.options.createPromiseError) {
+                this.instance.interceptors.response.use((response: AxiosResponse) => response, (error: Error) => {
+                    // wrap to a PromiseError, so that propagation can be stopped
+                    let promiseError: PromiseError = new PromiseError(error);
+                    // delay onError
+                    ErrorHandler.onError(promiseError, true);
+
+                    return Promise.reject(promiseError);
+                });
+            }
         }
     }
 
