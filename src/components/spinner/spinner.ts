@@ -141,7 +141,7 @@ export class MSpinner extends ModulVue {
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(SPINNER_NAME, 'plugin.install');
+        // v.prototype.$log.debug(SPINNER_NAME, 'plugin.install');
         v.use(PortalPlugin);
         v.use(ModulPlugin);
         v.use(I18nPlugin);

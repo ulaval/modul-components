@@ -4,13 +4,11 @@ import '../../src/utils/polyfills';
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import DatepickerPlugin from '../../src/components/datepicker/datepicker';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
-import LinkPlugin from '../../src/components/link/link';
-import FrenchPlugin from '../../src/lang/fr';
 import SandboxesPlugin from '../../src/sandbox';
 import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
 import { FRENCH } from '../../src/utils/i18n/i18n';
-import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 import MetaFactory from './meta-init';
 import routerFactory from './router';
 
@@ -22,13 +20,17 @@ let utilsOptions: UtilsPluginOptions = {
     }
 };
 
-Vue.use(UtilsPlugin, utilsOptions);
+// Vue.use(UtilsPlugin, utilsOptions);
 Vue.use(SandboxesPlugin);
-Vue.use(FrenchPlugin);
-Vue.use(DefaultSpritesPlugin);
+// Vue.use(FrenchPlugin);
+// Vue.use(DefaultSpritesPlugin);
 
-Vue.use(LinkPlugin);
 Vue.use(DynamicTemplatePlugin);
+
+/* TESTS */
+Vue.use(DatepickerPlugin);
+
+/* ***** */
 
 MetaFactory();
 

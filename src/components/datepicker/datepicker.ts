@@ -3,6 +3,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop } from 'vue-property-decorator';
 
+import PopupDirectivePlugin from '../../directives/popup/popup';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -322,6 +323,7 @@ const DatepickerPlugin: PluginObject<any> = {
         v.use(InputStylePlugin);
         v.use(ButtonPlugin);
         v.use(PopupPlugin);
+        v.use(PopupDirectivePlugin);
         v.use(ValidationMessagePlugin);
         v.use(MediaQueriesPlugin);
         v.component(DATEPICKER_NAME, MDatepicker);

@@ -283,7 +283,7 @@ function htmlEncode(val: string): string {
 
 const MessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug('$i18n', 'plugin.install');
+        // v.prototype.$log.debug('$i18n', 'plugin.install');
 
         let msg: Messages = new Messages(options);
         (v.prototype as any).$i18n = msg;
