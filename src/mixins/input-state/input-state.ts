@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-import autosize from 'autosize';
+import { Prop } from 'vue-property-decorator';
 
 export enum InputStateValue {
     Default = 'default',
@@ -69,22 +68,6 @@ export class InputState extends Vue implements InputStateMixin {
             value === InputStateTagStyle.P
     })
     public tagStyle: string;
-
-    protected mounted(): void {
-        autosize(this.$refs.input);
-        setTimeout(() => {
-            autosize.update(this.$refs.input);
-        });
-    }
-
-    protected beforeDestroy(): void {
-        autosize.destroy(this.$refs.input);
-    }
-
-    @Watch('tagStyle')
-    private tagStyleChanged(): void {
-        autosize.update(this.$refs.input);
-    }
 
     public get active(): boolean {
         return !this.isDisabled && !this.isWaiting;

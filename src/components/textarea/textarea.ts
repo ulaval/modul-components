@@ -1,6 +1,8 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+
+import TextareaAutoHeightPlugin from '../../directives/textarea-auto-height/textarea-auto-height';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
@@ -63,6 +65,7 @@ const TextareaPlugin: PluginObject<any> = {
         v.prototype.$log.warn(TEXTAREA_NAME + ' is not ready for production');
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
+        v.use(TextareaAutoHeightPlugin);
         v.component(TEXTAREA_NAME, MTextarea);
     }
 };

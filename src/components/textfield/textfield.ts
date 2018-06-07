@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
+import TextareaAutoHeightPlugin from '../../directives/textarea-auto-height/textarea-auto-height';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -159,6 +160,7 @@ const TextfieldPlugin: PluginObject<any> = {
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(ButtonPlugin);
+        v.use(TextareaAutoHeightPlugin);
         v.component(TEXTFIELD_NAME, MTextfield);
     }
 };
