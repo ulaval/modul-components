@@ -2,10 +2,14 @@
     :class="{'m--is-selected': isSelected,
              'm--is-disabled': isDisabled}"
     role="menuitem"
-    :aria-selected="isSelected"
     @keyup.enter="onClick"
     @click="onClick"
     @mouseover="onMouseover"
     @mouseleave="onMouseleave">
-    <slot></slot>
+    <router-link class="m-navbar-item__contents" :to="url" v-if="url && !isSelected" :aria-selected="isSelected">
+        <slot></slot>
+    </router-link>
+    <span class="m-navbar-item__contents" :tabindex="isSelected ? '-1' : '0'" :aria-selected="isSelected" v-else>
+        <slot></slot>
+    </span>
 </li>

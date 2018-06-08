@@ -25,6 +25,8 @@ export class MNavbarItem extends ModulVue {
     public value: string;
     @Prop()
     public disabled: boolean;
+    @Prop()
+    public url: string;
 
     // should be initialized to be reactive
     // tslint:disable-next-line:no-null-keyword
@@ -40,11 +42,6 @@ export class MNavbarItem extends ModulVue {
 
         if (parentNavbar) {
             this.parentNavbar = (parentNavbar as any) as Navbar;
-
-            if (!this.$el.querySelector('a, button')) {
-                this.$el.setAttribute('tabindex', '0');
-            }
-
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
         }

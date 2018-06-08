@@ -3,7 +3,6 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
-import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_NAME } from '../component-names';
 import NavbarItemPlugin, { BaseNavbar, Navbar } from '../navbar-item/navbar-item';
 import WithRender from './navbar.html?style=./navbar.scss';
@@ -16,11 +15,17 @@ const OVERFLOWOFFSET: number = 20;
 export enum MNavbarSkin {
     Light = 'light',
     Dark = 'dark',
-    LightTab = 'light-tab',
-    DarkTab = 'dark-tab',
+    Tab = 'tab',
     Plain = 'plain',
     Simple = 'simple',
     Arrow = 'arrow'
+}
+export enum MNavbarMaxWidth {
+    XLarge = '1400px',
+    Large = '1200px',
+    Regular = '1000px',
+    Small = '800px',
+    Text = '720px'
 }
 
 @WithRender
@@ -32,27 +37,25 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Prop()
     public selected: string;
     @Prop({
-        default: MNavbarSkin.LightTab,
+        default: MNavbarSkin.Tab,
         validator: value =>
             value === MNavbarSkin.Light ||
             value === MNavbarSkin.Dark ||
-            value === MNavbarSkin.LightTab ||
-            value === MNavbarSkin.DarkTab ||
+            value === MNavbarSkin.Tab ||
             value === MNavbarSkin.Plain ||
             value === MNavbarSkin.Simple ||
             value === MNavbarSkin.Arrow
     })
     public skin: string;
-    @Prop({ default: true })
-    public margin: boolean;
     @Prop()
     public disabled: boolean;
     @Prop({ default: true })
-    public arrowMobile: boolean;
+    public navigationArrow: boolean;
     @Prop({ default: false })
     public mouseEvent: boolean;
+    @Prop({ default: MNavbarMaxWidth.Large })
+    public maxWidth: string;
 
-    private animActive: boolean = false;
     private animReady: boolean = false;
     private internalValue: any | undefined = '';
     private showArrowLeft: boolean = false;
@@ -89,18 +92,30 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     protected mounted(): void {
-        this.scrollToSelected();
         this.setupScrolllH();
         this.as<ElementQueries>().$on('resize', this.setupScrolllH);
-
-        // delay the animation beyond initial load
+        (this.$refs.wrap as HTMLElement).addEventListener('scroll', this.setDisplayButtonArrrow);
         setTimeout(() => {
-            this.animReady = true;
-        }, 0);
+            this.scrollToSelected();
+
+             // delay the animation beyond initial load
+            setTimeout(() => {
+                this.animReady = true;
+            });
+        });
     }
 
     protected beforeDestroy(): void {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
+    }
+
+    private setDisplayButtonArrrow(): void {
+        let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
+        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
+
+        this.showArrowRight = wrapEl.scrollLeft < maxScrollLeft;
+
+        this.showArrowLeft = wrapEl.scrollLeft > 0;
     }
 
     private setPosition(element, ref: string): void {
@@ -110,8 +125,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
         localRef.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
         localRef.style.width = width + 'px';
-        this.animActive = true;
-
     }
 
     @Watch('selected')
@@ -126,43 +139,36 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private setupScrolllH(): void {
-        let listEl: HTMLElement = this.$refs.list as HTMLElement;
+        let contentsEl: HTMLElement = this.$refs.contents as HTMLElement;
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
+        let listEl: HTMLElement = this.$refs.list as HTMLElement;
         let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
 
         if (wrapEl.scrollWidth > wrapEl.clientWidth) {
             this.computedHeight = listEl.clientHeight;
             wrapEl.style.height = this.computedHeight + OVERFLOWOFFSET + 'px';
-            this.$el.style.height = this.computedHeight + 'px';
+            contentsEl.style.height = this.computedHeight + 'px';
 
             wrapEl.scrollLeft = this.updateScrollPosition();
 
-            if (wrapEl.scrollLeft < maxScrollLeft) {
-                this.showArrowRight = true;
-            }
-
-            if (wrapEl.scrollLeft > 0) {
-                this.showArrowLeft = true;
-            }
+            this.setDisplayButtonArrrow();
 
         } else {
             this.showArrowLeft = false;
             this.showArrowRight = false;
             wrapEl.style.removeProperty('height');
-            this.$el.style.removeProperty('height');
+            contentsEl.style.removeProperty('height');
         }
     }
 
     private scrollToSelected(): void {
         this.$children.forEach(element => {
             if (element.$props.value === this.selected) {
-
                 (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
 
                 if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
                     this.setPosition(element, this.skin);
                 }
-
             }
         });
     }
@@ -178,7 +184,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private get buttonSkin(): string {
-        return this.skin === 'dark' ? this.skin : 'light';
+        return this.skin === 'dark' ? 'dark' : 'light';
     }
 
     private get isLightSkin(): boolean {
@@ -189,32 +195,16 @@ export class MNavbar extends BaseNavbar implements Navbar {
         return this.skin === 'arrow';
     }
 
-    private scrollLeft(event: MouseEvent): void {
+    private scrollLeft(): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
-        wrapEl.scrollLeft = wrapEl.scrollLeft - (wrapEl.clientWidth / THRESHOLD);
-
-        if (wrapEl.scrollLeft === 0) {
-            this.showArrowLeft = false;
-        }
-
-        if (wrapEl.scrollLeft < maxScrollLeft) {
-            this.showArrowRight = true;
-        }
+        wrapEl.scrollLeft = wrapEl.scrollLeft - (wrapEl.clientWidth);
+        this.setDisplayButtonArrrow();
     }
 
-    private scrollRight(event: MouseEvent): void {
+    private scrollRight(): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
-        wrapEl.scrollLeft = wrapEl.scrollLeft + (wrapEl.clientWidth / THRESHOLD);
-
-        if (wrapEl.scrollLeft > 0) {
-            this.showArrowLeft = true;
-        }
-
-        if (wrapEl.scrollLeft === maxScrollLeft) {
-            this.showArrowRight = false;
-        }
+        wrapEl.scrollLeft = wrapEl.scrollLeft + (wrapEl.clientWidth);
+        this.setDisplayButtonArrrow();
     }
 }
 
