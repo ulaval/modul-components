@@ -1,6 +1,31 @@
 <div>
+    <h3>Test 1 : input type</h3>
+    <p class="m-u--margin-bottom">
+        Le textfield offre les différents types de comportements du "input type" afin de contrôler l'affichage du clavier sur mobile : text/password/email/url/tel.
+    </p>
+        <h6>Type text</h6>
+        <p>
+            <m-textfield label="Titre" type="text"></m-textfield>
+        </p>
+        <h6>Type password</h6>
+        <p>
+            <m-textfield label="Mot de passe" type="password" password-icon="true"></m-textfield>
+        </p>
+        <h6>Type courriel</h6>
+        <p>
+            <m-textfield label="Adresse de courriel" type="mail"></m-textfield>
+        </p>
+        <h6>Type url</h6>
+        <p>
+            <m-textfield label="URL" type="url"></m-textfield>
+        </p>
+        <h6>Type téléphone</h6>
+        <p>
+            <m-textfield label="Téléphone" type="phone"></m-textfield>
+        </p>
+
     <h3>
-        Test 1 : Compteur de caractères
+        Test 2 : Compteur de caractères
     </h3>
     <h4>
         Dépassement autorisé
@@ -85,18 +110,17 @@
         </m-textfield>
     </p>
 
-    <h3>Test 2 : Password icon</h3>
-    <p>
-        <m-textfield placeholder="Type your password" type="password" password-icon="true"></m-textfield>
-    </p>
-
     <h3>Test 3 : Retour à la ligne automatique (word-wrap)</h3>
     <p>
-        La propriété word-wrap permet les retours à la ligne automatiques dans un champ de saisi (plutôt que de cacher le texte en surplus).
+        La propriété word-wrap permet les retours à la ligne automatiques dans un champ de saisi de type texte seulement (plutôt que de cacher le texte en surplus).
         <br>From <a href="https://github.com/ulaval/modul-components/pull/260" target="blank">PR-260</a>
     </p>
     <p class="m-u--margin-top--l">
-        <m-textfield label="Objet (textfield avec word-wrap activé)" type="text" word-wrap="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
+        <m-textfield label="Objet (textfield de type text avec word-wrap activé)" type="text" word-wrap="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
+    </p>
+
+    <p class="m-u--margin-top--l">
+        <m-textfield label="Objet (textfield de type courriel avec word-wrap activé)" type="mail" word-wrap="true" value="Lorsque le type du champ de saisie est différent de text, ici courriel, le word-wrap ne doit pas s'activer."></m-textfield>
     </p>
 
 
