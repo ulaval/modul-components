@@ -1,7 +1,7 @@
 <div>
     <h3>Test 1 : input type</h3>
     <p class="m-u--margin-bottom">
-        Le textfield offre les différents types de comportements du "input type" afin de contrôler l'affichage du clavier sur mobile : text/password/email/url/tel.
+        Le clavier sur mobile doit s'ajuster en fonction du type défini sur le textfield.
     </p>
         <h6>Type text</h6>
         <p>
@@ -112,15 +112,19 @@
 
     <h3>Test 3 : Retour à la ligne automatique (word-wrap)</h3>
     <p>
-        La propriété word-wrap permet les retours à la ligne automatiques dans un champ de saisi de type texte seulement (plutôt que de cacher le texte en surplus).
+        Le texte qui "dépasse" du champ de saisi doit revenir à la ligne automatiquement lorsque la ropriété word-wrap est activée (plutôt que de cacher le texte en surplus).
         <br>From <a href="https://github.com/ulaval/modul-components/pull/260" target="blank">PR-260</a>
     </p>
-    <p class="m-u--margin-top--l">
-        <m-textfield label="Objet (textfield de type text avec word-wrap activé)" type="text" word-wrap="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
+    <h6>Champ de saisie de type text et word-wrap à true</h6>
+    <p>Le wordwrap est bien appliqué car le textfield est de type text.</p>
+    <p>
+        <m-textfield type="text" word-wrap="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
     </p>
 
+    <h6>Champ de saisie de type courriel et word-wrap à true</h6>
+    <p>Le wordwrap n'est pas appliqué car le textfield n'est pas de type text. Envoie également une erreur dans la console.</p>
     <p class="m-u--margin-top--l">
-        <m-textfield label="Objet (textfield de type courriel avec word-wrap activé)" type="mail" word-wrap="true" value="Lorsque le type du champ de saisie est différent de text, ici courriel, le word-wrap ne doit pas s'activer."></m-textfield>
+        <m-textfield type="mail" word-wrap="true" value="Lorsque le type du champ de saisie est différent de text, ici courriel, le word-wrap ne doit pas s'activer."></m-textfield>
     </p>
 
 
