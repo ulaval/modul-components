@@ -1,6 +1,0 @@
-{
-    "SERVICE_SITE_URL": "http://develop-sites-ena2-dv.paas.exp.ulaval.ca/api/",
-    "SERVICE_FICHIER_URL": "http://develop-fichiers-ena2-dv.paas.exp.ulaval.ca/api/",
-    "SERVICE_IDENTITE_URL": "http://develop-identites-ena2-dv.paas.exp.ulaval.ca/api/",
-    "EPIC_AFFICHER_DEFAUT": "true"
-}
