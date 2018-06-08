@@ -1,9 +1,9 @@
 <div>
     <h3>
-        Compteur de caractères
+        Test 1 : Compteur de caractères
     </h3>
     <h4>
-        Test 1 : Dépassement autorisé
+        Dépassement autorisé
     </h4>
     <ul>
         <li>Nombre de caractères permis : 20</li>
@@ -20,7 +20,7 @@
     </m-textfield>
 
     <h4>
-        Test 2 : Seuil d'affichage
+        Seuil d'affichage
     </h4>
     <ul>
         <li>Nombre de caractères permis : 30</li>
@@ -50,7 +50,7 @@
     </m-textfield>
 
     <h4>
-        Test 3 : Affichage d'un message d'erreur
+        Affichage d'un message d'erreur
     </h4>
     <ul>
         <li>Nombre de caractères permis : 20</li>
@@ -63,7 +63,7 @@
     </m-textfield>
 
     <h4>
-        Test 4 : sous-titre dans un module d'aprentissage (Prisme)
+        Sous-titre dans un module d'aprentissage (Prisme)
     </h4>
     <ul>
         <li>Nombre de caractères permis : 200</li>
@@ -76,7 +76,7 @@
         :length-overflow="true" v-model="test4Model" :error="test4Model.length > 200 ? true : false">
     </m-textfield>
 
-    <h3>Test 5 : Ne pas afficher un compteur sur un champ de saisie sans limite de caractères</h3>
+    <h4>Ne pas afficher un compteur sur un champ de saisie sans limite de caractères</h4>
     <p class="m-u--margin-bottom">
         Lorsque qu'on ajoute un compteur sur un champ sans limite de caractère, le compteur doit être masqué. Nous n'avons pas de cas d'utilisation de compteur de mots sans imposer de limite.
     </p>
@@ -85,8 +85,23 @@
         </m-textfield>
     </p>
 
+    <h3>Test 2 : Password icon</h3>
+    <p>
+        <m-textfield placeholder="Type your password" type="password" password-icon="true"></m-textfield>
+    </p>
+
+    <h3>Test 3 : Retour à la ligne automatique (word-wrap)</h3>
+    <p>
+        La propriété word-wrap permet les retours à la ligne automatiques dans un champ de saisi (plutôt que de cacher le texte en surplus).
+        <br>From <a href="https://github.com/ulaval/modul-components/pull/260" target="blank">PR-260</a>
+    </p>
+    <p class="m-u--margin-top--l">
+        <m-textfield label="Objet (textfield avec word-wrap activé)" type="text" word-wrap="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
+    </p>
+
+
     <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>Test # : Title</h3>
     <p class="m-u--margin-bottom">
         Test description
         <!-- if relevant, add link to PR
@@ -97,19 +112,5 @@
         <m-textfield>
             <!-- Test case -->
         </m-textfield>
-    </p>
-
-    <h3>Password icon</h3>
-    <p>
-        <m-textfield placeholder="Type your password" type="password" password-icon="true"></m-textfield>
-    </p>
-
-    <h3>Retour à la ligne automatique (word-wrap)</h3>
-    <p>
-        La propriété word-wrap permet les retours à la ligne automatiques dans un champ de saisi (plutôt que de cacher le texte en surplus).
-        <br>From <a href="https://github.com/ulaval/modul-components/pull/260" target="blank">PR-260</a>
-    </p>
-    <p class="m-u--margin-top--l">
-        <m-textfield label="Objet (textfield avec word-wrap activé)" type="text" word-wrap="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
     </p>
 </div>
