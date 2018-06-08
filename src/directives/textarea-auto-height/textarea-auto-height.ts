@@ -21,7 +21,9 @@ const MTextareaAutoHeight: DirectiveOptions = {
                     };
                     element.addEventListener('input', binding.ajustHeight);
                     window.addEventListener('resize', binding.ajustHeight);
-                    binding.ajustHeight();
+                    setTimeout(() => {
+                        binding.ajustHeight();
+                    });
                 }
             });
         }
