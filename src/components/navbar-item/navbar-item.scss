@@ -172,6 +172,8 @@ a {
 }
 
 .m-navbar.m--is-skin-dark {
+    $m-m-navbar-item--max-width: 60px;
+
     .m-navbar-item {
         font-size: $m-font-size--h5;
         font-weight: $m-font-weight--bold;
@@ -191,8 +193,6 @@ a {
         // word-break: break-word;
 
         &__contents {
-            $m-m-navbar-item--max-width: 60px;
-
             transition: color 0.4s ease;
             padding: $m-padding--l 0;
             color: $m-color--grey;
@@ -205,12 +205,12 @@ a {
 
             &::before {
                 content: '';
-                transition: opacity 0.4s ease;
+                transition: opacity $m-transition-duration--s ease, width $m-transition-duration--l ease;
                 position: absolute;
                 top: 0;
                 left: 50%;
-                margin-left: -$m-m-navbar-item--max-width/2;
-                width: $m-m-navbar-item--max-width;
+                transform: translateX(-50%);
+                width: $m-m-navbar-item--max-width/3;
                 height: $m-border-width--l;
                 background: $m-color--active;
                 opacity: 0;
@@ -224,6 +224,7 @@ a {
 
                 &::before {
                     opacity: 1;
+                    width: $m-m-navbar-item--max-width;
                 }
             }
         }
