@@ -12,7 +12,7 @@ a {
 
         &:not(.m--is-disabled) {
             .m-navbar-item__contents {
-                padding: $m-padding;
+                padding: $m-padding $m-margin--l;
                 background: $m-color--grey-light;
                 color: $m-color--text;
             }
@@ -96,8 +96,9 @@ a {
 
         &__contents {
             transition: color $m-transition-duration ease;
-            color: $m-color--grey;
+            color: $m-color--grey-dark;
             padding: $m-padding 0 $m-padding + $m-border-width 0;
+            font-weight: $m-font-weight--bold;
 
             &:visited {
                 color: $m-color--grey-darker;
@@ -130,15 +131,17 @@ a {
         position: relative;
 
         &__contents {
+            transition: color $m-transition-duration--l ease, font-weight $m-transition-duration--l ease;
             position: relative;
             padding-top: $m-padding;
             padding-bottom: $m-padding;
             padding-right: $m-padding--l;
-            transition: color 0.4s ease, font-weight 0.4s ease;
+            color: $m-color--grey-dark;
+            font-weight: $m-font-weight;
 
             &:hover,
             &:focus {
-                color: $m-color--interactive-light;
+                color: $m-color--interactive;
             }
         }
 
@@ -155,7 +158,7 @@ a {
                 height: 16px;
                 width: 1px;
                 position: absolute;
-                background: $m-color--text;
+                background: $m-color--grey-dark;
                 right: 0;
                 top: 50%;
                 transform: translate3d(0, -50%, 0);
@@ -164,7 +167,7 @@ a {
 
         &.m--is-selected {
             .m-navbar-item__contents {
-                color: $m-color--black;
+                color: $m-color--text;
                 font-weight: $m-font-weight--black;
             }
         }
@@ -220,7 +223,6 @@ a {
         &.m--is-selected {
             .m-navbar-item__contents {
                 color: $m-color--white;
-                font-weight: $m-font-weight--black;
 
                 &::before {
                     opacity: 1;
@@ -232,12 +234,6 @@ a {
 }
 
 .m-navbar.m--is-skin-arrow {
-    // .m-navbar {
-    //     &__list {
-    //         padding-bottom: $m-margin--s;
-    //     }
-    // }
-
     .m-navbar-item {
         margin: 0 $m-padding;
 
@@ -253,7 +249,7 @@ a {
 
         &__contents {
             transition: color $m-transition-duration ease;
-            color: $m-color--grey;
+            color: $m-color--grey-dark;
             padding: $m-padding 0 #{$m-padding + 6px} 0;
             font-weight: $m-font-weight--bold;
 
@@ -263,7 +259,7 @@ a {
 
             &:hover,
             &:focus {
-                color: $m-color--black;
+                color: $m-color--text;
             }
         }
     }
