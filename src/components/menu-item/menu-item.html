@@ -2,7 +2,7 @@
     :class="{ 'm--is-disabled' : disabled,
               'm--has-icon-spacing': hasIcon }"
     ref="m-menu-item"
-    tabindex="0"
+    :tabindex="disabled ? '-1' : '0'"
     role="option"
     @keydown.enter.prevent="onClick"
     @click.prevent="onClick">
