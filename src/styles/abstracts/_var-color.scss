@@ -1,9 +1,9 @@
 // ======================================================================
 //  Official color of Université Laval
 // ======================================================================
-$m-color--ul-blue: #09f;
-$m-color--ul-yellow: #ffc103;
-$m-color--ul-red: #e30513;
+$m-color--ul-blue: var(--m-color--ul-blue);
+$m-color--ul-yellow: var(--m-color--ul-yellow);
+$m-color--ul-red: var(--m-color--ul-red);
 
 // ======================================================================
 //  Seven Shades of Grey
@@ -20,49 +20,49 @@ $m-color--grey-lightest: #f9f9f9 !default;
 //  General color
 // ======================================================================
 $m-color--black: #000;
-$m-color--text: $m-color--grey-darker;
-$m-color--text-light: $m-color--grey;
+$m-color--text: var(--m-color--grey-darker);
+$m-color--text-light: var(--m-color--text-light);
 $m-color--white: #fff;
 
 // ======================================================================
 //  Success colors
 // ======================================================================
-$m-color--success-dark: #009962 !default;
-$m-color--success: #00c77f !default;
-$m-color--success-light: #cdf3e3 !default;
-$m-color--success-lightest: #eaf9f1 !default;
+$m-color--success-dark: var(--m-color--success-dark) !default;
+$m-color--success: var(--m-color--success) !default;
+$m-color--success-light: var(--m-color--success-light) !default;
+$m-color--success-lightest: var(--m-color--success-lightest) !default;
 
 // ======================================================================
 //  Warning colors
 // ======================================================================
-$m-color--warning: $m-color--ul-yellow !default;
-$m-color--warning-lightest: #fff8e6 !default;
+$m-color--warning: var(--m-color--warning) !default;
+$m-color--warning-lightest: var(m-color--warning-lightest) !default;
 
 // ======================================================================
 //  Error colors
 // ======================================================================
-$m-color--error-dark: #b3040f !default;
-$m-color--error: $m-color--ul-red !default;
-$m-color--error-lightest: #fcf2f3 !default;
+$m-color--error-dark: var(--m-color--error-dark) !default;
+$m-color--error: var(--m-color--error) !default;
+$m-color--error-lightest: var(--m-color--error-lightest) !default;
 
 // ======================================================================
 //  Interactive colors
 // ======================================================================
-$m-color--interactive-darker: #0075c3 !default;
-$m-color--interactive-dark: #0587e1 !default;
-$m-color--interactive: $m-color--ul-blue !default;
-$m-color--interactive-light: #36adff !default;
-$m-color--interactive-lighter: #6ed2ff !default;
-$m-color--interactive-lightest: #dffaff !default;
+$m-color--interactive-darker: var(--m-color--interactive-darker) !default;
+$m-color--interactive-dark: var(--m-color--interactive-dark) !default;
+$m-color--interactive: var(--m-color--interactive) !default;
+$m-color--interactive-light: var(--m-color--interactive-light) !default;
+$m-color--interactive-lighter: var(--m-color--interactive-lighter) !default;
+$m-color--interactive-lightest: var(--m-color--interactive-lightest) !default;
 $m-color--information: #eaf5ff !default;
 
 // ======================================================================
 //  Accent colors
 // ======================================================================
-$m-color--accent-dark: #ed8514 !default;
-$m-color--accent: #f39612 !default;
-$m-color--accent-light: #ffaa26 !default;
-$m-color--accent-lightest: #ffeecf !default;
+$m-color--accent-dark: var(--m-color--accent-dark) !default;
+$m-color--accent: var(--m-color--accent) !default;
+$m-color--accent-light: var(--m-color--accent-light) !default;
+$m-color--accent-lightest: var(--m-color--accent-lightest) !default;
 
 // ======================================================================
 //  Active colors

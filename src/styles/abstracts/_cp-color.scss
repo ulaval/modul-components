@@ -11,22 +11,10 @@
     --m-color--ul-red: #e00413;
 
     // ======================================================================
-    //  Seven Shades of Grey to rules them all!
-    // ======================================================================
-    --m-color--grey-darkest: #1f1f1f;
-    --m-color--grey-darker: #3d3d3d;
-    --m-color--grey-dark: #696969;
-    --m-color--grey: #929292;
-    --m-color--grey-light: #d7d7d7;
-    --m-color--grey-lighter: #f4f4f4;
-    --m-color--grey-lightest: #f9f9f9;
-
-    // ======================================================================
     //  General color
     // ======================================================================
-    --m-color--black: #000;
     --m-color--text: var(--m-color--grey-darker);
-    --m-color--white: #fff;
+    --m-color--text-light: var(--m-color--grey-dark);
 
     // ======================================================================
     //  Success colors
@@ -71,23 +59,4 @@
     //  Active colors
     // ======================================================================
     --m-color--active: var(--m-color--ul-yellow);
-
-    // ======================================================================
-    //  disabled colors
-    // ======================================================================
-    --m-color--disabled: var(--m-color--grey-lighter);
-    --m-color--disabled-light: var(--m-color--grey-lighter);
-
-    // ======================================================================
-    //  Scrollbar colors
-    // ======================================================================
-    --m-color--scrollbar: var(--m-color--grey);
-    --m-color--scrollbar-light: var(--m-color--grey-light);
-
-    // ======================================================================
-    //  UI colors
-    // ======================================================================
-    --m-color--border-dark: var(--m-color--grey-dark);
-    --m-color--border: var(--m-color--grey-light);
-    --m-color--header-dark: var(--m-color--grey-darkest);
 }
