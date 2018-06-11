@@ -5,6 +5,8 @@
          :placement="placement"
          :disabled="disabled"
          :close-on-backdrop="true"
+         :background="false"
+         :shadow="false"
          @open="onOpen"
          @close="onClose">
     <m-icon-button :id="id"
@@ -21,7 +23,7 @@
                    @click="onClick">
     </m-icon-button>
     <ul :id="ariaControls"
-        class="m-menu__wrap"
+        class="m-menu__list"
         :aria-labelledby="id"
         ref="menu">
         <slot></slot>

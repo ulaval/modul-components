@@ -1,11 +1,10 @@
 import { PluginObject } from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-import WithRender from './menu-item.html?style=./menu-item.scss';
+import { Prop } from 'vue-property-decorator';
+
+import { ModulVue } from '../../utils/vue/vue';
 import { MENU_ITEM_NAME } from '../component-names';
-import { MMenu } from '../menu/menu';
-import { fail } from 'assert';
+import WithRender from './menu-item.html?style=./menu-item.scss';
 
 export abstract class BaseMenu extends ModulVue {
 }
@@ -16,6 +15,14 @@ export interface MMenuInterface {
     close(): void;
 }
 
+export enum MMenuItemAction {
+    Default = 'default',
+    Add = 'add',
+    Edit = 'edit',
+    Delete = 'delete',
+    Archive = 'archive'
+}
+
 @WithRender
 @Component
 export class MMenuItem extends ModulVue {
@@ -24,6 +31,16 @@ export class MMenuItem extends ModulVue {
     public iconName: string;
     @Prop()
     public disabled: boolean;
+    @Prop({
+        default: MMenuItemAction.Default,
+        validator: value =>
+            value === MMenuItemAction.Default ||
+            value === MMenuItemAction.Add ||
+            value === MMenuItemAction.Edit ||
+            value === MMenuItemAction.Delete ||
+            value === MMenuItemAction.Archive
+    })
+    public action: string;
 
     public root: MMenuInterface; // Menu component
     private hasRoot: boolean = false;
@@ -51,15 +68,43 @@ export class MMenuItem extends ModulVue {
     }
 
     private get hasIconNameProp(): boolean {
-        return !!this.iconName;
+        return !!this.iconName || this.action !== MMenuItemAction.Default;
     }
 
     private get hasIcon(): boolean {
         if (this.hasRoot) {
             (this.root as MMenuInterface).checkIcon(this.hasIconNameProp);
-            return (this.root as MMenuInterface).hasIcon;
+            return (this.root as MMenuInterface).hasIcon || this.action !== MMenuItemAction.Default;
         }
         return false;
+    }
+
+    private get iconInfo(): any {
+        let iconName: string = '';
+        let label: string | undefined;
+        switch (this.action) {
+            case MMenuItemAction.Add:
+                iconName = 'add';
+                label = this.$i18n.translate('m-menu:add');
+                break;
+            case MMenuItemAction.Edit:
+                iconName = 'edit';
+                label = this.$i18n.translate('m-menu:edit');
+                break;
+            case MMenuItemAction.Delete:
+                iconName = 'delete';
+                label = this.$i18n.translate('m-menu:delete');
+                break;
+            case MMenuItemAction.Archive:
+                iconName = 'archive';
+                label = this.$i18n.translate('m-menu:archive');
+                break;
+            default:
+                iconName = this.iconName;
+                label = undefined;
+                break;
+        }
+        return { 'iconName': iconName, 'label': label };
     }
 
     private get hasDefaultSlot(): boolean {
