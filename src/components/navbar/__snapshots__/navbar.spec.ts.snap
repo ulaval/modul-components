@@ -4,13 +4,13 @@ exports[`MNavbar should render correctly 1`] = `
 <div class="m-navbar m--is-skin-tab">
     <div class="m-navbar__max-width" style="max-width:1200px;">
         <div class="m-navbar__contents">
-            <nav role="menubar" class="m-navbar__wrap">
+            <div role="menubar" class="m-navbar__wrap">
                 <ul aria-hidden="true" class="m-navbar__list">
                     <li role="menuitem" class="m-navbar-item"><span tabindex="0" class="m-navbar-item__contents"></span></li>
                     <li role="menuitem" class="m-navbar-item"><span tabindex="0" class="m-navbar-item__contents"></span></li>
                     <li role="menuitem" class="m-navbar-item"><span tabindex="0" class="m-navbar-item__contents"></span></li>
                 </ul>
-            </nav>
+            </div>
         </div>
     </div>
 </div>

@@ -27,6 +27,12 @@ export class MNavbarItem extends ModulVue {
     public disabled: boolean;
     @Prop()
     public url: string;
+    @Prop()
+    public ariaHaspopup: boolean;
+    @Prop()
+    public ariaExpanded: boolean;
+    @Prop()
+    public ariaControls: string;
 
     // should be initialized to be reactive
     // tslint:disable-next-line:no-null-keyword
