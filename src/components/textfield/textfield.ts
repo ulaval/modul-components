@@ -8,8 +8,9 @@ import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import ButtonPlugin from '../button/button';
+import CharacterCountPlugin from '../character-count/character-count';
 import { TEXTFIELD_NAME } from '../component-names';
+import IconButtonPlugin from '../icon-button/icon-button';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
@@ -138,7 +139,8 @@ const TextfieldPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
-        v.use(ButtonPlugin);
+        v.use(CharacterCountPlugin);
+        v.use(IconButtonPlugin);
         v.component(TEXTFIELD_NAME, MTextfield);
     }
 };
