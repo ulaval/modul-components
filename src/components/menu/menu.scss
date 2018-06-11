@@ -7,7 +7,7 @@
         width: 100%;
         margin: 0;
         padding: 0;
-        max-height: 216px; // magic number
+        max-height: 213px; // Magic number: height of 4 items
         overflow-x: hidden;
         overflow-y: auto;
         border: 1px solid $m-color--border;
