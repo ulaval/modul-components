@@ -122,7 +122,7 @@
             content: '';
             width: 100%;
             height: $m-border-width--s;
-            background: $m-color--grey;
+            background: $m-color--text;
         }
 
         .m-navbar__button {
@@ -213,7 +213,7 @@
         }
 
         &::before {
-            color: $m-color--grey;
+            color: $m-color--text;
             top: 0;
         }
 
