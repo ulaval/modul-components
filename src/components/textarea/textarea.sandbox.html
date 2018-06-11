@@ -11,7 +11,7 @@
     </ul>
     <h6>Dépassement autorisé : Oui</h6>
     <br>
-    <m-textarea :character-count="true" max-length="20" :length-overflow="true">
+    <m-textarea :readonly="true" :character-count="true" max-length="20" :length-overflow="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
     </m-textarea>
 
     <h6>Dépassement autorisé : Non</h6>
@@ -27,7 +27,7 @@
         <li>Dépassement autorisé : Oui</li>
     </ul>
     <h6>Affichage du compteur : à partir de 25 caractères</h6>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="25">
+    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="25" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de 0 caractère (en tout temps)</h6>
@@ -37,7 +37,7 @@
 
     <h6>Affichage du compteur : à partir de 30 caractères (une fois la limite atteinte)</h6>
     <br>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="30">
+    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="30" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de 35 caractères (seuil supérieur à la limite)</h6>
