@@ -15,8 +15,8 @@ $m-accordion--color-default: $m-color--interactive;
         margin: $m-margin--s 0;
     }
 
-    &.m--is-dark,
-    &.m--is-default {
+    &.m--is-default,
+    &.m--is-dark {
         margin-top: - $m-accordion--border-size;
     }
 
@@ -69,6 +69,7 @@ $m-accordion--color-default: $m-color--interactive;
             background-color: $m-color--grey-darker;
             border-top: $m-accordion--border-size solid $m-color--grey-darkest;
             border-bottom: $m-accordion--border-size solid $m-color--grey-darkest;
+            transition: border-size 0.5s ease;
 
             &::after {
                 top: 0;
@@ -134,7 +135,8 @@ $m-accordion--color-default: $m-color--interactive;
             h5,
             h6 {
                 margin: 0;
-                font-size: $m-font-size--l;
+                font-size: $m-font-size--h4;
+                // font-size: $m-font-size--l;
                 font-weight: $m-font-weight--bold;
             }
         }
@@ -302,4 +304,9 @@ $m-accordion--color-default: $m-color--interactive;
     &__hidden {
         @include m-visually-hidden();
     }
+}
+
+// when open, hide border-top on the next accordion
+.m-accordion.m--is-dark.m--is-open + .m-accordion.m--is-dark .m-accordion__header {
+    border-top: 0;
 }
