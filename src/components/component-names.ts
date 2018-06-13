@@ -60,4 +60,5 @@ export const TEXTAREA_NAME: string = 'm-textarea';
 export const TEXTFIELD_NAME: string = 'm-textfield';
 export const TIMEPICKER_NAME: string = 'm-timepicker';
 export const TOOLTIP_NAME: string = 'm-tooltip';
+export const TREE_NAME: string = 'm-tree';
 export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
