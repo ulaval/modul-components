@@ -1,9 +1,13 @@
 import { PluginObject } from 'vue';
+import Component from 'vue-class-component';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
+import WithRender from './tree.html';
 
+@WithRender
+@Component
 export class MTree extends ModulVue {
 
 }
