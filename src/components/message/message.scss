@@ -171,6 +171,7 @@ $m-message-size: 22px;
                 display: flex;
                 align-items: center;
                 min-height: 1.25em; // Magic number
+                min-width: 18px; // Magic number
 
                 .m-icon {
                     font-size: $m-font-size--l;
