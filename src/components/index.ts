@@ -46,6 +46,7 @@ import ProgressPluggin from './progress/progress';
 import RadioGroupPlugin from './radio-group/radio-group';
 import RadioStylePlugin from './radio-style/radio-style';
 import RadioPlugin from './radio/radio';
+import RichTextEditorPlugin from './rich-text-editor/rich-text-editor';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import SidebarPlugin from './sidebar/sidebar';
@@ -116,6 +117,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RadioPlugin);
         Vue.use(RadioGroupPlugin);
         Vue.use(RadioStylePlugin);
+        Vue.use(RichTextEditorPlugin);
         Vue.use(ScrollTopPlugin);
         Vue.use(SessionExpiredPlugin);
         Vue.use(SidebarPlugin);

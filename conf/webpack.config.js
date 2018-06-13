@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const path = require('path');
+const webpack = require('webpack');
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -121,7 +122,15 @@ module.exports = function (env) {
                     removingTags: ['desc', 'defs', 'style'],
                     removeSVGTagAttrs: true
                 }
-            }
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
+                query: {
+                  limit: 10000,
+                  name: path.posix.join('assets', 'fonts/[name].[hash:7].[ext]')
+                }
+              }
             ]
         },
         plugins: [
@@ -132,8 +141,12 @@ module.exports = function (env) {
             new ContextReplacementPlugin(
                 /moment[\/\\]locale$/,
                 /en-ca|fr-ca/
-            )
-        ]
+            ),
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery"
+            })
+        ],
     }
 
     if (!isLib) {
