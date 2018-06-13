@@ -5,9 +5,10 @@ import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
+import IconPlugin from '../icon/icon';
 import WithRender from './tree.html';
 
-export interface MNodeStructureArchive extends Vue {
+export interface MNodeStructureArchive {
     relativePath: string;
     idFile: string;
     fileName: string;
@@ -40,7 +41,12 @@ export class MTree extends ModulVue {
     icon: string;
 
     created(): void {
-        console.log(this.selected);
+        // console.log(this.tree);
+    }
+
+    haveChilds(child: MNodeStructureArchive[]): boolean {
+        console.log(child);
+        return child.length ? true : false;
     }
 
 }
@@ -49,6 +55,7 @@ const TreePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(TREE_NAME, 'plugin.install');
         v.use(IconFilePlugin);
+        v.use(IconPlugin);
         v.component(TREE_NAME, MTree);
     }
 };

@@ -1,1 +1,9 @@
-<div class="m-tree"></div>
+<div class="m-tree">
+    <m-list-item v-for="node in tree">
+        <m-icon-button v-if="haveChilds(node.childs)" icon-name="close" skin="dark">
+            EH
+        </m-icon-button>
+        <span>{{node.fileName}}</span>
+        <m-tree v-if="haveChilds(node.childs)" :tree="node.childs"></m-tree>
+    </m-list-item>
+</div>
