@@ -1,7 +1,28 @@
 <div>
     <h3>default</h3>
     <p>
-        <m-inplace-edit @click="ie1Click" :edit-mode.sync="editMode1">
+        <m-inplace-edit @click="click1" :edit-mode.sync="editMode1">
+            <span slot="readMode">{{value1}}</span>
+            <m-textfield slot="editMode" label="Field #1" v-model="value1"></m-textfield>
+        </m-inplace-edit>
+    </p>
+    <h3>Padding</h3>
+    <p>
+        <m-inplace-edit @click="click2" :edit-mode.sync="editMode2" padding="32px">
+            <span slot="readMode">{{value1}}</span>
+            <m-textfield slot="editMode" label="Field #1" v-model="value1"></m-textfield>
+        </m-inplace-edit>
+    </p>
+    <h3>edit mode padding</h3>
+    <p>
+        <m-inplace-edit @click="click3" :edit-mode.sync="editMode3" edit-mode-padding="64px">
+            <span slot="readMode">{{value1}}</span>
+            <m-textfield slot="editMode" label="Field #1" v-model="value1"></m-textfield>
+        </m-inplace-edit>
+    </p>
+    <h3>Padding & edit mode padding</h3>
+    <p>
+        <m-inplace-edit @click="click4" :edit-mode.sync="editMode4" padding="32px" edit-mode-padding="32px">
             <span slot="readMode">{{value1}}</span>
             <m-textfield slot="editMode" label="Field #1" v-model="value1"></m-textfield>
         </m-inplace-edit>

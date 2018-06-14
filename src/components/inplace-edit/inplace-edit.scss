@@ -2,12 +2,12 @@
 @import '../accordion/accordion-transition.scss';
 
 .m-inplace-edit {
-    transition: padding $m-transition-duration ease, background $m-transition-duration--s linear;
     padding: 0;
     background: $m-color--white;
+    transition: padding $m-transition-duration ease, background $m-transition-duration--s linear;
 
     &.m--is-edit-mode {
-        padding: 16px;
+        padding: $m-spacing;
         background: $m-color--information;
     }
 
