@@ -8,90 +8,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { LIMIT_TEXT_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import WithRender from './limit-text.html?style=./limit-text.scss';
-
-// @WithRender
-// @Component
-// export class MLimitText extends ModulVue {
-
-//     @Prop()
-//     public open: boolean;
-
-//     @Prop({ default: 4 })
-//     public lines: number;
-
-//     @Prop()
-//     public openLabel: string;
-
-//     @Prop()
-//     public closeLabel: string;
-
-//     private openHiddenText: string = this.$i18n.translate('m-limit-text:open');
-//     private closeHiddenText: string = this.$i18n.translate('m-limit-text:close');
-//     private internalOpen: boolean = false;
-//     private contentHeight: number = 0;
-//     private maxHeight: number = 0;
-//     private overflow: boolean = false;
-
-//     protected mounted(): void {
-//         Vue.nextTick(() => {
-//             this.computeHeight();
-//         });
-//     }
-
-//     protected updated(): void {
-//         this.computeHeight();
-//     }
-
-//     private computeHeight(): void {
-//         this.contentHeight = (this.$refs.container as HTMLElement).scrollHeight;
-//         this.maxHeight = (this.$refs.test as HTMLElement).clientHeight * this.lines;
-//         this.overflow = this.contentHeight > this.maxHeight;
-//     }
-
-//     private get maxHeightStyle(): string | undefined {
-//         if (this.overflow) {
-//             return this.propOpen ? this.contentHeight + 'px' : this.maxHeight + 'px';
-//         }
-//         return 'none';
-//     }
-
-//     private get propOpen(): boolean {
-//         if (this.open !== undefined) {
-//             return this.open;
-//         }
-//         return this.internalOpen;
-//     }
-
-//     private onOpen(): void {
-//         this.internalOpen = true;
-//         this.$emit('update:open', true);
-//     }
-
-//     private onClose(): void {
-//         this.internalOpen = false;
-//         this.$emit('update:open', false);
-//     }
-
-//     private get openText(): string {
-//         return `[ ${this.openLabel || this.openHiddenText} ]`;
-//     }
-
-//     private get closeText(): string {
-//         return `[ ${this.closeLabel || this.closeHiddenText} ]`;
-//     }
-// }
-
-// const LimitTextPlugin: PluginObject<any> = {
-//     install(v, options): void {
-//         v.prototype.$log.warn(LIMIT_TEXT_NAME + ' is not ready for production');
-//         v.use(I18nPlugin);
-//         v.use(LinkPlugin);
-//         v.component(LIMIT_TEXT_NAME, MLimitText);
-//     }
-// };
-
-// export default LimitTextPlugin;
+import WithRender from './limit-text.html';
 
 @WithRender
 @Component({
@@ -101,7 +18,9 @@ export class MLimitText extends ModulVue {
     @Prop({ default: 4 })
     public maxNumberOfLine: number;
     @Prop()
-    public label: string;
+    public showLabel: string;
+    @Prop()
+    public hideLabel: string;
 
     public componentName = LIMIT_TEXT_NAME;
     private reduceContent: string = '';
@@ -121,7 +40,7 @@ export class MLimitText extends ModulVue {
         this.initLineHeigh = parseFloat(String(window.getComputedStyle(this.el).lineHeight).replace(/,/g, '.')).toFixed(2);
         this.maxHeight = this.maxNumberOfLine * this.initLineHeigh;
 
-        // Add the close link if an HTML tag is present
+        // Generate the full content - Add the close link if an HTML tag is present
         if (this.originalContent.match('</')) {
             let tagIndex: number = this.originalContent.lastIndexOf('</');
             this.fullContent = this.originalContent.substring(0,tagIndex) + this.closeLink + this.originalContent.substring(tagIndex);
@@ -131,12 +50,12 @@ export class MLimitText extends ModulVue {
         // Get the limited text
         this.adjustText();
 
-        // Resize section ------------
+        // ------------ Resize section ------------
         this.previousOrientation = window.screen['orientation']['type'];
         this.$nextTick(() => {
             this.as<ElementQueries>().$on('resizeDone', this.checkOrientation);
         });
-        // ---------------------------
+        // ---------------------------------------
     }
 
     protected destroyed(): void {
@@ -240,15 +159,15 @@ export class MLimitText extends ModulVue {
     }
 
     private get openLinkOriginal(): string {
-        return `...&nbsp;<m-link style="font-weight:400;" mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.label ? this.label.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
+        return `...&nbsp;<m-link style="font-weight:400;" mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.showLabel ? this.showLabel.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
     }
 
     private get openLink(): string {
-        return `...&nbsp;<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.label ? this.label.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
+        return `...&nbsp;<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.showLabel ? this.showLabel.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
     }
 
     private get closeLink(): string {
-        return `<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:close') + `" :underline="false">[\xa0-\xa0]</m-link>`;
+        return `<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:close') + `" :underline="false">[` + (this.hideLabel ? this.hideLabel.replace(/\s/g, '\xa0') : '\xa0-\xa0') + `]</m-link>`;
     }
 
     private openText(): void {
@@ -263,7 +182,9 @@ export class MLimitText extends ModulVue {
         if (this.child) {
             this.child.$off('click');
         }
-        this.child = component[0].$children[0];
+        if (component[0].$children.length > 0) {
+            this.child = component[0].$children[0];
+        }
         this.child.$on('click', () => this.openText());
     }
 
@@ -271,7 +192,9 @@ export class MLimitText extends ModulVue {
         if (this.child) {
             this.child.$off('click');
         }
-        this.child = component[0].$children[0];
+        if (component[0].$children.length > 0) {
+            this.child = component[0].$children[0];
+        }
         this.child.$on('click', () => this.closeText());
     }
 }
