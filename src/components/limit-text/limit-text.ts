@@ -133,8 +133,9 @@ export class MLimitText extends ModulVue {
 
         // Resize section ------------
         this.previousOrientation = window.screen['orientation']['type'];
-        this.as<ElementQueries>().$on('resizeDone', this.checkOrientation);
-        // window.addEventListener('orientationchange', this.checkOrientation);
+        this.$nextTick(() => {
+            this.as<ElementQueries>().$on('resizeDone', this.checkOrientation);
+        });
         // ---------------------------
     }
 
@@ -154,7 +155,7 @@ export class MLimitText extends ModulVue {
         }
     }
 
-    private checkOrientation(): void {
+    private checkOrientation(e): void {
         if (window.screen['orientation']['type'] !== this.previousOrientation) {
             this.previousOrientation = window.screen['orientation']['type'];
             this.reset();
@@ -239,11 +240,11 @@ export class MLimitText extends ModulVue {
     }
 
     private get openLinkOriginal(): string {
-        return `... <m-link style="font-weight:400;" mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.label ? this.label.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
+        return `...&nbsp;<m-link style="font-weight:400;" mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.label ? this.label.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
     }
 
     private get openLink(): string {
-        return `... <m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.label ? this.label.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
+        return `...&nbsp;<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.label ? this.label.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
     }
 
     private get closeLink(): string {
