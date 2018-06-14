@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -15,6 +15,8 @@ import WithRender from './limit-text.html';
     mixins: [MediaQueries, ElementQueries]
 })
 export class MLimitText extends ModulVue {
+    @Prop()
+    public open: boolean;
     @Prop({ default: 4 })
     public maxNumberOfLine: number;
     @Prop()
@@ -26,15 +28,15 @@ export class MLimitText extends ModulVue {
     private reduceContent: string = '';
     private originalContent: string = '';
     private fullContent: string = '';
-    private open: boolean = false;
+    private internalOpen: boolean = false;
     private hasFinish: boolean = false;
     private child: ModulVue;
     private el: HTMLElement;
     private initLineHeigh: any = '';
     private maxHeight: number = 0;
-    private previousOrientation: string;
 
     protected mounted(): void {
+        this.internalOpen = this.open;
         this.originalContent = this.$refs.originalText['innerHTML'];
         this.el = this.$refs.originalText as HTMLElement;
         this.initLineHeigh = parseFloat(String(window.getComputedStyle(this.el).lineHeight).replace(/,/g, '.')).toFixed(2);
@@ -51,9 +53,8 @@ export class MLimitText extends ModulVue {
         this.adjustText();
 
         // ------------ Resize section ------------
-        this.previousOrientation = window.screen['orientation']['type'];
         this.$nextTick(() => {
-            this.as<ElementQueries>().$on('resizeDone', this.checkOrientation);
+            this.as<ElementQueries>().$on('resizeDone', this.reset);
         });
         // ---------------------------------------
     }
@@ -71,13 +72,6 @@ export class MLimitText extends ModulVue {
             this.hasFinish = true;
         } else {
             this.hasFinish = false;
-        }
-    }
-
-    private checkOrientation(e): void {
-        if (window.screen['orientation']['type'] !== this.previousOrientation) {
-            this.previousOrientation = window.screen['orientation']['type'];
-            this.reset();
         }
     }
 
@@ -170,12 +164,17 @@ export class MLimitText extends ModulVue {
         return `<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:close') + `" :underline="false">[` + (this.hideLabel ? this.hideLabel.replace(/\s/g, '\xa0') : '\xa0-\xa0') + `]</m-link>`;
     }
 
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.internalOpen = open;
+    }
+
     private openText(): void {
-        this.open = true;
+        this.internalOpen = true;
     }
 
     private closeText(): void {
-        this.open = false;
+        this.internalOpen = false;
     }
 
     private onUpdatedOpen(component: any): void {
