@@ -6,7 +6,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
 import IconPlugin from '../icon/icon';
-import WithRender from './tree.html';
+import WithRender from './tree.html?style=./tree.scss';
 
 export interface MNodeStructureArchive {
     relativePath: string;
@@ -45,8 +45,12 @@ export class MTree extends ModulVue {
     }
 
     haveChilds(child: MNodeStructureArchive[]): boolean {
-        console.log(child);
         return child.length ? true : false;
+    }
+
+    extensionFile(filename: string = ''): string {
+        let extension: string = filename.split('.').pop() as string;
+        return '.' + extension;
     }
 
 }

@@ -1,9 +1,17 @@
 <div class="m-tree">
-    <m-list-item v-for="node in tree">
-        <m-icon-button v-if="haveChilds(node.childs)" icon-name="close" skin="dark">
-            EH
-        </m-icon-button>
-        <span>{{node.fileName}}</span>
-        <m-tree v-if="haveChilds(node.childs)" :tree="node.childs"></m-tree>
-    </m-list-item>
+    <div v-for="node in tree">
+        <template v-if="haveChilds(node.childs)">
+            <m-accordion skin="plain">
+                <div slot="header">
+                    <m-icon-file :extension="extensionFile(node.relativePath)"></m-icon-file>
+                    <span>{{ node.fileName }}</span>
+                </div>
+                <m-tree v-if="haveChilds(node.childs)" :tree="node.childs" style="margin-left:100px;"></m-tree>
+            </m-accordion>
+        </template>
+        <div v-else class="m-tree__single-file">
+                <m-icon-file :extension="extensionFile(node.relativePath)"></m-icon-file>
+                <span>{{ node.fileName }}</span>
+        </div>
+    </div>
 </div>

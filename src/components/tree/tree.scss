@@ -1,0 +1,7 @@
+@import '../../styles/abstracts/variables';
+
+.m-tree {
+    &__single-file {
+        margin-left: $m-margin--l + 4px;
+    }
+}
