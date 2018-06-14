@@ -9,6 +9,7 @@ import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
 import CharacterCountPlugin from '../character-count/character-count';
 import { TEXTFIELD_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
