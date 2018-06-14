@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
@@ -38,19 +38,19 @@ export class MTree extends ModulVue {
     selection: MSelectOption;
 
     @Prop()
-    selectedFile: string;
+    externalSelectedFile: string;
 
     @Prop()
     icon: string;
 
-    relativePathSelected: string = '';
+    internalSelectedFile: string = '';
 
     created(): void {
-        this.currentSelectedFile = this.selectedFile;
+        this.initializeSelectedFile();
     }
 
     haveChilds(child: MNodeStructureArchive[]): boolean {
-        return child.length ? true : false;
+        return !!child.length;
     }
 
     extensionFile(filename: string = ''): string {
@@ -63,15 +63,21 @@ export class MTree extends ModulVue {
     }
 
     isFileSelected(relativePath: string): boolean {
-        return this.currentSelectedFile === relativePath;
+        return this.internalSelectedFile === relativePath;
     }
 
     get currentSelectedFile(): string {
-        return this.relativePathSelected;
+        return this.internalSelectedFile;
     }
 
     set currentSelectedFile(relativePath: string) {
-        this.relativePathSelected = relativePath;
+        this.internalSelectedFile = relativePath;
+        this.$emit('update:externalSelectedFile', this.internalSelectedFile);
+    }
+
+    @Watch('externalSelectedFile')
+    initializeSelectedFile(): void {
+        this.currentSelectedFile = this.externalSelectedFile;
     }
 
 }

@@ -1,14 +1,12 @@
 <div class="m-tree">
     <div v-for="file in tree">
-        <div v-if="haveChilds(file.childs)" class="m-tree__with-childs">
-            <m-accordion skin="plain">
-                <div slot="header">
-                    <m-icon-file :extension="extensionFile(file.relativePath)"></m-icon-file>
-                    <span>{{ file.fileName }}</span>
-                </div>
-                <m-tree v-if="haveChilds(file.childs)" :tree="file.childs" class="m-tree__with-childs__childs"></m-tree>
-            </m-accordion>
-        </div>
+        <m-accordion skin="plain" v-if="haveChilds(file.childs)" class="m-tree__with-childs">
+            <div slot="header">
+                <m-icon size="20px" name="m-svg__file-odf"></m-icon>
+                <span>{{ file.fileName }}</span>
+            </div>
+            <m-tree :tree="file.childs" class="m-tree__with-childs__childs" :externalSelectedFile.sync="currentSelectedFile"></m-tree>
+        </m-accordion>
         <m-link v-else mode="button" class="m-tree__single-file" @click="selectFile(file)" :class="{'m-tree__single-file__selected': isFileSelected(file.relativePath)}">
                 <m-icon-file :extension="extensionFile(file.relativePath)"></m-icon-file>
                 <span>{{ file.fileName }}</span>

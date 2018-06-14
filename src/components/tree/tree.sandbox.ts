@@ -13,41 +13,41 @@ export class MTreeSandbox extends Vue {
         {
             fileName: 'Fichier #1',
             idFile: 'a1',
-            relativePath: '/chemin-vers-le-fichier.html',
+            relativePath: '/1chemin-vers-le-fichier.html',
             childs: []
         },
         {
             fileName: 'Fichier #2',
             idFile: 'b1',
-            relativePath: '/chemin-vers-le-fichier.jpeg',
+            relativePath: '/2chemin-vers-le-fichier.jpeg',
             childs: [
                 {
                     fileName: 'Fichier #2-1',
                     idFile: 'b2',
-                    relativePath: '/chemin-vers-le-fichier.doc',
+                    relativePath: '/3chemin-vers-le-fichier.doc',
                     childs: []
                 },
                 {
                     fileName: 'Fichier #2-2',
                     idFile: 'b3',
-                    relativePath: '/chemin-vers-le-fichier.xls',
+                    relativePath: '/4chemin-vers-le-fichier.xls',
                     childs: []
                 },
                 {
                     fileName: 'Fichier #2-3',
                     idFile: 'b4',
-                    relativePath: '/chemin-vers-le-fichier.jpg',
+                    relativePath: '/5chemin-vers-le-fichier.jpg',
                     childs: [
                         {
                             fileName: 'Fichier #2-3-1',
                             idFile: 'b5',
-                            relativePath: '/chemin-vers-le-fichier.js',
+                            relativePath: '/6chemin-vers-le-fichier.js',
                             childs: []
                         },
                         {
                             fileName: 'Fichier #2-3-2',
                             idFile: 'b6',
-                            relativePath: '/chemin-vers-le-fichier.css',
+                            relativePath: '/7chemin-vers-le-fichier.css',
                             childs: []
                         }
                     ]
@@ -57,12 +57,12 @@ export class MTreeSandbox extends Vue {
         {
             fileName: 'Fichier #3',
             idFile: 'c1',
-            relativePath: '/chemin-vers-le-fichier.mp4',
+            relativePath: '/8chemin-vers-le-fichier.mp4',
             childs: [
                 {
                     fileName: 'Fichier #3-1',
                     idFile: 'c2',
-                    relativePath: '/chemin-vers-le-fichier.css',
+                    relativePath: '/9chemin-vers-le-fichier.css',
                     childs: []
                 }
             ]
