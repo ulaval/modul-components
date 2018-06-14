@@ -1,8 +1,15 @@
-<div class="m-limit-text">
+<!-- <div class="m-limit-text">
     <div ref="container" class="m-limit-text__container" :style="{ maxHeight: maxHeightStyle }">
         <slot></slot>
     </div>
     <div class="m-limit-text__test" ref="test" aria-hidden="true">&nbsp;</div>
     <m-link v-if="overflow && !propOpen" mode="button" @click="onOpen" hiddenText="openHiddenText" :underline="false">{{openText}}</m-link>
     <m-link v-if="overflow && propOpen" mode="button" @click="onClose" hiddenText="closeHiddenText" :underline="false">{{closeText}}</m-link>
+</div> -->
+<div class="m-limit-text">
+    <div ref="originalText" class="m-limit-text__original" v-show="!hasFinish">
+        <slot></slot>
+    </div>
+    <m-dynamic-template @updated="onUpdatedOpen($event)" :template="getReduceText" v-if="!open"></m-dynamic-template>
+    <m-dynamic-template @updated="onUpdatedClose($event)" :template="getFullText" v-if="open"></m-dynamic-template>
 </div>
