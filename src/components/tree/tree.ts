@@ -35,13 +35,18 @@ export class MTree extends ModulVue {
             value === MSelectOption.SINGLE ||
             value === MSelectOption.MULTIPLE
     })
-    selected: MSelectOption;
+    selection: MSelectOption;
+
+    @Prop()
+    selectedFile: string;
 
     @Prop()
     icon: string;
 
+    relativePathSelected: string = '';
+
     created(): void {
-        // console.log(this.tree);
+        this.currentSelectedFile = this.selectedFile;
     }
 
     haveChilds(child: MNodeStructureArchive[]): boolean {
@@ -51,6 +56,22 @@ export class MTree extends ModulVue {
     extensionFile(filename: string = ''): string {
         let extension: string = filename.split('.').pop() as string;
         return '.' + extension;
+    }
+
+    selectFile(file: MNodeStructureArchive): void {
+        this.currentSelectedFile = file.relativePath;
+    }
+
+    isFileSelected(relativePath: string): boolean {
+        return this.currentSelectedFile === relativePath;
+    }
+
+    get currentSelectedFile(): string {
+        return this.relativePathSelected;
+    }
+
+    set currentSelectedFile(relativePath: string) {
+        this.relativePathSelected = relativePath;
     }
 
 }

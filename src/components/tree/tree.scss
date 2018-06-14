@@ -3,5 +3,15 @@
 .m-tree {
     &__single-file {
         margin-left: $m-margin--l + 4px;
+
+        &__selected {
+            color: pink;
+        }
+    }
+
+    &__with-childs {
+        &__childs {
+            margin-left: $m-margin--l;
+        }
     }
 }

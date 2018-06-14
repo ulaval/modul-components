@@ -1,17 +1,17 @@
 <div class="m-tree">
-    <div v-for="node in tree">
-        <template v-if="haveChilds(node.childs)">
+    <div v-for="file in tree">
+        <div v-if="haveChilds(file.childs)" class="m-tree__with-childs">
             <m-accordion skin="plain">
                 <div slot="header">
-                    <m-icon-file :extension="extensionFile(node.relativePath)"></m-icon-file>
-                    <span>{{ node.fileName }}</span>
+                    <m-icon-file :extension="extensionFile(file.relativePath)"></m-icon-file>
+                    <span>{{ file.fileName }}</span>
                 </div>
-                <m-tree v-if="haveChilds(node.childs)" :tree="node.childs" style="margin-left:100px;"></m-tree>
+                <m-tree v-if="haveChilds(file.childs)" :tree="file.childs" class="m-tree__with-childs__childs"></m-tree>
             </m-accordion>
-        </template>
-        <div v-else class="m-tree__single-file">
-                <m-icon-file :extension="extensionFile(node.relativePath)"></m-icon-file>
-                <span>{{ node.fileName }}</span>
         </div>
+        <m-link v-else mode="button" class="m-tree__single-file" @click="selectFile(file)" :class="{'m-tree__single-file__selected': isFileSelected(file.relativePath)}">
+                <m-icon-file :extension="extensionFile(file.relativePath)"></m-icon-file>
+                <span>{{ file.fileName }}</span>
+        </m-link>
     </div>
 </div>
