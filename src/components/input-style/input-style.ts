@@ -28,6 +28,8 @@ export class MInputStyle extends ModulVue {
     public iconName: string;
     @Prop()
     public requiredMarker: boolean;
+    @Prop()
+    public readonly: boolean;
 
     private animActive: boolean = false;
 

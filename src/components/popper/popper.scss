@@ -9,9 +9,15 @@ $m-popper--margin: $m-margin !default;
 
     &__article {
         position: relative;
+        display: flex;
+        flex-direction: column;
 
         &.m--has-shadow {
             box-shadow: $m-box-shadow;
+        }
+
+        &.m--has-background {
+            background: $m-color--white;
         }
 
         &.m--is-default-anim {
@@ -58,5 +64,27 @@ $m-popper--margin: $m-margin !default;
                 margin-top: 0;
             }
         }
+    }
+
+    &__header,
+    &__body,
+    &__footer {
+        position: relative;
+
+        &:not(.m--no-padding) {
+            padding: $m-padding;
+        }
+
+        > :first-child {
+            margin-top: 0;
+
+            > :first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &__body {
+        flex: 1 1 auto;
     }
 }

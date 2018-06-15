@@ -38,12 +38,5 @@
         &__message {
             flex: 1 1 auto;
         }
-
-        &__maxlenght {
-            transition: color $m-transition-duration ease;
-            margin-top: 2px; // Magic number
-            font-size: $m-font-size--xs;
-            padding-left: $m-padding--xs;
-        }
     }
 }
