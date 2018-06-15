@@ -4,6 +4,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import { LIMIT_TEXT_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
@@ -18,13 +19,12 @@ export class MLimitText extends ModulVue {
     @Prop()
     public open: boolean;
     @Prop({ default: 4 })
-    public maxNumberOfLine: number;
+    public lines: number;
     @Prop()
     public showLabel: string;
     @Prop()
     public hideLabel: string;
 
-    public componentName = LIMIT_TEXT_NAME;
     private reduceContent: string = '';
     private originalContent: string = '';
     private fullContent: string = '';
@@ -40,7 +40,7 @@ export class MLimitText extends ModulVue {
         this.originalContent = this.$refs.originalText['innerHTML'];
         this.el = this.$refs.originalText as HTMLElement;
         this.initLineHeigh = parseFloat(String(window.getComputedStyle(this.el).lineHeight).replace(/,/g, '.')).toFixed(2);
-        this.maxHeight = this.maxNumberOfLine * this.initLineHeigh;
+        this.maxHeight = this.lines * this.initLineHeigh;
 
         // Generate the full content - Add the close link if an HTML tag is present
         if (this.originalContent.match('</')) {
@@ -200,9 +200,10 @@ export class MLimitText extends ModulVue {
 
 const LimitTextPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(LIMIT_TEXT_NAME + ' is not ready for production');
+        v.prototype.$log.debug(LIMIT_TEXT_NAME + 'plugin.install');
         v.use(I18nPlugin);
         v.use(LinkPlugin);
+        v.use(MediaQueriesPlugin);
         v.component(LIMIT_TEXT_NAME, MLimitText);
     }
 };

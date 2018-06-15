@@ -3,17 +3,18 @@ import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
+import LimitTextPlugin, { MLimitText } from '../limit-text/limit-text';
 import RadioPlugin, { MRadio, MRadioPosition } from './radio';
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
-
 describe('MRadio', () => {
     let localVue: VueConstructor<Vue>;
 
     beforeEach(() => {
         localVue = createLocalVue();
         localVue.use(RadioPlugin);
+        localVue.use(LimitTextPlugin);
     });
 
     it('should render correctly', () => {
@@ -24,6 +25,16 @@ describe('MRadio', () => {
             },
             slots: {
                 default: 'label'
+            }
+        });
+
+        mount(MLimitText, {
+            localVue: localVue,
+            propsData: {
+                // Put something here.
+            },
+            slots: {
+                default: 'Excepteur deserunt elit sunt ipsum esse non reprehenderit adipisicing culpa exercitation dolor occaecat in non.'
             }
         });
 
