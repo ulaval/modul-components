@@ -164,15 +164,18 @@ $m-message-size: 22px;
 
             &__body {
                 margin-left: $m-margin--s;
+                align-self: flex-start;
             }
 
             &__icon {
-                align-items: flex-start;
+                display: flex;
+                align-items: center;
+                min-height: 1.25em; // Magic number
+                min-width: 18px; // Magic number
 
                 .m-icon {
                     font-size: $m-font-size--l;
                     width: $m-font-size--l;
-                    margin-top: 2px; // Magic number
                 }
             }
         }
