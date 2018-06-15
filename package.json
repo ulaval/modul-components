@@ -140,8 +140,8 @@
         "url": "https://github.com/ulaval/modul-components.git"
     },
     "engines": {
-        "node": ">= 6.0.0",
-        "npm": ">= 3.0.0"
+        "node": ">= 8.0.0",
+        "npm": ">= 6.0.0"
     },
     "browserslist": [
         "> 1%",
