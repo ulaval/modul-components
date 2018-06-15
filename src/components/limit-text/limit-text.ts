@@ -21,9 +21,9 @@ export class MLimitText extends ModulVue {
     @Prop({ default: 4 })
     public lines: number;
     @Prop()
-    public showLabel: string;
+    public openLabel: string;
     @Prop()
-    public hideLabel: string;
+    public closeLabel: string;
 
     private reduceContent: string = '';
     private originalContent: string = '';
@@ -153,15 +153,15 @@ export class MLimitText extends ModulVue {
     }
 
     private get openLinkOriginal(): string {
-        return `...&nbsp;<m-link style="font-weight:400;" mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.showLabel ? this.showLabel.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
+        return `...&nbsp;<m-link style="font-weight:400;" mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.openLabel ? this.openLabel.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
     }
 
     private get openLink(): string {
-        return `...&nbsp;<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.showLabel ? this.showLabel.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
+        return `...&nbsp;<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + (this.openLabel ? this.openLabel.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
     }
 
     private get closeLink(): string {
-        return `<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:close') + `" :underline="false">[` + (this.hideLabel ? this.hideLabel.replace(/\s/g, '\xa0') : '\xa0-\xa0') + `]</m-link>`;
+        return `<m-link mode="button" hiddenText="` + this.$i18n.translate('m-limit-text:close') + `" :underline="false">[` + (this.closeLabel ? this.closeLabel.replace(/\s/g, '\xa0') : '\xa0-\xa0') + `]</m-link>`;
     }
 
     @Watch('open')
