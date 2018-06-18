@@ -12,10 +12,6 @@ install:
   - npm run setup
 
 script:
-  - ls node_modules
-  - ls node_modules/caniuse-lite/
-  - ls node_modules/caniuse-lite/dist
-  - ls node_modules/caniuse-lite/dist/unpacker/
   - npm run clean
   - npm run buildWebpack
   - npm run unitall -- -w 1
