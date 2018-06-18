@@ -1,5 +1,5 @@
 <div class="m-limit-text">
-    <div ref="originalText" class="m-limit-text__original" v-show="!hasFinish">
+    <div ref="originalText" class="m-limit-text__original" v-show="!hasFinish" aria-hidden="true">
         <slot></slot>
     </div>
     <m-dynamic-template @updated="onUpdatedOpen($event)" :template="getReduceText" v-if="!internalOpen"></m-dynamic-template>
