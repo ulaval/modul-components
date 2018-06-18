@@ -229,7 +229,7 @@
         align-items: center;
         user-select: none;
 
-        &:not(.m--is-selected):not(.m--is-disabled) {
+        &:not(.m--is-disabled) {
             &,
             a,
             a:visited,

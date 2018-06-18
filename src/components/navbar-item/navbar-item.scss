@@ -133,8 +133,6 @@ a {
         &__contents {
             transition: color $m-transition-duration--l ease, font-weight $m-transition-duration--l ease;
             position: relative;
-            padding-top: $m-padding;
-            padding-bottom: $m-padding;
             padding-right: $m-padding--l;
             color: $m-color--grey-dark;
             font-weight: $m-font-weight;

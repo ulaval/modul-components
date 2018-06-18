@@ -54,10 +54,6 @@ export class MNavbarItem extends ModulVue {
 
     }
 
-    private get isDisabled(): boolean {
-        return this.disabled;
-    }
-
     public get isSelected(): boolean {
         return !!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model;
     }

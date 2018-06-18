@@ -1,15 +1,15 @@
 <li class="m-navbar-item"
     :class="{'m--is-selected': isSelected,
-             'm--is-disabled': isDisabled}"
+             'm--is-disabled': disabled}"
     role="menuitem"
     @keyup.enter="onClick"
     @click="onClick"
     @mouseover="onMouseover"
     @mouseleave="onMouseleave">
-    <router-link class="m-navbar-item__contents" :to="url" v-if="url && !isSelected" :aria-selected="isSelected" :aria-haspopup="ariaHaspopup" :aria-expanded="ariaExpanded" :aria-controls="ariaControls">
+    <router-link class="m-navbar-item__contents" :to="url" v-if="url && !disabled" :aria-selected="isSelected" :aria-haspopup="ariaHaspopup" :aria-expanded="ariaExpanded" :aria-controls="ariaControls">
         <slot></slot>
     </router-link>
-    <span class="m-navbar-item__contents" :tabindex="isSelected ? '-1' : '0'" :aria-selected="isSelected" :aria-haspopup="ariaHaspopup" :aria-expanded="ariaExpanded" :aria-controls="ariaControls" v-else>
+    <span class="m-navbar-item__contents" :tabindex="disabled ? '-1' : '0'" :aria-selected="isSelected" :aria-haspopup="ariaHaspopup" :aria-expanded="ariaExpanded" :aria-controls="ariaControls" v-else>
         <slot></slot>
     </span>
 </li>
