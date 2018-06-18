@@ -5,7 +5,7 @@
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
     "scripts": {
-        "setup": "npm install --no-optional",
+        "setup": "npm install",
         "clean": "rimraf dist",
         "reset": "rmdir /S /Q node_modules",
         "dev": "rimraf dist/**/* && webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
