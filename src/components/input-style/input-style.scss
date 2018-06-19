@@ -354,6 +354,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h1 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 38px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -363,6 +367,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h2 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 33px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -372,6 +380,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h3 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 28px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -381,6 +393,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h4 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 23px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -390,6 +406,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h5 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 18px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
