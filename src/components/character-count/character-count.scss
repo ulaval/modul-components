@@ -1,7 +1,7 @@
 @import 'abstracts/variables';
 @import '../accordion/accordion-transition';
 
-.m-character-count {
+.m-character-count__wrap {
     transition: color $m-transition-duration ease;
     margin-top: 2px; // Magic number
     font-size: $m-font-size--xs;

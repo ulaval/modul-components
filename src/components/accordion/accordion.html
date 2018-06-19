@@ -1,4 +1,10 @@
-<article class="m-accordion" :class="['m--is-' + propSkin, {'m--is-closed': !propOpen, 'm--is-disabled': propDisabled, 'm--has-icon-left': iconPosition !== 'right', 'm--has-icon-large': iconSize=='large' }]">
+<article class="m-accordion"
+         :class="['m--is-' + propSkin,
+            {'m--is-closed': !propOpen,
+            'm--is-open': propOpen,
+            'm--is-disabled': propDisabled,
+            'm--has-icon-left': iconPosition !== 'right',
+            'm--has-icon-large': iconSize=='large' }]">
     <div class="m-accordion__header"
          :class="{ 'm--has-padding': paddingHeader && padding }"
          tabindex="0"

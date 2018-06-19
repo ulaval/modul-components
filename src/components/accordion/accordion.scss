@@ -11,13 +11,11 @@ $m-accordion--border-color: $m-color--border;
 $m-accordion--color-default: $m-color--interactive;
 
 .m-accordion {
-    &.m--is-light {
-        margin: $m-margin--s 0;
-    }
-
-    &.m--is-dark,
-    &.m--is-default {
-        margin-top: - $m-accordion--border-size;
+    &.m--is-default,
+    &.m--is-dark {
+        + .m-accordion {
+            margin-top: - $m-accordion--border-size;
+        }
     }
 
     &__header {
@@ -34,8 +32,8 @@ $m-accordion--color-default: $m-color--interactive;
             text-decoration: none;
         }
 
-        .m--is-dark > &,
-        .m--is-default > & {
+        .m-accordion.m--is-dark > &,
+        .m-accordion.m--is-default > & {
             position: relative;
             min-height: 80px;
 
@@ -52,9 +50,9 @@ $m-accordion--color-default: $m-color--interactive;
             }
         }
 
-        .m--is-default > & {
+        .m-accordion.m--is-default > & {
             color: $m-color--text;
-            background-color: #fff;
+            background-color: $m-color--white;
             border-top: $m-accordion--border-size solid $m-accordion--border-color;
             border-bottom: $m-accordion--border-size solid $m-accordion--border-color;
 
@@ -64,11 +62,12 @@ $m-accordion--color-default: $m-color--interactive;
             }
         }
 
-        .m--is-dark > & {
-            color: #fff;
+        .m-accordion.m--is-dark > & {
+            color: $m-color--white;
             background-color: $m-color--grey-darker;
             border-top: $m-accordion--border-size solid $m-color--grey-darkest;
             border-bottom: $m-accordion--border-size solid $m-color--grey-darkest;
+            transition: border-size 0.5s ease;
 
             &::after {
                 top: 0;
@@ -76,7 +75,12 @@ $m-accordion--color-default: $m-color--interactive;
             }
         }
 
-        .m--is-light > & {
+        // when open, hide border-top on the next accordion
+        .m-accordion.m--is-dark.m--is-open + .m-accordion.m--is-dark & {
+            border-top: 0;
+        }
+
+        .m-accordion.m--is-light > & {
             &:hover {
                 .m-accordion__header__content {
                     transition: color $m-transition-duration ease;
@@ -85,7 +89,7 @@ $m-accordion--color-default: $m-color--interactive;
             }
         }
 
-        .m--is-disabled & {
+        .m-accordion.m--is-disabled & {
             outline: none;
             border-color: $m-color--disabled-light;
 
@@ -111,11 +115,11 @@ $m-accordion--color-default: $m-color--interactive;
             }
         }
 
-        .m--is-dark.m--is-disabled & {
+        .m-accordion.m--is-dark.m--is-disabled & {
             border-color: $m-color--disabled;
         }
 
-        .m--has-icon-left & {
+        .m-accordion.m--has-icon-left & {
             flex-direction: row-reverse;
         }
     }
@@ -123,9 +127,9 @@ $m-accordion--color-default: $m-color--interactive;
     &__header__content {
         flex: 1;
 
-        .m--is-default &,
-        .m--is-dark &,
-        .m--is-light & {
+        .m-accordion.m--is-default &,
+        .m-accordion.m--is-dark &,
+        .m-accordion.m--is-light & {
             &,
             h1,
             h2,
@@ -134,7 +138,7 @@ $m-accordion--color-default: $m-color--interactive;
             h5,
             h6 {
                 margin: 0;
-                font-size: $m-font-size--l;
+                font-size: $m-font-size--h4;
                 font-weight: $m-font-weight--bold;
             }
         }
@@ -225,15 +229,15 @@ $m-accordion--color-default: $m-color--interactive;
             margin-right: $m-margin;
         }
 
-        .m--is-dark.m--has-icon-left &,
-        .m--is-default.m--has-icon-left & {
+        .m-accordion.m--is-dark.m--has-icon-left &,
+        .m-accordion.m--is-default.m--has-icon-left & {
             margin-right: $m-spacing;
         }
     }
 
     &__body-wrap {
-        .m--is-dark > &,
-        .m--is-default > & {
+        .m-accordion.m--is-dark > &,
+        .m-accordion.m--is-default > & {
             &.m-accordion-enter-to {
                 .m-accordion__body {
                     transform: translate3d(0, 0, 0);
@@ -254,14 +258,14 @@ $m-accordion--color-default: $m-color--interactive;
             }
         }
 
-        .m--is-default > & {
+        .m-accordion.m--is-default > & {
             color: $m-color--text;
-            background-color: #fff;
+            background-color: $m-color--white;
             border-bottom: 1px $m-color--border solid;
         }
 
-        .m--is-dark > & {
-            color: #fff;
+        .m-accordion.m--is-dark > & {
+            color: $m-color--white;
             background-color: #303030; // warning new grey detected, send the greyminator! >_<
             box-shadow: 0 0 7px $m-color--grey-darkest inset;
         }
@@ -269,31 +273,31 @@ $m-accordion--color-default: $m-color--interactive;
 
     &__body {
         &.m--has-padding {
-            .m--is-dark > .m-accordion__body-wrap > &,
-            .m--is-default > .m-accordion__body-wrap > & {
+            .m-accordion.m--is-dark > .m-accordion__body-wrap > &,
+            .m-accordion.m--is-default > .m-accordion__body-wrap > & {
                 padding: $m-spacing $m-spacing $m-spacing ($m-spacing + $m-accordion--vertical-border-size);
             }
 
-            .m--is-dark.m--has-icon-left > .m-accordion__body-wrap > &,
-            .m--is-default.m--has-icon-left > .m-accordion__body-wrap > & {
+            .m-accordion.m--is-dark.m--has-icon-left > .m-accordion__body-wrap > &,
+            .m-accordion.m--is-default.m--has-icon-left > .m-accordion__body-wrap > & {
                 padding-left: $m-spacing--xxl;
             }
 
-            .m--is-dark.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > &,
-            .m--is-default.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > & {
+            .m-accordion.m--is-dark.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > &,
+            .m-accordion.m--is-default.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > & {
                 padding-left: $m-spacing *2 + $m-accordion--icon-l-width + $m-accordion--vertical-border-size;
             }
 
-            .m--is-light > .m-accordion__body-wrap > & {
+            .m-accordion.m--is-light > .m-accordion__body-wrap > & {
                 padding-top: $m-margin--s;
                 padding-bottom: $m-margin;
             }
 
-            .m--is-light.m--has-icon-left > .m-accordion__body-wrap > & {
+            .m-accordion.m--is-light.m--has-icon-left > .m-accordion__body-wrap > & {
                 padding-left: 32px; // Magic number
             }
 
-            .m--is-light.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > & {
+            .m-accordion.m--is-light.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > & {
                 padding-left: 36px; // Magic number
             }
         }

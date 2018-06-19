@@ -103,9 +103,9 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     private setupGrabBehavior(): void {
         (this.element.style as any).webkitUserDrag = 'none';
         this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: DragEvent) => {
-            // We can't call event.preventDefault or event.stopPropagation here for the drag to be handled correctly on mobile devices.
-            // So we make sure that the draggable affected by the dragEvent is the closest draggable parent of the event target.
-            if (MDOMPlugin.getRecursive(MDraggable, event.target as HTMLElement) === this) {
+            if (!this.targetIsGrabbable(event)) {
+                (this.element.style as any).webkitUserDrag = '';
+            } else {
                 this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUpListener));
                 this.grabDelay = window.setTimeout(() => {
                     if (!MDraggable.currentDraggable && this.grabDelay) {
@@ -115,6 +115,28 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                 }, polyFillActive.dragDrop ? dragDropDelay : 0);
             }
         }));
+    }
+
+    private targetIsGrabbable(event: DragEvent): boolean {
+        // We can't call event.preventDefault or event.stopPropagation here for the drag to be handled correctly on mobile devices.
+        // So we make sure that the draggable affected by the dragEvent is the closest draggable parent of the event target.
+        // We don't apply the "grabbing" style on mouse down when target correspond to a link or a button, it just looks weird.
+
+        const draggable: MDraggable | undefined = MDOMPlugin.getRecursive(MDraggable, event.target as HTMLElement);
+        if (!draggable || draggable !== this) { return false; }
+
+        let recursiveElement: HTMLElement | null = event.target as HTMLElement | null;
+        const noGrabTags: string[] = ['A', 'BUTTON'];
+        let targetGrabbable: boolean = true;
+        while (recursiveElement && targetGrabbable && recursiveElement !== draggable.element) {
+            if (noGrabTags.find(tag => tag === recursiveElement!.tagName)) {
+                targetGrabbable = false;
+            }
+
+            recursiveElement = recursiveElement!.parentElement;
+        }
+
+        return targetGrabbable;
     }
 
     private destroyGrabBehavior(): void {
