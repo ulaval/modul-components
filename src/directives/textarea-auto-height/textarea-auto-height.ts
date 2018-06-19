@@ -29,7 +29,7 @@ const MTextareaAutoHeight: DirectiveOptions = {
         }
     },
     update(element: HTMLElement): void {
-        if (element) {
+        if (element.tagName === 'TEXTAREA') {
             let outerHeight: number = parseInt((window.getComputedStyle(element).height as string), 10);
             let diff: number = outerHeight - element.clientHeight;
             element.style.height = '0';
