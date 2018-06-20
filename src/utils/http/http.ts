@@ -2,8 +2,8 @@ import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse }
 import qs from 'qs/lib';
 import { PluginObject } from 'vue';
 
-import { ErrorHandler } from '../errors/error-handler';
 import { PromiseError } from '../errors/promise-error';
+import { WindowErrorHandler } from '../errors/window-error-handler';
 import * as strUtils from '../str/str';
 import { RequestConfig, RestAdapter } from './rest';
 
@@ -59,7 +59,7 @@ export class HttpService implements RestAdapter {
                     // wrap to a PromiseError, so that propagation can be stopped
                     let promiseError: PromiseError = new PromiseError(error);
                     // delay onError
-                    ErrorHandler.onError(promiseError, true);
+                    WindowErrorHandler.onError(promiseError, true);
 
                     return Promise.reject(promiseError);
                 });
