@@ -1,0 +1,46 @@
+<div>
+        <h5>default - different types</h5>
+            <m-error-template :type="errorType" :message="message"></m-error-template>
+            <br />
+            <m-error-template :type="informationType" :message="message"></m-error-template>
+            <br />
+            <m-error-template :type="warningType" :message="message"></m-error-template>
+        <hr/>
+
+        <h5>with #one hint</h5>
+        <m-error-template :type="errorType" :message="message"  :hints="oneHint"></m-error-template>
+
+        <hr/>
+        <h5>with #multiple hints</h5>
+        <m-error-template :type="errorType" :message="message"  :hints="manyHints"></m-error-template>
+
+        <hr/>
+
+
+        <h5>with #one link</h5>
+        <m-error-template :type="errorType" :message="message"  :links="oneLink"></m-error-template>
+
+        <hr/>
+        <h5>with #multiple links</h5>
+        <m-error-template :type="errorType" :message="message"  :links="manyLinks"></m-error-template>
+
+        <hr/>
+
+        <h5>with #error details</h5>
+        <m-error-template :type="errorType" :message="message" :displayErrorDetails="true" ></m-error-template>
+
+        <hr/>
+        <h5>with #error details and #reference number and #error date</h5>
+        <m-error-template :type="errorType" :message="message" :displayErrorDetails="true" error-reference-number="123456489" :error-date="errorDate"></m-error-template>
+
+        <hr/>
+
+        <h5>with #error details and stack trace</h5>
+        <m-error-template :type="errorType" :message="message" :displayErrorDetails="true" :stack="stackTrace"></m-error-template>
+
+        <h5>unexpected error popup with stack, hints and links</h5>
+        <m-button v-m-popup:errorpopup>pop me an error</m-button>
+        <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
+                <m-error-template :type="errorType" :message="message" :displayErrorDetails="true" :stack="stackTrace" error-reference-number="123456489" :errorDate="errorDate" :hints="manyHints" :links="manyLinks"></m-error-template>
+        </m-modal>
+    </div>

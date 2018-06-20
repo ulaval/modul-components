@@ -15,6 +15,7 @@ export const DROPDOWN_ITEM_NAME: string = 'm-dropdown-item';
 export const DROPDOWN_GROUP_NAME: string = 'm-dropdown-group';
 export const DYNAMIC_TEMPLATE_NAME: string = 'm-dynamic-template';
 export const ERROR_MESSAGE_NAME: string = 'm-error-message';
+export const ERROR_TEMPLATE_NAME: string = 'm-error-template';
 export const FILE_SELECT_NAME: string = 'm-file-select';
 export const FILE_UPLOAD_NAME: string = 'm-file-upload';
 export const EDIT_WINDOW_NAME: string = 'm-edit-window';

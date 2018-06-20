@@ -1,0 +1,20 @@
+<div class="m-error-template">
+    <m-message :state="type">
+        {{message}}
+    </m-message>
+    <p v-for="hint in hints" v-if="!!hints">{{hint}}</p>
+    <m-accordion v-if="displayErrorDetails" skin="light" icon-size="small">
+        <m-i18n slot="header" k="m-error-template:details"></m-i18n>
+        <p><strong><m-i18n k="m-error-template:browser"></m-i18n>: </strong>{{userAgent}}</p>
+        <p v-if="!!errorReferenceNumber"><strong><m-i18n k="m-error-template:reference-number"></m-i18n>: </strong>{{errorReferenceNumber}}</p>
+        <p><m-i18n k="m-error-template:date" :params="dateInfo"></m-i18n></p>
+        <m-panel  class="m-error-template" :padding="false" v-if="!!stack">
+            <pre>{{stack}}</pre>
+        </m-panel>
+    </m-accordion>
+    <div v-for="link in links">
+        <m-link mode="link" :url="link.url" target="_blank" >
+            {{link.label}}
+        </m-link>
+    </div>
+</div>
