@@ -1,21 +1,23 @@
 <div class="m-textfield"
      :class="[{ 'm--is-disabled' : isDisabled,
                 'm--is-waiting' : isWaiting,
-                'm--has-error' : hasError,
-                'm--is-valid' : isValid,
+                'm--has-error' : hasTextfieldError,
+                'm--is-valid' : isTextfieldValid,
                 'm--has-icon' : hasIcon,
-                'm--has-label': hasLabel },
+                'm--has-label': hasLabel,
+                'm--has-word-wrap':  hasWordWrap},
                 'm--is-type-' + inputType ]"
      @click="onClick"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
-                   :error="hasError"
-                   :valid="isValid"
+                   :error="hasTextfieldError"
+                   :valid="isTextfieldValid"
                    :label="label"
                    :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
+                   :readonly="readonly"
                    :required-marker="requiredMarker"
                    :icon-name="iconName"
                    :tag-style="tagStyle">
@@ -25,6 +27,7 @@
                :disabled="!active"
                :placeholder="placeholder"
                :readonly="readonly"
+               :maxlength="maxLengthNumber"
                @focus="onFocus"
                @blur="onBlur"
                @keyup="onKeyup"
@@ -32,8 +35,9 @@
                @change="onChange"
                @paste="onPaste"
                :autocomplete="autocomplete"
-               v-model="model">
-        <template slot="right-content">
+               v-model="model"
+               v-if="!hasWordWrap">
+        <template slot="right-content" v-if="!hasWordWrap">
             <transition name="m--is">
                 <m-icon-button class="m-textfield__icon-password"
                                button-size="22px"
@@ -44,13 +48,36 @@
                                v-if="propPasswordIcon && hasValue"></m-icon-button>
             </transition>
         </template>
+        <textarea ref="input"
+                :id="id"
+                class="m-textfield__input"
+                :disabled="!active"
+                :placeholder="placeholder"
+                :readonly="readonly"
+                rows="1"
+                @focus="onFocus"
+                @blur="onBlur"
+                @change="onChange"
+                @keypress.enter.prevent
+                @keyup="onKeyup"
+                @keydown="onKeydown"
+                @paste="onPaste"
+                :autocomplete="autocomplete"
+                v-model="model"
+                v-m-textarea-auto-height
+                v-if="hasWordWrap">
+        </textarea>
     </m-input-style>
-    <m-validation-message
-        :disabled="isDisabled"
-        :waiting="isWaiting"
-        :error="hasError"
-        :valid="isValid"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"></m-validation-message>
+    <div class="m-textfield__validation">
+        <m-validation-message
+            class="m-textfield__validation__message"
+            :disabled="isDisabled"
+            :waiting="isWaiting"
+            :error="hasTextfieldError"
+            :error-message="errorMessage"
+            :valid="isTextfieldValid"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"></m-validation-message>
+        <m-character-count v-if="characterCount" :value-length="valueLength" :max-length="maxLength" :threshold="characterCountThreshold" :transition="hasCounterTransition"></m-character-count>
+    </div>
 </div>

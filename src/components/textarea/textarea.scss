@@ -6,18 +6,14 @@
     flex-direction: column;
 
     &.m--has-error {
-        .m-textarea {
-            &__validation__maxlenght {
-                color: $m-color--error;
-            }
+        .m-textarea__validation {
+            color: $m-color--error;
         }
     }
 
     &.m--is-valid {
-        .m-textarea {
-            &__validation__maxlenght {
-                color: $m-color--success;
-            }
+        .m-textarea__validation {
+            color: $m-color--success;
         }
     }
 
@@ -28,34 +24,10 @@
         &__message {
             flex: 1 1 auto;
         }
-
-        &__maxlenght {
-            transition: color $m-transition-duration ease;
-            margin-top: $m-margin--xs;
-            font-size: $m-font-size--xs;
-        }
     }
 
     &__label {
         font-size: $m-font-size;
         font-weight: $m-font-weight--bold;
-    }
-
-    &__input {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 1;
-        width: 100%;
-        outline: none;
-        resize: none;
-        overflow: hidden;
-
-        &-hidden {
-            opacity: 0;
-            word-wrap: break-word;
-        }
     }
 }

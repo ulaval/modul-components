@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "msjsdiag.debugger-for-chrome",
+        "eamodio.gitlens",
+        "shinnn.stylelint",
+        "eg2.tslint",
+        "rbbit.typescript-hero",
+        "Orta.vscode-jest",
+        "MS-vsliveshare.vsliveshare"
+    ]
+}

@@ -41,10 +41,11 @@ export class InputManagement extends ModulVue
     public focus: boolean;
 
     public internalValue: string = '';
+    public trimWordWrap: boolean = false;
     private internalIsFocus: boolean = false;
 
     private beforeMount(): void {
-        this.internalValue = this.value ? this.value : '';
+        this.model = this.value ? this.value : '';
     }
 
     private mounted(): void {
@@ -109,7 +110,7 @@ export class InputManagement extends ModulVue
 
     @Watch('value')
     private onValueChange(value: string): void {
-        this.internalValue = value;
+        this.model = value;
     }
 
     private set model(value: string) {
@@ -118,7 +119,10 @@ export class InputManagement extends ModulVue
     }
 
     private get model(): string {
-        return this.value === undefined ? this.internalValue : this.value;
+        if (this.trimWordWrap) {
+            this.internalValue = this.internalValue.replace(/\n/g, '');
+        }
+        return this.internalValue;
     }
 
     private get hasValue(): boolean {

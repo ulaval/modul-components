@@ -1,5 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 
+import LoggerPlugin from '../utils/logger/logger';
 import BadgePlugin from './badge/badge';
 import DraggablePlugin from './draggable/draggable';
 import DraggableAllowScrollPlugin from './draggable/draggable-allow-scroll';
@@ -11,8 +12,8 @@ import PopupPlugin from './popup/popup';
 import RippleEffectPlugin from './ripple-effect/ripple-effect';
 import ScrollToPlugin from './scroll-to/scroll-to';
 import SortablePlugin from './sortable/sortable';
+import TextareaAutoHeightPlugin from './textarea-auto-height/textarea-auto-height';
 import RemoveUserSelectPlugin from './user-select/remove-user-select';
-import LoggerPlugin from '../utils/logger/logger';
 
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -32,6 +33,7 @@ const DirectivesPlugin: PluginObject<any> = {
         Vue.use(RippleEffectPlugin);
         Vue.use(ScrollToPlugin);
         Vue.use(SortablePlugin);
+        Vue.use(TextareaAutoHeightPlugin);
         Vue.use(I18nDirectivePlugin);
     }
 };
