@@ -72,6 +72,11 @@ $m-file-upload-max-height--s: 72px;
             align-items: center;
             justify-content: center;
 
+            .m-icon {
+                color: $m-color--success;
+                margin-right: $m-spacing--s;
+            }
+
             .m-file-select {
                 margin-top: 0;
                 margin-left: $m-spacing--s;

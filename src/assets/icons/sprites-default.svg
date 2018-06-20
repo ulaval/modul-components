@@ -74,6 +74,9 @@
     <symbol id="down-arrow" viewBox="0 0 24 24">
         <polygon fill="currentColor" points="0,7 24,7 12,19 "/>
     </symbol>
+    <symbol id="down-arrow-lined" viewBox="0 0 32 32">
+        <path fill="currentColor" d="M16 31.767c-0.175 0-0.341-0.070-0.465-0.192l-13.125-13.137c-0.188-0.189-0.244-0.47-0.142-0.715s0.341-0.406 0.606-0.406h7.875v-16.406c0-0.362 0.294-0.656 0.656-0.656h9.188c0.362 0 0.656 0.294 0.656 0.656v16.406h7.875c0.265 0 0.504 0.16 0.606 0.406s0.046 0.526-0.142 0.715l-13.125 13.137c-0.123 0.122-0.29 0.192-0.465 0.192zM4.459 18.63l11.541 11.553 11.541-11.553h-6.947c-0.362 0-0.656-0.294-0.656-0.656v-16.406h-7.875v16.406c0 0.362-0.294 0.656-0.656 0.656h-6.947z"></path>
+    </symbol>
     <symbol id="down-chevron" viewBox="0 0 24 24">
         <polyline stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" points="0.4,6.4 11.9,17.9 23.6,6.1 "/>
     </symbol>
