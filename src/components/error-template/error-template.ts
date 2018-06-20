@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -36,39 +35,6 @@ export class MErrorTemplate extends ModulVue {
     @Prop()
     public links?: {label: string, url: string}[] | undefined;
 
-    /**
-     * Shows details on the error (date, referenceNumber and stack [if present])
-     */
-    @Prop({
-        default: false
-    })
-    public displayErrorDetails: boolean;  // mettre un ? //
-
-    @Prop({
-        default: () => moment()
-    })
-    public errorDate: moment.Moment;   // mettre un ? //
-
-    @Prop()
-    public errorReferenceNumber?: string | undefined;
-
-    /**
-     * The stacktrace will always be displayed if provided and displayErrorDetails is true
-     */
-    @Prop()
-    public stack?: string | undefined;
-
-    private get userAgent(): string {
-        return window.navigator.userAgent;
-    }
-
-    private get dateInfo(): string[] | undefined {
-        let result: string[] | undefined = undefined;
-        if (this.errorDate) {
-            result = [this.errorDate.format('YYYY-MM-DD'), this.errorDate.format('HH:mm:ss')];
-        }
-        return result;
-    }
 }
 
 const ErrorTemplatePlugin: PluginObject<any> = {

@@ -14,21 +14,25 @@ import WithRender from './error-message.html?style=./error-message.scss';
 @WithRender
 @Component
 export class MErrorMessage extends ModulVue {
-    @Prop()
-    public error?: Error;
 
     @Prop({
         default: () => moment()
     })
-    public date: moment.Moment;
+    public errorDate: moment.Moment;   // mettre un ? //
 
     @Prop()
-    public referenceNumber?: string;
+    public errorReferenceNumber?: string | undefined;
 
     @Prop({
         default: false
     })
     public stacktrace: boolean;
+
+    /**
+     * Javascript Error containing the stack trace to be displayed
+     */
+    @Prop()
+    public error?: Error;
 
     private get userAgent(): string {
         return window.navigator.userAgent;
@@ -36,8 +40,8 @@ export class MErrorMessage extends ModulVue {
 
     private get dateInfo(): string[] | undefined {
         let result: string[] | undefined = undefined;
-        if (this.date) {
-            result = [this.date.format('YYYY-MM-DD'), this.date.format('HH:mm:ss')];
+        if (this.errorDate) {
+            result = [this.errorDate.format('YYYY-MM-DD'), this.errorDate.format('HH:mm:ss')];
         }
         return result;
     }

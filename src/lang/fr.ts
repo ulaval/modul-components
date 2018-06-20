@@ -19,7 +19,6 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/dropdown-group/dropdown-group.lang.fr.json'),
                 require('../components/edit-window/edit-window.lang.fr.json'),
                 require('../components/error-message/error-message.lang.fr.json'),
-                require('../components/error-template/error-template.lang.fr.json'),
                 require('../components/file-select/file-select.lang.fr.json'),
                 require('../components/file-upload/file-upload.lang.fr.json'),
                 require('../components/inplace-edit/inplace-edit.lang.fr.json'),

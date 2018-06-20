@@ -26,21 +26,18 @@
 
         <hr/>
 
-        <h5>with #error details</h5>
-        <m-error-template :type="errorType" :message="message" :displayErrorDetails="true" ></m-error-template>
-
-        <hr/>
-        <h5>with #error details and #reference number and #error date</h5>
-        <m-error-template :type="errorType" :message="message" :displayErrorDetails="true" error-reference-number="123456489" :error-date="errorDate"></m-error-template>
-
-        <hr/>
-
-        <h5>with #error details and stack trace</h5>
-        <m-error-template :type="errorType" :message="message" :displayErrorDetails="true" :stack="stackTrace"></m-error-template>
-
-        <h5>unexpected error popup with stack, hints and links</h5>
+        <h5>unexpected error popup with hints and links</h5>
         <m-button v-m-popup:errorpopup>pop me an error</m-button>
         <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
-                <m-error-template :type="errorType" :message="message" :displayErrorDetails="true" :stack="stackTrace" error-reference-number="123456489" :errorDate="errorDate" :hints="manyHints" :links="manyLinks"></m-error-template>
+                <m-error-template :type="errorType" :message="message" :hints="manyHints" :links="manyLinks"></m-error-template>
         </m-modal>
+        <hr/>
+        <h5>with content in slot</h5>
+        <m-error-template :type="errorType" :message="message" :hints="manyHints" :links="manyLinks">
+            <span>
+                <b>***Custom error details content through slot.***</b>
+            </span>
+        </m-error-template>
+
+        <hr/>
     </div>

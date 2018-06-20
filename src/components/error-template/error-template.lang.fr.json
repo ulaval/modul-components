@@ -1,8 +1,0 @@
-{
-    "m-error-template": {
-        "details": "Détails de l'erreur",
-        "browser": "Navigateur",
-        "reference-number": "No référence de l'erreur",
-        "date": "Elle a eu lieu le <strong>{0}</strong> à <strong>{1}</strong>"
-    }
-}
