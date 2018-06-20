@@ -24,7 +24,7 @@ const UtilsPlugin: PluginObject<any> = {
     install(v, options): void {
         if (!options || options.propagateVueParserErrors === undefined || options.propagateVueParserErrors) {
             // Vue parser errors do not propagate to window.onError by default
-            Vue.config.errorHandler = (err, vm, info) => WindowErrorHandler.onError(err);
+            Vue.config.errorHandler = (err, vm, info) => WindowErrorHandler.onError(new ErrorEvent('error', { error: err }));
         }
 
         if (!v.prototype.$log) {
