@@ -253,8 +253,5 @@ export class Portal extends ModulVue implements PortalMixin {
     @Watch('open')
     private openChanged(open: boolean): void {
         this.propOpen = open;
-        if (open) {
-            this.$emit('id', this.propId);
-        }
     }
 }
