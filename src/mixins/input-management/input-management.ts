@@ -40,8 +40,9 @@ export class InputManagement extends ModulVue
     @Prop()
     public focus: boolean;
 
-    public internalValue: string = '';
     public trimWordWrap: boolean = false;
+
+    public internalValue: string = '';
     private internalIsFocus: boolean = false;
 
     private beforeMount(): void {
@@ -114,14 +115,11 @@ export class InputManagement extends ModulVue
     }
 
     private set model(value: string) {
-        this.internalValue = value;
+        this.internalValue = /\n/g.test(value) && this.trimWordWrap ? value.replace(/\n/g, '') : value;
         this.$emit('input', value);
     }
 
     private get model(): string {
-        if (this.trimWordWrap) {
-            this.internalValue = this.internalValue.replace(/\n/g, '');
-        }
         return this.internalValue;
     }
 

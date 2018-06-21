@@ -77,6 +77,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     protected mounted(): void {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
+        this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
     @Watch('type')
