@@ -137,8 +137,8 @@ export class Portal extends ModulVue implements PortalMixin {
 
     protected mounted(): void {
         this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
-        this.$emit('id', this.propId);
         this.handleTrigger();
+        this.$emit('id', this.propId);
     }
 
     protected beforeDestroy(): void {
@@ -253,5 +253,8 @@ export class Portal extends ModulVue implements PortalMixin {
     @Watch('open')
     private openChanged(open: boolean): void {
         this.propOpen = open;
+        if (open) {
+            this.$emit('id', this.propId);
+        }
     }
 }
