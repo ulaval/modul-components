@@ -75,6 +75,7 @@
 
     &__header,
     &__footer {
+        flex-shrink: 0;
         min-height: $m-box--min-height;
 
         @include m-box-padding($m-padding);
