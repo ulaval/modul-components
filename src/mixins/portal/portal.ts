@@ -137,6 +137,7 @@ export class Portal extends ModulVue implements PortalMixin {
 
     protected mounted(): void {
         this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
+        this.$emit('id', this.propId);
         this.handleTrigger();
     }
 
