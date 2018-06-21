@@ -95,14 +95,16 @@
 
     </div>
     <template slot="footer">
-        <m-button @click="onAddClick" :disabled="!isAddBtnEnabled" class="m-file-upload__footer-add">
-            <m-i18n k="m-file-upload:add"></m-i18n>
-            <span slot="precision" v-show="completedFiles.length > 0">{{completedFiles.length}}
-                <m-i18n :nb="completedFiles.length" k="m-file-upload:file"></m-i18n>
-            </span>
-        </m-button>
-        <m-button @click="onCancelClick" skin="secondary" class="m-file-upload__footer-cancel">
-            <m-i18n k="m-file-upload:cancel"></m-i18n>
-        </m-button>
+        <div :style="buttonCompletedStyle">
+            <m-button @click="onAddClick" :disabled="!isAddBtnEnabled" class="m-file-upload__footer-add">
+                <m-i18n k="m-file-upload:add"></m-i18n>
+                <span slot="precision" v-show="completedFiles.length > 0">{{completedFiles.length}}
+                    <m-i18n :nb="completedFiles.length" k="m-file-upload:file"></m-i18n>
+                </span>
+            </m-button>
+            <m-button @click="onCancelClick" skin="secondary" class="m-file-upload__footer-cancel">
+                <m-i18n k="m-file-upload:cancel"></m-i18n>
+            </m-button>
+        </div>
     </template>
 </m-dialog>
