@@ -4,10 +4,11 @@ exports[`MFileUpload completed should render completed files 1`] = `
 <m-dialog title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__drop-zone">
-            <h2>
-                <m-icon name="drag-drop" size="48px"></m-icon> <span class="m-i18n">Drag and drop files</span></h2>
-            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
-            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__button"></m-file-select>
+            <div class="m-file-upload__drop-zone__instructions">
+                <h2>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop files here or</span></h2>
+                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+            </div>
         </div>
         <div class="m-file-upload__completed-list">
             <ul name="m--is" tag="ul" class="m-file-upload__completed-list__wrap">
@@ -43,10 +44,11 @@ exports[`MFileUpload should render correctly 1`] = `
 <m-dialog title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__drop-zone">
-            <h2>
-                <m-icon name="drag-drop" size="48px"></m-icon> <span class="m-i18n">Drag and drop files</span></h2>
-            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
-            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__button"></m-file-select>
+            <div class="m-file-upload__drop-zone__instructions">
+                <h2>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop files here or</span></h2>
+                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+            </div>
         </div>
     </div>
     <template>
@@ -64,7 +66,9 @@ exports[`MFileUpload should render correctly in mobile 1`] = `
 <m-dialog title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__drop-zone">
-            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__button"></m-file-select>
+            <div class="m-file-upload__drop-zone__instructions">
+                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+            </div>
         </div>
     </div>
     <template>
@@ -82,10 +86,11 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
 <m-dialog title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__drop-zone">
-            <h2>
-                <m-icon name="drag-drop" size="48px"></m-icon> <span class="m-i18n">Drag and drop files</span></h2>
-            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
-            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__button"></m-file-select>
+            <div class="m-file-upload__drop-zone__instructions">
+                <h2>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop files here or</span></h2>
+                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+            </div>
         </div>
         <h3 class="m-file-upload__title"><span class="m-i18n">Uploading</span> (1
             <span class="m-i18n">file</span>)
@@ -127,10 +132,11 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
 <m-dialog title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__drop-zone">
-            <h2>
-                <m-icon name="drag-drop" size="48px"></m-icon> <span class="m-i18n">Drag and drop files</span></h2>
-            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
-            <m-file-select skin="primary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__button"></m-file-select>
+            <div class="m-file-upload__drop-zone__instructions">
+                <h2>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop files here or</span></h2>
+                <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+            </div>
             <p class="m-file-upload__drop-zone__format"><span class="m-i18n m-file-upload__drop-zone__format__label">Accepted formats</span>: jpg, png, mp4</p>
         </div>
     </div>
@@ -185,12 +191,13 @@ exports[`MFileUpload validation validation messages should render rejected files
             </div>
         </div>
         <div class="m-file-upload__drop-zone">
-            <h2>
-                <svg aria-hidden="true" width="48px" height="48px" class="m-icon">
-                    <use xlink:href="#drag-drop" aria-hidden="true"></use>
-                </svg> <span class="m-i18n">Drag and drop files</span></h2>
-            <p class="m-file-upload__drop-zone__or"><span class="m-i18n">or</span></p>
-            <m-file-select skin="primary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__button"></m-file-select>
+            <div class="m-file-upload__drop-zone__instructions">
+                <h2>
+                    <svg aria-hidden="true" width="32px" height="32px" class="m-icon">
+                        <use xlink:href="#m-svg__arrow--down" aria-hidden="true"></use>
+                    </svg> <span class="m-i18n">Drop files here or</span></h2>
+                <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+            </div>
             <p class="m-file-upload__drop-zone__format"><span class="m-i18n m-file-upload__drop-zone__format__label">Accepted formats</span>: jpg, png, mp4</p>
         </div>
     </div>

@@ -448,4 +448,8 @@
         <path fill="none" stroke="#820F51" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M8.9,12v5.9
             c0,1,1.9,1.8,4.3,1.8c2.4,0,4.3-0.8,4.3-1.8V12"/>
     </symbol>
+    <symbol id="m-svg__arrow--down" viewBox="0 0 24 24">
+        <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="8.5,0.5
+            15.5,0.5 15.5,13.5 19.6,13.5 12,23.5 4.4,13.5 8.5,13.5 "/>
+    </symbol>
 </svg>
