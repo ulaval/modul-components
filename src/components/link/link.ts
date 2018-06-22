@@ -25,7 +25,7 @@ export enum MLinkSkin {
     light = 'light'
 }
 
-const ICON_NAME_DEFAULT: string = 'm-svg__chevron';
+const ICON_NAME_DEFAULT: string = 'm-svg__chevron--right';
 
 @WithRender
 @Component

@@ -76,16 +76,16 @@ export class MMessage extends Vue {
         let icon: string = '';
         switch (this.state) {
             case MMessageState.Success:
-                icon = 'm-svg__check-fill';
+                icon = 'm-svg__confirmation';
                 break;
             case MMessageState.Information:
-                icon = 'm-svg__information-fill';
+                icon = 'm-svg__information';
                 break;
             case MMessageState.Warning:
-                icon = 'm-svg__warning-fill';
+                icon = 'm-svg__warning';
                 break;
             case MMessageState.Error:
-                icon = 'm-svg__error-fill';
+                icon = 'm-svg__error';
                 break;
             default:
                 break;

@@ -13,8 +13,8 @@ export enum MStatusListStates {
 }
 
 export enum MStatusListIconName {
-    Check = 'm-svg__check-chip',
-    Error = 'm-svg__error-chip'
+    Check = 'm-svg__completed-filled',
+    Error = 'm-svg__error-filled'
 }
 
 @WithRender

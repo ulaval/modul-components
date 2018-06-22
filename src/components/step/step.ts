@@ -38,7 +38,7 @@ export class MStep extends ModulVue {
     public open: boolean;
     @Prop()
     public required: boolean;
-    @Prop({ default: 'm-svg__close-cleart' })
+    @Prop({ default: 'm-svg__close-clear' })
     public iconName: string;
     @Prop()
     public last: boolean;
@@ -84,13 +84,13 @@ export class MStep extends ModulVue {
                 icon = 'm-svg__close-clear';
                 break;
             case MStepState.Success:
-                icon = 'm-svg__check-chip';
+                icon = 'm-svg__completed-filled';
                 break;
             case MStepState.Warning:
-                icon = 'm-svg__warning-chip';
+                icon = 'm-svg__warning-filled';
                 break;
             case MStepState.Error:
-                icon = 'm-svg__error-chip';
+                icon = 'm-svg__error-filled';
                 break;
             default:
                 break;
