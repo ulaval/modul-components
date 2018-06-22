@@ -3,19 +3,19 @@
 .m-error-template {
     text-align: center;
 
-    &.m--is-skin-blue {
+    &.m--is-skin-information {
         h2 {
             color: $m-color--interactive;
         }
     }
 
-    &.m--is-skin-red {
+    &.m--is-skin-error {
         h2 {
             color: $m-color--error;
         }
     }
 
-    &.m--is-skin-yellow {
+    &.m--is-skin-warning {
         h2 {
             color: $m-color--warning;
         }

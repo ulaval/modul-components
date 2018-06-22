@@ -11,19 +11,18 @@ import LinkPlugin from '../link/link';
 import WithRender from './error-template.html?style=./error-template.scss';
 
 export enum MErrorTemplateSkin {
-    Blue = 'blue',
-    Red = 'red',
-    Yellow = 'yellow'
+    Information = 'information',
+    Warning = 'warning',
+    Error = 'error'
 }
 @WithRender
 @Component
 export class MErrorTemplate extends ModulVue {
 
     @Prop({validator: value =>
-        value === MErrorTemplateSkin.Blue ||
-        value === MErrorTemplateSkin.Red ||
-        value === MErrorTemplateSkin.Yellow}
-        )
+        value === MErrorTemplateSkin.Information ||
+        value === MErrorTemplateSkin.Error ||
+        value === MErrorTemplateSkin.Warning})
     public skin: MErrorTemplateSkin;
 
     @Prop()

@@ -1,183 +1,187 @@
-import { shallow, Wrapper } from '@vue/test-utils';
+import { mount, shallow, Wrapper, WrapperArray } from '@vue/test-utils';
+import Vue from 'vue';
 
-import ErrorTemplatePlugin, { MErrorTemplate } from './error-template';
+import { renderComponent } from '../../../tests/helpers/render';
+import ErrorTemplatePlugin, { MErrorTemplate, MErrorTemplateSkin } from './error-template';
 
 let wrapper: Wrapper<MErrorTemplate>;
 
-// const getMocks = () => {
-//     return {
-//     };
-// };
+const A_VALID_SKIN: string = MErrorTemplateSkin.Error;
+const A_VALID_ICON_NAME: string = 'iconName';
+const A_VALID_TITLE: string = 'An error title.';
+const FIRST_HINT_CONTENT: string = 'a hint';
+const SECOND_HINT_CONTENT: string = 'another hint';
+const ONE_HINT_LIST: string[] = [FIRST_HINT_CONTENT];
+const MANY_HINTS_LIST: string[] = [FIRST_HINT_CONTENT, SECOND_HINT_CONTENT];
+const DEFAULT_SLOT_ID: string = 'theSlotId';
+
+const FIRST_LINK_CONTENT: {label: string, url: string} = { label: 'a link', url: 'an Url' };
+const SECOND_LINK_CONTENT: {label: string, url: string} = { label: 'another link', url: 'another Url' };
+const ONE_LINK_LIST: {label: string, url: string}[] = [FIRST_LINK_CONTENT];
+const MANY_LINKS_LIST: {label: string, url: string}[] = [FIRST_LINK_CONTENT, SECOND_LINK_CONTENT];
+
+let hints: string[];
+let links: {label: string, url: string}[];
+let slots: {};
 
 const getStubs: any = () => {
     return {
+        ['m-link']: '<a @click="$emit(\'click\')"><slot /></a>',
+        ['m-icon']: '<span>Icone : {{ $attrs["name"] }}</span>'
     };
 };
 
-const initializeWrapper: any = () => {
+const initializeShallowWrapper: any = () => {
     wrapper = shallow(MErrorTemplate, {
-        // mocks: getMocks(),
         stubs: getStubs(),
-        mixins: [{
-            data: { },
-            methods: { }
-        }]
+        propsData: {
+            skin: A_VALID_SKIN,
+            iconName: A_VALID_ICON_NAME,
+            title: A_VALID_TITLE,
+            hints: hints,
+            links: links
+        },
+        slots: slots
     });
 };
 
-describe(``, () => {
-    describe(``, () => {
-        describe(``, () => {
-            it(``, () => {
-                initializeWrapper();
+beforeEach(() => {
+    hints = [];
+    links = [];
+});
 
+describe(`Error-template fonctionnality tests`, () => {
+
+    describe(`Given skin information`, () => {
+        it(`Then  class m--is-skin-information present`, () => {
+            wrapper = shallow(MErrorTemplate, {
+                stubs: getStubs(),
+                propsData: {
+                    skin:  MErrorTemplateSkin.Information,
+                    iconName: A_VALID_ICON_NAME,
+                    title: A_VALID_TITLE
+                }
+            });
+
+            expect(wrapper.find('.m--is-skin-information').exists()).toBeTruthy();
+        });
+    });
+
+    describe(`Given skin red`, () => {
+        it(`Then  class m--is-skin-error present`, () => {
+            wrapper = shallow(MErrorTemplate, {
+                stubs: getStubs(),
+                propsData: {
+                    skin:  MErrorTemplateSkin.Error,
+                    iconName: A_VALID_ICON_NAME,
+                    title: A_VALID_TITLE
+                }
+            });
+
+            expect(wrapper.find('.m--is-skin-error').exists()).toBeTruthy();
+        });
+    });
+
+    describe(`Given skin yellow`, () => {
+        it(`Then class m--is-skin-warning present`, () => {
+            wrapper = shallow(MErrorTemplate, {
+                stubs: getStubs(),
+                propsData: {
+                    skin: MErrorTemplateSkin.Warning,
+                    iconName: A_VALID_ICON_NAME,
+                    title: A_VALID_TITLE
+                }
+            });
+
+            expect(wrapper.find('.m--is-skin-warning').exists()).toBeTruthy();
+        });
+    });
+
+    describe(`Given on hint`, () => {
+        describe(`When rendering`, () => {
+            it(`Then should display one hint with proper content`, () => {
+                hints = ONE_HINT_LIST;
+                initializeShallowWrapper();
+                let hintWrapper: Wrapper<Vue> = wrapper.find({ ref: 'hint' });
+
+                expect(hintWrapper.element.innerHTML).toEqual(FIRST_HINT_CONTENT);
+            });
+        });
+    });
+
+    describe(`Given many hints`, () => {
+        describe(`When rendering`, () => {
+            it(`Then should display each hint content`, () => {
+                hints = MANY_HINTS_LIST;
+                initializeShallowWrapper();
+                let hintsWrapper: WrapperArray<Vue> = wrapper.findAll({ ref: 'hint' });
+
+                expect(hintsWrapper.wrappers[0].element.innerHTML).toEqual(FIRST_HINT_CONTENT);
+                expect(hintsWrapper.wrappers[1].element.innerHTML).toEqual(SECOND_HINT_CONTENT);
+            });
+        });
+    });
+
+    describe(`Given on link`, () => {
+        describe(`When rendering`, () => {
+            it(`Then should display one hint with proper content`, () => {
+                links = ONE_LINK_LIST;
+                initializeShallowWrapper();
+                let linkWrapper: Wrapper<Vue> = wrapper.find({ ref: 'link' });
+
+                expect(linkWrapper.element.innerHTML).toContain(FIRST_LINK_CONTENT.label);
+                expect(linkWrapper.element.innerHTML).toContain(FIRST_LINK_CONTENT.url);
+            });
+        });
+    });
+
+    describe(`Given many links`, () => {
+        describe(`When rendering`, () => {
+            it(`Then should display each link content`, () => {
+                links = MANY_LINKS_LIST;
+                initializeShallowWrapper();
+                let linksHTML: WrapperArray<Vue> = wrapper.findAll({ ref: 'link' });
+
+                expect(linksHTML.wrappers[0].element.innerHTML).toContain(FIRST_LINK_CONTENT.label);
+                expect(linksHTML.wrappers[0].element.innerHTML).toContain(FIRST_LINK_CONTENT.url);
+                expect(linksHTML.wrappers[1].element.innerHTML).toContain(SECOND_LINK_CONTENT.label);
+                expect(linksHTML.wrappers[1].element.innerHTML).toContain(SECOND_LINK_CONTENT.url);
+            });
+        });
+    });
+
+    describe(`Given content for the default slot`, () => {
+        describe(`When rendering`, () => {
+            it(`Then should display the slot content`, () => {
+                slots = {
+                    default: '<div id="' + DEFAULT_SLOT_ID + '">The slot content</div>'
+                };
+                initializeShallowWrapper();
+
+                expect(wrapper.find('#' + DEFAULT_SLOT_ID).exists()).toBeTruthy();
             });
         });
     });
 });
-// tests : passer n'importe quoi comme type
-// aucune valeurs dans errorDate : donne date courante
-// valeur fournir pour errorDate : donne date fournie
-// userAgent donne userAgent courant (mocké)
-// dateInfo : vérifier date bien formattée?
-// détecter que le message est bien passé ? throw quelque chose sinon?
-// affiche un hint
-// affiche plusieurs hint
-// m-accordion présent si displayErrorDetails true
-// --reference number présent si non undefined
-// --reference number absent si undefined
-// --dateInfo affiché
-// --stack affichée si non undefined
-// --stack absente si undefined
-// m-accordion absent si displayErrorDetails false
-// affiche un link si présent
-// affiche plusieurs link si présents
-// un test de snapshot
 
-// les tests pour chacune des pages suivantes seront surement juste un snapshot + test de quelques méthodes...
+describe(`Error-template integration tests`, () => {
+    describe(`Given an error with all props and slots initialized`, () => {
+        it(`Then should render properly`, async () => {
+            wrapper = mount(MErrorTemplate, {
+                stubs: getStubs(),
+                propsData: {
+                    skin: MErrorTemplateSkin.Warning,
+                    iconName: A_VALID_ICON_NAME,
+                    title: A_VALID_TITLE,
+                    hints: MANY_HINTS_LIST,
+                    links: MANY_LINKS_LIST
+                },
+                slots: {
+                    default: '<div id="' + DEFAULT_SLOT_ID + '">The slot content</div>'
+                }
+            });
 
-/***************** tests transférés depuis error-message.spec.ts et améliorés *******************/
-// import { mount, Wrapper } from '@vue/test-utils';
-// import moment from 'moment';
-// import Vue from 'vue';
-
-// import { addMessages } from '../../../tests/helpers/lang';
-// import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
-// import uuid from '../../utils/uuid/uuid';
-// import ErrorMessagePlugin, { MErrorMessage } from './error-message';
-
-// jest.mock('../../utils/uuid/uuid');
-// (uuid.generate as jest.Mock).mockReturnValue('uuid');
-
-// const MOCK_USER_AGENT: string = 'modul-user-agent';
-// describe('MErrorMessage', () => {
-//     beforeEach(() => {
-//         Vue.use(ErrorMessagePlugin);
-//         addMessages(Vue, ['components/error-message/error-message.lang.fr.json']);
-
-//         Object.defineProperty(window.navigator, 'userAgent', { value: MOCK_USER_AGENT, configurable: true });
-//     });
-
-//     it('should render correctly collapsed', () => {
-//         const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
-//             localVue: Vue
-//         });
-
-//         expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
-//     });
-
-//     it('should render correctly expanded', () => {
-//         const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
-//             localVue: Vue,
-//             propsData: {
-//                 date: moment('2018-01-02T00:01:02'),
-//                 referenceNumber: '123456879'
-//             },
-//             stubs: {
-//                 'm-accordion': WrapChildrenStub('div')
-//             }
-//         });
-
-//         expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
-//     });
-
-//     describe('given error', () => {
-//         it('should render correctly expanded', () => {
-//             const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
-//                 localVue: Vue,
-//                 propsData: {
-//                     date: moment('2018-01-02T00:01:02'),
-//                     referenceNumber: '123456879',
-//                     error: {
-//                         message: 'An error message'
-//                     }
-//                 },
-//                 stubs: {
-//                     'm-accordion': WrapChildrenStub('div')
-//                 }
-//             });
-
-//             expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
-//         });
-
-//         it('should render correctly expanded with stack trace on', () => {
-//             const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
-//                 localVue: Vue,
-//                 propsData: {
-//                     date: moment('2018-01-02T00:01:02'),
-//                     referenceNumber: '123456879',
-//                     error: {
-//                         message: 'An error message'
-//                     },
-//                     stacktrace: true
-//                 },
-//                 stubs: {
-//                     'm-accordion': WrapChildrenStub('div')
-//                 }
-//             });
-
-//             expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
-//         });
-//     });
-
-//     describe('given error with stack trace', () => {
-//         it('should render correctly expanded', () => {
-//             const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
-//                 localVue: Vue,
-//                 propsData: {
-//                     date: moment('2018-01-02T00:01:02'),
-//                     referenceNumber: '123456879',
-//                     error: {
-//                         message: 'An error message',
-//                         stack: 'This is a stack trace'
-//                     }
-//                 },
-//                 stubs: {
-//                     'm-accordion': WrapChildrenStub('div')
-//                 }
-//             });
-
-//             expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
-//         });
-
-//         it('should render correctly expanded with stack trace on', () => {
-//             const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
-//                 localVue: Vue,
-//                 propsData: {
-//                     date: moment('2018-01-02T00:01:02'),
-//                     referenceNumber: '123456879',
-//                     error: {
-//                         message: 'An error message',
-//                         stack: 'This is a stack trace'
-//                     },
-//                     stacktrace: true
-//                 },
-//                 stubs: {
-//                     'm-accordion': WrapChildrenStub('div')
-//                 }
-//             });
-
-//             expect(renderComponent(error.vm)).resolves.toMatchSnapshot();
-//         });
-//     });
-// });
+            await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+    });
+});
