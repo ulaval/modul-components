@@ -8,9 +8,10 @@ import { ScrollTo } from '../scroll-to/scroll-to-lib';
 import { CancelableScrollTo, ScrollToDuration } from './../scroll-to/scroll-to-lib';
 
 export enum MDraggableAllowScrollDirection {
-    TOP,
-    BOTTOM
+    Top,
+    Bottom
 }
+
 export interface MDraggableAllowScrollOptions {
     allowScroll: boolean;
     scrollDirection: MDraggableAllowScrollDirection;
@@ -53,9 +54,9 @@ export class MDraggableAllowScroll extends MElementDomPlugin<MDraggableAllowScro
     }
 
     private cleanUpOptions(): void {
-        if (this._options === undefined) { this._options = { allowScroll: true, scrollDirection: MDraggableAllowScrollDirection.TOP }; }
+        if (this._options === undefined) { this._options = { allowScroll: true, scrollDirection: MDraggableAllowScrollDirection.Top }; }
         if (this._options.allowScroll === undefined) { this._options.allowScroll = true; }
-        if (this._options.scrollDirection === undefined) { this._options.scrollDirection = MDraggableAllowScrollDirection.TOP; }
+        if (this._options.scrollDirection === undefined) { this._options.scrollDirection = MDraggableAllowScrollDirection.Top; }
     }
 
     private handleScroll(event: DragEvent): void {
@@ -84,18 +85,18 @@ export class MDraggableAllowScroll extends MElementDomPlugin<MDraggableAllowScro
         const scrollThreshold: number = 20;
 
         switch (this.options.scrollDirection) {
-            case MDraggableAllowScrollDirection.TOP: return event.clientY < scrollThreshold;
-            case MDraggableAllowScrollDirection.BOTTOM: return mousePositionElement(event, this.element).y >= this.element.offsetHeight - scrollThreshold;
+            case MDraggableAllowScrollDirection.Top: return event.clientY < scrollThreshold;
+            case MDraggableAllowScrollDirection.Bottom: return mousePositionElement(event, this.element).y >= this.element.offsetHeight - scrollThreshold;
             default: throw new Error(`Unhandled value for scrollDirection: ${this.options.scrollDirection}`);
         }
     }
 
     private activateScroll(): void {
         switch (this.options.scrollDirection) {
-            case MDraggableAllowScrollDirection.TOP:
+            case MDraggableAllowScrollDirection.Top:
                 this.activeScroll = new ScrollTo().scrollToTop(document.documentElement, ScrollToDuration.Slower);
                 break;
-            case MDraggableAllowScrollDirection.BOTTOM:
+            case MDraggableAllowScrollDirection.Bottom:
                 this.activeScroll = new ScrollTo().scrollToBottom(document.documentElement, ScrollToDuration.Slower);
                 break;
             default: throw new Error(`Unhandled value for scrollDirection: ${this.options.scrollDirection}`);
