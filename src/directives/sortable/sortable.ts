@@ -291,7 +291,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
 
     private insertInsertionMarker(event: MDropEvent): void {
         // Fix for firefox flickering.
-        if ((event as Event as CustomEvent).detail.target.nodeType === Node.TEXT_NODE) {
+        if (event.detail.target.nodeType === Node.TEXT_NODE) {
             return;
         }
 
