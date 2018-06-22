@@ -20,7 +20,7 @@ export enum MDropEffect {
     MNone = 'none'
 }
 
-export interface MDropEvent extends DragEvent {
+export interface MDropEvent extends CustomEvent {
     dropInfo: MDropInfo;
 }
 

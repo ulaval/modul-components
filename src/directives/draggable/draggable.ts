@@ -30,7 +30,7 @@ export interface MDragInfo {
     data: any;
 }
 
-export interface MDragEvent extends DragEvent {
+export interface MDragEvent extends CustomEvent {
     dragInfo: MDragInfo;
 }
 
