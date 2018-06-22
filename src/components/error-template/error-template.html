@@ -1,10 +1,20 @@
-<div class="m-error-template">
-    <m-message :state="type">
-        {{message}}
-    </m-message>
-    <p v-for="hint in hints" v-if="!!hints">{{hint}}</p>
-    <slot></slot>
-    <div v-for="link in links">
+<div class="m-error-template" :class="{
+    'm--is-skin-blue': skin=='blue',
+    'm--is-skin-red': skin=='red',
+    'm--is-skin-yellow': skin=='yellow'
+}">
+    <div class="m-error-template__header">
+        <m-icon :name="iconName" size="60px"></m-icon>
+        <h2 class="m-error-template__title">
+            {{title}}
+        </h2>
+    </div>
+
+    <p class="m-error-template__hints" v-for="hint in hints" v-if="!!hints">{{hint}}</p>
+    <div class="m-error-template__details">
+        <slot ></slot>
+    </div>
+    <div class="m-error-template__links" v-for="link in links">
         <m-link mode="link" :url="link.url" target="_blank" >
             {{link.label}}
         </m-link>

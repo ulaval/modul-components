@@ -8,26 +8,29 @@ import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TEMPLATE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import { MMessageState } from '../message/message';
 import WithRender from './error-template.html?style=./error-template.scss';
 
+export enum MErrorTemplateSkin {
+    Blue = 'blue',
+    Red = 'red',
+    Yellow = 'yellow'
+}
 @WithRender
 @Component
 export class MErrorTemplate extends ModulVue {
 
-    /**
-     * Must refer to the possible states for component m-message
-     */
     @Prop({validator: value =>
-        value === MMessageState.Success ||
-        value === MMessageState.Information ||
-        value === MMessageState.Warning ||
-        value === MMessageState.Error}
+        value === MErrorTemplateSkin.Blue ||
+        value === MErrorTemplateSkin.Red ||
+        value === MErrorTemplateSkin.Yellow}
         )
-    public type: MMessageState;
+    public skin: MErrorTemplateSkin;
 
     @Prop()
-    public message: string;
+    public iconName: string;
+
+    @Prop()
+    public title: string;
 
     @Prop()
     public hints?: string[] | undefined;

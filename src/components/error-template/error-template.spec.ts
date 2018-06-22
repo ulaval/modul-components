@@ -1,7 +1,35 @@
+import { shallow, Wrapper } from '@vue/test-utils';
+
+import ErrorTemplatePlugin, { MErrorTemplate } from './error-template';
+
+let wrapper: Wrapper<MErrorTemplate>;
+
+// const getMocks = () => {
+//     return {
+//     };
+// };
+
+const getStubs: any = () => {
+    return {
+    };
+};
+
+const initializeWrapper: any = () => {
+    wrapper = shallow(MErrorTemplate, {
+        // mocks: getMocks(),
+        stubs: getStubs(),
+        mixins: [{
+            data: { },
+            methods: { }
+        }]
+    });
+};
+
 describe(``, () => {
     describe(``, () => {
         describe(``, () => {
             it(``, () => {
+                initializeWrapper();
 
             });
         });

@@ -12,9 +12,9 @@ export class MErrorTemplateSandbox extends Vue {
     errorType: MMessageState = MMessageState.Error;
     warningType: MMessageState = MMessageState.Warning;
     informationType: MMessageState = MMessageState.Information;
-    message: string = 'My error message';
+    title: string = 'My error title';
     oneHint: string[] = ['My only hint'];
-    manyHints: string[] = ['My first hint', 'My second hint'];
+    manyHints: string[] = ['My first hint', 'My second long hint.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas urna rhoncus ipsum congue lobortis. Mauris vel neque condimentum, dignissim lectus ac, vehicula justo. Aliquam nunc leo, tristique hendrerit aliquam sagittis, scelerisque quis libero. Integer non augue nec lacus aliquet porttitor in nec lacus. Cras ultrices tellus est, condimentum gravida orci pulvinar quis. Integer eget turpis arcu. Curabitur consequat porta urna, at hendrerit justo consectetur non. Aenean venenatis ornare nulla, a vulputate erat eleifend ut.'];
     oneLink: { url: string, label: string }[] = [{ url: 'http://www.ulaval.ca', label: 'the only link' }];
     manyLinks: { url: string, label: string }[] = [{ url: 'http://www.ulaval.ca', label: 'the first link' }, { url: 'http://www.google.com', label: 'the second link' }];
     errorDate: moment.Moment = moment().subtract(moment.duration(2, 'days'));

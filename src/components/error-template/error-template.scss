@@ -1,7 +1,25 @@
 @import '../../styles/abstracts/variables';
 
 .m-error-template {
-    text-align: left;
+    text-align: center;
+
+    &.m--is-skin-blue {
+        h2 {
+            color: $m-color--interactive;
+        }
+    }
+
+    &.m--is-skin-red {
+        h2 {
+            color: $m-color--error;
+        }
+    }
+
+    &.m--is-skin-yellow {
+        h2 {
+            color: $m-color--warning;
+        }
+    }
 
     &__stacktrace {
         margin-top: $m-margin;
@@ -14,5 +32,17 @@
         pre {
             margin: 0;
         }
+    }
+
+    &__hints {
+        text-align: left;
+    }
+
+    &__links {
+        text-align: left;
+    }
+
+    &__details {
+        text-align: left;
     }
 }
