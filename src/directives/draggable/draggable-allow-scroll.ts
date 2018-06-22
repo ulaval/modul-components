@@ -8,8 +8,8 @@ import { ScrollTo } from '../scroll-to/scroll-to-lib';
 import { CancelableScrollTo, ScrollToDuration } from './../scroll-to/scroll-to-lib';
 
 export enum MDraggableAllowScrollDirection {
-    Top,
-    Bottom
+    Top = 'top',
+    Bottom = 'bottom'
 }
 
 export interface MDraggableAllowScrollOptions {
@@ -115,7 +115,7 @@ export class MDraggableAllowScroll extends MElementDomPlugin<MDraggableAllowScro
 const extractOptions: (binding: VNodeDirective) => MDraggableAllowScrollOptions = (binding: VNodeDirective) => {
     return {
         allowScroll: binding.value as boolean,
-        scrollDirection: MDraggableAllowScrollDirection[binding.arg.toUpperCase() as keyof typeof MDraggableAllowScrollDirection]
+        scrollDirection: binding.arg as MDraggableAllowScrollDirection
     };
 };
 
