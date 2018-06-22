@@ -13,7 +13,7 @@ exports[`tooltip should render correctly 1`] = `
         : fn.call(ctx, a)
       : fn.call(ctx)
   }" class="m-icon">
-                <use xlink:href="#m-svg__close" aria-hidden="true"></use>
+                <use aria-hidden="true"></use>
             </svg>
         </div>
         <div class="m-tooltip__body"></div>
@@ -34,7 +34,7 @@ exports[`tooltip should render correctly when close title is set 1`] = `
         : fn.call(ctx, a)
       : fn.call(ctx)
   }" class="m-icon">
-                <use xlink:href="#m-svg__close" aria-hidden="true"></use>
+                <use aria-hidden="true"></use>
             </svg>
         </div>
         <div class="m-tooltip__body"></div>
@@ -64,7 +64,7 @@ exports[`tooltip should render correctly when disabled 1`] = `
         : fn.call(ctx, a)
       : fn.call(ctx)
   }" class="m-icon">
-                <use xlink:href="#m-svg__close" aria-hidden="true"></use>
+                <use aria-hidden="true"></use>
             </svg>
         </div>
         <div class="m-tooltip__body"></div>
@@ -85,7 +85,7 @@ exports[`tooltip should render correctly when is open 1`] = `
         : fn.call(ctx, a)
       : fn.call(ctx)
   }" class="m-icon">
-                <use xlink:href="#m-svg__close" aria-hidden="true"></use>
+                <use aria-hidden="true"></use>
             </svg>
         </div>
         <div class="m-tooltip__body"></div>
@@ -106,7 +106,7 @@ exports[`tooltip should render correctly when mode is link 1`] = `
         : fn.call(ctx, a)
       : fn.call(ctx)
   }" class="m-icon">
-                <use xlink:href="#m-svg__close" aria-hidden="true"></use>
+                <use aria-hidden="true"></use>
             </svg>
         </div>
         <div class="m-tooltip__body">Tooltip text</div>
@@ -127,7 +127,7 @@ exports[`tooltip should render correctly when open title is set 1`] = `
         : fn.call(ctx, a)
       : fn.call(ctx)
   }" class="m-icon">
-                <use xlink:href="#m-svg__close" aria-hidden="true"></use>
+                <use aria-hidden="true"></use>
             </svg>
         </div>
         <div class="m-tooltip__body"></div>
@@ -148,7 +148,7 @@ exports[`tooltip should render correctly with default slot 1`] = `
         : fn.call(ctx, a)
       : fn.call(ctx)
   }" class="m-icon">
-                <use xlink:href="#m-svg__close" aria-hidden="true"></use>
+                <use aria-hidden="true"></use>
             </svg>
         </div>
         <div class="m-tooltip__body">Tooltip text</div>

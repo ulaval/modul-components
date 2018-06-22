@@ -7,7 +7,7 @@ exports[`MValidationMessage should render correctly when it is in error 1`] = `
             <p class="m-validation-message__error">
                 <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
                     <title>Error</title>
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg><span class="m-validation-message__text">error</span></p>
         </div>
     </m-accordion-transition>
@@ -21,7 +21,7 @@ exports[`MValidationMessage should render correctly when it is in error 2`] = `
             <p class="m-validation-message__error">
                 <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
                     <title>Error</title>
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg><span class="m-validation-message__text">error</span></p>
         </div>
     </m-accordion-transition>
@@ -35,7 +35,7 @@ exports[`MValidationMessage should render correctly when it is valid 1`] = `
             <p class="m-validation-message__valid">
                 <svg width="1em" height="1em" class="m-icon m-validation-message__valid__icon">
                     <title>Valid</title>
-                    <use xlink:href="#check" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg> <span class="m-validation-message__text">valid</span></p>
         </div>
     </m-accordion-transition>
@@ -49,7 +49,7 @@ exports[`MValidationMessage should render error message even if there is a valid
             <p class="m-validation-message__error">
                 <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
                     <title>Error</title>
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg><span class="m-validation-message__text">error</span></p>
         </div>
     </m-accordion-transition>

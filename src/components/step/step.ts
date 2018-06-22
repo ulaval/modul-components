@@ -38,7 +38,7 @@ export class MStep extends ModulVue {
     public open: boolean;
     @Prop()
     public required: boolean;
-    @Prop({ default: 'm-svg__default' })
+    @Prop({ default: 'm-svg__close-cleart' })
     public iconName: string;
     @Prop()
     public last: boolean;
@@ -81,7 +81,7 @@ export class MStep extends ModulVue {
         let icon: string = '';
         switch (this.state) {
             case MStepState.Locked:
-                icon = 'm-svg__default';
+                icon = 'm-svg__close-clear';
                 break;
             case MStepState.Success:
                 icon = 'm-svg__check-chip';
