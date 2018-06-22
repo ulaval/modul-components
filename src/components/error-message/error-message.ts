@@ -9,6 +9,7 @@ import { ERROR_MESSAGE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
+import PanelPlugin from '../panel/panel';
 import WithRender from './error-message.html?style=./error-message.scss';
 
 @WithRender
@@ -58,6 +59,7 @@ const ErrorMessagePlugin: PluginObject<any> = {
         v.use(AccordionPlugin);
         v.use(LinkPlugin);
         v.use(MessagePlugin);
+        v.use(PanelPlugin);
         v.component(ERROR_MESSAGE_NAME, MErrorMessage);
     }
 };
