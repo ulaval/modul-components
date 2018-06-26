@@ -272,7 +272,7 @@
             13,12 8.1,15.2 			"/>
         <circle fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="10" cx="9.7" cy="12" r="5.6"/>
     </symbol>
-    <symbol id="m-svg__file-music" viewBox="0 0 24 24" data-badge-origin="20.5,23.5">
+    <symbol id="m-svg__file-audio" viewBox="0 0 24 24" data-badge-origin="20.5,23.5">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.5,5.5V23
                 c0,0.3-0.2,0.5-0.5,0.5H4c-0.3,0-0.5-0.2-0.5-0.5V1c0-0.3,0.2-0.5,0.5-0.5h11.5v5H20.5z"/>
         <polygon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="15.5,0.5
