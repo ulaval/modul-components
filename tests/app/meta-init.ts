@@ -18,6 +18,8 @@ const components: string[] = [
     Components.DROPDOWN_GROUP_NAME,
     Components.DYNAMIC_TEMPLATE_NAME,
     Components.ERROR_MESSAGE_NAME,
+    Components.ERROR_PAGE_NOT_FOUND,
+    Components.ERROR_TECHNICAL_DIFFICULTY,
     Components.ERROR_TEMPLATE_NAME,
     Components.FILE_SELECT_NAME,
     Components.FILE_UPLOAD_NAME,

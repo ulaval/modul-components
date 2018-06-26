@@ -18,6 +18,8 @@ import DropdownPlugin from './dropdown/dropdown';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import EditWindow from './edit-window/edit-window';
 import ErrorMessage from './error-message/error-message';
+import ErrorPageNotFoundPlugin from './error-page-not-found/error-page-not-found';
+import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty/error-technical-difficulty';
 import ErrorTemplatePlugin from './error-template/error-template';
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
@@ -90,6 +92,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DynamicTemplatePlugin);
         Vue.use(EditWindow);
         Vue.use(ErrorMessage);
+        Vue.use(ErrorPageNotFoundPlugin);
+        Vue.use(ErrorTechnicalDifficultyPlugin);
         Vue.use(ErrorTemplatePlugin);
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
