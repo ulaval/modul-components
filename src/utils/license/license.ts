@@ -5,14 +5,14 @@ class License<TLicense> {
 }
 
 export class Licenses {
-    protected static licenses: License<any>[] = [];
+    protected static licenses: Map<string, any> = new Map<string, any>();
 
     public addLicense<TLicense>(id: any, value: TLicense): void {
-        Licenses.licenses.push(new License(id, value));
+        Licenses.licenses.set(id, value);
     }
 
     public getLicense<TLicense>(id: any): TLicense | undefined {
-        return (Licenses.licenses.find(license => license.id === id) || {} as any).value;
+        return Licenses.licenses.get(id);
     }
 }
 
