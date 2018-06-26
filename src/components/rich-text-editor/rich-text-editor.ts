@@ -63,7 +63,7 @@ class RichTextEditorPlugin implements PluginObject<RichTextPluginOptions> {
         v.use(VueFroala);
         v.component(RICH_TEXT_EDITOR_NAME, MRichTextEditor);
         v.component('async-component', (resolve) => {
-            resolve(Object.assign(MRichTextEditor, { data: () => ({ richTextPluginOptions: options }) }));
+            resolve(MRichTextEditor);
         });
     }
 }
