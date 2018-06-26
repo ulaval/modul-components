@@ -20,7 +20,7 @@ export enum MDropEffect {
     MNone = 'none'
 }
 
-export interface MDropEvent extends DragEvent {
+export interface MDropEvent extends CustomEvent {
     dropInfo: MDropInfo;
 }
 
@@ -118,7 +118,12 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private onDragLeave(event: DragEvent): void {
-        if (this.isLeavingDroppable(event, this)) { this.leaveDroppable(event); }
+        const leftFor: HTMLElement | undefined = event.relatedTarget as HTMLElement | undefined;
+        if (leftFor && leftFor !== this.element && leftFor.contains(this.element)) {
+            this.leaveDroppable(event);
+        } else if (!leftFor && this.isLeavingDroppable(event, this)) {
+            this.leaveDroppable(event);
+        }
     }
 
     private isLeavingDroppable(event: DragEvent, droppable?: MDroppable): boolean {

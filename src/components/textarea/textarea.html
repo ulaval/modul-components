@@ -17,6 +17,7 @@
                    :focus="isFocus"
                    :empty="isEmpty"
                    :icon-name="iconName"
+                   :readonly="readonly"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
         <textarea ref="input"
@@ -25,22 +26,18 @@
                   :disabled="!active"
                   :placeholder="placeholder"
                   :readonly="readonly"
+                  :maxlength="maxLengthNumber"
+                  :autocomplete="autocomplete"
                   rows="1"
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
-                  @keypress.enter.prevent
                   @keyup="onKeyup"
                   @keydown="onKeydown"
                   @paste="onPaste"
-                  :autocomplete="autocomplete"
                   v-model="model"
-                  :maxlength="maxLengthNumber">
+                  v-m-textarea-auto-height>
         </textarea>
-        <div class="m-textarea__input-hidden"
-             ref="inputHidden"
-             aria-hidden="true">{{ valueLength > 0 ? model : '&nbsp;'}}
-        </div>
     </m-input-style>
     <div class="m-textarea__validation">
         <m-validation-message
