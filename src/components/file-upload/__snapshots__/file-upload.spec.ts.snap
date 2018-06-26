@@ -194,7 +194,7 @@ exports[`MFileUpload validation validation messages should render rejected files
             <div class="m-file-upload__drop-zone__instructions">
                 <h2>
                     <svg aria-hidden="true" width="32px" height="32px" class="m-icon">
-                        <use xlink:href="#m-svg__arrow--down" aria-hidden="true"></use>
+                        <use aria-hidden="true"></use>
                     </svg> <span class="m-i18n">Drop files here or</span></h2>
                 <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
