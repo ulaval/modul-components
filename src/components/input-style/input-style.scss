@@ -40,7 +40,7 @@ $m-input-style--padding: 4px !default;
 
     &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus),
     &.m--has-value {
-        &:not(.m--is-readonly)::before {
+        &:not(.m--is-readonly):not(.m--has-error)::before {
             border-color: $m-color--text;
         }
     }
@@ -55,7 +55,9 @@ $m-input-style--padding: 4px !default;
         &::after {
             width: 100%;
         }
+    }
 
+    &.m--is-focus:not(.m--has-error) {
         .m-input-style__label,
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {
@@ -352,6 +354,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h1 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 38px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -361,6 +367,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h2 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 33px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -370,6 +380,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h3 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 28px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -379,6 +393,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h4 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 23px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -388,6 +406,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h5 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 18px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,

@@ -1,8 +1,7 @@
 {
     "m-file-upload": {
         "header-title": "Upload files",
-        "title": "Drag and drop files",
-        "choice": "or",
+        "title": "Drop files here or",
         "format": "Accepted format",
         "format.p": "Accepted formats",
         "import": "Uploading",
