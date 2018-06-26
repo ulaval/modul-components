@@ -161,15 +161,26 @@ export class MLimitText extends ModulVue {
     }
 
     private get openLinkOriginal(): string {
-        return `...&nbsp;<m-link style="font-weight:400;" mode="button" title="` + (this.openLabel ? this.openLabel.replace(/\s/g, '\xa0') : this.$i18n.translate('m-limit-text:open')) + `" hiddenText="` + (this.openLabel ? this.openLabel.replace(/\s/g, '\xa0') : this.$i18n.translate('m-limit-text:open')) + `" :underline="false">[` + (this.openLabel ? this.openLabel.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
+        return this.openLabel ? `...&nbsp;<m-link style="font-weight:400;" mode="button" title="` + this.getOpenLabelTitle + `" hiddenText="` + this.getOpenLabelTitle + `" :underline="false">[` + this.openLabel.replace(/\s/g, '\xa0') + `]</m-link>` :
+                                `...&nbsp;<m-link style="font-weight:400;" mode="button" title="` + this.getOpenLabelTitle + `" hiddenText="` + this.getOpenLabelTitle + `" :underline="false">[` + '\xa0+\xa0' + `]</m-link>`;
     }
 
     private get openLink(): string {
-        return `...&nbsp;<m-link mode="button" title="` + (this.openLabel ? this.openLabel.replace(/\s/g, '\xa0') : this.$i18n.translate('m-limit-text:open')) + `" hiddenText="` + (this.openLabel ? this.openLabel.replace(/\s/g, '\xa0') : this.$i18n.translate('m-limit-text:open')) + `" :underline="false">[` + (this.openLabel ? this.openLabel.replace(/\s/g, '\xa0') : '\xa0+\xa0') + `]</m-link>`;
+        return this.openLabel ? `...&nbsp;<m-link mode="button" title="` + this.openLabel.replace(/\s/g, '\xa0') + `" hiddenText="` + this.openLabel.replace(/\s/g, '\xa0') + `" :underline="false">[` + this.openLabel.replace(/\s/g, '\xa0') + `]</m-link>` :
+                                `...&nbsp;<m-link mode="button" title="` + this.$i18n.translate('m-limit-text:open') + `" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + '\xa0+\xa0' + `]</m-link>`;
     }
 
     private get closeLink(): string {
-        return `<m-link mode="button" title="` + (this.closeLabel ? this.closeLabel.replace(/\s/g, '\xa0') : this.$i18n.translate('m-limit-text:close')) + `" hiddenText="` + (this.closeLabel ? this.closeLabel.replace(/\s/g, '\xa0') : this.$i18n.translate('m-limit-text:close')) + `" :underline="false">[` + (this.closeLabel ? this.closeLabel.replace(/\s/g, '\xa0') : '\xa0-\xa0') + `]</m-link>`;
+        return this.closeLabel ? `<m-link mode="button" title="` + this.getCloseLabelTitle + `" hiddenText="` + this.getCloseLabelTitle + `" :underline="false">[` + this.closeLabel.replace(/\s/g, '\xa0') + `]</m-link>` :
+                                 `<m-link mode="button" title="` + this.getCloseLabelTitle + `" hiddenText="` + this.getCloseLabelTitle + `" :underline="false">[` + '\xa0-\xa0' + `]</m-link>`;
+    }
+
+    private get getOpenLabelTitle(): string {
+        return this.openLabel ? this.openLabel.replace(/\s/g, '\xa0') : this.$i18n.translate('m-limit-text:open');
+    }
+
+    private get getCloseLabelTitle(): string {
+        return this.closeLabel ? this.closeLabel.replace(/\s/g, '\xa0') : this.$i18n.translate('m-limit-text:close');
     }
 
     @Watch('open')

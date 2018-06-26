@@ -14,7 +14,6 @@ describe('MRadio', () => {
     beforeEach(() => {
         localVue = createLocalVue();
         localVue.use(RadioPlugin);
-        localVue.use(LimitTextPlugin);
     });
 
     it('should render correctly', () => {
@@ -25,16 +24,6 @@ describe('MRadio', () => {
             },
             slots: {
                 default: 'label'
-            }
-        });
-
-        mount(MLimitText, {
-            localVue: localVue,
-            propsData: {
-                // Put something here.
-            },
-            slots: {
-                default: 'Excepteur deserunt elit sunt ipsum esse non reprehenderit adipisicing culpa exercitation dolor occaecat in non.'
             }
         });
 
