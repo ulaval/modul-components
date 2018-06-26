@@ -291,6 +291,10 @@ export class MFileUpload extends ModulVue {
         return this.completedFiles.length === 0;
     }
 
+    private get buttonCompletedStyle(): string | undefined {
+        return !this.hasCompletedFiles ? 'display: flex;' : undefined;
+    }
+
     private get hasRejectedFiles(): boolean {
         return this.rejectedFiles.length !== 0;
     }
