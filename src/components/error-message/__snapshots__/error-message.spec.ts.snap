@@ -46,7 +46,7 @@ exports[`MErrorMessage given error should render correctly expanded with stack t
         <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
-        <m-panel class="m-error-message__stacktrace"><pre></pre></m-panel>
+        <div class="m-error-message__stacktrace"><pre></pre></div>
     </div>
     <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
@@ -99,7 +99,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
         <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
-        <m-panel class="m-error-message__stacktrace"><pre>This is a stack trace</pre></m-panel>
+        <div class="m-error-message__stacktrace"><pre>This is a stack trace</pre></div>
     </div>
     <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>

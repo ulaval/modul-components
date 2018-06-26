@@ -62,35 +62,40 @@ $m-file-upload-max-height--s: 72px;
     }
 
     &__drop-zone {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: $m-color--grey $m-border-width dashed;
+        border: $m-color--success $m-border-width dashed;
         padding: $m-padding--l $m-padding;
         text-align: center;
         transition: background $m-transition-duration ease;
 
-        h2 {
-            font-weight: $m-font-weight--bold;
+        &__instructions {
             display: flex;
             align-items: center;
-        }
+            justify-content: center;
 
-        & > :first-child {
-            margin-top: 0;
-        }
+            .m-icon {
+                color: $m-color--success;
+                margin-right: $m-spacing--s;
+            }
 
-        &__or {
-            font-weight: $m-font-weight--bold;
-        }
+            .m-file-select {
+                margin-top: 0;
+                margin-left: $m-spacing--s;
+            }
 
-        &__button {
-            margin-top: $m-margin;
+            h2 {
+                font-weight: $m-font-weight--bold;
+                display: flex;
+                align-items: center;
+                margin-top: 0;
+            }
+
+            &__button {
+                margin-top: $m-margin;
+            }
         }
 
         &__format {
-            margin-top: $m-margin--l;
+            margin-top: $m-spacing--s;
             font-weight: $m-font-weight--bold;
         }
     }

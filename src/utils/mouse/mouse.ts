@@ -1,5 +1,5 @@
 // Inspiration => https://acko.net/blog/mouse-handling-and-absolute-positions-in-javascript/.
-const getRelativeMousePos: (event: Event, reference: HTMLElement) => RelativeMousePos =
+const getRelativeMousePos: (event: MouseEvent | CustomEvent, reference: HTMLElement) => RelativeMousePos =
     (event: Event, reference: HTMLElement) => {
         let x: number = 0;
         let y: number = 0;
@@ -73,12 +73,12 @@ export interface RelativeMousePos {
     y: number;
 }
 
-export type MousePositionEvent<T> = (e: MouseEvent, relativeToEl?: HTMLElement) => T;
-export const mousePositionElement: MousePositionEvent<RelativeMousePos> = (e: MouseEvent, relativeToEl: HTMLElement) => {
+export type MousePositionEvent<T> = (e: MouseEvent | CustomEvent, relativeToEl?: HTMLElement) => T;
+export const mousePositionElement: MousePositionEvent<RelativeMousePos> = (e: MouseEvent | CustomEvent, relativeToEl: HTMLElement) => {
     return getRelativeMousePos(e, relativeToEl);
 };
 
-export const isInElement: MousePositionEvent<boolean> = (e: MouseEvent, relativeToEl: HTMLElement, threshold: number = 3) => {
+export const isInElement: MousePositionEvent<boolean> = (e: MouseEvent | CustomEvent, relativeToEl: HTMLElement, threshold: number = 3) => {
     const mousePosition: RelativeMousePos = mousePositionElement(e, relativeToEl);
     return mousePosition.x > 0 && mousePosition.y > 0
             && mousePosition.x + threshold <= relativeToEl.offsetWidth
