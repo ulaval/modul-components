@@ -32,10 +32,10 @@ export class MErrorTemplate extends ModulVue {
     public title: string;
 
     @Prop()
-    public hints?: string[] | undefined;
+    public hints?: string[];
 
     @Prop()
-    public links?: {label: string, url: string}[] | undefined;
+    public links?: {label: string, url: string}[];
 
 }
 

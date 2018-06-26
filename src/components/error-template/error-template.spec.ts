@@ -23,6 +23,7 @@ const MANY_LINKS_LIST: {label: string, url: string}[] = [FIRST_LINK_CONTENT, SEC
 let hints: string[];
 let links: {label: string, url: string}[];
 let slots: {};
+let skin: string;
 
 const getStubs: any = () => {
     return {
@@ -35,7 +36,7 @@ const initializeShallowWrapper: any = () => {
     wrapper = shallow(MErrorTemplate, {
         stubs: getStubs(),
         propsData: {
-            skin: A_VALID_SKIN,
+            skin: skin,
             iconName: A_VALID_ICON_NAME,
             title: A_VALID_TITLE,
             hints: hints,
@@ -48,20 +49,15 @@ const initializeShallowWrapper: any = () => {
 beforeEach(() => {
     hints = [];
     links = [];
+    skin = A_VALID_SKIN;
 });
 
 describe(`Error-template fonctionnality tests`, () => {
 
     describe(`Given skin information`, () => {
         it(`Then  class m--is-skin-information present`, () => {
-            wrapper = shallow(MErrorTemplate, {
-                stubs: getStubs(),
-                propsData: {
-                    skin:  MErrorTemplateSkin.Information,
-                    iconName: A_VALID_ICON_NAME,
-                    title: A_VALID_TITLE
-                }
-            });
+            skin = MErrorTemplateSkin.Information;
+            initializeShallowWrapper();
 
             expect(wrapper.find('.m--is-skin-information').exists()).toBeTruthy();
         });
@@ -69,14 +65,8 @@ describe(`Error-template fonctionnality tests`, () => {
 
     describe(`Given skin red`, () => {
         it(`Then  class m--is-skin-error present`, () => {
-            wrapper = shallow(MErrorTemplate, {
-                stubs: getStubs(),
-                propsData: {
-                    skin:  MErrorTemplateSkin.Error,
-                    iconName: A_VALID_ICON_NAME,
-                    title: A_VALID_TITLE
-                }
-            });
+            skin = MErrorTemplateSkin.Error;
+            initializeShallowWrapper();
 
             expect(wrapper.find('.m--is-skin-error').exists()).toBeTruthy();
         });
@@ -84,14 +74,8 @@ describe(`Error-template fonctionnality tests`, () => {
 
     describe(`Given skin yellow`, () => {
         it(`Then class m--is-skin-warning present`, () => {
-            wrapper = shallow(MErrorTemplate, {
-                stubs: getStubs(),
-                propsData: {
-                    skin: MErrorTemplateSkin.Warning,
-                    iconName: A_VALID_ICON_NAME,
-                    title: A_VALID_TITLE
-                }
-            });
+            skin = MErrorTemplateSkin.Warning;
+            initializeShallowWrapper();
 
             expect(wrapper.find('.m--is-skin-warning').exists()).toBeTruthy();
         });
@@ -102,6 +86,7 @@ describe(`Error-template fonctionnality tests`, () => {
             it(`Then should display one hint with proper content`, () => {
                 hints = ONE_HINT_LIST;
                 initializeShallowWrapper();
+
                 let hintWrapper: Wrapper<Vue> = wrapper.find({ ref: 'hint' });
 
                 expect(hintWrapper.element.innerHTML).toEqual(FIRST_HINT_CONTENT);
@@ -114,6 +99,7 @@ describe(`Error-template fonctionnality tests`, () => {
             it(`Then should display each hint content`, () => {
                 hints = MANY_HINTS_LIST;
                 initializeShallowWrapper();
+
                 let hintsWrapper: WrapperArray<Vue> = wrapper.findAll({ ref: 'hint' });
 
                 expect(hintsWrapper.wrappers[0].element.innerHTML).toEqual(FIRST_HINT_CONTENT);
@@ -127,6 +113,7 @@ describe(`Error-template fonctionnality tests`, () => {
             it(`Then should display one hint with proper content`, () => {
                 links = ONE_LINK_LIST;
                 initializeShallowWrapper();
+
                 let linkWrapper: Wrapper<Vue> = wrapper.find({ ref: 'link' });
 
                 expect(linkWrapper.element.innerHTML).toContain(FIRST_LINK_CONTENT.label);
@@ -140,6 +127,7 @@ describe(`Error-template fonctionnality tests`, () => {
             it(`Then should display each link content`, () => {
                 links = MANY_LINKS_LIST;
                 initializeShallowWrapper();
+
                 let linksHTML: WrapperArray<Vue> = wrapper.findAll({ ref: 'link' });
 
                 expect(linksHTML.wrappers[0].element.innerHTML).toContain(FIRST_LINK_CONTENT.label);
