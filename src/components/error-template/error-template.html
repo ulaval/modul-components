@@ -3,8 +3,8 @@
     'm--is-skin-error': skin=='error',
     'm--is-skin-warning': skin=='warning'
     }">
-    <m-icon :name="iconName" size="60px"></m-icon>
     <h2 class="m-error-template__title">{{title}}</h2>
+    <m-icon :name="iconName" size="60px"></m-icon>
     <p ref="hint" class="m-error-template__hints" v-for="hint in hints">{{hint}}</p>
     <div class="m-error-template__details">
         <slot></slot>
