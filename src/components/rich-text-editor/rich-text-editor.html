@@ -1,4 +1,5 @@
-<div class="test">
-    TEST {{ licenseKey }}
-    <froala :tag="tag" :config="internalOptions" @input="refreshModel"></froala>
+<div>
+    Options: {{ internalOptions }}
+
+    <froala :tag="tag" :config="internalOptions" :value="value" @input="refreshModel"></froala>
 </div>

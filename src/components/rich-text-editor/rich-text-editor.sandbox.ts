@@ -6,7 +6,9 @@ import WithRender from './rich-text-editor.sandbox.html';
 
 @WithRender
 @Component
-export class MRichTextEditorSandBox extends Vue {}
+export class MRichTextEditorSandBox extends Vue {
+    public model: string = '';
+}
 
 const RichTextEditorSandBoxPlugin: PluginObject<any> = {
     install(v, options): void {

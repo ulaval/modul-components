@@ -5,7 +5,8 @@
         fonctionne sans options spécifiée
     </p>
     <p>
-        <m-rich-text-editor></m-rich-text-editor>
+        <m-rich-text-editor @input="test" v-model="model"></m-rich-text-editor>
+        Model: {{ model }}
     </p>
     <p>
         <async-component></async-component>

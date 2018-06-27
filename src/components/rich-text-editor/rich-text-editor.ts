@@ -6,19 +6,13 @@ import { Prop } from 'vue-property-decorator';
 import LicensePlugin from '../../utils/license/license';
 import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT_EDITOR_NAME } from './../component-names';
-import WithRender from './rich-text-editor.html?style=./rich-text-editor.scss';
+import WithRender from './rich-text-editor.html';
 
-require('froala-editor');
-
-// Import fontawesome
 require('@fortawesome/fontawesome');
 require('@fortawesome/fontawesome-free-solid');
 
-// Import froala editor.
-require('jquery/dist/jquery.min.js');
 require('froala-editor/js/froala_editor.pkgd.min');
 require('froala-editor/css/froala_editor.pkgd.min.css');
-require('froala-editor/css/froala_style.min.css');
 
 export interface RichTextPluginOptions {
     key: string;
@@ -30,26 +24,32 @@ const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 class MRichTextEditorDefaultOptions {
     public immediateVueModelUpdate: boolean = true;
     public iconsTemplate: string = 'font_awesome_5';
+
+    constructor(public key: string) {
+        if (!key) {
+            throw new Error('In order to use the rich-text-editor you need to provide a valid froala key.');
+        }
+    }
 }
 
 @WithRender
 @Component
 export class MRichTextEditor extends ModulVue {
     public tag: string = 'textarea';
-    @Prop()
-    public value: string | undefined;
+    @Prop({ default: '' })
+    public value: string;
     @Prop()
     public options: MRichTextEditorOptions | undefined;
 
-    public get licenseKey(): string | undefined {
-        return this.$license.getLicense<string>(RICH_TEXT_LICENSE_KEY);
+    protected get internalOptions(): any {
+        return Object.assign(new MRichTextEditorDefaultOptions(this.froalaLicenseKey), this.options);
     }
 
-    public get internalOptions(): any {
-        return Object.assign(new MRichTextEditorDefaultOptions(), this.options);
+    protected get froalaLicenseKey(): string {
+        return this.$license.getLicense<string>(RICH_TEXT_LICENSE_KEY) || '';
     }
 
-    public refreshModel(newValue: string): void {
+    protected refreshModel(newValue: string): void {
         this.$emit('input', newValue);
     }
 }
