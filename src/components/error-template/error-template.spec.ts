@@ -2,7 +2,7 @@ import { mount, shallow, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import ErrorTemplatePlugin, { MErrorTemplate, MErrorTemplateSkin } from './error-template';
+import ErrorTemplatePlugin, { Link, MErrorTemplate, MErrorTemplateSkin } from './error-template';
 
 let wrapper: Wrapper<MErrorTemplate>;
 
@@ -15,13 +15,13 @@ const ONE_HINT_LIST: string[] = [FIRST_HINT_CONTENT];
 const MANY_HINTS_LIST: string[] = [FIRST_HINT_CONTENT, SECOND_HINT_CONTENT];
 const DEFAULT_SLOT_ID: string = 'theSlotId';
 
-const FIRST_LINK_CONTENT: {label: string, url: string} = { label: 'a link', url: 'an Url' };
-const SECOND_LINK_CONTENT: {label: string, url: string} = { label: 'another link', url: 'another Url' };
-const ONE_LINK_LIST: {label: string, url: string}[] = [FIRST_LINK_CONTENT];
-const MANY_LINKS_LIST: {label: string, url: string}[] = [FIRST_LINK_CONTENT, SECOND_LINK_CONTENT];
+const FIRST_LINK_CONTENT: Link = new Link('a link', 'an Url');
+const SECOND_LINK_CONTENT: Link = new Link('another link', 'another Url');
+const ONE_LINK_LIST: Link[] = [FIRST_LINK_CONTENT];
+const MANY_LINKS_LIST: Link[] = [FIRST_LINK_CONTENT, SECOND_LINK_CONTENT];
 
 let hints: string[];
-let links: {label: string, url: string}[];
+let links: Link[];
 let slots: {};
 let skin: string;
 

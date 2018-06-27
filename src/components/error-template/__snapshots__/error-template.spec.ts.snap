@@ -1,22 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Error-template integration tests Given an error with all props and slots initialized Then should render properly 1`] = `
-<div class="m-error-template m--is-skin-warning"><span name="iconName" size="60px">Icone : iconName</span>
-    <h2 class="m-error-template__title">An error title.</h2>
+<div class="m-error-template m--is-skin-warning">
+    <h2 class="m-error-template__title">An error title.</h2> <span name="iconName" size="60px">Icone : iconName</span>
     <p class="m-error-template__hints">a hint</p>
     <p class="m-error-template__hints">another hint</p>
     <div class="m-error-template__details">
         <div id="theSlotId">The slot content</div>
     </div>
     <div class="m-error-template__links">
-        <a mode="link" url="an Url" target="_blank">
-            a link
-        </a>
+        <a mode="link" url="an Url" target="_blank">a link</a>
     </div>
     <div class="m-error-template__links">
-        <a mode="link" url="another Url" target="_blank">
-            another link
-        </a>
+        <a mode="link" url="another Url" target="_blank">another link</a>
     </div>
 </div>
 `;

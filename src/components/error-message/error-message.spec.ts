@@ -36,8 +36,8 @@ describe('MErrorMessage', () => {
         const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
             localVue: Vue,
             propsData: {
-                errorDate: moment('2018-01-02T00:01:02'),
-                errorReferenceNumber: '123456879'
+                date: moment('2018-01-02T00:01:02'),
+                referenceNumber: '123456879'
             },
             stubs: {
                 'm-accordion': WrapChildrenStub('div'),
@@ -53,8 +53,8 @@ describe('MErrorMessage', () => {
             const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
                 localVue: Vue,
                 propsData: {
-                    errorDate: moment('2018-01-02T00:01:02'),
-                    errorReferenceNumber: '123456879',
+                    date: moment('2018-01-02T00:01:02'),
+                    referenceNumber: '123456879',
                     error: {
                         message: 'An error message'
                     }
@@ -72,8 +72,8 @@ describe('MErrorMessage', () => {
             const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
                 localVue: Vue,
                 propsData: {
-                    errorDate: moment('2018-01-02T00:01:02'),
-                    errorReferenceNumber: '123456879',
+                    date: moment('2018-01-02T00:01:02'),
+                    referenceNumber: '123456879',
                     error: {
                         message: 'An error message'
                     },
@@ -94,8 +94,8 @@ describe('MErrorMessage', () => {
             const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
                 localVue: Vue,
                 propsData: {
-                    errorDate: moment('2018-01-02T00:01:02'),
-                    errorReferenceNumber: '123456879',
+                    date: moment('2018-01-02T00:01:02'),
+                    referenceNumber: '123456879',
                     error: {
                         message: 'An error message',
                         stack: 'This is a stack trace'
@@ -114,8 +114,8 @@ describe('MErrorMessage', () => {
             const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
                 localVue: Vue,
                 propsData: {
-                    errorDate: moment('2018-01-02T00:01:02'),
-                    errorReferenceNumber: '123456879',
+                    date: moment('2018-01-02T00:01:02'),
+                    referenceNumber: '123456879',
                     error: {
                         message: 'An error message',
                         stack: 'This is a stack trace'

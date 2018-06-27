@@ -10,6 +10,16 @@ import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './error-template.html?style=./error-template.scss';
 
+export class Link {
+    public label: string;
+    public url: string;
+
+    constructor(label: string, url: string) {
+        this.label = label;
+        this.url = url;
+    }
+}
+
 export enum MErrorTemplateSkin {
     Information = 'information',
     Warning = 'warning',
@@ -35,7 +45,7 @@ export class MErrorTemplate extends ModulVue {
     public hints?: string[];
 
     @Prop()
-    public links?: {label: string, url: string}[];
+    public links?: Link[];
 
 }
 
