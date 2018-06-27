@@ -66,8 +66,8 @@ export class MErrorTechnicalDifficulty extends ModulVue {
         return window.navigator.userAgent;
     }
 
-    get dateInfo(): string[] | undefined {
-        let result: string[] | undefined = undefined;
+    get dateInfo(): string[] {
+        let result: string[] = [];
         if (this.errorDate) {
             result = [this.errorDate.format('YYYY-MM-DD'), this.errorDate.format('HH:mm:ss')];
         }

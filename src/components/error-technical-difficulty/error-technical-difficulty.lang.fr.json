@@ -1,6 +1,6 @@
 {
     "m-error-technical-difficulty": {
-        "title": "Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.",
+        "title": "Houston, nous avons un problème.",
         "hint.primary": "Vous pouvez attendre quelques minutes et réessayer.",
         "hint.secondary": "Si le problème persiste, vous pouvez contacter le soutien technique en leur fournissant le détail de l'erreur.",
         "details": "Détails de l'erreur",
@@ -8,6 +8,6 @@
         "reference-number": "No référence de l'erreur",
         "date": "Elle a eu lieu le <strong>{0}</strong> à <strong>{1}</strong>",
         "help": "Pour obtenir de l'aide, contactez le soutien technique",
-        "home-label": "Retour à l'acceuil"
+        "home-label": "Retour à l'accueil"
     }
 }
