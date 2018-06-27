@@ -1,25 +1,13 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
 import IconPlugin from '../icon/icon';
+import { MNodeStructureArchive } from '../root-tree/root-tree';
 import WithRender from './tree.html?style=./tree.scss';
-
-export interface MNodeStructureArchive {
-    relativePath: string;
-    idFile: string;
-    fileName: string;
-    childs: MNodeStructureArchive[];
-}
-
-export enum MSelectOption {
-    NONE = 0,
-    SINGLE = 1,
-    MULTIPLE = 2
-}
 
 @WithRender
 @Component
@@ -27,15 +15,6 @@ export class MTree extends ModulVue {
 
     @Prop()
     tree: MNodeStructureArchive[];
-
-    @Prop({
-        default: MSelectOption.NONE,
-        validator: value =>
-            value === MSelectOption.NONE ||
-            value === MSelectOption.SINGLE ||
-            value === MSelectOption.MULTIPLE
-    })
-    selection: MSelectOption;
 
     @Prop()
     externalSelectedFile: string;
@@ -45,12 +24,8 @@ export class MTree extends ModulVue {
 
     internalSelectedFile: string = '';
 
-    created(): void {
-        this.initializeSelectedFile();
-    }
-
-    haveChilds(child: MNodeStructureArchive[]): boolean {
-        return !!child.length;
+    isAFolder(idFile: string): boolean {
+        return !idFile;
     }
 
     extensionFile(filename: string = ''): string {
@@ -58,27 +33,39 @@ export class MTree extends ModulVue {
         return '.' + extension;
     }
 
-    selectFile(file: MNodeStructureArchive): void {
-        this.currentSelectedFile = file.relativePath;
-    }
-
     isFileSelected(relativePath: string): boolean {
-        return this.internalSelectedFile === relativePath;
+        return this.externalSelectedFile === relativePath;
     }
 
-    get currentSelectedFile(): string {
-        return this.internalSelectedFile;
+    selectFile(file: MNodeStructureArchive): void {
+        this.$emit('selectFile', file);
     }
 
-    set currentSelectedFile(relativePath: string) {
-        this.internalSelectedFile = relativePath;
-        this.$emit('update:externalSelectedFile', this.internalSelectedFile);
-    }
+    // @Watch('externalSelectedFile')
+    // test(): void {
+    //     console.log(this.externalSelectedFile);
+    // }
 
-    @Watch('externalSelectedFile')
-    initializeSelectedFile(): void {
-        this.currentSelectedFile = this.externalSelectedFile;
-    }
+    // isFolderOpen(relativePath: string): boolean {
+    //     if (this.currentSelectedFile.indexOf(relativePath) === -1) {
+    //         return true;
+    //     }
+    //     return true;
+    // }
+
+    // get currentSelectedFile(): string {
+    //     return this.internalSelectedFile;
+    // }
+
+    // set currentSelectedFile(relativePath: string) {
+    //     this.internalSelectedFile = relativePath;
+    //     this.$emit('update:externalSelectedFile', this.internalSelectedFile);
+    // }
+
+    // @Watch('externalSelectedFile')
+    // initializeSelectedFile(): void {
+    //     this.currentSelectedFile = this.externalSelectedFile;
+    // }
 
 }
 

@@ -10,6 +10,10 @@
     }
 
     &__with-childs {
+        &__selected {
+            color: pink;
+        }
+
         &__childs {
             margin-left: $m-margin--l;
         }

@@ -8,6 +8,8 @@ import WithRender from './root-tree.sandbox.html';
 @WithRender
 @Component
 export class MRootTreeSandbox extends Vue {
+    public currentFile: string = '/Dossier #1/3chemin-vers-le-fichier.doc';
+
     public testArbo: MNodeStructureArchive[] = [
         {
             fileName: 'Fichier #1',
@@ -17,7 +19,7 @@ export class MRootTreeSandbox extends Vue {
         },
         {
             fileName: 'Dossier #1',
-            idFile: 'b1',
+            idFile: '',
             relativePath: '/Dossier #1',
             childs: [
                 {
@@ -34,7 +36,7 @@ export class MRootTreeSandbox extends Vue {
                 },
                 {
                     fileName: 'Dossier #2',
-                    idFile: 'b4',
+                    idFile: '',
                     relativePath: '/Dossier #1/Dossier #2',
                     childs: [
                         {
@@ -51,7 +53,7 @@ export class MRootTreeSandbox extends Vue {
                         },
                         {
                             fileName: 'Dossier #3',
-                            idFile: 'b7',
+                            idFile: '',
                             relativePath: '/Dossier #1/Dossier #2/Dossier #3',
                             childs: [
                                 {
@@ -63,7 +65,7 @@ export class MRootTreeSandbox extends Vue {
                                 {
                                     fileName: 'Fichier #2-3-2-2',
                                     idFile: 'b9',
-                                    relativePath: '/Dossier #1/Dossier #2/Dossier #3/10chemin-vers-le-fichier.css',
+                                    relativePath: '/Dossier #1/Dossier #2/Dossier #3/10chemin-vers-le-fichier.doc',
                                     childs: []
                                 }
                             ]
@@ -74,7 +76,7 @@ export class MRootTreeSandbox extends Vue {
         },
         {
             fileName: 'Dossier #4',
-            idFile: 'c1',
+            idFile: '',
             relativePath: '/Dossier #4',
             childs: [
                 {
