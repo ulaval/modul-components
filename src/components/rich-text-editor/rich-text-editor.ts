@@ -7,13 +7,8 @@ import LicensePlugin from '../../utils/license/license';
 import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT_EDITOR_NAME } from './../component-names';
 import { MRichTextEditorRead } from './rich-text-editor-read';
+import { MRichTextEditorWrite } from './rich-text-editor-write';
 import WithRender from './rich-text-editor.html';
-
-require('@fortawesome/fontawesome');
-require('@fortawesome/fontawesome-free-solid');
-
-require('froala-editor/js/froala_editor.pkgd.min');
-require('froala-editor/css/froala_editor.pkgd.min.css');
 
 export interface RichTextPluginOptions {
     key: string;
@@ -35,7 +30,7 @@ class MRichTextEditorDefaultOptions {
 
 @WithRender
 @Component({
-    components: { MRichTextEditorRead }
+    components: { MRichTextEditorRead, MRichTextEditorWrite }
 })
 export class MRichTextEditor extends ModulVue {
     public tag: string = 'textarea';
@@ -67,9 +62,6 @@ class RichTextEditorPlugin implements PluginObject<RichTextPluginOptions> {
         }
         v.use(VueFroala);
         v.component(RICH_TEXT_EDITOR_NAME, MRichTextEditor);
-        v.component('async-component', (resolve) => {
-            resolve(MRichTextEditor);
-        });
     }
 }
 
