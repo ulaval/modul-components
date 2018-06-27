@@ -7,8 +7,6 @@ import { ERROR_PAGE_NOT_FOUND } from '../component-names';
 import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import MessagePlugin from '../message/message';
-import PanelPlugin from '../panel/panel';
 import WithRender from './error-page-not-found.html?style=./error-page-not-found.scss';
 
 @WithRender
@@ -16,25 +14,25 @@ import WithRender from './error-page-not-found.html?style=./error-page-not-found
 export class MErrorPageNotFound extends ModulVue {
 
     @Prop({
-        default: () => (Vue.prototype as any).$i18n.translate('m-page-not-found:title')
+        default: () => (Vue.prototype as any).$i18n.translate('m-error-page-not-found:title')
     })
     public title: string;
 
     @Prop({
         default: () => [
-            new Link((Vue.prototype as any).$i18n.translate('m-page-not-found:home-label'), '\\')]
+            new Link((Vue.prototype as any).$i18n.translate('m-error-page-not-found:home-label'), '\\')]
     })
     public links: Link[];
 
     @Prop({
         default: () => [
-            (Vue.prototype as any).$i18n.translate('m-page-not-foundy:hint.primary')]
+            (Vue.prototype as any).$i18n.translate('m-error-page-not-found:hint.primary')]
     })
     public hints: string[];
 
     readonly skin: string = MErrorTemplateSkin.Error;
 
-    readonly iconName: string = 'error';
+    readonly iconName: string = 'search';
 }
 
 const ErrorPageNotFoundPlugin: PluginObject<any> = {
@@ -42,8 +40,6 @@ const ErrorPageNotFoundPlugin: PluginObject<any> = {
         v.prototype.$log.debug(ERROR_PAGE_NOT_FOUND, 'plugin.install');
         v.use(I18nPlugin);
         v.use(LinkPlugin);
-        v.use(MessagePlugin);
-        v.use(PanelPlugin);
         v.use(ErrorTemplatePlugin);
         v.component(ERROR_PAGE_NOT_FOUND, MErrorPageNotFound);
     }
