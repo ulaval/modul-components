@@ -2,8 +2,7 @@ import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse }
 import qs from 'qs/lib';
 import { PluginObject } from 'vue';
 
-import { ErrorHandler } from '../errors/error-handler';
-import { PromiseError } from '../errors/promise-error';
+import { WindowErrorHandler } from '../errors/window-error-handler';
 import * as strUtils from '../str/str';
 import { RequestConfig, RestAdapter } from './rest';
 
@@ -13,7 +12,7 @@ export interface HttpPluginOptions {
     protectedUrls?: string[];
     authorizationFn?: () => string;
     timeout?: number;
-    createPromiseError?: boolean;
+    useEventOnPromiseError?: boolean;
 }
 
 export const NO_TIMEOUT: number = 0;
@@ -54,14 +53,17 @@ export class HttpService implements RestAdapter {
             }
 
             // response interceptor to progagate PromiseError
-            if (this.options.createPromiseError === undefined || this.options.createPromiseError) {
-                this.instance.interceptors.response.use((response: AxiosResponse) => response, (error: Error) => {
+            if (this.options.useEventOnPromiseError === undefined || this.options.useEventOnPromiseError) {
+                this.instance.interceptors.response.use((response: AxiosResponse) => response, (err: Error) => {
                     // wrap to a PromiseError, so that propagation can be stopped
-                    let promiseError: PromiseError = new PromiseError(error);
+                    let promiseErrorEvent: ErrorEvent = new ErrorEvent('error', {
+                        error: err,
+                        cancelable: true
+                    });
                     // delay onError
-                    ErrorHandler.onError(promiseError, true);
+                    WindowErrorHandler.onError(promiseErrorEvent, true);
 
-                    return Promise.reject(promiseError);
+                    return Promise.reject(promiseErrorEvent);
                 });
             }
         }

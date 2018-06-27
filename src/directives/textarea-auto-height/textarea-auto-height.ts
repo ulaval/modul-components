@@ -28,6 +28,14 @@ const MTextareaAutoHeight: DirectiveOptions = {
             });
         }
     },
+    update(element: HTMLElement): void {
+        if (element.tagName === 'TEXTAREA') {
+            let outerHeight: number = parseInt((window.getComputedStyle(element).height as string), 10);
+            let diff: number = outerHeight - element.clientHeight;
+            element.style.height = '0';
+            element.style.height = element.scrollHeight + diff + 'px';
+        }
+    },
     unbind(element: HTMLElement, binding: TextareaAutoHeightBinding): void {
         if (element.tagName === 'TEXTAREA' && binding.ajustHeight) {
             element.removeEventListener('input', binding.ajustHeight);
