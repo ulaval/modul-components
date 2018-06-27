@@ -43,6 +43,7 @@ export const PROGRESS_NAME: string = 'm-progress';
 export const RADIO_NAME: string = 'm-radio';
 export const RADIO_GROUP_NAME: string = 'm-radio-group';
 export const RADIO_STYLE_NAME: string = 'm-radio-style';
+export const ROOT_TREE_NAME: string = 'm-root-tree';
 export const SCROLL_TOP_NAME: string = 'm-scroll-top';
 export const SESSION_EXPIRED_NAME: string = 'm-session-expired';
 export const SIDEBAR_NAME: string = 'm-sidebar';

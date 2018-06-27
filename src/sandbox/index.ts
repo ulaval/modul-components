@@ -42,6 +42,7 @@ import ProgressSandboxPlugin from '../components/progress/progress.sandbox';
 import RadioGroupSandboxPlugin from '../components/radio-group/radio-group.sandbox';
 import RadioStyleSandboxPlugin from '../components/radio-style/radio-style.sandbox';
 import RadioSandboxPlugin from '../components/radio/radio.sandbox';
+import RootTreeSandboxPlugin from '../components/root-tree/root-tree.sandbox';
 import ScrollTopSandboxPlugin from '../components/scroll-top/scroll-top.sandbox';
 import SessionExpiredSandboxPlugin from '../components/session-expired/session-expired.sandbox';
 import SidebarSandboxPlugin from '../components/sidebar/sidebar.sandbox';
@@ -106,6 +107,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(RadioSandboxPlugin);
         Vue.use(RadioGroupSandboxPlugin);
         Vue.use(RadioStyleSandboxPlugin);
+        Vue.use(RootTreeSandboxPlugin);
         Vue.use(ScrollTopSandboxPlugin);
         Vue.use(SessionExpiredSandboxPlugin);
         Vue.use(SidebarSandboxPlugin);

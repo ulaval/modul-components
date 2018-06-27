@@ -46,6 +46,7 @@ import ProgressPluggin from './progress/progress';
 import RadioGroupPlugin from './radio-group/radio-group';
 import RadioStylePlugin from './radio-style/radio-style';
 import RadioPlugin from './radio/radio';
+import RootTreePlugin from './root-tree/root-tree';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import SidebarPlugin from './sidebar/sidebar';
@@ -137,6 +138,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
         Vue.use(TreePlugin);
+        Vue.use(RootTreePlugin);
     }
 };
 
