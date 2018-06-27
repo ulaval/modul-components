@@ -3,11 +3,11 @@
         <m-accordion skin="plain" v-if="isAFolder(file.idFile)" class="m-tree__with-childs">
             <div slot="header">
                 <m-icon size="20px" name="m-svg__file-odf"></m-icon>
-                <span :class="{'m-tree__with-childs__selected': isFileSelected(file.relativePath)}">{{ file.fileName }}</span>
+                <span :class="{'m-tree__with-childs__selected': isFileSelected(file)}">{{ file.fileName }}</span>
             </div>
             <m-tree :tree="file.childs" @selectFile="selectFile(file)" class="m-tree__with-childs__childs" :externalSelectedFile="externalSelectedFile"></m-tree>
         </m-accordion>
-        <m-link v-else mode="button" class="m-tree__single-file" @click="selectFile(file)" :class="{'m-tree__single-file__selected': isFileSelected(file.relativePath)}">
+        <m-link v-else mode="button" class="m-tree__single-file" @click="selectFile(file)" :class="{'m-tree__single-file__selected': isFileSelected(file)}">
             <m-icon-file :extension="extensionFile(file.relativePath)"></m-icon-file>
             <span>{{ file.fileName }}</span>
         </m-link>

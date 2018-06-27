@@ -40,26 +40,26 @@ export class MRootTree extends ModulVue {
     icon: string;
 
     @Prop()
-    externalSelectedFile: string;
+    externalSelectedFile: MNodeStructureArchive[];
 
     @Prop()
     initialiseFolders: boolean;
 
-    internalSelectedFile: string = '';
+    internalSelectedFile: MNodeStructureArchive[] = [];
 
     created(): void {
         this.selectedFile = this.externalSelectedFile;
     }
 
     selectNewFile(file: MNodeStructureArchive): void {
-        this.selectedFile = file.relativePath;
+        this.selectedFile = [file];
     }
 
-    set selectedFile(relativePath: string) {
-        this.internalSelectedFile = relativePath;
+    set selectedFile(file: MNodeStructureArchive[]) {
+        this.internalSelectedFile = file;
     }
 
-    get selectedFile(): string {
+    get selectedFile(): MNodeStructureArchive[] {
         return this.internalSelectedFile;
     }
 

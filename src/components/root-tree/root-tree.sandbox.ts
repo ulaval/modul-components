@@ -8,7 +8,14 @@ import WithRender from './root-tree.sandbox.html';
 @WithRender
 @Component
 export class MRootTreeSandbox extends Vue {
-    public currentFile: string = '/Dossier #1/3chemin-vers-le-fichier.doc';
+    public currentFile: MNodeStructureArchive[] = [
+        {
+            fileName: 'Fichier #2-2',
+            idFile: 'b3',
+            relativePath: '/Dossier #1/4chemin-vers-le-fichier.xls',
+            childs: []
+        }
+    ];
 
     public testArbo: MNodeStructureArchive[] = [
         {

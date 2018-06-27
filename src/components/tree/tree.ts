@@ -17,7 +17,7 @@ export class MTree extends ModulVue {
     tree: MNodeStructureArchive[];
 
     @Prop()
-    externalSelectedFile: string;
+    externalSelectedFile: MNodeStructureArchive[];
 
     @Prop()
     icon: string;
@@ -33,8 +33,8 @@ export class MTree extends ModulVue {
         return '.' + extension;
     }
 
-    isFileSelected(relativePath: string): boolean {
-        return this.externalSelectedFile === relativePath;
+    isFileSelected(file: MNodeStructureArchive): boolean {
+        return !!file.idFile && this.externalSelectedFile[0].idFile === file.idFile;
     }
 
     selectFile(file: MNodeStructureArchive): void {
