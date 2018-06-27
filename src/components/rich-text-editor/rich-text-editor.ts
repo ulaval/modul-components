@@ -6,6 +6,7 @@ import { Prop } from 'vue-property-decorator';
 import LicensePlugin from '../../utils/license/license';
 import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT_EDITOR_NAME } from './../component-names';
+import { MRichTextEditorRead } from './rich-text-editor-read';
 import WithRender from './rich-text-editor.html';
 
 require('@fortawesome/fontawesome');
@@ -33,7 +34,9 @@ class MRichTextEditorDefaultOptions {
 }
 
 @WithRender
-@Component
+@Component({
+    components: { MRichTextEditorRead }
+})
 export class MRichTextEditor extends ModulVue {
     public tag: string = 'textarea';
     @Prop({ default: '' })

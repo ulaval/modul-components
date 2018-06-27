@@ -5,5 +5,5 @@
     <div v-if="!readOnly">
         <froala :tag="tag" :config="internalOptions" :value="value" @input="refreshModel"></froala>
     </div>
-    <div class="fr-view" v-html="value" v-if="readOnly"></div>
+    <m-rich-text-editor-read class="fr-view" :value="value" v-if="readOnly"></m-rich-text-editor-read>
 </div>
