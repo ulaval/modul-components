@@ -7,7 +7,53 @@
         </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
         -->
     </p>
-    <p>
-        <m-navbar><!-- Test case --></m-navbar>
-    </p>
+    <m-navbar skin="dark" :selected.sync="selectedItem">
+        <m-navbar-item value="item1">
+            1
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9
+        </m-navbar-item>
+        <m-navbar-item value="item10">
+            10
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12
+        </m-navbar-item>
+    </m-navbar>
+    <m-navbar v-if="showMenu" skin="simple" :selected.sync="selectedItem">
+        <m-navbar-item value="item6">
+            item6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            item 7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            item 8
+        </m-navbar-item>
+    </m-navbar>
 </div>

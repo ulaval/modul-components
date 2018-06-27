@@ -3,7 +3,6 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
-import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_NAME } from '../component-names';
 import NavbarItemPlugin, { BaseNavbar, Navbar } from '../navbar-item/navbar-item';
 import WithRender from './navbar.html?style=./navbar.scss';
@@ -12,6 +11,7 @@ const UNDEFINED: string = 'undefined';
 const PAGE_STEP: number = 4;
 const THRESHOLD: number = 2.5;
 const OVERFLOWOFFSET: number = 20;
+const CSSNAVBARITEM: string = 'm-navbar-item';
 
 export enum MNavbarSkin {
     Light = 'light',
@@ -189,32 +189,82 @@ export class MNavbar extends BaseNavbar implements Navbar {
         return this.skin === 'arrow';
     }
 
-    private scrollLeft(event: MouseEvent): void {
-        let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
-        wrapEl.scrollLeft = wrapEl.scrollLeft - (wrapEl.clientWidth / THRESHOLD);
+    private scrollLeft(): void {
+        let conteneur: HTMLElement = this.$refs.wrap as HTMLElement;
+        let maxScrollLeft: number = conteneur.scrollWidth - conteneur.clientWidth;
+        let cLeft: number = conteneur.scrollLeft;
+        let outbound: any;
 
-        if (wrapEl.scrollLeft === 0) {
+        let navbarItems: Vue[] = this.$children.filter(element => {
+            return element.$el.classList.contains(CSSNAVBARITEM);
+        });
+
+        // find first item
+        let firstElement: HTMLElement = navbarItems[0].$el;
+        // find last item
+        let lastElement: HTMLElement = navbarItems[navbarItems.length - 1].$el;
+        // find the previus element outside visible area
+        navbarItems.every(element => {
+            let eLeft: number = element.$el.offsetLeft;
+
+            if (eLeft < cLeft) {
+                outbound = element;
+                return outbound;
+            }
+        });
+
+        if (outbound) {
+            outbound.$el.classList.add('test2');
+            conteneur.scrollLeft = outbound.$el.offsetLeft;
+        }
+
+        let ml: number = parseInt(window.getComputedStyle(firstElement).marginLeft as string, 10);
+        if (conteneur.scrollLeft <= ml) {
             this.showArrowLeft = false;
         }
 
-        if (wrapEl.scrollLeft < maxScrollLeft) {
+        let mr: number = parseInt(window.getComputedStyle(lastElement).marginRight as string, 10);
+        if (conteneur.scrollLeft < maxScrollLeft - mr) {
             this.showArrowRight = true;
         }
+
     }
 
-    private scrollRight(event: MouseEvent): void {
-        let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
-        wrapEl.scrollLeft = wrapEl.scrollLeft + (wrapEl.clientWidth / THRESHOLD);
+    private scrollRight(): void {
+        let conteneur: HTMLElement = this.$refs.wrap as HTMLElement;
+        let maxScrollLeft: number = conteneur.scrollWidth - conteneur.clientWidth;
+        let cRight: number = conteneur.scrollLeft + conteneur.clientWidth;
 
-        if (wrapEl.scrollLeft > 0) {
+        let navbarItems: Vue[] = this.$children.filter(element => {
+            return element.$el.classList.contains(CSSNAVBARITEM);
+        });
+
+        // find first item
+        let firstElement: HTMLElement = navbarItems[0].$el;
+        // find last item
+        let lastElement: HTMLElement = navbarItems[navbarItems.length - 1].$el;
+        // find the next element outside visible area
+        let outbound: Vue | undefined = navbarItems.find(element => (element.$el.offsetLeft + element.$el.clientWidth) > cRight);
+
+        if (outbound) {
+            let ml: number = parseInt(window.getComputedStyle(outbound.$el).marginLeft as string, 10);
+            let previousElement: HTMLElement | null = outbound.$el.previousElementSibling as HTMLElement;
+            let mrPrevious: number = parseInt(window.getComputedStyle(previousElement).marginRight as string, 10);
+
+            let margins: number = ml + mrPrevious;
+            conteneur.scrollLeft += outbound.$el.clientWidth;
+        }
+
+        let ml: number = parseInt(window.getComputedStyle(firstElement).marginLeft as string, 10);
+        if (conteneur.scrollLeft > ml) {
             this.showArrowLeft = true;
         }
 
-        if (wrapEl.scrollLeft === maxScrollLeft) {
+        let mr: number = parseInt(window.getComputedStyle(lastElement).marginRight as string, 10);
+        if (conteneur.scrollLeft >= maxScrollLeft - mr) {
             this.showArrowRight = false;
         }
+
     }
 }
 
@@ -227,3 +277,5 @@ const NavbarPlugin: PluginObject<any> = {
 };
 
 export default NavbarPlugin;
+
+// boucler sur tous les enfants avec un max-width de x et si leur hauteur est plus grande que Y, retirer le max-w et afficher les flèches

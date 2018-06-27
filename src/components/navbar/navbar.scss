@@ -76,8 +76,9 @@
         margin: 0;
         display: inline-flex;
         align-items: center;
+        justify-content: space-between;
         text-align: center;
-        white-space: nowrap;
+        // white-space: nowrap;
     }
 
     &__line,
@@ -123,6 +124,8 @@
         display: flex;
         align-items: center;
         user-select: none;
+        // border-left: 1px solid red;
+        // border-right: 1px solid red;
 
         &:not(.m--is-selected):not(.m--is-disabled) {
             &,

@@ -193,15 +193,20 @@ a {
     .m-navbar-item {
         font-size: $m-font-size--h5;
         font-weight: $m-font-weight--bold;
-        color: $m-color--grey;
+        // color: $m-color--grey;
         text-transform: uppercase;
-        padding: $m-spacing--l;
+        margin: $m-spacing--l;
         transition: color 0.4s ease;
+        display: block;
+        text-align: center;
+        background-color: pink;
+        color: #000 !important;
 
-        // for multiline feature to come
-        // max-width: 200 + $m-spacing--l * 2;
-        // min-width: 120 + $m-spacing--l * 2;
-        // word-break: break-word;
+        // for multiline
+        max-width: 200 + $m-spacing--l * 2;
+        // flex-basis: 120px;
+        min-width: 120  + $m-spacing--l * 2;
+        word-break: break-word;
 
         &::before {
             content: '';
@@ -219,7 +224,7 @@ a {
 
             &::before {
                 position: absolute;
-                top: 0;
+                top: - $m-spacing--l;
                 left: 50%;
                 margin-left: -30px;
                 width: 60px;

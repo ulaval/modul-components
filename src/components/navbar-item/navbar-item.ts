@@ -49,6 +49,33 @@ export class MNavbarItem extends ModulVue {
             console.error('m-navbar-item need to be inside m-navbar');
         }
 
+        setTimeout(() => {
+            this.setDimension();
+        }, 0);
+
+    }
+
+    private setDimension(): void {
+        // let pt: number = parseFloat(window.getComputedStyle(this.$el).getPropertyValue('padding-top'));
+        // let pb: number = parseFloat(window.getComputedStyle(this.$el).getPropertyValue('padding-bottom'));
+
+        let w: number = this.$el.clientWidth;
+        let lineHeight: number = parseFloat(window.getComputedStyle(this.$el).getPropertyValue('line-height'));
+        let h: number = this.$el.clientHeight;
+        let lines: number = h / lineHeight;
+
+        if (lines > 2) {
+            do {
+
+                this.$el.style.maxWidth = 'none';
+                w++;
+                this.$el.style.width = w + 'px';
+
+                h = this.$el.clientHeight;
+                lines = h / lineHeight;
+
+            } while (lines > 2);
+        }
     }
 
     private get isDisabled(): boolean {
