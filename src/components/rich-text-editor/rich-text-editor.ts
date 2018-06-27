@@ -7,7 +7,6 @@ import LicensePlugin from '../../utils/license/license';
 import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT_EDITOR_NAME } from './../component-names';
 import { MRichTextEditorRead } from './rich-text-editor-read';
-import { MRichTextEditorWrite } from './rich-text-editor-write';
 import WithRender from './rich-text-editor.html';
 
 export interface RichTextPluginOptions {
@@ -30,7 +29,10 @@ class MRichTextEditorDefaultOptions {
 
 @WithRender
 @Component({
-    components: { MRichTextEditorRead, MRichTextEditorWrite }
+    components: {
+        MRichTextEditorRead,
+        MRichTextEditorWrite: () => import(/* webpackChunkName: "rich-text-editor-write" */ './rich-text-editor-write')
+    }
 })
 export class MRichTextEditor extends ModulVue {
     public tag: string = 'textarea';

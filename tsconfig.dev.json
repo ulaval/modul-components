@@ -5,7 +5,7 @@
         "lib": [
             "es5", "es6", "dom"
         ],
-        "module": "es2015",
+        "module": "esnext",
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,

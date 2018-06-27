@@ -18,13 +18,15 @@ module.exports = function (env) {
             libraryTarget: 'umd',
             path: resolve('dist'),
             publicPath: '/',
-            filename: 'modul.js'
+            filename: 'modul.js',
+            chunkFilename: '[name].[chunkhash].js'
         }
     } else {
         outputObj = {
             path: resolve('dist'),
             publicPath: '/',
-            filename: 'app.js'
+            filename: 'app.js',
+            chunkFilename: '[name].[chunkhash].js'
         }
     }
 
@@ -150,11 +152,13 @@ module.exports = function (env) {
     }
 
     if (!isLib) {
-        config.plugins.push(new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: resolve('tests/app/index.html'),
-            inject: 'body'
-        }));
+        config.plugins.push(
+            new HtmlWebpackPlugin({
+                filename: 'index.html',
+                template: resolve('tests/app/index.html'),
+                inject: 'body'
+            })
+        );
     }
 
     return config;

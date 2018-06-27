@@ -24,3 +24,5 @@ export class MRichTextEditorWrite extends ModulVue {
         this.$emit('input', newValue);
     }
 }
+
+export default MRichTextEditorWrite;

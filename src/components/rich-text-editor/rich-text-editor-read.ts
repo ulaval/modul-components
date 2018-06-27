@@ -12,3 +12,5 @@ export class MRichTextEditorRead extends ModulVue {
     @Prop({ default: '' })
     public value: string;
 }
+
+export default MRichTextEditorRead;
