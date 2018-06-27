@@ -8,6 +8,7 @@ import WithRender from './rich-text-editor.sandbox.html';
 @Component
 export class MRichTextEditorSandBox extends Vue {
     public model: string = '';
+    public isReadOnly: boolean = true;
 }
 
 const RichTextEditorSandBoxPlugin: PluginObject<any> = {

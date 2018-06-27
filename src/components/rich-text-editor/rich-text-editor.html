@@ -1,5 +1,9 @@
 <div>
-    Options: {{ internalOptions }}
+    <div>Options: {{ internalOptions }}</div>
+    <div>ReadOnly: {{ readOnly }}</div>
 
-    <froala :tag="tag" :config="internalOptions" :value="value" @input="refreshModel"></froala>
+    <div v-if="!readOnly">
+        <froala :tag="tag" :config="internalOptions" :value="value" @input="refreshModel"></froala>
+    </div>
+    <div class="fr-view" v-html="value" v-if="readOnly"></div>
 </div>

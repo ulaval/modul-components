@@ -38,6 +38,8 @@ export class MRichTextEditor extends ModulVue {
     public tag: string = 'textarea';
     @Prop({ default: '' })
     public value: string;
+    @Prop({ default: true })
+    public readOnly: boolean;
     @Prop()
     public options: MRichTextEditorOptions | undefined;
 
