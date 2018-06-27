@@ -143,11 +143,7 @@ module.exports = function (env) {
             new ContextReplacementPlugin(
                 /moment[\/\\]locale$/,
                 /en-ca|fr-ca/
-            ),
-            new webpack.ProvidePlugin({
-                $: "jquery",
-                jQuery: "jquery"
-            })
+            )
         ],
     }
 

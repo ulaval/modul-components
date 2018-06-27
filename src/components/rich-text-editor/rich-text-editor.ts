@@ -1,6 +1,5 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import VueFroala from 'vue-froala-wysiwyg';
 import { Prop } from 'vue-property-decorator';
 
 import LicensePlugin from '../../utils/license/license';
@@ -62,7 +61,6 @@ class RichTextEditorPlugin implements PluginObject<RichTextPluginOptions> {
         if (options.key) {
             (v.prototype as ModulVue).$license.addLicense(RICH_TEXT_LICENSE_KEY, options.key);
         }
-        v.use(VueFroala);
         v.component(RICH_TEXT_EDITOR_NAME, MRichTextEditor);
     }
 }
