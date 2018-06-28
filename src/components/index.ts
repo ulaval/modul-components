@@ -20,6 +20,7 @@ import EditWindow from './edit-window/edit-window';
 import ErrorAccessDenied from './error-access-denied/error-access-denied';
 import ErrorBrowserNotSupported from './error-browser-not-supported/error-browser-not-supported';
 import ErrorConfigNotSupported from './error-config-not-supported/error-config-not-supported';
+import ErrorCookiesNotSupported from './error-cookies-not-supported/error-cookies-not-supported';
 import ErrorMessage from './error-message/error-message';
 import ErrorPageNotFoundPlugin from './error-page-not-found/error-page-not-found';
 import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty/error-technical-difficulty';
@@ -97,6 +98,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ErrorAccessDenied);
         Vue.use(ErrorBrowserNotSupported);
         Vue.use(ErrorConfigNotSupported);
+        Vue.use(ErrorCookiesNotSupported);
         Vue.use(ErrorMessage);
         Vue.use(ErrorPageNotFoundPlugin);
         Vue.use(ErrorTechnicalDifficultyPlugin);

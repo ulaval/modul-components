@@ -20,6 +20,7 @@ const components: string[] = [
     Components.ERROR_ACCESS_DENIED_NAME,
     Components.ERROR_BROWSER_NOT_SUPPORTED_NAME,
     Components.ERROR_CONFIG_NOT_SUPPORTED_NAME,
+    Components.ERROR_COOKIES_NOT_SUPPORTED_NAME,
     Components.ERROR_MESSAGE_NAME,
     Components.ERROR_PAGE_NOT_FOUND_NAME,
     Components.ERROR_TECHNICAL_DIFFICULTY_NAME,

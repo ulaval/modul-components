@@ -21,6 +21,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/error-access-denied/error-access-denied.lang.fr.json'),
                 require('../components/error-browser-not-supported/error-browser-not-supported.lang.fr.json'),
                 require('../components/error-config-not-supported/error-config-not-supported.lang.fr.json'),
+                require('../components/error-cookies-not-supported/error-cookies-not-supported.lang.fr.json'),
                 require('../components/error-message/error-message.lang.fr.json'),
                 require('../components/error-page-not-found/error-page-not-found.lang.fr.json'),
                 require('../components/error-technical-difficulty/error-technical-difficulty.lang.fr.json'),

@@ -17,6 +17,7 @@ import DynamicTemplateSandboxPlugin from '../components/dynamic-template/dynamic
 import ErrorAccessDeniedSandboxPlugin from '../components/error-access-denied/error-access-denied.sandbox';
 import ErrorBrowserNotSupportedSandboxPlugin from '../components/error-browser-not-supported/error-browser-not-supported.sandbox';
 import ErrorConfigNotSupportedSandboxPlugin from '../components/error-config-not-supported/error-config-not-supported.sandbox';
+import ErrorCookiesNotSupportedSandboxPlugin from '../components/error-cookies-not-supported/error-cookies-not-supported.sandbox';
 import ErrorMessageSandboxPlugin from '../components/error-message/error-message.sandbox';
 import ErrorPageNotFoundSandboxPlugin from '../components/error-page-not-found/error-page-not-found.sandbox';
 import ErrorTechnicalDifficultySandboxPlugin from '../components/error-technical-difficulty/error-technical-difficulty.sandbox';
@@ -86,6 +87,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(ErrorAccessDeniedSandboxPlugin);
         Vue.use(ErrorBrowserNotSupportedSandboxPlugin);
         Vue.use(ErrorConfigNotSupportedSandboxPlugin);
+        Vue.use(ErrorCookiesNotSupportedSandboxPlugin);
         Vue.use(ErrorMessageSandboxPlugin);
         Vue.use(ErrorPageNotFoundSandboxPlugin);
         Vue.use(ErrorTechnicalDifficultySandboxPlugin);
