@@ -17,7 +17,7 @@ const FOLDER_CLOSED: string = 'm-svg__file-odb';
 export class MTree extends ModulVue {
 
     @Prop()
-    tree: MNodeStructureArchive[];
+    node: MNodeStructureArchive;
 
     @Prop()
     externalSelectedFile: MNodeStructureArchive[];
@@ -28,12 +28,29 @@ export class MTree extends ModulVue {
     @Prop()
     openFolders: string[];
 
+    isOpenInternal: boolean = false;
+
+    mounted(): void {
+        if (this.openFolders.length && this.openFolders.indexOf(this.node.relativePath) !== -1) {
+            this.isOpen = true;
+        }
+    }
+
+    get isOpen(): boolean {
+        return this.isOpenInternal;
+    }
+
+    set isOpen(open: boolean) {
+        this.isOpenInternal = open;
+        this.$emit('update:isOpenInternal', this.isOpen);
+    }
+
     isAFolder(idFile: string): boolean {
         return !idFile;
     }
 
-    isEmpty(file: MNodeStructureArchive): boolean {
-        return !file.childs.length;
+    isEmpty(node: MNodeStructureArchive): boolean {
+        return !node.childs.length;
     }
 
     extensionFile(filename: string = ''): string {
@@ -41,12 +58,12 @@ export class MTree extends ModulVue {
         return '.' + extension;
     }
 
-    isFileSelected(file: MNodeStructureArchive): boolean {
-        return !!file.idFile && this.externalSelectedFile[0].idFile === file.idFile;
+    isFileSelected(node: MNodeStructureArchive): boolean {
+        return !!node.idFile && this.externalSelectedFile[0].idFile === node.idFile;
     }
 
-    selectFile(file: MNodeStructureArchive): void {
-        this.$emit('selectFile', file);
+    selectFile(node: MNodeStructureArchive): void {
+        this.$emit('selectFile', node);
     }
 
     folderIcon(): string {
