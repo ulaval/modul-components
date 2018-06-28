@@ -42,13 +42,20 @@ export class MRootTree extends ModulVue {
     @Prop()
     externalSelectedFile: MNodeStructureArchive[];
 
-    @Prop()
-    initialiseFolders: boolean;
+    initialiseFolders: boolean = true;
 
     internalSelectedFile: MNodeStructureArchive[] = [];
 
+    openFolders: string[] = [];
+
     created(): void {
         this.selectedFile = this.externalSelectedFile;
+        this.openFolders = this.foldersToOpen(this.tree);
+        console.log(this.openFolders);
+    }
+
+    test(): void {
+        this.openFolders.shift();
     }
 
     selectNewFile(file: MNodeStructureArchive): void {
@@ -61,6 +68,21 @@ export class MRootTree extends ModulVue {
 
     get selectedFile(): MNodeStructureArchive[] {
         return this.internalSelectedFile;
+    }
+
+    private foldersToOpen(files: MNodeStructureArchive[]): string[] {
+        let folders: string[] = [];
+        files.forEach((file: MNodeStructureArchive) => {
+            if (!file.idFile && this.selectedFile[0].relativePath.indexOf(file.relativePath) !== -1) {
+                folders.push(file.relativePath);
+                let recursiveFoldersToOpen: string[] = this.foldersToOpen(file.childs);
+                recursiveFoldersToOpen.forEach((relativePath: string) => {
+                    folders.push(relativePath);
+                });
+            }
+        });
+
+        return folders;
     }
 
 }

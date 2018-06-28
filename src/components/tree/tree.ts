@@ -9,6 +9,9 @@ import IconPlugin from '../icon/icon';
 import { MNodeStructureArchive } from '../root-tree/root-tree';
 import WithRender from './tree.html?style=./tree.scss';
 
+const FOLDER_OPEN: string = 'm-svg__file-odf';
+const FOLDER_CLOSED: string = 'm-svg__file-odb';
+
 @WithRender
 @Component
 export class MTree extends ModulVue {
@@ -22,7 +25,14 @@ export class MTree extends ModulVue {
     @Prop()
     icon: string;
 
-    internalSelectedFile: string = '';
+    @Prop()
+    openFolders: string[];
+
+    internalSelectedFile: MNodeStructureArchive[] = [];
+
+    created(): void {
+        // this.internalSelectedFile = this.externalSelectedFile;
+    }
 
     isAFolder(idFile: string): boolean {
         return !idFile;
@@ -39,6 +49,22 @@ export class MTree extends ModulVue {
 
     selectFile(file: MNodeStructureArchive): void {
         this.$emit('selectFile', file);
+    }
+
+    folderIcon($event): string {
+        return FOLDER_CLOSED;
+    }
+
+    isFolderOpen(relativePath: string): boolean | void {
+        console.log(relativePath);
+        if (relativePath === '/Dossier #1/Dossier #2') {
+            console.log(this.openFolders.indexOf(relativePath));
+        }
+        if (this.openFolders !== undefined && this.openFolders.length && this.openFolders.indexOf(relativePath) !== -1) {
+            // this.$emit('test');
+            // console.log(this.openFolders);
+            return true;
+        }
     }
 
     // @Watch('externalSelectedFile')

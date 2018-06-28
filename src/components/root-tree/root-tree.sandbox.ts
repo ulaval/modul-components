@@ -10,9 +10,9 @@ import WithRender from './root-tree.sandbox.html';
 export class MRootTreeSandbox extends Vue {
     public currentFile: MNodeStructureArchive[] = [
         {
-            fileName: 'Fichier #2-2',
-            idFile: 'b3',
-            relativePath: '/Dossier #1/4chemin-vers-le-fichier.xls',
+            fileName: 'Fichier #2-3-2-2',
+            idFile: 'b9',
+            relativePath: '/Dossier #1/Dossier #2/Dossier #3/10chemin-vers-le-fichier.doc',
             childs: []
         }
     ];
