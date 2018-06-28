@@ -2,10 +2,14 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { RICH_TEXT_EDITOR_NAME } from '../component-names';
+import MRichText from './rich-text';
+import MRichTextEdit from './rich-text-edit';
 import WithRender from './rich-text-editor.sandbox.html';
 
 @WithRender
-@Component
+@Component({
+    components: { MRichTextEdit, MRichText }
+})
 export class MRichTextEditorSandBox extends Vue {
     public model: string = '';
     public isReadOnly: boolean = true;

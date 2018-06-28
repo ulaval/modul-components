@@ -1,19 +1,16 @@
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
-import LicensePlugin from '../../utils/license/license';
 import { ModulVue } from '../../utils/vue/vue';
-import { RICH_TEXT_EDITOR_NAME } from './../component-names';
-import { MRichTextEditorRead } from './rich-text-editor-read';
-import WithRender from './rich-text-editor.html';
+import { froalaEditorFunctionality } from './adapter/vue-froala';
+import WithRender from './rich-text-edit.html';
 
-export interface RichTextPluginOptions {
-    key: string;
-}
-export interface MRichTextEditorOptions {}
+require('@fortawesome/fontawesome');
+require('@fortawesome/fontawesome-free-solid');
 
-const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
+require('froala-editor/js/froala_editor.pkgd.min');
+require('froala-editor/css/froala_editor.pkgd.min.css');
+require('froala-editor/js/languages/fr.js');
 
 class MRichTextEditorDefaultOptions {
     public immediateVueModelUpdate: boolean = true;
@@ -26,14 +23,15 @@ class MRichTextEditorDefaultOptions {
     }
 }
 
+class MRichTextEditorOptions {}
+
+const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
+
 @WithRender
 @Component({
-    components: {
-        MRichTextEditorRead,
-        MRichTextEditorWrite: () => import(/* webpackChunkName: "rich-text-editor-write" */ './rich-text-editor-write')
-    }
+    components: { Froala: froalaEditorFunctionality }
 })
-export class MRichTextEditor extends ModulVue {
+export class MRichTextEdit extends ModulVue {
     public tag: string = 'textarea';
     @Prop({ default: '' })
     public value: string;
@@ -55,14 +53,4 @@ export class MRichTextEditor extends ModulVue {
     }
 }
 
-export class RichTextEditorPlugin implements PluginObject<RichTextPluginOptions> {
-    install(v, options: RichTextPluginOptions): void {
-        v.use(LicensePlugin);
-        if (options.key) {
-            (v.prototype as ModulVue).$license.addLicense(RICH_TEXT_LICENSE_KEY, options.key);
-        }
-        v.component(RICH_TEXT_EDITOR_NAME, MRichTextEditor);
-    }
-}
-
-export default new RichTextEditorPlugin();
+export default MRichTextEdit;

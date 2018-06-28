@@ -5,13 +5,7 @@
         fonctionne sans options spécifiée
     </p>
     <p>
-        <m-rich-text-editor @input="test" v-model="model"></m-rich-text-editor>
-    </p>
-    <p>fonctionne avec toggle read-only</p>
-    <p>
-        <m-switch v-model="isReadOnly">
-            <span>read only?</span>
-        </m-switch>
-        <m-rich-text-editor @input="test" v-model="model" :read-only="isReadOnly"></m-rich-text-editor>
+        <m-rich-text-edit v-model="model"></m-rich-text-edit>
+        <m-rich-text :value="model"></m-rich-text>
     </p>
 </div>
