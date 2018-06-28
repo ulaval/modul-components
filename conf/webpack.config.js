@@ -20,7 +20,6 @@ module.exports = function (env) {
             path: resolve('dist'),
             publicPath: '/',
             filename: 'modul.js',
-            chunkFilename: '[name].[chunkhash].js'
         }
     } else {
         outputObj = {
@@ -158,15 +157,21 @@ module.exports = function (env) {
         );
     }
 
-    config.plugins.push(
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "vendor",
-            minChunks: ({ resource }) => /node_modules/.test(resource)
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "manifest"
-        })
-    );
+    if (!isLib) {
+        config.plugins.push(
+            new webpack.optimize.CommonsChunkPlugin({
+                name: "vendor",
+                minChunks: ({ resource }) => /node_modules/.test(resource)
+            }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: "manifest"
+            })
+        );
+    } else {
+        config.plugins.push(new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1 // We bundle everything in 1 chunk is isLib.  We need to explore this further (should we chunk the library as well?)
+        }));
+    }
 
     config.plugins.push(
         new BundleAnalyzerPlugin({

@@ -1,3 +1,5 @@
+// Thus code is ugly but it is an adaptation of https://github.com/froala/vue-froala-wysiwyg to get rid of the global $ (jquery) dependency.
+// We should get rid of this code when https://github.com/froala/vue-froala-wysiwyg/issues/50 is resolved.
 import $ from 'jquery';
 
 export default (Vue, Options = {}) => {
