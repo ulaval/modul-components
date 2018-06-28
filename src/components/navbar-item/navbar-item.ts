@@ -56,9 +56,6 @@ export class MNavbarItem extends ModulVue {
     }
 
     private setDimension(): void {
-        // let pt: number = parseFloat(window.getComputedStyle(this.$el).getPropertyValue('padding-top'));
-        // let pb: number = parseFloat(window.getComputedStyle(this.$el).getPropertyValue('padding-bottom'));
-
         let w: number = this.$el.clientWidth;
         let lineHeight: number = parseFloat(window.getComputedStyle(this.$el).getPropertyValue('line-height'));
         let h: number = this.$el.clientHeight;
@@ -75,6 +72,8 @@ export class MNavbarItem extends ModulVue {
                 lines = h / lineHeight;
 
             } while (lines > 2);
+            this.$emit('resize');
+            this.$log.log('resize');
         }
     }
 

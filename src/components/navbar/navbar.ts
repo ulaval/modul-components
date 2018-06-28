@@ -93,6 +93,10 @@ export class MNavbar extends BaseNavbar implements Navbar {
         this.setupScrolllH();
         this.as<ElementQueries>().$on('resize', this.setupScrolllH);
 
+        this.$children.forEach((child: Vue) => {
+            child.$on('resize', this.setupScrolllH);
+        });
+
         // delay the animation beyond initial load
         setTimeout(() => {
             this.animReady = true;
@@ -190,9 +194,9 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private scrollLeft(): void {
-        let conteneur: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft: number = conteneur.scrollWidth - conteneur.clientWidth;
-        let cLeft: number = conteneur.scrollLeft;
+        let container: HTMLElement = this.$refs.wrap as HTMLElement;
+        let maxScrollLeft: number = container.scrollWidth - container.clientWidth;
+        let cLeft: number = container.scrollLeft;
         let outbound: any;
 
         let navbarItems: Vue[] = this.$children.filter(element => {
@@ -214,26 +218,25 @@ export class MNavbar extends BaseNavbar implements Navbar {
         });
 
         if (outbound) {
-            outbound.$el.classList.add('test2');
-            conteneur.scrollLeft = outbound.$el.offsetLeft;
+            container.scrollLeft = outbound.$el.offsetLeft;
         }
 
         let ml: number = parseInt(window.getComputedStyle(firstElement).marginLeft as string, 10);
-        if (conteneur.scrollLeft <= ml) {
+        if (container.scrollLeft <= ml) {
             this.showArrowLeft = false;
         }
 
         let mr: number = parseInt(window.getComputedStyle(lastElement).marginRight as string, 10);
-        if (conteneur.scrollLeft < maxScrollLeft - mr) {
+        if (container.scrollLeft < maxScrollLeft - mr) {
             this.showArrowRight = true;
         }
 
     }
 
     private scrollRight(): void {
-        let conteneur: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft: number = conteneur.scrollWidth - conteneur.clientWidth;
-        let cRight: number = conteneur.scrollLeft + conteneur.clientWidth;
+        let container: HTMLElement = this.$refs.wrap as HTMLElement;
+        let maxScrollLeft: number = container.scrollWidth - container.clientWidth;
+        let cRight: number = container.scrollLeft + container.clientWidth;
 
         let navbarItems: Vue[] = this.$children.filter(element => {
             return element.$el.classList.contains(CSSNAVBARITEM);
@@ -244,24 +247,30 @@ export class MNavbar extends BaseNavbar implements Navbar {
         // find last item
         let lastElement: HTMLElement = navbarItems[navbarItems.length - 1].$el;
         // find the next element outside visible area
-        let outbound: Vue | undefined = navbarItems.find(element => (element.$el.offsetLeft + element.$el.clientWidth) > cRight);
+        let outbound: Vue | undefined = navbarItems.find(element => element.$el.offsetLeft + element.$el.clientWidth > cRight);
 
         if (outbound) {
             let ml: number = parseInt(window.getComputedStyle(outbound.$el).marginLeft as string, 10);
             let previousElement: HTMLElement | null = outbound.$el.previousElementSibling as HTMLElement;
-            let mrPrevious: number = parseInt(window.getComputedStyle(previousElement).marginRight as string, 10);
+            let mr: number = parseInt(window.getComputedStyle(previousElement).marginRight as string, 10);
 
-            let margins: number = ml + mrPrevious;
-            conteneur.scrollLeft += outbound.$el.clientWidth;
+            // get margins values
+            let margins: number = ml + mr;
+
+            // get the threshold of visible part of the element
+            let threshold: number = cRight - outbound.$el.offsetLeft;
+
+            // move the container scroll
+            container.scrollLeft += (outbound.$el.clientWidth + margins) - threshold;
         }
 
         let ml: number = parseInt(window.getComputedStyle(firstElement).marginLeft as string, 10);
-        if (conteneur.scrollLeft > ml) {
+        if (container.scrollLeft > ml) {
             this.showArrowLeft = true;
         }
 
         let mr: number = parseInt(window.getComputedStyle(lastElement).marginRight as string, 10);
-        if (conteneur.scrollLeft >= maxScrollLeft - mr) {
+        if (container.scrollLeft >= maxScrollLeft - mr) {
             this.showArrowRight = false;
         }
 
