@@ -1,6 +1,6 @@
 <div class="m-tree">
     <div v-for="file in tree">
-        <m-accordion v-if="isAFolder(file.idFile)" ref="test" skin="plain" class="m-tree__with-childs" :open="isFolderOpen(file.relativePath)">
+        <m-accordion v-if="isAFolder(file.idFile)" ref="test" skin="plain" class="m-tree__with-childs" :open="isFolderOpen(file.relativePath)" :disabled="isEmpty(file)">
             <div slot="header">
                 <m-icon ref="accordionIcon" size="20px" :name="folderIcon()"></m-icon>
                 <span :class="{'m-tree__with-childs__selected': isFileSelected(file)}">{{ file.fileName }}</span>

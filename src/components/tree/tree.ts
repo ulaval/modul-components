@@ -32,6 +32,10 @@ export class MTree extends ModulVue {
         return !idFile;
     }
 
+    isEmpty(file: MNodeStructureArchive): boolean {
+        return !file.childs.length;
+    }
+
     extensionFile(filename: string = ''): string {
         let extension: string = filename.split('.').pop() as string;
         return '.' + extension;
@@ -50,7 +54,7 @@ export class MTree extends ModulVue {
     }
 
     isFolderOpen(relativePath: string): boolean | void {
-        if (this.openFolders !== undefined && this.openFolders.length && this.openFolders.indexOf(relativePath) !== -1) {
+        if (this.openFolders.length && this.openFolders.indexOf(relativePath) !== -1) {
             return true;
         }
     }
