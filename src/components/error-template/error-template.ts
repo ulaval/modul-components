@@ -10,13 +10,24 @@ import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './error-template.html?style=./error-template.scss';
 
+/**
+ * Utility class to manage the properties relatied to the link displayed in the error pages.
+ */
 export class Link {
     public label: string;
     public url: string;
+    public external: boolean;
 
-    constructor(label: string, url: string) {
+    /**
+     * Constructor
+     * @param label Label for the url link to display.
+     * @param url Target for the location to navigate to, can be relative.
+     * @param external Defines to the target is external (opens in new tab), or internal (opens in same tab) to the application.
+     */
+    constructor(label: string, url: string, external: boolean = false) {
         this.label = label;
         this.url = url;
+        this.external = external;
     }
 }
 
@@ -47,6 +58,9 @@ export class MErrorTemplate extends ModulVue {
     @Prop()
     public links?: Link[];
 
+    isTargetExternal(isExternal: boolean): string {
+        return isExternal ? '_blank' : '' ;
+    }
 }
 
 const ErrorTemplatePlugin: PluginObject<any> = {

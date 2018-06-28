@@ -10,6 +10,6 @@
         <slot></slot>
     </div>
     <div ref="link" class="m-error-template__links" v-for="link in links">
-        <m-link mode="link" :url="link.url" target="_blank" >{{link.label}}</m-link>
+        <m-link mode="link" :url="link.url" :target="link.external" >{{link.label}}</m-link>
     </div>
 </div>

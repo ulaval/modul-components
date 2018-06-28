@@ -2,10 +2,9 @@ import { shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import { ERROR_TEMPLATE_NAME } from '../component-names';
-import { Link } from '../error-template/error-template';
-import { MErrorPageNotFound } from './error-page-not-found';
+import { MErrorBrowserNotSupported } from './error-browser-not-supported';
 
-let wrapper: Wrapper<MErrorPageNotFound>;
+let wrapper: Wrapper<MErrorBrowserNotSupported>;
 
 const getStubs: any = () => {
     return {
@@ -16,7 +15,7 @@ const getStubs: any = () => {
 describe(`Page not found - test`, () => {
     describe(`Given default values`, () => {
         it(`Should render with default values`, async () => {
-            wrapper = shallow(MErrorPageNotFound, { stubs: getStubs() });
+            wrapper = shallow(MErrorBrowserNotSupported, { stubs: getStubs() });
 
             await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
@@ -25,18 +24,22 @@ describe(`Page not found - test`, () => {
         it(`Should render with custom values provided`, async () => {
             const A_CUSTOM_TITLE: string = 'An error title.';
             const A_HINT: string = 'aHint';
-            const A_LINK: Link = new Link('aLabel', 'anUrl');
 
-            wrapper = shallow(MErrorPageNotFound, {
+            wrapper = shallow(MErrorBrowserNotSupported, {
                 stubs: getStubs(),
                 propsData: {
                     title: A_CUSTOM_TITLE,
-                    hints: [A_HINT],
-                    links: [A_LINK]
+                    hints: [A_HINT]
                 }
             });
 
             await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+    });
+    describe(`Mode mobile`, () => {
+        xit(``, async () => {
+
+            // ajouter tests
         });
     });
 });

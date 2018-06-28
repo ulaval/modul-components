@@ -5,7 +5,7 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
-import { ERROR_TECHNICAL_DIFFICULTY } from '../component-names';
+import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
 import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
@@ -24,7 +24,7 @@ export class MErrorTechnicalDifficulty extends ModulVue {
 
     @Prop({
         default: () => [
-            new Link((Vue.prototype as any).$i18n.translate('m-error-technical-difficulty:help'), 'https://www.ene.ulaval.ca/contactez-nous?systeme_en_cours=81'),
+            new Link((Vue.prototype as any).$i18n.translate('m-error-technical-difficulty:help'), 'https://www.ene.ulaval.ca/contactez-nous?systeme_en_cours=81', true),
             new Link((Vue.prototype as any).$i18n.translate('m-error-technical-difficulty:home-label'), '\\')]
     })
     public links: Link[];
@@ -66,6 +66,9 @@ export class MErrorTechnicalDifficulty extends ModulVue {
         return window.navigator.userAgent;
     }
 
+    /**
+     * Using the value of the props errorDate, generates an array with two values, the date in YYYY-MM-DD format and the time in HH:mm:ss format.
+     */
     get dateInfo(): string[] {
         let result: string[] = [];
         if (this.errorDate) {
@@ -74,6 +77,9 @@ export class MErrorTechnicalDifficulty extends ModulVue {
         return result;
     }
 
+    /**
+     * Defines if the stack trace is to be displayed based on the showStrackTrace prop and the presence of the attribute stack in the error.
+     */
     get propStacktrace(): boolean {
         return this.showStackTrace && !!this.error && !!this.error.stack;
     }
@@ -81,14 +87,14 @@ export class MErrorTechnicalDifficulty extends ModulVue {
 
 const ErrorTechnicalDifficultyPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(ERROR_TECHNICAL_DIFFICULTY, 'plugin.install');
+        v.prototype.$log.debug(ERROR_TECHNICAL_DIFFICULTY_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);
         v.use(MessagePlugin);
         v.use(PanelPlugin);
         v.use(ErrorTemplatePlugin);
-        v.component(ERROR_TECHNICAL_DIFFICULTY, MErrorTechnicalDifficulty);
+        v.component(ERROR_TECHNICAL_DIFFICULTY_NAME, MErrorTechnicalDifficulty);
     }
 };
 

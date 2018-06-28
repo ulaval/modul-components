@@ -3,9 +3,9 @@ import { shallow, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
 import { ERROR_TEMPLATE_NAME } from '../component-names';
 import { Link } from '../error-template/error-template';
-import { MErrorPageNotFound } from './error-page-not-found';
+import { MErrorAccessDenied } from './error-access-denied';
 
-let wrapper: Wrapper<MErrorPageNotFound>;
+let wrapper: Wrapper<MErrorAccessDenied>;
 
 const getStubs: any = () => {
     return {
@@ -16,7 +16,7 @@ const getStubs: any = () => {
 describe(`Page not found - test`, () => {
     describe(`Given default values`, () => {
         it(`Should render with default values`, async () => {
-            wrapper = shallow(MErrorPageNotFound, { stubs: getStubs() });
+            wrapper = shallow(MErrorAccessDenied, { stubs: getStubs() });
 
             await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
@@ -27,7 +27,7 @@ describe(`Page not found - test`, () => {
             const A_HINT: string = 'aHint';
             const A_LINK: Link = new Link('aLabel', 'anUrl');
 
-            wrapper = shallow(MErrorPageNotFound, {
+            wrapper = shallow(MErrorAccessDenied, {
                 stubs: getStubs(),
                 propsData: {
                     title: A_CUSTOM_TITLE,
