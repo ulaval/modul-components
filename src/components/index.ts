@@ -71,9 +71,7 @@ export interface ComponentPluginOptions {
 }
 
 const ComponentsPlugin: PluginObject<any> = {
-    install(v, options: ComponentPluginOptions): void {
-        options = options || {};
-
+    install(v, options: ComponentPluginOptions = {}): void {
         if (!v.prototype.$log) {
             Vue.use(LoggerPlugin);
         }
@@ -122,11 +120,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RadioPlugin);
         Vue.use(RadioGroupPlugin);
         Vue.use(RadioStylePlugin);
-
-        if (options) {
-            Vue.use(RichTextEditorPlugin, { key: options.richTextOptions ? options.richTextOptions.key : undefined });
-        }
-
+        Vue.use(RichTextEditorPlugin, { key: options.richTextOptions ? options.richTextOptions.key : undefined });
         Vue.use(ScrollTopPlugin);
         Vue.use(SessionExpiredPlugin);
         Vue.use(SidebarPlugin);

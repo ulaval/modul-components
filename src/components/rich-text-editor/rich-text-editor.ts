@@ -19,7 +19,7 @@ class MRichTextEditorDefaultOptions {
     public immediateVueModelUpdate: boolean = true;
     public iconsTemplate: string = 'font_awesome_5';
 
-    constructor(public key: string) {
+    constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {
             throw new Error('In order to use the rich-text-editor you need to provide a valid froala key.');
         }
@@ -43,7 +43,7 @@ export class MRichTextEditor extends ModulVue {
     public options: MRichTextEditorOptions | undefined;
 
     protected get internalOptions(): any {
-        return Object.assign(new MRichTextEditorDefaultOptions(this.froalaLicenseKey), this.options);
+        return Object.assign(new MRichTextEditorDefaultOptions(this.froalaLicenseKey, this.$i18n.currentLang()), this.options);
     }
 
     protected get froalaLicenseKey(): string {
