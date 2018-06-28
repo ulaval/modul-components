@@ -1,5 +1,6 @@
-// This code is ugly but it is an adaptation of https://github.com/froala/vue-froala-wysiwyg to get rid of the global $ (jquery) dependency.
-// We should get rid of this code when https://github.com/froala/vue-froala-wysiwyg/issues/50 is resolved.
+// Origin source can be found at https://github.com/froala/vue-froala-wysiwyg
+// This code is a quick fix to remove the global usage of $ / jQuery in vueFroala while we're awaiting answers from the codeowners of the repo.
+// Once we have ours answers, a PR adressing the issue should be provided.
 import $ from 'jquery';
 
 export const froalaEditorFunctionality: any = {
