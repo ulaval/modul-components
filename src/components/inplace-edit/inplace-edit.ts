@@ -59,7 +59,7 @@ export class MInplaceEdit extends ModulVue {
         }
     }
 
-    get Padding(): string {
+    get propPadding(): string {
         if (!this.propEditMode && this.padding) {
             return 'padding:' + this.padding;
         } else if (this.propEditMode && this.editModePadding) {
