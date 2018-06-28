@@ -2,8 +2,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const path = require('path');
-const webpack = require('webpack');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -19,14 +17,13 @@ module.exports = function (env) {
             libraryTarget: 'umd',
             path: resolve('dist'),
             publicPath: '/',
-            filename: 'modul.js',
+            filename: 'modul.js'
         }
     } else {
         outputObj = {
             path: resolve('dist'),
             publicPath: '/',
-            filename: '[name].[chunkhash].js',
-            chunkFilename: '[name].[chunkhash].js'
+            filename: 'app.js'
         }
     }
 
@@ -144,41 +141,16 @@ module.exports = function (env) {
                 /moment[\/\\]locale$/,
                 /en-ca|fr-ca/
             )
-        ],
+        ]
     }
 
     if (!isLib) {
-        config.plugins.push(
-            new HtmlWebpackPlugin({
-                filename: 'index.html',
-                template: resolve('tests/app/index.html'),
-                inject: 'body'
-            })
-        );
-    }
-
-    if (!isLib) {
-        config.plugins.push(
-            new webpack.optimize.CommonsChunkPlugin({
-                name: "vendor",
-                minChunks: ({ resource }) => /node_modules/.test(resource)
-            }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: "manifest"
-            })
-        );
-    } else {
-        config.plugins.push(new webpack.optimize.LimitChunkCountPlugin({
-            maxChunks: 1 // We bundle everything in 1 chunk is isLib.  We need to explore this further (should we chunk the library as well?)
+        config.plugins.push(new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: resolve('tests/app/index.html'),
+            inject: 'body'
         }));
     }
-
-    config.plugins.push(
-        new BundleAnalyzerPlugin({
-            analyzerMode: 'disable',
-            generateStatsFile: true
-        })
-    );
 
     return config;
 }

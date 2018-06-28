@@ -20,7 +20,7 @@ const utilsPluginOptions: UtilsPluginOptions = {
 };
 
 Vue.use(UtilsPlugin, utilsPluginOptions);
-Vue.use(ComponentsPlugin, { richTextOptions: { key: 'test' } });
+Vue.use(ComponentsPlugin, { richTextOptions: { key: 'test' } }); // TODO : Remove this.
 Vue.use(DirectivesPlugin);
 Vue.use(FiltersPlugin);
 
