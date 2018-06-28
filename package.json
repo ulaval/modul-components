@@ -26,7 +26,8 @@
         "tslint-ci": "tslint  -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -t junit -o reports/junit/js-lint-results.xml 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
         "stylelint": "stylelint \"src/**/*.css\" \"src/**/*.scss\" --config conf/stylelint.json",
         "prepack": "npm run clean && npm run build && npm run buildlib",
-        "component": "node ./tests/meta/component-generator"
+        "component": "node ./tests/meta/component-generator",
+        "stats": "rimraf dist && npm run buildWebpack && webpack-bundle-analyzer dist/stats.json"
     },
     "jest": {
         "roots": [
@@ -72,6 +73,7 @@
         "css-element-queries": "^0.4.0",
         "css-loader": "^0.28.7",
         "enquire.js": "^2.1.6",
+        "froala-editor": "^2.8.4",
         "jquery": "^3.3.1",
         "mobile-drag-drop": "^2.3.0-rc.1",
         "moment": "^2.19.3",
@@ -85,7 +87,8 @@
         "vue-class-component": "^6.1.1",
         "vue-property-decorator": "^6.0.0",
         "vue-template-compiler": "^2.5.9",
-        "vue-template-loader": "^0.3.1"
+        "vue-template-loader": "^0.3.1",
+        "webpack-bundle-analyzer": "^2.13.1"
     },
     "peerDependencies": {
         "file-loader": "^1.1.5",

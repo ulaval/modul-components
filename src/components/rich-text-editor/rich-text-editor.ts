@@ -55,7 +55,7 @@ export class MRichTextEditor extends ModulVue {
     }
 }
 
-class RichTextEditorPlugin implements PluginObject<RichTextPluginOptions> {
+export class RichTextEditorPlugin implements PluginObject<RichTextPluginOptions> {
     install(v, options: RichTextPluginOptions): void {
         v.use(LicensePlugin);
         if (options.key) {

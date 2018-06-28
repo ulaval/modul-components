@@ -3,6 +3,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 const path = require('path');
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -25,7 +26,7 @@ module.exports = function (env) {
         outputObj = {
             path: resolve('dist'),
             publicPath: '/',
-            filename: 'app.js',
+            filename: '[name].[chunkhash].js',
             chunkFilename: '[name].[chunkhash].js'
         }
     }
@@ -156,6 +157,23 @@ module.exports = function (env) {
             })
         );
     }
+
+    config.plugins.push(
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            minChunks: ({ resource }) => /node_modules/.test(resource)
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "manifest"
+        })
+    );
+
+    config.plugins.push(
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'disable',
+            generateStatsFile: true
+        })
+    );
 
     return config;
 }
