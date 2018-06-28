@@ -13,6 +13,10 @@ export class ScrollTo {
         return this.intertnalStartScroll(element, 0, duration);
     }
 
+    public scrollToBottom(element: HTMLElement, duration: string = ScrollToDuration.Regular): CancelableScrollTo {
+        return this.intertnalStartScroll(element, element.offsetHeight, duration);
+    }
+
     public startScroll(
         element: HTMLElement = document.body,
         target: number = 0,

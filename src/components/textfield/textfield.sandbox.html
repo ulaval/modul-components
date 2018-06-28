@@ -1,9 +1,34 @@
 <div>
+    <h3>Test 1 : input type</h3>
+    <p class="m-u--margin-bottom">
+        Le clavier sur mobile doit s'ajuster en fonction du type défini sur le textfield.
+    </p>
+        <h6>Type text</h6>
+        <p>
+            <m-textfield label="Titre" type="text"></m-textfield>
+        </p>
+        <h6>Type password</h6>
+        <p>
+            <m-textfield label="Mot de passe" type="password" password-icon="true"></m-textfield>
+        </p>
+        <h6>Type courriel</h6>
+        <p>
+            <m-textfield label="Adresse de courriel" type="mail"></m-textfield>
+        </p>
+        <h6>Type url</h6>
+        <p>
+            <m-textfield label="URL" type="url"></m-textfield>
+        </p>
+        <h6>Type téléphone</h6>
+        <p>
+            <m-textfield label="Téléphone" type="phone"></m-textfield>
+        </p>
+
     <h3>
-        Compteur de caractères
+        Test 2 : Compteur de caractères
     </h3>
     <h4>
-        Test 1 : Dépassement autorisé
+        Dépassement autorisé
     </h4>
     <ul>
         <li>Nombre de caractères permis : 20</li>
@@ -20,7 +45,7 @@
     </m-textfield>
 
     <h4>
-        Test 2 : Seuil d'affichage
+        Seuil d'affichage
     </h4>
     <ul>
         <li>Nombre de caractères permis : 30</li>
@@ -50,7 +75,7 @@
     </m-textfield>
 
     <h4>
-        Test 3 : Affichage d'un message d'erreur
+        Affichage d'un message d'erreur
     </h4>
     <ul>
         <li>Nombre de caractères permis : 20</li>
@@ -63,7 +88,7 @@
     </m-textfield>
 
     <h4>
-        Test 4 : sous-titre dans un module d'aprentissage (Prisme)
+        Sous-titre dans un module d'aprentissage (Prisme)
     </h4>
     <ul>
         <li>Nombre de caractères permis : 200</li>
@@ -76,7 +101,7 @@
         :length-overflow="true" v-model="test4Model" :error="test4Model.length > 200 ? true : false">
     </m-textfield>
 
-    <h3>Test 5 : Ne pas afficher un compteur sur un champ de saisie sans limite de caractères</h3>
+    <h4>Ne pas afficher un compteur sur un champ de saisie sans limite de caractères</h4>
     <p class="m-u--margin-bottom">
         Lorsque qu'on ajoute un compteur sur un champ sans limite de caractère, le compteur doit être masqué. Nous n'avons pas de cas d'utilisation de compteur de mots sans imposer de limite.
     </p>
@@ -85,15 +110,31 @@
         </m-textfield>
     </p>
 
+    <h3>Test 3 : Retour à la ligne automatique (word-wrap)</h3>
+    <p>
+        Le texte qui "dépasse" du champ de saisi doit revenir à la ligne automatiquement lorsque la ropriété word-wrap est activée (plutôt que de cacher le texte en surplus).
+        <br>From <a href="https://github.com/ulaval/modul-components/pull/260" target="blank">PR-260</a>
+    </p>
+    <h6>Champ de saisie de type text et word-wrap à true</h6>
+    <p>Le wordwrap est bien appliqué car le textfield est de type text.</p>
+    <p>
+        <m-textfield word-wrap="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
+    </p>
+
+    <h6>Champ de saisie de type courriel et word-wrap à true</h6>
+    <p>Le wordwrap n'est pas appliqué car le textfield n'est pas de type text. Envoie également une erreur dans la console.</p>
+    <p class="m-u--margin-top--l">
+        <m-textfield type="email" word-wrap="true" value="Lorsque le type du champ de saisie est différent de text, ici courriel, le word-wrap ne doit pas s'activer."></m-textfield>
+    </p>
     <h3>
         Test 5: Password
     </h3>
     <br/>
-    <m-textfield type="password" label="Password" placeholder="enter your password"></m-textfield>
+    <m-textfield type="password" label="Password" placeholder="Enter your password"></m-textfield>
 
 
     <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>Test # : Title</h3>
     <p class="m-u--margin-bottom">
         Test description
         <!-- if relevant, add link to PR
@@ -105,5 +146,4 @@
             <!-- Test case -->
         </m-textfield>
     </p>
-
 </div>
