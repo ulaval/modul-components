@@ -43,7 +43,7 @@ const components: string[] = [
     Components.PROGRESS_NAME,
     Components.POPUP_NAME,
     Components.RADIO_NAME,
-    Components.RICH_TEXT_EDITOR_NAME,
+    Components.RICH_TEXT,
     Components.RADIO_GROUP_NAME,
     Components.RADIO_STYLE_NAME,
     Components.SCROLL_TOP_NAME,

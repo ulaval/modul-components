@@ -23,7 +23,7 @@ class MRichTextEditorDefaultOptions {
     }
 }
 
-class MRichTextEditorOptions {}
+export class MRichTextEditorOptions {}
 
 const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
