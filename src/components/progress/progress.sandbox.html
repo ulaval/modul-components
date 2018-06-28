@@ -1,13 +1,63 @@
 <div>
     <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+    <h3>Progress Bar 50%</h3>
+    <p class="m-u--margin-bottom">Progress bar at 50%, all props default</p>
+    <p>
+        <m-progress value="50"></m-progress>
+    </p>
+    <h3>Progress Bar indeterminate mode</h3>
+    <p class="m-u--margin-bottom">Progress in indeterminate mode</p>
+    <p>
+        <m-progress :indeterminate="true"></m-progress>
+    </p>
+    <h3>Progress Bar 50%, 10px size</h3>
+    <p class="m-u--margin-bottom">Progress bar at 50%, with 10px height</p>
+    <p>
+        <m-progress size="10" value="50"></m-progress>
+    </p>
+    <h3>Progress Bar 50%, no border radius</h3>
+    <p class="m-u--margin-bottom">Progress bar at 50%, no border radius</p>
+    <p>
+        <m-progress value="50" :border-radius="false"></m-progress>
+    </p>
+    <h3>Progress Bar in circle mode</h3>
+    <p class="m-u--margin-bottom">Progress bar in circle mode</p>
+    <p>
+        <m-progress :circle="true" value="50"></m-progress>
+    </p>
+    <h3>Progress Bar in circle mode, indeterminate</h3>
+    <p class="m-u--margin-bottom">Progress bar in circle mode and indeterminate mode </p>
+    <p>
+        <m-progress :circle="true" :indeterminate="true"></m-progress>
+    </p>
+    <h3>Progress Bar in circle mode, stroke 10px</h3>
+    <p class="m-u--margin-bottom">Progress bar in circle mode, stroke of 10px</p>
+    <p>
+        <m-progress :circle="true" value="50" stroke="10"></m-progress>
+    </p>
+    <h3>Progress Bar in circle mode, diameter 100px</h3>
+    <p class="m-u--margin-bottom">Progress bar in circle mode, diameter of 100px</p>
+    <p>
+        <m-progress :circle="true" value="50" diameter="100"></m-progress>
+    </p>
+    <h3>Progress Bar states</h3>
+    <p class="m-u--margin-bottom">Progress bar in normal mode and circle mode, each state</p>
+    <p>
+        <m-progress value="50" state="completed"></m-progress>
     </p>
     <p>
-        <m-progress><!-- Test case --></m-progress>
+        <m-progress value="50" state="in-progress"></m-progress>
+    </p>
+    <p>
+        <m-progress value="50" state="error"></m-progress>
+    </p>
+    <p>
+        <m-progress value="50" state="completed" :circle="true"></m-progress>
+    </p>
+    <p>
+        <m-progress value="50" state="in-progress" :circle="true"></m-progress>
+    </p>
+    <p>
+        <m-progress value="50" state="error" :circle="true"></m-progress>
     </p>
 </div>
