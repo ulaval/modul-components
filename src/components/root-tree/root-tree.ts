@@ -4,6 +4,7 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { ROOT_TREE_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
 import TreePlugin from '../tree/tree';
 import WithRender from './root-tree.html';
 
@@ -42,15 +43,17 @@ export class MRootTree extends ModulVue {
     @Prop()
     externalSelectedFile: MNodeStructureArchive[];
 
-    initialiseFolders: boolean = true;
-
     internalSelectedFile: MNodeStructureArchive[] = [];
-
     openFolders: string[] = [];
+    emptyTreeTxt: string = this.$i18n.translate('m-root-tree:empty');
 
     created(): void {
         this.selectedFile = this.externalSelectedFile;
         this.openFolders = this.foldersToOpen(this.tree);
+    }
+
+    isTreeEmpty(): boolean {
+        return !this.tree.length;
     }
 
     selectNewFile(file: MNodeStructureArchive): void {
@@ -86,6 +89,7 @@ const RootTreePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(ROOT_TREE_NAME, 'plugin.install');
         v.use(TreePlugin);
+        v.use(I18nPlugin);
         v.component(ROOT_TREE_NAME, MRootTree);
     }
 };
