@@ -51,11 +51,6 @@ export class MRootTree extends ModulVue {
     created(): void {
         this.selectedFile = this.externalSelectedFile;
         this.openFolders = this.foldersToOpen(this.tree);
-        console.log(this.openFolders);
-    }
-
-    test(): void {
-        this.openFolders.shift();
     }
 
     selectNewFile(file: MNodeStructureArchive): void {

@@ -28,12 +28,6 @@ export class MTree extends ModulVue {
     @Prop()
     openFolders: string[];
 
-    internalSelectedFile: MNodeStructureArchive[] = [];
-
-    created(): void {
-        // this.internalSelectedFile = this.externalSelectedFile;
-    }
-
     isAFolder(idFile: string): boolean {
         return !idFile;
     }
@@ -51,47 +45,15 @@ export class MTree extends ModulVue {
         this.$emit('selectFile', file);
     }
 
-    folderIcon($event): string {
+    folderIcon(): string {
         return FOLDER_CLOSED;
     }
 
     isFolderOpen(relativePath: string): boolean | void {
-        console.log(relativePath);
-        if (relativePath === '/Dossier #1/Dossier #2') {
-            console.log(this.openFolders.indexOf(relativePath));
-        }
         if (this.openFolders !== undefined && this.openFolders.length && this.openFolders.indexOf(relativePath) !== -1) {
-            // this.$emit('test');
-            // console.log(this.openFolders);
             return true;
         }
     }
-
-    // @Watch('externalSelectedFile')
-    // test(): void {
-    //     console.log(this.externalSelectedFile);
-    // }
-
-    // isFolderOpen(relativePath: string): boolean {
-    //     if (this.currentSelectedFile.indexOf(relativePath) === -1) {
-    //         return true;
-    //     }
-    //     return true;
-    // }
-
-    // get currentSelectedFile(): string {
-    //     return this.internalSelectedFile;
-    // }
-
-    // set currentSelectedFile(relativePath: string) {
-    //     this.internalSelectedFile = relativePath;
-    //     this.$emit('update:externalSelectedFile', this.internalSelectedFile);
-    // }
-
-    // @Watch('externalSelectedFile')
-    // initializeSelectedFile(): void {
-    //     this.currentSelectedFile = this.externalSelectedFile;
-    // }
 
 }
 
