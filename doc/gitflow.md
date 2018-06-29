@@ -32,7 +32,7 @@ npm publish
 
 ### Merge back the release branch into develop (pull request needed)
 
-### Post publish stuff
+### Post-publishing stuff
 - Close Github milestone and open a new one
 - Release Jira version, ensure all tickets are closed, open a new version
 - Publish release notes if needed
