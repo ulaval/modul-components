@@ -2,4 +2,4 @@
 
 exports[`MNavbarItem should render correctly 1`] = `<li role="menuitem" class="m-navbar-item"><span tabindex="0" class="m-navbar-item__contents">navbar item content</span></li>`;
 
-exports[`MNavbarItem should render correctly when disabled 1`] = `<li role="menuitem" class="m-navbar-item m--is-disabled"><span tabindex="0" class="m-navbar-item__contents">navbar item content</span></li>`;
+exports[`MNavbarItem should render correctly when disabled 1`] = `<li role="menuitem" class="m-navbar-item m--is-disabled"><span tabindex="-1" class="m-navbar-item__contents">navbar item content</span></li>`;
