@@ -40,11 +40,11 @@ export class MLimitText extends ModulVue {
         this.originalContent = this.$refs.originalText['innerHTML'];
         this.el = this.$refs.originalText as HTMLElement;
         this.el.style.whiteSpace = 'nowrap';
-        for (let i: number = 0; i < this.el.children.length; i++) {
+        for (let i: number = 1; i < this.el.children.length; i++) {
             (this.el.children[i] as HTMLElement).style.display = 'none';
         }
         this.initLineHeigh = this.el.clientHeight;
-        for (let i: number = 0; i < this.el.children.length; i++) {
+        for (let i: number = 1; i < this.el.children.length; i++) {
             (this.el.children[i] as HTMLElement).style.display = 'block';
         }
         this.el.style.whiteSpace = 'normal';
