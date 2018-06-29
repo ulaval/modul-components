@@ -113,6 +113,10 @@
         }
     }
 
+    &.m--is-skin-soft {
+        background: rgba($m-color--white, 0.2);
+    }
+
     &.m--is-skin-arrow {
         &::before {
             position: absolute;

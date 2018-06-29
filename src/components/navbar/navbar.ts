@@ -17,6 +17,7 @@ export enum MNavbarSkin {
     Dark = 'dark',
     Tab = 'tab',
     Plain = 'plain',
+    Soft = 'soft',
     Simple = 'simple',
     Arrow = 'arrow'
 }
@@ -43,6 +44,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
             value === MNavbarSkin.Dark ||
             value === MNavbarSkin.Tab ||
             value === MNavbarSkin.Plain ||
+            value === MNavbarSkin.Soft ||
             value === MNavbarSkin.Simple ||
             value === MNavbarSkin.Arrow
     })
@@ -184,15 +186,15 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private get buttonSkin(): string {
-        return this.skin === 'dark' ? 'dark' : 'light';
+        return this.skin === MNavbarSkin.Dark ? MNavbarSkin.Dark : MNavbarSkin.Light;
     }
 
     private get isLightSkin(): boolean {
-        return this.skin === 'light';
+        return this.skin === MNavbarSkin.Light;
     }
 
     private get isArrowSkin(): boolean {
-        return this.skin === 'arrow';
+        return this.skin === MNavbarSkin.Arrow;
     }
 
     private scrollLeft(): void {
