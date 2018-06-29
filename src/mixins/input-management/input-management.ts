@@ -46,7 +46,8 @@ export class InputManagement extends ModulVue
     private internalIsFocus: boolean = false;
 
     private beforeMount(): void {
-        this.model = this.value ? this.value : '';
+        // Don't use this.model because we don't want to emit 'input' when the component isn't Mount
+        this.internalValue = this.getTrimValue(this.value ? this.value : '');
     }
 
     private mounted(): void {
@@ -109,14 +110,18 @@ export class InputManagement extends ModulVue
         this.$emit('paste', event);
     }
 
+    private getTrimValue(value: string): string {
+        return /\n/g.test(value) && this.trimWordWrap ? value.replace(/\n/g, '') : value;
+    }
+
     @Watch('value')
     private onValueChange(value: string): void {
         this.model = value;
     }
 
     private set model(value: string) {
-        this.internalValue = /\n/g.test(value) && this.trimWordWrap ? value.replace(/\n/g, '') : value;
-        this.$emit('input', value);
+        this.internalValue = this.getTrimValue(value);
+        this.$emit('input', this.internalValue);
     }
 
     private get model(): string {
