@@ -8,8 +8,6 @@ import LimitTextPlugin, { MLimitText } from './limit-text';
 
 let limitText: MLimitText;
 
-// jest.mock('../../mixins/media-queries/media-queries');
-
 describe('limit-text', () => {
     let localVue: VueConstructor<Vue>;
     let wrapper: Wrapper<MLimitText>;
@@ -29,7 +27,7 @@ describe('limit-text', () => {
     });
 
     it('should render correctly', async () => {
-        await Vue.nextTick();
+        Vue.nextTick();
         return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
     });
 

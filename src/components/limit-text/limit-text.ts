@@ -40,11 +40,11 @@ export class MLimitText extends ModulVue {
         this.originalContent = this.$refs.originalText['innerHTML'];
         this.el = this.$refs.originalText as HTMLElement;
         this.el.style.whiteSpace = 'nowrap';
-        for (let i: number = 1; i < this.el.children.length; i++) {
+        for (let i: number = 0; i < this.el.children.length; i++) {
             (this.el.children[i] as HTMLElement).style.display = 'none';
         }
         this.initLineHeigh = this.el.clientHeight;
-        for (let i: number = 1; i < this.el.children.length; i++) {
+        for (let i: number = 0; i < this.el.children.length; i++) {
             (this.el.children[i] as HTMLElement).style.display = 'block';
         }
         this.el.style.whiteSpace = 'normal';
@@ -222,7 +222,7 @@ const LimitTextPlugin: PluginObject<any> = {
         v.prototype.$log.debug(LIMIT_TEXT_NAME + 'plugin.install');
         v.use(I18nPlugin);
         v.use(LinkPlugin);
-        v.use(MediaQueriesPlugin); // Ref ça
+        v.use(MediaQueriesPlugin);
         v.component(LIMIT_TEXT_NAME, MLimitText);
     }
 };
