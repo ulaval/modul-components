@@ -28,21 +28,14 @@ export class MTree extends ModulVue {
     @Prop()
     openFolders: string[];
 
-    isOpenInternal: boolean = false;
+    @Prop()
+    externalIsOpen: boolean;
 
-    mounted(): void {
-        if (this.openFolders.length && this.openFolders.indexOf(this.node.relativePath) !== -1) {
-            this.isOpen = true;
-        }
-    }
+    internalIsOpen: boolean = false;
+    internalFolderIcon: string = FOLDER_CLOSED;
 
-    get isOpen(): boolean {
-        return this.isOpenInternal;
-    }
-
-    set isOpen(open: boolean) {
-        this.isOpenInternal = open;
-        this.$emit('update:isOpenInternal', this.isOpen);
+    created(): void {
+        this.internalIsOpen = this.externalIsOpen;
     }
 
     isAFolder(idFile: string): boolean {
@@ -66,15 +59,35 @@ export class MTree extends ModulVue {
         this.$emit('selectFile', node);
     }
 
-    folderIcon(): string {
-        return FOLDER_CLOSED;
+
+    // isFolderOpen(relativePath: string): boolean | void {
+        //     if (this.openFolders.length && this.openFolders.indexOf(relativePath) !== -1) {
+            //         return true;
+            //     }
+            // }
+
+    manageFolderIcon(): void {
+        this.folderIcon = this.isOpen ? FOLDER_OPEN : FOLDER_CLOSED;
     }
 
-    isFolderOpen(relativePath: string): boolean | void {
-        if (this.openFolders.length && this.openFolders.indexOf(relativePath) !== -1) {
-            return true;
-        }
+    get folderIcon(): string {
+        return this.internalFolderIcon;
     }
+
+    set folderIcon(icon: string) {
+        this.internalFolderIcon = icon;
+    }
+
+    get isOpen(): boolean {
+        return this.internalIsOpen;
+    }
+
+    set isOpen(open: boolean) {
+        this.internalIsOpen = open;
+    }
+
+
+
 
 }
 

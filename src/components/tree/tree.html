@@ -1,8 +1,8 @@
 <div class="m-tree">
     <template v-if="isAFolder(node.idFile)">
-        <m-accordion v-if="isAFolder(node.idFile)" skin="plain" class="m-tree__with-childs" :disabled="isEmpty(node)">
+        <m-accordion v-if="isAFolder(node.idFile)" skin="plain" class="m-tree__with-childs" :disabled="isEmpty(node)" :open.sync="internalIsOpen" @click="manageFolderIcon()">
             <div slot="header">
-                <m-icon ref="accordionIcon" size="20px" :name="folderIcon()"></m-icon>
+                <m-icon ref="accordionIcon" size="20px" :name="folderIcon"></m-icon>
                 <span>{{ node.fileName }}</span>
             </div>
             <m-tree v-for="childs_node in node.childs" :node="childs_node" :openFolders="openFolders" :externalSelectedFile="externalSelectedFile" @selectFile="selectFile" class="m-tree__with-childs__childs"></m-tree>
