@@ -18,7 +18,9 @@ modul-components is following the [Git branching model](https://nvie.com/posts/a
 ```
 git checkout master
 
-git merge --no-ff <release-branch> // merge conflicts to resolve for version change
+git merge --no-ff <release-branch>
+// merge conflicts to resolve for version change
+// unless there are changes in dependencies, scripts, etc., only the version should be different in package.json and package-lock.json
 git push
 
 // optional
