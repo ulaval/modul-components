@@ -25,8 +25,8 @@ export enum MTextfieldType {
     Telephone = 'tel'
 }
 
-const ICON_NAME_PASSWORD_VISIBLE: string = 'show-password';
-const ICON_NAME_PASSWORD_HIDDEN: string = 'hidden-password';
+const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
+const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
 
 @WithRender
 @Component({
@@ -77,6 +77,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     protected mounted(): void {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
+        this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
     @Watch('type')
