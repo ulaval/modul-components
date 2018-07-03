@@ -1,4 +1,4 @@
 <div class="m-root-tree">
     <span v-if="isTreeEmpty()">{{ emptyTreeTxt }}</span>
-    <m-tree v-else v-for="node in tree" :node="node" :externalSelectedFile="selectedFile" @selectFile="selectNewFile" :openFolders="openFolders"></m-tree>
+    <m-tree v-else v-for="node in tree" :node="node" :externalSelectedFile="selectedFile" @selectFile="selectFile" :openFolders="openFolders"></m-tree>
 </div>

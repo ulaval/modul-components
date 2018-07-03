@@ -56,8 +56,9 @@ export class MRootTree extends ModulVue {
         return !this.tree.length;
     }
 
-    selectNewFile(file: MNodeStructureArchive): void {
+    selectFile(file: MNodeStructureArchive): void {
         this.selectedFile = [file];
+        this.$emit('selectNewFile');
     }
 
     set selectedFile(file: MNodeStructureArchive[]) {
