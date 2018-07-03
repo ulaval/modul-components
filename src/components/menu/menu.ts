@@ -1,6 +1,8 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+
+import uuid from '../../utils/uuid/uuid';
 import { MENU_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
@@ -8,7 +10,6 @@ import MMenuItemPlugin, { BaseMenu, MMenuInterface } from '../menu-item/menu-ite
 import { MPopperPlacement } from '../popper/popper';
 import PopupPlugin from '../popup/popup';
 import WithRender from './menu.html?style=./menu.scss';
-import uuid from '../../utils/uuid/uuid';
 
 export enum MOptionsMenuSkin {
     Light = 'light',
@@ -50,6 +51,8 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     public disabled: boolean;
     @Prop({ default: '44px' })
     public size: string;
+    @Prop({ default: true })
+    public focusManagement: boolean;
 
     public hasIcon: boolean = false;
     private open = false;
