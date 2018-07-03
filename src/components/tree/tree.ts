@@ -28,14 +28,12 @@ export class MTree extends ModulVue {
     @Prop()
     openFolders: string[];
 
-    @Prop()
-    externalIsOpen: boolean;
-
     internalIsOpen: boolean = false;
     internalFolderIcon: string = FOLDER_CLOSED;
 
     created(): void {
-        this.internalIsOpen = this.externalIsOpen;
+        this.internalIsOpen = (this.openFolders.length && this.openFolders.indexOf(this.node.relativePath) !== -1) ? true : false;
+        this.manageFolderIcon();
     }
 
     isAFolder(idFile: string): boolean {
@@ -59,14 +57,16 @@ export class MTree extends ModulVue {
         this.$emit('selectFile', node);
     }
 
+    openClose(): void {
+        this.isOpen = !this.isOpen;
+        this.manageFolderIcon();
+    }
 
-    // isFolderOpen(relativePath: string): boolean | void {
-        //     if (this.openFolders.length && this.openFolders.indexOf(relativePath) !== -1) {
-            //         return true;
-            //     }
-            // }
+    openCloseIcon(): string {
+        return this.isOpen ? '-' : '+';
+    }
 
-    manageFolderIcon(): void {
+    private manageFolderIcon(): void {
         this.folderIcon = this.isOpen ? FOLDER_OPEN : FOLDER_CLOSED;
     }
 
@@ -85,9 +85,6 @@ export class MTree extends ModulVue {
     set isOpen(open: boolean) {
         this.internalIsOpen = open;
     }
-
-
-
 
 }
 

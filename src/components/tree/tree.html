@@ -1,34 +1,18 @@
 <div class="m-tree">
-    <template v-if="isAFolder(node.idFile)">
-        <m-accordion v-if="isAFolder(node.idFile)" skin="plain" class="m-tree__with-childs" :disabled="isEmpty(node)" :open.sync="internalIsOpen" @click="manageFolderIcon()">
-            <div slot="header">
-                <m-icon ref="accordionIcon" size="20px" :name="folderIcon"></m-icon>
-                <span>{{ node.fileName }}</span>
-            </div>
-            <m-tree v-for="childs_node in node.childs" :node="childs_node" :openFolders="openFolders" :externalSelectedFile="externalSelectedFile" @selectFile="selectFile" class="m-tree__with-childs__childs"></m-tree>
-        </m-accordion>
-    </template>
-    <template v-else>
-        <m-link mode="button" class="m-tree__single-file" @click="selectFile(node)" :class="{'m-tree__single-file__selected': isFileSelected(node)}">
-            <m-icon-file :extension="extensionFile(node.relativePath)"></m-icon-file>
+    <div v-if="isAFolder(node.idFile)" class="m-tree__with-childs">
+        <div class="m-tree__with-childs__header" @click="openClose()">
+            <span>{{ openCloseIcon() }}</span>
+            <m-icon size="20px" :name="folderIcon"></m-icon>
             <span>{{ node.fileName }}</span>
-        </m-link>
-    </template>
-</div>
-
-<!--
-    BK
-    <div class="m-tree">
-    <div v-for="file in tree"> -->
-        <!-- <m-accordion v-if="isAFolder(file.idFile)" ref="test" skin="plain" class="m-tree__with-childs" :open="isFolderOpen(file.relativePath)" :disabled="isEmpty(file)" > -->
-        <!-- <m-accordion v-if="isAFolder(file.idFile)" ref="test" skin="plain" class="m-tree__with-childs" :open.sync="isOpen" :disabled="isEmpty(file)" >
-            <div slot="header">
-                <m-icon ref="accordionIcon" size="20px" :name="folderIcon()"></m-icon>
-                <span :class="{'m-tree__with-childs__selected': isFileSelected(file)}">{{ file.fileName }}</span>
+        </div>
+        <transition name="slide-fade">
+            <div v-show="internalIsOpen" class="m-tree__with-childs__body">
+                <m-tree v-for="childs_node in node.childs" :node="childs_node" :openFolders="openFolders" :externalSelectedFile="externalSelectedFile" @selectFile="selectFile" class="m-tree__with-childs__childs"></m-tree>
             </div>
-            <m-tree :openFolders="openFolders" :tree="file.childs" @selectFile="selectFile" class="m-tree__with-childs__childs" :externalSelectedFile="externalSelectedFile"></m-tree>
-        </m-accordion>
-
+        </transition>
     </div>
-</div> -->
-
+    <m-link v-else mode="button" class="m-tree__single-file" @click="selectFile(node)" :class="{'m-tree__single-file__selected': isFileSelected(node)}">
+        <m-icon-file :extension="extensionFile(node.relativePath)"></m-icon-file>
+        <span>{{ node.fileName }}</span>
+    </m-link>
+</div>

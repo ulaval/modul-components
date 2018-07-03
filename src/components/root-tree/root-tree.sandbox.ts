@@ -17,11 +17,13 @@ export class MRootTreeSandbox extends Vue {
         }
     ];
 
+    public testArboVide: MNodeStructureArchive[] = [];
+
     public testArbo: MNodeStructureArchive[] = [
         {
             fileName: 'Fichier #1',
             idFile: 'a1',
-            relativePath: '/Fichier #1',
+            relativePath: '/Fichier #1.doc',
             childs: []
         },
         {
@@ -87,12 +89,50 @@ export class MRootTreeSandbox extends Vue {
             relativePath: '/Dossier #4',
             childs: [
                 {
-                    fileName: 'Fichier #4-1',
-                    idFile: 'c2',
-                    relativePath: '/Dossier #4/9chemin-vers-le-fichier.css',
-                    childs: []
+                    fileName: 'Dossier #99',
+                    idFile: '',
+                    relativePath: '/Dossier #4/Dossier #20',
+                    childs: [
+                        {
+                            fileName: 'Fichier #99-3-10',
+                            idFile: 'b50',
+                            relativePath: '/Dossier #1/Dossier #20/21chemin-vers-le-fichier-----------------------------.js',
+                            childs: []
+                        },
+                        {
+                            fileName: 'Fichier #2-3-20',
+                            idFile: 'b60',
+                            relativePath: '/Dossier #1/Dossier #20/22chemin-vers-le-fichier.css',
+                            childs: []
+                        },
+                        {
+                            fileName: 'Dossier #3',
+                            idFile: '',
+                            relativePath: '/Dossier #1/Dossier #20/Dossier #3',
+                            childs: [
+                                {
+                                    fileName: 'Fichier #2-3-2-10',
+                                    idFile: 'b80',
+                                    relativePath: '/Dossier #1/Dossier #20/Dossier #3/9chemin-vers-le-fichier.js',
+                                    childs: []
+                                },
+                                {
+                                    fileName: 'Fichier #2-3-2-20',
+                                    idFile: 'b90',
+                                    relativePath: '/Dossier #1/Dossier #20/Dossier #3/10chemin-vers-le-fichier.doc',
+                                    childs: []
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
+        },
+        {
+            fileName: 'Dossier #5',
+            idFile: '',
+            relativePath: '/Dossier #5',
+            childs: []
         }
     ];
 }
