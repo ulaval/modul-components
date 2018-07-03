@@ -12,12 +12,16 @@
     &__with-childs {
         &__header {
             cursor: pointer;
+
+            &__disabled {
+                color: $m-color--grey-light;
+            }
         }
 
         &__body {
             &-enter-active,
             &-leave-active {
-                transition: all 0.3s;
+                transition: all 0.5s;
                 height: auto;
             }
 

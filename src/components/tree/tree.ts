@@ -40,8 +40,12 @@ export class MTree extends ModulVue {
         return !idFile;
     }
 
-    isEmpty(node: MNodeStructureArchive): boolean {
-        return !node.childs.length;
+    isDisabled(): boolean {
+        return !this.node.childs.length;
+    }
+
+    isFileSelected(node: MNodeStructureArchive): boolean {
+        return !!node.idFile && this.externalSelectedFile[0].idFile === node.idFile;
     }
 
     extensionFile(filename: string = ''): string {
@@ -49,17 +53,15 @@ export class MTree extends ModulVue {
         return '.' + extension;
     }
 
-    isFileSelected(node: MNodeStructureArchive): boolean {
-        return !!node.idFile && this.externalSelectedFile[0].idFile === node.idFile;
-    }
-
     selectFile(node: MNodeStructureArchive): void {
         this.$emit('selectFile', node);
     }
 
     openClose(): void {
-        this.isOpen = !this.isOpen;
-        this.manageFolderIcon();
+        if (!this.isDisabled()) {
+            this.isOpen = !this.isOpen;
+            this.manageFolderIcon();
+        }
     }
 
     openCloseIcon(): string {
@@ -79,11 +81,13 @@ export class MTree extends ModulVue {
     }
 
     get isOpen(): boolean {
-        return this.internalIsOpen;
+        return this.internalIsOpen && !this.isDisabled();
     }
 
     set isOpen(open: boolean) {
-        this.internalIsOpen = open;
+        if (!this.isDisabled()) {
+            this.internalIsOpen = open;
+        }
     }
 
 }
