@@ -13,7 +13,7 @@
     <br />
 
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template skin="warning" :title="title" iconName="show-password"></m-error-template>
+        <m-error-template skin="warning" :title="title" iconName="m-svg__warning"></m-error-template>
     </div>
 
     <hr/>
@@ -49,7 +49,7 @@
     <h5>unexpected error popup with hints and links</h5>
     <m-button v-m-popup:errorpopup>pop me an error</m-button>
     <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
-            <m-error-template skin="error" :title="title" iconName="trash" :hints="manyHints" :links="manyLinks"></m-error-template>
+            <m-error-template skin="error" :title="title" iconName="m-svg__warning-filled" :hints="manyHints" :links="manyLinks"></m-error-template>
     </m-modal>
 
     <hr/>

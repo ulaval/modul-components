@@ -3,22 +3,61 @@
 .m-error-template {
     text-align: center;
 
-    &.m--is-skin-information {
-        h2 {
+    &__title {
+        font-size: $m-font-size--h3;
+
+        .m--is-skin-information & {
             color: $m-color--interactive;
         }
-    }
 
-    &.m--is-skin-error {
-        h2 {
+        .m--is-skin-error & {
             color: $m-color--error;
         }
-    }
 
-    &.m--is-skin-warning {
-        h2 {
+        .m--is-skin-warning & {
             color: $m-color--warning;
         }
+    }
+
+    &__icon-container {
+        position: relative;
+        min-height: 130px;
+        margin: $m-spacing--l 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate3d(0, -50%, 0);
+            height: 80px;
+            width: 100%;
+            z-index: 0;
+
+            .m--is-skin-information & {
+                background-color: #e4f4ff;
+                // background-color: $m-color--interactive;
+            }
+
+            .m--is-skin-error & {
+                background-color: #fcf2f3;
+                // background-color: $m-color--error;
+            }
+
+            .m--is-skin-warning & {
+                background-color: #fff8e6;
+                // background-color: $m-color--warning;
+            }
+        }
+    }
+
+    &__icon {
+        position: relative;
     }
 
     &__stacktrace {

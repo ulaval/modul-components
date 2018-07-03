@@ -1,15 +1,17 @@
-<div class="m-error-template" :class="{
+<article class="m-error-template" :class="{
     'm--is-skin-information': skin=='information',
     'm--is-skin-error': skin=='error',
     'm--is-skin-warning': skin=='warning'
     }">
-    <h2 class="m-error-template__title">{{title}}</h2>
-    <m-icon :name="iconName" size="60px"></m-icon>
+    <h1 class="m-error-template__title">{{title}}</h1>
+    <div class="m-error-template__icon-container">
+        <m-icon class="m-error-template__icon" :name="iconName" size="60px"></m-icon>
+    </div>
     <p ref="hint" class="m-error-template__hints" v-for="hint in hints">{{hint}}</p>
     <div class="m-error-template__details">
         <slot></slot>
     </div>
     <div ref="link" class="m-error-template__links" v-for="link in links">
-        <m-link mode="link" :url="link.url" :target="link.external" >{{link.label}}</m-link>
+        <m-link mode="link" :url="link.url" target="_blank">{{link.label}}</m-link>
     </div>
-</div>
+</article>
