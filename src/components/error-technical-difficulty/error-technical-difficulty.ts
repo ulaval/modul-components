@@ -60,7 +60,7 @@ export class MErrorTechnicalDifficulty extends ModulVue {
 
     readonly skin: string = MErrorTemplateSkin.Error;
 
-    readonly iconName: string = 'error';
+    readonly iconName: string = 'm-svg__error';
 
     get userAgent(): string {
         return window.navigator.userAgent;

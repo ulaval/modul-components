@@ -32,7 +32,7 @@ export class MErrorBrowserNotSupported extends ModulVue {
 
     readonly skin: string = MErrorTemplateSkin.Warning;
 
-    readonly iconName: string = 'warning';
+    readonly iconName: string = 'm-svg__warning';
 
     get mqAwareLinks(): Link[] {
         if (this.links.length === 0) {

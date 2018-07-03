@@ -32,7 +32,7 @@ export class MErrorPageNotFound extends ModulVue {
 
     readonly skin: string = MErrorTemplateSkin.Warning;
 
-    readonly iconName: string = 'search';
+    readonly iconName: string = 'm-svg__search';
 }
 
 const ErrorPageNotFoundPlugin: PluginObject<any> = {
