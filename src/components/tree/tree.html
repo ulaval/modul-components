@@ -5,8 +5,8 @@
             <m-icon size="20px" :name="folderIcon"></m-icon>
             <span>{{ node.fileName }}</span>
         </div>
-        <transition name="slide-fade">
-            <div v-show="internalIsOpen" class="m-tree__with-childs__body">
+        <transition name="m-tree__with-childs__body">
+            <div v-if="internalIsOpen" class="m-tree__with-childs__body">
                 <m-tree v-for="childs_node in node.childs" :node="childs_node" :openFolders="openFolders" :externalSelectedFile="externalSelectedFile" @selectFile="selectFile" class="m-tree__with-childs__childs"></m-tree>
             </div>
         </transition>

@@ -14,6 +14,20 @@
             cursor: pointer;
         }
 
+        &__body {
+            &-enter-active,
+            &-leave-active {
+                transition: all 0.3s;
+                height: auto;
+            }
+
+            &-enter,
+            &-leave-to {
+                transform: translateY(-5px);
+                opacity: 0;
+            }
+        }
+
         &__childs {
             margin-left: $m-margin--l;
         }
