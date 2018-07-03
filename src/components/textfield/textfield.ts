@@ -25,8 +25,8 @@ export enum MTextfieldType {
     Telephone = 'tel'
 }
 
-const ICON_NAME_PASSWORD_VISIBLE: string = 'show-password';
-const ICON_NAME_PASSWORD_HIDDEN: string = 'hidden-password';
+const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
+const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
 
 @WithRender
 @Component({
