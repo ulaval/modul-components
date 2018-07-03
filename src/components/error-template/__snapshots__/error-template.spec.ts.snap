@@ -10,10 +10,10 @@ exports[`Error-template integration tests Given an error with all props and slot
         <div id="theSlotId">The slot content</div>
     </div>
     <div class="m-error-template__links">
-        <a mode="link" url="an Url">a link</a>
+        <a mode="link" url="an Url" target="_blank">a link</a>
     </div>
     <div class="m-error-template__links">
-        <a mode="link" url="another Url">another link</a>
+        <a mode="link" url="another Url" target="_blank">another link</a>
     </div>
 </article>
 `;
