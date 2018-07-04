@@ -34,29 +34,32 @@ export class MInputStyle extends ModulVue {
     public setInputWidth(): void {
         this.$nextTick(() => {
             let labelEl: HTMLElement = this.$refs.label as HTMLElement;
-            let inputEl: HTMLElement = this.$el.querySelector('input') as HTMLElement;
+            let inputEl: HTMLElement | null = this.getInput();
             let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
-            if (inputEl) {
-                if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
-                    setTimeout(() => {
+            if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
+                setTimeout(() => {
+                    if (inputEl !== null) {
                         inputEl.style.width = '0px';
                         setTimeout(() => {
-                            let width: number = adjustWidthAutoEl.clientWidth < 50 ? 50 : adjustWidthAutoEl.clientWidth;
-                            if (this.hasLabel) {
-                                width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                            if (inputEl !== null) {
+                                let width: number = adjustWidthAutoEl.clientWidth < 50 ? 50 : adjustWidthAutoEl.clientWidth;
+                                if (this.hasLabel) {
+                                    width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                                }
+                                inputEl.style.width = width + 'px';
                             }
-                            inputEl.style.width = width + 'px';
                         }, 0);
-                    }, 0);
-
-                } else {
-                    if (inputEl.style.width) {
-                        inputEl.style.removeProperty('width');
                     }
+                }, 0);
+
+            } else if (inputEl) {
+                if (inputEl.style.width) {
+                    inputEl.style.removeProperty('width');
                 }
             }
         });
     }
+
     protected created(): void {
         setTimeout(() => {
             this.animActive = true;
@@ -108,6 +111,10 @@ export class MInputStyle extends ModulVue {
 
     private onMouseup(event): void {
         this.$emit('mouseup', event);
+    }
+
+    private getInput(): HTMLElement | null {
+        return this.$el.querySelector('input, textarea, [contenteditable=true]');
     }
 }
 
