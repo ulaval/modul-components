@@ -1,266 +1,221 @@
-// Origin source can be found at https://github.com/froala/vue-froala-wysiwyg
+// Original source can be found at https://github.com/froala/vue-froala-wysiwyg
 // This code is a quick fix to remove the global usage of $ / jQuery in vueFroala while we're awaiting answers from the codeowners of the repo.
 // Once we have ours answers, a PR adressing the issue should be provided.
 import $ from 'jquery';
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { Prop, Watch } from 'vue-property-decorator';
 
-export const froalaEditorFunctionality: any = {
+import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
-    props: ['tag', 'value', 'config', 'onManualControllerReady'],
+const SPECIAL_TAGS: string[] = ['img', 'button', 'input', 'a'];
+const INNER_HTML_ATTR: string = 'innerHTML';
+@WithRender
+@Component
+export class VueFroala extends Vue {
+    @Prop({
+        default: 'div'
+    })
+    public tag: 'div' | 'textarea';
 
-    watch: {
-        value: function(): void {
-            this.model = this.value;
-            this.updateValue();
-        }
-    },
+    @Prop({ default: '' })
+    public value: string;
 
-    render: function(createElement: any): void {
-        return createElement(
-            this.currentTag,
-            [this.$slots.default]);
-    },
+    @Prop()
+    public config: any;
 
-    created: function(): void {
+    protected currentTag: string = 'div';
+    protected listeningEvents: any[] = [];
+    protected _$element: any = undefined;
+    protected _$editor: any = undefined;
+    protected currentConfig: any = undefined;
+    protected defaultConfig: any = {
+        immediateVueModelUpdate: false,
+        vueIgnoreAttrs: undefined
+    };
+    protected editorInitialized: boolean = false;
+    protected hasSpecialTag: boolean = false;
+    protected model: string | undefined = undefined;
+    protected oldModel: string | undefined = undefined;
+
+    @Watch('value')
+    public refreshValue(): void {
+        this.model = this.value;
+        this.updateValue();
+    }
+
+    protected created(): void {
         this.currentTag = this.tag || this.currentTag;
         this.model = this.value;
-    },
+    }
 
-    // After first time render.
-    mounted: function(): void {
-        if (this.SPECIAL_TAGS.indexOf(this.currentTag) !== -1) {
+    protected mounted(): void {
+        if (SPECIAL_TAGS.indexOf(this.currentTag) !== -1) {
             this.hasSpecialTag = true;
         }
 
-        if (this.onManualControllerReady) {
-            this.generateManualController();
-        } else {
-            this.createEditor();
-        }
-    },
+        this.createEditor();
+    }
 
-    beforeDestroy: function(): void {
+    protected beforeDestroy(): void {
         this.destroyEditor();
-    },
+    }
 
-    data: function(): any {
-        return {
-            // Tag on which the editor is initialized.
-            currentTag: 'div',
-            listeningEvents: [],
+    private createEditor(): void {
+        if (this.editorInitialized) {
+            return;
+        }
 
-            // Jquery wrapped element.
-            _$element: undefined,
+        this.currentConfig = this.config || this.defaultConfig;
 
-            // Editor element.
-            _$editor: undefined,
+        this._$element = $(this.$refs.editor);
 
-            // Current config.
-            currentConfig: undefined,
+        this.setContent(true);
 
-            // Editor options config
-            defaultConfig: {
-                immediateVueModelUpdate: false,
-                vueIgnoreAttrs: undefined
-            },
+        this.registerEvents();
+        this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
+        this.initListeners();
 
-            editorInitialized: false,
+        this.editorInitialized = true;
+    }
 
-            SPECIAL_TAGS: ['img', 'button', 'input', 'a'],
-            INNER_HTML_ATTR: 'innerHTML',
-            hasSpecialTag: false,
+    private updateValue(): void {
+        if (JSON.stringify(this.oldModel) === JSON.stringify(this.model)) {
+            return;
+        }
 
-            model: undefined,
-            oldModel: undefined
-        };
-    },
-    methods: {
-        updateValue: function(): void {
-            if (JSON.stringify(this.oldModel) === JSON.stringify(this.model)) {
-                return;
-            }
+        this.setContent();
+    }
 
-            this.setContent();
-        },
+    private setContent(firstTime: boolean = false): void {
+        if (!this.editorInitialized && !firstTime) {
+            return;
+        }
 
-        createEditor: function(): void {
-
-            if (this.editorInitialized) {
-                return;
-            }
-
-            this.currentConfig = this.config || this.defaultConfig;
-
-            this._$element = $(this.$el);
-
-            this.setContent(true);
-
-            this.registerEvents();
-            this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
-            this.initListeners();
-
-            this.editorInitialized = true;
-        },
-
-        setContent: function(firstTime: any): void {
-            if (!this.editorInitialized && !firstTime) {
-                return;
-            }
-
-            if (this.model || this.model === '') {
-
-                this.oldModel = this.model;
-
-                if (this.hasSpecialTag) {
-                    this.setSpecialTagContent();
-                } else {
-                    this.setNormalTagContent(firstTime);
-                }
-            }
-        },
-
-        setNormalTagContent: function(firstTime: any): void {
-            const self: any = this;
-
-            function htmlSet(): void {
-
-                self._$element.froalaEditor('html.set', self.model || '', true);
-                // This will reset the undo stack everytime the model changes externally. Can we fix this?
-                self._$element.froalaEditor('undo.reset');
-                self._$element.froalaEditor('undo.saveStep');
-            }
-
-            if (firstTime) {
-                this.registerEvent(this._$element, 'froalaEditor.initialized', function(): void {
-                    htmlSet();
-                });
-            } else {
-                htmlSet();
-            }
-        },
-
-        setSpecialTagContent: function(): void {
-
-            const tags: any = this.model;
-
-            // add tags on element
-            if (tags) {
-                for (let attr in tags) {
-                    if (tags.hasOwnProperty(attr) && attr !== this.INNER_HTML_ATTR) {
-                        this._$element.attr(attr, tags[attr]);
-                    }
-                }
-
-                if (tags.hasOwnProperty(this.INNER_HTML_ATTR)) {
-                    this._$element[0].innerHTML = tags[this.INNER_HTML_ATTR];
-                }
-            }
-        },
-
-        destroyEditor: function(): void {
-
-            if (this._$element) {
-
-                this.listeningEvents && this._$element.off(this.listeningEvents.join(' '));
-                this._$editor.off('keyup');
-                this._$element.froalaEditor('destroy');
-                this.listeningEvents.length = 0;
-                this._$element = undefined;
-                this.editorInitialized = false;
-            }
-        },
-
-        getEditor: function(): any {
-
-            if (this._$element) {
-                return this._$element.froalaEditor.bind(this._$element);
-            }
-            return undefined;
-        },
-
-        generateManualController: function(): void {
-
-            const self: any = this;
-            const controls: any = {
-                initialize: this.createEditor,
-                destroy: this.destroyEditor,
-                getEditor: this.getEditor
-            };
-
-            this.onManualControllerReady(controls);
-        },
-
-        updateModel: function(): void {
-
-            let modelContent: string = '';
+        if (this.model || this.model === '') {
+            this.oldModel = this.model;
 
             if (this.hasSpecialTag) {
-
-                const attributeNodes: any = this._$element[0].attributes;
-                const attrs: any = {};
-
-                for (let i: number = 0; i < attributeNodes.length; i++) {
-
-                    const attrName: any = attributeNodes[i].name;
-                    if (this.currentConfig.vueIgnoreAttrs && this.currentConfig.vueIgnoreAttrs.indexOf(attrName) !== -1) {
-                        continue;
-                    }
-                    attrs[attrName] = attributeNodes[i].value;
-                }
-
-                if (this._$element[0].innerHTML) {
-                    attrs[this.INNER_HTML_ATTR] = this._$element[0].innerHTML;
-                }
-
-                modelContent = attrs;
+                this.setSpecialTagContent();
             } else {
-
-                const returnedHtml: any = this._$element.froalaEditor('html.get');
-                if (typeof returnedHtml === 'string') {
-                    modelContent = returnedHtml;
-                }
-            }
-
-            this.oldModel = modelContent;
-            this.$emit('input', modelContent);
-        },
-
-        initListeners: function(): void {
-            const self: any = this;
-
-      // bind contentChange and keyup event to froalaModel
-            this.registerEvent(this._$element, 'froalaEditor.contentChanged',function(): void {
-                self.updateModel();
-            });
-            if (this.currentConfig.immediateVueModelUpdate) {
-                this.registerEvent(this._$editor, 'keyup', function(): void {
-                    self.updateModel();
-                });
-            }
-        },
-
-    // register event on jquery editor element
-        registerEvent: function(element: any, eventName: any, callback: any): void {
-
-            if (!element || !eventName || !callback) {
-                return;
-            }
-
-            this.listeningEvents.push(eventName);
-            element.on(eventName, callback);
-        },
-
-        registerEvents: function(): void {
-
-            const events: any = this.currentConfig.events;
-            if (!events) {
-                return;
-            }
-
-            for (let event in events) {
-                if (events.hasOwnProperty(event)) {
-                    this.registerEvent(this._$element, event, events[event]);
-                }
+                this.setNormalTagContent(firstTime);
             }
         }
     }
-};
+
+    private setNormalTagContent(firstTime: boolean = false): void {
+        if (firstTime) {
+            this.registerEvent(this._$element, 'froalaEditor.initialized', () => {
+                this.htmlSet();
+            });
+        } else {
+            this.htmlSet();
+        }
+    }
+
+    private setSpecialTagContent(): void {
+        const tags: any = this.model;
+
+        // add tags on element
+        if (tags) {
+            for (let attr in tags) {
+                if (tags.hasOwnProperty(attr) && attr !== INNER_HTML_ATTR) {
+                    this._$element.attr(attr, tags[attr]);
+                }
+            }
+
+            if (tags.hasOwnProperty(INNER_HTML_ATTR)) {
+                this._$element[0].innerHTML = tags[INNER_HTML_ATTR];
+            }
+        }
+    }
+
+    private destroyEditor(): void {
+        if (this._$element) {
+
+            this.listeningEvents && this._$element.off(this.listeningEvents.join(' '));
+            this._$editor.off('keyup');
+            this._$element.froalaEditor('destroy');
+            this.listeningEvents.length = 0;
+            this._$element = undefined;
+            this.editorInitialized = false;
+        }
+    }
+
+    private updateModel(): void {
+        let modelContent: string = '';
+
+        if (this.hasSpecialTag) {
+
+            const attributeNodes: any = this._$element[0].attributes;
+            const attrs: any = {};
+
+            for (let i: number = 0; i < attributeNodes.length; i++) {
+
+                const attrName: any = attributeNodes[i].name;
+                if (this.currentConfig.vueIgnoreAttrs && this.currentConfig.vueIgnoreAttrs.indexOf(attrName) !== -1) {
+                    continue;
+                }
+                attrs[attrName] = attributeNodes[i].value;
+            }
+
+            if (this._$element[0].innerHTML) {
+                attrs[INNER_HTML_ATTR] = this._$element[0].innerHTML;
+            }
+
+            modelContent = attrs;
+        } else {
+
+            const returnedHtml: any = this._$element.froalaEditor('html.get');
+            if (typeof returnedHtml === 'string') {
+                modelContent = returnedHtml;
+            }
+        }
+
+        this.oldModel = modelContent;
+        this.$emit('input', modelContent);
+    }
+
+    private initListeners(): void {
+        // bind contentChange and keyup event to froalaModel
+        this.registerEvent(this._$element, 'froalaEditor.contentChanged', () => {
+            this.updateModel();
+        });
+        if (this.currentConfig.immediateVueModelUpdate) {
+            this.registerEvent(this._$editor, 'keyup', () => {
+                this.updateModel();
+            });
+        }
+    }
+
+    private registerEvent(element: any, eventName: any, callback: any): void {
+        if (!element || !eventName || !callback) {
+            return;
+        }
+
+        this.listeningEvents.push(eventName);
+        element.on(eventName, callback);
+    }
+
+    private registerEvents(): void {
+        const events: any = this.currentConfig.events;
+        if (!events) {
+            return;
+        }
+
+        for (let event in events) {
+            if (events.hasOwnProperty(event)) {
+                this.registerEvent(this._$element, event, events[event]);
+            }
+        }
+    }
+
+    private htmlSet(): void {
+        this._$element.froalaEditor('html.set', this.model || '', true);
+        // This will reset the undo stack everytime the model changes externally. Can we fix this?
+        this._$element.froalaEditor('undo.reset');
+        this._$element.froalaEditor('undo.saveStep');
+    }
+}
+
+export default VueFroala;

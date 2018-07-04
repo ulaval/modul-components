@@ -2,7 +2,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
-import { froalaEditorFunctionality } from './adapter/vue-froala';
+import VueFroala from './adapter/vue-froala';
 import { MRichTextEditorDefaultOptions, MRichTextEditorStandardOptions } from './rich-text-edit-options';
 import WithRender from './rich-text-edit.html';
 
@@ -20,10 +20,10 @@ export enum MRichTextEditMode {
 
 @WithRender
 @Component({
-    components: { Froala: froalaEditorFunctionality }
+    components: { Froala: VueFroala }
 })
 export class MRichTextEdit extends ModulVue {
-    public tag: string = 'textarea';
+    public tag: string = 'div';
     @Prop({ default: '' })
     public value: string;
     @Prop({ default: true })
