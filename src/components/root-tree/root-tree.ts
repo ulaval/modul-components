@@ -48,7 +48,7 @@ export class MRootTree extends ModulVue {
     emptyTreeTxt: string = this.$i18n.translate('m-root-tree:empty');
 
     created(): void {
-        this.selectedFile = this.externalSelectedFile;
+        this.selectedFile = this.externalSelectedFile ? this.externalSelectedFile : [];
         this.openFolders = this.foldersToOpen(this.tree);
     }
 

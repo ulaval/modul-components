@@ -10,71 +10,133 @@ import WithRender from './root-tree.sandbox.html';
 export class MRootTreeSandbox extends Vue {
     public currentFile: MNodeStructureArchive[] = [
         {
-            fileName: 'Fichier #2-3-2-2',
-            idFile: 'b9',
-            relativePath: '/Dossier #1/Dossier #2/Dossier #3/10chemin-vers-le-fichier.doc',
+            fileName: 'nav.html',
+            idFile: 'h1',
+            relativePath: '/html/Footer/nav/nav.html',
             childs: []
         }
     ];
 
-    public testArboVide: MNodeStructureArchive[] = [];
-
-    public testArbo: MNodeStructureArchive[] = [
+    public secondCurrentFile: MNodeStructureArchive[] = [
         {
-            fileName: 'Fichier #1',
+            fileName: 'home.html',
+            idFile: 'j1',
+            relativePath: '/html/home.html',
+            childs: []
+        }
+    ];
+
+    public currentFileEmpty: MNodeStructureArchive[] = [];
+
+    public emptyTree: MNodeStructureArchive[] = [];
+
+    public fullTree: MNodeStructureArchive[] = [
+        {
+            fileName: 'index.html',
             idFile: 'a1',
-            relativePath: '/Fichier #1.doc',
+            relativePath: '/index.html',
             childs: []
         },
         {
-            fileName: 'Dossier #1',
+            fileName: 'Medias',
             idFile: '',
-            relativePath: '/Dossier #1',
+            relativePath: '/medias',
             childs: [
                 {
-                    fileName: 'Fichier #2-1',
-                    idFile: 'b2',
-                    relativePath: '/Dossier #1/3chemin-vers-le-fichier.doc',
-                    childs: []
-                },
-                {
-                    fileName: 'Fichier #2-2',
-                    idFile: 'b3',
-                    relativePath: '/Dossier #1/4chemin-vers-le-fichier.xls',
-                    childs: []
-                },
-                {
-                    fileName: 'Dossier #2',
+                    fileName: 'Videos',
                     idFile: '',
-                    relativePath: '/Dossier #1/Dossier #2',
+                    relativePath: '/medias/Videos',
                     childs: [
                         {
-                            fileName: 'Fichier #2-3-1',
-                            idFile: 'b5',
-                            relativePath: '/Dossier #1/Dossier #2/6chemin-vers-le-fichier-----------------------------.js',
+                            fileName: 'video_cat.mp4',
+                            idFile: 'b1',
+                            relativePath: '/medias/video_cat.mp4',
                             childs: []
                         },
                         {
-                            fileName: 'Fichier #2-3-2',
-                            idFile: 'b6',
-                            relativePath: '/Dossier #1/Dossier #2/7chemin-vers-le-fichier.css',
+                            fileName: 'video-dog.mov',
+                            idFile: 'b2',
+                            relativePath: '/medias/video-dog.mov',
+                            childs: []
+                        }
+                    ]
+                },
+                {
+                    fileName: 'img',
+                    idFile: '',
+                    relativePath: '/medias/img',
+                    childs: [
+                        {
+                            fileName: 'Animals.jpg',
+                            idFile: 'c1',
+                            relativePath: '/medias/img/Animals.jpg',
                             childs: []
                         },
                         {
-                            fileName: 'Dossier #3',
+                            fileName: 'Birds.jpeg',
+                            idFile: 'c2',
+                            relativePath: '/medias/img/Birds.jpeg',
+                            childs: []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            fileName: 'scss',
+            idFile: '',
+            relativePath: '/scss',
+            childs: [
+                {
+                    fileName: 'css',
+                    idFile: '',
+                    relativePath: '/scss/css',
+                    childs: [
+                        {
+                            fileName: 'home.css',
+                            idFile: 'd1',
+                            relativePath: '/scss/css/home.css',
+                            childs: []
+                        },
+                        {
+                            fileName: 'newsletter.css',
+                            idFile: 'd2',
+                            relativePath: '/scss/css/newsletter.css',
+                            childs: []
+                        },
+                        {
+                            fileName: 'news.css',
+                            idFile: 'd3',
+                            relativePath: '/scss/css/news.css',
+                            childs: []
+                        },
+                        {
+                            fileName: 'event.css',
+                            idFile: 'd4',
+                            relativePath: '/scss/css/event.css',
+                            childs: []
+                        },
+                        {
+                            fileName: 'footer.css',
+                            idFile: 'd5',
+                            relativePath: '/scss/css/footer.css',
+                            childs: []
+                        },
+                        {
+                            fileName: 'header.css',
+                            idFile: 'd6',
+                            relativePath: '/scss/css/header.css',
+                            childs: []
+                        },
+                        {
+                            fileName: 'svg',
                             idFile: '',
-                            relativePath: '/Dossier #1/Dossier #2/Dossier #3',
+                            relativePath: '/scss/css/svg',
                             childs: [
                                 {
-                                    fileName: 'Fichier #2-3-2-1',
-                                    idFile: 'b8',
-                                    relativePath: '/Dossier #1/Dossier #2/Dossier #3/9chemin-vers-le-fichier.js',
-                                    childs: []
-                                },
-                                {
-                                    fileName: 'Fichier #2-3-2-2',
-                                    idFile: 'b9',
-                                    relativePath: '/Dossier #1/Dossier #2/Dossier #3/10chemin-vers-le-fichier.doc',
+                                    fileName: 'icon.svg',
+                                    idFile: 'e1',
+                                    relativePath: '/scss/css/img/icon.svg',
                                     childs: []
                                 }
                             ]
@@ -84,57 +146,115 @@ export class MRootTreeSandbox extends Vue {
             ]
         },
         {
-            fileName: 'Dossier #4',
+            fileName: 'Empty',
             idFile: '',
-            relativePath: '/Dossier #4',
+            relativePath: '/Empty',
+            childs: []
+        },
+        {
+            fileName: 'html',
+            idFile: '',
+            relativePath: '/html',
             childs: [
                 {
-                    fileName: 'Dossier #99',
+                    fileName: 'home.html',
+                    idFile: 'j1',
+                    relativePath: '/html/home.html',
+                    childs: []
+                },
+                {
+                    fileName: 'event.html',
+                    idFile: 'j2',
+                    relativePath: '/html/event.html',
+                    childs: []
+                },
+                {
+                    fileName: 'Header',
                     idFile: '',
-                    relativePath: '/Dossier #4/Dossier #20',
+                    relativePath: '/html/Header',
                     childs: [
                         {
-                            fileName: 'Fichier #99-3-10',
-                            idFile: 'b50',
-                            relativePath: '/Dossier #1/Dossier #20/21chemin-vers-le-fichier-----------------------------.js',
-                            childs: []
-                        },
-                        {
-                            fileName: 'Fichier #2-3-20',
-                            idFile: 'b60',
-                            relativePath: '/Dossier #1/Dossier #20/22chemin-vers-le-fichier.css',
-                            childs: []
-                        },
-                        {
-                            fileName: 'Dossier #3',
+                            fileName: 'nav',
                             idFile: '',
-                            relativePath: '/Dossier #1/Dossier #20/Dossier #3',
+                            relativePath: '/html/Header/nav',
                             childs: [
                                 {
-                                    fileName: 'Fichier #2-3-2-10',
-                                    idFile: 'b80',
-                                    relativePath: '/Dossier #1/Dossier #20/Dossier #3/9chemin-vers-le-fichier.js',
+                                    fileName: 'nav.html',
+                                    idFile: 'f1',
+                                    relativePath: '/html/Header/nav/nav.html',
                                     childs: []
-                                },
+                                }
+                            ]
+                        },
+                        {
+                            fileName: 'title',
+                            idFile: '',
+                            relativePath: '/html/Header/title',
+                            childs: [
                                 {
-                                    fileName: 'Fichier #2-3-2-20',
-                                    idFile: 'b90',
-                                    relativePath: '/Dossier #1/Dossier #20/Dossier #3/10chemin-vers-le-fichier.doc',
+                                    fileName: 'title.html',
+                                    idFile: 'g1',
+                                    relativePath: '/html/Header/nav/title.html',
                                     childs: []
                                 }
                             ]
                         }
                     ]
+                },
+                {
+                    fileName: 'news.html',
+                    idFile: 'j3',
+                    relativePath: '/html/news.html',
+                    childs: []
+                },
+                {
+                    fileName: 'Footer',
+                    idFile: '',
+                    relativePath: '/html/Footer',
+                    childs: [
+                        {
+                            fileName: 'nav',
+                            idFile: '',
+                            relativePath: '/html/Footer/nav',
+                            childs: [
+                                {
+                                    fileName: 'nav.html',
+                                    idFile: 'h1',
+                                    relativePath: '/html/Footer/nav/nav.html',
+                                    childs: []
+                                }
+                            ]
+                        },
+                        {
+                            fileName: 'copyright',
+                            idFile: '',
+                            relativePath: '/html/Footer/copyright',
+                            childs: [
+                                {
+                                    fileName: 'copyright.html',
+                                    idFile: 'i1',
+                                    relativePath: '/html/Footer/nav/copyright.html',
+                                    childs: []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    fileName: 'newsletter.html',
+                    idFile: 'j4',
+                    relativePath: '/html/newsletter.html',
+                    childs: []
                 }
             ]
-        },
-        {
-            fileName: 'Dossier #5',
-            idFile: '',
-            relativePath: '/Dossier #5',
-            childs: []
         }
     ];
+
+    public selectNewFile(file: MNodeStructureArchive): void {
+        console.log(file);
+        console.log('Ça passe');
+    }
+
 }
 
 const RootTreeSandboxPlugin: PluginObject<any> = {

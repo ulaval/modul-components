@@ -1,11 +1,28 @@
 <div>
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-    </p>
-    <br>
-    <br>
-    <p>
-        <m-root-tree :tree="testArbo" :externalSelectedFile="currentFile"></m-root-tree>
-    </p>
+    <h2>Default selected file</h2>
+    <div style="width: 50%; float:left;">
+        <h3>Single file selection</h3>
+        <p><m-root-tree :tree="fullTree" :externalSelectedFile="currentFile" @selectNewFile="selectNewFile" selection="1"></m-root-tree></p>
+    </div>
+    <!-- <div style="width: 50%; float:left;">
+        <h3>No file selection</h3>
+        <p><m-root-tree :tree="fullTree" :externalSelectedFile="secondCurrentFile" @selectNewFile="selectNewFile" selection="0"></m-root-tree></p>
+    </div>
+
+    <div style="clear: both;"></div>
+    <hr>
+    <h2>No default selected file</h2>
+    <div style="width: 50%; float:left;">
+        <h3>Single file selection</h3>
+        <p><m-root-tree :tree="fullTree" @selectNewFile="selectNewFile" selection="1"></m-root-tree></p>
+    </div>
+    <div style="width: 50%; float:left;">
+        <h3>No file selection</h3>
+        <p><m-root-tree :tree="fullTree" @selectNewFile="selectNewFile" selection="0"></m-root-tree></p>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <h2>Empty tree</h2>
+    <p><m-root-tree :tree="emptyTree" @selectNewFile="selectNewFile" selection="0"></m-root-tree></p> -->
 </div>
