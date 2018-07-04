@@ -37,7 +37,7 @@ export class MRootTree extends ModulVue {
     })
     selection: MSelectOption;
 
-    @Prop()
+    @Prop({ default: 'information' })
     icon: string;
 
     @Prop()
@@ -57,8 +57,10 @@ export class MRootTree extends ModulVue {
     }
 
     selectFile(file: MNodeStructureArchive): void {
-        this.selectedFile = [file];
-        this.$emit('selectNewFile');
+        if (!this.selectedFile.length || this.selectedFile[0].fileName !== file.fileName) {
+            this.selectedFile = [file];
+            this.$emit('selectNewFile', file);
+        }
     }
 
     set selectedFile(file: MNodeStructureArchive[]) {
@@ -71,15 +73,17 @@ export class MRootTree extends ModulVue {
 
     private foldersToOpen(files: MNodeStructureArchive[]): string[] {
         let folders: string[] = [];
-        files.forEach((file: MNodeStructureArchive) => {
-            if (!file.idFile && this.selectedFile[0].relativePath.indexOf(file.relativePath) !== -1) {
-                folders.push(file.relativePath);
-                let recursiveFoldersToOpen: string[] = this.foldersToOpen(file.childs);
-                recursiveFoldersToOpen.forEach((relativePath: string) => {
-                    folders.push(relativePath);
-                });
-            }
-        });
+        if (this.selectedFile.length) {
+            files.forEach((file: MNodeStructureArchive) => {
+                if (!file.idFile && this.selectedFile[0].relativePath.indexOf(file.relativePath) !== -1) {
+                    folders.push(file.relativePath);
+                    let recursiveFoldersToOpen: string[] = this.foldersToOpen(file.childs);
+                    recursiveFoldersToOpen.forEach((relativePath: string) => {
+                        folders.push(relativePath);
+                    });
+                }
+            });
+        }
 
         return folders;
     }

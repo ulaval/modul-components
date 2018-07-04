@@ -2,14 +2,13 @@
 
 .m-tree {
     &__single-file {
-        margin-left: $m-margin--l + 4px;
-
-        &__selected {
-            background-color: $m-color--grey-light;
-        }
+        margin-left: $m-margin;
+        user-select: none;
     }
 
     &__with-childs {
+        user-select: none;
+
         &__header {
             cursor: pointer;
 

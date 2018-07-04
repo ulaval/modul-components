@@ -45,7 +45,7 @@ export class MTree extends ModulVue {
     }
 
     isFileSelected(node: MNodeStructureArchive): boolean {
-        return !!node.idFile && this.externalSelectedFile[0].idFile === node.idFile;
+        return !!this.externalSelectedFile.length && !!node.idFile && this.externalSelectedFile[0].idFile === node.idFile;
     }
 
     extensionFile(filename: string = ''): string {
