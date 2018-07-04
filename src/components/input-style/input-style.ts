@@ -2,7 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
-import { InputState } from '../../mixins/input-state/input-state';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
@@ -32,9 +32,10 @@ export class MInputStyle extends ModulVue {
     private animActive: boolean = false;
 
     public setInputWidth(): void {
+        // This is not very VueJs friendly.  It should be replaced by :style or something similar.
         this.$nextTick(() => {
             let labelEl: HTMLElement = this.$refs.label as HTMLElement;
-            let inputEl: HTMLElement | null = this.getInput();
+            let inputEl: HTMLElement | null = this.as<InputStateMixin>().getInput();
             let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
             if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
                 setTimeout(() => {
@@ -72,7 +73,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && this.as<InputState>().active;
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && this.as<InputStateMixin>().active;
     }
 
     private get hasLabel(): boolean {
@@ -84,7 +85,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get isFocus(): boolean {
-        let focus: boolean = this.focus && this.as<InputState>().active;
+        let focus: boolean = this.focus && this.as<InputStateMixin>().active;
         this.$emit('focus', focus);
         return focus;
     }
@@ -111,10 +112,6 @@ export class MInputStyle extends ModulVue {
 
     private onMouseup(event): void {
         this.$emit('mouseup', event);
-    }
-
-    private getInput(): HTMLElement | null {
-        return this.$el.querySelector('input, textarea, [contenteditable=true]');
     }
 }
 

@@ -37,6 +37,7 @@ export interface InputStateMixin {
     errorMessage: string;
 
     disabled: boolean;
+    getInput(): HTMLElement | null;
 }
 
 @Component
@@ -119,5 +120,14 @@ export class InputState extends Vue implements InputStateMixin {
 
     public get hasHelperMessage(): boolean {
         return (!!this.helperMessage || this.helperMessage === ' ') && !this.disabled && !this.waiting;
+    }
+
+    public getInput(): HTMLElement | null {
+        const querySelectorString: string = 'input, textarea, [contenteditable=true]';
+        const elements: NodeListOf<Element> = this.$el.querySelectorAll(querySelectorString);
+        if (elements.length > 1 || elements.length === 0) {
+            throw new Error(`Input state can manage 1 and only 1 nested editable element (${querySelectorString})`);
+        }
+        return elements[0] as HTMLElement | null;
     }
 }

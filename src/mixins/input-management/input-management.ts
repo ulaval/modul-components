@@ -56,7 +56,7 @@ export class InputManagement extends ModulVue
     @Watch('focus')
     private focusChanged(focus: boolean): void {
         this.internalIsFocus = focus && !this.as<InputStateMixin>().isDisabled;
-        let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+        let inputEl: HTMLElement | null = this.as<InputStateMixin>().getInput();
         if (inputEl) {
             if (this.internalIsFocus) {
                 inputEl.focus();
@@ -68,7 +68,7 @@ export class InputManagement extends ModulVue
 
     private onClick(event: MouseEvent): void {
         this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
-        let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+        let inputEl: HTMLElement | null = this.as<InputStateMixin>().getInput();
         if (this.internalIsFocus && inputEl) {
             inputEl.focus();
         }
