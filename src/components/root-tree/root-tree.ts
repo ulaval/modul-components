@@ -16,9 +16,9 @@ export interface MNodeStructureArchive {
 }
 
 export enum MSelectOption {
-    NONE = 0,
-    SINGLE = 1,
-    MULTIPLE = 2
+    NONE = '0',
+    SINGLE = '1',
+    MULTIPLE = '2'
 }
 
 @WithRender
@@ -57,7 +57,7 @@ export class MRootTree extends ModulVue {
     }
 
     selectFile(file: MNodeStructureArchive): void {
-        if (!this.selectedFile.length || this.selectedFile[0].fileName !== file.fileName) {
+        if (this.selection === MSelectOption.SINGLE && (!this.selectedFile.length || this.selectedFile[0].fileName !== file.fileName)) {
             this.selectedFile = [file];
             this.$emit('selectNewFile', file);
         }
