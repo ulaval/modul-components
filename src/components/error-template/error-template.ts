@@ -47,6 +47,14 @@ export class MErrorTemplate extends ModulVue {
     @Prop()
     public links?: Link[];
 
+    get showHints(): boolean {
+        return this.hints && this.hints.length > 0 ? true : false;
+    }
+
+    get showlinks(): boolean {
+        return this.links && this.links.length > 0 ? true : false;
+    }
+
 }
 
 const ErrorTemplatePlugin: PluginObject<any> = {
