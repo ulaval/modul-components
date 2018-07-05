@@ -57,10 +57,8 @@ export class MTree extends ModulVue {
     }
 
     selectFile(file: MNodeStructureArchive): void {
-        if (this.selection === MSelectOption.SINGLE && (!this.selectedFile.length || this.selectedFile[0].fileName !== file.fileName)) {
-            this.selectedFile = [file];
-            this.$emit('selectNewFile', file);
-        }
+        this.selectedFile = [file];
+        this.$emit('selectNewFile', file);
     }
 
     set selectedFile(file: MNodeStructureArchive[]) {

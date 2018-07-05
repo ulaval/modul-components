@@ -63,7 +63,9 @@ export class MTreeNode extends ModulVue {
     }
 
     selectFile(node: MNodeStructureArchive): void {
-        this.$emit('selectFile', node);
+        if (this.selection !== MSelectOption.MULTIPLE) {
+            this.$emit('selectFile', node);
+        }
     }
 
     openCloseIcon(): string {
