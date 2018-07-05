@@ -46,7 +46,6 @@ import ProgressPluggin from './progress/progress';
 import RadioGroupPlugin from './radio-group/radio-group';
 import RadioStylePlugin from './radio-style/radio-style';
 import RadioPlugin from './radio/radio';
-import RootTreePlugin from './root-tree/root-tree';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import SidebarPlugin from './sidebar/sidebar';
@@ -64,6 +63,7 @@ import TextareaPlugin from './textarea/textarea';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
+import TreeNodePlugin from './tree-node/tree-node';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
@@ -138,7 +138,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
         Vue.use(TreePlugin);
-        Vue.use(RootTreePlugin);
+        Vue.use(TreeNodePlugin);
     }
 };
 

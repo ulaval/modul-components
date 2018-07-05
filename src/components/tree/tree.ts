@@ -1,93 +1,91 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
-import IconFilePlugin from '../icon-file/icon-file';
-import IconPlugin from '../icon/icon';
-import { MNodeStructureArchive } from '../root-tree/root-tree';
-import WithRender from './tree.html?style=./tree.scss';
+import I18nPlugin from '../i18n/i18n';
+import TreeNodePlugin from '../tree-node/tree-node';
+import WithRender from './tree.html';
 
-const FOLDER_OPEN: string = 'm-svg__file-odf';
-const FOLDER_CLOSED: string = 'm-svg__file-odb';
+export interface MNodeStructureArchive {
+    relativePath: string;
+    idFile: string;
+    fileName: string;
+    childs: MNodeStructureArchive[];
+}
+
+export enum MSelectOption {
+    NONE = '0',
+    SINGLE = '1',
+    MULTIPLE = '2'
+}
 
 @WithRender
 @Component
 export class MTree extends ModulVue {
 
     @Prop()
-    node: MNodeStructureArchive;
+    tree: MNodeStructureArchive[];
+
+    @Prop({
+        default: MSelectOption.NONE,
+        validator: value =>
+            value === MSelectOption.NONE ||
+            value === MSelectOption.SINGLE ||
+            value === MSelectOption.MULTIPLE
+    })
+    selection: MSelectOption;
+
+    @Prop({ default: 'information' })
+    icon: string;
 
     @Prop()
     externalSelectedFile: MNodeStructureArchive[];
 
-    @Prop()
-    icon: string;
-
-    @Prop()
-    openFolders: string[];
-
-    internalIsOpen: boolean = false;
-    internalFolderIcon: string = FOLDER_CLOSED;
+    internalSelectedFile: MNodeStructureArchive[] = [];
+    openFolders: string[] = [];
+    emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
 
     created(): void {
-        this.internalIsOpen = (this.openFolders.length && this.openFolders.indexOf(this.node.relativePath) !== -1) ? true : false;
-        this.manageFolderIcon();
+        this.selectedFile = this.externalSelectedFile ? this.externalSelectedFile : [];
+        this.openFolders = this.foldersToOpen(this.tree);
     }
 
-    isAFolder(idFile: string): boolean {
-        return !idFile;
+    isTreeEmpty(): boolean {
+        return !this.tree.length;
     }
 
-    isDisabled(): boolean {
-        return !this.node.childs.length;
-    }
-
-    isFileSelected(node: MNodeStructureArchive): boolean {
-        return !!this.externalSelectedFile.length && !!node.idFile && this.externalSelectedFile[0].idFile === node.idFile;
-    }
-
-    extensionFile(filename: string = ''): string {
-        let extension: string = filename.split('.').pop() as string;
-        return '.' + extension;
-    }
-
-    selectFile(node: MNodeStructureArchive): void {
-        this.$emit('selectFile', node);
-    }
-
-    openClose(): void {
-        if (!this.isDisabled()) {
-            this.isOpen = !this.isOpen;
-            this.manageFolderIcon();
+    selectFile(file: MNodeStructureArchive): void {
+        if (this.selection === MSelectOption.SINGLE && (!this.selectedFile.length || this.selectedFile[0].fileName !== file.fileName)) {
+            this.selectedFile = [file];
+            this.$emit('selectNewFile', file);
         }
     }
 
-    openCloseIcon(): string {
-        return this.isOpen ? '-' : '+';
+    set selectedFile(file: MNodeStructureArchive[]) {
+        this.internalSelectedFile = file;
     }
 
-    private manageFolderIcon(): void {
-        this.folderIcon = this.isOpen ? FOLDER_OPEN : FOLDER_CLOSED;
+    get selectedFile(): MNodeStructureArchive[] {
+        return this.internalSelectedFile;
     }
 
-    get folderIcon(): string {
-        return this.internalFolderIcon;
-    }
-
-    set folderIcon(icon: string) {
-        this.internalFolderIcon = icon;
-    }
-
-    get isOpen(): boolean {
-        return this.internalIsOpen && !this.isDisabled();
-    }
-
-    set isOpen(open: boolean) {
-        if (!this.isDisabled()) {
-            this.internalIsOpen = open;
+    private foldersToOpen(files: MNodeStructureArchive[]): string[] {
+        let folders: string[] = [];
+        if (this.selectedFile.length) {
+            files.forEach((file: MNodeStructureArchive) => {
+                if (!file.idFile && this.selectedFile[0].relativePath.indexOf(file.relativePath) !== -1) {
+                    folders.push(file.relativePath);
+                    let recursiveFoldersToOpen: string[] = this.foldersToOpen(file.childs);
+                    recursiveFoldersToOpen.forEach((relativePath: string) => {
+                        folders.push(relativePath);
+                    });
+                }
+            });
         }
+
+        return folders;
     }
 
 }
@@ -95,8 +93,8 @@ export class MTree extends ModulVue {
 const TreePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(TREE_NAME, 'plugin.install');
-        v.use(IconFilePlugin);
-        v.use(IconPlugin);
+        v.use(TreeNodePlugin);
+        v.use(I18nPlugin);
         v.component(TREE_NAME, MTree);
     }
 };

@@ -45,7 +45,6 @@ const components: string[] = [
     Components.RADIO_NAME,
     Components.RADIO_GROUP_NAME,
     Components.RADIO_STYLE_NAME,
-    Components.ROOT_TREE_NAME,
     Components.SCROLL_TOP_NAME,
     Components.SESSION_EXPIRED_NAME,
     Components.SIDEBAR_NAME,
@@ -64,6 +63,7 @@ const components: string[] = [
     Components.TIMEPICKER_NAME,
     Components.TOOLTIP_NAME,
     Components.TREE_NAME,
+    Components.TREE_NODE_NAME,
     Components.VALIDATION_MESSAGE_NAME
 ];
 

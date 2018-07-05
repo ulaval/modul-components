@@ -1,0 +1,21 @@
+<div class="m-tree">
+    <div v-if="isAFolder(node.idFile)" class="m-tree__with-childs">
+        <div class="m-tree__with-childs__header" @click="openClose()"  :class="{'m-tree__with-childs__header__disabled': isDisabled()}">
+            <span>{{ openCloseIcon() }}</span>
+            <m-icon size="20px" :name="folderIcon"></m-icon>
+            <span>{{ node.fileName }}</span>
+        </div>
+        <transition name="m-tree__with-childs__body">
+            <div v-show="isOpen" class="m-tree__with-childs__body">
+                <m-tree-node v-for="childs_node in node.childs" class="m-tree__with-childs__childs" @selectFile="selectFile" :node="childs_node" :openFolders="openFolders" :externalSelectedFile="externalSelectedFile" :icon="icon"></m-tree-node>
+            </div>
+        </transition>
+    </div>
+    <template v-else >
+        <m-link mode="button" class="m-tree__single-file" @click="selectFile(node)">
+            <m-icon-file :extension="extensionFile(node.relativePath)"></m-icon-file>
+            <span>{{ node.fileName }}</span>
+        </m-link>
+        <m-icon v-if="isFileSelected(node)" size="20px" :name="icon"></m-icon>
+    </template>
+</div>
