@@ -6,7 +6,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NODE_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
 import IconPlugin from '../icon/icon';
-import { MNodeStructureArchive } from '../tree/tree';
+import { MNodeStructureArchive, MSelectOption } from '../tree/tree';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
 const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
@@ -27,6 +27,15 @@ export class MTreeNode extends ModulVue {
 
     @Prop()
     openFolders: string[];
+
+    @Prop({
+        default: MSelectOption.NONE,
+        validator: value =>
+            value === MSelectOption.NONE ||
+            value === MSelectOption.SINGLE ||
+            value === MSelectOption.MULTIPLE
+    })
+    selection: MSelectOption;
 
     internalIsOpen: boolean = false;
     internalFolderIcon: string = FOLDER_CLOSED;
@@ -57,6 +66,10 @@ export class MTreeNode extends ModulVue {
         this.$emit('selectFile', node);
     }
 
+    openCloseIcon(): string {
+        return this.isOpen ? '-' : '+';
+    }
+
     openClose(): void {
         if (!this.isDisabled()) {
             this.isOpen = !this.isOpen;
@@ -64,12 +77,16 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    openCloseIcon(): string {
-        return this.isOpen ? '-' : '+';
-    }
-
     private manageFolderIcon(): void {
         this.folderIcon = this.isOpen ? FOLDER_OPEN : FOLDER_CLOSED;
+    }
+
+    get linkMode(): string {
+        return this.isInactiveButton ? 'text' : 'button';
+    }
+
+    get isInactiveButton(): boolean {
+        return this.selection === MSelectOption.NONE;
     }
 
     get folderIcon(): string {

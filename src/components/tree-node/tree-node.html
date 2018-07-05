@@ -7,12 +7,12 @@
         </div>
         <transition name="m-tree__with-childs__body">
             <div v-show="isOpen" class="m-tree__with-childs__body">
-                <m-tree-node v-for="childs_node in node.childs" class="m-tree__with-childs__childs" @selectFile="selectFile" :node="childs_node" :openFolders="openFolders" :externalSelectedFile="externalSelectedFile" :icon="icon"></m-tree-node>
+                <m-tree-node v-for="childs_node in node.childs" :selection="selection" class="m-tree__with-childs__childs" @selectFile="selectFile" :node="childs_node" :openFolders="openFolders" :externalSelectedFile="externalSelectedFile" :icon="icon"></m-tree-node>
             </div>
         </transition>
     </div>
     <template v-else >
-        <m-link mode="button" class="m-tree__single-file" @click="selectFile(node)">
+        <m-link :mode="linkMode" class="m-tree__single-file" @click="selectFile(node)" :disabled="isInactiveButton">
             <m-icon-file :extension="extensionFile(node.relativePath)"></m-icon-file>
             <span>{{ node.fileName }}</span>
         </m-link>
