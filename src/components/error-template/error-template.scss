@@ -1,10 +1,9 @@
 @import '../../styles/abstracts/variables';
 
 .m-error-template {
-    text-align: center;
-
     &__title {
         font-size: $m-font-size--h3;
+        text-align: center;
 
         .m--is-skin-information & {
             color: $m-color--interactive;
@@ -40,18 +39,15 @@
             z-index: 0;
 
             .m--is-skin-information & {
-                background-color: #e4f4ff;
-                // background-color: $m-color--interactive;
+                background-color: $m-color--interactive-lightest;
             }
 
             .m--is-skin-error & {
-                background-color: #fcf2f3;
-                // background-color: $m-color--error;
+                background-color: $m-color--error-lightest;
             }
 
             .m--is-skin-warning & {
-                background-color: #fff8e6;
-                // background-color: $m-color--warning;
+                background-color: $m-color--warning-lightest;
             }
         }
     }
@@ -73,15 +69,12 @@
         }
     }
 
-    &__hints {
-        text-align: left;
-    }
-
+    &__hints,
     &__links {
-        text-align: left;
+        text-align: left; // needed when inside a popup
     }
 
     &__details {
-        text-align: left;
+        margin: $m-spacing 0;
     }
 }
