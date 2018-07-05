@@ -15,7 +15,7 @@ exports[`MAcordion should render correctly when disabled 1`] = `
 `;
 
 exports[`MAcordion should render correctly when it is opened 1`] = `
-<article class="m-accordion m--is-default m--has-icon-left m--has-icon-large">
+<article class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large">
     <div tabindex="0" id="uuid" role="tab" aria-expanded="true" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
         <div class="m-accordion__header__content"> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-accordion__header-icon m--is-closed m--is-left m--is-large"></span></div>
     <div role="tabpanel" id="uuid-controls" aria-labelledby="uuid"

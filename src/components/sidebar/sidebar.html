@@ -22,7 +22,7 @@
                             v-if="hasHeader">
                         <h2 class="m-sidebar__title" v-if="hasTitle">{{ title }}</h2>
                         <slot name="header"></slot>
-                        <m-icon-button @click="closeDialog" icon-name="close" class="m-sidebar__header__close-button" v-if="closeButton && origin !== 'bottom'">
+                        <m-icon-button @click="closeDialog" icon-name="m-svg__close-clear" class="m-sidebar__header__close-button" v-if="closeButton && origin !== 'bottom'">
                             <m-i18n k="m-sidebar:close"></m-i18n>
                         </m-icon-button>
                     </header>

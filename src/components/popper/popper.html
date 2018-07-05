@@ -15,12 +15,22 @@
                      class="m-popper__article"
                      :class="[{ 'm--is-default-anim': defaultAnim,
                                 'm--is-open': defaultAnimOpen,
-                                'm--has-shadow': shadow },
+                                'm--has-shadow': shadow,
+                                'm--has-background': background },
                                 'm--is-placement-' + placement,
                                 className ]"
                      :aria-hidden="!propOpen"
+                     :style="{ width: width }"
                      v-show="propOpen" v-if="preload || loaded">
-                <slot></slot>
+                <header class="m-popper__header" :class="{ 'm--no-padding': !padding || !paddingHeader }"  v-if="hasHeaderSlot">
+                    <slot name="header"></slot>
+                </header>
+                <div class="m-popper__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
+                    <slot></slot>
+                </div>
+                <footer class="m-popper__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot">
+                    <slot name="footer"></slot>
+                </footer>
             </article>
         </transition>
     </portal>

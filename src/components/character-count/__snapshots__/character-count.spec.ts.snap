@@ -3,13 +3,13 @@
 exports[`MCharacterCount should render correctly 1`] = `""`;
 
 exports[`MCharacterCount should render correctly when maxLength prop is set 1`] = `
-<div>
-    <div aria-hidden="true" class="m-character-count">20<strong>/40</strong></div>
+<div class="m-character-count">
+    <div aria-hidden="true" class="m-character-count__wrap">20<strong>/40</strong></div>
 </div>
 `;
 
 exports[`MCharacterCount should render correctly when transition props is false 1`] = `
-<div>
-    <div aria-hidden="true" class="m-character-count">20<strong>/40</strong></div>
+<div class="m-character-count">
+    <div aria-hidden="true" class="m-character-count__wrap">20<strong>/40</strong></div>
 </div>
 `;
