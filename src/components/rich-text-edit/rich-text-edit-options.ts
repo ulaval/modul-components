@@ -34,6 +34,7 @@ library.add(faExpand, faCompress, faBold, faItalic, faUnderline, faStrikethrough
 export abstract class MRichTextEditorDefaultOptions {
     public immediateVueModelUpdate: boolean = true;
     public iconsTemplate: string = 'font_awesome_5';
+    public charCounterCount: boolean = false;
 
     public abstract toolbarButtons: string[] = [];
 
@@ -45,8 +46,8 @@ export abstract class MRichTextEditorDefaultOptions {
 }
 
 export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOptions {
-    public toolbarButtons: string[] = ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'paragraphFormat', 'align', 'formalOL',
-        'formalUL', 'outdent', 'indent', 'quote', '|', 'insertLink', 'insertTable', '|', 'specialCharacters', 'selectAll', 'clearFormatting', '|',
+    public toolbarButtons: string[] = ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'paragraphFormat', 'align', 'formatOL',
+        'formatUL', 'outdent', 'indent', 'quote', '|', 'insertLink', 'insertTable', '|', 'specialCharacters', 'selectAll', 'clearFormatting', '|',
         'help', '|', 'undo', 'redo' ];
 
     constructor(key: string, language: string | undefined) { super(key, language); }
