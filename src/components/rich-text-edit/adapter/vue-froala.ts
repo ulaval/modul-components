@@ -24,6 +24,7 @@ export class VueFroala extends Vue {
     @Prop()
     public config: any;
 
+    protected editorInstance: any = undefined;
     protected currentTag: string = 'div';
     protected listeningEvents: any[] = [];
     protected _$element: any = undefined;
@@ -38,10 +39,17 @@ export class VueFroala extends Vue {
     protected model: string | undefined = undefined;
     protected oldModel: string | undefined = undefined;
 
+    protected isFocused: boolean = false;
+    protected isInitialized: boolean = false;
+
     @Watch('value')
     public refreshValue(): void {
         this.model = this.value;
         this.updateValue();
+    }
+
+    public get isEmpty(): boolean {
+        return this.value.length === 0;
     }
 
     protected created(): void {
@@ -66,7 +74,36 @@ export class VueFroala extends Vue {
             return;
         }
 
-        this.currentConfig = this.config || this.defaultConfig;
+        this.currentConfig = Object.assign(this.config || this.defaultConfig, {
+            events: {
+                'froalaEditor.initialized': (e, editor) => {
+                    this.isInitialized = true;
+                    this.editorInstance = editor;
+                    editor.toolbar.hide();
+                    editor.quickInsert.hide();
+                },
+                'froalaEditor.focus': (e, editor) => {
+                    editor.toolbar.show();
+                    this.isFocused = true;
+                    this.$emit('focus');
+                },
+                'froalaEditor.blur': (e, editor) => {
+                    editor.toolbar.hide();
+                    this.isFocused = false;
+                    this.$emit('blur');
+                },
+                'froalaEditor.keyup': (e, editor) => {
+                    (window as any).editor = editor;
+                    this.$emit('keyup');
+                },
+                'froalaEditor.keydown': (e, editor) => {
+                    this.$emit('keydown');
+                },
+                'froalaEditor.paste.after': (e, editor) => {
+                    this.$emit('paste');
+                }
+            }
+        });
 
         this._$element = $(this.$refs.editor);
 

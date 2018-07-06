@@ -1,3 +1,17 @@
 .vue-froala {
-    background-color: white; // TODO remove this.  Placeholder.
+    &--collapsed {
+        // Style overrides when the editor is not focused when there is nothing to display.
+        /deep/ .fr-box.fr-basic .fr-element {
+            padding: 0;
+            min-height: unset;
+
+            p { margin: 0; }
+        }
+
+        /deep/ .fr-box.fr-basic.fr-top .fr-wrapper {
+            box-shadow: unset;
+        }
+
+        /deep/ .fr-wrapper.show-placeholder .fr-placeholder { display: none; }
+    }
 }

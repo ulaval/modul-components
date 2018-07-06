@@ -1,4 +1,8 @@
-<div class="vue-froala">
+<div class="vue-froala"
+    :class="{
+        'vue-froala--focused': isFocused,
+        'vue-froala--collapsed': isInitialized && !isFocused && isEmpty
+    }">
     <component ref="editor" :is="tag"></component>
 </div>
 
