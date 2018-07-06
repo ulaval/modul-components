@@ -5,6 +5,7 @@ import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { InputManagement, InputManagementData } from './../../mixins/input-management/input-management';
 import VueFroala from './adapter/vue-froala';
@@ -14,8 +15,6 @@ import WithRender from './rich-text-edit.html?style=./rich-text-edit.scss';
 require('froala-editor/js/froala_editor.pkgd.min');
 require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
-
-export class MRichTextEditorOptions {}
 
 const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
@@ -41,10 +40,6 @@ export class MRichTextEdit extends ModulVue implements InputManagementData {
     public tag: string = 'textarea';
     @Prop({ default: '' })
     public value: string = '';
-    @Prop({ default: true })
-    public readOnly: boolean;
-    @Prop()
-    public options: MRichTextEditorOptions | undefined;
     @Prop({
         default: MRichTextEditMode.STANDARD,
         validator: value => value === MRichTextEditMode.STANDARD
@@ -52,8 +47,11 @@ export class MRichTextEdit extends ModulVue implements InputManagementData {
 
     public mode: MRichTextEditMode;
 
+    protected id: string = `mTextarea-${uuid.generate()}`;
     protected get internalOptions(): any {
-        return Object.assign(this.getDefaultOptions(), this.options);
+        const propOptions: any = {};
+        if (this.as<InputManagement>().placeholder) { propOptions.placeholderText = this.as<InputManagement>().placeholder; }
+        return Object.assign(this.getDefaultOptions(), propOptions);
     }
 
     protected get froalaLicenseKey(): string {

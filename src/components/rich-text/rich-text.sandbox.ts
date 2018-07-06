@@ -12,6 +12,8 @@ import WithRender from './rich-text.sandbox.html';
 export class MRichTextSandBox extends Vue {
     public model: string = '';
     public isReadOnly: boolean = true;
+    public focus: boolean = false;
+    public placeholder: string = 'test';
 }
 
 const RichTextSandBoxPlugin: PluginObject<any> = {

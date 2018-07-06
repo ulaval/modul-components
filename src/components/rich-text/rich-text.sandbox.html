@@ -5,7 +5,10 @@
         fonctionne sans options spécifiée
     </p>
     <p>
-        <m-rich-text-edit v-model="model" :label="'test123123'" max-width="large"></m-rich-text-edit>
+        <button @click="focus = !focus">Change focus (now: {{ focus }})</button>
+        <button @click="placeholder = placeholder + 'a'">Change placeholder (now: {{ placeholder }})</button>
+        <br />
+        <m-rich-text-edit v-model="model" :label="'test123123'" :max-width="'large'" :placeholder="placeholder" :focus="focus"></m-rich-text-edit>
         <m-rich-text :value="model"></m-rich-text>
     </p>
 </div>
