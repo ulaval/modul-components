@@ -75,6 +75,7 @@ export class VueFroala extends Vue {
         }
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
+            // we reemit each valid input events so froala can work in input-style component.
             events: {
                 'froalaEditor.initialized': (e, editor) => {
                     this.isInitialized = true;
