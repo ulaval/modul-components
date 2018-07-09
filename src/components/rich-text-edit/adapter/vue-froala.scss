@@ -13,5 +13,8 @@
         }
 
         /deep/ .fr-wrapper.show-placeholder .fr-placeholder { display: none; }
+
+        // Allow popups to appear over modals.
+        /deep/ .fr-popup .fr-desktop .fr-active { z-index: 103; }
     }
 }
