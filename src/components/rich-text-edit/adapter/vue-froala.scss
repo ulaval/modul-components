@@ -1,6 +1,6 @@
 .vue-froala {
     &--collapsed {
-        // Style overrides when the editor is not focused when there is nothing to display.
+        // Style overrides when the editor is not focused when there is nothing to display.  Rework this as you wish.
         /deep/ .fr-box.fr-basic .fr-element {
             padding: 0;
             min-height: unset;
@@ -13,8 +13,9 @@
         }
 
         /deep/ .fr-wrapper.show-placeholder .fr-placeholder { display: none; }
+    }
 
-        // Allow popups to appear over modals.
-        /deep/ .fr-toolbar { z-index: 200; }
+    /deep/ .fr-box.fr-basic .fr-element {
+        font-weight: 300; // important since font-weight is bold by default otherwise.  A constant must exist somwhere.
     }
 }

@@ -47,8 +47,6 @@ export abstract class MRichTextEditorDefaultOptions {
     public lineBreakerTags: string [] = [];
     public zIndex: number = 200;
 
-    public abstract toolbarButtons: string[] = [];
-
     constructor(public key: string, public language: string = 'en_CA') {
         // tslint:disable-next-line:no-console
         console.log('OHOHOHOHOH', language);
@@ -65,6 +63,8 @@ export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOption
 
     public tableEditButtons: string[] = ['tableHeader', 'tableRemove', '|', 'tableRows', 'tableColumns', '|', 'tableCells',
         'tableCellVerticalAlign', 'tableCellHorizontalAlign'];
+
+    public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
 
     constructor(key: string, language?: string | undefined) { super(key, language); }
 }
