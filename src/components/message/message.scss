@@ -96,7 +96,8 @@ $m-message-size: 22px;
             }
 
             &__icon {
-                width: 44px;
+                flex-shrink: 0;
+                width: $m-touch-size;
                 justify-content: center;
                 align-items: center;
                 border-right: 1px solid;
@@ -108,7 +109,8 @@ $m-message-size: 22px;
 
             &__body {
                 padding: $m-margin;
-                flex: 1;
+                flex: 1 1 auto;
+                width: calc(100% - #{$m-touch-size});
 
                 &.m--has-close-button {
                     padding-right: $m-touch-size;
