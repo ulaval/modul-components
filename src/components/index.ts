@@ -19,6 +19,7 @@ import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import EditWindow from './edit-window/edit-window';
 import ErrorMessage from './error-message/error-message';
 import FileSelectPlugin from './file-select/file-select';
+import FileTreePlugin from './file-tree/file-tree';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
@@ -139,6 +140,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(InplaceEditPlugin);
         Vue.use(TreePlugin);
         Vue.use(TreeNodePlugin);
+        Vue.use(FileTreePlugin);
     }
 };
 

@@ -42,6 +42,9 @@ export class MTree<T> extends ModulVue {
     @Prop()
     externalSelectedNode: TreeNode<T>[];
 
+    @Prop({ default: false })
+    isTreeFile: boolean;
+
     internalSelectedNode: TreeNode<T>[] = [];
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
 
@@ -55,7 +58,7 @@ export class MTree<T> extends ModulVue {
 
     selectNode(node: TreeNode<T>): void {
         this.selectedNode = [node];
-        this.$emit('selectNewFile', node);
+        this.$emit('selectNode', node);
     }
 
     set selectedNode(node: TreeNode<T>[]) {
