@@ -31,4 +31,15 @@
             @paste="onPaste"
             ref="input"></froala>
     </m-input-style>
+    <div class="m-textfield__validation">
+        <m-validation-message
+            class="m-textfield__validation__message"
+            :disabled="isDisabled"
+            :waiting="isWaiting"
+            :error="hasError"
+            :error-message="errorMessage"
+            :valid="isValid"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"></m-validation-message>
+    </div>
 </div>

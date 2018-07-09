@@ -5,10 +5,41 @@
         fonctionne sans options spécifiée
     </p>
     <p>
-        <button @click="focus = !focus">Change focus (now: {{ focus }})</button>
-        <button @click="placeholder = placeholder + 'a'">Change placeholder (now: {{ placeholder }})</button>
-        <br />
-        <m-rich-text-edit v-model="model" :label="'test123123'" :max-width="'large'" :placeholder="placeholder" :focus="focus"></m-rich-text-edit>
+        <div><button @click="focus = !focus">Change focus (now: {{ focus }})</button></div>
+        <div><button @click="placeholder = placeholder + 'a'">Change placeholder (now: {{ placeholder }})</button></div>
+        <div>
+            Error message: <input type="text" v-model="errorMessage" />
+        </div>
+        <div>
+            Valid message: <input type="text" v-model="validMessage" />
+        </div>
+        <div>
+            Helper message: <input type="text" v-model="helperMessage" />
+        </div>
+        <div><button @click="waiting = !waiting">Waiting (now: {{ waiting }})</button></div>
+        <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
+        <m-rich-text-edit v-model="model"
+            :label="'test123123'"
+            :max-width="'large'"
+            :placeholder="placeholder"
+            :focus="focus"
+            :error="error"
+            :error-message="errorMessage"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"
+            :waiting="waiting"
+            :disabled="disabled"></m-rich-text-edit>
+        <m-textfield v-model="model"
+            :label="'test123123'"
+            :max-width="'large'"
+            :placeholder="placeholder"
+            :focus="focus"
+            :error="error"
+            :error-message="errorMessage"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"
+            :waiting="waiting"
+            :disabled="disabled"></m-textfield>
         <m-rich-text :value="model"></m-rich-text>
     </p>
 </div>

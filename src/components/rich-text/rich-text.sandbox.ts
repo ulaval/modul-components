@@ -14,6 +14,12 @@ export class MRichTextSandBox extends Vue {
     public isReadOnly: boolean = true;
     public focus: boolean = false;
     public placeholder: string = 'test';
+    public error: boolean = false;
+    public errorMessage: string = '';
+    public validMessage: string = '';
+    public helperMessage: string = '';
+    public waiting: boolean = false;
+    public disabled: boolean = false;
 }
 
 const RichTextSandBoxPlugin: PluginObject<any> = {
