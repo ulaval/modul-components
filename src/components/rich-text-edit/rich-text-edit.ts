@@ -44,7 +44,6 @@ export class MRichTextEdit extends ModulVue implements InputManagementData {
         default: MRichTextEditMode.STANDARD,
         validator: value => value === MRichTextEditMode.STANDARD
     })
-
     public mode: MRichTextEditMode;
 
     protected id: string = `mTextarea-${uuid.generate()}`;
@@ -63,7 +62,11 @@ export class MRichTextEdit extends ModulVue implements InputManagementData {
     }
 
     protected getDefaultOptions(): MRichTextEditorDefaultOptions {
-        return new MRichTextEditorStandardOptions(this.froalaLicenseKey/*, this.$i18n.currentLang() */);
+        if (this.mode === MRichTextEditMode.STANDARD) {
+            return new MRichTextEditorStandardOptions(this.froalaLicenseKey/*, this.$i18n.currentLang() */);
+        }
+
+        throw new Error(`rich-text-edit: mode ${this.mode} is not a valid mode.  See MRichTextEditMode Enum for a list of compatible modes.`);
     }
 }
 
