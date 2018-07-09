@@ -45,6 +45,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public charCounterCount: boolean = false;
     public tableInsertHelper: boolean = false;
     public lineBreakerTags: string [] = [];
+    public zIndex: number = 200;
 
     public abstract toolbarButtons: string[] = [];
 
