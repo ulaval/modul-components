@@ -8,11 +8,10 @@ import I18nPlugin from '../i18n/i18n';
 import TreeNodePlugin from '../tree-node/tree-node';
 import WithRender from './tree.html';
 
-export interface MNodeStructureArchive {
-    relativePath: string;
-    idFile: string;
-    fileName: string;
-    childs: MNodeStructureArchive[];
+export interface TreeNode<T> {
+    content: T;
+    childs: TreeNode<T>[];
+    // should be childs?: TreeNode<T>[]
 }
 
 export enum MSelectOption {
@@ -23,10 +22,10 @@ export enum MSelectOption {
 
 @WithRender
 @Component
-export class MTree extends ModulVue {
+export class MTree<T> extends ModulVue {
 
     @Prop()
-    tree: MNodeStructureArchive[];
+    tree: TreeNode<T>[];
 
     @Prop({
         default: MSelectOption.NONE,
@@ -41,49 +40,30 @@ export class MTree extends ModulVue {
     icon: string;
 
     @Prop()
-    externalSelectedFile: MNodeStructureArchive[];
+    externalSelectedNode: TreeNode<T>[];
 
-    internalSelectedFile: MNodeStructureArchive[] = [];
-    openFolders: string[] = [];
+    internalSelectedNode: TreeNode<T>[] = [];
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
 
     created(): void {
-        this.selectedFile = this.externalSelectedFile ? this.externalSelectedFile : [];
-        this.openFolders = this.foldersToOpen(this.tree);
+        this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];
     }
 
     isTreeEmpty(): boolean {
         return !this.tree.length;
     }
 
-    selectFile(file: MNodeStructureArchive): void {
-        this.selectedFile = [file];
-        this.$emit('selectNewFile', file);
+    selectNode(node: TreeNode<T>): void {
+        this.selectedNode = [node];
+        this.$emit('selectNewFile', node);
     }
 
-    set selectedFile(file: MNodeStructureArchive[]) {
-        this.internalSelectedFile = file;
+    set selectedNode(node: TreeNode<T>[]) {
+        this.internalSelectedNode = node;
     }
 
-    get selectedFile(): MNodeStructureArchive[] {
-        return this.internalSelectedFile;
-    }
-
-    private foldersToOpen(files: MNodeStructureArchive[]): string[] {
-        let folders: string[] = [];
-        if (this.selectedFile.length) {
-            files.forEach((file: MNodeStructureArchive) => {
-                if (!file.idFile && this.selectedFile[0].relativePath.indexOf(file.relativePath) !== -1) {
-                    folders.push(file.relativePath);
-                    let recursiveFoldersToOpen: string[] = this.foldersToOpen(file.childs);
-                    recursiveFoldersToOpen.forEach((relativePath: string) => {
-                        folders.push(relativePath);
-                    });
-                }
-            });
-        }
-
-        return folders;
+    get selectedNode(): TreeNode<T>[] {
+        return this.internalSelectedNode;
     }
 
 }

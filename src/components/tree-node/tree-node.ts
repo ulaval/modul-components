@@ -6,7 +6,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NODE_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
 import IconPlugin from '../icon/icon';
-import { MNodeStructureArchive, MSelectOption } from '../tree/tree';
+import { MSelectOption, TreeNode } from '../tree/tree';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
 const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
@@ -14,19 +14,16 @@ const FOLDER_CLOSED: string = 'm-svg__file-zip';
 
 @WithRender
 @Component
-export class MTreeNode extends ModulVue {
+export class MTreeNode<T> extends ModulVue {
 
     @Prop()
-    node: MNodeStructureArchive;
+    node: TreeNode<T>;
 
     @Prop()
-    externalSelectedFile: MNodeStructureArchive[];
+    externalSelectedNode: TreeNode<T>[];
 
     @Prop()
     icon: string;
-
-    @Prop()
-    openFolders: string[];
 
     @Prop({
         default: MSelectOption.NONE,
@@ -41,20 +38,20 @@ export class MTreeNode extends ModulVue {
     internalFolderIcon: string = FOLDER_CLOSED;
 
     created(): void {
-        this.internalIsOpen = (this.openFolders.length && this.openFolders.indexOf(this.node.relativePath) !== -1) ? true : false;
+        this.internalIsOpen = !this.node.content['idNode'] && this.externalSelectedNode[0].content['elementPath'].indexOf(this.node.content['elementPath']) !== -1;
         this.manageFolderIcon();
     }
 
-    isAFolder(idFile: string): boolean {
-        return !idFile;
+    isAFolder(idNode: string): boolean {
+        return !idNode;
     }
 
     isDisabled(): boolean {
         return !this.node.childs.length;
     }
 
-    isFileSelected(node: MNodeStructureArchive): boolean {
-        return !!this.externalSelectedFile.length && !!node.idFile && this.externalSelectedFile[0].idFile === node.idFile;
+    isFileSelected(node: TreeNode<T>): boolean {
+        return !!this.externalSelectedNode.length && !!node.content['idNode'] && this.externalSelectedNode[0].content['idNode'] === node.content['idNode'];
     }
 
     extensionFile(filename: string = ''): string {
@@ -62,9 +59,9 @@ export class MTreeNode extends ModulVue {
         return '.' + extension;
     }
 
-    selectFile(node: MNodeStructureArchive): void {
+    selectNode(node: TreeNode<T>): void {
         if (this.selection !== MSelectOption.MULTIPLE) {
-            this.$emit('selectFile', node);
+            this.$emit('selectNode', node);
         }
     }
 
@@ -89,6 +86,10 @@ export class MTreeNode extends ModulVue {
 
     get isInactiveButton(): boolean {
         return this.selection === MSelectOption.NONE;
+    }
+
+    get nodeTitle(): string {
+        return this.node.content['elementLabel'];
     }
 
     get folderIcon(): string {
