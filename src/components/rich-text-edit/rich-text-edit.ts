@@ -63,7 +63,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData {
     }
 
     protected getDefaultOptions(): MRichTextEditorDefaultOptions {
-        return new MRichTextEditorStandardOptions(this.froalaLicenseKey, this.$i18n.currentLang());
+        return new MRichTextEditorStandardOptions(this.froalaLicenseKey/*, this.$i18n.currentLang() */);
     }
 }
 
