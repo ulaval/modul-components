@@ -37,13 +37,16 @@ export class MTree<T> extends ModulVue {
     selection: MSelectOption;
 
     @Prop({ default: 'information' })
-    icon: string;
+    selectionIcon: string;
 
     @Prop()
     externalSelectedNode: TreeNode<T>[];
 
     @Prop({ default: false })
-    isTreeFile: boolean;
+    isAllOpen: boolean;
+
+    @Prop({ default: false })
+    isFileTree: boolean;
 
     internalSelectedNode: TreeNode<T>[] = [];
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');

@@ -20,7 +20,7 @@ export class MTreeNode<T> extends ModulVue {
     externalSelectedNode: TreeNode<T>[];
 
     @Prop()
-    icon: string;
+    selectionIcon: string;
 
     @Prop({
         default: MSelectOption.NONE,
@@ -31,13 +31,16 @@ export class MTreeNode<T> extends ModulVue {
     })
     selection: MSelectOption;
 
-    @Prop({ default: false })
-    isFile: boolean;
+    @Prop()
+    isAllOpen: boolean;
+
+    @Prop()
+    isFileTree: boolean;
 
     internalIsOpen: boolean = false;
 
     created(): void {
-        this.internalIsOpen = !this.node.content['idNode'] && this.externalSelectedNode[0].content['elementPath'].indexOf(this.node.content['elementPath']) !== -1;
+        this.internalIsOpen = this.isAllOpen || (!this.node.content['idNode'] && this.externalSelectedNode[0].content['elementPath'].indexOf(this.node.content['elementPath']) !== -1);
     }
 
     hasChild(idNode: string): boolean {
@@ -59,6 +62,7 @@ export class MTreeNode<T> extends ModulVue {
     }
 
     openCloseIcon(): string {
+        // TODO: change for an icon or animation in CSS
         return this.isOpen ? '-' : '+';
     }
 
