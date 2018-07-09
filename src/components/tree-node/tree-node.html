@@ -1,5 +1,5 @@
 <li class="m-tree">
-    <div v-if="hasChild(node.content.idNode)" class="m-tree__with-childs">
+    <div v-if="canHaveChildren" class="m-tree__with-childs">
         <div class="m-tree__with-childs__header" @click="openClose()"  :class="{'m-tree__with-childs__header__disabled': isDisabled()}">
             <span>{{ openCloseIcon() }}</span>
             <m-file-tree v-if="isFileTree" :file="node.content" :isOpen="isOpen"></m-file-tree>
@@ -7,15 +7,15 @@
         </div>
         <transition name="m-tree__with-childs__body">
             <ul v-show="isOpen" class="m-tree__with-childs__body">
-                <m-tree-node v-for="childsNode in node.childs" class="m-tree__with-childs__childs" :isFileTree="isFileTree" :selection="selection" :node="childsNode" :externalSelectedNode="externalSelectedNode" :icon="icon" :isAllOpen="isAllOpen" @selectNode="selectNode"></m-tree-node>
+                <m-tree-node v-for="childsNode in node.childs" class="m-tree__with-childs__childs" :isFileTree="isFileTree" :selectionNumber="selectionNumber" :selectionIcon="selectionIcon" :node="childsNode" :externalSelectedNode="externalSelectedNode" :isAllOpen="isAllOpen" @selectNewNode="selectNewNode"></m-tree-node>
             </ul>
         </transition>
     </div>
     <template v-else >
-        <m-link :mode="linkMode" class="m-tree__single-node" @click="selectNode(node)" :disabled="isInactiveButton">
-            <m-file-tree v-if="isFileTree" :file="node.content"></m-file-tree>
-            <span>{{ nodeTitle }}</span>
-        </m-link>
-        <m-icon v-if="isNodeSelected(node)" size="20px" :name="selectionIcon"></m-icon>
+            <m-link :mode="linkMode" class="m-tree__single-node" @click="selectNewNode(node)" :disabled="isInactiveButton">
+                <m-file-tree v-if="isFileTree" :file="node.content"></m-file-tree>
+                <span>{{ nodeTitle }}</span>
+            </m-link>
+            <m-icon v-if="isNodeSelected" size="20px" :name="selectionIcon"></m-icon>
     </template>
 </li>

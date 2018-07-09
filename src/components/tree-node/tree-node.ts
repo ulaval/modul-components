@@ -29,7 +29,7 @@ export class MTreeNode<T> extends ModulVue {
             value === MSelectOption.SINGLE ||
             value === MSelectOption.MULTIPLE
     })
-    selection: MSelectOption;
+    selectionNumber: MSelectOption;
 
     @Prop()
     isAllOpen: boolean;
@@ -43,21 +43,14 @@ export class MTreeNode<T> extends ModulVue {
         this.internalIsOpen = this.isAllOpen || (!this.node.content['idNode'] && this.externalSelectedNode[0].content['elementPath'].indexOf(this.node.content['elementPath']) !== -1);
     }
 
-    hasChild(idNode: string): boolean {
-        return !idNode;
-    }
-
+    // If a node can have children but don't
     isDisabled(): boolean {
         return !this.node.childs.length;
     }
 
-    isNodeSelected(node: TreeNode<T>): boolean {
-        return !!this.externalSelectedNode.length && !!node.content['idNode'] && this.externalSelectedNode[0].content['idNode'] === node.content['idNode'];
-    }
-
-    selectNode(node: TreeNode<T>): void {
-        if (this.selection !== MSelectOption.MULTIPLE) {
-            this.$emit('selectNode', node);
+    selectNewNode(node: TreeNode<T>): void {
+        if (this.selectionNumber !== MSelectOption.MULTIPLE) {
+            this.$emit('selectNewNode', node);
         }
     }
 
@@ -72,12 +65,21 @@ export class MTreeNode<T> extends ModulVue {
         }
     }
 
+    isNodeSelected(): boolean {
+        return !!this.externalSelectedNode.length && !!this.node.content['idNode'] && this.externalSelectedNode[0].content['idNode'] === this.node.content['idNode'];
+    }
+
+    // A node without an id, can have children.
+    get canHaveChildren(): boolean {
+        return !this.node.content['idNode'];
+    }
+
     get linkMode(): string {
         return this.isInactiveButton ? 'text' : 'button';
     }
 
     get isInactiveButton(): boolean {
-        return this.selection === MSelectOption.NONE;
+        return this.selectionNumber === MSelectOption.NONE;
     }
 
     get nodeTitle(): string {

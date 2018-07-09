@@ -34,7 +34,7 @@ export class MTree<T> extends ModulVue {
             value === MSelectOption.SINGLE ||
             value === MSelectOption.MULTIPLE
     })
-    selection: MSelectOption;
+    selectionNumber: MSelectOption;
 
     @Prop({ default: 'information' })
     selectionIcon: string;
@@ -52,23 +52,23 @@ export class MTree<T> extends ModulVue {
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
 
     created(): void {
-        this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];
+        this.selectNode = this.externalSelectedNode ? this.externalSelectedNode : [];
     }
 
     isTreeEmpty(): boolean {
         return !this.tree.length;
     }
 
-    selectNode(node: TreeNode<T>): void {
-        this.selectedNode = [node];
+    selectNewNode(node: TreeNode<T>): void {
+        this.selectNode = [node];
         this.$emit('selectNode', node);
     }
 
-    set selectedNode(node: TreeNode<T>[]) {
+    set selectNode(node: TreeNode<T>[]) {
         this.internalSelectedNode = node;
     }
 
-    get selectedNode(): TreeNode<T>[] {
+    get selectNode(): TreeNode<T>[] {
         return this.internalSelectedNode;
     }
 
