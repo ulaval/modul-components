@@ -11,8 +11,8 @@
     <div class="m-error-template__details" v-if="$slots['default']">
         <slot></slot>
     </div>
-    <ul ref="links" v-if="showLinks" class="m-error-template__links">
-        <li v-for="link in links">
+    <ul v-if="showLinks" class="m-error-template__links">
+        <li ref="link" v-for="link in links">
             <m-link class="m-error-template__link" icon-name="m-svg__chevron--right" mode="link" :url="link.url" target="_blank">{{link.label}}</m-link>
         </li>
     </ul>

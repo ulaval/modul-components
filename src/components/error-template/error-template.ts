@@ -41,18 +41,18 @@ export class MErrorTemplate extends ModulVue {
     @Prop()
     public title: string;
 
-    @Prop()
-    public hints?: string[];
+    @Prop({ default: [] })
+    public hints: string[];
 
-    @Prop()
-    public links?: Link[];
+    @Prop({ default: [] })
+    public links: Link[];
 
     get showHints(): boolean {
-        return this.hints && this.hints.length > 0 ? true : false;
+        return this.hints.length > 0 ? true : false;
     }
 
-    get showlinks(): boolean {
-        return this.links && this.links.length > 0 ? true : false;
+    get showLinks(): boolean {
+        return this.links.length > 0 ? true : false;
     }
 
 }
