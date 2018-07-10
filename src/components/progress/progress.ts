@@ -36,6 +36,8 @@ export class MProgress extends ModulVue {
             value === MProgressState.Error
     })
     public state: MProgressState;
+    @Prop({ default: true })
+    public borderRadius: boolean;
 
     private mode: string;
     private styleTag: HTMLElement | null;
@@ -80,7 +82,7 @@ export class MProgress extends ModulVue {
     }
 
     private get radiusSize(): string {
-        return this.circle ? 'initial' : this.size / 2 + 'px';
+        return this.circle || !this.borderRadius ? 'initial' : this.size / 2 + 'px';
     }
 
     private get styleObject(): { [name: string ]: string } {
