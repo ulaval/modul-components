@@ -18,4 +18,18 @@
     /deep/ .fr-box.fr-basic .fr-element {
         font-weight: 300; // important since font-weight is bold by default otherwise.  A constant must exist somwhere.
     }
+
+    /deep/ .fr-element {
+        ul { padding: inherit; }
+
+        li {
+            padding: 0;
+            list-style: unset;
+        }
+    }
+
+    /deep/ .fr-toolbar {
+        margin-top: 5px;
+        border-top: 2px solid #09f !important; // change for constant
+    }
 }

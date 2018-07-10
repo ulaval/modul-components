@@ -33,11 +33,11 @@ body,
 
 ul,
 li {
-    // padding: 0; can we safely remove this?  If not, override this in rich-text-editor.scss.
+    padding: 0;
 }
 
 li {
-    // list-style: none; can we safely remove this?  If not, override this in rich-text-editor.scss.
+    list-style: none;
 }
 
 button {
