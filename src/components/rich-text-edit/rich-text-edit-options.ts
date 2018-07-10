@@ -46,6 +46,8 @@ export abstract class MRichTextEditorDefaultOptions {
     public tableInsertHelper: boolean = false;
     public lineBreakerTags: string [] = [];
     public zIndex: number = 200;
+    public toolbarSticky: boolean = true;
+    public toolbarStickyOffset: number = 0;
 
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {

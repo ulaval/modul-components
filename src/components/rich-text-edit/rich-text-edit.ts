@@ -50,11 +50,16 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
         validator: value => value === MRichTextEditMode.STANDARD
     })
     public mode: MRichTextEditMode;
+    @Prop()
+    public toolbarStickyOffset: number = 0;
 
     protected id: string = `mTextarea-${uuid.generate()}`;
     protected get internalOptions(): any {
         const propOptions: any = {};
         if (this.as<InputManagement>().placeholder) { propOptions.placeholderText = this.as<InputManagement>().placeholder; }
+        if (this.toolbarStickyOffset) { propOptions.toolbarStickyOffset = this.toolbarStickyOffset; }
+        // tslint:disable-next-line:no-console
+        console.log('test', Object.assign(this.getDefaultOptions(), propOptions));
         return Object.assign(this.getDefaultOptions(), propOptions);
     }
 
