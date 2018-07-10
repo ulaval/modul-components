@@ -1,6 +1,5 @@
-// Original source can be found at https://github.com/froala/vue-froala-wysiwyg
-// This code is a quick fix to remove the global usage of $ / jQuery in vueFroala while we're awaiting answers from the codeowners of the repo.
-// Once we have ours answers, a PR adressing the issue should be provided.
+// This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
+// However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
 import Vue from 'vue';
 import Component from 'vue-class-component';
@@ -9,6 +8,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
 const SPECIAL_TAGS: string[] = ['img', 'button', 'input', 'a'];
+
 const INNER_HTML_ATTR: string = 'innerHTML';
 @WithRender
 @Component
