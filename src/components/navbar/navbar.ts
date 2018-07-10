@@ -15,11 +15,11 @@ const CSSNAVBARITEM: string = 'm-navbar-item';
 
 export enum MNavbarSkin {
     Light = 'light',
-    Dark = 'dark',
+    Darker = 'darker',
+    Darkest = 'darkest',
     LightTab = 'light-tab',
     DarkTab = 'dark-tab',
     Plain = 'plain',
-    Simple = 'simple',
     Arrow = 'arrow'
 }
 
@@ -35,11 +35,11 @@ export class MNavbar extends BaseNavbar implements Navbar {
         default: MNavbarSkin.LightTab,
         validator: value =>
             value === MNavbarSkin.Light ||
-            value === MNavbarSkin.Dark ||
+            value === MNavbarSkin.Darker ||
+            value === MNavbarSkin.Darkest ||
             value === MNavbarSkin.LightTab ||
             value === MNavbarSkin.DarkTab ||
             value === MNavbarSkin.Plain ||
-            value === MNavbarSkin.Simple ||
             value === MNavbarSkin.Arrow
     })
     public skin: string;

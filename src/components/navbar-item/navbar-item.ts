@@ -49,9 +49,12 @@ export class MNavbarItem extends ModulVue {
             console.error('m-navbar-item need to be inside m-navbar');
         }
 
-        setTimeout(() => {
-            this.setDimension();
-        }, 0);
+        // fix temporaire, créer une boucle infini si le skin ajoute du padding aux items
+        if (this.$parent.$props.skin === 'darker' || this.$parent.$props.skin === 'darkest') {
+            setTimeout(() => {
+                this.setDimension();
+            }, 0);
+        }
 
     }
 

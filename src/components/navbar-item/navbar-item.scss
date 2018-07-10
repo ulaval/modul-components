@@ -158,38 +158,7 @@ a {
     }
 }
 
-.m--is-skin-simple {
-    .m-navbar-item {
-        padding: $m-spacing $m-spacing--l;
-        transition: color 0.4s ease, font-weight 0.4s ease;
-        position: relative;
-
-        &:not(:last-child) {
-            &::after {
-                content: "";
-                display: block;
-                height: 16px;
-                width: 1px;
-                position: absolute;
-                background-color: $m-color--text;
-                right: 0;
-                top: 50%;
-                transform: translate3d(0, -50%, 0);
-            }
-        }
-
-        &:hover {
-            color: $m-color--black;
-        }
-
-        &.m--is-selected {
-            color: $m-color--black;
-            font-weight: 600;
-        }
-    }
-}
-
-.m--is-skin-dark {
+.m--is-skin-darker {
     .m-navbar-item {
         font-size: $m-font-size--h5;
         font-weight: $m-font-weight--bold;
@@ -229,6 +198,47 @@ a {
                 height: $m-border-width--l;
                 background-color: $m-color--active;
             }
+        }
+    }
+}
+
+.m--is-skin-darkest {
+    .m-navbar-item {
+        font-size: $m-font-size--h5;
+        font-weight: $m-font-weight--bold;
+        color: $m-color--grey;
+        text-transform: uppercase;
+        margin: $m-spacing--l;
+        transition: color 0.4s ease;
+        display: block;
+        text-align: center;
+
+        // for multiline
+        max-width: 200 + $m-spacing--l * 2;
+        // flex-basis: 120px;
+        min-width: 120  + $m-spacing--l * 2;
+        word-break: break-word;
+
+        &:not(:last-child) {
+            &::before {
+                content: '';
+                background-color: $m-color--grey;
+                transition: background-color 0.4s ease;
+                position: absolute;
+                width: 1px;
+                top: 0;
+                bottom: 0;
+                right: -$m-spacing--l;
+            }
+        }
+
+        &:hover {
+            color: $m-color--white;
+        }
+
+        &.m--is-selected {
+            color: $m-color--white;
+            font-weight: $m-font-weight--black;
         }
     }
 }
