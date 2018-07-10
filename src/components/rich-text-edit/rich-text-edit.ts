@@ -50,8 +50,8 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
         validator: value => value === MRichTextEditMode.STANDARD
     })
     public mode: MRichTextEditMode;
-    @Prop()
-    public toolbarStickyOffset: number = 0;
+    @Prop({ default: 0 })
+    public toolbarStickyOffset: number;
 
     protected id: string = `mTextarea-${uuid.generate()}`;
     protected get internalOptions(): any {
