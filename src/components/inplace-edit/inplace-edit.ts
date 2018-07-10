@@ -1,12 +1,13 @@
 import Vue, { PluginObject } from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
-import { INPLACE_EDIT_NAME } from '../component-names';
+
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
+import { INPLACE_EDIT_NAME } from '../component-names';
 import DialogPlugin from '../dialog/dialog';
 import IconButtonPlugin from '../icon-button/icon-button';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 
 @WithRender
@@ -21,6 +22,10 @@ export class MInplaceEdit extends ModulVue {
     public error: boolean;
     @Prop()
     public waiting: boolean;
+    @Prop()
+    public padding: string;
+    @Prop()
+    public editModePadding: string;
     @Prop({
         default: () => (Vue.prototype as any).$i18n.translate('m-inplace-edit:modify')
     })
@@ -51,6 +56,16 @@ export class MInplaceEdit extends ModulVue {
     public onMaxS(value: boolean, old: boolean): void {
         if (this.mqMounted) {
             this.propEditMode = false;
+        }
+    }
+
+    get propPadding(): string {
+        if (!this.propEditMode && this.padding) {
+            return 'padding:' + this.padding;
+        } else if (this.propEditMode && this.editModePadding) {
+            return 'padding:' + this.editModePadding;
+        } else {
+            return '';
         }
     }
 

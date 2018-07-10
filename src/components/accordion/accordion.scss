@@ -126,22 +126,6 @@ $m-accordion--color-default: $m-color--interactive;
 
     &__header__content {
         flex: 1;
-
-        .m-accordion.m--is-default &,
-        .m-accordion.m--is-dark &,
-        .m-accordion.m--is-light & {
-            &,
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                margin: 0;
-                font-size: $m-font-size--h4;
-                font-weight: $m-font-weight--bold;
-            }
-        }
     }
 
     &__header-icon {
