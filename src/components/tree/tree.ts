@@ -10,8 +10,7 @@ import WithRender from './tree.html';
 
 export interface TreeNode<T> {
     content: T;
-    childs: TreeNode<T>[];
-    // should be childs?: TreeNode<T>[]
+    childs?: TreeNode<T>[];
 }
 
 export enum MSelectOption {

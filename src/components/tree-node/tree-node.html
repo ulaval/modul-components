@@ -16,6 +16,6 @@
                 <m-file-tree v-if="isFileTree" :file="node.content"></m-file-tree>
                 <span>{{ nodeTitle }}</span>
             </m-link>
-            <m-icon v-if="isNodeSelected" size="20px" :name="selectionIcon"></m-icon>
+            <m-icon v-if="isNodeSelected()" size="20px" :name="selectionIcon"></m-icon>
     </template>
 </li>

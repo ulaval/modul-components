@@ -40,12 +40,12 @@ export class MTreeNode<T> extends ModulVue {
     internalIsOpen: boolean = false;
 
     created(): void {
-        this.internalIsOpen = this.isAllOpen || (!this.node.content['idNode'] && this.externalSelectedNode[0].content['elementPath'].indexOf(this.node.content['elementPath']) !== -1);
+        this.internalIsOpen = this.isAllOpen || (this.node.content['elementPath'] !== undefined && !this.node.content['idNode'] && this.externalSelectedNode[0].content['elementPath'].indexOf(this.node.content['elementPath']) !== -1);
     }
 
     // If a node can have children but don't
     isDisabled(): boolean {
-        return !this.node.childs.length;
+        return this.node.childs === undefined || !this.node.childs.length;
     }
 
     selectNewNode(node: TreeNode<T>): void {

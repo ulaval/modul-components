@@ -46,22 +46,19 @@ export class MRootTreeSandbox extends Vue {
                     content: {
                         idNode: 'a2',
                         elementLabel: 'Sous-titre 1'
-                    },
-                    childs: []
+                    }
                 },
                 {
                     content: {
                         idNode: 'a3',
                         elementLabel: 'Sous-titre 2'
-                    },
-                    childs: []
+                    }
                 },
                 {
                     content: {
                         idNode: 'a4',
                         elementLabel: 'Sous-titre 3'
-                    },
-                    childs: []
+                    }
                 }
             ]
         },
@@ -69,8 +66,27 @@ export class MRootTreeSandbox extends Vue {
             content: {
                 idNode: 'b1',
                 elementLabel: 'Titre 2'
+            }
+        },
+        {
+            content: {
+                idNode: '',
+                elementLabel: 'Titre 3'
             },
-            childs: []
+            childs: [
+                {
+                    content: {
+                        idNode: 'c1',
+                        elementLabel: 'Sous-titre 4'
+                    }
+                },
+                {
+                    content: {
+                        idNode: 'c2',
+                        elementLabel: 'Sous-titre 5'
+                    }
+                }
+            ]
         }
     ];
 
@@ -80,8 +96,7 @@ export class MRootTreeSandbox extends Vue {
                 elementLabel: 'index.html',
                 idNode: 'a1',
                 elementPath: '/index.html'
-            },
-            childs: []
+            }
         },
         {
             content: {
