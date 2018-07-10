@@ -14,6 +14,7 @@ export class Tree {
 export class TextTree {
     idNode: string;
     elementLabel: string;
+    uselessInfo: string;
 }
 
 @WithRender
@@ -39,25 +40,29 @@ export class MRootTreeSandbox extends Vue {
         {
             content: {
                 idNode: '',
-                elementLabel: 'Titre 1'
+                elementLabel: 'Titre 1',
+                uselessInfo: 'test'
             },
             childs: [
                 {
                     content: {
                         idNode: 'a2',
-                        elementLabel: 'Sous-titre 1'
+                        elementLabel: 'Sous-titre 1',
+                        uselessInfo: 'test'
                     }
                 },
                 {
                     content: {
                         idNode: 'a3',
-                        elementLabel: 'Sous-titre 2'
+                        elementLabel: 'Sous-titre 2',
+                        uselessInfo: 'test'
                     }
                 },
                 {
                     content: {
                         idNode: 'a4',
-                        elementLabel: 'Sous-titre 3'
+                        elementLabel: 'Sous-titre 3',
+                        uselessInfo: 'test'
                     }
                 }
             ]
@@ -65,25 +70,29 @@ export class MRootTreeSandbox extends Vue {
         {
             content: {
                 idNode: 'b1',
-                elementLabel: 'Titre 2'
+                elementLabel: 'Titre 2',
+                uselessInfo: 'test'
             }
         },
         {
             content: {
                 idNode: '',
-                elementLabel: 'Titre 3'
+                elementLabel: 'Titre 3',
+                uselessInfo: 'test'
             },
             childs: [
                 {
                     content: {
                         idNode: 'c1',
-                        elementLabel: 'Sous-titre 4'
+                        elementLabel: 'Sous-titre 4',
+                        uselessInfo: 'test'
                     }
                 },
                 {
                     content: {
                         idNode: 'c2',
-                        elementLabel: 'Sous-titre 5'
+                        elementLabel: 'Sous-titre 5',
+                        uselessInfo: 'test'
                     }
                 }
             ]
