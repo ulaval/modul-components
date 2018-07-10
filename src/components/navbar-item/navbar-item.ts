@@ -45,15 +45,15 @@ export class MNavbarItem extends ModulVue {
                 this.$el.setAttribute('tabindex', '0');
             }
 
+            // fix temporaire, créer une boucle infini si le skin ajoute du padding aux items
+            if (this.$parent.$props.skin === 'darker' || this.$parent.$props.skin === 'darkest') {
+                setTimeout(() => {
+                    this.setDimension();
+                }, 0);
+            }
+
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
-        }
-
-        // fix temporaire, créer une boucle infini si le skin ajoute du padding aux items
-        if (this.$parent.$props.skin === 'darker' || this.$parent.$props.skin === 'darkest') {
-            setTimeout(() => {
-                this.setDimension();
-            }, 0);
         }
 
     }
