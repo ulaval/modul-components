@@ -40,7 +40,6 @@ export enum MRichTextEditMode {
 })
 export class MRichTextEdit extends ModulVue implements InputManagementData, InputStateInputSelector {
     selector: string = '.fr-element';
-    // TODO : Do something with internalValue.
     internalValue: string;
 
     public tag: string = 'textarea';
