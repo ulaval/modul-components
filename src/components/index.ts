@@ -47,6 +47,7 @@ import RadioGroupPlugin from './radio-group/radio-group';
 import RadioStylePlugin from './radio-style/radio-style';
 import RadioPlugin from './radio/radio';
 import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text-edit/rich-text-license-plugin';
+import RichTextPlugin from './rich-text/rich-text';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import SidebarPlugin from './sidebar/sidebar';
@@ -121,6 +122,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RadioGroupPlugin);
         Vue.use(RadioStylePlugin);
         Vue.use(RichTextLicensePlugin, { key: options.richTextOptions ? options.richTextOptions.key : undefined });
+        Vue.use(RichTextPlugin); // TODO : rich-text read-only mode will always be included.  Are we all ok with that?
         Vue.use(ScrollTopPlugin);
         Vue.use(SessionExpiredPlugin);
         Vue.use(SidebarPlugin);
