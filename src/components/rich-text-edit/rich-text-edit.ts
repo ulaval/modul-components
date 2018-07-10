@@ -4,8 +4,9 @@ import { Prop } from 'vue-property-decorator';
 
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
-import { InputState } from '../../mixins/input-state/input-state';
+import { InputState, InputStateInputSelector } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import MessagePlugin from '../../utils/i18n/i18n';
 import LicensePlugin from '../../utils/license/license';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
@@ -37,7 +38,8 @@ export enum MRichTextEditMode {
         ElementQueries
     ]
 })
-export class MRichTextEdit extends ModulVue implements InputManagementData {
+export class MRichTextEdit extends ModulVue implements InputManagementData, InputStateInputSelector {
+    selector: string = '.fr-element';
     // TODO : Do something with internalValue.
     internalValue: string;
 
@@ -67,7 +69,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData {
 
     protected getDefaultOptions(): MRichTextEditorDefaultOptions {
         if (this.mode === MRichTextEditMode.STANDARD) {
-            return new MRichTextEditorStandardOptions(this.froalaLicenseKey/*, this.$i18n.currentLang() */);
+            return new MRichTextEditorStandardOptions(this.froalaLicenseKey, this.$i18n.currentLang());
         }
 
         throw new Error(`rich-text-edit: mode ${this.mode} is not a valid mode.  See MRichTextEditMode Enum for a list of compatible modes.`);
@@ -77,6 +79,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData {
 export class RichTextLicensePlugin implements PluginObject<RichTextLicensePluginOptions | undefined> {
     install(v, options: RichTextLicensePluginOptions | undefined = { key: '' }): void {
         v.use(LicensePlugin);
+        v.use(MessagePlugin);
         if (options.key) {
             (v.prototype as ModulVue).$license.addLicense(RICH_TEXT_LICENSE_KEY, options.key);
         }

@@ -48,8 +48,6 @@ export abstract class MRichTextEditorDefaultOptions {
     public zIndex: number = 200;
 
     constructor(public key: string, public language: string = 'en_CA') {
-        // tslint:disable-next-line:no-console
-        console.log('OHOHOHOHOH', language);
         if (!key) {
             throw new Error('In order to use the rich-text-editor you need to provide a valid froala key.');
         }
