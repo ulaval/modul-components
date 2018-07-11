@@ -16,7 +16,7 @@ export interface MTreeFormat {
 
 export interface TreeNode<T extends MTreeFormat> {
     content: T;
-    childs?: TreeNode<T>[];
+    children?: TreeNode<T>[];
 }
 
 export enum MSelectOption {
@@ -57,7 +57,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
 
     created(): void {
-        this.selectNode = this.externalSelectedNode ? this.externalSelectedNode : [];
+        this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];
     }
 
     isTreeEmpty(): boolean {
@@ -65,15 +65,15 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     }
 
     selectNewNode(node: TreeNode<T>): void {
-        this.selectNode = [node];
+        this.selectedNode = [node];
         this.$emit('selectNode', node);
     }
 
-    set selectNode(node: TreeNode<T>[]) {
+    set selectedNode(node: TreeNode<T>[]) {
         this.internalSelectedNode = node;
     }
 
-    get selectNode(): TreeNode<T>[] {
+    get selectedNode(): TreeNode<T>[] {
         return this.internalSelectedNode;
     }
 

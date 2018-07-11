@@ -22,13 +22,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     @Prop()
     selectionIcon: string;
 
-    @Prop({
-        default: MSelectOption.NONE,
-        validator: value =>
-            value === MSelectOption.NONE ||
-            value === MSelectOption.SINGLE ||
-            value === MSelectOption.MULTIPLE
-    })
+    @Prop()
     selectionNumber: MSelectOption;
 
     @Prop()
@@ -40,12 +34,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     internalIsOpen: boolean = false;
 
     created(): void {
-        this.internalIsOpen = this.isAllOpen || (this.node.content.elementPath !== undefined && !this.node.content.idNode && this.externalSelectedNode[0].content.elementPath.indexOf(this.node.content.elementPath) !== -1);
-    }
-
-    // If a node can have children but don't
-    isDisabled(): boolean {
-        return this.node.childs === undefined || !this.node.childs.length;
+        this.internalIsOpen = this.isAllOpen || (this.canHaveChildren && this.externalSelectedNode[0].content.elementPath.indexOf(this.node.content.elementPath) !== -1);
     }
 
     selectNewNode(node: TreeNode<T>): void {
@@ -54,19 +43,19 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         }
     }
 
-    openCloseIcon(): string {
-        // TODO: change for an icon or animation in CSS
-        return this.isOpen ? '-' : '+';
-    }
-
-    openClose(): void {
-        if (!this.isDisabled()) {
+    toggleChildren(): void {
+        if (!this.hasChildren) {
             this.isOpen = !this.isOpen;
         }
     }
 
     isNodeSelected(): boolean {
-        return !!this.externalSelectedNode.length && !!this.node.content.idNode && this.externalSelectedNode[0].content.idNode === this.node.content.idNode;
+        return !this.canHaveChildren && !!this.externalSelectedNode.length && this.externalSelectedNode[0].content.idNode === this.node.content.idNode;
+    }
+
+    // If a node can have children but don't
+    get hasChildren(): boolean {
+        return this.node.children === undefined || !this.node.children.length;
     }
 
     // A node without an id, can have children.

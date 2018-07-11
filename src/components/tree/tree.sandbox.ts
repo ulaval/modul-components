@@ -14,6 +14,7 @@ export class Tree {
 export class TextTree {
     idNode: string;
     elementLabel: string;
+    elementPath: string;
     uselessInfo: string;
 }
 
@@ -27,42 +28,53 @@ export class MRootTreeSandbox extends Vue {
                 idNode: 'b2',
                 elementPath: '/medias/Videos/video-dog.mov'
             },
-            childs: []
+            children: []
         }
     ];
 
-    public currentFileEmpty: TreeNode<string>[] = [];
+    public currentFileEmpty: TreeNode<TextTree>[] = [];
 
-    public emptyTree: TreeNode<string>[] = [
-    ];
+    public emptyTree: TreeNode<TextTree>[] = [];
 
     public textTree: TreeNode<TextTree>[] = [
         {
             content: {
                 idNode: '',
                 elementLabel: 'Titre 1',
-                uselessInfo: 'test'
+                uselessInfo: 'test',
+                elementPath: ''
             },
-            childs: [
+            children: [
                 {
                     content: {
                         idNode: 'a2',
                         elementLabel: 'Sous-titre 1',
-                        uselessInfo: 'test'
+                        uselessInfo: 'test',
+                        elementPath: ''
                     }
                 },
                 {
                     content: {
                         idNode: 'a3',
                         elementLabel: 'Sous-titre 2',
-                        uselessInfo: 'test'
+                        uselessInfo: 'test',
+                        elementPath: ''
                     }
                 },
                 {
                     content: {
                         idNode: 'a4',
                         elementLabel: 'Sous-titre 3',
-                        uselessInfo: 'test'
+                        uselessInfo: 'test',
+                        elementPath: ''
+                    }
+                },
+                {
+                    content: {
+                        idNode: '',
+                        elementLabel: 'Sous-titre 4',
+                        uselessInfo: 'test',
+                        elementPath: ''
                     }
                 }
             ]
@@ -71,28 +83,32 @@ export class MRootTreeSandbox extends Vue {
             content: {
                 idNode: 'b1',
                 elementLabel: 'Titre 2',
-                uselessInfo: 'test'
+                uselessInfo: 'test',
+                elementPath: ''
             }
         },
         {
             content: {
                 idNode: '',
                 elementLabel: 'Titre 3',
-                uselessInfo: 'test'
+                uselessInfo: 'test',
+                elementPath: ''
             },
-            childs: [
+            children: [
                 {
                     content: {
                         idNode: 'c1',
                         elementLabel: 'Sous-titre 4',
-                        uselessInfo: 'test'
+                        uselessInfo: 'test',
+                        elementPath: ''
                     }
                 },
                 {
                     content: {
                         idNode: 'c2',
                         elementLabel: 'Sous-titre 5',
-                        uselessInfo: 'test'
+                        uselessInfo: 'test',
+                        elementPath: ''
                     }
                 }
             ]
@@ -113,21 +129,21 @@ export class MRootTreeSandbox extends Vue {
                 idNode: '',
                 elementPath: '/medias'
             },
-            childs: [
+            children: [
                 {
                     content: {
                         elementLabel: 'Videos',
                         idNode: '',
                         elementPath: '/medias/Videos'
                     },
-                    childs: [
+                    children: [
                         {
                             content: {
                                 elementLabel: 'video_cat.mp4',
                                 idNode: 'b1',
                                 elementPath: '/medias/Videos/video_cat.mp4'
                             },
-                            childs: []
+                            children: []
                         },
                         {
                             content: {
@@ -135,9 +151,25 @@ export class MRootTreeSandbox extends Vue {
                                 idNode: 'b2',
                                 elementPath: '/medias/Videos/video-dog.mov'
                             },
-                            childs: []
+                            children: []
                         }
                     ]
+                },
+                {
+                    content: {
+                        elementLabel: 'Music',
+                        idNode: '',
+                        elementPath: '/medias/Music'
+                    },
+                    children: []
+                },
+                {
+                    content: {
+                        elementLabel: 'lost-file.jpg',
+                        idNode: 'b7',
+                        elementPath: '/medias/lost-file.jpg'
+                    },
+                    children: []
                 },
                 {
                     content: {
@@ -145,14 +177,14 @@ export class MRootTreeSandbox extends Vue {
                         idNode: '',
                         elementPath: '/medias/img'
                     },
-                    childs: [
+                    children: [
                         {
                             content: {
                                 elementLabel: 'Animals.jpg',
                                 idNode: 'c1',
                                 elementPath: '/medias/img/Animals.jpg'
                             },
-                            childs: []
+                            children: []
                         },
                         {
                             content: {
@@ -160,7 +192,7 @@ export class MRootTreeSandbox extends Vue {
                                 idNode: 'c2',
                                 elementPath: '/medias/img/Birds.jpeg'
                             },
-                            childs: []
+                            children: []
                         }
                     ]
                 }
@@ -172,7 +204,7 @@ export class MRootTreeSandbox extends Vue {
                 idNode: '',
                 elementPath: '/Empty'
             },
-            childs: []
+            children: []
         },
         {
             content: {
@@ -180,14 +212,14 @@ export class MRootTreeSandbox extends Vue {
                 idNode: '',
                 elementPath: '/html'
             },
-            childs: [
+            children: [
                 {
                     content: {
                         elementLabel: 'home.html',
                         idNode: 'j1',
                         elementPath: '/html/home.html'
                     },
-                    childs: []
+                    children: []
                 },
                 {
                     content: {
@@ -195,7 +227,7 @@ export class MRootTreeSandbox extends Vue {
                         idNode: 'j2',
                         elementPath: '/html/event.html'
                     },
-                    childs: []
+                    children: []
                 }
             ]
         }

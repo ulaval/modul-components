@@ -21,8 +21,6 @@ export class MFileTree<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: false })
     isOpen: boolean;
 
-    internalFolderIcon: string = FOLDER_CLOSED;
-
     get isAFolder(): boolean {
         return !this.file.idNode;
     }

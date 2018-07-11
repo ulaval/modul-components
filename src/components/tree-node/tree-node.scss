@@ -12,7 +12,7 @@ $m-accordion--icon-minus-width: 1px;
         user-select: none;
     }
 
-    &__with-childs {
+    &__with-children {
         user-select: none;
 
         &__header {
@@ -23,7 +23,7 @@ $m-accordion--icon-minus-width: 1px;
             &__disabled {
                 color: $m-color--grey-light;
 
-                .m-tree__with-childs__header__icon {
+                .m-tree__with-children__header__icon {
                     border-color: $m-color--grey-light;
 
                     &::before,
@@ -93,7 +93,7 @@ $m-accordion--icon-minus-width: 1px;
             }
         }
 
-        &__childs {
+        &__children {
             margin-left: $m-margin--l + 4;
         }
     }
