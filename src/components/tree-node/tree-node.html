@@ -1,7 +1,7 @@
 <li class="m-tree">
     <div v-if="canHaveChildren" class="m-tree__with-childs">
         <div class="m-tree__with-childs__header" @click="openClose()"  :class="{'m-tree__with-childs__header__disabled': isDisabled()}">
-            <span>{{ openCloseIcon() }}</span>
+            <span class="m-tree__with-childs__header__icon" :class="{ 'm--is-closed': isOpen}"></span>
             <m-file-tree v-if="isFileTree" :file="node.content" :isOpen="isOpen"></m-file-tree>
             <span>{{ nodeTitle }}</span>
         </div>
@@ -16,6 +16,6 @@
                 <m-file-tree v-if="isFileTree" :file="node.content"></m-file-tree>
                 <span>{{ nodeTitle }}</span>
             </m-link>
-            <m-icon v-if="isNodeSelected()" size="20px" :name="selectionIcon"></m-icon>
+            <m-icon v-if="isNodeSelected()" :name="selectionIcon"></m-icon>
     </template>
 </li>
