@@ -1,6 +1,6 @@
 <li class="m-tree">
-    <div v-if="canHaveChildren" class="m-tree__with-children">
-        <div class="m-tree__with-children__header" @click="toggleChildren()"  :class="{'m-tree__with-children__header__disabled': hasChildren}">
+    <div v-if="canHaveChildren" class="m-tree__with-children" :class="{'m--is-disabled': hasNoChild}">
+        <div class="m-tree__with-children__header" @click="toggleChildren()">
             <span class="m-tree__with-children__header__icon" :class="{ 'm--is-closed': isOpen}"></span>
             <m-file-tree v-if="isFileTree" :file="node.content" :isOpen="isOpen"></m-file-tree>
             <span>{{ nodeTitle }}</span>

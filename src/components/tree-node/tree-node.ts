@@ -44,7 +44,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     toggleChildren(): void {
-        if (!this.hasChildren) {
+        if (!this.hasNoChild) {
             this.isOpen = !this.isOpen;
         }
     }
@@ -54,7 +54,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     // If a node can have children but don't
-    get hasChildren(): boolean {
+    get hasNoChild(): boolean {
         return this.node.children === undefined || !this.node.children.length;
     }
 
@@ -76,11 +76,11 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     get isOpen(): boolean {
-        return this.internalIsOpen && !this.isDisabled();
+        return this.internalIsOpen && !this.hasNoChild;
     }
 
     set isOpen(open: boolean) {
-        if (!this.isDisabled()) {
+        if (!this.hasNoChild) {
             this.internalIsOpen = open;
         }
     }
