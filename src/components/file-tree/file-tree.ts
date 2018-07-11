@@ -6,13 +6,14 @@ import { ModulVue } from '../../utils/vue/vue';
 import { FILE_TREE_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
 import IconPlugin from '../icon/icon';
+import { MTreeFormat } from '../tree/tree';
 import WithRender from './file-tree.html';
 
 const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
 const FOLDER_CLOSED: string = 'm-svg__file-zip';
 @WithRender
 @Component
-export class MFileTree<T> extends ModulVue {
+export class MFileTree<T extends MTreeFormat> extends ModulVue {
 
     @Prop()
     file: T;
@@ -23,7 +24,7 @@ export class MFileTree<T> extends ModulVue {
     internalFolderIcon: string = FOLDER_CLOSED;
 
     get isAFolder(): boolean {
-        return !this.file['idNode'];
+        return !this.file.idNode;
     }
 
     get folderIcon(): string {
@@ -31,7 +32,7 @@ export class MFileTree<T> extends ModulVue {
     }
 
     get extensionFile(): string {
-        return '.' + this.file['elementLabel'].split('.').pop() as string;
+        return '.' + this.file.elementLabel.split('.').pop() as string;
     }
 
 }

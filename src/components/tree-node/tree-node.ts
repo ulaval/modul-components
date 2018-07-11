@@ -6,12 +6,12 @@ import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NODE_NAME } from '../component-names';
 import FileTreePlugin from '../file-tree/file-tree';
 import IconPlugin from '../icon/icon';
-import { MSelectOption, TreeNode } from '../tree/tree';
+import { MSelectOption, MTreeFormat, TreeNode } from '../tree/tree';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
 @WithRender
 @Component
-export class MTreeNode<T> extends ModulVue {
+export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     @Prop()
     node: TreeNode<T>;
@@ -40,7 +40,7 @@ export class MTreeNode<T> extends ModulVue {
     internalIsOpen: boolean = false;
 
     created(): void {
-        this.internalIsOpen = this.isAllOpen || (this.node.content['elementPath'] !== undefined && !this.node.content['idNode'] && this.externalSelectedNode[0].content['elementPath'].indexOf(this.node.content['elementPath']) !== -1);
+        this.internalIsOpen = this.isAllOpen || (this.node.content.elementPath !== undefined && !this.node.content.idNode && this.externalSelectedNode[0].content.elementPath.indexOf(this.node.content.elementPath) !== -1);
     }
 
     // If a node can have children but don't
@@ -66,12 +66,12 @@ export class MTreeNode<T> extends ModulVue {
     }
 
     isNodeSelected(): boolean {
-        return !!this.externalSelectedNode.length && !!this.node.content['idNode'] && this.externalSelectedNode[0].content['idNode'] === this.node.content['idNode'];
+        return !!this.externalSelectedNode.length && !!this.node.content.idNode && this.externalSelectedNode[0].content.idNode === this.node.content.idNode;
     }
 
     // A node without an id, can have children.
     get canHaveChildren(): boolean {
-        return !this.node.content['idNode'];
+        return !this.node.content.idNode;
     }
 
     get linkMode(): string {
@@ -83,7 +83,7 @@ export class MTreeNode<T> extends ModulVue {
     }
 
     get nodeTitle(): string {
-        return this.node.content['elementLabel'];
+        return this.node.content.elementLabel;
     }
 
     get isOpen(): boolean {

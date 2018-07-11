@@ -8,7 +8,13 @@ import I18nPlugin from '../i18n/i18n';
 import TreeNodePlugin from '../tree-node/tree-node';
 import WithRender from './tree.html';
 
-export interface TreeNode<T> {
+export interface MTreeFormat {
+    idNode: string;
+    elementLabel: string;
+    elementPath: string;
+}
+
+export interface TreeNode<T extends MTreeFormat> {
     content: T;
     childs?: TreeNode<T>[];
 }
@@ -21,7 +27,7 @@ export enum MSelectOption {
 
 @WithRender
 @Component
-export class MTree<T> extends ModulVue {
+export class MTree<T extends MTreeFormat> extends ModulVue {
 
     @Prop()
     tree: TreeNode<T>[];
