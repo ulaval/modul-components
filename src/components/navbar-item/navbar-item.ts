@@ -17,6 +17,9 @@ export interface Navbar {
     onClick(value: string, event): void;
 }
 
+// must be sync with selected css class
+const SELECTEDCLASS: string = 'm--is-selected';
+
 @WithRender
 @Component
 export class MNavbarItem extends ModulVue {
@@ -45,9 +48,7 @@ export class MNavbarItem extends ModulVue {
                 this.$el.setAttribute('tabindex', '0');
             }
 
-            setTimeout(() => {
-                this.setDimension();
-            }, 0);
+            this.setDimension();
 
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
@@ -67,18 +68,28 @@ export class MNavbarItem extends ModulVue {
         let lines: number = Math.round((h / lineHeight) * 100) / 100;
 
         if (lines > 2) {
+
+            this.$el.style.maxWidth = 'none';
+            // use selected class to reserve space for when selected
+            this.$el.classList.add(SELECTEDCLASS);
+            // create a infinite loop if the parent has 'align-items: stretch'
+            (this.$parent.$refs.list as HTMLElement).style.alignItems = 'flex-start';
+
             do {
 
-                this.$el.style.maxWidth = 'none';
+                // increment width
                 w++;
                 this.$el.style.width = w + 'px';
 
+                // update values
                 h = this.$el.clientHeight - paddingH;
                 lines = Math.round((h / lineHeight) * 100) / 100;
 
             } while (lines > 2);
-            this.$emit('resize');
-            this.$log.log('resize');
+
+            // reset styles once completed
+            this.$el.classList.remove(SELECTEDCLASS);
+            (this.$parent.$refs.list as HTMLElement).style.removeProperty('align-items');
         }
     }
 

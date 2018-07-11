@@ -286,5 +286,3 @@ const NavbarPlugin: PluginObject<any> = {
 };
 
 export default NavbarPlugin;
-
-// boucler sur tous les enfants avec un max-width de x et si leur hauteur est plus grande que Y, retirer le max-w et afficher les flèches

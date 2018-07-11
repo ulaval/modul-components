@@ -158,28 +158,21 @@ a {
     }
 }
 
-.m--is-skin-darker {
+.m--is-skin-darker,
+.m--is-skin-darkest {
     .m-navbar-item {
         font-size: $m-font-size--h5;
         font-weight: $m-font-weight--bold;
-        color: $m-color--grey;
         text-transform: uppercase;
         padding: $m-spacing--l;
         transition: color 0.4s ease;
-        display: block;
-        text-align: center;
+        justify-content: center;
+        color: $m-color--grey;
 
         // for multiline
         max-width: 200 + $m-spacing--l * 2;
-        // flex-basis: 120px;
         min-width: 120  + $m-spacing--l * 2;
         word-break: break-word;
-
-        &::before {
-            content: '';
-            background-color: $m-color--grey-darker;
-            transition: background-color 0.4s ease;
-        }
 
         &:hover {
             color: $m-color--white;
@@ -188,10 +181,22 @@ a {
         &.m--is-selected {
             color: $m-color--white;
             font-weight: $m-font-weight--black;
+        }
+    }
+}
 
+.m--is-skin-darker {
+    .m-navbar-item {
+        &::before {
+            content: '';
+            background-color: $m-color--grey-darker;
+            transition: background-color 0.4s ease;
+        }
+
+        &.m--is-selected {
             &::before {
                 position: absolute;
-                top: - $m-spacing--l;
+                top: 0;
                 left: 50%;
                 margin-left: -30px;
                 width: 60px;
@@ -204,41 +209,15 @@ a {
 
 .m--is-skin-darkest {
     .m-navbar-item {
-        font-size: $m-font-size--h5;
-        font-weight: $m-font-weight--bold;
-        color: $m-color--grey;
-        text-transform: uppercase;
-        margin: $m-spacing--l;
-        transition: color 0.4s ease;
-        display: block;
-        text-align: center;
-
-        // for multiline
-        max-width: 200 + $m-spacing--l * 2;
-        // flex-basis: 120px;
-        min-width: 120  + $m-spacing--l * 2;
-        word-break: break-word;
-
         &:not(:last-child) {
             &::before {
                 content: '';
-                background-color: $m-color--grey;
-                transition: background-color 0.4s ease;
                 position: absolute;
+                right: 0;
                 width: 1px;
-                top: 0;
-                bottom: 0;
-                right: -$m-spacing--l;
+                height: 1em;
+                background-color: $m-color--grey;
             }
-        }
-
-        &:hover {
-            color: $m-color--white;
-        }
-
-        &.m--is-selected {
-            color: $m-color--white;
-            font-weight: $m-font-weight--black;
         }
     }
 }
