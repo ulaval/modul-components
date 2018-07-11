@@ -45,12 +45,9 @@ export class MNavbarItem extends ModulVue {
                 this.$el.setAttribute('tabindex', '0');
             }
 
-            // fix temporaire, créer une boucle infini si le skin ajoute du padding aux items
-            if (this.$parent.$props.skin === 'darker' || this.$parent.$props.skin === 'darkest') {
-                setTimeout(() => {
-                    this.setDimension();
-                }, 0);
-            }
+            setTimeout(() => {
+                this.setDimension();
+            }, 0);
 
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
@@ -59,10 +56,15 @@ export class MNavbarItem extends ModulVue {
     }
 
     private setDimension(): void {
-        let w: number = this.$el.clientWidth;
         let lineHeight: number = parseFloat(window.getComputedStyle(this.$el).getPropertyValue('line-height'));
-        let h: number = this.$el.clientHeight;
-        let lines: number = h / lineHeight;
+        // must subtract the padding, create a infinite loop
+        let pt: number = parseInt(window.getComputedStyle(this.$el).getPropertyValue('padding-top'), 10);
+        let pb: number = parseInt(window.getComputedStyle(this.$el).getPropertyValue('padding-bottom'), 10);
+        let paddingH: number = pt + pb;
+
+        let h: number = this.$el.clientHeight - paddingH;
+        let w: number = this.$el.clientWidth;
+        let lines: number = Math.round((h / lineHeight) * 100) / 100;
 
         if (lines > 2) {
             do {
@@ -71,8 +73,8 @@ export class MNavbarItem extends ModulVue {
                 w++;
                 this.$el.style.width = w + 'px';
 
-                h = this.$el.clientHeight;
-                lines = h / lineHeight;
+                h = this.$el.clientHeight - paddingH;
+                lines = Math.round((h / lineHeight) * 100) / 100;
 
             } while (lines > 2);
             this.$emit('resize');
