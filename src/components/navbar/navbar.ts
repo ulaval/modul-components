@@ -250,7 +250,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
         let outbound: Vue | undefined = navbarItems.find(element => element.$el.offsetLeft + element.$el.clientWidth > cRight);
 
         if (outbound) {
-            let previousElement: HTMLElement | null = outbound.$el.previousElementSibling as HTMLElement;
 
             // get the threshold of visible part of the element
             let threshold: number = cRight - outbound.$el.offsetLeft;
@@ -260,8 +259,10 @@ export class MNavbar extends BaseNavbar implements Navbar {
         }
 
         let pl: number = parseInt(window.getComputedStyle(firstElement).paddingLeft as string, 10);
-        if (container.scrollLeft > pl) {
+        if (container.scrollLeft > pl && !this.showArrowLeft) {
             this.showArrowLeft = true;
+            // add the arrow width to the scroll the first time it appear
+            container.scrollLeft += (this.$refs.buttonRight as HTMLElement).clientWidth;
         }
 
         let pr: number = parseInt(window.getComputedStyle(lastElement).paddingRight as string, 10);
