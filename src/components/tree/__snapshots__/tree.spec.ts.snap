@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTree Given a tree with some data Then should render correctly 1`] = `
+<div class="m-tree">
+    <ul>
+        <div selectionNumber="0" node="[object Object]" externalSelectedNode="[object Object]" selectionIcon="information">m-tree-node</div>
+        <div selectionNumber="0" node="[object Object]" externalSelectedNode="[object Object]" selectionIcon="information">m-tree-node</div>
+    </ul>
+</div>
+`;
+
+exports[`MTree Given an empty tree Then should render correctly 1`] = `<div class="m-tree"><span>m-tree:empty</span></div>`;

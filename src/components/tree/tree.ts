@@ -44,7 +44,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: 'information' })
     selectionIcon: string;
 
-    @Prop()
+    @Prop({ default: [] })
     externalSelectedNode: TreeNode<T>[];
 
     @Prop({ default: false })
@@ -66,7 +66,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     selectNewNode(node: TreeNode<T>): void {
         this.selectedNode = [node];
-        this.$emit('selectNode', node);
+        this.$emit('newNodeSelected', node);
     }
 
     set selectedNode(node: TreeNode<T>[]) {
