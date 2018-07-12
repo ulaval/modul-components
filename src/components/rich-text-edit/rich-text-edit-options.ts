@@ -47,6 +47,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public lineBreakerTags: string [] = [];
     public zIndex: number = 200;
     public toolbarSticky: boolean = true;
+    public scrollableContainer: string = 'body';
     public toolbarStickyOffset: number = 0;
 
     constructor(public key: string, public language: string = 'en_CA') {

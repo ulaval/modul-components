@@ -43,23 +43,29 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
     internalValue: string;
 
     public tag: string = 'textarea';
+
     @Prop({ default: '' })
     public value: string = '';
+
     @Prop({
         default: MRichTextEditMode.STANDARD,
         validator: value => value === MRichTextEditMode.STANDARD
     })
     public mode: MRichTextEditMode;
+
     @Prop({ default: 0 })
     public toolbarStickyOffset: number;
+
+    @Prop()
+    public scrollableContainer: string;
 
     protected id: string = `mTextarea-${uuid.generate()}`;
     protected get internalOptions(): any {
         const propOptions: any = {};
         if (this.as<InputManagement>().placeholder) { propOptions.placeholderText = this.as<InputManagement>().placeholder; }
         if (this.toolbarStickyOffset) { propOptions.toolbarStickyOffset = this.toolbarStickyOffset; }
-        // tslint:disable-next-line:no-console
-        console.log('test', Object.assign(this.getDefaultOptions(), propOptions));
+        if (this.scrollableContainer) { propOptions.scrollableContainer = this.scrollableContainer; }
+
         return Object.assign(this.getDefaultOptions(), propOptions);
     }
 
