@@ -10,7 +10,7 @@
     <div class="m-navbar__max-width" :style="{ maxWidth: maxWidth }">
         <transition name="m--is">
             <div ref="buttonLeft" class="m-navbar__button m--is-left" @click="scrollLeft" v-if="showArrowLeft && navigationArrow">
-                <m-icon-button :skin="buttonSkin" icon-name="left-chevron" :ripple="skin!=='tab'"></m-icon-button>
+                <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--left" :ripple="skin!=='tab'"></m-icon-button>
             </div>
         </transition>
         <div class="m-navbar__contents" ref="contents">
@@ -24,7 +24,7 @@
         </div>
         <transition name="m--is">
             <div ref="buttonRight" class="m-navbar__button m--is-right" @click="scrollRight" v-if="showArrowRight && navigationArrow">
-                <m-icon-button :skin="buttonSkin" icon-name="chevron" :ripple="skin!=='tab'"></m-icon-button>
+                <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--right" :ripple="skin!=='tab'"></m-icon-button>
             </div>
         </transition>
     </div>
