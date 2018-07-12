@@ -251,11 +251,18 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
         if (outbound) {
 
+            let ml: number = parseInt(window.getComputedStyle(outbound.$el).marginLeft as string, 10);
+            let previousElement: HTMLElement | null = outbound.$el.previousElementSibling as HTMLElement;
+            let mr: number = parseInt(window.getComputedStyle(previousElement).marginRight as string, 10);
+
+            // get margins values
+            let margins: number = ml + mr;
+
             // get the threshold of visible part of the element
             let threshold: number = cRight - outbound.$el.offsetLeft;
 
             // move the container scroll
-            container.scrollLeft += outbound.$el.clientWidth - threshold;
+            container.scrollLeft += (outbound.$el.clientWidth + margins) - threshold;
         }
 
         let pl: number = parseInt(window.getComputedStyle(firstElement).paddingLeft as string, 10);
