@@ -63,7 +63,6 @@ const components: string[] = [
     Components.TIMEPICKER_NAME,
     Components.TOOLTIP_NAME,
     Components.TREE_NAME,
-    Components.TREE_NODE_NAME,
     Components.VALIDATION_MESSAGE_NAME
 ];
 
