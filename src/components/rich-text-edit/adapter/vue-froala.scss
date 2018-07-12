@@ -1,4 +1,8 @@
 .vue-froala {
+    /deep/ .fr-wrapper {
+        background-color: transparent;
+    }
+
     &--collapsed {
         // Style overrides when the editor is not focused when there is nothing to display.  Rework this as you wish.
         /deep/ .fr-box.fr-basic .fr-element {
@@ -13,6 +17,12 @@
         }
 
         /deep/ .fr-wrapper.show-placeholder .fr-placeholder { display: none; }
+    }
+
+    &--focused {
+        /deep/ .fr-wrapper {
+            background-color: white;
+        }
     }
 
     /deep/ .fr-box.fr-basic .fr-element {
