@@ -4,6 +4,12 @@ a {
     text-decoration: none;
 }
 
+// for multiline
+.m-navbar-item {
+    max-width: 200 + $m-spacing--l * 2;
+    word-break: break-word;
+}
+
 .m--is-skin-tab {
     .m-navbar-item {
         + .m-navbar-item {
@@ -170,9 +176,7 @@ a {
         color: $m-color--grey;
 
         // for multiline
-        max-width: 200 + $m-spacing--l * 2;
         min-width: 120  + $m-spacing--l * 2;
-        word-break: break-word;
 
         &:hover {
             color: $m-color--white;
