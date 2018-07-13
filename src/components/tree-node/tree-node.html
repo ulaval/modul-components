@@ -1,0 +1,21 @@
+<li class="m-tree">
+    <div v-if="canHaveChildren" class="m-tree__with-children" :class="{'m--is-disabled': hasNoChild}">
+        <div class="m-tree__with-children__header" @click="toggleChildren()">
+            <span class="m-tree__with-children__header__icon" :class="{ 'm--is-closed': isOpen}"></span>
+            <m-file-tree v-if="isFileTree" :file="node.content" :isOpen="isOpen"></m-file-tree>
+            <span>{{ nodeTitle }}</span>
+        </div>
+        <transition name="m-tree__with-children__body">
+            <ul v-show="isOpen" class="m-tree__with-children__body">
+                <m-tree-node v-for="childrensNode in node.children" class="m-tree__with-children__children" :isFileTree="isFileTree" :selectionNumber="selectionNumber" :selectionIcon="selectionIcon" :node="childrensNode" :externalSelectedNode="externalSelectedNode" :isAllOpen="isAllOpen" @selectNewNode="selectNewNode"></m-tree-node>
+            </ul>
+        </transition>
+    </div>
+    <template v-else >
+            <m-link :mode="linkMode" class="m-tree__single-node" @click="selectNewNode(node)" :disabled="isInactiveButton">
+                <m-file-tree v-if="isFileTree" :file="node.content"></m-file-tree>
+                <span>{{ nodeTitle }}</span>
+            </m-link>
+            <m-icon v-if="isNodeSelected()" :name="selectionIcon"></m-icon>
+    </template>
+</li>

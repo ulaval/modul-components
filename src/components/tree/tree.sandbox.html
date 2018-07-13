@@ -1,0 +1,25 @@
+<div>
+    <div style="width: 50%; float:left;">
+        <h2>Default tree</h2>
+        <p><m-tree :tree="textTree" :isAllOpen="true"></m-tree></p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h2>Empty tree</h2>
+       <p><m-tree :tree="emptyTree" @selectNewFile="selectNewFile" selection="0"></m-tree></p>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <h2>File tree</h2>
+    <div style="width: 50%; float:left;">
+        <h3>Single file selection</h3>
+        <p><m-tree :tree="fileTree" selectionNumber="1" :externalSelectedNode="currentFile" :isFileTree="true" :isAllOpen="false"></m-tree></p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h3>No file selection</h3>
+        <p><m-tree :tree="fileTree" :externalSelectedFile="secondCurrentFile" @selectNewFile="selectNewFile" :isFileTree="true"></m-tree></p>
+    </div>
+
+</div>
