@@ -30,7 +30,7 @@ export enum MSelectOption {
 export class MTree<T extends MTreeFormat> extends ModulVue {
 
     @Prop()
-    tree: TreeNode<T>[];
+    tree: TreeNode<MTreeFormat>[];
 
     @Prop({
         default: MSelectOption.NONE,

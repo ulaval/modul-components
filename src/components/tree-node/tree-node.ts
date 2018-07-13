@@ -14,7 +14,7 @@ import WithRender from './tree-node.html?style=./tree-node.scss';
 export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     @Prop()
-    node: TreeNode<T>;
+    node: TreeNode<MTreeFormat>;
 
     @Prop()
     externalSelectedNode: TreeNode<T>[];
@@ -34,12 +34,12 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     internalIsOpen: boolean = false;
 
     created(): void {
-        this.internalIsOpen = this.isAllOpen || (this.canHaveChildren && this.externalSelectedNode[0].content.elementPath.indexOf(this.node.content.elementPath) !== -1);
+        this.internalIsOpen = this.isAllOpen || (this.canHaveChildren && this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].content.elementPath.indexOf(this.node.content.elementPath) !== -1);
     }
 
     selectNewNode(node: TreeNode<T>): void {
-        if (this.selectionNumber !== MSelectOption.MULTIPLE) {
-            this.$emit('selectNewNode', node);
+        if (this.selectionNumber === MSelectOption.SINGLE) {
+            this.$emit('newNodeSelectected', node);
         }
     }
 

@@ -9,7 +9,7 @@ export class TreeUnit {
     elementPath: string;
 }
 
-const treeNode: TreeNode<TreeUnit>[] = [
+const treeNodeSelected: TreeNode<TreeUnit>[] = [
     {
         content: {
             elementLabel: 'video-dog.mov',
@@ -19,7 +19,7 @@ const treeNode: TreeNode<TreeUnit>[] = [
         children: []
     }
 ];
-const newTreeNode: TreeNode<TreeUnit>[] = [
+const newTreeNodeSelected: TreeNode<TreeUnit>[] = [
     {
         content: {
             elementLabel: 'index.html',
@@ -74,15 +74,15 @@ const treeWithData: TreeNode<TreeUnit>[] = [
     }
 ];
 
-let wrapper: Wrapper<MTree<TreeUnit>>;
 let tree: TreeNode<TreeUnit>[];
+let wrapper: Wrapper<MTree<TreeUnit>>;
 
 const initializeShallowWrapper: any = () => {
     wrapper = shallow(MTree, {
         stubs: getStubs(),
         propsData: {
             tree: tree,
-            externalSelectedNode: newTreeNode
+            externalSelectedNode: treeNodeSelected
         }
     });
 };
@@ -130,15 +130,15 @@ describe(`MTree`, () => {
         describe(`When a node is selected`, () => {
 
             beforeEach(() => {
-                wrapper.vm.selectNewNode(newTreeNode[0]);
+                wrapper.vm.selectNewNode(newTreeNodeSelected[0]);
             });
 
             it(`Then emit newNodeSelected`, () => {
-                expect(wrapper.emitted('newNodeSelected'));
+                expect(wrapper.emitted('newNodeSelected')).toBeTruthy();
             });
 
             it(`Then a new node is selected`, () => {
-                expect(wrapper.vm.internalSelectedNode).toEqual(newTreeNode);
+                expect(wrapper.vm.internalSelectedNode).toEqual(newTreeNodeSelected);
             });
         });
 

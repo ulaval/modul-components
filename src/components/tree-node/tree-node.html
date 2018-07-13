@@ -7,7 +7,7 @@
         </div>
         <transition name="m-tree__with-children__body">
             <ul v-show="isOpen" class="m-tree__with-children__body">
-                <m-tree-node v-for="childrensNode in node.children" class="m-tree__with-children__children" :isFileTree="isFileTree" :selectionNumber="selectionNumber" :selectionIcon="selectionIcon" :node="childrensNode" :externalSelectedNode="externalSelectedNode" :isAllOpen="isAllOpen" @selectNewNode="selectNewNode"></m-tree-node>
+                <m-tree-node v-for="childrensNode in node.children" class="m-tree__with-children__children" :isFileTree="isFileTree" :selectionNumber="selectionNumber" :selectionIcon="selectionIcon" :node="childrensNode" :externalSelectedNode="externalSelectedNode" :isAllOpen="isAllOpen" @selectNewNode="newNodeSelectected"></m-tree-node>
             </ul>
         </transition>
     </div>
