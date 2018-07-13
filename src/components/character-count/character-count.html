@@ -1,6 +1,6 @@
 <m-accordion-transition :transition="transition">
-    <div v-if="hasCounter">
-        <div class="m-character-count" aria-hidden="true">{{ valueLength }}<strong>/{{ maxLength }}</strong></div>
+    <div class="m-character-count" v-if="hasCounter">
+        <div class="m-character-count__wrap" aria-hidden="true">{{ valueLength }}<strong>/{{ maxLength }}</strong></div>
     </div>
 </m-accordion-transition>
 

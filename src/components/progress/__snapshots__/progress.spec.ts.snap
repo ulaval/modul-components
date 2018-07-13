@@ -23,3 +23,9 @@ exports[`MProgress indeterminate mode should render correctly when circle 1`] = 
     <div class="m-progress__slot"></div>
 </div>
 `;
+
+exports[`MProgress indeterminate mode should render correctly when no border radius 1`] = `
+<div name="m--is" appear="" class="m-progress m--is-determinate  m--is-in-progress" style="height:6px;border-radius:initial;">
+    <div class="m-progress__bar" style="width:0%;border-bottom-left-radius:initial;border-top-left-radius:initial;"></div>
+</div>
+`;
