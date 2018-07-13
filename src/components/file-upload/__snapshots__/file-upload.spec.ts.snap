@@ -22,7 +22,7 @@ exports[`MFileUpload completed should render completed files 1`] = `
                             <p class="m-file-upload__completed-list__infos-size">1 b</p>
                         </div>
                         <div class="m-file-upload__completed-list__delete">
-                            <m-icon-button icon-name="trash" button-size="32px" icon-size="20px" class="m-file-upload__completed-list__button"></m-icon-button>
+                            <m-icon-button icon-name="m-svg__delete" button-size="32px" icon-size="20px" class="m-file-upload__completed-list__button"></m-icon-button>
                         </div>
                     </div>
                 </li>
@@ -110,7 +110,7 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
                             <m-progress value="33" state="in-progress"></m-progress>
                         </div>
                         <div class="m-file-upload__import-list__delete">
-                            <m-icon-button icon-name="default" button-size="32px" icon-size="12px" class="m-file-upload__import-list__button"></m-icon-button>
+                            <m-icon-button icon-name="m-svg__close-clear" button-size="32px" icon-size="12px" class="m-file-upload__import-list__button"></m-icon-button>
                         </div>
                     </div>
                 </li>
@@ -158,13 +158,13 @@ exports[`MFileUpload validation validation messages should render rejected files
             <div class="m-message__wrap">
                 <div class="m-message__icon">
                     <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                        <use xlink:href="#error" aria-hidden="true"></use>
+                        <use aria-hidden="true"></use>
                     </svg>
                 </div>
                 <div class="m-message__body m--has-close-button">
                     <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:10px;">
                         <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
-                            <use xlink:href="#close" aria-hidden="true"></use>
+                            <use aria-hidden="true"></use>
                         </svg> <span class="m-icon-button__hidden"><span class="m-i18n">Close</span></span>
                     </button>
                     <div class="m-message__body__content">
@@ -194,7 +194,7 @@ exports[`MFileUpload validation validation messages should render rejected files
             <div class="m-file-upload__drop-zone__instructions">
                 <h2>
                     <svg aria-hidden="true" width="32px" height="32px" class="m-icon">
-                        <use xlink:href="#m-svg__arrow--down" aria-hidden="true"></use>
+                        <use aria-hidden="true"></use>
                     </svg> <span class="m-i18n">Drop files here or</span></h2>
                 <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
