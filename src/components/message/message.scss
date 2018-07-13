@@ -96,9 +96,8 @@ $m-message-size: 22px;
             }
 
             &__icon {
-                width: 44px;
                 justify-content: center;
-                align-items: center;
+                width: $m-touch-size;
                 border-right: 1px solid;
 
                 .m-icon {
@@ -108,7 +107,7 @@ $m-message-size: 22px;
 
             &__body {
                 padding: $m-margin;
-                flex: 1;
+                width: calc(100% - #{$m-touch-size});
 
                 &.m--has-close-button {
                     padding-right: $m-touch-size;
@@ -162,13 +161,7 @@ $m-message-size: 22px;
                 padding: $m-padding--s $m-margin; // Magic number
             }
 
-            &__body {
-                margin-left: $m-margin--s;
-                align-self: flex-start;
-            }
-
             &__icon {
-                display: flex;
                 align-items: center;
                 min-height: 1.25em; // Magic number
                 min-width: 18px; // Magic number
@@ -178,11 +171,19 @@ $m-message-size: 22px;
                     width: $m-font-size--l;
                 }
             }
+
+            &__body {
+                margin-left: $m-margin--s;
+                align-self: flex-start;
+                width: calc(100% - #{$m-font-size--l + $m-margin--s});
+            }
         }
     }
 
     &__icon {
         display: flex;
+        align-items: center;
+        flex-shrink: 0;
 
         .m-icon {
             display: flex;
@@ -192,6 +193,8 @@ $m-message-size: 22px;
     }
 
     &__body {
+        flex: 1 1 auto;
+
         &__content {
             position: relative;
             z-index: 1;
