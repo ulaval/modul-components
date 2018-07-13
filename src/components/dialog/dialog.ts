@@ -30,7 +30,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     })
     public size: MDialogSize;
 
-    @Prop()
+    @Prop({ default: true })
     public closeOnBackdrop: boolean;
 
     @Prop({ default: true })
