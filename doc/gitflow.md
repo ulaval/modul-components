@@ -44,7 +44,9 @@ npm publish
 ```
 
 ### Merge back the release branch into develop (pull request needed)
-Follow the same procedure as a standard PR. You don't need to assigned a milestone to this PR though.
+Merging is a bit different
+- You don't need to assigned a milestone to this PR though
+- Use a merge commit, not a squash merge
 
 ### Post-publishing stuff
 - Close Github milestone and open a new one
