@@ -4,6 +4,7 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { MENU_ITEM_NAME } from '../component-names';
+import IconPlugin from '../icon/icon';
 import WithRender from './menu-item.html?style=./menu-item.scss';
 
 export abstract class BaseMenu extends ModulVue {
@@ -112,10 +113,11 @@ export class MMenuItem extends ModulVue {
     }
 }
 
-const MenuPlugin: PluginObject<any> = {
+const MenuItemPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(IconPlugin);
         v.component(MENU_ITEM_NAME, MMenuItem);
     }
 };
 
-export default MenuPlugin;
+export default MenuItemPlugin;
