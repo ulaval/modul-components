@@ -16,7 +16,7 @@ const FOLDER_CLOSED: string = 'm-svg__file-zip';
 export class MFileTree<T extends MTreeFormat> extends ModulVue {
 
     @Prop()
-    file: T;
+    file: MTreeFormat;
 
     @Prop({ default: false })
     isOpen: boolean;
