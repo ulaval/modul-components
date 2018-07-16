@@ -12,6 +12,7 @@ export interface MTreeFormat {
     idNode: string;
     elementLabel: string;
     elementPath: string;
+    canHaveChildren?: boolean;
 }
 
 export interface TreeNode<T extends MTreeFormat> {
@@ -44,8 +45,8 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: 'information' })
     selectionIcon: string;
 
-    @Prop({ default: [] })
-    externalSelectedNode: TreeNode<T>[];
+    @Prop()
+    externalSelectedNode: TreeNode<MTreeFormat>[];
 
     @Prop({ default: false })
     isAllOpen: boolean;
@@ -53,7 +54,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: false })
     isFileTree: boolean;
 
-    internalSelectedNode: TreeNode<T>[] = [];
+    internalSelectedNode: TreeNode<MTreeFormat>[] = [];
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
 
     created(): void {
@@ -69,14 +70,13 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
         this.$emit('newNodeSelected', node);
     }
 
-    set selectedNode(node: TreeNode<T>[]) {
-        this.internalSelectedNode = node;
-    }
-
-    get selectedNode(): TreeNode<T>[] {
+    get selectedNode(): TreeNode<MTreeFormat>[] {
         return this.internalSelectedNode;
     }
 
+    set selectedNode(node: TreeNode<MTreeFormat>[]) {
+        this.internalSelectedNode = node;
+    }
 }
 
 const TreePlugin: PluginObject<any> = {

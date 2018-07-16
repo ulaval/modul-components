@@ -9,6 +9,7 @@ export class Tree {
     idNode: string;
     elementLabel: string;
     elementPath: string;
+    canHaveChildren?: boolean;
 }
 
 export class TextTree {
@@ -16,6 +17,7 @@ export class TextTree {
     elementLabel: string;
     elementPath: string;
     uselessInfo: string;
+    canHaveChildren?: boolean;
 }
 
 @WithRender
@@ -26,7 +28,8 @@ export class MRootTreeSandbox extends Vue {
             content: {
                 elementLabel: 'video-dog.mov',
                 idNode: 'b2',
-                elementPath: '/medias/Videos/video-dog.mov'
+                elementPath: '/medias/Videos/video-dog.mov',
+                canHaveChildren: false
             },
             children: []
         }
@@ -42,7 +45,8 @@ export class MRootTreeSandbox extends Vue {
                 idNode: '',
                 elementLabel: 'Titre 1',
                 uselessInfo: 'test',
-                elementPath: ''
+                elementPath: '',
+                canHaveChildren: true
             },
             children: [
                 {
@@ -92,7 +96,8 @@ export class MRootTreeSandbox extends Vue {
                 idNode: '',
                 elementLabel: 'Titre 3',
                 uselessInfo: 'test',
-                elementPath: ''
+                elementPath: '',
+                canHaveChildren: true
             },
             children: [
                 {
@@ -127,14 +132,16 @@ export class MRootTreeSandbox extends Vue {
             content: {
                 elementLabel: 'Medias',
                 idNode: '',
-                elementPath: '/medias'
+                elementPath: '/medias',
+                canHaveChildren: true
             },
             children: [
                 {
                     content: {
                         elementLabel: 'Videos',
                         idNode: '',
-                        elementPath: '/medias/Videos'
+                        elementPath: '/medias/Videos',
+                        canHaveChildren: true
                     },
                     children: [
                         {
@@ -159,7 +166,8 @@ export class MRootTreeSandbox extends Vue {
                     content: {
                         elementLabel: 'Music',
                         idNode: '',
-                        elementPath: '/medias/Music'
+                        elementPath: '/medias/Music',
+                        canHaveChildren: true
                     },
                     children: []
                 },
@@ -175,7 +183,8 @@ export class MRootTreeSandbox extends Vue {
                     content: {
                         elementLabel: 'img',
                         idNode: '',
-                        elementPath: '/medias/img'
+                        elementPath: '/medias/img',
+                        canHaveChildren: true
                     },
                     children: [
                         {
@@ -202,7 +211,8 @@ export class MRootTreeSandbox extends Vue {
             content: {
                 elementLabel: 'Empty',
                 idNode: '',
-                elementPath: '/Empty'
+                elementPath: '/Empty',
+                canHaveChildren: true
             },
             children: []
         },
@@ -210,7 +220,8 @@ export class MRootTreeSandbox extends Vue {
             content: {
                 elementLabel: 'html',
                 idNode: '',
-                elementPath: '/html'
+                elementPath: '/html',
+                canHaveChildren: true
             },
             children: [
                 {

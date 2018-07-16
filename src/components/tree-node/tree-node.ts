@@ -17,7 +17,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     node: TreeNode<MTreeFormat>;
 
     @Prop()
-    externalSelectedNode: TreeNode<T>[];
+    externalSelectedNode: TreeNode<MTreeFormat>[];
 
     @Prop()
     selectionIcon: string;
@@ -34,7 +34,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     internalIsOpen: boolean = false;
 
     created(): void {
-        this.internalIsOpen = this.isAllOpen || (this.canHaveChildren && this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].content.elementPath.indexOf(this.node.content.elementPath) !== -1);
+        this.internalIsOpen = this.isAllOpen || (this.canHaveChildren && this.isParentOfSelectedFile);
     }
 
     selectNewNode(node: TreeNode<T>): void {
@@ -43,24 +43,28 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         }
     }
 
-    toggleChildren(): void {
+    toggleChildrenVisibility(): void {
         if (!this.hasNoChild) {
-            this.isOpen = !this.isOpen;
+            this.internalIsOpen = !this.isOpen;
         }
     }
 
     isNodeSelected(): boolean {
-        return !this.canHaveChildren && !!this.externalSelectedNode.length && this.externalSelectedNode[0].content.idNode === this.node.content.idNode;
+        return !!this.externalSelectedNode.length && this.externalSelectedNode[0].content.idNode === this.node.content.idNode;
+    }
+
+    // If my node can have children and is the parent of the selected file.
+    get isParentOfSelectedFile(): boolean {
+        return this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].content.elementPath.indexOf(this.node.content.elementPath) !== -1;
+    }
+
+    get canHaveChildren(): boolean {
+        return this.node.content.canHaveChildren !== undefined && this.node.content.canHaveChildren;
     }
 
     // If a node can have children but don't
     get hasNoChild(): boolean {
         return this.node.children === undefined || !this.node.children.length;
-    }
-
-    // A node without an id, can have children.
-    get canHaveChildren(): boolean {
-        return !this.node.content.idNode;
     }
 
     get linkMode(): string {
@@ -77,12 +81,6 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     get isOpen(): boolean {
         return this.internalIsOpen && !this.hasNoChild;
-    }
-
-    set isOpen(open: boolean) {
-        if (!this.hasNoChild) {
-            this.internalIsOpen = open;
-        }
     }
 
 }
