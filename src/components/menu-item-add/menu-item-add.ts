@@ -9,6 +9,9 @@ import WithRender from './menu-item-add.html';
 @WithRender
 @Component
 export class MMenuItemAdd extends ModulVue {
+    private onClick(event: Event): void {
+        this.$emit('click', event);
+    }
 }
 
 const MenuItemAddPlugin: PluginObject<any> = {

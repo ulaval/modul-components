@@ -7,10 +7,9 @@
     @keydown.enter.prevent="onClick"
     @click.prevent="onClick">
     <span class="m-menu-item__icon" ref="icon" v-if="hasIcon">
-        <m-icon :name="iconInfo.iconName" v-if="hasIconNameProp"></m-icon>
+        <m-icon :name="iconName" v-if="hasIconNameProp"></m-icon>
     </span>
     <span class="m-menu-item__text" ref="text">
-        <template v-if="iconInfo.label">{{ iconInfo.label }}</template>
-        <slot v-else></slot>
+        <slot></slot>
     </span>
 </li>
