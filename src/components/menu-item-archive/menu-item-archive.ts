@@ -1,5 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { MENU_ITEM_ARCHIVE_NAME } from '../component-names';
@@ -9,6 +10,9 @@ import WithRender from './menu-item-archive.html';
 @WithRender
 @Component
 export class MMenuItemArchive extends ModulVue {
+    @Prop()
+    public disabled: boolean;
+
     private onClick(event: Event): void {
         this.$emit('click', event);
     }
