@@ -1,12 +1,14 @@
 @import 'abstracts/variables';
 
 .vue-froala {
+    margin-top: 5px;
+
     /deep/ .fr-wrapper {
         background-color: transparent;
     }
 
     /deep/ .fr-toolbar {
-        margin-top: -45px; // magic numbwer, froala toolbar height + shadow
+        margin-top: -47px; // magic number
         opacity: 0;
         border-top: unset;
         transition: margin-top $m-transition-duration--l ease, opacity $m-transition-duration--l ease;
@@ -55,7 +57,8 @@
         }
 
         /deep/ .fr-toolbar {
-            margin-top: 5px;
+            margin-top: 0;
+            padding: 0;
             opacity: 1;
 
             &::before {
