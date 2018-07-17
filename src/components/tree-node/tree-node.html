@@ -7,11 +7,11 @@
         </div>
         <transition name="m-tree__with-children__body">
             <ul v-show="isOpen" class="m-tree__with-children__body">
-                <m-tree-node v-for="childrensNode in node.children" class="m-tree__with-children__children" :is-file-tree="isFileTree" :selection-number="selectionNumber" :selection-icon="selectionIcon" :node="childrensNode" :external-selected-node="externalSelectedNode" :is-all-open="isAllOpen" @newNodeSelectected="selectNewNode"></m-tree-node>
+                <m-tree-node v-for="childrensNode in node.children" class="m-tree__with-children__children" :is-file-tree="isFileTree" :selection-number="selectionNumber" :selection-icon="selectionIcon" :node="childrensNode" :external-selected-node="externalSelectedNode" :is-all-open="isAllOpen" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree"></m-tree-node>
             </ul>
         </transition>
     </div>
-    <template v-else >
+    <template v-else-if="validNode()" >
             <m-link :mode="linkMode" class="m-tree__single-node" @click="selectNewNode(node)" :disabled="isInactiveButton">
                 <m-file-tree v-if="isFileTree" :file="node.content"></m-file-tree>
                 <span>{{ nodeTitle }}</span>

@@ -1,6 +1,10 @@
 <div class="m-tree">
     <span v-if="isTreeEmpty()">{{ emptyTreeTxt }}</span>
     <ul v-else>
-        <m-tree-node v-for="node in tree" :selection-number="selectionNumber" :node="node" :external-selected-node="selectedNode" :is-all-open="isAllOpen" :selection-icon="selectionIcon" :is-file-tree="isFileTree" @newNodeSelectected="selectNewNode"></m-tree-node>
+        <m-tree-node v-for="node in tree" :selection-number="selectionNumber" :node="node" :external-selected-node="selectedNode" :is-all-open="isAllOpen" :selection-icon="selectionIcon" :is-file-tree="isFileTree" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree"></m-tree-node>
     </ul>
+    <span v-if="errorTree" class="m-tree__error">
+        <m-icon name="m-svg__error-filled"></m-icon>
+        {{ errorTreeTxt }}
+    </span>
 </div>

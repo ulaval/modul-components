@@ -31,10 +31,27 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     @Prop()
     isFileTree: boolean;
 
+    @Prop()
+    errorTree: boolean;
+
     internalIsOpen: boolean = false;
 
     created(): void {
         this.internalIsOpen = this.isAllOpen || (this.canHaveChildren && this.isParentOfSelectedFile);
+    }
+
+    validNode(): boolean {
+        let valid: boolean = true;
+        if (this.node.content.idNode === undefined || !this.node.content.idNode) {
+            valid = false;
+            this.generateErrorTree();
+        }
+
+        return valid;
+    }
+
+    generateErrorTree(): void {
+        this.$emit('generateErrorTree');
     }
 
     selectNewNode(node: TreeNode<T>): void {
@@ -59,7 +76,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     get canHaveChildren(): boolean {
-        return this.node.content.canHaveChildren !== undefined && this.node.content.canHaveChildren;
+        return this.node.content.hasChildren !== undefined && this.node.content.hasChildren;
     }
 
     // If a node can have children but don't
@@ -76,7 +93,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     get nodeTitle(): string {
-        return this.node.content.elementLabel;
+        return (this.node.content.elementLabel !== undefined && !!this.node.content.elementLabel) ? this.node.content.elementLabel : this.node.content.idNode;
     }
 
     get isOpen(): boolean {

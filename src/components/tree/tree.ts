@@ -6,13 +6,13 @@ import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import TreeNodePlugin from '../tree-node/tree-node';
-import WithRender from './tree.html';
+import WithRender from './tree.html?style=./tree.scss';
 
 export interface MTreeFormat {
     idNode: string;
-    elementLabel: string;
+    elementLabel?: string;
     elementPath: string;
-    canHaveChildren?: boolean;
+    hasChildren?: boolean;
 }
 
 export interface TreeNode<T extends MTreeFormat> {
@@ -55,7 +55,10 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     isFileTree: boolean;
 
     internalSelectedNode: TreeNode<MTreeFormat>[] = [];
+    internalErrorTree: boolean = false;
+
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
+    errorTreeTxt: string = this.$i18n.translate('m-tree:error');
 
     created(): void {
         this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];
@@ -70,12 +73,24 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
         this.$emit('newNodeSelected', node);
     }
 
+    generateErrorTree(): void {
+        this.errorTree = true;
+    }
+
     get selectedNode(): TreeNode<MTreeFormat>[] {
         return this.internalSelectedNode;
     }
 
     set selectedNode(node: TreeNode<MTreeFormat>[]) {
         this.internalSelectedNode = node;
+    }
+
+    get errorTree(): boolean {
+        return this.internalErrorTree;
+    }
+
+    set errorTree(error: boolean) {
+        this.internalErrorTree = error;
     }
 }
 

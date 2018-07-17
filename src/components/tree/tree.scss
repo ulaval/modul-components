@@ -1,0 +1,9 @@
+@import '../../styles/abstracts/variables';
+
+.m-tree {
+    &__error {
+        .m-icon {
+            color: $m-color--error-dark;
+        }
+    }
+}

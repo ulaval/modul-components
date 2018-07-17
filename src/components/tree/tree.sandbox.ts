@@ -9,7 +9,7 @@ export class Tree {
     idNode: string;
     elementLabel: string;
     elementPath: string;
-    canHaveChildren?: boolean;
+    hasChildren?: boolean;
 }
 
 export class TextTree {
@@ -17,7 +17,7 @@ export class TextTree {
     elementLabel: string;
     elementPath: string;
     uselessInfo: string;
-    canHaveChildren?: boolean;
+    hasChildren?: boolean;
 }
 
 @WithRender
@@ -29,7 +29,7 @@ export class MRootTreeSandbox extends Vue {
                 elementLabel: 'video-dog.mov',
                 idNode: 'b2',
                 elementPath: '/medias/Videos/video-dog.mov',
-                canHaveChildren: false
+                hasChildren: false
             },
             children: []
         }
@@ -42,16 +42,16 @@ export class MRootTreeSandbox extends Vue {
     public textTree: TreeNode<TextTree>[] = [
         {
             content: {
-                idNode: '',
+                idNode: 'a1',
                 elementLabel: 'Titre 1',
                 uselessInfo: 'test',
                 elementPath: '',
-                canHaveChildren: true
+                hasChildren: true
             },
             children: [
                 {
                     content: {
-                        idNode: 'a2',
+                        idNode: '',
                         elementLabel: 'Sous-titre 1',
                         uselessInfo: 'test',
                         elementPath: ''
@@ -75,7 +75,7 @@ export class MRootTreeSandbox extends Vue {
                 },
                 {
                     content: {
-                        idNode: '',
+                        idNode: 'a5',
                         elementLabel: 'Sous-titre 4',
                         uselessInfo: 'test',
                         elementPath: ''
@@ -97,7 +97,7 @@ export class MRootTreeSandbox extends Vue {
                 elementLabel: 'Titre 3',
                 uselessInfo: 'test',
                 elementPath: '',
-                canHaveChildren: true
+                hasChildren: true
             },
             children: [
                 {
@@ -133,7 +133,7 @@ export class MRootTreeSandbox extends Vue {
                 elementLabel: 'Medias',
                 idNode: '',
                 elementPath: '/medias',
-                canHaveChildren: true
+                hasChildren: true
             },
             children: [
                 {
@@ -141,7 +141,7 @@ export class MRootTreeSandbox extends Vue {
                         elementLabel: 'Videos',
                         idNode: '',
                         elementPath: '/medias/Videos',
-                        canHaveChildren: true
+                        hasChildren: true
                     },
                     children: [
                         {
@@ -167,7 +167,7 @@ export class MRootTreeSandbox extends Vue {
                         elementLabel: 'Music',
                         idNode: '',
                         elementPath: '/medias/Music',
-                        canHaveChildren: true
+                        hasChildren: true
                     },
                     children: []
                 },
@@ -184,7 +184,7 @@ export class MRootTreeSandbox extends Vue {
                         elementLabel: 'img',
                         idNode: '',
                         elementPath: '/medias/img',
-                        canHaveChildren: true
+                        hasChildren: true
                     },
                     children: [
                         {
@@ -212,7 +212,7 @@ export class MRootTreeSandbox extends Vue {
                 elementLabel: 'Empty',
                 idNode: '',
                 elementPath: '/Empty',
-                canHaveChildren: true
+                hasChildren: true
             },
             children: []
         },
@@ -221,7 +221,7 @@ export class MRootTreeSandbox extends Vue {
                 elementLabel: 'html',
                 idNode: '',
                 elementPath: '/html',
-                canHaveChildren: true
+                hasChildren: true
             },
             children: [
                 {
