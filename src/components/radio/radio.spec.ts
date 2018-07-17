@@ -3,11 +3,11 @@ import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
+import LimitTextPlugin, { MLimitText } from '../limit-text/limit-text';
 import RadioPlugin, { MRadio, MRadioPosition } from './radio';
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
-
 describe('MRadio', () => {
     let localVue: VueConstructor<Vue>;
 

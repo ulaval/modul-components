@@ -1,13 +1,266 @@
 <div>
     <!-- Sandbox template -->
+    <h3>Liste déroulante filtrable</h3>
+    <p>
+        <m-dropdown :filterable="true" placeholder="Choisir un pays">
+            <m-dropdown-item value="AF" label="AFGHANISTAN"></m-dropdown-item>
+            <m-dropdown-item value="ZA" label="AFRIQUE DU SUD"></m-dropdown-item>
+            <m-dropdown-item value="AX" label="ÅLAND, ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="AL" label="ALBANIE"></m-dropdown-item>
+            <m-dropdown-item value="DZ" label="ALGÉRIE"></m-dropdown-item>
+            <m-dropdown-item value="DE" label="ALLEMAGNE"></m-dropdown-item>
+            <m-dropdown-item value="AD" label="ANDORRE"></m-dropdown-item>
+            <m-dropdown-item value="AO" label="ANGOLA"></m-dropdown-item>
+            <m-dropdown-item value="AI" label="ANGUILLA"></m-dropdown-item>
+            <m-dropdown-item value="AQ" label="ANTARCTIQUE"></m-dropdown-item>
+            <m-dropdown-item value="AG" label="ANTIGUA-ET-BARBUDA"></m-dropdown-item>
+            <m-dropdown-item value="AN" label="ANTILLES NÉERLANDAISES"></m-dropdown-item>
+            <m-dropdown-item value="SA" label="ARABIE SAOUDITE"></m-dropdown-item>
+            <m-dropdown-item value="AR" label="ARGENTINE"></m-dropdown-item>
+            <m-dropdown-item value="AM" label="ARMÉNIE"></m-dropdown-item>
+            <m-dropdown-item value="AW" label="ARUBA"></m-dropdown-item>
+            <m-dropdown-item value="AU" label="AUSTRALIE"></m-dropdown-item>
+            <m-dropdown-item value="AT" label="AUTRICHE"></m-dropdown-item>
+            <m-dropdown-item value="AZ" label="AZERBAÏDJAN"></m-dropdown-item>
+            <m-dropdown-item value="BS" label="BAHAMAS"></m-dropdown-item>
+            <m-dropdown-item value="BH" label="BAHREÏN"></m-dropdown-item>
+            <m-dropdown-item value="BD" label="BANGLADESH"></m-dropdown-item>
+            <m-dropdown-item value="BB" label="BARBADE"></m-dropdown-item>
+            <m-dropdown-item value="BY" label="BÉLARUS"></m-dropdown-item>
+            <m-dropdown-item value="BE" label="BELGIQUE"></m-dropdown-item>
+            <m-dropdown-item value="BZ" label="BELIZE"></m-dropdown-item>
+            <m-dropdown-item value="BJ" label="BÉNIN"></m-dropdown-item>
+            <m-dropdown-item value="BM" label="BERMUDES"></m-dropdown-item>
+            <m-dropdown-item value="BT" label="BHOUTAN"></m-dropdown-item>
+            <m-dropdown-item value="BO" label="BOLIVIE"></m-dropdown-item>
+            <m-dropdown-item value="BA" label="BOSNIE-HERZÉGOVINE"></m-dropdown-item>
+            <m-dropdown-item value="BW" label="BOTSWANA"></m-dropdown-item>
+            <m-dropdown-item value="BV" label="BOUVET, ÎLE"></m-dropdown-item>
+            <m-dropdown-item value="BR" label="BRÉSIL"></m-dropdown-item>
+            <m-dropdown-item value="BN" label="BRUNÉI DARUSSALAM"></m-dropdown-item>
+            <m-dropdown-item value="BG" label="BULGARIE"></m-dropdown-item>
+            <m-dropdown-item value="BF" label="BURKINA FASO"></m-dropdown-item>
+            <m-dropdown-item value="BI" label="BURUNDI"></m-dropdown-item>
+            <m-dropdown-item value="KY" label="CAÏMANES, ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="KH" label="CAMBODGE"></m-dropdown-item>
+            <m-dropdown-item value="CM" label="CAMEROUN"></m-dropdown-item>
+            <m-dropdown-item value="CA" label="CANADA"></m-dropdown-item>
+            <m-dropdown-item value="CV" label="CAP-VERT"></m-dropdown-item>
+            <m-dropdown-item value="CF" label="CENTRAFRICAINE, RÉPUBLIQUE"></m-dropdown-item>
+            <m-dropdown-item value="CL" label="CHILI"></m-dropdown-item>
+            <m-dropdown-item value="CN" label="CHINE"></m-dropdown-item>
+            <m-dropdown-item value="CX" label="CHRISTMAS, ÎLE"></m-dropdown-item>
+            <m-dropdown-item value="CY" label="CHYPRE"></m-dropdown-item>
+            <m-dropdown-item value="CC" label="COCOS (KEELING), ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="CO" label="COLOMBIE"></m-dropdown-item>
+            <m-dropdown-item value="KM" label="COMORES"></m-dropdown-item>
+            <m-dropdown-item value="CG" label="CONGO"></m-dropdown-item>
+            <m-dropdown-item value="CD" label="CONGO, LA RÉPUBLIQUE DÉMOCRATIQUE DU"></m-dropdown-item>
+            <m-dropdown-item value="CK" label="COOK, ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="KR" label="CORÉE, RÉPUBLIQUE DE"></m-dropdown-item>
+            <m-dropdown-item value="KP" label="CORÉE, RÉPUBLIQUE POPULAIRE DÉMOCRATIQUE DE"></m-dropdown-item>
+            <m-dropdown-item value="CR" label="COSTA RICA"></m-dropdown-item>
+            <m-dropdown-item value="CI" label="CÔTE D'IVOIRE"></m-dropdown-item>
+            <m-dropdown-item value="HR" label="CROATIE"></m-dropdown-item>
+            <m-dropdown-item value="CU" label="CUBA"></m-dropdown-item>
+            <m-dropdown-item value="DK" label="DANEMARK"></m-dropdown-item>
+            <m-dropdown-item value="DJ" label="DJIBOUTI"></m-dropdown-item>
+            <m-dropdown-item value="DO" label="DOMINICAINE, RÉPUBLIQUE"></m-dropdown-item>
+            <m-dropdown-item value="DM" label="DOMINIQUE"></m-dropdown-item>
+            <m-dropdown-item value="EG" label="ÉGYPTE"></m-dropdown-item>
+            <m-dropdown-item value="SV" label="EL SALVADOR"></m-dropdown-item>
+            <m-dropdown-item value="AE" label="ÉMIRATS ARABES UNIS"></m-dropdown-item>
+            <m-dropdown-item value="EC" label="ÉQUATEUR"></m-dropdown-item>
+            <m-dropdown-item value="ER" label="ÉRYTHRÉE"></m-dropdown-item>
+            <m-dropdown-item value="ES" label="ESPAGNE"></m-dropdown-item>
+            <m-dropdown-item value="EE" label="ESTONIE"></m-dropdown-item>
+            <m-dropdown-item value="US" label="ÉTATS-UNIS"></m-dropdown-item>
+            <m-dropdown-item value="ET" label="ÉTHIOPIE"></m-dropdown-item>
+            <m-dropdown-item value="FK" label="FALKLAND, ÎLES (MALVINAS)"></m-dropdown-item>
+            <m-dropdown-item value="FO" label="FÉROÉ, ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="FJ" label="FIDJI"></m-dropdown-item>
+            <m-dropdown-item value="FI" label="FINLANDE"></m-dropdown-item>
+            <m-dropdown-item value="FR" selected="selected" label="FRANCE"></m-dropdown-item>
+            <m-dropdown-item value="GA" label="GABON"></m-dropdown-item>
+            <m-dropdown-item value="GM" label="GAMBIE"></m-dropdown-item>
+            <m-dropdown-item value="GE" label="GÉORGIE"></m-dropdown-item>
+            <m-dropdown-item value="GS" label="GÉORGIE DU SUD ET LES ÎLES SANDWICH DU SUD"></m-dropdown-item>
+            <m-dropdown-item value="GH" label="GHANA"></m-dropdown-item>
+            <m-dropdown-item value="GI" label="GIBRALTAR"></m-dropdown-item>
+            <m-dropdown-item value="GR" label="GRÈCE"></m-dropdown-item>
+            <m-dropdown-item value="GD" label="GRENADE"></m-dropdown-item>
+            <m-dropdown-item value="GL" label="GROENLAND"></m-dropdown-item>
+            <m-dropdown-item value="GP" label="GUADELOUPE"></m-dropdown-item>
+            <m-dropdown-item value="GU" label="GUAM"></m-dropdown-item>
+            <m-dropdown-item value="GT" label="GUATEMALA"></m-dropdown-item>
+            <m-dropdown-item value="GG" label="GUERNESEY"></m-dropdown-item>
+            <m-dropdown-item value="GN" label="GUINÉE"></m-dropdown-item>
+            <m-dropdown-item value="GW" label="GUINÉE-BISSAU"></m-dropdown-item>
+            <m-dropdown-item value="GQ" label="GUINÉE ÉQUATORIALE"></m-dropdown-item>
+            <m-dropdown-item value="GY" label="GUYANA"></m-dropdown-item>
+            <m-dropdown-item value="GF" label="GUYANE FRANÇAISE"></m-dropdown-item>
+            <m-dropdown-item value="HT" label="HAÏTI"></m-dropdown-item>
+            <m-dropdown-item value="HM" label="HEARD, ÎLE ET MCDONALD, ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="HN" label="HONDURAS"></m-dropdown-item>
+            <m-dropdown-item value="HK" label="HONG-KONG"></m-dropdown-item>
+            <m-dropdown-item value="HU" label="HONGRIE"></m-dropdown-item>
+            <m-dropdown-item value="IM" label="ÎLE DE MAN"></m-dropdown-item>
+            <m-dropdown-item value="UM" label="ÎLES MINEURES ÉLOIGNÉES DES ÉTATS-UNIS"></m-dropdown-item>
+            <m-dropdown-item value="VG" label="ÎLES VIERGES BRITANNIQUES"></m-dropdown-item>
+            <m-dropdown-item value="VI" label="ÎLES VIERGES DES ÉTATS-UNIS"></m-dropdown-item>
+            <m-dropdown-item value="IN" label="INDE"></m-dropdown-item>
+            <m-dropdown-item value="ID" label="INDONÉSIE"></m-dropdown-item>
+            <m-dropdown-item value="IR" label="IRAN, RÉPUBLIQUE ISLAMIQUE D'"></m-dropdown-item>
+            <m-dropdown-item value="IQ" label="IRAQ"></m-dropdown-item>
+            <m-dropdown-item value="IE" label="IRLANDE"></m-dropdown-item>
+            <m-dropdown-item value="IS" label="ISLANDE"></m-dropdown-item>
+            <m-dropdown-item value="IL" label="ISRAËL"></m-dropdown-item>
+            <m-dropdown-item value="IT" label="ITALIE"></m-dropdown-item>
+            <m-dropdown-item value="JM" label="JAMAÏQUE"></m-dropdown-item>
+            <m-dropdown-item value="JP" label="JAPON"></m-dropdown-item>
+            <m-dropdown-item value="JE" label="JERSEY"></m-dropdown-item>
+            <m-dropdown-item value="JO" label="JORDANIE"></m-dropdown-item>
+            <m-dropdown-item value="KZ" label="KAZAKHSTAN"></m-dropdown-item>
+            <m-dropdown-item value="KE" label="KENYA"></m-dropdown-item>
+            <m-dropdown-item value="KG" label="KIRGHIZISTAN"></m-dropdown-item>
+            <m-dropdown-item value="KI" label="KIRIBATI"></m-dropdown-item>
+            <m-dropdown-item value="KW" label="KOWEÏT"></m-dropdown-item>
+            <m-dropdown-item value="LA" label="LAO, RÉPUBLIQUE DÉMOCRATIQUE POPULAIRE"></m-dropdown-item>
+            <m-dropdown-item value="LS" label="LESOTHO"></m-dropdown-item>
+            <m-dropdown-item value="LV" label="LETTONIE"></m-dropdown-item>
+            <m-dropdown-item value="LB" label="LIBAN"></m-dropdown-item>
+            <m-dropdown-item value="LR" label="LIBÉRIA"></m-dropdown-item>
+            <m-dropdown-item value="LY" label="LIBYENNE, JAMAHIRIYA ARABE"></m-dropdown-item>
+            <m-dropdown-item value="LI" label="LIECHTENSTEIN"></m-dropdown-item>
+            <m-dropdown-item value="LT" label="LITUANIE"></m-dropdown-item>
+            <m-dropdown-item value="LU" label="LUXEMBOURG"></m-dropdown-item>
+            <m-dropdown-item value="MO" label="MACAO"></m-dropdown-item>
+            <m-dropdown-item value="MK" label="MACÉDOINE, L'EX-RÉPUBLIQUE YOUGOSLAVE DE"></m-dropdown-item>
+            <m-dropdown-item value="MG" label="MADAGASCAR"></m-dropdown-item>
+            <m-dropdown-item value="MY" label="MALAISIE"></m-dropdown-item>
+            <m-dropdown-item value="MW" label="MALAWI"></m-dropdown-item>
+            <m-dropdown-item value="MV" label="MALDIVES"></m-dropdown-item>
+            <m-dropdown-item value="ML" label="MALI"></m-dropdown-item>
+            <m-dropdown-item value="MT" label="MALTE"></m-dropdown-item>
+            <m-dropdown-item value="MP" label="MARIANNES DU NORD, ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="MA" label="MAROC"></m-dropdown-item>
+            <m-dropdown-item value="MH" label="MARSHALL, ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="MQ" label="MARTINIQUE"></m-dropdown-item>
+            <m-dropdown-item value="MU" label="MAURICE"></m-dropdown-item>
+            <m-dropdown-item value="MR" label="MAURITANIE"></m-dropdown-item>
+            <m-dropdown-item value="YT" label="MAYOTTE"></m-dropdown-item>
+            <m-dropdown-item value="MX" label="MEXIQUE"></m-dropdown-item>
+            <m-dropdown-item value="FM" label="MICRONÉSIE, ÉTATS FÉDÉRÉS DE"></m-dropdown-item>
+            <m-dropdown-item value="MD" label="MOLDOVA, RÉPUBLIQUE DE"></m-dropdown-item>
+            <m-dropdown-item value="MC" label="MONACO"></m-dropdown-item>
+            <m-dropdown-item value="MN" label="MONGOLIE"></m-dropdown-item>
+            <m-dropdown-item value="MS" label="MONTSERRAT"></m-dropdown-item>
+            <m-dropdown-item value="MZ" label="MOZAMBIQUE"></m-dropdown-item>
+            <m-dropdown-item value="MM" label="MYANMAR"></m-dropdown-item>
+            <m-dropdown-item value="NA" label="NAMIBIE"></m-dropdown-item>
+            <m-dropdown-item value="NR" label="NAURU"></m-dropdown-item>
+            <m-dropdown-item value="NP" label="NÉPAL"></m-dropdown-item>
+            <m-dropdown-item value="NI" label="NICARAGUA"></m-dropdown-item>
+            <m-dropdown-item value="NE" label="NIGER"></m-dropdown-item>
+            <m-dropdown-item value="NG" label="NIGÉRIA"></m-dropdown-item>
+            <m-dropdown-item value="NU" label="NIUÉ"></m-dropdown-item>
+            <m-dropdown-item value="NF" label="NORFOLK, ÎLE"></m-dropdown-item>
+            <m-dropdown-item value="NO" label="NORVÈGE"></m-dropdown-item>
+            <m-dropdown-item value="NC" label="NOUVELLE-CALÉDONIE"></m-dropdown-item>
+            <m-dropdown-item value="NZ" label="NOUVELLE-ZÉLANDE"></m-dropdown-item>
+            <m-dropdown-item value="IO" label="OCÉAN INDIEN, TERRITOIRE BRITANNIQUE DE L'"></m-dropdown-item>
+            <m-dropdown-item value="OM" label="OMAN"></m-dropdown-item>
+            <m-dropdown-item value="UG" label="OUGANDA"></m-dropdown-item>
+            <m-dropdown-item value="UZ" label="OUZBÉKISTAN"></m-dropdown-item>
+            <m-dropdown-item value="PK" label="PAKISTAN"></m-dropdown-item>
+            <m-dropdown-item value="PW" label="PALAOS"></m-dropdown-item>
+            <m-dropdown-item value="PS" label="PALESTINIEN OCCUPÉ, TERRITOIRE"></m-dropdown-item>
+            <m-dropdown-item value="PA" label="PANAMA"></m-dropdown-item>
+            <m-dropdown-item value="PG" label="PAPOUASIE-NOUVELLE-GUINÉE"></m-dropdown-item>
+            <m-dropdown-item value="PY" label="PARAGUAY"></m-dropdown-item>
+            <m-dropdown-item value="NL" label="PAYS-BAS"></m-dropdown-item>
+            <m-dropdown-item value="PE" label="PÉROU"></m-dropdown-item>
+            <m-dropdown-item value="PH" label="PHILIPPINES"></m-dropdown-item>
+            <m-dropdown-item value="PN" label="PITCAIRN"></m-dropdown-item>
+            <m-dropdown-item value="PL" label="POLOGNE"></m-dropdown-item>
+            <m-dropdown-item value="PF" label="POLYNÉSIE FRANÇAISE"></m-dropdown-item>
+            <m-dropdown-item value="PR" label="PORTO RICO"></m-dropdown-item>
+            <m-dropdown-item value="PT" label="PORTUGAL"></m-dropdown-item>
+            <m-dropdown-item value="QA" label="QATAR"></m-dropdown-item>
+            <m-dropdown-item value="RE" label="RÉUNION"></m-dropdown-item>
+            <m-dropdown-item value="RO" label="ROUMANIE"></m-dropdown-item>
+            <m-dropdown-item value="GB" label="ROYAUME-UNI"></m-dropdown-item>
+            <m-dropdown-item value="RU" label="RUSSIE, FÉDÉRATION DE"></m-dropdown-item>
+            <m-dropdown-item value="RW" label="RWANDA"></m-dropdown-item>
+            <m-dropdown-item value="EH" label="SAHARA OCCIDENTAL"></m-dropdown-item>
+            <m-dropdown-item value="SH" label="SAINTE-HÉLÈNE"></m-dropdown-item>
+            <m-dropdown-item value="LC" label="SAINTE-LUCIE"></m-dropdown-item>
+            <m-dropdown-item value="KN" label="SAINT-KITTS-ET-NEVIS"></m-dropdown-item>
+            <m-dropdown-item value="SM" label="SAINT-MARIN"></m-dropdown-item>
+            <m-dropdown-item value="PM" label="SAINT-PIERRE-ET-MIQUELON"></m-dropdown-item>
+            <m-dropdown-item value="VA" label="SAINT-SIÈGE (ÉTAT DE LA CITÉ DU VATICAN)"></m-dropdown-item>
+            <m-dropdown-item value="VC" label="SAINT-VINCENT-ET-LES GRENADINES"></m-dropdown-item>
+            <m-dropdown-item value="SB" label="SALOMON, ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="WS" label="SAMOA"></m-dropdown-item>
+            <m-dropdown-item value="AS" label="SAMOA AMÉRICAINES"></m-dropdown-item>
+            <m-dropdown-item value="ST" label="SAO TOMÉ-ET-PRINCIPE"></m-dropdown-item>
+            <m-dropdown-item value="SN" label="SÉNÉGAL"></m-dropdown-item>
+            <m-dropdown-item value="CS" label="SERBIE-ET-MONTÉNÉGRO"></m-dropdown-item>
+            <m-dropdown-item value="SC" label="SEYCHELLES"></m-dropdown-item>
+            <m-dropdown-item value="SL" label="SIERRA LEONE"></m-dropdown-item>
+            <m-dropdown-item value="SG" label="SINGAPOUR"></m-dropdown-item>
+            <m-dropdown-item value="SK" label="SLOVAQUIE"></m-dropdown-item>
+            <m-dropdown-item value="SI" label="SLOVÉNIE"></m-dropdown-item>
+            <m-dropdown-item value="SO" label="SOMALIE"></m-dropdown-item>
+            <m-dropdown-item value="SD" label="SOUDAN"></m-dropdown-item>
+            <m-dropdown-item value="LK" label="SRI LANKA"></m-dropdown-item>
+            <m-dropdown-item value="SE" label="SUÈDE"></m-dropdown-item>
+            <m-dropdown-item value="CH" label="SUISSE"></m-dropdown-item>
+            <m-dropdown-item value="SR" label="SURINAME"></m-dropdown-item>
+            <m-dropdown-item value="SJ" label="SVALBARD ET ÎLE JAN MAYEN"></m-dropdown-item>
+            <m-dropdown-item value="SZ" label="SWAZILAND"></m-dropdown-item>
+            <m-dropdown-item value="SY" label="SYRIENNE, RÉPUBLIQUE ARABE"></m-dropdown-item>
+            <m-dropdown-item value="TJ" label="TADJIKISTAN"></m-dropdown-item>
+            <m-dropdown-item value="TW" label="TAÏWAN, PROVINCE DE CHINE"></m-dropdown-item>
+            <m-dropdown-item value="TZ" label="TANZANIE, RÉPUBLIQUE-UNIE DE"></m-dropdown-item>
+            <m-dropdown-item value="TD" label="TCHAD"></m-dropdown-item>
+            <m-dropdown-item value="CZ" label="TCHÈQUE, RÉPUBLIQUE"></m-dropdown-item>
+            <m-dropdown-item value="TF" label="TERRES AUSTRALES FRANÇAISES"></m-dropdown-item>
+            <m-dropdown-item value="TH" label="THAÏLANDE"></m-dropdown-item>
+            <m-dropdown-item value="TL" label="TIMOR-LESTE"></m-dropdown-item>
+            <m-dropdown-item value="TG" label="TOGO"></m-dropdown-item>
+            <m-dropdown-item value="TK" label="TOKELAU"></m-dropdown-item>
+            <m-dropdown-item value="TO" label="TONGA"></m-dropdown-item>
+            <m-dropdown-item value="TT" label="TRINITÉ-ET-TOBAGO"></m-dropdown-item>
+            <m-dropdown-item value="TN" label="TUNISIE"></m-dropdown-item>
+            <m-dropdown-item value="TM" label="TURKMÉNISTAN"></m-dropdown-item>
+            <m-dropdown-item value="TC" label="TURKS ET CAÏQUES, ÎLES"></m-dropdown-item>
+            <m-dropdown-item value="TR" label="TURQUIE"></m-dropdown-item>
+            <m-dropdown-item value="TV" label="TUVALU"></m-dropdown-item>
+            <m-dropdown-item value="UA" label="UKRAINE"></m-dropdown-item>
+            <m-dropdown-item value="UY" label="URUGUAY"></m-dropdown-item>
+            <m-dropdown-item value="VU" label="VANUATU"></m-dropdown-item>
+            <m-dropdown-item value="VE" label="VENEZUELA"></m-dropdown-item>
+            <m-dropdown-item value="VN" label="VIET NAM"></m-dropdown-item>
+            <m-dropdown-item value="WF" label="WALLIS ET FUTUNA"></m-dropdown-item>
+            <m-dropdown-item value="YE" label="YÉMEN"></m-dropdown-item>
+            <m-dropdown-item value="ZM" label="ZAMBIE"></m-dropdown-item>
+            <m-dropdown-item value="ZW" label="ZIMBABWE"></m-dropdown-item>
+        </m-dropdown>
+    </p>
+
+    <!-- Sandbox template -->
+    <br><br><br><br><br>
     <h3>Test Title</h3>
     <p class="m-u--margin-bottom">
         Test description
         <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
+        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank" label="PR description</a>
         -->
     </p>
     <p>
-        <m-dropdown><!-- Test case --></m-dropdown>
+        <m-dropdown>
+            <m-dropdown-item value="" label=""></m-dropdown-item>
+        </m-dropdown>
     </p>
 </div>

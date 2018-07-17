@@ -40,7 +40,8 @@ describe('MErrorMessage', () => {
                 referenceNumber: '123456879'
             },
             stubs: {
-                'm-accordion': WrapChildrenStub('div')
+                'm-accordion': WrapChildrenStub('div'),
+                'm-panel': WrapChildrenStub('div')
             }
         });
 
@@ -59,7 +60,8 @@ describe('MErrorMessage', () => {
                     }
                 },
                 stubs: {
-                    'm-accordion': WrapChildrenStub('div')
+                    'm-accordion': WrapChildrenStub('div'),
+                    'm-panel': WrapChildrenStub('div')
                 }
             });
 
@@ -78,7 +80,8 @@ describe('MErrorMessage', () => {
                     stacktrace: true
                 },
                 stubs: {
-                    'm-accordion': WrapChildrenStub('div')
+                    'm-accordion': WrapChildrenStub('div'),
+                    'm-panel': WrapChildrenStub('div')
                 }
             });
 
@@ -99,7 +102,8 @@ describe('MErrorMessage', () => {
                     }
                 },
                 stubs: {
-                    'm-accordion': WrapChildrenStub('div')
+                    'm-accordion': WrapChildrenStub('div'),
+                    'm-panel': WrapChildrenStub('div')
                 }
             });
 
@@ -119,7 +123,8 @@ describe('MErrorMessage', () => {
                     stacktrace: true
                 },
                 stubs: {
-                    'm-accordion': WrapChildrenStub('div')
+                    'm-accordion': WrapChildrenStub('div'),
+                    'm-panel': WrapChildrenStub('div')
                 }
             });
 

@@ -9,28 +9,28 @@ exports[`MLink Link mode should render correctly 1`] = `<a href="/" class="m-lin
 exports[`MLink Link mode should render correctly all icon style: left 1`] = `
 <a href="/" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
-        <use xlink:href="#chevron" aria-hidden="true"></use>
+        <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink Link mode should render correctly all icon style: name 1`] = `
 <a href="/" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
-        <use xlink:href="#clock" aria-hidden="true"></use>
+        <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink Link mode should render correctly all icon style: right 1`] = `
 <a href="/" class="m-link m--has-right-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
-        <use xlink:href="#chevron" aria-hidden="true"></use>
+        <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink Link mode should render correctly all icon style: size 1`] = `
 <a href="/" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="24px" height="24px" class="m-icon m-link__icon">
-        <use xlink:href="#chevron" aria-hidden="true"></use>
+        <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
@@ -53,28 +53,28 @@ exports[`MLink RouterLink mode should render correctly 1`] = `<a href="/" class=
 exports[`MLink RouterLink mode should render correctly all icon style: left 1`] = `
 <a href="/" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
-        <use xlink:href="#chevron" aria-hidden="true"></use>
+        <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink RouterLink mode should render correctly all icon style: name 1`] = `
 <a href="/" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
-        <use xlink:href="#clock" aria-hidden="true"></use>
+        <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink RouterLink mode should render correctly all icon style: right 1`] = `
 <a href="/" class="m-link m--has-right-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
-        <use xlink:href="#chevron" aria-hidden="true"></use>
+        <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink RouterLink mode should render correctly all icon style: size 1`] = `
 <a href="/" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="24px" height="24px" class="m-icon m-link__icon">
-        <use xlink:href="#chevron" aria-hidden="true"></use>
+        <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 

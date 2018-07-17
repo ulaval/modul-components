@@ -29,39 +29,33 @@ const EXT_ODG: string = 'odg';
 const EXT_ODS: string = 'ods';
 const EXT_ODF: string = 'odf';
 const EXT_ODB: string = 'odb';
-const EXT_SPSS: string = 'spss,sav,spo';
 const EXT_DWG: string = 'dwg,dao,cao,dxf,dwf';
-const EXT_ENL: string = 'enl,enlx,lib';
-const EXT_SAS: string = 'sas';
 
 // EXTENSIONS GROUPS
 const GROUP_IMAGE: string = 'm-svg__file-image';
 const GROUP_TEXT: string = 'm-svg__file-text';
-const GROUP_DOC: string = 'm-svg__file-doc';
-const GROUP_VSD: string = 'm-svg__file-vsd';
-const GROUP_PPT: string = 'm-svg__file-ppt';
-const GROUP_XLS: string = 'm-svg__file-xls';
-const GROUP_ACCDB: string = 'm-svg__file-accdb';
+const GROUP_WORD: string = 'm-svg__file-word';
+const GROUP_VISIO: string = 'm-svg__file-visio';
+const GROUP_POWERPOINT: string = 'm-svg__file-powerpoint';
+const GROUP_EXCEL: string = 'm-svg__file-excel';
+const GROUP_ACCESS: string = 'm-svg__file-access';
 const GROUP_PDF: string = 'm-svg__file-pdf';
-const GROUP_RM: string = 'm-svg__file-rm';
-const GROUP_MOV: string = 'm-svg__file-mov';
-const GROUP_WMA: string = 'm-svg__file-wma';
-const GROUP_SWF: string = 'm-svg__file-swf';
+const GROUP_REALPLAYER: string = 'm-svg__file-realplayer';
+const GROUP_QUICKTIME: string = 'm-svg__file-quicktime';
+const GROUP_MEDIAPLAYER: string = 'm-svg__file-mediaplayer';
+const GROUP_FLASH: string = 'm-svg__file-flash';
 const GROUP_VIDEO: string = 'm-svg__file-video';
-const GROUP_MUSIC: string = 'm-svg__file-music';
-const GROUP_ARCHIVE: string = 'm-svg__file-archive';
-const GROUP_OPEN_OFFICE: string = 'm-svg__file-openoffice';
-const GROUP_ODT: string = 'm-svg__file-odt';
-const GROUP_ODP: string = 'm-svg__file-odp';
-const GROUP_ODG: string = 'm-svg__file-odg';
-const GROUP_ODS: string = 'm-svg__file-ods';
-const GROUP_ODF: string = 'm-svg__file-odf';
-const GROUP_ODB: string = 'm-svg__file-odb';
-const GROUP_SPSS: string = 'm-svg__file-spss';
+const GROUP_AUDIO: string = 'm-svg__file-audio';
+const GROUP_ZIP: string = 'm-svg__file-zip';
+const GROUP_OPENOFFICE_DEFAULT: string = 'm-svg__file-openoffice-default';
+const GROUP_OPENOFFICE_WRITTER: string = 'm-svg__file-openoffice-writter';
+const GROUP_OPENOFFICE_IMPRESS: string = 'm-svg__file-openoffice-impress';
+const GROUP_OPENOFFICE_DRAW: string = 'm-svg__file-openoffice-draw';
+const GROUP_OPENOFFICE_CALC: string = 'm-svg__file-openoffice-calc';
+const GROUP_OPENOFFICE_MATH: string = 'm-svg__file-openoffice-math';
+const GROUP_OPENOFFICE_BASE: string = 'm-svg__file-openoffice-base';
 const GROUP_DWG: string = 'm-svg__file-dwg';
-const GROUP_ENL: string = 'm-svg__file-enl';
-const GROUP_SAS: string = 'm-svg__file-sas';
-const GROUP_OTHER: string = 'm-svg__file-other';
+const GROUP_OTHER: string = 'm-svg__file-default';
 
 type FileGroup = {
     [key: string]: string
@@ -87,30 +81,27 @@ export class MIconFile extends Vue {
     protected beforeMount(): void {
         this.mapExtensionsGroup(EXT_IMAGE, GROUP_IMAGE);
         this.mapExtensionsGroup(EXT_TEXT, GROUP_TEXT);
-        this.mapExtensionsGroup(EXT_DOC, GROUP_DOC);
-        this.mapExtensionsGroup(EXT_VSD, GROUP_VSD);
-        this.mapExtensionsGroup(EXT_PPT, GROUP_PPT);
-        this.mapExtensionsGroup(EXT_XLS, GROUP_XLS);
-        this.mapExtensionsGroup(EXT_ACCDB, GROUP_ACCDB);
+        this.mapExtensionsGroup(EXT_DOC, GROUP_WORD);
+        this.mapExtensionsGroup(EXT_VSD, GROUP_VISIO);
+        this.mapExtensionsGroup(EXT_PPT, GROUP_POWERPOINT);
+        this.mapExtensionsGroup(EXT_XLS, GROUP_EXCEL);
+        this.mapExtensionsGroup(EXT_ACCDB, GROUP_ACCESS);
         this.mapExtensionsGroup(EXT_PDF, GROUP_PDF);
-        // this.mapExtensionsGroup(EXT_RM, GROUP_RM);
-        // this.mapExtensionsGroup(EXT_MOV, GROUP_MOV);
-        // this.mapExtensionsGroup(EXT_WMA, GROUP_WMA);
-        // this.mapExtensionsGroup(EXT_SWF, GROUP_SWF);
+        this.mapExtensionsGroup(EXT_RM, GROUP_REALPLAYER);
+        this.mapExtensionsGroup(EXT_MOV, GROUP_QUICKTIME);
+        this.mapExtensionsGroup(EXT_WMA, GROUP_MEDIAPLAYER);
+        this.mapExtensionsGroup(EXT_SWF, GROUP_FLASH);
         this.mapExtensionsGroup(EXT_VIDEO, GROUP_VIDEO);
-        this.mapExtensionsGroup(EXT_MUSIC, GROUP_MUSIC);
-        this.mapExtensionsGroup(EXT_ARCHIVE, GROUP_ARCHIVE);
-        this.mapExtensionsGroup(EXT_OPEN_OFFICE, GROUP_OPEN_OFFICE);
-        this.mapExtensionsGroup(EXT_ODT, GROUP_ODT);
-        this.mapExtensionsGroup(EXT_ODP, GROUP_ODP);
-        this.mapExtensionsGroup(EXT_ODG, GROUP_ODG);
-        this.mapExtensionsGroup(EXT_ODS, GROUP_ODS);
-        this.mapExtensionsGroup(EXT_ODF, GROUP_ODF);
-        this.mapExtensionsGroup(EXT_ODB, GROUP_ODB);
-        // this.mapExtensionsGroup(EXT_SPSS, GROUP_SPSS);
+        this.mapExtensionsGroup(EXT_MUSIC, GROUP_AUDIO);
+        this.mapExtensionsGroup(EXT_ARCHIVE, GROUP_ZIP);
+        this.mapExtensionsGroup(EXT_OPEN_OFFICE, GROUP_OPENOFFICE_DEFAULT);
+        this.mapExtensionsGroup(EXT_ODT, GROUP_OPENOFFICE_WRITTER);
+        this.mapExtensionsGroup(EXT_ODP, GROUP_OPENOFFICE_IMPRESS);
+        this.mapExtensionsGroup(EXT_ODG, GROUP_OPENOFFICE_DRAW);
+        this.mapExtensionsGroup(EXT_ODS, GROUP_OPENOFFICE_CALC);
+        this.mapExtensionsGroup(EXT_ODF, GROUP_OPENOFFICE_MATH);
+        this.mapExtensionsGroup(EXT_ODB, GROUP_OPENOFFICE_BASE);
         this.mapExtensionsGroup(EXT_DWG, GROUP_DWG);
-        // this.mapExtensionsGroup(EXT_ENL, GROUP_ENL);
-        // this.mapExtensionsGroup(EXT_SAS, GROUP_SAS);
     }
 
     private mapExtensionsGroup(extensions, category: string): void {
