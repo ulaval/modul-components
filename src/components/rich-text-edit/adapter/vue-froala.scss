@@ -1,3 +1,5 @@
+@import 'abstracts/variables';
+
 .vue-froala {
     /deep/ .fr-wrapper {
         background-color: transparent;
@@ -30,11 +32,15 @@
     }
 
     /deep/ .fr-element {
-        ul { padding: inherit; }
+        ul {
+            margin-top: $m-margin;
+            margin-bottom: 0;
 
-        li {
-            padding: 0;
-            list-style: unset;
+            @include m-bullet-list();
+        }
+
+        table {
+            @include m-table();
         }
     }
 
