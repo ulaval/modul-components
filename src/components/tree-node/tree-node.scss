@@ -22,10 +22,6 @@ $m-accordion--icon-minus-width: 1px;
             margin-bottom: $m-margin--s;
             margin-left: $m-margin--xs;
 
-            .m--is-disabled & {
-                color: $m-color--grey-light;
-            }
-
             &__icon {
                 width: $m-tree-node--icon-width;
                 height: $m-tree-node--icon-height;
@@ -36,15 +32,6 @@ $m-accordion--icon-minus-width: 1px;
                 display: inline-block;
                 text-align: center;
                 position: relative;
-
-                .m--is-disabled & {
-                    border-color: $m-color--grey-light;
-
-                    &::before,
-                    &::after {
-                        background: $m-color--grey-light;
-                    }
-                }
 
                 &::before,
                 &::after {
@@ -97,6 +84,12 @@ $m-accordion--icon-minus-width: 1px;
 
         &__children {
             margin-left: $m-margin--l + 4;
+        }
+
+        &__no-children {
+            margin-left: $m-margin--l + 6;
+            margin-bottom: $m-margin--s;
+            color: $m-color--disabled;
         }
     }
 }

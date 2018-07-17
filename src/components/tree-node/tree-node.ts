@@ -5,6 +5,7 @@ import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NODE_NAME } from '../component-names';
 import FileTreePlugin from '../file-tree/file-tree';
+import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
 import { MSelectOption, MTreeFormat, TreeNode } from '../tree/tree';
 import WithRender from './tree-node.html?style=./tree-node.scss';
@@ -61,9 +62,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     toggleChildrenVisibility(): void {
-        if (!this.hasNoChild) {
-            this.internalIsOpen = !this.isOpen;
-        }
+        this.internalIsOpen = !this.isOpen;
     }
 
     isNodeSelected(): boolean {
@@ -83,9 +82,8 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         return this.node.content.hasChildren !== undefined && this.node.content.hasChildren;
     }
 
-    // If a node can have children but don't
-    get hasNoChild(): boolean {
-        return this.node.children === undefined || !this.node.children.length;
+    get childrenNotEmpty(): boolean {
+        return this.node.children !== undefined && !!this.node.children.length;
     }
 
     get linkMode(): string {
@@ -101,7 +99,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     get isOpen(): boolean {
-        return this.internalIsOpen && !this.hasNoChild;
+        return this.internalIsOpen;
     }
 
 }
@@ -111,6 +109,7 @@ const TreeNodePlugin: PluginObject<any> = {
         v.prototype.$log.debug(TREE_NODE_NAME, 'plugin.install');
         v.use(FileTreePlugin);
         v.use(IconPlugin);
+        v.use(I18nPlugin);
         v.component(TREE_NODE_NAME, MTreeNode);
     }
 };
