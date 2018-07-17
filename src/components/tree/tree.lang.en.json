@@ -1,5 +1,6 @@
 {
     "m-tree": {
-        "empty": "Vide"
+        "empty": "Aucun contenu",
+        "error": "Certains éléments n'ont pu être affichés"
     }
 }
