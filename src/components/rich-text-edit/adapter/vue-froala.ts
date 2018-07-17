@@ -41,6 +41,7 @@ export class VueFroala extends Vue {
 
     protected isFocused: boolean = false;
     protected isInitialized: boolean = false;
+    protected isFullScreen: boolean = false;
 
     @Watch('value')
     public refreshValue(): void {
@@ -89,9 +90,11 @@ export class VueFroala extends Vue {
                     this.$emit('focus');
                 },
                 'froalaEditor.blur': (e, editor) => {
-                    editor.toolbar.hide();
-                    this.isFocused = false;
-                    this.$emit('blur');
+                    if (!this.isFullScreen) {
+                        this.isFocused = false;
+                        editor.toolbar.hide();
+                        this.$emit('blur');
+                    }
                 },
                 'froalaEditor.keyup': (e, editor) => {
                     (window as any).editor = editor;
@@ -102,6 +105,12 @@ export class VueFroala extends Vue {
                 },
                 'froalaEditor.paste.after': (e, editor) => {
                     this.$emit('paste');
+                },
+                'froalaEditor.commands.after': (e, editor, cmd) => {
+                    if (cmd === 'fullscreen') {
+                        // tslint:disable-next-line:no-console
+                        this.isFullScreen = !this.isFullScreen;
+                    }
                 }
             }
         });
