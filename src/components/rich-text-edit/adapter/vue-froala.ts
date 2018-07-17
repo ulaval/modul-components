@@ -114,7 +114,6 @@ export class VueFroala extends Vue {
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!this.isFullScreen) {
                         this.isFocused = false;
-                        editor.toolbar.hide();
                         this.$emit('blur');
                     }
                 },

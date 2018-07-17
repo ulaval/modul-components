@@ -5,6 +5,30 @@
         background-color: transparent;
     }
 
+    /deep/ .fr-toolbar {
+        margin-top: -45px; // magic numbwer, froala toolbar height + shadow
+        opacity: 0;
+        border-top: unset;
+        transition: margin-top $m-transition-duration--l ease, opacity $m-transition-duration--l ease;
+        display: block !important;
+
+        &::before {
+            content: "";
+            width: 0;
+            height: 4px;
+            display: block;
+            background-color: $m-color--grey;
+            transition: background-color $m-transition-duration--l ease-in-out, width $m-transition-duration--l ease-in-out;
+        }
+    }
+
+    /deep/ .fr-box.fr-basic .fr-element {
+        transition: padding $m-transition-duration--l ease;
+        padding: 0;
+        min-height: unset;
+        font-weight: $m-font-weight;
+    }
+
     &--collapsed {
         // Style overrides when the editor is not focused when there is nothing to display.  Rework this as you wish.
         /deep/ .fr-box.fr-basic .fr-element {
@@ -22,13 +46,31 @@
     }
 
     &--focused {
+        /deep/ .fr-box.fr-basic .fr-element {
+            padding: $m-spacing;
+        }
+
         /deep/ .fr-wrapper {
             background-color: white;
         }
-    }
 
-    /deep/ .fr-box.fr-basic .fr-element {
-        font-weight: 300; // important since font-weight is bold by default otherwise.  A constant must exist somwhere.
+        /deep/ .fr-toolbar {
+            margin-top: 5px;
+            opacity: 1;
+
+            &::before {
+                width: 100%;
+                background-color: $m-color--interactive;
+
+                .m--has-error & {
+                    background-color: $m-color--error;
+                }
+
+                .m--is-valid & {
+                    background-color: $m-color--success;
+                }
+            }
+        }
     }
 
     /deep/ .fr-element {
@@ -42,10 +84,5 @@
         table {
             @include m-table();
         }
-    }
-
-    /deep/ .fr-toolbar {
-        margin-top: 5px;
-        border-top: 2px solid #09f !important; // change for constant
     }
 }
