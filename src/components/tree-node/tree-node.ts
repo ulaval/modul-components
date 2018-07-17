@@ -37,7 +37,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     internalIsOpen: boolean = false;
 
     created(): void {
-        this.internalIsOpen = this.isAllOpen || (this.canHaveChildren && this.isParentOfSelectedFile);
+        this.internalIsOpen = this.isAllOpen || (this.hasChildren && this.isParentOfSelectedFile);
     }
 
     validNode(): boolean {
@@ -75,7 +75,11 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         return this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].content.elementPath.indexOf(this.node.content.elementPath) !== -1;
     }
 
-    get canHaveChildren(): boolean {
+    get hasValidChildren(): boolean {
+        return this.hasChildren && this.validNode();
+    }
+
+    get hasChildren(): boolean {
         return this.node.content.hasChildren !== undefined && this.node.content.hasChildren;
     }
 
