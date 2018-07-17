@@ -10,6 +10,21 @@ import WithRender from './vue-froala.html?style=./vue-froala.scss';
 const SPECIAL_TAGS: string[] = ['img', 'button', 'input', 'a'];
 
 const INNER_HTML_ATTR: string = 'innerHTML';
+
+enum froalaEvents {
+    Initialized = 'froalaEditor.initialized',
+    Focus = 'froalaEditor.focus',
+    Blur = 'froalaEditor.blur',
+    KeyUp = 'froalaEditor.keyup',
+    KeyDown = 'froalaEditor.keydown',
+    PasteAfter = 'froalaEditor.paste.after',
+    CommandAfter = 'froalaEditor.commands.after'
+}
+
+enum froalaCommands {
+    FullScreen = 'fullscreen'
+}
+
 @WithRender
 @Component
 export class VueFroala extends Vue {
@@ -24,7 +39,6 @@ export class VueFroala extends Vue {
     @Prop()
     public config: any;
 
-    protected editorInstance: any = undefined;
     protected currentTag: string = 'div';
     protected listeningEvents: any[] = [];
     protected _$element: any = undefined;
@@ -78,37 +92,34 @@ export class VueFroala extends Vue {
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
             // we reemit each valid input events so froala can work in input-style component.
             events: {
-                'froalaEditor.initialized': (e, editor) => {
+                [froalaEvents.Initialized]: (_e, editor) => {
                     this.isInitialized = true;
-                    this.editorInstance = editor;
                     editor.toolbar.hide();
                     editor.quickInsert.hide();
                 },
-                'froalaEditor.focus': (e, editor) => {
+                [froalaEvents.Focus]: (_e, editor) => {
                     editor.toolbar.show();
                     this.isFocused = true;
                     this.$emit('focus');
                 },
-                'froalaEditor.blur': (e, editor) => {
+                [froalaEvents.Blur]: (_e, editor) => {
                     if (!this.isFullScreen) {
                         this.isFocused = false;
                         editor.toolbar.hide();
                         this.$emit('blur');
                     }
                 },
-                'froalaEditor.keyup': (e, editor) => {
-                    (window as any).editor = editor;
+                [froalaEvents.KeyUp]: (_e, _editor) => {
                     this.$emit('keyup');
                 },
-                'froalaEditor.keydown': (e, editor) => {
+                [froalaEvents.KeyDown]: (_e, _editor) => {
                     this.$emit('keydown');
                 },
-                'froalaEditor.paste.after': (e, editor) => {
+                [froalaEvents.PasteAfter]: (_e, _editor) => {
                     this.$emit('paste');
                 },
-                'froalaEditor.commands.after': (e, editor, cmd) => {
-                    if (cmd === 'fullscreen') {
-                        // tslint:disable-next-line:no-console
+                [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
+                    if (cmd === froalaCommands.FullScreen) {
                         this.isFullScreen = !this.isFullScreen;
                     }
                 }

@@ -1,4 +1,5 @@
 <div class="vue-froala"
+    @click.stop
     :class="{
         'vue-froala--focused': isFocused,
         'vue-froala--collapsed': isInitialized && !isFocused && isEmpty
