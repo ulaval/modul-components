@@ -29,6 +29,7 @@
             @keyup="onKeyup"
             @keydown="onKeydown"
             @paste="onPaste"
+            :disabled="disabled || waiting"
             ref="input"></froala>
     </m-input-style>
     <div class="m-textfield__validation">

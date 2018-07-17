@@ -61,10 +61,11 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
 
     protected id: string = `mTextarea-${uuid.generate()}`;
     protected get internalOptions(): any {
-        const propOptions: any = {};
-        if (this.as<InputManagement>().placeholder) { propOptions.placeholderText = this.as<InputManagement>().placeholder; }
-        if (this.toolbarStickyOffset) { propOptions.toolbarStickyOffset = this.toolbarStickyOffset; }
-        if (this.scrollableContainer) { propOptions.scrollableContainer = this.scrollableContainer; }
+        const propOptions: any = {
+            placeholderText: this.as<InputManagement>()!.placeholder
+        };
+        propOptions.toolbarStickyOffset = this.toolbarStickyOffset || undefined;
+        propOptions.scrollableContainer = this.scrollableContainer || undefined;
 
         return Object.assign(this.getDefaultOptions(), propOptions);
     }

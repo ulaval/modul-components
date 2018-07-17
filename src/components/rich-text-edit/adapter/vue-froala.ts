@@ -36,6 +36,9 @@ export class VueFroala extends Vue {
     @Prop({ default: '' })
     public value: string;
 
+    @Prop({ default: false })
+    public disabled: boolean;
+
     @Prop()
     public config: any;
 
@@ -84,6 +87,10 @@ export class VueFroala extends Vue {
         this.destroyEditor();
     }
 
+    protected get collapsed(): boolean {
+        return this.isInitialized && !this.isFocused && (this.isEmpty || this.disabled);
+    }
+
     private createEditor(): void {
         if (this.editorInitialized) {
             return;
@@ -96,6 +103,8 @@ export class VueFroala extends Vue {
                     this.isInitialized = true;
                     editor.toolbar.hide();
                     editor.quickInsert.hide();
+                    // tslint:disable-next-line:no-console
+                    console.log(editor);
                 },
                 [froalaEvents.Focus]: (_e, editor) => {
                     editor.toolbar.show();
