@@ -111,6 +111,7 @@
         overflow-x: hidden;
         overflow-y: auto;
         min-height: 120px;
+        position: relative;
 
         @include m-box-padding();
         @include m-scrollbar();

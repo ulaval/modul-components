@@ -2,13 +2,13 @@
 
 exports[`MIcon should render correctly 1`] = `
 <svg aria-hidden="true" width="20px" height="20px" class="m-icon">
-    <use xlink:href="#options" aria-hidden="true"></use>
+    <use aria-hidden="true"></use>
 </svg>
 `;
 
 exports[`MIcon should render title when svgTitle prop is set 1`] = `
 <svg width="1em" height="1em" class="m-icon">
     <title>options</title>
-    <use xlink:href="#default" aria-hidden="true"></use>
+    <use aria-hidden="true"></use>
 </svg>
 `;
