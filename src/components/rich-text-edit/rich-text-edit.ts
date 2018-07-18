@@ -59,7 +59,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
     @Prop()
     public scrollableContainer: string;
 
-    protected id: string = `mTextarea-${uuid.generate()}`;
+    protected id: string = `mrich-text-${uuid.generate()}`;
     protected get internalOptions(): any {
         const propOptions: any = {
             placeholderText: this.as<InputManagement>()!.placeholder
@@ -72,6 +72,10 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
 
     protected get froalaLicenseKey(): string {
         return this.$license.getLicense<string>(RICH_TEXT_LICENSE_KEY) || '';
+    }
+
+    protected mounted(): void {
+        this.as<InputState>().getInput()!.id = this.id;
     }
 
     protected refreshModel(newValue: string): void {

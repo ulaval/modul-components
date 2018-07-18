@@ -100,21 +100,24 @@ export class VueFroala extends Vue {
             // we reemit each valid input events so froala can work in input-style component.
             events: {
                 [froalaEvents.Initialized]: (_e, editor) => {
-                    this.isInitialized = true;
                     editor.toolbar.hide();
                     editor.quickInsert.hide();
-                    // tslint:disable-next-line:no-console
-                    console.log(editor);
+                    this.isInitialized = true;
+                    this.$el.style.marginTop = `-${this.$el.querySelector('.fr-toolbar')!.clientHeight}px`;
                 },
                 [froalaEvents.Focus]: (_e, editor) => {
-                    editor.toolbar.show();
-                    this.isFocused = true;
                     this.$emit('focus');
+                    editor.toolbar.show();
+                    this.$el.style.marginTop = '';
+                    this.isFocused = true;
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!this.isFullScreen) {
-                        this.isFocused = false;
+                        editor.toolbar.hide();
+                        editor.quickInsert.hide();
                         this.$emit('blur');
+                        this.isFocused = false;
+                        this.$el.style.marginTop = `-${this.$el.querySelector('.fr-toolbar')!.clientHeight}px`;
                     }
                 },
                 [froalaEvents.KeyUp]: (_e, _editor) => {

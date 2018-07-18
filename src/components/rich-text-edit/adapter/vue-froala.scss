@@ -12,7 +12,6 @@
     }
 
     /deep/ .fr-toolbar {
-        margin-top: -47px; // magic number
         opacity: 0;
         border-top: unset;
         transition: margin-top $m-transition-duration--l ease, opacity $m-transition-duration--l ease;
@@ -52,6 +51,10 @@
     }
 
     &--focused {
+        /deep/ .fr-placeholder {
+            padding: 16px 16px 0 16px !important; // Fix placeholder positioning bug.  Magic numbers.
+        }
+
         /deep/ .fr-box.fr-basic .fr-element {
             padding: $m-spacing;
         }
