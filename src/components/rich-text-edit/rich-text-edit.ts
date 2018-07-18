@@ -45,7 +45,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
     public tag: string = 'textarea';
 
     @Prop({ default: '' })
-    public value: string = '';
+    public value: string;
 
     @Prop({
         default: MRichTextEditMode.STANDARD,
