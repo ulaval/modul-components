@@ -41,20 +41,19 @@ export class MErrorTemplate extends ModulVue {
     @Prop()
     public title: string;
 
-    @Prop({ default: [] })
+    @Prop({ default: () => [] })
     public hints: string[];
 
-    @Prop({ default: [] })
+    @Prop({ default: () => [] })
     public links: Link[];
 
-    get showHints(): boolean {
-        return this.hints.length > 0 ? true : false;
+    private get hasHints(): boolean {
+        return this.hints.length > 0;
     }
 
-    get showLinks(): boolean {
-        return this.links.length > 0 ? true : false;
+    private get hasLinks(): boolean {
+        return this.links.length > 0;
     }
-
 }
 
 const ErrorTemplatePlugin: PluginObject<any> = {
