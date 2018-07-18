@@ -18,7 +18,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     node: TreeNode<MTreeFormat>;
 
     @Prop()
-    externalSelectedNode: TreeNode<MTreeFormat>[];
+    externalSelectedNode: string[];
 
     @Prop()
     selectionIcon: string;
@@ -35,46 +35,61 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     @Prop()
     errorTree: boolean;
 
+    @Prop({ default: '' })
+    externalCurrentPath: string;
+
     internalIsOpen: boolean = false;
+    internalCurrentPath: string = '';
 
     created(): void {
-        this.internalIsOpen = this.isAllOpen || (this.hasChildren && this.isParentOfSelectedFile);
-    }
-
-    validNode(): boolean {
-        let valid: boolean = true;
-        if (this.node.content.idNode === undefined || !this.node.content.idNode) {
-            valid = false;
-            this.generateErrorTree();
-        }
-
-        return valid;
+        this.currentPath = this.externalCurrentPath + '/' + this.node.content.idNode;
+        // this.internalIsOpen = this.isAllOpen || (this.hasChildren && this.isParentOfSelectedFile);
     }
 
     generateErrorTree(): void {
         this.$emit('generateErrorTree');
     }
 
-    selectNewNode(node: TreeNode<T>): void {
+    selectNewNode(path: string): void {
         if (this.selectionNumber === MSelectOption.SINGLE) {
-            this.$emit('newNodeSelectected', node);
+            this.$emit('newNodeSelectected', path);
         }
     }
 
+    openMe(): void {
+        this.isOpen = true;
+        this.$emit('openTheParent', true);
+    }
+
     toggleChildrenVisibility(): void {
-        this.internalIsOpen = !this.isOpen;
+        this.isOpen = !this.isOpen;
     }
 
     isNodeSelected(): boolean {
-        return !!this.externalSelectedNode.length && this.externalSelectedNode[0].content.idNode === this.node.content.idNode;
+        let isSelected: boolean = false;
+        if (this.externalSelectedNode[0] === this.currentPath) {
+            isSelected = true;
+            this.$emit('openTheParent', true);
+        }
+        return isSelected;
     }
 
     // If my node can have children and is the parent of the selected file.
-    get isParentOfSelectedFile(): boolean {
-        return this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].content.elementPath.indexOf(this.node.content.elementPath) !== -1;
+    // get isParentOfSelectedFile(): boolean {
+    //     return this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].indexOf(this.node.content.idNode) !== -1;
+    // }
+
+    validNode(): boolean {
+        let isValid: boolean = true;
+        if (this.node.content.idNode === undefined || !this.node.content.idNode) {
+            isValid = false;
+            this.generateErrorTree();
+        }
+
+        return isValid;
     }
 
-    get hasValidChildren(): boolean {
+    hasValidChildren(): boolean {
         return this.hasChildren && this.validNode();
     }
 
@@ -100,6 +115,18 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     get isOpen(): boolean {
         return this.internalIsOpen;
+    }
+
+    set isOpen(open: boolean) {
+        this.internalIsOpen = open;
+    }
+
+    get currentPath(): string {
+        return this.internalCurrentPath;
+    }
+
+    set currentPath(path: string) {
+        this.internalCurrentPath = path;
     }
 
 }

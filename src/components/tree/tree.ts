@@ -11,7 +11,6 @@ import WithRender from './tree.html?style=./tree.scss';
 export interface MTreeFormat {
     idNode: string;
     elementLabel?: string;
-    elementPath: string;
     hasChildren?: boolean;
 }
 
@@ -46,7 +45,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     selectionIcon: string;
 
     @Prop()
-    externalSelectedNode: TreeNode<MTreeFormat>[];
+    externalSelectedNode: string[];
 
     @Prop({ default: false })
     isAllOpen: boolean;
@@ -54,7 +53,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: false })
     isFileTree: boolean;
 
-    internalSelectedNode: TreeNode<MTreeFormat>[] = [];
+    internalSelectedNode: string[] = [];
     internalErrorTree: boolean = false;
 
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
@@ -64,25 +63,29 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
         this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];
     }
 
+    mounted(): void {
+        // Vérifier si le externalSelectedFile a été trouvé.
+    }
+
     isTreeEmpty(): boolean {
         return !this.tree.length;
     }
 
-    selectNewNode(node: TreeNode<T>): void {
-        this.selectedNode = [node];
-        this.$emit('newNodeSelected', node);
+    selectNewNode(path: string): void {
+        this.selectedNode = [path];
+        this.$emit('newNodeSelected', path);
     }
 
     generateErrorTree(): void {
         this.errorTree = true;
     }
 
-    get selectedNode(): TreeNode<MTreeFormat>[] {
+    get selectedNode(): string[] {
         return this.internalSelectedNode;
     }
 
-    set selectedNode(node: TreeNode<MTreeFormat>[]) {
-        this.internalSelectedNode = node;
+    set selectedNode(idNode: string[]) {
+        this.internalSelectedNode = idNode;
     }
 
     get errorTree(): boolean {

@@ -21,16 +21,15 @@ export class MFileTree<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: false })
     isOpen: boolean;
 
-    get isAFolder(): boolean {
-        return !this.file.idNode;
-    }
+    @Prop()
+    isAFolder: boolean;
 
     get folderIcon(): string {
         return this.isOpen ? FOLDER_OPEN : FOLDER_CLOSED;
     }
 
     get extensionFile(): string {
-        return '.' + this.file.elementLabel.split('.').pop() as string;
+        return '.' + this.file.idNode.split('.').pop() as string;
     }
 
 }
