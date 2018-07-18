@@ -8,6 +8,9 @@ import WithRender from './menu.sandbox.html';
 @WithRender
 @Component
 export class MMenuSandbox extends ModulVue {
+    private doAdd(): void {
+        alert('Add clicked');
+    }
 }
 
 const MenuSandboxPlugin: PluginObject<any> = {
