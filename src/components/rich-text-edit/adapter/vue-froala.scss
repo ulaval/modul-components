@@ -3,6 +3,10 @@
 .vue-froala {
     margin-top: 5px;
 
+    /deep/ .fr-box.fr-basic.fr-top .fr-wrapper {
+        box-shadow: unset;
+    }
+
     /deep/ .fr-wrapper {
         background-color: transparent;
     }
@@ -77,6 +81,18 @@
     }
 
     /deep/ .fr-element {
+        & > :first-child {
+            margin-top: 0;
+        }
+
+        & > * {
+            min-height: 24px; // magic number
+        }
+
+        & > p {
+            margin-top: 8px; // magic number
+        }
+
         ul {
             margin-top: $m-margin;
             margin-bottom: 0;
