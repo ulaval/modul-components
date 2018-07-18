@@ -11,7 +11,7 @@
               'm--no-margin': !margin }">
     <transition name="show">
         <div ref="buttonLeft" class="m-navbar__button" @click="scrollLeft" v-if="showArrowLeft && arrowMobile">
-            <m-icon-button :skin="buttonSkin" icon-name="left-chevron"></m-icon-button>
+            <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--left"></m-icon-button>
         </div>
     </transition>
     <nav class="m-navbar__wrap" role="menubar" ref="wrap">
@@ -23,7 +23,7 @@
     </nav>
     <transition name="show">
         <div ref="buttonRight" class="m-navbar__button" @click="scrollRight" v-if="showArrowRight && arrowMobile">
-            <m-icon-button :skin="buttonSkin" icon-name="chevron"></m-icon-button>
+            <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--right"></m-icon-button>
         </div>
     </transition>
     </div>

@@ -63,7 +63,7 @@
                             </p>
                         </div>
                         <div class="m-file-upload__import-list__delete">
-                            <m-icon-button class="m-file-upload__import-list__button" icon-name="default" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
+                            <m-icon-button class="m-file-upload__import-list__button" icon-name="m-svg__close-clear" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
                         </div>
                     </div>
                 </li>
@@ -85,7 +85,7 @@
                             <p class="m-file-upload__completed-list__infos-size">{{file.file.size | file-size}}</p>
                         </div>
                         <div class="m-file-upload__completed-list__delete">
-                            <m-icon-button class="m-file-upload__completed-list__button" icon-name="trash" button-size="32px" icon-size="20px" @click="onFileRemove(file)"></m-icon-button>
+                            <m-icon-button class="m-file-upload__completed-list__button" icon-name="m-svg__delete" button-size="32px" icon-size="20px" @click="onFileRemove(file)"></m-icon-button>
                         </div>
                     </div>
                 </li>
