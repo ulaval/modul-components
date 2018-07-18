@@ -102,13 +102,19 @@ export class VueFroala extends Vue {
                 [froalaEvents.Initialized]: (_e, editor) => {
                     editor.toolbar.hide();
                     editor.quickInsert.hide();
+
+                    const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
+                    toolBar.style.marginTop = `-${toolBar.offsetHeight + 5}px`;
+
                     this.isInitialized = true;
-                    this.$el.style.marginTop = `-${this.$el.querySelector('.fr-toolbar')!.clientHeight}px`;
                 },
                 [froalaEvents.Focus]: (_e, editor) => {
                     this.$emit('focus');
                     editor.toolbar.show();
-                    this.$el.style.marginTop = '';
+
+                    const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
+                    toolBar.style.marginTop = '';
+
                     this.isFocused = true;
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
@@ -116,8 +122,11 @@ export class VueFroala extends Vue {
                         editor.toolbar.hide();
                         editor.quickInsert.hide();
                         this.$emit('blur');
+
+                        const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
+                        toolBar.style.marginTop = `-${toolBar.offsetHeight + 5}px`;
+
                         this.isFocused = false;
-                        this.$el.style.marginTop = `-${this.$el.querySelector('.fr-toolbar')!.clientHeight}px`;
                     }
                 },
                 [froalaEvents.KeyUp]: (_e, _editor) => {
