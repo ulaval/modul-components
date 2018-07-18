@@ -479,10 +479,6 @@
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="23.5" y1="23.5" x2="15" y2="15"/>
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="0.5" y1="0.5" x2="9" y2="9"/>
     </symbol>
-    <symbol id="m-svg__right-answer" viewBox="0 0 24 24">
-        <polyline fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-            2,13.3 7.4,18.7 22,5.3 "/>
-    </symbol>
     <symbol id="m-svg__grid-filled" viewBox="0 0 24 24">
         <rect x="0.5" y="0.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.3" height="10.3"/>
         <rect x="0.5" y="13.2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.3" height="10.3"/>
@@ -636,6 +632,10 @@
             C18.9,19.7,19.4,19.9,20,20.3z"/>
         <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="10" d="M23.5,12c0,3.3-1.4,6.2-3.5,8.3
             c-2.1,2-4.9,3.2-8,3.2c-3,0-5.7-1.1-7.7-3C2,18.4,0.5,15.4,0.5,12C0.5,5.7,5.6,0.5,12,0.5C18.4,0.5,23.5,5.7,23.5,12z"/>
+    </symbol>
+    <symbol id="m-svg__right-answer" viewBox="0 0 24 24">
+        <polyline fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+            2,13.3 7.4,18.7 22,5.3 "/>
     </symbol>
     <symbol id="m-svg__search" viewBox="0 0 24 24">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M23.1,23.1L23.1,23.1
