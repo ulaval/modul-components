@@ -82,7 +82,7 @@ describe(`Error-template fonctionnality tests`, () => {
         });
     });
 
-    describe(`Given on hint`, () => {
+    describe(`Given an hint`, () => {
         describe(`When rendering`, () => {
             it(`Then should display one hint with proper content`, () => {
                 hints = ONE_HINT_LIST;
@@ -109,7 +109,7 @@ describe(`Error-template fonctionnality tests`, () => {
         });
     });
 
-    describe(`Given on link`, () => {
+    describe(`Given a link`, () => {
         describe(`When rendering`, () => {
             it(`Then should display one link with proper content`, () => {
                 links = ONE_LINK_LIST;

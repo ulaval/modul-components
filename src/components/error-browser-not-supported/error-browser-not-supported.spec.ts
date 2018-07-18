@@ -60,7 +60,7 @@ const initializeWrapperCustomValues: () => void = (): void => {
 beforeEach(() => {
     isMobileDevice = false;
 });
-describe(`Page not found - test`, () => {
+describe(`Browser not supported - test`, () => {
     describe('Given desktop mode', () => {
         describe(`Given default values`, () => {
             beforeEach(() => {

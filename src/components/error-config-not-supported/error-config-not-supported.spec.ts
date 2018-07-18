@@ -12,7 +12,7 @@ const getStubs: any = () => {
     };
 };
 
-describe(`Page not found - test`, () => {
+describe(`Configuration not supported- test`, () => {
     describe(`Given default values`, () => {
         it(`Should render with default values`, async () => {
             wrapper = shallow(MErrorConfigNotSupported, { stubs: getStubs() });
