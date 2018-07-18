@@ -43,7 +43,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     created(): void {
         this.currentPath = this.externalCurrentPath + '/' + this.node.content.idNode;
-        // this.internalIsOpen = this.isAllOpen || (this.hasChildren && this.isParentOfSelectedFile);
+        this.internalIsOpen = this.isAllOpen || (this.hasChildren && this.isParentOfSelectedFile);
     }
 
     generateErrorTree(): void {
@@ -56,11 +56,6 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         }
     }
 
-    openMe(): void {
-        this.isOpen = true;
-        this.$emit('openTheParent', true);
-    }
-
     toggleChildrenVisibility(): void {
         this.isOpen = !this.isOpen;
     }
@@ -69,15 +64,10 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         let isSelected: boolean = false;
         if (this.externalSelectedNode[0] === this.currentPath) {
             isSelected = true;
-            this.$emit('openTheParent', true);
+            // this.$emit('openTheParent', true);
         }
         return isSelected;
     }
-
-    // If my node can have children and is the parent of the selected file.
-    // get isParentOfSelectedFile(): boolean {
-    //     return this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].indexOf(this.node.content.idNode) !== -1;
-    // }
 
     validNode(): boolean {
         let isValid: boolean = true;
@@ -93,6 +83,14 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         return this.hasChildren && this.validNode();
     }
 
+    get isParentOfSelectedFile(): boolean {
+        return this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].indexOf(this.currentPath) === 0;
+    }
+
+    get nodeTitle(): string {
+        return (this.node.content.elementLabel !== undefined && !!this.node.content.elementLabel) ? this.node.content.elementLabel : this.node.content.idNode;
+    }
+
     get hasChildren(): boolean {
         return this.node.content.hasChildren !== undefined && this.node.content.hasChildren;
     }
@@ -101,16 +99,12 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         return this.node.children !== undefined && !!this.node.children.length;
     }
 
-    get linkMode(): string {
+    get typeLink(): string {
         return this.isInactiveButton ? 'text' : 'button';
     }
 
     get isInactiveButton(): boolean {
         return this.selectionNumber === MSelectOption.NONE;
-    }
-
-    get nodeTitle(): string {
-        return (this.node.content.elementLabel !== undefined && !!this.node.content.elementLabel) ? this.node.content.elementLabel : this.node.content.idNode;
     }
 
     get isOpen(): boolean {
