@@ -8,7 +8,7 @@
         <transition name="m-tree__with-children__body">
             <ul v-show="isOpen" class="m-tree__with-children__body">
                 <template v-if="childrenNotEmpty">
-                    <m-tree-node v-for="childrensNode in node.children" class="m-tree__with-children__children" :external-current-path="currentPath" :is-file-tree="isFileTree" :selection-number="selectionNumber" :selection-icon="selectionIcon" :node="childrensNode" :external-selected-node="externalSelectedNode" :is-all-open="isAllOpen" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree"></m-tree-node>
+                    <m-tree-node v-for="childrensNode in node.children" class="m-tree__with-children__children" :external-current-path="currentPath" :is-file-tree="isFileTree" :selection-number="selectionNumber" :selection-icon="selectionIcon" :node="childrensNode" :external-selected-node="externalSelectedNode" :is-all-open="isAllOpen" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree" @selectedNodeFound="selectedNodeFound"></m-tree-node>
                 </template>
                 <li v-else class="m-tree__with-children__no-children"><m-i18n k="m-tree-node:empty"></m-i18n></li>
             </ul>

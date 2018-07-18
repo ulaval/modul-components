@@ -56,15 +56,21 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     internalSelectedNode: string[] = [];
     internalErrorTree: boolean = false;
 
+    isSelectedNodeValid: boolean = false;
+
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
     errorTreeTxt: string = this.$i18n.translate('m-tree:error');
+    errorSelectedNode: string = this.$i18n.translate('m-tree:selected-node-error');
 
     created(): void {
         this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];
+        this.isSelectedNodeValid = !this.selectedNode.length;
     }
 
     mounted(): void {
-        // Vérifier si le externalSelectedFile a été trouvé.
+        if (!this.isSelectedNodeValid) {
+            console.warn(this.errorSelectedNode + ': ' + this.selectedNode[0]);
+        }
     }
 
     isTreeEmpty(): boolean {
@@ -74,6 +80,10 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     selectNewNode(path: string): void {
         this.selectedNode = [path];
         this.$emit('newNodeSelected', path);
+    }
+
+    selectedNodeFound(): void {
+        this.isSelectedNodeValid = true;
     }
 
     generateErrorTree(): void {

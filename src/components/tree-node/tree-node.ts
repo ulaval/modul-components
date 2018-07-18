@@ -60,11 +60,15 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         this.isOpen = !this.isOpen;
     }
 
+    selectedNodeFound(): void {
+        this.$emit('selectedNodeFound');
+    }
+
     isNodeSelected(): boolean {
         let isSelected: boolean = false;
         if (this.externalSelectedNode[0] === this.currentPath) {
             isSelected = true;
-            // this.$emit('openTheParent', true);
+            this.selectedNodeFound();
         }
         return isSelected;
     }
