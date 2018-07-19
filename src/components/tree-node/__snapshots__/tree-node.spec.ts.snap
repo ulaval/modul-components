@@ -1,17 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MTreeNode Given a node When can have children but don't have children Then should render correctly 1`] = `
-<li class="m-tree">
-    <div class="m-tree__with-children">
-        <div class="m-tree__with-children__header"><span class="m-tree__with-children__header__icon"></span> <span>Node 2</span></div>
-        <ul name="m-tree__with-children__body" class="m-tree__with-children__body" style="display:none;">
-            <li class="m-tree__with-children__no-children">m-tree-node:empty</li>
-        </ul>
-    </div>
-</li>
-`;
-
-exports[`MTreeNode Given a node When it's a folder with a child and the node is valid Then should render correctly 1`] = `
+exports[`MTreeNode Given a node When the node can and has children and the node is valid Then should render correctly 1`] = `
 <li class="m-tree">
     <div class="m-tree__with-children">
         <div class="m-tree__with-children__header"><span class="m-tree__with-children__header__icon"></span> <span>Node 3</span></div>
@@ -19,6 +8,17 @@ exports[`MTreeNode Given a node When it's a folder with a child and the node is 
             <li class="m-tree m-tree__with-children__children">
                 <m-link mode="button" class="m-tree__single-node"> <span>Node 4</span></m-link>
             </li>
+        </ul>
+    </div>
+</li>
+`;
+
+exports[`MTreeNode Given a node When the node can have children but don't have any Then should render correctly 1`] = `
+<li class="m-tree">
+    <div class="m-tree__with-children">
+        <div class="m-tree__with-children__header"><span class="m-tree__with-children__header__icon"></span> <span>Node 2</span></div>
+        <ul name="m-tree__with-children__body" class="m-tree__with-children__body" style="display:none;">
+            <li class="m-tree__with-children__no-children">m-tree-node:empty</li>
         </ul>
     </div>
 </li>
