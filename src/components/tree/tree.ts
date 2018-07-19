@@ -76,7 +76,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     mounted(): void {
         if (!this.isSelectedNodeValid) {
-            console.warn(this.errorSelectedNodeTxt + ': ' + this.selectedNode[0]);
+            console.error(this.errorSelectedNodeTxt + ': ' + '\"' + this.selectedNode[0] + '\"');
         }
     }
 

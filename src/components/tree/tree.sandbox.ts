@@ -7,45 +7,98 @@ import WithRender from './tree.sandbox.html';
 
 export class Tree {
     idNode: string;
-    elementLabel: string;
-    elementPath: string;
-    hasChildren?: boolean;
-}
-
-export class TextTree {
-    idNode: string;
-    elementLabel: string;
-    elementPath: string;
-    uselessInfo: string;
+    elementLabel?: string;
+    uselessData?: string;
     hasChildren?: boolean;
 }
 
 @WithRender
 @Component
 export class MRootTreeSandbox extends Vue {
-    public currentFile: TreeNode<Tree>[] = [
+    public currentFile: string[] = ['/dossier 1/dossier 2/index.html'];
+    public currentFile2: string[] = ['/1/2'];
+    public wrongCurrentFile: string[] = ['/3/4'];
+
+    public emptyTree: TreeNode<Tree>[] = [];
+
+    public tree: TreeNode<Tree>[] = [
         {
             content: {
-                elementLabel: 'video-dog.mov',
-                idNode: 'b2',
-                elementPath: '/medias/Videos/video-dog.mov',
-                hasChildren: false
+                idNode: '1',
+                elementLabel: 'Titre 1',
+                uselessData: 'test',
+                hasChildren: true
             },
-            children: []
+            children: [
+                {
+                    content: {
+                        idNode: '2',
+                        elementLabel: 'Sous-titre 1',
+                        uselessData: 'test'
+                    }
+                },
+                {
+                    content: {
+                        idNode: '3',
+                        elementLabel: 'Sous-titre 2',
+                        uselessData: 'test'
+                    }
+                },
+                {
+                    content: {
+                        idNode: '4',
+                        elementLabel: 'Sous-titre 3',
+                        uselessData: 'test'
+                    }
+                },
+                {
+                    content: {
+                        idNode: '5',
+                        elementLabel: 'Sous-titre 4',
+                        uselessData: 'test'
+                    }
+                }
+            ]
+        },
+        {
+            content: {
+                idNode: '6',
+                elementLabel: 'Titre 2',
+                uselessData: 'test'
+            }
+        },
+        {
+            content: {
+                idNode: '7',
+                elementLabel: 'Titre 3',
+                uselessData: 'test',
+                hasChildren: true
+            },
+            children: [
+                {
+                    content: {
+                        idNode: '1',
+                        elementLabel: 'Sous-titre 1',
+                        uselessData: 'test'
+                    }
+                },
+                {
+                    content: {
+                        idNode: '2',
+                        elementLabel: 'Sous-titre 2',
+                        uselessData: 'test'
+                    }
+                }
+            ]
         }
     ];
 
-    public currentFileEmpty: TreeNode<TextTree>[] = [];
-
-    public emptyTree: TreeNode<TextTree>[] = [];
-
-    public textTree: TreeNode<TextTree>[] = [
+    public errorTree: TreeNode<Tree>[] = [
         {
             content: {
-                idNode: 'a1',
+                idNode: '1',
                 elementLabel: 'Titre 1',
-                uselessInfo: 'test',
-                elementPath: '',
+                uselessData: 'test',
                 hasChildren: true
             },
             children: [
@@ -53,67 +106,28 @@ export class MRootTreeSandbox extends Vue {
                     content: {
                         idNode: '',
                         elementLabel: 'Sous-titre 1',
-                        uselessInfo: 'test',
-                        elementPath: ''
+                        uselessData: 'test'
                     }
                 },
                 {
                     content: {
-                        idNode: 'a3',
+                        idNode: '3',
                         elementLabel: 'Sous-titre 2',
-                        uselessInfo: 'test',
-                        elementPath: ''
+                        uselessData: 'test'
                     }
                 },
                 {
                     content: {
-                        idNode: 'a4',
+                        idNode: '4',
                         elementLabel: 'Sous-titre 3',
-                        uselessInfo: 'test',
-                        elementPath: ''
+                        uselessData: 'test'
                     }
                 },
                 {
                     content: {
-                        idNode: 'a5',
+                        idNode: '5',
                         elementLabel: 'Sous-titre 4',
-                        uselessInfo: 'test',
-                        elementPath: ''
-                    }
-                }
-            ]
-        },
-        {
-            content: {
-                idNode: 'b1',
-                elementLabel: 'Titre 2',
-                uselessInfo: 'test',
-                elementPath: ''
-            }
-        },
-        {
-            content: {
-                idNode: '',
-                elementLabel: 'Titre 3',
-                uselessInfo: 'test',
-                elementPath: '',
-                hasChildren: true
-            },
-            children: [
-                {
-                    content: {
-                        idNode: 'c1',
-                        elementLabel: 'Sous-titre 4',
-                        uselessInfo: 'test',
-                        elementPath: ''
-                    }
-                },
-                {
-                    content: {
-                        idNode: 'c2',
-                        elementLabel: 'Sous-titre 5',
-                        uselessInfo: 'test',
-                        elementPath: ''
+                        uselessData: 'test'
                     }
                 }
             ]
@@ -123,83 +137,40 @@ export class MRootTreeSandbox extends Vue {
     public fileTree: TreeNode<Tree>[] = [
         {
             content: {
-                elementLabel: 'index.html',
-                idNode: 'a1',
-                elementPath: '/index.html'
-            }
-        },
-        {
-            content: {
-                elementLabel: 'Medias',
-                idNode: '',
-                elementPath: '/medias',
+                idNode: 'dossier 1',
+                elementLabel: 'dossier 1',
                 hasChildren: true
             },
             children: [
                 {
                     content: {
-                        elementLabel: 'Videos',
-                        idNode: '',
-                        elementPath: '/medias/Videos',
+                        idNode: 'index.html',
+                        elementLabel: 'index.html'
+                    }
+                },
+                {
+                    content: {
+                        idNode: 'menu.html'
+                    }
+                },
+                {
+                    content: {
+                        idNode: 'dossier 2',
+                        elementLabel: 'dossier 2',
                         hasChildren: true
                     },
                     children: [
                         {
                             content: {
-                                elementLabel: 'video_cat.mp4',
-                                idNode: 'b1',
-                                elementPath: '/medias/Videos/video_cat.mp4'
-                            },
-                            children: []
+                                idNode: 'index.html',
+                                elementLabel: 'index.html'
+                            }
                         },
                         {
                             content: {
-                                elementLabel: 'video-dog.mov',
-                                idNode: 'b2',
-                                elementPath: '/medias/Videos/video-dog.mov'
-                            },
-                            children: []
-                        }
-                    ]
-                },
-                {
-                    content: {
-                        elementLabel: 'Music',
-                        idNode: '',
-                        elementPath: '/medias/Music',
-                        hasChildren: true
-                    },
-                    children: []
-                },
-                {
-                    content: {
-                        elementLabel: 'lost-file.jpg',
-                        idNode: 'b7',
-                        elementPath: '/medias/lost-file.jpg'
-                    },
-                    children: []
-                },
-                {
-                    content: {
-                        elementLabel: 'img',
-                        idNode: '',
-                        elementPath: '/medias/img',
-                        hasChildren: true
-                    },
-                    children: [
-                        {
-                            content: {
-                                elementLabel: 'Animals.jpg',
-                                idNode: 'c1',
-                                elementPath: '/medias/img/Animals.jpg'
-                            },
-                            children: []
-                        },
-                        {
-                            content: {
-                                elementLabel: 'Birds.jpeg',
-                                idNode: 'c2',
-                                elementPath: '/medias/img/Birds.jpeg'
+                                idNode: 'dossier 3',
+                                elementLabel: 'dossier 3',
+                                hasChildren: true
                             },
                             children: []
                         }
@@ -209,44 +180,157 @@ export class MRootTreeSandbox extends Vue {
         },
         {
             content: {
-                elementLabel: 'Empty',
-                idNode: '',
-                elementPath: '/Empty',
-                hasChildren: true
-            },
-            children: []
+                idNode: 'poney.jpg',
+                elementLabel: 'poney.jpg'
+            }
         },
         {
             content: {
-                elementLabel: 'html',
-                idNode: '',
-                elementPath: '/html',
+                idNode: 'dossier 4',
+                elementLabel: 'dossier 4',
+                hasChildren: true
+            }
+        },
+        {
+            content: {
+                idNode: 'gros dossier',
+                elementLabel: 'gros dossier',
                 hasChildren: true
             },
             children: [
                 {
                     content: {
-                        elementLabel: 'home.html',
-                        idNode: 'j1',
-                        elementPath: '/html/home.html'
+                        idNode: 'dossier 1',
+                        elementLabel: 'dossier 1',
+                        hasChildren: true
                     },
-                    children: []
-                },
-                {
-                    content: {
-                        elementLabel: 'event.html',
-                        idNode: 'j2',
-                        elementPath: '/html/event.html'
-                    },
-                    children: []
+                    children: [
+                        {
+                            content: {
+                                idNode: 'index.html',
+                                elementLabel: 'index.html'
+                            }
+                        },
+                        {
+                            content: {
+                                idNode: 'menu.html'
+                            }
+                        },
+                        {
+                            content: {
+                                idNode: 'dossier 2',
+                                elementLabel: 'dossier 2',
+                                hasChildren: true
+                            },
+                            children: [
+                                {
+                                    content: {
+                                        idNode: 'index.html',
+                                        elementLabel: 'index.html'
+                                    }
+                                },
+                                {
+                                    content: {
+                                        idNode: 'dossier 3',
+                                        elementLabel: 'dossier 3',
+                                        hasChildren: true
+                                    },
+                                    children: [{
+                                        content: {
+                                            idNode: 'dossier 1',
+                                            elementLabel: 'dossier 1',
+                                            hasChildren: true
+                                        },
+                                        children: [
+                                            {
+                                                content: {
+                                                    idNode: 'index.html',
+                                                    elementLabel: 'index.html'
+                                                }
+                                            },
+                                            {
+                                                content: {
+                                                    idNode: 'menu.html'
+                                                }
+                                            },
+                                            {
+                                                content: {
+                                                    idNode: 'dossier 2',
+                                                    elementLabel: 'dossier 2',
+                                                    hasChildren: true
+                                                },
+                                                children: [
+                                                    {
+                                                        content: {
+                                                            idNode: 'index.html',
+                                                            elementLabel: 'index.html'
+                                                        }
+                                                    },
+                                                    {
+                                                        content: {
+                                                            idNode: 'dossier 3',
+                                                            elementLabel: 'dossier 3',
+                                                            hasChildren: true
+                                                        },
+                                                        children: [{
+                                                            content: {
+                                                                idNode: 'dossier 1',
+                                                                elementLabel: 'dossier 1',
+                                                                hasChildren: true
+                                                            },
+                                                            children: [
+                                                                {
+                                                                    content: {
+                                                                        idNode: 'index.html',
+                                                                        elementLabel: 'index.html'
+                                                                    }
+                                                                },
+                                                                {
+                                                                    content: {
+                                                                        idNode: 'menu.html'
+                                                                    }
+                                                                },
+                                                                {
+                                                                    content: {
+                                                                        idNode: 'dossier 2',
+                                                                        elementLabel: 'dossier 2',
+                                                                        hasChildren: true
+                                                                    },
+                                                                    children: [
+                                                                        {
+                                                                            content: {
+                                                                                idNode: 'index.html',
+                                                                                elementLabel: 'index.html'
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            content: {
+                                                                                idNode: 'dossier 3',
+                                                                                elementLabel: 'dossier 3',
+                                                                                hasChildren: true
+                                                                            },
+                                                                            children: []
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
     ];
 
-    public selectNewFile(): void {
-        // console.log(file);
-        // console.log('Ça passe');
+    public newNodeSelected(): void {
+        console.error('New file selected');
     }
 
 }
