@@ -6,18 +6,23 @@ import { MTreeNode } from './tree-node';
 
 const EMPTY_NODE_REF: RefSelector = { ref: 'empty-node-txt' };
 const TXT_EMPTY_NODE: string = 'm-tree-node:empty';
-
 const NODE_ELEMENT_LABEL: string = 'Node 1';
+const NODE_ELEMENT_ID: string = 'Node 1';
+const PARENT_PATH: string = '/Parent 1';
 
-const TREE_NODE_WITH_A_FILE: TreeNode<MTreeFormat> = {
+const TREE_NODE_SELECTED: string[] = ['/Node 1'];
+const TREE_NODE_SELECTED_2: string[] = ['/Node 2'];
+const TREE_NODE_SELECTED_3: string[] = ['/Node 3/Node 4'];
+
+const TREE_NODE_WITHOUT_CHILDREN: TreeNode<MTreeFormat> = {
     content: {
         elementLabel: NODE_ELEMENT_LABEL,
-        idNode: 'Node 1'
+        idNode: NODE_ELEMENT_ID
     },
     children: []
 };
 
-const TREE_NODE_WITH_A_FILE_NOT_VALID: TreeNode<MTreeFormat> = {
+const TREE_NODE_WITHOUT_CHILDREN_NOT_VALID: TreeNode<MTreeFormat> = {
     content: {
         elementLabel: NODE_ELEMENT_LABEL,
         idNode: ''
@@ -68,10 +73,6 @@ const TREE_NODE_WITH_CHILDREN_NOT_VALID: TreeNode<MTreeFormat> = {
     ]
 };
 
-const TREE_NODE_SELECTED: string[] = ['/Node 1'];
-const TREE_NODE_SELECTED_2: string[] = ['/Node 2'];
-const TREE_NODE_SELECTED_3: string[] = ['/Node 3/Node 4'];
-
 let node: TreeNode<MTreeFormat>;
 let externalSelectedNode: string[] = [];
 let externalCurrentPath: string = '';
@@ -112,7 +113,7 @@ describe('MTreeNode', () => {
 
             describe(`and the node is valid`, () => {
                 beforeEach(() => {
-                    node = TREE_NODE_WITH_A_FILE;
+                    node = TREE_NODE_WITHOUT_CHILDREN;
                     initializeShallowWrapper();
                     wrapper.setMethods({ generateErrorTree: jest.fn() });
                 });
@@ -150,7 +151,7 @@ describe('MTreeNode', () => {
 
             describe(`and the node is not valid`, () => {
                 beforeEach(() => {
-                    node = TREE_NODE_WITH_A_FILE_NOT_VALID;
+                    node = TREE_NODE_WITHOUT_CHILDREN_NOT_VALID;
                     initializeShallowWrapper();
                     wrapper.setMethods({ generateErrorTree: jest.fn() });
                 });
@@ -171,7 +172,7 @@ describe('MTreeNode', () => {
 
         });
 
-        describe(`When can have children but don't have children`, () => {
+        describe(`When the node can have children but don't have any`, () => {
 
             beforeEach(() => {
                 node = TREE_NODE_WITH_CHILDREN_EMPTY;
@@ -206,7 +207,7 @@ describe('MTreeNode', () => {
 
         });
 
-        describe(`When it's a folder with a child`, () => {
+        describe(`When the node can and has children`, () => {
 
             describe(`and the node is valid`, () => {
 
@@ -338,7 +339,7 @@ describe('MTreeNode', () => {
 
         describe(`When we check if the current node is selected`, () => {
             beforeEach(() => {
-                node = TREE_NODE_WITH_A_FILE;
+                node = TREE_NODE_WITHOUT_CHILDREN;
             });
 
             describe(`When the current node is selected`, () => {
@@ -372,11 +373,11 @@ describe('MTreeNode', () => {
         describe(`When the node has a parent`, () => {
 
             it(`Then should return the right current path`, () => {
-                externalCurrentPath = '/Folder 1';
-                node = TREE_NODE_WITH_A_FILE;
+                externalCurrentPath = PARENT_PATH;
+                node = TREE_NODE_WITHOUT_CHILDREN;
                 initializeShallowWrapper();
 
-                expect(wrapper.vm.currentPath).toEqual('/Folder 1/Node 1');
+                expect(wrapper.vm.currentPath).toEqual(PARENT_PATH + '/' + NODE_ELEMENT_ID);
             });
         });
 

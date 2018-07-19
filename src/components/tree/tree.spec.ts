@@ -148,24 +148,6 @@ describe(`MTree`, () => {
                 expect(wrapper.vm.selectedNodeFound).toHaveBeenCalled();
             });
 
-            it(`Then should change isSelectedNodeValid to true`, () => {
-                wrapper.vm.selectedNodeFound();
-
-                expect(wrapper.vm.isSelectedNodeValid).toBeTruthy();
-            });
-
-        });
-
-        describe(`When the selected node is not found`, () => {
-
-            beforeEach(() => {
-                initializeShallowWrapper();
-            });
-
-            it(`Then should let isSelectedNodeValid to false`, () => {
-                expect(wrapper.vm.isSelectedNodeValid).toBeFalsy();
-            });
-
         });
 
     });

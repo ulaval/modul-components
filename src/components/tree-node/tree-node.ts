@@ -86,6 +86,10 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         return this.hasChildren && this.validNode();
     }
 
+    get hasChildren(): boolean {
+        return this.node.content.hasChildren !== undefined && this.node.content.hasChildren;
+    }
+
     get nodeTitle(): string {
         return (this.node.content.elementLabel !== undefined && !!this.node.content.elementLabel) ? this.node.content.elementLabel : this.node.content.idNode;
     }
@@ -116,10 +120,6 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     set currentPath(path: string) {
         this.internalCurrentPath = path;
-    }
-
-    private get hasChildren(): boolean {
-        return this.node.content.hasChildren !== undefined && this.node.content.hasChildren;
     }
 
     private get isParentOfSelectedFile(): boolean {
