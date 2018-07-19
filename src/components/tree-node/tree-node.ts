@@ -41,13 +41,11 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     internalIsOpen: boolean = false;
     internalCurrentPath: string = '';
 
+    emptyNodeTxt: string = this.$i18n.translate('m-tree-node:empty');
+
     created(): void {
         this.currentPath = this.externalCurrentPath + '/' + this.node.content.idNode;
         this.internalIsOpen = this.isAllOpen || (this.hasChildren && this.isParentOfSelectedFile);
-    }
-
-    generateErrorTree(): void {
-        this.$emit('generateErrorTree');
     }
 
     selectNewNode(path: string): void {
@@ -83,12 +81,12 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         return isValid;
     }
 
-    hasValidChildren(): boolean {
-        return this.hasChildren && this.validNode();
+    generateErrorTree(): void {
+        this.$emit('generateErrorTree');
     }
 
-    get isParentOfSelectedFile(): boolean {
-        return this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].indexOf(this.currentPath) === 0;
+    hasValidChildren(): boolean {
+        return this.hasChildren && this.validNode();
     }
 
     get nodeTitle(): string {
@@ -125,6 +123,10 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     set currentPath(path: string) {
         this.internalCurrentPath = path;
+    }
+
+    private get isParentOfSelectedFile(): boolean {
+        return this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0].indexOf(this.currentPath) === 0;
     }
 
 }

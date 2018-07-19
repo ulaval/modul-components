@@ -3,10 +3,10 @@
 exports[`MTree Given a tree with some data Then should render correctly 1`] = `
 <div class="m-tree">
     <ul>
-        <div selectionNumber="0" node="[object Object]" externalSelectedNode="[object Object]" selectionIcon="information">m-tree-node</div>
-        <div selectionNumber="0" node="[object Object]" externalSelectedNode="[object Object]" selectionIcon="information">m-tree-node</div>
+        <m-tree-node selection-number="0" node="[object Object]" external-selected-node="/medias/Videos/video-dog.mov" selection-icon="information"></m-tree-node>
+        <m-tree-node selection-number="0" node="[object Object]" external-selected-node="/medias/Videos/video-dog.mov" selection-icon="information"></m-tree-node>
     </ul>
 </div>
 `;
 
-exports[`MTree Given an empty tree Then should render correctly 1`] = `<div class="m-tree"><span>m-tree:empty</span></div>`;
+exports[`MTree Given an empty tree Then should render correctly 1`] = `<div class="m-tree"><span class="m-tree__empty">m-tree:empty</span> </div>`;

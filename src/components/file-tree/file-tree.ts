@@ -21,7 +21,7 @@ export class MFileTree<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: false })
     isOpen: boolean;
 
-    @Prop()
+    @Prop({ default: false })
     isAFolder: boolean;
 
     get folderIcon(): string {

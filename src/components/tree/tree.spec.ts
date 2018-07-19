@@ -1,96 +1,52 @@
-import { shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import { MTree, TreeNode } from './tree';
+import { MTree, MTreeFormat, TreeNode } from './tree';
 
-export class TreeUnit {
-    idNode: string;
-    elementLabel: string;
-    elementPath: string;
-}
+const EMPTY_TREE_REF: RefSelector = { ref: 'empty-tree-txt' };
+const ERROR_TREE_REF: RefSelector = { ref: 'error-tree-txt' };
+const TREE_NODE_REF: RefSelector = { ref: 'tree-node' };
 
-const treeNodeSelected: TreeNode<TreeUnit>[] = [
-    {
-        content: {
-            elementLabel: 'video-dog.mov',
-            idNode: 'b2',
-            elementPath: '/medias/Videos/video-dog.mov'
-        },
-        children: []
-    }
-];
-const newTreeNodeSelected: TreeNode<TreeUnit>[] = [
+const TXT_EMPTY_TREE: string = 'm-tree:empty';
+const TXT_ERROR_TREE: string = 'm-tree:error';
+
+const TREE_NODE_SELECTED: string[] = ['/medias/Videos/video-dog.mov'];
+const NEW_TREE_NODE_SELECTED: string[] = ['/index.html'];
+
+const EMPTY_TREE: TreeNode<MTreeFormat>[] = [];
+const TREE_WITH_DATA: TreeNode<MTreeFormat>[] = [
     {
         content: {
             elementLabel: 'index.html',
-            idNode: 'a1',
-            elementPath: '/index.html'
-        }
-    }
-];
-
-const emptyTree: TreeNode<TreeUnit>[] = [];
-const treeWithData: TreeNode<TreeUnit>[] = [
-    {
-        content: {
-            elementLabel: 'index.html',
-            idNode: 'a1',
-            elementPath: '/index.html'
+            idNode: 'index.html'
         }
     },
     {
         content: {
             elementLabel: 'Medias',
-            idNode: '',
-            elementPath: '/medias'
+            idNode: 'medias'
         },
         children: [
             {
                 content: {
                     elementLabel: 'Videos',
-                    idNode: '',
-                    elementPath: '/medias/Videos'
-                },
-                children: [
-                    {
-                        content: {
-                            elementLabel: 'video_cat.mp4',
-                            idNode: 'b1',
-                            elementPath: '/medias/Videos/video_cat.mp4'
-                        },
-                        children: []
-                    },
-                    {
-                        content: {
-                            elementLabel: 'video-dog.mov',
-                            idNode: 'b2',
-                            elementPath: '/medias/Videos/video-dog.mov'
-                        },
-                        children: []
-                    }
-                ]
+                    idNode: 'Videos'
+                }
             }
         ]
     }
 ];
 
-let tree: TreeNode<TreeUnit>[];
-let wrapper: Wrapper<MTree<TreeUnit>>;
+let tree: TreeNode<MTreeFormat>[];
+let wrapper: Wrapper<MTree<MTreeFormat>>;
 
 const initializeShallowWrapper: any = () => {
     wrapper = shallow(MTree, {
-        stubs: getStubs(),
         propsData: {
             tree: tree,
-            externalSelectedNode: treeNodeSelected
+            externalSelectedNode: TREE_NODE_SELECTED
         }
     });
-};
-
-const getStubs: any = () => {
-    return {
-        ['m-tree-node']: '<div>m-tree-node</div>'
-    };
 };
 
 describe(`MTree`, () => {
@@ -98,7 +54,7 @@ describe(`MTree`, () => {
     describe(`Given an empty tree`, () => {
 
         beforeEach(() => {
-            tree = emptyTree;
+            tree = EMPTY_TREE;
             initializeShallowWrapper();
         });
 
@@ -110,12 +66,16 @@ describe(`MTree`, () => {
             expect(wrapper.vm.isTreeEmpty()).toBeTruthy();
         });
 
+        it(`Then a message should appear`, () => {
+            expect(wrapper.find(EMPTY_TREE_REF).text()).toEqual(TXT_EMPTY_TREE);
+        });
+
     });
 
     describe(`Given a tree with some data`, () => {
 
         beforeEach(() => {
-            tree = treeWithData;
+            tree = TREE_WITH_DATA;
             initializeShallowWrapper();
         });
 
@@ -130,7 +90,14 @@ describe(`MTree`, () => {
         describe(`When a node is selected`, () => {
 
             beforeEach(() => {
-                wrapper.vm.selectNewNode(newTreeNodeSelected[0]);
+                wrapper.vm.selectNewNode(NEW_TREE_NODE_SELECTED[0]);
+            });
+
+            it(`Then should call selectNewNode`, () => {
+                wrapper.setMethods({ selectNewNode: jest.fn() });
+                wrapper.find(TREE_NODE_REF).trigger('newNodeSelectected');
+
+                expect(wrapper.vm.selectNewNode).toHaveBeenCalled();
             });
 
             it(`Then emit newNodeSelected`, () => {
@@ -138,8 +105,67 @@ describe(`MTree`, () => {
             });
 
             it(`Then a new node is selected`, () => {
-                expect(wrapper.vm.internalSelectedNode).toEqual(newTreeNodeSelected);
+                wrapper.vm.selectedNode = NEW_TREE_NODE_SELECTED;
+
+                expect(wrapper.vm.selectedNode).toEqual(NEW_TREE_NODE_SELECTED);
             });
+        });
+
+        describe(`When there is an error in the tree`, () => {
+
+            beforeEach(() => {
+                initializeShallowWrapper();
+                wrapper.vm.generateErrorTree();
+            });
+
+            it(`Then should call generateErrorTree`, () => {
+                wrapper.setMethods({ generateErrorTree: jest.fn() });
+                wrapper.find(TREE_NODE_REF).trigger('generateErrorTree');
+
+                expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
+            });
+
+            it(`Then should generate an error`, () => {
+                expect(wrapper.vm.errorTree).toBeTruthy();
+            });
+
+            it(`Then should show an error message`, () => {
+                expect(wrapper.find(ERROR_TREE_REF).text()).toEqual(TXT_ERROR_TREE);
+            });
+
+        });
+
+        describe(`When the selected node is found`, () => {
+
+            beforeEach(() => {
+                initializeShallowWrapper();
+            });
+
+            it(`Then should call selectedNodeFound`, () => {
+                wrapper.setMethods({ selectedNodeFound: jest.fn() });
+                wrapper.find(TREE_NODE_REF).trigger('selectedNodeFound');
+
+                expect(wrapper.vm.selectedNodeFound).toHaveBeenCalled();
+            });
+
+            it(`Then should change isSelectedNodeValid to true`, () => {
+                wrapper.vm.selectedNodeFound();
+
+                expect(wrapper.vm.isSelectedNodeValid).toBeTruthy();
+            });
+
+        });
+
+        describe(`When the selected node is not found`, () => {
+
+            beforeEach(() => {
+                initializeShallowWrapper();
+            });
+
+            it(`Then should let isSelectedNodeValid to false`, () => {
+                expect(wrapper.vm.isSelectedNodeValid).toBeFalsy();
+            });
+
         });
 
     });

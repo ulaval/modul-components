@@ -5,14 +5,12 @@ import { MFileTree } from './file-tree';
 
 const TREE_NODE_FILE: MTreeFormat = {
     elementLabel: 'Node 1.jpg',
-    idNode: 'n1',
-    elementPath: '/Node 1.jpg'
+    idNode: 'Node 1.jpg'
 };
 
 const TREE_NODE_FOLDER: MTreeFormat = {
     elementLabel: 'Node 2',
-    idNode: '',
-    elementPath: '/Node 2'
+    idNode: '/Node 2'
 };
 
 const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
@@ -20,6 +18,7 @@ const FOLDER_CLOSED: string = 'm-svg__file-zip';
 
 let file: MTreeFormat;
 let isOpen: boolean = false;
+let isAFolder: boolean = false;
 let wrapper: Wrapper<MFileTree<MTreeFormat>>;
 
 const initializeShallowWrapper: any = () => {
@@ -27,7 +26,8 @@ const initializeShallowWrapper: any = () => {
         stubs: getStubs(),
         propsData: {
             file,
-            isOpen
+            isOpen,
+            isAFolder
         }
     });
 };
@@ -45,12 +45,7 @@ describe(`MFileTree`, () => {
 
         beforeEach(() => {
             file = TREE_NODE_FOLDER;
-        });
-
-        it(`Then it should be a folder`, () => {
-            initializeShallowWrapper();
-
-            expect(wrapper.vm.isAFolder).toBeTruthy();
+            isAFolder = true;
         });
 
         describe(`When the folder is open`, () => {
@@ -81,13 +76,9 @@ describe(`MFileTree`, () => {
 
         beforeEach(() => {
             file = TREE_NODE_FILE;
+            isAFolder = false;
             initializeShallowWrapper();
         });
-
-        it(`Then it should not be a folder`, () => {
-            expect(wrapper.vm.isAFolder).toBeFalsy();
-        });
-
         describe(`When the file type is jpg`, () => {
 
             it(`Then the extensionFile should return .jpg`, () => {
