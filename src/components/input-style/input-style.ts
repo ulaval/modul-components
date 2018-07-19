@@ -30,6 +30,8 @@ export class MInputStyle extends ModulVue {
     public requiredMarker: boolean;
     @Prop()
     public readonly: boolean;
+    @Prop({ default: false })
+    public borderTop: boolean;
 
     private animActive: boolean = false;
 

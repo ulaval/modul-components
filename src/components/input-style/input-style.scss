@@ -250,38 +250,59 @@ $m-input-style--padding: 4px !default;
         }
 
         &__left {
-            // overflow: hidden;
             position: relative;
             min-height: 24px;
             flex: 1 1 auto;
+            // overflow: hidden;
 
-            .m--is-focus & {
-                padding-top: 4px;
-                margin-top: 4px;
-            }
-
-            &::before,
-            &::after {
-                top: 0;
-                content: "";
-                position: absolute;
-                display: block;
-                transition: background-color 0.45s ease-in-out, width 0.45s ease-in-out, height 0.45s ease-in-out;
-            }
-
-            &::before {
-                width: 100%;
-                height: 2px;
-                background-color: $m-color--interactive;
-            }
-
-            &::after {
-                width: 0;
-                height: 4px;
-
+            .m--has-border-top & {
                 .m--is-focus & {
+                    padding-top: 4px;
+                    margin-top: 4px;
+                }
+
+                &::before,
+                &::after {
+                    top: 0;
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    transition: background-color $m-transition-duration--l ease-in-out, width $m-transition-duration--l ease-in-out;
+                }
+
+                &::before {
                     width: 100%;
-                    background-color: $m-color--interactive;
+                    height: 2px;
+
+                    .m--is-focus & {
+                        background-color: $m-color--interactive;
+                    }
+
+                    .m--is-focus.m--is-valid & {
+                        background-color: $m-input-style--color-valid;
+                    }
+
+                    .m--is-focus.m--has-error & {
+                        background-color: $m-input-style--color-error;
+                    }
+                }
+
+                &::after {
+                    width: 0;
+                    height: 4px;
+
+                    .m--is-focus & {
+                        width: 100%;
+                        background-color: $m-color--interactive;
+                    }
+
+                    .m--is-focus.m--is-valid & {
+                        background-color: $m-input-style--color-valid;
+                    }
+
+                    .m--is-focus.m--has-error & {
+                        background-color: $m-input-style--color-error;
+                    }
                 }
             }
         }
