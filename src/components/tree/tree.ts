@@ -53,14 +53,13 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: false })
     isFileTree: boolean;
 
-    internalSelectedNode: string[] = [];
-    internalErrorTree: boolean = false;
-
-    isSelectedNodeValid: boolean = false;
-
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
     errorTreeTxt: string = this.$i18n.translate('m-tree:error');
     errorSelectedNode: string = this.$i18n.translate('m-tree:selected-node-error');
+
+    private internalErrorTree: boolean = false;
+    private internalSelectedNode: string[] = [];
+    private isSelectedNodeValid: boolean = false;
 
     created(): void {
         this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];

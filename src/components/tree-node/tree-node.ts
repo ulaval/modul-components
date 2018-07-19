@@ -32,16 +32,13 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     @Prop()
     isFileTree: boolean;
 
-    @Prop()
-    errorTree: boolean;
-
     @Prop({ default: '' })
     externalCurrentPath: string;
 
-    internalIsOpen: boolean = false;
-    internalCurrentPath: string = '';
-
     emptyNodeTxt: string = this.$i18n.translate('m-tree-node:empty');
+
+    private internalIsOpen: boolean = false;
+    private internalCurrentPath: string = '';
 
     created(): void {
         this.currentPath = this.externalCurrentPath + '/' + this.node.content.idNode;
@@ -93,10 +90,6 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
         return (this.node.content.elementLabel !== undefined && !!this.node.content.elementLabel) ? this.node.content.elementLabel : this.node.content.idNode;
     }
 
-    get hasChildren(): boolean {
-        return this.node.content.hasChildren !== undefined && this.node.content.hasChildren;
-    }
-
     get childrenNotEmpty(): boolean {
         return this.node.children !== undefined && !!this.node.children.length;
     }
@@ -123,6 +116,10 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     set currentPath(path: string) {
         this.internalCurrentPath = path;
+    }
+
+    private get hasChildren(): boolean {
+        return this.node.content.hasChildren !== undefined && this.node.content.hasChildren;
     }
 
     private get isParentOfSelectedFile(): boolean {
