@@ -48,28 +48,41 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     externalSelectedNode: string[];
 
     @Prop({ default: false })
-    isAllOpen: boolean;
+    externalIsAllOpen: boolean;
 
     @Prop({ default: false })
     isFileTree: boolean;
 
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
     errorTreeTxt: string = this.$i18n.translate('m-tree:error');
-    errorSelectedNode: string = this.$i18n.translate('m-tree:selected-node-error');
+    errorSelectedNodeTxt: string = this.$i18n.translate('m-tree:selected-node-error');
+
+    allOpenTxt: string = this.$i18n.translate('m-tree:all-close');
+    allCloseTxt: string = this.$i18n.translate('m-tree:all-open');
+
+    treeVisibilityTxt: string = '';
 
     private internalErrorTree: boolean = false;
     private internalSelectedNode: string[] = [];
     private isSelectedNodeValid: boolean = false;
+    private internalIsAllOpen: boolean = false;
 
     created(): void {
         this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];
         this.isSelectedNodeValid = !this.selectedNode.length;
+        this.isAllOpen = this.externalIsAllOpen;
+        this.treeVisibilityTxt = this.isAllOpen ? this.allOpenTxt : this.allCloseTxt;
     }
 
     mounted(): void {
         if (!this.isSelectedNodeValid) {
-            console.warn(this.errorSelectedNode + ': ' + this.selectedNode[0]);
+            console.warn(this.errorSelectedNodeTxt + ': ' + this.selectedNode[0]);
         }
+    }
+
+    toggleAllVisibility(): void {
+        this.isAllOpen = !this.isAllOpen;
+        this.treeVisibilityTxt = this.isAllOpen ? this.allOpenTxt : this.allCloseTxt;
     }
 
     isTreeEmpty(): boolean {
@@ -95,6 +108,14 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     set selectedNode(idNode: string[]) {
         this.internalSelectedNode = idNode;
+    }
+
+    get isAllOpen(): boolean {
+        return this.internalIsAllOpen;
+    }
+
+    set isAllOpen(isAllOpen: boolean) {
+        this.internalIsAllOpen = isAllOpen;
     }
 
     get errorTree(): boolean {

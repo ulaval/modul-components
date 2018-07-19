@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NODE_NAME } from '../component-names';
@@ -43,6 +43,11 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     created(): void {
         this.currentPath = this.externalCurrentPath + '/' + this.node.content.idNode;
         this.internalIsOpen = this.isAllOpen || (this.hasChildren && this.isParentOfSelectedFile);
+    }
+
+    @Watch('isAllOpen')
+    toggleIsAllOpen(): void {
+        this.isOpen = this.isAllOpen;
     }
 
     selectNewNode(path: string): void {

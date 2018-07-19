@@ -1,6 +1,7 @@
 <div class="m-tree">
     <span v-if="isTreeEmpty()" class="m-tree__empty" ref="empty-tree-txt">{{ emptyTreeTxt }}</span>
     <ul v-else>
+        <m-button skin="secondary" @click="toggleAllVisibility()">{{ treeVisibilityTxt }}</m-button>
         <m-tree-node v-for="node in tree" ref="tree-node" :selection-number="selectionNumber" :node="node" :external-selected-node="selectedNode" :is-all-open="isAllOpen" :selection-icon="selectionIcon" :is-file-tree="isFileTree" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree" @selectedNodeFound="selectedNodeFound"></m-tree-node>
     </ul>
     <div v-if="errorTree" class="m-tree__error" >

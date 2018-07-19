@@ -1,6 +1,10 @@
 @import '../../styles/abstracts/variables';
 
 .m-tree {
+    .m-button {
+        margin-bottom: $m-margin--l;
+    }
+
     &__error {
         .m-icon {
             color: $m-color--error-dark;

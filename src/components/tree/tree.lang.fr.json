@@ -2,6 +2,8 @@
     "m-tree": {
         "empty": "Aucun contenu",
         "error": "Certains éléments n'ont pu être affichés",
-        "selected-node-error": "L'élément sélectionné n'a pas été trouvé"
+        "selected-node-error": "L'élément sélectionné n'a pas été trouvé",
+        "all-open": "Tout ouvrir",
+        "all-close": "Tout fermer"
     }
 }
