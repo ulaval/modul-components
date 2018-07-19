@@ -1,14 +1,14 @@
 @import '../../styles/abstracts/variables';
 @import 'accordion-transition';
 
-$m-accordion--icon-l-width: 16px;
-$m-accordion--icon-width: 12px;
-$m-accordion--icon-l-height: 2px;
-$m-accordion--icon-height: 1px;
-$m-accordion--border-size: $m-border-width;
-$m-accordion--vertical-border-size: 6px;
-$m-accordion--border-color: $m-color--border;
-$m-accordion--color-default: $m-color--interactive;
+$m-accordion--icon-l-width: 16px !default;
+$m-accordion--icon-width: 12px !default;
+$m-accordion--icon-l-height: 2px !default;
+$m-accordion--icon-height: 1px !default;
+$m-accordion--border-size: $m-border-width !default;
+$m-accordion--vertical-border-size: 6px !default;
+$m-accordion--border-color: $m-color--border !default;
+$m-accordion--color-default: $m-color--interactive !default;
 
 .m-accordion {
     &.m--is-default,
@@ -129,81 +129,7 @@ $m-accordion--color-default: $m-color--interactive;
     }
 
     &__header-icon {
-        position: relative;
         display: block;
-
-        &::before,
-        &::after {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            content: '';
-            background: $m-color--interactive;
-            transform: translate3d(-50%, -50%, 0);
-            transition: transform $m-transition-duration ease;
-        }
-
-        &::after {
-            transition: transform $m-transition-duration ease, opacity 0.6s ease;
-        }
-
-        &.m--is-closed {
-            &::before,
-            &::after {
-                transform: translate3d(-50%, -50%, 0) rotate(90deg);
-            }
-
-            &::before {
-                opacity: 0;
-            }
-        }
-
-        &:not(.m--is-large) {
-            width: $m-accordion--icon-width;
-            height: $m-accordion--icon-width;
-
-            &::before {
-                width: $m-accordion--icon-width;
-                height: $m-accordion--icon-height;
-            }
-
-            &::after {
-                width: $m-accordion--icon-height;
-                height: $m-accordion--icon-width;
-            }
-
-            &.m--has-border {
-                width: $m-accordion--icon-width + 8;
-                height: $m-accordion--icon-width + 8;
-                border-width: $m-accordion--icon-height;
-            }
-        }
-
-        &.m--is-large {
-            width: $m-accordion--icon-l-width;
-            height: $m-accordion--icon-l-width;
-
-            &::before {
-                width: $m-accordion--icon-l-width;
-                height: $m-accordion--icon-l-height;
-            }
-
-            &::after {
-                width: $m-accordion--icon-l-height;
-                height: $m-accordion--icon-l-width;
-            }
-
-            &.m--has-border {
-                width: $m-accordion--icon-l-width + 8;
-                height: $m-accordion--icon-l-width + 8;
-                border-width: $m-accordion--icon-l-height;
-            }
-        }
-
-        &.m--has-border {
-            border-color: $m-color--interactive;
-            border-style: solid;
-        }
 
         &:not(.m--is-left) {
             margin-left: $m-spacing;
