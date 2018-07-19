@@ -2,7 +2,8 @@
     @click.stop
     :class="{
         'vue-froala--focused': isFocused,
-        'vue-froala--collapsed': collapsed
+        'vue-froala--collapsed': collapsed,
+        'vue-froala--animated': isAnimated
     }">
     <component ref="editor" :is="tag"></component>
 </div>

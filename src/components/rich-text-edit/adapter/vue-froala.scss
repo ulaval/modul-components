@@ -13,7 +13,6 @@
 
     /deep/ .fr-toolbar {
         opacity: 0;
-        transition: margin-top $m-transition-duration--l ease, opacity 0.3s ease;
         display: block !important;
         position: relative;
         box-shadow: unset;
@@ -31,6 +30,12 @@
         font-weight: $m-font-weight;
         border-left: 1px solid $m-color--grey-light;
         border-right: 1px solid $m-color--grey-light;
+    }
+
+    &--animated {
+        /deep/ .fr-toolbar {
+            transition: margin-top $m-transition-duration--l ease, opacity 0.3s ease;
+        }
     }
 
     &--collapsed {

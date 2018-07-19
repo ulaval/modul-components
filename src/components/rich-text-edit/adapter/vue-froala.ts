@@ -60,6 +60,8 @@ export class VueFroala extends Vue {
     protected isInitialized: boolean = false;
     protected isFullScreen: boolean = false;
 
+    protected isAnimated: boolean = false;
+
     @Watch('value')
     public refreshValue(): void {
         this.model = this.value;
@@ -100,31 +102,20 @@ export class VueFroala extends Vue {
             // we reemit each valid input events so froala can work in input-style component.
             events: {
                 [froalaEvents.Initialized]: (_e, editor) => {
-                    editor.toolbar.hide();
-                    editor.quickInsert.hide();
-
-                    const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
-                    toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
-
+                    this.hideToolbar(editor);
                     this.isInitialized = true;
                 },
                 [froalaEvents.Focus]: (_e, editor) => {
                     this.$emit('focus');
-                    editor.toolbar.show();
-
-                    const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
-                    toolBar.style.removeProperty('margin-top');
+                    this.showToolbar(editor);
 
                     this.isFocused = true;
+                    this.isAnimated = true;
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!this.isFullScreen) {
-                        editor.toolbar.hide();
-                        editor.quickInsert.hide();
                         this.$emit('blur');
-
-                        const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
-                        toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
+                        this.hideToolbar(editor);
 
                         this.isFocused = false;
                     }
@@ -155,6 +146,18 @@ export class VueFroala extends Vue {
         this.initListeners();
 
         this.editorInitialized = true;
+    }
+
+    private hideToolbar(editor: any): void {
+        editor.toolbar.hide();
+        const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
+        toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
+    }
+
+    private showToolbar(editor: any): void {
+        editor.toolbar.show();
+        const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
+        toolBar.style.removeProperty('margin-top');
     }
 
     private updateValue(): void {

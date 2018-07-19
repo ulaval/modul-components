@@ -45,7 +45,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public scrollableContainer: string = 'body';
     public toolbarStickyOffset: number = 0;
     public wordDeniedTags: string[] = ['img', 'table', 'tr', 'td', 'th'];
-    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quickInsert', 'quote', 'save', 'table', 'url', 'wordPaste'];
+    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'table', 'url', 'wordPaste'];
 
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {
