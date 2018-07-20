@@ -15,6 +15,7 @@ import DropdownItemSandboxPlugin from '../components/dropdown-item/dropdown-item
 import DropdownSandboxPlugin from '../components/dropdown/dropdown.sandbox';
 import DynamicTemplateSandboxPlugin from '../components/dynamic-template/dynamic-template.sandbox';
 import ErrorMessageSandboxPlugin from '../components/error-message/error-message.sandbox';
+import ErrorTemplateSandBoxPlugin from '../components/error-template/error-template.sandbox';
 import FileSelectSandboxPlugin from '../components/file-select/file-select.sandbox';
 import FileUploadSandboxPlugin from '../components/file-upload/file-upload.sandbox';
 import FlexTemplateSandboxPlugin from '../components/flex-template/flex-template.sandbox';
@@ -79,6 +80,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(DropdownGroupSandboxPlugin);
         Vue.use(DynamicTemplateSandboxPlugin);
         Vue.use(ErrorMessageSandboxPlugin);
+        Vue.use(ErrorTemplateSandBoxPlugin);
         Vue.use(FileSelectSandboxPlugin);
         Vue.use(FileUploadSandboxPlugin);
         Vue.use(FlexTemplateSandboxPlugin);

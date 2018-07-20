@@ -1,0 +1,19 @@
+<article class="m-error-template" :class="{
+    'm--is-skin-information': skin=='information',
+    'm--is-skin-error': skin=='error',
+    'm--is-skin-warning': skin=='warning'
+    }">
+    <h1 class="m-error-template__title">{{title}}</h1>
+    <div class="m-error-template__icon-container">
+        <m-icon class="m-error-template__icon" :name="iconName" size="130px"></m-icon>
+    </div>
+    <p ref="hint" class="m-error-template__hints" v-if="hasHints" v-for="hint in hints">{{hint}}</p>
+    <div class="m-error-template__details" v-if="$slots['default']">
+        <slot></slot>
+    </div>
+    <ul v-if="hasLinks" class="m-error-template__links">
+        <li ref="link" v-for="link in links">
+            <m-link class="m-error-template__link" icon-name="m-svg__chevron--right" mode="link" :url="link.url" target="_blank">{{link.label}}</m-link>
+        </li>
+    </ul>
+</article>

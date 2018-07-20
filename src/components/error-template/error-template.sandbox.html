@@ -1,0 +1,68 @@
+<div>
+    <h5>default - different skins ans icons</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-template skin="error" :title="title" iconName="error"></m-error-template>
+    </div>
+
+    <br />
+
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-template skin="information" :title="title" iconName="m-svg__file-video"></m-error-template>
+    </div>
+
+    <br />
+
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-template skin="warning" :title="title" iconName="m-svg__warning"></m-error-template>
+    </div>
+
+    <hr/>
+
+    <h5>with #one hint</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-template skin="error" :title="title" iconName="error"  :hints="oneHint"></m-error-template>
+    </div>
+
+    <hr/>
+
+    <h5>with #multiple hints</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-template skin="error" :title="title" iconName="error"  :hints="manyHints"></m-error-template>
+    </div>
+
+    <hr/>
+
+    <h5>with #one link</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-template skin="error" :title="title" iconName="error"  :links="oneLink"></m-error-template>
+    </div>
+
+    <hr/>
+
+    <h5>with #multiple links</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-template skin="error" :title="title" iconName="error"  :links="manyLinks"></m-error-template>
+    </div>
+
+    <hr/>
+
+    <h5>unexpected error popup with hints and links</h5>
+    <m-button v-m-popup:errorpopup>pop me an error</m-button>
+    <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
+            <m-error-template skin="error" :title="title" iconName="m-svg__warning-filled" :hints="manyHints" :links="manyLinks"></m-error-template>
+    </m-modal>
+
+    <hr/>
+
+    <h5>with content in slot</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-template skin="error" :title="title" iconName="error" :hints="manyHints" :links="manyLinks">
+            <span>
+                <b>***Custom error details content through slot.***</b>
+            </span>
+        </m-error-template>
+    </div>
+
+    <hr/>
+
+</div>
