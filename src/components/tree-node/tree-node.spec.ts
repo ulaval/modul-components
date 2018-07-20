@@ -74,12 +74,12 @@ const TREE_NODE_WITH_CHILDREN_NOT_VALID: TreeNode<MTreeFormat> = {
 };
 
 let node: TreeNode<MTreeFormat>;
-let externalSelectedNode: string[] = [];
-let externalCurrentPath: string = '';
+let selectedNode: string[] = [];
+let currentPath: string = '';
 let selectionIcon: string = '';
 let selectionQuantity: MSelectOption = MSelectOption.SINGLE;
-let isAllOpen: boolean = false;
-let isFileTree: boolean = false;
+let allOpen: boolean = false;
+let fileTree: boolean = false;
 
 let wrapper: Wrapper<MTreeNode<MTreeFormat>>;
 
@@ -88,12 +88,12 @@ const initializeShallowWrapper: any = () => {
         stubs: getStubs(),
         propsData: {
             node,
-            externalSelectedNode,
+            selectedNode,
             selectionIcon,
             selectionQuantity,
-            isAllOpen,
-            isFileTree,
-            externalCurrentPath
+            allOpen,
+            fileTree,
+            currentPath
         }
     });
 };
@@ -267,10 +267,10 @@ describe('MTreeNode', () => {
 
             describe(`When the node is a parent of the selected node`, () => {
                 it(`Then the node should be open`, () => {
-                    externalSelectedNode = TREE_NODE_SELECTED_3;
+                    selectedNode = TREE_NODE_SELECTED_3;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.isOpen).toBeTruthy();
+                    expect(wrapper.vm.open).toBeTruthy();
                 });
             });
 
@@ -278,20 +278,20 @@ describe('MTreeNode', () => {
                 it(`Then the node should not be open`, () => {
 
                     node = TREE_NODE_WITH_CHILDREN;
-                    externalSelectedNode = TREE_NODE_SELECTED_2;
+                    selectedNode = TREE_NODE_SELECTED_2;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.isOpen).toBeFalsy();
+                    expect(wrapper.vm.open).toBeFalsy();
                 });
             });
 
-            describe(`When isAllOpen is true`, () => {
+            describe(`When allOpen is true`, () => {
                 it(`Then the node should be open`, () => {
                     node = TREE_NODE_WITH_CHILDREN;
-                    isAllOpen = true;
+                    allOpen = true;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.isOpen).toBeTruthy();
+                    expect(wrapper.vm.open).toBeTruthy();
 
                 });
             });
@@ -342,28 +342,28 @@ describe('MTreeNode', () => {
 
             describe(`When the current node is selected`, () => {
                 it(`Then the node should be selected`, () => {
-                    externalSelectedNode = TREE_NODE_SELECTED;
+                    selectedNode = TREE_NODE_SELECTED;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.isNodeSelected()).toBeTruthy();
+                    expect(wrapper.vm.nodeSelected()).toBeTruthy();
                 });
             });
 
             describe(`When an other node is selected`, () => {
                 it(`Then the node should not be selected`, () => {
-                    externalSelectedNode = TREE_NODE_SELECTED_2;
+                    selectedNode = TREE_NODE_SELECTED_2;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.isNodeSelected()).toBeFalsy();
+                    expect(wrapper.vm.nodeSelected()).toBeFalsy();
                 });
             });
 
             describe(`When no node is selected`, () => {
                 it(`Then the node should not be selected`, () => {
-                    externalSelectedNode = [];
+                    selectedNode = [];
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.isNodeSelected()).toBeFalsy();
+                    expect(wrapper.vm.nodeSelected()).toBeFalsy();
                 });
             });
         });
@@ -371,11 +371,11 @@ describe('MTreeNode', () => {
         describe(`When the node has a parent`, () => {
 
             it(`Then should return the right current path`, () => {
-                externalCurrentPath = PARENT_PATH;
+                currentPath = PARENT_PATH;
                 node = TREE_NODE_WITHOUT_CHILDREN;
                 initializeShallowWrapper();
 
-                expect(wrapper.vm.currentPath).toEqual(PARENT_PATH + '/' + NODE_ELEMENT_ID);
+                expect(wrapper.vm.propCurrentPath).toEqual(PARENT_PATH + '/' + NODE_ELEMENT_ID);
             });
         });
 

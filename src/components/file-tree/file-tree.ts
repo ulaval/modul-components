@@ -19,13 +19,13 @@ export class MFileTree<T extends MTreeFormat> extends ModulVue {
     file: MTreeFormat;
 
     @Prop({ default: false })
-    isFolderOpen: boolean;
+    folderOpen: boolean;
 
     @Prop({ default: false })
-    isAFolder: boolean;
+    folder: boolean;
 
     get folderIcon(): string {
-        return this.isFolderOpen ? FOLDER_OPEN : FOLDER_CLOSED;
+        return this.folderOpen ? FOLDER_OPEN : FOLDER_CLOSED;
     }
 
     get extensionFile(): string {

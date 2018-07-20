@@ -45,13 +45,13 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     selectionIcon: string;
 
     @Prop()
-    externalSelectedNode: string[];
+    selectedNode: string[];
 
     @Prop({ default: false })
-    externalIsAllOpen: boolean;
+    allOpen: boolean;
 
     @Prop({ default: false })
-    isFileTree: boolean;
+    fileTree: boolean;
 
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
     errorTreeTxt: string = this.$i18n.translate('m-tree:error');
@@ -60,64 +60,64 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     private allOpenTxt: string = this.$i18n.translate('m-tree:all-close');
     private allCloseTxt: string = this.$i18n.translate('m-tree:all-open');
+    private selectedNodeValid: boolean = false;
     private internalErrorTree: boolean = false;
     private internalSelectedNode: string[] = [];
-    private internalIsAllOpen: boolean = false;
-    private isSelectedNodeValid: boolean = false;
+    private internalAllOpen: boolean = false;
 
     created(): void {
-        this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];
-        this.isSelectedNodeValid = !this.selectedNode.length;
-        this.isAllOpen = this.externalIsAllOpen;
-        this.setIsAllOpenTxt();
+        this.propSelectedNode = this.selectedNode ? this.selectedNode : [];
+        this.selectedNodeValid = !this.propSelectedNode.length;
+        this.propAllOpen = this.allOpen;
+        this.setAllOpenTxt();
     }
 
     mounted(): void {
-        if (!this.isSelectedNodeValid) {
-            console.error(this.errorSelectedNodeTxt + ': ' + '\"' + this.selectedNode[0] + '\"');
+        if (!this.selectedNodeValid) {
+            console.error(this.errorSelectedNodeTxt + ': ' + '\"' + this.propSelectedNode[0] + '\"');
         }
     }
 
     toggleAllVisibility(): void {
-        this.isAllOpen = !this.isAllOpen;
-        this.setIsAllOpenTxt();
+        this.propAllOpen = !this.propAllOpen;
+        this.setAllOpenTxt();
     }
 
-    isTreeEmpty(): boolean {
+    treeEmpty(): boolean {
         return !this.tree.length;
     }
 
     selectNewNode(path: string): void {
-        this.selectedNode = [path];
+        this.propSelectedNode = [path];
         this.$emit('newNodeSelected', path);
     }
 
     selectedNodeFound(): void {
-        this.isSelectedNodeValid = true;
+        this.selectedNodeValid = true;
     }
 
     generateErrorTree(): void {
         this.errorTree = true;
     }
 
-    setIsAllOpenTxt(): void {
-        this.treeVisibilityTxt = this.isAllOpen ? this.allOpenTxt : this.allCloseTxt;
+    setAllOpenTxt(): void {
+        this.treeVisibilityTxt = this.propAllOpen ? this.allOpenTxt : this.allCloseTxt;
     }
 
-    get selectedNode(): string[] {
+    get propSelectedNode(): string[] {
         return this.internalSelectedNode;
     }
 
-    set selectedNode(idNode: string[]) {
+    set propSelectedNode(idNode: string[]) {
         this.internalSelectedNode = idNode;
     }
 
-    get isAllOpen(): boolean {
-        return this.internalIsAllOpen;
+    get propAllOpen(): boolean {
+        return this.internalAllOpen;
     }
 
-    set isAllOpen(isAllOpen: boolean) {
-        this.internalIsAllOpen = isAllOpen;
+    set propAllOpen(allOpen: boolean) {
+        this.internalAllOpen = allOpen;
     }
 
     get errorTree(): boolean {

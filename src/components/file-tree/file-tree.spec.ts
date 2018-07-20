@@ -17,8 +17,8 @@ const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
 const FOLDER_CLOSED: string = 'm-svg__file-zip';
 
 let file: MTreeFormat;
-let isFolderOpen: boolean = false;
-let isAFolder: boolean = false;
+let folderOpen: boolean = false;
+let folder: boolean = false;
 let wrapper: Wrapper<MFileTree<MTreeFormat>>;
 
 const initializeShallowWrapper: any = () => {
@@ -26,8 +26,8 @@ const initializeShallowWrapper: any = () => {
         stubs: getStubs(),
         propsData: {
             file,
-            isFolderOpen,
-            isAFolder
+            folderOpen,
+            folder
         }
     });
 };
@@ -45,13 +45,13 @@ describe(`MFileTree`, () => {
 
         beforeEach(() => {
             file = TREE_NODE_FOLDER;
-            isAFolder = true;
+            folder = true;
         });
 
         describe(`When the folder is open`, () => {
 
             it(`Then should be the right icon`, () => {
-                isFolderOpen = true;
+                folderOpen = true;
                 initializeShallowWrapper();
 
                 expect(wrapper.vm.folderIcon).toEqual(FOLDER_OPEN);
@@ -62,7 +62,7 @@ describe(`MFileTree`, () => {
         describe(`When the folder is close`, () => {
 
             it(`Then should be the right icon`, () => {
-                isFolderOpen = false;
+                folderOpen = false;
                 initializeShallowWrapper();
 
                 expect(wrapper.vm.folderIcon).toEqual(FOLDER_CLOSED);
@@ -76,7 +76,7 @@ describe(`MFileTree`, () => {
 
         beforeEach(() => {
             file = TREE_NODE_FILE;
-            isAFolder = false;
+            folder = false;
             initializeShallowWrapper();
         });
         describe(`When the file type is jpg`, () => {
