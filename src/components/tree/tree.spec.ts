@@ -119,7 +119,6 @@ describe(`MTree`, () => {
         describe(`When there is an error in the tree`, () => {
 
             beforeEach(() => {
-                initializeShallowWrapper();
                 wrapper.vm.generateErrorTree();
             });
 
@@ -142,10 +141,6 @@ describe(`MTree`, () => {
 
         describe(`When the selected node is found`, () => {
 
-            beforeEach(() => {
-                initializeShallowWrapper();
-            });
-
             it(`Then should call selectedNodeFound`, () => {
                 wrapper.setMethods({ selectedNodeFound: jest.fn() });
                 wrapper.find(TREE_NODE_REF).trigger('selectedNodeFound');
@@ -155,53 +150,53 @@ describe(`MTree`, () => {
 
         });
 
-        describe(`When you click on the button to show/hide every nodes`, () => {
+    });
 
-            it(`Then call the function toggleAllVisibility`, () => {
+    describe(`When you click on the button to show/hide every nodes`, () => {
+
+        it(`Then call the function toggleAllVisibility`, () => {
+            initializeShallowWrapper();
+
+            wrapper.setMethods({ toggleAllVisibility: jest.fn() });
+            wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
+
+            expect(wrapper.vm.toggleAllVisibility).toHaveBeenCalled();
+        });
+
+        describe(`and isAllOpen is false`, () => {
+
+            beforeEach(() => {
+                externalIsAllOpen = false;
                 initializeShallowWrapper();
 
-                wrapper.setMethods({ toggleAllVisibility: jest.fn() });
                 wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
-
-                expect(wrapper.vm.toggleAllVisibility).toHaveBeenCalled();
             });
 
-            describe(`and isAllOpen is false`, () => {
-
-                beforeEach(() => {
-                    externalIsAllOpen = false;
-                    initializeShallowWrapper();
-
-                    wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
-                });
-
-                it(`All nodes should be open`, () => {
-                    expect(wrapper.vm.isAllOpen).toBeTruthy();
-                });
-
-                it(`The button label should become "m-tree:all-close"`, () => {
-                    expect(wrapper.vm.treeVisibilityTxt).toEqual(TXT_VISIBILITY_TREE_CLOSE);
-                });
-
+            it(`All nodes should be open`, () => {
+                expect(wrapper.vm.isAllOpen).toBeTruthy();
             });
 
-            describe(`and isAllOpen is true`, () => {
+            it(`The button label should become "m-tree:all-close"`, () => {
+                expect(wrapper.vm.treeVisibilityTxt).toEqual(TXT_VISIBILITY_TREE_CLOSE);
+            });
 
-                beforeEach(() => {
-                    externalIsAllOpen = true;
-                    initializeShallowWrapper();
+        });
 
-                    wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
-                });
+        describe(`and isAllOpen is true`, () => {
 
-                it(`All nodes should be hidden`, () => {
-                    expect(wrapper.vm.isAllOpen).toBeFalsy();
-                });
+            beforeEach(() => {
+                externalIsAllOpen = true;
+                initializeShallowWrapper();
 
-                it(`The button label should become "m-tree:all-open"`, () => {
-                    expect(wrapper.vm.treeVisibilityTxt).toEqual(TXT_VISIBILITY_TREE_OPEN);
-                });
+                wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
+            });
 
+            it(`All nodes should be hidden`, () => {
+                expect(wrapper.vm.isAllOpen).toBeFalsy();
+            });
+
+            it(`The button label should become "m-tree:all-open"`, () => {
+                expect(wrapper.vm.treeVisibilityTxt).toEqual(TXT_VISIBILITY_TREE_OPEN);
             });
 
         });

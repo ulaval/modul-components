@@ -77,7 +77,7 @@ let node: TreeNode<MTreeFormat>;
 let externalSelectedNode: string[] = [];
 let externalCurrentPath: string = '';
 let selectionIcon: string = '';
-let selectionNumber: MSelectOption = MSelectOption.SINGLE;
+let selectionQuantity: MSelectOption = MSelectOption.SINGLE;
 let isAllOpen: boolean = false;
 let isFileTree: boolean = false;
 
@@ -90,7 +90,7 @@ const initializeShallowWrapper: any = () => {
             node,
             externalSelectedNode,
             selectionIcon,
-            selectionNumber,
+            selectionQuantity,
             isAllOpen,
             isFileTree,
             externalCurrentPath
@@ -229,10 +229,6 @@ describe('MTreeNode', () => {
                     expect(wrapper.vm.childrenNotEmpty).toBeTruthy();
                 });
 
-                it(`Then it can't be selected`, () => {
-                    expect(wrapper.vm.isNodeSelected()).toBeFalsy();
-                });
-
                 it(`Then the node is valid`, () => {
                     let isValid: boolean = wrapper.vm.hasValidChildren();
 
@@ -302,11 +298,13 @@ describe('MTreeNode', () => {
 
         });
 
-        describe(`When selectionNumber = single`, () => {
+        describe(`When selectionQuantity = single`, () => {
+
+            beforeEach(() => {
+                initializeShallowWrapper();
+            });
 
             it(`Then should emit "newNodeSelectected"`, () => {
-                initializeShallowWrapper();
-
                 wrapper.vm.selectNewNode(node[0]);
 
                 expect(wrapper.emitted('newNodeSelectected')).toBeTruthy();
@@ -318,10 +316,10 @@ describe('MTreeNode', () => {
 
         });
 
-        describe(`When selectionNumber = none`, () => {
+        describe(`When selectionQuantity = none`, () => {
 
             beforeEach(() => {
-                selectionNumber = MSelectOption.NONE;
+                selectionQuantity = MSelectOption.NONE;
                 initializeShallowWrapper();
             });
 

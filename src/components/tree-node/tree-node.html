@@ -2,13 +2,13 @@
     <div v-if="hasValidChildren()" class="m-tree__with-children">
         <div class="m-tree__with-children__header" @click="toggleChildrenVisibility()">
             <span class="m-tree__with-children__header__icon" :class="{ 'm--is-closed': isOpen}"></span>
-            <m-file-tree v-if="isFileTree" :file="node.content" :is-open="isOpen" :is-a-folder="true"></m-file-tree>
+            <m-file-tree v-if="isFileTree" :file="node.content" :is-folder-open="isOpen" :is-a-folder="true"></m-file-tree>
             <span>{{ nodeTitle }}</span>
         </div>
         <transition name="m-tree__with-children__body">
             <ul v-show="isOpen" class="m-tree__with-children__body">
                 <template v-if="childrenNotEmpty">
-                    <m-tree-node v-for="childrensNode in node.children" class="m-tree__with-children__children" :external-current-path="currentPath" :is-file-tree="isFileTree" :selection-number="selectionNumber" :selection-icon="selectionIcon" :node="childrensNode" :external-selected-node="externalSelectedNode" :is-all-open="isAllOpen" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree" @selectedNodeFound="selectedNodeFound"></m-tree-node>
+                    <m-tree-node v-for="childrensNode in node.children" class="m-tree__with-children__children" :external-current-path="currentPath" :is-file-tree="isFileTree" :selection-quantity="selectionQuantity" :selection-icon="selectionIcon" :node="childrensNode" :external-selected-node="externalSelectedNode" :is-all-open="isAllOpen" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree" @selectedNodeFound="selectedNodeFound"></m-tree-node>
                 </template>
                 <li v-else class="m-tree__with-children__no-children" ref="empty-node-txt">{{ emptyNodeTxt }}</li>
             </ul>

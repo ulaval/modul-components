@@ -24,7 +24,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     selectionIcon: string;
 
     @Prop()
-    selectionNumber: MSelectOption;
+    selectionQuantity: MSelectOption;
 
     @Prop()
     isAllOpen: boolean;
@@ -51,7 +51,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     selectNewNode(path: string): void {
-        if (this.selectionNumber === MSelectOption.SINGLE) {
+        if (this.selectionQuantity === MSelectOption.SINGLE) {
             this.$emit('newNodeSelectected', path);
         }
     }
@@ -66,7 +66,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     isNodeSelected(): boolean {
         let isSelected: boolean = false;
-        if (this.externalSelectedNode[0] === this.currentPath) {
+        if (this.externalSelectedNode[0] !== undefined && this.externalSelectedNode[0] === this.currentPath) {
             isSelected = true;
             this.selectedNodeFound();
         }
@@ -108,7 +108,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     get isInactiveButton(): boolean {
-        return this.selectionNumber === MSelectOption.NONE;
+        return this.selectionQuantity === MSelectOption.NONE;
     }
 
     get isOpen(): boolean {

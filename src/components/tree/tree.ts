@@ -39,7 +39,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
             value === MSelectOption.SINGLE ||
             value === MSelectOption.MULTIPLE
     })
-    selectionNumber: MSelectOption;
+    selectionQuantity: MSelectOption;
 
     @Prop({ default: 'information' })
     selectionIcon: string;
@@ -56,22 +56,20 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
     errorTreeTxt: string = this.$i18n.translate('m-tree:error');
     errorSelectedNodeTxt: string = this.$i18n.translate('m-tree:selected-node-error');
-
-    allOpenTxt: string = this.$i18n.translate('m-tree:all-close');
-    allCloseTxt: string = this.$i18n.translate('m-tree:all-open');
-
     treeVisibilityTxt: string = '';
 
+    private allOpenTxt: string = this.$i18n.translate('m-tree:all-close');
+    private allCloseTxt: string = this.$i18n.translate('m-tree:all-open');
     private internalErrorTree: boolean = false;
     private internalSelectedNode: string[] = [];
-    private isSelectedNodeValid: boolean = false;
     private internalIsAllOpen: boolean = false;
+    private isSelectedNodeValid: boolean = false;
 
     created(): void {
         this.selectedNode = this.externalSelectedNode ? this.externalSelectedNode : [];
         this.isSelectedNodeValid = !this.selectedNode.length;
         this.isAllOpen = this.externalIsAllOpen;
-        this.treeVisibilityTxt = this.isAllOpen ? this.allOpenTxt : this.allCloseTxt;
+        this.setIsAllOpenTxt();
     }
 
     mounted(): void {
@@ -82,7 +80,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     toggleAllVisibility(): void {
         this.isAllOpen = !this.isAllOpen;
-        this.treeVisibilityTxt = this.isAllOpen ? this.allOpenTxt : this.allCloseTxt;
+        this.setIsAllOpenTxt();
     }
 
     isTreeEmpty(): boolean {
@@ -100,6 +98,10 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     generateErrorTree(): void {
         this.errorTree = true;
+    }
+
+    setIsAllOpenTxt(): void {
+        this.treeVisibilityTxt = this.isAllOpen ? this.allOpenTxt : this.allCloseTxt;
     }
 
     get selectedNode(): string[] {
