@@ -30,7 +30,7 @@ export enum MSelectOption {
 export class MTree<T extends MTreeFormat> extends ModulVue {
 
     @Prop()
-    tree: TreeNode<MTreeFormat>[];
+    public tree: TreeNode<MTreeFormat>[];
 
     @Prop({
         default: MSelectOption.NONE,
@@ -39,24 +39,24 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
             value === MSelectOption.SINGLE ||
             value === MSelectOption.MULTIPLE
     })
-    selectionQuantity: MSelectOption;
+    public selectionQuantity: MSelectOption;
 
     @Prop({ default: 'information' })
-    selectionIcon: string;
+    public selectionIcon: string;
 
     @Prop()
-    selectedNode: string[];
+    public selectedNode: string[];
 
     @Prop({ default: false })
-    allOpen: boolean;
+    public allOpen: boolean;
 
     @Prop({ default: false })
-    fileTree: boolean;
+    public fileTree: boolean;
 
-    emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
-    errorTreeTxt: string = this.$i18n.translate('m-tree:error');
-    errorSelectedNodeTxt: string = this.$i18n.translate('m-tree:selected-node-error');
-    treeVisibilityTxt: string = '';
+    public emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
+    public errorTreeTxt: string = this.$i18n.translate('m-tree:error');
+    public errorSelectedNodeTxt: string = this.$i18n.translate('m-tree:selected-node-error');
+    public treeVisibilityTxt: string = '';
 
     private allOpenTxt: string = this.$i18n.translate('m-tree:all-close');
     private allCloseTxt: string = this.$i18n.translate('m-tree:all-open');
@@ -65,66 +65,66 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     private internalSelectedNode: string[] = [];
     private internalAllOpen: boolean = false;
 
-    created(): void {
+    public toggleAllVisibility(): void {
+        this.propAllOpen = !this.propAllOpen;
+        this.setAllOpenTxt();
+    }
+
+    public treeEmpty(): boolean {
+        return !this.tree.length;
+    }
+
+    public selectNewNode(path: string): void {
+        this.propSelectedNode = [path];
+        this.$emit('newNodeSelected', path);
+    }
+
+    public selectedNodeFound(): void {
+        this.selectedNodeValid = true;
+    }
+
+    public generateErrorTree(): void {
+        this.errorTree = true;
+    }
+
+    protected created(): void {
         this.propSelectedNode = this.selectedNode ? this.selectedNode : [];
         this.selectedNodeValid = !this.propSelectedNode.length;
         this.propAllOpen = this.allOpen;
         this.setAllOpenTxt();
     }
 
-    mounted(): void {
+    protected mounted(): void {
         if (!this.selectedNodeValid) {
             console.error(this.errorSelectedNodeTxt + ': ' + '\"' + this.propSelectedNode[0] + '\"');
         }
     }
 
-    toggleAllVisibility(): void {
-        this.propAllOpen = !this.propAllOpen;
-        this.setAllOpenTxt();
-    }
-
-    treeEmpty(): boolean {
-        return !this.tree.length;
-    }
-
-    selectNewNode(path: string): void {
-        this.propSelectedNode = [path];
-        this.$emit('newNodeSelected', path);
-    }
-
-    selectedNodeFound(): void {
-        this.selectedNodeValid = true;
-    }
-
-    generateErrorTree(): void {
-        this.errorTree = true;
-    }
-
-    setAllOpenTxt(): void {
+    private setAllOpenTxt(): void {
         this.treeVisibilityTxt = this.propAllOpen ? this.allOpenTxt : this.allCloseTxt;
     }
 
-    get propSelectedNode(): string[] {
+    public get propSelectedNode(): string[] {
         return this.internalSelectedNode;
     }
 
-    set propSelectedNode(idNode: string[]) {
+    public set propSelectedNode(idNode: string[]) {
         this.internalSelectedNode = idNode;
     }
 
-    get propAllOpen(): boolean {
+    public get propAllOpen(): boolean {
         return this.internalAllOpen;
     }
 
-    set propAllOpen(allOpen: boolean) {
+    public set propAllOpen(allOpen: boolean) {
         this.internalAllOpen = allOpen;
     }
 
-    get errorTree(): boolean {
+    public get errorTree(): boolean {
         return this.internalErrorTree;
     }
 
-    set errorTree(error: boolean) {
+    public set errorTree(error: boolean) {
         this.internalErrorTree = error;
     }
 }

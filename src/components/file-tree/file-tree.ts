@@ -16,19 +16,19 @@ const FOLDER_CLOSED: string = 'm-svg__file-zip';
 export class MFileTree<T extends MTreeFormat> extends ModulVue {
 
     @Prop()
-    file: MTreeFormat;
+    public file: MTreeFormat;
 
     @Prop({ default: false })
-    folderOpen: boolean;
+    public folder: boolean;
 
     @Prop({ default: false })
-    folder: boolean;
+    public folderOpen: boolean;
 
-    get folderIcon(): string {
+    public get folderIcon(): string {
         return this.folderOpen ? FOLDER_OPEN : FOLDER_CLOSED;
     }
 
-    get extensionFile(): string {
+    public get extensionFile(): string {
         return '.' + this.file.idNode.split('.').pop() as string;
     }
 

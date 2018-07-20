@@ -122,10 +122,6 @@ describe('MTreeNode', () => {
                     expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
                 });
 
-                it(`Then should not be able to have children`, () => {
-                    expect(wrapper.vm.hasChildren).toBeFalsy();
-                });
-
                 it(`Then the node title should be "Node 1"`, () => {
                     expect(wrapper.vm.nodeTitle).toEqual(NODE_ELEMENT_LABEL);
                 });
@@ -184,10 +180,6 @@ describe('MTreeNode', () => {
                 expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
 
-            it(`Then should be able to have children`, () => {
-                expect(wrapper.vm.hasChildren).toBeTruthy();
-            });
-
             it(`Then should display a message`, () => {
                 expect(wrapper.vm.childrenNotEmpty).toBeFalsy();
                 expect(wrapper.find(EMPTY_NODE_REF).text()).toEqual(TXT_EMPTY_NODE);
@@ -219,10 +211,6 @@ describe('MTreeNode', () => {
 
                 it(`Then should render correctly`, () => {
                     expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-                });
-
-                it(`Then should be able to have children`, () => {
-                    expect(wrapper.vm.hasChildren).toBeTruthy();
                 });
 
                 it(`Then should have children`, () => {

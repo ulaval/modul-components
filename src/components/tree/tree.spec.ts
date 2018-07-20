@@ -41,7 +41,7 @@ const TREE_WITH_DATA: TreeNode<MTreeFormat>[] = [
 ];
 
 let tree: TreeNode<MTreeFormat>[];
-let externalIsAllOpen: boolean = false;
+let allOpen: boolean = false;
 let wrapper: Wrapper<MTree<MTreeFormat>>;
 
 const initializeShallowWrapper: any = () => {
@@ -49,7 +49,7 @@ const initializeShallowWrapper: any = () => {
         propsData: {
             tree: tree,
             selectedNode: TREE_NODE_SELECTED,
-            externalIsAllOpen
+            allOpen
         }
     });
 };
@@ -68,7 +68,7 @@ describe(`MTree`, () => {
         });
 
         it(`Then should be empty`, () => {
-            expect(wrapper.vm.isTreeEmpty()).toBeTruthy();
+            expect(wrapper.vm.treeEmpty()).toBeTruthy();
         });
 
         it(`Then a message should appear`, () => {
@@ -89,7 +89,7 @@ describe(`MTree`, () => {
         });
 
         it(`Then should not be empty`, () => {
-            expect(wrapper.vm.isTreeEmpty()).toBeFalsy();
+            expect(wrapper.vm.treeEmpty()).toBeFalsy();
         });
 
         describe(`When a node is selected`, () => {
@@ -164,14 +164,14 @@ describe(`MTree`, () => {
         describe(`and isAllOpen is false`, () => {
 
             beforeEach(() => {
-                externalIsAllOpen = false;
+                allOpen = false;
                 initializeShallowWrapper();
 
                 wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
             });
 
             it(`All nodes should be open`, () => {
-                expect(wrapper.vm.isAllOpen).toBeTruthy();
+                expect(wrapper.vm.propAllOpen).toBeTruthy();
             });
 
             it(`The button label should become "m-tree:all-close"`, () => {
@@ -183,14 +183,14 @@ describe(`MTree`, () => {
         describe(`and isAllOpen is true`, () => {
 
             beforeEach(() => {
-                externalIsAllOpen = true;
+                allOpen = true;
                 initializeShallowWrapper();
 
                 wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
             });
 
             it(`All nodes should be hidden`, () => {
-                expect(wrapper.vm.isAllOpen).toBeFalsy();
+                expect(wrapper.vm.propAllOpen).toBeFalsy();
             });
 
             it(`The button label should become "m-tree:all-open"`, () => {
