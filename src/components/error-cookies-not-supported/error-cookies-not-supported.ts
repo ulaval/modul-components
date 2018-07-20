@@ -7,7 +7,7 @@ import { ERROR_COOKIES_NOT_SUPPORTED_NAME } from '../component-names';
 import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import WithRender from './error-cookies-not-supported.html?style=./error-cookies-not-supported.scss';
+import WithRender from './error-cookies-not-supported.html';
 
 @WithRender
 @Component

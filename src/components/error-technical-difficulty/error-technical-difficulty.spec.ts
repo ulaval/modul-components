@@ -25,8 +25,7 @@ const DEFAULT_FIRST_HINT: string = 'm-error-technical-difficulty:hint.primary';
 const DEFAULT_SECOND_HINT: string = 'm-error-technical-difficulty:hint.secondary';
 const A_HINT: string = 'aHint';
 
-const DEFAULT_FIRST_LINK: Link = new Link('m-error-technical-difficulty:help', 'https://www.ene.ulaval.ca/contactez-nous?systeme_en_cours=81');
-const DEFAULT_SECOND_LINK: Link = new Link('m-error-technical-difficulty:home-label', '\\');
+const DEFAULT_FIRST_LINK: Link = new Link('m-error-technical-difficulty:home-label', '\\');
 const A_LINK: Link = new Link('aLabel', 'anUrl');
 
 const ERROR_REFERENCE_NUMBER: string = 'anErrorRefNumber';
@@ -85,8 +84,6 @@ describe(`MErrorTechnicalDifficulty - test`, () => {
         it(`Should use default links labels and Url`, () => {
             expect(wrapper.vm.links[0].label).toEqual(DEFAULT_FIRST_LINK.label);
             expect(wrapper.vm.links[0].url).toEqual(DEFAULT_FIRST_LINK.url);
-            expect(wrapper.vm.links[1].label).toEqual(DEFAULT_SECOND_LINK.label);
-            expect(wrapper.vm.links[1].url).toEqual(DEFAULT_SECOND_LINK.url);
         });
         it(`Should display error details`, () => {
 
@@ -142,21 +139,21 @@ describe(`MErrorTechnicalDifficulty - test`, () => {
                 });
             });
             describe(`and must show stack`, () => {
-                it(`Should not show stack block`, () => {
+                it(`Should show empty stack block`, () => {
                     showStack = true;
                     error.stack = undefined;
                     initializeShallowWrapper();
 
                     let stackBlock: Wrapper<Vue> = wrapper.find('#panel');
 
-                    expect(stackBlock.exists()).toBeFalsy();
+                    expect(stackBlock.exists()).toBeTruthy();
                 });
-                it(`Should return propStacktrace as false`, () => {
+                it(`Should return propStacktrace as true`, () => {
                     showStack = true;
                     error.stack = undefined;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.propStacktrace).toBeFalsy();
+                    expect(wrapper.vm.propStacktrace).toBeTruthy();
                 });
             });
         });

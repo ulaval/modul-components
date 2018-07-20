@@ -7,7 +7,7 @@ import { ERROR_PAGE_NOT_FOUND_NAME } from '../component-names';
 import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import WithRender from './error-page-not-found.html?style=./error-page-not-found.scss';
+import WithRender from './error-page-not-found.html';
 
 @WithRender
 @Component

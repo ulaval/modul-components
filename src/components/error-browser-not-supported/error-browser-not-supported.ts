@@ -9,7 +9,7 @@ import { ERROR_BROWSER_NOT_SUPPORTED_NAME } from '../component-names';
 import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import WithRender from './error-browser-not-supported.html?style=./error-browser-not-supported.scss';
+import WithRender from './error-browser-not-supported.html';
 
 @WithRender
 @Component({
@@ -34,14 +34,14 @@ export class MErrorBrowserNotSupported extends ModulVue {
 
     readonly iconName: string = 'm-svg__warning';
 
-    get mqAwareLinks(): Link[] {
+    private get mqAwareLinks(): Link[] {
         if (this.links.length === 0) {
             return this.as<MediaQueries>().isMqMinS ? [new Link(this.$i18n.translate('m-error-browser-not-supported:update-browser.desktop'), 'http://outdatedbrowser.com/fr', true)] : [];
         }
         return this.links;
     }
 
-    get mqAwareHints(): string[] {
+    private get mqAwareHints(): string[] {
         if (this.hints.length === 0) {
             return this.as<MediaQueries>().isMqMinS ? [this.$i18n.translate('m-error-browser-not-supported:hint.primary.desktop')] : [this.$i18n.translate('m-error-browser-not-supported:hint.primary.mobile')];
         }

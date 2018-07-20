@@ -24,7 +24,6 @@ export class MErrorTechnicalDifficulty extends ModulVue {
 
     @Prop({
         default: () => [
-            new Link((Vue.prototype as any).$i18n.translate('m-error-technical-difficulty:help'), 'https://www.ene.ulaval.ca/contactez-nous?systeme_en_cours=81', true),
             new Link((Vue.prototype as any).$i18n.translate('m-error-technical-difficulty:home-label'), '\\')]
     })
     public links: Link[];
@@ -62,14 +61,10 @@ export class MErrorTechnicalDifficulty extends ModulVue {
 
     readonly iconName: string = 'm-svg__error';
 
-    get userAgent(): string {
-        return window.navigator.userAgent;
-    }
-
     /**
      * Using the value of the props errorDate, generates an array with two values, the date in YYYY-MM-DD format and the time in HH:mm:ss format.
      */
-    get dateInfo(): string[] {
+    public get dateInfo(): string[] {
         let result: string[] = [];
         if (this.errorDate) {
             result = [this.errorDate.format('YYYY-MM-DD'), this.errorDate.format('HH:mm:ss')];
@@ -80,9 +75,14 @@ export class MErrorTechnicalDifficulty extends ModulVue {
     /**
      * Defines if the stack trace is to be displayed based on the showStrackTrace prop and the presence of the attribute stack in the error.
      */
-    get propStacktrace(): boolean {
-        return this.showStackTrace && !!this.error && !!this.error.stack;
+    public get propStacktrace(): boolean {
+        return this.showStackTrace && !!this.error;
     }
+
+    public get userAgent(): string {
+        return window.navigator.userAgent;
+    }
+
 }
 
 const ErrorTechnicalDifficultyPlugin: PluginObject<any> = {

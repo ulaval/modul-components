@@ -7,7 +7,7 @@ import { ERROR_ACCESS_DENIED_NAME } from '../component-names';
 import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import WithRender from './error-access-denied.html?style=./error-access-denied.scss';
+import WithRender from './error-access-denied.html';
 
 @WithRender
 @Component
@@ -18,10 +18,7 @@ export class MErrorAccessDenied extends ModulVue {
     })
     public title: string;
 
-    @Prop({
-        default: () => [
-            new Link((Vue.prototype as any).$i18n.translate('m-error-access-denied:help'), 'https://www.ene.ulaval.ca/contactez-nous?systeme_en_cours=81', true)]
-    })
+    @Prop()
     public links: Link[];
 
     @Prop({

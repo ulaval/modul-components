@@ -14,17 +14,13 @@ import WithRender from './error-template.html?style=./error-template.scss';
  * Utility class to manage the properties relatied to the link displayed in the error pages.
  */
 export class Link {
-    public label: string;
-    public url: string;
-    public external: boolean;
-
     /**
      * Constructor
      * @param label Label for the url link to display.
      * @param url Target for the location to navigate to, can be relative.
      * @param external Defines to the target is external (opens in new tab), or internal (opens in same tab) to the application.
      */
-    constructor(label: string, url: string, external: boolean = false) {
+    constructor(public label: string, public url: string, public external: boolean = false) {
         this.label = label;
         this.url = url;
         this.external = external;
