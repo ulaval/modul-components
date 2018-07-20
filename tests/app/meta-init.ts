@@ -18,6 +18,7 @@ const components: string[] = [
     Components.DROPDOWN_GROUP_NAME,
     Components.DYNAMIC_TEMPLATE_NAME,
     Components.ERROR_MESSAGE_NAME,
+    Components.ERROR_TEMPLATE_NAME,
     Components.FILE_SELECT_NAME,
     Components.FILE_UPLOAD_NAME,
     Components.FLEX_TEMPLATE_NAME,

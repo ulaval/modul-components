@@ -1,0 +1,80 @@
+@import '../../styles/abstracts/variables';
+
+.m-error-template {
+    &__title {
+        font-size: $m-font-size--h3;
+        text-align: center;
+
+        .m--is-skin-information & {
+            color: $m-color--interactive;
+        }
+
+        .m--is-skin-error & {
+            color: $m-color--error;
+        }
+
+        .m--is-skin-warning & {
+            color: $m-color--warning;
+        }
+    }
+
+    &__icon-container {
+        position: relative;
+        min-height: 130px;
+        margin: $m-spacing--l 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate3d(0, -50%, 0);
+            height: 80px;
+            width: 100%;
+            z-index: 0;
+
+            .m--is-skin-information & {
+                background-color: $m-color--interactive-lightest;
+            }
+
+            .m--is-skin-error & {
+                background-color: $m-color--error-lightest;
+            }
+
+            .m--is-skin-warning & {
+                background-color: $m-color--warning-lightest;
+            }
+        }
+    }
+
+    &__icon {
+        position: relative;
+    }
+
+    &__stacktrace {
+        margin-top: $m-margin;
+        max-height: 120px;
+        overflow: auto;
+        padding: $m-padding;
+
+        @include m-scrollbar();
+
+        pre {
+            margin: 0;
+        }
+    }
+
+    &__hints,
+    &__links {
+        text-align: left; // needed when inside a popup
+    }
+
+    &__details {
+        margin: $m-spacing 0;
+    }
+}
