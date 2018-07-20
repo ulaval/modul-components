@@ -2,8 +2,8 @@ import { PortalPluginInstall } from 'portal-vue';
 import Vue, { PluginObject } from 'vue';
 import * as TouchPlugin from 'vue-touch';
 
-import FilePlugin from '../utils/file/file';
 import { WindowErrorHandler } from './errors/window-error-handler';
+import FilePlugin from './file/file';
 import HttpPlugin, { HttpPluginOptions } from './http/http';
 import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
 import LoggerPlugin, { ConsoleOptions } from './logger/logger';

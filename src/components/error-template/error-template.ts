@@ -21,9 +21,6 @@ export class Link {
      * @param external Defines to the target is external (opens in new tab), or internal (opens in same tab) to the application.
      */
     constructor(public label: string, public url: string, public external: boolean = false) {
-        this.label = label;
-        this.url = url;
-        this.external = external;
     }
 }
 
