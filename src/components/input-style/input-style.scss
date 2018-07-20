@@ -38,9 +38,9 @@ $m-input-style--padding: 4px !default;
         background: $m-input-style--color-focus;
     }
 
-    &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus),
+    &:hover:not(.m--is-focus),
     &.m--has-value {
-        &:not(.m--is-readonly):not(.m--has-error)::before {
+        &:not(.m--is-disabled):not(.m--is-waiting):not(.m--is-readonly):not(.m--has-error):not(.m--is-valid)::before {
             border-color: $m-color--text;
         }
     }
@@ -180,7 +180,7 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    &.m--is-anim-active {
+    &.m--is-anim-ready {
         .m-input-style {
             &__label {
                 transition-property: color, transform;

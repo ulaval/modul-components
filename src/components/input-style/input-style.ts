@@ -31,7 +31,7 @@ export class MInputStyle extends ModulVue {
     @Prop()
     public readonly: boolean;
 
-    private animActive: boolean = false;
+    private isAnimReady: boolean = false;
 
     public setInputWidth(): void {
         this.$nextTick(() => {
@@ -61,7 +61,7 @@ export class MInputStyle extends ModulVue {
     }
     protected created(): void {
         setTimeout(() => {
-            this.animActive = true;
+            this.isAnimReady = true;
             this.setInputWidth();
         }, 0);
     }
@@ -71,7 +71,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && this.as<InputState>().active;
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
     }
 
     private get hasLabel(): boolean {
