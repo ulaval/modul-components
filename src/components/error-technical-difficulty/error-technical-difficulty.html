@@ -1,0 +1,11 @@
+<m-error-template :skin="skin" :iconName="iconName" :title="title" :hints="hints" :links="links" class="m-error-technical-difficulty">
+    <m-accordion skin="light" icon-size="small">
+        <m-i18n slot="header" k="m-error-technical-difficulty:details"></m-i18n>
+        <p><strong><m-i18n k="m-error-technical-difficulty:browser"></m-i18n>: </strong>{{userAgent}}</p>
+        <p v-if="!!errorReferenceNumber"><strong><m-i18n k="m-error-technical-difficulty:reference-number"></m-i18n>: </strong>{{errorReferenceNumber}}</p>
+        <p><m-i18n k="m-error-technical-difficulty:date" :params="dateInfo"></m-i18n></p>
+        <m-panel  class="m-error-technical-difficulty__stacktrace" :padding="false" v-if="propStacktrace">
+            <pre>{{error.stack}}</pre>
+        </m-panel>
+    </m-accordion>
+</m-error-template>
