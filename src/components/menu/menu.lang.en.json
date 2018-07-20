@@ -1,6 +1,10 @@
 {
     "m-menu": {
         "open": "Open menu",
-        "close": "Close menu"
+        "close": "Close menu",
+        "add": "Add",
+        "edit": "Edit",
+        "delete": "Delete",
+        "archive": "Archive"
     }
 }
