@@ -45,7 +45,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public scrollableContainer: string = 'body';
     public toolbarStickyOffset: number = 0;
     public wordDeniedTags: string[] = ['img', 'table', 'tr', 'td', 'th'];
-    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste'];
+    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'popupPlugin'];
 
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {
@@ -57,6 +57,7 @@ export abstract class MRichTextEditorDefaultOptions {
 export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOptions {
     public toolbarButtons: string[] = ['bold', 'italic', 'subscript', 'superscript', '|', 'paragraphFormat', 'formatUL',
         'formatOL', 'outdent', 'indent', '|', 'insertLink', 'specialCharacters', '|', 'fullscreen'];
+    public toolbarButtonsXS: string[] = ['stylesPopup'];
 
     public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
 

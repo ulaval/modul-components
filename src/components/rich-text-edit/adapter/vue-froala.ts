@@ -76,6 +76,85 @@ export class VueFroala extends Vue {
         return this.value.length === 0;
     }
 
+    protected ajouterPopups(buttonName: string, icon: string, buttonList: string[]): void {
+        $.extend($.FroalaEditor.POPUP_TEMPLATES, {
+            'popupPlugin.popup': '[_BUTTONS_][_CUSTOM_LAYER_]'
+        });
+
+        // The custom popup is defined inside a plugin (new or existing).
+        $.FroalaEditor.PLUGINS.popupPlugin = (editor) => {
+            // Create custom popup.
+            function initPopup(): void {
+                // Popup buttons.
+                let buttons: string = (buttonList.length > 1) ? `<div class="fr-buttons">${editor.button.buildList(buttonList)}</div>` : '';
+
+                // Load popup template.
+                let template: any = {
+                    buttons: buttons,
+                    custom_layer: ''
+                };
+
+                // Create popup.
+                return editor.popups.create('popupPlugin.popup', template);
+            }
+
+            // Show the popup
+            function showPopup(): void {
+                // Get the popup object defined above.
+                let popup: any = editor.popups.get('popupPlugin.popup');
+
+                // If popup doesn't exist then create it.
+                // To improve performance it is best to create the popup when it is first needed
+                // and not when the editor is initialized.
+                if (!popup) {
+                    popup = initPopup();
+                }
+
+                // Set the editor toolbar as the popup's container.
+                editor.popups.setContainer('popupPlugin.popup', editor.$tb);
+
+                // This will trigger the refresh event assigned to the popup.
+                // editor.popups.refresh('popupPlugin.popup');
+
+                // This custom popup is opened by pressing a button from the editor's toolbar.
+                // Get the button's object in order to place the popup relative to it.
+                let btn: any = editor.$tb.find(`.fr-command[data-cmd="${buttonName}"]`);
+
+                // Set the popup's position.
+                let left: any = btn.offset().left + btn.outerWidth() / 2;
+                let top: any = btn.offset().top + (editor.opts.toolbarBottom ? 10 : btn.outerHeight() - 10);
+
+                // Show the custom popup.
+                // The button's outerHeight is required in case the popup needs to be displayed above it.
+                editor.popups.show('popupPlugin.popup', left, top, btn.outerHeight());
+            }
+
+            // Hide the custom popup.
+            function hidePopup(): void {
+                editor.popups.hide('popupPlugin.popup');
+            }
+
+            // Methods visible outside the plugin.
+            return {
+                showPopup: showPopup,
+                hidePopup: hidePopup
+            };
+        };
+
+        // Define an icon and command for the button that opens the custom popup.
+        // $.FroalaEditor.DefineIcon('stylePopup', { NAME: 'bold' });
+        $.FroalaEditor.RegisterCommand(buttonName, {
+            title: 'styles',
+            icon: icon,
+            undo: false,
+            focus: false,
+            plugin: 'popupPlugin',
+            callback: function(): void {
+                this.popupPlugin.showPopup();
+            }
+        });
+    }
+
     protected created(): void {
         this.currentTag = this.tag || this.currentTag;
         this.model = this.value;
@@ -102,6 +181,7 @@ export class VueFroala extends Vue {
             return;
         }
 
+        this.ajouterPopups('stylesPopup', 'bold', ['bold', 'italic', 'subscript', 'superscript']);
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
             // we reemit each valid input events so froala can work in input-style component.
             events: {
