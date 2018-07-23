@@ -1,22 +1,20 @@
 @import 'abstracts/variables';
 
 .vue-froala {
-    // margin-top: 5px;
-
     /deep/ .fr-box.fr-basic.fr-top .fr-wrapper {
         box-shadow: unset;
     }
 
     /deep/ .fr-wrapper {
         background-color: transparent;
+        cursor: text;
     }
 
     /deep/ .fr-toolbar {
+        cursor: default;
         opacity: 0;
         display: block !important;
-        position: relative;
         box-shadow: unset;
-        // border-top: 0;
         border-left: 1px solid $m-color--grey-light;
         border-right: 1px solid $m-color--grey-light;
         border-top: 1px solid $m-color--grey-light;
@@ -39,7 +37,6 @@
     }
 
     &--collapsed {
-        // Style overrides when the editor is not focused when there is nothing to display.  Rework this as you wish.
         /deep/ .fr-box.fr-basic .fr-element {
             padding: 0;
             min-height: unset;
@@ -52,6 +49,12 @@
         }
 
         /deep/ .fr-wrapper.show-placeholder .fr-placeholder { display: none; }
+    }
+
+    &--unfocused {
+        /deep/ .fr-sticky-dummy {
+            height: 0 !important; // Fix flicking problem with multiple editors on page.
+        }
     }
 
     &--focused {
