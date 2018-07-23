@@ -17,10 +17,6 @@ import { MRichTextEditorDefaultOptions, MRichTextEditorStandardOptions } from '.
 import WithRender from './rich-text-edit.html?style=./rich-text-edit.scss';
 import { RichTextLicensePluginOptions } from './rich-text-license-plugin';
 
-require('froala-editor/js/froala_editor.pkgd.min');
-require('froala-editor/css/froala_editor.pkgd.min.css');
-require('froala-editor/js/languages/fr.js');
-
 const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
 export enum MRichTextEditMode {
