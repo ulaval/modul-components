@@ -18,6 +18,7 @@ import faListUl from '@fortawesome/fontawesome-free-solid/faListUl';
 import faMousePointer from '@fortawesome/fontawesome-free-solid/faMousePointer';
 import faOutdent from '@fortawesome/fontawesome-free-solid/faOutdent';
 import faParagraph from '@fortawesome/fontawesome-free-solid/faParagraph';
+import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
 import faQuestion from '@fortawesome/fontawesome-free-solid/faQuestion';
 import faRedo from '@fortawesome/fontawesome-free-solid/faRedo';
 import faSearch from '@fortawesome/fontawesome-free-solid/faSearch';
@@ -32,7 +33,7 @@ import faUnlink from '@fortawesome/fontawesome-free-solid/faUnlink';
 
 library.add(faExpand, faCompress, faBold, faItalic, faUnderline, faStrikethrough, faSubscript, faSuperScript, faParagraph, faAlignLeft, faAlignCenter,
     faAlignRight, faAlignJustify, faListOl, faListUl, faOutdent, faIndent, faLink, faExternalLinkAlt, faEdit, faUnlink, faSearch, faTrash,
-    faTimes, faMousePointer, faEraser, faQuestion, faUndo, faRedo, faArrowLeft);
+    faTimes, faMousePointer, faEraser, faQuestion, faUndo, faRedo, faArrowLeft, faPlus);
 
 export abstract class MRichTextEditorDefaultOptions {
     public immediateVueModelUpdate: boolean = true;
@@ -45,7 +46,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public scrollableContainer: string = 'body';
     public toolbarStickyOffset: number = 0;
     public wordDeniedTags: string[] = ['img', 'table', 'tr', 'td', 'th'];
-    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'popupPlugin'];
+    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'stylesPlugin', 'listesPlugin', 'insertionsPlugin'];
 
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {
@@ -57,7 +58,7 @@ export abstract class MRichTextEditorDefaultOptions {
 export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOptions {
     public toolbarButtons: string[] = ['bold', 'italic', 'subscript', 'superscript', '|', 'paragraphFormat', 'formatUL',
         'formatOL', 'outdent', 'indent', '|', 'insertLink', 'specialCharacters', '|', 'fullscreen'];
-    public toolbarButtonsXS: string[] = ['stylesPopup'];
+    public toolbarButtonsXS: string[] = ['stylesPopup', 'listesPopup', 'insertionsPopup', 'fullscreen'];
 
     public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
 
