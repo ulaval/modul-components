@@ -20,7 +20,7 @@
                                        'm--no-padding': !padding || !paddingHeader }">
                             <h2 v-if="hasTitle">{{ title }}</h2>
                             <slot name="header"></slot>
-                            <m-icon-button @click="closeDialog()" icon-name="close" skin="dark" class="m-dialog__header__close-button">
+                            <m-icon-button @click="closeDialog()" icon-name="m-svg__close-clear" skin="dark" class="m-dialog__header__close-button">
                                 <m-i18n k="m-dialog:close"></m-i18n>
                             </m-icon-button>
                         </div>

@@ -1,9 +1,9 @@
 import Component from 'vue-class-component';
 
-import { InputState } from '../../mixins/input-state/input-state';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
+import { InputState } from '../input-state/input-state';
+import { MediaQueries } from '../media-queries/media-queries';
 
 @Component({
     mixins: [

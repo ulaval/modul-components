@@ -18,20 +18,21 @@
               :after-leave="afterLeave"
               :leave-cancelled="leaveCancelled"
               :shadow="shadow"
+              :padding="padding"
+              :padding-header="paddingHeader"
+              :padding-body="paddingBody"
+              :padding-footer="paddingFooter"
               :preload="preload"
+              :width="width"
+              :background="background"
               v-if="!isMqMaxS">
         <div slot="trigger"
              v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
-        <div class="m-popup__body"
-             :class="{ 'm--has-padding': padding,
-                       'm--has--background': background }"
-             :style="{ width: width }">
-            <slot name="header"></slot>
-            <slot></slot>
-            <slot name="footer"></slot>
-        </div>
+        <slot name="header" slot="header"></slot>
+        <slot></slot>
+        <slot name="footer" slot="footer" ></slot>
     </m-popper>
     <m-sidebar :open.sync="propOpen"
                @open="onOpen()"
@@ -53,16 +54,8 @@
              v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
-        <div class="m-popup__body" :class="{ 'm--no-padding': !padding }">
-            <div slot="header" class="m-popup__header" v-if="hasHeaderSlot">
-                <slot name="header"></slot>
-            </div>
-            <div class="m-popup__content" v-if="hasDefaultSlot">
-                <slot></slot>
-            </div>
-            <div slot="footer" class="m-popup__footer" v-if="hasFooterSlot">
-                <slot name="footer"></slot>
-            </div>
-        </div>
+        <slot name="header" slot="header"></slot>
+        <slot></slot>
+        <slot name="footer" slot="footer" ></slot>
     </m-sidebar>
 </div>

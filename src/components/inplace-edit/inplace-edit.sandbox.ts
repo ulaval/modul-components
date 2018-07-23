@@ -9,9 +9,21 @@ import WithRender from './inplace-edit.sandbox.html';
 export class MInplaceEditSandbox extends Vue {
     private value1: string = 'a default value';
     private editMode1: boolean = false;
+    private editMode2: boolean = false;
+    private editMode3: boolean = false;
+    private editMode4: boolean = false;
 
-    private ie1Click(): void {
+    private click1(): void {
         this.editMode1 = true;
+    }
+    private click2(): void {
+        this.editMode2 = true;
+    }
+    private click3(): void {
+        this.editMode3 = true;
+    }
+    private click4(): void {
+        this.editMode4 = true;
     }
 }
 

@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
@@ -24,7 +25,7 @@ export enum MLinkSkin {
     light = 'light'
 }
 
-const ICON_NAME_DEFAULT: string = 'chevron';
+const ICON_NAME_DEFAULT: string = 'm-svg__chevron--right';
 
 @WithRender
 @Component
