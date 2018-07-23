@@ -7,6 +7,10 @@ import { Prop, Watch } from 'vue-property-decorator';
 
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
+require('froala-editor/js/froala_editor.pkgd.min');
+require('froala-editor/css/froala_editor.pkgd.min.css');
+require('froala-editor/js/languages/fr.js');
+
 const SPECIAL_TAGS: string[] = ['img', 'button', 'input', 'a'];
 
 const INNER_HTML_ATTR: string = 'innerHTML';
