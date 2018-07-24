@@ -2,7 +2,6 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
-import MessagePlugin from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TEMPLATE_NAME } from '../component-names';
@@ -70,7 +69,6 @@ const ErrorTemplatePlugin: PluginObject<any> = {
         v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);
-        v.use(MessagePlugin);
         v.component(ERROR_TEMPLATE_NAME, MErrorTemplate);
     }
 };
