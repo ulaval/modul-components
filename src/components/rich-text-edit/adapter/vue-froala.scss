@@ -20,6 +20,10 @@
         border-top: 1px solid $m-color--grey-light;
         border-bottom: 1px solid $m-color--grey-light;
 
+        button {
+            color: $m-color--grey-darker;
+        }
+
         .popup-button::after {
             position: absolute;
             width: 0;
