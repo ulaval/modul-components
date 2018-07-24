@@ -239,7 +239,7 @@ $m-input-style--padding: 4px !default;
         padding-bottom: $m-input-style--padding;
         background-color: $m-color--white;
 
-        .m--is-focus & {
+        .m--has-border-top.m--is-focus & {
             padding-bottom: $m-input-style--padding / 2;
         }
 
