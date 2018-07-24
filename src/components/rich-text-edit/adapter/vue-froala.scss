@@ -27,6 +27,7 @@
         min-height: unset;
         border-left: 1px solid transparent;
         border-right: 1px solid transparent;
+        overflow-x: unset;
     }
 
     &--animated {
@@ -91,6 +92,8 @@
     }
 
     /deep/ .fr-element {
+        color: $m-color--text;
+
         & > :first-child {
             margin-top: 0;
         }
