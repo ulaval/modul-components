@@ -52,6 +52,7 @@
         /deep/ .fr-box.fr-basic .fr-element {
             padding: 0;
             min-height: unset;
+            height: 0;
 
             p { margin: 0; }
         }
@@ -64,6 +65,8 @@
     }
 
     &--unfocused {
+        overflow: hidden;
+
         /deep/ .fr-sticky-dummy {
             height: 0 !important; // Fix flicking problem with multiple editors on page.
         }
