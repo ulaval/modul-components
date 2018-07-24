@@ -155,7 +155,6 @@ export class VueFroala extends Vue {
         // $.FroalaEditor.DefineIcon('stylePopup', { NAME: 'bold' });
         $.FroalaEditor.RegisterCommand(buttonName, {
             title: name,
-            class: 'fr-dropdown',
             icon: icon,
             undo: false,
             focus: false,
