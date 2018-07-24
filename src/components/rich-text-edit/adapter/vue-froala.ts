@@ -212,6 +212,8 @@ export class VueFroala extends Vue {
                         this.showToolbar(editor);
                         this.isFocused = true;
                         this.isAnimated = true;
+                    } else {
+                        this.$emit('blur');
                     }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
