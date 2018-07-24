@@ -4,7 +4,6 @@ import '../../src/utils/polyfills';
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import DatepickerPlugin from '../../src/components/datepicker/datepicker';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import SandboxesPlugin from '../../src/sandbox';
 import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
@@ -20,7 +19,7 @@ let utilsOptions: UtilsPluginOptions = {
     }
 };
 
-// Vue.use(UtilsPlugin, utilsOptions);
+Vue.use(UtilsPlugin, utilsOptions);
 Vue.use(SandboxesPlugin);
 // Vue.use(FrenchPlugin);
 // Vue.use(DefaultSpritesPlugin);
@@ -28,7 +27,7 @@ Vue.use(SandboxesPlugin);
 Vue.use(DynamicTemplatePlugin);
 
 /* TESTS */
-Vue.use(DatepickerPlugin);
+// Vue.use(DatepickerPlugin);
 
 /* ***** */
 
