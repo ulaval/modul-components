@@ -142,7 +142,7 @@ export class VueFroala extends Vue {
         return this.value.length === 0;
     }
 
-    protected ajouterPopups(name: string, icon: string, buttonList: string[]): void {
+    protected addPopup(name: string, icon: string, buttonList: string[]): void {
         const buttonName: string = `${name}Popup`;
         const pluginName: string = `${name}Plugin`;
 
@@ -163,6 +163,14 @@ export class VueFroala extends Vue {
                 this[pluginName].showPopup();
             }
         });
+    }
+
+    protected addPopups(): void {
+        // add mobile mode popups
+        $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
+        this.addPopup('styles', 'bold', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addPopup('listes', 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+        this.addPopup('insertions', 'plus', ['insertLink', 'specialCharacters']);
     }
 
     protected created(): void {
@@ -191,11 +199,7 @@ export class VueFroala extends Vue {
             return;
         }
 
-        // add mobile mode popups
-        this.ajouterPopups('styles', 'bold', ['bold', 'italic', 'subscript', 'superscript']);
-        this.ajouterPopups('listes', 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
-        $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        this.ajouterPopups('insertions', 'plus', ['insertLink', 'specialCharacters']);
+        this.addPopups();
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
             // we reemit each valid input events so froala can work in input-style component.
