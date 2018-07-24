@@ -155,6 +155,7 @@ export class VueFroala extends Vue {
         // $.FroalaEditor.DefineIcon('stylePopup', { NAME: 'bold' });
         $.FroalaEditor.RegisterCommand(buttonName, {
             title: name,
+            class: 'fr-dropdown',
             icon: icon,
             undo: false,
             focus: false,
@@ -184,6 +185,9 @@ export class VueFroala extends Vue {
         }
 
         this.createEditor();
+
+        // add a dropdown arrow to popups buttons
+        $(`button[id*='Popup']`).addClass('popup-button');
     }
 
     protected beforeDestroy(): void {
