@@ -60,21 +60,16 @@ class PopupPlugin {
 
     // Show the popup
     showPopup(): void {
-        // Get the popup object defined above.
-        let popup: any = this.editor.popups.get(`${this.pluginName}.popup`);
 
         // If popup doesn't exist then create it.
         // To improve performance it is best to create the popup when it is first needed
         // and not when the editor is initialized.
-        if (!popup) {
-            popup = this.initPopup();
+        if (!this.editor.popups.get(`${this.pluginName}.popup`)) {
+            this.initPopup();
         }
 
         // Set the editor toolbar as the popup's container.
         this.editor.popups.setContainer(`${this.pluginName}.popup`, this.editor.$tb);
-
-        // This will trigger the refresh event assigned to the popup.
-        // editor.popups.refresh(`${this.pluginName}.popup`);
 
         // This custom popup is opened by pressing a button from the editor's toolbar.
         // Get the button's object in order to place the popup relative to it.
