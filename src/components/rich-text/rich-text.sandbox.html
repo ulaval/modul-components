@@ -7,7 +7,6 @@
     <p>
         <div style="margin-bottom: 30px;">
             <div><button @click="focus = !focus">Change focus (now: {{ focus }})</button></div>
-            <div><button @click="placeholder = placeholder + 'a'">Change placeholder (now: {{ placeholder }})</button></div>
             <div>
                 Error message: <input type="text" v-model="errorMessage" />
             </div>
@@ -20,20 +19,22 @@
             <div><button @click="waiting = !waiting">Waiting (now: {{ waiting }})</button></div>
             <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
         </div>
-
-        <m-rich-text-edit v-model="model"
-            :toolbar-sticky-offset="58"
-            :label="'test123123'"
-            :max-width="'large'"
-            :placeholder="placeholder"
-            :focus="focus"
-            :error="error"
-            :error-message="errorMessage"
-            :valid-message="validMessage"
-            :helper-message="helperMessage"
-            :waiting="waiting"
-            :disabled="disabled"></m-rich-text-edit>
-        <m-rich-text :value="model"></m-rich-text>
+        <div>
+            <m-rich-text-edit v-model="model"
+                :toolbar-sticky-offset="58"
+                :label="'test123123'"
+                :max-width="'large'"
+                :placeholder="'some placeholder'"
+                :focus="focus"
+                :error="error"
+                :error-message="errorMessage"
+                :valid-message="validMessage"
+                :helper-message="helperMessage"
+                :waiting="waiting"
+                :disabled="disabled"></m-rich-text-edit>
+            <m-textfield label="'test123123'"></m-textfield>
+            <div><m-rich-text :value="model"></m-rich-text></div>
+        </div>
     </p>
     <div>
         <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine page</button>
