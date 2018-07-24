@@ -14,12 +14,12 @@ import faOutdent from '@fortawesome/fontawesome-free-solid/faOutdent';
 import faParagraph from '@fortawesome/fontawesome-free-solid/faParagraph';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
 import faSubscript from '@fortawesome/fontawesome-free-solid/faSubscript';
-import faSuperScript from '@fortawesome/fontawesome-free-solid/faSuperScript';
+import faSuperscript from '@fortawesome/fontawesome-free-solid/faSuperscript';
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 import faTrash from '@fortawesome/fontawesome-free-solid/faTrash';
 import faUnlink from '@fortawesome/fontawesome-free-solid/faUnlink';
 
-library.add(faExpand, faCompress, faBold, faItalic, faSubscript, faSuperScript, faParagraph, faListOl, faListUl, faOutdent, faIndent, faLink, faExternalLinkAlt, faEdit, faUnlink, faTrash,
+library.add(faExpand, faCompress, faBold, faItalic, faSubscript, faSuperscript, faParagraph, faListOl, faListUl, faOutdent, faIndent, faLink, faExternalLinkAlt, faEdit, faUnlink, faTrash,
     faTimes, faArrowLeft, faPlus);
 
 export abstract class MRichTextEditorDefaultOptions {
