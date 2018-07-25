@@ -1,8 +1,8 @@
-import { ModulVue } from '../../utils/vue/vue';
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+
 import { InputStateMixin } from '../../mixins/input-state/input-state';
+import { ModulVue } from '../../utils/vue/vue';
 
 @Component
 export class InputLabel extends ModulVue {
@@ -18,6 +18,6 @@ export class InputLabel extends ModulVue {
     }
 
     private get hasIcon(): boolean {
-        return !!this.iconName && !this.as<InputStateMixin>().isDisabled;
+        return !!this.iconName && !this.as<InputStateMixin>().isDisabled && !this.as<InputStateMixin>().isWaiting;
     }
 }

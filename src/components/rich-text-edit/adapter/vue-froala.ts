@@ -207,14 +207,10 @@ export class VueFroala extends Vue {
                     this.isInitialized = true;
                 },
                 [froalaEvents.Focus]: (_e, editor) => {
-                    if (!this.disabled) {
-                        this.$emit('focus');
-                        this.showToolbar(editor);
-                        this.isFocused = true;
-                        this.isAnimated = true;
-                    } else {
-                        this.$emit('blur');
-                    }
+                    this.$emit('focus');
+                    this.showToolbar(editor);
+                    this.isFocused = true;
+                    this.isAnimated = true;
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!this.isFullScreen) {
