@@ -1,6 +1,12 @@
 @import 'abstracts/variables';
 
 .vue-froala {
+    overflow: hidden;
+
+    &--dirty {
+        overflow: unset;
+    }
+
     /deep/ .fr-box.fr-basic.fr-top .fr-wrapper {
         box-shadow: unset;
     }

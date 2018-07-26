@@ -4,7 +4,8 @@
         'vue-froala--focused': isFocused,
         'vue-froala--unfocused': !isFocused,
         'vue-froala--collapsed': collapsed,
-        'vue-froala--animated': isAnimated
+        'vue-froala--animated': isTouched,
+        'vue-froala--dirty': isDirty
     }">
     <component ref="editor" :is="tag"></component>
 </div>

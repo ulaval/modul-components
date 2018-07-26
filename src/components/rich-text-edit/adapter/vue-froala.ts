@@ -113,7 +113,8 @@ enum FroalaElements {
     MODAL = '.fr-modal',
     MODAL_OVERLAY = '.fr-overlay',
     MODAL_WORD_PASTE_CLEAN_BUTTON = '.fr-remove-word',
-    TOOLBAR = '.fr-toolbar'
+    TOOLBAR = '.fr-toolbar',
+    TOOLBAR_ACTIVE_BUTTON = '.fr-active'
 }
 
 @WithRender
@@ -151,7 +152,8 @@ export class VueFroala extends Vue {
     protected isInitialized: boolean = false;
     protected isFullScreen: boolean = false;
 
-    protected isAnimated: boolean = false;
+    protected isTouched: boolean = false;
+    protected isDirty: boolean = false;
 
     @Watch('value')
     public refreshValue(): void {
@@ -233,10 +235,23 @@ export class VueFroala extends Vue {
                     this.isInitialized = true;
                 },
                 [froalaEvents.Focus]: (_e, editor) => {
+                    this.isDirty = false;
+
                     this.$emit('focus');
                     this.showToolbar(editor);
                     this.isFocused = true;
-                    this.isAnimated = true;
+                    this.isTouched = true;
+
+                    // Scrap all this code when https://github.com/froala/wysiwyg-editor/issues/2974 get implemented.
+                    // Listen to toolbar buttons click instead of creating a MutationObserver.
+                    const observer: MutationObserver = new MutationObserver(() => {
+                        if (editor.$tb[0].querySelector(FroalaElements.TOOLBAR_ACTIVE_BUTTON) !== null) {
+                            this.isDirty = true;
+                            observer.disconnect();
+                        }
+                    });
+
+                    observer.observe(editor.$tb[0], { attributes: true, subtree: true });
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!this.isFullScreen) {
@@ -244,6 +259,7 @@ export class VueFroala extends Vue {
                         this.hideToolbar(editor);
 
                         this.isFocused = false;
+                        this.isDirty = false;
                     }
                 },
                 [froalaEvents.KeyUp]: (_e, _editor) => {
@@ -251,6 +267,7 @@ export class VueFroala extends Vue {
                 },
                 [froalaEvents.KeyDown]: (_e, _editor) => {
                     this.$emit('keydown');
+                    this.isDirty = true;
                 },
                 [froalaEvents.PasteAfter]: (_e, _editor) => {
                     this.$emit('paste');
