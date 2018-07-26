@@ -55,7 +55,6 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     public emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
     public errorTreeTxt: string = this.$i18n.translate('m-tree:error');
-    public errorSelectedNodeTxt: string = this.$i18n.translate('m-tree:selected-node-error');
     public treeVisibilityTxt: string = '';
 
     private allOpenTxt: string = this.$i18n.translate('m-tree:all-close');
@@ -96,7 +95,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     protected mounted(): void {
         if (!this.selectedNodeValid) {
-            console.error(this.errorSelectedNodeTxt + ': ' + '\"' + this.propSelectedNode[0] + '\"');
+            console.error(`L'élément sélectionné n'a pas été trouvé: ` + '\"' + this.propSelectedNode[0] + '\"');
         }
     }
 
