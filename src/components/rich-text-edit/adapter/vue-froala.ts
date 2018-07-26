@@ -5,7 +5,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
-import { eraseTags, filterByTag, filterImg, filterNewLines, replaceTag, replaceTags } from '../../../utils/filter/htmlFilter';
+import { eraseNewLines, eraseTag, eraseTags, filterByTag, replaceTag, replaceTags } from '../../../utils/filter/htmlFilter';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
 require('froala-editor/js/froala_editor.pkgd.min');
@@ -34,22 +34,22 @@ enum froalaCommands {
 
 function cleanHtml(html: string): string {
     // delete new lines so the regexps will work
-    html = filterNewLines(html);
+    html = eraseNewLines(html);
     // delete images
-    html = filterImg(html);
+    html = eraseTag('img', html);
     // delete videos
     html = filterByTag('video', html);
-    // delete tables
+    // replace tables with paragraphs
     html = eraseTags(['table', 'tbody', 'tr'], html);
     html = replaceTag('td', 'p', html);
-    // replace headings with paragraphs
-    html = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p', html);
-
+    // replace headings, blockquotes with paragraphs
+    html = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote'], 'p', html);
+    // erase underlined and strikethrough styles
+    html = eraseTags(['u', 's'], html);
     return html;
 }
 
 class PopupPlugin {
-
     private editor;
     private buttonName;
     private pluginName;
