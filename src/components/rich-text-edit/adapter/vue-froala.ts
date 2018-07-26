@@ -150,7 +150,6 @@ export class VueFroala extends Vue {
 
     protected isFocused: boolean = false;
     protected isInitialized: boolean = false;
-    protected isFullScreen: boolean = false;
 
     protected isDirty: boolean = false;
 
@@ -239,9 +238,13 @@ export class VueFroala extends Vue {
                     this.$emit('focus');
                     this.showToolbar(editor);
                     this.isFocused = true;
+
+                    if (editor.helpers.isMobile()) {
+                        editor.fullscreen.toggle();
+                    }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
-                    if (!this.isFullScreen) {
+                    if (!editor.fullscreen.isActive()) {
                         this.$emit('blur');
                         this.hideToolbar(editor);
 
@@ -263,9 +266,7 @@ export class VueFroala extends Vue {
                     return cleanHtml(data);
                 },
                 [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
-                    if (cmd === froalaCommands.FullScreen) {
-                        this.isFullScreen = !this.isFullScreen;
-                    }
+                    // write code to be called after a command is called (button clicked, image modified, ...)
                 },
                 [froalaEvents.WordPasteBefore]: (_e, editor) => {
                     // Scrap this and all associated private methods when https://github.com/froala/wysiwyg-editor/issues/2964 get fixed.

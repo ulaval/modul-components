@@ -1,5 +1,3 @@
-/* tslint:disable:no-console */
-
 function createMultiTagsRegexString(tags: string[]): string {
     // create a string for a multi tags regexp
     let fullTagForRegex: string = '(';
