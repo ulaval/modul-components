@@ -1,3 +1,4 @@
+/* tslint:disable:no-console */
 // This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
@@ -5,6 +6,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
+import { eraseTags, filterByTag, filterImg, filterNewLines, replaceTag, replaceTags } from '../../../utils/filter/htmlFilter';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
 require('froala-editor/js/froala_editor.pkgd.min');
@@ -22,11 +24,28 @@ enum froalaEvents {
     KeyUp = 'froalaEditor.keyup',
     KeyDown = 'froalaEditor.keydown',
     PasteAfter = 'froalaEditor.paste.after',
+    PasteAfterCleanup = 'froalaEditor.paste.beforeCleanup',
     CommandAfter = 'froalaEditor.commands.after'
 }
 
 enum froalaCommands {
     FullScreen = 'fullscreen'
+}
+
+function cleanHtml(html: string): string {
+    // delete new lines so the regexps will work
+    html = filterNewLines(html);
+    // delete images
+    html = filterImg(html);
+    // delete videos
+    html = filterByTag('video', html);
+    // delete tables
+    html = eraseTags(['table', 'tbody', 'tr'], html);
+    html = replaceTag('td', 'p', html);
+    // replace headings with paragraphs
+    html = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p', html);
+
+    return html;
 }
 
 class PopupPlugin {
@@ -228,6 +247,9 @@ export class VueFroala extends Vue {
                 },
                 [froalaEvents.PasteAfter]: (_e, _editor) => {
                     this.$emit('paste');
+                },
+                [froalaEvents.PasteAfterCleanup]: (_e, _editor, _data: string) => {
+                    return cleanHtml(_data);
                 },
                 [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
                     if (cmd === froalaCommands.FullScreen) {
