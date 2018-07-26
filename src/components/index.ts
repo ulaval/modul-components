@@ -26,6 +26,7 @@ import ErrorPageNotFoundPlugin from './error-page-not-found/error-page-not-found
 import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty/error-technical-difficulty';
 import ErrorTemplatePlugin from './error-template/error-template';
 import FileSelectPlugin from './file-select/file-select';
+import FileTreePlugin from './file-tree/file-tree';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
 import I18nPlugin from './i18n/i18n';
@@ -74,6 +75,8 @@ import TextareaPlugin from './textarea/textarea';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
+import TreeNodePlugin from './tree-node/tree-node';
+import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 const ComponentsPlugin: PluginObject<any> = {
@@ -157,6 +160,9 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TooltipPlugin);
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
+        Vue.use(TreePlugin);
+        Vue.use(TreeNodePlugin);
+        Vue.use(FileTreePlugin);
     }
 };
 

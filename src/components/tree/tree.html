@@ -1,0 +1,13 @@
+<div class="m-tree">
+    <span v-if="treeEmpty()" class="m-tree__empty" ref="empty-tree-txt">{{ emptyTreeTxt }}</span>
+    <template v-else>
+        <m-button ref="button-toggle-visibility" skin="secondary" @click="toggleAllVisibility()">{{ treeVisibilityTxt }}</m-button>
+        <ul>
+            <m-tree-node ref="tree-node" v-for="node in tree" :selection-quantity="selectionQuantity" :node="node" :selected-node="propSelectedNode" :all-open="propAllOpen" :selection-icon="selectionIcon" :file-tree="fileTree" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree" @selectedNodeFound="selectedNodeFound"></m-tree-node>
+        </ul>
+    </template>
+    <div v-if="errorTree" class="m-tree__error" >
+        <m-icon name="m-svg__error-filled"></m-icon>
+        <span ref="error-tree-txt">{{ errorTreeTxt }}</span>
+    </div>
+</div>

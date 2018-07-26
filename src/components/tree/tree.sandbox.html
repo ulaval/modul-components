@@ -1,0 +1,48 @@
+<div>
+    <h2>Default tree</h2>
+    <div style="width: 50%; float:left;">
+        <h2>No selection</h2>
+        <p><m-tree :tree="tree" :isAllOpen="true"></m-tree></p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h2>Single node selection</h2>
+        <p><m-tree :tree="tree" :isAllOpen="true" selectionQuantity="1" :selectedNode="currentFile2" @newNodeSelected="newNodeSelected()"></m-tree></p>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <h2>File tree</h2>
+    <div style="width: 50%; float:left;">
+        <h3>No file selection</h3>
+        <p><m-tree :tree="fileTree" :fileTree="true"></m-tree></p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Single file selection</h3>
+        <p><m-tree :tree="fileTree" selectionQuantity="1" :selectedNode="currentFile" :fileTree="true" :isAllOpen="false" @newNodeSelected="newNodeSelected()"></m-tree></p>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <h2>Other cases</h2>
+
+    <div style="width: 50%; float:left;">
+        <h3>Nodes error</h3>
+        <p><m-tree :tree="errorTree" :fileTree="true"></m-tree></p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Empty tree</h3>
+        <p><m-tree :tree="emptyTree"></m-tree></p>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Selected node not found</h3>
+        <span>Console error</span>
+        <p><m-tree :tree="tree" :selectedNode="wrongCurrentFile" selectionQuantity="1"></m-tree></p>
+    </div>
+
+</div>
