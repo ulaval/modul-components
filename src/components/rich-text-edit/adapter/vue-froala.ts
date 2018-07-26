@@ -1,4 +1,3 @@
-/* tslint:disable:no-console */
 // This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
@@ -24,7 +23,8 @@ enum froalaEvents {
     KeyUp = 'froalaEditor.keyup',
     KeyDown = 'froalaEditor.keydown',
     PasteAfter = 'froalaEditor.paste.after',
-    PasteAfterCleanup = 'froalaEditor.paste.beforeCleanup',
+    PasteBeforeCleanup = 'froalaEditor.paste.beforeCleanup',
+    WordPasteBefore = 'froalaEditor.paste.wordPaste.before',
     CommandAfter = 'froalaEditor.commands.after'
 }
 
@@ -107,6 +107,13 @@ class PopupPlugin {
     hidePopup(): void {
         this.editor.popups.hide(`${this.pluginName}.popup`);
     }
+}
+
+enum FroalaElements {
+    MODAL = '.fr-modal',
+    MODAL_OVERLAY = '.fr-overlay',
+    MODAL_WORD_PASTE_CLEAN_BUTTON = '.fr-remove-word',
+    TOOLBAR = '.fr-toolbar'
 }
 
 @WithRender
@@ -248,12 +255,27 @@ export class VueFroala extends Vue {
                 [froalaEvents.PasteAfter]: (_e, _editor) => {
                     this.$emit('paste');
                 },
-                [froalaEvents.PasteAfterCleanup]: (_e, _editor, _data: string) => {
-                    return cleanHtml(_data);
+                [froalaEvents.PasteBeforeCleanup]: (_e, _editor, data: string) => {
+                    return cleanHtml(data);
                 },
                 [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
                     if (cmd === froalaCommands.FullScreen) {
                         this.isFullScreen = !this.isFullScreen;
+                    }
+                },
+                [froalaEvents.WordPasteBefore]: (_e, editor) => {
+                    // Scrap this and all associated private methods when https://github.com/froala/wysiwyg-editor/issues/2964 get fixed.
+                    if (editor.wordPaste && this.currentConfig.wordPasteModal) {
+                        if (this.getWordPasteCleanButton()) {
+                            requestAnimationFrame(() => { this.dismissWordPasteModal(); });
+                        } else {
+                            const observer: MutationObserver = new MutationObserver(() => {
+                                this.dismissWordPasteModal();
+                                observer.disconnect();
+                            });
+
+                            observer.observe(document.body, { childList: true });
+                        }
                     }
                 }
             }
@@ -270,15 +292,31 @@ export class VueFroala extends Vue {
         this.editorInitialized = true;
     }
 
+    private dismissWordPasteModal(): void {
+        const wordPasteModal: HTMLElement | null = document.querySelector(FroalaElements.MODAL);
+        wordPasteModal!.style.display = 'none';
+
+        const modalOverlay: HTMLElement | null = document.querySelector(FroalaElements.MODAL_OVERLAY);
+        modalOverlay!.style.display = 'none';
+
+        const cleanWordButton: HTMLElement | null = this.getWordPasteCleanButton();
+        cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+        cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+    }
+
+    private getWordPasteCleanButton(): HTMLElement | null {
+        return document.querySelector(FroalaElements.MODAL_WORD_PASTE_CLEAN_BUTTON);
+    }
+
     private hideToolbar(editor: any): void {
         editor.toolbar.hide();
-        const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
+        const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
         toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
     }
 
     private showToolbar(editor: any): void {
         editor.toolbar.show();
-        const toolBar: HTMLElement = this.$el.querySelector('.fr-toolbar') as HTMLElement;
+        const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
         toolBar.style.removeProperty('margin-top');
     }
 

@@ -32,8 +32,8 @@ export abstract class MRichTextEditorDefaultOptions {
     public toolbarSticky: boolean = true;
     public scrollableContainer: string = 'body';
     public toolbarStickyOffset: number = 0;
-    public wordDeniedTags: string[] = ['img', 'table', 'tr', 'td', 'th'];
     public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'stylesPlugin', 'listesPlugin', 'insertionsPlugin'];
+    public wordPasteModal: boolean = true;
 
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {
