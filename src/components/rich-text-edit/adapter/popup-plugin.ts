@@ -10,8 +10,8 @@ export class PopupPlugin {
         this.pluginName = `${name}Plugin`;
         this.buttonList = buttonList;
     }
+
     initPopup(): void {
-        // Popup buttons.
         let buttons: string = (this.buttonList.length > 1) ? `<div class="fr-buttons">${this.editor.button.buildList(this.buttonList)}</div>` : '';
 
         // Load popup template.
@@ -20,14 +20,10 @@ export class PopupPlugin {
             custom_layer: ''
         };
 
-        // Create popup.
         return this.editor.popups.create(`${this.pluginName}.popup`, template);
     }
 
-    // Show the popup
     showPopup(): void {
-
-        // If popup doesn't exist then create it.
         // To improve performance it is best to create the popup when it is first needed
         // and not when the editor is initialized.
         if (!this.editor.popups.get(`${this.pluginName}.popup`)) {
@@ -41,16 +37,14 @@ export class PopupPlugin {
         // Get the button's object in order to place the popup relative to it.
         let btn: any = this.editor.$tb.find(`.fr-command[data-cmd="${this.buttonName}"]`);
 
-        // Set the popup's position.
+        // Set the popup's position right under the button.
         let left: any = btn.offset().left + btn.outerWidth() / 2;
         let top: any = btn.offset().top + (this.editor.opts.toolbarBottom ? 10 : btn.outerHeight() - 10);
 
-        // Show the custom popup.
         // The button's outerHeight is required in case the popup needs to be displayed above it.
         this.editor.popups.show(`${this.pluginName}.popup`, left, top, btn.outerHeight());
     }
 
-    // Hide the custom popup.
     hidePopup(): void {
         this.editor.popups.hide(`${this.pluginName}.popup`);
     }
