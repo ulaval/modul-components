@@ -1,0 +1,6 @@
+{
+    "m-error-config-not-supported": {
+        "title": "L'application pourrait ne pas fonctionner correctement avec ce navigateur ou cet appareil",
+        "hint.primary": "Vous pouvez néanmoins y accéder, mais pour une expérience optimale, assurez-vous d'utiliser des versions récentes."
+    }
+}

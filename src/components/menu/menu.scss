@@ -3,13 +3,17 @@
 .m-menu {
     display: inline-flex;
 
-    &__wrap {
-        background-color: $m-color--white;
+    &__list {
         width: 100%;
         margin: 0;
         padding: 0;
-        max-height: 208px; // magic number
-        overflow: auto;
+        max-height: 213px; // Magic number: height of 4 items
+        overflow-x: hidden;
+        overflow-y: auto;
+        border: 1px solid $m-color--border;
+        border-radius: $m-border-radius--s;
+        background: $m-color--white;
+        box-shadow: $m-box-shadow;
 
         @include m-scrollbar();
     }

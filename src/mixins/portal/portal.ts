@@ -1,11 +1,11 @@
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
-import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import { MouseButtons } from '../../utils/mouse/mouse';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
+import { MediaQueries, MediaQueriesMixin } from '../media-queries/media-queries';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../open-trigger/open-trigger';
-import { MouseButtons } from './../../utils/mouse/mouse';
 
 export interface PortalMixin {
     propOpen: boolean;
@@ -56,7 +56,7 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop()
     public open: boolean;
 
-    @Prop({ default: 'mPortal' })
+    @Prop()
     public id: string;
 
     @Prop()
@@ -129,7 +129,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     protected beforeMount(): void {
-        this.propId = this.id + '-' + uuid.generate();
+        this.propId = this.id === undefined ? 'mPortal-' + uuid.generate() : this.id;
         let element: HTMLElement = document.createElement('div');
         element.setAttribute('id', this.propId);
         document.body.appendChild(element);

@@ -12,29 +12,26 @@
                             'm--is-disabled':disabled }, className ]"
                  @click.self="backdropClick()"
                  ref="dialogWrap">
-                <article class="m-dialog__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
-                    <header>
-                        <div class="m-dialog__header"
-                             :class="{ 'm--has-title': hasTitle,
-                                       'm--has-content': hasHeader,
-                                       'm--no-padding': !padding || !paddingHeader }">
-                            <h2 v-if="hasTitle">{{ title }}</h2>
-                            <slot name="header"></slot>
-                            <m-icon-button @click="closeDialog()" icon-name="m-svg__close-clear" skin="dark" class="m-dialog__header__close-button">
-                                <m-i18n k="m-dialog:close"></m-i18n>
-                            </m-icon-button>
-                        </div>
+                <article class="m-dialog__article" ref="article">
+                    <header class="m-dialog__header"
+                            :class="{ 'm--has-title': hasTitle,
+                                    'm--has-content': hasHeader,
+                                    'm--no-padding': !padding || !paddingHeader }">
+                        <h2 v-if="hasTitle">{{ title }}</h2>
+                        <slot name="header"></slot>
+                        <m-icon-button @click="closeDialog()" icon-name="close" skin="dark" class="m-dialog__header__close-button">
+                            <m-i18n k="m-dialog:close"></m-i18n>
+                        </m-icon-button>
                     </header>
                     <div class="m-dialog__body" ref="body"
                          :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
                         <slot></slot>
                     </div>
-                    <footer v-if="hasFooterSlot">
-                        <div class="m-dialog__footer"
-                             :class="{ 'm--no-padding': !padding || !paddingFooter }">
-                            <div>
-                                <slot name="footer"></slot>
-                            </div>
+                    <footer class="m-dialog__footer"
+                            :class="{ 'm--no-padding': !padding || !paddingFooter }"
+                            v-if="hasFooterSlot">
+                        <div>
+                            <slot name="footer"></slot>
                         </div>
                     </footer>
                 </article>

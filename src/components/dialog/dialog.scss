@@ -133,15 +133,12 @@ $m-dialog--max-width--s: 420px !default;
     &__footer {
         > :first-child {
             margin-top: 0;
-
-            > :first-child {
-                margin-top: 0;
-            }
         }
     }
 
     &__header,
     &__footer {
+        flex-shrink: 0;
         min-height: $m-box--min-height;
 
         @include m-box-padding($m-padding);
