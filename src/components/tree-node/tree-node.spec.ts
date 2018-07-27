@@ -16,24 +16,24 @@ const TREE_NODE_SELECTED_3: string[] = ['/Node 3/Node 4'];
 
 const TREE_NODE_WITHOUT_CHILDREN: TreeNode<MTreeFormat> = {
     content: {
-        elementLabel: NODE_ELEMENT_LABEL,
-        idNode: NODE_ELEMENT_ID
+        nodeLabel: NODE_ELEMENT_LABEL,
+        nodeId: NODE_ELEMENT_ID
     },
     children: []
 };
 
 const TREE_NODE_WITHOUT_CHILDREN_NOT_VALID: TreeNode<MTreeFormat> = {
     content: {
-        elementLabel: NODE_ELEMENT_LABEL,
-        idNode: ''
+        nodeLabel: NODE_ELEMENT_LABEL,
+        nodeId: ''
     },
     children: []
 };
 
 const TREE_NODE_WITH_CHILDREN_EMPTY: TreeNode<MTreeFormat> = {
     content: {
-        elementLabel: 'Node 2',
-        idNode: 'Node 2',
+        nodeLabel: 'Node 2',
+        nodeId: 'Node 2',
         hasChildren: true
     },
     children: []
@@ -41,15 +41,15 @@ const TREE_NODE_WITH_CHILDREN_EMPTY: TreeNode<MTreeFormat> = {
 
 const TREE_NODE_WITH_CHILDREN: TreeNode<MTreeFormat> = {
     content: {
-        elementLabel: 'Node 3',
-        idNode: 'Node 3',
+        nodeLabel: 'Node 3',
+        nodeId: 'Node 3',
         hasChildren: true
     },
     children: [
         {
             content: {
-                elementLabel: 'Node 4',
-                idNode: 'Node 4'
+                nodeLabel: 'Node 4',
+                nodeId: 'Node 4'
             },
             children: []
         }
@@ -58,15 +58,15 @@ const TREE_NODE_WITH_CHILDREN: TreeNode<MTreeFormat> = {
 
 const TREE_NODE_WITH_CHILDREN_NOT_VALID: TreeNode<MTreeFormat> = {
     content: {
-        elementLabel: 'Node 3',
-        idNode: '',
+        nodeLabel: 'Node 3',
+        nodeId: '',
         hasChildren: true
     },
     children: [
         {
             content: {
-                elementLabel: 'Node 4',
-                idNode: 'Node 4'
+                nodeLabel: 'Node 4',
+                nodeId: 'Node 4'
             },
             children: []
         }

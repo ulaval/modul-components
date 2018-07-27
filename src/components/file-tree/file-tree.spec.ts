@@ -4,13 +4,13 @@ import { MTreeFormat } from '../tree/tree';
 import { MFileTree } from './file-tree';
 
 const TREE_NODE_FILE: MTreeFormat = {
-    elementLabel: 'Node 1.jpg',
-    idNode: 'Node 1.jpg'
+    nodeLabel: 'Node 1.jpg',
+    nodeId: 'Node 1.jpg'
 };
 
 const TREE_NODE_FOLDER: MTreeFormat = {
-    elementLabel: 'Node 2',
-    idNode: '/Node 2'
+    nodeLabel: 'Node 2',
+    nodeId: '/Node 2'
 };
 
 const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';

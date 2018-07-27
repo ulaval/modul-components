@@ -20,20 +20,20 @@ const EMPTY_TREE: TreeNode<MTreeFormat>[] = [];
 const TREE_WITH_DATA: TreeNode<MTreeFormat>[] = [
     {
         content: {
-            elementLabel: 'index.html',
-            idNode: 'index.html'
+            nodeLabel: 'index.html',
+            nodeId: 'index.html'
         }
     },
     {
         content: {
-            elementLabel: 'Medias',
-            idNode: 'medias'
+            nodeLabel: 'Medias',
+            nodeId: 'medias'
         },
         children: [
             {
                 content: {
-                    elementLabel: 'Videos',
-                    idNode: 'Videos'
+                    nodeLabel: 'Videos',
+                    nodeId: 'Videos'
                 }
             }
         ]

@@ -65,7 +65,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
 
     public validNode(): boolean {
         let valid: boolean = true;
-        if (this.node.content.idNode === undefined || !this.node.content.idNode) {
+        if (this.node.content.nodeId === undefined || !this.node.content.nodeId) {
             valid = false;
             this.generateErrorTree();
         }
@@ -82,7 +82,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     protected created(): void {
-        this.propCurrentPath = this.currentPath + '/' + this.node.content.idNode;
+        this.propCurrentPath = this.currentPath + '/' + this.node.content.nodeId;
         this.open = this.allOpen || (this.hasChildren && this.parentOfSelectedFile);
     }
 
@@ -92,7 +92,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     public get nodeTitle(): string {
-        return (this.node.content.elementLabel !== undefined && !!this.node.content.elementLabel) ? this.node.content.elementLabel : this.node.content.idNode;
+        return (this.node.content.nodeLabel !== undefined && !!this.node.content.nodeLabel) ? this.node.content.nodeLabel : this.node.content.nodeId;
     }
 
     public get childrenNotEmpty(): boolean {

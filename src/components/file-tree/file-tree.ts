@@ -29,7 +29,7 @@ export class MFileTree<T extends MTreeFormat> extends ModulVue {
     }
 
     public get extensionFile(): string {
-        return '.' + this.file.idNode.split('.').pop() as string;
+        return '.' + this.file.nodeId.split('.').pop() as string;
     }
 
 }

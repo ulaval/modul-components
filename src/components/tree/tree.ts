@@ -9,8 +9,8 @@ import TreeNodePlugin from '../tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
 
 export interface MTreeFormat {
-    idNode: string;
-    elementLabel?: string;
+    nodeId: string;
+    nodeLabel?: string;
     hasChildren?: boolean;
 }
 
@@ -107,8 +107,8 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
         return this.internalSelectedNode;
     }
 
-    public set propSelectedNode(idNode: string[]) {
-        this.internalSelectedNode = idNode;
+    public set propSelectedNode(nodeId: string[]) {
+        this.internalSelectedNode = nodeId;
     }
 
     public get propAllOpen(): boolean {
