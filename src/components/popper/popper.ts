@@ -56,6 +56,18 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
 
     @Prop({ default: true })
     public shadow: boolean;
+    @Prop({ default: false })
+    public padding: boolean;
+    @Prop({ default: false })
+    public paddingHeader: boolean;
+    @Prop({ default: false })
+    public paddingBody: boolean;
+    @Prop({ default: false })
+    public paddingFooter: boolean;
+    @Prop({ default: true })
+    public background: boolean;
+    @Prop({ default: 'auto' })
+    public width: string;
 
     @Prop()
     public beforeEnter: any;
@@ -162,12 +174,20 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         }
     }
 
+    private get defaultAnim(): boolean {
+        return !(this.beforeEnter || this.enter || this.afterEnter || this.beforeLeave || this.leave || this.afterLeave);
+    }
+
+    private get hasHeaderSlot(): boolean {
+        return !!this.$slots.header;
+    }
+
     private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
     }
 
-    private get defaultAnim(): boolean {
-        return !(this.beforeEnter || this.enter || this.afterEnter || this.beforeLeave || this.leave || this.afterLeave);
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
     }
 
     private onBeforeEnter(el: HTMLElement): void {

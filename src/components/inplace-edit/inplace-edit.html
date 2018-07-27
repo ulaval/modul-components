@@ -1,6 +1,7 @@
 <div class="m-inplace-edit"
      :class="{'m--has-erreur': error && propEditMode,
               'm--is-edit-mode': propEditMode && isMqMinS }"
+              :style="propPadding"
      @click="onClick">
     <slot name="readMode" v-if="!propEditMode || !isMqMinS"></slot>
     <template v-if="isMqMinS">

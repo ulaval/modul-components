@@ -5,6 +5,9 @@
          :placement="placement"
          :disabled="disabled"
          :close-on-backdrop="true"
+         :background="false"
+         :shadow="false"
+         :focus-management="focusManagement"
          @open="onOpen"
          @close="onClose">
     <m-icon-button :id="id"
@@ -15,13 +18,13 @@
                    slot="trigger"
                    :skin="skin"
                    :title="propTitle"
-                   icon-name="options"
+                   icon-name="m-svg__options"
                    :disabled="disabled"
                    :button-size="size"
                    @click="onClick">
     </m-icon-button>
     <ul :id="ariaControls"
-        class="m-menu__wrap"
+        class="m-menu__list"
         :aria-labelledby="id"
         ref="menu">
         <slot></slot>

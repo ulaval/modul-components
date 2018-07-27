@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+import TextareaAutoHeightPlugin from '../../directives/textarea-auto-height/textarea-auto-height';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
@@ -27,7 +28,7 @@ import WithRender from './textarea.html?style=./textarea.scss';
 export class MTextarea extends ModulVue implements InputManagementData {
     @Prop()
     public characterCount: boolean;
-    @Prop()
+    @Prop({ default: 0 })
     public maxLength: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;
@@ -37,25 +38,6 @@ export class MTextarea extends ModulVue implements InputManagementData {
     readonly internalValue: string;
     private internalTextareaHeight: string = '0';
     private id: string = `mTextarea-${uuid.generate()}`;
-
-    protected mounted(): void {
-        this.setInputHiddenStyle();
-    }
-
-    protected updated(): void {
-        this.setInputHiddenStyle();
-    }
-
-    private setInputHiddenStyle(): void {
-        let inputHidden: HTMLElement = this.$refs.inputHidden as HTMLElement;
-        let computedElStyle: CSSStyleDeclaration = window.getComputedStyle(this.$refs.input as HTMLElement);
-        inputHidden.style.fontSize = computedElStyle.fontSize;
-        inputHidden.style.textTransform = computedElStyle.textTransform;
-        inputHidden.style.fontWeight = computedElStyle.fontWeight;
-        inputHidden.style.lineHeight = computedElStyle.lineHeight;
-        inputHidden.style.padding = computedElStyle.padding;
-        inputHidden.style.margin = computedElStyle.margin;
-    }
 
     private get valueLength(): number {
         return this.internalValue.length;
@@ -83,6 +65,7 @@ const TextareaPlugin: PluginObject<any> = {
         v.prototype.$log.warn(TEXTAREA_NAME + ' is not ready for production');
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
+        v.use(TextareaAutoHeightPlugin);
         v.component(TEXTAREA_NAME, MTextarea);
     }
 };

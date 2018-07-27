@@ -1,0 +1,35 @@
+<div>
+    <h5>default</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-access-denied></m-error-access-denied>
+    </div>
+
+    <br />
+
+    <h5>With custom title</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-access-denied :title="title"></m-error-access-denied>
+    </div>
+
+    <br />
+
+    <h5>With many custom hints</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-access-denied :hints="manyHints"></m-error-access-denied>
+    </div>
+
+    <br />
+
+    <h5>With many custom links</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-access-denied :links="manyLinks"></m-error-access-denied>
+    </div>
+
+    <br />
+
+    <h5>Unexpected error popup</h5>
+    <m-button v-m-popup:errorpopup>pop me an error</m-button>
+    <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
+            <m-error-access-denied ></m-error-access-denied>
+    </m-modal>
+</div>
