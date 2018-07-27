@@ -17,19 +17,19 @@ export class MTreeNode extends ModulVue {
     @Prop()
     public node: TreeNode<MTreeFormat>;
 
-    @Prop()
+    @Prop({ default: [] })
     public selectedNodes: string[];
 
-    @Prop()
+    @Prop({ default: '' })
     public selectionIcon: string;
 
-    @Prop()
+    @Prop({ default: MSelectOption.NONE })
     public selectionQuantity: MSelectOption;
 
-    @Prop()
+    @Prop({ default: false })
     public allOpen: boolean;
 
-    @Prop()
+    @Prop({ default: false })
     public fileTree: boolean;
 
     @Prop({ default: '' })
