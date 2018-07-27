@@ -3,7 +3,7 @@
     <template v-else>
         <m-button ref="button-toggle-visibility" skin="secondary" @click="toggleAllVisibility">{{ treeVisibilityTxt }}</m-button>
         <ul>
-            <m-tree-node ref="tree-node" v-for="node in tree" :selection-quantity="selectionQuantity" :node="node" :selected-nodes="propSelectedNodes" :all-open="propAllOpen" :selection-icon="selectionIcon" :file-tree="fileTree" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree" @selectedNodeFound="selectedNodeFound"></m-tree-node>
+            <m-tree-node ref="tree-node" v-for="node in tree" :key="node.nodeId" :selection-quantity="selectionQuantity" :node="node" :selected-nodes="propSelectedNodes" :all-open="propAllOpen" :selection-icon="selectionIcon" :file-tree="fileTree" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree" @selectedNodeFound="selectedNodeFound"></m-tree-node>
         </ul>
     </template>
     <div v-if="errorTree" class="m-tree__error" >
