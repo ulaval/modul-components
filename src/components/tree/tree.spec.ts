@@ -42,7 +42,7 @@ const TREE_WITH_DATA: TreeNode<MTreeFormat>[] = [
 
 let tree: TreeNode<MTreeFormat>[];
 let allOpen: boolean = false;
-let wrapper: Wrapper<MTree<MTreeFormat>>;
+let wrapper: Wrapper<MTree>;
 
 const initializeShallowWrapper: any = () => {
     wrapper = shallow(MTree, {

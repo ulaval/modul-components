@@ -54,9 +54,9 @@ export class MTree extends ModulVue {
     public fileTree: boolean;
 
     public treeVisibilityTxt: string = '';
+    public errorTree: boolean = false;
 
     private selectedNodeValid: boolean = false;
-    private internalErrorTree: boolean = false;
     private internalSelectedNodes: string[] = [];
     private internalAllOpen: boolean = false;
 
@@ -113,14 +113,6 @@ export class MTree extends ModulVue {
 
     public set propAllOpen(allOpen: boolean) {
         this.internalAllOpen = allOpen;
-    }
-
-    public get errorTree(): boolean {
-        return this.internalErrorTree;
-    }
-
-    public set errorTree(error: boolean) {
-        this.internalErrorTree = error;
     }
 }
 
