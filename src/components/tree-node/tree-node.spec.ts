@@ -81,7 +81,7 @@ let selectionQuantity: MSelectOption = MSelectOption.SINGLE;
 let allOpen: boolean = false;
 let fileTree: boolean = false;
 
-let wrapper: Wrapper<MTreeNode<MTreeFormat>>;
+let wrapper: Wrapper<MTreeNode>;
 
 const initializeShallowWrapper: any = () => {
     wrapper = shallow(MTreeNode, {
@@ -118,27 +118,27 @@ describe('MTreeNode', () => {
                     wrapper.setMethods({ generateErrorTree: jest.fn() });
                 });
 
-                it(`Then should render correctly`, () => {
+                it(`Should render correctly`, () => {
                     expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
                 });
 
-                it(`Then the node title should be "Node 1"`, () => {
+                it(`The node title should be "Node 1"`, () => {
                     expect(wrapper.vm.nodeTitle).toEqual(NODE_ELEMENT_LABEL);
                 });
 
-                it(`Then the node has not valid children`, () => {
+                it(`The node has not valid children`, () => {
                     let hasValidChildren: boolean = wrapper.vm.hasValidChildren();
 
                     expect(hasValidChildren).toBeFalsy();
                 });
 
-                it(`Then the node is valid`, () => {
+                it(`The node is valid`, () => {
                     let isValid: boolean = wrapper.vm.validNode();
 
                     expect(isValid).toBeTruthy();
                 });
 
-                it(`Then we don't emit generateErrorTree`, () => {
+                it(`We don't emit generateErrorTree`, () => {
                     wrapper.vm.validNode();
 
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
@@ -152,14 +152,14 @@ describe('MTreeNode', () => {
                     wrapper.setMethods({ generateErrorTree: jest.fn() });
                 });
 
-                it(`Then the node is not valid`, () => {
+                it(`The node is not valid`, () => {
                     let isValid: boolean = wrapper.vm.validNode();
 
                     expect(isValid).toBeFalsy();
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
                 });
 
-                it(`Then we emit generateErrorTree`, () => {
+                it(`We emit generateErrorTree`, () => {
                     wrapper.vm.validNode();
 
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
@@ -176,17 +176,17 @@ describe('MTreeNode', () => {
                 wrapper.setMethods({ generateErrorTree: jest.fn() });
             });
 
-            it(`Then should render correctly`, () => {
+            it(`Should render correctly`, () => {
                 expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
 
-            it(`Then the node is valid`, () => {
+            it(`The node is valid`, () => {
                 let isValid: boolean = wrapper.vm.hasValidChildren();
 
                 expect(isValid).toBeTruthy();
             });
 
-            it(`Then we don't emit generateErrorTree`, () => {
+            it(`We don't emit generateErrorTree`, () => {
                 wrapper.vm.hasValidChildren();
 
                 expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
@@ -204,21 +204,21 @@ describe('MTreeNode', () => {
                     wrapper.setMethods({ generateErrorTree: jest.fn() });
                 });
 
-                it(`Then should render correctly`, () => {
+                it(`Should render correctly`, () => {
                     expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
                 });
 
-                it(`Then should have children`, () => {
+                it(`Should have children`, () => {
                     expect(wrapper.vm.childrenNotEmpty).toBeTruthy();
                 });
 
-                it(`Then the node is valid`, () => {
+                it(`The node is valid`, () => {
                     let isValid: boolean = wrapper.vm.hasValidChildren();
 
                     expect(isValid).toBeTruthy();
                 });
 
-                it(`Then we don't emit generateErrorTree`, () => {
+                it(`We don't emit generateErrorTree`, () => {
                     wrapper.vm.hasValidChildren();
 
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
@@ -234,13 +234,13 @@ describe('MTreeNode', () => {
                     wrapper.setMethods({ generateErrorTree: jest.fn() });
                 });
 
-                it(`Then the node is not valid`, () => {
+                it(`The node is not valid`, () => {
                     let isValid: boolean = wrapper.vm.hasValidChildren();
 
                     expect(isValid).toBeFalsy();
                 });
 
-                it(`Then we emit generateErrorTree`, () => {
+                it(`We emit generateErrorTree`, () => {
                     wrapper.vm.hasValidChildren();
 
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
@@ -249,7 +249,7 @@ describe('MTreeNode', () => {
             });
 
             describe(`When the node is a parent of the selected node`, () => {
-                it(`Then the node should be open`, () => {
+                it(`The node should be open`, () => {
                     selectedNodes = TREE_NODE_SELECTED_3;
                     initializeShallowWrapper();
 
@@ -258,7 +258,7 @@ describe('MTreeNode', () => {
             });
 
             describe(`When the node is not a parent of the selected node`, () => {
-                it(`Then the node should not be open`, () => {
+                it(`The node should not be open`, () => {
 
                     node = TREE_NODE_WITH_CHILDREN;
                     selectedNodes = TREE_NODE_SELECTED_2;
@@ -269,7 +269,7 @@ describe('MTreeNode', () => {
             });
 
             describe(`When allOpen is true`, () => {
-                it(`Then the node should be open`, () => {
+                it(`The node should be open`, () => {
                     node = TREE_NODE_WITH_CHILDREN;
                     allOpen = true;
                     initializeShallowWrapper();
@@ -287,13 +287,13 @@ describe('MTreeNode', () => {
                 initializeShallowWrapper();
             });
 
-            it(`Then should emit "newNodeSelectected"`, () => {
+            it(`Should emit "newNodeSelectected"`, () => {
                 wrapper.vm.selectNewNode(node[0]);
 
                 expect(wrapper.emitted('newNodeSelectected')).toBeTruthy();
             });
 
-            it(`Then the link should be a button`, () => {
+            it(`The link should be a button`, () => {
                 expect(wrapper.vm.typeLink).toEqual('button');
             });
 
@@ -306,13 +306,13 @@ describe('MTreeNode', () => {
                 initializeShallowWrapper();
             });
 
-            it(`Then should be able to select a node`, () => {
+            it(`Should be able to select a node`, () => {
                 wrapper.vm.selectNewNode(node[0]);
 
                 expect(wrapper.emitted('newNodeSelectected')).toBeFalsy();
             });
 
-            it(`Then the link should be text`, () => {
+            it(`The link should be text`, () => {
                 expect(wrapper.vm.typeLink).toEqual('text');
             });
 
@@ -324,7 +324,7 @@ describe('MTreeNode', () => {
             });
 
             describe(`When the current node is selected`, () => {
-                it(`Then the node should be selected`, () => {
+                it(`The node should be selected`, () => {
                     selectedNodes = TREE_NODE_SELECTED;
                     initializeShallowWrapper();
 
@@ -333,7 +333,7 @@ describe('MTreeNode', () => {
             });
 
             describe(`When an other node is selected`, () => {
-                it(`Then the node should not be selected`, () => {
+                it(`The node should not be selected`, () => {
                     selectedNodes = TREE_NODE_SELECTED_2;
                     initializeShallowWrapper();
 
@@ -342,7 +342,7 @@ describe('MTreeNode', () => {
             });
 
             describe(`When no node is selected`, () => {
-                it(`Then the node should not be selected`, () => {
+                it(`The node should not be selected`, () => {
                     selectedNodes = [];
                     initializeShallowWrapper();
 
@@ -353,7 +353,7 @@ describe('MTreeNode', () => {
 
         describe(`When the node has a parent`, () => {
 
-            it(`Then should return the right current path`, () => {
+            it(`Should return the right current path`, () => {
                 currentPath = PARENT_PATH;
                 node = TREE_NODE_WITHOUT_CHILDREN;
                 initializeShallowWrapper();

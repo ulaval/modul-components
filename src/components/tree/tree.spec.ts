@@ -3,13 +3,9 @@ import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
 import { MTree, MTreeFormat, TreeNode } from './tree';
 
-const EMPTY_TREE_REF: RefSelector = { ref: 'empty-tree-txt' };
-const ERROR_TREE_REF: RefSelector = { ref: 'error-tree-txt' };
 const TREE_NODE_REF: RefSelector = { ref: 'tree-node' };
 const BUTTON_TOGGLE_VISIBILITY_REF: RefSelector = { ref: 'button-toggle-visibility' };
 
-const TXT_EMPTY_TREE: string = 'm-tree:empty';
-const TXT_ERROR_TREE: string = 'm-tree:error';
 const TXT_VISIBILITY_TREE_OPEN: string = 'm-tree:all-open';
 const TXT_VISIBILITY_TREE_CLOSE: string = 'm-tree:all-close';
 
@@ -63,11 +59,11 @@ describe(`MTree`, () => {
             initializeShallowWrapper();
         });
 
-        it(`Then should render correctly`, () => {
+        it(`Should render correctly`, () => {
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
-        it(`Then should be empty`, () => {
+        it(`Should be empty`, () => {
             expect(wrapper.vm.propTreeEmpty).toBeTruthy();
         });
 
@@ -80,11 +76,11 @@ describe(`MTree`, () => {
             initializeShallowWrapper();
         });
 
-        it(`Then should render correctly`, () => {
+        it(`Should render correctly`, () => {
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
-        it(`Then should not be empty`, () => {
+        it(`Should not be empty`, () => {
             expect(wrapper.vm.propTreeEmpty).toBeFalsy();
         });
 
@@ -94,18 +90,18 @@ describe(`MTree`, () => {
                 wrapper.vm.selectNewNode(NEW_TREE_NODE_SELECTED[0]);
             });
 
-            it(`Then should call selectNewNode`, () => {
+            it(`Call selectNewNode`, () => {
                 wrapper.setMethods({ selectNewNode: jest.fn() });
                 wrapper.find(TREE_NODE_REF).trigger('newNodeSelectected');
 
                 expect(wrapper.vm.selectNewNode).toHaveBeenCalled();
             });
 
-            it(`Then emit newNodeSelected`, () => {
+            it(`Emit newNodeSelected`, () => {
                 expect(wrapper.emitted('newNodeSelected')).toBeTruthy();
             });
 
-            it(`Then a new node is selected`, () => {
+            it(`A new node is selected`, () => {
                 expect(wrapper.vm.propSelectedNodes).toEqual(NEW_TREE_NODE_SELECTED);
             });
         });
@@ -116,14 +112,14 @@ describe(`MTree`, () => {
                 wrapper.vm.generateErrorTree();
             });
 
-            it(`Then should call generateErrorTree`, () => {
+            it(`Should call generateErrorTree`, () => {
                 wrapper.setMethods({ generateErrorTree: jest.fn() });
                 wrapper.find(TREE_NODE_REF).trigger('generateErrorTree');
 
                 expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
             });
 
-            it(`Then should generate an error`, () => {
+            it(`Sshould generate an error`, () => {
                 expect(wrapper.vm.errorTree).toBeTruthy();
             });
 
@@ -131,7 +127,7 @@ describe(`MTree`, () => {
 
         describe(`When the selected node is found`, () => {
 
-            it(`Then should call selectedNodeFound`, () => {
+            it(`Should call selectedNodeFound`, () => {
                 wrapper.setMethods({ selectedNodeFound: jest.fn() });
                 wrapper.find(TREE_NODE_REF).trigger('selectedNodeFound');
 
@@ -144,7 +140,7 @@ describe(`MTree`, () => {
 
     describe(`When you click on the button to show/hide every nodes`, () => {
 
-        it(`Then call the function toggleAllVisibility`, () => {
+        it(`Call the function toggleAllVisibility`, () => {
             initializeShallowWrapper();
 
             wrapper.setMethods({ toggleAllVisibility: jest.fn() });

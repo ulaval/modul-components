@@ -19,7 +19,7 @@ const FOLDER_CLOSED: string = 'm-svg__file-zip';
 let file: MTreeFormat;
 let folderOpen: boolean = false;
 let folder: boolean = false;
-let wrapper: Wrapper<MFileTree<MTreeFormat>>;
+let wrapper: Wrapper<MFileTree>;
 
 const initializeShallowWrapper: any = () => {
     wrapper = shallow(MFileTree, {
@@ -48,9 +48,9 @@ describe(`MFileTree`, () => {
             folder = true;
         });
 
-        describe(`When the folder is open`, () => {
+        describe(`When the folder is opened`, () => {
 
-            it(`Then should be the right icon`, () => {
+            it(`Should be the right icon`, () => {
                 folderOpen = true;
                 initializeShallowWrapper();
 
@@ -59,9 +59,9 @@ describe(`MFileTree`, () => {
 
         });
 
-        describe(`When the folder is close`, () => {
+        describe(`When the folder is closed`, () => {
 
-            it(`Then should be the right icon`, () => {
+            it(`Should be the right icon`, () => {
                 folderOpen = false;
                 initializeShallowWrapper();
 
@@ -81,7 +81,7 @@ describe(`MFileTree`, () => {
         });
         describe(`When the file type is jpg`, () => {
 
-            it(`Then the extensionFile should return .jpg`, () => {
+            it(`The extensionFile should return .jpg`, () => {
                 expect(wrapper.vm.extensionFile).toEqual('.jpg');
             });
 
