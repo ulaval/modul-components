@@ -7,7 +7,7 @@ import { PLUS_NAME } from '../component-names';
 import WithRender from './plus.html?style=./plus.scss';
 
 export enum MPlusSkin {
-    Interactive = 'interactive',
+    Default = 'default',
     Light = 'light'
 }
 
@@ -25,9 +25,9 @@ export class MPlus extends ModulVue {
     public border: boolean;
 
     @Prop({
-        default: MPlusSkin.Interactive,
+        default: MPlusSkin.Default,
         validator: value =>
-            value === MPlusSkin.Interactive ||
+            value === MPlusSkin.Default ||
             value === MPlusSkin.Light
     })
     public skin: string;
