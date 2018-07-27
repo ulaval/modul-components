@@ -68,7 +68,7 @@ describe(`MTree`, () => {
         });
 
         it(`Then should be empty`, () => {
-            expect(wrapper.vm.treeEmpty()).toBeTruthy();
+            expect(wrapper.vm.propTreeEmpty).toBeTruthy();
         });
 
         it(`Then a message should appear`, () => {
@@ -89,7 +89,7 @@ describe(`MTree`, () => {
         });
 
         it(`Then should not be empty`, () => {
-            expect(wrapper.vm.treeEmpty()).toBeFalsy();
+            expect(wrapper.vm.propTreeEmpty).toBeFalsy();
         });
 
         describe(`When a node is selected`, () => {

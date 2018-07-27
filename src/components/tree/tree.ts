@@ -69,10 +69,6 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
         this.setAllOpenTxt();
     }
 
-    public treeEmpty(): boolean {
-        return !this.tree.length;
-    }
-
     public selectNewNode(path: string): void {
         this.propSelectedNode = [path];
         this.$emit('newNodeSelected', path);
@@ -101,6 +97,10 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     private setAllOpenTxt(): void {
         this.treeVisibilityTxt = this.propAllOpen ? this.allOpenTxt : this.allCloseTxt;
+    }
+
+    public get propTreeEmpty(): boolean {
+        return !this.tree.length;
     }
 
     public get propSelectedNode(): string[] {
