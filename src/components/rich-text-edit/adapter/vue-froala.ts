@@ -129,12 +129,22 @@ export class VueFroala extends Vue {
         $(`button[id*='Popup']`).addClass('popup-button');
     }
 
+    protected destroyed(): void {
+        window.removeEventListener('resize', this.onResize);
+    }
+
     protected beforeDestroy(): void {
         this.destroyEditor();
     }
 
     protected get collapsed(): boolean {
         return this.isInitialized && !this.isFocused && (this.isEmpty || this.disabled);
+    }
+
+    protected onResize(): void {
+        if (!this.isFocused) {
+            this.adjusteToolbarPosition();
+        }
     }
 
     private createEditor(): void {
@@ -150,8 +160,10 @@ export class VueFroala extends Vue {
                 [froalaEvents.Initialized]: (_e, editor) => {
                     this.hideToolbar(editor);
                     this.isInitialized = true;
+                    window.addEventListener('resize', this.onResize);
                 },
                 [froalaEvents.Focus]: (_e, editor) => {
+                    window.removeEventListener('resize', this.onResize);
                     this.isDirty = false;
 
                     this.$emit('focus');
@@ -164,6 +176,7 @@ export class VueFroala extends Vue {
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!editor.fullscreen.isActive()) {
+                        window.addEventListener('resize', this.onResize);
                         this.$emit('blur');
                         this.hideToolbar(editor);
 
@@ -234,14 +247,18 @@ export class VueFroala extends Vue {
 
     private hideToolbar(editor: any): void {
         editor.toolbar.hide();
-        const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
-        toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
+        this.adjusteToolbarPosition();
     }
 
     private showToolbar(editor: any): void {
         editor.toolbar.show();
         const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
         toolBar.style.removeProperty('margin-top');
+    }
+
+    private adjusteToolbarPosition(): void {
+        const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
+        toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
     }
 
     private updateValue(): void {
