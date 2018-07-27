@@ -39,11 +39,11 @@ export class MInputStyle extends ModulVue {
         // This is not very VueJs friendly.  It should be replaced by :style or something similar.
         this.$nextTick(() => {
             let labelEl: HTMLElement = this.$refs.label as HTMLElement;
-            let inputEl: HTMLElement | null = this.as<InputStateMixin>().getInput();
+            let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
             let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
             if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
                 setTimeout(() => {
-                    if (inputEl !== null) {
+                    if (inputEl !== undefined) {
                         inputEl.style.width = '0px';
                         setTimeout(() => {
                             if (inputEl !== null) {
@@ -51,7 +51,7 @@ export class MInputStyle extends ModulVue {
                                 if (this.hasLabel) {
                                     width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
                                 }
-                                inputEl.style.width = width + 'px';
+                                inputEl!.style.width = width + 'px';
                             }
                         }, 0);
                     }

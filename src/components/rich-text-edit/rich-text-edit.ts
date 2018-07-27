@@ -38,8 +38,6 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
     selector: string = '.fr-element';
     internalValue: string;
 
-    public tag: string = 'textarea';
-
     @Prop({ default: '' })
     public value: string;
 
@@ -60,7 +58,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
         const propOptions: any = {
             placeholderText: this.as<InputManagement>()!.placeholder
         };
-        propOptions.toolbarStickyOffset = this.toolbarStickyOffset || undefined;
+        propOptions.toolbarStickyOffset = this.toolbarStickyOffset;
         propOptions.scrollableContainer = this.scrollableContainer || undefined;
 
         return Object.assign(this.getDefaultOptions(), propOptions);
@@ -69,6 +67,8 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
     protected get froalaLicenseKey(): string {
         return this.$license.getLicense<string>(RICH_TEXT_LICENSE_KEY) || '';
     }
+
+    private tag: string = 'textarea';
 
     protected mounted(): void {
         this.as<InputState>().getInput()!.id = this.id;
