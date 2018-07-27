@@ -24,7 +24,7 @@ let utilsOptions: UtilsPluginOptions = {
 };
 
 Vue.use(UtilsPlugin, utilsOptions);
-Vue.use(ComponentsPlugin, { richTextOptions: { key: 'test' } }); // TODO : Remove this
+Vue.use(ComponentsPlugin, { richTextOptions: { key: 'test' } }); // Fake key to avoid error in test pages.
 Vue.use(DirectivesPlugin);
 Vue.use(SandboxesPlugin);
 Vue.use(FiltersPlugin);
