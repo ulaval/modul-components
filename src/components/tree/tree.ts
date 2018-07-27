@@ -53,12 +53,8 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: false })
     public fileTree: boolean;
 
-    public emptyTreeTxt: string = this.$i18n.translate('m-tree:empty');
-    public errorTreeTxt: string = this.$i18n.translate('m-tree:error');
     public treeVisibilityTxt: string = '';
 
-    private allOpenTxt: string = this.$i18n.translate('m-tree:all-close');
-    private allCloseTxt: string = this.$i18n.translate('m-tree:all-open');
     private selectedNodeValid: boolean = false;
     private internalErrorTree: boolean = false;
     private internalSelectedNodes: string[] = [];
@@ -96,7 +92,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     }
 
     private setAllOpenTxt(): void {
-        this.treeVisibilityTxt = this.propAllOpen ? this.allOpenTxt : this.allCloseTxt;
+        this.treeVisibilityTxt = this.propAllOpen ? this.$i18n.translate('m-tree:all-close') : this.$i18n.translate('m-tree:all-open');
     }
 
     public get propTreeEmpty(): boolean {

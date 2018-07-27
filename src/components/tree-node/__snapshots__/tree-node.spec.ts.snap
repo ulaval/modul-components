@@ -18,7 +18,9 @@ exports[`MTreeNode Given a node When the node can have children but don't have a
     <div class="m-tree-node__with-children">
         <div class="m-tree-node__with-children__header"><span class="m-tree-node__with-children__header__icon"></span> <span>Node 2</span></div>
         <ul name="m-tree-node__with-children__body" class="m-tree-node__with-children__body" style="display:none;">
-            <li class="m-tree-node__with-children__no-children">m-tree-node:empty</li>
+            <li class="m-tree-node__with-children__no-children">
+                <m-i18n k="m-tree-node:empty"></m-i18n>
+            </li>
         </ul>
     </div>
 </li>

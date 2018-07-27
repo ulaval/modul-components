@@ -10,4 +10,4 @@ exports[`MTree Given a tree with some data Then should render correctly 1`] = `
 </div>
 `;
 
-exports[`MTree Given an empty tree Then should render correctly 1`] = `<div class="m-tree"><span class="m-tree__empty">m-tree:empty</span> </div>`;
+exports[`MTree Given an empty tree Then should render correctly 1`] = `<div class="m-tree"><span class="m-tree__empty"><m-i18n k="m-tree:empty"></m-i18n></span> </div>`;

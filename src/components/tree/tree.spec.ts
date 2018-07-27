@@ -71,10 +71,6 @@ describe(`MTree`, () => {
             expect(wrapper.vm.propTreeEmpty).toBeTruthy();
         });
 
-        it(`Then a message should appear`, () => {
-            expect(wrapper.find(EMPTY_TREE_REF).text()).toEqual(TXT_EMPTY_TREE);
-        });
-
     });
 
     describe(`Given a tree with some data`, () => {
@@ -129,10 +125,6 @@ describe(`MTree`, () => {
 
             it(`Then should generate an error`, () => {
                 expect(wrapper.vm.errorTree).toBeTruthy();
-            });
-
-            it(`Then should show an error message`, () => {
-                expect(wrapper.find(ERROR_TREE_REF).text()).toEqual(TXT_ERROR_TREE);
             });
 
         });

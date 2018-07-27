@@ -180,11 +180,6 @@ describe('MTreeNode', () => {
                 expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
 
-            it(`Then should display a message`, () => {
-                expect(wrapper.vm.childrenNotEmpty).toBeFalsy();
-                expect(wrapper.find(EMPTY_NODE_REF).text()).toEqual(TXT_EMPTY_NODE);
-            });
-
             it(`Then the node is valid`, () => {
                 let isValid: boolean = wrapper.vm.hasValidChildren();
 

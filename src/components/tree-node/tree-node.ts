@@ -35,8 +35,6 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     @Prop({ default: '' })
     public currentPath: string;
 
-    public emptyNodeTxt: string = this.$i18n.translate('m-tree-node:empty');
-
     private internalOpen: boolean = false;
     private internalCurrentPath: string = '';
 
