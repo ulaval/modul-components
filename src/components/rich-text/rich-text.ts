@@ -6,8 +6,6 @@ import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT } from '../component-names';
 import WithRender from './rich-text.html?style=./rich-text.scss';
 
-require('froala-editor/css/froala_editor.pkgd.min.css');
-
 @WithRender
 @Component
 export class MRichText extends ModulVue {
