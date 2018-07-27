@@ -91,7 +91,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
 
     protected mounted(): void {
         if (!this.selectedNodeValid) {
-            console.error(`L'élément sélectionné n'a pas été trouvé: ` + '\"' + this.propSelectedNode[0] + '\"');
+            console.error(`The selected node was not found: ` + '\"' + this.propSelectedNode[0] + '\"');
         }
     }
 
