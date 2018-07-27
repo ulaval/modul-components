@@ -4,18 +4,8 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_ITEM_NAME } from '../component-names';
+import { BaseNavbar, Navbar } from '../navbar/navbar';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
-
-export abstract class BaseNavbar extends ModulVue { }
-
-export interface Navbar {
-    model: string;
-    mouseEvent: boolean;
-    updateValue(value: string): void;
-    onMouseover(value: string, event): void;
-    onMouseleave(value: string, event): void;
-    onClick(value: string, event): void;
-}
 
 // must be sync with selected css class
 const SELECTEDCLASS: string = 'm--is-selected';
@@ -65,7 +55,7 @@ export class MNavbarItem extends ModulVue {
 
         let h: number = this.$el.clientHeight - paddingH;
         let w: number = this.$el.clientWidth;
-        let lines: number = Math.round((h / lineHeight) * 100) / 100;
+        let lines: number = Math.floor(h / lineHeight);
 
         if (lines > 2) {
 
@@ -83,7 +73,7 @@ export class MNavbarItem extends ModulVue {
 
                 // update values
                 h = this.$el.clientHeight - paddingH;
-                lines = Math.round((h / lineHeight) * 100) / 100;
+                lines = Math.floor(h / lineHeight);
 
             } while (lines > 2);
 
