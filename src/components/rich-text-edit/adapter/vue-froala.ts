@@ -171,18 +171,20 @@ export class VueFroala extends Vue {
                     this.updateModel();
                 },
                 [froalaEvents.Focus]: (_e, editor) => {
-                    window.removeEventListener('resize', this.onResize);
-                    this.isDirty = false;
+                    if (!this.disabled) {
+                        window.removeEventListener('resize', this.onResize);
+                        this.isDirty = false;
 
-                    this.$emit('focus');
-                    this.showToolbar();
-                    this.isFocused = true;
+                        this.$emit('focus');
+                        this.showToolbar();
+                        this.isFocused = true;
 
-                    // uncomment when  https://github.com/froala/wysiwyg-editor/issues/2988 is fixed
-                    // auto full-screen on mobiles
-                    // if (editor.helpers.isMobile()) {
-                    //     editor.fullscreen.toggle();
-                    // }
+                        // uncomment when  https://github.com/froala/wysiwyg-editor/issues/2988 is fixed
+                        // auto full-screen on mobiles
+                        // if (editor.helpers.isMobile()) {
+                        //     editor.fullscreen.toggle();
+                        // }
+                    }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!editor.fullscreen.isActive()) {
