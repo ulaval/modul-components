@@ -330,7 +330,7 @@ export class MRootTreeSandbox extends Vue {
     ];
 
     public newNodeSelected(): void {
-        console.error('New file selected');
+        console.error('modUL - New file selected');
     }
 
 }
