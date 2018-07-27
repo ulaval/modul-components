@@ -152,7 +152,6 @@ export class VueFroala extends Vue {
     protected isInitialized: boolean = false;
     protected isFullScreen: boolean = false;
 
-    protected isTouched: boolean = false;
     protected isDirty: boolean = false;
 
     @Watch('value')
@@ -240,7 +239,6 @@ export class VueFroala extends Vue {
                     this.$emit('focus');
                     this.showToolbar(editor);
                     this.isFocused = true;
-                    this.isTouched = true;
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!this.isFullScreen) {
