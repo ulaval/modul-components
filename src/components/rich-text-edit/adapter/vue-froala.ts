@@ -241,17 +241,6 @@ export class VueFroala extends Vue {
                     this.showToolbar(editor);
                     this.isFocused = true;
                     this.isTouched = true;
-
-                    // Scrap all this code when https://github.com/froala/wysiwyg-editor/issues/2974 get implemented.
-                    // Listen to toolbar buttons click instead of creating a MutationObserver.
-                    const observer: MutationObserver = new MutationObserver(() => {
-                        if (editor.$tb[0].querySelector(FroalaElements.TOOLBAR_ACTIVE_BUTTON) !== null) {
-                            this.isDirty = true;
-                            observer.disconnect();
-                        }
-                    });
-
-                    observer.observe(editor.$tb[0], { attributes: true, subtree: true });
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!this.isFullScreen) {

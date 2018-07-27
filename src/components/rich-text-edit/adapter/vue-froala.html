@@ -1,5 +1,7 @@
 <div class="vue-froala"
     @click.stop
+    @click.capture="isDirty = true"
+    @touchstart.capture="isDirty = true"
     :class="{
         'vue-froala--focused': isFocused,
         'vue-froala--unfocused': !isFocused,
