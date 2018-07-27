@@ -178,9 +178,11 @@ export class VueFroala extends Vue {
                     this.showToolbar();
                     this.isFocused = true;
 
-                    if (editor.helpers.isMobile()) {
-                        editor.fullscreen.toggle();
-                    }
+                    // uncomment when  https://github.com/froala/wysiwyg-editor/issues/2988 is fixed
+                    // auto full-screen on mobiles
+                    // if (editor.helpers.isMobile()) {
+                    //     editor.fullscreen.toggle();
+                    // }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!editor.fullscreen.isActive()) {
