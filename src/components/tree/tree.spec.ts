@@ -48,7 +48,7 @@ const initializeShallowWrapper: any = () => {
     wrapper = shallow(MTree, {
         propsData: {
             tree: tree,
-            selectedNode: TREE_NODE_SELECTED,
+            selectedNodes: TREE_NODE_SELECTED,
             allOpen
         }
     });
@@ -110,7 +110,7 @@ describe(`MTree`, () => {
             });
 
             it(`Then a new node is selected`, () => {
-                expect(wrapper.vm.propSelectedNode).toEqual(NEW_TREE_NODE_SELECTED);
+                expect(wrapper.vm.propSelectedNodes).toEqual(NEW_TREE_NODE_SELECTED);
             });
         });
 

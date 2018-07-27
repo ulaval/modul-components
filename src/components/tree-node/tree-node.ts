@@ -18,7 +18,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     public node: TreeNode<MTreeFormat>;
 
     @Prop()
-    public selectedNode: string[];
+    public selectedNodes: string[];
 
     @Prop()
     public selectionIcon: string;
@@ -51,12 +51,12 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     public selectedNodeFound(): void {
-        this.$emit('selectedNodeFound');
+        this.$emit('selectedNodesFound');
     }
 
     public nodeSelected(): boolean {
         let isSelected: boolean = false;
-        if (this.selectedNode[0] !== undefined && this.selectedNode[0] === this.propCurrentPath) {
+        if (this.selectedNodes[0] !== undefined && this.selectedNodes[0] === this.propCurrentPath) {
             isSelected = true;
             this.selectedNodeFound();
         }
@@ -128,7 +128,7 @@ export class MTreeNode<T extends MTreeFormat> extends ModulVue {
     }
 
     private get parentOfSelectedFile(): boolean {
-        return this.selectedNode[0] !== undefined && this.selectedNode[0].indexOf(this.propCurrentPath) === 0;
+        return this.selectedNodes[0] !== undefined && this.selectedNodes[0].indexOf(this.propCurrentPath) === 0;
     }
 
 }

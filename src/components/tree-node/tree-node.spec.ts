@@ -74,7 +74,7 @@ const TREE_NODE_WITH_CHILDREN_NOT_VALID: TreeNode<MTreeFormat> = {
 };
 
 let node: TreeNode<MTreeFormat>;
-let selectedNode: string[] = [];
+let selectedNodes: string[] = [];
 let currentPath: string = '';
 let selectionIcon: string = '';
 let selectionQuantity: MSelectOption = MSelectOption.SINGLE;
@@ -88,7 +88,7 @@ const initializeShallowWrapper: any = () => {
         stubs: getStubs(),
         propsData: {
             node,
-            selectedNode,
+            selectedNodes,
             selectionIcon,
             selectionQuantity,
             allOpen,
@@ -255,7 +255,7 @@ describe('MTreeNode', () => {
 
             describe(`When the node is a parent of the selected node`, () => {
                 it(`Then the node should be open`, () => {
-                    selectedNode = TREE_NODE_SELECTED_3;
+                    selectedNodes = TREE_NODE_SELECTED_3;
                     initializeShallowWrapper();
 
                     expect(wrapper.vm.open).toBeTruthy();
@@ -266,7 +266,7 @@ describe('MTreeNode', () => {
                 it(`Then the node should not be open`, () => {
 
                     node = TREE_NODE_WITH_CHILDREN;
-                    selectedNode = TREE_NODE_SELECTED_2;
+                    selectedNodes = TREE_NODE_SELECTED_2;
                     initializeShallowWrapper();
 
                     expect(wrapper.vm.open).toBeFalsy();
@@ -330,7 +330,7 @@ describe('MTreeNode', () => {
 
             describe(`When the current node is selected`, () => {
                 it(`Then the node should be selected`, () => {
-                    selectedNode = TREE_NODE_SELECTED;
+                    selectedNodes = TREE_NODE_SELECTED;
                     initializeShallowWrapper();
 
                     expect(wrapper.vm.nodeSelected()).toBeTruthy();
@@ -339,7 +339,7 @@ describe('MTreeNode', () => {
 
             describe(`When an other node is selected`, () => {
                 it(`Then the node should not be selected`, () => {
-                    selectedNode = TREE_NODE_SELECTED_2;
+                    selectedNodes = TREE_NODE_SELECTED_2;
                     initializeShallowWrapper();
 
                     expect(wrapper.vm.nodeSelected()).toBeFalsy();
@@ -348,7 +348,7 @@ describe('MTreeNode', () => {
 
             describe(`When no node is selected`, () => {
                 it(`Then the node should not be selected`, () => {
-                    selectedNode = [];
+                    selectedNodes = [];
                     initializeShallowWrapper();
 
                     expect(wrapper.vm.nodeSelected()).toBeFalsy();

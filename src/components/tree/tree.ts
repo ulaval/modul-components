@@ -45,7 +45,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     public selectionIcon: string;
 
     @Prop()
-    public selectedNode: string[];
+    public selectedNodes: string[];
 
     @Prop({ default: false })
     public allOpen: boolean;
@@ -61,7 +61,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     private allCloseTxt: string = this.$i18n.translate('m-tree:all-open');
     private selectedNodeValid: boolean = false;
     private internalErrorTree: boolean = false;
-    private internalSelectedNode: string[] = [];
+    private internalSelectedNodes: string[] = [];
     private internalAllOpen: boolean = false;
 
     public toggleAllVisibility(): void {
@@ -70,7 +70,7 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     }
 
     public selectNewNode(path: string): void {
-        this.propSelectedNode = [path];
+        this.propSelectedNodes = [path];
         this.$emit('newNodeSelected', path);
     }
 
@@ -83,15 +83,15 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
     }
 
     protected created(): void {
-        this.propSelectedNode = this.selectedNode ? this.selectedNode : [];
-        this.selectedNodeValid = !this.propSelectedNode.length;
+        this.propSelectedNodes = this.selectedNodes ? this.selectedNodes : [];
+        this.selectedNodeValid = !this.propSelectedNodes.length;
         this.propAllOpen = this.allOpen;
         this.setAllOpenTxt();
     }
 
     protected mounted(): void {
         if (!this.selectedNodeValid) {
-            console.error(`modUL - The selected node was not found: ` + '\"' + this.propSelectedNode[0] + '\"');
+            console.error(`modUL - The selected node was not found: ` + '\"' + this.propSelectedNodes[0] + '\"');
         }
     }
 
@@ -103,12 +103,12 @@ export class MTree<T extends MTreeFormat> extends ModulVue {
         return !this.tree.length;
     }
 
-    public get propSelectedNode(): string[] {
-        return this.internalSelectedNode;
+    public get propSelectedNodes(): string[] {
+        return this.internalSelectedNodes;
     }
 
-    public set propSelectedNode(nodeId: string[]) {
-        this.internalSelectedNode = nodeId;
+    public set propSelectedNodes(nodeId: string[]) {
+        this.internalSelectedNodes = nodeId;
     }
 
     public get propAllOpen(): boolean {
