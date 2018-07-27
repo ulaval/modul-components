@@ -15,7 +15,7 @@ export function eraseNewLines(html: string): string {
 }
 
 export function filterByTag(tag: string, html: string): string {
-    const regex: RegExp = new RegExp(`<${tag}([^>]*)>(.*)</${tag}>`, 'gi');
+    const regex: RegExp = new RegExp(`<${tag}([^>]*)>([^]*)</${tag}>`, 'gmi');
 
     return html.replace(regex, '');
 }
@@ -27,7 +27,7 @@ export function filterByTags(tags: string[], html: string): string {
 }
 
 export function replaceTag(tag, replace, html): string {
-    const openingTag: RegExp = new RegExp(`<${tag}([^>]*)>`, 'gi');
+    const openingTag: RegExp = new RegExp(`<${tag}([^>]*)>`, 'gmi');
     return html.replace(openingTag, `<${replace}>`).replace(`${tag}>`, `${replace}>`);
 }
 
@@ -36,7 +36,7 @@ export function replaceTags(tags: string[], replace: string, html: string): stri
 }
 
 export function eraseTag(tag: string, html: string): string {
-    const regex: RegExp = new RegExp(`(<${tag}([^>]*)>)|(</${tag}>)`, 'gi');
+    const regex: RegExp = new RegExp(`(<${tag}([^>]*)>)|(</${tag}>)`, 'gmi');
 
     return html.replace(regex, '');
 }

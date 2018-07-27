@@ -5,7 +5,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
-import { eraseNewLines, eraseTag, eraseTags, filterByTag, replaceTag, replaceTags } from '../../../utils/filter/htmlFilter';
+import { eraseTag, eraseTags, filterByTag, replaceTag, replaceTags } from '../../../utils/filter/htmlFilter';
 import { PopupPlugin } from './popup-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
@@ -30,8 +30,6 @@ enum froalaEvents {
 }
 
 function cleanHtml(html: string): string {
-    // delete new lines so the regexps will work
-    html = eraseNewLines(html);
     // delete images
     html = eraseTag('img', html);
     // delete videos
