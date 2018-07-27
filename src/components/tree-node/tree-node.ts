@@ -12,7 +12,7 @@ import WithRender from './tree-node.html?style=./tree-node.scss';
 
 @WithRender
 @Component
-export class MTreeNode<T extends MTreeFormat> extends ModulVue {
+export class MTreeNode extends ModulVue {
 
     @Prop()
     public node: TreeNode<MTreeFormat>;

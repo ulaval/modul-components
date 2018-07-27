@@ -27,7 +27,7 @@ export enum MSelectOption {
 
 @WithRender
 @Component
-export class MTree<T extends MTreeFormat> extends ModulVue {
+export class MTree extends ModulVue {
 
     @Prop()
     public tree: TreeNode<MTreeFormat>[];

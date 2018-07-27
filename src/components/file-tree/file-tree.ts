@@ -13,7 +13,7 @@ const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
 const FOLDER_CLOSED: string = 'm-svg__file-zip';
 @WithRender
 @Component
-export class MFileTree<T extends MTreeFormat> extends ModulVue {
+export class MFileTree extends ModulVue {
 
     @Prop()
     public file: MTreeFormat;
