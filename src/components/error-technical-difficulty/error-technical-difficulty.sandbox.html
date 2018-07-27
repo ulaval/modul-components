@@ -1,0 +1,70 @@
+<div>
+    <h5>default</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-technical-difficulty></m-error-technical-difficulty>
+    </div>
+
+    <br />
+
+    <h5>With custom title</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-technical-difficulty :title="title"></m-error-technical-difficulty>
+    </div>
+
+    <br />
+
+    <h5>With one custom hint</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-technical-difficulty :hints="oneHint"></m-error-technical-difficulty>
+    </div>
+
+    <br />
+
+    <h5>With many custom hints</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-technical-difficulty :hints="manyHints"></m-error-technical-difficulty>
+    </div>
+
+    <br />
+
+    <h5>With one custom link</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-technical-difficulty :links="oneLink"></m-error-technical-difficulty>
+    </div>
+
+    <br />
+
+    <h5>With many custom links</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-technical-difficulty :links="manyLinks"></m-error-technical-difficulty>
+    </div>
+
+    <br />
+
+    <h5>With reference number</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-technical-difficulty :errorReferenceNumber="referenceNumber"></m-error-technical-difficulty>
+    </div>
+
+    <br />
+
+    <h5>With custom date (2 days before now)</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-technical-difficulty :errorDate="errorDate"></m-error-technical-difficulty>
+    </div>
+
+    <br />
+
+    <h5>With stack trace</h5>
+    <div style="border: solid 1px black; padding: 10px; width: 600px;">
+        <m-error-technical-difficulty :showStackTrace="true" :error="errorWithStack"></m-error-technical-difficulty>
+    </div>
+
+    <br />
+
+    <h5>Unexpected error popup with stack</h5>
+    <m-button v-m-popup:errorpopup>pop me an error</m-button>
+    <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
+            <m-error-technical-difficulty :showStackTrace="true" :error="errorWithStack"></m-error-technical-difficulty>
+    </m-modal>
+</div>

@@ -2,6 +2,7 @@ import { mount, shallow, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
+import { ICON_NAME, LINK_NAME } from '../component-names';
 import ErrorTemplatePlugin, { Link, MErrorTemplate, MErrorTemplateSkin } from './error-template';
 
 let wrapper: Wrapper<MErrorTemplate>;
@@ -27,8 +28,8 @@ let skin: string;
 
 const getStubs: any = () => {
     return {
-        ['m-link']: '<a @click="$emit(\'click\')"><slot /></a>',
-        ['m-icon']: '<span>Icone : {{ $attrs["name"] }}</span>'
+        [LINK_NAME]: '<a @click="$emit(\'click\')"><slot /></a>',
+        [ICON_NAME]: '<span>Icone : {{ $attrs["name"] }}</span>'
     };
 };
 
@@ -81,7 +82,7 @@ describe(`Error-template fonctionnality tests`, () => {
         });
     });
 
-    describe(`Given on hint`, () => {
+    describe(`Given an hint`, () => {
         describe(`When rendering`, () => {
             it(`Then should display one hint with proper content`, () => {
                 hints = ONE_HINT_LIST;
@@ -108,7 +109,7 @@ describe(`Error-template fonctionnality tests`, () => {
         });
     });
 
-    describe(`Given on link`, () => {
+    describe(`Given a link`, () => {
         describe(`When rendering`, () => {
             it(`Then should display one link with proper content`, () => {
                 links = ONE_LINK_LIST;

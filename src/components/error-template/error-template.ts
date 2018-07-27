@@ -2,7 +2,6 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
-import MessagePlugin from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TEMPLATE_NAME } from '../component-names';
@@ -10,13 +9,17 @@ import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './error-template.html?style=./error-template.scss';
 
+/**
+ * Utility class to manage the properties relatied to the link displayed in the error pages.
+ */
 export class Link {
-    public label: string;
-    public url: string;
-
-    constructor(label: string, url: string) {
-        this.label = label;
-        this.url = url;
+    /**
+     * Constructor
+     * @param label Label for the url link to display.
+     * @param url Target for the location to navigate to, can be relative.
+     * @param external Defines to the target is external (opens in new tab), or internal (opens in same tab) to the application.
+     */
+    constructor(public label: string, public url: string, public external: boolean = false) {
     }
 }
 
@@ -54,6 +57,10 @@ export class MErrorTemplate extends ModulVue {
     private get hasLinks(): boolean {
         return this.links.length > 0;
     }
+
+    isTargetExternal(isExternal: boolean): string {
+        return isExternal ? '_blank' : '' ;
+    }
 }
 
 const ErrorTemplatePlugin: PluginObject<any> = {
@@ -62,7 +69,6 @@ const ErrorTemplatePlugin: PluginObject<any> = {
         v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);
-        v.use(MessagePlugin);
         v.component(ERROR_TEMPLATE_NAME, MErrorTemplate);
     }
 };

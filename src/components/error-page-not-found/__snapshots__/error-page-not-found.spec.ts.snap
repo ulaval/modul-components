@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page not found - test Given custom values Should render with custom values provided 1`] = `<div skin="warning" iconName="m-svg__search" title="An error title." hints="aHint" links="[object Object]"></div>`;
+
+exports[`Page not found - test Given default values Should render with default values 1`] = `<div skin="warning" iconName="m-svg__search" title="m-error-page-not-found:title" hints="m-error-page-not-found:hint.primary" links="[object Object]"></div>`;

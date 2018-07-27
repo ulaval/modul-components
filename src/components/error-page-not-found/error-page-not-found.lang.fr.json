@@ -1,0 +1,7 @@
+{
+    "m-error-page-not-found": {
+        "title": "La page demandée n'a pas été trouvée",
+        "hint.primary": "Elle a peut-être été déplacée ou retirée, ou son nom a changé. Veuillez vérifier l'adresse (URL) indiquée dans votre navigateur et réessayer.",
+        "home-label": "Retour à l'accueil"
+    }
+}
