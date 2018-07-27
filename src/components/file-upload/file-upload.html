@@ -29,10 +29,10 @@
 
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
-                <h2 v-if="isMqMinS">
+                <h3 class="m-file-upload__drop-zone__instructions__title" v-if="isMqMinS">
                     <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
                     <m-i18n k="m-file-upload:title"></m-i18n>
-                </h2>
+                </h3>
                 <m-file-select class="m-file-upload__drop-zone__instructions__button" skin="secondary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName"
                     keep-store="true"></m-file-select>
             </div>
