@@ -5,7 +5,6 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
-import { eraseTag, eraseTags, filterByTag, replaceTag, replaceTags } from '../../../utils/filter/htmlFilter';
 import { PopupPlugin } from './popup-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
@@ -27,21 +26,6 @@ enum froalaEvents {
     PasteBeforeCleanup = 'froalaEditor.paste.beforeCleanup',
     WordPasteBefore = 'froalaEditor.paste.wordPaste.before',
     CommandAfter = 'froalaEditor.commands.after'
-}
-
-function cleanHtml(html: string): string {
-    // delete images
-    html = eraseTag('img', html);
-    // delete videos
-    html = filterByTag('video', html);
-    // replace tables with paragraphs
-    html = eraseTags(['table', 'tbody', 'tr'], html);
-    html = replaceTag('td', 'p', html);
-    // replace headings, blockquotes with paragraphs
-    html = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote'], 'p', html);
-    // erase underlined and strikethrough styles
-    html = eraseTags(['u', 's'], html);
-    return html;
 }
 
 enum FroalaElements {
@@ -198,7 +182,7 @@ export class VueFroala extends Vue {
                     this.$emit('paste');
                 },
                 [froalaEvents.PasteBeforeCleanup]: (_e, _editor, data: string) => {
-                    return cleanHtml(data);
+                    return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's','h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote']);
                 },
                 [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
                     // write code to be called after a command is called (button clicked, image modified, ...)
