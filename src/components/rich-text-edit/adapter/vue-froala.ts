@@ -6,6 +6,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import { eraseNewLines, eraseTag, eraseTags, filterByTag, replaceTag, replaceTags } from '../../../utils/filter/htmlFilter';
+import { PopupPlugin } from './popup-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
 require('froala-editor/js/froala_editor.pkgd.min');
@@ -28,10 +29,6 @@ enum froalaEvents {
     CommandAfter = 'froalaEditor.commands.after'
 }
 
-enum froalaCommands {
-    FullScreen = 'fullscreen'
-}
-
 function cleanHtml(html: string): string {
     // delete new lines so the regexps will work
     html = eraseNewLines(html);
@@ -47,66 +44,6 @@ function cleanHtml(html: string): string {
     // erase underlined and strikethrough styles
     html = eraseTags(['u', 's'], html);
     return html;
-}
-
-class PopupPlugin {
-    private editor;
-    private buttonName;
-    private pluginName;
-    private icon;
-    private buttonList;
-
-    constructor(editor, name: string, icon: string, buttonList: string[]) {
-        this.editor = editor;
-        this.buttonName = `${name}Popup`;
-        this.pluginName = `${name}Plugin`;
-        this.icon = icon;
-        this.buttonList = buttonList;
-    }
-    initPopup(): void {
-        // Popup buttons.
-        let buttons: string = (this.buttonList.length > 1) ? `<div class="fr-buttons">${this.editor.button.buildList(this.buttonList)}</div>` : '';
-
-        // Load popup template.
-        let template: any = {
-            buttons: buttons,
-            custom_layer: ''
-        };
-
-        // Create popup.
-        return this.editor.popups.create(`${this.pluginName}.popup`, template);
-    }
-
-    // Show the popup
-    showPopup(): void {
-
-        // If popup doesn't exist then create it.
-        // To improve performance it is best to create the popup when it is first needed
-        // and not when the editor is initialized.
-        if (!this.editor.popups.get(`${this.pluginName}.popup`)) {
-            this.initPopup();
-        }
-
-        // Set the editor toolbar as the popup's container.
-        this.editor.popups.setContainer(`${this.pluginName}.popup`, this.editor.$tb);
-
-        // This custom popup is opened by pressing a button from the editor's toolbar.
-        // Get the button's object in order to place the popup relative to it.
-        let btn: any = this.editor.$tb.find(`.fr-command[data-cmd="${this.buttonName}"]`);
-
-        // Set the popup's position.
-        let left: any = btn.offset().left + btn.outerWidth() / 2;
-        let top: any = btn.offset().top + (this.editor.opts.toolbarBottom ? 10 : btn.outerHeight() - 10);
-
-        // Show the custom popup.
-        // The button's outerHeight is required in case the popup needs to be displayed above it.
-        this.editor.popups.show(`${this.pluginName}.popup`, left, top, btn.outerHeight());
-    }
-
-    // Hide the custom popup.
-    hidePopup(): void {
-        this.editor.popups.hide(`${this.pluginName}.popup`);
-    }
 }
 
 enum FroalaElements {
@@ -170,7 +107,7 @@ export class VueFroala extends Vue {
         $.FroalaEditor.POPUP_TEMPLATES[`${pluginName}.popup`] = '[_BUTTONS_]';
 
         // The custom popup is defined inside a plugin (new or existing).
-        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new PopupPlugin(editor, name, icon, buttonList); };
+        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new PopupPlugin(editor, name, buttonList); };
 
         // Define an icon and command for the button that opens the custom popup.
         // $.FroalaEditor.DefineIcon('stylePopup', { NAME: 'bold' });
