@@ -5,7 +5,7 @@
               'm--is-focus': focused }"
     role="option"
     :aria-selected="selected"
-    :disabled="disabled"
+    :tabindex="disabled ? '-1' : '0'"
     v-if="!filtered || inactive"
     @click.prevent="onClick">
     <span class="m-dropdown-item__element-text" v-if="isMqMinS"><slot>{{ propLabel }}</slot></span>

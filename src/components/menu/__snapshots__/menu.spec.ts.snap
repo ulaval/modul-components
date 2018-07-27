@@ -3,7 +3,7 @@
 exports[`MMenu Menu should render correctly 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -16,7 +16,7 @@ exports[`MMenu Menu should render correctly 1`] = `
 exports[`MMenu Menu should render correctly placement left 1`] = `
 <m-popup placement="left" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -29,7 +29,7 @@ exports[`MMenu Menu should render correctly placement left 1`] = `
 exports[`MMenu Menu should render correctly placement right 1`] = `
 <m-popup placement="right" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -42,7 +42,7 @@ exports[`MMenu Menu should render correctly placement right 1`] = `
 exports[`MMenu Menu should render correctly placement top 1`] = `
 <m-popup placement="top" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -55,7 +55,7 @@ exports[`MMenu Menu should render correctly placement top 1`] = `
 exports[`MMenu should react to open prop changes 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -68,7 +68,7 @@ exports[`MMenu should react to open prop changes 1`] = `
 exports[`MMenu should react to open prop changes 2`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -81,7 +81,7 @@ exports[`MMenu should react to open prop changes 2`] = `
 exports[`MMenu should render correctly when close title is set 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -94,7 +94,7 @@ exports[`MMenu should render correctly when close title is set 1`] = `
 exports[`MMenu should render correctly when open title is set 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Title open" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -107,7 +107,7 @@ exports[`MMenu should render correctly when open title is set 1`] = `
 exports[`MMenu should render correctly when size is set 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="200px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -120,7 +120,7 @@ exports[`MMenu should render correctly when size is set 1`] = `
 exports[`MMenu should render correctly when skin is dark 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="dark" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
@@ -133,7 +133,7 @@ exports[`MMenu should render correctly when skin is dark 1`] = `
 exports[`MMenu should render correctly when skin is light 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
     <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__wrap">
+    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
         <m-menu>
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
