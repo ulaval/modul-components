@@ -18,6 +18,7 @@ const INNER_HTML_ATTR: string = 'innerHTML';
 
 enum froalaEvents {
     Initialized = 'froalaEditor.initialized',
+    ContentChanged= 'froalaEditor.contentChanged',
     Focus = 'froalaEditor.focus',
     Blur = 'froalaEditor.blur',
     KeyUp = 'froalaEditor.keyup',
@@ -55,6 +56,7 @@ export class VueFroala extends Vue {
 
     protected currentTag: string = 'div';
     protected listeningEvents: any[] = [];
+    protected froalaEditor: any = undefined;
     protected _$element: any = undefined;
     protected _$editor: any = undefined;
     protected currentConfig: any = undefined;
@@ -62,13 +64,11 @@ export class VueFroala extends Vue {
         immediateVueModelUpdate: false,
         vueIgnoreAttrs: undefined
     };
-    protected editorInitialized: boolean = false;
     protected hasSpecialTag: boolean = false;
     protected model: string | undefined = undefined;
     protected oldModel: string | undefined = undefined;
 
     protected isFocused: boolean = false;
-    protected isInitialized: boolean = false;
 
     protected isDirty: boolean = false;
 
@@ -80,6 +80,10 @@ export class VueFroala extends Vue {
 
     public get isEmpty(): boolean {
         return this.value.length === 0;
+    }
+
+    public get isInitialized(): boolean {
+        return !!this.froalaEditor;
     }
 
     protected addPopup(name: string, icon: string, buttonList: string[]): void {
@@ -148,7 +152,7 @@ export class VueFroala extends Vue {
     }
 
     private createEditor(): void {
-        if (this.editorInitialized) {
+        if (this.isInitialized) {
             return;
         }
 
@@ -158,16 +162,20 @@ export class VueFroala extends Vue {
             // we reemit each valid input events so froala can work in input-style component.
             events: {
                 [froalaEvents.Initialized]: (_e, editor) => {
-                    this.hideToolbar(editor);
-                    this.isInitialized = true;
+                    this.froalaEditor = editor;
+                    this.hideToolbar();
                     window.addEventListener('resize', this.onResize);
+                    this.htmlSet();
+                },
+                [froalaEvents.ContentChanged]: (_e, _editor) => {
+                    this.updateModel();
                 },
                 [froalaEvents.Focus]: (_e, editor) => {
                     window.removeEventListener('resize', this.onResize);
                     this.isDirty = false;
 
                     this.$emit('focus');
-                    this.showToolbar(editor);
+                    this.showToolbar();
                     this.isFocused = true;
 
                     if (editor.helpers.isMobile()) {
@@ -178,13 +186,16 @@ export class VueFroala extends Vue {
                     if (!editor.fullscreen.isActive()) {
                         window.addEventListener('resize', this.onResize);
                         this.$emit('blur');
-                        this.hideToolbar(editor);
+                        this.hideToolbar();
 
                         this.isFocused = false;
                         this.isDirty = false;
                     }
                 },
                 [froalaEvents.KeyUp]: (_e, _editor) => {
+                    if (this.currentConfig.immediateVueModelUpdate) {
+                        this.updateModel();
+                    }
                     this.$emit('keyup');
                 },
                 [froalaEvents.KeyDown]: (_e, _editor) => {
@@ -224,9 +235,6 @@ export class VueFroala extends Vue {
 
         this.registerEvents();
         this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
-        this.initListeners();
-
-        this.editorInitialized = true;
     }
 
     private dismissWordPasteModal(): void {
@@ -245,15 +253,19 @@ export class VueFroala extends Vue {
         return document.querySelector(FroalaElements.MODAL_WORD_PASTE_CLEAN_BUTTON);
     }
 
-    private hideToolbar(editor: any): void {
-        editor.toolbar.hide();
-        this.adjusteToolbarPosition();
+    private hideToolbar(): void {
+        if (this.froalaEditor) {
+            this.froalaEditor.toolbar.hide();
+            this.adjusteToolbarPosition();
+        }
     }
 
-    private showToolbar(editor: any): void {
-        editor.toolbar.show();
-        const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
-        toolBar.style.removeProperty('margin-top');
+    private showToolbar(): void {
+        if (this.froalaEditor) {
+            this.froalaEditor.toolbar.show();
+            const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
+            toolBar.style.removeProperty('margin-top');
+        }
     }
 
     private adjusteToolbarPosition(): void {
@@ -270,7 +282,7 @@ export class VueFroala extends Vue {
     }
 
     private setContent(firstTime: boolean = false): void {
-        if (!this.editorInitialized && !firstTime) {
+        if (!this.isInitialized && !firstTime) {
             return;
         }
 
@@ -279,19 +291,9 @@ export class VueFroala extends Vue {
 
             if (this.hasSpecialTag) {
                 this.setSpecialTagContent();
-            } else {
-                this.setNormalTagContent(firstTime);
-            }
-        }
-    }
-
-    private setNormalTagContent(firstTime: boolean = false): void {
-        if (firstTime) {
-            this.registerEvent(this._$element, 'froalaEditor.initialized', () => {
+            } else if (!firstTime) {
                 this.htmlSet();
-            });
-        } else {
-            this.htmlSet();
+            }
         }
     }
 
@@ -314,13 +316,11 @@ export class VueFroala extends Vue {
 
     private destroyEditor(): void {
         if (this._$element) {
-
             this.listeningEvents && this._$element.off(this.listeningEvents.join(' '));
-            this._$editor.off('keyup');
-            this._$element.froalaEditor('destroy');
+            this.froalaEditor.destroy();
             this.listeningEvents.length = 0;
             this._$element = undefined;
-            this.editorInitialized = false;
+            this.froalaEditor = undefined;
         }
     }
 
@@ -358,18 +358,6 @@ export class VueFroala extends Vue {
         this.$emit('input', modelContent);
     }
 
-    private initListeners(): void {
-        // bind contentChange and keyup event to froalaModel
-        this.registerEvent(this._$element, 'froalaEditor.contentChanged', () => {
-            this.updateModel();
-        });
-        if (this.currentConfig.immediateVueModelUpdate) {
-            this.registerEvent(this._$editor, 'keyup', () => {
-                this.updateModel();
-            });
-        }
-    }
-
     private registerEvent(element: any, eventName: any, callback: any): void {
         if (!element || !eventName || !callback) {
             return;
@@ -393,10 +381,10 @@ export class VueFroala extends Vue {
     }
 
     private htmlSet(): void {
-        this._$element.froalaEditor('html.set', this.model || '', true);
+        this.froalaEditor.html.set(this.model || '', true);
         // This will reset the undo stack everytime the model changes externally. Can we fix this?
-        this._$element.froalaEditor('undo.reset');
-        this._$element.froalaEditor('undo.saveStep');
+        this.froalaEditor.undo.reset();
+        this.froalaEditor.undo.saveStep();
     }
 }
 
