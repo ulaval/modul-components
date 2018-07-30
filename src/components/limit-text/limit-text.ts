@@ -26,7 +26,7 @@ export class MLimitText extends ModulVue {
     public closeLabel: string;
 
     private reduceContent: string = '';
-    private originalContent: string = '';
+    private testingContent: string = '';
     private fullContent: string = '';
     private internalOpen: boolean = false;
     private hasFinish: boolean = false;
@@ -34,11 +34,38 @@ export class MLimitText extends ModulVue {
     private el: HTMLElement;
     private initLineHeigh: any = '';
     private maxHeight: number = 0;
+    private observer: any;
 
     protected mounted(): void {
         this.internalOpen = this.open;
-        this.originalContent = this.$refs.originalText['innerHTML'];
-        this.el = this.$refs.originalText as HTMLElement;
+        // ------------ Resize section ------------
+        this.$nextTick(() => {
+            this.as<ElementQueries>().$on('resizeDone', this.reset);
+        });
+        // ---------------------------------------
+
+        // ------------ Watch slot content -------
+        this.observer = new MutationObserver(() => {
+            // tslint:disable-next-line:no-console
+            console.log('in');
+            this.reset();
+        });
+        this.observer.observe(this.$refs.originalText, { subtree: true, childList: true, characterData: true });
+        // ---------------------------------------
+
+        this.initialize();
+    }
+
+    protected destroyed(): void {
+        if (this.child) {
+            this.child.$off('click');
+        }
+    }
+
+    private initialize(): void {
+        this.el = this.$refs.testingText as HTMLElement;
+        this.el.innerHTML = this.$refs.originalText['innerHTML'];
+        this.testingContent = this.el.innerHTML;
         this.el.style.whiteSpace = 'nowrap';
         for (let i: number = 1; i < this.el.children.length; i++) {
             (this.el.children[i] as HTMLElement).style.display = 'none';
@@ -51,26 +78,14 @@ export class MLimitText extends ModulVue {
         this.maxHeight = this.lines * this.initLineHeigh;
 
         // Generate the full content - Add the close link if an HTML tag is present
-        if (this.originalContent.match('</')) {
-            let tagIndex: number = this.originalContent.lastIndexOf('</');
-            this.fullContent = this.originalContent.substring(0,tagIndex) + this.closeLink + this.originalContent.substring(tagIndex);
+        if (this.testingContent.match('</')) {
+            let tagIndex: number = this.testingContent.lastIndexOf('</');
+            this.fullContent = this.testingContent.substring(0,tagIndex) + this.closeLink + this.testingContent.substring(tagIndex);
         } else {
-            this.fullContent = this.originalContent + this.closeLink;
+            this.fullContent = this.testingContent + this.closeLink;
         }
         // Get the limited text
         this.adjustText();
-
-        // ------------ Resize section ------------
-        this.$nextTick(() => {
-            this.as<ElementQueries>().$on('resizeDone', this.reset);
-        });
-        // ---------------------------------------
-    }
-
-    protected destroyed(): void {
-        if (this.child) {
-            this.child.$off('click');
-        }
     }
 
     private adjustText(): void {
@@ -95,10 +110,9 @@ export class MLimitText extends ModulVue {
 
     private reset(): void {
         this.hasFinish = false;
-        this.el.innerHTML = this.originalContent;
         this.reduceContent = '';
         this.$nextTick(() => {
-            this.adjustText();
+            this.initialize();
         });
     }
 

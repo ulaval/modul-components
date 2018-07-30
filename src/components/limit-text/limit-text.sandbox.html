@@ -200,4 +200,13 @@
                 eu id consequat esse veniam.</p>
         </m-limit-text>
     </div>
+    <h3>Dynamic text, 2 lines</h3>
+    <p class="m-u--margin-bottom">Exemple of dynamic text with 2 lines limit. Change text by pressing button</p>
+    <div>
+        <m-button @click="changingText">Change text</m-button>
+        <m-limit-text lines="2">
+            <p>{{ texte }}</p>
+        </m-limit-text>
+    </div>
+
 </div>
