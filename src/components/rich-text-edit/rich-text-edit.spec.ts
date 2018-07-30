@@ -2,7 +2,7 @@ import { shallow, Wrapper } from '../../../node_modules/@vue/test-utils';
 import Vue from '../../../node_modules/vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
-import { MRichTextEdit } from './rich-text-edit';
+import { MRichTextEdit, MRichTextEditMode } from './rich-text-edit';
 import { MRichTextEditorStandardOptions } from './rich-text-edit-options';
 import RichTextLicensePlugin from './rich-text-license-plugin';
 
@@ -31,6 +31,11 @@ describe('MRichTextEdit', () => {
     });
 
     describe('In standard Mode', () => {
+        beforeEach(() => {
+            wrapper.setProps({
+                mode: MRichTextEditMode.STANDARD
+            });
+        });
         it('default options are standard default options', () => {
             expect(richTextEditor.getDefaultOptions()).toEqual(defaultOptions);
         });
