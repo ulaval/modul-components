@@ -54,7 +54,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
     public scrollableContainer: string;
 
     protected id: string = `mrich-text-${uuid.generate()}`;
-    protected get internalOptions(): any {
+    public get internalOptions(): any {
         const propOptions: any = {
             placeholderText: this.as<InputManagement>()!.placeholder
         };
@@ -64,27 +64,22 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
         return Object.assign(this.getDefaultOptions(), propOptions);
     }
 
-    protected get froalaLicenseKey(): string {
+    public get froalaLicenseKey(): string {
         return this.$license.getLicense<string>(RICH_TEXT_LICENSE_KEY) || '';
     }
 
-    private tag: string = 'textarea';
-
-    protected mounted(): void {
-        this.as<InputState>().getInput()!.id = this.id;
-    }
-
-    protected refreshModel(newValue: string): void {
-        this.$emit('input', newValue);
-    }
-
-    protected getDefaultOptions(): MRichTextEditorDefaultOptions {
+    public getDefaultOptions(): MRichTextEditorDefaultOptions {
         if (this.mode === MRichTextEditMode.STANDARD) {
             return new MRichTextEditorStandardOptions(this.froalaLicenseKey, this.$i18n.currentLang());
         }
 
         throw new Error(`rich-text-edit: mode ${this.mode} is not a valid mode.  See MRichTextEditMode Enum for a list of compatible modes.`);
     }
+
+    protected refreshModel(newValue: string): void {
+        this.$emit('input', newValue);
+    }
+
 }
 
 export class RichTextLicensePlugin implements PluginObject<RichTextLicensePluginOptions | undefined> {

@@ -17,7 +17,7 @@
         "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
         "start": "webpack-dev-server --config conf/webpack.config.js --content-base src --port 8080 --history-api-fallback --host 0.0.0.0 --disable-host-check --inline=false",
         "unit": "jest --verbose --silent",
-        "unitwatch": "jest --watch --verbose --silent",
+        "unitwatch": "jest --watch --verbose",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
         "unitall": "jest --ci --coverage --testResultsProcessor=./tests/jest/ci-test-processor",
         "e2e": "node tests/e2e/index.js",
@@ -46,7 +46,8 @@
             "node"
         ],
         "moduleNameMapper": {
-            "^(.+\\.html)(\\?style=\\..+)?$": "$1"
+            "^(.+\\.html)(\\?style=\\..+)?$": "$1",
+            "\\.min.(css|less|sass|scss)$": "<rootDir>/tests/jest/jest-ignore.js"
         },
         "snapshotSerializers": [
             "<rootDir>/node_modules/jest-serializer-vue"
