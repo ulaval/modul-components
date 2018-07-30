@@ -115,7 +115,6 @@ describe('MTreeNode', () => {
                 beforeEach(() => {
                     node = TREE_NODE_WITHOUT_CHILDREN;
                     initializeShallowWrapper();
-                    wrapper.setMethods({ generateErrorTree: jest.fn() });
                 });
 
                 it(`Should render correctly`, () => {
@@ -137,8 +136,14 @@ describe('MTreeNode', () => {
                     expect(isValid).toBeTruthy();
                 });
 
-                it(`We don't emit generateErrorTree`, () => {
+                it(`We don't generate an error`, () => {
+                    wrapper.setMethods({ generateErrorTree: jest.fn() });
+
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
+                });
+
+                it(`We don't emit generateErrorTree`, () => {
+                    expect(wrapper.emitted('generateErrorTree')).toBeFalsy();
                 });
             });
 
@@ -151,10 +156,17 @@ describe('MTreeNode', () => {
 
                 it(`The node is not valid`, () => {
                     expect(wrapper.vm.validNode).toBeFalsy();
+                });
+
+                it(`We generate an error`, () => {
+                    wrapper.setMethods({ generateErrorTree: jest.fn() });
+
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalledWith();
                 });
 
                 it(`We emit generateErrorTree`, () => {
+                    wrapper.vm.generateErrorTree();
+
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalledWith();
                 });
             });
@@ -166,7 +178,6 @@ describe('MTreeNode', () => {
             beforeEach(() => {
                 node = TREE_NODE_WITH_CHILDREN_EMPTY;
                 initializeShallowWrapper();
-                wrapper.setMethods({ generateErrorTree: jest.fn() });
             });
 
             it(`Should render correctly`, () => {
@@ -177,8 +188,14 @@ describe('MTreeNode', () => {
                 expect(wrapper.vm.hasValidChildren).toBeTruthy();
             });
 
-            it(`We don't emit generateErrorTree`, () => {
+            it(`We don't generate an error`, () => {
+                wrapper.setMethods({ generateErrorTree: jest.fn() });
+
                 expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
+            });
+
+            it(`We don't emit generateErrorTree`, () => {
+                expect(wrapper.emitted('generateErrorTree')).toBeFalsy();
             });
 
         });
@@ -190,7 +207,6 @@ describe('MTreeNode', () => {
                 beforeEach(() => {
                     node = TREE_NODE_WITH_CHILDREN;
                     initializeShallowWrapper();
-                    wrapper.setMethods({ generateErrorTree: jest.fn() });
                 });
 
                 it(`Should render correctly`, () => {
@@ -205,8 +221,14 @@ describe('MTreeNode', () => {
                     expect(wrapper.vm.hasValidChildren).toBeTruthy();
                 });
 
-                it(`We don't emit generateErrorTree`, () => {
+                it(`We don't generate an error`, () => {
+                    wrapper.setMethods({ generateErrorTree: jest.fn() });
+
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
+                });
+
+                it(`We don't emit generateErrorTree`, () => {
+                    expect(wrapper.emitted('generateErrorTree')).toBeFalsy();
                 });
 
             });
@@ -216,15 +238,22 @@ describe('MTreeNode', () => {
                 beforeEach(() => {
                     node = TREE_NODE_WITH_CHILDREN_NOT_VALID;
                     initializeShallowWrapper();
-                    wrapper.setMethods({ generateErrorTree: jest.fn() });
                 });
 
                 it(`The node is not valid`, () => {
                     expect(wrapper.vm.hasValidChildren).toBeFalsy();
                 });
 
-                it(`We emit generateErrorTree`, () => {
+                it(`We generate an error`, () => {
+                    wrapper.setMethods({ generateErrorTree: jest.fn() });
+
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalledWith();
+                });
+
+                it(`We emit generateErrorTree`, () => {
+                    wrapper.vm.generateErrorTree();
+
+                    expect(wrapper.emitted('generateErrorTree')).toBeTruthy();
                 });
 
             });
