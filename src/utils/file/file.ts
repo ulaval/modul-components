@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from 'axios';
 import Vue, { PluginObject } from 'vue';
 
+import { FileMixin } from '../../mixins/file/file';
 import { HttpService } from '../http/http';
 import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
@@ -109,8 +110,8 @@ interface FileStoreRx extends Vue {
 }
 
 const extractExtension: (file: File) => string = (file: File): string => {
-    const match: RegExpMatchArray | null = file.name.match(/\.([a-zA-Z0-9]{3,4})$/);
-    return match ? match[1].toLowerCase() : '';
+    let fileMixin: FileMixin = new FileMixin();
+    return fileMixin.extractFileExtension(file.name);
 };
 
 class FileStore {

@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+import { FileMixin } from '../../mixins/file/file';
 import { ModulVue } from '../../utils/vue/vue';
 import { FILE_TREE_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
@@ -11,8 +12,13 @@ import WithRender from './file-tree.html';
 
 const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
 const FOLDER_CLOSED: string = 'm-svg__file-zip';
+
 @WithRender
-@Component
+@Component({
+    mixins: [
+        FileMixin
+    ]
+})
 export class MFileTree extends ModulVue {
 
     @Prop()
@@ -29,7 +35,7 @@ export class MFileTree extends ModulVue {
     }
 
     public get extensionFile(): string {
-        return '.' + this.file.nodeId.split('.').pop() as string;
+        return '.' + this.as<FileMixin>().extractFileExtension(this.file.nodeId);
     }
 
 }
