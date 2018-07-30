@@ -165,6 +165,10 @@ export class VueFroala extends Vue {
                     this.hideToolbar();
                     window.addEventListener('resize', this.onResize);
                     this.htmlSet();
+
+                    if (editor.helpers.isMobile()) {
+                        editor.fullscreen.toggle();
+                    }
                 },
                 [froalaEvents.ContentChanged]: (_e, _editor) => {
                     this.updateModel();
@@ -177,12 +181,6 @@ export class VueFroala extends Vue {
                         this.$emit('focus');
                         this.showToolbar();
                         this.isFocused = true;
-
-                        // uncomment when  https://github.com/froala/wysiwyg-editor/issues/2988 is fixed
-                        // auto full-screen on mobiles
-                        // if (editor.helpers.isMobile()) {
-                        //     editor.fullscreen.toggle();
-                        // }
                     }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
