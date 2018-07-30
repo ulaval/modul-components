@@ -200,7 +200,6 @@ export class MLimitText extends ModulVue {
     @Watch('open')
     private openChanged(open: boolean): void {
         this.internalOpen = open;
-        this.$emit('change', open);
     }
 
     private openText(): void {
