@@ -3,6 +3,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
+import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_NAME } from '../component-names';
 import NavbarItemPlugin, { MNavbarItem } from '../navbar-item/navbar-item';
 import WithRender from './navbar.html?style=./navbar.scss';
@@ -27,18 +28,16 @@ interface NavbarItems {
 }
 
 export enum MNavbarSkin {
+    Arrow = 'arrow',
     Light = 'light',
     Darker = 'darker',
     Darkest = 'darkest',
     LightTab = 'light-tab',
-    DarkTab = 'dark-tab',
-    Dark = 'dark',
-    Tab = 'tab',
     Plain = 'plain',
     Soft = 'soft',
-    Simple = 'simple',
-    Arrow = 'arrow'
+    Simple = 'simple'
 }
+
 export enum MNavbarMaxWidth {
     XLarge = '1400px',
     Large = '1200px',
@@ -56,19 +55,16 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Prop()
     public selected: string;
     @Prop({
-        default: MNavbarSkin.Tab,
+        default: MNavbarSkin.Light,
         validator: value =>
+            value === MNavbarSkin.Arrow ||
             value === MNavbarSkin.Light ||
             value === MNavbarSkin.Darker ||
             value === MNavbarSkin.Darkest ||
             value === MNavbarSkin.LightTab ||
-            value === MNavbarSkin.DarkTab ||
-            value === MNavbarSkin.Dark ||
-            value === MNavbarSkin.Tab ||
             value === MNavbarSkin.Plain ||
             value === MNavbarSkin.Soft ||
-            value === MNavbarSkin.Simple ||
-            value === MNavbarSkin.Arrow
+            value === MNavbarSkin.Simple
     })
     public skin: string;
     @Prop()
@@ -83,7 +79,8 @@ export class MNavbar extends BaseNavbar implements Navbar {
     public $refs: {
         buttonRight: HTMLElement,
         list: HTMLElement,
-        wrap: HTMLElement
+        wrap: HTMLElement,
+        contents: HTMLElement
     };
 
     private animActive: boolean = false;
@@ -220,7 +217,11 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private get buttonSkin(): string {
-        return this.skin === MNavbarSkin.Dark ? MNavbarSkin.Dark : MNavbarSkin.Light;
+        return this.skin === MNavbarSkin.Darker || this.skin === MNavbarSkin.Darkest ? 'dark' : 'light';
+    }
+
+    private get buttonRipple(): boolean {
+        return this.skin !== MNavbarSkin.LightTab;
     }
 
     private get isLightSkin(): boolean {

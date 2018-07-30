@@ -1,143 +1,91 @@
 <div>
     <!-- Sandbox template -->
-    <h3>Navbar skins</h3>
+    <h2>Navbar skins</h2>
     <p class="m-u--margin-bottom">
         Show the different skins possible for the component
     </p>
 
-    <h2>Skin tab et default</h2>
-    <m-navbar :selected.sync="selected">
-        <m-navbar-item value="salut" :disabled="true">Salut</m-navbar-item>
-        <m-navbar-item value="Bonjour">Bonjour</m-navbar-item>
-        <m-navbar-item value="TVA">TVA</m-navbar-item>
-        <m-navbar-item value="salut1">Salut1</m-navbar-item>
-        <m-navbar-item value="Bonjour1">Bonjour1</m-navbar-item>
-        <m-navbar-item value="TVA1">TVA1</m-navbar-item>
-        <m-navbar-item value="salut2">Salut2</m-navbar-item>
-        <m-navbar-item value="Bonjour2">Bonjour2</m-navbar-item>
-        <m-navbar-item value="TVA2">TVA2</m-navbar-item>
-        <m-navbar-item value="salut3">Salut3</m-navbar-item>
-        <m-navbar-item value="Bonjour3">Bonjour3</m-navbar-item>
-        <m-navbar-item value="TVA3">TVA3</m-navbar-item>
-        <m-navbar-item value="salut4">Salut4</m-navbar-item>
-        <m-navbar-item value="Bonjour4">Bonjour4</m-navbar-item>
-        <m-navbar-item value="TVA4">TVA4</m-navbar-item>
+    <h3>Skin light (default)</h3>
+    <m-navbar :selected.sync="selectedItem">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9 singes
+        </m-navbar-item>
+        <m-navbar-item value="item10">
+            10 chèvres et 10 moutons
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11 barnacles magestueuses volant vers le lointain
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12 zaine d'oeufs
+        </m-navbar-item>
     </m-navbar>
 
-    <h2>Skin soft</h2>
-    <m-navbar :selected.sync="selected" skin="soft" style="background: #09f">
-        <m-navbar-item value="salut" :disabled="true">Salut</m-navbar-item>
-        <m-navbar-item value="Bonjour">Bonjour</m-navbar-item>
-        <m-navbar-item value="TVA">TVA</m-navbar-item>
-        <m-navbar-item value="salut1">Salut1</m-navbar-item>
-        <m-navbar-item value="Bonjour1">Bonjour1</m-navbar-item>
-        <m-navbar-item value="TVA1">TVA1</m-navbar-item>
-        <m-navbar-item value="salut2">Salut2</m-navbar-item>
-        <m-navbar-item value="Bonjour2">Bonjour2</m-navbar-item>
-        <m-navbar-item value="TVA2">TVA2</m-navbar-item>
-        <m-navbar-item value="salut3">Salut3</m-navbar-item>
-        <m-navbar-item value="Bonjour3">Bonjour3</m-navbar-item>
-        <m-navbar-item value="TVA3">TVA3</m-navbar-item>
-        <m-navbar-item value="salut4">Salut4</m-navbar-item>
-        <m-navbar-item value="Bonjour4">Bonjour4</m-navbar-item>
-        <m-navbar-item value="TVA4">TVA4</m-navbar-item>
+    <h3>Skin arrow</h3>
+    <m-navbar skin="arrow" :selected.sync="selectedItem">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9 singes
+        </m-navbar-item>
+        <m-navbar-item value="item10">
+            10 chèvres et 10 moutons
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11 barnacles magestueuses volant vers le lointain
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12 zaine d'oeufs
+        </m-navbar-item>
     </m-navbar>
 
-    <h2>Skin light</h2>
-    <m-navbar :selected.sync="selected" skin="light" max-width="300px">
-        <m-navbar-item value="salut" :disabled="true">Salut</m-navbar-item>
-        <m-navbar-item value="Bonjour">Bonjour</m-navbar-item>
-        <m-navbar-item value="TVA">TVA</m-navbar-item>
-        <m-navbar-item value="salut1">Salut1</m-navbar-item>
-        <m-navbar-item value="Bonjour1">Bonjour1</m-navbar-item>
-        <m-navbar-item value="TVA1">TVA1</m-navbar-item>
-        <m-navbar-item value="salut2">Salut2</m-navbar-item>
-        <m-navbar-item value="Bonjour2">Bonjour2</m-navbar-item>
-        <m-navbar-item value="TVA2">TVA2</m-navbar-item>
-        <m-navbar-item value="salut3">Salut3</m-navbar-item>
-        <m-navbar-item value="Bonjour3">Bonjour3</m-navbar-item>
-        <m-navbar-item value="TVA3">TVA3</m-navbar-item>
-        <m-navbar-item value="salut4">Salut4</m-navbar-item>
-        <m-navbar-item value="Bonjour4">Bonjour4</m-navbar-item>
-        <m-navbar-item value="TVA4">TVA4</m-navbar-item>
-    </m-navbar>
-
-    <h2>Skin dark</h2>
-    <m-navbar :selected.sync="selected" skin="dark">
-        <m-navbar-item value="salut" :disabled="true">Salut</m-navbar-item>
-        <m-navbar-item value="Bonjour">Bonj our B onjour Bo njour Bon jour Bonjour</m-navbar-item>
-        <m-navbar-item value="TVA">TVA</m-navbar-item>
-        <m-navbar-item value="salut1">Salut1</m-navbar-item>
-        <m-navbar-item value="Bonjour1">Bonjour1</m-navbar-item>
-        <m-navbar-item value="TVA1">TVA1</m-navbar-item>
-        <m-navbar-item value="salut2">Salut2</m-navbar-item>
-        <m-navbar-item value="Bonjour2">Bonjour2</m-navbar-item>
-        <m-navbar-item value="TVA2">TVA2</m-navbar-item>
-        <m-navbar-item value="salut3">Salut3</m-navbar-item>
-        <m-navbar-item value="Bonjour3">Bonjour3</m-navbar-item>
-        <m-navbar-item value="TVA3">TVA3</m-navbar-item>
-        <m-navbar-item value="salut4">Salut4</m-navbar-item>
-        <m-navbar-item value="Bonjour4">Bonjour4</m-navbar-item>
-        <m-navbar-item value="TVA4">TVA4</m-navbar-item>
-    </m-navbar>
-
-    <h2>Skin plain</h2>
-    <m-navbar :selected.sync="selected" skin="plain">
-        <m-navbar-item value="salut">Salut</m-navbar-item>
-        <m-navbar-item value="Bonjour">Bonjour</m-navbar-item>
-        <m-navbar-item value="TVA">TVA</m-navbar-item>
-        <m-navbar-item value="salut1">Salut1</m-navbar-item>
-        <m-navbar-item value="Bonjour1">Bonjour1</m-navbar-item>
-        <m-navbar-item value="TVA1">TVA1</m-navbar-item>
-        <m-navbar-item value="salut2">Salut2</m-navbar-item>
-        <m-navbar-item value="Bonjour2">Bonjour2</m-navbar-item>
-        <m-navbar-item value="TVA2">TVA2</m-navbar-item>
-        <m-navbar-item value="salut3">Salut3</m-navbar-item>
-        <m-navbar-item value="Bonjour3">Bonjour3</m-navbar-item>
-        <m-navbar-item value="TVA3">TVA3</m-navbar-item>
-        <m-navbar-item value="salut4">Salut4</m-navbar-item>
-        <m-navbar-item value="Bonjour4">Bonjour4</m-navbar-item>
-        <m-navbar-item value="TVA4">TVA4</m-navbar-item>
-    </m-navbar>
-
-    <h2>Skin simple</h2>
-    <m-navbar :selected.sync="selected" skin="simple">
-        <m-navbar-item value="salut" :disabled="true">Salut</m-navbar-item>
-        <m-navbar-item value="Bonjour">Bonjour</m-navbar-item>
-        <m-navbar-item value="TVA">TVA</m-navbar-item>
-        <m-navbar-item value="salut1">Salut1</m-navbar-item>
-        <m-navbar-item value="Bonjour1">Bonjour1</m-navbar-item>
-        <m-navbar-item value="TVA1">TVA1</m-navbar-item>
-        <m-navbar-item value="salut2">Salut2</m-navbar-item>
-        <m-navbar-item value="Bonjour2">Bonjour2</m-navbar-item>
-        <m-navbar-item value="TVA2">TVA2</m-navbar-item>
-        <m-navbar-item value="salut3">Salut3</m-navbar-item>
-        <m-navbar-item value="Bonjour3">Bonjour3</m-navbar-item>
-        <m-navbar-item value="TVA3">TVA3</m-navbar-item>
-        <m-navbar-item value="salut4">Salut4</m-navbar-item>
-        <m-navbar-item value="Bonjour4">Bonjour4</m-navbar-item>
-        <m-navbar-item value="TVA4">TVA4</m-navbar-item>
-    </m-navbar>
-
-    <h2>Skin arrow</h2>
-    <m-navbar :selected.sync="selected" skin="arrow" max-width="200px">
-        <m-navbar-item value="salut" :disabled="true">Salut</m-navbar-item>
-        <m-navbar-item value="Bonjour">Bonjour</m-navbar-item>
-        <m-navbar-item value="TVA">TVA</m-navbar-item>
-        <m-navbar-item value="salut1">Salut1</m-navbar-item>
-        <m-navbar-item value="Bonjour1">Bonjour1</m-navbar-item>
-        <m-navbar-item value="TVA1">TVA1</m-navbar-item>
-        <m-navbar-item value="salut2">Salut2</m-navbar-item>
-        <m-navbar-item value="Bonjour2">Bonjour2</m-navbar-item>
-        <m-navbar-item value="TVA2">TVA2</m-navbar-item>
-        <m-navbar-item value="salut3">Salut3</m-navbar-item>
-        <m-navbar-item value="Bonjour3">Bonjour3</m-navbar-item>
-        <m-navbar-item value="TVA3">TVA3</m-navbar-item>
-        <m-navbar-item value="salut4">Salut4</m-navbar-item>
-        <m-navbar-item value="Bonjour4">Bonjour4</m-navbar-item>
-        <m-navbar-item value="TVA4">TVA4</m-navbar-item>
-    </m-navbar>
-    <h4 class="m-u--margin-bottom--s">darker & darkest, used together for main navigation</h4>
+    <h3>Skin darker</h3>
     <m-navbar skin="darker" :selected.sync="selectedItem">
         <m-navbar-item value="item1">
             1 souris verte
@@ -176,6 +124,8 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
+
+    <h3>Skin darkest</h3>
     <m-navbar skin="darkest" :selected.sync="selectedItem">
         <m-navbar-item value="item1">
             1 souris verte
@@ -214,9 +164,10 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
-    <h4 class="m-u--margin-bottom--s">light</h4>
-    <m-navbar skin="light" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
+
+    <h3>Skin soft</h3>
+    <m-navbar skin="soft" :selected.sync="selectedItem" style="background: #09f;">
+        <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
         <m-navbar-item value="item2">
@@ -253,9 +204,10 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
-    <h4 class="m-u--margin-bottom--s">plain (aka no style)</h4>
-    <m-navbar skin="plain" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
+
+    <h3>Skin simple</h3>
+    <m-navbar skin="simple" :selected.sync="selectedItem">
+        <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
         <m-navbar-item value="item2">
@@ -292,87 +244,10 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
-    <h4 class="m-u--margin-bottom--s">arrow</h4>
-    <m-navbar skin="arrow" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
-            1 souris verte
-        </m-navbar-item>
-        <m-navbar-item value="item2">
-            2
-        </m-navbar-item>
-        <m-navbar-item value="item3">
-            3
-        </m-navbar-item>
-        <m-navbar-item value="item4">
-            4
-        </m-navbar-item>
-        <m-navbar-item value="item5">
-            5
-        </m-navbar-item>
-        <m-navbar-item value="item6">
-            6
-        </m-navbar-item>
-        <m-navbar-item value="item7">
-            7
-        </m-navbar-item>
-        <m-navbar-item value="item8">
-            8
-        </m-navbar-item>
-        <m-navbar-item value="item9">
-            9 singes
-        </m-navbar-item>
-        <m-navbar-item value="item10">
-            10 chèvres et 10 moutons
-        </m-navbar-item>
-        <m-navbar-item value="item11">
-            11 barnacles magestueuses volant vers le lointain
-        </m-navbar-item>
-        <m-navbar-item value="item12">
-            12 zaine d'oeufs
-        </m-navbar-item>
-    </m-navbar>
-    <h4 class="m-u--margin-bottom--s">light-tab</h4>
+
+    <h3>Skin light-tab</h3>
     <m-navbar skin="light-tab" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
-            1 souris verte
-        </m-navbar-item>
-        <m-navbar-item value="item2">
-            2
-        </m-navbar-item>
-        <m-navbar-item value="item3">
-            3
-        </m-navbar-item>
-        <m-navbar-item value="item4">
-            4
-        </m-navbar-item>
-        <m-navbar-item value="item5">
-            5
-        </m-navbar-item>
-        <m-navbar-item value="item6">
-            6
-        </m-navbar-item>
-        <m-navbar-item value="item7">
-            7
-        </m-navbar-item>
-        <m-navbar-item value="item8">
-            8
-        </m-navbar-item>
-        <m-navbar-item value="item9">
-            9 singes
-        </m-navbar-item>
-        <m-navbar-item value="item10">
-            10 chèvres et 10 moutons
-        </m-navbar-item>
-        <m-navbar-item value="item11">
-            11 barnacles magestueuses volant vers le lointain
-        </m-navbar-item>
-        <m-navbar-item value="item12">
-            12 zaine d'oeufs
-        </m-navbar-item>
-    </m-navbar>
-    <h4 class="m-u--margin-bottom--s">dark-tab</h4>
-    <m-navbar skin="dark-tab" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
+        <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
         <m-navbar-item value="item2">

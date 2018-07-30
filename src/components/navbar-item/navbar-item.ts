@@ -32,7 +32,6 @@ export class MNavbarItem extends ModulVue {
     private parentNavbar: Navbar | null = null;
 
     protected mounted(): void {
-
         let parentNavbar: BaseNavbar | undefined;
         parentNavbar = this.getParent<BaseNavbar>(
             p => p instanceof BaseNavbar || // these will fail with Jest, but should pass in prod mode
@@ -45,43 +44,61 @@ export class MNavbarItem extends ModulVue {
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
         }
+    }
 
+    private stripHtml(html): string {
+        // Create a new div element
+        let temporalDivElement: HTMLElement = document.createElement('div');
+        // Set the HTML content with the providen
+        temporalDivElement.innerHTML = html;
+        // Retrieve the text property of the element (cross-browser support)
+        return temporalDivElement.textContent || temporalDivElement.innerText || '';
     }
 
     private setDimension(): void {
-        let lineHeight: number = parseFloat(window.getComputedStyle(this.$el).getPropertyValue('line-height'));
+        let itemEl: HTMLElement = this.$refs.item as HTMLElement;
+        let itemElComputedStyle: any = window.getComputedStyle(itemEl);
+        let lineHeight: number = parseFloat(itemElComputedStyle.getPropertyValue('line-height'));
+
         // must subtract the padding, create a infinite loop
-        let pt: number = parseInt(window.getComputedStyle(this.$el).getPropertyValue('padding-top'), 10);
-        let pb: number = parseInt(window.getComputedStyle(this.$el).getPropertyValue('padding-bottom'), 10);
+        let pt: number = parseInt(itemElComputedStyle.getPropertyValue('padding-top'), 10);
+        let pb: number = parseInt(itemElComputedStyle.getPropertyValue('padding-bottom'), 10);
         let paddingH: number = pt + pb;
 
-        let h: number = this.$el.clientHeight - paddingH;
-        let w: number = this.$el.clientWidth;
+        let h: number = itemEl.clientHeight - paddingH;
+
+        let itemValueLength: any = this.stripHtml(itemEl.innerHTML).trim().length;
+        let w: number = itemEl.clientWidth;
         let lines: number = Math.floor(h / lineHeight);
 
-        if (lines > 2) {
+        if (itemValueLength > 30 && lines > 2) {
+            itemEl.style.removeProperty('white-space');
+            itemEl.style.maxWidth = 'none';
 
-            this.$el.style.maxWidth = 'none';
             // use selected class to reserve space for when selected
+            itemEl.style.transition = 'none';
             this.$el.classList.add(SELECTEDCLASS);
             // create a infinite loop if the parent has 'align-items: stretch'
             (this.$parent.$refs.list as HTMLElement).style.alignItems = 'flex-start';
 
             do {
-
                 // increment width
                 w++;
-                this.$el.style.width = w + 'px';
+                itemEl.style.width = w + 'px';
+                this.$log.log(itemEl.style.width);
 
                 // update values
-                h = this.$el.clientHeight - paddingH;
+                h = itemEl.clientHeight - paddingH;
                 lines = Math.floor(h / lineHeight);
 
             } while (lines > 2);
 
             // reset styles once completed
             this.$el.classList.remove(SELECTEDCLASS);
+            itemEl.style.removeProperty('transition');
             (this.$parent.$refs.list as HTMLElement).style.removeProperty('align-items');
+        } else {
+            itemEl.style.whiteSpace = 'nowrap';
         }
     }
 

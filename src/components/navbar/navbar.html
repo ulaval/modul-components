@@ -1,15 +1,11 @@
-              'm--is-skin-tab': skin == 'tab',
-              'm--is-skin-light': skin == 'light',
-              'm--is-skin-dark': skin == 'dark',
-              'm--is-skin-plain': skin == 'plain',
-              'm--is-skin-soft': skin == 'soft',
-              'm--is-skin-simple': skin == 'simple',
-              'm--is-skin-arrow': skin == 'arrow',
-              'm--is-anim-ready': animReady == true }">
+<div class="m-navbar"
+     :class="['m--is-skin-' + skin,
+             { 'm--is-disabled': disabled,
+               'm--is-anim-ready': animReady }]">
     <div class="m-navbar__max-width" :style="{ maxWidth: maxWidth }">
         <transition name="m--is">
             <div ref="buttonLeft" class="m-navbar__button m--is-left" @click="scrollLeft" v-if="showArrowLeft && navigationArrow">
-                <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--left" :ripple="skin!=='tab'"></m-icon-button>
+                <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--left" :ripple="buttonRipple"></m-icon-button>
             </div>
         </transition>
         <div class="m-navbar__contents" ref="contents">
@@ -20,11 +16,10 @@
                     <li aria-hidden="true" class="m-navbar__arrow" v-if="isArrowSkin" ref="arrow"></li>
                 </ul>
             </div>
-<div class="m-navbar" :class="{ 'm--is-disabled': disabled,
         </div>
         <transition name="m--is">
             <div ref="buttonRight" class="m-navbar__button m--is-right" @click="scrollRight" v-if="showArrowRight && navigationArrow">
-                <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--right" :ripple="skin!=='tab'"></m-icon-button>
+                <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--right" :ripple="buttonRipple"></m-icon-button>
             </div>
         </transition>
     </div>

@@ -1,5 +1,9 @@
 @import 'abstracts/variables';
 
+@mixin m-navbar-linear-gradient($color, $position) {
+    background: linear-gradient(to $position, rgba($color, 1), rgba($color, 0));
+}
+
 .m-navbar {
     &__max-width {
         position: relative;
@@ -13,7 +17,7 @@
         overflow: hidden;
     }
 
-    &:not(.m--is-skin-tab) {
+    &:not(.m--is-skin-light-tab) {
         .m-navbar__button {
             &.m--is-right {
                 button {
@@ -29,25 +33,39 @@
         }
     }
 
-    &.m--is-skin-dark {
+    &.m--is-skin-darker,
+    &.m--is-skin-darkest {
+        .m-navbar__button {
+            stroke-width: 2;
+        }
+    }
+
     &.m--is-skin-darker {
-        background-color: $m-color--grey-darker;
+        background: $m-color--grey-darker;
+
+        .m-navbar__button {
+            &.m--is-right {
+                @include m-navbar-linear-gradient($m-color--grey-darker, left);
+            }
+
+            &.m--is-left {
+                @include m-navbar-linear-gradient($m-color--grey-darker, right);
+            }
+        }
     }
 
     &.m--is-skin-darkest {
         border-top: 1px solid $m-color--black;
         box-shadow: 0 0 7px $m-color--black inset;
-        background-color: $m-color--grey-darkest;
+        background: $m-color--grey-darkest;
 
         .m-navbar__button {
-            stroke-width: 2;
-
             &.m--is-right {
-                background: linear-gradient(to left, rgba($m-color--grey-darkest, 1), rgba($m-color--grey-darkest, 0));
+                @include m-navbar-linear-gradient($m-color--grey-darkest, left);
             }
 
             &.m--is-left {
-                background: linear-gradient(to right, rgba($m-color--grey-darkest, 1), rgba($m-color--grey-darkest, 0));
+                @include m-navbar-linear-gradient($m-color--grey-darkest, right);
             }
         }
     }
@@ -57,11 +75,11 @@
     &.m--is-skin-arrow {
         .m-navbar__button {
             &.m--is-right {
-                background: linear-gradient(to left, rgba($m-color--white, 1), rgba($m-color--white, 0));
+                @include m-navbar-linear-gradient($m-color--white, left);
             }
 
             &.m--is-left {
-                background: linear-gradient(to right, rgba($m-color--white, 1), rgba($m-color--white, 0));
+                @include m-navbar-linear-gradient($m-color--white, right);
             }
         }
     }
@@ -83,7 +101,24 @@
         }
     }
 
-    &.m--is-skin-tab {
+    &.m--is-skin-arrow {
+        &::before {
+            position: absolute;
+            right: 0;
+            bottom: $m-margin--s;
+            left: 0;
+            content: '';
+            width: 100%;
+            height: $m-border-width--s;
+            background: $m-color--text;
+        }
+
+        .m-navbar__button {
+            bottom: 7px; // Magic number
+        }
+    }
+
+    &.m--is-skin-light-tab {
         .m-navbar__button {
             $m-navbar--button-width: 14px;
 
@@ -124,23 +159,6 @@
         background: rgba($m-color--white, 0.2);
     }
 
-    &.m--is-skin-arrow {
-        &::before {
-            position: absolute;
-            right: 0;
-            bottom: $m-margin--s;
-            left: 0;
-            content: '';
-            width: 100%;
-            height: $m-border-width--s;
-            background: $m-color--text;
-        }
-
-        .m-navbar__button {
-            bottom: 7px; // Magic number
-        }
-    }
-
     &.m--is-anim-ready {
         .m-navbar {
             &__button {
@@ -175,10 +193,6 @@
 
         &.m--is-left {
             left: 0;
-        .m--is-skin-darker,
-        .m--is-skin-darkest & {
-            color: $m-color--grey-light;
-            stroke-width: 2;
         }
 
         &.m--is-right {
@@ -234,50 +248,6 @@
         &::after {
             color: $m-color--white;
             top: -1px;
-        }
-    }
-
-    &-item {
-        position: relative;
-        display: flex;
-        align-items: center;
-        user-select: none;
-
-        &:not(.m--is-disabled) {
-            &,
-            a,
-            a:visited,
-            button {
-                cursor: pointer;
-            }
-        }
-
-        &.m--is-disabled {
-            &,
-            a,
-            a:visited,
-            button {
-                cursor: not-allowed;
-            }
-        }
-
-        &,
-        a,
-        a:visited,
-        button {
-            font-family: $m-font-family;
-            font-size: $m-font-size;
-            font-weight: $m-font-weight;
-        }
-
-        button {
-            border: none;
-            background: none;
-        }
-
-        &,
-        :focus {
-            outline: none;
         }
     }
 }

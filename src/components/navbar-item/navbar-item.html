@@ -3,6 +3,7 @@
              'm--is-disabled': disabled}"
     role="menuitem">
     <router-link class="m-navbar-item__contents"
+                 ref="item"
                  :to="url" v-if="url && !disabled"
                  @click="onClick"
                  @keyup.enter="onClick"
@@ -15,6 +16,7 @@
         <slot></slot>
     </router-link>
     <div class="m-navbar-item__contents"
+         ref="item"
          :tabindex="disabled ? '-1' : '0'"
          @click="onClick"
          @keyup.enter="onClick"
