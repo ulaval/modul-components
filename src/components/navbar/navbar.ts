@@ -223,7 +223,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
         let firstElement: HTMLElement = navbarItems[0].$el;
         // find last item
         let lastElement: HTMLElement = navbarItems[navbarItems.length - 1].$el;
-        let test: object;
 
         return {
             elements: navbarItems,
