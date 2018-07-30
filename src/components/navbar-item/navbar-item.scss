@@ -5,6 +5,13 @@ a {
 }
 
 .m-navbar.m--is-skin-tab {
+// for multiline
+.m-navbar-item {
+    max-width: 200 + $m-spacing--l * 2;
+    word-break: break-word;
+}
+
+.m--is-skin-tab {
     .m-navbar-item {
         + .m-navbar-item {
             margin-left: 1px;
@@ -125,8 +132,17 @@ a {
 }
 
 .m-navbar.m--is-skin-simple {
+.m--is-skin-darker,
+.m--is-skin-darkest {
     .m-navbar-item {
         position: relative;
+        font-size: $m-font-size--h5;
+        font-weight: $m-font-weight--bold;
+        text-transform: uppercase;
+        padding: $m-spacing--l;
+        transition: color 0.4s ease;
+        justify-content: center;
+        color: $m-color--grey;
 
         &:not(.m--is-disabled):not(.m--is-selected) {
             .m-navbar-item__contents {
@@ -164,12 +180,20 @@ a {
                 transform: translate3d(0, -50%, 0);
             }
         }
+        // for multiline
+        min-width: 120  + $m-spacing--l * 2;
+
+        &:hover {
+            color: $m-color--white;
+        }
 
         &.m--is-selected {
             .m-navbar-item__contents {
                 color: $m-color--text;
                 font-weight: $m-font-weight--black;
             }
+            color: $m-color--white;
+            font-weight: $m-font-weight--black;
         }
     }
 }
@@ -177,6 +201,7 @@ a {
 .m-navbar.m--is-skin-dark {
     $m-m-navbar-item--max-width: 60px;
 
+.m--is-skin-darker {
     .m-navbar-item {
         font-size: $m-font-size--h5;
         font-weight: $m-font-weight--bold;
@@ -201,6 +226,10 @@ a {
                     color: $m-color--white;
                 }
             }
+        &::before {
+            content: '';
+            background-color: $m-color--grey-darker;
+            transition: background-color 0.4s ease;
         }
 
         &__contents {
@@ -209,6 +238,7 @@ a {
             color: $m-color--grey;
             min-width: $m-m-navbar-item--max-width;
 
+        &.m--is-selected {
             &::before {
                 content: '';
                 transition: opacity $m-transition-duration--s ease, width $m-transition-duration--l ease;
@@ -233,6 +263,25 @@ a {
                     width: $m-m-navbar-item--max-width;
                 }
             }
+.m--is-skin-darkest {
+    .m-navbar-item {
+        &:not(:last-child) {
+            &::before {
+                content: '';
+                position: absolute;
+                right: 0;
+                width: 1px;
+                height: 1em;
+                background-color: $m-color--grey;
+            }
+        }
+    }
+}
+
+.m--is-skin-arrow {
+    .m-navbar {
+        &__list {
+            padding-bottom: $m-margin--s;
         }
     }
 }
