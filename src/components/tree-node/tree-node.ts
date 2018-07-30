@@ -20,11 +20,16 @@ export class MTreeNode extends ModulVue {
     @Prop({ default: [] })
     public selectedNodes: string[];
 
-    @Prop({ default: '' })
-    public selectionIcon: string;
-
-    @Prop({ default: MSelectOption.NONE })
+    @Prop({ default: () => { return MSelectOption.NONE; },
+        validator: value =>
+            value === MSelectOption.NONE ||
+            value === MSelectOption.SINGLE ||
+            value === MSelectOption.MULTIPLE
+    })
     public selectionQuantity: MSelectOption;
+
+    @Prop({ default: 'information' })
+    public selectionIcon: string;
 
     @Prop({ default: false })
     public allOpen: boolean;
@@ -38,6 +43,10 @@ export class MTreeNode extends ModulVue {
     private internalOpen: boolean = false;
     private internalCurrentPath: string = '';
 
+    public test(): MSelectOption {
+        return MSelectOption.NONE;
+    }
+
     public selectNewNode(path: string): void {
         if (this.selectionQuantity === MSelectOption.SINGLE) {
             this.$emit('newNodeSelectected', path);
@@ -49,10 +58,24 @@ export class MTreeNode extends ModulVue {
     }
 
     public selectedNodeFound(): void {
-        this.$emit('selectedNodesFound');
+        this.$emit('selectedNodeFound');
     }
 
-    public nodeSelected(): boolean {
+    public generateErrorTree(): void {
+        this.$emit('generateErrorTree');
+    }
+
+    @Watch('allOpen')
+    public toggleAllOpen(): void {
+        this.open = this.allOpen;
+    }
+
+    protected created(): void {
+        this.propCurrentPath = this.currentPath + '/' + this.node.content.nodeId;
+        this.open = this.allOpen || (this.hasChildren && this.parentOfSelectedFile);
+    }
+
+    public get nodeSelected(): boolean {
         let isSelected: boolean = false;
         if (this.selectedNodes[0] !== undefined && this.selectedNodes[0] === this.propCurrentPath) {
             isSelected = true;
@@ -61,7 +84,7 @@ export class MTreeNode extends ModulVue {
         return isSelected;
     }
 
-    public validNode(): boolean {
+    public get validNode(): boolean {
         let valid: boolean = true;
         if (this.node.content.nodeId === undefined || !this.node.content.nodeId) {
             valid = false;
@@ -71,26 +94,12 @@ export class MTreeNode extends ModulVue {
         return valid;
     }
 
-    public generateErrorTree(): void {
-        this.$emit('generateErrorTree');
-    }
-
-    public hasValidChildren(): boolean {
-        return this.hasChildren && this.validNode();
-    }
-
-    protected created(): void {
-        this.propCurrentPath = this.currentPath + '/' + this.node.content.nodeId;
-        this.open = this.allOpen || (this.hasChildren && this.parentOfSelectedFile);
-    }
-
-    @Watch('allOpen')
-    private toggleAllOpen(): void {
-        this.open = this.allOpen;
-    }
-
     public get nodeTitle(): string {
         return (this.node.content.nodeLabel !== undefined && !!this.node.content.nodeLabel) ? this.node.content.nodeLabel : this.node.content.nodeId;
+    }
+
+    public get hasValidChildren(): boolean {
+        return this.hasChildren && this.validNode;
     }
 
     public get childrenNotEmpty(): boolean {

@@ -127,20 +127,17 @@ describe('MTreeNode', () => {
                 });
 
                 it(`The node has not valid children`, () => {
-                    let hasValidChildren: boolean = wrapper.vm.hasValidChildren();
 
-                    expect(hasValidChildren).toBeFalsy();
+                    expect(wrapper.vm.hasValidChildren).toBeFalsy();
                 });
 
                 it(`The node is valid`, () => {
-                    let isValid: boolean = wrapper.vm.validNode();
+                    let isValid: boolean = wrapper.vm.validNode;
 
                     expect(isValid).toBeTruthy();
                 });
 
                 it(`We don't emit generateErrorTree`, () => {
-                    wrapper.vm.validNode();
-
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
                 });
             });
@@ -153,16 +150,12 @@ describe('MTreeNode', () => {
                 });
 
                 it(`The node is not valid`, () => {
-                    let isValid: boolean = wrapper.vm.validNode();
-
-                    expect(isValid).toBeFalsy();
-                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
+                    expect(wrapper.vm.validNode).toBeFalsy();
+                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalledWith();
                 });
 
                 it(`We emit generateErrorTree`, () => {
-                    wrapper.vm.validNode();
-
-                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
+                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalledWith();
                 });
             });
 
@@ -181,14 +174,10 @@ describe('MTreeNode', () => {
             });
 
             it(`The node is valid`, () => {
-                let isValid: boolean = wrapper.vm.hasValidChildren();
-
-                expect(isValid).toBeTruthy();
+                expect(wrapper.vm.hasValidChildren).toBeTruthy();
             });
 
             it(`We don't emit generateErrorTree`, () => {
-                wrapper.vm.hasValidChildren();
-
                 expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
             });
 
@@ -213,14 +202,10 @@ describe('MTreeNode', () => {
                 });
 
                 it(`The node is valid`, () => {
-                    let isValid: boolean = wrapper.vm.hasValidChildren();
-
-                    expect(isValid).toBeTruthy();
+                    expect(wrapper.vm.hasValidChildren).toBeTruthy();
                 });
 
                 it(`We don't emit generateErrorTree`, () => {
-                    wrapper.vm.hasValidChildren();
-
                     expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
                 });
 
@@ -235,15 +220,11 @@ describe('MTreeNode', () => {
                 });
 
                 it(`The node is not valid`, () => {
-                    let isValid: boolean = wrapper.vm.hasValidChildren();
-
-                    expect(isValid).toBeFalsy();
+                    expect(wrapper.vm.hasValidChildren).toBeFalsy();
                 });
 
                 it(`We emit generateErrorTree`, () => {
-                    wrapper.vm.hasValidChildren();
-
-                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
+                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalledWith();
                 });
 
             });
@@ -328,7 +309,7 @@ describe('MTreeNode', () => {
                     selectedNodes = TREE_NODE_SELECTED;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.nodeSelected()).toBeTruthy();
+                    expect(wrapper.vm.nodeSelected).toBeTruthy();
                 });
             });
 
@@ -337,7 +318,7 @@ describe('MTreeNode', () => {
                     selectedNodes = TREE_NODE_SELECTED_2;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.nodeSelected()).toBeFalsy();
+                    expect(wrapper.vm.nodeSelected).toBeFalsy();
                 });
             });
 
@@ -346,7 +327,7 @@ describe('MTreeNode', () => {
                     selectedNodes = [];
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.nodeSelected()).toBeFalsy();
+                    expect(wrapper.vm.nodeSelected).toBeFalsy();
                 });
             });
         });

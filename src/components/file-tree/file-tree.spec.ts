@@ -72,21 +72,4 @@ describe(`MFileTree`, () => {
 
     });
 
-    describe(`When the node is a file`, () => {
-
-        beforeEach(() => {
-            file = TREE_NODE_FILE;
-            folder = false;
-            initializeShallowWrapper();
-        });
-        describe(`When the file type is jpg`, () => {
-
-            it(`The extensionFile should return .jpg`, () => {
-                expect(wrapper.vm.extensionFile).toEqual('.jpg');
-            });
-
-        });
-
-    });
-
 });

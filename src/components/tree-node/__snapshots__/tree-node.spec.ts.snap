@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MTreeNode Given a node When the node can and has children and the node is valid Then should render correctly 1`] = `
+exports[`MTreeNode Given a node When the node can and has children and the node is valid Should render correctly 1`] = `
 <li class="m-tree-node">
     <div class="m-tree-node__with-children">
         <div class="m-tree-node__with-children__header"><span class="m-tree-node__with-children__header__icon"></span> <span>Node 3</span></div>
@@ -13,7 +13,7 @@ exports[`MTreeNode Given a node When the node can and has children and the node 
 </li>
 `;
 
-exports[`MTreeNode Given a node When the node can have children but don't have any Then should render correctly 1`] = `
+exports[`MTreeNode Given a node When the node can have children but don't have any Should render correctly 1`] = `
 <li class="m-tree-node">
     <div class="m-tree-node__with-children">
         <div class="m-tree-node__with-children__header"><span class="m-tree-node__with-children__header__icon"></span> <span>Node 2</span></div>
@@ -26,7 +26,7 @@ exports[`MTreeNode Given a node When the node can have children but don't have a
 </li>
 `;
 
-exports[`MTreeNode Given a node When the node can't have children and the node is valid Then should render correctly 1`] = `
+exports[`MTreeNode Given a node When the node can't have children and the node is valid Should render correctly 1`] = `
 <li class="m-tree-node">
     <a mode="button" class="m-tree-node__single-node"> <span>Node 1</span></a>
 </li>

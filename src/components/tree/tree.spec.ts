@@ -1,7 +1,7 @@
 import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import { MTree, MTreeFormat, TreeNode } from './tree';
+import { MSelectOption, MTree, MTreeFormat, TreeNode } from './tree';
 
 const TREE_NODE_REF: RefSelector = { ref: 'tree-node' };
 const BUTTON_TOGGLE_VISIBILITY_REF: RefSelector = { ref: 'button-toggle-visibility' };
@@ -39,13 +39,15 @@ const TREE_WITH_DATA: TreeNode<MTreeFormat>[] = [
 let tree: TreeNode<MTreeFormat>[];
 let allOpen: boolean = false;
 let wrapper: Wrapper<MTree>;
+let selectionQuantity: MSelectOption = MSelectOption.SINGLE;
 
 const initializeShallowWrapper: any = () => {
     wrapper = shallow(MTree, {
         propsData: {
             tree: tree,
             selectedNodes: TREE_NODE_SELECTED,
-            allOpen
+            allOpen,
+            selectionQuantity
         }
     });
 };
@@ -119,7 +121,7 @@ describe(`MTree`, () => {
                 expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
             });
 
-            it(`Sshould generate an error`, () => {
+            it(`Should generate an error`, () => {
                 expect(wrapper.vm.errorTree).toBeTruthy();
             });
 
