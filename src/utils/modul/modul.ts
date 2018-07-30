@@ -1,7 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 
 import { BackdropMode } from '../../mixins/portal/portal';
-import uuid from '../../utils/uuid/uuid';
+import uuid from '../uuid/uuid';
 
 const BACKDROP_ID: string = 'mBackdropID';
 const BACKDROP_CLASS_NAME: string = 'm-backdrop';

@@ -105,20 +105,16 @@
         background: none;
         border: none;
         font-size: $m-font-size;
-        color: $m-color--grey;
+        color: $m-color--white;
         cursor: pointer;
         outline: none;
         text-decoration: none;
         line-height: 1;
         transform: translate3d(0, -100%, 0);
 
-        &:hover {
-            color: $m-color--white;
-        }
-
-        &:focus:not(:hover) {
-            background: rgba($m-color--black, 0.3);
-            color: $m-color--white;
+        &:hover,
+        &:focus {
+            color: $m-color--grey;
         }
     }
 

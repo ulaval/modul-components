@@ -26,7 +26,9 @@
         "tslint-ci": "tslint  -c conf/tslint.json -e 'src/**/*.d.ts' -e 'tests/unit/**/*.d.ts' -t junit -o reports/junit/js-lint-results.xml 'src/**/*.ts' 'tests/unit/**/*.ts' 'tests/e2e/*.ts'",
         "prepack": "npm run clean && npm run build && npm run buildlib",
         "component": "node ./tests/meta/component-generator",
-        "stats": "rimraf dist && npm run buildWebpack && webpack-bundle-analyzer dist/stats.json"
+        "stats": "rimraf dist && npm run buildWebpack && webpack-bundle-analyzer dist/stats.json",
+        "print_version_win": "echo %npm_package_version%",
+        "print_version_nx": "echo $npm_package_version"
     },
     "jest": {
         "roots": [

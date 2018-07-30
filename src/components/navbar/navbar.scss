@@ -6,7 +6,13 @@
     justify-content: center;
     overflow: hidden;
 
-    &.m--is-skin-dark {
+    &.m--is-skin-darker {
+        background-color: $m-color--grey-darker;
+    }
+
+    &.m--is-skin-darkest {
+        border-top: 1px solid $m-color--black;
+        box-shadow: 0 0 7px $m-color--black inset;
         background-color: $m-color--grey-darkest;
     }
 
@@ -43,7 +49,8 @@
         justify-content: center;
         max-width: 64px;
 
-        .m--is-skin-dark & {
+        .m--is-skin-darker,
+        .m--is-skin-darkest & {
             color: $m-color--grey-light;
             stroke-width: 2;
         }
@@ -75,9 +82,8 @@
         padding: 0;
         margin: 0;
         display: inline-flex;
-        align-items: center;
+        justify-content: space-between;
         text-align: center;
-        white-space: nowrap;
     }
 
     &__line,

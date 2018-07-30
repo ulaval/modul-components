@@ -1,12 +1,16 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
+import { ModulVue } from '../../utils/vue/vue';
 import { MENU_NAME } from '../component-names';
 import WithRender from './menu.sandbox.html';
 
 @WithRender
 @Component
-export class MMenuSandbox extends Vue {
+export class MMenuSandbox extends ModulVue {
+    private doAdd(): void {
+        alert('Add clicked');
+    }
 }
 
 const MenuSandboxPlugin: PluginObject<any> = {

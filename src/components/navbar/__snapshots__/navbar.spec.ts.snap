@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MNavbar should render correctly 1`] = `
-<div class="m-navbar m--is-skin-tab m--is-skin-light-tab">
+<div class="m-navbar m--is-skin-light-tab m--is-skin-tab">
     <nav role="menubar" class="m-navbar__wrap">
         <ul aria-hidden="true" class="m-navbar__list">
             <li role="menuitem" class="m-navbar-item"></li>

@@ -1,8 +1,8 @@
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
 
-import { InputStateMixin } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
+import { InputStateMixin } from '../input-state/input-state';
 
 export interface InputManagementProps {
     value: string;

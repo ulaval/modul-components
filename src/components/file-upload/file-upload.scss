@@ -68,13 +68,14 @@ $m-file-upload-max-height--s: 72px;
         transition: background $m-transition-duration ease;
 
         &__instructions {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
 
             .m-icon {
                 color: $m-color--success;
                 margin-right: $m-spacing--s;
+                margin-left: -5px; // magic number for alignment purpose
             }
 
             .m-file-select {
@@ -82,7 +83,7 @@ $m-file-upload-max-height--s: 72px;
                 margin-left: $m-spacing--s;
             }
 
-            h2 {
+            &__title {
                 font-weight: $m-font-weight--bold;
                 display: flex;
                 align-items: center;
