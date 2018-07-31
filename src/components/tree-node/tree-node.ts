@@ -28,7 +28,7 @@ export class MTreeNode extends ModulVue {
     })
     public selectionQuantity: MSelectOption;
 
-    @Prop({ default: 'information' })
+    @Prop({ default: '' })
     public selectionIcon: string;
 
     @Prop({ default: false })
@@ -77,7 +77,7 @@ export class MTreeNode extends ModulVue {
 
     public get nodeSelected(): boolean {
         let isSelected: boolean = false;
-        if (this.selectedNodes[0] !== undefined && this.selectedNodes[0] === this.propCurrentPath) {
+        if (this.selectedNodes[0] !== undefined && this.selectedNodes[0] === this.propCurrentPath && this.selectionIcon) {
             isSelected = true;
             this.selectedNodeFound();
         }
@@ -128,6 +128,10 @@ export class MTreeNode extends ModulVue {
 
     public set propCurrentPath(path: string) {
         this.internalCurrentPath = path;
+    }
+
+    private get propSelectionIcon(): string {
+        return this.selectionIcon;
     }
 
     private get hasChildren(): boolean {

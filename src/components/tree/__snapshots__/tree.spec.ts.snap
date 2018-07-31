@@ -4,8 +4,8 @@ exports[`MTree Given a tree with some data Should render correctly 1`] = `
 <div class="m-tree">
     <m-button skin="secondary">m-tree:all-open</m-button>
     <ul>
-        <m-tree-node selection-quantity="1" node="[object Object]" selected-nodes="/medias/Videos/video-dog.mov" selection-icon="information"></m-tree-node>
-        <m-tree-node selection-quantity="1" node="[object Object]" selected-nodes="/medias/Videos/video-dog.mov" selection-icon="information"></m-tree-node>
+        <m-tree-node selection-quantity="1" node="[object Object]" selected-nodes="/medias/Videos/video-dog.mov" selection-icon=""></m-tree-node>
+        <m-tree-node selection-quantity="1" node="[object Object]" selected-nodes="/medias/Videos/video-dog.mov" selection-icon=""></m-tree-node>
     </ul>
 </div>
 `;

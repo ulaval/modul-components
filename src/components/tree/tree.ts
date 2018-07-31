@@ -41,7 +41,7 @@ export class MTree extends ModulVue {
     })
     public selectionQuantity: MSelectOption;
 
-    @Prop({ default: 'information' })
+    @Prop({ default: '' })
     public selectionIcon: string;
 
     @Prop()

@@ -1,14 +1,13 @@
-import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import { MSelectOption, MTreeFormat, TreeNode } from '../tree/tree';
 import { MTreeNode } from './tree-node';
 
-const EMPTY_NODE_REF: RefSelector = { ref: 'empty-node-txt' };
-const TXT_EMPTY_NODE: string = 'm-tree-node:empty';
 const NODE_ELEMENT_LABEL: string = 'Node 1';
 const NODE_ELEMENT_ID: string = 'Node 1';
 const PARENT_PATH: string = '/Parent 1';
+const SELECTION_ICON: string = 'information';
 
 const TREE_NODE_SELECTED: string[] = ['/Node 1'];
 const TREE_NODE_SELECTED_2: string[] = ['/Node 2'];
@@ -330,6 +329,7 @@ describe('MTreeNode', () => {
         describe(`When we check if the current node is selected`, () => {
             beforeEach(() => {
                 node = TREE_NODE_WITHOUT_CHILDREN;
+                selectionIcon = SELECTION_ICON;
             });
 
             describe(`When the current node is selected`, () => {

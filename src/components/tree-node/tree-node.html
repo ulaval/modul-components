@@ -15,7 +15,7 @@
         </transition>
     </div>
     <template v-else-if="validNode" >
-            <m-link :mode="typeLink" class="m-tree-node__single-node" @click="selectNewNode(propCurrentPath)" :disabled="inactiveButton">
+            <m-link :mode="typeLink" class="m-tree-node__single-node" :disabled="inactiveButton" @click="selectNewNode(propCurrentPath)">
                 <m-file-tree v-if="fileTree" :file="node.content"></m-file-tree>
                 <span>{{ nodeTitle }}</span>
             </m-link>
