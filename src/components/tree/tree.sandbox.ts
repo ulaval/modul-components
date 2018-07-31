@@ -15,7 +15,7 @@ export class Tree {
 @WithRender
 @Component
 export class MRootTreeSandbox extends Vue {
-    public currentFile: string[] = ['/dossier 1/dossier 2/index.html'];
+    public currentFile: string[] = ['/folder 1/folder 2/index.html'];
     public currentFile2: string[] = ['/1/2'];
     public wrongCurrentFile: string[] = ['/3/4'];
 
@@ -25,7 +25,7 @@ export class MRootTreeSandbox extends Vue {
         {
             content: {
                 nodeId: '1',
-                nodeLabel: 'Titre 1',
+                nodeLabel: 'Title 1',
                 uselessData: 'test',
                 hasChildren: true
             },
@@ -33,28 +33,28 @@ export class MRootTreeSandbox extends Vue {
                 {
                     content: {
                         nodeId: '2',
-                        nodeLabel: 'Sous-titre 1',
+                        nodeLabel: 'Subtitle 1',
                         uselessData: 'test'
                     }
                 },
                 {
                     content: {
                         nodeId: '3',
-                        nodeLabel: 'Sous-titre 2',
+                        nodeLabel: 'Subtitle 2',
                         uselessData: 'test'
                     }
                 },
                 {
                     content: {
                         nodeId: '4',
-                        nodeLabel: 'Sous-titre 3',
+                        nodeLabel: 'Subtitle 3',
                         uselessData: 'test'
                     }
                 },
                 {
                     content: {
                         nodeId: '5',
-                        nodeLabel: 'Sous-titre 4',
+                        nodeLabel: 'Subtitle 4',
                         uselessData: 'test'
                     }
                 }
@@ -63,29 +63,28 @@ export class MRootTreeSandbox extends Vue {
         {
             content: {
                 nodeId: '6',
-                nodeLabel: 'Titre 2',
+                nodeLabel: 'Title 2',
                 uselessData: 'test'
             }
         },
         {
             content: {
                 nodeId: '7',
-                nodeLabel: 'Titre 3',
-                uselessData: 'test',
-                hasChildren: true
+                nodeLabel: 'Title 3',
+                uselessData: 'test'
             },
             children: [
                 {
                     content: {
                         nodeId: '1',
-                        nodeLabel: 'Sous-titre 1',
+                        nodeLabel: 'Subtitle 1',
                         uselessData: 'test'
                     }
                 },
                 {
                     content: {
                         nodeId: '2',
-                        nodeLabel: 'Sous-titre 2',
+                        nodeLabel: 'Subtitle 2',
                         uselessData: 'test'
                     }
                 }
@@ -97,7 +96,7 @@ export class MRootTreeSandbox extends Vue {
         {
             content: {
                 nodeId: '1',
-                nodeLabel: 'Titre 1',
+                nodeLabel: 'Title 1',
                 uselessData: 'test',
                 hasChildren: true
             },
@@ -105,28 +104,28 @@ export class MRootTreeSandbox extends Vue {
                 {
                     content: {
                         nodeId: '',
-                        nodeLabel: 'Sous-titre 1',
+                        nodeLabel: 'Subtitle 1',
                         uselessData: 'test'
                     }
                 },
                 {
                     content: {
                         nodeId: '3',
-                        nodeLabel: 'Sous-titre 2',
+                        nodeLabel: 'Subtitle 2',
                         uselessData: 'test'
                     }
                 },
                 {
                     content: {
                         nodeId: '4',
-                        nodeLabel: 'Sous-titre 3',
+                        nodeLabel: 'Subtitle 3',
                         uselessData: 'test'
                     }
                 },
                 {
                     content: {
                         nodeId: '5',
-                        nodeLabel: 'Sous-titre 4',
+                        nodeLabel: 'Subtitle 4',
                         uselessData: 'test'
                     }
                 }
@@ -137,8 +136,8 @@ export class MRootTreeSandbox extends Vue {
     public fileTree: TreeNode<Tree>[] = [
         {
             content: {
-                nodeId: 'dossier 1',
-                nodeLabel: 'dossier 1',
+                nodeId: 'folder 1',
+                nodeLabel: 'folder 1',
                 hasChildren: true
             },
             children: [
@@ -155,8 +154,8 @@ export class MRootTreeSandbox extends Vue {
                 },
                 {
                     content: {
-                        nodeId: 'dossier 2',
-                        nodeLabel: 'dossier 2',
+                        nodeId: 'folder 2',
+                        nodeLabel: 'folder 2',
                         hasChildren: true
                     },
                     children: [
@@ -168,8 +167,8 @@ export class MRootTreeSandbox extends Vue {
                         },
                         {
                             content: {
-                                nodeId: 'dossier 3',
-                                nodeLabel: 'dossier 3',
+                                nodeId: 'folder 3',
+                                nodeLabel: 'folder 3',
                                 hasChildren: true
                             },
                             children: []
@@ -186,22 +185,22 @@ export class MRootTreeSandbox extends Vue {
         },
         {
             content: {
-                nodeId: 'dossier 4',
-                nodeLabel: 'dossier 4',
+                nodeId: 'folder 4',
+                nodeLabel: 'folder 4',
                 hasChildren: true
             }
         },
         {
             content: {
-                nodeId: 'gros dossier',
-                nodeLabel: 'gros dossier',
+                nodeId: 'big folder',
+                nodeLabel: 'big folder',
                 hasChildren: true
             },
             children: [
                 {
                     content: {
-                        nodeId: 'dossier 1',
-                        nodeLabel: 'dossier 1',
+                        nodeId: 'folder 1',
+                        nodeLabel: 'folder 1',
                         hasChildren: true
                     },
                     children: [
@@ -218,8 +217,8 @@ export class MRootTreeSandbox extends Vue {
                         },
                         {
                             content: {
-                                nodeId: 'dossier 2',
-                                nodeLabel: 'dossier 2',
+                                nodeId: 'folder 2',
+                                nodeLabel: 'folder 2',
                                 hasChildren: true
                             },
                             children: [
@@ -231,14 +230,14 @@ export class MRootTreeSandbox extends Vue {
                                 },
                                 {
                                     content: {
-                                        nodeId: 'dossier 3',
-                                        nodeLabel: 'dossier 3',
+                                        nodeId: 'folder 3',
+                                        nodeLabel: 'folder 3',
                                         hasChildren: true
                                     },
                                     children: [{
                                         content: {
-                                            nodeId: 'dossier 1',
-                                            nodeLabel: 'dossier 1',
+                                            nodeId: 'folder 1',
+                                            nodeLabel: 'folder 1',
                                             hasChildren: true
                                         },
                                         children: [
@@ -255,8 +254,8 @@ export class MRootTreeSandbox extends Vue {
                                             },
                                             {
                                                 content: {
-                                                    nodeId: 'dossier 2',
-                                                    nodeLabel: 'dossier 2',
+                                                    nodeId: 'folder 2',
+                                                    nodeLabel: 'folder 2',
                                                     hasChildren: true
                                                 },
                                                 children: [
@@ -268,14 +267,14 @@ export class MRootTreeSandbox extends Vue {
                                                     },
                                                     {
                                                         content: {
-                                                            nodeId: 'dossier 3',
-                                                            nodeLabel: 'dossier 3',
+                                                            nodeId: 'folder 3',
+                                                            nodeLabel: 'folder 3',
                                                             hasChildren: true
                                                         },
                                                         children: [{
                                                             content: {
-                                                                nodeId: 'dossier 1',
-                                                                nodeLabel: 'dossier 1',
+                                                                nodeId: 'folder 1',
+                                                                nodeLabel: 'folder 1',
                                                                 hasChildren: true
                                                             },
                                                             children: [
@@ -292,8 +291,8 @@ export class MRootTreeSandbox extends Vue {
                                                                 },
                                                                 {
                                                                     content: {
-                                                                        nodeId: 'dossier 2',
-                                                                        nodeLabel: 'dossier 2',
+                                                                        nodeId: 'folder 2',
+                                                                        nodeLabel: 'folder 2',
                                                                         hasChildren: true
                                                                     },
                                                                     children: [
@@ -305,8 +304,8 @@ export class MRootTreeSandbox extends Vue {
                                                                         },
                                                                         {
                                                                             content: {
-                                                                                nodeId: 'dossier 3',
-                                                                                nodeLabel: 'dossier 3',
+                                                                                nodeId: 'folder 3',
+                                                                                nodeLabel: 'folder 3',
                                                                                 hasChildren: true
                                                                             },
                                                                             children: []
