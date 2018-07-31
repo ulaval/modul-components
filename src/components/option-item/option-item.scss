@@ -1,9 +1,9 @@
 @import 'abstracts/variables';
-$m-menu-item--color-hover: $m-color--interactive-lightest !default;
-$m-menu-item--color-select: $m-color--grey-lighter !default;
-$m-menu-item--color-active: $m-color--grey-lightest !default;
+$m-option-item--color-hover: $m-color--interactive-lightest !default;
+$m-option-item--color-select: $m-color--grey-lighter !default;
+$m-option-item--color-active: $m-color--grey-lightest !default;
 
-.m-menu-item {
+.m-option-item {
     display: flex;
     text-decoration: none;
 
@@ -16,7 +16,7 @@ $m-menu-item--color-active: $m-color--grey-lightest !default;
     }
 
     .m--has-icon-spacing {
-        .m-menu-item {
+        .m-option-item {
             &__text {
                 padding-left: 10px;
             }
@@ -48,7 +48,7 @@ $m-menu-item--color-active: $m-color--grey-lightest !default;
     &.m--is-disabled {
         cursor: not-allowed;
 
-        .m-menu-item {
+        .m-option-item {
             &__text,
             &__icon {
                 color: $m-color--disabled;
@@ -62,15 +62,15 @@ $m-menu-item--color-active: $m-color--grey-lightest !default;
 
         &:hover,
         &:focus {
-            background: $m-menu-item--color-hover;
+            background: $m-option-item--color-hover;
 
-            .m-menu-item__icon {
+            .m-option-item__icon {
                 color: $m-color--text;
             }
         }
 
         &:active {
-            background: $m-menu-item--color-active;
+            background: $m-option-item--color-active;
         }
     }
 

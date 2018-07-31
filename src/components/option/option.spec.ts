@@ -135,9 +135,9 @@ describe('MOption', () => {
             propsData: propsData,
             slots: {
                 default: `<m-option>
-                            <m-menu-item value="a">A item</m-menu-item>
-                            <m-menu-item value="b">B item</m-menu-item>
-                            <m-menu-item value="c">C item</m-menu-item>
+                            <m-option-item value="a">A item</m-option-item>
+                            <m-option-item value="b">B item</m-option-item>
+                            <m-option-item value="c">C item</m-option-item>
                           </m-option>`,
                 ...slots
             }

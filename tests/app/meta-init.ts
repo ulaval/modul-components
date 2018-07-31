@@ -42,7 +42,7 @@ const components: string[] = [
     Components.NAVBAR_NAME,
     Components.NAVBAR_ITEM_NAME,
     Components.OPTION_NAME,
-    Components.MENU_ITEM_NAME,
+    Components.OPTION_ITEM_NAME,
     Components.PAGE_NOT_FOUND_NAME,
     Components.PANEL_NAME,
     Components.PHONE_NUMBER_NAME,

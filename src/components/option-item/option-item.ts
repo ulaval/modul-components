@@ -3,14 +3,14 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
-import { MENU_ITEM_NAME } from '../component-names';
+import { OPTION_ITEM_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import { BaseOption, MOptionInterface } from '../option/option';
-import WithRender from './menu-item.html?style=./menu-item.scss';
+import WithRender from './option-item.html?style=./option-item.scss';
 
 @WithRender
 @Component
-export class MMenuItem extends ModulVue {
+export class MOptionItem extends ModulVue {
 
     @Prop()
     public iconName: string;
@@ -27,7 +27,7 @@ export class MMenuItem extends ModulVue {
             this.root = (rootNode as any) as MOptionInterface;
             this.hasRoot = true;
         } else {
-            console.error('m-menu-item need to be inside m-menu');
+            console.error('m-option-item need to be inside m-option');
         }
     }
 
@@ -59,11 +59,11 @@ export class MMenuItem extends ModulVue {
     }
 }
 
-const MenuItemPlugin: PluginObject<any> = {
+const OptionItemPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(IconPlugin);
-        v.component(MENU_ITEM_NAME, MMenuItem);
+        v.component(OPTION_ITEM_NAME, MOptionItem);
     }
 };
 
-export default MenuItemPlugin;
+export default OptionItemPlugin;

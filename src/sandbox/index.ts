@@ -34,11 +34,11 @@ import InputStyleSandboxPlugin from '../components/input-style/input-style.sandb
 import LimitTextSandboxPlugin from '../components/limit-text/limit-text.sandbox';
 import LinkSandboxPlugin from '../components/link/link.sandbox';
 import ListItemSandboxPlugin from '../components/list-item/list-item.sandbox';
-import MenuItemSandboxPlugin from '../components/menu-item/menu-item.sandbox';
 import MessageSandboxPlugin from '../components/message/message.sandbox';
 import ModalSandboxPlugin from '../components/modal/modal.sandbox';
 import NavbarItemSandboxPlugin from '../components/navbar-item/navbar-item.sandbox';
 import NavbarSandboxPlugin from '../components/navbar/navbar.sandbox';
+import OptionItemSandboxPlugin from '../components/option-item/option-item.sandbox';
 import OptionSandboxPlugin from '../components/option/option.sandbox';
 import PageNotFoundSandboxPlugin from '../components/page-not-found/page-not-found.sandbox';
 import PanelSandboxPlugin from '../components/panel/panel.sandbox';
@@ -109,7 +109,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(NavbarSandboxPlugin);
         Vue.use(NavbarItemSandboxPlugin);
         Vue.use(OptionSandboxPlugin);
-        Vue.use(MenuItemSandboxPlugin);
+        Vue.use(OptionItemSandboxPlugin);
         Vue.use(PageNotFoundSandboxPlugin);
         Vue.use(PanelSandboxPlugin);
         Vue.use(PhoneNumberSandboxPlugin);

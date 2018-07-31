@@ -2,12 +2,12 @@
 
 exports[`MOption Menu should render correctly 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -15,12 +15,12 @@ exports[`MOption Menu should render correctly 1`] = `
 
 exports[`MOption Menu should render correctly placement left 1`] = `
 <m-popup placement="left" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -28,12 +28,12 @@ exports[`MOption Menu should render correctly placement left 1`] = `
 
 exports[`MOption Menu should render correctly placement right 1`] = `
 <m-popup placement="right" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -41,12 +41,12 @@ exports[`MOption Menu should render correctly placement right 1`] = `
 
 exports[`MOption Menu should render correctly placement top 1`] = `
 <m-popup placement="top" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -54,12 +54,12 @@ exports[`MOption Menu should render correctly placement top 1`] = `
 
 exports[`MOption should react to open prop changes 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -67,12 +67,12 @@ exports[`MOption should react to open prop changes 1`] = `
 
 exports[`MOption should react to open prop changes 2`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -80,12 +80,12 @@ exports[`MOption should react to open prop changes 2`] = `
 
 exports[`MOption should render correctly when close title is set 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -93,12 +93,12 @@ exports[`MOption should render correctly when close title is set 1`] = `
 
 exports[`MOption should render correctly when open title is set 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Title open" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Title open" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -106,12 +106,12 @@ exports[`MOption should render correctly when open title is set 1`] = `
 
 exports[`MOption should render correctly when size is set 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="200px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="200px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -119,12 +119,12 @@ exports[`MOption should render correctly when size is set 1`] = `
 
 exports[`MOption should render correctly when skin is dark 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="dark" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="dark" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>
@@ -132,12 +132,12 @@ exports[`MOption should render correctly when skin is dark 1`] = `
 
 exports[`MOption should render correctly when skin is light 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-option">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-option__list">
+    <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
+    <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
         <m-option>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
+            <m-option-item value="a">A item</m-option-item>
+            <m-option-item value="b">B item</m-option-item>
+            <m-option-item value="c">C item</m-option-item>
         </m-option>
     </ul>
 </m-popup>

@@ -7,7 +7,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { OPTION_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
-import MMenuItemPlugin from '../menu-item/menu-item';
+import MMenuItemPlugin from '../option-item/option-item';
 import { MPopperPlacement } from '../popper/popper';
 import PopupPlugin from '../popup/popup';
 import WithRender from './option.html?style=./option.scss';
@@ -66,7 +66,7 @@ export class MOption extends BaseOption implements MOptionInterface {
 
     public hasIcon: boolean = false;
     private open = false;
-    private id: string = `mMenu-${uuid.generate()}`;
+    private id: string = `mOption-${uuid.generate()}`;
 
     public checkIcon(icon: boolean): void {
         if (icon) {
@@ -92,11 +92,11 @@ export class MOption extends BaseOption implements MOptionInterface {
     }
 
     private getOpenTitle(): string {
-        return this.openTitle === undefined ? this.$i18n.translate('m-menu:open') : this.openTitle;
+        return this.openTitle === undefined ? this.$i18n.translate('m-option:open') : this.openTitle;
     }
 
     private getCloseTitle(): string {
-        return this.closeTitle === undefined ? this.$i18n.translate('m-menu:close') : this.closeTitle;
+        return this.closeTitle === undefined ? this.$i18n.translate('m-option:close') : this.closeTitle;
     }
 
     private get propTitle(): string {
