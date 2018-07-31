@@ -2,12 +2,12 @@ export class PopupPlugin {
     private buttonName: string;
     private pluginName: string;
 
-    constructor(name: string, private editor, private buttonList: string[]) {
+    constructor(name: string, private editor: any, private buttonList: string[]) {
         this.buttonName = `${name}Popup`;
         this.pluginName = `${name}Plugin`;
     }
 
-    initPopup(): void {
+    public initPopup(): void {
         let buttons: string = (this.buttonList.length > 1) ? `<div class="fr-buttons">${this.editor.button.buildList(this.buttonList)}</div>` : '';
 
         // Load popup template.
@@ -19,7 +19,7 @@ export class PopupPlugin {
         return this.editor.popups.create(`${this.pluginName}.popup`, template);
     }
 
-    showPopup(): void {
+    public showPopup(): void {
         // To improve performance it is best to create the popup when it is first needed
         // and not when the editor is initialized.
         if (!this.editor.popups.get(`${this.pluginName}.popup`)) {
@@ -41,7 +41,7 @@ export class PopupPlugin {
         this.editor.popups.show(`${this.pluginName}.popup`, left, top, btn.outerHeight());
     }
 
-    hidePopup(): void {
+    public hidePopup(): void {
         this.editor.popups.hide(`${this.pluginName}.popup`);
     }
 }
