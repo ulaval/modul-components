@@ -33,7 +33,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/limit-text/limit-text.lang.fr.json'),
                 require('../components/login/login.lang.fr.json'),
                 require('../components/message/message.lang.fr.json'),
-                require('../components/menu/menu.lang.fr.json'),
+                require('../components/option/option.lang.fr.json'),
                 require('../components/modal/modal.lang.fr.json'),
                 require('../components/page-not-found/page-not-found.lang.fr.json'),
                 require('../components/phone-number/phone-number.lang.fr.json'),

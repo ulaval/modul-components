@@ -3,22 +3,32 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import uuid from '../../utils/uuid/uuid';
-import { MENU_NAME } from '../component-names';
+import { ModulVue } from '../../utils/vue/vue';
+import { OPTION_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
-import MMenuItemPlugin, { BaseMenu, MMenuInterface } from '../menu-item/menu-item';
+import MMenuItemPlugin from '../menu-item/menu-item';
 import { MPopperPlacement } from '../popper/popper';
 import PopupPlugin from '../popup/popup';
-import WithRender from './menu.html?style=./menu.scss';
+import WithRender from './option.html?style=./option.scss';
 
-export enum MOptionsMenuSkin {
+export abstract class BaseOption extends ModulVue {
+}
+
+export interface MOptionInterface {
+    hasIcon: boolean;
+    checkIcon(el: boolean): void;
+    close(): void;
+}
+
+export enum MOptionsSkin {
     Light = 'light',
     Dark = 'dark'
 }
 
 @WithRender
 @Component
-export class MMenu extends BaseMenu implements MMenuInterface {
+export class MOption extends BaseOption implements MOptionInterface {
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
@@ -37,12 +47,12 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     })
     public placement: MPopperPlacement;
     @Prop({
-        default: MOptionsMenuSkin.Light,
+        default: MOptionsSkin.Light,
         validator: value =>
-            value === MOptionsMenuSkin.Light ||
-            value === MOptionsMenuSkin.Dark
+            value === MOptionsSkin.Light ||
+            value === MOptionsSkin.Dark
     })
-    public skin: MOptionsMenuSkin;
+    public skin: MOptionsSkin;
     @Prop()
     public openTitle: string;
     @Prop()
@@ -98,14 +108,14 @@ export class MMenu extends BaseMenu implements MMenuInterface {
     }
 }
 
-const MenuPlugin: PluginObject<any> = {
+const OptionPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(PopupPlugin);
         v.use(I18nPlugin);
         v.use(MMenuItemPlugin);
         v.use(IconButtonPlugin);
-        v.component(MENU_NAME, MMenu);
+        v.component(OPTION_NAME, MOption);
     }
 };
 
-export default MenuPlugin;
+export default OptionPlugin;
