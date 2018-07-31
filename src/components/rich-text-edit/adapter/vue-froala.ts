@@ -93,7 +93,7 @@ export class VueFroala extends Vue {
         $.FroalaEditor.POPUP_TEMPLATES[`${pluginName}.popup`] = '[_BUTTONS_]';
 
         // The custom popup is defined inside a plugin (new or existing).
-        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new PopupPlugin(editor, name, buttonList); };
+        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new PopupPlugin(name, editor, buttonList); };
 
         // Create the button that'll open the popup
         $.FroalaEditor.RegisterCommand(buttonName, {

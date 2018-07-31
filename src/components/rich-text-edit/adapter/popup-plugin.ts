@@ -1,14 +1,10 @@
 export class PopupPlugin {
-    private editor: any;
     private buttonName: string;
     private pluginName: string;
-    private buttonList: string[];
 
-    constructor(editor, name: string, buttonList: string[]) {
-        this.editor = editor;
+    constructor(name: string, private editor, private buttonList: string[]) {
         this.buttonName = `${name}Popup`;
         this.pluginName = `${name}Plugin`;
-        this.buttonList = buttonList;
     }
 
     initPopup(): void {
