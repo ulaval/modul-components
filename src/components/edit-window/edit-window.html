@@ -8,31 +8,27 @@
                  ref="dialogWrap"
                  v-show="propOpen" v-if="propOpen || preload || loaded">
                 <section class="m-edit-window__article" ref="article">
-                    <header>
-                        <div class="m-edit-window__header"
-                             :class="{'m--no-padding': !padding || !paddingHeader}">
-                            <div class="m-edit-window__header__left">
-                                <slot name="header"></slot>
-                            </div>
-                            <div class="m-edit-window__header__right" v-if="hasHeaderRightSlot">
-                                <slot name="header-right"></slot>
-                            </div>
+                    <header class="m-edit-window__header"
+                            :class="{'m--no-padding': !padding || !paddingHeader}">
+                        <div class="m-edit-window__header__left">
+                            <slot name="header"></slot>
+                        </div>
+                        <div class="m-edit-window__header__right" v-if="hasHeaderRightSlot">
+                            <slot name="header-right"></slot>
                         </div>
                     </header>
                     <div class="m-edit-window__body"
                          :class="{ 'm--no-padding': !padding || !paddingBody }">
                         <slot></slot>
                     </div>
-                    <footer>
-                        <div class="m-edit-window__footer"
-                             :class="{ 'm--no-padding': !padding || !paddingFooter }">
-                            <slot name="footer">
-                                <div>
-                                    <m-button @click="save()" :disabled="isSaveButtonDisabled" class="m-edit-window__footer__save-button"><m-i18n k="m-edit-window:save"></m-i18n></m-button>
-                                    <m-button @click="cancel()" skin="secondary"><m-i18n k="m-edit-window:cancel"></m-i18n></m-button>
-                                </div>
-                            </slot>
-                        </div>
+                    <footer class="m-edit-window__footer"
+                            :class="{ 'm--no-padding': !padding || !paddingFooter }">
+                        <slot name="footer">
+                            <div>
+                                <m-button @click="save()" :disabled="isSaveButtonDisabled" class="m-edit-window__footer__save-button"><m-i18n k="m-edit-window:save"></m-i18n></m-button>
+                                <m-button @click="cancel()" skin="secondary"><m-i18n k="m-edit-window:cancel"></m-i18n></m-button>
+                            </div>
+                        </slot>
                     </footer>
                 </section>
             </div>

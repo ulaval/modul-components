@@ -33,6 +33,9 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop({ default: true })
     public closeOnBackdrop: boolean;
 
+    @Prop({ default: true })
+    public focusManagement: boolean;
+
     @Prop()
     public title: string;
     @Prop({ default: true })
@@ -57,7 +60,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public handlesFocus(): boolean {
-        return true;
+        return this.focusManagement;
     }
 
     public doCustomPropOpen(value: boolean): boolean {
