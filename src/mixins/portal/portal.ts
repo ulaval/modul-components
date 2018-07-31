@@ -56,7 +56,7 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop()
     public open: boolean;
 
-    @Prop({ default: 'mPortal' })
+    @Prop()
     public id: string;
 
     @Prop()
@@ -129,7 +129,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     protected beforeMount(): void {
-        this.propId = this.id + '-' + uuid.generate();
+        this.propId = this.id === undefined ? 'mPortal-' + uuid.generate() : this.id;
         let element: HTMLElement = document.createElement('div');
         element.setAttribute('id', this.propId);
         document.body.appendChild(element);
