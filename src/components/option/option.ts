@@ -7,7 +7,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { OPTION_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
-import MMenuItemPlugin from '../option-item/option-item';
+import MOptionItemPlugin from '../option-item/option-item';
 import { MPopperPlacement } from '../popper/popper';
 import PopupPlugin from '../popup/popup';
 import WithRender from './option.html?style=./option.scss';
@@ -112,7 +112,7 @@ const OptionPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(PopupPlugin);
         v.use(I18nPlugin);
-        v.use(MMenuItemPlugin);
+        v.use(MOptionItemPlugin);
         v.use(IconButtonPlugin);
         v.component(OPTION_NAME, MOption);
     }
