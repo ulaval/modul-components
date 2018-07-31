@@ -7,11 +7,27 @@ $m-accordion--icon-plus-width: 10px;
 $m-accordion--icon-minus-width: 1px;
 
 .m-tree-node {
-    color: $m-color--text;
+    color: $m-color--ul-blue;
 
     &__single-node {
-        margin-bottom: $m-margin--s;
+        margin-bottom: $m-margin;
         user-select: none;
+        border: 1px solid $m-color--ul-blue;
+        border-radius: 22px;
+        padding: 9px 21px;
+        width: $m-min-width;
+
+        &.m--is-node-selected {
+            color: #fff;
+            background-color: $m-color--interactive-darker;
+            border-color: $m-color--interactive-darker;
+        }
+    }
+
+    /deep/ .m-link__text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__with-children {
@@ -19,8 +35,14 @@ $m-accordion--icon-minus-width: 1px;
 
         &__header {
             cursor: pointer;
-            margin-bottom: $m-margin--s;
-            margin-left: $m-margin--xs;
+            margin-bottom: $m-margin;
+            border: 1px solid $m-color--ul-blue;
+            border-radius: 22px;
+            padding: 9px 21px;
+            width: $m-min-width;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             &__icon {
                 width: $m-tree-node--icon-width;
@@ -83,7 +105,32 @@ $m-accordion--icon-minus-width: 1px;
         }
 
         &__children {
-            margin-left: $m-margin--l + 4;
+            margin-left: 52px;
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: -22px;
+                top: 21px;
+                width: 22px;
+                height: 1px;
+                background-color: $m-color--ul-blue;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: -22px;
+                width: 1px;
+                top: -12px;
+                height: 56px;
+                background-color: $m-color--ul-blue;
+            }
+
+            &:last-child::after {
+                height: 34px;
+            }
         }
 
         &__no-children {

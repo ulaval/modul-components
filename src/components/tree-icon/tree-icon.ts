@@ -4,11 +4,11 @@ import { Prop } from 'vue-property-decorator';
 
 import { FileMixin } from '../../mixins/file/file';
 import { ModulVue } from '../../utils/vue/vue';
-import { FILE_TREE_NAME } from '../component-names';
+import { TREE_ICON_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
 import IconPlugin from '../icon/icon';
 import { MTreeFormat } from '../tree/tree';
-import WithRender from './file-tree.html';
+import WithRender from './tree-icon.html?style=./tree-icon.scss';
 
 const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
 const FOLDER_CLOSED: string = 'm-svg__file-zip';
@@ -19,7 +19,7 @@ const FOLDER_CLOSED: string = 'm-svg__file-zip';
         FileMixin
     ]
 })
-export class MFileTree extends ModulVue {
+export class MTreeIcon extends ModulVue {
 
     @Prop()
     public file: MTreeFormat;
@@ -40,13 +40,13 @@ export class MFileTree extends ModulVue {
 
 }
 
-const FileTreePlugin: PluginObject<any> = {
+const TreeIconPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(FILE_TREE_NAME, 'plugin.install');
+        v.prototype.$log.debug(TREE_ICON_NAME, 'plugin.install');
         v.use(IconFilePlugin);
         v.use(IconPlugin);
-        v.component(FILE_TREE_NAME, MFileTree);
+        v.component(TREE_ICON_NAME, MTreeIcon);
     }
 };
 
-export default FileTreePlugin;
+export default TreeIconPlugin;

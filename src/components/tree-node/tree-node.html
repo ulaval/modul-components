@@ -1,24 +1,30 @@
 <li class="m-tree-node">
     <div v-if="hasValidChildren" class="m-tree-node__with-children">
         <div class="m-tree-node__with-children__header" @click="toggleChildrenVisibility">
-            <span class="m-tree-node__with-children__header__icon" :class="{ 'm--is-closed': open}"></span>
-            <m-file-tree v-if="fileTree" :file="node.content" :is-folder-open="open" :is-a-folder="true"></m-file-tree>
+            <!-- <span class="m-tree-node__with-children__header__icon" :class="{ 'm--is-closed': open}"></span> -->
+            <m-tree-icon v-if="fileTree" :file="node.content" :is-folder-open="open" :is-a-folder="true"></m-tree-icon>
             <span>{{ nodeTitle }}</span>
         </div>
         <transition name="m-tree-node__with-children__body">
             <ul v-show="open" class="m-tree-node__with-children__body">
                 <template v-if="childrenNotEmpty">
-                    <m-tree-node v-for="childrensNode in node.children" :key="childrensNode.nodeId" class="m-tree-node__with-children__children" :current-path="propCurrentPath" :file-tree="fileTree" :selection-quantity="selectionQuantity" :selection-icon="selectionIcon" :node="childrensNode" :selected-nodes="selectedNodes" :all-open="allOpen" @newNodeSelectected="selectNewNode" @generateErrorTree="generateErrorTree" @selectedNodeFound="selectedNodeFound"></m-tree-node>
+                    <m-tree-node v-for="childrensNode in node.children" :key="childrensNode.nodeId" class="m-tree-node__with-children__children"
+                        :current-path="propCurrentPath" :file-tree="fileTree" :selection-quantity="selectionQuantity" :selection-icon="selectionIcon"
+                        :node="childrensNode" :selected-nodes="selectedNodes" :all-open="allOpen" @newNodeSelectected="selectNewNode"
+                        @generateErrorTree="generateErrorTree" @selectedNodeFound="selectedNodeFound"></m-tree-node>
                 </template>
-                <li v-else class="m-tree-node__with-children__no-children" ref="empty-node-txt"><m-i18n k="m-tree-node:empty"></m-i18n></li>
+                <li v-else class="m-tree-node__with-children__no-children" ref="empty-node-txt">
+                    <m-i18n k="m-tree-node:empty"></m-i18n>
+                </li>
             </ul>
         </transition>
     </div>
-    <template v-else-if="validNode" >
-            <m-link :mode="typeLink" class="m-tree-node__single-node" :class="{ 'm--is-node-selected': nodeSelected }" :disabled="inactiveButton" @click="selectNewNode(propCurrentPath)">
-                <m-file-tree v-if="fileTree" :file="node.content"></m-file-tree>
-                <span>{{ nodeTitle }}</span>
-            </m-link>
-            <m-icon v-if="selectedIcon" :name="selectionIcon"></m-icon>
+    <template v-else-if="validNode">
+        <m-link :mode="typeLink" class="m-tree-node__single-node" :class="{ 'm--is-node-selected': nodeSelected }" :disabled="inactiveButton"
+            @click="selectNewNode(propCurrentPath)">
+            <m-tree-icon class="m-tree-icon" v-if="fileTree" :file="node.content"></m-tree-icon>
+            <span>{{ nodeTitle }}</span>
+        </m-link>
+        <m-icon v-if="selectedIcon" :name="selectionIcon"></m-icon>
     </template>
 </li>

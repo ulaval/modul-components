@@ -4,9 +4,9 @@ import { Prop, Watch } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NODE_NAME } from '../component-names';
-import FileTreePlugin from '../file-tree/file-tree';
 import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
+import TreeIconPlugin from '../tree-icon/tree-icon';
 import { MSelectOption, MTreeFormat, TreeNode } from '../tree/tree';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
@@ -151,7 +151,7 @@ export class MTreeNode extends ModulVue {
 const TreeNodePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(TREE_NODE_NAME, 'plugin.install');
-        v.use(FileTreePlugin);
+        v.use(TreeIconPlugin);
         v.use(IconPlugin);
         v.use(I18nPlugin);
         v.component(TREE_NODE_NAME, MTreeNode);

@@ -98,7 +98,7 @@ const initializeShallowWrapper: any = () => {
 
 const getStubs: any = () => {
     return {
-        ['m-file-tree']: '<div>m-file-tree</div>',
+        ['m-tree-icon']: '<div>m-tree-icon</div>',
         ['m-link']: '<a @click="$emit(\'click\')"><slot /></a>'
     };
 };

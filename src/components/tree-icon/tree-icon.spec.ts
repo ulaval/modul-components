@@ -1,7 +1,7 @@
 import { shallow, Wrapper } from '@vue/test-utils';
 
 import { MTreeFormat } from '../tree/tree';
-import { MFileTree } from './file-tree';
+import { MTreeIcon } from './tree-icon';
 
 const TREE_NODE_FILE: MTreeFormat = {
     nodeLabel: 'Node 1.jpg',
@@ -19,10 +19,10 @@ const FOLDER_CLOSED: string = 'm-svg__file-zip';
 let file: MTreeFormat;
 let folderOpen: boolean = false;
 let folder: boolean = false;
-let wrapper: Wrapper<MFileTree>;
+let wrapper: Wrapper<MTreeIcon>;
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MFileTree, {
+    wrapper = shallow(MTreeIcon, {
         stubs: getStubs(),
         propsData: {
             file,
@@ -39,7 +39,7 @@ const getStubs: any = () => {
     };
 };
 
-describe(`MFileTree`, () => {
+describe(`MTreeIcon`, () => {
 
     describe(`When the node is a folder`, () => {
 
