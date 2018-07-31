@@ -38,7 +38,6 @@ import MessageSandboxPlugin from '../components/message/message.sandbox';
 import ModalSandboxPlugin from '../components/modal/modal.sandbox';
 import NavbarItemSandboxPlugin from '../components/navbar-item/navbar-item.sandbox';
 import NavbarSandboxPlugin from '../components/navbar/navbar.sandbox';
-import OptionItemSandboxPlugin from '../components/option-item/option-item.sandbox';
 import OptionSandboxPlugin from '../components/option/option.sandbox';
 import PageNotFoundSandboxPlugin from '../components/page-not-found/page-not-found.sandbox';
 import PanelSandboxPlugin from '../components/panel/panel.sandbox';
@@ -109,7 +108,6 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(NavbarSandboxPlugin);
         Vue.use(NavbarItemSandboxPlugin);
         Vue.use(OptionSandboxPlugin);
-        Vue.use(OptionItemSandboxPlugin);
         Vue.use(PageNotFoundSandboxPlugin);
         Vue.use(PanelSandboxPlugin);
         Vue.use(PhoneNumberSandboxPlugin);
