@@ -77,11 +77,15 @@ export class MTreeNode extends ModulVue {
 
     public get nodeSelected(): boolean {
         let isSelected: boolean = false;
-        if (this.selectedNodes[0] !== undefined && this.selectedNodes[0] === this.propCurrentPath && this.selectionIcon) {
+        if (this.selected) {
             isSelected = true;
             this.selectedNodeFound();
         }
         return isSelected;
+    }
+
+    public get selectedIcon(): boolean {
+        return this.selected && !!this.selectionIcon;
     }
 
     public get validNode(): boolean {
@@ -130,8 +134,8 @@ export class MTreeNode extends ModulVue {
         this.internalCurrentPath = path;
     }
 
-    private get propSelectionIcon(): string {
-        return this.selectionIcon;
+    private get selected(): boolean {
+        return this.selectedNodes[0] !== undefined && this.selectedNodes[0] === this.propCurrentPath;
     }
 
     private get hasChildren(): boolean {

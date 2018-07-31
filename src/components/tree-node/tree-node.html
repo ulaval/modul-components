@@ -15,10 +15,10 @@
         </transition>
     </div>
     <template v-else-if="validNode" >
-            <m-link :mode="typeLink" class="m-tree-node__single-node" :disabled="inactiveButton" @click="selectNewNode(propCurrentPath)">
+            <m-link :mode="typeLink" class="m-tree-node__single-node" :class="{ 'm--is-node-selected': nodeSelected }" :disabled="inactiveButton" @click="selectNewNode(propCurrentPath)">
                 <m-file-tree v-if="fileTree" :file="node.content"></m-file-tree>
                 <span>{{ nodeTitle }}</span>
             </m-link>
-            <m-icon v-if="nodeSelected" :name="selectionIcon"></m-icon>
+            <m-icon v-if="selectedIcon" :name="selectionIcon"></m-icon>
     </template>
 </li>

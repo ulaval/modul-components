@@ -329,15 +329,35 @@ describe('MTreeNode', () => {
         describe(`When we check if the current node is selected`, () => {
             beforeEach(() => {
                 node = TREE_NODE_WITHOUT_CHILDREN;
-                selectionIcon = SELECTION_ICON;
             });
 
             describe(`When the current node is selected`, () => {
-                it(`The node should be selected`, () => {
-                    selectedNodes = TREE_NODE_SELECTED;
-                    initializeShallowWrapper();
 
-                    expect(wrapper.vm.nodeSelected).toBeTruthy();
+                beforeEach(() => {
+                    selectedNodes = TREE_NODE_SELECTED;
+                });
+
+                describe(`and selectionIcon is not empty`, () => {
+                    beforeEach(() => {
+                        initializeShallowWrapper();
+                    });
+
+                    it(`The node should be selected`, () => {
+                        expect(wrapper.vm.nodeSelected).toBeTruthy();
+                    });
+
+                    it(`The icon should not be visible`, () => {
+                        expect(wrapper.vm.selectedIcon).toBeFalsy();
+                    });
+                });
+
+                describe(`and selectionIcon is empty`, () => {
+                    it(`The icon should be visible`, () => {
+                        selectionIcon = SELECTION_ICON;
+                        initializeShallowWrapper();
+
+                        expect(wrapper.vm.selectedIcon).toBeTruthy();
+                    });
                 });
             });
 
