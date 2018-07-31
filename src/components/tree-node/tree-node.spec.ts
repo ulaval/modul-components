@@ -42,8 +42,7 @@ const TREE_NODE_WITH_CHILDREN_EMPTY: TreeNode<MTreeFormat> = {
 const TREE_NODE_WITH_CHILDREN: TreeNode<MTreeFormat> = {
     content: {
         nodeLabel: 'Node 3',
-        nodeId: 'Node 3',
-        hasChildren: true
+        nodeId: 'Node 3'
     },
     children: [
         {
