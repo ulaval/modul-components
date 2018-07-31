@@ -7,6 +7,7 @@ import WithRender from './navbar.sandbox.html';
 @WithRender
 @Component
 export class MNavbarSandbox extends Vue {
+    public selectedItem = 'item4';
 }
 
 const NavbarSandboxPlugin: PluginObject<any> = {
