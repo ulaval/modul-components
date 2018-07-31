@@ -144,7 +144,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RadioGroupPlugin);
         Vue.use(RadioStylePlugin);
         Vue.use(RichTextLicensePlugin, { key: options.richTextOptions ? options.richTextOptions.key : undefined });
-        Vue.use(RichTextPlugin); // TODO : rich-text read-only mode will always be included.  Are we all ok with that?
+        Vue.use(RichTextPlugin);
         Vue.use(ScrollTopPlugin);
         Vue.use(SessionExpiredPlugin);
         Vue.use(SidebarPlugin);
