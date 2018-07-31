@@ -1,0 +1,9 @@
+<div class="m-menu" :class="'m--is-skin-' + skin">
+    <div class="m-menu__header" @click="onClick">
+        <slot name="trigger"></slot>
+    </div>
+    <ul class="m-menu__body" role="menu">
+        <slot>
+        </slot>
+    </ul>
+</div>

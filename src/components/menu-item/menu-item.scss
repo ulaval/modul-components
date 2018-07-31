@@ -1,0 +1,48 @@
+@import 'abstracts/variables';
+@import '../components/menu/menu-skins';
+
+.m-menu-item {
+    @include menu-skins();
+
+    &.m--is-selected {
+        --menu-item-bdc: #{$m-color--ul-yellow};
+
+        color: #fff;
+        font-weight: $m-font-weight--black;
+    }
+
+    // todo gérer les focus & cie
+    outline: unset;
+
+    &__link {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        padding: $m-spacing--s $m-spacing;
+        min-height: $m-touch-size;
+
+        .m--is-group & {
+            justify-content: space-between;
+        }
+    }
+
+    &.m--is-inside-group {
+        text-transform: lowercase;
+        background-color: var(--menu-item-group-bgc);
+        border-left: 4px solid var(--menu-item-bdc);
+    }
+
+    &:not(.m--is-disabled) {
+        cursor: pointer;
+    }
+
+    &.m--is-disabled {
+        cursor: not-allowed;
+    }
+
+    &__icon {
+        margin-right: $m-padding;
+    }
+}
+

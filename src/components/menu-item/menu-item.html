@@ -1,0 +1,24 @@
+<li class="m-menu-item" :class="{'m--is-selected': isSelected,
+ 'm--is-disabled': isDisabled,
+ 'm--has-icon': hasIcon,
+ 'm--is-group' : group,
+ 'm--is-inside-group' : insideGroup}" tabindex="-1" role="none">
+
+    <router-link v-if="url" @click="onClick" :to="url" class="m-menu-item__link" role="menuitem" :aria-selected="isSelected">
+        <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
+        <span class="m-menu-item__label">{{ label }}</span>
+    </router-link>
+
+    <span v-else @click="onClick" class="m-menu-item__link">
+        <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
+        <span class="m-menu-item__label">{{ label }}</span>
+        <!-- a remplacer par le m-plus -->
+        <m-icon class="m-menu-item__plus" ref="plus" v-if="group" name="m-svg__chevron--down"></m-icon>
+    </span>
+
+    <m-accordion-transition>
+        <ul ref="group" v-show="group && isSelected || hasChildrenSelected">
+            <slot></slot>
+        </ul>
+    </m-accordion-transition>
+</li>

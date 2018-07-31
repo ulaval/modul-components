@@ -38,6 +38,8 @@ import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import ListItemPlugin from './list-item/list-item';
 import LoginPlugin from './login/login';
+import MenuItemPlugin from './menu-item/menu-item';
+import MenuPlugin from './menu/menu';
 import MessagePlugin from './message/message';
 import ModalPlugin from './modal/modal';
 import NavbarItemPlugin from './navbar-item/navbar-item';
@@ -124,6 +126,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(NavbarPlugin);
         Vue.use(NavbarItemPlugin);
         Vue.use(OptionPlugin);
+        Vue.use(MenuPlugin);
+        Vue.use(MenuItemPlugin);
         Vue.use(OptionItemAddPlugin);
         Vue.use(OptionItemArchivePlugin);
         Vue.use(OptionItemDeletePlugin);
