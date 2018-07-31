@@ -34,7 +34,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -74,7 +74,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -111,10 +111,10 @@
         <m-navbar-item value="item8">
             8
         </m-navbar-item>
-        <m-navbar-item value="item9">
+        <m-navbar-item value="item9" @click="toggleNav">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -124,6 +124,24 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
+    <m-accordion-transition>
+        <div v-if="navOpen" >
+            <m-navbar skin="darkest" selected="item3">
+                <m-navbar-item value="item1">
+                    Élément enfant 1
+                </m-navbar-item>
+                <m-navbar-item value="item2">
+                    Élément enfant 2
+                </m-navbar-item>
+                <m-navbar-item value="item3">
+                    Élément enfant 3
+                </m-navbar-item>
+                <m-navbar-item value="item4">
+                    Élément enfant 4
+                </m-navbar-item>
+            </m-navbar>
+        </div>
+    </m-accordion-transition>
 
     <h3>Skin darkest</h3>
     <m-navbar skin="darkest" :selected.sync="selectedItem">
@@ -154,7 +172,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -194,7 +212,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -234,7 +252,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -274,7 +292,47 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
+            10 chèvres et 10 moutons
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11 barnacles magestueuses volant vers le lointain
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12 zaine d'oeufs
+        </m-navbar-item>
+    </m-navbar>
+
+    <h3>Skin dark-tab</h3>
+    <m-navbar skin="dark-tab" :selected.sync="selectedItem">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9 singes
+        </m-navbar-item>
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">

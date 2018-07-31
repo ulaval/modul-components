@@ -2,13 +2,17 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { NAVBAR_NAME } from '../component-names';
-import WithRender from './navbar.sandbox.html';
+import WithRender from './navbar.sandbox.html?style=./navbar.sandbox.scss';
 
 @WithRender
 @Component
 export class MNavbarSandbox extends Vue {
-    private selected: string = 'TVA4';
-    private selectedItem: string = 'item4';
+    private selectedItem: string = 'item11';
+    private navOpen: boolean = false;
+
+    private toggleNav(): void {
+        this.navOpen = !this.navOpen;
+    }
 }
 
 const NavbarSandboxPlugin: PluginObject<any> = {

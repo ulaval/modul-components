@@ -8,7 +8,7 @@ import { BaseNavbar, Navbar } from '../navbar/navbar';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
 
 // must be sync with selected css class
-const SELECTEDCLASS: string = 'm--is-selected';
+const FAKE_SELECTED_CLASS: string = 'm--is-fake-selected';
 
 @WithRender
 @Component
@@ -41,62 +41,63 @@ export class MNavbarItem extends ModulVue {
         if (parentNavbar) {
             this.parentNavbar = (parentNavbar as any) as Navbar;
             this.setDimension();
+
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
         }
+
+        setTimeout(() => {
+            this.setDimension();
+        });
+        this.$modul.event.$on('resize', this.setDimension);
+    }
+
+    private beforeDestroy(): void {
+        this.$modul.event.$off('resize', this.setDimension);
     }
 
     private stripHtml(html): string {
-        // Create a new div element
         let temporalDivElement: HTMLElement = document.createElement('div');
-        // Set the HTML content with the providen
         temporalDivElement.innerHTML = html;
-        // Retrieve the text property of the element (cross-browser support)
         return temporalDivElement.textContent || temporalDivElement.innerText || '';
     }
 
     private setDimension(): void {
         let itemEl: HTMLElement = this.$refs.item as HTMLElement;
-        let itemElComputedStyle: any = window.getComputedStyle(itemEl);
-        let lineHeight: number = parseFloat(itemElComputedStyle.getPropertyValue('line-height'));
-
-        // must subtract the padding, create a infinite loop
-        let pt: number = parseInt(itemElComputedStyle.getPropertyValue('padding-top'), 10);
-        let pb: number = parseInt(itemElComputedStyle.getPropertyValue('padding-bottom'), 10);
-        let paddingH: number = pt + pb;
-
-        let h: number = itemEl.clientHeight - paddingH;
-
+        itemEl.style.removeProperty('width');
+        itemEl.style.removeProperty('max-width');
+        itemEl.style.removeProperty('white-space');
         let itemValueLength: any = this.stripHtml(itemEl.innerHTML).trim().length;
-        let w: number = itemEl.clientWidth;
-        let lines: number = Math.floor(h / lineHeight);
 
-        if (itemValueLength > 30 && lines > 2) {
-            itemEl.style.removeProperty('white-space');
-            itemEl.style.maxWidth = 'none';
+        if (itemValueLength > 15) {
+            let itemElComputedStyle: any = window.getComputedStyle(itemEl);
+            let fontSize: number = parseFloat(itemElComputedStyle.getPropertyValue('font-size'));
+            let paddingH: number = parseInt(itemElComputedStyle.getPropertyValue('padding-top'), 10) + parseInt(itemElComputedStyle.getPropertyValue('padding-bottom'), 10);
+            // must subtract the padding, create a infinite loop
+            let itemElHeight: number = itemEl.clientHeight - paddingH;
+            let lines: number = Math.floor(itemElHeight / fontSize);
 
-            // use selected class to reserve space for when selected
-            itemEl.style.transition = 'none';
-            this.$el.classList.add(SELECTEDCLASS);
-            // create a infinite loop if the parent has 'align-items: stretch'
-            (this.$parent.$refs.list as HTMLElement).style.alignItems = 'flex-start';
+            if (lines > 2) {
+                // use selected class to reserve space for when selected
+                this.$el.classList.add(FAKE_SELECTED_CLASS);
+                // create a infinite loop if the parent has 'align-items: stretch'
+                (this.$parent.$refs.list as HTMLElement).style.alignItems = 'flex-start';
 
-            do {
-                // increment width
-                w++;
-                itemEl.style.width = w + 'px';
-                this.$log.log(itemEl.style.width);
+                do {
+                    itemEl.style.width = itemEl.clientWidth + 1 + 'px'; // increment width
 
-                // update values
-                h = itemEl.clientHeight - paddingH;
-                lines = Math.floor(h / lineHeight);
+                    // update values
+                    itemElHeight = itemEl.clientHeight - paddingH;
+                    lines = Math.floor(itemElHeight / fontSize);
+                } while (lines > 2);
 
-            } while (lines > 2);
+                // reset styles once completed
+                this.$el.classList.remove(FAKE_SELECTED_CLASS);
+                (this.$parent.$refs.list as HTMLElement).style.removeProperty('align-items');
+            } else {
+                itemEl.style.maxWidth = '280px';
+            }
 
-            // reset styles once completed
-            this.$el.classList.remove(SELECTEDCLASS);
-            itemEl.style.removeProperty('transition');
-            (this.$parent.$refs.list as HTMLElement).style.removeProperty('align-items');
         } else {
             itemEl.style.whiteSpace = 'nowrap';
         }
@@ -112,22 +113,26 @@ export class MNavbarItem extends ModulVue {
 
     private onClick(event: Event): void {
         if (!this.disabled && this.parentNavbar) {
-            this.parentNavbar.onClick(this.value, event);
+            this.parentNavbar.onClick(event, this.value);
             if (this.value !== this.parentNavbar.model) {
                 this.parentNavbar.updateValue(this.value);
             }
+            this.$emit('click', event);
         }
     }
 
     private onMouseover(event: Event): void {
-        if (!this.disabled && this.parentNavbar && this.parentNavbar.mouseEvent) {
-            this.parentNavbar.onMouseover(this.value, event);
+        if (!this.disabled && this.parentNavbar) {
+            this.parentNavbar.onMouseover(event, this.value);
+            this.$emit('mouseover', event);
         }
+
     }
 
     private onMouseleave(event: Event): void {
-        if (!this.disabled && this.parentNavbar && this.parentNavbar.mouseEvent) {
-            this.parentNavbar.onMouseleave(this.value, event);
+        if (!this.disabled && this.parentNavbar) {
+            this.parentNavbar.onMouseleave(event, this.value);
+            this.$emit('mouseleave', event);
         }
     }
 }

@@ -17,7 +17,7 @@
         overflow: hidden;
     }
 
-    &:not(.m--is-skin-light-tab) {
+    &:not(.m--is-skin-light-tab):not(.m--is-skin-dark-tab) {
         .m-navbar__button {
             &.m--is-right {
                 button {
@@ -30,13 +30,6 @@
                     margin-left: -$m-padding;
                 }
             }
-        }
-    }
-
-    &.m--is-skin-darker,
-    &.m--is-skin-darkest {
-        .m-navbar__button {
-            stroke-width: 2;
         }
     }
 
@@ -55,8 +48,6 @@
     }
 
     &.m--is-skin-darkest {
-        border-top: 1px solid $m-color--black;
-        box-shadow: 0 0 7px $m-color--black inset;
         background: $m-color--grey-darkest;
 
         .m-navbar__button {
@@ -110,7 +101,7 @@
             content: '';
             width: 100%;
             height: $m-border-width--s;
-            background: $m-color--text;
+            background: $m-color--border;
         }
 
         .m-navbar__button {
@@ -118,11 +109,10 @@
         }
     }
 
-    &.m--is-skin-light-tab {
+    &.m--is-skin-light-tab,
+    &.m--is-skin-dark-tab {
         .m-navbar__button {
             $m-navbar--button-width: 14px;
-
-            background: $m-color--grey-light;
 
             &.m--is-left::after,
             &.m--is-right::before {
@@ -130,12 +120,10 @@
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                width: 14px;
+                width: $m-navbar--button-width;
             }
 
             &.m--is-left {
-                border-right: 1px solid $m-color--white;
-
                 &::after {
                     right: 0;
                     transform: translateX(100%);
@@ -144,13 +132,39 @@
             }
 
             &.m--is-right {
-                border-left: 1px solid $m-color--white;
-
                 &::before {
                     left: 0;
                     transform: translateX(-100%);
                     background: linear-gradient(to left, rgba($m-color--black, 0.1), rgba($m-color--black, 0));
                 }
+            }
+        }
+    }
+
+    &.m--is-skin-dark-tab {
+        .m-navbar__button {
+            background: $m-color--grey-darkest;
+
+            &.m--is-left {
+                border-right: 1px solid $m-color--grey-darker;
+            }
+
+            &.m--is-right {
+                border-left: 1px solid $m-color--grey-darker;
+            }
+        }
+    }
+
+    &.m--is-skin-light-tab {
+        .m-navbar__button {
+            background: $m-color--grey-light;
+
+            &.m--is-left {
+                border-right: 1px solid $m-color--white;
+            }
+
+            &.m--is-right {
+                border-left: 1px solid $m-color--white;
             }
         }
     }
@@ -190,6 +204,7 @@
         align-items: center;
         justify-content: center;
         max-width: 64px;
+        stroke-width: 2;
 
         &.m--is-left {
             left: 0;
@@ -213,7 +228,6 @@
         padding: 0;
         margin: 0;
         display: inline-flex;
-        justify-content: space-between;
         text-align: center;
     }
 
@@ -241,7 +255,7 @@
         }
 
         &::before {
-            color: $m-color--text;
+            color: $m-color--border;
             top: 0;
         }
 

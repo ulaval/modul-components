@@ -1,6 +1,6 @@
 <li class="m-navbar-item"
     :class="{'m--is-selected': isSelected,
-             'm--is-disabled': disabled}"
+             'm--is-disabled': disabled }"
     role="menuitem">
     <router-link class="m-navbar-item__contents"
                  ref="item"
@@ -13,7 +13,7 @@
                  :aria-haspopup="ariaHaspopup"
                  :aria-expanded="ariaExpanded"
                  :aria-controls="ariaControls">
-        <slot></slot>
+        <span class="m-navbar-item__text"><slot></slot></span>
     </router-link>
     <div class="m-navbar-item__contents"
          ref="item"
@@ -27,6 +27,6 @@
          :aria-expanded="ariaExpanded"
          :aria-controls="ariaControls"
          :role="disabled ? undefined : 'button'" v-else>
-        <slot></slot>
+        <span class="m-navbar-item__text"><slot></slot></span>
     </div>
 </li>
