@@ -131,7 +131,7 @@ export class MTreeNode extends ModulVue {
     }
 
     private get hasChildren(): boolean {
-        return this.node.content.hasChildren !== undefined && this.node.content.hasChildren;
+        return (this.node.children !== undefined && !!this.node.children.length) || (this.node.content.hasChildren !== undefined && this.node.content.hasChildren);
     }
 
     private get parentOfSelectedFile(): boolean {
