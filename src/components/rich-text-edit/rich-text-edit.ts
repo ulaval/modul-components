@@ -10,7 +10,7 @@ import MessagePlugin from '../../utils/i18n/i18n';
 import LicensePlugin from '../../utils/license/license';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import { RICH_TEXT_EDIT } from '../component-names';
+import { RICH_TEXT_EDIT_NAME } from '../component-names';
 import { InputManagement, InputManagementData } from './../../mixins/input-management/input-management';
 import VueFroala from './adapter/vue-froala';
 import { MRichTextEditorDefaultOptions, MRichTextEditorStandardOptions } from './rich-text-edit-options';
@@ -89,7 +89,7 @@ export class RichTextLicensePlugin implements PluginObject<RichTextLicensePlugin
         if (options.key) {
             (v.prototype as ModulVue).$license.addLicense(RICH_TEXT_LICENSE_KEY, options.key);
         }
-        v.use(RICH_TEXT_EDIT, MRichTextEdit);
+        v.use(RICH_TEXT_EDIT_NAME, MRichTextEdit);
     }
 }
 

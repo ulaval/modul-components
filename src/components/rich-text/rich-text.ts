@@ -3,7 +3,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
-import { RICH_TEXT } from '../component-names';
+import { RICH_TEXT_NAME } from '../component-names';
 import WithRender from './rich-text.html?style=./rich-text.scss';
 
 @WithRender
@@ -15,7 +15,7 @@ export class MRichText extends ModulVue {
 
 const RichTextPlugin: PluginObject<any> = {
     install(v): void {
-        v.component(RICH_TEXT, RichTextPlugin);
+        v.component(RICH_TEXT_NAME, RichTextPlugin);
     }
 };
 
