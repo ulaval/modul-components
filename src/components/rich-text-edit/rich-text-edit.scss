@@ -1,0 +1,51 @@
+@import 'abstracts/variables';
+
+.m-rich-text {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+
+    &.m--has-error {
+        .m-rich-text__validation {
+            color: $m-color--error;
+        }
+    }
+
+    &.m--is-valid {
+        .m-rich-text__validation {
+            color: $m-color--success;
+        }
+    }
+
+    &__validation {
+        display: flex;
+        justify-content: flex-end;
+
+        &__message {
+            flex: 1 1 auto;
+        }
+    }
+
+    &__label {
+        font-size: $m-font-size;
+        font-weight: $m-font-weight--bold;
+    }
+
+    &__input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        outline: none;
+        resize: none;
+        overflow: hidden;
+
+        &-hidden {
+            opacity: 0;
+            word-wrap: break-word;
+        }
+    }
+}

@@ -4,6 +4,12 @@ a {
     text-decoration: none;
 }
 
+// for multiline
+.m-navbar-item {
+    max-width: 200 + $m-spacing--l * 2;
+    word-break: break-word;
+}
+
 .m--is-skin-tab {
     .m-navbar-item {
         + .m-navbar-item {
@@ -158,56 +164,19 @@ a {
     }
 }
 
-.m--is-skin-simple {
-    .m-navbar-item {
-        padding: $m-spacing $m-spacing--l;
-        transition: color 0.4s ease, font-weight 0.4s ease;
-        position: relative;
-
-        &:not(:last-child) {
-            &::after {
-                content: "";
-                display: block;
-                height: 16px;
-                width: 1px;
-                position: absolute;
-                background-color: $m-color--text;
-                right: 0;
-                top: 50%;
-                transform: translate3d(0, -50%, 0);
-            }
-        }
-
-        &:hover {
-            color: $m-color--black;
-        }
-
-        &.m--is-selected {
-            color: $m-color--black;
-            font-weight: 600;
-        }
-    }
-}
-
-.m--is-skin-dark {
+.m--is-skin-darker,
+.m--is-skin-darkest {
     .m-navbar-item {
         font-size: $m-font-size--h5;
         font-weight: $m-font-weight--bold;
-        color: $m-color--grey;
         text-transform: uppercase;
         padding: $m-spacing--l;
         transition: color 0.4s ease;
+        justify-content: center;
+        color: $m-color--grey;
 
-        // for multiline feature to come
-        // max-width: 200 + $m-spacing--l * 2;
-        // min-width: 120 + $m-spacing--l * 2;
-        // word-break: break-word;
-
-        &::before {
-            content: '';
-            background-color: $m-color--grey-darker;
-            transition: background-color 0.4s ease;
-        }
+        // for multiline
+        min-width: 120  + $m-spacing--l * 2;
 
         &:hover {
             color: $m-color--white;
@@ -216,7 +185,19 @@ a {
         &.m--is-selected {
             color: $m-color--white;
             font-weight: $m-font-weight--black;
+        }
+    }
+}
 
+.m--is-skin-darker {
+    .m-navbar-item {
+        &::before {
+            content: '';
+            background-color: $m-color--grey-darker;
+            transition: background-color 0.4s ease;
+        }
+
+        &.m--is-selected {
             &::before {
                 position: absolute;
                 top: 0;
@@ -225,6 +206,21 @@ a {
                 width: 60px;
                 height: $m-border-width--l;
                 background-color: $m-color--active;
+            }
+        }
+    }
+}
+
+.m--is-skin-darkest {
+    .m-navbar-item {
+        &:not(:last-child) {
+            &::before {
+                content: '';
+                position: absolute;
+                right: 0;
+                width: 1px;
+                height: 1em;
+                background-color: $m-color--grey;
             }
         }
     }
