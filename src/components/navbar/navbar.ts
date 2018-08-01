@@ -77,6 +77,10 @@ export class MNavbar extends BaseNavbar implements Navbar {
     public maxWidth: string;
     @Prop()
     public multiline: boolean;
+    @Prop()
+    public titleButtonLeft: string;
+    @Prop()
+    public titleButtonRight: string;
 
     public $refs: {
         buttonRight: HTMLElement,
@@ -123,7 +127,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     protected mounted(): void {
         this.setupScrolllH();
-        this.setDisplayButtonArrrow();
         this.as<ElementQueries>().$on('resize', this.setupScrolllH);
 
         this.$children.forEach((child: Vue) => {
@@ -188,6 +191,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
             contentsEl.style.height = this.computedHeight + 'px';
 
             this.scrollToSelected();
+            this.setDisplayButtonArrrow();
 
         } else {
             this.showArrowLeft = false;

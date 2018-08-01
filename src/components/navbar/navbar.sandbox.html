@@ -8,7 +8,7 @@
     <m-button @click="toggleMultiline">{{ multiline ? 'Remove' : 'Add' }} multiline</m-button>
 
     <h3>Skin light (default)</h3>
-    <m-navbar :selected.sync="selectedItem" :multiline="multiline">
+    <m-navbar :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -48,7 +48,7 @@
     </m-navbar>
 
     <h3>Skin arrow</h3>
-    <m-navbar skin="arrow" :selected.sync="selectedItem" :multiline="multiline">
+    <m-navbar skin="arrow" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -88,7 +88,7 @@
     </m-navbar>
 
     <h3>Skin darker</h3>
-    <m-navbar skin="darker" :selected.sync="selectedItem" :multiline="multiline">
+    <m-navbar skin="darker" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -146,7 +146,7 @@
     </m-accordion-transition>
 
     <h3>Skin darkest</h3>
-    <m-navbar skin="darkest" :selected.sync="selectedItem" :multiline="multiline">
+    <m-navbar skin="darkest" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -186,7 +186,7 @@
     </m-navbar>
 
     <h3>Skin soft</h3>
-    <m-navbar skin="soft" :selected.sync="selectedItem" :multiline="multiline" style="background: #09f;">
+    <m-navbar skin="soft" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant" style="background: #09f;">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -226,7 +226,7 @@
     </m-navbar>
 
     <h3>Skin simple</h3>
-    <m-navbar skin="simple" :selected.sync="selectedItem" :multiline="multiline">
+    <m-navbar skin="simple" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -266,7 +266,7 @@
     </m-navbar>
 
     <h3>Skin light-tab</h3>
-    <m-navbar skin="light-tab" :selected.sync="selectedItem" :multiline="multiline">
+    <m-navbar skin="light-tab" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -306,7 +306,7 @@
     </m-navbar>
 
     <h3>Skin dark-tab</h3>
-    <m-navbar skin="dark-tab" :selected.sync="selectedItem" :multiline="multiline">
+    <m-navbar skin="dark-tab" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
