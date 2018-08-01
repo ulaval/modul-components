@@ -31,7 +31,7 @@ export class MInputStyle extends ModulVue {
     @Prop()
     public readonly: boolean;
 
-    private isAnimReady: boolean = false;
+    private animReady: boolean = false;
 
     public setInputWidth(): void {
         this.$nextTick(() => {
@@ -61,7 +61,7 @@ export class MInputStyle extends ModulVue {
     }
     protected created(): void {
         setTimeout(() => {
-            this.isAnimReady = true;
+            this.animReady = true;
             this.setInputWidth();
         }, 0);
     }
