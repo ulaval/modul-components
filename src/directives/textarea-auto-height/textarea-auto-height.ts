@@ -4,6 +4,27 @@ import { TEXTAREA_AUTO_HEIGHT } from '../directive-names';
 
 interface TextareaAutoHeightBinding extends VNodeDirective {
     ajustHeight: () => void;
+    setDisabledUpdate: () => void;
+}
+
+let textareaAutoHeightDisabledUpdate: boolean = false;
+
+function textareaAutoHeightAjustHeight(element: HTMLElement): void {
+    if (element && element.tagName === 'TEXTAREA') {
+        let outerHeight: number = parseInt((window.getComputedStyle(element).height as string), 10);
+        let diff: number = outerHeight - element.clientHeight;
+        element.style.height = '0';
+        element.style.height = element.scrollHeight + diff + 'px';
+    }
+}
+
+function textareaAutoHeightSetDisabledUpdate(): void {
+    textareaAutoHeightDisabledUpdate = true;
+    setTimeout(() => {
+        if (textareaAutoHeightDisabledUpdate) {
+            textareaAutoHeightDisabledUpdate = false;
+        }
+    }, 800);
 }
 
 const MTextareaAutoHeight: DirectiveOptions = {
@@ -12,13 +33,14 @@ const MTextareaAutoHeight: DirectiveOptions = {
             node.context.$nextTick(() => {
                 if (node.context && element) {
                     binding.ajustHeight = () => {
-                        if (element) {
-                            let outerHeight: number = parseInt((window.getComputedStyle(element).height as string), 10);
-                            let diff: number = outerHeight - element.clientHeight;
-                            element.style.height = '0';
-                            element.style.height = element.scrollHeight + diff + 'px';
-                        }
+                        textareaAutoHeightAjustHeight(element);
+                        textareaAutoHeightSetDisabledUpdate();
                     };
+                    binding.setDisabledUpdate = () => {
+                        textareaAutoHeightSetDisabledUpdate();
+                    };
+
+                    element.addEventListener('mousedown', binding.setDisabledUpdate);
                     element.addEventListener('input', binding.ajustHeight);
                     window.addEventListener('resize', binding.ajustHeight);
                     setTimeout(() => {
@@ -29,17 +51,19 @@ const MTextareaAutoHeight: DirectiveOptions = {
         }
     },
     update(element: HTMLElement): void {
-        if (element.tagName === 'TEXTAREA') {
-            let outerHeight: number = parseInt((window.getComputedStyle(element).height as string), 10);
-            let diff: number = outerHeight - element.clientHeight;
-            element.style.height = '0';
-            element.style.height = element.scrollHeight + diff + 'px';
+        if (!textareaAutoHeightDisabledUpdate) {
+            textareaAutoHeightAjustHeight(element);
         }
     },
     unbind(element: HTMLElement, binding: TextareaAutoHeightBinding): void {
-        if (element.tagName === 'TEXTAREA' && binding.ajustHeight) {
-            element.removeEventListener('input', binding.ajustHeight);
-            window.removeEventListener('resize', binding.ajustHeight);
+        if (element.tagName === 'TEXTAREA') {
+            if (binding.setDisabledUpdate) {
+                element.removeEventListener('mousedown', binding.setDisabledUpdate);
+            }
+            if (binding.ajustHeight) {
+                element.removeEventListener('input', binding.ajustHeight);
+                window.removeEventListener('resize', binding.ajustHeight);
+            }
         }
     }
 };
