@@ -22,31 +22,27 @@ export class MErrorBrowserNotSupported extends ModulVue {
     })
     public title: string;
 
+    @Prop({
+        default: () => [new Link((Vue.prototype as any).$i18n.translate('m-error-browser-not-supported:update-browser.desktop'), 'http://outdatedbrowser.com/fr', true)]
+    })
+    public linksDesktop: Link[];
+
     @Prop({ default: () => [] })
-    public links: Link[];
+    public linksMobile: Link[];
 
     @Prop({
-        default: () => []
+        default: () => [(Vue.prototype as any).$i18n.translate('m-error-browser-not-supported:hint.primary.desktop')]
     })
-    public hints: string[];
+    public hintsDesktop: string[];
+
+    @Prop({
+        default: () => [(Vue.prototype as any).$i18n.translate('m-error-browser-not-supported:hint.primary.mobile')]
+    })
+    public hintsMobile: string[];
 
     readonly skin: string = MErrorTemplateSkin.Warning;
 
     readonly iconName: string = 'm-svg__warning';
-
-    private get mqAwareLinks(): Link[] {
-        if (this.links.length === 0) {
-            return this.as<MediaQueries>().isMqMinS ? [new Link(this.$i18n.translate('m-error-browser-not-supported:update-browser.desktop'), 'http://outdatedbrowser.com/fr', true)] : [];
-        }
-        return this.links;
-    }
-
-    private get mqAwareHints(): string[] {
-        if (this.hints.length === 0) {
-            return this.as<MediaQueries>().isMqMinS ? [this.$i18n.translate('m-error-browser-not-supported:hint.primary.desktop')] : [this.$i18n.translate('m-error-browser-not-supported:hint.primary.mobile')];
-        }
-        return this.hints;
-    }
 }
 
 const ErrorBrowserNotSupported: PluginObject<any> = {
