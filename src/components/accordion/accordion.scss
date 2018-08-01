@@ -11,10 +11,22 @@ $m-accordion--border-color: $m-color--border !default;
 $m-accordion--color-default: $m-color--interactive !default;
 
 .m-accordion {
-    &.m--is-default,
+    &.m--is-default {
+        &:not(.m--is-open) + .m-accordion {
+            margin-top: -$m-accordion--border-size;
+        }
+
+        &.m--is-open + .m-accordion {
+            margin-top: -1px;
+        }
+    }
+
     &.m--is-dark {
-        + .m-accordion {
-            margin-top: - $m-accordion--border-size;
+        transition: padding-top $m-transition-duration ease;
+        background: $m-color--grey-darkest;
+
+        &:not(.m--is-open) + .m-accordion {
+            padding-top: $m-accordion--border-size;
         }
     }
 
@@ -65,8 +77,6 @@ $m-accordion--color-default: $m-color--interactive !default;
         .m-accordion.m--is-dark > & {
             color: $m-color--white;
             background-color: $m-color--grey-darker;
-            border-top: $m-accordion--border-size solid $m-color--grey-darkest;
-            border-bottom: $m-accordion--border-size solid $m-color--grey-darkest;
             transition: border-size 0.5s ease;
 
             &::after {
@@ -171,12 +181,13 @@ $m-accordion--color-default: $m-color--interactive !default;
         .m-accordion.m--is-default > & {
             color: $m-color--text;
             background-color: $m-color--white;
-            border-bottom: 1px $m-color--border solid;
+            border-bottom: 1px solid $m-color--border;
         }
 
         .m-accordion.m--is-dark > & {
+            border-top: 2px solid $m-color--grey-darkest;
             color: $m-color--white;
-            background-color: #303030; // warning new grey detected, send the greyminator! >_<
+            background: #303030; // warning new grey detected, send the greyminator! >_<
             box-shadow: 0 0 7px $m-color--grey-darkest inset;
         }
     }
