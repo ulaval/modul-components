@@ -5,8 +5,10 @@
         Show the different skins possible for the component
     </p>
 
+    <m-button @click="toggleMultiline">{{ multiline ? 'Remove' : 'Add' }} multiline</m-button>
+
     <h3>Skin light (default)</h3>
-    <m-navbar :selected.sync="selectedItem">
+    <m-navbar :selected.sync="selectedItem" :multiline="multiline">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -46,7 +48,7 @@
     </m-navbar>
 
     <h3>Skin arrow</h3>
-    <m-navbar skin="arrow" :selected.sync="selectedItem">
+    <m-navbar skin="arrow" :selected.sync="selectedItem" :multiline="multiline">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -86,7 +88,7 @@
     </m-navbar>
 
     <h3>Skin darker</h3>
-    <m-navbar skin="darker" :selected.sync="selectedItem">
+    <m-navbar skin="darker" :selected.sync="selectedItem" :multiline="multiline">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -144,7 +146,7 @@
     </m-accordion-transition>
 
     <h3>Skin darkest</h3>
-    <m-navbar skin="darkest" :selected.sync="selectedItem">
+    <m-navbar skin="darkest" :selected.sync="selectedItem" :multiline="multiline">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -184,7 +186,7 @@
     </m-navbar>
 
     <h3>Skin soft</h3>
-    <m-navbar skin="soft" :selected.sync="selectedItem" style="background: #09f;">
+    <m-navbar skin="soft" :selected.sync="selectedItem" :multiline="multiline" style="background: #09f;">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -224,7 +226,7 @@
     </m-navbar>
 
     <h3>Skin simple</h3>
-    <m-navbar skin="simple" :selected.sync="selectedItem">
+    <m-navbar skin="simple" :selected.sync="selectedItem" :multiline="multiline">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -264,7 +266,7 @@
     </m-navbar>
 
     <h3>Skin light-tab</h3>
-    <m-navbar skin="light-tab" :selected.sync="selectedItem">
+    <m-navbar skin="light-tab" :selected.sync="selectedItem" :multiline="multiline">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -304,7 +306,7 @@
     </m-navbar>
 
     <h3>Skin dark-tab</h3>
-    <m-navbar skin="dark-tab" :selected.sync="selectedItem">
+    <m-navbar skin="dark-tab" :selected.sync="selectedItem" :multiline="multiline">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>

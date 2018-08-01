@@ -1,7 +1,8 @@
 <div class="m-navbar"
      :class="['m--is-skin-' + skin,
              { 'm--is-disabled': disabled,
-               'm--is-anim-ready': animReady }]">
+               'm--is-anim-ready': animReady,
+               'm--is-multiline': multiline }]">
     <div class="m-navbar__max-width" :style="{ maxWidth: maxWidth }">
         <transition name="m--is">
             <div ref="buttonLeft" class="m-navbar__button m--is-left" @click="scrollLeft" v-if="hasArrowLeft">

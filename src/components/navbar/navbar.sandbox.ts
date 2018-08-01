@@ -7,8 +7,13 @@ import WithRender from './navbar.sandbox.html?style=./navbar.sandbox.scss';
 @WithRender
 @Component
 export class MNavbarSandbox extends Vue {
-    private selectedItem: string = 'item11';
+    private selectedItem: string = 'item6';
     private navOpen: boolean = false;
+    private multiline: boolean = true;
+
+    private toggleMultiline(): void {
+        this.multiline = !this.multiline;
+    }
 
     private toggleNav(): void {
         this.navOpen = !this.navOpen;

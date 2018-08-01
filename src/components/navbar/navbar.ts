@@ -14,6 +14,7 @@ export abstract class BaseNavbar extends ModulVue { }
 
 export interface Navbar {
     model: string;
+    multiline: boolean;
     updateValue(value: string): void;
     onMouseover(event: Event, value: string): void;
     onMouseleave(event: Event, value: string): void;
@@ -74,6 +75,8 @@ export class MNavbar extends BaseNavbar implements Navbar {
     public navigationArrow: boolean;
     @Prop({ default: MNavbarMaxWidth.Large })
     public maxWidth: string;
+    @Prop()
+    public multiline: boolean;
 
     public $refs: {
         buttonRight: HTMLElement,
@@ -120,20 +123,11 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     protected mounted(): void {
         this.setupScrolllH();
+        this.setDisplayButtonArrrow();
         this.as<ElementQueries>().$on('resize', this.setupScrolllH);
 
         this.$children.forEach((child: Vue) => {
             child.$on('resize', this.setupScrolllH);
-        });
-
-        // delay the animation beyond initial load
-        setTimeout(() => {
-            this.scrollToSelected();
-             // delay the animation beyond initial load
-            setTimeout(() => {
-                this.animReady = true;
-
-            });
         });
 
         this.$refs.wrap.addEventListener('scroll', this.setDisplayButtonArrrow);
@@ -142,6 +136,13 @@ export class MNavbar extends BaseNavbar implements Navbar {
     protected beforeDestroy(): void {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
         this.$refs.wrap.removeEventListener('scroll', this.setDisplayButtonArrrow);
+    }
+
+    @Watch('multiline')
+    private multilineChanged(): void {
+        setTimeout(() => {
+            this.setupScrolllH();
+        });
     }
 
     private setDisplayButtonArrrow(): void {
@@ -161,7 +162,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
         return this.showArrowLeft && this.navigationArrow;
     }
 
-    private setPosition(element, ref: string): void {
+    private setSelectedIndicatorPosition(element, ref: string): void {
         let positionX: number = element.$el.offsetLeft;
         let width: number = element.$el.clientWidth;
         let localRef: HTMLElement = this.$refs[ref];
@@ -173,12 +174,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Watch('selected')
     private setAndUpdate(value): void {
         this.internalValue = value;
-        if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
-            let selected: Vue | undefined = this.$children.find(element => element.$props.value === this.selected);
-            if (selected) {
-                this.setPosition(selected, this.skin);
-            }
-        }
+        this.scrollToSelected();
     }
 
     private setupScrolllH(): void {
@@ -193,26 +189,48 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
             this.scrollToSelected();
 
-            this.setDisplayButtonArrrow();
-
         } else {
             this.showArrowLeft = false;
             this.showArrowRight = false;
             wrapEl.style.removeProperty('height');
             contentsEl.style.removeProperty('height');
         }
+
+        if (!this.animReady) {
+            setTimeout(() => {
+                this.animReady = true;
+            });
+        }
     }
 
     private scrollToSelected(): void {
         this.$children.forEach(element => {
-            if (element.$props.value === this.selected) {
-                let boutonWidth: number = this.hasArrowLeft ? this.$refs.buttonLeft.clientWidth : 0;
-                this.$refs.wrap.scrollLeft = element.$el.offsetLeft - boutonWidth;
+            // Allow time to make sure an item is selected
+            setTimeout(() => {
+                if (element.$props.value === this.selected) {
+                    let buttonLeftWidth: number = this.hasArrowLeft ? this.$refs.buttonLeft.clientWidth : 0;
+                    let buttonRightWidth: number = this.hasArrowRight ? this.$refs.buttonRight.clientWidth : 0;
+                    let wrapEl: HTMLElement = this.$refs.wrap;
+                    let scrollPositionAlignLeft: number = element.$el.offsetLeft - buttonLeftWidth;
 
-                if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
-                    this.setPosition(element, this.skin);
+                    // Check if selected element is visible in navbar
+                    if (wrapEl.clientWidth > (element.$el.offsetLeft - wrapEl.scrollLeft + buttonRightWidth)) {
+                        // Check if the selected element exceeds on the left side
+                        if ((element.$el.offsetLeft - buttonLeftWidth - wrapEl.scrollLeft) < 0) {
+                            wrapEl.scrollLeft = scrollPositionAlignLeft;
+                        // Check if the selected element exceeds on the right side
+                        } else if (wrapEl.clientWidth < (element.$el.offsetLeft - wrapEl.scrollLeft + element.$el.clientWidth - buttonRightWidth)) {
+                            wrapEl.scrollLeft = wrapEl.scrollLeft + element.$el.clientWidth + buttonRightWidth - (wrapEl.scrollLeft + wrapEl.clientWidth - element.$el.offsetLeft);
+                        }
+                    } else {
+                        wrapEl.scrollLeft = scrollPositionAlignLeft;
+                    }
+
+                    if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
+                        this.setSelectedIndicatorPosition(element, this.skin);
+                    }
                 }
-            }
+            });
         });
     }
 
@@ -264,8 +282,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
         if (outbound) {
             wrapEl.scrollLeft = outbound.$el.offsetLeft - this.$refs.buttonLeft.clientWidth;
         }
-
-        this.setDisplayButtonArrrow();
     }
 
     private scrollRight(): void {
@@ -283,7 +299,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
             // move the container scroll
             wrapEl.scrollLeft += (outbound.$el.clientWidth + this.$refs.buttonRight.clientWidth) - threshold;
         }
-        this.setDisplayButtonArrrow();
     }
 }
 

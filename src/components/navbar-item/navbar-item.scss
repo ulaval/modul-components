@@ -2,14 +2,22 @@
 
 // Styles while
 .m-navbar {
-    .m-navbar-item__text {
-        transition: opacity $m-transition-duration ease;
-        opacity: 0;
+    &.m--is-multiline {
+        .m-navbar-item__text {
+            transition: opacity $m-transition-duration ease;
+            opacity: 0;
+        }
+
+        &.m--is-anim-ready {
+            .m-navbar-item__text {
+                opacity: 1;
+            }
+        }
     }
 
-    &.m--is-anim-ready {
-        .m-navbar-item__text {
-            opacity: 1;
+    &:not(.m--is-multiline) {
+        .m-navbar-item__contents {
+            white-space: nowrap;
         }
     }
 }
@@ -49,6 +57,16 @@
 
 // Light skin styles
 .m-navbar.m--is-skin-light {
+    &.m--is-anim-ready {
+        .m-navbar-item__contents {
+            transition: color $m-transition-duration ease;
+
+            &::after {
+                transition: opacity $m-transition-duration ease;
+            }
+        }
+    }
+
     .m-navbar-item {
         margin: 0;
 
@@ -70,13 +88,11 @@
         }
 
         &__contents {
-            transition: color $m-transition-duration ease;
             color: $m-color--grey;
             padding: $m-spacing 0 $m-spacing + $m-border-width 0;
             font-weight: $m-font-weight--bold;
 
             &::after {
-                transition: opacity $m-transition-duration ease;
                 position: absolute;
                 right: 0;
                 bottom: 0;
@@ -106,6 +122,16 @@
 // Darker and darkest skin styles
 .m-navbar.m--is-skin-darker,
 .m-navbar.m--is-skin-darkest {
+    &.m--is-anim-ready {
+        .m-navbar-item__contents {
+            transition: color $m-transition-duration ease, font-weight $m-transition-duration ease;
+
+            &::before {
+                transition: background $m-transition-duration--l ease, opacity $m-transition-duration--s ease, width $m-transition-duration--l ease;
+            }
+        }
+    }
+
     .m-navbar-item {
         &:not(:first-child) {
             .m-navbar-item__contents {
@@ -148,7 +174,6 @@
         }
 
         &__contents {
-            transition: color $m-transition-duration ease, font-weight $m-transition-duration ease;
             font-size: $m-font-size--h5;
             font-weight: $m-font-weight;
             justify-content: center;
@@ -207,7 +232,6 @@
 
             &::before {
                 content: '';
-                transition: background $m-transition-duration--l ease, opacity $m-transition-duration--s ease, width $m-transition-duration--l ease;
                 position: absolute;
                 top: 0;
                 left: 50%;
@@ -245,6 +269,12 @@
 
 // Soft skin styles
 .m-navbar.m--is-skin-soft {
+    &.m--is-anim-ready {
+        .m-navbar-item__contents {
+            transition: background $m-transition-duration ease;
+        }
+    }
+
     .m-navbar-item {
         &:not(.m--is-selected) {
             &:not(.m--is-disabled) {
@@ -293,7 +323,6 @@
         }
 
         &__contents {
-            transition: background $m-transition-duration ease;
             position: relative;
             padding: 22px $m-spacing--l; // Magic number
             color: $m-color--white;
@@ -305,6 +334,12 @@
 
 // Arrow skin styles
 .m-navbar.m--is-skin-arrow {
+    &.m--is-anim-ready {
+        .m-navbar-item__contents {
+            transition: color $m-transition-duration ease;
+        }
+    }
+
     .m-navbar-item {
         margin: 0 $m-padding;
 
@@ -334,7 +369,6 @@
         }
 
         &__contents {
-            transition: color $m-transition-duration ease;
             color: $m-color--grey;
             padding: $m-padding 0 #{$m-padding + 6px} 0;
             font-weight: $m-font-weight--bold;
@@ -344,6 +378,12 @@
 
 // Simple skin styles
 .m-navbar.m--is-skin-simple {
+    &.m--is-anim-ready {
+        .m-navbar-item__contents {
+            transition: color $m-transition-duration--l ease, font-weight $m-transition-duration--l ease;
+        }
+    }
+
     .m-navbar-item {
         position: relative;
 
@@ -354,14 +394,6 @@
                     color: $m-color--interactive;
                 }
             }
-        }
-
-        &__contents {
-            transition: color $m-transition-duration--l ease, font-weight $m-transition-duration--l ease;
-            position: relative;
-            padding-right: $m-padding--l;
-            color: $m-color--grey-dark;
-            font-weight: $m-font-weight;
         }
 
         &:not(:first-child) {
@@ -402,12 +434,27 @@
                 font-weight: $m-font-weight--black;
             }
         }
+
+        &__contents {
+            position: relative;
+            padding-right: $m-padding--l;
+            color: $m-color--grey-dark;
+            font-weight: $m-font-weight;
+        }
     }
 }
 
 // Tabs skin styles
 .m-navbar.m--is-skin-light-tab,
 .m-navbar.m--is-skin-dark-tab {
+    &.m--is-anim-ready {
+        .m-navbar-item:not(.m--is-selected):not(.m--is-disabled) {
+            .m-navbar-item__contents {
+                transition: background $m-transition-duration ease;
+            }
+        }
+    }
+
     .m-navbar-item {
         + .m-navbar-item {
             border-left-width: 1px;
@@ -427,12 +474,6 @@
                     height: $m-border-width--l;
                     background: $m-color--active;
                 }
-            }
-        }
-
-        &:not(.m--is-selected):not(.m--is-disabled) {
-            .m-navbar-item__contents {
-                transition: background $m-transition-duration ease;
             }
         }
 

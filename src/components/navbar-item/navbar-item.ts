@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_ITEM_NAME } from '../component-names';
@@ -56,6 +56,15 @@ export class MNavbarItem extends ModulVue {
         this.$modul.event.$off('resize', this.setDimension);
     }
 
+    private get isMultiline(): boolean {
+        return this.parentNavbar ? this.parentNavbar.multiline : false;
+    }
+
+    @Watch('isMultiline')
+    private isMultilineChanged(): void {
+        this.setDimension();
+    }
+
     private stripHtml(html): string {
         let temporalDivElement: HTMLElement = document.createElement('div');
         temporalDivElement.innerHTML = html;
@@ -67,9 +76,8 @@ export class MNavbarItem extends ModulVue {
         itemEl.style.removeProperty('width');
         itemEl.style.removeProperty('max-width');
         itemEl.style.removeProperty('white-space');
-        let itemValueLength: any = this.stripHtml(itemEl.innerHTML).trim().length;
 
-        if (itemValueLength > 15) {
+        if (this.isMultiline && (this.stripHtml(itemEl.innerHTML).trim().length > 15)) {
             let itemElComputedStyle: any = window.getComputedStyle(itemEl);
             let fontSize: number = parseFloat(itemElComputedStyle.getPropertyValue('font-size'));
             let paddingH: number = parseInt(itemElComputedStyle.getPropertyValue('padding-top'), 10) + parseInt(itemElComputedStyle.getPropertyValue('padding-bottom'), 10);
@@ -97,7 +105,6 @@ export class MNavbarItem extends ModulVue {
             } else {
                 itemEl.style.maxWidth = '280px';
             }
-
         } else {
             itemEl.style.whiteSpace = 'nowrap';
         }
