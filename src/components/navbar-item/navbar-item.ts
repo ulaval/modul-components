@@ -49,6 +49,7 @@ export class MNavbarItem extends ModulVue {
         setTimeout(() => {
             this.setDimension();
         });
+
         this.$modul.event.$on('resize', this.setDimension);
     }
 
