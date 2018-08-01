@@ -91,7 +91,7 @@ describe('MAcordionGroup', () => {
         const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
         for (let i: number = 0; i < acrds.length; ++i) {
-            expect(acrds.at(i).vm.isOpen).toBeTruthy();
+            expect(acrds.at(i).vm.propOpen).toBeTruthy();
         }
     });
 
@@ -114,7 +114,7 @@ describe('MAcordionGroup', () => {
         expect(acrds.length).toBeGreaterThan(0);
 
         for (let i: number = 0; i < acrds.length; ++i) {
-            expect(acrds.at(i).vm.isOpen).toBeFalsy();
+            expect(acrds.at(i).vm.propOpen).toBeFalsy();
         }
     });
 
@@ -128,15 +128,15 @@ describe('MAcordionGroup', () => {
             .at(0)
             .find('.m-accordion__header')
             .trigger('click');
-        expect(acrds.at(0).vm.isOpen).toBeTruthy();
-        expect(acrds.at(1).vm.isOpen).toBeFalsy();
+        expect(acrds.at(0).vm.propOpen).toBeTruthy();
+        expect(acrds.at(1).vm.propOpen).toBeFalsy();
 
         acrds
             .at(1)
             .find('.m-accordion__header')
             .trigger('click');
-        expect(acrds.at(0).vm.isOpen).toBeFalsy();
-        expect(acrds.at(1).vm.isOpen).toBeTruthy();
+        expect(acrds.at(0).vm.propOpen).toBeFalsy();
+        expect(acrds.at(1).vm.propOpen).toBeTruthy();
     });
 
     it('should cascade down skin to accordions', () => {
@@ -159,7 +159,7 @@ describe('MAcordionGroup', () => {
         const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
         for (let i: number = 0; i < acrds.length; ++i) {
-            expect(acrds.at(i).vm.isDisabled).toEqual(true);
+            expect(acrds.at(i).vm.propDisabled).toEqual(true);
         }
     });
 
@@ -176,7 +176,7 @@ describe('MAcordionGroup', () => {
         });
 
         const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
-        expect(acrds.at(0).vm.isDisabled).toEqual(true);
+        expect(acrds.at(0).vm.propDisabled).toEqual(true);
     });
 
     it('should open all accordions specified by id in openedIds prop', () => {
@@ -185,8 +185,8 @@ describe('MAcordionGroup', () => {
         });
 
         const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
-        expect(acrds.at(0).vm.isOpen).toBeFalsy();
-        expect(acrds.at(1).vm.isOpen).toBeTruthy();
+        expect(acrds.at(0).vm.propOpen).toBeFalsy();
+        expect(acrds.at(1).vm.propOpen).toBeTruthy();
     });
 
     it('should should sync openedIds prop when a accordion is closed or opened', () => {

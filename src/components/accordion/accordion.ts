@@ -29,8 +29,8 @@ export enum MAccordionIconSize {
 
 export interface AccordionGateway extends Vue {
     propId: string;
-    isOpen: boolean;
-    isDisabled: boolean;
+    propOpen: boolean;
+    propDisabled: boolean;
 }
 
 export interface AccordionGroupGateway {
@@ -103,30 +103,30 @@ export class MAccordion extends ModulVue implements AccordionGateway {
     };
 
     private uuid: string = uuid.generate();
-    private internalIsOpen: boolean = false;
+    private internalPropOpen: boolean = false;
 
     public get propId(): string {
         return this.id || this.uuid;
     }
 
-    public get isOpen(): boolean {
-        return this.internalIsOpen;
+    public get propOpen(): boolean {
+        return this.internalPropOpen;
     }
 
-    public set isOpen(value) {
-        if (value !== this.internalIsOpen) {
-            this.internalIsOpen = value;
+    public set propOpen(value) {
+        if (value !== this.internalPropOpen) {
+            this.internalPropOpen = value;
             this.$emit('update:open', value);
         }
     }
 
-    public get isDisabled(): boolean {
+    public get propDisabled(): boolean {
         return (isAccordionGroup(this.$parent) && this.$parent.disabled) ||
             this.disabled;
     }
 
     private created(): void {
-        this.internalIsOpen = this.open;
+        this.internalPropOpen = this.open;
 
         if (isAccordionGroup(this.$parent)) {
             this.$parent.addAccordion(this);
@@ -155,24 +155,24 @@ export class MAccordion extends ModulVue implements AccordionGateway {
         let target: Element | null;
         target = (event.target as HTMLElement).closest('[href], [onclick], button, input, textarea, radio');
 
-        if (!this.isDisabled && !target) {
-            const initialState: boolean = this.internalIsOpen;
+        if (!this.propDisabled && !target) {
+            const initialState: boolean = this.internalPropOpen;
 
-            if (!this.internalIsOpen &&
+            if (!this.internalPropOpen &&
                 isAccordionGroup(this.$parent) &&
                 this.$parent.concurrent) {
                 this.$parent.closeAllAccordions();
             }
 
             this.$refs.accordionHeader.blur();
-            this.isOpen = !initialState;
-            this.$emit('click', this.internalIsOpen);
+            this.propOpen = !initialState;
+            this.$emit('click', this.internalPropOpen);
         }
     }
 
     @Watch('open')
     private syncOpenProp(val: boolean): void {
-        this.internalIsOpen = val;
+        this.internalPropOpen = val;
     }
 }
 
