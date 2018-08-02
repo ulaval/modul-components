@@ -79,6 +79,7 @@ export class Portal extends ModulVue implements PortalMixin {
     private internalOpen: boolean = false;
     private stackId: string;
     private internalTransitionDuration: number = PortalTransitionDuration.Regular;
+    private opening: boolean = false;
 
     public setFocusToPortal(): void {
         if (this.as<PortalMixinImpl>().handlesFocus()) {
@@ -166,8 +167,12 @@ export class Portal extends ModulVue implements PortalMixin {
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
                         this.portalTargetEl.style.position = 'absolute';
 
+                        // this.opening is important since it's fix a race condition where the portal
+                        // could appear behind the content of the page if it was toggled too quickly.
+                        this.opening = true;
                         setTimeout(() => {
                             this.setFocusToPortal();
+                            this.opening = false;
                         }, this.transitionDuration);
                     }
                 }
@@ -178,7 +183,9 @@ export class Portal extends ModulVue implements PortalMixin {
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
                         setTimeout(() => {
                             // $emit update:open has been launched, animation already occurs
-                            this.portalTargetEl.style.position = '';
+                            if (!this.opening) {
+                                this.portalTargetEl.style.position = '';
+                            }
                             this.setFocusToTrigger();
                         }, this.transitionDuration);
                     }

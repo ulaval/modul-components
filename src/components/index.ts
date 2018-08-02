@@ -57,6 +57,8 @@ import ProgressPluggin from './progress/progress';
 import RadioGroupPlugin from './radio-group/radio-group';
 import RadioStylePlugin from './radio-style/radio-style';
 import RadioPlugin from './radio/radio';
+import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text-edit/rich-text-license-plugin';
+import RichTextPlugin from './rich-text/rich-text';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import SidebarPlugin from './sidebar/sidebar';
@@ -76,9 +78,12 @@ import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
-const ComponentsPlugin: PluginObject<any> = {
-    install(v, options): void {
+export interface ComponentPluginOptions {
+    richTextOptions?: RichTextLicensePluginOptions;
+}
 
+const ComponentsPlugin: PluginObject<any> = {
+    install(v, options: ComponentPluginOptions = {}): void {
         if (!v.prototype.$log) {
             Vue.use(LoggerPlugin);
         }
@@ -138,6 +143,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RadioPlugin);
         Vue.use(RadioGroupPlugin);
         Vue.use(RadioStylePlugin);
+        Vue.use(RichTextLicensePlugin, { key: options.richTextOptions ? options.richTextOptions.key : undefined });
+        Vue.use(RichTextPlugin);
         Vue.use(ScrollTopPlugin);
         Vue.use(SessionExpiredPlugin);
         Vue.use(SidebarPlugin);

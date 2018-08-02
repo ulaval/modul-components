@@ -242,25 +242,18 @@ export class Modul {
         }
     }
 
-    private isIOSMobile(): boolean {
-        return !!navigator.platform && /iPhone|iPod/.test(navigator.platform);
-    }
-
     private activeScrollBody(): void {
         this.htmlEl.style.removeProperty('overflow');
-        if (this.isIOSMobile()) {
-            this.bodyStyle.removeProperty('position');
-            this.bodyStyle.removeProperty('top');
-            this.bodyStyle.removeProperty('right');
-            this.bodyStyle.removeProperty('left');
-            this.bodyStyle.removeProperty('bottom');
-            this.bodyStyle.removeProperty('height');
-        }
+        this.bodyStyle.removeProperty('position');
+        this.bodyStyle.removeProperty('top');
+        this.bodyStyle.removeProperty('right');
+        this.bodyStyle.removeProperty('left');
+        this.bodyStyle.removeProperty('bottom');
+        this.bodyStyle.removeProperty('height');
         this.bodyStyle.removeProperty('overflow');
-        if (this.isIOSMobile()) {
-            window.scrollTo(0, this.stopScrollPosition);
-            this.stopScrollPosition = this.scrollPosition;
-        }
+        window.scrollTo(0, this.stopScrollPosition);
+        this.stopScrollPosition = this.scrollPosition;
+
         if (this.bodyStyle.length === 0) {
             this.bodyEl.removeAttribute('style');
         }
@@ -269,17 +262,15 @@ export class Modul {
     private stopScrollBody(viewportIsSmall: boolean): string {
         if (this.scrollActive) {
             this.scrollActive = false;
-            if (this.isIOSMobile()) {
-                this.stopScrollPosition = this.scrollPosition;
-                this.bodyStyle.position = 'fixed';
-                this.bodyStyle.top = '0'; // --> ENA2-767
-                this.bodyStyle.top = '0';
-                this.bodyStyle.right = '0';
-                this.bodyStyle.left = '0';
-                this.bodyStyle.bottom = '0'; // --- Added bug in IE11 --- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
-                this.bodyStyle.height = '100%';
-            }
+            this.stopScrollPosition = this.scrollPosition;
+            this.bodyStyle.position = 'fixed';
+            this.bodyStyle.top = '0'; // --> ENA2-767
+            this.bodyStyle.right = '0';
+            this.bodyStyle.left = '0';
+            this.bodyStyle.bottom = '0'; // --- Added bug in IE11 --- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
+            this.bodyStyle.height = '100%';
             this.bodyStyle.overflow = 'hidden';
+            this.bodyEl.scrollTop = this.stopScrollPosition;
             this.htmlEl.style.overflow = 'hidden';
         }
         return uuid.generate();
