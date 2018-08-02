@@ -4,7 +4,7 @@ import { Model, Prop } from 'vue-property-decorator';
 
 import uuid from '../../utils/uuid/uuid';
 import { BUTTON_GROUP_NAME } from '../component-names';
-import RadioPlugin, { BaseButtonGroup, ButtonGroup, MRadioPosition } from '../radio/radio';
+import RadioPlugin, { BaseButtonGroup, ButtonGroup, MRadioPosition, MRadioVerticalAlignement } from '../radio/radio';
 import WithRender from './button-group.html?style=./button-group.scss';
 
 @WithRender
@@ -27,6 +27,15 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
             value === MRadioPosition.Right
     })
     public position: MRadioPosition;
+    @Prop({
+        default: MRadioVerticalAlignement.Top,
+        validator: value =>
+            value === MRadioVerticalAlignement.Top ||
+            value === MRadioVerticalAlignement.Center
+    })
+    public radioVerticalAlign: MRadioVerticalAlignement;
+    @Prop()
+    public radioMarginTop: string;
 
     public stateIsError: boolean = false;
     public stateIsValid: boolean = false;

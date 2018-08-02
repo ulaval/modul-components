@@ -3,8 +3,7 @@ import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
-import LimitTextPlugin, { MLimitText } from '../limit-text/limit-text';
-import RadioPlugin, { MRadio, MRadioPosition } from './radio';
+import RadioPlugin, { MRadio, MRadioPosition, MRadioVerticalAlignement } from './radio';
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -86,6 +85,32 @@ describe('MRadio', () => {
                 value: 'radio'
             }
         });
+        return expect(renderComponent(rdo.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when radio is vertical align center', () => {
+        const rdo: Wrapper<MRadio> = mount(MRadio, {
+            localVue: localVue,
+            propsData: {
+                modelValue: 'radio',
+                value: 'radio',
+                radioVerticalAlign: MRadioVerticalAlignement.Center
+            }
+        });
+
+        return expect(renderComponent(rdo.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when radio is radio margin top 10px', () => {
+        const rdo: Wrapper<MRadio> = mount(MRadio, {
+            localVue: localVue,
+            propsData: {
+                modelValue: 'radio',
+                value: 'radio',
+                radioMarginTop: '10px'
+            }
+        });
+
         return expect(renderComponent(rdo.vm)).resolves.toMatchSnapshot();
     });
 

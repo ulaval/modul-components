@@ -15,6 +15,11 @@ export enum MRadioPosition {
     Right = 'right'
 }
 
+export enum MRadioVerticalAlignement {
+    Center = 'center',
+    Top = 'top'
+}
+
 export interface RadioGroup {
     name: string;
     stateIsDisabled: boolean;
@@ -22,6 +27,8 @@ export interface RadioGroup {
     stateIsValid: boolean;
     position: MRadioPosition;
     inline: boolean;
+    radioVerticalAlign: MRadioVerticalAlignement;
+    radioMarginTop: string;
     getValue(): string;
     updateValue(value: string): void;
 }
@@ -58,6 +65,15 @@ export class MRadio extends ModulVue {
     public position: MRadioPosition;
     @Prop()
     public disabled: boolean;
+    @Prop({
+        default: MRadioVerticalAlignement.Top,
+        validator: value =>
+            value === MRadioVerticalAlignement.Top ||
+            value === MRadioVerticalAlignement.Center
+    })
+    public radioVerticalAlign: MRadioVerticalAlignement;
+    @Prop()
+    public radioMarginTop: string;
 
     // ----- For Button Group -----
     @Prop()
@@ -81,6 +97,14 @@ export class MRadio extends ModulVue {
 
     public get propPosition(): MRadioPosition {
         return this.isGroup() ? this.parentGroup.position : this.position;
+    }
+
+    public get propVerticalAlign(): MRadioVerticalAlignement {
+        return this.isGroup() ? this.parentGroup.radioVerticalAlign : this.radioVerticalAlign;
+    }
+
+    public get propRadioMarginTop(): string {
+        return this.isGroup() ? this.parentGroup.radioMarginTop : this.radioMarginTop;
     }
 
     public get propDisabled(): boolean {
