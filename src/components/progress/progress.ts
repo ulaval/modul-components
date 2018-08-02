@@ -29,7 +29,6 @@ export class MProgress extends ModulVue {
     @Prop({ default: 4 })
     public stroke: number;
     @Prop({
-        default: MProgressState.InProgress,
         validator: value =>
             value === MProgressState.Completed ||
             value === MProgressState.InProgress ||
@@ -79,6 +78,10 @@ export class MProgress extends ModulVue {
 
     private get propSize(): string {
         return this.circle ? '100%' : this.size + 'px';
+    }
+
+    private get propState(): MProgressState {
+        return this.state ? this.state : this.value >= 100 ? MProgressState.Completed : MProgressState.InProgress ;
     }
 
     private get radiusSize(): string {
