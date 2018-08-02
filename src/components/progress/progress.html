@@ -3,9 +3,9 @@
          :class="{'m--is-circle': circle,
          'm--is-indeterminate': indeterminate,
          'm--is-determinate ': !indeterminate,
-         'm--is-completed': state=='completed',
-         'm--is-in-progress': state=='in-progress',
-         'm--is-error': state=='error', }">
+         'm--is-completed': propState=='completed',
+         'm--is-in-progress': propState=='in-progress',
+         'm--is-error': propState=='error', }">
          <div v-if="!circle" class="m-progress__bar" :style="barStyleObject"></div>
          <div v-else class="m-progress__wrap" :style="svgStyles">
             <template>
