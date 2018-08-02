@@ -88,7 +88,7 @@ describe('MRadio', () => {
         return expect(renderComponent(rdo.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when radio is vertical align center', () => {
+    it('should render correctly when radioVerticalAlign is center', () => {
         const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {
@@ -101,7 +101,7 @@ describe('MRadio', () => {
         return expect(renderComponent(rdo.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when radio is radio margin top 10px', () => {
+    it('should render correctly when radioMarginTop is 10px', () => {
         const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {

@@ -1,5 +1,5 @@
 @import 'abstracts/variables';
-$m-radio--width: 16px !default;
+$m-radio--width: 17px !default;
 $m-radio--color-disabled: $m-color--disabled !default;
 
 .m-radio {
@@ -191,8 +191,8 @@ $m-radio--color-disabled: $m-color--disabled !default;
                     transition: transform $m-transition-duration ease-out;
                     content: '';
                     display: block;
-                    width: 10px;
-                    height: 10px;
+                    width: calc(100% - 4px);
+                    height: calc(100% - 4px);
                     background: $m-color--interactive;
                     border-radius: 50%;
                     visibility: hidden;

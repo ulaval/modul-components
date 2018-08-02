@@ -60,7 +60,7 @@ exports[`MRadioGroup should render correctly when inline 1`] = `
 </div>
 `;
 
-exports[`MRadioGroup should render correctly when radio is radio margin top 10px 1`] = `
+exports[`MRadioGroup should render correctly when radiosMarginTop is  10px 1`] = `
 <div class="m-radio-group">
     <ul role="radiogroup" class="m-radio-group__body">
         <li class="m-radio">
@@ -80,15 +80,15 @@ exports[`MRadioGroup should render correctly when radio is radio margin top 10px
 </div>
 `;
 
-exports[`MRadioGroup should render correctly when radioPosition is right 1`] = `
+exports[`MRadioGroup should render correctly when radiosPosition is right 1`] = `
 <div class="m-radio-group">
     <ul role="radiogroup" class="m-radio-group__body">
-        <li class="m-radio">
+        <li class="m-radio m--is-input-right">
             <input type="radio" id="uuid" name="uuid" value="rdo1" class="m-radio__hidden">
             <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:undefined;"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
             </label>
         </li>
-        <li class="m-radio">
+        <li class="m-radio m--is-input-right">
             <input type="radio" id="uuid" name="uuid" value="rdo2" class="m-radio__hidden">
             <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:undefined;"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
             </label>
@@ -100,7 +100,7 @@ exports[`MRadioGroup should render correctly when radioPosition is right 1`] = `
 </div>
 `;
 
-exports[`MRadioGroup should render correctly when vertical alignment is center 1`] = `
+exports[`MRadioGroup should render correctly when radiosVerticalAlign is center 1`] = `
 <div class="m-radio-group">
     <ul role="radiogroup" class="m-radio-group__body">
         <li class="m-radio m--is-align-center">

@@ -32,11 +32,11 @@ describe('MRadioGroup', () => {
         return expect(renderComponent(grp.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when radioPosition is right', () => {
+    it('should render correctly when radiosPosition is right', () => {
         const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             propsData: {
-                radioPosition: MRadioPosition.Right
+                radiosPosition: MRadioPosition.Right
             },
             slots: slots
         });
@@ -68,11 +68,11 @@ describe('MRadioGroup', () => {
         return expect(renderComponent(grp.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when vertical alignment is center', () => {
+    it('should render correctly when radiosVerticalAlign is center', () => {
         const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             propsData: {
-                radioVerticalAlign: MRadioVerticalAlignement.Center
+                radiosVerticalAlign: MRadioVerticalAlignement.Center
             },
             slots: slots
         });
@@ -80,11 +80,11 @@ describe('MRadioGroup', () => {
         return expect(renderComponent(grp.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when radio is radio margin top 10px', () => {
+    it('should render correctly when radiosMarginTop is  10px', () => {
         const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             propsData: {
-                radioMarginTop: '10px'
+                radiosMarginTop: '10px'
             },
             slots: slots
         });

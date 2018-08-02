@@ -25,10 +25,10 @@ export interface RadioGroup {
     stateIsDisabled: boolean;
     stateIsError: boolean;
     stateIsValid: boolean;
-    radioPosition: MRadioPosition;
+    radiosPosition: MRadioPosition;
     inline: boolean;
-    radioVerticalAlign: MRadioVerticalAlignement;
-    radioMarginTop: string;
+    radiosVerticalAlign: MRadioVerticalAlignement;
+    radiosMarginTop: string;
     getValue(): string;
     updateValue(value: string): void;
 }
@@ -96,15 +96,15 @@ export class MRadio extends ModulVue {
     private internalDisabled: boolean = false;
 
     public get propPosition(): MRadioPosition {
-        return this.isGroup() ? this.parentGroup.radioPosition : this.radioPosition;
+        return this.isGroup() ? this.parentGroup.radiosPosition : this.radioPosition;
     }
 
     public get propVerticalAlign(): MRadioVerticalAlignement {
-        return this.isGroup() ? this.parentGroup.radioVerticalAlign : this.radioVerticalAlign;
+        return this.isGroup() ? this.parentGroup.radiosVerticalAlign : this.radioVerticalAlign;
     }
 
     public get propRadioMarginTop(): string {
-        return this.isGroup() ? this.parentGroup.radioMarginTop : this.radioMarginTop;
+        return this.isGroup() ? this.parentGroup.radiosMarginTop : this.radioMarginTop;
     }
 
     public get propDisabled(): boolean {

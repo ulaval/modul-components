@@ -26,16 +26,16 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
             value === MRadioPosition.Left ||
             value === MRadioPosition.Right
     })
-    public radioPosition: MRadioPosition;
+    public radiosPosition: MRadioPosition;
     @Prop({
         default: MRadioVerticalAlignement.Top,
         validator: value =>
             value === MRadioVerticalAlignement.Top ||
             value === MRadioVerticalAlignement.Center
     })
-    public radioVerticalAlign: MRadioVerticalAlignement;
+    public radiosVerticalAlign: MRadioVerticalAlignement;
     @Prop()
-    public radioMarginTop: string;
+    public radiosMarginTop: string;
 
     public stateIsError: boolean = false;
     public stateIsValid: boolean = false;
