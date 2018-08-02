@@ -25,6 +25,7 @@ enum froalaEvents {
     KeyDown = 'froalaEditor.keydown',
     PasteAfter = 'froalaEditor.paste.after',
     PasteBeforeCleanup = 'froalaEditor.paste.beforeCleanup',
+    PasteAfterCleanup = 'froalaEditor.paste.afterCleanup',
     WordPasteBefore = 'froalaEditor.paste.wordPaste.before',
     CommandAfter = 'froalaEditor.commands.after'
 }
@@ -166,9 +167,10 @@ export class VueFroala extends Vue {
                     window.addEventListener('resize', this.onResize);
                     this.htmlSet();
 
-                    if (editor.helpers.isMobile()) {
-                        editor.fullscreen.toggle();
-                    }
+                    // auto fullscreen on mobiles - uncomment when https://github.com/froala/wysiwyg-editor/issues/2988 is resolved
+                    // if (editor.helpers.isMobile()) {
+                    //     editor.fullscreen.toggle();
+                    // }
                 },
                 [froalaEvents.ContentChanged]: (_e, _editor) => {
                     this.updateModel();
@@ -206,7 +208,8 @@ export class VueFroala extends Vue {
                 [froalaEvents.PasteAfter]: (_e, _editor) => {
                     this.$emit('paste');
                 },
-                [froalaEvents.PasteBeforeCleanup]: (_e, _editor, data: string) => {
+                // if we use pasteBeforeCleanup, there's an error in froala's code
+                [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's','h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote']);
                 },
                 [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
@@ -240,14 +243,21 @@ export class VueFroala extends Vue {
 
     private dismissWordPasteModal(): void {
         const wordPasteModal: HTMLElement | null = document.querySelector(FroalaElements.MODAL);
-        wordPasteModal!.style.display = 'none';
-
         const modalOverlay: HTMLElement | null = document.querySelector(FroalaElements.MODAL_OVERLAY);
-        modalOverlay!.style.display = 'none';
-
         const cleanWordButton: HTMLElement | null = this.getWordPasteCleanButton();
-        cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
-        cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+
+        if (wordPasteModal) {
+            wordPasteModal.style.display = 'none';
+        }
+
+        if (modalOverlay) {
+            modalOverlay.style.display = 'none';
+        }
+
+        if (cleanWordButton) {
+            cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+            cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+        }
     }
 
     private getWordPasteCleanButton(): HTMLElement | null {
