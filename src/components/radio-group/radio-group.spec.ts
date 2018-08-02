@@ -32,11 +32,11 @@ describe('MRadioGroup', () => {
         return expect(renderComponent(grp.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when position is right', () => {
+    it('should render correctly when radioPosition is right', () => {
         const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             propsData: {
-                position: MRadioPosition.Right
+                radioPosition: MRadioPosition.Right
             },
             slots: slots
         });

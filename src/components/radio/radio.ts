@@ -25,7 +25,7 @@ export interface RadioGroup {
     stateIsDisabled: boolean;
     stateIsError: boolean;
     stateIsValid: boolean;
-    position: MRadioPosition;
+    radioPosition: MRadioPosition;
     inline: boolean;
     radioVerticalAlign: MRadioVerticalAlignement;
     radioMarginTop: string;
@@ -62,7 +62,7 @@ export class MRadio extends ModulVue {
             value === MRadioPosition.Left ||
             value === MRadioPosition.Right
     })
-    public position: MRadioPosition;
+    public radioPosition: MRadioPosition;
     @Prop()
     public disabled: boolean;
     @Prop({
