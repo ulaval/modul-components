@@ -96,7 +96,7 @@ export class MRadio extends ModulVue {
     private internalDisabled: boolean = false;
 
     public get propPosition(): MRadioPosition {
-        return this.isGroup() ? this.parentGroup.position : this.position;
+        return this.isGroup() ? this.parentGroup.radioPosition : this.radioPosition;
     }
 
     public get propVerticalAlign(): MRadioVerticalAlignement {
