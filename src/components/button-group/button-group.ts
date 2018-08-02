@@ -26,7 +26,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
             value === MRadioPosition.Left ||
             value === MRadioPosition.Right
     })
-    public position: MRadioPosition;
+    public radioPosition: MRadioPosition;
     @Prop({
         default: MRadioVerticalAlignement.Top,
         validator: value =>

@@ -24,7 +24,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
             value === MRadioPosition.Left ||
             value === MRadioPosition.Right
     })
-    public position: MRadioPosition;
+    public radioPosition: MRadioPosition;
     @Prop()
     public inline: boolean;
     @Prop()

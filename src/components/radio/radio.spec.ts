@@ -77,11 +77,11 @@ describe('MRadio', () => {
         return expect(renderComponent(rdo.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when position is right', () => {
+    it('should render correctly when radioPosition is right', () => {
         const rdo: Wrapper<MRadio> = mount(MRadio, {
             localVue: localVue,
             propsData: {
-                position: MRadioPosition.Right,
+                radioPosition: MRadioPosition.Right,
                 value: 'radio'
             }
         });
