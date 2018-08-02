@@ -11,10 +11,10 @@ exports[`Error-template integration tests Given an error with all props and slot
     </div>
     <ul class="m-error-template__links">
         <li>
-            <a icon-name="m-svg__chevron--right" mode="link" url="an Url" target="_blank" class="m-error-template__link">a link</a>
+            <a icon-name="m-svg__chevron--right" mode="link" url="an Url" target="" class="m-error-template__link">a link</a>
         </li>
         <li>
-            <a icon-name="m-svg__chevron--right" mode="link" url="another Url" target="_blank" class="m-error-template__link">another link</a>
+            <a icon-name="m-svg__chevron--right" mode="link" url="another Url" target="" class="m-error-template__link">another link</a>
         </li>
     </ul>
 </article>

@@ -13,7 +13,7 @@
     </div>
     <ul v-if="hasLinks" class="m-error-template__links">
         <li ref="link" v-for="link in links">
-            <m-link class="m-error-template__link" icon-name="m-svg__chevron--right" mode="link" :url="link.url" target="_blank">{{link.label}}</m-link>
+            <m-link class="m-error-template__link" icon-name="m-svg__chevron--right" mode="link" :url="link.url" :target="isTargetExternal(link.external)">{{link.label}}</m-link>
         </li>
     </ul>
 </article>
