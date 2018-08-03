@@ -56,7 +56,7 @@ export class VueFroala extends Vue {
     public config: any;
 
     protected currentTag: string = 'div';
-    protected listeningEvents: any[] = [];
+    protected listeningEvents: Event[] = [];
     protected froalaEditor: any = undefined;
     protected _$element: any = undefined;
     protected _$editor: any = undefined;
@@ -238,7 +238,9 @@ export class VueFroala extends Vue {
         this.setContent(true);
 
         this.registerEvents();
-        this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
+        if (this._$element.froalaEditor) {
+            this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
+        }
     }
 
     private dismissWordPasteModal(): void {
