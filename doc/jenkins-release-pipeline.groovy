@@ -2,7 +2,8 @@
 
 // Création de la release d'un repo modul
 // ce script est utilisé dans un pipeline Jenkins
-// le code source original est conservé ici: https://github.com/ulaval/modul-components/tree/develop/doc/jenkins-release-pipeline.groovy
+// le code source original est conservé ici https://github.com/ulaval/modul-components/tree/develop/doc/jenkins-release-pipeline.groovy
+// toujours utiliser la version qui se trouve sur Github
 
 pipeline {
     agent none
@@ -28,7 +29,7 @@ pipeline {
         timestamps()
     }
 
-    // Le contenu de cette section ne doit pas se retrouver sur Github
+	// Les valeurs contenues de cette section ne doit pas se retrouver sur Github
     environment {
         // Pour éviter une erreur: EACCES: permission denied, mkdir '/.npm'
         npm_config_cache = 'npm-cache'
