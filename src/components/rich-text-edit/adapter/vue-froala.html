@@ -1,0 +1,14 @@
+<div class="vue-froala"
+    @click.stop
+    @mousedown.capture="isDirty = true"
+    @touchstart.capture="isDirty = true"
+    :class="{
+        'vue-froala--focused': isFocused,
+        'vue-froala--unfocused': !isFocused,
+        'vue-froala--collapsed': collapsed,
+        'vue-froala--animated': isInitialized,
+        'vue-froala--dirty': isDirty
+    }">
+    <component ref="editor" :is="tag"></component>
+</div>
+

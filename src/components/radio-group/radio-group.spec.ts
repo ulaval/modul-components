@@ -3,7 +3,7 @@ import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
-import { MRadioPosition } from '../radio/radio';
+import { MRadioPosition, MRadioVerticalAlignement } from '../radio/radio';
 import RadioGroupPlugin, { MRadioGroup } from './radio-group';
 
 jest.mock('../../utils/uuid/uuid');
@@ -32,11 +32,11 @@ describe('MRadioGroup', () => {
         return expect(renderComponent(grp.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when position is right', () => {
+    it('should render correctly when radiosPosition is right', () => {
         const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
             localVue: localVue,
             propsData: {
-                position: MRadioPosition.Right
+                radiosPosition: MRadioPosition.Right
             },
             slots: slots
         });
@@ -61,6 +61,30 @@ describe('MRadioGroup', () => {
             localVue: localVue,
             propsData: {
                 disabled: true
+            },
+            slots: slots
+        });
+
+        return expect(renderComponent(grp.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when radiosVerticalAlign is center', () => {
+        const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
+            localVue: localVue,
+            propsData: {
+                radiosVerticalAlign: MRadioVerticalAlignement.Center
+            },
+            slots: slots
+        });
+
+        return expect(renderComponent(grp.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when radiosMarginTop is  10px', () => {
+        const grp: Wrapper<MRadioGroup> = mount(MRadioGroup, {
+            localVue: localVue,
+            propsData: {
+                radiosMarginTop: '10px'
             },
             slots: slots
         });

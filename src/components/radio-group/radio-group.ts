@@ -5,7 +5,7 @@ import { Model, Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { RADIO_GROUP_NAME } from '../component-names';
-import RadioPlugin, { BaseRadioGroup, MRadioPosition, RadioGroup } from '../radio/radio';
+import RadioPlugin, { BaseRadioGroup, MRadioPosition, MRadioVerticalAlignement, RadioGroup } from '../radio/radio';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './radio-group.html?style=./radio-group.scss';
 
@@ -24,11 +24,20 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
             value === MRadioPosition.Left ||
             value === MRadioPosition.Right
     })
-    public position: MRadioPosition;
+    public radiosPosition: MRadioPosition;
     @Prop()
     public inline: boolean;
     @Prop()
     public label: string;
+    @Prop({
+        default: MRadioVerticalAlignement.Top,
+        validator: value =>
+            value === MRadioVerticalAlignement.Top ||
+            value === MRadioVerticalAlignement.Center
+    })
+    public radiosVerticalAlign: MRadioVerticalAlignement;
+    @Prop()
+    public radiosMarginTop: string;
 
     public name: string = uuid.generate();
     private internalValue: any | undefined = '';

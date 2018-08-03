@@ -140,16 +140,16 @@ describe('button-group', () => {
         });
     });
 
-    describe('position prop overrides radio items', () => {
+    describe('radiosPosition prop overrides radio items', () => {
         let vm: Vue;
 
         beforeEach(() => {
             vm = new Vue({
                 template: `
                 <div>
-                    <m-button-group ref="g" :position="position" >
-                        <m-radio ref="a" position="left" value="radio1"></m-radio>
-                        <m-radio ref="b" position="right" value="radio2"></m-radio>
+                    <m-button-group ref="g" :radiosPosition="position" >
+                        <m-radio ref="a" radioPosition="left" value="radio1"></m-radio>
+                        <m-radio ref="b" radioPosition="right" value="radio2"></m-radio>
                         <m-radio ref="c" value="radio3"></m-radio>
                     </m-button-group>
                 </div>`,
@@ -159,12 +159,12 @@ describe('button-group', () => {
             }).$mount();
         });
 
-        it('position prop left', () => {
+        it('radiosPosition prop left', () => {
             expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
 
-            (vm as any).position = MRadioPosition.Left;
+            (vm as any).radiosPosition = MRadioPosition.Left;
             Vue.nextTick(() => {
                 expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
                 expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
@@ -172,12 +172,12 @@ describe('button-group', () => {
             });
         });
 
-        it('position prop right', () => {
+        it('radiosPosition prop right', () => {
             expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
             expect((vm.$refs.c as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeFalsy();
 
-            (vm as any).position = MRadioPosition.Right;
+            (vm as any).radiosPosition = MRadioPosition.Right;
             Vue.nextTick(() => {
                 expect((vm.$refs.a as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();
                 expect((vm.$refs.b as Vue).$el.classList.contains(POSITION_RIGHT_CSS)).toBeTruthy();

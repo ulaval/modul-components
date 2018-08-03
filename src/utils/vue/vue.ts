@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Messages } from '../i18n/i18n';
-import { HttpService } from '../http/http';
+
 import { FileService } from '../file/file';
-import { MediaQueries } from '../media-queries/media-queries';
-import { Modul } from '../modul/modul';
-import { ConfirmFunction } from '../modal/confirm';
-import { AlertFunction } from '../modal/alert';
+import { HttpService } from '../http/http';
+import { Messages } from '../i18n/i18n';
+import { Licenses } from '../license/license';
 import { Logger } from '../logger/logger';
+import { MediaQueries } from '../media-queries/media-queries';
+import { AlertFunction } from '../modal/alert';
+import { ConfirmFunction } from '../modal/confirm';
+import { Modul } from '../modul/modul';
 
 // TODO: explore usage of TS declare syntax
 // declare module 'vue/types/vue' {
@@ -26,6 +28,7 @@ export class ModulVue extends Vue {
     public $alert: AlertFunction;
     public $file: FileService;
     public $log: Logger;
+    public $license: Licenses;
 
     protected getParent<T extends Vue>(test: (obj: Vue) => boolean): T | undefined {
         let p: Vue = this.$parent;
