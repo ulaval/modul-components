@@ -14,18 +14,24 @@ exports[`MMenu Menu should render correctly 1`] = `
 
 exports[`MMenu should react to disabled prop changes 1`] = `
 <div class="m-menu m--is-skin-dark">
-    <div tabindex="0" aria-haspopup="true" aria-controls="mMenu-uuid-controls" class="m-menu__trigger">Menu</div>
     <m-accordion-transition>
-        <ul id="mMenu-uuid-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;"></ul>
+        <ul id="mMenu-uuid-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
+            <m-menu-item value="a">A item</m-menu-item>
+            <m-menu-item value="b">B item</m-menu-item>
+            <m-menu-item value="c">C item</m-menu-item>
+        </ul>
     </m-accordion-transition>
 </div>
 `;
 
 exports[`MMenu should react to disabled prop changes 2`] = `
 <div class="m-menu m--is-skin-dark m--is-disabled">
-    <div tabindex="-1" aria-haspopup="true" aria-controls="mMenu-uuid-controls" class="m-menu__trigger">Menu</div>
     <m-accordion-transition>
-        <ul id="mMenu-uuid-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;"></ul>
+        <ul id="mMenu-uuid-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
+            <m-menu-item value="a">A item</m-menu-item>
+            <m-menu-item value="b">B item</m-menu-item>
+            <m-menu-item value="c">C item</m-menu-item>
+        </ul>
     </m-accordion-transition>
 </div>
 `;
