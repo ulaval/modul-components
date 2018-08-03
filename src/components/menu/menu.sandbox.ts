@@ -8,11 +8,22 @@ import WithRender from './menu.sandbox.html';
 @Component
 export class MMenuSandbox extends Vue {
 
-    public selectedItem = 'item2';
-    public item1 = 'item1';
+    private selectedItem: string = 'item2';
+    private selectedItemLight: string = 'subitem1';
+    private openDarkSkin: boolean = false;
+    private openLightSkin: boolean = false;
 
-    public click(): void {
-        this.selectedItem = 'item3';
+    private changeModel(): void {
+        this.selectedItem = this.selectedItem === 'item2' ? 'subitem1' : 'item2';
+        this.selectedItemLight = this.selectedItemLight === 'subitem1' ? 'item2' : 'subitem1';
+    }
+
+    private toggleDarkSkin(): void {
+        this.openDarkSkin = !this.openDarkSkin;
+    }
+
+    private toggleLightSkin(): void {
+        this.openLightSkin = !this.openLightSkin;
     }
 
 }

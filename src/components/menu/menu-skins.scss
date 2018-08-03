@@ -1,33 +1,6 @@
-@mixin menu-skins() {
-    @include menu-commun();
-    @include menu-skin-light();
-    @include menu-skin-dark();
-}
 
-@mixin menu-commun {
-    color: var(--menu-item-color);
-    background-color: var(--menu-item-bgc);
-    text-transform: uppercase;
-    font-weight: $m-font-weight--bold;
-    transition: color $m-transition-duration--l ease, font-weight $m-transition-duration--l ease;
-}
+$m-menu-color--skin-light-bg-light: $m-color--interactive !default;
+$m-menu-color--skin-light-bg-dark: $m-color--interactive-dark !default;
 
-@mixin menu-skin-light() {
-    .m--is-skin-light & {
-        --menu-item-color: #98d5ff;
-        --menu-item-bgc: #39d;
-        --menu-item-bdc: var(--menu-item-bgc);
-        --menu-item-group-bgc: #007acc;
-        --menu-item-group-bgc-rgba: #{rgba(#007acc, 0.5)};
-    }
-}
-
-@mixin menu-skin-dark() {
-    .m--is-skin-dark & {
-        --menu-item-color: #{$m-color--grey-light};
-        --menu-item-bgc: #2c2b2b;
-        --menu-item-bdc: var(--menu-item-bgc);
-        --menu-item-group-bgc: #{$m-color--grey-darkest};
-        --menu-item-group-bgc-rgba: #{rgba($m-color--grey-darkest, 0.7)};
-    }
-}
+$m-menu-color--skin-dark-bg-light: #2c2b2b !default;
+$m-menu-color--skin-dark-bg-dark: $m-color--grey-darkest !default;

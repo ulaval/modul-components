@@ -1,22 +1,53 @@
 @import 'abstracts/variables';
 @import 'menu-skins';
+@import '../accordion/accordion-transition.scss';
 
 .m-menu {
     overflow: hidden;
 
     &__header {
-        @include menu-skins();
-
-        padding: $m-spacing;
+        transition: color $m-transition-duration ease, font-weight $m-transition-duration ease;
         position: relative;
         z-index: 2;
-        box-shadow: 0 2px 2px var(--menu-item-group-bgc-rgba);
+        outline: none;
+        padding: $m-spacing;
+        font-weight: $m-font-weight--black;
+
+        .m-menu.m--is-skin-light & {
+            color: rgba($m-color--white, 0.7);
+            background: $m-menu-color--skin-light-bg-light;
+            box-shadow: 0 1px 2px rgba($m-color--black, 0.1);
+        }
+
+        .m-menu.m--is-skin-dark & {
+            color: $m-color--grey-light;
+            background: $m-menu-color--skin-dark-bg-light;
+            box-shadow: 0 1px 2px rgba($m-color--black, 0.5);
+        }
+
+        .m-menu.m--is-open & {
+            color: $m-color--white;
+        }
+
+        .m-menu:not(.m--is-disabled) & {
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                color: $m-color--white;
+            }
+        }
+
+        .m-menu.m--is-disabled & {
+            cursor: not-allowed;
+        }
     }
 
     &__body {
-        margin: 0;
-        padding: 0;
         position: relative;
         z-index: 1;
+        margin: 0;
+        padding: 0;
+        list-style: none;
     }
 }

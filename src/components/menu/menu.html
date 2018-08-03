@@ -1,9 +1,25 @@
-<div class="m-menu" :class="'m--is-skin-' + skin">
-    <div class="m-menu__header" @click="onClick">
+<div class="m-menu"
+     :class="[ 'm--is-skin-' + skin,
+               { 'm--is-open': propOpen,
+                 'm--is-disabled': propDisabled }]">
+    <div class="m-menu__header"
+         ref="buttonMenu"
+         :tabindex="propDisabled ? '-1' : '0'"
+         @click="toggleMenu"
+         @keypress.enter="toggleMenu"
+         aria-haspopup="true"
+         :aria-controls="ariaControls"
+         :aria-expanded="propOpen"
+         v-if="hasSlotTrigger">
         <slot name="trigger"></slot>
     </div>
-    <ul class="m-menu__body" role="menu">
-        <slot>
-        </slot>
-    </ul>
+    <m-accordion-transition>
+        <ul :id="ariaControls"
+            class="m-menu__body"
+            role="menu"
+            :aria-hidden="!propOpen"
+            v-show="propOpen">
+            <slot></slot>
+        </ul>
+    </m-accordion-transition>
 </div>

@@ -1,23 +1,35 @@
-<li class="m-menu-item" :class="{'m--is-selected': isSelected,
- 'm--is-disabled': isDisabled,
- 'm--has-icon': hasIcon,
- 'm--is-group' : group,
- 'm--is-inside-group' : insideGroup}" tabindex="-1" role="none">
-
-    <router-link v-if="url" @click="onClick" :to="url" class="m-menu-item__link" role="menuitem" :aria-selected="isSelected">
+<li class="m-menu-item"
+    :class="{'m--is-selected': isSelected,
+             'm--is-disabled': isDisabled,
+             'm--has-icon': hasIcon,
+             'm--is-group': group,
+             'm--is-open': propOpen,
+             'm--is-inside-group' : menuItiemGroupRoot,
+             'm--is-anim-ready': animReady}"
+    role="none">
+    <router-link class="m-menu-item__link"
+                 :to="url"
+                 @click="onClick"
+                 :aria-selected="isSelected"
+                 role="menuitem"
+                 v-if="isUrl">
         <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
         <span class="m-menu-item__label">{{ label }}</span>
     </router-link>
 
-    <span v-else @click="onClick" class="m-menu-item__link">
+    <span class="m-menu-item__link"
+          @click="onClick"
+          @keypress.enter="onClick"
+          :tabindex="isDisabled ? '-1' : '0'"
+          v-else>
         <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
         <span class="m-menu-item__label">{{ label }}</span>
         <!-- a remplacer par le m-plus -->
         <m-icon class="m-menu-item__plus" ref="plus" v-if="group" name="m-svg__chevron--down"></m-icon>
     </span>
 
-    <m-accordion-transition>
-        <ul ref="group" v-show="group && isSelected || hasChildrenSelected">
+    <m-accordion-transition :transition="isAnimReady">
+        <ul class="m-menu-item__group" ref="group" :aria-hidden="!propOpen" v-show="propOpen">
             <slot></slot>
         </ul>
     </m-accordion-transition>

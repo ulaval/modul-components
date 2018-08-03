@@ -1,19 +1,16 @@
 <div>
-    <h3>Test 1 : menu</h3>
-    <p class="m-u--margin-bottom">
-        Le clavier sur mobile doit s'ajuster en fonction du type défini sur le textfield.
-    </p>
-    <m-menu :selected.sync="selectedItem">
+    <h2>Skin dark (default)</h2>
+    <m-menu class="m-u--margin-top" :selected.sync="selectedItem" :open="openDarkSkin">
         <div slot="trigger">
-            menu 1
+            Menu
         </div>
-        <m-menu-item value="item1" label="item 1" icon-name="m-svg__completed-filled">
+        <m-menu-item value="item1" label="item 1" icon-name="m-svg__profile">
         </m-menu-item>
-        <m-menu-item value="item2" url="patate" label="item 2">
+        <m-menu-item value="item2" label="item 2">
         </m-menu-item>
         <m-menu-item value="item3" label="item 3">
         </m-menu-item>
-        <m-menu-item label="Subitem header" group="true">
+        <m-menu-item label="Subitem header">
             <m-menu-item value="subitem1" label="subitem 1">
             </m-menu-item>
             <m-menu-item value="subitem2" label="subitem 2">
@@ -24,18 +21,22 @@
         <m-menu-item value="item5" label="item 5">
         </m-menu-item>
     </m-menu>
+    <m-button class="m-u--margin-top" @click="changeModel">Change model</m-button>
+    <m-button class="m-u--margin-top" @click="toggleDarkSkin">Toggle dark menu</m-button>
+    <p>Selected item : {{ selectedItem }}<p>
 
-    <m-menu :selected.sync="selectedItem" skin="dark">
+    <h2>Skin light</h2>
+    <m-menu class="m-u--margin-top" :selected.sync="selectedItemLight" skin="light"  :open="openLightSkin">
         <div slot="trigger">
-            menu 2
+            Menu
         </div>
-        <m-menu-item value="item1" label="item 1" icon-name="m-svg__completed-filled">
+        <m-menu-item value="item1" label="item 1" icon-name="m-svg__profile">
         </m-menu-item>
-        <m-menu-item value="item2" url="patate" label="item 2">
+        <m-menu-item value="item2" label="item 2">
         </m-menu-item>
         <m-menu-item value="item3" label="item 3">
         </m-menu-item>
-        <m-menu-item label="Subitem header" group="true">
+        <m-menu-item label="Subitem header">
             <m-menu-item value="subitem1" label="subitem 1">
             </m-menu-item>
             <m-menu-item value="subitem2" label="subitem 2">
@@ -45,9 +46,16 @@
         </m-menu-item>
         <m-menu-item value="item5" label="item 5">
         </m-menu-item>
+        <m-menu-item label="Subitem header">
+            <m-menu-item value="subitem5" label="subitem 1">
+            </m-menu-item>
+            <m-menu-item value="subitem6" label="subitem 2">
+            </m-menu-item>
+            <m-menu-item value="subitem7" label="subitem 3">
+            </m-menu-item>
+        </m-menu-item>
     </m-menu>
-    <br>
-    <br>
-    <br>
-    <m-button @click="click">Change model</m-button>
+    <m-button class="m-u--margin-top" @click="changeModel">Change model</m-button>
+    <m-button class="m-u--margin-top" @click="toggleLightSkin">Toggle light menu</m-button>
+    <p>Selected item : {{ selectedItemLight }}<p></p>
 </div>

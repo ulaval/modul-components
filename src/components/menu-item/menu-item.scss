@@ -1,48 +1,140 @@
 @import 'abstracts/variables';
 @import '../components/menu/menu-skins';
+@import '../accordion/accordion-transition.scss';
+
+.m-menu.m--is-skin-light {
+    .m-menu-item {
+        &.m--is-inside-group {
+            > .m-menu-item__link {
+                background: $m-menu-color--skin-light-bg-dark;
+
+                &::before {
+                    background: $m-menu-color--skin-light-bg-light;
+                }
+            }
+        }
+
+        &__link {
+            color: rgba($m-color--white, 0.7);
+            background: $m-menu-color--skin-light-bg-light;
+        }
+    }
+}
+
+.m-menu.m--is-skin-dark {
+    .m-menu-item {
+        &.m--is-inside-group {
+            > .m-menu-item__link {
+                background: $m-menu-color--skin-dark-bg-dark;
+
+                &::before {
+                    background: $m-menu-color--skin-dark-bg-light;
+                }
+            }
+        }
+
+        &__link {
+            color: $m-color--grey-light;
+            background: $m-menu-color--skin-dark-bg-light;
+        }
+    }
+}
 
 .m-menu-item {
-    @include menu-skins();
+    position: relative;
 
-    &.m--is-selected {
-        --menu-item-bdc: #{$m-color--ul-yellow};
+    &.m--is-anim-ready {
+        .m-menu-item__link {
+            transition: color $m-transition-duration ease, font-weight $m-transition-duration ease;
+        }
 
-        color: #fff;
-        font-weight: $m-font-weight--black;
+        &.m--is-inside-group > .m-menu-item__link::after {
+            transition: width $m-transition-duration ease;
+        }
     }
 
-    // todo gérer les focus & cie
-    outline: unset;
+    &.m--is-selected,
+    &.m--is-open {
+        > .m-menu-item__link {
+            color: $m-color--white;
+            font-weight: $m-font-weight--black;
+        }
+    }
 
-    &__link {
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        align-items: center;
-        padding: $m-spacing--s $m-spacing;
-        min-height: $m-touch-size;
-
-        .m--is-group & {
+    &.m--is-group {
+        > .m-menu-item__link {
             justify-content: space-between;
         }
     }
 
     &.m--is-inside-group {
-        text-transform: lowercase;
-        background-color: var(--menu-item-group-bgc);
-        border-left: 4px solid var(--menu-item-bdc);
+        > .m-menu-item__link {
+            text-transform: lowercase;
+
+            &::before,
+            &::after {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                content: '';
+            }
+
+            &::before {
+                width: $m-border-width--l;
+            }
+
+            &::after {
+                background: $m-color--ul-yellow;
+                width: 0;
+            }
+        }
+
+        &.m--is-selected {
+            .m-menu-item__link::after {
+                width: $m-border-width--l;
+            }
+        }
     }
 
     &:not(.m--is-disabled) {
-        cursor: pointer;
+        > .m-menu-item__link {
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                color: $m-color--white;
+            }
+        }
     }
 
     &.m--is-disabled {
-        cursor: not-allowed;
+        > .m-menu-item__link {
+            cursor: not-allowed;
+        }
     }
 
     &__icon {
-        margin-right: $m-padding;
+        margin-right: $m-spacing--s;
+        font-size: 20px; // Magic number
+    }
+
+    &__link {
+        position: relative;
+        display: flex;
+        text-transform: uppercase;
+        font-weight: $m-font-weight;
+        align-items: center;
+        text-decoration: none;
+        padding: $m-spacing--s $m-spacing;
+        min-height: $m-touch-size;
+        outline: none;
+    }
+
+    &__group {
+        padding: 0;
+        margin: 0;
+        list-style: none;
     }
 }
 
