@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
@@ -59,6 +59,24 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
             this.groupItemRoot = (groupItemRoot as any) as MenuItem;
             this.groupItemRoot.group = true;
         }
+
+        this.propOpen = this.open;
+    }
+
+    @Watch('open')
+    private openChanged(open: boolean): void {
+        this.propOpen = open;
+    }
+
+    public set propOpen(open: boolean) {
+        if (this.group) {
+            this.internalOpen = open;
+            this.$emit('update:open', open);
+        }
+    }
+
+    public get propOpen(): boolean {
+        return this.internalOpen;
     }
 
     public get isAnimReady(): boolean {
@@ -67,15 +85,6 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
 
     private get isUrl(): boolean {
         return !!this.url && !this.group;
-    }
-
-    public set propOpen(open: boolean) {
-        this.internalOpen = open;
-        this.$emit('update:open', open);
-    }
-
-    public get propOpen(): boolean {
-        return this.internalOpen;
     }
 
     private toggleOpen(): void {
