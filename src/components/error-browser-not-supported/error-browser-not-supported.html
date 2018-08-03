@@ -1,2 +1,2 @@
-<m-error-template :skin="skin" :iconName="iconName" :title="title" :hints="mqAwareHints" :links="mqAwareLinks">
+<m-error-template :skin="skin" :iconName="iconName" :title="title" :hints="isMqMinS ? hintsDesktop : hintsMobile" :links="isMqMinS ? linksDesktop : linksMobile">
 </m-error-template>

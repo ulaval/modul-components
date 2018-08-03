@@ -58,8 +58,8 @@ export class InputManagement extends ModulVue
 
     @Watch('focus')
     private focusChanged(focus: boolean): void {
-        this.internalIsFocus = focus && !this.as<InputStateMixin>().isDisabled;
-        let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+        this.internalIsFocus = focus && this.as<InputStateMixin>().active;
+        let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
         if (inputEl) {
             if (this.internalIsFocus) {
                 inputEl.focus();
@@ -70,8 +70,8 @@ export class InputManagement extends ModulVue
     }
 
     private onClick(event: MouseEvent): void {
-        this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
-        let inputEl: HTMLElement = this.$refs.input as HTMLElement;
+        this.internalIsFocus = this.as<InputStateMixin>().active;
+        let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
         if (this.internalIsFocus && inputEl) {
             inputEl.focus();
         }
@@ -79,7 +79,7 @@ export class InputManagement extends ModulVue
     }
 
     private onFocus(event: FocusEvent): void {
-        this.internalIsFocus = !this.as<InputStateMixin>().isDisabled;
+        this.internalIsFocus = this.as<InputStateMixin>().active;
         if (this.internalIsFocus) {
             this.$emit('focus', event);
         }
@@ -91,13 +91,13 @@ export class InputManagement extends ModulVue
     }
 
     private onKeyup(event: Event): void {
-        if (!this.as<InputStateMixin>().isDisabled) {
+        if (this.as<InputStateMixin>().active) {
             this.$emit('keyup', event, this.model);
         }
     }
 
     private onKeydown(event: Event): void {
-        if (!this.as<InputStateMixin>().isDisabled) {
+        if (this.as<InputStateMixin>().active) {
             this.$emit('keydown', event);
         }
     }

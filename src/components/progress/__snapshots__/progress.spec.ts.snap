@@ -29,3 +29,9 @@ exports[`MProgress indeterminate mode should render correctly when no border rad
     <div class="m-progress__bar" style="width:0%;border-bottom-left-radius:initial;border-top-left-radius:initial;"></div>
 </div>
 `;
+
+exports[`MProgress indeterminate mode should render correctly when value is 100% 1`] = `
+<div name="m--is" appear="" class="m-progress m--is-determinate  m--is-completed" style="height:6px;border-radius:initial;">
+    <div class="m-progress__bar" style="width:100%;border-radius:initial;"></div>
+</div>
+`;
