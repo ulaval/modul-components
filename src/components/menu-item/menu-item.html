@@ -21,6 +21,9 @@
           @click="onClick"
           @keypress.enter="onClick"
           :tabindex="isDisabled ? '-1' : '0'"
+          :aria-haspopup="group"
+          :aria-controls="group ? ariaControls : undefined"
+          :aria-expanded="group ? propOpen : undefined"
           v-else>
         <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
         <span class="m-menu-item__label">{{ label }}</span>
@@ -29,7 +32,7 @@
     </span>
 
     <m-accordion-transition :transition="isAnimReady">
-        <ul class="m-menu-item__group" ref="group" :aria-hidden="!propOpen" v-show="propOpen">
+        <ul :id="ariaControls" class="m-menu-item__group" ref="group" :aria-hidden="!propOpen" v-show="propOpen">
             <slot></slot>
         </ul>
     </m-accordion-transition>

@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import { MENU_ITEM_NAME } from '../component-names';
@@ -40,7 +41,8 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     // tslint:disable-next-line:no-null-keyword
     public menuItiemGroupRoot: MenuItem | null = null;
     private internalOpen: boolean = false;
-    private animReady: boolean = false;
+
+    private ariaControls: string = `mMenuItem-${uuid.generate()}`;
 
     protected mounted(): void {
         let menuRoot: BaseMenu | undefined;
