@@ -239,7 +239,8 @@
     &:not(.m--no-padding) {
         @if ($topBottom >= $m-padding and $topBottom >= $m-padding--s) {
             @media (max-width: $m-mq--max--s) {
-                padding: #{$topBottom/2} #{$rightLeft/2};
+                padding-left: $rightLeft / 2;
+                padding-right: $rightLeft / 2;
             }
 
             @media (min-width: $m-mq--min--s) {

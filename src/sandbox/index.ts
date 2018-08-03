@@ -14,6 +14,7 @@ import DropdownGroupSandboxPlugin from '../components/dropdown-group/dropdown-gr
 import DropdownItemSandboxPlugin from '../components/dropdown-item/dropdown-item.sandbox';
 import DropdownSandboxPlugin from '../components/dropdown/dropdown.sandbox';
 import DynamicTemplateSandboxPlugin from '../components/dynamic-template/dynamic-template.sandbox';
+import EditWindowSandboxPlugin from '../components/edit-window/edit-window.sandbox';
 import ErrorAccessDeniedSandboxPlugin from '../components/error-access-denied/error-access-denied.sandbox';
 import ErrorBrowserNotSupportedSandboxPlugin from '../components/error-browser-not-supported/error-browser-not-supported.sandbox';
 import ErrorConfigNotSupportedSandboxPlugin from '../components/error-config-not-supported/error-config-not-supported.sandbox';
@@ -81,6 +82,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(DatefieldsSandboxPlugin);
         Vue.use(DatepickerSandboxPlugin);
         Vue.use(DialogSandboxPlugin);
+        Vue.use(EditWindowSandboxPlugin);
         Vue.use(DropdownSandboxPlugin);
         Vue.use(DropdownItemSandboxPlugin);
         Vue.use(DropdownGroupSandboxPlugin);
