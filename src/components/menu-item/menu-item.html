@@ -21,6 +21,7 @@
           @click="onClick"
           @keypress.enter="onClick"
           :tabindex="isDisabled ? '-1' : '0'"
+          :aria-selected="selected"
           :aria-haspopup="group"
           :aria-controls="group ? ariaControls : undefined"
           :aria-expanded="group ? propOpen : undefined"
