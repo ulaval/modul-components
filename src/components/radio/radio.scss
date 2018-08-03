@@ -1,5 +1,5 @@
 @import 'abstracts/variables';
-$m-radio--width: 16px !default;
+$m-radio--width: 17px !default;
 $m-radio--color-disabled: $m-color--disabled !default;
 
 .m-radio {
@@ -152,6 +152,22 @@ $m-radio--color-disabled: $m-color--disabled !default;
             }
         }
 
+        &.m--is-align-center {
+            .m-radio__wrap {
+                align-items: center;
+            }
+        }
+
+        &:not(.m--is-align-center) {
+            .m-radio__wrap {
+                align-items: flex-start;
+            }
+
+            .m-radio__input {
+                margin-top: 2px; // Magic number
+            }
+        }
+
         .m-radio {
             &__wrap {
                 display: inline-flex;
@@ -175,8 +191,8 @@ $m-radio--color-disabled: $m-color--disabled !default;
                     transition: transform $m-transition-duration ease-out;
                     content: '';
                     display: block;
-                    width: 10px;
-                    height: 10px;
+                    width: calc(100% - 4px);
+                    height: calc(100% - 4px);
                     background: $m-color--interactive;
                     border-radius: 50%;
                     visibility: hidden;
@@ -325,6 +341,22 @@ $m-radio--color-disabled: $m-color--disabled !default;
             flex: 1;
         }
 
+        &.m--is-align-center {
+            .m-radio__wrap {
+                align-items: center;
+            }
+        }
+
+        &:not(.m--is-align-center) {
+            .m-radio__wrap {
+                align-items: flex-start;
+            }
+
+            .m-radio__input {
+                margin-top: 2px; // Magic number
+            }
+        }
+
         .m-radio {
             &__wrap,
             &__label {
@@ -334,7 +366,6 @@ $m-radio--color-disabled: $m-color--disabled !default;
 
             &__wrap {
                 display: inline-flex;
-                align-items: center;
                 text-align: center;
                 justify-content: center;
                 vertical-align: middle;
