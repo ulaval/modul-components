@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MOption Menu should render correctly 1`] = `
+exports[`MOption Option should render correctly 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-option">
     <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
     <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
@@ -13,7 +13,7 @@ exports[`MOption Menu should render correctly 1`] = `
 </m-popup>
 `;
 
-exports[`MOption Menu should render correctly placement left 1`] = `
+exports[`MOption Option should render correctly placement left 1`] = `
 <m-popup placement="left" close-on-backdrop="true" focus-management="true" class="m-option">
     <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
     <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
@@ -26,7 +26,7 @@ exports[`MOption Menu should render correctly placement left 1`] = `
 </m-popup>
 `;
 
-exports[`MOption Menu should render correctly placement right 1`] = `
+exports[`MOption Option should render correctly placement right 1`] = `
 <m-popup placement="right" close-on-backdrop="true" focus-management="true" class="m-option">
     <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
     <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">
@@ -39,7 +39,7 @@ exports[`MOption Menu should render correctly placement right 1`] = `
 </m-popup>
 `;
 
-exports[`MOption Menu should render correctly placement top 1`] = `
+exports[`MOption Option should render correctly placement top 1`] = `
 <m-popup placement="top" close-on-backdrop="true" focus-management="true" class="m-option">
     <m-icon-button slot="trigger" id="mOption-uuid" aria-haspopup="true" aria-controls="mOption-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-option__button"></m-icon-button>
     <ul id="mOption-uuid-controls" aria-labelledby="mOption-uuid" class="m-option__list">

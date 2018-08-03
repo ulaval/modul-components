@@ -23,7 +23,7 @@ export interface Menu {
     onClick(event: Event, value: string): void;
 }
 
-export enum Skins {
+export enum MMenuSkin {
     Light = 'light',
     Dark = 'dark'
 }
@@ -38,12 +38,12 @@ export class MMenu extends BaseMenu implements Menu {
     @Prop()
     public closeOnSelected: boolean;
     @Prop({
-        default: Skins.Dark,
+        default: MMenuSkin.Dark,
         validator: value =>
-            value === Skins.Light ||
-            value === Skins.Dark
+            value === MMenuSkin.Light ||
+            value === MMenuSkin.Dark
     })
-    public skin: Skins;
+    public skin: MMenuSkin;
     @Prop()
     public disabled: boolean;
 

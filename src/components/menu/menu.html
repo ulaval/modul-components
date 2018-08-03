@@ -2,7 +2,7 @@
      :class="[ 'm--is-skin-' + skin,
                { 'm--is-open': propOpen,
                  'm--is-disabled': propDisabled }]">
-    <div class="m-menu__header"
+    <div class="m-menu__trigger"
          ref="buttonMenu"
          :tabindex="propDisabled ? '-1' : '0'"
          @click="toggleMenu"
