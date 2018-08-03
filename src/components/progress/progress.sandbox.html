@@ -60,4 +60,23 @@
     <p>
         <m-progress value="50" state="error" :circle="true"></m-progress>
     </p>
+    <h3>Progress Bar no state (value commands state)</h3>
+    <p class="m-u--margin-bottom">Progress bar in normal mode, differents value</p>
+    <p>
+        <m-progress value="0"></m-progress>
+    </p>
+    <p>
+        <m-progress value="50"></m-progress>
+    </p>
+    <p>
+        <m-progress value="100"></m-progress>
+    </p>
+    <h3>Progress Bar 99%, no state</h3>
+    <p class="m-u--margin-bottom">Progress bar in normal mode and circle mode, 99%</p>
+    <p>
+        <m-progress value="99"></m-progress>
+    </p>
+    <p>
+        <m-progress value="99" :circle="true"></m-progress>
+    </p>
 </div>

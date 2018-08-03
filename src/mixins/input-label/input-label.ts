@@ -18,6 +18,6 @@ export class InputLabel extends ModulVue {
     }
 
     private get hasIcon(): boolean {
-        return !!this.iconName && !this.as<InputStateMixin>().isDisabled;
+        return !!this.iconName && !this.as<InputStateMixin>().isDisabled && !this.as<InputStateMixin>().isWaiting;
     }
 }

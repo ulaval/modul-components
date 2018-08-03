@@ -1,14 +1,14 @@
-import '../src/utils/polyfills';
-import Vue from 'vue';
 import '../src/styles/main.scss';
+import '../src/utils/polyfills';
+
+import Vue from 'vue';
 
 import ComponentsPlugin from '../src/components';
 import DirectivesPlugin from '../src/directives';
 import FiltersPlugin from '../src/filters';
-import UtilsPlugin, { UtilsPluginOptions } from '../src/utils';
-
-import { FRENCH } from '../src/utils/i18n/i18n';
 import FrenchPlugin from '../src/lang/fr';
+import UtilsPlugin, { UtilsPluginOptions } from '../src/utils';
+import { FRENCH } from '../src/utils/i18n/i18n';
 import DefaultSpritesPlugin from '../src/utils/svg/default-sprites';
 
 Vue.config.productionTip = false;

@@ -9,7 +9,6 @@ $m-input-style--padding: 4px !default;
 
 .m-input-style {
     position: relative;
-    z-index: 0;
     display: inline-flex;
     flex-direction: column;
     outline: none;
@@ -40,7 +39,7 @@ $m-input-style--padding: 4px !default;
 
     &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus),
     &.m--has-value {
-        &:not(.m--is-readonly):not(.m--has-error)::before {
+        &:not(.m--is-readonly):not(.m--has-error):not(.m--is-waiting)::before {
             border-color: $m-color--text;
         }
     }
@@ -57,7 +56,7 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    &.m--is-focus:not(.m--has-error) {
+    &.m--is-focus:not(.m--has-error):not(.m--is-valid) {
         .m-input-style__label,
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {
@@ -228,26 +227,81 @@ $m-input-style--padding: 4px !default;
 
     &__body {
         position: relative;
-        z-index: 2;
+        z-index: 3;
         display: flex;
         align-items: center;
         flex: 1 1 auto;
         width: 100%;
         font-weight: $m-font-weight;
         text-decoration: none;
-        padding: 0 0 $m-input-style--padding 0;
+        padding-bottom: $m-input-style--padding;
+        background-color: $m-color--white;
+
+        .m--has-border-top.m--is-focus & {
+            padding-bottom: $m-input-style--padding / 2;
+        }
 
         &,
         div,
         span {
-            cursor: pointer;
+            cursor: text;
         }
 
         &__left {
             position: relative;
-            overflow: hidden;
             min-height: 24px;
             flex: 1 1 auto;
+
+            .m--has-border-top & {
+                .m--is-focus & {
+                    padding-top: 4px;
+                    margin-top: 4px;
+                }
+
+                &::before,
+                &::after {
+                    top: 0;
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    transition: background-color $m-transition-duration--l ease-in-out, width $m-transition-duration--l ease-in-out;
+                }
+
+                &::before {
+                    width: 100%;
+                    height: 2px;
+
+                    .m--is-focus & {
+                        background-color: $m-color--interactive;
+                    }
+
+                    .m--is-focus.m--is-valid & {
+                        background-color: $m-input-style--color-valid;
+                    }
+
+                    .m--is-focus.m--has-error & {
+                        background-color: $m-input-style--color-error;
+                    }
+                }
+
+                &::after {
+                    width: 0;
+                    height: 4px;
+
+                    .m--is-focus & {
+                        width: 100%;
+                        background-color: $m-color--interactive;
+                    }
+
+                    .m--is-focus.m--is-valid & {
+                        background-color: $m-input-style--color-valid;
+                    }
+
+                    .m--is-focus.m--has-error & {
+                        background-color: $m-input-style--color-error;
+                    }
+                }
+            }
         }
 
         &__right {
@@ -302,8 +356,8 @@ $m-input-style--padding: 4px !default;
         font-size: $m-font-size;
         font-weight: $m-font-weight--bold;
         text-align: left;
-        border: none;
         background: none;
+        border: none;
         color: $m-color--text;
     }
 
