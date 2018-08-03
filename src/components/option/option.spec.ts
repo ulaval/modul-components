@@ -21,113 +21,113 @@ describe('MOption', () => {
         addMessages(localVue, ['components/option/option.lang.en.json']);
     });
 
-    describe('Menu', () => {
+    describe('Option', () => {
         it('should render correctly', () => {
-            const menu: Wrapper<MOption> = mountGroup();
+            const option: Wrapper<MOption> = mountGroup();
 
-            return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+            return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
         });
     });
 
-    describe('Menu', () => {
+    describe('Option', () => {
         it('should render correctly placement top', () => {
-            const menu: Wrapper<MOption> = mountGroup({
+            const option: Wrapper<MOption> = mountGroup({
                 placement: MPopperPlacement.Top
             });
 
-            return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+            return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
         });
     });
 
-    describe('Menu', () => {
+    describe('Option', () => {
         it('should render correctly placement left', () => {
-            const menu: Wrapper<MOption> = mountGroup({
+            const option: Wrapper<MOption> = mountGroup({
                 placement: MPopperPlacement.Left
             });
 
-            return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+            return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
         });
     });
 
-    describe('Menu', () => {
+    describe('Option', () => {
         it('should render correctly placement right', () => {
-            const menu: Wrapper<MOption> = mountGroup({
+            const option: Wrapper<MOption> = mountGroup({
                 placement: MPopperPlacement.Right
             });
 
-            return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+            return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
         });
     });
 
     it('should render correctly when skin is dark', () => {
-        const menu: Wrapper<MOption> = mountGroup({
+        const option: Wrapper<MOption> = mountGroup({
             skin: MOptionsSkin.Dark
         });
 
-        menu.update();
+        option.update();
 
-        return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when skin is light', () => {
-        const menu: Wrapper<MOption> = mountGroup({
+        const option: Wrapper<MOption> = mountGroup({
             skin: MOptionsSkin.Light
         });
 
-        menu.update();
+        option.update();
 
-        return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when open title is set', () => {
-        const menu: Wrapper<MOption> = mountGroup({
+        const option: Wrapper<MOption> = mountGroup({
             openTitle: 'Title open'
         });
 
-        menu.update();
+        option.update();
 
-        return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when close title is set', () => {
-        const menu: Wrapper<MOption> = mountGroup({
+        const option: Wrapper<MOption> = mountGroup({
             closeTitle: 'Title close',
             open: true
         });
 
-        menu.update();
+        option.update();
 
-        return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
 
     it('should render correctly when size is set', () => {
-        const menu: Wrapper<MOption> = mountGroup({
+        const option: Wrapper<MOption> = mountGroup({
             size: '200px'
         });
 
-        menu.update();
+        option.update();
 
-        return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+        return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
 
     it('should emit click event when clicked', () => {
-        const menu: Wrapper<MOption> = mountGroup();
+        const option: Wrapper<MOption> = mountGroup();
 
-        menu.find('.m-option__button').trigger('click');
-        expect(menu.emitted('click')).toBeTruthy();
+        option.find('.m-option__button').trigger('click');
+        expect(option.emitted('click')).toBeTruthy();
 
-        menu.find('.m-option__button').trigger('click');
-        expect(menu.emitted('click')).toBeTruthy();
+        option.find('.m-option__button').trigger('click');
+        expect(option.emitted('click')).toBeTruthy();
     });
 
     it('should react to open prop changes', () => {
-        const menu: Wrapper<MOption> = mountGroup();
+        const option: Wrapper<MOption> = mountGroup();
 
-        menu.setProps({ open: false });
-        expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+        option.setProps({ open: false });
+        expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
 
-        menu.setProps({ open: true });
-        expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
+        option.setProps({ open: true });
+        expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
 
     const mountGroup: (propsData?: object, slots?: Slots) => Wrapper<MOption> = (propsData?: object, slots?: Slots) => {
