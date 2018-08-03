@@ -8,13 +8,13 @@
          @click="toggleMenu"
          @keypress.enter="toggleMenu"
          aria-haspopup="true"
-         :aria-controls="ariaControls"
+         :aria-controls="idAriaControls"
          :aria-expanded="propOpen"
          v-if="hasSlotTrigger">
         <slot name="trigger"></slot>
     </div>
     <m-accordion-transition>
-        <ul :id="ariaControls"
+        <ul :id="idAriaControls"
             class="m-menu__body"
             role="menu"
             ref="menu"

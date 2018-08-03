@@ -46,21 +46,19 @@ export class MMenu extends BaseMenu implements Menu {
     public skin: MMenuSkin;
     @Prop()
     public disabled: boolean;
+    @Prop({ default: `mMenu-${uuid.generate()}-controls` })
+    public idAriaControls: string;
 
     public $refs: {
         menu: HTMLElement;
         buttonMenu: HTMLElement;
     };
 
-    public $el: HTMLElement;
-
     public animReady: boolean = false;
     private internalValue: string | undefined = '';
     private internalOpen: boolean = false;
     private internalDisabled: boolean = false;
     private internalItems: MMenuItem[] = [];
-
-    private ariaControls: string = `mMenu-${uuid.generate()}-controls`;
 
     @Watch('selected')
     public updateValue(value: string | undefined): void {
