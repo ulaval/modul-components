@@ -1,6 +1,7 @@
-import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+
+import { ModulVue } from '../../utils/vue/vue';
 
 export enum InputStateValue {
     Default = 'default',
@@ -37,10 +38,15 @@ export interface InputStateMixin {
     errorMessage: string;
 
     disabled: boolean;
+    getInput(): HTMLElement | undefined;
+}
+
+export interface InputStateInputSelector {
+    selector: string;
 }
 
 @Component
-export class InputState extends Vue implements InputStateMixin {
+export class InputState extends ModulVue implements InputStateMixin {
     @Prop()
     public disabled: boolean;
     @Prop()
@@ -121,5 +127,14 @@ export class InputState extends Vue implements InputStateMixin {
 
     public get hasHelperMessage(): boolean {
         return (!!this.helperMessage || this.helperMessage === ' ') && !this.disabled && !this.waiting;
+    }
+
+    public getInput(): HTMLElement | undefined {
+        const selector: string = this.as<InputStateInputSelector>()!.selector || 'input, textarea, [contenteditable=true]';
+        const elements: NodeListOf<Element> = this.$el.querySelectorAll(selector);
+        if (elements.length > 1 || elements.length === 0) {
+            throw new Error(`Input state can manage 1 and only 1 nested editable element (${selector})`);
+        }
+        return elements[0] as HTMLElement | undefined;
     }
 }

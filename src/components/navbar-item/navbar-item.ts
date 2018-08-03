@@ -4,18 +4,11 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_ITEM_NAME } from '../component-names';
+import { BaseNavbar, Navbar } from '../navbar/navbar';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
 
-export abstract class BaseNavbar extends ModulVue { }
-
-export interface Navbar {
-    model: string;
-    mouseEvent: boolean;
-    updateValue(value: string): void;
-    onMouseover(value: string, event): void;
-    onMouseleave(value: string, event): void;
-    onClick(value: string, event): void;
-}
+// must be sync with selected css class
+const SELECTEDCLASS: string = 'm--is-selected';
 
 @WithRender
 @Component
@@ -45,10 +38,49 @@ export class MNavbarItem extends ModulVue {
                 this.$el.setAttribute('tabindex', '0');
             }
 
+            this.setDimension();
+
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
         }
 
+    }
+
+    private setDimension(): void {
+        let lineHeight: number = parseFloat(window.getComputedStyle(this.$el).getPropertyValue('line-height'));
+        // must subtract the padding, create a infinite loop
+        let pt: number = parseInt(window.getComputedStyle(this.$el).getPropertyValue('padding-top'), 10);
+        let pb: number = parseInt(window.getComputedStyle(this.$el).getPropertyValue('padding-bottom'), 10);
+        let paddingH: number = pt + pb;
+
+        let h: number = this.$el.clientHeight - paddingH;
+        let w: number = this.$el.clientWidth;
+        let lines: number = Math.floor(h / lineHeight);
+
+        if (lines > 2) {
+
+            this.$el.style.maxWidth = 'none';
+            // use selected class to reserve space for when selected
+            this.$el.classList.add(SELECTEDCLASS);
+            // create a infinite loop if the parent has 'align-items: stretch'
+            (this.$parent.$refs.list as HTMLElement).style.alignItems = 'flex-start';
+
+            do {
+
+                // increment width
+                w++;
+                this.$el.style.width = w + 'px';
+
+                // update values
+                h = this.$el.clientHeight - paddingH;
+                lines = Math.floor(h / lineHeight);
+
+            } while (lines > 2);
+
+            // reset styles once completed
+            this.$el.classList.remove(SELECTEDCLASS);
+            (this.$parent.$refs.list as HTMLElement).style.removeProperty('align-items');
+        }
     }
 
     private get isDisabled(): boolean {

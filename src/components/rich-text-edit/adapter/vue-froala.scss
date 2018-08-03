@@ -1,0 +1,145 @@
+@import 'abstracts/variables';
+
+.vue-froala {
+    overflow: hidden;
+
+    &--dirty {
+        overflow: unset;
+    }
+
+    /deep/ .fr-box.fr-basic.fr-top .fr-wrapper {
+        box-shadow: unset;
+    }
+
+    /deep/ .fr-wrapper {
+        background-color: transparent;
+        cursor: text;
+    }
+
+    /deep/ .fr-toolbar {
+        cursor: default;
+        opacity: 0;
+        display: block !important;
+        box-shadow: unset;
+        border-left: 1px solid $m-color--grey-light;
+        border-right: 1px solid $m-color--grey-light;
+        border-top: 1px solid $m-color--grey-light;
+        border-bottom: 1px solid $m-color--grey-light;
+
+        button {
+            color: $m-color--grey-darker;
+        }
+
+        .popup-button::after {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #222;
+            right: 0;
+            top: 17px;
+            content: "";
+        }
+    }
+
+    /deep/ .fr-box.fr-basic .fr-element {
+        transition: padding $m-transition-duration--l ease, border-color $m-transition-duration--l ease-in-out;
+        padding: 0;
+        min-height: unset;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+        overflow-x: unset;
+    }
+
+    &--animated {
+        /deep/ .fr-toolbar {
+            transition: margin-top $m-transition-duration--l ease, opacity 0.3s ease;
+        }
+    }
+
+    &--collapsed {
+        /deep/ .fr-box.fr-basic .fr-element {
+            padding: 0;
+            min-height: unset;
+            height: 0;
+
+            p { margin: 0; }
+        }
+
+        /deep/ .fr-box.fr-basic.fr-top .fr-wrapper {
+            box-shadow: unset;
+        }
+
+        /deep/ .fr-wrapper.show-placeholder .fr-placeholder { display: none; }
+    }
+
+    &--unfocused {
+        overflow: hidden;
+
+        /deep/ .fr-sticky-dummy {
+            height: 0 !important; // Fix flicking problem with multiple editors on page.
+        }
+    }
+
+    &--focused {
+        /deep/ .fr-placeholder {
+            padding: 16px 16px 0 16px !important; // Fix placeholder positioning bug.  Magic numbers.
+        }
+
+        /deep/ .fr-box.fr-basic .fr-element {
+            padding: $m-spacing;
+            font-weight: $m-font-weight;
+            border-left-color: $m-color--grey-light;
+            border-right-color: $m-color--grey-light;
+        }
+
+        /deep/ .fr-wrapper {
+            background-color: white;
+        }
+
+        /deep/ .fr-toolbar {
+            margin-top: 0;
+            padding: 0;
+            opacity: 1;
+
+            &::before,
+            &::after {
+                .m--has-error & {
+                    background-color: $m-color--error;
+                }
+
+                .m--is-valid & {
+                    background-color: $m-color--success;
+                }
+            }
+        }
+    }
+
+    /deep/ .fr-element {
+        color: $m-color--text;
+
+        & > :first-child {
+            margin-top: 0;
+        }
+
+        & > * {
+            min-height: 24px; // magic number
+        }
+
+        & > p {
+            margin-top: 8px; // magic number
+        }
+
+        ul {
+            margin-top: $m-margin;
+            margin-bottom: 0;
+
+            @include m-bullet-list();
+        }
+
+        table {
+            @include m-table();
+        }
+    }
+}

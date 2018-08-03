@@ -6,7 +6,10 @@ $m-menu-item--color-active: $m-color--grey-lightest !default;
 .m-menu-item {
     display: flex;
     text-decoration: none;
-    max-width: 220px;
+
+    @media (min-width: $m-mq--min--s) {
+        max-width: 220px; // Magic number
+    }
 
     &:not(:last-child) {
         border-bottom: 1px solid $m-color--border;
