@@ -1,6 +1,6 @@
 <div>
     <h2>Skin dark (default)</h2>
-    <m-menu class="m-u--margin-top" :selected.sync="selectedItem" :open="openDarkSkin">
+    <m-menu class="m-u--margin-top" :selected.sync="selectedItem" :open.sync="openDarkSkin">
         <div slot="trigger">
             Menu
         </div>
@@ -10,7 +10,7 @@
         </m-menu-item>
         <m-menu-item value="item3" label="Item 3">
         </m-menu-item>
-        <m-menu-item label="Subitem header">
+        <m-menu-item label="Item group 1" :open.sync="openItemGroup1DarkSkin">
             <m-menu-item value="subitem1" label="Subitem 1">
             </m-menu-item>
             <m-menu-item value="subitem2" label="Subitem 2">
@@ -20,13 +20,22 @@
         </m-menu-item>
         <m-menu-item value="item5" label="Item 5">
         </m-menu-item>
+        <m-menu-item label="Item group 2">
+            <m-menu-item value="subitem4" label="Subitem 4">
+            </m-menu-item>
+            <m-menu-item value="subitem5" label="Subitem 5">
+            </m-menu-item>
+            <m-menu-item value="subitem6" label="Subitem 6">
+            </m-menu-item>
+        </m-menu-item>
     </m-menu>
     <m-button class="m-u--margin-top" @click="changeModel">Change model</m-button>
     <m-button class="m-u--margin-top" @click="toggleDarkSkin">Toggle dark menu</m-button>
+    <m-button class="m-u--margin-top" @click="toggleItemGroup1DarkSkin" :disabled="!openDarkSkin">Open Item group 1</m-button>
     <p>Selected item : {{ selectedItem }}</p>
 
     <h2>Skin light</h2>
-    <m-menu class="m-u--margin-top" :selected.sync="selectedItemLight" skin="light"  :open="openLightSkin">
+    <m-menu class="m-u--margin-top" :selected.sync="selectedItemLight" skin="light"  :open.sync="openLightSkin">
         <div slot="trigger">
             Menu
         </div>
@@ -36,7 +45,7 @@
         </m-menu-item>
         <m-menu-item value="item3" label="Item 3">
         </m-menu-item>
-        <m-menu-item label="Item group 1">
+        <m-menu-item label="Item group 1" :open.sync="openItemGroup1LightSkin">
             <m-menu-item icon-name="m-svg__clock" value="subitem1" label="Subitem 1">
             </m-menu-item>
             <m-menu-item value="subitem2" label="Subitem 2">
@@ -65,5 +74,6 @@
     </m-menu>
     <m-button class="m-u--margin-top" @click="changeModel">Change model</m-button>
     <m-button class="m-u--margin-top" @click="toggleLightSkin">Toggle light menu</m-button>
+    <m-button class="m-u--margin-top" @click="toggleItemGroup1LightSkin" :disabled="!openLightSkin">Open Item group 1</m-button>
     <p>Selected item : {{ selectedItemLight }}</p>
 </div>

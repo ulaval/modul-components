@@ -12,6 +12,8 @@ export class MMenuSandbox extends Vue {
     private selectedItemLight: string = 'subitem1';
     private openDarkSkin: boolean = false;
     private openLightSkin: boolean = false;
+    private openItemGroup1DarkSkin: boolean = false;
+    private openItemGroup1LightSkin: boolean = false;
 
     private changeModel(): void {
         this.selectedItem = this.selectedItem === 'item2' ? 'subitem1' : 'item2';
@@ -26,6 +28,13 @@ export class MMenuSandbox extends Vue {
         this.openLightSkin = !this.openLightSkin;
     }
 
+    private toggleItemGroup1DarkSkin(): void {
+        this.openItemGroup1DarkSkin = !this.openItemGroup1DarkSkin;
+    }
+
+    private toggleItemGroup1LightSkin(): void {
+        this.openItemGroup1LightSkin = !this.openItemGroup1LightSkin;
+    }
 }
 
 const MenuSandboxPlugin: PluginObject<any> = {
