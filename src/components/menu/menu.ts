@@ -58,7 +58,6 @@ export class MMenu extends BaseMenu implements Menu {
     private internalValue: string | undefined = '';
     private internalOpen: boolean = false;
     private internalDisabled: boolean = false;
-    private observer: any;
     private internalItems: MMenuItem[] = [];
 
     private ariaControls: string = `mMenu-${uuid.generate()}-controls`;
