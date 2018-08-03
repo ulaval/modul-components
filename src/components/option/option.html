@@ -1,4 +1,4 @@
-<m-popup class="m-menu"
+<m-popup class="m-option"
          :class="{ 'm--is-disabled': disabled }"
          :open.sync="open"
          :padding="false"
@@ -11,7 +11,7 @@
          @open="onOpen"
          @close="onClose">
     <m-icon-button :id="id"
-                   class="m-menu__button"
+                   class="m-option__button"
                    aria-haspopup="true"
                    :aria-controls="ariaControls"
                    :aria-expanded="open"
@@ -24,7 +24,7 @@
                    @click="onClick">
     </m-icon-button>
     <ul :id="ariaControls"
-        class="m-menu__list"
+        class="m-option__list"
         :aria-labelledby="id"
         ref="menu">
         <slot></slot>

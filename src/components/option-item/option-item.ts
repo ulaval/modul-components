@@ -3,46 +3,38 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
-import { MENU_ITEM_NAME } from '../component-names';
+import { OPTION_ITEM_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
-import WithRender from './menu-item.html?style=./menu-item.scss';
-
-export abstract class BaseMenu extends ModulVue {
-}
-
-export interface MMenuInterface {
-    hasIcon: boolean;
-    checkIcon(el: boolean): void;
-    close(): void;
-}
+import { BaseOption, MOptionInterface } from '../option/option';
+import WithRender from './option-item.html?style=./option-item.scss';
 
 @WithRender
 @Component
-export class MMenuItem extends ModulVue {
+export class MOptionItem extends ModulVue {
 
     @Prop()
     public iconName: string;
     @Prop()
     public disabled: boolean;
 
-    public root: MMenuInterface; // Menu component
+    public root: MOptionInterface; // Menu component
     private hasRoot: boolean = false;
 
     protected mounted(): void {
-        let rootNode: BaseMenu | undefined = this.getParent<BaseMenu>(p => p instanceof BaseMenu);
+        let rootNode: BaseOption | undefined = this.getParent<BaseOption>(p => p instanceof BaseOption);
 
         if (rootNode) {
-            this.root = (rootNode as any) as MMenuInterface;
+            this.root = (rootNode as any) as MOptionInterface;
             this.hasRoot = true;
         } else {
-            console.error('m-menu-item need to be inside m-menu');
+            console.error('m-option-item need to be inside m-option');
         }
     }
 
     private onClick(event: MouseEvent): void {
         if (!this.disabled) {
             if (this.hasRoot) {
-                (this.root as MMenuInterface).close();
+                (this.root as MOptionInterface).close();
                 this.$emit('click', event);
             }
         } else {
@@ -56,8 +48,8 @@ export class MMenuItem extends ModulVue {
 
     private get hasIcon(): boolean {
         if (this.hasRoot) {
-            (this.root as MMenuInterface).checkIcon(this.hasIconNameProp);
-            return (this.root as MMenuInterface).hasIcon;
+            (this.root as MOptionInterface).checkIcon(this.hasIconNameProp);
+            return (this.root as MOptionInterface).hasIcon;
         }
         return false;
     }
@@ -67,11 +59,11 @@ export class MMenuItem extends ModulVue {
     }
 }
 
-const MenuItemPlugin: PluginObject<any> = {
+const OptionItemPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(IconPlugin);
-        v.component(MENU_ITEM_NAME, MMenuItem);
+        v.component(OPTION_ITEM_NAME, MOptionItem);
     }
 };
 
-export default MenuItemPlugin;
+export default OptionItemPlugin;
