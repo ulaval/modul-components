@@ -33,7 +33,7 @@ export class MInputStyle extends ModulVue {
     @Prop({ default: false })
     public borderTop: boolean;
 
-    private animActive: boolean = false;
+    private animReady: boolean = false;
 
     public setInputWidth(): void {
         // This is not very VueJs friendly.  It should be replaced by :style or something similar.
@@ -67,7 +67,7 @@ export class MInputStyle extends ModulVue {
 
     protected created(): void {
         setTimeout(() => {
-            this.animActive = true;
+            this.animReady = true;
             this.setInputWidth();
         }, 0);
     }
@@ -77,7 +77,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && this.as<InputState>().active;
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
     }
 
     private get hasLabel(): boolean {
