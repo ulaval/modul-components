@@ -14,8 +14,9 @@ export abstract class BaseMenuItem extends ModulVue {
 
 export interface MenuItem {
     group: boolean;
+    open: boolean;
     propOpen: boolean;
-    isAnimReady: boolean;
+    selected: boolean;
 }
 
 @WithRender
@@ -35,50 +36,33 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     public disabled: boolean;
 
     public group: boolean = false;
+    public selected: boolean = false;
     // should be initialized to be reactive
     // tslint:disable-next-line:no-null-keyword
     public menuRoot: Menu | null = null;
     // tslint:disable-next-line:no-null-keyword
-    public menuItiemGroupRoot: MenuItem | null = null;
+    public groupItemRoot: MenuItem | null = null;
     private internalOpen: boolean = false;
 
-    private ariaControls: string = `mMenuItem-${uuid.generate()}`;
+    private ariaControls: string = `mMenuItem-${uuid.generate()}-controls`;
 
     protected mounted(): void {
-        let menuRoot: BaseMenu | undefined;
-        menuRoot = this.getParent<BaseMenu>(
-            p => p instanceof BaseMenu || // these will fail with Jest, but should pass in prod mode
-                p.$options.name === 'MMenu' // these are necessary for Jest, but the first two should pass in prod mode
-        );
-
+        let menuRoot: BaseMenu | undefined = this.getParent<BaseMenu>(p => p instanceof BaseMenu || p.$options.name === 'MMenu');
         if (menuRoot) {
             this.menuRoot = (menuRoot as any) as Menu;
         } else {
-            console.error('m-menu-item need to be inside m-menu');
+            console.error('<m-menu-item> need to be inside <m-menu>');
         }
 
-        let menuItiemGroupRoot: BaseMenuItem | undefined;
-        menuItiemGroupRoot = this.getParent<BaseMenuItem>(
-            p => p instanceof BaseMenuItem || // these will fail with Jest, but should pass in prod mode
-                p.$options.name === 'MMenuItem' // these are necessary for Jest, but the first two should pass in prod mode
-        );
-
-        if (menuItiemGroupRoot) {
-            this.menuItiemGroupRoot = (menuItiemGroupRoot as any) as MenuItem;
-            this.menuItiemGroupRoot.group = true;
+        let groupItemRoot: BaseMenuItem | undefined = this.getParent<BaseMenuItem>(p => p instanceof BaseMenuItem || p.$options.name === 'MMenuItem');
+        if (groupItemRoot) {
+            this.groupItemRoot = (groupItemRoot as any) as MenuItem;
+            this.groupItemRoot.group = true;
         }
     }
 
     public get isAnimReady(): boolean {
-        return this.menuRoot ? this.menuRoot.isAnimReady : false;
-    }
-
-    public get isSelected(): boolean {
-        let selected: boolean = !this.isDisabled && !this.group && this.menuRoot ? this.value === this.menuRoot.model : false;
-        if (selected && this.menuRoot) {
-            this.menuRoot.groupSelectioned = this.menuItiemGroupRoot ? this.menuItiemGroupRoot : undefined;
-        }
-        return selected;
+        return this.menuRoot ? this.menuRoot.animReady : false;
     }
 
     private get isUrl(): boolean {
@@ -98,7 +82,7 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
         this.propOpen = !this.propOpen;
     }
 
-    private get isDisabled(): boolean {
+    public get isDisabled(): boolean {
         return this.menuRoot && this.menuRoot.propDisabled ? true : this.disabled;
     }
 

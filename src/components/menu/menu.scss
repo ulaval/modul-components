@@ -4,6 +4,7 @@
 
 .m-menu {
     overflow: hidden;
+    user-select: none;
 
     &__header {
         transition: color $m-transition-duration ease, font-weight $m-transition-duration ease;

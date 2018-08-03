@@ -1,4 +1,4 @@
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
@@ -7,7 +7,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { MENU_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
-import { MenuItem, MMenuItem } from '../menu-item/menu-item';
+import { MMenuItem } from '../menu-item/menu-item';
 import PopupPlugin from '../popup/popup';
 import WithRender from './menu.html?style=./menu.scss';
 
@@ -18,11 +18,9 @@ export interface Menu {
     model: string;
     propOpen: boolean;
     propDisabled: boolean;
-    groupSelectioned: MenuItem | undefined;
-    isAnimReady: boolean;
+    animReady: boolean;
     updateValue(value: string | undefined): void;
     onClick(event: Event, value: string): void;
-    closeAllGroup(): void;
 }
 
 export enum Skins {
@@ -37,6 +35,8 @@ export class MMenu extends BaseMenu implements Menu {
     public selected: string;
     @Prop()
     public open: boolean;
+    @Prop()
+    public closeOnSelected: boolean;
     @Prop({
         default: Skins.Dark,
         validator: value =>
@@ -47,14 +47,21 @@ export class MMenu extends BaseMenu implements Menu {
     @Prop()
     public disabled: boolean;
 
-    public groupSelectioned: MenuItem | undefined;
+    public $refs: {
+        menu: HTMLElement;
+        buttonMenu: HTMLElement;
+    };
+
+    public $el: HTMLElement;
+
     public animReady: boolean = false;
     private internalValue: string | undefined = '';
     private internalOpen: boolean = false;
     private internalDisabled: boolean = false;
-    private itemSelectioned: MMenuItem;
+    private observer: any;
+    private internalItems: MMenuItem[] = [];
 
-    private ariaControls: string = `mMenu-${uuid.generate()}`;
+    private ariaControls: string = `mMenu-${uuid.generate()}-controls`;
 
     @Watch('selected')
     public updateValue(value: string | undefined): void {
@@ -65,33 +72,64 @@ export class MMenu extends BaseMenu implements Menu {
         this.$emit('click', event, value);
     }
 
-    public closeAllGroup(isAnimReady: boolean = true): void {
-        this.$children.forEach((menuItem: MMenuItem) => {
-            if (menuItem.$options.name === 'MMenuItem' && menuItem.group) {
-                menuItem.propOpen = false;
-            }
-        });
-    }
-
-    public set isAnimReady(animReady: boolean) {
-        if (animReady) {
-            setTimeout(() => {
-                this.animReady = true;
-            }, 300);
-        } else {
-            this.animReady = false;
-        }
-    }
-
-    public get isAnimReady(): boolean {
-        return this.animReady;
-    }
-
     protected mounted(): void {
         this.model = this.selected;
         this.propOpen = this.open;
         this.propDisabled = this.disabled;
-        this.isAnimReady = true;
+
+        this.$nextTick(() => {
+            this.buildItemsMap();
+        });
+
+        setTimeout(() => {
+            this.animReady = true;
+        });
+    }
+
+    private buildItemsMap(): void {
+        let items: MMenuItem[] = [];
+        this.$children.forEach(item => {
+            if (item instanceof MMenuItem) {
+                if (!item.group) {
+                    items.push(item);
+                } else {
+                    (item as Vue).$children.forEach(groupItem => {
+                        if (groupItem instanceof MMenuItem) {
+                            items.push(groupItem);
+                        }
+                    });
+                }
+            }
+        });
+        this.internalItems = items;
+        this.selectedItem();
+    }
+
+    private selectedItem(): void {
+        if (this.internalItems) {
+            this.internalItems.forEach((item) => {
+                if (item.value === this.model) {
+                    if (!item.isDisabled) {
+                        if (item.groupItemRoot) {
+                            item.groupItemRoot.propOpen = true;
+                        }
+                        item.selected = true;
+                    }
+                } else if (!item.isDisabled && item.selected) {
+                    item.selected = false;
+                }
+            });
+        }
+    }
+
+    private closeAllGroupItem(): void {
+        if (this.internalItems) {
+            this.internalItems.forEach((item) => {
+                if (item.groupItemRoot) {
+                    item.groupItemRoot.propOpen = false;
+                }
+            });
+        }
     }
 
     public get model(): any {
@@ -100,7 +138,14 @@ export class MMenu extends BaseMenu implements Menu {
 
     public set model(value: any) {
         this.internalValue = value;
+        this.selectedItem();
         this.$emit('update:selected', value);
+        if (this.closeOnSelected) {
+            // Add a delay before closing the menu to display the selected item
+            setTimeout(() => {
+                this.propOpen = false;
+            }, 600);
+        }
     }
 
     @Watch('open')
@@ -122,16 +167,12 @@ export class MMenu extends BaseMenu implements Menu {
     }
 
     public set propOpen(open: boolean) {
-        this.isAnimReady = false;
-        if (open) {
-            this.closeAllGroup(false);
-            if (this.groupSelectioned) {
-                this.groupSelectioned.propOpen = true;
-            }
-        }
+        this.animReady = false;
+        this.closeAllGroupItem();
+        this.selectedItem();
         this.internalOpen = open;
         this.$emit('update:open', open);
-        this.isAnimReady = true;
+        this.animReady = true;
     }
 
     public get propOpen(): boolean {
@@ -141,7 +182,7 @@ export class MMenu extends BaseMenu implements Menu {
     private toggleMenu(event: Event): void {
         if (!this.propDisabled) {
             this.propOpen = !this.propOpen;
-            (this.$refs.buttonMenu as HTMLElement).blur();
+            this.$refs.buttonMenu.blur();
             this.onClick(event, '');
         }
     }

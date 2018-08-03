@@ -17,6 +17,7 @@
         <ul :id="ariaControls"
             class="m-menu__body"
             role="menu"
+            ref="menu"
             :aria-hidden="!propOpen"
             v-show="propOpen">
             <slot></slot>

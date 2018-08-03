@@ -1,16 +1,16 @@
 <li class="m-menu-item"
-    :class="{'m--is-selected': isSelected,
+    :class="{'m--is-selected': selected,
              'm--is-disabled': isDisabled,
              'm--has-icon': hasIcon,
              'm--is-group': group,
              'm--is-open': propOpen,
-             'm--is-inside-group' : menuItiemGroupRoot,
+             'm--is-inside-group' : groupItemRoot,
              'm--is-anim-ready': isAnimReady}"
     role="none">
     <router-link class="m-menu-item__link"
                  :to="url"
                  @click="onClick"
-                 :aria-selected="isSelected"
+                 :aria-selected="selected"
                  role="menuitem"
                  v-if="isUrl">
         <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
