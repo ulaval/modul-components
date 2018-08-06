@@ -162,10 +162,6 @@ $m-radio--color-disabled: $m-color--disabled !default;
             .m-radio__wrap {
                 align-items: flex-start;
             }
-
-            .m-radio__input {
-                margin-top: 2px; // Magic number
-            }
         }
 
         .m-radio {
@@ -350,10 +346,6 @@ $m-radio--color-disabled: $m-color--disabled !default;
         &:not(.m--is-align-center) {
             .m-radio__wrap {
                 align-items: flex-start;
-            }
-
-            .m-radio__input {
-                margin-top: 2px; // Magic number
             }
         }
 
