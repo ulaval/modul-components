@@ -103,8 +103,6 @@ export class MNavbarItem extends ModulVue {
                 // reset styles once completed
                 this.$el.classList.remove(FAKE_SELECTED_CLASS);
                 (this.$parent.$refs.list as HTMLElement).style.removeProperty('align-items');
-            } else {
-                itemEl.style.maxWidth = '280px';
             }
         } else {
             itemEl.style.whiteSpace = 'nowrap';

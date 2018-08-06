@@ -174,8 +174,7 @@
         }
 
         &__contents {
-            font-size: $m-font-size--h5;
-            font-weight: $m-font-weight;
+            font-weight: $m-font-weight--bold;
             justify-content: center;
             color: $m-color--grey-light;
         }
@@ -226,8 +225,10 @@
         }
 
         &__contents {
-            padding: $m-spacing--l 0;
+            font-size: $m-font-size--l;
+            padding: $m-spacing--m 0;
             min-width: $m-navbar-item--min-width;
+            min-height: 80px;
             text-transform: uppercase;
 
             &::before {
@@ -261,8 +262,8 @@
         }
 
         &__contents {
+            font-size: $m-font-size;
             padding: $m-spacing 0;
-            min-height: 72px; // Magic Number
         }
     }
 }
@@ -324,9 +325,11 @@
 
         &__contents {
             position: relative;
-            padding: 22px $m-spacing--l; // Magic number
+            padding: $m-spacing--m $m-spacing--l;
+            min-height: 80px;
             color: $m-color--white;
             text-transform: uppercase;
+            font-size: $m-font-size--l;
             font-weight: $m-font-weight--bold;
         }
     }
@@ -450,7 +453,7 @@
     &.m--is-anim-ready {
         .m-navbar-item:not(.m--is-selected):not(.m--is-disabled) {
             .m-navbar-item__contents {
-                transition: background $m-transition-duration ease;
+                transition: font-weight $m-transition-duration ease, background $m-transition-duration ease;
             }
         }
     }
@@ -465,6 +468,8 @@
             position: relative;
 
             .m-navbar-item__contents {
+                font-weight: $m-font-weight--bold;
+
                 &::before {
                     position: absolute;
                     top: 0;
