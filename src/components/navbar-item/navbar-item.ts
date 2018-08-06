@@ -119,6 +119,10 @@ export class MNavbarItem extends ModulVue {
         return !!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model;
     }
 
+    private get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
+    }
+
     private onClick(event: Event): void {
         if (!this.disabled && this.parentNavbar) {
             this.parentNavbar.onClick(event, this.value);

@@ -7,13 +7,13 @@ exports[`MNavbar should render correctly 1`] = `
             <div role="menubar" class="m-navbar__wrap">
                 <ul aria-hidden="true" class="m-navbar__list">
                     <li role="menuitem" class="m-navbar-item">
-                        <div tabindex="0" role="button" class="m-navbar-item__contents"><span class="m-navbar-item__text"></span></div>
+                        <div tabindex="0" role="button" class="m-navbar-item__contents"><span class="m-navbar-item__text">item1</span></div>
                     </li>
                     <li role="menuitem" class="m-navbar-item">
-                        <div tabindex="0" role="button" class="m-navbar-item__contents"><span class="m-navbar-item__text"></span></div>
+                        <div tabindex="0" role="button" class="m-navbar-item__contents"><span class="m-navbar-item__text">item2</span></div>
                     </li>
                     <li role="menuitem" class="m-navbar-item">
-                        <div tabindex="0" role="button" class="m-navbar-item__contents"><span class="m-navbar-item__text"></span></div>
+                        <div tabindex="0" role="button" class="m-navbar-item__contents"><span class="m-navbar-item__text">item3</span></div>
                     </li>
                     <li aria-hidden="true" class="m-navbar__line"></li>
                 </ul>

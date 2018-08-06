@@ -13,7 +13,8 @@
                  :aria-haspopup="ariaHaspopup"
                  :aria-expanded="ariaExpanded"
                  :aria-controls="ariaControls">
-        <span class="m-navbar-item__text"><slot></slot></span>
+        <span class="m-navbar-item__text" v-if="hasDefaultSlot"><slot></slot></span>
+        <span class="m-navbar-item__text" v-else>{{ value }}</span>
     </router-link>
     <div class="m-navbar-item__contents"
          ref="item"
@@ -27,6 +28,7 @@
          :aria-expanded="ariaExpanded"
          :aria-controls="ariaControls"
          :role="disabled ? undefined : 'button'" v-else>
-        <span class="m-navbar-item__text"><slot></slot></span>
+        <span class="m-navbar-item__text" v-if="hasDefaultSlot"><slot></slot></span>
+        <span class="m-navbar-item__text" v-else>{{ value }}</span>
     </div>
 </li>
