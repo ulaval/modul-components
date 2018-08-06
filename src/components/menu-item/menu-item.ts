@@ -17,6 +17,7 @@ export interface MenuItem {
     open: boolean;
     propOpen: boolean;
     selected: boolean;
+    itemSelected: boolean;
 }
 
 @WithRender
@@ -37,6 +38,7 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
 
     public group: boolean = false;
     public selected: boolean = false;
+    public itemSelected: boolean = false;
     // should be initialized to be reactive
     // tslint:disable-next-line:no-null-keyword
     public menuRoot: Menu | null = null;
@@ -96,7 +98,7 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     }
 
     private onClick(event: Event): void {
-        if (!this.isDisabled && this.menuRoot) {
+        if (!this.isDisabled && this.menuRoot && !this.menuRoot.closeOnSelectionInAction) {
             if (this.group) {
                 this.toggleOpen();
             } else if (this.value !== this.menuRoot.model) {

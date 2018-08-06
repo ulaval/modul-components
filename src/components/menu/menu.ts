@@ -19,6 +19,7 @@ export interface Menu {
     propOpen: boolean;
     propDisabled: boolean;
     animReady: boolean;
+    closeOnSelectionInAction: boolean;
     updateValue(value: string | undefined): void;
     onClick(event: Event, value: string): void;
 }
@@ -35,8 +36,8 @@ export class MMenu extends BaseMenu implements Menu {
     public selected: string;
     @Prop()
     public open: boolean;
-    @Prop()
-    public closeOnSelected: boolean;
+    @Prop({ default: true })
+    public closeOnSelection: boolean;
     @Prop({
         default: MMenuSkin.Dark,
         validator: value =>
@@ -55,6 +56,7 @@ export class MMenu extends BaseMenu implements Menu {
     };
 
     public animReady: boolean = false;
+    public closeOnSelectionInAction: boolean = false;
     private internalValue: string | undefined = '';
     private internalOpen: boolean = false;
     private internalDisabled: boolean = false;
@@ -105,15 +107,19 @@ export class MMenu extends BaseMenu implements Menu {
     private selectedItem(): void {
         if (this.internalItems) {
             this.internalItems.forEach((item) => {
-                if (item.value === this.model) {
-                    if (!item.isDisabled) {
+                if (!item.isDisabled) {
+                    if (item.value === this.model) {
+                        item.selected = true;
                         if (item.groupItemRoot) {
                             item.groupItemRoot.propOpen = true;
+                            item.groupItemRoot.itemSelected = true;
                         }
-                        item.selected = true;
+                    } else if (item.selected) {
+                        item.selected = false;
+                        if (item.groupItemRoot) {
+                            item.groupItemRoot.itemSelected = false;
+                        }
                     }
-                } else if (!item.isDisabled && item.selected) {
-                    item.selected = false;
                 }
             });
         }
@@ -134,14 +140,18 @@ export class MMenu extends BaseMenu implements Menu {
     }
 
     public set model(value: any) {
-        this.internalValue = value;
-        this.selectedItem();
-        this.$emit('update:selected', value);
-        if (this.closeOnSelected) {
-            // Add a delay before closing the menu to display the selected item
-            setTimeout(() => {
-                this.propOpen = false;
-            }, 600);
+        if (!this.closeOnSelectionInAction) {
+            this.internalValue = value;
+            this.selectedItem();
+            this.$emit('update:selected', value);
+            if (this.closeOnSelection) {
+                this.closeOnSelectionInAction = true;
+                // Add a delay before closing the menu to display the selected item
+                setTimeout(() => {
+                    this.propOpen = false;
+                    this.closeOnSelectionInAction = false;
+                }, 600);
+            }
         }
     }
 
