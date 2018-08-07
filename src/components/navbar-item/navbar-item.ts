@@ -46,10 +46,6 @@ export class MNavbarItem extends ModulVue {
             console.error('m-navbar-item need to be inside m-navbar');
         }
 
-        setTimeout(() => {
-            this.setDimension();
-        });
-
         this.$modul.event.$on('resize', this.setDimension);
     }
 
@@ -66,19 +62,13 @@ export class MNavbarItem extends ModulVue {
         this.setDimension();
     }
 
-    private stripHtml(html): string {
-        let temporalDivElement: HTMLElement = document.createElement('div');
-        temporalDivElement.innerHTML = html;
-        return temporalDivElement.textContent || temporalDivElement.innerText || '';
-    }
-
     private setDimension(): void {
         let itemEl: HTMLElement = this.$refs.item as HTMLElement;
         itemEl.style.removeProperty('width');
         itemEl.style.removeProperty('max-width');
         itemEl.style.removeProperty('white-space');
 
-        if (this.isMultiline && (this.stripHtml(itemEl.innerHTML).trim().length > 15)) {
+        if (this.isMultiline && (itemEl.innerText.trim().length > 15)) {
             let itemElComputedStyle: any = window.getComputedStyle(itemEl);
             let fontSize: number = parseFloat(itemElComputedStyle.getPropertyValue('font-size'));
             let paddingH: number = parseInt(itemElComputedStyle.getPropertyValue('padding-top'), 10) + parseInt(itemElComputedStyle.getPropertyValue('padding-bottom'), 10);

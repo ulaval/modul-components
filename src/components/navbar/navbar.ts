@@ -75,7 +75,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     public navigationArrow: boolean;
     @Prop({ default: MNavbarMaxWidth.Large })
     public maxWidth: string;
-    @Prop()
+    @Prop({ default: true })
     public multiline: boolean;
     @Prop()
     public titleButtonLeft: string;
@@ -208,7 +208,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private scrollToSelected(): void {
-        this.$children.forEach(element => {
+        this.navbarItems().elements.forEach(element => {
             // Allow time to make sure an item is selected
             setTimeout(() => {
                 if (element.$props.value === this.selected) {
