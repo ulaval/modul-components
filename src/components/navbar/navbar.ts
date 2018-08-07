@@ -143,6 +143,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     @Watch('multiline')
     private multilineChanged(): void {
+        // Wait for navbar-item height calculation -> setimension()
         setTimeout(() => {
             this.setupScrolllH();
         });
@@ -255,7 +256,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private navbarItems(): NavbarItems {
-
         let navbarItems: Vue[] = this.$children.filter(element => {
             return element instanceof MNavbarItem;
         });

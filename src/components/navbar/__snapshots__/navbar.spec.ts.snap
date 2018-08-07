@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MNavbar should render correctly 1`] = `
-<div class="m-navbar m--is-skin-light">
+<div class="m-navbar m--is-skin-light m--is-multiline">
     <div class="m-navbar__max-width" style="max-width:1200px;">
         <div class="m-navbar__contents">
             <div role="menubar" class="m-navbar__wrap">

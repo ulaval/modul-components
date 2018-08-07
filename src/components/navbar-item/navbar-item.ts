@@ -68,7 +68,7 @@ export class MNavbarItem extends ModulVue {
         itemEl.style.removeProperty('max-width');
         itemEl.style.removeProperty('white-space');
 
-        if (this.isMultiline && (itemEl.innerText.trim().length > 15)) {
+        if (this.isMultiline && ((itemEl.innerText === undefined ? '' : itemEl.innerText).trim().length > 15)) {
             let itemElComputedStyle: any = window.getComputedStyle(itemEl);
             let fontSize: number = parseFloat(itemElComputedStyle.getPropertyValue('font-size'));
             let paddingH: number = parseInt(itemElComputedStyle.getPropertyValue('padding-top'), 10) + parseInt(itemElComputedStyle.getPropertyValue('padding-bottom'), 10);
