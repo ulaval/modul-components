@@ -34,7 +34,7 @@ export class MLimitText extends ModulVue {
     private el: HTMLElement;
     private initLineHeigh: any = '';
     private maxHeight: number = 0;
-    private observer: any;
+    private observer: MutationObserver;
 
     protected mounted(): void {
         this.internalOpen = this.open;
@@ -46,11 +46,9 @@ export class MLimitText extends ModulVue {
 
         // ------------ Watch slot content -------
         this.observer = new MutationObserver(() => {
-            // tslint:disable-next-line:no-console
-            console.log('in');
             this.reset();
         });
-        this.observer.observe(this.$refs.originalText, { subtree: true, childList: true, characterData: true });
+        this.observer.observe(this.$refs.originalText as HTMLElement, { subtree: true, childList: true, characterData: true });
         // ---------------------------------------
 
         this.initialize();
@@ -60,11 +58,12 @@ export class MLimitText extends ModulVue {
         if (this.child) {
             this.child.$off('click');
         }
+        this.observer.disconnect();
     }
 
     private initialize(): void {
         this.el = this.$refs.testingText as HTMLElement;
-        this.el.innerHTML = this.$refs.originalText['innerHTML'];
+        this.el.innerHTML = (this.$refs.originalText as HTMLElement).innerHTML;
         this.testingContent = this.el.innerHTML;
         this.el.style.whiteSpace = 'nowrap';
         for (let i: number = 1; i < this.el.children.length; i++) {
