@@ -5,7 +5,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
-import { filterNewLines, replaceTags } from '../../../utils/clean/htmlClean';
+import { replaceTags } from '../../../utils/clean/htmlClean';
 import { PopupPlugin } from './popup-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
@@ -211,7 +211,6 @@ export class VueFroala extends Vue {
                 },
                 // if we use pasteBeforeCleanup, there's an error in froala's code
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
-                    data = filterNewLines(data);
                     data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p', data);
                     return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                 },
