@@ -25,6 +25,7 @@ const components: string[] = [
     Components.ERROR_PAGE_NOT_FOUND_NAME,
     Components.ERROR_TECHNICAL_DIFFICULTY_NAME,
     Components.ERROR_TEMPLATE_NAME,
+    Components.EDIT_WINDOW_NAME,
     Components.FILE_SELECT_NAME,
     Components.FILE_UPLOAD_NAME,
     Components.FLEX_TEMPLATE_NAME,
