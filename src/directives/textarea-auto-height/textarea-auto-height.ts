@@ -10,7 +10,7 @@ interface TextareaAutoHeightBinding extends VNodeDirective {
 let textareaAutoHeightDisabledUpdate: boolean = false;
 
 function textareaAutoHeightAjustHeight(element: HTMLElement): void {
-    if (element && element.tagName === 'TEXTAREA') {
+    if (element.tagName === 'TEXTAREA') {
         let outerHeight: number = parseInt((window.getComputedStyle(element).height as string), 10);
         let diff: number = outerHeight - element.clientHeight;
         element.style.height = '0';
@@ -60,10 +60,9 @@ const MTextareaAutoHeight: DirectiveOptions = {
             if (binding.setDisabledUpdate) {
                 element.removeEventListener('mousedown', binding.setDisabledUpdate);
             }
-            if (binding.ajustHeight) {
-                element.removeEventListener('input', binding.ajustHeight);
-                window.removeEventListener('resize', binding.ajustHeight);
-            }
+
+            element.removeEventListener('input', binding.ajustHeight);
+            window.removeEventListener('resize', binding.ajustHeight);
         }
     }
 };
