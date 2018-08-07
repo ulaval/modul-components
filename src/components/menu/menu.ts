@@ -75,10 +75,7 @@ export class MMenu extends BaseMenu implements Menu {
         this.model = this.selected;
         this.propOpen = this.open;
         this.propDisabled = this.disabled;
-
-        this.$nextTick(() => {
-            this.buildItemsMap();
-        });
+        this.buildItemsMap();
 
         setTimeout(() => {
             this.animReady = true;
