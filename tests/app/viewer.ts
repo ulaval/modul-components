@@ -8,6 +8,7 @@ import WithRender from './viewer.html';
 @Component
 export class Viewer extends Vue {
     public tag: string = '';
+    public menuOpen: boolean = false;
 
     public mounted(): void {
         this.buildTag();

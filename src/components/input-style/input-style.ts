@@ -30,38 +30,44 @@ export class MInputStyle extends ModulVue {
     public requiredMarker: boolean;
     @Prop()
     public readonly: boolean;
+    @Prop({ default: false })
+    public borderTop: boolean;
 
-    private animActive: boolean = false;
+    private animReady: boolean = false;
 
     public setInputWidth(): void {
+        // This is not very VueJs friendly.  It should be replaced by :style or something similar.
         this.$nextTick(() => {
             let labelEl: HTMLElement = this.$refs.label as HTMLElement;
-            let inputEl: HTMLElement = this.$el.querySelector('input') as HTMLElement;
+            let inputEl: HTMLElement | undefined = this.as<InputState>().getInput();
             let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
-            if (inputEl) {
-                if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
-                    setTimeout(() => {
+            if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
+                setTimeout(() => {
+                    if (inputEl !== undefined) {
                         inputEl.style.width = '0px';
                         setTimeout(() => {
-                            let width: number = adjustWidthAutoEl.clientWidth < 50 ? 50 : adjustWidthAutoEl.clientWidth;
-                            if (this.hasLabel) {
-                                width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                            if (inputEl !== null) {
+                                let width: number = adjustWidthAutoEl.clientWidth < 50 ? 50 : adjustWidthAutoEl.clientWidth;
+                                if (this.hasLabel) {
+                                    width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                                }
+                                inputEl!.style.width = width + 'px';
                             }
-                            inputEl.style.width = width + 'px';
                         }, 0);
-                    }, 0);
-
-                } else {
-                    if (inputEl.style.width) {
-                        inputEl.style.removeProperty('width');
                     }
+                }, 0);
+
+            } else if (inputEl) {
+                if (inputEl.style.width) {
+                    inputEl.style.removeProperty('width');
                 }
             }
         });
     }
+
     protected created(): void {
         setTimeout(() => {
-            this.animActive = true;
+            this.animReady = true;
             this.setInputWidth();
         }, 0);
     }
@@ -71,7 +77,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && this.as<InputState>().active;
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
     }
 
     private get hasLabel(): boolean {

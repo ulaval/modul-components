@@ -14,6 +14,7 @@ import DropdownGroupSandboxPlugin from '../components/dropdown-group/dropdown-gr
 import DropdownItemSandboxPlugin from '../components/dropdown-item/dropdown-item.sandbox';
 import DropdownSandboxPlugin from '../components/dropdown/dropdown.sandbox';
 import DynamicTemplateSandboxPlugin from '../components/dynamic-template/dynamic-template.sandbox';
+import EditWindowSandboxPlugin from '../components/edit-window/edit-window.sandbox';
 import ErrorAccessDeniedSandboxPlugin from '../components/error-access-denied/error-access-denied.sandbox';
 import ErrorBrowserNotSupportedSandboxPlugin from '../components/error-browser-not-supported/error-browser-not-supported.sandbox';
 import ErrorConfigNotSupportedSandboxPlugin from '../components/error-config-not-supported/error-config-not-supported.sandbox';
@@ -49,6 +50,7 @@ import ProgressSandboxPlugin from '../components/progress/progress.sandbox';
 import RadioGroupSandboxPlugin from '../components/radio-group/radio-group.sandbox';
 import RadioStyleSandboxPlugin from '../components/radio-style/radio-style.sandbox';
 import RadioSandboxPlugin from '../components/radio/radio.sandbox';
+import RichTextSandBoxPlugin from '../components/rich-text/rich-text.sandbox';
 import ScrollTopSandboxPlugin from '../components/scroll-top/scroll-top.sandbox';
 import SessionExpiredSandboxPlugin from '../components/session-expired/session-expired.sandbox';
 import SidebarSandboxPlugin from '../components/sidebar/sidebar.sandbox';
@@ -81,6 +83,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(DatefieldsSandboxPlugin);
         Vue.use(DatepickerSandboxPlugin);
         Vue.use(DialogSandboxPlugin);
+        Vue.use(EditWindowSandboxPlugin);
         Vue.use(DropdownSandboxPlugin);
         Vue.use(DropdownItemSandboxPlugin);
         Vue.use(DropdownGroupSandboxPlugin);
@@ -120,6 +123,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(RadioSandboxPlugin);
         Vue.use(RadioGroupSandboxPlugin);
         Vue.use(RadioStyleSandboxPlugin);
+        Vue.use(RichTextSandBoxPlugin);
         Vue.use(ScrollTopSandboxPlugin);
         Vue.use(SessionExpiredSandboxPlugin);
         Vue.use(SidebarSandboxPlugin);

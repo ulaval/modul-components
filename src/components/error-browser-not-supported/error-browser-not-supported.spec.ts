@@ -9,7 +9,9 @@ let wrapper: Wrapper<MErrorBrowserNotSupported>;
 let isMobileDevice: boolean;
 const A_CUSTOM_TITLE: string = 'An error title.';
 const A_HINT: string = 'aHint';
+const A_HINT_MOBILE: string = 'aHint-Mobile';
 const A_LINK: Link = new Link('aLabel', 'anUrl');
+const A_LINK_MOBILE: Link = new Link('aLabel-Mobile', 'anUrl');
 
 const getStubs: any = () => {
     return {
@@ -44,8 +46,10 @@ const initializeWrapperCustomValues: () => void = (): void => {
         mocks: getMocks(),
         propsData: {
             title: A_CUSTOM_TITLE,
-            hints: [A_HINT],
-            links: [A_LINK]
+            hintsDesktop: [A_HINT],
+            hintsMobile: [A_HINT_MOBILE],
+            linksDesktop: [A_LINK],
+            linksMobile: [A_LINK_MOBILE]
         },
         mixins: [{
             data: function(): any {
@@ -66,25 +70,7 @@ describe(`Browser not supported - test`, () => {
             beforeEach(() => {
                 initializeWrapperDefaultValues();
             });
-            describe(`When getting hints`, () => {
-                it(`Should return desktop hints`, () => {
-
-                    let hints: string[] = wrapper.vm.mqAwareHints;
-
-                    expect(hints).toHaveLength(1);
-                    expect(hints[0]).toEqual('m-error-browser-not-supported:hint.primary.desktop');
-                });
-            });
-            describe(`When getting links`, () => {
-                it(`Should return desktop links`, () => {
-                    let links: Link[] = wrapper.vm.mqAwareLinks;
-
-                    expect(links).toHaveLength(1);
-                    expect(links[0].label).toEqual('m-error-browser-not-supported:update-browser.desktop');
-                    expect(links[0].url).toEqual('http://outdatedbrowser.com/fr');
-                });
-            });
-            it(`Should render with default values`, async () => {
+            it(`Should render with default desktop values`, async () => {
                 await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
         });
@@ -92,22 +78,7 @@ describe(`Browser not supported - test`, () => {
             beforeEach(() => {
                 initializeWrapperCustomValues();
             });
-            describe(`When getting hints`, () => {
-                it(`Should return specified hints`, () => {
-                    let hints: string[] = wrapper.vm.mqAwareHints;
 
-                    expect(hints).toHaveLength(1);
-                    expect(hints[0]).toEqual(A_HINT);
-                });
-            });
-            describe(`When getting links`, () => {
-                it(`Should return specified links`, () => {
-                    let links: Link[] = wrapper.vm.mqAwareLinks;
-
-                    expect(links).toHaveLength(1);
-                    expect(links[0]).toEqual(A_LINK);
-                });
-            });
             it(`Should render with custom values provided`, async () => {
                 await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
@@ -122,42 +93,16 @@ describe(`Browser not supported - test`, () => {
             beforeEach(() => {
                 initializeWrapperDefaultValues();
             });
-            describe(`When getting hints`, () => {
-                it(`Should return mobile hints`, () => {
-
-                    let hints: string[] = wrapper.vm.mqAwareHints;
-
-                    expect(hints).toHaveLength(1);
-                    expect(hints[0]).toEqual('m-error-browser-not-supported:hint.primary.mobile');
-                });
-            });
-            describe(`When getting links`, () => {
-                it(`Should return no links`, () => {
-                    let links: Link[] = wrapper.vm.mqAwareLinks;
-
-                    expect(links).toHaveLength(0);
-                });
+            it(`Should render with default mobile values provided`, async () => {
+                await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
         });
         describe(`Given custom values`, () => {
             beforeEach(() => {
                 initializeWrapperCustomValues();
             });
-            describe(`When getting hints`, () => {
-                it(`Should return specified hints`, () => {
-                    let hints: string[] = wrapper.vm.mqAwareHints;
-
-                    expect(hints).toHaveLength(1);
-                    expect(hints[0]).toEqual(A_HINT);
-                });
-            });
-            describe(`When getting links`, () => {
-                it(`Should return specified links`, () => {
-                    let links: Link[] = wrapper.vm.mqAwareLinks;
-
-                    expect(links).toHaveLength(1);
-                    expect(links[0]).toEqual(A_LINK);
-                });
+            it(`Should render with custom mobile values provided`, async () => {
+                await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
         });
     });

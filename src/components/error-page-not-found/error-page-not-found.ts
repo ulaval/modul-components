@@ -20,7 +20,7 @@ export class MErrorPageNotFound extends ModulVue {
 
     @Prop({
         default: () => [
-            new Link((Vue.prototype as any).$i18n.translate('m-error-page-not-found:home-label'), '\\')]
+            new Link((Vue.prototype as any).$i18n.translate('m-error-page-not-found:home-label'), `\\`)]
     })
     public links: Link[];
 
