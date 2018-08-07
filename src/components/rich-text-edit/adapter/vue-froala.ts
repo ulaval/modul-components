@@ -213,7 +213,7 @@ export class VueFroala extends Vue {
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     data = filterNewLines(data);
                     data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p', data);
-                    return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote']);
+                    return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                 },
                 [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
                     // write code to be called after a command is called (button clicked, image modified, ...)
