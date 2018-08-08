@@ -1,6 +1,6 @@
 <div>
     <h2>Skin dark (default)</h2>
-    <m-menu class="m-u--margin-top" :selected.sync="selectedItem" :open.sync="openDarkSkin">
+    <m-menu class="m-u--margin-top m-u--max-width--xs" :selected.sync="selectedItem" :open.sync="openDarkSkin">
         <div slot="trigger">
             Menu
         </div>
@@ -35,7 +35,7 @@
     <p>Selected item : {{ selectedItem }}</p>
 
     <h2>Skin light</h2>
-    <m-menu class="m-u--margin-top" :selected.sync="selectedItemLight" skin="light"  :open.sync="openLightSkin">
+    <m-menu class="m-u--margin-top m-u--max-width--xs" :selected.sync="selectedItemLight" skin="light" :open.sync="openLightSkin">
         <div slot="trigger">
             Menu
         </div>

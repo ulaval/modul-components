@@ -28,11 +28,23 @@
     // ======================================================================
     &--max-width {
         max-width: $m-max-width;
-    }
 
-    &--max-width--text {
-        max-width: $m-max-width--text;
-        display: flex !important;
+        &--xs {
+            max-width: $m-max-width--xs;
+        }
+
+        &--s {
+            max-width: $m-max-width--s;
+        }
+
+        &--l {
+            max-width: $m-max-width--l;
+        }
+
+        &--text {
+            max-width: $m-max-width--text;
+            display: flex !important;
+        }
     }
 
     &--min-width {
