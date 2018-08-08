@@ -89,10 +89,16 @@ describe('MAcordion', () => {
         const acn: Wrapper<MAccordion> = mount(MAccordion);
 
         acn.find('.m-accordion__header').trigger('click');
-        expect(acn.emitted('click')[0][0]).toBeTruthy();
+        expect(acn.emitted('click')).toBeTruthy();
+        expect(acn.find('.m--is-open').exists()).toBeTruthy();
 
         acn.find('.m-accordion__header').trigger('click');
-        expect(acn.emitted('click')[1][0]).toBeFalsy();
+        expect(acn.emitted('click')).toBeTruthy();
+        expect(acn.find('.m--is-open').exists()).toBeFalsy();
+
+        acn.find('.m-accordion__header').trigger('click');
+        expect(acn.emitted('click')).toBeTruthy();
+        expect(acn.find('.m--is-open').exists()).toBeTruthy();
     });
 
     it('should react to open prop changes', () => {

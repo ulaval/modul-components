@@ -44,6 +44,7 @@ import NavbarSandboxPlugin from '../components/navbar/navbar.sandbox';
 import PageNotFoundSandboxPlugin from '../components/page-not-found/page-not-found.sandbox';
 import PanelSandboxPlugin from '../components/panel/panel.sandbox';
 import PhoneNumberSandboxPlugin from '../components/phone-number/phone-number.sandbox';
+import PlusSandboxPlugin from '../components/plus/plus.sandbox';
 import PopperSandboxPlugin from '../components/popper/popper.sandbox';
 import PopupSandboxPlugin from '../components/popup/popup.sandbox';
 import ProgressSandboxPlugin from '../components/progress/progress.sandbox';
@@ -116,6 +117,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(PageNotFoundSandboxPlugin);
         Vue.use(PanelSandboxPlugin);
         Vue.use(PhoneNumberSandboxPlugin);
+        Vue.use(PlusSandboxPlugin);
         Vue.use(PopperSandboxPlugin);
         Vue.use(ProgressSandboxPlugin);
         Vue.use(PopupSandboxPlugin);

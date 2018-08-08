@@ -1,0 +1,18 @@
+<div>
+    <h2 class="m-u--no-margin">Exemple 1</h2>
+    <div class="m-u--margin-top m-u--padding" :style="{ background: exemple1SkinLight ? 'lightgrey' : ''}">
+        <m-plus :open="example1Open"
+                :disabled="exemple1Disabled"
+                :large="exemple1Large"
+                :border="exemple1Border"
+                :skin="exemple1SkinLight ? 'light' : 'default'"
+                @click="exemple1ToggleOpen"></m-plus>
+    </div>
+    <div class="m-u--margin-top--l">
+        <m-button @click="exemple1ToggleOpen">Toggle open</m-button>
+        <m-button @click="exemple1ToggleDisabled">Toggle disabled</m-button>
+        <m-button @click="exemple1ToggleBorder">Toggle border</m-button>
+        <m-button @click="exemple1ToggleLarge">Toggle large</m-button>
+        <m-button @click="exemple1ToggleSkinLight">Toggle skin light</m-button>
+    </div>
+</div>

@@ -51,6 +51,7 @@ import NavbarPlugin from './navbar/navbar';
 import PageNotFoundPlugin from './page-not-found/page-not-found';
 import PanelPlugin from './panel/panel';
 import PhoneNumberPlugin from './phone-number/phone-number';
+import PlusPlugin from './plus/plus';
 import PopperPlugin from './popper/popper';
 import PopupPlugin from './popup/popup';
 import ProgressPluggin from './progress/progress';
@@ -137,6 +138,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(PageNotFoundPlugin);
         Vue.use(PanelPlugin);
         Vue.use(PhoneNumberPlugin);
+        Vue.use(PlusPlugin);
         Vue.use(PopperPlugin);
         Vue.use(PopupPlugin);
         Vue.use(ProgressPluggin);
