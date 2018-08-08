@@ -167,7 +167,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private setSelectedIndicatorPosition(element, ref: string): void {
-        this.$log.log('selected');
         let positionX: number = element.$el.offsetLeft;
         let width: number = element.$el.clientWidth;
         let localRef: HTMLElement = this.$refs[ref];
@@ -235,6 +234,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
                     if (this.skin === MNavbarSkin.TabUnderline || this.skin === MNavbarSkin.TabArrow) {
                         this.setSelectedIndicatorPosition(element, this.skin);
                     }
+                    this.setDisplayButtonArrrow();
                 }
             });
         });
