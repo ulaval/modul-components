@@ -90,6 +90,7 @@ export class MNavbarItem extends ModulVue {
                     lines = Math.floor(itemElHeight / fontSize);
                 } while (lines > 2);
 
+                itemEl.style.width = itemEl.clientWidth + 2 + 'px';
                 // reset styles once completed
                 this.$el.classList.remove(FAKE_SELECTED_CLASS);
                 (this.$parent.$refs.list as HTMLElement).style.removeProperty('align-items');

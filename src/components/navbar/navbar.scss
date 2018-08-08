@@ -17,7 +17,7 @@
         overflow: hidden;
     }
 
-    &:not(.m--is-skin-light-tab):not(.m--is-skin-dark-tab) {
+    &:not(.m--is-skin-tab-light):not(.m--is-skin-tab-dark) {
         .m-navbar__button {
             &.m--is-right {
                 button {
@@ -33,7 +33,7 @@
         }
     }
 
-    &.m--is-skin-darker {
+    &.m--is-skin-nav-main {
         background: $m-color--grey-darker;
 
         .m-navbar__button {
@@ -47,7 +47,7 @@
         }
     }
 
-    &.m--is-skin-darkest {
+    &.m--is-skin-nav-sub {
         background: $m-color--grey-darkest;
 
         .m-navbar__button {
@@ -61,9 +61,9 @@
         }
     }
 
-    &.m--is-skin-light,
-    &.m--is-skin-simple,
-    &.m--is-skin-arrow {
+    &.m--is-skin-tab-underline,
+    &.m--is-skin-tab-soft,
+    &.m--is-skin-tab-arrow {
         .m-navbar__button {
             &.m--is-right {
                 @include m-navbar-linear-gradient($m-color--white, left);
@@ -75,7 +75,7 @@
         }
     }
 
-    &.m--is-skin-light {
+    &.m--is-skin-tab-underline {
         &::before {
             position: absolute;
             left: 0;
@@ -92,7 +92,7 @@
         }
     }
 
-    &.m--is-skin-arrow {
+    &.m--is-skin-tab-arrow {
         &::before {
             position: absolute;
             right: 0;
@@ -101,7 +101,7 @@
             content: '';
             width: 100%;
             height: $m-border-width--s;
-            background: $m-color--border;
+            background: $m-color--grey;
         }
 
         .m-navbar__button {
@@ -109,8 +109,8 @@
         }
     }
 
-    &.m--is-skin-light-tab,
-    &.m--is-skin-dark-tab {
+    &.m--is-skin-tab-light,
+    &.m--is-skin-tab-dark {
         .m-navbar__button {
             $m-navbar--button-width: 14px;
 
@@ -141,7 +141,7 @@
         }
     }
 
-    &.m--is-skin-dark-tab {
+    &.m--is-skin-tab-dark {
         .m-navbar__button {
             background: $m-color--grey-darkest;
 
@@ -155,7 +155,7 @@
         }
     }
 
-    &.m--is-skin-light-tab {
+    &.m--is-skin-tab-light {
         .m-navbar__button {
             background: $m-color--grey-light;
 
@@ -169,7 +169,7 @@
         }
     }
 
-    &.m--is-skin-soft {
+    &.m--is-skin-nav-soft {
         background: rgba($m-color--white, 0.2);
     }
 
@@ -255,7 +255,7 @@
         }
 
         &::before {
-            color: $m-color--border;
+            color: $m-color--grey;
             top: 0;
         }
 

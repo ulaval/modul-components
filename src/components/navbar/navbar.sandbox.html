@@ -7,7 +7,7 @@
 
     <m-button @click="toggleMultiline">{{ multiline ? 'Remove' : 'Add' }} multiline</m-button>
 
-    <h3>Skin light (default)</h3>
+    <h3>Skin nav-main (default)</h3>
     <m-navbar :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
@@ -47,8 +47,8 @@
         </m-navbar-item>
     </m-navbar>
 
-    <h3>Skin arrow</h3>
-    <m-navbar skin="arrow" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+    <h3>Skin nav-sub</h3>
+    <m-navbar skin="nav-sub" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -87,8 +87,8 @@
         </m-navbar-item>
     </m-navbar>
 
-    <h3>Skin darker</h3>
-    <m-navbar skin="darker" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+    <h3>Skin nav-soft</h3>
+    <m-navbar skin="nav-soft" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant" style="background: #09f;">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -113,7 +113,7 @@
         <m-navbar-item value="item8">
             8
         </m-navbar-item>
-        <m-navbar-item value="item9" @click="toggleNav">
+        <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
         <m-navbar-item value="item10" :disabled="true">
@@ -124,224 +124,246 @@
         </m-navbar-item>
         <m-navbar-item value="item12">
             12 zaine d'oeufs
+        </m-navbar-item>
+    </m-navbar>
+
+    <h3>Skin tab-light</h3>
+    <m-navbar skin="tab-light" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9 singes
+        </m-navbar-item>
+        <m-navbar-item value="item10" :disabled="true">
+            10 chèvres et 10 moutons
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11 barnacles magestueuses volant vers le lointain
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12 zaine d'oeufs
+        </m-navbar-item>
+    </m-navbar>
+
+    <h3>Skin tab-dark</h3>
+    <m-navbar skin="tab-dark" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9 singes
+        </m-navbar-item>
+        <m-navbar-item value="item10" :disabled="true">
+            10 chèvres et 10 moutons
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11 barnacles magestueuses volant vers le lointain
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12 zaine d'oeufs
+        </m-navbar-item>
+    </m-navbar>
+
+    <h3>Skin tab-arrow</h3>
+    <m-navbar skin="tab-arrow" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9 singes
+        </m-navbar-item>
+        <m-navbar-item value="item10" :disabled="true">
+            10 chèvres et 10 moutons
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11 barnacles magestueuses volant vers le lointain
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12 zaine d'oeufs
+        </m-navbar-item>
+    </m-navbar>
+
+    <h3>Skin tab-underline</h3>
+    <m-navbar skin="tab-underline" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9 singes
+        </m-navbar-item>
+        <m-navbar-item value="item10" :disabled="true">
+            10 chèvres et 10 moutons
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11 barnacles magestueuses volant vers le lointain
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12 zaine d'oeufs
+        </m-navbar-item>
+    </m-navbar>
+
+    <h3>Skin tab-soft</h3>
+    <m-navbar skin="tab-soft" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9 singes
+        </m-navbar-item>
+        <m-navbar-item value="item10" :disabled="true">
+            10 chèvres et 10 moutons
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11 barnacles magestueuses volant vers le lointain
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12 zaine d'oeufs
+        </m-navbar-item>
+    </m-navbar>
+
+    <h2>Main navbar with sub menu</h2>
+    <m-navbar skin="nav-main" :selected.sync="selectedItemMainMenu" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1" @click="navOpen = false">
+            Item 1
+        </m-navbar-item>
+        <m-navbar-item value="item2" @click="navOpen = false">
+            Item 2
+        </m-navbar-item>
+        <m-navbar-item value="item3" @click="navOpen = false">
+            Item 3
+        </m-navbar-item>
+        <m-navbar-item value="item4" @click="toggleNav">
+            Toggle sub menu
+        </m-navbar-item>
+        <m-navbar-item value="item5" @click="navOpen = false">
+            Item 5
+        </m-navbar-item>
+        <m-navbar-item value="item6" @click="navOpen = false">
+            Item 6
         </m-navbar-item>
     </m-navbar>
     <m-accordion-transition>
         <div v-if="navOpen" >
-            <m-navbar skin="darkest" selected="item3">
+            <m-navbar skin="nav-sub" selected="item3">
                 <m-navbar-item value="item1">
-                    Élément enfant 1
+                    Sub item 1
                 </m-navbar-item>
                 <m-navbar-item value="item2">
-                    Élément enfant 2
+                    Sub item 2
                 </m-navbar-item>
                 <m-navbar-item value="item3">
-                    Élément enfant 3
+                    Sub item 3
                 </m-navbar-item>
                 <m-navbar-item value="item4">
-                    Élément enfant 4
+                    Sub item 4
                 </m-navbar-item>
             </m-navbar>
         </div>
     </m-accordion-transition>
-
-    <h3>Skin darkest</h3>
-    <m-navbar skin="darkest" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
-        <m-navbar-item value="item1">
-            1 souris verte
-        </m-navbar-item>
-        <m-navbar-item value="item2">
-            2
-        </m-navbar-item>
-        <m-navbar-item value="item3">
-            3
-        </m-navbar-item>
-        <m-navbar-item value="item4">
-            4
-        </m-navbar-item>
-        <m-navbar-item value="item5">
-            5
-        </m-navbar-item>
-        <m-navbar-item value="item6">
-            6
-        </m-navbar-item>
-        <m-navbar-item value="item7">
-            7
-        </m-navbar-item>
-        <m-navbar-item value="item8">
-            8
-        </m-navbar-item>
-        <m-navbar-item value="item9">
-            9 singes
-        </m-navbar-item>
-        <m-navbar-item value="item10" :disabled="true">
-            10 chèvres et 10 moutons
-        </m-navbar-item>
-        <m-navbar-item value="item11">
-            11 barnacles magestueuses volant vers le lointain
-        </m-navbar-item>
-        <m-navbar-item value="item12">
-            12 zaine d'oeufs
-        </m-navbar-item>
-    </m-navbar>
-
-    <h3>Skin soft</h3>
-    <m-navbar skin="soft" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant" style="background: #09f;">
-        <m-navbar-item value="item1">
-            1 souris verte
-        </m-navbar-item>
-        <m-navbar-item value="item2">
-            2
-        </m-navbar-item>
-        <m-navbar-item value="item3">
-            3
-        </m-navbar-item>
-        <m-navbar-item value="item4">
-            4
-        </m-navbar-item>
-        <m-navbar-item value="item5">
-            5
-        </m-navbar-item>
-        <m-navbar-item value="item6">
-            6
-        </m-navbar-item>
-        <m-navbar-item value="item7">
-            7
-        </m-navbar-item>
-        <m-navbar-item value="item8">
-            8
-        </m-navbar-item>
-        <m-navbar-item value="item9">
-            9 singes
-        </m-navbar-item>
-        <m-navbar-item value="item10" :disabled="true">
-            10 chèvres et 10 moutons
-        </m-navbar-item>
-        <m-navbar-item value="item11">
-            11 barnacles magestueuses volant vers le lointain
-        </m-navbar-item>
-        <m-navbar-item value="item12">
-            12 zaine d'oeufs
-        </m-navbar-item>
-    </m-navbar>
-
-    <h3>Skin simple</h3>
-    <m-navbar skin="simple" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
-        <m-navbar-item value="item1">
-            1 souris verte
-        </m-navbar-item>
-        <m-navbar-item value="item2">
-            2
-        </m-navbar-item>
-        <m-navbar-item value="item3">
-            3
-        </m-navbar-item>
-        <m-navbar-item value="item4">
-            4
-        </m-navbar-item>
-        <m-navbar-item value="item5">
-            5
-        </m-navbar-item>
-        <m-navbar-item value="item6">
-            6
-        </m-navbar-item>
-        <m-navbar-item value="item7">
-            7
-        </m-navbar-item>
-        <m-navbar-item value="item8">
-            8
-        </m-navbar-item>
-        <m-navbar-item value="item9">
-            9 singes
-        </m-navbar-item>
-        <m-navbar-item value="item10" :disabled="true">
-            10 chèvres et 10 moutons
-        </m-navbar-item>
-        <m-navbar-item value="item11">
-            11 barnacles magestueuses volant vers le lointain
-        </m-navbar-item>
-        <m-navbar-item value="item12">
-            12 zaine d'oeufs
-        </m-navbar-item>
-    </m-navbar>
-
-    <h3>Skin light-tab</h3>
-    <m-navbar skin="light-tab" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
-        <m-navbar-item value="item1">
-            1 souris verte
-        </m-navbar-item>
-        <m-navbar-item value="item2">
-            2
-        </m-navbar-item>
-        <m-navbar-item value="item3">
-            3
-        </m-navbar-item>
-        <m-navbar-item value="item4">
-            4
-        </m-navbar-item>
-        <m-navbar-item value="item5">
-            5
-        </m-navbar-item>
-        <m-navbar-item value="item6">
-            6
-        </m-navbar-item>
-        <m-navbar-item value="item7">
-            7
-        </m-navbar-item>
-        <m-navbar-item value="item8">
-            8
-        </m-navbar-item>
-        <m-navbar-item value="item9">
-            9 singes
-        </m-navbar-item>
-        <m-navbar-item value="item10" :disabled="true">
-            10 chèvres et 10 moutons
-        </m-navbar-item>
-        <m-navbar-item value="item11">
-            11 barnacles magestueuses volant vers le lointain
-        </m-navbar-item>
-        <m-navbar-item value="item12">
-            12 zaine d'oeufs
-        </m-navbar-item>
-    </m-navbar>
-
-    <h3>Skin dark-tab</h3>
-    <m-navbar skin="dark-tab" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
-        <m-navbar-item value="item1">
-            1 souris verte
-        </m-navbar-item>
-        <m-navbar-item value="item2">
-            2
-        </m-navbar-item>
-        <m-navbar-item value="item3">
-            3
-        </m-navbar-item>
-        <m-navbar-item value="item4">
-            4
-        </m-navbar-item>
-        <m-navbar-item value="item5">
-            5
-        </m-navbar-item>
-        <m-navbar-item value="item6">
-            6
-        </m-navbar-item>
-        <m-navbar-item value="item7">
-            7
-        </m-navbar-item>
-        <m-navbar-item value="item8">
-            8
-        </m-navbar-item>
-        <m-navbar-item value="item9">
-            9 singes
-        </m-navbar-item>
-        <m-navbar-item value="item10" :disabled="true">
-            10 chèvres et 10 moutons
-        </m-navbar-item>
-        <m-navbar-item value="item11">
-            11 barnacles magestueuses volant vers le lointain
-        </m-navbar-item>
-        <m-navbar-item value="item12">
-            12 zaine d'oeufs
-        </m-navbar-item>
-    </m-navbar>
 </div>

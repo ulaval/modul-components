@@ -8,6 +8,7 @@ import WithRender from './navbar.sandbox.html?style=./navbar.sandbox.scss';
 @Component
 export class MNavbarSandbox extends Vue {
     private selectedItem: string = 'item6';
+    private selectedItemMainMenu: string = 'item2';
     private navOpen: boolean = false;
     private multiline: boolean = true;
 

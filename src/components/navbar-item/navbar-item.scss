@@ -56,7 +56,7 @@
 }
 
 // Light skin styles
-.m-navbar.m--is-skin-light {
+.m-navbar.m--is-skin-tab-underline {
     &.m--is-anim-ready {
         .m-navbar-item__contents {
             transition: color $m-transition-duration ease;
@@ -120,8 +120,8 @@
 }
 
 // Darker and darkest skin styles
-.m-navbar.m--is-skin-darker,
-.m-navbar.m--is-skin-darkest {
+.m-navbar.m--is-skin-nav-main,
+.m-navbar.m--is-skin-nav-sub {
     &.m--is-anim-ready {
         .m-navbar-item__contents {
             transition: color $m-transition-duration ease, font-weight $m-transition-duration ease;
@@ -182,7 +182,7 @@
 }
 
 // Darker skin styles
-.m-navbar.m--is-skin-darker {
+.m-navbar.m--is-skin-nav-main {
     $m-navbar-item--min-width: 60px;
 
     .m-navbar-item {
@@ -247,7 +247,7 @@
 }
 
 // Darkest skin styles
-.m-navbar.m--is-skin-darkest {
+.m-navbar.m--is-skin-nav-sub {
     .m-navbar-item {
         + .m-navbar-item {
             &::before {
@@ -269,7 +269,7 @@
 }
 
 // Soft skin styles
-.m-navbar.m--is-skin-soft {
+.m-navbar.m--is-skin-nav-soft {
     &.m--is-anim-ready {
         .m-navbar-item__contents {
             transition: background $m-transition-duration ease;
@@ -336,7 +336,7 @@
 }
 
 // Arrow skin styles
-.m-navbar.m--is-skin-arrow {
+.m-navbar.m--is-skin-tab-arrow {
     &.m--is-anim-ready {
         .m-navbar-item__contents {
             transition: color $m-transition-duration ease;
@@ -380,7 +380,7 @@
 }
 
 // Simple skin styles
-.m-navbar.m--is-skin-simple {
+.m-navbar.m--is-skin-tab-soft {
     &.m--is-anim-ready {
         .m-navbar-item__contents {
             transition: color $m-transition-duration--l ease, font-weight $m-transition-duration--l ease;
@@ -448,8 +448,8 @@
 }
 
 // Tabs skin styles
-.m-navbar.m--is-skin-light-tab,
-.m-navbar.m--is-skin-dark-tab {
+.m-navbar.m--is-skin-tab-light,
+.m-navbar.m--is-skin-tab-dark {
     &.m--is-anim-ready {
         .m-navbar-item:not(.m--is-selected):not(.m--is-disabled) {
             .m-navbar-item__contents {
@@ -482,6 +482,10 @@
             }
         }
 
+        &.m--is-fake-selected .m-navbar-item__contents {
+            font-weight: $m-font-weight--bold;
+        }
+
         &__contents {
             padding: $m-padding $m-margin--l;
         }
@@ -489,7 +493,7 @@
 }
 
 // Light tab skin styles
-.m-navbar.m--is-skin-light-tab {
+.m-navbar.m--is-skin-tab-light {
     .m-navbar-item {
         + .m-navbar-item {
             border-left-color: $m-color--white;
@@ -548,7 +552,7 @@
 }
 
 // Dark tab skin styles
-.m-navbar.m--is-skin-dark-tab {
+.m-navbar.m--is-skin-tab-dark {
     .m-navbar-item {
         + .m-navbar-item {
             border-left-color: $m-color--grey-darker;

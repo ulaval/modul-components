@@ -28,14 +28,14 @@ interface NavbarItems {
 }
 
 export enum MNavbarSkin {
-    Light = 'light',
-    Arrow = 'arrow',
-    Darker = 'darker',
-    Darkest = 'darkest',
-    Soft = 'soft',
-    Simple = 'simple',
-    LightTab = 'light-tab',
-    DarkTab = 'dark-tab',
+    NavMain = 'nav-main',
+    NavSub = 'nav-sub',
+    NavSoft= 'nav-soft',
+    TabLight = 'tab-light',
+    TabDark = 'tab-dark',
+    TabArrow = 'tab-arrow',
+    TabUnderline = 'tab-underline',
+    TabSoft= 'tab-soft',
     Plain = 'plain'
 }
 
@@ -56,16 +56,16 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Prop()
     public selected: string;
     @Prop({
-        default: MNavbarSkin.Light,
+        default: MNavbarSkin.NavMain,
         validator: value =>
-            value === MNavbarSkin.Light ||
-            value === MNavbarSkin.Arrow ||
-            value === MNavbarSkin.Soft ||
-            value === MNavbarSkin.Simple ||
-            value === MNavbarSkin.Darker ||
-            value === MNavbarSkin.Darkest ||
-            value === MNavbarSkin.LightTab ||
-            value === MNavbarSkin.DarkTab ||
+            value === MNavbarSkin.NavMain ||
+            value === MNavbarSkin.NavSub ||
+            value === MNavbarSkin.NavSoft ||
+            value === MNavbarSkin.TabLight ||
+            value === MNavbarSkin.TabDark ||
+            value === MNavbarSkin.TabArrow ||
+            value === MNavbarSkin.TabUnderline ||
+            value === MNavbarSkin.TabSoft ||
             value === MNavbarSkin.Plain
     })
     public skin: string;
@@ -167,6 +167,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private setSelectedIndicatorPosition(element, ref: string): void {
+        this.$log.log('selected');
         let positionX: number = element.$el.offsetLeft;
         let width: number = element.$el.clientWidth;
         let localRef: HTMLElement = this.$refs[ref];
@@ -231,7 +232,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
                         wrapEl.scrollLeft = scrollPositionAlignLeft;
                     }
 
-                    if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
+                    if (this.skin === MNavbarSkin.TabUnderline || this.skin === MNavbarSkin.TabArrow) {
                         this.setSelectedIndicatorPosition(element, this.skin);
                     }
                 }
@@ -240,19 +241,19 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private get buttonSkin(): string {
-        return this.skin === MNavbarSkin.Soft || this.skin === MNavbarSkin.Darker || this.skin === MNavbarSkin.Darkest || this.skin === MNavbarSkin.DarkTab ? 'dark' : 'light';
+        return this.skin === MNavbarSkin.NavMain || this.skin === MNavbarSkin.NavSub || this.skin === MNavbarSkin.NavSoft || this.skin === MNavbarSkin.TabDark ? 'dark' : 'light';
     }
 
     private get buttonRipple(): boolean {
-        return this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow || this.skin === MNavbarSkin.Simple;
+        return this.skin === MNavbarSkin.TabUnderline || this.skin === MNavbarSkin.TabArrow || this.skin === MNavbarSkin.TabSoft;
     }
 
-    private get isLightSkin(): boolean {
-        return this.skin === MNavbarSkin.Light;
+    private get isTabUnderlineSkin(): boolean {
+        return this.skin === MNavbarSkin.TabUnderline;
     }
 
-    private get isArrowSkin(): boolean {
-        return this.skin === MNavbarSkin.Arrow;
+    private get isTabArrowSkin(): boolean {
+        return this.skin === MNavbarSkin.TabArrow;
     }
 
     private navbarItems(): NavbarItems {
