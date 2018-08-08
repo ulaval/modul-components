@@ -47,6 +47,7 @@ const components: string[] = [
     Components.PAGE_NOT_FOUND_NAME,
     Components.PANEL_NAME,
     Components.PHONE_NUMBER_NAME,
+    Components.PLUS_NAME,
     Components.POPPER_NAME,
     Components.PROGRESS_NAME,
     Components.POPUP_NAME,
