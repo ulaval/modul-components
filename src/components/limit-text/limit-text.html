@@ -2,6 +2,7 @@
     <div ref="originalText" class="m-limit-text__original" v-show="!hasFinish" aria-hidden="true">
         <slot></slot>
     </div>
+    <div ref="testingText" class="m-limit-text__testing-text" v-show="!hasFinish" aria-hidden="true"></div>
     <m-dynamic-template @updated="onUpdatedOpen($event)" :template="getReduceText" v-if="!internalOpen"></m-dynamic-template>
     <m-dynamic-template @updated="onUpdatedClose($event)" :template="getFullText" v-if="internalOpen"></m-dynamic-template>
 </div>
