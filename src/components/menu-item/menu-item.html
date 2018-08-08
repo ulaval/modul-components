@@ -2,7 +2,6 @@
     :class="{'m--is-selected': selected,
              'm--is-item-selected': itemSelected,
              'm--is-disabled': isDisabled,
-             'm--has-icon': hasIcon,
              'm--is-group': group,
              'm--is-open': propOpen,
              'm--is-inside-group' : groupItemRoot,
@@ -29,8 +28,7 @@
           v-else>
         <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
         <span class="m-menu-item__label">{{ label }}</span>
-        <!-- a remplacer par le m-plus -->
-        <m-icon class="m-menu-item__plus" ref="plus" v-if="group" name="m-svg__chevron--down"></m-icon>
+        <m-plus class="m-menu-item__plus" skin="current-color" :open="propOpen" :large="itemSelected" ref="plus" v-if="group"></m-plus>
     </span>
 
     <m-accordion-transition :transition="isAnimReady">

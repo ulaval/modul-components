@@ -1,7 +1,7 @@
 <span class="m-plus"
-      :class="{ 'm--is-open': open,
+      :class="[ 'm--is-skin-' + skin, {
+                'm--is-open': open,
                 'm--is-disabled': disabled,
                 'm--is-large': large,
-                'm--has-border': border,
-                'm--is-skin-light': skinLight }"
+                'm--has-border': border }]"
       @click="onClick"></span>
