@@ -19,7 +19,6 @@ export class MRichTextSandBox extends Vue {
     public helperMessage: string = '';
     public waiting: boolean = false;
     public disabled: boolean = false;
-    public afficherFormulairePleinePage: boolean = false;
     public fullScreenFormModel: string = '';
 }
 
