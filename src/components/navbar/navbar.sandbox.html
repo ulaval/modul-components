@@ -329,39 +329,87 @@
 
     <h2>Main navbar with sub menu</h2>
     <m-navbar skin="nav-main" :selected.sync="selectedItemMainMenu" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
-        <m-navbar-item value="item1" @click="navOpen = false">
-            Item 1
+        <m-navbar-item value="item1" @click="toggleNavPres">
+            Présentation du cours
         </m-navbar-item>
-        <m-navbar-item value="item2" @click="navOpen = false">
-            Item 2
+        <m-navbar-item value="item2" @click="toggleNavMod">
+            Modules d'apprentissage
         </m-navbar-item>
-        <m-navbar-item value="item3" @click="navOpen = false">
-            Item 3
+        <m-navbar-item value="item3" @click="closeNav">
+            Évaluations et travaux pratiques
         </m-navbar-item>
-        <m-navbar-item value="item4" @click="toggleNav">
-            Toggle sub menu
+        <m-navbar-item value="item4" @click="closeNav">
+            Résultats
         </m-navbar-item>
-        <m-navbar-item value="item5" @click="navOpen = false">
-            Item 5
+        <m-navbar-item value="item5" @click="closeNav">
+            Ressources complémentaires et références bibliographiques
         </m-navbar-item>
-        <m-navbar-item value="item6" @click="navOpen = false">
-            Item 6
+        <m-navbar-item value="item6" @click="closeNav">
+            Calendrier de session
         </m-navbar-item>
     </m-navbar>
     <m-accordion-transition>
-        <div v-if="navOpen" >
-            <m-navbar skin="nav-sub" selected="item3">
+        <div v-if="navOpenPres" >
+            <m-navbar skin="nav-sub" :selected.sync="selectedItemPres">
                 <m-navbar-item value="item1">
-                    Sub item 1
+                    Introduction
                 </m-navbar-item>
                 <m-navbar-item value="item2">
-                    Sub item 2
+                    Liens entre le cours et le programme
                 </m-navbar-item>
                 <m-navbar-item value="item3">
-                    Sub item 3
+                    Modalités particulières de l’offre de cours
                 </m-navbar-item>
                 <m-navbar-item value="item4">
-                    Sub item 4
+                    Objectifs généraux
+                </m-navbar-item>
+                <m-navbar-item value="item5">
+                    Objectifs particuliers
+                </m-navbar-item>
+                <m-navbar-item value="item6">
+                    Éléments de contenu
+                </m-navbar-item>
+                <m-navbar-item value="item7">
+                    Approche pédagogique
+                </m-navbar-item>
+                <m-navbar-item value="item8">
+                    Modalités d'encadrement
+                </m-navbar-item>
+                <m-navbar-item value="item9">
+                    Appréciation de l'enseignement
+                </m-navbar-item>
+            </m-navbar>
+        </div>
+    </m-accordion-transition>
+    <m-accordion-transition>
+        <div v-if="navOpenMod" >
+            <m-navbar skin="nav-sub" :selected.sync="selectedItemMod">
+                <m-navbar-item value="item1">
+                    Module de la semaine 1
+                </m-navbar-item>
+                <m-navbar-item value="item2">
+                    Module de la semaine 2
+                </m-navbar-item>
+                <m-navbar-item value="item3">
+                    Module de la semaine 3
+                </m-navbar-item>
+                <m-navbar-item value="item4">
+                    Module de la semaine 4
+                </m-navbar-item>
+                <m-navbar-item value="item5">
+                    Module de la semaine 5
+                </m-navbar-item>
+                <m-navbar-item value="item6">
+                    Module de la semaine 6
+                </m-navbar-item>
+                <m-navbar-item value="item7">
+                    Module de la semaine 7
+                </m-navbar-item>
+                <m-navbar-item value="item8">
+                    Module de la semaine 8
+                </m-navbar-item>
+                <m-navbar-item value="item9">
+                    Module de la semaine 9
                 </m-navbar-item>
             </m-navbar>
         </div>
