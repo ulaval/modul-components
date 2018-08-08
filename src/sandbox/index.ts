@@ -14,6 +14,7 @@ import DropdownGroupSandboxPlugin from '../components/dropdown-group/dropdown-gr
 import DropdownItemSandboxPlugin from '../components/dropdown-item/dropdown-item.sandbox';
 import DropdownSandboxPlugin from '../components/dropdown/dropdown.sandbox';
 import DynamicTemplateSandboxPlugin from '../components/dynamic-template/dynamic-template.sandbox';
+import EditWindowSandboxPlugin from '../components/edit-window/edit-window.sandbox';
 import ErrorAccessDeniedSandboxPlugin from '../components/error-access-denied/error-access-denied.sandbox';
 import ErrorBrowserNotSupportedSandboxPlugin from '../components/error-browser-not-supported/error-browser-not-supported.sandbox';
 import ErrorConfigNotSupportedSandboxPlugin from '../components/error-config-not-supported/error-config-not-supported.sandbox';
@@ -43,6 +44,7 @@ import NavbarSandboxPlugin from '../components/navbar/navbar.sandbox';
 import PageNotFoundSandboxPlugin from '../components/page-not-found/page-not-found.sandbox';
 import PanelSandboxPlugin from '../components/panel/panel.sandbox';
 import PhoneNumberSandboxPlugin from '../components/phone-number/phone-number.sandbox';
+import PlusSandboxPlugin from '../components/plus/plus.sandbox';
 import PopperSandboxPlugin from '../components/popper/popper.sandbox';
 import PopupSandboxPlugin from '../components/popup/popup.sandbox';
 import ProgressSandboxPlugin from '../components/progress/progress.sandbox';
@@ -81,6 +83,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(DatefieldsSandboxPlugin);
         Vue.use(DatepickerSandboxPlugin);
         Vue.use(DialogSandboxPlugin);
+        Vue.use(EditWindowSandboxPlugin);
         Vue.use(DropdownSandboxPlugin);
         Vue.use(DropdownItemSandboxPlugin);
         Vue.use(DropdownGroupSandboxPlugin);
@@ -114,6 +117,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(PageNotFoundSandboxPlugin);
         Vue.use(PanelSandboxPlugin);
         Vue.use(PhoneNumberSandboxPlugin);
+        Vue.use(PlusSandboxPlugin);
         Vue.use(PopperSandboxPlugin);
         Vue.use(ProgressSandboxPlugin);
         Vue.use(PopupSandboxPlugin);

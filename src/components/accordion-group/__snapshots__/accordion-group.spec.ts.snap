@@ -11,7 +11,7 @@ exports[`MAcordionGroup should not render both close all and open all link when 
     <div class="m-accordion-group__body">
         <article class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="uuid" role="tab" aria-expanded="true" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-accordion__header-icon m--is-closed m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-open m--is-large m--is-left"></span></div>
             <div role="tabpanel" id="uuid-controls"
                 aria-labelledby="uuid" class="m-accordion__body-wrap">
                 <div class="m-accordion__body m--has-padding"></div>
@@ -19,7 +19,7 @@ exports[`MAcordionGroup should not render both close all and open all link when 
         </article>
         <article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-large m--is-left"></span></div>
         </article>'</div>
 </article>
 `;
@@ -35,7 +35,7 @@ exports[`MAcordionGroup should not render close all link when all accordions are
     <div class="m-accordion-group__body">
         <article class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="uuid" role="tab" aria-expanded="true" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-accordion__header-icon m--is-closed m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-open m--is-large m--is-left"></span></div>
             <div role="tabpanel" id="uuid-controls"
                 aria-labelledby="uuid" class="m-accordion__body-wrap">
                 <div class="m-accordion__body m--has-padding"></div>
@@ -43,7 +43,7 @@ exports[`MAcordionGroup should not render close all link when all accordions are
         </article>
         <article class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="uuid" role="tab" aria-expanded="true" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-accordion__header-icon m--is-closed m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to hide content.</span></div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-open m--is-large m--is-left"></span></div>
             <div role="tabpanel" id="uuid-controls"
                 aria-labelledby="uuid" class="m-accordion__body-wrap">
                 <div class="m-accordion__body m--has-padding"></div>
@@ -63,11 +63,11 @@ exports[`MAcordionGroup should not render open all link when all accordions are 
     <div class="m-accordion-group__body">
         <article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="a" role="tab" aria-controls="a-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-large m--is-left"></span></div>
         </article>
         <article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="b" role="tab" aria-controls="b-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-large m--is-left"></span></div>
         </article>'</div>
 </article>
 `;
@@ -77,11 +77,11 @@ exports[`MAcordionGroup should not render toggle links when concurrent 1`] = `
     <div class="m-accordion-group__body">
         <article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="a" role="tab" aria-controls="a-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-large m--is-left"></span></div>
         </article>
         <article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="b" role="tab" aria-controls="b-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-large m--is-left"></span></div>
         </article>'</div>
 </article>
 `;
@@ -97,11 +97,11 @@ exports[`MAcordionGroup should render correctly 1`] = `
     <div class="m-accordion-group__body">
         <article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="a" role="tab" aria-controls="a-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-large m--is-left"></span></div>
         </article>
         <article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="b" role="tab" aria-controls="b-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-large m--is-left"></span></div>
         </article>'</div>
 </article>
 `;
@@ -118,11 +118,11 @@ exports[`MAcordionGroup should render correctly with title 1`] = `
     <div class="m-accordion-group__body">
         <article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="a" role="tab" aria-controls="a-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>A</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-large m--is-left"></span></div>
         </article>
         <article class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large">
             <div tabindex="0" id="b" role="tab" aria-controls="b-controls" class="m-accordion__header m--has-padding">
-                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--is-large"></span></div>
+                <div class="m-accordion__header__content"><span>B</span> <span class="m-i18n m-accordion__hidden">Click to display content.</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-large m--is-left"></span></div>
         </article>'</div>
 </article>
 `;
