@@ -30,6 +30,7 @@ export class MLimitText extends ModulVue {
     private fullContent: string = '';
     private internalOpen: boolean = false;
     private hasFinish: boolean = false;
+    private contentTooTall: boolean = false;
     private child: ModulVue;
     private el: HTMLElement;
     private initLineHeigh: any = '';
@@ -89,11 +90,13 @@ export class MLimitText extends ModulVue {
 
     private adjustText(): void {
         if (this.isContentTooTall(false)) {
+            this.contentTooTall = true;
             this.hasFinish = false;
             this.getReduceContent();
             this.hasFinish = true;
         } else {
-            this.hasFinish = false;
+            this.contentTooTall = false;
+            this.hasFinish = true;
         }
     }
 
@@ -110,6 +113,7 @@ export class MLimitText extends ModulVue {
     private reset(): void {
         this.hasFinish = false;
         this.reduceContent = '';
+        this.testingContent = '';
         this.$nextTick(() => {
             this.initialize();
         });
