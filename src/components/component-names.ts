@@ -50,6 +50,7 @@ export const OPTION_ITEM_EDIT_NAME: string = 'm-option-item-edit';
 export const PAGE_NOT_FOUND_NAME: string = 'm-page-not-found';
 export const PANEL_NAME: string = 'm-panel';
 export const PHONE_NUMBER_NAME: string = 'm-phone-number';
+export const PLUS_NAME: string = 'm-plus';
 export const POPPER_NAME: string = 'm-popper';
 export const POPUP_NAME: string = 'm-popup';
 export const PROGRESS_NAME: string = 'm-progress';
