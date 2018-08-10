@@ -1,0 +1,15 @@
+<li class="m-option-item"
+    :class="{ 'm--is-disabled' : disabled,
+              'm--has-icon-spacing': hasIcon }"
+    ref="m-option-item"
+    :tabindex="disabled ? '-1' : '0'"
+    role="option"
+    @keydown.enter.prevent="onClick"
+    @click.prevent="onClick">
+    <span class="m-option-item__icon" ref="icon" v-if="hasIcon">
+        <m-icon :name="iconName" v-if="hasIconNameProp"></m-icon>
+    </span>
+    <span class="m-option-item__text" ref="text">
+        <slot></slot>
+    </span>
+</li>

@@ -1,32 +1,26 @@
-<m-popup class="m-menu"
-         :class="{ 'm--is-disabled': disabled }"
-         :open.sync="open"
-         :padding="false"
-         :placement="placement"
-         :disabled="disabled"
-         :close-on-backdrop="true"
-         :background="false"
-         :shadow="false"
-         :focus-management="focusManagement"
-         @open="onOpen"
-         @close="onClose">
-    <m-icon-button :id="id"
-                   class="m-menu__button"
-                   aria-haspopup="true"
-                   :aria-controls="ariaControls"
-                   :aria-expanded="open"
-                   slot="trigger"
-                   :skin="skin"
-                   :title="propTitle"
-                   icon-name="m-svg__options"
-                   :disabled="disabled"
-                   :button-size="size"
-                   @click="onClick">
-    </m-icon-button>
-    <ul :id="ariaControls"
-        class="m-menu__list"
-        :aria-labelledby="id"
-        ref="menu">
-        <slot></slot>
-    </ul>
-</m-popup>
+<div class="m-menu"
+     :class="[ 'm--is-skin-' + skin,
+               { 'm--is-open': propOpen,
+                 'm--is-disabled': propDisabled }]">
+    <div class="m-menu__trigger"
+         ref="buttonMenu"
+         :tabindex="propDisabled ? '-1' : '0'"
+         @click="toggleMenu"
+         @keypress.enter="toggleMenu"
+         aria-haspopup="true"
+         :aria-controls="idAriaControls"
+         :aria-expanded="propOpen"
+         v-if="hasSlotTrigger">
+        <slot name="trigger"></slot>
+    </div>
+    <m-accordion-transition>
+        <ul :id="idAriaControls"
+            class="m-menu__body"
+            role="menu"
+            ref="menu"
+            :aria-hidden="!propOpen"
+            v-show="propOpen">
+            <slot></slot>
+        </ul>
+    </m-accordion-transition>
+</div>
