@@ -2,12 +2,14 @@ import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
+import ModulPlugin from '../../utils/modul/modul';
 import NavbarItemPlugin, { MNavbarItem } from './navbar-item';
 
 describe('MNavbarItem', () => {
     let localVue: VueConstructor<Vue>;
 
     beforeEach(() => {
+        Vue.use(ModulPlugin);
         localVue = createLocalVue();
         localVue.use(NavbarItemPlugin);
     });
