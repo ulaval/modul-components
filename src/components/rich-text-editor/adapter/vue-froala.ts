@@ -264,6 +264,8 @@ export class VueFroala extends Vue {
             cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
             cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
         }
+
+        wordPasteModal!.remove();
     }
 
     private getWordPasteCleanButton(): HTMLElement | null {
