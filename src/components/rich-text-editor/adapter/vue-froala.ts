@@ -187,12 +187,16 @@ export class VueFroala extends Vue {
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!editor.fullscreen.isActive()) {
-                        window.addEventListener('resize', this.onResize);
-                        this.$emit('blur');
-                        this.hideToolbar();
+                        // this timeout is used to avoid the "undetected click" bug
+                        // that happens sometimes due to the hideToolbar animation
+                        setTimeout(() => {
+                            window.addEventListener('resize', this.onResize);
+                            this.$emit('blur');
+                            this.hideToolbar();
 
-                        this.isFocused = false;
-                        this.isDirty = false;
+                            this.isFocused = false;
+                            this.isDirty = false;
+                        }, 100);
                     }
                 },
                 [froalaEvents.KeyUp]: (_e, _editor) => {
