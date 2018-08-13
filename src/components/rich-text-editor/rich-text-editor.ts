@@ -3,18 +3,18 @@ import { Prop } from 'vue-property-decorator';
 
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
+import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState, InputStateInputSelector } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import { InputManagement, InputManagementData } from './../../mixins/input-management/input-management';
 import VueFroala from './adapter/vue-froala';
-import { MRichTextEditorDefaultOptions, MRichTextEditorStandardOptions } from './rich-text-edit-options';
-import WithRender from './rich-text-edit.html?style=./rich-text-edit.scss';
+import { MRichTextEditorDefaultOptions, MRichTextEditorStandardOptions } from './rich-text-editor-options';
+import WithRender from './rich-text-editor.html?style=./rich-text-editor.scss';
 
 const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
-export enum MRichTextEditMode {
+export enum MRichTextEditorMode {
     STANDARD
 }
 
@@ -29,7 +29,7 @@ export enum MRichTextEditMode {
         ElementQueries
     ]
 })
-export class MRichTextEdit extends ModulVue implements InputManagementData, InputStateInputSelector {
+export class MRichTextEditor extends ModulVue implements InputManagementData, InputStateInputSelector {
     selector: string = '.fr-element';
     internalValue: string;
 
@@ -37,10 +37,10 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
     public value: string;
 
     @Prop({
-        default: MRichTextEditMode.STANDARD,
-        validator: value => value === MRichTextEditMode.STANDARD
+        default: MRichTextEditorMode.STANDARD,
+        validator: value => value === MRichTextEditorMode.STANDARD
     })
-    public mode: MRichTextEditMode;
+    public mode: MRichTextEditorMode;
 
     @Prop({ default: 0 })
     public toolbarStickyOffset: number;
@@ -64,7 +64,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
     }
 
     public getDefaultOptions(): MRichTextEditorDefaultOptions {
-        if (this.mode === MRichTextEditMode.STANDARD) {
+        if (this.mode === MRichTextEditorMode.STANDARD) {
             return new MRichTextEditorStandardOptions(this.froalaLicenseKey, this.$i18n.currentLang());
         }
 
