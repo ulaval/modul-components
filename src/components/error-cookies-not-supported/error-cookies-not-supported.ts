@@ -32,7 +32,7 @@ export class MErrorCookiesNotSupported extends ModulVue {
 
     readonly skin: string = MErrorTemplateSkin.Warning;
 
-    readonly iconName: string = 'error-cookies-not-supported';
+    readonly iconName: string = 'error-cookies-disabled';
 }
 
 const ErrorCookiesNotSupportedPlugin: PluginObject<any> = {
