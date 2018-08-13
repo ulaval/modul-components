@@ -29,7 +29,7 @@ export class MErrorAccessDenied extends ModulVue {
 
     readonly skin: string = MErrorTemplateSkin.Information;
 
-    readonly iconName: string = 'm-svg__information';
+    readonly iconName: string = 'error-access-denied';
 }
 
 const ErrorAccessDeniedPlugin: PluginObject<any> = {

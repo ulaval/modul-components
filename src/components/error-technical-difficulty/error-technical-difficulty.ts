@@ -59,7 +59,7 @@ export class MErrorTechnicalDifficulty extends ModulVue {
 
     readonly skin: string = MErrorTemplateSkin.Error;
 
-    readonly iconName: string = 'm-svg__error';
+    readonly iconName: string = 'error-technical-difficulty';
 
     /**
      * Using the value of the props errorDate, generates an array with two values, the date in YYYY-MM-DD format and the time in HH:mm:ss format.
