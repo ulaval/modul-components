@@ -127,6 +127,10 @@ export class MCarousel extends Vue {
         return count;
     }
 
+    private onTap(event: Event): void {
+        this.$emit('tap', event);
+    }
+
     private showPrevItem(resetInterval: boolean = false): void {
         if (this.isIndexValid(this.propIndex - 1)) {
             this.showItem(this.propIndex - 1, false, resetInterval);

@@ -1,11 +1,14 @@
 <div>
     <!-- Sandbox template -->
-    <h3>Navbar skins</h3>
+    <h2>Navbar skins</h2>
     <p class="m-u--margin-bottom">
         Show the different skins possible for the component
     </p>
-    <h4 class="m-u--margin-bottom--s">darker & darkest, used together for main navigation</h4>
-    <m-navbar skin="darker" :selected.sync="selectedItem">
+
+    <m-button @click="toggleMultiline">{{ multiline ? 'Remove' : 'Add' }} multiline</m-button>
+
+    <h3>Skin nav-main (default)</h3>
+    <m-navbar :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -33,7 +36,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -43,7 +46,9 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
-    <m-navbar skin="darkest" :selected.sync="selectedItem">
+
+    <h3>Skin nav-sub</h3>
+    <m-navbar skin="nav-sub" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
@@ -71,7 +76,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -81,9 +86,10 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
-    <h4 class="m-u--margin-bottom--s">light</h4>
-    <m-navbar skin="light" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
+
+    <h3>Skin nav-soft</h3>
+    <m-navbar skin="nav-soft" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant" style="background: #09f;">
+        <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
         <m-navbar-item value="item2">
@@ -110,7 +116,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -120,9 +126,10 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
-    <h4 class="m-u--margin-bottom--s">plain (aka no style)</h4>
-    <m-navbar skin="plain" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
+
+    <h3>Skin tab-light</h3>
+    <m-navbar skin="tab-light" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
         <m-navbar-item value="item2">
@@ -149,7 +156,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -159,9 +166,10 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
-    <h4 class="m-u--margin-bottom--s">arrow</h4>
-    <m-navbar skin="arrow" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
+
+    <h3>Skin tab-dark</h3>
+    <m-navbar skin="tab-dark" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
         <m-navbar-item value="item2">
@@ -188,7 +196,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -198,9 +206,10 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
-    <h4 class="m-u--margin-bottom--s">light-tab</h4>
-    <m-navbar skin="light-tab" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
+
+    <h3>Skin tab-arrow</h3>
+    <m-navbar skin="tab-arrow" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
         <m-navbar-item value="item2">
@@ -227,7 +236,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -237,9 +246,10 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
-    <h4 class="m-u--margin-bottom--s">dark-tab</h4>
-    <m-navbar skin="dark-tab" :selected.sync="selectedItem">
-                <m-navbar-item value="item1">
+
+    <h3>Skin tab-underline</h3>
+    <m-navbar skin="tab-underline" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
         <m-navbar-item value="item2">
@@ -266,7 +276,7 @@
         <m-navbar-item value="item9">
             9 singes
         </m-navbar-item>
-        <m-navbar-item value="item10">
+        <m-navbar-item value="item10" :disabled="true">
             10 chèvres et 10 moutons
         </m-navbar-item>
         <m-navbar-item value="item11">
@@ -276,4 +286,132 @@
             12 zaine d'oeufs
         </m-navbar-item>
     </m-navbar>
+
+    <h3>Skin tab-soft</h3>
+    <m-navbar skin="tab-soft" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+        <m-navbar-item value="item2">
+            2
+        </m-navbar-item>
+        <m-navbar-item value="item3">
+            3
+        </m-navbar-item>
+        <m-navbar-item value="item4">
+            4
+        </m-navbar-item>
+        <m-navbar-item value="item5">
+            5
+        </m-navbar-item>
+        <m-navbar-item value="item6">
+            6
+        </m-navbar-item>
+        <m-navbar-item value="item7">
+            7
+        </m-navbar-item>
+        <m-navbar-item value="item8">
+            8
+        </m-navbar-item>
+        <m-navbar-item value="item9">
+            9 singes
+        </m-navbar-item>
+        <m-navbar-item value="item10" :disabled="true">
+            10 chèvres et 10 moutons
+        </m-navbar-item>
+        <m-navbar-item value="item11">
+            11 barnacles magestueuses volant vers le lointain
+        </m-navbar-item>
+        <m-navbar-item value="item12">
+            12 zaine d'oeufs
+        </m-navbar-item>
+    </m-navbar>
+
+    <h2>Main navbar with sub menu</h2>
+    <m-navbar skin="nav-main" :selected.sync="selectedItemMainMenu" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1" @click="toggleNavPres">
+            Présentation du cours
+        </m-navbar-item>
+        <m-navbar-item value="item2" @click="toggleNavMod">
+            Modules d'apprentissage
+        </m-navbar-item>
+        <m-navbar-item value="item3" @click="closeNav">
+            Évaluations et travaux pratiques
+        </m-navbar-item>
+        <m-navbar-item value="item4" @click="closeNav">
+            Résultats
+        </m-navbar-item>
+        <m-navbar-item value="item5" @click="closeNav">
+            Ressources complémentaires et références bibliographiques
+        </m-navbar-item>
+        <m-navbar-item value="item6" @click="closeNav">
+            Calendrier de session
+        </m-navbar-item>
+    </m-navbar>
+    <m-accordion-transition>
+        <div v-if="navOpenPres" >
+            <m-navbar skin="nav-sub" :selected.sync="selectedItemPres">
+                <m-navbar-item value="item1">
+                    Introduction
+                </m-navbar-item>
+                <m-navbar-item value="item2">
+                    Liens entre le cours et le programme
+                </m-navbar-item>
+                <m-navbar-item value="item3">
+                    Modalités particulières de l’offre de cours
+                </m-navbar-item>
+                <m-navbar-item value="item4">
+                    Objectifs généraux
+                </m-navbar-item>
+                <m-navbar-item value="item5">
+                    Objectifs particuliers
+                </m-navbar-item>
+                <m-navbar-item value="item6">
+                    Éléments de contenu
+                </m-navbar-item>
+                <m-navbar-item value="item7">
+                    Approche pédagogique
+                </m-navbar-item>
+                <m-navbar-item value="item8">
+                    Modalités d'encadrement
+                </m-navbar-item>
+                <m-navbar-item value="item9">
+                    Appréciation de l'enseignement
+                </m-navbar-item>
+            </m-navbar>
+        </div>
+    </m-accordion-transition>
+    <m-accordion-transition>
+        <div v-if="navOpenMod" >
+            <m-navbar skin="nav-sub" :selected.sync="selectedItemMod">
+                <m-navbar-item value="item1">
+                    Module de la semaine 1
+                </m-navbar-item>
+                <m-navbar-item value="item2">
+                    Module de la semaine 2
+                </m-navbar-item>
+                <m-navbar-item value="item3">
+                    Module de la semaine 3
+                </m-navbar-item>
+                <m-navbar-item value="item4">
+                    Module de la semaine 4
+                </m-navbar-item>
+                <m-navbar-item value="item5">
+                    Module de la semaine 5
+                </m-navbar-item>
+                <m-navbar-item value="item6">
+                    Module de la semaine 6
+                </m-navbar-item>
+                <m-navbar-item value="item7">
+                    Module de la semaine 7
+                </m-navbar-item>
+                <m-navbar-item value="item8">
+                    Module de la semaine 8
+                </m-navbar-item>
+                <m-navbar-item value="item9">
+                    Module de la semaine 9
+                </m-navbar-item>
+            </m-navbar>
+        </div>
+    </m-accordion-transition>
 </div>

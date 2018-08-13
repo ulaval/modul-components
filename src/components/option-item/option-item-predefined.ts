@@ -2,11 +2,11 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
-import WithRender from './menu-item-predefined.html';
+import WithRender from './option-item-predefined.html';
 
 @Component
 @WithRender
-export class MMenuItemPredefined extends ModulVue {
+export class MOptionItemPredefined extends ModulVue {
     @Prop()
     public disabled: boolean;
 
