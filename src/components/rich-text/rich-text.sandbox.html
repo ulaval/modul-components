@@ -1,40 +1,8 @@
 <div>
-    <h3>Froala Text Editor</h3>
-    <p class="m-u--margin-bottom">
-        Fonctionne sans options spécifiée
-    </p>
-    <div class="m-u--margin-top">
-        <m-button @click="focus = !focus">Change focus (now: {{ focus }})</m-button>
-        <m-button @click="waiting = !waiting">Waiting (now: {{ waiting }})</m-button>
-        <m-button @click="disabled = !disabled">Disabled (now: {{ disabled }})</m-button>
+    <!-- Sandbox template -->
+    <h3>Froala Text Reader</h3>
+    <h5>affiche du texte riche</h5>
+    <div>
+        <m-rich-text :value="model"></m-rich-text>
     </div>
-    <div class="m-u--margin-top">
-        <m-textfield label="Error message" v-model="errorMessage"></m-textfield>
-        <m-textfield label="Valid message" v-model="validMessage" :disabled="errorMessage"></m-textfield>
-        <m-textfield label="Helper message" v-model="helperMessage"></m-textfield>
-    </div>
-    <m-rich-text-edit class="m-u--margin-top--l"
-        v-model="model"
-        :toolbar-sticky-offset="58"
-        label="RichText"
-        :max-width="'large'"
-        :placeholder="'some placeholder'"
-        :focus="focus"
-        :error="error"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"
-        :waiting="waiting"
-        :disabled="disabled"></m-rich-text-edit>
-    <m-rich-text class="m-u--margin-top" :value="model"></m-rich-text>
-    <m-edit-window>
-        <m-button class="m-u--margin-top--l" slot="trigger">Afficher formulaire pleine page</m-button>
-        <h2 class="m-u--no-margin" slot="header">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae impedit sed quod necessitatibus incidunt itaque numquam ipsum quam earum, quisquam ea, assumenda quibusdam porro eveniet magnam accusantium expedita, recusandae optio.
-        </h2>
-        <div>
-            <m-rich-text-edit scrollable-container=".m-edit-window__body" class="p-formulaire-texte__textearea" :label="'pouet'"
-                tag-style="p" max-width="720px" v-model="fullScreenFormModel"></m-rich-text-edit>
-        </div>
-    </m-edit-window>
 </div>
