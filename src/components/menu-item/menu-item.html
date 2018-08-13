@@ -1,15 +1,39 @@
 <li class="m-menu-item"
-    :class="{ 'm--is-disabled' : disabled,
-              'm--has-icon-spacing': hasIcon }"
-    ref="m-menu-item"
-    :tabindex="disabled ? '-1' : '0'"
-    role="option"
-    @keydown.enter.prevent="onClick"
-    @click.prevent="onClick">
-    <span class="m-menu-item__icon" ref="icon" v-if="hasIcon">
-        <m-icon :name="iconName" v-if="hasIconNameProp"></m-icon>
+    :class="{'m--is-selected': selected,
+             'm--is-item-selected': itemSelected,
+             'm--is-disabled': isDisabled,
+             'm--is-group': group,
+             'm--is-open': propOpen,
+             'm--is-inside-group' : groupItemRoot,
+             'm--is-anim-ready': isAnimReady}"
+    role="none">
+    <router-link class="m-menu-item__link"
+                 :to="url"
+                 @click="onClick"
+                 :aria-selected="selected"
+                 role="menuitem"
+                 v-if="isUrl">
+        <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
+        <span class="m-menu-item__label">{{ label }}</span>
+    </router-link>
+
+    <span class="m-menu-item__link"
+          @click="onClick"
+          @keypress.enter="onClick"
+          :tabindex="isDisabled ? '-1' : '0'"
+          :aria-selected="selected"
+          :aria-haspopup="group"
+          :aria-controls="group ? ariaControls : undefined"
+          :aria-expanded="group ? propOpen : undefined"
+          v-else>
+        <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
+        <span class="m-menu-item__label">{{ label }}</span>
+        <m-plus class="m-menu-item__plus" skin="current-color" :open="propOpen" :large="itemSelected" ref="plus" v-if="group"></m-plus>
     </span>
-    <span class="m-menu-item__text" ref="text">
-        <slot></slot>
-    </span>
+
+    <m-accordion-transition :transition="isAnimReady">
+        <ul :id="ariaControls" class="m-menu-item__group" ref="group" :aria-hidden="!propOpen" v-show="propOpen">
+            <slot></slot>
+        </ul>
+    </m-accordion-transition>
 </li>

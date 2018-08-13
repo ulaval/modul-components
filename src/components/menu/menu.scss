@@ -1,20 +1,54 @@
 @import 'abstracts/variables';
+@import 'menu-skins';
+@import '../accordion/accordion-transition.scss';
 
 .m-menu {
-    display: inline-flex;
+    overflow: hidden;
+    user-select: none;
 
-    &__list {
-        width: 100%;
+    &__trigger {
+        transition: color $m-transition-duration ease, font-weight $m-transition-duration ease;
+        position: relative;
+        z-index: 2;
+        outline: none;
+        padding: $m-spacing;
+        font-weight: $m-font-weight--black;
+
+        .m-menu.m--is-skin-light & {
+            color: rgba($m-color--white, 0.7);
+            background: $m-menu-color--skin-light-bg-light;
+            box-shadow: 0 1px 2px rgba($m-color--black, 0.1);
+        }
+
+        .m-menu.m--is-skin-dark & {
+            color: $m-color--grey-light;
+            background: $m-menu-color--skin-dark-bg-light;
+            box-shadow: 0 1px 2px rgba($m-color--black, 0.5);
+        }
+
+        .m-menu.m--is-open & {
+            color: $m-color--white;
+        }
+
+        .m-menu:not(.m--is-disabled) & {
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                color: $m-color--white;
+            }
+        }
+
+        .m-menu.m--is-disabled & {
+            cursor: not-allowed;
+        }
+    }
+
+    &__body {
+        position: relative;
+        z-index: 1;
         margin: 0;
         padding: 0;
-        max-height: 213px; // Magic number: height of 4 items
-        overflow-x: hidden;
-        overflow-y: auto;
-        border: 1px solid $m-color--border;
-        border-radius: $m-border-radius--s;
-        background: $m-color--white;
-        box-shadow: $m-box-shadow;
-
-        @include m-scrollbar();
+        list-style: none;
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-beta.43",
+    "version": "1.0.0-beta.45",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -79,7 +79,7 @@
         "jquery": "^3.3.1",
         "mobile-drag-drop": "^2.3.0-rc.1",
         "moment": "^2.19.3",
-        "node-sass": "^4.9.0",
+        "node-sass": "^4.9.2",
         "portal-vue": "~1.1.1",
         "postcss-loader": "^2.0.9",
         "sass-loader": "^6.0.6",

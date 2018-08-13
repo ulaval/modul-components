@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MPlus should render correctly 1`] = `<span class="m-plus m--is-skin-default"></span>`;
+
+exports[`MPlus should render correctly with border prop 1`] = `<span class="m-plus m--is-skin-default m--has-border"></span>`;
+
+exports[`MPlus should render correctly with disabled prop 1`] = `<span class="m-plus m--is-skin-default m--is-disabled"></span>`;
+
+exports[`MPlus should render correctly with large prop 1`] = `<span class="m-plus m--is-skin-default m--is-large"></span>`;
+
+exports[`MPlus should render correctly with open prop 1`] = `<span class="m-plus m--is-skin-default m--is-open"></span>`;
+
+exports[`MPlus should render correctly with skin prop light 1`] = `<span class="m-plus m--is-skin-light"></span>`;
