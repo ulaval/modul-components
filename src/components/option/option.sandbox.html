@@ -1,0 +1,29 @@
+<div>
+    <!-- Sandbox template -->
+    <h3>Test Title</h3>
+    <p class="m-u--margin-bottom">
+        Test description
+        <!-- if relevant, add link to PR
+        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
+        -->
+    </p>
+    <m-option>
+    <m-option-item-add @click="doAdd"></m-option-item-add>
+        <m-option-item-edit></m-option-item-edit>
+        <m-option-item-archive></m-option-item-archive>
+        <m-option-item-delete :disabled="true"></m-option-item-delete>
+    </m-option>
+    <m-option>
+        <m-option-item>Test 1</m-option-item>
+        <m-option-item>Test 2</m-option-item>
+        <m-option-item icon-name="m-svg__clock">Temps</m-option-item>
+    </m-option>
+    <m-option>
+        <m-option-item>Test 1</m-option-item>
+        <m-option-item :disabled="true">Test 2</m-option-item>
+        <m-option-item>Test 3</m-option-item>
+        <m-option-item>Test 4</m-option-item>
+        <m-option-item>Test 5</m-option-item>
+        <m-option-item>Test 6</m-option-item>
+    </m-option>
+</div>

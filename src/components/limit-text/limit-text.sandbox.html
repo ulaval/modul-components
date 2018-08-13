@@ -200,6 +200,22 @@
                 eu id consequat esse veniam.</p>
         </m-limit-text>
     </div>
+    <h3>Open with props</h3>
+    <p class="m-u--margin-bottom">Limit-text with text and bold text, 2 lines limit, open param.</p>
+    <div>
+        <m-button @click="testOpen = !testOpen">Toggle open</m-button>
+        <m-limit-text :open="testOpen"lines="2">
+            <p>Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua anim tempor
+                ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa laborum
+                ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id Eiusmod sint minim eu id
+                consequat esse veniam. <b>Ullamco labore do sit sit commodo.</b>Deserunt ad amet sint in esse aute. Ut est cupidatat
+                mollit ipsum aliqua nostrud. Proident aliqua anim tempor ut excepteur tempor ipsum qui eu. Anim culpa <b>voluptate occaecat veniam amet</b> reprehenderit
+                irure.Culpa laborum ullamco sint quis exercitation <b>amet ad est sunt commodo. Eiusmod sint Lorem ipsum, dolor</b>
+                sit amet consectetur adipisicing elit. Aliquid voluptates a sapiente beatae odio architecto delectus repellat
+                dolorem soluta accusamus. Ex, blanditiis illum explicabo quo mollitia nesciunt officiis facilis vero. minim
+                eu id consequat esse veniam.</p>
+        </m-limit-text>
+    </div>
     <h3>Dynamic text, 2 lines</h3>
     <p class="m-u--margin-bottom">Exemple of dynamic text with 2 lines limit. Change text by pressing button</p>
     <div>

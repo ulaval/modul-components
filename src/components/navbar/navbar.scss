@@ -1,22 +1,81 @@
 @import 'abstracts/variables';
 
+@mixin m-navbar-linear-gradient($color, $position) {
+    background: linear-gradient(to $position, rgba($color, 1), rgba($color, 0));
+}
+
 .m-navbar {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-
-    &.m--is-skin-darker {
-        background-color: $m-color--grey-darker;
+    &__max-width {
+        position: relative;
+        margin: 0 auto;
     }
 
-    &.m--is-skin-darkest {
-        border-top: 1px solid $m-color--black;
-        box-shadow: 0 0 7px $m-color--black inset;
-        background-color: $m-color--grey-darkest;
+    &__contents {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
     }
 
-    &.m--is-skin-light {
+    &:not(.m--is-skin-tab-light):not(.m--is-skin-tab-dark) {
+        .m-navbar__button {
+            &.m--is-right {
+                button {
+                    margin-right: -$m-padding;
+                }
+            }
+
+            &.m--is-left {
+                button {
+                    margin-left: -$m-padding;
+                }
+            }
+        }
+    }
+
+    &.m--is-skin-nav-main {
+        background: $m-color--grey-darker;
+
+        .m-navbar__button {
+            &.m--is-right {
+                @include m-navbar-linear-gradient($m-color--grey-darker, left);
+            }
+
+            &.m--is-left {
+                @include m-navbar-linear-gradient($m-color--grey-darker, right);
+            }
+        }
+    }
+
+    &.m--is-skin-nav-sub {
+        background: $m-color--grey-darkest;
+
+        .m-navbar__button {
+            &.m--is-right {
+                @include m-navbar-linear-gradient($m-color--grey-darkest, left);
+            }
+
+            &.m--is-left {
+                @include m-navbar-linear-gradient($m-color--grey-darkest, right);
+            }
+        }
+    }
+
+    &.m--is-skin-tab-underline,
+    &.m--is-skin-tab-soft,
+    &.m--is-skin-tab-arrow {
+        .m-navbar__button {
+            &.m--is-right {
+                @include m-navbar-linear-gradient($m-color--white, left);
+            }
+
+            &.m--is-left {
+                @include m-navbar-linear-gradient($m-color--white, right);
+            }
+        }
+    }
+
+    &.m--is-skin-tab-underline {
         &::before {
             position: absolute;
             left: 0;
@@ -27,9 +86,13 @@
             content: '';
             background: $m-color--border;
         }
+
+        .m-navbar__button {
+            bottom: $m-border-width--l;
+        }
     }
 
-    &.m--is-skin-arrow {
+    &.m--is-skin-tab-arrow {
         &::before {
             position: absolute;
             right: 0;
@@ -40,32 +103,115 @@
             height: $m-border-width--s;
             background: $m-color--grey;
         }
+
+        .m-navbar__button {
+            bottom: 7px; // Magic number
+        }
+    }
+
+    &.m--is-skin-tab-light,
+    &.m--is-skin-tab-dark {
+        .m-navbar__button {
+            $m-navbar--button-width: 14px;
+
+            &.m--is-left::after,
+            &.m--is-right::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: $m-navbar--button-width;
+            }
+
+            &.m--is-left {
+                &::after {
+                    right: 0;
+                    transform: translateX(100%);
+                    background: linear-gradient(to right, rgba($m-color--black, 0.1), rgba($m-color--black, 0));
+                }
+            }
+
+            &.m--is-right {
+                &::before {
+                    left: 0;
+                    transform: translateX(-100%);
+                    background: linear-gradient(to left, rgba($m-color--black, 0.1), rgba($m-color--black, 0));
+                }
+            }
+        }
+    }
+
+    &.m--is-skin-tab-dark {
+        .m-navbar__button {
+            background: $m-color--grey-darkest;
+
+            &.m--is-left {
+                border-right: 1px solid $m-color--grey-darker;
+            }
+
+            &.m--is-right {
+                border-left: 1px solid $m-color--grey-darker;
+            }
+        }
+    }
+
+    &.m--is-skin-tab-light {
+        .m-navbar__button {
+            background: $m-color--grey-light;
+
+            &.m--is-left {
+                border-right: 1px solid $m-color--white;
+            }
+
+            &.m--is-right {
+                border-left: 1px solid $m-color--white;
+            }
+        }
+    }
+
+    &.m--is-skin-nav-soft {
+        background: rgba($m-color--white, 0.2);
+    }
+
+    &.m--is-anim-ready {
+        .m-navbar {
+            &__button {
+                &.m--is-enter-active,
+                &.m--is-leave-active {
+                    transition: max-width $m-transition-duration--l ease, opacity $m-transition-duration ease,;
+                }
+
+                &.m--is-enter,
+                &.m--is-leave-to {
+                    max-width: 0;
+                    opacity: 0;
+                }
+            }
+
+            &__line,
+            &__arrow {
+                transition: transform $m-transition-duration ease, width $m-transition-duration ease;
+            }
+        }
     }
 
     &__button {
-        position: relative;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
         max-width: 64px;
+        stroke-width: 2;
 
-        .m--is-skin-darker,
-        .m--is-skin-darkest & {
-            color: $m-color--grey-light;
-            stroke-width: 2;
+        &.m--is-left {
+            left: 0;
         }
 
-        .m--is-anim-ready & {
-            &.show-enter-active,
-            &.show-leave-active {
-                transition: opacity 0.3s ease, max-width 0.4s ease;
-            }
-
-            &.show-enter,
-            &.show-leave-to {
-                opacity: 0;
-                max-width: 0;
-            }
+        &.m--is-right {
+            right: 0;
         }
     }
 
@@ -82,17 +228,12 @@
         padding: 0;
         margin: 0;
         display: inline-flex;
-        justify-content: space-between;
         text-align: center;
     }
 
     &__line,
     &__arrow {
         position: absolute;
-
-        &.m--is-anim-active {
-            transition: transform $m-transition-duration ease, width $m-transition-duration ease;
-        }
     }
 
     &__line {
@@ -121,50 +262,6 @@
         &::after {
             color: $m-color--white;
             top: -1px;
-        }
-    }
-
-    &-item {
-        position: relative;
-        display: flex;
-        align-items: center;
-        user-select: none;
-
-        &:not(.m--is-selected):not(.m--is-disabled) {
-            &,
-            a,
-            a:visited,
-            button {
-                cursor: pointer;
-            }
-        }
-
-        &.m--is-disabled {
-            &,
-            a,
-            a:visited,
-            button {
-                cursor: not-allowed;
-            }
-        }
-
-        &,
-        a,
-        a:visited,
-        button {
-            font-family: $m-font-family;
-            font-size: $m-font-size;
-            font-weight: $m-font-weight;
-        }
-
-        button {
-            border: none;
-            background: none;
-        }
-
-        &,
-        :focus {
-            outline: none;
         }
     }
 }

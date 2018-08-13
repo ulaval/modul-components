@@ -8,7 +8,8 @@ import WithRender from './plus.html?style=./plus.scss';
 
 export enum MPlusSkin {
     Default = 'default',
-    Light = 'light'
+    Light = 'light',
+    CurrentColor = 'current-color'
 }
 
 @WithRender
@@ -28,7 +29,8 @@ export class MPlus extends ModulVue {
         default: MPlusSkin.Default,
         validator: value =>
             value === MPlusSkin.Default ||
-            value === MPlusSkin.Light
+            value === MPlusSkin.Light ||
+            value === MPlusSkin.CurrentColor
     })
     public skin: string;
 
@@ -39,10 +41,6 @@ export class MPlus extends ModulVue {
         if (!this.disabled) {
             this.$emit('click', event);
         }
-    }
-
-    private get skinLight(): boolean {
-        return this.skin === MPlusSkin.Light;
     }
 }
 
