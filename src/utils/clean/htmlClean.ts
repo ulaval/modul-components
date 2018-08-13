@@ -1,13 +1,6 @@
 function createMultiTagsRegexString(tags: string[]): string {
     // create a string for a multi tags regexp
-    let fullTagForRegex: string = '(';
-    for (let i: number = 0; i < tags.length; i++) {
-        const tag: string = tags[i];
-        fullTagForRegex += (i === tags.length - 1) ? `${tag}` : `${tag}|`;
-    }
-    fullTagForRegex += ')';
-
-    return fullTagForRegex;
+    return `(${tags.join('|')})`;
 }
 
 export function eraseNewLines(html: string): string {
