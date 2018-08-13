@@ -14,10 +14,6 @@
         "extensionFileMsg": "The file extension is not accepted.",
         "maxSizeMsg": "File is denied because its size exceeds the allowable limit",
         "maxNumberMsg": "The maximum number of files that can be added simultaneously is reached",
-        "errorMsg": "An error occurred during the upload.",
-        "size-b": "b",
-        "size-kb": "Kb",
-        "size-mb": "Mb",
-        "size-gb": "Gb"
+        "errorMsg": "An error occurred during the upload."
     }
 }

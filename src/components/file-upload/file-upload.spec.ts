@@ -6,6 +6,7 @@ import { createMockFile, createMockFileList } from '../../../tests/helpers/file'
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
 import I18nPlugin from '../../components/i18n/i18n';
+import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileStatus } from '../../utils/file/file';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
@@ -18,11 +19,13 @@ import FileUploadPlugin, { MFileUpload } from './file-upload';
 describe('MFileUpload', () => {
     beforeEach(() => {
         resetModulPlugins();
+        Vue.use(FileSizeFilterPlugin);
         Vue.use(FilePlugin);
         Vue.use(I18nPlugin);
         Vue.use(MediaQueriesPlugin);
 
         addMessages(Vue, ['components/file-upload/file-upload.lang.en.json']);
+        addMessages(Vue, ['filters/filesize/filesize.lang.en.json']);
     });
 
     it('should render correctly', () => {

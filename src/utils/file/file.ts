@@ -108,7 +108,7 @@ interface FileStoreRx extends Vue {
     files: MFile[];
 }
 
-const extractExtension: (file: File) => string = (file: File): string => {
+export const extractExtension: (file: File) => string = (file: File): string => {
     const match: RegExpMatchArray | null = file.name.match(/\.([a-zA-Z0-9]{3,4})$/);
     return match ? match[1].toLowerCase() : '';
 };

@@ -1,0 +1,8 @@
+{
+    "f-m-filesize": {
+        "size-b": "b",
+        "size-kb": "Kb",
+        "size-mb": "Mb",
+        "size-gb": "Gb"
+    }
+}
