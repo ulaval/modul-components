@@ -21,9 +21,7 @@ export function filterByTag(tag: string, html: string): string {
 }
 
 export function filterByTags(tags: string[], html: string): string {
-    tags.forEach((tag) => { html = filterByTag(tag, html); });
-
-    return html;
+    return filterByTag(createMultiTagsRegexString(tags), html);
 }
 
 export function replaceTag(tag, replace, html): string {
