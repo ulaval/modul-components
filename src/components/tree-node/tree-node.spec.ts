@@ -1,8 +1,12 @@
-import { shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import { MSelectOption, MTreeFormat, TreeNode } from '../tree/tree';
+import { MLinkMode } from '../link/link';
+import { TreeNode } from '../tree/tree';
 import { MTreeNode } from './tree-node';
+
+const CHILD_NODE_LIST: RefSelector = { ref: 'childNodeList' };
+const LINK: RefSelector = { ref: 'link' };
 
 const NODE_ELEMENT_LABEL: string = 'Node 1';
 const NODE_ELEMENT_ID: string = 'Node 1';
@@ -13,71 +17,54 @@ const TREE_NODE_SELECTED: string[] = ['/Node 1'];
 const TREE_NODE_SELECTED_2: string[] = ['/Node 2'];
 const TREE_NODE_SELECTED_3: string[] = ['/Node 3/Node 4'];
 
-const TREE_NODE_WITHOUT_CHILDREN: TreeNode<MTreeFormat> = {
-    content: {
-        nodeLabel: NODE_ELEMENT_LABEL,
-        nodeId: NODE_ELEMENT_ID
-    },
+const TREE_NODE_WITHOUT_CHILDREN: TreeNode = {
+    label: NODE_ELEMENT_LABEL,
+    id: NODE_ELEMENT_ID
+};
+
+const TREE_NODE_WITHOUT_CHILDREN_NOT_VALID: TreeNode = {
+    label: NODE_ELEMENT_LABEL,
+    id: '',
     children: []
 };
 
-const TREE_NODE_WITHOUT_CHILDREN_NOT_VALID: TreeNode<MTreeFormat> = {
-    content: {
-        nodeLabel: NODE_ELEMENT_LABEL,
-        nodeId: ''
-    },
+const TREE_NODE_WITH_CHILDREN_EMPTY: TreeNode = {
+    label: 'Node 2',
+    id: 'Node 2',
+    hasChildren: true,
     children: []
 };
 
-const TREE_NODE_WITH_CHILDREN_EMPTY: TreeNode<MTreeFormat> = {
-    content: {
-        nodeLabel: 'Node 2',
-        nodeId: 'Node 2',
-        hasChildren: true
-    },
-    children: []
-};
-
-const TREE_NODE_WITH_CHILDREN: TreeNode<MTreeFormat> = {
-    content: {
-        nodeLabel: 'Node 3',
-        nodeId: 'Node 3'
-    },
+const TREE_NODE_WITH_CHILDREN: TreeNode = {
+    label: 'Node 3',
+    id: 'Node 3',
     children: [
         {
-            content: {
-                nodeLabel: 'Node 4',
-                nodeId: 'Node 4'
-            },
+            label: 'Node 4',
+            id: 'Node 4',
             children: []
         }
     ]
 };
 
-const TREE_NODE_WITH_CHILDREN_NOT_VALID: TreeNode<MTreeFormat> = {
-    content: {
-        nodeLabel: 'Node 3',
-        nodeId: '',
-        hasChildren: true
-    },
+const TREE_NODE_WITH_CHILDREN_NOT_VALID: TreeNode = {
+    label: 'Node 3',
+    id: '',
+    hasChildren: true,
     children: [
         {
-            content: {
-                nodeLabel: 'Node 4',
-                nodeId: 'Node 4'
-            },
+            label: 'Node 4',
+            id: 'Node 4',
             children: []
         }
     ]
 };
 
-let node: TreeNode<MTreeFormat>;
+let node: TreeNode;
 let selectedNodes: string[] = [];
-let currentPath: string = '';
-let selectionIcon: string = '';
-let selectionQuantity: MSelectOption = MSelectOption.SINGLE;
-let allOpen: boolean = false;
-let fileTree: boolean = false;
+let selectable: boolean = true;
+let icons: boolean = false;
+let path: string = '';
 
 let wrapper: Wrapper<MTreeNode>;
 
@@ -87,11 +74,9 @@ const initializeShallowWrapper: any = () => {
         propsData: {
             node,
             selectedNodes,
-            selectionIcon,
-            selectionQuantity,
-            allOpen,
-            fileTree,
-            currentPath
+            selectable,
+            icons,
+            path
         }
     });
 };
@@ -119,29 +104,12 @@ describe('MTreeNode', () => {
                     expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
                 });
 
-                it(`The node title should be "Node 1"`, () => {
-                    expect(wrapper.vm.nodeTitle).toEqual(NODE_ELEMENT_LABEL);
+                it(`The node label should be "Node 1"`, () => {
+                    expect(wrapper.vm.label).toEqual(NODE_ELEMENT_LABEL);
                 });
 
-                it(`The node has not valid children`, () => {
-
-                    expect(wrapper.vm.hasValidChildren).toBeFalsy();
-                });
-
-                it(`The node is valid`, () => {
-                    let isValid: boolean = wrapper.vm.validNode;
-
-                    expect(isValid).toBeTruthy();
-                });
-
-                it(`We don't generate an error`, () => {
-                    wrapper.setMethods({ generateErrorTree: jest.fn() });
-
-                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
-                });
-
-                it(`We don't emit generateErrorTree`, () => {
-                    expect(wrapper.emitted('generateErrorTree')).toBeFalsy();
+                it(`The node does not have children`, () => {
+                    expect(wrapper.vm.hasChildren).toBeFalsy();
                 });
             });
 
@@ -150,22 +118,6 @@ describe('MTreeNode', () => {
                     node = TREE_NODE_WITHOUT_CHILDREN_NOT_VALID;
                     initializeShallowWrapper();
                     wrapper.setMethods({ generateErrorTree: jest.fn() });
-                });
-
-                it(`The node is not valid`, () => {
-                    expect(wrapper.vm.validNode).toBeFalsy();
-                });
-
-                it(`We generate an error`, () => {
-                    wrapper.setMethods({ generateErrorTree: jest.fn() });
-
-                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalledWith();
-                });
-
-                it(`We emit generateErrorTree`, () => {
-                    wrapper.vm.generateErrorTree();
-
-                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalledWith();
                 });
             });
 
@@ -180,20 +132,6 @@ describe('MTreeNode', () => {
 
             it(`Should render correctly`, () => {
                 expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-            });
-
-            it(`The node is valid`, () => {
-                expect(wrapper.vm.hasValidChildren).toBeTruthy();
-            });
-
-            it(`We don't generate an error`, () => {
-                wrapper.setMethods({ generateErrorTree: jest.fn() });
-
-                expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
-            });
-
-            it(`We don't emit generateErrorTree`, () => {
-                expect(wrapper.emitted('generateErrorTree')).toBeFalsy();
             });
 
         });
@@ -212,46 +150,7 @@ describe('MTreeNode', () => {
                 });
 
                 it(`Should have children`, () => {
-                    expect(wrapper.vm.childrenNotEmpty).toBeTruthy();
-                });
-
-                it(`The node is valid`, () => {
-                    expect(wrapper.vm.hasValidChildren).toBeTruthy();
-                });
-
-                it(`We don't generate an error`, () => {
-                    wrapper.setMethods({ generateErrorTree: jest.fn() });
-
-                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalledTimes(0);
-                });
-
-                it(`We don't emit generateErrorTree`, () => {
-                    expect(wrapper.emitted('generateErrorTree')).toBeFalsy();
-                });
-
-            });
-
-            describe(`and the node is not valid`, () => {
-
-                beforeEach(() => {
-                    node = TREE_NODE_WITH_CHILDREN_NOT_VALID;
-                    initializeShallowWrapper();
-                });
-
-                it(`The node is not valid`, () => {
-                    expect(wrapper.vm.hasValidChildren).toBeFalsy();
-                });
-
-                it(`We generate an error`, () => {
-                    wrapper.setMethods({ generateErrorTree: jest.fn() });
-
-                    expect(wrapper.vm.generateErrorTree).toHaveBeenCalledWith();
-                });
-
-                it(`We emit generateErrorTree`, () => {
-                    wrapper.vm.generateErrorTree();
-
-                    expect(wrapper.emitted('generateErrorTree')).toBeTruthy();
+                    expect(wrapper.vm.hasChildren).toBeTruthy();
                 });
 
             });
@@ -261,7 +160,7 @@ describe('MTreeNode', () => {
                     selectedNodes = TREE_NODE_SELECTED_3;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.open).toBeTruthy();
+                    expect(wrapper.find(CHILD_NODE_LIST)).toBeTruthy();
                 });
             });
 
@@ -272,56 +171,47 @@ describe('MTreeNode', () => {
                     selectedNodes = TREE_NODE_SELECTED_2;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.open).toBeFalsy();
-                });
-            });
-
-            describe(`When allOpen is true`, () => {
-                it(`The node should be open`, () => {
-                    node = TREE_NODE_WITH_CHILDREN;
-                    allOpen = true;
-                    initializeShallowWrapper();
-
-                    expect(wrapper.vm.open).toBeTruthy();
-
+                    expect(wrapper.find(CHILD_NODE_LIST)).toBeTruthy();
                 });
             });
 
         });
 
-        describe(`When selectionQuantity = single`, () => {
+        describe(`When selectionMode = single`, () => {
 
             beforeEach(() => {
+                node = TREE_NODE_WITHOUT_CHILDREN;
                 initializeShallowWrapper();
             });
 
-            it(`Should emit "newNodeSelectected"`, () => {
-                wrapper.vm.selectNewNode(node[0]);
+            it(`Should emit "click"`, () => {
+                wrapper.find(LINK).trigger('click');
 
-                expect(wrapper.emitted('newNodeSelectected')).toBeTruthy();
+                expect(wrapper.emitted('click')).toBeTruthy();
             });
 
             it(`The link should be a button`, () => {
-                expect(wrapper.vm.typeLink).toEqual('button');
+                expect(wrapper.vm.linkMode).toEqual(MLinkMode.Button);
             });
 
         });
 
-        describe(`When selectionQuantity = none`, () => {
+        describe(`When not selectable`, () => {
 
             beforeEach(() => {
-                selectionQuantity = MSelectOption.NONE;
+                selectable = false;
+                node = TREE_NODE_WITHOUT_CHILDREN;
                 initializeShallowWrapper();
             });
 
-            it(`Should be able to select a node`, () => {
-                wrapper.vm.selectNewNode(node[0]);
+            it(`Should not be able to select a node`, () => {
+                wrapper.find(LINK).trigger('click');
 
-                expect(wrapper.emitted('newNodeSelectected')).toBeFalsy();
+                expect(wrapper.emitted('click')).toBeFalsy();
             });
 
             it(`The link should be text`, () => {
-                expect(wrapper.vm.typeLink).toEqual('text');
+                expect(wrapper.vm.linkMode).toEqual(MLinkMode.Text);
             });
 
         });
@@ -343,20 +233,7 @@ describe('MTreeNode', () => {
                     });
 
                     it(`The node should be selected`, () => {
-                        expect(wrapper.vm.nodeSelected).toBeTruthy();
-                    });
-
-                    it(`The icon should not be visible`, () => {
-                        expect(wrapper.vm.selectedIcon).toBeFalsy();
-                    });
-                });
-
-                describe(`and selectionIcon is empty`, () => {
-                    it(`The icon should be visible`, () => {
-                        selectionIcon = SELECTION_ICON;
-                        initializeShallowWrapper();
-
-                        expect(wrapper.vm.selectedIcon).toBeTruthy();
+                        expect(wrapper.vm.isSelected).toBeTruthy();
                     });
                 });
             });
@@ -366,7 +243,7 @@ describe('MTreeNode', () => {
                     selectedNodes = TREE_NODE_SELECTED_2;
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.nodeSelected).toBeFalsy();
+                    expect(wrapper.vm.isSelected).toBeFalsy();
                 });
             });
 
@@ -375,7 +252,7 @@ describe('MTreeNode', () => {
                     selectedNodes = [];
                     initializeShallowWrapper();
 
-                    expect(wrapper.vm.nodeSelected).toBeFalsy();
+                    expect(wrapper.vm.isSelected).toBeFalsy();
                 });
             });
         });
@@ -383,11 +260,11 @@ describe('MTreeNode', () => {
         describe(`When the node has a parent`, () => {
 
             it(`Should return the right current path`, () => {
-                currentPath = PARENT_PATH;
+                path = PARENT_PATH;
                 node = TREE_NODE_WITHOUT_CHILDREN;
                 initializeShallowWrapper();
 
-                expect(wrapper.vm.propCurrentPath).toEqual(PARENT_PATH + '/' + NODE_ELEMENT_ID);
+                expect(wrapper.vm.currentPath).toEqual(PARENT_PATH + '/' + NODE_ELEMENT_ID);
             });
         });
 

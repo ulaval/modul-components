@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
@@ -8,111 +8,97 @@ import I18nPlugin from '../i18n/i18n';
 import TreeNodePlugin from '../tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
 
-export interface MTreeFormat {
-    nodeId: string;
-    nodeLabel?: string;
+export interface TreeNode {
+    id: string;
+    label?: string;
+    children?: TreeNode[];
     hasChildren?: boolean;
+    data?: any;
 }
 
-export interface TreeNode<T extends MTreeFormat> {
-    content: T;
-    children?: TreeNode<T>[];
-}
-
-export enum MSelectOption {
-    NONE = '0',
-    SINGLE = '1',
-    MULTIPLE = '2'
+export enum MSelectionMode {
+    None = '0',
+    Single = '1',
+    Multiple = '2'
 }
 
 @WithRender
 @Component
 export class MTree extends ModulVue {
-
     @Prop()
-    public tree: TreeNode<MTreeFormat>[];
+    public tree: TreeNode[];
 
     @Prop({
-        default: MSelectOption.NONE,
+        default: MSelectionMode.Single,
         validator: value =>
-            value === MSelectOption.NONE ||
-            value === MSelectOption.SINGLE ||
-            value === MSelectOption.MULTIPLE
+            value === MSelectionMode.None ||
+            value === MSelectionMode.Single ||
+            value === MSelectionMode.Multiple
     })
-    public selectionQuantity: MSelectOption;
-
-    @Prop({ default: '' })
-    public selectionIcon: string;
+    public selectionMode: MSelectionMode;
 
     @Prop()
     public selectedNodes: string[];
 
-    @Prop({ default: false })
-    public allOpen: boolean;
+    @Prop()
+    public icons: boolean;
 
-    @Prop({ default: false })
-    public fileTree: boolean;
-
-    public treeVisibilityTxt: string = '';
+    public propSelectedNodes: string[] = this.selectedNodes || [];
     public errorTree: boolean = false;
 
-    private selectedNodeValid: boolean = false;
-    private internalSelectedNodes: string[] = [];
-    private internalAllOpen: boolean = false;
+    private selectedNodesFound: string[] = [];
 
-    public toggleAllVisibility(): void {
-        this.propAllOpen = !this.propAllOpen;
-        this.setAllOpenTxt();
-    }
-
-    public selectNewNode(path: string): void {
-        this.propSelectedNodes = [path];
-        this.$emit('newNodeSelected', path);
-    }
-
-    public selectedNodeFound(): void {
-        this.selectedNodeValid = true;
-    }
-
-    public generateErrorTree(): void {
-        this.errorTree = true;
-    }
-
-    protected created(): void {
-        this.propSelectedNodes = this.selectedNodes ? this.selectedNodes : [];
-        this.selectedNodeValid = !this.propSelectedNodes.length;
-        this.propAllOpen = this.allOpen;
-        this.setAllOpenTxt();
-    }
-
-    protected mounted(): void {
-        if (!this.selectedNodeValid) {
-            console.error(`modUL - The selected node was not found: ` + '\"' + this.propSelectedNodes[0] + '\"');
+    public onClick(path: string): void {
+        if (this.propSelectedNodes.indexOf(path) === -1) {
+            if (this.selectionMode === MSelectionMode.Multiple) {
+                this.propSelectedNodes.push(path);
+            } else {
+                this.propSelectedNodes = [path];
+            }
+        } else if (this.selectionMode === MSelectionMode.Multiple) {
+            this.propSelectedNodes.splice(this.propSelectedNodes.indexOf(path), 1);
         }
-    }
-
-    private setAllOpenTxt(): void {
-        this.treeVisibilityTxt = this.propAllOpen ? this.$i18n.translate('m-tree:all-close') : this.$i18n.translate('m-tree:all-open');
+        this.$emit('select', path);
     }
 
     public get propTreeEmpty(): boolean {
         return !this.tree.length;
     }
 
-    public get propSelectedNodes(): string[] {
-        return this.internalSelectedNodes;
+    public get selectable(): boolean {
+        return this.selectionMode !== MSelectionMode.None;
     }
 
-    public set propSelectedNodes(nodeId: string[]) {
-        this.internalSelectedNodes = nodeId;
+    protected created(): void {
+        this.browseTree();
     }
 
-    public get propAllOpen(): boolean {
-        return this.internalAllOpen;
+    @Watch('tree')
+    private browseTree(): void {
+        this.errorTree = false;
+        this.tree.forEach(node => {
+            this.browseNode(node);
+        });
+        this.propSelectedNodes.forEach(selectedNode => {
+            if (this.selectedNodesFound.indexOf(selectedNode) === -1) {
+                console.error(`modUL - The selected node was not found: "${selectedNode}"`);
+            }
+        });
     }
 
-    public set propAllOpen(allOpen: boolean) {
-        this.internalAllOpen = allOpen;
+    private browseNode(node: TreeNode, path: string = ''): void {
+        if (node.id.trim() === '') {
+            this.errorTree = true;
+        }
+        let currentPath: string = path + '/' + node.id;
+        if (this.propSelectedNodes.indexOf(currentPath) !== -1) {
+            this.selectedNodesFound.push(currentPath);
+        }
+        if (node.children) {
+            node.children.forEach(childNode => {
+                this.browseNode(childNode, currentPath);
+            });
+        }
     }
 }
 

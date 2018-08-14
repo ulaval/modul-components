@@ -6,8 +6,8 @@ import { TreeNode } from './tree';
 import WithRender from './tree.sandbox.html';
 
 export class Tree {
-    nodeId: string;
-    nodeLabel?: string;
+    id: string;
+    label?: string;
     uselessData?: string;
     hasChildren?: boolean;
 }
@@ -19,158 +19,123 @@ export class MRootTreeSandbox extends Vue {
     public currentFile2: string[] = ['/1/2'];
     public wrongCurrentFile: string[] = ['/3/4'];
 
-    public emptyTree: TreeNode<Tree>[] = [];
+    public emptyTree: TreeNode[] = [];
 
-    public tree: TreeNode<Tree>[] = [
+    public tree: TreeNode[] = [
         {
-            content: {
-                nodeId: '1',
-                nodeLabel: 'Title 1',
-                uselessData: 'test',
-                hasChildren: true
-            },
+            id: '1',
+            label: 'Title 1',
+            hasChildren: true,
             children: [
                 {
-                    content: {
-                        nodeId: '2',
-                        nodeLabel: 'Subtitle 1',
-                        uselessData: 'test'
-                    }
+                    id: '2',
+                    label: 'Subtitle 1'
                 },
                 {
-                    content: {
-                        nodeId: '3',
-                        nodeLabel: 'Subtitle 2',
-                        uselessData: 'test'
-                    }
-                },
-                {
-                    content: {
-                        nodeId: '4',
-                        nodeLabel: 'Subtitle 3',
-                        uselessData: 'test'
-                    }
-                },
-                {
-                    content: {
-                        nodeId: '5',
-                        nodeLabel: 'Subtitle 4',
-                        uselessData: 'test'
-                    }
-                }
-            ]
-        },
-        {
-            content: {
-                nodeId: '6',
-                nodeLabel: 'Title 2',
-                uselessData: 'test'
-            }
-        },
-        {
-            content: {
-                nodeId: '7',
-                nodeLabel: 'Title 3',
-                uselessData: 'test'
-            },
-            children: [
-                {
-                    content: {
-                        nodeId: '1',
-                        nodeLabel: 'Subtitle 1',
-                        uselessData: 'test'
-                    }
-                },
-                {
-                    content: {
-                        nodeId: '2',
-                        nodeLabel: 'Subtitle 2',
-                        uselessData: 'test'
-                    }
-                }
-            ]
-        }
-    ];
-
-    public errorTree: TreeNode<Tree>[] = [
-        {
-            content: {
-                nodeId: '1',
-                nodeLabel: 'Title 1',
-                uselessData: 'test',
-                hasChildren: true
-            },
-            children: [
-                {
-                    content: {
-                        nodeId: '',
-                        nodeLabel: 'Subtitle 1',
-                        uselessData: 'test'
-                    }
-                },
-                {
-                    content: {
-                        nodeId: '3',
-                        nodeLabel: 'Subtitle 2',
-                        uselessData: 'test'
-                    }
-                },
-                {
-                    content: {
-                        nodeId: '4',
-                        nodeLabel: 'Subtitle 3',
-                        uselessData: 'test'
-                    }
-                },
-                {
-                    content: {
-                        nodeId: '5',
-                        nodeLabel: 'Subtitle 4',
-                        uselessData: 'test'
-                    }
-                }
-            ]
-        }
-    ];
-
-    public fileTree: TreeNode<Tree>[] = [
-        {
-            content: {
-                nodeId: 'folder 1',
-                nodeLabel: 'folder 1',
-                hasChildren: true
-            },
-            children: [
-                {
-                    content: {
-                        nodeId: 'index.html',
-                        nodeLabel: 'index.html'
-                    }
-                },
-                {
-                    content: {
-                        nodeId: 'menu.html'
-                    }
-                },
-                {
-                    content: {
-                        nodeId: 'folder 2',
-                        nodeLabel: 'folder 2',
-                        hasChildren: true
-                    },
+                    id: '3',
+                    label: 'Subtitle 2',
                     children: [
                         {
-                            content: {
-                                nodeId: 'index.html',
-                                nodeLabel: 'index.html'
-                            }
+                            id: '2',
+                            label: 'Subtitle 1'
                         },
                         {
-                            content: {
-                                nodeId: 'folder 3',
-                                nodeLabel: 'folder 3',
-                                hasChildren: true
-                            },
+                            id: '3',
+                            label: 'Subtitle 2',
+                            hasChildren: true
+                        },
+                        {
+                            id: '4',
+                            label: 'Subtitle 3'
+                        },
+                        {
+                            id: '5',
+                            label: 'Subtitle 4'
+                        }
+                    ]
+                },
+                {
+                    id: '4',
+                    label: 'Subtitle 3'
+                },
+                {
+                    id: '5',
+                    label: 'Subtitle 4'
+                }
+            ]
+        },
+        {
+            id: '6',
+            label: 'Title 2'
+        },
+        {
+            id: '7',
+            label: 'Title 3',
+            children: [
+                {
+                    id: '1',
+                    label: 'Subtitle 1'
+                },
+                {
+                    id: '2',
+                    label: 'Subtitle 2'
+                }
+            ]
+        }
+    ];
+
+    public errorTree: TreeNode[] = [
+        {
+            id: '1',
+            label: 'Title 1',
+            hasChildren: true,
+            children: [
+                {
+                    id: '',
+                    label: 'Subtitle 1'
+                },
+                {
+                    id: '3',
+                    label: 'Subtitle 2'
+                },
+                {
+                    id: '4',
+                    label: 'Subtitle 3'
+                },
+                {
+                    id: '5',
+                    label: 'Subtitle 4'
+                }
+            ]
+        }
+    ];
+
+    public fileTree: TreeNode[] = [
+        {
+            id: 'folder 1',
+            label: 'folder 1',
+            hasChildren: true,
+            children: [
+                {
+                    id: 'index.html',
+                    label: 'index.html'
+                },
+                {
+                    id: 'menu.html'
+                },
+                {
+                    id: 'folder 2',
+                    label: 'folder 2',
+                    hasChildren: true,
+                    children: [
+                        {
+                            id: 'index.html',
+                            label: 'index.html'
+                        },
+                        {
+                            id: 'folder 3',
+                            label: 'folder 3',
+                            hasChildren: true,
                             children: []
                         }
                     ]
@@ -178,147 +143,109 @@ export class MRootTreeSandbox extends Vue {
             ]
         },
         {
-            content: {
-                nodeId: 'poney.jpg',
-                nodeLabel: 'poney.jpg'
-            }
+            id: 'poney.jpg',
+            label: 'poney.jpg'
         },
         {
-            content: {
-                nodeId: 'folder 4',
-                nodeLabel: 'folder 4',
-                hasChildren: true
-            }
+            id: 'folder 4',
+            label: 'folder 4',
+            hasChildren: true
         },
         {
-            content: {
-                nodeId: 'big folder',
-                nodeLabel: 'big folder',
-                hasChildren: true
-            },
+            id: 'big folder',
+            label: 'big folder',
+            hasChildren: true,
             children: [
                 {
-                    content: {
-                        nodeId: 'folder 1',
-                        nodeLabel: 'folder 1',
-                        hasChildren: true
-                    },
+                    id: 'folder 1',
+                    label: 'folder 1',
+                    hasChildren: true,
                     children: [
                         {
-                            content: {
-                                nodeId: 'index.html',
-                                nodeLabel: 'index.html'
-                            }
+                            id: 'index.html',
+                            label: 'index.html'
                         },
                         {
-                            content: {
-                                nodeId: 'menu.html'
-                            }
+                            id: 'menu.html'
                         },
                         {
-                            content: {
-                                nodeId: 'folder 2',
-                                nodeLabel: 'folder 2',
-                                hasChildren: true
-                            },
+                            id: 'folder 2',
+                            label: 'folder 2',
+                            hasChildren: true,
                             children: [
                                 {
-                                    content: {
-                                        nodeId: 'index.html',
-                                        nodeLabel: 'index.html'
-                                    }
+                                    id: 'index.html',
+                                    label: 'index.html'
                                 },
                                 {
-                                    content: {
-                                        nodeId: 'folder 3',
-                                        nodeLabel: 'folder 3',
-                                        hasChildren: true
-                                    },
-                                    children: [{
-                                        content: {
-                                            nodeId: 'folder 1',
-                                            nodeLabel: 'folder 1',
-                                            hasChildren: true
-                                        },
-                                        children: [
-                                            {
-                                                content: {
-                                                    nodeId: 'index.html',
-                                                    nodeLabel: 'index.html'
-                                                }
-                                            },
-                                            {
-                                                content: {
-                                                    nodeId: 'menu.html'
-                                                }
-                                            },
-                                            {
-                                                content: {
-                                                    nodeId: 'folder 2',
-                                                    nodeLabel: 'folder 2',
-                                                    hasChildren: true
+                                    id: 'folder 3',
+                                    label: 'folder 3',
+                                    hasChildren: true,
+                                    children: [
+                                        {
+                                            id: 'folder 1',
+                                            label: 'folder 1',
+                                            hasChildren: true,
+                                            children: [
+                                                {
+                                                    id: 'index.html',
+                                                    label: 'index.html'
                                                 },
-                                                children: [
-                                                    {
-                                                        content: {
-                                                            nodeId: 'index.html',
-                                                            nodeLabel: 'index.html'
-                                                        }
-                                                    },
-                                                    {
-                                                        content: {
-                                                            nodeId: 'folder 3',
-                                                            nodeLabel: 'folder 3',
-                                                            hasChildren: true
+                                                {
+                                                    id: 'menu.html'
+                                                },
+                                                {
+                                                    id: 'folder 2',
+                                                    label: 'folder 2',
+                                                    hasChildren: true,
+                                                    children: [
+                                                        {
+                                                            id: 'index.html',
+                                                            label: 'index.html'
                                                         },
-                                                        children: [{
-                                                            content: {
-                                                                nodeId: 'folder 1',
-                                                                nodeLabel: 'folder 1',
-                                                                hasChildren: true
-                                                            },
+                                                        {
+                                                            id: 'folder 3',
+                                                            label: 'folder 3',
+                                                            hasChildren: true,
                                                             children: [
                                                                 {
-                                                                    content: {
-                                                                        nodeId: 'index.html',
-                                                                        nodeLabel: 'index.html'
-                                                                    }
-                                                                },
-                                                                {
-                                                                    content: {
-                                                                        nodeId: 'menu.html'
-                                                                    }
-                                                                },
-                                                                {
-                                                                    content: {
-                                                                        nodeId: 'folder 2',
-                                                                        nodeLabel: 'folder 2',
-                                                                        hasChildren: true
-                                                                    },
+                                                                    id: 'folder 1',
+                                                                    label: 'folder 1',
+                                                                    hasChildren: true,
                                                                     children: [
                                                                         {
-                                                                            content: {
-                                                                                nodeId: 'index.html',
-                                                                                nodeLabel: 'index.html'
-                                                                            }
+                                                                            id: 'index.html',
+                                                                            label: 'index.html'
                                                                         },
                                                                         {
-                                                                            content: {
-                                                                                nodeId: 'folder 3',
-                                                                                nodeLabel: 'folder 3',
-                                                                                hasChildren: true
-                                                                            },
-                                                                            children: []
+                                                                            id: 'menu.html'
+                                                                        },
+                                                                        {
+                                                                            id: 'folder 2',
+                                                                            label: 'folder 2',
+                                                                            hasChildren: true,
+                                                                            children: [
+                                                                                {
+                                                                                    id: 'index.html',
+                                                                                    label: 'index.html'
+                                                                                },
+                                                                                {
+                                                                                    id: 'folder 3',
+                                                                                    label: 'folder 3',
+                                                                                    hasChildren: true,
+                                                                                    children: []
+                                                                                }
+                                                                            ]
                                                                         }
                                                                     ]
                                                                 }
                                                             ]
-                                                        }]
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -328,7 +255,7 @@ export class MRootTreeSandbox extends Vue {
         }
     ];
 
-    public newNodeSelected(): void {
+    public onSelect(): void {
         console.error('modUL - New file selected');
     }
 

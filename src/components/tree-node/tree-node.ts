@@ -1,151 +1,105 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NODE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
+import { MLinkMode } from '../link/link';
 import TreeIconPlugin from '../tree-icon/tree-icon';
-import { MSelectOption, MTreeFormat, TreeNode } from '../tree/tree';
+import { TreeNode } from '../tree/tree';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
 @WithRender
 @Component
 export class MTreeNode extends ModulVue {
-
     @Prop()
-    public node: TreeNode<MTreeFormat>;
+    public node: TreeNode;
 
     @Prop({ default: [] })
     public selectedNodes: string[];
 
-    @Prop({ default: () => { return MSelectOption.NONE; },
-        validator: value =>
-            value === MSelectOption.NONE ||
-            value === MSelectOption.SINGLE ||
-            value === MSelectOption.MULTIPLE
-    })
-    public selectionQuantity: MSelectOption;
+    @Prop()
+    selectable: boolean;
+
+    @Prop()
+    public icons: boolean;
 
     @Prop({ default: '' })
-    public selectionIcon: string;
+    public path: string;
 
-    @Prop({ default: false })
-    public allOpen: boolean;
+    @Prop()
+    public placeholder: string;
 
-    @Prop({ default: false })
-    public fileTree: boolean;
+    @Prop()
+    public hasSibling: boolean;
 
-    @Prop({ default: '' })
-    public currentPath: string;
+    private open: boolean = false;
 
-    private internalOpen: boolean = false;
-    private internalCurrentPath: string = '';
-
-    public test(): MSelectOption {
-        return MSelectOption.NONE;
-    }
-
-    public selectNewNode(path: string): void {
-        if (this.selectionQuantity === MSelectOption.SINGLE) {
-            this.$emit('newNodeSelectected', path);
+    public onClick(): void {
+        if (this.isFolder) {
+            this.open = !this.open;
+        } else {
+            this.$emit('click', this.currentPath);
         }
     }
 
-    public toggleChildrenVisibility(): void {
-        this.open = !this.open;
+    public onChildClick(path: string): void {
+        this.$emit('click', path);
     }
 
-    public selectedNodeFound(): void {
-        this.$emit('selectedNodeFound');
-    }
-
-    public generateErrorTree(): void {
-        this.$emit('generateErrorTree');
-    }
-
-    @Watch('allOpen')
-    public toggleAllOpen(): void {
-        this.open = this.allOpen;
-    }
-
-    protected created(): void {
-        this.propCurrentPath = this.currentPath + '/' + this.node.content.nodeId;
-        this.open = this.allOpen || (this.hasChildren && this.parentOfSelectedFile);
-    }
-
-    public get nodeSelected(): boolean {
-        let isSelected: boolean = false;
-        if (this.selected) {
-            isSelected = true;
-            this.selectedNodeFound();
+    public childHasSibling(index: number): boolean {
+        if (this.node.children) {
+            return !!this.node.children[index + 1];
         }
-        return isSelected;
+        return false;
     }
 
-    public get selectedIcon(): boolean {
-        return this.selected && !!this.selectionIcon;
+    protected mounted(): void {
+        this.open = this.isParentOfSelectedFile;
     }
 
-    public get validNode(): boolean {
-        let valid: boolean = true;
-        if (this.node.content.nodeId === undefined || !this.node.content.nodeId) {
-            valid = false;
-            this.generateErrorTree();
-        }
-
-        return valid;
+    public get currentPath(): string {
+        return this.path + '/' + this.node.id;
     }
 
-    public get nodeTitle(): string {
-        return (this.node.content.nodeLabel !== undefined && !!this.node.content.nodeLabel) ? this.node.content.nodeLabel : this.node.content.nodeId;
+    public get label(): string {
+        return this.node.label || this.node.id;
     }
 
-    public get hasValidChildren(): boolean {
-        return this.hasChildren && this.validNode;
+    private get isParentOfSelectedFile(): boolean {
+        let pathMatchesSelectedNode: boolean = false;
+        this.selectedNodes.forEach(selectedNode => {
+            let reg: RegExp = new RegExp(`${this.currentPath}\/`);
+            pathMatchesSelectedNode = reg.test(selectedNode) || pathMatchesSelectedNode;
+        });
+        return pathMatchesSelectedNode;
     }
 
-    public get childrenNotEmpty(): boolean {
-        return this.node.children !== undefined && !!this.node.children.length;
+    public get hasChildren(): boolean {
+        return !!this.node.children && this.node.children.length > 0;
     }
 
-    public get typeLink(): string {
-        return this.inactiveButton ? 'text' : 'button';
+    public get isFolder(): boolean {
+        return this.node.hasChildren || !!this.node.children;
     }
 
-    public get inactiveButton(): boolean {
-        return this.selectionQuantity === MSelectOption.NONE;
+    public get linkMode(): MLinkMode {
+        return this.selectable || this.isFolder ? MLinkMode.Button : MLinkMode.Text;
     }
 
-    public get open(): boolean {
-        return this.internalOpen;
+    public get linkDisabled(): boolean {
+        return this.linkMode === MLinkMode.Text;
     }
 
-    public set open(open: boolean) {
-        this.internalOpen = open;
+    public get isSelected(): boolean {
+        return this.selectedNodes.indexOf(this.currentPath) !== -1;
     }
 
-    public get propCurrentPath(): string {
-        return this.internalCurrentPath;
+    public get emptyContentMessage(): string {
+        return this.placeholder || this.$i18n.translate('m-tree-node:empty');
     }
-
-    public set propCurrentPath(path: string) {
-        this.internalCurrentPath = path;
-    }
-
-    private get selected(): boolean {
-        return this.selectedNodes[0] !== undefined && this.selectedNodes[0] === this.propCurrentPath;
-    }
-
-    private get hasChildren(): boolean {
-        return (this.node.children !== undefined && !!this.node.children.length) || (this.node.content.hasChildren !== undefined && this.node.content.hasChildren);
-    }
-
-    private get parentOfSelectedFile(): boolean {
-        return this.selectedNodes[0] !== undefined && this.selectedNodes[0].indexOf(this.propCurrentPath) === 0;
-    }
-
 }
 
 const TreeNodePlugin: PluginObject<any> = {

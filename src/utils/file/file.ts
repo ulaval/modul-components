@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from 'axios';
 import Vue, { PluginObject } from 'vue';
 
-import { FileMixin } from '../../mixins/file/file';
 import { HttpService } from '../http/http';
 import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
@@ -109,10 +108,13 @@ interface FileStoreRx extends Vue {
     files: MFile[];
 }
 
-const extractExtension: (file: File) => string = (file: File): string => {
-    let fileMixin: FileMixin = new FileMixin();
-    return fileMixin.extractFileExtension(file.name);
-};
+export function extractExtension(filename: string): string {
+    if (filename) {
+        const match: RegExpMatchArray | null = filename.match(/\.([a-zA-Z0-9]{2,4})$/);
+        return match ? match[1].toLowerCase() : '';
+    }
+    return '';
+}
 
 class FileStore {
     private filesmap: { [uid: string]: MFile } = {};
@@ -152,7 +154,7 @@ class FileStore {
                 status: MFileStatus.READY,
                 progress: 0,
                 get extension(): string {
-                    return extractExtension(file);
+                    return extractExtension(file.name);
                 }
             };
 
@@ -259,7 +261,7 @@ class FileStore {
     }
 
     private validateExtension(file: MFile): void {
-        const ext: string = extractExtension(file.file);
+        const ext: string = extractExtension(file.file.name);
 
         if (this.options!.extensions!.indexOf(ext) === -1) {
             file.status = MFileStatus.REJECTED;

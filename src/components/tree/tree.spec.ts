@@ -1,53 +1,68 @@
 import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import { MSelectOption, MTree, MTreeFormat, TreeNode } from './tree';
+import { MSelectionMode, MTree, TreeNode } from './tree';
 
 const TREE_NODE_REF: RefSelector = { ref: 'tree-node' };
-const BUTTON_TOGGLE_VISIBILITY_REF: RefSelector = { ref: 'button-toggle-visibility' };
+const EMPTY_TREE_REF: RefSelector = { ref: 'empty-tree-txt' };
+const ERROR_TREE_REF: RefSelector = { ref: 'error-tree-txt' };
 
-const TXT_VISIBILITY_TREE_OPEN: string = 'm-tree:all-open';
-const TXT_VISIBILITY_TREE_CLOSE: string = 'm-tree:all-close';
-
-const TREE_NODE_SELECTED: string[] = ['/medias/Videos/video-dog.mov'];
+const SELECTED_NODES: string[] = ['/medias/Videos'];
+const SELECTED_NODES_INVALID: string[] = ['/medias/Videos/video-dog.mov'];
 const NEW_TREE_NODE_SELECTED: string[] = ['/index.html'];
 
-const EMPTY_TREE: TreeNode<MTreeFormat>[] = [];
-const TREE_WITH_DATA: TreeNode<MTreeFormat>[] = [
+const EMPTY_TREE: TreeNode[] = [];
+const TREE_WITH_DATA: TreeNode[] = [
     {
-        content: {
-            nodeLabel: 'index.html',
-            nodeId: 'index.html'
-        }
+        label: 'index.html',
+        id: 'index.html'
     },
     {
-        content: {
-            nodeLabel: 'Medias',
-            nodeId: 'medias'
-        },
+        label: 'Medias',
+        id: 'medias',
         children: [
             {
-                content: {
-                    nodeLabel: 'Videos',
-                    nodeId: 'Videos'
-                }
+                label: 'Videos',
+                id: 'Videos'
+            }
+        ]
+    }
+];
+const TREE_WITH_NIVALID_DATA: TreeNode[] = [
+    {
+        label: 'index.html',
+        id: ''
+    },
+    {
+        label: 'Medias',
+        id: 'medias',
+        children: [
+            {
+                label: 'Videos',
+                id: 'Videos'
             }
         ]
     }
 ];
 
-let tree: TreeNode<MTreeFormat>[];
-let allOpen: boolean = false;
 let wrapper: Wrapper<MTree>;
-let selectionQuantity: MSelectOption = MSelectOption.SINGLE;
+
+let tree: TreeNode[] = TREE_WITH_DATA;
+let selectionMode: MSelectionMode = MSelectionMode.Single;
+let selectedNodes: string[] = SELECTED_NODES;
+
+afterEach(() => {
+    tree = [];
+    selectionMode = MSelectionMode.Single;
+    selectedNodes = SELECTED_NODES;
+});
 
 const initializeShallowWrapper: any = () => {
     wrapper = shallow(MTree, {
         propsData: {
-            tree: tree,
-            selectedNodes: TREE_NODE_SELECTED,
-            allOpen,
-            selectionQuantity
+            tree,
+            selectedNodes,
+            selectionMode
         }
     });
 };
@@ -68,7 +83,6 @@ describe(`MTree`, () => {
         it(`Should be empty`, () => {
             expect(wrapper.vm.propTreeEmpty).toBeTruthy();
         });
-
     });
 
     describe(`Given a tree with some data`, () => {
@@ -89,18 +103,18 @@ describe(`MTree`, () => {
         describe(`When a node is selected`, () => {
 
             beforeEach(() => {
-                wrapper.vm.selectNewNode(NEW_TREE_NODE_SELECTED[0]);
+                wrapper.vm.onClick(NEW_TREE_NODE_SELECTED[0]);
             });
 
-            it(`Call selectNewNode`, () => {
-                wrapper.setMethods({ selectNewNode: jest.fn() });
-                wrapper.find(TREE_NODE_REF).trigger('newNodeSelectected');
+            it(`Call onClick`, () => {
+                wrapper.setMethods({ onClick: jest.fn() });
+                wrapper.find(TREE_NODE_REF).trigger('click');
 
-                expect(wrapper.vm.selectNewNode).toHaveBeenCalled();
+                expect(wrapper.vm.onClick).toHaveBeenCalled();
             });
 
-            it(`Emit newNodeSelected`, () => {
-                expect(wrapper.emitted('newNodeSelected')).toBeTruthy();
+            it(`Emit select`, () => {
+                expect(wrapper.emitted('select')).toBeTruthy();
             });
 
             it(`A new node is selected`, () => {
@@ -111,84 +125,18 @@ describe(`MTree`, () => {
         describe(`When there is an error in the tree`, () => {
 
             beforeEach(() => {
-                wrapper.vm.generateErrorTree();
-            });
-
-            it(`Should call generateErrorTree`, () => {
-                wrapper.setMethods({ generateErrorTree: jest.fn() });
-                wrapper.find(TREE_NODE_REF).trigger('generateErrorTree');
-
-                expect(wrapper.vm.generateErrorTree).toHaveBeenCalled();
+                tree = TREE_WITH_NIVALID_DATA;
+                initializeShallowWrapper();
             });
 
             it(`Should generate an error`, () => {
                 expect(wrapper.vm.errorTree).toBeTruthy();
             });
 
-        });
-
-        describe(`When the selected node is found`, () => {
-
-            it(`Should call selectedNodeFound`, () => {
-                wrapper.setMethods({ selectedNodeFound: jest.fn() });
-                wrapper.find(TREE_NODE_REF).trigger('selectedNodeFound');
-
-                expect(wrapper.vm.selectedNodeFound).toHaveBeenCalled();
+            it(`Should show an error message`, () => {
+                expect(wrapper.find(ERROR_TREE_REF).exists()).toBeTruthy();
             });
 
         });
-
     });
-
-    describe(`When you click on the button to show/hide every nodes`, () => {
-
-        it(`Call the function toggleAllVisibility`, () => {
-            initializeShallowWrapper();
-
-            wrapper.setMethods({ toggleAllVisibility: jest.fn() });
-            wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
-
-            expect(wrapper.vm.toggleAllVisibility).toHaveBeenCalled();
-        });
-
-        describe(`and isAllOpen is false`, () => {
-
-            beforeEach(() => {
-                allOpen = false;
-                initializeShallowWrapper();
-
-                wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
-            });
-
-            it(`All nodes should be open`, () => {
-                expect(wrapper.vm.propAllOpen).toBeTruthy();
-            });
-
-            it(`The button label should become "m-tree:all-close"`, () => {
-                expect(wrapper.vm.treeVisibilityTxt).toEqual(TXT_VISIBILITY_TREE_CLOSE);
-            });
-
-        });
-
-        describe(`and isAllOpen is true`, () => {
-
-            beforeEach(() => {
-                allOpen = true;
-                initializeShallowWrapper();
-
-                wrapper.find(BUTTON_TOGGLE_VISIBILITY_REF).trigger('click');
-            });
-
-            it(`All nodes should be hidden`, () => {
-                expect(wrapper.vm.propAllOpen).toBeFalsy();
-            });
-
-            it(`The button label should become "m-tree:all-open"`, () => {
-                expect(wrapper.vm.treeVisibilityTxt).toEqual(TXT_VISIBILITY_TREE_OPEN);
-            });
-
-        });
-
-    });
-
 });

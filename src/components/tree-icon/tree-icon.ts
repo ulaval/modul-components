@@ -2,32 +2,26 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
-import { FileMixin } from '../../mixins/file/file';
+import { extractExtension } from '../../utils/file/file';
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_ICON_NAME } from '../component-names';
 import IconFilePlugin from '../icon-file/icon-file';
 import IconPlugin from '../icon/icon';
-import { MTreeFormat } from '../tree/tree';
 import WithRender from './tree-icon.html?style=./tree-icon.scss';
 
-const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
-const FOLDER_CLOSED: string = 'm-svg__file-zip';
+const FOLDER_OPEN: string = 'm-svg__folder-open';
+const FOLDER_CLOSED: string = 'm-svg__folder';
 
 @WithRender
-@Component({
-    mixins: [
-        FileMixin
-    ]
-})
+@Component
 export class MTreeIcon extends ModulVue {
+    @Prop()
+    public filename: string;
 
     @Prop()
-    public file: MTreeFormat;
-
-    @Prop({ default: false })
     public folder: boolean;
 
-    @Prop({ default: false })
+    @Prop()
     public folderOpen: boolean;
 
     public get folderIcon(): string {
@@ -35,9 +29,8 @@ export class MTreeIcon extends ModulVue {
     }
 
     public get extensionFile(): string {
-        return '.' + this.as<FileMixin>().extractFileExtension(this.file.nodeId);
+        return '.' + extractExtension(this.filename);
     }
-
 }
 
 const TreeIconPlugin: PluginObject<any> = {

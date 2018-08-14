@@ -1,22 +1,22 @@
 import { shallow, Wrapper } from '@vue/test-utils';
 
-import { MTreeFormat } from '../tree/tree';
+import { TreeNode } from '../tree/tree';
 import { MTreeIcon } from './tree-icon';
 
-const TREE_NODE_FILE: MTreeFormat = {
-    nodeLabel: 'Node 1.jpg',
-    nodeId: 'Node 1.jpg'
+const TREE_NODE_FILE: TreeNode = {
+    label: 'Node 1.jpg',
+    id: 'Node 1.jpg'
 };
 
-const TREE_NODE_FOLDER: MTreeFormat = {
-    nodeLabel: 'Node 2',
-    nodeId: '/Node 2'
+const TREE_NODE_FOLDER: TreeNode = {
+    label: 'Node 2',
+    id: '/Node 2'
 };
 
-const FOLDER_OPEN: string = 'm-svg__file-openoffice-math';
-const FOLDER_CLOSED: string = 'm-svg__file-zip';
+const FOLDER_OPEN: string = 'm-svg__folder-open';
+const FOLDER_CLOSED: string = 'm-svg__folder';
 
-let file: MTreeFormat;
+let file: TreeNode;
 let folderOpen: boolean = false;
 let folder: boolean = false;
 let wrapper: Wrapper<MTreeIcon>;
