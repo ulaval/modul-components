@@ -49,6 +49,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     private touchUpListener: any = this.doCleanUp.bind(this);
     private grabDelay: number | undefined = undefined;
     private touchHasMoved: boolean = false;
+    private isMouseInitiatedDrag: boolean = false;
 
     constructor(element: HTMLElement, options: MDraggableOptions) {
         super(element, options);
@@ -73,7 +74,8 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
                 this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
                 this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-                this.addEventListener('touchmove', (event: MouseEvent) => { this.touchHasMoved = true; });
+                this.addEventListener('touchmove', () => { this.touchHasMoved = true; });
+                this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; });
                 this.setupGrabBehavior();
                 MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
             });
@@ -141,7 +143,8 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private destroyGrabBehavior(): void {
         // This allow to "delay" user drag on desktop.  When wanted delay is over, set webkitUserDrag to ''.
-        this.touchHasMoved = !polyFillActive.dragDrop;
+        this.touchHasMoved = false;
+        this.isMouseInitiatedDrag = false;
         (this.element.style as any).webkitUserDrag = 'none';
         if (this.grabDelay) { window.clearTimeout(this.grabDelay); this.grabDelay = undefined; }
         this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUpListener));
@@ -181,7 +184,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private onDragStart(event: DragEvent): void {
         // On some mobile devices dragStart will be triggered even though user has not moved / dragged yet.  We want to avoid that.
-        if (polyFillActive.dragDrop && !this.touchHasMoved) {
+        if (polyFillActive.dragDrop && (!this.touchHasMoved && !this.isMouseInitiatedDrag)) {
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
