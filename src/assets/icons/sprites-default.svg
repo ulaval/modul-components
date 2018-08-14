@@ -146,6 +146,12 @@
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="12" y1="9.5" x2="12" y2="19.8"/>
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="16" y1="9.5" x2="16" y2="19.8"/>
     </symbol>
+    <symbol id="m-svg__download" viewBox="-1 -1 26 26">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+            <polygon points="9.1,0.5 14.9,0.5 14.9,11.2 18.3,11.2 12,19.4 5.7,11.2 9.1,11.2"/>
+            <polyline points="0.5,17.6 0.5,23.5 23.5,23.5 23.5,17.9"/>
+        </g>
+    </symbol>
     <symbol id="m-svg__dragndrop" viewBox="0 0 24 24">
         <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="10" d="M14.6,17.6v-7.3c0-0.6,0.5-1.1,1.1-1.1
             c0.6,0,1.1,0.5,1.1,1.1v2.1h1.5c0.4,0,0.7,0.3,0.7,0.7h1.5c0.4,0,0.7,0.3,0.7,0.7h1.1c0.6,0,1.1,0.5,1.1,1.1v2.3
@@ -664,6 +670,16 @@
             C18.9,19.7,19.4,19.9,20,20.3z"/>
         <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="10" d="M23.5,12c0,3.3-1.4,6.2-3.5,8.3
             c-2.1,2-4.9,3.2-8,3.2c-3,0-5.7-1.1-7.7-3C2,18.4,0.5,15.4,0.5,12C0.5,5.7,5.6,0.5,12,0.5C18.4,0.5,23.5,5.7,23.5,12z"/>
+    </symbol>
+    <symbol id="m-svg__replace" viewBox="-1 -1 26 26">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+            <rect x="0.5" y="15.6" width="7.9" height="7.9"/>
+            <rect x="15.6" y="0.5" width="7.9" height="7.9"/>
+            <path d="M21.7,13.6 c0,5.5-4.5,10-10,10"/>
+            <polyline points="21.7,12.4 23.5,14.3 21.7,12.4 19.7,14.3"/>
+            <path d="M2.3,10.5 c0-5.5,4.5-10,10-10"/>
+            <polyline points="2.3,11.6 0.5,9.7 2.3,11.6 4.3,9.8"/>
+        </g>
     </symbol>
     <symbol id="m-svg__right-answer" viewBox="0 0 24 24">
         <polyline fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
