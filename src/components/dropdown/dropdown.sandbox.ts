@@ -7,6 +7,9 @@ import WithRender from './dropdown.sandbox.html';
 @WithRender
 @Component
 export class MDropdownSandbox extends Vue {
+    // tslint:disable-next-line:no-null-keyword
+    public nullValue: null = null;
+    public undefinedValue: undefined = undefined;
 }
 
 const DropdownSandboxPlugin: PluginObject<any> = {

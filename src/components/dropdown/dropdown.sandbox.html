@@ -263,4 +263,23 @@
             <m-dropdown-item value="" label=""></m-dropdown-item>
         </m-dropdown>
     </p>
+    <p>
+        <h3>Undefined and null model value</h3>
+        <h4>Undefined</h4>
+        <m-dropdown :filterable="true" label="Quel est votre légume préféré" placeholder="Choisir un légume" v-model="undefinedValue">
+            <m-dropdown-item value="a" label="Asperge"></m-dropdown-item>
+            <m-dropdown-item value="b" label="Brocoli"></m-dropdown-item>
+            <m-dropdown-item value="c" label="Carotte"></m-dropdown-item>
+            <m-dropdown-item value="d" label="Daikon"></m-dropdown-item>
+            <m-dropdown-item value="e" label="Épinard"></m-dropdown-item>
+        </m-dropdown>
+        <h4>Null</h4>
+        <m-dropdown :filterable="true" label="Quel est votre légume préféré" placeholder="Choisir un légume" v-model="nullValue">
+            <m-dropdown-item value="a" label="Asperge"></m-dropdown-item>
+            <m-dropdown-item value="b" label="Brocoli"></m-dropdown-item>
+            <m-dropdown-item value="c" label="Carotte"></m-dropdown-item>
+            <m-dropdown-item value="d" label="Daikon"></m-dropdown-item>
+            <m-dropdown-item value="e" label="Épinard"></m-dropdown-item>
+        </m-dropdown>
+    </p>
 </div>
