@@ -32,7 +32,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public toolbarSticky: boolean = true;
     public scrollableContainer: string = 'body';
     public toolbarStickyOffset: number = 0;
-    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'stylesPlugin', 'listesPlugin', 'insertionsPlugin'];
+    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'stylesSubMenu', 'listesSubMenu', 'insertionsSubMenu'];
     public wordPasteModal: boolean = true;
 
     constructor(public key: string, public language: string = 'en_CA') {
@@ -45,8 +45,8 @@ export abstract class MRichTextEditorDefaultOptions {
 export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOptions {
     public toolbarButtons: string[] = ['bold', 'italic', 'subscript', 'superscript', '|', 'formatUL',
         'formatOL', 'outdent', 'indent', '|', 'insertLink', 'specialCharacters', '|', 'fullscreen'];
-    public toolbarButtonsXS: string[] = ['stylesPopup', 'bold', 'italic', 'subscript', 'superscript', 'listesPopup', 'formatUL',
-        'formatOL', 'outdent', 'indent', 'insertionsPopup', 'insertLink', 'specialCharacters', 'fullscreen'];
+    public toolbarButtonsXS: string[] = ['styles-sub-menu', 'bold', 'italic', 'subscript', 'superscript', 'listes-sub-menu', 'formatUL',
+        'formatOL', 'outdent', 'indent', 'insertions-sub-menu', 'insertLink', 'specialCharacters', 'fullscreen'];
 
     public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
 

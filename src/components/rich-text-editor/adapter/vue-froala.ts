@@ -1,12 +1,13 @@
 // This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
-import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import { replaceTags } from '../../../utils/clean/htmlClean';
+import { ModulVue } from '../../../utils/vue/vue';
 import { PopupPlugin } from './popup-plugin';
+import SubMenuPlugin from './submenu-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
 require('froala-editor/js/froala_editor.pkgd.min');
@@ -41,7 +42,7 @@ enum FroalaElements {
 
 @WithRender
 @Component
-export class VueFroala extends Vue {
+export class VueFroala extends ModulVue {
     @Prop({
         default: 'div'
     })
@@ -110,12 +111,40 @@ export class VueFroala extends Vue {
         });
     }
 
+    protected addSubMenu(name: string, icon: string, buttonList: string[]): void {
+        const buttonName: string = `${name}-sub-menu`;
+        const pluginName: string = `${name}SubMenu`;
+
+        // The custom popup is defined inside a plugin (new or existing).
+        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new SubMenuPlugin(name, editor, buttonList); };
+
+        // Create the button that'll open the popup
+        $.FroalaEditor.RegisterCommand(buttonName, {
+            title: name,
+            icon: icon,
+            undo: false,
+            focus: false,
+            plugin: pluginName,
+            callback: function(): void {
+                this[pluginName].toggle();
+            }
+        });
+    }
+
     protected addPopups(): void {
         // add mobile mode popups
         $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
         this.addPopup('styles', 'bold', ['bold', 'italic', 'subscript', 'superscript']);
         this.addPopup('listes', 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
         this.addPopup('insertions', 'plus', ['insertLink', 'specialCharacters']);
+    }
+
+    protected addSubMenus(): void {
+         // add mobile mode popups
+        $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
+        this.addSubMenu('styles', 'bold', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addSubMenu('listes', 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+        this.addSubMenu('insertions', 'plus', ['insertLink', 'specialCharacters']);
     }
 
     protected created(): void {
@@ -157,7 +186,8 @@ export class VueFroala extends Vue {
             return;
         }
 
-        this.addPopups();
+        // this.addPopups();
+        this.addSubMenus();
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
             // we reemit each valid input events so froala can work in input-style component.
