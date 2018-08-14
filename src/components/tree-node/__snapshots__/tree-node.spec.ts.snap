@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTreeNode Given a node When the node can and has children and the node is valid Should render correctly 1`] = `
+<li class="m-tree-node">
+    <a mode="button" class="m-tree-node__single-node"> <span>Node 3</span></a>
+    <div class="m-tree-node__with-children">
+        <m-accordion-transition>
+            <ul class="m-tree-node__with-children__body" style="display:none;">
+                <li class="m-tree-node m-tree-node__with-children__children">
+                    <m-link mode="button" class="m-tree-node__single-node"> <span>Node 4</span></m-link>
+                    <div class="m-tree-node__with-children">
+                        <m-accordion-transition>
+                            <ul class="m-tree-node__with-children__body" style="display:none;">
+                                <li class="m-tree-node__with-children__children--empty">
+                                    m-tree-node:empty
+                                </li>
+                            </ul>
+                        </m-accordion-transition>
+                    </div>
+                </li>
+            </ul>
+        </m-accordion-transition>
+    </div>
+</li>
+`;
+
+exports[`MTreeNode Given a node When the node can have children but don't have any Should render correctly 1`] = `
+<li class="m-tree-node">
+    <a mode="button" class="m-tree-node__single-node"> <span>Node 2</span></a>
+    <div class="m-tree-node__with-children">
+        <m-accordion-transition>
+            <ul class="m-tree-node__with-children__body" style="display:none;">
+                <li class="m-tree-node__with-children__children--empty">
+                    m-tree-node:empty
+                </li>
+            </ul>
+        </m-accordion-transition>
+    </div>
+</li>
+`;
+
+exports[`MTreeNode Given a node When the node can't have children and the node is valid Should render correctly 1`] = `
+<li class="m-tree-node">
+    <a mode="button" class="m-tree-node__single-node"> <span>Node 1</span></a>
+</li>
+`;

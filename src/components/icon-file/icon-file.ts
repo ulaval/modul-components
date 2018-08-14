@@ -30,6 +30,8 @@ const EXT_ODS: string = 'ods';
 const EXT_ODF: string = 'odf';
 const EXT_ODB: string = 'odb';
 const EXT_DWG: string = 'dwg,dao,cao,dxf,dwf';
+const EXT_CODE: string = 'js,ts,json,css,scss';
+const EXT_MARKUP: string = 'html,xml';
 
 // EXTENSIONS GROUPS
 const GROUP_IMAGE: string = 'm-svg__file-image';
@@ -55,6 +57,8 @@ const GROUP_OPENOFFICE_CALC: string = 'm-svg__file-openoffice-calc';
 const GROUP_OPENOFFICE_MATH: string = 'm-svg__file-openoffice-math';
 const GROUP_OPENOFFICE_BASE: string = 'm-svg__file-openoffice-base';
 const GROUP_DWG: string = 'm-svg__file-dwg';
+const GROUP_CODE: string = 'm-svg__file-code';
+const GROUP_MARKUP: string = 'm-svg__file-markup';
 const GROUP_OTHER: string = 'm-svg__file-default';
 
 type FileGroup = {
@@ -102,6 +106,8 @@ export class MIconFile extends Vue {
         this.mapExtensionsGroup(EXT_ODF, GROUP_OPENOFFICE_MATH);
         this.mapExtensionsGroup(EXT_ODB, GROUP_OPENOFFICE_BASE);
         this.mapExtensionsGroup(EXT_DWG, GROUP_DWG);
+        this.mapExtensionsGroup(EXT_CODE, GROUP_CODE);
+        this.mapExtensionsGroup(EXT_MARKUP, GROUP_MARKUP);
     }
 
     private mapExtensionsGroup(extensions, category: string): void {
