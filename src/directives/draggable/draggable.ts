@@ -198,7 +198,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         MDraggable.currentDraggable = this;
         this.element.classList.add(MDraggableClassNames.Dragging);
         if (typeof this.options.dragData === 'object') {
-            event.dataTransfer.setData('text', JSON.stringify(this.options.dragData));
+            event.dataTransfer.setData('application/json', JSON.stringify(this.options.dragData));
         } else {
             event.dataTransfer.setData('text', this.options.dragData);
         }
