@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTree Given a tree with some data Should render correctly 1`] = `
+<div class="m-tree">
+    <ul class="m-tree__content">
+        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos"></m-tree-node>
+        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos"></m-tree-node>
+    </ul>
+</div>
+`;
+
+exports[`MTree Given an empty tree Should render correctly 1`] = `
+<div class="m-tree">
+    <p class="m-tree__empty">
+        m-tree:empty
+    </p>
+</div>
+`;
