@@ -64,7 +64,7 @@ export class MNavbarItem extends ModulVue {
 
     private setDimension(): void {
         let itemEl: HTMLElement = this.$refs.item as HTMLElement;
-        if (itemEl) {
+        if (itemEl && itemEl.style) {
             itemEl.style.removeProperty('width');
             itemEl.style.removeProperty('max-width');
             itemEl.style.removeProperty('white-space');
