@@ -14,10 +14,6 @@
         "extensionFileMsg": "L'extension du fichier n’est pas acceptée.",
         "maxSizeMsg": "Le fichier est refusé, car sa taille dépasse la limite permise",
         "maxNumberMsg": "Le nombre maximal de fichiers pouvant être ajoutés simultanément est atteint",
-        "errorMsg": "Une erreur s'est produite durant le téléversement.",
-        "size-b": "o",
-        "size-kb": "ko",
-        "size-mb": "Mo",
-        "size-gb": "Go"
+        "errorMsg": "Une erreur s'est produite durant le téléversement."
     }
 }

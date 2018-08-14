@@ -3,11 +3,12 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import uuid from '../../utils/uuid/uuid';
-import { ACCORDION_NAME } from '../component-names';
+import { ModulVue } from '../../utils/vue/vue';
+import { ACCORDION_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, INPLACE_EDIT_NAME, INPUT_STYLE_NAME, LINK_NAME, RADIO_GROUP_NAME, RADIO_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
+import PlusPlugin from '../plus/plus';
 import AccordionTransitionPlugin from './accordion-transition';
 import WithRender from './accordion.html?style=./accordion.scss';
-import { ModulVue } from '../../utils/vue/vue';
 
 export enum MAccordionSkin {
     Default = 'default',
@@ -40,6 +41,8 @@ export interface AccordionGroupGateway {
     removeAccordion(id: string): void;
     closeAllAccordions(): any;
 }
+
+const COMPONENT_IN_CLOSEST: string = '.' + BUTTON_GROUP_NAME + ', .' + INPUT_STYLE_NAME + ', .' + CHECKBOX_NAME + ', .' + RADIO_GROUP_NAME + ', .' + RADIO_NAME + ', .' + LINK_NAME + ', .' + INPLACE_EDIT_NAME;
 
 function isAccordionGroup(parent: any): parent is AccordionGroupGateway {
     return parent && 'addAccordion' in parent;
@@ -142,7 +145,7 @@ export class MAccordion extends ModulVue implements AccordionGateway {
         return isAccordionGroup(this.$parent) ? this.$parent.skin : this.skin;
     }
 
-    private get propIconBorder(): boolean {
+    private get hasIconBorder(): boolean {
         if (this.iconBorder) {
             return this.iconBorder;
         }
@@ -151,8 +154,7 @@ export class MAccordion extends ModulVue implements AccordionGateway {
     }
 
     private toggleAccordion(event: Event): void {
-        let target: Element | null;
-        target = (event.target as HTMLElement).closest('[href], [onclick], button, input, textarea, radio');
+        let target: Element | null = (event.target as HTMLElement).closest('[href], [onclick], a, button, input, textarea, radio, ' + COMPONENT_IN_CLOSEST);
 
         if (!this.propDisabled && !target) {
             const initialState: boolean = this.internalPropOpen;
@@ -165,7 +167,7 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
             this.$refs.accordionHeader.blur();
             this.propOpen = !initialState;
-            this.$emit('click', this.internalPropOpen);
+            this.$emit('click', event);
         }
     }
 
@@ -179,6 +181,7 @@ const AccordionPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(I18nPlugin);
         v.use(AccordionTransitionPlugin);
+        v.use(PlusPlugin);
         v.component(ACCORDION_NAME, MAccordion);
     }
 };

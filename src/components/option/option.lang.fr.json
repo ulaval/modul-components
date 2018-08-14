@@ -1,0 +1,10 @@
+{
+    "m-option": {
+        "open": "Ouvrir le menu",
+        "close": "Fermer le menu",
+        "add": "Ajouter",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "archive": "Archiver"
+    }
+}

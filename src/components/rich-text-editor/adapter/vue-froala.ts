@@ -5,6 +5,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
+import { replaceTags } from '../../../utils/clean/htmlClean';
 import { PopupPlugin } from './popup-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
@@ -187,12 +188,16 @@ export class VueFroala extends Vue {
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!editor.fullscreen.isActive()) {
-                        window.addEventListener('resize', this.onResize);
-                        this.$emit('blur');
-                        this.hideToolbar();
+                        // this timeout is used to avoid the "undetected click" bug
+                        // that happens sometimes due to the hideToolbar animation
+                        setTimeout(() => {
+                            window.addEventListener('resize', this.onResize);
+                            this.$emit('blur');
+                            this.hideToolbar();
 
-                        this.isFocused = false;
-                        this.isDirty = false;
+                            this.isFocused = false;
+                            this.isDirty = false;
+                        }, 100);
                     }
                 },
                 [froalaEvents.KeyUp]: (_e, _editor) => {
@@ -210,7 +215,8 @@ export class VueFroala extends Vue {
                 },
                 // if we use pasteBeforeCleanup, there's an error in froala's code
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
-                    return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's','h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote']);
+                    data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p', data);
+                    return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                 },
                 [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
                     // write code to be called after a command is called (button clicked, image modified, ...)
@@ -258,6 +264,8 @@ export class VueFroala extends Vue {
             cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
             cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
         }
+
+        wordPasteModal!.remove();
     }
 
     private getWordPasteCleanButton(): HTMLElement | null {
