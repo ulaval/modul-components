@@ -126,7 +126,7 @@ export class VueFroala extends ModulVue {
             focus: false,
             plugin: pluginName,
             callback: function(): void {
-                this[pluginName].toggle();
+                this[pluginName].showSubMenu();
             }
         });
     }

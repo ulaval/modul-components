@@ -1,4 +1,3 @@
-/* tslint:disable:no-console */
 export default class SubMenuPlugin {
     private isSubMenuVisible: boolean;
     private subButtons: any[];
@@ -9,20 +8,27 @@ export default class SubMenuPlugin {
         this.isSubMenuVisible = false;
         this.menuButton = this.editor.$tb.find(`.fr-command[data-cmd="${menuButtonCmd}"]`);
         this.subButtons = buttonNames.map(name => this.editor.$tb.find(`.fr-command[data-cmd="${name}"]`));
-        console.log(this.menuButton);
+
+        this.editor.$wp.click(() => { this.hideSubmenu(); });
     }
 
-    public toggle(): void {
-        (this.isSubMenuVisible) ? this.hideSubmenu() : this.showSubmenu();
-    }
+    public showSubMenu(): void {
+        // hide toggle buttons
+        this.editor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).hide();
+        // hide fullscreen buttons
+        this.editor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).hide();
 
-    private showSubmenu(): void {
-        console.log('showSubmenu');
+        this.subButtons.forEach(btn => btn.show());
         this.isSubMenuVisible = true;
     }
 
-    private hideSubmenu(): void {
-        console.log('hideSubmenu');
+    public hideSubmenu(): void {
+        // show toggle buttons
+        this.editor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
+        // hide fullscreen buttons
+        this.editor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
+
+        this.subButtons.forEach(btn => btn.hide());
         this.isSubMenuVisible = false;
     }
 }
