@@ -55,8 +55,8 @@ export class MCarousel extends Vue {
                 let index: number = 0;
                 this.$slots.default.forEach(item => {
                     if (item.componentInstance instanceof MCarouselItem) {
-                        item.componentInstance.transitionForward = this.transitionForward;
                         item.componentInstance.isVisible = index === this.internalIndex;
+                        item.componentInstance.position = index - this.internalIndex;
                         item.componentInstance.$slots.default.forEach(content => {
                             let el: HTMLElement = content.componentInstance && content.componentInstance.$el || content.elm as HTMLElement;
                             if (el instanceof HTMLElement && (el.tagName === 'IMG' || el.tagName === 'PICTURE')) {
@@ -103,8 +103,7 @@ export class MCarousel extends Vue {
     private set propIndex(value) {
         if (value !== this.propIndex && this.isIndexValid(value)) {
             this.items.forEach((item, index) => {
-                item.transitionForward = this.transitionForward;
-                item.isVisible = index === value;
+                item.position = index - value;
             });
             this.internalIndex = value;
             this.$emit('update:index', value);
@@ -120,7 +119,7 @@ export class MCarousel extends Vue {
         if (this.$slots.default) {
             this.$slots.default.forEach(item => {
                 if (item.componentInstance instanceof MCarouselItem) {
-                    count ++;
+                    count++;
                 }
             });
         }

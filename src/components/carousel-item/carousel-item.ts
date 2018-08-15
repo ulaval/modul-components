@@ -9,8 +9,7 @@ import WithRender from './carousel-item.html?style=./carousel-item.scss';
 @Component
 export class MCarouselItem extends Vue {
     public isVisible: boolean = false;
-    public transitionForward: boolean = true;
-    private animActive: boolean = false;
+    public position: number = 0;
 
     public beforeEnter(): void {
         this.$emit('animationStart');
@@ -20,14 +19,12 @@ export class MCarouselItem extends Vue {
         this.$emit('animationDone');
     }
 
-    private mounted(): void {
-        setTimeout(() => {
-            this.animActive = true;
-        });
-    }
-
-    private get transitionName(): string {
-        return this.transitionForward ? 'm--is-right-to-left' : 'm--is-left-to-right';
+    public get translate(): string {
+        if (this.position === 0) {
+            return 'translate(0)';
+        } else {
+            return `translate(calc(${100 * this.position}% + ${8 * this.position}px))`;
+        }
     }
 }
 
