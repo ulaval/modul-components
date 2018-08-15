@@ -8,8 +8,6 @@ export default class SubMenuPlugin {
         this.isSubMenuVisible = false;
         this.menuButton = this.editor.$tb.find(`.fr-command[data-cmd="${menuButtonCmd}"]`);
         this.subButtons = buttonNames.map(name => this.editor.$tb.find(`.fr-command[data-cmd="${name}"]`));
-
-        this.editor.$wp.click(() => { this.hideSubmenu(); });
     }
 
     public showSubMenu(): void {
@@ -18,16 +16,22 @@ export default class SubMenuPlugin {
         // hide fullscreen buttons
         this.editor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).hide();
 
+        // show hide button
+        this.editor.$tb.find(`.fr-command[data-cmd="hide"]`).show();
+        // show sub-menu buttons
         this.subButtons.forEach(btn => btn.show());
         this.isSubMenuVisible = true;
     }
 
-    public hideSubmenu(): void {
+    public hideSubMenu(): void {
         // show toggle buttons
         this.editor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
-        // hide fullscreen buttons
+        // show fullscreen buttons
         this.editor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
 
+        // hide hide button
+        this.editor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+        // show sub-menu buttons
         this.subButtons.forEach(btn => btn.hide());
         this.isSubMenuVisible = false;
     }

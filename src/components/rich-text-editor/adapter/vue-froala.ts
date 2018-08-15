@@ -145,6 +145,20 @@ export class VueFroala extends ModulVue {
         this.addSubMenu('styles', 'bold', ['bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu('listes', 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
         this.addSubMenu('insertions', 'plus', ['insertLink', 'specialCharacters']);
+
+        // add "hide sub-menu" button
+        $.FroalaEditor.DefineIcon('angle-left', { NAME: 'angle-left' });
+        $.FroalaEditor.RegisterCommand('hide', {
+            title: 'Cacher le sous menu',
+            icon: 'angle-left',
+            undo: false,
+            focus: false,
+            callback: function(): void {
+                this.stylesSubMenu.hideSubMenu();
+                this.listesSubMenu.hideSubMenu();
+                this.insertionsSubMenu.hideSubMenu();
+            }
+        });
     }
 
     protected created(): void {
