@@ -10,6 +10,7 @@
                  :to="routerLinkUrl"
                  :target="target"
                  v-if="isRouterLink"
+                 :tabindex="disabled ? '-1' : tabindex"
                  ref="router">
         <m-icon :name="propIconName" :size="iconSize" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon>
         <span class="m-link__text">
@@ -31,6 +32,7 @@
        @click="onClick"
        v-if="!isRouterLink"
        @keyup="onKeyup"
+       :tabindex="disabled ? '-1' : tabindex"
        ref="link">
         <m-icon class="m-link__icon" :name="propIconName" :size="iconSize" v-if="hasIcon" aria-hidden="true"></m-icon>
         <span class="m-link__text">

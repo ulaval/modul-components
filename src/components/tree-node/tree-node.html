@@ -1,19 +1,33 @@
 <li class="m-tree-node" ref="item">
-    <m-link :mode="linkMode" class="m-tree-node__single-node" :class="{ 'm--is-selected': isSelected }" :disabled="linkDisabled"
-        :underline="false" @click="onClick" ref="link">
-        <m-tree-icon class="m-tree-icon" v-if="icons" :filename="node.id" :folder-open="open" :folder="isFolder"></m-tree-icon>
+    <m-link class="m-tree-node__single-node"
+            :class="{ 'm--is-selected': isSelected }"
+            mode="button"
+            :disabled="linkDisabled"
+            :underline="false"
+            @click="onClick"
+            ref="link">
+        <m-tree-icon class="m-tree-icon"
+                     :filename="node.id"
+                     :folder-open="open"
+                     :folder="isFolder"
+                     v-if="icons"></m-tree-icon>
         <span>{{ label }}</span>
     </m-link>
     <div v-if="isFolder" class="m-tree-node__with-children">
         <m-accordion-transition v-if="hasChildren">
-            <ul v-show="open" class="m-tree-node__with-children__body" :class="{'m-tree-node__line-extension' : hasSibling}" ref="childNodeList">
+            <ul class="m-tree-node__with-children__body"
+                :class="{'m-tree-node__line-extension' : hasSibling}"
+                ref="childNodeList"
+                v-show="open">
                 <m-tree-node v-for="(childNode, index) in node.children" :key="childNode.id" class="m-tree-node__with-children__children"
                     :path="currentPath" :icons="icons" :selectable="selectable" :node="childNode" :selected-nodes="selectedNodes"
                     :has-sibling="childHasSibling(index)" @click="onChildClick"></m-tree-node>
             </ul>
         </m-accordion-transition>
         <m-accordion-transition v-else>
-            <ul v-show="open" class="m-tree-node__with-children__body" :class="{'m-tree-node__line-extension' : hasSibling}">
+            <ul class="m-tree-node__with-children__body"
+                :class="{'m-tree-node__line-extension' : hasSibling}"
+                v-show="open">
                 <li class="m-tree-node__with-children__children--empty">
                     {{emptyContentMessage}}
                 </li>

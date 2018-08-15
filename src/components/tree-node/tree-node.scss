@@ -22,14 +22,17 @@ $m-accordion--icon-minus-width: 1px;
         padding: 9px 21px;
         width: $m-min-width;
 
-        &.m--is-selected,
-        &.m--is-button.m--is-button:hover {
-            color: #fff;
-            background-color: $m-color--interactive-darker;
-            border-color: $m-color--interactive-darker;
+        &:not(.m--is-disabled) {
+            &.m--is-selected,
+            &.m--is-button:hover,
+            &.m--is-button:focus {
+                color: $m-color--white;
+                background-color: $m-color--interactive-darker;
+                border-color: $m-color--interactive-darker;
+            }
         }
 
-        &.m--is-text-link {
+        &.m--is-disabled {
             color: $m-color--grey-light;
             border-color: $m-color--grey-light;
         }

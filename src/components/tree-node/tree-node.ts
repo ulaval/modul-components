@@ -85,12 +85,12 @@ export class MTreeNode extends ModulVue {
         return this.node.hasChildren || !!this.node.children;
     }
 
-    public get linkMode(): MLinkMode {
-        return this.selectable || this.isFolder ? MLinkMode.Button : MLinkMode.Text;
+    public get linkMode(): string {
+        return this.selectable || this.isFolder ? MLinkMode.Button : 'text';
     }
 
     public get linkDisabled(): boolean {
-        return this.linkMode === MLinkMode.Text;
+        return this.linkMode === 'text';
     }
 
     public get isSelected(): boolean {

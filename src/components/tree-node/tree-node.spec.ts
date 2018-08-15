@@ -211,7 +211,7 @@ describe('MTreeNode', () => {
             });
 
             it(`The link should be text`, () => {
-                expect(wrapper.vm.linkMode).toEqual(MLinkMode.Text);
+                expect(wrapper.vm.linkMode).toEqual('text');
             });
 
         });
