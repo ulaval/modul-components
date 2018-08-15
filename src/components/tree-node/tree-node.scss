@@ -1,0 +1,92 @@
+@import '../../styles/abstracts/variables';
+@import '../accordion/accordion-transition';
+
+$m-tree-node--icon-width: 18px;
+$m-tree-node--icon-height: 18px;
+$m-tree-node--icon-border-width: 1px;
+$m-accordion--icon-plus-width: 10px;
+$m-accordion--icon-minus-width: 1px;
+
+.m-tree-node {
+    color: $m-color--ul-blue;
+
+    & + &,
+    &__with-children__body > & {
+        margin-top: $m-margin;
+    }
+
+    &__single-node {
+        user-select: none;
+        border: 1px solid $m-color--ul-blue;
+        border-radius: 22px;
+        padding: 9px 21px;
+        width: $m-min-width;
+
+        &.m--is-selected,
+        &.m--is-button.m--is-button:hover {
+            color: #fff;
+            background-color: $m-color--interactive-darker;
+            border-color: $m-color--interactive-darker;
+        }
+
+        &.m--is-text-link {
+            color: $m-color--grey-light;
+            border-color: $m-color--grey-light;
+        }
+    }
+
+    /deep/ .m-link__text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__line-extension::before {
+        content: "";
+        position: absolute;
+        left: -22px;
+        width: 1px;
+        top: 0;
+        bottom: 0;
+        background-color: $m-color--ul-blue;
+    }
+
+    &__with-children {
+        user-select: none;
+
+        &__children {
+            margin-left: 52px;
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: -22px;
+                top: 21px;
+                width: 22px;
+                height: 1px;
+                background-color: $m-color--ul-blue;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: -22px;
+                width: 1px;
+                top: -$m-margin;
+                height: 56px;
+                background-color: $m-color--ul-blue;
+            }
+
+            &:last-child::after {
+                height: 34px;
+            }
+
+            &--empty {
+                margin-left: 30px;
+                margin-top: $m-margin;
+                color: $m-color--text;
+            }
+        }
+    }
+}

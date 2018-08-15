@@ -76,4 +76,7 @@ export const TEXTAREA_NAME: string = 'm-textarea';
 export const TEXTFIELD_NAME: string = 'm-textfield';
 export const TIMEPICKER_NAME: string = 'm-timepicker';
 export const TOOLTIP_NAME: string = 'm-tooltip';
+export const TREE_NAME: string = 'm-tree';
+export const TREE_ICON_NAME: string = 'm-tree-icon';
+export const TREE_NODE_NAME: string = 'm-tree-node';
 export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
