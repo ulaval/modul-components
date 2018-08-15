@@ -120,7 +120,7 @@ enum FroalaElements {
         const pluginName: string = `${name}SubMenu`;
 
         // The custom popup is defined inside a plugin (new or existing).
-        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new SubMenuPlugin(name, editor, buttonList); };
+        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new SubMenuPlugin(editor, buttonList); };
 
         // Create the button that'll open the popup
         $.FroalaEditor.RegisterCommand(buttonName, {
@@ -158,7 +158,9 @@ enum FroalaElements {
             undo: false,
             focus: false,
             callback: () => {
-                this.hideSubMenus();
+                this.froalaEditor.stylesSubMenu.hideSubMenu();
+                this.froalaEditor.listesSubMenu.hideSubMenu();
+                this.froalaEditor.insertionsSubMenu.hideSubMenu();
             }
         });
     }
@@ -197,27 +199,27 @@ enum FroalaElements {
         }
     }
 
-    protected showSubMenus(): void {
-        this.froalaEditor.stylesSubMenu.showSubMenu();
-        this.froalaEditor.listesSubMenu.showSubMenu();
-        this.froalaEditor.insertionsSubMenu.showSubMenu();
+    protected desktopMode(): void {
+        this.froalaEditor.$tb.find(`.fr-command`).show();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).hide();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
     }
 
-    protected hideSubMenus(): void {
-        this.froalaEditor.stylesSubMenu.hideSubMenu();
-        this.froalaEditor.listesSubMenu.hideSubMenu();
-        this.froalaEditor.insertionsSubMenu.hideSubMenu();
+    protected mobileMode(): void {
+        this.froalaEditor.$tb.find(`.fr-command`).hide();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
     }
 
     @Watch('isEqMinS')
     private test(): void {
         // mode desktop
         if (this.as<ElementQueries>().isEqMinS) {
-            this.showSubMenus();
+            this.desktopMode();
             // hide hide button
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
         } else {
-            this.hideSubMenus();
+            this.mobileMode();
         }
     }
 
