@@ -48,4 +48,28 @@
             word-wrap: break-word;
         }
     }
+
+    // mode mobile
+    &.m--is-eq-max-s {
+        /deep/ .fr-command {
+            display: none;
+
+            &[data-cmd*="-sub-menu"],
+            &[data-cmd="fullscreen"] {
+                display: inline-block;
+            }
+        }
+    }
+
+    // mode desktop
+    &.m--is-eq-min-s {
+        /deep/ .fr-command {
+            display: inline-block;
+
+            &[data-cmd*="-sub-menu"],
+            &[data-cmd="hide"] {
+                display: none;
+            }
+        }
+    }
 }

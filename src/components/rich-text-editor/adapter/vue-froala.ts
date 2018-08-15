@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
+import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
 import { ModulVue } from '../../../utils/vue/vue';
 import { PopupPlugin } from './popup-plugin';
@@ -41,8 +42,11 @@ enum FroalaElements {
 }
 
 @WithRender
-@Component
-export class VueFroala extends ModulVue {
+@Component({
+    mixins: [
+        ElementQueries
+    ]
+})export class VueFroala extends ModulVue {
     @Prop({
         default: 'div'
     })
@@ -153,10 +157,8 @@ export class VueFroala extends ModulVue {
             icon: 'angle-left',
             undo: false,
             focus: false,
-            callback: function(): void {
-                this.stylesSubMenu.hideSubMenu();
-                this.listesSubMenu.hideSubMenu();
-                this.insertionsSubMenu.hideSubMenu();
+            callback: () => {
+                this.hideSubMenus();
             }
         });
     }
@@ -192,6 +194,30 @@ export class VueFroala extends ModulVue {
     protected onResize(): void {
         if (!this.isFocused) {
             this.adjusteToolbarPosition();
+        }
+    }
+
+    protected showSubMenus(): void {
+        this.froalaEditor.stylesSubMenu.showSubMenu();
+        this.froalaEditor.listesSubMenu.showSubMenu();
+        this.froalaEditor.insertionsSubMenu.showSubMenu();
+    }
+
+    protected hideSubMenus(): void {
+        this.froalaEditor.stylesSubMenu.hideSubMenu();
+        this.froalaEditor.listesSubMenu.hideSubMenu();
+        this.froalaEditor.insertionsSubMenu.hideSubMenu();
+    }
+
+    @Watch('isEqMinS')
+    private test(): void {
+        // mode desktop
+        if (this.as<ElementQueries>().isEqMinS) {
+            this.showSubMenus();
+            // hide hide button
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+        } else {
+            this.hideSubMenus();
         }
     }
 
