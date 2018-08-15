@@ -1,5 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
 import * as TouchPlugin from 'vue-touch';
 
 import { CAROUSEL_ITEM_NAME } from '../component-names';
@@ -8,6 +9,9 @@ import WithRender from './carousel-item.html?style=./carousel-item.scss';
 @WithRender
 @Component
 export class MCarouselItem extends Vue {
+    @Prop({ default: 16 })
+    margin: number;
+
     public isVisible: boolean = false;
     public position: number = 0;
 
@@ -23,7 +27,7 @@ export class MCarouselItem extends Vue {
         if (this.position === 0) {
             return 'translate(0)';
         } else {
-            return `translate(calc(${100 * this.position}% + ${8 * this.position}px))`;
+            return `translate(calc(${100 * this.position}% + ${(this.margin / 2) * this.position}px))`;
         }
     }
 }
