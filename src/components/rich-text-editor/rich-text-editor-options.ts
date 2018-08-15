@@ -49,7 +49,7 @@ export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOption
 
     public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
 
-    public linkInsertButtons: string[] = ['linkBack'];
+    public linkInsertButtons: string[] = [];
 
     constructor(key: string, language?: string | undefined) { super(key, language); }
 }
