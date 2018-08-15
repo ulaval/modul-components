@@ -58,6 +58,10 @@
             &[data-cmd="fullscreen"] {
                 display: inline-block;
             }
+
+            &.fr-submit {
+                display: inline-block;
+            }
         }
 
         /deep/ .fr-placeholder {

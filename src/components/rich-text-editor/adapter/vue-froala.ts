@@ -209,6 +209,8 @@ enum FroalaElements {
         this.froalaEditor.$tb.find(`.fr-command`).hide();
         this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
         this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
+        // show submit buttons (ex: link insertion submit button)
+        this.froalaEditor.$tb.find(`.fr-submit`).show();
     }
 
     @Watch('isEqMinS')
