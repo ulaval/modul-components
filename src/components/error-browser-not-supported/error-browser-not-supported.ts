@@ -42,7 +42,7 @@ export class MErrorBrowserNotSupported extends ModulVue {
 
     readonly skin: string = MErrorTemplateSkin.Warning;
 
-    readonly iconName: string = 'error-browser-not-supported';
+    readonly iconName: string = 'm-svg__error-browser-not-supported';
 }
 
 const ErrorBrowserNotSupported: PluginObject<any> = {

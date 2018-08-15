@@ -29,7 +29,7 @@ export class MErrorConfigNotSupported extends ModulVue {
 
     readonly skin: string = MErrorTemplateSkin.Warning;
 
-    readonly iconName: string = 'error-config-not-supported';
+    readonly iconName: string = 'm-svg__error-config-not-supported';
 }
 
 const ErrorConfigNotSupportedPlugin: PluginObject<any> = {
