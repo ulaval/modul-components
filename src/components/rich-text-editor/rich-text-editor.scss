@@ -59,6 +59,14 @@
                 display: inline-block;
             }
         }
+
+        /deep/ .fr-placeholder {
+            padding-top: 50px !important;
+        }
+
+        /deep/ .fr-box.fr-basic .fr-element {
+            padding-top: 50px;
+        }
     }
 
     // mode desktop
