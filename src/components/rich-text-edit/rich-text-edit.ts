@@ -46,7 +46,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
     public toolbarStickyOffset: number;
 
     @Prop()
-    public scrollableContainer: string;
+    public scrollableContainer: string | undefined;
 
     protected id: string = `mrich-text-${uuid.generate()}`;
     public get internalOptions(): any {
@@ -54,7 +54,7 @@ export class MRichTextEdit extends ModulVue implements InputManagementData, Inpu
             placeholderText: this.as<InputManagement>()!.placeholder
         };
         propOptions.toolbarStickyOffset = this.toolbarStickyOffset;
-        propOptions.scrollableContainer = this.scrollableContainer || undefined;
+        propOptions.scrollableContainer = this.scrollableContainer;
 
         return Object.assign(this.getDefaultOptions(), propOptions);
     }
