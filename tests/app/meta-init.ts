@@ -73,6 +73,7 @@ const components: string[] = [
     Components.TEXTFIELD_NAME,
     Components.TIMEPICKER_NAME,
     Components.TOOLTIP_NAME,
+    Components.TREE_NAME,
     Components.VALIDATION_MESSAGE_NAME
 ];
 
