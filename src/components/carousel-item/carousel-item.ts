@@ -9,7 +9,7 @@ import WithRender from './carousel-item.html?style=./carousel-item.scss';
 @WithRender
 @Component
 export class MCarouselItem extends Vue {
-    @Prop({ default: 16 })
+    @Prop({ default: 0 })
     margin: number;
 
     public isVisible: boolean = false;
