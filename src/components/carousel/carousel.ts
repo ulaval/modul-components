@@ -18,6 +18,9 @@ export class MCarousel extends Vue {
     @Prop()
     public keyboardNavigable: boolean;
 
+    @Prop({ default: 0 })
+    margin: number;
+
     private items: MCarouselItem[] = [];
 
     private internalIndex: number = 0;
@@ -56,15 +59,16 @@ export class MCarousel extends Vue {
                     if (item.componentInstance instanceof MCarouselItem) {
                         item.componentInstance.isVisible = index === this.internalIndex;
                         item.componentInstance.position = index - this.internalIndex;
+                        item.componentInstance.margin = this.margin;
                         item.componentInstance.$slots.default.forEach(content => {
                             let el: HTMLElement = content.componentInstance && content.componentInstance.$el || content.elm as HTMLElement;
                             if (el instanceof HTMLElement && (el.tagName === 'IMG' || el.tagName === 'PICTURE')) {
                                 el.style.maxWidth = '100%';
                                 el.style.maxHeight = '100%';
-                                el.style.position = 'absolute';
-                                el.style.top = '50%';
-                                el.style.left = '50%';
-                                el.style.transform = 'translate(-50%, -50%)';
+                                // el.style.position = 'absolute';
+                                // el.style.top = '50%';
+                                // el.style.left = '50%';
+                                // el.style.transform = 'translate(-50%, -50%)';
                             }
                         });
                         items.push(item.componentInstance);

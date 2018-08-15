@@ -7,6 +7,11 @@ import WithRender from './carousel.sandbox.html';
 @WithRender
 @Component
 export class MCarouselSandbox extends Vue {
+    private test: number = 0;
+
+    private onClick(): void {
+        this.test = 16;
+    }
 }
 
 const CarouselSandboxPlugin: PluginObject<any> = {
