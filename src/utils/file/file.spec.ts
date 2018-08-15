@@ -5,7 +5,7 @@ import { createMockFile, createMockFileList } from '../../../tests/helpers/file'
 import { HttpService } from '../http/http';
 import { RequestConfig } from '../http/rest';
 import { ModulVue } from '../vue/vue';
-import { FileService, MFile, MFileRejectionCause, MFileStatus } from './file';
+import { extractExtension, FileService, MFile, MFileRejectionCause, MFileStatus } from './file';
 
 jest.mock('../http/http');
 
@@ -323,5 +323,31 @@ describe('FileService', () => {
                 expect(fileToUpload.status).toEqual(MFileStatus.CANCELED);
             });
         });
+    });
+});
+
+const VALID_FILENAME: string = 'text.html';
+const VALID_FILENAME_RETURNED_VALUE: string = 'html';
+const NOT_A_VALID_FILENAME: string = 'text';
+
+describe(`FileMixin`, () => {
+
+    describe(`Given a valid filename`, () => {
+
+        it(`Should return the right extension`, () => {
+            let extension: string = extractExtension(VALID_FILENAME);
+
+            expect(extension).toEqual(VALID_FILENAME_RETURNED_VALUE);
+        });
+
+    });
+});
+
+describe(`Given a non valid filename`, () => {
+
+    it(`Should return the right extension`, () => {
+        let extension: string = extractExtension(NOT_A_VALID_FILENAME);
+
+        expect(extension).toEqual('');
     });
 });
