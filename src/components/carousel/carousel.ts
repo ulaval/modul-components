@@ -12,9 +12,6 @@ export class MCarousel extends Vue {
     @Prop()
     public index: number;
 
-    @Prop()
-    public infinite: boolean;
-
     @Prop({ default: 0 })
     public interval: number;
 
@@ -25,7 +22,10 @@ export class MCarousel extends Vue {
 
     private internalIndex: number = 0;
     private updateInterval: any;
-    private transitionForward: boolean = true;
+
+    public onTap(event: Event): void {
+        this.$emit('tap', event);
+    }
 
     protected mounted(): void {
         this.toggleKeyboardNavigation(this.keyboardNavigable);
@@ -48,7 +48,6 @@ export class MCarousel extends Vue {
 
     private initialize(): void {
         if (this.isIndexValid(this.propIndex) || this.propIndex === 0 && this.items.length === 0) {
-            this.transitionForward = this.internalIndex <= this.propIndex;
             this.internalIndex = this.propIndex;
             let items: MCarouselItem[] = [];
             if (this.$slots.default) {
@@ -126,28 +125,19 @@ export class MCarousel extends Vue {
         return count;
     }
 
-    private onTap(event: Event): void {
-        this.$emit('tap', event);
-    }
-
     private showPrevItem(resetInterval: boolean = false): void {
         if (this.isIndexValid(this.propIndex - 1)) {
-            this.showItem(this.propIndex - 1, false, resetInterval);
-        } else if (this.infinite) {
-            this.showItem(this.items.length - 1, false, resetInterval);
+            this.showItem(this.propIndex - 1, resetInterval);
         }
     }
 
     private showNextItem(resetInterval: boolean = false): void {
         if (this.isIndexValid(this.propIndex + 1)) {
-            this.showItem(this.propIndex + 1, true, resetInterval);
-        } else if (this.infinite) {
-            this.showItem(0, true, resetInterval);
+            this.showItem(this.propIndex + 1, resetInterval);
         }
     }
 
-    private showItem(index: number, transitionForward: boolean, resetInterval: boolean): void {
-        this.transitionForward = transitionForward;
+    private showItem(index: number, resetInterval: boolean): void {
         this.propIndex = index;
         if (resetInterval) {
             this.resetInterval();
