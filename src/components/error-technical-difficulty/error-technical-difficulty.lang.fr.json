@@ -1,6 +1,6 @@
 {
     "m-error-technical-difficulty": {
-        "title": "Houston, nous avons un problème",
+        "title": "Un problème technique<br>s'est produit",
         "hint.primary": "Vous pouvez attendre quelques minutes et réessayer.",
         "hint.secondary": "Si le problème persiste, vous pouvez contacter le soutien technique en leur fournissant le détail de l'erreur.",
         "details": "Détails de l'erreur",

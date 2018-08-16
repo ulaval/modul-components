@@ -1,6 +1,6 @@
 {
     "m-error-access-denied": {
-        "title": "Vous n'avez pas les privilèges pour voir cette page",
+        "title": "Vous n'avez pas les privilèges<br>pour voir cette page",
         "hint.primary": "Si vous croyez que cette situation est anormale, contacter le soutien technique.",
         "help": "Coordonnées du soutien technique"
     }
