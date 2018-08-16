@@ -58,6 +58,10 @@ export class MErrorTemplate extends ModulVue {
         return this.links.length > 0;
     }
 
+    private get hasLinksAndSlot(): boolean {
+        return this.links.length > 0 || !!this.$slots['default'];
+    }
+
     isTargetExternal(isExternal: boolean): string {
         return isExternal ? '_blank' : '' ;
     }
