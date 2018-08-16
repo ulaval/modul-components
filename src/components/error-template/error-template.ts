@@ -50,12 +50,26 @@ export class MErrorTemplate extends ModulVue {
     @Prop({ default: () => [] })
     public links: Link[];
 
+    @Prop({ default: 130 })
+    public propSize: number;
+
     private get hasHints(): boolean {
         return this.hints.length > 0;
     }
 
     private get hasLinks(): boolean {
         return this.links.length > 0;
+    }
+
+    public get iconUrl(): String {
+        return '../../assets/icons/svg/' + this.iconName + '.svg';
+    }
+
+    public get styleObject(): { [name: string ]: string } {
+        return {
+            width: this.propSize + 'px',
+            height: this.propSize + 'px'
+        };
     }
 
     isTargetExternal(isExternal: boolean): string {

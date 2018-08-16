@@ -5,7 +5,7 @@
     }">
     <h1 class="m-error-template__title">{{title}}</h1>
     <div class="m-error-template__icon-container">
-        <m-icon class="m-error-template__icon" :name="iconName" size="130px"></m-icon>
+        <img class="m-error-template__icon" :src="iconUrl" :style="styleObject" />
     </div>
     <p ref="hint" class="m-error-template__hints" v-if="hasHints" v-for="hint in hints">{{hint}}</p>
     <div class="m-error-template__details" v-if="$slots['default']">
