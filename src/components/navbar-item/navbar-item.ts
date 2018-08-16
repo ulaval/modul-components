@@ -64,38 +64,40 @@ export class MNavbarItem extends ModulVue {
 
     private setDimension(): void {
         let itemEl: HTMLElement = this.$refs.item as HTMLElement;
-        itemEl.style.removeProperty('width');
-        itemEl.style.removeProperty('max-width');
-        itemEl.style.removeProperty('white-space');
+        if (itemEl && itemEl.style) {
+            itemEl.style.removeProperty('width');
+            itemEl.style.removeProperty('max-width');
+            itemEl.style.removeProperty('white-space');
 
-        if (this.isMultiline && ((itemEl.innerText === undefined ? '' : itemEl.innerText).trim().length > 15)) {
-            let itemElComputedStyle: any = window.getComputedStyle(itemEl);
-            let fontSize: number = parseFloat(itemElComputedStyle.getPropertyValue('font-size'));
-            let paddingH: number = parseInt(itemElComputedStyle.getPropertyValue('padding-top'), 10) + parseInt(itemElComputedStyle.getPropertyValue('padding-bottom'), 10);
-            // must subtract the padding, create a infinite loop
-            let itemElHeight: number = itemEl.clientHeight - paddingH;
-            let lines: number = Math.floor(itemElHeight / fontSize);
+            if (this.isMultiline && ((itemEl.innerText === undefined ? '' : itemEl.innerText).trim().length > 15)) {
+                let itemElComputedStyle: any = window.getComputedStyle(itemEl);
+                let fontSize: number = parseFloat(itemElComputedStyle.getPropertyValue('font-size'));
+                let paddingH: number = parseInt(itemElComputedStyle.getPropertyValue('padding-top'), 10) + parseInt(itemElComputedStyle.getPropertyValue('padding-bottom'), 10);
+                // must subtract the padding, create a infinite loop
+                let itemElHeight: number = itemEl.clientHeight - paddingH;
+                let lines: number = Math.floor(itemElHeight / fontSize);
 
-            if (lines > 2) {
-                // use selected class to reserve space for when selected
-                this.$el.classList.add(FAKE_SELECTED_CLASS);
-                // create a infinite loop if the parent has 'align-items: stretch'
-                (this.$parent.$refs.list as HTMLElement).style.alignItems = 'flex-start';
+                if (lines > 2) {
+                    // use selected class to reserve space for when selected
+                    this.$el.classList.add(FAKE_SELECTED_CLASS);
+                    // create a infinite loop if the parent has 'align-items: stretch'
+                    (this.$parent.$refs.list as HTMLElement).style.alignItems = 'flex-start';
 
-                do {
-                    itemEl.style.width = itemEl.clientWidth + 1 + 'px'; // increment width
+                    do {
+                        itemEl.style.width = itemEl.clientWidth + 1 + 'px'; // increment width
 
-                    // update values
-                    itemElHeight = itemEl.clientHeight - paddingH;
-                    lines = Math.floor(itemElHeight / fontSize);
-                } while (lines > 2);
+                        // update values
+                        itemElHeight = itemEl.clientHeight - paddingH;
+                        lines = Math.floor(itemElHeight / fontSize);
+                    } while (lines > 2);
 
-                // reset styles once completed
-                this.$el.classList.remove(FAKE_SELECTED_CLASS);
-                (this.$parent.$refs.list as HTMLElement).style.removeProperty('align-items');
+                    // reset styles once completed
+                    this.$el.classList.remove(FAKE_SELECTED_CLASS);
+                    (this.$parent.$refs.list as HTMLElement).style.removeProperty('align-items');
+                }
+            } else {
+                itemEl.style.whiteSpace = 'nowrap';
             }
-        } else {
-            itemEl.style.whiteSpace = 'nowrap';
         }
     }
 

@@ -4,6 +4,8 @@
     &__title {
         font-size: $m-font-size--h3;
         text-align: center;
+        max-width: 250px; // Magic number
+        margin: 0 auto;
 
         .m--is-skin-information & {
             color: $m-color--interactive;

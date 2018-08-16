@@ -185,7 +185,7 @@ describe('draggable', () => {
             draggable.trigger('dragstart', options);
 
             const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
-            expect(options.dataTransfer.setData).toHaveBeenCalledWith('text', JSON.stringify(userDefinedData));
+            expect(options.dataTransfer.setData).toHaveBeenCalledWith('application/json', JSON.stringify(userDefinedData));
             expect(options.dataTransfer.setDragImage).toHaveBeenCalledWith(dragImage, 0, 0);
         });
     });
