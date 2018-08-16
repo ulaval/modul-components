@@ -1,6 +1,6 @@
 {
     "m-error-technical-difficulty": {
-        "title": "Un problème technique s'est produit",
+        "title": "Un problème technique<br>s'est produit",
         "hint.primary": "Essayez de rafraîchir la page.",
         "hint.secondary": "Si le problème persiste, vous pouvez contacter l'équipe de soutien et leur fournir les précisions techniques ci-dessous.",
         "details": "Précisions techniques",
