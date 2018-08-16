@@ -4,8 +4,7 @@
     &__title {
         font-size: $m-font-size--h3;
         text-align: center;
-        max-width: 250px; // Magic number
-        margin: 0 auto;
+        font-weight: $m-font-weight--black;
 
         .m--is-skin-information & {
             color: $m-color--interactive;
@@ -74,6 +73,12 @@
     &__hints,
     &__links {
         text-align: left; // needed when inside a popup
+    }
+
+    &__hints {
+        &.m--no-content {
+            text-align: center;
+        }
     }
 
     &__details {
