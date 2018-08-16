@@ -22,7 +22,6 @@ export class MCarousel extends Vue {
     margin: number;
 
     private items: MCarouselItem[] = [];
-
     private internalIndex: number = 0;
     private updateInterval: any;
 
@@ -57,7 +56,6 @@ export class MCarousel extends Vue {
                 let index: number = 0;
                 this.$slots.default.forEach(item => {
                     if (item.componentInstance instanceof MCarouselItem) {
-                        item.componentInstance.isVisible = index === this.internalIndex;
                         item.componentInstance.position = index - this.internalIndex;
                         item.componentInstance.margin = this.margin;
                         item.componentInstance.$slots.default.forEach(content => {
@@ -65,10 +63,6 @@ export class MCarousel extends Vue {
                             if (el instanceof HTMLElement && (el.tagName === 'IMG' || el.tagName === 'PICTURE')) {
                                 el.style.maxWidth = '100%';
                                 el.style.maxHeight = '100%';
-                                // el.style.position = 'absolute';
-                                // el.style.top = '50%';
-                                // el.style.left = '50%';
-                                // el.style.transform = 'translate(-50%, -50%)';
                             }
                         });
                         items.push(item.componentInstance);
