@@ -1,12 +1,11 @@
 import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import { MLinkMode } from '../link/link';
 import { TreeNode } from '../tree/tree';
 import { MTreeNode } from './tree-node';
 
-const CHILD_NODE_LIST: RefSelector = { ref: 'childNodeList' };
-const LINK: RefSelector = { ref: 'link' };
+const CHILDREN: RefSelector = { ref: 'children' };
+const ITEM: RefSelector = { ref: 'item' };
 
 const NODE_ELEMENT_LABEL: string = 'Node 1';
 const NODE_ELEMENT_ID: string = 'Node 1';
@@ -160,7 +159,7 @@ describe('MTreeNode', () => {
                     selectedNodes = TREE_NODE_SELECTED_3;
                     initializeShallowWrapper();
 
-                    expect(wrapper.find(CHILD_NODE_LIST)).toBeTruthy();
+                    expect(wrapper.find(CHILDREN)).toBeTruthy();
                 });
             });
 
@@ -171,7 +170,7 @@ describe('MTreeNode', () => {
                     selectedNodes = TREE_NODE_SELECTED_2;
                     initializeShallowWrapper();
 
-                    expect(wrapper.find(CHILD_NODE_LIST)).toBeTruthy();
+                    expect(wrapper.find(CHILDREN)).toBeTruthy();
                 });
             });
 
@@ -185,13 +184,9 @@ describe('MTreeNode', () => {
             });
 
             it(`Should emit "click"`, () => {
-                wrapper.find(LINK).trigger('click');
+                wrapper.find(ITEM).trigger('click');
 
                 expect(wrapper.emitted('click')).toBeTruthy();
-            });
-
-            it(`The link should be a button`, () => {
-                expect(wrapper.vm.linkMode).toEqual(MLinkMode.Button);
             });
 
         });
@@ -205,13 +200,9 @@ describe('MTreeNode', () => {
             });
 
             it(`Should not be able to select a node`, () => {
-                wrapper.find(LINK).trigger('click');
+                wrapper.find(ITEM).trigger('click');
 
                 expect(wrapper.emitted('click')).toBeFalsy();
-            });
-
-            it(`The link should be text`, () => {
-                expect(wrapper.vm.linkMode).toEqual(MLinkMode.Text);
             });
 
         });
