@@ -14,6 +14,9 @@ import WithRender from './vue-froala.html?style=./vue-froala.scss';
 require('froala-editor/js/froala_editor.pkgd.min');
 require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
+require('../../../assets/icons/svg/Froala-bold.svg');
+require('../../../assets/icons/svg/Froala-styles.svg');
+require('../../../assets/icons/svg/Froala-lists.svg');
 
 const SPECIAL_TAGS: string[] = ['img', 'button', 'input', 'a'];
 
@@ -136,8 +139,6 @@ enum FroalaElements {
     }
 
     protected addCustomIcons(): void {
-        this.$log.log($.FroalaEditor.ICON_TEMPLATES);
-
         if (this.$i18n.currentLang() === 'fr') {
             $.FroalaEditor.DefineIcon('bold', { SRC: '../../../assets/icons/svg/Froala-bold.svg', ALT: 'gras', template: 'image' });
         }
@@ -154,7 +155,6 @@ enum FroalaElements {
     }
 
     protected addSubMenus(): void {
-        this.$log.log(this.$i18n.translate('m-rich-text-editor:styles'));
          // add mobile mode popups
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
