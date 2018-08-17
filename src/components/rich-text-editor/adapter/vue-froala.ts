@@ -138,22 +138,23 @@ enum FroalaElements {
     protected addPopups(): void {
         // add mobile mode popups
         $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        this.addPopup('styles', 'bold', ['bold', 'italic', 'subscript', 'superscript']);
-        this.addPopup('listes', 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
-        this.addPopup('insertions', 'plus', ['insertLink', 'specialCharacters']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
     }
 
     protected addSubMenus(): void {
+        this.$log.log(this.$i18n.translate('m-rich-text-editor:styles'));
          // add mobile mode popups
         $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        this.addSubMenu('styles', 'bold', ['bold', 'italic', 'subscript', 'superscript']);
-        this.addSubMenu('listes', 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
-        this.addSubMenu('insertions', 'plus', ['insertLink', 'specialCharacters']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
 
         // add "hide sub-menu" button
         $.FroalaEditor.DefineIcon('angle-left', { NAME: 'angle-left' });
         $.FroalaEditor.RegisterCommand('hide', {
-            title: 'Cacher le sous menu',
+            title: this.$i18n.translate('m-rich-text-editor:hide-submenu'),
             icon: 'angle-left',
             undo: false,
             focus: false,
