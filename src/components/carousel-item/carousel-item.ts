@@ -28,10 +28,6 @@ export class MCarouselItem extends Vue {
             return `translate(calc(${100 * this.position}% + ${(this.margin / 2) * this.position}px))`;
         }
     }
-
-    get isLoad(): boolean {
-        return this.position === 0 || this.position === 1 || this.position === -1 || this.position === 2 || this.position === -2;
-    }
 }
 
 const CarouselItemPlugin: PluginObject<any> = {
