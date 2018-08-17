@@ -135,19 +135,29 @@ enum FroalaElements {
         });
     }
 
+    protected addCustomIcons(): void {
+        this.$log.log($.FroalaEditor.ICON_TEMPLATES);
+
+        if (this.$i18n.currentLang() === 'fr') {
+            $.FroalaEditor.DefineIcon('bold', { SRC: '../../../assets/icons/svg/Froala-bold.svg', ALT: 'gras', template: 'image' });
+        }
+        $.FroalaEditor.DefineIcon('styles', { SRC: '../../../assets/icons/svg/Froala-styles.svg', ALT: 'gras', template: 'image' });
+        $.FroalaEditor.DefineIcon('lists', { SRC: '../../../assets/icons/svg/Froala-lists.svg', ALT: 'gras', template: 'image' });
+    }
+
     protected addPopups(): void {
         // add mobile mode popups
         $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
         this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
     }
 
     protected addSubMenus(): void {
         this.$log.log(this.$i18n.translate('m-rich-text-editor:styles'));
          // add mobile mode popups
-        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
-        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
 
         // we'll use this submodule when we'll support images,tables,...
         //  $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
@@ -235,6 +245,7 @@ enum FroalaElements {
             return;
         }
 
+        this.addCustomIcons();
         // this.addPopups();
         this.addSubMenus();
 
