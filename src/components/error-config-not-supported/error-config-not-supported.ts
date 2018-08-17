@@ -23,7 +23,8 @@ export class MErrorConfigNotSupported extends ModulVue {
 
     @Prop({
         default: () => [
-            (Vue.prototype as any).$i18n.translate('m-error-config-not-supported:hint.primary')]
+            (Vue.prototype as any).$i18n.translate('m-error-config-not-supported:hint.primary'),
+            (Vue.prototype as any).$i18n.translate('m-error-config-not-supported:hint.secondary')]
     })
     public hints: string[];
 
