@@ -136,8 +136,6 @@ enum FroalaElements {
     }
 
     protected addCustomIcons(): void {
-        this.$log.log($.FroalaEditor.ICON_TEMPLATES);
-
         if (this.$i18n.currentLang() === 'fr') {
             $.FroalaEditor.DefineIcon('bold', { SRC: '../../../assets/icons/svg/Froala-bold.svg', ALT: 'gras', template: 'image' });
         }
