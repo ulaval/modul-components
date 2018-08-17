@@ -26,20 +26,23 @@
         border-top: 1px solid $m-color--grey-light;
         border-bottom: 1px solid $m-color--grey-light;
 
-        button {
-            color: $m-color--grey-darker;
-        }
+        button[id*='-sub-menu'] {
+            img {
+                margin-left: 8px;
+                margin-right: 16px;
+            }
 
-        button[id*='-sub-menu']::after {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 4px solid transparent;
-            border-right: 4px solid transparent;
-            border-top: 4px solid #222;
-            right: 0;
-            top: 17px;
-            content: "";
+            &::after {
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 4px solid #222;
+                right: 4px;
+                top: 17px;
+                content: "";
+            }
         }
 
         .popup-button::after {
