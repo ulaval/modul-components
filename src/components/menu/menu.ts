@@ -120,11 +120,9 @@ export class MMenu extends BaseMenu implements Menu {
                         }
                         let groupSelected: boolean = false;
                         item.$children.forEach(itemGroup => {
-                            if (itemGroup instanceof MMenuItem) {
-                                if (itemGroup.selected) {
-                                    item.propOpen = true;
-                                    groupSelected = true;
-                                }
+                            if (itemGroup instanceof MMenuItem && itemGroup.selected) {
+                                item.propOpen = true;
+                                groupSelected = true;
                             }
                         });
                         item.groupSelected = groupSelected;
