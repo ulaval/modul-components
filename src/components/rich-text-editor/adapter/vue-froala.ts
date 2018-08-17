@@ -163,7 +163,7 @@ enum FroalaElements {
             callback: () => {
                 this.froalaEditor.stylesSubMenu.hideSubMenu();
                 this.froalaEditor.listesSubMenu.hideSubMenu();
-                this.froalaEditor.insertionsSubMenu.hideSubMenu();
+                // this.froalaEditor.insertionsSubMenu.hideSubMenu();
             }
         });
     }
