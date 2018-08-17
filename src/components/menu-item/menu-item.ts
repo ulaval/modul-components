@@ -14,10 +14,10 @@ export abstract class BaseMenuItem extends ModulVue {
 
 export interface MenuItem {
     group: boolean;
-    open: boolean;
     propOpen: boolean;
     selected: boolean;
-    itemSelected: boolean;
+    groupSelected: boolean;
+    insideGroup: boolean;
 }
 
 @WithRender
@@ -38,7 +38,8 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
 
     public group: boolean = false;
     public selected: boolean = false;
-    public itemSelected: boolean = false;
+    public groupSelected: boolean = false;
+    public insideGroup = false;
     // should be initialized to be reactive
     // tslint:disable-next-line:no-null-keyword
     public menuRoot: Menu | null = null;
@@ -56,11 +57,11 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
             console.error('<m-menu-item> need to be inside <m-menu>');
         }
 
-        let groupItemRoot: BaseMenuItem | undefined = this.getParent<BaseMenuItem>(p => p instanceof BaseMenuItem || p.$options.name === 'MMenuItem');
-        if (groupItemRoot) {
-            this.groupItemRoot = (groupItemRoot as any) as MenuItem;
-            this.groupItemRoot.group = true;
-        }
+        this.$children.forEach(item => {
+            if (item instanceof MMenuItem) {
+                this.group = true;
+            }
+        });
 
         this.propOpen = this.open;
     }
