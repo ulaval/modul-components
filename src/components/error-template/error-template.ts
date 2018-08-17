@@ -42,6 +42,9 @@ export class MErrorTemplate extends ModulVue {
     public iconName: string;
 
     @Prop()
+    public svgName: string;
+
+    @Prop()
     public title: string;
 
     @Prop({ default: () => [] })
@@ -51,29 +54,37 @@ export class MErrorTemplate extends ModulVue {
     public links: Link[];
 
     @Prop({ default: 130 })
-    public propSize: number;
+    public size: number;
 
-    private get hasHints(): boolean {
+    public svg: string;
+
+    public get isSvg(): boolean {
+        return (this.svgName !== undefined) && (this.svgName.trim().length > 0);
+    }
+
+    public get hasHints(): boolean {
         return this.hints.length > 0;
     }
 
-    private get hasLinks(): boolean {
+    public get hasLinks(): boolean {
         return this.links.length > 0;
-    }
-
-    public get iconUrl(): String {
-        return '../../assets/icons/svg/' + this.iconName + '.svg';
     }
 
     public get styleObject(): { [name: string ]: string } {
         return {
-            width: this.propSize + 'px',
-            height: this.propSize + 'px'
+            width: this.size + 'px',
+            height: this.size + 'px'
         };
     }
 
-    isTargetExternal(isExternal: boolean): string {
+    public isTargetExternal(isExternal: boolean): string {
         return isExternal ? '_blank' : '' ;
+    }
+
+    protected created(): void {
+        if (this.svgName) {
+            this.svg = require(`../../assets/icons/svg/${this.svgName}.svg`);
+        }
     }
 }
 
