@@ -51,6 +51,10 @@
                 background-color: $m-color--warning-lightest;
             }
         }
+
+        &__svg {
+            z-index: 1;
+        }
     }
 
     &__icon {

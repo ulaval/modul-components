@@ -42,6 +42,9 @@ export class MErrorTemplate extends ModulVue {
     public iconName: string;
 
     @Prop()
+    public svgName: string;
+
+    @Prop()
     public title: string;
 
     @Prop({ default: () => [] })
@@ -50,20 +53,42 @@ export class MErrorTemplate extends ModulVue {
     @Prop({ default: () => [] })
     public links: Link[];
 
-    private get hasHints(): boolean {
+    @Prop({ default: 130 })
+    public size: number;
+
+    public svg: string;
+
+    public get isSvg(): boolean {
+        return (this.svgName !== undefined) && (this.svgName.trim().length > 0);
+    }
+
+    public get hasHints(): boolean {
         return this.hints.length > 0;
     }
 
-    private get hasLinks(): boolean {
+    public get hasLinks(): boolean {
         return this.links.length > 0;
+    }
+
+    public get styleObject(): { [name: string ]: string } {
+        return {
+            width: this.size + 'px',
+            height: this.size + 'px'
+        };
+    }
+
+    public isTargetExternal(isExternal: boolean): string {
+        return isExternal ? '_blank' : '' ;
+    }
+
+    protected created(): void {
+        if (this.svgName) {
+            this.svg = require(`../../assets/icons/svg/${this.svgName}.svg`);
+        }
     }
 
     private get hasLinksAndSlot(): boolean {
         return this.links.length > 0 || !!this.$slots['default'];
-    }
-
-    isTargetExternal(isExternal: boolean): string {
-        return isExternal ? '_blank' : '' ;
     }
 }
 

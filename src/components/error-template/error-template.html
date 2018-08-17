@@ -3,9 +3,10 @@
     'm--is-skin-error': skin=='error',
     'm--is-skin-warning': skin=='warning'
     }">
-    <h1 class="m-error-template__title" v-html="title"></h1>
-    <div class="m-error-template__icon-container">
-        <m-icon class="m-error-template__icon" :name="iconName" size="130px"></m-icon>
+    <h1 class="m-error-template__title">{{title}}</h1>
+    <div  class="m-error-template__icon-container" >
+        <div class="m-error-template__icon" :style="styleObject" v-html="svg" :title="title" v-if="isSvg"></div>
+        <m-icon class="m-error-template__icon" :name="iconName" :svg-title="title" :size="size + 'px'" v-else></m-icon>
     </div>
     <p ref="hint" class="m-error-template__hints" :class="{ 'm--no-content': !hasLinksAndSlot}" v-if="hasHints" v-for="hint in hints">{{hint}}</p>
     <div class="m-error-template__details" v-if="$slots['default']">
