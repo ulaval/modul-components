@@ -10,7 +10,11 @@ export class MCarouselSandbox extends Vue {
     private test: number = 0;
 
     private onClick(): void {
-        this.test = 16;
+        if (this.test === 0) {
+            this.test = 16;
+        } else {
+            this.test = 0;
+        }
     }
 }
 
