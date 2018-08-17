@@ -14,6 +14,9 @@ import WithRender from './vue-froala.html?style=./vue-froala.scss';
 require('froala-editor/js/froala_editor.pkgd.min');
 require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
+require('../../../assets/icons/svg/Froala-bold.svg');
+require('../../../assets/icons/svg/Froala-styles.svg');
+require('../../../assets/icons/svg/Froala-lists.svg');
 
 const SPECIAL_TAGS: string[] = ['img', 'button', 'input', 'a'];
 
