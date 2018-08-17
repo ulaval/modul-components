@@ -146,10 +146,12 @@ enum FroalaElements {
     protected addSubMenus(): void {
         this.$log.log(this.$i18n.translate('m-rich-text-editor:styles'));
          // add mobile mode popups
-        $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
-        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
+
+        // we'll use this submodule when we'll support images,tables,...
+        //  $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
+        // this.addSubMenu(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
 
         // add "hide sub-menu" button
         $.FroalaEditor.DefineIcon('angle-left', { NAME: 'angle-left' });
@@ -210,6 +212,8 @@ enum FroalaElements {
         this.froalaEditor.$tb.find(`.fr-command`).hide();
         this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
         this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertLink"]`).show();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
         // show submit buttons (ex: link insertion submit button)
         this.froalaEditor.$tb.find(`.fr-submit`).show();
     }

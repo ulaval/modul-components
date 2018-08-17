@@ -55,7 +55,9 @@
             display: none;
 
             &[data-cmd*="-sub-menu"],
-            &[data-cmd="fullscreen"] {
+            &[data-cmd="fullscreen"],
+            &[data-cmd="insertLink"],
+            &[data-cmd="specialCharacters"] {
                 display: inline-block;
             }
 
