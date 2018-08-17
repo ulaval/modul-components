@@ -42,8 +42,8 @@ const components: string[] = [
     Components.MODAL_NAME,
     Components.NAVBAR_NAME,
     Components.NAVBAR_ITEM_NAME,
+    Components.OPTION_NAME,
     Components.MENU_NAME,
-    Components.MENU_ITEM_NAME,
     Components.PAGE_NOT_FOUND_NAME,
     Components.PANEL_NAME,
     Components.PHONE_NUMBER_NAME,
@@ -53,6 +53,7 @@ const components: string[] = [
     Components.POPUP_NAME,
     Components.RADIO_NAME,
     Components.RICH_TEXT_NAME,
+    Components.RICH_TEXT_EDITOR_NAME,
     Components.RADIO_GROUP_NAME,
     Components.RADIO_STYLE_NAME,
     Components.SCROLL_TOP_NAME,
@@ -72,6 +73,7 @@ const components: string[] = [
     Components.TEXTFIELD_NAME,
     Components.TIMEPICKER_NAME,
     Components.TOOLTIP_NAME,
+    Components.TREE_NAME,
     Components.VALIDATION_MESSAGE_NAME
 ];
 

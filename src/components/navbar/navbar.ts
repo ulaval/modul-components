@@ -14,11 +14,11 @@ export abstract class BaseNavbar extends ModulVue { }
 
 export interface Navbar {
     model: string;
-    mouseEvent: boolean;
+    multiline: boolean;
     updateValue(value: string): void;
-    onMouseover(value: string, event): void;
-    onMouseleave(value: string, event): void;
-    onClick(value: string, event): void;
+    onMouseover(event: Event, value: string): void;
+    onMouseleave(event: Event, value: string): void;
+    onClick(event: Event, value: string): void;
 }
 
 interface NavbarItems {
@@ -28,13 +28,23 @@ interface NavbarItems {
 }
 
 export enum MNavbarSkin {
-    Light = 'light',
-    Darker = 'darker',
-    Darkest = 'darkest',
-    LightTab = 'light-tab',
-    DarkTab = 'dark-tab',
-    Plain = 'plain',
-    Arrow = 'arrow'
+    NavMain = 'nav-main',
+    NavSub = 'nav-sub',
+    NavSoft= 'nav-soft',
+    TabLight = 'tab-light',
+    TabDark = 'tab-dark',
+    TabArrow = 'tab-arrow',
+    TabUnderline = 'tab-underline',
+    TabSoft= 'tab-soft',
+    Plain = 'plain'
+}
+
+export enum MNavbarMaxWidth {
+    XLarge = '1400px',
+    Large = '1200px',
+    Regular = '1000px',
+    Small = '800px',
+    Text = '720px'
 }
 
 @WithRender
@@ -46,33 +56,40 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Prop()
     public selected: string;
     @Prop({
-        default: MNavbarSkin.LightTab,
+        default: MNavbarSkin.NavMain,
         validator: value =>
-            value === MNavbarSkin.Light ||
-            value === MNavbarSkin.Darker ||
-            value === MNavbarSkin.Darkest ||
-            value === MNavbarSkin.LightTab ||
-            value === MNavbarSkin.DarkTab ||
-            value === MNavbarSkin.Plain ||
-            value === MNavbarSkin.Arrow
+            value === MNavbarSkin.NavMain ||
+            value === MNavbarSkin.NavSub ||
+            value === MNavbarSkin.NavSoft ||
+            value === MNavbarSkin.TabLight ||
+            value === MNavbarSkin.TabDark ||
+            value === MNavbarSkin.TabArrow ||
+            value === MNavbarSkin.TabUnderline ||
+            value === MNavbarSkin.TabSoft ||
+            value === MNavbarSkin.Plain
     })
     public skin: string;
-    @Prop({ default: true })
-    public margin: boolean;
     @Prop()
     public disabled: boolean;
     @Prop({ default: true })
-    public arrowMobile: boolean;
-    @Prop({ default: false })
-    public mouseEvent: boolean;
+    public navigationArrow: boolean;
+    @Prop({ default: MNavbarMaxWidth.Large })
+    public maxWidth: string;
+    @Prop({ default: true })
+    public multiline: boolean;
+    @Prop()
+    public titleButtonLeft: string;
+    @Prop()
+    public titleButtonRight: string;
 
     public $refs: {
         buttonRight: HTMLElement,
+        buttonLeft: HTMLElement,
         list: HTMLElement,
-        wrap: HTMLElement
+        wrap: HTMLElement,
+        contents: HTMLElement
     };
 
-    private animActive: boolean = false;
     private animReady: boolean = false;
     private internalValue: any | undefined = '';
     private showArrowLeft: boolean = false;
@@ -83,16 +100,16 @@ export class MNavbar extends BaseNavbar implements Navbar {
         this.model = value;
     }
 
-    public onMouseover(value: any, event: Event): void {
-        this.$emit('mouseover', value, event);
+    public onMouseover(event: Event, value: string): void {
+        this.$emit('mouseover', event, value);
     }
 
-    public onMouseleave(value: any, event: Event): void {
-        this.$emit('mouseleave', value, event);
+    public onMouseleave(event: Event, value: string): void {
+        this.$emit('mouseleave', event, value);
     }
 
-    public onClick(value: any, event: Event): void {
-        this.$emit('click', value, event);
+    public onClick(event: Event, value: string): void {
+        this.$emit('click', event, value);
     }
 
     public get model(): any {
@@ -109,7 +126,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     protected mounted(): void {
-        this.scrollToSelected();
         this.setupScrolllH();
         this.as<ElementQueries>().$on('resize', this.setupScrolllH);
 
@@ -117,104 +133,130 @@ export class MNavbar extends BaseNavbar implements Navbar {
             child.$on('resize', this.setupScrolllH);
         });
 
-        // delay the animation beyond initial load
-        setTimeout(() => {
-            this.animReady = true;
-        }, 0);
+        this.$refs.wrap.addEventListener('scroll', this.setDisplayButtonArrrow);
     }
 
     protected beforeDestroy(): void {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
+        this.$refs.wrap.removeEventListener('scroll', this.setDisplayButtonArrrow);
     }
 
-    private setPosition(element, ref: string): void {
+    @Watch('multiline')
+    private multilineChanged(): void {
+        // Wait for navbar-item height calculation -> setimension()
+        setTimeout(() => {
+            this.setupScrolllH();
+        });
+    }
+
+    private setDisplayButtonArrrow(): void {
+        let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
+        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
+
+        this.showArrowRight = wrapEl.scrollLeft < maxScrollLeft;
+
+        this.showArrowLeft = wrapEl.scrollLeft > 0;
+    }
+
+    private get hasArrowRight(): boolean {
+        return this.showArrowRight && this.navigationArrow;
+    }
+
+    private get hasArrowLeft(): boolean {
+        return this.showArrowLeft && this.navigationArrow;
+    }
+
+    private setSelectedIndicatorPosition(element, ref: string): void {
         let positionX: number = element.$el.offsetLeft;
         let width: number = element.$el.clientWidth;
         let localRef: HTMLElement = this.$refs[ref];
 
         localRef.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
         localRef.style.width = width + 'px';
-        this.animActive = true;
-
     }
 
     @Watch('selected')
     private setAndUpdate(value): void {
         this.internalValue = value;
-        if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
-            let selected: Vue | undefined = this.$children.find(element => element.$props.value === this.selected);
-            if (selected) {
-                this.setPosition(selected, this.skin);
-            }
-        }
+        this.scrollToSelected();
     }
 
     private setupScrolllH(): void {
-        let listEl: HTMLElement = this.$refs.list;
+        let contentsEl: HTMLElement = this.$refs.contents;
         let wrapEl: HTMLElement = this.$refs.wrap;
-        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
+        let listEl: HTMLElement = this.$refs.list;
 
         if (wrapEl.scrollWidth > wrapEl.clientWidth) {
             this.computedHeight = listEl.clientHeight;
             wrapEl.style.height = this.computedHeight + OVERFLOWOFFSET + 'px';
-            this.$el.style.height = this.computedHeight + 'px';
+            contentsEl.style.height = this.computedHeight + 'px';
 
-            wrapEl.scrollLeft = this.updateScrollPosition();
-
-            if (wrapEl.scrollLeft < maxScrollLeft) {
-                this.showArrowRight = true;
-            }
-
-            if (wrapEl.scrollLeft > 0) {
-                this.showArrowLeft = true;
-            }
+            this.scrollToSelected();
+            this.setDisplayButtonArrrow();
 
         } else {
             this.showArrowLeft = false;
             this.showArrowRight = false;
             wrapEl.style.removeProperty('height');
-            this.$el.style.removeProperty('height');
+            contentsEl.style.removeProperty('height');
+        }
+
+        if (!this.animReady) {
+            setTimeout(() => {
+                this.animReady = true;
+            });
         }
     }
 
     private scrollToSelected(): void {
-        this.$children.forEach(element => {
-            if (element.$props.value === this.selected) {
+        this.navbarItems().elements.forEach(element => {
+            // Allow time to make sure an item is selected
+            setTimeout(() => {
+                if (element.$props.value === this.selected) {
+                    let buttonLeftWidth: number = this.hasArrowLeft ? this.$refs.buttonLeft.clientWidth : 0;
+                    let buttonRightWidth: number = this.hasArrowRight ? this.$refs.buttonRight.clientWidth : 0;
+                    let wrapEl: HTMLElement = this.$refs.wrap;
+                    let scrollPositionAlignLeft: number = element.$el.offsetLeft - buttonLeftWidth;
 
-                (this.$refs.wrap as HTMLElement).scrollLeft = element.$el.offsetLeft;
+                    // Check if selected element is visible in navbar
+                    if (wrapEl.clientWidth > (element.$el.offsetLeft - wrapEl.scrollLeft + buttonRightWidth)) {
+                        // Check if the selected element exceeds on the left side
+                        if ((element.$el.offsetLeft - buttonLeftWidth - wrapEl.scrollLeft) < 0) {
+                            wrapEl.scrollLeft = scrollPositionAlignLeft;
+                        // Check if the selected element exceeds on the right side
+                        } else if (wrapEl.clientWidth < (element.$el.offsetLeft - wrapEl.scrollLeft + element.$el.clientWidth - buttonRightWidth)) {
+                            wrapEl.scrollLeft = wrapEl.scrollLeft + element.$el.clientWidth + buttonRightWidth - (wrapEl.scrollLeft + wrapEl.clientWidth - element.$el.offsetLeft);
+                        }
+                    } else {
+                        wrapEl.scrollLeft = scrollPositionAlignLeft;
+                    }
 
-                if (this.skin === MNavbarSkin.Light || this.skin === MNavbarSkin.Arrow) {
-                    this.setPosition(element, this.skin);
+                    if (this.skin === MNavbarSkin.TabUnderline || this.skin === MNavbarSkin.TabArrow) {
+                        this.setSelectedIndicatorPosition(element, this.skin);
+                    }
+                    this.setDisplayButtonArrrow();
                 }
-
-            }
+            });
         });
-    }
-
-    private updateScrollPosition(): number {
-        let offsetLeft: number = 0;
-        this.$children.forEach(element => {
-            if (element.$props.value === this.selected) {
-                offsetLeft = element.$el.offsetLeft;
-            }
-        });
-        return offsetLeft;
     }
 
     private get buttonSkin(): string {
-        return this.skin === 'dark' ? this.skin : 'light';
+        return this.skin === MNavbarSkin.NavMain || this.skin === MNavbarSkin.NavSub || this.skin === MNavbarSkin.NavSoft || this.skin === MNavbarSkin.TabDark ? 'dark' : 'light';
     }
 
-    private get isLightSkin(): boolean {
-        return this.skin === 'light';
+    private get buttonRipple(): boolean {
+        return this.skin === MNavbarSkin.TabUnderline || this.skin === MNavbarSkin.TabArrow || this.skin === MNavbarSkin.TabSoft;
     }
 
-    private get isArrowSkin(): boolean {
-        return this.skin === 'arrow';
+    private get isTabUnderlineSkin(): boolean {
+        return this.skin === MNavbarSkin.TabUnderline;
+    }
+
+    private get isTabArrowSkin(): boolean {
+        return this.skin === MNavbarSkin.TabArrow;
     }
 
     private navbarItems(): NavbarItems {
-
         let navbarItems: Vue[] = this.$children.filter(element => {
             return element instanceof MNavbarItem;
         });
@@ -232,75 +274,36 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private scrollLeft(): void {
-        let container: HTMLElement = this.$refs.wrap;
-        let maxScrollLeft: number = container.scrollWidth - container.clientWidth;
-        let cLeft: number = container.scrollLeft;
-        let outbound: any | undefined;
-
-        let navbarItems: NavbarItems = this.navbarItems();
+        let wrapEl: HTMLElement = this.$refs.wrap;
+        let outbound: Vue | undefined;
 
         // find the previus element outside visible area
-        navbarItems.elements.forEach(element => {
-            let eLeft: number = element.$el.offsetLeft;
-            if (eLeft < cLeft) {
+        this.navbarItems().elements.forEach(element => {
+            if (element.$el.offsetLeft < wrapEl.scrollLeft) {
                 outbound = element;
             }
         });
 
         if (outbound) {
-            container.scrollLeft = outbound.$el.offsetLeft;
+            wrapEl.scrollLeft = outbound.$el.offsetLeft - this.$refs.buttonLeft.clientWidth;
         }
-
-        let pl: number = parseInt(window.getComputedStyle(navbarItems.firstElement).paddingLeft as string, 10);
-        if (container.scrollLeft <= pl) {
-            this.showArrowLeft = false;
-        }
-
-        let pr: number = parseInt(window.getComputedStyle(navbarItems.lastElement).paddingRight as string, 10);
-        if (container.scrollLeft < maxScrollLeft - pr) {
-            this.showArrowRight = true;
-        }
-
     }
 
     private scrollRight(): void {
-        let container: HTMLElement = this.$refs.wrap;
-        let maxScrollLeft: number = container.scrollWidth - container.clientWidth;
-        let cRight: number = container.scrollLeft + container.clientWidth;
-
-        let navbarItems: NavbarItems = this.navbarItems();
+        let wrapEl: HTMLElement = this.$refs.wrap;
+        // let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
+        let cRight: number = wrapEl.scrollLeft + wrapEl.clientWidth;
 
         // find the next element outside visible area
-        let outbound: Vue | undefined = navbarItems.elements.find(element => element.$el.offsetLeft + element.$el.clientWidth > cRight);
+        let outbound: Vue | undefined = this.navbarItems().elements.find(element => element.$el.offsetLeft + element.$el.clientWidth > cRight);
 
         if (outbound) {
-
-            let ml: number = parseInt(window.getComputedStyle(outbound.$el).marginLeft as string, 10);
-            let previousElement: HTMLElement | null = outbound.$el.previousElementSibling as HTMLElement;
-            let mr: number = parseInt(window.getComputedStyle(previousElement).marginRight as string, 10);
-
-            // get margins values
-            let margins: number = ml + mr;
-
             // get the threshold of visible part of the element
             let threshold: number = cRight - outbound.$el.offsetLeft;
 
             // move the container scroll
-            container.scrollLeft += (outbound.$el.clientWidth + margins) - threshold;
+            wrapEl.scrollLeft += (outbound.$el.clientWidth + this.$refs.buttonRight.clientWidth) - threshold;
         }
-
-        let pl: number = parseInt(window.getComputedStyle(navbarItems.firstElement).paddingLeft as string, 10);
-        if (container.scrollLeft > pl && !this.showArrowLeft) {
-            this.showArrowLeft = true;
-            // add the arrow width to the scroll the first time it appear
-            container.scrollLeft += (this.$refs.buttonRight as HTMLElement).clientWidth;
-        }
-
-        let pr: number = parseInt(window.getComputedStyle(navbarItems.lastElement).paddingRight as string, 10);
-        if (container.scrollLeft >= maxScrollLeft - pr) {
-            this.showArrowRight = false;
-        }
-
     }
 }
 

@@ -35,12 +35,12 @@ import InputStyleSandboxPlugin from '../components/input-style/input-style.sandb
 import LimitTextSandboxPlugin from '../components/limit-text/limit-text.sandbox';
 import LinkSandboxPlugin from '../components/link/link.sandbox';
 import ListItemSandboxPlugin from '../components/list-item/list-item.sandbox';
-import MenuItemSandboxPlugin from '../components/menu-item/menu-item.sandbox';
 import MenuSandboxPlugin from '../components/menu/menu.sandbox';
 import MessageSandboxPlugin from '../components/message/message.sandbox';
 import ModalSandboxPlugin from '../components/modal/modal.sandbox';
 import NavbarItemSandboxPlugin from '../components/navbar-item/navbar-item.sandbox';
 import NavbarSandboxPlugin from '../components/navbar/navbar.sandbox';
+import OptionSandboxPlugin from '../components/option/option.sandbox';
 import PageNotFoundSandboxPlugin from '../components/page-not-found/page-not-found.sandbox';
 import PanelSandboxPlugin from '../components/panel/panel.sandbox';
 import PhoneNumberSandboxPlugin from '../components/phone-number/phone-number.sandbox';
@@ -51,6 +51,7 @@ import ProgressSandboxPlugin from '../components/progress/progress.sandbox';
 import RadioGroupSandboxPlugin from '../components/radio-group/radio-group.sandbox';
 import RadioStyleSandboxPlugin from '../components/radio-style/radio-style.sandbox';
 import RadioSandboxPlugin from '../components/radio/radio.sandbox';
+import RichTextEditorSandBoxPlugin from '../components/rich-text-editor/rich-text-editor.sandbox';
 import RichTextSandBoxPlugin from '../components/rich-text/rich-text.sandbox';
 import ScrollTopSandboxPlugin from '../components/scroll-top/scroll-top.sandbox';
 import SessionExpiredSandboxPlugin from '../components/session-expired/session-expired.sandbox';
@@ -69,6 +70,7 @@ import TextareaSandboxPlugin from '../components/textarea/textarea.sandbox';
 import TextfieldSandboxPlugin from '../components/textfield/textfield.sandbox';
 import TimepickerSandboxPlugin from '../components/timepicker/timepicker.sandbox';
 import TooltipSandboxPlugin from '../components/tooltip/tooltip.sandbox';
+import TreeSandboxPlugin from '../components/tree/tree.sandbox';
 import ValidationMessageSandboxPlugin from '../components/validation-message/validation-message.sandbox';
 
 const SandboxesPlugin: PluginObject<any> = {
@@ -113,7 +115,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(NavbarSandboxPlugin);
         Vue.use(NavbarItemSandboxPlugin);
         Vue.use(MenuSandboxPlugin);
-        Vue.use(MenuItemSandboxPlugin);
+        Vue.use(OptionSandboxPlugin);
         Vue.use(PageNotFoundSandboxPlugin);
         Vue.use(PanelSandboxPlugin);
         Vue.use(PhoneNumberSandboxPlugin);
@@ -125,6 +127,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(RadioGroupSandboxPlugin);
         Vue.use(RadioStyleSandboxPlugin);
         Vue.use(RichTextSandBoxPlugin);
+        Vue.use(RichTextEditorSandBoxPlugin);
         Vue.use(ScrollTopSandboxPlugin);
         Vue.use(SessionExpiredSandboxPlugin);
         Vue.use(SidebarSandboxPlugin);
@@ -142,6 +145,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(TextfieldSandboxPlugin);
         Vue.use(TimepickerSandboxPlugin);
         Vue.use(TooltipSandboxPlugin);
+        Vue.use(TreeSandboxPlugin);
         Vue.use(ValidationMessageSandboxPlugin);
     }
 };

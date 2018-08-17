@@ -86,6 +86,10 @@ export class MErrorTemplate extends ModulVue {
             this.svg = require(`../../assets/icons/svg/${this.svgName}.svg`);
         }
     }
+
+    private get hasLinksAndSlot(): boolean {
+        return this.links.length > 0 || !!this.$slots['default'];
+    }
 }
 
 const ErrorTemplatePlugin: PluginObject<any> = {
