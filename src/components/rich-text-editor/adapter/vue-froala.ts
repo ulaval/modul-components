@@ -154,7 +154,6 @@ enum FroalaElements {
     }
 
     protected addSubMenus(): void {
-        this.$log.log(this.$i18n.translate('m-rich-text-editor:styles'));
          // add mobile mode popups
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
