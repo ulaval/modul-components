@@ -219,7 +219,7 @@ enum FroalaElements {
     }
 
     @Watch('isEqMinS')
-    private test(): void {
+    private changeMode(): void {
         // mode desktop
         if (this.as<ElementQueries>().isEqMinS) {
             this.desktopMode();
