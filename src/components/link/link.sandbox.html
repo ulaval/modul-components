@@ -1,13 +1,24 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+    <h2>Utilisation du composant m-link</h2>
+    <p>
+        <m-link>m-link</m-link>
+    </p>
+    <h2>Utilisation de la classe .m-u--link</h2>
+    <p>
+        <a href="#" class="m-u--link">
+            <span class="m-u--link-text">Lien (.m-u--link)</span>
+        </a>
     </p>
     <p>
-        <m-link><!-- Test case --></m-link>
+        <a href="#" class="m-u--link">
+            <m-icon class="m-u--link-icon-left" name="m-svg__clock"></m-icon>
+            <span class="m-u--link-text">Icone à gauche (.m-u--link-icon-left)</span>
+        </a>
+    </p>
+    <p>
+        <a href="#" class="m-u--link">
+            <span class="m-u--link-text">Icone à droite (.m-u--link-icon-right)</span>
+            <m-icon class="m-u--link-icon-right" name="m-svg__clock"></m-icon>
+        </a>
     </p>
 </div>
