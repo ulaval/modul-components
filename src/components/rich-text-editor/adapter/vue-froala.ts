@@ -248,24 +248,24 @@ export class VueFroala extends Vue {
     }
 
     private dismissWordPasteModal(): void {
-        const wordPasteModal: HTMLElement | null = document.querySelector(FroalaElements.MODAL);
-        const modalOverlay: HTMLElement | null = document.querySelector(FroalaElements.MODAL_OVERLAY);
-        const cleanWordButton: HTMLElement | null = this.getWordPasteCleanButton();
+        if ($(FroalaElements.MODAL).is(':visible')) {
+            const wordPasteModal: HTMLElement | null = document.querySelector(FroalaElements.MODAL);
+            const modalOverlay: HTMLElement | null = document.querySelector(FroalaElements.MODAL_OVERLAY);
+            const cleanWordButton: HTMLElement | null = this.getWordPasteCleanButton();
 
-        if (wordPasteModal) {
-            wordPasteModal.style.display = 'none';
+            if (wordPasteModal) {
+                wordPasteModal.style.display = 'none';
+            }
+
+            if (modalOverlay) {
+                modalOverlay.style.display = 'none';
+            }
+
+            if (cleanWordButton) {
+                cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+                cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+            }
         }
-
-        if (modalOverlay) {
-            modalOverlay.style.display = 'none';
-        }
-
-        if (cleanWordButton) {
-            cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
-            cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
-        }
-
-        wordPasteModal!.remove();
     }
 
     private getWordPasteCleanButton(): HTMLElement | null {
