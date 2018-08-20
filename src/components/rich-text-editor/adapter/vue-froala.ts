@@ -248,14 +248,12 @@ export class VueFroala extends Vue {
     }
 
     private dismissWordPasteModal(): void {
-        if ($(FroalaElements.MODAL).is(':visible')) {
-            const wordPasteModal: HTMLElement | null = document.querySelector(FroalaElements.MODAL);
-            const modalOverlay: HTMLElement | null = document.querySelector(FroalaElements.MODAL_OVERLAY);
-            const cleanWordButton: HTMLElement | null = this.getWordPasteCleanButton();
+        const wordPasteModal: HTMLElement | null = document.querySelector(FroalaElements.MODAL);
+        const modalOverlay: HTMLElement | null = document.querySelector(FroalaElements.MODAL_OVERLAY);
+        const cleanWordButton: HTMLElement | null = this.getWordPasteCleanButton();
 
-            if (wordPasteModal) {
-                wordPasteModal.style.display = 'none';
-            }
+        if (wordPasteModal && wordPasteModal.style.display !== 'none') {
+            wordPasteModal.style.display = 'none';
 
             if (modalOverlay) {
                 modalOverlay.style.display = 'none';
