@@ -145,11 +145,11 @@ enum FroalaElements {
 
     protected addSubMenus(): void {
         this.$log.log(this.$i18n.translate('m-rich-text-editor:styles'));
-         // add mobile mode popups
+         // add mobile mode submenus
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
 
-        // we'll use this submodule when we'll support images,tables,...
+        // we'll use this submenu when we'll support images,tables,...
         //  $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
         // this.addSubMenu(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
 
@@ -235,7 +235,6 @@ enum FroalaElements {
             return;
         }
 
-        // this.addPopups();
         this.addSubMenus();
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
