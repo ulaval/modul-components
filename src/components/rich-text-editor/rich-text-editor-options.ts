@@ -1,4 +1,5 @@
 import { library } from '@fortawesome/fontawesome';
+import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft';
 import faArrowLeft from '@fortawesome/fontawesome-free-solid/faArrowLeft';
 import faBold from '@fortawesome/fontawesome-free-solid/faBold';
 import faCompress from '@fortawesome/fontawesome-free-solid/faCompress';
@@ -20,7 +21,7 @@ import faTrash from '@fortawesome/fontawesome-free-solid/faTrash';
 import faUnlink from '@fortawesome/fontawesome-free-solid/faUnlink';
 
 library.add(faExpand, faCompress, faBold, faItalic, faSubscript, faSuperscript, faParagraph, faListOl, faListUl, faOutdent, faIndent, faLink, faExternalLinkAlt, faEdit, faUnlink, faTrash,
-    faTimes, faArrowLeft, faPlus);
+    faTimes, faArrowLeft, faPlus, faAngleLeft);
 
 export abstract class MRichTextEditorDefaultOptions {
     public immediateVueModelUpdate: boolean = true;
@@ -32,7 +33,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public toolbarSticky: boolean = true;
     public scrollableContainer: string = 'body';
     public toolbarStickyOffset: number = 0;
-    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'stylesPlugin', 'listesPlugin', 'insertionsPlugin'];
+    public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'stylesSubMenu', 'listesSubMenu', 'insertionsSubMenu'];
     public wordPasteModal: boolean = true;
 
     constructor(public key: string, public language: string = 'en_CA') {
@@ -43,13 +44,12 @@ export abstract class MRichTextEditorDefaultOptions {
 }
 
 export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOptions {
-    public toolbarButtons: string[] = ['bold', 'italic', 'subscript', 'superscript', '|', 'formatUL',
-        'formatOL', 'outdent', 'indent', '|', 'insertLink', 'specialCharacters', '|', 'fullscreen'];
-    public toolbarButtonsXS: string[] = ['stylesPopup', 'listesPopup', 'insertLink', 'specialCharacters', 'fullscreen'];
+    public toolbarButtons: string[] = ['hide', 'styles-sub-menu', 'bold', 'italic', 'subscript', 'superscript', 'listes-sub-menu', 'formatUL',
+        'formatOL', 'outdent', 'indent', 'insertLink', 'specialCharacters', 'fullscreen'];
 
     public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
 
-    public linkInsertButtons: string[] = ['linkBack'];
+    public linkInsertButtons: string[] = [];
 
     constructor(key: string, language?: string | undefined) { super(key, language); }
 }

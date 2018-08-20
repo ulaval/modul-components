@@ -1,12 +1,14 @@
 // This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
-import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
+import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
+import { ModulVue } from '../../../utils/vue/vue';
 import { PopupPlugin } from './popup-plugin';
+import SubMenuPlugin from './submenu-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
 require('froala-editor/js/froala_editor.pkgd.min');
@@ -40,8 +42,11 @@ enum FroalaElements {
 }
 
 @WithRender
-@Component
-export class VueFroala extends Vue {
+@Component({
+    mixins: [
+        ElementQueries
+    ]
+})export class VueFroala extends ModulVue {
     @Prop({
         default: 'div'
     })
@@ -110,12 +115,57 @@ export class VueFroala extends Vue {
         });
     }
 
+    protected addSubMenu(name: string, icon: string, buttonList: string[]): void {
+        const buttonName: string = `${name}-sub-menu`;
+        const pluginName: string = `${name}SubMenu`;
+
+        // The custom popup is defined inside a plugin (new or existing).
+        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new SubMenuPlugin(editor, buttonList); };
+
+        // Create the button that'll open the popup
+        $.FroalaEditor.RegisterCommand(buttonName, {
+            title: name,
+            icon: icon,
+            undo: false,
+            focus: false,
+            plugin: pluginName,
+            callback: function(): void {
+                this[pluginName].showSubMenu();
+            }
+        });
+    }
+
     protected addPopups(): void {
         // add mobile mode popups
         $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        this.addPopup('styles', 'bold', ['bold', 'italic', 'subscript', 'superscript']);
-        this.addPopup('listes', 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
-        this.addPopup('insertions', 'plus', ['insertLink', 'specialCharacters']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
+    }
+
+    protected addSubMenus(): void {
+        this.$log.log(this.$i18n.translate('m-rich-text-editor:styles'));
+         // add mobile mode submenus
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+
+        // we'll use this submenu when we'll support images,tables,...
+        //  $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
+        // this.addSubMenu(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
+
+        // add "hide sub-menu" button
+        $.FroalaEditor.DefineIcon('angle-left', { NAME: 'angle-left' });
+        $.FroalaEditor.RegisterCommand('hide', {
+            title: this.$i18n.translate('m-rich-text-editor:hide-submenu'),
+            icon: 'angle-left',
+            undo: false,
+            focus: false,
+            callback: () => {
+                this.froalaEditor.stylesSubMenu.hideSubMenu();
+                this.froalaEditor.listesSubMenu.hideSubMenu();
+                this.froalaEditor.insertionsSubMenu.hideSubMenu();
+            }
+        });
     }
 
     protected created(): void {
@@ -152,12 +202,40 @@ export class VueFroala extends Vue {
         }
     }
 
+    protected desktopMode(): void {
+        this.froalaEditor.$tb.find(`.fr-command`).show();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).hide();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+    }
+
+    protected mobileMode(): void {
+        this.froalaEditor.$tb.find(`.fr-command`).hide();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertLink"]`).show();
+        this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
+        // show submit buttons (ex: link insertion submit button)
+        this.froalaEditor.$tb.find(`.fr-submit`).show();
+    }
+
+    @Watch('isEqMinS')
+    private changeMode(): void {
+        // mode desktop
+        if (this.as<ElementQueries>().isEqMinS) {
+            this.desktopMode();
+            // hide hide button
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+        } else {
+            this.mobileMode();
+        }
+    }
+
     private createEditor(): void {
         if (this.isInitialized) {
             return;
         }
 
-        this.addPopups();
+        this.addSubMenus();
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
             // we reemit each valid input events so froala can work in input-style component.

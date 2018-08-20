@@ -1,0 +1,8 @@
+{
+    "m-rich-text-editor": {
+        "hide-submenu": "Cacher le sous menu",
+        "insert": "insertions",
+        "styles": "styles",
+        "lists": "listes"
+    }
+}

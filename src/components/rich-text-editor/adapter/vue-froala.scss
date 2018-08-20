@@ -30,6 +30,18 @@
             color: $m-color--grey-darker;
         }
 
+        button[id*='-sub-menu']::after {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #222;
+            right: 0;
+            top: 17px;
+            content: "";
+        }
+
         .popup-button::after {
             position: absolute;
             width: 0;
@@ -99,6 +111,7 @@
         }
 
         /deep/ .fr-toolbar {
+            height: 40px;
             margin-top: 0;
             padding: 0;
             opacity: 1;
