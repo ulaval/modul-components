@@ -89,6 +89,10 @@
     &--unfocused {
         overflow: hidden;
 
+        /deep/ .fr-box.fr-basic.fr-top .fr-wrapper {
+            background: unset;
+        }
+
         /deep/ .fr-sticky-dummy {
             height: 0 !important; // Fix flicking problem with multiple editors on page.
         }
