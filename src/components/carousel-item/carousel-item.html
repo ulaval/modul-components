@@ -1,5 +1,3 @@
-<transition :name="transitionName" @before-enter="beforeEnter" @after-leave="afterLeave">
-    <div class="m-carousel-item" :class="{ 'm--is-anim-active': animActive }" v-show="isVisible">
-        <slot></slot>
-    </div>
-</transition>
+<li class="m-carousel-item" :style="{transform : translate, left: margin + 'px', right: margin + 'px'}">
+    <slot></slot>
+</li>

@@ -86,11 +86,11 @@ export class MMenu extends BaseMenu implements Menu {
         let items: MMenuItem[] = [];
         this.$children.forEach(item => {
             if (item instanceof MMenuItem) {
-                if (!item.group) {
-                    items.push(item);
-                } else {
+                items.push(item);
+                if (item.group) {
                     (item as Vue).$children.forEach(groupItem => {
                         if (groupItem instanceof MMenuItem) {
+                            groupItem.insideGroup = true;
                             items.push(groupItem);
                         }
                     });
@@ -98,7 +98,6 @@ export class MMenu extends BaseMenu implements Menu {
             }
         });
         this.internalItems = items;
-        this.selectedItem();
     }
 
     private selectedItem(): void {
@@ -107,26 +106,27 @@ export class MMenu extends BaseMenu implements Menu {
                 if (!item.isDisabled) {
                     if (item.value === this.model) {
                         item.selected = true;
-                        if (item.groupItemRoot) {
-                            item.groupItemRoot.propOpen = true;
-                            item.groupItemRoot.itemSelected = true;
-                        }
                     } else if (item.selected) {
                         item.selected = false;
-                        if (item.groupItemRoot) {
-                            item.groupItemRoot.itemSelected = false;
-                        }
                     }
                 }
             });
-        }
-    }
 
-    private closeAllGroupItem(): void {
-        if (this.internalItems) {
             this.internalItems.forEach((item) => {
-                if (item.groupItemRoot) {
-                    item.groupItemRoot.propOpen = false;
+                if (!item.isDisabled) {
+                    if (item.group) {
+                        if (!this.open) {
+                            item.propOpen = false;
+                        }
+                        let groupSelected: boolean = false;
+                        item.$children.forEach(itemGroup => {
+                            if (itemGroup instanceof MMenuItem && itemGroup.selected) {
+                                item.propOpen = true;
+                                groupSelected = true;
+                            }
+                        });
+                        item.groupSelected = groupSelected;
+                    }
                 }
             });
         }
@@ -172,7 +172,6 @@ export class MMenu extends BaseMenu implements Menu {
 
     public set propOpen(open: boolean) {
         this.animReady = false;
-        this.closeAllGroupItem();
         this.selectedItem();
         this.internalOpen = open;
         this.$emit('update:open', open);

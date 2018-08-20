@@ -3,11 +3,10 @@
     @mousedown.capture="isDirty = true"
     @touchstart.capture="isDirty = true"
     :class="{
-        'vue-froala--focused': isFocused,
-        'vue-froala--unfocused': !isFocused,
-        'vue-froala--collapsed': collapsed,
-        'vue-froala--animated': isInitialized,
-        'vue-froala--dirty': isDirty
+        'm--is-focus': isFocused,
+        'm--is-collapsed': collapsed,
+        'm--is-anim-ready': isInitialized,
+        'm--is-dirty': isDirty
     }">
     <component ref="editor" :is="tag"></component>
 </div>

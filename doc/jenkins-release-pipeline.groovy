@@ -41,6 +41,7 @@ pipeline {
 		JENKINS_USER = '<jenkins-user>'
 		JENKINS_EMAIL = '<jenkins-email>'
 		NPM_CONFIG = '<npm-config>'
+        POST_RECIPIENTS = '<recipients-email>'
     }
 
     stages {
@@ -239,7 +240,7 @@ pipeline {
 							withCredentials([
 								[$class: 'UsernamePasswordMultiBinding', credentialsId: GIT_CREDS, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']
 							]) {
-								sh "curl -d '{\"title\": \"${BRANCHE_RELEASE}\",\"body\": \"Merge back branch `${BRANCHE_RELEASE}` into develop. *DO NOT SQUASH MERGE*.\",\"head\": \"${BRANCHE_RELEASE}\",\"base\": \"develop\"}' -X POST https://api.github.com/repos/ulaval/${reponame}/pulls?access_token=${GIT_PASSWORD}"
+								sh "curl -d '{\"title\": \"${BRANCHE_RELEASE}\",\"body\": \"Merge back branch `${BRANCHE_RELEASE}` into develop. MERGE COMMIT ONLY - *DO NOT SQUASH/REBASE MERGE*.\",\"head\": \"${BRANCHE_RELEASE}\",\"base\": \"develop\"}' -X POST https://api.github.com/repos/ulaval/${reponame}/pulls?access_token=${GIT_PASSWORD}"
 							}
 						}
 					} finally {
@@ -247,6 +248,19 @@ pipeline {
 					}
 				}
 			}
+        }
+    }
+
+    post {
+        always {
+            script {
+                emailext subject: '$DEFAULT_SUBJECT',
+                        body: '$DEFAULT_CONTENT',
+                        replyTo: '$DEFAULT_REPLYTO',
+                        to: "${POST_RECIPIENTS}"
+                recipientProviders:
+                [[$class: 'DevelopersRecipientProvider']]
+            }
         }
     }
 }

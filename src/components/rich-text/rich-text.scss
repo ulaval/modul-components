@@ -1,14 +1,8 @@
 @import 'abstracts/variables';
+@import '../rich-text-edit/var-froala';
 
 .m-rich-text {
-    /deep/ ul {
-        margin-top: $m-margin;
-        margin-bottom: 0;
-
-        @include m-bullet-list();
-    }
-
-    /deep/ table {
-        @include m-table();
+    /deep/ {
+        @include commonsFroalaStyles();
     }
 }
