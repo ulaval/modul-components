@@ -4,6 +4,9 @@ import $ from 'jquery';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
+import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
+import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
+import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
 import { ModulVue } from '../../../utils/vue/vue';
@@ -14,9 +17,6 @@ import WithRender from './vue-froala.html?style=./vue-froala.scss';
 require('froala-editor/js/froala_editor.pkgd.min');
 require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
-require('../../../assets/icons/svg/Froala-bold.svg');
-require('../../../assets/icons/svg/Froala-styles.svg');
-require('../../../assets/icons/svg/Froala-lists.svg');
 
 const SPECIAL_TAGS: string[] = ['img', 'button', 'input', 'a'];
 
@@ -139,11 +139,13 @@ enum FroalaElements {
     }
 
     protected addCustomIcons(): void {
+        $.FroalaEditor.DefineIconTemplate('custom-icons', '[SVG]');
+
         if (this.$i18n.currentLang() === 'fr') {
-            $.FroalaEditor.DefineIcon('bold', { SRC: '../../../assets/icons/svg/Froala-bold.svg', ALT: 'gras', template: 'image' });
+            $.FroalaEditor.DefineIcon('bold', { SVG: (boldIcon as string), template: 'custom-icons' });
         }
-        $.FroalaEditor.DefineIcon('styles', { SRC: '../../../assets/icons/svg/Froala-styles.svg', ALT: 'gras', template: 'image' });
-        $.FroalaEditor.DefineIcon('lists', { SRC: '../../../assets/icons/svg/Froala-lists.svg', ALT: 'gras', template: 'image' });
+        $.FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
+        $.FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
     }
 
     protected addPopups(): void {
@@ -228,10 +230,10 @@ enum FroalaElements {
         this.froalaEditor.$tb.find(`.fr-submit`).show();
     }
 
-    @Watch('isEqMinS')
+    @Watch('isEqMinXS')
     private test(): void {
         // mode desktop
-        if (this.as<ElementQueries>().isEqMinS) {
+        if (this.as<ElementQueries>().isEqMinXS) {
             this.desktopMode();
             // hide hide button
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();

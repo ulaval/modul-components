@@ -29,3 +29,8 @@ declare module '*.css' {
     const withRender: WithRender;
     export = withRender;
 }
+
+declare module "*.svg" {
+    const content: any;
+    export default content;
+  }
