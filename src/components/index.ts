@@ -79,6 +79,9 @@ import TextareaPlugin from './textarea/textarea';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
+import TreeIconPlugin from './tree-icon/tree-icon';
+import TreeNodePlugin from './tree-node/tree-node';
+import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 export interface ComponentPluginOptions {
@@ -170,6 +173,9 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TooltipPlugin);
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
+        Vue.use(TreePlugin);
+        Vue.use(TreeIconPlugin);
+        Vue.use(TreeNodePlugin);
     }
 };
 

@@ -1,0 +1,93 @@
+@import '../../styles/abstracts/variables';
+@import '../accordion/accordion-transition';
+
+$m-tree-node--height: $m-touch-size;
+$m-tree-node--child-indentation: 52px;
+$m-tree-node--line-width: 22px;
+
+.m-tree-node {
+    color: $m-color--ul-blue;
+
+    & + &,
+    &__children > & {
+        margin-top: $m-margin;
+    }
+
+    &__item {
+        border-radius: $m-tree-node--height / 2;
+        padding-left: 21px;
+        padding-right: 21px;
+        width: $m-min-width;
+        display: flex;
+        align-items: center;
+        height: $m-tree-node--height;
+
+        @include m-button();
+        @include m-button--secondary();
+
+        &__label {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: $m-line-height;
+        }
+    }
+
+    &.m--is-disabled > &__item {
+        @include m-button--disabled();
+    }
+
+    &.m--is-selected > &__item,
+    &:not(.m--is-disabled) > &__item:hover {
+        @include m-button--hover();
+    }
+
+    &__line-extension::before {
+        content: "";
+        position: absolute;
+        left: -$m-tree-node--line-width;
+        width: 1px;
+        top: 0;
+        bottom: 0;
+        background-color: $m-color--interactive;
+    }
+
+    &__child {
+        margin-left: $m-tree-node--child-indentation;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: -$m-tree-node--line-width;
+            top: $m-tree-node--height / 2 - 1;
+            width: $m-tree-node--line-width;
+            height: 1px;
+            background-color: $m-color--interactive;
+        }
+
+        &.m--is-disabled::before {
+            background-color: $m-color--disabled;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: -$m-tree-node--line-width;
+            width: 1px;
+            top: -$m-margin;
+            height: $m-tree-node--height + $m-margin;
+            background-color: $m-color--interactive;
+        }
+
+        &:last-child::after {
+            height: $m-tree-node--height / 2 + $m-margin;
+        }
+
+        &-empty {
+            margin-left: $m-tree-node--child-indentation - $m-tree-node--line-width;
+            margin-top: $m-margin;
+            color: $m-color--text;
+        }
+    }
+}

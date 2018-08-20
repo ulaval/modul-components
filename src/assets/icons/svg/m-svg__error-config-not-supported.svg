@@ -1,0 +1,29 @@
+<svg id="m-svg__error-config-not-supported" viewBox="0 0 153 131" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path fill="#D7D7D7" d="M14.8,114c-6.2,0-11.2-5-11.2-11.2V12.2C3.6,6,8.6,1,14.8,1h123.4c6.2,0,11.2,5,11.2,11.2v90.6
+        c0,6.2-5,11.2-11.2,11.2H14.8z"/>
+    <path d="M138.2,2c5.6,0,10.2,4.6,10.2,10.2v90.6c0,5.6-4.6,10.2-10.2,10.2H14.8c-5.6,0-10.2-4.6-10.2-10.2V12.2
+        C4.6,6.6,9.2,2,14.8,2H138.2 M138.2,0H14.8C8,0,2.6,5.5,2.6,12.2v90.6c0,6.7,5.5,12.2,12.2,12.2h123.4c6.7,0,12.2-5.5,12.2-12.2
+        V12.2C150.4,5.5,145,0,138.2,0L138.2,0z"/>
+    <rect x="10.4" y="7.8" fill="#98D5FF" stroke="#000000" stroke-width="0.25" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="132.3" height="78.2"/>
+    <line fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="10.9" y1="47.5" x2="143.2" y2="47.5"/>
+    <line fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="10.4" y1="66.4" x2="142.6" y2="66.4"/>
+    <line fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="10.4" y1="27.3" x2="142.6" y2="27.3"/>
+    <line fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="77.1" y1="7.8" x2="77.1" y2="86"/>
+    <line fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="43.7" y1="7.8" x2="43.7" y2="86"/>
+    <line fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="109.3" y1="7.8" x2="109.3" y2="86"/>
+    <polyline fill="none" stroke="#E30513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+        10.9,47.5 28.2,47.5 29.3,50.9 32.8,40.5 35.1,45.1 40.8,17.5 47.7,67 52.3,47.5 58.1,47.5 59.2,44 61.5,49.8 63.8,42.8 66.1,47.5
+        73,47.5 	"/>
+    <polyline fill="none" stroke="#E30513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+        71.9,47.5 89.2,47.5 90.3,48.7 93.8,42.1 96.1,46.7 101.8,45.5 108.7,50.3 113.3,47.5 119.1,47.5 120.2,47.2 122.5,48.7 124.8,46
+        127.1,47.5 134,47.5 	"/>
+    <circle fill="#E30513" stroke="#E30513" stroke-width="2" stroke-miterlimit="10" cx="134" cy="47.5" r="1.7"/>
+    <polygon opacity="0.2" fill="#FFFFFF" points="73.9,8.1 45.2,40 10.2,84.6 10.2,25.1 10.2,8 25,8.1 	"/>
+    <rect x="10.4" y="7.8" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="132.3" height="78.2"/>
+    <circle fill="#B3040F" stroke="#000000" stroke-width="2" stroke-miterlimit="10" cx="16" cy="100" r="6"/>
+    <path fill="#0075C3" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M74.5,106h-24c-3.3,0-6-2.7-6-6v0
+        c0-3.3,2.7-6,6-6h24V106z"/>
+    <path fill="#0075C3" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M102.5,106h-24V94h24c3.3,0,6,2.7,6,6v0
+        C108.5,103.3,105.8,106,102.5,106z"/>
+    <ellipse opacity="0.5" fill="#D7D7D7" cx="76.3" cy="128.5" rx="75" ry="2.5"/>
+</svg>

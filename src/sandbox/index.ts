@@ -70,6 +70,7 @@ import TextareaSandboxPlugin from '../components/textarea/textarea.sandbox';
 import TextfieldSandboxPlugin from '../components/textfield/textfield.sandbox';
 import TimepickerSandboxPlugin from '../components/timepicker/timepicker.sandbox';
 import TooltipSandboxPlugin from '../components/tooltip/tooltip.sandbox';
+import TreeSandboxPlugin from '../components/tree/tree.sandbox';
 import ValidationMessageSandboxPlugin from '../components/validation-message/validation-message.sandbox';
 
 const SandboxesPlugin: PluginObject<any> = {
@@ -144,6 +145,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(TextfieldSandboxPlugin);
         Vue.use(TimepickerSandboxPlugin);
         Vue.use(TooltipSandboxPlugin);
+        Vue.use(TreeSandboxPlugin);
         Vue.use(ValidationMessageSandboxPlugin);
     }
 };
