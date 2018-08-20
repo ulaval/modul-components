@@ -21,7 +21,6 @@ $m-tree-node--line-width: 22px;
         display: flex;
         align-items: center;
         height: $m-tree-node--height;
-
         @include m-button();
         @include m-button--secondary();
 
