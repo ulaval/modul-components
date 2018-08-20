@@ -17,7 +17,7 @@ exports[`MSessionExpired should render correctly 1`] = `
     <p><span class="m-i18n">m-session-expired:directions-1</span></p>
     <p><span class="m-i18n">m-session-expired:directions-2</span></p>
     <p></p>
-    <a href="/" class="m-link"> <span class="m-link__text">
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text">
         m-session-expired:back-to-portal
     </span> </a>
 </div>
@@ -40,7 +40,7 @@ exports[`MSessionExpired should render correctly with back-to-label override 1`]
     <p><span class="m-i18n">m-session-expired:directions-1</span></p>
     <p><span class="m-i18n">m-session-expired:directions-2</span></p>
     <p></p>
-    <a href="/" class="m-link"> <span class="m-link__text">
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text">
         Some back to label
     </span> </a>
 </div>

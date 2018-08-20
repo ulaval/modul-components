@@ -6,7 +6,6 @@ import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NODE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
-import { MLinkMode } from '../link/link';
 import TreeIconPlugin from '../tree-icon/tree-icon';
 import { TreeNode } from '../tree/tree';
 import WithRender from './tree-node.html?style=./tree-node.scss';
@@ -40,7 +39,7 @@ export class MTreeNode extends ModulVue {
     public onClick(): void {
         if (this.isFolder) {
             this.open = !this.open;
-        } else {
+        } else if (this.selectable) {
             this.$emit('click', this.currentPath);
         }
     }
@@ -85,12 +84,8 @@ export class MTreeNode extends ModulVue {
         return this.node.hasChildren || !!this.node.children;
     }
 
-    public get linkMode(): MLinkMode {
-        return this.selectable || this.isFolder ? MLinkMode.Button : MLinkMode.Text;
-    }
-
-    public get linkDisabled(): boolean {
-        return this.linkMode === MLinkMode.Text;
+    public get isDisabled(): boolean {
+        return !this.selectable && !this.isFolder;
     }
 
     public get isSelected(): boolean {

@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Browser not supported - test Given desktop mode Given custom values Should render with custom values provided 1`] = `<div skin="warning" iconName="m-svg__warning" title="An error title." hints="aHint" links="[object Object]"></div>`;
+exports[`Browser not supported - test Given desktop mode Given custom values Should render with custom values provided 1`] = `<div skin="warning" svg-name="m-svg__error-browser-not-supported" title="An error title." hints="aHint" links="[object Object]"></div>`;
 
-exports[`Browser not supported - test Given desktop mode Given default values Should render with default desktop values 1`] = `<div skin="warning" iconName="m-svg__warning" title="m-error-browser-not-supported:title" hints="m-error-browser-not-supported:hint.primary.desktop" links="[object Object]"></div>`;
+exports[`Browser not supported - test Given desktop mode Given default values Should render with default desktop values 1`] = `<div skin="warning" svg-name="m-svg__error-browser-not-supported" title="m-error-browser-not-supported:title" hints="m-error-browser-not-supported:hint.primary.desktop" links="[object Object]"></div>`;
 
-exports[`Browser not supported - test Given mobile device size Given custom values Should render with custom mobile values provided 1`] = `<div skin="warning" iconName="m-svg__warning" title="An error title." hints="aHint-Mobile" links="[object Object]"></div>`;
+exports[`Browser not supported - test Given mobile device size Given custom values Should render with custom mobile values provided 1`] = `<div skin="warning" svg-name="m-svg__error-browser-not-supported" title="An error title." hints="aHint-Mobile" links="[object Object]"></div>`;
 
-exports[`Browser not supported - test Given mobile device size Given default values Should render with default mobile values provided 1`] = `<div skin="warning" iconName="m-svg__warning" title="m-error-browser-not-supported:title" hints="m-error-browser-not-supported:hint.primary.mobile" links=""></div>`;
+exports[`Browser not supported - test Given mobile device size Given default values Should render with default mobile values provided 1`] = `<div skin="warning" svg-name="m-svg__error-browser-not-supported" title="m-error-browser-not-supported:title" hints="m-error-browser-not-supported:hint.primary.mobile" links=""></div>`;
