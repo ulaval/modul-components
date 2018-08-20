@@ -17,7 +17,7 @@ export function filterByTags(tags: string[], html: string): string {
     return filterByTag(createMultiTagsRegexString(tags), html);
 }
 
-export function replaceTag(tag, replace, html): string {
+export function replaceTag(tag: string, replace: string, html: string): string {
     const openingTag: RegExp = new RegExp(`<${tag}([^>]*)>`, 'gmi');
     return html.replace(openingTag, `<${replace}>`).replace(`${tag}>`, `${replace}>`);
 }

@@ -204,7 +204,6 @@ describe('MTreeNode', () => {
 
                 expect(wrapper.emitted('click')).toBeFalsy();
             });
-
         });
 
         describe(`When we check if the current node is selected`, () => {
