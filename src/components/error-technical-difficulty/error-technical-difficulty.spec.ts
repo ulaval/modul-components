@@ -46,6 +46,7 @@ const initializeShallowWrapperNoProps: any = () => {
     wrapper = shallow(MErrorTechnicalDifficulty, {
         stubs: getStubs(),
         propsData: {
+            title: DEFAULT_TITLE
         }
     });
 };
@@ -64,19 +65,21 @@ const initializeShallowWrapper: any = () => {
     });
 };
 
-beforeEach(() => {
-    showStack = false;
-    error = new Error();
-
-    initializeShallowWrapperNoProps();
-});
-
 describe(`MErrorTechnicalDifficulty - test`, () => {
+
+    beforeEach(() => {
+        showStack = false;
+        error = new Error();
+
+        initializeShallowWrapperNoProps();
+    });
+
     describe(`Given no defined props`, () => {
 
         it(`Should use default title`, () => {
-            expect(wrapper.vm.title).toEqual(DEFAULT_TITLE);
+            expect(wrapper.props().title).toBe(DEFAULT_TITLE);
         });
+
         it(`Should use default hints`, () => {
             expect(wrapper.vm.hints[0]).toEqual(DEFAULT_FIRST_HINT);
             expect(wrapper.vm.hints[1]).toEqual(DEFAULT_SECOND_HINT);

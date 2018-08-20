@@ -1,13 +1,119 @@
 <div>
     <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
+    <h3>Carousel - Desktop version</h3>
+    <p class="m-u--margin-bottom">The m-carousel in desktop version</p>
     <p>
-        <m-carousel><!-- Test case --></m-carousel>
+        <m-carousel style="height: 400px;" margin="0">
+            <m-carousel-item>
+                <img src="https://picsum.photos/300" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/400" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+        </m-carousel>
+    </p>
+    <h3>Carousel - Mobile version</h3>
+    <p class="m-u--margin-bottom">The m-carousel in mobile version</p>
+    <p style="max-width: 640px">
+        <m-carousel style="height: 400px;" margin="16">
+            <m-carousel-item>
+                <img src="https://picsum.photos/300" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/400" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+        </m-carousel>
+    </p>
+    <h3>Carousel - Dynamic version</h3>
+    <p class="m-u--margin-bottom">The m-carousel in dynamic version, click on the button to switch context</p>
+    <p style="max-width: 640px">
+        <m-button @click="onClick">Switch context</m-button>
+        <m-carousel style="height: 400px;" :margin="test">
+            <m-carousel-item>
+                <img src="https://picsum.photos/300" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/400" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+        </m-carousel>
+    </p>
+    <h3>Carousel - Big version</h3>
+    <p class="m-u--margin-bottom">The m-carousel with a lot of slide</p>
+    <p>
+        <m-button @click="onClick">Switch context</m-button>
+        <m-carousel style="height: 400px;" margin="0">
+            <m-carousel-item>
+                <img src="https://picsum.photos/300" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/400" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/600" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/700" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/800" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/900" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/300" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/400" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+            <m-carousel-item>
+                <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+        </m-carousel>
     </p>
 </div>
