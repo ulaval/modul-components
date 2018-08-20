@@ -5,6 +5,18 @@
 // le code source original est conservé ici https://github.com/ulaval/modul-components/tree/develop/doc/jenkins-release-pipeline.groovy
 // toujours utiliser la version qui se trouve sur Github
 
+def configureGit(user, email) {
+    sh("git config user.name '${user}'")
+    sh("git config user.email '${email}'")
+    sh("git config push.default simple")
+}
+
+def checkout(branch, credentials, repoUrl) {
+    git branch: branch,
+        credentialsId: credentials,
+        url: repoUrl
+}
+
 pipeline {
     agent none
 
@@ -12,13 +24,14 @@ pipeline {
 		choice(name: 'repourl', description: "Url du repo Github.", choices: 'github.com/ulaval/modul-components.git\ngithub.com/ulaval/modul-website.git')
 		booleanParam(name: 'creerrelease', description: "Création de la branche release.", defaultValue: true)
 		choice(name: 'version', description: 'Incrément de la version dans le fichier package.json (utiliser prerelease tant qu\'on est en beta).', choices: 'prerelease\npatch\nminor\nmajor')
+        booleanParam(name: 'codeowners', description: "Effectuer la rotation des codeowners (uniquement avec l'option creerrelease sélectionnée).", defaultValue: true)
 		booleanParam(name: 'merge', description: "Merger la branche release dans master.", defaultValue: true)
 		string(name: 'mergefrom', description: "Nom de la branche à merger dans master et ramener dans develop (ex: release/v1.0.0-beta.40). Laisser à blanc si l'option 'creerrelease' est sélectionnée.", defaultValue: '')
 		booleanParam(name: 'tag', description: "Tagger master.", defaultValue: true)
 		booleanParam(name: 'npmpublish', description: "Publier la version sur npm.", defaultValue: true)
 		string(name: 'npmtag', description: "Tag spécifique à associer au package sur npm (ex: beta). Laisser à blanc si le package doit être taggé 'latest'.", defaultValue: '')
 		booleanParam(name: 'pullrequest', description: "Création d'un PR pour ramener la release dans la branche develop.", defaultValue: true)
-		booleanParam(name: 'dryrun', description: "Pas de commit, pas de npm publish. Unique des logs dans la console pour simuler ce qui va se passer.", defaultValue: true)
+		booleanParam(name: 'dryrun', description: "Pas de commit, pas de npm publish. Uniquement des logs dans la console pour simuler ce qui va se passer.", defaultValue: true)
     }
 
     options {
@@ -41,6 +54,7 @@ pipeline {
 		JENKINS_USER = '<jenkins-user>'
 		JENKINS_EMAIL = '<jenkins-email>'
 		NPM_CONFIG = '<npm-config>'
+        POST_RECIPIENTS = '<recipients-email>'
     }
 
     stages {
@@ -58,13 +72,8 @@ pipeline {
 			steps {
 				script {
 					try {
-						git branch: 'develop',
-							credentialsId: GIT_CREDS,
-							url: "https://${REPO_URL}"
-
-						sh("git config user.name '${JENKINS_USER}'")
-						sh("git config user.email '${JENKINS_EMAIL}'")
-						sh("git config push.default simple")
+						checkout('develop',GIT_CREDS, "https://${REPO_URL}")
+						configureGit(JENKINS_USER, JENKINS_EMAIL)
 
 						def newVersion = sh (
 							script: "npm version ${params.version} --no-git-tag-version",
@@ -72,8 +81,15 @@ pipeline {
 						).trim()
 						BRANCHE_RELEASE = "release/${newVersion}"
 
+                        def codeOwners = readFile file: ".github/CODEOWNERS"
+                        if (params.codeowners) {
+                        }
+
 						if (params.dryrun) {
-							echo "Créer branche ${BRANCHE_RELEASE}"
+							echo "Créer branche ${BRANCHE_RELEASE}, version: ${newVersion}"
+                            if (params.codeowners) {
+                                echo "Code owners: ${codeOwners}"
+                            }
 						} else {
 							withCredentials([usernamePassword(credentialsId: GIT_CREDS, passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 								sh "git checkout -b ${BRANCHE_RELEASE}"
@@ -103,13 +119,8 @@ pipeline {
 			steps {
 				script {
 					try {
-						git branch: 'master',
-							credentialsId: GIT_CREDS,
-							url: "https://${REPO_URL}"
-
-						sh("git config user.name '${JENKINS_USER}'")
-						sh("git config user.email '${JENKINS_EMAIL}'")
-						sh("git config push.default simple")
+						checkout('master', GIT_CREDS, "https://${REPO_URL}")
+						configureGit(JENKINS_USER, JENKINS_EMAIL)
 
 						if (params.dryrun) {
 							echo "Merge origin/${BRANCHE_RELEASE} dans master"
@@ -140,13 +151,8 @@ pipeline {
 			steps {
 				script {
 					try {
-						git branch: 'master',
-							credentialsId: GIT_CREDS,
-							url: "https://${REPO_URL}"
-
-						sh("git config user.name '${JENKINS_USER}'")
-						sh("git config user.email '${JENKINS_EMAIL}'")
-						sh("git config push.default simple")
+						checkout('master', GIT_CREDS, "https://${REPO_URL}")
+						configureGit(JENKINS_USER, JENKINS_EMAIL)
 
 						withNPM(npmrcConfig: NPM_CONFIG) {
 							echo "Cleaning up..."
@@ -192,9 +198,7 @@ pipeline {
 			steps {
 				script {
 					try {
-						git branch: 'master',
-							credentialsId: GIT_CREDS,
-							url: "https://${REPO_URL}"
+						checkout('master', GIT_CREDS, "https://${REPO_URL}")
 
 						if (params.dryrun) {
 							echo "publish avec le tag '${params.npmtag}' (si '' -> LATEST)"
@@ -239,7 +243,7 @@ pipeline {
 							withCredentials([
 								[$class: 'UsernamePasswordMultiBinding', credentialsId: GIT_CREDS, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']
 							]) {
-								sh "curl -d '{\"title\": \"${BRANCHE_RELEASE}\",\"body\": \"Merge back branch `${BRANCHE_RELEASE}` into develop. *DO NOT SQUASH MERGE*.\",\"head\": \"${BRANCHE_RELEASE}\",\"base\": \"develop\"}' -X POST https://api.github.com/repos/ulaval/${reponame}/pulls?access_token=${GIT_PASSWORD}"
+								sh "curl -d '{\"title\": \"${BRANCHE_RELEASE}\",\"body\": \"Merge back branch `${BRANCHE_RELEASE}` into develop. MERGE COMMIT ONLY - *DO NOT SQUASH MERGE*.\",\"head\": \"${BRANCHE_RELEASE}\",\"base\": \"develop\"}' -X POST https://api.github.com/repos/ulaval/${reponame}/pulls?access_token=${GIT_PASSWORD}"
 							}
 						}
 					} finally {
@@ -247,6 +251,19 @@ pipeline {
 					}
 				}
 			}
+        }
+    }
+
+    post {
+        always {
+            script {
+                emailext subject: '$DEFAULT_SUBJECT',
+                        body: '$DEFAULT_CONTENT',
+                        replyTo: '$DEFAULT_REPLYTO',
+                        to: "${POST_RECIPIENTS}"
+                recipientProviders:
+                [[$class: 'DevelopersRecipientProvider']]
+            }
         }
     }
 }
