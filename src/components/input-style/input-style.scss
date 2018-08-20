@@ -251,6 +251,7 @@ $m-input-style--padding: 4px !default;
             position: relative;
             min-height: 24px;
             flex: 1 1 auto;
+            max-width: 100%;
 
             .m--has-border-top & {
                 .m--is-focus & {
