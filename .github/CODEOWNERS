@@ -3,10 +3,10 @@
 # leads:0
 *    @simardo
 
-# typescript:2
+# typescript:0
 *.ts @simardo
 
-# styling:3
+# styling:0
 *.scss @simardo
 *.css @simardo
 *.html @simardo
