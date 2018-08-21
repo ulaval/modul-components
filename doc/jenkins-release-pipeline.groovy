@@ -24,7 +24,7 @@ pipeline {
 		choice(name: 'repourl', description: "Url du repo Github.", choices: 'github.com/ulaval/modul-components.git\ngithub.com/ulaval/modul-website.git')
 		booleanParam(name: 'creerrelease', description: "Création de la branche release.", defaultValue: true)
 		choice(name: 'version', description: 'Incrément de la version dans le fichier package.json (utiliser prerelease tant qu\'on est en beta).', choices: 'prerelease\npatch\nminor\nmajor')
-        booleanParam(name: 'codeowners', description: "Effectuer la rotation des codeowners (uniquement avec l'option creerrelease sélectionnée).", defaultValue: true)
+        booleanParam(name: 'codeowners', description: "Effectuer la rotation des codeowners (uniquement avec l'option creerrelease sélectionnée).", defaultValue: false)
 		booleanParam(name: 'merge', description: "Merger la branche release dans master.", defaultValue: true)
 		string(name: 'mergefrom', description: "Nom de la branche à merger dans master et ramener dans develop (ex: release/v1.0.0-beta.40). Laisser à blanc si l'option 'creerrelease' est sélectionnée.", defaultValue: '')
 		booleanParam(name: 'tag', description: "Tagger master.", defaultValue: true)
