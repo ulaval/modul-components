@@ -51,7 +51,6 @@ describe('draggable', () => {
             const userDefinedGrouping: string = 'someGrouping';
             const draggable: Wrapper<Vue> = getDraggableDirective(param, { dragData: userDefinedData, action: userDefinedAction, grouping: userDefinedGrouping });
 
-            expect((draggable.element.style as any).webkitUserDrag).toBe('none');
             expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
             expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe(userDefinedAction);
             expect(MDOMPlugin.get(MDraggable, draggable.element).options.dragData).toBe(userDefinedData);
@@ -94,7 +93,6 @@ describe('draggable', () => {
             jest.runOnlyPendingTimers();
 
             expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
-            expect((draggable.element.style as any).webkitUserDrag).toBe('');
             expect(MDraggable.currentDraggable).toBeUndefined();
         });
 
@@ -146,7 +144,6 @@ describe('draggable', () => {
             draggable.trigger('touchend');
 
             expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
-            expect((draggable.element.style as any).webkitUserDrag).toBe('none');
             expect(MDraggable.currentDraggable).toBeUndefined();
         });
     });
@@ -160,7 +157,6 @@ describe('draggable', () => {
 
             expect(element.draggable).toBeFalsy();
             expect(dragImage.hidden).toBeTruthy();
-            expect((draggable.element.style as any).webkitUserDrag).toBe('');
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Draggable);
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Dragging);
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Grabbing);
