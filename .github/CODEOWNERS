@@ -1,13 +1,14 @@
-
 # This file is auto-generated - DO NOT EDIT MANUALLY
 
-# leads:2
+# leads:0
 * vidal7
 
 # typescript:0
 *.ts Mboulianne vidal7
 
-# styling:2
+# styles:0
 *.css raphpare vidal7
 *.scss raphpare vidal7
+
+# templates:0
 *.html raphpare vidal7
