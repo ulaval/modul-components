@@ -1,12 +1,13 @@
+
 # This file is auto-generated - DO NOT EDIT MANUALLY
 
-# leads:1
-* jfnadeau
+# leads:2
+* vidal7
 
-# typescript:1
-*.ts gabra20 jfnadeau
+# typescript:0
+*.ts Mboulianne vidal7
 
-# styling:1
-*.css Atiomi jfnadeau
-*.scss Atiomi jfnadeau
-*.html Atiomi jfnadeau
+# styling:2
+*.css raphpare vidal7
+*.scss raphpare vidal7
+*.html raphpare vidal7
