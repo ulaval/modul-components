@@ -16,7 +16,7 @@ exports[`MPageNotFound should render correctly 1`] = `
     </div>
     <p><span class="m-i18n">m-page-not-found:directions</span></p>
     <p></p>
-    <a href="/" class="m-link"> <span class="m-link__text">
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text">
         m-page-not-found:back-to-portal
     </span> </a>
 </div>
@@ -38,7 +38,7 @@ exports[`MPageNotFound should render correctly with back-to-label override 1`] =
     </div>
     <p><span class="m-i18n">m-page-not-found:directions</span></p>
     <p></p>
-    <a href="/" class="m-link"> <span class="m-link__text">
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text">
         Some back to label
     </span> </a>
 </div>

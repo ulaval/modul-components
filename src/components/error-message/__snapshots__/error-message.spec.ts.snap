@@ -21,7 +21,7 @@ exports[`MErrorMessage given error should render correctly expanded 1`] = `
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -48,7 +48,7 @@ exports[`MErrorMessage given error should render correctly expanded with stack t
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
         <div class="m-error-message__stacktrace"><pre></pre></div>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -74,7 +74,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -101,7 +101,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
         <div class="m-error-message__stacktrace"><pre>This is a stack trace</pre></div>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -126,7 +126,7 @@ exports[`MErrorMessage should render correctly collapsed 1`] = `
         <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
             <div class="m-accordion__header__content"><span class="m-i18n">Détails de l'erreur</span> <span class="m-i18n m-accordion__hidden">m-accordion:open</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"></span></div>
     </article>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -152,7 +152,7 @@ exports[`MErrorMessage should render correctly expanded 1`] = `
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
