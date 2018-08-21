@@ -1,1 +1,10 @@
-*    @simardo @jfnadeau @vidal7
+# leads:0
+*    @simardo
+
+# typescript:0
+*.ts @simardo
+
+# styling:0
+*.scss @simardo
+*.css @simardo
+*.html @simardo
