@@ -55,6 +55,9 @@ pipeline {
 		JENKINS_EMAIL = '<jenkins-email>'
 		NPM_CONFIG = '<npm-config>'
         POST_RECIPIENTS = '<recipients-email>'
+        CODEOWNERS_DEV = 'Mboulianne,gabra20'
+        CODEOWNERS_INT = 'setur52,Atiomi,raphpare'
+        CODEOWNERS_LEAD = 'simardo,jfnadeau,vidal7'
     }
 
     stages {
@@ -82,13 +85,20 @@ pipeline {
 						BRANCHE_RELEASE = "release/${newVersion}"
 
                         def codeOwners = readFile file: ".github/CODEOWNERS"
+                        def devs = CODEOWNERS_DEV.split(',')
+                        def integrateurs = CODEOWNERS_INT.split(',')
+                        def leads = CODEOWNERS_LEAD.split(',')
                         if (params.codeowners) {
+
                         }
 
 						if (params.dryrun) {
 							echo "Créer branche ${BRANCHE_RELEASE}, version: ${newVersion}"
                             if (params.codeowners) {
                                 echo "Code owners: ${codeOwners}"
+                                echo "Devs: ${devs}"
+                                echo "Intégrateurs: ${integrateurs}"
+                                echo "Leads: ${leads}"
                             }
 						} else {
 							withCredentials([usernamePassword(credentialsId: GIT_CREDS, passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
