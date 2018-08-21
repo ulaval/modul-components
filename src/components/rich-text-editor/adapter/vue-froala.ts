@@ -89,7 +89,7 @@ enum FroalaElements {
         return this.value.length === 0;
     }
 
-    public get isInitialized(): boolean {
+    public isInitialized(): boolean {
         return !!this.froalaEditor;
     }
 
@@ -144,7 +144,6 @@ enum FroalaElements {
     }
 
     protected addSubMenus(): void {
-        this.$log.log(this.$i18n.translate('m-rich-text-editor:styles'));
          // add mobile mode submenus
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
@@ -193,7 +192,7 @@ enum FroalaElements {
     }
 
     protected get collapsed(): boolean {
-        return this.isInitialized && !this.isFocused && (this.isEmpty || this.disabled);
+        return this.isInitialized() && !this.isFocused && (this.isEmpty || this.disabled);
     }
 
     protected onResize(): void {
@@ -231,7 +230,7 @@ enum FroalaElements {
     }
 
     private createEditor(): void {
-        if (this.isInitialized) {
+        if (this.isInitialized()) {
             return;
         }
 
@@ -379,7 +378,7 @@ enum FroalaElements {
     }
 
     private setContent(firstTime: boolean = false): void {
-        if (!this.isInitialized && !firstTime) {
+        if (!this.isInitialized() && !firstTime) {
             return;
         }
 
