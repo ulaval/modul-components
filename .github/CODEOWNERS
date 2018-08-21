@@ -1,12 +1,12 @@
 # This file is auto-generated - DO NOT EDIT MANUALLY
 
-# leads:0
-*    @simardo
+# leads:1
+* jfnadeau
 
-# typescript:0
-*.ts @simardo
+# typescript:1
+*.ts gabra20 jfnadeau
 
-# styling:0
-*.scss @simardo
-*.css @simardo
-*.html @simardo
+# styling:1
+*.css Atiomi jfnadeau
+*.scss Atiomi jfnadeau
+*.html Atiomi jfnadeau
