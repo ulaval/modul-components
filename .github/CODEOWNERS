@@ -1,14 +1,14 @@
 # This file is auto-generated - DO NOT EDIT MANUALLY
 
-# leads:0
-* vidal7
+# leads:1
+* jfnadeau
 
-# typescript:0
-*.ts Mboulianne vidal7
+# typescript:1
+*.ts gabra20 jfnadeau
 
-# styles:0
-*.css raphpare vidal7
-*.scss raphpare vidal7
+# styles:1
+*.css Atiomi jfnadeau
+*.scss Atiomi jfnadeau
 
 # templates:0
-*.html raphpare vidal7
+*.html gabra20 Atiomi jfnadeau
