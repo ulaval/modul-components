@@ -56,8 +56,12 @@ pipeline {
 		NPM_CONFIG = '<npm-config>'
         POST_RECIPIENTS = '<recipients-email>'
         CODEOWNERS_DEV = '<developers>'
-        CODEOWNERS_INT = '<intégrateurs>'
-        CODEOWNERS_LEAD = '<lead-devs>'
+        CODEOWNERS_DEV_EXT = '*.ts'
+        CODEOWNERS_STYLES = '<intégrateurs>'
+        CODEOWNERS_STYLES_EXT = '*.css,*.scss'
+        CODEOWNERS_TEMPLATES_EXT = '*.html'
+        CODEOWNERS_LEADS = '<lead-devs>'
+        CODEOWNERS_LEADS_EXT = '*'
     }
 
     stages {
@@ -75,7 +79,7 @@ pipeline {
 			steps {
 				script {
 					try {
-						checkout('develop',GIT_CREDS, "https://${REPO_URL}")
+						checkout('develop', GIT_CREDS, "https://${REPO_URL}")
 						configureGit(JENKINS_USER, JENKINS_EMAIL)
 
 						def newVersion = sh (
@@ -84,26 +88,76 @@ pipeline {
 						).trim()
 						BRANCHE_RELEASE = "release/${newVersion}"
 
-                        def codeOwners = readFile file: ".github/CODEOWNERS"
-                        def devs = CODEOWNERS_DEV.split(',')
-                        def integrateurs = CODEOWNERS_INT.split(',')
-                        def leads = CODEOWNERS_LEAD.split(',')
+                        def newCodeOwners = []
                         if (params.codeowners) {
+                            def codeOwnersDefinition = [:]
+                            def codeOwnersDefinitionExt = [:]
+                            codeOwnersDefinition['typescript'] = CODEOWNERS_DEV.split(',')
+                            codeOwnersDefinition['styles'] = CODEOWNERS_STYLES.split(',')
+                            codeOwnersDefinition['templates'] = [] // manual feed
+                            codeOwnersDefinition['leads'] = CODEOWNERS_LEADS.split(',')
+                            codeOwnersDefinitionExt['typescript'] = CODEOWNERS_DEV_EXT.split(',')
+                            codeOwnersDefinitionExt['styles'] = CODEOWNERS_STYLES_EXT.split(',')
+                            codeOwnersDefinitionExt['templates'] = CODEOWNERS_TEMPLATES_EXT.split(',')
+                            codeOwnersDefinitionExt['leads'] = CODEOWNERS_LEADS_EXT.split(',')
 
+                            def codeOwnersRaw = readFile file: ".github/CODEOWNERS"
+                            def codeOwners = codeOwnersRaw.split('\n')
+
+                            def nextLead = ''
+                            def nextDev = ''
+                            def nextStyles = ''
+
+                            for (line in codeOwners) {
+                                def matcher = (line =~ /(\w+):(\d+)/)
+                                if (matcher) {
+                                    def category = matcher.group(1)
+                                    def categoryUsers = codeOwnersDefinition[category]
+                                    def user = ''
+                                    def rotation = matcher.group(2).toInteger() + 1
+
+                                    if (rotation >= categoryUsers.size()) {
+                                        rotation = 0
+                                    }
+
+                                    if (category == 'templates') {
+                                        user = nextDev + ' ' + nextStyles
+                                    } else {
+                                        user = categoryUsers[rotation]
+                                    }
+
+                                    newCodeOwners.push("# ${category}:${rotation}")
+
+                                    for (ext in codeOwnersDefinitionExt[category]) {
+                                        newCodeOwners.push("${ext} ${[user, nextLead].join(' ')}")
+                                    }
+
+                                    if (category == 'leads') {
+                                        nextLead = user
+                                    } else if (category == 'typescript') {
+                                        nextDev = user
+                                    } else if (category == 'styles') {
+                                        nextStyles = user
+                                    }
+                                } else if (line == '' || line.startsWith('#')) {
+                                    newCodeOwners.push(line);
+                                }
+                            }
+                            newCodeOwners.push('');
                         }
 
 						if (params.dryrun) {
 							echo "Créer branche ${BRANCHE_RELEASE}, version: ${newVersion}"
                             if (params.codeowners) {
-                                echo "Code owners: ${codeOwners}"
-                                echo "Code owners: ${codeOwners.split('\n')}"
-                                echo "Devs: ${devs}"
-                                echo "Intégrateurs: ${integrateurs}"
-                                echo "Leads: ${leads}"
+                                echo "Code owners"
+                                echo newCodeOwners.join('\n')
                             }
 						} else {
 							withCredentials([usernamePassword(credentialsId: GIT_CREDS, passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 								sh "git checkout -b ${BRANCHE_RELEASE}"
+                                if (params.codeowners) {
+                                    writeFile file: ".github/CODEOWNERS", text: newCodeOwners.join('\n')
+                                }
 								sh 'git add -A'
 								sh "git commit -m'Release ${newVersion}'"
 								sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@${REPO_URL}')
