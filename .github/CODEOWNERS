@@ -12,3 +12,7 @@
 
 # templates:0
 *.html simardo jfnadeau vidal7
+
+# others
+/package.json @simardo
+/package-lock.json @simardo

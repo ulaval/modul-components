@@ -293,8 +293,10 @@ enum FroalaElements {
                 },
                 // if we use pasteBeforeCleanup, there's an error in froala's code
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
-                    data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p', data);
-                    return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
+                    if (data.replace) {
+                        data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p', data);
+                        return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
+                    }
                 },
                 [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
                     // write code to be called after a command is called (button clicked, image modified, ...)
@@ -330,20 +332,18 @@ enum FroalaElements {
         const modalOverlay: HTMLElement | null = document.querySelector(FroalaElements.MODAL_OVERLAY);
         const cleanWordButton: HTMLElement | null = this.getWordPasteCleanButton();
 
-        if (wordPasteModal) {
+        if (wordPasteModal && wordPasteModal.style.display !== 'none') {
             wordPasteModal.style.display = 'none';
-        }
 
-        if (modalOverlay) {
-            modalOverlay.style.display = 'none';
-        }
+            if (modalOverlay) {
+                modalOverlay.style.display = 'none';
+            }
 
-        if (cleanWordButton) {
-            cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
-            cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+            if (cleanWordButton) {
+                cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+                cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+            }
         }
-
-        wordPasteModal!.remove();
     }
 
     private getWordPasteCleanButton(): HTMLElement | null {
