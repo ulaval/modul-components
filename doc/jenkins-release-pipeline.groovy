@@ -55,9 +55,9 @@ pipeline {
 		JENKINS_EMAIL = '<jenkins-email>'
 		NPM_CONFIG = '<npm-config>'
         POST_RECIPIENTS = '<recipients-email>'
-        CODEOWNERS_DEV = 'Mboulianne,gabra20'
-        CODEOWNERS_INT = 'setur52,Atiomi,raphpare'
-        CODEOWNERS_LEAD = 'simardo,jfnadeau,vidal7'
+        CODEOWNERS_DEV = '<developers>'
+        CODEOWNERS_INT = '<intégrateurs>'
+        CODEOWNERS_LEAD = '<lead-devs>'
     }
 
     stages {
@@ -96,6 +96,7 @@ pipeline {
 							echo "Créer branche ${BRANCHE_RELEASE}, version: ${newVersion}"
                             if (params.codeowners) {
                                 echo "Code owners: ${codeOwners}"
+                                echo "Code owners: ${codeOwners.split('\n')}"
                                 echo "Devs: ${devs}"
                                 echo "Intégrateurs: ${integrateurs}"
                                 echo "Leads: ${leads}"
