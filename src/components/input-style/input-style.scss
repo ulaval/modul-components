@@ -418,6 +418,10 @@ $m-input-style--padding: 4px !default;
         ::placeholder,
         .m-input-style__body__transparent-text {
             font-size: $m-font-size--h1;
+
+            @media (max-width: $m-mq--max--s) {
+                font-size: $m-font-size--mobile-h1;
+            }
         }
     }
 
@@ -431,6 +435,10 @@ $m-input-style--padding: 4px !default;
         ::placeholder,
         .m-input-style__body__transparent-text {
             font-size: $m-font-size--h2;
+
+            @media (max-width: $m-mq--max--s) {
+                font-size: $m-font-size--mobile-h2;
+            }
         }
     }
 
@@ -444,6 +452,10 @@ $m-input-style--padding: 4px !default;
         ::placeholder,
         .m-input-style__body__transparent-text {
             font-size: $m-font-size--h3;
+
+            @media (max-width: $m-mq--max--s) {
+                font-size: $m-font-size--mobile-h3;
+            }
         }
     }
 
@@ -457,6 +469,10 @@ $m-input-style--padding: 4px !default;
         ::placeholder,
         .m-input-style__body__transparent-text {
             font-size: $m-font-size--h4;
+
+            @media (max-width: $m-mq--max--s) {
+                font-size: $m-font-size--mobile-h4;
+            }
         }
     }
 
@@ -470,6 +486,10 @@ $m-input-style--padding: 4px !default;
         ::placeholder,
         .m-input-style__body__transparent-text {
             font-size: $m-font-size--h5;
+
+            @media (max-width: $m-mq--max--s) {
+                font-size: $m-font-size--mobile-h5;
+            }
         }
     }
 
@@ -479,6 +499,10 @@ $m-input-style--padding: 4px !default;
         ::placeholder,
         .m-input-style__body__transparent-text {
             font-size: $m-font-size--h6;
+
+            @media (max-width: $m-mq--max--s) {
+                font-size: $m-font-size--mobile-h6;
+            }
         }
     }
 

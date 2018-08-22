@@ -1,4 +1,4 @@
-@mixin titleStyles() {
+@mixin m-title-styles() {
     h1,
     h2,
     h3,
@@ -29,37 +29,61 @@
     .m-u--h1 {
         margin: 0;
         font-size: $m-font-size--h1;
+
+        @media (max-width: $m-mq--max--s) {
+            font-size: $m-font-size--mobile-h1;
+        }
     }
 
     h2,
     .m-u--h2 {
         margin: $m-padding--l 0 0 0;
         font-size: $m-font-size--h2;
+
+        @media (max-width: $m-mq--max--s) {
+            font-size: $m-font-size--mobile-h2;
+        }
     }
 
     h3,
     .m-u--h3 {
         margin: $m-padding--l 0 0 0;
         font-size: $m-font-size--h3;
+
+        @media (max-width: $m-mq--max--s) {
+            font-size: $m-font-size--mobile-h3;
+        }
     }
 
     h4,
     .m-u--h4 {
         font-size: $m-font-size--h4;
+
+        @media (max-width: $m-mq--max--s) {
+            font-size: $m-font-size--mobile-h4;
+        }
     }
 
     h5,
     .m-u--h5 {
         font-size: $m-font-size--h5;
+
+        @media (max-width: $m-mq--max--s) {
+            font-size: $m-font-size--mobile-h5;
+        }
     }
 
     h6,
     .m-u--h6 {
         font-size: $m-font-size--h6;
+
+        @media (max-width: $m-mq--max--s) {
+            font-size: $m-font-size--mobile-h6;
+        }
     }
 }
 
-@mixin textStyles() {
+@mixin m-text-styles() {
     p,
     .m-u--p {
         font-family: $m-font-family;
