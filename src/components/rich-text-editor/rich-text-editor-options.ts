@@ -44,8 +44,8 @@ export abstract class MRichTextEditorDefaultOptions {
 }
 
 export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOptions {
-    public toolbarButtons: string[] = ['hide', 'styles-sub-menu', 'bold', 'italic', 'subscript', 'superscript', 'listes-sub-menu', 'formatUL',
-        'formatOL', 'outdent', 'indent', 'insertLink', 'specialCharacters', 'fullscreen'];
+    public toolbarButtons: string[] = ['hide', 'styles-sub-menu', 'bold', 'italic', 'subscript', 'superscript', '|', 'listes-sub-menu', 'formatUL',
+        'formatOL', 'outdent', 'indent', '|', 'insertLink', 'specialCharacters', '|', 'fullscreen'];
 
     public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
 
