@@ -36,18 +36,6 @@ $m-padding--xs: 4px !default;
 //  spacing
 // ======================================================================
 
-$m-spacing-map: (
-    '--xxxxl': 64px,
-    '--xxxl': 56px,
-    '--xxl': 48px,
-    '--xl': 40px,
-    '--l': 32px,
-    '--m': 24px,
-    '': 16px,
-    '--s': 8px,
-    '--xs': 4px
-);
-
 $m-spacing--xxxxl: 64px !default;
 $m-spacing--xxxl: 56px !default;
 $m-spacing--xxl: 48px !default;
@@ -58,3 +46,26 @@ $m-spacing: 16px !default;
 $m-spacing--s: 8px !default;
 $m-spacing--xs: 4px !default;
 
+$m-spacing-map: (
+    'xxxxl': 64px,
+    'xxxl': 56px,
+    'xxl': 48px,
+    'xl': 40px,
+    'l': 32px,
+    'm': 24px,
+    '': 16px,
+    's': 8px,
+    'xs': 4px
+);
+
+@function m-spacing($size: '') {
+    $m-map: $m-spacing-map;
+
+    @if map-has-key($m-map, $size) {
+        @return map-get($m-map, $size);
+    }
+
+    @error "Unknown spacing size '#{$size}', Valide sizes are : '#{$m-map}' ";
+
+    @return null;
+}
