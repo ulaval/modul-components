@@ -17,7 +17,14 @@ import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DropdownPlugin from './dropdown/dropdown';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import EditWindow from './edit-window/edit-window';
+import ErrorAccessDenied from './error-access-denied/error-access-denied';
+import ErrorBrowserNotSupported from './error-browser-not-supported/error-browser-not-supported';
+import ErrorConfigNotSupported from './error-config-not-supported/error-config-not-supported';
+import ErrorCookiesNotSupported from './error-cookies-not-supported/error-cookies-not-supported';
 import ErrorMessage from './error-message/error-message';
+import ErrorPageNotFoundPlugin from './error-page-not-found/error-page-not-found';
+import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty/error-technical-difficulty';
+import ErrorTemplatePlugin from './error-template/error-template';
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
@@ -31,21 +38,30 @@ import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import ListItemPlugin from './list-item/list-item';
 import LoginPlugin from './login/login';
-import menuItemPlugin from './menu-item/menu-item';
-import menuPlugin from './menu/menu';
+import MenuItemPlugin from './menu-item/menu-item';
+import MenuPlugin from './menu/menu';
 import MessagePlugin from './message/message';
 import ModalPlugin from './modal/modal';
 import NavbarItemPlugin from './navbar-item/navbar-item';
 import NavbarPlugin from './navbar/navbar';
+import OptionItemPlugin from './option-item/option-item';
+import OptionItemAddPlugin from './option-item/option-item-add';
+import OptionItemArchivePlugin from './option-item/option-item-archive';
+import OptionItemDeletePlugin from './option-item/option-item-delete';
+import OptionItemEditPlugin from './option-item/option-item-edit';
+import OptionPlugin from './option/option';
 import PageNotFoundPlugin from './page-not-found/page-not-found';
 import PanelPlugin from './panel/panel';
 import PhoneNumberPlugin from './phone-number/phone-number';
+import PlusPlugin from './plus/plus';
 import PopperPlugin from './popper/popper';
 import PopupPlugin from './popup/popup';
 import ProgressPluggin from './progress/progress';
 import RadioGroupPlugin from './radio-group/radio-group';
 import RadioStylePlugin from './radio-style/radio-style';
 import RadioPlugin from './radio/radio';
+import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text-editor/rich-text-license-plugin';
+import RichTextPlugin from './rich-text/rich-text';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import SidebarPlugin from './sidebar/sidebar';
@@ -63,11 +79,17 @@ import TextareaPlugin from './textarea/textarea';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
+import TreeIconPlugin from './tree-icon/tree-icon';
+import TreeNodePlugin from './tree-node/tree-node';
+import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
-const ComponentsPlugin: PluginObject<any> = {
-    install(v, options): void {
+export interface ComponentPluginOptions {
+    richTextOptions?: RichTextLicensePluginOptions;
+}
 
+const ComponentsPlugin: PluginObject<any> = {
+    install(v, options: ComponentPluginOptions = {}): void {
         if (!v.prototype.$log) {
             Vue.use(LoggerPlugin);
         }
@@ -88,7 +110,14 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(EditWindow);
+        Vue.use(ErrorAccessDenied);
+        Vue.use(ErrorBrowserNotSupported);
+        Vue.use(ErrorConfigNotSupported);
+        Vue.use(ErrorCookiesNotSupported);
         Vue.use(ErrorMessage);
+        Vue.use(ErrorPageNotFoundPlugin);
+        Vue.use(ErrorTechnicalDifficultyPlugin);
+        Vue.use(ErrorTemplatePlugin);
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
         Vue.use(FlexTemplatePlugin);
@@ -105,17 +134,26 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ModalPlugin);
         Vue.use(NavbarPlugin);
         Vue.use(NavbarItemPlugin);
-        Vue.use(menuPlugin);
-        Vue.use(menuItemPlugin);
+        Vue.use(OptionPlugin);
+        Vue.use(MenuPlugin);
+        Vue.use(MenuItemPlugin);
+        Vue.use(OptionItemAddPlugin);
+        Vue.use(OptionItemArchivePlugin);
+        Vue.use(OptionItemDeletePlugin);
+        Vue.use(OptionItemEditPlugin);
+        Vue.use(OptionItemPlugin);
         Vue.use(PageNotFoundPlugin);
         Vue.use(PanelPlugin);
         Vue.use(PhoneNumberPlugin);
+        Vue.use(PlusPlugin);
         Vue.use(PopperPlugin);
         Vue.use(PopupPlugin);
         Vue.use(ProgressPluggin);
         Vue.use(RadioPlugin);
         Vue.use(RadioGroupPlugin);
         Vue.use(RadioStylePlugin);
+        Vue.use(RichTextLicensePlugin, { key: options.richTextOptions ? options.richTextOptions.key : undefined });
+        Vue.use(RichTextPlugin);
         Vue.use(ScrollTopPlugin);
         Vue.use(SessionExpiredPlugin);
         Vue.use(SidebarPlugin);
@@ -135,6 +173,9 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TooltipPlugin);
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
+        Vue.use(TreePlugin);
+        Vue.use(TreeIconPlugin);
+        Vue.use(TreeNodePlugin);
     }
 };
 

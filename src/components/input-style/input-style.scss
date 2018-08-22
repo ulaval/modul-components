@@ -9,7 +9,6 @@ $m-input-style--padding: 4px !default;
 
 .m-input-style {
     position: relative;
-    z-index: 0;
     display: inline-flex;
     flex-direction: column;
     outline: none;
@@ -38,9 +37,9 @@ $m-input-style--padding: 4px !default;
         background: $m-input-style--color-focus;
     }
 
-    &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus),
+    &:hover:not(.m--is-focus),
     &.m--has-value {
-        &::before {
+        &:not(.m--is-disabled):not(.m--is-waiting):not(.m--is-readonly):not(.m--has-error):not(.m--is-valid)::before {
             border-color: $m-color--text;
         }
     }
@@ -51,11 +50,13 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    &.m--is-focus {
+    &.m--is-focus:not(.m--is-readonly) {
         &::after {
             width: 100%;
         }
+    }
 
+    &.m--is-focus:not(.m--has-error):not(.m--is-valid) {
         .m-input-style__label,
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {
@@ -178,7 +179,7 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    &.m--is-anim-active {
+    &.m--is-anim-ready {
         .m-input-style {
             &__label {
                 transition-property: color, transform;
@@ -226,26 +227,82 @@ $m-input-style--padding: 4px !default;
 
     &__body {
         position: relative;
-        z-index: 2;
+        z-index: 3;
         display: flex;
         align-items: center;
         flex: 1 1 auto;
         width: 100%;
         font-weight: $m-font-weight;
         text-decoration: none;
-        padding: 0 0 $m-input-style--padding 0;
+        padding-bottom: $m-input-style--padding;
+        background-color: $m-color--white;
+
+        .m--has-border-top.m--is-focus & {
+            padding-bottom: $m-input-style--padding / 2;
+        }
 
         &,
         div,
         span {
-            cursor: pointer;
+            cursor: text;
         }
 
         &__left {
             position: relative;
-            overflow: hidden;
             min-height: 24px;
             flex: 1 1 auto;
+            max-width: 100%;
+
+            .m--has-border-top & {
+                .m--is-focus & {
+                    padding-top: 4px;
+                    margin-top: 4px;
+                }
+
+                &::before,
+                &::after {
+                    top: 0;
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    transition: background-color $m-transition-duration--l ease-in-out, width $m-transition-duration--l ease-in-out;
+                }
+
+                &::before {
+                    width: 100%;
+                    height: 2px;
+
+                    .m--is-focus & {
+                        background-color: $m-color--interactive;
+                    }
+
+                    .m--is-focus.m--is-valid & {
+                        background-color: $m-input-style--color-valid;
+                    }
+
+                    .m--is-focus.m--has-error & {
+                        background-color: $m-input-style--color-error;
+                    }
+                }
+
+                &::after {
+                    width: 0;
+                    height: 4px;
+
+                    .m--is-focus & {
+                        width: 100%;
+                        background-color: $m-color--interactive;
+                    }
+
+                    .m--is-focus.m--is-valid & {
+                        background-color: $m-input-style--color-valid;
+                    }
+
+                    .m--is-focus.m--has-error & {
+                        background-color: $m-input-style--color-error;
+                    }
+                }
+            }
         }
 
         &__right {
@@ -297,11 +354,9 @@ $m-input-style--padding: 4px !default;
         outline: none;
         text-overflow: ellipsis;
         font-family: $m-font-family;
-        font-size: $m-font-size;
-        font-weight: $m-font-weight--bold;
         text-align: left;
-        border: none;
         background: none;
+        border: none;
         color: $m-color--text;
     }
 
@@ -311,13 +366,12 @@ $m-input-style--padding: 4px !default;
         overflow: hidden;
         width: 100%;
         padding: 0;
+        font-size: $m-font-size;
+        font-weight: $m-font-weight--bold;
+        line-height: $m-line-height;
 
         @include m-is-ie() {
             vertical-align: middle;
-        }
-
-        &[readonly=readonly] {
-            cursor: pointer;
         }
 
         &::-ms-clear,
@@ -329,13 +383,36 @@ $m-input-style--padding: 4px !default;
             background: rgba($m-color--white, 0);
             -webkit-box-shadow: 0 0 0 1000px $m-color--white inset !important;
         }
+
+        &[readonly=readonly] {
+            cursor: pointer;
+        }
     }
 
     textarea {
-        width: 100%;
+        resize: none;
+    }
+
+    &.m--is-tag-h1,
+    &.m--is-tag-h2,
+    &.m--is-tag-h3,
+    &.m--is-tag-h4,
+    &.m--is-tag-h5,
+    &.m--is-tag-h6 {
+        input,
+        textarea,
+        ::placeholder,
+        .m-input-style__body__transparent-text {
+            font-family: $m-font-family;
+            font-weight: $m-font-weight--bold;
+        }
     }
 
     &.m--is-tag-h1 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 38px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -345,6 +422,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h2 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 33px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -354,6 +435,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h3 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 28px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -363,6 +448,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h4 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 23px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,
@@ -372,6 +461,10 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--is-tag-h5 {
+        &:not(.m--is-label-up) .m-input-style__label {
+            transform: translate3d(0, 18px, 0); // Magic number
+        }
+
         input,
         textarea,
         ::placeholder,

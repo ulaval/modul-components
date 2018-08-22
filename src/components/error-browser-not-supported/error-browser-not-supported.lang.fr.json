@@ -1,0 +1,8 @@
+{
+    "m-error-browser-not-supported": {
+        "title": "Ce navigateur<br>n'est pas compatible",
+        "hint.primary.desktop": "Une mise à niveau de votre navigateur est nécessaire pour accéder ce site.",
+        "hint.primary.mobile": "Une mise à niveau de votre navigateur est nécessaire pour accéder à ce site. Pour ce faire, consulter la boutique de téléchargement d'application de votre appareil",
+        "update-browser.desktop": "Mettre mon navigateur à niveau"
+    }
+}

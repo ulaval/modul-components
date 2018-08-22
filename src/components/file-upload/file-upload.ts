@@ -1,12 +1,12 @@
-import filesize from 'filesize';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
+import { MBadgeState } from '../../directives/badge/badge';
 import FileDropPlugin from '../../directives/file-drop/file-drop';
+import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
-import { Messages } from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -19,7 +19,6 @@ import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
-import { MBadgeState } from './../../directives/badge/badge';
 import WithRender from './file-upload.html?style=./file-upload.scss';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
@@ -29,8 +28,6 @@ interface MFileExt extends MFile {
     isOldRejection: boolean;
 }
 
-let filesizeSymbols: { [name: string]: string } | undefined = undefined;
-
 const defaultDragEvent: (e: DragEvent) => void = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -39,23 +36,6 @@ const defaultDragEvent: (e: DragEvent) => void = (e: DragEvent) => {
 
 @WithRender
 @Component({
-    filters: {
-        fileSize(bytes: number): string {
-            if (!filesizeSymbols) {
-                const i18n: Messages = (Vue.prototype as any).$i18n;
-                filesizeSymbols = {
-                    B: i18n.translate('m-file-upload:size-b'),
-                    KB: i18n.translate('m-file-upload:size-kb'),
-                    MB: i18n.translate('m-file-upload:size-mb'),
-                    GB: i18n.translate('m-file-upload:size-gb')
-                };
-            }
-
-            return filesize(bytes, {
-                symbols: filesizeSymbols
-            });
-        }
-    },
     mixins: [
         MediaQueries
     ]
@@ -291,6 +271,10 @@ export class MFileUpload extends ModulVue {
         return this.completedFiles.length === 0;
     }
 
+    private get buttonCompletedStyle(): string | undefined {
+        return !this.hasCompletedFiles ? 'display: flex;' : undefined;
+    }
+
     private get hasRejectedFiles(): boolean {
         return this.rejectedFiles.length !== 0;
     }
@@ -322,6 +306,7 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(MessagePlugin);
         v.use(LinkPlugin);
         v.use(MediaQueriesPlugin);
+        v.use(FileSizeFilterPlugin);
         v.component(FILE_UPLOAD_NAME, MFileUpload);
     }
 };

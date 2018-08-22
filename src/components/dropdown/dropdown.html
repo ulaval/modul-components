@@ -36,7 +36,7 @@
                v-model="selectedText">
         <template slot="adjust-width-auto" v-if="width === 'auto'">{{ selectedText }}</template>
         <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="active">
-            <m-icon class="m-dropdown__arrow__icon" ref="arrow" name="down-arrow" button-size="18px" icon-size="16px" :disabled="!active" @keydown.enter.prevent="open = active">
+            <m-icon class="m-dropdown__arrow__icon" ref="arrow" name="m-svg__arrow-head-filled--down" button-size="18px" icon-size="16px" :disabled="!active" @keydown.enter.prevent="open = active">
                 <m-i18n k="m-dropdown:open" v-if="!open"></m-i18n>
                 <m-i18n k="m-dropdown:close" v-if="open"></m-i18n>
             </m-icon>
@@ -71,7 +71,7 @@
                         placeholder="Recherche"
                         ref="researchInput"
                         v-model="selectedText">
-                <m-icon-button class="m-dropdown__header__research-button" icon-name="search" @click="focusOnResearchInput">
+                <m-icon-button class="m-dropdown__header__research-button" icon-name="m-svg__search" @click="focusOnResearchInput">
                     <m-i18n k="m-dropdown:research"></m-i18n>
                 </m-icon-button>
             </div>

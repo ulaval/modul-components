@@ -3,7 +3,7 @@
 exports[`MRadio should not render icon when not part of a group 1`] = `
 <li class="m-radio">
     <input type="radio" id="uuid" value="radio" class="m-radio__hidden">
-    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
+    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:undefined;"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
     </label>
 </li>
 `;
@@ -11,7 +11,7 @@ exports[`MRadio should not render icon when not part of a group 1`] = `
 exports[`MRadio should render correctly 1`] = `
 <li class="m-radio">
     <input type="radio" id="uuid" value="radio" class="m-radio__hidden">
-    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content">label</span> </span>
+    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:undefined;"></span> <span class="m-radio__label"> <span class="m-radio__label__content">label</span> </span>
     </label>
 </li>
 `;
@@ -19,7 +19,7 @@ exports[`MRadio should render correctly 1`] = `
 exports[`MRadio should render correctly name when set 1`] = `
 <li class="m-radio">
     <input type="radio" id="uuid" name="name" value="radio" class="m-radio__hidden">
-    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
+    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:undefined;"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
     </label>
 </li>
 `;
@@ -27,15 +27,7 @@ exports[`MRadio should render correctly name when set 1`] = `
 exports[`MRadio should render correctly when disabled 1`] = `
 <li class="m-radio m--is-disabled">
     <input type="radio" id="uuid" disabled="disabled" aria-hidden="true" value="radio" class="m-radio__hidden">
-    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
-    </label>
-</li>
-`;
-
-exports[`MRadio should render correctly when position is right 1`] = `
-<li class="m-radio m--is-input-right">
-    <input type="radio" id="uuid" value="radio" class="m-radio__hidden">
-    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
+    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:undefined;"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
     </label>
 </li>
 `;
@@ -43,7 +35,31 @@ exports[`MRadio should render correctly when position is right 1`] = `
 exports[`MRadio should render correctly when radio is selected 1`] = `
 <li class="m-radio m--is-checked">
     <input type="radio" id="uuid" value="radio" checked="checked" class="m-radio__hidden">
-    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
+    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:undefined;"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
+    </label>
+</li>
+`;
+
+exports[`MRadio should render correctly when radioMarginTop is 10px 1`] = `
+<li class="m-radio m--is-checked">
+    <input type="radio" id="uuid" value="radio" checked="checked" class="m-radio__hidden">
+    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:10px;"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
+    </label>
+</li>
+`;
+
+exports[`MRadio should render correctly when radioPosition is right 1`] = `
+<li class="m-radio m--is-input-right">
+    <input type="radio" id="uuid" value="radio" class="m-radio__hidden">
+    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:undefined;"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
+    </label>
+</li>
+`;
+
+exports[`MRadio should render correctly when radioVerticalAlign is center 1`] = `
+<li class="m-radio m--is-checked m--is-align-center">
+    <input type="radio" id="uuid" value="radio" checked="checked" class="m-radio__hidden">
+    <label for="uuid" class="m-radio__wrap"><span aria-hidden="true" class="m-radio__input" style="margin-top:undefined;"></span> <span class="m-radio__label"> <span class="m-radio__label__content"></span> </span>
     </label>
 </li>
 `;

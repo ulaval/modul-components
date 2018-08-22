@@ -4,7 +4,8 @@
                 'm--has-error' : hasTextfieldError,
                 'm--is-valid' : isTextfieldValid,
                 'm--has-icon' : hasIcon,
-                'm--has-label': hasLabel },
+                'm--has-label': hasLabel,
+                'm--has-word-wrap':  hasWordWrap},
                 'm--is-type-' + inputType ]"
      @click="onClick"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
@@ -16,6 +17,7 @@
                    :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
+                   :readonly="readonly"
                    :required-marker="requiredMarker"
                    :icon-name="iconName"
                    :tag-style="tagStyle">
@@ -25,6 +27,7 @@
                :disabled="!active"
                :placeholder="placeholder"
                :readonly="readonly"
+               :maxlength="maxLengthNumber"
                @focus="onFocus"
                @blur="onBlur"
                @keyup="onKeyup"
@@ -33,8 +36,8 @@
                @paste="onPaste"
                :autocomplete="autocomplete"
                v-model="model"
-               :maxlength="maxLengthNumber">
-        <template slot="right-content">
+               v-if="!hasWordWrap">
+        <template slot="right-content" v-if="!hasWordWrap">
             <transition name="m--is">
                 <m-icon-button class="m-textfield__icon-password"
                                button-size="22px"
@@ -45,6 +48,25 @@
                                v-if="propPasswordIcon && hasValue"></m-icon-button>
             </transition>
         </template>
+        <textarea ref="input"
+                :id="id"
+                class="m-textfield__input"
+                :disabled="!active"
+                :placeholder="placeholder"
+                :readonly="readonly"
+                rows="1"
+                @focus="onFocus"
+                @blur="onBlur"
+                @change="onChange"
+                @keypress.enter.prevent
+                @keyup="onKeyup"
+                @keydown="onKeydown"
+                @paste="onPaste"
+                :autocomplete="autocomplete"
+                v-model="model"
+                v-m-textarea-auto-height
+                v-if="hasWordWrap">
+        </textarea>
     </m-input-style>
     <div class="m-textfield__validation">
         <m-validation-message

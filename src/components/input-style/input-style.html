@@ -1,5 +1,6 @@
 <div class="m-input-style"
     :class="[{ 'm--is-focus' : isFocus,
+              'm--is-readonly': readonly,
               'm--is-label-up': labelIsUp,
               'm--is-disabled' : isDisabled,
               'm--is-waiting' : isWaiting,
@@ -7,7 +8,8 @@
               'm--is-valid' : isValid,
               'm--has-label': hasLabel,
               'm--has-value': hasValue,
-              'm--is-anim-active': animActive },
+              'm--has-border-top': borderTop,
+              'm--is-anim-ready': animReady },
               'm--is-tag-' + tagStyle]"
     @click="onClick"
     @mousedown="onMousedown"
@@ -24,6 +26,6 @@
             <slot name="right-content"></slot>
         </div>
         <m-spinner size="small" class="m-input-style__spinner" v-if="isWaiting"></m-spinner>
-        <m-icon class="m-input-style__disabled-icon" name="default" v-if="isDisabled"></m-icon>
+        <m-icon class="m-input-style__disabled-icon" name="m-svg__close-clear" v-if="isDisabled"></m-icon>
     </div>
 </div>

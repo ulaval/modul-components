@@ -13,7 +13,7 @@ export enum MRadioStylePosition {
 
 export interface RadioGroup {
     name: string;
-    position: MRadioStylePosition;
+    radioPosition: MRadioStylePosition;
     enabled: boolean;
     inline: boolean;
     getValue(): string;
@@ -30,7 +30,7 @@ export class MRadioStyle extends ModulVue {
             value === MRadioStylePosition.Left ||
             value === MRadioStylePosition.Right
     })
-    public position: MRadioStylePosition;
+    public radioPosition: MRadioStylePosition;
     @Prop({ default: '1em' })
     public inputSize: string;
     @Prop()
@@ -43,7 +43,7 @@ export class MRadioStyle extends ModulVue {
     public fullWidth: boolean;
 
     private get isInputRight(): boolean {
-        return this.position === MRadioStylePosition.Right;
+        return this.radioPosition === MRadioStylePosition.Right;
     }
 
     private onClick(event: MouseEvent): void {

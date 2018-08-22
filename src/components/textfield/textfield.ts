@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
+import TextareaAutoHeightPlugin from '../../directives/textarea-auto-height/textarea-auto-height';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -23,8 +24,8 @@ export enum MTextfieldType {
     Telephone = 'tel'
 }
 
-const ICON_NAME_PASSWORD_VISIBLE: string = 'show-password';
-const ICON_NAME_PASSWORD_HIDDEN: string = 'hidden-password';
+const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
+const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
 
 @WithRender
 @Component({
@@ -49,9 +50,11 @@ export class MTextfield extends ModulVue implements InputManagementData {
     public type: MTextfieldType;
     @Prop({ default: true })
     public passwordIcon: boolean;
+    @Prop({ default: false })
+    public wordWrap: boolean;
     @Prop()
     public characterCount: boolean;
-    @Prop()
+    @Prop({ default: 0 })
     public maxLength: number;
     @Prop({ default: true })
     public lengthOverflow: boolean;
@@ -73,12 +76,23 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     protected mounted(): void {
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
+        this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
     @Watch('type')
     private typeChanged(type: MTextfieldType): void {
-        this.$log.warn('<' + TEXTFIELD_NAME + '>: Change of property "type" is not supported');
+        this.$log.warn(TEXTFIELD_NAME + ': Change of property "type" is not supported');
         (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
+    }
+
+    @Watch('inputType')
+    private inputTypeChanged(value: string): void {
+        this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
+    }
+
+    @Watch('wordWrap')
+    private wordWrapChanged(wordWrap: boolean): void {
+        this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
     private togglePasswordVisibility(event): void {
@@ -114,12 +128,20 @@ export class MTextfield extends ModulVue implements InputManagementData {
         return this.passwordIcon && this.type === MTextfieldType.Password && this.as<InputState>().active;
     }
 
+    private get hasWordWrap(): boolean {
+        let hasWordWrap: boolean = this.inputType === MTextfieldType.Text && this.wordWrap;
+        if (this.inputType !== MTextfieldType.Text && this.wordWrap) {
+            this.$log.warn(TEXTFIELD_NAME + ': If you want to use word-wrap prop, you need to set type prop at "text"');
+        }
+        return hasWordWrap;
+    }
+
     public get valueLength(): number {
         return this.internalValue.length;
     }
 
     private get maxLengthNumber(): number {
-        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity ;
+        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity;
     }
 
     private get hasTextfieldError(): boolean {
@@ -139,6 +161,7 @@ const TextfieldPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
+        v.use(TextareaAutoHeightPlugin);
         v.use(CharacterCountPlugin);
         v.use(IconButtonPlugin);
         v.component(TEXTFIELD_NAME, MTextfield);

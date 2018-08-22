@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
@@ -11,7 +12,6 @@ import WithRender from './link.html?style=./link.scss';
 export enum MLinkMode {
     RouterLink = 'router-link',
     Link = 'link',
-    Text = 'text',
     Button = 'button'
 }
 
@@ -21,10 +21,12 @@ export enum MLinkIconPosition {
 }
 
 export enum MLinkSkin {
-    light = 'light'
+    Default = 'default',
+    Light = 'light',
+    Text = 'text'
 }
 
-const ICON_NAME_DEFAULT: string = 'chevron';
+const ICON_NAME_DEFAULT: string = 'm-svg__chevron--right';
 
 @WithRender
 @Component
@@ -37,7 +39,6 @@ export class MLink extends ModulVue {
         validator: value =>
             value === MLinkMode.RouterLink ||
             value === MLinkMode.Link ||
-            value === MLinkMode.Text ||
             value === MLinkMode.Button
     })
     public mode: MLinkMode;
@@ -52,7 +53,11 @@ export class MLink extends ModulVue {
     public underline: boolean;
 
     @Prop({
-        validator: value => value === MLinkSkin.light
+        default: MLinkSkin.Default,
+        validator: value =>
+            value === MLinkSkin.Default ||
+            value === MLinkSkin.Light ||
+            value === MLinkSkin.Text
     })
     public skin: MLinkSkin;
 
@@ -75,6 +80,9 @@ export class MLink extends ModulVue {
     @Prop({ default: '12px' })
     public iconSize: string;
 
+    @Prop({ default: '1' })
+    public tabindex: string;
+
     protected mounted(): void {
         this.isButtonChanged(this.mode === MLinkMode.Button);
     }
@@ -96,7 +104,7 @@ export class MLink extends ModulVue {
 
     private onClick(event): void {
         this.$el.blur();
-        if (this.isButton || this.isTextLink || this.disabled) {
+        if (this.isButton || this.disabled) {
             event.preventDefault();
         }
         if (!this.disabled) {
@@ -119,12 +127,12 @@ export class MLink extends ModulVue {
         return this.mode === MLinkMode.Button;
     }
 
-    private get isTextLink(): boolean {
-        return this.mode === MLinkMode.Text;
+    private get isSkinText(): boolean {
+        return this.skin === MLinkSkin.Text;
     }
 
     private get isSkinLight(): boolean {
-        return this.skin === MLinkSkin.light;
+        return this.skin === MLinkSkin.Light;
     }
 
     private get isUnvisited(): boolean {

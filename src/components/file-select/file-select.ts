@@ -84,6 +84,10 @@ export class MFileSelect extends ModulVue {
         }
         this.$refs.inputFile.value = '';
     }
+
+    private get hasLabel(): boolean {
+        return !!this.label;
+    }
 }
 
 const FileSelectPlugin: PluginObject<any> = {

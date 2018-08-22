@@ -29,13 +29,14 @@ export class MProgress extends ModulVue {
     @Prop({ default: 4 })
     public stroke: number;
     @Prop({
-        default: MProgressState.InProgress,
         validator: value =>
             value === MProgressState.Completed ||
             value === MProgressState.InProgress ||
             value === MProgressState.Error
     })
     public state: MProgressState;
+    @Prop({ default: true })
+    public borderRadius: boolean;
 
     private mode: string;
     private styleTag: HTMLElement | null;
@@ -79,8 +80,12 @@ export class MProgress extends ModulVue {
         return this.circle ? '100%' : this.size + 'px';
     }
 
+    private get propState(): MProgressState {
+        return this.state ? this.state : this.value >= 100 ? MProgressState.Completed : MProgressState.InProgress ;
+    }
+
     private get radiusSize(): string {
-        return this.circle ? 'initial' : this.size / 2 + 'px';
+        return this.circle || !this.borderRadius ? 'initial' : this.size / 2 + 'px';
     }
 
     private get styleObject(): { [name: string ]: string } {

@@ -44,5 +44,28 @@ describe('MProgress', () => {
 
             return expect(renderComponent(pgr.vm)).resolves.toMatchSnapshot();
         });
+
+        it('should render correctly when no border radius', () => {
+            const pgr: Wrapper<MProgress> = mount(MProgress, {
+                localVue: localVue,
+                propsData: {
+                    borderRadius: false
+                }
+            });
+
+            return expect(renderComponent(pgr.vm)).resolves.toMatchSnapshot();
+        });
+
+        it('should render correctly when value is 100%', () => {
+            const pgr: Wrapper<MProgress> = mount(MProgress, {
+                localVue: localVue,
+                propsData: {
+                    borderRadius: false,
+                    value: 100
+                }
+            });
+
+            return expect(renderComponent(pgr.vm)).resolves.toMatchSnapshot();
+        });
     });
 });

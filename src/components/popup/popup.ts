@@ -108,18 +108,6 @@ export class MPopup extends ModulVue {
         this.$emit('close');
     }
 
-    private get hasHeaderSlot(): boolean {
-        return !!this.$slots.header;
-    }
-
-    private get hasDefaultSlot(): boolean {
-        return !!this.$slots.default;
-    }
-
-    private get hasFooterSlot(): boolean {
-        return !!this.$slots.footer;
-    }
-
     private get hasTriggerSlot(): boolean {
         return !!this.$slots.trigger;
     }

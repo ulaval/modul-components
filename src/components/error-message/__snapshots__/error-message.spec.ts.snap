@@ -6,7 +6,7 @@ exports[`MErrorMessage given error should render correctly expanded 1`] = `
         <div class="m-message__wrap">
             <div class="m-message__icon">
                 <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg>
             </div>
             <div class="m-message__body">
@@ -21,7 +21,7 @@ exports[`MErrorMessage given error should render correctly expanded 1`] = `
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -32,7 +32,7 @@ exports[`MErrorMessage given error should render correctly expanded with stack t
         <div class="m-message__wrap">
             <div class="m-message__icon">
                 <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg>
             </div>
             <div class="m-message__body">
@@ -46,9 +46,9 @@ exports[`MErrorMessage given error should render correctly expanded with stack t
         <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
-        <m-panel class="m-error-message__stacktrace"><pre></pre></m-panel>
+        <div class="m-error-message__stacktrace"><pre></pre></div>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -59,7 +59,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
         <div class="m-message__wrap">
             <div class="m-message__icon">
                 <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg>
             </div>
             <div class="m-message__body">
@@ -74,7 +74,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -85,7 +85,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
         <div class="m-message__wrap">
             <div class="m-message__icon">
                 <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg>
             </div>
             <div class="m-message__body">
@@ -99,9 +99,9 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
         <p><strong><span class="m-i18n">Navigateur</span>: </strong>modul-user-agent</p>
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
-        <m-panel class="m-error-message__stacktrace"><pre>This is a stack trace</pre></m-panel>
+        <div class="m-error-message__stacktrace"><pre>This is a stack trace</pre></div>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -112,7 +112,7 @@ exports[`MErrorMessage should render correctly collapsed 1`] = `
         <div class="m-message__wrap">
             <div class="m-message__icon">
                 <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg>
             </div>
             <div class="m-message__body">
@@ -124,9 +124,9 @@ exports[`MErrorMessage should render correctly collapsed 1`] = `
     <p><span class="m-i18n">Si le problème persiste, vous pouvez contacter le soutien technique en leur fournissant le détail de l'erreur.</span></p>
     <article class="m-accordion m--is-light m--is-closed m--has-icon-left">
         <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
-            <div class="m-accordion__header__content"><span class="m-i18n">Détails de l'erreur</span> <span class="m-i18n m-accordion__hidden">m-accordion:open</span> </div> <span aria-hidden="true" class="m-accordion__header-icon m--is-left m--has-border"></span></div>
+            <div class="m-accordion__header__content"><span class="m-i18n">Détails de l'erreur</span> <span class="m-i18n m-accordion__hidden">m-accordion:open</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"></span></div>
     </article>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
@@ -137,7 +137,7 @@ exports[`MErrorMessage should render correctly expanded 1`] = `
         <div class="m-message__wrap">
             <div class="m-message__icon">
                 <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use xlink:href="#error" aria-hidden="true"></use>
+                    <use aria-hidden="true"></use>
                 </svg>
             </div>
             <div class="m-message__body">
@@ -152,7 +152,7 @@ exports[`MErrorMessage should render correctly expanded 1`] = `
         <p><strong><span class="m-i18n">No référence de l'erreur</span>: </strong>123456879</p>
         <p><span class="m-i18n">Elle a eu lieu le <strong>2018-01-02</strong> à <strong>00:01:02</strong></span></p>
     </div>
-    <a href="/" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    <a href="/" tabindex="1" class="m-link"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
     </a>
 </div>
 `;
