@@ -92,7 +92,7 @@ enum FroalaElements {
         return this.value.length === 0;
     }
 
-    public get isInitialized(): boolean {
+    public isInitialized(): boolean {
         return !!this.froalaEditor;
     }
 
@@ -206,7 +206,7 @@ enum FroalaElements {
     }
 
     protected get collapsed(): boolean {
-        return this.isInitialized && !this.isFocused && (this.isEmpty || this.disabled);
+        return this.isInitialized() && !this.isFocused && (this.isEmpty || this.disabled);
     }
 
     protected onResize(): void {
@@ -244,7 +244,7 @@ enum FroalaElements {
     }
 
     private createEditor(): void {
-        if (this.isInitialized) {
+        if (this.isInitialized()) {
             return;
         }
 
@@ -393,7 +393,7 @@ enum FroalaElements {
     }
 
     private setContent(firstTime: boolean = false): void {
-        if (!this.isInitialized && !firstTime) {
+        if (!this.isInitialized() && !firstTime) {
             return;
         }
 
