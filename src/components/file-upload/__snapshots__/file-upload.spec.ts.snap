@@ -154,7 +154,7 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
 exports[`MFileUpload validation validation messages should render rejected files in modal 1`] = `
 <m-dialog title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
-        <div class="m-message m-file-upload__error-message m--has-error m--is-skin-regular">
+        <div class="m-message m-file-upload__error-message m--is-state-error m--is-skin-default">
             <div class="m-message__wrap">
                 <div class="m-message__icon">
                     <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
@@ -165,8 +165,9 @@ exports[`MFileUpload validation validation messages should render rejected files
                     <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:10px;">
                         <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
                             <use aria-hidden="true"></use>
-                        </svg> <span class="m-icon-button__hidden"><span class="m-i18n">Close</span></span>
-                    </button>
+                        </svg> <span class="m-icon-button__hidden">
+                m-message:close
+            </span></button>
                     <div class="m-message__body__content">
                         <p class="m-file-upload__error-message__title"><span class="m-i18n">The following files can not be added.</span></p>
                         <ul class="m-file-upload__error-message__list">

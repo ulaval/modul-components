@@ -16,8 +16,9 @@ export enum MMessageState {
 }
 
 export enum MMessageSkin {
-    Regular = 'regular',
-    Light = 'light'
+    Default = 'default',
+    Light = 'light',
+    Page = 'page'
 }
 
 @WithRender
@@ -34,10 +35,11 @@ export class MMessage extends Vue {
     public state: MMessageState;
 
     @Prop({
-        default: MMessageSkin.Regular,
+        default: MMessageSkin.Default,
         validator: value =>
-            value === MMessageSkin.Regular ||
-            value === MMessageSkin.Light
+            value === MMessageSkin.Default ||
+            value === MMessageSkin.Light ||
+            value === MMessageSkin.Page
     })
     public skin: MMessageSkin;
 
@@ -45,26 +47,36 @@ export class MMessage extends Vue {
     public icon: boolean;
 
     @Prop()
-    public closeButton: boolean;
+    public title: string;
 
     @Prop()
+    public closeButton: boolean;
+
+    @Prop({ default: true })
     public visible: boolean;
 
-    private internalPropVisible: boolean = true;
+    private internalVisible: boolean = true;
+    private animReady: boolean = false;
+
+    protected mounted(): void {
+        this.propVisible = this.visible;
+        setTimeout(() => {
+            this.animReady = true;
+        });
+    }
 
     @Watch('visible')
     private onVisibleChange(value: boolean): void {
-        // reset to true if prop reset to undefined
-        this.internalPropVisible = value === undefined ? true : value;
+        this.propVisible = value;
     }
 
     private get propVisible(): boolean {
-        return this.visible !== undefined ? this.visible : this.internalPropVisible;
+        return this.internalVisible;
     }
 
     private set propVisible(visible: boolean) {
-        this.internalPropVisible = visible;
-        this.$emit('update:visible', visible);
+        this.internalVisible = visible === undefined ? true : visible;
+        this.$emit('update:visible', this.internalVisible);
     }
 
     private onClose(event): void {
@@ -93,8 +105,36 @@ export class MMessage extends Vue {
         return icon;
     }
 
+    private get isSkinDefault(): boolean {
+        return this.skin === MMessageSkin.Default;
+    }
+
+    private get isSkinLight(): boolean {
+        return this.skin === MMessageSkin.Light;
+    }
+
+    private get isSkinPage(): boolean {
+        return this.skin === MMessageSkin.Page;
+    }
+
+    private get isStateInformation(): boolean {
+        return this.state === MMessageState.Information;
+    }
+
+    private get isStateWarning(): boolean {
+        return this.state === MMessageState.Warning;
+    }
+
+    private get isStateError(): boolean {
+        return this.state === MMessageState.Error;
+    }
+
+    private get isStateSuccess(): boolean {
+        return this.state === MMessageState.Success;
+    }
+
     private get showCloseButton(): boolean {
-        return this.skin === MMessageSkin.Regular && this.closeButton;
+        return this.skin === MMessageSkin.Default && this.closeButton;
     }
 
 }
