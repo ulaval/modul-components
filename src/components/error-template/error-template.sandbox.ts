@@ -3,15 +3,16 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { ERROR_TEMPLATE_NAME } from '../component-names';
-import { Link, MErrorTemplateState } from './error-template';
+import MessagePlugin, { MMessageState } from '../message/message';
+import { Link } from './error-template';
 import WithRender from './error-template.sandbox.html';
 
 @WithRender
 @Component
 export class MErrorTemplateSandbox extends Vue {
-    errorType: MErrorTemplateState = MErrorTemplateState.Error;
-    warningType: MErrorTemplateState = MErrorTemplateState.Warning;
-    informationType: MErrorTemplateState = MErrorTemplateState.Information;
+    errorType: MMessageState = MMessageState.Error;
+    warningType: MMessageState = MMessageState.Warning;
+    informationType: MMessageState = MMessageState.Information;
     title: string = 'My error title';
     oneHint: string[] = ['My only hint'];
     manyHints: string[] = ['My first hint', 'My second long hint.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas urna rhoncus ipsum congue lobortis. Mauris vel neque condimentum, dignissim lectus ac, vehicula justo. Aliquam nunc leo, tristique hendrerit aliquam sagittis, scelerisque quis libero. Integer non augue nec lacus aliquet porttitor in nec lacus. Cras ultrices tellus est, condimentum gravida orci pulvinar quis. Integer eget turpis arcu. Curabitur consequat porta urna, at hendrerit justo consectetur non. Aenean venenatis ornare nulla, a vulputate erat eleifend ut.'];

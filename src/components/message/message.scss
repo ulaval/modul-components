@@ -17,7 +17,7 @@ $m-message-size: 32px;
 }
 
 .m-message.m--is-skin-default {
-    &.m--is-state-success {
+    &.m--is-state-confirmation {
         @include m-message-skin-default($m-color--success);
     }
 
@@ -88,7 +88,7 @@ $m-message-size: 32px;
 }
 
 .m-message.m--is-skin-light {
-    &.m--is-state-success {
+    &.m--is-state-confirmation {
         color: $m-color--success;
     }
 

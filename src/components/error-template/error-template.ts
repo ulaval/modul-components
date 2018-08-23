@@ -7,6 +7,7 @@ import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TEMPLATE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import { MMessageState } from '../message/message';
 import WithRender from './error-template.html?style=./error-template.scss';
 
 /**
@@ -23,13 +24,6 @@ export class Link {
     }
 }
 
-export enum MErrorTemplateState {
-    Information = 'information',
-    Warning = 'warning',
-    Error = 'error',
-    Success = 'success'
-}
-
 export enum MErrorTemplateSkin {
     Default = 'default',
     Light = 'light'
@@ -40,14 +34,14 @@ export enum MErrorTemplateSkin {
 export class MErrorTemplate extends ModulVue {
 
     @Prop({
-        default: MErrorTemplateState.Error,
+        default: MMessageState.Error,
         validator: value =>
-            value === MErrorTemplateState.Information ||
-            value === MErrorTemplateState.Error ||
-            value === MErrorTemplateState.Warning ||
-            value === MErrorTemplateState.Success
+            value === MMessageState.Information ||
+            value === MMessageState.Error ||
+            value === MMessageState.Warning ||
+            value === MMessageState.Confirmation
     })
-    public state: MErrorTemplateState;
+    public state: string;
 
     @Prop({
         default: MErrorTemplateSkin.Default,
@@ -55,7 +49,7 @@ export class MErrorTemplate extends ModulVue {
             value === MErrorTemplateSkin.Default ||
             value === MErrorTemplateSkin.Light
     })
-    public skin: MErrorTemplateSkin;
+    public skin: string;
 
     @Prop()
     public iconName: string;
@@ -122,19 +116,19 @@ export class MErrorTemplate extends ModulVue {
     }
 
     private get isStateInformation(): boolean {
-        return this.state === MErrorTemplateState.Information;
+        return this.state === MMessageState.Information;
     }
 
     private get isStateWarning(): boolean {
-        return this.state === MErrorTemplateState.Warning;
+        return this.state === MMessageState.Warning;
     }
 
     private get isStateError(): boolean {
-        return this.state === MErrorTemplateState.Error;
+        return this.state === MMessageState.Error;
     }
 
-    private get isStateSuccess(): boolean {
-        return this.state === MErrorTemplateState.Success;
+    private get isStateConfirmation(): boolean {
+        return this.state === MMessageState.Confirmation;
     }
 
     private get iconNameProp(): string {
@@ -142,11 +136,11 @@ export class MErrorTemplate extends ModulVue {
             return this.iconName;
         } else {
             switch (this.state) {
-                case MErrorTemplateState.Success:
+                case MMessageState.Confirmation:
                     return'm-svg__confirmation';
-                case MErrorTemplateState.Information:
+                case MMessageState.Information:
                     return'm-svg__information';
-                case MErrorTemplateState.Warning:
+                case MMessageState.Warning:
                     return 'm-svg__warning';
                 default:
                     return'm-svg__error';

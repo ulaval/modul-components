@@ -14,7 +14,7 @@
 }
 
 .m-error-template {
-    &.m--is-state-success {
+    &.m--is-state-confirmation {
         @include m-error-template-state($m-color--success, $m-color--success-lightest);
     }
 

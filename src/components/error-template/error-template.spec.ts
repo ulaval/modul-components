@@ -3,11 +3,12 @@ import Vue from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import { ICON_NAME, LINK_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link, MErrorTemplate, MErrorTemplateState } from './error-template';
+import MessagePlugin, { MMessageState } from '../message/message';
+import ErrorTemplatePlugin, { Link, MErrorTemplate } from './error-template';
 
 let wrapper: Wrapper<MErrorTemplate>;
 
-const A_VALID_STATE: string = MErrorTemplateState.Error;
+const A_VALID_STATE: string = MMessageState.Error;
 const A_VALID_ICON_NAME: string = 'iconName';
 const A_VALID_TITLE: string = 'An error title.';
 const FIRST_HINT_CONTENT: string = 'a hint';
@@ -57,7 +58,7 @@ describe(`Error-template fonctionnality tests`, () => {
 
     describe(`Given state information`, () => {
         it(`Then  class m--is-state-information present`, () => {
-            state = MErrorTemplateState.Information;
+            state = MMessageState.Information;
             initializeShallowWrapper();
 
             expect(wrapper.find('.m--is-state-information').exists()).toBeTruthy();
@@ -66,7 +67,7 @@ describe(`Error-template fonctionnality tests`, () => {
 
     describe(`Given state error`, () => {
         it(`Then  class m--is-state-error present`, () => {
-            state = MErrorTemplateState.Error;
+            state = MMessageState.Error;
             initializeShallowWrapper();
 
             expect(wrapper.find('.m--is-state-error').exists()).toBeTruthy();
@@ -75,7 +76,7 @@ describe(`Error-template fonctionnality tests`, () => {
 
     describe(`Given state warning`, () => {
         it(`Then class m--is-state-warning present`, () => {
-            state = MErrorTemplateState.Warning;
+            state = MMessageState.Warning;
             initializeShallowWrapper();
 
             expect(wrapper.find('.m--is-state-warning').exists()).toBeTruthy();
@@ -159,7 +160,7 @@ describe(`Error-template integration tests`, () => {
             wrapper = mount(MErrorTemplate, {
                 stubs: getStubs(),
                 propsData: {
-                    state: MErrorTemplateState.Warning,
+                    state: MMessageState.Warning,
                     iconName: A_VALID_ICON_NAME,
                     title: A_VALID_TITLE,
                     hints: MANY_HINTS_LIST,

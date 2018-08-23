@@ -10,7 +10,7 @@ import IconPlugin from '../icon/icon';
 import WithRender from './message.html?style=./message.scss';
 
 export enum MMessageState {
-    Success = 'success',
+    Confirmation = 'confirmation',
     Information = 'information',
     Warning = 'warning',
     Error = 'error'
@@ -27,9 +27,9 @@ export enum MMessageSkin {
 @Component
 export class MMessage extends Vue {
     @Prop({
-        default: MMessageState.Success,
+        default: MMessageState.Confirmation,
         validator: value =>
-            value === MMessageState.Success ||
+            value === MMessageState.Confirmation ||
             value === MMessageState.Information ||
             value === MMessageState.Warning ||
             value === MMessageState.Error
@@ -90,7 +90,7 @@ export class MMessage extends Vue {
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
-            case MMessageState.Success:
+            case MMessageState.Confirmation:
                 icon = 'm-svg__confirmation';
                 break;
             case MMessageState.Information:
@@ -144,8 +144,8 @@ export class MMessage extends Vue {
         return this.state === MMessageState.Error;
     }
 
-    private get isStateSuccess(): boolean {
-        return this.state === MMessageState.Success;
+    private get isStateConfirmation(): boolean {
+        return this.state === MMessageState.Confirmation;
     }
 
     private get showCloseButton(): boolean {
