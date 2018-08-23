@@ -58,8 +58,8 @@ export class MErrorTemplate extends ModulVue {
     @Prop({ default: () => [] })
     public links: Link[];
 
-    @Prop({ default: 130 })
-    public size: number;
+    @Prop({ default: '130px' })
+    public size: string;
 
     public svg: string;
 
@@ -77,7 +77,7 @@ export class MErrorTemplate extends ModulVue {
 
     public get styleObject(): { [name: string ]: string } {
         return {
-            width: this.size + 'px'
+            width: this.size
         };
     }
 
