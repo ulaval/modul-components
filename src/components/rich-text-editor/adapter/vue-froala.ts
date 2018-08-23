@@ -157,7 +157,7 @@ enum FroalaElements {
     }
 
     protected addSubMenus(): void {
-         // add mobile mode popups
+         // add mobile mode submenus
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
 
@@ -232,7 +232,7 @@ enum FroalaElements {
     }
 
     @Watch('isEqMinXS')
-    private test(): void {
+    private changeMode(): void {
         // mode desktop
         if (this.as<ElementQueries>().isEqMinXS) {
             this.desktopMode();
