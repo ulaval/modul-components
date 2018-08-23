@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MRichTextEditor should render correctly 1`] = `
-<div class="m-rich-text m--is-eq-max-s" style="width:100%;max-width:288px;">
+<div class="m-rich-text m--is-mobile" style="width:100%;max-width:288px;">
     <m-input-style label-for="mrich-text-uuid" empty="true" border-top="true" tag-style="default"></m-input-style>
     <div class="m-textfield__validation">
         <m-validation-message class="m-textfield__validation__message"></m-validation-message>

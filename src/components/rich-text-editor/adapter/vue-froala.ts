@@ -4,6 +4,9 @@ import $ from 'jquery';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
+import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
+import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
+import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
 import { ModulVue } from '../../../utils/vue/vue';
@@ -136,21 +139,30 @@ enum FroalaElements {
         });
     }
 
+    protected addCustomIcons(): void {
+        $.FroalaEditor.DefineIconTemplate('custom-icons', '[SVG]');
+
+        if (this.$i18n.currentLang() === 'fr') {
+            $.FroalaEditor.DefineIcon('bold', { SVG: (boldIcon as string), template: 'custom-icons' });
+        }
+        $.FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
+        $.FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
+    }
+
     protected addPopups(): void {
         // add mobile mode popups
         $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
         this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
     }
 
     protected addSubMenus(): void {
-        this.$log.log(this.$i18n.translate('m-rich-text-editor:styles'));
          // add mobile mode submenus
-        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'bold', ['bold', 'italic', 'subscript', 'superscript']);
-        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'formatUL', ['formatUL', 'formatOL', 'outdent', 'indent']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
 
-        // we'll use this submenu when we'll support images,tables,...
+        // we'll use this submodule when we'll support images,tables,...
         //  $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
         // this.addSubMenu(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
 
@@ -164,7 +176,8 @@ enum FroalaElements {
             callback: () => {
                 this.froalaEditor.stylesSubMenu.hideSubMenu();
                 this.froalaEditor.listesSubMenu.hideSubMenu();
-                this.froalaEditor.insertionsSubMenu.hideSubMenu();
+                // we'll use this submenu when we'll support images,tables,...
+                // this.froalaEditor.insertionsSubMenu.hideSubMenu();
             }
         });
     }
@@ -226,10 +239,10 @@ enum FroalaElements {
         });
     }
 
-    @Watch('isEqMinS')
+    @Watch('isEqMinXS')
     private changeMode(): void {
         // mode desktop
-        if (this.as<ElementQueries>().isEqMinS) {
+        if (this.as<ElementQueries>().isEqMinXS) {
             this.desktopMode();
             // hide hide button
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
@@ -243,6 +256,7 @@ enum FroalaElements {
             return;
         }
 
+        this.addCustomIcons();
         this.addSubMenus();
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
@@ -302,7 +316,7 @@ enum FroalaElements {
                 // if we use pasteBeforeCleanup, there's an error in froala's code
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     if (data.replace) {
-                        data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p', data);
+                        data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
                         return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                     }
                 },
