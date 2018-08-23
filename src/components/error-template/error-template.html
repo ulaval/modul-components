@@ -4,12 +4,14 @@
                   'm--is-state-warning': state=='warning',
                   'm--is-state-error': state=='error',}">
     <header class="m-error-template__header">
-        <h2 class="m-error-template__title" v-html="title"></h2>
-        <div  class="m-error-template__icon-container" >
+        <h2 class="m-error-template__title"
+            v-if="title"
+            v-html="title"></h2>
+        <div class="m-error-template__icon-container"
+             aria-hidden="true">
             <div class="m-error-template__icon"
                 :style="styleObject"
                 v-html="svg"
-                :title="title"
                 v-if="isSvg"></div>
             <m-icon class="m-error-template__icon"
                     :name="iconNameProp"
@@ -18,7 +20,8 @@
                     v-else></m-icon>
         </div>
     </header>
-    <div class="m-error-template__body">
+    <div class="m-error-template__body"
+         v-if="hasBody">
         <p class="m-error-template__hints"
             :class="{'m--no-content': !hasLinksAndSlot}"
             v-if="hasHints"

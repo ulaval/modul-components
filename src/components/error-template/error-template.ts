@@ -92,7 +92,11 @@ export class MErrorTemplate extends ModulVue {
     }
 
     private get hasLinksAndSlot(): boolean {
-        return this.links.length > 0 || !!this.$slots.default;
+        return this.hasLinks || !!this.$slots.default;
+    }
+
+    private get hasBody(): boolean {
+        return this.hasHints || this.hasLinks || !!this.$slots.default;
     }
 
     private get iconNameProp(): string {
