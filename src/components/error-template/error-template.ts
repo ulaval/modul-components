@@ -23,20 +23,25 @@ export class Link {
     }
 }
 
-export enum MErrorTemplateSkin {
+export enum MErrorTemplateState {
     Information = 'information',
     Warning = 'warning',
-    Error = 'error'
+    Error = 'error',
+    Success = 'success'
 }
 @WithRender
 @Component
 export class MErrorTemplate extends ModulVue {
 
-    @Prop({validator: value =>
-        value === MErrorTemplateSkin.Information ||
-        value === MErrorTemplateSkin.Error ||
-        value === MErrorTemplateSkin.Warning})
-    public skin: MErrorTemplateSkin;
+    @Prop({
+        default: MErrorTemplateState.Error,
+        validator: value =>
+            value === MErrorTemplateState.Information ||
+            value === MErrorTemplateState.Error ||
+            value === MErrorTemplateState.Warning ||
+            value === MErrorTemplateState.Success
+    })
+    public state: MErrorTemplateState;
 
     @Prop()
     public iconName: string;
@@ -89,6 +94,23 @@ export class MErrorTemplate extends ModulVue {
 
     private get hasLinksAndSlot(): boolean {
         return this.links.length > 0 || !!this.$slots['default'];
+    }
+
+    private get iconNameProp(): string {
+        if (this.iconName) {
+            return this.iconName;
+        } else {
+            switch (this.state) {
+                case MErrorTemplateState.Success:
+                    return'm-svg__confirmation';
+                case MErrorTemplateState.Information:
+                    return'm-svg__information';
+                case MErrorTemplateState.Warning:
+                    return 'm-svg__warning';
+                default:
+                    return'm-svg__error';
+            }
+        }
     }
 }
 

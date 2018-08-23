@@ -1,55 +1,93 @@
 @import '../../styles/abstracts/variables';
 
 .m-error-template {
+    &.m--is-state-success {
+        .m-error-template {
+            &__title,
+            &__icon {
+                color: $m-color--success;
+            }
+
+            &__icon-container::before {
+                background-color: $m-color--success-lightest;
+            }
+        }
+    }
+
+    &.m--is-state-information {
+        .m-error-template {
+            &__title,
+            &__icon {
+                color: $m-color--interactive;
+            }
+
+            &__icon-container::before {
+                background-color: $m-color--interactive-lightest;
+            }
+        }
+    }
+
+    &.m--is-state-error {
+        .m-error-template {
+            &__title,
+            &__icon {
+                color: $m-color--error;
+            }
+
+            &__icon-container::before {
+                background-color: $m-color--error-lightest;
+            }
+        }
+    }
+
+    &.m--is-state-warning {
+        .m-error-template {
+            &__title,
+            &__icon {
+                color: $m-color--warning;
+            }
+
+            &__icon-container::before {
+                background-color: $m-color--warning-lightest;
+            }
+        }
+    }
+
+    &__header {
+        ~ .m-error-template__body {
+            padding-top: $m-spacing--l;
+        }
+    }
+
     &__title {
         font-size: $m-font-size--h3;
         text-align: center;
         font-weight: $m-font-weight--black;
+        margin: 0;
 
-        .m--is-skin-information & {
-            color: $m-color--interactive;
-        }
-
-        .m--is-skin-error & {
-            color: $m-color--error;
-        }
-
-        .m--is-skin-warning & {
-            color: $m-color--warning;
+        ~ .m-error-template__icon-container {
+            margin-top: $m-spacing--l;
         }
     }
 
     &__icon-container {
         position: relative;
         min-height: 130px;
-        margin: $m-spacing--l 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
         &::before {
-            content: "";
-            display: block;
             position: absolute;
-            right: 0;
             top: 50%;
-            transform: translate3d(0, -50%, 0);
-            height: 80px;
-            width: 100%;
+            right: 0;
+            left: 0;
             z-index: 0;
-
-            .m--is-skin-information & {
-                background-color: $m-color--interactive-lightest;
-            }
-
-            .m--is-skin-error & {
-                background-color: $m-color--error-lightest;
-            }
-
-            .m--is-skin-warning & {
-                background-color: $m-color--warning-lightest;
-            }
+            transform: translate3d(0, -50%, 0);
+            content: '';
+            display: block;
+            height: 80px; // Magic number
         }
 
         &__svg {
@@ -80,12 +118,32 @@
     }
 
     &__hints {
+        margin: 0;
+
         &.m--no-content {
             text-align: center;
+        }
+
+        + .m-error-template__hints {
+            margin-top: $m-margin;
         }
     }
 
     &__details {
-        margin: $m-spacing 0;
+        margin: 0;
+
+        &:not(:first-child) {
+            margin: $m-margin 0 0 0;
+        }
+    }
+
+    &__links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        &:not(:first-child) {
+            margin: $m-margin 0 0 0;
+        }
     }
 }

@@ -4,7 +4,7 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_PAGE_NOT_FOUND_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
+import ErrorTemplatePlugin, { Link, MErrorTemplateState } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './error-page-not-found.html';
@@ -30,7 +30,7 @@ export class MErrorPageNotFound extends ModulVue {
     })
     public hints: string[];
 
-    readonly skin: string = MErrorTemplateSkin.Warning;
+    readonly state: string = MErrorTemplateState.Warning;
 
     readonly svgName: string = 'm-svg__error-page-not-found';
 }

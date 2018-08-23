@@ -4,7 +4,7 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_ACCESS_DENIED_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
+import ErrorTemplatePlugin, { Link, MErrorTemplateState } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './error-access-denied.html';
@@ -27,7 +27,7 @@ export class MErrorAccessDenied extends ModulVue {
     })
     public hints: string[];
 
-    readonly skin: string = MErrorTemplateSkin.Information;
+    readonly state: string = MErrorTemplateState.Information;
 
     readonly svgName: string = 'm-svg__error-access-denied';
 }

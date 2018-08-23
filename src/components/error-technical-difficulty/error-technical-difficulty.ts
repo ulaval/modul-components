@@ -6,7 +6,7 @@ import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
+import ErrorTemplatePlugin, { Link, MErrorTemplateState } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
@@ -57,7 +57,7 @@ export class MErrorTechnicalDifficulty extends ModulVue {
     @Prop()
     public error?: Error;
 
-    public skin: string = MErrorTemplateSkin.Error;
+    public state: string = MErrorTemplateState.Error;
 
     public svgName: string = 'm-svg__error-technical-difficulty';
 
