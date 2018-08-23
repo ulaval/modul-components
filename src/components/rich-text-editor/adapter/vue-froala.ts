@@ -308,7 +308,7 @@ enum FroalaElements {
                 // if we use pasteBeforeCleanup, there's an error in froala's code
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     if (data.replace) {
-                        data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p', data);
+                        data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
                         return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                     }
                 },
