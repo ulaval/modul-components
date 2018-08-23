@@ -1,6 +1,6 @@
+import { shallow, Wrapper } from '@vue/test-utils';
 import $ from 'jquery';
 
-import { shallow, Wrapper } from '../../../../node_modules/@vue/test-utils';
 import { VueFroala } from './vue-froala';
 
 let wrapper: Wrapper<VueFroala>;
