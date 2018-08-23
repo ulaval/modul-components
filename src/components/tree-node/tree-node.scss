@@ -37,8 +37,11 @@ $m-tree-node--line-width: 22px;
         @include m-button--disabled();
     }
 
-    &.m--is-selected > &__item,
-    &:not(.m--is-disabled) > &__item:hover {
+    &.m--is-selected > &__item {
+        @include m-button--active();
+    }
+
+    &:not(.m--is-disabled):not(.m--is-selected) > &__item:hover {
         @include m-button--hover();
     }
 

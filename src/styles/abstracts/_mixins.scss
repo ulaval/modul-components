@@ -190,10 +190,14 @@
     }
 
     &:active {
-        color: $m-color--white;
-        background: $m-color--interactive-dark;
-        border-color: $m-color--interactive-dark;
+        @include m-button--active();
     }
+}
+
+@mixin m-button--active() {
+    color: $m-color--white;
+    background: $m-color--interactive-dark;
+    border-color: $m-color--interactive-dark;
 }
 
 @mixin m-list() {
