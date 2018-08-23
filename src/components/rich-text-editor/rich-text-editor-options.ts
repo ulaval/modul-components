@@ -31,7 +31,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public lineBreakerTags: string [] = [];
     public zIndex: number = 200;
     public toolbarSticky: boolean = true;
-    public scrollableContainer: string = 'body';
+    public scrollableContainer: string | undefined;
     public toolbarStickyOffset: number = 0;
     public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'stylesSubMenu', 'listesSubMenu', 'insertionsSubMenu'];
     public wordPasteModal: boolean = true;
