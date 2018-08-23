@@ -4,7 +4,7 @@
                   'm--is-state-warning': state=='warning',
                   'm--is-state-error': state=='error',}">
     <header class="m-error-template__header">
-        <h2 class="m-error-template__title">{{title}}</h2>
+        <h2 class="m-error-template__title" v-html="title"></h2>
         <div  class="m-error-template__icon-container" >
             <div class="m-error-template__icon"
                 :style="styleObject"

@@ -77,8 +77,7 @@ export class MErrorTemplate extends ModulVue {
 
     public get styleObject(): { [name: string ]: string } {
         return {
-            width: this.size + 'px',
-            height: this.size + 'px'
+            width: this.size + 'px'
         };
     }
 
@@ -93,7 +92,7 @@ export class MErrorTemplate extends ModulVue {
     }
 
     private get hasLinksAndSlot(): boolean {
-        return this.links.length > 0 || !!this.$slots['default'];
+        return this.links.length > 0 || !!this.$slots.default;
     }
 
     private get iconNameProp(): string {
