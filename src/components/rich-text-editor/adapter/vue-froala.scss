@@ -1,8 +1,19 @@
 @import 'abstracts/variables';
 @import '../../../styles/abstracts/var-froala';
+@import '../../rich-text-edit/var-froala';
+@import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css"); /* FA CSS import */
+
+/deep/ .vue-froala::before {
+    content: "\f16c";
+    font-family: Font Awesome 5 Free, sans-serif;
+    font-weight: 900;
+    display: inline-block;
+}
 
 .vue-froala {
     overflow: hidden;
+
+    /deep/ .fas { font-style: normal; }
 
     &.m--is-dirty {
         overflow: unset;
@@ -50,6 +61,8 @@
             font-weight: $m-font-weight;
             border-left-color: $m-color--grey-light;
             border-right-color: $m-color--grey-light;
+            word-wrap: break-word;
+            -moz-user-select: text; // Dirty fix for text selection in firefox if the rich-text is in a draggable container.
         }
 
         .fr-box.fr-basic.fr-top .fr-wrapper {

@@ -1,28 +1,3 @@
-import { library } from '@fortawesome/fontawesome';
-import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft';
-import faArrowLeft from '@fortawesome/fontawesome-free-solid/faArrowLeft';
-import faBold from '@fortawesome/fontawesome-free-solid/faBold';
-import faCompress from '@fortawesome/fontawesome-free-solid/faCompress';
-import faEdit from '@fortawesome/fontawesome-free-solid/faEdit';
-import faExpand from '@fortawesome/fontawesome-free-solid/faExpand';
-import faExternalLinkAlt from '@fortawesome/fontawesome-free-solid/faExternalLinkAlt';
-import faIndent from '@fortawesome/fontawesome-free-solid/faIndent';
-import faItalic from '@fortawesome/fontawesome-free-solid/faItalic';
-import faLink from '@fortawesome/fontawesome-free-solid/faLink';
-import faListOl from '@fortawesome/fontawesome-free-solid/faListOl';
-import faListUl from '@fortawesome/fontawesome-free-solid/faListUl';
-import faOutdent from '@fortawesome/fontawesome-free-solid/faOutdent';
-import faParagraph from '@fortawesome/fontawesome-free-solid/faParagraph';
-import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
-import faSubscript from '@fortawesome/fontawesome-free-solid/faSubscript';
-import faSuperscript from '@fortawesome/fontawesome-free-solid/faSuperscript';
-import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
-import faTrash from '@fortawesome/fontawesome-free-solid/faTrash';
-import faUnlink from '@fortawesome/fontawesome-free-solid/faUnlink';
-
-library.add(faExpand, faCompress, faBold, faItalic, faSubscript, faSuperscript, faParagraph, faListOl, faListUl, faOutdent, faIndent, faLink, faExternalLinkAlt, faEdit, faUnlink, faTrash,
-    faTimes, faArrowLeft, faPlus, faAngleLeft);
-
 export abstract class MRichTextEditorDefaultOptions {
     public immediateVueModelUpdate: boolean = true;
     public iconsTemplate: string = 'font_awesome_5';
