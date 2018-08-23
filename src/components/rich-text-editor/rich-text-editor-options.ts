@@ -31,7 +31,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public lineBreakerTags: string [] = [];
     public zIndex: number = 200;
     public toolbarSticky: boolean = true;
-    public scrollableContainer: string = 'body';
+    public scrollableContainer: string | undefined;
     public toolbarStickyOffset: number = 0;
     public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'stylesSubMenu', 'listesSubMenu', 'insertionsSubMenu'];
     public wordPasteModal: boolean = true;
@@ -44,8 +44,8 @@ export abstract class MRichTextEditorDefaultOptions {
 }
 
 export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOptions {
-    public toolbarButtons: string[] = ['hide', 'styles-sub-menu', 'bold', 'italic', 'subscript', 'superscript', 'listes-sub-menu', 'formatUL',
-        'formatOL', 'outdent', 'indent', 'insertLink', 'specialCharacters', 'fullscreen'];
+    public toolbarButtons: string[] = ['hide', 'styles-sub-menu', 'bold', 'italic', 'subscript', 'superscript', '|', 'listes-sub-menu', 'formatUL',
+        'formatOL', 'outdent', 'indent', '|', 'insertLink', 'specialCharacters', '|', 'fullscreen'];
 
     public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
 
