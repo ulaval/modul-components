@@ -33,6 +33,10 @@ jobs:
           name: npm test
           command: npm run unitall -- -w 1
 
+      - run:
+          name: npm pack
+          command: npm pack
+
       - store_test_results:
           path: reports/junit
       - store_artifacts:
