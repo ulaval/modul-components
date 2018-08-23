@@ -251,6 +251,7 @@ $m-input-style--padding: 4px !default;
             position: relative;
             min-height: 24px;
             flex: 1 1 auto;
+            max-width: 100%;
 
             .m--has-border-top & {
                 .m--is-focus & {
@@ -353,8 +354,6 @@ $m-input-style--padding: 4px !default;
         outline: none;
         text-overflow: ellipsis;
         font-family: $m-font-family;
-        font-size: $m-font-size;
-        font-weight: $m-font-weight--bold;
         text-align: left;
         background: none;
         border: none;
@@ -367,6 +366,8 @@ $m-input-style--padding: 4px !default;
         overflow: hidden;
         width: 100%;
         padding: 0;
+        font-size: $m-font-size;
+        font-weight: $m-font-weight--bold;
         line-height: $m-line-height;
 
         @include m-is-ie() {

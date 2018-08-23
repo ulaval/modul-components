@@ -1,7 +1,7 @@
 {
     "m-error-cookies-not-supported": {
-        "title": "Activez les cookies pour continuer",
-        "hint.primary": "Pour accéder à l'application, vous devez éviter d'utiliser la navigation privée et vous assurez d'avoir activé les cookies et le local storage dans votre navigateur.",
-        "home-label": "Retour à l'accueil"
+        "title": "Les cookies sont désactivés<br>dans votre navigateur",
+        "hint.primary": "Pour accéder à ce site, modifiez les paramètres de votre navigateur et réessayer.",
+        "home-label": "Accueil"
     }
 }

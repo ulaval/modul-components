@@ -1,54 +1,8 @@
 <div>
     <!-- Sandbox template -->
-    <h3>Froala Text Editor</h3>
-    <p class="m-u--margin-bottom">
-        fonctionne sans options spécifiée
-    </p>
-    <p>
-        <div style="margin-bottom: 30px;">
-            <div><button @click="focus = !focus">Change focus (now: {{ focus }})</button></div>
-            <div>
-                Error message: <input type="text" v-model="errorMessage" />
-            </div>
-            <div>
-                Valid message: <input type="text" v-model="validMessage" />
-            </div>
-            <div>
-                Helper message: <input type="text" v-model="helperMessage" />
-            </div>
-            <div><button @click="waiting = !waiting">Waiting (now: {{ waiting }})</button></div>
-            <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
-        </div>
-        <div>
-            <m-rich-text-edit v-model="model"
-                :toolbar-sticky-offset="58"
-                :label="'test123123'"
-                :max-width="'large'"
-                :placeholder="'some placeholder'"
-                :focus="focus"
-                :error="error"
-                :error-message="errorMessage"
-                :valid-message="validMessage"
-                :helper-message="helperMessage"
-                :waiting="waiting"
-                :disabled="disabled"></m-rich-text-edit>
-            <m-textfield label="'test123123'" :waiting="waiting" :disabled="disabled"></m-textfield>
-            <div><m-rich-text :value="model"></m-rich-text></div>
-        </div>
-    </p>
+    <h3>Froala Text Reader</h3>
+    <h5>affiche du texte riche</h5>
     <div>
-        <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine page</button>
-        <m-edit-window :open.sync="afficherFormulairePleinePage">
-            <template slot="header">
-                <span class="m-u--h2 m-u--font-weight--bold">
-                    <m-i18n k="texte:texte"></m-i18n>
-                </span>
-            </template>
-            <div>
-                <m-rich-text-edit :scrollable-container="'.m-edit-window__body'" class="p-formulaire-texte__textearea" :label="'pouet'"
-                    tag-style="p" max-width="720px" v-model="fullScreenFormModel"></m-rich-text-edit>
-            </div>
-        </m-edit-window>
+        <m-rich-text :value="model"></m-rich-text>
     </div>
-
 </div>

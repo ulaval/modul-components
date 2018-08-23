@@ -1,144 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MMenu Menu should render correctly 1`] = `
-<m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
+<div class="m-menu m--is-skin-dark">
+    <m-accordion-transition>
+        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
             <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
+        </ul>
+    </m-accordion-transition>
+</div>
 `;
 
-exports[`MMenu Menu should render correctly placement left 1`] = `
-<m-popup placement="left" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
+exports[`MMenu should react to disabled prop changes 1`] = `
+<div class="m-menu m--is-skin-dark">
+    <m-accordion-transition>
+        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
             <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
+        </ul>
+    </m-accordion-transition>
+</div>
 `;
 
-exports[`MMenu Menu should render correctly placement right 1`] = `
-<m-popup placement="right" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
+exports[`MMenu should react to disabled prop changes 2`] = `
+<div class="m-menu m--is-skin-dark m--is-disabled">
+    <m-accordion-transition>
+        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
             <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
-`;
-
-exports[`MMenu Menu should render correctly placement top 1`] = `
-<m-popup placement="top" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
+        </ul>
+    </m-accordion-transition>
+</div>
 `;
 
 exports[`MMenu should react to open prop changes 1`] = `
-<m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
+<div class="m-menu m--is-skin-dark">
+    <m-accordion-transition>
+        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
             <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
+        </ul>
+    </m-accordion-transition>
+</div>
 `;
 
 exports[`MMenu should react to open prop changes 2`] = `
-<m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
+<div class="m-menu m--is-skin-dark m--is-open">
+    <m-accordion-transition>
+        <ul id="mMenu-undefined-controls" role="menu" class="m-menu__body">
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
             <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
-`;
-
-exports[`MMenu should render correctly when close title is set 1`] = `
-<m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
-`;
-
-exports[`MMenu should render correctly when open title is set 1`] = `
-<m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Title open" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
-`;
-
-exports[`MMenu should render correctly when size is set 1`] = `
-<m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="200px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
+        </ul>
+    </m-accordion-transition>
+</div>
 `;
 
 exports[`MMenu should render correctly when skin is dark 1`] = `
-<m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="dark" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
+<div class="m-menu m--is-skin-dark">
+    <m-accordion-transition>
+        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
             <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
+        </ul>
+    </m-accordion-transition>
+</div>
 `;
 
 exports[`MMenu should render correctly when skin is light 1`] = `
-<m-popup placement="bottom" close-on-backdrop="true" focus-management="true" class="m-menu">
-    <m-icon-button slot="trigger" id="mMenu-uuid" aria-haspopup="true" aria-controls="mMenu-uuid-controls" skin="light" title="Open menu" icon-name="m-svg__options" button-size="44px" class="m-menu__button"></m-icon-button>
-    <ul id="mMenu-uuid-controls" aria-labelledby="mMenu-uuid" class="m-menu__list">
-        <m-menu>
+<div class="m-menu m--is-skin-light">
+    <m-accordion-transition>
+        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
             <m-menu-item value="a">A item</m-menu-item>
             <m-menu-item value="b">B item</m-menu-item>
             <m-menu-item value="c">C item</m-menu-item>
-        </m-menu>
-    </ul>
-</m-popup>
+        </ul>
+    </m-accordion-transition>
+</div>
 `;

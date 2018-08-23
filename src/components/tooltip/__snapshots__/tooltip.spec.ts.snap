@@ -95,7 +95,7 @@ exports[`tooltip should render correctly when is open 1`] = `
 
 exports[`tooltip should render correctly when mode is link 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" class="m-tooltip">
-    <a href="#" slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" class="m-link m-tooltip__link m--is-unvisited m--is-button"> <span class="m-link__text">Link</span> </a>
+    <a href="#" tabindex="1" slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" class="m-link m-tooltip__link m--is-unvisited m--is-button"> <span class="m-link__text">Link</span> </a>
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
             <svg aria-hidden="true" width="12px" height="12px" svg-tile="function boundFn(a) {

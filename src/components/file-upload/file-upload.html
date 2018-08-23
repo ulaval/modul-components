@@ -17,7 +17,7 @@
                         <m-i18n k="m-file-upload:extensionFileMsg"></m-i18n>
                     </p>
                     <p class="m-file-upload__error-message__error" v-else-if="hasSizeRejection(file)">
-                        <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb * 1024 | file-size}}).
+                        <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb * 1024 | f-m-filesize}}).
                     </p>
                     <p class="m-file-upload__error-message__error" v-else-if="hasMaxFilesRejection(file)">
                         <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}}
@@ -55,7 +55,7 @@
                         <div class="m-file-upload__import-list__progress-wrap">
                             <div class="m-file-upload__import-list__infos">
                                 <p class="m-file-upload__import-list__name">{{file.name}}</p>
-                                <p class="m-file-upload__import-list__size">{{file.file.size | file-size}}</p>
+                                <p class="m-file-upload__import-list__size">{{file.file.size | f-m-filesize}}</p>
                             </div>
                             <m-progress :value="file.progress" :state="getFileStatus(file)"></m-progress>
                             <p class="m-file-upload__import-list__error-message" v-if="getFileStatus(file) === 'error'">
@@ -82,7 +82,7 @@
                                 <m-link :url="file.url" mode="link" target="_blank" v-if="file.url">{{file.name}}</m-link>
                                 <template v-else>{{file.name}}</template>
                             </p>
-                            <p class="m-file-upload__completed-list__infos-size">{{file.file.size | file-size}}</p>
+                            <p class="m-file-upload__completed-list__infos-size">{{file.file.size | f-m-filesize}}</p>
                         </div>
                         <div class="m-file-upload__completed-list__delete">
                             <m-icon-button class="m-file-upload__completed-list__button" icon-name="m-svg__delete" button-size="32px" icon-size="20px" @click="onFileRemove(file)"></m-icon-button>

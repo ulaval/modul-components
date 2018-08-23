@@ -33,10 +33,13 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/limit-text/limit-text.lang.fr.json'),
                 require('../components/login/login.lang.fr.json'),
                 require('../components/message/message.lang.fr.json'),
-                require('../components/menu/menu.lang.fr.json'),
+                require('../components/option/option.lang.fr.json'),
                 require('../components/modal/modal.lang.fr.json'),
                 require('../components/page-not-found/page-not-found.lang.fr.json'),
                 require('../components/phone-number/phone-number.lang.fr.json'),
+                require('../components/rich-text-editor/rich-text-editor.lang.fr.json'),
+                require('../components/tree-node/tree-node.lang.fr.json'),
+                require('../components/tree/tree.lang.fr.json'),
                 require('../components/scroll-top/scroll-top.lang.fr.json'),
                 require('../components/session-expired/session-expired.lang.fr.json'),
                 require('../components/sidebar/sidebar.lang.fr.json'),
@@ -45,7 +48,8 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/textfield/textfield.lang.fr.json'),
                 require('../components/timepicker/timepicker.lang.fr.json'),
                 require('../components/tooltip/tooltip.lang.fr.json'),
-                require('../components/validation-message/validation-message.lang.fr.json')
+                require('../components/validation-message/validation-message.lang.fr.json'),
+                require('../filters/filesize/filesize.lang.fr.json')
             ];
 
             msgs.forEach(msgs => i18n.addMessages(FRENCH, msgs));

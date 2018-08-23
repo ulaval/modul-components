@@ -1,26 +1,15 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
-import { MRichTextEdit } from '../rich-text-edit/rich-text-edit';
 import { MRichText } from './rich-text';
 import WithRender from './rich-text.sandbox.html';
 
 @WithRender
 @Component({
-    components: { MRichTextEdit, MRichText }
+    components: { MRichText }
 })
 export class MRichTextSandBox extends Vue {
-    public model: string = '';
-    public isReadOnly: boolean = true;
-    public focus: boolean = false;
-    public error: boolean = false;
-    public errorMessage: string = '';
-    public validMessage: string = '';
-    public helperMessage: string = '';
-    public waiting: boolean = false;
-    public disabled: boolean = false;
-    public afficherFormulairePleinePage: boolean = false;
-    public fullScreenFormModel: string = '';
+    public model: string = '<p><strong>texte gras.</strong></p><p><em>texte italique.</em><p/><p><sub>texte indice.</sub></p><p><sup>texte exposant.</sup></p><p><br></p><p>liste à puces :</p><ul><li>élément<ul><li>sous-élément</li><li>sous-élément</li></ul></li><li>élément</li><li>élément</li></ul><p><br></p><p>liste numérotée :</p><ol><li>élément<ol><li>sous-élément</li><li>sous-élément</li></ol></li><li>élément</li><li>élément</li></ol><p><br></p><p style="margin-left: 80px;">texte indenté</p><p><a href="http://google.com">lien vers google</a></p><p><br></p><p>caractères spéciaux: ÃΥθи</p>';
 }
 
 const RichTextSandBoxPlugin: PluginObject<any> = {

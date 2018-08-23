@@ -1,13 +1,15 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
-    <p>
-        <m-link><!-- Test case --></m-link>
-    </p>
+    <p><m-link>Bonjour</m-link></p>
+
+    <h2>Icon name "m-svg__clock"</h2>
+    <p><m-link icon-name="m-svg__clock">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link></p>
+
+    <p><m-link icon-name="m-svg__clock" :disabled="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link></p>
+
+    <h2>Skin text</h2>
+    <p><m-link skin="text" icon-name="m-svg__clock">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link></p>
+    <div class="m-u--margin-top--l" style="background: grey; padding: 16px;">
+        <h2 class="m-u--no-margin">Skin light</h2>
+        <p><m-link skin="light" icon-name="m-svg__clock">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link></p>
+    </div>
 </div>
