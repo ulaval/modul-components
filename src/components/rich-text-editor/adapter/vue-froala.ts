@@ -81,6 +81,7 @@ enum FroalaElements {
     protected isFocused: boolean = false;
 
     protected isDirty: boolean = false;
+    protected wordObserver: MutationObserver;
 
     @Watch('value')
     public refreshValue(): void {
@@ -184,6 +185,7 @@ enum FroalaElements {
     protected created(): void {
         this.currentTag = this.tag || this.currentTag;
         this.model = this.value;
+        this.initWordObserver();
     }
 
     protected mounted(): void {
@@ -229,6 +231,12 @@ enum FroalaElements {
         this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
         // show submit buttons (ex: link insertion submit button)
         this.froalaEditor.$tb.find(`.fr-submit`).show();
+    }
+
+    private initWordObserver(): void {
+        this.wordObserver = new MutationObserver(() => {
+            this.dismissWordPasteModal();
+        });
     }
 
     @Watch('isEqMinXS')
@@ -318,16 +326,7 @@ enum FroalaElements {
                 [froalaEvents.WordPasteBefore]: (_e, editor) => {
                     // Scrap this and all associated private methods when https://github.com/froala/wysiwyg-editor/issues/2964 get fixed.
                     if (editor.wordPaste && this.currentConfig.wordPasteModal) {
-                        if (this.getWordPasteCleanButton()) {
-                            requestAnimationFrame(() => { this.dismissWordPasteModal(); });
-                        } else {
-                            const observer: MutationObserver = new MutationObserver(() => {
-                                this.dismissWordPasteModal();
-                                observer.disconnect();
-                            });
-
-                            observer.observe(document.body, { childList: true });
-                        }
+                        this.wordObserver.observe(document.body, { childList: true, attributes: true });
                     }
                 }
             }
@@ -347,6 +346,7 @@ enum FroalaElements {
         const cleanWordButton: HTMLElement | null = this.getWordPasteCleanButton();
 
         if (wordPasteModal && wordPasteModal.style.display !== 'none') {
+            this.wordObserver.disconnect();
             wordPasteModal.style.display = 'none';
 
             if (modalOverlay) {
