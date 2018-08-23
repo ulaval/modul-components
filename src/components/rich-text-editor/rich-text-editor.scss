@@ -49,8 +49,7 @@
         }
     }
 
-    // mode mobile
-    &.m--is-eq-max-s {
+    &.m--is-mobile {
         /deep/ .fr-command {
             display: none;
 
@@ -75,8 +74,7 @@
         }
     }
 
-    // mode desktop
-    &.m--is-eq-min-s {
+    &.m--is-desktop {
         /deep/ .fr-command {
             display: inline-block;
 
