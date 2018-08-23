@@ -10,7 +10,7 @@ exports[`MPageNotFound should render correctly 1`] = `
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">m-page-not-found:message</span></div>
+                <div class="m-message__text"><span class="m-i18n">m-page-not-found:message</span></div>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@ exports[`MPageNotFound should render correctly with back-to-label override 1`] =
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">m-page-not-found:message</span></div>
+                <div class="m-message__text"><span class="m-i18n">m-page-not-found:message</span></div>
             </div>
         </div>
     </div>

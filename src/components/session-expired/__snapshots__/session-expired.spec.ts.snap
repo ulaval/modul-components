@@ -10,7 +10,7 @@ exports[`MSessionExpired should render correctly 1`] = `
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">m-session-expired:message</span></div>
+                <div class="m-message__text"><span class="m-i18n">m-session-expired:message</span></div>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@ exports[`MSessionExpired should render correctly with back-to-label override 1`]
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">m-session-expired:message</span></div>
+                <div class="m-message__text"><span class="m-i18n">m-session-expired:message</span></div>
             </div>
         </div>
     </div>

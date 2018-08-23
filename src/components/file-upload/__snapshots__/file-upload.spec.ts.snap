@@ -162,13 +162,7 @@ exports[`MFileUpload validation validation messages should render rejected files
                     </svg>
                 </div>
                 <div class="m-message__body m--has-close-button">
-                    <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:10px;">
-                        <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
-                            <use aria-hidden="true"></use>
-                        </svg> <span class="m-icon-button__hidden">
-                m-message:close
-            </span></button>
-                    <div class="m-message__body__content">
+                    <div class="m-message__text">
                         <p class="m-file-upload__error-message__title"><span class="m-i18n">The following files can not be added.</span></p>
                         <ul class="m-file-upload__error-message__list">
                             <li>
@@ -189,6 +183,12 @@ exports[`MFileUpload validation validation messages should render rejected files
                         </ul>
                     </div>
                 </div>
+                <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:10px;">
+                    <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
+                        <use aria-hidden="true"></use>
+                    </svg> <span class="m-icon-button__hidden">
+            m-message:close
+        </span></button>
             </div>
         </div>
         <div class="m-file-upload__drop-zone">

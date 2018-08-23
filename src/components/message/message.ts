@@ -3,6 +3,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import { MESSAGE_NAME } from '../component-names';
+import ErrorTemplatePlugin, { MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
@@ -18,6 +19,7 @@ export enum MMessageState {
 export enum MMessageSkin {
     Default = 'default',
     Light = 'light',
+    PageLight = 'page-light',
     Page = 'page'
 }
 
@@ -39,6 +41,7 @@ export class MMessage extends Vue {
         validator: value =>
             value === MMessageSkin.Default ||
             value === MMessageSkin.Light ||
+            value === MMessageSkin.PageLight ||
             value === MMessageSkin.Page
     })
     public skin: MMessageSkin;
@@ -113,8 +116,20 @@ export class MMessage extends Vue {
         return this.skin === MMessageSkin.Light;
     }
 
+    private get isNotSkinPage(): boolean {
+        return !this.isSkinPage && !this.isSkinPageLight;
+    }
+
+    private get skinPageValue(): string {
+        return this.isSkinPage ? MErrorTemplateSkin.Default : MErrorTemplateSkin.Light;
+    }
+
     private get isSkinPage(): boolean {
         return this.skin === MMessageSkin.Page;
+    }
+
+    private get isSkinPageLight(): boolean {
+        return this.skin === MMessageSkin.PageLight;
     }
 
     private get isStateInformation(): boolean {
@@ -136,7 +151,6 @@ export class MMessage extends Vue {
     private get showCloseButton(): boolean {
         return this.skin === MMessageSkin.Default && this.closeButton;
     }
-
 }
 
 const MessagePlugin: PluginObject<any> = {
@@ -144,6 +158,7 @@ const MessagePlugin: PluginObject<any> = {
         v.prototype.$log.debug(MESSAGE_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(IconButtonPlugin);
+        v.use(ErrorTemplatePlugin);
         v.use(I18nPlugin);
         v.component(MESSAGE_NAME, MMessage);
     }

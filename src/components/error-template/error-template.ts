@@ -29,6 +29,12 @@ export enum MErrorTemplateState {
     Error = 'error',
     Success = 'success'
 }
+
+export enum MErrorTemplateSkin {
+    Default = 'default',
+    Light = 'light'
+}
+
 @WithRender
 @Component
 export class MErrorTemplate extends ModulVue {
@@ -42,6 +48,14 @@ export class MErrorTemplate extends ModulVue {
             value === MErrorTemplateState.Success
     })
     public state: MErrorTemplateState;
+
+    @Prop({
+        default: MErrorTemplateSkin.Default,
+        validator: value =>
+            value === MErrorTemplateSkin.Default ||
+            value === MErrorTemplateSkin.Light
+    })
+    public skin: MErrorTemplateSkin;
 
     @Prop()
     public iconName: string;
@@ -59,7 +73,7 @@ export class MErrorTemplate extends ModulVue {
     public links: Link[];
 
     @Prop({ default: '130px' })
-    public size: string;
+    public imageSize: string;
 
     public svg: string;
 
@@ -77,7 +91,7 @@ export class MErrorTemplate extends ModulVue {
 
     public get styleObject(): { [name: string ]: string } {
         return {
-            width: this.size
+            width: this.imageSize
         };
     }
 
@@ -97,6 +111,30 @@ export class MErrorTemplate extends ModulVue {
 
     private get hasBody(): boolean {
         return this.hasHints || this.hasLinks || !!this.$slots.default;
+    }
+
+    private get isSkinDefault(): boolean {
+        return this.skin === MErrorTemplateSkin.Default;
+    }
+
+    private get isSkinLight(): boolean {
+        return this.skin === MErrorTemplateSkin.Light;
+    }
+
+    private get isStateInformation(): boolean {
+        return this.state === MErrorTemplateState.Information;
+    }
+
+    private get isStateWarning(): boolean {
+        return this.state === MErrorTemplateState.Warning;
+    }
+
+    private get isStateError(): boolean {
+        return this.state === MErrorTemplateState.Error;
+    }
+
+    private get isStateSuccess(): boolean {
+        return this.state === MErrorTemplateState.Success;
     }
 
     private get iconNameProp(): string {

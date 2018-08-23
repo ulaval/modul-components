@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Error-template integration tests Given an error with all props and slots initialized Then should render properly 1`] = `
-<article class="m-error-template m--is-state-warning">
+<article class="m-error-template m--is-state-warning m--is-skin-default">
     <header class="m-error-template__header">
         <h2 class="m-error-template__title">An error title.</h2>
         <div aria-hidden="true" class="m-error-template__icon-container"><span name="iconName" svg-title="An error title." size="130px" class="m-error-template__icon">Icone : iconName</span></div>

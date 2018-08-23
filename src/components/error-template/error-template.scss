@@ -1,54 +1,52 @@
 @import '../../styles/abstracts/variables';
 
+@mixin m-error-template-state($color, $color-background) {
+    .m-error-template {
+        &__title,
+        &__icon {
+            color: $color;
+        }
+
+        &__icon-container::before {
+            background: $color-background;
+        }
+    }
+}
+
 .m-error-template {
     &.m--is-state-success {
-        .m-error-template {
-            &__title,
-            &__icon {
-                color: $m-color--success;
-            }
-
-            &__icon-container::before {
-                background-color: $m-color--success-lightest;
-            }
-        }
+        @include m-error-template-state($m-color--success, $m-color--success-lightest);
     }
 
     &.m--is-state-information {
-        .m-error-template {
-            &__title,
-            &__icon {
-                color: $m-color--interactive;
-            }
-
-            &__icon-container::before {
-                background-color: $m-color--interactive-lightest;
-            }
-        }
+        @include m-error-template-state($m-color--interactive, $m-color--interactive-lightest);
     }
 
     &.m--is-state-error {
-        .m-error-template {
-            &__title,
-            &__icon {
-                color: $m-color--error;
-            }
+        @include m-error-template-state($m-color--error, $m-color--error-lightest);
+    }
 
+    &.m--is-state-warning {
+        @include m-error-template-state($m-color--warning, $m-color--warning-lightest);
+    }
+
+    &.m--is-skin-default {
+        .m-error-template {
             &__icon-container::before {
-                background-color: $m-color--error-lightest;
+                right: 0;
+                left: 0;
+                transform: translate3d(0, -50%, 0);
             }
         }
     }
 
-    &.m--is-state-warning {
+    &.m--is-skin-light {
         .m-error-template {
-            &__title,
-            &__icon {
-                color: $m-color--warning;
-            }
-
             &__icon-container::before {
-                background-color: $m-color--warning-lightest;
+                left: 50%;
+                transform: translate3d(-50%, -50%, 0);
+                width: 100%;
+                max-width: 220px; //Magic number
             }
         }
     }
@@ -81,10 +79,7 @@
         &::before {
             position: absolute;
             top: 50%;
-            right: 0;
-            left: 0;
             z-index: 0;
-            transform: translate3d(0, -50%, 0);
             content: '';
             display: block;
             height: 80px; // Magic number

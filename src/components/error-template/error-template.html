@@ -1,8 +1,10 @@
 <article class="m-error-template"
-         :class="{'m--is-state-success': state=='success',
-                  'm--is-state-information': state=='information',
-                  'm--is-state-warning': state=='warning',
-                  'm--is-state-error': state=='error',}">
+         :class="{'m--is-state-success': isStateSuccess,
+                  'm--is-state-information': isStateInformation,
+                  'm--is-state-warning': isStateWarning,
+                  'm--is-state-error': isStateError,
+                  'm--is-skin-default': isSkinDefault,
+                  'm--is-skin-light': isSkinLight}">
     <header class="m-error-template__header">
         <h2 class="m-error-template__title"
             v-if="title"
@@ -16,7 +18,7 @@
             <m-icon class="m-error-template__icon"
                     :name="iconNameProp"
                     :svg-title="title"
-                    :size="size"
+                    :size="imageSize"
                     v-else></m-icon>
         </div>
     </header>

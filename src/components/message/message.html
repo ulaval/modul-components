@@ -5,10 +5,11 @@
             'm--is-state-error': isStateError,
             'm--is-skin-default': isSkinDefault,
             'm--is-skin-light': isSkinLight,
-            'm--is-skin-page': isSkinPage}"
+            'm--is-skin-page': isSkinPage,
+            'm--is-skin-page-light': isSkinPageLight}"
     v-if="propVisible">
     <div class="m-message__wrap"
-        v-if="!isSkinPage">
+        v-if="isNotSkinPage">
         <div class="m-message__icon" v-if="icon">
             <m-icon :name="getIcon()"></m-icon>
         </div>
@@ -32,6 +33,7 @@
     <m-error-template class="m-message__page"
                     v-else
                     :state="state"
+                    :skin="skinPageValue"
                     :title="title">
         <slot></slot>
     </m-error-template>

@@ -10,7 +10,7 @@ exports[`MErrorMessage given error should render correctly expanded 1`] = `
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
+                <div class="m-message__text"><span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@ exports[`MErrorMessage given error should render correctly expanded with stack t
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
+                <div class="m-message__text"><span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
+                <div class="m-message__text"><span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
             </div>
         </div>
     </div>
@@ -89,7 +89,7 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
+                <div class="m-message__text"><span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@ exports[`MErrorMessage should render correctly collapsed 1`] = `
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
+                <div class="m-message__text"><span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
             </div>
         </div>
     </div>
@@ -141,7 +141,7 @@ exports[`MErrorMessage should render correctly expanded 1`] = `
                 </svg>
             </div>
             <div class="m-message__body">
-                <div class="m-message__body__content"> <span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
+                <div class="m-message__text"><span class="m-i18n">Un problème technique s'est produit et empêche la tâche en cours de s'achever normalement.</span></div>
             </div>
         </div>
     </div>
