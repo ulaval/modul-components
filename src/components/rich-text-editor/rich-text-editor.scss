@@ -65,6 +65,10 @@
             }
         }
 
+        /deep/ .fr-separator {
+            display: none;
+        }
+
         /deep/ .fr-placeholder {
             padding-top: 50px !important;
         }
