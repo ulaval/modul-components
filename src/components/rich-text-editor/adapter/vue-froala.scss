@@ -2,13 +2,6 @@
 @import '../../../styles/abstracts/var-froala';
 @import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css"); /* FA CSS import */
 
-/deep/ .vue-froala::before {
-    content: "\f16c";
-    font-family: Font Awesome 5 Free, sans-serif;
-    font-weight: 900;
-    display: inline-block;
-}
-
 .vue-froala {
     overflow: hidden;
 
@@ -69,6 +62,13 @@
         }
 
         .fr-toolbar {
+            &::before {
+                // content: "\f16c";
+                font-family: Font Awesome 5 Free, sans-serif;
+                font-weight: 900;
+                // display: inline-block;
+            }
+
             height: 40px;
             margin-top: 0;
             padding: 0;

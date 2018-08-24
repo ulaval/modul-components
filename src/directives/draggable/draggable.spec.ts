@@ -223,7 +223,7 @@ describe('draggable', () => {
         });
 
         ['mousedown', 'touchstart'].forEach(eventName => {
-            it(`it should do nothing if the user triggered ${eventName} in an input before dragEnd`, () => {
+            it(`it should do nothing if the user triggered ${eventName} in an input before dragStart`, () => {
                 mockTargetIsInput = true;
                 draggable.trigger(eventName);
 
