@@ -132,6 +132,12 @@
                 color: $m-color--grey-darker;
             }
 
+            button[data-cmd*='specialCharacters'] {
+                :not(.fr-sr-only) {
+                    font-size: 16px;
+                }
+            }
+
             button[id*='-sub-menu']::after,
             .popup-button::after {
                 position: absolute;
