@@ -9,6 +9,7 @@ let froala: any;
 // mock froala editor
 $.FroalaEditor = {
     DefineIcon: jest.fn(),
+    DefineIconTemplate: jest.fn(),
     POPUP_TEMPLATES: {},
     PLUGINS: {},
     RegisterCommand: jest.fn()
