@@ -11,7 +11,8 @@ $.FroalaEditor = {
     DefineIcon: jest.fn(),
     POPUP_TEMPLATES: {},
     PLUGINS: {},
-    RegisterCommand: jest.fn()
+    RegisterCommand: jest.fn(),
+    DefineIconTemplate: jest.fn()
 };
 
 describe('VueFroala', () => {
