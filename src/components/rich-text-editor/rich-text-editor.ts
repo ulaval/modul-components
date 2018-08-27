@@ -42,8 +42,8 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     })
     public mode: MRichTextEditorMode;
 
-    @Prop({ default: 0 })
-    public toolbarStickyOffset: number;
+    @Prop({ default: '0' })
+    public toolbarStickyOffset: string;
 
     @Prop()
     public scrollableContainer: string | undefined;
@@ -51,9 +51,10 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     protected id: string = `mrich-text-${uuid.generate()}`;
     public get internalOptions(): any {
         const propOptions: any = {
-            placeholderText: this.as<InputManagement>()!.placeholder
+            placeholderText: this.as<InputManagement>()!.placeholder,
+            toolbarStickyOffset: this.calculateToolbarStickyOffset()
         };
-        propOptions.toolbarStickyOffset = this.toolbarStickyOffset;
+
         propOptions.scrollableContainer = this.scrollableContainer;
 
         return Object.assign(this.getDefaultOptions(), propOptions);
@@ -73,6 +74,18 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
     protected refreshModel(newValue: string): void {
         this.$emit('input', newValue);
+    }
+
+    protected calculateToolbarStickyOffset(): number | undefined {
+        if (/^\d+$/.test(this.toolbarStickyOffset)) {
+            return Number(this.toolbarStickyOffset);
+        } else {
+            const element: HTMLElement | null = document.querySelector(this.toolbarStickyOffset);
+            if (!element) {
+                throw new Error('No element has been foud with the selector given in toolbar-sticky-offset prop.');
+            }
+            return element!.offsetHeight;
+        }
     }
 
 }
