@@ -82,7 +82,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         } else {
             const element: HTMLElement | null = document.querySelector(this.toolbarStickyOffset);
             if (!element) {
-                throw new Error('No element has been foud with the selector given in toolbar-sticky-offset prop.');
+                throw new Error('No element has been found with the selector given in the toolbar-sticky-offset prop.');
             }
             return element!.offsetHeight;
         }
