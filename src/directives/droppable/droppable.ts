@@ -114,9 +114,11 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private isDropRestrictedByEncapsuledSortable(): boolean {
-        if ((MSortable.activeSortContainer && MSortable.fromSortContainer)
+        const activeSortContainer: MSortable | undefined = MSortable.activeSortContainer || MDOMPlugin.getRecursive(MSortable, this.element);
+
+        if ((activeSortContainer && MSortable.fromSortContainer)
             && MSortable.activeSortContainer !== MSortable.fromSortContainer
-            && (MSortable.activeSortContainer.options.encapsulate || MSortable.fromSortContainer.options.encapsulate)) {
+            && (activeSortContainer.options.encapsulate || MSortable.fromSortContainer.options.encapsulate)) {
             return true;
         }
 

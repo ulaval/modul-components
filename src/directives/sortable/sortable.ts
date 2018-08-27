@@ -13,7 +13,7 @@ export interface MSortableOptions {
     items: any[];
     acceptedActions: string[];
     canSort?: any;
-    encapsulate: boolean;
+    encapsulate?: boolean;
 }
 
 export enum MSortableEventNames {
@@ -300,9 +300,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
 
         const currentInsertPosition: MSortInsertPositions = this.getCurrentInsertPosition();
         const newInsertPosition: MSortInsertPositions = this.getInsertionMarkerBehavior().getInsertPosition(event);
-        if (MDroppable.currentHoverDroppable === MDroppable.previousHoverContainer && currentInsertPosition === newInsertPosition) {
-            return;
-        }
+        if (MDroppable.currentHoverDroppable === MDroppable.previousHoverContainer && currentInsertPosition === newInsertPosition) { return; }
 
         let element: HTMLElement;
         if (!this.isInsertingOnChild()) {

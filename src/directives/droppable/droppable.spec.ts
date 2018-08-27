@@ -189,7 +189,7 @@ describe('droppable', () => {
         const userDefinedData: any = { someKey: 'someValue' };
         const userDefinedGrouping: string = 'someGrouping';
 
-        const mockCanDrop: (wrapper: Wrapper<Vue>, value: boolean) => void = (wrapper: Wrapper<Vue>, value: boolean) => {
+        const mockCanDrop: (wrapper: Wrapper<Vue>, value: boolean) => void = (_wrapper: Wrapper<Vue>, value: boolean) => {
             const plugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element);
             plugin.canDrop = jest.fn();
             (plugin.canDrop as jest.Mock).mockImplementation(() => value);
