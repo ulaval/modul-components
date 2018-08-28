@@ -94,7 +94,6 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.element.classList.remove(MDraggableClassNames.Draggable);
         this.destroyGrabBehavior();
         this.cleanupCssClasses();
-        (this.element.style as any).webkitUserDrag = '';
         this.removeAllEvents();
     }
 
@@ -110,7 +109,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                 this.grabDelay = window.setTimeout(() => {
                     if (!MDraggable.currentDraggable && this.grabDelay) {
                         this.element.classList.add(MDraggableClassNames.Grabbing);
-                        (this.element.style as any).webkitUserDrag = '';
+                        this.forceCursorRefresh();
                     }
                 }, polyFillActive.dragDrop ? dragDropDelay : 0);
             }
@@ -123,7 +122,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
         this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
         this.addEventListener('touchmove', () => this.touchHasMoved = true);
-        this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; clearUserSelection(); });
+        this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; });
         this.setupGrabBehavior();
         MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
     }
@@ -164,10 +163,17 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     private destroyGrabBehavior(): void {
         this.touchHasMoved = false;
         this.isMouseInitiatedDrag = false;
-        (this.element.style as any).webkitUserDrag = 'none';
+
+        this.forceCursorRefresh();
         if (this.grabDelay) { window.clearTimeout(this.grabDelay); this.grabDelay = undefined; }
         this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUpListener));
         this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.intputTouchUpListener));
+    }
+
+    private forceCursorRefresh(): void {
+        // Hack to force cursor refresh.
+        (this.element.style as any).webkitUserDrag = 'none';
+        (this.element.style as any).webkitUserDrag = '';
     }
 
     private attachDragImage(): void {
