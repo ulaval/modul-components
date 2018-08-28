@@ -54,9 +54,15 @@ describe('MRichTextEditor', () => {
             it('the component should throw an error', () => {
                 expect(() => {
                     wrapper = shallow(MRichTextEditor, {
-                        propsData: { scrollableContainer: '#container', toolbarStickyOffset: '#header' }
+                        propsData: { scrollableContainer: '#container' }
                     });
-                }).toThrow();
+                }).toThrow(richTextEditor.getSelectorErrorMsg('scrollable-container'));
+
+                expect(() => {
+                    wrapper = shallow(MRichTextEditor, {
+                        propsData: { toolbarStickyOffset: '#header' }
+                    });
+                }).toThrow(richTextEditor.getSelectorErrorMsg('toolbar-sticky-offset'));
             });
         });
 

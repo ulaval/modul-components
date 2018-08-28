@@ -77,6 +77,10 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         throw new Error(`rich-text-edit: mode ${this.mode} is not a valid mode.  See MRichTextEditMode Enum for a list of compatible modes.`);
     }
 
+    public getSelectorErrorMsg(prop: string): string {
+        return `${RICH_TEXT_EDITOR_NAME}: No element has been found with the selector given in the ${prop} prop.`;
+    }
+
     protected refreshModel(newValue: string): void {
         this.$emit('input', newValue);
     }
@@ -117,9 +121,4 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             throw new Error(this.getSelectorErrorMsg(propInError));
         }
     }
-
-    protected getSelectorErrorMsg(prop: string): string {
-        return `${RICH_TEXT_EDITOR_NAME}: No element has been found with the selector given in the ${prop} prop.`;
-    }
-
 }
