@@ -122,7 +122,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
         this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
         this.addEventListener('touchmove', () => this.touchHasMoved = true);
-        this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; clearUserSelection(); });
+        this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; });
         this.setupGrabBehavior();
         MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
     }
