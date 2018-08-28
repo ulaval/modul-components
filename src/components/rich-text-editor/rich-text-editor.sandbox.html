@@ -49,5 +49,18 @@
             </div>
         </m-edit-window>
     </div>
-
+    <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
+    <div class="m-u--margin-bottom">
+        <m-rich-text-editor v-model="model"
+        :toolbar-sticky-offset="58"
+        :label="'texte riche'"
+        :max-width="'large'"
+        :focus="focus"
+        :error="error"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"
+        :waiting="waiting"
+        :disabled="disabled"></m-rich-text-editor>
+    </div>
 </div>
