@@ -67,9 +67,9 @@ describe('MRichTextEditor', () => {
         });
 
         it('internal options are customed defaultOptions', () => {
-            const customOptions: any = { toolbarStickyOffset: 1, placeholderText: 'placeholder', scrollableContainer: 'container' };
+            const customOptions: any = { toolbarStickyOffset: 1, placeholderText: 'placeholder' };
 
-            wrapper.setProps({ toolbarStickyOffset: 1, placeholder: 'placeholder', scrollableContainer: 'container' });
+            wrapper.setProps({ toolbarStickyOffset: 1, placeholder: 'placeholder' });
             expect(richTextEditor.internalOptions).toEqual({ ...defaultOptions, ...customOptions });
         });
     });
