@@ -2,7 +2,7 @@
     <!-- Sandbox template -->
     <h3>Liste déroulante filtrable</h3>
     <p>
-        <m-dropdown :filterable="true" placeholder="Choisir un pays">
+        <m-dropdown :filterable="true" label="Pays" placeholder="Choisir un pays">
             <m-dropdown-item value="AF" label="AFGHANISTAN"></m-dropdown-item>
             <m-dropdown-item value="ZA" label="AFRIQUE DU SUD"></m-dropdown-item>
             <m-dropdown-item value="AX" label="ÅLAND, ÎLES"></m-dropdown-item>
@@ -249,18 +249,75 @@
         </m-dropdown>
     </p>
 
-    <!-- Sandbox template -->
+    <p>
+        <h3>Undefined and null model value</h3>
+        <p class="m-u--margin-bottom">
+
+                <!-- if relevant, add link to PR
+                </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank" label="PR description</a>
+
+            </p>-->
+        <h4>Undefined</h4>
+        <m-dropdown :filterable="false" label="Légume" v-model="undefinedValue1" helperMessage="Non filtrable, sans placeholder">
+                <m-dropdown-item value="1a" label="Asperge"></m-dropdown-item>
+                <m-dropdown-item value="1b" label="Brocoli"></m-dropdown-item>
+                <m-dropdown-item value="1c" label="Carotte"></m-dropdown-item>
+                <m-dropdown-item value="1d" label="Daikon"></m-dropdown-item>
+                <m-dropdown-item value="1e" label="Épinard"></m-dropdown-item>
+        </m-dropdown>
+        <m-dropdown :filterable="false" label="Légume" placeholder="Choisir un légume" v-model="undefinedValue2" helperMessage="Non filtrable, avec placeholder">
+                <m-dropdown-item value="2a" label="Asperge"></m-dropdown-item>
+                <m-dropdown-item value="2b" label="Brocoli"></m-dropdown-item>
+                <m-dropdown-item value="2c" label="Carotte"></m-dropdown-item>
+                <m-dropdown-item value="2d" label="Daikon"></m-dropdown-item>
+                <m-dropdown-item value="2e" label="Épinard"></m-dropdown-item>
+        </m-dropdown>
+        <m-dropdown :filterable="true" label="Légume" v-model="undefinedValue3" helperMessage="Filtrable, sans placeholder">
+                <m-dropdown-item value="3a" label="Asperge"></m-dropdown-item>
+                <m-dropdown-item value="3b" label="Brocoli"></m-dropdown-item>
+                <m-dropdown-item value="3c" label="Carotte"></m-dropdown-item>
+                <m-dropdown-item value="3d" label="Daikon"></m-dropdown-item>
+                <m-dropdown-item value="3e" label="Épinard"></m-dropdown-item>
+        </m-dropdown>
+
+        <h4>Null</h4>
+        <m-dropdown :filterable="false" label="Légume" v-model="nullValue1" helperMessage="Non filtrable, sans placeholder">
+                <m-dropdown-item value="4a" label="Asperge"></m-dropdown-item>
+                <m-dropdown-item value="4b" label="Brocoli"></m-dropdown-item>
+                <m-dropdown-item value="4c" label="Carotte"></m-dropdown-item>
+                <m-dropdown-item value="4d" label="Daikon"></m-dropdown-item>
+                <m-dropdown-item value="4e" label="Épinard"></m-dropdown-item>
+        </m-dropdown>
+        <m-dropdown :filterable="false" label="Légume" placeholder="Choisir un légume" v-model="nullValue2" helperMessage="Non filtrable, avec placeholder">
+                <m-dropdown-item value="5a" label="Asperge"></m-dropdown-item>
+                <m-dropdown-item value="5b" label="Brocoli"></m-dropdown-item>
+                <m-dropdown-item value="5c" label="Carotte"></m-dropdown-item>
+                <m-dropdown-item value="5d" label="Daikon"></m-dropdown-item>
+                <m-dropdown-item value="5e" label="Épinard"></m-dropdown-item>
+        </m-dropdown>
+        <m-dropdown :filterable="true" label="Légume" v-model="nullValue3" helperMessage="Filtrable, sans placeholder">
+                <m-dropdown-item value="6a" label="Asperge"></m-dropdown-item>
+                <m-dropdown-item value="6b" label="Brocoli"></m-dropdown-item>
+                <m-dropdown-item value="6c" label="Carotte"></m-dropdown-item>
+                <m-dropdown-item value="6d" label="Daikon"></m-dropdown-item>
+                <m-dropdown-item value="6e" label="Épinard"></m-dropdown-item>
+        </m-dropdown>
+    </p>
+
+
+    <!-- Sandbox template
     <br><br><br><br><br>
     <h3>Test Title</h3>
     <p class="m-u--margin-bottom">
         Test description
         <!-- if relevant, add link to PR
         </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank" label="PR description</a>
-        -->
+
     </p>
     <p>
         <m-dropdown>
             <m-dropdown-item value="" label=""></m-dropdown-item>
         </m-dropdown>
     </p>
+    -->
 </div>
