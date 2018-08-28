@@ -1,8 +1,11 @@
 @import 'abstracts/variables';
 @import '../../../styles/abstracts/var-froala';
+@import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css"); /* FA CSS import */
 
 .vue-froala {
     overflow: hidden;
+
+    /deep/ .fas { font-style: normal; }
 
     &.m--is-dirty {
         overflow: unset;
@@ -50,6 +53,8 @@
             font-weight: $m-font-weight;
             border-left-color: $m-color--grey-light;
             border-right-color: $m-color--grey-light;
+            word-wrap: break-word;
+            -moz-user-select: text; // Dirty fix for text selection in firefox if the rich-text is in a draggable container.
         }
 
         .fr-box.fr-basic.fr-top .fr-wrapper {
@@ -57,6 +62,11 @@
         }
 
         .fr-toolbar {
+            &::before {
+                font-family: Font Awesome 5 Free, sans-serif;
+                font-weight: 900;
+            }
+
             height: 40px;
             margin-top: 0;
             padding: 0;
@@ -118,6 +128,12 @@
 
             button {
                 color: $m-color--grey-darker;
+            }
+
+            button[data-cmd*='specialCharacters'] {
+                :not(.fr-sr-only) {
+                    font-size: 16px;
+                }
             }
 
             button[id*='-sub-menu']::after,

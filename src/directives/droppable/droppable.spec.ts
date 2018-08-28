@@ -11,6 +11,12 @@ import { MDraggableEventNames } from './../draggable/draggable';
 import DroppablePlugin, { MDropEffect, MDroppable, MDroppableClassNames, MDroppableEventNames, MDroppableOptions } from './droppable';
 
 jest.mock('../../utils/mouse/mouse');
+let mockTargetIsInput: boolean = false;
+jest.mock('../../utils/event/event', () => ({ targetIsInput(): boolean { return mockTargetIsInput; } }));
+
+beforeEach(() => {
+    mockTargetIsInput = false;
+});
 
 describe('droppable', () => {
     polyFillActive.dragDrop = false;
@@ -402,6 +408,23 @@ describe('droppable', () => {
             const returnValue: boolean = plugin.canDrop();
 
             expect(returnValue).toBeTruthy();
+        });
+    });
+
+    ['mousedown', 'touchstart'].forEach(eventName => {
+        it(`it should apply MRemoveUserSelect on ${eventName}`, () => {
+            const droppable: Wrapper<Vue> = getDroppableDirective(true);
+            droppable.trigger(eventName);
+
+            expect(MDOMPlugin.get(MRemoveUserSelect, droppable.element)).toBeDefined();
+        });
+        it(`it should not apply MRemoveUserSelect on ${eventName} when the event target is an input`, () => {
+            mockTargetIsInput = true;
+
+            const droppable: Wrapper<Vue> = getDroppableDirective(true);
+            droppable.trigger(eventName);
+
+            expect(MDOMPlugin.get(MRemoveUserSelect, droppable.element)).toBeUndefined();
         });
     });
 });

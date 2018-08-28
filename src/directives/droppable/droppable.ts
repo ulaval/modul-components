@@ -1,5 +1,6 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
+import { targetIsInput } from '../../utils/event/event';
 import { isInElement } from '../../utils/mouse/mouse';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { DROPPABLE_NAME } from '../directive-names';
@@ -50,6 +51,10 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     public static currentHoverDroppable?: MDroppable;
     public static previousHoverContainer?: MDroppable;
 
+    private grabEvents: string[] = ['mousedown', 'touchstart'];
+    private cancelGrabEvents: string[] = ['mouseup', 'touchend', 'click', 'touchcancel'];
+    private intputTouchUpListener: any = this.turnDragOn.bind(this);
+
     constructor(element: HTMLElement, options: MDroppableOptions) {
         super(element, options);
     }
@@ -67,6 +72,7 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
                 this.addEventListener('dragexit', (event: DragEvent) => this.onDragLeave(event));
                 this.addEventListener('dragover', (event: DragEvent) => this.onDragOver(event));
                 this.addEventListener('drop', (event: DragEvent) => this.onDrop(event));
+                this.allowInputTextSelection();
             });
         }
     }
@@ -82,6 +88,7 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
         MDOMPlugin.detach(MRemoveUserSelect, this.element);
         this.cleanupCssClasses();
         this.removeAllEvents();
+        this.cancelGrabEvents.forEach(cancelEventName => document.removeEventListener(cancelEventName, this.intputTouchUpListener));
         this.element.classList.remove(MDroppableClassNames.Droppable);
     }
 
@@ -223,6 +230,22 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
             element = element.parentNode as HTMLElement;
         }
         return found;
+    }
+
+    private allowInputTextSelection(): void {
+        this.grabEvents.forEach(eventName => {
+            this.addEventListener(eventName, (event: Event) => {
+                if (targetIsInput(event)) {
+                    MDOMPlugin.detach(MRemoveUserSelect, this.element);
+                    this.cancelGrabEvents.forEach(cancelEventName => document.addEventListener(cancelEventName, this.intputTouchUpListener));
+                }
+            });
+        });
+    }
+
+    private turnDragOn(): void {
+        MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
+        this.cancelGrabEvents.forEach(cancelEventName => document.removeEventListener(cancelEventName, this.intputTouchUpListener));
     }
 }
 

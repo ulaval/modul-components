@@ -1,5 +1,6 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
+import { targetIsInput } from '../../utils/event/event';
 import { dragDropDelay, polyFillActive } from '../../utils/polyfills';
 import { clearUserSelection } from '../../utils/selection/selection';
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
@@ -47,6 +48,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     private grabEvents: string[] = ['mousedown', 'touchstart'];
     private cancelGrabEvents: string[] = ['mouseup', 'touchend', 'click', 'touchcancel'];
     private touchUpListener: any = this.doCleanUp.bind(this);
+    private intputTouchUpListener: any = this.turnDragOn.bind(this);
     private grabDelay: number | undefined = undefined;
     private touchHasMoved: boolean = false;
     private isMouseInitiatedDrag: boolean = false;
@@ -70,14 +72,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                 this.element.classList.add(MDraggableClassNames.Draggable);
 
                 this.options.action = this.options.action ? this.options.action : DEFAULT_ACTION;
-                this.element.draggable = true;
-
-                this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
-                this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-                this.addEventListener('touchmove', () => { this.touchHasMoved = true; });
-                this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; });
-                this.setupGrabBehavior();
-                MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
+                this.turnDragOn();
             });
         }
     }
@@ -97,17 +92,20 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.element.draggable = false;
         MDOMPlugin.detach(MRemoveUserSelect, this.element);
         this.element.classList.remove(MDraggableClassNames.Draggable);
+        this.destroyGrabBehavior();
         this.cleanupCssClasses();
         (this.element.style as any).webkitUserDrag = '';
         this.removeAllEvents();
     }
 
     private setupGrabBehavior(): void {
-        (this.element.style as any).webkitUserDrag = 'none';
-        this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: DragEvent) => {
-            if (!this.targetIsGrabbable(event)) {
-                (this.element.style as any).webkitUserDrag = '';
-            } else {
+        this.destroyGrabBehavior();
+        this.grabEvents.forEach(eventName => this.removeEventListener(eventName));
+        this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: MouseEvent) => {
+            if (targetIsInput(event)) {
+                this.turnDragOff();
+                this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.intputTouchUpListener));
+            } else if (this.targetIsGrabbable(event)) {
                 this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.touchUpListener));
                 this.grabDelay = window.setTimeout(() => {
                     if (!MDraggable.currentDraggable && this.grabDelay) {
@@ -119,7 +117,29 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         }));
     }
 
-    private targetIsGrabbable(event: DragEvent): boolean {
+    private turnDragOn(): void {
+        this.element.draggable = true;
+
+        this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
+        this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
+        this.addEventListener('touchmove', () => this.touchHasMoved = true);
+        this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; clearUserSelection(); });
+        this.setupGrabBehavior();
+        MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
+    }
+
+    private turnDragOff(): void {
+        this.element.draggable = false;
+
+        this.removeEventListener('dragend');
+        this.removeEventListener('dragstart');
+        this.removeEventListener('touchmove');
+        this.removeEventListener('mousedown');
+        this.destroyGrabBehavior();
+        MDOMPlugin.detach(MRemoveUserSelect, this.element);
+    }
+
+    private targetIsGrabbable(event: Event): boolean {
         // We can't call event.preventDefault or event.stopPropagation here for the drag to be handled correctly on mobile devices.
         // So we make sure that the draggable affected by the dragEvent is the closest draggable parent of the event target.
         // We don't apply the "grabbing" style on mouse down when target correspond to a link or a button, it just looks weird.
@@ -142,12 +162,12 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private destroyGrabBehavior(): void {
-        // This allow to "delay" user drag on desktop.  When wanted delay is over, set webkitUserDrag to ''.
         this.touchHasMoved = false;
         this.isMouseInitiatedDrag = false;
         (this.element.style as any).webkitUserDrag = 'none';
         if (this.grabDelay) { window.clearTimeout(this.grabDelay); this.grabDelay = undefined; }
         this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.touchUpListener));
+        this.cancelGrabEvents.forEach(eventName => document.removeEventListener(eventName, this.intputTouchUpListener));
     }
 
     private attachDragImage(): void {

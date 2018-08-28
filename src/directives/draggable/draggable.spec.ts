@@ -1,14 +1,19 @@
 import { mount, Wrapper } from '@vue/test-utils';
-import Vue, { VueConstructor } from 'vue';
+import Vue from 'vue';
 
 import { resetModulPlugins } from './../../../tests/helpers/component';
 import { polyFillActive } from './../../utils/polyfills';
-import { ModulVue } from './../../utils/vue/vue';
 import { MDOMPlugin } from './../domPlugin';
 import { MRemoveUserSelect } from './../user-select/remove-user-select';
 import DraggablePlugin, { MDraggable, MDraggableClassNames, MDraggableEventNames, MDraggableOptions } from './draggable';
 
 jest.useFakeTimers();
+let mockTargetIsInput: boolean = false;
+jest.mock('../../utils/event/event', () => ({ targetIsInput(): boolean { return mockTargetIsInput; } }));
+
+beforeEach(() => {
+    mockTargetIsInput = false;
+});
 
 describe('draggable', () => {
     polyFillActive.dragDrop = false;
@@ -34,7 +39,6 @@ describe('draggable', () => {
         return directive;
     };
 
-    let localVue: VueConstructor<ModulVue>;
     beforeEach(() => {
         resetModulPlugins();
         Vue.use(DraggablePlugin);
@@ -94,7 +98,36 @@ describe('draggable', () => {
             expect(MDraggable.currentDraggable).toBeUndefined();
         });
 
-        it(`it should not apply grabbing class to parent draggable on ${eventName}`, () => {
+        it(`it should apply MRemoveUserSelect on ${eventName}`, () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective();
+            draggable.trigger(eventName);
+            jest.runOnlyPendingTimers();
+
+            expect(MDOMPlugin.get(MRemoveUserSelect, draggable.element)).toBeDefined();
+        });
+
+        it(`it should not apply grabbing class on ${eventName} when the event target is an input`, () => {
+            mockTargetIsInput = true;
+
+            const draggable: Wrapper<Vue> = getDraggableDirective();
+            draggable.trigger(eventName);
+            jest.runOnlyPendingTimers();
+
+            expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+            expect(MDraggable.currentDraggable).toBeUndefined();
+        });
+
+        it(`it should not apply MRemoveUserSelect on ${eventName} when the event target is an input`, () => {
+            mockTargetIsInput = true;
+
+            const draggable: Wrapper<Vue> = getDraggableDirective();
+            draggable.trigger(eventName);
+            jest.runOnlyPendingTimers();
+
+            expect(MDOMPlugin.get(MRemoveUserSelect, draggable.element)).toBeUndefined();
+        });
+
+        it(`it should not apply grabbing class to parent draggable on ${eventName} when draggable is nested into another draggable`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(true, undefined, '<div class="childDraggable" v-m-draggable="true">child draggable</div>');
             const childDraggable: Wrapper<Vue> = draggable.find('.childDraggable');
 
@@ -188,6 +221,22 @@ describe('draggable', () => {
             expect(options.dataTransfer.setData).toHaveBeenCalledWith('application/json', JSON.stringify(userDefinedData));
             expect(options.dataTransfer.setDragImage).toHaveBeenCalledWith(dragImage, 0, 0);
         });
+
+        ['mousedown', 'touchstart'].forEach(eventName => {
+            it(`it should do nothing if the user triggered ${eventName} in an input before dragStart`, () => {
+                mockTargetIsInput = true;
+                draggable.trigger(eventName);
+
+                const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                draggable.trigger('dragend', options);
+
+                const event: any = draggable.emitted(MDraggableEventNames.OnDragStart);
+                expect(MDraggable.currentDraggable).toBeUndefined();
+                expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
+                expect(draggable.element.classList).not.toContain(MDraggableClassNames.Dragging);
+                expect(event).toBeUndefined();
+            });
+        });
     });
 
     describe('onDragEnd', () => {
@@ -201,6 +250,9 @@ describe('draggable', () => {
                 dragData: userDefinedData,
                 grouping: userDefinedGrouping
             }, dragImageTemplate);
+
+            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            draggable.trigger('dragstart', options);
         });
 
         it('it should update element correctly', () => {
@@ -221,6 +273,20 @@ describe('draggable', () => {
             expect(options.stopPropagation).toHaveBeenCalled();
             expect(event.dragInfo).toBeDefined();
             expect(event.dragInfo).toEqual({ action: userDefinedAction, data: userDefinedData, grouping: userDefinedGrouping });
+        });
+
+        ['mousedown', 'touchstart'].forEach(eventName => {
+            it(`it should do nothing if the user triggered ${eventName} in an input before dragEnd`, () => {
+                mockTargetIsInput = true;
+                draggable.trigger(eventName);
+
+                const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                draggable.trigger('dragend', options);
+
+                expect(MDraggable.currentDraggable).toBeDefined();
+                expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
+                expect(draggable.element.classList).toContain(MDraggableClassNames.Dragging);
+            });
         });
     });
 });
