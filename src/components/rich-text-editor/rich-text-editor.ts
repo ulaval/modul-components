@@ -8,6 +8,7 @@ import { InputState, InputStateInputSelector } from '../../mixins/input-state/in
 import { InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
+import { RICH_TEXT_EDITOR_NAME } from '../component-names';
 import VueFroala from './adapter/vue-froala';
 import { MRichTextEditorDefaultOptions, MRichTextEditorStandardOptions } from './rich-text-editor-options';
 import WithRender from './rich-text-editor.html?style=./rich-text-editor.scss';
@@ -49,17 +50,17 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     public scrollableContainer: string | undefined;
 
     protected id: string = `mrich-text-${uuid.generate()}`;
+
+    mounted(): void {
+        this.testSelectorProps();
+    }
+
     public get internalOptions(): any {
         const propOptions: any = {
             placeholderText: this.as<InputManagement>()!.placeholder,
-            toolbarStickyOffset: this.calculateToolbarStickyOffset()
+            toolbarStickyOffset: this.calculateToolbarStickyOffset(),
+            scrollableContainer: this.getScrollableContainer()
         };
-        if (this.scrollableContainer) {
-            if (!document.querySelector(this.scrollableContainer)) {
-                throw new Error('No element has been found with the selector given in the scrollable-container prop.');
-            }
-            propOptions.scrollableContainer = this.scrollableContainer;
-        }
 
         return Object.assign(this.getDefaultOptions(), propOptions);
     }
@@ -81,15 +82,44 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     }
 
     protected calculateToolbarStickyOffset(): number | undefined {
-        if (/^\d+$/.test(this.toolbarStickyOffset)) {
-            return Number(this.toolbarStickyOffset);
-        } else {
-            const element: HTMLElement | null = document.querySelector(this.toolbarStickyOffset);
-            if (!element) {
-                throw new Error('No element has been found with the selector given in the toolbar-sticky-offset prop.');
+        if (this.toolbarStickyOffset) {
+            if (/^\d+$/.test(this.toolbarStickyOffset)) {
+                return Number(this.toolbarStickyOffset);
+            } else {
+                const element: HTMLElement | null = document.querySelector(this.toolbarStickyOffset);
+                return element!.offsetHeight;
             }
-            return element!.offsetHeight;
         }
+    }
+
+    protected getScrollableContainer(): string | undefined {
+        if (this.scrollableContainer && document.querySelector(this.scrollableContainer)) {
+            return this.scrollableContainer;
+        }
+    }
+
+    protected testSelectorProps(): void {
+        let propInError: string | undefined;
+        if (this.scrollableContainer) {
+            if (!document.querySelector(this.scrollableContainer)) {
+                propInError = 'scrollable-container';
+            }
+        }
+
+        if (this.toolbarStickyOffset && !/^\d+$/.test(this.toolbarStickyOffset)) {
+            if (!document.querySelector(this.toolbarStickyOffset)) {
+                propInError = 'toolbar-sticky-offset';
+            }
+        }
+
+        if (propInError) {
+            console.error(this.getSelectorErrorMsg(propInError));
+            throw new Error(this.getSelectorErrorMsg(propInError));
+        }
+    }
+
+    protected getSelectorErrorMsg(prop: string): string {
+        return `${RICH_TEXT_EDITOR_NAME}: No element has been found with the selector given in the ${prop} prop.`;
     }
 
 }
