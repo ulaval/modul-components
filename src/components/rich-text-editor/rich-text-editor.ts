@@ -54,8 +54,12 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             placeholderText: this.as<InputManagement>()!.placeholder,
             toolbarStickyOffset: this.calculateToolbarStickyOffset()
         };
-
-        propOptions.scrollableContainer = this.scrollableContainer;
+        if (this.scrollableContainer) {
+            if (!document.querySelector(this.scrollableContainer)) {
+                throw new Error('No element has been found with the selector given in the scrollable-container prop.');
+            }
+            propOptions.scrollableContainer = this.scrollableContainer;
+        }
 
         return Object.assign(this.getDefaultOptions(), propOptions);
     }
