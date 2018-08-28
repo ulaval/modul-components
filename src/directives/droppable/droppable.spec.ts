@@ -1,10 +1,9 @@
 import { mount, Wrapper } from '@vue/test-utils';
-import Vue, { VueConstructor } from 'vue';
+import Vue from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { isInElement } from '../../utils/mouse/mouse';
 import { polyFillActive } from '../../utils/polyfills';
-import { ModulVue } from '../../utils/vue/vue';
 import { MDOMPlugin } from '../domPlugin';
 import DraggablePlugin, { MDraggable, MDraggableOptions } from '../draggable/draggable';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
@@ -60,7 +59,6 @@ describe('droppable', () => {
         return { preventDefault: () => {}, stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
     };
 
-    let localVue: VueConstructor<ModulVue>;
     beforeEach(() => {
         resetModulPlugins();
         Vue.use(DroppablePlugin);
@@ -189,7 +187,7 @@ describe('droppable', () => {
         const userDefinedData: any = { someKey: 'someValue' };
         const userDefinedGrouping: string = 'someGrouping';
 
-        const mockCanDrop: (wrapper: Wrapper<Vue>, value: boolean) => void = (wrapper: Wrapper<Vue>, value: boolean) => {
+        const mockCanDrop: (wrapper: Wrapper<Vue>, value: boolean) => void = (_wrapper: Wrapper<Vue>, value: boolean) => {
             const plugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element);
             plugin.canDrop = jest.fn();
             (plugin.canDrop as jest.Mock).mockImplementation(() => value);

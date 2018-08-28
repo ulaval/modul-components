@@ -13,6 +13,7 @@ export interface MSortableOptions {
     items: any[];
     acceptedActions: string[];
     canSort?: any;
+    encapsulate?: boolean;
 }
 
 export enum MSortableEventNames {
@@ -299,9 +300,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
 
         const currentInsertPosition: MSortInsertPositions = this.getCurrentInsertPosition();
         const newInsertPosition: MSortInsertPositions = this.getInsertionMarkerBehavior().getInsertPosition(event);
-        if (MDroppable.currentHoverDroppable === MDroppable.previousHoverContainer && currentInsertPosition === newInsertPosition) {
-            return;
-        }
+        if (MDroppable.currentHoverDroppable === MDroppable.previousHoverContainer && currentInsertPosition === newInsertPosition) { return; }
 
         let element: HTMLElement;
         if (!this.isInsertingOnChild()) {
@@ -398,7 +397,8 @@ const extractVnodeAttributes: (binding: VNodeDirective, node: VNode) => MSortabl
     return {
         items: getVNodeAttributeValue(node, 'items'),
         acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
-        canSort: binding.value
+        canSort: binding.value,
+        encapsulate: binding.modifiers.encapsulate || false
     };
 };
 const Directive: DirectiveOptions = {
@@ -408,13 +408,13 @@ const Directive: DirectiveOptions = {
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         MDOMPlugin.attach(MSortable, element, extractVnodeAttributes(binding, node));
     },
-    unbind(element: HTMLElement, binding: VNodeDirective): void {
+    unbind(element: HTMLElement): void {
         MDOMPlugin.detach(MSortable, element);
     }
 };
 
 const SortablePlugin: PluginObject<any> = {
-    install(v, options): void {
+    install(v, _options): void {
         v.use(DraggablePlugin);
         v.use(DroppablePlugin);
         v.directive(SORTABLE_NAME, Directive);

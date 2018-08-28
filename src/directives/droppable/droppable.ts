@@ -5,7 +5,7 @@ import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive
 import { DROPPABLE_NAME } from '../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
 import { MDraggable } from '../draggable/draggable';
-import { MSortableAction } from '../sortable/sortable';
+import { MSortable, MSortableAction } from '../sortable/sortable';
 import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../user-select/remove-user-select';
 
 export enum MDroppableClassNames {
@@ -108,7 +108,20 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
         const acceptAny: boolean = this.options.acceptedActions.find(action => action === 'any') !== undefined;
         const draggableAction: string = draggable.options.action;
         const isAllowedAction: boolean = this.options.acceptedActions.find(action => action === draggableAction) !== undefined;
-        return canDrop && !this.isHoveringOverDraggedElementChild() && (acceptAny || isAllowedAction);
+        return canDrop && !this.isHoveringOverDraggedElementChild()
+            && (acceptAny || isAllowedAction)
+            && !this.isDropRestrictedByEncapsuledSortable();
+    }
+
+    private isDropRestrictedByEncapsuledSortable(): boolean {
+        const activeSortContainer: MSortable | undefined = MSortable.activeSortContainer || MDOMPlugin.getRecursive(MSortable, this.element);
+        if ((activeSortContainer && MSortable.fromSortContainer)
+            && activeSortContainer !== MSortable.fromSortContainer
+            && (activeSortContainer.options.encapsulate || MSortable.fromSortContainer.options.encapsulate)) {
+            return true;
+        }
+
+        return false;
     }
 
     private setOptions(value: MDroppableOptions): void {
@@ -128,7 +141,6 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
 
     private isLeavingDroppable(event: DragEvent, droppable?: MDroppable): boolean {
         if (!droppable) { return false; }
-        const threshold: number = 3;
         return !isInElement(event, droppable.element) || MDroppable.previousHoverContainer !== MDroppable.currentHoverDroppable;
     }
 
