@@ -270,7 +270,9 @@ pipeline {
                     message.push('$DEFAULT_CONTENT')
                     message.push('</pre>')
 
-                    emailext subject: '$DEFAULT_SUBJECT',
+                    def subject = "Release ${params.repourl} - Build #${currentBuild.number} - ${currentBuild.currentResult}!"
+
+                    emailext subject: subject,
                             body: message.join('<br/>'),
                             replyTo: '$DEFAULT_REPLYTO',
                             to: "${POST_RECIPIENTS}"
