@@ -44,7 +44,7 @@ describe('MRichTextEditor', () => {
 
     describe('without props set', () => {
         it('internal options are defaultOptions', () => {
-            const customOptions: any = { placeholderText: undefined, scrollableContainer: undefined };
+            const customOptions: any = { placeholderText: ' ', scrollableContainer: undefined };
             expect(richTextEditor.internalOptions).toEqual({ ...defaultOptions, ...customOptions });
         });
     });
@@ -67,9 +67,9 @@ describe('MRichTextEditor', () => {
         });
 
         it('internal options are customed defaultOptions', () => {
-            const customOptions: any = { toolbarStickyOffset: 1 };
+            const customOptions: any = { toolbarStickyOffset: 1, placeholderText: 'placeholder' };
 
-            wrapper.setProps({ toolbarStickyOffset: 1 });
+            wrapper.setProps({ toolbarStickyOffset: 1, placeholder: 'placeholder' });
             expect(richTextEditor.internalOptions).toEqual({ ...defaultOptions, ...customOptions });
         });
     });
