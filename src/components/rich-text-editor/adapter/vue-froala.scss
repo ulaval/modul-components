@@ -136,22 +136,24 @@
                 }
             }
 
-            button[id*='-sub-menu']::after,
-            .popup-button::after {
-                position: absolute;
-                width: 0;
-                height: 0;
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 4px solid $m-color--grey-darkest;
-                right: 0;
-                top: 17px;
-                content: '';
-            }
+            button[id*='-sub-menu'],
+            .popup-button {
+                &::after {
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border-left: 4px solid transparent;
+                    border-right: 4px solid transparent;
+                    border-top: 4px solid $m-color--grey-darkest;
+                    right: 4px;
+                    top: 17px;
+                    content: '';
+                }
 
-            svg {
-                margin-left: 8px;
-                margin-right: 16px;
+                svg {
+                    margin-left: 8px;
+                    margin-right: 16px;
+                }
             }
         }
 
