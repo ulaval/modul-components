@@ -41,8 +41,10 @@ $m-tree-node--line-width: 22px;
         @include m-button--active();
     }
 
-    &:not(.m--is-disabled):not(.m--is-selected) > &__item:hover {
-        @include m-button--hover();
+    @media (min-width: $m-mq--min--s) {
+        &:not(.m--is-disabled):not(.m--is-selected) > &__item:hover {
+            @include m-button--hover();
+        }
     }
 
     &__line-extension::before {
