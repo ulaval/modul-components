@@ -18,7 +18,7 @@
     </div>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
-        :toolbar-sticky-offset="58"
+        toolbar-sticky-offset=".mtest-header"
         :label="'texte riche'"
         :max-width="'large'"
         :placeholder="'some placeholder'"
@@ -44,7 +44,7 @@
                 </span>
             </template>
             <div>
-                <m-rich-text-editor :scrollable-container="'.m-edit-window__body'" class="p-formulaire-texte__textearea" :label="'texte riche'"
+                <m-rich-text-editor scrollable-container=".m-edit-window__body" class="p-formulaire-texte__textearea" :label="'texte riche'"
                     tag-style="p" max-width="720px" v-model="fullScreenFormModel"></m-rich-text-editor>
             </div>
         </m-edit-window>
