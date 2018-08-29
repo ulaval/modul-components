@@ -136,15 +136,15 @@ export abstract class MElementDomPlugin<OptionsType> implements DomPlugin<Option
     public abstract update(options: any, refresh: RefreshFunction): void;
     public abstract detach(): void;
 
-    public addEventListener(eventName: string, listener: EventListenerOrEventListenerObject): void {
+    public addEventListener(eventName: string, listener: EventListenerOrEventListenerObject, useCapture?: boolean | undefined): void {
         let listeners: EventListenerOrEventListenerObject[] | undefined = this.attachedEvents.get(eventName);
         if (!listeners) {
             this.attachedEvents.set(eventName, [listener]);
-            this.element.addEventListener(eventName, listener);
+            this.element.addEventListener(eventName, listener, useCapture);
         } else {
             if (listeners.indexOf(listener) === -1) {
                 listeners.push(listener);
-                this.element.addEventListener(eventName, listener);
+                this.element.addEventListener(eventName, listener, useCapture);
             }
             this.attachedEvents.set(eventName, listeners);
         }
@@ -162,8 +162,6 @@ export abstract class MElementDomPlugin<OptionsType> implements DomPlugin<Option
 
     public removeAllEvents(): void {
         this.attachedEvents
-            .forEach((listeners: EventListenerOrEventListenerObject[], eventName: string) => {
-                this.removeEventListener(eventName);
-            });
+            .forEach((_listeners: EventListenerOrEventListenerObject[], eventName: string) => this.removeEventListener(eventName));
     }
 }

@@ -252,8 +252,8 @@
         + .m-navbar-item {
             &::before {
                 position: absolute;
-                top: $m-spacing--m;
-                bottom: $m-spacing--m;
+                height: calc(100% - #{$m-spacing * 2});
+                margin: $m-spacing 0;
                 left: 0;
                 content: '';
                 width: 1px;
