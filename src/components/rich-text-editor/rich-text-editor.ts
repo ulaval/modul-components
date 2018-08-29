@@ -31,7 +31,7 @@ export enum MRichTextEditorMode {
     ]
 })
 export class MRichTextEditor extends ModulVue implements InputManagementData, InputStateInputSelector {
-    selector: string = '.fr-element';
+    selector: string = '.fr-element.fr-view';
     internalValue: string;
 
     @Prop({ default: '' })
