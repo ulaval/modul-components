@@ -69,12 +69,14 @@
             display: none;
         }
 
-        /deep/ .fr-placeholder {
-            padding-top: 50px !important;
-        }
+        &.m--is-focus {
+            /deep/ .fr-placeholder {
+                padding-top: 50px !important;
+            }
 
-        /deep/ .fr-box.fr-basic .fr-element {
-            padding-top: 50px;
+            /deep/ .fr-box.fr-basic .fr-element {
+                padding-top: 50px;
+            }
         }
     }
 

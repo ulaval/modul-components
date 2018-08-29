@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-beta.50",
+    "version": "1.0.0-beta.51",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -68,8 +68,6 @@
         "includeFailureMsg": true
     },
     "dependencies": {
-        "@fortawesome/fontawesome": "^1.1.8",
-        "@fortawesome/fontawesome-free-solid": "^5.0.13",
         "@types/sprintf-js": "^1.1.0",
         "axios": "^0.17.1",
         "css-element-queries": "^0.4.0",

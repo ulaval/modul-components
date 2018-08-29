@@ -44,16 +44,32 @@ describe('MRichTextEditor', () => {
 
     describe('without props set', () => {
         it('internal options are defaultOptions', () => {
-            const customOptions: any = { placeholderText: undefined, scrollableContainer: undefined };
+            const customOptions: any = { placeholderText: ' ', scrollableContainer: undefined };
             expect(richTextEditor.internalOptions).toEqual({ ...defaultOptions, ...customOptions });
         });
     });
 
     describe('with props set', () => {
-        it('internal options are customed defaultOptions', () => {
-            const customOptions: any = { placeholderText: undefined, scrollableContainer: 'container', toolbarStickyOffset: 1 };
+        describe(`with props in error`, () => {
+            it('the component should throw an error', () => {
+                expect(() => {
+                    wrapper = shallow(MRichTextEditor, {
+                        propsData: { scrollableContainer: '#container' }
+                    });
+                }).toThrow(richTextEditor.getSelectorErrorMsg('scrollable-container'));
 
-            wrapper.setProps({ scrollableContainer: 'container', toolbarStickyOffset: 1 });
+                expect(() => {
+                    wrapper = shallow(MRichTextEditor, {
+                        propsData: { toolbarStickyOffset: '#header' }
+                    });
+                }).toThrow(richTextEditor.getSelectorErrorMsg('toolbar-sticky-offset'));
+            });
+        });
+
+        it('internal options are customed defaultOptions', () => {
+            const customOptions: any = { toolbarStickyOffset: 1, placeholderText: 'placeholder' };
+
+            wrapper.setProps({ toolbarStickyOffset: 1, placeholder: 'placeholder' });
             expect(richTextEditor.internalOptions).toEqual({ ...defaultOptions, ...customOptions });
         });
     });

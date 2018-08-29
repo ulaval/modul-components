@@ -1,20 +1,29 @@
 import { mount, Wrapper, WrapperArray } from '@vue/test-utils';
-import Vue, { VueConstructor } from 'vue';
+import Vue from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { polyFillActive } from '../../utils/polyfills';
-import { ModulVue } from '../../utils/vue/vue';
-import { MDraggable, MDraggableEventNames, MDraggableOptions } from '../draggable/draggable';
-import { MDroppable } from '../droppable/droppable';
+import { MDOMPlugin } from '../domPlugin';
+import { MDraggableEventNames, MDraggableOptions } from '../draggable/draggable';
+import { MDroppable, MDroppableClassNames } from '../droppable/droppable';
 import DroppableGroupPlugin from '../droppable/droppable-group';
-import { MDOMPlugin } from './../domPlugin';
-import { MDraggableClassNames } from './../draggable/draggable';
+import { MDraggable } from './../draggable/draggable';
 import { MSortableDefaultInsertionMarkerBehavior } from './insertion-behavior';
 import SortablePlugin, { MSortable, MSortableAction, MSortableClassNames, MSortableEventNames, MSortableOptions, MSortInsertPositions } from './sortable';
 
 jest.mock('./insertion-behavior');
+
 describe('sortable', () => {
-    polyFillActive.dragDrop = false;
+    beforeEach(() => {
+        polyFillActive.dragDrop = false;
+        resetModulPlugins();
+        Vue.use(SortablePlugin);
+        Vue.use(DroppableGroupPlugin);
+        MSortable.fromSortContainer = undefined;
+        MSortable.activeSortContainer = undefined;
+        MDraggable.currentDraggable = undefined;
+        MDroppable.currentHoverDroppable = undefined;
+    });
 
     const emptyPlaceholderTemplate: string = `<li v-for="item in items" v-if="items.length">Item #{{ $index }}</li>`;
     const getSortableDirective: (bindingValue?: boolean, options?: MSortableOptions, innerHtml?: string) => Wrapper<Vue> =
@@ -22,8 +31,8 @@ describe('sortable', () => {
         const innerHTML: string = `${innerHtml || emptyPlaceholderTemplate}`;
         let template: string;
         if (options) {
-            template = bindingValue === undefined ? `<ul v-m-sortable :items="items" :accepted-actions="acceptedActions">${innerHTML}</ul>`
-                    : `<ul v-m-sortable="${bindingValue}" :items="items" :accepted-actions="acceptedActions">${innerHTML}</ul>`;
+            template = bindingValue === undefined ? `<ul v-m-sortable${options.encapsulate ? '.encapsulate' : ''} :items="items" :accepted-actions="acceptedActions">${innerHTML}</ul>`
+                    : `<ul v-m-sortable${options.encapsulate ? '.encapsulate' : ''}="${bindingValue}" :items="items" :accepted-actions="acceptedActions">${innerHTML}</ul>`;
         } else {
             template = bindingValue === undefined ? `<ul v-m-sortable>${innerHTML}</ul>`
                 : `<ul v-m-sortable="${bindingValue}">${innerHTML}</ul>`;
@@ -63,37 +72,27 @@ describe('sortable', () => {
         return { preventDefault: () => {}, stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
     };
 
-    const makeDroppable: (sortable: MSortable) => void = (sortable: MSortable) => {
-        const droppablePart: MDroppable = MDOMPlugin.get(MDroppable, sortable.element);
-        droppablePart.canDrop = jest.fn();
-        (droppablePart.canDrop as jest.Mock).mockImplementation(() => true);
-    };
-
-    let localVue: VueConstructor<ModulVue>;
-    beforeEach(() => {
-        resetModulPlugins();
-        Vue.use(SortablePlugin);
-        Vue.use(DroppableGroupPlugin);
-    });
-
     [true, undefined].forEach(param => {
         it(`it should render correctly when binding ${param} is provided`, () => {
             const userDefinedActions: string[] = ['a', 'b'];
             const userDefinedItems: any[] = [{ id: 0 }];
-            const sortable: Wrapper<Vue> = getSortableDirective(param, { items: userDefinedItems, acceptedActions: userDefinedActions });
+            const userDefinedEncapsulate: boolean = true;
+            const sortable: Wrapper<Vue> = getSortableDirective(param, { items: userDefinedItems, acceptedActions: userDefinedActions, encapsulate: userDefinedEncapsulate });
 
             expect(sortable.element.classList).toContain(MSortableClassNames.Sortable);
             expect(MDOMPlugin.get(MSortable, sortable.element).options.acceptedActions)
-                .toEqual([...userDefinedActions, MSortableAction.Move, MSortableAction.MoveGroup]);
+                .toEqual([...userDefinedActions, MSortableAction.Move, MSortableAction.MoveGroup])
+                ;
             expect(MDOMPlugin.get(MSortable, sortable.element).options.items).toBe(userDefinedItems);
+            expect(MDOMPlugin.get(MSortable, sortable.element).options.encapsulate).toBe(userDefinedEncapsulate);
             expect(MDOMPlugin.get(MDroppable, sortable.element)).toBeDefined();
         });
 
-        it(`it should default action correctly when binding ${param} is provided and action is not user defined`, () => {
+        it(`it should default options correctly when binding ${param} is provided and action is not user defined`, () => {
             const sortable: Wrapper<Vue> = getSortableDirective(param);
 
-            expect(MDOMPlugin.get(MDroppable, sortable.element).options.acceptedActions)
-                .toEqual([MSortableAction.Default, MSortableAction.Move, MSortableAction.MoveGroup]);
+            expect(MDOMPlugin.get(MDroppable, sortable.element).options.acceptedActions).toEqual([MSortableAction.Default, MSortableAction.Move, MSortableAction.MoveGroup]);
+            expect(MDOMPlugin.get(MSortable, sortable.element).options.encapsulate).toBeFalsy();
         });
 
         it('it should setup empty placeholder correctly', () => {
@@ -211,7 +210,6 @@ describe('sortable', () => {
 
         it('it should clean up childs correctly', () => {
             const sortable: Wrapper<Vue> = getSortableDirective(true, { acceptedActions: ['someAction'], items: [{ id: 0 }] });
-            const plugin: MSortable = MDOMPlugin.get(MSortable, sortable.element);
 
             sortable.destroy();
 
@@ -221,49 +219,52 @@ describe('sortable', () => {
     });
 
     describe('onDragEnter', () => {
-        let sortable: Wrapper<Vue>;
-        let secondSortable: Wrapper<Vue>;
-        let plugin: MSortable;
-        let secondPlugin: MSortable;
-
-        beforeEach(() => {
-            sortable = getSortableDirective(true, { acceptedActions: ['someAction'], items: [{ id: 0 }] });
-            plugin = MDOMPlugin.get(MSortable, sortable.element);
-            makeDroppable(plugin);
-
-            secondSortable = getSortableDirective(true, { acceptedActions: ['someAction'], items: [{ id: 0 }] });
-            secondPlugin = MDOMPlugin.get(MSortable, secondSortable.element);
-            makeDroppable(secondPlugin);
-
-            sortable.find(`.${MDraggableClassNames.Draggable}`).trigger('dragstart', getEventDummy());
-        });
+        const buildSortable: (options: MSortableOptions, mockDroppable?: boolean) => Wrapper<Vue> = (options: MSortableOptions, mockDroppable?: boolean) => {
+            const sortable: Wrapper<Vue> = getSortableDirective(true, options);
+            return sortable;
+        };
 
         it('it should handle event correctly', () => {
-            const eventDummy: any = getEventDummy();
-            sortable.find('li').trigger('dragenter', eventDummy);
+            const sortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] });
 
-            expect(MSortable.activeSortContainer).toBe(plugin);
+            sortable.find('li').trigger('dragstart', getEventDummy());
+            sortable.find('li').trigger('dragenter', getEventDummy());
+
+            expect(MSortable.activeSortContainer).toBe(MDOMPlugin.get(MSortable, sortable.element));
         });
 
         it('it should handle transition from one active sortable to another', () => {
+            const sortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] });
+            const secondSortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] });
+
+            sortable.find('li').trigger('dragstart', getEventDummy());
             sortable.find('li').trigger('dragenter', getEventDummy());
-            jest.spyOn(plugin, 'doCleanUp');
+            jest.spyOn(MDOMPlugin.get(MSortable, sortable.element), 'doCleanUp');
             secondSortable.find('li').trigger('dragenter', getEventDummy());
 
-            expect(plugin.doCleanUp).toHaveBeenCalled();
+            expect(MDOMPlugin.get(MSortable, sortable.element).doCleanUp).toHaveBeenCalled();
             expect(MSortable.activeSortContainer).toBe(MDOMPlugin.get(MSortable, secondSortable.element));
         });
 
         it('it should not call doCleanup more than 1 time on multiple trigger', () => {
-            jest.spyOn(plugin, 'doCleanUp');
-            MSortable.activeSortContainer = plugin;
+            const sortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] });
+            const secondSortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] });
+
+            sortable.find('li').trigger('dragstart', getEventDummy());
+            jest.spyOn(MDOMPlugin.get(MSortable, sortable.element), 'doCleanUp');
+            MSortable.activeSortContainer = MDOMPlugin.get(MSortable, sortable.element);
             secondSortable.find('li').trigger('dragenter', getEventDummy());
             secondSortable.find('li').trigger('dragenter', getEventDummy());
 
-            expect(plugin.doCleanUp).toHaveBeenCalledTimes(1);
+            expect(MDOMPlugin.get(MSortable, sortable.element).doCleanUp).toHaveBeenCalledTimes(1);
         });
 
         it('it should transition to sort before class properly', () => {
+            const sortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] });
+            const secondSortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] });
+
+            sortable.find('li').trigger('dragstart', getEventDummy());
+
             ((MSortableDefaultInsertionMarkerBehavior as any) as jest.Mock).mockImplementation(() => ({ getInsertPosition: () => MSortInsertPositions.After }));
             secondSortable.find('li').trigger('dragenter', getEventDummy());
 
@@ -275,6 +276,11 @@ describe('sortable', () => {
         });
 
         it('it should transition to sort after class properly', () => {
+            const sortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] });
+            const secondSortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] });
+
+            sortable.find('li').trigger('dragstart', getEventDummy());
+
             ((MSortableDefaultInsertionMarkerBehavior as any) as jest.Mock).mockImplementation(() => ({ getInsertPosition: () => MSortInsertPositions.Before }));
             secondSortable.find('li').trigger('dragenter', getEventDummy());
 
@@ -283,6 +289,26 @@ describe('sortable', () => {
 
             expect(secondSortable.find('li').element.classList).toContain(MSortableClassNames.SortAfter);
             expect(secondSortable.find('li').element.classList).not.toContain(MSortableClassNames.SortBefore);
+        });
+
+        it(`it should not trigger drop events when dragging from a restricted sortable to another`, () => {
+            const sortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }], encapsulate: true }, false);
+            const secondSortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] }, false);
+
+            sortable.find('li').trigger('dragstart', getEventDummy());
+            secondSortable.find('li').trigger('dragenter', getEventDummy());
+
+            expect(secondSortable.find('li').element.classList).toContain(MDroppableClassNames.CantDrop);
+        });
+
+        it(`it should not trigger drop events when dragging from a non-restricted sortable to a restricted sortable`, () => {
+            const sortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }] }, false);
+            const secondSortable: Wrapper<Vue> = buildSortable({ acceptedActions: ['someAction'], items: [{ id: 0 }], encapsulate: true }, false);
+
+            sortable.find('li').trigger('dragstart', getEventDummy());
+            secondSortable.find('li').trigger('dragenter', getEventDummy());
+
+            expect(secondSortable.find('li').element.classList).toContain(MDroppableClassNames.CantDrop);
         });
     });
 
@@ -295,11 +321,9 @@ describe('sortable', () => {
         beforeEach(() => {
             sortable = getSortableDirective(true, { acceptedActions: ['someAction'], items: [{ id: 0 }] });
             plugin = MDOMPlugin.get(MSortable, sortable.element);
-            makeDroppable(plugin);
 
             secondSortable = getSortableDirective(true, { acceptedActions: ['someAction'], items: [{ id: 0 }] });
             secondPlugin = MDOMPlugin.get(MSortable, secondSortable.element);
-            makeDroppable(secondPlugin);
         });
 
         it('should cleanup when leaving sortable', () => {
@@ -327,7 +351,6 @@ describe('sortable', () => {
     describe('onDrop', () => {
         const buildSortable: (options: MSortableOptions) => Wrapper<Vue> = (options: MSortableOptions) => {
             const sortable: Wrapper<Vue> = getSortableDirective(true, options);
-            makeDroppable(MDOMPlugin.get(MSortable, sortable.element));
             return sortable;
         };
 

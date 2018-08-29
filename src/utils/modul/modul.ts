@@ -30,7 +30,7 @@ type StackMap = {
 };
 
 export class Modul {
-    public bodyEl: HTMLElement = document.body || document.documentElement;
+    public bodyEl: HTMLElement = document.documentElement || document.body; // The order is important for tooltip positioning in the RTE.
     public bodyStyle: any = this.bodyEl.style;
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
     public event = new Vue();
