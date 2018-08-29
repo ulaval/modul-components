@@ -4,7 +4,8 @@
                   'm--is-state-warning': isStateWarning,
                   'm--is-state-error': isStateError,
                   'm--is-skin-default': isSkinDefault,
-                  'm--is-skin-light': isSkinLight}">
+                  'm--is-skin-light': isSkinLight,
+                  'm--no-svg-icon': !isSvg }">
     <header class="m-error-template__header">
         <h2 class="m-error-template__title"
             v-if="title"
@@ -17,7 +18,6 @@
                 v-if="isSvg"></div>
             <m-icon class="m-error-template__icon"
                     :name="iconNameProp"
-                    :svg-title="title"
                     :size="imageSize"
                     v-else></m-icon>
         </div>

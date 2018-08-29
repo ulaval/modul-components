@@ -51,9 +51,22 @@
         }
     }
 
+    &.m--no-svg-icon {
+        .m-error-template__icon-container {
+            &::after {
+                content: '';
+                width: 150px;
+                height: 5px;
+                border-radius: 50%;
+                background: $m-color--grey-lighter;
+                margin-top: $m-spacing--s;
+            }
+        }
+    }
+
     &__header {
         ~ .m-error-template__body {
-            padding-top: $m-spacing--l;
+            padding-top: $m-spacing;
         }
     }
 
@@ -64,7 +77,7 @@
         margin: 0;
 
         ~ .m-error-template__icon-container {
-            margin-top: $m-spacing--l;
+            margin-top: $m-spacing;
         }
     }
 
@@ -78,7 +91,7 @@
 
         &::before {
             position: absolute;
-            top: 50%;
+            top: calc(50% - #{$m-spacing--s - 5}); // Magic number: align this backgroun with icon
             z-index: 0;
             content: '';
             display: block;
