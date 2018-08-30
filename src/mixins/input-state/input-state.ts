@@ -132,7 +132,7 @@ export class InputState extends ModulVue implements InputStateMixin {
     public getInput(): HTMLElement | undefined {
         const selector: string = this.as<InputStateInputSelector>()!.selector || 'input, textarea, [contenteditable=true]';
         const elements: NodeListOf<Element> = this.$el.querySelectorAll(selector);
-        if (elements.length > 1 || elements.length === 0) {
+        if (elements.length > 1) {
             throw new Error(`Input state can manage 1 and only 1 nested editable element (${selector})`);
         }
         return elements[0] as HTMLElement | undefined;
