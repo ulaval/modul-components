@@ -18,6 +18,6 @@
         "maxNumberMsg": "The maximum number of files that can be added simultaneously is reached",
         "errorMsg": "An error occurred during the upload.",
         "cancelFileUpload": "Cancel upload",
-        "deleteUploadedFile": "Delete the uploaded file"
+        "deleteUploadedFile": "Delete uploaded file"
     }
 }
