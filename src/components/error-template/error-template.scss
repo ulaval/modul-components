@@ -1,5 +1,8 @@
 @import '../../styles/abstracts/variables';
 
+$m-error-template--shadow-width: 150px;
+$m-error-template--shadow-height: 5px;
+
 @mixin m-error-template-state($color, $color-background) {
     .m-error-template {
         &__title,
@@ -51,19 +54,6 @@
         }
     }
 
-    &.m--no-svg-icon {
-        .m-error-template__icon-container {
-            &::after {
-                content: '';
-                width: 150px;
-                height: 5px;
-                border-radius: 50%;
-                background: $m-color--grey-lighter;
-                margin-top: $m-spacing--s;
-            }
-        }
-    }
-
     &__header {
         ~ .m-error-template__body {
             padding-top: $m-spacing;
@@ -91,11 +81,20 @@
 
         &::before {
             position: absolute;
-            top: calc(50% - #{$m-spacing--s - 5}); // Magic number: align this backgroun with icon
+            top: calc(50% - #{$m-spacing--s - $m-error-template--shadow-height}); // Magic number: align this backgroun with icon
             z-index: 0;
             content: '';
             display: block;
             height: 80px; // Magic number
+        }
+
+        &::after {
+            content: '';
+            width: $m-error-template--shadow-width;
+            height: $m-error-template--shadow-height;
+            border-radius: 50%;
+            background: $m-color--grey-lighter;
+            margin-top: $m-spacing--s;
         }
 
         &__svg {
