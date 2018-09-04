@@ -62,6 +62,17 @@ export class MFileUpload extends ModulVue {
     private internalOpen: boolean = false;
 
     private created(): void {
+        this.updateValidationOptions();
+    }
+
+    private destroyed(): void {
+        this.$file.destroy(this.storeName);
+    }
+
+    @Watch('extensions')
+    @Watch('maxSizeKb')
+    @Watch('maxFiles')
+    private updateValidationOptions(): void {
         this.$file.setValidationOptions(
             {
                 extensions: this.extensions,
@@ -70,10 +81,6 @@ export class MFileUpload extends ModulVue {
             },
             this.storeName
         );
-    }
-
-    private destroyed(): void {
-        this.$file.destroy(this.storeName);
     }
 
     @Watch('open')
