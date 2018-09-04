@@ -79,9 +79,9 @@ describe('FileService', () => {
     });
 
     describe('validations', () => {
-        it('should reject files with invalid extensions', () => {
+        it('should accept files with allowedExtensions', () => {
             filesvc.setValidationOptions({
-                extensions: ['jpg', 'jpeg', 'pdf', 'mp4']
+                allowedExtensions: ['jpg', 'jpeg', 'pdf', 'mp4']
             });
 
             filesvc.add(
@@ -91,7 +91,26 @@ describe('FileService', () => {
                     createMockFile('valid.jpeg'),
                     createMockFile('valid.pdf'),
                     createMockFile('valid.mp4'),
-                    createMockFile('invalid')
+                    createMockFile('invalid.mov')
+                ])
+            );
+
+            expectValidationResults(5, MFileRejectionCause.FILE_TYPE);
+        });
+
+        it('should reject files with rejectedExtensions', () => {
+            filesvc.setValidationOptions({
+                rejectedExtensions: ['mov']
+            });
+
+            filesvc.add(
+                createMockFileList([
+                    createMockFile('valid.jpg'),
+                    createMockFile('valid.JpG'),
+                    createMockFile('valid.jpeg'),
+                    createMockFile('valid.pdf'),
+                    createMockFile('valid.mp4'),
+                    createMockFile('invalid.mov')
                 ])
             );
 
@@ -105,8 +124,8 @@ describe('FileService', () => {
 
             filesvc.add(
                 createMockFileList([
-                    createMockFile('invalid', 4096),
-                    createMockFile('valid', 1024)
+                    createMockFile('invalid.mov', 4096),
+                    createMockFile('valid.jpg', 1024)
                 ])
             );
 
@@ -120,8 +139,8 @@ describe('FileService', () => {
 
             filesvc.add(
                 createMockFileList([
-                    createMockFile('valid'),
-                    createMockFile('invalid')
+                    createMockFile('valid.jpg'),
+                    createMockFile('invalid.mov')
                 ])
             );
 
@@ -144,7 +163,7 @@ describe('FileService', () => {
 
             expect(readyFiles.length).toEqual(expectedNbReadyFiles);
             expect(rejectedFiles.length).toEqual(1);
-            expect(rejectedFiles[0].name).toEqual('invalid');
+            expect(rejectedFiles[0].name).toEqual('invalid.mov');
             expect(rejectedFiles[0].status).toEqual(MFileStatus.REJECTED);
             expect(rejectedFiles[0].rejection).toEqual(rejectionCause);
         };

@@ -43,7 +43,8 @@ export interface MFileUploadOptions {
 export interface MFileValidationOptions {
     maxFiles?: number;
     maxSizeKb?: number;
-    extensions?: string[];
+    allowedExtensions?: string[];
+    rejectedExtensions?: string[];
 }
 
 export class FileService {
@@ -247,7 +248,7 @@ class FileStore {
             return;
         }
 
-        if (this.options.extensions) {
+        if (this.options.rejectedExtensions || this.options.allowedExtensions) {
             this.validateExtension(file);
         }
 
@@ -263,7 +264,8 @@ class FileStore {
     private validateExtension(file: MFile): void {
         const ext: string = extractExtension(file.file.name);
 
-        if (this.options!.extensions!.indexOf(ext) === -1) {
+        if ((this.options!.rejectedExtensions && this.options!.rejectedExtensions!.indexOf(ext) !== -1) ||
+            (this.options!.allowedExtensions && this.options!.allowedExtensions!.indexOf(ext) === -1)) {
             file.status = MFileStatus.REJECTED;
             file.rejection = MFileRejectionCause.FILE_TYPE;
         }

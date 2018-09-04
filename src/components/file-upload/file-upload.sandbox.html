@@ -7,7 +7,16 @@
         </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
         -->
     </p>
-    <p>
-        <m-file-upload :extensions="['jpg', 'jpeg', 'png']"><!-- Test case --><button>open</button></m-file-upload>
-    </p>
+        <p>
+            <!-- <m-file-upload><button>No extension specified</button></m-file-upload> -->
+        </p>
+        <p>
+            <!-- <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']"><button>Only allowed extensions</button></m-file-upload> -->
+        </p>
+        <p>
+            <!-- <m-file-upload :rejected-extensions="['jpg', 'jpeg', 'png']"><button>Only rejected extensions</button></m-file-upload> -->
+        </p>
+        <p>
+            <m-file-upload :rejected-extensions="['jpg']" :allowed-extensions="['jpg', 'jpeg', 'png', 'mp4']"><button>Allowed and rejected extensions</button></m-file-upload>
+        </p>
 </div>
