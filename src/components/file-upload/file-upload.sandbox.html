@@ -8,6 +8,7 @@
         -->
     </p>
     <p>
-        <m-file-upload :extensions="['jpg', 'jpeg', 'png']"><!-- Test case --><button>open</button></m-file-upload>
+        <m-file-upload :extensions="['jpg', 'jpeg', 'png']" :max-files="1"><!-- Test case --><button>Single file upload</button></m-file-upload>
+        <m-file-upload :extensions="['jpg', 'jpeg', 'png']" :max-files="5"><!-- Test case --><button>Multiple files upload</button></m-file-upload>
     </p>
 </div>
