@@ -1,14 +1,20 @@
-import { PluginObject } from 'vue';
-import { Prop } from 'vue-property-decorator';
 import PortalPlugin from 'portal-vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import WithRender from './modal.html?style=./modal.scss';
+import { Prop } from 'vue-property-decorator';
+
+import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
-import { MODAL_NAME } from '../component-names';
-import { Portal, PortalMixinImpl, PortalMixin, BackdropMode } from '../../mixins/portal/portal';
 import ButtonPlugin from '../button/button';
+import { MODAL_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import WithRender from './modal.html?style=./modal.scss';
+
+export enum MModalWidth {
+    Default = 'default',
+    Large = 'large'
+}
 
 @WithRender
 @Component({
@@ -27,6 +33,13 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     public cancelLabel: string | undefined;
     @Prop({ default: true })
     public negativeLink: boolean;
+    @Prop({
+        default: MModalWidth.Default,
+        validator: value =>
+            value === MModalWidth.Default ||
+            value === MModalWidth.Large
+    })
+    public width: string;
 
     public handlesFocus(): boolean {
         return true;
@@ -80,6 +93,10 @@ export class MModal extends ModulVue implements PortalMixinImpl {
 
     private get hasCancelLabel(): boolean {
         return !!this.cancelLabel;
+    }
+
+    private get hasWidthLarge(): boolean {
+        return this.width === MModalWidth.Large;
     }
 }
 
