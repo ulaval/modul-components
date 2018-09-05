@@ -15,6 +15,7 @@
         font-weight: $m-font-weight--black;
         display: flex;
         align-items: center;
+        text-transform: uppercase;
 
         &__plus {
             margin-right: $m-spacing--s;
@@ -30,7 +31,6 @@
             color: $m-color--grey-light;
             background: $m-menu-color--skin-dark-bg-light;
             box-shadow: 0 1px 2px rgba($m-color--black, 0.5);
-            text-transform: uppercase;
         }
 
         .m-menu.m--is-open & {
