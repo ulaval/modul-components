@@ -11,6 +11,7 @@
          :aria-controls="idAriaControls"
          :aria-expanded="propOpen"
          v-if="hasSlotTrigger">
+        <m-plus class="m-menu__trigger__plus" skin="current-color" :open="propOpen"></m-plus>
         <slot name="trigger"></slot>
     </div>
     <m-accordion-transition>
