@@ -345,53 +345,14 @@
     }
 }
 
-@mixin m-box-padding($topBottom: $m-padding--l, $rightLeft: $m-padding--l) {
+@mixin m-box-padding($topBottom: $m-spacing--xl, $rightLeft: $m-spacing--l, $topBottomMobile: $m-spacing--xl, $rightLeftMobile: $m-spacing) {
     &:not(.m--no-padding) {
-        @if ($topBottom >= $m-padding and $topBottom >= $m-padding--s) {
-            @media (max-width: $m-mq--max--s) {
-                padding-left: $rightLeft / 2;
-                padding-right: $rightLeft / 2;
-            }
-
-            @media (min-width: $m-mq--min--s) {
-                padding: $topBottom $rightLeft;
-            }
+        @media (max-width: $m-mq--max--s) {
+            padding: $topBottomMobile $rightLeftMobile;
         }
 
-        @else {
-            @if ($topBottom <= $m-padding) {
-                padding-top: $m-padding;
-                padding-bottom: $m-padding;
-            }
-
-            @else {
-                @media (max-width: $m-mq--max--s) {
-                    padding-top: $topBottom/2;
-                    padding-bottom: $topBottom/2;
-                }
-
-                @media (min-width: $m-mq--min--s) {
-                    padding-top: $topBottom;
-                    padding-bottom: $topBottom;
-                }
-            }
-
-            @if ($topBottom <= $m-padding--s) {
-                padding-right: $m-padding--s;
-                padding-left: $m-padding--s;
-            }
-
-            @else {
-                @media (max-width: $m-mq--max--s) {
-                    padding-right: $rightLeft/2;
-                    padding-left: $rightLeft/2;
-                }
-
-                @media (min-width: $m-mq--min--s) {
-                    padding-right: $rightLeft;
-                    padding-left: $rightLeft;
-                }
-            }
+        @media (min-width: $m-mq--min--s) {
+            padding: $topBottom $rightLeft;
         }
     }
 }

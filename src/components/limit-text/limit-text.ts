@@ -64,28 +64,30 @@ export class MLimitText extends ModulVue {
 
     private initialize(): void {
         this.el = this.$refs.testingText as HTMLElement;
-        this.el.innerHTML = (this.$refs.originalText as HTMLElement).innerHTML;
-        this.testingContent = this.el.innerHTML;
-        this.el.style.whiteSpace = 'nowrap';
-        for (let i: number = 1; i < this.el.children.length; i++) {
-            (this.el.children[i] as HTMLElement).style.display = 'none';
-        }
-        this.initLineHeigh = this.el.clientHeight;
-        for (let i: number = 1; i < this.el.children.length; i++) {
-            (this.el.children[i] as HTMLElement).style.display = 'block';
-        }
-        this.el.style.whiteSpace = 'normal';
-        this.maxHeight = this.lines * this.initLineHeigh;
+        if (this.el) {
+            this.el.innerHTML = (this.$refs.originalText as HTMLElement).innerHTML;
+            this.testingContent = this.el.innerHTML;
+            this.el.style.whiteSpace = 'nowrap';
+            for (let i: number = 1; i < this.el.children.length; i++) {
+                (this.el.children[i] as HTMLElement).style.display = 'none';
+            }
+            this.initLineHeigh = this.el.clientHeight;
+            for (let i: number = 1; i < this.el.children.length; i++) {
+                (this.el.children[i] as HTMLElement).style.display = 'block';
+            }
+            this.el.style.whiteSpace = 'normal';
+            this.maxHeight = this.lines * this.initLineHeigh;
 
-        // Generate the full content - Add the close link if an HTML tag is present
-        if (this.testingContent.match('</')) {
-            let tagIndex: number = this.testingContent.lastIndexOf('</');
-            this.fullContent = this.testingContent.substring(0,tagIndex) + this.closeLink + this.testingContent.substring(tagIndex);
-        } else {
-            this.fullContent = this.testingContent + this.closeLink;
+            // Generate the full content - Add the close link if an HTML tag is present
+            if (this.testingContent.match('</')) {
+                let tagIndex: number = this.testingContent.lastIndexOf('</');
+                this.fullContent = this.testingContent.substring(0,tagIndex) + this.closeLink + this.testingContent.substring(tagIndex);
+            } else {
+                this.fullContent = this.testingContent + this.closeLink;
+            }
+            // Get the limited text
+            this.adjustText();
         }
-        // Get the limited text
-        this.adjustText();
     }
 
     private adjustText(): void {
