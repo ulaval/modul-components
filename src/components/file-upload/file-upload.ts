@@ -282,6 +282,10 @@ export class MFileUpload extends ModulVue {
         return this.rejectedFiles.length !== 0;
     }
 
+    private get hasAllowedExtensions(): boolean {
+        return this.allowedExtensions !== undefined && !!this.allowedExtensions.length;
+    }
+
     private get propOpen(): boolean {
         return this.open ? this.open : this.internalOpen;
     }

@@ -264,8 +264,8 @@ class FileStore {
     private validateExtension(file: MFile): void {
         const ext: string = extractExtension(file.file.name);
 
-        if ((this.options!.rejectedExtensions && this.options!.rejectedExtensions!.indexOf(ext) !== -1) ||
-            (this.options!.allowedExtensions && this.options!.allowedExtensions!.indexOf(ext) === -1)) {
+        if ((this.options!.rejectedExtensions && this.options!.rejectedExtensions!.length && this.options!.rejectedExtensions!.indexOf(ext) !== -1) ||
+            (this.options!.allowedExtensions && this.options!.allowedExtensions!.length && this.options!.allowedExtensions!.indexOf(ext) === -1)) {
             file.status = MFileStatus.REJECTED;
             file.rejection = MFileRejectionCause.FILE_TYPE;
         }
