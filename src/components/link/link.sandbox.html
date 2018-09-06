@@ -1,13 +1,34 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+    <h2>Utilisation du composant m-link</h2>
+    <p><m-link>Bonjour</m-link></p>
+
+    <h2>Icon name "m-svg__clock"</h2>
+    <p><m-link icon-name="m-svg__clock">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link></p>
+
+    <p><m-link icon-name="m-svg__clock" :disabled="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link></p>
+
+    <h2>Skin text</h2>
+    <p><m-link skin="text" icon-name="m-svg__clock">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link></p>
+    <div class="m-u--margin-top--l" style="background: grey; padding: 16px;">
+        <h2 class="m-u--no-margin">Skin light</h2>
+        <p><m-link skin="light" icon-name="m-svg__clock">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link></p>
+    </div>
+    <h2>Utilisation de la classe .m-u--link</h2>
+    <p>
+        <a href="#" class="m-u--link">
+            <span class="m-u--link-text">Lien (.m-u--link)</span>
+        </a>
     </p>
     <p>
-        <m-link><!-- Test case --></m-link>
+        <a href="#" class="m-u--link">
+            <m-icon class="m-u--link-icon-left" name="m-svg__clock"></m-icon>
+            <span class="m-u--link-text">Icône à gauche (.m-u--link-icon-left)</span>
+        </a>
+    </p>
+    <p>
+        <a href="#" class="m-u--link">
+            <span class="m-u--link-text">Icône à droite (.m-u--link-icon-right)</span>
+            <m-icon class="m-u--link-icon-right" name="m-svg__clock"></m-icon>
+        </a>
     </p>
 </div>

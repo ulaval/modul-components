@@ -9,6 +9,11 @@ Once approved, do the following steps for each PR
 - Assign the current opened milestone to the PR
 - Resolve the linked Jira ticket and assign the current opened version
 
+### Complete release
+The complete release workflow is processed by Jenkins using the task `MODUL/modul - releases/modul - release-complete`. You only need to manually approve PR for merging back the release branch into develop. Of course, the post-publishing steps described below have to be done manually as well.
+
+However, it is possible to perform the process manually using the following directions.
+
 ### Release branch
 > These steps can be performed manually or using the Jenkins task `MODUL/modul - releases/modul - creer-branche-release`
 - Create a release branch

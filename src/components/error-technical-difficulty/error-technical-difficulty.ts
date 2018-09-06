@@ -57,9 +57,9 @@ export class MErrorTechnicalDifficulty extends ModulVue {
     @Prop()
     public error?: Error;
 
-    readonly skin: string = MErrorTemplateSkin.Error;
+    public skin: string = MErrorTemplateSkin.Error;
 
-    readonly iconName: string = 'm-svg__error';
+    public svgName: string = 'm-svg__error-technical-difficulty';
 
     /**
      * Returns the formatted date for the value received as props (format = YYYY-MM-DD). Used to display the date when the error was generated.

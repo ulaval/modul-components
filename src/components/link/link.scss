@@ -1,94 +1,79 @@
 @import 'abstracts/variables';
 
 .m-link {
+    --m-link--color-visited: #{$m-color--interactive-darker};
+    --m-link--color-active: #{$m-color--interactive-dark};
+    --m-link--color: #{$m-color--interactive};
+    --m-link--color-hover: #{$m-color--interactive-light};
+
     transition: color $m-transition-duration ease;
     position: relative;
     display: inline-flex;
     align-items: center;
     font-weight: $m-font-weight--bold;
-    color: $m-color--interactive;
+    color: var(--m-link--color);
     text-decoration: none;
+
+    &.m--has-icon {
+        display: inline-flex;
+        align-items: center;
+    }
 
     &.m--has-right-icon {
         flex-direction: row-reverse;
 
         .m-link__icon {
-            margin-left: $m-margin--xs;
+            margin-left: $m-margin--s;
         }
     }
 
     &.m--has-left-icon {
         .m-link__icon {
-            margin-right: $m-margin--xs;
+            margin-right: $m-margin--s;
         }
     }
 
-    &:not(.m--is-disabled):not(.m--is-text-link) {
+    &:not(.m--is-disabled) {
         &:not(.m--no-underline) {
-            .m-link__text {
-                transition: box-shadow $m-transition-duration--s ease;
-                box-shadow: 0 0 rgba($m-color--interactive, 0); // rgba doesn't seem to work with css variables in hex value... but in this case it doesn't matter though.
-            }
-
-            &:not(.m--is-unvisited):visited {
-                color: var(--m-color--interactive-darker);
-            }
-
             &:hover,
             &:focus {
                 .m-link__text {
-                    box-shadow: 0 1px var(--m-color--interactive-light);
+                    text-decoration: underline;
                 }
-            }
-
-            &:active {
-                .m-link__text {
-                    box-shadow: 0 1px var(--m-color--interactive-dark);
-                }
-            }
-        }
-
-        &:not(.m--is-unvisited):visited {
-            color: var(--m-color--interactive-darker);
-
-            &:hover,
-            &:focus {
-                color: var(--m-color--interactive-light);
-            }
-
-            &:active {
-                color: var(--m-color--interactive-dark);
             }
         }
 
         &:hover,
         &:focus {
-            color: var(--m-color--interactive-light);
+            color: var(--m-link--color-hover);
         }
 
         &:active {
-            color: var(--m-color--interactive-dark);
+            color: var(--m-link--color-active);
+        }
+
+        &:not(.m--is-unvisited):not(:hover):not(:focus):visited {
+            color: var(--m-link--color-visited);
         }
     }
 
     &.m--is-disabled {
         color: $m-color--disabled;
-        cursor: default;
+        cursor: not-allowed;
     }
 
-    &.m--is-text-link {
-        color: $m-color--text;
+    &.m--is-skin-text {
+        --m-link--color-visited: #{$m-color--text};
+        --m-link--color-active: #{$m-color--black};
+        --m-link--color: #{$m-color--text};
+        --m-link--color-hover: #{$m-color--grey-dark};
     }
 
     &.m--is-skin-light {
-        --m-color--interactive-darker: $m-color--white;
-        --m-color--interactive-dark: $m-color--white;
-        --m-color--interactive: $m-color--white;
-        --m-color--interactive-light: $m-color--white;
-        --m-color--interactive-lighter: $m-color--white;
-        --m-color--interactive-lightest: $m-color--white;
-
-        color: $m-color--white;
+        --m-link--color-visited: #{$m-color--white};
+        --m-link--color-active: #{$m-color--grey-light};
+        --m-link--color: #{$m-color--white};
+        --m-link--color-hover: #{$m-color--grey-lighter};
     }
 
     &:focus {
@@ -102,6 +87,7 @@
 
     &__icon {
         display: inline-flex;
+        flex-shrink: 0;
         vertical-align: middle;
         stroke-width: 2px;
     }

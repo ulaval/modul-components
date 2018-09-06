@@ -30,7 +30,7 @@ type StackMap = {
 };
 
 export class Modul {
-    public bodyEl: HTMLElement = document.body || document.documentElement;
+    public bodyEl: HTMLElement = document.documentElement || document.body; // The order is important for tooltip positioning in the RTE.
     public bodyStyle: any = this.bodyEl.style;
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
     public event = new Vue();
@@ -226,7 +226,9 @@ export class Modul {
                 this.scrollActive = true;
 
                 setTimeout(() => {
-                    document.body.removeChild(b);
+                    if (b && b.parentNode) {
+                        b.parentNode.removeChild(b);
+                    }
                     // if (!this.backdropElement) {
                     //     this.activeScrollBody();
                     // }

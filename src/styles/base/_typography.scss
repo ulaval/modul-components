@@ -2,96 +2,13 @@
 //  Titles
 // ======================================================================
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.m-u--h1,
-.m-u--h2,
-.m-u--h3,
-.m-u--h4,
-.m-u--h5,
-.m-u--h6 {
-    font-family: $m-font-family;
-    font-weight: $m-font-weight--bold;
-    line-height: 1.1;
-}
-
-h4,
-h5,
-h6,
-.m-u--h4,
-.m-u--h5,
-.m-u--h6 {
-    margin: $m-margin--l 0 0 0;
-}
-
-h1,
-.m-u--h1 {
-    margin: 0;
-    font-size: $m-font-size--h1;
-}
-
-h2,
-.m-u--h2 {
-    margin: $m-padding--l 0 0 0;
-    font-size: $m-font-size--h2;
-}
-
-h3,
-.m-u--h3 {
-    margin: $m-padding--l 0 0 0;
-    font-size: $m-font-size--h3;
-}
-
-h4,
-.m-u--h4 {
-    font-size: $m-font-size--h4;
-}
-
-h5,
-.m-u--h5 {
-    font-size: $m-font-size--h5;
-}
-
-h6,
-.m-u--h6 {
-    font-size: $m-font-size--h6;
-}
+@include titleStyles();
 
 // ======================================================================
 //  Text
 // ======================================================================
-p,
-.m-u--p {
-    font-family: $m-font-family;
-    margin: $m-margin 0 0 0;
-}
 
-b,
-strong {
-    font-weight: $m-font-weight--bold;
-}
-
-i,
-em {
-    font-style: italic;
-}
-
-small {
-    font-size: $m-font-size--s;
-}
-
-pre,
-code {
-    word-break: break-all;
-    word-wrap: break-word;
-    font-size: $m-font-size--s;
-    font-weight: $m-font-weight;
-    color: $m-color--text;
-}
+@include textStyles();
 
 // ======================================================================
 //  Link

@@ -148,7 +148,9 @@ export class Portal extends ModulVue implements PortalMixin {
             this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
         }
 
-        document.body.removeChild(this.portalTargetEl);
+        if (this.portalTargetEl.parentNode) {
+            this.portalTargetEl.parentNode.removeChild(this.portalTargetEl);
+        }
     }
 
     public get propOpen(): boolean {
