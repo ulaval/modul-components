@@ -1,17 +1,11 @@
 @import 'abstracts/variables';
 
 .m-carousel {
-    &__slider {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        overflow: hidden;
-        margin: 0;
-        height: 100%;
-        user-select: none;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    perspective: 1000px;
+    margin: 0;
 }

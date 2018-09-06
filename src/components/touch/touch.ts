@@ -48,15 +48,15 @@ export class MTouch extends Vue {
     private initializeZingTouch(): void {
         this.destroyZingTouch();
 
-        this.zingRegion = new ZingTouch.Region(this.$refs.swipeContainer, false, false);
-        (this.$refs.swipeContainer as HTMLElement).style.touchAction = '';
+        this.zingRegion = new ZingTouch.Region(this.$el, false, false);
+        (this.$el).style.touchAction = '';
 
         this.configureZingSwipe();
         this.configureZingTap();
     }
 
     private configureZingSwipe(): void {
-        this.zingRegion.bind(this.$slots.default[0].elm, 'swipe', (event: CustomEvent) => {
+        this.zingRegion.bind(this.$el, 'swipe', (event: CustomEvent) => {
             const swipeOptions: MTouchSwipeOptions = this.internalSwipeOptions;
 
             if (event.detail.data[0].velocity < swipeOptions.velocity) {
@@ -86,7 +86,7 @@ export class MTouch extends Vue {
     }
 
     private configureZingTap(): void {
-        this.zingRegion.bind(this.$slots.default[0].elm, new ZingTouch.Tap({
+        this.zingRegion.bind(this.$el, new ZingTouch.Tap({
             numInputs: 1,
             maxDelay: 300
         }), (event: Event) => {
@@ -95,7 +95,7 @@ export class MTouch extends Vue {
     }
 
     private destroyZingTouch(): void {
-        if (this.zingRegion) { this.zingRegion.unbind(this.$slots.default[0].elm); }
+        if (this.zingRegion) { this.zingRegion.unbind(this.$el); }
         this.zingRegion = undefined;
     }
 }

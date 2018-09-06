@@ -1,5 +1,3 @@
-<m-touch class="m-carousel" @tap="onTap" @swipeleft="showNextItem" @swiperight="showPrevItem" :swipe-options="{direction: 'horizontal'}">
-    <ul class="m-carousel__slider">
-        <slot></slot>
-    </ul>
+<m-touch class="m-carousel" @tap="onTap" @swipeleft="showNextItem" @swiperight="showPrevItem" :swipe-options="{direction: 'horizontal'}" tag="ul">
+    <slot></slot>
 </m-touch>
