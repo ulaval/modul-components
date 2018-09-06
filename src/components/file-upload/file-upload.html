@@ -31,7 +31,7 @@
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title" v-if="isMqMinS">
                     <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
-                    <m-i18n k="m-file-upload:title"></m-i18n>
+                    <m-i18n k="m-file-upload:title" :nb="maxFiles"></m-i18n>
                 </h3>
                 <m-file-select class="m-file-upload__drop-zone__instructions__button" skin="secondary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName"
                     keep-store="true"></m-file-select>
@@ -63,7 +63,7 @@
                             </p>
                         </div>
                         <div class="m-file-upload__import-list__delete">
-                            <m-icon-button class="m-file-upload__import-list__button" icon-name="m-svg__close-clear" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
+                            <m-icon-button class="m-file-upload__import-list__button" :title="tooltipCancel" icon-name="m-svg__close-clear" button-size="32px" icon-size="12px" @click="onUploadCancel(file)"></m-icon-button>
                         </div>
                     </div>
                 </li>
@@ -85,7 +85,7 @@
                             <p class="m-file-upload__completed-list__infos-size">{{file.file.size | f-m-filesize}}</p>
                         </div>
                         <div class="m-file-upload__completed-list__delete">
-                            <m-icon-button class="m-file-upload__completed-list__button" icon-name="m-svg__delete" button-size="32px" icon-size="20px" @click="onFileRemove(file)"></m-icon-button>
+                            <m-icon-button class="m-file-upload__completed-list__button" :title="tooltipDelete" icon-name="m-svg__delete" button-size="32px" icon-size="20px" @click="onFileRemove(file)"></m-icon-button>
                         </div>
                     </div>
                 </li>
