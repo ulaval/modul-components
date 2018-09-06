@@ -24,6 +24,8 @@ export class MLimitText extends ModulVue {
     public openLabel: string;
     @Prop()
     public closeLabel: string;
+    @Prop()
+    public html: string;
 
     private reduceContent: string = '';
     private testingContent: string = '';
@@ -169,6 +171,10 @@ export class MLimitText extends ModulVue {
             index++;
         }
         this.reduceContent = lastValidContent.replace(this.openLinkOriginal, this.openLink);
+    }
+
+    private get rawhtml(): string {
+        return this.html;
     }
 
     private get getReduceText(): string {
