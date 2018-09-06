@@ -141,7 +141,7 @@ $m-dialog--max-width--s: 420px !default;
         flex-shrink: 0;
         min-height: $m-box--min-height;
 
-        @include m-box-padding($m-padding);
+        @include m-box-padding($m-spacing, $m-spacing--l, $m-spacing, $m-spacing);
     }
 
     &__header {

@@ -60,6 +60,7 @@ export class MMenu extends BaseMenu implements Menu {
     private internalOpen: boolean = false;
     private internalDisabled: boolean = false;
     private internalItems: MMenuItem[] = [];
+    private observer: MutationObserver;
 
     @Watch('selected')
     public updateValue(value: string | undefined): void {
@@ -74,7 +75,18 @@ export class MMenu extends BaseMenu implements Menu {
         this.model = this.selected;
         this.propOpen = this.open;
         this.propDisabled = this.disabled;
-        this.buildItemsMap();
+
+        this.$nextTick(() => {
+            this.buildItemsMap();
+
+            this.observer = new MutationObserver(() => {
+                this.buildItemsMap();
+            });
+
+            if (this.$refs.menu) {
+                this.observer.observe(this.$refs.menu, { subtree: true, childList: true });
+            }
+        });
 
         setTimeout(() => {
             this.animReady = true;

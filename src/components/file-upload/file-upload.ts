@@ -58,8 +58,9 @@ export class MFileUpload extends ModulVue {
         dialog: MDialog;
     };
 
-    private title: string = this.$i18n.translate('m-file-upload:header-title');
     private internalOpen: boolean = false;
+    private tooltipCancel: string = this.$i18n.translate('m-file-upload:cancelFileUpload');
+    private tooltipDelete: string = this.$i18n.translate('m-file-upload:deleteUploadedFile');
 
     private created(): void {
         this.$file.setValidationOptions(
@@ -210,6 +211,10 @@ export class MFileUpload extends ModulVue {
 
     private hasMaxFilesRejection(file): boolean {
         return file.rejection === MFileRejectionCause.MAX_FILES;
+    }
+
+    private get title(): string {
+        return this.$i18n.translate('m-file-upload:header-title', {}, this.maxFiles);
     }
 
     private get fileExtensions(): string {

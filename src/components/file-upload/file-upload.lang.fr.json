@@ -1,7 +1,9 @@
 {
     "m-file-upload": {
-        "header-title": "Ajouter des fichiers",
-        "title": "Déposer les fichiers ici ou",
+        "header-title": "Ajouter un fichier",
+        "header-title.p": "Ajouter des fichiers",
+        "title": "Déposer un fichier",
+        "title.p": "Déposer des fichiers",
         "format": "Format accepté",
         "format.p": "Formats acceptés",
         "import": "En cours d'importation",
@@ -14,6 +16,8 @@
         "extensionFileMsg": "L'extension du fichier n’est pas acceptée.",
         "maxSizeMsg": "Le fichier est refusé, car sa taille dépasse la limite permise",
         "maxNumberMsg": "Le nombre maximal de fichiers pouvant être ajoutés simultanément est atteint",
-        "errorMsg": "Une erreur s'est produite durant le téléversement."
+        "errorMsg": "Une erreur s'est produite durant le téléversement.",
+        "cancelFileUpload": "Annuler le téléversement",
+        "deleteUploadedFile": "Supprimer le fichier téléversé"
     }
 }

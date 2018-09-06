@@ -31,7 +31,7 @@ export enum MRichTextEditorMode {
     ]
 })
 export class MRichTextEditor extends ModulVue implements InputManagementData, InputStateInputSelector {
-    selector: string = '.fr-element';
+    selector: string = '.fr-element.fr-view';
     internalValue: string;
 
     @Prop({ default: '' })
@@ -98,7 +98,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     }
 
     protected getScrollableContainer(): string | undefined {
-        if (this.scrollableContainer && document.querySelector(this.scrollableContainer)) {
+        if (this.scrollableContainer) {
             return this.scrollableContainer;
         }
     }

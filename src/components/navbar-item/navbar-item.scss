@@ -186,13 +186,13 @@
     $m-navbar-item--min-width: 60px;
 
     .m-navbar-item {
-        &:first-child {
+        &:first-child:not(:last-child) {
             .m-navbar-item__contents::before {
                 left: calc(50% - #{$m-spacing});
             }
         }
 
-        &:last-child {
+        &:last-child:not(:first-child) {
             .m-navbar-item__contents::before {
                 left: calc(50% + #{$m-spacing});
             }

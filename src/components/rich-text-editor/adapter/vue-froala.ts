@@ -83,6 +83,8 @@ enum FroalaElements {
     protected isDirty: boolean = false;
     protected wordObserver: MutationObserver;
 
+    private clickedInsideEditor: boolean = false;
+
     @Watch('value')
     public refreshValue(): void {
         this.model = this.value;
@@ -201,6 +203,7 @@ enum FroalaElements {
 
     protected destroyed(): void {
         window.removeEventListener('resize', this.onResize);
+        this.unfixMobileFullscreen();
     }
 
     protected beforeDestroy(): void {
@@ -267,11 +270,6 @@ enum FroalaElements {
                     this.hideToolbar();
                     window.addEventListener('resize', this.onResize);
                     this.htmlSet();
-
-                    // auto fullscreen on mobiles - uncomment when https://github.com/froala/wysiwyg-editor/issues/2988 is resolved
-                    // if (editor.helpers.isMobile()) {
-                    //     editor.fullscreen.toggle();
-                    // }
                 },
                 [froalaEvents.ContentChanged]: (_e, _editor) => {
                     this.updateModel();
@@ -279,6 +277,8 @@ enum FroalaElements {
                 [froalaEvents.Focus]: (_e, editor) => {
                     if (!this.disabled) {
                         window.removeEventListener('resize', this.onResize);
+                        this.fixMobileFullscreen();
+
                         this.isDirty = false;
 
                         this.$emit('focus');
@@ -287,7 +287,7 @@ enum FroalaElements {
                     }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
-                    if (!editor.fullscreen.isActive()) {
+                    if (!editor.fullscreen.isActive() && !this.clickedInsideEditor) {
                         // this timeout is used to avoid the "undetected click" bug
                         // that happens sometimes due to the hideToolbar animation
                         setTimeout(() => {
@@ -297,6 +297,7 @@ enum FroalaElements {
 
                             this.isFocused = false;
                             this.isDirty = false;
+                            this.unfixMobileFullscreen();
                         }, 100);
                     }
                 },
@@ -340,6 +341,27 @@ enum FroalaElements {
         if (this._$element.froalaEditor) {
             this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
         }
+    }
+
+    private fixMobileFullscreen(): void {
+        this.clickedInsideEditor = false;
+
+        this.unfixMobileFullscreen();
+        window.addEventListener('touchstart', this.blockMobileBlur, true);
+        window.addEventListener('touchend', this.unblockMobileBlur, false);
+    }
+
+    private unfixMobileFullscreen(): void {
+        window.addEventListener('touchstart', this.blockMobileBlur, true);
+        window.addEventListener('touchend', this.unblockMobileBlur, false);
+    }
+
+    private blockMobileBlur(event: Event): void {
+        this.clickedInsideEditor = this.$parent.$el.contains(event.target as HTMLElement);
+    }
+
+    private unblockMobileBlur(): void {
+        this.clickedInsideEditor = false;
     }
 
     private dismissWordPasteModal(): void {

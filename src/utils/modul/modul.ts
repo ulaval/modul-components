@@ -226,7 +226,9 @@ export class Modul {
                 this.scrollActive = true;
 
                 setTimeout(() => {
-                    document.body.removeChild(b);
+                    if (b && b.parentNode) {
+                        b.parentNode.removeChild(b);
+                    }
                     // if (!this.backdropElement) {
                     //     this.activeScrollBody();
                     // }

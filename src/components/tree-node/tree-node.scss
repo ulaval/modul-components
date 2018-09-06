@@ -7,6 +7,36 @@ $m-tree-node--line-width: 22px;
 
 .m-tree-node {
     color: $m-color--ul-blue;
+    margin-left: $m-tree-node--line-width;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: -$m-tree-node--line-width;
+        top: $m-tree-node--height / 2 - 1;
+        width: $m-tree-node--line-width;
+        height: 1px;
+        background-color: $m-color--interactive;
+    }
+
+    &.m--is-disabled::before {
+        background-color: $m-color--disabled;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: -$m-tree-node--line-width;
+        width: 1px;
+        top: $m-tree-node--height / 2;
+        bottom: -$m-tree-node--height / 2 - $m-margin;
+        background-color: $m-color--interactive;
+    }
+
+    &:last-child::after {
+        content: none;
+    }
 
     & + &,
     &__children > & {
@@ -59,33 +89,14 @@ $m-tree-node--line-width: 22px;
 
     &__child {
         margin-left: $m-tree-node--child-indentation;
-        position: relative;
-
-        &::before {
-            content: "";
-            position: absolute;
-            left: -$m-tree-node--line-width;
-            top: $m-tree-node--height / 2 - 1;
-            width: $m-tree-node--line-width;
-            height: 1px;
-            background-color: $m-color--interactive;
-        }
-
-        &.m--is-disabled::before {
-            background-color: $m-color--disabled;
-        }
 
         &::after {
-            content: "";
-            position: absolute;
-            left: -$m-tree-node--line-width;
-            width: 1px;
             top: -$m-margin;
             height: $m-tree-node--height + $m-margin;
-            background-color: $m-color--interactive;
         }
 
         &:last-child::after {
+            content: "";
             height: $m-tree-node--height / 2 + $m-margin;
         }
 
@@ -94,5 +105,13 @@ $m-tree-node--line-width: 22px;
             margin-top: $m-margin;
             color: $m-color--text;
         }
+    }
+}
+
+.m-tree__content > .m-tree-node:only-child {
+    margin-left: 0;
+
+    &::before {
+        content: none;
     }
 }
