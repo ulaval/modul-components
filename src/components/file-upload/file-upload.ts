@@ -65,6 +65,18 @@ export class MFileUpload extends ModulVue {
     private tooltipDelete: string = this.$i18n.translate('m-file-upload:deleteUploadedFile');
 
     private created(): void {
+        this.updateValidationOptions();
+    }
+
+    private destroyed(): void {
+        this.$file.destroy(this.storeName);
+    }
+
+    @Watch('allowedExtensions')
+    @Watch('rejectedExtensions')
+    @Watch('maxSizeKb')
+    @Watch('maxFiles')
+    private updateValidationOptions(): void {
         this.$file.setValidationOptions(
             {
                 allowedExtensions: this.allowedExtensions,
@@ -74,10 +86,6 @@ export class MFileUpload extends ModulVue {
             },
             this.storeName
         );
-    }
-
-    private destroyed(): void {
-        this.$file.destroy(this.storeName);
     }
 
     @Watch('open')
