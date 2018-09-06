@@ -4,26 +4,30 @@
     <p class="m-u--margin-bottom">
         Allowed/Rejected extensions
     </p>
-        <p>
-            <!-- <m-file-upload><button>No extension specified</button></m-file-upload> -->
+        <!-- <p>
+            <m-file-upload><button>No extension specified</button></m-file-upload>
         </p>
         <p>
-            <!-- <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']"><button>Only allowed extensions</button></m-file-upload> -->
+            <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']"><button>Only allowed extensions</button></m-file-upload>
         </p>
         <p>
-            <!-- <m-file-upload :rejected-extensions="['jpg', 'jpeg', 'png']"><button>Only rejected extensions</button></m-file-upload> -->
+            <m-file-upload :rejected-extensions="['jpg', 'jpeg', 'png']"><button>Only rejected extensions</button></m-file-upload>
+        </p> -->
+        <p>
+            <m-file-upload :rejected-extensions="['jpg', 'jpeg']" :allowed-extensions="['jpg', 'jpeg', 'png', 'mp4']"><button>Allowed and rejected extensions</button></m-file-upload>
         </p>
         <p>
-            <!-- <m-file-upload :rejected-extensions="['jpg']" :allowed-extensions="['jpg', 'jpeg', 'png', 'mp4']"><button>Allowed and rejected extensions</button></m-file-upload> -->
-        </p>
-        <p>
-            <m-file-upload :rejected-extensions="['jpg']" :allowed-extensions="[]"><button>Empty allowed</button></m-file-upload>
+            <!-- <m-file-upload :rejected-extensions="['jpg']" :allowed-extensions="[]"><button>Allowed extensions defined but empty</button></m-file-upload> -->
         </p>
     <p>
-    <p class="m-u--margin-bottom">
-        Single/Multiple file(s)/upload
+    <!-- <p class="m-u--margin-bottom">
+        Single/Multiple file(s) upload
     </p>
-        <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']" :max-files="1"><!-- Test case --><button>Single file upload</button></m-file-upload>
-        <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']" :max-files="5"><!-- Test case --><button>Multiple files upload</button></m-file-upload>
-    </p>
+        <p>
+            <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']" :max-files="1"><button>Single file upload</button></m-file-upload>
+        </p>
+        <p>
+            <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']" :max-files="5"><button>Multiple files upload</button></m-file-upload>
+        </p>
+    </p> -->
 </div>
