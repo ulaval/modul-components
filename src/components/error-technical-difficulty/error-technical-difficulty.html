@@ -6,8 +6,8 @@
         <p>
             <m-i18n k="m-error-technical-difficulty:date.primary" ></m-i18n>
             <strong>{{formattedDate}}</strong>
-            <m-i18n k="m-error-technical-difficulty:date.secondary" >
-            </m-i18n><strong>{{formattedTime}}</strong>
+            <m-i18n k="m-error-technical-difficulty:date.secondary" ></m-i18n>
+            <strong>{{formattedTime}}</strong>
         </p>
         <m-panel  class="m-error-technical-difficulty__stacktrace" :padding="false" v-if="propStacktrace">
             <pre>{{error.stack}}</pre>
