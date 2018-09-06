@@ -16,6 +16,7 @@ script:
   - npm run buildWebpack
   - npm run unitall -- -w 1
   - npm run tslint
+  - npm pack
 
 cache:
   directories:

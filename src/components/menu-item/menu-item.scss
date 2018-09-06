@@ -84,6 +84,10 @@
         > .m-menu-item__link {
             color: $m-color--white;
             font-weight: $m-font-weight--black;
+
+            > .m-menu-item__icon {
+                stroke-width: 1.5px;
+            }
         }
     }
 
@@ -158,6 +162,10 @@
         padding: $m-spacing--s $m-spacing;
         min-height: $m-touch-size;
         outline: none;
+    }
+
+    &__label {
+        flex: 1 1 auto;
     }
 
     &__group {

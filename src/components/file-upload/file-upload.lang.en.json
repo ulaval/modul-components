@@ -1,7 +1,9 @@
 {
     "m-file-upload": {
-        "header-title": "Upload files",
-        "title": "Drop files here or",
+        "header-title": "Upload file",
+        "header-title.p": "Upload files",
+        "title": "Drop file",
+        "title.p": "Drop files",
         "format": "Accepted format",
         "format.p": "Accepted formats",
         "import": "Uploading",
@@ -14,6 +16,8 @@
         "extensionFileMsg": "The file extension is not accepted.",
         "maxSizeMsg": "File is denied because its size exceeds the allowable limit",
         "maxNumberMsg": "The maximum number of files that can be added simultaneously is reached",
-        "errorMsg": "An error occurred during the upload."
+        "errorMsg": "An error occurred during the upload.",
+        "cancelFileUpload": "Cancel upload",
+        "deleteUploadedFile": "Delete uploaded file"
     }
 }

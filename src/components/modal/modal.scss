@@ -1,5 +1,6 @@
 @import '../../styles/abstracts/variables';
 $m-modal--max-width: 380px !default;
+$m-modal--max-width--l: 500px !default;
 
 .m-modal {
     display: inline-block;
@@ -17,17 +18,15 @@ $m-modal--max-width: 380px !default;
         outline: none;
         min-width: $m-min-width;
         overflow: auto;
+        padding: $m-spacing--l;
 
         @include m-is-ie() {
             display: block;
         }
 
-        @media screen and (min-width: $m-mq--min--s) {
-            padding: $m-padding--l;
-        }
-
-        @media screen and (max-width: $m-mq--max--s) {
-            padding: $m-padding;
+        @media (max-width: $m-mq--max--s) {
+            padding-left: $m-spacing--s;
+            padding-right: $m-spacing--s;
         }
 
         &.m--is-enter-active,
@@ -54,15 +53,16 @@ $m-modal--max-width: 380px !default;
         border-radius: $m-border-radius;
         cursor: auto;
         width: 100%;
+        max-width: $m-modal--max-width;
         background: $m-color--white;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
 
-        @media screen and (min-width: #{$m-modal--max-width + $m-padding * 2}) {
-            width: $m-modal--max-width;
-        }
-
         @include m-is-ie() {
             margin: 60px auto;
+        }
+
+        &.m--has-width-large {
+            max-width: $m-modal--max-width--l;
         }
     }
 
@@ -82,10 +82,20 @@ $m-modal--max-width: 380px !default;
         }
     }
 
+    &__body,
+    &__footer {
+        &:not(.m--no-padding) {
+            padding: $m-spacing--l $m-spacing;
+
+            @media (min-width: $m-mq--min--s) {
+                padding: $m-spacing--l $m-spacing--m;
+            }
+        }
+    }
+
     &__header {
         width: 100%;
-        padding: $m-margin $m-padding;
-        border-bottom: 1px solid $m-color--grey;
+        border-bottom: 1px solid $m-color--border;
 
         h1,
         h2,
@@ -94,14 +104,21 @@ $m-modal--max-width: 380px !default;
         h5,
         h6 {
             margin: 0;
-            font-size: $m-font-size--h3;
+            font-size: $m-font-size--h4;
             font-weight: $m-font-weight--bold;
+        }
+
+        &:not(.m--no-padding) {
+            padding: $m-spacing $m-spacing;
+
+            @media (min-width: $m-mq--min--s) {
+                padding: $m-spacing $m-spacing--m;
+            }
         }
     }
 
     &__body {
         text-align: center;
-        padding: $m-padding;
 
         @include m-scrollbar();
 
@@ -112,7 +129,6 @@ $m-modal--max-width: 380px !default;
 
     &__footer {
         width: 100%;
-        padding: $m-padding;
         display: inline-flex;
         justify-content: center;
         flex-direction: column;

@@ -49,8 +49,7 @@
         }
     }
 
-    // mode mobile
-    &.m--is-eq-max-s {
+    &.m--is-mobile {
         /deep/ .fr-command {
             display: none;
 
@@ -66,17 +65,22 @@
             }
         }
 
-        /deep/ .fr-placeholder {
-            padding-top: 50px !important;
+        /deep/ .fr-separator {
+            display: none;
         }
 
-        /deep/ .fr-box.fr-basic .fr-element {
-            padding-top: 50px;
+        &.m--is-focus {
+            /deep/ .fr-placeholder {
+                padding-top: 50px !important;
+            }
+
+            /deep/ .fr-box.fr-basic .fr-element {
+                padding-top: 50px;
+            }
         }
     }
 
-    // mode desktop
-    &.m--is-eq-min-s {
+    &.m--is-desktop {
         /deep/ .fr-command {
             display: inline-block;
 

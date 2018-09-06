@@ -106,6 +106,7 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
                 this.menuRoot.updateValue(this.value);
                 this.menuRoot.onClick(event, this.value);
             }
+            this.$emit('click', event);
         }
     }
 }
