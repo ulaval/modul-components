@@ -229,7 +229,7 @@ export class MFileUpload extends ModulVue {
         return this.$i18n.translate('m-file-upload:header-title', {}, this.maxFiles);
     }
 
-    private get fileExtensions(): string {
+    private get fileAllowedExtensions(): string {
         return this.allowedExtensions ? this.allowedExtensions.join(', ') : '';
     }
 

@@ -8,20 +8,19 @@
 
         <div class="m-u--margin-bottom">
             <h5>Allowed extensions only</h5>
-            <span>Allowed extensions: jpg, jpeg, png</span>
+            <p>Allowed extensions: jpg, jpeg, png</p>
             <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']"><button>File upload</button></m-file-upload>
         </div>
 
         <div class="m-u--margin-bottom">
             <h5>Rejected extensions only</h5>
-            <span>Rejected extensions: jpg, jpeg, png</span>
+            <p>Rejected extensions: jpg, jpeg, png</p>
             <m-file-upload :rejected-extensions="['jpg', 'jpeg', 'png']"><button>File upload</button></m-file-upload>
         </div>
 
         <div class="m-u--margin-bottom">
             <h5>Allowed and rejected extensions</h5>
-            <span>Allowed extensions: jpg, jpeg, png, mp4</span>
-            <br>
+            <p>Allowed extensions: jpg, jpeg, png, mp4</p>
             <span>Rejected extensions: jpg, jpeg</span>
             <m-file-upload :rejected-extensions="['jpg', 'jpeg']" :allowed-extensions="['jpg', 'jpeg', 'png', 'mp4']"><button>File upload</button></m-file-upload>
         </div>
