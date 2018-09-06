@@ -168,6 +168,7 @@ export class MFileUpload extends ModulVue {
     private onOpen(): void {
         this.$emit('open');
         this.propOpen = true;
+        this.updateValidationOptions();
         // We need 2 nextTick to be able to have the wrap element in the DOM - MODUL-118
         Vue.nextTick(() => {
             Vue.nextTick(() => {
