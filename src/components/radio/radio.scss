@@ -102,12 +102,6 @@ $m-radio--color-disabled: $m-color--disabled !default;
                 &__input {
                     border-color: $m-color--disabled;
                 }
-
-                &__label {
-                    color: $m-color--disabled;
-                    background: $m-color--white;
-                    border-color: $m-color--disabled;
-                }
             }
 
             &.m--is-checked {

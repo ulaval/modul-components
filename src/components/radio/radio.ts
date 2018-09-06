@@ -74,6 +74,10 @@ export class MRadio extends ModulVue {
     public radioVerticalAlign: MRadioVerticalAlignement;
     @Prop()
     public radioMarginTop: string;
+    @Prop({
+        default: false
+    })
+    public readOnly: boolean;
 
     // ----- For Button Group -----
     @Prop()
@@ -109,7 +113,7 @@ export class MRadio extends ModulVue {
 
     public get propDisabled(): boolean {
         let groupDisabled: boolean = this.isGroup() ? this.parentGroup.stateIsDisabled : false;
-        return groupDisabled || this.as<InputState>().isDisabled;
+        return groupDisabled || this.as<InputState>().isDisabled || this.readOnly;
     }
 
     public get propError(): boolean {
