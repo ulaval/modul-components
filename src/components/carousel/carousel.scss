@@ -8,4 +8,8 @@
     overflow: hidden;
     perspective: 1000px;
     margin: 0;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }
