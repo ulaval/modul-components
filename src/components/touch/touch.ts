@@ -90,8 +90,6 @@ export class MTouch extends Vue {
             numInputs: 1,
             maxDelay: 300
         }), (event: Event) => {
-            // tslint:disable-next-line:no-console
-            console.log('tapped');
             this.$emit('tap', event);
         });
     }
