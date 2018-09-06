@@ -67,6 +67,7 @@ describe('MFileUpload', () => {
     describe('validation', () => {
         const validationOpts: MFileValidationOptions = {
             allowedExtensions: ['jpg', 'png', 'mp4'],
+            rejectedExtensions: ['mov'],
             maxSizeKb: 1,
             maxFiles: 5
         };
