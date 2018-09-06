@@ -39,12 +39,12 @@ export enum MErrorTemplateImageSize {
 export class MErrorTemplate extends ModulVue {
 
     @Prop({
-        default: MMessageState.Error,
+        default: 'error',
         validator: value =>
             value === MMessageState.Information ||
-            value === MMessageState.Error ||
             value === MMessageState.Warning ||
-            value === MMessageState.Confirmation
+            value === MMessageState.Confirmation ||
+            value === MMessageState.Error
     })
     public state: string;
 
