@@ -29,6 +29,11 @@ export enum MErrorTemplateSkin {
     Light = 'light'
 }
 
+export enum MErrorTemplateImageSize {
+    Default = '130px',
+    Small = '76px'
+}
+
 @WithRender
 @Component
 export class MErrorTemplate extends ModulVue {
@@ -58,6 +63,9 @@ export class MErrorTemplate extends ModulVue {
     public svgName: string;
 
     @Prop()
+    public imageSize: string;
+
+    @Prop()
     public title: string;
 
     @Prop({ default: () => [] })
@@ -65,9 +73,6 @@ export class MErrorTemplate extends ModulVue {
 
     @Prop({ default: () => [] })
     public links: Link[];
-
-    @Prop({ default: '130px' })
-    public imageSize: string;
 
     public svg: string;
 
@@ -85,8 +90,15 @@ export class MErrorTemplate extends ModulVue {
 
     public get styleObject(): { [name: string ]: string } {
         return {
-            width: this.imageSize
+            width: this.propImageSize
         };
+    }
+
+    public get propImageSize(): string {
+        if (this.imageSize) {
+            return this.imageSize;
+        }
+        return this.isSkinLight ? MErrorTemplateImageSize.Small : MErrorTemplateImageSize.Default;
     }
 
     public isTargetExternal(isExternal: boolean): string {

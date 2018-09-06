@@ -35,21 +35,43 @@ $m-error-template--shadow-height: 5px;
 
     &.m--is-skin-default {
         .m-error-template {
-            &__icon-container::before {
-                right: 0;
-                left: 0;
-                transform: translate3d(0, -50%, 0);
+            &__title {
+                font-size: $m-font-size--h3;
+            }
+
+            &__icon-container {
+                &::before {
+                    right: 0;
+                    left: 0;
+                    transform: translate3d(0, -50%, 0);
+                    height: 80px; // Magic number
+                }
+
+                &::after {
+                    width: $m-error-template--shadow-width;
+                }
             }
         }
     }
 
     &.m--is-skin-light {
         .m-error-template {
-            &__icon-container::before {
-                left: 50%;
-                transform: translate3d(-50%, -50%, 0);
-                width: 100%;
-                max-width: 220px; //Magic number
+            &__title {
+                font-size: $m-font-size--h4;
+            }
+
+            &__icon-container {
+                &::before {
+                    left: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                    width: 100%;
+                    max-width: 140px; //Magic number
+                    height: 48px; // Magic number
+                }
+
+                &::after {
+                    width: $m-error-template--shadow-width/2;
+                }
             }
         }
     }
@@ -61,7 +83,6 @@ $m-error-template--shadow-height: 5px;
     }
 
     &__title {
-        font-size: $m-font-size--h3;
         text-align: center;
         font-weight: $m-font-weight--black;
         margin: 0;
@@ -73,7 +94,6 @@ $m-error-template--shadow-height: 5px;
 
     &__icon-container {
         position: relative;
-        min-height: 130px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -85,12 +105,10 @@ $m-error-template--shadow-height: 5px;
             z-index: 0;
             content: '';
             display: block;
-            height: 80px; // Magic number
         }
 
         &::after {
             content: '';
-            width: $m-error-template--shadow-width;
             height: $m-error-template--shadow-height;
             border-radius: 50%;
             background: $m-color--grey-lighter;
