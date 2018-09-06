@@ -75,6 +75,7 @@ export const TEMPLATE_NAME: string = 'm-template';
 export const TEXTAREA_NAME: string = 'm-textarea';
 export const TEXTFIELD_NAME: string = 'm-textfield';
 export const TIMEPICKER_NAME: string = 'm-timepicker';
+export const TOUCH_NAME: string = 'm-touch';
 export const TOOLTIP_NAME: string = 'm-tooltip';
 export const TREE_NAME: string = 'm-tree';
 export const TREE_ICON_NAME: string = 'm-tree-icon';

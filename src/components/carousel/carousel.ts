@@ -2,8 +2,9 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
-import carouselItem, { MCarouselItem } from '../carousel-item/carousel-item';
+import { MCarouselItem } from '../carousel-item/carousel-item';
 import { CAROUSEL_NAME } from '../component-names';
+import TouchPlugin from '../touch/touch';
 import WithRender from './carousel.html?style=./carousel.scss';
 
 @WithRender
@@ -24,6 +25,7 @@ export class MCarousel extends Vue {
     private items: MCarouselItem[] = [];
     private internalIndex: number = 0;
     private updateInterval: any;
+    private readonly angleThreshold = 20;
 
     public onTap(event: Event): void {
         this.$emit('tap', event);
@@ -153,8 +155,9 @@ export class MCarousel extends Vue {
 }
 
 const CarouselPlugin: PluginObject<any> = {
-    install(v, options): void {
+    install(v): void {
         v.prototype.$log.warn(CAROUSEL_NAME + ' is not ready for production');
+        v.use(TouchPlugin);
         v.component(CAROUSEL_NAME, MCarousel);
     }
 };
