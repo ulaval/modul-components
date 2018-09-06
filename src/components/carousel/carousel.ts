@@ -25,7 +25,6 @@ export class MCarousel extends Vue {
     private items: MCarouselItem[] = [];
     private internalIndex: number = 0;
     private updateInterval: any;
-    private readonly angleThreshold = 20;
 
     public onTap(event: Event): void {
         this.$emit('tap', event);
