@@ -173,10 +173,6 @@ export class MLimitText extends ModulVue {
         this.reduceContent = lastValidContent.replace(this.openLinkOriginal, this.openLink);
     }
 
-    private get rawhtml(): string {
-        return this.html;
-    }
-
     private get getReduceText(): string {
         return this.reduceContent;
     }
