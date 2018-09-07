@@ -405,7 +405,9 @@ enum FroalaElements {
 
     private adjusteToolbarPosition(): void {
         const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
-        toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
+        if (toolBar) {
+            toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
+        }
     }
 
     private updateValue(): void {
