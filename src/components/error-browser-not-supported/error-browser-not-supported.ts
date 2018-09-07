@@ -8,8 +8,8 @@ import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_BROWSER_NOT_SUPPORTED_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
 import { MMessageState } from '../message/message';
-import PageMessagePlugin, { Link } from '../page-message/page-message';
 import WithRender from './error-browser-not-supported.html';
 
 @WithRender
@@ -52,7 +52,7 @@ const ErrorBrowserNotSupported: PluginObject<any> = {
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.use(MediaQueriesPlugin);
-        v.use(PageMessagePlugin);
+        v.use(MessagePagePlugin);
         v.component(ERROR_BROWSER_NOT_SUPPORTED_NAME, MErrorBrowserNotSupported);
     }
 };

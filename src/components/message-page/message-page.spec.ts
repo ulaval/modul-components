@@ -4,9 +4,9 @@ import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import { ICON_NAME, LINK_NAME } from '../component-names';
 import MessagePlugin, { MMessageState } from '../message/message';
-import PageMessagePlugin, { Link, MPageMessage } from './page-message';
+import MessagePagePlugin, { Link, MMessagePage } from './message-page';
 
-let wrapper: Wrapper<MPageMessage>;
+let wrapper: Wrapper<MMessagePage>;
 
 const A_VALID_STATE: string = MMessageState.Error;
 const A_VALID_ICON_NAME: string = 'iconName';
@@ -35,7 +35,7 @@ const getStubs: any = () => {
 };
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MPageMessage, {
+    wrapper = shallow(MMessagePage, {
         stubs: getStubs(),
         propsData: {
             state: state,
@@ -54,7 +54,7 @@ beforeEach(() => {
     state = A_VALID_STATE;
 });
 
-describe(`page-message fonctionnality tests`, () => {
+describe(`message-page fonctionnality tests`, () => {
 
     describe(`Given state information`, () => {
         it(`Then  class m--is-state-information present`, () => {
@@ -154,10 +154,10 @@ describe(`page-message fonctionnality tests`, () => {
     });
 });
 
-describe(`page-message integration tests`, () => {
+describe(`message-page integration tests`, () => {
     describe(`Given an error with all props and slots initialized`, () => {
         it(`Then should render properly`, async () => {
-            wrapper = mount(MPageMessage, {
+            wrapper = mount(MMessagePage, {
                 stubs: getStubs(),
                 propsData: {
                     state: MMessageState.Warning,

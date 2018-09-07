@@ -6,8 +6,8 @@ import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_ACCESS_DENIED_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
 import { MMessageState } from '../message/message';
-import PageMessagePlugin, { Link } from '../page-message/page-message';
 import WithRender from './error-access-denied.html';
 
 @WithRender
@@ -38,7 +38,7 @@ const ErrorAccessDeniedPlugin: PluginObject<any> = {
         v.prototype.$log.debug(ERROR_ACCESS_DENIED_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(LinkPlugin);
-        v.use(PageMessagePlugin);
+        v.use(MessagePagePlugin);
         v.component(ERROR_ACCESS_DENIED_NAME, MErrorAccessDenied);
     }
 };

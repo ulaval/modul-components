@@ -8,8 +8,8 @@ import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
 import MessagePlugin, { MMessageState } from '../message/message';
-import PageMessagePlugin, { Link } from '../page-message/page-message';
 import PanelPlugin from '../panel/panel';
 import WithRender from './error-technical-difficulty.html?style=./error-technical-difficulty.scss';
 
@@ -99,7 +99,7 @@ const ErrorTechnicalDifficultyPlugin: PluginObject<any> = {
         v.use(LinkPlugin);
         v.use(MessagePlugin);
         v.use(PanelPlugin);
-        v.use(PageMessagePlugin);
+        v.use(MessagePagePlugin);
         v.component(ERROR_TECHNICAL_DIFFICULTY_NAME, MErrorTechnicalDifficulty);
     }
 };

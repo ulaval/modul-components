@@ -2,7 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { ERROR_COOKIES_NOT_SUPPORTED_NAME } from '../component-names';
-import { Link } from '../page-message/page-message';
+import { Link } from '../message-page/message-page';
 import WithRender from './error-cookies-not-supported.sandbox.html';
 
 @WithRender

@@ -6,7 +6,7 @@ import { MESSAGE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
-import PageMessagePlugin, { MPageMessageSkin } from '../page-message/page-message';
+import MessagePagePlugin, { MMessagePageSkin } from '../message-page/message-page';
 import WithRender from './message.html?style=./message.scss';
 
 export enum MMessageState {
@@ -121,7 +121,7 @@ export class MMessage extends Vue {
     }
 
     private get skinPageValue(): string {
-        return this.isSkinPage ? MPageMessageSkin.Default : MPageMessageSkin.Light;
+        return this.isSkinPage ? MMessagePageSkin.Default : MMessagePageSkin.Light;
     }
 
     private get isSkinPage(): boolean {
@@ -158,7 +158,7 @@ const MessagePlugin: PluginObject<any> = {
         v.prototype.$log.debug(MESSAGE_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(IconButtonPlugin);
-        v.use(PageMessagePlugin);
+        v.use(MessagePagePlugin);
         v.use(I18nPlugin);
         v.component(MESSAGE_NAME, MMessage);
     }

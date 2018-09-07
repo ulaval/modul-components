@@ -4,11 +4,11 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
-import { PAGE_MESSAGE_NAME } from '../component-names';
+import { MESSAGE_PAGE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import { MMessageState } from '../message/message';
-import WithRender from './page-message.html?style=./page-message.scss';
+import WithRender from './message-page.html?style=./message-page.scss';
 
 /**
  * Utility class to manage the properties relatied to the link displayed in the error pages.
@@ -24,19 +24,19 @@ export class Link {
     }
 }
 
-export enum MPageMessageSkin {
+export enum MMessagePageSkin {
     Default = 'default',
     Light = 'light'
 }
 
-export enum MPageMessageImageSize {
+export enum MMessagePageImageSize {
     Default = '130px',
     Small = '76px'
 }
 
 @WithRender
 @Component
-export class MPageMessage extends ModulVue {
+export class MMessagePage extends ModulVue {
 
     @Prop({
         default: 'error',
@@ -49,10 +49,10 @@ export class MPageMessage extends ModulVue {
     public state: string;
 
     @Prop({
-        default: MPageMessageSkin.Default,
+        default: MMessagePageSkin.Default,
         validator: value =>
-            value === MPageMessageSkin.Default ||
-            value === MPageMessageSkin.Light
+            value === MMessagePageSkin.Default ||
+            value === MMessagePageSkin.Light
     })
     public skin: string;
 
@@ -98,7 +98,7 @@ export class MPageMessage extends ModulVue {
         if (this.imageSize) {
             return this.imageSize;
         }
-        return this.isSkinLight ? MPageMessageImageSize.Small : MPageMessageImageSize.Default;
+        return this.isSkinLight ? MMessagePageImageSize.Small : MMessagePageImageSize.Default;
     }
 
     public isTargetExternal(isExternal: boolean): string {
@@ -120,11 +120,11 @@ export class MPageMessage extends ModulVue {
     }
 
     private get isSkinDefault(): boolean {
-        return this.skin === MPageMessageSkin.Default;
+        return this.skin === MMessagePageSkin.Default;
     }
 
     private get isSkinLight(): boolean {
-        return this.skin === MPageMessageSkin.Light;
+        return this.skin === MMessagePageSkin.Light;
     }
 
     private get isStateInformation(): boolean {
@@ -161,14 +161,14 @@ export class MPageMessage extends ModulVue {
     }
 }
 
-const PageMessagePlugin: PluginObject<any> = {
+const MessagePagePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(PAGE_MESSAGE_NAME, 'plugin.install');
+        v.prototype.$log.debug(MESSAGE_PAGE_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);
-        v.component(PAGE_MESSAGE_NAME, MPageMessage);
+        v.component(MESSAGE_PAGE_NAME, MMessagePage);
     }
 };
 
-export default PageMessagePlugin;
+export default MessagePagePlugin;

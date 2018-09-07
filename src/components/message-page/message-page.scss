@@ -1,10 +1,10 @@
 @import '../../styles/abstracts/variables';
 
-$m-page-message--shadow-width: 150px;
-$m-page-message--shadow-height: 5px;
+$m-message-page--shadow-width: 150px;
+$m-message-page--shadow-height: 5px;
 
-@mixin m-page-message-state($color, $color-background) {
-    .m-page-message {
+@mixin m-message-page-state($color, $color-background) {
+    .m-message-page {
         &__title,
         &__icon {
             color: $color;
@@ -16,25 +16,25 @@ $m-page-message--shadow-height: 5px;
     }
 }
 
-.m-page-message {
+.m-message-page {
     &.m--is-state-confirmation {
-        @include m-page-message-state($m-color--success, $m-color--success-lightest);
+        @include m-message-page-state($m-color--success, $m-color--success-lightest);
     }
 
     &.m--is-state-information {
-        @include m-page-message-state($m-color--interactive, $m-color--interactive-lightest);
+        @include m-message-page-state($m-color--interactive, $m-color--interactive-lightest);
     }
 
     &.m--is-state-error {
-        @include m-page-message-state($m-color--error, $m-color--error-lightest);
+        @include m-message-page-state($m-color--error, $m-color--error-lightest);
     }
 
     &.m--is-state-warning {
-        @include m-page-message-state($m-color--warning, $m-color--warning-lightest);
+        @include m-message-page-state($m-color--warning, $m-color--warning-lightest);
     }
 
     &.m--is-skin-default {
-        .m-page-message {
+        .m-message-page {
             &__title {
                 font-size: $m-font-size--h3;
             }
@@ -48,14 +48,14 @@ $m-page-message--shadow-height: 5px;
                 }
 
                 &::after {
-                    width: $m-page-message--shadow-width;
+                    width: $m-message-page--shadow-width;
                 }
             }
         }
     }
 
     &.m--is-skin-light {
-        .m-page-message {
+        .m-message-page {
             &__title {
                 font-size: $m-font-size--h4;
             }
@@ -70,14 +70,14 @@ $m-page-message--shadow-height: 5px;
                 }
 
                 &::after {
-                    width: $m-page-message--shadow-width/2;
+                    width: $m-message-page--shadow-width/2;
                 }
             }
         }
     }
 
     &__header {
-        ~ .m-page-message__body {
+        ~ .m-message-page__body {
             padding-top: $m-spacing;
         }
     }
@@ -87,7 +87,7 @@ $m-page-message--shadow-height: 5px;
         font-weight: $m-font-weight--black;
         margin: 0;
 
-        ~ .m-page-message__icon-container {
+        ~ .m-message-page__icon-container {
             margin-top: $m-spacing;
         }
     }
@@ -101,7 +101,7 @@ $m-page-message--shadow-height: 5px;
 
         &::before {
             position: absolute;
-            top: calc(50% - #{$m-spacing--s - $m-page-message--shadow-height}); // Magic number: align this backgroun with icon
+            top: calc(50% - #{$m-spacing--s - $m-message-page--shadow-height}); // Magic number: align this backgroun with icon
             z-index: 0;
             content: '';
             display: block;
@@ -109,7 +109,7 @@ $m-page-message--shadow-height: 5px;
 
         &::after {
             content: '';
-            height: $m-page-message--shadow-height;
+            height: $m-message-page--shadow-height;
             border-radius: 50%;
             background: $m-color--grey-lighter;
             margin-top: $m-spacing--s;
@@ -149,7 +149,7 @@ $m-page-message--shadow-height: 5px;
             text-align: center;
         }
 
-        + .m-page-message__hints {
+        + .m-message-page__hints {
             margin-top: $m-margin;
         }
     }

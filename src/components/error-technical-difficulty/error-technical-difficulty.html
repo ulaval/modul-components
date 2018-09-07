@@ -1,4 +1,4 @@
-<m-page-message class="m-error-technical-difficulty":state="state" :svg-name="svgName" :title="title" :hints="hints" :links="links">
+<m-message-page class="m-error-technical-difficulty":state="state" :svg-name="svgName" :title="title" :hints="hints" :links="links">
     <m-accordion skin="light" icon-size="small">
         <m-i18n slot="header" k="m-error-technical-difficulty:details"></m-i18n>
         <p class="m-error-technical-difficulty__browser"><strong>{{'m-error-technical-difficulty:browser' | f-m-i18n}}: </strong>{{userAgent}}</p>
@@ -13,4 +13,4 @@
             <pre>{{error.stack}}</pre>
         </m-panel>
     </m-accordion>
-</m-page-message>
+</m-message-page>
