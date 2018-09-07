@@ -3,14 +3,14 @@
     <div style="width: 50%; float:left;">
         <h2>No selection</h2>
         <p>
-            <m-tree :tree="tree" selectionMode="0" ></m-tree>
+            <m-tree :tree="tree" selection-mode="0" ></m-tree>
         </p>
     </div>
 
     <div style="width: 50%; float:left;">
         <h2>Single node selection</h2>
         <p>
-            <m-tree :tree="tree" :selectedNodes="currentFile2" @select="onSelect"></m-tree>
+            <m-tree :tree="tree" :selected-nodes="currentFile2" @select="onSelect"></m-tree>
         </p>
     </div>
 
@@ -20,14 +20,14 @@
     <div style="width: 50%; float:left;">
         <h3>No file selection</h3>
         <p>
-            <m-tree :tree="fileTree" selectionMode="0" :icons="true"></m-tree>
+            <m-tree :tree="fileTree" selection-mode="0" :icons="true"></m-tree>
         </p>
     </div>
 
     <div style="width: 50%; float:left;">
         <h3>Single file selection</h3>
         <p>
-            <m-tree :tree="fileTree" selectionMode="1" :selectedNodes="currentFile" :icons="true" @select="onSelect"></m-tree>
+            <m-tree :tree="fileTree" selection-mode="1" :selected-nodes="currentFile" :icons="true" @select="onSelect"></m-tree>
         </p>
     </div>
 
@@ -55,7 +55,7 @@
         <h3>Selected node not found</h3>
         <span>Console error</span>
         <p>
-            <m-tree :tree="tree" :selectedNodes="wrongCurrentFile" @select="onSelect"></m-tree>
+            <m-tree :tree="tree" :selected-nodes="wrongCurrentFile" @select="onSelect"></m-tree>
         </p>
     </div>
 
