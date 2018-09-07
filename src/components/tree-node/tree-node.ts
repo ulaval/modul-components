@@ -37,7 +37,7 @@ export class MTreeNode extends ModulVue {
     @Prop()
     public hasSibling: boolean;
 
-    private internalOpen: boolean = false;
+    public internalOpen: boolean = false;
 
     public onClick(): void {
         if (this.isFolder) {
