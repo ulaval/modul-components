@@ -33,7 +33,8 @@ enum froalaEvents {
     PasteBeforeCleanup = 'froalaEditor.paste.beforeCleanup',
     PasteAfterCleanup = 'froalaEditor.paste.afterCleanup',
     WordPasteBefore = 'froalaEditor.paste.wordPaste.before',
-    CommandAfter = 'froalaEditor.commands.after'
+    CommandAfter = 'froalaEditor.commands.after',
+    CommandBefore = 'froalaEditor.commands.before'
 }
 
 enum FroalaElements {
@@ -203,7 +204,7 @@ enum FroalaElements {
 
     protected destroyed(): void {
         window.removeEventListener('resize', this.onResize);
-        this.unfixMobileFullscreen();
+        this.unblockMobileBlur();
     }
 
     protected beforeDestroy(): void {
@@ -277,7 +278,7 @@ enum FroalaElements {
                 [froalaEvents.Focus]: (_e, editor) => {
                     if (!this.disabled) {
                         window.removeEventListener('resize', this.onResize);
-                        this.fixMobileFullscreen();
+                        this.unblockMobileBlur();
 
                         this.isDirty = false;
 
@@ -297,7 +298,7 @@ enum FroalaElements {
 
                             this.isFocused = false;
                             this.isDirty = false;
-                            this.unfixMobileFullscreen();
+                            this.unblockMobileBlur();
                         }, 100);
                     }
                 },
@@ -321,8 +322,15 @@ enum FroalaElements {
                         return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                     }
                 },
+                [froalaEvents.CommandBefore]: (_e, _editor, cmd) => {
+                    if (cmd === 'fullscreen') {
+                        this.blockMobileBlur(); // On iphone the input blur when going full screen and become invisible.
+                    }
+                },
                 [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
-                    // write code to be called after a command is called (button clicked, image modified, ...)
+                    if (cmd === 'fullscreen') {
+                        this.unblockMobileBlur();
+                    }
                 },
                 [froalaEvents.WordPasteBefore]: (_e, editor) => {
                     // Scrap this and all associated private methods when https://github.com/froala/wysiwyg-editor/issues/2964 get fixed.
@@ -343,21 +351,8 @@ enum FroalaElements {
         }
     }
 
-    private fixMobileFullscreen(): void {
-        this.clickedInsideEditor = false;
-
-        this.unfixMobileFullscreen();
-        window.addEventListener('touchstart', this.blockMobileBlur, true);
-        window.addEventListener('touchend', this.unblockMobileBlur, false);
-    }
-
-    private unfixMobileFullscreen(): void {
-        window.addEventListener('touchstart', this.blockMobileBlur, true);
-        window.addEventListener('touchend', this.unblockMobileBlur, false);
-    }
-
-    private blockMobileBlur(event: Event): void {
-        this.clickedInsideEditor = this.$parent.$el.contains(event.target as HTMLElement);
+    private blockMobileBlur(): void {
+        this.clickedInsideEditor = true;
     }
 
     private unblockMobileBlur(): void {
