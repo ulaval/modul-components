@@ -83,6 +83,10 @@
                 }
             }
         }
+
+        .fr-sticky-dummy + .fr-sticky-dummy {
+            height: 0 !important; // Fix flicking problem with multiple editors on page and https://github.com/froala/wysiwyg-editor/issues/2818
+        }
     }
 
     /deep/ {
