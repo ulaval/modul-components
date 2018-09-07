@@ -81,7 +81,7 @@ export class MDraggableAllowScroll extends MElementDomPlugin<MDraggableAllowScro
     }
 
     private shouldScroll(event: MouseEvent): boolean {
-        const scrollThreshold: number = 20;
+        const scrollThreshold: number = this.element.offsetHeight;
 
         switch (this.options.scrollDirection) {
             case MDraggableAllowScrollDirection.Top: return event.clientY < scrollThreshold;
