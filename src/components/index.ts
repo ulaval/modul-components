@@ -24,7 +24,6 @@ import ErrorCookiesNotSupported from './error-cookies-not-supported/error-cookie
 import ErrorMessage from './error-message/error-message';
 import ErrorPageNotFoundPlugin from './error-page-not-found/error-page-not-found';
 import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty/error-technical-difficulty';
-import ErrorTemplatePlugin from './error-template/error-template';
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
@@ -50,6 +49,7 @@ import OptionItemArchivePlugin from './option-item/option-item-archive';
 import OptionItemDeletePlugin from './option-item/option-item-delete';
 import OptionItemEditPlugin from './option-item/option-item-edit';
 import OptionPlugin from './option/option';
+import PageMessagePlugin from './page-message/page-message';
 import PageNotFoundPlugin from './page-not-found/page-not-found';
 import PanelPlugin from './panel/panel';
 import PhoneNumberPlugin from './phone-number/phone-number';
@@ -117,7 +117,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ErrorMessage);
         Vue.use(ErrorPageNotFoundPlugin);
         Vue.use(ErrorTechnicalDifficultyPlugin);
-        Vue.use(ErrorTemplatePlugin);
+        Vue.use(PageMessagePlugin);
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
         Vue.use(FlexTemplatePlugin);

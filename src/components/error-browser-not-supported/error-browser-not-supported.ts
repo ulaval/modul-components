@@ -6,10 +6,10 @@ import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_BROWSER_NOT_SUPPORTED_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import { MMessageState } from '../message/message';
+import PageMessagePlugin, { Link } from '../page-message/page-message';
 import WithRender from './error-browser-not-supported.html';
 
 @WithRender
@@ -52,7 +52,7 @@ const ErrorBrowserNotSupported: PluginObject<any> = {
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.use(MediaQueriesPlugin);
-        v.use(ErrorTemplatePlugin);
+        v.use(PageMessagePlugin);
         v.component(ERROR_BROWSER_NOT_SUPPORTED_NAME, MErrorBrowserNotSupported);
     }
 };

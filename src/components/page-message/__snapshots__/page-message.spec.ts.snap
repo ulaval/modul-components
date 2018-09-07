@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`page-message integration tests Given an error with all props and slots initialized Then should render properly 1`] = `
+<article class="m-page-message m--is-state-warning m--is-skin-default">
+    <header class="m-page-message__header">
+        <h2 class="m-page-message__title">An error title.</h2>
+        <div aria-hidden="true" class="m-page-message__icon-container"><span name="iconName" size="130px" class="m-page-message__icon">Icone : iconName</span></div>
+    </header>
+    <div class="m-page-message__body">
+        <p class="m-page-message__hints">a hint</p>
+        <p class="m-page-message__hints">another hint</p>
+        <div class="m-page-message__details">
+            <div id="theSlotId">The slot content</div>
+        </div>
+        <ul class="m-page-message__links">
+            <li>
+                <a icon-name="m-svg__chevron--right" mode="link" url="an Url" target="" class="m-page-message__link">a link</a>
+            </li>
+            <li>
+                <a icon-name="m-svg__chevron--right" mode="link" url="another Url" target="" class="m-page-message__link">another link</a>
+            </li>
+        </ul>
+    </div>
+</article>
+`;

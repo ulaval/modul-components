@@ -1,8 +1,8 @@
 import { shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import { ERROR_TEMPLATE_NAME } from '../component-names';
-import { Link } from '../error-template/error-template';
+import { PAGE_MESSAGE_NAME } from '../component-names';
+import { Link } from '../page-message/page-message';
 import { MErrorBrowserNotSupported } from './error-browser-not-supported';
 
 let wrapper: Wrapper<MErrorBrowserNotSupported>;
@@ -15,7 +15,7 @@ const A_LINK_MOBILE: Link = new Link('aLabel-Mobile', 'anUrl');
 
 const getStubs: any = () => {
     return {
-        [ERROR_TEMPLATE_NAME]: '<div><slot /></div>'
+        [PAGE_MESSAGE_NAME]: '<div><slot /></div>'
     };
 };
 

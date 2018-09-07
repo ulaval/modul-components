@@ -4,11 +4,11 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
-import { ERROR_TEMPLATE_NAME } from '../component-names';
+import { PAGE_MESSAGE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import { MMessageState } from '../message/message';
-import WithRender from './error-template.html?style=./error-template.scss';
+import WithRender from './page-message.html?style=./page-message.scss';
 
 /**
  * Utility class to manage the properties relatied to the link displayed in the error pages.
@@ -24,19 +24,19 @@ export class Link {
     }
 }
 
-export enum MErrorTemplateSkin {
+export enum MPageMessageSkin {
     Default = 'default',
     Light = 'light'
 }
 
-export enum MErrorTemplateImageSize {
+export enum MPageMessageImageSize {
     Default = '130px',
     Small = '76px'
 }
 
 @WithRender
 @Component
-export class MErrorTemplate extends ModulVue {
+export class MPageMessage extends ModulVue {
 
     @Prop({
         default: 'error',
@@ -49,10 +49,10 @@ export class MErrorTemplate extends ModulVue {
     public state: string;
 
     @Prop({
-        default: MErrorTemplateSkin.Default,
+        default: MPageMessageSkin.Default,
         validator: value =>
-            value === MErrorTemplateSkin.Default ||
-            value === MErrorTemplateSkin.Light
+            value === MPageMessageSkin.Default ||
+            value === MPageMessageSkin.Light
     })
     public skin: string;
 
@@ -98,7 +98,7 @@ export class MErrorTemplate extends ModulVue {
         if (this.imageSize) {
             return this.imageSize;
         }
-        return this.isSkinLight ? MErrorTemplateImageSize.Small : MErrorTemplateImageSize.Default;
+        return this.isSkinLight ? MPageMessageImageSize.Small : MPageMessageImageSize.Default;
     }
 
     public isTargetExternal(isExternal: boolean): string {
@@ -120,11 +120,11 @@ export class MErrorTemplate extends ModulVue {
     }
 
     private get isSkinDefault(): boolean {
-        return this.skin === MErrorTemplateSkin.Default;
+        return this.skin === MPageMessageSkin.Default;
     }
 
     private get isSkinLight(): boolean {
-        return this.skin === MErrorTemplateSkin.Light;
+        return this.skin === MPageMessageSkin.Light;
     }
 
     private get isStateInformation(): boolean {
@@ -161,14 +161,14 @@ export class MErrorTemplate extends ModulVue {
     }
 }
 
-const ErrorTemplatePlugin: PluginObject<any> = {
+const PageMessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(ERROR_TEMPLATE_NAME, 'plugin.install');
+        v.prototype.$log.debug(PAGE_MESSAGE_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);
-        v.component(ERROR_TEMPLATE_NAME, MErrorTemplate);
+        v.component(PAGE_MESSAGE_NAME, MPageMessage);
     }
 };
 
-export default ErrorTemplatePlugin;
+export default PageMessagePlugin;

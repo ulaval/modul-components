@@ -3,10 +3,10 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import { MESSAGE_NAME } from '../component-names';
-import ErrorTemplatePlugin, { MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
+import PageMessagePlugin, { MPageMessageSkin } from '../page-message/page-message';
 import WithRender from './message.html?style=./message.scss';
 
 export enum MMessageState {
@@ -121,7 +121,7 @@ export class MMessage extends Vue {
     }
 
     private get skinPageValue(): string {
-        return this.isSkinPage ? MErrorTemplateSkin.Default : MErrorTemplateSkin.Light;
+        return this.isSkinPage ? MPageMessageSkin.Default : MPageMessageSkin.Light;
     }
 
     private get isSkinPage(): boolean {
@@ -158,7 +158,7 @@ const MessagePlugin: PluginObject<any> = {
         v.prototype.$log.debug(MESSAGE_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(IconButtonPlugin);
-        v.use(ErrorTemplatePlugin);
+        v.use(PageMessagePlugin);
         v.use(I18nPlugin);
         v.component(MESSAGE_NAME, MMessage);
     }

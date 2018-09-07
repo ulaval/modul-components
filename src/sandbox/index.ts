@@ -22,7 +22,6 @@ import ErrorCookiesNotSupportedSandboxPlugin from '../components/error-cookies-n
 import ErrorMessageSandboxPlugin from '../components/error-message/error-message.sandbox';
 import ErrorPageNotFoundSandboxPlugin from '../components/error-page-not-found/error-page-not-found.sandbox';
 import ErrorTechnicalDifficultySandboxPlugin from '../components/error-technical-difficulty/error-technical-difficulty.sandbox';
-import ErrorTemplateSandBoxPlugin from '../components/error-template/error-template.sandbox';
 import FileSelectSandboxPlugin from '../components/file-select/file-select.sandbox';
 import FileUploadSandboxPlugin from '../components/file-upload/file-upload.sandbox';
 import FlexTemplateSandboxPlugin from '../components/flex-template/flex-template.sandbox';
@@ -41,6 +40,7 @@ import ModalSandboxPlugin from '../components/modal/modal.sandbox';
 import NavbarItemSandboxPlugin from '../components/navbar-item/navbar-item.sandbox';
 import NavbarSandboxPlugin from '../components/navbar/navbar.sandbox';
 import OptionSandboxPlugin from '../components/option/option.sandbox';
+import PageMessageSandBoxPlugin from '../components/page-message/page-message.sandbox';
 import PageNotFoundSandboxPlugin from '../components/page-not-found/page-not-found.sandbox';
 import PanelSandboxPlugin from '../components/panel/panel.sandbox';
 import PhoneNumberSandboxPlugin from '../components/phone-number/phone-number.sandbox';
@@ -97,7 +97,6 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(ErrorMessageSandboxPlugin);
         Vue.use(ErrorPageNotFoundSandboxPlugin);
         Vue.use(ErrorTechnicalDifficultySandboxPlugin);
-        Vue.use(ErrorTemplateSandBoxPlugin);
         Vue.use(FileSelectSandboxPlugin);
         Vue.use(FileUploadSandboxPlugin);
         Vue.use(FlexTemplateSandboxPlugin);
@@ -116,6 +115,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(NavbarItemSandboxPlugin);
         Vue.use(MenuSandboxPlugin);
         Vue.use(OptionSandboxPlugin);
+        Vue.use(PageMessageSandBoxPlugin);
         Vue.use(PageNotFoundSandboxPlugin);
         Vue.use(PanelSandboxPlugin);
         Vue.use(PhoneNumberSandboxPlugin);

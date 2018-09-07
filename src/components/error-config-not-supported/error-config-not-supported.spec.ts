@@ -1,14 +1,14 @@
 import { shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import { ERROR_TEMPLATE_NAME } from '../component-names';
+import { PAGE_MESSAGE_NAME } from '../component-names';
 import { MErrorConfigNotSupported } from './error-config-not-supported';
 
 let wrapper: Wrapper<MErrorConfigNotSupported>;
 
 const getStubs: any = () => {
     return {
-        [ERROR_TEMPLATE_NAME]: '<div><slot /></div>'
+        [PAGE_MESSAGE_NAME]: '<div><slot /></div>'
     };
 };
 

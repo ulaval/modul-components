@@ -6,10 +6,10 @@ import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import MessagePlugin, { MMessageState } from '../message/message';
+import PageMessagePlugin, { Link } from '../page-message/page-message';
 import PanelPlugin from '../panel/panel';
 import WithRender from './error-technical-difficulty.html?style=./error-technical-difficulty.scss';
 
@@ -99,7 +99,7 @@ const ErrorTechnicalDifficultyPlugin: PluginObject<any> = {
         v.use(LinkPlugin);
         v.use(MessagePlugin);
         v.use(PanelPlugin);
-        v.use(ErrorTemplatePlugin);
+        v.use(PageMessagePlugin);
         v.component(ERROR_TECHNICAL_DIFFICULTY_NAME, MErrorTechnicalDifficulty);
     }
 };
