@@ -62,14 +62,17 @@ export class MErrorTechnicalDifficulty extends ModulVue {
     public svgName: string = 'm-svg__error-technical-difficulty';
 
     /**
-     * Using the value of the props errorDate, generates an array with two values, the date in YYYY-MM-DD format and the time in HH:mm:ss format.
+     * Returns the formatted date for the value received as props (format = YYYY-MM-DD). Used to display the date when the error was generated.
      */
-    public get dateInfo(): string[] {
-        let result: string[] = [];
-        if (this.errorDate) {
-            result = [this.errorDate.format('YYYY-MM-DD'), this.errorDate.format('HH:mm:ss')];
-        }
-        return result;
+    public get formattedDate(): string {
+        return this.errorDate.format('YYYY-MM-DD');
+    }
+
+    /**
+     * Returns the formatted time for the value received as props (format = HH:mm:ss). Used to display the time when the error was generated.
+     */
+    public get formattedTime(): string {
+        return this.errorDate.format('HH:mm:ss');
     }
 
     /**
@@ -79,6 +82,9 @@ export class MErrorTechnicalDifficulty extends ModulVue {
         return this.showStackTrace && !!this.error;
     }
 
+    /**
+     * Returns the current userAgent string.
+     */
     public get userAgent(): string {
         return window.navigator.userAgent;
     }
