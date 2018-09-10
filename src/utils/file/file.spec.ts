@@ -9,6 +9,9 @@ import { extractExtension, FileService, MFile, MFileRejectionCause, MFileStatus 
 
 jest.mock('../http/http');
 
+const FILENAME_POSITION_1: string = 'file.jpg';
+const FILENAME_POSITION_2: string = 'file.mov';
+
 describe('FileService', () => {
     let filesvc: FileService;
 
@@ -79,42 +82,73 @@ describe('FileService', () => {
     });
 
     describe('validations', () => {
-        it('should accept files with allowedExtensions', () => {
-            filesvc.setValidationOptions({
-                allowedExtensions: ['jpg', 'jpeg', 'pdf', 'mp4']
+
+        describe(`When there is only accepted extensions`, () => {
+            it(`Then should accept them all`, () => {
+                filesvc.setValidationOptions({
+                    allowedExtensions: ['jpg', 'mov']
+                });
+
+                mockFiles();
+
+                expect(readyFiles().length).toEqual(2);
+                expect(rejectedFiles().length).toEqual(0);
+                expect(readyFiles()[0].name).toEqual(FILENAME_POSITION_1);
+                expect(readyFiles()[1].name).toEqual(FILENAME_POSITION_2);
             });
-
-            filesvc.add(
-                createMockFileList([
-                    createMockFile('valid.jpg'),
-                    createMockFile('valid.JpG'),
-                    createMockFile('valid.jpeg'),
-                    createMockFile('valid.pdf'),
-                    createMockFile('valid.mp4'),
-                    createMockFile('invalid.mov')
-                ])
-            );
-
-            expectValidationResults(5, MFileRejectionCause.FILE_TYPE);
         });
 
-        it('should reject files with rejectedExtensions', () => {
-            filesvc.setValidationOptions({
-                rejectedExtensions: ['mov']
+        describe(`When there is only rejected extensions`, () => {
+            it(`then should reject all files`, () => {
+                filesvc.setValidationOptions({
+                    rejectedExtensions: ['jpg', 'mov']
+                });
+
+                mockFiles();
+
+                expect(readyFiles().length).toEqual(0);
+                expect(rejectedFiles().length).toEqual(2);
+                expect(rejectedFiles()[0].name).toEqual(FILENAME_POSITION_1);
+                expect(rejectedFiles()[1].name).toEqual(FILENAME_POSITION_2);
+                expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
+                expect(rejectedFiles()[0].rejection).toEqual(MFileRejectionCause.FILE_TYPE);
             });
+        });
 
-            filesvc.add(
-                createMockFileList([
-                    createMockFile('valid.jpg'),
-                    createMockFile('valid.JpG'),
-                    createMockFile('valid.jpeg'),
-                    createMockFile('valid.pdf'),
-                    createMockFile('valid.mp4'),
-                    createMockFile('invalid.mov')
-                ])
-            );
+        describe(`When there is a mix of accepted and rejected extensions`, () => {
+            it(`then should only accept the file with the right extension`, () => {
+                filesvc.setValidationOptions({
+                    allowedExtensions: ['jpg'],
+                    rejectedExtensions: ['mov']
+                });
 
-            expectValidationResults(5, MFileRejectionCause.FILE_TYPE);
+                mockFiles();
+
+                expect(readyFiles().length).toEqual(1);
+                expect(rejectedFiles().length).toEqual(1);
+                expect(readyFiles()[0].name).toEqual(FILENAME_POSITION_1);
+                expect(rejectedFiles()[0].name).toEqual(FILENAME_POSITION_2);
+                expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
+                expect(rejectedFiles()[0].rejection).toEqual(MFileRejectionCause.FILE_TYPE);
+            });
+        });
+
+        describe(`When there is accepted extensions in the rejected extensions`, () => {
+            it(`then should only accept the file with the right extension`, () => {
+                filesvc.setValidationOptions({
+                    allowedExtensions: ['jpg', 'mov'],
+                    rejectedExtensions: ['mov']
+                });
+
+                mockFiles();
+
+                expect(readyFiles().length).toEqual(1);
+                expect(rejectedFiles().length).toEqual(1);
+                expect(readyFiles()[0].name).toEqual(FILENAME_POSITION_1);
+                expect(rejectedFiles()[0].name).toEqual(FILENAME_POSITION_2);
+                expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
+                expect(rejectedFiles()[0].rejection).toEqual(MFileRejectionCause.FILE_TYPE);
+            });
         });
 
         it('should reject files too big', () => {
@@ -154,18 +188,29 @@ describe('FileService', () => {
             expectedNbReadyFiles: number,
             rejectionCause: MFileRejectionCause
         ) => {
-            const readyFiles: MFile[] = filesvc
-                .files()
-                .filter(f => f.status === MFileStatus.READY);
-            const rejectedFiles: MFile[] = filesvc
-                .files()
-                .filter(f => f.status === MFileStatus.REJECTED);
 
-            expect(readyFiles.length).toEqual(expectedNbReadyFiles);
-            expect(rejectedFiles.length).toEqual(1);
-            expect(rejectedFiles[0].name).toEqual('invalid.mov');
-            expect(rejectedFiles[0].status).toEqual(MFileStatus.REJECTED);
-            expect(rejectedFiles[0].rejection).toEqual(rejectionCause);
+            expect(readyFiles().length).toEqual(expectedNbReadyFiles);
+            expect(rejectedFiles().length).toEqual(1);
+            expect(rejectedFiles()[0].name).toEqual('invalid.mov');
+            expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
+            expect(rejectedFiles()[0].rejection).toEqual(rejectionCause);
+        };
+
+        const readyFiles: () => MFile[] = () => {
+            return filesvc.files().filter(f => f.status === MFileStatus.READY);
+        };
+
+        const rejectedFiles: () => MFile[] = () => {
+            return filesvc.files().filter(f => f.status === MFileStatus.REJECTED);
+        };
+
+        const mockFiles: () => void = () => {
+            filesvc.add(
+                createMockFileList([
+                    createMockFile(FILENAME_POSITION_1),
+                    createMockFile(FILENAME_POSITION_2)
+                ])
+            );
         };
     });
 
