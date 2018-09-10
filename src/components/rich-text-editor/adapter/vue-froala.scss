@@ -122,7 +122,6 @@
         .fr-toolbar {
             cursor: default;
             opacity: 0;
-            display: block !important;
             box-shadow: unset;
             border-radius: 0;
             border-top: 0;
@@ -204,6 +203,48 @@
                 &.fr-not-empty:focus + label {
                     color: $m-color--interactive;
                 }
+            }
+        }
+    }
+
+    &.m--is-mobile {
+        /deep/ .fr-command {
+            display: none;
+
+            &[data-cmd*="-sub-menu"],
+            &[data-cmd="fullscreen"],
+            &[data-cmd="insertLink"],
+            &[data-cmd="specialCharacters"] {
+                display: inline-block;
+            }
+
+            &.fr-submit {
+                display: inline-block;
+            }
+        }
+
+        /deep/ .fr-separator {
+            display: none;
+        }
+
+        &.m--is-focus {
+            /deep/ .fr-placeholder {
+                padding-top: 50px !important;
+            }
+
+            /deep/ .fr-box.fr-basic .fr-element {
+                padding-top: 50px;
+            }
+        }
+    }
+
+    &.m--is-desktop {
+        /deep/ .fr-command {
+            display: inline-block;
+
+            &[data-cmd*="-sub-menu"],
+            &[data-cmd="hide"] {
+                display: none;
             }
         }
     }
