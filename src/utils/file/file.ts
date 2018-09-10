@@ -276,11 +276,11 @@ class FileStore {
     }
 
     private extensionInAcceptedExtensions(extension: string): boolean {
-        return this.options!.allowedExtensions === undefined || this.options!.allowedExtensions!.length === 0 || this.options!.allowedExtensions!.indexOf(extension) !== -1;
+        return this.options === undefined || this.options.allowedExtensions === undefined || this.options.allowedExtensions.length === 0 || this.options.allowedExtensions.indexOf(extension) !== -1;
     }
 
     private extensionInRejectedExtensions(extension: string): boolean {
-        return this.options!.rejectedExtensions !== undefined && this.options!.rejectedExtensions!.length > 0 && this.options!.rejectedExtensions!.indexOf(extension) !== -1;
+        return this.options !== undefined && this.options.rejectedExtensions !== undefined && this.options.rejectedExtensions.length > 0 && this.options.rejectedExtensions.indexOf(extension) !== -1;
     }
 
     private validateSize(file: MFile): void {
