@@ -29,6 +29,7 @@ export interface RadioGroup {
     inline: boolean;
     radiosVerticalAlign: MRadioVerticalAlignement;
     radiosMarginTop: string;
+    readOnly: boolean;
     getValue(): string;
     updateValue(value: string): void;
 }
@@ -74,6 +75,8 @@ export class MRadio extends ModulVue {
     public radioVerticalAlign: MRadioVerticalAlignement;
     @Prop()
     public radioMarginTop: string;
+    @Prop()
+    public readOnly: boolean;
 
     // ----- For Button Group -----
     @Prop()
@@ -109,7 +112,7 @@ export class MRadio extends ModulVue {
 
     public get propDisabled(): boolean {
         let groupDisabled: boolean = this.isGroup() ? this.parentGroup.stateIsDisabled : false;
-        return groupDisabled || this.as<InputState>().isDisabled;
+        return groupDisabled || this.as<InputState>().isDisabled || this.propReadOnly;
     }
 
     public get propError(): boolean {
@@ -143,6 +146,14 @@ export class MRadio extends ModulVue {
             this.parentGroup.updateValue(value);
         } else {
             this.$emit('change', value);
+        }
+    }
+
+    public get propReadOnly(): boolean {
+        if (this.readOnly !== undefined) {
+            return this.readOnly;
+        } else {
+            return this.isGroup() ? (this.parentGroup as ButtonGroup).readOnly : false;
         }
     }
 
