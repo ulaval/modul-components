@@ -6,7 +6,8 @@
         "details": "Précisions techniques",
         "browser": "Navigateur",
         "reference-number": "No référence de l'erreur",
-        "date": "Elle a eu lieu le <strong>{0}</strong> à <strong>{1}</strong>",
+        "date.primary": "Elle a eu lieu le ",
+        "date.secondary": " à ",
         "help": "Pour obtenir de l'aide, contactez le soutien technique",
         "home-label": "Coordonnées du soutien technique"
     }
