@@ -41,9 +41,9 @@ const defaultDragEvent: (e: DragEvent) => void = (e: DragEvent) => {
     ]
 })
 export class MFileUpload extends ModulVue {
-    @Prop({ default: [] })
+    @Prop({ default: () => [] })
     public allowedExtensions: string[];
-    @Prop({ default: [] })
+    @Prop({ default: () => [] })
     public rejectedExtensions: string[];
     @Prop()
     public maxSizeKb?: number;
