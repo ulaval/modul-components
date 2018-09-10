@@ -49,7 +49,7 @@ const getBadgeOrigin: (vnode: VNode) => String[] = (vnode: VNode) => {
     }
 
     const element: HTMLElement = document.getElementById(elID) as HTMLElement;
-    if (element && element.dataset && element.dataset.badgeOrigin) {
+    if (element && element.dataset.badgeOrigin) {
         return (((document.getElementById(elID) as HTMLElement).dataset.badgeOrigin) as string).split(',');
     } else {
         return DEFAULT_ORIGIN;
@@ -127,7 +127,10 @@ const MBadgeDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-        if (element && element.children && element.children[element.children.length - 1].classList.contains('m-icon')) {
+        if (element
+            && element.children
+            && element.children[element.children.length - 1] !== undefined
+            && element.children[element.children.length - 1].classList.contains('m-icon')) {
             element.removeChild(element.children[element.children.length - 1]);
         }
         if (binding.value.state !== undefined && binding.value.state !== '') {
@@ -140,7 +143,9 @@ const MBadgeDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-        if (element && element.children) {
+        if (element
+            && element.children
+            && element.children[element.children.length - 1] !== undefined) {
             element.removeChild(element.children[element.children.length - 1]);
         }
     }
