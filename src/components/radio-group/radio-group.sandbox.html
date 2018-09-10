@@ -40,4 +40,27 @@
             <m-radio value="4" style="font-size:2em">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
         </m-radio-group>
     </p>
+
+    <h3>
+        Readonly mode
+    </h3>
+    <p>From <a href="https://jira.dti.ulaval.ca/browse/MODUL-283">MODUL-283</a></p>
+    <h4>Group read-only set to true and childs read-only false</h4>
+    <p>
+        <m-radio-group :read-only="true">
+            <m-radio value="Choix de réponse 1" :read-only="false" >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+            <m-radio value="Choix de réponse 2"  checked="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+            <m-radio value="Choix de réponse 3" :read-only="false" >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+        </m-radio-group>
+    </p>
+    <h4>Group read-only not setted (default value) and childs read-only setted individually</h4>
+    <p>
+        <m-radio-group>
+            <m-radio value="Choix de réponse 1" :read-only="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+            <m-radio value="Choix de réponse 2" >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+            <m-radio value="Choix de réponse 3" :read-only="true">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+            <m-radio value="Choix de réponse 4" :read-only="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+        </m-radio-group>
+    </p>
+
 </div>

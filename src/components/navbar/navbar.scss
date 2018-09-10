@@ -34,20 +34,6 @@
     }
 
     &.m--is-skin-nav-main {
-        background: $m-color--grey-darker;
-
-        .m-navbar__button {
-            &.m--is-right {
-                @include m-navbar-linear-gradient($m-color--grey-darker, left);
-            }
-
-            &.m--is-left {
-                @include m-navbar-linear-gradient($m-color--grey-darker, right);
-            }
-        }
-    }
-
-    &.m--is-skin-nav-sub {
         background: $m-color--grey-darkest;
 
         .m-navbar__button {
@@ -57,6 +43,20 @@
 
             &.m--is-left {
                 @include m-navbar-linear-gradient($m-color--grey-darkest, right);
+            }
+        }
+    }
+
+    &.m--is-skin-nav-sub {
+        background: $m-color--grey-black;
+
+        .m-navbar__button {
+            &.m--is-right {
+                @include m-navbar-linear-gradient($m-color--grey-black, left);
+            }
+
+            &.m--is-left {
+                @include m-navbar-linear-gradient($m-color--grey-black, right);
             }
         }
     }

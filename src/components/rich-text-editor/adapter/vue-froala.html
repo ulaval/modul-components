@@ -6,7 +6,9 @@
         'm--is-focus': isFocused,
         'm--is-collapsed': collapsed,
         'm--is-anim-ready': isInitialized,
-        'm--is-dirty': isDirty
+        'm--is-dirty': isDirty,
+        'm--is-desktop' : isEqMinXS,
+        'm--is-mobile' : isEqMaxXS
     }">
     <component ref="editor" :is="tag"></component>
 </div>

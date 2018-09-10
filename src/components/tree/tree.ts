@@ -11,6 +11,7 @@ import WithRender from './tree.html?style=./tree.scss';
 export interface TreeNode {
     id: string;
     label?: string;
+    open?: boolean;
     children?: TreeNode[];
     hasChildren?: boolean;
     data?: any;

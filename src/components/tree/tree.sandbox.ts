@@ -71,6 +71,7 @@ export class MRootTreeSandbox extends Vue {
         {
             id: '7',
             label: 'Title 3',
+            open: true,
             children: [
                 {
                     id: '1',

@@ -24,6 +24,8 @@ export class MLimitText extends ModulVue {
     public openLabel: string;
     @Prop()
     public closeLabel: string;
+    @Prop()
+    public html: string;
 
     private reduceContent: string = '';
     private testingContent: string = '';

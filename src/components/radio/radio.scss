@@ -96,16 +96,10 @@ $m-radio--color-disabled: $m-color--disabled !default;
         &.m--is-disabled {
             .m-radio {
                 &__wrap {
-                    cursor: not-allowed;
+                    cursor: default;
                 }
 
                 &__input {
-                    border-color: $m-color--disabled;
-                }
-
-                &__label {
-                    color: $m-color--disabled;
-                    background: $m-color--white;
                     border-color: $m-color--disabled;
                 }
             }
@@ -277,7 +271,7 @@ $m-radio--color-disabled: $m-color--disabled !default;
         &.m--is-disabled {
             .m-radio {
                 &__label {
-                    cursor: not-allowed;
+                    cursor: default;
                     color: $m-radio--color-disabled;
                     background: $m-color--white;
                     border-color: $m-radio--color-disabled;
