@@ -261,14 +261,26 @@ class FileStore {
         }
     }
 
+    /**
+     * If the extension is a part of acceptedExtensions or if acceptedExtensions is empty or undefined, we accept all extensions.
+     * If the extension is a part of rejectedExtensions, it'll be rejected.
+     * If the extension is a part of the accepted and rejected extensions, it'll be rejected.
+     */
     private validateExtension(file: MFile): void {
         const ext: string = extractExtension(file.file.name);
 
-        if ((this.options!.rejectedExtensions && this.options!.rejectedExtensions!.length && this.options!.rejectedExtensions!.indexOf(ext) !== -1) ||
-            (this.options!.allowedExtensions && this.options!.allowedExtensions!.length && this.options!.allowedExtensions!.indexOf(ext) === -1)) {
+        if (this.extensionInRejectedExtensions(ext) || !this.extensionInAcceptedExtensions(ext)) {
             file.status = MFileStatus.REJECTED;
             file.rejection = MFileRejectionCause.FILE_TYPE;
         }
+    }
+
+    private extensionInAcceptedExtensions(extension: string): boolean {
+        return this.options!.allowedExtensions === undefined || this.options!.allowedExtensions!.length === 0 || this.options!.allowedExtensions!.indexOf(extension) !== -1;
+    }
+
+    private extensionInRejectedExtensions(extension: string): boolean {
+        return this.options!.rejectedExtensions !== undefined && this.options!.rejectedExtensions!.length > 0 && this.options!.rejectedExtensions!.indexOf(extension) !== -1;
     }
 
     private validateSize(file: MFile): void {

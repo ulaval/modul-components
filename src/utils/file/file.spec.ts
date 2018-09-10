@@ -84,7 +84,7 @@ describe('FileService', () => {
     describe('validations', () => {
 
         describe(`When there is only accepted extensions`, () => {
-            it(`Then should accept them all`, () => {
+            it(`should accept the right file`, () => {
                 filesvc.setValidationOptions({
                     allowedExtensions: ['jpg', 'mov']
                 });
@@ -98,8 +98,23 @@ describe('FileService', () => {
             });
         });
 
+        describe(`When there is no accepted extensions`, () => {
+            it(`should accept every files`, () => {
+                filesvc.setValidationOptions({
+                    allowedExtensions: []
+                });
+
+                mockFiles();
+
+                expect(readyFiles().length).toEqual(2);
+                expect(rejectedFiles().length).toEqual(0);
+                expect(readyFiles()[0].name).toEqual(FILENAME_POSITION_1);
+                expect(readyFiles()[1].name).toEqual(FILENAME_POSITION_2);
+            });
+        });
+
         describe(`When there is only rejected extensions`, () => {
-            it(`then should reject all files`, () => {
+            it(`should reject the right files`, () => {
                 filesvc.setValidationOptions({
                     rejectedExtensions: ['jpg', 'mov']
                 });
@@ -113,10 +128,24 @@ describe('FileService', () => {
                 expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
                 expect(rejectedFiles()[0].rejection).toEqual(MFileRejectionCause.FILE_TYPE);
             });
+
+            it(`should accept every other files`, () => {
+                filesvc.setValidationOptions({
+                    rejectedExtensions: ['mp4', 'mp3']
+                });
+
+                mockFiles();
+
+                expect(readyFiles().length).toEqual(2);
+                expect(rejectedFiles().length).toEqual(0);
+                expect(readyFiles()[0].name).toEqual(FILENAME_POSITION_1);
+                expect(readyFiles()[1].name).toEqual(FILENAME_POSITION_2);
+
+            });
         });
 
         describe(`When there is a mix of accepted and rejected extensions`, () => {
-            it(`then should only accept the file with the right extension`, () => {
+            it(`should only accept the file with the right extension`, () => {
                 filesvc.setValidationOptions({
                     allowedExtensions: ['jpg'],
                     rejectedExtensions: ['mov']
@@ -134,7 +163,7 @@ describe('FileService', () => {
         });
 
         describe(`When there is accepted extensions in the rejected extensions`, () => {
-            it(`then should only accept the file with the right extension`, () => {
+            it(`should only accept the file with the right extension`, () => {
                 filesvc.setValidationOptions({
                     allowedExtensions: ['jpg', 'mov'],
                     rejectedExtensions: ['mov']
