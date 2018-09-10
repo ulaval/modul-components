@@ -11,9 +11,17 @@ jest.useFakeTimers();
 let mockTargetIsInput: boolean = false;
 jest.mock('../../utils/event/event', () => ({ targetIsInput(): boolean { return mockTargetIsInput; } }));
 
+const WIDTH: number = 100;
+const HEIGHT: number = 200;
+
+let spyWindow: jest.SpyInstance<any> = jest.spyOn(window, 'getComputedStyle');
+
 beforeEach(() => {
     mockTargetIsInput = false;
+    element.mockReset();
 });
+let element: jest.Mock = jest.fn();
+element.mockReturnValue({ classList: jest.fn(), querySelector: jest.fn() });
 
 describe('draggable', () => {
     polyFillActive.dragDrop = false;
@@ -26,12 +34,18 @@ describe('draggable', () => {
             directive = mount({
                 template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`
                     : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`,
-                data: () => options
+                data: () => options,
+                computed: {
+                    element : element
+                }
             }, { localVue: Vue });
         } else {
             directive = mount({
                 template: bindingValue === undefined ? `<div v-m-draggable>${innerHtml || ''}</div>`
-                    : `<div v-m-draggable="${bindingValue}">${innerHtml || ''}</div>`
+                    : `<div v-m-draggable="${bindingValue}">${innerHtml || ''}</div>`,
+                computed: {
+                    element : element
+                }
             }, { localVue: Vue });
         }
 
@@ -211,11 +225,48 @@ describe('draggable', () => {
             const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
             jest.spyOn(options.dataTransfer, 'setData');
             jest.spyOn(options.dataTransfer, 'setDragImage');
+
             draggable.trigger('dragstart', options);
 
             const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
             expect(options.dataTransfer.setData).toHaveBeenCalledWith('application/json', JSON.stringify(userDefinedData));
             expect(options.dataTransfer.setDragImage).toHaveBeenCalledWith(dragImage, 0, 0);
+        });
+
+        describe(`With no dragImage defined`, () => {
+            it('should use the default ghost image and not set a custom dragImage', () => {
+                element.mockReturnValue({ classList: jest.fn(), querySelector: undefined });
+
+                draggable = getDraggableDirective(true, {
+                    action: userDefinedAction,
+                    dragData: userDefinedData,
+                    grouping: userDefinedGrouping
+                });
+                const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                jest.spyOn(options.dataTransfer, 'setData');
+                jest.spyOn(options.dataTransfer, 'setDragImage');
+
+                draggable.trigger('dragstart', options);
+
+                const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
+                expect(options.dataTransfer.setDragImage).toHaveBeenCalledTimes(0);
+            });
+        });
+
+        describe(`With dragImage defined`, () => {
+            it('should set a custom dragImage with offsets set to half the width and height', () => {
+                spyWindow.mockReturnValue({ width: WIDTH, height: HEIGHT });
+
+                const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                jest.spyOn(options.dataTransfer, 'setData');
+                jest.spyOn(options.dataTransfer, 'setDragImage');
+
+                draggable.trigger('dragstart', options);
+
+                const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
+                expect(options.dataTransfer.setData).toHaveBeenCalledWith('application/json', JSON.stringify(userDefinedData));
+                expect(options.dataTransfer.setDragImage).toHaveBeenCalledWith(dragImage, WIDTH / 2, HEIGHT / 2);
+            });
         });
 
         ['mousedown', 'touchstart'].forEach(eventName => {
