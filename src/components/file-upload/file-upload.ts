@@ -41,10 +41,10 @@ const defaultDragEvent: (e: DragEvent) => void = (e: DragEvent) => {
     ]
 })
 export class MFileUpload extends ModulVue {
-    @Prop()
-    public allowedExtensions?: string[];
-    @Prop()
-    public rejectedExtensions?: string[];
+    @Prop({ default: [] })
+    public allowedExtensions: string[];
+    @Prop({ default: [] })
+    public rejectedExtensions: string[];
     @Prop()
     public maxSizeKb?: number;
     @Prop()
@@ -230,7 +230,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private get fileAllowedExtensions(): string {
-        return this.allowedExtensions ? this.allowedExtensions.join(', ') : '';
+        return this.allowedExtensions.join(', ');
     }
 
     private get isAddBtnEnabled(): boolean {
@@ -297,7 +297,7 @@ export class MFileUpload extends ModulVue {
     }
 
     private get hasAllowedExtensions(): boolean {
-        return this.allowedExtensions !== undefined && !!this.allowedExtensions.length;
+        return this.allowedExtensions.length > 0;
     }
 
     private get propOpen(): boolean {
