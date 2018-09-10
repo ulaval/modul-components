@@ -7,7 +7,7 @@
         <m-accordion-transition v-if="hasChildren">
             <ul v-show="internalOpen" class="m-tree-node__children" :class="{'m-tree-node__line-extension' : hasSibling}" ref="children">
                 <m-tree-node v-for="(childNode, index) in node.children" :key="childNode.id" class="m-tree-node__child" :path="currentPath"
-                    :icons="icons" :selectable="selectable" :node-open.sync="childNode.open" :node="childNode" :selected-nodes="selectedNodes" :has-sibling="childHasSibling(index)"
+                    :icons="icons" :selectable="selectable" :open.sync="childNode.open" :node="childNode" :selected-nodes="selectedNodes" :has-sibling="childHasSibling(index)"
                     @click="onChildClick"></m-tree-node>
             </ul>
         </m-accordion-transition>
