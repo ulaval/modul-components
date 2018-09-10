@@ -33,7 +33,7 @@ export class MTouch extends Vue {
         return Object.assign({
             direction: MTouchSwipeDirection[this.swipeOptions!.direction || MTouchSwipeDirection.both] as any as MTouchSwipeOptions,
             angleThreshold: this.swipeOptions!.angleThreshold || 20,
-            velocity: this.swipeOptions!.velocity || 1
+            velocity: this.swipeOptions!.velocity || 0.3
         });
     }
 
