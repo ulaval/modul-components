@@ -49,7 +49,7 @@ const getBadgeOrigin: (vnode: VNode) => String[] = (vnode: VNode) => {
     }
 
     const element: HTMLElement = document.getElementById(elID) as HTMLElement;
-    if (element && element.dataset.badgeOrigin) {
+    if (element && element.dataset && element.dataset.badgeOrigin) {
         return (((document.getElementById(elID) as HTMLElement).dataset.badgeOrigin) as string).split(',');
     } else {
         return DEFAULT_ORIGIN;
