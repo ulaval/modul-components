@@ -118,7 +118,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
             event.dataTransfer.setData('text', this.options.dragData);
         }
 
-        this.setDragImage(event);
+        this.setEventDragImage(event);
         this.dispatchEvent(event, MDraggableEventNames.OnDragStart);
     }
 
@@ -231,7 +231,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         }
     }
 
-    private setDragImage(event: DragEvent): void {
+    private setEventDragImage(event: DragEvent): void {
         const dragImage: HTMLElement | null = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         if (dragImage && event.dataTransfer.setDragImage) {
             dragImage.hidden = false;
