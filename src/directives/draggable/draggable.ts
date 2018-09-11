@@ -235,15 +235,18 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         const dragImage: HTMLElement | null = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         if (dragImage && event.dataTransfer.setDragImage) {
             dragImage.hidden = false;
-
-            const dragImageWidth: string | null = window.getComputedStyle(dragImage).width;
-            let horizontalCenterOffset: number = dragImageWidth ? parseInt(dragImageWidth, 10) / 2 : 0;
-
-            const dragImageHeight: string | null = window.getComputedStyle(dragImage).height;
-            let verticalCenterOffset: number = dragImageHeight ? parseInt(dragImageHeight, 10) / 2 : 0;
-
-            event.dataTransfer.setDragImage(dragImage, horizontalCenterOffset, verticalCenterOffset);
+            event.dataTransfer.setDragImage(dragImage, this.calculateHorizontalCenterOffset(dragImage), this.calculateVerticalCenterOffset(dragImage));
         }
+    }
+
+    private calculateHorizontalCenterOffset(dragImage: HTMLElement): number {
+        const dragImageWidth: string | null = window.getComputedStyle(dragImage).width;
+        return dragImageWidth ? parseInt(dragImageWidth, 10) / 2 : 0;
+    }
+
+    private calculateVerticalCenterOffset(dragImage: HTMLElement): number {
+        const dragImageHeight: string | null = window.getComputedStyle(dragImage).height;
+        return dragImageHeight ? parseInt(dragImageHeight, 10) / 2 : 0;
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
