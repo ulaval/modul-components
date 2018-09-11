@@ -13,12 +13,12 @@ export class MLimitTextSandbox extends Vue {
     private testOpen: boolean = false;
 
     private vhtml: string = `<p>Test rawhtml Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua anim tempor ut
-            excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa laborum ullamco
+            excepteur tempor ipsum qui</p><p> eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa laborum ullamco
             sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id consequat esse veniam. Ullamco labore
             do sit sit commodo. Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident
             aliqua anim tempor ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit
             irure.Culpa laborum ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id consequat
-            esse veniam. Ullamco labore do sit sit commodo. Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum
+            esse veniam. Ullamco labore do sit sit </p><p>commodo. Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum
             aliqua nostrud. Proident aliqua anim tempor ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam
             amet reprehenderit irure.Culpa laborum ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint
             minim eu id consequat esse veniam. Ullamco labore do sit sit commodo. Deserunt ad amet sint in esse aute. Ut
@@ -27,7 +27,7 @@ export class MLimitTextSandbox extends Vue {
             est sunt commodo. Eiusmod sint minim eu id consequat esse veniam. Ullamco labore do sit sit commodo. Deserunt
             ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua anim tempor ut excepteur
             tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa laborum ullamco sint
-            quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id consequat esse veniam. Ullamco labore do
+            quis exercitation amet ad est sunt commodo. </p><p>Eiusmod sint minim eu id consequat esse veniam. Ullamco labore do
             sit sit commodo. Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua
             anim tempor ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa
             laborum ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id consequat esse veniam.
