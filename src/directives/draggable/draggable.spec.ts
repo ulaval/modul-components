@@ -15,13 +15,13 @@ const WIDTH: number = 100;
 const HEIGHT: number = 200;
 
 let spyWindow: jest.SpyInstance<any> = jest.spyOn(window, 'getComputedStyle');
+let element: jest.Mock = jest.fn();
+element.mockReturnValue({ classList: jest.fn(), querySelector: jest.fn() });
 
 beforeEach(() => {
     mockTargetIsInput = false;
     element.mockReset();
 });
-let element: jest.Mock = jest.fn();
-element.mockReturnValue({ classList: jest.fn(), querySelector: jest.fn() });
 
 describe('draggable', () => {
     polyFillActive.dragDrop = false;
