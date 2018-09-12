@@ -222,19 +222,23 @@ enum FroalaElements {
     }
 
     protected desktopMode(): void {
-        this.froalaEditor.$tb.find(`.fr-command`).show();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).hide();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+        if (this.froalaEditor) {
+            this.froalaEditor.$tb.find(`.fr-command`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).hide();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+        }
     }
 
     protected mobileMode(): void {
-        this.froalaEditor.$tb.find(`.fr-command`).hide();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertLink"]`).show();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
-        // show submit buttons (ex: link insertion submit button)
-        this.froalaEditor.$tb.find(`.fr-submit`).show();
+        if (this.froalaEditor) {
+            this.froalaEditor.$tb.find(`.fr-command`).hide();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertLink"]`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
+            // show submit buttons (ex: link insertion submit button)
+            this.froalaEditor.$tb.find(`.fr-submit`).show();
+        }
     }
 
     private initWordObserver(): void {
@@ -249,7 +253,9 @@ enum FroalaElements {
         if (this.as<ElementQueries>().isEqMinXS) {
             this.desktopMode();
             // hide hide button
-            this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+            if (this.froalaEditor) {
+                this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+            }
         } else {
             this.mobileMode();
         }
@@ -452,7 +458,9 @@ enum FroalaElements {
     private destroyEditor(): void {
         if (this._$element) {
             this.listeningEvents && this._$element.off(this.listeningEvents.join(' '));
-            this.froalaEditor.destroy();
+            if (this.froalaEditor) {
+                this.froalaEditor.destroy();
+            }
             this.listeningEvents.length = 0;
             this._$element = undefined;
             this.froalaEditor = undefined;
@@ -516,10 +524,12 @@ enum FroalaElements {
     }
 
     private htmlSet(): void {
-        this.froalaEditor.html.set(this.model || '', true);
-        // This will reset the undo stack everytime the model changes externally. Can we fix this?
-        this.froalaEditor.undo.reset();
-        this.froalaEditor.undo.saveStep();
+        if (this.froalaEditor) {
+            this.froalaEditor.html.set(this.model || '', true);
+            // This will reset the undo stack everytime the model changes externally. Can we fix this?
+            this.froalaEditor.undo.reset();
+            this.froalaEditor.undo.saveStep();
+        }
     }
 }
 
