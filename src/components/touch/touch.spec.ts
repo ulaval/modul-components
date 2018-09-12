@@ -129,7 +129,7 @@ describe('MTouch', () => {
         });
     });
 
-    describe('swipe', () => {
+    describe('tap', () => {
         let tapcallback: MZingGestureCallback;
         beforeEach(() => {
             tapcallback = undefined;
