@@ -64,7 +64,7 @@ describe('MZingTouchUtil', () => {
         { angle: 186, result: MZingGestureDirections.None },
         { angle: 185, result: MZingGestureDirections.Left },
         { angle: 180, result: MZingGestureDirections.Left },
-        { angle: 175, result: MZingGestureDirections.Left }
+        { angle: 175, result: MZingGestureDirections.Left },
         { angle: 174, result: MZingGestureDirections.None }
     ].forEach(keyValue => {
         it(`it should detect directions ${keyValue.result} when angle is ${ keyValue.angle } and threshold is 5`, () => {
