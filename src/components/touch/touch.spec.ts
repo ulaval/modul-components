@@ -93,49 +93,38 @@ describe('MTouch', () => {
             });
         });
 
-        [MTouchSwipeDirection.both, MTouchSwipeDirection.horizontal].forEach((providedSwipeDirection) => {
-            it(`should emit swiperight when provided swipe direction is ${providedSwipeDirection}`, () => {
+        [MZingGestureDirections.Left, MZingGestureDirections.Right].forEach((direction: MZingGestureDirections) => {
+            it(`should emit swipe${direction} when provided swipe direction is both`, () => {
                 const fakeEventObject: any = { detail: 'someDetail' };
-                swipeOptions.direction = providedSwipeDirection;
-                (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => MZingGestureDirections.Right);
+                swipeOptions.direction = MTouchSwipeDirection.both;
+                (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => direction);
 
                 mountComponent();
                 swipeCallback(fakeEventObject as any);
 
-                expect(wrapper.emitted('swiperight')[0][0]).toBeDefined();
+                expect(wrapper.emitted(`swipe${direction}`.toLowerCase())[0][0]).toBeDefined();
             });
 
-            it(`should not emit swiperight when provided swipe direction is vertical`, () => {
+            it(`should emit swipe${direction} when provided swipe direction is horizontal`, () => {
+                const fakeEventObject: any = { detail: 'someDetail' };
+                swipeOptions.direction = MTouchSwipeDirection.horizontal;
+                (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => direction);
+
+                mountComponent();
+                swipeCallback(fakeEventObject as any);
+
+                expect(wrapper.emitted(`swipe${direction}`.toLowerCase())[0][0]).toBeDefined();
+            });
+
+            it(`should not emit swipe${direction} when provided swipe direction is vertical`, () => {
                 const fakeEventObject: any = { detail: 'someDetail' };
                 swipeOptions.direction = MTouchSwipeDirection.vertical;
-                (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => MZingGestureDirections.Right);
+                (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => direction);
 
                 mountComponent();
                 swipeCallback(fakeEventObject as any);
 
-                expect(wrapper.emitted('swiperight')).toBeUndefined();
-            });
-
-            it(`should emit swipeleft when provided swipe direction is ${providedSwipeDirection}`, () => {
-                const fakeEventObject: any = { detail: 'someDetail' };
-                swipeOptions.direction = providedSwipeDirection;
-                (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => MZingGestureDirections.Left);
-
-                mountComponent();
-                swipeCallback(fakeEventObject as any);
-
-                expect(wrapper.emitted('swipeleft')[0][0]).toBeDefined();
-            });
-
-            it(`should not emit swiperight when provided swipe direction is vertical`, () => {
-                const fakeEventObject: any = { detail: 'someDetail' };
-                swipeOptions.direction = MTouchSwipeDirection.vertical;
-                (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => MZingGestureDirections.Left);
-
-                mountComponent();
-                swipeCallback(fakeEventObject as any);
-
-                expect(wrapper.emitted('swipeleft')).toBeUndefined();
+                expect(wrapper.emitted(`swipe${direction}`.toLowerCase())).toBeUndefined();
             });
         });
     });
