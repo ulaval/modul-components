@@ -8,9 +8,9 @@ import WithRender from './touch.html';
 import ZingTouchUtil, { MZingRegion } from './zingtouch';
 
 export enum MTouchSwipeDirection {
-    horizontal,
-    vertical,
-    both
+    horizontal = 'horizontal',
+    vertical = 'vertical',
+    both = 'both'
 }
 
 export interface MTouchSwipeOptions {

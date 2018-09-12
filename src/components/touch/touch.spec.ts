@@ -29,7 +29,7 @@ describe('MTouch', () => {
     beforeEach(() => {
         localVue = createLocalVue();
         swipeOptions = {
-            direction: MTouchSwipeDirection.both,
+            direction: 'both' as any,
             angleThreshold: 999,
             velocity: 999
         };
@@ -62,7 +62,7 @@ describe('MTouch', () => {
 
         mountComponent();
 
-        const expectedSwipeOptions: MTouchSwipeOptions = { angleThreshold: 20, direction: 2, velocity: 0.3 };
+        const expectedSwipeOptions: MTouchSwipeOptions = { angleThreshold: 20, direction: MTouchSwipeDirection.both, velocity: 0.3 };
         expect(ZingTouchUtil.GestureFactory.getGesture).toHaveBeenCalledWith(MZingTouchGestures.Swipe, expectedSwipeOptions);
         expect(mockZingRegion.bind).toHaveBeenCalledWith(wrapper.vm.$el, 'swipeGesture', expect.anything());
     });
