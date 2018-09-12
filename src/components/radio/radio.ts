@@ -112,7 +112,7 @@ export class MRadio extends ModulVue {
 
     public get propDisabled(): boolean {
         let groupDisabled: boolean = this.isGroup() ? this.parentGroup.stateIsDisabled : false;
-        return groupDisabled || this.as<InputState>().isDisabled || this.propReadOnly;
+        return groupDisabled || this.as<InputState>().isDisabled;
     }
 
     public get propError(): boolean {
