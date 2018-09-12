@@ -3,8 +3,9 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { TOUCH_NAME } from '../component-names';
+import { MZingGestureDirections, MZingTouchGestures } from './enums';
 import WithRender from './touch.html';
-import ZingTouchUtil, { ZingGestureDirections, ZingRegion, ZingTouchGestures } from './zingtouch.';
+import ZingTouchUtil, { MZingRegion } from './zingtouch';
 
 export enum MTouchSwipeDirection {
     horizontal,
@@ -27,13 +28,14 @@ export class MTouch extends Vue {
     @Prop()
     public swipeOptions: MTouchSwipeOptions | undefined;
 
-    private zingRegion: ZingRegion | undefined;
+    private zingRegion: MZingRegion | undefined;
 
     private get internalSwipeOptions(): MTouchSwipeOptions {
+        const swipeOptions: any = this.swipeOptions || {};
         return Object.assign({
-            direction: MTouchSwipeDirection[this.swipeOptions!.direction || MTouchSwipeDirection.both] as any as MTouchSwipeOptions,
-            angleThreshold: this.swipeOptions!.angleThreshold || 20,
-            velocity: this.swipeOptions!.velocity || 0.3
+            direction: swipeOptions.direction || MTouchSwipeDirection.both,
+            angleThreshold: swipeOptions.angleThreshold || 20,
+            velocity: swipeOptions.velocity || 0.3
         });
     }
 
@@ -49,7 +51,6 @@ export class MTouch extends Vue {
         this.destroyZingTouch();
 
         this.zingRegion = ZingTouchUtil.setupRegion(this.$el, false, false);
-        (this.$el).style.touchAction = '';
 
         this.configureZingSwipe();
         this.configureZingTap();
@@ -57,7 +58,7 @@ export class MTouch extends Vue {
 
     private configureZingSwipe(): void {
         this.zingRegion!.bind(this.$el,
-            ZingTouchUtil.GestureFactory.getGesture(ZingTouchGestures.Swipe, { velocity: this.internalSwipeOptions }),
+            ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Swipe, this.internalSwipeOptions),
             (event: CustomEvent) => {
                 switch (this.internalSwipeOptions.direction) {
                     case MTouchSwipeDirection.both:
@@ -69,23 +70,20 @@ export class MTouch extends Vue {
     }
 
     private handleHorizontalSwipe(event: CustomEvent): void {
-        const angle: number = event.detail.data[0].currentDirection;
         const swipeOptions: MTouchSwipeOptions = this.internalSwipeOptions;
 
-        switch (ZingTouchUtil.detectDirection(angle, swipeOptions.angleThreshold)) {
-            case ZingGestureDirections.Right:
-                event.detail.events.forEach(event => event.originalEvent.preventDefault());
+        switch (ZingTouchUtil.detectDirection(event, swipeOptions.angleThreshold)) {
+            case MZingGestureDirections.Right:
                 this.$emit('swiperight', event);
                 break;
-            case ZingGestureDirections.Left:
-                event.detail.events.forEach(event => event.originalEvent.preventDefault());
+            case MZingGestureDirections.Left:
                 this.$emit('swipeleft', event);
                 break;
         }
     }
 
     private configureZingTap(): void {
-        this.zingRegion!.bind(this.$el, ZingTouchUtil.GestureFactory.getGesture(ZingTouchGestures.Tap), (event: Event) => {
+        this.zingRegion!.bind(this.$el, ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Tap), (event: Event) => {
             this.$emit('tap', event);
         });
     }
