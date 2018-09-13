@@ -16,7 +16,7 @@ const ajustHeight: Function = (element: HTMLElement): void => {
         if (element.scrollHeight + diff > 0) {
             element.style.height = element.scrollHeight + diff + 'px';
         } else {
-            element.style.height = '';
+            element.style.removeProperty('height');
         }
     }
 };
