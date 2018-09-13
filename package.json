@@ -87,7 +87,8 @@
         "vue-class-component": "^6.1.1",
         "vue-property-decorator": "^6.0.0",
         "vue-template-compiler": "^2.5.9",
-        "vue-template-loader": "^1.0.0"
+        "vue-template-loader": "^1.0.0",
+        "zingtouch": "^1.0.6"
     },
     "peerDependencies": {
         "file-loader": "^1.1.5",
