@@ -304,6 +304,19 @@
         </m-dropdown>
     </p>
 
+    <p>
+        <h3>Dropdown-item avec une value numerique</h3>
+        <p class="m-u--margin-bottom">
+            From <a href="https://github.com/ulaval/modul-components/pull/458" target="blank">PR #458</a> : It's impossible to select a dropdown option when it is a numeric value
+
+            <!-- if relevant, add link to PR
+            </br>From <a href="https://github.com/ulaval/modul-components/pull/458" target="blank" label="PR description</a> -->
+        </p>
+
+        <m-dropdown :filterable="false" label="Item à valeur numérique" v-model="numValue">
+                <m-dropdown-item v-for="item of numItems" :value="item" :label="item"></m-dropdown-item>
+        </m-dropdown>
+    </p>
 
     <!-- Sandbox template
     <br><br><br><br><br>
