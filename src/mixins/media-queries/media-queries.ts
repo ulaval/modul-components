@@ -6,11 +6,7 @@ import { MediaQueriesStatus } from './../../utils/media-queries/media-queries';
 export interface MediaQueriesMixin extends MediaQueriesStatus {}
 @Component
 export class MediaQueries extends ModulVue implements MediaQueriesStatus {
-    protected created(): void {
-        if (!this.$mq) {
-            throw new Error('MediaQueries mixin -> this.$mq is undefined, you must register the MediaQueries plugin.');
-        }
-    }
+    public mqState: MediaQueriesStatus = this.$mq ? this.$mq.state : undefined as any;
 
     public get isMqMinXL(): boolean {
         return this.$mq.state.isMqMinXL;
