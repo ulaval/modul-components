@@ -6,45 +6,49 @@ import { MediaQueriesStatus } from './../../utils/media-queries/media-queries';
 export interface MediaQueriesMixin extends MediaQueriesStatus {}
 @Component
 export class MediaQueries extends ModulVue implements MediaQueriesStatus {
-    public mqState: MediaQueriesStatus = this.$mq.state;
+    protected created(): void {
+        if (!this.$mq) {
+            throw new Error('MediaQueries mixin -> this.$mq is undefined, you must register the MediaQueries plugin.');
+        }
+    }
 
     public get isMqMinXL(): boolean {
-        return this.mqState.isMqMinXL;
+        return this.$mq.state.isMqMinXL;
     }
     public get isMqMinL(): boolean {
-        return this.mqState.isMqMinL;
+        return this.$mq.state.isMqMinL;
     }
     public get isMqMinM(): boolean {
-        return this.mqState.isMqMinM;
+        return this.$mq.state.isMqMinM;
     }
     public get isMqMinS(): boolean {
-        return this.mqState.isMqMinS;
+        return this.$mq.state.isMqMinS;
     }
     public get isMqMinXS(): boolean {
-        return this.mqState.isMqMinXS;
+        return this.$mq.state.isMqMinXS;
     }
     public get isMqMaxXL(): boolean {
-        return this.mqState.isMqMaxXL;
+        return this.$mq.state.isMqMaxXL;
     }
     public get isMqMaxL(): boolean {
-        return this.mqState.isMqMaxL;
+        return this.$mq.state.isMqMaxL;
     }
     public get isMqMaxM(): boolean {
-        return this.mqState.isMqMaxM;
+        return this.$mq.state.isMqMaxM;
     }
     public get isMqMaxS(): boolean {
-        return this.mqState.isMqMaxS;
+        return this.$mq.state.isMqMaxS;
     }
     public get isMqMaxXS(): boolean {
-        return this.mqState.isMqMaxXS;
+        return this.$mq.state.isMqMaxXS;
     }
     public get isMqS(): boolean {
-        return this.mqState.isMqS;
+        return this.$mq.state.isMqS;
     }
     public get isMqM(): boolean {
-        return this.mqState.isMqM;
+        return this.$mq.state.isMqM;
     }
     public get isMqL(): boolean {
-        return this.mqState.isMqL;
+        return this.$mq.state.isMqL;
     }
 }
