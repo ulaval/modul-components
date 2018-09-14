@@ -1,21 +1,3 @@
-*,
-*::before,
-*::after {
-    box-sizing: inherit;
-}
-
-html,
-body {
-    min-width: $m-min-width;
-    overflow-x: hidden;
-    outline-color: $m-color--interactive-light;
-}
-
-html {
-    box-sizing: border-box;
-}
-
-body,
 .m-u--app-body {
     font-family: $m-font-family;
     font-weight: $m-font-weight;
@@ -24,6 +6,15 @@ body,
     line-height: $m-line-height;
     margin: 0;
     color: $m-color--text;
+    box-sizing: border-box;
+    outline-color: $m-color--interactive-light;
+    min-width: $m-min-width;
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: inherit;
+    }
 }
 
 ::selection {
