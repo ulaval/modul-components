@@ -30,12 +30,12 @@ interface NavbarItems {
 export enum MNavbarSkin {
     NavMain = 'nav-main',
     NavSub = 'nav-sub',
-    NavSoft= 'nav-soft',
+    NavSoft = 'nav-soft',
     TabLight = 'tab-light',
     TabDark = 'tab-dark',
     TabArrow = 'tab-arrow',
     TabUnderline = 'tab-underline',
-    TabSoft= 'tab-soft',
+    TabSoft = 'tab-soft',
     Plain = 'plain'
 }
 
@@ -212,22 +212,22 @@ export class MNavbar extends BaseNavbar implements Navbar {
         this.navbarItems().elements.forEach(element => {
             // Allow time to make sure an item is selected
             setTimeout(() => {
-                if (element.$props.value === this.selected) {
-                    let buttonLeftWidth: number = this.hasArrowLeft ? this.$refs.buttonLeft.clientWidth : 0;
-                    let buttonRightWidth: number = this.hasArrowRight ? this.$refs.buttonRight.clientWidth : 0;
+                if (element && element.$props.value === this.selected) {
+                    let buttonLeftWidth: number = this.$refs.buttonLeft && this.hasArrowLeft ? this.$refs.buttonLeft.clientWidth : 0;
+                    let buttonRightWidth: number = this.$refs.buttonRight && this.hasArrowRight ? this.$refs.buttonRight.clientWidth : 0;
                     let wrapEl: HTMLElement = this.$refs.wrap;
                     let scrollPositionAlignLeft: number = element.$el.offsetLeft - buttonLeftWidth;
 
                     // Check if selected element is visible in navbar
-                    if (wrapEl.clientWidth > (element.$el.offsetLeft - wrapEl.scrollLeft + buttonRightWidth)) {
+                    if (wrapEl && wrapEl.clientWidth > (element.$el.offsetLeft - wrapEl.scrollLeft + buttonRightWidth)) {
                         // Check if the selected element exceeds on the left side
                         if ((element.$el.offsetLeft - buttonLeftWidth - wrapEl.scrollLeft) < 0) {
                             wrapEl.scrollLeft = scrollPositionAlignLeft;
-                        // Check if the selected element exceeds on the right side
+                            // Check if the selected element exceeds on the right side
                         } else if (wrapEl.clientWidth < (element.$el.offsetLeft - wrapEl.scrollLeft + element.$el.clientWidth - buttonRightWidth)) {
                             wrapEl.scrollLeft = wrapEl.scrollLeft + element.$el.clientWidth + buttonRightWidth - (wrapEl.scrollLeft + wrapEl.clientWidth - element.$el.offsetLeft);
                         }
-                    } else {
+                    } else if (wrapEl) {
                         wrapEl.scrollLeft = scrollPositionAlignLeft;
                     }
 

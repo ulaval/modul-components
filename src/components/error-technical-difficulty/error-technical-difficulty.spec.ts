@@ -100,10 +100,14 @@ describe(`MErrorTechnicalDifficulty - test`, () => {
         it('Should not show stacktrace', () => {
             expect(wrapper.vm.showStackTrace).toBeFalsy();
         });
-        describe('When accessing dateInfo', () => {
-            it('Should give default values (current date/time) with dateInfo in proper format', () => {
-                expect(wrapper.vm.dateInfo[0]).toEqual(mockCurrentDate);
-                expect(wrapper.vm.dateInfo[1]).toEqual(mockCurrentTime);
+        describe('When accessing formattedDate', () => {
+            it('Should give default values (current date) in proper format', () => {
+                expect(wrapper.vm.formattedDate).toEqual(mockCurrentDate);
+            });
+        });
+        describe('When accessing formattedTime', () => {
+            it('Should give default values (current time) in proper format', () => {
+                expect(wrapper.vm.formattedTime).toEqual(mockCurrentTime);
             });
         });
     });

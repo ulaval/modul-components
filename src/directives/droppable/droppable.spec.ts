@@ -1,10 +1,9 @@
 import { mount, Wrapper } from '@vue/test-utils';
-import Vue, { VueConstructor } from 'vue';
+import Vue from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { isInElement } from '../../utils/mouse/mouse';
 import { polyFillActive } from '../../utils/polyfills';
-import { ModulVue } from '../../utils/vue/vue';
 import { MDOMPlugin } from '../domPlugin';
 import DraggablePlugin, { MDraggable, MDraggableOptions } from '../draggable/draggable';
 import { MRemoveUserSelect } from '../user-select/remove-user-select';
@@ -12,6 +11,12 @@ import { MDraggableEventNames } from './../draggable/draggable';
 import DroppablePlugin, { MDropEffect, MDroppable, MDroppableClassNames, MDroppableEventNames, MDroppableOptions } from './droppable';
 
 jest.mock('../../utils/mouse/mouse');
+let mockTargetIsInput: boolean = false;
+jest.mock('../../utils/event/event', () => ({ targetIsInput(): boolean { return mockTargetIsInput; } }));
+
+beforeEach(() => {
+    mockTargetIsInput = false;
+});
 
 describe('droppable', () => {
     polyFillActive.dragDrop = false;
@@ -60,7 +65,6 @@ describe('droppable', () => {
         return { preventDefault: () => {}, stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
     };
 
-    let localVue: VueConstructor<ModulVue>;
     beforeEach(() => {
         resetModulPlugins();
         Vue.use(DroppablePlugin);
@@ -189,7 +193,7 @@ describe('droppable', () => {
         const userDefinedData: any = { someKey: 'someValue' };
         const userDefinedGrouping: string = 'someGrouping';
 
-        const mockCanDrop: (wrapper: Wrapper<Vue>, value: boolean) => void = (wrapper: Wrapper<Vue>, value: boolean) => {
+        const mockCanDrop: (wrapper: Wrapper<Vue>, value: boolean) => void = (_wrapper: Wrapper<Vue>, value: boolean) => {
             const plugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element);
             plugin.canDrop = jest.fn();
             (plugin.canDrop as jest.Mock).mockImplementation(() => value);
@@ -404,6 +408,23 @@ describe('droppable', () => {
             const returnValue: boolean = plugin.canDrop();
 
             expect(returnValue).toBeTruthy();
+        });
+    });
+
+    ['mousedown', 'touchstart'].forEach(eventName => {
+        it(`it should apply MRemoveUserSelect on ${eventName}`, () => {
+            const droppable: Wrapper<Vue> = getDroppableDirective(true);
+            droppable.trigger(eventName);
+
+            expect(MDOMPlugin.get(MRemoveUserSelect, droppable.element)).toBeDefined();
+        });
+        it(`it should not apply MRemoveUserSelect on ${eventName} when the event target is an input`, () => {
+            mockTargetIsInput = true;
+
+            const droppable: Wrapper<Vue> = getDroppableDirective(true);
+            droppable.trigger(eventName);
+
+            expect(MDOMPlugin.get(MRemoveUserSelect, droppable.element)).toBeUndefined();
         });
     });
 });

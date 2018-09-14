@@ -1,13 +1,14 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { TOOLTIP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
-import uuid from '../../utils/uuid/uuid';
 import LinkPlugin from '../link/link';
 import { MPopperPlacement } from '../popper/popper';
 import WithRender from './tooltip.html?style=./tooltip.scss';
@@ -89,7 +90,7 @@ export class MTooltip extends ModulVue {
         this.$emit('open');
     }
 
-    private onClose(): void {
+    private onClose(event: Event): void {
         this.$emit('close', event);
     }
 

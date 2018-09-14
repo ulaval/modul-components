@@ -1,0 +1,9 @@
+@import '../../styles/abstracts/variables';
+
+.m-limit-text {
+    &__content {
+        & > :first-child {
+            margin-top: 0 !important;
+        }
+    }
+}

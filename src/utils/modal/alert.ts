@@ -1,4 +1,4 @@
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 
 import { MModal } from '../../components/modal/modal';
 
@@ -27,7 +27,10 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
             if (AlertInstance) {
                 unhook();
             }
-            resolve();
+
+            Vue.nextTick(() => {
+                resolve();
+            });
         };
 
         let hook: () => void = () => {

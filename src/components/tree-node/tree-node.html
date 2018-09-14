@@ -1,18 +1,18 @@
 <li class="m-tree-node" :class="{ 'm--is-selected': isSelected, 'm--is-disabled' : isDisabled }">
     <div class="m-tree-node__item" role="button" :tabindex="isDisabled ? '-1' : 1" @click="onClick" ref="item">
-        <m-tree-icon class="m-tree-icon" v-if="icons" :filename="node.id" :folder-open="open" :folder="isFolder"></m-tree-icon>
+        <m-tree-icon class="m-tree-icon" v-if="icons" :filename="node.id" :folder-open="internalOpen" :folder="isFolder"></m-tree-icon>
         <span class="m-tree-node__item__label">{{label}}</span>
     </div>
     <template v-if="isFolder">
         <m-accordion-transition v-if="hasChildren">
-            <ul v-show="open" class="m-tree-node__children" :class="{'m-tree-node__line-extension' : hasSibling}" ref="children">
+            <ul v-show="internalOpen" class="m-tree-node__children" :class="{'m-tree-node__line-extension' : hasSibling}" ref="children">
                 <m-tree-node v-for="(childNode, index) in node.children" :key="childNode.id" class="m-tree-node__child" :path="currentPath"
-                    :icons="icons" :selectable="selectable" :node="childNode" :selected-nodes="selectedNodes" :has-sibling="childHasSibling(index)"
+                    :icons="icons" :selectable="selectable" :open.sync="childNode.open" :node="childNode" :selected-nodes="selectedNodes" :has-sibling="childHasSibling(index)"
                     @click="onChildClick"></m-tree-node>
             </ul>
         </m-accordion-transition>
         <m-accordion-transition v-else>
-            <ul v-show="open" class="m-tree-node__children" :class="{'m-tree-node__line-extension' : hasSibling}">
+            <ul v-show="internalOpen" class="m-tree-node__children" :class="{'m-tree-node__line-extension' : hasSibling}">
                 <li class="m-tree-node__child-empty">
                     {{emptyContentMessage}}
                 </li>

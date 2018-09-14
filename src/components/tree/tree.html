@@ -6,7 +6,7 @@
         {{'m-tree:empty' | f-m-i18n}}
     </p>
     <ul v-else class="m-tree__content">
-        <m-tree-node ref="tree-node" v-for="node in tree" :key="node.id" :selectable="selectable" :node="node" :selected-nodes="propSelectedNodes"
+        <m-tree-node ref="tree-node" v-for="node in tree" :key="node.id" :selectable="selectable" :open.sync="node.open" :node="node" :selected-nodes="propSelectedNodes"
             :icons="icons" @click="onClick"></m-tree-node>
     </ul>
 </div>

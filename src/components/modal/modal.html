@@ -2,21 +2,27 @@
     <slot name="trigger"></slot>
     <portal :target-el="'#' + propId">
         <transition name="m--is">
-            <div v-show="propOpen" v-if="propOpen || preload || loaded"
-                 class="m-modal__wrap"
+            <div class="m-modal__wrap"
                  :class="[{ 'm--is-disabled': disabled }, className ]"
+                 v-show="propOpen"
+                 v-if="propOpen || preload || loaded"
                  ref="dialogWrap">
-                <article class="m-modal__article" ref="article">
-                    <header class="m-modal__header" v-if="hasTitle">
+                <article class="m-modal__article"
+                         :class="{ 'm--has-width-large': hasWidthLarge }"
+                         ref="article">
+                    <header class="m-modal__header"
+                            v-if="hasTitle">
                         <h2>{{ title }}</h2>
                     </header>
-                    <div class="m-modal__body" v-if="hasDefaultSlot || hasMessage">
+                    <div class="m-modal__body"
+                         v-if="hasDefaultSlot || hasMessage">
                         <p v-if="hasMessage" v-html="message"></p>
                         <slot></slot>
                     </div>
                     <footer class="m-modal__footer">
                         <slot name="footer"></slot>
-                        <nav class="m-modal__footer__nav" v-if="!hasFooterSlot">
+                        <nav class="m-modal__footer__nav"
+                             v-if="!hasFooterSlot">
                             <m-button @click="onOk()">
                                 <template v-if="hasOkLabel">{{ okLabel }}</template>
                                 <m-i18n v-else k="m-modal:ok"></m-i18n>

@@ -1,7 +1,7 @@
 <div>
     <!-- Sandbox template -->
     <h3>Froala Text Editor</h3>
-    <h5 class="m-u--margin-bottom">fonctionne sans options spécifiée</h5>
+    <h5 class="m-u--margin-bottom">fonctionne sans option spécifiée</h5>
     <div class="m-u--margin-bottom">
         <div><button @click="focus = !focus">Change focus (now: {{ focus }})</button></div>
         <div>
@@ -18,7 +18,7 @@
     </div>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
-        :toolbar-sticky-offset="58"
+        toolbar-sticky-offset=".mtest-header"
         :label="'texte riche'"
         :max-width="'large'"
         :placeholder="'some placeholder'"
@@ -44,10 +44,23 @@
                 </span>
             </template>
             <div>
-                <m-rich-text-editor :scrollable-container="'.m-edit-window__body'" class="p-formulaire-texte__textearea" :label="'texte riche'"
+                <m-rich-text-editor scrollable-container=".m-edit-window__body" class="p-formulaire-texte__textearea" :label="'texte riche'"
                     tag-style="p" max-width="720px" v-model="fullScreenFormModel"></m-rich-text-editor>
             </div>
         </m-edit-window>
     </div>
-
+    <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
+    <div class="m-u--margin-bottom">
+        <m-rich-text-editor v-model="model"
+        :toolbar-sticky-offset="58"
+        :label="'texte riche'"
+        :max-width="'large'"
+        :focus="focus"
+        :error="error"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"
+        :waiting="waiting"
+        :disabled="disabled"></m-rich-text-editor>
+    </div>
 </div>

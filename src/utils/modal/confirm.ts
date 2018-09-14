@@ -1,4 +1,4 @@
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 
 import { MModal } from '../../components/modal/modal';
 
@@ -29,7 +29,10 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
             if (confirmInstance) {
                 unhook();
             }
-            resolve();
+
+            Vue.nextTick(() => {
+                resolve();
+            });
         };
 
         let onCancel: () => void = () => {

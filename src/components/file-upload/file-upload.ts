@@ -41,8 +41,10 @@ const defaultDragEvent: (e: DragEvent) => void = (e: DragEvent) => {
     ]
 })
 export class MFileUpload extends ModulVue {
-    @Prop()
-    public extensions?: string[];
+    @Prop({ default: () => [] })
+    public allowedExtensions: string[];
+    @Prop({ default: () => [] })
+    public rejectedExtensions: string[];
     @Prop()
     public maxSizeKb?: number;
     @Prop()
@@ -58,22 +60,32 @@ export class MFileUpload extends ModulVue {
         dialog: MDialog;
     };
 
-    private title: string = this.$i18n.translate('m-file-upload:header-title');
     private internalOpen: boolean = false;
+    private tooltipCancel: string = this.$i18n.translate('m-file-upload:cancelFileUpload');
+    private tooltipDelete: string = this.$i18n.translate('m-file-upload:deleteUploadedFile');
 
     private created(): void {
+        this.updateValidationOptions();
+    }
+
+    private destroyed(): void {
+        this.$file.destroy(this.storeName);
+    }
+
+    @Watch('allowedExtensions')
+    @Watch('rejectedExtensions')
+    @Watch('maxSizeKb')
+    @Watch('maxFiles')
+    private updateValidationOptions(): void {
         this.$file.setValidationOptions(
             {
-                extensions: this.extensions,
+                allowedExtensions: this.allowedExtensions,
+                rejectedExtensions: this.rejectedExtensions,
                 maxSizeKb: this.maxSizeKb,
                 maxFiles: this.maxFiles
             },
             this.storeName
         );
-    }
-
-    private destroyed(): void {
-        this.$file.destroy(this.storeName);
     }
 
     @Watch('open')
@@ -156,6 +168,7 @@ export class MFileUpload extends ModulVue {
     private onOpen(): void {
         this.$emit('open');
         this.propOpen = true;
+        this.updateValidationOptions();
         // We need 2 nextTick to be able to have the wrap element in the DOM - MODUL-118
         Vue.nextTick(() => {
             Vue.nextTick(() => {
@@ -212,8 +225,12 @@ export class MFileUpload extends ModulVue {
         return file.rejection === MFileRejectionCause.MAX_FILES;
     }
 
-    private get fileExtensions(): string {
-        return this.extensions ? this.extensions.join(', ') : '';
+    private get title(): string {
+        return this.$i18n.translate('m-file-upload:header-title', {}, this.maxFiles);
+    }
+
+    private get fileAllowedExtensions(): string {
+        return this.allowedExtensions.join(', ');
     }
 
     private get isAddBtnEnabled(): boolean {
@@ -277,6 +294,10 @@ export class MFileUpload extends ModulVue {
 
     private get hasRejectedFiles(): boolean {
         return this.rejectedFiles.length !== 0;
+    }
+
+    private get hasAllowedExtensions(): boolean {
+        return this.allowedExtensions.length > 0;
     }
 
     private get propOpen(): boolean {

@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-beta.47",
+    "version": "1.0.0-beta.57",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -49,7 +49,7 @@
         ],
         "moduleNameMapper": {
             "^(.+\\.html)(\\?style=\\..+)?$": "$1",
-            "\\.min.(css|less|sass|scss)$": "<rootDir>/tests/jest/jest-ignore.js"
+            "\\.min\\.(css|less|sass|scss)|\\.svg$": "<rootDir>/tests/jest/jest-ignore.js"
         },
         "snapshotSerializers": [
             "<rootDir>/node_modules/jest-serializer-vue"
@@ -68,8 +68,6 @@
         "includeFailureMsg": true
     },
     "dependencies": {
-        "@fortawesome/fontawesome": "^1.1.8",
-        "@fortawesome/fontawesome-free-solid": "^5.0.13",
         "@types/sprintf-js": "^1.1.0",
         "axios": "^0.17.1",
         "css-element-queries": "^0.4.0",
@@ -89,7 +87,8 @@
         "vue-class-component": "^6.1.1",
         "vue-property-decorator": "^6.0.0",
         "vue-template-compiler": "^2.5.9",
-        "vue-template-loader": "^1.0.0"
+        "vue-template-loader": "^1.0.0",
+        "zingtouch": "^1.0.6"
     },
     "peerDependencies": {
         "file-loader": "^1.1.5",
