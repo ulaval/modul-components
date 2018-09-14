@@ -13,7 +13,7 @@ export class MCarouselItem extends Vue {
     public position: number = 0;
     public margin: number = 0;
 
-    private hasNoTransition: boolean = true;
+    private animNotReady = true;
 
     public beforeEnter(): void {
         this.$emit('animationStart');
@@ -33,8 +33,8 @@ export class MCarouselItem extends Vue {
 
     protected mounted(): void {
         setTimeout(() => {
-            this.hasNoTransition = false;
-        }, 0);
+            this.animNotReady = false;
+        });
     }
 }
 
