@@ -74,16 +74,19 @@ export class MTouch extends Vue {
 
         switch (ZingTouchUtil.detectDirection(event, swipeOptions.angleThreshold)) {
             case MZingGestureDirections.Right:
+                this.handleZingEvent(event);
                 this.$emit('swiperight', event);
                 break;
             case MZingGestureDirections.Left:
+                this.handleZingEvent(event);
                 this.$emit('swipeleft', event);
                 break;
         }
     }
 
     private configureZingTap(): void {
-        this.zingRegion!.bind(this.$el, ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Tap), (event: Event) => {
+        this.zingRegion!.bind(this.$el, ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Tap), (event: CustomEvent) => {
+            this.handleZingEvent(event);
             this.$emit('tap', event);
         });
     }
@@ -91,6 +94,11 @@ export class MTouch extends Vue {
     private destroyZingTouch(): void {
         if (this.zingRegion) { this.zingRegion.unbind(this.$el); }
         this.zingRegion = undefined;
+    }
+
+    private handleZingEvent(event: CustomEvent): void {
+        // Since we reemit the event, we stop event propagation.  Event whould be handled twice from each listener otherwise.
+        event.stopPropagation();
     }
 }
 
