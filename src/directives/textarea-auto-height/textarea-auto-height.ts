@@ -13,7 +13,11 @@ const ajustHeight: Function = (element: HTMLElement): void => {
         let outerHeight: number = parseInt((window.getComputedStyle(element).height as string), 10);
         let diff: number = outerHeight - element.clientHeight;
         element.style.height = '0';
-        element.style.height = element.scrollHeight + diff + 'px';
+        if (element.scrollHeight + diff > 0) {
+            element.style.height = element.scrollHeight + diff + 'px';
+        } else {
+            element.style.removeProperty('height');
+        }
     }
 };
 

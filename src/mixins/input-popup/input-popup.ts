@@ -55,7 +55,7 @@ export class InputPopup extends ModulVue {
 
     public hasValue(): boolean {
         // undefined, null and empty string return false
-        return !!(this.internalValue || '').trim();
+        return !!(this.internalValue || '').toString().trim();
     }
 
     public hasPlaceholder(): boolean {

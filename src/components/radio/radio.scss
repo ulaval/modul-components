@@ -11,7 +11,7 @@ $m-radio--color-disabled: $m-color--disabled !default;
     &:not(.m--is-mode-button) {
         display: inline;
 
-        &:not(.m--is-disabled) {
+        &:not(.m--is-disabled):not(.m--is-read-only) {
             &:not(.m--is-error):not(.m--is-valid) {
                 &:not(.m--is-checked) .m-radio__wrap:hover,
                 &.m--is-focus {
@@ -94,6 +94,32 @@ $m-radio--color-disabled: $m-color--disabled !default;
         }
 
         &.m--is-disabled {
+            .m-radio {
+                &__wrap {
+                    cursor: not-allowed;
+                }
+
+                &__input {
+                    border-color: $m-color--disabled;
+                }
+
+                &__label {
+                    color: $m-color--disabled;
+                    background: $m-color--white;
+                    border-color: $m-color--disabled;
+                }
+            }
+
+            &.m--is-checked {
+                .m-radio__input {
+                    &::before {
+                        background: $m-color--disabled;
+                    }
+                }
+            }
+        }
+
+        &.m--is-read-only {
             .m-radio {
                 &__wrap {
                     cursor: default;

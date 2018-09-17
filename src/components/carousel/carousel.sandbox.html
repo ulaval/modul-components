@@ -1,5 +1,4 @@
 <div>
-    <!-- Sandbox template -->
     <h3>Carousel - Desktop version</h3>
     <p class="m-u--margin-bottom">The m-carousel in desktop version</p>
     <p>
@@ -112,6 +111,22 @@
             </m-carousel-item>
             <m-carousel-item>
                 <img src="https://picsum.photos/500" alt="">
+            </m-carousel-item>
+        </m-carousel>
+    </p>
+    <h3>Carousel - Video seek</h3>
+    <p class="m-u--margin-bottom">m-carousel should allow video seek no matter what device is being used</p>
+    <p>
+        <m-carousel style="height: 400px;" margin="0">
+            <m-carousel-item>
+                <video controls="true" style="display: block; max-height: 300px; max-width: 300px;">
+                    <source id="mp4" src="http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4" type="video/mp4">
+                </video>
+            </m-carousel-item>
+            <m-carousel-item>
+                <video controls="true" style="display: block; max-height: 300px; max-width: 300px;" playsinline="true">
+                    <source id="mp4" src="http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4" type="video/mp4">
+                </video>
             </m-carousel-item>
         </m-carousel>
     </p>
