@@ -11,6 +11,8 @@
                             'm--is-close-on-backdrop': closeOnBackdrop,
                             'm--is-disabled':disabled }, className ]"
                  @click.self="backdropClick()"
+                 @keydown.esc="escKeyDownEvent"
+                 tabindex="0"
                  ref="dialogWrap">
                 <article class="m-dialog__article" ref="article">
                     <header class="m-dialog__header"

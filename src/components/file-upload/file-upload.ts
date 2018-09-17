@@ -64,6 +64,13 @@ export class MFileUpload extends ModulVue {
     private tooltipCancel: string = this.$i18n.translate('m-file-upload:cancelFileUpload');
     private tooltipDelete: string = this.$i18n.translate('m-file-upload:deleteUploadedFile');
 
+    public fileSelectFocus(): void {
+        // Get the focus for event key-down-esc work.
+        this.$nextTick(() => {
+            this.$refs.dialog.focus();
+        });
+    }
+
     private created(): void {
         this.updateValidationOptions();
     }
