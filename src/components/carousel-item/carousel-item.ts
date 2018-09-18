@@ -13,6 +13,8 @@ export class MCarouselItem extends Vue {
     public position: number = 0;
     public margin: number = 0;
 
+    private animNotReady = true;
+
     public beforeEnter(): void {
         this.$emit('animationStart');
     }
@@ -27,6 +29,12 @@ export class MCarouselItem extends Vue {
         } else {
             return `translate(calc(${100 * this.position}% + ${(this.margin / 2) * this.position}px))`;
         }
+    }
+
+    protected mounted(): void {
+        setTimeout(() => {
+            this.animNotReady = false;
+        });
     }
 }
 
