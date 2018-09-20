@@ -39,6 +39,7 @@ export enum MErrorTemplateImageSize {
 export class MErrorTemplate extends ModulVue {
 
     @Prop({
+        // TODO: remplace 'error' by MMessageState.Error and correct unit test
         default: 'error',
         validator: value =>
             value === MMessageState.Information ||

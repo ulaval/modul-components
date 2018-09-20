@@ -29,7 +29,7 @@ export class MErrorConfigNotSupported extends ModulVue {
     })
     public hints: string[];
 
-    readonly skin: string = MMessageState.Warning;
+    readonly state: string = MMessageState.Warning;
 
     readonly svgName: string = 'm-svg__error-config-not-supported';
 }

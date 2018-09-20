@@ -1,5 +1,11 @@
-<m-error-template class="m-error-technical-difficulty":state="state" :svg-name="svgName" :title="title" :hints="hints" :links="links">
-    <m-accordion skin="light" icon-size="small">
+<m-error-template class="m-error-technical-difficulty"
+                  :state="state"
+                  :svg-name="svgName"
+                  :title="title"
+                  :hints="hints"
+                  :links="links">
+    <m-accordion skin="light"
+                 icon-size="small">
         <m-i18n slot="header" k="m-error-technical-difficulty:details"></m-i18n>
         <p class="m-error-technical-difficulty__browser"><strong>{{'m-error-technical-difficulty:browser' | f-m-i18n}}: </strong>{{userAgent}}</p>
         <p v-if="!!errorReferenceNumber"><strong>{{'m-error-technical-difficulty:reference-number' | f-m-i18n}}: </strong>{{errorReferenceNumber}}</p>
