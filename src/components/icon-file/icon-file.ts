@@ -2,10 +2,10 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+import { Messages } from '../../utils/i18n/i18n';
 import { ICON_FILE_NAME } from '../component-names';
 import IconPluggin from '../icon/icon';
 import WithRender from './icon-file.html';
-import { Messages } from '../../utils/i18n/i18n';
 
 // Extensions list
 const EXT_IMAGE: string = 'bmp,eps,gif,jpeg,jpg,png,tif,tiff,psd,ai,indd';
@@ -101,21 +101,22 @@ export class MIconFile extends Vue {
     public extension: string;
     @Prop()
     public $i18n: Messages;
+
     public get svgTitle(): string {
-        let currentTooltip: string = this.currentTooltip;
+        let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
+        let currentTooltip: string = this.tooltipGroup[cleanExtension] || TOOLTIP_OTHER;
         let i18n: Messages = (Vue.prototype as any).$i18n;
         let titlePrefix: string = i18n.translate('m-icon-file:prefix');
-        let titleSuffix: string = i18n.translate(this.tooltipGroup[currentTooltip]);
-        let tooltipContent: string = titlePrefix + ' ' + titleSuffix;
+        let titleSuffix: string = i18n.translate(`m-icon-file:${currentTooltip}`);
+        let tooltipContent: string = `${titlePrefix} ${titleSuffix}`;
 
         return tooltipContent;
-
     }
     @Prop({ default: '24px' })
     public size: string;
 
     public currentTooltip: string = '';
-    public tooltipGroup: {[k: string]: any} = {};
+    public tooltipGroup: FileGroup = {};
     private fileMap: FileGroup = {};
 
     public get spriteId(): string {
@@ -153,8 +154,8 @@ export class MIconFile extends Vue {
 
     private mapExtensionsGroup(extensions, category: string, tooltip: string): void {
         extensions.split(',').forEach(ex => this.fileMap[ex] = category);
-        this.tooltipGroup[tooltip] = tooltip;
-        this.currentTooltip = tooltip;
+        extensions.split(',').forEach(ex => this.tooltipGroup[ex] = tooltip);
+
     }
 
     private onClick(event): void {
