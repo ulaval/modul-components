@@ -34,6 +34,25 @@
         <h5>Résultat dans le lecteur</h5>
         <div><m-rich-text :value="model"></m-rich-text></div>
     </div>
+    <h5 class="m-u--margin-bottom">fonctionne quand le modèle est déjà initialisé</h5>
+    <div class="m-u--margin-bottom">
+        <m-rich-text-editor v-model="initializedModel"
+        toolbar-sticky-offset=".mtest-header"
+        :label="'texte riche'"
+        :max-width="'large'"
+        :placeholder="'some placeholder'"
+        :focus="focus"
+        :error="error"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"
+        :waiting="waiting"
+        :disabled="disabled"></m-rich-text-editor>
+    </div>
+    <div class="m-u--margin-bottom">
+        <h5>Résultat dans le lecteur</h5>
+        <div><m-rich-text :value="initializedModel"></m-rich-text></div>
+    </div>
     <div>
         <h5 class="m-u--margin-bottom">fonctionne dans un formulaire pleine page</h5>
         <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine page</button>

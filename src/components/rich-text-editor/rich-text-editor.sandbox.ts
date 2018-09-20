@@ -21,6 +21,7 @@ export class MRichTextEditorSandBox extends Vue {
     public disabled: boolean = false;
     public afficherFormulairePleinePage: boolean = false;
     public fullScreenFormModel: string = '';
+    public initializedModel: string = '<p>Test text</p><p><strong>I should be bold</strong></p><p><em>I should be italic</em></p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;I should be tabulated</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;And me even more</p><ol><li>Ordered list</li><li>Unordered list</li></ol>';
 }
 
 const RichTextEditorSandBoxPlugin: PluginObject<any> = {
