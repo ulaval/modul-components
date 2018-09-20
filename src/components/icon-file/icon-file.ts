@@ -115,8 +115,7 @@ export class MIconFile extends Vue {
     @Prop({ default: '24px' })
     public size: string;
 
-    public currentTooltip: string = '';
-    public tooltipGroup: FileGroup = {};
+    private tooltipGroup: FileGroup = {};
     private fileMap: FileGroup = {};
 
     public get spriteId(): string {
