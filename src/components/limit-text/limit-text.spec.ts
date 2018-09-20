@@ -3,10 +3,9 @@ import '../../utils/polyfills';
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
+import { getDefaultMock } from '../../../tests/helpers/mock';
 import { renderComponent } from '../../../tests/helpers/render';
 import LimitTextPlugin, { MLimitText } from './limit-text';
-
-let limitText: MLimitText;
 
 describe('limit-text', () => {
     let localVue: VueConstructor<Vue>;
@@ -16,6 +15,7 @@ describe('limit-text', () => {
         localVue = createLocalVue();
         localVue.use(LimitTextPlugin);
         wrapper = mount(MLimitText, {
+            mocks: getDefaultMock(),
             localVue: localVue,
             propsData: {
                 lines: 2
@@ -30,5 +30,4 @@ describe('limit-text', () => {
         Vue.nextTick();
         return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
     });
-
 });
