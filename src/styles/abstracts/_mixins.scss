@@ -357,6 +357,26 @@
     }
 }
 
+@mixin m-fixed-box-padding($topBottom: $m-spacing--xl, $rightLeft: $m-spacing--l, $topBottomMobile: $m-spacing--xl, $rightLeftMobile: $m-spacing) {
+    &:not(.m--no-padding) {
+        @media (max-width: $m-mq--max--s) {
+            padding: $topBottomMobile $rightLeftMobile 0;
+
+            > :last-child {
+                margin-bottom: $topBottomMobile;
+            }
+        }
+
+        @media (min-width: $m-mq--min--s) {
+            padding: $topBottom $rightLeft 0;
+
+            > :last-child {
+                margin-bottom: $topBottom;
+            }
+        }
+    }
+}
+
 @mixin m-triangle($m-direction, $m-color: currentcolor, $m-size: 1em) {
     @if not index(top right bottom left, $m-direction) {
         @error "Direction must be either `top`, `right`, `bottom` or `left`.";
