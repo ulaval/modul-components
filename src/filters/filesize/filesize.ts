@@ -6,7 +6,7 @@ import { FILESIZE_NAME } from '../filter-names';
 
 let filesizeSymbols: { [name: string]: string } | undefined = undefined;
 
-const fileSize: (bytes: number) => string = (bytes) => {
+export const fileSize: (bytes: number) => string = (bytes) => {
     if (!filesizeSymbols) {
         const i18n: Messages = (Vue.prototype as any).$i18n;
         filesizeSymbols = {
