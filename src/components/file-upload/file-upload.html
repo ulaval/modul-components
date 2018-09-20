@@ -36,8 +36,8 @@
                 <m-file-select class="m-file-upload__drop-zone__instructions__button" skin="secondary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName"
                     keep-store="true"></m-file-select>
             </div>
-            <p class="m-file-upload__drop-zone__format" v-if="extensions">
-                <m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format" :nb="extensions.length"></m-i18n>: {{fileExtensions}}</p>
+            <p class="m-file-upload__drop-zone__format" v-if="hasAllowedExtensions">
+                <m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format" :nb="allowedExtensions.length"></m-i18n>: {{fileAllowedExtensions}}</p>
         </div>
 
         <h3 class="m-file-upload__title" v-if="!hasUploadingFiles">

@@ -152,6 +152,42 @@ describe('MTreeNode', () => {
                     expect(wrapper.vm.hasChildren).toBeTruthy();
                 });
 
+                describe(`and we open the node`, () => {
+
+                    beforeEach(() => {
+                        wrapper.vm.internalOpen = false;
+                        wrapper.vm.onClick();
+                    });
+
+                    it(`Then should be open`, () => {
+                        expect(wrapper.vm.internalOpen).toBeTruthy();
+                    });
+
+                    it(`Then the event update:open is emitted with the value true`, () => {
+                        expect(wrapper.emitted('update:open')).toBeTruthy();
+                        expect(wrapper.emitted('update:open')[0]).toEqual([true]);
+                    });
+
+                });
+
+                describe(`and we close the node`, () => {
+
+                    beforeEach(() => {
+                        wrapper.vm.internalOpen = true;
+                        wrapper.vm.onClick();
+                    });
+
+                    it(`Then should be closed`, () => {
+                        expect(wrapper.vm.internalOpen).toBeFalsy();
+                    });
+
+                    it(`Then the event update:open is emitted with the value false`, () => {
+                        expect(wrapper.emitted('update:open')).toBeTruthy();
+                        expect(wrapper.emitted('update:open')[0]).toEqual([false]);
+                    });
+
+                });
+
             });
 
             describe(`When the node is a parent of the selected node`, () => {

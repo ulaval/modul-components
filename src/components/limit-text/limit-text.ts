@@ -9,7 +9,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { LIMIT_TEXT_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import WithRender from './limit-text.html';
+import WithRender from './limit-text.html?style=./limit-text.scss';
 
 @WithRender
 @Component({
@@ -24,6 +24,8 @@ export class MLimitText extends ModulVue {
     public openLabel: string;
     @Prop()
     public closeLabel: string;
+    @Prop()
+    public html: string;
 
     private reduceContent: string = '';
     private testingContent: string = '';

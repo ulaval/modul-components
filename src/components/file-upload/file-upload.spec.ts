@@ -66,7 +66,8 @@ describe('MFileUpload', () => {
 
     describe('validation', () => {
         const validationOpts: MFileValidationOptions = {
-            extensions: ['jpg', 'png', 'mp4'],
+            allowedExtensions: ['jpg', 'png', 'mp4'],
+            rejectedExtensions: ['mov'],
             maxSizeKb: 1,
             maxFiles: 5
         };
@@ -74,21 +75,22 @@ describe('MFileUpload', () => {
         it('should pass validation options to $file service when extensions property is modified', async () => {
             const filesvc: FileService = (Vue.prototype as ModulVue).$file;
             jest.spyOn(filesvc, 'setValidationOptions');
-
             const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                 propsData: validationOpts,
                 data: {
                     isMqMinS: true
                 }
             });
-
-            const newExtensions: string[] = ['avi', 'mp3'];
-            fupd.vm.extensions = newExtensions;
-
+            const newAcceptedExtensions: string[] = ['avi', 'mp3'];
+            const newRejectedExtensions: string[] = ['css', 'js'];
             const newValidationOpts: MFileValidationOptions = { ...validationOpts };
-            newValidationOpts.extensions = newExtensions;
+            newValidationOpts.allowedExtensions = newAcceptedExtensions;
+            newValidationOpts.rejectedExtensions = newRejectedExtensions;
 
+            fupd.vm.allowedExtensions = newAcceptedExtensions;
+            fupd.vm.rejectedExtensions = newRejectedExtensions;
             await Vue.nextTick();
+
             expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
                 newValidationOpts,
                 DEFAULT_STORE_NAME

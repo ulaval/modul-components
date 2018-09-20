@@ -36,6 +36,10 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
     public radiosVerticalAlign: MRadioVerticalAlignement;
     @Prop()
     public radiosMarginTop: string;
+    @Prop({
+        default: false
+    })
+    public readOnly: boolean;
 
     public stateIsError: boolean = false;
     public stateIsValid: boolean = false;

@@ -16,6 +16,9 @@ export class MTreeNode extends ModulVue {
     @Prop()
     public node: TreeNode;
 
+    @Prop({ default: false })
+    public open: boolean;
+
     @Prop({ default: [] })
     public selectedNodes: string[];
 
@@ -34,11 +37,12 @@ export class MTreeNode extends ModulVue {
     @Prop()
     public hasSibling: boolean;
 
-    private open: boolean = false;
+    public internalOpen: boolean = false;
 
     public onClick(): void {
         if (this.isFolder) {
-            this.open = !this.open;
+            this.internalOpen = !this.internalOpen;
+            this.$emit('update:open', this.internalOpen);
         } else if (this.selectable) {
             this.$emit('click', this.currentPath);
         }
@@ -56,7 +60,7 @@ export class MTreeNode extends ModulVue {
     }
 
     protected mounted(): void {
-        this.open = this.isParentOfSelectedFile;
+        this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
     }
 
     public get currentPath(): string {

@@ -19,44 +19,23 @@ const getStubs: any = () => {
     };
 };
 
-const getMocks: any = () => {
-    return {
-        $mq: {
-            register: jest.fn()
-        }
-    };
-};
 const initializeWrapperDefaultValues: () => void = (): void => {
     wrapper = shallow(MErrorBrowserNotSupported, {
-        mocks: getMocks(),
-        stubs: getStubs(),
-        mixins: [{
-            data: function(): any {
-                return {
-                    isMqMinS: isMobileDevice ? false : true
-                };
-            }
-        }]
+        mocks: { $mq: { state: { isMqMinS: isMobileDevice ? false : true } } },
+        stubs: getStubs()
     });
 };
 
 const initializeWrapperCustomValues: () => void = (): void => {
     wrapper = shallow(MErrorBrowserNotSupported, {
+        mocks: { $mq: { state: { isMqMinS: isMobileDevice ? false : true } } },
         stubs: getStubs(),
-        mocks: getMocks(),
         propsData: {
             title: A_CUSTOM_TITLE,
             hintsDesktop: [A_HINT],
             hintsMobile: [A_HINT_MOBILE],
             linksDesktop: [A_LINK],
             linksMobile: [A_LINK_MOBILE]
-        },
-        mixins: [{
-            data: function(): any {
-                return {
-                    isMqMinS: isMobileDevice ? false : true
-                };
-            }
         }]
     });
 };
