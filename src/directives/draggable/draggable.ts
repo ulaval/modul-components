@@ -111,7 +111,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                         this.element.classList.add(MDraggableClassNames.Grabbing);
                         this.forceCursorRefresh();
                     }
-                }, polyFillActive.dragDrop ? dragDropDelay : 0);
+                }, polyFillActive.dragDrop && !this.isMouseInitiatedDrag ? dragDropDelay : 0);
             }
         }));
     }
@@ -121,8 +121,8 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
         this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
         this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-        this.addEventListener('touchmove', () => this.touchHasMoved = true);
-        this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; });
+        this.addEventListener('touchmove', () => this.touchHasMoved = true, true); // here is it important to use capture on devices that supports mouse + touch events.
+        this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; }, true);
         this.setupGrabBehavior();
         MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
     }
