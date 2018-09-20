@@ -17,10 +17,12 @@
                 <m-icon name="m-svg__confirmation"
                         :svg-title="titleValidIcon"
                         class="m-validation-message__valid__icon"></m-icon>
-                <span class="m-validation-message__text">{{ validMessage }}</span>
+                <span class="m-validation-message__text"
+                      v-html="validMessage"></span>
             </p>
             <p class="m-validation-message__helper"
-               v-if="hasHelperMessage">{{ helperMessage }}</p>
+               v-if="hasHelperMessage"
+               v-html="helperMessage"></p>
         </div>
     </m-accordion-transition>
 </div>
