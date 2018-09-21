@@ -63,4 +63,22 @@
         :waiting="waiting"
         :disabled="disabled"></m-rich-text-editor>
     </div>
+    <h5 class="m-u--margin-bottom">peut focuser avec une fonction (à partir de input management, sans prop)</h5>
+    <p>
+        <button @click="focusEditor">Focus the editor</button>
+    </p>
+    <div class="m-u--margin-bottom">
+        <m-rich-text-editor v-model="model"
+        :toolbar-sticky-offset="58"
+        :label="'texte riche'"
+        :max-width="'large'"
+        :focus="focus"
+        :error="error"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"
+        :waiting="waiting"
+        :disabled="disabled"
+        ref="rteTestFocus"></m-rich-text-editor>
+    </div>
 </div>

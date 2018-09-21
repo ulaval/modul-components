@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
+import { InputManagement } from '../../mixins/input-management/input-management';
 import { MRichText } from '../rich-text/rich-text';
 import { MRichTextEditor } from './rich-text-editor';
 import WithRender from './rich-text-editor.sandbox.html';
@@ -21,6 +22,10 @@ export class MRichTextEditorSandBox extends Vue {
     public disabled: boolean = false;
     public afficherFormulairePleinePage: boolean = false;
     public fullScreenFormModel: string = '';
+
+    public focusEditor(): void {
+        (this.$refs['rteTestFocus'] as InputManagement).focusInput();
+    }
 }
 
 const RichTextEditorSandBoxPlugin: PluginObject<any> = {
