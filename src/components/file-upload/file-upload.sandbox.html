@@ -1,14 +1,38 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
-    <p>
-        <m-file-upload :extensions="['jpg', 'jpeg', 'png']" :max-files="1"><!-- Test case --><button>Single file upload</button></m-file-upload>
-        <m-file-upload :extensions="['jpg', 'jpeg', 'png']" :max-files="5"><!-- Test case --><button>Multiple files upload</button></m-file-upload>
-    </p>
+    <h2>File-upload</h2>
+
+        <div class="m-u--margin-bottom">
+            <h5>No extension specified</h5>
+            <m-file-upload><button>File upload</button></m-file-upload>
+        </div>
+
+        <div class="m-u--margin-bottom">
+            <h5>Allowed extensions only</h5>
+            <span>Allowed extensions: jpg, jpeg, png</span>
+            <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']"><button>File upload</button></m-file-upload>
+        </div>
+
+        <div class="m-u--margin-bottom">
+            <h5>Rejected extensions only</h5>
+            <span>Rejected extensions: jpg, jpeg, png</span>
+            <m-file-upload :rejected-extensions="['jpg', 'jpeg', 'png']"><button>File upload</button></m-file-upload>
+        </div>
+
+        <div class="m-u--margin-bottom">
+            <h5>Allowed and rejected extensions</h5>
+            <span>Allowed extensions: jpg, jpeg, png, mp4</span>
+            <br>
+            <span>Rejected extensions: jpg, jpeg</span>
+            <m-file-upload :rejected-extensions="['jpg', 'jpeg']" :allowed-extensions="['jpg', 'jpeg', 'png', 'mp4']"><button>File upload</button></m-file-upload>
+        </div>
+
+        <div class="m-u--margin-bottom">
+            <h5>Single file upload</h5>
+            <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']" :max-files="1"><button>File upload</button></m-file-upload>
+        </div>
+
+        <div class="m-u--margin-bottom">
+            <h5>Multiple files upload</h5>
+            <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']" :max-files="5"><button>File upload</button></m-file-upload>
+        </div>
 </div>

@@ -54,7 +54,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
-        propsData = { propsData: { editMode: false, saveFn: () => { return Promise.resolve(); } } };
+        propsData = { propsData: { editMode: false } };
         inplaceEdit = new MInplaceEdit(propsData);
     });
 
@@ -84,7 +84,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         beforeEach(() => {
             Vue.use(MediaQueriesPlugin);
-            propsData = { propsData: {  editMode: true, saveFn: () => { return Promise.resolve(); } } };
+            propsData = { propsData: {  editMode: true } };
             inplaceEdit = new MInplaceEdit(propsData);
         });
 
@@ -113,7 +113,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         beforeEach(() => {
             Vue.use(MediaQueriesPlugin);
-            propsData = { propsData: {  editMode: true, saveFn: () => { return Promise.reject('some reason'); } } };
+            propsData = { propsData: {  editMode: true } };
             inplaceEdit = new MInplaceEdit(propsData);
         });
 
@@ -149,19 +149,12 @@ describe('Component inplace-edit - Complete component by default', () => {
 
         wrapper = mount(MInplaceEdit, {
             localVue: Vue,
+            mocks: { $mq: { state: { isMqMinS: true, isMqMinM: false } } },
             slots: {
                 default: 'default',
                 editMode: EDIT_SLOT,
                 readMode: READ_SLOT
-            },
-            mixins: [{
-                data(): any {
-                    return {
-                        isMqMinS: true,
-                        isMqMinM: false
-                    };
-                }
-            }]
+            }
         });
     });
 
@@ -212,6 +205,7 @@ describe('Component inplace-edit - Complete component mobile', () => {
 
         wrapper = shallow(MInplaceEdit, {
             localVue: Vue,
+            mocks: { $mq: { state: { isMqMinS: false } } },
             slots: {
                 default: 'default',
                 editMode: EDIT_SLOT,
@@ -219,14 +213,7 @@ describe('Component inplace-edit - Complete component mobile', () => {
             },
             stubs: {
                 'm-dialog': '<div><slot></slot></div>'
-            },
-            mixins: [{
-                data(): any {
-                    return {
-                        isMqMinS: false
-                    };
-                }
-            }]
+            }
         });
     });
     describe('at creation', () => {

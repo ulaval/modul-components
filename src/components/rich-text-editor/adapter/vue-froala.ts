@@ -291,14 +291,17 @@ enum FroalaElements {
                     if (!editor.fullscreen.isActive() && !this.clickedInsideEditor) {
                         // this timeout is used to avoid the "undetected click" bug
                         // that happens sometimes due to the hideToolbar animation
+                        this.isFocused = false;
                         setTimeout(() => {
-                            window.addEventListener('resize', this.onResize);
-                            this.$emit('blur');
-                            this.hideToolbar();
+                            if (!this.isFocused) {
+                                window.addEventListener('resize', this.onResize);
+                                this.$emit('blur');
+                                this.hideToolbar();
 
-                            this.isFocused = false;
-                            this.isDirty = false;
-                            this.unblockMobileBlur();
+                                this.isFocused = false;
+                                this.isDirty = false;
+                                this.unblockMobileBlur();
+                            }
                         }, 100);
                     }
                 },

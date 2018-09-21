@@ -1,3 +1,3 @@
-<li class="m-carousel-item" :style="{transform : translate, left: margin + 'px', right: margin + 'px'}">
+<li class="m-carousel-item" :class="{ 'm--no-animation': animNotReady }" :style="{transform : translate, left: margin + 'px', right: margin + 'px'}">
     <slot></slot>
 </li>
