@@ -31,8 +31,7 @@
         "html": "Langage de balisage hypertexte",
         "css": "Feuille de style en cascade",
         "json": "Format de données JSON",
-        "code": "Code",
-        "markup": "Markup",
+        "js": "Code",
         "default": "Fichier non reconnu"
     }
 }

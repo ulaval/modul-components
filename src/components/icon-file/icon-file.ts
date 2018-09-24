@@ -31,8 +31,11 @@ const EXT_ODS: string = 'ods';
 const EXT_ODF: string = 'odf';
 const EXT_ODB: string = 'odb';
 const EXT_DWG: string = 'dwg,dao,cao,dxf,dwf';
-const EXT_CODE: string = 'js,ts,json,css,scss';
-const EXT_MARKUP: string = 'html,xml';
+const EXT_MARKUP_XML: string = 'xml';
+const EXT_MARKUP_HTML: string = 'html,htm';
+const EXT_CODE_CSS: string = 'css,scss';
+const EXT_CODE_JSON: string = 'json';
+const EXT_CODE_SCRIPT: string = 'js,ts';
 
 // Extensions Groups
 const GROUP_IMAGE: string = 'm-svg__file-image';
@@ -78,7 +81,7 @@ const TOOLTIP_FLASH: string = 'swf';
 const TOOLTIP_VIDEO: string = 'video';
 const TOOLTIP_AUDIO: string = 'music';
 const TOOLTIP_ZIP: string = 'zip';
-const TOOLTIP_OPENOFFICE_DEFAULT: string = 'oppenoffice1';
+const TOOLTIP_OPENOFFICE_DEFAULT: string = 'openoffice1';
 const TOOLTIP_OPENOFFICE_WRITTER: string = 'odt';
 const TOOLTIP_OPENOFFICE_IMPRESS: string = 'odp';
 const TOOLTIP_OPENOFFICE_DRAW: string = 'odg';
@@ -86,8 +89,11 @@ const TOOLTIP_OPENOFFICE_CALC: string = 'ods';
 const TOOLTIP_OPENOFFICE_MATH: string = 'odf';
 const TOOLTIP_OPENOFFICE_BASE: string = 'odb';
 const TOOLTIP_DWG: string = 'dwg';
-const TOOLTIP_CODE: string = 'code';
-const TOOLTIP_MARKUP: string = 'markup';
+const TOOLTIP_MARKUP_XML: string = 'xml';
+const TOOLTIP_MARKUP_HTML: string = 'html';
+const TOOLTIP_CODE_CSS: string = 'css';
+const TOOLTIP_CODE_JSON: string = 'json';
+const TOOLTIP_CODE_SCRIPT: string = 'js';
 const TOOLTIP_OTHER: string = 'default';
 
 type FileGroup = {
@@ -147,8 +153,11 @@ export class MIconFile extends Vue {
         this.mapExtensionsGroup(EXT_ODF, GROUP_OPENOFFICE_MATH, TOOLTIP_OPENOFFICE_MATH);
         this.mapExtensionsGroup(EXT_ODB, GROUP_OPENOFFICE_BASE, TOOLTIP_OPENOFFICE_BASE);
         this.mapExtensionsGroup(EXT_DWG, GROUP_DWG, TOOLTIP_DWG);
-        this.mapExtensionsGroup(EXT_CODE, GROUP_CODE, TOOLTIP_CODE);
-        this.mapExtensionsGroup(EXT_MARKUP, GROUP_MARKUP, TOOLTIP_MARKUP);
+        this.mapExtensionsGroup(EXT_CODE_CSS, GROUP_CODE, TOOLTIP_CODE_CSS);
+        this.mapExtensionsGroup(EXT_CODE_JSON, GROUP_CODE, TOOLTIP_CODE_JSON);
+        this.mapExtensionsGroup(EXT_CODE_SCRIPT, GROUP_CODE, TOOLTIP_CODE_SCRIPT);
+        this.mapExtensionsGroup(EXT_MARKUP_XML, GROUP_MARKUP, TOOLTIP_MARKUP_XML);
+        this.mapExtensionsGroup(EXT_MARKUP_HTML, GROUP_MARKUP, TOOLTIP_MARKUP_HTML);
     }
 
     private mapExtensionsGroup(extensions, category: string, tooltip: string): void {

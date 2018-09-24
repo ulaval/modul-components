@@ -31,8 +31,7 @@
         "html": "Hypertext markup language",
         "css": "Cascading style sheet",
         "json": "JSON data format",
-        "code": "Code",
-        "markup": "Markup",
+        "js": "Code",
         "default": "Unrecognized file"
     }
 }
