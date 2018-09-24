@@ -7,6 +7,10 @@
 
     /deep/ .fas { font-style: normal; }
 
+    /deep/ button[id^=fullscreen] {
+        float: right;
+    }
+
     &.m--is-dirty {
         overflow: unset;
     }
