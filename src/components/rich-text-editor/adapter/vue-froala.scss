@@ -135,6 +135,14 @@
 
             button {
                 color: $m-color--grey-darker;
+
+                svg {
+                    fill: $m-color--grey-darker;
+                }
+
+                &::after {
+                    border-top-color: $m-color--grey-darker !important;
+                }
             }
 
             button[data-cmd*='specialCharacters'] {
