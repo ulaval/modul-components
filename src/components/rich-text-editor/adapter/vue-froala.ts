@@ -41,6 +41,12 @@ enum FroalaElements {
     EDITABLE_ELEMENT = '.fr-element'
 }
 
+export enum FroalaStatus {
+    Blurring = 'blurring',
+    Blurred = 'blurred',
+    Focused = 'focused'
+}
+
 @WithRender
 @Component({
     mixins: [
@@ -78,6 +84,7 @@ enum FroalaElements {
     protected isInitialized: boolean = false;
 
     protected isDirty: boolean = false;
+    protected status: FroalaStatus = FroalaStatus.Blurred;
 
     private clickedInsideEditor: boolean = false;
 
@@ -275,24 +282,26 @@ enum FroalaElements {
                         if (this.isInitialized) { this.$emit('focus'); }
                         this.showToolbar();
                         this.isFocused = true;
+                        this.status = FroalaStatus.Focused;
                     }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!editor.fullscreen.isActive() && !this.clickedInsideEditor) {
                         // this timeout is used to avoid the "undetected click" bug
                         // that happens sometimes due to the hideToolbar animation
-                        this.isFocused = false;
+                        this.status = FroalaStatus.Blurring;
                         setTimeout(() => {
-                            if (!this.isFocused) {
+                            if (this.status === FroalaStatus.Blurring) {
                                 window.addEventListener('resize', this.onResize);
                                 this.$emit('blur');
                                 this.hideToolbar();
 
                                 this.isFocused = false;
+                                this.status = FroalaStatus.Blurred;
                                 this.isDirty = false;
                                 this.unblockMobileBlur();
                             }
-                        }, 100);
+                        }, 150);
                     }
                 },
                 [froalaEvents.KeyUp]: (_e, _editor) => {
