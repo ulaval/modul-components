@@ -1,7 +1,7 @@
 {
     "m-file-upload": {
-        "header-title": "Upload file",
-        "header-title.p": "Upload files",
+        "header-title": "Upload file here or",
+        "header-title.p": "Upload files here or",
         "title": "Drop file",
         "title.p": "Drop files",
         "format": "Accepted format",
