@@ -1,6 +1,6 @@
-import Project, { ClassDeclaration, ClassInstancePropertyTypes, Decorator, LanguageService, ModuleKind, ObjectLiteralExpression, PropertyAssignment, PropertyDeclaration, ScriptTarget, SourceFile, Type, TypeChecker } from 'ts-simple-ast';
+import Project, { ClassDeclaration, ClassInstancePropertyTypes, Decorator, Expression, LanguageService, ObjectLiteralExpression, PropertyAssignment, PropertyDeclaration, SourceFile, SyntaxKind, Type, TypeChecker } from 'ts-simple-ast';
 
-import { Meta, MetaProps } from './meta-model';
+import { Meta, MetaComponent, MetaProps } from './meta-model';
 
 const MIXINS_PROPERTY_NAME: string = 'mixins';
 const COMPONENT_DECORATOR_NAME: string = 'Component';
@@ -12,50 +12,72 @@ const DEFAULT_PROPERTY_NAME: string = 'default';
  * @ref: https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API
  * @ref: https://github.com/dsherret/ts-simple-ast
  * @ref: https://ts-ast-viewer.com/
+ *
  */
 export class MetaGenerator {
 
     private project: Project;
-    private sourceFile: SourceFile;
     private typeChecker: TypeChecker;
     private languageService: LanguageService;
 
-    constructor(sourceFileName: string) {
+    constructor() {
 
+        // use this in prod
         this.project = new Project({
-            compilerOptions: {
-                target: ScriptTarget.ES5,
-                module: ModuleKind.None
-            }
+            tsConfigFilePath: './tsconfig.meta.json',
+            addFilesFromTsConfig: true
         });
 
-        this.sourceFile = this.project.addExistingSourceFileIfExists(sourceFileName);
+        // use this for test.
+        // this.project = new Project({
+        //     tsConfigFilePath: './tsconfig.meta.json',
+        //     addFilesFromTsConfig: false
+        // });
+        // this.project.addExistingSourceFile('src/components/error-browser-not-supported/error-browser-not-supported.ts');
+
         this.typeChecker = this.project.getTypeChecker();
         this.languageService = this.project.getLanguageService();
 
     }
 
+    public generateMeta(): Meta {
+        let output: Meta = {
+            components: []
+        };
+
+        this.project.getSourceFiles().forEach((sourceFile: SourceFile) => {
+            let classDeclarations: ClassDeclaration[] = sourceFile.getClasses();
+            classDeclarations.forEach((classDeclaration: ClassDeclaration) => {
+                let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
+
+                // If the class has the @Component decorator
+                if (componentDecorator) {
+                    output.components.push(this.generateComponentMeta(classDeclaration));
+                }
+
+            });
+        });
+
+        return output;
+    }
     /**
      *
      */
-    public generateMeta(): Meta {
-        let output: Meta = {};
+    public generateComponentMeta(classDeclaration: ClassDeclaration): MetaComponent {
+        let output: MetaComponent = {
+            name: classDeclaration.getName()
+        };
 
-        let classDeclarations: ClassDeclaration[] = this.sourceFile.getClasses();
-        classDeclarations.forEach((classDeclaration: ClassDeclaration) => {
+        let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
 
-            let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
+        // Decorators with parenthesis (ex. @decorator(3)) are decorator factories,
+        // while decorators without (ex. @decorator) are not.
+        if (componentDecorator.isDecoratorFactory()) {
+            // extract initializer from @component
+            output.mixins = this.extractorMixinsFromComponentDecorator(componentDecorator);
+        }
 
-            // Decorators with parenthesis (ex. @decorator(3)) are decorator factories,
-            // while decorators without (ex. @decorator) are not.
-            if (componentDecorator && componentDecorator.isDecoratorFactory()) {
-                output.mixins = this.extractorMixinsFromComponentDecorator(componentDecorator);
-                // tslint:disable-next-line:no-console
-            }
-
-            output.props = this.extractMetaPropFromClass(classDeclaration);
-
-        });
+        output.props = this.extractMetaPropsFromClass(classDeclaration);
 
         return output;
     }
@@ -80,7 +102,7 @@ export class MetaGenerator {
         return result;
     }
 
-    private extractMetaPropFromClass(classDeclaration: ClassDeclaration): MetaProps[] {
+    private extractMetaPropsFromClass(classDeclaration: ClassDeclaration): MetaProps[] {
 
         // Get a list of all annotated @props
         let propertyDeclarationWithProps: ClassInstancePropertyTypes[] = classDeclaration.getInstanceProperties().filter((property: PropertyDeclaration) => {
@@ -94,17 +116,35 @@ export class MetaGenerator {
         // extract name and type from prop.
         return propertyDeclarationWithProps.map((classInstancePropertyTypes: ClassInstancePropertyTypes) => {
 
-            let name: string = classInstancePropertyTypes.getName();
-            let type: Type = classInstancePropertyTypes.getType();
-            let propDecorator: Decorator = classInstancePropertyTypes.getDecorator(PROP_DECORATOR_NAME);
-
-            return {
-                name: name,
-                type: type.getText(),
-                values: this.getTypeTypesAsStrings(type.compilerType),
-                default: this.extractDefaultValueFromPropDecorator(propDecorator)
-            };
+            return this.extractMetaPropFromPropertyTypes(classInstancePropertyTypes);
         }, this);
+    }
+
+    private extractMetaPropFromPropertyTypes(classInstancePropertyTypes: ClassInstancePropertyTypes): MetaProps {
+        let name: string = classInstancePropertyTypes.getName();
+        let type: Type = classInstancePropertyTypes.getType();
+
+        let output: MetaProps = {
+            name: name,
+            type: type.getNonNullableType().getText().split('.').pop(),
+            optional: type.isNullable()
+        };
+
+        // extact values of enum type
+        if (type.isEnum() || type.isEnumLiteral()) {
+            output.values = this.getTypeTypesAsStrings(type.compilerType);
+        }
+
+        let propDecorator: Decorator = classInstancePropertyTypes.getDecorator(PROP_DECORATOR_NAME);
+        if (propDecorator.isDecoratorFactory()) {
+            let defaultValue: string = this.extractDefaultValueFromPropDecorator(propDecorator);
+            if (defaultValue) {
+                output.default = defaultValue;
+                output.optional = true; // props is optional if have a default value
+            }
+        }
+
+        return output;
     }
 
     private extractDefaultValueFromPropDecorator(propDecorator: Decorator): string {
@@ -113,7 +153,15 @@ export class MetaGenerator {
             if (argument instanceof ObjectLiteralExpression) {
                 let arg: ObjectLiteralExpression = argument as ObjectLiteralExpression;
                 if (arg.getProperty(DEFAULT_PROPERTY_NAME)) {
-                    _default = (arg.getProperty(DEFAULT_PROPERTY_NAME) as PropertyAssignment).getInitializer().getText();
+
+                    let initializer: Expression = (arg.getProperty(DEFAULT_PROPERTY_NAME) as PropertyAssignment).getInitializer();
+                    // we dont want arrow function here
+                    if (initializer.getKind() !== SyntaxKind.ArrowFunction) {
+                        _default = initializer.getText().split('.').pop();
+                    } else {
+                        _default = initializer.getText();
+                    }
+
                 }
 
             }
