@@ -215,7 +215,7 @@ export enum FroalaStatus {
     }
 
     protected desktopMode(): void {
-        if (this.froalaEditor) {
+        if (this.froalaEditor && this.froalaEditor.$tb) {
             this.froalaEditor.$tb.find(`.fr-command`).show();
             this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).hide();
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
@@ -223,7 +223,7 @@ export enum FroalaStatus {
     }
 
     protected mobileMode(): void {
-        if (this.froalaEditor) {
+        if (this.froalaEditor && this.froalaEditor.$tb) {
             this.froalaEditor.$tb.find(`.fr-command`).hide();
             this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
@@ -240,7 +240,7 @@ export enum FroalaStatus {
         if (this.as<ElementQueries>().isEqMinXS) {
             this.desktopMode();
             // hide hide button
-            if (this.froalaEditor) {
+            if (this.froalaEditor && this.froalaEditor.$tb) {
                 this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
             }
         } else {
@@ -461,9 +461,11 @@ export enum FroalaStatus {
     private htmlSet(): void {
         if (this.froalaEditor) {
             this.froalaEditor.html.set(this.model || '', true);
-            // This will reset the undo stack everytime the model changes externally. Can we fix this?
-            this.froalaEditor.undo.reset();
-            this.froalaEditor.undo.saveStep();
+            if (this.froalaEditor.undo) {
+                // This will reset the undo stack everytime the model changes externally. Can we fix this?
+                this.froalaEditor.undo.reset();
+                this.froalaEditor.undo.saveStep();
+            }
         }
     }
 }
