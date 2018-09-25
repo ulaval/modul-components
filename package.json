@@ -20,7 +20,7 @@
         "unitwatch": "jest --watch --verbose --silent",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
         "metagenv2": "node --inspect-brk -r ./tests/meta-v2/ts-loader.js  ./tests/meta-v2/generate-meta.ts ./tests/meta/test/class-with-props.ts",
-        "metagenv2acc": "node --inspect-brk -r ./tests/meta-v2/ts-loader.js  ./tests/meta-v2/generate-meta.ts ./src/components/datefields/datefields.ts",
+        "metagenv2acc": "node --inspect-brk -r ./tests/meta-v2/ts-loader.js  ./tests/meta-v2/generate-meta.ts ./src/components/accordion/accordion.ts",
         "unitall": "jest --ci --coverage --testResultsProcessor=./tests/jest/ci-test-processor",
         "e2e": "node tests/e2e/index.js",
         "test": "npm run unitall && npm run e2e",

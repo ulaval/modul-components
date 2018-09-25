@@ -1,120 +1,124 @@
-import * as ts from 'typescript';
+import Project, { ClassDeclaration, ClassInstancePropertyTypes, Decorator, LanguageService, ModuleKind, ObjectLiteralExpression, PropertyAssignment, PropertyDeclaration, ScriptTarget, SourceFile, Type, TypeChecker } from 'ts-simple-ast';
 
-import { Meta } from './meta-model';
+import { Meta, MetaProps } from './meta-model';
 
+const MIXINS_PROPERTY_NAME: string = 'mixins';
+const COMPONENT_DECORATOR_NAME: string = 'Component';
+const PROP_DECORATOR_NAME: string = 'Prop';
+const DEFAULT_PROPERTY_NAME: string = 'default';
 /**
- * Extract meta from a TS file using typescript compiler API
+ * Extract static meta from a TS file using the typescript compiler API
  *
  * @ref: https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API
+ * @ref: https://github.com/dsherret/ts-simple-ast
  * @ref: https://ts-ast-viewer.com/
  */
 export class MetaGenerator {
 
-    private program: ts.Program;
-    private checker: ts.TypeChecker;
+    private project: Project;
+    private sourceFile: SourceFile;
+    private typeChecker: TypeChecker;
+    private languageService: LanguageService;
 
     constructor(sourceFileName: string) {
 
-        this.program = ts.createProgram([sourceFileName], {
-            target: ts.ScriptTarget.ES5,
-            module: ts.ModuleKind.None
+        this.project = new Project({
+            compilerOptions: {
+                target: ScriptTarget.ES5,
+                module: ModuleKind.None
+            }
         });
 
-        // Get the checker, we will use it to find more about classes
-        this.checker = this.program.getTypeChecker();
+        this.sourceFile = this.project.addExistingSourceFileIfExists(sourceFileName);
+        this.typeChecker = this.project.getTypeChecker();
+        this.languageService = this.project.getLanguageService();
 
     }
 
+    /**
+     *
+     */
     public generateMeta(): Meta {
         let output: Meta = {};
 
-        // Get the main source file
-        const sourceFile: any = this.program.getSourceFile(this.program.getRootFileNames()[0]);
+        let classDeclarations: ClassDeclaration[] = this.sourceFile.getClasses();
+        classDeclarations.forEach((classDeclaration: ClassDeclaration) => {
 
-        // Walk the tree to search for classes
-        ts.forEachChild(sourceFile, (node: any) => {
-            this.visitClassComponent(node);
+            let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
+
+            // Decorators with parenthesis (ex. @decorator(3)) are decorator factories,
+            // while decorators without (ex. @decorator) are not.
+            if (componentDecorator && componentDecorator.isDecoratorFactory()) {
+                output.mixins = this.extractorMixinsFromComponentDecorator(componentDecorator);
+                // tslint:disable-next-line:no-console
+            }
+
+            output.props = this.extractMetaPropFromClass(classDeclaration);
+
         });
 
         return output;
     }
 
-    visitClassComponent(node: any): void {
+    private extractorMixinsFromComponentDecorator(decorator: Decorator): string[] {
 
-        if (ts.isClassDeclaration(node) && node.name) {
+        let result: string[] = [];
 
-            if (this.isClassAComponent(node)) {
-                let symbol: any = this.checker.getSymbolAtLocation(node.name);
-
+        decorator.getArguments().forEach((argument) => {
+            if (argument instanceof ObjectLiteralExpression) {
                 // tslint:disable-next-line:no-console
-                console.log(`**** visit class component with name ${symbol.getName()}`);
-
-                this.visitComponentDecorator(node);
-
-                // This is a Class, visit its children
-                ts.forEachChild(node, (node: any) => {
-                    this.visitProps(node);
-                });
-            }
-
-        }
-    }
-
-    visitProps(node: ts.Node): void {
-
-        if (ts.isPropertyDeclaration(node) && node.name) {
-
-            if (this.isPropertyAPropOrModel(node)) {
-                let symbol: any = this.checker.getSymbolAtLocation(node.name);
-
-                let type: any = this.checker.getTypeAtLocation(node);
-                const typeName: string = this.getTypeAsString(type);
-                const typeValues: string[] = this.getTypeTypesAsStrings(type);
-                // tslint:disable-next-line:no-console
-                console.log(`**** visiting prop with name ${symbol.getName()} of type ${typeName} possible values = ${JSON.stringify(typeValues)}`);
-            }
-
-        }
-    }
-
-    private isClassAComponent(node: any): boolean {
-        if (node.decorators && node.decorators.length > 0) {
-            let componentDecorator: ts.Decorator = node.decorators.find((decorator: ts.Decorator) => {
-                return (decorator.getText() && (decorator.getText().startsWith('@Component')));
-            });
-
-            if (componentDecorator) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private visitComponentDecorator(node: any): any {
-        if (node.decorators && node.decorators.length > 0) {
-            let componentDecorator: ts.Decorator = node.decorators.find((decorator: ts.Decorator) => {
-                return (decorator.getText() && (decorator.getText().startsWith('@Component')));
-            });
-
-            if (ts.isCallLikeExpression(componentDecorator.expression)) {
-                if ((componentDecorator.expression as ts.CallExpression).arguments[0]) {
-                    //get the first arguments and parse it
-                    //(componentDecorator.expression as ts.CallExpression).arguments[0].
+                if ((argument as ObjectLiteralExpression).getProperty(MIXINS_PROPERTY_NAME)) {
+                    // tslint:disable-next-line:no-console
+                    let mixins: string = ((argument as ObjectLiteralExpression).getProperty(MIXINS_PROPERTY_NAME) as PropertyAssignment).getInitializer().getText();
+                    if (mixins) {
+                        result = mixins.replace(/\[?\]?\r?\n?/g, '').split(',').map((str) => str.trim());
+                    }
                 }
             }
-        }
+        });
+
+        return result;
     }
 
-    private isPropertyAPropOrModel(node): boolean {
-        if (node.decorators && node.decorators.length > 0) {
-            if (node.decorators.find((decorator: ts.Decorator) => {
+    private extractMetaPropFromClass(classDeclaration: ClassDeclaration): MetaProps[] {
 
-                return (decorator.getText() && (decorator.getText().startsWith('@Prop') || decorator.getText().startsWith('@Model')));
-            }), this) {
+        // Get a list of all annotated @props
+        let propertyDeclarationWithProps: ClassInstancePropertyTypes[] = classDeclaration.getInstanceProperties().filter((property: PropertyDeclaration) => {
+            let propDecorator: Decorator = property.getDecorator(PROP_DECORATOR_NAME);
+            if (propDecorator) {
                 return true;
             }
-        }
-        return false;
+            return false;
+        });
+
+        // extract name and type from prop.
+        return propertyDeclarationWithProps.map((classInstancePropertyTypes: ClassInstancePropertyTypes) => {
+
+            let name: string = classInstancePropertyTypes.getName();
+            let type: Type = classInstancePropertyTypes.getType();
+            let propDecorator: Decorator = classInstancePropertyTypes.getDecorator(PROP_DECORATOR_NAME);
+
+            return {
+                name: name,
+                type: type.getText(),
+                values: this.getTypeTypesAsStrings(type.compilerType),
+                default: this.extractDefaultValueFromPropDecorator(propDecorator)
+            };
+        }, this);
+    }
+
+    private extractDefaultValueFromPropDecorator(propDecorator: Decorator): string {
+        let _default: string = '';
+        propDecorator.getArguments().forEach((argument) => {
+            if (argument instanceof ObjectLiteralExpression) {
+                let arg: ObjectLiteralExpression = argument as ObjectLiteralExpression;
+                if (arg.getProperty(DEFAULT_PROPERTY_NAME)) {
+                    _default = (arg.getProperty(DEFAULT_PROPERTY_NAME) as PropertyAssignment).getInitializer().getText();
+                }
+
+            }
+        });
+        return _default;
     }
 
     private getTypeAsString(type): string {
