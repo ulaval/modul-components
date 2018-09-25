@@ -3,9 +3,9 @@ import Vue, { VueConstructor } from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
-import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
+import { getDefaultMock } from '../../../tests/helpers/mock';
+import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
-import { MIconButton } from '../icon-button/icon-button';
 import DropdownPlugin, { MDropdown } from './dropdown';
 
 jest.mock('../../utils/uuid/uuid');
@@ -24,6 +24,7 @@ describe('MDropdown', () => {
 
     it('should render correctly', () => {
         const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
+            mocks: getDefaultMock(),
             localVue: Vue
         });
 
@@ -32,6 +33,7 @@ describe('MDropdown', () => {
 
     it('should render correctly when placeholder is set', () => {
         const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
+            mocks: getDefaultMock(),
             localVue: Vue,
             propsData: {
                 placeholder: 'placeholder test'
@@ -63,6 +65,7 @@ describe('MDropdown', () => {
 
     const mountGroup: (propsData?: object, slots?: Slots) => Wrapper<MDropdown> = (propsData?: object, slots?: Slots) => {
         return mount(MDropdown, {
+            mocks: getDefaultMock(),
             propsData: propsData,
             slots: {
                 default: `<m-dropdown>

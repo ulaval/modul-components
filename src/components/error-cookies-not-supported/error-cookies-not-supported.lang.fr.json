@@ -1,7 +1,7 @@
 {
     "m-error-cookies-not-supported": {
         "title": "Les cookies sont désactivés<br>dans votre navigateur",
-        "hint.primary": "Pour accéder à ce site, modifiez les paramètres de votre navigateur et réessayer.",
+        "hint.primary": "Pour accéder à ce site, modifiez les paramètres de votre navigateur et réessayez.",
         "home-label": "Accueil"
     }
 }
