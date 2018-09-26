@@ -30,6 +30,10 @@ export class MCarousel extends Vue {
         this.$emit('tap', event);
     }
 
+    public onClick(event: Event): void {
+        this.$emit('click', event);
+    }
+
     protected mounted(): void {
         this.toggleKeyboardNavigation(this.keyboardNavigable);
         if (this.interval) {
