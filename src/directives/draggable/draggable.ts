@@ -235,7 +235,11 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         const dragImage: HTMLElement | null = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         if (dragImage && event.dataTransfer.setDragImage) {
             dragImage.hidden = false;
-            event.dataTransfer.setDragImage(dragImage, this.calculateHorizontalCenterOffset(dragImage), this.calculateVerticalCenterOffset(dragImage));
+            if (polyFillActive.dragDrop) {
+                event.dataTransfer.setDragImage(dragImage, 0, 0);
+            } else {
+                event.dataTransfer.setDragImage(dragImage, this.calculateHorizontalCenterOffset(dragImage), this.calculateVerticalCenterOffset(dragImage));
+            }
         }
     }
 
