@@ -112,9 +112,7 @@ export class MIconFile extends Vue {
         let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
         let currentTooltip: string = this.tooltipGroup[cleanExtension] || TOOLTIP_OTHER;
         let i18n: Messages = (Vue.prototype as any).$i18n;
-        let titlePrefix: string = i18n.translate('m-icon-file:prefix');
-        let titleSuffix: string = i18n.translate(`m-icon-file:${currentTooltip}`);
-        let tooltipContent: string = `${titlePrefix} ${titleSuffix}`;
+        let tooltipContent: string = i18n.translate(`m-icon-file:${currentTooltip}`);
 
         return tooltipContent;
     }
