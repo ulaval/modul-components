@@ -194,6 +194,7 @@ describe('draggable', () => {
         const userDefinedData: any = { someKey: 'someValue' };
         const userDefinedGrouping: string = 'someGrouping';
         beforeEach(() => {
+            polyFillActive.dragDrop = false;
             draggable = getDraggableDirective(true, {
                 action: userDefinedAction,
                 dragData: userDefinedData,
@@ -236,7 +237,6 @@ describe('draggable', () => {
         describe(`With no dragImage defined`, () => {
             it('should use the default ghost image and not set a custom dragImage', () => {
                 element.mockReturnValue({ classList: jest.fn(), querySelector: undefined });
-
                 draggable = getDraggableDirective(true, {
                     action: userDefinedAction,
                     dragData: userDefinedData,
@@ -254,18 +254,31 @@ describe('draggable', () => {
         });
 
         describe(`With dragImage defined`, () => {
-            it('should set a custom dragImage with offsets set to half the width and height', () => {
-                spyWindow.mockReturnValue({ width: WIDTH, height: HEIGHT });
+            describe(`With mobile drag & drop polyfill active`, () => {
+                it('should set a custom dragImage with offsets set to 0', () => {
+                    polyFillActive.dragDrop = true;
+                    const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                    jest.spyOn(options.dataTransfer, 'setDragImage');
 
-                const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
-                jest.spyOn(options.dataTransfer, 'setData');
-                jest.spyOn(options.dataTransfer, 'setDragImage');
+                    draggable.trigger('touchmove');
+                    draggable.trigger('dragstart', options);
 
-                draggable.trigger('dragstart', options);
+                    const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
+                    expect(options.dataTransfer.setDragImage).toHaveBeenCalledWith(dragImage, 0, 0);
+                });
+            });
 
-                const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
-                expect(options.dataTransfer.setData).toHaveBeenCalledWith('application/json', JSON.stringify(userDefinedData));
-                expect(options.dataTransfer.setDragImage).toHaveBeenCalledWith(dragImage, WIDTH / 2, HEIGHT / 2);
+            describe(`On desktop`, () => {
+                it('should set a custom dragImage with offsets set to half the width and height', () => {
+                    spyWindow.mockReturnValue({ width: WIDTH, height: HEIGHT });
+                    const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                    jest.spyOn(options.dataTransfer, 'setDragImage');
+
+                    draggable.trigger('dragstart', options);
+
+                    const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
+                    expect(options.dataTransfer.setDragImage).toHaveBeenCalledWith(dragImage, WIDTH / 2, HEIGHT / 2);
+                });
             });
         });
 
