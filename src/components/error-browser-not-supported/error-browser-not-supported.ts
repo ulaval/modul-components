@@ -6,9 +6,10 @@ import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_BROWSER_NOT_SUPPORTED_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
+import { MMessageState } from '../message/message';
 import WithRender from './error-browser-not-supported.html';
 
 @WithRender
@@ -40,7 +41,7 @@ export class MErrorBrowserNotSupported extends ModulVue {
     })
     public hintsMobile: string[];
 
-    readonly skin: string = MErrorTemplateSkin.Warning;
+    readonly state: string = MMessageState.Warning;
 
     readonly svgName: string = 'm-svg__error-browser-not-supported';
 }
@@ -51,7 +52,7 @@ const ErrorBrowserNotSupported: PluginObject<any> = {
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.use(MediaQueriesPlugin);
-        v.use(ErrorTemplatePlugin);
+        v.use(MessagePagePlugin);
         v.component(ERROR_BROWSER_NOT_SUPPORTED_NAME, MErrorBrowserNotSupported);
     }
 };

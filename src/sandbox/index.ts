@@ -22,7 +22,6 @@ import ErrorCookiesNotSupportedSandboxPlugin from '../components/error-cookies-n
 import ErrorMessageSandboxPlugin from '../components/error-message/error-message.sandbox';
 import ErrorPageNotFoundSandboxPlugin from '../components/error-page-not-found/error-page-not-found.sandbox';
 import ErrorTechnicalDifficultySandboxPlugin from '../components/error-technical-difficulty/error-technical-difficulty.sandbox';
-import ErrorTemplateSandBoxPlugin from '../components/error-template/error-template.sandbox';
 import FileSelectSandboxPlugin from '../components/file-select/file-select.sandbox';
 import FileUploadSandboxPlugin from '../components/file-upload/file-upload.sandbox';
 import FlexTemplateSandboxPlugin from '../components/flex-template/flex-template.sandbox';
@@ -36,6 +35,7 @@ import LimitTextSandboxPlugin from '../components/limit-text/limit-text.sandbox'
 import LinkSandboxPlugin from '../components/link/link.sandbox';
 import ListItemSandboxPlugin from '../components/list-item/list-item.sandbox';
 import MenuSandboxPlugin from '../components/menu/menu.sandbox';
+import MessagePageSandBoxPlugin from '../components/message-page/message-page.sandbox';
 import MessageSandboxPlugin from '../components/message/message.sandbox';
 import ModalSandboxPlugin from '../components/modal/modal.sandbox';
 import NavbarItemSandboxPlugin from '../components/navbar-item/navbar-item.sandbox';
@@ -97,7 +97,6 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(ErrorMessageSandboxPlugin);
         Vue.use(ErrorPageNotFoundSandboxPlugin);
         Vue.use(ErrorTechnicalDifficultySandboxPlugin);
-        Vue.use(ErrorTemplateSandBoxPlugin);
         Vue.use(FileSelectSandboxPlugin);
         Vue.use(FileUploadSandboxPlugin);
         Vue.use(FlexTemplateSandboxPlugin);
@@ -116,6 +115,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(NavbarItemSandboxPlugin);
         Vue.use(MenuSandboxPlugin);
         Vue.use(OptionSandboxPlugin);
+        Vue.use(MessagePageSandBoxPlugin);
         Vue.use(PageNotFoundSandboxPlugin);
         Vue.use(PanelSandboxPlugin);
         Vue.use(PhoneNumberSandboxPlugin);

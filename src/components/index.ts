@@ -24,7 +24,6 @@ import ErrorCookiesNotSupported from './error-cookies-not-supported/error-cookie
 import ErrorMessage from './error-message/error-message';
 import ErrorPageNotFoundPlugin from './error-page-not-found/error-page-not-found';
 import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty/error-technical-difficulty';
-import ErrorTemplatePlugin from './error-template/error-template';
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
@@ -40,6 +39,7 @@ import ListItemPlugin from './list-item/list-item';
 import LoginPlugin from './login/login';
 import MenuItemPlugin from './menu-item/menu-item';
 import MenuPlugin from './menu/menu';
+import MessagePagePlugin from './message-page/message-page';
 import MessagePlugin from './message/message';
 import ModalPlugin from './modal/modal';
 import NavbarItemPlugin from './navbar-item/navbar-item';
@@ -117,7 +117,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ErrorMessage);
         Vue.use(ErrorPageNotFoundPlugin);
         Vue.use(ErrorTechnicalDifficultyPlugin);
-        Vue.use(ErrorTemplatePlugin);
+        Vue.use(MessagePagePlugin);
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
         Vue.use(FlexTemplatePlugin);

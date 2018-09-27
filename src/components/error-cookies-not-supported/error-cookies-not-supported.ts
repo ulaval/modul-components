@@ -4,9 +4,10 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_COOKIES_NOT_SUPPORTED_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
+import { MMessageState } from '../message/message';
 import WithRender from './error-cookies-not-supported.html';
 
 @WithRender
@@ -30,7 +31,7 @@ export class MErrorCookiesNotSupported extends ModulVue {
     })
     public hints: string[];
 
-    readonly skin: string = MErrorTemplateSkin.Warning;
+    readonly state: string = MMessageState.Warning;
 
     readonly svgName: string = 'm-svg__error-cookies-disabled';
 }
@@ -40,7 +41,7 @@ const ErrorCookiesNotSupportedPlugin: PluginObject<any> = {
         v.prototype.$log.debug(ERROR_COOKIES_NOT_SUPPORTED_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(LinkPlugin);
-        v.use(ErrorTemplatePlugin);
+        v.use(MessagePagePlugin);
         v.component(ERROR_COOKIES_NOT_SUPPORTED_NAME, MErrorCookiesNotSupported);
     }
 };
