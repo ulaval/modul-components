@@ -1,13 +1,34 @@
 <div>
     <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>Tooltip</h3>
     <p class="m-u--margin-bottom">
-        Test description
+        The tooltip open with icon-button.
+    </p>
+    <p>
+        <m-tooltip>
+            Veniam qui mollit officia magna aute amet culpa irure excepteur culpa fugiat. Adipisicing ex occaecat elit suntdolore sint Lorem ex pariatur ea est non non amet. Irure deserunt reprehenderit ullamco sit id officia dolor fugiat ullamco irure officia. Adipisicing officia magna nisi consequat velit enim excepteur.
+        </m-tooltip>
+    </p>
+    <h3>Tooltip with a link inside</h3>
+    <p class="m-u--margin-bottom">
+        The tooltip has a link inside.
         <!-- if relevant, add link to PR
         </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
         -->
     </p>
     <p>
-        <m-tooltip><!-- Test case --></m-tooltip>
+        <m-tooltip>
+            <a href="https://fr.wikipedia.org/wiki/Cath%C3%A9drale_de_Brasilia" target="_blank">https://fr.wikipedia.org/wiki/Cath%C3%A9drale_de_Brasilia</a>
+        </m-tooltip>
+    </p>
+    <h3>Tooltip with a link inside without link tag</h3>
+    <p class="m-u--margin-bottom">
+        The tooltip has a link inside.
+        </br>From <a href="https://github.com/ulaval/modul-components/pull/482" target="blank">PR 482</a>
+    </p>
+    <p>
+        <m-tooltip>https://fr.wikipedia.org/wiki/Cath%C3%A9drale_de_Brasilia</m-tooltip>
+        <m-tooltip><div>https://fr.wikipedia.org/wiki/Cath%C3%A9drale_de_Brasilia</div></m-tooltip>
+        <m-tooltip><span>https://fr.wikipedia.org/wiki/Cath%C3%A9drale_de_Brasilia</span></m-tooltip>
     </p>
 </div>

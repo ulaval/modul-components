@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-beta.58",
+    "version": "1.0.0-beta.59",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -157,6 +157,7 @@
         "not ie <= 10"
     ],
     "files": [
+        "src/**/*.ts",
         "dist"
     ],
     "license": "Apache-2.0"

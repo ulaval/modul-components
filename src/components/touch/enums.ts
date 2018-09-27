@@ -8,3 +8,8 @@ export enum MZingGestureDirections {
     Right = 'right',
     None = 'none'
 }
+
+export enum MZingTapInteractions {
+    Click = 'click',
+    Tap = 'tap'
+}

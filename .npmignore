@@ -1,6 +1,5 @@
 node_modules
 conf
-src
 tests
 .npmignore
 .vscode
