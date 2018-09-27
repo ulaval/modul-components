@@ -42,6 +42,7 @@ $m-dialog--max-width--s: 420px !default;
 
         &.m--is-close-on-backdrop {
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         &.m--is-enter-active,
