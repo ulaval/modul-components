@@ -3,12 +3,12 @@
     <portal :target-el="'#' + propId">
         <transition name="m--is" :duration="{ enter: 800, leave: 600 }">
             <div class="m-edit-window__wrap"
-                 :class="[{ 'm--is-disabled':disabled },
+                 :class="[{ 'm--is-disabled':disabled, 'm--is-android': isAndroid },
                             className ]"
                  ref="dialogWrap"
                  v-show="propOpen" v-if="propOpen || preload || loaded">
-                <section class="m-edit-window__article" ref="article">
-                    <header class="m-edit-window__header"
+                <section class="m-edit-window__article" :class="{'m--is-android': isAndroid}" ref="article">
+                    <header class="m-edit-window__header" ref="header"
                             :class="{'m--no-padding': !padding || !paddingHeader}">
                         <div class="m-edit-window__header__left">
                             <slot name="header"></slot>
@@ -17,11 +17,11 @@
                             <slot name="header-right"></slot>
                         </div>
                     </header>
-                    <div class="m-edit-window__body"
+                    <div class="m-edit-window__body" ref="body"
                          :class="{ 'm--no-padding': !padding || !paddingBody }">
                         <slot></slot>
                     </div>
-                    <footer class="m-edit-window__footer"
+                    <footer class="m-edit-window__footer" ref="footer"
                             :class="{ 'm--no-padding': !padding || !paddingFooter }">
                         <slot name="footer">
                             <div>
