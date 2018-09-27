@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
+import { Meta } from '../../src/meta/v2';
 import { MetaGenerator } from './meta-generator';
-import { Meta } from './meta-model';
 
 let destination: string = process.argv[2];
 

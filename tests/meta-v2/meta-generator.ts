@@ -22,7 +22,6 @@ export class MetaGenerator {
 
     constructor() {
 
-
         this.project = new Project({
             tsConfigFilePath: './tsconfig.meta.json',
             addFilesFromTsConfig: true
