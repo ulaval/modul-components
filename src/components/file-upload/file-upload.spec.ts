@@ -237,19 +237,20 @@ describe('MFileUpload', () => {
         });
 
         describe('when fileReplacement is false', () => {
-            it('should be the right title', () => {
-                const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
+
+            let fupd: Wrapper<MFileUpload>;
+
+            beforeEach(() => {
+                fupd = mount(MFileUpload, {
                     propsData: validationOpts
                 });
+            });
 
+            it('should be the right title', () => {
                 expect(fupd.vm.title).toEqual(TITLE_ADD_NEW_FILE);
             });
 
             it('should be the right button', () => {
-                const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
-                    propsData: validationOpts
-                });
-
                 expect(fupd.vm.buttonAdd).toEqual(BTN_ADD_NEW_FILE);
             });
         });
