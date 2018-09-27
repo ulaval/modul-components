@@ -1,6 +1,6 @@
 import Project, { ClassDeclaration, ClassInstancePropertyTypes, Decorator, Expression, LanguageService, ObjectLiteralExpression, PropertyAssignment, PropertyDeclaration, SourceFile, SyntaxKind, Type, TypeChecker } from 'ts-simple-ast';
 
-import { Meta, MetaComponent, MetaProps } from './meta-model';
+import { Meta, MetaComponent, MetaProps } from '../../src/meta/v2';
 
 const MIXINS_PROPERTY_NAME: string = 'mixins';
 const COMPONENT_DECORATOR_NAME: string = 'Component';
@@ -22,18 +22,18 @@ export class MetaGenerator {
 
     constructor() {
 
-        // use this in prod
+
         this.project = new Project({
             tsConfigFilePath: './tsconfig.meta.json',
             addFilesFromTsConfig: true
         });
 
-        // use this for test.
+        // use this for test a specific file
         // this.project = new Project({
         //     tsConfigFilePath: './tsconfig.meta.json',
         //     addFilesFromTsConfig: false
         // });
-        // this.project.addExistingSourceFile('src/components/error-browser-not-supported/error-browser-not-supported.ts');
+        // this.project.addExistingSourceFile('src/components/accordion/accordion.ts');
 
         this.typeChecker = this.project.getTypeChecker();
         this.languageService = this.project.getLanguageService();
@@ -65,7 +65,7 @@ export class MetaGenerator {
      */
     public generateComponentMeta(classDeclaration: ClassDeclaration): MetaComponent {
         let output: MetaComponent = {
-            name: classDeclaration.getName()
+            componentName: classDeclaration.getName()
         };
 
         let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
@@ -130,9 +130,9 @@ export class MetaGenerator {
             optional: type.isNullable()
         };
 
-        // extact values of enum type
-        if (type.isEnum() || type.isEnumLiteral()) {
-            output.values = this.getTypeTypesAsStrings(type.compilerType);
+        // extact values of non nullable enum literal type
+        if (type.getNonNullableType().isEnumLiteral()) {
+            output.values = this.getTypeTypesAsStrings(type.getNonNullableType().compilerType);
         }
 
         let propDecorator: Decorator = classInstancePropertyTypes.getDecorator(PROP_DECORATOR_NAME);

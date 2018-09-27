@@ -1,11 +1,11 @@
-import Vue from 'vue';
-
 export type Preview = string | boolean;
 
 export interface ComponentAttribute {
     type: string;
     values: string[];
     default?: number;
+    defaultValue?: string;
+    optional?: boolean;
     origin?: ComponentMeta;
 }
 
