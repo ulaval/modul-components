@@ -280,12 +280,9 @@ export class Portal extends ModulVue implements PortalMixin {
 
             // We wait for the portal creation / mounting.
             this.$nextTick(() => {
-                const portalElement: HTMLElement = this.$el.querySelector('.v-portal') as HTMLElement;
-                if (portalElement) {
-                    this.portalTargetIsReady = true;
-                    this.portalTargetEl = document.querySelector(this.portalTargetSelector) as HTMLElement;
-                    onPortalReady();
-                }
+                this.portalTargetIsReady = true;
+                this.portalTargetEl = document.querySelector(this.portalTargetSelector) as HTMLElement;
+                onPortalReady();
             });
         } else {
             onPortalReady();
