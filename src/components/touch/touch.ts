@@ -3,7 +3,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { TOUCH_NAME } from '../component-names';
-import { MZingGestureDirections, MZingTouchGestures } from './enums';
+import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 import WithRender from './touch.html';
 import ZingTouchUtil, { MZingRegion } from './zingtouch';
 
@@ -86,8 +86,16 @@ export class MTouch extends Vue {
 
     private configureZingTap(): void {
         this.zingRegion!.bind(this.$el, ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Tap), (event: CustomEvent) => {
-            this.handleZingEvent(event);
-            this.$emit('tap', event);
+            switch (ZingTouchUtil.detectTap(event)) {
+                case MZingTapInteractions.Tap:
+                    this.handleZingEvent(event);
+                    this.$emit('tap', event);
+                    break;
+                case MZingTapInteractions.Click:
+                    this.handleZingEvent(event);
+                    this.$emit('click', event);
+                    break;
+            }
         });
     }
 
