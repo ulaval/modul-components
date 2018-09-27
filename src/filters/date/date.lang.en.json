@@ -1,0 +1,6 @@
+{
+    "f-m-date": {
+        "long": "MMMM Do, YYYY",
+        "short": "MMM Do, YYYY"
+    }
+}
