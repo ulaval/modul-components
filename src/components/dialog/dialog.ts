@@ -48,6 +48,8 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
+    @Prop()
+    public closeTitle: string;
 
     $refs: {
         body: HTMLElement;
@@ -115,6 +117,10 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         if (this.closeOnBackdrop) {
             this.as<PortalMixin>().tryClose();
         }
+    }
+
+    private get propCloseTitle(): string {
+        return this.closeTitle ? this.closeTitle : this.$i18n.translate('m-dialog:close') ;
     }
 }
 
