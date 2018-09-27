@@ -157,6 +157,7 @@
         "not ie <= 10"
     ],
     "files": [
+        "src/**/*.ts",
         "dist"
     ],
     "license": "Apache-2.0"

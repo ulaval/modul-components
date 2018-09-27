@@ -87,7 +87,7 @@ exports[`MTimepicker should render correctly when error is set 1`] = `
                     <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
                         <title>m-validation-message:title-error-icon</title>
                         <use aria-hidden="true"></use>
-                    </svg><span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
+                    </svg> <span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
             </div>
         </m-accordion-transition>
     </div>
