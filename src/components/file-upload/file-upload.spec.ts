@@ -16,6 +16,11 @@ import MessagePlugin from '../message/message';
 import { FileService } from './../../utils/file/file';
 import FileUploadPlugin, { MFileUpload } from './file-upload';
 
+const BTN_REPLACE_FILE: string = 'Replace';
+const TITLE_REPLACE_FILE: string = 'Replace a file';
+const BTN_ADD_NEW_FILE: string = 'Add';
+const TITLE_ADD_NEW_FILE: string = 'Upload files';
+
 describe('MFileUpload', () => {
     beforeEach(() => {
         resetModulPlugins();
@@ -72,163 +77,227 @@ describe('MFileUpload', () => {
             maxFiles: 5
         };
 
-        it('should pass validation options to $file service when extensions property is modified', async () => {
-            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
-            jest.spyOn(filesvc, 'setValidationOptions');
-            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
-                propsData: validationOpts,
-                data: {
-                    isMqMinS: true
-                }
-            });
-            const newAcceptedExtensions: string[] = ['avi', 'mp3'];
-            const newRejectedExtensions: string[] = ['css', 'js'];
-            const newValidationOpts: MFileValidationOptions = { ...validationOpts };
-            newValidationOpts.allowedExtensions = newAcceptedExtensions;
-            newValidationOpts.rejectedExtensions = newRejectedExtensions;
-
-            fupd.vm.allowedExtensions = newAcceptedExtensions;
-            fupd.vm.rejectedExtensions = newRejectedExtensions;
-            await Vue.nextTick();
-
-            expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
-                newValidationOpts,
-                DEFAULT_STORE_NAME
-            );
-        });
-
-        it('should pass validation options to $file service when maxSizeKb property is modified', async () => {
-            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
-            jest.spyOn(filesvc, 'setValidationOptions');
-
-            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
-                propsData: validationOpts,
-                data: {
-                    isMqMinS: true
-                }
-            });
-
-            const newMaxSizeKb: number = 100;
-            fupd.vm.maxSizeKb = newMaxSizeKb;
-
-            const newValidationOpts: MFileValidationOptions = { ...validationOpts };
-            newValidationOpts.maxSizeKb = newMaxSizeKb;
-
-            await Vue.nextTick();
-            expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
-                newValidationOpts,
-                DEFAULT_STORE_NAME
-            );
-        });
-
-        it('should pass validation options to $file service when extensions property is modified', async () => {
-            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
-            jest.spyOn(filesvc, 'setValidationOptions');
-
-            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
-                propsData: validationOpts,
-                data: {
-                    isMqMinS: true
-                }
-            });
-
-            const newMaxFiles: number = 25;
-            fupd.vm.maxFiles = newMaxFiles;
-
-            const newValidationOpts: MFileValidationOptions = { ...validationOpts };
-            newValidationOpts.maxFiles = newMaxFiles;
-
-            await Vue.nextTick();
-            expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
-                newValidationOpts,
-                DEFAULT_STORE_NAME
-            );
-        });
-
-        it('should pass validation options to $file service', () => {
-            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
-            jest.spyOn(filesvc, 'setValidationOptions');
-
-            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
-                propsData: validationOpts,
-                data: {
-                    isMqMinS: true
-                }
-            });
-
-            expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
-                validationOpts,
-                DEFAULT_STORE_NAME
-            );
-        });
-
-        it('should render accepted file extensions', () => {
-            const filesvc: FileService = (Vue.prototype as ModulVue).$file;
-            jest.spyOn(filesvc, 'setValidationOptions');
-
-            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
-                propsData: validationOpts,
-                data: {
-                    isMqMinS: true
-                }
-            });
-
-            return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
-        });
-
-        describe('validation messages', () => {
-            let fupd: Wrapper<MFileUpload>;
-
-            const stubMDialogRefs: (fu: MFileUpload) => void = (fu: MFileUpload) => {
-                (fu.$refs.dialog as any) = {
-                    $refs: {
-                        body: document.createElement('div')
+        describe('when fileReplacement is false', () => {
+            it('should pass validation options to $file service when extensions property is modified', async () => {
+                const filesvc: FileService = (Vue.prototype as ModulVue).$file;
+                jest.spyOn(filesvc, 'setValidationOptions');
+                const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
+                    propsData: validationOpts,
+                    data: {
+                        isMqMinS: true
                     }
-                };
-            };
+                });
+                const newAcceptedExtensions: string[] = ['avi', 'mp3'];
+                const newRejectedExtensions: string[] = ['css', 'js'];
+                const newValidationOpts: MFileValidationOptions = { ...validationOpts };
+                newValidationOpts.allowedExtensions = newAcceptedExtensions;
+                newValidationOpts.rejectedExtensions = newRejectedExtensions;
 
-            beforeEach(() => {
-                Vue.use(MessagePlugin);
-                addMessages(Vue, ['components/message/message.lang.en.json']);
+                fupd.vm.allowedExtensions = newAcceptedExtensions;
+                fupd.vm.rejectedExtensions = newRejectedExtensions;
+                await Vue.nextTick();
 
-                fupd = mount(MFileUpload, {
+                expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
+                    newValidationOpts,
+                    DEFAULT_STORE_NAME
+                );
+            });
+
+            it('should pass validation options to $file service when maxSizeKb property is modified', async () => {
+                const filesvc: FileService = (Vue.prototype as ModulVue).$file;
+                jest.spyOn(filesvc, 'setValidationOptions');
+
+                const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                     propsData: validationOpts,
                     data: {
                         isMqMinS: true
                     }
                 });
 
-                stubMDialogRefs(fupd.vm);
-            });
+                const newMaxSizeKb: number = 100;
+                fupd.vm.maxSizeKb = newMaxSizeKb;
 
-            it('should render rejected files in modal', async () => {
-                fupd.vm.$file.add(
-                    createMockFileList([
-                        createMockFile('invalid-extensions'),
-                        createMockFile('invalid-size.jpg', 2000),
-                        createMockFile('valid1.jpg'),
-                        createMockFile('valid2.jpg'),
-                        createMockFile('valid3.jpg'),
-                        createMockFile('valid4.jpg'),
-                        createMockFile('valid5.jpg'),
-                        createMockFile('max-files.jpg')
-                    ])
-                );
+                const newValidationOpts: MFileValidationOptions = { ...validationOpts };
+                newValidationOpts.maxSizeKb = newMaxSizeKb;
 
                 await Vue.nextTick();
-                expect(await renderComponent(fupd.vm)).toMatchSnapshot();
-            });
-
-            it('should clear rejected files when validation message is closed', async () => {
-                fupd.vm.$file.add(
-                    createMockFileList([createMockFile('invalid-extensions')])
+                expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
+                    newValidationOpts,
+                    DEFAULT_STORE_NAME
                 );
-                await Vue.nextTick();
-
-                fupd.find('.m-message button').trigger('click');
-
-                expect(fupd.vm.$file.files().length).toEqual(0);
             });
+
+            it('should pass validation options to $file service when extensions property is modified', async () => {
+                const filesvc: FileService = (Vue.prototype as ModulVue).$file;
+                jest.spyOn(filesvc, 'setValidationOptions');
+
+                const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
+                    propsData: validationOpts,
+                    data: {
+                        isMqMinS: true
+                    }
+                });
+
+                const newMaxFiles: number = 25;
+                fupd.vm.maxFiles = newMaxFiles;
+
+                const newValidationOpts: MFileValidationOptions = { ...validationOpts };
+                newValidationOpts.maxFiles = newMaxFiles;
+
+                await Vue.nextTick();
+                expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
+                    newValidationOpts,
+                    DEFAULT_STORE_NAME
+                );
+            });
+
+            it('should pass validation options to $file service', () => {
+                const filesvc: FileService = (Vue.prototype as ModulVue).$file;
+                jest.spyOn(filesvc, 'setValidationOptions');
+
+                const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
+                    propsData: validationOpts,
+                    data: {
+                        isMqMinS: true
+                    }
+                });
+
+                expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
+                    validationOpts,
+                    DEFAULT_STORE_NAME
+                );
+            });
+
+            it('should render accepted file extensions', () => {
+                const filesvc: FileService = (Vue.prototype as ModulVue).$file;
+                jest.spyOn(filesvc, 'setValidationOptions');
+
+                const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
+                    propsData: validationOpts,
+                    data: {
+                        isMqMinS: true
+                    }
+                });
+
+                return expect(renderComponent(fupd.vm)).resolves.toMatchSnapshot();
+            });
+
+            describe('validation messages', () => {
+                let fupd: Wrapper<MFileUpload>;
+
+                const stubMDialogRefs: (fu: MFileUpload) => void = (fu: MFileUpload) => {
+                    (fu.$refs.dialog as any) = {
+                        $refs: {
+                            body: document.createElement('div')
+                        }
+                    };
+                };
+
+                beforeEach(() => {
+                    Vue.use(MessagePlugin);
+                    addMessages(Vue, ['components/message/message.lang.en.json']);
+
+                    fupd = mount(MFileUpload, {
+                        propsData: validationOpts,
+                        data: {
+                            isMqMinS: true
+                        }
+                    });
+
+                    stubMDialogRefs(fupd.vm);
+                });
+
+                it('should render rejected files in modal', async () => {
+                    fupd.vm.$file.add(
+                        createMockFileList([
+                            createMockFile('invalid-extensions'),
+                            createMockFile('invalid-size.jpg', 2000),
+                            createMockFile('valid1.jpg'),
+                            createMockFile('valid2.jpg'),
+                            createMockFile('valid3.jpg'),
+                            createMockFile('valid4.jpg'),
+                            createMockFile('valid5.jpg'),
+                            createMockFile('max-files.jpg')
+                        ])
+                    );
+
+                    await Vue.nextTick();
+                    expect(await renderComponent(fupd.vm)).toMatchSnapshot();
+                });
+
+                it('should clear rejected files when validation message is closed', async () => {
+                    fupd.vm.$file.add(
+                        createMockFileList([createMockFile('invalid-extensions')])
+                    );
+                    await Vue.nextTick();
+
+                    fupd.find('.m-message button').trigger('click');
+
+                    expect(fupd.vm.$file.files().length).toEqual(0);
+                });
+            });
+
+            it('should be the right title', () => {
+                const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
+                    propsData: validationOpts
+                });
+
+                expect(fupd.vm.title).toEqual(TITLE_ADD_NEW_FILE);
+            });
+
+            it('should be the right button', () => {
+                const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
+                    propsData: validationOpts
+                });
+
+                expect(fupd.vm.buttonAdd).toEqual(BTN_ADD_NEW_FILE);
+            });
+        });
+
+
+        describe('when fileReplacement is set to true', () => {
+
+            let filesvc: FileService;
+            let fupd: Wrapper<MFileUpload>;
+
+            beforeEach(() => {
+                filesvc = (Vue.prototype as ModulVue).$file;
+                jest.spyOn(filesvc, 'setValidationOptions');
+
+                fupd = mount(MFileUpload, {
+                    propsData: {
+                        allowedExtensions: validationOpts.allowedExtensions,
+                        rejectedExtensions: validationOpts.rejectedExtensions,
+                        maxSizeKb: validationOpts.maxSizeKb,
+                        maxFiles: validationOpts.maxFiles,
+                        fileReplacement: true
+                    },
+                    data: {
+                        isMqMinS: true
+                    }
+                });
+            });
+
+            it('should allowed only 1 file', async () => {
+
+                const newValidationOpts: MFileValidationOptions = { ...validationOpts };
+                newValidationOpts.maxFiles = 1;
+
+                await Vue.nextTick();
+                expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
+                    newValidationOpts,
+                    DEFAULT_STORE_NAME
+                );
+            });
+
+            it('should be the right title', () => {
+                expect(fupd.vm.title).toEqual(TITLE_REPLACE_FILE);
+            });
+
+            it('should be the right button', () => {
+                expect(fupd.vm.buttonAdd).toEqual(BTN_REPLACE_FILE);
+            });
+
         });
     });
 

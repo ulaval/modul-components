@@ -227,11 +227,11 @@ export class MFileUpload extends ModulVue {
         return file.rejection === MFileRejectionCause.MAX_FILES;
     }
 
-    private get title(): string {
+    public get title(): string {
         return this.fileReplacement ? this.$i18n.translate('m-file-upload:header-title-file-replacement') : this.$i18n.translate('m-file-upload:header-title', {}, this.propMaxFiles);
     }
 
-    private get buttonAdd(): string {
+    public get buttonAdd(): string {
         return this.fileReplacement ? this.$i18n.translate('m-file-upload:replace') : this.$i18n.translate('m-file-upload:add');
     }
 
