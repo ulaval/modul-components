@@ -132,7 +132,7 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
 </m-dialog>
 `;
 
-exports[`MFileUpload validation when fileReplacement is false should render accepted file extensions 1`] = `
+exports[`MFileUpload validation should render accepted file extensions 1`] = `
 <m-dialog title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__drop-zone">
@@ -156,7 +156,7 @@ exports[`MFileUpload validation when fileReplacement is false should render acce
 </m-dialog>
 `;
 
-exports[`MFileUpload validation when fileReplacement is false validation messages should render rejected files in modal 1`] = `
+exports[`MFileUpload validation validation messages should render rejected files in modal 1`] = `
 <m-dialog title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-message m-file-upload__error-message m--has-error m--is-skin-regular">
