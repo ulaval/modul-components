@@ -50,6 +50,7 @@ describe('draggable', () => {
         }
 
         Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => {});
+        jest.runOnlyPendingTimers();
         return directive;
     };
 
@@ -170,7 +171,7 @@ describe('draggable', () => {
             draggable.destroy();
 
             expect(element.draggable).toBeFalsy();
-            expect(dragImage.hidden).toBeTruthy();
+            expect(dragImage.hidden).toBeFalsy();
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Draggable);
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Dragging);
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Grabbing);
