@@ -10,7 +10,7 @@ import FiltersPlugin from '../../src/filters';
 import FrenchPlugin from '../../src/lang/fr';
 import SandboxesPlugin from '../../src/sandbox';
 import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
-import { FRENCH } from '../../src/utils/i18n/i18n';
+import { FormatMode, FRENCH } from '../../src/utils/i18n/i18n';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 import MetaFactory from './meta-init';
 import routerFactory from './router';
@@ -19,7 +19,8 @@ Vue.config.productionTip = false;
 
 let utilsOptions: UtilsPluginOptions = {
     i18PluginOptions: {
-        curLang: FRENCH
+        curLang: FRENCH,
+        formatMode: FormatMode.Vsprintf
     }
 };
 

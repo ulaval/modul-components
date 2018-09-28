@@ -1,11 +1,12 @@
 import Vue from 'vue';
 
-import MessagePlugin, { DebugMode, ENGLISH, I18nPluginOptions } from '../src/utils/i18n/i18n';
+import MessagePlugin, { DebugMode, ENGLISH, FormatMode, I18nPluginOptions } from '../src/utils/i18n/i18n';
 import LoggerPlugin, { ConsoleOptions } from '../src/utils/logger/logger';
 
 let i18nOptions: I18nPluginOptions = {
     curLang: ENGLISH,
-    debug: DebugMode.Warn
+    debug: DebugMode.Warn,
+    formatMode: FormatMode.Vsprintf
 };
 
 let consoleOptions: ConsoleOptions = {

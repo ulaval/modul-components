@@ -1,34 +1,20 @@
-import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 
+import { addMessages } from '../../../tests/helpers/lang';
 import { NBSP } from '../../utils/str/str';
 import { TIME_NAME } from '../filter-names';
-import DateFilterPlugin from './time';
+import { timeFilter } from './time';
 
 describe(TIME_NAME, () => {
     beforeEach(() => {
-        Vue.use(DateFilterPlugin);
+        addMessages(Vue, ['filters/time/time.lang.fr.json']);
     });
 
     it(`should return formatted time with minutes`, () => {
-        const element: Wrapper<Vue> = mount(
-            {
-                template: `<span>{{ new Date(2018, 8, 27, 17, 05) | f-m-time }}</span>`
-            },
-                { localVue: Vue }
-            );
-
-        expect(element.vm.$el.textContent).toEqual(`17${NBSP}h${NBSP}05`);
+        expect(timeFilter(new Date(2018, 8, 27, 17, 5))).toEqual(`17${NBSP}h${NBSP}05`);
     });
 
     it(`should return formatted time whitout minutes`, () => {
-        const element: Wrapper<Vue> = mount(
-            {
-                template: `<span>{{ new Date(2018, 8, 27, 7, 0) | f-m-time }}</span>`
-            },
-                { localVue: Vue }
-            );
-
-        expect(element.vm.$el.textContent).toEqual(`7${NBSP}h`);
+        expect(timeFilter(new Date(2018, 8, 27, 7, 0))).toEqual(`7${NBSP}h`);
     });
 });
