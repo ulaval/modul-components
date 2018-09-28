@@ -1,183 +1,147 @@
 @import 'abstracts/variables';
-$m-message-size: 22px;
+@import '../accordion/accordion-transition.scss';
+
+$m-message-size: 32px;
+
+@mixin m-message-skin-default($color) {
+    .m-message {
+        &__wrap {
+            border-left: $m-border-width--l solid $color;
+        }
+
+        &__icon,
+        &__title {
+            color: $color;
+        }
+    }
+}
+
+.m-message.m--is-skin-default {
+    &.m--is-state-confirmation {
+        @include m-message-skin-default($m-color--success);
+    }
+
+    &.m--is-state-information {
+        @include m-message-skin-default($m-color--interactive);
+    }
+
+    &.m--is-state-warning {
+        @include m-message-skin-default($m-color--warning);
+    }
+
+    &.m--is-state-error {
+        @include m-message-skin-default($m-color--error);
+    }
+
+    + .m-message {
+        margin-top: $m-spacing;
+    }
+
+    .m-message {
+        &__wrap {
+            display: flex;
+            padding: $m-margin;
+            background: $m-color--grey-lightest;
+        }
+
+        &__icon {
+            justify-content: center;
+
+            .m-icon {
+                font-size: $m-message-size;
+            }
+        }
+
+        &__body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding-left: $m-margin;
+            width: calc(100% - #{$m-message-size});
+
+            &.m--has-close-button {
+                padding-right: $m-touch-size;
+                position: relative;
+            }
+
+            &__close-button {
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 0;
+
+                .m-button__icon .m-icon {
+                    font-size: $m-font-size--xs;
+                    height: $m-font-size--xs;
+                }
+            }
+        }
+
+        &__title {
+            font-size: $m-font-size--l;
+
+            + .m-message__text {
+                margin-top: $m-spacing--s;
+            }
+        }
+    }
+}
+
+.m-message.m--is-skin-light {
+    &.m--is-state-confirmation {
+        color: $m-color--success;
+    }
+
+    &.m--is-state-information {
+        color: $m-color--interactive;
+    }
+
+    &.m--is-state-warning {
+        color: $m-color--warning;
+    }
+
+    &.m--is-state-error {
+        color: $m-color--error;
+    }
+
+    + .m-message {
+        margin-top: $m-spacing--xs;
+    }
+
+    .m-message {
+        &__wrap {
+            display: inline-flex;
+            align-items: flex-start;
+        }
+
+        &__icon {
+            align-items: center;
+            min-height: 1.25em; // Magic number
+            min-width: 18px; // Magic number
+
+            .m-icon {
+                font-size: $m-font-size--l;
+                width: $m-font-size--l;
+            }
+        }
+
+        &__body {
+            margin-left: $m-margin--s;
+            align-self: flex-start;
+            width: calc(100% - #{$m-font-size--l + $m-margin--s});
+        }
+
+        &__title {
+            font-size: $m-font-size;
+        }
+    }
+}
 
 .m-message {
-    display: block;
     text-align: left;
 
-    &.m--is-success {
-        .m-message__icon {
-            color: $m-color--success;
-        }
-    }
-
-    &.m--is-information {
-        .m-message__icon {
-            color: $m-color--interactive;
-        }
-    }
-
-    &.m--is-warning {
-        .m-message__icon {
-            color: $m-color--warning;
-        }
-    }
-
-    &.m--has-error {
-        .m-message__icon {
-            color: $m-color--error;
-        }
-    }
-
-    &.m--is-skin-regular {
-        &.m--is-success {
-            border: 1px solid $m-color--success;
-
-            .m-message {
-                &__icon {
-                    background: $m-color--success-lightest;
-                    border-color: $m-color--success;
-                }
-
-                &__body__close-button {
-                    color: $m-color--success;
-                }
-            }
-        }
-
-        &.m--is-information {
-            border: 1px solid $m-color--interactive;
-
-            .m-message {
-                &__icon {
-                    background: $m-color--information;
-                    border-color: $m-color--interactive;
-                }
-
-                &__body__close-button {
-                    color: $m-color--interactive;
-                }
-            }
-        }
-
-        &.m--is-warning {
-            border: 1px solid $m-color--warning;
-
-            .m-message {
-                &__icon {
-                    background: $m-color--warning-lightest;
-                    border-color: $m-color--warning;
-                }
-
-                &__body__close-button {
-                    color: $m-color--warning;
-                }
-            }
-        }
-
-        &.m--has-error {
-            border: 1px solid $m-color--error;
-
-            .m-message {
-                &__icon {
-                    background: $m-color--error-lightest;
-                    border-color: $m-color--error;
-                }
-
-                &__body__close-button {
-                    color: $m-color--error;
-                }
-            }
-        }
-
-        .m-message {
-            &__wrap {
-                display: flex;
-            }
-
-            &__icon {
-                justify-content: center;
-                width: $m-touch-size;
-                border-right: 1px solid;
-
-                .m-icon {
-                    font-size: $m-message-size;
-                }
-            }
-
-            &__body {
-                padding: $m-margin;
-                width: calc(100% - #{$m-touch-size});
-
-                &.m--has-close-button {
-                    padding-right: $m-touch-size;
-                    position: relative;
-                }
-
-                &__close-button {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    z-index: 0;
-
-                    .m-button__icon .m-icon {
-                        font-size: $m-font-size--xs;
-                        height: $m-font-size--xs;
-                    }
-                }
-            }
-        }
-    }
-
-    &.m--is-skin-light {
-        &.m--is-success {
-            .m-message__wrap {
-                background: $m-color--success-lightest;
-            }
-        }
-
-        &.m--is-information {
-            .m-message__wrap {
-                background: $m-color--information;
-            }
-        }
-
-        &.m--is-warning {
-            .m-message__wrap {
-                background: $m-color--warning-lightest;
-                align-items: baseline;
-            }
-        }
-
-        &.m--has-error {
-            .m-message__wrap {
-                background: $m-color--error-lightest;
-            }
-        }
-
-        .m-message {
-            &__wrap {
-                display: inline-flex;
-                padding: $m-padding--s $m-margin; // Magic number
-            }
-
-            &__icon {
-                align-items: center;
-                min-height: 1.25em; // Magic number
-                min-width: 18px; // Magic number
-
-                .m-icon {
-                    font-size: $m-font-size--l;
-                    width: $m-font-size--l;
-                }
-            }
-
-            &__body {
-                margin-left: $m-margin--s;
-                align-self: flex-start;
-                width: calc(100% - #{$m-font-size--l + $m-margin--s});
-            }
-        }
+    &__wrap {
+        position: relative;
     }
 
     &__icon {
@@ -193,17 +157,21 @@ $m-message-size: 22px;
     }
 
     &__body {
+        position: relative;
         flex: 1 1 auto;
+    }
 
-        &__content {
-            position: relative;
-            z-index: 1;
+    &__title {
+        margin-top: 0;
+    }
 
+    &__text {
+        position: relative;
+
+        > :first-child {
+            &,
             > :first-child {
-                &,
-                > :first-child {
-                    margin-top: 0;
-                }
+                margin-top: 0;
             }
         }
     }
