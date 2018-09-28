@@ -8,7 +8,6 @@ import { MENU_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import { MMenuItem } from '../menu-item/menu-item';
-import PopupPlugin from '../popup/popup';
 import WithRender from './menu.html?style=./menu.scss';
 
 export abstract class BaseMenu extends ModulVue {
@@ -209,7 +208,6 @@ export class MMenu extends BaseMenu implements Menu {
 
 const MenuPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(PopupPlugin);
         v.use(I18nPlugin);
         v.use(IconButtonPlugin);
         v.component(MENU_NAME, MMenu);

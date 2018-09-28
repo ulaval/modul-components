@@ -1,9 +1,8 @@
 <div>
     <m-message state="warning">
-        <m-i18n k="m-page-not-found:message"></m-i18n>
+        <p>{{'m-page-not-found:message' | f-m-i18n}}</p>
     </m-message>
-    <p><m-i18n k="m-page-not-found:directions"></m-i18n></p>
-    <p></p>
+    <p>{{'m-page-not-found:directions' | f-m-i18n}}</p>
     <m-link mode="link">
         {{backToLabel}}
     </m-link>

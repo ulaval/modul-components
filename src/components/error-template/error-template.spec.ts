@@ -3,11 +3,12 @@ import Vue from 'vue';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import { ICON_NAME, LINK_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link, MErrorTemplate, MErrorTemplateSkin } from './error-template';
+import MessagePlugin, { MMessageState } from '../message/message';
+import ErrorTemplatePlugin, { Link, MErrorTemplate } from './error-template';
 
 let wrapper: Wrapper<MErrorTemplate>;
 
-const A_VALID_SKIN: string = MErrorTemplateSkin.Error;
+const A_VALID_STATE: string = MMessageState.Error;
 const A_VALID_ICON_NAME: string = 'iconName';
 const A_VALID_TITLE: string = 'An error title.';
 const FIRST_HINT_CONTENT: string = 'a hint';
@@ -24,7 +25,7 @@ const MANY_LINKS_LIST: Link[] = [FIRST_LINK_CONTENT, SECOND_LINK_CONTENT];
 let hints: string[];
 let links: Link[];
 let slots: {};
-let skin: string;
+let state: string;
 
 const getStubs: any = () => {
     return {
@@ -37,7 +38,7 @@ const initializeShallowWrapper: any = () => {
     wrapper = shallow(MErrorTemplate, {
         stubs: getStubs(),
         propsData: {
-            skin: skin,
+            state: state,
             iconName: A_VALID_ICON_NAME,
             title: A_VALID_TITLE,
             hints: hints,
@@ -50,35 +51,35 @@ const initializeShallowWrapper: any = () => {
 beforeEach(() => {
     hints = [];
     links = [];
-    skin = A_VALID_SKIN;
+    state = A_VALID_STATE;
 });
 
 describe(`Error-template fonctionnality tests`, () => {
 
-    describe(`Given skin information`, () => {
-        it(`Then  class m--is-skin-information present`, () => {
-            skin = MErrorTemplateSkin.Information;
+    describe(`Given state information`, () => {
+        it(`Then  class m--is-state-information present`, () => {
+            state = MMessageState.Information;
             initializeShallowWrapper();
 
-            expect(wrapper.find('.m--is-skin-information').exists()).toBeTruthy();
+            expect(wrapper.find('.m--is-state-information').exists()).toBeTruthy();
         });
     });
 
-    describe(`Given skin red`, () => {
-        it(`Then  class m--is-skin-error present`, () => {
-            skin = MErrorTemplateSkin.Error;
+    describe(`Given state error`, () => {
+        it(`Then  class m--is-state-error present`, () => {
+            state = MMessageState.Error;
             initializeShallowWrapper();
 
-            expect(wrapper.find('.m--is-skin-error').exists()).toBeTruthy();
+            expect(wrapper.find('.m--is-state-error').exists()).toBeTruthy();
         });
     });
 
-    describe(`Given skin yellow`, () => {
-        it(`Then class m--is-skin-warning present`, () => {
-            skin = MErrorTemplateSkin.Warning;
+    describe(`Given state warning`, () => {
+        it(`Then class m--is-state-warning present`, () => {
+            state = MMessageState.Warning;
             initializeShallowWrapper();
 
-            expect(wrapper.find('.m--is-skin-warning').exists()).toBeTruthy();
+            expect(wrapper.find('.m--is-state-warning').exists()).toBeTruthy();
         });
     });
 
@@ -159,7 +160,7 @@ describe(`Error-template integration tests`, () => {
             wrapper = mount(MErrorTemplate, {
                 stubs: getStubs(),
                 propsData: {
-                    skin: MErrorTemplateSkin.Warning,
+                    state: MMessageState.Warning,
                     iconName: A_VALID_ICON_NAME,
                     title: A_VALID_TITLE,
                     hints: MANY_HINTS_LIST,
