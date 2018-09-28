@@ -80,8 +80,8 @@ export class Portal extends ModulVue implements PortalMixin {
     private stackId: string;
     private internalTransitionDuration: number = PortalTransitionDuration.Regular;
     private opening: boolean = false;
-    private portalTargetElExists: boolean = false;
-    private portalTargetIsReady: boolean = false;
+    private portalTargetCreated: boolean = false;
+    private portalTargetMounted: boolean = false;
 
     public setFocusToPortal(): void {
         if (this.as<PortalMixinImpl>().handlesFocus()) {
@@ -145,8 +145,8 @@ export class Portal extends ModulVue implements PortalMixin {
 
         if (this.portalTargetEl && this.portalTargetEl.parentNode) {
             this.portalTargetEl.parentNode.removeChild(this.portalTargetEl);
-            this.portalTargetElExists = false;
-            this.portalTargetIsReady = false;
+            this.portalTargetCreated = false;
+            this.portalTargetMounted = false;
         }
     }
 
@@ -215,11 +215,11 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public get portalCreated(): boolean {
-        return this.portalTargetElExists;
+        return this.portalTargetCreated;
     }
 
     public get portalMounted(): boolean {
-        return (this.propOpen || this.preload || this.loaded) && this.portalTargetIsReady;
+        return (this.propOpen || this.preload || this.loaded) && this.portalTargetMounted;
     }
 
     @Watch('trigger')
@@ -274,13 +274,13 @@ export class Portal extends ModulVue implements PortalMixin {
         if (!this.portalTargetEl) {
             this.propId = this.id === undefined ? 'mPortal-' + uuid.generate() : this.id;
             this.portalTargetEl = document.createElement('div');
-            this.portalTargetElExists = true;
             this.portalTargetEl.setAttribute('id', this.propId);
             document.body.appendChild(this.portalTargetEl);
+            this.portalTargetCreated = true;
 
             // We wait for the portal creation / mounting.
             this.$nextTick(() => {
-                this.portalTargetIsReady = true;
+                this.portalTargetMounted = true;
                 this.portalTargetEl = document.querySelector(this.portalTargetSelector) as HTMLElement;
                 onPortalReady();
             });
