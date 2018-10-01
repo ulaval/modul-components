@@ -39,31 +39,41 @@ export class MEditWindow extends ModulVue {
         this.as<Portal>().transitionDuration = PortalTransitionDuration.Regular + PortalTransitionDuration.XSlow;
 
         if (this.isAndroid) {
-            this.$on('open', this.stickFooter);
+            this.$on('open', this.initStickyFooter);
+            this.$on('close', this.unbindStickyFooter);
         }
     }
 
-    public get popupBody(): any {
+    private get popupBody(): any {
         return (this.$refs.article as Element).querySelector('.m-popup__body');
     }
 
-    public get isAndroid(): boolean {
+    private get isAndroid(): boolean {
         return /(android)/i.test(window.navigator.userAgent);
     }
 
-    // to stick the footer at the window bottom and not have the footer get pushed by android keyboard
-    private stickFooter(): void {
+    private initStickyFooter(): void {
+        this.stickyFooter(0);
+        (window.screen as any).orientation.addEventListener('change', () => {
+            this.stickyFooter(250);
+        });
+    }
 
-        // waiting until the opening animation has finished before doing anything DOM related
+    private unbindStickyFooter(): void {
+        (window.screen as any).orientation.removeEventListener('change', this.stickyFooter(250));
+    }
+
+    // to stick the footer at the window bottom and not have the footer get pushed by android keyboard
+    private stickyFooter(delay: number): void {
         setTimeout(() => {
+
             let wrapH: number = this.$refs.dialogWrap.clientHeight;
             let headerH: number = this.$refs.header.clientHeight;
             let footerH: number = this.$refs.footer.clientHeight;
 
             this.$refs.body.style.height = wrapH - (headerH + footerH) + 'px';
 
-        }, this.as<Portal>().transitionDuration);
-
+        }, delay);
     }
 
     private handlesFocus(): boolean {
