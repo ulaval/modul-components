@@ -8,7 +8,7 @@
         <m-i18n slot="header" k="m-error-message:details"></m-i18n>
         <p><strong><m-i18n k="m-error-message:browser"></m-i18n>: </strong>{{userAgent}}</p>
         <p v-if="!!referenceNumber"><strong><m-i18n k="m-error-message:reference-number"></m-i18n>: </strong>{{referenceNumber}}</p>
-        <p><m-i18n k="m-error-message:date" :params="dateInfo"></m-i18n></p>
+        <p>{{i18nDate}}</p>
         <m-panel  class="m-error-message__stacktrace" :padding="false" v-if="propStacktrace">
             <pre>{{error.stack}}</pre>
         </m-panel>

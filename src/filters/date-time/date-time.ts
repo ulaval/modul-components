@@ -1,5 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 
+import { FormatMode } from '../../utils/i18n/i18n';
 import { dateFilter } from '../date/date';
 import { DATE_TIME_NAME } from '../filter-names';
 import { timeFilter } from '../time/time';
@@ -9,7 +10,10 @@ export const dateTimeFilter: (date: Date, short?: boolean) => string = (date, sh
         date: dateFilter(date, short),
         time: timeFilter(date)
     };
-    return Vue.prototype.$i18n.translate(short ? 'f-m-date-time:short' : 'f-m-date-time:long', params);
+    // let messages: Messages = new Messages({ formatMode: FormatMode.Vsprintf, curLang: FRENCH });
+    // messages.addMessages(FRENCH, require('../date-time/date-time.lang.fr.json'));
+    // Vue.prototype.$i18n.addMessages(FRENCH, require('../date-time/date-time.lang.fr.json'));
+    return Vue.prototype.$i18n.translate(short ? 'f-m-date-time:short' : 'f-m-date-time:long', params, 0, '', true, FormatMode.Vsprintf);
 };
 
 const DateTimeFilterPlugin: PluginObject<any> = {

@@ -6,7 +6,7 @@ import { dateFilter } from './date';
 
 describe(DATE_NAME, () => {
     beforeEach(() => {
-        addMessages(Vue, ['filters/date/date.lang.fr.json']);
+        addMessages(Vue, ['filters/date/date.lang.en.json']);
     });
 
     it(`should return long formatted date`, () => {
