@@ -256,7 +256,7 @@ export enum FroalaStatus {
         }
 
         if ($.FE.LANGUAGE['fr'].translation['URL'] !== this.$i18n.translate('m-rich-text-editor:URL')) {
-            $.FE.LANGUAGE['fr'].translation['URL'] = this.$i18n.translate('m-rich-text-editor:URL')
+            $.FE.LANGUAGE['fr'].translation['URL'] = this.$i18n.translate('m-rich-text-editor:URL');
         }
 
         this.addCustomIcons();
