@@ -1,45 +1,42 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Vertical alignement</h3>
-    <p class="m-u--margin-bottom">
-        vertical alignement of icon & text with light skin
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
-    <p>
-        <m-message state="warning" skin="light">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-        <m-message skin="light">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-        <m-message state="error" skin="light">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-        <m-message state="information" skin="light">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-    </p>
-    <p style="width:200px;">
-        <m-message state="warning" skin="light">Ad labore ad ex do minim qui eu aliquip aute non. Tempor Lorem ipsum ad id esse minim. Pariatur cupidatat qui qui reprehenderit voluptate aute officia consectetur cillum sint do. Consequat ipsum ex est culpa sint velit nostrud nisi minim tempor nostrud tempor adipisicing do.</m-message>
-    </p>
-    <h3>Regular message</h3>
-    <p>
-        <m-message state="warning">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-    </p>
-    <p>
-        <m-message>Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-    </p>
-    <p>
-        <m-message state="error">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-    </p>
-    <p>
-        <m-message state="information">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-    </p>
-    <h3>Close button</h3>
-    <p>
-        <m-message state="warning" :close-button="true">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-    </p>
-    <p>
-        <m-message :close-button="true">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-    </p>
-    <p>
-        <m-message state="error" :close-button="true">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-    </p>
-    <p>
-        <m-message state="information" :close-button="true">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
-    </p>
+    <h2 class="m-u--no-margin">Skin light</h2>
+    <m-message class="m-u--margin-top" state="error" skin="light">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <m-message state="warning" skin="light">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <m-message state="information" skin="light">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <m-message skin="light">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <div class="m-u--margin-top--l">
+        <m-message title="Ad labore ad ex do minim." state="warning" skin="light">Ad labore ad ex do minim qui eu aliquip aute non. Tempor Lorem ipsum ad id esse minim. Pariatur cupidatat qui qui reprehenderit voluptate aute officia consectetur cillum sint do. Consequat ipsum ex est culpa sint velit nostrud nisi minim tempor nostrud tempor adipisicing do.</m-message>
+        <m-message title="Ad labore ad ex do minim." state="error" skin="light"></m-message>
+        <m-message style="max-width:250px;" state="warning" skin="light">Ad labore ad ex do minim qui eu aliquip aute non. Tempor Lorem ipsum ad id esse minim. Pariatur cupidatat qui qui reprehenderit voluptate aute officia consectetur cillum sint do. Consequat ipsum ex est culpa sint velit nostrud nisi minim tempor nostrud tempor adipisicing do.</m-message>
+    </div>
+
+    <h2>Skin default</h2>
+    <m-message class="m-u--margin-top" state="error">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <m-message state="warning">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <m-message state="information">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <m-message>Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+
+    <div class="m-u--margin-top--l">
+        <m-message title="Ad labore ad ex do minim." state="warning">Ad labore ad ex do minim qui eu aliquip aute non. Tempor Lorem ipsum ad id esse minim. Pariatur cupidatat qui qui reprehenderit voluptate aute officia consectetur cillum sint do. Consequat ipsum ex est culpa sint velit nostrud nisi minim tempor nostrud tempor adipisicing do.</m-message>
+        <m-message title="Ad labore ad ex do minim." state="error"></m-message>
+        <m-message style="max-width:250px;" state="warning">Ad labore ad ex do minim qui eu aliquip aute non. Tempor Lorem ipsum ad id esse minim. Pariatur cupidatat qui qui reprehenderit voluptate aute officia consectetur cillum sint do. Consequat ipsum ex est culpa sint velit nostrud nisi minim tempor nostrud tempor adipisicing do.</m-message>
+    </div>
+
+    <h3 class="m-u--h5 m-u--margin-bottom">:close-button="true"</h3>
+    <m-message state="error" :close-button="true">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <m-message state="warning" :close-button="true">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <m-message state="information" :close-button="true">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+    <m-message :close-button="true">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+
+    <h2>Skin page</h2>
+    <m-message class="m-u--margin-top--l" title="Error" state="error" skin="page"></m-message>
+    <m-message class="m-u--margin-top--l" title="Warning" state="warning" skin="page"></m-message>
+    <m-message class="m-u--margin-top--l" title="Information" state="information" skin="page"></m-message>
+    <m-message class="m-u--margin-top--l" title="Titre contenant un retour<br>de ligne HTML" state="confirmation" skin="page">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
+
+    <h2>Skin page-light</h2>
+    <m-message class="m-u--margin-top--l" skin="page-light" title="Error" state="error"></m-message>
+    <m-message class="m-u--margin-top--l" skin="page-light" title="Warning" state="warning"></m-message>
+    <m-message class="m-u--margin-top--l" skin="page-light" title="Information" state="information"></m-message>
+    <m-message class="m-u--margin-top--l" skin="page-light" title="Titre contenant un retour<br>de ligne HTML" state="confirmation">Ad labore ad ex do minim qui eu aliquip aute non.</m-message>
 </div>

@@ -97,6 +97,48 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.removeAllEvents();
     }
 
+    public onDragStart(event: DragEvent): void {
+        // On some mobile devices dragStart will be triggered even though user has not moved / dragged yet.  We want to avoid that.
+        if (polyFillActive.dragDrop && (!this.touchHasMoved && !this.isMouseInitiatedDrag)) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            return;
+        }
+
+        event.stopPropagation();
+        this.doCleanUp();
+        clearUserSelection();
+
+        MDraggable.currentDraggable = this;
+        this.element.classList.add(MDraggableClassNames.Dragging);
+        if (typeof this.options.dragData === 'object') {
+            event.dataTransfer.setData('application/json', JSON.stringify(this.options.dragData));
+        } else {
+            event.dataTransfer.setData('text', this.options.dragData);
+        }
+
+        this.setEventDragImage(event);
+        this.dispatchEvent(event, MDraggableEventNames.OnDragStart);
+    }
+
+    public onDragEnd(event: DragEvent): void {
+        event.stopPropagation();
+        this.doCleanUp();
+
+        // Fix for IE / Edge.  clientX / clientY don't appear to be out of element on dragLeave.
+        // We can't detect whether we're leaving de droppable for real therefore we have to force leave onDragEnd.
+        if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.leaveDroppable(event); }
+        if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
+        if (MSortable.fromSortContainer) { MSortable.fromSortContainer.doCleanUp(); }
+        if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }
+
+        this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
+
+        const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
+        if (dragImage) { dragImage.hidden = true; }
+    }
+
     private setupGrabBehavior(): void {
         this.destroyGrabBehavior();
         this.grabEvents.forEach(eventName => this.removeEventListener(eventName));
@@ -182,8 +224,6 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
             const origin: number = -9999;
             dragImage.style.left = `${origin}px`;
             dragImage.style.top = `${origin}px`;
-            const computedWidth: string | null = window.getComputedStyle(dragImage).width;
-            dragImage.style.width = computedWidth && computedWidth !== 'auto' ? window.getComputedStyle(dragImage).width : '100%';
             dragImage.style.position = 'absolute';
             dragImage.style.overflow = 'hidden';
             dragImage.style.zIndex = '1';
@@ -191,54 +231,26 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         }
     }
 
-    private onDragEnd(event: DragEvent): void {
-        event.stopPropagation();
-        this.doCleanUp();
-
-        // Fix for IE / Edge.  clientX / clientY don't appear to be out of element on dragLeave.
-        // We can't detect whether we're leaving de droppable for real therefore we have to force leave onDragEnd.
-        if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.leaveDroppable(event); }
-        if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
-        if (MSortable.fromSortContainer) { MSortable.fromSortContainer.doCleanUp(); }
-        if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }
-
-        this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
-
-        const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
-        if (dragImage) { dragImage.hidden = true; }
-    }
-
-    private onDragStart(event: DragEvent): void {
-        // On some mobile devices dragStart will be triggered even though user has not moved / dragged yet.  We want to avoid that.
-        if (polyFillActive.dragDrop && (!this.touchHasMoved && !this.isMouseInitiatedDrag)) {
-            event.preventDefault();
-            event.stopPropagation();
-            event.stopImmediatePropagation();
-            return;
-        }
-
-        event.stopPropagation();
-        this.doCleanUp();
-        clearUserSelection();
-
-        MDraggable.currentDraggable = this;
-        this.element.classList.add(MDraggableClassNames.Dragging);
-        if (typeof this.options.dragData === 'object') {
-            event.dataTransfer.setData('application/json', JSON.stringify(this.options.dragData));
-        } else {
-            event.dataTransfer.setData('text', this.options.dragData);
-        }
-
-        this.setDragImage(event);
-        this.dispatchEvent(event, MDraggableEventNames.OnDragStart);
-    }
-
-    private setDragImage(event: DragEvent): void {
-        const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
+    private setEventDragImage(event: DragEvent): void {
+        const dragImage: HTMLElement | null = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         if (dragImage && event.dataTransfer.setDragImage) {
             dragImage.hidden = false;
-            event.dataTransfer.setDragImage(dragImage, 0, 0);
+            if (polyFillActive.dragDrop) {
+                event.dataTransfer.setDragImage(dragImage, 0, 0);
+            } else {
+                event.dataTransfer.setDragImage(dragImage, this.calculateHorizontalCenterOffset(dragImage), this.calculateVerticalCenterOffset(dragImage));
+            }
         }
+    }
+
+    private calculateHorizontalCenterOffset(dragImage: HTMLElement): number {
+        const dragImageWidth: string | null = window.getComputedStyle(dragImage).width;
+        return dragImageWidth ? parseInt(dragImageWidth, 10) / 2 : 0;
+    }
+
+    private calculateVerticalCenterOffset(dragImage: HTMLElement): number {
+        const dragImageHeight: string | null = window.getComputedStyle(dragImage).height;
+        return dragImageHeight ? parseInt(dragImageHeight, 10) / 2 : 0;
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
