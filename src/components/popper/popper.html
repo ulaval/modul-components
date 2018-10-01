@@ -16,10 +16,11 @@
                      :class="[{ 'm--is-default-anim': defaultAnim,
                                 'm--is-open': defaultAnimOpen,
                                 'm--has-shadow': shadow,
-                                'm--has-background': background },
+                                'm--has-background': background,
+                                'm--is-hidden': isHidden },
                                 'm--is-placement-' + placement,
                                 className ]"
-                     :aria-hidden="!propOpen"
+                     :aria-hidden="!propOpen || isHidden"
                      :style="{ width: width }"
                      v-show="propOpen" v-if="preload || loaded">
                 <header class="m-popper__header" :class="{ 'm--no-padding': !padding || !paddingHeader }"  v-if="hasHeaderSlot">
