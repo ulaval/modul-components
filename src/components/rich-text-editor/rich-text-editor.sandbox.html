@@ -17,9 +17,18 @@
         <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
     </div>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="model" toolbar-sticky-offset=".mtest-header" :label="'texte riche'" :max-width="'large'"
-            :placeholder="'some placeholder'" :focus="focus" :error="error" :error-message="errorMessage"
-            :valid-message="validMessage" :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
+        <m-rich-text-editor v-model="model"
+            toolbar-sticky-offset=".mtest-header"
+            :label="'texte riche'"
+            :max-width="'large'"
+            :placeholder="'some placeholder'"
+            :focus="focus"
+            :error="error"
+            :error-message="errorMessage"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"
+            :waiting="waiting"
+            :disabled="disabled"></m-rich-text-editor>
     </div>
     <div class="m-u--margin-bottom">
         <h5>Résultat dans le lecteur</h5>
@@ -31,7 +40,7 @@
         <h5>Contenu du v-model</h5>
         <div>
             <pre>
-                {{ model }}
+{{ model }}
             </pre>
         </div>
     </div>
@@ -72,9 +81,17 @@
     </div>
     <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="model" :toolbar-sticky-offset="58" :label="'texte riche'" :max-width="'large'"
-            :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage" :helper-message="helperMessage"
-            :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
+        <m-rich-text-editor v-model="model"
+            :toolbar-sticky-offset="58"
+            :label="'texte riche'"
+            :max-width="'large'"
+            :focus="focus"
+            :error="error"
+            :error-message="errorMessage"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"
+            :waiting="waiting"
+            :disabled="disabled"></m-rich-text-editor>
     </div>
     <h5 class="m-u--margin-bottom">Tests de la case à cocher « Ouvrir dans un nouvel onglet » d'un lien externe</h5>
     <div class="m-u--margin-bottom">
