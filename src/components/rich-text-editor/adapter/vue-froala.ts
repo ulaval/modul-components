@@ -194,7 +194,10 @@ export enum FroalaStatus {
     }
 
     protected mounted(): void {
-        if ($.FE !== undefined && $.FE.LANGUAGE[this.config.language] !== undefined) {
+        if ($.FE !== undefined
+            && $.FE.LANGUAGE[this.config.language] !== undefined
+            && this.customTranslations !== undefined
+        ) {
             Object.assign($.FE.LANGUAGE[this.config.language].translation, this.customTranslations);
         }
 
