@@ -174,9 +174,10 @@ export enum FroalaStatus {
             icon: 'angle-left',
             undo: false,
             focus: false,
-            callback: () => {
-                this.froalaEditor.stylesSubMenu.hideSubMenu();
-                this.froalaEditor.listesSubMenu.hideSubMenu();
+            callback: function(): void {
+                // Important not to use an arrow function here with this.froalaEditor since the editor is corrupted for some reason.
+                this.stylesSubMenu.hideSubMenu();
+                this.listesSubMenu.hideSubMenu();
                 // we'll use this submenu when we'll support images,tables,...
                 // this.froalaEditor.insertionsSubMenu.hideSubMenu();
             }
