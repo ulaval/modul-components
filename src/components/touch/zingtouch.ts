@@ -1,6 +1,6 @@
 import ZingTouch from 'zingtouch';
 
-import { MZingGestureDirections, MZingTouchGestures } from './enums';
+import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 
 export type MZingGestureCallback = (event: CustomEvent) => void;
 export interface MZingGesture {}
@@ -41,6 +41,15 @@ export class MZingTouchUtil {
         }
 
         return MZingGestureDirections.None;
+    }
+
+    detectTap(event: CustomEvent): MZingTapInteractions {
+        const interval: number = event.detail.interval;
+        if (interval <= 5) {
+            return MZingTapInteractions.Click;
+        } else {
+            return MZingTapInteractions.Tap;
+        }
     }
 }
 

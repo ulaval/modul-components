@@ -1,55 +1,118 @@
 @import '../../styles/abstracts/variables';
 
+$m-error-template--shadow-width: 150px;
+$m-error-template--shadow-height: 5px;
+
+@mixin m-error-template-state($color, $color-background) {
+    .m-error-template {
+        &__title,
+        &__icon {
+            color: $color;
+        }
+
+        &__icon-container::before {
+            background: $color-background;
+        }
+    }
+}
+
 .m-error-template {
+    &.m--is-state-confirmation {
+        @include m-error-template-state($m-color--success, $m-color--success-lightest);
+    }
+
+    &.m--is-state-information {
+        @include m-error-template-state($m-color--interactive, $m-color--interactive-lightest);
+    }
+
+    &.m--is-state-error {
+        @include m-error-template-state($m-color--error, $m-color--error-lightest);
+    }
+
+    &.m--is-state-warning {
+        @include m-error-template-state($m-color--warning, $m-color--warning-lightest);
+    }
+
+    &.m--is-skin-default {
+        .m-error-template {
+            &__title {
+                font-size: $m-font-size--h3;
+            }
+
+            &__icon-container {
+                &::before {
+                    right: 0;
+                    left: 0;
+                    transform: translate3d(0, -50%, 0);
+                    height: 80px; // Magic number
+                }
+
+                &::after {
+                    width: $m-error-template--shadow-width;
+                }
+            }
+        }
+    }
+
+    &.m--is-skin-light {
+        .m-error-template {
+            &__title {
+                font-size: $m-font-size--h4;
+            }
+
+            &__icon-container {
+                &::before {
+                    left: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                    width: 100%;
+                    max-width: 140px; //Magic number
+                    height: 48px; // Magic number
+                }
+
+                &::after {
+                    width: $m-error-template--shadow-width/2;
+                }
+            }
+        }
+    }
+
+    &__header {
+        ~ .m-error-template__body {
+            padding-top: $m-spacing;
+        }
+    }
+
     &__title {
-        font-size: $m-font-size--h3;
         text-align: center;
         font-weight: $m-font-weight--black;
+        margin: 0;
 
-        .m--is-skin-information & {
-            color: $m-color--interactive;
-        }
-
-        .m--is-skin-error & {
-            color: $m-color--error;
-        }
-
-        .m--is-skin-warning & {
-            color: $m-color--warning;
+        ~ .m-error-template__icon-container {
+            margin-top: $m-spacing;
         }
     }
 
     &__icon-container {
         position: relative;
-        min-height: 130px;
-        margin: $m-spacing--l 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
         &::before {
-            content: "";
-            display: block;
             position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translate3d(0, -50%, 0);
-            height: 80px;
-            width: 100%;
+            top: calc(50% - #{$m-spacing--s - $m-error-template--shadow-height}); // Magic number: align this backgroun with icon
             z-index: 0;
+            content: '';
+            display: block;
+        }
 
-            .m--is-skin-information & {
-                background-color: $m-color--interactive-lightest;
-            }
-
-            .m--is-skin-error & {
-                background-color: $m-color--error-lightest;
-            }
-
-            .m--is-skin-warning & {
-                background-color: $m-color--warning-lightest;
-            }
+        &::after {
+            content: '';
+            height: $m-error-template--shadow-height;
+            border-radius: 50%;
+            background: $m-color--grey-lighter;
+            margin-top: $m-spacing--s;
         }
 
         &__svg {
@@ -80,12 +143,32 @@
     }
 
     &__hints {
+        margin: 0;
+
         &.m--no-content {
             text-align: center;
+        }
+
+        + .m-error-template__hints {
+            margin-top: $m-margin;
         }
     }
 
     &__details {
-        margin: $m-spacing 0;
+        margin: 0;
+
+        &:not(:first-child) {
+            margin: $m-spacing 0 0 0;
+        }
+    }
+
+    &__links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        &:not(:first-child) {
+            margin: $m-spacing 0 0 0;
+        }
     }
 }

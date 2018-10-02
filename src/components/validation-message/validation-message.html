@@ -1,16 +1,28 @@
 <div class="m-validation-message">
     <m-accordion-transition :transition="transition">
-        <div class="m-validation-message__wrap" v-if="(hasErrorMessage || hasValidMessage || hasHelperMessage) && active" @click="onClick">
-            <p class="m-validation-message__error" v-if="hasErrorMessage && hasError">
-                <m-icon name="m-svg__error" :svg-title="titleErrorIcon" class="m-validation-message__error__icon">
-                </m-icon><span class="m-validation-message__text">{{ errorMessage }}</span>
+        <div class="m-validation-message__wrap"
+             v-if="(hasErrorMessage || hasValidMessage || hasHelperMessage) && active"
+             @click="onClick">
+            <p class="m-validation-message__error"
+               v-if="hasErrorMessage && hasError">
+                <m-icon name="m-svg__error"
+                        :svg-title="titleErrorIcon"
+                        class="m-validation-message__error__icon">
+                </m-icon>
+                <span class="m-validation-message__text"
+                      v-html="errorMessage"></span>
             </p>
-            <p class="m-validation-message__valid" v-if="hasValidMessage && isValid">
-                <m-icon name="m-svg__confirmation" :svg-title="titleValidIcon" class="m-validation-message__valid__icon"></m-icon>
-                <span class="m-validation-message__text">{{ validMessage }}</span>
+            <p class="m-validation-message__valid"
+               v-if="hasValidMessage && isValid">
+                <m-icon name="m-svg__confirmation"
+                        :svg-title="titleValidIcon"
+                        class="m-validation-message__valid__icon"></m-icon>
+                <span class="m-validation-message__text"
+                      v-html="validMessage"></span>
             </p>
-            <p class="m-validation-message__helper" v-if="hasHelperMessage">{{ helperMessage }}</p>
+            <p class="m-validation-message__helper"
+               v-if="hasHelperMessage"
+               v-html="helperMessage"></p>
         </div>
     </m-accordion-transition>
 </div>
-
