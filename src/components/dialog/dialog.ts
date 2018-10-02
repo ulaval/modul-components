@@ -48,6 +48,8 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
+    @Prop({ default: false })
+    public keyDownEsc: boolean;
 
     $refs: {
         body: HTMLElement;
@@ -60,7 +62,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public handlesFocus(): boolean {
-        return this.focusManagement;
+        return this.focusManagement && !this.keyDownEsc;
     }
 
     public doCustomPropOpen(value: boolean): boolean {
@@ -89,9 +91,27 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return this.$refs.article;
     }
 
+    public escKeyDownEvent(): void {
+        if (this.keyDownEsc) {
+            this.$emit('key-down-esc');
+        }
+    }
+
+    public focus(): void {
+        this.$refs.dialogWrap.focus();
+    }
+
     protected mounted(): void {
         if (!this.hasHeader) {
             this.$log.warn('<' + DIALOG_NAME + '> needs a header slot or title prop.');
+        }
+    }
+
+    protected updated(): void {
+        if (this.as<PortalMixin>().propOpen && !this.handlesFocus()) {
+            this.$nextTick(() => {
+                this.focus();
+            });
         }
     }
 

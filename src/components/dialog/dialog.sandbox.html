@@ -12,4 +12,15 @@
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, velit? Temporibus et ipsa, voluptatibus cum, ducimus rerum ex officia minima culpa maiores architecto tempore aut, consequuntur consectetur possimus tempora recusandae!
         <div slot="footer">Pied de page</div>
     </m-dialog>
+
+    <h3>Trigger the dialog with event the close when press key 'esc' </h3>
+    <m-dialog title="Titre de la fenêtre" ref="dialogKeyDownParent" @key-down-esc="cancel(1)" :key-down-esc="true">
+        <m-button slot="trigger">Ouvrir la fenêtre</m-button>
+        <m-dialog title="Titre de la fenêtre" ref="dialogKeyDownEnfant" @key-down-esc="cancel(2)" :key-down-esc="true">
+            <m-button slot="trigger">Ouvrir la fenêtre</m-button>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, velit? Temporibus et ipsa, voluptatibus cum, ducimus rerum ex officia minima culpa maiores architecto tempore aut, consequuntur consectetur possimus tempora recusandae!
+            <div slot="footer">Pied de page</div>
+        </m-dialog>
+        <div slot="footer">Pied de page</div>
+    </m-dialog>
 </div>

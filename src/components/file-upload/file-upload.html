@@ -1,4 +1,4 @@
-<m-dialog :title="title" ref="dialog" :open.sync="propOpen" @open="onOpen" @close="onClose" :close-on-backdrop="false" :padding-body="false">
+<m-dialog :title="title" ref="dialog" :open.sync="propOpen" @open="onOpen" @close="onClose" @key-down-esc="onClose" :key-down-esc="true" :close-on-backdrop="false" :padding-body="false">
 
     <span slot="trigger">
         <slot></slot>
@@ -33,7 +33,7 @@
                     <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
                     <m-i18n k="m-file-upload:title" :nb="maxFiles"></m-i18n>
                 </h3>
-                <m-file-select class="m-file-upload__drop-zone__instructions__button" skin="secondary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName"
+                <m-file-select @focus="fileSelectFocus" class="m-file-upload__drop-zone__instructions__button" skin="secondary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName"
                     keep-store="true"></m-file-select>
             </div>
             <p class="m-file-upload__drop-zone__format" v-if="hasAllowedExtensions">
