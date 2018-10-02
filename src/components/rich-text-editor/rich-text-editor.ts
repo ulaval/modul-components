@@ -49,6 +49,10 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     @Prop()
     public scrollableContainer: string | undefined;
 
+    public customTranslations: {[key: string]: string} = {
+        'URL': this.$i18n.translate('m-rich-text-editor:URL')
+    };
+
     protected id: string = `mrich-text-${uuid.generate()}`;
 
     mounted(): void {
@@ -80,12 +84,6 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
     public getSelectorErrorMsg(prop: string): string {
         return `${RICH_TEXT_EDITOR_NAME}: No element has been found with the selector given in the ${prop} prop.`;
-    }
-
-    public get customTranslations(): {[key: string]: string} {
-        return {
-            'URL': this.$i18n.translate('m-rich-text-editor:URL')
-        };
     }
 
     protected refreshModel(newValue: string): void {
