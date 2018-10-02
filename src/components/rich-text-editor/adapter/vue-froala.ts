@@ -32,7 +32,8 @@ enum froalaEvents {
     PasteBeforeCleanup = 'froalaEditor.paste.beforeCleanup',
     PasteAfterCleanup = 'froalaEditor.paste.afterCleanup',
     CommandAfter = 'froalaEditor.commands.after',
-    CommandBefore = 'froalaEditor.commands.before'
+    CommandBefore = 'froalaEditor.commands.before',
+    ShowLinkInsert = 'froalaEditor.popups.show.link.insert'
 }
 
 enum FroalaElements {
@@ -334,6 +335,9 @@ export enum FroalaStatus {
                     if (cmd === 'fullscreen') {
                         this.unblockMobileBlur();
                     }
+                },
+                [froalaEvents.ShowLinkInsert]: (_e, editor) => {
+                    this.manageLinkInsert(editor);
                 }
             }
         });
@@ -358,6 +362,16 @@ export enum FroalaStatus {
             this.hideToolbar();
         } else {
             this.$emit('focus');
+        }
+    }
+
+    private manageLinkInsert(editor: any): void {
+        const popup: HTMLElement = editor.popups.get('link.insert')[0];
+        const urlField: HTMLInputElement = popup.querySelector(`[name="href"]`) as HTMLInputElement;
+        const textField: HTMLInputElement = popup.querySelector(`[name="text"]`) as HTMLInputElement;
+
+        if (!urlField.value && !textField.value) {
+            (popup.querySelector(`[name="target"]`) as HTMLInputElement).checked = true;
         }
     }
 
