@@ -368,9 +368,8 @@ export enum FroalaStatus {
     private manageLinkInsert(editor: any): void {
         const popup: HTMLElement = editor.popups.get('link.insert')[0];
         const urlField: HTMLInputElement = popup.querySelector(`[name="href"]`) as HTMLInputElement;
-        const textField: HTMLInputElement = popup.querySelector(`[name="text"]`) as HTMLInputElement;
 
-        if (!urlField.value && !textField.value) {
+        if (!urlField.value) {
             (popup.querySelector(`[name="target"]`) as HTMLInputElement).checked = true;
         }
     }
