@@ -82,6 +82,21 @@
         :waiting="waiting"
         :disabled="disabled"></m-rich-text-editor>
     </div>
+    <h5 class="m-u--margin-bottom">Ouvrir dans une nouvelle fenêtre est coché par défaut dans la modale d'insertion de lien</h5>
+    <div class="m-u--margin-bottom">
+        <m-rich-text-editor v-model="model"
+        :toolbar-sticky-offset="58"
+        :label="'texte riche'"
+        :max-width="'large'"
+        :focus="focus"
+        :error="error"
+        :error-message="errorMessage"
+        :valid-message="validMessage"
+        :helper-message="helperMessage"
+        :waiting="waiting"
+        :disabled="disabled"
+        :placeholder="'some placeholder'"></m-rich-text-editor>
+    </div>
     <h5 class="m-u--margin-bottom">peut focuser / clicker différents éléments à la suite du rich-text après avoir focus le rich-text</h5>
     <div class="m-u--margin-bottom">
         <div>
