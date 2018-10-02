@@ -15,27 +15,27 @@
     *::after {
         box-sizing: inherit;
     }
-}
 
-::selection {
-    background: $m-color--ul-yellow;
-    color: $m-color--text;
-}
+    ::selection {
+        background: $m-color--ul-yellow;
+        color: $m-color--text;
+    }
 
-ul,
-li {
-    padding: 0;
-}
+    ul,
+    li {
+        padding: 0;
+    }
 
-ul li {
-    list-style: none;
-}
+    ul li {
+        list-style: none;
+    }
 
-button {
-    border-radius: 0;
-}
+    button {
+        border-radius: 0;
+    }
 
-abbr {
-    text-decoration: none;
-    box-shadow: 0 1px $m-color--grey-dark;
+    abbr {
+        text-decoration: none;
+        box-shadow: 0 1px $m-color--grey-dark;
+    }
 }
