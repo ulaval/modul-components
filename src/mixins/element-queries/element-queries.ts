@@ -77,9 +77,12 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
 
     private resizeElement(el: HTMLElement): void {
         if (this.eqActive) {
-            this.setEqMin(el);
-            this.setEqMax(el);
-            this.setEq(el);
+            const elWidth: number = el.clientWidth;
+            requestAnimationFrame(() => {
+                this.setEqMin(elWidth);
+                this.setEqMax(elWidth);
+                this.setEq(elWidth);
+            });
             this.$emit('resize');
             clearTimeout(this.doneResizeEvent);
             this.doneResizeEvent = setTimeout(() => {
@@ -102,9 +105,9 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
     }
 
-    private setEqMin(el: HTMLElement): void {
+    private setEqMin(elWidth: number): void {
         // width >= XL
-        if (el.clientWidth >= ElementQueriesBpMin.XL) {
+        if (elWidth >= ElementQueriesBpMin.XL) {
             if (!this.isEqMinXL) {
                 this.isEqMinXL = true;
                 this.$emit('isEqMinXL', true);
@@ -117,7 +120,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width >= L
-        if (el.clientWidth >= ElementQueriesBpMin.L) {
+        if (elWidth >= ElementQueriesBpMin.L) {
             if (!this.isEqMinL) {
                 this.isEqMinL = true;
                 this.$emit('isEqMinL', true);
@@ -130,7 +133,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width >= M
-        if (el.clientWidth >= ElementQueriesBpMin.M) {
+        if (elWidth >= ElementQueriesBpMin.M) {
             if (!this.isEqMinM) {
                 this.isEqMinM = true;
                 this.$emit('isEqMinM', true);
@@ -143,7 +146,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width >= S
-        if (el.clientWidth >= ElementQueriesBpMin.S) {
+        if (elWidth >= ElementQueriesBpMin.S) {
             if (!this.isEqMinS) {
                 this.isEqMinS = true;
                 this.$emit('isEqMinS', true);
@@ -156,7 +159,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width >= XS
-        if (el.clientWidth >= ElementQueriesBpMin.XS) {
+        if (elWidth >= ElementQueriesBpMin.XS) {
             if (!this.isEqMinXS) {
                 this.isEqMinXS = true;
                 this.$emit('isEqMinXS', true);
@@ -169,9 +172,9 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
     }
 
-    private setEqMax(el: HTMLElement): void {
+    private setEqMax(elWidth: number): void {
         // width <= XL
-        if (el.clientWidth <= ElementQueriesBpMax.XL) {
+        if (elWidth <= ElementQueriesBpMax.XL) {
             if (!this.isEqMaxXL) {
                 this.isEqMaxXL = true;
                 this.$emit('isEqMaxXL', true);
@@ -184,7 +187,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width <= L
-        if (el.clientWidth <= ElementQueriesBpMax.L) {
+        if (elWidth <= ElementQueriesBpMax.L) {
             if (!this.isEqMaxL) {
                 this.isEqMaxL = true;
                 this.$emit('isEqMaxL', true);
@@ -197,7 +200,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width <= M
-        if (el.clientWidth <= ElementQueriesBpMax.M) {
+        if (elWidth <= ElementQueriesBpMax.M) {
             if (!this.isEqMaxM) {
                 this.isEqMaxM = true;
                 this.$emit('isEqMaxM', true);
@@ -210,7 +213,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width <= S
-        if (el.clientWidth <= ElementQueriesBpMax.S) {
+        if (elWidth <= ElementQueriesBpMax.S) {
             if (!this.isEqMaxS) {
                 this.isEqMaxS = true;
                 this.$emit('isEqMaxS', true);
@@ -223,7 +226,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width <= XS
-        if (el.clientWidth <= ElementQueriesBpMax.XS) {
+        if (elWidth <= ElementQueriesBpMax.XS) {
             if (!this.isEqMaxXS) {
                 this.isEqMaxXS = true;
                 this.$emit('isEqMaxXS', true);
@@ -236,9 +239,9 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
     }
 
-    private setEq(el: HTMLElement): void {
+    private setEq(elWidth: number): void {
         // width >= minM && width <= maxL
-        if (el.clientWidth >= ElementQueriesBpMin.M && el.clientWidth <= ElementQueriesBpMax.L) {
+        if (elWidth >= ElementQueriesBpMin.M && elWidth <= ElementQueriesBpMax.L) {
             if (!this.isEqL) {
                 this.isEqL = true;
                 this.$emit('isEqL', true);
@@ -251,7 +254,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width >= minS && width <= maxM
-        if (el.clientWidth >= ElementQueriesBpMin.S && el.clientWidth <= ElementQueriesBpMax.M) {
+        if (elWidth >= ElementQueriesBpMin.S && elWidth <= ElementQueriesBpMax.M) {
             if (!this.isEqM) {
                 this.isEqM = true;
                 this.$emit('isEqM', true);
@@ -264,7 +267,7 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
         }
 
         // width >= minXS && width <= maxS
-        if (el.clientWidth >= ElementQueriesBpMin.XS && el.clientWidth <= ElementQueriesBpMax.S) {
+        if (elWidth >= ElementQueriesBpMin.XS && elWidth <= ElementQueriesBpMax.S) {
             if (!this.isEqS) {
                 this.isEqS = true;
                 this.$emit('isEqS', true);
