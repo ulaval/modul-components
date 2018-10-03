@@ -139,10 +139,6 @@
                 svg {
                     fill: $m-color--grey-darker;
                 }
-
-                &::after {
-                    border-top-color: $m-color--grey-darker !important;
-                }
             }
 
             button[data-cmd*='specialCharacters'] {
@@ -159,7 +155,7 @@
                     height: 0;
                     border-left: 4px solid transparent;
                     border-right: 4px solid transparent;
-                    border-top: 4px solid $m-color--grey-darkest;
+                    border-top: 4px solid $m-color--grey-darker;
                     right: 4px;
                     top: 17px;
                     content: '';
