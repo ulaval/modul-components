@@ -1,15 +1,16 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './template.html?style=./template.scss';
-import { TEMPLATE_NAME } from '../component-names';
+
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
+import { TEMPLATE_NAME } from '../component-names';
+import WithRender from './template.html?style=./template.scss';
 
 @WithRender
 @Component({
     mixins: [ElementQueries]
 })
-export class Mtemplate extends Vue {
+export class MTemplate extends Vue {
     @Prop()
     public footerFullWidth: boolean;
 
@@ -36,7 +37,7 @@ export class Mtemplate extends Vue {
 
 const TemplatePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(TEMPLATE_NAME, Mtemplate);
+        v.component(TEMPLATE_NAME, MTemplate);
     }
 };
 
