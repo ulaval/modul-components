@@ -1,6 +1,7 @@
 <div>
 
     <h2>Toggles</h2>
+
     <p>
         Clicks from those children elements shouldn't toggle the accordion
     </p>
@@ -52,12 +53,25 @@
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
     <br>
+    <p>
+        accordion opening / closing can be trigger using the prop open.
+    </p>
+    <br>
+    <m-button @click="toggleAccordion()">toggle</m-button>
+    <m-accordion icon-position="right" :open.sync="accordionOpen" @update:open="onAccordionOpen($event)" @click="onClick">
+        <div slot="header">
+            <div>Accordion header</div>
+        </div>
+        <p class="m-u--no-margin">Accordion content</p>
+    </m-accordion>
+    <br>
     <br>
 
     <h2>Border-top</h2>
     <p>
         when open, hide border-top on the next accordion
     </p>
+
     <m-accordion>
         <div slot="header">Accordion title</div>
         <p class="m-u--no-margin">Accordion content</p>
