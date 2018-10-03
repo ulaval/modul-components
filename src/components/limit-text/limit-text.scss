@@ -1,6 +1,8 @@
 @import '../../styles/abstracts/variables';
 
 .m-limit-text {
+    text-size-adjust: 100%;
+
     &__content,
     &__original {
         & > :first-child {
