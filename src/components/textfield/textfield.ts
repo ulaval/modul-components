@@ -75,14 +75,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     protected mounted(): void {
-        (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
         this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
     @Watch('type')
     private typeChanged(type: MTextfieldType): void {
         this.$log.warn(TEXTFIELD_NAME + ': Change of property "type" is not supported');
-        (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
 
     @Watch('inputType')
@@ -107,12 +105,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
             this.type === MTextfieldType.Telephone) {
             type = this.type;
         }
-        this.$nextTick(() => {
-            let inputEl: HTMLElement = this.$refs.input as HTMLElement;
-            if (inputEl) {
-                inputEl.setAttribute('type', type);
-            }
-        });
         return type;
     }
 
