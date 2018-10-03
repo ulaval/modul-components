@@ -97,7 +97,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.passwordAsText = !this.passwordAsText;
     }
 
-    private get inputType(): MTextfieldType {
+    public get inputType(): MTextfieldType {
         let type: MTextfieldType = MTextfieldType.Text;
         if (this.type === MTextfieldType.Password && this.passwordAsText) {
             type = MTextfieldType.Text;
