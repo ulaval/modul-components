@@ -13,12 +13,12 @@ export class MetaV2Converter {
      * @param tagName
      */
     extractComponentMetaFromV2(tagName: string): ComponentMeta {
+        let metaComponent: MetaComponent = this.metaV2.findMetaComponentByTagName(tagName);
 
         let componentMetaOutput: ComponentMeta = {
-            tag: tagName
+            tag: tagName,
+            metaV2: metaComponent
         };
-
-        let metaComponent: MetaComponent = this.metaV2.findMetaComponentByTagName(tagName);
 
         // set attribute
         if (metaComponent.props) {

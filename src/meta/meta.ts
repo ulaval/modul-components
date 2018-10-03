@@ -1,3 +1,5 @@
+import { MetaComponent } from './v2';
+
 export type Preview = string | boolean;
 
 export interface ComponentAttribute {
@@ -44,6 +46,7 @@ export interface ComponentMeta {
     mixins?: string[];
     methods?: ComponentMethods;
     enums?: ComponentEnums;
+    metaV2?: MetaComponent;
 }
 
 export type ComponentMetaMap = {
