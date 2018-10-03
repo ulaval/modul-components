@@ -12,7 +12,7 @@ export abstract class BaseTabs extends ModulVue {
 
 @WithRender
 @Component
-export class MTabPane extends ModulVue {
+export class MTabPanel extends ModulVue {
 
     @Prop()
     public label: string;
@@ -51,7 +51,7 @@ export class MTabPane extends ModulVue {
 const TabPannePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.warn(TAB_PANEL_NAME + ' is not ready for production');
-        v.component(TAB_PANEL_NAME, MTabPane);
+        v.component(TAB_PANEL_NAME, MTabPanel);
     }
 };
 
