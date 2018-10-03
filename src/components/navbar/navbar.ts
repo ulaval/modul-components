@@ -151,11 +151,13 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     private setDisplayButtonArrrow(): void {
         let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
-        let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
+        if (wrapEl) {
+            let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
 
-        this.showArrowRight = wrapEl.scrollLeft < maxScrollLeft;
+            this.showArrowRight = wrapEl.scrollLeft < maxScrollLeft;
 
-        this.showArrowLeft = wrapEl.scrollLeft > 0;
+            this.showArrowLeft = wrapEl.scrollLeft > 0;
+        }
     }
 
     private get hasArrowRight(): boolean {

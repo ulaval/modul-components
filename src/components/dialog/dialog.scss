@@ -168,6 +168,7 @@ $m-dialog--max-width--s: 420px !default;
         overflow-x: hidden;
         overflow-y: auto;
         min-height: 120px;
+        -webkit-overflow-scrolling: touch;
 
         @include m-box-padding();
 
