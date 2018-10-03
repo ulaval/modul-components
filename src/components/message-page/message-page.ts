@@ -8,7 +8,7 @@ import { ERROR_TEMPLATE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import { MMessageState } from '../message/message';
-import WithRender from './message-page.html/message-page.scss';
+import WithRender from './message-page.html?style=./message-page.scss';
 
 /**
  * Utility class to manage the properties related to the link displayed in the error pages.
