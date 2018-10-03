@@ -22,7 +22,7 @@ import ErrorCookiesNotSupportedSandboxPlugin from '../components/error-cookies-n
 import ErrorMessageSandboxPlugin from '../components/error-message/error-message.sandbox';
 import ErrorPageNotFoundSandboxPlugin from '../components/error-page-not-found/error-page-not-found.sandbox';
 import ErrorTechnicalDifficultySandboxPlugin from '../components/error-technical-difficulty/error-technical-difficulty.sandbox';
-import ErrorTemplateSandBoxPlugin from '../components/error-template/error-template.sandbox';
+import MessagePageSandBoxPlugin from '../components/message-page/message-page.sandbox';
 import FileSelectSandboxPlugin from '../components/file-select/file-select.sandbox';
 import FileUploadSandboxPlugin from '../components/file-upload/file-upload.sandbox';
 import FlexTemplateSandboxPlugin from '../components/flex-template/flex-template.sandbox';
@@ -97,7 +97,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(ErrorMessageSandboxPlugin);
         Vue.use(ErrorPageNotFoundSandboxPlugin);
         Vue.use(ErrorTechnicalDifficultySandboxPlugin);
-        Vue.use(ErrorTemplateSandBoxPlugin);
+        Vue.use(MessagePageSandBoxPlugin);
         Vue.use(FileSelectSandboxPlugin);
         Vue.use(FileUploadSandboxPlugin);
         Vue.use(FlexTemplateSandboxPlugin);

@@ -3,7 +3,7 @@ import moment from 'moment';
 import Vue from 'vue';
 
 import { ACCORDION_NAME, ERROR_TEMPLATE_NAME, I18N_NAME, PANEL_NAME } from '../component-names';
-import { Link } from '../error-template/error-template';
+import { Link } from '../message-page/message-page';
 import { MErrorTechnicalDifficulty } from './error-technical-difficulty';
 
 // mock moment implementation to set the "present date/time" to a fixed value.

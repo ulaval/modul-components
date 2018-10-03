@@ -2,7 +2,7 @@ import { shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
 import { ERROR_TEMPLATE_NAME } from '../component-names';
-import { Link } from '../error-template/error-template';
+import { Link } from '../message-page/message-page';
 import { MErrorPageNotFound } from './error-page-not-found';
 
 let wrapper: Wrapper<MErrorPageNotFound>;
