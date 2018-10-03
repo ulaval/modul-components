@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { MetaComponent } from './v2';
 
 export type Preview = string | boolean;
 
@@ -6,6 +6,8 @@ export interface ComponentAttribute {
     type: string;
     values: string[];
     default?: number;
+    defaultValue?: string;
+    optional?: boolean;
     origin?: ComponentMeta;
 }
 
@@ -44,6 +46,7 @@ export interface ComponentMeta {
     mixins?: string[];
     methods?: ComponentMethods;
     enums?: ComponentEnums;
+    metaV2?: MetaComponent;
 }
 
 export type ComponentMetaMap = {
