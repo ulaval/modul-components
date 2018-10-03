@@ -18,12 +18,11 @@ require('froala-editor/js/froala_editor.pkgd.min');
 require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
 
-const SPECIAL_TAGS: string[] = ['img', 'button', 'input', 'a'];
-
 const INNER_HTML_ATTR: string = 'innerHTML';
 
 enum froalaEvents {
     Initialized = 'froalaEditor.initialized',
+    InitializationDelayed = 'froalaEditor.initializationDelayed',
     ContentChanged= 'froalaEditor.contentChanged',
     Focus = 'froalaEditor.focus',
     Blur = 'froalaEditor.blur',
@@ -32,17 +31,21 @@ enum froalaEvents {
     PasteAfter = 'froalaEditor.paste.after',
     PasteBeforeCleanup = 'froalaEditor.paste.beforeCleanup',
     PasteAfterCleanup = 'froalaEditor.paste.afterCleanup',
-    WordPasteBefore = 'froalaEditor.paste.wordPaste.before',
     CommandAfter = 'froalaEditor.commands.after',
-    CommandBefore = 'froalaEditor.commands.before'
+    CommandBefore = 'froalaEditor.commands.before',
+    ShowLinkInsert = 'froalaEditor.popups.show.link.insert'
 }
 
 enum FroalaElements {
-    MODAL = '.fr-modal',
-    MODAL_OVERLAY = '.fr-overlay',
-    MODAL_WORD_PASTE_CLEAN_BUTTON = '.fr-remove-word',
     TOOLBAR = '.fr-toolbar',
-    TOOLBAR_ACTIVE_BUTTON = '.fr-active'
+    TOOLBAR_ACTIVE_BUTTON = '.fr-active',
+    EDITABLE_ELEMENT = '.fr-element'
+}
+
+export enum FroalaStatus {
+    Blurring = 'blurring',
+    Blurred = 'blurred',
+    Focused = 'focused'
 }
 
 @WithRender
@@ -75,14 +78,14 @@ enum FroalaElements {
         immediateVueModelUpdate: false,
         vueIgnoreAttrs: undefined
     };
-    protected hasSpecialTag: boolean = false;
     protected model: string | undefined = undefined;
     protected oldModel: string | undefined = undefined;
 
     protected isFocused: boolean = false;
+    protected isInitialized: boolean = false;
 
     protected isDirty: boolean = false;
-    protected wordObserver: MutationObserver;
+    protected status: FroalaStatus = FroalaStatus.Blurred;
 
     private clickedInsideEditor: boolean = false;
 
@@ -94,10 +97,6 @@ enum FroalaElements {
 
     public get isEmpty(): boolean {
         return this.value.length === 0;
-    }
-
-    public isInitialized(): boolean {
-        return !!this.froalaEditor;
     }
 
     protected addPopup(name: string, icon: string, buttonList: string[]): void {
@@ -176,9 +175,10 @@ enum FroalaElements {
             icon: 'angle-left',
             undo: false,
             focus: false,
-            callback: () => {
-                this.froalaEditor.stylesSubMenu.hideSubMenu();
-                this.froalaEditor.listesSubMenu.hideSubMenu();
+            callback: function(): void {
+                // Important not to use an arrow function here with this.froalaEditor since the editor is corrupted for some reason.
+                this.stylesSubMenu.hideSubMenu();
+                this.listesSubMenu.hideSubMenu();
                 // we'll use this submenu when we'll support images,tables,...
                 // this.froalaEditor.insertionsSubMenu.hideSubMenu();
             }
@@ -188,14 +188,9 @@ enum FroalaElements {
     protected created(): void {
         this.currentTag = this.tag || this.currentTag;
         this.model = this.value;
-        this.initWordObserver();
     }
 
     protected mounted(): void {
-        if (SPECIAL_TAGS.indexOf(this.currentTag) !== -1) {
-            this.hasSpecialTag = true;
-        }
-
         this.createEditor();
 
         // add a dropdown arrow to popups buttons
@@ -212,7 +207,7 @@ enum FroalaElements {
     }
 
     protected get collapsed(): boolean {
-        return this.isInitialized() && !this.isFocused && (this.isEmpty || this.disabled);
+        return this.isInitialized && !this.isFocused && (this.isEmpty || this.disabled);
     }
 
     protected onResize(): void {
@@ -222,25 +217,23 @@ enum FroalaElements {
     }
 
     protected desktopMode(): void {
-        this.froalaEditor.$tb.find(`.fr-command`).show();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).hide();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+        if (this.froalaEditor && this.froalaEditor.$tb) {
+            this.froalaEditor.$tb.find(`.fr-command`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).hide();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+        }
     }
 
     protected mobileMode(): void {
-        this.froalaEditor.$tb.find(`.fr-command`).hide();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertLink"]`).show();
-        this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
-        // show submit buttons (ex: link insertion submit button)
-        this.froalaEditor.$tb.find(`.fr-submit`).show();
-    }
-
-    private initWordObserver(): void {
-        this.wordObserver = new MutationObserver(() => {
-            this.dismissWordPasteModal();
-        });
+        if (this.froalaEditor && this.froalaEditor.$tb) {
+            this.froalaEditor.$tb.find(`.fr-command`).hide();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertLink"]`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
+            // show submit buttons (ex: link insertion submit button)
+            this.froalaEditor.$tb.find(`.fr-submit`).show();
+        }
     }
 
     @Watch('isEqMinXS')
@@ -249,14 +242,16 @@ enum FroalaElements {
         if (this.as<ElementQueries>().isEqMinXS) {
             this.desktopMode();
             // hide hide button
-            this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+            if (this.froalaEditor && this.froalaEditor.$tb) {
+                this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
+            }
         } else {
             this.mobileMode();
         }
     }
 
     private createEditor(): void {
-        if (this.isInitialized()) {
+        if (this.isInitialized) {
             return;
         }
 
@@ -266,43 +261,49 @@ enum FroalaElements {
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
             // we reemit each valid input events so froala can work in input-style component.
             events: {
+                [froalaEvents.InitializationDelayed]: (_e, editor) => {
+                    this.froalaEditor = editor;
+                    this.htmlSet();
+                    window.addEventListener('resize', this.onResize);
+                },
                 [froalaEvents.Initialized]: (_e, editor) => {
                     this.froalaEditor = editor;
-                    this.hideToolbar();
-                    window.addEventListener('resize', this.onResize);
-                    this.htmlSet();
+                    this.isInitialized = true;
+                    this.manageInitialFocus(editor);
                 },
                 [froalaEvents.ContentChanged]: (_e, _editor) => {
                     this.updateModel();
                 },
-                [froalaEvents.Focus]: (_e, editor) => {
+                [froalaEvents.Focus]: (_e) => {
                     if (!this.disabled) {
                         window.removeEventListener('resize', this.onResize);
                         this.unblockMobileBlur();
 
                         this.isDirty = false;
 
-                        this.$emit('focus');
+                        if (this.isInitialized) { this.$emit('focus'); }
                         this.showToolbar();
                         this.isFocused = true;
+                        this.status = FroalaStatus.Focused;
                     }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
                     if (!editor.fullscreen.isActive() && !this.clickedInsideEditor) {
                         // this timeout is used to avoid the "undetected click" bug
                         // that happens sometimes due to the hideToolbar animation
-                        this.isFocused = false;
+                        this.status = FroalaStatus.Blurring;
                         setTimeout(() => {
-                            if (!this.isFocused) {
+                            if (this.status === FroalaStatus.Blurring) {
                                 window.addEventListener('resize', this.onResize);
                                 this.$emit('blur');
                                 this.hideToolbar();
 
                                 this.isFocused = false;
+                                this.status = FroalaStatus.Blurred;
                                 this.isDirty = false;
                                 this.unblockMobileBlur();
                             }
-                        }, 100);
+                        }, 150);
                     }
                 },
                 [froalaEvents.KeyUp]: (_e, _editor) => {
@@ -335,11 +336,8 @@ enum FroalaElements {
                         this.unblockMobileBlur();
                     }
                 },
-                [froalaEvents.WordPasteBefore]: (_e, editor) => {
-                    // Scrap this and all associated private methods when https://github.com/froala/wysiwyg-editor/issues/2964 get fixed.
-                    if (editor.wordPaste && this.currentConfig.wordPasteModal) {
-                        this.wordObserver.observe(document.body, { childList: true, attributes: true });
-                    }
+                [froalaEvents.ShowLinkInsert]: (_e, editor) => {
+                    this.manageLinkInsert(editor);
                 }
             }
         });
@@ -354,6 +352,28 @@ enum FroalaElements {
         }
     }
 
+    private editorIsAvailable(): boolean {
+        return this.froalaEditor !== undefined && this.froalaEditor !== null && this.isInitialized;
+    }
+
+    private manageInitialFocus(editor: any): void {
+        // the editor might or might not be focused when initializing.  If it is focused, we have to emit the focus event.  Otherwise, we have to hide the toolbar.
+        if (!editor.core.hasFocus()) {
+            this.hideToolbar();
+        } else {
+            this.$emit('focus');
+        }
+    }
+
+    private manageLinkInsert(editor: any): void {
+        const popup: HTMLElement = editor.popups.get('link.insert')[0];
+        const urlField: HTMLInputElement = popup.querySelector(`[name="href"]`) as HTMLInputElement;
+
+        if (!urlField.value) {
+            (popup.querySelector(`[name="target"]`) as HTMLInputElement).checked = true;
+        }
+    }
+
     private blockMobileBlur(): void {
         this.clickedInsideEditor = true;
     }
@@ -362,39 +382,15 @@ enum FroalaElements {
         this.clickedInsideEditor = false;
     }
 
-    private dismissWordPasteModal(): void {
-        const wordPasteModal: HTMLElement | null = document.querySelector(FroalaElements.MODAL);
-        const modalOverlay: HTMLElement | null = document.querySelector(FroalaElements.MODAL_OVERLAY);
-        const cleanWordButton: HTMLElement | null = this.getWordPasteCleanButton();
-
-        if (wordPasteModal && wordPasteModal.style.display !== 'none') {
-            this.wordObserver.disconnect();
-            wordPasteModal.style.display = 'none';
-
-            if (modalOverlay) {
-                modalOverlay.style.display = 'none';
-            }
-
-            if (cleanWordButton) {
-                cleanWordButton!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
-                cleanWordButton!.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
-            }
-        }
-    }
-
-    private getWordPasteCleanButton(): HTMLElement | null {
-        return document.querySelector(FroalaElements.MODAL_WORD_PASTE_CLEAN_BUTTON);
-    }
-
     private hideToolbar(): void {
-        if (this.froalaEditor) {
+        if (this.editorIsAvailable()) {
             this.froalaEditor.toolbar.hide();
             this.adjusteToolbarPosition();
         }
     }
 
     private showToolbar(): void {
-        if (this.froalaEditor) {
+        if (this.editorIsAvailable()) {
             this.froalaEditor.toolbar.show();
             const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
             toolBar.style.removeProperty('margin-top');
@@ -417,42 +413,25 @@ enum FroalaElements {
     }
 
     private setContent(firstTime: boolean = false): void {
-        if (!this.isInitialized() && !firstTime) {
+        if (!firstTime) {
             return;
         }
 
         if (this.model || this.model === '') {
             this.oldModel = this.model;
 
-            if (this.hasSpecialTag) {
-                this.setSpecialTagContent();
-            } else if (!firstTime) {
-                this.htmlSet();
-            }
-        }
-    }
-
-    private setSpecialTagContent(): void {
-        const tags: any = this.model;
-
-        // add tags on element
-        if (tags) {
-            for (let attr in tags) {
-                if (tags.hasOwnProperty(attr) && attr !== INNER_HTML_ATTR) {
-                    this._$element.attr(attr, tags[attr]);
-                }
-            }
-
-            if (tags.hasOwnProperty(INNER_HTML_ATTR)) {
-                this._$element[0].innerHTML = tags[INNER_HTML_ATTR];
-            }
+            this.htmlSet();
         }
     }
 
     private destroyEditor(): void {
         if (this._$element) {
+            this.isInitialized = false;
+            this.isFocused = false;
             this.listeningEvents && this._$element.off(this.listeningEvents.join(' '));
-            this.froalaEditor.destroy();
+            if (this.froalaEditor) {
+                this.froalaEditor.destroy();
+            }
             this.listeningEvents.length = 0;
             this._$element = undefined;
             this.froalaEditor = undefined;
@@ -462,31 +441,9 @@ enum FroalaElements {
     private updateModel(): void {
         let modelContent: string = '';
 
-        if (this.hasSpecialTag) {
-
-            const attributeNodes: any = this._$element[0].attributes;
-            const attrs: any = {};
-
-            for (let i: number = 0; i < attributeNodes.length; i++) {
-
-                const attrName: any = attributeNodes[i].name;
-                if (this.currentConfig.vueIgnoreAttrs && this.currentConfig.vueIgnoreAttrs.indexOf(attrName) !== -1) {
-                    continue;
-                }
-                attrs[attrName] = attributeNodes[i].value;
-            }
-
-            if (this._$element[0].innerHTML) {
-                attrs[INNER_HTML_ATTR] = this._$element[0].innerHTML;
-            }
-
-            modelContent = attrs;
-        } else {
-
-            const returnedHtml: any = this._$element.froalaEditor('html.get');
-            if (typeof returnedHtml === 'string') {
-                modelContent = returnedHtml;
-            }
+        const returnedHtml: any = this._$element.froalaEditor('html.get');
+        if (typeof returnedHtml === 'string') {
+            modelContent = returnedHtml;
         }
 
         this.oldModel = modelContent;
@@ -516,10 +473,14 @@ enum FroalaElements {
     }
 
     private htmlSet(): void {
-        this.froalaEditor.html.set(this.model || '', true);
-        // This will reset the undo stack everytime the model changes externally. Can we fix this?
-        this.froalaEditor.undo.reset();
-        this.froalaEditor.undo.saveStep();
+        if (this.froalaEditor) {
+            this.froalaEditor.html.set(this.model || '', true);
+            if (this.froalaEditor.undo) {
+                // This will reset the undo stack everytime the model changes externally. Can we fix this?
+                this.froalaEditor.undo.reset();
+                this.froalaEditor.undo.saveStep();
+            }
+        }
     }
 }
 
