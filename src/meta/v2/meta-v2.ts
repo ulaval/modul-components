@@ -1,3 +1,24 @@
+export interface Meta {
+    components: MetaComponent[];
+}
+
+export interface MetaComponent {
+    componentName: string;
+    props?: MetaProps[];
+    events?: MetaEvent[];
+    mixins?: string[];
+    slots?: MetaSlot[];
+}
+export interface MetaArgument {
+    name: string;
+    type: string;
+}
+
+export interface MetaEvent {
+    name: string;
+    arguments?: MetaArgument[];
+}
+
 export interface MetaProps {
     name: string;
     optional: boolean;
@@ -6,14 +27,9 @@ export interface MetaProps {
     default?: string;
 }
 
-export interface MetaComponent {
-    componentName: string;
-    props?: MetaProps[];
-    mixins?: string[];
-}
-
-export interface Meta {
-    components: MetaComponent[];
+export interface MetaSlot {
+    name?: string;
+    isDefault: boolean;
 }
 
 export class MetaV2 {
