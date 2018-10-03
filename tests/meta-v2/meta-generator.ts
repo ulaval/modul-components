@@ -102,9 +102,7 @@ export class MetaGenerator {
 
         decorator.getArguments().forEach((argument) => {
             if (argument instanceof ObjectLiteralExpression) {
-                // tslint:disable-next-line:no-console
                 if ((argument as ObjectLiteralExpression).getProperty(MIXINS_PROPERTY_NAME)) {
-                    // tslint:disable-next-line:no-console
                     let mixins: string = ((argument as ObjectLiteralExpression).getProperty(MIXINS_PROPERTY_NAME) as PropertyAssignment).getInitializer().getText();
                     if (mixins) {
                         result = mixins.replace(/\[?\]?\r?\n?/g, '').split(',').map((str) => str.trim());
@@ -214,7 +212,7 @@ export class MetaGenerator {
             let stringLitteral: StringLiteral = metaDecorator.getArguments()[0] as StringLiteral;
             output.name = stringLitteral.getLiteralValue();
         } else {
-            throw new Error(`Probleme while extracting metadata for method ${JSON.stringify(methodDeclaration.getText())}`);
+            throw new Error(`Problem while extracting metadata for method ${JSON.stringify(methodDeclaration.getText())}`);
         }
 
         // extract methods arguments
