@@ -20,7 +20,7 @@
                         <h2 v-if="hasTitle">{{ title }}</h2>
                         <slot name="header"></slot>
                         <m-icon-button @click="closeDialog()" icon-name="m-svg__close-clear" skin="dark" class="m-dialog__header__close-button" :title="closeTitle">
-                            <m-i18n :k="closeTitle"></m-i18n>
+                            {{ closeTitle }}
                         </m-icon-button>
                     </header>
                     <div class="m-dialog__body" ref="body"
