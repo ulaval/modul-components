@@ -16,6 +16,11 @@ import MessagePlugin from '../message/message';
 import { FileService } from './../../utils/file/file';
 import FileUploadPlugin, { MFileUpload } from './file-upload';
 
+const BTN_REPLACE_FILE: string = 'Replace';
+const TITLE_REPLACE_FILE: string = 'Replace a file';
+const BTN_ADD_NEW_FILE: string = 'Add';
+const TITLE_ADD_NEW_FILE: string = 'Upload files';
+
 describe('MFileUpload', () => {
     beforeEach(() => {
         resetModulPlugins();
@@ -229,6 +234,70 @@ describe('MFileUpload', () => {
 
                 expect(fupd.vm.$file.files().length).toEqual(0);
             });
+        });
+
+        describe('when fileReplacement is false', () => {
+
+            let fupd: Wrapper<MFileUpload>;
+
+            beforeEach(() => {
+                fupd = mount(MFileUpload, {
+                    propsData: validationOpts
+                });
+            });
+
+            it('should be the right title', () => {
+                expect(fupd.vm.title).toEqual(TITLE_ADD_NEW_FILE);
+            });
+
+            it('should be the right button', () => {
+                expect(fupd.vm.buttonAdd).toEqual(BTN_ADD_NEW_FILE);
+            });
+        });
+
+        describe('when fileReplacement is true', () => {
+
+            let filesvc: FileService;
+            let fupd: Wrapper<MFileUpload>;
+
+            beforeEach(() => {
+                filesvc = (Vue.prototype as ModulVue).$file;
+                jest.spyOn(filesvc, 'setValidationOptions');
+
+                fupd = mount(MFileUpload, {
+                    propsData: {
+                        allowedExtensions: validationOpts.allowedExtensions,
+                        rejectedExtensions: validationOpts.rejectedExtensions,
+                        maxSizeKb: validationOpts.maxSizeKb,
+                        maxFiles: validationOpts.maxFiles,
+                        fileReplacement: true
+                    },
+                    data: {
+                        isMqMinS: true
+                    }
+                });
+            });
+
+            it('should allowed only 1 file', async () => {
+
+                const newValidationOpts: MFileValidationOptions = { ...validationOpts };
+                newValidationOpts.maxFiles = 1;
+
+                await Vue.nextTick();
+                expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
+                    newValidationOpts,
+                    DEFAULT_STORE_NAME
+                );
+            });
+
+            it('should be the right title', () => {
+                expect(fupd.vm.title).toEqual(TITLE_REPLACE_FILE);
+            });
+
+            it('should be the right button', () => {
+                expect(fupd.vm.buttonAdd).toEqual(BTN_REPLACE_FILE);
+            });
+
         });
     });
 

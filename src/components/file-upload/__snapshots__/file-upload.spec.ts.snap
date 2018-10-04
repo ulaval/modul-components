@@ -31,7 +31,8 @@ exports[`MFileUpload completed should render completed files 1`] = `
     </div>
     <template>
         <div style="display:flex;">
-            <m-button class="m-file-upload__footer-add"><span class="m-i18n">Add</span> <span slot="precision">1
+            <m-button class="m-file-upload__footer-add">Add
+                <span slot="precision">1
                     <span class="m-i18n">file</span></span>
             </m-button>
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
@@ -53,7 +54,8 @@ exports[`MFileUpload should render correctly 1`] = `
     </div>
     <template>
         <div>
-            <m-button disabled="disabled" class="m-file-upload__footer-add"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
+            <m-button disabled="disabled" class="m-file-upload__footer-add">Add
+                <span slot="precision" style="display:none;">0
                     <span class="m-i18n">file</span></span>
             </m-button>
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
@@ -73,7 +75,8 @@ exports[`MFileUpload should render correctly in mobile 1`] = `
     </div>
     <template>
         <div>
-            <m-button disabled="disabled" class="m-file-upload__footer-add"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
+            <m-button disabled="disabled" class="m-file-upload__footer-add">Add
+                <span slot="precision" style="display:none;">0
                     <span class="m-i18n">file</span></span>
             </m-button>
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
@@ -119,7 +122,8 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
     </div>
     <template>
         <div>
-            <m-button disabled="disabled" class="m-file-upload__footer-add"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
+            <m-button disabled="disabled" class="m-file-upload__footer-add">Add
+                <span slot="precision" style="display:none;">0
                     <span class="m-i18n">file</span></span>
             </m-button>
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
@@ -142,7 +146,8 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
     </div>
     <template>
         <div>
-            <m-button disabled="disabled" class="m-file-upload__footer-add"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
+            <m-button disabled="disabled" class="m-file-upload__footer-add">Add
+                <span slot="precision" style="display:none;">0
                     <span class="m-i18n">file</span></span>
             </m-button>
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
@@ -204,7 +209,8 @@ exports[`MFileUpload validation validation messages should render rejected files
     </div>
     <template>
         <div>
-            <m-button disabled="disabled" class="m-file-upload__footer-add"><span class="m-i18n">Add</span> <span slot="precision" style="display:none;">0
+            <m-button disabled="disabled" class="m-file-upload__footer-add">Add
+                <span slot="precision" style="display:none;">0
                     <span class="m-i18n">file</span></span>
             </m-button>
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
