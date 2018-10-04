@@ -194,10 +194,6 @@ export enum FroalaStatus {
     }
 
     protected mounted(): void {
-<<<<<<< HEAD
-=======
-
->>>>>>> Added an additionnal check to make sure that all variables/props are defined before appending custom translations
         if ($.FE !== undefined
             && $.FE.LANGUAGE[this.config.language] !== undefined
             && this.customTranslations !== undefined
