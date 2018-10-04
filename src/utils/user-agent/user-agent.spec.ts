@@ -132,7 +132,7 @@ describe('user-agent', () => {
             userAgent: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)',
             hardware: 'mobile',
             os: 'Windows Phone',
-            browser: 'Internet explorer mobile 0',
+            browser: 'Internet explorer mobile 9',
             want: {
                 isWindowsPhone: true,
                 isTrident: true,
