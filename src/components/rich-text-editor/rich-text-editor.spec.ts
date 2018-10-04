@@ -17,7 +17,12 @@ let defaultOptions: MRichTextEditorStandardOptions;
 describe('MRichTextEditor', () => {
     beforeEach(() => {
         Vue.use(RichTextLicensePlugin, { key: froalaLicenseKey });
-        wrapper = shallow(MRichTextEditor);
+        wrapper = shallow(MRichTextEditor,
+            {
+                stubs: {
+                    froala : '<froala></froala>'
+                }
+            });
         richTextEditor = wrapper.vm;
         defaultOptions = new MRichTextEditorStandardOptions(froalaLicenseKey, richTextEditor.$i18n.currentLang());
     });
@@ -53,17 +58,18 @@ describe('MRichTextEditor', () => {
     });
 
     describe('when refreshing model', () => {
-        it('should refresh with real value if has value', () => {
+        it('should refresh with real value if it has value', () => {
             const content: string = '<p>abc123</p>';
 
-            richTextEditor.$emit('input', content);
+            const obj: Vue = (richTextEditor.$refs.input as Vue).$emit('input', content);
 
             expect(wrapper.emitted().input[0]).toEqual([content]);
         });
+
         it(`should refresh with an empty string if it doesn't have value`, () => {
             const content: string = '<p><strong> &nbsp; </strong></p>';
 
-            richTextEditor.$emit('input', content);
+            const obj: Vue = (richTextEditor.$refs.input as Vue).$emit('input', content);
 
             expect(wrapper.emitted().input[0]).toEqual(['']);
         });
