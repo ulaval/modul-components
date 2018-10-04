@@ -7,6 +7,7 @@ import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TEMPLATE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import { MMessageState } from '../message/message';
 import WithRender from './error-template.html?style=./error-template.scss';
 
 /**
@@ -24,25 +25,46 @@ export class Link {
 }
 
 export enum MErrorTemplateSkin {
-    Information = 'information',
-    Warning = 'warning',
-    Error = 'error'
+    Default = 'default',
+    Light = 'light'
 }
+
+export enum MErrorTemplateImageSize {
+    Default = '130px',
+    Small = '76px'
+}
+
 @WithRender
 @Component
 export class MErrorTemplate extends ModulVue {
 
-    @Prop({validator: value =>
-        value === MErrorTemplateSkin.Information ||
-        value === MErrorTemplateSkin.Error ||
-        value === MErrorTemplateSkin.Warning})
-    public skin: MErrorTemplateSkin;
+    @Prop({
+        // TODO: remplace 'error' by MMessageState.Error and correct unit test
+        default: 'error',
+        validator: value =>
+            value === MMessageState.Information ||
+            value === MMessageState.Warning ||
+            value === MMessageState.Confirmation ||
+            value === MMessageState.Error
+    })
+    public state: string;
+
+    @Prop({
+        default: MErrorTemplateSkin.Default,
+        validator: value =>
+            value === MErrorTemplateSkin.Default ||
+            value === MErrorTemplateSkin.Light
+    })
+    public skin: string;
 
     @Prop()
     public iconName: string;
 
     @Prop()
     public svgName: string;
+
+    @Prop()
+    public imageSize: string;
 
     @Prop()
     public title: string;
@@ -52,9 +74,6 @@ export class MErrorTemplate extends ModulVue {
 
     @Prop({ default: () => [] })
     public links: Link[];
-
-    @Prop({ default: 130 })
-    public size: number;
 
     public svg: string;
 
@@ -72,9 +91,15 @@ export class MErrorTemplate extends ModulVue {
 
     public get styleObject(): { [name: string ]: string } {
         return {
-            width: this.size + 'px',
-            height: this.size + 'px'
+            width: this.propImageSize
         };
+    }
+
+    public get propImageSize(): string {
+        if (this.imageSize) {
+            return this.imageSize;
+        }
+        return this.isSkinLight ? MErrorTemplateImageSize.Small : MErrorTemplateImageSize.Default;
     }
 
     public isTargetExternal(isExternal: boolean): string {
@@ -88,7 +113,52 @@ export class MErrorTemplate extends ModulVue {
     }
 
     private get hasLinksAndSlot(): boolean {
-        return this.links.length > 0 || !!this.$slots['default'];
+        return this.hasLinks || !!this.$slots.default;
+    }
+
+    private get hasBody(): boolean {
+        return this.hasHints || this.hasLinks || !!this.$slots.default;
+    }
+
+    private get isSkinDefault(): boolean {
+        return this.skin === MErrorTemplateSkin.Default;
+    }
+
+    private get isSkinLight(): boolean {
+        return this.skin === MErrorTemplateSkin.Light;
+    }
+
+    private get isStateInformation(): boolean {
+        return this.state === MMessageState.Information;
+    }
+
+    private get isStateWarning(): boolean {
+        return this.state === MMessageState.Warning;
+    }
+
+    private get isStateError(): boolean {
+        return this.state === MMessageState.Error;
+    }
+
+    private get isStateConfirmation(): boolean {
+        return this.state === MMessageState.Confirmation;
+    }
+
+    private get iconNameProp(): string {
+        if (this.iconName) {
+            return this.iconName;
+        } else {
+            switch (this.state) {
+                case MMessageState.Confirmation:
+                    return'm-svg__confirmation';
+                case MMessageState.Information:
+                    return'm-svg__information';
+                case MMessageState.Warning:
+                    return 'm-svg__warning';
+                default:
+                    return'm-svg__error';
+            }
+        }
     }
 }
 
