@@ -114,6 +114,7 @@
         min-height: 120px;
         position: relative;
         transition: padding-bottom 0.5s ease;
+        -webkit-overflow-scrolling: touch;
 
         @include m-fixed-box-padding();
         @include m-scrollbar();

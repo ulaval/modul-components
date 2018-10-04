@@ -1,12 +1,18 @@
-<m-error-template :skin="skin" :svg-name="svgName" :title="title" :hints="hints" :links="links" class="m-error-technical-difficulty">
-    <m-accordion skin="light" icon-size="small">
+<m-error-template class="m-error-technical-difficulty"
+                  :state="state"
+                  :svg-name="svgName"
+                  :title="title"
+                  :hints="hints"
+                  :links="links">
+    <m-accordion skin="light"
+                 icon-size="small">
         <m-i18n slot="header" k="m-error-technical-difficulty:details"></m-i18n>
-        <p><strong><m-i18n k="m-error-technical-difficulty:browser"></m-i18n>: </strong>{{userAgent}}</p>
-        <p v-if="!!errorReferenceNumber"><strong><m-i18n k="m-error-technical-difficulty:reference-number"></m-i18n>: </strong>{{errorReferenceNumber}}</p>
+        <p class="m-error-technical-difficulty__browser"><strong>{{'m-error-technical-difficulty:browser' | f-m-i18n}}: </strong>{{userAgent}}</p>
+        <p v-if="!!errorReferenceNumber"><strong>{{'m-error-technical-difficulty:reference-number' | f-m-i18n}}: </strong>{{errorReferenceNumber}}</p>
         <p>
-            <m-i18n k="m-error-technical-difficulty:date.primary" ></m-i18n>
+            {{'m-error-technical-difficulty:date.primary' | f-m-i18n}}
             <strong>{{formattedDate}}</strong>
-            <m-i18n k="m-error-technical-difficulty:date.secondary" ></m-i18n>
+            {{'m-error-technical-difficulty:date.secondary' | f-m-i18n}}
             <strong>{{formattedTime}}</strong>
         </p>
         <m-panel  class="m-error-technical-difficulty__stacktrace" :padding="false" v-if="propStacktrace">

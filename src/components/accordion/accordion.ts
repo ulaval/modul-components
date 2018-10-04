@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
@@ -117,9 +117,17 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
     public set propOpen(value) {
         if (value !== this.internalPropOpen) {
-            this.internalPropOpen = value;
-            this.$emit('update:open', value);
+            this.updateOpen(value);
         }
+    }
+
+    @Emit('update:open')
+    private updateOpen(value): void {
+        this.internalPropOpen = value;
+    }
+
+    @Emit('click')
+    private clickEvent(event: Event): void {
     }
 
     public get propDisabled(): boolean {
@@ -167,13 +175,13 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
             this.$refs.accordionHeader.blur();
             this.propOpen = !initialState;
-            this.$emit('click', event);
+            this.clickEvent(event);
         }
     }
 
     @Watch('open')
     private syncOpenProp(val: boolean): void {
-        this.internalPropOpen = val;
+        this.propOpen = val;
     }
 }
 
