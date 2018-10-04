@@ -55,6 +55,8 @@ export class MFileUpload extends ModulVue {
     public storeName: string;
     @Prop()
     public open: boolean;
+    @Prop({ default: false })
+    public fileReplacement: boolean;
 
     $refs: {
         dialog: MDialog;
@@ -82,7 +84,7 @@ export class MFileUpload extends ModulVue {
                 allowedExtensions: this.allowedExtensions,
                 rejectedExtensions: this.rejectedExtensions,
                 maxSizeKb: this.maxSizeKb,
-                maxFiles: this.maxFiles
+                maxFiles: this.propMaxFiles
             },
             this.storeName
         );
@@ -225,8 +227,12 @@ export class MFileUpload extends ModulVue {
         return file.rejection === MFileRejectionCause.MAX_FILES;
     }
 
-    private get title(): string {
-        return this.$i18n.translate('m-file-upload:header-title', {}, this.maxFiles);
+    public get title(): string {
+        return this.fileReplacement ? this.$i18n.translate('m-file-upload:header-title-file-replacement') : this.$i18n.translate('m-file-upload:header-title', {}, this.propMaxFiles);
+    }
+
+    public get buttonAdd(): string {
+        return this.fileReplacement ? this.$i18n.translate('m-file-upload:replace') : this.$i18n.translate('m-file-upload:add');
     }
 
     private get fileAllowedExtensions(): string {
@@ -309,6 +315,14 @@ export class MFileUpload extends ModulVue {
             this.internalOpen = value;
             this.$emit('update:open', value);
         }
+    }
+
+    private get propMaxFiles(): number | undefined {
+        return this.fileReplacement ? 1 : this.maxFiles;
+    }
+
+    private get multipleSelection(): boolean {
+        return this.propMaxFiles !== undefined && this.propMaxFiles > 1;
     }
 }
 
