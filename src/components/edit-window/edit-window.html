@@ -3,11 +3,11 @@
     <portal :target-el="'#' + propId">
         <transition name="m--is" :duration="{ enter: 800, leave: 600 }">
             <div class="m-edit-window__wrap"
-                 :class="[{ 'm--is-disabled':disabled, 'm--is-android': isAndroid },
+                 :class="[{ 'm--is-disabled':disabled },
                             className ]"
                  ref="dialogWrap"
                  v-show="propOpen" v-if="propOpen || preload || loaded">
-                <section class="m-edit-window__article" :class="{'m--is-android': isAndroid}" ref="article">
+                <section class="m-edit-window__article" ref="article">
                     <header class="m-edit-window__header" ref="header"
                             :class="{'m--no-padding': !padding || !paddingHeader}">
                         <div class="m-edit-window__header__left">

@@ -12,10 +12,7 @@
         min-width: $m-min-width;
         overflow: hidden;
         background: $m-color--grey-lightest;
-
-        &:not(.m--is-android) {
-            display: flex;
-        }
+        display: flex;
 
         &.m--is-enter-active,
         &.m--is-leave-active {
@@ -62,10 +59,7 @@
         margin: 0 auto;
         background: $m-color--white;
         box-shadow: $m-box-shadow;
-
-        &:not(.m--is-android) {
-            display: flex;
-        }
+        display: flex;
 
         > header,
         > footer {
@@ -119,6 +113,7 @@
         overflow-y: auto;
         min-height: 120px;
         position: relative;
+        transition: padding-bottom 0.5s ease;
 
         @include m-fixed-box-padding();
         @include m-scrollbar();

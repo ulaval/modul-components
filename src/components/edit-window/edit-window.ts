@@ -39,8 +39,8 @@ export class MEditWindow extends ModulVue {
         this.as<Portal>().transitionDuration = PortalTransitionDuration.Regular + PortalTransitionDuration.XSlow;
 
         if (this.isAndroid) {
-            this.$on('open', this.initStickyFooter);
-            this.$on('close', this.unbindStickyFooter);
+            this.$on('open', this.initFooter);
+            this.$on('close', this.unbindFooter);
         }
     }
 
@@ -52,28 +52,24 @@ export class MEditWindow extends ModulVue {
         return /(android)/i.test(window.navigator.userAgent);
     }
 
-    private initStickyFooter(): void {
-        this.stickyFooter(0);
-        (window.screen as any).orientation.addEventListener('change', () => {
-            this.stickyFooter(250);
+    private initFooter(): void {
+        setTimeout(() => {
+            this.$refs.body.addEventListener('focusin', this.handleFooter);
+            this.$refs.body.addEventListener('focusout', this.handleFooter);
         });
     }
 
-    private unbindStickyFooter(): void {
-        (window.screen as any).orientation.removeEventListener('change', this.stickyFooter(250));
+    private handleFooter(event): void {
+        if (event.type === 'focusin') {
+            this.$refs.body.style.paddingBottom = '50%';
+        } else if (event.type === 'focusout') {
+            this.$refs.body.style.paddingBottom = '0';
+        }
     }
 
-    // to stick the footer at the window bottom and not have the footer get pushed by android keyboard
-    private stickyFooter(delay: number): void {
-        setTimeout(() => {
-
-            let wrapH: number = this.$refs.dialogWrap.clientHeight;
-            let headerH: number = this.$refs.header.clientHeight;
-            let footerH: number = this.$refs.footer.clientHeight;
-
-            this.$refs.body.style.height = wrapH - (headerH + footerH) + 'px';
-
-        }, delay);
+    private unbindFooter(): void {
+        this.$refs.body.removeEventListener('focusin', this.handleFooter);
+        this.$refs.body.removeEventListener('focusout', this.handleFooter);
     }
 
     private handlesFocus(): boolean {
