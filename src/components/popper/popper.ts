@@ -96,6 +96,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     private popper: Popper | undefined;
     private defaultAnimOpen: boolean = false;
     private internalOpen: boolean = false;
+    private isHidden: boolean = false;
 
     public handlesFocus(): boolean {
         return this.focusManagement;
@@ -114,7 +115,10 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
             if (this.popper === undefined) {
                 let options: object = {
                     placement: this.placement,
-                    eventsEnabled: false
+                    eventsEnabled: true,
+                    onUpdate: (data: Popper.Data) => {
+                        this.isHidden = data.hide;
+                    }
                 };
                 let reference: Element = this.as<PortalMixin>().getTrigger() as Element;
                 if (!reference) {
@@ -135,8 +139,6 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     }
 
     protected mounted(): void {
-        this.$modul.event.$on('scroll', this.update);
-        this.$modul.event.$on('resize', this.update);
         this.$modul.event.$on('updateAfterResize', this.update);
 
         // sometimes, the document.click event is stopped causing a menu to stay open, even if another menu has been clicked.
@@ -145,8 +147,6 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     }
 
     protected beforeDestroy(): void {
-        this.$modul.event.$off('scroll', this.update);
-        this.$modul.event.$off('resize', this.update);
         this.$modul.event.$off('updateAfterResize', this.update);
         document.removeEventListener('mouseup', this.onDocumentClick);
 
@@ -171,6 +171,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         if (this.popper !== undefined) {
             this.popper.destroy();
             this.popper = undefined;
+            this.isHidden = false;
         }
     }
 

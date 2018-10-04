@@ -2,6 +2,6 @@
     "m-error-config-not-supported": {
         "title": "L'application pourrait ne pas fonctionner correctement avec ce navigateur<br>ou cet appareil",
         "hint.primary": "La version du navigateur ou du système d'exploitation que vous utilisez n'est pas officiellement prise en charge.",
-        "hint.secondary": "Pour une expérience optimale, veuillez vous assurer d'utiliser la version la plus récente de votre navigateur préféré sur un système d'exploitation compatible."
+        "hint.secondary": "Pour une expérience optimale, assurez-vous d'utiliser la version la plus récente de votre navigateur préféré, sur un système d'exploitation compatible."
     }
 }

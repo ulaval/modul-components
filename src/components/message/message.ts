@@ -3,30 +3,33 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
 import { MESSAGE_NAME } from '../component-names';
+import ErrorTemplatePlugin, { MErrorTemplateSkin } from '../error-template/error-template';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import WithRender from './message.html?style=./message.scss';
 
 export enum MMessageState {
-    Success = 'success',
+    Confirmation = 'confirmation',
     Information = 'information',
     Warning = 'warning',
     Error = 'error'
 }
 
 export enum MMessageSkin {
-    Regular = 'regular',
-    Light = 'light'
+    Default = 'default',
+    Light = 'light',
+    PageLight = 'page-light',
+    Page = 'page'
 }
 
 @WithRender
 @Component
 export class MMessage extends Vue {
     @Prop({
-        default: MMessageState.Success,
+        default: MMessageState.Confirmation,
         validator: value =>
-            value === MMessageState.Success ||
+            value === MMessageState.Confirmation ||
             value === MMessageState.Information ||
             value === MMessageState.Warning ||
             value === MMessageState.Error
@@ -34,10 +37,12 @@ export class MMessage extends Vue {
     public state: MMessageState;
 
     @Prop({
-        default: MMessageSkin.Regular,
+        default: MMessageSkin.Default,
         validator: value =>
-            value === MMessageSkin.Regular ||
-            value === MMessageSkin.Light
+            value === MMessageSkin.Default ||
+            value === MMessageSkin.Light ||
+            value === MMessageSkin.PageLight ||
+            value === MMessageSkin.Page
     })
     public skin: MMessageSkin;
 
@@ -45,26 +50,36 @@ export class MMessage extends Vue {
     public icon: boolean;
 
     @Prop()
-    public closeButton: boolean;
+    public title: string;
 
     @Prop()
+    public closeButton: boolean;
+
+    @Prop({ default: true })
     public visible: boolean;
 
-    private internalPropVisible: boolean = true;
+    private internalVisible: boolean = true;
+    private animReady: boolean = false;
+
+    protected mounted(): void {
+        this.propVisible = this.visible;
+        setTimeout(() => {
+            this.animReady = true;
+        });
+    }
 
     @Watch('visible')
     private onVisibleChange(value: boolean): void {
-        // reset to true if prop reset to undefined
-        this.internalPropVisible = value === undefined ? true : value;
+        this.propVisible = value;
     }
 
     private get propVisible(): boolean {
-        return this.visible !== undefined ? this.visible : this.internalPropVisible;
+        return this.internalVisible;
     }
 
     private set propVisible(visible: boolean) {
-        this.internalPropVisible = visible;
-        this.$emit('update:visible', visible);
+        this.internalVisible = visible === undefined ? true : visible;
+        this.$emit('update:visible', this.internalVisible);
     }
 
     private onClose(event): void {
@@ -75,7 +90,7 @@ export class MMessage extends Vue {
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
-            case MMessageState.Success:
+            case MMessageState.Confirmation:
                 icon = 'm-svg__confirmation';
                 break;
             case MMessageState.Information:
@@ -93,10 +108,49 @@ export class MMessage extends Vue {
         return icon;
     }
 
-    private get showCloseButton(): boolean {
-        return this.skin === MMessageSkin.Regular && this.closeButton;
+    private get isSkinDefault(): boolean {
+        return this.skin === MMessageSkin.Default;
     }
 
+    private get isSkinLight(): boolean {
+        return this.skin === MMessageSkin.Light;
+    }
+
+    private get isNotSkinPage(): boolean {
+        return !this.isSkinPage && !this.isSkinPageLight;
+    }
+
+    private get skinPageValue(): string {
+        return this.isSkinPage ? MErrorTemplateSkin.Default : MErrorTemplateSkin.Light;
+    }
+
+    private get isSkinPage(): boolean {
+        return this.skin === MMessageSkin.Page;
+    }
+
+    private get isSkinPageLight(): boolean {
+        return this.skin === MMessageSkin.PageLight;
+    }
+
+    private get isStateInformation(): boolean {
+        return this.state === MMessageState.Information;
+    }
+
+    private get isStateWarning(): boolean {
+        return this.state === MMessageState.Warning;
+    }
+
+    private get isStateError(): boolean {
+        return this.state === MMessageState.Error;
+    }
+
+    private get isStateConfirmation(): boolean {
+        return this.state === MMessageState.Confirmation;
+    }
+
+    private get showCloseButton(): boolean {
+        return this.skin === MMessageSkin.Default && this.closeButton;
+    }
 }
 
 const MessagePlugin: PluginObject<any> = {
@@ -104,6 +158,7 @@ const MessagePlugin: PluginObject<any> = {
         v.prototype.$log.debug(MESSAGE_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(IconButtonPlugin);
+        v.use(ErrorTemplatePlugin);
         v.use(I18nPlugin);
         v.component(MESSAGE_NAME, MMessage);
     }

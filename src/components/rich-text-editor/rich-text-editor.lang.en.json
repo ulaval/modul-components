@@ -3,6 +3,7 @@
         "hide-submenu": "hide submenu",
         "insert": "insertions",
         "styles": "styles",
-        "lists": "listes"
+        "lists": "listes",
+        "URL": "URL or email"
     }
 }
