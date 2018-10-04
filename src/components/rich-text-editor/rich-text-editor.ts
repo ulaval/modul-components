@@ -86,12 +86,6 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         return `${RICH_TEXT_EDITOR_NAME}: No element has been found with the selector given in the ${prop} prop.`;
     }
 
-    public get customTranslations(): {[key: string]: string} {
-        return {
-            'URL': this.$i18n.translate('m-rich-text-editor:URL')
-        };
-    }
-
     protected refreshModel(newValue: string): void {
         this.$emit('input', newValue);
     }
