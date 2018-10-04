@@ -2,6 +2,7 @@
     "m-file-upload": {
         "header-title": "Upload file",
         "header-title.p": "Upload files",
+        "header-title-file-replacement": "Replace a file",
         "title": "Drop your file here or",
         "title.p": "Drop your files here or",
         "format": "Accepted format",
@@ -10,6 +11,7 @@
         "file": "file",
         "file.p": "files",
         "add": "Add",
+        "replace": "Replace",
         "cancel": "Cancel",
         "rejectFileMsg": "The following file can not be added.",
         "rejectFileMsg.p": "The following files can not be added.",
