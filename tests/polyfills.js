@@ -22,3 +22,5 @@ if (!window.Element.prototype.closest) {
         }
     };
 }
+
+window.requestAnimationFrame = callback => callback();
