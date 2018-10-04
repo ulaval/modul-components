@@ -6,7 +6,7 @@ exports[`MFileUpload completed should render completed files 1`] = `
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop file</span></h3>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your file here or</span></h3>
                 <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
@@ -46,7 +46,7 @@ exports[`MFileUpload should render correctly 1`] = `
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop file</span></h3>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your file here or</span></h3>
                 <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
@@ -88,7 +88,7 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop file</span></h3>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your file here or</span></h3>
                 <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
@@ -134,7 +134,7 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop files</span></h3>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your files here or</span></h3>
                 <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
             <p class="m-file-upload__drop-zone__format"><span class="m-i18n m-file-upload__drop-zone__format__label">Accepted formats</span>: jpg, png, mp4</p>
@@ -196,7 +196,7 @@ exports[`MFileUpload validation validation messages should render rejected files
                 <h3 class="m-file-upload__drop-zone__instructions__title">
                     <svg aria-hidden="true" width="32px" height="32px" class="m-icon">
                         <use aria-hidden="true"></use>
-                    </svg> <span class="m-i18n">Drop files</span></h3>
+                    </svg> <span class="m-i18n">Drop your files here or</span></h3>
                 <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
             <p class="m-file-upload__drop-zone__format"><span class="m-i18n m-file-upload__drop-zone__format__label">Accepted formats</span>: jpg, png, mp4</p>

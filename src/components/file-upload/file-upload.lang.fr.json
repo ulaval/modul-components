@@ -2,8 +2,8 @@
     "m-file-upload": {
         "header-title": "Ajouter un fichier",
         "header-title.p": "Ajouter des fichiers",
-        "title": "Déposer un fichier",
-        "title.p": "Déposer des fichiers",
+        "title": "Déposer le fichier ici ou",
+        "title.p": "Déposer les fichiers ici ou",
         "format": "Format accepté",
         "format.p": "Formats acceptés",
         "import": "En cours d'importation",
