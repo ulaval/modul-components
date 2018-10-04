@@ -1,13 +1,59 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
-    <p>
-        <m-popup><!-- Test case --></m-popup>
-    </p>
+    <h3>Popup</h3>
+    <h5 class="m-u--margin-bottom">Le popup se comporte correctement dans un cas normal</h5>
+    <div class="m-u--margin-bottom">
+        <m-popup>
+            <m-button slot="trigger">Ouvrir</m-button>
+            <p style="margin:0;">Du contenu de popup.</p>
+        </m-popup>
+    </div>
+    <h5 class="m-u--margin-bottom">Le popup se comporte correctement dans le edit window</h5>
+    <div class="m-u--margin-bottom">
+        <m-edit-window title="Titre">
+            <m-button slot="trigger">Ouvrir</m-button>
+            <h2 slot="header" style="margin:0;">Titre</h2>
+                <p style="margin:0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in magna ut elit pellentesque placerat sit amet vitae augue. Maecenas accumsan massa vitae sem accumsan vehicula. Quisque sit amet nulla ullamcorper, tincidunt ante at, tempor erat. Pellentesque pellentesque nulla eu varius iaculis. Pellentesque ut blandit ante, non ullamcorper nisi. Praesent vitae leo velit. Nulla bibendum urna nec consequat cursus. In suscipit risus non mi convallis, at imperdiet purus efficitur. Quisque ornare, quam id iaculis imperdiet, leo nibh rutrum leo, eget pharetra ligula mi quis lectus. Suspendisse at quam ipsum. Ut dictum tellus non blandit venenatis.</p>
+
+                <p style="margin:0;">Donec et tempor magna, vel fermentum turpis. Nunc quis consectetur turpis, ut venenatis purus. Curabitur dignissim dignissim diam id maximus. Etiam blandit elit ut velit tincidunt, sit amet tempor velit blandit. Integer pretium a dui sed pulvinar. Vivamus urna magna, pulvinar feugiat lobortis sit amet, vestibulum non libero. Aliquam et eros nec augue vulputate accumsan. Vivamus pretium placerat est, ut commodo mauris ultricies quis. Vivamus in tempus lacus, vitae porta turpis. Fusce ultricies sed turpis faucibus pharetra. Nam tristique, ipsum sed egestas suscipit, est urna semper nisi, vel ultrices odio velit ut eros. Quisque scelerisque at tortor non dapibus. Nunc eget odio convallis, finibus metus a, pretium lectus. Quisque id elit mi. Integer dictum odio in est blandit rutrum in vitae ipsum. In ac maximus justo.</p>
+
+                <p>Duis vel leo scelerisque, tristique diam sed, interdum eros. Nullam odio orci, cursus nec libero non, varius suscipit odio. Ut interdum velit turpis, quis varius erat dictum vel. Quisque eget metus a tellus venenatis lacinia nec a metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus vitae quam a mi pulvinar feugiat nec nec nibh. Ut imperdiet sapien vitae tellus vulputate, ac convallis urna tincidunt. Donec aliquam magna non metus sodales, nec pretium ligula rutrum. Nunc lorem tellus, convallis suscipit ipsum id, condimentum cursus dolor. Nulla ut est ut elit faucibus pharetra. Proin sem ex, fringilla vitae dolor vel, egestas ullamcorper erat. Maecenas non ornare erat, eu ultricies quam. Sed tempus ultricies rhoncus. Donec facilisis tortor vitae rutrum malesuada. Nam et arcu sed metus laoreet aliquet. Proin facilisis eu neque vitae tristique.</p>
+
+                <p>Praesent malesuada orci vel lectus efficitur tempor. Sed tincidunt efficitur quam. Phasellus vel ex quis lacus aliquet euismod. Maecenas ac elementum ante. Mauris id felis ligula. Proin hendrerit, turpis eu egestas tempor, risus enim euismod dui, quis fringilla ex ante eget lectus. Aenean imperdiet, libero ac egestas placerat, eros nibh consectetur nibh, sit amet viverra metus velit ac nulla. Pellentesque sodales id tortor quis aliquet.</p>
+
+                <p>Aenean venenatis neque ut orci euismod accumsan. Praesent fermentum ornare erat ut tincidunt. Pellentesque elementum, dui nec malesuada ultricies, justo ex varius eros, in finibus eros tellus vel leo. Quisque non imperdiet augue. Suspendisse dignissim tellus ante, eget molestie lacus dapibus nec. Phasellus nec dignissim eros. Morbi libero eros, iaculis quis elit vel, ornare feugiat leo. Nunc malesuada vitae ex in vulputate. Maecenas sem magna, congue a ligula non, efficitur varius risus. Etiam auctor placerat nulla rutrum bibendum. Phasellus rutrum imperdiet efficitur. Curabitur non turpis eget est pharetra maximus ut ac leo. Integer sit amet bibendum tellus. Curabitur ac lorem ullamcorper, tristique ex nec, feugiat sapien. Curabitur tincidunt commodo eros, eget maximus augue mollis in.</p>
+
+                <p>Aenean venenatis neque ut orci euismod accumsan. Praesent fermentum ornare erat ut tincidunt. Pellentesque elementum, dui nec malesuada ultricies, justo ex varius eros, in finibus eros tellus vel leo. Quisque non imperdiet augue. Suspendisse dignissim tellus ante, eget molestie lacus dapibus nec. Phasellus nec dignissim eros. Morbi libero eros, iaculis quis elit vel, ornare feugiat leo. Nunc malesuada vitae ex in vulputate. Maecenas sem magna, congue a ligula non, efficitur varius risus. Etiam auctor placerat nulla rutrum bibendum. Phasellus rutrum imperdiet efficitur. Curabitur non turpis eget est pharetra maximus ut ac leo. Integer sit amet bibendum tellus. Curabitur ac lorem ullamcorper, tristique ex nec, feugiat sapien. Curabitur tincidunt commodo eros, eget maximus augue mollis in.</p>
+
+                <p>Aenean venenatis neque ut orci euismod accumsan. Praesent fermentum ornare erat ut tincidunt. Pellentesque elementum, dui nec malesuada ultricies, justo ex varius eros, in finibus eros tellus vel leo. Quisque non imperdiet augue. Suspendisse dignissim tellus ante, eget molestie lacus dapibus nec. Phasellus nec dignissim eros. Morbi libero eros, iaculis quis elit vel, ornare feugiat leo. Nunc malesuada vitae ex in vulputate. Maecenas sem magna, congue a ligula non, efficitur varius risus. Etiam auctor placerat nulla rutrum bibendum. Phasellus rutrum imperdiet efficitur. Curabitur non turpis eget est pharetra maximus ut ac leo. Integer sit amet bibendum tellus. Curabitur ac lorem ullamcorper, tristique ex nec, feugiat sapien. Curabitur tincidunt commodo eros, eget maximus augue mollis in.</p>
+
+                <p>Aenean venenatis neque ut orci euismod accumsan. Praesent fermentum ornare erat ut tincidunt. Pellentesque elementum, dui nec malesuada ultricies, justo ex varius eros, in finibus eros tellus vel leo. Quisque non imperdiet augue. Suspendisse dignissim tellus ante, eget molestie lacus dapibus nec. Phasellus nec dignissim eros. Morbi libero eros, iaculis quis elit vel, ornare feugiat leo. Nunc malesuada vitae ex in vulputate. Maecenas sem magna, congue a ligula non, efficitur varius risus. Etiam auctor placerat nulla rutrum bibendum. Phasellus rutrum imperdiet efficitur. Curabitur non turpis eget est pharetra maximus ut ac leo. Integer sit amet bibendum tellus. Curabitur ac lorem ullamcorper, tristique ex nec, feugiat sapien. Curabitur tincidunt commodo eros, eget maximus augue mollis in.</p>
+
+                <p>Aenean venenatis neque ut orci euismod accumsan. Praesent fermentum ornare erat ut tincidunt. Pellentesque elementum, dui nec malesuada ultricies, justo ex varius eros, in finibus eros tellus vel leo. Quisque non imperdiet augue. Suspendisse dignissim tellus ante, eget molestie lacus dapibus nec. Phasellus nec dignissim eros. Morbi libero eros, iaculis quis elit vel, ornare feugiat leo. Nunc malesuada vitae ex in vulputate. Maecenas sem magna, congue a ligula non, efficitur varius risus. Etiam auctor placerat nulla rutrum bibendum. Phasellus rutrum imperdiet efficitur. Curabitur non turpis eget est pharetra maximus ut ac leo. Integer sit amet bibendum tellus. Curabitur ac lorem ullamcorper, tristique ex nec, feugiat sapien. Curabitur tincidunt commodo eros, eget maximus augue mollis in.</p>
+
+                <m-popup>
+                        <m-button slot="trigger">Ouvrir</m-button>
+                        <h2 slot="header" style="margin:0;">Some popup</h2>
+                </m-popup>
+
+                <p>Sed elementum fermentum pulvinar. Vivamus fermentum erat non arcu euismod tristique. Quisque pulvinar lorem leo, in pharetra augue egestas vitae. Pellentesque dui purus, consequat eget odio nec, pretium congue nisi. Duis id nulla vel turpis viverra congue. Quisque eu sapien ac nulla congue ultrices quis quis eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce pharetra lacinia odio vitae placerat. Mauris imperdiet finibus tellus. Nullam scelerisque nec justo vitae pretium. In sed augue enim. Donec finibus nibh et elit tristique, sit amet tristique tellus sodales.</p>
+
+                <p>Praesent in nisl justo. Phasellus elementum dui at molestie malesuada. Maecenas rhoncus tellus velit, vitae efficitur mi euismod quis. Vivamus porttitor leo leo, a tempus dui lacinia ac. Suspendisse cursus velit tristique eleifend convallis. Nulla hendrerit nisi vitae mauris sagittis tincidunt sed et lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ac risus erat. Quisque consequat augue justo.</p>
+
+                <p>Suspendisse malesuada dui vel elit viverra dictum. Sed tempor velit in iaculis semper. Suspendisse in aliquam est, vitae condimentum neque. Mauris suscipit libero metus, ut efficitur dui venenatis in. Vivamus ac rutrum nisl. Vestibulum vitae ex ultrices ante cursus bibendum. Suspendisse tincidunt lacinia tempus. Aliquam ante dui, lacinia ut pharetra sit amet, sodales id ante. Nullam iaculis nisl lacinia, mollis nunc ac, laoreet ligula. Donec efficitur sed eros at vulputate. Fusce magna mauris, aliquet eu nisi quis, aliquam volutpat magna. Nullam eleifend imperdiet dictum. Vestibulum faucibus tortor eget volutpat sagittis. Donec erat purus, scelerisque at faucibus quis, tempus semper magna. Aenean lobortis metus ante, quis vestibulum lacus ultricies id.</p>
+
+                <p>Integer eu arcu vehicula, pulvinar nunc ut, venenatis nibh. Nulla semper molestie turpis, vitae scelerisque arcu ultrices eget. Proin vehicula sed mauris posuere commodo. In erat urna, egestas id dictum vitae, eleifend vitae metus. Sed sed nibh gravida ante pretium commodo vitae vel justo. Phasellus aliquam quam orci, non porta erat venenatis vitae. Proin eu pretium neque, ac pretium tellus.</p>
+
+                <p>Proin a tempus tortor. Phasellus a mollis quam. Nunc volutpat neque ac enim posuere faucibus. Curabitur a sollicitudin diam. Praesent placerat libero massa, nec rhoncus metus dignissim eget. Nam a turpis eu felis bibendum dapibus eu vitae ipsum. Sed ullamcorper sapien nec nisl hendrerit, sit amet tempor sapien pharetra. Nunc a ante consequat nunc lacinia porta.</p>
+
+                <p>Sed elementum fermentum pulvinar. Vivamus fermentum erat non arcu euismod tristique. Quisque pulvinar lorem leo, in pharetra augue egestas vitae. Pellentesque dui purus, consequat eget odio nec, pretium congue nisi. Duis id nulla vel turpis viverra congue. Quisque eu sapien ac nulla congue ultrices quis quis eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce pharetra lacinia odio vitae placerat. Mauris imperdiet finibus tellus. Nullam scelerisque nec justo vitae pretium. In sed augue enim. Donec finibus nibh et elit tristique, sit amet tristique tellus sodales.</p>
+
+                <p>Praesent in nisl justo. Phasellus elementum dui at molestie malesuada. Maecenas rhoncus tellus velit, vitae efficitur mi euismod quis. Vivamus porttitor leo leo, a tempus dui lacinia ac. Suspendisse cursus velit tristique eleifend convallis. Nulla hendrerit nisi vitae mauris sagittis tincidunt sed et lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ac risus erat. Quisque consequat augue justo.</p>
+
+                <p>Suspendisse malesuada dui vel elit viverra dictum. Sed tempor velit in iaculis semper. Suspendisse in aliquam est, vitae condimentum neque. Mauris suscipit libero metus, ut efficitur dui venenatis in. Vivamus ac rutrum nisl. Vestibulum vitae ex ultrices ante cursus bibendum. Suspendisse tincidunt lacinia tempus. Aliquam ante dui, lacinia ut pharetra sit amet, sodales id ante. Nullam iaculis nisl lacinia, mollis nunc ac, laoreet ligula. Donec efficitur sed eros at vulputate. Fusce magna mauris, aliquet eu nisi quis, aliquam volutpat magna. Nullam eleifend imperdiet dictum. Vestibulum faucibus tortor eget volutpat sagittis. Donec erat purus, scelerisque at faucibus quis, tempus semper magna. Aenean lobortis metus ante, quis vestibulum lacus ultricies id.</p>
+
+                <p>Integer eu arcu vehicula, pulvinar nunc ut, venenatis nibh. Nulla semper molestie turpis, vitae scelerisque arcu ultrices eget. Proin vehicula sed mauris posuere commodo. In erat urna, egestas id dictum vitae, eleifend vitae metus. Sed sed nibh gravida ante pretium commodo vitae vel justo. Phasellus aliquam quam orci, non porta erat venenatis vitae. Proin eu pretium neque, ac pretium tellus.</p>
+
+                <p>Proin a tempus tortor. Phasellus a mollis quam. Nunc volutpat neque ac enim posuere faucibus. Curabitur a sollicitudin diam. Praesent placerat libero massa, nec rhoncus metus dignissim eget. Nam a turpis eu felis bibendum dapibus eu vitae ipsum. Sed ullamcorper sapien nec nisl hendrerit, sit amet tempor sapien pharetra. Nunc a ante consequat nunc lacinia porta.</p>
+        </m-edit-window>
+    </div>
 </div>
