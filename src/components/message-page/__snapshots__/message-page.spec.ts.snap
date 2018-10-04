@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Message-page integration tests Given an error with all props and slots initialized Then should render properly 1`] = `
+exports[`message-page integration tests Given an error with all props and slots initialized Then should render properly 1`] = `
 <article class="m-message-page m--is-state-warning m--is-skin-default">
     <header class="m-message-page__header">
         <h2 class="m-message-page__title">An error title.</h2>
