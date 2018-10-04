@@ -36,6 +36,39 @@ describe('MRichTextEditor', () => {
         expect(richTextEditor.froalaLicenseKey).toEqual(froalaLicenseKey);
     });
 
+    describe('custom validation for HTML content', () => {
+        ['', '<p></p>', '<p>&nbsp;</p>', ' &nbsp; ', '<p><strong></strong></p>']
+        .forEach((value: string) => {
+            it(`A RTE with '${value}' is considered to be empty`, () => {
+                expect(richTextEditor.customHasValue(value)).toBeFalsy();
+            });
+        });
+
+        ['a', '<p>abc</p>', '<p>a&nbsp;</p>', ' &nbsp; abc', '<p><strong>abc</strong></p>']
+        .forEach((value: string) => {
+            it(`A RTE with '${value}' is considered NOT to be empty`, () => {
+                expect(richTextEditor.customHasValue(value)).toBeTruthy();
+            });
+        });
+    });
+
+    describe('when refreshing model', () => {
+        it('should refresh with real value if has value', () => {
+            const content: string = '<p>abc123</p>';
+
+            richTextEditor.$emit('input', content);
+
+            expect(wrapper.emitted().input[0]).toEqual([content]);
+        });
+        it(`should refresh with an empty string if it doesn't have value`, () => {
+            const content: string = '<p><strong> &nbsp; </strong></p>';
+
+            richTextEditor.$emit('input', content);
+
+            expect(wrapper.emitted().input[0]).toEqual(['']);
+        });
+    });
+
     describe('In standard Mode', () => {
         beforeEach(() => {
             wrapper.setProps({
