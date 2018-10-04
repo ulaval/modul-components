@@ -220,14 +220,21 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private attachDragImage(): void {
         const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
-        if (dragImage) {
-            const origin: number = -9999;
-            dragImage.style.left = `${origin}px`;
-            dragImage.style.top = `${origin}px`;
-            dragImage.style.position = 'absolute';
-            dragImage.style.overflow = 'hidden';
-            dragImage.style.zIndex = '1';
-            dragImage.hidden = true;
+        // We use this property to know if the dragImage was handled or not.
+        const dragImagePluginName: string = '__mdraggableimage__';
+        if (dragImage && !dragImage[dragImagePluginName]) {
+            const offsetWidth: number = dragImage.offsetWidth;
+
+            requestAnimationFrame(() => {
+                const origin: number = -9999;
+                dragImage.style.left = `${origin}px`;
+                dragImage.style.top = `${origin}px`;
+                dragImage.style.position = 'absolute';
+                dragImage.style.overflow = 'hidden';
+                dragImage.style.zIndex = '1';
+                dragImage.hidden = true;
+                dragImage[dragImagePluginName] = true;
+            });
         }
     }
 
