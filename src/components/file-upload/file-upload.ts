@@ -62,9 +62,7 @@ export class MFileUpload extends ModulVue {
     };
 
     public get isDropZoneEnabled(): boolean {
-        const a: boolean = UserAgentUtil.isDesktop();
-        const b: boolean = this.$mq.state.isMqMinS;
-        return a && b;
+        return UserAgentUtil.isDesktop() && this.$mq.state.isMqMinS;
     }
 
     private internalOpen: boolean = false;
