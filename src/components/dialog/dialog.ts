@@ -6,12 +6,12 @@ import { Prop } from 'vue-property-decorator';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
-import { TEMP_NAME } from '../component-names';
+import { DIALOG_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import WithRender from './temp-name.html?style=./temp-name.scss';
+import WithRender from './dialog.html?style=./dialog.scss';
 
-export enum MTempNameWidth {
+export enum MDialogWidth {
     Default = 'default',
     Large = 'large'
 }
@@ -20,7 +20,7 @@ export enum MTempNameWidth {
 @Component({
     mixins: [Portal]
 })
-export class MTempName extends ModulVue implements PortalMixinImpl {
+export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop()
     public title: string;
     @Prop()
@@ -34,10 +34,10 @@ export class MTempName extends ModulVue implements PortalMixinImpl {
     @Prop({ default: true })
     public negativeLink: boolean;
     @Prop({
-        default: MTempNameWidth.Default,
+        default: MDialogWidth.Default,
         validator: value =>
-            value === MTempNameWidth.Default ||
-            value === MTempNameWidth.Large
+            value === MDialogWidth.Default ||
+            value === MDialogWidth.Large
     })
     public width: string;
 
@@ -96,18 +96,18 @@ export class MTempName extends ModulVue implements PortalMixinImpl {
     }
 
     private get hasWidthLarge(): boolean {
-        return this.width === MTempNameWidth.Large;
+        return this.width === MDialogWidth.Large;
     }
 }
 
-const TempNamePlugin: PluginObject<any> = {
+const DialogPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(ButtonPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.use(PortalPlugin);
-        v.component(TEMP_NAME, MTempName);
+        v.component(DIALOG_NAME, MDialog);
     }
 };
 
-export default TempNamePlugin;
+export default DialogPlugin;

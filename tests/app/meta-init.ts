@@ -39,7 +39,7 @@ const components: string[] = [
     Components.LINK_NAME,
     Components.LIST_ITEM_NAME,
     Components.MESSAGE_NAME,
-    Components.TEMP_NAME,
+    Components.DIALOG_NAME,
     Components.NAVBAR_NAME,
     Components.NAVBAR_ITEM_NAME,
     Components.OPTION_NAME,

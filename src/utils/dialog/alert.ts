@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 
-import { MTempName } from '../../components/dialog/temp-name';
+import { MDialog } from '../../components/dialog/dialog';
 
 export interface AlertOptions {
     okLabel?: string;
@@ -8,11 +8,11 @@ export interface AlertOptions {
 
 export type AlertFunction = (message: string, options?: AlertOptions) => Promise<any>;
 
-let AlertInstance: MTempName | undefined = undefined;
+let AlertInstance: MDialog | undefined = undefined;
 
 export const alertFunction: AlertFunction = (message: string, options?: AlertOptions) => {
     if (!AlertInstance) {
-        AlertInstance = new MTempName({
+        AlertInstance = new MDialog({
             el: document.createElement('div')
         });
 

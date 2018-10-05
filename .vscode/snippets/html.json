@@ -181,13 +181,13 @@
 		],
 		"description": "Create a modul message tag"
 	},
-	"temp-name": {
-		"prefix": "m-temp-name",
+	"dialog": {
+		"prefix": "m-dialog",
 		"body": [
-			"<m-temp-name>$1</m-temp-name>",
+			"<m-dialog>$1</m-dialog>",
 			"$2"
 		],
-		"description": "Create a modul temp-name tag"
+		"description": "Create a modul dialog tag"
 	},
 	"navbar": {
 		"prefix": "m-navbar",

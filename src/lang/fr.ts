@@ -34,7 +34,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/login/login.lang.fr.json'),
                 require('../components/message/message.lang.fr.json'),
                 require('../components/option/option.lang.fr.json'),
-                require('../components/dialog/temp-name.lang.fr.json'),
+                require('../components/dialog/dialog.lang.fr.json'),
                 require('../components/page-not-found/page-not-found.lang.fr.json'),
                 require('../components/phone-number/phone-number.lang.fr.json'),
                 require('../components/rich-text-editor/rich-text-editor.lang.fr.json'),
