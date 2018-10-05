@@ -24,7 +24,7 @@ const components: string[] = [
     Components.ERROR_MESSAGE_NAME,
     Components.ERROR_PAGE_NOT_FOUND_NAME,
     Components.ERROR_TECHNICAL_DIFFICULTY_NAME,
-    Components.ERROR_TEMPLATE_NAME,
+    Components.MESSAGE_PAGE_NAME,
     Components.EDIT_WINDOW_NAME,
     Components.FILE_SELECT_NAME,
     Components.FILE_UPLOAD_NAME,

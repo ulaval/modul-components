@@ -2,7 +2,7 @@ import { shallow, Wrapper } from '@vue/test-utils';
 import moment from 'moment';
 import Vue from 'vue';
 
-import { ACCORDION_NAME, ERROR_TEMPLATE_NAME, I18N_NAME, PANEL_NAME } from '../component-names';
+import { ACCORDION_NAME, MESSAGE_PAGE_NAME, I18N_NAME, PANEL_NAME } from '../component-names';
 import { Link } from '../message-page/message-page';
 import { MErrorTechnicalDifficulty } from './error-technical-difficulty';
 
@@ -35,7 +35,7 @@ let showStack: boolean;
 
 const getStubs: any = () => {
     return {
-        [ERROR_TEMPLATE_NAME]: '<div><slot /></div>',
+        [MESSAGE_PAGE_NAME]: '<div><slot /></div>',
         [ACCORDION_NAME]: '<div id="accordionDiv"><slot /></div>',
         [I18N_NAME]: '<span>{{ $attrs["k"] }}</span>',
         [PANEL_NAME]: '<div id="panel"><slot /></div>'

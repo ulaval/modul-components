@@ -2,7 +2,7 @@ import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
-import { ERROR_TEMPLATE_NAME } from '../component-names';
+import { MESSAGE_PAGE_NAME } from '../component-names';
 import MessagePlugin, { MMessageState } from '../message/message';
 import { Link } from './message-page';
 import WithRender from './message-page.sandbox.html';
@@ -26,7 +26,7 @@ export class MMessagePageSandbox extends Vue {
 
 const MessagePageSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(`${ERROR_TEMPLATE_NAME}-sandbox`, MMessagePageSandbox);
+        v.component(`${MESSAGE_PAGE_NAME}-sandbox`, MMessagePageSandbox);
     }
 };
 

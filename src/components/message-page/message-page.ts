@@ -4,7 +4,7 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
-import { ERROR_TEMPLATE_NAME } from '../component-names';
+import { MESSAGE_PAGE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import { MMessageState } from '../message/message';
@@ -164,11 +164,11 @@ export class MMessagePage extends ModulVue {
 
 const MessagePagePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(ERROR_TEMPLATE_NAME, 'plugin.install');
+        v.prototype.$log.debug(MESSAGE_PAGE_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);
-        v.component(ERROR_TEMPLATE_NAME, MMessagePage);
+        v.component(MESSAGE_PAGE_NAME, MMessagePage);
     }
 };
 
