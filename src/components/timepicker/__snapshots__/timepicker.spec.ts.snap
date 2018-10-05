@@ -15,9 +15,7 @@ exports[`MTimepicker should render correctly 1`] = `
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
-        <div class="m-popper">
-            <DIV class="v-portal" style="display:none;"></DIV>
-        </div>
+        <div class="m-popper"> </div>
     </div>
 </div>
 `;
@@ -37,9 +35,7 @@ exports[`MTimepicker should render correctly min/max time 1`] = `
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
-        <div class="m-popper">
-            <DIV class="v-portal" style="display:none;"></DIV>
-        </div>
+        <div class="m-popper"> </div>
     </div>
 </div>
 `;
@@ -62,9 +58,7 @@ exports[`MTimepicker should render correctly when disabled is set 1`] = `
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
-        <div class="m-popper">
-            <DIV class="v-portal" style="display:none;"></DIV>
-        </div>
+        <div class="m-popper"> </div>
     </div>
 </div>
 `;
@@ -92,9 +86,7 @@ exports[`MTimepicker should render correctly when error is set 1`] = `
         </m-accordion-transition>
     </div>
     <div class="m-popup">
-        <div class="m-popper">
-            <DIV class="v-portal" style="display:none;"></DIV>
-        </div>
+        <div class="m-popper"> </div>
     </div>
 </div>
 `;
@@ -122,9 +114,7 @@ exports[`MTimepicker should render correctly when valid is set 1`] = `
         </m-accordion-transition>
     </div>
     <div class="m-popup">
-        <div class="m-popper">
-            <DIV class="v-portal" style="display:none;"></DIV>
-        </div>
+        <div class="m-popper"> </div>
     </div>
 </div>
 `;
@@ -147,9 +137,7 @@ exports[`MTimepicker should render correctly when waiting is set 1`] = `
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
-        <div class="m-popper">
-            <DIV class="v-portal" style="display:none;"></DIV>
-        </div>
+        <div class="m-popper"> </div>
     </div>
 </div>
 `;

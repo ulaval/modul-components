@@ -1,6 +1,6 @@
 <div class="m-popper" :class="{ 'm--is-open': propOpen }">
     <slot name="trigger"></slot>
-    <portal :target-el="'#' + propId" v-if="hasDefaultSlot">
+    <portal :target-el="portalTargetSelector" v-if="hasDefaultSlot && portalCreated">
         <transition
             name="m--is"
             @before-enter="onBeforeEnter"
@@ -22,7 +22,7 @@
                                 className ]"
                      :aria-hidden="!propOpen || isHidden"
                      :style="{ width: width }"
-                     v-show="propOpen" v-if="preload || loaded">
+                     v-show="propOpen" v-if="portalMounted">
                 <header class="m-popper__header" :class="{ 'm--no-padding': !padding || !paddingHeader }"  v-if="hasHeaderSlot">
                     <slot name="header"></slot>
                 </header>
