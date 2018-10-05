@@ -16,7 +16,7 @@ import DropdownGroupPlugin from './dropdown-group/dropdown-group';
 import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DropdownPlugin from './dropdown/dropdown';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
-import EditWindow from './edit-window/edit-window';
+import Overlay from './overlay/overlay';
 import ErrorAccessDenied from './error-access-denied/error-access-denied';
 import ErrorBrowserNotSupported from './error-browser-not-supported/error-browser-not-supported';
 import ErrorConfigNotSupported from './error-config-not-supported/error-config-not-supported';
@@ -109,7 +109,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DropdownItemPlugin);
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
-        Vue.use(EditWindow);
+        Vue.use(Overlay);
         Vue.use(ErrorAccessDenied);
         Vue.use(ErrorBrowserNotSupported);
         Vue.use(ErrorConfigNotSupported);

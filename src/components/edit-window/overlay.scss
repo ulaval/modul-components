@@ -1,6 +1,6 @@
 @import '../../styles/abstracts/variables';
 
-.m-edit-window {
+.m-overlay {
     &__wrap {
         position: fixed;
         top: 0;
@@ -18,7 +18,7 @@
         &.m--is-leave-active {
             transition: background linear;
 
-            .m-edit-window__article {
+            .m-overlay__article {
                 transition: transform ease;
             }
         }
@@ -26,7 +26,7 @@
         &.m--is-enter-active {
             transition-duration: $m-transition-duration;
 
-            .m-edit-window__article {
+            .m-overlay__article {
                 transition-delay: $m-transition-duration--s;
                 transition-duration: $m-transition-duration--xl;
             }
@@ -34,7 +34,7 @@
 
         &.m--is-leave-active {
             &,
-            .m-edit-window__article {
+            .m-overlay__article {
                 transition-duration: $m-transition-duration--xl;
             }
         }
@@ -43,7 +43,7 @@
         &.m--is-leave-to {
             background: rgba($m-color--grey-lightest, 0);
 
-            .m-edit-window__article {
+            .m-overlay__article {
                 transform: translate3d(0, 110%, 0);
             }
         }

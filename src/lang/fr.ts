@@ -17,7 +17,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/dropdown/dropdown.lang.fr.json'),
                 require('../components/dropdown-item/dropdown-item.lang.fr.json'),
                 require('../components/dropdown-group/dropdown-group.lang.fr.json'),
-                require('../components/edit-window/edit-window.lang.fr.json'),
+                require('../components/overlay/overlay.lang.fr.json'),
                 require('../components/error-access-denied/error-access-denied.lang.fr.json'),
                 require('../components/error-browser-not-supported/error-browser-not-supported.lang.fr.json'),
                 require('../components/error-config-not-supported/error-config-not-supported.lang.fr.json'),
