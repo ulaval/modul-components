@@ -77,6 +77,8 @@ export class MRadio extends ModulVue {
     public radioMarginTop: string;
     @Prop()
     public readOnly: boolean;
+    @Prop({ default : 'li' })
+    public tag: string;
 
     // ----- For Button Group -----
     @Prop()

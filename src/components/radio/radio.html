@@ -1,4 +1,4 @@
-<li class="m-radio"
+<component :is="tag" class="m-radio"
     :class="{ 'm--is-mode-button': isButton(),
               'm--is-disabled': propDisabled,
               'm--is-read-only': propReadOnly,
@@ -20,4 +20,4 @@
             <m-icon aria-hidden="true" class="m-radio__icon m--is-right" :name="iconName" v-if="isButton() && !hasIconLeft() && hasIcon()"></m-icon>
         </span>
     </label>
-</li>
+</component>
