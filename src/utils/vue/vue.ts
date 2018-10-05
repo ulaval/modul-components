@@ -7,8 +7,8 @@ import { Messages } from '../i18n/i18n';
 import { Licenses } from '../license/license';
 import { Logger } from '../logger/logger';
 import { MediaQueries } from '../media-queries/media-queries';
-import { AlertFunction } from '../modal/alert';
-import { ConfirmFunction } from '../modal/confirm';
+import { AlertFunction } from '../temp-name/alert';
+import { ConfirmFunction } from '../temp-name/confirm';
 import { Modul } from '../modul/modul';
 
 // TODO: explore usage of TS declare syntax

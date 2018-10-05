@@ -156,7 +156,7 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
 </m-dialog>
 `;
 
-exports[`MFileUpload validation validation messages should render rejected files in modal 1`] = `
+exports[`MFileUpload validation validation messages should render rejected files in temp-name 1`] = `
 <m-dialog title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-message m-file-upload__error-message m--is-state-error m--is-skin-default">

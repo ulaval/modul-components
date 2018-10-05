@@ -41,7 +41,7 @@ import LoginPlugin from './login/login';
 import MenuItemPlugin from './menu-item/menu-item';
 import MenuPlugin from './menu/menu';
 import MessagePlugin from './message/message';
-import ModalPlugin from './modal/modal';
+import TempNamePlugin from './temp-name/temp-name';
 import NavbarItemPlugin from './navbar-item/navbar-item';
 import NavbarPlugin from './navbar/navbar';
 import OptionItemPlugin from './option-item/option-item';
@@ -131,7 +131,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ListItemPlugin);
         Vue.use(LoginPlugin);
         Vue.use(MessagePlugin);
-        Vue.use(ModalPlugin);
+        Vue.use(TempNamePlugin);
         Vue.use(NavbarPlugin);
         Vue.use(NavbarItemPlugin);
         Vue.use(OptionPlugin);

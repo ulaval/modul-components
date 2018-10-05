@@ -1,8 +1,8 @@
 @import '../../styles/abstracts/variables';
-$m-modal--max-width: 380px !default;
-$m-modal--max-width--l: 500px !default;
+$m-temp-name--max-width: 380px !default;
+$m-temp-name--max-width--l: 500px !default;
 
-.m-modal {
+.m-temp-name {
     display: inline-block;
 
     &__wrap {
@@ -33,14 +33,14 @@ $m-modal--max-width--l: 500px !default;
         &.m--is-leave-active {
             transition-duration: $m-transition-duration;
 
-            .m-modal__article {
+            .m-temp-name__article {
                 transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
             }
         }
 
         &.m--is-enter,
         &.m--is-leave-to {
-            .m-modal__article {
+            .m-temp-name__article {
                 transform: translate3d(0, $m-padding--l, 0) scale(0.98);
                 opacity: 0;
             }
@@ -53,7 +53,7 @@ $m-modal--max-width--l: 500px !default;
         border-radius: $m-border-radius;
         cursor: auto;
         width: 100%;
-        max-width: $m-modal--max-width;
+        max-width: $m-temp-name--max-width;
         background: $m-color--white;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
 
@@ -62,7 +62,7 @@ $m-modal--max-width--l: 500px !default;
         }
 
         &.m--has-width-large {
-            max-width: $m-modal--max-width--l;
+            max-width: $m-temp-name--max-width--l;
         }
     }
 
@@ -122,7 +122,7 @@ $m-modal--max-width--l: 500px !default;
 
         @include m-scrollbar();
 
-        ~ .m-modal__footer {
+        ~ .m-temp-name__footer {
             padding-top: 0;
         }
     }

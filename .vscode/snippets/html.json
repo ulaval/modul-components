@@ -181,13 +181,13 @@
 		],
 		"description": "Create a modul message tag"
 	},
-	"modal": {
-		"prefix": "m-modal",
+	"temp-name": {
+		"prefix": "m-temp-name",
 		"body": [
-			"<m-modal>$1</m-modal>",
+			"<m-temp-name>$1</m-temp-name>",
 			"$2"
 		],
-		"description": "Create a modul modal tag"
+		"description": "Create a modul temp-name tag"
 	},
 	"navbar": {
 		"prefix": "m-navbar",

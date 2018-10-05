@@ -1,36 +1,36 @@
-<div class="m-modal" ref="baseWindow">
+<div class="m-temp-name" ref="baseWindow">
     <slot name="trigger"></slot>
     <portal :target-el="portalTargetSelector" v-if="portalCreated">
         <transition name="m--is">
-            <div class="m-modal__wrap"
+            <div class="m-temp-name__wrap"
                     :class="[{ 'm--is-disabled': disabled }, className ]"
                     v-show="propOpen"
                     v-if="portalMounted"
                     ref="dialogWrap">
-                <article class="m-modal__article"
+                <article class="m-temp-name__article"
                             :class="{ 'm--has-width-large': hasWidthLarge }"
                             ref="article">
-                    <header class="m-modal__header"
+                    <header class="m-temp-name__header"
                             v-if="hasTitle">
                         <h2>{{ title }}</h2>
                     </header>
-                    <div class="m-modal__body"
+                    <div class="m-temp-name__body"
                             v-if="hasDefaultSlot || hasMessage">
                         <p v-if="hasMessage" v-html="message"></p>
                         <slot></slot>
                     </div>
-                    <footer class="m-modal__footer">
+                    <footer class="m-temp-name__footer">
                         <slot name="footer"></slot>
-                        <nav class="m-modal__footer__nav"
+                        <nav class="m-temp-name__footer__nav"
                                 v-if="!hasFooterSlot">
                             <m-button @click="onOk()">
                                 <template v-if="hasOkLabel">{{ okLabel }}</template>
-                                <m-i18n v-else k="m-modal:ok"></m-i18n>
+                                <m-i18n v-else k="m-temp-name:ok"></m-i18n>
                                 <template slot="precision" v-if="hasOkPrecision">{{ okPrecision }}</template>
                             </m-button>
                             <m-link mode="button" @click="onCancel()" v-if="negativeLink">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
-                                <m-i18n v-else k="m-modal:cancel"></m-i18n>
+                                <m-i18n v-else k="m-temp-name:cancel"></m-i18n>
                             </m-link>
                         </nav>
                     </footer>

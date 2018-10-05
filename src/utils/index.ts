@@ -8,8 +8,8 @@ import HttpPlugin, { HttpPluginOptions } from './http/http';
 import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
 import LoggerPlugin, { ConsoleOptions } from './logger/logger';
 import MediaQueriesPlugin from './media-queries/media-queries';
-import AlertPlugin from './modal/alert';
-import ConfirmPlugin from './modal/confirm';
+import AlertPlugin from './temp-name/alert';
+import ConfirmPlugin from './temp-name/confirm';
 import ModulPlugin from './modul/modul';
 import SpritesPlugin from './svg/sprites';
 

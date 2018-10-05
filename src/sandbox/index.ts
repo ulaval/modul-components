@@ -37,7 +37,7 @@ import LinkSandboxPlugin from '../components/link/link.sandbox';
 import ListItemSandboxPlugin from '../components/list-item/list-item.sandbox';
 import MenuSandboxPlugin from '../components/menu/menu.sandbox';
 import MessageSandboxPlugin from '../components/message/message.sandbox';
-import ModalSandboxPlugin from '../components/modal/modal.sandbox';
+import TempNameSandboxPlugin from '../components/temp-name/temp-name.sandbox';
 import NavbarItemSandboxPlugin from '../components/navbar-item/navbar-item.sandbox';
 import NavbarSandboxPlugin from '../components/navbar/navbar.sandbox';
 import OptionSandboxPlugin from '../components/option/option.sandbox';
@@ -111,7 +111,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(LinkSandboxPlugin);
         Vue.use(ListItemSandboxPlugin);
         Vue.use(MessageSandboxPlugin);
-        Vue.use(ModalSandboxPlugin);
+        Vue.use(TempNameSandboxPlugin);
         Vue.use(NavbarSandboxPlugin);
         Vue.use(NavbarItemSandboxPlugin);
         Vue.use(MenuSandboxPlugin);

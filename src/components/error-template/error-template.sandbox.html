@@ -60,9 +60,9 @@
 
     <h5>unexpected error popup with hints and links</h5>
     <m-button v-m-popup:errorpopup>pop me an error</m-button>
-    <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
+    <m-temp-name ref="errorpopup" :negativeLink="false" ok-label="Fermer">
             <m-error-template state="error" :title="title" icon-name="m-svg__warning-filled" :hints="manyHints" :links="manyLinks"></m-error-template>
-    </m-modal>
+    </m-temp-name>
 
     <hr/>
 

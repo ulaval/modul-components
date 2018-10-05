@@ -206,7 +206,7 @@ describe('MFileUpload', () => {
                 stubMDialogRefs(fupd.vm);
             });
 
-            it('should render rejected files in modal', async () => {
+            it('should render rejected files in temp-name', async () => {
                 fupd.vm.$file.add(
                     createMockFileList([
                         createMockFile('invalid-extensions'),

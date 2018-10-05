@@ -6,12 +6,12 @@ import { Prop } from 'vue-property-decorator';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
-import { MODAL_NAME } from '../component-names';
+import { TEMP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import WithRender from './modal.html?style=./modal.scss';
+import WithRender from './temp-name.html?style=./temp-name.scss';
 
-export enum MModalWidth {
+export enum MTempNameWidth {
     Default = 'default',
     Large = 'large'
 }
@@ -20,7 +20,7 @@ export enum MModalWidth {
 @Component({
     mixins: [Portal]
 })
-export class MModal extends ModulVue implements PortalMixinImpl {
+export class MTempName extends ModulVue implements PortalMixinImpl {
     @Prop()
     public title: string;
     @Prop()
@@ -34,10 +34,10 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     @Prop({ default: true })
     public negativeLink: boolean;
     @Prop({
-        default: MModalWidth.Default,
+        default: MTempNameWidth.Default,
         validator: value =>
-            value === MModalWidth.Default ||
-            value === MModalWidth.Large
+            value === MTempNameWidth.Default ||
+            value === MTempNameWidth.Large
     })
     public width: string;
 
@@ -96,18 +96,18 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     }
 
     private get hasWidthLarge(): boolean {
-        return this.width === MModalWidth.Large;
+        return this.width === MTempNameWidth.Large;
     }
 }
 
-const ModalPlugin: PluginObject<any> = {
+const TempNamePlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(ButtonPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.use(PortalPlugin);
-        v.component(MODAL_NAME, MModal);
+        v.component(TEMP_NAME, MTempName);
     }
 };
 
-export default ModalPlugin;
+export default TempNamePlugin;
