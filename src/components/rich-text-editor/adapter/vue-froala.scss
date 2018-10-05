@@ -11,6 +11,10 @@
         float: right;
     }
 
+    /deep/ .fr-separator:last-of-type {
+        display: none;
+    }
+
     &.m--is-dirty {
         overflow: unset;
     }
