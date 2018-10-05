@@ -3,7 +3,7 @@ import { Prop } from 'vue-property-decorator';
 
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
-import { InputManagement, InputManagementData, InputManagementFunction } from '../../mixins/input-management/input-management';
+import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState, InputStateInputSelector } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
@@ -30,7 +30,7 @@ export enum MRichTextEditorMode {
         ElementQueries
     ]
 })
-export class MRichTextEditor extends ModulVue implements InputManagementData, InputStateInputSelector, InputManagementFunction {
+export class MRichTextEditor extends ModulVue implements InputManagementData, InputStateInputSelector {
 
     selector: string = '.fr-element.fr-view';
     internalValue: string;
@@ -87,20 +87,8 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         return `${RICH_TEXT_EDITOR_NAME}: No element has been found with the selector given in the ${prop} prop.`;
     }
 
-    customHasValue(newValue: string): boolean {
-        const div: HTMLElement = document.createElement('div');
-        div.innerHTML = newValue;
-        return (div.textContent || div.innerText || '')
-            .trim()
-            .length > 0;
-    }
-
     protected refreshModel(newValue: string): void {
-        if (this.customHasValue(newValue)) {
-            this.$emit('input', newValue);
-        } else {
-            this.$emit('input', '');
-        }
+        this.$emit('input', newValue);
     }
 
     protected calculateToolbarStickyOffset(): number | undefined {

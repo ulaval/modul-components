@@ -15,10 +15,6 @@ export interface InputManagementData {
     internalValue: string;
 }
 
-export interface InputManagementFunction {
-    customHasValue(value: string): boolean;
-}
-
 export enum InputManagementAutocomplete {
     Off = 'off',
     On = 'on'
@@ -133,8 +129,7 @@ export class InputManagement extends ModulVue
     }
 
     private get hasValue(): boolean {
-        const customHasValue: (value: string) => boolean = this.as<InputManagementFunction>().customHasValue;
-        return customHasValue ? customHasValue(this.model) : this.model !== '';
+        return this.model !== '';
     }
 
     private get isEmpty(): boolean {
