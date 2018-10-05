@@ -97,7 +97,6 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(ErrorMessageSandboxPlugin);
         Vue.use(ErrorPageNotFoundSandboxPlugin);
         Vue.use(ErrorTechnicalDifficultySandboxPlugin);
-        Vue.use(MessagePageSandBoxPlugin);
         Vue.use(FileSelectSandboxPlugin);
         Vue.use(FileUploadSandboxPlugin);
         Vue.use(FlexTemplateSandboxPlugin);
@@ -111,6 +110,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(LinkSandboxPlugin);
         Vue.use(ListItemSandboxPlugin);
         Vue.use(MessageSandboxPlugin);
+        Vue.use(MessagePageSandBoxPlugin);
         Vue.use(ModalSandboxPlugin);
         Vue.use(NavbarSandboxPlugin);
         Vue.use(NavbarItemSandboxPlugin);
