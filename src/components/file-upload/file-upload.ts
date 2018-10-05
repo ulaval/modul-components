@@ -8,6 +8,7 @@ import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { FILE_UPLOAD_NAME } from '../component-names';
@@ -59,6 +60,12 @@ export class MFileUpload extends ModulVue {
     $refs: {
         dialog: MDialog;
     };
+
+    public get isDropZoneEnabled(): boolean {
+        const a: boolean = UserAgentUtil.isDesktop();
+        const b: boolean = this.$mq.state.isMqMinS;
+        return a && b;
+    }
 
     private internalOpen: boolean = false;
     private tooltipCancel: string = this.$i18n.translate('m-file-upload:cancelFileUpload');

@@ -1,4 +1,4 @@
-import UserAgent from './user-agent';
+import { UserAgent } from './user-agent';
 
 const defineUserAgent: (value: string) => void = (value: string) => {
     Object.defineProperty(window.navigator, 'userAgent', { value: value, configurable: true });
@@ -139,30 +139,30 @@ describe('user-agent', () => {
                 isMobile: true
             }
         }
-    ].forEach(({ userAgent, hardware, os, browser, want }) => {
+    ].forEach(({ userAgent: value , hardware, os, browser, want }) => {
         it(`should be ${os} running on ${hardware} when browser is ${browser} on os ${os}`, () => {
-            defineUserAgent(userAgent);
+            defineUserAgent(value);
 
-            const us: UserAgent = new UserAgent();
+            const userAgent: UserAgent = new UserAgent();
 
-            expect(us.isEdge()).toBe(!!want.isEdge);
-            expect(us.isGecko()).toBe(!!want.isGecko);
-            expect(us.isKHTML()).toBe(!!want.isKHTML);
-            expect(us.isWebKit()).toBe(!!want.isWebKit);
-            expect(us.isBlink()).toBe(!!want.isBlink);
-            expect(us.isPresto()).toBe(!!want.isPresto);
-            expect(us.isTrident()).toBe(!!want.isTrident);
+            expect(userAgent.isEdge()).toBe(!!want.isEdge);
+            expect(userAgent.isGecko()).toBe(!!want.isGecko);
+            expect(userAgent.isKHTML()).toBe(!!want.isKHTML);
+            expect(userAgent.isWebKit()).toBe(!!want.isWebKit);
+            expect(userAgent.isBlink()).toBe(!!want.isBlink);
+            expect(userAgent.isPresto()).toBe(!!want.isPresto);
+            expect(userAgent.isTrident()).toBe(!!want.isTrident);
 
-            expect(us.isWindows()).toBe(!!want.isWindows);
-            expect(us.isMacOs()).toBe(!!want.isMacOs);
-            expect(us.isUnix()).toBe(!!want.isUnix);
-            expect(us.isLinux()).toBe(!!want.isLinux);
-            expect(us.isAndroid()).toBe(!!want.isAndroid);
-            expect(us.isIOs()).toBe(!!want.isIOs);
-            expect(us.isWindowsPhone()).toBe(!!want.isWindowsPhone);
+            expect(userAgent.isWindows()).toBe(!!want.isWindows);
+            expect(userAgent.isMacOs()).toBe(!!want.isMacOs);
+            expect(userAgent.isUnix()).toBe(!!want.isUnix);
+            expect(userAgent.isLinux()).toBe(!!want.isLinux);
+            expect(userAgent.isAndroid()).toBe(!!want.isAndroid);
+            expect(userAgent.isIOs()).toBe(!!want.isIOs);
+            expect(userAgent.isWindowsPhone()).toBe(!!want.isWindowsPhone);
 
-            expect(us.isMobile()).toBe(!!want.isMobile);
-            expect(us.isDesktop()).toBe(!!want.isDesktop);
+            expect(userAgent.isMobile()).toBe(!!want.isMobile);
+            expect(userAgent.isDesktop()).toBe(!!want.isDesktop);
         });
 
     });

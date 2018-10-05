@@ -30,7 +30,7 @@ const OS_DESKTOP: UserAgentSpecifications = { expected: [
     ...OS_LINUX.expected
 ]};
 
-export interface UserAgentsStatus {
+export interface UserAgentStatus {
     isEdge: boolean;
     isGecko: boolean;
     isKHTML: boolean;
@@ -51,9 +51,8 @@ export interface UserAgentsStatus {
     isDesktop: boolean;
 }
 
-export default class UserAgents {
-
-    private state: UserAgentsStatus = {
+export class UserAgent {
+    private state: UserAgentStatus = {
         isEdge: false,
         isGecko: false,
         isKHTML: false,
@@ -73,25 +72,9 @@ export default class UserAgents {
     };
 
     constructor() {
-
-        this.state.isEdge = this.userAgentIs(ENGINE_EDGE);
-        this.state.isGecko = this.userAgentIs(ENGINE_GECKO);
-        this.state.isKHTML = this.userAgentIs(ENGINE_KHTML);
-        this.state.isWebKit = this.userAgentIs(ENGINE_WEBKIT);
-        this.state.isBlink = this.userAgentIs(ENGINE_BLINK);
-        this.state.isPresto = this.userAgentIs(ENGINE_PRESTO);
-        this.state.isTrident = this.userAgentIs(ENGINE_TRIDENT);
-
-        this.state.isWindows = this.userAgentIs(OS_WINDOWS);
-        this.state.isMacOs = this.userAgentIs(OS_MACOS);
-        this.state.isUnix = this.userAgentIs(OS_UNIX);
-        this.state.isLinux = this.userAgentIs(OS_LINUX);
-        this.state.isAndroid = this.userAgentIs(OS_ANDROID);
-        this.state.isIOs = this.userAgentIs(OS_IOS);
-        this.state.isWindowsPhone = this.userAgentIs(OS_WINDOWS_PHONE);
-
-        this.state.isMobile = this.userAgentIs(OS_MOBILE);
-        this.state.isDesktop = !this.state.isMobile;
+        this.initUserAgentEngines();
+        this.initUserAgentOS();
+        this.initHardware();
     }
 
     public isMobile(): boolean {
@@ -158,6 +141,31 @@ export default class UserAgents {
         return this.state.isWindowsPhone;
     }
 
+    private initHardware(): void {
+        this.state.isMobile = this.userAgentIs(OS_MOBILE);
+        this.state.isDesktop = !this.state.isMobile;
+    }
+
+    private initUserAgentOS(): void {
+        this.state.isWindows = this.userAgentIs(OS_WINDOWS);
+        this.state.isMacOs = this.userAgentIs(OS_MACOS);
+        this.state.isUnix = this.userAgentIs(OS_UNIX);
+        this.state.isLinux = this.userAgentIs(OS_LINUX);
+        this.state.isAndroid = this.userAgentIs(OS_ANDROID);
+        this.state.isIOs = this.userAgentIs(OS_IOS);
+        this.state.isWindowsPhone = this.userAgentIs(OS_WINDOWS_PHONE);
+    }
+
+    private initUserAgentEngines(): void {
+        this.state.isEdge = this.userAgentIs(ENGINE_EDGE);
+        this.state.isGecko = this.userAgentIs(ENGINE_GECKO);
+        this.state.isKHTML = this.userAgentIs(ENGINE_KHTML);
+        this.state.isWebKit = this.userAgentIs(ENGINE_WEBKIT);
+        this.state.isBlink = this.userAgentIs(ENGINE_BLINK);
+        this.state.isPresto = this.userAgentIs(ENGINE_PRESTO);
+        this.state.isTrident = this.userAgentIs(ENGINE_TRIDENT);
+    }
+
     private userAgentIs(specification: UserAgentSpecifications): boolean {
         let containsExpected: boolean = specification.expected.reduce((previous: boolean, value: string) => {
             return previous || navigator.userAgent.indexOf(value) !== -1;
@@ -174,3 +182,6 @@ export default class UserAgents {
         return containsExpected && !containsNotExpected;
     }
 }
+
+const UserAgentUtil: UserAgent = new UserAgent();
+export default UserAgentUtil;
