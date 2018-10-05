@@ -37,11 +37,6 @@ export class MEditWindow extends ModulVue {
 
     protected mounted(): void {
         this.as<Portal>().transitionDuration = PortalTransitionDuration.Regular + PortalTransitionDuration.XSlow;
-
-        if (this.isAndroid) {
-            this.$on('open', this.initFooter);
-            this.$on('close', this.unbindFooter);
-        }
     }
 
     private get popupBody(): any {
@@ -52,24 +47,14 @@ export class MEditWindow extends ModulVue {
         return /(android)/i.test(window.navigator.userAgent);
     }
 
-    private initFooter(): void {
-        setTimeout(() => {
-            this.$refs.body.addEventListener('focusin', this.handleFooter);
-            this.$refs.body.addEventListener('focusout', this.handleFooter);
-        });
-    }
-
     private handleFooter(event): void {
-        if (event.type === 'focusin') {
-            this.$refs.body.style.paddingBottom = '50%';
-        } else if (event.type === 'focusout') {
-            this.$refs.body.style.paddingBottom = '0';
+        if (this.isAndroid) {
+            if (event.type === 'focusin') {
+                this.$refs.body.style.paddingBottom = '50%';
+            } else if (event.type === 'focusout') {
+                this.$refs.body.style.paddingBottom = '0';
+            }
         }
-    }
-
-    private unbindFooter(): void {
-        this.$refs.body.removeEventListener('focusin', this.handleFooter);
-        this.$refs.body.removeEventListener('focusout', this.handleFooter);
     }
 
     private handlesFocus(): boolean {
