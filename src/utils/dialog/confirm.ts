@@ -65,7 +65,7 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
                 hook();
             });
         } else {
-            console.error('No instance of dialog modal');
+            console.error('No instance of dialog');
             reject();
         }
     });

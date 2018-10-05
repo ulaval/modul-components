@@ -52,7 +52,7 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
                 hook();
             });
         } else {
-            console.error('No instance of dialog modal');
+            console.error('No instance of dialog');
             reject();
         }
     });
