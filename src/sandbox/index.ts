@@ -84,8 +84,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(CheckboxSandboxPlugin);
         Vue.use(DatefieldsSandboxPlugin);
         Vue.use(DatepickerSandboxPlugin);
-        Vue.use(ModalSandboxPlugin);
-        Vue.use(OverlaySandboxPlugin);
+        Vue.use(DialogSandboxPlugin);
         Vue.use(DropdownSandboxPlugin);
         Vue.use(DropdownItemSandboxPlugin);
         Vue.use(DropdownGroupSandboxPlugin);
@@ -111,11 +110,12 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(LinkSandboxPlugin);
         Vue.use(ListItemSandboxPlugin);
         Vue.use(MessageSandboxPlugin);
-        Vue.use(DialogSandboxPlugin);
+        Vue.use(ModalSandboxPlugin);
         Vue.use(NavbarSandboxPlugin);
         Vue.use(NavbarItemSandboxPlugin);
         Vue.use(MenuSandboxPlugin);
         Vue.use(OptionSandboxPlugin);
+        Vue.use(OverlaySandboxPlugin);
         Vue.use(PageNotFoundSandboxPlugin);
         Vue.use(PanelSandboxPlugin);
         Vue.use(PhoneNumberSandboxPlugin);
