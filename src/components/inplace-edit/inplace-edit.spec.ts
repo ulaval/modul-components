@@ -234,13 +234,5 @@ describe('Component inplace-edit - Complete component mobile', () => {
             wrapper.setProps({ waiting: 'true' });
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
-        it('must show mobile confirm controls', () => {
-            let controlFound: Wrapper<Vue> = wrapper.find({ ref : 'confirm-control-mobile' });
-            expect(controlFound.is('button')).toBe(true);
-        });
-        it('must show mobile cancel controls', () => {
-            let controlFound: Wrapper<Vue> = wrapper.find({ ref : 'cancel-control-mobile' });
-            expect(controlFound.is('button')).toBe(true);
-        });
     });
 });
