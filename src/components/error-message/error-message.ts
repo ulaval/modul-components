@@ -36,12 +36,12 @@ export class MErrorMessage extends ModulVue {
         return window.navigator.userAgent;
     }
 
-    private get i18nDate(): string[] | undefined {
+    private get i18nDate(): string {
         let result: string[] | undefined = undefined;
         if (this.date) {
             result = [this.date.format('YYYY-MM-DD'), this.date.format('HH:mm:ss')];
         }
-        return Vue.prototype.$i18n.translate('m-error-message:date', result, 0, '', true, FormatMode.Default);
+        return this.$i18n.translate('m-error-message:date', result, 0, '', true, FormatMode.Default);
     }
 
     private get propStacktrace(): boolean {

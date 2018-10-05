@@ -3,11 +3,12 @@ import 'moment/locale/fr';
 import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 
-import { FormatMode } from '../../utils/i18n/i18n';
+import { FormatMode, Messages } from '../../utils/i18n/i18n';
 import { DATE_NAME } from '../filter-names';
 
 export let dateFilter: (date: Date, short?: boolean) => string = (date, short) => {
-    return moment(date).format(Vue.prototype.$i18n.translate(short ? 'f-m-date:short' : 'f-m-date:long', 0, '', true, FormatMode.Vsprintf));
+    let i18n: Messages = (Vue.prototype as any).$i18n as Messages;
+    return moment(date).format(i18n.translate(short ? 'f-m-date:short' : 'f-m-date:long', undefined, 0, '', undefined, FormatMode.Vsprintf));
 };
 
 const DateFilterPlugin: PluginObject<any> = {
