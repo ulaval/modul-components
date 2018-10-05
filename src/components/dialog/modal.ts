@@ -5,10 +5,10 @@ import { Prop } from 'vue-property-decorator';
 import { MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDuration } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
-import { DIALOG_NAME } from '../component-names';
-import WithRender from './dialog.html?style=./dialog.scss';
+import { MODAL_NAME } from '../component-names';
+import WithRender from './modal.html?style=./modal.scss';
 
-export enum MDialogSize {
+export enum MModalSize {
     FullScreen = 'full-screen',
     Large = 'large',
     Regular = 'regular',
@@ -19,16 +19,16 @@ export enum MDialogSize {
 @Component({
     mixins: [Portal]
 })
-export class MDialog extends ModulVue implements PortalMixinImpl {
+export class MModal extends ModulVue implements PortalMixinImpl {
     @Prop({
-        default: MDialogSize.Regular,
+        default: MModalSize.Regular,
         validator: value =>
-            value === MDialogSize.Regular ||
-            value === MDialogSize.FullScreen ||
-            value === MDialogSize.Large ||
-            value === MDialogSize.Small
+            value === MModalSize.Regular ||
+            value === MModalSize.FullScreen ||
+            value === MModalSize.Large ||
+            value === MModalSize.Small
     })
-    public size: MDialogSize;
+    public size: MModalSize;
 
     @Prop({ default: true })
     public closeOnBackdrop: boolean;
@@ -51,13 +51,13 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     $refs: {
         body: HTMLElement;
-        dialogWrap: HTMLElement;
+        modalWrap: HTMLElement;
         article: HTMLElement;
     };
 
-    private closeTitle: string = this.$i18n.translate('m-dialog:close');
+    private closeTitle: string = this.$i18n.translate('m-modal:close');
 
-    public closeDialog(): void {
+    public closeModal(): void {
         this.as<PortalMixin>().tryClose();
     }
 
@@ -74,17 +74,17 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
     public get sizeFullSceen(): boolean {
-        let fullScreen: boolean = !this.as<MediaQueriesMixin>().isMqMinS ? true : this.size === MDialogSize.FullScreen ? true : false;
+        let fullScreen: boolean = !this.as<MediaQueriesMixin>().isMqMinS ? true : this.size === MModalSize.FullScreen ? true : false;
         this.as<Portal>().transitionDuration = fullScreen ? PortalTransitionDuration.XSlow : PortalTransitionDuration.Regular;
         return fullScreen;
     }
 
     public get sizeLarge(): boolean {
-        return this.as<MediaQueriesMixin>().isMqMinS && this.size === MDialogSize.Large;
+        return this.as<MediaQueriesMixin>().isMqMinS && this.size === MModalSize.Large;
     }
 
     public get sizeSmall(): boolean {
-        return this.as<MediaQueriesMixin>().isMqMinS && this.size === MDialogSize.Small;
+        return this.as<MediaQueriesMixin>().isMqMinS && this.size === MModalSize.Small;
     }
 
     public getPortalElement(): HTMLElement {
@@ -93,7 +93,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     protected mounted(): void {
         if (!this.hasHeader) {
-            this.$log.warn('<' + DIALOG_NAME + '> needs a header slot or title prop.');
+            this.$log.warn('<' + MODAL_NAME + '> needs a header slot or title prop.');
         }
     }
 
@@ -120,10 +120,10 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 }
 
-const DialogPlugin: PluginObject<any> = {
+const ModalPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(DIALOG_NAME, MDialog);
+        v.component(MODAL_NAME, MModal);
     }
 };
 
-export default DialogPlugin;
+export default ModalPlugin;

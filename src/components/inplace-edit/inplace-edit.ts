@@ -6,7 +6,7 @@ import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { INPLACE_EDIT_NAME } from '../component-names';
-import DialogPlugin from '../dialog/dialog';
+import ModalPlugin from '../modal/modal';
 import IconButtonPlugin from '../icon-button/icon-button';
 import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 
@@ -94,7 +94,7 @@ const InplaceEditPlugin: PluginObject<any> = {
         v.use(MediaQueriesPlugin);
         v.use(IconButtonPlugin);
         v.use(ButtonPlugin);
-        v.use(DialogPlugin);
+        v.use(ModalPlugin);
         v.component(INPLACE_EDIT_NAME, MInplaceEdit);
     }
 };

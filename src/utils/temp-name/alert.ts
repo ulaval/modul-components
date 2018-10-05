@@ -52,7 +52,7 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
                 hook();
             });
         } else {
-            console.error('No instance of temp-name dialog');
+            console.error('No instance of temp-name modal');
             reject();
         }
     });

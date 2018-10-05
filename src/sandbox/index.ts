@@ -9,7 +9,7 @@ import CarouselSandboxPlugin from '../components/carousel/carousel.sandbox';
 import CheckboxSandboxPlugin from '../components/checkbox/checkbox.sandbox';
 import DatefieldsSandboxPlugin from '../components/datefields/datefields.sandbox';
 import DatepickerSandboxPlugin from '../components/datepicker/datepicker.sandbox';
-import DialogSandboxPlugin from '../components/dialog/dialog.sandbox';
+import ModalSandboxPlugin from '../components/modal/modal.sandbox';
 import DropdownGroupSandboxPlugin from '../components/dropdown-group/dropdown-group.sandbox';
 import DropdownItemSandboxPlugin from '../components/dropdown-item/dropdown-item.sandbox';
 import DropdownSandboxPlugin from '../components/dropdown/dropdown.sandbox';
@@ -84,7 +84,7 @@ const SandboxesPlugin: PluginObject<any> = {
         Vue.use(CheckboxSandboxPlugin);
         Vue.use(DatefieldsSandboxPlugin);
         Vue.use(DatepickerSandboxPlugin);
-        Vue.use(DialogSandboxPlugin);
+        Vue.use(ModalSandboxPlugin);
         Vue.use(OverlaySandboxPlugin);
         Vue.use(DropdownSandboxPlugin);
         Vue.use(DropdownItemSandboxPlugin);

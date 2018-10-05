@@ -93,13 +93,13 @@
 		],
 		"description": "Create a modul datepicker tag"
 	},
-	"dialog": {
-		"prefix": "m-dialog",
+	"modal": {
+		"prefix": "m-modal",
 		"body": [
-			"<m-dialog>$1</m-dialog>",
+			"<m-modal>$1</m-modal>",
 			"$2"
 		],
-		"description": "Create a modul dialog tag"
+		"description": "Create a modul modal tag"
 	},
 	"dropdown": {
 		"prefix": "m-dropdown",

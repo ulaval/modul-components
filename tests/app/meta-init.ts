@@ -12,7 +12,7 @@ const components: string[] = [
     Components.CHECKBOX_NAME,
     Components.DATEFIELDS_NAME,
     Components.DATEPICKER_NAME,
-    Components.DIALOG_NAME,
+    Components.MODAL_NAME,
     Components.DROPDOWN_NAME,
     Components.DROPDOWN_ITEM_NAME,
     Components.DROPDOWN_GROUP_NAME,
