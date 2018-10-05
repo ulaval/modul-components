@@ -160,7 +160,8 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     private onDocumentClick(event: MouseEvent): void {
         if (this.as<PortalMixin>().propOpen) {
             let trigger: HTMLElement | undefined = this.as<PortalMixin>().getTrigger();
-            if (!(this.as<PortalMixin>().getPortalElement().contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
+            const element: HTMLElement = this.as<PortalMixin>().getPortalElement();
+            if (!(element && element.contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
                 (trigger && trigger.contains(event.target as HTMLElement)))) {
                 this.as<PortalMixin>().propOpen = false;
             }

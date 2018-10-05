@@ -80,6 +80,8 @@ export class Portal extends ModulVue implements PortalMixin {
     private stackId: string;
     private internalTransitionDuration: number = PortalTransitionDuration.Regular;
     private opening: boolean = false;
+    private portalTargetCreated: boolean = false;
+    private portalTargetMounted: boolean = false;
 
     public setFocusToPortal(): void {
         if (this.as<PortalMixinImpl>().handlesFocus()) {
@@ -129,13 +131,6 @@ export class Portal extends ModulVue implements PortalMixin {
         }
     }
 
-    protected beforeMount(): void {
-        this.propId = this.id === undefined ? 'mPortal-' + uuid.generate() : this.id;
-        let element: HTMLElement = document.createElement('div');
-        element.setAttribute('id', this.propId);
-        document.body.appendChild(element);
-    }
-
     protected mounted(): void {
         this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
         this.handleTrigger();
@@ -148,8 +143,10 @@ export class Portal extends ModulVue implements PortalMixin {
             this.internalTrigger.removeEventListener('mouseenter', this.handleMouseEnter);
         }
 
-        if (this.portalTargetEl.parentNode) {
+        if (this.portalTargetEl && this.portalTargetEl.parentNode) {
             this.portalTargetEl.parentNode.removeChild(this.portalTargetEl);
+            this.portalTargetCreated = false;
+            this.portalTargetMounted = false;
         }
     }
 
@@ -164,20 +161,23 @@ export class Portal extends ModulVue implements PortalMixin {
     public set propOpen(value: boolean) {
         if (value !== this.internalOpen) {
             if (value) {
-                if (this.portalTargetEl) {
-                    this.stackId = this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().getBackdropMode(), this.as<MediaQueriesMixin>().isMqMaxS);
-                    if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
-                        this.portalTargetEl.style.position = 'absolute';
+                this.ensurePortalTargetEl(() => {
+                    if (this.portalTargetEl) {
+                        this.stackId = this.$modul.pushElement(this.portalTargetEl, this.as<PortalMixinImpl>().getBackdropMode(), this.as<MediaQueriesMixin>().isMqMaxS);
 
-                        // this.opening is important since it's fix a race condition where the portal
-                        // could appear behind the content of the page if it was toggled too quickly.
-                        this.opening = true;
-                        setTimeout(() => {
-                            this.setFocusToPortal();
-                            this.opening = false;
-                        }, this.transitionDuration);
+                        if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
+                            this.portalTargetEl.style.position = 'absolute';
+
+                            // this.opening is important since it's fix a race condition where the portal
+                            // could appear behind the content of the page if it was toggled too quickly.
+                            this.opening = true;
+                            setTimeout(() => {
+                                this.setFocusToPortal();
+                                this.opening = false;
+                            }, this.transitionDuration);
+                        }
                     }
-                }
+                });
             } else {
                 if (this.portalTargetEl) {
                     this.$modul.popElement(this.stackId);
@@ -208,6 +208,18 @@ export class Portal extends ModulVue implements PortalMixin {
 
     public set transitionDuration(speed: number) {
         this.internalTransitionDuration = speed;
+    }
+
+    public get portalTargetSelector(): string {
+        return this.propId ? `#${this.propId}` : '';
+    }
+
+    public get portalCreated(): boolean {
+        return this.portalTargetCreated;
+    }
+
+    public get portalMounted(): boolean {
+        return (this.propOpen || this.preload || this.loaded) && this.portalTargetMounted;
     }
 
     @Watch('trigger')
@@ -256,6 +268,25 @@ export class Portal extends ModulVue implements PortalMixin {
 
     private handleMouseEnter(): void {
         this.propOpen = true;
+    }
+
+    private ensurePortalTargetEl(onPortalReady: () => void = () => {}): void {
+        if (!this.portalTargetEl) {
+            this.propId = this.id === undefined ? 'mPortal-' + uuid.generate() : this.id;
+            this.portalTargetEl = document.createElement('div');
+            this.portalTargetEl.setAttribute('id', this.propId);
+            document.body.appendChild(this.portalTargetEl);
+            this.portalTargetCreated = true;
+
+            // We wait for the portal creation / mounting.
+            this.$nextTick(() => {
+                this.portalTargetMounted = true;
+                this.portalTargetEl = document.querySelector(this.portalTargetSelector) as HTMLElement;
+                onPortalReady();
+            });
+        } else {
+            onPortalReady();
+        }
     }
 
     @Watch('open')
