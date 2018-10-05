@@ -49,6 +49,10 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     @Prop()
     public scrollableContainer: string | undefined;
 
+    public customTranslations: {[key: string]: string} = {
+        'URL': this.$i18n.translate('m-rich-text-editor:URL')
+    };
+
     protected id: string = `mrich-text-${uuid.generate()}`;
 
     mounted(): void {
