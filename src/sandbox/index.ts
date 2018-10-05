@@ -37,7 +37,7 @@ import LinkSandboxPlugin from '../components/link/link.sandbox';
 import ListItemSandboxPlugin from '../components/list-item/list-item.sandbox';
 import MenuSandboxPlugin from '../components/menu/menu.sandbox';
 import MessageSandboxPlugin from '../components/message/message.sandbox';
-import TempNameSandboxPlugin from '../components/temp-name/temp-name.sandbox';
+import TempNameSandboxPlugin from '../components/dialog/temp-name.sandbox';
 import NavbarItemSandboxPlugin from '../components/navbar-item/navbar-item.sandbox';
 import NavbarSandboxPlugin from '../components/navbar/navbar.sandbox';
 import OptionSandboxPlugin from '../components/option/option.sandbox';

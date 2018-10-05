@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 
-import { MTempName } from '../../components/temp-name/temp-name';
+import { MTempName } from '../../components/dialog/temp-name';
 
 export interface AlertOptions {
     okLabel?: string;
@@ -52,7 +52,7 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
                 hook();
             });
         } else {
-            console.error('No instance of temp-name modal');
+            console.error('No instance of dialog modal');
             reject();
         }
     });

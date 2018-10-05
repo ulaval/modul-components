@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 
-import { MTempName } from '../../components/temp-name/temp-name';
+import { MTempName } from '../../components/dialog/temp-name';
 
 export interface ConfirmOptions {
     okLabel?: string;
@@ -65,7 +65,7 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
                 hook();
             });
         } else {
-            console.error('No instance of temp-name modal');
+            console.error('No instance of dialog modal');
             reject();
         }
     });

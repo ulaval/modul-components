@@ -41,7 +41,7 @@ import LoginPlugin from './login/login';
 import MenuItemPlugin from './menu-item/menu-item';
 import MenuPlugin from './menu/menu';
 import MessagePlugin from './message/message';
-import TempNamePlugin from './temp-name/temp-name';
+import TempNamePlugin from './dialog/temp-name';
 import NavbarItemPlugin from './navbar-item/navbar-item';
 import NavbarPlugin from './navbar/navbar';
 import OptionItemPlugin from './option-item/option-item';
