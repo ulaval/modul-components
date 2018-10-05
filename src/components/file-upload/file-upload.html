@@ -20,8 +20,8 @@
                         <m-i18n k="m-file-upload:maxSizeMsg"></m-i18n> ({{maxSizeKb * 1024 | f-m-filesize}}).
                     </p>
                     <p class="m-file-upload__error-message__error" v-else-if="hasMaxFilesRejection(file)">
-                        <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{maxFiles}}
-                        <m-i18n :nb="maxFiles" k="m-file-upload:file"></m-i18n>)
+                        <m-i18n k="m-file-upload:maxNumberMsg"></m-i18n> ({{propMaxFiles}}
+                        <m-i18n :nb="propMaxFiles" k="m-file-upload:file"></m-i18n>)
                     </p>
                 </li>
             </ul>
@@ -31,9 +31,9 @@
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title" v-if="isMqMinS">
                     <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
-                    <m-i18n k="m-file-upload:title" :nb="maxFiles"></m-i18n>
+                    <m-i18n k="m-file-upload:title" :nb="propMaxFiles"></m-i18n>
                 </h3>
-                <m-file-select class="m-file-upload__drop-zone__instructions__button" skin="secondary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName"
+                <m-file-select class="m-file-upload__drop-zone__instructions__button" skin="secondary" :multiple="multipleSelection" :store-name="storeName"
                     keep-store="true"></m-file-select>
             </div>
             <p class="m-file-upload__drop-zone__format" v-if="hasAllowedExtensions">
@@ -95,8 +95,7 @@
     </div>
     <template slot="footer">
         <div :style="buttonCompletedStyle">
-            <m-button @click="onAddClick" :disabled="!isAddBtnEnabled" class="m-file-upload__footer-add">
-                <m-i18n k="m-file-upload:add"></m-i18n>
+            <m-button @click="onAddClick" :disabled="!isAddBtnEnabled" class="m-file-upload__footer-add">{{ buttonAdd }}
                 <span slot="precision" v-show="completedFiles.length > 0">{{completedFiles.length}}
                     <m-i18n :nb="completedFiles.length" k="m-file-upload:file"></m-i18n>
                 </span>

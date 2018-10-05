@@ -68,6 +68,9 @@ export enum FroalaStatus {
     @Prop()
     public config: any;
 
+    @Prop()
+    public customTranslations: {[key: string]: string};
+
     protected currentTag: string = 'div';
     protected listeningEvents: Event[] = [];
     protected froalaEditor: any = undefined;
@@ -191,6 +194,13 @@ export enum FroalaStatus {
     }
 
     protected mounted(): void {
+        if ($.FE !== undefined
+            && $.FE.LANGUAGE[this.config.language] !== undefined
+            && this.customTranslations !== undefined
+        ) {
+            Object.assign($.FE.LANGUAGE[this.config.language].translation, this.customTranslations);
+        }
+
         this.createEditor();
 
         // add a dropdown arrow to popups buttons
