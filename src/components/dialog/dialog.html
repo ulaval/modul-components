@@ -1,8 +1,8 @@
 <div class="m-dialog" ref="baseWindow">
     <slot name="trigger"></slot>
-    <portal :target-el="'#' + propId">
+    <portal :target-el="portalTargetSelector" v-if="portalCreated">
         <transition name="m--is">
-            <div v-show="propOpen" v-if="propOpen || preload || loaded"
+            <div v-show="propOpen" v-if="portalMounted"
                  class="m-dialog__wrap m--is-dialog"
                  :class="[{ 'm--is-small': sizeSmall,
                             'm--is-large': sizeLarge,
@@ -19,9 +19,7 @@
                                     'm--no-padding': !padding || !paddingHeader }">
                         <h2 v-if="hasTitle">{{ title }}</h2>
                         <slot name="header"></slot>
-                        <m-icon-button @click="closeDialog()" icon-name="m-svg__close-clear" skin="dark" class="m-dialog__header__close-button">
-                            <m-i18n k="m-dialog:close"></m-i18n>
-                        </m-icon-button>
+                        <m-icon-button @click="closeDialog()" icon-name="m-svg__close-clear" skin="dark" class="m-dialog__header__close-button" :title="closeTitle"></m-icon-button>
                     </header>
                     <div class="m-dialog__body" ref="body"
                          :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
