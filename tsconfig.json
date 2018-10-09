@@ -23,10 +23,10 @@
         ]
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
+        "tests/app/**/*"
     ],
     "exclude": [
-        "src/**/*.spec.*",
-        "tests/**/*"
+        "src/**/*.spec.*"
     ]
 }

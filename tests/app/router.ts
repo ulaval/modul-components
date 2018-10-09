@@ -5,7 +5,7 @@ import Meta from '../../src/meta/meta';
 import { Attributes } from './attributes/attributes';
 import { MediaQueriesTest } from './media-queries/media-queries';
 import { Navigation } from './navigation/navigation';
-import { Viewer } from './viewer';
+import { Viewer } from './viewer/viewer';
 
 Vue.use(Router);
 

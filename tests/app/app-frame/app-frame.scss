@@ -1,0 +1,25 @@
+.mtest-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    padding: 16px 32px;
+    background: #fff;
+}
+
+.mtest-header h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mtest-content {
+    margin-top: 46px;
+}
+
+@media (max-width: 767px) {
+    .mtest-header {
+        padding: 16px;
+    }
+}

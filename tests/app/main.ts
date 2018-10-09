@@ -12,6 +12,7 @@ import SandboxesPlugin from '../../src/sandbox';
 import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
 import { FRENCH } from '../../src/utils/i18n/i18n';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
+import { AppFrame } from './app-frame/app-frame';
 import MetaFactory from './meta-init';
 import routerFactory from './router';
 
@@ -32,13 +33,15 @@ Vue.use(FiltersPlugin);
 Vue.use(FrenchPlugin);
 Vue.use(DefaultSpritesPlugin);
 
+Vue.component('app-frame', AppFrame);
+
 MetaFactory();
 
 let router: Router = routerFactory();
 
 const vue: Vue = new Vue({
     router,
-    template: '<router-view></router-view>'
+    template: '<app-frame></app-frame>'
 });
 
 vue.$mount('#vue');
