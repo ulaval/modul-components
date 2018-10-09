@@ -22,11 +22,14 @@ const TITLE_REPLACE_FILE: string = 'Replace a file';
 const BTN_ADD_NEW_FILE: string = 'Add';
 const TITLE_ADD_NEW_FILE: string = 'Upload files';
 
+
 jest.mock('../../utils/user-agent/user-agent', () => ({
     UserAgentUtil: () => jest.fn(),
     isDesktop: jest.fn()
 }));
-(UserAgentUtil.isDesktop as jest.Mock).mockImplementation(() => true);
+
+let mockIsDesktopValue: boolean = true;
+(UserAgentUtil.isDesktop as jest.Mock).mockImplementation(() => mockIsDesktopValue);
 
 describe('MFileUpload', () => {
     beforeEach(() => {
@@ -320,7 +323,6 @@ describe('MFileUpload', () => {
                 expect(fupd.vm.isDropZoneEnabled).toBeTruthy();
             });
             it('should not be available on desktop with small screen size or lower', () => {
-                (UserAgentUtil.isDesktop as jest.Mock).mockImplementation(() => true);
                 const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                     mocks: { $mq: { state: { isMqMinS: false } } }
                 });
@@ -328,7 +330,7 @@ describe('MFileUpload', () => {
                 expect(fupd.vm.isDropZoneEnabled).toBeFalsy();
             });
             it('should not be available on mobile', () => {
-                (UserAgentUtil.isDesktop as jest.Mock).mockImplementation(() => false);
+                mockIsDesktopValue = false;
                 const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                     mocks: { $mq: { state: { isMqMinS: true } } }
                 });
@@ -337,7 +339,7 @@ describe('MFileUpload', () => {
 
             });
             it('should not be available on mobile with small screen size or larger', () => {
-                (UserAgentUtil.isDesktop as jest.Mock).mockImplementation(() => false);
+                mockIsDesktopValue = false;
                 const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                     mocks: { $mq: { state: { isMqMinS: true } } }
                 });
