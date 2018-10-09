@@ -24,7 +24,7 @@
         ]
     },
     "include": [
-        "src/**/*", "tests/app/sandbox-loader.ts"
+        "src/**/*"
     ],
     "exclude": [
         "src/**/*.spec.*"
