@@ -11,7 +11,7 @@ describe('user-agent', () => {
             hardware: 'desktop',
             os: '<blank>',
             browser: '<blank>',
-            want: {
+            expected: {
                 isDesktop: true
             }
         },
@@ -20,7 +20,7 @@ describe('user-agent', () => {
             hardware: 'desktop',
             os: 'windows 10',
             browser: 'chrome 60',
-            want: {
+            expected: {
                 isGecko: true,
                 isKHTML: true,
                 isWebKit: true,
@@ -34,7 +34,7 @@ describe('user-agent', () => {
             hardware: 'desktop',
             os: 'windows 7',
             browser: 'Firefox 54',
-            want: {
+            expected: {
                 isGecko: true,
                 isWindows: true,
                 isDesktop: true
@@ -45,7 +45,7 @@ describe('user-agent', () => {
             hardware: 'desktop',
             os: 'Windows 7',
             browser: 'Internet Explorer 9',
-            want: {
+            expected: {
                 isTrident: true,
                 isWindows: true,
                 isDesktop: true
@@ -56,7 +56,7 @@ describe('user-agent', () => {
             hardware: 'desktop',
             os: 'Windows 10',
             browser: 'Edge 38',
-            want: {
+            expected: {
                 isEdge: true,
                 isWebKit: true,
                 isKHTML: true,
@@ -70,7 +70,7 @@ describe('user-agent', () => {
             hardware: 'desktop',
             os: 'Mac OS',
             browser: 'Firefox',
-            want: {
+            expected: {
                 isGecko: true,
                 isMacOs: true,
                 isDesktop: true
@@ -81,7 +81,7 @@ describe('user-agent', () => {
             hardware: 'desktop',
             os: 'Linux',
             browser: 'Thunderbird',
-            want: {
+            expected: {
                 isGecko: true,
                 isLinux: true,
                 isUnix: true,
@@ -93,7 +93,7 @@ describe('user-agent', () => {
             hardware: 'desktop',
             os: 'Mac OS X',
             browser: 'Opera',
-            want: {
+            expected: {
                 isPresto: true,
                 isMacOs: true,
                 isDesktop: true
@@ -104,7 +104,7 @@ describe('user-agent', () => {
             hardware: 'mobile',
             os: 'Android',
             browser: 'Google Weblight Proxy',
-            want: {
+            expected: {
                 isLinux: true,
                 isAndroid: true,
                 isWebKit: true,
@@ -119,7 +119,7 @@ describe('user-agent', () => {
             hardware: 'mobile',
             os: 'IOs',
             browser: 'Safari 10',
-            want: {
+            expected: {
                 isIOs: true,
                 isMacOs: true,
                 isWebKit: true,
@@ -133,36 +133,36 @@ describe('user-agent', () => {
             hardware: 'mobile',
             os: 'Windows Phone',
             browser: 'Internet explorer mobile 9',
-            want: {
+            expected: {
                 isWindowsPhone: true,
                 isTrident: true,
                 isMobile: true
             }
         }
-    ].forEach(({ userAgent: value , hardware, os, browser, want }) => {
+    ].forEach(({ userAgent: value , hardware, os, browser, expected }) => {
         it(`should be ${os} running on ${hardware} when browser is ${browser} on os ${os}`, () => {
             defineUserAgent(value);
 
             const userAgent: UserAgent = new UserAgent();
 
-            expect(userAgent.isEdge()).toBe(!!want.isEdge);
-            expect(userAgent.isGecko()).toBe(!!want.isGecko);
-            expect(userAgent.isKHTML()).toBe(!!want.isKHTML);
-            expect(userAgent.isWebKit()).toBe(!!want.isWebKit);
-            expect(userAgent.isBlink()).toBe(!!want.isBlink);
-            expect(userAgent.isPresto()).toBe(!!want.isPresto);
-            expect(userAgent.isTrident()).toBe(!!want.isTrident);
+            expect(userAgent.isEdge()).toBe(!!expected.isEdge);
+            expect(userAgent.isGecko()).toBe(!!expected.isGecko);
+            expect(userAgent.isKHTML()).toBe(!!expected.isKHTML);
+            expect(userAgent.isWebKit()).toBe(!!expected.isWebKit);
+            expect(userAgent.isBlink()).toBe(!!expected.isBlink);
+            expect(userAgent.isPresto()).toBe(!!expected.isPresto);
+            expect(userAgent.isTrident()).toBe(!!expected.isTrident);
 
-            expect(userAgent.isWindows()).toBe(!!want.isWindows);
-            expect(userAgent.isMacOs()).toBe(!!want.isMacOs);
-            expect(userAgent.isUnix()).toBe(!!want.isUnix);
-            expect(userAgent.isLinux()).toBe(!!want.isLinux);
-            expect(userAgent.isAndroid()).toBe(!!want.isAndroid);
-            expect(userAgent.isIOs()).toBe(!!want.isIOs);
-            expect(userAgent.isWindowsPhone()).toBe(!!want.isWindowsPhone);
+            expect(userAgent.isWindows()).toBe(!!expected.isWindows);
+            expect(userAgent.isMacOs()).toBe(!!expected.isMacOs);
+            expect(userAgent.isUnix()).toBe(!!expected.isUnix);
+            expect(userAgent.isLinux()).toBe(!!expected.isLinux);
+            expect(userAgent.isAndroid()).toBe(!!expected.isAndroid);
+            expect(userAgent.isIOs()).toBe(!!expected.isIOs);
+            expect(userAgent.isWindowsPhone()).toBe(!!expected.isWindowsPhone);
 
-            expect(userAgent.isMobile()).toBe(!!want.isMobile);
-            expect(userAgent.isDesktop()).toBe(!!want.isDesktop);
+            expect(userAgent.isMobile()).toBe(!!expected.isMobile);
+            expect(userAgent.isDesktop()).toBe(!!expected.isDesktop);
         });
 
     });
