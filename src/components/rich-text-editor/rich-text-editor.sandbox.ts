@@ -25,8 +25,17 @@ export class MRichTextEditorSandBox extends Vue {
     public linksOpenInNewWindowModel = '<p>Tests de la La case à cocher « Ouvrir dans un nouvel onglet ».</p><ol><li>Elle est <strong>sélectionnée par défaut&nbsp;</strong>à la création d&#39;un <strong>nouveau&nbsp;</strong>lien externe.</li><li>Elle est <strong>sélectionnée&nbsp;</strong>lors de la modification d&#39;un lien existant, si l&#39;utilisateur l&#39;a laissé sélectionnée à la création du <a href="http://google.ca" rel="noopener noreferrer" target="_blank">lien</a>.</li><li>Par contre, elle <strong>n&#39;est pas&nbsp;</strong><strong>sélectionnée&nbsp;</strong>lors de la modification d&#39;un lien existant, si l&#39;utilisateur l&#39;avait désélectionnée à la création du <a href="http://google.ca">lien</a>.</li></ol></div>';
     public inputFocusTestInputType = '';
 
+    public todos: {todo: string, done: boolean}[] = [];
+    public currentTodo: {todo: string, done: boolean} = { todo: '', done: false };
+    public resetValue: string = '';
+
     public alertTestSuccess(message: string): void {
         alert(message);
+    }
+
+    public addTodo(): void {
+        this.todos.push({ todo: this.currentTodo.todo, done: this.currentTodo.done });
+        this.currentTodo = { todo: this.resetValue, done: false };
     }
 }
 

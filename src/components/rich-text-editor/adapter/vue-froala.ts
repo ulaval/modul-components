@@ -423,10 +423,6 @@ export enum FroalaStatus {
     }
 
     private setContent(firstTime: boolean = false): void {
-        if (!firstTime) {
-            return;
-        }
-
         if (this.model || this.model === '') {
             this.oldModel = this.model;
 
