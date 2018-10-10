@@ -1,0 +1,14 @@
+{
+    "extends": "../../tsconfig.dev.json",
+    "compilerOptions": {
+        "module": "commonjs",
+        "sourceMap": true,
+        "strictNullChecks" : false
+    },
+    "include": [
+        "**/*"
+    ],
+    "exclude": [
+
+    ]
+}
