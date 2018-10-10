@@ -1,0 +1,32 @@
+@import '../../../src/styles/abstracts/variables';
+
+.m-test {
+    &__header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 2;
+        padding: 16px 32px;
+        background: #fff;
+
+        @media (max-width: $m-mq--max--s) {
+            padding: 16px;
+        }
+
+        h1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__title {
+        font-weight: 800;
+    }
+
+    &__content {
+        margin-top: 46px;
+    }
+}
+
