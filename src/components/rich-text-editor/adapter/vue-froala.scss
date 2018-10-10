@@ -55,10 +55,10 @@
         .fr-box.fr-basic .fr-element {
             padding: $m-spacing;
             font-weight: $m-font-weight;
-            border-left-color: $m-color--grey-light;
-            border-right-color: $m-color--grey-light;
             word-wrap: break-word;
             -moz-user-select: text; // Dirty fix for text selection in firefox if the rich-text is in a draggable container.
+            border-left: 1px solid $m-color--grey-light;
+            border-right: 1px solid $m-color--grey-light;
         }
 
         .fr-box.fr-basic.fr-top .fr-wrapper {
@@ -102,11 +102,9 @@
         }
 
         .fr-box.fr-basic .fr-element {
-            transition: padding $m-transition-duration--l ease, border-color $m-transition-duration--l ease-in-out;
+            transition: padding $m-transition-duration--l ease;
             padding: 0;
             min-height: unset;
-            border-left: 1px solid transparent;
-            border-right: 1px solid transparent;
             overflow-x: unset;
         }
 

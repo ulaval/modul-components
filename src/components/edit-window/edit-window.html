@@ -1,12 +1,12 @@
 <div class="m-edit-window" ref="baseWindow">
     <slot name="trigger"></slot>
-    <portal :target-el="'#' + propId">
+    <portal :target-el="portalTargetSelector" v-if="portalCreated">
         <transition name="m--is" :duration="{ enter: 800, leave: 600 }">
             <div class="m-edit-window__wrap"
                  :class="[{ 'm--is-disabled':disabled },
                             className ]"
                  ref="dialogWrap"
-                 v-show="propOpen" v-if="propOpen || preload || loaded">
+                 v-show="propOpen" v-if="portalMounted">
                 <section class="m-edit-window__article" ref="article">
                     <header class="m-edit-window__header"
                             :class="{'m--no-padding': !padding || !paddingHeader}">

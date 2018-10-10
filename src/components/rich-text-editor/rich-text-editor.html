@@ -31,7 +31,9 @@
             @keydown="onKeydown"
             @paste="onPaste"
             :disabled="disabled || waiting"
+            :custom-translations="customTranslations"
             ref="input"></froala>
+
     </m-input-style>
     <div class="m-textfield__validation">
         <m-validation-message
