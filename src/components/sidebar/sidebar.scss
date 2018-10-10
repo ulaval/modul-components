@@ -16,6 +16,7 @@
         align-items: center;
         outline: none;
         min-width: $m-min-width;
+        user-select: none;
 
         @include m-is-ie() {
             display: block;
