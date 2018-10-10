@@ -1,25 +1,32 @@
-.mtest-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 2;
-    padding: 16px 32px;
-    background: #fff;
-}
+@import '../../../src/styles/abstracts/variables';
 
-.mtest-header h1 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+.m-test {
+    &__header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 2;
+        padding: 16px 32px;
+        background: #fff;
 
-.mtest-content {
-    margin-top: 46px;
-}
+        @media (max-width: $m-mq--max--s) {
+            padding: 16px;
+        }
 
-@media (max-width: 767px) {
-    .mtest-header {
-        padding: 16px;
+        h1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__title {
+        font-weight: 800;
+    }
+
+    &__content {
+        margin-top: 46px;
     }
 }
+
