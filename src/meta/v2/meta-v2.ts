@@ -1,5 +1,5 @@
 export interface Meta {
-    moduleVersion?: string;
+    modulVersion?: string;
     components: MetaComponent[];
 }
 

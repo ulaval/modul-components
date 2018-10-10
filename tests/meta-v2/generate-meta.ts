@@ -17,7 +17,7 @@ let meta: Meta = generator.generateMeta();
 
 const packageFileContent: any = JSON.parse(fs.readFileSync(packageFilePath, 'utf8'));
 
-meta.moduleVersion = packageFileContent.version;
+meta.modulVersion = packageFileContent.version;
 
 fs.writeFile(destination, JSON.stringify(meta), 'utf8', (err) => {
     if (err) {
