@@ -142,4 +142,44 @@
             In orci lorem, consectetur sed hendrerit ac, sodales non leo. Fusce dolor sapien, faucibus vitae sapien vel, porta elementum nunc. Phasellus non nisi ac ligula pretium placerat nec a turpis. Mauris at orci magna. Praesent dictum purus quis metus vehicula placerat. Praesent eu pellentesque lorem. Integer et euismod nulla. Integer ex erat, tincidunt a sem a, blandit blandit leo. Curabitur nisi libero, molestie dapibus enim eget, imperdiet egestas ex.
         </p>
     </div>
+
+    <div>
+        <h5 class="m-u--margin-bottom">Réutilisation d'un RTE</h5>
+        <p>Si on change la valeur du model dans le JS, le changement est rapporté dans le RTE<p>
+        <div>
+            <h6>Current todo</h6>
+            <dl>
+                <dt>TODO :</dt>
+                <dd>
+                    <code>{{ currentTodo.todo }}</code>
+                </dd>
+                <dt>DONE : </dt>
+                <dd>
+                    <code>{{ currentTodo.done }}</code>
+                </dd>
+            </dl>
+        </div>
+
+        <ul v-if="todos.length > 0">
+            <li v-for="todo in todos">
+                {{ todo.todo }} is {{ (todo.done) ? "done" : "in progress" }}
+            </li>
+        </ul>
+
+        <div>
+                <m-rich-text-editor v-model="currentTodo.todo"
+                :toolbar-sticky-offset="58"
+                :label="'Todo'"
+                :max-width="'large'"
+                :focus="focus"
+                :error="error"
+                :error-message="errorMessage"
+                :valid-message="validMessage"
+                :helper-message="helperMessage"
+                :waiting="waiting"
+                :disabled="disabled"></m-rich-text-editor>
+                <br>
+                <button @click="addTodo">Add todo</button><input type="text" placeholder="Valeur à affecter au RTE lors de la réinitialisation" v-model="resetValue">
+        </div>
+    </div>
 </div>

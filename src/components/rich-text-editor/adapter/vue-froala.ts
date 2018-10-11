@@ -354,7 +354,7 @@ export enum FroalaStatus {
 
         this._$element = $(this.$refs.editor);
 
-        this.setContent(true);
+        this.setContent();
 
         this.registerEvents();
         if (this._$element.froalaEditor) {
@@ -422,11 +422,7 @@ export enum FroalaStatus {
         this.setContent();
     }
 
-    private setContent(firstTime: boolean = false): void {
-        if (!firstTime) {
-            return;
-        }
-
+    private setContent(): void {
         if (this.model || this.model === '') {
             this.oldModel = this.model;
 
