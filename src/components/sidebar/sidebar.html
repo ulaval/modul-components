@@ -9,9 +9,9 @@
                            'm--is-origin-' + origin,
                            className ]"
                 @click.self="backdropClick"
-                ref="dialogWrap">
+                ref="modalWrap">
                 <article class="m-sidebar__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
-                    <button type="button" @click="closeDialog()" class="m-sidebar__close-button" v-if="closeButton && origin === 'bottom'">
+                    <button type="button" @click="closeModal()" class="m-sidebar__close-button" v-if="closeButton && origin === 'bottom'">
                         <m-i18n k="m-sidebar:close"></m-i18n>
                     </button>
                     <header class="m-sidebar__header"
@@ -22,7 +22,7 @@
                             v-if="hasHeader">
                         <h2 class="m-sidebar__title" v-if="hasTitle">{{ title }}</h2>
                         <slot name="header"></slot>
-                        <m-icon-button @click="closeDialog" icon-name="m-svg__close-clear" class="m-sidebar__header__close-button" v-if="closeButton && origin !== 'bottom'">
+                        <m-icon-button @click="closeModal" icon-name="m-svg__close-clear" class="m-sidebar__header__close-button" v-if="closeButton && origin !== 'bottom'">
                             <m-i18n k="m-sidebar:close"></m-i18n>
                         </m-icon-button>
                     </header>

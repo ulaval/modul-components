@@ -1,4 +1,4 @@
-<m-dialog :title="title" ref="dialog" :open.sync="propOpen" @open="onOpen" @close="onClose" :close-on-backdrop="false" :padding-body="false">
+<m-modal :title="title" ref="modal" :open.sync="propOpen" @open="onOpen" @close="onClose" :close-on-backdrop="false" :padding-body="false">
 
     <span slot="trigger">
         <slot></slot>
@@ -105,4 +105,4 @@
             </m-button>
         </div>
     </template>
-</m-dialog>
+</m-modal>

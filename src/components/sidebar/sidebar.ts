@@ -112,7 +112,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
         }
     }
 
-    private closeDialog(): void {
+    private closeModal(): void {
         this.as<PortalMixin>().tryClose();
     }
 

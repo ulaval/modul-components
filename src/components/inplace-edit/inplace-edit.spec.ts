@@ -35,13 +35,13 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
         expect(inplaceEdit.editMode).toBeFalsy();
     });
 
-    it('must use default value for dialog title',() => {
+    it('must use default value for modal title',() => {
 
         expect(inplaceEdit.title).toEqual(inplaceEdit.$i18n.translate('m-inplace-edit:modify'));
     });
 
     describe('when defining title prop', () => {
-        it('must use props value for dialog title',() => {
+        it('must use props value for modal title',() => {
             let titleProp: string = 'myTitle';
             inplaceEdit.title = titleProp;
 
@@ -212,7 +212,7 @@ describe('Component inplace-edit - Complete component mobile', () => {
                 readMode: READ_SLOT
             },
             stubs: {
-                'm-dialog': '<div><slot></slot></div>'
+                'm-modal': '<div><slot></slot></div>'
             }
         });
     });

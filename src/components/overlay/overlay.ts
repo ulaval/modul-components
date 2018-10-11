@@ -4,14 +4,14 @@ import { Prop } from 'vue-property-decorator';
 
 import { BackdropMode, Portal, PortalMixin, PortalTransitionDuration } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
-import { EDIT_WINDOW_NAME } from '../component-names';
-import WithRender from './edit-window.html?style=./edit-window.scss';
+import { OVERLAY_NAME } from '../component-names';
+import WithRender from './overlay.html?style=./overlay.scss';
 
 @WithRender
 @Component({
     mixins: [Portal]
 })
-export class MEditWindow extends ModulVue {
+export class MOverlay extends ModulVue {
 
     @Prop({ default: true })
     public focusManagement: boolean;
@@ -99,10 +99,10 @@ export class MEditWindow extends ModulVue {
     }
 }
 
-const FullpagePlugin: PluginObject<any> = {
+const OverlayPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(EDIT_WINDOW_NAME, MEditWindow);
+        v.component(OVERLAY_NAME, MOverlay);
     }
 };
 
-export default FullpagePlugin;
+export default OverlayPlugin;

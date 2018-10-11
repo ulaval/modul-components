@@ -1,9 +1,10 @@
 @import '../../styles/abstracts/variables';
-$m-dialog--max-width--l: $m-max-width !default;
-$m-dialog--max-width: 600px !default;
-$m-dialog--max-width--s: 420px !default;
+$m-dialog--max-width: 380px !default;
+$m-dialog--max-width--l: 500px !default;
 
 .m-dialog {
+    display: inline-block;
+
     &__wrap {
         position: fixed;
         top: 0;
@@ -12,18 +13,90 @@ $m-dialog--max-width--s: 420px !default;
         left: 0;
         background: none;
         display: flex;
+        justify-content: center;
         align-items: center;
         outline: none;
         min-width: $m-min-width;
-        overflow: hidden;
+        overflow: auto;
+        padding: $m-spacing--l;
 
-        // MODUL-20, MODUL-87, ENA2-760
-        // the mq must stay sync with the component template and TS file
-        @media (min-width: $m-mq--min--s) {
-            justify-content: center;
+        @include m-is-ie() {
+            display: block;
         }
 
-        // doesn't work for slot content because of the scoped style... >_<
+        @media (max-width: $m-mq--max--s) {
+            padding-left: $m-spacing--s;
+            padding-right: $m-spacing--s;
+        }
+
+        &.m--is-enter-active,
+        &.m--is-leave-active {
+            transition-duration: $m-transition-duration;
+
+            .m-dialog__article {
+                transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
+            }
+        }
+
+        &.m--is-enter,
+        &.m--is-leave-to {
+            .m-dialog__article {
+                transform: translate3d(0, $m-padding--l, 0) scale(0.98);
+                opacity: 0;
+            }
+        }
+    }
+
+    &__article {
+        margin-top: auto;
+        margin-bottom: auto;
+        border-radius: $m-border-radius;
+        cursor: auto;
+        width: 100%;
+        max-width: $m-dialog--max-width;
+        background: $m-color--white;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+
+        @include m-is-ie() {
+            margin: 60px auto;
+        }
+
+        &.m--has-width-large {
+            max-width: $m-dialog--max-width--l;
+        }
+    }
+
+    &__header,
+    &__body,
+    &__footer {
+        &.m--no-padding {
+            padding: 0;
+        }
+
+        > :first-child {
+            margin-top: 0;
+
+            > :first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &__body,
+    &__footer {
+        &:not(.m--no-padding) {
+            padding: $m-spacing--l $m-spacing;
+
+            @media (min-width: $m-mq--min--s) {
+                padding: $m-spacing--l $m-spacing--m;
+            }
+        }
+    }
+
+    &__header {
+        width: 100%;
+        border-bottom: 1px solid $m-color--border;
+
         h1,
         h2,
         h3,
@@ -34,156 +107,41 @@ $m-dialog--max-width--s: 420px !default;
             font-size: $m-font-size--h4;
             font-weight: $m-font-weight--bold;
         }
-        ////////////////////////////////////////////
 
-        @include m-is-ie() {
-            display: block;
-        }
+        &:not(.m--no-padding) {
+            padding: $m-spacing $m-spacing;
 
-        &.m--is-close-on-backdrop {
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        &.m--is-enter-active,
-        &.m--is-leave-active {
-            &.m--is-full-screen {
-                transition-duration: $m-transition-duration--xl;
+            @media (min-width: $m-mq--min--s) {
+                padding: $m-spacing $m-spacing--m;
             }
-
-            &:not(.m--is-full-screen) {
-                transition-duration: $m-transition-duration;
-            }
-        }
-
-        &.m--is-enter,
-        &.m--is-leave-to {
-            &:not(.m--is-full-screen) {
-                .m-dialog__article {
-                    transform: translate3d(0, $m-padding--l, 0) scale(0.98);
-                    opacity: 0;
-                }
-            }
-
-            &.m--is-full-screen {
-                .m-dialog__article {
-                    transform: translate3d(0, 110%, 0);
-                }
-            }
-        }
-
-        &:not(.m--is-full-screen) {
-            padding: $m-padding--l $m-padding--l 0 $m-padding--l;
-
-            .m-dialog__article {
-                transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
-                margin-top: auto;
-                margin-bottom: auto;
-                max-width: $m-dialog--max-width;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-
-        &.m--is-full-screen {
-            .m-dialog__article {
-                transition: transform $m-transition-duration--xl ease;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                margin: 0 !important; //style for IE
-            }
-        }
-
-        &.m--is-large {
-            .m-dialog__article {
-                max-width: $m-dialog--max-width--l;
-            }
-        }
-
-        &.m--is-small {
-            .m-dialog__article {
-                max-width: $m-dialog--max-width--s;
-            }
-        }
-
-        &.m--has-body-max-width {
-            .m-dialog__body {
-                max-width: $m-max-width--l;
-                margin: 0 auto;
-            }
-        }
-    }
-
-    &__article {
-        cursor: auto;
-        width: 100%;
-        background: $m-color--white;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        max-height: 100%;
-
-        @include m-is-ie() {
-            margin: $m-padding--l*2 auto;
-        }
-    }
-
-    &__header,
-    &__body,
-    &__footer {
-        > :first-child {
-            margin-top: 0;
-        }
-    }
-
-    &__header,
-    &__footer {
-        flex-shrink: 0;
-        min-height: $m-box--min-height;
-
-        @include m-box-padding($m-spacing, $m-spacing--l, $m-spacing, $m-spacing);
-    }
-
-    &__header {
-        position: relative;
-        background-color: var(--m-color--header-dark);
-        color: $m-color--white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        &__close-button {
-            margin-right: -12px; // Magic number: visually align
-        }
-
-        &:not(.m--has-content) {
-            justify-content: flex-end;
         }
     }
 
     &__body {
-        position: relative;
-        width: 100%;
-        flex: 1 1 auto;
-        overflow-x: hidden;
-        overflow-y: auto;
-        min-height: 120px;
-        -webkit-overflow-scrolling: touch;
-
-        @include m-box-padding();
-
-        @include m-is-ie() {
-            flex: none;
-        }
+        text-align: center;
 
         @include m-scrollbar();
+
+        ~ .m-dialog__footer {
+            padding-top: 0;
+        }
     }
 
     &__footer {
-        display: flex;
-        flex-direction: column;
+        width: 100%;
+        display: inline-flex;
         justify-content: center;
-        border-top: 1px solid $m-color--grey;
+        flex-direction: column;
+        align-items: center;
+
+        &__nav {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+
+            .m-link {
+                margin-top: $m-margin;
+            }
+        }
     }
 }

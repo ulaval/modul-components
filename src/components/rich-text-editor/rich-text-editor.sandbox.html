@@ -42,7 +42,7 @@
     <div>
         <h5 class="m-u--margin-bottom">fonctionne dans un formulaire pleine page</h5>
         <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine page</button>
-        <m-edit-window :open.sync="afficherFormulairePleinePage">
+        <m-overlay :open.sync="afficherFormulairePleinePage">
             <template slot="header">
                 <span class="m-u--h2 m-u--font-weight--bold">
                     <m-i18n k="texte:texte"></m-i18n>
@@ -52,7 +52,7 @@
                 <m-rich-text-editor scrollable-container=".m-edit-window__body" class="p-formulaire-texte__textearea"
                     :label="'texte riche'" tag-style="p" max-width="720px" v-model="fullScreenFormModel"></m-rich-text-editor>
             </div>
-        </m-edit-window>
+        </m-overlay>
     </div>
     <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
     <div class="m-u--margin-bottom">
