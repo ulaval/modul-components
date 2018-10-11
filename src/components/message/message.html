@@ -1,21 +1,40 @@
 <div class="m-message"
-    :class="{'m--is-success': state=='success',
-             'm--is-information': state=='information',
-             'm--is-warning': state=='warning',
-             'm--has-error': state=='error',
-             'm--is-skin-regular': skin!='light',
-             'm--is-skin-light': skin=='light'}" v-if="propVisible">
-    <div class="m-message__wrap">
+    :class="{'m--is-state-confirmation': isStateConfirmation,
+            'm--is-state-information': isStateInformation,
+            'm--is-state-warning': isStateWarning,
+            'm--is-state-error': isStateError,
+            'm--is-skin-default': isSkinDefault,
+            'm--is-skin-light': isSkinLight,
+            'm--is-skin-page': isSkinPage,
+            'm--is-skin-page-light': isSkinPageLight}"
+    v-if="propVisible">
+    <div class="m-message__wrap"
+        v-if="isNotSkinPage">
         <div class="m-message__icon" v-if="icon">
             <m-icon :name="getIcon()"></m-icon>
         </div>
-        <div class="m-message__body" :class="{'m--has-close-button': closeButton}">
-            <m-icon-button icon-name="m-svg__close-clear" icon-size="10px" @click="onClose" class="m-message__body__close-button" v-if="showCloseButton">
-                <m-i18n k="m-message:close"></m-i18n>
-            </m-icon-button>
-            <div class="m-message__body__content">
+        <div class="m-message__body"
+            :class="{'m--has-close-button': closeButton}">
+            <h2 class="m-message__title"
+                v-if="title">{{title}}</h2>
+            <div class="m-message__text"
+                    v-if="$slots.default">
                 <slot></slot>
             </div>
         </div>
+        <m-icon-button class="m-message__body__close-button"
+                    v-if="showCloseButton"
+                    icon-name="m-svg__close-clear"
+                    icon-size="10px"
+                    @click="onClose" >
+            {{'m-message:close' | f-m-i18n}}
+        </m-icon-button>
     </div>
+    <m-error-template class="m-message__page"
+                    v-else
+                    :state="state"
+                    :skin="skinPageValue"
+                    :title="title">
+        <slot></slot>
+    </m-error-template>
 </div>

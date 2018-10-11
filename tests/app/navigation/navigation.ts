@@ -1,17 +1,25 @@
-import { ModulVue } from '../../../src/utils/vue/vue';
 import Component from 'vue-class-component';
-import WithRender from './navigation.html';
-import Meta from '../../../src/meta/meta';
+
+import { ModulVue } from '../../../src/utils/vue/vue';
+import { getComponentsNames, getDirectiveNames, getFiltersNames } from '../names-loader';
+import WithRender from './navigation.html?style=./navigation.scss';
 
 @WithRender
 @Component
 export class Navigation extends ModulVue {
-    public routes: string[] = [];
-    protected mounted(): void {
-        let meta: string[] = [];
-        Meta.getTags().forEach(tag => {
-            meta.push(tag);
-        });
-        this.routes = meta;
+    public componentsTag: string[] = [];
+    public directivesName: string[] = [];
+    public filtersName: string[] = [];
+
+    scrollToTop(): void {
+        window.scrollTo(0, 0);
     }
+
+    protected mounted(): void {
+
+        this.componentsTag = getComponentsNames();
+        this.directivesName = getDirectiveNames();
+        this.filtersName = getFiltersNames();
+    }
+
 }

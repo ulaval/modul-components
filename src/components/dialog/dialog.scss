@@ -42,6 +42,7 @@ $m-dialog--max-width--s: 420px !default;
 
         &.m--is-close-on-backdrop {
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         &.m--is-enter-active,
@@ -168,6 +169,7 @@ $m-dialog--max-width--s: 420px !default;
         overflow-x: hidden;
         overflow-y: auto;
         min-height: 120px;
+        -webkit-overflow-scrolling: touch;
 
         @include m-box-padding();
 

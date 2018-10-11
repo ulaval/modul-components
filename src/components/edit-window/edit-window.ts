@@ -1,11 +1,11 @@
 import { PluginObject } from 'vue';
-import { ModulVue } from '../../utils/vue/vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+
+import { BackdropMode, Portal, PortalMixin, PortalTransitionDuration } from '../../mixins/portal/portal';
+import { ModulVue } from '../../utils/vue/vue';
 import { EDIT_WINDOW_NAME } from '../component-names';
-import { Portal, PortalMixin, PortalMixinImpl, BackdropMode, PortalTransitionDuration } from '../../mixins/portal/portal';
 import WithRender from './edit-window.html?style=./edit-window.scss';
-import { log } from 'util';
 
 @WithRender
 @Component({

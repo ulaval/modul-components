@@ -55,6 +55,8 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         article: HTMLElement;
     };
 
+    private closeTitle: string = this.$i18n.translate('m-dialog:close');
+
     public closeDialog(): void {
         this.as<PortalMixin>().tryClose();
     }

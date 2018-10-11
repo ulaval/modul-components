@@ -1,6 +1,9 @@
 @import '../../styles/abstracts/variables';
 
 .m-limit-text {
+    // https://github.com/ulaval/modul-components/pull/506
+    text-size-adjust: 100%;
+
     &__content,
     &__original {
         & > :first-child {

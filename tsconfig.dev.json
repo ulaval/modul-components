@@ -12,7 +12,8 @@
         "strictNullChecks": true,
         "types": [
             "node",
-            "jest"
+            "jest",
+            "webpack-env"
         ],
         "typeRoots": [
             "node_modules/@types"
