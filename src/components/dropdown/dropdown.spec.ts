@@ -8,6 +8,15 @@ import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import DropdownPlugin, { MDropdown } from './dropdown';
 
+
+
+
+
+
+
+
+
+
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
 
@@ -40,6 +49,17 @@ describe('MDropdown', () => {
             }
         });
 
+        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when footer slot is set', () => {
+        const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
+            mocks: getDefaultMock(),
+            localVue: Vue,
+            slots: {
+                footer: '<div></div>'
+            }
+        });
         return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
     });
 
