@@ -32,9 +32,9 @@ export class InputManagement extends ModulVue
     @Prop({
         default: undefined,
         validator: value =>
-        value === InputManagementAutocomplete.Off ||
-        value === InputManagementAutocomplete.On ||
-        value === undefined
+            value === InputManagementAutocomplete.Off ||
+            value === InputManagementAutocomplete.On ||
+            value === undefined
     })
     public autocomplete: string;
     @Prop()

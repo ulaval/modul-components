@@ -18,21 +18,31 @@
     </div>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
-        toolbar-sticky-offset=".mtest-header"
-        :label="'texte riche'"
-        :max-width="'large'"
-        :placeholder="'some placeholder'"
-        :focus="focus"
-        :error="error"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"
-        :waiting="waiting"
-        :disabled="disabled"></m-rich-text-editor>
+            toolbar-sticky-offset=".mtest-header"
+            :label="'texte riche'"
+            :max-width="'large'"
+            :placeholder="'some placeholder'"
+            :focus="focus"
+            :error="error"
+            :error-message="errorMessage"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"
+            :waiting="waiting"
+            :disabled="disabled"></m-rich-text-editor>
     </div>
     <div class="m-u--margin-bottom">
         <h5>Résultat dans le lecteur</h5>
-        <div><m-rich-text :value="model"></m-rich-text></div>
+        <div>
+            <m-rich-text :value="model"></m-rich-text>
+        </div>
+    </div>
+    <div>
+        <h5>Contenu du v-model</h5>
+        <div>
+            <pre>
+{{ model }}
+            </pre>
+        </div>
     </div>
     <h5 class="m-u--margin-bottom">fonctionne quand le modèle est déjà initialisé</h5>
     <div class="m-u--margin-bottom">
@@ -55,7 +65,8 @@
     </div>
     <div>
         <h5 class="m-u--margin-bottom">fonctionne dans un formulaire pleine page</h5>
-        <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine page</button>
+        <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine
+            page</button>
         <m-edit-window :open.sync="afficherFormulairePleinePage">
             <template slot="header">
                 <span class="m-u--h2 m-u--font-weight--bold">
@@ -63,24 +74,24 @@
                 </span>
             </template>
             <div>
-                <m-rich-text-editor scrollable-container=".m-edit-window__body" class="p-formulaire-texte__textearea" :label="'texte riche'"
-                    tag-style="p" max-width="720px" v-model="fullScreenFormModel"></m-rich-text-editor>
+                <m-rich-text-editor scrollable-container=".m-edit-window__body" class="p-formulaire-texte__textearea"
+                    :label="'texte riche'" tag-style="p" max-width="720px" v-model="fullScreenFormModel"></m-rich-text-editor>
             </div>
         </m-edit-window>
     </div>
     <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
-        :toolbar-sticky-offset="58"
-        :label="'texte riche'"
-        :max-width="'large'"
-        :focus="focus"
-        :error="error"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"
-        :waiting="waiting"
-        :disabled="disabled"></m-rich-text-editor>
+            :toolbar-sticky-offset="58"
+            :label="'texte riche'"
+            :max-width="'large'"
+            :focus="focus"
+            :error="error"
+            :error-message="errorMessage"
+            :valid-message="validMessage"
+            :helper-message="helperMessage"
+            :waiting="waiting"
+            :disabled="disabled"></m-rich-text-editor>
     </div>
     <h5 class="m-u--margin-bottom">Tests de la case à cocher « Ouvrir dans un nouvel onglet » d'un lien externe</h5>
     <div class="m-u--margin-bottom">
