@@ -1,9 +1,14 @@
 <div>
+    <h2 class="m-u--no-margin">Champ texte de base</h2>
+    <m-textfield label="Titre" value=""></m-textfield>
 
-        <h3 class="m-u--h6">Type text</h3>
-        <m-textfield :disabled="true" label="Titre" value="text"></m-textfield>
+    <h3 class="m-u--h6">Champ obligatoire</h3>
+    <m-textfield :required-marker="true" label="Nom" value="" error-message="Ce champ est obligatoire."></m-textfield>
 
-    <h2 class="m-u--no-margin">Test 1 : input type</h2>
+    <h3 class="m-u--h6">Champ désactivé</h3>
+    <m-textfield :disabled="true" label="Titre" value="text"></m-textfield>
+
+    <h2>Test 1 : input type</h2>
     <p class="m-u--margin-bottom">Le clavier sur mobile doit s'ajuster en fonction du type défini sur le textfield.</p>
 
     <h3 class="m-u--h6">Type text</h3>
