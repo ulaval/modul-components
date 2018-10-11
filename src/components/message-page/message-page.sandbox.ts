@@ -2,14 +2,14 @@ import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
-import { ERROR_TEMPLATE_NAME } from '../component-names';
+import { MESSAGE_PAGE_NAME } from '../component-names';
 import MessagePlugin, { MMessageState } from '../message/message';
-import { Link } from './error-template';
-import WithRender from './error-template.sandbox.html';
+import { Link } from './message-page';
+import WithRender from './message-page.sandbox.html';
 
 @WithRender
 @Component
-export class MErrorTemplateSandbox extends Vue {
+export class MMessagePageSandbox extends Vue {
     errorType: MMessageState = MMessageState.Error;
     warningType: MMessageState = MMessageState.Warning;
     informationType: MMessageState = MMessageState.Information;
@@ -24,10 +24,10 @@ export class MErrorTemplateSandbox extends Vue {
 (l3) in the error page.`;
 }
 
-const ErrorTemplateSandboxPlugin: PluginObject<any> = {
+const MessagePageSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(`${ERROR_TEMPLATE_NAME}-sandbox`, MErrorTemplateSandbox);
+        v.component(`${MESSAGE_PAGE_NAME}-sandbox`, MMessagePageSandbox);
     }
 };
 
-export default ErrorTemplateSandboxPlugin;
+export default MessagePageSandboxPlugin;

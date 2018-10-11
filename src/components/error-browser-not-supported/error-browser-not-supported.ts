@@ -6,7 +6,7 @@ import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_BROWSER_NOT_SUPPORTED_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link } from '../error-template/error-template';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import { MMessageState } from '../message/message';
@@ -52,7 +52,7 @@ const ErrorBrowserNotSupported: PluginObject<any> = {
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.use(MediaQueriesPlugin);
-        v.use(ErrorTemplatePlugin);
+        v.use(MessagePagePlugin);
         v.component(ERROR_BROWSER_NOT_SUPPORTED_NAME, MErrorBrowserNotSupported);
     }
 };
