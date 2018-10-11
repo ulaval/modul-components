@@ -15,13 +15,18 @@ export interface InputManagementData {
     internalValue: string;
 }
 
+export interface InputManagementFocusable {
+    focusInput(): void;
+}
+
 export enum InputManagementAutocomplete {
     Off = 'off',
     On = 'on'
 }
 @Component
 export class InputManagement extends ModulVue
-    implements InputManagementProps, InputManagementData {
+    implements InputManagementProps, InputManagementData, InputManagementFocusable {
+
     @Prop()
     @Model('input')
     public value: string;
@@ -43,7 +48,15 @@ export class InputManagement extends ModulVue
     public trimWordWrap: boolean = false;
 
     public internalValue: string = '';
+
     private internalIsFocus: boolean = false;
+
+    public focusInput(): void {
+        let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
+        if (inputEl) {
+            inputEl.focus();
+        }
+    }
 
     private beforeMount(): void {
         // Don't use this.model because we don't want to emit 'input' when the component isn't Mount
