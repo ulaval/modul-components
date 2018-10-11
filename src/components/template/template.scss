@@ -118,19 +118,7 @@ $m-template--column-color: $m-color--grey-light;
     }
 }
 
-@media (max-width: $m-mq--max--xs) {
-    .m-template {
-        &__header,
-        &__body,
-        &__column {
-            &:not(.m--no-padding) {
-                padding: $m-padding $m-padding--s;
-            }
-        }
-    }
-}
-
-@media (min-width: $m-mq--min--xs) and (max-width: $m-mq--max--s) {
+@media (max-width: $m-mq--max--s) {
     .m-template {
         &__header,
         &__body,
@@ -152,7 +140,9 @@ $m-template--column-color: $m-color--grey-light;
         }
 
         &__header {
-            padding: $m-margin--l $m-padding--l;
+            &:not(.m--no-padding) {
+                padding: $m-margin--l $m-padding--l;
+            }
         }
     }
 }
