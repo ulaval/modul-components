@@ -83,6 +83,7 @@ export enum FroalaStatus {
     };
     protected model: string | undefined = undefined;
     protected oldModel: string | undefined = undefined;
+    protected rawHtmlInput: string | undefined = undefined;
 
     protected isFocused: boolean = false;
     protected isInitialized: boolean = false;
@@ -448,12 +449,21 @@ export enum FroalaStatus {
         let modelContent: string = '';
 
         const returnedHtml: any = this._$element.froalaEditor('html.get');
-        if (typeof returnedHtml === 'string') {
-            modelContent = returnedHtml;
+        if (typeof returnedHtml === 'string' && returnedHtml !== this.rawHtmlInput) {
+            this.rawHtmlInput = returnedHtml;
+            modelContent = this.removeEmptyHTML(returnedHtml);
+        } else {
+            modelContent = (this.oldModel) ? this.oldModel : '';
         }
 
         this.oldModel = modelContent;
         this.$emit('input', modelContent);
+    }
+
+    private removeEmptyHTML(value: string): string {
+        const div: HTMLElement = document.createElement('div');
+        div.innerHTML = value;
+        return ((div.textContent || div.innerText || '').trim().length > 0) ? value : '';
     }
 
     private registerEvent(element: any, eventName: any, callback: any): void {

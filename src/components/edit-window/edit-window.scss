@@ -7,12 +7,12 @@
         right: 0;
         bottom: 0;
         left: 0;
-        display: flex;
         justify-content: center;
         outline: none;
         min-width: $m-min-width;
         overflow: hidden;
         background: $m-color--grey-lightest;
+        display: flex;
 
         &.m--is-enter-active,
         &.m--is-leave-active {
@@ -52,7 +52,6 @@
     &__article {
         transform: translate3d(0, 0, 0);
         cursor: auto;
-        display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
@@ -60,6 +59,7 @@
         margin: 0 auto;
         background: $m-color--white;
         box-shadow: $m-box-shadow;
+        display: flex;
 
         > header,
         > footer {
@@ -113,6 +113,7 @@
         overflow-y: auto;
         min-height: 120px;
         position: relative;
+        transition: padding-bottom 0.5s ease;
         -webkit-overflow-scrolling: touch;
 
         @include m-fixed-box-padding();
