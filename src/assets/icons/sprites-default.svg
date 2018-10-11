@@ -31,6 +31,10 @@
     <symbol id="m-svg__arrow-head-filled--up" viewBox="-1 -1 26 26">
         <polygon fill="currentColor" points="24,17 0,17 12,5 "/>
     </symbol>
+    <symbol id="m-svg__arrow-head-circle--right" viewBox="-1 -1 26 26">
+        <path fill="currentColor" d="M12 0c-6.617 0-12 5.383-12 12s5.383 12 12 12 12-5.383 12-12-5.383-12-12-12zM12 23c-6.065 0-11-4.935-11-11s4.935-11 11-11 11 4.935 11 11-4.935 11-11 11z"/>
+        <path fill="currentColor" d="M17.724 11.553l-9-4.5c-0.155-0.077-0.339-0.070-0.487 0.021-0.147 0.092-0.237 0.253-0.237 0.426v9c0 0.173 0.090 0.334 0.237 0.426 0.080 0.049 0.172 0.074 0.263 0.074 0.077 0 0.153-0.018 0.224-0.053l9-4.5c0.169-0.085 0.276-0.258 0.276-0.447s-0.107-0.362-0.276-0.447zM9 15.691v-7.382l7.382 3.691-7.382 3.691z"/>
+    </symbol>
     <symbol id="m-svg__arrow-thin--down" viewBox="-1 -1 26 26">
         <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="12,0.5
             12,23.5 4.8,16.4 12,23.5 19.2,16.3 "/>
@@ -43,9 +47,12 @@
         <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="0.5,12
             23.5,12 16.4,19.2 23.5,12 16.3,4.8 "/>
     </symbol>
-    <symbol id="m-svg__arrow-thin--up" viewBox="-1 -1 26 26" >
+    <symbol id="m-svg__arrow-thin--up" viewBox="-1 -1 26 26">
         <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="12,23.5
             12,0.5 19.2,7.6 12,0.5 4.8,7.7 "/>
+    </symbol>
+    <symbol id="m-svg__arrow-return" viewBox="-1 -1 26 26">
+        <path fill="currentColor" d="M17 4h-5a.5.5 0 0 0 0 1h5c3.309 0 6 2.691 6 6s-2.691 6-6 6H1.707l4.146-4.146a.5.5 0 0 0-.707-.707l-4.999 5a.503.503 0 0 0 0 .707l4.999 5a.502.502 0 0 0 .708 0 .5.5 0 0 0 0-.707L1.707 18H17c3.859 0 7-3.141 7-7s-3.141-7-7-7z"/>
     </symbol>
     <symbol id="m-svg__attachment" viewBox="-1 -1 26 26">
         <path fill="none" stroke="currentColor" stroke-width="0.9326" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
@@ -133,7 +140,7 @@
             C16.4,7.8,16.1,7.9,16,8.1L16,8.1z"/>
     </symbol>
     <symbol id="m-svg__confirmation" viewBox="-1 -1 26 26">
-        <circle stroke="currentColor" fill="#fff" stroke-miterlimit="10" cx="12" cy="12" r="11.5"/>
+        <circle stroke="currentColor" fill="none" stroke-miterlimit="10" cx="12" cy="12" r="11.5"/>
         <path fill="currentColor" d="M16,8.1l-6.3,5.8L8,12.3C7.9,12.1,7.6,12,7.4,12s-0.5,0.1-0.6,0.3c-0.2,0.2-0.3,0.4-0.3,0.6s0.1,0.5,0.3,0.6L9,15.9
         c0.2,0.2,0.4,0.3,0.6,0.3c0.3,0,0.5-0.1,0.6-0.3l6.9-6.5c0.2-0.2,0.3-0.4,0.3-0.7c0-0.5-0.4-0.9-0.9-0.9C16.4,7.8,16.1,7.9,16,8.1
         L16,8.1z"/>
@@ -193,7 +200,7 @@
         <path fill="#fff" d="M13.4,17.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4c0-0.8,0.6-1.3,1.4-1.3S13.4,16.8,13.4,17.5z"/>
     </symbol>
     <symbol id="m-svg__error" viewBox="-1 -1 26 26">
-        <circle stroke="currentColor" fill="#fff" stroke-miterlimit="10" cx="12" cy="12" r="11.5"/>
+        <circle stroke="currentColor" fill="none" stroke-miterlimit="10" cx="12" cy="12" r="11.5"/>
         <path fill="currentColor" d="M13.4,17.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4c0-0.8,0.6-1.3,1.4-1.3S13.4,16.8,13.4,17.5z"/>
         <path fill="currentColor" d="M12,14.3c0.5,0,0.9-0.4,0.9-0.9V6c0-0.5-0.4-0.9-0.9-0.9S11.1,5.5,11.1,6v7.4C11.1,13.9,11.5,14.3,12,14.3z"/>
     </symbol>
@@ -598,7 +605,7 @@
         <path fill="#fff" d="M12,9.7c-0.5,0-0.9,0.4-0.9,0.9V18c0,0.5,0.4,0.9,0.9,0.9s0.9-0.4,0.9-0.9v-7.4C12.9,10.1,12.5,9.7,12,9.7z"/>
     </symbol>
     <symbol id="m-svg__information" viewBox="-1 -1 26 26">
-        <circle stroke="currentColor" fill="#fff" stroke-miterlimit="10" class="st0" cx="12" cy="12" r="11.5"/>
+        <circle stroke="currentColor" fill="none" stroke-miterlimit="10" class="st0" cx="12" cy="12" r="11.5"/>
         <path fill="currentColor" d="M10.6,6.5c0-0.8,0.6-1.4,1.4-1.4s1.4,0.6,1.4,1.4S12.8,7.8,12,7.8S10.6,7.2,10.6,6.5z"/>
         <path fill="currentColor" d="M12,9.7c-0.5,0-0.9,0.4-0.9,0.9V18c0,0.5,0.4,0.9,0.9,0.9s0.9-0.4,0.9-0.9v-7.4C12.9,10.1,12.5,9.7,12,9.7z"/>
     </symbol>
@@ -796,7 +803,7 @@
         <path fill="#fff" d="M13.4,19.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4s0.6-1.4,1.4-1.4S13.4,18.7,13.4,19.5z"/>
     </symbol>
     <symbol id="m-svg__warning" viewBox="-1 -1 26 26">
-        <path stroke="currentColor" fill="#fff" d="M1.3,23.5h21.5c0.6,0,1-0.7,0.7-1.2L12.7,0.9c-0.3-0.6-1.2-0.6-1.4,0L0.6,22.4C0.3,22.8,0.7,23.5,1.3,23.5z"/>
+        <path stroke="currentColor" fill="none" d="M1.3,23.5h21.5c0.6,0,1-0.7,0.7-1.2L12.7,0.9c-0.3-0.6-1.2-0.6-1.4,0L0.6,22.4C0.3,22.8,0.7,23.5,1.3,23.5z"/>
         <path fill="currentColor" d="M12,16.2c0.5,0,0.9-0.4,0.9-0.9V7.9C12.9,7.4,12.5,7,12,7s-0.9,0.4-0.9,0.9v7.4C11.1,15.8,11.5,16.2,12,16.2z"/>
         <path fill="currentColor" d="M13.4,19.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4s0.6-1.4,1.4-1.4S13.4,18.7,13.4,19.5z"/>
     </symbol>
