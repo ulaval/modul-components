@@ -17,18 +17,9 @@
         <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
     </div>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="model"
-            toolbar-sticky-offset=".mtest-header"
-            :label="'texte riche'"
-            :max-width="'large'"
-            :placeholder="'some placeholder'"
-            :focus="focus"
-            :error="error"
-            :error-message="errorMessage"
-            :valid-message="validMessage"
-            :helper-message="helperMessage"
-            :waiting="waiting"
-            :disabled="disabled"></m-rich-text-editor>
+        <m-rich-text-editor v-model="model" toolbar-sticky-offset=".mtest-header" :label="'texte riche'" :max-width="'large'"
+            :placeholder="'some placeholder'" :focus="focus" :error="error" :error-message="errorMessage"
+            :valid-message="validMessage" :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
     </div>
     <div class="m-u--margin-bottom">
         <h5>Résultat dans le lecteur</h5>
@@ -36,37 +27,21 @@
             <m-rich-text :value="model"></m-rich-text>
         </div>
     </div>
-    <div>
-        <h5>Contenu du v-model</h5>
-        <div>
-            <pre>
-{{ model }}
-            </pre>
-        </div>
-    </div>
     <h5 class="m-u--margin-bottom">fonctionne quand le modèle est déjà initialisé</h5>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="initializedModel"
-        toolbar-sticky-offset=".mtest-header"
-        :label="'texte riche'"
-        :max-width="'large'"
-        :placeholder="'some placeholder'"
-        :focus="focus"
-        :error="error"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"
-        :waiting="waiting"
-        :disabled="disabled"></m-rich-text-editor>
+        <m-rich-text-editor v-model="initializedModel" toolbar-sticky-offset=".mtest-header" :label="'texte riche'"
+            :max-width="'large'" :placeholder="'some placeholder'" :focus="focus" :error="error" :error-message="errorMessage"
+            :valid-message="validMessage" :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
     </div>
     <div class="m-u--margin-bottom">
         <h5>Résultat dans le lecteur</h5>
-        <div><m-rich-text :value="initializedModel"></m-rich-text></div>
+        <div>
+            <m-rich-text :value="initializedModel"></m-rich-text>
+        </div>
     </div>
     <div>
         <h5 class="m-u--margin-bottom">fonctionne dans un formulaire pleine page</h5>
-        <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine
-            page</button>
+        <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine page</button>
         <m-edit-window :open.sync="afficherFormulairePleinePage">
             <template slot="header">
                 <span class="m-u--h2 m-u--font-weight--bold">
@@ -81,34 +56,27 @@
     </div>
     <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="model"
-            :toolbar-sticky-offset="58"
-            :label="'texte riche'"
-            :max-width="'large'"
-            :focus="focus"
-            :error="error"
-            :error-message="errorMessage"
-            :valid-message="validMessage"
-            :helper-message="helperMessage"
-            :waiting="waiting"
-            :disabled="disabled"></m-rich-text-editor>
+        <m-rich-text-editor v-model="model" :toolbar-sticky-offset="58" :label="'texte riche'" :max-width="'large'"
+            :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage" :helper-message="helperMessage"
+            :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
     </div>
+
+    <h5 class="m-u--margin-bottom">peut focuser avec une fonction (à partir de input management, sans prop)</h5>
+    <p>
+        <button @click="focusEditor">Focus the editor</button>
+    </p>
+    <div class="m-u--margin-bottom">
+        <m-rich-text-editor v-model="model" ref="rteTestFocus"></m-rich-text-editor>
+    </div>
+
     <h5 class="m-u--margin-bottom">Tests de la case à cocher « Ouvrir dans un nouvel onglet » d'un lien externe</h5>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="linksOpenInNewWindowModel"
-        :toolbar-sticky-offset="58"
-        :label="'texte riche'"
-        :max-width="'large'"
-        :focus="focus"
-        :error="error"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"
-        :waiting="waiting"
-        :disabled="disabled"
-        :placeholder="'some placeholder'"></m-rich-text-editor>
+        <m-rich-text-editor v-model="linksOpenInNewWindowModel" :toolbar-sticky-offset="58" :label="'texte riche'"
+            :max-width="'large'" :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage"
+            :helper-message="helperMessage" :waiting="waiting" :disabled="disabled" :placeholder="'some placeholder'"></m-rich-text-editor>
     </div>
-    <h5 class="m-u--margin-bottom">peut focuser / clicker différents éléments à la suite du rich-text après avoir focus le rich-text</h5>
+    <h5 class="m-u--margin-bottom">peut focuser / clicker différents éléments à la suite du rich-text après avoir focus
+        le rich-text</h5>
     <div class="m-u--margin-bottom">
         <div>
             <select v-model="inputFocusTestInputType">
@@ -119,17 +87,9 @@
                 <option value="button">Button</option>
             </select>
         </div>
-        <m-rich-text-editor v-model="model"
-        :toolbar-sticky-offset="58"
-        :label="'texte riche'"
-        :max-width="'large'"
-        :focus="focus"
-        :error="error"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"
-        :waiting="waiting"
-        :disabled="disabled"></m-rich-text-editor>
+        <m-rich-text-editor v-model="model" :toolbar-sticky-offset="58" :label="'texte riche'" :max-width="'large'"
+            :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage" :helper-message="helperMessage"
+            :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
         <div>
             <m-radio v-if="inputFocusTestInputType === 'radio'">radio</m-radio>
             <m-textfield v-if="inputFocusTestInputType === 'textfield'" placeholder="textfield"></m-textfield>
@@ -137,60 +97,76 @@
             <m-button v-if="inputFocusTestInputType === 'button'" @click="alertTestSuccess('The button was clicked')">Button</m-button>
         </div>
 
-        <p>Ce test nécéssite beaucoup de contenu à la suite du rich-text.  Ne pas enlever svp.</p>
+        <p>Ce test nécéssite beaucoup de contenu à la suite du rich-text. Ne pas enlever svp.</p>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ultrices egestas. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec non magna ac diam mattis feugiat sit amet at tellus. Curabitur ullamcorper lorem ac mauris pretium, vel suscipit ex venenatis. Proin aliquet semper lacus eget vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at risus massa. Vestibulum interdum luctus tellus, id tempor justo facilisis id.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ultrices egestas. Class aptent
+            taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec non magna ac diam
+            mattis feugiat sit amet at tellus. Curabitur ullamcorper lorem ac mauris pretium, vel suscipit ex
+            venenatis. Proin aliquet semper lacus eget vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Duis at risus massa. Vestibulum interdum luctus tellus, id tempor justo facilisis id.
 
-            Maecenas blandit odio convallis, ornare mauris sed, commodo nulla. Fusce hendrerit congue turpis. Ut viverra gravida metus sed gravida. Quisque condimentum massa eu finibus accumsan. Maecenas efficitur orci ut velit aliquam aliquam. Vestibulum vestibulum velit rhoncus justo mollis dignissim. Morbi pulvinar nulla iaculis consectetur convallis. Suspendisse imperdiet ornare interdum.
+            Maecenas blandit odio convallis, ornare mauris sed, commodo nulla. Fusce hendrerit congue turpis. Ut
+            viverra gravida metus sed gravida. Quisque condimentum massa eu finibus accumsan. Maecenas efficitur orci
+            ut velit aliquam aliquam. Vestibulum vestibulum velit rhoncus justo mollis dignissim. Morbi pulvinar nulla
+            iaculis consectetur convallis. Suspendisse imperdiet ornare interdum.
 
-            In orci lorem, consectetur sed hendrerit ac, sodales non leo. Fusce dolor sapien, faucibus vitae sapien vel, porta elementum nunc. Phasellus non nisi ac ligula pretium placerat nec a turpis. Mauris at orci magna. Praesent dictum purus quis metus vehicula placerat. Praesent eu pellentesque lorem. Integer et euismod nulla. Integer ex erat, tincidunt a sem a, blandit blandit leo. Curabitur nisi libero, molestie dapibus enim eget, imperdiet egestas ex.
+            In orci lorem, consectetur sed hendrerit ac, sodales non leo. Fusce dolor sapien, faucibus vitae sapien
+            vel, porta elementum nunc. Phasellus non nisi ac ligula pretium placerat nec a turpis. Mauris at orci
+            magna. Praesent dictum purus quis metus vehicula placerat. Praesent eu pellentesque lorem. Integer et
+            euismod nulla. Integer ex erat, tincidunt a sem a, blandit blandit leo. Curabitur nisi libero, molestie
+            dapibus enim eget, imperdiet egestas ex.
         </p>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ultrices egestas. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec non magna ac diam mattis feugiat sit amet at tellus. Curabitur ullamcorper lorem ac mauris pretium, vel suscipit ex venenatis. Proin aliquet semper lacus eget vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at risus massa. Vestibulum interdum luctus tellus, id tempor justo facilisis id.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ultrices egestas. Class aptent
+            taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec non magna ac diam
+            mattis feugiat sit amet at tellus. Curabitur ullamcorper lorem ac mauris pretium, vel suscipit ex
+            venenatis. Proin aliquet semper lacus eget vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Duis at risus massa. Vestibulum interdum luctus tellus, id tempor justo facilisis id.
 
-            Maecenas blandit odio convallis, ornare mauris sed, commodo nulla. Fusce hendrerit congue turpis. Ut viverra gravida metus sed gravida. Quisque condimentum massa eu finibus accumsan. Maecenas efficitur orci ut velit aliquam aliquam. Vestibulum vestibulum velit rhoncus justo mollis dignissim. Morbi pulvinar nulla iaculis consectetur convallis. Suspendisse imperdiet ornare interdum.
+            Maecenas blandit odio convallis, ornare mauris sed, commodo nulla. Fusce hendrerit congue turpis. Ut
+            viverra gravida metus sed gravida. Quisque condimentum massa eu finibus accumsan. Maecenas efficitur orci
+            ut velit aliquam aliquam. Vestibulum vestibulum velit rhoncus justo mollis dignissim. Morbi pulvinar nulla
+            iaculis consectetur convallis. Suspendisse imperdiet ornare interdum.
 
-            In orci lorem, consectetur sed hendrerit ac, sodales non leo. Fusce dolor sapien, faucibus vitae sapien vel, porta elementum nunc. Phasellus non nisi ac ligula pretium placerat nec a turpis. Mauris at orci magna. Praesent dictum purus quis metus vehicula placerat. Praesent eu pellentesque lorem. Integer et euismod nulla. Integer ex erat, tincidunt a sem a, blandit blandit leo. Curabitur nisi libero, molestie dapibus enim eget, imperdiet egestas ex.
+            In orci lorem, consectetur sed hendrerit ac, sodales non leo. Fusce dolor sapien, faucibus vitae sapien
+            vel, porta elementum nunc. Phasellus non nisi ac ligula pretium placerat nec a turpis. Mauris at orci
+            magna. Praesent dictum purus quis metus vehicula placerat. Praesent eu pellentesque lorem. Integer et
+            euismod nulla. Integer ex erat, tincidunt a sem a, blandit blandit leo. Curabitur nisi libero, molestie
+            dapibus enim eget, imperdiet egestas ex.
         </p>
     </div>
 
     <div>
         <h5 class="m-u--margin-bottom">Réutilisation d'un RTE</h5>
-        <p>Si on change la valeur du model dans le JS, le changement est rapporté dans le RTE<p>
-        <div>
-            <h6>Current todo</h6>
-            <dl>
-                <dt>TODO :</dt>
-                <dd>
-                    <code>{{ currentTodo.todo }}</code>
-                </dd>
-                <dt>DONE : </dt>
-                <dd>
-                    <code>{{ currentTodo.done }}</code>
-                </dd>
-            </dl>
-        </div>
+        <p>Si on change la valeur du model dans le JS, le changement est rapporté dans le RTE</p>
+                <div>
+                    <h6>Current todo</h6>
+                    <dl>
+                        <dt>TODO :</dt>
+                        <dd>
+                            <code>{{ currentTodo.todo }}</code>
+                        </dd>
+                        <dt>DONE : </dt>
+                        <dd>
+                            <code>{{ currentTodo.done }}</code>
+                        </dd>
+                    </dl>
+                </div>
 
-        <ul v-if="todos.length > 0">
-            <li v-for="todo in todos">
-                {{ todo.todo }} is {{ (todo.done) ? "done" : "in progress" }}
-            </li>
-        </ul>
+                <ul v-if="todos.length > 0">
+                    <li v-for="todo in todos">
+                        {{ todo.todo }} is {{ (todo.done) ? "done" : "in progress" }}
+                    </li>
+                </ul>
 
-        <div>
-                <m-rich-text-editor v-model="currentTodo.todo"
-                :toolbar-sticky-offset="58"
-                :label="'Todo'"
-                :max-width="'large'"
-                :focus="focus"
-                :error="error"
-                :error-message="errorMessage"
-                :valid-message="validMessage"
-                :helper-message="helperMessage"
-                :waiting="waiting"
-                :disabled="disabled"></m-rich-text-editor>
-                <br>
-                <button @click="addTodo">Add todo</button><input type="text" placeholder="Valeur à affecter au RTE lors de la réinitialisation" v-model="resetValue">
-        </div>
+                <div>
+                    <m-rich-text-editor v-model="currentTodo.todo" :toolbar-sticky-offset="58" :label="'Todo'"
+                        :max-width="'large'" :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage"
+                        :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
+                    <br>
+                    <button @click="addTodo">Add todo</button><input type="text" placeholder="Valeur à affecter au RTE lors de la réinitialisation"
+                        v-model="resetValue">
+                </div>
+            </div>
+
     </div>
-</div>
