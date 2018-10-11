@@ -2,6 +2,8 @@
 @import '../../styles/abstracts/var-froala';
 
 .m-rich-text {
+    word-break: break-word;
+
     & > :first-child {
         margin-top: 0 !important;
     }

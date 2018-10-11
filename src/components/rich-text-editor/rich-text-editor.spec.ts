@@ -17,7 +17,12 @@ let defaultOptions: MRichTextEditorStandardOptions;
 describe('MRichTextEditor', () => {
     beforeEach(() => {
         Vue.use(RichTextLicensePlugin, { key: froalaLicenseKey });
-        wrapper = shallow(MRichTextEditor);
+        wrapper = shallow(MRichTextEditor,
+            {
+                stubs: {
+                    froala : '<froala></froala>'
+                }
+            });
         richTextEditor = wrapper.vm;
         defaultOptions = new MRichTextEditorStandardOptions(froalaLicenseKey, richTextEditor.$i18n.currentLang());
     });
