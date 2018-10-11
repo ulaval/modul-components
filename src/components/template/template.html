@@ -17,6 +17,7 @@
                     <slot name="subHeader"></slot>
                 </div>
                 <div class="m-template__body"
+                     :class="{ 'm--no-padding': !paddingBody }"
                      v-if="$slots.default">
                     <slot></slot>
                 </div>

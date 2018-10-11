@@ -123,7 +123,9 @@ $m-template--column-color: $m-color--grey-light;
         &__header,
         &__body,
         &__column {
-            padding: $m-padding $m-padding--s;
+            &:not(.m--no-padding) {
+                padding: $m-padding $m-padding--s;
+            }
         }
     }
 }
@@ -133,7 +135,9 @@ $m-template--column-color: $m-color--grey-light;
         &__header,
         &__body,
         &__column {
-            padding: $m-padding;
+            &:not(.m--no-padding) {
+                padding: $m-padding;
+            }
         }
     }
 }
@@ -142,7 +146,9 @@ $m-template--column-color: $m-color--grey-light;
     .m-template {
         &__body,
         &__column {
-            padding: $m-padding--l;
+            &:not(.m--no-padding) {
+                padding: $m-padding--l;
+            }
         }
 
         &__header {
