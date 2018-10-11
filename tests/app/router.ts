@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
 
-import Meta from '../../src/meta/meta';
 import { Attributes } from './attributes/attributes';
 import { MediaQueriesTest } from './media-queries/media-queries';
+import { getComponentsNames, getDirectiveNames, getFiltersNames } from './names-loader';
 import { Navigation } from './navigation/navigation';
-import { Viewer } from './viewer';
+import { Viewer } from './viewer/viewer';
 
 Vue.use(Router);
 
@@ -28,9 +28,25 @@ const routerFactory: () => Router = () => {
         }
     ];
 
-    Meta.getTags().forEach(tag => {
+    getComponentsNames().forEach(tag => {
         componentRoutes.push({
-            path: '/' + tag,
+            path: '/components/' + tag,
+            meta: tag,
+            component: Viewer
+        });
+    });
+
+    getDirectiveNames().forEach(tag => {
+        componentRoutes.push({
+            path: '/directives/' + tag,
+            meta: tag,
+            component: Viewer
+        });
+    });
+
+    getFiltersNames().forEach(tag => {
+        componentRoutes.push({
+            path: '/filters/' + tag,
             meta: tag,
             component: Viewer
         });

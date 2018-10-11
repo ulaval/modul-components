@@ -23,6 +23,7 @@
 
         &.m--is-close-on-backdrop {
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         &.m--is-origin {

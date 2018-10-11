@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 
-import { MModal } from '../../components/modal/modal';
+import { MDialog } from '../../components/dialog/dialog';
 
 export interface ConfirmOptions {
     okLabel?: string;
@@ -10,11 +10,11 @@ export interface ConfirmOptions {
 
 export type ConfirmFunction = (message: string, options?: ConfirmOptions) => Promise<any>;
 
-let confirmInstance: MModal | undefined = undefined;
+let confirmInstance: MDialog | undefined = undefined;
 
 export const confirmFunction: ConfirmFunction = (message: string, options?: ConfirmOptions) => {
     if (!confirmInstance) {
-        confirmInstance = new MModal({
+        confirmInstance = new MDialog({
             el: document.createElement('div')
         });
 
@@ -65,7 +65,7 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
                 hook();
             });
         } else {
-            console.error('No instance of modal dialog');
+            console.error('No instance of dialog');
             reject();
         }
     });
