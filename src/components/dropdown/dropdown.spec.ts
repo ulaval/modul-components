@@ -8,15 +8,6 @@ import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import DropdownPlugin, { MDropdown } from './dropdown';
 
-
-
-
-
-
-
-
-
-
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
 
