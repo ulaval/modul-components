@@ -116,12 +116,6 @@ $m-template--column-color: $m-color--grey-light;
             flex: 0 0 $m-template--column-width;
         }
     }
-
-    &:not(.m--is-eq-max-s) {
-        .m-template__column {
-            max-width: $m-template--column-width;
-        }
-    }
 }
 
 @media (max-width: $m-mq--max--xs) {

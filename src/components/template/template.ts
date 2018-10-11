@@ -13,26 +13,6 @@ import WithRender from './template.html?style=./template.scss';
 export class MTemplate extends Vue {
     @Prop()
     public footerFullWidth: boolean;
-
-    private get hasHeaderSlot(): boolean {
-        return !!this.$slots.header;
-    }
-
-    private get hasSubHeaderSlot(): boolean {
-        return !!this.$slots.subHeader;
-    }
-
-    private get hasDefaultSlot(): boolean {
-        return !!this.$slots.default;
-    }
-
-    private get hasColumnSlot(): boolean {
-        return !!this.$slots.column;
-    }
-
-    private get hasFooterSlot(): boolean {
-        return !!this.$slots.footer;
-    }
 }
 
 const TemplatePlugin: PluginObject<any> = {
