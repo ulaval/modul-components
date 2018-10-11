@@ -27,12 +27,34 @@ export class MEditWindow extends ModulVue {
     @Prop({ default: false })
     public disableSaveButton: boolean;
 
+    public $refs: {
+        dialogWrap: HTMLElement,
+        header: HTMLElement,
+        body: HTMLElement,
+        footer: HTMLElement,
+        article: Element
+    };
+
     protected mounted(): void {
         this.as<Portal>().transitionDuration = PortalTransitionDuration.Regular + PortalTransitionDuration.XSlow;
     }
 
-    public get popupBody(): any {
+    private get popupBody(): any {
         return (this.$refs.article as Element).querySelector('.m-popup__body');
+    }
+
+    private get isAndroid(): boolean {
+        return /(android)/i.test(window.navigator.userAgent);
+    }
+
+    private handleFooter(event): void {
+        if (this.isAndroid) {
+            if (event.type === 'focusin') {
+                this.$refs.body.style.paddingBottom = '50%';
+            } else if (event.type === 'focusout') {
+                this.$refs.body.style.paddingBottom = '0';
+            }
+        }
     }
 
     private handlesFocus(): boolean {

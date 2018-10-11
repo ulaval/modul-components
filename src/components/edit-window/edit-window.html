@@ -8,7 +8,7 @@
                  ref="dialogWrap"
                  v-show="propOpen" v-if="portalMounted">
                 <section class="m-edit-window__article" ref="article">
-                    <header class="m-edit-window__header"
+                    <header class="m-edit-window__header" ref="header"
                             :class="{'m--no-padding': !padding || !paddingHeader}">
                         <div class="m-edit-window__header__left">
                             <slot name="header"></slot>
@@ -17,11 +17,11 @@
                             <slot name="header-right"></slot>
                         </div>
                     </header>
-                    <div class="m-edit-window__body"
+                    <div class="m-edit-window__body" ref="body" @focusin="handleFooter" @focusout="handleFooter"
                          :class="{ 'm--no-padding': !padding || !paddingBody }">
                         <slot></slot>
                     </div>
-                    <footer class="m-edit-window__footer"
+                    <footer class="m-edit-window__footer" ref="footer"
                             :class="{ 'm--no-padding': !padding || !paddingFooter }">
                         <slot name="footer">
                             <div>
