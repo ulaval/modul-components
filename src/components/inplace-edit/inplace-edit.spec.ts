@@ -212,7 +212,7 @@ describe('Component inplace-edit - Complete component mobile', () => {
                 readMode: READ_SLOT
             },
             stubs: {
-                'm-edit-window': '<div><slot></slot></div>'
+                'm-overlay': '<div><slot></slot></div>'
             }
         });
     });
@@ -235,13 +235,13 @@ describe('Component inplace-edit - Complete component mobile', () => {
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
-        it(`should close on edit-window cancel`, () => {
-            wrapper.find({ ref : 'editWindow' }).vm.$emit('close');
+        it(`should close on overlay cancel`, () => {
+            wrapper.find({ ref : 'overlay' }).vm.$emit('close');
             expect(wrapper.emitted().cancel).toBeTruthy();
         });
 
-        it(`should ok on edit-window save`, () => {
-            wrapper.find({ ref : 'editWindow' }).vm.$emit('save');
+        it(`should ok on overlay save`, () => {
+            wrapper.find({ ref : 'overlay' }).vm.$emit('save');
             expect(wrapper.emitted().ok).toBeTruthy();
         });
     });

@@ -24,11 +24,11 @@
         </transition>
     </template>
     <template v-if="!isMqMinS">
-        <m-edit-window ref="editWindow" :open="propEditMode" @close="cancel" @save="confirm">
+        <m-overlay ref="overlay" :open="propEditMode" @close="cancel" @save="confirm">
             <h2 class="m-edit-inplace__title" slot="header">{{ title }}</h2>
             <form>
                 <slot name="editMode"></slot>
             </form>
-        </m-edit-window>
+        </m-overlay>
     </template>
 </div>
