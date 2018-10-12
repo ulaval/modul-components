@@ -16,6 +16,14 @@ export enum MDialogWidth {
     Large = 'large'
 }
 
+export enum MDialogState {
+    Default = 'default',
+    Warning = 'warning',
+    Confirmation = 'confirmation',
+    Info = 'info',
+    Error = 'error'
+}
+
 @WithRender
 @Component({
     mixins: [Portal]
@@ -25,13 +33,17 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public title: string;
     @Prop()
     public message: string;
+    @Prop({ default: false })
+    public hint: boolean;
     @Prop()
     public okLabel: string | undefined;
     @Prop()
     public okPrecision: string | undefined;
     @Prop()
     public cancelLabel: string | undefined;
-    @Prop({ default: true })
+    @Prop()
+    public cancelPrecision: string | undefined;
+    @Prop({ default: false })
     public negativeLink: boolean;
     @Prop({
         default: MDialogWidth.Default,
@@ -40,6 +52,17 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
             value === MDialogWidth.Large
     })
     public width: string;
+
+    @Prop({
+        default: MDialogState.Default,
+        validator: value =>
+            value === MDialogState.Default ||
+            value === MDialogState.Warning ||
+            value === MDialogState.Confirmation ||
+            value === MDialogState.Info ||
+            value === MDialogState.Error
+    })
+    public type: string;
 
     public handlesFocus(): boolean {
         return true;

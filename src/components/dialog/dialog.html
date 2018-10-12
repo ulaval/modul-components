@@ -28,6 +28,11 @@
                                 <m-i18n v-else k="m-dialog:ok"></m-i18n>
                                 <template slot="precision" v-if="hasOkPrecision">{{ okPrecision }}</template>
                             </m-button>
+                            <m-button @click="onOk()" skin="secondary" isRegularSize="true">
+                                <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
+                                <m-i18n v-else k="m-dialog:close"></m-i18n>
+                                <template slot="precision" v-if="hasCancelPrecision">{{ cancelPrecision }}</template>
+                            </m-button>
                             <m-link mode="button" @click="onCancel()" v-if="negativeLink">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
                                 <m-i18n v-else k="m-dialog:cancel"></m-i18n>

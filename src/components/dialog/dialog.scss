@@ -143,5 +143,14 @@ $m-dialog--max-width--l: 500px !default;
                 margin-top: $m-margin;
             }
         }
+
+        .m-button {
+            min-width: 226px;
+
+            + .m-button {
+                margin-top: $m-spacing--s;
+            }
+        }
     }
 }
+
