@@ -15,9 +15,8 @@
                         <h2>{{ title }}</h2>
                     </header>
                     <div class="m-dialog__body">
-                        <div v-if="hasHint">
+                        <!--Condition to add here for state prop-->
                             <m-message class="m-u--margin-top--l" skin="page-light" type="error"></m-message>
-                        </div>
                         <div v-if="hasDefaultSlot || hasMessage">
                             <p v-if="hasMessage" v-html="message"></p>
                             <slot></slot>
