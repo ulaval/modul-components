@@ -30,11 +30,11 @@
             {{'m-message:close' | f-m-i18n}}
         </m-icon-button>
     </div>
-    <m-error-template class="m-message__page"
+    <m-message-page class="m-message__page"
                     v-else
                     :state="state"
                     :skin="skinPageValue"
                     :title="title">
         <slot></slot>
-    </m-error-template>
+    </m-message-page>
 </div>

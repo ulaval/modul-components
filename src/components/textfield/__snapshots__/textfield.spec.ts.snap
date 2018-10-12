@@ -5,7 +5,7 @@ exports[`MTextfield should render correctly 1`] = `
     <div class="m-input-style m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <input id="mTextfield-uuid" maxlength="Infinity" value="" class="m-textfield__input"> </div>
+                <input id="mTextfield-uuid" maxlength="Infinity" type="text" value="" class="m-textfield__input"> </div>
             <div class="m-input-style__body__right"></div>
         </div>
     </div>
