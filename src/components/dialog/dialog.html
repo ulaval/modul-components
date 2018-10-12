@@ -3,26 +3,34 @@
     <portal :target-el="portalTargetSelector" v-if="portalCreated">
         <transition name="m--is">
             <div class="m-dialog__wrap"
-                    :class="[{ 'm--is-disabled': disabled }, className ]"
-                    v-show="propOpen"
-                    v-if="portalMounted"
-                    ref="modalWrap">
+                 :class="[{ 'm--is-disabled': disabled }, className ]"
+                 v-show="propOpen"
+                 v-if="portalMounted"
+                 ref="modalWrap">
                 <article class="m-dialog__article"
-                            :class="{ 'm--has-width-large': hasWidthLarge }"
-                            ref="article">
+                         :class="{ 'm--has-width-large': hasWidthLarge }"
+                         ref="article">
                     <header class="m-dialog__header"
                             v-if="hasTitle">
                         <h2>{{ title }}</h2>
                     </header>
-                    <div class="m-dialog__body"
-                            v-if="hasDefaultSlot || hasMessage">
-                        <p v-if="hasMessage" v-html="message"></p>
-                        <slot></slot>
+                    <div class="m-dialog__body">
+                        <div v-if="hasHint">
+                            <m-message class="m-u--margin-top--l" skin="page-light" type="error"></m-message>
+                        </div>
+                        <div v-if="hasDefaultSlot || hasMessage">
+                            <p v-if="hasMessage" v-html="message"></p>
+                            <slot></slot>
+                        </div>
+                        <div v-if="hasHint">
+                            <!--Using error state temporarily for testing purposes-->
+                            <m-message state="error" skin="default" icon="true" closeButton="false" visible="true">{{ hint }}</m-message>
+                        </div>
                     </div>
                     <footer class="m-dialog__footer">
                         <slot name="footer"></slot>
                         <nav class="m-dialog__footer__nav"
-                                v-if="!hasFooterSlot">
+                             v-if="!hasFooterSlot">
                             <m-button @click="onOk()">
                                 <template v-if="hasOkLabel">{{ okLabel }}</template>
                                 <m-i18n v-else k="m-dialog:ok"></m-i18n>

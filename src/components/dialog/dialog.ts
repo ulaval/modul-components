@@ -9,6 +9,7 @@ import ButtonPlugin from '../button/button';
 import { DIALOG_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import MessagePlugin, { MMessageState } from '../message/message';
 import WithRender from './dialog.html?style=./dialog.scss';
 
 export enum MDialogWidth {
@@ -33,8 +34,8 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public title: string;
     @Prop()
     public message: string;
-    @Prop({ default: false })
-    public hint: boolean;
+    @Prop()
+    public hint: string;
     @Prop()
     public okLabel: string | undefined;
     @Prop()
@@ -62,7 +63,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
             value === MDialogState.Info ||
             value === MDialogState.Error
     })
-    public type: string;
+    public type: MMessageState;
 
     public handlesFocus(): boolean {
         return true;
@@ -106,6 +107,10 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return !!this.message;
     }
 
+    private get hasHint(): boolean {
+        return !!this.hint;
+    }
+
     private get hasOkLabel(): boolean {
         return !!this.okLabel;
     }
@@ -116,6 +121,10 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     private get hasCancelLabel(): boolean {
         return !!this.cancelLabel;
+    }
+
+    private get hasCancelPrecision(): boolean {
+        return !!this.cancelPrecision;
     }
 
     private get hasWidthLarge(): boolean {
@@ -129,6 +138,7 @@ const DialogPlugin: PluginObject<any> = {
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.use(PortalPlugin);
+        v.use(MessagePlugin);
         v.component(DIALOG_NAME, MDialog);
     }
 };
