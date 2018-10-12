@@ -3,23 +3,21 @@
 exports[`Component inplace-edit - Complete component mobile when in editMode should render correctly 1`] = `
 <div class="m-inplace-edit">
     <div class="readSlot">readSlot</div>
-    <m-edit-window open="open">
-        <h2 slot="header" class="m-edit-inplace__title">Modify</h2>
+    <div open="open">
         <form>
             <input type="text" name="inputEditMode" value="myInput" class="editSlot">
         </form>
-    </m-edit-window>
+    </div>
 </div>
 `;
 
 exports[`Component inplace-edit - Complete component mobile when in editMode should render correctly in waiting mode 1`] = `
 <div class="m-inplace-edit">
     <div class="readSlot">readSlot</div>
-    <m-edit-window open="open">
-        <h2 slot="header" class="m-edit-inplace__title">Modify</h2>
+    <div open="open">
         <form>
             <input type="text" name="inputEditMode" value="myInput" class="editSlot">
         </form>
-    </m-edit-window>
+    </div>
 </div>
 `;

@@ -212,7 +212,7 @@ describe('Component inplace-edit - Complete component mobile', () => {
                 readMode: READ_SLOT
             },
             stubs: {
-                'm-dialog': '<div><slot></slot></div>'
+                'm-edit-window': '<div><slot></slot></div>'
             }
         });
     });
@@ -233,6 +233,16 @@ describe('Component inplace-edit - Complete component mobile', () => {
         it('should render correctly in waiting mode', () => {
             wrapper.setProps({ waiting: 'true' });
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+
+        it(`should close on edit-window cancel`, () => {
+            wrapper.find({ ref : 'editWindow' }).vm.$emit('close');
+            expect(wrapper.emitted().cancel).toBeTruthy();
+        });
+
+        it(`should ok on edit-window save`, () => {
+            wrapper.find({ ref : 'editWindow' }).vm.$emit('save');
+            expect(wrapper.emitted().ok).toBeTruthy();
         });
     });
 });

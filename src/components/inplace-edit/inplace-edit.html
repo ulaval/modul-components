@@ -24,7 +24,7 @@
         </transition>
     </template>
     <template v-if="!isMqMinS">
-        <m-edit-window :open="propEditMode" @close="cancel" @save="confirm">
+        <m-edit-window ref="editWindow" :open="propEditMode" @close="cancel" @save="confirm">
             <h2 class="m-edit-inplace__title" slot="header">{{ title }}</h2>
             <form>
                 <slot name="editMode"></slot>
