@@ -10,10 +10,11 @@ import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 let propsData: { propsData: { editMode: boolean } };
 
 let inplaceEdit: MInplaceEdit;
-let wrapper: Wrapper<ModulVue>;
+let wrapper: Wrapper<MInplaceEdit>;
 
 const CANCEL_EVENT: string = 'cancel';
 const CONFIRM_EVENT: string = 'ok';
+const REF_OVERLAY: object = { ref : 'overlay' };
 
 const READ_SLOT_CLASS: string = 'readSlot';
 const READ_SLOT: string = '<div class="' + READ_SLOT_CLASS + '">readSlot</div>';
@@ -195,7 +196,6 @@ describe('Component inplace-edit - Complete component by default', () => {
 });
 
 describe('Component inplace-edit - Complete component mobile', () => {
-    let wrapper: Wrapper<ModulVue>;
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
@@ -235,14 +235,26 @@ describe('Component inplace-edit - Complete component mobile', () => {
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
-        it(`should close on overlay cancel`, () => {
-            wrapper.find({ ref : 'overlay' }).vm.$emit('close');
-            expect(wrapper.emitted().cancel).toBeTruthy();
+        it(`should cancel on overlay close`, () => {
+            // given
+            wrapper.setMethods({ cancel: jest.fn() });
+
+            // when
+            wrapper.find(REF_OVERLAY).vm.$emit('close');
+
+            // then
+            expect(wrapper.vm.cancel).toHaveBeenCalledWith();
         });
 
-        it(`should ok on overlay save`, () => {
-            wrapper.find({ ref : 'overlay' }).vm.$emit('save');
-            expect(wrapper.emitted().ok).toBeTruthy();
+        it(`should confirm on overlay save`, () => {
+            // given
+            wrapper.setMethods({ confirm: jest.fn() });
+
+            // when
+            wrapper.find(REF_OVERLAY).vm.$emit('save');
+
+            // then
+            expect(wrapper.vm.confirm).toHaveBeenCalledWith();
         });
     });
 });
