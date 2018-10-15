@@ -1,7 +1,7 @@
 <div style="width: 600px;">
     <m-table :rows-max="5" :data="data" :headers="headers">
         <template slot="name" scope="{value}">
-            <m-button>{{ value.name }}</m-button>
+            <m-link>{{ value.name }}</m-link>
         </template>
         <template slot="age" scope="{value}">
             {{ value.age }}

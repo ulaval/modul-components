@@ -20,7 +20,8 @@ export class MTableSandbox extends Vue {
         },
         {
             slot: 'username',
-            title: 'Username'
+            title: 'Username',
+            width: '35%'
         },
         {
             slot: 'menu',

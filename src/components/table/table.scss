@@ -2,13 +2,21 @@
 
 .m-table {
     width: 100%;
+    border: $m-border-width--s solid $m-color--grey-lighter;
 
     thead {
         text-align: left;
     }
 
-    tr:nth-child(even) {
-        background: $m-color--grey-lightest;
-        border: none;
+    tr {
+        &:nth-child(even) {
+            background: $m-color--grey-lightest;
+            border: none;
+        }
+
+        td,
+        th {
+            padding: 5px 10px;
+        }
     }
 }
