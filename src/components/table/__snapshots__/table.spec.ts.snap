@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MTable Given a table full of data When the rowsMax < data.length Should render correctly 1`] = `
+exports[`MTable Given a table full of data When rowsMax < data.length Should render correctly 1`] = `
 <table cellspacing="0" class="m-table">
     <thead>
         <tr>
@@ -21,7 +21,7 @@ exports[`MTable Given a table full of data When the rowsMax < data.length Should
 </table>
 `;
 
-exports[`MTable Given a table full of data When the rowsMax > data.length Should render correctly 1`] = `
+exports[`MTable Given a table full of data When rowsMax > data.length Should render correctly 1`] = `
 <table cellspacing="0" class="m-table">
     <thead>
         <tr>

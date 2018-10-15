@@ -6,14 +6,16 @@ let data: any[];
 let headers: TableHeader[];
 let rowsMax: number;
 
+const width: string = '10%';
+const data1: any = { data: '1' };
+
 const DATA_WITH_4_ROWS: any[] = [
-    { data: '1' },
+    data1,
     { data: '2' },
     { data: '3' },
     { data: '4' }
 ];
 
-const width: string = '10%';
 const HEADER_WITH_WIDTH: TableHeader = {
     slot: 'test',
     title: 'Test',
@@ -107,6 +109,16 @@ describe(`MTable`, () => {
 
             it(`Then show a number of rows equal to the legnth of data`, () => {
                 expect(wrapper.vm.propRows).toEqual(4);
+            });
+
+        });
+
+        describe(`When looping the data`, () => {
+
+            it(`Then should return the right data`, () => {
+                initializeShallowWrapper();
+
+                expect(wrapper.vm.getDataValue(1)).toEqual(data1);
             });
 
         });

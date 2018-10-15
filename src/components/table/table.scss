@@ -6,6 +6,11 @@
 
     thead {
         text-align: left;
+        background: $m-color--grey-lighter;
+
+        th {
+            padding: $m-padding--s;
+        }
     }
 
     tr {
@@ -14,9 +19,8 @@
             border: none;
         }
 
-        td,
-        th {
-            padding: 5px 10px;
+        td {
+            padding: $m-padding--xs $m-padding--s;
         }
     }
 }

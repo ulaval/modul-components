@@ -27,6 +27,10 @@ export class MTable extends ModulVue {
 
     private rows: number = 0;
 
+    public getDataValue(row: number): any {
+        return this.data[row - 1];
+    }
+
     public getWidth(header: TableHeader): { width: string } {
         return {
             width: header.width ? header.width : ''

@@ -7,7 +7,7 @@
     <tbody>
         <tr v-for="row in propRows" :key="row">
             <td v-for="header in headers">
-                <slot :name="header.slot" :value="data[row - 1]"></slot>
+                <slot :name="header.slot" :value="getDataValue(row)"></slot>
             </td>
         </tr>
     </tbody>
