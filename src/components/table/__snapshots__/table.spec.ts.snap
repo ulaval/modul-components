@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTable Given a table full of data When the rowsMax < data.length Should render correctly 1`] = `
+<table cellspacing="0" class="m-table">
+    <thead>
+        <tr>
+            <th style="width:10%;">Test</th>
+            <th style="width:;">Test2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+`;
+
+exports[`MTable Given a table full of data When the rowsMax > data.length Should render correctly 1`] = `
+<table cellspacing="0" class="m-table">
+    <thead>
+        <tr>
+            <th style="width:10%;">Test</th>
+            <th style="width:;">Test2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+`;

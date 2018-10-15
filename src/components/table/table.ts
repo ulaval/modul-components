@@ -17,7 +17,7 @@ export interface TableHeader {
 export class MTable extends ModulVue {
 
     @Prop({ default: () => [] })
-    headers: any[];
+    headers: TableHeader[];
 
     @Prop({ default: () => [] })
     data: any[];
@@ -27,21 +27,21 @@ export class MTable extends ModulVue {
 
     private rows: number = 0;
 
-    protected created(): void {
-        this.propRows = (this.data.length <= this.rowsMax) ? this.data.length : this.rowsMax;
-    }
-
-    protected getWidth(header: TableHeader): { width: string } {
+    public getWidth(header: TableHeader): { width: string } {
         return {
             width: header.width ? header.width : ''
         };
     }
 
-    get propRows(): number {
+    protected created(): void {
+        this.propRows = (this.data.length <= this.rowsMax) ? this.data.length : this.rowsMax;
+    }
+
+    public get propRows(): number {
         return this.rows;
     }
 
-    set propRows(rows: number) {
+    public set propRows(rows: number) {
         this.rows = rows;
     }
 
