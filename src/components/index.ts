@@ -104,12 +104,11 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(CheckboxPlugin);
         Vue.use(DatefieldsPlugin);
         Vue.use(DatepickerPlugin);
-        Vue.use(ModalPlugin);
+        Vue.use(DialogPlugin);
         Vue.use(DropdownPlugin);
         Vue.use(DropdownItemPlugin);
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
-        Vue.use(Overlay);
         Vue.use(ErrorAccessDenied);
         Vue.use(ErrorBrowserNotSupported);
         Vue.use(ErrorConfigNotSupported);
@@ -131,7 +130,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ListItemPlugin);
         Vue.use(LoginPlugin);
         Vue.use(MessagePlugin);
-        Vue.use(DialogPlugin);
+        Vue.use(ModalPlugin);
         Vue.use(NavbarPlugin);
         Vue.use(NavbarItemPlugin);
         Vue.use(OptionPlugin);
@@ -142,6 +141,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(OptionItemDeletePlugin);
         Vue.use(OptionItemEditPlugin);
         Vue.use(OptionItemPlugin);
+        Vue.use(Overlay);
         Vue.use(PageNotFoundPlugin);
         Vue.use(PanelPlugin);
         Vue.use(PhoneNumberPlugin);
