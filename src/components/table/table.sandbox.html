@@ -1,0 +1,19 @@
+<div style="width: 600px;">
+    <m-table :rows-max="5" :data="data" :headers="headers">
+        <template slot="name" scope="{value}">
+            <m-button>{{ value.name }}</m-button>
+        </template>
+        <template slot="age" scope="{value}">
+            {{ value.age }}
+        </template>
+        <template slot="username" scope="{value}">
+            {{ value.username }}
+        </template>
+        <template slot="menu" scope="{value}">
+            <m-option>
+                <m-option-item-edit @click="editData(value.id)"></m-option-item-edit>
+                <m-option-item-delete @click="deleteData(value.id)"></m-option-item-delete>
+            </m-option>
+        </template>
+    </m-table>
+</div>

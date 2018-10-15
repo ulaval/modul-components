@@ -1,0 +1,14 @@
+@import '../../styles/abstracts/variables';
+
+.m-table {
+    width: 100%;
+
+    thead {
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background: $m-color--grey-lightest;
+        border: none;
+    }
+}

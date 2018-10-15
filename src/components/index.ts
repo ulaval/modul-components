@@ -72,6 +72,7 @@ import StepPlugin from './step/step';
 import SteppersItemPlugin from './steppers-item/steppers-item';
 import SteppersPlugin from './steppers/steppers';
 import SwitchPlugin from './switch/switch';
+import TablePlugin from './table/table';
 import TabPanelPlugin from './tab-panel/tab-panel';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
@@ -176,6 +177,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TreePlugin);
         Vue.use(TreeIconPlugin);
         Vue.use(TreeNodePlugin);
+        Vue.use(TablePlugin);
     }
 };
 

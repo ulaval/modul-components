@@ -1,0 +1,15 @@
+<table class="m-table" cellspacing="0">
+    <thead>
+        <tr>
+            <th v-for="header in headers" :style="getWidth(header)">{{ header.title }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr v-for="row in propRows" :key="row">
+            <td v-for="header in headers">
+                <slot :name="header.slot" :value="data[row - 1]"></slot>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
