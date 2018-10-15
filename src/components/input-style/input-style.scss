@@ -222,6 +222,8 @@ $m-input-style--padding: 4px !default;
 
     &__required-marker {
         color: $m-color--accent;
+        font-size: inherit;
+        font-weight: $m-font-weight--black;
         margin-left: 2px;
     }
 

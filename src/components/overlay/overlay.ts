@@ -4,14 +4,14 @@ import { Prop } from 'vue-property-decorator';
 
 import { BackdropMode, Portal, PortalMixin, PortalTransitionDuration } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
-import { EDIT_WINDOW_NAME } from '../component-names';
-import WithRender from './edit-window.html?style=./edit-window.scss';
+import { OVERLAY_NAME } from '../component-names';
+import WithRender from './overlay.html?style=./overlay.scss';
 
 @WithRender
 @Component({
     mixins: [Portal]
 })
-export class MEditWindow extends ModulVue {
+export class MOverlay extends ModulVue {
 
     @Prop({ default: true })
     public focusManagement: boolean;
@@ -27,12 +27,34 @@ export class MEditWindow extends ModulVue {
     @Prop({ default: false })
     public disableSaveButton: boolean;
 
+    public $refs: {
+        dialogWrap: HTMLElement,
+        header: HTMLElement,
+        body: HTMLElement,
+        footer: HTMLElement,
+        article: Element
+    };
+
     protected mounted(): void {
         this.as<Portal>().transitionDuration = PortalTransitionDuration.Regular + PortalTransitionDuration.XSlow;
     }
 
-    public get popupBody(): any {
+    private get popupBody(): any {
         return (this.$refs.article as Element).querySelector('.m-popup__body');
+    }
+
+    private get isAndroid(): boolean {
+        return /(android)/i.test(window.navigator.userAgent);
+    }
+
+    private handleFooter(event): void {
+        if (this.isAndroid) {
+            if (event.type === 'focusin') {
+                this.$refs.body.style.paddingBottom = '50%';
+            } else if (event.type === 'focusout') {
+                this.$refs.body.style.paddingBottom = '0';
+            }
+        }
     }
 
     private handlesFocus(): boolean {
@@ -77,10 +99,10 @@ export class MEditWindow extends ModulVue {
     }
 }
 
-const FullpagePlugin: PluginObject<any> = {
+const OverlayPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(EDIT_WINDOW_NAME, MEditWindow);
+        v.component(OVERLAY_NAME, MOverlay);
     }
 };
 
-export default FullpagePlugin;
+export default OverlayPlugin;

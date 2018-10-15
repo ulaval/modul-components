@@ -2,35 +2,37 @@
     <slot name="trigger"></slot>
     <portal :target-el="portalTargetSelector" v-if="portalCreated">
         <transition name="m--is">
-            <div v-show="propOpen" v-if="portalMounted"
-                 class="m-dialog__wrap m--is-dialog"
-                 :class="[{ 'm--is-small': sizeSmall,
-                            'm--is-large': sizeLarge,
-                            'm--is-full-screen': sizeFullSceen,
-                            'm--has-body-max-width': bodyMaxWidth,
-                            'm--is-close-on-backdrop': closeOnBackdrop,
-                            'm--is-disabled':disabled }, className ]"
-                 @click.self="backdropClick()"
-                 ref="dialogWrap">
-                <article class="m-dialog__article" ref="article">
+            <div class="m-dialog__wrap"
+                    :class="[{ 'm--is-disabled': disabled }, className ]"
+                    v-show="propOpen"
+                    v-if="portalMounted"
+                    ref="modalWrap">
+                <article class="m-dialog__article"
+                            :class="{ 'm--has-width-large': hasWidthLarge }"
+                            ref="article">
                     <header class="m-dialog__header"
-                            :class="{ 'm--has-title': hasTitle,
-                                    'm--has-content': hasHeader,
-                                    'm--no-padding': !padding || !paddingHeader }">
-                        <h2 v-if="hasTitle">{{ title }}</h2>
-                        <slot name="header"></slot>
-                        <m-icon-button @click="closeDialog()" icon-name="m-svg__close-clear" skin="dark" class="m-dialog__header__close-button" :title="closeTitle"></m-icon-button>
+                            v-if="hasTitle">
+                        <h2>{{ title }}</h2>
                     </header>
-                    <div class="m-dialog__body" ref="body"
-                         :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
+                    <div class="m-dialog__body"
+                            v-if="hasDefaultSlot || hasMessage">
+                        <p v-if="hasMessage" v-html="message"></p>
                         <slot></slot>
                     </div>
-                    <footer class="m-dialog__footer"
-                            :class="{ 'm--no-padding': !padding || !paddingFooter }"
-                            v-if="hasFooterSlot">
-                        <div>
-                            <slot name="footer"></slot>
-                        </div>
+                    <footer class="m-dialog__footer">
+                        <slot name="footer"></slot>
+                        <nav class="m-dialog__footer__nav"
+                                v-if="!hasFooterSlot">
+                            <m-button @click="onOk()">
+                                <template v-if="hasOkLabel">{{ okLabel }}</template>
+                                <m-i18n v-else k="m-dialog:ok"></m-i18n>
+                                <template slot="precision" v-if="hasOkPrecision">{{ okPrecision }}</template>
+                            </m-button>
+                            <m-link mode="button" @click="onCancel()" v-if="negativeLink">
+                                <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
+                                <m-i18n v-else k="m-dialog:cancel"></m-i18n>
+                            </m-link>
+                        </nav>
                     </footer>
                 </article>
             </div>

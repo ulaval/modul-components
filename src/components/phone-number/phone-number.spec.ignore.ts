@@ -331,7 +331,7 @@
 //             Vue.nextTick(() => {
 //                 (vm as any).visible = false;
 //                 Vue.nextTick(() => {
-//                     (vm as any).modal = true;
+//                     (vm as any).dialog = true;
 //                     Vue.nextTick(() => {
 //                         (vm as any).visible = true;
 //                         Vue.nextTick(() => {
