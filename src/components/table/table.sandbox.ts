@@ -2,7 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 
 import { TABLE_NAME } from '../component-names';
-import WithRender from './table.sandbox.html';
+import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 import { TableHeader } from './table';
 
 @WithRender
