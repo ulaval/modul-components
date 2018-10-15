@@ -140,6 +140,12 @@ export class MFileUpload extends ModulVue {
         }
     }
 
+    private onPortalContentVisible(): void {
+        ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
+            this.$refs.modal.$refs.modalWrap.addEventListener(evt, defaultDragEvent);
+        });
+    }
+
     private onMessageClose(): void {
         for (const f of this.rejectedFiles) {
             this.$file.remove(f.uid, this.storeName);
@@ -175,7 +181,7 @@ export class MFileUpload extends ModulVue {
         Vue.nextTick(() => {
             Vue.nextTick(() => {
                 ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
-                    this.$refs.modal.$refs.modalWrap.addEventListener(evt, defaultDragEvent);
+                    // this.$refs.modal.$refs.modalWrap.addEventListener(evt, defaultDragEvent);
                 });
             });
         });
