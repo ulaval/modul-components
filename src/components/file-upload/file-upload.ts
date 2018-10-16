@@ -140,6 +140,12 @@ export class MFileUpload extends ModulVue {
         }
     }
 
+    private onPortalContentVisible(): void {
+        this.dropEvents.forEach((evt) => {
+            this.$refs.modal.$refs.modalWrap.addEventListener(evt, defaultDragEvent);
+        });
+    }
+
     private onMessageClose(): void {
         for (const f of this.rejectedFiles) {
             this.$file.remove(f.uid, this.storeName);
@@ -171,14 +177,6 @@ export class MFileUpload extends ModulVue {
         this.$emit('open');
         this.propOpen = true;
         this.updateValidationOptions();
-        // We need 2 nextTick to be able to have the wrap element in the DOM - MODUL-118
-        Vue.nextTick(() => {
-            Vue.nextTick(() => {
-                ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
-                    this.$refs.modal.$refs.modalWrap.addEventListener(evt, defaultDragEvent);
-                });
-            });
-        });
     }
 
     private onClose(): void {
@@ -188,7 +186,7 @@ export class MFileUpload extends ModulVue {
             .filter(f => f.status === MFileStatus.UPLOADING)
             .forEach(this.onUploadCancel);
         this.$file.clear(this.storeName);
-        ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
+        this.dropEvents.forEach((evt) => {
             this.$refs.modal.$refs.modalWrap.removeEventListener(evt, defaultDragEvent);
         });
     }
@@ -323,6 +321,10 @@ export class MFileUpload extends ModulVue {
 
     private get multipleSelection(): boolean {
         return this.propMaxFiles !== undefined && this.propMaxFiles > 1;
+    }
+
+    private get dropEvents(): string[] {
+        return ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'];
     }
 }
 
