@@ -3,7 +3,7 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
-import { Link } from '../error-template/error-template';
+import { Link } from '../message-page/message-page';
 import WithRender from './error-technical-difficulty.sandbox.html';
 
 @WithRender

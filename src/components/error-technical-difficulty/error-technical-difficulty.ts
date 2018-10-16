@@ -6,10 +6,10 @@ import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import MessagePlugin from '../message/message';
+import MessagePlugin, { MMessageState } from '../message/message';
 import PanelPlugin from '../panel/panel';
 import WithRender from './error-technical-difficulty.html?style=./error-technical-difficulty.scss';
 
@@ -57,7 +57,7 @@ export class MErrorTechnicalDifficulty extends ModulVue {
     @Prop()
     public error?: Error;
 
-    public skin: string = MErrorTemplateSkin.Error;
+    public state: string = MMessageState.Error;
 
     public svgName: string = 'm-svg__error-technical-difficulty';
 
@@ -99,7 +99,7 @@ const ErrorTechnicalDifficultyPlugin: PluginObject<any> = {
         v.use(LinkPlugin);
         v.use(MessagePlugin);
         v.use(PanelPlugin);
-        v.use(ErrorTemplatePlugin);
+        v.use(MessagePagePlugin);
         v.component(ERROR_TECHNICAL_DIFFICULTY_NAME, MErrorTechnicalDifficulty);
     }
 };

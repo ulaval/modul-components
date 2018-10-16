@@ -1,10 +1,9 @@
 @import '../../styles/abstracts/variables';
-$m-modal--max-width: 380px !default;
-$m-modal--max-width--l: 500px !default;
+$m-modal--max-width--l: $m-max-width !default;
+$m-modal--max-width: 600px !default;
+$m-modal--max-width--s: 420px !default;
 
 .m-modal {
-    display: inline-block;
-
     &__wrap {
         position: fixed;
         top: 0;
@@ -13,90 +12,18 @@ $m-modal--max-width--l: 500px !default;
         left: 0;
         background: none;
         display: flex;
-        justify-content: center;
         align-items: center;
         outline: none;
         min-width: $m-min-width;
-        overflow: auto;
-        padding: $m-spacing--l;
+        overflow: hidden;
 
-        @include m-is-ie() {
-            display: block;
+        // MODUL-20, MODUL-87, ENA2-760
+        // the mq must stay sync with the component template and TS file
+        @media (min-width: $m-mq--min--s) {
+            justify-content: center;
         }
 
-        @media (max-width: $m-mq--max--s) {
-            padding-left: $m-spacing--s;
-            padding-right: $m-spacing--s;
-        }
-
-        &.m--is-enter-active,
-        &.m--is-leave-active {
-            transition-duration: $m-transition-duration;
-
-            .m-modal__article {
-                transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
-            }
-        }
-
-        &.m--is-enter,
-        &.m--is-leave-to {
-            .m-modal__article {
-                transform: translate3d(0, $m-padding--l, 0) scale(0.98);
-                opacity: 0;
-            }
-        }
-    }
-
-    &__article {
-        margin-top: auto;
-        margin-bottom: auto;
-        border-radius: $m-border-radius;
-        cursor: auto;
-        width: 100%;
-        max-width: $m-modal--max-width;
-        background: $m-color--white;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
-
-        @include m-is-ie() {
-            margin: 60px auto;
-        }
-
-        &.m--has-width-large {
-            max-width: $m-modal--max-width--l;
-        }
-    }
-
-    &__header,
-    &__body,
-    &__footer {
-        &.m--no-padding {
-            padding: 0;
-        }
-
-        > :first-child {
-            margin-top: 0;
-
-            > :first-child {
-                margin-top: 0;
-            }
-        }
-    }
-
-    &__body,
-    &__footer {
-        &:not(.m--no-padding) {
-            padding: $m-spacing--l $m-spacing;
-
-            @media (min-width: $m-mq--min--s) {
-                padding: $m-spacing--l $m-spacing--m;
-            }
-        }
-    }
-
-    &__header {
-        width: 100%;
-        border-bottom: 1px solid $m-color--border;
-
+        // doesn't work for slot content because of the scoped style... >_<
         h1,
         h2,
         h3,
@@ -107,41 +34,155 @@ $m-modal--max-width--l: 500px !default;
             font-size: $m-font-size--h4;
             font-weight: $m-font-weight--bold;
         }
+        ////////////////////////////////////////////
 
-        &:not(.m--no-padding) {
-            padding: $m-spacing $m-spacing;
+        @include m-is-ie() {
+            display: block;
+        }
 
-            @media (min-width: $m-mq--min--s) {
-                padding: $m-spacing $m-spacing--m;
+        &.m--is-close-on-backdrop {
+            cursor: pointer;
+        }
+
+        &.m--is-enter-active,
+        &.m--is-leave-active {
+            &.m--is-full-screen {
+                transition-duration: $m-transition-duration--xl;
             }
+
+            &:not(.m--is-full-screen) {
+                transition-duration: $m-transition-duration;
+            }
+        }
+
+        &.m--is-enter,
+        &.m--is-leave-to {
+            &:not(.m--is-full-screen) {
+                .m-modal__article {
+                    transform: translate3d(0, $m-padding--l, 0) scale(0.98);
+                    opacity: 0;
+                }
+            }
+
+            &.m--is-full-screen {
+                .m-modal__article {
+                    transform: translate3d(0, 110%, 0);
+                }
+            }
+        }
+
+        &:not(.m--is-full-screen) {
+            padding: $m-padding--l $m-padding--l 0 $m-padding--l;
+
+            .m-modal__article {
+                transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;
+                margin-top: auto;
+                margin-bottom: auto;
+                max-width: $m-modal--max-width;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        &.m--is-full-screen {
+            .m-modal__article {
+                transition: transform $m-transition-duration--xl ease;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: 0 !important; //style for IE
+            }
+        }
+
+        &.m--is-large {
+            .m-modal__article {
+                max-width: $m-modal--max-width--l;
+            }
+        }
+
+        &.m--is-small {
+            .m-modal__article {
+                max-width: $m-modal--max-width--s;
+            }
+        }
+
+        &.m--has-body-max-width {
+            .m-modal__body {
+                max-width: $m-max-width--l;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &__article {
+        cursor: auto;
+        width: 100%;
+        background: $m-color--white;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+
+        @include m-is-ie() {
+            margin: $m-padding--l*2 auto;
+        }
+    }
+
+    &__header,
+    &__body,
+    &__footer {
+        > :first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__header,
+    &__footer {
+        flex-shrink: 0;
+        min-height: $m-box--min-height;
+
+        @include m-box-padding($m-spacing, $m-spacing--l, $m-spacing, $m-spacing);
+    }
+
+    &__header {
+        position: relative;
+        background-color: var(--m-color--header-dark);
+        color: $m-color--white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &__close-button {
+            margin-right: -12px; // Magic number: visually align
+        }
+
+        &:not(.m--has-content) {
+            justify-content: flex-end;
         }
     }
 
     &__body {
-        text-align: center;
+        position: relative;
+        width: 100%;
+        flex: 1 1 auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        min-height: 120px;
+        -webkit-overflow-scrolling: touch;
+
+        @include m-box-padding();
+
+        @include m-is-ie() {
+            flex: none;
+        }
 
         @include m-scrollbar();
-
-        ~ .m-modal__footer {
-            padding-top: 0;
-        }
     }
 
     &__footer {
-        width: 100%;
-        display: inline-flex;
-        justify-content: center;
+        display: flex;
         flex-direction: column;
-        align-items: center;
-
-        &__nav {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-
-            .m-link {
-                margin-top: $m-margin;
-            }
-        }
+        justify-content: center;
+        border-top: 1px solid $m-color--grey;
     }
 }

@@ -1,0 +1,22 @@
+.m-navigation {
+    &__submenu {
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: inline;
+            list-style-type: none;
+        }
+
+        li:not(:first-child)::before {
+            content: " | ";
+        }
+    }
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -46px;
+    visibility: hidden;
+}

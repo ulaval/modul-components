@@ -36,7 +36,8 @@
                @paste="onPaste"
                :autocomplete="autocomplete"
                v-model="model"
-               v-if="!hasWordWrap">
+               v-if="!hasWordWrap"
+               :type="inputType">
         <template slot="right-content" v-if="!hasWordWrap">
             <transition name="m--is">
                 <m-icon-button class="m-textfield__icon-password"

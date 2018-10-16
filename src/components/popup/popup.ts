@@ -68,6 +68,8 @@ export class MPopup extends ModulVue {
     public preload: boolean;
     @Prop()
     public trigger: HTMLElement;
+    @Prop({ default: true })
+    public lazy: boolean;
 
     public $refs: {
         popper: MPopper;
@@ -98,6 +100,10 @@ export class MPopup extends ModulVue {
 
     public get propTrigger(): HTMLElement {
         return this.trigger || this.as<OpenTriggerMixin>().triggerHook || undefined;
+    }
+
+    private onPortalContentMounted(): void {
+        this.$emit('portal-content-mounted');
     }
 
     private onOpen(): void {

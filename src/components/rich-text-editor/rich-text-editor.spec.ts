@@ -17,9 +17,20 @@ let defaultOptions: MRichTextEditorStandardOptions;
 describe('MRichTextEditor', () => {
     beforeEach(() => {
         Vue.use(RichTextLicensePlugin, { key: froalaLicenseKey });
-        wrapper = shallow(MRichTextEditor);
+        wrapper = shallow(MRichTextEditor,
+            {
+                stubs: {
+                    froala : '<froala></froala>'
+                }
+            });
         richTextEditor = wrapper.vm;
         defaultOptions = new MRichTextEditorStandardOptions(froalaLicenseKey, richTextEditor.$i18n.currentLang());
+    });
+
+    it('should have a value for each custom translations key', () => {
+        Object.keys(richTextEditor.customTranslations).forEach(key => {
+            expect(richTextEditor.customTranslations[key]).not.toBe('');
+        });
     });
 
     it('should render correctly', () => {

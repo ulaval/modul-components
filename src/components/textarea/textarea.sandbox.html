@@ -1,4 +1,13 @@
 <div>
+    <h3 class="m-u--no-margin">Zone de texte de base</h3>
+    <m-textarea label="Titre" value=""></m-textarea>
+
+    <h4 class="m-u--h6">Champ obligatoire</h4>
+    <m-textarea :required-marker="true" label="Nom" value="" error-message="Ce champ est obligatoire."></m-textarea>
+
+    <h4 class="m-u--h6">Champ désactivé</h4>
+    <m-textarea :disabled="true" label="Titre" value="text"></m-textarea>
+
     <h3>
         Test 1 : Compteur de caractères
     </h3>

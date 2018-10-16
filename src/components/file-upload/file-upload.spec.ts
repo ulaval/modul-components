@@ -16,6 +16,11 @@ import MessagePlugin from '../message/message';
 import { FileService } from './../../utils/file/file';
 import FileUploadPlugin, { MFileUpload } from './file-upload';
 
+const BTN_REPLACE_FILE: string = 'Replace';
+const TITLE_REPLACE_FILE: string = 'Replace a file';
+const BTN_ADD_NEW_FILE: string = 'Add';
+const TITLE_ADD_NEW_FILE: string = 'Upload files';
+
 describe('MFileUpload', () => {
     beforeEach(() => {
         resetModulPlugins();
@@ -179,8 +184,8 @@ describe('MFileUpload', () => {
         describe('validation messages', () => {
             let fupd: Wrapper<MFileUpload>;
 
-            const stubMDialogRefs: (fu: MFileUpload) => void = (fu: MFileUpload) => {
-                (fu.$refs.dialog as any) = {
+            const stubMModalRefs: (fu: MFileUpload) => void = (fu: MFileUpload) => {
+                (fu.$refs.modal as any) = {
                     $refs: {
                         body: document.createElement('div')
                     }
@@ -198,10 +203,10 @@ describe('MFileUpload', () => {
                     }
                 });
 
-                stubMDialogRefs(fupd.vm);
+                stubMModalRefs(fupd.vm);
             });
 
-            it('should render rejected files in modal', async () => {
+            it('should render rejected files in dialog', async () => {
                 fupd.vm.$file.add(
                     createMockFileList([
                         createMockFile('invalid-extensions'),
@@ -229,6 +234,70 @@ describe('MFileUpload', () => {
 
                 expect(fupd.vm.$file.files().length).toEqual(0);
             });
+        });
+
+        describe('when fileReplacement is false', () => {
+
+            let fupd: Wrapper<MFileUpload>;
+
+            beforeEach(() => {
+                fupd = mount(MFileUpload, {
+                    propsData: validationOpts
+                });
+            });
+
+            it('should be the right title', () => {
+                expect(fupd.vm.title).toEqual(TITLE_ADD_NEW_FILE);
+            });
+
+            it('should be the right button', () => {
+                expect(fupd.vm.buttonAdd).toEqual(BTN_ADD_NEW_FILE);
+            });
+        });
+
+        describe('when fileReplacement is true', () => {
+
+            let filesvc: FileService;
+            let fupd: Wrapper<MFileUpload>;
+
+            beforeEach(() => {
+                filesvc = (Vue.prototype as ModulVue).$file;
+                jest.spyOn(filesvc, 'setValidationOptions');
+
+                fupd = mount(MFileUpload, {
+                    propsData: {
+                        allowedExtensions: validationOpts.allowedExtensions,
+                        rejectedExtensions: validationOpts.rejectedExtensions,
+                        maxSizeKb: validationOpts.maxSizeKb,
+                        maxFiles: validationOpts.maxFiles,
+                        fileReplacement: true
+                    },
+                    data: {
+                        isMqMinS: true
+                    }
+                });
+            });
+
+            it('should allowed only 1 file', async () => {
+
+                const newValidationOpts: MFileValidationOptions = { ...validationOpts };
+                newValidationOpts.maxFiles = 1;
+
+                await Vue.nextTick();
+                expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
+                    newValidationOpts,
+                    DEFAULT_STORE_NAME
+                );
+            });
+
+            it('should be the right title', () => {
+                expect(fupd.vm.title).toEqual(TITLE_REPLACE_FILE);
+            });
+
+            it('should be the right button', () => {
+                expect(fupd.vm.buttonAdd).toEqual(BTN_REPLACE_FILE);
+            });
+
         });
     });
 
@@ -273,7 +342,7 @@ describe('MFileUpload', () => {
             });
 
             fupd = mount(MFileUpload);
-            fupd.vm.$refs.dialog = { closeDialog: jest.fn() } as any;
+            fupd.vm.$refs.modal = { closeModal: jest.fn() } as any;
         });
 
         it('should emit done event when add button is clicked', () => {
@@ -285,12 +354,12 @@ describe('MFileUpload', () => {
         });
 
         it('should clear all files when add button is clicked', () => {
-            jest.spyOn(fupd.vm.$refs.dialog, 'closeDialog');
+            jest.spyOn(fupd.vm.$refs.modal, 'closeModal');
             fupd
                 .find('.m-file-upload__footer-add')
                 .trigger('click');
 
-            expect(fupd.vm.$refs.dialog.closeDialog).toHaveBeenCalled();
+            expect(fupd.vm.$refs.modal.closeModal).toHaveBeenCalled();
         });
 
         it('should emit cancel event when cancel button is clicked', () => {
@@ -302,12 +371,12 @@ describe('MFileUpload', () => {
         });
 
         it('should clear all files when cancel button is clicked', () => {
-            jest.spyOn(fupd.vm.$refs.dialog, 'closeDialog');
+            jest.spyOn(fupd.vm.$refs.modal, 'closeModal');
             fupd
                 .find('.m-file-upload__footer-cancel')
                 .trigger('click');
 
-            expect(fupd.vm.$refs.dialog.closeDialog).toHaveBeenCalled();
+            expect(fupd.vm.$refs.modal.closeModal).toHaveBeenCalled();
         });
 
         it('should emit file-upload-cancel event for each file being uploaded when cancel button is clicked', async () => {
@@ -315,7 +384,7 @@ describe('MFileUpload', () => {
                 createMockFileList([createMockFile('uploading')])
             );
 
-            jest.spyOn(fupd.vm.$refs.dialog, 'closeDialog');
+            jest.spyOn(fupd.vm.$refs.modal, 'closeModal');
             const uploadingFile: MFile = fupd.vm.$file.files()[2];
             uploadingFile.status = MFileStatus.UPLOADING;
 
@@ -324,7 +393,7 @@ describe('MFileUpload', () => {
                 .trigger('click');
 
             const evt: any = fupd.emitted('file-upload-cancel');
-            expect(fupd.vm.$refs.dialog.closeDialog).toHaveBeenCalled();
+            expect(fupd.vm.$refs.modal.closeModal).toHaveBeenCalled();
         });
     });
 
