@@ -102,10 +102,6 @@ export class MPopup extends ModulVue {
         return this.trigger || this.as<OpenTriggerMixin>().triggerHook || undefined;
     }
 
-    private onPortalContentVisible(): void {
-        this.$emit('portal-content-visible');
-    }
-
     private onPortalContentMounted(): void {
         this.$emit('portal-content-mounted');
     }
