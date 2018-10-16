@@ -64,7 +64,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalItems: MDropdownItem[] = [];
     private internalNavigationItems: MDropdownItem[];
     private internalSelectedText: string | undefined = '';
-    private observer?: MutationObserver;
+    private observer: MutationObserver;
     private focusedIndex: number = -1;
 
     private internalOpen: boolean = false;
@@ -97,7 +97,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     protected beforeDestroy(): void {
         if (this.observer) { this.observer.disconnect(); }
-        this.observer = undefined;
     }
 
     public get open(): boolean {
