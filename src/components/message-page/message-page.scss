@@ -33,6 +33,10 @@ $m-message-page--shadow-height: 5px;
         @include m-message-page-state($m-color--warning, $m-color--warning-lightest);
     }
 
+    &.m--is-state-hint {
+        @include m-message-page-state($m-color--hint, $m-color--hint-lightest);
+    }
+
     &.m--is-skin-default {
         .m-message-page {
             &__title {

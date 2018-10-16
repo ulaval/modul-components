@@ -44,7 +44,8 @@ export class MMessagePage extends ModulVue {
             value === MMessageState.Information ||
             value === MMessageState.Warning ||
             value === MMessageState.Confirmation ||
-            value === MMessageState.Error
+            value === MMessageState.Error ||
+            value === MMessageState.Hint
     })
     public state: string;
 
@@ -143,6 +144,10 @@ export class MMessagePage extends ModulVue {
         return this.state === MMessageState.Confirmation;
     }
 
+    private get isStateHint(): boolean {
+        return this.state === MMessageState.Hint;
+    }
+
     private get iconNameProp(): string {
         if (this.iconName) {
             return this.iconName;
@@ -154,6 +159,8 @@ export class MMessagePage extends ModulVue {
                     return'm-svg__information';
                 case MMessageState.Warning:
                     return 'm-svg__warning';
+                case MMessageState.Hint:
+                    return 'm-svg__hint';
                 default:
                     return'm-svg__error';
             }
