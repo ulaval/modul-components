@@ -48,6 +48,12 @@ $m-color--error: $m-color--ul-red !default;
 $m-color--error-lightest: #fcf2f3 !default;
 
 // ======================================================================
+//  Hint colors
+// ======================================================================
+$m-color--hint: #00c77f !default;
+$m-color--hint-lightest: #eaf9f1 !default;
+
+// ======================================================================
 //  Interactive colors
 // ======================================================================
 $m-color--interactive-darker: #0075c3 !default;
@@ -84,7 +90,7 @@ $m-color--scrollbar: $m-color--grey !default;
 $m-color--scrollbar-light: $m-color--grey-light !default;
 
 // ======================================================================
-//  Boder colors
+//  Border colors
 // ======================================================================
 $m-color--border-dark: $m-color--grey-dark !default;
 $m-color--border: $m-color--grey-light !default;
