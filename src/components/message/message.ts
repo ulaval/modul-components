@@ -13,7 +13,8 @@ export enum MMessageState {
     Confirmation = 'confirmation',
     Information = 'information',
     Warning = 'warning',
-    Error = 'error'
+    Error = 'error',
+    Hint = 'hint'
 }
 
 export enum MMessageSkin {
@@ -32,7 +33,8 @@ export class MMessage extends Vue {
             value === MMessageState.Confirmation ||
             value === MMessageState.Information ||
             value === MMessageState.Warning ||
-            value === MMessageState.Error
+            value === MMessageState.Error ||
+            value === MMessageState.Hint
     })
     public state: MMessageState;
 
@@ -102,6 +104,9 @@ export class MMessage extends Vue {
             case MMessageState.Error:
                 icon = 'm-svg__error';
                 break;
+            case MMessageState.Hint:
+                icon = 'm-svg__hint';
+                break;
             default:
                 break;
         }
@@ -146,6 +151,10 @@ export class MMessage extends Vue {
 
     private get isStateConfirmation(): boolean {
         return this.state === MMessageState.Confirmation;
+    }
+
+    private get isStateHint(): boolean {
+        return this.state === MMessageState.Hint;
     }
 
     private get showCloseButton(): boolean {

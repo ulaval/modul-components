@@ -33,6 +33,20 @@ $m-message-size: 32px;
         @include m-message-skin-default($m-color--error);
     }
 
+    &.m--is-state-hint {
+        @include m-message-skin-default($m-color--hint);
+
+        border: 1px solid #00c77f;
+
+        .m-message {
+            &__wrap {
+                border: 1px solid #00c77f;
+                margin: 4px;
+                background-color: #fff;
+            }
+        }
+    }
+
     + .m-message {
         margin-top: $m-spacing;
     }
@@ -102,6 +116,10 @@ $m-message-size: 32px;
 
     &.m--is-state-error {
         color: $m-color--error;
+    }
+
+    &.m--is-state-hint {
+        color: $m-color--hint;
     }
 
     + .m-message {
