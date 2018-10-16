@@ -155,7 +155,7 @@ export class Messages {
             }
         }
 
-        val = this.format(val, params, this.formatMode);
+        val = this.format(val, params);
 
         return val;
     }
@@ -165,8 +165,8 @@ export class Messages {
      * @param {string} val the string to format
      * @param {any[]} params the values to insert in string
      */
-    private format(val: string, params: any, formatMode: FormatMode = FormatMode.Default): string {
-        switch (formatMode) {
+    private format(val: string, params: any): string {
+        switch (this.formatMode) {
             case FormatMode.Vsprintf:
                 return vsprintf(val, params);
             case FormatMode.Sprintf:
