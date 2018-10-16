@@ -29,7 +29,7 @@ const GLOBAL_SEPARATOR: string = '__';
 /**
  * Default suffixe used for global parameters
  */
-const GLOBAL_SUFFIXE_DEFAULT = 'global';
+const GLOBAL_SUFFIXE_DEFAULT: string = 'global';
 
 export type MessageMap = {
     [key: string]: string;
