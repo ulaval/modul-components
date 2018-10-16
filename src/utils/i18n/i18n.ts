@@ -21,12 +21,26 @@ export const ENGLISH: string = 'en';
  */
 const FORMAT_REGEX: RegExp = /{\d+}/g;
 
+/**
+ * String used as a global parameter suffixe separator
+ */
+const GLOBAL_SEPARATOR: string = '__';
+
+/**
+ * Default suffixe used for global parameters
+ */
+const GLOBAL_SUFFIXE_DEFAULT = 'global';
+
 export type MessageMap = {
     [key: string]: string;
 };
 
 export type BundleMessagesMap = {
     [bundle: string]: MessageMap;
+};
+
+export type GlobalParamsMap = {
+    [key: string]: string;
 };
 
 type LanguageBundlesMap = {
@@ -43,6 +57,8 @@ export interface I18nPluginOptions {
     curLang?: string;
     debug?: DebugMode;
     formatMode?: FormatMode;
+    globalParams?: GlobalParamsMap;
+    globalParamsSuffixe?: string;
 }
 
 export enum FormatMode {
@@ -55,6 +71,8 @@ export class Messages {
     private curLang: string = ENGLISH;
     private formatMode: FormatMode;
     private messages: LanguageBundlesMap = {};
+    private globalParams: GlobalParamsMap;
+    private globalParamsSuffixe: string = GLOBAL_SUFFIXE_DEFAULT;
 
     constructor(private options?: I18nPluginOptions) {
         if (options) {
@@ -63,6 +81,16 @@ export class Messages {
             }
             if (options.formatMode) {
                 this.formatMode = options.formatMode;
+            }
+            if (options.globalParamsSuffixe && options.globalParamsSuffixe !== '') {
+                this.globalParamsSuffixe = options.globalParamsSuffixe;
+            }
+            if (options.globalParams) {
+                const globalParamsRename: GlobalParamsMap[] = Object.keys(options.globalParams).map((key: string) => {
+                    const newKey: string = this.formatGlobalParamKey(key);
+                    return (options.globalParams) ? { [newKey]: options.globalParams[key] } : {};
+                });
+                this.globalParams = Object.assign({}, ...globalParamsRename);
             }
         }
     }
@@ -115,13 +143,19 @@ export class Messages {
 
         let val: string = this.resolveKey(this.curLang, key, nb, modifier);
 
+        if (this.globalParams
+            && (this.formatMode === FormatMode.Sprintf || this.formatMode === FormatMode.Vsprintf)
+        ) {
+            params = Object.assign(this.globalParams, params);
+        }
+
         if (htmlEncodeParams && params.length) {
             for (let i: number = 0; i < params.length; ++i) {
                 params[i] = htmlEncode(params[i].toString());
             }
         }
 
-        val = this.format(val, params);
+        val = this.format(val, params, this.formatMode);
 
         return val;
     }
@@ -131,8 +165,8 @@ export class Messages {
      * @param {string} val the string to format
      * @param {any[]} params the values to insert in string
      */
-    private format(val: string, params: any): string {
-        switch (this.formatMode) {
+    private format(val: string, params: any, formatMode: FormatMode = FormatMode.Default): string {
+        switch (formatMode) {
             case FormatMode.Vsprintf:
                 return vsprintf(val, params);
             case FormatMode.Sprintf:
@@ -214,6 +248,15 @@ export class Messages {
             }
             return key;
         }
+    }
+
+    /**
+     * Force all global parameters to follow the same naming structure by appending a suffixe
+     *
+     * @param key original key
+     */
+    private formatGlobalParamKey(key): string {
+        return key + GLOBAL_SEPARATOR + this.globalParamsSuffixe;
     }
 
     /**

@@ -14,5 +14,11 @@
         "decompte_athletes_olympiques_canada.p": "Il y a %(nbAthletes)s athlètes olympiques canadiens.",
         "decompte_athletes_olympiques_pays": "Il y a %(nbAthletes)s athlètes olympiques et %(nbPays)s pays participants.",
         "decompte_athletes_olympiques_pays_default_formatting": "Il y a {0} athlètes olympiques et {1} pays participants."
+    },
+    "exemples_avec_parametres_globaux": {
+        "decompte_medailles_olympiques_canada": "Les athlètes canadiens ont gagnés %(nbMedailles)s%(espace_insecable__global)smedaille.",
+        "decompte_medailles_olympiques_canada_default_formatting": "Les athlètes canadiens ont gagnés {0} medaille.",
+
+        "decompte_medailles_olympiques_canada.p": "Les athlètes canadiens ont gagnés %(nbMedailles)%(espace_insecable.global)medailles."
     }
 }
