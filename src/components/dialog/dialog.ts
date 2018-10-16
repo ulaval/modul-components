@@ -21,7 +21,7 @@ export enum MDialogState {
     Default = 'default',
     Warning = 'warning',
     Confirmation = 'confirmation',
-    Info = 'info',
+    Information = 'information',
     Error = 'error'
 }
 
@@ -60,7 +60,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
             value === MDialogState.Default ||
             value === MDialogState.Warning ||
             value === MDialogState.Confirmation ||
-            value === MDialogState.Info ||
+            value === MDialogState.Information ||
             value === MDialogState.Error
     })
     public type: MDialogState;
@@ -142,7 +142,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
             case MDialogState.Confirmation:
                 state = 'confirmation';
                 break;
-            case MDialogState.Info:
+            case MDialogState.Information:
                 state = 'information';
                 break;
             case MDialogState.Warning:
