@@ -63,7 +63,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
             value === MDialogState.Info ||
             value === MDialogState.Error
     })
-    public type: MMessageState;
+    public type: MDialogState;
 
     public handlesFocus(): boolean {
         return true;
@@ -81,12 +81,17 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return this.$refs.article as HTMLElement;
     }
 
-    private onOk(): void {
+    private onPrimaryButton(): void {
         this.as<PortalMixin>().propOpen = false;
-        this.$emit('ok');
+        this.$emit('primary');
     }
 
-    private onCancel(): void {
+    private onSecondaryButton(): void {
+        this.as<PortalMixin>().propOpen = false;
+        this.$emit('secondary');
+    }
+
+    private onCancelLink(): void {
         this.as<PortalMixin>().propOpen = false;
         this.$emit('cancel');
     }
@@ -129,6 +134,27 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     private get hasWidthLarge(): boolean {
         return this.width === MDialogWidth.Large;
+    }
+
+    private getState(): string {
+        let state: string = '';
+        switch (this.type) {
+            case MDialogState.Confirmation:
+                state = 'confirmation';
+                break;
+            case MDialogState.Info:
+                state = 'information';
+                break;
+            case MDialogState.Warning:
+                state = 'warning';
+                break;
+            case MDialogState.Error:
+                state = 'error';
+                break;
+            default:
+                break;
+        }
+        return state;
     }
 }
 

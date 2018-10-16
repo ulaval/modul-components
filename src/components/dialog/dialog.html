@@ -16,14 +16,16 @@
                     </header>
                     <div class="m-dialog__body">
                         <!--Condition to add here for state prop-->
-                            <m-message class="m-u--margin-top--l" skin="page-light" type="error"></m-message>
+                        <div v-if="type !== 'default'">
+                            <m-message class="m-u--margin-top--l" skin="page-light" :state="getState()"></m-message>
+                        </div>
                         <div v-if="hasDefaultSlot || hasMessage">
                             <p v-if="hasMessage" v-html="message"></p>
                             <slot></slot>
                         </div>
                         <div v-if="hasHint">
                             <!--Using error state temporarily for testing purposes-->
-                            <m-message state="error" skin="default" icon="true" closeButton="false" visible="true">{{ hint }}</m-message>
+                            <m-message state="error" >{{ hint }}</m-message>
                         </div>
                     </div>
                     <footer class="m-dialog__footer">
@@ -35,7 +37,7 @@
                                 <m-i18n v-else k="m-dialog:ok"></m-i18n>
                                 <template slot="precision" v-if="hasOkPrecision">{{ okPrecision }}</template>
                             </m-button>
-                            <m-button @click="onOk()" skin="secondary" isRegularSize="true">
+                            <m-button @click="onConditionalOk()" skin="secondary" isRegularSize="true">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
                                 <m-i18n v-else k="m-dialog:close"></m-i18n>
                                 <template slot="precision" v-if="hasCancelPrecision">{{ cancelPrecision }}</template>
