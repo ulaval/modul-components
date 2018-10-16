@@ -1,5 +1,12 @@
 @import '../../styles/abstracts/variables';
 
-table {
-    width: 45%;
+.m-table-sandbox {
+    table {
+        width: 45%;
+        margin-bottom: $m-margin--l;
+    }
+
+    h2 {
+        margin-bottom: $m-margin;
+    }
 }

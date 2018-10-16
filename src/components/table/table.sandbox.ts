@@ -69,12 +69,38 @@ export class MTableSandbox extends Vue {
 
     ];
 
+    dataIncomplete: any[] = [
+        {
+            id: '1',
+            name: 'Jonathan',
+            age: '25'
+        },
+        {
+            id: '2',
+            name: 'Carl',
+            username: 'carl.30'
+        },
+        {
+            id: '3',
+            age: '26',
+            username: 'jacob.26'
+        },
+        {
+            name: 'Vincent',
+            age: '34',
+            username: 'vincent.34'
+        }
+
+    ];
+
+    emptyData: any[] = [];
+
     editData(id: string): void {
-        console.log('Edit data: ' + id);
+        console.error('Edit data: ' + id);
     }
 
     deleteData(id: string): void {
-        console.log('Delete data: ' + id);
+        console.error('Delete data: ' + id);
     }
 }
 

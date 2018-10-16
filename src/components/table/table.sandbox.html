@@ -1,5 +1,44 @@
-<div>
+<div class="m-table-sandbox">
+    <h2>Table</h2>
     <m-table :rows-max="5" :data="data" :headers="headers">
+        <template slot="name" scope="{value}">
+            <m-link>{{ value.name }}</m-link>
+        </template>
+        <template slot="age" scope="{value}">
+            {{ value.age }}
+        </template>
+        <template slot="username" scope="{value}">
+            {{ value.username }}
+        </template>
+        <template slot="menu" scope="{value}">
+            <m-option>
+                <m-option-item-edit @click="editData(value.id)"></m-option-item-edit>
+                <m-option-item-delete @click="deleteData(value.id)"></m-option-item-delete>
+            </m-option>
+        </template>
+    </m-table>
+
+    <h2>Table with missing data</h2>
+    <m-table :data="dataIncomplete" :headers="headers">
+        <template slot="name" scope="{value}">
+            <m-link>{{ value.name }}</m-link>
+        </template>
+        <template slot="age" scope="{value}">
+            {{ value.age }}
+        </template>
+        <template slot="username" scope="{value}">
+            {{ value.username }}
+        </template>
+        <template slot="menu" scope="{value}">
+            <m-option>
+                <m-option-item-edit @click="editData(value.id)"></m-option-item-edit>
+                <m-option-item-delete @click="deleteData(value.id)"></m-option-item-delete>
+            </m-option>
+        </template>
+    </m-table>
+
+    <h2>Empty table</h2>
+    <m-table :data="emptyData" :headers="headers">
         <template slot="name" scope="{value}">
             <m-link>{{ value.name }}</m-link>
         </template>
