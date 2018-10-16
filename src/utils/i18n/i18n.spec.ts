@@ -93,7 +93,7 @@ describe('i18n plugin', () => {
         });
     });
 
-    describe('with global variables en mode Vsprintf', () => {
+    describe('with global variables in mode Vsprintf', () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {
                 formatMode: FormatMode.Vsprintf,
@@ -112,7 +112,7 @@ describe('i18n plugin', () => {
         });
     });
 
-    describe('with global variables en mode sprintf', () => {
+    describe('with global variables in mode sprintf', () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {
                 formatMode: FormatMode.Sprintf,
@@ -131,7 +131,7 @@ describe('i18n plugin', () => {
         });
     });
 
-    describe('with global variables en mode sprintf', () => {
+    describe('with global variables in default mode', () => {
         beforeEach(() => {
             let options: I18nPluginOptions = {
                 globalParams: { espace_insecable : '__ESPACE_INSECABLE__' } // use in place of "\xa0" to be able to validate the result
