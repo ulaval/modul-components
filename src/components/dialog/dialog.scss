@@ -125,6 +125,10 @@ $m-dialog--max-width--l: 500px !default;
         ~ .m-dialog__footer {
             padding-top: 0;
         }
+
+        .m-message {
+            margin-top: 35px;
+        }
     }
 
     &__footer {
