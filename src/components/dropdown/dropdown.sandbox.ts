@@ -16,6 +16,7 @@ export class MDropdownSandbox extends Vue {
     public undefinedValue1: undefined = undefined;
     public undefinedValue2: undefined = undefined;
     public undefinedValue3: undefined = undefined;
+    public numValue: undefined = undefined;
 
     public numItems: number[] = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007];
 }
