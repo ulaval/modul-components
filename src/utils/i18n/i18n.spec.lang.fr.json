@@ -18,7 +18,5 @@
     "exemples_avec_parametres_globaux": {
         "decompte_medailles_olympiques_canada": "Les athlètes canadiens ont gagnés %(nbMedailles)s%(espace_insecable__global)smedaille.",
         "decompte_medailles_olympiques_canada_default_formatting": "Les athlètes canadiens ont gagnés {0} medaille.",
-
-        "decompte_medailles_olympiques_canada.p": "Les athlètes canadiens ont gagnés %(nbMedailles)%(espace_insecable.global)medailles."
     }
 }
