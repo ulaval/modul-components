@@ -130,6 +130,14 @@ $m-dialog--max-width--l: 500px !default;
 
         .m-message {
             margin-top: $m-spacing--l;
+
+            &.m--is-skin-page-light {
+                margin-bottom: $m-spacing;
+
+                + .message {
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 
