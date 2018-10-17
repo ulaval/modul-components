@@ -13,10 +13,8 @@ export class MTableHeaderCell extends ModulVue {
     @Prop({ default: '' })
     width: string;
 
-    public get propWidth(): { width: string } {
-        return {
-            width: this.width ? this.width : ''
-        };
+    public get propWidth(): { width: string } | undefined {
+        return this.width ? { width: this.width } : undefined;
     }
 
 }
