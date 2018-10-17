@@ -45,9 +45,23 @@ exports[`MDropdown should render correctly when footer slot is set 1`] = `
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
-        <div class="m-popper">
-            <DIV class="v-portal" style="display:none;"></DIV>
-        </div>
+        <m-popper-mock placement="bottom-start" focus-management="true" open-trigger="mousedown" enter="function boundFn(a) {
+    var l = arguments.length;
+    return l
+      ? l &gt; 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }" leave="function boundFn(a) {
+    var l = arguments.length;
+    return l
+      ? l &gt; 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }" padding-header="true" padding-body="true" padding-footer="true" preload="true" width="100%" background="true">
+            <div>footer-content</div>
+        </m-popper-mock>
     </div>
 </div>
 `;
