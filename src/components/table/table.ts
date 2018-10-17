@@ -26,6 +26,10 @@ export class MTable extends ModulVue {
 
     private rows: number = 0;
 
+    public getDataValue(row: number): any {
+        return this.data[row - 1];
+    }
+
     public get hasHeader(): boolean {
         return !!this.$slots['table-header'];
     }
@@ -33,16 +37,6 @@ export class MTable extends ModulVue {
     public get hasFooter(): boolean {
         return !!this.$slots['table-footer'];
     }
-
-    public getDataValue(row: number): any {
-        return this.data[row - 1];
-    }
-
-    // public getWidth(header: TableHeader): { width: string } {
-    //     return {
-    //         width: header.width ? header.width : ''
-    //     };
-    // }
 
     protected created(): void {
         this.propRows = (this.data.length <= this.maxRows) ? this.data.length : this.maxRows;
