@@ -1,0 +1,3 @@
+<td>
+    <slot></slot>
+</td>

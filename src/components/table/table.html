@@ -1,15 +1,17 @@
 <table class="m-table" cellspacing="0">
-    <thead>
+    <thead v-if="hasHeader">
         <tr>
-            <th v-for="header in headers" :style="getWidth(header)">{{ header.title }}</th>
+            <slot name="table-header"></slot>
         </tr>
     </thead>
     <tbody>
         <tr v-for="row in propRows" :key="row">
-            <td v-for="header in headers">
-                <slot :name="header.slot" :value="getDataValue(row)"></slot>
-            </td>
+            <slot name="table-data" :data="getDataValue(row)"></slot>
         </tr>
     </tbody>
+    <tfoot v-if="hasFooter">
+        <tr>
+            <slot name="table-footer"></slot>
+        </tr>
+    </tfoot>
 </table>
-

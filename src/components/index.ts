@@ -73,6 +73,9 @@ import SteppersItemPlugin from './steppers-item/steppers-item';
 import SteppersPlugin from './steppers/steppers';
 import SwitchPlugin from './switch/switch';
 import TablePlugin from './table/table';
+import TableHeaderCellPlugin from './table/table-header-cell/table-header-cell';
+import TableBodyCellPlugin from './table/table-body-cell/table-body-cell';
+import TableFooterCellPlugin from './table/table-footer-cell/table-footer-cell';
 import TabPanelPlugin from './tab-panel/tab-panel';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
@@ -166,6 +169,10 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(SteppersItemPlugin);
         Vue.use(SwitchPlugin);
         Vue.use(TabPanelPlugin);
+        Vue.use(TablePlugin);
+        Vue.use(TableHeaderCellPlugin);
+        Vue.use(TableBodyCellPlugin);
+        Vue.use(TableFooterCellPlugin);
         Vue.use(TabsPlugin);
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);
@@ -177,7 +184,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TreePlugin);
         Vue.use(TreeIconPlugin);
         Vue.use(TreeNodePlugin);
-        Vue.use(TablePlugin);
     }
 };
 
