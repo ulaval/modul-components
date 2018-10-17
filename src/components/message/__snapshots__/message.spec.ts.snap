@@ -39,6 +39,19 @@ exports[`MMessage should render correctly all possible states: Error 1`] = `
 </div>
 `;
 
+exports[`MMessage should render correctly all possible states: Hint 1`] = `
+<div class="m-message m--is-state-hint m--is-skin-default">
+    <div class="m-message__wrap">
+        <div class="m-message__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-message__body"> </div>
+    </div>
+</div>
+`;
+
 exports[`MMessage should render correctly all possible states: Information 1`] = `
 <div class="m-message m--is-state-information m--is-skin-default">
     <div class="m-message__wrap">
