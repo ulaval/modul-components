@@ -1,18 +1,13 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
 import WithRender from './table.html?style=./table.scss';
 import TableHeaderCellPlugin from './table-header-cell/table-header-cell';
 import TableBodyCellPlugin from './table-body-cell/table-body-cell';
-
-export interface TableHeader {
-    slot: string;
-    title?: string;
-    width?: string;
-}
+import TableFooterCellPlugin from './table-footer-cell/table-footer-cell';
 
 @WithRender
 @Component
@@ -57,6 +52,7 @@ const TablePlugin: PluginObject<any> = {
         v.prototype.$log.debug(TABLE_NAME, 'plugin.install');
         v.use(TableHeaderCellPlugin);
         v.use(TableBodyCellPlugin);
+        v.use(TableFooterCellPlugin);
         v.component(TABLE_NAME, MTable);
     }
 };
