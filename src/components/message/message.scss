@@ -40,6 +40,9 @@ $m-message-size: 32px;
 
         .m-message {
             &__wrap {
+                font-style: italic;
+                font-size: 19px;
+                line-height: 1;
                 border: 1px solid #00c77f;
                 margin: 4px;
                 background-color: #fff;

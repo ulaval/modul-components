@@ -88,7 +88,7 @@ $m-dialog--max-width--l: 500px !default;
             padding: $m-spacing--l $m-spacing;
 
             @media (min-width: $m-mq--min--s) {
-                padding: $m-spacing--l $m-spacing--m;
+                padding: $m-spacing--l;
             }
         }
     }
@@ -112,13 +112,15 @@ $m-dialog--max-width--l: 500px !default;
             padding: $m-spacing $m-spacing;
 
             @media (min-width: $m-mq--min--s) {
-                padding: $m-spacing $m-spacing--m;
+                padding: $m-spacing--l $m-spacing--l;
             }
         }
     }
 
     &__body {
         text-align: center;
+        font-size: $m-font-size--h5;
+        font-weight: $m-font-weight--bold;
 
         @include m-scrollbar();
 
@@ -127,7 +129,7 @@ $m-dialog--max-width--l: 500px !default;
         }
 
         .m-message {
-            margin-top: 35px;
+            margin-top: $m-spacing--l;
         }
     }
 
@@ -152,7 +154,7 @@ $m-dialog--max-width--l: 500px !default;
             min-width: 226px;
 
             + .m-button {
-                margin-top: $m-spacing--s;
+                margin-top: 12px;
             }
         }
     }
