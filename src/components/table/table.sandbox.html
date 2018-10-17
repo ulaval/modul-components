@@ -1,58 +1,109 @@
 <div class="m-table-sandbox">
-    <h2>Table</h2>
-    <m-table :rows-max="5" :data="data" :headers="headers">
-        <template slot="name" scope="{value}">
-            <m-link>{{ value.name }}</m-link>
+    <h2>Table - With header and footer</h2>
+    <m-table :data="data" :max-rows="5">
+        <template slot="table-header">
+            <m-table-header-cell>Name</m-table-header-cell>
+            <m-table-header-cell>Age</m-table-header-cell>
+            <m-table-header-cell>Username</m-table-header-cell>
+            <m-table-header-cell width="10%"></m-table-header-cell>
         </template>
-        <template slot="age" scope="{value}">
-            {{ value.age }}
+        <template slot="table-data" scope="{data}">
+            <m-table-body-cell>
+                <m-link>{{ data.name }}</m-link>
+            </m-table-body-cell>
+            <m-table-body-cell>
+                {{ data.age }}
+            </m-table-body-cell>
+            <m-table-body-cell>
+                {{ data.username }}
+            </m-table-body-cell>
+            <m-table-body-cell>
+                <m-option>
+                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
+                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+                </m-option>
+            </m-table-body-cell>
         </template>
-        <template slot="username" scope="{value}">
-            {{ value.username }}
-        </template>
-        <template slot="menu" scope="{value}">
-            <m-option>
-                <m-option-item-edit @click="editData(value.id)"></m-option-item-edit>
-                <m-option-item-delete @click="deleteData(value.id)"></m-option-item-delete>
-            </m-option>
-        </template>
-    </m-table>
-
-    <h2>Table with missing data</h2>
-    <m-table :data="dataIncomplete" :headers="headers">
-        <template slot="name" scope="{value}">
-            <m-link>{{ value.name }}</m-link>
-        </template>
-        <template slot="age" scope="{value}">
-            {{ value.age }}
-        </template>
-        <template slot="username" scope="{value}">
-            {{ value.username }}
-        </template>
-        <template slot="menu" scope="{value}">
-            <m-option>
-                <m-option-item-edit @click="editData(value.id)"></m-option-item-edit>
-                <m-option-item-delete @click="deleteData(value.id)"></m-option-item-delete>
-            </m-option>
+        <template slot="table-footer">
+            <m-table-footer-cell>TEST</m-table-footer-cell>
+            <m-table-footer-cell>TEST</m-table-footer-cell>
+            <m-table-footer-cell>TEST</m-table-footer-cell>
+            <m-table-footer-cell>TEST</m-table-footer-cell>
         </template>
     </m-table>
 
-    <h2>Empty table</h2>
-    <m-table :data="emptyData" :headers="headers">
-        <template slot="name" scope="{value}">
-            <m-link>{{ value.name }}</m-link>
+    <h2>Table - Without header and footer</h2>
+    <m-table :data="data" :max-rows="5">
+        <template slot="table-data" scope="{data}">
+            <m-table-body-cell>
+                <m-link>{{ data.name }}</m-link>
+            </m-table-body-cell>
+            <m-table-body-cell>
+                {{ data.age }}
+            </m-table-body-cell>
+            <m-table-body-cell>
+                {{ data.username }}
+            </m-table-body-cell>
+            <m-table-body-cell>
+                <m-option>
+                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
+                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+                </m-option>
+            </m-table-body-cell>
         </template>
-        <template slot="age" scope="{value}">
-            {{ value.age }}
+    </m-table>
+
+    <h2>Table - missing data</h2>
+    <m-table :data="dataIncomplete" :max-rows="5">
+        <template slot="table-header">
+            <m-table-header-cell>Name</m-table-header-cell>
+            <m-table-header-cell>Age</m-table-header-cell>
+            <m-table-header-cell>Username</m-table-header-cell>
+            <m-table-header-cell width="10%"></m-table-header-cell>
         </template>
-        <template slot="username" scope="{value}">
-            {{ value.username }}
+        <template slot="table-data" scope="{data}">
+            <m-table-body-cell>
+                <m-link>{{ data.name }}</m-link>
+            </m-table-body-cell>
+            <m-table-body-cell>
+                {{ data.age }}
+            </m-table-body-cell>
+            <m-table-body-cell>
+                {{ data.username }}
+            </m-table-body-cell>
+            <m-table-body-cell>
+                <m-option>
+                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
+                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+                </m-option>
+            </m-table-body-cell>
         </template>
-        <template slot="menu" scope="{value}">
-            <m-option>
-                <m-option-item-edit @click="editData(value.id)"></m-option-item-edit>
-                <m-option-item-delete @click="deleteData(value.id)"></m-option-item-delete>
-            </m-option>
+    </m-table>
+
+    <h2>Table - empty</h2>
+    <m-table :data="emptyData" :max-rows="5">
+        <template slot="table-header">
+            <m-table-header-cell>Name</m-table-header-cell>
+            <m-table-header-cell>Age</m-table-header-cell>
+            <m-table-header-cell>Username</m-table-header-cell>
+            <m-table-header-cell width="10%"></m-table-header-cell>
+        </template>
+        <template slot="table-data" scope="{data}">
+            <m-table-body-cell>
+                <m-link>{{ data.name }}</m-link>
+            </m-table-body-cell>
+            <m-table-body-cell>
+                {{ data.age }}
+            </m-table-body-cell>
+            <m-table-body-cell>
+                {{ data.username }}
+            </m-table-body-cell>
+            <m-table-body-cell>
+                <m-option>
+                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
+                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+                </m-option>
+            </m-table-body-cell>
         </template>
     </m-table>
 </div>

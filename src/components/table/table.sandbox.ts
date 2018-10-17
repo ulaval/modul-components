@@ -3,31 +3,10 @@ import Component from 'vue-class-component';
 
 import { TABLE_NAME } from '../component-names';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
-import { TableHeader } from './table';
 
 @WithRender
 @Component
 export class MTableSandbox extends Vue {
-
-    headers: TableHeader[] = [
-        {
-            slot: 'name',
-            title: 'Name'
-        },
-        {
-            slot: 'age',
-            title: 'Age'
-        },
-        {
-            slot: 'username',
-            title: 'Username',
-            width: '35%'
-        },
-        {
-            slot: 'menu',
-            width: '5%'
-        }
-    ];
 
     data: any[] = [
         {
