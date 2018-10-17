@@ -1,32 +1,32 @@
-<div class="m-edit-window" ref="baseWindow">
+<div class="m-overlay" ref="baseWindow">
     <slot name="trigger"></slot>
     <portal :target-el="portalTargetSelector" v-if="portalCreated">
         <transition name="m--is" :duration="{ enter: 800, leave: 600 }">
-            <div class="m-edit-window__wrap"
+            <div class="m-overlay__wrap"
                  :class="[{ 'm--is-disabled':disabled },
                             className ]"
-                 ref="dialogWrap"
+                 ref="modalWrap"
                  v-show="propOpen" v-if="portalMounted">
-                <section class="m-edit-window__article" ref="article">
-                    <header class="m-edit-window__header" ref="header"
+                <section class="m-overlay__article" ref="article">
+                    <header class="m-overlay__header"
                             :class="{'m--no-padding': !padding || !paddingHeader}">
-                        <div class="m-edit-window__header__left">
+                        <div class="m-overlay__header__left">
                             <slot name="header"></slot>
                         </div>
-                        <div class="m-edit-window__header__right" v-if="hasHeaderRightSlot">
+                        <div class="m-overlay__header__right" v-if="hasHeaderRightSlot">
                             <slot name="header-right"></slot>
                         </div>
                     </header>
-                    <div class="m-edit-window__body" ref="body" @focusin="handleFooter" @focusout="handleFooter"
+                    <div class="m-overlay__body"
                          :class="{ 'm--no-padding': !padding || !paddingBody }">
                         <slot></slot>
                     </div>
-                    <footer class="m-edit-window__footer" ref="footer"
+                    <footer class="m-overlay__footer"
                             :class="{ 'm--no-padding': !padding || !paddingFooter }">
                         <slot name="footer">
                             <div>
-                                <m-button @click="save()" :disabled="isSaveButtonDisabled" class="m-edit-window__footer__save-button"><m-i18n k="m-edit-window:save"></m-i18n></m-button>
-                                <m-button @click="cancel()" skin="secondary"><m-i18n k="m-edit-window:cancel"></m-i18n></m-button>
+                                <m-button @click="save()" :disabled="isSaveButtonDisabled" class="m-overlay__footer__save-button"><m-i18n k="m-overlay:save"></m-i18n></m-button>
+                                <m-button @click="cancel()" skin="secondary"><m-i18n k="m-overlay:cancel"></m-i18n></m-button>
                             </div>
                         </slot>
                     </footer>

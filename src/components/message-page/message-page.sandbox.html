@@ -1,59 +1,59 @@
 <div>
     <h5>default - different skins ans icons</h5>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template></m-error-template>
+        <m-message-page></m-message-page>
     </div>
 
     <br />
 
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template state="information" :title="title" icon-name="m-svg__file-video"></m-error-template>
+        <m-message-page state="information" :title="title" icon-name="m-svg__file-video"></m-message-page>
     </div>
 
     <br />
 
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template state="information" :title="title"></m-error-template>
+        <m-message-page state="information" :title="title"></m-message-page>
     </div>
 
     <br />
 
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template state="confirmation" :title="title"></m-error-template>
+        <m-message-page state="confirmation" :title="title"></m-message-page>
     </div>
 
     <br />
 
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template state="warning" :title="title"></m-error-template>
+        <m-message-page state="warning" :title="title"></m-message-page>
     </div>
 
     <hr/>
 
     <h5>with #one hint</h5>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template state="error" :title="title" icon-name="error"  :hints="oneHint"></m-error-template>
+        <m-message-page state="error" :title="title" icon-name="error"  :hints="oneHint"></m-message-page>
     </div>
 
     <hr/>
 
     <h5>with #multiple hints</h5>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template state="error" :title="title" icon-name="error"  :hints="manyHints"></m-error-template>
+        <m-message-page state="error" :title="title" icon-name="error"  :hints="manyHints"></m-message-page>
     </div>
 
     <hr/>
 
     <h5>with #one link</h5>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template state="error" :title="title" icon-name="error"  :links="oneLink"></m-error-template>
+        <m-message-page state="error" :title="title" icon-name="error"  :links="oneLink"></m-message-page>
     </div>
 
     <hr/>
 
     <h5>with #multiple links</h5>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template state="error" :title="title" icon-name="error"  :links="manyLinks"></m-error-template>
+        <m-message-page state="error" :title="title" icon-name="error"  :links="manyLinks"></m-message-page>
     </div>
 
     <hr/>
@@ -61,18 +61,18 @@
     <h5>unexpected error popup with hints and links</h5>
     <m-button v-m-popup:errorpopup>pop me an error</m-button>
     <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
-            <m-error-template state="error" :title="title" icon-name="m-svg__warning-filled" :hints="manyHints" :links="manyLinks"></m-error-template>
+            <m-message-page state="error" :title="title" icon-name="m-svg__warning-filled" :hints="manyHints" :links="manyLinks"></m-message-page>
     </m-modal>
 
     <hr/>
 
     <h5>with content in slot</h5>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-template state="error" :title="title" icon-name="error" :hints="manyHints" :links="manyLinks">
+        <m-message-page state="error" :title="title" icon-name="error" :hints="manyHints" :links="manyLinks">
             <span>
                 <b>***Custom error details content through slot.***</b>
             </span>
-        </m-error-template>
+        </m-message-page>
     </div>
 
     <hr/>

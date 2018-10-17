@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 
-import { MModal } from '../../components/modal/modal';
+import { MDialog } from '../../components/dialog/dialog';
 
 export interface AlertOptions {
     okLabel?: string;
@@ -8,11 +8,11 @@ export interface AlertOptions {
 
 export type AlertFunction = (message: string, options?: AlertOptions) => Promise<any>;
 
-let AlertInstance: MModal | undefined = undefined;
+let AlertInstance: MDialog | undefined = undefined;
 
 export const alertFunction: AlertFunction = (message: string, options?: AlertOptions) => {
     if (!AlertInstance) {
-        AlertInstance = new MModal({
+        AlertInstance = new MDialog({
             el: document.createElement('div')
         });
 
@@ -52,7 +52,7 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
                 hook();
             });
         } else {
-            console.error('No instance of modal dialog');
+            console.error('No instance of dialog');
             reject();
         }
     });
