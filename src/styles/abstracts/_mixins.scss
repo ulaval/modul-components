@@ -345,6 +345,30 @@
     }
 }
 
+@mixin m-table-regular() {
+    width: 100%;
+    border: $m-border-width--s solid $m-color--grey-lighter;
+
+    thead {
+        text-align: left;
+
+        tr {
+            background: $m-color--grey-lightest;
+        }
+    }
+
+    tr {
+        &:nth-child(even) {
+            background: $m-color--grey-lightest;
+        }
+
+        td,
+        th {
+            padding: 5px 10px;
+        }
+    }
+}
+
 @mixin m-box-padding($topBottom: $m-spacing--xl, $rightLeft: $m-spacing--l, $topBottomMobile: $m-spacing--xl, $rightLeftMobile: $m-spacing) {
     &:not(.m--no-padding) {
         @media (max-width: $m-mq--max--s) {
