@@ -1,4 +1,4 @@
-<table class="m-table" cellspacing="0">
+<table class="m-table" :class="[ 'm--is-skin-' + skin]" cellspacing="0">
     <thead v-if="hasHeader">
         <tr>
             <slot name="table-header"></slot>

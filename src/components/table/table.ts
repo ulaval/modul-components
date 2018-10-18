@@ -8,7 +8,11 @@ import WithRender from './table.html?style=./table.scss';
 import TableHeaderCellPlugin from './table-header-cell/table-header-cell';
 import TableBodyCellPlugin from './table-body-cell/table-body-cell';
 import TableFooterCellPlugin from './table-footer-cell/table-footer-cell';
+import { MAccordionSkin } from '../accordion/accordion';
 
+export enum MTableSkin {
+    Regular = 'regular'
+}
 @WithRender
 @Component
 export class MTable extends ModulVue {
@@ -18,6 +22,13 @@ export class MTable extends ModulVue {
 
     @Prop({ default: 50 })
     maxRows: number;
+
+    @Prop({
+        default: MTableSkin.Regular,
+        validator: value =>
+            value === MTableSkin.Regular
+    })
+    public skin: MTableSkin;
 
     private rows: number = 0;
 
