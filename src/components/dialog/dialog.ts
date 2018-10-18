@@ -159,15 +159,6 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return state;
     }
 
-    private equalizeBtns(): any {
-        let width: string = '';
-        let sizeArray: any;
-
-        sizeArray = document.getElementsByClassName('m-button');
-        console.log(sizeArray);
-
-        return sizeArray;
-    }
 }
 
 const DialogPlugin: PluginObject<any> = {
