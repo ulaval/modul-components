@@ -17,7 +17,7 @@ import { FileService } from './../../utils/file/file';
 import FileUploadPlugin, { MFileUpload } from './file-upload';
 
 const BTN_REPLACE_FILE: string = 'Replace';
-const TITLE_REPLACE_FILE: string = 'Replace a file';
+const TITLE_REPLACE_FILE: string = 'Replace file';
 const BTN_ADD_NEW_FILE: string = 'Add';
 const TITLE_ADD_NEW_FILE: string = 'Upload files';
 
