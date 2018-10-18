@@ -27,9 +27,9 @@
             </ul>
         </m-message>
 
-        <div class="m-file-upload__drop-zone">
+        <div class="m-file-upload__drop-zone" v-if="isDropZoneEnabled">
             <div class="m-file-upload__drop-zone__instructions">
-                <h3 class="m-file-upload__drop-zone__instructions__title" v-if="isMqMinS">
+                <h3 class="m-file-upload__drop-zone__instructions__title">
                     <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
                     <m-i18n k="m-file-upload:title" :nb="propMaxFiles"></m-i18n>
                 </h3>
@@ -38,6 +38,12 @@
             </div>
             <p class="m-file-upload__drop-zone__format" v-if="hasAllowedExtensions">
                 <m-i18n class="m-file-upload__drop-zone__format__label" k="m-file-upload:format" :nb="allowedExtensions.length"></m-i18n>: {{fileAllowedExtensions}}</p>
+        </div>
+        <div class="m-file-upload__no-drop-zone" v-else>
+            <m-file-select class="m-file-upload__no-drop-zone__instructions__button" skin="primary" :multiple="maxFiles > 1 ? true : false" :store-name="storeName"
+                keep-store="true"></m-file-select>
+            <p class="m-file-upload__no-drop-zone__format" v-if="hasAllowedExtensions">
+                <m-i18n class="m-file-upload__no-drop-zone__format__label" k="m-file-upload:format" :nb="allowedExtensions.length"></m-i18n>: {{fileAllowedExtensions}}</p>
         </div>
 
         <h3 class="m-file-upload__title" v-if="!hasUploadingFiles">

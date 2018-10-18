@@ -71,6 +71,9 @@ export class Portal extends ModulVue implements PortalMixin {
     @Prop()
     public preload: boolean;
 
+    @Prop({ default: true })
+    public lazy: boolean;
+
     public loaded: boolean = false;
 
     private internalTrigger: HTMLElement | undefined = undefined;
@@ -134,6 +137,7 @@ export class Portal extends ModulVue implements PortalMixin {
     protected mounted(): void {
         this.portalTargetEl = document.getElementById(this.propId) as HTMLElement;
         this.handleTrigger();
+        if (!this.lazy) { this.ensurePortalTargetEl(); }
     }
 
     protected beforeDestroy(): void {
@@ -176,6 +180,8 @@ export class Portal extends ModulVue implements PortalMixin {
                                 this.setFocusToPortal();
                                 this.opening = false;
                             }, this.transitionDuration);
+                        } else {
+                            this.$emit('portal-content-visible');
                         }
                     }
                 });
@@ -220,7 +226,7 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public get portalMounted(): boolean {
-        return (this.propOpen || this.preload || this.loaded) && this.portalTargetMounted;
+        return (this.propOpen || this.preload || this.loaded) && (this.portalTargetMounted || !this.lazy);
     }
 
     @Watch('trigger')
@@ -283,6 +289,7 @@ export class Portal extends ModulVue implements PortalMixin {
             this.$nextTick(() => {
                 this.portalTargetMounted = true;
                 this.portalTargetEl = document.querySelector(this.portalTargetSelector) as HTMLElement;
+                this.$emit('portal-content-mounted');
                 onPortalReady();
             });
         } else {

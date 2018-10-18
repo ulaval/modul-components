@@ -17,7 +17,7 @@
                             <slot name="header-right"></slot>
                         </div>
                     </header>
-                    <div class="m-overlay__body"
+                    <div class="m-overlay__body" ref="body" @focusin="handleFooter" @focusout="handleFooter"
                          :class="{ 'm--no-padding': !padding || !paddingBody }">
                         <slot></slot>
                     </div>
