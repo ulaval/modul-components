@@ -1,31 +1,39 @@
 <section class="m-template"
-         :class="{ 'm--has-column' : hasColumnSlot,
+         :class="{ 'm--has-column' : $slots.column,
                    'm--is-eq-max-s' : isEqMaxS,
                    'm--is-eq-max-m' : isEqMaxM }">
-    <header class="m-template__header-container" v-if="hasHeaderSlot">
+    <header class="m-template__header-container" v-if="$slots.header">
         <div class="m-template__header">
             <slot name="header"></slot>
         </div>
     </header>
-    <div class="m-template__wrap" v-if="hasDefaultSlot || hasColumnSlot || hasFooterSlot ">
-        <div class="m-template__main" v-if="hasDefaultSlot || (hasFooterSlot && !footerFullWidth)">
+    <div class="m-template__wrap"
+         v-if="$slots.default || $slots.subHeader || $slots.column || $slots.footer ">
+        <div class="m-template__main"
+             v-if="$slots.default || $slots.subHeader || ($slots.footer && !footerFullWidth)">
             <div class="m-template__main-content">
-                <div class="m-template__sub-header" v-if="hasSubHeaderSlot">
+                <div class="m-template__sub-header"
+                     v-if="$slots.subHeader">
                     <slot name="subHeader"></slot>
                 </div>
-                <div class="m-template__body" v-if="hasDefaultSlot">
+                <div class="m-template__body"
+                     :class="{ 'm--no-padding': !paddingBody }"
+                     v-if="$slots.default">
                     <slot></slot>
                 </div>
-                <footer class="m-template__body-footer" v-if="hasFooterSlot && !footerFullWidth">
+                <footer class="m-template__body-footer"
+                        v-if="$slots.footer && !footerFullWidth">
                     <slot name="footer"></slot>
                 </footer>
             </div>
         </div>
-        <aside class="m-template__column" v-if="hasColumnSlot">
+        <aside class="m-template__column"
+               v-if="$slots.column">
             <slot name="column"></slot>
         </aside>
     </div>
-    <footer class="m-template__body__footer" v-if="hasFooterSlot && footerFullWidth">
+    <footer class="m-template__body__footer"
+            v-if="$slots.footer && footerFullWidth">
         <slot name="footer"></slot>
     </footer>
 </section>
