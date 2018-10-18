@@ -143,7 +143,8 @@ export class Messages {
 
         let val: string = this.resolveKey(this.curLang, key, nb, modifier);
 
-        if (this.globalParams && (this.formatMode === (FormatMode.Sprintf || FormatMode.Vsprintf))) {
+        if (this.globalParams && (this.formatMode === FormatMode.Sprintf || this.formatMode === FormatMode.Vsprintf)
+        ) {
             params = Object.assign(this.globalParams, params);
         }
 
