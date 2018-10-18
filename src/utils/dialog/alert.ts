@@ -20,7 +20,7 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
     }
     AlertInstance.message = message;
     AlertInstance.okLabel = options && options.okLabel ? options.okLabel : undefined;
-    AlertInstance.negativeLink = false;
+    AlertInstance.cancelLink = false;
 
     return new Promise((resolve, reject) => {
         let onOk: () => void = () => {

@@ -47,7 +47,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop()
     public cancelPrecision: string | undefined;
     @Prop({ default: false })
-    public negativeLink: boolean;
+    public cancelLink: boolean;
     @Prop({
         default: MDialogWidth.Default,
         validator: value =>

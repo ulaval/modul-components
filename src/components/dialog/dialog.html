@@ -40,7 +40,7 @@
                                 <m-i18n v-else k="m-dialog:close"></m-i18n>
                                 <template slot="precision" v-if="hasCancelPrecision">{{ cancelPrecision }}</template>
                             </m-button>
-                            <m-link mode="button" @click="onCancelLink()" v-if="negativeLink">
+                            <m-link mode="button" @click="onCancelLink()" v-if="cancelLink">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
                                 <m-i18n v-else k="m-dialog:cancel"></m-i18n>
                             </m-link>
