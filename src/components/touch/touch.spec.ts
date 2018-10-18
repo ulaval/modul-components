@@ -1,7 +1,7 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
-import { MZingGestureDirections, MZingTouchGestures } from './enums';
+import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 import { MTouch, MTouchSwipeDirection, MTouchSwipeOptions } from './touch';
 import ZingTouchUtil, { MZingGesture, MZingGestureCallback, MZingRegion } from './zingtouch';
 
@@ -11,7 +11,8 @@ jest.mock('./zingtouch', () => ({
     GestureFactory: {
         getGesture: jest.fn()
     },
-    detectDirection: jest.fn()
+    detectDirection: jest.fn(),
+    detectTap: jest.fn()
 }));
 
 describe('MTouch', () => {
@@ -150,14 +151,27 @@ describe('MTouch', () => {
             });
         });
 
-        it(`should hanndle tap`, () => {
+        it(`should handle tap when detected tap is a tap`, () => {
             const fakeEventObject: any = { detail: 'someDetail', stopPropagation: jest.fn() };
             jest.spyOn(fakeEventObject, 'stopPropagation');
+            (ZingTouchUtil.detectTap as jest.Mock).mockImplementation(() => MZingTapInteractions.Tap);
 
             mountComponent();
             tapcallback(fakeEventObject as any);
 
-            expect(wrapper.emitted('tap')[0][0]).toBeDefined();
+            expect(wrapper.emitted('tap')).toBeDefined();
+            expect(fakeEventObject.stopPropagation).toHaveBeenCalled();
+        });
+
+        it(`should handle tap when detected tap is a click`, () => {
+            const fakeEventObject: any = { detail: 'someDetail', stopPropagation: jest.fn() };
+            jest.spyOn(fakeEventObject, 'stopPropagation');
+            (ZingTouchUtil.detectTap as jest.Mock).mockImplementation(() => MZingTapInteractions.Click);
+
+            mountComponent();
+            tapcallback(fakeEventObject as any);
+
+            expect(wrapper.emitted('click')).toBeDefined();
             expect(fakeEventObject.stopPropagation).toHaveBeenCalled();
         });
     });

@@ -10,8 +10,8 @@ export * from './i18n/i18n';
 export * from './logger/logger';
 // re-exporte because of a conflit with ./mixin/media-queries
 export { MediaQueries as MediaQueriesUtils, MediaQueriesBpMin, MediaQueriesBpMax, MediaQueriesBp } from './media-queries/media-queries';
-export * from './modal/alert';
-export * from './modal/confirm';
+export * from './dialog/alert';
+export * from './dialog/confirm';
 export * from './modul/modul';
 export * from './svg/sprites';
 

@@ -1,11 +1,12 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import WithRender from './page-not-found.html';
+import { Prop } from 'vue-property-decorator';
+
+import { PAGE_NOT_FOUND_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
-import { Prop } from 'vue-property-decorator';
-import { PAGE_NOT_FOUND_NAME } from '../component-names';
+import WithRender from './page-not-found.html';
 
 @WithRender
 @Component
