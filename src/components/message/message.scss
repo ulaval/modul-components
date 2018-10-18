@@ -36,7 +36,7 @@ $m-message-size: 32px;
     &.m--is-state-hint {
         @include m-message-skin-default($m-color--hint);
 
-        border: 1px solid #00c77f;
+        border: 1px solid $m-color--success;
 
         .m-message {
             &__wrap {

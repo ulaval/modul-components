@@ -112,7 +112,7 @@ $m-dialog--max-width--l: 500px !default;
             padding: $m-spacing $m-spacing;
 
             @media (min-width: $m-mq--min--s) {
-                padding: $m-spacing--l $m-spacing--l;
+                padding: $m-spacing--l;
             }
         }
     }
