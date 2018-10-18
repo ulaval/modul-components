@@ -159,7 +159,7 @@ $m-dialog--max-width--l: 500px !default;
         }
 
         .m-button {
-            min-width: 226px;
+            min-width: 100%;
 
             + .m-button {
                 margin-top: 12px;

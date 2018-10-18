@@ -67,12 +67,6 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     })
     public type: MDialogState;
 
-    public $refs: {
-        article: HTMLElement
-        prbtn: HTMLElement,
-        secbtn: HTMLElement
-    };
-
     public handlesFocus(): boolean {
         return true;
     }
@@ -87,18 +81,6 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     public getPortalElement(): HTMLElement {
         return this.$refs.article as HTMLElement;
-    }
-
-    //temp WIP
-    protected mounted(): void {
-        this.$nextTick(() => {
-
-            let prBtn: {} = this.$refs.prbtn;
-            let secBtn: {} = this.$refs.secbtn;
-
-            console.log(prBtn);
-            console.log(secBtn);
-        });
     }
 
     private onPrimaryButton(): void {
