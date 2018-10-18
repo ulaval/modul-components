@@ -1,6 +1,5 @@
 {
     "m-modal": {
-        "cancel": "Annuler",
-        "ok": "Ok"
+        "close": "Fermer la fenêtre"
     }
 }

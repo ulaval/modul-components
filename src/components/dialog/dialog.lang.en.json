@@ -1,5 +1,6 @@
 {
     "m-dialog": {
-        "close": "Close"
+        "cancel": "Cancel",
+        "ok": "Ok"
     }
 }

@@ -64,7 +64,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalItems: MDropdownItem[] = [];
     private internalNavigationItems: MDropdownItem[];
     private internalSelectedText: string | undefined = '';
-    private observer: any;
+    private observer: MutationObserver;
     private focusedIndex: number = -1;
 
     private internalOpen: boolean = false;
@@ -93,18 +93,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (this.focus) {
             this.focusChanged(this.focus);
         }
-        this.$nextTick(() => {
-            this.buildItemsMap();
+    }
 
-            this.observer = new MutationObserver(() => {
-                this.buildItemsMap();
-            });
-
-            if (this.$refs.items) {
-                // todo: mobile
-                this.observer.observe(this.$refs.items, { subtree: true, childList: true });
-            }
-        });
+    protected beforeDestroy(): void {
+        if (this.observer) { this.observer.disconnect(); }
     }
 
     public get open(): boolean {
@@ -165,6 +157,19 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.dirty = false;
         this.internalOpen = false;
         this.setInputWidth();
+    }
+
+    private portalContentMounted(): void {
+        this.buildItemsMap();
+
+        this.observer = new MutationObserver(() => {
+            this.buildItemsMap();
+        });
+
+        if (this.$refs.items) {
+            // todo: mobile
+            this.observer.observe(this.$refs.items, { subtree: true, childList: true });
+        }
     }
 
     private setInputWidth(): void {

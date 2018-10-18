@@ -1,15 +1,15 @@
 import { shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import { ERROR_TEMPLATE_NAME } from '../component-names';
-import { Link } from '../error-template/error-template';
+import { MESSAGE_PAGE_NAME } from '../component-names';
+import { Link } from '../message-page/message-page';
 import { MErrorAccessDenied } from './error-access-denied';
 
 let wrapper: Wrapper<MErrorAccessDenied>;
 
 const getStubs: any = () => {
     return {
-        [ERROR_TEMPLATE_NAME]: '<div><slot /></div>'
+        [MESSAGE_PAGE_NAME]: '<div><slot /></div>'
     };
 };
 

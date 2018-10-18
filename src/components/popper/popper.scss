@@ -20,6 +20,10 @@ $m-popper--margin: $m-margin !default;
             background: $m-color--white;
         }
 
+        &.m--is-hidden {
+            display: none;
+        }
+
         &.m--is-default-anim {
             &.m--is-enter-active,
             &.m--is-leave-active {

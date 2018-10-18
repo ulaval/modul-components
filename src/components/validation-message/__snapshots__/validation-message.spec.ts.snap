@@ -8,7 +8,7 @@ exports[`MValidationMessage should render correctly when it is in error 1`] = `
                 <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
                     <title>Error</title>
                     <use aria-hidden="true"></use>
-                </svg><span class="m-validation-message__text">error</span></p>
+                </svg> <span class="m-validation-message__text">error</span></p>
         </div>
     </m-accordion-transition>
 </div>
@@ -22,7 +22,7 @@ exports[`MValidationMessage should render correctly when it is in error 2`] = `
                 <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
                     <title>Error</title>
                     <use aria-hidden="true"></use>
-                </svg><span class="m-validation-message__text">error</span></p>
+                </svg> <span class="m-validation-message__text">error</span></p>
         </div>
     </m-accordion-transition>
 </div>
@@ -50,7 +50,7 @@ exports[`MValidationMessage should render error message even if there is a valid
                 <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
                     <title>Error</title>
                     <use aria-hidden="true"></use>
-                </svg><span class="m-validation-message__text">error</span></p>
+                </svg> <span class="m-validation-message__text">error</span></p>
         </div>
     </m-accordion-transition>
 </div>

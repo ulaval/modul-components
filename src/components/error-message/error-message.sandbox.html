@@ -16,7 +16,7 @@
 
     <h5>unexpected error popup with stack</h5>
     <m-button v-m-popup:errorpopup>pop me an error</m-button>
-    <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
+    <m-dialog ref="errorpopup" :negativeLink="false" ok-label="Fermer">
         <m-error-message :error="e" :referenceNumber="123456879" :stacktrace="true"></m-error-message>
-    </m-modal>
+    </m-dialog>
 </div>
