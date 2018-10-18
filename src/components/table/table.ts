@@ -4,11 +4,11 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
-import WithRender from './table.html?style=./table.scss';
-import TableHeaderCellPlugin from './table-header-cell/table-header-cell';
 import TableBodyCellPlugin from './table-body-cell/table-body-cell';
+import TableEmptyCellPlugin from './table-empty-cell/table-empty-cell';
 import TableFooterCellPlugin from './table-footer-cell/table-footer-cell';
-import { MAccordionSkin } from '../accordion/accordion';
+import TableHeaderCellPlugin from './table-header-cell/table-header-cell';
+import WithRender from './table.html?style=./table.scss';
 
 export enum MTableSkin {
     Regular = 'regular'
@@ -44,6 +44,10 @@ export class MTable extends ModulVue {
         return !!this.$slots['table-footer'];
     }
 
+    public get isEmpty(): boolean {
+        return !this.data.length;
+    }
+
     protected created(): void {
         this.propRows = (this.data.length <= this.maxRows) ? this.data.length : this.maxRows;
     }
@@ -64,6 +68,7 @@ const TablePlugin: PluginObject<any> = {
         v.use(TableHeaderCellPlugin);
         v.use(TableBodyCellPlugin);
         v.use(TableFooterCellPlugin);
+        v.use(TableEmptyCellPlugin);
         v.component(TABLE_NAME, MTable);
     }
 };

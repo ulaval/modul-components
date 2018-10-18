@@ -74,6 +74,7 @@ export const TABLE_NAME: string = 'm-table';
 export const TABLE_HEADER_CELL_NAME: string = 'm-table-header-cell';
 export const TABLE_BODY_CELL_NAME: string = 'm-table-body-cell';
 export const TABLE_FOOTER_CELL_NAME: string = 'm-table-footer-cell';
+export const TABLE_EMPTY_CELL_NAME: string = 'm-table-empty-cell';
 export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
 export const TEXTAREA_NAME: string = 'm-textarea';
