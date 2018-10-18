@@ -5,12 +5,14 @@ import { Prop } from 'vue-property-decorator';
 
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
-import ButtonPlugin from '../button/button';
+import ButtonPlugin, { MButton } from '../button/button';
 import { DIALOG_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import MessagePlugin, { MMessageState } from '../message/message';
 import WithRender from './dialog.html?style=./dialog.scss';
+import { MPopup } from '../popup/popup';
+import { MInputStyle } from '../input-style/input-style';
 
 export enum MDialogWidth {
     Default = 'default',
@@ -65,6 +67,12 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     })
     public type: MDialogState;
 
+    public $refs: {
+        article: HTMLElement
+        prbtn: HTMLElement,
+        secbtn: HTMLElement
+    };
+
     public handlesFocus(): boolean {
         return true;
     }
@@ -79,6 +87,18 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     public getPortalElement(): HTMLElement {
         return this.$refs.article as HTMLElement;
+    }
+
+    //temp WIP
+    protected mounted(): void {
+        this.$nextTick(() => {
+
+            let prBtn: {} = this.$refs.prbtn;
+            let secBtn: {} = this.$refs.secbtn;
+
+            console.log(prBtn);
+            console.log(secBtn);
+        });
     }
 
     private onPrimaryButton(): void {
@@ -155,6 +175,16 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
                 break;
         }
         return state;
+    }
+
+    private equalizeBtns(): any {
+        let width: string = '';
+        let sizeArray: any;
+
+        sizeArray = document.getElementsByClassName('m-button');
+        console.log(sizeArray);
+
+        return sizeArray;
     }
 }
 

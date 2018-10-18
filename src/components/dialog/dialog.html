@@ -30,12 +30,12 @@
                         <slot name="footer"></slot>
                         <nav class="m-dialog__footer__nav"
                              v-if="!hasFooterSlot">
-                            <m-button @click="onPrimaryButton()">
+                            <m-button ref="prbtn" @click="onPrimaryButton()">
                                 <template v-if="hasOkLabel">{{ okLabel }}</template>
                                 <m-i18n v-else k="m-dialog:ok"></m-i18n>
                                 <template slot="precision" v-if="hasOkPrecision">{{ okPrecision }}</template>
                             </m-button>
-                            <m-button @click="onSecondaryButton()" skin="secondary" isRegularSize="true">
+                            <m-button sec="secbtn" @click="onSecondaryButton()" skin="secondary" isRegularSize="true">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
                                 <m-i18n v-else k="m-dialog:close"></m-i18n>
                                 <template slot="precision" v-if="hasCancelPrecision">{{ cancelPrecision }}</template>
