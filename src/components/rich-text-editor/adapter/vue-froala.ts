@@ -365,7 +365,7 @@ export enum FroalaStatus {
         }
     }
 
-    private refreshDirtyModel(): void{
+    private refreshDirtyModel(): void {
         if (this.isDirty) {
             this.isDirty = false;
             this.updateModel();
