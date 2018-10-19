@@ -4,6 +4,12 @@
     table {
         width: 45%;
         margin-bottom: $m-margin--l;
+
+        .subscribed {
+            background-color: $m-color--success;
+            padding: $m-padding--xs $m-padding--s;
+            color: $m-color--grey-lightest;
+        }
     }
 
     h2 {

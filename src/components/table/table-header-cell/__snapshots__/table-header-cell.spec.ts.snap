@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Given a header When the width is defined Should render correctly 1`] = `<th style="width:25%;"></th>`;
-
-exports[`Given a header When the width is undefined Should render correctly 1`] = `<th></th>`;

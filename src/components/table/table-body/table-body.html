@@ -1,0 +1,5 @@
+<tbody>
+    <m-table-row v-for="(data, row) in rows" :key="row">
+        <slot :data="data"></slot>
+    </m-table-row>
+</tbody>

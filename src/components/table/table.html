@@ -1,20 +1,3 @@
 <table class="m-table" :class="[ 'm-table-' + skin]" cellspacing="0">
-    <thead v-if="hasHeader">
-        <tr>
-            <slot name="table-header"></slot>
-        </tr>
-    </thead>
-    <tbody>
-        <template v-if="isEmpty">
-            <m-table-empty-cell v-if="isEmpty"><slot name="table-empty"></slot></m-table-empty-cell>
-        </template>
-        <tr v-else v-for="row in propRows" :key="row">
-            <slot name="table-data" :data="getDataValue(row)"></slot>
-        </tr>
-    </tbody>
-    <tfoot v-if="hasFooter">
-        <tr>
-            <slot name="table-footer"></slot>
-        </tr>
-    </tfoot>
+    <slot></slot>
 </table>

@@ -1,21 +1,13 @@
 import { PluginObject } from 'vue';
-
-import WithRender from './table-header-cell.html';
-import { ModulVue } from '../../../utils/vue/vue';
 import Component from 'vue-class-component';
-import { TABLE_HEADER_CELL_NAME } from '../../component-names';
-import { Prop } from 'vue-property-decorator';
+
+import { ModulVue } from '../../../../utils/vue/vue';
+import { TABLE_HEADER_CELL_NAME } from '../../../component-names';
+import WithRender from './table-header-cell.html';
 
 @WithRender
 @Component
 export class MTableHeaderCell extends ModulVue {
-
-    @Prop({ default: '' })
-    width: string;
-
-    public get propWidth(): { width: string } | undefined {
-        return this.width ? { width: this.width } : undefined;
-    }
 
 }
 

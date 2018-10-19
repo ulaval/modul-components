@@ -1,38 +1,61 @@
 <div class="m-table-sandbox">
     <h2>Table - With header and footer</h2>
-    <m-table :data="data" :max-rows="5">
-        <template slot="table-header">
+    <m-table>
+        <m-table-header>
+            <m-table-row>
+                <m-table-header-cell>Name</m-table-header-cell>
+                <m-table-header-cell>Age</m-table-header-cell>
+                <m-table-header-cell>Username</m-table-header-cell>
+                <m-table-header-cell>Subscription</m-table-header-cell>
+                <m-table-header-cell width="10%"></m-table-header-cell>
+            </m-table-row>
+        </m-table-header>
+        <m-table-body :rows="data">
+            <template scope="{data}">
+                <m-table-cell>
+                    <m-link>{{ data.name }}</m-link>
+                </m-table-cell>
+                <m-table-cell>
+                    {{ data.age }}
+                </m-table-cell>
+                <m-table-cell>
+                    {{ data.username }}
+                </m-table-cell>
+                <m-table-cell>
+                    <span class="subscribed">Subscribed</span>
+                </m-table-cell>
+                <m-table-cell>
+                    <m-option>
+                        <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
+                        <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+                    </m-option>
+                </m-table-cell>
+            </template>
+        </m-table-body>
+
+        <!-- <template slot="table-header">
             <m-table-header-cell>Name</m-table-header-cell>
             <m-table-header-cell>Age</m-table-header-cell>
             <m-table-header-cell>Username</m-table-header-cell>
+            <m-table-header-cell>Subscribed</m-table-header-cell>
             <m-table-header-cell width="10%"></m-table-header-cell>
         </template>
+        <m-table-header>
+            <m-table-row>
+                <m-table-cell>rtyr</m-table-cell>
+                <m-table-cell>rtyr</m-table-cell>
+                <m-table-cell>rtyr</m-table-cell>
+            </m-table-row>
+        </m-table-header>
         <template slot="table-data" scope="{data}">
-            <m-table-body-cell>
-                <m-link>{{ data.name }}</m-link>
-            </m-table-body-cell>
-            <m-table-body-cell>
-                {{ data.age }}
-            </m-table-body-cell>
-            <m-table-body-cell>
-                {{ data.username }}
-            </m-table-body-cell>
-            <m-table-body-cell>
-                <m-option>
-                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
-                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
-                </m-option>
-            </m-table-body-cell>
+
         </template>
         <template slot="table-footer">
-            <m-table-footer-cell>TEST</m-table-footer-cell>
-            <m-table-footer-cell>TEST</m-table-footer-cell>
-            <m-table-footer-cell>TEST</m-table-footer-cell>
-            <m-table-footer-cell>TEST</m-table-footer-cell>
-        </template>
+            <m-table-footer-cell colspan="5" style="text-align: center;"><m-link @click="showMore">Show more</m-link></m-table-footer-cell>
+        </template> -->
     </m-table>
 
-    <h2>Table - Without header and footer</h2>
+    <!-- <h2>Table - Without header and footer</h2>
     <m-table :data="data" :max-rows="5">
         <template slot="table-data" scope="{data}">
             <m-table-body-cell>
@@ -99,7 +122,7 @@
             <m-table-header-cell width="10%"></m-table-header-cell>
         </template>
         <template slot="table-empty">
-            <td colspan="4" style="text-align:center; padding: 10px; background-color: #ff5252; color: white;">Je suis vide</td>
+            <td colspan="4" style="text-align:center; padding: 10px; background-color: #ff5252; color: white;">Empty data</td>
         </template>
-    </m-table>
+    </m-table> -->
 </div>
