@@ -82,7 +82,7 @@ $m-steppers--badge--size: 14px;
 
     &__icon-completed {
         position: absolute;
-        bottom: 0;
+        bottom: -4px; // Magic number
         right: -6px; // Magic number
         color: $m-color--success;
     }
