@@ -1,21 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MTable Given a table full of data When rowsMax < data.length Should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
-    <tbody>
-        <tr></tr>
-        <tr></tr>
-    </tbody>
-</table>
-`;
-
-exports[`MTable Given a table full of data When rowsMax > data.length Should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
-    <tbody>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-    </tbody>
-</table>
-`;
+exports[`MTable Should render correctly 1`] = `<table cellspacing="0" class="m-table m-table-regular"></table>`;

@@ -13,48 +13,12 @@ export enum MTableSkin {
 @Component
 export class MTable extends ModulVue {
 
-    @Prop({ default: () => [] })
-    rows: any[];
-
-    // @Prop({ default: 50 })
-    // maxRows: number;
-
     @Prop({
         default: MTableSkin.Regular,
         validator: value =>
             value === MTableSkin.Regular
     })
     public skin: MTableSkin;
-
-    // private rows: number = 0;
-
-    // public getDataValue(row: number): any {
-    //     return this.data[row - 1];
-    // }
-
-    // public get hasHeader(): boolean {
-    //     return !!this.$slots['table-header'];
-    // }
-
-    // public get hasFooter(): boolean {
-    //     return !!this.$slots['table-footer'];
-    // }
-
-    // public get isEmpty(): boolean {
-    //     return !this.data.length;
-    // }
-
-    // protected created(): void {
-    //     this.propRows = (this.data.length <= this.maxRows) ? this.data.length : this.maxRows;
-    // }
-
-    // public get propRows(): number {
-    //     return this.rows;
-    // }
-
-    // public set propRows(rows: number) {
-    //     this.rows = rows;
-    // }
 
 }
 
