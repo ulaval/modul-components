@@ -31,12 +31,14 @@ $m-steppers--badge--size: 14px;
     }
 
     &.m--is-in-progress {
-        .m-steppers-item__icon {
-            border-color: $m-color--ul-yellow;
-        }
+        .m-steppers-item {
+            &__icon {
+                border-color: $m-color--ul-yellow;
+            }
 
-        .m-steppers-item__title {
-            font-weight: $m-font-weight--bold;
+            &__title {
+                font-weight: $m-font-weight--bold;
+            }
         }
     }
 
@@ -48,16 +50,24 @@ $m-steppers--badge--size: 14px;
             cursor: not-allowed;
         }
 
-        .m-steppers-item__icon {
-            border-color: $m-color--grey;
-        }
+        .m-steppers-item {
+            &__icon {
+                border-color: $m-color--grey;
+                color: $m-color--grey;
+            }
 
-        .m-steppers-item__title {
-            color: $m-color--grey-dark;
+            &__icon-completed {
+                color: $m-color--grey;
+            }
+
+            &__title {
+                color: $m-color--grey-dark;
+            }
         }
     }
 
     &__icon {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -68,6 +78,13 @@ $m-steppers--badge--size: 14px;
         background-color: $m-color--white;
         font-size: $m-steppers--icon--size;
         transition: color $m-transition-duration;
+    }
+
+    &__icon-completed {
+        position: absolute;
+        bottom: 0;
+        right: -6px; // Magic number
+        color: $m-color--success;
     }
 
     &__title {

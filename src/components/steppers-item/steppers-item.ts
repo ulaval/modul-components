@@ -33,6 +33,8 @@ export class MSteppersItem extends ModulVue {
     public iconName: string;
     @Prop()
     public iconTitle: string;
+    @Prop({ default: false })
+    public confirmation: boolean;
 
     @Watch('state')
     private stateChanged(value?: string[]): void {
