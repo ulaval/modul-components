@@ -35,7 +35,7 @@
                                 <m-i18n v-else k="m-dialog:ok"></m-i18n>
                                 <template slot="precision" v-if="hasPrBtnPrecision">{{ prBtnPrecision }}</template>
                             </m-button>
-                            <m-button @click="onSecondaryButton()" skin="secondary" isRegularSize="true" v-if="secBtn">
+                            <m-button @click="onSecondaryButton()" skin="secondary" v-if="secBtn">
                                 <template v-if="hasSecBtnLabel">{{ secBtnLabel }}</template>
                                 <m-i18n v-else k="m-dialog:close"></m-i18n>
                                 <template slot="precision" v-if="hasSecBtnPrecision">{{ secBtnPrecision }}</template>

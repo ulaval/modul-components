@@ -1,25 +1,52 @@
 <div>
-    <h2 class="m-u--no-margin">Width default</h2>
-    <m-dialog class="m-u--margin-top" title="Titre de la fenêtre">
+    <h2 class="m-u--no-margin">Width default with a single button</h2>
+    <m-dialog class="m-u--margin-top" :secBtn="false" title="Titre de la fenêtre">
         <m-button slot="trigger">Ouvrir la fenêtre</m-button>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero id!
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel
+        doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero
+        id!
     </m-dialog>
-
-    <h2 class="m-u--no-margin">Width default with specified type, hint and cancelLink</h2>
-    <m-dialog class="m-u--margin-top" title="Titre de la fenêtre" cancelLink="true" secBtnLabel="Long custom close label" type="confirmation" hint="Je suis un indice">
+    <br/>
+    <br/>
+    <br/>
+    <h2 class="m-u--no-margin">Width default with type=error andboth buttons</h2>
+    <m-dialog class="m-u--margin-top" type="error" title="Titre de la fenêtre">
         <m-button slot="trigger">Ouvrir la fenêtre</m-button>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero id!
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel
+        doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero
+        id!
     </m-dialog>
-
-    <h2>Width large with a specified type</h2>
-    <m-dialog class="m-u--margin-top" title="Titre de la fenêtre" type="information" width="large">
+    <br/>
+    <br/>
+    <br/>
+    <h2 class="m-u--no-margin">Width default with type=confirmation, secondary button, hint and cancelLink</h2>
+    <m-dialog class="m-u--margin-top" title="Titre de la fenêtre" cancelLink="true" type="confirmation"
+              hint="This is a hint, but is it a good hint?">
         <m-button slot="trigger">Ouvrir la fenêtre</m-button>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero id!
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel
+        doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero
+        id!
     </m-dialog>
-
-    <h2>Width large with with specified type, hint and cancelLink</h2>
-    <m-dialog class="m-u--margin-top" type="information" title="Titre de la fenêtre" cancelLink="true" width="large" hint="Je suis un gros gros indice">
+    <br/>
+    <br/>
+    <h2>Width large with type=information, primary btn precision, custom secondary btn label</h2>
+    <m-dialog class="m-u--margin-top" title="Titre de la fenêtre" type="information" width="large"
+              prBtnPrecision="this is a precision" secBtnLabel="Long custom close label">
         <m-button slot="trigger">Ouvrir la fenêtre</m-button>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero id!
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel
+        doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero
+        id!
+    </m-dialog>
+    <br/>
+    <br/>
+    <h2>Width large with with specified type=warning, sec btn custom label, hint, cancelLink, custom cancelLink
+        Label</h2>
+    <m-dialog class="m-u--margin-top" type="warning" title="Titre de la fenêtre" cancelLink="true"
+              secBtnPrecision="small precision" cancelLinkLabel="Get out" width="large"
+              hint="I am a very big hint, even bigger than the other hint">
+        <m-button slot="trigger">Ouvrir la fenêtre</m-button>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel
+        doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero
+        id!
     </m-dialog>
 </div>
