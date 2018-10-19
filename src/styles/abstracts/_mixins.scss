@@ -346,25 +346,56 @@
 }
 
 @mixin m-table-regular() {
-    width: 100%;
-    border: $m-border-width--s solid $m-color--grey-lighter;
-
-    thead {
+    /deep/ thead {
         text-align: left;
 
         tr {
-            background: $m-color--grey-lightest;
+            background: $m-color--grey-light;
+
+            th {
+                color: $m-color--grey;
+                height: 64px;
+
+                &:first-child {
+                    padding-left: $m-padding;
+                }
+
+                &:last-child {
+                    padding-right: $m-padding;
+                }
+            }
         }
     }
 
-    tr {
-        &:nth-child(even) {
-            background: $m-color--grey-lightest;
-        }
+    /deep/ tbody {
+        tr {
+            &:nth-child(even) {
+                background: $m-color--grey-lightest;
+            }
 
-        td,
-        th {
-            padding: 5px 10px;
+            &.m-table-empty-cell {
+                background-color: $m-color--grey-lightest;
+                text-align: center;
+
+                td {
+                    padding: $m-padding--xl;
+                    color: $m-color--grey;
+                }
+            }
+
+            td {
+                color: $m-color--grey-darker;
+                font-weight: $m-font-weight--bold;
+                height: 64px;
+
+                &:first-child {
+                    padding-left: $m-padding;
+                }
+
+                &:last-child {
+                    padding-right: $m-padding;
+                }
+            }
         }
     }
 }
