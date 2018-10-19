@@ -3,8 +3,8 @@ import Vue, { PluginObject } from 'vue';
 import { MDialog } from '../../components/dialog/dialog';
 
 export interface ConfirmOptions {
-    okLabel?: string;
-    cancelLabel?: string;
+    prBtnLabel?: string;
+    secBtnLabel?: string;
     silentCancel?: boolean;
 }
 
@@ -21,11 +21,11 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
         document.body.appendChild(confirmInstance.$el);
     }
     confirmInstance.message = message;
-    confirmInstance.okLabel = options && options.okLabel ? options.okLabel : undefined;
-    confirmInstance.cancelLabel = options && options.cancelLabel ? options.cancelLabel : undefined;
+    confirmInstance.prBtnLabel = options && options.prBtnLabel ? options.prBtnLabel : undefined;
+    confirmInstance.secBtnLabel = options && options.secBtnLabel ? options.secBtnLabel : undefined;
 
     return new Promise((resolve, reject) => {
-        let onOk: () => void = () => {
+        let onPrimaryButton: () => void = () => {
             if (confirmInstance) {
                 unhook();
             }
@@ -35,7 +35,7 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
             });
         };
 
-        let onCancel: () => void = () => {
+        let onSecondaryButton: () => void = () => {
             if (confirmInstance) {
                 unhook();
             }
@@ -46,16 +46,16 @@ export const confirmFunction: ConfirmFunction = (message: string, options?: Conf
 
         let hook: () => void = () => {
             if (confirmInstance) {
-                confirmInstance.$on('ok', onOk);
-                confirmInstance.$on('cancel', onCancel);
+                confirmInstance.$on('primary', onPrimaryButton);
+                confirmInstance.$on('secondary', onSecondaryButton);
                 confirmInstance.$props['open'] = true;
             }
         };
 
         let unhook: () => void = () => {
             if (confirmInstance) {
-                confirmInstance.$off('ok', onOk);
-                confirmInstance.$off('cancel', onCancel);
+                confirmInstance.$off('primary', onPrimaryButton);
+                confirmInstance.$off('secondary', onSecondaryButton);
                 confirmInstance.$props['open'] = false;
             }
         };

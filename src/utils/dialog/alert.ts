@@ -3,7 +3,7 @@ import Vue, { PluginObject } from 'vue';
 import { MDialog } from '../../components/dialog/dialog';
 
 export interface AlertOptions {
-    okLabel?: string;
+    prBtnLabel?: string;
 }
 
 export type AlertFunction = (message: string, options?: AlertOptions) => Promise<any>;
@@ -19,11 +19,11 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
         document.body.appendChild(AlertInstance.$el);
     }
     AlertInstance.message = message;
-    AlertInstance.okLabel = options && options.okLabel ? options.okLabel : undefined;
+    AlertInstance.prBtnLabel = options && options.prBtnLabel ? options.prBtnLabel : undefined;
     AlertInstance.cancelLink = false;
 
     return new Promise((resolve, reject) => {
-        let onOk: () => void = () => {
+        let onPrimaryButton: () => void = () => {
             if (AlertInstance) {
                 unhook();
             }
@@ -35,14 +35,14 @@ export const alertFunction: AlertFunction = (message: string, options?: AlertOpt
 
         let hook: () => void = () => {
             if (AlertInstance) {
-                AlertInstance.$on('ok', onOk);
+                AlertInstance.$on('primary', onPrimaryButton);
                 AlertInstance.$props['open'] = true;
             }
         };
 
         let unhook: () => void = () => {
             if (AlertInstance) {
-                AlertInstance.$off('ok', onOk);
+                AlertInstance.$off('primary', onPrimaryButton);
                 AlertInstance.$props['open'] = false;
             }
         };

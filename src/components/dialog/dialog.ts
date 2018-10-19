@@ -39,15 +39,19 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     @Prop()
     public hint: string;
     @Prop()
-    public okLabel: string | undefined;
+    public prBtnLabel: string | undefined;
     @Prop()
-    public okPrecision: string | undefined;
+    public prBtnPrecision: string | undefined;
+    @Prop({ default: true })
+    public secBtn: boolean;
     @Prop()
-    public cancelLabel: string | undefined;
+    public secBtnLabel: string | undefined;
     @Prop()
-    public cancelPrecision: string | undefined;
+    public secBtnPrecision: string | undefined;
     @Prop({ default: false })
     public cancelLink: boolean;
+    @Prop()
+    public cancelLinkLabel: string | undefined;
     @Prop({
         default: MDialogWidth.Default,
         validator: value =>
@@ -118,20 +122,24 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return !!this.hint;
     }
 
-    private get hasOkLabel(): boolean {
-        return !!this.okLabel;
+    private get hasPrBtnLabel(): boolean {
+        return !!this.prBtnLabel;
     }
 
-    private get hasOkPrecision(): boolean {
-        return !!this.okPrecision;
+    private get hasPrBtnPrecision(): boolean {
+        return !!this.prBtnPrecision;
     }
 
-    private get hasCancelLabel(): boolean {
-        return !!this.cancelLabel;
+    private get hasSecBtnLabel(): boolean {
+        return !!this.secBtnLabel;
     }
 
-    private get hasCancelPrecision(): boolean {
-        return !!this.cancelPrecision;
+    private get hasSecBtnPrecision(): boolean {
+        return !!this.secBtnPrecision;
+    }
+
+    private get hasCancelLinkLabel(): boolean {
+        return !!this.cancelLinkLabel;
     }
 
     private get hasWidthLarge(): boolean {

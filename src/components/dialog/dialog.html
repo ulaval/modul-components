@@ -31,17 +31,17 @@
                         <nav class="m-dialog__footer__nav"
                              v-if="!hasFooterSlot">
                             <m-button @click="onPrimaryButton()">
-                                <template v-if="hasOkLabel">{{ okLabel }}</template>
+                                <template v-if="hasPrBtnLabel">{{ prBtnLabel }}</template>
                                 <m-i18n v-else k="m-dialog:ok"></m-i18n>
-                                <template slot="precision" v-if="hasOkPrecision">{{ okPrecision }}</template>
+                                <template slot="precision" v-if="hasPrBtnPrecision">{{ prBtnPrecision }}</template>
                             </m-button>
-                            <m-button @click="onSecondaryButton()" skin="secondary" isRegularSize="true">
-                                <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
+                            <m-button @click="onSecondaryButton()" skin="secondary" isRegularSize="true" v-if="secBtn">
+                                <template v-if="hasSecBtnLabel">{{ secBtnLabel }}</template>
                                 <m-i18n v-else k="m-dialog:close"></m-i18n>
-                                <template slot="precision" v-if="hasCancelPrecision">{{ cancelPrecision }}</template>
+                                <template slot="precision" v-if="hasSecBtnPrecision">{{ secBtnPrecision }}</template>
                             </m-button>
                             <m-link mode="button" @click="onCancelLink()" v-if="cancelLink">
-                                <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
+                                <template v-if="hasCancelLinkLabel">{{ cancelLinkLabel }}</template>
                                 <m-i18n v-else k="m-dialog:cancel"></m-i18n>
                             </m-link>
                         </nav>
