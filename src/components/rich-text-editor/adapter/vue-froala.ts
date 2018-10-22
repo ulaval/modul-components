@@ -384,8 +384,6 @@ export enum FroalaStatus {
 
     private simulateReadonlyBlur(event: Event): void {
         if (!this.$el.contains(event.target as Node)) {
-            // tslint:disable-next-line:no-console
-            console.log('blurring for real');
             if (this.isFocused) {
                 this.froalaEditor.edit.on();
                 this.froalaEditor.events.trigger('blur');
