@@ -15,11 +15,12 @@
         </div>
         <div><button @click="waiting = !waiting">Waiting (now: {{ waiting }})</button></div>
         <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
+        <div><button @click="readonly = !readonly">ReadOnly (now: {{ readonly }})</button></div>
     </div>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="model" :toolbar-sticky-offset="58" :label="'texte riche'" :max-width="'large'"
+        <m-rich-text-editor v-model="model" :label="'texte riche'" :max-width="'large'"
             :placeholder="'some placeholder'" :focus="focus" :error="error" :error-message="errorMessage"
-            :valid-message="validMessage" :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
+            :valid-message="validMessage" :helper-message="helperMessage" :waiting="waiting" :disabled="disabled" :readonly="readonly"></m-rich-text-editor>
     </div>
     <div class="m-u--margin-bottom">
         <h5>Résultat dans le lecteur</h5>
