@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTableBody When the rows are empty Should render correctly 1`] = `
+<tbody>
+    <m-table-empty></m-table-empty>
+</tbody>
+`;
+
+exports[`MTableBody When the rows are not empty Should render correctly 1`] = `
+<tbody>
+    <m-table-row></m-table-row>
+    <m-table-row></m-table-row>
+</tbody>
+`;
