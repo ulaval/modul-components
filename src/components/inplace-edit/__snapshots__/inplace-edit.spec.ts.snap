@@ -3,15 +3,9 @@
 exports[`Component inplace-edit - Complete component mobile when in editMode should render correctly 1`] = `
 <div class="m-inplace-edit">
     <div class="readSlot">readSlot</div>
-    <div title="Modify" open="open">
+    <div open="open">
         <form>
             <input type="text" name="inputEditMode" value="myInput" class="editSlot">
-            <div class="m-inplace-edit__buttons">
-                <button type="button" class="m-button m--is-skin-primary"> <span class="m-button__text"><span class="m-i18n">Save</span> </span>
-                </button>
-                <button type="button" class="m-button m--is-skin-secondary"> <span class="m-button__text"><span class="m-i18n">Cancel</span> </span>
-                </button>
-            </div>
         </form>
     </div>
 </div>
@@ -20,18 +14,9 @@ exports[`Component inplace-edit - Complete component mobile when in editMode sho
 exports[`Component inplace-edit - Complete component mobile when in editMode should render correctly in waiting mode 1`] = `
 <div class="m-inplace-edit">
     <div class="readSlot">readSlot</div>
-    <div title="Modify" open="open">
+    <div open="open">
         <form>
             <input type="text" name="inputEditMode" value="myInput" class="editSlot">
-            <div class="m-inplace-edit__buttons">
-                <button disabled="disabled" type="button" class="m-button m--is-skin-primary m--is-waiting">
-                    <div aria-hidden="true" class="m-spinner m-button__icon m--is-left">
-                        <div></div>
-                    </div> <span class="m-button__text"><span class="m-i18n">Save</span> </span>
-                </button>
-                <button disabled="disabled" type="button" class="m-button m--is-skin-secondary m--is-disabled"> <span class="m-button__text"><span class="m-i18n">Cancel</span> </span>
-                </button>
-            </div>
         </form>
     </div>
 </div>

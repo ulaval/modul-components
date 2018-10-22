@@ -274,6 +274,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.as<InputState>().isDisabled || this.as<InputState>().isWaiting;
     }
 
+    private get hasFooterSlot(): boolean {
+        return !!this.$slots.footer;
+    }
+
     private onKeydownUp($event: KeyboardEvent): void {
         if (!this.open) {
             this.open = true;

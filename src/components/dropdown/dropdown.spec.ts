@@ -1,4 +1,4 @@
-import { mount, Slots, Wrapper } from '@vue/test-utils';
+import { createLocalVue, mount, Slots, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
 import { resetModulPlugins } from '../../../tests/helpers/component';
@@ -13,11 +13,16 @@ jest.mock('../../utils/uuid/uuid');
 
 describe('MDropdown', () => {
     let localVue: VueConstructor<Vue>;
+    let mockPopper: VueConstructor<Vue>;
 
     beforeEach(() => {
         resetModulPlugins();
-        Vue.use(DropdownPlugin);
-        addMessages(Vue, [
+        localVue = createLocalVue();
+        localVue.use(DropdownPlugin);
+        mockPopper = localVue.component('m-popper', {
+            template: '<m-popper-mock><slot name="footer"></slot></m-popper-mock>'
+        });
+        addMessages(localVue, [
             'components/dropdown/dropdown.lang.en.json'
         ]);
     });
@@ -25,7 +30,7 @@ describe('MDropdown', () => {
     it('should render correctly', () => {
         const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
             mocks: getDefaultMock(),
-            localVue: Vue
+            localVue: localVue
         });
 
         return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
@@ -34,12 +39,24 @@ describe('MDropdown', () => {
     it('should render correctly when placeholder is set', () => {
         const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
             mocks: getDefaultMock(),
-            localVue: Vue,
+            localVue: localVue,
             propsData: {
                 placeholder: 'placeholder test'
             }
         });
 
+        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when footer slot is set', () => {
+        Vue.component('m-popper', mockPopper);
+        const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
+            mocks: getDefaultMock(),
+            localVue: localVue,
+            slots: {
+                footer: '<div>footer-content</div>'
+            }
+        });
         return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
     });
 
