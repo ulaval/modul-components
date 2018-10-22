@@ -373,20 +373,21 @@
                 background: $m-color--grey-lightest;
             }
 
-            &.m-table-empty-cell {
-                background-color: $m-color--grey-lightest;
-                text-align: center;
-
-                td {
-                    padding: $m-padding--xl;
-                    color: $m-color--grey;
-                }
-            }
-
             td {
                 color: $m-color--grey-darker;
                 font-weight: $m-font-weight--bold;
                 height: 64px;
+
+                &.m-table-empty {
+                    background-color: $m-color--grey-lightest;
+                    text-align: center;
+                    height: 161px;
+                    color: $m-color--grey;
+
+                    &--icon {
+                        font-size: 45px;
+                    }
+                }
 
                 &:first-child {
                     padding-left: $m-padding;

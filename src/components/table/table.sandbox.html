@@ -111,7 +111,7 @@
         </template>
     </m-table>-->
 
-    <h2>Table - empty without slot</h2>
+    <h2>Empty table - default slot</h2>
     <m-table :data="emptyData" :max-rows="5">
          <m-table-header>
             <m-table-row>
@@ -123,27 +123,11 @@
             </m-table-row>
         </m-table-header>
         <m-table-body :data="emptyData" columns="5">
-            <template scope="{data}">
-                <m-table-cell>
-                    <m-link>{{ data.name }}</m-link>
-                </m-table-cell>
-                <m-table-cell>{{ data.age }}</m-table-cell>
-                <m-table-cell>{{ data.username }}</m-table-cell>
-                <m-table-cell>
-                    <span class="subscribed">Subscribed</span>
-                </m-table-cell>
-                <m-table-cell>
-                    <m-option>
-                        <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
-                        <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
-                    </m-option>
-                </m-table-cell>
-            </template>
         </m-table-body>
     </m-table>
 
-    <h2>Table - empty with slot</h2>
-    <m-table :data="emptyData" :max-rows="5">
+    <h2>Empty table - custom slot</h2>
+    <m-table :data="emptyData">
          <m-table-header>
             <m-table-row>
                 <m-table-header-cell>Name</m-table-header-cell>
@@ -154,22 +138,6 @@
             </m-table-row>
         </m-table-header>
         <m-table-body :data="emptyData" columns="5">
-            <template scope="{data}">
-                <m-table-cell>
-                    <m-link>{{ data.name }}</m-link>
-                </m-table-cell>
-                <m-table-cell>{{ data.age }}</m-table-cell>
-                <m-table-cell>{{ data.username }}</m-table-cell>
-                <m-table-cell>
-                    <span class="subscribed">Subscribed</span>
-                </m-table-cell>
-                <m-table-cell>
-                    <m-option>
-                        <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
-                        <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
-                    </m-option>
-                </m-table-cell>
-            </template>
             <template slot="table-empty">
                 <m-table-cell :colspan="5" style="text-align:center; padding: 10px; background-color: #ff5252; color: white;">Empty data</m-table-cell>
             </template>
