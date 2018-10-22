@@ -13,6 +13,13 @@ export class MTableBody extends ModulVue {
     @Prop({ default: () => [] })
     rows: any[];
 
+    @Prop()
+    columns: number;
+
+    public get isEmpty(): boolean {
+        return !this.rows.length;
+    }
+
 }
 
 const TableBodyPlugin: PluginObject<any> = {

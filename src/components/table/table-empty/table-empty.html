@@ -1,0 +1,7 @@
+<m-table-row class="m-table-empty-cell">
+    <slot v-if="hasSlot"></slot>
+    <m-table-cell v-else :colspan="columns">
+            {{ i18nEmptyData }}
+            <m-icon name="m-svg__heraldry"></m-icon>
+    </m-table-cell>
+</m-table-row>
