@@ -12,6 +12,11 @@
         }
     }
 
+    &--show-more {
+        text-align: center;
+        padding: $m-padding;
+    }
+
     h2 {
         margin-bottom: $m-margin;
     }

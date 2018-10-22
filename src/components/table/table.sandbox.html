@@ -1,5 +1,5 @@
 <div class="m-table-sandbox">
-    <h2>Complex table - With header and footer</h2>
+    <h2>Complex table</h2>
     <m-table>
         <m-table-header>
             <m-table-row>
@@ -29,9 +29,11 @@
             </template>
         </m-table-body>
         <m-table-footer>
-            <m-table-cell class="m-table-sandbox--show-more" colspan="5">
-                <m-link>Show more</m-link>
-            </m-table-cell>
+            <m-table-row>
+                <m-table-cell class="m-table-sandbox--show-more" colspan="5">
+                    <m-link>Show more</m-link>
+                </m-table-cell>
+            </m-table-row>
         </m-table-footer>
     </m-table>
 
@@ -42,6 +44,7 @@
                 <th>Name</th>
                 <th>Age</th>
                 <th>Country</th>
+                <th>City</th>
             </tr>
         </thead>
         <tbody>
@@ -49,6 +52,7 @@
                 <td>Bob</td>
                 <td>20</td>
                 <td>Canada</td>
+                <td>Quebec</td>
             </tr>
         </tbody>
     </m-table>

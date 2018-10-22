@@ -81,6 +81,10 @@ export class MTableSandbox extends Vue {
     deleteData(id: string): void {
         console.error('Delete data: ' + id);
     }
+
+    showMore(): void {
+        console.error('Show more');
+    }
 }
 
 const TableSandboxPlugin: PluginObject<any> = {
