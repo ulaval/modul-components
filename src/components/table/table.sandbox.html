@@ -57,64 +57,6 @@
         </tbody>
     </m-table>
 
-    <!-- <h2>Table - Without header and footer</h2>
-    <m-table :data="data" :max-rows="5">
-        <template slot="table-data" scope="{data}">
-            <m-table-body-cell>
-                <m-link>{{ data.name }}</m-link>
-            </m-table-body-cell>
-            <m-table-body-cell>
-                {{ data.age }}
-            </m-table-body-cell>
-            <m-table-body-cell>
-                {{ data.username }}
-            </m-table-body-cell>
-            <m-table-body-cell>
-                <m-option>
-                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
-                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
-                </m-option>
-            </m-table-body-cell>
-        </template>
-    </m-table>
-
-    <h2>Table - missing data</h2>
-    <m-table :data="dataIncomplete" :max-rows="5">
-        <template slot="table-header">
-            <m-table-header-cell>Name</m-table-header-cell>
-            <m-table-header-cell>Age</m-table-header-cell>
-            <m-table-header-cell>Username</m-table-header-cell>
-            <m-table-header-cell width="10%"></m-table-header-cell>
-        </template>
-        <template slot="table-data" scope="{data}">
-            <m-table-body-cell>
-                <m-link>{{ data.name }}</m-link>
-            </m-table-body-cell>
-            <m-table-body-cell>
-                {{ data.age }}
-            </m-table-body-cell>
-            <m-table-body-cell>
-                {{ data.username }}
-            </m-table-body-cell>
-            <m-table-body-cell>
-                <m-option>
-                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
-                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
-                </m-option>
-            </m-table-body-cell>
-        </template>
-    </m-table>
-
-    <h2>Table - empty without slot</h2>
-    <m-table :data="emptyData" :max-rows="5">
-        <template slot="table-header">
-            <m-table-header-cell>Name</m-table-header-cell>
-            <m-table-header-cell>Age</m-table-header-cell>
-            <m-table-header-cell>Username</m-table-header-cell>
-            <m-table-header-cell width="10%"></m-table-header-cell>
-        </template>
-    </m-table>-->
-
     <h2>Empty table - default slot</h2>
     <m-table :data="emptyData" :max-rows="5">
          <m-table-header>
