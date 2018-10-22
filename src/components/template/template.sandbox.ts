@@ -7,6 +7,13 @@ import WithRender from './template.sandbox.html';
 @WithRender
 @Component
 export class MTemplateSandbox extends Vue {
+    private hasEntete: boolean = false;
+
+    mounted(): void {
+        setTimeout(() => {
+            this.hasEntete = true;
+        }, 2000);
+    }
 }
 
 const TemplateSandboxPlugin: PluginObject<any> = {
