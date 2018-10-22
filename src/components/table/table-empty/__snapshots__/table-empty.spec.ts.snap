@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTableEmpty When a slot is provided Should render correctly 1`] = `
+<m-table-row>
+    <div>slot</div>
+</m-table-row>
+`;
+
+exports[`MTableEmpty When no slot is provided Should render correctly 1`] = `
+<m-table-row>
+    <m-table-cell class="m-table-empty">
+        <m-icon name="m-svg__heraldry" size="45" class="m-table-empty-cell--icon"></m-icon>
+        <p>
+            m-table-empty:empty
+        </p>
+    </m-table-cell>
+</m-table-row>
+`;
