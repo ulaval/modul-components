@@ -5,7 +5,7 @@ import { SCROLL_TO_NAME } from '../directive-names';
 
 class ScrollToCallback {
 
-    constructor(private speed: ScrollToSpeed, private easing: ScrollToEasing, private offset: number, private target: Element) { }
+    constructor(private speed: ScrollToSpeed, private easing: ScrollToEasing, private offset: number, private target: HTMLElement) { }
 
     callBack: (event: MouseEvent) => void = (event: MouseEvent) => {
         // tslint:disable-next-line:no-console
@@ -31,7 +31,7 @@ const MScrollTo: DirectiveOptions = {
         if (!node.context) {
             throw new Error('Error node context is null');
         }
-        let target: Element = node.context.$refs[binding.arg] as Element;
+        let target: HTMLElement = node.context.$refs[binding.arg] as HTMLElement;
         const _scrollToCallback: ScrollToCallback = new ScrollToCallback(speed, easing, offset, target);
 
         Object.defineProperty(element, '_scrollToCallback', {

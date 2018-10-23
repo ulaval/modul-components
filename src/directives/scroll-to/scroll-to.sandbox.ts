@@ -15,7 +15,7 @@ export class MScrollToSandbox extends ModulVue {
     public easing: ScrollToEasing = ScrollToEasing.Linear;
 
     scrollToGreenUsingService(): void {
-        let _element: Element = this.$refs.green as Element;
+        let _element: HTMLElement = this.$refs.green as HTMLElement;
 
         this.$scrollTo.goTo(_element, +this.offset, this.speed, this.easing).then((finalPosition) => {
             alert(`callback at ${finalPosition}`);
@@ -23,11 +23,11 @@ export class MScrollToSandbox extends ModulVue {
     }
 
     scrollToBottom(): void {
-        this.$scrollTo.goToBottom(this.speed, this.easing);
+        this.$scrollTo.goToBottom(+this.offset , this.speed, this.easing);
     }
 
     scrollToTop(): void {
-        this.$scrollTo.goToTop(this.speed, this.easing);
+        this.$scrollTo.goToTop(+this.offset, this.speed, this.easing);
     }
 
     getGlobalParameters(): any {
@@ -39,9 +39,22 @@ export class MScrollToSandbox extends ModulVue {
         };
     }
 
-    scrollInOrangeUsingService(): void {
+    scrollInOrangeUsingService(): boolean {
+        let _container: HTMLElement = this.$refs.orange as HTMLElement;
+        let _element: HTMLElement = this.$refs.greenInOrange as HTMLElement;
         // let _element: Element = this.$refs.orange as Element;
-        this.$scrollTo.goToBottom(ScrollToSpeed.Slow, ScrollToEasing.EaseOutCubic);
+        this.$scrollTo.goToInside(_container, _element,0, ScrollToSpeed.Slower, ScrollToEasing.Linear);
+        return false;
+    }
+
+    scrollInToTopOrangeUsingService(): void {
+        let _container: HTMLElement = this.$refs.orange as HTMLElement;
+        this.$scrollTo.goToTopInside(_container,0, ScrollToSpeed.Slower, ScrollToEasing.Linear);
+    }
+
+    scrollInToBottomOrangeUsingService(): void {
+        let _container: HTMLElement = this.$refs.orange as HTMLElement;
+        this.$scrollTo.goToBottomInside(_container,0, ScrollToSpeed.Slower, ScrollToEasing.Linear);
     }
 }
 

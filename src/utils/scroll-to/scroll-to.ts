@@ -40,46 +40,73 @@ export class ScrollTo {
      * @param speed
      * @param easing
      */
-    public goToTop(speed: ScrollToSpeed, easing: ScrollToEasing): Promise<any> {
-        const targetLocation: number = 0;
-        return this.internalScrollTo(targetLocation, speed, easing);
+    public goToTop(offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+
+        let targetLocation: number = 0 + offset;
+
+        return this.internalScroll(undefined, targetLocation, speed, easing);
     }
 
-    /**
-     * Scroll to the bottom of the page.
-     *
-     * @param offset
-     * @param speed
-     * @param easing
-     */
-    public goToBottom(speed: ScrollToSpeed, easing: ScrollToEasing): Promise<any> {
-        // const targetLocation: number = (window.innerHeight ||
-        //     (document.documentElement || document.body).clientHeight) + offset;
+    public goToTopInside(container: HTMLElement, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
-        const targetLocation: number = document.body.offsetHeight ;
+        const containerPosition: number = Math.round(container.offsetTop) + offset;
+        const elementPosition: number = 0;
+        const targetLocation: number = (elementPosition - containerPosition);
 
-        return this.internalScrollTo(targetLocation, speed, easing);
+        return this.internalScroll(container, 1, speed, easing);
     }
 
-    /**
-     * Scroll to a specified html element.
-     *
-     * @param offset
-     * @param speed
-     * @param easing
-     */
-    public goTo(element: Element, offset: number, speed: ScrollToSpeed, easing: ScrollToEasing): Promise<any> {
+    public goToBottomInside(container: HTMLElement, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
-        const elementLocation: number = element.getBoundingClientRect().top + window.pageYOffset;
-        const targetLocation: number = Math.max(Math.round(elementLocation) + offset, 0);
+        const targetLocation: number = Math.max(Math.round(container.scrollHeight) + offset, 0);
 
-        return this.internalScrollTo(targetLocation, speed, easing);
+        return this.internalScroll(container, targetLocation, speed, easing);
     }
 
-    private internalScrollTo(targetLocation: number, speed: ScrollToSpeed, easing: ScrollToEasing): Promise<number> {
+    public goToBottom(offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+
+        let targetLocation: number = document.body.offsetHeight + offset;
+
+        return this.internalScroll(undefined, targetLocation, speed, easing);
+    }
+
+    public goTo(target: HTMLElement | number, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+
+        let targetLocation: number = 0;
+
+        // get element relative position from window
+        if (target instanceof HTMLElement) {
+            const elementLocation: number = target.getBoundingClientRect().top + window.pageYOffset;
+            targetLocation = Math.max(Math.round(elementLocation) + offset, 0);
+        } else {
+            targetLocation = +target;
+        }
+
+        return this.internalScroll(undefined, targetLocation, speed, easing);
+    }
+
+    public goToInside(container: HTMLElement, target: HTMLElement, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+
+        let targetLocation: number = 0;
+
+        // get element relative position from container
+        const containerPosition: number = Math.round(container.offsetTop);
+        const elementPosition: number = Math.round(target.offsetTop);
+        targetLocation = Math.max((elementPosition - containerPosition) + offset, 0);
+
+        return this.internalScroll(container, targetLocation, speed, easing);
+    }
+
+    private internalScroll(container: HTMLElement | undefined, targetLocation: number, speed: ScrollToSpeed, easing: ScrollToEasing): Promise<number> {
         return new Promise((resolve, reject) => {
             const startTime: number = performance.now();
-            const startLocation: number = window.pageYOffset;
+            let startLocation: number = 0;
+            if (container) {
+                startLocation = container.scrollTop;
+            } else {
+                startLocation = window.pageYOffset;
+            }
+
             const distanceToScroll: number = targetLocation - startLocation;
             const easingFunction: (t: any) => any = this.getEasingFunction(easing);
             const duration: number = this.getDuration(speed);
@@ -88,9 +115,13 @@ export class ScrollTo {
                 const progressPercentage: number = Math.min(1, ((currentTime - startTime) / duration));
                 const targetPosition: number = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage));
 
-                window.scrollTo(0, targetPosition);
+                if (container) {
+                    container.scrollTop = targetPosition;
+                } else {
+                    window.scrollTo(0, targetPosition);
+                }
 
-                if (Math.round(window.pageYOffset) === targetLocation || progressPercentage === 1) {
+                if (Math.round(0) === targetLocation || progressPercentage === 1) {
                     return resolve(targetLocation);
                 }
 
