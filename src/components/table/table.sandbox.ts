@@ -2,6 +2,14 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 
 import { TABLE_NAME } from '../component-names';
+import TablePlugin from './table';
+import TableBodyPlugin from './table-body/table-body';
+import TableCellPlugin from './table-cell/table-cell';
+import TableEmptyPlugin from './table-empty/table-empty';
+import TableFooterPlugin from './table-footer/table-footer';
+import TableHeaderPlugin from './table-header/table-header';
+import TableHeaderCellPlugin from './table-header/table-header-cell/table-header-cell';
+import TableRowPlugin from './table-row/table-row';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
 @WithRender
@@ -89,6 +97,14 @@ export class MTableSandbox extends Vue {
 
 const TableSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(TableBodyPlugin);
+        v.use(TableCellPlugin);
+        v.use(TableEmptyPlugin);
+        v.use(TableFooterPlugin);
+        v.use(TableHeaderCellPlugin);
+        v.use(TableHeaderPlugin);
+        v.use(TableRowPlugin);
+        v.use(TablePlugin);
         v.component(`${TABLE_NAME}-sandbox`, MTableSandbox);
     }
 };
