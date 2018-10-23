@@ -235,7 +235,7 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     private allowInputTextSelection(): void {
         this.grabEvents.forEach(eventName => {
             this.addEventListener(eventName, (event: Event) => {
-                if (targetIsInput(event)) {
+                if (targetIsInput(this.element, event)) {
                     MDOMPlugin.detach(MRemoveUserSelect, this.element);
                     this.cancelGrabEvents.forEach(cancelEventName => document.addEventListener(cancelEventName, this.intputTouchUpListener));
                 }

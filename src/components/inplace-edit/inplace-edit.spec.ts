@@ -10,10 +10,11 @@ import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 let propsData: { propsData: { editMode: boolean } };
 
 let inplaceEdit: MInplaceEdit;
-let wrapper: Wrapper<ModulVue>;
+let wrapper: Wrapper<MInplaceEdit>;
 
 const CANCEL_EVENT: string = 'cancel';
 const CONFIRM_EVENT: string = 'ok';
+const REF_OVERLAY: object = { ref : 'overlay' };
 
 const READ_SLOT_CLASS: string = 'readSlot';
 const READ_SLOT: string = '<div class="' + READ_SLOT_CLASS + '">readSlot</div>';
@@ -35,13 +36,13 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
         expect(inplaceEdit.editMode).toBeFalsy();
     });
 
-    it('must use default value for dialog title',() => {
+    it('must use default value for modal title',() => {
 
         expect(inplaceEdit.title).toEqual(inplaceEdit.$i18n.translate('m-inplace-edit:modify'));
     });
 
     describe('when defining title prop', () => {
-        it('must use props value for dialog title',() => {
+        it('must use props value for modal title',() => {
             let titleProp: string = 'myTitle';
             inplaceEdit.title = titleProp;
 
@@ -54,7 +55,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
-        propsData = { propsData: { editMode: false, saveFn: () => { return Promise.resolve(); } } };
+        propsData = { propsData: { editMode: false } };
         inplaceEdit = new MInplaceEdit(propsData);
     });
 
@@ -84,7 +85,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         beforeEach(() => {
             Vue.use(MediaQueriesPlugin);
-            propsData = { propsData: {  editMode: true, saveFn: () => { return Promise.resolve(); } } };
+            propsData = { propsData: {  editMode: true } };
             inplaceEdit = new MInplaceEdit(propsData);
         });
 
@@ -113,7 +114,7 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
 
         beforeEach(() => {
             Vue.use(MediaQueriesPlugin);
-            propsData = { propsData: {  editMode: true, saveFn: () => { return Promise.reject('some reason'); } } };
+            propsData = { propsData: {  editMode: true } };
             inplaceEdit = new MInplaceEdit(propsData);
         });
 
@@ -149,19 +150,12 @@ describe('Component inplace-edit - Complete component by default', () => {
 
         wrapper = mount(MInplaceEdit, {
             localVue: Vue,
+            mocks: { $mq: { state: { isMqMinS: true, isMqMinM: false } } },
             slots: {
                 default: 'default',
                 editMode: EDIT_SLOT,
                 readMode: READ_SLOT
-            },
-            mixins: [{
-                data(): any {
-                    return {
-                        isMqMinS: true,
-                        isMqMinM: false
-                    };
-                }
-            }]
+            }
         });
     });
 
@@ -202,7 +196,6 @@ describe('Component inplace-edit - Complete component by default', () => {
 });
 
 describe('Component inplace-edit - Complete component mobile', () => {
-    let wrapper: Wrapper<ModulVue>;
 
     beforeEach(() => {
         Vue.use(MediaQueriesPlugin);
@@ -212,21 +205,15 @@ describe('Component inplace-edit - Complete component mobile', () => {
 
         wrapper = shallow(MInplaceEdit, {
             localVue: Vue,
+            mocks: { $mq: { state: { isMqMinS: false } } },
             slots: {
                 default: 'default',
                 editMode: EDIT_SLOT,
                 readMode: READ_SLOT
             },
             stubs: {
-                'm-dialog': '<div><slot></slot></div>'
-            },
-            mixins: [{
-                data(): any {
-                    return {
-                        isMqMinS: false
-                    };
-                }
-            }]
+                'm-overlay': '<div><slot></slot></div>'
+            }
         });
     });
     describe('at creation', () => {
@@ -247,13 +234,27 @@ describe('Component inplace-edit - Complete component mobile', () => {
             wrapper.setProps({ waiting: 'true' });
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
-        it('must show mobile confirm controls', () => {
-            let controlFound: Wrapper<Vue> = wrapper.find({ ref : 'confirm-control-mobile' });
-            expect(controlFound.is('button')).toBe(true);
+
+        it(`should cancel on overlay close`, () => {
+            // given
+            wrapper.setMethods({ cancel: jest.fn() });
+
+            // when
+            wrapper.find(REF_OVERLAY).vm.$emit('close');
+
+            // then
+            expect(wrapper.vm.cancel).toHaveBeenCalledWith();
         });
-        it('must show mobile cancel controls', () => {
-            let controlFound: Wrapper<Vue> = wrapper.find({ ref : 'cancel-control-mobile' });
-            expect(controlFound.is('button')).toBe(true);
+
+        it(`should confirm on overlay save`, () => {
+            // given
+            wrapper.setMethods({ confirm: jest.fn() });
+
+            // when
+            wrapper.find(REF_OVERLAY).vm.$emit('save');
+
+            // then
+            expect(wrapper.vm.confirm).toHaveBeenCalledWith();
         });
     });
 });

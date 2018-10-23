@@ -63,6 +63,7 @@ $m-tooltip--max-height: 280px !default;
     &__body {
         padding: $m-padding;
         background: $m-color--information;
+        word-break: break-word;
 
         @media (max-width: $m-mq--max--s) {
             position: relative;

@@ -2,7 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { ERROR_CONFIG_NOT_SUPPORTED_NAME } from '../component-names';
-import { Link } from '../error-template/error-template';
+import { Link } from '../message-page/message-page';
 import WithRender from './error-config-not-supported.sandbox.html';
 
 @WithRender

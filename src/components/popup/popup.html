@@ -25,7 +25,9 @@
               :preload="preload"
               :width="width"
               :background="background"
-              v-if="!isMqMaxS">
+              :lazy="lazy"
+              v-if="!isMqMaxS"
+              @portal-content-mounted="onPortalContentMounted">
         <div slot="trigger"
              v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
@@ -49,7 +51,9 @@
                :trigger="propTrigger"
                :class-name="className"
                :preload="preload"
-               v-if="isMqMaxS">
+               v-if="isMqMaxS"
+               :lazy="lazy"
+               @portal-content-mounted="onPortalContentMounted">
         <div slot="trigger"
              v-if="hasTriggerSlot">
             <slot name="trigger"></slot>

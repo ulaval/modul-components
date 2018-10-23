@@ -9,7 +9,9 @@ export abstract class MRichTextEditorDefaultOptions {
     public scrollableContainer: string | undefined;
     public toolbarStickyOffset: number = 0;
     public pluginsEnabled: string[] = ['align', 'draggable', 'embedly', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quote', 'save', 'specialCharacters', 'table', 'url', 'wordPaste', 'stylesSubMenu', 'listesSubMenu', 'insertionsSubMenu'];
-    public wordPasteModal: boolean = true;
+    public wordPasteModal: boolean = false;
+    public initOnClick: boolean = true;
+    public wordPasteKeepFormatting: boolean = false;
 
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {

@@ -115,9 +115,28 @@
         </m-carousel>
     </p>
     <h3>Carousel - Video seek</h3>
-    <p class="m-u--margin-bottom">m-carousel should allow video seek no matter what device is being used</p>
+    <p class="m-u--margin-bottom">From <a href="https://github.com/ulaval/modul-components/pull/440" target="blank" title="PR #440 : Bugfix/carousel fix video seek #440">PR #440</a> : m-carousel should allow video seek no matter what device is being used.</p>
     <p>
         <m-carousel style="height: 400px;" margin="0">
+            <m-carousel-item>
+                <video controls="true" style="display: block; max-height: 300px; max-width: 300px;">
+                    <source id="mp4" src="http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4" type="video/mp4">
+                </video>
+            </m-carousel-item>
+            <m-carousel-item>
+                <video controls="true" style="display: block; max-height: 300px; max-width: 300px;" playsinline="true">
+                    <source id="mp4" src="http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4" type="video/mp4">
+                </video>
+            </m-carousel-item>
+        </m-carousel>
+    </p>
+    <h3>Carousel - Event detection</h3>
+    <p class="m-u--margin-bottom">From <a href="https://github.com/ulaval/modul-components/pull/479" target="blank" title="PR #479 : Bugfix zingtouch detect click and tap #479">PR #479</a> : m-carousel tap should not be emitted twice (desktop or mobile).</p>
+    <p>
+        Number of tap: {{ tapCounter }}
+    </p>
+    <p>
+        <m-carousel mousedown.native.capture="clearEventDetectionTest()" @tap="testTap" style="height: 400px;" margin="0">
             <m-carousel-item>
                 <video controls="true" style="display: block; max-height: 300px; max-width: 300px;">
                     <source id="mp4" src="http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4" type="video/mp4">

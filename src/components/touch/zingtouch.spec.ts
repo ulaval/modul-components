@@ -1,6 +1,6 @@
 import ZingTouch from 'zingtouch';
 
-import { MZingGestureDirections, MZingTouchGestures } from './enums';
+import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 import { MZingGesture, MZingTouchGestureFactory, MZingTouchUtil } from './zingtouch';
 
 describe('MZingTouchGestureFactory', () => {
@@ -66,5 +66,18 @@ describe('MZingTouchUtil', () => {
         });
     });
 
-    // The rest of the code is untestable
+    [
+        { interval: 0, result: MZingTapInteractions.Click },
+        { interval: 4, result: MZingTapInteractions.Click },
+        { interval: 5, result: MZingTapInteractions.Click },
+        { interval: 6, result: MZingTapInteractions.Tap },
+        { interval: 7, result: MZingTapInteractions.Tap },
+        { interval: 10, result: MZingTapInteractions.Tap }
+    ].forEach(keyValue => {
+        it(`it should detect ${keyValue.result} when interval is ${keyValue.interval}`, () => {
+            const interaction: MZingTapInteractions = util.detectTap({ detail: { interval: keyValue.interval } } as CustomEvent);
+
+            expect(interaction).toBe(keyValue.result);
+        });
+    });
 });

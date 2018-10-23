@@ -1,6 +1,5 @@
 {
     "m-modal": {
-        "cancel": "Cancel",
-        "ok": "Ok"
+        "close": "Close"
     }
 }

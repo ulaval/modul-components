@@ -3,7 +3,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { TOUCH_NAME } from '../component-names';
-import { MZingGestureDirections, MZingTouchGestures } from './enums';
+import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 import WithRender from './touch.html';
 import ZingTouchUtil, { MZingRegion } from './zingtouch';
 
@@ -74,23 +74,39 @@ export class MTouch extends Vue {
 
         switch (ZingTouchUtil.detectDirection(event, swipeOptions.angleThreshold)) {
             case MZingGestureDirections.Right:
+                this.handleZingEvent(event);
                 this.$emit('swiperight', event);
                 break;
             case MZingGestureDirections.Left:
+                this.handleZingEvent(event);
                 this.$emit('swipeleft', event);
                 break;
         }
     }
 
     private configureZingTap(): void {
-        this.zingRegion!.bind(this.$el, ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Tap), (event: Event) => {
-            this.$emit('tap', event);
+        this.zingRegion!.bind(this.$el, ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Tap), (event: CustomEvent) => {
+            switch (ZingTouchUtil.detectTap(event)) {
+                case MZingTapInteractions.Tap:
+                    this.handleZingEvent(event);
+                    this.$emit('tap', event);
+                    break;
+                case MZingTapInteractions.Click:
+                    this.handleZingEvent(event);
+                    this.$emit('click', event);
+                    break;
+            }
         });
     }
 
     private destroyZingTouch(): void {
         if (this.zingRegion) { this.zingRegion.unbind(this.$el); }
         this.zingRegion = undefined;
+    }
+
+    private handleZingEvent(event: CustomEvent): void {
+        // Since we reemit the event, we stop event propagation.  Event whould be handled twice from each listener otherwise.
+        event.stopPropagation();
     }
 }
 
