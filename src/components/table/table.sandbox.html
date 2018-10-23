@@ -3,6 +3,7 @@
     <m-table>
         <m-table-header>
             <m-table-row>
+                <m-table-header-cell width="10%"></m-table-header-cell>
                 <m-table-header-cell>Name</m-table-header-cell>
                 <m-table-header-cell>Age</m-table-header-cell>
                 <m-table-header-cell>Username</m-table-header-cell>
@@ -12,6 +13,9 @@
         </m-table-header>
         <m-table-body :rows="data">
             <template scope="{data}">
+                <m-table-cell>
+                    <m-checkbox @change="onCheck(data.id)"></m-checkbox>
+                </m-table-cell>
                 <m-table-cell>
                     <m-link>{{ data.name }}</m-link>
                 </m-table-cell>
@@ -56,6 +60,12 @@
                 <td>20</td>
                 <td>Canada</td>
                 <td>Quebec</td>
+            </tr>
+            <tr>
+                <td>Bill</td>
+                <td>80</td>
+                <td>Canada</td>
+                <td>Montreal</td>
             </tr>
         </tbody>
     </m-table>
