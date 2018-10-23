@@ -2,14 +2,6 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 
 import { TABLE_NAME } from '../component-names';
-import TablePlugin from './table';
-import TableBodyPlugin from './table-body/table-body';
-import TableCellPlugin from './table-cell/table-cell';
-import TableEmptyPlugin from './table-empty/table-empty';
-import TableFooterPlugin from './table-footer/table-footer';
-import TableHeaderPlugin from './table-header/table-header';
-import TableHeaderCellPlugin from './table-header/table-header-cell/table-header-cell';
-import TableRowPlugin from './table-row/table-row';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
 @WithRender
@@ -52,30 +44,12 @@ export class MTableSandbox extends Vue {
             name: 'Michael',
             age: '16',
             username: 'michael.16'
-        }
-
-    ];
-
-    dataIncomplete: any[] = [
-        {
-            id: '1',
-            name: 'Jonathan',
-            age: '25'
         },
         {
-            id: '2',
-            name: 'Carl',
-            username: 'carl.30'
-        },
-        {
-            id: '3',
+            id: '7',
+            name: 'Tharle',
             age: '26',
-            username: 'jacob.26'
-        },
-        {
-            name: 'Vincent',
-            age: '34',
-            username: 'vincent.34'
+            username: 'tharle.26'
         }
 
     ];
@@ -93,18 +67,14 @@ export class MTableSandbox extends Vue {
     showMore(): void {
         console.error('Show more');
     }
+
+    onCheck(id: string): void {
+        console.error('Check: ' + id);
+    }
 }
 
 const TableSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(TableBodyPlugin);
-        v.use(TableCellPlugin);
-        v.use(TableEmptyPlugin);
-        v.use(TableFooterPlugin);
-        v.use(TableHeaderCellPlugin);
-        v.use(TableHeaderPlugin);
-        v.use(TableRowPlugin);
-        v.use(TablePlugin);
         v.component(`${TABLE_NAME}-sandbox`, MTableSandbox);
     }
 };
