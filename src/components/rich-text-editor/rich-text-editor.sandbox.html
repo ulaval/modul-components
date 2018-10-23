@@ -17,7 +17,7 @@
         <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
     </div>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="model" toolbar-sticky-offset=".mtest-header" :label="'texte riche'" :max-width="'large'"
+        <m-rich-text-editor v-model="model" :toolbar-sticky-offset="58" :label="'texte riche'" :max-width="'large'"
             :placeholder="'some placeholder'" :focus="focus" :error="error" :error-message="errorMessage"
             :valid-message="validMessage" :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
     </div>
@@ -29,7 +29,7 @@
     </div>
     <h5 class="m-u--margin-bottom">fonctionne quand le modèle est déjà initialisé</h5>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="initializedModel" toolbar-sticky-offset=".mtest-header" :label="'texte riche'"
+        <m-rich-text-editor v-model="initializedModel" :toolbar-sticky-offset="58" :label="'texte riche'"
             :max-width="'large'" :placeholder="'some placeholder'" :focus="focus" :error="error" :error-message="errorMessage"
             :valid-message="validMessage" :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
     </div>
@@ -139,34 +139,33 @@
     <div>
         <h5 class="m-u--margin-bottom">Réutilisation d'un RTE</h5>
         <p>Si on change la valeur du model dans le JS, le changement est rapporté dans le RTE</p>
-                <div>
-                    <h6>Current todo</h6>
-                    <dl>
-                        <dt>TODO :</dt>
-                        <dd>
-                            <code>{{ currentTodo.todo }}</code>
-                        </dd>
-                        <dt>DONE : </dt>
-                        <dd>
-                            <code>{{ currentTodo.done }}</code>
-                        </dd>
-                    </dl>
-                </div>
+        <div>
+            <h6>Current todo</h6>
+            <dl>
+                <dt>TODO :</dt>
+                <dd>
+                    <code>{{ currentTodo.todo }}</code>
+                </dd>
+                <dt>DONE : </dt>
+                <dd>
+                    <code>{{ currentTodo.done }}</code>
+                </dd>
+            </dl>
+        </div>
 
-                <ul v-if="todos.length > 0">
-                    <li v-for="todo in todos">
-                        {{ todo.todo }} is {{ (todo.done) ? "done" : "in progress" }}
-                    </li>
-                </ul>
+        <ul v-if="todos.length > 0">
+            <li v-for="todo in todos">
+                {{ todo.todo }} is {{ (todo.done) ? "done" : "in progress" }}
+            </li>
+        </ul>
 
-                <div>
-                    <m-rich-text-editor v-model="currentTodo.todo" :toolbar-sticky-offset="58" :label="'Todo'"
-                        :max-width="'large'" :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage"
-                        :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
-                    <br>
-                    <button @click="addTodo">Add todo</button><input type="text" placeholder="Valeur à affecter au RTE lors de la réinitialisation"
-                        v-model="resetValue">
-                </div>
-            </div>
-
+        <div>
+            <m-rich-text-editor v-model="currentTodo.todo" :toolbar-sticky-offset="58" :label="'Todo'"
+                :max-width="'large'" :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage"
+                :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
+            <br>
+            <button @click="addTodo">Add todo</button><input type="text" placeholder="Valeur à affecter au RTE lors de la réinitialisation"
+                v-model="resetValue">
+        </div>
     </div>
+</div>
