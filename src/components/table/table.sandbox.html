@@ -2,14 +2,12 @@
     <h2>Complex table</h2>
     <m-table>
         <m-table-header>
-            <m-table-row>
-                <m-table-header-cell width="10%"></m-table-header-cell>
-                <m-table-header-cell>Name</m-table-header-cell>
-                <m-table-header-cell>Age</m-table-header-cell>
-                <m-table-header-cell>Username</m-table-header-cell>
-                <m-table-header-cell>Subscription</m-table-header-cell>
-                <m-table-header-cell width="10%"></m-table-header-cell>
-            </m-table-row>
+            <m-table-header-cell width="10%"></m-table-header-cell>
+            <m-table-header-cell>Name</m-table-header-cell>
+            <m-table-header-cell>Age</m-table-header-cell>
+            <m-table-header-cell>Username</m-table-header-cell>
+            <m-table-header-cell>Subscription</m-table-header-cell>
+            <m-table-header-cell width="10%"></m-table-header-cell>
         </m-table-header>
         <m-table-body :rows="data">
             <template scope="{data}">
@@ -33,14 +31,12 @@
             </template>
         </m-table-body>
         <m-table-footer>
-            <m-table-row>
-                <m-table-cell class="m-table-sandbox--show-more" colspan="5">
-                    <m-button class="m-table-sandbox--show-more--button" @click="showMore">
-                        <p>Show more results</p>
-                        <span>1-10 of 45</span>
-                    </m-button>
-                </m-table-cell>
-            </m-table-row>
+            <m-table-cell class="m-table-sandbox--show-more" colspan="6">
+                <m-button class="m-table-sandbox--show-more--button" @click="showMore">
+                    <p>Show more results</p>
+                    <span>1-10 of 45</span>
+                </m-button>
+            </m-table-cell>
         </m-table-footer>
     </m-table>
 
@@ -73,13 +69,11 @@
     <h2>Empty table - default slot</h2>
     <m-table :data="emptyData" :max-rows="5">
          <m-table-header>
-            <m-table-row>
-                <m-table-header-cell>Name</m-table-header-cell>
-                <m-table-header-cell>Age</m-table-header-cell>
-                <m-table-header-cell>Username</m-table-header-cell>
-                <m-table-header-cell>Subscription</m-table-header-cell>
-                <m-table-header-cell width="10%"></m-table-header-cell>
-            </m-table-row>
+            <m-table-header-cell>Name</m-table-header-cell>
+            <m-table-header-cell>Age</m-table-header-cell>
+            <m-table-header-cell>Username</m-table-header-cell>
+            <m-table-header-cell>Subscription</m-table-header-cell>
+            <m-table-header-cell width="10%"></m-table-header-cell>
         </m-table-header>
         <m-table-body :data="emptyData" columns="5">
         </m-table-body>
@@ -88,13 +82,11 @@
     <h2>Empty table - custom slot</h2>
     <m-table :data="emptyData">
          <m-table-header>
-            <m-table-row>
-                <m-table-header-cell>Name</m-table-header-cell>
-                <m-table-header-cell>Age</m-table-header-cell>
-                <m-table-header-cell>Username</m-table-header-cell>
-                <m-table-header-cell>Subscription</m-table-header-cell>
-                <m-table-header-cell width="10%"></m-table-header-cell>
-            </m-table-row>
+            <m-table-header-cell>Name</m-table-header-cell>
+            <m-table-header-cell>Age</m-table-header-cell>
+            <m-table-header-cell>Username</m-table-header-cell>
+            <m-table-header-cell>Subscription</m-table-header-cell>
+            <m-table-header-cell width="10%"></m-table-header-cell>
         </m-table-header>
         <m-table-body :data="emptyData" columns="5">
             <template slot="table-empty">
