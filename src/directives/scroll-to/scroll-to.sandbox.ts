@@ -23,7 +23,7 @@ export class MScrollToSandbox extends ModulVue {
     }
 
     scrollToBottom(): void {
-        this.$scrollTo.goToBottom(this.speed,this.easing);
+        this.$scrollTo.goToBottom(this.speed, this.easing);
     }
 
     scrollToTop(): void {
@@ -37,6 +37,11 @@ export class MScrollToSandbox extends ModulVue {
             easing: this.easing,
             offset: +this.offset
         };
+    }
+
+    scrollInOrangeUsingService(): void {
+        // let _element: Element = this.$refs.orange as Element;
+        this.$scrollTo.goToBottom(ScrollToSpeed.Slow, ScrollToEasing.EaseOutCubic);
     }
 }
 
