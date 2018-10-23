@@ -53,7 +53,7 @@ export class ScrollTo {
         const elementPosition: number = 0;
         const targetLocation: number = (elementPosition - containerPosition);
 
-        return this.internalScroll(container, 1, speed, easing);
+        return this.internalScroll(container, 0, speed, easing);
     }
 
     public goToBottomInside(container: HTMLElement, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
@@ -117,12 +117,17 @@ export class ScrollTo {
 
                 if (container) {
                     container.scrollTop = targetPosition;
+
+                    if (targetPosition === targetLocation || progressPercentage === 1) {
+                        return resolve(targetLocation);
+                    }
+
                 } else {
                     window.scrollTo(0, targetPosition);
-                }
 
-                if (Math.round(0) === targetLocation || progressPercentage === 1) {
-                    return resolve(targetLocation);
+                    if (Math.round(window.pageYOffset) === targetLocation || progressPercentage === 1) {
+                        return resolve(targetLocation);
+                    }
                 }
 
                 window.requestAnimationFrame(step);
