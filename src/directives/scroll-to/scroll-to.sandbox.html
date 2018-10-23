@@ -1,0 +1,51 @@
+<div>
+    <!-- Sandbox template -->
+    <h3>Test Scroll-to</h3>
+    <p class="m-u--margin-bottom">
+        Sandbox Parameters
+    </p>
+    <div>
+        Offset: <input type="text" v-model="offset" />
+        Speed: <select v-model="speed">
+                    <option value="slow">Slow</option>
+                    <option value="slower" >Slower</option>
+                    <option value="regular" >Regular</option>
+                    <option value="fast"  >Fast</option>
+                </select>
+        Easing: <select v-model="easing">
+                    <option value="linear">Linear</option>
+                    <option value="easeInQuad">EaseInQuad</option>
+                    <option value="easeOutQuad">EaseOutQuad</option>
+                    <option value="easeInCubic">EaseInCubic</option>
+                    <option value="easeOutCubic">EaseOutCubic</option>
+                </select>
+    </div>
+
+    <p class="m-u--margin-bottom">
+        test directive m-scroll-to
+    </p>
+    <p>
+        <div>
+            <!-- <a href="#" v-m-scroll-to:blue>Scroll to blue</a>
+            <a href="#" v-m-scroll-to:red>Scroll to red</a> -->
+            <a href="#" v-m-scroll-to:green="getGlobalParameters()">Scroll to green</a>
+        </div>
+    </p>
+    <p class="m-u--margin-bottom">
+        test service Vue.$scrollTo
+    </p>
+    <p>
+        <div>
+            <a href="#" @click="scrollToGreenUsingService()">Scroll to green using service</a>
+            <a href="#" @click="scrollToBottom()">Scroll to bottom</a>
+        </div>
+    </p>
+    <!-- Test case -->
+    <div ref="blue" style="height: 1000px; background-color: royalblue;"> <a href="#" @click="scrollToTop()">Scroll to
+            top</a>
+    </div>
+    <div ref="red" style="height: 1000px; background-color: red;"> <a href="#" @click="scrollToTop()">Scroll to top</a>
+    </div>
+    <div ref="green" style="height: 1000px; background-color: green;"> <a href="#" @click="scrollToTop()">Scroll to top</a>
+    </div>
+</div>
