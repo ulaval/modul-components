@@ -350,9 +350,10 @@
         text-align: left;
 
         tr {
-            background: $m-color--grey-light;
+            background-color: rgba($m-color--grey-light, 0.3);
 
             th {
+                opacity: 1;
                 color: $m-color--grey;
                 height: 64px;
 
