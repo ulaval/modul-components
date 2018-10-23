@@ -27,9 +27,13 @@ export class MOverlay extends ModulVue {
     @Prop({ default: false })
     public disableSaveButton: boolean;
 
+    public hasKeyboard: boolean = false;
+    public isOverflowing: boolean = false;
+
     public $refs: {
         dialogWrap: HTMLElement,
         body: HTMLElement,
+        footer: HTMLElement,
         article: Element
     };
 
@@ -45,13 +49,24 @@ export class MOverlay extends ModulVue {
         return /(android)/i.test(window.navigator.userAgent);
     }
 
-    private handleFooter(event): void {
+    private onFocusIn(): void {
         if (this.isAndroid) {
-            if (event.type === 'focusin') {
-                this.$refs.body.style.paddingBottom = '50%';
-            } else if (event.type === 'focusout') {
+            if (this.$refs.body.scrollHeight < this.$refs.article.clientHeight) {
+                this.isOverflowing = true;
+                let footerHeight: number = this.$refs.footer.clientHeight;
+                this.$refs.body.style.paddingBottom = `calc(100% - ${footerHeight}px)`;
+            }
+            this.hasKeyboard = true;
+        }
+    }
+
+    private onFocusOut(): void {
+        if (this.isAndroid) {
+            if (this.isOverflowing) {
+                this.isOverflowing = false;
                 this.$refs.body.style.paddingBottom = '0';
             }
+            this.hasKeyboard = false;
         }
     }
 
