@@ -29,9 +29,7 @@ export class MOverlay extends ModulVue {
 
     public $refs: {
         dialogWrap: HTMLElement,
-        header: HTMLElement,
         body: HTMLElement,
-        footer: HTMLElement,
         article: Element
     };
 

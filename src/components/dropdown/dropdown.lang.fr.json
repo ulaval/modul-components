@@ -1,10 +1,10 @@
 {
     "m-dropdown": {
-        "no-data": "Aucune données",
-        "no-result": "Aucun résultats",
+        "no-data": "Aucune donnée",
+        "no-result": "Aucun résultat",
         "none": "(Aucun)",
-        "research" : "Recherche",
-        "search" : "Rechercher",
+        "research": "Recherche",
+        "search": "Rechercher",
         "open": "Ouvrir la liste déroulante",
         "close": "Fermer la liste déroulante"
     }
