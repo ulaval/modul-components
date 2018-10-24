@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
-import { ScrollToEasing, ScrollToSpeed } from '../../utils/scroll-to/scroll-to';
+import { ScrollToDuration, ScrollToEasing } from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_TO_NAME } from '../directive-names';
 import WithRender from './scroll-to.sandbox.html';
@@ -11,7 +11,7 @@ import WithRender from './scroll-to.sandbox.html';
 export class MScrollToSandbox extends ModulVue {
 
     public offset: string = '-58';
-    public speed: ScrollToSpeed = ScrollToSpeed.Regular;
+    public speed: ScrollToDuration = ScrollToDuration.Regular;
     public easing: ScrollToEasing = ScrollToEasing.Linear;
 
     scrollToGreenUsingService(): void {

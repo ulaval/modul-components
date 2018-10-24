@@ -1,11 +1,11 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
-import { ScrollTo, ScrollToEasing, ScrollToSpeed } from '../../utils';
+import { ScrollTo, ScrollToDuration, ScrollToEasing } from '../../utils';
 import { SCROLL_TO_NAME } from '../directive-names';
 
 class ScrollToCallback {
 
-    constructor(private speed: ScrollToSpeed, private easing: ScrollToEasing, private offset: number, private target: HTMLElement) { }
+    constructor(private speed: ScrollToDuration, private easing: ScrollToEasing, private offset: number, private target: HTMLElement) { }
 
     callBack: (event: MouseEvent) => void = (event: MouseEvent) => {
         // tslint:disable-next-line:no-console
@@ -22,7 +22,7 @@ class ScrollToCallback {
 const MScrollTo: DirectiveOptions = {
 
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        let speed: ScrollToSpeed = binding.value.speed || ScrollToSpeed.Regular;
+        let speed: ScrollToDuration = binding.value.speed || ScrollToDuration.Regular;
 
         let easing: ScrollToEasing = binding.value.easing || ScrollToEasing.Linear;
 
@@ -43,7 +43,7 @@ const MScrollTo: DirectiveOptions = {
     },
     update(element: HTMLElement, binding: VNodeDirective): void {
         if (element && (element as any)._scrollToCallback) {
-            (element as any)._scrollToCallback.speed = binding.value.speed || ScrollToSpeed.Regular;
+            (element as any)._scrollToCallback.speed = binding.value.speed || ScrollToDuration.Regular;
 
             (element as any)._scrollToCallback.easing = binding.value.easing || ScrollToEasing.Linear;
 

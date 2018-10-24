@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 
-export enum ScrollToSpeed {
+export enum ScrollToDuration {
     Slow = 'slow',
     Slower = 'slower',
     Regular = 'regular',
@@ -33,44 +33,37 @@ const easeOutCubic = t => --t * t * t + 1;
  */
 export class ScrollTo {
 
-    /**
-     * Scroll to the top of the page.
-     *
-     * @param offset
-     * @param speed
-     * @param easing
-     */
-    public goToTop(offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToTop(offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         let targetLocation: number = 0 + offset;
 
-        return this.internalScroll(undefined, targetLocation, speed, easing);
+        return this.internalScroll(undefined, targetLocation, duration, easing);
     }
 
-    public goToTopInside(container: HTMLElement, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToTopInside(container: HTMLElement, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         const containerPosition: number = Math.round(container.offsetTop) + offset;
         const elementPosition: number = 0;
         const targetLocation: number = (elementPosition - containerPosition);
 
-        return this.internalScroll(container, 0, speed, easing);
+        return this.internalScroll(container, 0, duration, easing);
     }
 
-    public goToBottomInside(container: HTMLElement, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToBottomInside(container: HTMLElement, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         const targetLocation: number = Math.max(Math.round(container.scrollHeight) + offset, 0);
 
-        return this.internalScroll(container, targetLocation, speed, easing);
+        return this.internalScroll(container, targetLocation, duration, easing);
     }
 
-    public goToBottom(offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToBottom(offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         let targetLocation: number = document.body.offsetHeight + offset;
 
-        return this.internalScroll(undefined, targetLocation, speed, easing);
+        return this.internalScroll(undefined, targetLocation, duration, easing);
     }
 
-    public goTo(target: HTMLElement | number, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goTo(target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         let targetLocation: number = 0;
 
@@ -82,10 +75,10 @@ export class ScrollTo {
             targetLocation = +target;
         }
 
-        return this.internalScroll(undefined, targetLocation, speed, easing);
+        return this.internalScroll(undefined, targetLocation, duration, easing);
     }
 
-    public goToInside(container: HTMLElement, target: HTMLElement | number, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToInside(container: HTMLElement, target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         let targetLocation: number = 0;
 
@@ -98,10 +91,10 @@ export class ScrollTo {
             targetLocation = +target;
         }
 
-        return this.internalScroll(container, targetLocation, speed, easing);
+        return this.internalScroll(container, targetLocation, duration, easing);
     }
 
-    private internalScroll(container: HTMLElement | undefined, targetLocation: number, speed: ScrollToSpeed, easing: ScrollToEasing): Promise<number> {
+    private internalScroll(container: HTMLElement | undefined, targetLocation: number, duration: ScrollToDuration, easing: ScrollToEasing): Promise<number> {
         return new Promise((resolve, reject) => {
             const startTime: number = performance.now();
             let startLocation: number = 0;
@@ -113,10 +106,10 @@ export class ScrollTo {
 
             const distanceToScroll: number = targetLocation - startLocation;
             const easingFunction: (t: any) => any = this.getEasingFunction(easing);
-            const duration: number = this.getDuration(speed);
+            const _duration: number = this.getDuration(duration);
 
             const step: any = (currentTime) => {
-                const progressPercentage: number = Math.min(1, ((currentTime - startTime) / duration));
+                const progressPercentage: number = Math.min(1, ((currentTime - startTime) / _duration));
                 const targetPosition: number = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage));
 
                 if (container) {
@@ -156,13 +149,13 @@ export class ScrollTo {
         }
     }
 
-    private getDuration(speed: ScrollToSpeed): number {
+    private getDuration(speed: ScrollToDuration): number {
         switch (speed) {
-            case ScrollToSpeed.Slow:
+            case ScrollToDuration.Slow:
                 return 1500;
-            case ScrollToSpeed.Slower:
+            case ScrollToDuration.Slower:
                 return 3000;
-            case ScrollToSpeed.Fast:
+            case ScrollToDuration.Fast:
                 return 400;
             default:
                 return 800;
