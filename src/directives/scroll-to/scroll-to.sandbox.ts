@@ -56,6 +56,11 @@ export class MScrollToSandbox extends ModulVue {
         let _container: HTMLElement = this.$refs.orange as HTMLElement;
         this.$scrollTo.goToBottomInside(_container,0, this.speed, this.easing);
     }
+
+    scrollInToDown200InOrangeUsingService(): void {
+        let _container: HTMLElement = this.$refs.orange as HTMLElement;
+        this.$scrollTo.goToInside(_container, 200 ,0, this.speed, this.easing);
+    }
 }
 
 const ScrollToSandboxPlugin: PluginObject<any> = {

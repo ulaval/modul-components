@@ -85,14 +85,18 @@ export class ScrollTo {
         return this.internalScroll(undefined, targetLocation, speed, easing);
     }
 
-    public goToInside(container: HTMLElement, target: HTMLElement, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToInside(container: HTMLElement, target: HTMLElement | number, offset: number, speed: ScrollToSpeed = ScrollToSpeed.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         let targetLocation: number = 0;
 
         // get element relative position from container
-        const containerPosition: number = Math.round(container.offsetTop);
-        const elementPosition: number = Math.round(target.offsetTop);
-        targetLocation = Math.max((elementPosition - containerPosition) + offset, 0);
+        if (target instanceof HTMLElement) {
+            const containerPosition: number = Math.round(container.offsetTop);
+            const elementPosition: number = Math.round(target.offsetTop);
+            targetLocation = Math.max((elementPosition - containerPosition) + offset, 0);
+        } else {
+            targetLocation = +target;
+        }
 
         return this.internalScroll(container, targetLocation, speed, easing);
     }
