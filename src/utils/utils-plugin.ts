@@ -26,9 +26,6 @@ const UtilsPlugin: PluginObject<any> = {
         if (!options || options.propagateVueParserErrors === undefined || options.propagateVueParserErrors) {
             // Vue parser errors do not propagate to window.onError by default
             Vue.config.errorHandler = (err, vm, info) => {
-                // tslint:disable-next-line:no-console
-                // Show the err!
-                console.error(err);
                 WindowErrorHandler.onError(new ErrorEvent('error', { error: err }));
             };
         }

@@ -33,6 +33,13 @@ const easeOutCubic = t => --t * t * t + 1;
  */
 export class ScrollTo {
 
+    /**
+     * Scroll to top of the current windows
+     *
+     * @param offset the offset to add (in case of a sticky header)
+     * @param duration duration of the scroll
+     * @param easing easing function to use
+     */
     public goToTop(offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         let targetLocation: number = 0 + offset;
@@ -40,6 +47,14 @@ export class ScrollTo {
         return this.internalScroll(undefined, targetLocation, duration, easing);
     }
 
+    /**
+     * Scroll to top of an specified container
+     *
+     * @param container the HTML container containing the scroll
+     * @param offset the offset to add (in case of a sticky header)
+     * @param duration duration of the scroll
+     * @param easing easing function to use
+     */
     public goToTopInside(container: HTMLElement, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         const containerPosition: number = Math.round(container.offsetTop) + offset;
@@ -49,6 +64,14 @@ export class ScrollTo {
         return this.internalScroll(container, 0, duration, easing);
     }
 
+    /**
+     * Scroll to the bottom of an specified container
+     *
+     * @param container the HTML container containing the scroll
+     * @param offset the offset to add (in case of a sticky header)
+     * @param duration duration of the scroll
+     * @param easing easing function to use
+     */
     public goToBottomInside(container: HTMLElement, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         const targetLocation: number = Math.max(Math.round(container.scrollHeight) + offset, 0);
@@ -56,6 +79,13 @@ export class ScrollTo {
         return this.internalScroll(container, targetLocation, duration, easing);
     }
 
+    /**
+     * Scroll to the bottom of the windows
+     *
+     * @param offset the offset to add (in case of a sticky header)
+     * @param duration duration of the scroll
+     * @param easing easing function to use
+     */
     public goToBottom(offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         let targetLocation: number = document.body.offsetHeight + offset;
@@ -63,6 +93,14 @@ export class ScrollTo {
         return this.internalScroll(undefined, targetLocation, duration, easing);
     }
 
+    /**
+     * Scroll to a specific element or position of the windows
+     *
+     * @param target the HTML container containing the scroll
+     * @param offset the offset to add (in case of a sticky header)
+     * @param duration duration of the scroll
+     * @param easing easing function to use
+     */
     public goTo(target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         let targetLocation: number = 0;
@@ -78,6 +116,15 @@ export class ScrollTo {
         return this.internalScroll(undefined, targetLocation, duration, easing);
     }
 
+    /**
+     * Scroll to a specific element of an specified container
+     *
+     * @param container the HTML container containing the scroll
+     * @param target the target HtmlElement
+     * @param offset the offset to add (in case of a sticky header)
+     * @param duration duration of the scroll
+     * @param easing easing function to use
+     */
     public goToInside(container: HTMLElement, target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
         let targetLocation: number = 0;
