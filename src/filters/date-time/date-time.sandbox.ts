@@ -4,6 +4,7 @@ import { Component } from 'vue-property-decorator';
 import TextfieldPlugin from '../../components/textfield/textfield';
 import { DATE_TIME_NAME } from '../filter-names';
 import WithRender from './date-time.sandbox.html';
+import { dateTimeFilter } from './date-time';
 
 @WithRender
 @Component
@@ -18,6 +19,14 @@ export class MDateTimeSandbox extends Vue {
 
     get date(): Date {
         return new Date(this.year, this.month - 1, this.day, this.hours, this.minutes);
+    }
+
+    get formattedDateTimeLong(): string {
+        return dateTimeFilter(this.date);
+    }
+
+    get formattedDateTimeShort(): string {
+        return dateTimeFilter(this.date, true);
     }
 }
 

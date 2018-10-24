@@ -13,7 +13,15 @@ describe(DATE_NAME, () => {
         expect(dateFilter(new Date(2018, 8, 27))).toEqual('27 septembre 2018');
     });
 
+    it(`should return long formatted date with sup tags`, () => {
+        expect(dateFilter(new Date(2018, 9, 1))).toEqual('1<sup>er</sup> octobre 2018');
+    });
+
     it(`should return short formatted date`, () => {
-        expect(dateFilter(new Date(2018, 9, 1), true)).toEqual('1er oct. 2018');
+        expect(dateFilter(new Date(2018, 8, 27), true)).toEqual('27 sept. 2018');
+    });
+
+    it(`should return short formatted date with sup tags`, () => {
+        expect(dateFilter(new Date(2018, 9, 1), true)).toEqual('1<sup>er</sup> oct. 2018');
     });
 });

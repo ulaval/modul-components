@@ -18,7 +18,15 @@ describe(DATE_TIME_NAME, () => {
         expect(dateTimeFilter(new Date(2018, 8, 27, 17, 5))).toEqual(`27 septembre 2018 à${NBSP}17${NBSP}h${NBSP}05`);
     });
 
+    it(`should return long formatted date time with sup tags`, () => {
+        expect(dateTimeFilter(new Date(2018, 9, 1, 7, 0))).toEqual(`1<sup>er</sup> octobre 2018 à${NBSP}7${NBSP}h`);
+    });
+
     it(`should return short formatted date time`, () => {
-        expect(dateTimeFilter(new Date(2018, 9, 1, 7, 0), true)).toEqual(`1er oct. 2018 7${NBSP}h`);
+        expect(dateTimeFilter(new Date(2018, 8, 27, 17, 5), true)).toEqual(`27 sept. 2018 17${NBSP}h${NBSP}05`);
+    });
+
+    it(`should return short formatted date time with sup tags`, () => {
+        expect(dateTimeFilter(new Date(2018, 9, 1, 7, 0), true)).toEqual(`1<sup>er</sup> oct. 2018 7${NBSP}h`);
     });
 });

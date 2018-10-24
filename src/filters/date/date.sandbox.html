@@ -4,8 +4,8 @@
     <m-textfield v-model="day" label="day"></m-textfield>
 
     <h3>Long format</h3>
-    <p>{{ date | f-m-date }}</p>
+    <p v-html="formattedDateLong"></p>
 
     <h3>Short format</h3>
-    <p>{{ date | f-m-date(true) }}</p>
+    <p v-html="formattedDateShort"></p>
 </div>
