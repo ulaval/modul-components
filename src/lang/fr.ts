@@ -46,7 +46,6 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/sidebar/sidebar.lang.fr.json'),
                 require('../components/spinner/spinner.lang.fr.json'),
                 require('../components/switch/switch.lang.fr.json'),
-                require('../components/table/table-empty/table-empty.lang.fr.json'),
                 require('../components/textfield/textfield.lang.fr.json'),
                 require('../components/timepicker/timepicker.lang.fr.json'),
                 require('../components/tooltip/tooltip.lang.fr.json'),

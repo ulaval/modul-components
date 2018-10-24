@@ -1,3 +1,25 @@
 <table class="m-table" :class="[ 'm-table-' + skin]" cellspacing="0">
-    <slot></slot>
+    <slot name="header">
+        <thead>
+            <tr>
+                <th v-for="column in columns">
+                    <slot :name="'header.' + column.dataProp">
+                        {{ column.title }}
+                    </slot>
+                </th>
+            </tr>
+        </thead>
+    </slot>
+
+    <slot name="body">
+        <tbody>
+            <tr v-for="row in rows">
+                <td v-for="column in columns">
+                    <slot :name="'body.' + column.dataProp" :data="row">
+                        {{ row[column.dataProp] }}
+                    </slot>
+                </td>
+            </tr>
+        </tbody>
+    </slot>
 </table>

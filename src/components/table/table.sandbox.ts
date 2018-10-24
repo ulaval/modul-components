@@ -2,13 +2,32 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 
 import { TABLE_NAME } from '../component-names';
+import { MTableColumns } from './table';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
 @WithRender
 @Component
 export class MTableSandbox extends Vue {
 
-    data: any[] = [
+    columns: MTableColumns[] = [
+        {
+            id: 'name',
+            title: 'Name',
+            dataProp: 'name'
+        },
+        {
+            id: 'age',
+            title: 'Age',
+            dataProp: 'age'
+        },
+        {
+            id: 'username',
+            title: 'Username',
+            dataProp: 'username'
+        }
+    ];
+
+    rows: any[] = [
         {
             id: '1',
             name: 'Jonathan',

@@ -1,97 +1,33 @@
 <div class="m-table-sandbox">
-    <h2>Complex table</h2>
-    <m-table>
-        <m-table-header>
-            <m-table-header-cell width="10%"></m-table-header-cell>
-            <m-table-header-cell>Name</m-table-header-cell>
-            <m-table-header-cell>Age</m-table-header-cell>
-            <m-table-header-cell>Username</m-table-header-cell>
-            <m-table-header-cell>Subscription</m-table-header-cell>
-            <m-table-header-cell width="10%"></m-table-header-cell>
-        </m-table-header>
-        <m-table-body :rows="data">
-            <template scope="{data}">
-                <m-table-cell>
-                    <m-checkbox @change="onCheck(data.id)"></m-checkbox>
-                </m-table-cell>
-                <m-table-cell>
-                    <m-link>{{ data.name }}</m-link>
-                </m-table-cell>
-                <m-table-cell>{{ data.age }}</m-table-cell>
-                <m-table-cell class="m-table-sandbox--underline">{{ data.username }}</m-table-cell>
-                <m-table-cell>
-                    <span class="subscribed">Subscribed</span>
-                </m-table-cell>
-                <m-table-cell>
-                    <m-option>
-                        <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
-                        <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
-                    </m-option>
-                </m-table-cell>
-            </template>
-        </m-table-body>
-        <m-table-footer>
-            <m-table-cell class="m-table-sandbox--show-more" colspan="6">
-                <m-button class="m-table-sandbox--show-more--button" @click="showMore">
-                    <p>Show more results</p>
-                    <span>1-10 of 45</span>
-                </m-button>
-            </m-table-cell>
-        </m-table-footer>
+    <m-table :columns="columns" :rows="rows"></m-table>
+
+    <m-table :columns="columns" :rows="rows">
+        <template slot="header">
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>AGE</th>
+                    <th>USERNAME</th>
+                </tr>
+            </thead>
+        </template>
+        <template slot="body">
+            <tbody>
+                <tr v-for="row in rows">
+                    <td>{{ row.age }}</td>
+                    <td>{{ row.username }}</td>
+                    <td>{{ row.name }}</td>
+                </tr>
+            </tbody>
+        </template>
     </m-table>
 
-    <h2>Simple table</h2>
-    <m-table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Country</th>
-                <th>City</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Bob</td>
-                <td>20</td>
-                <td>Canada</td>
-                <td>Quebec</td>
-            </tr>
-            <tr>
-                <td>Bill</td>
-                <td>80</td>
-                <td>Canada</td>
-                <td>Montreal</td>
-            </tr>
-        </tbody>
-    </m-table>
-
-    <h2>Empty table - default slot</h2>
-    <m-table :data="emptyData" :max-rows="5">
-         <m-table-header>
-            <m-table-header-cell>Name</m-table-header-cell>
-            <m-table-header-cell>Age</m-table-header-cell>
-            <m-table-header-cell>Username</m-table-header-cell>
-            <m-table-header-cell>Subscription</m-table-header-cell>
-            <m-table-header-cell width="10%"></m-table-header-cell>
-        </m-table-header>
-        <m-table-body :data="emptyData" columns="5">
-        </m-table-body>
-    </m-table>
-
-    <h2>Empty table - custom slot</h2>
-    <m-table :data="emptyData">
-         <m-table-header>
-            <m-table-header-cell>Name</m-table-header-cell>
-            <m-table-header-cell>Age</m-table-header-cell>
-            <m-table-header-cell>Username</m-table-header-cell>
-            <m-table-header-cell>Subscription</m-table-header-cell>
-            <m-table-header-cell width="10%"></m-table-header-cell>
-        </m-table-header>
-        <m-table-body :data="emptyData" columns="5">
-            <template slot="table-empty">
-                <m-table-cell :colspan="5" style="text-align:center; padding: 10px; background-color: #ff5252; color: white;">Empty data</m-table-cell>
-            </template>
-        </m-table-body>
+    <m-table :columns="columns" :rows="rows">
+        <template slot="header.age">
+            <th>AGE</th>
+        </template>
+        <template slot="body.age" scope="{data}">
+            {{ data.age }} ans
+        </template>
     </m-table>
 </div>

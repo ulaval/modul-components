@@ -9,6 +9,14 @@ import WithRender from './table.html?style=./table.scss';
 export enum MTableSkin {
     Regular = 'regular'
 }
+
+export interface MTableColumns {
+    id: string;
+    title: string;
+    dataProp: string;
+    width?: string;
+}
+
 @WithRender
 @Component
 export class MTable extends ModulVue {
@@ -19,6 +27,12 @@ export class MTable extends ModulVue {
             value === MTableSkin.Regular
     })
     public skin: MTableSkin;
+
+    @Prop({ default: () => [] })
+    columns: MTableColumns[];
+
+    @Prop({ default: () => [] })
+    rows: any[];
 
 }
 

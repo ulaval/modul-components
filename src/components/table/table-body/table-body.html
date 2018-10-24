@@ -1,8 +1,0 @@
-<tbody>
-    <m-table-empty v-if="isEmpty" :columns="columns">
-        <slot name="table-empty"></slot>
-    </m-table-empty>
-    <m-table-row v-for="(data, row) in rows" :key="row">
-        <slot :data="data"></slot>
-    </m-table-row>
-</tbody>
