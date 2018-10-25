@@ -8,7 +8,7 @@ pipeline {
     }
 
     environment {
-        token = credentials('openshift-ul-modul-dv01-token')
+        token = credentials('openshift-ul-modul-dv01')
         openshiftServer = 'https://console-pca.svc.ulaval.ca'
         openshiftProject = 'ul-modul-dv01'
     }
