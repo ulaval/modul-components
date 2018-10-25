@@ -25,6 +25,7 @@ const easeOutQuad: easing = t => t * (2 - t);
 // accelerating from zero velocity
 const easeInCubic: easing = t => t * t * t;
 // decelerating to zero velocity
+const easeOutCubic: easing = t => --t * t * t + 1;
 
 export class ScrollTo {
 
