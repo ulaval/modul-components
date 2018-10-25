@@ -184,6 +184,7 @@
         padding: $m-padding;
         flex: 1 1 auto;
         overflow: auto;
+        user-select: text;
 
         @include m-scrollbar();
     }
