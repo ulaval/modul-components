@@ -10,6 +10,7 @@ import { MDroppable } from '../droppable/droppable';
 import { MSortable } from '../sortable/sortable';
 import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../user-select/remove-user-select';
 import { MDraggableAllowScroll } from './draggable-allow-scroll';
+import { draggableHasHandle, isHandleUsedToDrag } from './draggable-helper';
 
 export enum MDraggableClassNames {
     DragImage = 'dragImage',
@@ -99,7 +100,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     public onDragStart(event: DragEvent): void {
         // On some mobile devices dragStart will be triggered even though user has not moved / dragged yet.  We want to avoid that.
-        if (polyFillActive.dragDrop && (!this.touchHasMoved && !this.isMouseInitiatedDrag)) {
+        if ((polyFillActive.dragDrop && (!this.touchHasMoved && !this.isMouseInitiatedDrag))) {
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
@@ -143,7 +144,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.destroyGrabBehavior();
         this.grabEvents.forEach(eventName => this.removeEventListener(eventName));
         this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: MouseEvent) => {
-            if (targetIsInput(this.element, event)) {
+            if (targetIsInput(this.element, event) || (draggableHasHandle(this.element, event) && !isHandleUsedToDrag(event))) {
                 this.turnDragOff();
                 this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.intputTouchUpListener));
             } else if (this.targetIsGrabbable(event)) {

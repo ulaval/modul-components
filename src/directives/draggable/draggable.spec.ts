@@ -9,7 +9,15 @@ import DraggablePlugin, { MDraggable, MDraggableClassNames, MDraggableEventNames
 
 jest.useFakeTimers();
 let mockTargetIsInput: boolean = false;
-jest.mock('../../utils/event/event', () => ({ targetIsInput(): boolean { return mockTargetIsInput; } }));
+let mockDraggableHasHandle: boolean;
+let mockIsHandleUsedToDrag: boolean;
+jest.mock('../../utils/event/event', () => ({
+    targetIsInput(): boolean { return mockTargetIsInput; }
+}));
+jest.mock('./draggable-helper', () => ({
+    draggableHasHandle(): boolean { return mockDraggableHasHandle; },
+    isHandleUsedToDrag(): boolean { return mockIsHandleUsedToDrag; }
+}));
 
 const WIDTH: number = 100;
 const HEIGHT: number = 200;
@@ -20,6 +28,8 @@ element.mockReturnValue({ classList: jest.fn(), querySelector: jest.fn() });
 
 beforeEach(() => {
     mockTargetIsInput = false;
+    mockDraggableHasHandle = false;
+    mockIsHandleUsedToDrag = false;
     element.mockReset();
 });
 
@@ -148,6 +158,62 @@ describe('draggable', () => {
 
             expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
             expect(childDraggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+        });
+
+        it(`it should not apply grabbing class to parent draggable on ${eventName} when draggable is nested into another draggable`, () => {
+            const draggable: Wrapper<Vue> = getDraggableDirective(true, undefined, '<div class="childDraggable" v-m-draggable="true">child draggable</div>');
+            const childDraggable: Wrapper<Vue> = draggable.find('.childDraggable');
+
+            childDraggable.trigger(eventName);
+            jest.runOnlyPendingTimers();
+
+            expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+            expect(childDraggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+        });
+
+        describe(`Given a draggable element with no handle`, () => {
+            describe(`When ${eventName}`, () => {
+                it(`Then it should apply grabbing class to parent draggable`, () => {
+                    const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, '<div class="draggableContent">draggable content</div>');
+
+                    draggable.trigger(eventName);
+                    jest.runOnlyPendingTimers();
+
+                    expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+                });
+            });
+        });
+
+        describe(`Given a draggable element with handle`, () => {
+            describe(`When ${eventName} and the handle is not used`, () => {
+                it(`Then it should not apply grabbing class to parent draggable`, () => {
+                    mockDraggableHasHandle = true;
+                    mockIsHandleUsedToDrag = false;
+                    const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, '<div class="dragHandle">Handle</div><div class="draggableContent">draggable content</div>');
+                    const draggableContent: Wrapper<Vue> = draggable.find('.draggableContent');
+
+                    draggableContent.trigger(eventName);
+                    jest.runOnlyPendingTimers();
+
+                    expect(draggable.element.classList).not.toContain(MDraggableClassNames.Grabbing);
+                });
+            });
+        });
+
+        describe(`Given a draggable element with handle`, () => {
+            describe(`When ${eventName} and the handle is used`, () => {
+                it(`Then it should apply grabbing class to parent draggable`, () => {
+                    mockDraggableHasHandle = true;
+                    mockIsHandleUsedToDrag = true;
+                    const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, '<div class="dragHandle">Handle</div><div class="draggableContent">draggable content</div>');
+                    const draggableHandle: Wrapper<Vue> = draggable.find('.draggableContent');
+
+                    draggableHandle.trigger(eventName);
+                    jest.runOnlyPendingTimers();
+
+                    expect(draggable.element.classList).toContain(MDraggableClassNames.Grabbing);
+                });
+            });
         });
     });
 
