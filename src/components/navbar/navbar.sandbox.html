@@ -128,10 +128,20 @@
     </m-navbar>
 
     <h3>Skin tab-light</h3>
+    <h4>Skin tab-light : un seul onglet</h4>
+    <br>From <a href="https://github.com/ulaval/modul-components/pull/539" target="blank">PR 539</a>
     <m-navbar skin="tab-light" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
         <m-navbar-item value="item1">
             1 souris verte
         </m-navbar-item>
+    </m-navbar>
+
+    <h4>Skin tab-light : plusieurs onglets</h4>
+    <m-navbar skin="tab-light" :selected.sync="selectedItem" :multiline="multiline" title-button-left="Naviguer précédent" title-button-right="Naviguer suivant">
+        <m-navbar-item value="item1">
+            1 souris verte
+        </m-navbar-item>
+
         <m-navbar-item value="item2">
             2
         </m-navbar-item>
