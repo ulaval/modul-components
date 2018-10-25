@@ -36,10 +36,8 @@ export class MTable extends ModulVue {
 
     protected i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
 
-    public widthColumn(col: MColumnTable): { width: string } {
-        return {
-            width: col.width ? col.width : ''
-        };
+    public widthColumn(col: MColumnTable): { width: string } | '' {
+        return col.width ? { width:  col.width } : '';
     }
 
     public get isEmpty(): boolean {
