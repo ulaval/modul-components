@@ -15,6 +15,7 @@ export abstract class BaseNavbar extends ModulVue { }
 export interface Navbar {
     model: string;
     multiline: boolean;
+    autoSelect: boolean;
     updateValue(value: string): void;
     onMouseover(event: Event, value: string): void;
     onMouseleave(event: Event, value: string): void;
@@ -81,6 +82,8 @@ export class MNavbar extends BaseNavbar implements Navbar {
     public titleButtonLeft: string;
     @Prop()
     public titleButtonRight: string;
+    @Prop({ default: false })
+    public autoSelect: boolean;
 
     public $refs: {
         buttonRight: HTMLElement,
@@ -144,9 +147,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Watch('multiline')
     private multilineChanged(): void {
         // Wait for navbar-item height calculation -> setimension()
-        setTimeout(() => {
-            this.setupScrolllH();
-        });
     }
 
     private setDisplayButtonArrrow(): void {

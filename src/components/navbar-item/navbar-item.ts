@@ -42,6 +42,9 @@ export class MNavbarItem extends ModulVue {
             this.parentNavbar = (parentNavbar as any) as Navbar;
             this.setDimension();
 
+            if (this.parentNavbar.autoSelect && this.$el.querySelector('.router-link-active')) {
+                this.parentNavbar.updateValue(this.value);
+            }
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
         }
