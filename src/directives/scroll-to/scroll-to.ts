@@ -8,8 +8,6 @@ class ScrollToCallback {
     constructor(private speed: ScrollToDuration, private easing: ScrollToEasing, private offset: number, private target: HTMLElement) { }
 
     callBack: (event: MouseEvent) => void = (event: MouseEvent) => {
-        // tslint:disable-next-line:no-console
-        console.log('run' + JSON.stringify({ speed: this.speed, easing: this.easing, offset: this.offset }));
         let scrollTo: ScrollTo = (Vue.prototype as any).$scrollTo as ScrollTo;
 
         scrollTo.goTo(this.target, this.offset, this.speed, this.easing);

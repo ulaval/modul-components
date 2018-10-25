@@ -15,22 +15,17 @@ export enum ScrollToEasing {
     EaseOutCubic = 'easeOutCubic'
 }
 
-// tslint:disable:typedef
 // linear
-const linear = t => t;
+type easing = (t: number) => number;
+const linear: easing = t => t;
 // accelerating from zero velocity
-const easeInQuad = t => t * t;
+const easeInQuad: easing = t => t * t;
 // decelerating to zero velocity
-const easeOutQuad = t => t * (2 - t);
+const easeOutQuad: easing = t => t * (2 - t);
 // accelerating from zero velocity
-const easeInCubic = t => t * t * t;
+const easeInCubic: easing = t => t * t * t;
 // decelerating to zero velocity
-const easeOutCubic = t => --t * t * t + 1;
-// tslint:enable:typedef
 
-/**
- *
- */
 export class ScrollTo {
 
     /**
@@ -42,7 +37,7 @@ export class ScrollTo {
      */
     public goToTop(offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
-        let targetLocation: number = 0 + offset;
+        const targetLocation: number = 0 + offset;
 
         return this.internalScroll(undefined, targetLocation, duration, easing);
     }
@@ -88,7 +83,7 @@ export class ScrollTo {
      */
     public goToBottom(offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
 
-        let targetLocation: number = document.body.offsetHeight + offset;
+        const targetLocation: number = document.body.offsetHeight + offset;
 
         return this.internalScroll(undefined, targetLocation, duration, easing);
     }
