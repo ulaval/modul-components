@@ -28,10 +28,10 @@ export class MTable extends ModulVue {
     })
     public skin: MTableSkin;
 
-    @Prop({ default: () => [] })
+    @Prop()
     columns: MColumnTable[];
 
-    @Prop({ default: () => [] })
+    @Prop()
     rows: any[];
 
     protected i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
