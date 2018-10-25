@@ -4,30 +4,18 @@ exports[`MTable Given a table full of data When using a footer Then should rende
 <table cellspacing="0" class="m-table m-table-regular">
     <thead>
         <tr>
-            <th style="width:10%;">
-                A
-            </th>
-            <th>
-                B
-            </th>
+            <th style="width:10%;">A</th>
+            <th>B</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>
-                a1
-            </td>
-            <td>
-                b1
-            </td>
+            <td>a1</td>
+            <td>b1</td>
         </tr>
         <tr>
-            <td>
-                a2
-            </td>
-            <td>
-                b2
-            </td>
+            <td>a2</td>
+            <td>b2</td>
         </tr>
     </tbody>
     <tfoot>
@@ -42,26 +30,18 @@ exports[`MTable Given a table full of data When using slot to replace a td Then 
 <table cellspacing="0" class="m-table m-table-regular">
     <thead>
         <tr>
-            <th style="width:10%;">
-                A
-            </th>
-            <th>
-                B
-            </th>
+            <th style="width:10%;">A</th>
+            <th>B</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>SLOT TD</td>
-            <td>
-                b1
-            </td>
+            <td>b1</td>
         </tr>
         <tr>
             <td>SLOT TD</td>
-            <td>
-                b2
-            </td>
+            <td>b2</td>
         </tr>
     </tbody>
 </table>
@@ -72,27 +52,17 @@ exports[`MTable Given a table full of data When using slot to replace a th Then 
     <thead>
         <tr>
             <th>SLOT TH</th>
-            <th>
-                B
-            </th>
+            <th>B</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>
-                a1
-            </td>
-            <td>
-                b1
-            </td>
+            <td>a1</td>
+            <td>b1</td>
         </tr>
         <tr>
-            <td>
-                a2
-            </td>
-            <td>
-                b2
-            </td>
+            <td>a2</td>
+            <td>b2</td>
         </tr>
     </tbody>
 </table>
@@ -107,20 +77,12 @@ exports[`MTable Given a table full of data When using slot to replace the header
     </thead>
     <tbody>
         <tr>
-            <td>
-                a1
-            </td>
-            <td>
-                b1
-            </td>
+            <td>a1</td>
+            <td>b1</td>
         </tr>
         <tr>
-            <td>
-                a2
-            </td>
-            <td>
-                b2
-            </td>
+            <td>a2</td>
+            <td>b2</td>
         </tr>
     </tbody>
 </table>
@@ -130,12 +92,8 @@ exports[`MTable Given a table full of data When using slot to replace the tbody 
 <table cellspacing="0" class="m-table m-table-regular">
     <thead>
         <tr>
-            <th style="width:10%;">
-                A
-            </th>
-            <th>
-                B
-            </th>
+            <th style="width:10%;">A</th>
+            <th>B</th>
         </tr>
     </thead>
     <tbody>
@@ -150,30 +108,18 @@ exports[`MTable Given a table full of data When we don't use slots Then should r
 <table cellspacing="0" class="m-table m-table-regular">
     <thead>
         <tr>
-            <th style="width:10%;">
-                A
-            </th>
-            <th>
-                B
-            </th>
+            <th style="width:10%;">A</th>
+            <th>B</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>
-                a1
-            </td>
-            <td>
-                b1
-            </td>
+            <td>a1</td>
+            <td>b1</td>
         </tr>
         <tr>
-            <td>
-                a2
-            </td>
-            <td>
-                b2
-            </td>
+            <td>a2</td>
+            <td>b2</td>
         </tr>
     </tbody>
 </table>
@@ -183,12 +129,8 @@ exports[`MTable Given an empty table When a custom slot is given Then should ren
 <table cellspacing="0" class="m-table m-table-regular">
     <thead>
         <tr>
-            <th style="width:10%;">
-                A
-            </th>
-            <th>
-                B
-            </th>
+            <th style="width:10%;">A</th>
+            <th>B</th>
         </tr>
     </thead>
     <tbody>
@@ -203,12 +145,8 @@ exports[`MTable Given an empty table When we use the default template Then shoul
 <table cellspacing="0" class="m-table m-table-regular">
     <thead>
         <tr>
-            <th style="width:10%;">
-                A
-            </th>
-            <th>
-                B
-            </th>
+            <th style="width:10%;">A</th>
+            <th>B</th>
         </tr>
     </thead>
     <tbody>
