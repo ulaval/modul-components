@@ -73,7 +73,7 @@ export class MTableSandbox extends Vue {
 
     ];
 
-    emptyData: any[] = [];
+    emptyRows: any[] = [];
 
     editData(id: string): void {
         console.error('Edit data: ' + id);

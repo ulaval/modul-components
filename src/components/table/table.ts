@@ -34,6 +34,12 @@ export class MTable extends ModulVue {
     @Prop({ default: () => [] })
     rows: any[];
 
+    public i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
+
+    public get isEmpty(): boolean {
+        return !this.rows.length;
+    }
+
 }
 
 const TablePlugin: PluginObject<any> = {

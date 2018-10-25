@@ -1,6 +1,8 @@
 <div class="m-table-sandbox">
+    <h2>Classic table</h2>
     <m-table :columns="columns" :rows="rows"></m-table>
 
+    <h2>Table - Custom table element</h2>
     <m-table :columns="columns" :rows="rows">
         <template slot="header">
             <thead>
@@ -22,12 +24,27 @@
         </template>
     </m-table>
 
+    <h2>Table - Custom cells</h2>
     <m-table :columns="columns" :rows="rows">
         <template slot="header.age">
             <th>AGE</th>
         </template>
         <template slot="body.age" scope="{data}">
-            {{ data.age }} ans
+            <td>
+                {{ data.age }} ans
+            </td>
+        </template>
+    </m-table>
+
+    <h2>Empty table - default slot</h2>
+    <m-table :columns="columns" :rows="emptyRows"></m-table>
+
+    <h2>Empty table - custom slot</h2>
+    <m-table :columns="columns" :rows="emptyRows">
+        <template slot="empty">
+            <td class="empty-table-custom" colspan="3">
+                Empty table
+            </td>
         </template>
     </m-table>
 </div>

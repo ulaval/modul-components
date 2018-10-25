@@ -10,6 +10,12 @@
             padding: $m-padding--xs $m-padding--s;
             color: $m-color--grey-lightest;
         }
+
+        .empty-table-custom {
+            text-align: center;
+            background-color: #ff5252;
+            color: white;
+        }
     }
 
     &--show-more {

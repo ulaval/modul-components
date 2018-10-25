@@ -2,23 +2,31 @@
     <slot name="header">
         <thead>
             <tr>
-                <th v-for="column in columns">
-                    <slot :name="'header.' + column.dataProp">
+                <slot v-for="column in columns" :name="'header.' + column.dataProp">
+                    <th>
                         {{ column.title }}
-                    </slot>
-                </th>
+                    </th>
+                </slot>
             </tr>
         </thead>
     </slot>
 
     <slot name="body">
         <tbody>
-            <tr v-for="row in rows">
-                <td v-for="column in columns">
-                    <slot :name="'body.' + column.dataProp" :data="row">
+            <tr v-if="isEmpty">
+                <slot name="empty">
+                    <td class="m-table--empty" :colspan="columns.length">
+                        <m-icon name="m-svg__data" size="55"></m-icon>
+                        <p>{{ i18nEmptyTable }}</p>
+                    </td>
+                </slot>
+            </tr>
+            <tr v-else v-for="row in rows">
+                <slot v-for="column in columns" :name="'body.' + column.dataProp" :data="row">
+                    <td>
                         {{ row[column.dataProp] }}
-                    </slot>
-                </td>
+                    </td>
+                </slot>
             </tr>
         </tbody>
     </slot>
