@@ -14,7 +14,7 @@
         </template>
         <template slot="body">
             <tbody>
-                <tr v-for="row in rows">
+                <tr v-for="(row, index) in rows" :key="index">
                     <td colspan="2">{{ row.name }} - {{ row.username }}</td>
                     <td>{{ row.age }}</td>
                 </tr>

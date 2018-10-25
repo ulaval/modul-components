@@ -3,9 +3,7 @@
         <thead>
             <tr>
                 <slot v-for="column in columns" :name="'header.' + column.dataProp">
-                    <th :style="columnWidth(column)">
-                        {{ column.title }}
-                    </th>
+                    <th :style="columnWidth(column)" :key="column.id">{{ column.title }}</th>
                 </slot>
             </tr>
         </thead>
@@ -21,11 +19,9 @@
                     </td>
                 </slot>
             </tr>
-            <tr v-else v-for="row in rows">
+            <tr v-else v-for="(row, index) in rows" :key="index">
                 <slot v-for="column in columns" :name="'body.' + column.dataProp" :data="row">
-                    <td>
-                        {{ row[column.dataProp] }}
-                    </td>
+                    <td :key="'body.' + column.id" >{{ row[column.dataProp] }}</td>
                 </slot>
             </tr>
         </tbody>
