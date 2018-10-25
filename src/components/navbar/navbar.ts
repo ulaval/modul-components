@@ -147,6 +147,9 @@ export class MNavbar extends BaseNavbar implements Navbar {
     @Watch('multiline')
     private multilineChanged(): void {
         // Wait for navbar-item height calculation -> setimension()
+        setTimeout(() => {
+            this.setupScrolllH();
+        });
     }
 
     private setDisplayButtonArrrow(): void {
