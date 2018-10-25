@@ -2,14 +2,14 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 
 import { TABLE_NAME } from '../component-names';
-import { MTableColumns } from './table';
+import { MColumnTable } from './table';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
 @WithRender
 @Component
 export class MTableSandbox extends Vue {
 
-    columns: MTableColumns[] = [
+    columns: MColumnTable[] = [
         {
             id: 'name',
             title: 'Name',
@@ -24,6 +24,12 @@ export class MTableSandbox extends Vue {
             id: 'username',
             title: 'Username',
             dataProp: 'username'
+        },
+        {
+            id: 'menu',
+            title: '',
+            dataProp: 'menu',
+            width: '10%'
         }
     ];
 

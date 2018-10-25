@@ -10,7 +10,7 @@ export enum MTableSkin {
     Regular = 'regular'
 }
 
-export interface MTableColumns {
+export interface MColumnTable {
     id: string;
     title: string;
     dataProp: string;
@@ -29,12 +29,18 @@ export class MTable extends ModulVue {
     public skin: MTableSkin;
 
     @Prop({ default: () => [] })
-    columns: MTableColumns[];
+    columns: MColumnTable[];
 
     @Prop({ default: () => [] })
     rows: any[];
 
-    public i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
+    protected i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
+
+    public widthColumn(col: MColumnTable): { width: string } {
+        return {
+            width: col.width ? col.width : ''
+        };
+    }
 
     public get isEmpty(): boolean {
         return !this.rows.length;

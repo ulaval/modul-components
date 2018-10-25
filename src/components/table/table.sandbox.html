@@ -30,8 +30,14 @@
             <th>AGE</th>
         </template>
         <template slot="body.age" scope="{data}">
+            <td>{{ data.age }} ans</td>
+        </template>
+        <template slot="body.menu" scope="{data}">
             <td>
-                {{ data.age }} ans
+                <m-option>
+                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
+                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+                </m-option>
             </td>
         </template>
     </m-table>
