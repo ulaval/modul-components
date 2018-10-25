@@ -152,7 +152,6 @@ exports[`MTable Given an empty table When we use the default template Then shoul
     <tbody>
         <tr>
             <td colspan="2" class="m-table--empty">
-                <m-icon name="m-svg__data" size="55"></m-icon>
                 <p>m-table:empty-table</p>
             </td>
         </tr>
