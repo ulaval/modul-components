@@ -217,10 +217,10 @@ export class MNavbar extends BaseNavbar implements Navbar {
         this.navbarItems().elements.forEach(element => {
             // Allow time to make sure an item is selected
             setTimeout(() => {
-                if (element && element.$props.value === this.selected) {
+                let wrapEl: HTMLElement = this.$refs.wrap;
+                if (element && element.$props.value === this.selected && wrapEl) {
                     let buttonLeftWidth: number = this.$refs.buttonLeft && this.hasArrowLeft ? this.$refs.buttonLeft.clientWidth : 0;
                     let buttonRightWidth: number = this.$refs.buttonRight && this.hasArrowRight ? this.$refs.buttonRight.clientWidth : 0;
-                    let wrapEl: HTMLElement = this.$refs.wrap;
                     let scrollPositionAlignLeft: number = element.$el.offsetLeft - buttonLeftWidth;
 
                     // Check if selected element is visible in navbar
