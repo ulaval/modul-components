@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image "docker-local.maven.ulaval.ca/ena2/ena2-openshift-client"
+            image "docker-local.maven.ulaval.ca/ena2/ena2-openshift-client:18.10.16-1"
             registryUrl 'https://docker-local.maven.ulaval.ca/v2'
             registryCredentialsId 'artifactory-docker-registry-credentials'
         }
@@ -30,13 +30,13 @@ pipeline {
                 script {
                     try {
                         // If application doesn't exist, create it
-                        sh "oc get route --server=${openshiftServer} -n=${openshiftProject} ${appName} --token=${token}"
-                        echo "Application ${appName} already exists."
+                        sh("oc --server=${openshiftServer} --namespace=${openshiftProject} --token=${token} --certificate-authority=/ca-comodo.crt get route ${appName}")
+                        echo("Application ${appName} already exists.")
 
-                        echo "Starting build of ${appName}..."
-                        sh "oc start-build --server=${openshiftServer} -n=${openshiftProject} ${appName} --wait --token=${token}"
+                        echo("Starting build of ${appName}...")
+                        sh("oc --server=${openshiftServer} --namespace=${openshiftProject} --token=${token} --certificate-authority=/ca-comodo.crt start-build ${appName} --wait")
                     } catch (e) {
-                        echo "The app does not exist on Openshift."
+                        echo("The app does not exist on Openshift.")
                         // echo "Application ${appName} doesn\'t exists. Creating the app..."
                         // sh "oc new-app modul-components --server=${openshiftServer} -n=${openshiftProject} -p NAME=${appName} -p SOURCE_REPOSITORY_REF=${branch} -l app=${appName} --token=${token}"
                     }
