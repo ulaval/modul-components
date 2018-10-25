@@ -6,11 +6,13 @@ pipeline {
             registryCredentialsId 'artifactory-docker-registry-credentials'
         }
     }
+
     environment {
-        token = credentials('openshift-modul-dv-token')
-        openshiftServer = 'https://pca.exp.ulaval.ca'
-        openshiftProject = 'modul-dv'
+        token = credentials('openshift-ul-modul-dv01-token')
+        openshiftServer = 'https://console-pca.svc.ulaval.ca'
+        openshiftProject = 'ul-modul-dv01'
     }
+
     stages {
         stage('Build') {
             steps {
