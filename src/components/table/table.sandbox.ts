@@ -9,7 +9,30 @@ import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 @Component
 export class MTableSandbox extends Vue {
 
+    simpleColumns: MColumnTable[] = [
+        {
+            id: 'name',
+            title: 'Name',
+            dataProp: 'name'
+        },
+        {
+            id: 'age',
+            title: 'Age',
+            dataProp: 'age'
+        },
+        {
+            id: 'username',
+            title: 'Username',
+            dataProp: 'username'
+        }
+    ];
+
     columns: MColumnTable[] = [
+        {
+            id: 'check',
+            title: '',
+            dataProp: 'check'
+        },
         {
             id: 'name',
             title: 'Name',
@@ -63,20 +86,7 @@ export class MTableSandbox extends Vue {
             name: 'Manon',
             age: '28',
             username: 'manon.28'
-        },
-        {
-            id: '6',
-            name: 'Michael',
-            age: '16',
-            username: 'michael.16'
-        },
-        {
-            id: '7',
-            name: 'Tharle',
-            age: '26',
-            username: 'tharle.26'
         }
-
     ];
 
     emptyRows: any[] = [];
