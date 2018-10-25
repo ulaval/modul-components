@@ -14,7 +14,6 @@
             <tr v-if="isEmpty">
                 <slot name="empty">
                     <td class="m-table--empty" :colspan="columns.length">
-                        <m-icon name="m-svg__data" size="55"></m-icon>
                         <p>{{ i18nEmptyTable }}</p>
                     </td>
                 </slot>

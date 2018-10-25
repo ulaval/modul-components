@@ -383,6 +383,10 @@
                     text-align: center;
                     height: 161px;
                     color: $m-color--grey;
+
+                    p {
+                        margin-top: 0;
+                    }
                 }
 
                 &:first-child {

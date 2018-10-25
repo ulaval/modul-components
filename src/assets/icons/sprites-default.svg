@@ -811,10 +811,4 @@
         <line fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="2" y1="22" x2="22" y2="2"/>
         <line fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="22" y1="22" x2="2" y2="2"/>
     </symbol>
-    <symbol id="m-svg__data" viewBox="-1 -1 26 26">
-         <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" fill="none">
-            <ellipse cx="10" cy="4.5" rx="9.5" ry="4"/>
-            <path d="M19.499 8.5c0 2.209-4.254 4-9.5 4s-9.5-1.791-9.5-4m19 4.5c0 2.209-4.254 4-9.5 4s-9.5-1.791-9.5-4m0-8.5v13c0 2.209 4.254 4 9.5 4s9.5-1.791 9.5-4v-13"/>
-        </g>
-    </symbol>
 </svg>
