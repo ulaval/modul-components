@@ -156,7 +156,7 @@ describe(`MTable`, () => {
             it(`Then should be the right width`, () => {
                 initializeShallowWrapper();
 
-                expect(wrapper.vm.widthColumn(columns[0])).toEqual({ width: '10%' });
+                expect(wrapper.vm.columnWidth(columns[0])).toEqual({ width: '10%' });
             });
         });
 
@@ -164,7 +164,7 @@ describe(`MTable`, () => {
             it(`Then should be the right width`, () => {
                 initializeShallowWrapper();
 
-                expect(wrapper.vm.widthColumn(columns[1])).toEqual('');
+                expect(wrapper.vm.columnWidth(columns[1])).toEqual('');
             });
         });
 

@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <slot v-for="column in columns" :name="'header.' + column.dataProp">
-                    <th :style="widthColumn(column)">
+                    <th :style="columnWidth(column)">
                         {{ column.title }}
                     </th>
                 </slot>
