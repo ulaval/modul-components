@@ -290,7 +290,7 @@ export enum FroalaStatus {
                         window.removeEventListener('resize', this.onResize);
                         this.unblockMobileBlur();
 
-                        this.isDirty = false;
+                        this.refreshDirtyModel();
 
                         if (this.isInitialized) { this.$emit('focus'); }
                         this.showToolbar();
@@ -311,7 +311,9 @@ export enum FroalaStatus {
 
                                 this.isFocused = false;
                                 this.status = FroalaStatus.Blurred;
-                                this.isDirty = false;
+
+                                this.refreshDirtyModel();
+
                                 this.unblockMobileBlur();
                             }
                         }, 150);
@@ -360,6 +362,13 @@ export enum FroalaStatus {
         this.registerEvents();
         if (this._$element.froalaEditor) {
             this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
+        }
+    }
+
+    private refreshDirtyModel(): void {
+        if (this.isDirty) {
+            this.isDirty = false;
+            this.updateModel();
         }
     }
 

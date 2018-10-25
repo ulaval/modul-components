@@ -7,6 +7,15 @@ import WithRender from './button.sandbox.html';
 @WithRender
 @Component
 export class MButtonSandbox extends Vue {
+    afficherbouton1: boolean = false;
+
+    toogleAfficher(): void {
+        this.afficherbouton1 = !this.afficherbouton1;
+    }
+
+    get libelle(): string {
+        return 'patate';
+    }
 }
 
 const ButtonSandboxPlugin: PluginObject<any> = {

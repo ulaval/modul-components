@@ -2,7 +2,7 @@
     "m-file-upload": {
         "header-title": "Ajouter un fichier",
         "header-title.p": "Ajouter des fichiers",
-        "header-title-file-replacement": "Remplacer un fichier",
+        "header-title-file-replacement": "Remplacer le fichier",
         "title": "Déposer le fichier ici ou",
         "title.p": "Déposer les fichiers ici ou",
         "format": "Format accepté",

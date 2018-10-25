@@ -24,18 +24,11 @@
         </transition>
     </template>
     <template v-if="!isMqMinS">
-        <m-modal :title="title" :open="propEditMode" @close="cancel">
+        <m-overlay ref="overlay" :open="propEditMode" @close="cancel" @save="confirm">
+            <h2 class="m-edit-inplace__title" slot="header">{{ title }}</h2>
             <form>
                 <slot name="editMode"></slot>
-                <div class="m-inplace-edit__buttons">
-                    <m-button :waiting="waiting" ref="confirm-control-mobile" skin="primary" @click="confirm">
-                        <m-i18n k="m-inplace-edit:save"></m-i18n>
-                    </m-button>
-                    <m-button :disabled="waiting" ref="cancel-control-mobile" skin="secondary" @click="cancel">
-                        <m-i18n k="m-inplace-edit:cancel"></m-i18n>
-                    </m-button>
-                </div>
             </form>
-        </m-modal>
+        </m-overlay>
     </template>
 </div>

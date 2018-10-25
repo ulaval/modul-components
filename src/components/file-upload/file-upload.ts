@@ -8,6 +8,7 @@ import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { FILE_UPLOAD_NAME } from '../component-names';
@@ -61,6 +62,10 @@ export class MFileUpload extends ModulVue {
     $refs: {
         modal: MModal;
     };
+
+    public get isDropZoneEnabled(): boolean {
+        return UserAgentUtil.isDesktop() && this.$mq.state.isMqMinS;
+    }
 
     private internalOpen: boolean = false;
     private tooltipCancel: string = this.$i18n.translate('m-file-upload:cancelFileUpload');
@@ -140,6 +145,12 @@ export class MFileUpload extends ModulVue {
         }
     }
 
+    private onPortalContentVisible(): void {
+        this.dropEvents.forEach((evt) => {
+            this.$refs.modal.$refs.modalWrap.addEventListener(evt, defaultDragEvent);
+        });
+    }
+
     private onMessageClose(): void {
         for (const f of this.rejectedFiles) {
             this.$file.remove(f.uid, this.storeName);
@@ -171,14 +182,6 @@ export class MFileUpload extends ModulVue {
         this.$emit('open');
         this.propOpen = true;
         this.updateValidationOptions();
-        // We need 2 nextTick to be able to have the wrap element in the DOM - MODUL-118
-        Vue.nextTick(() => {
-            Vue.nextTick(() => {
-                ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
-                    this.$refs.modal.$refs.modalWrap.addEventListener(evt, defaultDragEvent);
-                });
-            });
-        });
     }
 
     private onClose(): void {
@@ -188,7 +191,7 @@ export class MFileUpload extends ModulVue {
             .filter(f => f.status === MFileStatus.UPLOADING)
             .forEach(this.onUploadCancel);
         this.$file.clear(this.storeName);
-        ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
+        this.dropEvents.forEach((evt) => {
             this.$refs.modal.$refs.modalWrap.removeEventListener(evt, defaultDragEvent);
         });
     }
@@ -323,6 +326,10 @@ export class MFileUpload extends ModulVue {
 
     private get multipleSelection(): boolean {
         return this.propMaxFiles !== undefined && this.propMaxFiles > 1;
+    }
+
+    private get dropEvents(): string[] {
+        return ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'];
     }
 }
 

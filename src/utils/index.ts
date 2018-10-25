@@ -1,49 +1,19 @@
-import { PortalPluginInstall } from 'portal-vue';
-import Vue, { PluginObject } from 'vue';
-import * as TouchPlugin from 'vue-touch';
+import UtilsPlugin from './utils-plugin';
 
-import { WindowErrorHandler } from './errors/window-error-handler';
-import FilePlugin from './file/file';
-import HttpPlugin, { HttpPluginOptions } from './http/http';
-import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
-import LoggerPlugin, { ConsoleOptions } from './logger/logger';
-import MediaQueriesPlugin from './media-queries/media-queries';
-import AlertPlugin from './dialog/alert';
-import ConfirmPlugin from './dialog/confirm';
-import ModulPlugin from './modul/modul';
-import SpritesPlugin from './svg/sprites';
+/**
+ * List public declaration here.
+ */
+export { default as UtilsPlugin, UtilsPluginOptions } from './utils-plugin';
+export * from './file/file';
+export * from './http/http';
+export * from './i18n/i18n';
+export * from './logger/logger';
+// re-exporte because of a conflit with ./mixin/media-queries
+export { MediaQueries as MediaQueriesUtils, MediaQueriesBpMin, MediaQueriesBpMax, MediaQueriesBp } from './media-queries/media-queries';
+export * from './dialog/alert';
+export * from './dialog/confirm';
+export * from './modul/modul';
+export * from './svg/sprites';
 
-export interface UtilsPluginOptions {
-    httpPluginOptions?: HttpPluginOptions;
-    consoleOptions?: ConsoleOptions;
-    i18PluginOptions?: I18nPluginOptions;
-    propagateVueParserErrors?: boolean;
-}
-
-const UtilsPlugin: PluginObject<any> = {
-    install(v, options): void {
-        if (!options || options.propagateVueParserErrors === undefined || options.propagateVueParserErrors) {
-            // Vue parser errors do not propagate to window.onError by default
-            Vue.config.errorHandler = (err, vm, info) => WindowErrorHandler.onError(new ErrorEvent('error', { error: err }));
-        }
-
-        if (!v.prototype.$log) {
-            Vue.use(LoggerPlugin, options ? options.consoleOptions : undefined);
-        } else if (options) {
-            v.prototype.$log.setConsoleOptions(options.consoleOptions);
-        }
-
-        Vue.use(MediaQueriesPlugin);
-        Vue.use(ModulPlugin);
-        Vue.use(I18nPlugin, options ? options.i18PluginOptions : undefined);
-        Vue.use(HttpPlugin, options ? options.httpPluginOptions : undefined);
-        Vue.use({ install: PortalPluginInstall });
-        Vue.use(SpritesPlugin);
-        Vue.use(TouchPlugin, { name: 'v-touch' });
-        Vue.use(ConfirmPlugin);
-        Vue.use(AlertPlugin);
-        Vue.use(FilePlugin);
-    }
-};
-
+// Preserve the default import to prevent breaking changes when using legacy import.
 export default UtilsPlugin;
