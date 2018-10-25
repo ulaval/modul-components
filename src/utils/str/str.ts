@@ -465,4 +465,6 @@ export function normalizeString(str: string): string {
     return result;
 }
 
+export const NBSP: string = '\xa0';
+
 export { sprintf, vsprintf } from 'sprintf-js';
