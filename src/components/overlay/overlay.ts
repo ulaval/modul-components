@@ -6,6 +6,7 @@ import { BackdropMode, Portal, PortalMixin, PortalTransitionDuration } from '../
 import { ModulVue } from '../../utils/vue/vue';
 import { OVERLAY_NAME } from '../component-names';
 import WithRender from './overlay.html?style=./overlay.scss';
+import UserAgentUtil from '../../utils/user-agent/user-agent';
 
 @WithRender
 @Component({
@@ -46,7 +47,7 @@ export class MOverlay extends ModulVue {
     }
 
     private get isAndroid(): boolean {
-        return /(android)/i.test(window.navigator.userAgent);
+        return UserAgentUtil.isAndroid();
     }
 
     private onFocusIn(): void {
