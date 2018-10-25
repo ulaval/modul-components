@@ -22,6 +22,14 @@
                 </tr>
             </tbody>
         </template>
+        <template slot="footer">
+            <td class="m-table-sandbox--show-more" colspan="4">
+                <m-button class="m-table-sandbox--show-more--button" @click="showMore">
+                    <p>Show more results</p>
+                    <span>1-10 of 45</span>
+                </m-button>
+            </td>
+        </template>
     </m-table>
 
     <h2>Table - Custom cells</h2>
@@ -48,7 +56,7 @@
     <h2>Empty table - custom slot</h2>
     <m-table :columns="columns" :rows="emptyRows">
         <template slot="empty">
-            <td class="empty-table-custom" colspan="3">
+            <td class="empty-table-custom" :colspan="columns.length">
                 Empty table
             </td>
         </template>

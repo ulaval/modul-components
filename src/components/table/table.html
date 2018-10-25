@@ -30,4 +30,10 @@
             </tr>
         </tbody>
     </slot>
+
+    <tfoot v-if="$slots.footer">
+        <tr>
+            <slot name="footer"></slot>
+        </tr>
+    </tfoot>
 </table>
