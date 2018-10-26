@@ -1,0 +1,40 @@
+@import '../../styles/abstracts/variables';
+
+.m-table-sandbox {
+    table {
+        width: 50%;
+        margin-bottom: $m-margin--l;
+
+        .subscribed {
+            background-color: $m-color--success;
+            padding: $m-padding--xs $m-padding--s;
+            color: $m-color--grey-lightest;
+        }
+
+        &__empty-table-custom {
+            text-align: center;
+            background-color: $m-color--error;
+            color: $m-color--white;
+        }
+    }
+
+    &__show-more {
+        text-align: center;
+        padding: $m-padding;
+
+        &-button {
+            p {
+                margin-top: 0;
+                margin-bottom: $m-margin--xs;
+            }
+
+            span {
+                font-weight: $m-font-weight--light;
+            }
+        }
+    }
+
+    h2 {
+        margin-bottom: $m-margin;
+    }
+}

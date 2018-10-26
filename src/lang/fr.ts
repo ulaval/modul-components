@@ -39,6 +39,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/page-not-found/page-not-found.lang.fr.json'),
                 require('../components/phone-number/phone-number.lang.fr.json'),
                 require('../components/rich-text-editor/rich-text-editor.lang.fr.json'),
+                require('../components/table/table.lang.fr.json'),
                 require('../components/tree-node/tree-node.lang.fr.json'),
                 require('../components/tree/tree.lang.fr.json'),
                 require('../components/scroll-top/scroll-top.lang.fr.json'),
@@ -50,7 +51,10 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/timepicker/timepicker.lang.fr.json'),
                 require('../components/tooltip/tooltip.lang.fr.json'),
                 require('../components/validation-message/validation-message.lang.fr.json'),
-                require('../filters/filesize/filesize.lang.fr.json')
+                require('../filters/filesize/filesize.lang.fr.json'),
+                require('../filters/date/date.lang.fr.json'),
+                require('../filters/time/time.lang.fr.json'),
+                require('../filters/date-time/date-time.lang.fr.json')
             ];
 
             msgs.forEach(msgs => i18n.addMessages(FRENCH, msgs));
