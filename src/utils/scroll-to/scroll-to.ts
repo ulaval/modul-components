@@ -16,16 +16,16 @@ export enum ScrollToEasing {
 }
 
 // linear
-type easing = (t: number) => number;
-const linear: easing = t => t;
+type EasingFunction = (t: number) => number;
+const linear: EasingFunction = t => t;
 // accelerating from zero velocity
-const easeInQuad: easing = t => t * t;
+const easeInQuad: EasingFunction = t => t * t;
 // decelerating to zero velocity
-const easeOutQuad: easing = t => t * (2 - t);
+const easeOutQuad: EasingFunction = t => t * (2 - t);
 // accelerating from zero velocity
-const easeInCubic: easing = t => t * t * t;
+const easeInCubic: EasingFunction = t => t * t * t;
 // decelerating to zero velocity
-const easeOutCubic: easing = t => --t * t * t + 1;
+const easeOutCubic: EasingFunction = t => --t * t * t + 1;
 
 export class ScrollTo {
 
@@ -148,7 +148,7 @@ export class ScrollTo {
             }
 
             const distanceToScroll: number = targetLocation - startLocation;
-            const easingFunction: (t: any) => any = this.getEasingFunction(easing);
+            const easingFunction: EasingFunction = this.getEasingFunction(easing);
             const _duration: number = this.getDuration(duration);
 
             const step: any = (currentTime) => {

@@ -1,3 +1,4 @@
+import { ModulVue } from 'src/utils/vue/vue';
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
 import { ScrollTo, ScrollToDuration, ScrollToEasing } from '../../utils';
@@ -8,7 +9,7 @@ class ScrollToCallback {
     constructor(private speed: ScrollToDuration, private easing: ScrollToEasing, private offset: number, private target: HTMLElement) { }
 
     callBack: (event: MouseEvent) => void = (event: MouseEvent) => {
-        let scrollTo: ScrollTo = (Vue.prototype as any).$scrollTo as ScrollTo;
+        let scrollTo: ScrollTo = (Vue.prototype as ModulVue).$scrollTo as ScrollTo;
 
         scrollTo.goTo(this.target, this.offset, this.speed, this.easing);
     }
