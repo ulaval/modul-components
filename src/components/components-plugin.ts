@@ -79,6 +79,7 @@ import TemplatePlugin from './template/template';
 import TextareaPlugin from './textarea/textarea';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
+import ToastPlugin from './toast/toast';
 import TooltipPlugin from './tooltip/tooltip';
 import TreeIconPlugin from './tree-icon/tree-icon';
 import TreeNodePlugin from './tree-node/tree-node';
@@ -172,6 +173,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TextareaPlugin);
         Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
+        Vue.use(ToastPlugin);
         Vue.use(TooltipPlugin);
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
