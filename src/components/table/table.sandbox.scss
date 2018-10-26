@@ -11,18 +11,18 @@
             color: $m-color--grey-lightest;
         }
 
-        .empty-table-custom {
+        &__empty-table-custom {
             text-align: center;
-            background-color: #ff5252;
-            color: white;
+            background-color: $m-color--error;
+            color: $m-color--white;
         }
     }
 
-    &--show-more {
+    &__show-more {
         text-align: center;
         padding: $m-padding;
 
-        &--button {
+        &-button {
             p {
                 margin-top: 0;
                 margin-bottom: $m-margin--xs;
