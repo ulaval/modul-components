@@ -1,29 +1,24 @@
 import { ModulVue } from 'src/utils/vue/vue';
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
-import { ScrollTo, ScrollToDuration, ScrollToEasing } from '../../utils';
+import { ScrollTo, ScrollToDuration } from '../../utils';
 import { SCROLL_TO_NAME } from '../directive-names';
 
 class ScrollToCallback {
 
-    constructor(private speed: ScrollToDuration, private easing: ScrollToEasing, private offset: number, private target: HTMLElement) { }
+    constructor(private speed: ScrollToDuration, private offset: number, private target: HTMLElement) { }
 
     callBack: (event: MouseEvent) => void = (event: MouseEvent) => {
         let scrollTo: ScrollTo = (Vue.prototype as ModulVue).$scrollTo as ScrollTo;
 
-        scrollTo.goTo(this.target, this.offset, this.speed, this.easing);
+        scrollTo.goTo(this.target, this.offset, this.speed);
     }
 }
 
-/**
- *
- */
 const MScrollTo: DirectiveOptions = {
 
     inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
         let speed: ScrollToDuration = binding.value.speed || ScrollToDuration.Regular;
-
-        let easing: ScrollToEasing = binding.value.easing || ScrollToEasing.Linear;
 
         let offset: number = binding.value.offset || 0;
 
@@ -31,7 +26,7 @@ const MScrollTo: DirectiveOptions = {
             throw new Error('Error node context is null');
         }
         let target: HTMLElement = node.context.$refs[binding.arg] as HTMLElement;
-        const _scrollToCallback: ScrollToCallback = new ScrollToCallback(speed, easing, offset, target);
+        const _scrollToCallback: ScrollToCallback = new ScrollToCallback(speed, offset, target);
 
         Object.defineProperty(element, '_scrollToCallback', {
             value: _scrollToCallback
@@ -43,8 +38,6 @@ const MScrollTo: DirectiveOptions = {
     update(element: HTMLElement, binding: VNodeDirective): void {
         if (element && (element as any)._scrollToCallback) {
             (element as any)._scrollToCallback.speed = binding.value.speed || ScrollToDuration.Regular;
-
-            (element as any)._scrollToCallback.easing = binding.value.easing || ScrollToEasing.Linear;
 
             (element as any)._scrollToCallback.offset = binding.value.offset || 0;
         }

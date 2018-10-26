@@ -1,18 +1,9 @@
 import { PluginObject } from 'vue';
 
 export enum ScrollToDuration {
-    Slow = 'slow',
-    Slower = 'slower',
+    Short = 'short',
     Regular = 'regular',
-    Fast = 'fast'
-}
-
-export enum ScrollToEasing {
-    Linear = 'linear',
-    EaseInQuad = 'easeInQuad',
-    EaseOutQuad = 'easeOutQuad',
-    EaseInCubic = 'easeInCubic',
-    EaseOutCubic = 'easeOutCubic'
+    Long = 'long'
 }
 
 // linear
@@ -26,67 +17,59 @@ const easeOutQuad: EasingFunction = t => t * (2 - t);
 const easeInCubic: EasingFunction = t => t * t * t;
 // decelerating to zero velocity
 const easeOutCubic: EasingFunction = t => --t * t * t + 1;
+// accelerating from zero velocity
+const easeInQuint: EasingFunction = t => t * t * t * t * t;
+// decelerating to zero velocity
+const easeOutQuint: EasingFunction = t => 1 + --t * t * t * t * t;
+
+const defaultEasingFunction: EasingFunction = easeOutQuad;
 
 export class ScrollTo {
 
     /**
      * Scroll to top of the current windows
      *
-     * @param offset the offset to add (in case of a sticky header)
      * @param duration duration of the scroll
-     * @param easing easing function to use
      */
-    public goToTop(offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToTop(duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
-        const targetLocation: number = 0 + offset;
-
-        return this.internalScroll(undefined, targetLocation, duration, easing);
+        return this.internalScroll(undefined, 0, duration, defaultEasingFunction);
     }
 
     /**
      * Scroll to top of an specified container
      *
      * @param container the HTML container containing the scroll
-     * @param offset the offset to add (in case of a sticky header)
      * @param duration duration of the scroll
-     * @param easing easing function to use
      */
-    public goToTopInside(container: HTMLElement, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToTopInside(container: HTMLElement, duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
-        const containerPosition: number = Math.round(container.offsetTop) + offset;
-        const elementPosition: number = 0;
-        const targetLocation: number = (elementPosition - containerPosition);
-
-        return this.internalScroll(container, 0, duration, easing);
+        return this.internalScroll(container, 0, duration, defaultEasingFunction);
     }
 
     /**
      * Scroll to the bottom of an specified container
      *
      * @param container the HTML container containing the scroll
-     * @param offset the offset to add (in case of a sticky header)
      * @param duration duration of the scroll
-     * @param easing easing function to use
      */
-    public goToBottomInside(container: HTMLElement, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToBottomInside(container: HTMLElement, duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
-        const targetLocation: number = Math.max(Math.round(container.scrollHeight) + offset, 0);
+        const targetLocation: number = Math.max(Math.round(container.scrollHeight), 0);
 
-        return this.internalScroll(container, targetLocation, duration, easing);
+        return this.internalScroll(container, targetLocation, duration, defaultEasingFunction);
     }
 
     /**
      * Scroll to the bottom of the windows
      *
-     * @param offset the offset to add (in case of a sticky header)
      * @param duration duration of the scroll
-     * @param easing easing function to use
      */
-    public goToBottom(offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToBottom(duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
-        const targetLocation: number = document.body.offsetHeight + offset;
+        const targetLocation: number = document.body.offsetHeight;
 
-        return this.internalScroll(undefined, targetLocation, duration, easing);
+        return this.internalScroll(undefined, targetLocation, duration, defaultEasingFunction);
     }
 
     /**
@@ -95,9 +78,8 @@ export class ScrollTo {
      * @param target the HTML container containing the scroll
      * @param offset the offset to add (in case of a sticky header)
      * @param duration duration of the scroll
-     * @param easing easing function to use
      */
-    public goTo(target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goTo(target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
         let targetLocation: number = 0;
 
@@ -109,7 +91,7 @@ export class ScrollTo {
             targetLocation = +target;
         }
 
-        return this.internalScroll(undefined, targetLocation, duration, easing);
+        return this.internalScroll(undefined, targetLocation, duration, defaultEasingFunction);
     }
 
     /**
@@ -121,7 +103,7 @@ export class ScrollTo {
      * @param duration duration of the scroll
      * @param easing easing function to use
      */
-    public goToInside(container: HTMLElement, target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular, easing: ScrollToEasing = ScrollToEasing.Linear): Promise<any> {
+    public goToInside(container: HTMLElement, target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
         let targetLocation: number = 0;
 
@@ -134,10 +116,10 @@ export class ScrollTo {
             targetLocation = +target;
         }
 
-        return this.internalScroll(container, targetLocation, duration, easing);
+        return this.internalScroll(container, targetLocation, duration, defaultEasingFunction);
     }
 
-    private internalScroll(container: HTMLElement | undefined, targetLocation: number, duration: ScrollToDuration, easing: ScrollToEasing): Promise<number> {
+    private internalScroll(container: HTMLElement | undefined, targetLocation: number, duration: ScrollToDuration, easing: EasingFunction): Promise<number> {
         return new Promise((resolve, reject) => {
             const startTime: number = performance.now();
             let startLocation: number = 0;
@@ -148,12 +130,11 @@ export class ScrollTo {
             }
 
             const distanceToScroll: number = targetLocation - startLocation;
-            const easingFunction: EasingFunction = this.getEasingFunction(easing);
             const _duration: number = this.getDuration(duration);
 
             const step: any = (currentTime) => {
                 const progressPercentage: number = Math.min(1, ((currentTime - startTime) / _duration));
-                const targetPosition: number = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage));
+                const targetPosition: number = Math.floor(startLocation + distanceToScroll * easing(progressPercentage));
 
                 if (container) {
                     container.scrollTop = targetPosition;
@@ -177,31 +158,14 @@ export class ScrollTo {
         });
     }
 
-    private getEasingFunction(easing: ScrollToEasing): (t: any) => any {
-        switch (easing) {
-            case ScrollToEasing.EaseInQuad:
-                return easeInQuad;
-            case ScrollToEasing.EaseOutQuad:
-                return easeOutQuad;
-            case ScrollToEasing.EaseInCubic:
-                return easeInCubic;
-            case ScrollToEasing.EaseOutCubic:
-                return easeOutCubic;
-            default:
-                return linear;
-        }
-    }
-
     private getDuration(speed: ScrollToDuration): number {
         switch (speed) {
-            case ScrollToDuration.Slow:
-                return 1500;
-            case ScrollToDuration.Slower:
-                return 3000;
-            case ScrollToDuration.Fast:
-                return 400;
+            case ScrollToDuration.Long:
+                return 2000;
+            case ScrollToDuration.Short:
+                return 500;
             default:
-                return 800;
+                return 1000;
         }
     }
 
