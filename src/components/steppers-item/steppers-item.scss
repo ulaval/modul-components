@@ -88,11 +88,11 @@ $m-steppers--badge--size: 14px;
     }
 
     &__title {
+        transition: color $m-transition-duration ease;
         margin-top: $m-margin--s;
         text-align: center;
         font-size: $m-font-size--s;
         color: $m-color--text;
         text-decoration: none;
-        transition: color $m-transition-duration;
     }
 }
