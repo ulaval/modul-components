@@ -1,43 +1,51 @@
-import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
+import { ModulVue } from 'src/utils/vue/vue';
+import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
+import { ScrollTo, ScrollToDuration } from '../../utils';
 import { SCROLL_TO_NAME } from '../directive-names';
-import ScrollTo, { ScrollToDuration } from './scroll-to-lib';
 
-const MOUSE_DOWN_MODIFIER: string = 'ripple-effect_mouse-down';
+class ScrollToCallback {
 
-interface ScrollToBinding extends VNodeDirective {
-    listener: (event: MouseEvent) => void;
+    constructor(private speed: ScrollToDuration, private offset: number, private target: HTMLElement) { }
+
+    callBack: (event: MouseEvent) => void = (event: MouseEvent) => {
+        let scrollTo: ScrollTo = (Vue.prototype as ModulVue).$scrollTo as ScrollTo;
+
+        scrollTo.goTo(this.target, this.offset, this.speed);
+    }
 }
 
 const MScrollTo: DirectiveOptions = {
-    bind(element: HTMLElement, binding: ScrollToBinding, node: VNode): void {
-        if (node.context) {
-            node.context.$nextTick(() => {
-                if (node.context && element) {
-                    binding.listener = (event: MouseEvent) => {
-                        let target: HTMLElement = node.context !== undefined && node.context.$refs[binding.arg] ? node.context.$refs[binding.arg] as HTMLElement : document.body;
-                        let duration: string;
-                        switch (binding.value) {
-                            case ScrollToDuration.Null:
-                            case ScrollToDuration.Slow:
-                            case ScrollToDuration.Fast:
-                                duration = binding.value;
-                                break;
-                            default:
-                                duration = ScrollToDuration.Regular;
-                        }
-                        ScrollTo.startScroll(element, target.offsetTop, duration);
-                    };
-                    element.addEventListener('touchstart', binding.listener);
-                    element.addEventListener('click', binding.listener);
-                }
-            });
+
+    inserted(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+        let speed: ScrollToDuration = binding.value.speed || ScrollToDuration.Regular;
+
+        let offset: number = binding.value.offset || 0;
+
+        if (!node.context) {
+            throw new Error('Error node context is null');
+        }
+        let target: HTMLElement = node.context.$refs[binding.arg] as HTMLElement;
+        const _scrollToCallback: ScrollToCallback = new ScrollToCallback(speed, offset, target);
+
+        Object.defineProperty(element, '_scrollToCallback', {
+            value: _scrollToCallback
+        });
+
+        element.addEventListener('touchstart', _scrollToCallback.callBack);
+        element.addEventListener('click', _scrollToCallback.callBack);
+    },
+    update(element: HTMLElement, binding: VNodeDirective): void {
+        if (element && (element as any)._scrollToCallback) {
+            (element as any)._scrollToCallback.speed = binding.value.speed || ScrollToDuration.Regular;
+
+            (element as any)._scrollToCallback.offset = binding.value.offset || 0;
         }
     },
-    unbind(element: HTMLElement, binding: ScrollToBinding): void {
-        if (element && binding.listener) {
-            element.removeEventListener('touchstart', binding.listener);
-            element.removeEventListener('click', binding.listener);
+    unbind(element: HTMLElement, binding: VNodeDirective): void {
+        if (element && (element as any)._scrollToCallback) {
+            element.removeEventListener('touchstart', (element as any)._scrollToCallback.callBack);
+            element.removeEventListener('click', (element as any)._scrollToCallback.callBack);
         }
     }
 };
