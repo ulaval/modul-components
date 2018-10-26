@@ -1,69 +1,67 @@
-<m-flex-template padding-top="52px">
-    <m-template>
-        <div slot="header">
-            <h1>Sandboxes</h1>
-            <nav class="m-u--margin-top">
-                <ul class="m-navigation__submenu">
-                    <li>
-                        <m-link mode="link" href="#component">Components</m-link>
-                    </li>
-                    <li>
-                        <m-link mode="link" href="#directives">Directives</m-link>
-                    </li>
-                    <li>
-                        <m-link mode="link" href="#filters">Filters</m-link>
-                    </li>
-                    <li>
-                        <m-link mode="link" href="#mixins">Mixins</m-link>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
-        <a class="anchor" id="component"></a>
-        <h2>Components <m-link href="#" mode="link" @click="scrollToTop()"><m-icon name="m-svg__arrow-thin--up" size="16px"></m-icon></m-link>
-        </h2>
+<m-template>
+    <div slot="header">
+        <h1 class="m-u--no-margin">Sandboxes</h1>
         <nav class="m-u--margin-top">
-            <ul class="m-u--bullet-list">
-                <li v-for="route in componentsTag">
-                    <m-link :url="'components/' + route">{{route}}</m-link>
-                </li>
-            </ul>
-        </nav>
-        <a class="anchor" id="directives"></a>
-        <h2>Directives <m-link href="#" mode="link" @click="scrollToTop()"><m-icon name="m-svg__arrow-thin--up" size="16px" ></m-icon></m-link>
-        </h2>
-        <nav class="m-u--margin-top">
-            <ul class="m-u--bullet-list">
-                <li v-for="route in directivesName">
-                    <m-link :url="'directives/' + route">{{route}}</m-link>
-                </li>
-            </ul>
-        </nav>
-        <a class="anchor" id="filters"></a>
-        <h2>Filters  <m-link href="#" mode="link" @click="scrollToTop()"><m-icon name="m-svg__arrow-thin--up" size="16px"></m-icon></m-link>
-        </h2>
-        <nav class="m-u--margin-top">
-            <ul class="m-u--bullet-list">
-                <li v-for="route in filtersName">
-                    <m-link :url="'filters/' + route">{{route}}</m-link>
-                </li>
-            </ul>
-        </nav>
-        <a class="anchor" id="mixins"></a>
-        <h2>Mixins <m-link href="#" mode="link" @click="scrollToTop()"><m-icon name="m-svg__arrow-thin--up" size="16px"></m-icon></m-link>
-        </h2>
-        <nav class="m-u--margin-top">
-            <ul class="m-u--bullet-list">
+            <ul class="m-navigation__submenu">
                 <li>
-                    <m-link url="media-queries">Media Queries</m-link>
+                    <m-link mode="link" href="#component">Components</m-link>
                 </li>
                 <li>
-                    <m-link url="attributes">Attributes list</m-link>
+                    <m-link mode="link" href="#directives">Directives</m-link>
+                </li>
+                <li>
+                    <m-link mode="link" href="#filters">Filters</m-link>
+                </li>
+                <li>
+                    <m-link mode="link" href="#mixins">Mixins</m-link>
                 </li>
             </ul>
-
         </nav>
+    </div>
 
-    </m-template>
-</m-flex-template>
+    <a class="anchor" id="component"></a>
+    <h2 class="m-u--no-margin">Components <m-link href="#" mode="link" @click="scrollToTop()"><m-icon name="m-svg__arrow-thin--up" size="16px"></m-icon></m-link>
+    </h2>
+    <nav class="m-u--margin-top">
+        <ul class="m-u--bullet-list">
+            <li v-for="route in componentsTag">
+                <m-link :url="'components/' + route">{{route}}</m-link>
+            </li>
+        </ul>
+    </nav>
+    <a class="anchor" id="directives"></a>
+    <h2>Directives <m-link href="#" mode="link" @click="scrollToTop()"><m-icon name="m-svg__arrow-thin--up" size="16px" ></m-icon></m-link>
+    </h2>
+    <nav class="m-u--margin-top">
+        <ul class="m-u--bullet-list">
+            <li v-for="route in directivesName">
+                <m-link :url="'directives/' + route">{{route}}</m-link>
+            </li>
+        </ul>
+    </nav>
+    <a class="anchor" id="filters"></a>
+    <h2>Filters  <m-link href="#" mode="link" @click="scrollToTop()"><m-icon name="m-svg__arrow-thin--up" size="16px"></m-icon></m-link>
+    </h2>
+    <nav class="m-u--margin-top">
+        <ul class="m-u--bullet-list">
+            <li v-for="route in filtersName">
+                <m-link :url="'filters/' + route">{{route}}</m-link>
+            </li>
+        </ul>
+    </nav>
+    <a class="anchor" id="mixins"></a>
+    <h2>Mixins <m-link href="#" mode="link" @click="scrollToTop()"><m-icon name="m-svg__arrow-thin--up" size="16px"></m-icon></m-link>
+    </h2>
+    <nav class="m-u--margin-top">
+        <ul class="m-u--bullet-list">
+            <li>
+                <m-link url="media-queries">Media Queries</m-link>
+            </li>
+            <li>
+                <m-link url="attributes">Attributes list</m-link>
+            </li>
+        </ul>
+
+    </nav>
+
+</m-template>
