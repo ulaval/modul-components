@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 
 export enum ScrollToDuration {
-    Short = 'short',
     Regular = 'regular',
     Long = 'long'
 }
@@ -22,7 +21,7 @@ const easeInQuint: EasingFunction = t => t * t * t * t * t;
 // decelerating to zero velocity
 const easeOutQuint: EasingFunction = t => 1 + --t * t * t * t * t;
 
-const defaultEasingFunction: EasingFunction = easeOutQuad;
+const defaultEasingFunction: EasingFunction = easeOutQuint;
 
 export class ScrollTo {
 
@@ -161,11 +160,9 @@ export class ScrollTo {
     private getDuration(speed: ScrollToDuration): number {
         switch (speed) {
             case ScrollToDuration.Long:
-                return 2000;
-            case ScrollToDuration.Short:
-                return 500;
-            default:
                 return 1000;
+            default:
+                return 600;
         }
     }
 
