@@ -12,7 +12,6 @@ import WithRender from './rich-text-editor.sandbox.html';
 })
 export class MRichTextEditorSandBox extends Vue {
     public model: string = '';
-    public isReadOnly: boolean = true;
     public focus: boolean = false;
     public error: boolean = false;
     public errorMessage: string = '';
@@ -20,6 +19,7 @@ export class MRichTextEditorSandBox extends Vue {
     public helperMessage: string = '';
     public waiting: boolean = false;
     public disabled: boolean = false;
+    public readonly: boolean = false;
     public afficherFormulairePleinePage: boolean = false;
     public fullScreenFormModel: string = '';
 
