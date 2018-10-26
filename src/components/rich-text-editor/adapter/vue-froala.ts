@@ -65,6 +65,9 @@ export enum FroalaStatus {
     @Prop({ default: false })
     public disabled: boolean;
 
+    @Prop({ default: false })
+    public readonly: boolean;
+
     @Prop()
     public config: any;
 
@@ -296,6 +299,7 @@ export enum FroalaStatus {
                         this.showToolbar();
                         this.isFocused = true;
                         this.status = FroalaStatus.Focused;
+                        this.internalReadonly = this.readonly;
                     }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
@@ -315,6 +319,7 @@ export enum FroalaStatus {
                                 this.refreshDirtyModel();
 
                                 this.unblockMobileBlur();
+                                this.internalReadonly = false;
                             }
                         }, 150);
                     }
@@ -372,6 +377,38 @@ export enum FroalaStatus {
         }
     }
 
+    @Watch('readonly')
+    private setReadOnly(): void {
+        this.internalReadonly = this.readonly;
+    }
+
+    private simulateReadonlyBlur(event: Event): void {
+        if (!this.$el.contains(event.target as Node)) {
+            if (this.isFocused) {
+                this.froalaEditor.edit.on();
+                this.froalaEditor.events.trigger('blur');
+            }
+            document.removeEventListener('mousedown', this.simulateReadonlyBlur, true);
+        }
+    }
+
+    private get internalReadonly(): boolean {
+        return this.readonly;
+    }
+
+    private set internalReadonly(value: boolean) {
+        document.removeEventListener('mousedown', this.simulateReadonlyBlur, true);
+        if (value) {
+            if (this.isFocused) {
+                this.hideToolbar();
+                document.addEventListener('mousedown', this.simulateReadonlyBlur, true);
+                this.froalaEditor.edit.off();
+            }
+        } else {
+            this.froalaEditor.edit.on();
+        }
+    }
+
     private editorIsAvailable(): boolean {
         return this.froalaEditor !== undefined && this.froalaEditor !== null && this.isInitialized;
     }
@@ -410,7 +447,7 @@ export enum FroalaStatus {
     }
 
     private showToolbar(): void {
-        if (this.editorIsAvailable()) {
+        if (this.editorIsAvailable() && !this.internalReadonly) {
             this.froalaEditor.toolbar.show();
             const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
             toolBar.style.removeProperty('margin-top');
@@ -451,6 +488,7 @@ export enum FroalaStatus {
             this.listeningEvents.length = 0;
             this._$element = undefined;
             this.froalaEditor = undefined;
+            this.internalReadonly = false;
         }
     }
 

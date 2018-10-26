@@ -67,6 +67,7 @@ const components: string[] = [
     Components.STEPPERS_ITEM_NAME,
     Components.SWITCH_NAME,
     Components.TAB_PANEL_NAME,
+    Components.TABLE_NAME,
     Components.TABS_NAME,
     Components.TEMPLATE_NAME,
     Components.TEXTAREA_NAME,

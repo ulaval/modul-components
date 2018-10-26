@@ -504,27 +504,19 @@
                 background: $m-color--white;
             }
 
-            &:first-child,
-            &:last-child {
-                &::after {
-                    position: absolute;
-                    top: $m-border-width--l;
-                    bottom: 0;
-                    content: '';
-                    width: $m-border-width--s;
-                    background: $m-color--grey-light;
-                }
-            }
-
             &:first-child {
-                &::after {
-                    left: 0;
+                border-left: 1px solid $m-color--grey-light;
+
+                .m-navbar-item__contents::before {
+                    left: -1px;
                 }
             }
 
             &:last-child {
-                &::after {
-                    right: 0;
+                border-right: 1px solid $m-color--grey-light;
+
+                .m-navbar-item__contents::before {
+                    right: -1px;
                 }
             }
         }

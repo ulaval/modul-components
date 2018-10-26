@@ -49,6 +49,33 @@
         }
     }
 
+    &.m--is-readonly.m--is-focus /deep/ {
+        .fr-placeholder {
+            display: none;
+        }
+
+        .fr-box.fr-basic .fr-element {
+            padding: unset;
+            font-weight: $m-font-weight;
+            word-wrap: break-word;
+            -moz-user-select: text; // Dirty fix for text selection in firefox if the rich-text is in a draggable container.
+            border-left: 0 transparent;
+            border-right: 0 transparent;
+        }
+
+        .fr-box.fr-basic.fr-top .fr-wrapper {
+            background: $m-color--white;
+        }
+
+        .fr-toolbar {
+            display: none;
+        }
+
+        .fr-sticky-dummy + .fr-sticky-dummy {
+            height: 0 !important; // Fix flicking problem with multiple editors on page and https://github.com/froala/wysiwyg-editor/issues/2818
+        }
+    }
+
     &.m--is-focus /deep/ {
         .fr-placeholder {
             padding: $m-spacing $m-spacing 0 $m-spacing !important; // Fix placeholder positioning bug.  Magic numbers.

@@ -11,6 +11,7 @@ import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
 import LoggerPlugin, { ConsoleOptions } from './logger/logger';
 import MediaQueriesPlugin from './media-queries/media-queries';
 import ModulPlugin from './modul/modul';
+import ScrollToPlugin from './scroll-to/scroll-to';
 import SpritesPlugin from './svg/sprites';
 
 export interface UtilsPluginOptions {
@@ -24,7 +25,9 @@ const UtilsPlugin: PluginObject<any> = {
     install(v, options): void {
         if (!options || options.propagateVueParserErrors === undefined || options.propagateVueParserErrors) {
             // Vue parser errors do not propagate to window.onError by default
-            Vue.config.errorHandler = (err, vm, info) => WindowErrorHandler.onError(new ErrorEvent('error', { error: err }));
+            Vue.config.errorHandler = (err, vm, info) => {
+                WindowErrorHandler.onError(new ErrorEvent('error', { error: err }));
+            };
         }
 
         if (!v.prototype.$log) {
@@ -43,6 +46,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(ConfirmPlugin);
         Vue.use(AlertPlugin);
         Vue.use(FilePlugin);
+        Vue.use(ScrollToPlugin);
     }
 };
 

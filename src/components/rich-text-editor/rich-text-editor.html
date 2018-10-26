@@ -16,10 +16,11 @@
                    :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
-                   :border-top="true"
+                   :border-top="!readonly"
                    :icon-name="iconName"
                    :required-marker="requiredMarker"
-                   :tag-style="tagStyle">
+                   :tag-style="tagStyle"
+                   :readonly="readonly">
         <froala :config="internalOptions"
             :value="value"
             @input="refreshModel"
@@ -32,8 +33,8 @@
             @paste="onPaste"
             :disabled="disabled || waiting"
             :custom-translations="customTranslations"
-            ref="input"></froala>
-
+            ref="input"
+            :readonly="readonly"></froala>
     </m-input-style>
     <div class="m-textfield__validation">
         <m-validation-message
