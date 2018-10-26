@@ -6,7 +6,7 @@ import SpritesHelper from '../../../tests/helpers/sprites';
 import { ICON_CLASS, validateIconSvg } from '../icon/icon.spec';
 import SteppersItemPlugin, { MSteppersItem, MSteppersItemState } from './steppers-item';
 
-const STATE_COMPLETED_CSS: string = 'm--is-completed';
+const STATE_VISITED_CSS: string = 'm--is-visited';
 const STATE_PROGRESS_CSS: string = 'm--is-in-progress';
 const STATE_DISABLED_CSS: string = 'm--is-disabled';
 
@@ -14,7 +14,7 @@ let steppersItem: MSteppersItem;
 
 describe('MSteppersItemState', () => {
     it('validates enum', () => {
-        expect(MSteppersItemState.Completed).toEqual('completed');
+        expect(MSteppersItemState.Visited).toEqual('visited');
         expect(MSteppersItemState.InProgress).toEqual('in-progress');
         expect(MSteppersItemState.Disabled).toEqual('disabled');
     });
@@ -44,7 +44,7 @@ describe('MSteppers-item', () => {
     it('css class for steppers-item are not present', () => {
         steppersItem = new MSteppersItem().$mount();
         expect(steppersItem.$el.classList.contains(STATE_PROGRESS_CSS)).toBeFalsy();
-        expect(steppersItem.$el.classList.contains(STATE_COMPLETED_CSS)).toBeFalsy();
+        expect(steppersItem.$el.classList.contains(STATE_VISITED_CSS)).toBeFalsy();
     });
 
     it('state prop', done => {
@@ -56,10 +56,10 @@ describe('MSteppers-item', () => {
             expect(steppersItem.$el.classList.contains(STATE_DISABLED_CSS)).toBeFalsy();
             expect(steppersItem.$el.classList.contains(STATE_PROGRESS_CSS)).toBeTruthy();
 
-            steppersItem.state = MSteppersItemState.Completed;
+            steppersItem.state = MSteppersItemState.Visited;
             Vue.nextTick(() => {
                 expect(steppersItem.$el.classList.contains(STATE_PROGRESS_CSS)).toBeFalsy();
-                expect(steppersItem.$el.classList.contains(STATE_COMPLETED_CSS)).toBeTruthy();
+                expect(steppersItem.$el.classList.contains(STATE_VISITED_CSS)).toBeTruthy();
                 done();
             });
         });
