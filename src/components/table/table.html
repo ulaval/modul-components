@@ -1,0 +1,34 @@
+<table class="m-table" :class="[ 'm--is-skin-' + skin]" cellspacing="0">
+    <slot name="header">
+        <thead>
+            <tr>
+                <slot v-for="column in columns" :name="'header.' + column.dataProp">
+                    <th :style="columnWidth(column)" :key="column.id">{{ column.title }}</th>
+                </slot>
+            </tr>
+        </thead>
+    </slot>
+
+    <slot name="body">
+        <tbody>
+            <tr v-if="isEmpty">
+                <slot name="empty">
+                    <td class="m-table--empty" :colspan="columns.length">
+                        <p>{{ i18nEmptyTable }}</p>
+                    </td>
+                </slot>
+            </tr>
+            <tr v-else v-for="(row, index) in rows" :key="index">
+                <slot v-for="column in columns" :name="'body.' + column.dataProp" :data="row">
+                    <td :key="'body.' + column.id" >{{ row[column.dataProp] }}</td>
+                </slot>
+            </tr>
+        </tbody>
+    </slot>
+
+    <tfoot v-if="$slots.footer">
+        <tr>
+            <slot name="footer"></slot>
+        </tr>
+    </tfoot>
+</table>

@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTable Given a table full of data When using a footer Then should render correctly 1`] = `
+<table cellspacing="0" class="m-table m--is-skin-regular">
+    <thead>
+        <tr>
+            <th style="width:10%;">A</th>
+            <th>B</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>a1</td>
+            <td>b1</td>
+        </tr>
+        <tr>
+            <td>a2</td>
+            <td>b2</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>SLOT FOOTER</td>
+        </tr>
+    </tfoot>
+</table>
+`;
+
+exports[`MTable Given a table full of data When using slot to replace a td Then should render correctly 1`] = `
+<table cellspacing="0" class="m-table m--is-skin-regular">
+    <thead>
+        <tr>
+            <th style="width:10%;">A</th>
+            <th>B</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>SLOT TD</td>
+            <td>b1</td>
+        </tr>
+        <tr>
+            <td>SLOT TD</td>
+            <td>b2</td>
+        </tr>
+    </tbody>
+</table>
+`;
+
+exports[`MTable Given a table full of data When using slot to replace a th Then should render correctly 1`] = `
+<table cellspacing="0" class="m-table m--is-skin-regular">
+    <thead>
+        <tr>
+            <th>SLOT TH</th>
+            <th>B</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>a1</td>
+            <td>b1</td>
+        </tr>
+        <tr>
+            <td>a2</td>
+            <td>b2</td>
+        </tr>
+    </tbody>
+</table>
+`;
+
+exports[`MTable Given a table full of data When using slot to replace the header Then should render correctly 1`] = `
+<table cellspacing="0" class="m-table m--is-skin-regular">
+    <thead>
+        <tr>
+            <th>SLOT THEAD</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>a1</td>
+            <td>b1</td>
+        </tr>
+        <tr>
+            <td>a2</td>
+            <td>b2</td>
+        </tr>
+    </tbody>
+</table>
+`;
+
+exports[`MTable Given a table full of data When using slot to replace the tbody Then should render correctly 1`] = `
+<table cellspacing="0" class="m-table m--is-skin-regular">
+    <thead>
+        <tr>
+            <th style="width:10%;">A</th>
+            <th>B</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>SLOT BODY</td>
+        </tr>
+    </tbody>
+</table>
+`;
+
+exports[`MTable Given a table full of data When we don't use slots Then should render correctly 1`] = `
+<table cellspacing="0" class="m-table m--is-skin-regular">
+    <thead>
+        <tr>
+            <th style="width:10%;">A</th>
+            <th>B</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>a1</td>
+            <td>b1</td>
+        </tr>
+        <tr>
+            <td>a2</td>
+            <td>b2</td>
+        </tr>
+    </tbody>
+</table>
+`;
+
+exports[`MTable Given an empty table When a custom slot is given Then should render correctly 1`] = `
+<table cellspacing="0" class="m-table m--is-skin-regular">
+    <thead>
+        <tr>
+            <th style="width:10%;">A</th>
+            <th>B</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>EMPTY</td>
+        </tr>
+    </tbody>
+</table>
+`;
+
+exports[`MTable Given an empty table When we use the default template Then should render correctly 1`] = `
+<table cellspacing="0" class="m-table m--is-skin-regular">
+    <thead>
+        <tr>
+            <th style="width:10%;">A</th>
+            <th>B</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="2" class="m-table--empty">
+                <p>m-table:empty-table</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+`;
