@@ -345,62 +345,6 @@
     }
 }
 
-@mixin m-table-regular() {
-    /deep/ thead {
-        text-align: left;
-
-        tr {
-            background-color: rgba($m-color--grey-light, 0.3);
-
-            th {
-                opacity: 1;
-                color: $m-color--grey;
-                height: 64px;
-
-                &:first-child {
-                    padding-left: $m-padding;
-                }
-
-                &:last-child {
-                    padding-right: $m-padding;
-                }
-            }
-        }
-    }
-
-    /deep/ tbody {
-        tr {
-            &:nth-child(even) {
-                background: $m-color--grey-lightest;
-            }
-
-            td {
-                color: $m-color--grey-darker;
-                height: 64px;
-
-                &.m-table--empty {
-                    background-color: $m-color--grey-lightest;
-                    text-align: center;
-                    height: 161px;
-                    color: $m-color--grey;
-
-                    p {
-                        margin-top: 0;
-                    }
-                }
-
-                &:first-child {
-                    padding-left: $m-padding;
-                }
-
-                &:last-child {
-                    padding-right: $m-padding;
-                }
-            }
-        }
-    }
-}
-
 @mixin m-box-padding($topBottom: $m-spacing--xl, $rightLeft: $m-spacing--l, $topBottomMobile: $m-spacing--xl, $rightLeftMobile: $m-spacing) {
     &:not(.m--no-padding) {
         @media (max-width: $m-mq--max--s) {
