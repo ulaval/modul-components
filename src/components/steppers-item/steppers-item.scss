@@ -10,7 +10,7 @@ $m-steppers--badge--size: 14px;
     z-index: 1;
     outline: none;
 
-    &.m--is-completed {
+    &.m--is-visited {
         cursor: pointer;
 
         &:focus .m-steppers-item__icon,
