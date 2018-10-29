@@ -1,4 +1,4 @@
-export function draggableHasHandle(element: HTMLElement, event: MouseEvent): boolean {
+export function draggableHasHandle(element: HTMLElement): boolean {
     return element.getElementsByClassName('dragHandle').length > 0;
 }
 

@@ -144,7 +144,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.destroyGrabBehavior();
         this.grabEvents.forEach(eventName => this.removeEventListener(eventName));
         this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: MouseEvent) => {
-            if (targetIsInput(this.element, event) || (draggableHasHandle(this.element, event) && !isHandleUsedToDrag(event))) {
+            if (targetIsInput(this.element, event) || (draggableHasHandle(this.element) && !isHandleUsedToDrag(event))) {
                 this.turnDragOff();
                 this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.intputTouchUpListener));
             } else if (this.targetIsGrabbable(event)) {
