@@ -73,6 +73,7 @@ import SteppersItemPlugin from './steppers-item/steppers-item';
 import SteppersPlugin from './steppers/steppers';
 import SwitchPlugin from './switch/switch';
 import TabPanelPlugin from './tab-panel/tab-panel';
+import TablePlugin from './table/table';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
 import TextareaPlugin from './textarea/textarea';
@@ -165,6 +166,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(SteppersItemPlugin);
         Vue.use(SwitchPlugin);
         Vue.use(TabPanelPlugin);
+        Vue.use(TablePlugin);
         Vue.use(TabsPlugin);
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);

@@ -16,10 +16,10 @@ export class MDraggableSandbox extends ModulVue {
     }
 }
 
-const AccordionSandboxPlugin: PluginObject<any> = {
+const DraggableSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
         v.component(`${DRAGGABLE_NAME}-sandbox`, MDraggableSandbox);
     }
 };
 
-export default AccordionSandboxPlugin;
+export default DraggableSandboxPlugin;
