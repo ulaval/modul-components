@@ -218,7 +218,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
             // Allow time to make sure an item is selected
             setTimeout(() => {
                 let wrapEl: HTMLElement = this.$refs.wrap;
-                if (element && element.$props.value === this.selected && wrapEl) {
+                if (element && element.$props.value === this.model && wrapEl) {
                     let buttonLeftWidth: number = this.$refs.buttonLeft && this.hasArrowLeft ? this.$refs.buttonLeft.clientWidth : 0;
                     let buttonRightWidth: number = this.$refs.buttonRight && this.hasArrowRight ? this.$refs.buttonRight.clientWidth : 0;
                     let scrollPositionAlignLeft: number = element.$el.offsetLeft - buttonLeftWidth;
