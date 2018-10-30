@@ -6,6 +6,7 @@ import { MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDuration } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
 import { MODAL_NAME } from '../component-names';
+import UserAgentUtil from '../../utils/user-agent/user-agent';
 import WithRender from './modal.html?style=./modal.scss';
 
 export enum MModalSize {
@@ -48,6 +49,8 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     public paddingBody: boolean;
     @Prop({ default: true })
     public paddingFooter: boolean;
+
+    public hasKeyboard: boolean = false;
 
     $refs: {
         body: HTMLElement;
@@ -116,6 +119,22 @@ export class MModal extends ModulVue implements PortalMixinImpl {
     private backdropClick(): void {
         if (this.closeOnBackdrop) {
             this.as<PortalMixin>().tryClose();
+        }
+    }
+
+    private get isAndroid(): boolean {
+        return UserAgentUtil.isAndroid();
+    }
+
+    private onFocusIn(): void {
+        if (this.isAndroid) {
+            this.hasKeyboard = true;
+        }
+    }
+
+    private onFocusOut(): void {
+        if (this.isAndroid) {
+            this.hasKeyboard = false;
         }
     }
 }
