@@ -163,27 +163,21 @@ $m-modal--max-width--s: 420px !default;
     &__body {
         overflow-x: hidden;
         overflow-y: auto;
+        position: relative;
         flex: 1 1 auto;
-        position: relative;
-        z-index: 1;
-    }
-
-    &__content {
-        position: relative;
         width: 100%;
-        flex: 1 1 auto;
-        overflow-x: hidden;
-        overflow-y: auto;
         min-height: 120px;
         -webkit-overflow-scrolling: touch;
 
+        @include m-scrollbar();
+    }
+
+    &__content {
         @include m-box-padding();
 
         @include m-is-ie() {
             flex: none;
         }
-
-        @include m-scrollbar();
     }
 
     &__footer {

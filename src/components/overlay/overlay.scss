@@ -102,29 +102,15 @@
         overflow-y: auto;
         position: relative;
         flex: 1 1 auto;
-        z-index: 1;
-    }
-
-    &__content {
-        position: relative;
-        width: 100%;
-        flex: 1 1 auto;
-        overflow-x: hidden;
-        overflow-y: auto;
-
-        &:not(.m--is-android) {
-            display: grid;
-            grid-template-rows: auto minmax($m-box--min-height, max-content);
-        }
-    }
-
-    &__body {
         width: 100%;
         min-height: 120px;
         -webkit-overflow-scrolling: touch;
 
-        @include m-fixed-box-padding();
         @include m-scrollbar();
+    }
+
+    &__content {
+        @include m-fixed-box-padding();
     }
 
     &__footer {
@@ -139,12 +125,10 @@
     @keyframes fadeIn {
         0% {
             opacity: 0;
-            z-index: -1;
         }
 
         100% {
             opacity: 1;
-            z-index: 1;
         }
     }
 }
