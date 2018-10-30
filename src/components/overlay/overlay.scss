@@ -11,7 +11,6 @@
         min-width: $m-min-width;
         overflow: hidden;
         background: $m-color--grey-lightest;
-        display: flex;
 
         &.m--is-enter-active,
         &.m--is-leave-active {
@@ -72,6 +71,8 @@
     &__header,
     &__footer {
         min-height: $m-box--min-height;
+        display: flex;
+        align-items: center;
 
         @include m-box-padding($m-spacing, $m-spacing--l, $m-spacing, $m-spacing);
     }
@@ -110,6 +111,15 @@
         flex: 1 1 auto;
         overflow-x: hidden;
         overflow-y: auto;
+
+        &:not(.m--is-android) {
+            display: grid;
+            grid-template-rows: auto minmax($m-box--min-height, max-content);
+        }
+    }
+
+    &__body {
+        width: 100%;
         min-height: 120px;
         -webkit-overflow-scrolling: touch;
 
@@ -118,9 +128,6 @@
     }
 
     &__footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         border-top: $m-border-width--s solid $m-color--border;
         animation: fadeIn 0.5s linear forwards;
 
