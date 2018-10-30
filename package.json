@@ -84,7 +84,8 @@
         "vue-touch": "^2.0.0-beta.4"
     },
     "peerDependencies": {
-        "vue": "^2.5.9"
+        "vue": "^2.5.9",
+        "vue-router": "^3.0.1"
     },
     "devDependencies": {
         "@types/filesize": "^3.6.0",
