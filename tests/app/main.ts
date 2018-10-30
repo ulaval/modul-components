@@ -19,6 +19,7 @@ import { getSandboxPlugin } from './sandbox-loader';
 Vue.config.productionTip = false;
 
 let utilsOptions: UtilsPluginOptions = {
+    propagateVueParserErrors: false,
     i18PluginOptions: {
         curLang: FRENCH
     }

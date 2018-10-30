@@ -1,13 +1,7 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
-    <p>
-        <m-steppers><!-- Test case --></m-steppers>
-    </p>
+    <m-steppers>
+        <m-steppers-item icon-name="m-svg__profile" state="visited" :completed="true">Profil</m-steppers-item>
+        <m-steppers-item icon-name="m-svg__calendar" state="in-progress" :completed="true">Calandrier</m-steppers-item>
+        <m-steppers-item icon-name="m-svg__logout" state="disabled" :completed="true">Déconnexion</m-steppers-item>
+    </m-steppers>
 </div>

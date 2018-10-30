@@ -14,6 +14,7 @@ export * from './dialog/alert';
 export * from './dialog/confirm';
 export * from './modul/modul';
 export * from './svg/sprites';
+export * from './scroll-to/scroll-to';
 
 // Preserve the default import to prevent breaking changes when using legacy import.
 export default UtilsPlugin;

@@ -38,7 +38,7 @@ export class MSteppers extends BaseSteppers {
         }
 
         for (let i: number = this.$children.length - 1; i >= 0; i--) {
-            if (hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.InProgress || hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.Completed) {
+            if (hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.InProgress || hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.Visited) {
                 let childWidth: number = this.$children[i].$el.clientWidth;
                 let childOffset: number = this.$children[i].$el.offsetLeft;
                 this.lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;

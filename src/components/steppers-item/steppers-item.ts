@@ -8,7 +8,7 @@ import IconPlugin from '../icon/icon';
 import WithRender from './steppers-item.html?style=./steppers-item.scss';
 
 export enum MSteppersItemState {
-    Completed = 'completed',
+    Visited = 'visited',
     InProgress = 'in-progress',
     Disabled = 'disabled'
 }
@@ -24,7 +24,7 @@ export class MSteppersItem extends ModulVue {
     @Prop({
         default: MSteppersItemState.Disabled,
         validator: value =>
-            value === MSteppersItemState.Completed ||
+            value === MSteppersItemState.Visited ||
             value === MSteppersItemState.InProgress ||
             value === MSteppersItemState.Disabled
     })
@@ -33,6 +33,8 @@ export class MSteppersItem extends ModulVue {
     public iconName: string;
     @Prop()
     public iconTitle: string;
+    @Prop({ default: false })
+    public completed: boolean;
 
     @Watch('state')
     private stateChanged(value?: string[]): void {
@@ -44,8 +46,8 @@ export class MSteppersItem extends ModulVue {
         this.$emit('update:value', this.state);
     }
 
-    private get isCompleted(): boolean {
-        return this.state === MSteppersItemState.Completed;
+    private get isVisited(): boolean {
+        return this.state === MSteppersItemState.Visited;
     }
 
     private get isInProgress(): boolean {
@@ -57,11 +59,11 @@ export class MSteppersItem extends ModulVue {
     }
 
     private get isTabIndex(): 0 | -1 {
-        return this.state === MSteppersItemState.Completed ? 0 : -1;
+        return this.isVisited ? 0 : -1;
     }
 
     private onClick(event: Event): void {
-        if (this.state === MSteppersItemState.Completed) {
+        if (this.isVisited) {
             this.$emit('click', event);
             (this.$refs.title as HTMLElement).blur();
         }
