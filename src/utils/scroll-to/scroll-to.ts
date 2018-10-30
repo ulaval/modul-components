@@ -54,7 +54,7 @@ export class ScrollTo {
      */
     public goToBottomInside(container: HTMLElement, duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
-        const targetLocation: number = Math.max(Math.round(container.scrollHeight), 0);
+        const targetLocation: number = this.maxContainerScroll(container);
 
         return this.internalScroll(container, targetLocation, duration, defaultEasingFunction);
     }
@@ -66,7 +66,7 @@ export class ScrollTo {
      */
     public goToBottom(duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
-        const targetLocation: number = document.body.offsetHeight;
+        const targetLocation: number = this.maxWindowScroll();
 
         return this.internalScroll(undefined, targetLocation, duration, defaultEasingFunction);
     }
@@ -90,7 +90,10 @@ export class ScrollTo {
             targetLocation = +target;
         }
 
-        return this.internalScroll(undefined, targetLocation, duration, defaultEasingFunction);
+        // get scroll location if its less than maxscroll
+        const scrollLocation: number = Math.min(targetLocation, this.maxWindowScroll());
+
+        return this.internalScroll(undefined, scrollLocation, duration, defaultEasingFunction);
     }
 
     /**
@@ -115,7 +118,10 @@ export class ScrollTo {
             targetLocation = +target;
         }
 
-        return this.internalScroll(container, targetLocation, duration, defaultEasingFunction);
+        // get scroll location if its less than maxscroll
+        const scrollLocation: number = Math.min(targetLocation, this.maxContainerScroll(container));
+
+        return this.internalScroll(container, scrollLocation, duration, defaultEasingFunction);
     }
 
     private internalScroll(container: HTMLElement | undefined, targetLocation: number, duration: ScrollToDuration, easing: EasingFunction): Promise<number> {
@@ -155,6 +161,30 @@ export class ScrollTo {
 
             window.requestAnimationFrame(step);
         });
+    }
+
+    private maxContainerScroll(container: HTMLElement): number {
+        return Math.max(Math.round(container.scrollHeight - container.offsetHeight), 0);
+    }
+
+    private maxWindowScroll(): number {
+        return this.getDocumentHeight() - this.getWindowHeight();
+    }
+
+    private getDocumentHeight(): number {
+        return Math.max(
+            document.body.scrollHeight,
+            document.documentElement ? document.documentElement.scrollHeight : 0,
+            document.body.offsetHeight,
+            document.documentElement ? document.documentElement.offsetHeight : 0,
+            document.body.clientHeight,
+            document.documentElement ? document.documentElement.clientHeight : 0
+        );
+    }
+
+    private getWindowHeight(): number {
+        return window.innerHeight ||
+            (document.documentElement || document.body).clientHeight;
     }
 
     private getDuration(speed: ScrollToDuration): number {
