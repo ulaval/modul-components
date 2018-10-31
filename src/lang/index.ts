@@ -1,4 +1,11 @@
 /**
  * List public declaration here.
  */
-export * from './fr';
+import FrenchPlugin from './fr';
+
+/**
+ * List public declaration here.
+ */
+export { default as FrenchPlugin } from './fr';
+
+export default FrenchPlugin;
