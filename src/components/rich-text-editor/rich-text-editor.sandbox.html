@@ -43,14 +43,14 @@
     <div>
         <h5 class="m-u--margin-bottom">fonctionne dans un formulaire pleine page</h5>
         <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine page</button>
-        <m-overlay :open.sync="afficherFormulairePleinePage">
+        <m-overlay id="overlayPleinePage" :open.sync="afficherFormulairePleinePage" @cancel="resetModelPleinePage()">
             <template slot="header">
                 <span class="m-u--h2 m-u--font-weight--bold">
                     <m-i18n k="texte:texte"></m-i18n>
                 </span>
             </template>
             <div>
-                <m-rich-text-editor scrollable-container=".m-edit-window__body" class="p-formulaire-texte__textearea"
+                <m-rich-text-editor class="p-formulaire-texte__textearea" scrollable-container="#overlayPleinePage .m-overlay__body"
                     :label="'texte riche'" tag-style="p" max-width="720px" v-model="fullScreenFormModel"></m-rich-text-editor>
             </div>
         </m-overlay>
