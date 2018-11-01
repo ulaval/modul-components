@@ -6,6 +6,7 @@
         "eg2.tslint",
         "rbbit.typescript-hero",
         "Orta.vscode-jest",
-        "MS-vsliveshare.vsliveshare"
+        "MS-vsliveshare.vsliveshare",
+        "mkaufman.htmlhint"
     ]
 }
