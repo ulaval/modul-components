@@ -43,7 +43,7 @@ exports[`MDropdown should render correctly when footer slot is set 1`] = `
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
-        <m-popper-mock placement="bottom-start" focus-management="true" open-trigger="mousedown" enter="function boundFn(a) {
+        <m-popper-mock placement="bottom-start" open-trigger="mousedown" enter="function boundFn(a) {
     var l = arguments.length;
     return l
       ? l &gt; 1
