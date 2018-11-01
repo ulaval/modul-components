@@ -35,6 +35,8 @@ export class MSteppersItem extends ModulVue {
     public iconTitle: string;
     @Prop({ default: false })
     public completed: boolean;
+    @Prop()
+    url: string;
 
     @Watch('state')
     private stateChanged(value?: string[]): void {
@@ -60,6 +62,22 @@ export class MSteppersItem extends ModulVue {
 
     private get isTabIndex(): 0 | -1 {
         return this.isVisited ? 0 : -1;
+    }
+
+    private get isLink(): boolean {
+        return !!this.url && this.isVisited;
+    }
+
+    private get componentToShow(): string {
+        return this.isLink ? 'router-link' : 'div';
+    }
+
+    private get role(): string | undefined {
+        return this.isLink || this.isDisabled ? undefined : 'button';
+    }
+
+    private get propUrl(): string | undefined {
+        return this.isLink ? this.url : undefined;
     }
 
     private onClick(event: Event): void {
