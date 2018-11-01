@@ -23,7 +23,7 @@ A set of VueJS components for Modul web applications (beta release).
 
 1. Run npm install @ulaval/modul-components --save
 
-### Project templates and webpack configuration
+### Start a new modul application and webpack configuration
 
 Please refer to [this repository](https://github.com/simardo/vuejs-typescript-template) for a template of a modul project using vue-cli 2.x
 
