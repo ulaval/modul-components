@@ -75,7 +75,7 @@ export class MSteppers extends BaseSteppers {
         let initHeight: number = wrapItem.clientHeight;
         let scrollbarSpace: number = 40;
 
-        if (document.readyState === 'complete') {
+        if (document.readyState === 'complete' || initHeight > 0) {
             elStyleHeight = initHeight + 'px';
             overflowWrapperStyleHeight = initHeight + scrollbarSpace + 'px';
             this.setMinWidth();
