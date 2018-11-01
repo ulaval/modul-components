@@ -52,9 +52,9 @@
     <m-table :columns="columns" :rows="emptyRows"></m-table>
 
     <h2>Empty table - custom slot</h2>
-    <m-table :columns="columns" :rows="emptyRows">
+    <m-table class="m-table-sandbox__empty" :columns="columns" :rows="emptyRows">
         <template slot="empty">
-            <td class="m-table-sandbox__empty-table-custom" :colspan="columns.length">
+            <td class="m-table-sandbox__empty__cell" :colspan="columns.length">
                 Empty table
             </td>
         </template>
