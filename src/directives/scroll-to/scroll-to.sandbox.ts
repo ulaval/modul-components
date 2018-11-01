@@ -10,7 +10,7 @@ import WithRender from './scroll-to.sandbox.html';
 @Component
 export class MScrollToSandbox extends ModulVue {
 
-    public offset: string = '-58';
+    public offset: string = '0';
     public speed: ScrollToDuration = ScrollToDuration.Regular;
 
     scrollToGreenUsingService(): void {
@@ -41,7 +41,7 @@ export class MScrollToSandbox extends ModulVue {
         let _container: HTMLElement = this.$refs.orange as HTMLElement;
         let _element: HTMLElement = this.$refs.greenInOrange as HTMLElement;
         // let _element: Element = this.$refs.orange as Element;
-        this.$scrollTo.goToInside(_container, _element,0, this.speed);
+        this.$scrollTo.goToInside(_container, _element, 0, this.speed);
         return false;
     }
 
@@ -57,7 +57,7 @@ export class MScrollToSandbox extends ModulVue {
 
     scrollInToDown200InOrangeUsingService(): void {
         let _container: HTMLElement = this.$refs.orange as HTMLElement;
-        this.$scrollTo.goToInside(_container, 200 ,0, this.speed);
+        this.$scrollTo.goToInside(_container, 200, 0, this.speed);
     }
 }
 
