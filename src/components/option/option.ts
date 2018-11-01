@@ -61,7 +61,7 @@ export class MOption extends BaseOption implements MOptionInterface {
     public disabled: boolean;
     @Prop({ default: '44px' })
     public size: string;
-    @Prop({ default: true })
+    @Prop({ default: false })
     public focusManagement: boolean;
 
     public hasIcon: boolean = false;
