@@ -118,12 +118,28 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 }
                 this.focusSelected();
                 this.scrollToFocused();
+
                 this.$emit('open');
             } else {
                 this.internalFilter = '';
                 this.$emit('close');
             }
         });
+    }
+
+    private onAfterEnter(): void {
+        if (this.as<MediaQueries>().isMqMaxS && this.filterable) {
+            this.$children.forEach((popup, index) => {
+                if (popup.$options.name === 'MPopup') {
+                    popup.$children.forEach((sidebar, index) => {
+                        if (sidebar.$options.name === 'MSidebar') {
+                            // (this.$refs.items as HTMLElement).style.height = (sidebar.$refs.body as HTMLElement).clientHeight + 'px';
+                            // (sidebar.$refs.body as HTMLElement).style.overflow = 'hidden';
+                        }
+                    });
+                }
+            });
+        }
     }
 
     @Watch('value')

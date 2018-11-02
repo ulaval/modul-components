@@ -26,7 +26,7 @@
                             <m-i18n k="m-sidebar:close"></m-i18n>
                         </m-icon-button>
                     </header>
-                    <div class="m-sidebar__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
+                    <div class="m-sidebar__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot" ref="body">
                         <slot></slot>
                     </div>
                     <footer class="m-sidebar__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot">

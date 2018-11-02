@@ -217,7 +217,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         if (this.afterEnter) {
             this.afterEnter(el.children[0]);
         }
-
+        this.$emit('after-enter', el);
         this.as<PortalMixin>().setFocusToPortal();
     }
 

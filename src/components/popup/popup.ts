@@ -114,6 +114,10 @@ export class MPopup extends ModulVue {
         this.$emit('close');
     }
 
+    private onAfterEnter(): void {
+        this.$emit('after-enter');
+    }
+
     private get hasTriggerSlot(): boolean {
         return !!this.$slots.trigger;
     }

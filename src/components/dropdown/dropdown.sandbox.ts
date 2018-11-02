@@ -8,15 +8,15 @@ import WithRender from './dropdown.sandbox.html';
 @Component
 export class MDropdownSandbox extends Vue {
     // tslint:disable-next-line:no-null-keyword
-    public nullValue1: null = null;
+    public nullValue1: string = '4a';
     // tslint:disable-next-line:no-null-keyword
-    public nullValue2: null = null;
+    public nullValue2: string = '5a';
     // tslint:disable-next-line:no-null-keyword
-    public nullValue3: null = null;
-    public undefinedValue1: undefined = undefined;
-    public undefinedValue2: undefined = undefined;
-    public undefinedValue3: undefined = undefined;
-    public numValue: undefined = undefined;
+    public nullValue3: string = '6a';
+    public undefinedValue1: string = '';
+    public undefinedValue2: string = '';
+    public undefinedValue3: string = '';
+    public numValue: number = 2000;
 
     public numItems: number[] = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007];
 }

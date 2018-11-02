@@ -179,6 +179,7 @@ export class Portal extends ModulVue implements PortalMixin {
                                 this.$emit('portal-content-visible');
                                 this.setFocusToPortal();
                                 this.opening = false;
+                                this.$emit('after-enter');
                             }, this.transitionDuration);
                         } else {
                             this.$emit('portal-content-visible');
