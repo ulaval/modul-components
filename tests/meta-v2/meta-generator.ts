@@ -35,7 +35,7 @@ export class MetaGenerator {
         //     tsConfigFilePath: './tsconfig.meta.json',
         //     addFilesFromTsConfig: false
         // });
-        // this.project.addExistingSourceFile('src/components/accordion/accordion.ts');
+        // this.project.addExistingSourceFile('src/components/tooltip/tooltip.ts');
 
         this.typeChecker = this.project.getTypeChecker();
         this.languageService = this.project.getLanguageService();
@@ -265,7 +265,7 @@ export class MetaGenerator {
 
     private getTypeTypesAsStrings(type): string[] {
         if (type.types) {
-            return type.types.map((type) => this.getTypeAsString(type));
+            return type.types.map((type) => type.value);
         }
         return [];
     }
