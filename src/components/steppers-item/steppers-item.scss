@@ -9,13 +9,9 @@ $m-steppers--badge--size: 14px;
     z-index: 1;
 
     &.m--is-visited {
-        &::before,
-        &::after,
         .m-steppers-item__button {
             cursor: pointer;
-        }
 
-        .m-steppers-item__button {
             &:hover,
             &:focus {
                 .m-steppers-item__icon,
@@ -43,9 +39,8 @@ $m-steppers--badge--size: 14px;
     }
 
     &.m--is-disabled {
-        &::before,
-        &::after,
         .m-steppers-item__button {
+            user-select: none;
             cursor: not-allowed;
         }
 
@@ -77,6 +72,7 @@ $m-steppers--badge--size: 14px;
     }
 
     &__icon {
+        transition: color $m-transition-duration ease, border-color $m-transition-duration ease;
         position: relative;
         display: flex;
         align-items: center;
@@ -87,11 +83,11 @@ $m-steppers--badge--size: 14px;
         border: 2px solid;
         background-color: $m-color--white;
         font-size: $m-steppers--icon--size;
-        transition: color $m-transition-duration;
         color: $m-color--text;
     }
 
     &__icon-completed {
+        transition: color $m-transition-duration ease;
         position: absolute;
         bottom: -4px; // Magic number
         right: -6px; // Magic number
