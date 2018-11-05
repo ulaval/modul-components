@@ -111,9 +111,10 @@ export class ScrollTo {
 
         // get element relative position from container
         if (target instanceof HTMLElement) {
-            const containerPosition: number = Math.round(container.offsetTop);
-            const elementPosition: number = Math.round(target.offsetTop);
-            targetLocation = Math.max((elementPosition - containerPosition) + offset, 0);
+            const scrollTop: number = (container.getBoundingClientRect().top * -1) + container.scrollTop;
+            targetLocation = (target.getBoundingClientRect().top + scrollTop) - container.clientTop;
+            targetLocation = targetLocation + offset;
+
         } else {
             targetLocation = +target;
         }
