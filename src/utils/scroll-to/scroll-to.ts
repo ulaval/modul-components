@@ -92,7 +92,6 @@ export class ScrollTo {
 
         // get scroll location if its less than maxscroll
         const scrollLocation: number = Math.min(targetLocation, this.maxWindowScroll());
-
         return this.internalScroll(undefined, scrollLocation, duration, defaultEasingFunction);
     }
 
@@ -106,10 +105,6 @@ export class ScrollTo {
      * @param easing easing function to use
      */
     public goToInside(container: HTMLElement, target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
-
-        container.addEventListener('touchmove', this.preventDefault, { passive: false });
-        container.addEventListener('wheel', this.preventDefault, { passive: false });
-        container.addEventListener('touchstart ', this.preventDefault, { passive: false });
 
         let targetLocation: number = 0;
 
@@ -126,15 +121,7 @@ export class ScrollTo {
         // get scroll location if its less than maxscroll
         const scrollLocation: number = Math.min(targetLocation, this.maxContainerScroll(container));
 
-        return this.internalScroll(container, scrollLocation, duration, defaultEasingFunction).then(() => {
-            container.removeEventListener('touchmove', this.preventDefault);
-            container.removeEventListener('wheel', this.preventDefault);
-            container.removeEventListener('touchstart', this.preventDefault);
-        });
-    }
-
-    private preventDefault(e: Event): void {
-        e.preventDefault();
+        return this.internalScroll(container, scrollLocation, duration, defaultEasingFunction);
     }
 
     private internalScroll(container: HTMLElement | undefined, targetLocation: number, duration: ScrollToDuration, easing: EasingFunction): Promise<number> {
@@ -142,8 +129,10 @@ export class ScrollTo {
             const startTime: number = performance.now();
             let startLocation: number = 0;
             if (container) {
+                this.disableScrollEvent(container);
                 startLocation = container.scrollTop;
             } else {
+                this.disableScrollEvent(document.body);
                 startLocation = window.pageYOffset;
             }
 
@@ -158,6 +147,7 @@ export class ScrollTo {
                     container.scrollTop = targetPosition;
 
                     if (targetPosition === targetLocation || progressPercentage === 1) {
+                        this.enableScrollEvent(container);
                         return resolve(targetLocation);
                     }
 
@@ -165,6 +155,8 @@ export class ScrollTo {
                     window.scrollTo(0, targetPosition);
 
                     if (Math.round(window.pageYOffset) === targetLocation || progressPercentage === 1) {
+
+                        this.enableScrollEvent(document.body);
                         return resolve(targetLocation);
                     }
                 }
@@ -174,6 +166,22 @@ export class ScrollTo {
 
             window.requestAnimationFrame(step);
         });
+    }
+
+    private disableScrollEvent(container: HTMLElement): void {
+        container.addEventListener('touchmove', this.preventDefault, { passive: false });
+        container.addEventListener('wheel', this.preventDefault, { passive: false });
+        container.addEventListener('touchstart ', this.preventDefault, { passive: false });
+    }
+
+    private enableScrollEvent(container: HTMLElement): void {
+        container.removeEventListener('touchmove', this.preventDefault);
+        container.removeEventListener('wheel', this.preventDefault);
+        container.removeEventListener('touchstart', this.preventDefault);
+    }
+
+    private preventDefault(e: Event): void {
+        e.preventDefault();
     }
 
     private maxContainerScroll(container: HTMLElement): number {
