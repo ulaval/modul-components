@@ -50,6 +50,16 @@ export class MScrollToServivceSandbox extends ModulVue {
         let _container: HTMLElement = this.$refs.orange as HTMLElement;
         this.$scrollTo.goToInside(_container, 200, 0, this.speed);
     }
+
+    scrollToTextArea(): void {
+        // Aller au haut de la page
+        let conteneur: HTMLElement | null = document.querySelector('.m-overlay__body');
+        let element: HTMLElement | null = document.querySelector('.scroll-to-me-on-save');
+        if (conteneur && element) {
+            this.$scrollTo.goToInside(conteneur, element, +this.offset, this.speed);
+        }
+
+    }
 }
 
 const ScrollToSandboxPlugin: PluginObject<any> = {
