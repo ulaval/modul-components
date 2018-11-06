@@ -77,7 +77,7 @@ export class MRadio extends ModulVue {
     public radioMarginTop: string;
     @Prop()
     public readOnly: boolean;
-    @Prop({ default : 'li' })
+    @Prop({ default : 'span' })
     public tag: string;
 
     // ----- For Button Group -----
@@ -102,6 +102,10 @@ export class MRadio extends ModulVue {
 
     public get propPosition(): MRadioPosition {
         return this.isGroup() ? this.parentGroup.radiosPosition : this.radioPosition;
+    }
+
+    public get propTag(): string {
+        return this.isGroup() ? 'li' : this.tag;
     }
 
     public get propVerticalAlign(): MRadioVerticalAlignement {
