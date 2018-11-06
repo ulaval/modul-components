@@ -1,14 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MFileUpload completed should render completed files 1`] = `
-<m-dialog title="Upload file"><span slot="trigger"></span>
+<m-modal title="Upload file"><span slot="trigger"></span>
     <div class="m-file-upload">
-        <div class="m-file-upload__drop-zone">
-            <div class="m-file-upload__drop-zone__instructions">
-                <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your file here or</span></h3>
-                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
-            </div>
+        <div class="m-file-upload__no-drop-zone">
+            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" class="m-file-upload__no-drop-zone__instructions__button"></m-file-select>
         </div>
         <div class="m-file-upload__completed-list">
             <ul name="m--is" tag="ul" class="m-file-upload__completed-list__wrap">
@@ -38,11 +34,11 @@ exports[`MFileUpload completed should render completed files 1`] = `
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
-</m-dialog>
+</m-modal>
 `;
 
 exports[`MFileUpload should render correctly 1`] = `
-<m-dialog title="Upload file"><span slot="trigger"></span>
+<m-modal title="Upload file"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
@@ -61,14 +57,16 @@ exports[`MFileUpload should render correctly 1`] = `
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
-</m-dialog>
+</m-modal>
 `;
 
 exports[`MFileUpload should render correctly in mobile 1`] = `
-<m-dialog title="Upload file"><span slot="trigger"></span>
+<m-modal title="Upload file"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
+                <h3 class="m-file-upload__drop-zone__instructions__title">
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your file here or</span></h3>
                 <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
@@ -82,18 +80,14 @@ exports[`MFileUpload should render correctly in mobile 1`] = `
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
-</m-dialog>
+</m-modal>
 `;
 
 exports[`MFileUpload uploading should render uploading files 1`] = `
-<m-dialog title="Upload file"><span slot="trigger"></span>
+<m-modal title="Upload file"><span slot="trigger"></span>
     <div class="m-file-upload">
-        <div class="m-file-upload__drop-zone">
-            <div class="m-file-upload__drop-zone__instructions">
-                <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your file here or</span></h3>
-                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
-            </div>
+        <div class="m-file-upload__no-drop-zone">
+            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" class="m-file-upload__no-drop-zone__instructions__button"></m-file-select>
         </div>
         <h3 class="m-file-upload__title"><span class="m-i18n">Uploading</span> (1
             <span class="m-i18n">file</span>)
@@ -129,11 +123,11 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
-</m-dialog>
+</m-modal>
 `;
 
 exports[`MFileUpload validation should render accepted file extensions 1`] = `
-<m-dialog title="Upload files"><span slot="trigger"></span>
+<m-modal title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
@@ -153,11 +147,11 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
-</m-dialog>
+</m-modal>
 `;
 
-exports[`MFileUpload validation validation messages should render rejected files in modal 1`] = `
-<m-dialog title="Upload files"><span slot="trigger"></span>
+exports[`MFileUpload validation validation messages should render rejected files in dialog 1`] = `
+<m-modal title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-message m-file-upload__error-message m--is-state-error m--is-skin-default">
             <div class="m-message__wrap">
@@ -215,5 +209,5 @@ exports[`MFileUpload validation validation messages should render rejected files
             <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
-</m-dialog>
+</m-modal>
 `;

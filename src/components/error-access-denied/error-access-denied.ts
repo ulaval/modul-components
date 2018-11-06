@@ -4,7 +4,7 @@ import { Prop } from 'vue-property-decorator';
 
 import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_ACCESS_DENIED_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link } from '../error-template/error-template';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import { MMessageState } from '../message/message';
@@ -38,7 +38,7 @@ const ErrorAccessDeniedPlugin: PluginObject<any> = {
         v.prototype.$log.debug(ERROR_ACCESS_DENIED_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(LinkPlugin);
-        v.use(ErrorTemplatePlugin);
+        v.use(MessagePagePlugin);
         v.component(ERROR_ACCESS_DENIED_NAME, MErrorAccessDenied);
     }
 };

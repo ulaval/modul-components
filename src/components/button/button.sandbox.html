@@ -1,13 +1,33 @@
 <div>
     <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>L'utilsation de v-html dans un bouton et d'un &lt;m-i18n &gt; dans un autre n'est pas compatible</h3>
     <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+            <a href="https://github.com/ulaval/modul-components/pull/536">PR-536</a> : Pour démontrer le bug qui force l'utilisation de key= lorsque l'on utilise des template voir <a href="https://fr.vuejs.org/v2/guide/conditional.html#Controle-des-elements-reutilisables-avec-key">(la doc officiel)</a>
+
     </p>
+
     <p>
-        <m-button><!-- Test case --></m-button>
+        <div>
+            using key
+
+            <m-button  v-html="libelle" @click="toogleAfficher()" v-if="afficherbouton1" key="username-input-2">
+            </m-button>
+
+            <m-button  @click="toogleAfficher()" v-if="!afficherbouton1">
+                patate2
+            </m-button key="username-input">
+
+
+            not using key
+
+
+            <m-button v-html="libelle" @click="toogleAfficher()" v-if="afficherbouton1" >
+            </m-button>
+
+            <m-button  @click="toogleAfficher()" v-if="!afficherbouton1">
+                patate2
+            </m-button >
+        </div>
+
     </p>
 </div>

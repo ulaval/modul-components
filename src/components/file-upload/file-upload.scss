@@ -61,7 +61,8 @@ $m-file-upload-max-height--s: 72px;
         }
     }
 
-    &__drop-zone {
+    &__drop-zone,
+    &__no-drop-zone {
         border: $m-color--success $m-border-width dashed;
         padding: $m-padding--l $m-padding;
         text-align: center;

@@ -16,7 +16,8 @@
         "strictNullChecks": true,
         "types": [
             "node",
-            "jest"
+            "jest",
+            "webpack-env"
         ],
         "typeRoots": [
             "node_modules/@types"
@@ -26,7 +27,6 @@
         "src/**/*"
     ],
     "exclude": [
-        "src/**/*.spec.*",
-        "tests/**/*"
+        "src/**/*.spec.*"
     ]
 }

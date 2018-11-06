@@ -1,0 +1,174 @@
+@import '../../styles/abstracts/variables';
+
+$m-message-page--shadow-width: 150px;
+$m-message-page--shadow-height: 5px;
+
+@mixin m-message-page-state($color, $color-background) {
+    .m-message-page {
+        &__title,
+        &__icon {
+            color: $color;
+        }
+
+        &__icon-container::before {
+            background: $color-background;
+        }
+    }
+}
+
+.m-message-page {
+    &.m--is-state-confirmation {
+        @include m-message-page-state($m-color--success, $m-color--success-lightest);
+    }
+
+    &.m--is-state-information {
+        @include m-message-page-state($m-color--interactive, $m-color--interactive-lightest);
+    }
+
+    &.m--is-state-error {
+        @include m-message-page-state($m-color--error, $m-color--error-lightest);
+    }
+
+    &.m--is-state-warning {
+        @include m-message-page-state($m-color--warning, $m-color--warning-lightest);
+    }
+
+    &.m--is-skin-default {
+        .m-message-page {
+            &__title {
+                font-size: $m-font-size--h3;
+            }
+
+            &__icon-container {
+                &::before {
+                    right: 0;
+                    left: 0;
+                    transform: translate3d(0, -50%, 0);
+                    height: 80px; // Magic number
+                }
+
+                &::after {
+                    width: $m-message-page--shadow-width;
+                }
+            }
+        }
+    }
+
+    &.m--is-skin-light {
+        .m-message-page {
+            &__title {
+                font-size: $m-font-size--h4;
+            }
+
+            &__icon-container {
+                &::before {
+                    left: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                    width: 100%;
+                    max-width: 140px; //Magic number
+                    height: 48px; // Magic number
+                }
+
+                &::after {
+                    width: $m-message-page--shadow-width/2;
+                }
+            }
+        }
+    }
+
+    &__header {
+        ~ .m-message-page__body {
+            padding-top: $m-spacing;
+        }
+    }
+
+    &__title {
+        text-align: center;
+        font-weight: $m-font-weight--black;
+        margin: 0;
+
+        ~ .m-message-page__icon-container {
+            margin-top: $m-spacing;
+        }
+    }
+
+    &__icon-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &::before {
+            position: absolute;
+            top: calc(50% - #{$m-spacing--s - $m-message-page--shadow-height}); // Magic number: align this backgroun with icon
+            z-index: 0;
+            content: '';
+            display: block;
+        }
+
+        &::after {
+            content: '';
+            height: $m-message-page--shadow-height;
+            border-radius: 50%;
+            background: $m-color--grey-lighter;
+            margin-top: $m-spacing--s;
+        }
+
+        &__svg {
+            z-index: 1;
+        }
+    }
+
+    &__icon {
+        position: relative;
+    }
+
+    &__stacktrace {
+        margin-top: $m-margin;
+        max-height: 120px;
+        overflow: auto;
+        padding: $m-padding;
+
+        @include m-scrollbar();
+
+        pre {
+            margin: 0;
+        }
+    }
+
+    &__hints,
+    &__links {
+        text-align: left; // needed when inside a popup
+    }
+
+    &__hints {
+        margin: 0;
+
+        &.m--no-content {
+            text-align: center;
+        }
+
+        + .m-message-page__hints {
+            margin-top: $m-margin;
+        }
+    }
+
+    &__details {
+        margin: 0;
+
+        &:not(:first-child) {
+            margin: $m-spacing 0 0 0;
+        }
+    }
+
+    &__links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        &:not(:first-child) {
+            margin: $m-spacing 0 0 0;
+        }
+    }
+}

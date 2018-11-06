@@ -1,29 +1,27 @@
 
-<m-flex-template padding-top="52px">
-    <m-template>
-        <div slot="header">
-            <m-link :underline="false" :unvisited="true" icon-name="m-svg__chevron--left">Menu</m-link>
-            <h1>Media Queries</h1>
-        </div>
-        <div>
-            <h2 v-if="isMqMinXS || isMqMinS || isMqMinM || isMqMinL || isMqMinXL" >min-width</h2>
-            <p id="min480" v-if="isMqMinXS">480px >= ... <strong>isMqMinXS</strong></p>
-            <p id="min768" v-if="isMqMinS">768px >= ... <strong>isMqMinS</strong></p>
-            <p id="min1024" v-if="isMqMinM">1024px >= ... <strong>isMqMinM</strong></p>
-            <p id="min1200" v-if="isMqMinL"> 1200px >= ... <strong>isMqMinL</strong></p>
-            <p id="min1600" v-if="isMqMinXL">1600px >= ... <strong>isMqXL</strong></p>
+<m-template>
+    <div slot="header">
+        <m-link :underline="false" :unvisited="true" icon-name="m-svg__chevron--left">Menu</m-link>
+        <h1>Media Queries</h1>
+    </div>
+    <div>
+        <h2 v-if="isMqMinXS || isMqMinS || isMqMinM || isMqMinL || isMqMinXL" >min-width</h2>
+        <p id="min480" v-if="isMqMinXS">480px >= ... <strong>isMqMinXS</strong></p>
+        <p id="min768" v-if="isMqMinS">768px >= ... <strong>isMqMinS</strong></p>
+        <p id="min1024" v-if="isMqMinM">1024px >= ... <strong>isMqMinM</strong></p>
+        <p id="min1200" v-if="isMqMinL"> 1200px >= ... <strong>isMqMinL</strong></p>
+        <p id="min1600" v-if="isMqMinXL">1600px >= ... <strong>isMqXL</strong></p>
 
-            <h2 v-if="isMqMaxXS || isMqMaxS || isMqMaxM || isMqMaxL || isMqMaxXL">max-width</h2>
-            <p id="max480" v-if="isMqMaxXS"><strong>isMqXS</strong> ... < 480px</p>
-            <p id="max768" v-if="isMqMaxS"><strong>isMqMaxS</strong> ... < 768px</p>
-            <p id="max1024" v-if="isMqMaxM"><strong>isMqMaxM</strong> ... < 1024px</p>
-            <p id="max1200" v-if="isMqMaxL"><strong>isMqMaxL</strong> ... < 1200px</p>
-            <p id="max1600" v-if="isMqMaxXL"><strong>isMqMaxXL</strong> ... < 1600px</p>
+        <h2 v-if="isMqMaxXS || isMqMaxS || isMqMaxM || isMqMaxL || isMqMaxXL">max-width</h2>
+        <p id="max480" v-if="isMqMaxXS"><strong>isMqXS</strong> ... < 480px</p>
+        <p id="max768" v-if="isMqMaxS"><strong>isMqMaxS</strong> ... < 768px</p>
+        <p id="max1024" v-if="isMqMaxM"><strong>isMqMaxM</strong> ... < 1024px</p>
+        <p id="max1200" v-if="isMqMaxL"><strong>isMqMaxL</strong> ... < 1200px</p>
+        <p id="max1600" v-if="isMqMaxXL"><strong>isMqMaxXL</strong> ... < 1600px</p>
 
-            <h2 v-if="isMqS || isMqM || isMqL" >min-width and max-width</h2>
-            <p id="in480-768" v-if="isMqS">480px =­> ... <strong>isMqS</strong> ... < 768px</p>
-            <p id="in768-1024" v-if="isMqM">768px => ... <strong>isMqM</strong>... < 1024px</p>
-            <p id="in1024-1600" v-if="isMqL">1024px => ... <strong>isMqL</strong> ... < 1600px</p>
-        </div>
-    </m-template>
-</m-flex-template>
+        <h2 v-if="isMqS || isMqM || isMqL" >min-width and max-width</h2>
+        <p id="in480-768" v-if="isMqS">480px =­> ... <strong>isMqS</strong> ... < 768px</p>
+        <p id="in768-1024" v-if="isMqM">768px => ... <strong>isMqM</strong>... < 1024px</p>
+        <p id="in1024-1600" v-if="isMqL">1024px => ... <strong>isMqL</strong> ... < 1600px</p>
+    </div>
+</m-template>

@@ -7,6 +7,10 @@ export enum ScrollToDuration {
 }
 
 export interface CancelableScrollTo { promise: Promise<any>; cancel: () => void; }
+
+/**
+ * @deprecated use global service in /utils/scroll-to.
+ */
 export class ScrollTo {
     // https://coderwall.com/p/hujlhg/smooth-scrolling-without-jquery
     public scrollToTop(element: HTMLElement, duration: string = ScrollToDuration.Regular): CancelableScrollTo {

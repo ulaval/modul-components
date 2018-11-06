@@ -31,6 +31,7 @@ export enum MRichTextEditorMode {
     ]
 })
 export class MRichTextEditor extends ModulVue implements InputManagementData, InputStateInputSelector {
+
     selector: string = '.fr-element.fr-view';
     internalValue: string;
 
@@ -50,6 +51,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     public scrollableContainer: string | undefined;
 
     public customTranslations: {[key: string]: string} = {
+        'Update': this.$i18n.translate('m-inplace-edit:modify'),
         'URL': this.$i18n.translate('m-rich-text-editor:URL')
     };
 

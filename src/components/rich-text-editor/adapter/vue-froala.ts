@@ -65,6 +65,9 @@ export enum FroalaStatus {
     @Prop({ default: false })
     public disabled: boolean;
 
+    @Prop({ default: false })
+    public readonly: boolean;
+
     @Prop()
     public config: any;
 
@@ -83,6 +86,7 @@ export enum FroalaStatus {
     };
     protected model: string | undefined = undefined;
     protected oldModel: string | undefined = undefined;
+    protected rawHtmlInput: string | undefined = undefined;
 
     protected isFocused: boolean = false;
     protected isInitialized: boolean = false;
@@ -273,6 +277,7 @@ export enum FroalaStatus {
             events: {
                 [froalaEvents.InitializationDelayed]: (_e, editor) => {
                     this.froalaEditor = editor;
+                    this.setReadOnly();
                     this.htmlSet();
                     window.addEventListener('resize', this.onResize);
                 },
@@ -289,12 +294,13 @@ export enum FroalaStatus {
                         window.removeEventListener('resize', this.onResize);
                         this.unblockMobileBlur();
 
-                        this.isDirty = false;
+                        this.refreshDirtyModel();
 
                         if (this.isInitialized) { this.$emit('focus'); }
                         this.showToolbar();
                         this.isFocused = true;
                         this.status = FroalaStatus.Focused;
+                        this.internalReadonly = this.readonly;
                     }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
@@ -310,8 +316,11 @@ export enum FroalaStatus {
 
                                 this.isFocused = false;
                                 this.status = FroalaStatus.Blurred;
-                                this.isDirty = false;
+
+                                this.refreshDirtyModel();
+
                                 this.unblockMobileBlur();
+                                this.internalReadonly = false;
                             }
                         }, 150);
                     }
@@ -354,11 +363,52 @@ export enum FroalaStatus {
 
         this._$element = $(this.$refs.editor);
 
-        this.setContent(true);
+        this.setContent();
 
         this.registerEvents();
         if (this._$element.froalaEditor) {
             this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
+        }
+    }
+
+    private refreshDirtyModel(): void {
+        if (this.isDirty) {
+            this.isDirty = false;
+            this.updateModel();
+        }
+    }
+
+    @Watch('readonly')
+    private setReadOnly(): void {
+        this.internalReadonly = this.readonly;
+    }
+
+    private simulateReadonlyBlur(event: Event): void {
+        if (!this.$el.contains(event.target as Node)) {
+            if (this.isFocused) {
+                this.froalaEditor.edit.on();
+                this.froalaEditor.events.trigger('blur');
+            }
+            document.removeEventListener('mousedown', this.simulateReadonlyBlur, true);
+        }
+    }
+
+    private get internalReadonly(): boolean {
+        return this.readonly;
+    }
+
+    private set internalReadonly(value: boolean) {
+        if (!this.froalaEditor) { return; }
+
+        document.removeEventListener('mousedown', this.simulateReadonlyBlur, true);
+        if (value) {
+            if (this.isFocused) {
+                this.hideToolbar();
+                document.addEventListener('mousedown', this.simulateReadonlyBlur, true);
+                this.froalaEditor.edit.off();
+            }
+        } else {
+            this.froalaEditor.edit.on();
         }
     }
 
@@ -400,7 +450,7 @@ export enum FroalaStatus {
     }
 
     private showToolbar(): void {
-        if (this.editorIsAvailable()) {
+        if (this.editorIsAvailable() && !this.internalReadonly) {
             this.froalaEditor.toolbar.show();
             const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
             toolBar.style.removeProperty('margin-top');
@@ -422,11 +472,7 @@ export enum FroalaStatus {
         this.setContent();
     }
 
-    private setContent(firstTime: boolean = false): void {
-        if (!firstTime) {
-            return;
-        }
-
+    private setContent(): void {
         if (this.model || this.model === '') {
             this.oldModel = this.model;
 
@@ -445,6 +491,7 @@ export enum FroalaStatus {
             this.listeningEvents.length = 0;
             this._$element = undefined;
             this.froalaEditor = undefined;
+            this.internalReadonly = false;
         }
     }
 
@@ -452,12 +499,21 @@ export enum FroalaStatus {
         let modelContent: string = '';
 
         const returnedHtml: any = this._$element.froalaEditor('html.get');
-        if (typeof returnedHtml === 'string') {
-            modelContent = returnedHtml;
+        if (typeof returnedHtml === 'string' && returnedHtml !== this.rawHtmlInput) {
+            this.rawHtmlInput = returnedHtml;
+            modelContent = this.removeEmptyHTML(returnedHtml);
+        } else {
+            modelContent = (this.oldModel) ? this.oldModel : '';
         }
 
         this.oldModel = modelContent;
         this.$emit('input', modelContent);
+    }
+
+    private removeEmptyHTML(value: string): string {
+        const div: HTMLElement = document.createElement('div');
+        div.innerHTML = value;
+        return ((div.textContent || div.innerText || '').trim().length > 0) ? value : '';
     }
 
     private registerEvent(element: any, eventName: any, callback: any): void {
