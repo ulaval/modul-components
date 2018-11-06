@@ -1,0 +1,68 @@
+@import '../../styles/abstracts/variables';
+
+$m-table--row-min-height: 64px;
+
+@mixin m-table--skin-regular() {
+    thead tr th,
+    tbody tr td {
+        padding-top: $m-spacing;
+        padding-bottom: $m-spacing;
+        height: $m-table--row-min-height;
+    }
+
+    thead {
+        text-align: left;
+
+        tr {
+            background-color: rgba($m-color--grey-light, 0.3);
+
+            th {
+                opacity: 1;
+                color: $m-color--grey;
+
+                &:first-child {
+                    padding-left: $m-spacing;
+                }
+
+                &:last-child {
+                    padding-right: $m-spacing;
+                }
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background: $m-color--grey-lightest;
+            }
+
+            td {
+                color: $m-color--grey-darker;
+
+                &.m-table--empty {
+                    background-color: $m-color--grey-lightest;
+                    text-align: center;
+                    min-height: 161px; // Magic number
+                    color: $m-color--grey;
+
+                    p {
+                        margin-top: 0;
+                    }
+                }
+
+                &:first-child {
+                    padding-left: $m-spacing;
+                }
+
+                &:last-child {
+                    padding-right: $m-spacing;
+                }
+            }
+        }
+    }
+}
+
+.m-table.m--is-skin-regular {
+    @include m-table--skin-regular();
+}

@@ -19,7 +19,7 @@ import WithRender from './textfield.html?style=./textfield.scss';
 export enum MTextfieldType {
     Text = 'text',
     Password = 'password',
-    EMail = 'email',
+    Email = 'email',
     Url = 'url',
     Telephone = 'tel'
 }
@@ -41,7 +41,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     @Prop({
         default: MTextfieldType.Text,
         validator: value =>
-            value === MTextfieldType.EMail ||
+            value === MTextfieldType.Email ||
             value === MTextfieldType.Password ||
             value === MTextfieldType.Telephone ||
             value === MTextfieldType.Text ||
@@ -75,14 +75,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     protected mounted(): void {
-        (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
         this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
     @Watch('type')
     private typeChanged(type: MTextfieldType): void {
         this.$log.warn(TEXTFIELD_NAME + ': Change of property "type" is not supported');
-        (this.$refs.input as HTMLElement).setAttribute('type', this.inputType);
     }
 
     @Watch('inputType')
@@ -99,20 +97,14 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.passwordAsText = !this.passwordAsText;
     }
 
-    private get inputType(): MTextfieldType {
+    public get inputType(): MTextfieldType {
         let type: MTextfieldType = MTextfieldType.Text;
         if (this.type === MTextfieldType.Password && this.passwordAsText) {
             type = MTextfieldType.Text;
-        } else if (this.type === MTextfieldType.Password || this.type === MTextfieldType.EMail || this.type === MTextfieldType.Url ||
+        } else if (this.type === MTextfieldType.Password || this.type === MTextfieldType.Email || this.type === MTextfieldType.Url ||
             this.type === MTextfieldType.Telephone) {
             type = this.type;
         }
-        this.$nextTick(() => {
-            let inputEl: HTMLElement = this.$refs.input as HTMLElement;
-            if (inputEl) {
-                inputEl.setAttribute('type', type);
-            }
-        });
         return type;
     }
 

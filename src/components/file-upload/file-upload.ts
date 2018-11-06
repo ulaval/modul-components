@@ -8,10 +8,11 @@ import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { FILE_UPLOAD_NAME } from '../component-names';
-import DialogPlugin, { MDialog } from '../dialog/dialog';
+import ModalPlugin, { MModal } from '../modal/modal';
 import FileSelectPlugin from '../file-select/file-select';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
@@ -55,10 +56,16 @@ export class MFileUpload extends ModulVue {
     public storeName: string;
     @Prop()
     public open: boolean;
+    @Prop({ default: false })
+    public fileReplacement: boolean;
 
     $refs: {
-        dialog: MDialog;
+        modal: MModal;
     };
+
+    public get isDropZoneEnabled(): boolean {
+        return UserAgentUtil.isDesktop() && this.$mq.state.isMqMinS;
+    }
 
     private internalOpen: boolean = false;
     private tooltipCancel: string = this.$i18n.translate('m-file-upload:cancelFileUpload');
@@ -82,7 +89,7 @@ export class MFileUpload extends ModulVue {
                 allowedExtensions: this.allowedExtensions,
                 rejectedExtensions: this.rejectedExtensions,
                 maxSizeKb: this.maxSizeKb,
-                maxFiles: this.maxFiles
+                maxFiles: this.propMaxFiles
             },
             this.storeName
         );
@@ -132,10 +139,16 @@ export class MFileUpload extends ModulVue {
         }, 0);
 
         if (nbNewRejection > 0) {
-            this.$refs.dialog.$refs.body.scrollTop = 0;
+            this.$refs.modal.$refs.body.scrollTop = 0;
             // TODO Change function to have a smooth scroll when it will work on a diferent element than the body of the page
             // ScrollTo.startScroll(bodyRef, 0, ScrollToDuration.Regular);
         }
+    }
+
+    private onPortalContentVisible(): void {
+        this.dropEvents.forEach((evt) => {
+            this.$refs.modal.$refs.modalWrap.addEventListener(evt, defaultDragEvent);
+        });
     }
 
     private onMessageClose(): void {
@@ -146,12 +159,12 @@ export class MFileUpload extends ModulVue {
 
     private onAddClick(): void {
         this.$emit('done', this.completedFiles);
-        this.$refs.dialog.closeDialog();
+        this.$refs.modal.closeModal();
     }
 
     private onCancelClick(): void {
         this.$emit('cancel');
-        this.$refs.dialog.closeDialog();
+        this.$refs.modal.closeModal();
     }
 
     private onUploadCancel(file: MFile): void {
@@ -169,14 +182,6 @@ export class MFileUpload extends ModulVue {
         this.$emit('open');
         this.propOpen = true;
         this.updateValidationOptions();
-        // We need 2 nextTick to be able to have the wrap element in the DOM - MODUL-118
-        Vue.nextTick(() => {
-            Vue.nextTick(() => {
-                ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
-                    this.$refs.dialog.$refs.dialogWrap.addEventListener(evt, defaultDragEvent);
-                });
-            });
-        });
     }
 
     private onClose(): void {
@@ -186,8 +191,8 @@ export class MFileUpload extends ModulVue {
             .filter(f => f.status === MFileStatus.UPLOADING)
             .forEach(this.onUploadCancel);
         this.$file.clear(this.storeName);
-        ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach((evt) => {
-            this.$refs.dialog.$refs.dialogWrap.removeEventListener(evt, defaultDragEvent);
+        this.dropEvents.forEach((evt) => {
+            this.$refs.modal.$refs.modalWrap.removeEventListener(evt, defaultDragEvent);
         });
     }
 
@@ -225,8 +230,12 @@ export class MFileUpload extends ModulVue {
         return file.rejection === MFileRejectionCause.MAX_FILES;
     }
 
-    private get title(): string {
-        return this.$i18n.translate('m-file-upload:header-title', {}, this.maxFiles);
+    public get title(): string {
+        return this.fileReplacement ? this.$i18n.translate('m-file-upload:header-title-file-replacement') : this.$i18n.translate('m-file-upload:header-title', {}, this.propMaxFiles);
+    }
+
+    public get buttonAdd(): string {
+        return this.fileReplacement ? this.$i18n.translate('m-file-upload:replace') : this.$i18n.translate('m-file-upload:add');
     }
 
     private get fileAllowedExtensions(): string {
@@ -310,6 +319,18 @@ export class MFileUpload extends ModulVue {
             this.$emit('update:open', value);
         }
     }
+
+    private get propMaxFiles(): number | undefined {
+        return this.fileReplacement ? 1 : this.maxFiles;
+    }
+
+    private get multipleSelection(): boolean {
+        return this.propMaxFiles !== undefined && this.propMaxFiles > 1;
+    }
+
+    private get dropEvents(): string[] {
+        return ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'];
+    }
 }
 
 const FileUploadPlugin: PluginObject<any> = {
@@ -318,7 +339,7 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(FilePlugin);
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);
-        v.use(DialogPlugin);
+        v.use(ModalPlugin);
         v.use(ProgressPlugin);
         v.use(IconPlugin);
         v.use(I18nPlugin);

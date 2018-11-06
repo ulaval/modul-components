@@ -29,7 +29,7 @@
 
     <h5>Unexpected error popup</h5>
     <m-button v-m-popup:errorpopup>pop me an error</m-button>
-    <m-modal ref="errorpopup" :negativeLink="false" ok-label="Fermer">
+    <m-dialog ref="errorpopup" :negativeLink="false" ok-label="Fermer">
             <m-error-cookies-not-supported ></m-error-cookies-not-supported>
-    </m-modal>
+    </m-dialog>
 </div>

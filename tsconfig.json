@@ -4,6 +4,7 @@
         "outDir": "dist",
         "rootDir": "src",
         "declaration": true,
+        "sourceMap": true,
         "target": "es5",
         "lib": [
             "es5", "es6", "dom"
@@ -15,7 +16,8 @@
         "strictNullChecks": true,
         "types": [
             "node",
-            "jest"
+            "jest",
+            "webpack-env"
         ],
         "typeRoots": [
             "node_modules/@types"
@@ -25,7 +27,6 @@
         "src/**/*"
     ],
     "exclude": [
-        "src/**/*.spec.*",
-        "tests/**/*"
+        "src/**/*.spec.*"
     ]
 }

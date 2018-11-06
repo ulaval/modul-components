@@ -1,8 +1,8 @@
 import { shallow, Wrapper } from '@vue/test-utils';
 
 import { renderComponent } from '../../../tests/helpers/render';
-import { ERROR_TEMPLATE_NAME } from '../component-names';
-import { Link } from '../error-template/error-template';
+import { MESSAGE_PAGE_NAME } from '../component-names';
+import { Link } from '../message-page/message-page';
 import { MErrorBrowserNotSupported } from './error-browser-not-supported';
 
 let wrapper: Wrapper<MErrorBrowserNotSupported>;
@@ -15,48 +15,27 @@ const A_LINK_MOBILE: Link = new Link('aLabel-Mobile', 'anUrl');
 
 const getStubs: any = () => {
     return {
-        [ERROR_TEMPLATE_NAME]: '<div><slot /></div>'
+        [MESSAGE_PAGE_NAME]: '<div><slot /></div>'
     };
 };
 
-const getMocks: any = () => {
-    return {
-        $mq: {
-            register: jest.fn()
-        }
-    };
-};
 const initializeWrapperDefaultValues: () => void = (): void => {
     wrapper = shallow(MErrorBrowserNotSupported, {
-        mocks: getMocks(),
-        stubs: getStubs(),
-        mixins: [{
-            data: function(): any {
-                return {
-                    isMqMinS: isMobileDevice ? false : true
-                };
-            }
-        }]
+        mocks: { $mq: { state: { isMqMinS: isMobileDevice ? false : true } } },
+        stubs: getStubs()
     });
 };
 
 const initializeWrapperCustomValues: () => void = (): void => {
     wrapper = shallow(MErrorBrowserNotSupported, {
+        mocks: { $mq: { state: { isMqMinS: isMobileDevice ? false : true } } },
         stubs: getStubs(),
-        mocks: getMocks(),
         propsData: {
             title: A_CUSTOM_TITLE,
             hintsDesktop: [A_HINT],
             hintsMobile: [A_HINT_MOBILE],
             linksDesktop: [A_LINK],
             linksMobile: [A_LINK_MOBILE]
-        },
-        mixins: [{
-            data: function(): any {
-                return {
-                    isMqMinS: isMobileDevice ? false : true
-                };
-            }
         }]
     });
 };

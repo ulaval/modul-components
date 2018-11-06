@@ -1,0 +1,48 @@
+@import '../../../src/styles/abstracts/variables';
+
+.m-app-frame {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: $m-color--white;
+        padding: $m-spacing;
+        min-width: $m-min-width;
+
+        @media (min-width: $m-mq--min--s) {
+            padding: $m-spacing $m-spacing--l;
+        }
+    }
+
+    &__titre {
+        display: flex;
+        flex-direction: column;
+        font-size: $m-font-size--h4;
+
+        @media (min-width: $m-mq--min--s) {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    &__logo {
+        text-transform: uppercase;
+    }
+
+    &__logo-gras {
+        font-weight: $m-font-weight--black;
+    }
+
+    &__sous-titre {
+        font-size: $m-font-size--s;
+
+        @media (min-width: $m-mq--min--s) {
+            margin-left: $m-spacing--s;
+
+            &::before {
+                content: '-';
+                margin-right: $m-spacing--s;
+            }
+        }
+    }
+}

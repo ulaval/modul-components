@@ -8,6 +8,34 @@
         -->
     </p>
     <p>
-        <m-validation-message><!-- Test case --></m-validation-message>
+        <m-validation-message>
+            <!-- Test case -->
+        </m-validation-message>
+    </p>
+
+    <h3>Message d'erreur avec italique</h3>
+    <p class="m-u--margin-bottom">
+        Teste qu'un message d'erreur avec de l'italique s'affiche correctement
+    </p>
+    <p>
+        <m-validation-message :error="true"
+                              error-message="Message d'erreur avec <i>italique</i>"></m-validation-message>
+    </p>
+
+    <h3>Message valide avec italique</h3>
+    <p class="m-u--margin-bottom">
+        Teste qu'un message valide avec de l'italique s'affiche correctement
+    </p>
+    <p>
+        <m-validation-message :valid="true"
+                              valid-message="Message valide avec <i>italique</i>"></m-validation-message>
+    </p>
+
+    <h3>Message d'aide avec italique</h3>
+    <p class="m-u--margin-bottom">
+        Teste qu'un message d'aide avec de l'italique s'affiche correctement
+    </p>
+    <p>
+        <m-validation-message helper-message="Message d'aide avec <i>italique</i>"></m-validation-message>
     </p>
 </div>

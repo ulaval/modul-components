@@ -3,6 +3,7 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
 import { ERROR_MESSAGE_NAME } from '../component-names';
@@ -35,12 +36,12 @@ export class MErrorMessage extends ModulVue {
         return window.navigator.userAgent;
     }
 
-    private get dateInfo(): string[] | undefined {
+    private get i18nDate(): string {
         let result: string[] | undefined = undefined;
         if (this.date) {
             result = [this.date.format('YYYY-MM-DD'), this.date.format('HH:mm:ss')];
         }
-        return result;
+        return this.$i18n.translate('m-error-message:date', result, 0, '', true, FormatMode.Default);
     }
 
     private get propStacktrace(): boolean {

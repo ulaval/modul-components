@@ -40,8 +40,13 @@ export class MIconButton extends Vue {
     @Prop()
     public title: string;
 
+    private hasSlot: boolean = false;
+
     protected mounted(): void {
-        this.hasSlots();
+        this.hasSlot = !!this.$slots.default;
+        if (!this.hasSlot) {
+            // Vue.prototype.$log.warn('<' + ICON_BUTTON_NAME + '> needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
+        }
     }
 
     private onClick(event: Event): void {
@@ -75,14 +80,6 @@ export class MIconButton extends Vue {
 
     private get isSkinLink(): boolean {
         return this.skin === MIconButtonSkin.Link;
-    }
-
-    private hasSlots(): boolean {
-        let hasSlot: boolean = !!this.$slots.default;
-        if (!hasSlot) {
-            // Vue.prototype.$log.warn('<' + ICON_BUTTON_NAME + '> needs a text in its default slot that will describe its function. This text will be hidden and only read by the screen readers.');
-        }
-        return hasSlot;
     }
 }
 
