@@ -107,6 +107,8 @@ export class ScrollTo {
      */
     public goToInside(container: HTMLElement, target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
+        container.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+
         let targetLocation: number = 0;
 
         // get element relative position from container
@@ -122,7 +124,9 @@ export class ScrollTo {
         // get scroll location if its less than maxscroll
         const scrollLocation: number = Math.min(targetLocation, this.maxContainerScroll(container));
 
-        return this.internalScroll(container, scrollLocation, duration, defaultEasingFunction);
+        return this.internalScroll(container, scrollLocation, duration, defaultEasingFunction).then(() => {
+            container.removeEventListener('touchmove', (e) => e.preventDefault());
+        });
     }
 
     private internalScroll(container: HTMLElement | undefined, targetLocation: number, duration: ScrollToDuration, easing: EasingFunction): Promise<number> {
