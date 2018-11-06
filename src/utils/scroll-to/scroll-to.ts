@@ -107,7 +107,9 @@ export class ScrollTo {
      */
     public goToInside(container: HTMLElement, target: HTMLElement | number, offset: number, duration: ScrollToDuration = ScrollToDuration.Regular): Promise<any> {
 
-        container.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+        container.addEventListener('touchmove', this.preventDefault, { passive: false });
+        container.addEventListener('wheel', this.preventDefault, { passive: false });
+        container.addEventListener('touchstart ', this.preventDefault, { passive: false });
 
         let targetLocation: number = 0;
 
@@ -125,8 +127,14 @@ export class ScrollTo {
         const scrollLocation: number = Math.min(targetLocation, this.maxContainerScroll(container));
 
         return this.internalScroll(container, scrollLocation, duration, defaultEasingFunction).then(() => {
-            container.removeEventListener('touchmove', (e) => e.preventDefault());
+            container.removeEventListener('touchmove', this.preventDefault);
+            container.removeEventListener('wheel', this.preventDefault);
+            container.removeEventListener('touchstart', this.preventDefault);
         });
+    }
+
+    private preventDefault(e: Event): void {
+        e.preventDefault();
     }
 
     private internalScroll(container: HTMLElement | undefined, targetLocation: number, duration: ScrollToDuration, easing: EasingFunction): Promise<number> {
