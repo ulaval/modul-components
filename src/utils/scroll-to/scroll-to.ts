@@ -169,20 +169,19 @@ export class ScrollTo {
     }
 
     private disableScrollEvent(container: HTMLElement): void {
-        container.style.overflowY = 'hidden';
         container.addEventListener('touchmove', this.preventDefault, { passive: false });
         container.addEventListener('wheel', this.preventDefault, { passive: false });
         container.addEventListener('touchstart ', this.preventDefault, { passive: false });
     }
 
     private enableScrollEvent(container: HTMLElement): void {
-        container.style.overflowY = 'auto';
         container.removeEventListener('touchmove', this.preventDefault);
         container.removeEventListener('wheel', this.preventDefault);
         container.removeEventListener('touchstart', this.preventDefault);
     }
 
     private preventDefault(e: Event): void {
+        e.stopPropagation();
         e.preventDefault();
     }
 
