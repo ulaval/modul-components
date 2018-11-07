@@ -16,6 +16,7 @@
         align-items: center;
         outline: none;
         min-width: $m-min-width;
+        user-select: none;
 
         @include m-is-ie() {
             display: block;
@@ -183,6 +184,7 @@
         padding: $m-padding;
         flex: 1 1 auto;
         overflow: auto;
+        user-select: text;
 
         @include m-scrollbar();
     }
