@@ -5,7 +5,7 @@
     <router-link class="m-navbar-item__contents"
                  ref="item"
                  :to="url" v-if="url && !disabled"
-                 @click="onClick"
+                 @click.native="onClick"
                  @keyup.enter="onClick"
                  @mouseover="onMouseover"
                  @mouseleave="onMouseleave"
