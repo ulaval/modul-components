@@ -274,8 +274,8 @@ export enum FroalaStatus {
             events: {
                 [froalaEvents.InitializationDelayed]: (_e, editor) => {
                     this.froalaEditor = editor;
-                    this.setReadOnly();
                     this.isLoaded = true;
+                    this.setReadOnly();
                     this.htmlSet();
                     window.addEventListener('resize', this.onResize);
                 },
