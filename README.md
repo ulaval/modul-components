@@ -10,7 +10,7 @@ A set of VueJS components for MOD**UL** web applications (beta release).
 
 [Check out our documentation](https://ulaval.github.io/modul)
 
-## Getting started
+## Getting started to use modul in your project
 
 ### Prerequisites
 
@@ -18,10 +18,6 @@ A set of VueJS components for MOD**UL** web applications (beta release).
 - vue-router
 - webpack
 - sass
-
-### Usage as a dependency in your project (npm realease)
-
-1. Run npm install @ulaval/modul-components --save
 
 ### Start a new modul application and webpack configuration
 
