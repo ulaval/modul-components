@@ -17,7 +17,7 @@
         overflow: hidden;
     }
 
-    &:not(.m--is-skin-tab-light):not(.m--is-skin-tab-dark) {
+    &:not(.m--is-skin-tab-light):not(.m--is-skin-tab-dark):not(.m--is-skin-plain) {
         .m-navbar__button {
             &.m--is-right {
                 button {
@@ -30,6 +30,12 @@
                     margin-left: -$m-padding;
                 }
             }
+        }
+    }
+
+    &.m--is-skin-plain {
+        .m-navbar__button {
+            background-color: currentColor;
         }
     }
 
