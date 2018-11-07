@@ -13,7 +13,6 @@ import { PopupPlugin } from './popup-plugin';
 import SubMenuPlugin from './submenu-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
-
 require('froala-editor/js/froala_editor.pkgd.min');
 require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
