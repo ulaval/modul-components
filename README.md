@@ -4,7 +4,7 @@
 
 # modul-components
 
-A set of VueJS components for Modul web applications (beta release).
+A set of VueJS components for MOD**UL** web applications (beta release).
 
 ## Documentation
 
