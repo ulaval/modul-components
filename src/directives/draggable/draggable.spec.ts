@@ -1,6 +1,5 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-
 import { resetModulPlugins } from './../../../tests/helpers/component';
 import { polyFillActive } from './../../utils/polyfills';
 import { MDOMPlugin } from './../domPlugin';
@@ -9,14 +8,9 @@ import DraggablePlugin, { MDraggable, MDraggableClassNames, MDraggableEventNames
 
 jest.useFakeTimers();
 let mockTargetIsInput: boolean = false;
-let mockDraggableHasHandle: boolean;
-let mockIsHandleUsedToDrag: boolean;
+
 jest.mock('../../utils/event/event', () => ({
     targetIsInput(): boolean { return mockTargetIsInput; }
-}));
-jest.mock('./draggable-helper', () => ({
-    draggableHasHandle(): boolean { return mockDraggableHasHandle; },
-    isHandleUsedToDrag(): boolean { return mockIsHandleUsedToDrag; }
 }));
 
 const WIDTH: number = 100;
@@ -28,8 +22,6 @@ element.mockReturnValue({ classList: jest.fn(), querySelector: jest.fn() });
 
 beforeEach(() => {
     mockTargetIsInput = false;
-    mockDraggableHasHandle = false;
-    mockIsHandleUsedToDrag = false;
     element.mockReset();
 });
 
@@ -38,30 +30,30 @@ describe('draggable', () => {
 
     const dragImageTemplate: string = `<div class="${MDraggableClassNames.DragImage}"></div>`;
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
-    (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
-        let directive: Wrapper<Vue>;
-        if (options) {
-            directive = mount({
-                template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`
-                    : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`,
-                data: () => options,
-                computed: {
-                    element : element
-                }
-            }, { localVue: Vue });
-        } else {
-            directive = mount({
-                template: bindingValue === undefined ? `<div v-m-draggable>${innerHtml || ''}</div>`
-                    : `<div v-m-draggable="${bindingValue}">${innerHtml || ''}</div>`,
-                computed: {
-                    element : element
-                }
-            }, { localVue: Vue });
-        }
+        (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
+            let directive: Wrapper<Vue>;
+            if (options) {
+                directive = mount({
+                    template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`
+                        : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data="dragData" :grouping="grouping">${innerHtml || ''}</div>`,
+                    data: () => options,
+                    computed: {
+                        element: element
+                    }
+                }, { localVue: Vue });
+            } else {
+                directive = mount({
+                    template: bindingValue === undefined ? `<div v-m-draggable>${innerHtml || ''}</div>`
+                        : `<div v-m-draggable="${bindingValue}">${innerHtml || ''}</div>`,
+                    computed: {
+                        element: element
+                    }
+                }, { localVue: Vue });
+            }
 
-        Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => {});
-        return directive;
-    };
+            Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => { });
+            return directive;
+        };
 
     beforeEach(() => {
         resetModulPlugins();
@@ -187,8 +179,6 @@ describe('draggable', () => {
         describe(`Given a draggable element with handle`, () => {
             describe(`When ${eventName} and the handle is not used`, () => {
                 it(`Then it should not apply grabbing class to parent draggable`, () => {
-                    mockDraggableHasHandle = true;
-                    mockIsHandleUsedToDrag = false;
                     const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, '<div class="dragHandle">Handle</div><div class="draggableContent">draggable content</div>');
                     const draggableContent: Wrapper<Vue> = draggable.find('.draggableContent');
 
@@ -203,10 +193,8 @@ describe('draggable', () => {
         describe(`Given a draggable element with handle`, () => {
             describe(`When ${eventName} and the handle is used`, () => {
                 it(`Then it should apply grabbing class to parent draggable`, () => {
-                    mockDraggableHasHandle = true;
-                    mockIsHandleUsedToDrag = true;
                     const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, '<div class="dragHandle">Handle</div><div class="draggableContent">draggable content</div>');
-                    const draggableHandle: Wrapper<Vue> = draggable.find('.draggableContent');
+                    const draggableHandle: Wrapper<Vue> = draggable.find('.dragHandle');
 
                     draggableHandle.trigger(eventName);
                     jest.runOnlyPendingTimers();
@@ -269,7 +257,7 @@ describe('draggable', () => {
         });
 
         it('it should update element correctly', () => {
-            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             draggable.trigger('dragstart', options);
 
             expect(MDraggable.currentDraggable).toBe(MDOMPlugin.get(MDraggable, draggable.element));
@@ -278,7 +266,7 @@ describe('draggable', () => {
         });
 
         it('it should manage DragEvent correctly', () => {
-            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             jest.spyOn(options, 'stopPropagation');
             draggable.trigger('dragstart', options);
 
@@ -289,7 +277,7 @@ describe('draggable', () => {
         });
 
         it('should populate dataTransfer correctly', () => {
-            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             jest.spyOn(options.dataTransfer, 'setData');
             jest.spyOn(options.dataTransfer, 'setDragImage');
 
@@ -308,7 +296,7 @@ describe('draggable', () => {
                     dragData: userDefinedData,
                     grouping: userDefinedGrouping
                 });
-                const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
                 jest.spyOn(options.dataTransfer, 'setData');
                 jest.spyOn(options.dataTransfer, 'setDragImage');
 
@@ -323,7 +311,7 @@ describe('draggable', () => {
             describe(`With mobile drag & drop polyfill active`, () => {
                 it('should set a custom dragImage with offsets set to 0', () => {
                     polyFillActive.dragDrop = true;
-                    const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                    const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
                     jest.spyOn(options.dataTransfer, 'setDragImage');
 
                     draggable.trigger('touchmove');
@@ -337,7 +325,7 @@ describe('draggable', () => {
             describe(`On desktop`, () => {
                 it('should set a custom dragImage with offsets set to half the width and height', () => {
                     spyWindow.mockReturnValue({ width: WIDTH, height: HEIGHT });
-                    const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                    const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
                     jest.spyOn(options.dataTransfer, 'setDragImage');
 
                     draggable.trigger('dragstart', options);
@@ -353,7 +341,7 @@ describe('draggable', () => {
                 mockTargetIsInput = true;
                 draggable.trigger(eventName);
 
-                const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
                 draggable.trigger('dragend', options);
 
                 const event: any = draggable.emitted(MDraggableEventNames.OnDragStart);
@@ -377,12 +365,12 @@ describe('draggable', () => {
                 grouping: userDefinedGrouping
             }, dragImageTemplate);
 
-            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             draggable.trigger('dragstart', options);
         });
 
         it('it should update element correctly', () => {
-            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             draggable.trigger('dragend', options);
 
             expect(MDraggable.currentDraggable).toBeUndefined();
@@ -391,7 +379,7 @@ describe('draggable', () => {
         });
 
         it('it should manage DragEvent correctly', () => {
-            const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+            const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             jest.spyOn(options, 'stopPropagation');
             draggable.trigger('dragend', options);
 
@@ -406,7 +394,7 @@ describe('draggable', () => {
                 mockTargetIsInput = true;
                 draggable.trigger(eventName);
 
-                const options: any = { stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+                const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
                 draggable.trigger('dragend', options);
 
                 expect(MDraggable.currentDraggable).toBeDefined();

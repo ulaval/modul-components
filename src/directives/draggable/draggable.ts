@@ -1,5 +1,4 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-
 import { targetIsInput } from '../../utils/event/event';
 import { dragDropDelay, polyFillActive } from '../../utils/polyfills';
 import { clearUserSelection } from '../../utils/selection/selection';
@@ -10,7 +9,6 @@ import { MDroppable } from '../droppable/droppable';
 import { MSortable } from '../sortable/sortable';
 import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../user-select/remove-user-select';
 import { MDraggableAllowScroll } from './draggable-allow-scroll';
-import { draggableHasHandle, isHandleUsedToDrag } from './draggable-helper';
 
 export enum MDraggableClassNames {
     DragImage = 'dragImage',
@@ -100,7 +98,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     public onDragStart(event: DragEvent): void {
         // On some mobile devices dragStart will be triggered even though user has not moved / dragged yet.  We want to avoid that.
-        if ((polyFillActive.dragDrop && (!this.touchHasMoved && !this.isMouseInitiatedDrag))) {
+        if (polyFillActive.dragDrop && (!this.touchHasMoved && !this.isMouseInitiatedDrag)) {
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
@@ -144,7 +142,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.destroyGrabBehavior();
         this.grabEvents.forEach(eventName => this.removeEventListener(eventName));
         this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: MouseEvent) => {
-            if (targetIsInput(this.element, event) || (draggableHasHandle(this.element) && !isHandleUsedToDrag(event))) {
+            if (targetIsInput(this.element, event) || (this.draggableHasHandle(this.element) && !this.isHandleUsedToDrag(event))) {
                 this.turnDragOff();
                 this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.intputTouchUpListener));
             } else if (this.targetIsGrabbable(event)) {
@@ -277,6 +275,15 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     private cleanupCssClasses(): void {
         this.element.classList.remove(MDraggableClassNames.Dragging);
         this.element.classList.remove(MDraggableClassNames.Grabbing);
+    }
+
+    private draggableHasHandle(element: HTMLElement): boolean {
+        return element.getElementsByClassName('dragHandle').length > 0;
+    }
+
+    private isHandleUsedToDrag(event: MouseEvent): boolean {
+        let elementDragged: HTMLElement = event.target as HTMLElement;
+        return elementDragged.classList.contains('dragHandle');
     }
 }
 
