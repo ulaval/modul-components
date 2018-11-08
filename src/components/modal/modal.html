@@ -1,36 +1,56 @@
-<div class="m-modal" ref="baseWindow">
+<div class="m-modal"
+     ref="baseWindow">
     <slot name="trigger"></slot>
-    <portal :target-el="portalTargetSelector" v-if="portalCreated">
+    <portal :target-el="portalTargetSelector"
+            v-if="portalCreated">
         <transition name="m--is">
-            <div v-show="propOpen" v-if="portalMounted" class="m-modal__wrap m--is-modal m-u--app-body" :class="[{ 'm--is-small': sizeSmall,
+            <div v-show="propOpen"
+                 v-if="portalMounted"
+                 class="m-modal__wrap"
+                 :class="[{ 'm--is-small': sizeSmall,
                             'm--is-large': sizeLarge,
                             'm--is-full-screen': sizeFullSceen,
                             'm--has-body-max-width': bodyMaxWidth,
                             'm--is-close-on-backdrop': closeOnBackdrop,
                             'm--is-disabled':disabled }, className ]"
-                @click.self="backdropClick()" ref="modalWrap">
-                <article class="m-modal__article" ref="article">
-                    <header class="m-modal__header" :class="{ 'm--has-title': hasTitle,
+                 @click.self="backdropClick()"
+                 ref="modalWrap">
+                <article class="m-modal__article"
+                         ref="article">
+                    <header class="m-modal__header"
+                            :class="{ 'm--has-title': hasTitle,
                                     'm--has-content': hasHeader,
                                     'm--no-padding': !padding || !paddingHeader }">
                         <h2 v-if="hasTitle">{{ title }}</h2>
                         <slot name="header"></slot>
-                        <m-icon-button @click="closeModal()" icon-name="m-svg__close-clear" skin="dark" class="m-modal__header__close-button"
-                            :title="closeTitle"></m-icon-button>
+                        <m-icon-button @click="closeModal()"
+                                       icon-name="m-svg__close-clear"
+                                       skin="dark"
+                                       class="m-modal__header__close-button"
+                                       :title="closeTitle"></m-icon-button>
                     </header>
-                    <div class="m-modal__body" ref="body" :class="{'m--is-android': hasKeyboard}">
-                        <div class="m-modal__content" @focusin="onFocusIn" @focusout="onFocusOut" :class="{ 'm--no-padding': !padding || !paddingBody }"
-                            v-if="hasDefaultSlot">
+                    <div class="m-modal__body"
+                         ref="body"
+                         :class="{'m--is-android': hasKeyboard}">
+                        <div class="m-modal__content"
+                             @focusin="onFocusIn"
+                             @focusout="onFocusOut"
+                             :class="{ 'm--no-padding': !padding || !paddingBody }"
+                             v-if="hasDefaultSlot">
                             <slot></slot>
                         </div>
-                        <footer class="m-modal__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot && hasKeyboard">
+                        <footer class="m-modal__footer"
+                                :class="{ 'm--no-padding': !padding || !paddingFooter }"
+                                v-if="hasFooterSlot && hasKeyboard">
                             <div>
                                 <slot name="footer"></slot>
                             </div>
                         </footer>
                     </div>
 
-                    <footer v-if="!hasKeyboard && hasFooterSlot" class="m-modal__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }">
+                    <footer v-if="!hasKeyboard && hasFooterSlot"
+                            class="m-modal__footer"
+                            :class="{ 'm--no-padding': !padding || !paddingFooter }">
                         <div>
                             <slot name="footer"></slot>
                         </div>

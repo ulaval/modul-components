@@ -1,6 +1,5 @@
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { MouseButtons } from '../../utils/mouse/mouse';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
@@ -278,11 +277,12 @@ export class Portal extends ModulVue implements PortalMixin {
         this.propOpen = true;
     }
 
-    private ensurePortalTargetEl(onPortalReady: () => void = () => {}): void {
+    private ensurePortalTargetEl(onPortalReady: () => void = () => { }): void {
         if (!this.portalTargetEl) {
             this.propId = this.id === undefined ? 'mPortal-' + uuid.generate() : this.id;
             this.portalTargetEl = document.createElement('div');
             this.portalTargetEl.setAttribute('id', this.propId);
+            this.portalTargetEl.setAttribute('class', 'm-u--app-body');
             document.body.appendChild(this.portalTargetEl);
             this.portalTargetCreated = true;
 

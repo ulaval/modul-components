@@ -1,36 +1,44 @@
-<div class="m-dialog" ref="baseWindow">
+<div class="m-dialog"
+     ref="baseWindow">
     <slot name="trigger"></slot>
-    <portal :target-el="portalTargetSelector" v-if="portalCreated">
+    <portal :target-el="portalTargetSelector"
+            v-if="portalCreated">
         <transition name="m--is">
-            <div class="m-dialog__wrap m-u--app-body"
-                    :class="[{ 'm--is-disabled': disabled }, className ]"
-                    v-show="propOpen"
-                    v-if="portalMounted"
-                    ref="modalWrap">
+            <div class="m-dialog__wrap"
+                 :class="[{ 'm--is-disabled': disabled }, className ]"
+                 v-show="propOpen"
+                 v-if="portalMounted"
+                 ref="modalWrap">
                 <article class="m-dialog__article"
-                            :class="{ 'm--has-width-large': hasWidthLarge }"
-                            ref="article">
+                         :class="{ 'm--has-width-large': hasWidthLarge }"
+                         ref="article">
                     <header class="m-dialog__header"
                             v-if="hasTitle">
                         <h2>{{ title }}</h2>
                     </header>
                     <div class="m-dialog__body"
-                            v-if="hasDefaultSlot || hasMessage">
-                        <p v-if="hasMessage" v-html="message"></p>
+                         v-if="hasDefaultSlot || hasMessage">
+                        <p v-if="hasMessage"
+                           v-html="message"></p>
                         <slot></slot>
                     </div>
                     <footer class="m-dialog__footer">
                         <slot name="footer"></slot>
                         <nav class="m-dialog__footer__nav"
-                                v-if="!hasFooterSlot">
+                             v-if="!hasFooterSlot">
                             <m-button @click="onOk()">
                                 <template v-if="hasOkLabel">{{ okLabel }}</template>
-                                <m-i18n v-else k="m-dialog:ok"></m-i18n>
-                                <template slot="precision" v-if="hasOkPrecision">{{ okPrecision }}</template>
+                                <m-i18n v-else
+                                        k="m-dialog:ok"></m-i18n>
+                                <template slot="precision"
+                                          v-if="hasOkPrecision">{{ okPrecision }}</template>
                             </m-button>
-                            <m-link mode="button" @click="onCancel()" v-if="negativeLink">
+                            <m-link mode="button"
+                                    @click="onCancel()"
+                                    v-if="negativeLink">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
-                                <m-i18n v-else k="m-dialog:cancel"></m-i18n>
+                                <m-i18n v-else
+                                        k="m-dialog:cancel"></m-i18n>
                             </m-link>
                         </nav>
                     </footer>

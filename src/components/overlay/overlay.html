@@ -1,43 +1,69 @@
-<div class="m-overlay" ref="baseWindow">
+<div class="m-overlay"
+     ref="baseWindow">
     <slot name="trigger"></slot>
-    <portal :target-el="portalTargetSelector" v-if="portalCreated">
-        <transition name="m--is" :duration="{ enter: 800, leave: 600 }">
-            <div class="m-overlay__wrap m-u--app-body" :class="[{ 'm--is-disabled':disabled},
+    <portal :target-el="portalTargetSelector"
+            v-if="portalCreated">
+        <transition name="m--is"
+                    :duration="{ enter: 800, leave: 600 }">
+            <div class="m-overlay__wrap"
+                 :class="[{ 'm--is-disabled':disabled},
                             className ]"
-                ref="modalWrap" v-show="propOpen" v-if="portalMounted">
-                <section class="m-overlay__article" ref="article">
-                    <header class="m-overlay__header" :class="{'m--no-padding': !padding || !paddingHeader}">
+                 ref="modalWrap"
+                 v-show="propOpen"
+                 v-if="portalMounted">
+                <section class="m-overlay__article"
+                         ref="article">
+                    <header class="m-overlay__header"
+                            :class="{'m--no-padding': !padding || !paddingHeader}">
                         <div class="m-overlay__header__left">
                             <slot name="header"></slot>
                         </div>
-                        <div class="m-overlay__header__right" v-if="hasHeaderRightSlot">
+                        <div class="m-overlay__header__right"
+                             v-if="hasHeaderRightSlot">
                             <slot name="header-right"></slot>
                         </div>
                     </header>
-                    <div class="m-overlay__body" :class="{'m--is-android': hasKeyboard}">
-                        <div class="m-overlay__content" ref="body" @focusin="onFocusIn" @focusout="onFocusOut" :class="{ 'm--no-padding': !padding || !paddingBody }">
+                    <div class="m-overlay__body"
+                         :class="{'m--is-android': hasKeyboard}">
+                        <div class="m-overlay__content"
+                             ref="body"
+                             @focusin="onFocusIn"
+                             @focusout="onFocusOut"
+                             :class="{ 'm--no-padding': !padding || !paddingBody }">
                             <slot></slot>
                         </div>
-                        <footer v-if="hasKeyboard" class="m-overlay__footer" ref="footer" :class="{ 'm--no-padding': !padding || !paddingFooter }">
+                        <footer v-if="hasKeyboard"
+                                class="m-overlay__footer"
+                                ref="footer"
+                                :class="{ 'm--no-padding': !padding || !paddingFooter }">
                             <slot name="footer">
                                 <div>
-                                    <m-button @click="save()" :disabled="isSaveButtonDisabled" class="m-overlay__footer__save-button">
+                                    <m-button @click="save()"
+                                              :disabled="isSaveButtonDisabled"
+                                              class="m-overlay__footer__save-button">
                                         <m-i18n k="m-overlay:save"></m-i18n>
                                     </m-button>
-                                    <m-button @click="cancel()" skin="secondary">
+                                    <m-button @click="cancel()"
+                                              skin="secondary">
                                         <m-i18n k="m-overlay:cancel"></m-i18n>
                                     </m-button>
                                 </div>
                             </slot>
                         </footer>
                     </div>
-                    <footer v-if="!hasKeyboard" class="m-overlay__footer" ref="footer" :class="{ 'm--no-padding': !padding || !paddingFooter }">
+                    <footer v-if="!hasKeyboard"
+                            class="m-overlay__footer"
+                            ref="footer"
+                            :class="{ 'm--no-padding': !padding || !paddingFooter }">
                         <slot name="footer">
                             <div>
-                                <m-button @click="save()" :disabled="isSaveButtonDisabled" class="m-overlay__footer__save-button">
+                                <m-button @click="save()"
+                                          :disabled="isSaveButtonDisabled"
+                                          class="m-overlay__footer__save-button">
                                     <m-i18n k="m-overlay:save"></m-i18n>
                                 </m-button>
-                                <m-button @click="cancel()" skin="secondary">
+                                <m-button @click="cancel()"
+                                          skin="secondary">
                                     <m-i18n k="m-overlay:cancel"></m-i18n>
                                 </m-button>
                             </div>
