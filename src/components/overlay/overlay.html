@@ -2,7 +2,7 @@
     <slot name="trigger"></slot>
     <portal :target-el="portalTargetSelector" v-if="portalCreated">
         <transition name="m--is" :duration="{ enter: 800, leave: 600 }">
-            <div class="m-overlay__wrap" :class="[{ 'm--is-disabled':disabled},
+            <div class="m-overlay__wrap m-u--app-body" :class="[{ 'm--is-disabled':disabled},
                             className ]"
                 ref="modalWrap" v-show="propOpen" v-if="portalMounted">
                 <section class="m-overlay__article" ref="article">

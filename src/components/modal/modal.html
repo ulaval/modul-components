@@ -2,7 +2,7 @@
     <slot name="trigger"></slot>
     <portal :target-el="portalTargetSelector" v-if="portalCreated">
         <transition name="m--is">
-            <div v-show="propOpen" v-if="portalMounted" class="m-modal__wrap m--is-modal" :class="[{ 'm--is-small': sizeSmall,
+            <div v-show="propOpen" v-if="portalMounted" class="m-modal__wrap m--is-modal m-u--app-body" :class="[{ 'm--is-small': sizeSmall,
                             'm--is-large': sizeLarge,
                             'm--is-full-screen': sizeFullSceen,
                             'm--has-body-max-width': bodyMaxWidth,
